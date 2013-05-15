@@ -472,3 +472,21 @@ body,pre {
 background:#fff;
 }
 }
+
+/* Layout */
+.main-container {
+	max-width: 960px;
+	margin: 0 auto;
+	display: block;
+}
+.left-pane, .right-pane {
+	display: inline-block;
+	vertical-align: top;
+}
+.left-pane {
+	width: 66%;
+}
+.right-pane {
+	width: 30%;
+	margin-left: 3%;
+}
