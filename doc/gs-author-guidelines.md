@@ -1,4 +1,3 @@
-
 ## copy and paste your way to working code
 At every step in the guide, the use should have code that compiles. In the end, the user should have code that runs.
 
