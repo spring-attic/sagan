@@ -134,3 +134,10 @@ public class Foo {
     [linkid]: http://abc.com/xyz
 
 http://daringfireball.net/projects/markdown/syntax
+
+
+## use [admon:...] syntax for indicating note/tip/warning/info sections
+
+As a placeholder until we have proper CSS, add [admon:note], etc at the beginning of any paragraph you would like to see specially treated as an 'admonition', e.g.
+
+[note:tip] This is a tip, and should be colored appropriately (maybe green), and given a border, etc.
