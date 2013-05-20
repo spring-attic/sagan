@@ -71,3 +71,67 @@ For fully-qualified inline links, use the short markdown form
     ... rest of document ...
     [jdk7]: http://docs.oracle.com/javase/7/docs/webnotes/install/index.html
 
+
+## Use macros for common content
+
+See available macros at 
+
+https://github.com/springframework-meta/springframework.org/blob/master/doc/gs-macros.md
+
+And see their usage at
+
+https://github.com/springframework-meta/gs-rest-service#readme
+
+
+## set up a build plan at http://drone.io
+
+e.g. https://drone.io/github.com/springframework-meta/gs-rest-service
+
+be sure to set up the zapier integration to publish failed build reports to hipchat. This means simply sending email to sagan-ci.Xv6i@zapiermail.com from the settings > notification screen in your build. See https://drone.io/github.com/springframework-meta/gs-rest-service/admin/notifications for an example.
+
+
+## set up hipchat webhook for your repository
+
+----
+
+## misc
+
+- use 'hello' as package.
+- single blank line between `package` declaration and `import` declarations
+- single blank line between `import` declarations and class declaration.
+
+
+- write a test script for the `complete` version of the code
+
+
+## 4 spaces, not tabs (Java, XML, and all other file types)
+
+- allows consistent, precise display of content
+- no surprises when copying and pasting (i.e. markdown renders tabs as spaces, users pastes spaces, but `complete` version has tabs, so when user diffs to check their work they get whitespace differences, etc)
+
+
+## leave no newline between final closing braces
+
+```java
+public class Foo {
+
+    public static void main(String... args) {
+        // ...
+    }
+}
+```
+
+
+## always add github project description for GSG repos
+
+
+## add .gitignore file to any empty directories under 'initial'
+
+
+## use reference-style links as a rule
+
+    a sentence with [an embedded link][linkid]
+    ...
+    [linkid]: http://abc.com/xyz
+
+http://daringfireball.net/projects/markdown/syntax
