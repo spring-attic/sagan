@@ -1,3 +1,25 @@
+## Use conventional style for git commits
+
+See <https://github.com/SpringSource/spring-framework/blob/master/CONTRIBUTING.md#format-commit-messages>
+
+## Common sections in all GSGs
+
+- What you'll build
+
+- What you'll need
+
+- [macro:how-to-complete-this-guide]
+
+- Set up the project
+
+- Steps 2 .. N
+
+- Summary
+
+## do not mention cloning or downloading the repository in your guide.
+
+Just include the [macro:how-to-complete-this-guide](https://github.com/springframework-meta/springframework.org/blob/master/doc/gs-macros.md) macro after the "What you'll need" section
+
 ## copy and paste your way to working code
 At every step in the guide, the use should have code that compiles. In the end, the user should have code that runs.
 
