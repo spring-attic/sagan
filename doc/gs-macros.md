@@ -5,14 +5,14 @@ How to complete this guide
 
 Like all Spring's [Getting Started guides](/getting-started), you can start from scratch and complete each step, or you can bypass basic setup steps that are already familiar to you. Either way, you end up with working code.
 
-To **start from scratch**, move on to [setting up the project](#scratch).
+To **start from scratch**, move on to [Setting up the project](#scratch).
 
 To **skip the basics**, do the following:
 
  - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
 `git clone https://github.com/springframework-meta/gs-rest-service.git`
  - cd into `gs-rest-service/initial`
- - Jump ahead to [create a resource representation class](#initial).
+ - Jump ahead to [Create a resource representation class](#initial).
 
 **When you're finished**, you can check your results against the the code in `gs-rest-service/complete`.
 
