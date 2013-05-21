@@ -121,7 +121,9 @@ be sure to set up the zapier integration to publish failed build reports to hipc
 
 ## misc
 
-- use 'hello' as package.
+- use 'hello' as the package
+- keep the package hierarchy flat unless there is a strong reason to add subpackages
+- use 'Application' as the name of the class with a `main()` method
 - single blank line between `package` declaration and `import` declarations
 - single blank line between `import` declarations and class declaration.
 
@@ -169,3 +171,6 @@ e.g.:
 > **Tip:** This is a tip, and should be colored appropriately (maybe green), and given a border, etc.
 
 Precedent: http://developer.android.com/sdk/installing/bundle.html
+
+
+## use 
