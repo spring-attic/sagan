@@ -12,7 +12,11 @@ See <https://github.com/SpringSource/spring-framework/blob/master/CONTRIBUTING.m
 
 - Set up the project
 
-- Steps 2 .. N
+    - Create the directory structure
+
+    - Create a Maven POM
+
+- Steps A .. Z
 
 - Summary
 
