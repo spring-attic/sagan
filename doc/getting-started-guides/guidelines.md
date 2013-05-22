@@ -60,7 +60,7 @@ https://github.com/springframework-meta/gs-rest-service#readme
 
 ## Do not mention cloning or downloading the repository in your guide.
 
-Just include the [macro:how-to-complete-this-guide](https://github.com/springframework-meta/springframework.org/blob/master/doc/gs-macros.md) macro after the "What you'll need" section
+Just include the [macro:how-to-complete-this-guide](https://github.com/springframework-meta/springframework.org/blob/master/doc/gs-macros.md) macro after the "What you'll need" section.
 
 ## Copy and paste your way to working code
 At every step in the guide, the use should have code that compiles. In the end, the user should have code that runs.
