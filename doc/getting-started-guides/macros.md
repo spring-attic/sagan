@@ -15,7 +15,7 @@ How to complete this guide
 
 Like all Spring's [Getting Started guides](/getting-started), you can start from scratch and complete each step, or you can bypass basic setup steps that are already familiar to you. Either way, you end up with working code.
 
-To **start from scratch**, move on to [Setting up the project](#scratch).
+To **start from scratch**, move on to [Set up the project](#scratch).
 
 To **skip the basics**, do the following:
 
@@ -68,7 +68,7 @@ There's more to building RESTful web services than is covered here. You may want
 
 TODO: mention that we're using Spring Bootstrap's [_starter POMs_](../gs-bootstrap-starter) here.
 
-Experienced Maven users who are unaccustomed to using an external parent project: you can take it out later, it's just there to reduce the amount of code you have to write to get started.
+Note to experienced Maven users who are unaccustomed to using an external parent project: you can take it out later, it's just there to reduce the amount of code you have to write to get started.
 
 
 # [build-an-executable-jar]
@@ -97,7 +97,7 @@ Add the following configuration to your existing Maven POM:
 
 The `start-class` property tells Maven to create a `META-INF/MANIFEST.MF` file with a `Main-Class: hello.Application` entry. This entry enables you to run the jar with `java -jar`.
 
-The [Maven Shade plugin][maven-shade-plugin] extracts classes from all the jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
+The [Maven Shade plugin][maven-shade-plugin] extracts classes from all jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
 
 Now run the following to produce a single executable JAR file containing all necessary dependency classes and resources:
 
