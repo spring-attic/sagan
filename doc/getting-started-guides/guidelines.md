@@ -48,6 +48,8 @@ Use imperative statements, for example:
 
 Use sentence-style capitalization, as seen above.
 
+Follow a section heading with one or more lines of text -- i.e. no empty sections.
+
 ## Use macros for common content
 
 See available macros at 
@@ -58,9 +60,13 @@ See their usage at
 
 https://github.com/springframework-meta/gs-rest-service#readme
 
-## Do not mention cloning or downloading the repository in your guide.
+## Do not mention cloning or downloading the repository in your guide
 
 Just include the [macro:how-to-complete-this-guide](https://github.com/springframework-meta/springframework.org/blob/master/doc/gs-macros.md) macro after the "What you'll need" section.
+
+## Precede code block with at least one intro sentence to give context
+
+Precede code with a brief explanation of its purpose or what you should notice about it. (More or most details can follow the code, but avoid starting a code block without giving context.)
 
 ## Copy and paste your way to working code
 At every step in the guide, the use should have code that compiles. In the end, the user should have code that runs.
@@ -119,7 +125,6 @@ For example, [JSON][u-json].
 For example, https://drone.io/github.com/springframework-meta/gs-rest-service
 
 Be sure to set up the zapier integration to publish failed build reports to hipchat. This means simply sending email to sagan-ci.Xv6i@zapiermail.com from the settings > notification screen in your build. See https://drone.io/github.com/springframework-meta/gs-rest-service/admin/notifications for an example.
-
 
 ## Set up hipchat webhook for your repository
 
