@@ -40,15 +40,17 @@ Capitalize the first letter of all major words in titles.
 
 ### Section headings
 
-Use imperative statements, for example:
+- Use imperative statements and sentence-style capitalization:
+   
+    - Set up the project
+   
+    - Create a configuration class
+   
+    - Run the service
 
- - Set up the project
- - Create a configuration class
- - Run the service
+- Follow a section heading with one or more lines of text -- i.e. no empty sections.
 
-Use sentence-style capitalization, as seen above.
-
-Follow a section heading with one or more lines of text -- i.e. no empty sections.
+## Always create 'scratch' and 'initial' anchors
 
 ## Use macros for common content
 
@@ -64,82 +66,15 @@ https://github.com/springframework-meta/gs-rest-service#readme
 
 Just include the [macro:how-to-complete-this-guide](https://github.com/springframework-meta/springframework.org/blob/master/doc/gs-macros.md) macro after the "What you'll need" section.
 
-## Precede code block with at least one intro sentence to give context
+## Precede code block with intro sentence to give context
 
-Precede code with a brief explanation of its purpose or what you should notice about it. (More or most details can follow the code, but avoid starting a code block without giving context.)
+Precede code with at least one sentence that explains its purpose or what you should notice about it. More or most details can follow the code, but avoid starting a code block without giving context.
 
 ## Copy and paste your way to working code
-At every step in the guide, the use should have code that compiles. In the end, the user should have code that runs.
+At every step in the guide, the user should have code that compiles. In the end, the user should have code that runs.
 
 ## Demonstrate what 'working code' means
 Always end the guide with a final step that exercises the working code. For example, a guide that stands up a RESTful web service should exercise that service using. 
-
-## Always create 'scratch' and 'initial' anchors
-
-## Naming
-
-Use `initial` and `complete` for directory names.
-
-Use group id `org.springframework`.
-
-In the `initial/pom.xml`, use `<artifactId>gs-${name}</artifactId>`; for example, `gs-rest-service`.
-
-in the `complete/pom.xml`, use `<artifactId>gs-${name}-complete</artifactId>; for example, `gs-rest-service-complete`.
-
-## versioning
-
-Use 1.0-SNAPSHOT for all versions.
-
-## Use a common .gitignore
-
-You can probably create this from a gs-template project after all...
-for now, use the .gitignore in gs-rest-service.
-
-## Use consistent versioning in links
-
-3.2.x vs current, etc
-
-
-## For fully-qualified inline links, use the short markdown form
-
-    You'll need [JDK 7][jdk7] or better.
-    ... rest of document ...
-    [jdk7]: http://docs.oracle.com/javase/7/docs/webnotes/install/index.html
-
-## Use reference-style links as a rule
-
-    a sentence with [an embedded link][linkid]
-    ...
-    [linkid]: http://abc.com/xyz
-
-http://daringfireball.net/projects/markdown/syntax
-
-
-## Wrap first mentions of technologies such as JSON in a link to an Understanding doc 
-
-For example, [JSON][u-json].
-
-
-## Set up a build plan at http://drone.io
-
-For example, https://drone.io/github.com/springframework-meta/gs-rest-service
-
-Be sure to set up the zapier integration to publish failed build reports to hipchat. This means simply sending email to sagan-ci.Xv6i@zapiermail.com from the settings > notification screen in your build. See https://drone.io/github.com/springframework-meta/gs-rest-service/admin/notifications for an example.
-
-## Set up hipchat webhook for your repository
-
-----
-
-## Misc
-
-- Use 'hello' as the package
-- Keep the package hierarchy flat unless there is a strong reason to add subpackages
-- Use 'Application' as the name of the class with a `main()` method
-- Single blank line between `package` declaration and `import` declarations
-- Single blank line between `import` declarations and class declaration.
-- classpath lowercase, not CLASSPATH.
-- Write a test script for the `complete` version of the code
-
 
 ## 4 spaces, not tabs (Java, XML, and all other file types)
 
@@ -163,12 +98,74 @@ public class Foo {
 }
 ```
 
+## Misc
+
+- Use 'hello' as the package.
+- Keep the package hierarchy flat unless there is a strong reason to add subpackages
+- Use 'Application' as the name of the class with a `main()` method
+- Single blank line between `package` declaration and `import` declarations
+- Single blank line between `import` declarations and class declaration.
+- classpath lowercase, not CLASSPATH.
+- Write a test script for the `complete` version of the code
+
+
+
+## Naming
+
+Use `initial` and `complete` for directory names.
+
+Use group id `org.springframework`.
+
+In the `initial/pom.xml`, use `<artifactId>gs-${name}</artifactId>`; for example, `gs-rest-service`.
+
+in the `complete/pom.xml`, use `<artifactId>gs-${name}-complete</artifactId>; for example, `gs-rest-service-complete`.
+
+## Versioning
+
+Use 1.0-SNAPSHOT for all versions.
+
+
+## Use consistent versioning in links
+
+3.2.x vs current, etc
+
+## Use reference-style links as a rule
+
+    a sentence with [an embedded link][linkid]
+    ...
+    [linkid]: http://abc.com/xyz
+
+http://daringfireball.net/projects/markdown/syntax
+
+##Tone and voice
+- Use "you" and "your" rather than "we", "our", "us", and "let's". "You" is more direct and accurate; the guide is addressing and is written for the user, "you."
+- Use present tense except in a context where it could be inaccurate or misleading.
+- Use active voice rather than passive whenever possible, especially when you're referring to something the user does. 
+
+
+## Wrap first mentions of technologies such as JSON in a link to an Understanding doc 
+
+For example, [JSON][u-json].
+
+
+## Set up a build plan at http://drone.io
+
+For example, https://drone.io/github.com/springframework-meta/gs-rest-service
+
+Be sure to set up the zapier integration to publish failed build reports to hipchat. This means simply sending email to sagan-ci.Xv6i@zapiermail.com from the settings > notification screen in your build. See https://drone.io/github.com/springframework-meta/gs-rest-service/admin/notifications for an example.
+
+## Set up hipchat webhook for your repository
+
+----
 
 ## Always add github project description for GSG repos
 
+## Use a common .gitignore
+
+You can probably create this from a gs-template project after all...
+for now, use the .gitignore in gs-rest-service.
 
 ## Add .gitignore file to any empty directories under 'initial'
-
 
 ## Use markdown blockquote syntax for indicating note/tip/warning/info sections
 
