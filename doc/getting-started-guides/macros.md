@@ -1,4 +1,4 @@
-# [prereq-editor-jdk-buildtools]
+# [macro:prereq-editor-jdk-buildtools]
 
  - A favorite text editor or IDE
  - [JDK 6][jdk] or better
@@ -8,7 +8,7 @@
 [mvn]: http://maven.apache.org/download.cgi
 
 
-# [how-to-complete-this-guide]
+# [macro:how-to-complete-this-guide]
 
 How to complete this guide
 --------------------------
@@ -27,7 +27,7 @@ To **skip the basics**, do the following:
 **When you're finished**, you can check your results against the the code in `gs-rest-service/complete`.
 
 
-# [build-system-intro]
+# [macro:build-system-intro]
 
 First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to our [Getting Started with Maven](../gs-maven/README.md) or [Getting Started with Gradle](../gs-gradle/README.md) guides.
 
@@ -44,11 +44,11 @@ In a project directory of your choosing, create the following subdirectory struc
                 └── hello
 
 
-# [build-status]
+# [macro:build-status]
 
 [![Build Status](https://drone.io/github.com/springframework-meta/gs-rest-service/status.png)](https://drone.io/github.com/springframework-meta/gs-rest-service/latest)
 
-# [related-resources]
+# [macro:related-resources]
 
 Related resources
 -----------------
@@ -64,14 +64,14 @@ There's more to building RESTful web services than is covered here. You may want
 </span>
 
 
-# [bootstrap-starter-pom-disclaimer]
+# [macro:bootstrap-starter-pom-disclaimer]
 
 TODO: mention that we're using Spring Bootstrap's [_starter POMs_](../gs-bootstrap-starter) here.
 
 Note to experienced Maven users who are unaccustomed to using an external parent project: you can take it out later, it's just there to reduce the amount of code you have to write to get started.
 
 
-# [build-an-executable-jar]
+# [macro:build-an-executable-jar]
 
 ### Build an executable JAR
 
