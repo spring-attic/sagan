@@ -1,15 +1,11 @@
-# [macro:prereq-editor-jdk-buildtools]
-
+#                                        {!snippet:prereq-editor-jdk-buildtools}
  - A favorite text editor or IDE
  - [JDK 6][jdk] or better
  - [Maven 3.0][mvn] or later
 
 [jdk]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 [mvn]: http://maven.apache.org/download.cgi
-
-
-# [macro:how-to-complete-this-guide]
-
+#                                          {!snippet:how-to-complete-this-guide}
 How to complete this guide
 --------------------------
 
@@ -25,14 +21,11 @@ To **skip the basics**, do the following:
  - Jump ahead to [Create a resource representation class](#initial).
 
 **When you're finished**, you can check your results against the the code in `gs-rest-service/complete`.
-
-
-# [macro:build-system-intro]
-
+#                                                  {!snippet:build-system-intro}
 First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to our [Getting Started with Maven](../gs-maven/README.md) or [Getting Started with Gradle](../gs-gradle/README.md) guides.
 
 
-# [create-directory-structure-hello]
+#                                    {!snippet:create-directory-structure-hello}
 
 ### Create the directory structure
 
@@ -42,14 +35,9 @@ In a project directory of your choosing, create the following subdirectory struc
         └── main
             └── java
                 └── hello
-
-
-# [macro:build-status]
-
+#                                                        {!snippet:build-status}
 [![Build Status](https://drone.io/github.com/springframework-meta/gs-rest-service/status.png)](https://drone.io/github.com/springframework-meta/gs-rest-service/latest)
-
-# [macro:related-resources]
-
+#                                                   {!snippet:related-resources}
 Related resources
 -----------------
 
@@ -62,17 +50,11 @@ There's more to building RESTful web services than is covered here. You may want
 * [Consuming REST services](https://github.com/springframework-meta/gs-consuming-rest-core/blob/master/README.md)
 * [Testing REST services](TODO)
 </span>
-
-
-# [macro:bootstrap-starter-pom-disclaimer]
-
+#                                    {!snippet:bootstrap-starter-pom-disclaimer}
 TODO: mention that we're using Spring Bootstrap's [_starter POMs_](../gs-bootstrap-starter) here.
 
 Note to experienced Maven users who are unaccustomed to using an external parent project: you can take it out later, it's just there to reduce the amount of code you have to write to get started.
-
-
-# [macro:build-an-executable-jar]
-
+#                                             {!snippet:build-an-executable-jar}
 ### Build an executable JAR
 
 Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
