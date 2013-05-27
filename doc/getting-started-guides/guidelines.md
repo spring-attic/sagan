@@ -8,7 +8,7 @@ See <https://github.com/SpringSource/spring-framework/blob/master/CONTRIBUTING.m
 
 - What you'll need
 
-- [macro:how-to-complete-this-guide]
+- {!snippet:how-to-complete-this-guide}
 
 - Set up the project
 
@@ -50,19 +50,18 @@ Use sentence-style capitalization, as seen above.
 
 Follow a section heading with one or more lines of text -- i.e. no empty sections.
 
-## Use macros for common content
+## Use snippets for common content
 
-See available macros at 
+ 1. Read the [mdp README](https://github.com/springframework-meta/mdp#readme)
+ 2. Browse available [snippets][snippets] for use in GSGs
+ 3. See their use in practice in the [gs-rest-service README](https://github.com/springframework-meta/gs-rest-service#readme)
 
-https://github.com/springframework-meta/springframework.org/blob/master/doc/gs-macros.md
+[snippets]: https://github.com/springframework-meta/springframework.org/blob/master/doc/getting-started-guides/snippets.md
 
-See their usage at
-
-https://github.com/springframework-meta/gs-rest-service#readme
 
 ## Do not mention cloning or downloading the repository in your guide
 
-Just include the [macro:how-to-complete-this-guide](https://github.com/springframework-meta/springframework.org/blob/master/doc/gs-macros.md) macro after the "What you'll need" section.
+Just include the [{!snippet:how-to-complete-this-guide}][snippets] snippet after the "What you'll need" section.
 
 ## Precede code block with at least one intro sentence to give context
 
