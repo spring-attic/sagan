@@ -1,6 +1,49 @@
-## Use conventional style for git commits
+## Use conventional git commit comment formatting
 
-See <https://github.com/SpringSource/spring-framework/blob/master/CONTRIBUTING.md#format-commit-messages>.
+Please read and follow the [commit guidelines section of Pro Git][progit].
+
+Most importantly, please format your commit messages in the following way
+(adapted from the commit template in the link above):
+
+    Summarize changes in 50 characters or less
+
+    More detailed explanatory text, if necessary. Wrap it to about 72
+    characters or so. In some contexts, the first line is treated as the
+    subject of an email and the rest of the text as the body. The blank
+    line separating the summary from the body is critical (unless you omit
+    the body entirely); tools like rebase can get confused if you run the
+    two together.
+
+    Further paragraphs come after blank lines.
+
+     - Bullet points are okay, too
+     
+     - Typically a hyphen or asterisk is used for the bullet, preceded by a
+       single space, with blank lines in between, but conventions vary here
+
+
+1. Use present-tense imperative statements in the subject line, e.g. "Fix broken Javadoc link"
+1. Begin the subject line sentence with a capitalized verb, e.g. "Add, Prune, Fix, Introduce, Avoid, etc."
+1. Do not end the subject line with a period
+1. Keep the subject line to 50 characters or less if possible
+1. Wrap lines in the body at 72 characters or less
+
+Here's a good [example][]:
+
+    Edit content and style
+
+     - Revise all exposition
+     - Remove gradle artifacts and instructions for now
+     - Eliminate @Configuration class
+     - Convert tabs to spaces in .java and .xml files
+     - Preserve empty directory structure in 'initial'
+
+Single-line, subject-only commit messages can be fine as well:
+
+    Edit per guidelines
+
+[progit]: http://progit.org/book/ch5-2.html#commit_guidelines
+[example]: https://github.com/springframework-meta/gs-rest-service/commit/f103b1701926341487233ecb3fdbca026f404d23
 
 ## Common sections in all GSGs
 
