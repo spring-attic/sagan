@@ -16,11 +16,11 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 To **skip the basics**, do the following:
 
  - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
-`git clone https://github.com/springframework-meta/**PROJECT NAME**.git`
- - cd into `**PROJECT NAME**/initial`
+`git clone https://github.com/springframework-meta/{@projectname}.git`
+ - cd into `{@projectname}/initial`
  - Jump ahead to [Create a resource representation class](#initial).
 
-**When you're finished**, you can check your results against the code in `**PROJECT NAME**/complete`.
+**When you're finished**, you can check your results against the code in `{@projectname}/complete`.
 #                                                  {!snippet:build-system-intro}
 First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to our [Getting Started with Maven](../gs-maven/README.md) or [Getting Started with Gradle](../gs-gradle/README.md) guides.
 #                                    {!snippet:create-directory-structure-hello}
@@ -34,7 +34,7 @@ In a project directory of your choosing, create the following subdirectory struc
             └── java
                 └── hello
 #                                                        {!snippet:build-status}
-[![Build Status](https://drone.io/github.com/springframework-meta/**PROJECT NAME**/status.png)](https://drone.io/github.com/springframework-meta/**PROJECT NAME**/latest)
+[![Build Status](https://drone.io/github.com/springframework-meta/{@projectname}/status.png)](https://drone.io/github.com/springframework-meta/{@projectname}/latest)
 #                                                   {!snippet:related-resources}
 Related resources
 -----------------
