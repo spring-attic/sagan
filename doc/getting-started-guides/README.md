@@ -6,7 +6,7 @@ Getting Started Guides (GSGs) are:
 
 - **task-focused**, ideally on tasks that developers would naturally Google when they're faced with implementing something they've never done before.
 
-- **NOT Spring project-focused**. GSGs *incorporate* one or more Spring projects, but they are all about using Spring to *solve a real-world problem*.
+- **NOT Spring project-specific**. GSGs always *incorporate* one or more Spring projects, but they are all about using Spring to *solve a real-world problem*.
 
 - the **hello world** of a given particular development task.
 
@@ -33,7 +33,7 @@ Each GSG lives in its own repository at GitHub under the [springframework-meta](
 
  - <https://github.com/springframework-meta/gs-rest-service>
 
-Please follow the GSG [author guidelines](gs-author-guidelines.md).
+Please follow the GSG [author guidelines](guidelines.md).
 
 To cut down on duplication of common text across GSGs, we have a simple collection of reusable [snippets](snippets.md). Please familiarize yourself with them and use as appropriate. Issue a pull request if you'd like to add a new snippet. Use the [`mdp`](https://github.com/springframework-meta/mdp) tool to process your README.md files and expand embedded snippets into a single, readable document.
 
