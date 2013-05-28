@@ -121,7 +121,7 @@ in the `complete/pom.xml`, use `<artifactId>gs-${name}-complete</artifactId>; fo
 
 ## Versioning
 
-Use 1.0-SNAPSHOT for all versions.
+Use 0.1.0 for all versions. This is consistent with the [semantic versioning](http://semver.org) approach and indicates a very early stage of development, which is what Getting Started Guides are all about.
 
 
 ## Use consistent versioning in links
