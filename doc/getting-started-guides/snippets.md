@@ -23,8 +23,6 @@ To **skip the basics**, do the following:
 **When you're finished**, you can check your results against the the code in `gs-rest-service/complete`.
 #                                                  {!snippet:build-system-intro}
 First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to our [Getting Started with Maven](../gs-maven/README.md) or [Getting Started with Gradle](../gs-gradle/README.md) guides.
-
-
 #                                    {!snippet:create-directory-structure-hello}
 
 ### Create the directory structure
