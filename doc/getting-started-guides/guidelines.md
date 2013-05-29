@@ -149,7 +149,7 @@ public class Foo {
 - Single blank line between `import` declarations and class declaration.
 - classpath lowercase, not CLASSPATH.
 - Write a test script for the `complete` version of the code
-
+- Wrap lines of source files (.java, .xml, etc) at no more than 110 characters. This is important to avoid horizontal scrolling on GitHub/sf.org.
 
 
 ## Naming
@@ -161,6 +161,7 @@ Use group id `org.springframework`.
 In the `initial/pom.xml`, use `<artifactId>gs-${name}</artifactId>`; for example, `gs-rest-service`.
 
 in the `complete/pom.xml`, use `<artifactId>gs-${name}-complete</artifactId>; for example, `gs-rest-service-complete`.
+
 
 ## Versioning
 
@@ -216,6 +217,3 @@ For example:
 > **Tip:** This is a tip, and should be colored appropriately (maybe green), and given a border, etc.
 
 Precedent: http://developer.android.com/sdk/installing/bundle.html
-
-
-
