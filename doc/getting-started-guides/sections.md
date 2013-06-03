@@ -19,11 +19,11 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 To **skip the basics**, do the following:
 
  - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
-`git clone https://github.com/springframework-meta/gs-rest-service.git`
- - cd into `gs-rest-service/initial`
+`git clone https://github.com/springframework-meta/{@project-name}.git`
+ - cd into `{@project-name}/initial`
  - Jump ahead to [Create a resource representation class](#initial).
 
-**When you're finished**, you can check your results against the the code in `gs-rest-service/complete`.
+**When you're finished**, you can check your results against the code in `{@project-name}/complete`.
 {!end#how-to-complete-this-guide}
 
 
@@ -33,7 +33,6 @@ First you set up a basic build script. You can use any build system you like whe
 
 
 # {!begin#create-directory-structure-hello}
-
 ### Create the directory structure
 
 In a project directory of your choosing, create the following subdirectory structure; for example, with `mkdir -p src/main/java/hello` on *nix systems:
@@ -46,7 +45,7 @@ In a project directory of your choosing, create the following subdirectory struc
 
 
 # {!begin#build-status}
-[![Build Status](https://drone.io/github.com/springframework-meta/gs-rest-service/status.png)](https://drone.io/github.com/springframework-meta/gs-rest-service/latest)
+[![Build Status](https://drone.io/github.com/springframework-meta/{@project-name}/status.png)](https://drone.io/github.com/springframework-meta/{@project-name}/latest)
 {!end#build-status}
 
 
