@@ -35,8 +35,6 @@ Each GSG lives in its own repository at GitHub under the [springframework-meta](
 
 Please follow the GSG [author guidelines](guidelines.md).
 
-To cut down on duplication of common text across GSGs, we have a simple collection of reusable [snippets](snippets.md). Please familiarize yourself with them and use as appropriate. Issue a pull request if you'd like to add a new snippet. Use the [`mdp`](https://github.com/springframework-meta/mdp) tool to process your README.md files and expand embedded snippets into a single, readable document.
+To cut down on duplication of common text across GSGs, we have a simple collection of reusable [sections](sections.md). Please familiarize yourself with them and use as appropriate. Issue a pull request if you'd like to add a new section. Use the [`mdp`](https://github.com/springframework-meta/mdp) tool to process your README.md files and expand embedded sections into a single, readable document.
 
 If you find yourself working across a large number of GSGs, read up on [managing multiple repositories with `mr`](repo-management.md)
-
-
