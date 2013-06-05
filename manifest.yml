@@ -1,0 +1,8 @@
+---
+applications:
+- name: sagan
+  memory: 512M
+  instances: 1
+  url: sagan.cfapps.io
+  path: target/springframework-site-0.0.1.SNAPSHOT.jar
+  command: java -classpath . org.springframework.site.ApplicationConfiguration --server.port=$PORT
