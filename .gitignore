@@ -1,0 +1,11 @@
+#*
+*~
+.#*
+target
+.springBeans
+.settings
+.classpath
+.project
+build
+bin
+dependency-reduced-pom.xml
