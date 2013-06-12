@@ -23,6 +23,14 @@
 			<groupId>org.springframework.bootstrap</groupId>
 			<artifactId>spring-bootstrap-actuator-starter</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>nz.net.ultraq.web.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+        </dependency>
 	</dependencies>
 
 	<properties>

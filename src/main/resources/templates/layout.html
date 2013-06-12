@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+	<title>Layout</title>
+	<link rel="stylesheet"
+		  th:href="@{/resources/css/getting-started.css}"
+		  href="../../resources/css/getting-started.css"/>
+</head>
+<body>
+<div class="container">
+	<div class="navbar">
+		<div class="navbar-inner">
+			<a class="brand" th:href="@{/}" href="index.html">
+				Spring
+			</a>
+			<ul class="nav">
+				<li>
+					<a th:href="@{/guides}" href="guides/index.html">
+						Guides
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<h1 layout:fragment="header">Layout</h1>
+
+	<div layout:fragment="content">
+		Fake content
+	</div>
+</div>
+</body>
+</html>
