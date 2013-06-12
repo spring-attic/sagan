@@ -1,13 +1,10 @@
-package org.springframework.site;
+package org.springframework.site.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.bootstrap.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
-import org.springframework.bootstrap.context.annotation.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.thymeleaf.TemplateProcessingParameters;
 import org.thymeleaf.resourceresolver.IResourceResolver;
@@ -38,9 +35,7 @@ public class ThymeLeafConfiguration {
 		TemplateResolver resolver = new TemplateResolver();
 		resolver.setResourceResolver(new IResourceResolver() {
 			@Override
-			public InputStream getResourceAsStream(
-					TemplateProcessingParameters templateProcessingParameters,
-					String resourceName) {
+			public InputStream getResourceAsStream(TemplateProcessingParameters templateProcessingParameters, String resourceName) {
 				try {
 					return resourceLoader.getResource(resourceName).getInputStream();
 				} catch (IOException e) {

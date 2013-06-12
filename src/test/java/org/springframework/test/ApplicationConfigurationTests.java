@@ -17,7 +17,7 @@ package org.springframework.test;
 
 import org.junit.Test;
 import org.springframework.bootstrap.context.embedded.AnnotationConfigEmbeddedWebApplicationContext;
-import org.springframework.site.ApplicationConfiguration;
+import org.springframework.site.configuration.ApplicationConfiguration;
 
 /**
  * @author Dave Syer
