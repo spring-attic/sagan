@@ -27,4 +27,10 @@ public class GettingStartedController {
 		return "guides/gs/guide";
 	}
 
+	@RequestMapping(value = "", method = { GET, HEAD })
+	public String listGuides(Model model) {
+		model.addAttribute("guides", service.listGuides());
+		return "guides/gs/list";
+	}
+
 }

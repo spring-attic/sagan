@@ -5,10 +5,15 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.site.guides.GettingStartedController;
 import org.springframework.site.guides.GitHubGettingStartedService;
+import org.springframework.site.guides.Guide;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.web.client.RestClientException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -32,15 +37,14 @@ public class GettingStartedControllerTests {
 
 	@Test
 	public void guideSlugInModel() {
-		when(guideService.loadGuide(GUIDE_NAME)).thenReturn(GUIDE_TEXT);
 		controller.viewGuide(GUIDE_NAME, model);
 		assertEquals(GUIDE_NAME, model.get("guideSlug"));
 	}
 
 	@Test
 	public void guideView() {
-		when(guideService.loadGuide(GUIDE_NAME)).thenReturn(GUIDE_TEXT);
-		assertEquals("guides/gs/guide", controller.viewGuide(GUIDE_NAME, model));
+		String view = controller.viewGuide(GUIDE_NAME, model);
+		assertEquals("guides/gs/guide", view);
 	}
 
 	@Test
@@ -55,5 +59,20 @@ public class GettingStartedControllerTests {
 		when(guideService.loadGuide(GUIDE_NAME)).thenThrow(new RestClientException("Is GitHub down?"));
 		controller.viewGuide(GUIDE_NAME, model);
 	}
+
+	@Test
+	public void listGuidesView(){
+		String view = controller.listGuides(model);
+		assertEquals("guides/gs/list", view);
+	}
+
+	@Test
+	public void listGuidesModel(){
+		List<Guide> repoList = new ArrayList<Guide>();
+		when(guideService.listGuides()).thenReturn(repoList);
+		controller.listGuides(model);
+		assertSame(repoList, model.get("guides"));
+	}
+
 
 }

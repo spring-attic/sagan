@@ -1,0 +1,20 @@
+<html
+		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+		layout:decorator="layout">
+<head>
+	<title>SpringFramework.org - Getting Started Guides</title>
+</head>
+<body>
+<h1 layout:fragment="header">Getting Started Guides</h1>
+
+<div layout:fragment="content" class="container">
+
+	<ul>
+		<li th:each="guide : ${guides}">
+			<h3 ><a href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}}" th:text="${guide.guideId}">rest-service</a></h3>
+			<p th:text="${guide.description}">Getting Started: Building a RESTful Web Service</p>
+		</li>
+	</ul>
+</div>
+</body>
+</html>
