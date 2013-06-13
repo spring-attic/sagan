@@ -5,7 +5,8 @@ import org.springframework.site.guides.Guide;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class GuideTest {
 
@@ -13,7 +14,7 @@ public class GuideTest {
 	public void guideId(){
 		Guide guide = new Guide();
 		guide.setName("gs-rest-service");
-		assertEquals("rest-service", guide.getGuideId());
+		assertThat(guide.getGuideId(), is("rest-service"));
 	}
 
 	@Test

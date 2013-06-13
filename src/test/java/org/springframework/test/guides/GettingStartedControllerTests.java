@@ -12,8 +12,8 @@ import org.springframework.web.client.RestClientException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -38,20 +38,20 @@ public class GettingStartedControllerTests {
 	@Test
 	public void guideSlugInModel() {
 		controller.viewGuide(GUIDE_NAME, model);
-		assertEquals(GUIDE_NAME, model.get("guideSlug"));
+		assertThat((String) model.get("guideSlug"), is(GUIDE_NAME));
 	}
 
 	@Test
 	public void guideView() {
 		String view = controller.viewGuide(GUIDE_NAME, model);
-		assertEquals("guides/gs/guide", view);
+		assertThat(view, is("guides/gs/guide"));
 	}
 
 	@Test
 	public void guideTextInModel() {
 		when(guideService.loadGuide(GUIDE_NAME)).thenReturn(GUIDE_TEXT);
 		controller.viewGuide(GUIDE_NAME, model);
-		assertEquals(GUIDE_TEXT, model.get("guide"));
+		assertThat((String) model.get("guide"), is(GUIDE_TEXT));
 	}
 
 	@Test(expected = RestClientException.class)
@@ -63,7 +63,7 @@ public class GettingStartedControllerTests {
 	@Test
 	public void listGuidesView(){
 		String view = controller.listGuides(model);
-		assertEquals("guides/gs/list", view);
+		assertThat(view, is("guides/gs/list"));
 	}
 
 	@Test
@@ -71,8 +71,7 @@ public class GettingStartedControllerTests {
 		List<Guide> repoList = new ArrayList<Guide>();
 		when(guideService.listGuides()).thenReturn(repoList);
 		controller.listGuides(model);
-		assertSame(repoList, model.get("guides"));
+		assertThat((List<Guide>) model.get("guides"), is(repoList));
 	}
-
 
 }

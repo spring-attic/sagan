@@ -14,9 +14,9 @@ import org.springframework.web.client.RestOperations;
 import java.io.IOException;
 import java.util.Map;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -50,7 +50,7 @@ public class GitHubGettingStartedServiceTests {
 		String guideId = "rest-service";
 		when(restOperations.getForObject(anyString(), eq(Map.class), eq(guideId))).thenReturn(restServiceReadMeFixture);
 		String guide = service.loadGuide(guideId);
-		assertTrue(guide.contains("Getting Started: Building a RESTful Web Service"));
+		assertThat(guide, containsString("Getting Started: Building a RESTful Web Service"));
 	}
 
 	@Test(expected = GuideNotFoundException.class)
