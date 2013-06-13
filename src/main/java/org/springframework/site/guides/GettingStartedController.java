@@ -22,7 +22,6 @@ public class GettingStartedController {
 
 	@RequestMapping(value = "/{guideSlug}", method = { GET, HEAD })
 	public String viewGuide(@PathVariable("guideSlug") String guideSlug, Model model) {
-		System.out.println(guideSlug);
 		model.addAttribute("guideSlug", guideSlug);
 		model.addAttribute("guide", service.loadGuide(guideSlug));
 		return "guides/gs/guide";
