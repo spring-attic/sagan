@@ -12,3 +12,5 @@ dependency-reduced-pom.xml
 .idea
 *.iml
 /src/main/resources/git.properties
+Gemfile.lock
+
