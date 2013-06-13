@@ -17,20 +17,25 @@ package org.springframework.site.configuration;
 
 import org.springframework.bootstrap.SpringApplication;
 import org.springframework.bootstrap.context.annotation.EnableAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.social.github.api.GitHub;
+import org.springframework.social.github.api.impl.GitHubTemplate;
 
-/**
- * @author Dave Syer
- * 
- */
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan
+@ComponentScan(basePackages = "org.springframework.site")
 public class ApplicationConfiguration {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApplicationConfiguration.class, args);
+	}
+
+	@Bean
+	public GitHub gitHubTemplate() {
+		// parametrize auth token
+		return new GitHubTemplate("5a0e089d267693b45926d7f620d85a2eb6a85da6");
 	}
 
 }
