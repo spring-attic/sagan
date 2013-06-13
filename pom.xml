@@ -60,10 +60,19 @@
 
 	<build>
         <resources>
-          <resource>
-            <directory>src/main/resources</directory>
-            <filtering>true</filtering>
-          </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/cacerts</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/cacerts</include>
+                </includes>
+            </resource>
         </resources>
 		<plugins>
 			<plugin>
