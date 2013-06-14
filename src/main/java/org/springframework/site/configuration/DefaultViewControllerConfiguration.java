@@ -33,6 +33,7 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	{
 		mimeTypes.put("css", MediaType.valueOf("text/css"));
 		mimeTypes.put("js", MediaType.valueOf("text/javascript"));
+		mimeTypes.put("ico", MediaType.APPLICATION_OCTET_STREAM);
 	}
 
 	@Override
