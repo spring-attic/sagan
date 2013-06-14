@@ -8,6 +8,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.guides.GitHubGettingStartedService;
 import org.springframework.site.guides.Guide;
 import org.springframework.site.guides.GuideNotFoundException;
+import org.springframework.site.guides.ImageNotFoundException;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestOperations;

@@ -1,4 +1,4 @@
-package org.springframework.test.guides;
+package org.springframework.site.guides;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 

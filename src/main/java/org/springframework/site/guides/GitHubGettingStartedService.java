@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.stereotype.Service;
-import org.springframework.test.guides.ImageNotFoundException;
 import org.springframework.web.client.RestClientException;
 
 import java.util.ArrayList;
