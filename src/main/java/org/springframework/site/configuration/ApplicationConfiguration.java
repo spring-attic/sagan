@@ -29,7 +29,13 @@ import org.springframework.social.github.api.impl.GitHubTemplate;
 public class ApplicationConfiguration {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApplicationConfiguration.class, args);
+		build().run(args);;
+	}
+
+	public static SpringApplication build() {
+		SpringApplication application = new SpringApplication(ApplicationConfiguration.class);
+		application.setDefaultCommandLineArgs("--spring.template.mode=LEGACYHTML5", "--spring.template.cache=false");
+		return application;
 	}
 
 	@Bean
