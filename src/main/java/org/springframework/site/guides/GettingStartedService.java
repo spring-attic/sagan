@@ -8,4 +8,5 @@ public interface GettingStartedService {
 
 	List<Guide> listGuides();
 
+	byte[] loadImage(String guideSlug, String imageName);
 }

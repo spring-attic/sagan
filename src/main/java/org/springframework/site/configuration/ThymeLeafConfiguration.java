@@ -27,7 +27,7 @@ public class ThymeLeafConfiguration {
 	@Value("${spring.template.suffix:.html}")
 	private String suffix;
 
-	@Value("${spring.template.mode:HTML5}")
+	@Value("${spring.template.mode:LEGACYHTML5}")
 	private String templateMode;
 
 	@Bean

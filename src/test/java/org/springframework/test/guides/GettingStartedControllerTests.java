@@ -3,6 +3,7 @@ package org.springframework.test.guides;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.springframework.http.ResponseEntity;
 import org.springframework.site.guides.GettingStartedController;
 import org.springframework.site.guides.GitHubGettingStartedService;
 import org.springframework.site.guides.Guide;
@@ -74,4 +75,11 @@ public class GettingStartedControllerTests {
 		assertThat((List<Guide>) model.get("guides"), is(repoList));
 	}
 
+	@Test
+	public void loadImages() {
+		byte[] image = "animage".getBytes();
+		when(guideService.loadImage(GUIDE_NAME, "welcome.png")).thenReturn(image);
+		ResponseEntity<byte[]> responseEntity = controller.loadImage(GUIDE_NAME, "welcome.png");
+		assertThat(responseEntity.getBody(), is(image));
+	}
 }
