@@ -34,7 +34,7 @@ public class ApplicationConfiguration {
 
 	@Bean
 	public GitHub gitHubTemplate() {
-		// parametrize auth token
+		// TODO parametrize auth token
 		return new GitHubTemplate("5a0e089d267693b45926d7f620d85a2eb6a85da6");
 	}
 
