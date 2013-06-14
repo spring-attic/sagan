@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = OfflineApplicationConfiguration.class)
-public class DynamicPageRequestMappingTest {
+public class DynamicPageRequestMappingTests {
 
 	@Autowired
 	private WebApplicationContext wac;

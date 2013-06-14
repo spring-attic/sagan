@@ -8,7 +8,7 @@ import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class GuideTest {
+public class GuideTests {
 
 	@Test
 	public void guideId(){

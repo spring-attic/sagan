@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.bootstrap.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +21,7 @@ import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
-public class StaticAssetRequestMappingTest {
+public class BasicAcceptanceTests {
 
 	private static ConfigurableApplicationContext context;
 
@@ -33,8 +32,8 @@ public class StaticAssetRequestMappingTest {
 						new Callable<ConfigurableApplicationContext>() {
 							@Override
 							public ConfigurableApplicationContext call() throws Exception {
-								return (ConfigurableApplicationContext) SpringApplication
-										.run(ApplicationConfiguration.class);
+								return (ConfigurableApplicationContext) ApplicationConfiguration
+										.build().run();
 							}
 						});
 		context = future.get(30, TimeUnit.SECONDS);
@@ -55,6 +54,15 @@ public class StaticAssetRequestMappingTest {
 		assertTrue(response.getHeaders().getContentType()
 				.isCompatibleWith(MediaType.valueOf("text/css")));
 		assertTrue(response.getBody().contains("h1,h2,h3,h4,h5,h6"));
+	}
+
+	@Test
+	public void getDeviceDetectionGuide() throws Exception {
+		ResponseEntity<String> response = getRestTemplate().getForEntity(
+				"http://localhost:8080/guides/gs/device-detection/content", String.class);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertTrue(response.getHeaders().getContentType().isCompatibleWith(MediaType.valueOf("text/html")));
+		assertTrue(response.getBody().contains("<img"));
 	}
 
 	private RestTemplate getRestTemplate() {
