@@ -1,6 +1,8 @@
 package org.springframework.site.configuration;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,6 +16,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -23,6 +27,13 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 
 	@Autowired
 	private ResourcePatternResolver resourceResolver;
+
+	private Map<String, MediaType> mimeTypes = new HashMap<String, MediaType>();
+
+	{
+		mimeTypes.put("css", MediaType.valueOf("text/css"));
+		mimeTypes.put("js", MediaType.valueOf("text/javascript"));
+	}
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
@@ -50,13 +61,18 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	@Bean
 	public Filter cssMimeTypeFilter() {
 		return new GenericFilterBean() {
+
 			@Override
 			public void doFilter(ServletRequest request, ServletResponse response,
 					FilterChain chain) throws IOException, ServletException {
-				if (((HttpServletRequest) request).getRequestURI().endsWith(".css")) {
-					response.setContentType("text/css");
-					chain.doFilter(request, response);
+				String uri = ((HttpServletRequest) request).getRequestURI();
+				String extension = StringUtils.getFilenameExtension(uri);
+				if (mimeTypes.containsKey(extension)) {
+					response.setContentType(mimeTypes.get(extension).toString());
+				} else {
+					logger.warn("No media type found for request: " + uri);
 				}
+				chain.doFilter(request, response);
 			}
 		};
 	}
