@@ -10,10 +10,11 @@
 
 <div layout:fragment="content" class="container">
 	<ul>
-		<li>Spring Framework</li>
-		<li>Spring Security</li>
-		<li>Spring Mobile</li>
+		<li th:each="project : ${someprojects}">
+            <span th:text="${project.name}"/>
+        </li>
 	</ul>
+    <div th:text=${projects}></div>
 </div>
 </body>
 </html>
