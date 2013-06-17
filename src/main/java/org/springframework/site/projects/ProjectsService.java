@@ -5,12 +5,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * User: Nick Street
- * Date: 6/17/13
- * Time: 12:25 PM
- */
-
 @Service
 public class ProjectsService {
 	public List<Project> listGuides() {

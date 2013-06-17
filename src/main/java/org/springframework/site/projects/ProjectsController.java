@@ -24,7 +24,7 @@ public class ProjectsController {
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listProjects(Model model) {
 		List<Project> projects = service.listGuides();
-		model.addAttribute("someprojects", projects);
+		model.addAttribute("projects", projects);
 		return "projects/index";
 	}
 
