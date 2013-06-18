@@ -130,6 +130,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+    </dependencies>
 
 	<build>
 		<resources>
