@@ -9,9 +9,8 @@ import org.springframework.site.guides.GitHubGettingStartedService;
 import org.springframework.site.guides.Guide;
 import org.springframework.site.guides.GuideNotFoundException;
 import org.springframework.site.guides.ImageNotFoundException;
-import org.springframework.social.github.api.GitHub;
+import org.springframework.site.services.GitHubService;
 import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestOperations;
 
 import java.io.IOException;
 import java.util.Map;
@@ -30,10 +29,7 @@ public class GitHubGettingStartedServiceTests {
 
 	private static final String GUIDE_ID = "rest-service";
 	@Mock
-	private GitHub gh;
-
-	@Mock
-	private RestOperations restOperations;
+	private GitHubService gitHubService;
 
 	private GitHubGettingStartedService service;
 	private ObjectMapper mapper;
@@ -42,10 +38,8 @@ public class GitHubGettingStartedServiceTests {
 	public void setup() throws IOException {
 		initMocks(this);
 
-		when(gh.restOperations()).thenReturn(restOperations);
-
 		mapper = new ObjectMapper();
-		service = new GitHubGettingStartedService(gh);
+		service = new GitHubGettingStartedService(gitHubService);
 	}
 
 	@Test
@@ -53,8 +47,8 @@ public class GitHubGettingStartedServiceTests {
 		Map<String, String> restServiceReadMeFixture = mapper.readValue(new ClassPathResource("gs-rest-service.readme.json", getClass()).getInputStream(), Map.class);
 		String guideId = GUIDE_ID;
 
-		when(restOperations.getForObject(anyString(), eq(Map.class), eq(guideId))).thenReturn(restServiceReadMeFixture);
-		when(restOperations.postForObject(anyString(), anyString(), eq(String.class))).thenReturn("Getting Started: Building a RESTful Web Service");
+		when(gitHubService.getForObject(anyString(), eq(Map.class), eq(guideId))).thenReturn(restServiceReadMeFixture);
+		when(gitHubService.renderToHtml(anyString())).thenReturn("Getting Started: Building a RESTful Web Service");
 
 		String guide = service.loadGuide(guideId);
 		assertThat(guide, containsString("Getting Started: Building a RESTful Web Service"));
@@ -63,7 +57,7 @@ public class GitHubGettingStartedServiceTests {
 	@Test(expected = GuideNotFoundException.class)
 	public void unknownGuide() {
 		String unknownGuideId = "foo";
-		when(restOperations.getForObject(anyString(), eq(Map.class), eq(unknownGuideId))).thenThrow(RestClientException.class);
+		when(gitHubService.getForObject(anyString(), eq(Map.class), eq(unknownGuideId))).thenThrow(RestClientException.class);
 		service.loadGuide(unknownGuideId);
 	}
 
@@ -76,7 +70,7 @@ public class GitHubGettingStartedServiceTests {
 
 		Guide[] guides = {guide, notAGuide};
 
-		when(restOperations.getForObject(anyString(), eq(Guide[].class))).thenReturn(guides);
+		when(gitHubService.getForObject(anyString(), eq(Guide[].class))).thenReturn(guides);
 
 		assertThat(service.listGuides(), hasItem(guide));
 		assertThat(service.listGuides(), not(hasItem(notAGuide)));
@@ -88,7 +82,7 @@ public class GitHubGettingStartedServiceTests {
 
 		String imageName = "welcome.png";
 
-		when(restOperations.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID), eq(imageName))).thenReturn(imageResponseFixture);
+		when(gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID), eq(imageName))).thenReturn(imageResponseFixture);
 
 		byte[] result = service.loadImage(GUIDE_ID, imageName);
 
@@ -99,7 +93,7 @@ public class GitHubGettingStartedServiceTests {
 	public void unknownImage() {
 		String unknownImage = "uknown_image.png";
 
-		when(restOperations.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID), eq(unknownImage))).thenThrow(RestClientException.class);
+		when(gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID), eq(unknownImage))).thenThrow(RestClientException.class);
 
 		service.loadImage(GUIDE_ID, unknownImage);
 	}

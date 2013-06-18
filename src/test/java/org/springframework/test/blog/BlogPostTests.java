@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.site.blog.Post;
 import static org.junit.Assert.assertEquals;
 
-public class BlogTests {
+public class BlogPostTests {
 
 	@Test
 	public void slugReplacesSpacesWithDashes() {
