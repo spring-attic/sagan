@@ -25,6 +25,11 @@ public class DocumentationService {
 				"http://static.springsource.org/spring-mobile/docs/current/reference/htmlsingle/",
 				"http://static.springsource.org/spring-mobile/docs/current/api/"));
 
+		projects.add(new Project("Spring Web Services",
+				"https://github.com/SpringSource/spring-ws",
+				"http://static.springsource.org/spring-ws/sites/2.0/reference/html/index.html",
+				"http://static.springsource.org/spring-ws/sites/2.0/apidocs/index.html"));
+
 		return projects;
 	}
 }
