@@ -16,7 +16,7 @@ public class GitHubGettingStartedService implements GettingStartedService {
 
 	private static final String HOSTNAME = "https://api.github.com";
 	private static final String REPOS_URL = HOSTNAME + "/orgs/springframework-meta/repos";
-	private static final String README_URL = HOSTNAME + "/repos/springframework-meta/gs-{guideId}/contents/README.src.md";
+	private static final String README_URL = HOSTNAME + "/repos/springframework-meta/gs-{guideId}/contents/README.md";
 	private static final String IMAGES_URL = HOSTNAME + "/repos/springframework-meta/gs-{guideId}/contents/images/{imageName}";
 
 	private static final Logger log = Logger.getLogger(GitHubGettingStartedService.class);
