@@ -1,5 +1,7 @@
 package org.springframework.site.documentation;
 
+import java.util.List;
+
 public class Project {
 
 	private String name;
@@ -15,18 +17,20 @@ public class Project {
 	private String githubUrl;
 	private String referenceUrl;
 	private String apiDocsUrl;
+    private List<String> supportedVersions;
 
-	public Project(String name, String id) {
+    public Project(String name, String id) {
 		this.name = name;
 		this.id = id;
 	}
 
-	public Project(String name, String githubUrl, String referenceUrl, String apiDocsUrl) {
+	public Project(String name, String githubUrl, String referenceUrl, String apiDocsUrl, List<String> supportedVersions) {
 		this.name = name;
 		this.githubUrl = githubUrl;
 		this.referenceUrl = referenceUrl;
 		this.apiDocsUrl = apiDocsUrl;
-	}
+        this.supportedVersions = supportedVersions;
+    }
 	
 	public String getName() {
 		return name;
@@ -92,4 +96,15 @@ public class Project {
 		this.name = name;
 	}
 
+    public String getLatestReferenceUrl() {
+        return substituteVersion(this.getReferenceUrl(), this.supportedVersions.get(0));
+    }
+
+    public String getLatestApiDocsUrl() {
+        return substituteVersion(this.getApiDocsUrl(), this.supportedVersions.get(0));
+    }
+
+    private String substituteVersion(String urlTemplate, String version) {
+        return urlTemplate.replaceAll("\\{version\\}", version);
+    }
 }

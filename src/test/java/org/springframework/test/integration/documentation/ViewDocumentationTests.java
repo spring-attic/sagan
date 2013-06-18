@@ -38,7 +38,7 @@ public class ViewDocumentationTests {
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("Spring Security")))
-				.andExpect(content().string(containsString("http://static.springsource.org/spring-mobile/docs/current/api/")));
+				.andExpect(content().string(containsString("http://static.springsource.org/spring-mobile/docs/1.0.1.RELEASE/reference/htmlsingle/")));
 	}
 
 }
