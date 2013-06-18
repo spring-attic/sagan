@@ -1,4 +1,4 @@
-package org.springframework.site.domain.blog;
+package org.springframework.site.blog;
 
 import org.springframework.data.annotation.CreatedDate;
 
