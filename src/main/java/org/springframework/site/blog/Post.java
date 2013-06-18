@@ -28,8 +28,7 @@ public class Post implements Serializable {
 	@Column(nullable = false)
 	private String renderedContent;
 
-	@CreatedDate
-	private Date createdDate;
+	private Date createdDate = new Date();
 
 	public Post() {
 	}
