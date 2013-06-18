@@ -8,7 +8,7 @@
 <div layout:fragment="content" class="container" th:object="${post}">
     <h1 th:text="*{title}">Blog post</h1>
     <div class='date' th:text="${#dates.format(post.createdDate)}">June 18, 2013 3:49:54 PM BST</div>
-    <article th:text="*{renderedContent}">Blog content</article>
+    <article th:utext="*{renderedContent}">Blog content</article>
 </div>
 </body>
 </html>

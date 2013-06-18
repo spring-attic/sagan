@@ -1,6 +1,6 @@
 package org.springframework.site.blog;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.Type;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
@@ -23,9 +23,11 @@ public class Post implements Serializable {
 	private String title;
 
 	@Column(nullable = false)
+	@Type(type="text")
 	private String rawContent;
 
 	@Column(nullable = false)
+	@Type(type="text")
 	private String renderedContent;
 
 	private Date createdDate = new Date();
