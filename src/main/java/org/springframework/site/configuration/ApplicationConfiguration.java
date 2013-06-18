@@ -29,7 +29,7 @@ import org.springframework.social.github.api.impl.GitHubTemplate;
 public class ApplicationConfiguration {
 
 	public static void main(String[] args) {
-		build().run(args);;
+		build().run(args);
 	}
 
 	public static SpringApplication build() {

@@ -1,0 +1,22 @@
+<html
+		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+		layout:decorator="layout">
+<head>
+	<title>SpringFramework - Documentation</title>
+</head>
+<body>
+<h1 layout:fragment="header">Spring Documentation</h1>
+<div layout:fragment="overview">Spring Documentation is Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
+
+<div layout:fragment="content" class="container">
+	<ul>
+		<li th:each="springProject : ${projects}">
+            <span th:text="${springProject.name}">Spring Framework</span>
+            <a th:href="${springProject.githubUrl}">Github</a>
+            <a th:href="${springProject.referenceUrl}">Reference</a>
+            <a th:href="${springProject.apiDocsUrl}">API docs</a>
+        </li>
+	</ul>
+</div>
+</body>
+</html>
