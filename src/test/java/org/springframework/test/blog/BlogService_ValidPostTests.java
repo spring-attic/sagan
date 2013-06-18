@@ -1,11 +1,14 @@
 package org.springframework.test.blog;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.site.blog.BlogService;
+import org.springframework.site.blog.NoSuchBlogPostException;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.repository.PostRepository;
 
@@ -26,6 +29,9 @@ public class BlogService_ValidPostTests {
 
 	@Mock
 	private PostRepository postRepository;
+
+	@Rule
+	public ExpectedException expected = ExpectedException.none();
 
 	@Before
 	public void setup() {
@@ -49,6 +55,13 @@ public class BlogService_ValidPostTests {
 		when(postRepository.findOne(anyLong())).thenReturn(post);
 		assertThat(post, equalTo(service.getPost(post.getId())));
 		verify(postRepository).findOne(anyLong());
+	}
+
+	@Test
+	public void nonExistentPost() {
+		when(postRepository.findOne(anyLong())).thenReturn(null);
+		expected.expect(NoSuchBlogPostException.class);
+		service.getPost(999L);
 	}
 
 }

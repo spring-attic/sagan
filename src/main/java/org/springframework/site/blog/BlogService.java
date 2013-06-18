@@ -24,6 +24,10 @@ public class BlogService {
 	}
 
 	public Post getPost(Long postId) {
-		return repository.findOne(postId);
+		Post one = repository.findOne(postId);
+		if (one == null) {
+			throw new NoSuchBlogPostException("Blog post not found with Id=" + postId);
+		}
+		return one;
 	}
 }
