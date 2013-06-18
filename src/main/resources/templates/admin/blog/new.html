@@ -9,7 +9,7 @@
     <form th:action="@{/admin/blog}" action="#" method="post" th:object="${postForm}">
         <label for="title">Title:<input id="title" type="text" th:field="*{title}" name="title" /></label>
         <label for="content">Content:<textarea id="content" th:field="*{content}" name="content" /></label>
-        <button type="submit">Submit</button>
+        <button type="submit">Publish</button>
     </form>
 </div>
 </body>

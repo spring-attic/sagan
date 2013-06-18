@@ -20,8 +20,8 @@ public class BlogController {
 		this.service = service;
 	}
 
-	@RequestMapping(value = "/{postId:[0-9]+}", method = { GET, HEAD })
-	public String showPost(@PathVariable Long postId, Model model) {
+	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { GET, HEAD })
+	public String showPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
 		model.addAttribute("post", service.getPost(postId));
 		return "blog/show";
 	}

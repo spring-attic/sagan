@@ -1,6 +1,7 @@
 package org.springframework.site.blog;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +30,14 @@ public class Post implements Serializable {
 
 	@CreatedDate
 	private Date createdDate;
+
+	public Post() {
+	}
+
+	public Post(String title, String content) {
+		this.title = title;
+		this.rawContent = content;
+	}
 
 	public Long getId() {
 		return id;
@@ -64,5 +73,14 @@ public class Post implements Serializable {
 
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public String getSlug() {
+		if (title == null) {
+			return "";
+		}
+
+		String cleanedTitle = title.toLowerCase().replace("\n", " ").replaceAll("[^a-z\\d\\s]", "");
+		return StringUtils.arrayToDelimitedString(StringUtils.tokenizeToStringArray(cleanedTitle, " "), "-");
 	}
 }
