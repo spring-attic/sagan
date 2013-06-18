@@ -253,6 +253,10 @@ body {
   margin: 0 auto -240px;
 }
 
+#footer-push-down {
+  height: 240px;
+}
+
 #footer {
   height: 240px;
   background-color: #f5f5f5;
