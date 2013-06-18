@@ -1,52 +1,64 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
-<title>Layout</title>
-<link rel="stylesheet" th:href="@{/resources/css/getting-started.css}" href="../css/getting-started.css" />
-<link rel="stylesheet" th:href="@{/resources/css/bootstrap.css}" href="../css/bootstrap.css" />
-<link rel="stylesheet" th:href="@{/resources/css/bootstrap-responsive.css}" href="../css/bootstrap-responsive.css" />
+	<title>Layout</title>
+	<link rel="stylesheet" th:href="@{/resources/css/getting-started.css}" href="../css/getting-started.css" />
+	<link rel="stylesheet" th:href="@{/resources/css/bootstrap.css}" href="../css/bootstrap.css" />
+	<link rel="stylesheet" th:href="@{/resources/css/bootstrap-responsive.css}" href="../css/bootstrap-responsive.css" />
 </head>
 <body>
-	<div class="container">
-		<div class="navbar">
+
+	<div id="wrap">
+
+		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
-				<a class="brand" th:href="@{/}" href="pages/index.html"> Spring
-				</a>
-				<ul class="nav">
-					<li><a th:href="@{/documentation}"
-						href="documentation/index.html"> Documentation </a></li>
-					<li><a th:href="@{/guides}" href="pages/guides/index.html">
-							Guides </a></li>
-					<li><a th:href="@{/projects}" href="pages/projects.html">
-							Projects </a></li>
-					<li><a th:href="@{/blog}" href="pages/blog.html">Blog</a></li>
-					<li><a href="http://forum.springframework.org"> Forum </a></li>
-				</ul>
+				<div class="container">
+					<a class="brand" th:href="@{/}" href="pages/index.html">Spring</a>
+					<ul class="nav">
+						<li><a th:href="@{/documentation}" href="documentation/index.html">Documentation</a></li>
+						<li><a th:href="@{/guides}" href="pages/guides/index.html">Guides</a></li>
+						<li><a th:href="@{/projects}" href="pages/projects.html">Projects</a></li>
+						<!--<li><a th:href="@{/blog}" href="pages/blog.html">Blog</a></li>-->
+						<li><a href="http://forum.springframework.org"> Forum </a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
-		<h1 layout:fragment="header"></h1>
-		<div layout:fragment="overview"></div>
 
-		<div layout:fragment="content">Fake content</div>
+		<div class="container">
+			<div class="page-header">
+				<h1 layout:fragment="header" >Header</h1>
+				<div layout:fragment="overview">Overview</div>
+			</div>
 
-		<div class="footer">
-			&copy; 2013 Go Pivotal, Inc. All Rights Reserved. <a
-				href="http://www.vmware.com/help/legal.html">Terms of Use</a>, <a
-				href="http://www.gopivotal.com/privacy-policy">Privacy</a>, and <a
-				th:href="@{/trademark}" href="pages/trademark.html">Trademark
-				Standards</a>
-
-				<ul>
-					<li><a th:href="@{/tools}" href="pages/tools.html">Tools</a></li>
-					<li><a th:href="@{/services}" href="pages/services.html">Services</a></li>
-					<li><a th:href="@{/case-study}" href="pages/case-study.html">Case Studies</a></li>
-					<li><a th:href="@{/newsletter}" href="pages/newsletter.html">Newsletter</a></li>
-					<li><a th:href="@{/about}" href="pages/about.html">About Us</a></li>
-					<li><a th:href="@{/about/jobs}" href="pages/about/jobs.html">Jobs</a></li>
-				</ul>
+			<div layout:fragment="content" >Fake content</div>
 		</div>
 
 	</div>
+
+	<div id="footer">
+		<div class="container">
+
+			<div class="navbar">
+				<div class="container ">
+					<ul class="nav">
+						<li><a th:href="@{/tools}" href="pages/tools.html">Tools</a></li>
+						<li><a th:href="@{/services}" href="pages/services.html">Services</a></li>
+						<li><a th:href="@{/case-study}" href="pages/case-study.html">Case Studies</a></li>
+						<li><a th:href="@{/newsletter}" href="pages/newsletter.html">Newsletter</a></li>
+						<li><a th:href="@{/about}" href="pages/about.html">About Us</a></li>
+						<li><a th:href="@{/about/jobs}" href="pages/about/jobs.html">Jobs</a></li>
+					</ul>
+				</div>
+			</div>
+
+			&copy; 2013 Go Pivotal, Inc. All Rights Reserved.
+			<a href="http://www.vmware.com/help/legal.html">Terms of Use</a>,
+			<a href="http://www.gopivotal.com/privacy-policy">Privacy</a>, and
+			<a th:href="@{/trademark}" href="pages/trademark.html">Trademark Standards</a>
+
+		</div>
+	</div>
+
 </body>
 </html>
