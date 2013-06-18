@@ -13,8 +13,8 @@
 		<li th:each="springProject : ${projects}" class="span3">
             <span th:text="${springProject.name}">Spring Framework</span>
             <a th:href="${springProject.githubUrl}">Github</a>
-            <a th:href="${springProject.referenceUrl}">Reference</a>
-            <a th:href="${springProject.apiDocsUrl}">API docs</a>
+            <a th:href="${springProject.latestReferenceUrl}">Reference</a>
+            <a th:href="${springProject.latestApiDocsUrl}">API docs</a>
         </li>
 	</ul>
 </div>

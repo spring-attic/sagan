@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title th:inline="text">SpringFramework - [[${post.title}]]</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" th:object="${post}">
+    <h1 th:text="*{title}">Blog post</h1>
+    <article th:text="*{renderedContent}">Blog content</article>
+</div>
+</body>
+</html>
