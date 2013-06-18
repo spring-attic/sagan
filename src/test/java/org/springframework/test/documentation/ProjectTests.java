@@ -3,6 +3,7 @@ package org.springframework.test.documentation;
 import org.junit.Test;
 import org.junit.Before;
 import org.springframework.site.documentation.Project;
+import org.springframework.site.documentation.ProjectDocumentVersion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +30,18 @@ public class ProjectTests {
     }
 
     @Test
-    public void getLatestReferenceUrl() {
-        assertThat(project.getLatestReferenceUrl(), equalTo("http://project.org/reference/4.0.0/index.html"));
+    public void getSupportedReferenceDocumentVersions() {
+        List<ProjectDocumentVersion> docVersions = project.getSupportedReferenceDocumentVersions();
+        assertThat(docVersions.get(0).getUrl(), equalTo("http://project.org/reference/4.0.0/index.html"));
+        assertThat(docVersions.get(1).getUrl(), equalTo("http://project.org/reference/3.1.5/index.html"));
+        assertThat(docVersions.get(2).getUrl(), equalTo("http://project.org/reference/1.2.3/index.html"));
     }
 
     @Test
-    public void getLatestApiDocsUrl() {
-        assertThat(project.getLatestApiDocsUrl(), equalTo("http://project.org/api/4.0.0/index.html"));
+    public void getSupportedApiDocsUrls() {
+        List<ProjectDocumentVersion> docVersions = project.getSupportedApiDocsDocumentVersions();
+        assertThat(docVersions.get(0).getUrl(), equalTo("http://project.org/api/4.0.0/index.html"));
+        assertThat(docVersions.get(1).getUrl(), equalTo("http://project.org/api/3.1.5/index.html"));
+        assertThat(docVersions.get(2).getUrl(), equalTo("http://project.org/api/1.2.3/index.html"));
     }
 }

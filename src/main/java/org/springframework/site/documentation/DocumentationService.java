@@ -12,6 +12,7 @@ public class DocumentationService {
 
         ArrayList<String> supportedVersions = new ArrayList<String>();
         supportedVersions.add("3.2.3.RELEASE");
+        supportedVersions.add("4.0.0.M1");
         projects.add(new Project("Spring Framework",
 				"https://github.com/SpringSource/spring-framework",
 				"http://static.springsource.org/spring/docs/{version}/spring-framework-reference/html/",
