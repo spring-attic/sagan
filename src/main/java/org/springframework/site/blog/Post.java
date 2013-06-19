@@ -30,6 +30,7 @@ public class Post implements Serializable {
 	@Type(type="text")
 	private String renderedContent;
 
+	@Column(nullable = false)
 	private Date createdDate = new Date();
 
 	public Post() {

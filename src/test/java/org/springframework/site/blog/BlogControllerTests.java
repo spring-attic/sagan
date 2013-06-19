@@ -29,7 +29,7 @@ public class BlogControllerTests {
 	@Test
 	public void listPostsModel(){
 		List<Post> posts = new ArrayList<Post>();
-		when(blogService.listPosts()).thenReturn(posts);
+		when(blogService.mostRecentPosts()).thenReturn(posts);
 		controller.listPosts(model);
 		assertThat((List<Post>) model.get("posts"), is(posts));
 	}

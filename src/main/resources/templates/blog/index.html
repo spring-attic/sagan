@@ -12,6 +12,7 @@
 	<ul class='posts'>
 		<li th:each="post : ${posts}">
             <h2 th:text="${post.title}">This week in Spring</h2>
+			<div class='date' th:text="${#dates.format(post.createdDate)}">June 18, 2013 3:49:54 PM BST</div>
         </li>
 	</ul>
 </div>

@@ -28,7 +28,7 @@ public class BlogController {
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listPosts(Model model) {
-		model.addAttribute("posts", service.listPosts());
+		model.addAttribute("posts", service.mostRecentPosts());
 		return "blog/index";
 	}
 }

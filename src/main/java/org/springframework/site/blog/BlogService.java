@@ -1,6 +1,8 @@
 package org.springframework.site.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.site.blog.repository.PostRepository;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.stereotype.Service;
@@ -36,7 +38,7 @@ public class BlogService {
 		return one;
 	}
 
-	public List<Post> listPosts() {
-		return repository.findAll();
+	public List<Post> mostRecentPosts() {
+		return repository.findAll(new PageRequest(0, 10, Sort.Direction.DESC, "createdDate")).getContent();
 	}
 }

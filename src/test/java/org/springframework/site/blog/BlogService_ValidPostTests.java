@@ -7,15 +7,16 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.data.domain.*;
 import org.springframework.site.blog.repository.PostRepository;
 import org.springframework.site.services.MarkdownService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -77,9 +78,14 @@ public class BlogService_ValidPostTests {
 
 	@Test
 	public void listPosts() {
+		Pageable firstTenPosts = new PageRequest(0, 10, Sort.Direction.DESC, "createdDate");
 		List<Post> posts = new ArrayList<Post>();
-		when(postRepository.findAll()).thenReturn(posts);
-		assertThat(service.listPosts(), is(posts));
+		posts.add(new Post("title", "content"));
+		Page page = new PageImpl(posts);
+
+		when(postRepository.findAll(firstTenPosts)).thenReturn(page);
+
+		assertThat(service.mostRecentPosts(), is(posts));
 	}
 
 }
