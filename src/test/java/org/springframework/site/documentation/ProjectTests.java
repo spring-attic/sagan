@@ -1,15 +1,13 @@
 package org.springframework.site.documentation;
 
-import org.junit.Test;
-import org.junit.Before;
-import org.springframework.site.documentation.Project;
-import org.springframework.site.documentation.ProjectDocumentVersion;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
 
 public class ProjectTests {
 
@@ -17,16 +15,10 @@ public class ProjectTests {
 
     @Before
     public void setup() {
-        List<String> supportedVersions = new ArrayList<String>();
-
-        supportedVersions.add("4.0.0");
-        supportedVersions.add("3.1.5");
-        supportedVersions.add("1.2.3");
-
-        project = new Project("Name",
+        project = new Project(null,
+                "Name",
                 "https://github.com/someone/project",
-                "http://project.org/reference/{version}/index.html",
-                "http://project.org/api/{version}/index.html", supportedVersions);
+                "http://project.org/reference/{version}/index.html", "http://project.org/api/{version}/index.html", Arrays.asList("4.0.0", "3.1.5", "1.2.3"));
     }
 
     @Test

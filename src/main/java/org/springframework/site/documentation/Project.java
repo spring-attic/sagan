@@ -5,13 +5,18 @@ import java.util.List;
 
 public class Project {
 
+	private String id;
 	private String name;
 	private String githubUrl;
 	private String referenceUrl;
 	private String apiDocsUrl;
-    private List<String> supportedVersions;
+    private List<String> supportedVersions = new ArrayList<String>();
+    
+    public Project() {
+	}
 
-	public Project(String name, String githubUrl, String referenceUrl, String apiDocsUrl, List<String> supportedVersions) {
+	public Project(String id, String name, String githubUrl, String referenceUrl, String apiDocsUrl, List<String> supportedVersions) {
+		this.id = id;
 		this.name = name;
 		this.githubUrl = githubUrl;
 		this.referenceUrl = referenceUrl;
@@ -31,11 +36,43 @@ public class Project {
 		return referenceUrl;
 	}
 
-	public String getApiDocsUrl() {
+	public String getApiUrl() {
 		return apiDocsUrl;
 	}
 
-    private ProjectDocumentVersion buildDocumentVersion(String urlTemplate, String version, boolean isCurrent) {
+    public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public List<String> getSupportedVersions() {
+		return supportedVersions;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setGithubUrl(String githubUrl) {
+		this.githubUrl = githubUrl;
+	}
+
+	public void setReferenceUrl(String referenceUrl) {
+		this.referenceUrl = referenceUrl;
+	}
+
+	public void setApiUrl(String apiDocsUrl) {
+		this.apiDocsUrl = apiDocsUrl;
+	}
+
+	public void setSupportedVersions(List<String> supportedVersions) {
+		this.supportedVersions = supportedVersions;
+	}
+
+	private ProjectDocumentVersion buildDocumentVersion(String urlTemplate, String version, boolean isCurrent) {
         String url = urlTemplate.replaceAll("\\{version\\}", version);
         return new ProjectDocumentVersion(url, version, isCurrent);
     }
@@ -45,7 +82,7 @@ public class Project {
     }
 
     public List<ProjectDocumentVersion> getSupportedApiDocsDocumentVersions() {
-        return getDocumentVersions(this.getApiDocsUrl());
+        return getDocumentVersions(this.getApiUrl());
     }
 
     private List<ProjectDocumentVersion> getDocumentVersions(String urlTemplate) {

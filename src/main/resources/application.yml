@@ -1,0 +1,17 @@
+project:
+  artifactId: springframework-site
+  name: Sagan
+  version: X.X.X.X
+  description: Sagan website
+
+info:
+  build:
+    artifact: ${project.artifactId}
+    name: ${project.name}
+    description: ${project.description}
+    version: ${project.version}
+
+spring:
+  jpa:
+    ddl_auto: create_drop
+      

@@ -21,7 +21,7 @@ public class DocumentationController {
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listProjects(Model model) {
-		model.addAttribute("projects", service.listProjects());
+		model.addAttribute("projects", service.getProjects());
 		return "documentation/index";
 	}
 

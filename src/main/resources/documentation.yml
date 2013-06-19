@@ -1,0 +1,26 @@
+projects:
+  - id: spring-framework
+    name: Spring Framework
+    supportedVersions: [3.1.4.RELEASE, 3.2.3.RELEASE, 4.0.0.M1]
+    githubUrl: https://github.com/SpringSource/spring-framework
+    referenceUrl: http://static.springsource.org/spring/docs/{version}/spring-framework-reference/html/
+    apiUrl: http://static.springsource.org/spring/docs/{version}/javadoc-api/
+  - id: spring-security
+    supportedVersions: [3.1.4.RELEASE]
+    name: Spring Security
+    githubUrl: https://github.com/SpringSource/spring-security",
+    referenceUrl: http://static.springsource.org/spring-security/site/docs/{version}/reference/springsecurity.html
+    apiUrl: http://static.springsource.org/spring-security/site/docs/{version}/apidocs/index.html
+  - id: spring-mobile
+    supportedVersions: [1.0.1.RELEASE]
+    name: Spring Mobile
+    githubUrl: https://github.com/SpringSource/spring-mobile
+    referenceUrl: http://static.springsource.org/spring-mobile/docs/{version}/reference/htmlsingle/
+    apiUrl: http://static.springsource.org/spring-mobile/docs/{version}/api/
+  - id: spring-ws
+    supportedVersions: [2.0]
+    name: Spring Web Services
+    githubUrl: https://github.com/SpringSource/spring-ws
+    referenceUrl: http://static.springsource.org/spring-ws/sites/{version}/reference/html/index.html
+    apiUrl: http://static.springsource.org/spring-ws/sites/{version}/apidocs/index.html
+      

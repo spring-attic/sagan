@@ -24,7 +24,7 @@ import org.springframework.site.configuration.ApplicationConfiguration;
  *
  */
 public class ApplicationConfigurationTests {
-
+	
 	@Test
 	public void testContextLoading() throws Exception {
 		AnnotationConfigEmbeddedWebApplicationContext context = new AnnotationConfigEmbeddedWebApplicationContext();
