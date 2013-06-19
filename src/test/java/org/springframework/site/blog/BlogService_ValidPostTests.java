@@ -78,14 +78,14 @@ public class BlogService_ValidPostTests {
 
 	@Test
 	public void listPosts() {
-		Pageable firstTenPosts = new PageRequest(0, 10, Sort.Direction.DESC, "createdDate");
+		Pageable firstTenPosts = new BlogPostsPageRequest(1);
 		List<Post> posts = new ArrayList<Post>();
 		posts.add(new Post("title", "content"));
 		Page page = new PageImpl(posts);
 
 		when(postRepository.findAll(firstTenPosts)).thenReturn(page);
 
-		assertThat(service.mostRecentPosts(), is(posts));
+		assertThat(service.mostRecentPosts(firstTenPosts), is(posts));
 	}
 
 }
