@@ -5,6 +5,8 @@ import org.springframework.site.blog.repository.PostRepository;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BlogService {
 
@@ -32,5 +34,9 @@ public class BlogService {
 			throw new NoSuchBlogPostException("Blog post not found with Id=" + postId);
 		}
 		return one;
+	}
+
+	public List<Post> listPosts() {
+		return repository.findAll();
 	}
 }

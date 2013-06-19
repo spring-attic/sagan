@@ -26,4 +26,9 @@ public class BlogController {
 		return "blog/show";
 	}
 
+	@RequestMapping(value = "", method = { GET, HEAD })
+	public String listPosts(Model model) {
+		model.addAttribute("posts", service.listPosts());
+		return "blog/index";
+	}
 }

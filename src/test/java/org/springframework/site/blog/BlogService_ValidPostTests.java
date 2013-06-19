@@ -7,17 +7,16 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.site.blog.BlogService;
-import org.springframework.site.blog.NoSuchBlogPostException;
-import org.springframework.site.blog.Post;
 import org.springframework.site.blog.repository.PostRepository;
 import org.springframework.site.services.MarkdownService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -74,6 +73,13 @@ public class BlogService_ValidPostTests {
 		when(postRepository.findOne(anyLong())).thenReturn(null);
 		expected.expect(NoSuchBlogPostException.class);
 		service.getPost(999L);
+	}
+
+	@Test
+	public void listPosts() {
+		List<Post> posts = new ArrayList<Post>();
+		when(postRepository.findAll()).thenReturn(posts);
+		assertThat(service.listPosts(), is(posts));
 	}
 
 }

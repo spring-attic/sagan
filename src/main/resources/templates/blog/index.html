@@ -1,0 +1,19 @@
+<html   xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+		layout:decorator="layout">
+<head>
+	<title>SpringFramework - Blog</title>
+</head>
+<body>
+<h1 layout:fragment="header">Spring Blog</h1>
+<div layout:fragment="overview">Spring Blog is Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
+
+<div layout:fragment="content" class="container">
+	<ul class='posts'>
+		<li th:each="post : ${posts}">
+            <h2 th:text="${post.title}">This week in Spring</h2>
+        </li>
+	</ul>
+</div>
+</body>
+</html>

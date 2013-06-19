@@ -61,7 +61,7 @@ public class CreateBlogPostTests {
 					@Override
 					public void match(MvcResult result) {
 						String redirectedUrl = result.getResponse().getRedirectedUrl();
-						assertTrue("Expected redirect to blog, got: " + redirectedUrl, redirectedUrl.matches("^/blog/\\d-post-title"));
+						assertTrue("Expected redirect to blog, got: " + redirectedUrl, redirectedUrl.matches("^/blog/\\d+-post-title"));
 					}
 				});
 	}
@@ -85,5 +85,4 @@ public class CreateBlogPostTests {
 				.andExpect(content().string(containsString("<h1>Post Title</h1>")))
 				.andExpect(content().string(containsString("Post Title</title>")));
 	}
-
 }
