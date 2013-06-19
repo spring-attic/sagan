@@ -1,4 +1,4 @@
-package org.springframework.test.guides;
+package org.springframework.site.guides;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;

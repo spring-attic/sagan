@@ -1,10 +1,10 @@
-package org.springframework.test.integration;
+package org.springframework.site.integration.documentation;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.configuration.OfflineApplicationConfiguration;
+import org.springframework.site.test.configuration.OfflineApplicationConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = OfflineApplicationConfiguration.class)
-public class StaticPageRequestMappingTests {
+public class ViewDocumentationTests {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -33,21 +33,12 @@ public class StaticPageRequestMappingTests {
 	}
 
 	@Test
-	public void getHomePage() throws Exception {
-		this.mockMvc.perform(get("/"))
+	public void getDocumentationPage() throws Exception {
+		this.mockMvc.perform(get("/documentation"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Hello World")));
-	}
-
-	@Test
-	public void getGuidesPage() throws Exception {
-		this.mockMvc.perform(get("/guides"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Getting Started")))
-				.andExpect(content().string(containsString("Tutorials")))
-				.andExpect(content().string(containsString("Reference Apps")));
+				.andExpect(content().string(containsString("Spring Security")))
+				.andExpect(content().string(containsString("http://static.springsource.org/spring-mobile/docs/1.0.1.RELEASE/reference/htmlsingle/")));
 	}
 
 }

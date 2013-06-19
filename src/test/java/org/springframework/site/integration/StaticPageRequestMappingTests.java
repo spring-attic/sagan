@@ -1,10 +1,10 @@
-package org.springframework.test.integration;
+package org.springframework.site.integration;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.configuration.OfflineApplicationConfiguration;
+import org.springframework.site.test.configuration.OfflineApplicationConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = OfflineApplicationConfiguration.class)
-public class DynamicPageRequestMappingTests {
+public class StaticPageRequestMappingTests {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -33,19 +33,21 @@ public class DynamicPageRequestMappingTests {
 	}
 
 	@Test
-	public void getGettingStartedGuidesListPage() throws Exception {
-		this.mockMvc.perform(get("/guides/gs"))
+	public void getHomePage() throws Exception {
+		this.mockMvc.perform(get("/"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("rest-service")));
+				.andExpect(content().string(containsString("Hello World")));
 	}
 
 	@Test
-	public void getGettingStartedGuidesPage() throws Exception {
-		this.mockMvc.perform(get("/guides/gs/foo-bar/content"))
+	public void getGuidesPage() throws Exception {
+		this.mockMvc.perform(get("/guides"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Awesome getting started guide that isn't helpful")));
+				.andExpect(content().string(containsString("Getting Started")))
+				.andExpect(content().string(containsString("Tutorials")))
+				.andExpect(content().string(containsString("Reference Apps")));
 	}
 
 }

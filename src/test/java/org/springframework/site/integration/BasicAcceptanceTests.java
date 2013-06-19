@@ -1,4 +1,4 @@
-package org.springframework.test.integration;
+package org.springframework.site.integration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

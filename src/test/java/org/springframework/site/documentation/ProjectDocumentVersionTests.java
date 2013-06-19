@@ -1,4 +1,4 @@
-package org.springframework.test.documentation;
+package org.springframework.site.documentation;
 
 import org.junit.Test;
 import org.springframework.site.documentation.ProjectDocumentVersion;

@@ -1,4 +1,4 @@
-package org.springframework.test.configuration;
+package org.springframework.site.test.configuration;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,7 +48,7 @@ public class OfflineApplicationConfiguration{
 		public List<Guide> listGuides() {
 			ObjectMapper mapper = new ObjectMapper();
 			try {
-				InputStream json = new ClassPathResource("../guides/springframework-meta.repos.offline.json", getClass()).getInputStream();
+				InputStream json = new ClassPathResource("../../guides/springframework-meta.repos.offline.json", getClass()).getInputStream();
 				return mapper.readValue(json, new TypeReference<List<Guide>>(){});
 			} catch (IOException e) {
 				throw new RuntimeException(e);

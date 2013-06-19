@@ -1,10 +1,10 @@
-package org.springframework.test.integration.documentation;
+package org.springframework.site.integration;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.configuration.OfflineApplicationConfiguration;
+import org.springframework.site.test.configuration.OfflineApplicationConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = OfflineApplicationConfiguration.class)
-public class ViewDocumentationTests {
+public class DynamicPageRequestMappingTests {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -33,12 +33,19 @@ public class ViewDocumentationTests {
 	}
 
 	@Test
-	public void getDocumentationPage() throws Exception {
-		this.mockMvc.perform(get("/documentation"))
+	public void getGettingStartedGuidesListPage() throws Exception {
+		this.mockMvc.perform(get("/guides/gs"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Spring Security")))
-				.andExpect(content().string(containsString("http://static.springsource.org/spring-mobile/docs/1.0.1.RELEASE/reference/htmlsingle/")));
+				.andExpect(content().string(containsString("rest-service")));
+	}
+
+	@Test
+	public void getGettingStartedGuidesPage() throws Exception {
+		this.mockMvc.perform(get("/guides/gs/foo-bar/content"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html"))
+				.andExpect(content().string(containsString("Awesome getting started guide that isn't helpful")));
 	}
 
 }

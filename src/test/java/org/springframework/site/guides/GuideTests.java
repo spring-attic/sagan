@@ -1,4 +1,4 @@
-package org.springframework.test.guides;
+package org.springframework.site.guides;
 
 import org.junit.Test;
 import org.springframework.site.guides.Guide;

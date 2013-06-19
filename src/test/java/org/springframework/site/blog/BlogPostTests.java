@@ -1,4 +1,4 @@
-package org.springframework.test.blog;
+package org.springframework.site.blog;
 
 import org.junit.Test;
 import org.springframework.site.blog.Post;

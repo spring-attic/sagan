@@ -1,4 +1,4 @@
-package org.springframework.test.guides;
+package org.springframework.site.guides;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
