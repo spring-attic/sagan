@@ -55,13 +55,9 @@ public class BlogIndexTests {
 
 	@Test
 	public void given1Post_blogIndexShowsPostSummary() throws Exception {
-		Post post = new PostBuilder().title("This week in Spring - June 3, 2013")
-									 .rawContent("Raw content")
-									 .renderedContent("Html content")
-									 .build();
-		postRepository.save(post);
+		Post post = createSinglePost();
 
-		MvcResult response = this.mockMvc.perform(get("/blog"))
+		MvcResult response = mockMvc.perform(get("/blog"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andReturn();
@@ -70,11 +66,20 @@ public class BlogIndexTests {
 		assertThat(html.select("ul.posts li h2").first().text(), is(post.getTitle()));
 	}
 
+	private Post createSinglePost() {
+		Post post = new PostBuilder().title("This week in Spring - June 3, 2013")
+										 .rawContent("Raw content")
+										 .renderedContent("Html content")
+										 .build();
+		postRepository.save(post);
+		return post;
+	}
+
 	@Test
 	public void givenManyPosts_blogIndexShowsLatest10PostSummaries() throws Exception {
 		createManyPostsInNovember(11);
 
-		MvcResult response = this.mockMvc.perform(get("/blog"))
+		MvcResult response = mockMvc.perform(get("/blog"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andReturn();
@@ -100,4 +105,12 @@ public class BlogIndexTests {
 		postRepository.save(posts);
 	}
 
+	@Test
+	public void givenRequestForInvalidPage_blogIndexReturns404() throws Exception {
+		createSinglePost();
+
+		mockMvc.perform(get("/blog?page=2"))
+				.andExpect(status().isNotFound())
+				.andReturn();
+	}
 }

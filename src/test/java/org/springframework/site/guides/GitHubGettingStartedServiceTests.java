@@ -1,18 +1,6 @@
 package org.springframework.site.guides;
 
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
-
-import java.io.IOException;
-import java.util.Map;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -20,7 +8,19 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.services.GitHubService;
 import org.springframework.web.client.RestClientException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.Map;
+
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 public class GitHubGettingStartedServiceTests {
 
@@ -86,7 +86,7 @@ public class GitHubGettingStartedServiceTests {
 
 		byte[] result = service.loadImage(GUIDE_ID, imageName);
 
-		assertNotNull(result);
+		assertThat(result, is(notNullValue()));
 	}
 
 	@SuppressWarnings("unchecked")

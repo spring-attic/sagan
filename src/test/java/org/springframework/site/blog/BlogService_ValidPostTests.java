@@ -7,7 +7,9 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.repository.PostRepository;
 import org.springframework.site.services.MarkdownService;
 
@@ -81,11 +83,21 @@ public class BlogService_ValidPostTests {
 		Pageable firstTenPosts = new BlogPostsPageRequest(1);
 		List<Post> posts = new ArrayList<Post>();
 		posts.add(new Post("title", "content"));
-		Page page = new PageImpl(posts);
+		Page<Post> page = new PageImpl<Post>(posts);
 
 		when(postRepository.findAll(firstTenPosts)).thenReturn(page);
 
 		assertThat(service.mostRecentPosts(firstTenPosts), is(posts));
+	}
+
+	@Test(expected = BlogPostsNotFound.class)
+	public void blogPostsNotFound() {
+		ArrayList<Post> noPosts = new ArrayList<Post>();
+		Page<Post> emptyPage = new PageImpl<Post>(noPosts);
+
+		when(postRepository.findAll(any(Pageable.class))).thenReturn(emptyPage);
+
+		service.mostRecentPosts(new BlogPostsPageRequest(1));
 	}
 
 }

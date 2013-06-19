@@ -38,6 +38,10 @@ public class BlogService {
 	}
 
 	public List<Post> mostRecentPosts(Pageable pageRequest) {
-		return repository.findAll(pageRequest).getContent();
+		List<Post> posts = repository.findAll(pageRequest).getContent();
+		if (posts.size() == 0) {
+			throw new BlogPostsNotFound("No blog posts found for pageRequest " + pageRequest);
+		}
+		return posts;
 	}
 }
