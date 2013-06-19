@@ -31,6 +31,7 @@ public class GitHubGettingStartedService implements GettingStartedService {
 	public String loadGuide(String guideId) {
 		try {
 			log.info(String.format("Fetching getting started guide for '%s'", guideId));
+			@SuppressWarnings("unchecked")
 			Map<String, String> readme = gitHubService.getForObject(README_PATH, Map.class, guideId);
 			String markdownReadme = new String(extractCodedContent(readme));
 			return gitHubService.renderToHtml(markdownReadme);
@@ -62,6 +63,7 @@ public class GitHubGettingStartedService implements GettingStartedService {
 	@Override
 	public byte[] loadImage(String guideSlug, String imageName) {
 		try {
+			@SuppressWarnings("unchecked")
 			Map<String, String> response = gitHubService.getForObject(IMAGES_PATH, Map.class, guideSlug, imageName);
 			return extractCodedContent(response);
 		} catch (RestClientException e) {

@@ -26,6 +26,7 @@ public class BlogControllerTests {
 		controller = new BlogController(blogService);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void listPostsModel(){
 		List<Post> posts = new ArrayList<Post>();

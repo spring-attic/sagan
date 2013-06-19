@@ -15,6 +15,7 @@
  */
 package org.springframework.site.configuration;
 
+import java.util.Collections;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
@@ -65,14 +66,23 @@ public class ApplicationConfiguration {
 	
 	@PostConstruct
 	public void loadDocumentationProjects() {
+		bind("documentation.yml", documentationService);
+	}
+
+	public static void bind(String path, DocumentationService documentationService) {
 		RelaxedDataBinder binder = new RelaxedDataBinder(documentationService);
 		YamlPropertiesFactoryBean factory = new YamlPropertiesFactoryBean();
-		factory.setResources(new Resource[] {new ClassPathResource("documentation.yml")});
+		factory.setResources(new Resource[] {new ClassPathResource(path)});
 		Properties properties = factory.getObject();
-		logger.info("Binding documentation properties: " + properties);
+		logger.info("Binding properties: " + properties);
 		properties.remove("projects");
+		for (Object key : Collections.list(properties.propertyNames())) {
+			if (key.toString().endsWith(("ersions"))) {
+				properties.remove(key);
+			}
+		}
 		binder.bind(new MutablePropertyValues(properties));
-		Assert.state(!binder.getBindingResult().hasErrors(), "Errors binding documentation" + binder.getBindingResult().getAllErrors());
+		Assert.state(!binder.getBindingResult().hasErrors(), "Errors binding " + path + ": " + binder.getBindingResult().getAllErrors());
 	}
 
 }

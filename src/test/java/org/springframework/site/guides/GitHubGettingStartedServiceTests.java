@@ -1,29 +1,26 @@
 package org.springframework.site.guides;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.site.guides.GitHubGettingStartedService;
-import org.springframework.site.guides.Guide;
-import org.springframework.site.guides.GuideNotFoundException;
-import org.springframework.site.guides.ImageNotFoundException;
-import org.springframework.site.services.GitHubService;
-import org.springframework.web.client.RestClientException;
-
-import java.io.IOException;
-import java.util.Map;
-
-import static junit.framework.Assert.assertNotNull;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
+
+import java.io.IOException;
+import java.util.Map;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.site.services.GitHubService;
+import org.springframework.web.client.RestClientException;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class GitHubGettingStartedServiceTests {
 
@@ -44,6 +41,7 @@ public class GitHubGettingStartedServiceTests {
 
 	@Test
 	public void loadGuide() throws IOException {
+		@SuppressWarnings("unchecked")
 		Map<String, String> restServiceReadMeFixture = mapper.readValue(new ClassPathResource("gs-rest-service.readme.json", getClass()).getInputStream(), Map.class);
 		String guideId = GUIDE_ID;
 
@@ -54,6 +52,7 @@ public class GitHubGettingStartedServiceTests {
 		assertThat(guide, containsString("Getting Started: Building a RESTful Web Service"));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test(expected = GuideNotFoundException.class)
 	public void unknownGuide() {
 		String unknownGuideId = "foo";
@@ -78,6 +77,7 @@ public class GitHubGettingStartedServiceTests {
 
 	@Test
 	public void loadImage() throws IOException {
+		@SuppressWarnings("unchecked")
 		Map<String, String> imageResponseFixture = mapper.readValue(new ClassPathResource("gs-device-detection.image.json", getClass()).getInputStream(), Map.class);
 
 		String imageName = "welcome.png";
@@ -89,6 +89,7 @@ public class GitHubGettingStartedServiceTests {
 		assertNotNull(result);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test(expected = ImageNotFoundException.class)
 	public void unknownImage() {
 		String unknownImage = "uknown_image.png";

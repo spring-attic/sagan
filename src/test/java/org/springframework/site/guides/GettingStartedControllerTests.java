@@ -67,6 +67,7 @@ public class GettingStartedControllerTests {
 		assertThat(view, is("guides/gs/list"));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void listGuidesModel(){
 		List<Guide> repoList = new ArrayList<Guide>();

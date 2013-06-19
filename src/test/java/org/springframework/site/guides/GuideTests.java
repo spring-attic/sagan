@@ -1,11 +1,11 @@
 package org.springframework.site.guides;
 
-import org.junit.Test;
-
-import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 public class GuideTests {
 
