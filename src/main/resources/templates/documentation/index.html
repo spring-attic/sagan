@@ -10,19 +10,19 @@
 
 <div layout:fragment="content" class="container">
 	<ul class="row">
-		<li th:each="springProject : ${projects}" class="span3">
-            <p th:text="${springProject.name}">Spring Framework</p>
-            <a th:href="${springProject.githubUrl}">Github</a>
+		<li th:each="item : ${projects}" th:id="${item.id}" class="span3">
+            <p th:text="${item.name}">Spring Framework</p>
+            <a th:href="${item.githubUrl}">Github</a>
             <div class="js-spring-popover" data-title="Reference Docs" data-placement="bottom">
                 <ul>
-                    <li th:each="documentVersion : ${springProject.supportedReferenceDocumentVersions}">
+                    <li th:each="documentVersion : ${item.supportedReferenceDocumentVersions}" th:if="${item.referenceUrl}">
                         <a th:href="${documentVersion.url}" th:text="${documentVersion.versionName}">Reference</a>
                     </li>
                 </ul>
             </div>
             <div class="js-spring-popover" data-title="API Docs" data-placement="bottom">
                 <ul>
-                    <li th:each="documentVersion : ${springProject.supportedApiDocsDocumentVersions}">
+                    <li th:each="documentVersion : ${item.supportedApiDocsDocumentVersions}" th:if="${item.apiUrl}">
                         <a th:href="${documentVersion.url}" th:text="${documentVersion.versionName}">API docs</a>
                     </li>
                 </ul>
