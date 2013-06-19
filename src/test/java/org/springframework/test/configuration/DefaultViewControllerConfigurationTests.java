@@ -1,4 +1,4 @@
-package org.springframework.site.test.configuration;
+package org.springframework.test.configuration;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;

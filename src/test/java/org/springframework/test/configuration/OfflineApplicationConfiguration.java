@@ -1,4 +1,4 @@
-package org.springframework.site.test.configuration;
+package org.springframework.test.configuration;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
