@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -73,7 +72,7 @@ public class BlogIndexTests {
 
 	@Test
 	public void givenManyPosts_blogIndexShowsLatest10PostSummaries() throws Exception {
-		createManyPostsInJune(11);
+		createManyPostsInNovember(11);
 
 		MvcResult response = this.mockMvc.perform(get("/blog"))
 				.andExpect(status().isOk())
@@ -82,16 +81,16 @@ public class BlogIndexTests {
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 		assertThat(html.select("ul.posts li").size(), is(10));
-		assertThat(html.select("ul.posts li .date").first().text(), containsString("June 11, 2013"));
-		assertThat(html.select("ul.posts li .date").last().text(), containsString("June 2, 2013"));
+		assertThat(html.select("ul.posts li .date").first().text(), is("November 11, 2013"));
+		assertThat(html.select("ul.posts li .date").last().text(), is("November 2, 2013"));
 	}
 
-	private void createManyPostsInJune(int numPostsToCreate) {
+	private void createManyPostsInNovember(int numPostsToCreate) {
 		Calendar calendar = Calendar.getInstance();
 		List<Post> posts = new ArrayList<Post>();
 		for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
-			calendar.set(2013, 5, postNumber);
-			Post post = new PostBuilder().title("This week in Spring - June " + postNumber + ", 2013")
+			calendar.set(2013, 10, postNumber);
+			Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2013")
 					.rawContent("Raw content")
 					.renderedContent("Html content")
 					.dateCreated(calendar.getTime())
