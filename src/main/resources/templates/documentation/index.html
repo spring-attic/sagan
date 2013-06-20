@@ -1,4 +1,4 @@
-<html
+<html   xmlns:th="http://www.thymeleaf.org"
 		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 		layout:decorator="layout">
 <head>
@@ -13,16 +13,16 @@
 		<li th:each="item : ${projects}" th:id="${item.id}" class="span3">
             <p th:text="${item.name}">Spring Framework</p>
             <a th:href="${item.githubUrl}">Github</a>
-            <div class="js-spring-popover" data-title="Reference Docs" data-placement="bottom">
+            <div class="js-spring-popover" data-title="Reference Docs" data-placement="bottom" th:if="${item.referenceUrl}">
                 <ul>
-                    <li th:each="documentVersion : ${item.supportedReferenceDocumentVersions}" th:if="${item.referenceUrl}">
+                    <li th:each="documentVersion : ${item.supportedReferenceDocumentVersions}">
                         <a th:href="${documentVersion.url}" th:text="${documentVersion.versionName}">Reference</a>
                     </li>
                 </ul>
             </div>
-            <div class="js-spring-popover" data-title="API Docs" data-placement="bottom">
+            <div class="js-spring-popover" data-title="API Docs" data-placement="bottom" th:if="${item.apiUrl}">
                 <ul>
-                    <li th:each="documentVersion : ${item.supportedApiDocsDocumentVersions}" th:if="${item.apiUrl}">
+                    <li th:each="documentVersion : ${item.supportedApiDocsDocumentVersions}">
                         <a th:href="${documentVersion.url}" th:text="${documentVersion.versionName}">API docs</a>
                     </li>
                 </ul>
