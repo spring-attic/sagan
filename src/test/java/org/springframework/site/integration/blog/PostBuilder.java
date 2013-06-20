@@ -9,6 +9,7 @@ public class PostBuilder {
 	private String title;
 	private String rawContent;
 	private String renderedContent;
+	private String renderedSummary;
 	private Date date;
 
 	public PostBuilder title(String title) {
@@ -26,6 +27,11 @@ public class PostBuilder {
 		return this;
 	}
 
+	public PostBuilder renderedSummary(String renderedSummary) {
+		this.renderedSummary = renderedSummary;
+		return this;
+	}
+
 	public PostBuilder dateCreated(Date date) {
 		this.date = date;
 		return this;
@@ -34,6 +40,7 @@ public class PostBuilder {
 	public Post build() {
 		Post post = new Post(title, rawContent);
 		post.setRenderedContent(renderedContent);
+		post.setRenderedSummary(renderedSummary);
 		if (date != null) {
 			post.setCreatedDate(date);
 		}

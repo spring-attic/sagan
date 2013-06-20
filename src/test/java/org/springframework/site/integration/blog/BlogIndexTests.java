@@ -72,6 +72,7 @@ public class BlogIndexTests {
 		Post post = new PostBuilder().title("This week in Spring - June 3, 2013")
 										 .rawContent("Raw content")
 										 .renderedContent("Html content")
+										 .renderedSummary("Html summary")
 										 .build();
 		postRepository.save(post);
 		return post;
@@ -100,6 +101,7 @@ public class BlogIndexTests {
 			Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2013")
 					.rawContent("Raw content")
 					.renderedContent("Html content")
+					.renderedSummary("Html summary")
 					.dateCreated(calendar.getTime())
 					.build();
 			posts.add(post);
