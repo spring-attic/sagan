@@ -8,6 +8,17 @@
 {!end#prereq-editor-jdk-buildtools}
 
 
+# {!begin#prereq-editor-android-buildtools}
+ - A favorite text editor or IDE
+ - [Android SDK][sdk]
+ - [Maven 3.0][mvn] or later
+ - An Android device or Emulator
+
+[sdk]: http://developer.android.com/sdk/index.html
+[mvn]: http://maven.apache.org/download.cgi
+{!end#prereq-editor-android-buildtools}
+
+
 # {!begin#how-to-complete-this-guide}
 How to complete this guide
 --------------------------
