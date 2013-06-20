@@ -43,6 +43,11 @@ First you set up a basic build script. You can use any build system you like whe
 {!end#build-system-intro}
 
 
+# {!begin#android-build-system-intro}
+First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Getting Started with Maven](../gs-maven-android/README.md) or [Getting Started with Gradle](../gs-gradle-android/README.md).
+{!end#android-build-system-intro}
+
+
 # {!begin#create-directory-structure-hello}
 ### Create the directory structure
 
