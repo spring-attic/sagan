@@ -144,9 +144,7 @@ $ mkdir -p src/main/java/org/hello
 # {!begin#create-android-manifest}
 ### Create an Android Manifest
 
-Every Android application must have an `AndroidManifest.xml` file. The [Android Manifest] contains all the information required to run an Android application, and it cannot build without one.
-
-{!include:complete/AndroidManifest.xml}
+The [Android Manifest] contains all the information required to run an Android application, and it cannot build without one.
 
 [Android Manifest]: http://developer.android.com/guide/topics/manifest/manifest-intro.html
 {!end#create-android-manifest}
