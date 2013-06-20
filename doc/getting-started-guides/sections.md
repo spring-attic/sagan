@@ -55,7 +55,7 @@ Building Android applications requires the installation of the [Android SDK][sdk
     Mac OS X:
     
     ```sh
-	   $ export ANDROID_HOME=/<installation location>/android-sdk-macosx
+    $ export ANDROID_HOME=/<installation location>/android-sdk-macosx
     $ export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
     ```
     
@@ -123,6 +123,23 @@ In a project directory of your choosing, create the following subdirectory struc
             └── java
                 └── hello
 {!end#create-directory-structure-hello}
+
+
+# {!begin#create-directory-structure-org-hello}
+### Create the directory structure
+
+In a project directory of your choosing, create the following subdirectory structure; for example, with the following command on Mac or Linux:
+
+```sh
+$ mkdir -p src/main/java/org/hello
+```
+
+    └── src
+        └── main
+            └── java
+                └── org
+                    └── hello
+{!end#create-directory-structure-org-hello}
 
 
 # {!begin#build-status}
