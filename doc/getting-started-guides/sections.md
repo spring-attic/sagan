@@ -206,6 +206,21 @@ This command will try to start an emulator named "Default". Please be patient as
 [Platforms and Packages]: http://developer.android.com/sdk/installing/adding-packages.html
 {!end#start-android-virtual-device}
 
+
+# {!begin#build-and-run-android}
+Build and Run the Client
+------------------------
+
+Once the emulator has finished starting up, run the following command to invoke the code and see the results of the REST request:
+
+```sh
+$ mvn clean package android:deploy android:run
+```
+	
+This will build the Android app and then run it in the emulator.
+{!end#build-and-run-android}
+
+
 # {!begin#build-an-executable-jar}
 ### Build an executable JAR
 
