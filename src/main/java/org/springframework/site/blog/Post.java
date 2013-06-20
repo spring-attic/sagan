@@ -31,6 +31,10 @@ public class Post implements Serializable {
 	private String renderedContent;
 
 	@Column(nullable = false)
+	@Type(type="text")
+	private String renderedSummary;
+
+	@Column(nullable = false)
 	private Date createdDate = new Date();
 
 	public Post() {
@@ -67,6 +71,14 @@ public class Post implements Serializable {
 
 	public void setRenderedContent(String renderedContent) {
 		this.renderedContent = renderedContent;
+	}
+
+	public String getRenderedSummary() {
+		return renderedSummary;
+	}
+
+	public void setRenderedSummary(String renderedSummary) {
+		this.renderedSummary = renderedSummary;
 	}
 
 	public Date getCreatedDate() {

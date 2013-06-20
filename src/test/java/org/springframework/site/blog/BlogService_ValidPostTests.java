@@ -20,6 +20,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,11 +28,13 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_ValidPostTests {
 
-	public static final String RENDERED_HTML_FROM_MARKDOWN = "Rendered HTML from Markdown";
+	public static final String RENDERED_HTML_FROM_MARKDOWN = "<p>Rendered HTML</p><p>from Markdown</p>";
+	public static final String RENDERED_SUMMARY_HTML_FROM_MARKDOWN = "<p>Rendered HTML</p>";
 	private BlogService service;
 	private Post post;
 	private String title = "Title";
-	private String content = "#Subtitle\nBody";
+	private String content = "Rendered HTML\n\nfrom Markdown";
+	private String firstParagraph = "Rendered HTML";
 
 	@Mock
 	private PostRepository postRepository;
@@ -45,7 +48,8 @@ public class BlogService_ValidPostTests {
 	@Before
 	public void setup() {
 		service = new BlogService(postRepository, markdownService);
-		when(markdownService.renderToHtml(anyString())).thenReturn(RENDERED_HTML_FROM_MARKDOWN);
+		when(markdownService.renderToHtml(content)).thenReturn(RENDERED_HTML_FROM_MARKDOWN);
+		when(markdownService.renderToHtml(firstParagraph)).thenReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 		post = service.addPost(title, content);
 	}
 
@@ -58,6 +62,11 @@ public class BlogService_ValidPostTests {
 	@Test
 	public void postHasRenderedContent() {
 		assertThat(post.getRenderedContent(), equalTo(RENDERED_HTML_FROM_MARKDOWN));
+	}
+
+	@Test
+	public void postHasRenderedSummary() {
+		assertThat(post.getRenderedSummary(), equalTo(RENDERED_SUMMARY_HTML_FROM_MARKDOWN));
 	}
 
 	@Test
@@ -115,6 +124,13 @@ public class BlogService_ValidPostTests {
 		PaginationInfo paginationInfo = service.paginationInfo(new PageRequest(0, 10));
 		assertThat(paginationInfo.getCurrentPage(), is(equalTo(1L)));
 		assertThat(paginationInfo.getTotalPages(), is(equalTo(11L)));
+	}
+
+	@Test
+	public void extractFirstParagraph() {
+		assertEquals("xx", service.extractFirstParagraph("xxxxx", 2));
+		assertEquals("xx", service.extractFirstParagraph("xx\n\nxxx", 20));
+		assertEquals("xx", service.extractFirstParagraph("xx xx\n\nxxx", 4));
 	}
 
 }
