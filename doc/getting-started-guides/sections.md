@@ -177,6 +177,35 @@ Note to experienced Maven users who are unaccustomed to using an external parent
 {!end#bootstrap-starter-pom-disclaimer}
 
 
+# {!begin#start-android-virtual-device}
+Start an Android Virtual Device
+----------------------------------
+
+If you do not have an Android device for testing, you can use an [Android Virtual Device (AVD)][avd]. To do this, you must first have the [Android SDK][sdk] installed and also have installed the corresponding SDK [Platforms and Packages].
+
+### Create an AVD
+
+The following command creates a new AVD based on Android 4.2.2 (API Level 17).
+
+```sh
+$ android create avd --name Default --target 29 --abi armeabi-v7a
+```
+
+### Start the AVD
+
+Use the following command to start the emulator using the Android Maven Plugin:
+
+```sh
+$ mvn android:emulator-start
+```
+
+This command will try to start an emulator named "Default". Please be patient as the emulator takes a few moments to finish startup.
+
+[sdk]: http://developer.android.com/sdk/index.html
+[avd]: http://developer.android.com/tools/devices/index.html
+[Platforms and Packages]: http://developer.android.com/sdk/installing/adding-packages.html
+{!end#start-android-virtual-device}
+
 # {!begin#build-an-executable-jar}
 ### Build an executable JAR
 
