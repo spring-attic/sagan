@@ -2,8 +2,10 @@ package org.springframework.site.integration.blog;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -113,4 +115,35 @@ public class BlogIndexTests {
 				.andExpect(status().isNotFound())
 				.andReturn();
 	}
+
+	@Test
+	public void given1PageOfResults_blogIndexDoesNotShowPaginationControl() throws Exception {
+		createManyPostsInNovember(1);
+
+		MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();
+		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+		assertThat(html.select("#pagination_control").first(), is(nullValue()));
+	}
+
+	@Test
+	public void givenManyPosts_blogIndexShowsPaginationControl() throws Exception {
+		createManyPostsInNovember(21);
+
+		MvcResult response = this.mockMvc.perform(get("/blog?page=2")).andReturn();
+
+		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+
+		Element previousLink = html.select("#pagination_control a.previous").first();
+		assertThat("No previous pagination link found", previousLink, is(notNullValue()));
+		String previousHref = previousLink.attributes().get("href");
+		assertThat(previousHref, is("/blog?page=1"));
+
+		Element nextLink = html.select("#pagination_control a.next").first();
+		assertThat("No next pagination link found", nextLink, is(notNullValue()));
+		String nextHref = nextLink.attributes().get("href");
+		assertThat(nextHref, is("/blog?page=3"));
+	}
+
+
+
 }

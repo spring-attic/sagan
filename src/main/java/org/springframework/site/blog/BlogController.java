@@ -1,6 +1,7 @@
 package org.springframework.site.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,10 +28,11 @@ public class BlogController {
 		return "blog/show";
 	}
 
-
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listPosts(Model model, @RequestParam(defaultValue = "1") int page) {
-		model.addAttribute("posts", service.mostRecentPosts(new BlogPostsPageRequest(page-1)));
+		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
+		model.addAttribute("posts", service.mostRecentPosts(pageRequest));
+		model.addAttribute("paginationInfo", service.paginationInfo(pageRequest));
 		return "blog/index";
 	}
 }

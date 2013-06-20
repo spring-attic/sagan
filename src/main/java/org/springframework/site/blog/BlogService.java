@@ -1,6 +1,7 @@
 package org.springframework.site.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.repository.PostRepository;
 import org.springframework.site.services.MarkdownService;
@@ -43,5 +44,9 @@ public class BlogService {
 			throw new BlogPostsNotFound("No blog posts found for pageRequest " + pageRequest);
 		}
 		return posts;
+	}
+
+	public PaginationInfo paginationInfo(PageRequest pageRequest) {
+		return new PaginationInfo(pageRequest.getPageNumber()+1, repository.count() / pageRequest.getPageSize() + 1);
 	}
 }

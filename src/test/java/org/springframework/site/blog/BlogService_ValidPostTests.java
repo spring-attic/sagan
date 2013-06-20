@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.repository.PostRepository;
 import org.springframework.site.services.MarkdownService;
@@ -98,6 +99,22 @@ public class BlogService_ValidPostTests {
 		when(postRepository.findAll(any(Pageable.class))).thenReturn(emptyPage);
 
 		service.mostRecentPosts(new BlogPostsPageRequest(1));
+	}
+
+	@Test
+	public void givenOnePage_paginationInfoBasedOnCurrentPageAndTotalPosts() {
+		when(postRepository.count()).thenReturn(1L);
+		PaginationInfo paginationInfo = service.paginationInfo(new PageRequest(0, 10));
+		assertThat(paginationInfo.getCurrentPage(), is(equalTo(1L)));
+		assertThat(paginationInfo.getTotalPages(), is(equalTo(1L)));
+	}
+
+	@Test
+	public void givenManyPages_paginationInfoBasedOnCurrentPageAndTotalPosts() {
+		when(postRepository.count()).thenReturn(101L);
+		PaginationInfo paginationInfo = service.paginationInfo(new PageRequest(0, 10));
+		assertThat(paginationInfo.getCurrentPage(), is(equalTo(1L)));
+		assertThat(paginationInfo.getTotalPages(), is(equalTo(11L)));
 	}
 
 }

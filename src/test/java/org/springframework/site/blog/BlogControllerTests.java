@@ -56,6 +56,17 @@ public class BlogControllerTests {
 	}
 
 	@Test
+	public void listPosts_providesPaginationInfo(){
+		PaginationInfo paginationInfo = new PaginationInfo(TEST_PAGE, 20);
+
+		when(blogService.paginationInfo(new BlogPostsPageRequest(TEST_PAGE-1))).thenReturn(paginationInfo);
+
+		controller.listPosts(model, TEST_PAGE);
+
+		assertThat((PaginationInfo) model.get("paginationInfo"), is(paginationInfo));
+	}
+
+	@Test
 	public void listPostsView() {
 		assertThat(controller.listPosts(model, TEST_PAGE), is("blog/index"));
 	}
