@@ -14,4 +14,7 @@ info:
 spring:
   jpa:
     ddl_auto: create_drop
-      
+
+security:
+  basic:
+    path: ""

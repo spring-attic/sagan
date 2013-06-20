@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>SpringFramework - Home</title>
+</head>
+<body>
+	<h1 layout:fragment="header">The Spring Framework</h1>
+
+	<div layout:fragment="content" class="container">
+		<form action="/signin/github" th:action="@{/signin/github}"
+			method="post">
+			<button type="submit">Sign in with github</button>
+		</form>
+	</div>
+</body>
+</html>
