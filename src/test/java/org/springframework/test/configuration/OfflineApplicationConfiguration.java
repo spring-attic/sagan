@@ -48,7 +48,8 @@ public class OfflineApplicationConfiguration{
 		public List<Guide> listGuides() {
 			ObjectMapper mapper = new ObjectMapper();
 			try {
-				InputStream json = new ClassPathResource("../../guides/springframework-meta.repos.offline.json", getClass()).getInputStream();
+				String reposJson = "/org/springframework/site/guides/springframework-meta.repos.offline.json";
+				InputStream json = new ClassPathResource(reposJson, getClass()).getInputStream();
 				return mapper.readValue(json, new TypeReference<List<Guide>>(){});
 			} catch (IOException e) {
 				throw new RuntimeException(e);
