@@ -42,7 +42,7 @@ public class ApplicationConfigurationTests {
 	@Test
 	public void testContextLoading() throws Exception {
 		SpringApplication application = ApplicationConfiguration.build();
-		application.setDefaultCommandLineArgs("--github.client.id=foo");
+		application.setDefaultCommandLineArgs("--GITHUB_CLIENT_ID=foo");
 		context = (ConfigurableApplicationContext) application.run();
 		ApplicationConfiguration configuration = context
 				.getBean(ApplicationConfiguration.class);

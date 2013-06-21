@@ -67,10 +67,10 @@ public class ApplicationConfiguration {
 	@Autowired
 	private DocumentationService documentationService;
 
-	@Value("${github.client.id:none}")
+	@Value("${GITHUB_CLIENT_ID:${github.client.id:none}}")
 	private String githubClientId;
 
-	@Value("${github.client.secret:none}")
+	@Value("${GITHUB_CLIENT_SECRET:${github.client.secret:none}}")
 	private String githubClientSecret;
 
 	public static void main(String[] args) {
