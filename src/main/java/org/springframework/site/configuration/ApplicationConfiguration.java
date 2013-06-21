@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.Filter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,26 +35,23 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.HttpConfiguration;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.site.documentation.DocumentationService;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionSignUp;
+import org.springframework.site.security.GithubAuthenticationSigninAdapter;
+import org.springframework.site.security.RemoteUsernameConnectionSignUp;
+import org.springframework.site.security.SecurityContextAuthenticationFilter;
 import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
-import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.impl.GitHubTemplate;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
 import org.springframework.util.Assert;
-import org.springframework.web.context.request.NativeWebRequest;
 
 @EnableAutoConfiguration
 @Configuration
@@ -62,6 +60,8 @@ public class ApplicationConfiguration {
 
 	private static final Log logger = LogFactory
 			.getLog(ApplicationConfiguration.class);
+
+	static final String SIGNIN_SUCCESS_PATH = "/signin/success";
 
 	@Autowired
 	private DocumentationService documentationService;
@@ -92,14 +92,23 @@ public class ApplicationConfiguration {
 	}
 
 	@Configuration
-	@Order(Integer.MAX_VALUE-1)
+	@Order(Integer.MAX_VALUE - 1)
 	protected static class SigninAuthenticationConfiguration extends
 			WebSecurityConfigurerAdapter {
 
 		@Override
 		protected void configure(HttpConfiguration http) throws Exception {
-			http.antMatcher("/signin/github").authorizeUrls().anyRequest()
-					.anonymous();
+			http.antMatcher("/signin/**")
+					.addFilterBefore(authenticationFilter(),
+							AnonymousAuthenticationFilter.class)
+					.authorizeUrls().anyRequest().anonymous();
+		}
+
+		// Not a @Bean because we explicitly do not want it added automatically by Bootstrap to all requests
+		protected Filter authenticationFilter() {
+			AbstractAuthenticationProcessingFilter filter = new SecurityContextAuthenticationFilter(
+					SIGNIN_SUCCESS_PATH);
+			return filter;
 		}
 	}
 
@@ -117,7 +126,8 @@ public class ApplicationConfiguration {
 		}
 
 		private AuthenticationEntryPoint authenticationEntryPoint() {
-			// TODO: can we POST back here?
+			// TODO: this causes an interstitial page to pop up in UI. Can we or
+			// should we POST back here (e.g. with forward)?
 			return new LoginUrlAuthenticationEntryPoint("/signin");
 		}
 
@@ -126,34 +136,14 @@ public class ApplicationConfiguration {
 				GitHubConnectionFactory connectionFactory) {
 			ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
 			registry.addConnectionFactory(connectionFactory);
+			// TODO: do we need this at all?
 			InMemoryUsersConnectionRepository repository = new InMemoryUsersConnectionRepository(
 					registry);
-			repository.setConnectionSignUp(new ConnectionSignUp() {
-				@Override
-				public String execute(Connection<?> connection) {
-					return connection.getDisplayName() != null ? connection
-							.getDisplayName() : null;
-				}
-			});
+			repository.setConnectionSignUp(new RemoteUsernameConnectionSignUp());
 			return new ProviderSignInController(registry, repository,
-					new SignInAdapter() {
-						@Override
-						public String signIn(String userId,
-								Connection<?> connection,
-								NativeWebRequest request) {
-							// TODO: get group info from github and determine
-							// role
-							Authentication authentication = new UsernamePasswordAuthenticationToken(
-									userId,
-									"N/A",
-									AuthorityUtils
-											.commaSeparatedStringToAuthorityList("ROLE_USER"));
-							SecurityContextHolder.getContext()
-									.setAuthentication(authentication);
-							return null;
-						}
-					});
+					new GithubAuthenticationSigninAdapter(SIGNIN_SUCCESS_PATH));
 		}
+
 	}
 
 	@PostConstruct
