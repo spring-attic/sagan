@@ -15,21 +15,39 @@
  */
 package org.springframework.test.configuration;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.After;
 import org.junit.Test;
-import org.springframework.bootstrap.context.embedded.AnnotationConfigEmbeddedWebApplicationContext;
+import org.springframework.bootstrap.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.site.configuration.ApplicationConfiguration;
+import org.springframework.test.util.ReflectionTestUtils;
 
 /**
  * @author Dave Syer
- *
+ * 
  */
 public class ApplicationConfigurationTests {
-	
+
+	private ConfigurableApplicationContext context;
+
+	@After
+	public void clean() {
+		if (context != null) {
+			context.close();
+		}
+	}
+
 	@Test
 	public void testContextLoading() throws Exception {
-		AnnotationConfigEmbeddedWebApplicationContext context = new AnnotationConfigEmbeddedWebApplicationContext();
-		context.register(ApplicationConfiguration.class);
-		context.refresh();
+		SpringApplication application = ApplicationConfiguration.build();
+		application.setDefaultCommandLineArgs("--github.client.id=foo");
+		context = (ConfigurableApplicationContext) application.run();
+		ApplicationConfiguration configuration = context
+				.getBean(ApplicationConfiguration.class);
+		assertEquals("foo",
+				ReflectionTestUtils.getField(configuration, "githubClientId"));
 		context.close();
 	}
 

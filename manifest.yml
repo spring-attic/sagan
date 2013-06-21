@@ -5,5 +5,5 @@ applications:
   instances: 1
   url: sagan.cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
-  command: cp cacerts .jdk/lib/security && java -classpath . org.springframework.site.configuration.ApplicationConfiguration --server.port=$PORT
+  command: cp cacerts .jdk/lib/security && java -classpath . org.springframework.site.configuration.ApplicationConfiguration --server.port=$PORT --github.client.id=${GITHUB_CLIENT_ID} --github.client.secret=${GITHUB_CLIENT_SECRET}
 

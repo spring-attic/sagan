@@ -18,3 +18,8 @@ spring:
 security:
   basic:
     path: ""
+
+github:
+  client:
+    id: fb06c006c2ed62fe9e8b
+    secret: 164264e3f6d70c7c21713b7fa64225cb8d6107b2

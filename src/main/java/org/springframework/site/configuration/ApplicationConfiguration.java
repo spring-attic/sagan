@@ -25,6 +25,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.bootstrap.SpringApplication;
 import org.springframework.bootstrap.bind.RelaxedDataBinder;
 import org.springframework.bootstrap.config.YamlPropertiesFactoryBean;
@@ -66,6 +67,12 @@ public class ApplicationConfiguration {
 	@Autowired
 	private DocumentationService documentationService;
 
+	@Value("${github.client.id:none}")
+	private String githubClientId;
+
+	@Value("${github.client.secret:none}")
+	private String githubClientSecret;
+
 	public static void main(String[] args) {
 		build().run(args);
 	}
@@ -81,13 +88,13 @@ public class ApplicationConfiguration {
 
 	@Bean
 	public GitHubConnectionFactory gitHubConnectionFactory() {
-		return new GitHubConnectionFactory("fb06c006c2ed62fe9e8b",
-				"164264e3f6d70c7c21713b7fa64225cb8d6107b2");
+		return new GitHubConnectionFactory(githubClientId,
+				githubClientSecret);
 	}
 
 	@Bean
 	public GitHub gitHubTemplate() {
-		// TODO parametrize auth token
+		// TODO parameterize auth token
 		return new GitHubTemplate("5a0e089d267693b45926d7f620d85a2eb6a85da6");
 	}
 
