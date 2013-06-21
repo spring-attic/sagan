@@ -42,6 +42,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.site.documentation.DocumentationService;
 import org.springframework.site.security.GithubAuthenticationSigninAdapter;
 import org.springframework.site.security.RemoteUsernameConnectionSignUp;
@@ -117,6 +118,9 @@ public class ApplicationConfiguration {
 		protected Filter authenticationFilter() {
 			AbstractAuthenticationProcessingFilter filter = new SecurityContextAuthenticationFilter(
 					SIGNIN_SUCCESS_PATH);
+			SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+			successHandler.setDefaultTargetUrl("/admin/blog/new");
+			filter.setAuthenticationSuccessHandler(successHandler);
 			return filter;
 		}
 	}
@@ -138,7 +142,8 @@ public class ApplicationConfiguration {
 		private AuthenticationEntryPoint authenticationEntryPoint() {
 			// TODO: this causes an interstitial page to pop up in UI. Can we or
 			// should we POST back here (e.g. with forward)?
-			return new LoginUrlAuthenticationEntryPoint("/signin");
+			LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint("/signin");
+			return entryPoint;
 		}
 
 		@Bean
