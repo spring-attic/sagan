@@ -88,8 +88,10 @@ public class ApplicationConfiguration {
 
 	@Bean
 	public GitHubConnectionFactory gitHubConnectionFactory() {
-		return new GitHubConnectionFactory(githubClientId,
+		GitHubConnectionFactory factory = new GitHubConnectionFactory(githubClientId,
 				githubClientSecret);
+		factory.setScope("user");
+		return factory;
 	}
 
 	@Bean
