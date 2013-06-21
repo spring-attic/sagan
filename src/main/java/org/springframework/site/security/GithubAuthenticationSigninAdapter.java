@@ -1,14 +1,21 @@
 package org.springframework.site.security;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
+import org.springframework.social.github.api.GitHub;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.context.request.NativeWebRequest;
 
 public class GithubAuthenticationSigninAdapter implements SignInAdapter {
+
+	private static final String IS_MEMBER_PATH = "https://api.github.com/teams/{team}/members/{user}";
 
 	private String path;
 
@@ -20,7 +27,16 @@ public class GithubAuthenticationSigninAdapter implements SignInAdapter {
 	public String signIn(String userId, Connection<?> connection,
 			NativeWebRequest request) {
 
-		// TODO: get group info from github and determine role
+		GitHub template = (GitHub) connection.getApi();
+		try {
+			ResponseEntity<Void> response = template.restOperations().getForEntity(IS_MEMBER_PATH, Void.class, "435080", userId);
+			if (response.getStatusCode()!=HttpStatus.NO_CONTENT) {
+				throw new BadCredentialsException("User not member of required org");
+			}
+		} catch (RestClientException e) {
+			throw new BadCredentialsException("User not member of required org");
+		}
+
 		Authentication authentication = new UsernamePasswordAuthenticationToken(
 				userId, "N/A",
 				AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
