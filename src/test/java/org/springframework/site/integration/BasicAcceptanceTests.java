@@ -60,7 +60,7 @@ public class BasicAcceptanceTests {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertTrue(response.getHeaders().getContentType()
 				.isCompatibleWith(MediaType.valueOf("text/css")));
-		assertTrue(response.getBody().contains("h1,h2,h3,h4,h5,h6"));
+		assertTrue(response.getBody().contains("#authentication"));
 	}
 
 	@Test
