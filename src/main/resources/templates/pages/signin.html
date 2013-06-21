@@ -8,6 +8,16 @@
 	<h1 layout:fragment="header">The Spring Framework</h1>
 
 	<div layout:fragment="content" class="container">
+		<div th:if="${param.error}" class="alert alert-error">We could not
+			authenticate you with Github. You must authenticate and authorize
+			this application to access your Github profile before you can use the
+			admin features. This application can not access any private
+			information (like passwords), from Github, only the public profile.
+        </div>
+		<div th:if="${param.logout}" class="alert alert-success">Logged out successfully</div>
+        <div th:unless="${param.error}">
+            Please sign in with Github to access the admin pages.
+        </div>
 		<form action="/signin/github" th:action="@{/signin/github}"
 			method="post">
 			<button type="submit">Sign in with github</button>

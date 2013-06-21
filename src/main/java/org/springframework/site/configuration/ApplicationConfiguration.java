@@ -121,7 +121,8 @@ public class ApplicationConfiguration {
 		protected void configure(HttpConfiguration http) throws Exception {
 			http.exceptionHandling().authenticationEntryPoint(
 					authenticationEntryPoint());
-			http.antMatcher("/admin/**").authorizeUrls().anyRequest()
+			http.logout().logoutUrl("/logout").logoutSuccessUrl("/signin?logout=success");
+			http.requestMatchers().antMatchers("/admin/**", "/logout").authorizeUrls().anyRequest()
 					.authenticated();
 		}
 
@@ -140,8 +141,10 @@ public class ApplicationConfiguration {
 			InMemoryUsersConnectionRepository repository = new InMemoryUsersConnectionRepository(
 					registry);
 			repository.setConnectionSignUp(new RemoteUsernameConnectionSignUp());
-			return new ProviderSignInController(registry, repository,
+			ProviderSignInController controller = new ProviderSignInController(registry, repository,
 					new GithubAuthenticationSigninAdapter(SIGNIN_SUCCESS_PATH));
+			controller.setSignInUrl("/signin?error=access_denied");
+			return controller;
 		}
 
 	}

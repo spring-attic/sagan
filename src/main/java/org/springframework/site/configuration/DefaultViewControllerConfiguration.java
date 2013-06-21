@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -21,6 +22,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
+import org.thymeleaf.spring3.SpringTemplateEngine;
 
 @Configuration
 public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter {
@@ -28,12 +31,20 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	@Autowired
 	private ResourcePatternResolver resourceResolver;
 
+	@Autowired
+	private SpringTemplateEngine templateEngine;
+
 	private Map<String, MediaType> mimeTypes = new HashMap<String, MediaType>();
 
 	{
 		mimeTypes.put("css", MediaType.valueOf("text/css"));
 		mimeTypes.put("js", MediaType.valueOf("text/javascript"));
 		mimeTypes.put("ico", MediaType.APPLICATION_OCTET_STREAM);
+	}
+
+	@PostConstruct
+	public void configureThymeleafSecurity() {
+		templateEngine.addDialect(new SpringSecurityDialect());
 	}
 
 	@Override

@@ -56,7 +56,7 @@ public class BasicAcceptanceTests {
 	@Test
 	public void getStyleSheet() throws Exception {
 		ResponseEntity<String> response = getRestTemplate().getForEntity(
-				"http://localhost:8080/css/getting-started.css", String.class);
+				"http://localhost:8080/css/application.css", String.class);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertTrue(response.getHeaders().getContentType()
 				.isCompatibleWith(MediaType.valueOf("text/css")));
