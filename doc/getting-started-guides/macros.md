@@ -19,11 +19,11 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 To **skip the basics**, do the following:
 
  - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
-`git clone https://github.com/springframework-meta/${project_name}.git`
- - cd into `${project_name}/initial`
+`git clone https://github.com/springframework-meta/${project_id}.git`
+ - cd into `${project_id}/initial`
  - Jump ahead to [${jump_ahead}](#initial).
 
-**When you're finished**, you can check your results against the code in `${project_name}/complete`.
+**When you're finished**, you can check your results against the code in `${project_id}/complete`.
 </#macro>
 
 
@@ -45,7 +45,7 @@ In a project directory of your choosing, create the following subdirectory struc
 
 
 <#macro build_status>
-[![Build Status](https://drone.io/github.com/springframework-meta/${project_name}/status.png)](https://drone.io/github.com/springframework-meta/${project_name}/latest)
+[![Build Status](https://drone.io/github.com/springframework-meta/${project_id}/status.png)](https://drone.io/github.com/springframework-meta/${project_id}/latest)
 </#macro>
 
 
