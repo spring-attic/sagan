@@ -9,8 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.configuration.ApplicationConfiguration;
+import org.springframework.site.guides.GettingStartedGuide;
 import org.springframework.site.guides.GettingStartedService;
-import org.springframework.site.guides.Guide;
+import org.springframework.site.guides.GuideRepo;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,17 +41,17 @@ public class OfflineApplicationConfiguration{
 
 	private class OfflineGettingStartedService implements GettingStartedService {
 		@Override
-		public String loadGuide(String guideId) {
-			return "Awesome getting started guide that isn't helpful";
+		public GettingStartedGuide loadGuide(String guideId) {
+			return new GettingStartedGuide("Awesome getting started guide that isn't helpful");
 		}
 
 		@Override
-		public List<Guide> listGuides() {
+		public List<GuideRepo> listGuides() {
 			ObjectMapper mapper = new ObjectMapper();
 			try {
 				String reposJson = "/org/springframework/site/guides/springframework-meta.repos.offline.json";
 				InputStream json = new ClassPathResource(reposJson, getClass()).getInputStream();
-				return mapper.readValue(json, new TypeReference<List<Guide>>(){});
+				return mapper.readValue(json, new TypeReference<List<GuideRepo>>(){});
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}

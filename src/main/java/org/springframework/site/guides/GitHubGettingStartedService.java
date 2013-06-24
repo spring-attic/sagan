@@ -28,13 +28,14 @@ public class GitHubGettingStartedService implements GettingStartedService {
 	}
 
 	@Override
-	public String loadGuide(String guideId) {
+	public GettingStartedGuide loadGuide(String guideId) {
 		try {
 			log.info(String.format("Fetching getting started guide for '%s'", guideId));
 			@SuppressWarnings("unchecked")
 			Map<String, String> readme = gitHubService.getForObject(README_PATH, Map.class, guideId);
 			String markdownReadme = new String(extractCodedContent(readme));
-			return gitHubService.renderToHtml(markdownReadme);
+			String renderedMarkdown = gitHubService.renderToHtml(markdownReadme);
+			return new GettingStartedGuide(renderedMarkdown);
 		}
 		catch (RestClientException e) {
 			String msg = String.format("No getting started guide found for '%s'", guideId);
@@ -48,16 +49,16 @@ public class GitHubGettingStartedService implements GettingStartedService {
 	}
 
 	@Override
-	public List<Guide> listGuides() {
-		List<Guide> guides = new ArrayList<Guide>();
+	public List<GuideRepo> listGuides() {
+		List<GuideRepo> guideRepos = new ArrayList<GuideRepo>();
 
-		for (Guide guide : gitHubService.getForObject(REPOS_PATH, Guide[].class)) {
-			if (guide.isGettingStartedGuide()) {
-				guides.add(guide);
+		for (GuideRepo guideRepo : gitHubService.getForObject(REPOS_PATH, GuideRepo[].class)) {
+			if (guideRepo.isGettingStartedGuide()) {
+				guideRepos.add(guideRepo);
 			}
 		}
 
-		return guides;
+		return guideRepos;
 	}
 
 	@Override

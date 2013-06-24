@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface GettingStartedService {
 
-	String loadGuide(String guideId);
+	GettingStartedGuide loadGuide(String guideId);
 
-	List<Guide> listGuides();
+	List<GuideRepo> listGuides();
 
 	byte[] loadImage(String guideSlug, String imageName);
 }

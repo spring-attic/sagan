@@ -12,9 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.http.ResponseEntity;
-import org.springframework.site.guides.GettingStartedController;
-import org.springframework.site.guides.GitHubGettingStartedService;
-import org.springframework.site.guides.Guide;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.web.client.RestClientException;
 
@@ -50,9 +47,9 @@ public class GettingStartedControllerTests {
 
 	@Test
 	public void guideTextInModel() {
-		when(guideService.loadGuide(GUIDE_NAME)).thenReturn(GUIDE_TEXT);
+		when(guideService.loadGuide(GUIDE_NAME)).thenReturn(new GettingStartedGuide(GUIDE_TEXT));
 		controller.viewGuide(GUIDE_NAME, model);
-		assertThat((String) model.get("guide"), is(GUIDE_TEXT));
+		assertThat(((GettingStartedGuide) model.get("guide")).getContent(), is(GUIDE_TEXT));
 	}
 
 	@Test(expected = RestClientException.class)
@@ -70,10 +67,10 @@ public class GettingStartedControllerTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void listGuidesModel(){
-		List<Guide> repoList = new ArrayList<Guide>();
+		List<GuideRepo> repoList = new ArrayList<GuideRepo>();
 		when(guideService.listGuides()).thenReturn(repoList);
 		controller.listGuides(model);
-		assertThat((List<Guide>) model.get("guides"), is(repoList));
+		assertThat((List<GuideRepo>) model.get("guides"), is(repoList));
 	}
 
 	@Test

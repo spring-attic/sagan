@@ -48,8 +48,8 @@ public class GitHubGettingStartedServiceTests {
 		when(gitHubService.getForObject(anyString(), eq(Map.class), eq(guideId))).thenReturn(restServiceReadMeFixture);
 		when(gitHubService.renderToHtml(anyString())).thenReturn("Getting Started: Building a RESTful Web Service");
 
-		String guide = service.loadGuide(guideId);
-		assertThat(guide, containsString("Getting Started: Building a RESTful Web Service"));
+		GettingStartedGuide guide = service.loadGuide(guideId);
+		assertThat(guide.getContent(), containsString("Getting Started: Building a RESTful Web Service"));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -62,17 +62,17 @@ public class GitHubGettingStartedServiceTests {
 
 	@Test
 	public void listsGuides() {
-		Guide guide = new Guide();
-		guide.setName("gs-rest-service");
-		Guide notAGuide = new Guide();
-		notAGuide.setName("not-a-guide");
+		GuideRepo guideRepo = new GuideRepo();
+		guideRepo.setName("gs-rest-service");
+		GuideRepo notAGuideRepo = new GuideRepo();
+		notAGuideRepo.setName("not-a-guide");
 
-		Guide[] guides = {guide, notAGuide};
+		GuideRepo[] guideRepos = {guideRepo, notAGuideRepo};
 
-		when(gitHubService.getForObject(anyString(), eq(Guide[].class))).thenReturn(guides);
+		when(gitHubService.getForObject(anyString(), eq(GuideRepo[].class))).thenReturn(guideRepos);
 
-		assertThat(service.listGuides(), hasItem(guide));
-		assertThat(service.listGuides(), not(hasItem(notAGuide)));
+		assertThat(service.listGuides(), hasItem(guideRepo));
+		assertThat(service.listGuides(), not(hasItem(notAGuideRepo)));
 	}
 
 	@Test

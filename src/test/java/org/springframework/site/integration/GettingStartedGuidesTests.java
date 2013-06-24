@@ -1,5 +1,7 @@
 package org.springframework.site.integration;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,10 +11,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -20,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = OfflineApplicationConfiguration.class)
-public class DynamicPageRequestMappingTests {
+public class GettingStartedGuidesTests {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -42,10 +46,13 @@ public class DynamicPageRequestMappingTests {
 
 	@Test
 	public void getGettingStartedGuidesPage() throws Exception {
-		this.mockMvc.perform(get("/guides/gs/foo-bar/content"))
+		MvcResult response = this.mockMvc.perform(get("/guides/gs/foo-bar/content"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Awesome getting started guide that isn't helpful")));
+				.andReturn();
+
+		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+		assertThat(html.select("article").text(), containsString("Awesome getting started guide that isn't helpful"));
 	}
 
 }

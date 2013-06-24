@@ -3,7 +3,7 @@ package org.springframework.site.guides;
 import org.springframework.social.github.api.GitHubRepo;
 
 @SuppressWarnings("serial")
-public class Guide extends GitHubRepo {
+public class GuideRepo extends GitHubRepo {
 
 	public String getGuideId(){
 		return getName().replaceAll("^gs-", "");
