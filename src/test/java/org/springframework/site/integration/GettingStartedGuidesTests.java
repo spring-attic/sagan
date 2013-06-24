@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -42,7 +44,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GettingStartedGuidesTests {
 
 	public static final GettingStartedGuide GETTING_STARTED_GUIDE =
-			new GettingStartedGuide("Awesome getting started guide that isn't helpful", "Related resources");
+			new GettingStartedGuide("Awesome getting started guide that isn't helpful", "Related resources", "");
 
 	@Primary
 	@Bean
@@ -99,7 +101,11 @@ public class GettingStartedGuidesTests {
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 		assertThat(html.select("article").text(), is(GETTING_STARTED_GUIDE.getContent()));
-		assertThat(html.select("aside#sidebar").text(), is(GETTING_STARTED_GUIDE.getSidebar()));
+		assertThat(html.select("aside#sidebar .related_resources").text(), is(GETTING_STARTED_GUIDE.getSidebar()));
+
+		Element downloadLink = html.select("aside#sidebar a.github_download").first();
+		assertThat(downloadLink, is(notNullValue()));
+		assertThat(downloadLink.attr("href"), is(GETTING_STARTED_GUIDE.getZipUrl()));
 	}
 
 }

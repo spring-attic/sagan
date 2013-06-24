@@ -8,7 +8,10 @@
 <div layout:fragment="content" class="container">
     <div class="row">
 	    <article class="span8" th:utext="${guide.content}">a guide</article>
-	    <aside id='sidebar' class="span4" th:utext="${guide.sidebar}">Sidebar content</aside>
+	    <aside id='sidebar' class="span4">
+            <a class="github_download" th:href='${guide.zipUrl}'>Download the repo</a>
+            <div class='related_resources' th:utext="${guide.sidebar}">Sidebar content</div>
+        </aside>
     </div>
 </div>
 </body>

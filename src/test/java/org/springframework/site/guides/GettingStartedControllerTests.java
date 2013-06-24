@@ -46,10 +46,11 @@ public class GettingStartedControllerTests {
 	}
 
 	@Test
-	public void guideTextInModel() {
-		when(guideService.loadGuide(GUIDE_NAME)).thenReturn(new GettingStartedGuide(GUIDE_TEXT, ""));
+	public void guideIsInModel() {
+		GettingStartedGuide guide = new GettingStartedGuide(GUIDE_TEXT, "", "");
+		when(guideService.loadGuide(GUIDE_NAME)).thenReturn(guide);
 		controller.viewGuide(GUIDE_NAME, model);
-		assertThat(((GettingStartedGuide) model.get("guide")).getContent(), is(GUIDE_TEXT));
+		assertThat(((GettingStartedGuide) model.get("guide")), is(guide));
 	}
 
 	@Test(expected = RestClientException.class)
