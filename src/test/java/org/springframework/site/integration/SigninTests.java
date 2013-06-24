@@ -12,7 +12,7 @@ import org.springframework.bootstrap.context.initializer.ConfigFileApplicationCo
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.test.configuration.OfflineApplicationConfiguration;
+import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = OfflineApplicationConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
+@ContextConfiguration(classes = ApplicationConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
 public class SigninTests {
 
 	@Autowired

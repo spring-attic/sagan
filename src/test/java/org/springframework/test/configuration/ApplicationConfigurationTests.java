@@ -15,8 +15,6 @@
  */
 package org.springframework.test.configuration;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.bootstrap.SpringApplication;
@@ -24,10 +22,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 
-/**
- * @author Dave Syer
- * 
- */
+import static org.junit.Assert.assertEquals;
+
 public class ApplicationConfigurationTests {
 
 	private ConfigurableApplicationContext context;

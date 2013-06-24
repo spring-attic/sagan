@@ -6,7 +6,10 @@
 </head>
 <body>
 <div layout:fragment="content" class="container">
-	<article th:utext="${guide.content}">a guide</article>
+    <div class="row">
+	    <article class="span8" th:utext="${guide.content}">a guide</article>
+	    <aside id='sidebar' class="span4" th:utext="${guide.sidebar}">Sidebar content</aside>
+    </div>
 </div>
 </body>
 </html>

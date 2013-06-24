@@ -15,12 +15,6 @@
  */
 package org.springframework.site.configuration;
 
-import java.util.Collections;
-import java.util.Properties;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.Filter;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.MutablePropertyValues;
@@ -54,6 +48,11 @@ import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.impl.GitHubTemplate;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
 import org.springframework.util.Assert;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.Filter;
+import java.util.Collections;
+import java.util.Properties;
 
 @EnableAutoConfiguration
 @Configuration
