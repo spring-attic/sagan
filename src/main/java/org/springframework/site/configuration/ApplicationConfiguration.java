@@ -134,8 +134,8 @@ public class ApplicationConfiguration {
 		protected void configure(HttpConfiguration http) throws Exception {
 			http.exceptionHandling().authenticationEntryPoint(
 					authenticationEntryPoint());
-			http.logout().logoutUrl("/logout").logoutSuccessUrl("/signin?logout=success");
-			http.requestMatchers().antMatchers("/admin/**", "/logout").authorizeUrls().anyRequest()
+			http.logout().logoutUrl("/signout").logoutSuccessUrl("/signin?signout=success");
+			http.requestMatchers().antMatchers("/admin/**", "/signout").authorizeUrls().anyRequest()
 					.authenticated();
 		}
 

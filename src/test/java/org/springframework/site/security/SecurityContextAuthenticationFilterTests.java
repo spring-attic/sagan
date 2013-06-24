@@ -5,17 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-/**
- * @author Dave Syer
- * 
- */
+import java.util.List;
+
 public class SecurityContextAuthenticationFilterTests {
 
-	private SecurityContextAuthenticationFilter filter = new SecurityContextAuthenticationFilter(
-			"/foo");
+	private SecurityContextAuthenticationFilter filter = new SecurityContextAuthenticationFilter("/foo");
 
 	@After
 	public void clean() {
@@ -24,15 +22,10 @@ public class SecurityContextAuthenticationFilterTests {
 
 	@Test
 	public void testSuccessfulAuthentication() throws Exception {
-		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-				"Nick",
-				"N/A",
-				AuthorityUtils
-						.commaSeparatedStringToAuthorityList("ROLE_USER"));
-		SecurityContextHolder
-				.getContext()
-				.setAuthentication(
-						authentication);
+		List<GrantedAuthority> roleUser = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken("Nick","N/A",roleUser);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+
 		assertEquals(authentication, filter.attemptAuthentication(null, null));
 	}
 

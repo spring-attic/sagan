@@ -1,18 +1,5 @@
 package org.springframework.site.integration;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import java.io.IOException;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -27,6 +14,15 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class BasicAcceptanceTests {
 
@@ -93,5 +89,12 @@ public class BasicAcceptanceTests {
 		Element loginButton = html.select("form button").first();
 		assertThat("No login button found", loginButton, is(notNullValue()));
 		assertThat(loginButton.text(), is(equalTo("Sign in with github")));
+	}
+
+	@Test
+	public void userCanSignOut() throws Exception {
+		ResponseEntity<String> response = getRestTemplate().getForEntity(
+				"http://localhost:8080/signout", String.class);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 }

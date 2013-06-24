@@ -37,19 +37,19 @@ public class SigninTests {
 
 	private MockMvc mockMvc;
 
-	@After
-	public void clean() {
-		SecurityContextHolder.clearContext();
-	}
-
 	@Before
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 
+	@After
+	public void clean() {
+		SecurityContextHolder.clearContext();
+	}
+
 	@Test
-	public void showsAlertAfterSuccessfulLogout() throws Exception {
-		MvcResult response = mockMvc.perform(get("/signin?logout=success"))
+	public void showsAlertAfterSuccessfulSignOut() throws Exception {
+		MvcResult response = mockMvc.perform(get("/signin?signout=success"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andReturn();
@@ -57,8 +57,8 @@ public class SigninTests {
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 		Element alert = html.select(".alert.alert-success").first();
 
-		assertThat("No log out alert on page", alert, is(notNullValue()));
-		assertThat(alert.text(), containsString("Logged out successfully"));
+		assertThat("No sign out alert on page", alert, is(notNullValue()));
+		assertThat(alert.text(), containsString("Signed out successfully"));
 	}
 
 	@Test
@@ -108,7 +108,10 @@ public class SigninTests {
 		Element alert = html.select("#authentication").first();
 		assertThat("No authentication element found ", alert, is(notNullValue()));
 		assertThat(alert.text(), containsString("Nick"));
-		assertThat(alert.text(), containsString("Log out"));
+
+		Element signOutLink = html.select("#authentication a").first();
+		assertThat(alert.text(), containsString("Sign out"));
+		assertThat(signOutLink.attr("href"), containsString("/signout"));
 	}
 
 }
