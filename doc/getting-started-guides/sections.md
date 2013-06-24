@@ -37,8 +37,8 @@ To **skip the basics**, do the following:
 **When you're finished**, you can check your results against the code in `{@project-name}/complete`.
 {!end#how-to-complete-this-guide}
 
-
 # {!begin#android-dev-env}
+<a name="android-dev-env"></a>
 Install the Android development environment
 ----------------------------------------------
 
@@ -73,11 +73,9 @@ Building Android applications requires you to install the [Android SDK][sdk]. In
     set PATH=%PATH%;%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools
     ```
 
-4. Once the SDK is installed, you add the relevant [Platforms and Packages]. This guide uses Android 4.2.2 (API Level 17).
-
 ### Install Android SDK platforms and packages
 
-The [Android SDK][sdk] download does not include specific Android platforms. To run the code in this guide, you need to download and install the latest SDK Platform. You accomplish this by using the Android SDK and AVD Manager that was installed from the previous step.
+The [Android SDK][sdk] download does not include specific Android platforms. To run the code in this guide, you need to download and install the latest SDK Platform. You do this by using the Android SDK and AVD Manager that was installed from the previous step.
 
 1. Open the **Android SDK Manager** window:
 
@@ -182,7 +180,7 @@ TODO: mention that we're using Spring Bootstrap's [_starter POMs_](../gs-bootstr
 Start an Android virtual device
 ----------------------------------
 
-If you do not have an Android device for testing, you can use an [Android Virtual Device (AVD)][avd]. To do this, you must first install the [Android SDK][sdk] and install the corresponding SDK [Platforms and Packages].
+If you do not have an Android device for testing, you can use an [Android Virtual Device (AVD)][avd]. To do this, you must first install the Android SDK and install the corresponding SDK platforms and packages. See [Install the Android Development Environment](#android-dev-env).
 
 ### Create an AVD
 
