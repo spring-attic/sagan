@@ -167,12 +167,14 @@
 				<filtering>true</filtering>
 				<excludes>
 					<exclude>**/cacerts</exclude>
+					<exclude>**/*.swf</exclude>
 				</excludes>
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>**/cacerts</include>
+					<include>**/*.swf</include>
 				</includes>
 			</resource>
 		</resources>
