@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
@@ -31,7 +33,22 @@ public class BlogController {
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listPosts(Model model, @RequestParam(defaultValue = "1") int page) {
 		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
-		model.addAttribute("posts", service.mostRecentPosts(pageRequest));
+		List<Post> posts = service.mostRecentPosts(pageRequest);
+		return populatePosts(posts, model, page, pageRequest);
+	}
+
+	@RequestMapping(value = "/categories/{category}", method = { GET, HEAD })
+	public String listPostsForCategory(@PathVariable PostCategory category, Model model, @RequestParam(defaultValue = "1") int page) {
+		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
+		List<Post> posts = service.mostRecentPosts(category, pageRequest);
+		return populatePosts(posts, model, page, pageRequest);
+	}
+
+	private String populatePosts(List<Post> posts, Model model, int page, PageRequest pageRequest) {
+		if (posts.size() == 0 && page > 1) {
+			throw new BlogPostsNotFound("Page does not exist");
+		}
+		model.addAttribute("posts", posts);
 		model.addAttribute("paginationInfo", service.paginationInfo(pageRequest));
 		return "blog/index";
 	}

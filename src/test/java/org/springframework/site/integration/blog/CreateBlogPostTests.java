@@ -5,6 +5,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.site.blog.Post;
+import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.blog.PostCategory;
+import org.springframework.site.blog.repository.PostRepository;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,7 +25,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -35,6 +42,9 @@ public class CreateBlogPostTests {
 	private WebApplicationContext wac;
 
 	private MockMvc mockMvc;
+
+	@Autowired
+	private PostRepository postRepository;
 
 	@Before
 	public void setup() {
@@ -54,6 +64,7 @@ public class CreateBlogPostTests {
 		MockHttpServletRequestBuilder createPostRequest = post("/admin/blog");
 		createPostRequest.param("title", "Post Title");
 		createPostRequest.param("content", "My Content");
+		createPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
 
 		this.mockMvc.perform(createPostRequest)
 				.andExpect(status().isFound())
@@ -72,6 +83,7 @@ public class CreateBlogPostTests {
 		MockHttpServletRequestBuilder createPostRequest = post("/admin/blog");
 		createPostRequest.param("title", "Post Title");
 		createPostRequest.param("content", "My Content");
+		createPostRequest.param("category", PostCategory.ENGINEERING.name());
 		this.mockMvc.perform(createPostRequest).andDo(new ResultHandler() {
 			@Override
 			public void handle(MvcResult result) throws Exception {
@@ -83,6 +95,27 @@ public class CreateBlogPostTests {
 		this.mockMvc.perform(get("/blog/" + postId.get() + "-sfgsgdf"))
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("<h1>Post Title</h1>")))
-				.andExpect(content().string(containsString("Post Title</title>")));
+				.andExpect(content().string(containsString("Post Title</title>")))
+				.andExpect(content().string(containsString(PostCategory.ENGINEERING.toString())));
+	}
+
+	@Test
+	public void viewBlogPostsForCategory() throws Exception {
+		postRepository.save(PostBuilder.post()
+				.title("DO NOT LOOK AT ME")
+				.category(PostCategory.RELEASES).build());
+
+		postRepository.save(PostBuilder.post()
+				.title("An Engineering Post")
+				.category(PostCategory.ENGINEERING).build());
+
+		Page<Post> posts = postRepository.findByCategory(PostCategory.ENGINEERING, new PageRequest(0, 10));
+		assertThat(posts.getSize(), greaterThanOrEqualTo(1));
+
+		this.mockMvc.perform(get("/blog/categories/" + PostCategory.ENGINEERING.getUrlSlug()))
+				.andExpect(content().contentTypeCompatibleWith("text/html"))
+				.andExpect(content().string(containsString("<h2>An Engineering Post</h2>")))
+				.andExpect(content().string(not(containsString("DO NOT LOOK AT ME"))))
+				.andExpect(content().string(containsString(PostCategory.ENGINEERING.toString())));
 	}
 }

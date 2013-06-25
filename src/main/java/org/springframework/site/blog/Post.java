@@ -3,10 +3,7 @@ package org.springframework.site.blog;
 import org.hibernate.annotations.Type;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,6 +20,10 @@ public class Post implements Serializable {
 	private String title;
 
 	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private PostCategory category;
+
+	@Column(nullable = false)
 	@Type(type="text")
 	private String rawContent;
 
@@ -37,12 +38,13 @@ public class Post implements Serializable {
 	@Column(nullable = false)
 	private Date createdDate = new Date();
 
-	public Post() {
+	private Post() {
 	}
 
-	public Post(String title, String content) {
+	public Post(String title, String content, PostCategory category) {
 		this.title = title;
 		this.rawContent = content;
+		this.category = category;
 	}
 
 	public Long getId() {
@@ -55,6 +57,14 @@ public class Post implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public PostCategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(PostCategory category) {
+		this.category = category;
 	}
 
 	public String getRawContent() {

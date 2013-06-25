@@ -9,6 +9,9 @@
     <form th:action="@{/admin/blog}" action="#" method="post" th:object="${postForm}">
         <label for="title">Title:<input id="title" type="text" th:field="*{title}" name="title" /></label>
         <label for="content">Content:<textarea id="content" th:field="*{content}" name="content" /></label>
+		<select name="category" th:field="*{category}" >
+			<option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.displayName}">Category</option>
+		</select>
         <button type="submit">Publish</button>
     </form>
 </div>

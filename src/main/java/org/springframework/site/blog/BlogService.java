@@ -3,6 +3,7 @@ package org.springframework.site.blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.site.blog.admin.PostForm;
 import org.springframework.site.blog.repository.PostRepository;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.stereotype.Service;
@@ -21,10 +22,9 @@ public class BlogService {
 		this.markdownService = markdownService;
 	}
 
-	public Post addPost(String title, String content) {
-		Post post = new Post();
-		post.setTitle(title);
-		post.setRawContent(content);
+	public Post addPost(PostForm postForm) {
+		String content = postForm.getContent();
+		Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
 		post.setRenderedContent(markdownService.renderToHtml(content));
 		post.setRenderedSummary(markdownService.renderToHtml(extractFirstParagraph(content, 500)));
 		repository.save(post);
@@ -55,9 +55,11 @@ public class BlogService {
 
 	public List<Post> mostRecentPosts(Pageable pageRequest) {
 		List<Post> posts = repository.findAll(pageRequest).getContent();
-		if (posts.size() == 0) {
-			throw new BlogPostsNotFound("No blog posts found for pageRequest " + pageRequest);
-		}
+		return posts;
+	}
+
+	public List<Post> mostRecentPosts(PostCategory category, Pageable pageRequest) {
+		List<Post> posts = repository.findByCategory(category, pageRequest).getContent();
 		return posts;
 	}
 

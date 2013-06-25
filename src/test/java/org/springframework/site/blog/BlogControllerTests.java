@@ -37,7 +37,7 @@ public class BlogControllerTests {
 	@Test
 	public void listPosts_providesAListOfPostsInTheModel(){
 		List<Post> posts = new ArrayList<Post>();
-		posts.add(new Post("title", "content"));
+		posts.add(PostBuilder.post().build());
 
 		when(blogService.mostRecentPosts(any(Pageable.class))).thenReturn(posts);
 
@@ -73,7 +73,7 @@ public class BlogControllerTests {
 
 	@Test
 	public void showPostModel() {
-		Post post = new Post();
+		Post post = PostBuilder.post().build();
 		when(blogService.getPost(post.getId())).thenReturn(post);
 		controller.showPost(post.getId(), "1-post-title", model);
 		assertThat((Post) model.get("post"), is(post));

@@ -1,16 +1,27 @@
-package org.springframework.site.integration.blog;
-
-import org.springframework.site.blog.Post;
+package org.springframework.site.blog;
 
 import java.util.Date;
 
 public class PostBuilder {
 
 	private String title;
+	private PostCategory category;
 	private String rawContent;
 	private String renderedContent;
 	private String renderedSummary;
 	private Date date;
+
+	public PostBuilder() {
+		this.title = "My Post";
+		this.category =	PostCategory.ENGINEERING;
+		this.rawContent = "post body";
+		this.renderedContent = "post body";
+		this.renderedSummary = "summary";
+	}
+
+	public static PostBuilder post() {
+		return new PostBuilder();
+	}
 
 	public PostBuilder title(String title) {
 		this.title = title;
@@ -37,8 +48,13 @@ public class PostBuilder {
 		return this;
 	}
 
+	public PostBuilder category(PostCategory category) {
+		this.category = category;
+		return this;
+	}
+
 	public Post build() {
-		Post post = new Post(title, rawContent);
+		Post post = new Post(title, rawContent, category);
 		post.setRenderedContent(renderedContent);
 		post.setRenderedSummary(renderedSummary);
 		if (date != null) {
