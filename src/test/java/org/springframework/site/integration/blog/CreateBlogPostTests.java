@@ -1,12 +1,13 @@
 package org.springframework.site.integration.blog;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
@@ -17,16 +18,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultHandler;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.concurrent.atomic.AtomicReference;
-
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -49,6 +48,12 @@ public class CreateBlogPostTests {
 	@Before
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		postRepository.deleteAll();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		postRepository.deleteAll();
 	}
 
 	@Test
@@ -60,7 +65,7 @@ public class CreateBlogPostTests {
 	}
 
 	@Test
-	public void createNewBlogPost() throws Exception {
+	public void redirectToBlogPostAfterCreation() throws Exception {
 		MockHttpServletRequestBuilder createPostRequest = post("/admin/blog");
 		createPostRequest.param("title", "Post Title");
 		createPostRequest.param("content", "My Content");
@@ -78,25 +83,44 @@ public class CreateBlogPostTests {
 	}
 
 	@Test
-	public void viewBlogPost() throws Exception {
-		final AtomicReference<String> postId = new AtomicReference<String>();
+	public void canViewBlogPostAtAnySlugName() throws Exception {
+		Post post = PostBuilder.post().build();
+		postRepository.save(post);
+		this.mockMvc.perform(get("/blog/" + post.getId() + "-random-slug"))
+				.andExpect(content().contentTypeCompatibleWith("text/html"))
+				.andExpect(content().string(containsString(post.getTitle())));
+	}
+
+	@Test
+	public void createdPostValuesArePersisted() throws Exception {
 		MockHttpServletRequestBuilder createPostRequest = post("/admin/blog");
 		createPostRequest.param("title", "Post Title");
 		createPostRequest.param("content", "My Content");
 		createPostRequest.param("category", PostCategory.ENGINEERING.name());
-		this.mockMvc.perform(createPostRequest).andDo(new ResultHandler() {
-			@Override
-			public void handle(MvcResult result) throws Exception {
-				String redirectedUrl = result.getResponse().getRedirectedUrl();
-				postId.set(redirectedUrl.substring(redirectedUrl.lastIndexOf("/") + 1));
-			}
-		});
+		createPostRequest.param("broadcast", "true");
 
-		this.mockMvc.perform(get("/blog/" + postId.get() + "-sfgsgdf"))
+		mockMvc.perform(createPostRequest);
+
+		Post post = postRepository.findAll().get(0);
+
+		assertThat(post.getTitle(), is("Post Title"));
+		assertThat(post.getRawContent(), is("My Content"));
+		assertThat(post.getCategory(), is(PostCategory.ENGINEERING));
+	}
+
+	@Test
+	public void persistedPostValuesAreDisplayedCorrectly() throws Exception {
+		Post post = PostBuilder.post().build();
+		postRepository.save(post);
+
+		MvcResult response = mockMvc.perform(get("/blog/" + post.getId()))
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("<h1>Post Title</h1>")))
-				.andExpect(content().string(containsString("Post Title</title>")))
-				.andExpect(content().string(containsString(PostCategory.ENGINEERING.toString())));
+				.andExpect(content().string(containsString(post.getTitle())))
+				.andExpect(content().string(containsString(post.getCategory().getDisplayName())))
+				.andReturn();
+
+		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+		assertThat(html.title(), containsString(post.getTitle()));
 	}
 
 }
