@@ -18,7 +18,7 @@ $(function(){
 ZeroClipboard.setDefaults( { moviePath: '/js/ZeroClipboard.swf' } );
 
 $(document).ready(function() {
-    $('article pre').each(function(index) {
+    $('article .highlight pre').each(function(index) {
             var codeBlockId = "code-block-"+ index;
             $(this).attr('id', codeBlockId);
             var button = $('<button class="copy-button" id="copy-button-"' + index + ' data-clipboard-target="' + codeBlockId + '" title="Click to copy to clipboard.">Copy</button>');
