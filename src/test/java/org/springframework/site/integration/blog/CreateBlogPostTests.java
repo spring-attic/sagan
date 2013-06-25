@@ -112,7 +112,7 @@ public class CreateBlogPostTests {
 		Page<Post> posts = postRepository.findByCategory(PostCategory.ENGINEERING, new PageRequest(0, 10));
 		assertThat(posts.getSize(), greaterThanOrEqualTo(1));
 
-		this.mockMvc.perform(get("/blog/categories/" + PostCategory.ENGINEERING.getUrlSlug()))
+		this.mockMvc.perform(get("/blog/category/" + PostCategory.ENGINEERING.getUrlSlug()))
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("<h2>An Engineering Post</h2>")))
 				.andExpect(content().string(not(containsString("DO NOT LOOK AT ME"))))

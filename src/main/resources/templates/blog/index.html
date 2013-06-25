@@ -9,21 +9,36 @@
 <div layout:fragment="overview">Spring Blog is Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
 
 <div layout:fragment="content" class="container">
-	<ul class='posts'>
-		<li th:each="post : ${posts}">
-            <h2 th:text="${post.title}">This week in Spring</h2>
-			<div class="byline">
-				<span class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</span>
-				<span class='author'>Author TBD</span>
-				<span class='category' th:text="${post.category}">Category</span>
-			</div>
-            <div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
-        </li>
-	</ul>
+	<div class="row">
+		<div id="content" class="span8">
+			<ul class='posts'>
+				<li th:each="post : ${posts}">
+					<h2 th:text="${post.title}">This week in Spring</h2>
+					<div class="byline">
+						<span class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</span>
+						<span class='author'>Author TBD</span>
+						<span class='category' th:text="${post.category}">Category</span>
+					</div>
+					<div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
+				</li>
+			</ul>
 
-	<div id='pagination_control' th:if="${paginationInfo.isVisible()}">
-		<a th:href="@{/blog(page=${paginationInfo.previousPageNumber})}" href='/blog?page=1' class='previous' th:if="${paginationInfo.previousVisible}">Previous</a>
-		<a th:href="@{/blog(page=${paginationInfo.nextPageNumber})}" href='/blog?page=3' class='next' th:if="${paginationInfo.nextVisible}">Next</a>
+			<div id='pagination_control' th:if="${paginationInfo.isVisible()}">
+				<a th:href="@{/blog(page=${paginationInfo.previousPageNumber})}" href='/blog?page=1' class='previous' th:if="${paginationInfo.previousVisible}">Previous</a>
+				<a th:href="@{/blog(page=${paginationInfo.nextPageNumber})}" href='/blog?page=3' class='next' th:if="${paginationInfo.nextVisible}">Next</a>
+			</div>
+		</div>
+
+		<div id="sidebar" class="span4">
+			<ul class='blog-categories'>
+				<li>
+					<a th:href="@{/blog}" href="/blog">All Posts</a>
+				</li>
+				<li th:each="category : ${categories}">
+					<a th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}" href="/blog/category/engineering">Engineering</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>
 </body>

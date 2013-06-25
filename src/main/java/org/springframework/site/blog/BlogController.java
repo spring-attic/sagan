@@ -37,7 +37,7 @@ public class BlogController {
 		return populatePosts(posts, model, page, pageRequest);
 	}
 
-	@RequestMapping(value = "/categories/{category}", method = { GET, HEAD })
+	@RequestMapping(value = "/category/{category}", method = { GET, HEAD })
 	public String listPostsForCategory(@PathVariable PostCategory category, Model model, @RequestParam(defaultValue = "1") int page) {
 		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
 		List<Post> posts = service.mostRecentPosts(category, pageRequest);
@@ -48,6 +48,7 @@ public class BlogController {
 		if (posts.size() == 0 && page > 1) {
 			throw new BlogPostsNotFound("Page does not exist");
 		}
+		model.addAttribute("categories", PostCategory.values());
 		model.addAttribute("posts", posts);
 		model.addAttribute("paginationInfo", service.paginationInfo(pageRequest));
 		return "blog/index";
