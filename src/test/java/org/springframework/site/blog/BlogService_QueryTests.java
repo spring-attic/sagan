@@ -21,7 +21,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -94,5 +94,17 @@ public class BlogService_QueryTests {
 		assertEquals("xx", service.extractFirstParagraph("xxxxx", 2));
 		assertEquals("xx", service.extractFirstParagraph("xx\n\nxxx", 20));
 		assertEquals("xx", service.extractFirstParagraph("xx xx\n\nxxx", 4));
+	}
+
+	@Test
+	public void listBroadcasts() {
+		Pageable firstTenPosts = new BlogPostsPageRequest(1);
+		List<Post> posts = new ArrayList<Post>();
+		posts.add(PostBuilder.post().isBroadcast().build());
+		Page<Post> page = new PageImpl<Post>(posts);
+
+		when(postRepository.findByBroadcast(eq(true), any(Pageable.class))).thenReturn(page);
+
+		assertThat(service.mostRecentBroadcastPosts(firstTenPosts), is(posts));
 	}
 }

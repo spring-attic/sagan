@@ -84,4 +84,32 @@ public class BlogControllerTests {
 		assertThat(controller.showPost(1L, "not important", model), is("blog/show"));
 	}
 
+	@Test
+	public void listBroadcastsView() throws Exception {
+		assertThat(controller.listBroadcasts(model, TEST_PAGE), is("blog/index"));
+	}
+
+	@Test
+	public void listBroadcasts() throws Exception {
+		List<Post> posts = new ArrayList<Post>();
+		Post post = PostBuilder.post().isBroadcast().build();
+		posts.add(post);
+
+		when(blogService.mostRecentBroadcastPosts(any(Pageable.class))).thenReturn(posts);
+
+		controller.listBroadcasts(model, TEST_PAGE);
+
+		assertThat((List<Post>) model.get("posts"), is(posts));
+	}
+
+	@Test
+	public void listBroadcasts_providesPaginationInfo(){
+		PaginationInfo paginationInfo = new PaginationInfo(TEST_PAGE, 20);
+
+		when(blogService.paginationInfo(new BlogPostsPageRequest(TEST_PAGE-1))).thenReturn(paginationInfo);
+
+		controller.listBroadcasts(model, TEST_PAGE);
+
+		assertThat((PaginationInfo) model.get("paginationInfo"), is(paginationInfo));
+	}
 }

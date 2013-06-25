@@ -10,6 +10,7 @@ public class PostBuilder {
 	private String renderedContent;
 	private String renderedSummary;
 	private Date date;
+	private boolean isBroadcast;
 
 	public PostBuilder() {
 		this.title = "My Post";
@@ -17,6 +18,7 @@ public class PostBuilder {
 		this.rawContent = "post body";
 		this.renderedContent = "post body";
 		this.renderedSummary = "summary";
+		this.isBroadcast = false;
 	}
 
 	public static PostBuilder post() {
@@ -60,6 +62,12 @@ public class PostBuilder {
 		if (date != null) {
 			post.setCreatedDate(date);
 		}
+		post.setIsBroadcast(isBroadcast);
 		return post;
+	}
+
+	public PostBuilder isBroadcast() {
+		isBroadcast = true;
+		return this;
 	}
 }

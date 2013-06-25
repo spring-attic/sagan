@@ -38,6 +38,11 @@ public class Post implements Serializable {
 	@Column(nullable = false)
 	private Date createdDate = new Date();
 
+	@Column(nullable = false)
+	@Type(type="boolean")
+	private boolean broadcast = false;
+
+	@SuppressWarnings("unused")
 	private Post() {
 	}
 
@@ -107,4 +112,13 @@ public class Post implements Serializable {
 		String cleanedTitle = title.toLowerCase().replace("\n", " ").replaceAll("[^a-z\\d\\s]", "");
 		return StringUtils.arrayToDelimitedString(StringUtils.tokenizeToStringArray(cleanedTitle, " "), "-");
 	}
+
+	public void setIsBroadcast(boolean isBroadcast) {
+		this.broadcast = isBroadcast;
+	}
+
+	public boolean getIsBroadcast() {
+		return broadcast;
+	}
+
 }

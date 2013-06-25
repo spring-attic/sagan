@@ -99,23 +99,4 @@ public class CreateBlogPostTests {
 				.andExpect(content().string(containsString(PostCategory.ENGINEERING.toString())));
 	}
 
-	@Test
-	public void viewBlogPostsForCategory() throws Exception {
-		postRepository.save(PostBuilder.post()
-				.title("DO NOT LOOK AT ME")
-				.category(PostCategory.RELEASES).build());
-
-		postRepository.save(PostBuilder.post()
-				.title("An Engineering Post")
-				.category(PostCategory.ENGINEERING).build());
-
-		Page<Post> posts = postRepository.findByCategory(PostCategory.ENGINEERING, new PageRequest(0, 10));
-		assertThat(posts.getSize(), greaterThanOrEqualTo(1));
-
-		this.mockMvc.perform(get("/blog/category/" + PostCategory.ENGINEERING.getUrlSlug()))
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("<h2>An Engineering Post</h2>")))
-				.andExpect(content().string(not(containsString("DO NOT LOOK AT ME"))))
-				.andExpect(content().string(containsString(PostCategory.ENGINEERING.toString())));
-	}
 }

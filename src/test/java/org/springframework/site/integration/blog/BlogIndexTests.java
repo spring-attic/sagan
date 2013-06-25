@@ -1,5 +1,6 @@
 package org.springframework.site.integration.blog;
 
+import org.hamcrest.MatcherAssert;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,8 +10,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.repository.PostRepository;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.test.context.ContextConfiguration;
@@ -26,6 +30,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -88,9 +95,14 @@ public class BlogIndexTests {
 				.andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertThat(html.select("ul.posts li").size(), is(10));
+
+		assertThat(numberOfBlogPosts(html), is(10));
 		assertThat(html.select("ul.posts li .date").first().text(), is("November 11, 2013"));
 		assertThat(html.select("ul.posts li .date").last().text(), is("November 2, 2013"));
+	}
+
+	private int numberOfBlogPosts(Document html) {
+		return html.select("ul.posts li").size();
 	}
 
 	private void createManyPostsInNovember(int numPostsToCreate) {
@@ -146,6 +158,56 @@ public class BlogIndexTests {
 		assertThat(nextHref, is("/blog?page=3"));
 	}
 
+
+	@Test
+	public void viewBlogPostsForCategory() throws Exception {
+		postRepository.save(PostBuilder.post()
+				.title("DO NOT LOOK AT ME")
+				.category(PostCategory.RELEASES).build());
+
+		postRepository.save(PostBuilder.post()
+				.title("An Engineering Post")
+				.category(PostCategory.ENGINEERING).build());
+
+		Page<Post> posts = postRepository.findByCategory(PostCategory.ENGINEERING, new PageRequest(0, 10));
+		MatcherAssert.assertThat(posts.getSize(), greaterThanOrEqualTo(1));
+
+		this.mockMvc.perform(get("/blog/category/" + PostCategory.ENGINEERING.getUrlSlug()))
+				.andExpect(content().contentTypeCompatibleWith("text/html"))
+				.andExpect(content().string(containsString("<h2>An Engineering Post</h2>")))
+				.andExpect(content().string(not(containsString("DO NOT LOOK AT ME"))))
+				.andExpect(content().string(containsString(PostCategory.ENGINEERING.toString())));
+	}
+
+	@Test
+	public void viewBroadcastBlogPosts() throws Exception {
+		createManyPostsInNovember(5);
+
+		postRepository.save(PostBuilder.post()
+				.title("A broadcast post")
+				.isBroadcast()
+				.build());
+
+		postRepository.save(PostBuilder.post()
+				.title("Another broadcast post")
+				.isBroadcast()
+				.build());
+
+		MvcResult response = this.mockMvc.perform(get("/blog/broadcasts")).andReturn();
+
+		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+
+		assertThat(numberOfBlogPosts(html), is(2));
+	}
+
+	@Test
+	public void givenRequestForInvalidBroadcastPage_blogIndexReturns404() throws Exception {
+		postRepository.save(PostBuilder.post().isBroadcast().build());
+
+		mockMvc.perform(get("/blog/broadcasts?page=2"))
+				.andExpect(status().isNotFound())
+				.andReturn();
+	}
 
 
 }

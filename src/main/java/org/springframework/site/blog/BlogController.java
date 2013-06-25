@@ -53,4 +53,11 @@ public class BlogController {
 		model.addAttribute("paginationInfo", service.paginationInfo(pageRequest));
 		return "blog/index";
 	}
+
+	@RequestMapping(value = "/broadcasts", method = { GET, HEAD })
+	public String listBroadcasts(Model model, @RequestParam(defaultValue = "1") int page) {
+		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
+		List<Post> posts = service.mostRecentBroadcastPosts(pageRequest);
+		return populatePosts(posts, model, page, pageRequest);
+	}
 }

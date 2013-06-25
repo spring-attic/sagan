@@ -54,16 +54,18 @@ public class BlogService {
 	}
 
 	public List<Post> mostRecentPosts(Pageable pageRequest) {
-		List<Post> posts = repository.findAll(pageRequest).getContent();
-		return posts;
+		return repository.findAll(pageRequest).getContent();
 	}
 
 	public List<Post> mostRecentPosts(PostCategory category, Pageable pageRequest) {
-		List<Post> posts = repository.findByCategory(category, pageRequest).getContent();
-		return posts;
+		return repository.findByCategory(category, pageRequest).getContent();
 	}
 
 	public PaginationInfo paginationInfo(PageRequest pageRequest) {
 		return new PaginationInfo(pageRequest.getPageNumber()+1, repository.count() / pageRequest.getPageSize() + 1);
+	}
+
+	public List<Post> mostRecentBroadcastPosts(Pageable pageRequest) {
+		return repository.findByBroadcast(true, pageRequest).getContent();
 	}
 }

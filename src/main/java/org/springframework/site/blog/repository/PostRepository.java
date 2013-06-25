@@ -8,4 +8,6 @@ import org.springframework.site.blog.PostCategory;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 	Page<Post> findByCategory(PostCategory category, Pageable pageable);
+
+	Page<Post> findByBroadcast(boolean isBroadcast, Pageable pageable);
 }
