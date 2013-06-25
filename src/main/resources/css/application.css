@@ -17,3 +17,11 @@
     color: black;
     text-decoration: none;
 }
+
+.copy-button {
+    float: right;
+    background-color: #cccccc;
+}
+
+.copy-button.zeroclipboard-is-hover { background-color: #eeeeee; }
+.copy-button.zeroclipboard-is-active { background-color: #aaaaaa; }
