@@ -47,7 +47,7 @@ public class GettingStartedControllerTests {
 
 	@Test
 	public void guideIsInModel() {
-		GettingStartedGuide guide = new GettingStartedGuide(GUIDE_TEXT, "", "");
+		GettingStartedGuide guide = new GettingStartedGuide("guide-id", GUIDE_TEXT, "");
 		when(guideService.loadGuide(GUIDE_NAME)).thenReturn(guide);
 		controller.viewGuide(GUIDE_NAME, model);
 		assertThat(((GettingStartedGuide) model.get("guide")), is(guide));

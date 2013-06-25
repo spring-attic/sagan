@@ -44,7 +44,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GettingStartedGuidesTests {
 
 	public static final GettingStartedGuide GETTING_STARTED_GUIDE =
-			new GettingStartedGuide("Awesome getting started guide that isn't helpful", "Related resources", "");
+			new GettingStartedGuide("awesome-guide", "Awesome getting started guide that isn't helpful", "Related resources");
 
 	@Primary
 	@Bean

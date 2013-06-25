@@ -4,24 +4,3 @@
     line-height: 20px;
     padding: 10px 0;
 }
-
-.github_download {
-    padding: 10px 20px 10px 50px;
-    color: black;
-    border-bottom: 1px solid black;
-    background: url(/img/download_repo.png) no-repeat 13px 8px, #ccc;
-}
-
-.github_download:hover {
-    background: url(/img/download_repo.png) no-repeat 13px 8px, #ddd;
-    color: black;
-    text-decoration: none;
-}
-
-.copy-button {
-    float: right;
-    background-color: #cccccc;
-}
-
-.copy-button.zeroclipboard-is-hover { background-color: #eeeeee; }
-.copy-button.zeroclipboard-is-active { background-color: #aaaaaa; }

@@ -9,7 +9,34 @@
     <div class="row">
 	    <article class="span8" th:utext="${guide.content}">a guide</article>
 	    <aside id='sidebar' class="span4">
-            <a class="github_download" th:href='${guide.zipUrl}'>Download the repo</a>
+            <div class="github-actions">
+
+                <h3>Get the code</h3>
+
+                <div class="btn-group">
+                    <button class="btn active" data-protocol="https">HTTPS</button>
+                    <button class="btn" data-protocol="ssh">SSH</button>
+                    <button class="btn" data-protocol="subversion">Subversion</button>
+                </div>
+
+                <div class="clone-url https">
+                    <input type="text" id="clone-url-https" value="https://github.com/springframework-meta/gs-rest-service.git" th:value="${guide.gitRepoHttpsUrl}" readonly="readonly"/>
+                    <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoHttpsUrl}" title="copy to clipboard" data-toggle="tooltip">Copy</button>
+                </div>
+
+                <div class="clone-url ssh hide">
+                    <input type="text" id="clone-url-ssh" th:value="${guide.gitRepoSshUrl}" readonly="readonly"/>
+                    <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoSshUrl}" title="copy to clipboard" data-toggle="tooltip">Copy</button>
+                </div>
+
+                <div class="clone-url subversion hide">
+                    <input type="text" id="clone-url-subversion" th:value="${guide.gitRepoSubversionUrl}" readonly="readonly"/>
+                    <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoSubversionUrl}" title="copy to clipboard" data-toggle="tooltip">Copy</button>
+                </div>
+
+                <a class="github_download" th:href='${guide.zipUrl}'>Download ZIP</a>
+            </div>
+
             <div class='related_resources' th:utext="${guide.sidebar}">Sidebar content</div>
         </aside>
     </div>

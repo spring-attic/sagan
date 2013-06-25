@@ -18,7 +18,6 @@ public class GitHubGettingStartedService implements GettingStartedService {
 	private static final String README_PATH = "/repos/springframework-meta/gs-%s/contents/README.md";
 	private static final String SIDEBAR_PATH = "/repos/springframework-meta/gs-%s/contents/SIDEBAR.md";
 	private static final String IMAGES_PATH = "/repos/springframework-meta/gs-{guideId}/contents/images/{imageName}";
-	private static final String REPO_ZIP_URL = "https://github.com/springframework-meta/gs-%s/archive/master.zip";
 
 	private static final Logger log = Logger.getLogger(GitHubGettingStartedService.class);
 
@@ -31,8 +30,7 @@ public class GitHubGettingStartedService implements GettingStartedService {
 
 	@Override
 	public GettingStartedGuide loadGuide(String guideId) {
-		String zipUrl = String.format(REPO_ZIP_URL, guideId);
-		return new GettingStartedGuide(getGuideContent(guideId), getGuideSidebar(guideId), zipUrl);
+		return new GettingStartedGuide(guideId, getGuideContent(guideId), getGuideSidebar(guideId));
 	}
 
 	private String getGuideContent(String guideId) {
