@@ -15,7 +15,7 @@ $(function(){
     $('.js-spring-popover').springPopover();
 });
 
-ZeroClipboard.setDefaults( { moviePath: '/js/ZeroClipboard.swf' } );
+ZeroClipboard.setDefaults( { moviePath: 'http://sagan.cfapps.io/js/ZeroClipboard.swf' } );
 
 $(document).ready(function() {
     $('article .highlight pre').each(function(index) {
