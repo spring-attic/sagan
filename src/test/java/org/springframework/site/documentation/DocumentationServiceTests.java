@@ -1,10 +1,5 @@
 package org.springframework.site.documentation;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +7,10 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
 
 public class DocumentationServiceTests {
 
@@ -33,8 +32,8 @@ public class DocumentationServiceTests {
 				.getSupportedVersions().size());
 	}
 
-	@Test
-	@Ignore
+//	@Test
+	// Disabled as this test only needs to run on demand
 	public void linkTests() {
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.setErrorHandler(new ResponseErrorHandler() {
