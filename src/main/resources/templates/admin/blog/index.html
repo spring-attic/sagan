@@ -1,0 +1,60 @@
+<html   xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+		layout:decorator="layout">
+<head>
+	<title>SpringFramework - Blog Dashboard</title>
+</head>
+<body>
+<h1 layout:fragment="header">Hello <span sec:authentication="name">Bob</span></h1>
+<div layout:fragment="overview">
+	<a th:href="@{'/admin/blog/new'}" href="/admin/blog/new" class="btn btn-primary">Create New Post</a>
+</div>
+
+<div layout:fragment="content" class="container">
+	<div class="row">
+		<div id="content" class="span8">
+			<h2>Drafts</h2>
+			<ul class='posts'>
+				<li th:each="post : ${drafts}">
+					<h2 th:text="${post.title}">This week in Spring</h2>
+					<div class="byline">
+						<span class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</span>
+						<span class='author'>Author TBD</span>
+						<span class='category' th:text="${post.category}">Category</span>
+					</div>
+					<div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
+				</li>
+			</ul>
+			<h2>Scheduled Posts</h2>
+			<ul class='posts'>
+				<li th:each="post : ${scheduledPosts}">
+					<h2 th:text="${post.title}">This week in Spring</h2>
+					<div class="byline">
+						<span class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</span>
+						<span class='author'>Author TBD</span>
+						<span class='category' th:text="${post.category}">Category</span>
+					</div>
+					<div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
+				</li>
+			</ul>
+			<h2>Live Posts</h2>
+			<ul class='posts'>
+				<li th:each="post : ${myPosts}">
+					<h2 th:text="${post.title}">This week in Spring</h2>
+					<div class="byline">
+						<span class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</span>
+						<span class='author'>Author TBD</span>
+						<span class='category' th:text="${post.category}">Category</span>
+					</div>
+					<div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
+				</li>
+			</ul>
+		</div>
+
+		<div id="sidebar" class="span4">
+		</div>
+	</div>
+</div>
+</body>
+</html>

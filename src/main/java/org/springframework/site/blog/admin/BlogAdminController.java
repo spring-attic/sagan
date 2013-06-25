@@ -1,6 +1,7 @@
 package org.springframework.site.blog.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
@@ -19,6 +20,12 @@ public class BlogAdminController {
 	@Autowired
 	public BlogAdminController(BlogService service) {
 		this.service = service;
+	}
+
+	@RequestMapping(value = "", method = { GET, HEAD })
+	public String dashboard(Model model) {
+		model.addAttribute("myPosts", service.mostRecentPosts(new PageRequest(0, 20)));
+		return "admin/blog/index";
 	}
 
 	@RequestMapping(value = "/new", method = { GET, HEAD })
