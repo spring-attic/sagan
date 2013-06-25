@@ -37,20 +37,20 @@ To **skip the basics**, do the following:
 **When you're finished**, you can check your results against the code in `{@project-name}/complete`.
 {!end#how-to-complete-this-guide}
 
-
 # {!begin#android-dev-env}
-Installing the Android Development Environment
+<a name="android-dev-env"></a>
+Install the Android development environment
 ----------------------------------------------
 
-Building Android applications requires the installation of the [Android SDK][sdk].
+Building Android applications requires you to install the [Android SDK][sdk]. Installing the Android SDK also installs the AVD Manager, which provides a graphical user interface for creating and managing Android Virtual Devices (AVDs). 
 
 ### Install the Android SDK
 
 1. Download the correct version of the [Android SDK][sdk] for your operating system from the Android web site.
 
-2. Unzip the archive and place it in a location of your choosing. For example on Linux or Mac, you may want to place it in the root of your user directory. See the [Android Developers] web site for additional installation details.
+2. Unzip the archive to a location of your choosing. For example, on Linux or Mac, you could place it in the root of your user directory. See the [Android Developers] web site for additional installation details.
 
-3. Configure the `ANDROID_HOME` environment variable based on the location where you installed the Android SDK. Additionally, you should consider adding `ANDROID_HOME/tools`, and  `ANDROID_HOME/platform-tools` to your PATH.
+3. Configure the `ANDROID_HOME` environment variable based on the location of the Android SDK. Additionally, consider adding `ANDROID_HOME/tools`, and  `ANDROID_HOME/platform-tools` to your PATH.
 
     Mac OS X:
 
@@ -73,29 +73,27 @@ Building Android applications requires the installation of the [Android SDK][sdk
     set PATH=%PATH%;%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools
     ```
 
-4. Once the SDK is installed, we need to add the relevant [Platforms and Packages]. We are using Android 4.2.2 (API Level 17) in this guide.
+### Install Android SDK platforms and packages
 
-### Install Android SDK Platforms and Packages
+The [Android SDK][sdk] download does not include specific Android platforms. To run the code in this guide, you need to download and install the latest SDK Platform. You do this by using the Android SDK and AVD Manager that was installed from the previous step.
 
-The [Android SDK][sdk] download does not include any specific Android platforms. In order to run the code in this guide, you need to download and install the latest SDK Platform. You accomplish this by using the *Android SDK and AVD Manager* that was installed from the previous step.
-
-1. Open the *Android SDK Manager* window:
+1. Open the **Android SDK Manager** window:
 
     ```sh
     $ android
     ```
 
-    > Note: if this command does not open the *Android SDK Manager*, then your path is not configured correctly.
+    > Note: If this command does not open the *Android SDK Manager*, then your path is not configured correctly.
 
-2. Select the checkbox for *Tools*
+2. Select the checkbox for **Tools**.
 
-3. Select the checkbox for the latest Android SDK, "Android 4.2.2 (API Level 17)" as of this writing
+3. Select the checkbox for the latest Android SDK, Android 4.2.2 (API Level 17) as of this writing.
 
-4. Select the checkbox for the *Android Support Library* from the *Extras* folder
+4. Select the checkbox for the **Android Support Library** from the **Extras** folder.
 
-5. Click the **Install packages...** button to complete the download and installation
+5. Click the **Install packages...** button to complete the download and installation.
 
-    > Note: you may want to simply install all the available updates, but be aware it will take longer, as each API level is a sizable download.
+    > Note: You may want to install all the available updates, but be aware it will take longer, as each API level is a large download.
 
 [sdk]: http://developer.android.com/sdk/index.html
 [Android Developers]: http://developer.android.com/sdk/installing/index.html
@@ -142,7 +140,7 @@ $ mkdir -p src/main/java/org/hello
 {!end#create-directory-structure-org-hello}
 
 # {!begin#create-android-manifest}
-### Create an Android Manifest
+### Create an Android manifest
 
 The [Android Manifest] contains all the information required to run an Android application, and it cannot build without one.
 
@@ -173,15 +171,16 @@ There's more to building RESTful web services than is covered here. You may want
 # {!begin#bootstrap-starter-pom-disclaimer}
 TODO: mention that we're using Spring Bootstrap's [_starter POMs_](../gs-bootstrap-starter) here.
 
-Note to experienced Maven users who are unaccustomed to using an external parent project: you can take it out later, it's just there to reduce the amount of code you have to write to get started.
+> Note to experienced Maven users who don't use an external parent project: You can take it out later, it's just there to reduce the amount of code you have to write to get started.
+
 {!end#bootstrap-starter-pom-disclaimer}
 
 
 # {!begin#start-android-virtual-device}
-Start an Android Virtual Device
+Start an Android virtual device
 ----------------------------------
 
-If you do not have an Android device for testing, you can use an [Android Virtual Device (AVD)][avd]. To do this, you must first have the [Android SDK][sdk] installed and also have installed the corresponding SDK [Platforms and Packages].
+If you do not have an Android device for testing, you can use an [Android Virtual Device (AVD)][avd]. To do this, you must first install the Android SDK and install the corresponding SDK platforms and packages. See [Install the Android Development Environment](#android-dev-env).
 
 ### Create an AVD
 
@@ -193,13 +192,13 @@ $ android create avd --name Default --target 29 --abi armeabi-v7a
 
 ### Start the AVD
 
-Use the following command to start the emulator using the Android Maven Plugin:
+Start the emulator using the Android Maven plugin:
 
 ```sh
 $ mvn android:emulator-start
 ```
 
-This command will try to start an emulator named "Default". Please be patient as the emulator takes a few moments to finish startup.
+This command starts an emulator named "Default". Please be patient as the emulator takes a few moments to finish startup.
 
 [sdk]: http://developer.android.com/sdk/index.html
 [avd]: http://developer.android.com/tools/devices/index.html
@@ -208,16 +207,16 @@ This command will try to start an emulator named "Default". Please be patient as
 
 
 # {!begin#build-and-run-android}
-Build and Run the Client
+Build and run the client
 ------------------------
 
-Once the emulator has finished starting up, run the following command to invoke the code and see the results of the REST request:
+Once the emulator starts up, run the following command to invoke the code and see the results of the REST request:
 
 ```sh
 $ mvn clean package android:deploy android:run
 ```
 
-This will build the Android app and then run it in the emulator.
+This command builds the Android app and runs it in the emulator.
 {!end#build-and-run-android}
 
 
