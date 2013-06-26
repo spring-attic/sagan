@@ -28,6 +28,9 @@ public class BasicAcceptanceTests {
 
 	private static ConfigurableApplicationContext context;
 
+	//TODO make this dynamic
+	private String serverAddress = "http://localhost:8080";
+
 	@BeforeClass
 	public static void start() throws Exception {
 		Future<ConfigurableApplicationContext> future = Executors
@@ -49,23 +52,8 @@ public class BasicAcceptanceTests {
 		}
 	}
 
-	@Test
-	public void getStyleSheet() throws Exception {
-		ResponseEntity<String> response = getRestTemplate().getForEntity(
-				"http://localhost:8080/css/application.css.css", String.class);
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertTrue(response.getHeaders().getContentType()
-				.isCompatibleWith(MediaType.valueOf("text/css")));
-		assertTrue(response.getBody().contains("#authentication"));
-	}
-
-	@Test
-	public void getDeviceDetectionGuide() throws Exception {
-		ResponseEntity<String> response = getRestTemplate().getForEntity(
-				"http://localhost:8080/guides/gs/device-detection/content", String.class);
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertTrue(response.getHeaders().getContentType().isCompatibleWith(MediaType.valueOf("text/html")));
-		assertTrue(response.getBody().contains("<img"));
+	private ResponseEntity<String> doGet(String path) {
+		return getRestTemplate().getForEntity(serverAddress + path, String.class);
 	}
 
 	private RestTemplate getRestTemplate() {
@@ -80,9 +68,24 @@ public class BasicAcceptanceTests {
 	}
 
 	@Test
+	public void getStyleSheet() throws Exception {
+		ResponseEntity<String> response = doGet("/bootstrap/css/bootstrap.css");
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertTrue(response.getHeaders().getContentType()
+				.isCompatibleWith(MediaType.valueOf("text/css")));
+	}
+
+	@Test
+	public void getDeviceDetectionGuide() throws Exception {
+		ResponseEntity<String> response = doGet("/guides/gs/device-detection/content");
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertTrue(response.getHeaders().getContentType().isCompatibleWith(MediaType.valueOf("text/html")));
+		assertTrue(response.getBody().contains("<img"));
+	}
+
+	@Test
 	public void adminIsSecure() {
-		ResponseEntity<String> response = getRestTemplate().getForEntity(
-				"http://localhost:8080/admin", String.class);
+		ResponseEntity<String> response = doGet("/admin");
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 
 		Document html = Jsoup.parse(response.getBody());
@@ -93,8 +96,7 @@ public class BasicAcceptanceTests {
 
 	@Test
 	public void userCanSignOut() throws Exception {
-		ResponseEntity<String> response = getRestTemplate().getForEntity(
-				"http://localhost:8080/signout", String.class);
+		ResponseEntity<String> response = doGet("/signout");
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 }
