@@ -14,7 +14,7 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/application.css.css}" href="../../css/application.css.css" />
 
 	<script type="text/javascript" th:src="@{/resources/js/jquery.js}" src="../../js/jquery.js"></script>
-	<script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.js}" src="../../bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.min.js}" src="../../bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" th:src="@{/resources/js/application.js}" src="../../js/application.js"></script>
 
   <script>
@@ -43,7 +43,7 @@
           <li><a href="#">Help</a></li>
         </ul>
       </div>
-    </div> 
+    </div>
     <div class="header--content container-fluid">
       <div class="row-fluid">
         <h1 class="header--content-title span8">
@@ -56,7 +56,7 @@
         </p>
       </div>
     </div>
- 	</div>  
+ 	</div>
 
   <div class="body--container with-filter container-fluid ">
     <h2>Search Styles</h2>  
@@ -103,6 +103,31 @@
         </div>
       </div>
     </div>
+
+	<pre class="prettyprint">
+&lt;div class=&quot;row--container&quot;&gt;
+	&lt;div class=&quot;row-fluid&quot;&gt;
+		&lt;h2&gt;Page List Layouts&lt;/h2&gt;
+		&lt;h3&gt;3 Column layout, with link and descriptions&lt;/h3&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;row-fluid body--container--row&quot;&gt;
+		&lt;div class=&quot;span4&quot;&gt;
+			&lt;a href=&quot;#&quot; class=&quot;body--container--link&quot;&gt;Getting started building a RESTful web service&lt;/a&gt;
+			&lt;p&gt;Aenean eu leo quam. Pellentesque ornare sem&lt;/p&gt;
+		&lt;/div&gt;
+
+		&lt;div class=&quot;span4&quot;&gt;
+			&lt;a href=&quot;#&quot; class=&quot;body--container--link&quot;&gt;Getting started building a RESTful web service&lt;/a&gt;
+			&lt;p&gt;Aenean eu leo quam. Pellentesque ornare sem&lt;/p&gt;
+		&lt;/div&gt;
+
+		&lt;div class=&quot;span4&quot;&gt;
+			&lt;a href=&quot;#&quot; class=&quot;body--container--link&quot; &gt;Getting started building a RESTful web service&lt;/a&gt;
+			&lt;p&gt;Aenean eu leo quam. Pellentesque ornare sem&lt;/p&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+	</pre>
 
     <div class="row--container">
       <div class="row-fluid">
@@ -388,5 +413,8 @@
       </div>
     </div>
   </div>
+
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+
 </body>
 </html>

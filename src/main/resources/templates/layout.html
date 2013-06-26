@@ -14,43 +14,50 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/guide.css.css}" href="../../css/guide.css.css" />
 
 	<script type="text/javascript" th:src="@{/resources/js/jquery.js}" src="../../js/jquery.js"></script>
-	<script type="text/javascript" th:src="@{/resources/js/bootstrap.js}" src="../../js/bootstrap.js"></script>
+	<script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.min.js}" src="../../bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" th:src="@{/resources/js/ZeroClipboard.js}" src="../../js/ZeroClipboard.js"></script>
 	<script type="text/javascript" th:src="@{/resources/js/application.js}" src="../../js/application.js"></script>
 	<script type="text/javascript" th:src="@{/resources/js/guide.js}" src="../../js/guide.js"></script>
 </head>
 <body>
-
-	<div id="wrap">
-
-		<div class="navbar navbar-fixed-top">
+	<div class="header--container">
+		<div class="navbar container-fluid header--navbar">
 			<div class="navbar-inner">
-				<div class="container">
-					<a class="brand" th:href="@{/}" href="pages/index.html">Spring</a>
-					<ul class="nav">
-						<li><a th:href="@{/documentation}" href="documentation/index.html">Documentation</a></li>
-						<li><a th:href="@{/guides}" href="pages/guides/index.html">Guides</a></li>
-						<li><a th:href="@{/projects}" href="pages/projects.html">Projects</a></li>
-						<li><a th:href="@{/blog}" href="pages/blog.html">Blog</a></li>
-						<li><a href="http://forum.springframework.org"> Forum </a></li>
-					</ul>
-                    <div id='authentication' sec:authorize="isFullyAuthenticated()">
-                        <span sec:authentication="name">Bob</span>
-                        <a th:href="@{/signout}" href="/signout">Sign out</a>
-                    </div>
-                </div>
+				<a class="brand" th:href="@{/}" href="pages/index.html">Spring</a>
+				<form class="navbar-form pull-left">
+					<input type="text" class="span4" placeholder="Search Spring" />
+				</form>
+
+				<ul class="nav pull-right">
+					<li><a th:href="@{/documentation}" href="documentation/index.html">Documentation</a></li>
+					<li><a th:href="@{/guides}" href="pages/guides/index.html">Guides</a></li>
+					<li><a th:href="@{/projects}" href="pages/projects.html">Projects</a></li>
+					<li><a th:href="@{/blog}" href="pages/blog.html">Blog</a></li>
+					<li><a href="http://forum.springframework.org"> Forum </a></li>
+				</ul>
+				<div id='authentication' sec:authorize="isFullyAuthenticated()">
+					<span sec:authentication="name">Bob</span>
+					<a th:href="@{/signout}" href="/signout">Sign out</a>
+				</div>
 			</div>
 		</div>
-
-		<div class="container">
-			<div class="page-header">
-				<h1 layout:fragment="header" >Header</h1>
-				<div layout:fragment="overview">Overview</div>
+		<div class="header--content container-fluid">
+			<div class="row-fluid">
+				<h1 class="header--content-title span8" layout:fragment="header">
+					Header title
+				</h1>
 			</div>
-
-			<div layout:fragment="content" >Fake content</div>
+			<div class="row-fluid">
+				<p class="header--content-subtitle span8" layout:fragment="overview">
+					Subttile Ligula Risus Tristique Pharetra and a <a href="#"
+																	  class="header--content-subtitle--link">link</a>
+				</p>
+			</div>
 		</div>
+	</div>
 
+	<div class="body--container with-filter container-fluid " layout:fragment="content">
+		Fake content
 		<div id="footer-push-down"></div>
 	</div>
 
