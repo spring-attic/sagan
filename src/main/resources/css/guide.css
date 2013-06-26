@@ -27,6 +27,10 @@
     padding: 10px 0;
 }
 
+.clone-url input[type="text"] {
+    cursor: default;
+}
+
 .related_resources {
     margin-top: 25px;
 }
