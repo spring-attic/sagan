@@ -106,17 +106,19 @@ public class CreateBlogPostTests {
 		assertThat(post.getTitle(), is("Post Title"));
 		assertThat(post.getRawContent(), is("My Content"));
 		assertThat(post.getCategory(), is(PostCategory.ENGINEERING));
+		assertThat(post.isBroadcast(), is(true));
 	}
 
 	@Test
 	public void persistedPostValuesAreDisplayedCorrectly() throws Exception {
-		Post post = PostBuilder.post().build();
+		Post post = PostBuilder.post().isBroadcast().build();
 		postRepository.save(post);
 
 		MvcResult response = mockMvc.perform(get("/blog/" + post.getId()))
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString(post.getTitle())))
 				.andExpect(content().string(containsString(post.getCategory().getDisplayName())))
+				.andExpect(content().string(containsString("Broadcast")))
 				.andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());

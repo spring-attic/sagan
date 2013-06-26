@@ -29,6 +29,7 @@ public class BlogService_ValidPostTests {
 	private String content = "Rendered HTML\n\nfrom Markdown";
 	private String firstParagraph = "Rendered HTML";
 	private PostCategory category = PostCategory.ENGINEERING;
+	private boolean isBroadcast = true;
 
 	@Mock
 	private PostRepository postRepository;
@@ -48,6 +49,7 @@ public class BlogService_ValidPostTests {
 		postForm.setTitle(title);
 		postForm.setContent(content);
 		postForm.setCategory(category);
+		postForm.setBroadcast(isBroadcast);
 		post = service.addPost(postForm);
 	}
 
@@ -56,6 +58,7 @@ public class BlogService_ValidPostTests {
 		assertThat(post.getTitle(), equalTo(title));
 		assertThat(post.getRawContent(), equalTo(content));
 		assertThat(post.getCategory(), equalTo(category));
+		assertThat(post.isBroadcast(), equalTo(isBroadcast));
 	}
 
 	@Test

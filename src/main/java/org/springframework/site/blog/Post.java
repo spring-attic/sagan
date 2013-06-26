@@ -113,12 +113,15 @@ public class Post implements Serializable {
 		return StringUtils.arrayToDelimitedString(StringUtils.tokenizeToStringArray(cleanedTitle, " "), "-");
 	}
 
-	public void setIsBroadcast(boolean isBroadcast) {
+	public void setBroadcast(boolean isBroadcast) {
 		this.broadcast = isBroadcast;
 	}
 
-	public boolean getIsBroadcast() {
+	public boolean isBroadcast() {
 		return broadcast;
 	}
 
+	public String getPath() {
+		return "/blog/" + getId() + "-" + getSlug();
+	}
 }

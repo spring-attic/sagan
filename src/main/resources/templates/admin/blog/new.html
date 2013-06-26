@@ -12,6 +12,7 @@
 		<select name="category" th:field="*{category}" >
 			<option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.displayName}">Category</option>
 		</select>
+        <label for="broadcast">Broadcast:<input type="checkbox" th:field="*{broadcast}" id="broadcast" name="broadcast" /></label>
         <button type="submit">Publish</button>
     </form>
 </div>

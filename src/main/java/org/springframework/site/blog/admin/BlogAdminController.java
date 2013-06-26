@@ -37,7 +37,7 @@ public class BlogAdminController {
 	@RequestMapping(value = "", method = { POST })
 	public String createPost(PostForm postForm) {
 		Post newPost = service.addPost(postForm);
-		return "redirect:/blog/" + newPost.getId() + "-" + newPost.getSlug();
+		return "redirect:" + newPost.getPath();
 	}
 
 }

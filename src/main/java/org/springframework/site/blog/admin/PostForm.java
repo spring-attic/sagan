@@ -6,6 +6,7 @@ public class PostForm {
 	private String title;
 	private String content;
 	private PostCategory category;
+	private boolean isBroadcast;
 
 	public String getTitle() {
 		return title;
@@ -29,5 +30,13 @@ public class PostForm {
 
 	public void setCategory(PostCategory category) {
 		this.category = category;
+	}
+
+	public boolean isBroadcast() {
+		return isBroadcast;
+	}
+
+	public void setBroadcast(boolean broadcast) {
+		isBroadcast = broadcast;
 	}
 }

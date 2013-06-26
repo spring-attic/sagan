@@ -27,6 +27,7 @@ public class BlogService {
 		Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
 		post.setRenderedContent(markdownService.renderToHtml(content));
 		post.setRenderedSummary(markdownService.renderToHtml(extractFirstParagraph(content, 500)));
+		post.setBroadcast(postForm.isBroadcast());
 		repository.save(post);
 		return post;
 	}

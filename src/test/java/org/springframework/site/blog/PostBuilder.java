@@ -62,7 +62,7 @@ public class PostBuilder {
 		if (date != null) {
 			post.setCreatedDate(date);
 		}
-		post.setIsBroadcast(isBroadcast);
+		post.setBroadcast(isBroadcast);
 		return post;
 	}
 
