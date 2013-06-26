@@ -38,7 +38,12 @@ public class GettingStartedGuideTests {
 	}
 
 	@Test
-	public void testGetCiStatusUrl() throws Exception {
-		assertThat(guide.getCiStatusUrl(), is("https://drone.io/github.com/springframework-meta/gs-rest-service/status.png"));
+	public void testGetCiStatusImageUrl() throws Exception {
+		assertThat(guide.getCiStatusImageUrl(), is("https://drone.io/github.com/springframework-meta/gs-rest-service/status.png"));
+	}
+
+	@Test
+	public void testGetCiLatestUrl() throws Exception {
+		assertThat(guide.getCiLatestUrl(), is("https://drone.io/github.com/springframework-meta/gs-rest-service/latest"));
 	}
 }

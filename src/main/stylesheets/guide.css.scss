@@ -3,34 +3,36 @@
     color: black;
     border-bottom: 1px solid black;
     background: url(/img/download_repo.png) no-repeat 13px 8px, #ccc;
+    &:hover {
+      background: url(/img/download_repo.png) no-repeat 13px 8px, #ddd;
+      color: black;
+      text-decoration: none;
+  }
 }
 
-.github_download:hover {
-    background: url(/img/download_repo.png) no-repeat 13px 8px, #ddd;
-    color: black;
-    text-decoration: none;
-}
 
 .copy-button {
     background-color: #cccccc;
     margin-bottom: 10px;
+    &.snippet {
+        float: right;
+    }
+    &.zeroclipboard-is-hover { background-color: #eeeeee; }
+    &.zeroclipboard-is-active { background-color: #aaaaaa; }
 }
 
-.copy-button.snippet {
-    float: right;
-}
-
-.copy-button.zeroclipboard-is-hover { background-color: #eeeeee; }
-.copy-button.zeroclipboard-is-active { background-color: #aaaaaa; }
 
 .clone-url {
     padding: 10px 0;
-}
-
-.clone-url input[type="text"] {
-    cursor: default;
+    input[type="text"] {
+        cursor: default;
+    }
 }
 
 .related_resources {
     margin-top: 25px;
+}
+
+a.ci-status {
+    float: right;
 }

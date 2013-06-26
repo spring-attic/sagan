@@ -11,10 +11,11 @@
 	    <aside id='sidebar' class="span4">
             <div class="github-actions">
 
-                <h3>Build System</h3>
-                <img src="https://drone.io/github.com/springframework-meta/gs-rest-service/status.png" th:src="${guide.ciStatusUrl}"/>
-
-                <h3>Get the code</h3>
+                <h3>Get the code
+                    <a th:href="${guide.ciLatestUrl}" class="ci-status">
+                        <img src="https://drone.io/github.com/springframework-meta/gs-rest-service/status.png" th:src="${guide.ciStatusImageUrl}"/>
+                    </a>
+                </h3>
 
                 <div class="btn-group">
                     <button class="btn active" data-protocol="https">HTTPS</button>
