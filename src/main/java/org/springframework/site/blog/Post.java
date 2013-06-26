@@ -10,8 +10,6 @@ import java.util.Date;
 @Entity
 public class Post implements Serializable {
 
-	private static final long serialVersionUID = 6541602744396162438L;
-
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -39,7 +37,9 @@ public class Post implements Serializable {
 	private Date createdDate = new Date();
 
 	@Column(nullable = false)
-	@Type(type="boolean")
+	private boolean draft = true;
+
+	@Column(nullable = false)
 	private boolean broadcast = false;
 
 	@SuppressWarnings("unused")
@@ -111,6 +111,14 @@ public class Post implements Serializable {
 
 		String cleanedTitle = title.toLowerCase().replace("\n", " ").replaceAll("[^a-z\\d\\s]", "");
 		return StringUtils.arrayToDelimitedString(StringUtils.tokenizeToStringArray(cleanedTitle, " "), "-");
+	}
+
+	public boolean isDraft() {
+		return draft;
+	}
+
+	public void setDraft(boolean draft) {
+		this.draft = draft;
 	}
 
 	public void setBroadcast(boolean isBroadcast) {

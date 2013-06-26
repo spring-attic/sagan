@@ -1,7 +1,8 @@
-package org.springframework.site.blog;
+package org.springframework.site.blog.web;
 
 import org.junit.Test;
 import org.springframework.data.domain.Sort;
+import org.springframework.site.blog.web.BlogPostsPageRequest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -1,12 +1,14 @@
-package org.springframework.site.blog.admin;
+package org.springframework.site.blog;
 
+import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
 
 public class PostForm {
 	private String title;
 	private String content;
 	private PostCategory category;
-	private boolean isBroadcast;
+	private boolean broadcast;
+    private boolean draft;
 
 	public String getTitle() {
 		return title;
@@ -33,10 +35,19 @@ public class PostForm {
 	}
 
 	public boolean isBroadcast() {
-		return isBroadcast;
+		return broadcast;
 	}
 
 	public void setBroadcast(boolean broadcast) {
-		isBroadcast = broadcast;
+		this.broadcast = broadcast;
 	}
+
+    public boolean isDraft() {
+        return draft;
+    }
+
+    public void setDraft(boolean draft) {
+        this.draft = draft;
+    }
+
 }

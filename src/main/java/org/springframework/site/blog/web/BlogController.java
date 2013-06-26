@@ -1,7 +1,8 @@
-package org.springframework.site.blog;
+package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.site.blog.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,7 @@ public class BlogController {
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { GET, HEAD })
 	public String showPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
-		model.addAttribute("post", service.getPost(postId));
+		model.addAttribute("post", service.getPublishedPost(postId));
 		return "blog/show";
 	}
 

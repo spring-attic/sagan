@@ -1,6 +1,8 @@
-package org.springframework.site.blog;
+package org.springframework.site.blog.web;
 
 import org.junit.Test;
+import org.springframework.site.blog.PostCategory;
+import org.springframework.site.blog.web.PostCategoryFormatter;
 
 import java.text.ParseException;
 

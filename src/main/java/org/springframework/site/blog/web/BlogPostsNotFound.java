@@ -1,4 +1,4 @@
-package org.springframework.site.blog;
+package org.springframework.site.blog.web;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 

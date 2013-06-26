@@ -1,4 +1,4 @@
-package org.springframework.site.admin.blog;
+package org.springframework.site.blog.web;
 
 
 import org.junit.Before;
@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
-import org.springframework.site.blog.admin.BlogAdminController;
+import org.springframework.site.blog.web.BlogAdminController;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.util.Collections;
@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
@@ -28,6 +29,8 @@ public class BlogAdminControllerTests {
 	@Mock
 	private BlogService blogService;
 
+	private ExtendedModelMap model = new ExtendedModelMap();
+
 	@Before
 	public void setup() {
 		controller = new BlogAdminController(blogService);
@@ -36,9 +39,22 @@ public class BlogAdminControllerTests {
 	@Test
 	public void dashboardShowsUsersPosts() {
 		List<Post> posts = Collections.singletonList(PostBuilder.post().build());
-		when(blogService.mostRecentPosts(any(PageRequest.class))).thenReturn(posts);
+		when(blogService.allPosts(any(PageRequest.class))).thenReturn(posts);
 		ExtendedModelMap model = new ExtendedModelMap();
 		controller.dashboard(model);
-		assertThat((List< Post >)model.get("myPosts"), equalTo(posts));
+		assertThat((List< Post >)model.get("posts"), equalTo(posts));
+	}
+
+	@Test
+	public void showPostModel() {
+		Post post = PostBuilder.post().build();
+		when(blogService.getPost(post.getId())).thenReturn(post);
+		controller.showPost(post.getId(), "1-post-title", model);
+		assertThat((Post) model.get("post"), is(post));
+	}
+
+	@Test
+	public void showPostView() {
+		assertThat(controller.showPost(1L, "not important", model), is("admin/blog/show"));
 	}
 }

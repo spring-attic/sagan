@@ -1,6 +1,7 @@
-package org.springframework.site.blog;
+package org.springframework.site.blog.web;
 
 import org.springframework.format.Formatter;
+import org.springframework.site.blog.PostCategory;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;

@@ -1,4 +1,4 @@
-package org.springframework.site.blog;
+package org.springframework.site.blog.web;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

@@ -11,7 +11,7 @@ import org.springframework.bootstrap.context.initializer.ConfigFileApplicationCo
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
-import org.springframework.site.blog.repository.PostRepository;
+import org.springframework.site.blog.PostRepository;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -65,11 +65,12 @@ public class CreateBlogPostTests {
 	}
 
 	@Test
-	public void redirectToBlogPostAfterCreation() throws Exception {
+	public void redirectToPublishedPostAfterCreation() throws Exception {
 		MockHttpServletRequestBuilder createPostRequest = post("/admin/blog");
 		createPostRequest.param("title", "Post Title");
 		createPostRequest.param("content", "My Content");
 		createPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
+        createPostRequest.param("draft", "false");
 
 		this.mockMvc.perform(createPostRequest)
 				.andExpect(status().isFound())
@@ -78,6 +79,25 @@ public class CreateBlogPostTests {
 					public void match(MvcResult result) {
 						String redirectedUrl = result.getResponse().getRedirectedUrl();
 						assertTrue("Expected redirect to blog, got: " + redirectedUrl, redirectedUrl.matches("^/blog/\\d+-post-title"));
+					}
+				});
+	}
+
+	@Test
+	public void redirectToDraftPostAfterCreation() throws Exception {
+		MockHttpServletRequestBuilder createPostRequest = post("/admin/blog");
+		createPostRequest.param("title", "Post Title");
+		createPostRequest.param("content", "My Content");
+		createPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
+		createPostRequest.param("draft", "true");
+
+		this.mockMvc.perform(createPostRequest)
+				.andExpect(status().isFound())
+				.andExpect(new ResultMatcher() {
+					@Override
+					public void match(MvcResult result) {
+						String redirectedUrl = result.getResponse().getRedirectedUrl();
+						assertTrue("Expected redirect to admin blog, got: " + redirectedUrl, redirectedUrl.matches("^/admin/blog/\\d+-post-title"));
 					}
 				});
 	}

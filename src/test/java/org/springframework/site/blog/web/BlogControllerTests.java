@@ -1,10 +1,16 @@
-package org.springframework.site.blog;
+package org.springframework.site.blog.web;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Pageable;
+import org.springframework.site.blog.BlogService;
+import org.springframework.site.blog.PaginationInfo;
+import org.springframework.site.blog.Post;
+import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.blog.web.BlogController;
+import org.springframework.site.blog.web.BlogPostsPageRequest;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.util.ArrayList;
@@ -22,7 +28,7 @@ public class BlogControllerTests {
 	private static final int TEST_PAGE = 1;
 
 	@Mock
-	BlogService blogService;
+    BlogService blogService;
 
 	private BlogController controller;
 	private ExtendedModelMap model = new ExtendedModelMap();
@@ -74,7 +80,7 @@ public class BlogControllerTests {
 	@Test
 	public void showPostModel() {
 		Post post = PostBuilder.post().build();
-		when(blogService.getPost(post.getId())).thenReturn(post);
+		when(blogService.getPublishedPost(post.getId())).thenReturn(post);
 		controller.showPost(post.getId(), "1-post-title", model);
 		assertThat((Post) model.get("post"), is(post));
 	}

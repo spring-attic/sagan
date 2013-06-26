@@ -8,7 +8,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 
-public class BlogPostTests {
+public class PostTests {
 
 	@Test
 	public void slugReplacesSpacesWithDashes() {

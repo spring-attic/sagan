@@ -1,12 +1,14 @@
-package org.springframework.site.blog.admin;
+package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
+import org.springframework.site.blog.PostForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -24,7 +26,7 @@ public class BlogAdminController {
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String dashboard(Model model) {
-		model.addAttribute("myPosts", service.mostRecentPosts(new PageRequest(0, 20)));
+		model.addAttribute("posts", service.allPosts(new PageRequest(0, 20)));
 		return "admin/blog/index";
 	}
 
@@ -34,10 +36,18 @@ public class BlogAdminController {
 		return "admin/blog/new";
 	}
 
+	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = {GET, HEAD})
+	public String showPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
+		model.addAttribute("post", service.getPost(postId));
+		return "admin/blog/show";
+	}
+
 	@RequestMapping(value = "", method = { POST })
 	public String createPost(PostForm postForm) {
 		Post newPost = service.addPost(postForm);
-		return "redirect:" + newPost.getPath();
+		return newPost.isDraft() ?
+				"redirect:/admin" + newPost.getPath() :
+				"redirect:" + newPost.getPath();
 	}
 
 }

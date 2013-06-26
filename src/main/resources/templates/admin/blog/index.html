@@ -14,40 +14,16 @@
 <div layout:fragment="content" class="container">
 	<div class="row">
 		<div id="content" class="span8">
-			<h2>Drafts</h2>
+			<h2>Posts</h2>
 			<ul class='posts'>
-				<li th:each="post : ${drafts}">
+				<li th:each="post : ${posts}">
 					<h2 th:text="${post.title}">This week in Spring</h2>
 					<div class="byline">
 						<span class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</span>
 						<span class='author'>Author TBD</span>
 						<span class='category' th:text="${post.category}">Category</span>
 					</div>
-					<div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
-				</li>
-			</ul>
-			<h2>Scheduled Posts</h2>
-			<ul class='posts'>
-				<li th:each="post : ${scheduledPosts}">
-					<h2 th:text="${post.title}">This week in Spring</h2>
-					<div class="byline">
-						<span class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</span>
-						<span class='author'>Author TBD</span>
-						<span class='category' th:text="${post.category}">Category</span>
-					</div>
-					<div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
-				</li>
-			</ul>
-			<h2>Live Posts</h2>
-			<ul class='posts'>
-				<li th:each="post : ${myPosts}">
-					<h2 th:text="${post.title}">This week in Spring</h2>
-					<div class="byline">
-						<span class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</span>
-						<span class='author'>Author TBD</span>
-						<span class='category' th:text="${post.category}">Category</span>
-					</div>
-					<div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
+                    <div class='draft' th:if="${post.draft}">Draft</div>
 				</li>
 			</ul>
 		</div>

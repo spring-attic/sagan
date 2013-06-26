@@ -11,7 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.site.blog.repository.PostRepository;
+import org.springframework.site.blog.web.BlogPostsPageRequest;
+import org.springframework.site.blog.web.NoSuchBlogPostException;
 import org.springframework.site.services.MarkdownService;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -43,8 +45,31 @@ public class BlogService_QueryTests {
 	}
 
 	@Test
+	public void postIsRetrievable() {
+		Post post = PostBuilder.post().build();
+		when(postRepository.findOne(anyLong())).thenReturn(post);
+		assertThat(post, equalTo(service.getPost(post.getId())));
+		verify(postRepository).findOne(anyLong());
+	}
+
+	@Test
+	public void publishedPostIsRetrievable() {
+		Post post = PostBuilder.post().build();
+		when(postRepository.findByIdAndDraftFalse(anyLong())).thenReturn(post);
+		assertThat(post, equalTo(service.getPublishedPost(post.getId())));
+		verify(postRepository).findByIdAndDraftFalse(anyLong());
+	}
+
+	@Test
 	public void nonExistentPost() {
 		when(postRepository.findOne(anyLong())).thenReturn(null);
+		expected.expect(NoSuchBlogPostException.class);
+		service.getPost(999L);
+	}
+
+	@Test
+	public void nonPublishedPost() {
+		when(postRepository.findByIdAndDraftFalse(anyLong())).thenReturn(null);
 		expected.expect(NoSuchBlogPostException.class);
 		service.getPost(999L);
 	}
@@ -53,10 +78,10 @@ public class BlogService_QueryTests {
 	public void listPosts() {
 		Pageable firstTenPosts = new BlogPostsPageRequest(1);
 		List<Post> posts = new ArrayList<Post>();
-		posts.add(new Post("title", "content", PostCategory.ENGINEERING));
+		posts.add(PostBuilder.post().build());
 		Page<Post> page = new PageImpl<Post>(posts);
 
-		when(postRepository.findAll(firstTenPosts)).thenReturn(page);
+		when(postRepository.findByDraftFalse(firstTenPosts)).thenReturn(page);
 
 		assertThat(service.mostRecentPosts(firstTenPosts), is(posts));
 	}
@@ -65,10 +90,10 @@ public class BlogService_QueryTests {
 	public void listPostsForCategory() {
 		Pageable firstTenPosts = new BlogPostsPageRequest(1);
 		List<Post> posts = new ArrayList<Post>();
-		posts.add(new Post("title", "content", PostCategory.ENGINEERING));
+		posts.add(PostBuilder.post().category(PostCategory.ENGINEERING).build());
 		Page<Post> page = new PageImpl<Post>(posts);
 
-		when(postRepository.findByCategory(PostCategory.ENGINEERING, firstTenPosts)).thenReturn(page);
+		when(postRepository.findByCategoryAndDraftFalse(PostCategory.ENGINEERING, firstTenPosts)).thenReturn(page);
 
 		assertThat(service.mostRecentPosts(PostCategory.ENGINEERING, firstTenPosts), is(posts));
 	}
@@ -103,8 +128,20 @@ public class BlogService_QueryTests {
 		posts.add(PostBuilder.post().isBroadcast().build());
 		Page<Post> page = new PageImpl<Post>(posts);
 
-		when(postRepository.findByBroadcast(eq(true), any(Pageable.class))).thenReturn(page);
+		when(postRepository.findByBroadcastAndDraftFalse(eq(true), any(Pageable.class))).thenReturn(page);
 
 		assertThat(service.mostRecentBroadcastPosts(firstTenPosts), is(posts));
+	}
+
+	@Test
+	public void allPosts() {
+		List<Post> posts = new ArrayList<Post>();
+		posts.add(PostBuilder.post().draft().build());
+		posts.add(PostBuilder.post().build());
+		Page<Post> page = new PageImpl<Post>(posts);
+
+		when(postRepository.findAll(any(Pageable.class))).thenReturn(page);
+
+		assertThat(service.allPosts(new BlogPostsPageRequest(1)), is(posts));
 	}
 }

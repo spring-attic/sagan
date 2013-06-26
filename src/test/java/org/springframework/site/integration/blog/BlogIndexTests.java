@@ -15,7 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
-import org.springframework.site.blog.repository.PostRepository;
+import org.springframework.site.blog.PostRepository;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -169,7 +169,7 @@ public class BlogIndexTests {
 				.title("An Engineering Post")
 				.category(PostCategory.ENGINEERING).build());
 
-		Page<Post> posts = postRepository.findByCategory(PostCategory.ENGINEERING, new PageRequest(0, 10));
+		Page<Post> posts = postRepository.findByCategoryAndDraftFalse(PostCategory.ENGINEERING, new PageRequest(0, 10));
 		MatcherAssert.assertThat(posts.getSize(), greaterThanOrEqualTo(1));
 
 		this.mockMvc.perform(get("/blog/category/" + PostCategory.ENGINEERING.getUrlSlug()))

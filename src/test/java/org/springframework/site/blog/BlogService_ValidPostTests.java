@@ -7,8 +7,6 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.site.blog.admin.PostForm;
-import org.springframework.site.blog.repository.PostRepository;
 import org.springframework.site.services.MarkdownService;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -29,7 +27,8 @@ public class BlogService_ValidPostTests {
 	private String content = "Rendered HTML\n\nfrom Markdown";
 	private String firstParagraph = "Rendered HTML";
 	private PostCategory category = PostCategory.ENGINEERING;
-	private boolean isBroadcast = true;
+	private boolean broadcast = true;
+	private boolean draft = false;
 
 	@Mock
 	private PostRepository postRepository;
@@ -49,7 +48,7 @@ public class BlogService_ValidPostTests {
 		postForm.setTitle(title);
 		postForm.setContent(content);
 		postForm.setCategory(category);
-		postForm.setBroadcast(isBroadcast);
+		postForm.setBroadcast(broadcast);
 		post = service.addPost(postForm);
 	}
 
@@ -58,7 +57,8 @@ public class BlogService_ValidPostTests {
 		assertThat(post.getTitle(), equalTo(title));
 		assertThat(post.getRawContent(), equalTo(content));
 		assertThat(post.getCategory(), equalTo(category));
-		assertThat(post.isBroadcast(), equalTo(isBroadcast));
+		assertThat(post.isBroadcast(), equalTo(broadcast));
+		assertThat(post.isDraft(), equalTo(draft));
 	}
 
 	@Test
@@ -75,13 +75,5 @@ public class BlogService_ValidPostTests {
 	public void postIsPersisted() {
 		verify(postRepository).save(any(Post.class));
 	}
-
-	@Test
-	public void postIsRetrievable() {
-		when(postRepository.findOne(anyLong())).thenReturn(post);
-		assertThat(post, equalTo(service.getPost(post.getId())));
-		verify(postRepository).findOne(anyLong());
-	}
-
 
 }

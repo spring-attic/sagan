@@ -10,7 +10,8 @@ public class PostBuilder {
 	private String renderedContent;
 	private String renderedSummary;
 	private Date date;
-	private boolean isBroadcast;
+	private boolean broadcast;
+	private boolean draft;
 
 	public PostBuilder() {
 		this.title = "My Post";
@@ -18,7 +19,8 @@ public class PostBuilder {
 		this.rawContent = "post body";
 		this.renderedContent = "post body";
 		this.renderedSummary = "summary";
-		this.isBroadcast = false;
+		this.broadcast = false;
+		this.draft = false;
 	}
 
 	public static PostBuilder post() {
@@ -55,6 +57,11 @@ public class PostBuilder {
 		return this;
 	}
 
+	public PostBuilder draft() {
+		this.draft = true;
+		return this;
+	}
+
 	public Post build() {
 		Post post = new Post(title, rawContent, category);
 		post.setRenderedContent(renderedContent);
@@ -62,12 +69,13 @@ public class PostBuilder {
 		if (date != null) {
 			post.setCreatedDate(date);
 		}
-		post.setBroadcast(isBroadcast);
+		post.setBroadcast(broadcast);
+		post.setDraft(draft);
 		return post;
 	}
 
 	public PostBuilder isBroadcast() {
-		isBroadcast = true;
+		broadcast = true;
 		return this;
 	}
 }

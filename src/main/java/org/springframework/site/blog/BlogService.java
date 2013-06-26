@@ -3,8 +3,7 @@ package org.springframework.site.blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.site.blog.admin.PostForm;
-import org.springframework.site.blog.repository.PostRepository;
+import org.springframework.site.blog.web.NoSuchBlogPostException;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +27,7 @@ public class BlogService {
 		post.setRenderedContent(markdownService.renderToHtml(content));
 		post.setRenderedSummary(markdownService.renderToHtml(extractFirstParagraph(content, 500)));
 		post.setBroadcast(postForm.isBroadcast());
+		post.setDraft(postForm.isDraft());
 		repository.save(post);
 		return post;
 	}
@@ -47,19 +47,27 @@ public class BlogService {
 	}
 
 	public Post getPost(Long postId) {
-		Post one = repository.findOne(postId);
-		if (one == null) {
+		Post post = repository.findOne(postId);
+		if (post == null) {
 			throw new NoSuchBlogPostException("Blog post not found with Id=" + postId);
 		}
-		return one;
+		return post;
+	}
+
+	public Post getPublishedPost(Long postId) {
+		Post post = repository.findByIdAndDraftFalse(postId);
+		if (post == null) {
+			throw new NoSuchBlogPostException("Blog post not found with Id=" + postId);
+		}
+		return post;
 	}
 
 	public List<Post> mostRecentPosts(Pageable pageRequest) {
-		return repository.findAll(pageRequest).getContent();
+		return repository.findByDraftFalse(pageRequest).getContent();
 	}
 
 	public List<Post> mostRecentPosts(PostCategory category, Pageable pageRequest) {
-		return repository.findByCategory(category, pageRequest).getContent();
+		return repository.findByCategoryAndDraftFalse(category, pageRequest).getContent();
 	}
 
 	public PaginationInfo paginationInfo(PageRequest pageRequest) {
@@ -67,6 +75,10 @@ public class BlogService {
 	}
 
 	public List<Post> mostRecentBroadcastPosts(Pageable pageRequest) {
-		return repository.findByBroadcast(true, pageRequest).getContent();
+		return repository.findByBroadcastAndDraftFalse(true, pageRequest).getContent();
+	}
+
+	public List<Post> allPosts(Pageable pageRequest) {
+		return repository.findAll(pageRequest).getContent();
 	}
 }
