@@ -1,0 +1,28 @@
+$base-font-family: 'Open Sans', sans-serif;
+$secondary-font-family: Quicksand, sans-serif;
+
+body, h1, h2, h3, p, input {
+  font-family: $base-font-family;
+  margin: 0;
+  font-weight: 400;
+}
+
+h1 {
+	font-size: 32px;
+  font-family: $secondary-font-family;
+}
+
+h2 {
+	font-size: 19px;
+  font-weight: 400;
+}
+
+h3, .popover-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+p, .list-link {
+  font-size: 14px;
+  line-height: 21px;
+}
+

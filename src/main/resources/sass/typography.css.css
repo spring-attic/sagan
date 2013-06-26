@@ -1,0 +1,20 @@
+body, h1, h2, h3, p, input {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  font-weight: 400; }
+
+h1 {
+  font-size: 32px;
+  font-family: Quicksand, sans-serif; }
+
+h2 {
+  font-size: 19px;
+  font-weight: 400; }
+
+h3, .popover-title {
+  font-size: 14px;
+  font-weight: bold; }
+
+p, .list-link {
+  font-size: 14px;
+  line-height: 21px; }
