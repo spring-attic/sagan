@@ -36,4 +36,9 @@ public class GettingStartedGuideTests {
 	public void testGetRepoSubversionUrl() throws Exception {
 		assertThat(guide.getGitRepoSubversionUrl(), is("https://github.com/springframework-meta/gs-rest-service"));
 	}
+
+	@Test
+	public void testGetCiStatusUrl() throws Exception {
+		assertThat(guide.getCiStatusUrl(), is("https://drone.io/github.com/springframework-meta/gs-rest-service/status.png"));
+	}
 }

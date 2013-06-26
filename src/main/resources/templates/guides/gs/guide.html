@@ -12,7 +12,7 @@
             <div class="github-actions">
 
                 <h3>Build System</h3>
-                <img src="https://drone.io/github.com/springframework-meta/gs-rest-service/status.png" th:src="'https://drone.io/github.com/springframework-meta/gs-'+${guide.guideId}+'/status.png'"/>
+                <img src="https://drone.io/github.com/springframework-meta/gs-rest-service/status.png" th:src="${guide.ciStatusUrl}"/>
 
                 <h3>Get the code</h3>
 
