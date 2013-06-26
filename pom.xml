@@ -165,17 +165,15 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
-				<excludes>
-					<exclude>**/cacerts</exclude>
-					<exclude>**/*.swf</exclude>
-				</excludes>
+                <includes>
+                    <include>**/application.yml</include>
+                </includes>
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
-				<includes>
-					<include>**/cacerts</include>
-					<include>**/*.swf</include>
-				</includes>
+                <excludes>
+                    <exclude>**/application.yml</exclude>
+                </excludes>
 			</resource>
 		</resources>
 		<plugins>
