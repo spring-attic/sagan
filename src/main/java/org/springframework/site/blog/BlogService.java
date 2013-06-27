@@ -86,4 +86,20 @@ public class BlogService {
 	private PaginationInfo buildPaginationInfo(Pageable pageRequest) {
 		return new PaginationInfo(pageRequest, repository.count());
 	}
+
+	public void updatePost(Post post, PostForm postForm) {
+		String content = postForm.getContent();
+
+		post.setTitle(postForm.getTitle());
+		post.setRawContent(content);
+		post.setCategory(postForm.getCategory());
+
+		post.setRenderedContent(markdownService.renderToHtml(content));
+		post.setRenderedSummary(markdownService.renderToHtml(extractFirstParagraph(content, 500)));
+
+		post.setBroadcast(postForm.isBroadcast());
+		post.setDraft(postForm.isDraft());
+
+		repository.save(post);
+	}
 }

@@ -22,6 +22,10 @@
 						<span class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</span>
 						<span class='author'>Author TBD</span>
 						<span class='category' th:text="${post.category}">Category</span>
+
+						<nav>
+							<span><a th:href="@{'/admin' + ${post.path} + '/edit'}" href="/admin/blog/edit">Edit</a></span>
+						</nav>
 					</div>
                     <div class='draft' th:if="${post.draft}">Draft</div>
 				</li>

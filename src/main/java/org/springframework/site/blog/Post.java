@@ -133,20 +133,5 @@ public class Post implements Serializable {
 		return "/blog/" + getId() + "-" + getSlug();
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
 
-		Post post = (Post) o;
-
-		if (id != null ? !id.equals(post.id) : post.id != null) return false;
-
-		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
-	}
 }

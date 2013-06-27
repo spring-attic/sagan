@@ -1,14 +1,21 @@
 package org.springframework.site.blog;
 
-import org.springframework.site.blog.Post;
-import org.springframework.site.blog.PostCategory;
-
 public class PostForm {
 	private String title;
 	private String content;
 	private PostCategory category;
 	private boolean broadcast;
     private boolean draft;
+
+	public PostForm() {	}
+
+	public PostForm(Post post) {
+		title = post.getTitle();
+		content = post.getRawContent();
+		category = post.getCategory();
+		broadcast = post.isBroadcast();
+		draft = post.isDraft();
+	}
 
 	public String getTitle() {
 		return title;

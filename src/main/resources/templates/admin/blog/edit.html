@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>SpringFramework - Edit Blog Post</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <form th:action="@{'/admin' + ${post.path}}" action="#" method="post" th:object="${postForm}">
+        <label for="title">Title:<input id="title" type="text" th:field="*{title}" name="title" /></label>
+        <label for="content">Content:<textarea id="content" th:field="*{content}" name="content" /></label>
+		<select name="category" th:field="*{category}" >
+			<option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.displayName}">Category</option>
+		</select>
+        <label for="broadcast">Broadcast:<input type="checkbox" th:field="*{broadcast}" id="broadcast" name="broadcast" /></label>
+        <button name="draft" value="false" type="submit">Post Now</button>
+        <button name="draft" value="true" type="submit">Save &amp; View Draft</button>
+    </form>
+</div>
+</body>
+</html>
