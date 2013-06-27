@@ -1,10 +1,16 @@
 $off-white: #FCFAFB;
 $black-green: #3A3C2F; 
-$lime: #66AB34;
-$leaf: #426B4F;
+$lime: #7E9456;
+$leaf: #4E681E;
 $bark: #AF9A85;
-$light-grey: #F6F6F6;
+$light-grey: #ECEBEB;
 $medium-grey: #DEDEDE;
+$navy: #1F2D36;
+$slate: #44474C;
+$mauve: #665A6B;
+$denim: #8395A1;
+
+
 
 
 body {
@@ -54,6 +60,10 @@ body {
 
 .body--container--row {
   margin-bottom: 30px;
+}
+
+.clear {
+  clear: both;
 }
 
 .body--container--link {
@@ -135,23 +145,66 @@ input.floating-input {
 }
 
 .bottom-slide--container {
-  background-color: rgba(204, 204, 204, 0.54);
   height: 190px;
   overflow: hidden;
+  border-radius: 3px;
+  background-color: rgba(204, 204, 204, 1);
+  border: 1px solid darken($medium-grey, 10%);
+  box-shadow: 1px 2px 3px rgba(204, 204, 204, 0.5);
+
+  .bottom-slider--image {
+    background-image: url("http://imgs.mi9.com/uploads/landscape/2101/beautiful-leaf-wallpapers_1280x960_28083.jpg");
+    background-size: cover;
+    height: 137px;
+
+    transition: all 0.33s;
+    -wekit-transition: all 0.33s;
+    -moz-transition: all 0.33s;
+    -o-transition: all 0.33s;
+    -ms-transition: all 0.33s;
+  }
   .bottom-slider {
-    background-color: rgba(153, 153, 153, 0.54);
+    background-color: $light-grey;
     padding: 15px 10px;
-    margin-top: 120px;
+    border-top: 1px solid darken($medium-grey, 25%);
+    transition: all 0.33s;
+    -wekit-transition: all 0.33s;
+    -moz-transition: all 0.33s;
+    -o-transition: all 0.33s;
+    -ms-transition: all 0.33s;
     .bottom-slider--title {
       display: inline-block;
       max-width: 360px;
       line-height: 14px;
+
     }
     .bottom-slider--icon {
       color: #333;
       font-size: 27px;
       line-height: 22px;
       font-size: 27px;
+    }
+    .bottom-slider--more-info {
+      opacity:0;
+    }
+  }
+  &:hover {
+    .bottom-slider--image {
+      transform: translateY(-26px);
+      -webkit-transform: translateY(-26px);
+      -moz-transform: translateY(-26px);
+      -o-transform: translateY(-26px);
+      -ms-transform: translateY(-26px);
+    }
+    .bottom-slider {
+      transform: translateY(-53px);
+      -webkit-transform: translateY(-53px);
+      -moz-transform: translateY(-53px);
+      -o-transform: translateY(-53px);
+      -ms-transform: translateY(-53px);
+    }
+    .bottom-slider--more-info {
+      opacity: 1;
     }
   }
 }
