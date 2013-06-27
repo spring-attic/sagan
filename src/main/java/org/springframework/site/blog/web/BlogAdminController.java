@@ -64,7 +64,7 @@ public class BlogAdminController {
 				"redirect:" + newPost.getPath();
 	}
 
-	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { PUT, POST })
+	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = PUT)
 	public String updatePost(@PathVariable Long postId, PostForm postForm) {
 		Post post = service.getPost(postId);
 		service.updatePost(post, postForm);
@@ -73,7 +73,7 @@ public class BlogAdminController {
 				"redirect:" + post.getPath();
 	}
 
-	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}/delete", method = { POST, DELETE })
+	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = DELETE)
 	public String deletePost(@PathVariable Long postId) {
 		Post post = service.getPost(postId);
 		service.deletePost(post);

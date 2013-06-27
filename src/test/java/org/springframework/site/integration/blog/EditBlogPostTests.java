@@ -26,7 +26,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -101,7 +101,7 @@ public class EditBlogPostTests {
 	}
 
 	private MockHttpServletRequestBuilder createEditPostRequest() {
-		MockHttpServletRequestBuilder editPostRequest = post("/admin"+ post.getPath());
+		MockHttpServletRequestBuilder editPostRequest = put("/admin"+ post.getPath());
 		editPostRequest.param("title", "New Title");
 		editPostRequest.param("content", "New Content");
 		editPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());

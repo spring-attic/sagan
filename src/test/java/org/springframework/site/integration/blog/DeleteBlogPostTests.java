@@ -22,7 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -77,7 +77,7 @@ public class DeleteBlogPostTests {
 	}
 
 	private MockHttpServletRequestBuilder createDeletePostRequest() {
-		MockHttpServletRequestBuilder editPostRequest = post("/admin"+ post.getPath() + "/delete");
+		MockHttpServletRequestBuilder editPostRequest = delete("/admin"+ post.getPath());
 		return editPostRequest;
 	}
 

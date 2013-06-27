@@ -7,6 +7,7 @@
 <body>
 <div layout:fragment="content" class="container">
     <form th:action="@{'/admin' + ${post.path}}" action="#" method="post" th:object="${postForm}">
+		<input type="hidden" name="_method" value="PUT" />
         <label for="title">Title:<input id="title" type="text" th:field="*{title}" name="title" /></label>
         <label for="content">Content:<textarea id="content" th:field="*{content}" name="content" /></label>
 		<select name="category" th:field="*{category}" >

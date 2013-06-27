@@ -25,7 +25,8 @@
 
 						<nav>
 							<span><a th:href="@{'/admin' + ${post.path} + '/edit'}" href="/admin/blog/edit">Edit</a></span>
-							<span><form th:action="@{'/admin' + ${post.path} + '/delete'}" method="post">
+							<span><form th:action="@{'/admin' + ${post.path}}" method="post">
+								<input type="hidden" name="_method" value="DELETE" />
 								<button type="submit" name="delete">Delete</button>
 							</form></span>
 						</nav>

@@ -49,6 +49,7 @@ import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.impl.GitHubTemplate;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
 import org.springframework.util.Assert;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.Filter;
@@ -189,5 +190,10 @@ public class ApplicationConfiguration {
 	@Bean
 	public BlogPostAtomViewer blogPostAtomViewer(){
 		return new BlogPostAtomViewer();
+	}
+
+	@Bean
+	public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+		return new HiddenHttpMethodFilter();
 	}
 }
