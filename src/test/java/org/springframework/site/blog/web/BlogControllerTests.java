@@ -49,24 +49,24 @@ public class BlogControllerTests {
 
 	@Test
 	public void anyListPosts_providesAllCategoriesInModel() {
-		controller.listPosts(model, TEST_PAGE);
+		controller.listPublishedPosts(model, TEST_PAGE);
 		assertThat((PostCategory[]) model.get("categories"), is(PostCategory.values()));
 	}
 
 	@Test
 	public void anyListPosts_providesPaginationInfoInModel(){
-		controller.listPosts(model, TEST_PAGE);
+		controller.listPublishedPosts(model, TEST_PAGE);
 		assertThat((PaginationInfo) model.get("paginationInfo"), is(paginationInfo));
 	}
 
 	@Test
 	public void viewNameForAllPosts() {
-		assertThat(controller.listPosts(model, TEST_PAGE), is("blog/index"));
+		assertThat(controller.listPublishedPosts(model, TEST_PAGE), is("blog/index"));
 	}
 
 	@Test
 	public void viewNameForBroadcastPosts() throws Exception {
-		assertThat(controller.listBroadcasts(model, TEST_PAGE), is("blog/index"));
+		assertThat(controller.listPublishedBroadcasts(model, TEST_PAGE), is("blog/index"));
 	}
 
 	@Test
@@ -76,7 +76,7 @@ public class BlogControllerTests {
 
 	@Test
 	public void viewNameForCategoryPosts() {
-		String view = controller.listPostsForCategory(TEST_CATEGORY, model, TEST_PAGE);
+		String view = controller.listPublishedPostsForCategory(TEST_CATEGORY, model, TEST_PAGE);
 		assertThat(view, is("blog/index"));
 	}
 
@@ -91,27 +91,19 @@ public class BlogControllerTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void postsInModelForAllPosts(){
-		controller.listPosts(model, TEST_PAGE);
+		controller.listPublishedPosts(model, TEST_PAGE);
 		assertThatPostsAreInModel();
 	}
 
 	@Test
 	public void postsInModelForBroadcastPosts() throws Exception {
-		controller.listBroadcasts(model, TEST_PAGE);
+		controller.listPublishedBroadcasts(model, TEST_PAGE);
 		assertThatPostsAreInModel();
 	}
 
 	@Test
 	public void postsInModelForCategoryPosts() {
-		controller.listPostsForCategory(TEST_CATEGORY, model, TEST_PAGE);
+		controller.listPublishedPostsForCategory(TEST_CATEGORY, model, TEST_PAGE);
 		assertThatPostsAreInModel();
 	}
-
-	@Test
-	public void postsInModelForAllPostsAtomFeed(){
-		when(blogService.getPublishedPosts(eq(BlogPostsPageRequest.forFeeds()))).thenReturn(results);
-		controller.atomFeed(model);
-		assertThatPostsAreInModel();
-	}
-
 }

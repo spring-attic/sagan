@@ -82,13 +82,15 @@ public class BlogAtomFeedsTests {
 		return builder.parse(new ByteArrayInputStream(atomFeed.getBytes()));
 	}
 
+	private Document doGetForDocument(String path) throws Exception {
+		ResultActions resultActions = mockMvc.perform(get(path));
+		MvcResult mvcResult = resultActions.andReturn();
+		return getAtomFeedDocument(mvcResult);
+	}
+
 	@Test
 	public void feedHasCorrectMetadata() throws Exception {
-		ResultActions resultActions = mockMvc.perform(get("/blog/categories/blog.atom"));
-		MvcResult mvcResult = resultActions
-				.andExpect(status().isOk())
-				.andReturn();
-		Document doc = getAtomFeedDocument(mvcResult);
+		Document doc = doGetForDocument("/blog.atom");
 
 		assertThat(xpath.evaluate("/feed/title", doc), is("Spring"));
 		assertThat(xpath.evaluate("/feed/icon", doc), is(siteUrl.getAbsoluteUrl("/favicon.ico")));
@@ -96,11 +98,27 @@ public class BlogAtomFeedsTests {
 	}
 
 	@Test
+	public void rendersBroadcastsFeed() throws Exception {
+		Document doc = doGetForDocument("/blog/broadcasts.atom");
+
+		assertThat(xpath.evaluate("/feed/title", doc), is("Spring Broadcasts"));
+		assertThat(xpath.evaluate("/feed/link/@href", doc), is(siteUrl.getAbsoluteUrl("/blog/broadcasts")));
+	}
+
+	@Test
+	public void rendersCategoryFeed() throws Exception {
+		Document doc = doGetForDocument("/blog/category/news.atom");
+
+		assertThat(xpath.evaluate("/feed/title", doc), is("Spring News and Events"));
+		assertThat(xpath.evaluate("/feed/link/@href", doc), is(siteUrl.getAbsoluteUrl("/blog/category/news")));
+	}
+
+	@Test
 	public void containsBlogPostFields() throws Exception {
 		Post post = PostBuilder.post().category(PostCategory.ENGINEERING).isBroadcast().build();
 		postRepository.save(post);
 
-		ResultActions resultActions = mockMvc.perform(get("/blog/categories/blog.atom"));
+		ResultActions resultActions = mockMvc.perform(get("/blog.atom"));
 		MvcResult mvcResult = resultActions
 				.andExpect(status().isOk())
 				.andReturn();
@@ -120,10 +138,7 @@ public class BlogAtomFeedsTests {
 	public void containsAMaximumOf20Posts() throws Exception {
 		createPosts(21);
 
-		String urlTemplate = "/blog/categories/blog.atom";
-		MvcResult mvcResult = mockMvc.perform(get(urlTemplate)).andReturn();
-
-		Document doc = getAtomFeedDocument(mvcResult);
+		Document doc = doGetForDocument("/blog.atom");
 
 		XPathExpression expression = xpath.compile("//entry");
 		NodeList evaluate = (NodeList) expression.evaluate(doc, XPathConstants.NODESET);

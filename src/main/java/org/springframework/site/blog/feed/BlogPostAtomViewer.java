@@ -15,13 +15,18 @@ import java.util.Map;
 
 public class BlogPostAtomViewer extends AbstractAtomFeedView {
 
+	private final SiteUrl siteUrl;
+
 	@Autowired
-	private SiteUrl siteUrl;
+	public BlogPostAtomViewer(SiteUrl siteUrl) {
+		this.siteUrl = siteUrl;
+	}
 
 	@Override
 	protected void buildFeedMetadata(Map<String, Object> model, Feed feed, HttpServletRequest request) {
-		feed.setTitle("Spring");
-		String postUrl = siteUrl.getAbsoluteUrl("/blog");
+		feed.setTitle((String) model.get("feed-title"));
+		String postPath = (String) model.get("feed-path");
+		String postUrl = siteUrl.getAbsoluteUrl(postPath);
 		Link postLink = new Link();
 		postLink.setHref(postUrl);
 		feed.setAlternateLinks(Arrays.asList(postLink));
@@ -86,5 +91,4 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 		}
 		entry.setCategories(categories);
 	}
-
 }

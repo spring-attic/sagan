@@ -42,6 +42,7 @@ import org.springframework.site.documentation.DocumentationService;
 import org.springframework.site.security.GithubAuthenticationSigninAdapter;
 import org.springframework.site.security.RemoteUsernameConnectionSignUp;
 import org.springframework.site.security.SecurityContextAuthenticationFilter;
+import org.springframework.site.services.SiteUrl;
 import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
@@ -188,8 +189,8 @@ public class ApplicationConfiguration {
 	}
 
 	@Bean
-	public BlogPostAtomViewer blogPostAtomViewer(){
-		return new BlogPostAtomViewer();
+	public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl){
+		return new BlogPostAtomViewer(siteUrl);
 	}
 
 	@Bean
