@@ -90,7 +90,7 @@ public class BlogService_QueryTests {
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().draft().build());
 
-		assertThat(service.mostRecentPosts(firstTenPosts), contains(post));
+		assertThat(service.getPublishedPosts(firstTenPosts), contains(post));
 	}
 
 	@Test
@@ -100,7 +100,7 @@ public class BlogService_QueryTests {
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().category(PostCategory.NEWS_AND_EVENTS).build());
 
-		assertThat(service.mostRecentPosts(PostCategory.ENGINEERING, firstTenPosts), contains(post));
+		assertThat(service.getPublishedPosts(PostCategory.ENGINEERING, firstTenPosts), contains(post));
 	}
 
 	@Test
@@ -133,7 +133,7 @@ public class BlogService_QueryTests {
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().build());
 
-		assertThat(service.mostRecentBroadcastPosts(firstTenPosts), contains(post));
+		assertThat(service.getPublishedBroadcastPosts(firstTenPosts), contains(post));
 	}
 
 	@Test
@@ -144,6 +144,6 @@ public class BlogService_QueryTests {
 		Post draft = PostBuilder.post().draft().build();
 		postRepository.save(draft);
 
-		assertThat(service.allPosts(new BlogPostsPageRequest(0)), containsInAnyOrder(post, draft));
+		assertThat(service.getAllPosts(new BlogPostsPageRequest(0)), containsInAnyOrder(post, draft));
 	}
 }

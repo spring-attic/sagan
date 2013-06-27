@@ -35,14 +35,14 @@ public class BlogController {
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listPosts(Model model, @RequestParam(defaultValue = "1") int page) {
 		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
-		List<Post> posts = service.mostRecentPosts(pageRequest);
+		List<Post> posts = service.getPublishedPosts(pageRequest);
 		return populatePosts(posts, model, page, pageRequest);
 	}
 
 	@RequestMapping(value = "/category/{category}", method = { GET, HEAD })
 	public String listPostsForCategory(@PathVariable PostCategory category, Model model, @RequestParam(defaultValue = "1") int page) {
 		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
-		List<Post> posts = service.mostRecentPosts(category, pageRequest);
+		List<Post> posts = service.getPublishedPosts(category, pageRequest);
 		return populatePosts(posts, model, page, pageRequest);
 	}
 
@@ -59,13 +59,13 @@ public class BlogController {
 	@RequestMapping(value = "/broadcasts", method = { GET, HEAD })
 	public String listBroadcasts(Model model, @RequestParam(defaultValue = "1") int page) {
 		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
-		List<Post> posts = service.mostRecentBroadcastPosts(pageRequest);
+		List<Post> posts = service.getPublishedBroadcastPosts(pageRequest);
 		return populatePosts(posts, model, page, pageRequest);
 	}
 
 	@RequestMapping(value="/categories/blog.atom", method = RequestMethod.GET)
 	public String atomFeed(Model model) {
-		List<Post> posts = service.mostRecentPosts(new BlogPostsPageRequest(0));
+		List<Post> posts = service.getPublishedPosts(new BlogPostsPageRequest(0));
 		model.addAttribute("posts", posts);
 		return "blogPostAtomViewer";
 	}

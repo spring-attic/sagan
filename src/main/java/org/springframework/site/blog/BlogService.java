@@ -32,6 +32,7 @@ public class BlogService {
 		return post;
 	}
 
+	//TODO extract this out
 	String extractFirstParagraph(String content, int maxLength) {
 		String paragraph = content.trim();
 		int paragraphBreakpoint = paragraph.indexOf("\n\n");
@@ -62,23 +63,23 @@ public class BlogService {
 		return post;
 	}
 
-	public List<Post> mostRecentPosts(Pageable pageRequest) {
+	public List<Post> getPublishedPosts(Pageable pageRequest) {
 		return repository.findByDraftFalse(pageRequest).getContent();
 	}
 
-	public List<Post> mostRecentPosts(PostCategory category, Pageable pageRequest) {
+	public List<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
 		return repository.findByCategoryAndDraftFalse(category, pageRequest).getContent();
 	}
 
-	public PaginationInfo paginationInfo(PageRequest pageRequest) {
-		return new PaginationInfo(pageRequest.getPageNumber()+1, repository.count() / pageRequest.getPageSize() + 1);
-	}
-
-	public List<Post> mostRecentBroadcastPosts(Pageable pageRequest) {
+	public List<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
 		return repository.findByBroadcastAndDraftFalse(true, pageRequest).getContent();
 	}
 
-	public List<Post> allPosts(Pageable pageRequest) {
+	public List<Post> getAllPosts(Pageable pageRequest) {
 		return repository.findAll(pageRequest).getContent();
+	}
+
+	public PaginationInfo paginationInfo(PageRequest pageRequest) {
+		return new PaginationInfo(pageRequest, repository.count());
 	}
 }

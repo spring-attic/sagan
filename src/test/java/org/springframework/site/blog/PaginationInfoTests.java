@@ -2,6 +2,7 @@ package org.springframework.site.blog;
 
 
 import org.junit.Test;
+import org.springframework.data.domain.PageRequest;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -11,40 +12,64 @@ public class PaginationInfoTests {
 
 	@Test
 	public void givenOnePage_controlsAreNotVisible() {
-		assertThat(new PaginationInfo(1, 1).isVisible(), is(false));
-		assertThat(new PaginationInfo(1, 1).isPreviousVisible(), is(false));
-		assertThat(new PaginationInfo(1, 1).isNextVisible(), is(false));
+		PageRequest pageRequest = new PageRequest(0, 10);
+		int itemCount = 8;
+		PaginationInfo paginationInfo = new PaginationInfo(pageRequest, itemCount);
+
+		assertThat(paginationInfo.isVisible(), is(false));
+		assertThat(paginationInfo.isPreviousVisible(), is(false));
+		assertThat(paginationInfo.isNextVisible(), is(false));
 	}
 
 	@Test
 	public void givenOnFirstPageOfThree_nextIsVisible() {
-		assertThat(new PaginationInfo(1, 3).isVisible(), is(true));
-		assertThat(new PaginationInfo(1, 3).isPreviousVisible(), is(false));
-		assertThat(new PaginationInfo(1, 3).isNextVisible(), is(true));
+		PageRequest pageRequest = new PageRequest(0, 10);
+		int itemCount = 23;
+		PaginationInfo paginationInfo = new PaginationInfo(pageRequest, itemCount);
+
+		assertThat(paginationInfo.isVisible(), is(true));
+		assertThat(paginationInfo.isPreviousVisible(), is(false));
+		assertThat(paginationInfo.isNextVisible(), is(true));
 	}
 
 	@Test
 	public void givenOnSecondPageOfThree_nextAndPreviousAreVisible() {
-		assertThat(new PaginationInfo(2, 3).isVisible(), is(true));
-		assertThat(new PaginationInfo(2, 3).isPreviousVisible(), is(true));
-		assertThat(new PaginationInfo(2, 3).isNextVisible(), is(true));
+		PageRequest pageRequest = new PageRequest(1, 10);
+		int itemCount = 23;
+		PaginationInfo paginationInfo = new PaginationInfo(pageRequest, itemCount);
+
+		assertThat(paginationInfo.isVisible(), is(true));
+		assertThat(paginationInfo.isPreviousVisible(), is(true));
+		assertThat(paginationInfo.isNextVisible(), is(true));
 	}
 
 	@Test
 	public void givenOnThirdPageOfThree_previousIsVisible() {
-		assertThat(new PaginationInfo(3, 3).isVisible(), is(true));
-		assertThat(new PaginationInfo(3, 3).isPreviousVisible(), is(true));
-		assertThat(new PaginationInfo(3, 3).isNextVisible(), is(false));
+		PageRequest pageRequest = new PageRequest(2, 10);
+		int itemCount = 23;
+		PaginationInfo paginationInfo = new PaginationInfo(pageRequest, itemCount);
+
+		assertThat(paginationInfo.isVisible(), is(true));
+		assertThat(paginationInfo.isPreviousVisible(), is(true));
+		assertThat(paginationInfo.isNextVisible(), is(false));
 	}
 
 	@Test
 	public void givenOnPageTwo_nextPageIsThree() {
-		assertThat(new PaginationInfo(2, 3).getNextPageNumber(), is(equalTo(3L)));
+		PageRequest pageRequest = new PageRequest(1, 10);
+		int itemCount = 23;
+		PaginationInfo paginationInfo = new PaginationInfo(pageRequest, itemCount);
+
+		assertThat(paginationInfo.getNextPageNumber(), is(equalTo(3L)));
 	}
 
 	@Test
 	public void givenOnPageTwo_previousPageIsOne() {
-		assertThat(new PaginationInfo(2, 3).getPreviousPageNumber(), is(equalTo(1L)));
+		PageRequest pageRequest = new PageRequest(1, 10);
+		int itemCount = 23;
+		PaginationInfo paginationInfo = new PaginationInfo(pageRequest, itemCount);
+
+		assertThat(paginationInfo.getPreviousPageNumber(), is(equalTo(1L)));
 	}
 
 

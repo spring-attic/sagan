@@ -10,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
-import org.springframework.site.blog.web.BlogAdminController;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.util.Collections;
@@ -39,7 +38,7 @@ public class BlogAdminControllerTests {
 	@Test
 	public void dashboardShowsUsersPosts() {
 		List<Post> posts = Collections.singletonList(PostBuilder.post().build());
-		when(blogService.allPosts(any(PageRequest.class))).thenReturn(posts);
+		when(blogService.getAllPosts(any(PageRequest.class))).thenReturn(posts);
 		ExtendedModelMap model = new ExtendedModelMap();
 		controller.dashboard(model);
 		assertThat((List< Post >)model.get("posts"), equalTo(posts));

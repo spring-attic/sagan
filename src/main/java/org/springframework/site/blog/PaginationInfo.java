@@ -1,17 +1,18 @@
 package org.springframework.site.blog;
 
+import org.springframework.data.domain.PageRequest;
+
+/**
+ * Used in views for rendering pagination controls
+ * Page numbers are not zero indexed
+ */
 public class PaginationInfo {
 	private final long currentPage;
 	private final long totalPages;
 
-	/**
-	 * Create a new PaginationInfo, which is used in views for rendering pagination controls
-	 * @param currentPage the current page, starting at 1
-	 * @param totalPages the total number of pages
-	 */
-	public PaginationInfo(int currentPage, long totalPages) {
-		this.currentPage = currentPage;
-		this.totalPages = totalPages;
+	public PaginationInfo(PageRequest pageRequest, long itemCount) {
+		currentPage = pageRequest.getPageNumber() + 1;
+		totalPages = itemCount / pageRequest.getPageSize() + 1;
 	}
 
 	public boolean isVisible() {
