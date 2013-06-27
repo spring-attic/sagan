@@ -1,9 +1,9 @@
 package org.springframework.site.blog.feed;
 
 import com.sun.syndication.feed.atom.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.blog.Post;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.site.services.SiteUrl;
 import org.springframework.web.servlet.view.feed.AbstractAtomFeedView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +15,17 @@ import java.util.Map;
 
 public class BlogPostAtomViewer extends AbstractAtomFeedView {
 
+	@Autowired
+	private SiteUrl siteUrl;
+
 	@Override
 	protected void buildFeedMetadata(Map<String, Object> model, Feed feed, HttpServletRequest request) {
-		feed.setTitle("Spring Blog");
+		feed.setTitle("Spring");
+		String postUrl = siteUrl.getAbsoluteUrl("/blog");
+		Link postLink = new Link();
+		postLink.setHref(postUrl);
+		feed.setAlternateLinks(Arrays.asList(postLink));
+		feed.setIcon(siteUrl.getAbsoluteUrl("/favicon.ico"));
 		super.buildFeedMetadata(model, feed, request);
 	}
 
@@ -33,6 +41,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 			setRenderedContent(post, entry);
 			setPostUrl(post, entry);
 			setAuthor(entry);
+			setCategories(post, entry);
 			entries.add(entry);
 		}
 
@@ -44,19 +53,6 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 		super.render(model, request, response);
 	}
 
-	private void setAuthor(Entry entry) {
-		Person person = new Person();
-		person.setName("Spring Team");
-		entry.setAuthors(Arrays.asList(person));
-	}
-
-	private void setPostUrl(Post post, Entry entry) {
-		String postUrl = createAbsoluteUrl(post.getPath());
-		Link postLink = new Link();
-		postLink.setHref(postUrl);
-		entry.setAlternateLinks(Arrays.asList(postLink));
-	}
-
 	private void setRenderedContent(Post post, Entry entry) {
 		Content content = new Content();
 		content.setType(Content.HTML);
@@ -64,9 +60,31 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 		entry.setContents(Arrays.asList(content));
 	}
 
-	private String createAbsoluteUrl(String path) {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-		String baseUrl = request.getRequestURL().toString();
-		return baseUrl + path;
+	private void setPostUrl(Post post, Entry entry) {
+		String postUrl = siteUrl.getAbsoluteUrl(post.getPath());
+		Link postLink = new Link();
+		postLink.setHref(postUrl);
+		entry.setAlternateLinks(Arrays.asList(postLink));
 	}
+
+	private void setAuthor(Entry entry) {
+		Person person = new Person();
+		person.setName("Spring Team");
+		entry.setAuthors(Arrays.asList(person));
+	}
+
+	private void setCategories(Post post, Entry entry) {
+		Category category = new Category();
+		category.setLabel(post.getCategory().getDisplayName());
+		List<Category> categories = new ArrayList<Category>();
+		categories.add(category);
+
+		if (post.isBroadcast()) {
+			Category broadcast = new Category();
+			broadcast.setLabel("Broadcast");
+			categories.add(broadcast);
+		}
+		entry.setCategories(categories);
+	}
+
 }

@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostRepository;
 import org.springframework.site.configuration.ApplicationConfiguration;
+import org.springframework.site.services.SiteUrl;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -20,14 +22,17 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,6 +54,9 @@ public class BlogAtomFeedsTests {
 	private WebApplicationContext wac;
 
 	@Autowired
+	SiteUrl siteUrl;
+
+	@Autowired
 	private PostRepository postRepository;
 
 	private MockMvc mockMvc;
@@ -66,9 +74,30 @@ public class BlogAtomFeedsTests {
 		postRepository.deleteAll();
 	}
 
+	private Document getAtomFeedDocument(MvcResult mvcResult) throws ParserConfigurationException, SAXException, IOException {
+		String atomFeed = mvcResult.getResponse().getContentAsString();
+		atomFeed = atomFeed.replaceAll("\r", "");
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		return builder.parse(new ByteArrayInputStream(atomFeed.getBytes()));
+	}
+
+	@Test
+	public void feedHasCorrectMetadata() throws Exception {
+		ResultActions resultActions = mockMvc.perform(get("/blog/categories/blog.atom"));
+		MvcResult mvcResult = resultActions
+				.andExpect(status().isOk())
+				.andReturn();
+		Document doc = getAtomFeedDocument(mvcResult);
+
+		assertThat(xpath.evaluate("/feed/title", doc), is("Spring"));
+		assertThat(xpath.evaluate("/feed/icon", doc), is(siteUrl.getAbsoluteUrl("/favicon.ico")));
+		assertThat(xpath.evaluate("/feed/link/@href", doc), is(siteUrl.getAbsoluteUrl("/blog")));
+	}
+
 	@Test
 	public void containsBlogPostFields() throws Exception {
-		Post post = PostBuilder.post().isBroadcast().build();
+		Post post = PostBuilder.post().category(PostCategory.ENGINEERING).isBroadcast().build();
 		postRepository.save(post);
 
 		ResultActions resultActions = mockMvc.perform(get("/blog/categories/blog.atom"));
@@ -82,8 +111,9 @@ public class BlogAtomFeedsTests {
 
 		String postDate = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedDate());
 		assertThat(atomFeed, containsString(postDate));
-
 		assertThat(atomFeed, containsString(post.getPath()));
+		assertThat(atomFeed, containsString(PostCategory.ENGINEERING.getDisplayName()));
+		assertThat(atomFeed, containsString("Broadcast"));
 	}
 
 	@Test
@@ -92,12 +122,8 @@ public class BlogAtomFeedsTests {
 
 		String urlTemplate = "/blog/categories/blog.atom";
 		MvcResult mvcResult = mockMvc.perform(get(urlTemplate)).andReturn();
-		String atomFeed = mvcResult.getResponse().getContentAsString();
-		atomFeed = atomFeed.replaceAll("\r", "");
 
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		Document doc = builder.parse(new ByteArrayInputStream(atomFeed.getBytes()));
+		Document doc = getAtomFeedDocument(mvcResult);
 
 		XPathExpression expression = xpath.compile("//entry");
 		NodeList evaluate = (NodeList) expression.evaluate(doc, XPathConstants.NODESET);
