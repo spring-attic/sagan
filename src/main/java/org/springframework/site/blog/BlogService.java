@@ -1,6 +1,7 @@
 package org.springframework.site.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.web.NoSuchBlogPostException;
 import org.springframework.site.blog.web.ResultList;
@@ -69,6 +70,10 @@ public class BlogService {
 		return new ResultList<Post>(posts, buildPaginationInfo(pageRequest));
 	}
 
+	public Page<Post> getPagedPublishedPosts(Pageable pageRequest) {
+		return repository.findByDraftFalse(pageRequest);
+	}
+
 	public ResultList<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
 		List<Post> posts = repository.findByCategoryAndDraftFalse(category, pageRequest).getContent();
 		return new ResultList<Post>(posts, buildPaginationInfo(pageRequest));
@@ -79,9 +84,8 @@ public class BlogService {
 		return new ResultList<Post>(posts, buildPaginationInfo(pageRequest));
 	}
 
-	public ResultList<Post> getAllPosts(Pageable pageRequest) {
-		List<Post> posts = repository.findAll(pageRequest).getContent();
-		return new ResultList<Post>(posts, buildPaginationInfo(pageRequest));
+	public Page<Post> getDraftPosts(Pageable pageRequest) {
+		return repository.findByDraftTrue(pageRequest);
 	}
 
 	private PaginationInfo buildPaginationInfo(Pageable pageRequest) {

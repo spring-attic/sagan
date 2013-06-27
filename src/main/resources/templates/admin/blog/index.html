@@ -14,15 +14,13 @@
 <div layout:fragment="content" class="container">
 	<div class="row">
 		<div id="content" class="span8">
-			<h2>Posts</h2>
-			<ul class='posts'>
-				<li th:each="post : ${posts}">
-					<h2 th:text="${post.title}">This week in Spring</h2>
-					<div class="byline">
-						<span class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</span>
-						<span class='author' th:text="${post.author}">Author</span>
-						<span class='category' th:text="${post.category}">Category</span>
-
+			<h2>Drafts</h2>
+			<table class='table drafts'>
+				<tr th:each="post : ${drafts}">
+					<td class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</td>
+					<td class='author' th:text="${post.author}">Author</td>
+					<td th:text="${post.title}">This week in Spring</td>
+					<td class="actions">
 						<nav>
 							<span><a th:href="@{'/admin' + ${post.path} + '/edit'}" href="/admin/blog/edit">Edit</a></span>
 							<span><form th:action="@{'/admin' + ${post.path}}" method="post">
@@ -30,10 +28,30 @@
 								<button type="submit" name="delete">Delete</button>
 							</form></span>
 						</nav>
-					</div>
-                    <div class='draft' th:if="${post.draft}">Draft</div>
-				</li>
-			</ul>
+					</td>
+				</tr>
+			</table>
+
+			<h2>Scheduled</h2>
+
+
+			<h2>Posts</h2>
+			<table class='table posts'>
+				<tr th:each="post : ${posts}">
+					<td class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</td>
+					<td class='author' th:text="${post.author}">Author</td>
+					<td th:text="${post.title}">This week in Spring</td>
+					<td class="actions">
+						<nav>
+							<span><a th:href="@{'/admin' + ${post.path} + '/edit'}" href="/admin/blog/edit">Edit</a></span>
+							<span><form th:action="@{'/admin' + ${post.path}}" method="post">
+								<input type="hidden" name="_method" value="DELETE" />
+								<button type="submit" name="delete">Delete</button>
+							</form></span>
+						</nav>
+					</td>
+				</tr>
+			</table>
 		</div>
 
 		<div id="sidebar" class="span4">

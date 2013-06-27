@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.*;
 import org.springframework.site.blog.web.BlogPostsPageRequest;
@@ -22,12 +21,9 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -107,20 +103,6 @@ public class BlogService_QueryTests {
 	}
 
 	@Test
-	public void paginationInfoBasedOnCurrentPageAndTotalPosts() {
-		List<Post> posts = new ArrayList<Post>();
-		int itemCount = 11;
-		for (int i = 0; i < itemCount; ++i) {
-			posts.add(PostBuilder.post().build());
-		}
-		postRepository.save(posts);
-
-		PageRequest pageRequest = new PageRequest(0, 10);
-		ResultList<Post> result = service.getAllPosts(pageRequest);
-		assertThat(result.getPaginationInfo(), is(new PaginationInfo(pageRequest, itemCount)));
-	}
-
-	@Test
 	public void listBroadcasts() {
 		Pageable firstTenPosts = new BlogPostsPageRequest(0);
 		Post post = PostBuilder.post().isBroadcast().build();
@@ -129,17 +111,5 @@ public class BlogService_QueryTests {
 
 		ResultList<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(firstTenPosts);
 		assertThat(publishedBroadcastPosts.getItems(), contains(post));
-	}
-
-	@Test
-	public void allPosts() {
-		Post post = PostBuilder.post().build();
-		postRepository.save(post);
-
-		Post draft = PostBuilder.post().draft().build();
-		postRepository.save(draft);
-
-		ResultList<Post> allPosts = service.getAllPosts(new BlogPostsPageRequest(0));
-		assertThat(allPosts.getItems(), containsInAnyOrder(post, draft));
 	}
 }

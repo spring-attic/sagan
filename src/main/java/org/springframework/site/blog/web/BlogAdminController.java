@@ -2,6 +2,7 @@ package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -27,9 +29,10 @@ public class BlogAdminController {
 	}
 
 	@RequestMapping(value = "", method = { GET, HEAD })
-	public String dashboard(Model model) {
-		ResultList<Post> result = service.getAllPosts(new PageRequest(0, 20));
-		model.addAttribute("posts", result.getItems());
+	public String dashboard(Model model, @RequestParam(defaultValue = "1") int page) {
+		PageRequest pageRequest = new PageRequest(page - 1, Integer.MAX_VALUE, Sort.Direction.DESC, "createdDate");
+		model.addAttribute("posts", service.getPagedPublishedPosts(pageRequest));
+		model.addAttribute("drafts", service.getDraftPosts(pageRequest));
 		return "admin/blog/index";
 	}
 
