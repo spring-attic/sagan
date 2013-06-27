@@ -56,11 +56,11 @@ public class BlogAdminController {
 
 	@RequestMapping(value = "", method = { POST })
 	public String createPost(PostForm postForm) {
-		Post newPost = service.addPost(postForm);
-		return newPost.isDraft() ?
-				"redirect:/admin" + newPost.getPath() :
-				"redirect:" + newPost.getPath();
-	}
+	Post newPost = service.addPost(postForm);
+	return newPost.isDraft() ?
+			"redirect:/admin" + newPost.getPath() :
+			"redirect:" + newPost.getPath();
+}
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { PUT, POST })
 	public String updatePost(@PathVariable Long postId, PostForm postForm) {
@@ -69,6 +69,13 @@ public class BlogAdminController {
 		return post.isDraft() ?
 				"redirect:/admin" + post.getPath() :
 				"redirect:" + post.getPath();
+	}
+
+	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}/delete", method = { POST, DELETE })
+	public String deletePost(@PathVariable Long postId) {
+		Post post = service.getPost(postId);
+		service.deletePost(post);
+		return "redirect:/admin/blog";
 	}
 
 }

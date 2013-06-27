@@ -102,4 +102,8 @@ public class BlogService {
 
 		repository.save(post);
 	}
+
+	public void deletePost(Post post) {
+		repository.delete(post);
+	}
 }
