@@ -1,8 +1,10 @@
 package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.site.blog.*;
+import org.springframework.data.domain.Pageable;
+import org.springframework.site.blog.BlogService;
+import org.springframework.site.blog.Post;
+import org.springframework.site.blog.PostCategory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,15 +36,22 @@ public class BlogController {
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listPosts(Model model, @RequestParam(defaultValue = "1") int page) {
-		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
+		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
 		ResultList<Post> result = service.getPublishedPosts(pageRequest);
 		return renderListOfPosts(result, model);
 	}
 
 	@RequestMapping(value = "/category/{category}", method = { GET, HEAD })
 	public String listPostsForCategory(@PathVariable PostCategory category, Model model, @RequestParam(defaultValue = "1") int page) {
-		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
+		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
 		ResultList<Post> result = service.getPublishedPosts(category, pageRequest);
+		return renderListOfPosts(result, model);
+	}
+
+	@RequestMapping(value = "/broadcasts", method = { GET, HEAD })
+	public String listBroadcasts(Model model, @RequestParam(defaultValue = "1") int page) {
+		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
+		ResultList<Post> result = service.getPublishedBroadcastPosts(pageRequest);
 		return renderListOfPosts(result, model);
 	}
 
@@ -57,16 +66,9 @@ public class BlogController {
 		return "blog/index";
 	}
 
-	@RequestMapping(value = "/broadcasts", method = { GET, HEAD })
-	public String listBroadcasts(Model model, @RequestParam(defaultValue = "1") int page) {
-		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
-		ResultList<Post> result = service.getPublishedBroadcastPosts(pageRequest);
-		return renderListOfPosts(result, model);
-	}
-
 	@RequestMapping(value="/categories/blog.atom", method = RequestMethod.GET)
 	public String atomFeed(Model model) {
-		List<Post> posts = service.getPublishedPosts(new BlogPostsPageRequest(0)).getItems();
+		List<Post> posts = service.getPublishedPosts(BlogPostsPageRequest.forFeeds()).getItems();
 		model.addAttribute("posts", posts);
 		return "blogPostAtomViewer";
 	}

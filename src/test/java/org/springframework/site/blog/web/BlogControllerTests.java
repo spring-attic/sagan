@@ -38,9 +38,10 @@ public class BlogControllerTests {
 		MockitoAnnotations.initMocks(this);
 		controller = new BlogController(blogService);
 		posts.add(PostBuilder.post().build());
-		when(blogService.getPublishedPosts(any(Pageable.class))).thenReturn(results);
-		when(blogService.getPublishedBroadcastPosts(any(Pageable.class))).thenReturn(results);
-		when(blogService.getPublishedPosts(eq(TEST_CATEGORY), any(Pageable.class))).thenReturn(results);
+		Pageable testPageable = BlogPostsPageRequest.forLists(TEST_PAGE);
+		when(blogService.getPublishedPosts(eq(testPageable))).thenReturn(results);
+		when(blogService.getPublishedBroadcastPosts(eq(testPageable))).thenReturn(results);
+		when(blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(testPageable))).thenReturn(results);
 	}
 
 	private void assertThatPostsAreInModel() {
@@ -117,15 +118,9 @@ public class BlogControllerTests {
 
 	@Test
 	public void postsInModelForAllPostsAtomFeed(){
+		when(blogService.getPublishedPosts(eq(BlogPostsPageRequest.forFeeds()))).thenReturn(results);
 		controller.atomFeed(model);
 		assertThatPostsAreInModel();
 	}
 
-	@Test
-	public void listPosts_offsetsThePageToBeZeroIndexed(){
-		controller.listPosts(model, TEST_PAGE);
-		int zeroIndexedPage = TEST_PAGE - 1;
-		BlogPostsPageRequest pageRequest = new BlogPostsPageRequest(zeroIndexedPage);
-		verify(blogService).getPublishedPosts(eq(pageRequest));
-	}
 }

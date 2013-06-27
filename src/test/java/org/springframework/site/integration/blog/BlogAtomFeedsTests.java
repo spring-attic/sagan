@@ -87,8 +87,8 @@ public class BlogAtomFeedsTests {
 	}
 
 	@Test
-	public void containsAMaximumOf10Posts() throws Exception {
-		createPosts(16);
+	public void containsAMaximumOf20Posts() throws Exception {
+		createPosts(21);
 
 		String urlTemplate = "/blog/categories/blog.atom";
 		MvcResult mvcResult = mockMvc.perform(get(urlTemplate)).andReturn();
@@ -101,7 +101,7 @@ public class BlogAtomFeedsTests {
 
 		XPathExpression expression = xpath.compile("//entry");
 		NodeList evaluate = (NodeList) expression.evaluate(doc, XPathConstants.NODESET);
-		assertThat(evaluate.getLength(), is(10));
+		assertThat(evaluate.getLength(), is(20));
 	}
 
 	private void createPosts(int numPostsToCreate) {
