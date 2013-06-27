@@ -47,7 +47,7 @@ public class BlogController {
 	}
 
 	private String populatePosts(List<Post> posts, Model model, int page, PageRequest pageRequest) {
-		if (posts.size() == 0 && page > 1) {
+		if (posts.size() == 0) {
 			throw new BlogPostsNotFound("Page does not exist");
 		}
 		model.addAttribute("categories", PostCategory.values());

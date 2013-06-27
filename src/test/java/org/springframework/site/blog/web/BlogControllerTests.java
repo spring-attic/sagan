@@ -5,12 +5,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Pageable;
-import org.springframework.site.blog.BlogService;
-import org.springframework.site.blog.PaginationInfo;
-import org.springframework.site.blog.Post;
-import org.springframework.site.blog.PostBuilder;
-import org.springframework.site.blog.web.BlogController;
-import org.springframework.site.blog.web.BlogPostsPageRequest;
+import org.springframework.site.blog.*;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.util.ArrayList;
@@ -22,6 +17,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.site.blog.PostCategory.*;
 
 public class BlogControllerTests {
 
@@ -32,90 +28,103 @@ public class BlogControllerTests {
 
 	private BlogController controller;
 	private ExtendedModelMap model = new ExtendedModelMap();
+	private final List<Post> posts = new ArrayList<Post>();
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		controller = new BlogController(blogService);
+		posts.add(PostBuilder.post().build());
+		when(blogService.mostRecentPosts(any(Pageable.class))).thenReturn(posts);
+		when(blogService.mostRecentBroadcastPosts(any(Pageable.class))).thenReturn(posts);
 	}
 
-	@SuppressWarnings("unchecked")
-	@Test
-	public void listPosts_providesAListOfPostsInTheModel(){
-		List<Post> posts = new ArrayList<Post>();
-		posts.add(PostBuilder.post().build());
-
-		when(blogService.mostRecentPosts(any(Pageable.class))).thenReturn(posts);
-
-		controller.listPosts(model, TEST_PAGE);
-
+	private void assertThatPostsAreInModel() {
 		assertThat((List<Post>) model.get("posts"), is(posts));
 	}
 
 	@Test
-	public void listPosts_offsetsThePageToBeZeroIndexed(){
+	public void anyListPosts_providesAllCategoriesInModel() {
 		controller.listPosts(model, TEST_PAGE);
-
-		int zeroIndexedPage = TEST_PAGE - 1;
-		BlogPostsPageRequest pageRequest = new BlogPostsPageRequest(zeroIndexedPage);
-		verify(blogService).mostRecentPosts(eq(pageRequest));
+		assertThat((PostCategory[]) model.get("categories"), is(PostCategory.values()));
 	}
 
 	@Test
-	public void listPosts_providesPaginationInfo(){
+	public void anyListPosts_providesPaginationInfoInModel(){
 		PaginationInfo paginationInfo = new PaginationInfo(TEST_PAGE, 20);
-
 		when(blogService.paginationInfo(new BlogPostsPageRequest(TEST_PAGE-1))).thenReturn(paginationInfo);
-
 		controller.listPosts(model, TEST_PAGE);
-
 		assertThat((PaginationInfo) model.get("paginationInfo"), is(paginationInfo));
 	}
 
+	@Test(expected = BlogPostsNotFound.class)
+	public void throwsExceptionWhenPostsNotFound() {
+		ArrayList<Post> noPosts = new ArrayList<Post>();
+		when(blogService.mostRecentPosts(any(Pageable.class))).thenReturn(noPosts);
+		controller.listPosts(model, TEST_PAGE);
+	}
+
 	@Test
-	public void listPostsView() {
+	public void viewNameForAllPosts() {
 		assertThat(controller.listPosts(model, TEST_PAGE), is("blog/index"));
 	}
 
 	@Test
-	public void showPostModel() {
+	public void viewNameForBroadcastPosts() throws Exception {
+		assertThat(controller.listBroadcasts(model, TEST_PAGE), is("blog/index"));
+	}
+
+	@Test
+	public void viewNameForSinglePost() {
+		assertThat(controller.showPost(1L, "not important", model), is("blog/show"));
+	}
+
+	@Test
+	public void viewNameForCategoryPosts() {
+		when(blogService.mostRecentPosts(eq(ENGINEERING), any(Pageable.class))).thenReturn(posts);
+		String view = controller.listPostsForCategory(ENGINEERING, model, TEST_PAGE);
+		assertThat(view, is("blog/index"));
+	}
+
+	@Test
+	public void singlePostInModelForOnePost() {
 		Post post = PostBuilder.post().build();
 		when(blogService.getPublishedPost(post.getId())).thenReturn(post);
 		controller.showPost(post.getId(), "1-post-title", model);
 		assertThat((Post) model.get("post"), is(post));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
-	public void showPostView() {
-		assertThat(controller.showPost(1L, "not important", model), is("blog/show"));
+	public void postsInModelForAllPosts(){
+		controller.listPosts(model, TEST_PAGE);
+		assertThatPostsAreInModel();
 	}
 
 	@Test
-	public void listBroadcastsView() throws Exception {
-		assertThat(controller.listBroadcasts(model, TEST_PAGE), is("blog/index"));
-	}
-
-	@Test
-	public void listBroadcasts() throws Exception {
-		List<Post> posts = new ArrayList<Post>();
-		Post post = PostBuilder.post().isBroadcast().build();
-		posts.add(post);
-
-		when(blogService.mostRecentBroadcastPosts(any(Pageable.class))).thenReturn(posts);
-
+	public void postsInModelForBroadcastPosts() throws Exception {
 		controller.listBroadcasts(model, TEST_PAGE);
-
-		assertThat((List<Post>) model.get("posts"), is(posts));
+		assertThatPostsAreInModel();
 	}
 
 	@Test
-	public void listBroadcasts_providesPaginationInfo(){
-		PaginationInfo paginationInfo = new PaginationInfo(TEST_PAGE, 20);
+	public void postsInModelForCategoryPosts() {
+		when(blogService.mostRecentPosts(eq(ENGINEERING), any(Pageable.class))).thenReturn(posts);
+		controller.listPostsForCategory(ENGINEERING, model, TEST_PAGE);
+		assertThatPostsAreInModel();
+	}
 
-		when(blogService.paginationInfo(new BlogPostsPageRequest(TEST_PAGE-1))).thenReturn(paginationInfo);
+	@Test
+	public void postsInModelForAllPostsAtomFeed(){
+		controller.atomFeed(model);
+		assertThatPostsAreInModel();
+	}
 
-		controller.listBroadcasts(model, TEST_PAGE);
-
-		assertThat((PaginationInfo) model.get("paginationInfo"), is(paginationInfo));
+	@Test
+	public void listPosts_offsetsThePageToBeZeroIndexed(){
+		controller.listPosts(model, TEST_PAGE);
+		int zeroIndexedPage = TEST_PAGE - 1;
+		BlogPostsPageRequest pageRequest = new BlogPostsPageRequest(zeroIndexedPage);
+		verify(blogService).mostRecentPosts(eq(pageRequest));
 	}
 }
