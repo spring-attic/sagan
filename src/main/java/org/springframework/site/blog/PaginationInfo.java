@@ -1,6 +1,6 @@
 package org.springframework.site.blog;
 
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 
 /**
  * Used in views for rendering pagination controls
@@ -10,9 +10,9 @@ public class PaginationInfo {
 	private final long currentPage;
 	private final long totalPages;
 
-	public PaginationInfo(Pageable pageRequest, long itemCount) {
-		currentPage = pageRequest.getPageNumber() + 1;
-		totalPages = itemCount / pageRequest.getPageSize() + 1;
+	public PaginationInfo(Page page) {
+		currentPage = page.getNumber() + 1;
+		totalPages = page.getTotalPages();
 	}
 
 	public boolean isVisible() {

@@ -44,7 +44,7 @@ public class BlogAdminControllerTests {
 		Page<Post> drafts = new PageImpl<Post>(new ArrayList<Post>());
 		Page<Post> posts = new PageImpl<Post>(new ArrayList<Post>());
 
-		when(blogService.getPagedPublishedPosts(any(PageRequest.class))).thenReturn(posts);
+		when(blogService.getPublishedPosts(any(PageRequest.class))).thenReturn(posts);
 		when(blogService.getDraftPosts(any(PageRequest.class))).thenReturn(drafts);
 
 		ExtendedModelMap model = new ExtendedModelMap();

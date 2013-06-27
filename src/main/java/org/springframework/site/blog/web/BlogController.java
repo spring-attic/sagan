@@ -1,8 +1,10 @@
 package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.BlogService;
+import org.springframework.site.blog.PaginationInfo;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.stereotype.Controller;
@@ -36,29 +38,29 @@ public class BlogController {
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listPublishedPosts(Model model, @RequestParam(defaultValue = "1") int page) {
 		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
-		ResultList<Post> result = service.getPublishedPosts(pageRequest);
+		Page<Post> result = service.getPublishedPosts(pageRequest);
 		return renderListOfPosts(result, model);
 	}
 
 	@RequestMapping(value = "/category/{category}", method = { GET, HEAD })
 	public String listPublishedPostsForCategory(@PathVariable PostCategory category, Model model, @RequestParam(defaultValue = "1") int page) {
 		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
-		ResultList<Post> result = service.getPublishedPosts(category, pageRequest);
+		Page<Post> result = service.getPublishedPosts(category, pageRequest);
 		return renderListOfPosts(result, model);
 	}
 
 	@RequestMapping(value = "/broadcasts", method = { GET, HEAD })
 	public String listPublishedBroadcasts(Model model, @RequestParam(defaultValue = "1") int page) {
 		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
-		ResultList<Post> result = service.getPublishedBroadcastPosts(pageRequest);
+		Page<Post> result = service.getPublishedBroadcastPosts(pageRequest);
 		return renderListOfPosts(result, model);
 	}
 
-	private String renderListOfPosts(ResultList<Post> result, Model model) {
-		List<Post> posts = result.getItems();
+	private String renderListOfPosts(Page<Post> page, Model model) {
+		List<Post> posts = page.getContent();
 		model.addAttribute("categories", PostCategory.values());
 		model.addAttribute("posts", posts);
-		model.addAttribute("paginationInfo", result.getPaginationInfo());
+		model.addAttribute("paginationInfo", new PaginationInfo(page));
 		return "blog/index";
 	}
 }

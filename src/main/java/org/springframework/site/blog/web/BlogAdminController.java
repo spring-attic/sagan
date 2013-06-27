@@ -1,6 +1,7 @@
 package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.site.blog.BlogService;
@@ -31,7 +32,7 @@ public class BlogAdminController {
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String dashboard(Model model, @RequestParam(defaultValue = "1") int page) {
 		PageRequest pageRequest = new PageRequest(page - 1, Integer.MAX_VALUE, Sort.Direction.DESC, "createdDate");
-		model.addAttribute("posts", service.getPagedPublishedPosts(pageRequest));
+		model.addAttribute("posts", service.getPublishedPosts(pageRequest));
 		model.addAttribute("drafts", service.getDraftPosts(pageRequest));
 		return "admin/blog/index";
 	}

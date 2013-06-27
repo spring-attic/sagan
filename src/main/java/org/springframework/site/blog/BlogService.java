@@ -4,11 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.web.NoSuchBlogPostException;
-import org.springframework.site.blog.web.ResultList;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class BlogService {
@@ -65,31 +62,24 @@ public class BlogService {
 		return post;
 	}
 
-	public ResultList<Post> getPublishedPosts(Pageable pageRequest) {
-		List<Post> posts = repository.findByDraftFalse(pageRequest).getContent();
-		return new ResultList<Post>(posts, buildPaginationInfo(pageRequest));
-	}
-
-	public Page<Post> getPagedPublishedPosts(Pageable pageRequest) {
-		return repository.findByDraftFalse(pageRequest);
-	}
-
-	public ResultList<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
-		List<Post> posts = repository.findByCategoryAndDraftFalse(category, pageRequest).getContent();
-		return new ResultList<Post>(posts, buildPaginationInfo(pageRequest));
-	}
-
-	public ResultList<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
-		List<Post> posts = repository.findByBroadcastAndDraftFalse(true, pageRequest).getContent();
-		return new ResultList<Post>(posts, buildPaginationInfo(pageRequest));
-	}
-
 	public Page<Post> getDraftPosts(Pageable pageRequest) {
 		return repository.findByDraftTrue(pageRequest);
 	}
 
-	private PaginationInfo buildPaginationInfo(Pageable pageRequest) {
-		return new PaginationInfo(pageRequest, repository.count());
+	public Page<Post> getPublishedPosts(Pageable pageRequest) {
+		return repository.findByDraftFalse(pageRequest);
+	}
+
+	public Page<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
+		return repository.findByCategoryAndDraftFalse(category, pageRequest);
+	}
+
+	public Page<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
+		return repository.findByBroadcastAndDraftFalse(true, pageRequest);
+	}
+
+	public Page<Post> getAllPosts(Pageable pageRequest) {
+		return repository.findAll(pageRequest);
 	}
 
 	public void updatePost(Post post, PostForm postForm) {
