@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.*;
@@ -24,23 +26,23 @@ public class BlogControllerTests {
 	public static final PostCategory TEST_CATEGORY = ENGINEERING;
 
 	@Mock
-    BlogService blogService;
+    private BlogService blogService;
 
 	private BlogController controller;
 	private ExtendedModelMap model = new ExtendedModelMap();
-	private final List<Post> posts = new ArrayList<Post>();
-	private final PaginationInfo paginationInfo = new PaginationInfo(new PageRequest(TEST_PAGE,10), 20);
-	private final ResultList<Post> results = new ResultList<Post>(posts, paginationInfo);
+	private List<Post> posts = new ArrayList<Post>();
+	private Page<Post> page;
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		controller = new BlogController(blogService);
 		posts.add(PostBuilder.post().build());
+		page = new PageImpl<Post>(posts, new PageRequest(TEST_PAGE, 10), 20);
 		Pageable testPageable = BlogPostsPageRequest.forLists(TEST_PAGE);
-		when(blogService.getPublishedPosts(eq(testPageable))).thenReturn(results);
-		when(blogService.getPublishedBroadcastPosts(eq(testPageable))).thenReturn(results);
-		when(blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(testPageable))).thenReturn(results);
+		when(blogService.getPublishedPosts(eq(testPageable))).thenReturn(page);
+		when(blogService.getPublishedBroadcastPosts(eq(testPageable))).thenReturn(page);
+		when(blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(testPageable))).thenReturn(page);
 	}
 
 	private void assertThatPostsAreInModel() {
@@ -56,7 +58,7 @@ public class BlogControllerTests {
 	@Test
 	public void anyListPosts_providesPaginationInfoInModel(){
 		controller.listPublishedPosts(model, TEST_PAGE);
-		assertThat((PaginationInfo) model.get("paginationInfo"), is(paginationInfo));
+		assertThat((PaginationInfo) model.get("paginationInfo"), is(new PaginationInfo(page)));
 	}
 
 	@Test

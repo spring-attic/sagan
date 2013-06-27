@@ -8,12 +8,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.*;
 import org.springframework.site.blog.web.BlogPostsPageRequest;
 import org.springframework.site.blog.web.NoSuchBlogPostException;
-import org.springframework.site.blog.web.ResultList;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.test.context.ContextConfiguration;
@@ -91,8 +91,8 @@ public class BlogService_QueryTests {
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().draft().build());
 
-		ResultList<Post> publishedPosts = service.getPublishedPosts(firstTenPosts);
-		assertThat(publishedPosts.getItems(), contains(post));
+		Page<Post> publishedPosts = service.getPublishedPosts(firstTenPosts);
+		assertThat(publishedPosts.getContent(), contains(post));
 	}
 
 	@Test
@@ -102,22 +102,22 @@ public class BlogService_QueryTests {
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().category(PostCategory.NEWS_AND_EVENTS).build());
 
-		ResultList<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, firstTenPosts);
-		assertThat(publishedPosts.getItems(), contains(post));
+		Page<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, firstTenPosts);
+		assertThat(publishedPosts.getContent(), contains(post));
 	}
 
 	@Test
 	public void paginationInfoBasedOnCurrentPageAndTotalPosts() {
 		List<Post> posts = new ArrayList<Post>();
-		int itemCount = 11;
+		long itemCount = 11;
 		for (int i = 0; i < itemCount; ++i) {
 			posts.add(PostBuilder.post().build());
 		}
 		postRepository.save(posts);
 
 		PageRequest pageRequest = new PageRequest(0, 10);
-		ResultList<Post> result = service.getAllPosts(pageRequest);
-		assertThat(result.getPaginationInfo(), is(new PaginationInfo(pageRequest, itemCount)));
+		Page<Post> result = service.getAllPosts(pageRequest);
+		assertThat(result.getTotalElements(), is(itemCount));
 	}
 
 	@Test
@@ -127,8 +127,8 @@ public class BlogService_QueryTests {
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().build());
 
-		ResultList<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(firstTenPosts);
-		assertThat(publishedBroadcastPosts.getItems(), contains(post));
+		Page<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(firstTenPosts);
+		assertThat(publishedBroadcastPosts.getContent(), contains(post));
 	}
 
 	@Test
@@ -139,7 +139,7 @@ public class BlogService_QueryTests {
 		Post draft = PostBuilder.post().draft().build();
 		postRepository.save(draft);
 
-		ResultList<Post> allPosts = service.getAllPosts(new BlogPostsPageRequest(0));
-		assertThat(allPosts.getItems(), containsInAnyOrder(post, draft));
+		Page<Post> allPosts = service.getAllPosts(new BlogPostsPageRequest(0));
+		assertThat(allPosts.getContent(), containsInAnyOrder(post, draft));
 	}
 }

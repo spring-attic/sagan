@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.site.blog.*;
 import org.springframework.ui.ExtendedModelMap;
@@ -37,8 +39,8 @@ public class BlogAdminControllerTests {
 	@Test
 	public void dashboardShowsUsersPosts() {
 		List<Post> posts = Collections.singletonList(PostBuilder.post().build());
-		ResultList<Post> results = new ResultList<Post>(posts, mock(PaginationInfo.class));
-		when(blogService.getAllPosts(any(PageRequest.class))).thenReturn(results);
+		Page<Post> page = new PageImpl<Post>(posts);
+		when(blogService.getAllPosts(any(PageRequest.class))).thenReturn(page);
 		ExtendedModelMap model = new ExtendedModelMap();
 		controller.dashboard(model);
 		assertThat((List<Post>)model.get("posts"), equalTo(posts));

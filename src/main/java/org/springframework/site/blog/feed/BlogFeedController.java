@@ -1,6 +1,7 @@
 package org.springframework.site.blog.feed;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
@@ -9,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
@@ -27,24 +26,24 @@ public class BlogFeedController {
 
 	@RequestMapping(value="/blog.atom", method = { GET, HEAD })
 	public String listPublishedPosts(Model model) {
-		List<Post> posts = service.getPublishedPosts(BlogPostsPageRequest.forFeeds()).getItems();
-		return renderBlogFeeds(model,posts, "", "");
+		Page<Post> page = service.getPublishedPosts(BlogPostsPageRequest.forFeeds());
+		return renderBlogFeeds(model, page, "", "");
 	}
 
 	@RequestMapping(value = "/blog/category/{category}.atom", method = { GET, HEAD })
 	public String listPublishedPostsForCategory(@PathVariable PostCategory category, Model model) {
-		List<Post> posts = service.getPublishedPosts(category, BlogPostsPageRequest.forFeeds()).getItems();
-		return renderBlogFeeds(model, posts, category.getDisplayName(), "/category/" + category.getUrlSlug());
+		Page<Post> page = service.getPublishedPosts(category, BlogPostsPageRequest.forFeeds());
+		return renderBlogFeeds(model, page, category.getDisplayName(), "/category/" + category.getUrlSlug());
 	}
 
 	@RequestMapping(value = "/blog/broadcasts.atom", method = { GET, HEAD })
 	public String listPublishedBroadcastPosts(Model model) {
-		List<Post> posts = service.getPublishedBroadcastPosts(BlogPostsPageRequest.forFeeds()).getItems();
-		return renderBlogFeeds(model, posts, "Broadcasts", "/broadcasts");
+		Page<Post> page = service.getPublishedBroadcastPosts(BlogPostsPageRequest.forFeeds());
+		return renderBlogFeeds(model, page, "Broadcasts", "/broadcasts");
 	}
 
-	private String renderBlogFeeds(Model model, List<Post> posts, String category, String subPath) {
-		model.addAttribute("posts", posts);
+	private String renderBlogFeeds(Model model, Page<Post> page, String category, String subPath) {
+		model.addAttribute("posts", page.getContent());
 		model.addAttribute("feed-title", ("Spring " + category).trim());
 		model.addAttribute("feed-path", "/blog" + subPath);
 		return "blogPostAtomViewer";
