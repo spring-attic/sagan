@@ -16,13 +16,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.site.blog.PostCategory.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.site.blog.PostCategory.ENGINEERING;
 
 public class BlogControllerTests {
 
 	private static final int TEST_PAGE = 1;
+	public static final PostCategory TEST_CATEGORY = ENGINEERING;
 
 	@Mock
     BlogService blogService;
@@ -30,14 +30,17 @@ public class BlogControllerTests {
 	private BlogController controller;
 	private ExtendedModelMap model = new ExtendedModelMap();
 	private final List<Post> posts = new ArrayList<Post>();
+	private final PaginationInfo paginationInfo = new PaginationInfo(new PageRequest(TEST_PAGE,10), 20);
+	private final ResultList<Post> results = new ResultList<Post>(posts, paginationInfo);
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		controller = new BlogController(blogService);
 		posts.add(PostBuilder.post().build());
-		when(blogService.getPublishedPosts(any(Pageable.class))).thenReturn(posts);
-		when(blogService.getPublishedBroadcastPosts(any(Pageable.class))).thenReturn(posts);
+		when(blogService.getPublishedPosts(any(Pageable.class))).thenReturn(results);
+		when(blogService.getPublishedBroadcastPosts(any(Pageable.class))).thenReturn(results);
+		when(blogService.getPublishedPosts(eq(TEST_CATEGORY), any(Pageable.class))).thenReturn(results);
 	}
 
 	private void assertThatPostsAreInModel() {
@@ -52,8 +55,6 @@ public class BlogControllerTests {
 
 	@Test
 	public void anyListPosts_providesPaginationInfoInModel(){
-		PaginationInfo paginationInfo = new PaginationInfo(new PageRequest(TEST_PAGE,10), 20);
-		when(blogService.paginationInfo(new BlogPostsPageRequest(TEST_PAGE-1))).thenReturn(paginationInfo);
 		controller.listPosts(model, TEST_PAGE);
 		assertThat((PaginationInfo) model.get("paginationInfo"), is(paginationInfo));
 	}
@@ -61,7 +62,8 @@ public class BlogControllerTests {
 	@Test(expected = BlogPostsNotFound.class)
 	public void throwsExceptionWhenPostsNotFound() {
 		ArrayList<Post> noPosts = new ArrayList<Post>();
-		when(blogService.getPublishedPosts(any(Pageable.class))).thenReturn(noPosts);
+		ResultList<Post> emptyResults = new ResultList<Post>(noPosts, mock(PaginationInfo.class));
+		when(blogService.getPublishedPosts(any(Pageable.class))).thenReturn(emptyResults);
 		controller.listPosts(model, TEST_PAGE);
 	}
 
@@ -82,8 +84,7 @@ public class BlogControllerTests {
 
 	@Test
 	public void viewNameForCategoryPosts() {
-		when(blogService.getPublishedPosts(eq(ENGINEERING), any(Pageable.class))).thenReturn(posts);
-		String view = controller.listPostsForCategory(ENGINEERING, model, TEST_PAGE);
+		String view = controller.listPostsForCategory(TEST_CATEGORY, model, TEST_PAGE);
 		assertThat(view, is("blog/index"));
 	}
 
@@ -110,8 +111,7 @@ public class BlogControllerTests {
 
 	@Test
 	public void postsInModelForCategoryPosts() {
-		when(blogService.getPublishedPosts(eq(ENGINEERING), any(Pageable.class))).thenReturn(posts);
-		controller.listPostsForCategory(ENGINEERING, model, TEST_PAGE);
+		controller.listPostsForCategory(TEST_CATEGORY, model, TEST_PAGE);
 		assertThatPostsAreInModel();
 	}
 

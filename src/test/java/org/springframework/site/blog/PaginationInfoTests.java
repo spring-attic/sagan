@@ -1,6 +1,7 @@
 package org.springframework.site.blog;
 
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.springframework.data.domain.PageRequest;
 
@@ -72,5 +73,11 @@ public class PaginationInfoTests {
 		assertThat(paginationInfo.getPreviousPageNumber(), is(equalTo(1L)));
 	}
 
-
+	@Test
+	public void pagesAreNotZeroIndexed() {
+		int itemCount = 101;
+		PaginationInfo paginationInfo = new PaginationInfo(new PageRequest(0, 10), itemCount);
+		assertThat(paginationInfo.getCurrentPage(), is(Matchers.equalTo(1L)));
+		assertThat(paginationInfo.getTotalPages(), is(Matchers.equalTo(11L)));
+	}
 }

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.*;
 import org.springframework.site.blog.web.BlogPostsPageRequest;
 import org.springframework.site.blog.web.NoSuchBlogPostException;
+import org.springframework.site.blog.web.ResultList;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.test.context.ContextConfiguration;
@@ -90,7 +91,8 @@ public class BlogService_QueryTests {
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().draft().build());
 
-		assertThat(service.getPublishedPosts(firstTenPosts), contains(post));
+		ResultList<Post> publishedPosts = service.getPublishedPosts(firstTenPosts);
+		assertThat(publishedPosts.getItems(), contains(post));
 	}
 
 	@Test
@@ -100,30 +102,22 @@ public class BlogService_QueryTests {
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().category(PostCategory.NEWS_AND_EVENTS).build());
 
-		assertThat(service.getPublishedPosts(PostCategory.ENGINEERING, firstTenPosts), contains(post));
+		ResultList<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, firstTenPosts);
+		assertThat(publishedPosts.getItems(), contains(post));
 	}
 
 	@Test
-	public void givenOnePage_paginationInfoBasedOnCurrentPageAndTotalPosts() {
-		postRepository.save(PostBuilder.post().build());
-
-		PaginationInfo paginationInfo = service.paginationInfo(new PageRequest(0, 10));
-		assertThat(paginationInfo.getCurrentPage(), is(equalTo(1L)));
-		assertThat(paginationInfo.getTotalPages(), is(equalTo(1L)));
-	}
-
-	@Test
-	public void givenManyPages_paginationInfoBasedOnCurrentPageAndTotalPosts() {
+	public void paginationInfoBasedOnCurrentPageAndTotalPosts() {
 		List<Post> posts = new ArrayList<Post>();
-
-		for (int i = 0; i < 101; ++i) {
+		int itemCount = 11;
+		for (int i = 0; i < itemCount; ++i) {
 			posts.add(PostBuilder.post().build());
 		}
 		postRepository.save(posts);
 
-		PaginationInfo paginationInfo = service.paginationInfo(new PageRequest(0, 10));
-		assertThat(paginationInfo.getCurrentPage(), is(equalTo(1L)));
-		assertThat(paginationInfo.getTotalPages(), is(equalTo(11L)));
+		PageRequest pageRequest = new PageRequest(0, 10);
+		ResultList<Post> result = service.getAllPosts(pageRequest);
+		assertThat(result.getPaginationInfo(), is(new PaginationInfo(pageRequest, itemCount)));
 	}
 
 	@Test
@@ -133,7 +127,8 @@ public class BlogService_QueryTests {
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().build());
 
-		assertThat(service.getPublishedBroadcastPosts(firstTenPosts), contains(post));
+		ResultList<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(firstTenPosts);
+		assertThat(publishedBroadcastPosts.getItems(), contains(post));
 	}
 
 	@Test
@@ -144,6 +139,7 @@ public class BlogService_QueryTests {
 		Post draft = PostBuilder.post().draft().build();
 		postRepository.save(draft);
 
-		assertThat(service.getAllPosts(new BlogPostsPageRequest(0)), containsInAnyOrder(post, draft));
+		ResultList<Post> allPosts = service.getAllPosts(new BlogPostsPageRequest(0));
+		assertThat(allPosts.getItems(), containsInAnyOrder(post, draft));
 	}
 }

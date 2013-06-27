@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.site.blog.BlogService;
+import org.springframework.site.blog.PaginationInfo;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.ui.ExtendedModelMap;
@@ -19,6 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,10 +40,11 @@ public class BlogAdminControllerTests {
 	@Test
 	public void dashboardShowsUsersPosts() {
 		List<Post> posts = Collections.singletonList(PostBuilder.post().build());
-		when(blogService.getAllPosts(any(PageRequest.class))).thenReturn(posts);
+		ResultList<Post> results = new ResultList<Post>(posts, mock(PaginationInfo.class));
+		when(blogService.getAllPosts(any(PageRequest.class))).thenReturn(results);
 		ExtendedModelMap model = new ExtendedModelMap();
 		controller.dashboard(model);
-		assertThat((List< Post >)model.get("posts"), equalTo(posts));
+		assertThat((List<Post>)model.get("posts"), equalTo(posts));
 	}
 
 	@Test

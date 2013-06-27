@@ -1,9 +1,9 @@
 package org.springframework.site.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.web.NoSuchBlogPostException;
+import org.springframework.site.blog.web.ResultList;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.stereotype.Service;
 
@@ -63,23 +63,27 @@ public class BlogService {
 		return post;
 	}
 
-	public List<Post> getPublishedPosts(Pageable pageRequest) {
-		return repository.findByDraftFalse(pageRequest).getContent();
+	public ResultList<Post> getPublishedPosts(Pageable pageRequest) {
+		List<Post> posts = repository.findByDraftFalse(pageRequest).getContent();
+		return new ResultList<Post>(posts, buildPaginationInfo(pageRequest));
 	}
 
-	public List<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
-		return repository.findByCategoryAndDraftFalse(category, pageRequest).getContent();
+	public ResultList<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
+		List<Post> posts = repository.findByCategoryAndDraftFalse(category, pageRequest).getContent();
+		return new ResultList<Post>(posts, buildPaginationInfo(pageRequest));
 	}
 
-	public List<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
-		return repository.findByBroadcastAndDraftFalse(true, pageRequest).getContent();
+	public ResultList<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
+		List<Post> posts = repository.findByBroadcastAndDraftFalse(true, pageRequest).getContent();
+		return new ResultList<Post>(posts, buildPaginationInfo(pageRequest));
 	}
 
-	public List<Post> getAllPosts(Pageable pageRequest) {
-		return repository.findAll(pageRequest).getContent();
+	public ResultList<Post> getAllPosts(Pageable pageRequest) {
+		List<Post> posts = repository.findAll(pageRequest).getContent();
+		return new ResultList<Post>(posts, buildPaginationInfo(pageRequest));
 	}
 
-	public PaginationInfo paginationInfo(PageRequest pageRequest) {
+	private PaginationInfo buildPaginationInfo(Pageable pageRequest) {
 		return new PaginationInfo(pageRequest, repository.count());
 	}
 }

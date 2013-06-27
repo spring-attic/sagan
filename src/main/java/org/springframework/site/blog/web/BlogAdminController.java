@@ -26,7 +26,8 @@ public class BlogAdminController {
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String dashboard(Model model) {
-		model.addAttribute("posts", service.getAllPosts(new PageRequest(0, 20)));
+		ResultList<Post> result = service.getAllPosts(new PageRequest(0, 20));
+		model.addAttribute("posts", result.getItems());
 		return "admin/blog/index";
 	}
 
