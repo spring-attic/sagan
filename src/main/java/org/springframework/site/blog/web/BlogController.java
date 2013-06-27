@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -60,5 +61,12 @@ public class BlogController {
 		PageRequest pageRequest = new BlogPostsPageRequest(page - 1);
 		List<Post> posts = service.mostRecentBroadcastPosts(pageRequest);
 		return populatePosts(posts, model, page, pageRequest);
+	}
+
+	@RequestMapping(value="/categories/blog.atom", method = RequestMethod.GET)
+	public String atomFeed(Model model) {
+		List<Post> posts = service.mostRecentPosts(new BlogPostsPageRequest(0));
+		model.addAttribute("posts", posts);
+		return "blogPostAtomViewer";
 	}
 }

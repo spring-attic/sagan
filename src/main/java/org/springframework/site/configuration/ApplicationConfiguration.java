@@ -37,6 +37,7 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.site.blog.feed.BlogPostAtomViewer;
 import org.springframework.site.documentation.DocumentationService;
 import org.springframework.site.security.GithubAuthenticationSigninAdapter;
 import org.springframework.site.security.RemoteUsernameConnectionSignUp;
@@ -185,4 +186,8 @@ public class ApplicationConfiguration {
 				+ path + ": " + binder.getBindingResult().getAllErrors());
 	}
 
+	@Bean
+	public BlogPostAtomViewer blogPostAtomViewer(){
+		return new BlogPostAtomViewer();
+	}
 }

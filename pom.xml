@@ -68,6 +68,11 @@
             <artifactId>thymeleaf-extras-springsecurity3</artifactId>
             <version>2.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>net.java.dev.rome</groupId>
+            <artifactId>rome</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 		<dependency>
 			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
