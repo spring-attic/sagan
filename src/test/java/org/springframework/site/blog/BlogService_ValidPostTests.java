@@ -11,8 +11,8 @@ import org.springframework.site.services.MarkdownService;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -76,4 +76,10 @@ public class BlogService_ValidPostTests {
 		verify(postRepository).save(any(Post.class));
 	}
 
+	@Test
+	public void extractFirstParagraph() {
+		assertEquals("xx", service.extractFirstParagraph("xxxxx", 2));
+		assertEquals("xx", service.extractFirstParagraph("xx\n\nxxx", 20));
+		assertEquals("xx", service.extractFirstParagraph("xx xx\n\nxxx", 4));
+	}
 }
