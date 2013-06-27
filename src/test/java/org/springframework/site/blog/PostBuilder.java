@@ -5,6 +5,7 @@ import java.util.Date;
 public class PostBuilder {
 
 	private String title;
+	private String author;
 	private PostCategory category;
 	private String rawContent;
 	private String renderedContent;
@@ -15,6 +16,7 @@ public class PostBuilder {
 
 	public PostBuilder() {
 		this.title = "My Post";
+		this.author = "test";
 		this.category =	PostCategory.ENGINEERING;
 		this.rawContent = "post body";
 		this.renderedContent = "post body";
@@ -25,6 +27,11 @@ public class PostBuilder {
 
 	public static PostBuilder post() {
 		return new PostBuilder();
+	}
+
+	public PostBuilder author(String author) {
+		this.author = author;
+		return this;
 	}
 
 	public PostBuilder title(String title) {
@@ -64,6 +71,7 @@ public class PostBuilder {
 
 	public Post build() {
 		Post post = new Post(title, rawContent, category);
+		post.setAuthor(author);
 		post.setRenderedContent(renderedContent);
 		post.setRenderedSummary(renderedSummary);
 		if (date != null) {

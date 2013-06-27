@@ -21,9 +21,10 @@ public class BlogService {
 		this.markdownService = markdownService;
 	}
 
-	public Post addPost(PostForm postForm) {
+	public Post addPost(PostForm postForm, String author) {
 		String content = postForm.getContent();
 		Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
+		post.setAuthor(author);
 		post.setRenderedContent(markdownService.renderToHtml(content));
 		post.setRenderedSummary(markdownService.renderToHtml(extractFirstParagraph(content, 500)));
 		post.setBroadcast(postForm.isBroadcast());

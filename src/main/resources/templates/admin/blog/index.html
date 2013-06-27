@@ -20,7 +20,7 @@
 					<h2 th:text="${post.title}">This week in Spring</h2>
 					<div class="byline">
 						<span class='date' th:text='${#dates.format(post.createdDate, "MMMM d, yyyy")}'>June 18, 2013</span>
-						<span class='author'>Author TBD</span>
+						<span class='author' th:text="${post.author}">Author</span>
 						<span class='category' th:text="${post.category}">Category</span>
 
 						<nav>

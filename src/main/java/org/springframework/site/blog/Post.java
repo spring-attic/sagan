@@ -15,6 +15,9 @@ public class Post implements Serializable {
 	private Long id;
 
 	@Column(nullable = false)
+	private String author;
+
+	@Column(nullable = false)
 	private String title;
 
 	@Column(nullable = false)
@@ -54,6 +57,14 @@ public class Post implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public String getTitle() {

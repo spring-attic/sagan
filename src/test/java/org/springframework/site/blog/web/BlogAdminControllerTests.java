@@ -7,12 +7,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.site.blog.BlogService;
-import org.springframework.site.blog.PaginationInfo;
-import org.springframework.site.blog.Post;
-import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.blog.*;
 import org.springframework.ui.ExtendedModelMap;
 
+import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,8 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogAdminControllerTests {
@@ -58,5 +55,20 @@ public class BlogAdminControllerTests {
 	@Test
 	public void showPostView() {
 		assertThat(controller.showPost(1L, "not important", model), is("admin/blog/show"));
+	}
+
+	@Test
+	public void creatingABlogPostRecordsTheUser() {
+		PostForm postForm = new PostForm();
+		Principal principal = new Principal() {
+			@Override
+			public String getName() {
+				return "testUser";
+			}
+		};
+
+		when(blogService.addPost(postForm, "testUser")).thenReturn(PostBuilder.post().build());
+		controller.createPost(postForm, principal);
+		verify(blogService).addPost(postForm, "testUser");
 	}
 }

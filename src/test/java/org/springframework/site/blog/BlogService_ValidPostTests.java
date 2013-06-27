@@ -21,6 +21,7 @@ public class BlogService_ValidPostTests {
 
 	public static final String RENDERED_HTML_FROM_MARKDOWN = "<p>Rendered HTML</p><p>from Markdown</p>";
 	public static final String RENDERED_SUMMARY_HTML_FROM_MARKDOWN = "<p>Rendered HTML</p>";
+	private static final String AUTHOR = "author";
 	private BlogService service;
 	private Post post;
 	private String title = "Title";
@@ -49,7 +50,7 @@ public class BlogService_ValidPostTests {
 		postForm.setContent(content);
 		postForm.setCategory(category);
 		postForm.setBroadcast(broadcast);
-		post = service.addPost(postForm);
+		post = service.addPost(postForm, AUTHOR);
 	}
 
 	@Test
@@ -59,6 +60,11 @@ public class BlogService_ValidPostTests {
 		assertThat(post.getCategory(), equalTo(category));
 		assertThat(post.isBroadcast(), equalTo(broadcast));
 		assertThat(post.isDraft(), equalTo(draft));
+	}
+
+	@Test
+	public void postHasAuthor() {
+		assertThat(post.getAuthor(), equalTo(AUTHOR));
 	}
 
 	@Test

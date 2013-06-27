@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
@@ -55,12 +57,12 @@ public class BlogAdminController {
 	}
 
 	@RequestMapping(value = "", method = { POST })
-	public String createPost(PostForm postForm) {
-	Post newPost = service.addPost(postForm);
-	return newPost.isDraft() ?
-			"redirect:/admin" + newPost.getPath() :
-			"redirect:" + newPost.getPath();
-}
+	public String createPost(PostForm postForm, Principal principal) {
+		Post newPost = service.addPost(postForm, principal.getName());
+		return newPost.isDraft() ?
+				"redirect:/admin" + newPost.getPath() :
+				"redirect:" + newPost.getPath();
+	}
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { PUT, POST })
 	public String updatePost(@PathVariable Long postId, PostForm postForm) {

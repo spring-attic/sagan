@@ -23,6 +23,8 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.security.Principal;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -44,9 +46,16 @@ public class CreateBlogPostTests {
 
 	@Autowired
 	private PostRepository postRepository;
+	private Principal principal;
 
 	@Before
 	public void setup() {
+		principal = new Principal() {
+			@Override
+			public String getName() {
+				return "author";
+			}
+		};
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 		postRepository.deleteAll();
 	}
@@ -66,7 +75,7 @@ public class CreateBlogPostTests {
 
 	@Test
 	public void redirectToPublishedPostAfterCreation() throws Exception {
-		MockHttpServletRequestBuilder createPostRequest = post("/admin/blog");
+		MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
 		createPostRequest.param("title", "Post Title");
 		createPostRequest.param("content", "My Content");
 		createPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
@@ -85,7 +94,7 @@ public class CreateBlogPostTests {
 
 	@Test
 	public void redirectToDraftPostAfterCreation() throws Exception {
-		MockHttpServletRequestBuilder createPostRequest = post("/admin/blog");
+		MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
 		createPostRequest.param("title", "Post Title");
 		createPostRequest.param("content", "My Content");
 		createPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
@@ -113,7 +122,7 @@ public class CreateBlogPostTests {
 
 	@Test
 	public void createdPostValuesArePersisted() throws Exception {
-		MockHttpServletRequestBuilder createPostRequest = post("/admin/blog");
+		MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
 		createPostRequest.param("title", "Post Title");
 		createPostRequest.param("content", "My Content");
 		createPostRequest.param("category", PostCategory.ENGINEERING.name());
@@ -127,6 +136,10 @@ public class CreateBlogPostTests {
 		assertThat(post.getRawContent(), is("My Content"));
 		assertThat(post.getCategory(), is(PostCategory.ENGINEERING));
 		assertThat(post.isBroadcast(), is(true));
+	}
+
+	private MockHttpServletRequestBuilder getCreatePostRequest() {
+		return post("/admin/blog").principal(principal);
 	}
 
 	@Test
