@@ -57,9 +57,6 @@ public class BlogController {
 
 	private String renderListOfPosts(ResultList<Post> result, Model model) {
 		List<Post> posts = result.getItems();
-		if (posts.size() == 0) {
-			throw new BlogPostsNotFound("Page does not exist");
-		}
 		model.addAttribute("categories", PostCategory.values());
 		model.addAttribute("posts", posts);
 		model.addAttribute("paginationInfo", result.getPaginationInfo());

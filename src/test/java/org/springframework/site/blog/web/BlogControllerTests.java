@@ -14,9 +14,8 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.site.blog.PostCategory.ENGINEERING;
 
 public class BlogControllerTests {
@@ -58,14 +57,6 @@ public class BlogControllerTests {
 	public void anyListPosts_providesPaginationInfoInModel(){
 		controller.listPosts(model, TEST_PAGE);
 		assertThat((PaginationInfo) model.get("paginationInfo"), is(paginationInfo));
-	}
-
-	@Test(expected = BlogPostsNotFound.class)
-	public void throwsExceptionWhenPostsNotFound() {
-		ArrayList<Post> noPosts = new ArrayList<Post>();
-		ResultList<Post> emptyResults = new ResultList<Post>(noPosts, mock(PaginationInfo.class));
-		when(blogService.getPublishedPosts(any(Pageable.class))).thenReturn(emptyResults);
-		controller.listPosts(model, TEST_PAGE);
 	}
 
 	@Test

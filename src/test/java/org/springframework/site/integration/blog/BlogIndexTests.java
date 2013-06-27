@@ -122,15 +122,6 @@ public class BlogIndexTests {
 	}
 
 	@Test
-	public void givenRequestForInvalidPage_blogIndexReturns404() throws Exception {
-		createSinglePost();
-
-		mockMvc.perform(get("/blog?page=2"))
-				.andExpect(status().isNotFound())
-				.andReturn();
-	}
-
-	@Test
 	public void given1PageOfResults_blogIndexDoesNotShowPaginationControl() throws Exception {
 		createManyPostsInNovember(1);
 
@@ -199,15 +190,5 @@ public class BlogIndexTests {
 
 		assertThat(numberOfBlogPosts(html), is(2));
 	}
-
-	@Test
-	public void givenRequestForInvalidBroadcastPage_blogIndexReturns404() throws Exception {
-		postRepository.save(PostBuilder.post().isBroadcast().build());
-
-		mockMvc.perform(get("/blog/broadcasts?page=2"))
-				.andExpect(status().isNotFound())
-				.andReturn();
-	}
-
 
 }
