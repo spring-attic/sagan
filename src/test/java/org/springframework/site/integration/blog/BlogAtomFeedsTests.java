@@ -76,7 +76,6 @@ public class BlogAtomFeedsTests {
 
 	private Document getAtomFeedDocument(MvcResult mvcResult) throws ParserConfigurationException, SAXException, IOException {
 		String atomFeed = mvcResult.getResponse().getContentAsString();
-		atomFeed = atomFeed.replaceAll("\r", "");
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		return builder.parse(new ByteArrayInputStream(atomFeed.getBytes()));

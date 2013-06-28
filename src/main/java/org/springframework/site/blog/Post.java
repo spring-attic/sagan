@@ -144,5 +144,7 @@ public class Post implements Serializable {
 		return "/blog/" + getId() + "-" + getSlug();
 	}
 
-
+	public Date getPublishedDate() {
+		return createdDate;
+	}
 }
