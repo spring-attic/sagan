@@ -5,13 +5,16 @@
 <body>
 	<ul class='blog-categories' layout:fragment="blog-categories">
 		<li>
-			<a th:href="@{/blog}" href="/blog">All Posts</a>
+			<a th:href="@{/blog}">All Posts</a>
+            <a th:href="@{/blog.atom}"><i class="icon-rss"></i></a>
 		</li>
 		<li>
-			<a th:href="@{/blog/broadcasts}" href="/blog/broadcasts">Broadcasts</a>
+			<a th:href="@{/blog/broadcasts}">Broadcasts</a>
+            <a th:href="@{/blog/broadcasts.atom}"><i class="icon-rss"></i></a>
 		</li>
 		<li th:each="category : ${categories}">
-			<a th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}" href="/blog/category/engineering">Engineering</a>
+			<a th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}">Engineering</a>
+			<a th:href="@{'/blog/category/'+${category.urlSlug}}+'.atom'"><i class="icon-rss"></i></a>
 		</li>
 	</ul>
 </body>

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.*;
 import org.springframework.ui.ExtendedModelMap;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,9 @@ public class BlogControllerTests {
 	@Mock
     private BlogService blogService;
 
+	@Mock
+    private HttpServletRequest request;
+
 	private BlogController controller;
 	private ExtendedModelMap model = new ExtendedModelMap();
 	private List<Post> posts = new ArrayList<Post>();
@@ -43,6 +47,7 @@ public class BlogControllerTests {
 		when(blogService.getPublishedPosts(eq(testPageable))).thenReturn(page);
 		when(blogService.getPublishedBroadcastPosts(eq(testPageable))).thenReturn(page);
 		when(blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(testPageable))).thenReturn(page);
+		when(request.getServletPath()).thenReturn("/blog");
 	}
 
 	private void assertThatPostsAreInModel() {
@@ -51,24 +56,24 @@ public class BlogControllerTests {
 
 	@Test
 	public void anyListPosts_providesAllCategoriesInModel() {
-		controller.listPublishedPosts(model, TEST_PAGE);
+		controller.listPublishedPosts(model, TEST_PAGE, request);
 		assertThat((PostCategory[]) model.get("categories"), is(PostCategory.values()));
 	}
 
 	@Test
 	public void anyListPosts_providesPaginationInfoInModel(){
-		controller.listPublishedPosts(model, TEST_PAGE);
+		controller.listPublishedPosts(model, TEST_PAGE, request);
 		assertThat((PaginationInfo) model.get("paginationInfo"), is(new PaginationInfo(page)));
 	}
 
 	@Test
 	public void viewNameForAllPosts() {
-		assertThat(controller.listPublishedPosts(model, TEST_PAGE), is("blog/index"));
+		assertThat(controller.listPublishedPosts(model, TEST_PAGE, request), is("blog/index"));
 	}
 
 	@Test
 	public void viewNameForBroadcastPosts() throws Exception {
-		assertThat(controller.listPublishedBroadcasts(model, TEST_PAGE), is("blog/index"));
+		assertThat(controller.listPublishedBroadcasts(model, TEST_PAGE, request), is("blog/index"));
 	}
 
 	@Test
@@ -78,7 +83,7 @@ public class BlogControllerTests {
 
 	@Test
 	public void viewNameForCategoryPosts() {
-		String view = controller.listPublishedPostsForCategory(TEST_CATEGORY, model, TEST_PAGE);
+		String view = controller.listPublishedPostsForCategory(TEST_CATEGORY, model, TEST_PAGE, request);
 		assertThat(view, is("blog/index"));
 	}
 
@@ -93,19 +98,44 @@ public class BlogControllerTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void postsInModelForAllPosts(){
-		controller.listPublishedPosts(model, TEST_PAGE);
+		controller.listPublishedPosts(model, TEST_PAGE, request);
 		assertThatPostsAreInModel();
 	}
 
 	@Test
 	public void postsInModelForBroadcastPosts() throws Exception {
-		controller.listPublishedBroadcasts(model, TEST_PAGE);
+		controller.listPublishedBroadcasts(model, TEST_PAGE, request);
 		assertThatPostsAreInModel();
 	}
 
 	@Test
 	public void postsInModelForCategoryPosts() {
-		controller.listPublishedPostsForCategory(TEST_CATEGORY, model, TEST_PAGE);
+		controller.listPublishedPostsForCategory(TEST_CATEGORY, model, TEST_PAGE, request);
 		assertThatPostsAreInModel();
 	}
+
+	@Test
+	public void feedUrlInModelForAllPosts(){
+		when(request.getServletPath()).thenReturn("/blog/");
+		controller.listPublishedPosts(model, TEST_PAGE, request);
+		assertThat((String) model.get("feed_path"), is("/blog.atom"));
+	}
+
+	@Test
+	public void feedUrlInModelForCategorisedPosts(){
+		String path = "/blog/category/" + TEST_CATEGORY.getUrlSlug();
+		when(request.getServletPath()).thenReturn(path);
+		controller.listPublishedPostsForCategory(TEST_CATEGORY, model, TEST_PAGE, request);
+		assertThat((String) model.get("feed_path"), is(path + ".atom"));
+	}
+
+	@Test
+	public void feedUrlInModelForBroadcastPosts(){
+		String path = "/blog/broadcasts";
+		when(request.getServletPath()).thenReturn(path);
+		controller.listPublishedBroadcasts(model, TEST_PAGE, request);
+		assertThat((String) model.get("feed_path"), is(path + ".atom"));
+	}
+
+
 }

@@ -1,9 +1,11 @@
 package org.springframework.site.integration.blog;
 
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -190,5 +192,4 @@ public class BlogIndexTests {
 
 		assertThat(numberOfBlogPosts(html), is(2));
 	}
-
 }

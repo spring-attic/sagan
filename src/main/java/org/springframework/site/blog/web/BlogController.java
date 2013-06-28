@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -37,31 +38,33 @@ public class BlogController {
 	}
 
 	@RequestMapping(value = "", method = { GET, HEAD })
-	public String listPublishedPosts(Model model, @RequestParam(defaultValue = "1") int page) {
+	public String listPublishedPosts(Model model, @RequestParam(defaultValue = "1") int page, HttpServletRequest request) {
 		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
 		Page<Post> result = service.getPublishedPosts(pageRequest);
-		return renderListOfPosts(result, model);
+		return renderListOfPosts(result, model, request);
 	}
 
 	@RequestMapping(value = "/category/{category}", method = { GET, HEAD })
-	public String listPublishedPostsForCategory(@PathVariable PostCategory category, Model model, @RequestParam(defaultValue = "1") int page) {
+	public String listPublishedPostsForCategory(@PathVariable PostCategory category, Model model, @RequestParam(defaultValue = "1") int page, HttpServletRequest request) {
 		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
 		Page<Post> result = service.getPublishedPosts(category, pageRequest);
-		return renderListOfPosts(result, model);
+		return renderListOfPosts(result, model, request);
 	}
 
 	@RequestMapping(value = "/broadcasts", method = { GET, HEAD })
-	public String listPublishedBroadcasts(Model model, @RequestParam(defaultValue = "1") int page) {
+	public String listPublishedBroadcasts(Model model, @RequestParam(defaultValue = "1") int page, HttpServletRequest request) {
 		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
 		Page<Post> result = service.getPublishedBroadcastPosts(pageRequest);
-		return renderListOfPosts(result, model);
+		return renderListOfPosts(result, model, request);
 	}
 
-	private String renderListOfPosts(Page<Post> page, Model model) {
+	private String renderListOfPosts(Page<Post> page, Model model, HttpServletRequest request) {
 		List<Post> posts = page.getContent();
 		model.addAttribute("categories", PostCategory.values());
 		model.addAttribute("posts", posts);
 		model.addAttribute("paginationInfo", new PaginationInfo(page));
+		String feedPath = request.getServletPath().replaceAll("/$", "");
+		model.addAttribute("feed_path", feedPath + ".atom");
 		return "blog/index";
 	}
 }
