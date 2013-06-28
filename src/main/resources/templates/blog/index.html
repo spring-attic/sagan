@@ -31,17 +31,7 @@
 		</div>
 
 		<div id="sidebar" class="span4">
-			<ul class='blog-categories'>
-				<li>
-					<a th:href="@{/blog}" href="/blog">All Posts</a>
-				</li>
-                <li>
-					<a th:href="@{/blog/broadcasts}" href="/blog/broadcasts">Broadcasts</a>
-				</li>
-				<li th:each="category : ${categories}">
-					<a th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}" href="/blog/category/engineering">Engineering</a>
-				</li>
-			</ul>
+			<ul layout:include="blog/_categories :: blog-categories" />
 		</div>
 	</div>
 </div>
