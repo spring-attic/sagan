@@ -22,19 +22,74 @@ body {
 	margin: 0 auto;
 }
 
+.header--navbar {
+  margin-bottom: 60px;
+  box-shadow: 0 1px 3px rgba(153, 153, 153, 0.75);
+  .navbar-inner {
+    background-image: url("../img/pattern-blinding-dark-blue.png");
+    border: none;
+    .spring-logo {
+      background-image: url("../img/icon-spring-logo-white.png");
+      width: 120px;
+      height: 34px;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      transition: all 0.15s;
+      -webkit-transition: all 0.15s;
+      -moz-transition: all 0.15s;
+      -o-transition: all 0.15s;
+      -ms-transition: all 0.15s;
+      &:hover {
+        background-image: url("../img/icon-spring-logo-green.png");
+      }
+      &.brand {
+        padding: 0;
+        margin: 8px 0;
+      }
+    }
+    .nav .navbar-link {
+      padding: 13px 15px 0;
+      &.active a {
+        background-color: transparent;
+        border-bottom: 3px solid $off-white;
+      }
+      a {
+        color: $off-white;
+        text-transform: uppercase;
+        font-weight: 700;
+        text-shadow: none;
+        font-size: 11px;
+        transition: all 0.15s;
+        -webkit-transition: all 0.15s;
+        -moz-transition: all 0.15s;
+        -o-transition: all 0.15s;
+        -ms-transition: all 0.15s;
+        padding: 0 1px 2px;
+      }
+      &:hover a {
+        color: $off-white;
+        border-bottom: 3px solid $off-white;
+      }
+    }
+    .nav-search {
+      color: $off-white;
+      padding: 15px 0;
+      .icon-search {
+        font-size: 18px;
+        border-left: 1px solid white;
+        padding: 3px 0 3px 12px;
+        margin: 0 0 0 15px;
+      }
+    }
+  }
+}
+
+
+
 .header--container {
   background-color: $medium-grey;
   padding: 60px 0;
-  .header--navbar {
-  	margin-bottom: 60px;
-  }
-  .navbar-inner {
-  	background-color: transparent;
-  	background-image: none;
-  	border: none;
-  	box-shadow: none;
-  	padding: 0px;
-  }
+  margin-top: 50px;
   .header--content-subtitle--link {
     color: $lime;
     &:hover {
