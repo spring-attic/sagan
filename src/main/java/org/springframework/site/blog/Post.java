@@ -5,11 +5,13 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
 public class Post implements Serializable {
 
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy");
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -37,13 +39,16 @@ public class Post implements Serializable {
 	private String renderedSummary;
 
 	@Column(nullable = false)
-	private Date createdDate = new Date();
+	private Date createdAt = new Date();
 
 	@Column(nullable = false)
 	private boolean draft = true;
 
 	@Column(nullable = false)
 	private boolean broadcast = false;
+
+	@Column(nullable = true)
+	private Date publishAt;
 
 	@SuppressWarnings("unused")
 	private Post() {
@@ -107,12 +112,20 @@ public class Post implements Serializable {
 		this.renderedSummary = renderedSummary;
 	}
 
-	public Date getCreatedDate() {
-		return createdDate;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getPublishAt() {
+		return publishAt;
+	}
+
+	public void setPublishAt(Date publishAt) {
+		this.publishAt = publishAt;
 	}
 
 	public String getSlug() {
@@ -144,7 +157,23 @@ public class Post implements Serializable {
 		return "/blog/" + getId() + "-" + getSlug();
 	}
 
-	public Date getPublishedDate() {
-		return createdDate;
+	public boolean isScheduled() {
+		return publishAt == null;
+	}
+
+	public String getFormattedPublishDate() {
+		return isScheduled() ? "Unscheduled" : DATE_FORMAT.format(publishAt);
+	}
+
+	public boolean isLiveOn(Date date) {
+		return !isDraft() && publishAt.before(date);
+	}
+
+	@Override
+	public String toString() {
+		return "Post{" +
+				"id=" + id +
+				", title='" + title + '\'' +
+				'}';
 	}
 }

@@ -14,13 +14,11 @@ import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BlogService_ValidPostTests {
+public class BlogService_UpdatePostTests {
 
 	public static final String RENDERED_HTML_FROM_MARKDOWN = "<p>Rendered HTML</p><p>from Markdown</p>";
 	public static final String RENDERED_SUMMARY_HTML_FROM_MARKDOWN = "<p>Rendered HTML</p>";
@@ -48,7 +46,9 @@ public class BlogService_ValidPostTests {
 
 	@Rule
 	public ExpectedException expected = ExpectedException.none();
+
 	private PostForm postForm;
+	private String ORIGINAL_AUTHOR = "original author";
 
 	@Before
 	public void setup() {
@@ -57,17 +57,21 @@ public class BlogService_ValidPostTests {
 		service = new BlogService(postRepository, markdownService, dateService);
 		when(markdownService.renderToHtml(content)).thenReturn(RENDERED_HTML_FROM_MARKDOWN);
 		when(markdownService.renderToHtml(firstParagraph)).thenReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
-		postForm = new PostForm();
+
+		post = PostBuilder.post().author(ORIGINAL_AUTHOR).build();
+		postForm = new PostForm(post);
 		postForm.setTitle(title);
 		postForm.setContent(content);
 		postForm.setCategory(category);
 		postForm.setBroadcast(broadcast);
 		postForm.setPublishAt(publishAt);
-		post = service.addPost(postForm, AUTHOR);
+
+		service.updatePost(post, postForm);
 	}
 
-	@Test
 	public void postHasCorrectUserEnteredValues() {
+		service.updatePost(post, postForm);
+
 		assertThat(post.getTitle(), equalTo(title));
 		assertThat(post.getRawContent(), equalTo(content));
 		assertThat(post.getCategory(), equalTo(category));
@@ -77,8 +81,8 @@ public class BlogService_ValidPostTests {
 	}
 
 	@Test
-	public void postHasAuthor() {
-		assertThat(post.getAuthor(), equalTo(AUTHOR));
+	public void postRetainsOriginalAuthor() {
+		assertThat(post.getAuthor(), equalTo(ORIGINAL_AUTHOR));
 	}
 
 	@Test
@@ -109,13 +113,6 @@ public class BlogService_ValidPostTests {
 
 	@Test
 	public void postIsPersisted() {
-		verify(postRepository).save(any(Post.class));
-	}
-
-	@Test
-	public void extractFirstParagraph() {
-		assertEquals("xx", service.extractFirstParagraph("xxxxx", 2));
-		assertEquals("xx", service.extractFirstParagraph("xx\n\nxxx", 20));
-		assertEquals("xx", service.extractFirstParagraph("xx xx\n\nxxx", 4));
+		verify(postRepository).save(post);
 	}
 }

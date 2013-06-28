@@ -14,6 +14,22 @@
 			<option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.displayName}">Category</option>
 		</select>
         <label for="broadcast">Broadcast:<input type="checkbox" th:field="*{broadcast}" id="broadcast" name="broadcast" /></label>
+		<div class="well">
+			<div id="datetimepicker1" class="input-append date">
+				<input id="publishAt" type="text" th:field="*{publishAt}" name="publishAt" data-format="yyyy-MM-dd HH:mm" />
+				<span class="add-on">
+				  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+				  </i>
+				</span>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$('#datetimepicker1').datetimepicker({
+					language: 'pt-BR'
+				});
+			});
+		</script>
         <button name="draft" value="false" type="submit">Post Now</button>
         <button name="draft" value="true" type="submit">Save &amp; View Draft</button>
     </form>

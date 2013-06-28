@@ -13,14 +13,16 @@ import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostForm;
+import org.springframework.site.services.DateService;
+import org.springframework.site.test.DateTestUtils;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.sameInstance;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
@@ -32,11 +34,22 @@ public class BlogAdminControllerTests {
 	@Mock
 	private BlogService blogService;
 
+	@Mock
+	private DateService dateService;
+
 	private ExtendedModelMap model = new ExtendedModelMap();
+	private Principal principal;
 
 	@Before
 	public void setup() {
-		controller = new BlogAdminController(blogService);
+		principal = new Principal() {
+			@Override
+			public String getName() {
+				return "testUser";
+			}
+		};
+		when(dateService.now()).thenReturn(new Date());
+		controller = new BlogAdminController(blogService, dateService);
 	}
 
 	@Test
@@ -70,15 +83,42 @@ public class BlogAdminControllerTests {
 	@Test
 	public void creatingABlogPostRecordsTheUser() {
 		PostForm postForm = new PostForm();
-		Principal principal = new Principal() {
-			@Override
-			public String getName() {
-				return "testUser";
-			}
-		};
 
 		when(blogService.addPost(eq(postForm), anyString())).thenReturn(PostBuilder.post().build());
 		controller.createPost(postForm, principal);
 		verify(blogService).addPost(postForm, "testUser");
+	}
+
+
+	@Test
+	public void redirectToPublishedPostAfterCreation() throws Exception {
+		PostForm postForm = new PostForm();
+		Post post = PostBuilder.post().id(123L).publishAt("2013-05-06 00:00").title("Post Title").build();
+		when(blogService.addPost(postForm, principal.getName())).thenReturn(post);
+		when(dateService.now()).thenReturn(DateTestUtils.getDate("2013-10-06 00:00"));
+		String result = controller.createPost(postForm, principal);
+
+		assertThat(result, equalTo("redirect:/blog/123-post-title"));
+	}
+
+	@Test
+	public void redirectToDraftPostAfterCreation() throws Exception {
+		PostForm postForm = new PostForm();
+		Post draft = PostBuilder.post().id(123L).draft().title("Post Title").build();
+		when(blogService.addPost(postForm, principal.getName())).thenReturn(draft);
+		String result = controller.createPost(postForm, principal);
+
+		assertThat(result, equalTo("redirect:/admin/blog/123-post-title"));
+	}
+
+	@Test
+	public void redirectToScheduledPostAfterCreation() throws Exception {
+		PostForm postForm = new PostForm();
+		Post post = PostBuilder.post().id(123L).publishAt("2013-10-12 00:00").title("Post Title").build();
+		when(blogService.addPost(postForm, principal.getName())).thenReturn(post);
+		when(dateService.now()).thenReturn(DateTestUtils.getDate("2013-10-06 00:00"));
+		String result = controller.createPost(postForm, principal);
+
+		assertThat(result, equalTo("redirect:/admin/blog/123-post-title"));
 	}
 }

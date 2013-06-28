@@ -93,25 +93,6 @@ public class CreateBlogPostTests {
 	}
 
 	@Test
-	public void redirectToDraftPostAfterCreation() throws Exception {
-		MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
-		createPostRequest.param("title", "Post Title");
-		createPostRequest.param("content", "My Content");
-		createPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
-		createPostRequest.param("draft", "true");
-
-		this.mockMvc.perform(createPostRequest)
-				.andExpect(status().isFound())
-				.andExpect(new ResultMatcher() {
-					@Override
-					public void match(MvcResult result) {
-						String redirectedUrl = result.getResponse().getRedirectedUrl();
-						assertTrue("Expected redirect to admin blog, got: " + redirectedUrl, redirectedUrl.matches("^/admin/blog/\\d+-post-title"));
-					}
-				});
-	}
-
-	@Test
 	public void canViewBlogPostAtAnySlugName() throws Exception {
 		Post post = PostBuilder.post().build();
 		postRepository.save(post);

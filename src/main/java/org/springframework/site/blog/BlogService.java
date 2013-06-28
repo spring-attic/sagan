@@ -4,19 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.web.NoSuchBlogPostException;
+import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class BlogService {
 
 	private PostRepository repository;
 	private MarkdownService markdownService;
+	private DateService dateService;
 
 	@Autowired
-	public BlogService(PostRepository repository, MarkdownService markdownService) {
+	public BlogService(PostRepository repository, MarkdownService markdownService, DateService dateService) {
 		this.repository = repository;
 		this.markdownService = markdownService;
+		this.dateService = dateService;
 	}
 
 	public Post addPost(PostForm postForm, String author) {
@@ -27,6 +32,7 @@ public class BlogService {
 		post.setRenderedSummary(markdownService.renderToHtml(extractFirstParagraph(content, 500)));
 		post.setBroadcast(postForm.isBroadcast());
 		post.setDraft(postForm.isDraft());
+		post.setPublishAt(publishDate(postForm));
 		repository.save(post);
 		return post;
 	}
@@ -55,7 +61,7 @@ public class BlogService {
 	}
 
 	public Post getPublishedPost(Long postId) {
-		Post post = repository.findByIdAndDraftFalse(postId);
+		Post post = repository.findByIdAndDraftFalseAndPublishAtBefore(postId, dateService.now());
 		if (post == null) {
 			throw new NoSuchBlogPostException("Blog post not found with Id=" + postId);
 		}
@@ -67,15 +73,19 @@ public class BlogService {
 	}
 
 	public Page<Post> getPublishedPosts(Pageable pageRequest) {
-		return repository.findByDraftFalse(pageRequest);
+		return repository.findByDraftFalseAndPublishAtBefore(dateService.now(), pageRequest);
+	}
+
+	public Page<Post> getScheduledPosts(Pageable pageRequest) {
+		return repository.findByDraftFalseAndPublishAtAfter(dateService.now(), pageRequest);
 	}
 
 	public Page<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
-		return repository.findByCategoryAndDraftFalse(category, pageRequest);
+		return repository.findByCategoryAndDraftFalseAndPublishAtBefore(category, dateService.now(), pageRequest);
 	}
 
 	public Page<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
-		return repository.findByBroadcastAndDraftFalse(true, pageRequest);
+		return repository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, dateService.now(), pageRequest);
 	}
 
 	public Page<Post> getAllPosts(Pageable pageRequest) {
@@ -94,11 +104,16 @@ public class BlogService {
 
 		post.setBroadcast(postForm.isBroadcast());
 		post.setDraft(postForm.isDraft());
+		post.setPublishAt(publishDate(postForm));
 
 		repository.save(post);
 	}
 
 	public void deletePost(Post post) {
 		repository.delete(post);
+	}
+
+	private Date publishDate(PostForm postForm) {
+		return !postForm.isDraft() && postForm.getPublishAt() == null ? dateService.now() : postForm.getPublishAt();
 	}
 }

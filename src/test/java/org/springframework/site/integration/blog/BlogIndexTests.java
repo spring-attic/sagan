@@ -99,8 +99,8 @@ public class BlogIndexTests {
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
 		assertThat(numberOfBlogPosts(html), is(10));
-		assertThat(html.select("ul.posts li .date").first().text(), is("November 11, 2013"));
-		assertThat(html.select("ul.posts li .date").last().text(), is("November 2, 2013"));
+		assertThat(html.select("ul.posts li .date").first().text(), is("November 11, 2012"));
+		assertThat(html.select("ul.posts li .date").last().text(), is("November 2, 2012"));
 	}
 
 	private int numberOfBlogPosts(Document html) {
@@ -111,12 +111,13 @@ public class BlogIndexTests {
 		Calendar calendar = Calendar.getInstance();
 		List<Post> posts = new ArrayList<Post>();
 		for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
-			calendar.set(2013, 10, postNumber);
-			Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2013")
+			calendar.set(2012, 10, postNumber);
+			Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2012")
 					.rawContent("Raw content")
 					.renderedContent("Html content")
 					.renderedSummary("Html summary")
 					.dateCreated(calendar.getTime())
+					.publishAt(calendar.getTime())
 					.build();
 			posts.add(post);
 		}

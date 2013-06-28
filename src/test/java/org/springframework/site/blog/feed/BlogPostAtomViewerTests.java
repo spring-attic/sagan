@@ -90,7 +90,7 @@ public class BlogPostAtomViewerTests {
 		blogPostAtomViewer.buildFeedMetadata(model, feed, request);
 
 		Post latestPost = posts.get(0);
-		assertThat(feed.getUpdated(), is(latestPost.getPublishedDate()));
+		assertThat(feed.getUpdated(), is(latestPost.getPublishAt()));
 	}
 
 	@Test
@@ -107,7 +107,7 @@ public class BlogPostAtomViewerTests {
 		for (int date = numberOfPosts; date > 0; date--) {
 			calendar.set(2013, 6, date);
 			Post post = PostBuilder.post().build();
-			post.setCreatedDate(calendar.getTime());
+			post.setPublishAt(calendar.getTime());
 			posts.add(post);
 		}
 	}
@@ -116,7 +116,7 @@ public class BlogPostAtomViewerTests {
 	public void hasCorrectIdForEntry() throws Exception {
 		calendar.set(2013, 6, 1);
 		Post post = spy(PostBuilder.post().build());
-		post.setCreatedDate(calendar.getTime());
+		post.setCreatedAt(calendar.getTime());
 		when(post.getId()).thenReturn(123L);
 
 		model.addAttribute("posts", Arrays.asList(post));

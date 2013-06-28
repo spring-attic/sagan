@@ -126,7 +126,7 @@ public class BlogAtomFeedsTests {
 		assertThat(atomFeed, containsString(post.getTitle()));
 		assertThat(atomFeed, containsString(post.getRenderedContent()));
 
-		String postDate = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedDate());
+		String postDate = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedAt());
 		assertThat(atomFeed, containsString(postDate));
 		assertThat(atomFeed, containsString(post.getPath()));
 		assertThat(atomFeed, containsString(PostCategory.ENGINEERING.getDisplayName()));
@@ -154,7 +154,7 @@ public class BlogAtomFeedsTests {
 					.renderedContent("Html content")
 					.renderedSummary("Html summary")
 					.dateCreated(calendar.getTime())
-					.build();
+							.build();
 			posts.add(post);
 		}
 		postRepository.save(posts);

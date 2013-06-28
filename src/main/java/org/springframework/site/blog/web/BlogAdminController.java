@@ -1,13 +1,13 @@
 package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostForm;
+import org.springframework.site.services.DateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,17 +23,20 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 public class BlogAdminController {
 
 	private BlogService service;
+	private DateService dateService;
 
 	@Autowired
-	public BlogAdminController(BlogService service) {
+	public BlogAdminController(BlogService service, DateService dateService) {
 		this.service = service;
+		this.dateService = dateService;
 	}
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String dashboard(Model model, @RequestParam(defaultValue = "1") int page) {
-		PageRequest pageRequest = new PageRequest(page - 1, Integer.MAX_VALUE, Sort.Direction.DESC, "createdDate");
+		PageRequest pageRequest = new PageRequest(page - 1, Integer.MAX_VALUE, Sort.Direction.DESC, "createdAt");
 		model.addAttribute("posts", service.getPublishedPosts(pageRequest));
 		model.addAttribute("drafts", service.getDraftPosts(pageRequest));
+		model.addAttribute("scheduled", service.getScheduledPosts(pageRequest));
 		return "admin/blog/index";
 	}
 
@@ -63,18 +66,18 @@ public class BlogAdminController {
 	@RequestMapping(value = "", method = { POST })
 	public String createPost(PostForm postForm, Principal principal) {
 		Post newPost = service.addPost(postForm, principal.getName());
-		return newPost.isDraft() ?
-				"redirect:/admin" + newPost.getPath() :
-				"redirect:" + newPost.getPath();
+		return newPost.isLiveOn(dateService.now()) ?
+				"redirect:" + newPost.getPath() :
+				"redirect:/admin" + newPost.getPath();
 	}
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = PUT)
 	public String updatePost(@PathVariable Long postId, PostForm postForm) {
 		Post post = service.getPost(postId);
 		service.updatePost(post, postForm);
-		return post.isDraft() ?
-				"redirect:/admin" + post.getPath() :
-				"redirect:" + post.getPath();
+		return post.isLiveOn(dateService.now()) ?
+				"redirect:" + post.getPath() :
+				"redirect:/admin" + post.getPath();
 	}
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = DELETE)

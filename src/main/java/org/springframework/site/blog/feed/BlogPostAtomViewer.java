@@ -40,7 +40,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 		List<Post> posts = (List<Post>) model.get("posts");
 		if (posts.size() > 0) {
 			Post latestPost = posts.get(0);
-			feed.setUpdated(latestPost.getCreatedDate());
+			feed.setUpdated(latestPost.getPublishAt());
 		}
 	}
 
@@ -68,7 +68,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 			Entry entry = new Entry();
 			entry.setTitle(post.getTitle());
 			setId(post, entry, request);
-			entry.setUpdated(post.getCreatedDate());
+			entry.setUpdated(post.getPublishAt());
 			setRenderedContent(post, entry);
 			setPostUrl(post, entry);
 			setAuthor(post, entry);
@@ -80,7 +80,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 	}
 
 	private void setId(Post post, Entry entry, HttpServletRequest request) {
-		String dateString = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedDate());
+		String dateString = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedAt());
 		String host = request.getServerName();
 		String id = String.format("tag:%s,%s:%s", host, dateString, post.getId());
 		entry.setId(id);

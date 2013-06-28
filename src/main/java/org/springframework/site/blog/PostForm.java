@@ -1,5 +1,9 @@
 package org.springframework.site.blog;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class PostForm {
 	private String title;
 	private String content;
@@ -7,7 +11,10 @@ public class PostForm {
 	private boolean broadcast;
     private boolean draft;
 
-	public PostForm() {	}
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private Date publishAt;
+
+	public PostForm() { }
 
 	public PostForm(Post post) {
 		title = post.getTitle();
@@ -15,6 +22,7 @@ public class PostForm {
 		category = post.getCategory();
 		broadcast = post.isBroadcast();
 		draft = post.isDraft();
+		publishAt = post.getPublishAt();
 	}
 
 	public String getTitle() {
@@ -57,4 +65,11 @@ public class PostForm {
         this.draft = draft;
     }
 
+	public Date getPublishAt() {
+		return publishAt;
+	}
+
+	public void setPublishAt(Date publishAt) {
+		this.publishAt = publishAt;
+	}
 }

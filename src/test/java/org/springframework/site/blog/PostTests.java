@@ -2,7 +2,11 @@ package org.springframework.site.blog;
 
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -42,6 +46,36 @@ public class PostTests {
 		when(post.getId()).thenReturn(123L);
 
 		assertThat(post.getPath(), is("/blog/123-an-awesome-blog-post"));
+	}
+
+	@Test
+	public void getFormattedPublishDateReturnsSchedulePublishAt() throws ParseException {
+		Post post = PostBuilder.post().publishAt("2013-06-11 13:17:01").build();
+		assertThat(post.getFormattedPublishDate(), equalTo("June 11, 2013"));
+	}
+
+	@Test
+	public void getFormattedPublishDateReturnsUnscheduled() throws ParseException {
+		Post post = PostBuilder.post().unscheduled().build();
+		assertThat(post.getFormattedPublishDate(), equalTo("Unscheduled"));
+	}
+
+	@Test
+	public void isNotLiveIfDraft() throws ParseException {
+		Post post = PostBuilder.post().draft().build();
+		assertThat(post.isLiveOn(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2014-06-28 00:00")), is(false));
+	}
+
+	@Test
+	public void isNotLiveIfScheduledInTheFuture() throws ParseException {
+		Post post = PostBuilder.post().publishAt("2013-15-12 00:00").build();
+		assertThat(post.isLiveOn(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-28 00:00")), is(false));
+	}
+
+	@Test
+	public void isLiveIfPublishedInThePast() throws ParseException {
+		Post post = PostBuilder.post().publishAt("2013-01-01 00:00").build();
+		assertThat(post.isLiveOn(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-28 00:00")), is(true));
 	}
 
 }
