@@ -78,7 +78,7 @@ public class BlogPostAtomViewerTests {
 
 		blogPostAtomViewer.buildFeedMetadata(model, feed, request);
 
-		assertThat(feed.getId(), is("springsource.org/blog.atom"));
+		assertThat(feed.getId(), is("http://springsource.org/blog.atom"));
 	}
 
 	@Test

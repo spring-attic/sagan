@@ -27,7 +27,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 	protected void buildFeedMetadata(Map<String, Object> model, Feed feed, HttpServletRequest request) {
 		String feedPath = (String) model.get("feed-path");
 		feed.setTitle((String) model.get("feed-title"));
-		feed.setId(String.format("springsource.org%s", feedPath));
+		feed.setId(String.format("http://springsource.org%s", feedPath));
 		feed.setIcon(siteUrl.getAbsoluteUrl("/favicon.ico"));
 		setFeedUrl(feedPath, feed);
 		setBlogUrl((String) model.get("blog-path"), feed);
