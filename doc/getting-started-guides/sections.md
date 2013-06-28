@@ -44,7 +44,13 @@ First you set up a basic build script. You can use any build system you like whe
 
 
 # {!begin#android-build-system-intro}
-First you set up a basic build script. If this is your first time working with Android projects, refer to [Getting Started with Android](../gs-android/README.md) to help configure your development environment. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Getting Started with Maven](../gs-maven-android/README.md) or [Getting Started with Gradle](../gs-gradle-android/README.md).
+In this section you set up a basic build script and then create a simple application. 
+
+> **Note:**If you are new to Android projects, before you proceed, refer to [Getting Started with Android](../gs-android/README.md) to help you configure your development environment. 
+
+You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Getting Started with Maven](../gs-maven-android/README.md) or [Getting Started with Gradle](../gs-gradle-android/README.md).
+
+After you create a simple web application that will consume the REST 
 {!end#android-build-system-intro}
 
 
