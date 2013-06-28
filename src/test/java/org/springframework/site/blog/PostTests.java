@@ -26,6 +26,11 @@ public class PostTests {
 	}
 
 	@Test
+	public void slugStripsNonAlphanumericCharactersUsedAsDividersWithSpaces() {
+		assertEquals("title-1-something", new Post("Title__--1/@something", "", PostCategory.ENGINEERING).getSlug());
+	}
+
+	@Test
 	public void slugStripsNewLineCharacters() {
 		assertEquals("title-1-on-multiple-lines", new Post("Title 1\n on multiple\nlines", "", PostCategory.ENGINEERING).getSlug());
 	}
