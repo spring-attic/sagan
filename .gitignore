@@ -13,4 +13,4 @@ dependency-reduced-pom.xml
 *.iml
 /src/main/resources/git.properties
 Gemfile.lock
-
+.DS_Store
