@@ -58,7 +58,8 @@ public class BlogFeedControllerTests {
 	public void feedMetadataInModelForAllPublishedPosts(){
 		controller.listPublishedPosts(model);
 		assertThat((String) model.get("feed-title"), is("Spring"));
-		assertThat((String) model.get("feed-path"), is("/blog"));
+		assertThat((String) model.get("feed-path"), is("/blog.atom"));
+		assertThat((String) model.get("blog-path"), is("/blog"));
 	}
 
 	@Test
@@ -71,7 +72,8 @@ public class BlogFeedControllerTests {
 	public void feedMetadataInModelForCategoryPosts(){
 		controller.listPublishedPostsForCategory(TEST_CATEGORY, model);
 		assertThat((String) model.get("feed-title"), is("Spring " + TEST_CATEGORY.getDisplayName()));
-		assertThat((String) model.get("feed-path"), is("/blog/category/" + TEST_CATEGORY.getUrlSlug()));
+		assertThat((String) model.get("feed-path"), is("/blog/category/" + TEST_CATEGORY.getUrlSlug() + ".atom"));
+		assertThat((String) model.get("blog-path"), is("/blog/category/" + TEST_CATEGORY.getUrlSlug()));
 	}
 
 	@Test
@@ -84,7 +86,8 @@ public class BlogFeedControllerTests {
 	public void feedMetadataInModelForBroadcastPosts(){
 		controller.listPublishedBroadcastPosts(model);
 		assertThat((String) model.get("feed-title"), is("Spring Broadcasts"));
-		assertThat((String) model.get("feed-path"), is("/blog/broadcasts"));
+		assertThat((String) model.get("feed-path"), is("/blog/broadcasts.atom"));
+		assertThat((String) model.get("blog-path"), is("/blog/broadcasts"));
 	}
 
 }

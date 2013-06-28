@@ -45,7 +45,21 @@ public class BlogPostAtomViewerTests {
 	}
 
 	@Test
-	public void hasCategoryInLink() {
+	public void hasLinkToAssociatedBlogList() {
+		String expectedBlogPath = "/blog/category/engineering";
+		String expectedBlogUrl = "http://localhost:8080/blog/category/engineering";
+		when(siteUrl.getAbsoluteUrl(eq(expectedBlogPath))).thenReturn(expectedBlogUrl);
+		model.addAttribute("blog-path", expectedBlogPath);
+
+		blogPostAtomViewer.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
+
+		Link feedLink = (Link) feed.getAlternateLinks().get(0);
+		assertThat(feedLink.getHref(), is(expectedBlogUrl));
+		assertThat(feedLink.getRel(), is("alternate"));
+	}
+
+	@Test
+	public void hasLinkToSelf() {
 		String expectedFeedPath = "/blog/category/engineering.atom";
 		String expectedFeedUrl = "http://localhost:8080/blog/category/engineering.atom";
 		when(siteUrl.getAbsoluteUrl(eq(expectedFeedPath))).thenReturn(expectedFeedUrl);
@@ -53,17 +67,18 @@ public class BlogPostAtomViewerTests {
 
 		blogPostAtomViewer.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
 
-		Link feedLink = (Link) feed.getAlternateLinks().get(0);
+		Link feedLink = (Link) feed.getOtherLinks().get(0);
 		assertThat(feedLink.getHref(), is(expectedFeedUrl));
+		assertThat(feedLink.getRel(), is("self"));
 	}
 
 	@Test
 	public void hasCorrectIdForFeed() throws Exception {
-		model.addAttribute("feed-path", "/blog");
+		model.addAttribute("feed-path", "/blog.atom");
 
 		blogPostAtomViewer.buildFeedMetadata(model, feed, request);
 
-		assertThat(feed.getId(), is("tag:springsource.org:/blog"));
+		assertThat(feed.getId(), is("springsource.org/blog.atom"));
 	}
 
 	@Test

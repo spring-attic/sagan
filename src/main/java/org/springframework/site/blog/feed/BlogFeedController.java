@@ -45,7 +45,9 @@ public class BlogFeedController {
 	private String renderBlogFeeds(Model model, Page<Post> page, String category, String subPath) {
 		model.addAttribute("posts", page.getContent());
 		model.addAttribute("feed-title", ("Spring " + category).trim());
-		model.addAttribute("feed-path", "/blog" + subPath);
+		String blogPath = "/blog" + subPath;
+		model.addAttribute("blog-path", blogPath);
+		model.addAttribute("feed-path", blogPath + ".atom");
 		return "blogPostAtomViewer";
 	}
 }
