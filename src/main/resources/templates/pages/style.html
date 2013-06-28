@@ -15,12 +15,14 @@
 
 	<script type="text/javascript" th:src="@{/resources/js/jquery.js}" src="../../js/jquery.js"></script>
 	<script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.min.js}" src="../../bootstrap/js/bootstrap.min.js"></script>
-
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
   <script>
   $(function() {
     console.log('boo');
     $('.js-spring-popover').popover({ html: true});
   });
+
+
   </script>
 
 </head>
@@ -64,6 +66,15 @@
       <i class="icon-search floating-input--icon"></i>
       <input type="text" class="floating-input span6" placeholder="filter">
     </div>
+
+    <pre class="prettyprint">
+      &lt;h2&gt;Search Styles&lt;/h2&gt;  
+      &lt;h3&gt;Filter on a page&lt;/h3&gt;
+      &lt;div class=&quot;row-fluid filter--container&quot;&gt;
+        &lt;i class=&quot;icon-search floating-input--icon&quot;&gt;&lt;/i&gt;
+        &lt;input type=&quot;text&quot; class=&quot;floating-input span6&quot; placeholder=&quot;filter&quot;&gt;
+      &lt;/div&gt;
+    </pre>
     <div class="row--container">
       <div class="row-fluid">
         <h2>Page List Layouts</h2>    
@@ -103,30 +114,30 @@
       </div>
     </div>
 
-	<pre class="prettyprint">
-&lt;div class=&quot;row--container&quot;&gt;
-	&lt;div class=&quot;row-fluid&quot;&gt;
-		&lt;h2&gt;Page List Layouts&lt;/h2&gt;
-		&lt;h3&gt;3 Column layout, with link and descriptions&lt;/h3&gt;
-	&lt;/div&gt;
-	&lt;div class=&quot;row-fluid body--container--row&quot;&gt;
-		&lt;div class=&quot;span4&quot;&gt;
-			&lt;a href=&quot;#&quot; class=&quot;body--container--link&quot;&gt;Getting started building a RESTful web service&lt;/a&gt;
-			&lt;p&gt;Aenean eu leo quam. Pellentesque ornare sem&lt;/p&gt;
-		&lt;/div&gt;
+  	<pre class="prettyprint">
+      &lt;div class=&quot;row--container&quot;&gt;
+      	&lt;div class=&quot;row-fluid&quot;&gt;
+      		&lt;h2&gt;Page List Layouts&lt;/h2&gt;
+      		&lt;h3&gt;3 Column layout, with link and descriptions&lt;/h3&gt;
+      	&lt;/div&gt;
+      	&lt;div class=&quot;row-fluid body--container--row&quot;&gt;
+      		&lt;div class=&quot;span4&quot;&gt;
+      			&lt;a href=&quot;#&quot; class=&quot;body--container--link&quot;&gt;Getting started building a RESTful web service&lt;/a&gt;
+      			&lt;p&gt;Aenean eu leo quam. Pellentesque ornare sem&lt;/p&gt;
+      		&lt;/div&gt;
 
-		&lt;div class=&quot;span4&quot;&gt;
-			&lt;a href=&quot;#&quot; class=&quot;body--container--link&quot;&gt;Getting started building a RESTful web service&lt;/a&gt;
-			&lt;p&gt;Aenean eu leo quam. Pellentesque ornare sem&lt;/p&gt;
-		&lt;/div&gt;
+      		&lt;div class=&quot;span4&quot;&gt;
+      			&lt;a href=&quot;#&quot; class=&quot;body--container--link&quot;&gt;Getting started building a RESTful web service&lt;/a&gt;
+      			&lt;p&gt;Aenean eu leo quam. Pellentesque ornare sem&lt;/p&gt;
+      		&lt;/div&gt;
 
-		&lt;div class=&quot;span4&quot;&gt;
-			&lt;a href=&quot;#&quot; class=&quot;body--container--link&quot; &gt;Getting started building a RESTful web service&lt;/a&gt;
-			&lt;p&gt;Aenean eu leo quam. Pellentesque ornare sem&lt;/p&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-	</pre>
+      		&lt;div class=&quot;span4&quot;&gt;
+      			&lt;a href=&quot;#&quot; class=&quot;body--container--link&quot; &gt;Getting started building a RESTful web service&lt;/a&gt;
+      			&lt;p&gt;Aenean eu leo quam. Pellentesque ornare sem&lt;/p&gt;
+      		&lt;/div&gt;
+      	&lt;/div&gt;
+      &lt;/div&gt;
+  	</pre>
 
     <div class="row--container">
       <div class="row-fluid">
@@ -391,29 +402,126 @@
             </li>
           </ul>
         </div>
-
-
       </div>
     </div>
+    <pre class="prettyprint">
+      &lt;div class=&quot;row--container&quot;&gt;
+        &lt;div class=&quot;row-fluid&quot;&gt;
+          &lt;h3&gt;6 column grid with links and popover&lt;/h3&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;row-fluid body--container--row&quot;&gt;
+          &lt;div class=&quot;span2&quot;&gt;
+            &lt;a href=&quot;#&quot; class=&quot;body--container--link bold&quot;&gt;Spring Project Name&lt;/a&gt;
+            &lt;ul class=&quot;list-link--container&quot;&gt;
+              &lt;li class=&quot;list-link&quot;&gt;
+                &lt;div class=&quot;js-spring-popover&quot; data-title=&quot;Reference Docs&quot; data-content=&quot; 
+                  &lt;ul class=&lsquo;list-link--container&rsquo;&gt;
+                    &lt;li class=&lsquo;list-link&lsquo;&gt;
+                      &lt;a href=&lsquo;#&rsquo;&gt;3.1.4.RELEASE (Current)&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li class=&lsquo;list-link&rsquo;&gt;
+                      &lt;a href=&lsquo;#&rsquo;&gt;1.2.4&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li class=&lsquo;list-link&rsquo;&gt;
+                      &lt;a href=&lsquo;#&rsquo;&gt;5.6.7.0&lt;/a&gt;
+                    &lt;/li&gt;
+                  &lt;/ul&gt;
+                &quot;data-toggle=&quot;popover&quot; data-placement=&quot;bottom&quot;&gt;Reference Docs&lt;/div&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    </pre>
     <div class="row--container">
       <h3> 3 Column grid with bottom slide</h3>
       <div class="row-fluid body--container--row">
         <div class="span4 bottom-slide--container">
-          picture goes here
-          <div class="bottom-slider">
-            <h3 class="bottom-slider--title">
-              Linky Title goes here 
-            </h3>
-            <a href="#" class="pull-right">
-              <i class="icon-github bottom-slider--icon"></i>
-            </a>
-          </div>
+          <a href="">
+            <div class="bottom-slider--image">
+            </div>
+            <div class="bottom-slider">
+              <h3 class="bottom-slider--title">
+                <a href="#" class="body--container--link bold">Linky Title goes here</a>
+              </h3>
+              <div class="bottom-slider--more-info">
+                <p>
+                  Nullam quis risus eget urna mollis ornare vel eu leo.
+                </p>
+                <a href="#" class="btn pull-right">
+                  <i class="icon-github bottom-slider--icon"></i>
+                </a>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="span4 bottom-slide--container">
+          <a href="">
+            <div class="bottom-slider--image">
+            </div>
+            <div class="bottom-slider">
+              <h3 class="bottom-slider--title">
+                <a href="#" class="body--container--link bold">Linky Title goes here</a>
+              </h3>
+              <div class="bottom-slider--more-info">
+                <p>
+                  Nullam quis risus eget urna mollis ornare vel eu leo.
+                </p>
+                <a href="#" class="btn pull-right">
+                  <i class="icon-github bottom-slider--icon"></i>
+                </a>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="span4 bottom-slide--container">
+          <a href="">
+            <div class="bottom-slider--image">
+            </div>
+            <div class="bottom-slider">
+              <h3 class="bottom-slider--title">
+                <a href="#" class="body--container--link bold">Linky Title goes here</a>
+              </h3>
+              <div class="bottom-slider--more-info">
+                <p>
+                  Nullam quis risus eget urna mollis ornare vel eu leo.
+                </p>
+                <a href="#" class="btn pull-right">
+                  <i class="icon-github bottom-slider--icon"></i>
+                </a>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
+      <pre class="prettyprint">
+        &lt;div class=&quot;row-fluid body--container--row&quot;&gt;
+          &lt;div class=&quot;span4 bottom-slide--container&quot;&gt;
+            &lt;a href=&quot;&quot;&gt;
+              &lt;div class=&quot;bottom-slider--image&quot;&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;bottom-slider&quot;&gt;
+                &lt;h3 class=&quot;bottom-slider--title&quot;&gt;
+                  &lt;a href=&quot;#&quot; class=&quot;body--container--link bold&quot;&gt;Linky Title goes here&lt;/a&gt;
+                &lt;/h3&gt;
+                &lt;div class=&quot;bottom-slider--more-info&quot;&gt;
+                  &lt;p&gt;
+                    Nullam quis risus eget urna mollis ornare vel eu leo.
+                  &lt;/p&gt;
+                  &lt;a href=&quot;#&quot; class=&quot;btn pull-right&quot;&gt;
+                    &lt;i class=&quot;icon-github bottom-slider--icon&quot;&gt;&lt;/i&gt;
+                  &lt;/a&gt;
+                  &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      </pre>
     </div>
   </div>
-
-	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
-
 </body>
 </html>
