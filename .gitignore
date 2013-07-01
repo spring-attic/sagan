@@ -15,3 +15,4 @@ dependency-reduced-pom.xml
 Gemfile.lock
 .DS_Store
 .sass-cache
+atlassian-ide-plugin.xml
