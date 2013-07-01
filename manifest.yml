@@ -1,7 +1,7 @@
 ---
 applications:
 - name: sagan
-  memory: 512M
+  memory: 768M
   instances: 1
   host: sagan
   domain: cfapps.io
