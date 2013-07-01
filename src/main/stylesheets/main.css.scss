@@ -264,3 +264,18 @@ input.floating-input {
   }
 }
 
+.dashboard--posts {
+  tr:hover {
+    .actions {
+      visibility: visible;
+    }
+  }
+
+  .actions {
+    visibility: hidden;
+    form {
+      display: inline;
+    }
+  }
+}
+

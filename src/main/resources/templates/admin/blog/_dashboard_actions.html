@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<nav class="actions" layout:fragment="dashboard-actions">
+    <span><a class="btn" th:href="@{'/admin' + ${post.path}}" href="/admin/blog/show">View</a></span>
+    <span><a class="btn" th:href="@{'/admin' + ${post.path} + '/edit'}" href="/admin/blog/edit">Edit</a></span>
+    <span><form th:action="@{'/admin' + ${post.path}}" method="post">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <button class="btn" type="submit" name="delete">Delete</button>
+    </form></span>
+</nav>
+</body>
+</html>
