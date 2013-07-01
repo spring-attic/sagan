@@ -14,6 +14,17 @@ $(document).ready(function() {
         $('.clone-url.' + $(this).data('protocol')).show();
     });
 
+    if (typeof(sts_import) === 'function') {
+        $(".gs-guide-import").click(function (e) {
+            var linkElement = e.target;
+            var url = linkElement.href;
+            sts_import("guide", url);
+            e.preventDefault();
+        });
+    } else {
+        $(".gs-guide-import").hide();
+    }
+
 });
 
 function createCodeCopyButtons() {

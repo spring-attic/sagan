@@ -39,6 +39,7 @@
                 </div>
 
                 <a class="github_download" th:href='${guide.zipUrl}'>Download ZIP</a>
+                <a class="gs-guide-import" th:href="${guide.githubHttpsUrl}">Import into STS</a>
             </div>
 
             <div class='related_resources' th:utext="${guide.sidebar}">Sidebar content</div>
