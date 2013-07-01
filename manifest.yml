@@ -3,7 +3,8 @@ applications:
 - name: sagan
   memory: 512M
   instances: 1
-  url: sagan.cfapps.io
+  host: sagan
+  domain: cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
   command: cp cacerts .jdk/lib/security && java -classpath . org.springframework.site.configuration.ApplicationConfiguration --server.port=$PORT
 
