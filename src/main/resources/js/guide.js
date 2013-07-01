@@ -15,14 +15,12 @@ $(document).ready(function() {
     });
 
     if (typeof(sts_import) === 'function') {
-        $(".gs-guide-import").click(function (e) {
+        $(".gs-guide-import").show().click(function (e) {
             var linkElement = e.target;
             var url = linkElement.href;
             sts_import("guide", url);
             e.preventDefault();
         });
-    } else {
-        $(".gs-guide-import").hide();
     }
 
 });
