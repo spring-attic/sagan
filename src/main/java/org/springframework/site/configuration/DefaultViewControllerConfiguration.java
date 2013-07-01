@@ -12,6 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,6 +46,7 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	@PostConstruct
 	public void configureThymeleafSecurity() {
 		templateEngine.addDialect(new SpringSecurityDialect());
+		templateEngine.addDialect(new LayoutDialect());
 	}
 
 	@Override
