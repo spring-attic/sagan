@@ -26,10 +26,12 @@ import static org.junit.Assert.*;
 
 public class BasicAcceptanceTests {
 
+	public static final int PORT = 9080;
+
 	private static ConfigurableApplicationContext context;
 
 	//TODO make this dynamic
-	private String serverAddress = "http://localhost:8080";
+	private String serverAddress = "http://localhost:" + PORT;
 
 	@BeforeClass
 	public static void start() throws Exception {
@@ -39,7 +41,7 @@ public class BasicAcceptanceTests {
 							@Override
 							public ConfigurableApplicationContext call() throws Exception {
 								return (ConfigurableApplicationContext) ApplicationConfiguration
-										.build().run();
+										.build().run("--server.port=" + PORT);
 							}
 						});
 		context = future.get(30, TimeUnit.SECONDS);
@@ -85,7 +87,7 @@ public class BasicAcceptanceTests {
 
 	@Test
 	public void adminIsSecure() {
-		ResponseEntity<String> response = doGet("/admin");
+		ResponseEntity<String> response = doGet("/admin/blog");
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 
 		Document html = Jsoup.parse(response.getBody());

@@ -31,6 +31,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
@@ -123,13 +124,14 @@ public class ApplicationConfiguration {
 			AbstractAuthenticationProcessingFilter filter = new SecurityContextAuthenticationFilter(
 					SIGNIN_SUCCESS_PATH);
 			SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-			successHandler.setDefaultTargetUrl("/admin/blog/new");
+			successHandler.setDefaultTargetUrl("/admin/blog");
 			filter.setAuthenticationSuccessHandler(successHandler);
 			return filter;
 		}
 	}
 
 	@Configuration
+	@EnableWebSecurity
 	@Order(Integer.MAX_VALUE)
 	protected static class AdminAuthenticationConfiguration extends
 			WebSecurityConfigurerAdapter {

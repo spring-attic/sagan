@@ -29,9 +29,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.not;
