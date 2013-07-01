@@ -46,11 +46,10 @@ First you set up a basic build script. You can use any build system you like whe
 # {!begin#android-build-system-intro}
 In this section you set up a basic build script and then create a simple application. 
 
-> **Note:**If you are new to Android projects, before you proceed, refer to [Getting Started with Android](../gs-android/README.md) to help you configure your development environment. 
+> **Note: **If you are new to Android projects, before you proceed, refer to [Getting Started with Android](../gs-android/README.md) to help you configure your development environment. 
 
 You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Getting Started with Maven](../gs-maven-android/README.md) or [Getting Started with Gradle](../gs-gradle-android/README.md).
-
-After you create a simple web application that will consume the REST 
+ 
 {!end#android-build-system-intro}
 
 
@@ -98,8 +97,7 @@ The [Android Manifest] contains all the information required to run an Android a
 # {!begin#related-resources}
 Related resources
 -----------------
-
-There's more to building RESTful web services than is covered here. You may want to continue your exploration of Spring and REST with the following Getting Started guides:
+You can continue your exploration of Spring and REST with the following Getting Started guides:
 
 * [Handling POST, PUT, and GET requests in REST services](TODO)
 * [Creating self-describing APIs with HATEOAS](TODO)
@@ -123,13 +121,13 @@ TODO: mention that we're using Spring Bootstrap's [_starter POMs_](../gs-bootstr
 Build and run the client
 ------------------------
 
-When you have an attached device or running emulator, use the following command to invoke the code and see the results of the REST request:
+With an attached device or emulator running, invoke the code and see the results of the REST request:
 
 ```sh
 $ mvn clean package android:deploy android:run
 ```
 
-This command builds the Android app and runs it in the emulator.
+The command builds the Android app and runs it in the emulator.
 {!end#build-and-run-android}
 
 
