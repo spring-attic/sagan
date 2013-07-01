@@ -3,7 +3,7 @@ ZeroClipboard.setDefaults( { moviePath: '/js/ZeroClipboard.swf' } );
 $(document).ready(function() {
     if (ZeroClipboard.detectFlashSupport()) {
         createCodeCopyButtons();
-        activateGithubCopyButton();
+        createCopyButton($('button.copy-button.github'));
     }
 
     $('.github-actions button').click(function() {
@@ -29,13 +29,14 @@ function createCodeCopyButtons() {
     $('article .highlight pre').each(function(index) {
             var codeBlockId = "code-block-"+ index;
             $(this).attr('id', codeBlockId);
-            var button = $('<button class="copy-button snippet" id="copy-button-"' + index + ' data-clipboard-target="' + codeBlockId + '" title="Click to copy to clipboard.">Copy</button>');
+            var button = $('<button class="copy-button snippet" id="copy-button-"' + index + ' data-clipboard-target="' + codeBlockId + '">Copy</button>');
             $(this).before(button);
-            new ZeroClipboard(button);
+            createCopyButton(button);
         }
     );
 }
 
-function activateGithubCopyButton() {
-    new ZeroClipboard($('button.copy-button.github'));
+function createCopyButton($el){
+    var zero = new ZeroClipboard($el);
+    $(zero.htmlBridge).tooltip({title: "copy to clipboard", placement: 'bottom'});
 }
