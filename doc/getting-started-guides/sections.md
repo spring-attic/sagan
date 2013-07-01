@@ -46,11 +46,10 @@ First you set up a basic build script. You can use any build system you like whe
 # {!begin#android-build-system-intro}
 In this section you set up a basic build script and then create a simple application. 
 
-> **Note:**If you are new to Android projects, before you proceed, refer to [Getting Started with Android](../gs-android/README.md) to help you configure your development environment. 
+> **Note:** If you are new to Android projects, before you proceed, refer to [Getting Started with Android](../gs-android/README.md) to help you configure your development environment. 
 
 You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Getting Started with Maven](../gs-maven-android/README.md) or [Getting Started with Gradle](../gs-gradle-android/README.md).
-
-After you create a simple web application that will consume the REST 
+ 
 {!end#android-build-system-intro}
 
 
@@ -98,15 +97,15 @@ The [Android Manifest] contains all the information required to run an Android a
 # {!begin#related-resources}
 Related resources
 -----------------
+You can continue your exploration of Spring and REST with the following Getting Started guides:
 
-There's more to building RESTful web services than is covered here. You may want to continue your exploration of Spring and REST with the following Getting Started guides:
-
-* [Handling POST, PUT, and GET requests in REST services](TODO)
-* [Creating self-describing APIs with HATEOAS](TODO)
-* [Securing a REST service with HTTP Basic](TODO)
-* [Securing a REST service with OAuth](TODO)
-* [Consuming REST services](https://github.com/springframework-meta/gs-consuming-rest-core/blob/master/README.md)
-* [Testing REST services](TODO)
+* [Handling POST, PUT, and GET Requests in REST Services](TODO)
+* [Creating Self-Describing APIs with HATEOAS](TODO)
+* [Securing a REST Service with HTTP Basic](TODO)
+* [Securing a REST Service with OAuth](TODO)
+* [Building a RESTful Web Service](https://github.com/springframework-meta/gs-rest-service-core/blob/master/README.md)
+* [Consuming RESTful Web Services with Spring](https://github.com/springframework-meta/gs-consuming-rest-core/blob/master/README.md)
+* [Testing REST Services](TODO)
 </span>
 {!end#related-resources}
 
@@ -114,7 +113,7 @@ There's more to building RESTful web services than is covered here. You may want
 # {!begin#bootstrap-starter-pom-disclaimer}
 TODO: mention that we're using Spring Bootstrap's [_starter POMs_](../gs-bootstrap-starter) here.
 
-> Note to experienced Maven users who don't use an external parent project: You can take it out later, it's just there to reduce the amount of code you have to write to get started.
+> Note to experienced Maven users who don't use an external parent project: You can take out the project later, it's just there to reduce the amount of code you have to write to get started.
 
 {!end#bootstrap-starter-pom-disclaimer}
 
@@ -123,13 +122,13 @@ TODO: mention that we're using Spring Bootstrap's [_starter POMs_](../gs-bootstr
 Build and run the client
 ------------------------
 
-When you have an attached device or running emulator, use the following command to invoke the code and see the results of the REST request:
+With an attached device or emulator running, invoke the code and see the results of the REST request:
 
 ```sh
 $ mvn clean package android:deploy android:run
 ```
 
-This command builds the Android app and runs it in the emulator.
+The command builds the Android app and runs it in the emulator or attached device.
 {!end#build-and-run-android}
 
 
