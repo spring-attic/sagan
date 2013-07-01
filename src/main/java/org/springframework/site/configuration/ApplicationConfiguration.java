@@ -30,9 +30,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.security.config.annotation.web.HttpConfiguration;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -108,8 +109,9 @@ public class ApplicationConfiguration {
 	protected static class SigninAuthenticationConfiguration extends
 			WebSecurityConfigurerAdapter {
 
+
 		@Override
-		protected void configure(HttpConfiguration http) throws Exception {
+		protected void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/signin/**")
 					.addFilterBefore(authenticationFilter(),
 							AnonymousAuthenticationFilter.class)
@@ -133,12 +135,11 @@ public class ApplicationConfiguration {
 			WebSecurityConfigurerAdapter {
 
 		@Override
-		protected void configure(HttpConfiguration http) throws Exception {
+		protected void configure(HttpSecurity http) throws Exception {
 			http.exceptionHandling().authenticationEntryPoint(
 					authenticationEntryPoint());
 			http.logout().logoutUrl("/signout").logoutSuccessUrl("/signin?signout=success");
-			http.requestMatchers().antMatchers("/admin/**", "/signout").authorizeUrls().anyRequest()
-					.authenticated();
+			http.authorizeUrls().antMatchers("/admin/**", "/signout").authenticated();
 		}
 
 		private AuthenticationEntryPoint authenticationEntryPoint() {
@@ -146,6 +147,12 @@ public class ApplicationConfiguration {
 			// should we POST back here (e.g. with forward)?
 			LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint("/signin");
 			return entryPoint;
+		}
+
+		// TODO remove once Thymeleaf integration is fixed in spring-data
+		@Bean
+		public DefaultWebSecurityExpressionHandler webSecurityExpressionHandler() {
+			return new DefaultWebSecurityExpressionHandler();
 		}
 
 		@Bean
