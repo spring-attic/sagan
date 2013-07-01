@@ -23,32 +23,47 @@
 	<script type="text/javascript" th:src="@{/resources/js/guide.js}" src="../../js/guide.js"></script>
 </head>
 <body>
-	<div class="header--container">
-		<div class="navbar container-fluid header--navbar">
-			<div class="navbar-inner">
-				<a class="brand" th:href="@{/}" href="pages/index.html">Spring</a>
-				<form class="navbar-form pull-left">
-					<input type="text" class="span4" placeholder="Search Spring" />
-				</form>
+<div class="navbar navbar-fixed-top header--navbar">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand spring-logo" th:href="@{/}" href="/"></a>
+            <ul class="nav pull-right">
+                <li class=" navbar-link">
+                    <a th:href="@{/documentation}" href="documentation/index.html">Documentation</a>
+                </li>
+                <li class=" navbar-link active">
+                    <a th:href="@{/guides}" href="pages/guides/index.html">Guides</a>
+                </li>
+                <li class=" navbar-link">
+                    <a th:href="@{/projects}" href="pages/projects.html">Projects</a>
+                </li>
+                <li class=" navbar-link">
+                    <a th:href="@{/blog}" href="pages/blog.html">Blog</a>
+                </li>
+                <li class=" navbar-link">
+                    <a href="http://forum.springframework.org">Forum</a>
+                </li>
+                <li class=" navbar-link">
+                    <a href="#">Help</a>
+                </li>
+                <li class="nav-search">
+                    <i class="icon-search"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-				<ul class="nav pull-right">
-					<li><a th:href="@{/documentation}" href="documentation/index.html">Documentation</a></li>
-					<li><a th:href="@{/guides}" href="pages/guides/index.html">Guides</a></li>
-					<li><a th:href="@{/projects}" href="pages/projects.html">Projects</a></li>
-					<li><a th:href="@{/blog}" href="pages/blog.html">Blog</a></li>
-					<li><a href="http://forum.springframework.org"> Forum </a></li>
-				</ul>
-				<div id='authentication' sec:authorize="isFullyAuthenticated()">
-					<span sec:authentication="name">Bob</span>
-					<a th:href="@{/signout}" href="/signout">Sign out</a>
-				</div>
-			</div>
-		</div>
+	<div class="header--container">
 		<div class="header--content container-fluid">
 			<div class="row-fluid">
 				<h1 class="header--content-title span8" layout:fragment="header">
 					Header title
 				</h1>
+                <div id='authentication' sec:authorize="isFullyAuthenticated()">
+                    <span sec:authentication="name">Bob</span>
+                    <a th:href="@{/signout}" href="/signout">Sign out</a>
+                </div>
 			</div>
 			<div class="row-fluid">
 				<p class="header--content-subtitle span8" layout:fragment="overview">
