@@ -3,6 +3,8 @@ package org.springframework.site.blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.site.blog.web.NoSuchBlogPostException;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
@@ -16,12 +18,15 @@ public class BlogService {
 	private PostRepository repository;
 	private MarkdownService markdownService;
 	private DateService dateService;
+	private ElasticsearchOperations elasticsearchTemplate;
+
 
 	@Autowired
-	public BlogService(PostRepository repository, MarkdownService markdownService, DateService dateService) {
+	public BlogService(PostRepository repository, MarkdownService markdownService, DateService dateService, ElasticsearchOperations elasticsearchTemplate) {
 		this.repository = repository;
 		this.markdownService = markdownService;
 		this.dateService = dateService;
+		this.elasticsearchTemplate = elasticsearchTemplate;
 	}
 
 	public Post addPost(PostForm postForm, String author) {
@@ -34,6 +39,8 @@ public class BlogService {
 		post.setDraft(postForm.isDraft());
 		post.setPublishAt(publishDate(postForm));
 		repository.save(post);
+
+		updateIndex(post);
 		return post;
 	}
 
@@ -107,6 +114,18 @@ public class BlogService {
 		post.setPublishAt(publishDate(postForm));
 
 		repository.save(post);
+
+		updateIndex(post);
+}
+
+	private void updateIndex(Post post) {
+		if (elasticsearchTemplate != null) {
+			IndexQuery indexQuery = new IndexQuery();
+			indexQuery.setId(post.getId().toString());
+			indexQuery.setObject(post);
+			elasticsearchTemplate.index(indexQuery);
+			elasticsearchTemplate.refresh(Post.class, true);
+		}
 	}
 
 	public void deletePost(Post post) {

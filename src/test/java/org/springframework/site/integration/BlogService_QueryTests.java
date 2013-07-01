@@ -15,9 +15,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.site.blog.*;
 import org.springframework.site.blog.web.BlogPostsPageRequest;
 import org.springframework.site.blog.web.NoSuchBlogPostException;
-import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
+import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -37,7 +37,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = ApplicationConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
+@ContextConfiguration(classes = ElasticsearchStubConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
 @TransactionConfiguration(defaultRollback=true)
 @Transactional
 public class BlogService_QueryTests {
@@ -63,7 +63,7 @@ public class BlogService_QueryTests {
 		initMocks(this);
 		when(dateService.now()).thenReturn(new Date());
 
-		service = new BlogService(postRepository, markdownService, dateService);
+		service = new BlogService(postRepository, markdownService, dateService, null);
 		assertThat(postRepository.findAll().size(), equalTo(0));
 	}
 

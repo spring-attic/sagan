@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.site.configuration.ApplicationConfiguration;
+import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
@@ -41,7 +42,7 @@ public class BasicAcceptanceTests {
 							@Override
 							public ConfigurableApplicationContext call() throws Exception {
 								return (ConfigurableApplicationContext) ApplicationConfiguration
-										.build().run("--server.port=" + PORT);
+										.build(ElasticsearchStubConfiguration.class).run("--server.port=" + PORT);
 							}
 						});
 		context = future.get(30, TimeUnit.SECONDS);

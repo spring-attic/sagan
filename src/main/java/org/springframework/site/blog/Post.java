@@ -1,6 +1,7 @@
 package org.springframework.site.blog;
 
 import org.hibernate.annotations.Type;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Document(indexName = "blog")
 @Entity
 public class Post implements Serializable {
 
@@ -26,6 +28,7 @@ public class Post implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private PostCategory category;
 
+//	@Field
 	@Column(nullable = false)
 	@Type(type="text")
 	private String rawContent;

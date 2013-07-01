@@ -37,7 +37,7 @@ public class ApplicationConfigurationTests {
 
 	@Test
 	public void testContextLoading() throws Exception {
-		SpringApplication application = ApplicationConfiguration.build();
+		SpringApplication application = ApplicationConfiguration.build(ElasticsearchStubConfiguration.class);
 		application.setDefaultCommandLineArgs("--GITHUB_CLIENT_ID=foo");
 		context = (ConfigurableApplicationContext) application.run();
 		ApplicationConfiguration configuration = context

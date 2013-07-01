@@ -17,6 +17,7 @@ package org.springframework.site.configuration;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.elasticsearch.client.Client;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,9 +28,13 @@ import org.springframework.bootstrap.context.annotation.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.elasticsearch.client.TransportClientFactoryBean;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -39,6 +44,7 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.site.blog.Post;
 import org.springframework.site.blog.feed.BlogPostAtomViewer;
 import org.springframework.site.documentation.DocumentationService;
 import org.springframework.site.security.GithubAuthenticationSigninAdapter;
@@ -55,9 +61,12 @@ import org.springframework.util.Assert;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.servlet.Filter;
 import java.util.Collections;
 import java.util.Properties;
+
+import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 
 @EnableAutoConfiguration
 @Configuration
@@ -78,13 +87,15 @@ public class ApplicationConfiguration {
 	@Value("${GITHUB_CLIENT_SECRET:${github.client.secret:none}}")
 	private String githubClientSecret;
 
+	@Autowired
+	private Client client;
+
 	public static void main(String[] args) {
-		build().run(args);
+		build(ApplicationConfiguration.class).run(args);
 	}
 
-	public static SpringApplication build() {
-		SpringApplication application = new SpringApplication(
-				ApplicationConfiguration.class);
+	public static SpringApplication build(Class<?>... config) {
+		SpringApplication application = new SpringApplication(config);
 		application.setDefaultCommandLineArgs(
 				"--spring.template.mode=LEGACYHTML5",
 				"--spring.template.cache=false");
@@ -103,6 +114,49 @@ public class ApplicationConfiguration {
 	public GitHub gitHubTemplate() {
 		// TODO parameterize auth token
 		return new GitHubTemplate("5a0e089d267693b45926d7f620d85a2eb6a85da6");
+	}
+
+	@Bean
+	public ElasticsearchOperations elasticsearchTemplate() throws Exception {
+		return new ElasticsearchTemplate(client);
+	}
+
+	@Configuration
+	@Profile({"staging", "production"})
+	protected static class ElasticSearchExternalConfiguration {
+
+		@Bean
+		public Client elasticSearchClient() throws Exception {
+			TransportClientFactoryBean transportClient = new TransportClientFactoryBean();
+			// TODO: extract elasticsearch settings to application.yml
+			transportClient.setClusterNodes("localhost:9300");
+			transportClient.setClusterName("elasticsearch_pivotal");
+			transportClient.setClientTransportSniff(true);
+			transportClient.afterPropertiesSet();
+			return transportClient.getObject();
+		}
+	}
+
+	@Configuration
+	@Profile({"default", "development"})
+	protected static class ElasticSearchLocalConfiguration {
+
+		@PostConstruct
+		public void deleteSearchIndex() throws Exception {
+			ElasticsearchTemplate elasticsearchTemplate = new ElasticsearchTemplate(elasticSearchClient());
+			elasticsearchTemplate.deleteIndex(Post.class);
+			elasticsearchTemplate.createIndex(Post.class);
+		}
+
+		@PreDestroy
+		public void closeClient() throws Exception {
+			elasticSearchClient().close();
+		}
+
+		@Bean
+		public Client elasticSearchClient() throws Exception {
+			return nodeBuilder().local(false).node().client();
+		}
 	}
 
 	@Configuration
@@ -180,10 +234,10 @@ public class ApplicationConfiguration {
 	}
 
 	public static void bind(String path,
-			DocumentationService documentationService) {
+							DocumentationService documentationService) {
 		RelaxedDataBinder binder = new RelaxedDataBinder(documentationService);
 		YamlPropertiesFactoryBean factory = new YamlPropertiesFactoryBean();
-		factory.setResources(new Resource[] { new ClassPathResource(path) });
+		factory.setResources(new Resource[]{new ClassPathResource(path)});
 		Properties properties = factory.getObject();
 		logger.info("Binding properties: " + properties);
 		properties.remove("projects");
@@ -198,7 +252,7 @@ public class ApplicationConfiguration {
 	}
 
 	@Bean
-	public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl){
+	public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl) {
 		return new BlogPostAtomViewer(siteUrl);
 	}
 

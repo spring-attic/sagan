@@ -54,7 +54,7 @@ public class BlogService_ValidPostTests {
 	public void setup() {
 		when(dateService.now()).thenReturn(now);
 
-		service = new BlogService(postRepository, markdownService, dateService);
+		service = new BlogService(postRepository, markdownService, dateService, null);
 		when(markdownService.renderToHtml(content)).thenReturn(RENDERED_HTML_FROM_MARKDOWN);
 		when(markdownService.renderToHtml(firstParagraph)).thenReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 		postForm = new PostForm();

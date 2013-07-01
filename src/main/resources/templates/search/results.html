@@ -1,0 +1,36 @@
+<html   xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+		layout:decorator="layout">
+<head>
+	<title>SpringFramework - Blog</title>
+	<link rel="alternate" type="application/atom+xml" th:href="${feed_path}" />
+</head>
+<body>
+<h1 layout:fragment="header">Search results</h1>
+<div layout:fragment="overview"></div>
+
+<div layout:fragment="content" class="container">
+	<div class="row">
+		<div id="content" class="span12">
+
+			<div th:if="${results.empty}" class="warning alert-warning">
+				No results found for your query.
+			</div>
+
+			<ul th:if="${!results.empty}" class='results'>
+				<li th:each="post : ${results}">
+					<a th:href="@{${post.path}}"><h2 th:text="${post.title}">This week in Spring</h2></a>
+					<div class="byline">
+						<span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
+						<span class='author' th:text="${post.author}">Author</span>
+						<span class='category' th:text="${post.category}">Category</span>
+						<span class='broadcast' th:if="${post.broadcast}">Broadcast</span>
+					</div>
+					<div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

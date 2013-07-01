@@ -1,0 +1,48 @@
+package org.springframework.site.search;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.query.Criteria;
+import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.site.blog.Post;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+
+@Controller
+@RequestMapping("/search")
+public class SearchController {
+
+	private ElasticsearchOperations elasticsearchTemplate;
+
+	@Autowired
+	public SearchController(ElasticsearchOperations elasticsearchTemplate) {
+		this.elasticsearchTemplate = elasticsearchTemplate;
+	}
+
+	@RequestMapping(method = {GET, HEAD})
+	public String search(@RequestParam(value = "q", defaultValue = "") String query, Model model) {
+
+		Page<Post> posts;
+		if (query.equals("")) {
+			SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchAllQuery()).build();
+			posts = elasticsearchTemplate.queryForPage(searchQuery, Post.class);
+		} else {
+			CriteriaQuery criteriaQuery = new CriteriaQuery(new Criteria("rawContent").contains(query));
+			posts = elasticsearchTemplate.queryForPage(criteriaQuery, Post.class);
+		}
+
+		model.addAttribute("results", posts.getContent());
+		model.addAttribute("query", query);
+		return "search/results";
+	}
+
+}

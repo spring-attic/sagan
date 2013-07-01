@@ -48,6 +48,9 @@
                 </li>
                 <li class="nav-search">
                     <i class="icon-search"></i>
+				<form class="navbar-form pull-left" th:action="@{/search}" action="/search" method="get">
+					<input type="text" class="span4" placeholder="Search Spring" name="q" th:value="${query}" />
+				</form>
                 </li>
             </ul>
         </div>

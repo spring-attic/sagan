@@ -10,13 +10,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.site.guides.GettingStartedGuide;
 import org.springframework.site.guides.GettingStartedService;
 import org.springframework.site.guides.GuideRepo;
+import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -39,8 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@Import(ApplicationConfiguration.class)
-@ContextConfiguration(classes = GettingStartedGuidesTests.class)
+@ContextConfiguration(classes = {ElasticsearchStubConfiguration.class, GettingStartedGuidesTests.class })
 public class GettingStartedGuidesTests {
 
 	public static final GettingStartedGuide GETTING_STARTED_GUIDE =
