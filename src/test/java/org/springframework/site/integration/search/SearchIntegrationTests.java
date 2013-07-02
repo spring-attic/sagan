@@ -47,18 +47,18 @@ public class SearchIntegrationTests {
 	public void testSearch() {
 		searchController.search("content", 1, model);
 
-		List<Post> posts = (List<Post>) model.get("results");
+		List<PostView> posts = (List<PostView>) model.get("results");
 		assertThat(posts, not(empty()));
-		assertThat(posts.get(0).getRawContent(), is(equalTo(post.getRawContent())));
+		assertThat(posts.get(0).getRenderedContent(), is(equalTo(post.getRenderedContent())));
 	}
 
 	@Test
 	public void testSearchTitle() {
 		searchController.search("Spring", 1, model);
 
-		List<Post> posts = (List<Post>) model.get("results");
+		List<PostView> posts = (List<PostView>) model.get("results");
 		assertThat(posts, not(empty()));
-		assertThat(posts.get(0).getRawContent(), is(equalTo(post.getRawContent())));
+		assertThat(posts.get(0).getRenderedContent(), is(equalTo(post.getRenderedContent())));
 	}
 
 	@Test

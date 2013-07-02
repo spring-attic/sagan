@@ -40,6 +40,7 @@ public class SearchViewTests {
 	private Map<String,Object> model;
 	private View view;
 	private MockHttpServletResponse response;
+	private DateService dateService = new DateService();
 
 	@Before
 	public void setUp() throws Exception {
@@ -90,7 +91,7 @@ public class SearchViewTests {
 
 	@Test
 	public void displaysPaginationControl() throws Exception {
-		Page<Post> posts = new PageImpl<Post>(buildManyPostsInNovember(10), BlogPostsPageRequest.forSearch(1), 11);
+		Page<PostView> posts = new PageImpl<PostView>(buildManyPostsInNovember(10), BlogPostsPageRequest.forSearch(1), 11);
 		model.put("results", posts.getContent());
 		model.put("paginationInfo", new PaginationInfo(posts));
 		view.render(model, new MockHttpServletRequest(), response);
@@ -107,12 +108,12 @@ public class SearchViewTests {
 				.renderedSummary("Html summary")
 				.build();
 
-		return new PostView(post, new DateService());
+		return new PostView(post, dateService);
 	}
 
-	private List<Post> buildManyPostsInNovember(int numPostsToCreate) {
+	private List<PostView> buildManyPostsInNovember(int numPostsToCreate) {
 		Calendar calendar = Calendar.getInstance();
-		List<Post> posts = new ArrayList<Post>();
+		List<PostView> posts = new ArrayList<PostView>();
 		for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
 			calendar.set(2012, 10, postNumber);
 			Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2012")
@@ -122,7 +123,7 @@ public class SearchViewTests {
 					.dateCreated(calendar.getTime())
 					.publishAt(calendar.getTime())
 					.build();
-			posts.add(post);
+			posts.add(new PostView(post, dateService));
 		}
 		return posts;
 	}
