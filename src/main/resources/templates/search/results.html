@@ -29,6 +29,12 @@
 					<div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
 				</li>
 			</ul>
+
+			<div id='pagination_control' th:if="${paginationInfo.isVisible()}">
+				<a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${query})}" href='/search?page=1' class='previous' th:if="${paginationInfo.previousVisible}">Previous</a>
+				<a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${query})}" href='/search?page=3' class='next' th:if="${paginationInfo.nextVisible}">Next</a>
+			</div>
+
 		</div>
 	</div>
 </div>

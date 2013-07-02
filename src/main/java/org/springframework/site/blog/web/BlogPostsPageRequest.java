@@ -21,4 +21,8 @@ public class BlogPostsPageRequest extends PageRequest {
 		return new PageRequest(0, 20, Sort.Direction.DESC, "createdAt");
 	}
 
+	public static Pageable forSearch(int page) {
+		return new PageRequest(page - 1, 10);
+	}
+
 }

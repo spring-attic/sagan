@@ -7,7 +7,9 @@ import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.site.blog.PaginationInfo;
 import org.springframework.site.blog.Post;
+import org.springframework.site.blog.web.BlogPostsPageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +31,7 @@ public class SearchController {
 	}
 
 	@RequestMapping(method = {GET, HEAD})
-	public String search(@RequestParam(value = "q", defaultValue = "") String query, Model model) {
+	public String search(@RequestParam(value = "q", defaultValue = "") String query, @RequestParam(defaultValue = "1") int page, Model model) {
 
 		Page<Post> posts;
 		if (query.equals("")) {
@@ -45,11 +47,13 @@ public class SearchController {
 				criteria.contains(token);
 			}
 			CriteriaQuery criteriaQuery = new CriteriaQuery(criteria);
+			criteriaQuery.setPageable(BlogPostsPageRequest.forSearch(page));
 			posts = elasticsearchTemplate.queryForPage(criteriaQuery, Post.class);
 		}
 
 		model.addAttribute("results", posts.getContent());
 		model.addAttribute("query", query);
+		model.addAttribute("paginationInfo", new PaginationInfo(posts));
 		return "search/results";
 	}
 

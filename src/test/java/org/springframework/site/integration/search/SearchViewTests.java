@@ -8,10 +8,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.site.blog.PaginationInfo;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.blog.web.BlogPostsPageRequest;
 import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -39,9 +43,12 @@ public class SearchViewTests {
 	public void setUp() throws Exception {
 		view = viewResolver.resolveViewName("search/results", Locale.UK);
 		response = new MockHttpServletResponse();
+		Page<Post> posts = new PageImpl<Post>(Collections.<Post>emptyList(), BlogPostsPageRequest.forSearch(1), 0);
+
 		model = new HashMap<String, Object>();
 		model.put("results", Collections.emptyList());
 		model.put("query", "searchterm");
+		model.put("paginationInfo", new PaginationInfo(posts));
 	}
 
 	@Test
@@ -79,6 +86,18 @@ public class SearchViewTests {
 		assertThat(message, is(nullValue()));
 	}
 
+	@Test
+	public void displaysPaginationControl() throws Exception {
+		Page<Post> posts = new PageImpl<Post>(buildManyPostsInNovember(10), BlogPostsPageRequest.forSearch(1), 11);
+		model.put("results", posts.getContent());
+		model.put("paginationInfo", new PaginationInfo(posts));
+		view.render(model, new MockHttpServletRequest(), response);
+
+		Document html = Jsoup.parse(response.getContentAsString());
+		Element searchInputBox = html.select("#pagination_control").first();
+		assertThat(searchInputBox, is(notNullValue()));
+	}
+
 	private Post createSinglePost() {
 		Post post = new PostBuilder().title("This week in Spring - June 3, 2013")
 				.rawContent("raw content")
@@ -87,5 +106,22 @@ public class SearchViewTests {
 				.build();
 
 		return post;
+	}
+
+	private List<Post> buildManyPostsInNovember(int numPostsToCreate) {
+		Calendar calendar = Calendar.getInstance();
+		List<Post> posts = new ArrayList<Post>();
+		for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
+			calendar.set(2012, 10, postNumber);
+			Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2012")
+					.rawContent("Raw content")
+					.renderedContent("Html content")
+					.renderedSummary("Html summary")
+					.dateCreated(calendar.getTime())
+					.publishAt(calendar.getTime())
+					.build();
+			posts.add(post);
+		}
+		return posts;
 	}
 }

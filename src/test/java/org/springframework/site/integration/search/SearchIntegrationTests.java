@@ -44,7 +44,7 @@ public class SearchIntegrationTests {
 
 	@Test
 	public void testSearch() {
-		searchController.search("content", model);
+		searchController.search("content", 1, model);
 
 		List<Post> posts = (List<Post>) model.get("results");
 		assertThat(posts, not(empty()));
@@ -53,7 +53,7 @@ public class SearchIntegrationTests {
 
 	@Test
 	public void testSearchTitle() {
-		searchController.search("Spring", model);
+		searchController.search("Spring", 1, model);
 
 		List<Post> posts = (List<Post>) model.get("results");
 		assertThat(posts, not(empty()));
@@ -62,7 +62,7 @@ public class SearchIntegrationTests {
 
 	@Test
 	public void testSearchWithMultipleWords() {
-		searchController.search("content \nraw", model);
+		searchController.search("content \nraw", 1, model);
 
 		List<Post> posts = (List<Post>) model.get("results");
 		assertThat(posts, not(empty()));

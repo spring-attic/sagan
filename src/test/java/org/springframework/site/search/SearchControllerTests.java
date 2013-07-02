@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.Matchers.any;
@@ -44,20 +45,26 @@ public class SearchControllerTests {
 
 	@Test
 	public void search_providesQueryInModel() {
-		controller.search("searchTerm", model);
+		controller.search("searchTerm", 1, model);
 		assertThat((String) model.get("query"), is(equalTo("searchTerm")));
 	}
 
 	@Test
+	public void search_providesPaginationInfoInModel() {
+		controller.search("searchTerm", 1, model);
+		assertThat(model.get("paginationInfo"), is(notNullValue()));
+	}
+
+	@Test
 	public void search_providesResultsInModel() {
-		controller.search("searchTerm", model);
+		controller.search("searchTerm", 1, model);
 		assertThat((List<Post>) model.get("results"), equalTo(posts.getContent()));
 	}
 
 	@Test
 	public void search_providesAllResultsForBlankQuery() {
 		when(elasticsearchTemplate.queryForPage(any(SearchQuery.class), eq(Post.class))).thenReturn(posts);
-		controller.search("", model);
+		controller.search("", 1, model);
 		assertThat((List<Post>) model.get("results"), equalTo(posts.getContent()));
 	}
 }
