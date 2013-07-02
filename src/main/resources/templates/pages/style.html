@@ -18,8 +18,12 @@
   <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
   <script>
   $(function() {
-    console.log('boo');
     $('.js-spring-popover').popover({ html: true});
+
+    //OPENS SEARCH INPUT
+    $(".js-search-input-open").click(function () {
+      $(".js-search-input").addClass("js-open");
+    });
   });
 
 
@@ -35,23 +39,23 @@
           <li class=" navbar-link">
             <a href="#">Documentation</a>
           </li>
-          <li class=" navbar-link active">
+          <li class="navbar-link active">
             <a href="#">Guides</a>
           </li>
-          <li class=" navbar-link">
+          <li class="navbar-link">
             <a href="#">Projects</a>
           </li>
-          <li class=" navbar-link">
+          <li class="navbar-link">
             <a href="#">Blog</a>
           </li>
-          <li class=" navbar-link">
+          <li class="navbar-link">
             <a href="#">Forum</a>
           </li>
-          <li class=" navbar-link">
-            <a href="#">Help</a>
-          </li>
           <li class="nav-search">
-            <i class="icon-search"></i>
+            <div class="header-nav-search--container js-search-input">
+              <input type="text" class="header-nav-search--input" placeholder="Search for documention, guides, and posts...">
+              <i class="icon-search header-nav-search--icon js-search-input-open"></i>
+            </div>
           </li>
         </ul>
       </div>

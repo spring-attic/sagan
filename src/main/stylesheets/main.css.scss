@@ -22,6 +22,8 @@ body {
 	margin: 0 auto;
 }
 
+
+
 .header--navbar {
   margin-bottom: 60px;
   box-shadow: 0 1px 3px rgba(153, 153, 153, 0.75);
@@ -47,43 +49,75 @@ body {
         margin: 8px 0;
       }
     }
-    .nav .navbar-link {
-      padding: 13px 15px 0;
-      &.active a {
-        background-color: transparent;
-        border-bottom: 3px solid $off-white;
+    .nav {
+      .navbar-link {
+        padding: 13px 15px 0;
+        &.active a {
+          background-color: transparent;
+          border-bottom: 3px solid $off-white;
+        }
+        a {
+          color: $off-white;
+          text-transform: uppercase;
+          font-weight: 700;
+          text-shadow: none;
+          font-size: 11px;
+          transition: all 0.15s;
+          -webkit-transition: all 0.15s;
+          -moz-transition: all 0.15s;
+          -o-transition: all 0.15s;
+          -ms-transition: all 0.15s;
+          padding: 0 1px 2px;
+        }
+        &:hover a {
+          color: $off-white;
+          border-bottom: 3px solid $off-white;
+        }
       }
-      a {
-        color: $off-white;
-        text-transform: uppercase;
-        font-weight: 700;
-        text-shadow: none;
-        font-size: 11px;
-        transition: all 0.15s;
-        -webkit-transition: all 0.15s;
-        -moz-transition: all 0.15s;
-        -o-transition: all 0.15s;
-        -ms-transition: all 0.15s;
-        padding: 0 1px 2px;
-      }
-      &:hover a {
-        color: $off-white;
-        border-bottom: 3px solid $off-white;
+      .nav-search {
+        padding: 11px 0;
       }
     }
-    .nav-search {
-      color: $off-white;
-      padding: 15px 0;
-      form {
-        border-left: 1px solid white;
-        padding-left: 10px;
-        margin-bottom: 0;
+    .header-nav-search--container {
+      .header-nav-search--icon {
+        color: $off-white;
+        font-size: 15px;
+        padding: 3px 0 3px 12px;
+        transition: all 0.5;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        -ms-transition: all 0.5s;
       }
-      .icon-search {
-        font-size: 18px;
-        background-color: transparent;
-        color: white;
+
+      .header-nav-search--input {
+        background: transparent;
         border: none;
+        box-shadow: none;
+        margin: 0 0 0 -12px;
+        width: 0px;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        -ms-transition: all 0.5s;
+      }
+      &.js-open {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+        margin: 0 0 0 12px;
+        .header-nav-search--input {
+          width: 250px;
+          margin: 0;
+          font-size: 12px;
+          padding: 3px 6px;
+        }
+        .header-nav-search--icon {
+          color: #333;
+          border: none;
+          padding: 0 6px 0 0;
+          margin: 0;
+        }
       }
     }
   }
