@@ -74,11 +74,16 @@ body {
     .nav-search {
       color: $off-white;
       padding: 15px 0;
+      form {
+        border-left: 1px solid white;
+        padding-left: 10px;
+        margin-bottom: 0;
+      }
       .icon-search {
         font-size: 18px;
-        border-left: 1px solid white;
-        padding: 3px 0 3px 12px;
-        margin: 0 0 0 15px;
+        background-color: transparent;
+        color: white;
+        border: none;
       }
     }
   }

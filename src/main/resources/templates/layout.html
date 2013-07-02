@@ -47,9 +47,9 @@
                     <a href="#">Help</a>
                 </li>
                 <li class="nav-search">
-                    <i class="icon-search"></i>
-				<form class="navbar-form pull-left" th:action="@{/search}" action="/search" method="get">
-					<input type="text" class="span4" placeholder="Search Spring" name="q" th:value="${query}" />
+				<form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
+					<input type="text" class="search-query input-medium" placeholder="Search Spring" name="q" th:value="${query}" />
+					<button type="submit" class="icon-search"></button>
 				</form>
                 </li>
             </ul>
