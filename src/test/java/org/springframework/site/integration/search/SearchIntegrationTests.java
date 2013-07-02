@@ -32,19 +32,37 @@ public class SearchIntegrationTests {
 
 	@Autowired
 	private SearchController searchController;
+	private Post post;
+	ExtendedModelMap model = new ExtendedModelMap();
 
 	@Before
 	public void setUp() throws Exception {
 		elasticsearchTemplate.deleteIndex(Post.class);
+		post = createSinglePost();
+		addPostToIndex(post);
 	}
 
 	@Test
 	public void testSearch() {
-		Post post = createSinglePost();
-		addPostToIndex(post);
-
-		ExtendedModelMap model = new ExtendedModelMap();
 		searchController.search("content", model);
+
+		List<Post> posts = (List<Post>) model.get("results");
+		assertThat(posts, not(empty()));
+		assertThat(posts.get(0).getRawContent(), is(equalTo(post.getRawContent())));
+	}
+
+	@Test
+	public void testSearchTitle() {
+		searchController.search("Spring", model);
+
+		List<Post> posts = (List<Post>) model.get("results");
+		assertThat(posts, not(empty()));
+		assertThat(posts.get(0).getRawContent(), is(equalTo(post.getRawContent())));
+	}
+
+	@Test
+	public void testSearchWithMultipleWords() {
+		searchController.search("content \nraw", model);
 
 		List<Post> posts = (List<Post>) model.get("results");
 		assertThat(posts, not(empty()));
@@ -60,7 +78,7 @@ public class SearchIntegrationTests {
 	}
 
 	private Post createSinglePost() {
-		Post post = new PostBuilder().title("This week in Spring - June 3, 2013")
+		Post post = new PostBuilder().title("This week in Spring")
 				.rawContent("raw content")
 				.renderedContent("Html content")
 				.renderedSummary("Html summary")
