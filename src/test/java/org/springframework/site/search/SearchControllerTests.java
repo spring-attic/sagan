@@ -6,7 +6,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.FacetedPageImpl;
-import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
@@ -46,7 +45,7 @@ public class SearchControllerTests {
 		postsList.add(PostBuilder.post().build());
 		posts = new FacetedPageImpl<Post>(postsList);
 		postViews = new ArrayList<PostView>();
-		when(elasticsearchTemplate.queryForPage(any(CriteriaQuery.class), eq(Post.class))).thenReturn(posts);
+		when(elasticsearchTemplate.queryForPage(any(SearchQuery.class), eq(Post.class))).thenReturn(posts);
 		when(postViewFactory.createPostViewList(posts.getContent())).thenReturn(postViews);
 	}
 
