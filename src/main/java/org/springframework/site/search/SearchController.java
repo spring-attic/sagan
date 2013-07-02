@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
+
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
@@ -51,7 +53,8 @@ public class SearchController {
 				criteria.contains(token);
 			}
 			Criteria draftCriteria = new Criteria("draft").is(Boolean.FALSE);
-			criteria = criteria.and(draftCriteria);
+			Criteria publishDateCriteria = new Criteria("publishAt").lessThanEqual(new Date().getTime());
+			criteria = criteria.and(draftCriteria).and(publishDateCriteria);
 			CriteriaQuery criteriaQuery = new CriteriaQuery(criteria);
 			criteriaQuery.setPageable(BlogPostsPageRequest.forSearch(page));
 			posts = elasticsearchTemplate.queryForPage(criteriaQuery, Post.class);

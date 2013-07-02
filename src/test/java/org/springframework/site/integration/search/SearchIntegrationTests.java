@@ -18,6 +18,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.ui.ExtendedModelMap;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -71,9 +73,22 @@ public class SearchIntegrationTests {
 	}
 
 	@Test
-	public void searchDoesNotIncludeDraftPosts() {
+	public void searchDoesNotIncludeDraftPosts() throws ParseException {
 		Post draftPost = createSinglePost();
 		draftPost.setDraft(true);
+		addPostToIndex(draftPost, "2");
+
+		searchController.search("content", 1, model);
+
+		List<Post> posts = (List<Post>) model.get("results");
+		assertThat(posts, not(empty()));
+		assertThat(posts.size(), equalTo(1));
+	}
+
+	@Test
+	public void searchDoesNotIncludeUnpublishedPosts() throws ParseException {
+		Post draftPost = createSinglePost();
+		draftPost.setPublishAt(new Date(System.currentTimeMillis() + 100000000));
 		addPostToIndex(draftPost, "2");
 
 		searchController.search("content", 1, model);
@@ -91,13 +106,13 @@ public class SearchIntegrationTests {
 		elasticsearchTemplate.refresh(Post.class, true);
 	}
 
-	private Post createSinglePost() {
+	private Post createSinglePost() throws ParseException {
 		Post post = new PostBuilder().title("This week in Spring")
 				.rawContent("raw content")
 				.renderedContent("Html content")
 				.renderedSummary("Html summary")
+				.publishAt("2013-01-01 10:00")
 				.build();
-
 		return post;
 	}
 
