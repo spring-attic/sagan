@@ -65,11 +65,24 @@ public class SearchIntegrationTests {
 
 	@Test
 	public void testSearchWithMultipleWords() {
-		searchController.search("content \nraw", 1, model);
+		searchController.search("raw content", 1, model);
 
 		List<PostView> posts = (List<PostView>) model.get("results");
 		assertThat(posts, not(empty()));
 		assertThat(posts.get(0).getRenderedContent(), is(equalTo(post.getRenderedContent())));
+	}
+
+	@Test
+	public void searchOnlyIncludesPostsMatchingSearchterm() throws ParseException {
+		Post draftPost = createSinglePost();
+		draftPost.setTitle("Test");
+		draftPost.setRawContent("Test body");
+		addPostToIndex(draftPost, "2");
+
+		searchController.search("content", 1, model);
+
+		List<PostView> posts = (List<PostView>) model.get("results");
+		assertThat(posts.size(), equalTo(1));
 	}
 
 	@Test

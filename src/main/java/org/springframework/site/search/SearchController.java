@@ -3,8 +3,6 @@ package org.springframework.site.search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.query.Criteria;
-import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.site.blog.PaginationInfo;
@@ -18,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 
+import static org.elasticsearch.index.query.FilterBuilders.*;
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
+import static org.elasticsearch.index.query.QueryBuilders.matchPhraseQuery;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
@@ -43,21 +43,19 @@ public class SearchController {
 			SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchAllQuery()).build();
 			posts = elasticsearchTemplate.queryForPage(searchQuery, Post.class);
 		} else {
-			Criteria criteria = new Criteria();
-			criteria = criteria.or("rawContent");
-			for (String token : query.split("\\s+")) {
-				criteria.contains(token);
-			}
-			criteria = criteria.or("title");
-			for (String token : query.split("\\s+")) {
-				criteria.contains(token);
-			}
-			Criteria draftCriteria = new Criteria("draft").is(Boolean.FALSE);
-			Criteria publishDateCriteria = new Criteria("publishAt").lessThanEqual(new Date().getTime());
-			criteria = criteria.and(draftCriteria).and(publishDateCriteria);
-			CriteriaQuery criteriaQuery = new CriteriaQuery(criteria);
-			criteriaQuery.setPageable(BlogPostsPageRequest.forSearch(page));
-			posts = elasticsearchTemplate.queryForPage(criteriaQuery, Post.class);
+			SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchAllQuery())
+					.withFilter(
+							andFilter(
+									termFilter("draft", Boolean.FALSE),
+									numericRangeFilter("publishAt").lte(new Date().getTime()),
+									orFilter(
+											queryFilter(matchPhraseQuery("title", query)),
+											queryFilter(matchPhraseQuery("rawContent", query))
+									)
+							)
+					).build();
+			searchQuery.setPageable(BlogPostsPageRequest.forSearch(page));
+			posts = elasticsearchTemplate.queryForPage(searchQuery, Post.class);
 		}
 
 		model.addAttribute("results", postViewFactory.createPostViewList(posts.getContent()));

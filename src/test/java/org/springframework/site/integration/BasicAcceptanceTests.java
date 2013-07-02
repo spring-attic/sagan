@@ -92,7 +92,7 @@ public class BasicAcceptanceTests {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 
 		Document html = Jsoup.parse(response.getBody());
-		Element loginButton = html.select("form button").first();
+		Element loginButton = html.select(".body--container form button").first();
 		assertThat("No login button found", loginButton, is(notNullValue()));
 		assertThat(loginButton.text(), is(equalTo("Sign in with github")));
 	}
