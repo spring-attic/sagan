@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
+<head>
+    <title>SpringFramework - Edit Team Member Profile</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <form th:action="@{/admin/team/myprofile}" action="#" method="post" th:object="${profile}">
+        <label for="firstName">First Name:<input id="firstName" type="text" th:field="*{firstName}" name="firstName" /></label>
+        <label for="lastName">Last Name:<input id="lastName" type="text" th:field="*{lastName}" name="lastName" /></label>
+        <label for="location">Location:<input id="location" type="text" th:field="*{location}" name="location" /></label>
+        <label for="bio">Bio:<input id="bio" type="text" th:field="*{bio}" name="bio" /></label>
+        <label for="email">Email:<input id="email" type="text" th:field="*{email}" name="email" /></label>
+        <label for="githubUsername">Github Username:<input id="githubUsername" type="text" th:field="*{githubUsername}" name="githubUsername" /></label>
+        <input type="hidden" name="_method" value="PUT" />
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+</body>
+</html>
