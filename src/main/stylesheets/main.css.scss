@@ -83,6 +83,7 @@ body {
         color: $off-white;
         font-size: 15px;
         padding: 3px 0 3px 12px;
+        cursor: pointer;
         transition: all 0.5;
         -webkit-transition: all 0.5s;
         -moz-transition: all 0.5s;
@@ -175,8 +176,9 @@ body {
   margin: 0;
   .list-link {
     display: block;
-    a {
+    a, div {
       color: #333;
+      cursor: pointer;
       &:hover {
         color: $lime;
         text-decoration: none;
@@ -200,9 +202,11 @@ body {
     }
   }
   &.bottom {
+    margin-top: 5px;
     .arrow {
       border-bottom-color: $lime;
       top: -9px;
+      left: 15%;
       &:after {
         border-bottom-color: $lime;
       }
