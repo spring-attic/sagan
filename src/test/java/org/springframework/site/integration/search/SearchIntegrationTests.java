@@ -2,7 +2,6 @@ package org.springframework.site.integration.search;
 
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,6 @@ import static org.hamcrest.Matchers.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = ApplicationConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
-@Ignore
 public class SearchIntegrationTests {
 
 	@Autowired
@@ -42,7 +40,7 @@ public class SearchIntegrationTests {
 	public void setUp() throws Exception {
 		elasticsearchTemplate.deleteIndex(Post.class);
 		post = createSinglePost();
-		addPostToIndex(post);
+		addPostToIndex(post, "1");
 	}
 
 	@Test
@@ -72,9 +70,22 @@ public class SearchIntegrationTests {
 		assertThat(posts.get(0).getRenderedContent(), is(equalTo(post.getRenderedContent())));
 	}
 
-	private void addPostToIndex(Post post) {
+	@Test
+	public void searchDoesNotIncludeDraftPosts() {
+		Post draftPost = createSinglePost();
+		draftPost.setDraft(true);
+		addPostToIndex(draftPost, "2");
+
+		searchController.search("content", 1, model);
+
+		List<Post> posts = (List<Post>) model.get("results");
+		assertThat(posts, not(empty()));
+		assertThat(posts.size(), equalTo(1));
+	}
+
+	private void addPostToIndex(Post post, String id) {
 		IndexQuery indexQuery = new IndexQuery();
-		indexQuery.setId("1");
+		indexQuery.setId(id);
 		indexQuery.setObject(post);
 		elasticsearchTemplate.index(indexQuery);
 		elasticsearchTemplate.refresh(Post.class, true);

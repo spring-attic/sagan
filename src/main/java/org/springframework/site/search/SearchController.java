@@ -41,7 +41,8 @@ public class SearchController {
 			SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchAllQuery()).build();
 			posts = elasticsearchTemplate.queryForPage(searchQuery, Post.class);
 		} else {
-			Criteria criteria = new Criteria().or("rawContent");
+			Criteria criteria = new Criteria();
+			criteria = criteria.or("rawContent");
 			for (String token : query.split("\\s+")) {
 				criteria.contains(token);
 			}
@@ -49,6 +50,8 @@ public class SearchController {
 			for (String token : query.split("\\s+")) {
 				criteria.contains(token);
 			}
+			Criteria draftCriteria = new Criteria("draft").is(Boolean.FALSE);
+			criteria = criteria.and(draftCriteria);
 			CriteriaQuery criteriaQuery = new CriteriaQuery(criteria);
 			criteriaQuery.setPageable(BlogPostsPageRequest.forSearch(page));
 			posts = elasticsearchTemplate.queryForPage(criteriaQuery, Post.class);

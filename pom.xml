@@ -114,6 +114,11 @@
             <artifactId>spring-data-elasticsearch</artifactId>
             <version>1.0.0.BUILD-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>0.90.2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.yaml</groupId>

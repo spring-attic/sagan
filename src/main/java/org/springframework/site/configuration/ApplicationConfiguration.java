@@ -156,7 +156,7 @@ public class ApplicationConfiguration {
 
 		@Bean
 		public Client elasticSearchClient() throws Exception {
-			return nodeBuilder().local(false).node().client();
+			return nodeBuilder().local(true).node().client();
 		}
 	}
 
