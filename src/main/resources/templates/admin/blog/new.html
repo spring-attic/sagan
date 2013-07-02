@@ -1,37 +1,11 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
     <title>SpringFramework - New Blog Post</title>
 </head>
 <body>
 <div layout:fragment="content" class="container">
-    <form th:action="@{/admin/blog}" action="#" method="post" th:object="${postForm}">
-        <label for="title">Title:<input id="title" type="text" th:field="*{title}" name="title" /></label>
-        <label for="content">Content:<textarea id="content" th:field="*{content}" name="content" /></label>
-		<select name="category" th:field="*{category}" >
-			<option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.displayName}">Category</option>
-		</select>
-        <label for="broadcast">Broadcast:<input type="checkbox" th:field="*{broadcast}" id="broadcast" name="broadcast" /></label>
-		<div class="well">
-			<div id="datetimepicker1" class="input-append date">
-				<input id="publishAt" type="text" th:field="*{publishAt}" name="publishAt" data-format="yyyy-MM-dd HH:mm" />
-				<span class="add-on">
-				  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-				  </i>
-				</span>
-			</div>
-		</div>
-		<script type="text/javascript">
-			$(function() {
-				$('#datetimepicker1').datetimepicker({
-					language: 'pt-BR'
-				});
-			});
-		</script>
-        <button name="draft" value="false" type="submit">Publish</button>
-        <button name="draft" value="true" type="submit">Save &amp; View Draft</button>
-    </form>
+    <form layout:substituteby="admin/blog/_post_form :: post-form" ></form>
 </div>
 </body>
 </html>
