@@ -77,7 +77,7 @@ public class DeleteBlogPostTests {
 	}
 
 	private MockHttpServletRequestBuilder createDeletePostRequest() {
-		MockHttpServletRequestBuilder editPostRequest = delete("/admin"+ post.getPath());
+		MockHttpServletRequestBuilder editPostRequest = delete("/admin/blog/" + post.getSlug());
 		return editPostRequest;
 	}
 

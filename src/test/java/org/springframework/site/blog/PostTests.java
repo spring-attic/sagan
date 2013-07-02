@@ -6,58 +6,35 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 
 public class PostTests {
+	PostBuilder builder = PostBuilder.post().id(1L);
 
 	@Test
 	public void slugReplacesSpacesWithDashes() {
-		assertEquals("this-is-a-title", new Post("This is a title", "", PostCategory.ENGINEERING).getSlug());
+		assertEquals("1-this-is-a-title", builder.title("This is a title").build().getSlug());
 	}
 
 	@Test
 	public void slugReplacesMultipleSpacesWithASingleDash() {
-		assertEquals("this-is-a-title", new Post("This    is a title", "", PostCategory.ENGINEERING).getSlug());
+		assertEquals("1-this-is-a-title", builder.title("This    is a title").build().getSlug());
 	}
 
 	@Test
 	public void slugStripsNonAlphanumericCharacters() {
-		assertEquals("title-1-with-characters", new Post("Title 1, with characters';:\\|", "", PostCategory.ENGINEERING).getSlug());
+		assertEquals("1-title-1-with-characters", builder.title("Title 1, with characters';:\\|").build().getSlug());
 	}
 
 	@Test
 	public void slugStripsNonAlphanumericCharactersUsedAsDividersWithSpaces() {
-		assertEquals("title-1-something", new Post("Title__--1/@something", "", PostCategory.ENGINEERING).getSlug());
+		assertEquals("1-title-1-something", builder.title("Title__--1/@something").build().getSlug());
 	}
 
 	@Test
 	public void slugStripsNewLineCharacters() {
-		assertEquals("title-1-on-multiple-lines", new Post("Title 1\n on multiple\nlines", "", PostCategory.ENGINEERING).getSlug());
-	}
-
-	@Test
-	public void pathToFullContent(){
-		Post post = spy(new Post("An awesome blog post", "Awesomeness is awesome!", PostCategory.NEWS_AND_EVENTS));
-
-		when(post.getId()).thenReturn(123L);
-
-		assertThat(post.getPath(), is("/blog/123-an-awesome-blog-post"));
-	}
-
-	@Test
-	public void getFormattedPublishDateReturnsSchedulePublishAt() throws ParseException {
-		Post post = PostBuilder.post().publishAt("2013-06-11 13:17:01").build();
-		assertThat(post.getFormattedPublishDate(), equalTo("June 11, 2013"));
-	}
-
-	@Test
-	public void getFormattedPublishDateReturnsUnscheduled() throws ParseException {
-		Post post = PostBuilder.post().unscheduled().build();
-		assertThat(post.getFormattedPublishDate(), equalTo("Unscheduled"));
+		assertEquals("1-title-1-on-multiple-lines", builder.title("Title 1\n on multiple\nlines").build().getSlug());
 	}
 
 	@Test

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.services.DateService;
 import org.springframework.site.services.SiteUrl;
 import org.springframework.ui.ExtendedModelMap;
 
@@ -32,7 +33,7 @@ public class BlogPostAtomViewerTests {
 	@Before
 	public void setUp() throws Exception {
 		siteUrl = mock(SiteUrl.class);
-		blogPostAtomViewer = new BlogPostAtomViewer(siteUrl);
+		blogPostAtomViewer = new BlogPostAtomViewer(siteUrl, new DateService());
 		when(request.getServerName()).thenReturn("springsource.org");
 		model.addAttribute("posts", new ArrayList<Post>());
 	}

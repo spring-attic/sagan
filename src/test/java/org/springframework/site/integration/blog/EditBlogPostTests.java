@@ -66,7 +66,7 @@ public class EditBlogPostTests {
 
 	@Test
 	public void getEditBlogPage() throws Exception {
-		this.mockMvc.perform(get("/admin" + post.getPath() + "/edit"))
+		this.mockMvc.perform(get("/admin/blog/" + post.getSlug() + "/edit"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("Edit Blog Post")));
@@ -101,7 +101,7 @@ public class EditBlogPostTests {
 	}
 
 	private MockHttpServletRequestBuilder createEditPostRequest() {
-		MockHttpServletRequestBuilder editPostRequest = put("/admin"+ post.getPath());
+		MockHttpServletRequestBuilder editPostRequest = put("/admin/blog/" + post.getSlug());
 		editPostRequest.param("title", "New Title");
 		editPostRequest.param("content", "New Content");
 		editPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());

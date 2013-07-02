@@ -3,6 +3,8 @@ package org.springframework.site.blog.feed;
 import com.sun.syndication.feed.atom.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.blog.Post;
+import org.springframework.site.blog.web.PostView;
+import org.springframework.site.services.DateService;
 import org.springframework.site.services.SiteUrl;
 import org.springframework.web.servlet.view.feed.AbstractAtomFeedView;
 
@@ -17,10 +19,12 @@ import java.util.Map;
 public class BlogPostAtomViewer extends AbstractAtomFeedView {
 
 	private final SiteUrl siteUrl;
+	private final DateService dateService;
 
 	@Autowired
-	public BlogPostAtomViewer(SiteUrl siteUrl) {
+	public BlogPostAtomViewer(SiteUrl siteUrl, DateService dateService) {
 		this.siteUrl = siteUrl;
+		this.dateService = dateService;
 	}
 
 	@Override
@@ -94,7 +98,8 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 	}
 
 	private void setPostUrl(Post post, Entry entry) {
-		String postUrl = siteUrl.getAbsoluteUrl(post.getPath());
+		PostView postView = new PostView(post, dateService);
+		String postUrl = siteUrl.getAbsoluteUrl(postView.getPath());
 		Link postLink = new Link();
 		postLink.setHref(postUrl);
 		entry.setAlternateLinks(Arrays.asList(postLink));

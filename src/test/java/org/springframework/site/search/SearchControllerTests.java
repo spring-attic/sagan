@@ -10,6 +10,8 @@ import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.blog.web.PostView;
+import org.springframework.site.blog.web.PostViewFactory;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.util.ArrayList;
@@ -28,19 +30,24 @@ public class SearchControllerTests {
 	@Mock
 	private ElasticsearchTemplate elasticsearchTemplate;
 
+	@Mock
+	private PostViewFactory postViewFactory;
+
 	private SearchController controller;
 	private ExtendedModelMap model = new ExtendedModelMap();
 	private FacetedPageImpl<Post> posts;
-
+	private List<PostView> postViews;
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		controller = new SearchController(elasticsearchTemplate);
+		controller = new SearchController(elasticsearchTemplate, postViewFactory);
 		List<Post> postsList = new ArrayList<Post>();
 		postsList.add(PostBuilder.post().build());
 		posts = new FacetedPageImpl<Post>(postsList);
+		postViews = new ArrayList<PostView>();
 		when(elasticsearchTemplate.queryForPage(any(CriteriaQuery.class), eq(Post.class))).thenReturn(posts);
+		when(postViewFactory.createPostViewList(posts.getContent())).thenReturn(postViews);
 	}
 
 	@Test
@@ -58,13 +65,13 @@ public class SearchControllerTests {
 	@Test
 	public void search_providesResultsInModel() {
 		controller.search("searchTerm", 1, model);
-		assertThat((List<Post>) model.get("results"), equalTo(posts.getContent()));
+		assertThat((List<PostView>) model.get("results"), equalTo(postViews));
 	}
 
 	@Test
 	public void search_providesAllResultsForBlankQuery() {
 		when(elasticsearchTemplate.queryForPage(any(SearchQuery.class), eq(Post.class))).thenReturn(posts);
 		controller.search("", 1, model);
-		assertThat((List<Post>) model.get("results"), equalTo(posts.getContent()));
+		assertThat((List<PostView>) model.get("results"), equalTo(postViews));
 	}
 }

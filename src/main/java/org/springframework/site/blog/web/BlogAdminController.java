@@ -1,18 +1,15 @@
 package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostForm;
-import org.springframework.site.services.DateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -23,25 +20,26 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 public class BlogAdminController {
 
 	private BlogService service;
-	private DateService dateService;
+	private PostViewFactory postViewFactory;
 
 	@Autowired
-	public BlogAdminController(BlogService service, DateService dateService) {
+	public BlogAdminController(BlogService service, PostViewFactory postViewFactory) {
 		this.service = service;
-		this.dateService = dateService;
+		this.postViewFactory = postViewFactory;
 	}
 
 	@RequestMapping(value = "", method = { GET, HEAD })
-	public String dashboard(Model model, @RequestParam(defaultValue = "1") int page) {
-		PageRequest pageRequest = new PageRequest(page - 1, Integer.MAX_VALUE, Sort.Direction.DESC, "createdAt");
-		model.addAttribute("posts", service.getPublishedPosts(pageRequest));
-		model.addAttribute("drafts", service.getDraftPosts(pageRequest));
-		model.addAttribute("scheduled", service.getScheduledPosts(pageRequest));
+	public String dashboard(Model model) {
+		Pageable pageRequest = BlogPostsPageRequest.forDashboard();
+		model.addAttribute("posts", postViewFactory.createPostViewPage(service.getPublishedPosts(pageRequest)));
+		model.addAttribute("drafts", postViewFactory.createPostViewPage(service.getDraftPosts(pageRequest)));
+		model.addAttribute("scheduled", postViewFactory.createPostViewPage(service.getScheduledPosts(pageRequest)));
 		return "admin/blog/index";
 	}
 
 	@RequestMapping(value = "/new", method = { GET, HEAD })
-	public String newPost(PostForm postForm, Model model) {
+	public String newPost(Model model) {
+		model.addAttribute("postForm", new PostForm());
 		model.addAttribute("categories", PostCategory.values());
 		return "admin/blog/new";
 	}
@@ -66,18 +64,16 @@ public class BlogAdminController {
 	@RequestMapping(value = "", method = { POST })
 	public String createPost(PostForm postForm, Principal principal) {
 		Post newPost = service.addPost(postForm, principal.getName());
-		return newPost.isLiveOn(dateService.now()) ?
-				"redirect:" + newPost.getPath() :
-				"redirect:/admin" + newPost.getPath();
+		PostView postView = postViewFactory.createPostView(newPost);
+		return "redirect:" + postView.getPath();
 	}
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = PUT)
 	public String updatePost(@PathVariable Long postId, PostForm postForm) {
 		Post post = service.getPost(postId);
 		service.updatePost(post, postForm);
-		return post.isLiveOn(dateService.now()) ?
-				"redirect:" + post.getPath() :
-				"redirect:/admin" + post.getPath();
+		PostView postView = postViewFactory.createPostView(post);
+		return "redirect:" + postView.getPath();
 	}
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = DELETE)

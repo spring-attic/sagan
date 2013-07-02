@@ -14,11 +14,19 @@ public class BlogPostsPageRequest extends PageRequest {
 	 * @param page not zero indexed
 	 */
 	public static Pageable forLists(int page) {
-		return new PageRequest(page - 1, 10, Sort.Direction.DESC, "createdAt");
+		return build(page - 1, 10);
+	}
+
+	public static Pageable forDashboard() {
+		return build(0, Integer.MAX_VALUE);
 	}
 
 	public static Pageable forFeeds(){
-		return new PageRequest(0, 20, Sort.Direction.DESC, "createdAt");
+		return build(0, 20);
+	}
+
+	private static Pageable build(int page, int pageSize) {
+		return new PageRequest(page, pageSize, Sort.Direction.DESC, "createdAt");
 	}
 
 	public static Pageable forSearch(int page) {

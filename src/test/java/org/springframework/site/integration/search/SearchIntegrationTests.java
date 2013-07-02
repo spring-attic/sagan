@@ -10,6 +10,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.blog.web.PostView;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.site.search.SearchController;
 import org.springframework.test.context.ContextConfiguration;
@@ -64,9 +65,9 @@ public class SearchIntegrationTests {
 	public void testSearchWithMultipleWords() {
 		searchController.search("content \nraw", 1, model);
 
-		List<Post> posts = (List<Post>) model.get("results");
+		List<PostView> posts = (List<PostView>) model.get("results");
 		assertThat(posts, not(empty()));
-		assertThat(posts.get(0).getRawContent(), is(equalTo(post.getRawContent())));
+		assertThat(posts.get(0).getRenderedContent(), is(equalTo(post.getRenderedContent())));
 	}
 
 	private void addPostToIndex(Post post) {

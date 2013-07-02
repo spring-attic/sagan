@@ -16,6 +16,8 @@ import org.springframework.site.blog.PaginationInfo;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.web.BlogPostsPageRequest;
+import org.springframework.site.blog.web.PostView;
+import org.springframework.site.services.DateService;
 import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -98,14 +100,14 @@ public class SearchViewTests {
 		assertThat(searchInputBox, is(notNullValue()));
 	}
 
-	private Post createSinglePost() {
+	private PostView createSinglePost() {
 		Post post = new PostBuilder().title("This week in Spring - June 3, 2013")
 				.rawContent("raw content")
 				.renderedContent("Html content")
 				.renderedSummary("Html summary")
 				.build();
 
-		return post;
+		return new PostView(post, new DateService());
 	}
 
 	private List<Post> buildManyPostsInNovember(int numPostsToCreate) {

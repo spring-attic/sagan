@@ -25,7 +25,7 @@ public class BlogSampleDataController {
 		for (int i = 0; i < 8; i++) {
 			generateRandomBlogPost();
 		}
-		return blogAdminController.dashboard(model, 1);
+		return blogAdminController.dashboard(model);
 	}
 
 	private void generateRandomBlogPost() {

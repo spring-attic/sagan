@@ -128,7 +128,7 @@ public class BlogAtomFeedsTests {
 
 		String postDate = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedAt());
 		assertThat(atomFeed, containsString(postDate));
-		assertThat(atomFeed, containsString(post.getPath()));
+		assertThat(atomFeed, containsString("/blog/" + post.getSlug()));
 		assertThat(atomFeed, containsString(PostCategory.ENGINEERING.getDisplayName()));
 		assertThat(atomFeed, containsString("Broadcast"));
 	}

@@ -137,7 +137,7 @@ public class Post implements Serializable {
 		}
 
 		String cleanedTitle = title.toLowerCase().replace("\n", " ").replaceAll("[^a-z\\d\\s]", " ");
-		return StringUtils.arrayToDelimitedString(StringUtils.tokenizeToStringArray(cleanedTitle, " "), "-");
+		return getId() + "-" + StringUtils.arrayToDelimitedString(StringUtils.tokenizeToStringArray(cleanedTitle, " "), "-");
 	}
 
 	public boolean isDraft() {
@@ -156,16 +156,8 @@ public class Post implements Serializable {
 		return broadcast;
 	}
 
-	public String getPath() {
-		return "/blog/" + getId() + "-" + getSlug();
-	}
-
 	public boolean isScheduled() {
 		return publishAt == null;
-	}
-
-	public String getFormattedPublishDate() {
-		return isScheduled() ? "Unscheduled" : DATE_FORMAT.format(publishAt);
 	}
 
 	public boolean isLiveOn(Date date) {

@@ -23,11 +23,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @RequestMapping("/blog")
 public class BlogController {
 
-	private BlogService service;
+	private final BlogService service;
+	private final PostViewFactory postViewFactory;
 
 	@Autowired
-	public BlogController(BlogService service) {
+	public BlogController(BlogService service, PostViewFactory postViewFactory) {
 		this.service = service;
+		this.postViewFactory = postViewFactory;
 	}
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { GET, HEAD })
@@ -59,10 +61,11 @@ public class BlogController {
 	}
 
 	private String renderListOfPosts(Page<Post> page, Model model, HttpServletRequest request) {
-		List<Post> posts = page.getContent();
+		Page<PostView> postViewPage = postViewFactory.createPostViewPage(page);
+		List<PostView> posts = postViewPage.getContent();
 		model.addAttribute("categories", PostCategory.values());
 		model.addAttribute("posts", posts);
-		model.addAttribute("paginationInfo", new PaginationInfo(page));
+		model.addAttribute("paginationInfo", new PaginationInfo(postViewPage));
 		String feedPath = request.getServletPath().replaceAll("/$", "");
 		model.addAttribute("feed_path", feedPath + ".atom");
 		return "blog/index";
