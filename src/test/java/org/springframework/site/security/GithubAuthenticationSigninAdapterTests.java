@@ -1,40 +1,48 @@
 package org.springframework.site.security;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.ArgumentMatcher;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.stubbing.OngoingStubbing;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.site.team.SignInService;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestOperations;
 import org.springframework.web.context.request.ServletWebRequest;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@RunWith(MockitoJUnitRunner.class)
 public class GithubAuthenticationSigninAdapterTests {
 
-	private GithubAuthenticationSigninAdapter adapter = new GithubAuthenticationSigninAdapter(
-			"/foo");
+	private GithubAuthenticationSigninAdapter adapter;
 	@SuppressWarnings("unchecked")
 	private Connection<GitHub> connection = Mockito.mock(Connection.class);
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
+
+	@Mock
+	private SignInService signInService;
+
+	@Before
+	public void setup() {
+		adapter = new GithubAuthenticationSigninAdapter("/foo", signInService);
+	}
 
 	@After
 	public void clean() {
@@ -43,8 +51,7 @@ public class GithubAuthenticationSigninAdapterTests {
 
 	@Test
 	public void signInSunnyDay() {
-		mockIsMemberOfTeam().thenReturn(
-				new ResponseEntity<Void>(HttpStatus.NO_CONTENT));
+		when(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).thenReturn(true);
 
 		adapter.signIn("dsyer", connection, new ServletWebRequest(
 				new MockHttpServletRequest()));
@@ -52,12 +59,12 @@ public class GithubAuthenticationSigninAdapterTests {
 				.getAuthentication();
 		assertNotNull(authentication);
 		assertTrue(authentication.isAuthenticated());
+		verify(signInService).createMemberProfileIfNeeded(eq("dsyer"), any(GitHub.class));
 	}
 
 	@Test
 	public void signInFailure() {
-		mockIsMemberOfTeam().thenReturn(
-				new ResponseEntity<Void>(HttpStatus.NOT_FOUND));
+		when(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).thenReturn(false);
 
 		expectedException.expect(BadCredentialsException.class);
 		adapter.signIn("dsyer", connection, new ServletWebRequest(
@@ -67,26 +74,10 @@ public class GithubAuthenticationSigninAdapterTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void signInFailureAfterRestException() {
-		mockIsMemberOfTeam().thenThrow(RestClientException.class);
+		when(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).thenThrow(RestClientException.class);
 		expectedException.expect(BadCredentialsException.class);
 		adapter.signIn("dsyer", connection, new ServletWebRequest(
 				new MockHttpServletRequest()));
-	}
-
-	private OngoingStubbing<ResponseEntity<Void>> mockIsMemberOfTeam() {
-		GitHub github = mock(GitHub.class);
-		when(connection.getApi()).thenReturn(github);
-		RestOperations restOperations = mock(RestOperations.class);
-		when(github.restOperations()).thenReturn(restOperations);
-		OngoingStubbing<ResponseEntity<Void>> expectedResult = when(restOperations
-				.getForEntity(anyString(),
-						argThat(new ArgumentMatcher<Class<Void>>() {
-							@Override
-							public boolean matches(Object argument) {
-								return true;
-							}
-						}), anyString(), anyString()));
-		return expectedResult;
 	}
 
 }

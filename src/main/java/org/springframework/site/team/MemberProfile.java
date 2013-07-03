@@ -17,10 +17,7 @@ public class MemberProfile {
 	private Long id;
 
 	@Column(nullable = true)
-	private String firstName;
-
-	@Column(nullable = true)
-	private String lastName;
+	private String name;
 
 	@Column(nullable = true)
 	private String location;
@@ -46,20 +43,12 @@ public class MemberProfile {
 	@Column(nullable = false)
 	private String memberId;
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getLocation() {
@@ -127,7 +116,7 @@ public class MemberProfile {
 	}
 
 	public String getFullName() {
-		return String.format("%s %s", firstName, lastName);
+		return name;
 	}
 
 	public String getGravatarImageUrl() {

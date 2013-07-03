@@ -8,8 +8,7 @@
 <body>
 <div layout:fragment="content" class="container">
     <form th:action="@{/admin/profile}" action="#" method="post" th:object="${profile}">
-        <label for="firstName">First Name:<input id="firstName" type="text" th:field="*{firstName}" name="firstName" /></label>
-        <label for="lastName">Last Name:<input id="lastName" type="text" th:field="*{lastName}" name="lastName" /></label>
+        <label for="name">Name:<input id="name" type="text" th:field="*{name}" name="name" /></label>
         <label for="location">Location:<input id="location" type="text" th:field="*{location}" name="location" /></label>
         <label for="bio">Bio:<input id="bio" type="text" th:field="*{bio}" name="bio" /></label>
         <label for="gravatarEmail">Gravatar Email:<input id="gravatarEmail" type="text" th:field="*{gravatarEmail}" name="gravatarEmail" /></label>

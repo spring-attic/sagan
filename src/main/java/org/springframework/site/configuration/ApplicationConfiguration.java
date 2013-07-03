@@ -51,6 +51,7 @@ import org.springframework.site.security.RemoteUsernameConnectionSignUp;
 import org.springframework.site.security.SecurityContextAuthenticationFilter;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.SiteUrl;
+import org.springframework.site.team.SignInService;
 import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
@@ -198,6 +199,9 @@ public class ApplicationConfiguration {
 	protected static class AdminAuthenticationConfiguration extends
 			WebSecurityConfigurerAdapter {
 
+		@Autowired
+		private SignInService signInService;
+
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.exceptionHandling().authenticationEntryPoint(
@@ -223,7 +227,7 @@ public class ApplicationConfiguration {
 					registry);
 			repository.setConnectionSignUp(new RemoteUsernameConnectionSignUp());
 			ProviderSignInController controller = new ProviderSignInController(registry, repository,
-					new GithubAuthenticationSigninAdapter(SIGNIN_SUCCESS_PATH));
+					new GithubAuthenticationSigninAdapter(SIGNIN_SUCCESS_PATH, signInService));
 			controller.setSignInUrl("/signin?error=access_denied");
 			return controller;
 		}

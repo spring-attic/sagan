@@ -42,8 +42,7 @@ public class ViewTeamMemberTests {
 	@Test
 	public void getTeamMemberPage() throws Exception {
 		MemberProfile profile = new MemberProfile();
-		profile.setFirstName("First");
-		profile.setLastName("Last");
+		profile.setName("First Last");
 		profile.setGithubUsername("someguy");
 		profile.setMemberId("someguy");
 

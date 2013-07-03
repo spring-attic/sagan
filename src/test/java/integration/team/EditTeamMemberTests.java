@@ -69,8 +69,7 @@ public class 	EditTeamMemberTests {
 	@Test
 	public void getEditTeamMemberPageWithExistingProfile() throws Exception {
 		MemberProfile profile = new MemberProfile();
-		profile.setFirstName("First");
-		profile.setLastName("Last");
+		profile.setName("First Last");
 		profile.setLocation("Location");
 		profile.setGravatarEmail("test@example.com");
 		profile.setGithubUsername("someguy");
@@ -81,15 +80,13 @@ public class 	EditTeamMemberTests {
 		this.mockMvc.perform(get("/admin/profile/edit").principal(principal))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("First")))
-				.andExpect(content().string(containsString("Last")));
+				.andExpect(content().string(containsString("First Last")));
 	}
 
 	@Test
 	public void savingAProfileForTheFirstTime() throws Exception {
 		MockHttpServletRequestBuilder requestBuilder = put("/admin/profile").principal(principal);
-		requestBuilder.param("firstName", "Some");
-		requestBuilder.param("lastName", "Guy");
+		requestBuilder.param("name", "Some Guy");
 		requestBuilder.param("location", "London");
 		requestBuilder.param("bio", "I am just a guy");
 		requestBuilder.param("gravatarEmail", "someguy@example.com");
@@ -105,8 +102,7 @@ public class 	EditTeamMemberTests {
 		assertThat(profile, not(nullValue()));
 
 		assertEquals("someguy", profile.getMemberId());
-		assertEquals("Some", profile.getFirstName());
-		assertEquals("Guy", profile.getLastName());
+		assertEquals("Some Guy", profile.getName());
 		assertEquals("London", profile.getLocation());
 		assertEquals("I am just a guy", profile.getBio());
 		assertEquals("someguy@example.com", profile.getGravatarEmail());
@@ -120,8 +116,7 @@ public class 	EditTeamMemberTests {
 	public void saveExistingProfile() throws Exception {
 		MemberProfile existingProfile = new MemberProfile();
 		existingProfile.setMemberId("someguy");
-		existingProfile.setFirstName("Some");
-		existingProfile.setLastName("Guy");
+		existingProfile.setName("Some");
 		existingProfile.setLocation("London");
 		existingProfile.setBio("I am just a guy");
 		existingProfile.setGravatarEmail("someguy@example.com");
@@ -132,8 +127,7 @@ public class 	EditTeamMemberTests {
 		teamRepository.save(existingProfile);
 
 		MockHttpServletRequestBuilder requestBuilder = put("/admin/profile").principal(principal);
-		requestBuilder.param("firstName", "Some_");
-		requestBuilder.param("lastName", "Guy_");
+		requestBuilder.param("name", "Some_ Guy_");
 		requestBuilder.param("location", "London_");
 		requestBuilder.param("bio", "I am just a guy_");
 		requestBuilder.param("gravatarEmail", "someguy_@example.com");
@@ -147,8 +141,7 @@ public class 	EditTeamMemberTests {
 		MemberProfile profile = teamRepository.findByMemberId("someguy");
 		assertThat(profile, not(nullValue()));
 		assertEquals("someguy", profile.getMemberId());
-		assertEquals("Some_", profile.getFirstName());
-		assertEquals("Guy_", profile.getLastName());
+		assertEquals("Some_ Guy_", profile.getName());
 		assertEquals("London_", profile.getLocation());
 		assertEquals("I am just a guy_", profile.getBio());
 		assertEquals("someguy_@example.com", profile.getGravatarEmail());
