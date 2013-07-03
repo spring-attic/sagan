@@ -44,7 +44,7 @@ public class BlogService {
 		return post;
 	}
 
-	//TODO extract this out
+	// package private for testing purposes
 	String extractFirstParagraph(String content, int maxLength) {
 		String paragraph = content.trim();
 		int paragraphBreakpoint = paragraph.indexOf("\n\n");

@@ -27,11 +27,11 @@ import static org.junit.Assert.*;
 
 public class BasicAcceptanceTests {
 
+	//TODO make this dynamic
 	public static final int PORT = 9080;
 
 	private static ConfigurableApplicationContext context;
 
-	//TODO make this dynamic
 	private String serverAddress = "http://localhost:" + PORT;
 
 	@BeforeClass

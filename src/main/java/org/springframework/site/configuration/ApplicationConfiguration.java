@@ -89,6 +89,9 @@ public class ApplicationConfiguration {
 	@Autowired
 	private Client client;
 
+	@Value("${GITHUB_ACCESS_TOKEN:${github.access.token:5a0e089d267693b45926d7f620d85a2eb6a85da6}}")
+	private String accessToken;
+
 	public static void main(String[] args) {
 		build(ApplicationConfiguration.class).run(args);
 	}
@@ -111,8 +114,7 @@ public class ApplicationConfiguration {
 
 	@Bean
 	public GitHub gitHubTemplate() {
-		// TODO parameterize auth token
-		return new GitHubTemplate("5a0e089d267693b45926d7f620d85a2eb6a85da6");
+		return new GitHubTemplate(accessToken);
 	}
 
 	@Bean
@@ -124,12 +126,17 @@ public class ApplicationConfiguration {
 	@Profile({"staging", "production"})
 	protected static class ElasticSearchExternalConfiguration {
 
+		@Value("${elasticsearch.cluster.nodes:localhost:9300}")
+		private String clusterNodes = "localhost:9300";
+
+		@Value("${elasticsearch.cluster.name:elasticsearch_pivotal}")
+		private String clusterName = "elasticsearch_pivotal";
+
 		@Bean
 		public Client elasticSearchClient() throws Exception {
 			TransportClientFactoryBean transportClient = new TransportClientFactoryBean();
-			// TODO: extract elasticsearch settings to application.yml
-			transportClient.setClusterNodes("localhost:9300");
-			transportClient.setClusterName("elasticsearch_pivotal");
+			transportClient.setClusterNodes(clusterNodes);
+			transportClient.setClusterName(clusterName);
 			transportClient.setClientTransportSniff(true);
 			transportClient.afterPropertiesSet();
 			return transportClient.getObject();
