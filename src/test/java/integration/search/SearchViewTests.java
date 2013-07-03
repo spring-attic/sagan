@@ -1,5 +1,6 @@
-package org.springframework.site.integration.search;
+package integration.search;
 
+import integration.configuration.ElasticsearchStubConfiguration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,7 +18,6 @@ import org.springframework.site.blog.Post;
 import org.springframework.site.blog.web.BlogPostsPageRequest;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchEntryBuilder;
-import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;

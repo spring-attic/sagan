@@ -1,7 +1,8 @@
-package org.springframework.site.integration;
+package integration;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import integration.configuration.ElasticsearchStubConfiguration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -16,7 +17,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.guides.GettingStartedGuide;
 import org.springframework.site.guides.GettingStartedService;
 import org.springframework.site.guides.GuideRepo;
-import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;

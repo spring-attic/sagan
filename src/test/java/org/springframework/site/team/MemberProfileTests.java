@@ -7,7 +7,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 
-public class MemberProfileTest {
+public class MemberProfileTests {
 
 	@Test
 	public void twitterLink() {

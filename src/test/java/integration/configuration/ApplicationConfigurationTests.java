@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.test.configuration;
+package integration.configuration;
 
 import org.junit.After;
 import org.junit.Test;

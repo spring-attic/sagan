@@ -1,5 +1,6 @@
-package org.springframework.site.integration.team;
+package integration.team;
 
+import integration.configuration.ElasticsearchStubConfiguration;
 import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
 import org.springframework.site.team.MemberProfile;
 import org.springframework.site.team.TeamRepository;
-import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;

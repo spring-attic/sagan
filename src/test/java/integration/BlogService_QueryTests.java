@@ -1,5 +1,6 @@
-package org.springframework.site.integration;
+package integration;
 
+import integration.configuration.ElasticsearchStubConfiguration;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,7 +22,6 @@ import org.springframework.site.blog.web.BlogPostsPageRequest;
 import org.springframework.site.blog.web.EntityNotFoundException;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
-import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;

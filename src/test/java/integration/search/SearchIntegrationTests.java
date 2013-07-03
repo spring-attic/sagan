@@ -1,4 +1,4 @@
-package org.springframework.site.integration.search;
+package integration.search;
 
 
 import org.junit.Before;

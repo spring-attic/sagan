@@ -1,5 +1,6 @@
-package org.springframework.site.integration.search;
+package integration.search;
 
+import integration.configuration.ElasticsearchStubConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.site.guides.GettingStartedGuide;
 import org.springframework.site.guides.GettingStartedService;
 import org.springframework.site.guides.GuideRepo;
 import org.springframework.site.search.SearchService;
-import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -24,8 +24,8 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {ElasticsearchStubConfiguration.class, GuideSearchTests.OfflineConfiguration.class})
-public class GuideSearchTests {
+@ContextConfiguration(classes = {ElasticsearchStubConfiguration.class, GettingStartedGuideIndexServiceTests.OfflineConfiguration.class})
+public class GettingStartedGuideIndexServiceTests {
 
 	public static final GettingStartedGuide GETTING_STARTED_GUIDE =
 			new GettingStartedGuide("awesome-guide", "Awesome getting started guide that isn't helpful", "Related resources");

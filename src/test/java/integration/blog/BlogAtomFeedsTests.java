@@ -1,5 +1,6 @@
-package org.springframework.site.integration.blog;
+package integration.blog;
 
+import integration.configuration.ElasticsearchStubConfiguration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,6 @@ import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostRepository;
 import org.springframework.site.services.SiteUrl;
-import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;

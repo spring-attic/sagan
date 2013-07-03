@@ -1,7 +1,12 @@
-package org.springframework.test.configuration;
+package integration.configuration;
 
 import org.elasticsearch.client.Client;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;

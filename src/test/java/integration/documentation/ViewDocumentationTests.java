@@ -1,10 +1,10 @@
-package org.springframework.site.integration;
+package integration.documentation;
 
+import integration.configuration.ElasticsearchStubConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -20,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = ElasticsearchStubConfiguration.class)
-public class StaticPageRequestMappingTests {
+public class ViewDocumentationTests {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -33,21 +34,27 @@ public class StaticPageRequestMappingTests {
 	}
 
 	@Test
-	public void getHomePage() throws Exception {
-		this.mockMvc.perform(get("/"))
+	public void getDocumentationPage() throws Exception {
+		this.mockMvc
+				.perform(get("/documentation"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Hello World")));
+				.andExpect(content().string(containsString("Spring Security")))
+				.andExpect(
+						content()
+								.string(containsString("http://static.springsource.org/spring-mobile/docs/1.0.1.RELEASE/reference/htmlsingle/")));
 	}
 
 	@Test
-	public void getGuidesPage() throws Exception {
-		this.mockMvc.perform(get("/guides"))
+	public void getDocumentationForProjectWithMissingLinks() throws Exception {
+		this.mockMvc
+				.perform(get("/documentation"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Getting Started")))
-				.andExpect(content().string(containsString("Tutorials")))
-				.andExpect(content().string(containsString("Reference Apps")));
+				.andExpect(content().string(containsString("Spring AMQP")))
+				.andExpect(
+						content()
+								.string(not(containsString("http://static.springsource.org/spring-amqp-samples"))));
 	}
 
 }

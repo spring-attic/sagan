@@ -1,11 +1,4 @@
-package org.springframework.test.configuration;
-
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.net.URL;
+package integration.configuration;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +9,13 @@ import org.springframework.site.configuration.DefaultViewControllerConfiguration
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+
+import java.net.URL;
+
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class DefaultViewControllerConfigurationTests {
 
