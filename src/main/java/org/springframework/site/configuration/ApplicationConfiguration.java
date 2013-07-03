@@ -36,10 +36,8 @@ import org.springframework.data.elasticsearch.client.TransportClientFactoryBean;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -165,7 +163,6 @@ public class ApplicationConfiguration {
 	protected static class SigninAuthenticationConfiguration extends
 			WebSecurityConfigurerAdapter {
 
-
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/signin/**")
@@ -186,7 +183,6 @@ public class ApplicationConfiguration {
 	}
 
 	@Configuration
-	@EnableWebSecurity
 	@Order(Integer.MAX_VALUE)
 	protected static class AdminAuthenticationConfiguration extends
 			WebSecurityConfigurerAdapter {
@@ -204,12 +200,6 @@ public class ApplicationConfiguration {
 			// should we POST back here (e.g. with forward)?
 			LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint("/signin");
 			return entryPoint;
-		}
-
-		// TODO remove once Thymeleaf integration is fixed in spring-data
-		@Bean
-		public DefaultWebSecurityExpressionHandler webSecurityExpressionHandler() {
-			return new DefaultWebSecurityExpressionHandler();
 		}
 
 		@Bean
