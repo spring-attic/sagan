@@ -42,7 +42,7 @@ public class BasicAcceptanceTests {
 							@Override
 							public ConfigurableApplicationContext call() throws Exception {
 								return (ConfigurableApplicationContext) ApplicationConfiguration
-										.build(ElasticsearchStubConfiguration.class).run("--server.port=" + PORT);
+										.build(ElasticsearchStubConfiguration.class).run("--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb");
 							}
 						});
 		context = future.get(30, TimeUnit.SECONDS);
