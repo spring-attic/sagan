@@ -21,7 +21,7 @@ import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SignInServiceTest {
+public class SignInServiceTests {
 
 	@Mock
 	private GitHub gitHub;
