@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
-import org.springframework.site.blog.web.BlogPostsPageRequest;
+import org.springframework.site.web.PageableFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,19 +26,19 @@ public class BlogFeedController {
 
 	@RequestMapping(value="/blog.atom", method = { GET, HEAD })
 	public String listPublishedPosts(Model model) {
-		Page<Post> page = service.getPublishedPosts(BlogPostsPageRequest.forFeeds());
+		Page<Post> page = service.getPublishedPosts(PageableFactory.forFeeds());
 		return renderBlogFeeds(model, page, "", "");
 	}
 
 	@RequestMapping(value = "/blog/category/{category}.atom", method = { GET, HEAD })
 	public String listPublishedPostsForCategory(@PathVariable PostCategory category, Model model) {
-		Page<Post> page = service.getPublishedPosts(category, BlogPostsPageRequest.forFeeds());
+		Page<Post> page = service.getPublishedPosts(category, PageableFactory.forFeeds());
 		return renderBlogFeeds(model, page, category.getDisplayName(), "/category/" + category.getUrlSlug());
 	}
 
 	@RequestMapping(value = "/blog/broadcasts.atom", method = { GET, HEAD })
 	public String listPublishedBroadcastPosts(Model model) {
-		Page<Post> page = service.getPublishedBroadcastPosts(BlogPostsPageRequest.forFeeds());
+		Page<Post> page = service.getPublishedBroadcastPosts(PageableFactory.forFeeds());
 		return renderBlogFeeds(model, page, "Broadcasts", "/broadcasts");
 	}
 

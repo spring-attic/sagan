@@ -13,8 +13,10 @@ import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostForm;
+import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.services.DateService;
+import org.springframework.site.web.PageableFactory;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.security.Principal;
@@ -31,10 +33,16 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.same;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogAdminControllerTests {
+	private static final Post TEST_POST = PostBuilder.post()
+			.id(123L)
+			.publishYesterday()
+			.build();
+
 	private BlogAdminController controller;
 
 	@Mock
@@ -64,9 +72,9 @@ public class BlogAdminControllerTests {
 		postViewFactory = mock(PostViewFactory.class);
 		controller = new BlogAdminController(blogService, postViewFactory, searchService);
 
-		Page<Post> drafts = new PageImpl<Post>(new ArrayList<Post>(), BlogPostsPageRequest.forDashboard(), 1);
-		Page<Post> published = new PageImpl<Post>(new ArrayList<Post>(), BlogPostsPageRequest.forDashboard(), 1);
-		Page<Post> scheduled = new PageImpl<Post>(new ArrayList<Post>(), BlogPostsPageRequest.forDashboard(), 1);
+		Page<Post> drafts = new PageImpl<Post>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
+		Page<Post> published = new PageImpl<Post>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
+		Page<Post> scheduled = new PageImpl<Post>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
 
 		when(blogService.getPublishedPosts(any(PageRequest.class))).thenReturn(published);
 		when(blogService.getDraftPosts(any(PageRequest.class))).thenReturn(drafts);
@@ -106,30 +114,9 @@ public class BlogAdminControllerTests {
 	public void creatingABlogPostRecordsTheUser() {
 		PostForm postForm = new PostForm();
 
-		when(blogService.addPost(eq(postForm), anyString())).thenReturn(PostBuilder.post().build());
+		when(blogService.addPost(eq(postForm), anyString())).thenReturn(TEST_POST);
 		controller.createPost(postForm, principal);
 		verify(blogService).addPost(postForm, "testUser");
-	}
-
-	@Test
-	public void creatingABlogPostAddsThatPostToTheSearchIndex() {
-		PostForm postForm = new PostForm();
-
-		when(blogService.addPost(eq(postForm), anyString())).thenReturn(PostBuilder.post().build());
-		controller.createPost(postForm, principal);
-
-		verify(searchService).savePostToSearchIndex(any(Post.class));
-	}
-
-	@Test
-	public void updatingABlogPostAddsThatPostToTheSearchIndex() {
-		Post post = PostBuilder.post().build();
-		long postId = 123L;
-		when(blogService.getPost(eq(postId))).thenReturn(post);
-
-		controller.updatePost(postId, new PostForm());
-
-		verify(searchService).savePostToSearchIndex(eq(post));
 	}
 
 	@Test
@@ -141,4 +128,40 @@ public class BlogAdminControllerTests {
 
 		assertThat(result, equalTo("redirect:/blog/123-post-title"));
 	}
+
+	@Test
+	public void creatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
+		PostForm postForm = new PostForm();
+		when(blogService.addPost(eq(postForm), anyString())).thenReturn(TEST_POST);
+		controller.createPost(postForm, principal);
+		verify(searchService).saveToIndex(any(SearchEntry.class));
+	}
+
+	@Test
+	public void creatingABlogPost_doesNotSaveToSearchIndexIfNotLive() throws Exception {
+		PostForm postForm = new PostForm();
+		Post post = PostBuilder.post().draft().build();
+		when(blogService.addPost(eq(postForm), anyString())).thenReturn(post);
+		controller.createPost(postForm, principal);
+		verifyZeroInteractions(searchService);
+	}
+
+	@Test
+	public void updatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
+		long postId = TEST_POST.getId();
+		when(blogService.getPost(eq(postId))).thenReturn(TEST_POST);
+		controller.updatePost(postId, new PostForm());
+		verify(searchService).saveToIndex(any(SearchEntry.class));
+	}
+
+	@Test
+	public void updatingABlogPost_doesNotSaveToSearchIndexIfNotLive() throws Exception {
+		long postId = 123L;
+		Post post = PostBuilder.post().id(postId).draft().build();
+		when(blogService.getPost(eq(postId))).thenReturn(post);
+		controller.updatePost(postId, new PostForm());
+		verifyZeroInteractions(searchService);
+	}
+
+
 }

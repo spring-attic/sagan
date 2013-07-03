@@ -6,13 +6,16 @@ import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostForm;
+import org.springframework.site.blog.PostSearchEntryMapper;
 import org.springframework.site.search.SearchService;
+import org.springframework.site.web.PageableFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.Date;
 
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -28,6 +31,8 @@ public class BlogAdminController {
 	private PostViewFactory postViewFactory;
 	private SearchService searchService;
 
+	private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
+
 	@Autowired
 	public BlogAdminController(BlogService service, PostViewFactory postViewFactory, SearchService searchService) {
 		this.service = service;
@@ -37,7 +42,7 @@ public class BlogAdminController {
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String dashboard(Model model) {
-		Pageable pageRequest = BlogPostsPageRequest.forDashboard();
+		Pageable pageRequest = PageableFactory.forDashboard();
 		model.addAttribute("posts", postViewFactory.createPostViewPage(service.getPublishedPosts(pageRequest)));
 		model.addAttribute("drafts", postViewFactory.createPostViewPage(service.getDraftPosts(pageRequest)));
 		model.addAttribute("scheduled", postViewFactory.createPostViewPage(service.getScheduledPosts(pageRequest)));
@@ -70,9 +75,9 @@ public class BlogAdminController {
 
 	@RequestMapping(value = "", method = { POST })
 	public String createPost(PostForm postForm, Principal principal) {
-		Post newPost = service.addPost(postForm, principal.getName());
-		searchService.savePostToSearchIndex(newPost);
-		PostView postView = postViewFactory.createPostView(newPost);
+		Post post = service.addPost(postForm, principal.getName());
+		saveToIndex(post);
+		PostView postView = postViewFactory.createPostView(post);
 		return "redirect:" + postView.getPath();
 	}
 
@@ -80,7 +85,7 @@ public class BlogAdminController {
 	public String updatePost(@PathVariable Long postId, PostForm postForm) {
 		Post post = service.getPost(postId);
 		service.updatePost(post, postForm);
-		searchService.savePostToSearchIndex(post);
+		saveToIndex(post);
 		PostView postView = postViewFactory.createPostView(post);
 		return "redirect:" + postView.getPath();
 	}
@@ -90,6 +95,12 @@ public class BlogAdminController {
 		Post post = service.getPost(postId);
 		service.deletePost(post);
 		return "redirect:/admin/blog";
+	}
+
+	private void saveToIndex(Post post) {
+		if (post.isLiveOn(new Date())) {
+			searchService.saveToIndex(mapper.map(post));
+		}
 	}
 
 }

@@ -5,6 +5,7 @@ import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostForm;
+import org.springframework.site.blog.PostSearchEntryMapper;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,8 @@ public class BlogSampleDataController {
 
 	@Autowired
 	private SearchService searchService;
+
+	private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
 	@RequestMapping
 	public String createSamples(Model model) throws Exception {
@@ -49,6 +52,8 @@ public class BlogSampleDataController {
 				"\n" +
 				"1.  I'll be doing a webinar on building effective REST APIs with Spring on June 13th. I'll be introducing Spring's deep support for REST services, starting");
 		Post post = blogService.addPost(postForm, authors[(int) (Math.random() * authors.length)]);
-		searchService.savePostToSearchIndex(post);
+		if (post.isLiveOn(new Date())) {
+			searchService.saveToIndex(mapper.map(post));
+		}
 	}
 }

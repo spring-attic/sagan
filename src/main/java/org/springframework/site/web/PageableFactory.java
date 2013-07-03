@@ -1,15 +1,11 @@
-package org.springframework.site.blog.web;
+package org.springframework.site.web;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 @SuppressWarnings("serial")
-public class BlogPostsPageRequest extends PageRequest {
-	//TODO remove this
-	public BlogPostsPageRequest(int page) {
-		super(page, 10, Sort.Direction.DESC, "createdAt");
-	}
+public abstract class PageableFactory {
 
 	/**
 	 * @param page not zero indexed

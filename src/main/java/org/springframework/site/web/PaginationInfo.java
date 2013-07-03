@@ -1,4 +1,4 @@
-package org.springframework.site.blog;
+package org.springframework.site.web;
 
 import org.springframework.data.domain.Page;
 

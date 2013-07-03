@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.site.guides.GettingStartedGuide;
 import org.springframework.site.guides.GettingStartedService;
 import org.springframework.site.guides.GuideRepo;
+import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,7 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -71,7 +72,7 @@ public class GettingStartedGuideIndexServiceTests {
 
 	@Test
 	public void gettingStartedGuidesAreIndexedOnStartup() {
-		verify(searchService).saveGuideToSearchIndex(eq(GETTING_STARTED_GUIDE));
+		verify(searchService).saveToIndex(any(SearchEntry.class));
 	}
 
 }

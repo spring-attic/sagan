@@ -18,7 +18,7 @@ import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostRepository;
-import org.springframework.site.blog.web.BlogPostsPageRequest;
+import org.springframework.site.web.PageableFactory;
 import org.springframework.site.blog.web.EntityNotFoundException;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
@@ -49,6 +49,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 @Transactional
 public class BlogService_QueryTests {
 
+	private static final Pageable FIRST_TEN_POSTS = PageableFactory.forLists(1);
 	private BlogService service;
 
 	@Autowired
@@ -119,12 +120,11 @@ public class BlogService_QueryTests {
 
 	@Test
 	public void getPublishedPostsOnlyShowsPublishedPosts() {
-		Pageable firstTenPosts = new BlogPostsPageRequest(0);
 		Post post = PostBuilder.post().build();
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().draft().build());
 
-		Page<Post> publishedPosts = service.getPublishedPosts(firstTenPosts);
+		Page<Post> publishedPosts = service.getPublishedPosts(FIRST_TEN_POSTS);
 		assertThat(publishedPosts.getContent(), contains(post));
 	}
 
@@ -137,7 +137,7 @@ public class BlogService_QueryTests {
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
 		when(dateService.now()).thenReturn(today);
 
-		assertThat(service.getPublishedPosts(new BlogPostsPageRequest(0)), contains(post));
+		assertThat(service.getPublishedPosts(FIRST_TEN_POSTS), contains(post));
 	}
 
 	@Test
@@ -149,7 +149,7 @@ public class BlogService_QueryTests {
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
 		when(dateService.now()).thenReturn(today);
 
-		assertThat(service.getScheduledPosts(new BlogPostsPageRequest(0)), contains(post));
+		assertThat(service.getScheduledPosts(FIRST_TEN_POSTS), contains(post));
 	}
 
 	@Test
@@ -161,23 +161,21 @@ public class BlogService_QueryTests {
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
 		when(dateService.now()).thenReturn(today);
 
-		assertThat(service.getScheduledPosts(new BlogPostsPageRequest(0)), contains(post));
+		assertThat(service.getScheduledPosts(FIRST_TEN_POSTS), contains(post));
 	}
 
 	@Test
 	public void listPostsForCategory() {
-		Pageable firstTenPosts = new BlogPostsPageRequest(0);
 		Post post = PostBuilder.post().category(PostCategory.ENGINEERING).build();
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().category(PostCategory.NEWS_AND_EVENTS).build());
 
-		Page<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, firstTenPosts);
+		Page<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, FIRST_TEN_POSTS);
 		assertThat(publishedPosts.getContent(), contains(post));
 	}
 
 	@Test
 	public void listPostsForCategoryDoesNotFindFutureSchedulePost() throws ParseException {
-		Pageable firstTenPosts = new BlogPostsPageRequest(0);
 		Post post = PostBuilder.post().publishAt("2013-06-13 00:00").category(PostCategory.ENGINEERING).build();
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().publishAt("2013-06-15 00:00").category(PostCategory.ENGINEERING).build());
@@ -185,7 +183,7 @@ public class BlogService_QueryTests {
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
 		when(dateService.now()).thenReturn(today);
 
-		Page<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, firstTenPosts);
+		Page<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, FIRST_TEN_POSTS);
 		assertThat(publishedPosts.getContent(), contains(post));
 	}
 
@@ -205,18 +203,16 @@ public class BlogService_QueryTests {
 
 	@Test
 	public void listBroadcasts() {
-		Pageable firstTenPosts = new BlogPostsPageRequest(0);
 		Post post = PostBuilder.post().isBroadcast().build();
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().build());
 
-		Page<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(firstTenPosts);
+		Page<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(FIRST_TEN_POSTS);
 		assertThat(publishedBroadcastPosts.getContent(), contains(post));
 	}
 
 	@Test
 	public void listBroadcastsDoesNotFindFutureSchedulePost() throws ParseException {
-		Pageable firstTenPosts = new BlogPostsPageRequest(0);
 		Post post = PostBuilder.post().publishAt("2013-06-13 00:00").isBroadcast().build();
 		postRepository.save(post);
 		postRepository.save(PostBuilder.post().publishAt("2013-06-15 00:00").isBroadcast().build());
@@ -224,7 +220,7 @@ public class BlogService_QueryTests {
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
 		when(dateService.now()).thenReturn(today);
 
-		Page<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(firstTenPosts);
+		Page<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(FIRST_TEN_POSTS);
 		assertThat(publishedBroadcastPosts.getContent(), contains(post));
 	}
 
@@ -236,7 +232,7 @@ public class BlogService_QueryTests {
 		Post draft = PostBuilder.post().draft().build();
 		postRepository.save(draft);
 
-		Page<Post> allPosts = service.getAllPosts(new BlogPostsPageRequest(0));
+		Page<Post> allPosts = service.getAllPosts(FIRST_TEN_POSTS);
 		assertThat(allPosts.getContent(), containsInAnyOrder(post, draft));
 	}
 }

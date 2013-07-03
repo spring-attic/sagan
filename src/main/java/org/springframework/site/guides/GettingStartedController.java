@@ -8,12 +8,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static org.springframework.site.guides.GettingStartedController.GUIDES_ROOT;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
 @Controller
-@RequestMapping("/guides/gs")
+@RequestMapping(GUIDES_ROOT)
 public class GettingStartedController {
+
+	public static final String GUIDES_ROOT = "/guides/gs";
+	private static final String CONTENT_PATH = "/content";
+	private static final String SHOW_GUIDE = "/{guideSlug}" + CONTENT_PATH;
+
+	static String getPath(GettingStartedGuide guide) {
+		return GUIDES_ROOT + "/" + guide.getGuideId() + CONTENT_PATH;
+	}
 
 	private GettingStartedService service;
 
@@ -22,15 +31,15 @@ public class GettingStartedController {
 		this.service = service;
 	}
 
-	@RequestMapping(value = "/{guideSlug}/content", method = { GET, HEAD })
-	public String viewGuide(@PathVariable("guideSlug") String guideSlug, Model model) {
+	@RequestMapping(value = SHOW_GUIDE, method = { GET, HEAD })
+	public String viewGuide(@PathVariable String guideSlug, Model model) {
 		model.addAttribute("guideSlug", guideSlug);
 		model.addAttribute("guide", service.loadGuide(guideSlug));
 		return "guides/gs/guide";
 	}
 
 	@RequestMapping(value = "/{guideSlug}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })
-	public ResponseEntity<byte[]> loadImage(@PathVariable("guideSlug") String guideSlug, @PathVariable("name") String imageName) {
+	public ResponseEntity<byte[]> loadImage(@PathVariable String guideSlug, @PathVariable("name") String imageName) {
 		byte[] image = service.loadImage(guideSlug, imageName);
 		return new ResponseEntity<byte[]>(image, HttpStatus.OK);
 	}

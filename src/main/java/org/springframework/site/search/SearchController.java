@@ -5,8 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-import org.springframework.site.blog.PaginationInfo;
-import org.springframework.site.blog.web.BlogPostsPageRequest;
+import org.springframework.site.web.PageableFactory;
+import org.springframework.site.web.PaginationInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +52,7 @@ public class SearchController {
 									)
 							)
 					).build();
-			searchQuery.setPageable(BlogPostsPageRequest.forSearch(page));
+			searchQuery.setPageable(PageableFactory.forSearch(page));
 			entries = elasticsearchTemplate.queryForPage(searchQuery, SearchEntry.class);
 		}
 

@@ -13,9 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.site.blog.PaginationInfo;
+import org.springframework.site.web.PageableFactory;
+import org.springframework.site.web.PaginationInfo;
 import org.springframework.site.blog.Post;
-import org.springframework.site.blog.web.BlogPostsPageRequest;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchEntryBuilder;
 import org.springframework.test.context.ContextConfiguration;
@@ -54,7 +54,7 @@ public class SearchViewTests {
 	public void setUp() throws Exception {
 		view = viewResolver.resolveViewName("search/results", Locale.UK);
 		response = new MockHttpServletResponse();
-		Page<Post> posts = new PageImpl<Post>(Collections.<Post>emptyList(), BlogPostsPageRequest.forSearch(1), 0);
+		Page<Post> posts = new PageImpl<Post>(Collections.<Post>emptyList(), PageableFactory.forSearch(1), 0);
 
 		model = new HashMap<String, Object>();
 		model.put("results", Collections.emptyList());
@@ -99,7 +99,7 @@ public class SearchViewTests {
 
 	@Test
 	public void displaysPaginationControl() throws Exception {
-		Page<SearchEntry> entries = new PageImpl<SearchEntry>(buildManySearchEntriesInNovember(10), BlogPostsPageRequest.forSearch(1), 11);
+		Page<SearchEntry> entries = new PageImpl<SearchEntry>(buildManySearchEntriesInNovember(10), PageableFactory.forSearch(1), 11);
 		model.put("results", entries.getContent());
 		model.put("paginationInfo", new PaginationInfo(entries));
 		view.render(model, new MockHttpServletRequest(), response);

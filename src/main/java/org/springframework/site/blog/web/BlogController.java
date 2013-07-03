@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.BlogService;
-import org.springframework.site.blog.PaginationInfo;
+import org.springframework.site.web.PageableFactory;
+import org.springframework.site.web.PaginationInfo;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.stereotype.Controller;
@@ -41,21 +42,21 @@ public class BlogController {
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listPublishedPosts(Model model, @RequestParam(defaultValue = "1") int page, HttpServletRequest request) {
-		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
+		Pageable pageRequest = PageableFactory.forLists(page);
 		Page<Post> result = service.getPublishedPosts(pageRequest);
 		return renderListOfPosts(result, model, request);
 	}
 
 	@RequestMapping(value = "/category/{category}", method = { GET, HEAD })
 	public String listPublishedPostsForCategory(@PathVariable PostCategory category, Model model, @RequestParam(defaultValue = "1") int page, HttpServletRequest request) {
-		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
+		Pageable pageRequest = PageableFactory.forLists(page);
 		Page<Post> result = service.getPublishedPosts(category, pageRequest);
 		return renderListOfPosts(result, model, request);
 	}
 
 	@RequestMapping(value = "/broadcasts", method = { GET, HEAD })
 	public String listPublishedBroadcasts(Model model, @RequestParam(defaultValue = "1") int page, HttpServletRequest request) {
-		Pageable pageRequest = BlogPostsPageRequest.forLists(page);
+		Pageable pageRequest = PageableFactory.forLists(page);
 		Page<Post> result = service.getPublishedBroadcastPosts(pageRequest);
 		return renderListOfPosts(result, model, request);
 	}

@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.*;
+import org.springframework.site.web.PageableFactory;
+import org.springframework.site.web.PaginationInfo;
 import org.springframework.ui.ExtendedModelMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +51,7 @@ public class BlogController_PublishedPostsForCategoryTests {
 		List<Post> posts = new ArrayList<Post>();
 		posts.add(PostBuilder.post().build());
 		Page postsPage = new PageImpl<Post>(posts, new PageRequest(TEST_PAGE, 10), 20);
-		Pageable testPageable = BlogPostsPageRequest.forLists(TEST_PAGE);
+		Pageable testPageable = PageableFactory.forLists(TEST_PAGE);
 
 		page = new PageImpl<PostView>(new ArrayList<PostView>(), testPageable, 1);
 

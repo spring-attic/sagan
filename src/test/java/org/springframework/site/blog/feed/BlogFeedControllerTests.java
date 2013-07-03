@@ -11,7 +11,7 @@ import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
-import org.springframework.site.blog.web.BlogPostsPageRequest;
+import org.springframework.site.web.PageableFactory;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.util.ArrayList;
@@ -43,9 +43,9 @@ public class BlogFeedControllerTests {
 		controller = new BlogFeedController(blogService);
 		posts.add(PostBuilder.post().build());
 		page = new PageImpl<Post>(posts, mock(Pageable.class), 20);
-		when(blogService.getPublishedPosts(eq(BlogPostsPageRequest.forFeeds()))).thenReturn(page);
-		when(blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(BlogPostsPageRequest.forFeeds()))).thenReturn(page);
-		when(blogService.getPublishedBroadcastPosts(eq(BlogPostsPageRequest.forFeeds()))).thenReturn(page);
+		when(blogService.getPublishedPosts(eq(PageableFactory.forFeeds()))).thenReturn(page);
+		when(blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(PageableFactory.forFeeds()))).thenReturn(page);
+		when(blogService.getPublishedBroadcastPosts(eq(PageableFactory.forFeeds()))).thenReturn(page);
 	}
 
 	@Test
