@@ -39,7 +39,7 @@
 				</tr>
 			</table>
 
-			<h2>Posts</h2>
+			<h2>Published</h2>
 			<table class='table dashboard--posts'>
 				<tr th:each="post : ${posts}">
 					<td class='date' th:text='  ${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</td>
