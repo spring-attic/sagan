@@ -145,6 +145,8 @@ public class ApplicationConfiguration {
 			ElasticsearchTemplate elasticsearchTemplate = new ElasticsearchTemplate(elasticSearchClient());
 			elasticsearchTemplate.deleteIndex(Post.class);
 			elasticsearchTemplate.createIndex(Post.class);
+			elasticsearchTemplate.putMapping(Post.class);
+			elasticsearchTemplate.refresh(Post.class, false);
 		}
 
 		@PreDestroy

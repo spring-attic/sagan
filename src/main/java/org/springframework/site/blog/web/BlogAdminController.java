@@ -57,7 +57,7 @@ public class BlogAdminController {
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = {GET, HEAD})
 	public String showPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
-		model.addAttribute("post", service.getPost(postId));
+		model.addAttribute("post", postViewFactory.createPostView(service.getPost(postId)));
 		return "admin/blog/show";
 	}
 

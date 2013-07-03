@@ -82,7 +82,8 @@ public class BlogAdminControllerTests {
 		Post post = PostBuilder.post().build();
 		when(blogService.getPost(post.getId())).thenReturn(post);
 		controller.showPost(post.getId(), "1-post-title", model);
-		assertThat((Post) model.get("post"), is(post));
+		PostView view = (PostView) model.get("post");
+		assertThat(view, is(notNullValue()));
 	}
 
 	@Test

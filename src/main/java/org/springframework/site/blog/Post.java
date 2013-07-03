@@ -2,6 +2,8 @@ package org.springframework.site.blog;
 
 import org.hibernate.annotations.Type;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -51,6 +53,7 @@ public class Post implements Serializable {
 	private boolean broadcast = false;
 
 	@Column(nullable = true)
+	@Field(type = FieldType.Long)
 	private Date publishAt;
 
 	@SuppressWarnings("unused")
