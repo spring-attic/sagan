@@ -7,7 +7,7 @@
 </head>
 <body>
 <div layout:fragment="content" class="container">
-    <form th:action="@{/admin/team/myprofile}" action="#" method="post" th:object="${profile}">
+    <form th:action="@{/admin/profile}" action="#" method="post" th:object="${profile}">
         <label for="firstName">First Name:<input id="firstName" type="text" th:field="*{firstName}" name="firstName" /></label>
         <label for="lastName">Last Name:<input id="lastName" type="text" th:field="*{lastName}" name="lastName" /></label>
         <label for="location">Location:<input id="location" type="text" th:field="*{location}" name="location" /></label>

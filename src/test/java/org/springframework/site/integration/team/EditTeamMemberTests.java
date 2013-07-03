@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @ContextConfiguration(classes = ElasticsearchStubConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
 @Transactional
-public class EditTeamMemberTests {
+public class 	EditTeamMemberTests {
 	@Autowired
 	private WebApplicationContext wac;
 
@@ -60,7 +60,7 @@ public class EditTeamMemberTests {
 
 	@Test
 	public void getEditTeamMemberPageWithNoProfile() throws Exception {
-		this.mockMvc.perform(get("/admin/team/myprofile/edit").principal(principal))
+		this.mockMvc.perform(get("/admin/profile/edit").principal(principal))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("someguy")));
@@ -78,7 +78,7 @@ public class EditTeamMemberTests {
 
 		teamRepository.save(profile);
 
-		this.mockMvc.perform(get("/admin/team/myprofile/edit").principal(principal))
+		this.mockMvc.perform(get("/admin/profile/edit").principal(principal))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("First")))
@@ -87,7 +87,7 @@ public class EditTeamMemberTests {
 
 	@Test
 	public void savingAProfileForTheFirstTime() throws Exception {
-		MockHttpServletRequestBuilder requestBuilder = put("/admin/team/myprofile").principal(principal);
+		MockHttpServletRequestBuilder requestBuilder = put("/admin/profile").principal(principal);
 		requestBuilder.param("firstName", "Some");
 		requestBuilder.param("lastName", "Guy");
 		requestBuilder.param("location", "London");
@@ -100,7 +100,7 @@ public class EditTeamMemberTests {
 					@Override
 					public void match(MvcResult result) {
 						String redirectedUrl = result.getResponse().getRedirectedUrl();
-						MatcherAssert.assertThat(redirectedUrl, startsWith("/admin/team/myprofile/edit"));
+						MatcherAssert.assertThat(redirectedUrl, startsWith("/admin/profile/edit"));
 					}
 				});
 

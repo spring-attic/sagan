@@ -89,4 +89,8 @@ public class MemberProfile {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+
+	public String getFullName() {
+		return String.format("%s %s", firstName, lastName);
+	}
 }

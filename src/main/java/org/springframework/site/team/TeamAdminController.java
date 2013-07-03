@@ -10,13 +10,12 @@ import java.security.Principal;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
-@RequestMapping("/admin/team")
 public class TeamAdminController {
 
 	@Autowired
 	private TeamRepository teamRepository;
 
-	@RequestMapping(value = "/myprofile/edit", method = {GET, HEAD})
+	@RequestMapping(value = "/admin/profile/edit", method = {GET, HEAD})
 	public String editTeamMember(Principal principal, Model model) {
 		MemberProfile profile = teamRepository.findByMemberId(principal.getName());
 		if (profile == null) {
@@ -28,13 +27,13 @@ public class TeamAdminController {
 	}
 
 
-	@RequestMapping(value = "/myprofile", method = PUT)
+	@RequestMapping(value = "/admin/profile", method = PUT)
 	public String saveTeamMember(Principal principal, MemberProfile profile, Model model) {
 		profile.setMemberId(principal.getName());
 		model.addAttribute("profile", profile);
 
 		teamRepository.save(profile);
 
-		return "redirect:/admin/team/myprofile/edit";
+		return "redirect:/admin/profile/edit";
 	}
 }

@@ -14,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.site.blog.*;
 import org.springframework.site.blog.web.BlogPostsPageRequest;
-import org.springframework.site.blog.web.NoSuchBlogPostException;
+import org.springframework.site.blog.web.EntityNotFoundException;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.test.configuration.ElasticsearchStubConfiguration;
@@ -88,7 +88,7 @@ public class BlogService_QueryTests {
 		Post post = PostBuilder.post().draft().build();
 		postRepository.save(post);
 
-		expected.expect(NoSuchBlogPostException.class);
+		expected.expect(EntityNotFoundException.class);
 		service.getPublishedPost(post.getId());
 	}
 
@@ -100,13 +100,13 @@ public class BlogService_QueryTests {
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
 		when(dateService.now()).thenReturn(today);
 
-		expected.expect(NoSuchBlogPostException.class);
+		expected.expect(EntityNotFoundException.class);
 		service.getPublishedPost(post.getId());
 	}
 
 	@Test
 	public void nonExistentPostThrowsException() {
-		expected.expect(NoSuchBlogPostException.class);
+		expected.expect(EntityNotFoundException.class);
 		service.getPost(999L);
 	}
 

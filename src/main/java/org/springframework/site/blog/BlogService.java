@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.site.blog.web.NoSuchBlogPostException;
+import org.springframework.site.blog.web.EntityNotFoundException;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.stereotype.Service;
@@ -62,7 +62,7 @@ public class BlogService {
 	public Post getPost(Long postId) {
 		Post post = repository.findOne(postId);
 		if (post == null) {
-			throw new NoSuchBlogPostException("Blog post not found with Id=" + postId);
+			throw new EntityNotFoundException("Blog post not found with Id=" + postId);
 		}
 		return post;
 	}
@@ -70,7 +70,7 @@ public class BlogService {
 	public Post getPublishedPost(Long postId) {
 		Post post = repository.findByIdAndDraftFalseAndPublishAtBefore(postId, dateService.now());
 		if (post == null) {
-			throw new NoSuchBlogPostException("Blog post not found with Id=" + postId);
+			throw new EntityNotFoundException("Blog post not found with Id=" + postId);
 		}
 		return post;
 	}
