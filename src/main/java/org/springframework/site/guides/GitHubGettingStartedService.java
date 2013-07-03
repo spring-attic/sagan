@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 public class GitHubGettingStartedService implements GettingStartedService {
 
-	private static final String REPOS_PATH = "/orgs/springframework-meta/repos";
+	private static final String REPOS_PATH = "/orgs/springframework-meta/repos?per_page=100";
 	private static final String README_PATH = "/repos/springframework-meta/gs-%s/contents/README.md";
 	private static final String SIDEBAR_PATH = "/repos/springframework-meta/gs-%s/contents/SIDEBAR.md";
 	private static final String IMAGES_PATH = "/repos/springframework-meta/gs-{guideId}/contents/images/{imageName}";
