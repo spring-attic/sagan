@@ -55,7 +55,6 @@ public class ViewDocumentationTests {
 				.andExpect(
 						content()
 								.string(not(containsString("http://static.springsource.org/spring-amqp-samples"))));
-		// TODO: assert that the links for reference docs don't exist
 	}
 
 }
