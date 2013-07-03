@@ -14,7 +14,7 @@ public class GettingStartedGuideIndexService {
 
 	private GuideSearchEntryMapper mapper = new GuideSearchEntryMapper();
 
-	private static final long TEN_MINUTES = 1000 * 60 * 10;
+	private static final long ONE_HOUR = 1000 * 60 * 60;
 	private final SearchService searchService;
 	private final GettingStartedService gettingStartedService;
 
@@ -24,7 +24,8 @@ public class GettingStartedGuideIndexService {
 		this.gettingStartedService = gettingStartedService;
 	}
 
-	@Scheduled(fixedDelay = TEN_MINUTES, initialDelay = 0L)
+	// ten minute delay initially by default
+	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${guides.index.delay:600000}")
 	public void indexGuides() {
 		logger.info("Indexing getting started guides");
 		for (GuideRepo repo : gettingStartedService.listGuides()) {
