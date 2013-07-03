@@ -26,6 +26,9 @@ import static org.junit.Assert.assertEquals;
 
 public class ApplicationConfigurationTests {
 
+	//TODO make this dynamic
+	public static final int PORT = 9080;
+
 	private ConfigurableApplicationContext context;
 
 	@After
@@ -38,7 +41,7 @@ public class ApplicationConfigurationTests {
 	@Test
 	public void testContextLoading() throws Exception {
 		SpringApplication application = ApplicationConfiguration.build(ElasticsearchStubConfiguration.class);
-		application.setDefaultCommandLineArgs("--GITHUB_CLIENT_ID=foo");
+		application.setDefaultCommandLineArgs("--GITHUB_CLIENT_ID=foo", "--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb");
 		context = (ConfigurableApplicationContext) application.run();
 		ApplicationConfiguration configuration = context
 				.getBean(ApplicationConfiguration.class);
