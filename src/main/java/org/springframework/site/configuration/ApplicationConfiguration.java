@@ -35,6 +35,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.elasticsearch.client.TransportClientFactoryBean;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -70,6 +71,7 @@ import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 @EnableAutoConfiguration
 @Configuration
 @ComponentScan(basePackages = "org.springframework.site")
+@EnableScheduling
 public class ApplicationConfiguration {
 
 	private static final Log logger = LogFactory

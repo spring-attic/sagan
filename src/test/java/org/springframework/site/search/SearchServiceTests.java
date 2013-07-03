@@ -5,6 +5,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.guides.GettingStartedGuide;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
@@ -35,5 +36,12 @@ public class SearchServiceTests {
 		Post draftPost = PostBuilder.post().id(123L).scheduled().build();
 		searchService.savePostToSearchIndex(draftPost);
 		verifyZeroInteractions(elasticsearch);
+	}
+
+	@Test
+	public void saveAGettingStartedGuide() {
+		GettingStartedGuide guide = new GettingStartedGuide("rest-service", "This is a rest service guide", "Some sidebar stuff");
+		searchService.saveGuideToSearchIndex(guide);
+		verify(elasticsearch).index(any(IndexQuery.class));
 	}
 }

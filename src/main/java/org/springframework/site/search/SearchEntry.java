@@ -74,4 +74,12 @@ public class SearchEntry {
 	public void setRawContent(String rawContent) {
 		this.rawContent = rawContent;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }

@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.guides.GettingStartedGuide;
@@ -38,38 +39,43 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {ElasticsearchStubConfiguration.class, GettingStartedGuidesTests.class })
+@ContextConfiguration(classes = {ElasticsearchStubConfiguration.class, GettingStartedGuidesTests.OfflineConfiguration.class})
 public class GettingStartedGuidesTests {
 
 	public static final GettingStartedGuide GETTING_STARTED_GUIDE =
 			new GettingStartedGuide("awesome-guide", "Awesome getting started guide that isn't helpful", "Related resources");
 
-	@Primary
-	@Bean
-	public GettingStartedService offlineGettingStartedService() {
-		return new GettingStartedService(){
-			@Override
-			public GettingStartedGuide loadGuide(String guideId) {
-				return GETTING_STARTED_GUIDE;
-			}
+	@Configuration
+	protected static class OfflineConfiguration {
 
-			@Override
-			public List<GuideRepo> listGuides() {
-				ObjectMapper mapper = new ObjectMapper();
-				try {
-					String reposJson = "/org/springframework/site/guides/springframework-meta.repos.offline.json";
-					InputStream json = new ClassPathResource(reposJson, getClass()).getInputStream();
-					return mapper.readValue(json, new TypeReference<List<GuideRepo>>(){});
-				} catch (IOException e) {
-					throw new RuntimeException(e);
+		@Primary
+		@Bean
+		public GettingStartedService offlineGettingStartedService() {
+			return new GettingStartedService() {
+				@Override
+				public GettingStartedGuide loadGuide(String guideId) {
+					return GETTING_STARTED_GUIDE;
 				}
-			}
 
-			@Override
-			public byte[] loadImage(String guideSlug, String imageName) {
-				return new byte[0];
-			}
-		};
+				@Override
+				public List<GuideRepo> listGuides() {
+					ObjectMapper mapper = new ObjectMapper();
+					try {
+						String reposJson = "/org/springframework/site/guides/springframework-meta.repos.offline.json";
+						InputStream json = new ClassPathResource(reposJson, getClass()).getInputStream();
+						return mapper.readValue(json, new TypeReference<List<GuideRepo>>() {
+						});
+					} catch (IOException e) {
+						throw new RuntimeException(e);
+					}
+				}
+
+				@Override
+				public byte[] loadImage(String guideSlug, String imageName) {
+					return new byte[0];
+				}
+			};
+		}
 	}
 
 	@Autowired
