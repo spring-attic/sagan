@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 
 @SuppressWarnings("serial")
 public class BlogPostsPageRequest extends PageRequest {
+	//TODO remove this
 	public BlogPostsPageRequest(int page) {
 		super(page, 10, Sort.Direction.DESC, "createdAt");
 	}

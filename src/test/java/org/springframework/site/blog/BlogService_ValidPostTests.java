@@ -13,7 +13,9 @@ import org.springframework.site.services.MarkdownService;
 import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
@@ -54,7 +56,7 @@ public class BlogService_ValidPostTests {
 	public void setup() {
 		when(dateService.now()).thenReturn(now);
 
-		service = new BlogService(postRepository, markdownService, dateService, null);
+		service = new BlogService(postRepository, markdownService, dateService);
 		when(markdownService.renderToHtml(content)).thenReturn(RENDERED_HTML_FROM_MARKDOWN);
 		when(markdownService.renderToHtml(firstParagraph)).thenReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 		postForm = new PostForm();

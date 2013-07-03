@@ -1,9 +1,11 @@
 package org.springframework.site.blog;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
@@ -47,6 +49,14 @@ public class PostTests {
 	public void isNotLiveIfScheduledInTheFuture() throws ParseException {
 		Post post = PostBuilder.post().publishAt("2013-15-12 00:00").build();
 		assertThat(post.isLiveOn(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-28 00:00")), is(false));
+	}
+
+	@Ignore("TODO: implement this at some point")
+	@Test
+	public void isScheduledIfPublishDateIsInTheFuture() throws ParseException {
+		Date futureDate = new Date(System.currentTimeMillis() + 10000000);
+		Post post = PostBuilder.post().publishAt(futureDate).build();
+		assertThat(post.isScheduled(), is(true));
 	}
 
 	@Test

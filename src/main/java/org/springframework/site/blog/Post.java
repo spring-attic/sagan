@@ -1,21 +1,20 @@
 package org.springframework.site.blog;
 
 import org.hibernate.annotations.Type;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Document(indexName = "blog")
 @Entity
 public class Post implements Serializable {
 
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy");
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -30,7 +29,6 @@ public class Post implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private PostCategory category;
 
-//	@Field
 	@Column(nullable = false)
 	@Type(type="text")
 	private String rawContent;
@@ -53,7 +51,6 @@ public class Post implements Serializable {
 	private boolean broadcast = false;
 
 	@Column(nullable = true)
-	@Field(type = FieldType.Long)
 	private Date publishAt;
 
 	@SuppressWarnings("unused")

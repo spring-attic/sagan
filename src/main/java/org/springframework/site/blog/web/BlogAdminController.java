@@ -6,6 +6,7 @@ import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostForm;
+import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @Controller
 @RequestMapping("/admin/blog")
@@ -21,11 +26,13 @@ public class BlogAdminController {
 
 	private BlogService service;
 	private PostViewFactory postViewFactory;
+	private SearchService searchService;
 
 	@Autowired
-	public BlogAdminController(BlogService service, PostViewFactory postViewFactory) {
+	public BlogAdminController(BlogService service, PostViewFactory postViewFactory, SearchService searchService) {
 		this.service = service;
 		this.postViewFactory = postViewFactory;
+		this.searchService = searchService;
 	}
 
 	@RequestMapping(value = "", method = { GET, HEAD })
@@ -64,6 +71,7 @@ public class BlogAdminController {
 	@RequestMapping(value = "", method = { POST })
 	public String createPost(PostForm postForm, Principal principal) {
 		Post newPost = service.addPost(postForm, principal.getName());
+		searchService.savePostToSearchIndex(newPost);
 		PostView postView = postViewFactory.createPostView(newPost);
 		return "redirect:" + postView.getPath();
 	}
@@ -72,6 +80,7 @@ public class BlogAdminController {
 	public String updatePost(@PathVariable Long postId, PostForm postForm) {
 		Post post = service.getPost(postId);
 		service.updatePost(post, postForm);
+		searchService.savePostToSearchIndex(post);
 		PostView postView = postViewFactory.createPostView(post);
 		return "redirect:" + postView.getPath();
 	}

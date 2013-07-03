@@ -14,10 +14,9 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.site.blog.PaginationInfo;
 import org.springframework.site.blog.Post;
-import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.web.BlogPostsPageRequest;
-import org.springframework.site.blog.web.PostView;
-import org.springframework.site.services.DateService;
+import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchEntryBuilder;
 import org.springframework.test.configuration.ElasticsearchStubConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -25,9 +24,19 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.servlet.View;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -36,11 +45,10 @@ import static org.junit.Assert.assertThat;
 public class SearchViewTests {
 
 	@Autowired
-	private	ThymeleafViewResolver viewResolver;
-	private Map<String,Object> model;
+	private ThymeleafViewResolver viewResolver;
+	private Map<String, Object> model;
 	private View view;
 	private MockHttpServletResponse response;
-	private DateService dateService = new DateService();
 
 	@Before
 	public void setUp() throws Exception {
@@ -78,7 +86,7 @@ public class SearchViewTests {
 
 	@Test
 	public void displaysSearchResults() throws Exception {
-		model.put("results", Arrays.asList(createSinglePost()));
+		model.put("results", Arrays.asList(createSingleSearchEntry()));
 		view.render(model, new MockHttpServletRequest(), response);
 
 		Document html = Jsoup.parse(response.getContentAsString());
@@ -91,9 +99,9 @@ public class SearchViewTests {
 
 	@Test
 	public void displaysPaginationControl() throws Exception {
-		Page<PostView> posts = new PageImpl<PostView>(buildManyPostsInNovember(10), BlogPostsPageRequest.forSearch(1), 11);
-		model.put("results", posts.getContent());
-		model.put("paginationInfo", new PaginationInfo(posts));
+		Page<SearchEntry> entries = new PageImpl<SearchEntry>(buildManySearchEntriesInNovember(10), BlogPostsPageRequest.forSearch(1), 11);
+		model.put("results", entries.getContent());
+		model.put("paginationInfo", new PaginationInfo(entries));
 		view.render(model, new MockHttpServletRequest(), response);
 
 		Document html = Jsoup.parse(response.getContentAsString());
@@ -101,30 +109,32 @@ public class SearchViewTests {
 		assertThat(searchInputBox, is(notNullValue()));
 	}
 
-	private PostView createSinglePost() {
-		Post post = new PostBuilder().title("This week in Spring - June 3, 2013")
-				.rawContent("raw content")
-				.renderedContent("Html content")
-				.renderedSummary("Html summary")
+	private SearchEntry createSingleSearchEntry() {
+		return SearchEntryBuilder.entry()
+				.title("This week in Spring - June 3, 2013")
+				.summary("Html summary")
+				.rawContent("Raw Content")
+				.publishAt(new Date(System.currentTimeMillis() - 1000000))
+				.path("/blog/" + 1)
 				.build();
-
-		return new PostView(post, dateService);
 	}
 
-	private List<PostView> buildManyPostsInNovember(int numPostsToCreate) {
+	private List<SearchEntry> buildManySearchEntriesInNovember(int numberToCreate) {
 		Calendar calendar = Calendar.getInstance();
-		List<PostView> posts = new ArrayList<PostView>();
-		for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
-			calendar.set(2012, 10, postNumber);
-			Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2012")
-					.rawContent("Raw content")
-					.renderedContent("Html content")
-					.renderedSummary("Html summary")
-					.dateCreated(calendar.getTime())
+		List<SearchEntry> entries = new ArrayList<SearchEntry>();
+		for (int number = 1; number <= numberToCreate; number++) {
+			calendar.set(2012, 10, number);
+
+			SearchEntry entry = SearchEntryBuilder.entry()
+					.title("This week in Spring - November " + number + ", 2012")
+					.summary("Html summary")
+					.rawContent("Raw Content")
 					.publishAt(calendar.getTime())
+					.path("/blog/" + number)
 					.build();
-			posts.add(new PostView(post, dateService));
+
+			entries.add(entry);
 		}
-		return posts;
+		return entries;
 	}
 }

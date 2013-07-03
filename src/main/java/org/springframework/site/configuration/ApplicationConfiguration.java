@@ -42,9 +42,9 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.site.blog.Post;
 import org.springframework.site.blog.feed.BlogPostAtomViewer;
 import org.springframework.site.documentation.DocumentationService;
+import org.springframework.site.search.SearchEntry;
 import org.springframework.site.security.GithubAuthenticationSigninAdapter;
 import org.springframework.site.security.RemoteUsernameConnectionSignUp;
 import org.springframework.site.security.SecurityContextAuthenticationFilter;
@@ -150,10 +150,10 @@ public class ApplicationConfiguration {
 		@PostConstruct
 		public void deleteSearchIndex() throws Exception {
 			ElasticsearchTemplate elasticsearchTemplate = new ElasticsearchTemplate(elasticSearchClient());
-			elasticsearchTemplate.deleteIndex(Post.class);
-			elasticsearchTemplate.createIndex(Post.class);
-			elasticsearchTemplate.putMapping(Post.class);
-			elasticsearchTemplate.refresh(Post.class, false);
+			elasticsearchTemplate.deleteIndex(SearchEntry.class);
+			elasticsearchTemplate.createIndex(SearchEntry.class);
+			elasticsearchTemplate.putMapping(SearchEntry.class);
+			elasticsearchTemplate.refresh(SearchEntry.class, false);
 		}
 
 		@PreDestroy

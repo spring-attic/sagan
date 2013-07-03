@@ -2,8 +2,10 @@ package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.blog.BlogService;
+import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostForm;
+import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +17,13 @@ import java.util.Date;
 public class BlogSampleDataController {
 
 	@Autowired
-	BlogAdminController blogAdminController;
+	private BlogAdminController blogAdminController;
 
 	@Autowired
-	BlogService blogService;
+	private BlogService blogService;
+
+	@Autowired
+	private SearchService searchService;
 
 	@RequestMapping
 	public String createSamples(Model model) throws Exception {
@@ -43,6 +48,7 @@ public class BlogSampleDataController {
 		postForm.setContent("Welcome to another installment of This Week in **Spring**. The SpringOne2GX super early bird registration discount expires on June 10th, 2013, so make your arrangements now to secure the discount. Also, we've got three webinars coming up this month, check out the details below. As usual, we've got a lot to cover, so let's get to it!\n" +
 				"\n" +
 				"1.  I'll be doing a webinar on building effective REST APIs with Spring on June 13th. I'll be introducing Spring's deep support for REST services, starting");
-		blogService.addPost(postForm, authors[(int)(Math.random()*authors.length)]);
+		Post post = blogService.addPost(postForm, authors[(int) (Math.random() * authors.length)]);
+		searchService.savePostToSearchIndex(post);
 	}
 }

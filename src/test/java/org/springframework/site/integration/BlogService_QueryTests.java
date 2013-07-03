@@ -12,7 +12,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.site.blog.*;
+import org.springframework.site.blog.BlogService;
+import org.springframework.site.blog.Post;
+import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.blog.PostCategory;
+import org.springframework.site.blog.PostRepository;
 import org.springframework.site.blog.web.BlogPostsPageRequest;
 import org.springframework.site.blog.web.EntityNotFoundException;
 import org.springframework.site.services.DateService;
@@ -31,7 +35,10 @@ import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -63,7 +70,7 @@ public class BlogService_QueryTests {
 		initMocks(this);
 		when(dateService.now()).thenReturn(new Date());
 
-		service = new BlogService(postRepository, markdownService, dateService, null);
+		service = new BlogService(postRepository, markdownService, dateService);
 		assertThat(postRepository.findAll().size(), equalTo(0));
 	}
 

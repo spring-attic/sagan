@@ -7,10 +7,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.FacetedPageImpl;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-import org.springframework.site.blog.Post;
-import org.springframework.site.blog.PostBuilder;
-import org.springframework.site.blog.web.PostView;
-import org.springframework.site.blog.web.PostViewFactory;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.util.ArrayList;
@@ -29,24 +25,19 @@ public class SearchControllerTests {
 	@Mock
 	private ElasticsearchTemplate elasticsearchTemplate;
 
-	@Mock
-	private PostViewFactory postViewFactory;
-
 	private SearchController controller;
 	private ExtendedModelMap model = new ExtendedModelMap();
-	private FacetedPageImpl<Post> posts;
-	private List<PostView> postViews;
+	private FacetedPageImpl<SearchEntry> resultsPage;
+	private List<SearchEntry> entries = new ArrayList<SearchEntry>();
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		controller = new SearchController(elasticsearchTemplate, postViewFactory);
-		List<Post> postsList = new ArrayList<Post>();
-		postsList.add(PostBuilder.post().build());
-		posts = new FacetedPageImpl<Post>(postsList);
-		postViews = new ArrayList<PostView>();
-		when(elasticsearchTemplate.queryForPage(any(SearchQuery.class), eq(Post.class))).thenReturn(posts);
-		when(postViewFactory.createPostViewList(posts.getContent())).thenReturn(postViews);
+		controller = new SearchController(elasticsearchTemplate);
+		SearchEntry entry = new SearchEntry();
+		entries.add(entry);
+		resultsPage = new FacetedPageImpl<SearchEntry>(entries);
+		when(elasticsearchTemplate.queryForPage(any(SearchQuery.class), eq(SearchEntry.class))).thenReturn(resultsPage);
 	}
 
 	@Test
@@ -64,13 +55,12 @@ public class SearchControllerTests {
 	@Test
 	public void search_providesResultsInModel() {
 		controller.search("searchTerm", 1, model);
-		assertThat((List<PostView>) model.get("results"), equalTo(postViews));
+		assertThat((List<SearchEntry>) model.get("results"), equalTo(entries));
 	}
 
 	@Test
 	public void search_providesAllResultsForBlankQuery() {
-		when(elasticsearchTemplate.queryForPage(any(SearchQuery.class), eq(Post.class))).thenReturn(posts);
 		controller.search("", 1, model);
-		assertThat((List<PostView>) model.get("results"), equalTo(postViews));
+		assertThat((List<SearchEntry>) model.get("results"), equalTo(entries));
 	}
 }

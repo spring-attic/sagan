@@ -13,6 +13,7 @@ import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostForm;
+import org.springframework.site.search.SearchService;
 import org.springframework.site.services.DateService;
 import org.springframework.ui.ExtendedModelMap;
 
@@ -20,10 +21,17 @@ import java.security.Principal;
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.same;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogAdminControllerTests {
@@ -31,6 +39,9 @@ public class BlogAdminControllerTests {
 
 	@Mock
 	private BlogService blogService;
+
+	@Mock
+	private SearchService searchService;
 
 	private ExtendedModelMap model = new ExtendedModelMap();
 	private Principal principal;
@@ -45,13 +56,13 @@ public class BlogAdminControllerTests {
 				return "testUser";
 			}
 		};
-		controller = new BlogAdminController(blogService, postViewFactory);
+		controller = new BlogAdminController(blogService, postViewFactory, searchService);
 	}
 
 	@Test
 	public void dashboardShowsUsersPosts() {
 		postViewFactory = mock(PostViewFactory.class);
-		controller = new BlogAdminController(blogService, postViewFactory);
+		controller = new BlogAdminController(blogService, postViewFactory, searchService);
 
 		Page<Post> drafts = new PageImpl<Post>(new ArrayList<Post>(), BlogPostsPageRequest.forDashboard(), 1);
 		Page<Post> published = new PageImpl<Post>(new ArrayList<Post>(), BlogPostsPageRequest.forDashboard(), 1);
@@ -100,6 +111,26 @@ public class BlogAdminControllerTests {
 		verify(blogService).addPost(postForm, "testUser");
 	}
 
+	@Test
+	public void creatingABlogPostAddsThatPostToTheSearchIndex() {
+		PostForm postForm = new PostForm();
+
+		when(blogService.addPost(eq(postForm), anyString())).thenReturn(PostBuilder.post().build());
+		controller.createPost(postForm, principal);
+
+		verify(searchService).savePostToSearchIndex(any(Post.class));
+	}
+
+	@Test
+	public void updatingABlogPostAddsThatPostToTheSearchIndex() {
+		Post post = PostBuilder.post().build();
+		long postId = 123L;
+		when(blogService.getPost(eq(postId))).thenReturn(post);
+
+		controller.updatePost(postId, new PostForm());
+
+		verify(searchService).savePostToSearchIndex(eq(post));
+	}
 
 	@Test
 	public void redirectToPostAfterCreation() throws Exception {

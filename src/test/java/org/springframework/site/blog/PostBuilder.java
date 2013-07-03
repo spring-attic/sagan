@@ -96,6 +96,16 @@ public class PostBuilder {
 		return this;
 	}
 
+	public PostBuilder isBroadcast() {
+		broadcast = true;
+		return this;
+	}
+
+	public PostBuilder scheduled() {
+		publishAt = new Date(System.currentTimeMillis() + 1000000);
+		return this;
+	}
+
 	public Post build() {
 		Post post = new Post(title, rawContent, category);
 		post.setAuthor(author);
@@ -111,10 +121,5 @@ public class PostBuilder {
 		ReflectionTestUtils.setField(post, "id", this.id);
 
 		return post;
-	}
-
-	public PostBuilder isBroadcast() {
-		broadcast = true;
-		return this;
 	}
 }
