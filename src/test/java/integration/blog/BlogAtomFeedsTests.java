@@ -40,8 +40,10 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -120,7 +122,10 @@ public class BlogAtomFeedsTests {
 		ResultActions resultActions = mockMvc.perform(get("/blog.atom"));
 		MvcResult mvcResult = resultActions
 				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("application/atom+xml"))
 				.andReturn();
+
+		assertThat(mvcResult.getResponse().getCharacterEncoding(), equalTo("utf-8"));
 
 		String atomFeed = mvcResult.getResponse().getContentAsString();
 		assertThat(atomFeed, containsString(post.getTitle()));
