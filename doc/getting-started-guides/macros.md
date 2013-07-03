@@ -24,6 +24,7 @@ To **skip the basics**, do the following:
  - Jump ahead to [${jump_ahead}](#initial).
 
 **When you're finished**, you can check your results against the code in `${project_id}/complete`.
+[zip]: https://github.com/springframework-meta/${project_id}/archive/master.zip
 </#macro>
 
 
