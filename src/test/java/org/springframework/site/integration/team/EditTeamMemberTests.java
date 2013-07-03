@@ -72,7 +72,7 @@ public class 	EditTeamMemberTests {
 		profile.setFirstName("First");
 		profile.setLastName("Last");
 		profile.setLocation("Location");
-		profile.setEmail("test@example.com");
+		profile.setGravatarEmail("test@example.com");
 		profile.setGithubUsername("someguy");
 		profile.setMemberId("someguy");
 
@@ -92,17 +92,13 @@ public class 	EditTeamMemberTests {
 		requestBuilder.param("lastName", "Guy");
 		requestBuilder.param("location", "London");
 		requestBuilder.param("bio", "I am just a guy");
-		requestBuilder.param("email", "someguy@example.com");
-		requestBuilder.param("githubUsername", "someguy");
+		requestBuilder.param("gravatarEmail", "someguy@example.com");
+		requestBuilder.param("githubUsername", "gh_someguy");
+		requestBuilder.param("twitterUsername", "tw_someguy");
+		requestBuilder.param("speakerdeckUsername", "sd_someguy");
+		requestBuilder.param("lanyrdUsername", "ly_someguy");
 
-		this.mockMvc.perform(requestBuilder)
-				.andExpect(new ResultMatcher() {
-					@Override
-					public void match(MvcResult result) {
-						String redirectedUrl = result.getResponse().getRedirectedUrl();
-						MatcherAssert.assertThat(redirectedUrl, startsWith("/admin/profile/edit"));
-					}
-				});
+		performRequestAndExpectRedirect(requestBuilder, "/admin/profile/edit");
 
 		MemberProfile profile = teamRepository.findByMemberId("someguy");
 
@@ -113,8 +109,64 @@ public class 	EditTeamMemberTests {
 		assertEquals("Guy", profile.getLastName());
 		assertEquals("London", profile.getLocation());
 		assertEquals("I am just a guy", profile.getBio());
-		assertEquals("someguy@example.com", profile.getEmail());
-		assertEquals("someguy", profile.getGithubUsername());
-
+		assertEquals("someguy@example.com", profile.getGravatarEmail());
+		assertEquals("gh_someguy", profile.getGithubUsername());
+		assertEquals("tw_someguy", profile.getTwitterUsername());
+		assertEquals("sd_someguy", profile.getSpeakerdeckUsername());
+		assertEquals("ly_someguy", profile.getLanyrdUsername());
 	}
+
+	@Test
+	public void saveExistingProfile() throws Exception {
+		MemberProfile existingProfile = new MemberProfile();
+		existingProfile.setMemberId("someguy");
+		existingProfile.setFirstName("Some");
+		existingProfile.setLastName("Guy");
+		existingProfile.setLocation("London");
+		existingProfile.setBio("I am just a guy");
+		existingProfile.setGravatarEmail("someguy@example.com");
+		existingProfile.setGithubUsername("someguy");
+		existingProfile.setTwitterUsername("tw_someguy");
+		existingProfile.setSpeakerdeckUsername("sd_someguy");
+		existingProfile.setLanyrdUsername("ly_someguy");
+		teamRepository.save(existingProfile);
+
+		MockHttpServletRequestBuilder requestBuilder = put("/admin/profile").principal(principal);
+		requestBuilder.param("firstName", "Some_");
+		requestBuilder.param("lastName", "Guy_");
+		requestBuilder.param("location", "London_");
+		requestBuilder.param("bio", "I am just a guy_");
+		requestBuilder.param("gravatarEmail", "someguy_@example.com");
+		requestBuilder.param("githubUsername", "gh_someguy_");
+		requestBuilder.param("twitterUsername", "tw_someguy_");
+		requestBuilder.param("speakerdeckUsername", "sd_someguy_");
+		requestBuilder.param("lanyrdUsername", "ly_someguy_");
+
+		performRequestAndExpectRedirect(requestBuilder, "/admin/profile/edit");
+
+		MemberProfile profile = teamRepository.findByMemberId("someguy");
+		assertThat(profile, not(nullValue()));
+		assertEquals("someguy", profile.getMemberId());
+		assertEquals("Some_", profile.getFirstName());
+		assertEquals("Guy_", profile.getLastName());
+		assertEquals("London_", profile.getLocation());
+		assertEquals("I am just a guy_", profile.getBio());
+		assertEquals("someguy_@example.com", profile.getGravatarEmail());
+		assertEquals("gh_someguy_", profile.getGithubUsername());
+		assertEquals("tw_someguy_", profile.getTwitterUsername());
+		assertEquals("sd_someguy_", profile.getSpeakerdeckUsername());
+		assertEquals("ly_someguy_", profile.getLanyrdUsername());
+	}
+
+	private void performRequestAndExpectRedirect(MockHttpServletRequestBuilder requestBuilder, final String expectedRedirectUrl) throws Exception {
+		this.mockMvc.perform(requestBuilder)
+				.andExpect(new ResultMatcher() {
+					@Override
+					public void match(MvcResult result) {
+						String redirectedUrl = result.getResponse().getRedirectedUrl();
+						MatcherAssert.assertThat(redirectedUrl, startsWith(expectedRedirectUrl));
+					}
+				});
+	}
+
 }

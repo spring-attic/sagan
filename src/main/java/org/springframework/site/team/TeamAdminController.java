@@ -29,10 +29,26 @@ public class TeamAdminController {
 
 	@RequestMapping(value = "/admin/profile", method = PUT)
 	public String saveTeamMember(Principal principal, MemberProfile profile, Model model) {
-		profile.setMemberId(principal.getName());
-		model.addAttribute("profile", profile);
 
-		teamRepository.save(profile);
+		MemberProfile existingProfile = teamRepository.findByMemberId(principal.getName());
+		if (existingProfile != null) {
+			existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
+			existingProfile.setGravatarEmail(profile.getGravatarEmail());
+			existingProfile.setTwitterUsername(profile.getTwitterUsername());
+			existingProfile.setBio(profile.getBio());
+			existingProfile.setFirstName(profile.getFirstName());
+			existingProfile.setGithubUsername(profile.getGithubUsername());
+			existingProfile.setTwitterUsername(profile.getTwitterUsername());
+			existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
+			existingProfile.setLanyrdUsername(profile.getLanyrdUsername());
+			existingProfile.setLastName(profile.getLastName());
+			existingProfile.setLocation(profile.getLocation());
+			teamRepository.save(existingProfile);
+		} else {
+			profile.setMemberId(principal.getName());
+			model.addAttribute("profile", profile);
+			teamRepository.save(profile);
+		}
 
 		return "redirect:/admin/profile/edit";
 	}

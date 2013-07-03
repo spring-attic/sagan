@@ -44,8 +44,6 @@ public class ViewTeamMemberTests {
 		MemberProfile profile = new MemberProfile();
 		profile.setFirstName("First");
 		profile.setLastName("Last");
-		profile.setLocation("Location");
-		profile.setEmail("test@example.com");
 		profile.setGithubUsername("someguy");
 		profile.setMemberId("someguy");
 
