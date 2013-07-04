@@ -93,6 +93,10 @@ public class BlogService {
 		return repository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, dateService.now(), pageRequest);
 	}
 
+	public Page<Post> getPublishedPostsForMember(MemberProfile profile, Pageable pageRequest) {
+		return repository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, dateService.now(), pageRequest);
+	}
+
 	public Page<Post> getAllPosts(Pageable pageRequest) {
 		return repository.findAll(pageRequest);
 	}

@@ -6,6 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.site.blog.Post;
+import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.blog.PostRepository;
 import org.springframework.site.team.MemberProfile;
 import org.springframework.site.team.TeamRepository;
 import org.springframework.test.context.ContextConfiguration;
@@ -32,6 +35,9 @@ public class ViewTeamMemberTests {
 	@Autowired
 	private TeamRepository teamRepository;
 
+	@Autowired
+	private PostRepository postRepository;
+
 	private MockMvc mockMvc;
 
 	@Before
@@ -53,6 +59,24 @@ public class ViewTeamMemberTests {
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("First Last")))
 				.andExpect(content().string(containsString("someguy")));
+	}
+
+	@Test
+	public void getTeamMemberPageShowsPosts() throws Exception {
+		MemberProfile profile = new MemberProfile();
+		profile.setName("First Last");
+		profile.setGithubUsername("someguy");
+		profile.setMemberId("someguy");
+
+		teamRepository.save(profile);
+
+		Post post = PostBuilder.post().author(profile).title("My Post").build();
+		postRepository.save(post);
+
+		this.mockMvc.perform(get("/about/team/someguy"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html"))
+				.andExpect(content().string(containsString("My Post")));
 	}
 
 	@Test

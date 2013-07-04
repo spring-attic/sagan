@@ -3,6 +3,7 @@ package org.springframework.site.blog;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.site.team.MemberProfile;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -23,4 +24,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 	Page<Post> findByBroadcastAndDraftFalseAndPublishAtBefore(boolean broadcast, Date publishedBefore, Pageable pageRequest);
 
 	Page<Post> findByDraftFalseAndPublishAtAfter(Date now, Pageable pageRequest);
+
+	Page<Post> findByDraftFalseAndAuthorAndPublishAtBefore(MemberProfile profile, Date publishedBefore, Pageable pageRequest);
 }

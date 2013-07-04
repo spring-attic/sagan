@@ -18,6 +18,7 @@ import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostRepository;
+import org.springframework.site.team.MemberProfile;
 import org.springframework.site.team.TeamRepository;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.site.blog.web.EntityNotFoundException;
@@ -238,5 +239,33 @@ public class BlogService_QueryTests {
 
 		Page<Post> allPosts = service.getAllPosts(FIRST_TEN_POSTS);
 		assertThat(allPosts.getContent(), containsInAnyOrder(post, draft));
+	}
+
+	@Test
+	public void getPublishedPostsForAuthorOnlyShowsAuthorsPosts() {
+		MemberProfile profile = new MemberProfile();
+		profile.setMemberId("myauthor");
+		teamRepository.save(profile);
+
+		Post post = PostBuilder.post().author(profile).build();
+		postRepository.save(post);
+		postRepository.save(PostBuilder.post().build());
+
+		Page<Post> publishedPosts = service.getPublishedPostsForMember(profile, FIRST_TEN_POSTS);
+		assertThat(publishedPosts.getContent(), contains(post));
+	}
+
+	@Test
+	public void getPublishedPostsForAuthorOnlyShowsPublishedPosts() {
+		MemberProfile profile = new MemberProfile();
+		profile.setMemberId("myauthor");
+		teamRepository.save(profile);
+
+		Post post = PostBuilder.post().author(profile).build();
+		postRepository.save(post);
+		postRepository.save(PostBuilder.post().author(profile).draft().build());
+
+		Page<Post> publishedPosts = service.getPublishedPostsForMember(profile, FIRST_TEN_POSTS);
+		assertThat(publishedPosts.getContent(), contains(post));
 	}
 }
