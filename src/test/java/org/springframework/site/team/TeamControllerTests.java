@@ -1,7 +1,5 @@
 package org.springframework.site.team;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,9 +44,7 @@ public class TeamControllerTests {
 	@Test
 	public void includeTeamLocationsInModel() throws Exception {
 		teamController.showTeam(model);
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonInput = (String) model.get("teamLocations");
-		List<TeamLocation> teamLocations = mapper.readValue(jsonInput, new TypeReference<List<TeamLocation>>(){});
+		List<TeamLocation> teamLocations = (List<TeamLocation>) model.get("teamLocations");
 
 		TeamLocation norman = teamLocations.get(0);
 		assertThat(norman.getName(), equalTo("Norman"));
