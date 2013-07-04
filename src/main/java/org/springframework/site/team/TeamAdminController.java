@@ -18,36 +18,26 @@ public class TeamAdminController {
 	@RequestMapping(value = "/admin/profile/edit", method = {GET, HEAD})
 	public String editTeamMember(Principal principal, Model model) {
 		MemberProfile profile = teamRepository.findByMemberId(principal.getName());
-		if (profile == null) {
-			profile = new MemberProfile();
-			profile.setGithubUsername(principal.getName());
-		}
 		model.addAttribute("profile", profile);
 		return "admin/team/edit";
 	}
 
 
 	@RequestMapping(value = "/admin/profile", method = PUT)
-	public String saveTeamMember(Principal principal, MemberProfile profile, Model model) {
+	public String saveTeamMember(Principal principal, MemberProfile profile) {
 
 		MemberProfile existingProfile = teamRepository.findByMemberId(principal.getName());
-		if (existingProfile != null) {
-			existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
-			existingProfile.setGravatarEmail(profile.getGravatarEmail());
-			existingProfile.setTwitterUsername(profile.getTwitterUsername());
-			existingProfile.setBio(profile.getBio());
-			existingProfile.setName(profile.getName());
-			existingProfile.setGithubUsername(profile.getGithubUsername());
-			existingProfile.setTwitterUsername(profile.getTwitterUsername());
-			existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
-			existingProfile.setLanyrdUsername(profile.getLanyrdUsername());
-			existingProfile.setLocation(profile.getLocation());
-			teamRepository.save(existingProfile);
-		} else {
-			profile.setMemberId(principal.getName());
-			model.addAttribute("profile", profile);
-			teamRepository.save(profile);
-		}
+		existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
+		existingProfile.setAvatarUrl(profile.getAvatarUrl());
+		existingProfile.setTwitterUsername(profile.getTwitterUsername());
+		existingProfile.setBio(profile.getBio());
+		existingProfile.setName(profile.getName());
+		existingProfile.setGithubUsername(profile.getGithubUsername());
+		existingProfile.setTwitterUsername(profile.getTwitterUsername());
+		existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
+		existingProfile.setLanyrdUsername(profile.getLanyrdUsername());
+		existingProfile.setLocation(profile.getLocation());
+		teamRepository.save(existingProfile);
 
 		return "redirect:/admin/profile/edit";
 	}

@@ -34,6 +34,7 @@ public class SignInServiceTests {
 	private String name = "Full Name";
 	private String location = "London";
 	private String email = "user@example.com";
+	private String avatarUrl = "http://gravatar.com/avatar/ABC";
 
 	@Before
 	public void setup() {
@@ -42,7 +43,7 @@ public class SignInServiceTests {
 
 	@Test
 	public void createAMemberProfileIfOneDoesNotExist() {
-		GitHubUserProfile userProfile = new GitHubUserProfile(1L, username, name, location, "", "", email, "", null);
+		GitHubUserProfile userProfile = new GitHubUserProfile(1L, username, name, location, "", "", email, avatarUrl, null);
 		UserOperations userOperations = mock(UserOperations.class);
 
 		when(userOperations.getUserProfile()).thenReturn(userProfile);
@@ -55,8 +56,11 @@ public class SignInServiceTests {
 			@Override
 			public boolean matches(Object argument) {
 				MemberProfile profile = (MemberProfile)argument;
-				return profile != null && username.equals(profile.getMemberId()) &&
-						name.equals(profile.getName()) && username.equals(profile.getGithubUsername());
+				return profile != null &&
+						username.equals(profile.getMemberId()) &&
+						name.equals(profile.getName()) &&
+						username.equals(profile.getGithubUsername()) &&
+						avatarUrl.equals(profile.getAvatarUrl());
 			}
 		}));
 	}

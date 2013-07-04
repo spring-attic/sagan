@@ -108,11 +108,4 @@ public class MemberProfileTests {
 		nick.setLanyrdUsername("");
 		assertThat(nick.getLanyrdLink(), is(nullValue()));
 	}
-
-	@Test
-	public void gravatarImageUrl() {
-		MemberProfile nick = new MemberProfile();
-		nick.setGravatarEmail("nicholas.street@gmail.com");
-		assertThat(nick.getGravatarImageUrl(), equalTo("http://gravatar.com/avatar/4265c262601883aabd7bd437511f5397"));
-	}
 }

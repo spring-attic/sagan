@@ -1,7 +1,5 @@
 package org.springframework.site.team;
 
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
@@ -26,7 +24,7 @@ public class MemberProfile {
 	private String bio;
 
 	@Column(nullable = true)
-	private String gravatarEmail;
+	private String avatarUrl;
 
 	@Column(nullable = true)
 	private String githubUsername;
@@ -67,12 +65,12 @@ public class MemberProfile {
 		this.bio = bio;
 	}
 
-	public String getGravatarEmail() {
-		return gravatarEmail;
+	public String getAvatarUrl() {
+		return avatarUrl;
 	}
 
-	public void setGravatarEmail(String gravatarEmail) {
-		this.gravatarEmail = gravatarEmail;
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
 	}
 
 	public String getGithubUsername() {
@@ -117,12 +115,6 @@ public class MemberProfile {
 
 	public String getFullName() {
 		return name == null ? getMemberId() : name;
-	}
-
-	public String getGravatarImageUrl() {
-		PasswordEncoder encoder = new Md5PasswordEncoder();
-		String hashedEmail = encoder.encodePassword(getGravatarEmail(), null);
-		return String.format("http://gravatar.com/avatar/%s", hashedEmail);
 	}
 
 	public Link getTwitterLink() {

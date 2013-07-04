@@ -10,7 +10,7 @@
 
     <div class="row-fluid">
         <div class="span8">
-            <img th:src="*{gravatarImageUrl}" class="pull-left avatar" th:unless="${#strings.isEmpty(profile.gravatarImageUrl)}"/>
+            <img th:src="*{avatarUrl}" class="pull-left avatar" th:unless="${#strings.isEmpty(profile.avatarUrl)}"/>
             <h1 class="header--content-title" th:text="*{fullName}">
                 First Last
             </h1>

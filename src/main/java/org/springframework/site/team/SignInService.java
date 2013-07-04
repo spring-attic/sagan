@@ -26,6 +26,7 @@ public class SignInService {
 			profile = new MemberProfile();
 			profile.setMemberId(userId);
 			profile.setGithubUsername(userId);
+			profile.setAvatarUrl(remoteProfile.getProfileImageUrl());
 			profile.setName(remoteProfile.getName());
 			teamRepository.save(profile);
 		}
