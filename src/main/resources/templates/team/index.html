@@ -28,6 +28,21 @@
             </p>
         </div>
     </div>
+
+    <div class="row">
+        <div class="span12">
+            <ul class="team-members">
+                <li th:each="profile : ${profiles}">
+                    <a th:href="@{'/about/team/' + ${profile.memberId}}">
+                        <img th:src="${profile.avatarUrl}" />
+                        <div class="team-member-name" th:text="${profile.name}"></div>
+                        <div class="team-member-location" th:text="${profile.location}"></div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <script th:inline="javascript">
         /*<![CDATA[*/
         var teamLocations = /*[[${teamLocations}]]*/ [{name: 'Name', latitude: 30.0, longitude: 1.5}];

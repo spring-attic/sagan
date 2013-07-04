@@ -2,3 +2,28 @@
     margin-right: 10px; }
 
 #map { height: 300px; }
+
+ul.team-members {
+  margin: 50px 0 0 0;
+  li {
+    list-style: none;
+    display: inline-block;
+    vertical-align: top;
+    width: 180px;
+    margin-bottom: 20px;
+    a {
+      color: black;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .team-member-name {
+      font-weight: bold;
+    }
+
+    .team-member-location {
+      font-size: 0.9em;
+    }
+  }
+}

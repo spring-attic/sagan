@@ -1,21 +1,21 @@
 package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.blog.BlogService;
-import org.springframework.site.blog.Post;
-import org.springframework.site.blog.PostCategory;
-import org.springframework.site.blog.PostForm;
-import org.springframework.site.blog.PostSearchEntryMapper;
+import org.springframework.site.blog.*;
 import org.springframework.site.search.SearchService;
+import org.springframework.site.team.GeoLocation;
+import org.springframework.site.team.MemberProfile;
+import org.springframework.site.team.TeamRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/admin/blog/sample")
+@RequestMapping("/admin/sample")
 public class BlogSampleDataController {
 
 	@Autowired
@@ -25,16 +25,65 @@ public class BlogSampleDataController {
 	private BlogService blogService;
 
 	@Autowired
+	private TeamRepository teamRepository;
+
+	@Autowired
 	private SearchService searchService;
 
 	private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
-	@RequestMapping
-	public String createSamples(Model model, Principal principal) throws Exception {
+	@RequestMapping(method = RequestMethod.GET)
+	public String showSampleIndex(Model model, Principal principal) throws Exception {
+		return "admin/sample/index";
+	}
+
+
+	@RequestMapping(value = "/posts", method = RequestMethod.POST)
+	public String createSamplePosts(Model model, Principal principal) throws Exception {
 		for (int i = 0; i < 8; i++) {
 			generateRandomBlogPost(principal.getName());
 		}
-		return blogAdminController.dashboard(model);
+		return "redirect:/admin/blog";
+	}
+
+	@RequestMapping(value = "/teammembers", method = RequestMethod.POST)
+	public String createSampleTeamMembers(Model model, Principal principal) throws Exception {
+		for (int i = 0; i < 8; i++) {
+			generateRandomTeamMember(i);
+		}
+		return "redirect:/about/team";
+	}
+
+	private static String[] locations = {
+			"Greece",
+			"Cairo",
+			"Turkmenistan",
+			"Austria",
+			"Melbourne",
+			"Gabon",
+			"San Francisco",
+			"New York"
+	};
+
+	private static GeoLocation[] geoLocations = {
+			new GeoLocation(39.04453f, 22.98798f),
+			new GeoLocation(30.0505f, 31.2499f),
+			new GeoLocation(39.12222f, 59.38353f),
+			new GeoLocation(9.96713f, -84.06132f),
+			new GeoLocation(28.08363f, -80.60811f),
+			new GeoLocation(-0.59068f, 11.79716f),
+			new GeoLocation(37.77896f, -122.4192f),
+			new GeoLocation(40.7306f, -73.98658f)
+	};
+
+	private void generateRandomTeamMember(int index) {
+		MemberProfile profile = new MemberProfile();
+		profile.setMemberId("member" + index);
+		profile.setName("Member " + index);
+		profile.setLocation(locations[index % locations.length]);
+		profile.setGeoLocation(geoLocations[index % geoLocations.length]);
+		profile.setAvatarUrl("http://lorempixel.com/80/80/people/" + index);
+		teamRepository.save(profile);
 	}
 
 	private void generateRandomBlogPost(String authorId) {

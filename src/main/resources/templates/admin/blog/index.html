@@ -9,7 +9,9 @@
 <h1 layout:fragment="header">Hello <span sec:authentication="name">Bob</span></h1>
 <div layout:fragment="overview">
 	<a th:href="@{'/admin/blog/new'}" href="/admin/blog/new" class="btn btn-primary">Create New Post</a>
-	<a th:href="@{'/admin/blog/sample'}" href="/admin/blog/sample" class="btn btn-primary">Create 8 posts</a>
+	<form th:action="@{'/admin/sample/posts'}" action="/admin/sample/posts" method="post" class='form-inline' style="display: inline">
+        <button class="btn btn-primary">Create 8 posts</button>
+    </form>
 </div>
 
 <div layout:fragment="content" class="container">
