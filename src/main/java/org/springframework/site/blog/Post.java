@@ -15,7 +15,7 @@ public class Post implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, optional = false)
 	private MemberProfile author;
 
 	@Column(nullable = false)

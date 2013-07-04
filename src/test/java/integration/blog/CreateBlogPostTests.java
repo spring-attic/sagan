@@ -13,6 +13,8 @@ import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostRepository;
+import org.springframework.site.team.MemberProfile;
+import org.springframework.site.team.TeamRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -21,6 +23,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.security.Principal;
@@ -37,6 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = ElasticsearchStubConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
+@Transactional
 public class CreateBlogPostTests {
 
 	@Autowired
@@ -46,10 +50,19 @@ public class CreateBlogPostTests {
 
 	@Autowired
 	private PostRepository postRepository;
+
+	@Autowired
+	private TeamRepository teamRepository;
+
 	private Principal principal;
 
 	@Before
 	public void setup() {
+		MemberProfile profile = new MemberProfile();
+		profile.setMemberId("author");
+		profile.setName("Mr Author");
+		teamRepository.save(profile);
+
 		principal = new Principal() {
 			@Override
 			public String getName() {

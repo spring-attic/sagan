@@ -17,9 +17,11 @@
 		<div id="content" class="span8">
 			<h2>Drafts</h2>
 			<table class='table dashboard--posts'>
-				<tr th:each="post : ${drafts}">
+				<tr th:each="post : ${drafts}" layout:fragment="post-row">
 					<td class="date" th:text="${post.formattedPublishDate}">June 18, 2013</td>
-					<td class="author" th:text="${post.author.name}">Author</td>
+					<td class="author">
+                        <a class='author' th:text="${post.author.name}" th:href="@{'/about/team/'+${post.author.memberId}}">Author</a>
+                    </td>
 					<td th:text="${post.title}">This week in Spring</td>
 					<td>
 						<nav layout:substituteby="admin/blog/_dashboard_actions :: dashboard-actions" />
@@ -29,26 +31,14 @@
 
 			<h2>Scheduled</h2>
 			<table class='table dashboard--posts'>
-				<tr th:each="post : ${scheduled}">
-					<td class='date' th:text='  ${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</td>
-					<td class='author' th:text="${post.author.name}">Author</td>
-					<td th:text="${post.title}">This week in Spring</td>
-					<td>
-						<nav layout:substituteby="admin/blog/_dashboard_actions :: dashboard-actions" />
-					</td>
+				<tr th:each="post : ${scheduled}" layout:include="/admin/blog/index::post-row">
 				</tr>
 			</table>
 
 			<h2>Published</h2>
 			<table class='table dashboard--posts'>
-				<tr th:each="post : ${posts}">
-					<td class='date' th:text='  ${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</td>
-					<td class='author' th:text="${post.author.name}">Author</td>
-					<td th:text="${post.title}">This week in Spring</td>
-					<td>
-						<nav layout:substituteby="admin/blog/_dashboard_actions :: dashboard-actions" />
-					</td>
-				</tr>
+				<tr th:each="post : ${posts}" layout:include="/admin/blog/index::post-row">
+    				</tr>
 			</table>
 		</div>
 

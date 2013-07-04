@@ -8,6 +8,7 @@ import org.springframework.site.blog.BlogService;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
+import org.springframework.site.services.DateService;
 import org.springframework.ui.ExtendedModelMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,6 @@ public class BlogController_ShowTests {
 	@Mock
 	private HttpServletRequest request;
 
-	@Mock
 	private PostViewFactory postViewFactory;
 
 	private BlogController controller;
@@ -35,6 +35,8 @@ public class BlogController_ShowTests {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
+		postViewFactory = new PostViewFactory(new DateService());
+
 		controller = new BlogController(blogService, postViewFactory);
 
 		post = PostBuilder.post().build();
@@ -54,6 +56,6 @@ public class BlogController_ShowTests {
 
 	@Test
 	public void singlePostInModelForOnePost() {
-		assertThat((Post) model.get("post"), is(post));
+		assertThat(((PostView) model.get("post")).getId(), is(post.getId()));
 	}
 }

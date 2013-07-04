@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.Date;
 
 @Controller
@@ -29,16 +30,15 @@ public class BlogSampleDataController {
 	private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
 	@RequestMapping
-	public String createSamples(Model model) throws Exception {
+	public String createSamples(Model model, Principal principal) throws Exception {
 		for (int i = 0; i < 8; i++) {
-			generateRandomBlogPost();
+			generateRandomBlogPost(principal.getName());
 		}
 		return blogAdminController.dashboard(model);
 	}
 
-	private void generateRandomBlogPost() {
+	private void generateRandomBlogPost(String authorId) {
 		PostCategory[] categories = PostCategory.values();
-		String[] authors = new String[] {"nickstreet", "kseebaldt", "dsyer"};
 		long MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
 		PostForm postForm = new PostForm();
 		postForm.setCategory(categories[(int) (Math.random() * categories.length)]);
@@ -51,7 +51,7 @@ public class BlogSampleDataController {
 		postForm.setContent("Welcome to another installment of This Week in **Spring**. The SpringOne2GX super early bird registration discount expires on June 10th, 2013, so make your arrangements now to secure the discount. Also, we've got three webinars coming up this month, check out the details below. As usual, we've got a lot to cover, so let's get to it!\n" +
 				"\n" +
 				"1.  I'll be doing a webinar on building effective REST APIs with Spring on June 13th. I'll be introducing Spring's deep support for REST services, starting");
-		Post post = blogService.addPost(postForm, authors[(int) (Math.random() * authors.length)]);
+		Post post = blogService.addPost(postForm, authorId);
 		if (post.isLiveOn(new Date())) {
 			searchService.saveToIndex(mapper.map(post));
 		}

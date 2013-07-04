@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+
+<div layout:fragment="full-post">
+    <h1 th:text="*{title}">Blog post</h1>
+    <div class="byline">
+        <span class='date' th:text='${post.formattedPublishDate}'>Jan 15, 2000</span>
+
+        <a class='author' th:text="${post.author.name}" th:href="@{'/about/team/'+${post.author.memberId}}">Author</a>
+        <span class='category' th:text="${post.category}">Category</span>
+        <span class='broadcast' th:if="${post.broadcast}">Broadcast</span>
+    </div>
+    <article th:utext="*{renderedContent}">Blog content</article>
+</div>
+
+</body>
+</html>
