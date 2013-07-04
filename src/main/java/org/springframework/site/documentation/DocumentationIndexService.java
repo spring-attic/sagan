@@ -35,6 +35,7 @@ public class DocumentationIndexService {
 	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.index.delay:600000}")
 	public void indexDocumentation() {
 		logger.info("Indexing project documentation");
+		int count = 0;
 		for (final Project project : documentationService.getProjects()) {
 			executor.submit(new Runnable() {
 				@Override
@@ -48,6 +49,10 @@ public class DocumentationIndexService {
 					}
 				}
 			});
+			count++;
+			if (count>2) {
+				break; // TODO remove: hack to prevent index from getting too large in dev
+			}
 		}
 		counters.increment("search.indexes.projects.refresh.count");
 	}
