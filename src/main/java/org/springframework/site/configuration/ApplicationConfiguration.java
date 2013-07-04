@@ -35,7 +35,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.elasticsearch.client.TransportClientFactoryBean;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -105,6 +107,13 @@ public class ApplicationConfiguration {
 				"--spring.template.mode=LEGACYHTML5",
 				"--spring.template.cache=false");
 		return application;
+	}
+
+	@Bean
+	public TaskScheduler scheduler() {
+		ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+		scheduler.setPoolSize(10);
+		return scheduler;
 	}
 
 	@Bean

@@ -93,4 +93,7 @@ public class Project {
         return documentVersions;
     }
 
+	public String getApiAllClassesUrl() {
+		return getApiUrl() + "/allclasses-frame.html";
+	}
 }

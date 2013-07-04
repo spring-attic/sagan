@@ -2,6 +2,7 @@ package org.springframework.site.guides;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.bootstrap.actuate.metrics.CounterService;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.web.client.RestClientException;
@@ -15,7 +16,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-public class GettingStartedGuideIndexServiceTest {
+public class GettingStartedGuideIndexServiceTests {
 
 	private SearchService searchService = mock(SearchService.class);
 	private GettingStartedService gettingStartedService = mock(GettingStartedService.class);
@@ -28,7 +29,7 @@ public class GettingStartedGuideIndexServiceTest {
 		repo.setName("gs-awesome-guide");
 		repos.add(repo);
 		when(gettingStartedService.listGuides()).thenReturn(repos);
-		service = new GettingStartedGuideIndexService(searchService, gettingStartedService);
+		service = new GettingStartedGuideIndexService(searchService, gettingStartedService, mock(CounterService.class));
 	}
 
 	@Test

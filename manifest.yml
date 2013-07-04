@@ -6,5 +6,5 @@ applications:
   host: sagan
   domain: cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
-  command: cp cacerts .jdk/lib/security && java -classpath . org.springframework.site.configuration.ApplicationConfiguration --server.port=$PORT --guides.index.delay=0
+  command: cp cacerts .jdk/lib/security && java -classpath . org.springframework.site.configuration.ApplicationConfiguration --server.port=$PORT --search.index.delay=0
 
