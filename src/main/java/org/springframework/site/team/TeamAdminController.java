@@ -37,6 +37,7 @@ public class TeamAdminController {
 		existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
 		existingProfile.setLanyrdUsername(profile.getLanyrdUsername());
 		existingProfile.setLocation(profile.getLocation());
+		existingProfile.setGeoLocation(profile.getGeoLocation());
 		teamRepository.save(existingProfile);
 
 		return "redirect:/admin/profile/edit";

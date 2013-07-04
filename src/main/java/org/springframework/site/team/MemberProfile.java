@@ -38,6 +38,9 @@ public class MemberProfile {
 	@Column(nullable = false)
 	private String memberId;
 
+	@Column
+	private GeoLocation geoLocation;
+
 	public String getName() {
 		return name;
 	}
@@ -143,5 +146,18 @@ public class MemberProfile {
 		}
 		String pathAndHost = String.format("lanyrd.com/profile/%s", getLanyrdUsername());
 		return new Link("https://" + pathAndHost, pathAndHost);
+	}
+
+	public GeoLocation getGeoLocation() {
+		return geoLocation;
+	}
+
+	public void setGeoLocation(GeoLocation geoLocation) {
+		this.geoLocation = geoLocation;
+	}
+
+	public TeamLocation getTeamLocation() {
+		if (geoLocation == null) return null;
+		return new TeamLocation(name, geoLocation.getLatitude(), geoLocation.getLongitude());
 	}
 }

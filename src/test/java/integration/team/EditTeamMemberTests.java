@@ -24,8 +24,7 @@ import java.security.Principal;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.startsWith;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -97,6 +96,7 @@ public class EditTeamMemberTests {
 		requestBuilder.param("twitterUsername", "tw_someguy_");
 		requestBuilder.param("speakerdeckUsername", "sd_someguy_");
 		requestBuilder.param("lanyrdUsername", "ly_someguy_");
+		requestBuilder.param("geoLocation", "-12.5,45.3");
 
 		performRequestAndExpectRedirect(requestBuilder, "/admin/profile/edit");
 
@@ -111,6 +111,10 @@ public class EditTeamMemberTests {
 		assertEquals("tw_someguy_", profile.getTwitterUsername());
 		assertEquals("sd_someguy_", profile.getSpeakerdeckUsername());
 		assertEquals("ly_someguy_", profile.getLanyrdUsername());
+
+		assertThat(profile.getGeoLocation(), not(nullValue()));
+		assertThat((double)profile.getGeoLocation().getLatitude(), closeTo(-12.5, 0.1));
+		assertThat((double) profile.getGeoLocation().getLongitude(), closeTo(45.3, 0.1));
 	}
 
 	private void performRequestAndExpectRedirect(MockHttpServletRequestBuilder requestBuilder, final String expectedRedirectUrl) throws Exception {

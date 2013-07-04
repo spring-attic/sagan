@@ -13,6 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
@@ -25,11 +29,28 @@ public class TeamController {
 	private PostViewFactory postViewFactory;
 
 	@Autowired
-	public TeamController(TeamRepository teamRepository, BlogService blogService, PostViewFactory postViewFactory) {
+	public TeamController(TeamRepository teamRepository,
+						  BlogService blogService,
+						  PostViewFactory postViewFactory) {
 		this.teamRepository = teamRepository;
 		this.blogService = blogService;
 		this.postViewFactory = postViewFactory;
 	}
+
+	@RequestMapping(value = "", method = {GET, HEAD})
+	public String showTeam(Model model) throws IOException {
+		List<MemberProfile> profiles = teamRepository.findAll();
+		model.addAttribute("profiles", profiles);
+		List<TeamLocation> teamLocations = new ArrayList<TeamLocation>();
+		for (MemberProfile profile : profiles) {
+			if (profile.getTeamLocation() != null) {
+				teamLocations.add(profile.getTeamLocation());
+			}
+		}
+		model.addAttribute("teamLocations", teamLocations);
+		return "team/index";
+	}
+
 
 	@RequestMapping(value = "/{memberId:\\w+}", method = {GET, HEAD})
 	public String showProfile(@PathVariable String memberId, Model model){
