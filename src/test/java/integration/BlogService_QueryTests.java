@@ -18,6 +18,7 @@ import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostRepository;
+import org.springframework.site.team.TeamRepository;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.site.blog.web.EntityNotFoundException;
 import org.springframework.site.services.DateService;
@@ -61,6 +62,9 @@ public class BlogService_QueryTests {
 	@Mock
 	private DateService dateService;
 
+	@Mock
+	private TeamRepository teamRepository;
+
 	@Rule
 	public ExpectedException expected = ExpectedException.none();
 
@@ -71,7 +75,7 @@ public class BlogService_QueryTests {
 		initMocks(this);
 		when(dateService.now()).thenReturn(new Date());
 
-		service = new BlogService(postRepository, markdownService, dateService);
+		service = new BlogService(postRepository, markdownService, dateService, teamRepository);
 		assertThat(postRepository.findAll().size(), equalTo(0));
 	}
 

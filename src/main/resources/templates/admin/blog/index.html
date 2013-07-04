@@ -19,7 +19,7 @@
 			<table class='table dashboard--posts'>
 				<tr th:each="post : ${drafts}">
 					<td class="date" th:text="${post.formattedPublishDate}">June 18, 2013</td>
-					<td class="author" th:text="${post.author}">Author</td>
+					<td class="author" th:text="${post.author.name}">Author</td>
 					<td th:text="${post.title}">This week in Spring</td>
 					<td>
 						<nav layout:substituteby="admin/blog/_dashboard_actions :: dashboard-actions" />
@@ -31,7 +31,7 @@
 			<table class='table dashboard--posts'>
 				<tr th:each="post : ${scheduled}">
 					<td class='date' th:text='  ${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</td>
-					<td class='author' th:text="${post.author}">Author</td>
+					<td class='author' th:text="${post.author.name}">Author</td>
 					<td th:text="${post.title}">This week in Spring</td>
 					<td>
 						<nav layout:substituteby="admin/blog/_dashboard_actions :: dashboard-actions" />
@@ -43,7 +43,7 @@
 			<table class='table dashboard--posts'>
 				<tr th:each="post : ${posts}">
 					<td class='date' th:text='  ${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</td>
-					<td class='author' th:text="${post.author}">Author</td>
+					<td class='author' th:text="${post.author.name}">Author</td>
 					<td th:text="${post.title}">This week in Spring</td>
 					<td>
 						<nav layout:substituteby="admin/blog/_dashboard_actions :: dashboard-actions" />

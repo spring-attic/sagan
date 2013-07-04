@@ -107,7 +107,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 
 	private void setAuthor(Post post, Entry entry) {
 		Person person = new Person();
-		person.setName(post.getAuthor());
+		person.setName(post.getAuthor().getName());
 		entry.setAuthors(Arrays.asList(person));
 	}
 

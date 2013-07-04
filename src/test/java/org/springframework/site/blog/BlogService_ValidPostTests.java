@@ -9,6 +9,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
+import org.springframework.site.team.MemberProfile;
+import org.springframework.site.team.TeamRepository;
 
 import java.util.Date;
 
@@ -26,7 +28,8 @@ public class BlogService_ValidPostTests {
 
 	public static final String RENDERED_HTML_FROM_MARKDOWN = "<p>Rendered HTML</p><p>from Markdown</p>";
 	public static final String RENDERED_SUMMARY_HTML_FROM_MARKDOWN = "<p>Rendered HTML</p>";
-	private static final String AUTHOR = "author";
+	private static final String AUTHOR_ID = "author";
+	private static final String AUTHOR_NAME = "mr author";
 	private BlogService service;
 	private Post post;
 	private String title = "Title";
@@ -48,6 +51,9 @@ public class BlogService_ValidPostTests {
 	@Mock
 	private DateService dateService;
 
+	@Mock
+	private TeamRepository teamRepository;
+
 	@Rule
 	public ExpectedException expected = ExpectedException.none();
 	private PostForm postForm;
@@ -56,7 +62,13 @@ public class BlogService_ValidPostTests {
 	public void setup() {
 		when(dateService.now()).thenReturn(now);
 
-		service = new BlogService(postRepository, markdownService, dateService);
+		MemberProfile profile = new MemberProfile();
+		profile.setMemberId(AUTHOR_ID);
+		profile.setName(AUTHOR_NAME);
+
+		when(teamRepository.findByMemberId(AUTHOR_ID)).thenReturn(profile);
+
+		service = new BlogService(postRepository, markdownService, dateService, teamRepository);
 		when(markdownService.renderToHtml(content)).thenReturn(RENDERED_HTML_FROM_MARKDOWN);
 		when(markdownService.renderToHtml(firstParagraph)).thenReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 		postForm = new PostForm();
@@ -65,7 +77,7 @@ public class BlogService_ValidPostTests {
 		postForm.setCategory(category);
 		postForm.setBroadcast(broadcast);
 		postForm.setPublishAt(publishAt);
-		post = service.addPost(postForm, AUTHOR);
+		post = service.addPost(postForm, AUTHOR_ID);
 	}
 
 	@Test
@@ -80,7 +92,7 @@ public class BlogService_ValidPostTests {
 
 	@Test
 	public void postHasAuthor() {
-		assertThat(post.getAuthor(), equalTo(AUTHOR));
+		assertThat(post.getAuthor().getName(), equalTo(AUTHOR_NAME));
 	}
 
 	@Test
@@ -97,7 +109,7 @@ public class BlogService_ValidPostTests {
 	public void draftWithNullPublishDate() {
 		postForm.setDraft(true);
 		postForm.setPublishAt(null);
-		post = service.addPost(postForm, AUTHOR);
+		post = service.addPost(postForm, AUTHOR_ID);
 		assertThat(post.getPublishAt(), is(nullValue()));
 	}
 
@@ -105,7 +117,7 @@ public class BlogService_ValidPostTests {
 	public void postWithNullPublishDateSetsPublishAtToNow() {
 		postForm.setDraft(false);
 		postForm.setPublishAt(null);
-		post = service.addPost(postForm, AUTHOR);
+		post = service.addPost(postForm, AUTHOR_ID);
 		assertThat(post.getPublishAt(), equalTo(now));
 	}
 

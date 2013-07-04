@@ -1,14 +1,10 @@
 package org.springframework.site.blog;
 
 import org.hibernate.annotations.Type;
+import org.springframework.site.team.MemberProfile;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,8 +15,8 @@ public class Post implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@Column(nullable = false)
-	private String author;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private MemberProfile author;
 
 	@Column(nullable = false)
 	private String title;
@@ -67,11 +63,11 @@ public class Post implements Serializable {
 		return id;
 	}
 
-	public String getAuthor() {
+	public MemberProfile getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(MemberProfile author) {
 		this.author = author;
 	}
 

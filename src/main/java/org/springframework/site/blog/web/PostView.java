@@ -3,6 +3,7 @@ package org.springframework.site.blog.web;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.services.DateService;
+import org.springframework.site.team.MemberProfile;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,7 +52,7 @@ public class PostView {
 		return post.isBroadcast();
 	}
 
-	public String getAuthor() {
+	public MemberProfile getAuthor() {
 		return post.getAuthor();
 	}
 

@@ -10,6 +10,22 @@ import static org.hamcrest.Matchers.nullValue;
 public class MemberProfileTests {
 
 	@Test
+	public void fullNameUsesNameIfAvailable() {
+		MemberProfile nick = new MemberProfile();
+		nick.setMemberId("nickstreet");
+		nick.setName("Nick Street");
+		assertThat(nick.getFullName(), equalTo("Nick Street"));
+	}
+
+	@Test
+	public void fullNameFallsBackToUsername() {
+		MemberProfile nick = new MemberProfile();
+		nick.setMemberId("nickstreet");
+		nick.setName(null);
+		assertThat(nick.getFullName(), equalTo("nickstreet"));
+	}
+
+	@Test
 	public void twitterLink() {
 		MemberProfile nick = new MemberProfile();
 		nick.setTwitterUsername("nickstreet");

@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.web.EntityNotFoundException;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
+import org.springframework.site.team.MemberProfile;
+import org.springframework.site.team.TeamRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -14,21 +16,23 @@ import java.util.Date;
 public class BlogService {
 
 	private PostRepository repository;
+	private TeamRepository teamRepository;
 	private MarkdownService markdownService;
 	private DateService dateService;
 
-
 	@Autowired
-	public BlogService(PostRepository repository, MarkdownService markdownService, DateService dateService) {
+	public BlogService(PostRepository repository, MarkdownService markdownService, DateService dateService, TeamRepository teamRepository) {
 		this.repository = repository;
 		this.markdownService = markdownService;
 		this.dateService = dateService;
+		this.teamRepository = teamRepository;
 	}
 
-	public Post addPost(PostForm postForm, String author) {
+	public Post addPost(PostForm postForm, String authorId) {
 		String content = postForm.getContent();
 		Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
-		post.setAuthor(author);
+		MemberProfile profile = teamRepository.findByMemberId(authorId);
+		post.setAuthor(profile);
 		post.setRenderedContent(markdownService.renderToHtml(content));
 		post.setRenderedSummary(markdownService.renderToHtml(extractFirstParagraph(content, 500)));
 		post.setBroadcast(postForm.isBroadcast());

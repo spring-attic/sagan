@@ -116,7 +116,7 @@ public class MemberProfile {
 	}
 
 	public String getFullName() {
-		return name;
+		return name == null ? getMemberId() : name;
 	}
 
 	public String getGravatarImageUrl() {

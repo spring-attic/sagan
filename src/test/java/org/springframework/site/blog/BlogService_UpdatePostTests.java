@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
+import org.springframework.site.team.TeamRepository;
 
 import java.util.Date;
 
@@ -46,6 +47,9 @@ public class BlogService_UpdatePostTests {
 	@Mock
 	private DateService dateService;
 
+	@Mock
+	private TeamRepository teamRepository;
+
 	@Rule
 	public ExpectedException expected = ExpectedException.none();
 
@@ -56,11 +60,11 @@ public class BlogService_UpdatePostTests {
 	public void setup() {
 		when(dateService.now()).thenReturn(now);
 
-		service = new BlogService(postRepository, markdownService, dateService);
+		service = new BlogService(postRepository, markdownService, dateService, teamRepository);
 		when(markdownService.renderToHtml(content)).thenReturn(RENDERED_HTML_FROM_MARKDOWN);
 		when(markdownService.renderToHtml(firstParagraph)).thenReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 
-		post = PostBuilder.post().author(ORIGINAL_AUTHOR).build();
+		post = PostBuilder.post().author("author_id", ORIGINAL_AUTHOR).build();
 		postForm = new PostForm(post);
 		postForm.setTitle(title);
 		postForm.setContent(content);
@@ -84,7 +88,7 @@ public class BlogService_UpdatePostTests {
 
 	@Test
 	public void postRetainsOriginalAuthor() {
-		assertThat(post.getAuthor(), equalTo(ORIGINAL_AUTHOR));
+		assertThat(post.getAuthor().getName(), equalTo(ORIGINAL_AUTHOR));
 	}
 
 	@Test

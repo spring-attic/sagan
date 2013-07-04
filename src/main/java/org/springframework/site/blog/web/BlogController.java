@@ -34,7 +34,7 @@ public class BlogController {
 	}
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { GET, HEAD })
-	public String showPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
+	public String showPost(@PathVariable("postId") Long postId, @PathVariable("slug") String slug, Model model) {
 		model.addAttribute("post", service.getPublishedPost(postId));
 		model.addAttribute("categories", PostCategory.values());
 		return "blog/show";
@@ -48,14 +48,14 @@ public class BlogController {
 	}
 
 	@RequestMapping(value = "/category/{category}", method = { GET, HEAD })
-	public String listPublishedPostsForCategory(@PathVariable PostCategory category, Model model, @RequestParam(defaultValue = "1") int page, HttpServletRequest request) {
+	public String listPublishedPostsForCategory(@PathVariable("category") PostCategory category, Model model, @RequestParam(defaultValue = "1", value="page") int page, HttpServletRequest request) {
 		Pageable pageRequest = PageableFactory.forLists(page);
 		Page<Post> result = service.getPublishedPosts(category, pageRequest);
 		return renderListOfPosts(result, model, request);
 	}
 
 	@RequestMapping(value = "/broadcasts", method = { GET, HEAD })
-	public String listPublishedBroadcasts(Model model, @RequestParam(defaultValue = "1") int page, HttpServletRequest request) {
+	public String listPublishedBroadcasts(Model model, @RequestParam(defaultValue = "1", value="page") int page, HttpServletRequest request) {
 		Pageable pageRequest = PageableFactory.forLists(page);
 		Page<Post> result = service.getPublishedBroadcastPosts(pageRequest);
 		return renderListOfPosts(result, model, request);

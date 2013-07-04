@@ -1,5 +1,6 @@
 package org.springframework.site.blog;
 
+import org.springframework.site.team.MemberProfile;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.text.ParseException;
@@ -10,7 +11,7 @@ public class PostBuilder {
 
 	private Long id;
 	private String title;
-	private String author;
+	private MemberProfile author;
 	private PostCategory category;
 	private String rawContent;
 	private String renderedContent;
@@ -22,7 +23,8 @@ public class PostBuilder {
 
 	public PostBuilder() {
 		this.title = "My Post";
-		this.author = "test";
+		this.author = new MemberProfile();
+		this.author.setMemberId("test");
 		this.category =	PostCategory.ENGINEERING;
 		this.rawContent = "post body";
 		this.renderedContent = "post body";
@@ -41,8 +43,14 @@ public class PostBuilder {
 		return this;
 	}
 
-	public PostBuilder author(String author) {
+	public PostBuilder author(MemberProfile author) {
 		this.author = author;
+		return this;
+	}
+
+	public PostBuilder author(String authorId, String name) {
+		this.author.setMemberId(authorId);
+		this.author.setName(name);
 		return this;
 	}
 
