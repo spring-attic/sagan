@@ -1,6 +1,15 @@
 package org.springframework.site.blog.feed;
 
-import com.sun.syndication.feed.atom.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.blog.Post;
 import org.springframework.site.blog.web.PostView;
@@ -8,15 +17,16 @@ import org.springframework.site.services.DateService;
 import org.springframework.site.services.SiteUrl;
 import org.springframework.web.servlet.view.feed.AbstractAtomFeedView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import com.sun.syndication.feed.atom.Category;
+import com.sun.syndication.feed.atom.Content;
+import com.sun.syndication.feed.atom.Entry;
+import com.sun.syndication.feed.atom.Feed;
+import com.sun.syndication.feed.atom.Link;
+import com.sun.syndication.feed.atom.Person;
 
 public class BlogPostAtomViewer extends AbstractAtomFeedView {
+
+	private static final TimeZone UTC = TimeZone.getTimeZone("UTC");
 
 	private final SiteUrl siteUrl;
 	private final DateService dateService;
@@ -28,11 +38,12 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 	}
 
 	@Override
-	protected void buildFeedMetadata(Map<String, Object> model, Feed feed, HttpServletRequest request) {
+	protected void buildFeedMetadata(Map<String, Object> model, Feed feed,
+			HttpServletRequest request) {
 		String feedPath = (String) model.get("feed-path");
 		feed.setTitle((String) model.get("feed-title"));
 		feed.setId(String.format("http://springsource.org%s", feedPath));
-		feed.setIcon(siteUrl.getAbsoluteUrl("/favicon.ico"));
+		feed.setIcon(this.siteUrl.getAbsoluteUrl("/favicon.ico"));
 		setFeedUrl(feedPath, feed);
 		setBlogUrl((String) model.get("blog-path"), feed);
 		setUpdatedDate(model, feed);
@@ -49,7 +60,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 	}
 
 	private void setFeedUrl(String feedPath, Feed feed) {
-		String feedUrl = siteUrl.getAbsoluteUrl(feedPath);
+		String feedUrl = this.siteUrl.getAbsoluteUrl(feedPath);
 		Link feedLink = new Link();
 		feedLink.setHref(feedUrl);
 		feedLink.setRel("self");
@@ -57,14 +68,15 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 	}
 
 	private void setBlogUrl(String blogPath, Feed feed) {
-		String blogUrl = siteUrl.getAbsoluteUrl(blogPath);
+		String blogUrl = this.siteUrl.getAbsoluteUrl(blogPath);
 		Link blogLink = new Link();
 		blogLink.setHref(blogUrl);
 		feed.setAlternateLinks(Arrays.asList(blogLink));
 	}
 
 	@Override
-	protected List<Entry> buildFeedEntries(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	protected List<Entry> buildFeedEntries(Map<String, Object> model,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<Post> posts = (List<Post>) model.get("posts");
 		List<Entry> entries = new ArrayList<Entry>(posts.size());
 
@@ -84,7 +96,9 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 	}
 
 	private void setId(Post post, Entry entry, HttpServletRequest request) {
-		String dateString = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedAt());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setTimeZone(UTC);
+		String dateString = dateFormat.format(post.getCreatedAt());
 		String host = request.getServerName();
 		String id = String.format("tag:%s,%s:%s", host, dateString, post.getId());
 		entry.setId(id);
@@ -98,8 +112,8 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 	}
 
 	private void setPostUrl(Post post, Entry entry) {
-		PostView postView = new PostView(post, dateService);
-		String postUrl = siteUrl.getAbsoluteUrl(postView.getPath());
+		PostView postView = new PostView(post, this.dateService);
+		String postUrl = this.siteUrl.getAbsoluteUrl(postView.getPath());
 		Link postLink = new Link();
 		postLink.setHref(postUrl);
 		entry.setAlternateLinks(Arrays.asList(postLink));
