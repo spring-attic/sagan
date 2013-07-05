@@ -16,4 +16,5 @@ Gemfile.lock
 .DS_Store
 .sass-cache
 atlassian-ide-plugin.xml
-data/*
+data/
+tmp/
