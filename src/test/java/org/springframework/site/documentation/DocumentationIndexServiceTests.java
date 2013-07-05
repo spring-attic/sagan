@@ -34,6 +34,5 @@ public class DocumentationIndexServiceTests {
 		service.process(project);
 		int crawlDepthLevel = 0;
 		verify(crawlerService).crawl(contains("github"), eq(crawlDepthLevel));
-
 	}
 }

@@ -4,7 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.actuate.metrics.CounterService;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.site.search.CrawlerService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
@@ -32,10 +31,9 @@ public class DocumentationIndexService {
 	}
 
 	// ten minute delay initially by default
-	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.index.delay:600000}")
+//	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.index.delay:600000}")
 	public void indexDocumentation() {
 		logger.info("Indexing project documentation");
-		int count = 0;
 		for (final Project project : documentationService.getProjects()) {
 			executor.submit(new Runnable() {
 				@Override
@@ -49,15 +47,11 @@ public class DocumentationIndexService {
 					}
 				}
 			});
-			count++;
-			if (count>2) {
-				break; // TODO remove: hack to prevent index from getting too large in dev
-			}
 		}
 		counters.increment("search.indexes.projects.refresh.count");
 	}
 
-	public void process(Project project) {
+	void process(Project project) {
 		logger.info("Indexing project: " + project.getId());
 		if (!project.getSupportedVersions().isEmpty()) {
 			crawlerService.crawl(new UriTemplate(project.getApiAllClassesUrl()).expand(project.getSupportedVersions().get(0)).toString(), 1);
