@@ -152,4 +152,11 @@ public class CreateBlogPostTests {
 		assertThat(html.title(), containsString(post.getTitle()));
 	}
 
+	@Test
+	public void invalidPostsShowsErrors() throws Exception {
+		MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
+		mockMvc.perform(createPostRequest)
+				.andExpect(status().isOk());
+	}
+
 }

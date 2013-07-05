@@ -5,19 +5,52 @@
 <body>
     <form layout:fragment="post-form">
         <input type="hidden" name="_method" value="PUT" th:if="${edit}" />
-        <label for="title">Title:<input id="title" type="text" th:field="*{title}" name="title" /></label>
-        <label for="content">Content:<textarea id="content" th:field="*{content}" name="content" /></label>
-        <select name="category" th:field="*{category}" >
-            <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.displayName}">Category</option>
-        </select>
-        <label for="broadcast">Broadcast:<input type="checkbox" th:field="*{broadcast}" id="broadcast" name="broadcast" /></label>
+
+        <div class="control-group" th:class="'control-group' + (${#fields.hasErrors('title')}? ' error')">
+            <label class="control-label" for="title">Title:</label>
+            <div class="controls">
+                <input id="title" type="text" th:field="*{title}" name="title" />
+                <span class="help-inline" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Incorrect title</span>
+            </div>
+        </div>
+
+        <div class="control-group" th:class="'control-group' + (${#fields.hasErrors('content')}? ' error')">
+            <label class="control-label" for="content">Content:</label>
+            <div class="controls">
+                <input id="content" type="text" th:field="*{content}" name="content" />
+                <span class="help-inline" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Incorrect content</span>
+            </div>
+        </div>
+
+        <div class="control-group" th:class="'control-group' + (${#fields.hasErrors('category')}? ' error')">
+            <label class="control-label" for="category">Category:</label>
+            <div class="controls">
+                <select id="category" name="category" th:field="*{category}" >
+                    <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.displayName}">Category</option>
+                </select>
+                <span class="help-inline" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Incorrect category</span>
+            </div>
+        </div>
+
+        <div class="control-group" th:class="'control-group' + (${#fields.hasErrors('broadcast')}? ' error')">
+            <label class="control-label" for="broadcast">Broadcast:</label>
+            <div class="controls">
+                <input type="checkbox" th:field="*{broadcast}" id="broadcast" name="broadcast" />
+                <span class="help-inline" th:if="${#fields.hasErrors('broadcast')}" th:errors="*{broadcast}">Incorrect broadcast</span>
+            </div>
+        </div>
+
         <div class="well">
-            <div id="datetimepicker1" class="input-append date">
-                <input id="publishAt" type="text" th:field="*{publishAt}" name="publishAt" data-format="yyyy-MM-dd hh:mm" />
-                    <span class="add-on">
-                      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                      </i>
-                    </span>
+            <div class="control-group">
+                <div class="controls">
+                    <div id="datetimepicker1" class="input-append date">
+                        <input id="publishAt" type="text" th:field="*{publishAt}" name="publishAt" data-format="yyyy-MM-dd hh:mm" />
+                        <span class="add-on">
+                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                          </i>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
         <script type="text/javascript">

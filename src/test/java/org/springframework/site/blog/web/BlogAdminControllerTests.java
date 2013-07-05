@@ -9,32 +9,24 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.site.blog.BlogService;
-import org.springframework.site.blog.Post;
-import org.springframework.site.blog.PostBuilder;
-import org.springframework.site.blog.PostForm;
+import org.springframework.site.blog.*;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.services.DateService;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.ui.ExtendedModelMap;
+import org.springframework.validation.BindException;
+import org.springframework.validation.MapBindingResult;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.sameInstance;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.same;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogAdminControllerTests {
@@ -54,9 +46,11 @@ public class BlogAdminControllerTests {
 	private ExtendedModelMap model = new ExtendedModelMap();
 	private Principal principal;
 	private PostViewFactory postViewFactory;
+	private MapBindingResult bindingResult;
 
 	@Before
 	public void setup() {
+		bindingResult = new MapBindingResult(new HashMap<Object, Object>(), "postForm");
 		postViewFactory = new PostViewFactory(new DateService());
 		principal = new Principal() {
 			@Override
@@ -115,16 +109,19 @@ public class BlogAdminControllerTests {
 		PostForm postForm = new PostForm();
 
 		when(blogService.addPost(eq(postForm), anyString())).thenReturn(TEST_POST);
-		controller.createPost(postForm, principal);
+		controller.createPost(principal, postForm, new BindException(postForm, "postForm"), null);
 		verify(blogService).addPost(postForm, "testUser");
 	}
 
 	@Test
 	public void redirectToPostAfterCreation() throws Exception {
 		PostForm postForm = new PostForm();
+		postForm.setTitle("title");
+		postForm.setContent("content");
+		postForm.setCategory(PostCategory.ENGINEERING);
 		Post post = PostBuilder.post().id(123L).publishAt("2013-05-06 00:00").title("Post Title").build();
 		when(blogService.addPost(postForm, principal.getName())).thenReturn(post);
-		String result = controller.createPost(postForm, principal);
+		String result = controller.createPost(principal, postForm, bindingResult, null);
 
 		assertThat(result, equalTo("redirect:/blog/123-post-title"));
 	}
@@ -133,7 +130,7 @@ public class BlogAdminControllerTests {
 	public void creatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
 		PostForm postForm = new PostForm();
 		when(blogService.addPost(eq(postForm), anyString())).thenReturn(TEST_POST);
-		controller.createPost(postForm, principal);
+		controller.createPost(principal, postForm, new BindException(postForm, "postForm"), null);
 		verify(searchService).saveToIndex(any(SearchEntry.class));
 	}
 
@@ -142,7 +139,7 @@ public class BlogAdminControllerTests {
 		PostForm postForm = new PostForm();
 		Post post = PostBuilder.post().draft().build();
 		when(blogService.addPost(eq(postForm), anyString())).thenReturn(post);
-		controller.createPost(postForm, principal);
+		controller.createPost(principal, postForm, new BindException(postForm, "postForm"), null);
 		verifyZeroInteractions(searchService);
 	}
 

@@ -1,13 +1,21 @@
 package org.springframework.site.blog;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class PostForm {
+	@NotEmpty
 	private String title;
+
+	@NotEmpty
 	private String content;
+
+	@NotNull
 	private PostCategory category;
+
 	private boolean broadcast;
     private boolean draft;
 

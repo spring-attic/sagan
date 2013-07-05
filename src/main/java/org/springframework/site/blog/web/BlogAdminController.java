@@ -2,26 +2,20 @@ package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.site.blog.BlogService;
-import org.springframework.site.blog.Post;
-import org.springframework.site.blog.PostCategory;
-import org.springframework.site.blog.PostForm;
-import org.springframework.site.blog.PostSearchEntryMapper;
+import org.springframework.site.blog.*;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
 
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @RequestMapping("/admin/blog")
@@ -74,11 +68,16 @@ public class BlogAdminController {
 	}
 
 	@RequestMapping(value = "", method = { POST })
-	public String createPost(PostForm postForm, Principal principal) {
-		Post post = service.addPost(postForm, principal.getName());
-		saveToIndex(post);
-		PostView postView = postViewFactory.createPostView(post);
-		return "redirect:" + postView.getPath();
+	public String createPost(Principal principal, @Valid PostForm postForm, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("categories", PostCategory.values());
+			return "admin/blog/new";
+		} else {
+			Post post = service.addPost(postForm, principal.getName());
+			saveToIndex(post);
+			PostView postView = postViewFactory.createPostView(post);
+			return "redirect:" + postView.getPath();
+		}
 	}
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = PUT)
