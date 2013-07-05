@@ -1,6 +1,6 @@
-<#macro prereq_editor_jdk_buildtools>
+<#macro prereq_editor_jdk_buildtools java_version="6">
  - A favorite text editor or IDE
- - [JDK 6][jdk] or later
+ - [JDK ${java_version}][jdk] or later
  - [Maven 3.0][mvn] or later
 
 [jdk]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
