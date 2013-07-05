@@ -98,7 +98,6 @@ public class EditTeamMemberTests {
 		existingProfile.setName("Some");
 		existingProfile.setLocation("London");
 		existingProfile.setBio("I am just a guy");
-		existingProfile.setAvatarUrl("http://gravatar.com/avatar/ABC");
 		existingProfile.setGithubUsername("someguy");
 		existingProfile.setTwitterUsername("tw_someguy");
 		existingProfile.setSpeakerdeckUsername("sd_someguy");
@@ -109,7 +108,6 @@ public class EditTeamMemberTests {
 		requestBuilder.param("name", "Some_ Guy_");
 		requestBuilder.param("location", "London_");
 		requestBuilder.param("bio", "I am just a guy_");
-		requestBuilder.param("avatarUrl", "http://gravatar.com/avatar/ABCD");
 		requestBuilder.param("githubUsername", "gh_someguy_");
 		requestBuilder.param("twitterUsername", "tw_someguy_");
 		requestBuilder.param("speakerdeckUsername", "sd_someguy_");
@@ -125,7 +123,6 @@ public class EditTeamMemberTests {
 		assertEquals("Some_ Guy_", profile.getName());
 		assertEquals("London_", profile.getLocation());
 		assertEquals("I am just a guy_", profile.getBio());
-		assertEquals("http://gravatar.com/avatar/ABCD", profile.getAvatarUrl());
 		assertEquals("gh_someguy_", profile.getGithubUsername());
 		assertEquals("tw_someguy_", profile.getTwitterUsername());
 		assertEquals("sd_someguy_", profile.getSpeakerdeckUsername());

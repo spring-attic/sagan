@@ -48,7 +48,6 @@ public class TeamAdminController {
 	private void updateMemberProfile(String memberId, MemberProfile profile) {
 		MemberProfile existingProfile = teamRepository.findByMemberId(memberId);
 		existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
-		existingProfile.setAvatarUrl(profile.getAvatarUrl());
 		existingProfile.setTwitterUsername(profile.getTwitterUsername());
 		existingProfile.setBio(profile.getBio());
 		existingProfile.setName(profile.getName());
