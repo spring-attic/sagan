@@ -81,12 +81,18 @@ public class BlogAdminController {
 	}
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = PUT)
-	public String updatePost(@PathVariable Long postId, PostForm postForm) {
+	public String updatePost(@PathVariable Long postId, @Valid PostForm postForm, BindingResult bindingResult, Model model) {
 		Post post = service.getPost(postId);
-		service.updatePost(post, postForm);
-		saveToIndex(post);
-		PostView postView = postViewFactory.createPostView(post);
-		return "redirect:" + postView.getPath();
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("categories", PostCategory.values());
+			model.addAttribute("post", post);
+			return "admin/blog/edit";
+		} else {
+			service.updatePost(post, postForm);
+			saveToIndex(post);
+			PostView postView = postViewFactory.createPostView(post);
+			return "redirect:" + postView.getPath();
+		}
 	}
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = DELETE)

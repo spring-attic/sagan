@@ -97,6 +97,24 @@ public class EditBlogPostTests {
 		assertThat(updatedPost.getId(), equalTo(post.getId()));
 	}
 
+	@Test
+	public void updateDoesNotPersistInvalidData() throws Exception {
+		MockHttpServletRequestBuilder editPostRequest = put("/admin/blog/" + post.getSlug());
+		editPostRequest.param("title", "");
+		editPostRequest.param("content", "");
+		editPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
+		editPostRequest.param("draft", "false");
+
+		this.mockMvc.perform(editPostRequest).andExpect(status().isOk());
+		Post updatedPost = postRepository.findOne(post.getId());
+
+		assertEquals("Original Title", updatedPost.getTitle());
+		assertEquals("Original Content", updatedPost.getRawContent());
+		assertEquals(PostCategory.ENGINEERING, updatedPost.getCategory());
+		assertEquals(false, updatedPost.isDraft());
+		assertThat(updatedPost.getId(), equalTo(post.getId()));
+	}
+
 	private MockHttpServletRequestBuilder createEditPostRequest() {
 		MockHttpServletRequestBuilder editPostRequest = put("/admin/blog/" + post.getSlug());
 		editPostRequest.param("title", "New Title");

@@ -147,7 +147,7 @@ public class BlogAdminControllerTests {
 	public void updatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
 		long postId = TEST_POST.getId();
 		when(blogService.getPost(eq(postId))).thenReturn(TEST_POST);
-		controller.updatePost(postId, new PostForm());
+		controller.updatePost(postId, new PostForm(), bindingResult, model);
 		verify(searchService).saveToIndex(any(SearchEntry.class));
 	}
 
@@ -156,7 +156,7 @@ public class BlogAdminControllerTests {
 		long postId = 123L;
 		Post post = PostBuilder.post().id(postId).draft().build();
 		when(blogService.getPost(eq(postId))).thenReturn(post);
-		controller.updatePost(postId, new PostForm());
+		controller.updatePost(postId, new PostForm(), bindingResult, model);
 		verifyZeroInteractions(searchService);
 	}
 
