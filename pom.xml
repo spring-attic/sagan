@@ -166,6 +166,12 @@
 			<version>1.7.2</version>
 		</dependency>
 
+        <dependency>
+            <groupId>org.cloudfoundry</groupId>
+            <artifactId>cloudfoundry-runtime</artifactId>
+            <version>0.8.4</version>
+        </dependency>
+
 		<!-- Test scope -->
 
 		<dependency>

@@ -17,6 +17,9 @@ package org.springframework.site.configuration;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cloudfoundry.runtime.env.CloudEnvironment;
+import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
+import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
 import org.elasticsearch.client.Client;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +69,7 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.servlet.Filter;
+import javax.sql.DataSource;
 import java.util.Collections;
 import java.util.Properties;
 
@@ -132,6 +136,18 @@ public class ApplicationConfiguration {
 	@Bean
 	public ElasticsearchOperations elasticsearchTemplate() throws Exception {
 		return new ElasticsearchTemplate(client);
+	}
+
+	@Configuration
+	@Profile({"development", "staging", "production"})
+	protected static class CloudFoundryDataSourceConfiguration {
+		@Bean
+		public DataSource dataSource() {
+			CloudEnvironment cloudEnvironment = new CloudEnvironment();
+			RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db", RdbmsServiceInfo.class);
+			RdbmsServiceCreator serviceCreator = new RdbmsServiceCreator();
+			return serviceCreator.createService(serviceInfo);
+		}
 	}
 
 	@Configuration
