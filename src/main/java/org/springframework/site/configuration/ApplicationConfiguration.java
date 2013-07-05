@@ -64,6 +64,7 @@ import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.impl.GitHubTemplate;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 import javax.annotation.PostConstruct;
@@ -151,28 +152,28 @@ public class ApplicationConfiguration {
 	}
 
 	@Configuration
-	@Profile({"staging", "production"})
+	@Profile({"default", "development", "staging", "production"})
 	protected static class ElasticSearchExternalConfiguration {
 
-		@Value("${elasticsearch.cluster.nodes:localhost:9300}")
+		@Value("${elasticsearch.cluster.nodes:ec2-50-112-200-3.us-west-2.compute.amazonaws.com:9300}")
 		private String clusterNodes = "localhost:9300";
 
-		@Value("${elasticsearch.cluster.name:elasticsearch_pivotal}")
-		private String clusterName = "elasticsearch_pivotal";
+		@Value("${elasticsearch.cluster.name:elasticsearch}")
+		private String clusterName = "elasticsearch";
 
 		@Bean
 		public Client elasticSearchClient() throws Exception {
 			TransportClientFactoryBean transportClient = new TransportClientFactoryBean();
 			transportClient.setClusterNodes(clusterNodes);
 			transportClient.setClusterName(clusterName);
-			transportClient.setClientTransportSniff(true);
+			transportClient.setClientTransportSniff(false);
 			transportClient.afterPropertiesSet();
 			return transportClient.getObject();
 		}
 	}
 
 	@Configuration
-	@Profile({"default", "development"})
+    @Profile({"local"})
 	protected static class ElasticSearchLocalConfiguration {
 
 		@PostConstruct
