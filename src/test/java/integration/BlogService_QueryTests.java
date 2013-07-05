@@ -1,6 +1,6 @@
 package integration;
 
-import integration.configuration.ElasticsearchStubConfiguration;
+import integration.configuration.SiteOfflineConfiguration;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -46,7 +46,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = ElasticsearchStubConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
+@ContextConfiguration(classes = SiteOfflineConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
 @TransactionConfiguration(defaultRollback=true)
 @Transactional
 public class BlogService_QueryTests {

@@ -1,4 +1,4 @@
-package org.springframework.site.search;
+package org.springframework.index;
 
 import org.jsoup.nodes.Document;
 

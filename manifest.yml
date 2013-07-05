@@ -6,4 +6,11 @@ applications:
   host: sagan
   domain: cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
-  command: java -Xmx1260m -XX:MaxPermSize=512m -classpath . org.springframework.site.configuration.ApplicationConfiguration --server.port=$PORT --search.index.delay=0 --spring.profiles.active=$SPRING_PROFILE
+  command: java -Xmx1260m -XX:MaxPermSize=512m -classpath . org.springframework.site.configuration.ApplicationConfiguration --server.port=$PORT --spring.profiles.active=$SPRING_PROFILE
+- name: sagan-index
+  memory: 2G
+  instances: 1
+  host: sagan-index
+  domain: cfapps.io
+  path: target/springframework-site-0.0.1.SNAPSHOT.jar
+  command: java -Xmx1260m -XX:MaxPermSize=512m -classpath . org.springframework.index.configuration.CrawlerConfiguration --server.port=$PORT --search.index.delay=0

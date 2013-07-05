@@ -6,17 +6,14 @@ import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.site.configuration.ApplicationConfiguration;
 
 import static org.mockito.Mockito.mock;
 
 @Configuration
-@Import(ApplicationConfiguration.class)
-public class ElasticsearchStubConfiguration {
+public class ElasticsearchStubbedConfiguration {
 
 	// Mock to prevent Elasticsearch from starting up (slowly)
 	@Bean

@@ -1,6 +1,8 @@
-package org.springframework.site.search;
+package org.springframework.index;
 
 import org.jsoup.nodes.Document;
+import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchEntryMapper;
 
 import java.util.Date;
 

@@ -2,7 +2,7 @@ package integration;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import integration.configuration.ElasticsearchStubConfiguration;
+import integration.configuration.SiteOfflineConfiguration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -39,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {ElasticsearchStubConfiguration.class, GettingStartedGuidesTests.OfflineConfiguration.class})
+@ContextConfiguration(classes = {SiteOfflineConfiguration.class, GettingStartedGuidesTests.OfflineConfiguration.class})
 public class GettingStartedGuidesTests {
 
 	public static final GettingStartedGuide GETTING_STARTED_GUIDE =

@@ -1,4 +1,4 @@
-package org.springframework.site.search;
+package org.springframework.index;
 
 import com.soulgalore.crawler.core.CrawlerConfiguration;
 import com.soulgalore.crawler.core.HTMLPageResponse;
@@ -17,6 +17,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -25,15 +26,15 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 
 @Component
-public class DefaultCrawlerService implements CrawlerService {
+public class CrawlerService {
 
-	private static Log logger = LogFactory.getLog(DefaultCrawlerService.class);
+	private static Log logger = LogFactory.getLog(CrawlerService.class);
 
 	private final SearchService searchService;
 	private WebDocumentSearchEntryMapper mapper = new WebDocumentSearchEntryMapper();
 
 	@Autowired
-	public DefaultCrawlerService(SearchService searchService) {
+	public CrawlerService(SearchService searchService) {
 		this.searchService = searchService;
 	}
 
@@ -48,7 +49,6 @@ public class DefaultCrawlerService implements CrawlerService {
 		return client;
 	}
 
-	@Override
 	public void crawl(String url, int levels) {
 		CrawlerConfiguration apiConfig = new CrawlerConfiguration.Builder().setStartUrl(url).setMaxLevels(levels).build();
 		DefaultCrawler crawler = new DefaultCrawler(new IndexingResponseFetcher(), Executors.newFixedThreadPool(10), new CompositeURLParser(new FramePageURLParser(), new AhrefPageURLParser()));

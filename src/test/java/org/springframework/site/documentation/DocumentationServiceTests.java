@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.site.configuration.ApplicationConfiguration;
+import org.springframework.site.configuration.DocumentationConfiguration;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,7 +17,7 @@ public class DocumentationServiceTests {
 	@Test
 	public void bindingToYaml() {
 		DocumentationService documentationService = new DocumentationService();
-		ApplicationConfiguration.bind("test-documentation.yml",
+		DocumentationConfiguration.bind("test-documentation.yml",
 				documentationService);
 		assertEquals(3, documentationService.getProject("spring-framework")
 				.getSupportedVersions().size());
@@ -26,7 +26,7 @@ public class DocumentationServiceTests {
 	@Test
 	public void bindingToFullYaml() {
 		DocumentationService documentationService = new DocumentationService();
-		ApplicationConfiguration
+		DocumentationConfiguration
 				.bind("documentation.yml", documentationService);
 		assertEquals(3, documentationService.getProject("spring-framework")
 				.getSupportedVersions().size());
@@ -50,7 +50,7 @@ public class DocumentationServiceTests {
 			}
 		});
 		DocumentationService documentationService = new DocumentationService();
-		ApplicationConfiguration
+		DocumentationConfiguration
 				.bind("documentation.yml", documentationService);
 		StringBuilder builder = new StringBuilder();
 		for (Project project : documentationService.getProjects()) {

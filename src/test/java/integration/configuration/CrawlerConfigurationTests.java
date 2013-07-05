@@ -19,9 +19,11 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.bootstrap.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.site.configuration.ApplicationConfiguration;
+import org.springframework.index.configuration.CrawlerConfiguration;
 
-public class ApplicationConfigurationTests {
+import static junit.framework.Assert.assertNotNull;
+
+public class CrawlerConfigurationTests {
 
 	//TODO make this dynamic
 	public static final int PORT = 9080;
@@ -37,11 +39,11 @@ public class ApplicationConfigurationTests {
 
 	@Test
 	public void testContextLoading() throws Exception {
-		SpringApplication application = ApplicationConfiguration.build(SiteOfflineConfiguration.class);
-		application.setDefaultCommandLineArgs("--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb");
+		SpringApplication application = CrawlerConfiguration.build(CrawlerOfflineConfiguration.class);
+		application.setDefaultCommandLineArgs("--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb", "--search.index.delay=6000000");
 		context = (ConfigurableApplicationContext) application.run();
-		ApplicationConfiguration configuration = context
-				.getBean(ApplicationConfiguration.class);
+		CrawlerConfiguration configuration = context.getBean(CrawlerConfiguration.class);
+		assertNotNull(configuration);
 		context.close();
 	}
 

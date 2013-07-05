@@ -1,8 +1,11 @@
-package org.springframework.site.documentation;
+package org.springframework.index;
 
 import org.junit.Test;
 import org.springframework.bootstrap.actuate.metrics.CounterService;
-import org.springframework.site.search.CrawlerService;
+import org.springframework.index.CrawlerService;
+import org.springframework.index.DocumentationIndexService;
+import org.springframework.site.documentation.DocumentationService;
+import org.springframework.site.documentation.Project;
 
 import java.util.Arrays;
 
