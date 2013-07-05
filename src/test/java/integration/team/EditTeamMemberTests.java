@@ -58,7 +58,16 @@ public class EditTeamMemberTests {
 	}
 
 	@Test
-	public void getEditTeamMemberPageWithExistingProfile() throws Exception {
+	public void getEditMyProfilePageWithExistingProfile() throws Exception {
+		getEditProfilePage("/admin/profile");
+	}
+
+	@Test
+	public void getEditOtherTeamMemberPageWithExistingProfile() throws Exception {
+		getEditProfilePage("/admin/team/someguy");
+	}
+
+	private void getEditProfilePage(String editTeamUri) throws Exception {
 		MemberProfile profile = new MemberProfile();
 		profile.setName("First Last");
 		profile.setLocation("Location");
@@ -67,14 +76,23 @@ public class EditTeamMemberTests {
 
 		teamRepository.save(profile);
 
-		this.mockMvc.perform(get("/admin/profile/edit").principal(principal))
+		this.mockMvc.perform(get(editTeamUri).principal(principal))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("First Last")));
 	}
 
 	@Test
-	public void saveExistingProfile() throws Exception {
+	public void saveMyProfile() throws Exception {
+		saveProfile("/admin/profile");
+	}
+
+	@Test
+	public void saveOtherTeamMemberProfile() throws Exception {
+		saveProfile("/admin/team/someguy");
+	}
+
+	private void saveProfile(String editTeamUri) throws Exception {
 		MemberProfile existingProfile = new MemberProfile();
 		existingProfile.setMemberId("someguy");
 		existingProfile.setName("Some");
@@ -87,7 +105,7 @@ public class EditTeamMemberTests {
 		existingProfile.setLanyrdUsername("ly_someguy");
 		teamRepository.save(existingProfile);
 
-		MockHttpServletRequestBuilder requestBuilder = put("/admin/profile").principal(principal);
+		MockHttpServletRequestBuilder requestBuilder = put(editTeamUri).principal(principal);
 		requestBuilder.param("name", "Some_ Guy_");
 		requestBuilder.param("location", "London_");
 		requestBuilder.param("bio", "I am just a guy_");
@@ -98,7 +116,7 @@ public class EditTeamMemberTests {
 		requestBuilder.param("lanyrdUsername", "ly_someguy_");
 		requestBuilder.param("geoLocation", "-12.5,45.3");
 
-		performRequestAndExpectRedirect(requestBuilder, "/admin/profile/edit");
+		performRequestAndExpectRedirect(requestBuilder, editTeamUri);
 
 		MemberProfile profile = teamRepository.findByMemberId("someguy");
 		assertThat(profile, not(nullValue()));
