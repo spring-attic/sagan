@@ -1,5 +1,6 @@
 package org.springframework.site.team;
 
+import org.hibernate.annotations.Type;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -40,6 +41,10 @@ public class MemberProfile {
 
 	@Column
 	private GeoLocation geoLocation;
+
+	@Column
+	@Type(type="text")
+	private String videoEmbeds;
 
 	public String getName() {
 		return name;
@@ -159,5 +164,13 @@ public class MemberProfile {
 	public TeamLocation getTeamLocation() {
 		if (geoLocation == null) return null;
 		return new TeamLocation(name, geoLocation.getLatitude(), geoLocation.getLongitude());
+	}
+
+	public String getVideoEmbeds() {
+		return videoEmbeds;
+	}
+
+	public void setVideoEmbeds(String videoEmbeds) {
+		this.videoEmbeds = videoEmbeds;
 	}
 }

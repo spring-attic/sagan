@@ -115,6 +115,7 @@ public class EditTeamMemberTests {
 		requestBuilder.param("speakerdeckUsername", "sd_someguy_");
 		requestBuilder.param("lanyrdUsername", "ly_someguy_");
 		requestBuilder.param("geoLocation", "-12.5,45.3");
+		requestBuilder.param("videoEmbeds", "<iframe width=\"420\" height=\"315\" src=\"//www.youtube.com/embed/J---aiyznGQ\" frameborder=\"0\" allowfullscreen></iframe>");
 
 		performRequestAndExpectRedirect(requestBuilder, editTeamUri);
 
@@ -129,6 +130,7 @@ public class EditTeamMemberTests {
 		assertEquals("tw_someguy_", profile.getTwitterUsername());
 		assertEquals("sd_someguy_", profile.getSpeakerdeckUsername());
 		assertEquals("ly_someguy_", profile.getLanyrdUsername());
+		assertEquals("<iframe width=\"420\" height=\"315\" src=\"//www.youtube.com/embed/J---aiyznGQ\" frameborder=\"0\" allowfullscreen></iframe>", profile.getVideoEmbeds());
 
 		assertThat(profile.getGeoLocation(), not(nullValue()));
 		assertThat((double)profile.getGeoLocation().getLatitude(), closeTo(-12.5, 0.1));

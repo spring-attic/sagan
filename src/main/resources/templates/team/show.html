@@ -53,6 +53,8 @@
                     <div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
                 </li>
             </ul>
+            <h2 th:inline="text" th:unless="${#strings.isEmpty(profile.videoEmbeds)}">Videos by [[${profile.name}]]</h2>
+            <div th:utext="${profile.videoEmbeds}"></div>
         </div>
     </div>
 </div>

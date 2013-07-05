@@ -58,6 +58,7 @@ public class TeamAdminController {
 		existingProfile.setLanyrdUsername(profile.getLanyrdUsername());
 		existingProfile.setLocation(profile.getLocation());
 		existingProfile.setGeoLocation(profile.getGeoLocation());
+		existingProfile.setVideoEmbeds(profile.getVideoEmbeds());
 		teamRepository.save(existingProfile);
 	}
 }
