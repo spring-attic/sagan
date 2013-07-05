@@ -2,7 +2,6 @@ package integration.search;
 
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.site.search.SearchController;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchEntryBuilder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -30,7 +30,7 @@ import static org.hamcrest.Matchers.not;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = ApplicationConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
-@Ignore
+@ActiveProfiles("local")
 public class SearchIntegrationTests {
 
 	@Autowired
