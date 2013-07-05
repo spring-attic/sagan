@@ -358,6 +358,15 @@
 			</snapshots>
 		</pluginRepository>
 		<pluginRepository>
+			<id>spring-aws-snapshots</id>
+			<name>Spring Snapshots</name>
+			<!-- TODO Remove -->
+			<url>http://s3.amazonaws.com/maven.springframework.org/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
 			<url>http://repo.springsource.org/milestone</url>
