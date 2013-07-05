@@ -1,7 +1,6 @@
 package integration.blog;
 
 import integration.configuration.ElasticsearchStubConfiguration;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,9 +18,11 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertEquals;
@@ -33,6 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = ElasticsearchStubConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
+@Transactional
 public class EditBlogPostTests {
 
 	@Autowired
@@ -51,17 +53,11 @@ public class EditBlogPostTests {
 	@Before
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-		postRepository.deleteAll();
 		post = PostBuilder.post()
 				.title(originalTitle)
 				.rawContent(originalContent)
 				.category(originalCategory).build();
 		postRepository.save(post);
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		postRepository.deleteAll();
 	}
 
 	@Test
@@ -98,6 +94,7 @@ public class EditBlogPostTests {
 		assertEquals("New Content", updatedPost.getRawContent());
 		assertEquals(PostCategory.NEWS_AND_EVENTS, updatedPost.getCategory());
 		assertEquals(false, updatedPost.isDraft());
+		assertThat(updatedPost.getId(), equalTo(post.getId()));
 	}
 
 	private MockHttpServletRequestBuilder createEditPostRequest() {

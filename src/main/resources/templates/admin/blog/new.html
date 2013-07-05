@@ -1,11 +1,13 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
       layout:decorator="layout">
 <head>
     <title>SpringFramework - New Blog Post</title>
 </head>
 <body>
 <div layout:fragment="content" class="container">
-    <form layout:substituteby="admin/blog/_post_form :: post-form" ></form>
+    <form layout:include="admin/blog/_post_form :: post-form" th:action="@{/admin/blog}" method="post" th:object="${postForm}">
+    </form>
 </div>
 </body>
 </html>
