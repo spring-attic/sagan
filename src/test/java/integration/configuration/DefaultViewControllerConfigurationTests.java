@@ -40,7 +40,7 @@ public class DefaultViewControllerConfigurationTests {
 	}
 
 	@Test
-	public void mapsHtmlPageToUrls() throws Exception {
+	 public void mapsHtmlPageToUrls() throws Exception {
 		Resource[] resources = {new UrlResource(new URL("file://test/templates/pages/guides.html"))};
 
 		when(resourceResolver.getResources("classpath:/templates/pages/**/*.html")).thenReturn(resources);
@@ -50,6 +50,18 @@ public class DefaultViewControllerConfigurationTests {
 
 		verify(controllerRegistry).addViewController("/guides");
 		verify(viewRegistration).setViewName("pages/guides");
+	}
+
+	@Test
+	public void mapsSubdirectoryPagesToUrls() throws Exception {
+		Resource[] resources = {new UrlResource(new URL("file://test/templates/pages/about/jobs.html"))};
+
+		when(resourceResolver.getResources("classpath:/templates/pages/**/*.html")).thenReturn(resources);
+
+		configurer.addViewControllers(controllerRegistry);
+
+		verify(controllerRegistry).addViewController("/about/jobs");
+		verify(viewRegistration).setViewName("pages/about/jobs");
 	}
 
 	@Test
