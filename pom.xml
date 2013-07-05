@@ -6,7 +6,7 @@
 	<groupId>org.springframework</groupId>
 	<artifactId>springframework-site</artifactId>
 	<version>0.0.1.SNAPSHOT</version>
-	<packaging>executable-jar</packaging>
+	<packaging>jar</packaging>
 
 	<name>springframework-site</name>
 
@@ -40,6 +40,11 @@
 		<dependency>
 			<groupId>org.springframework.bootstrap</groupId>
 			<artifactId>spring-bootstrap-actuator-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.bootstrap</groupId>
+			<artifactId>spring-bootstrap-launcher</artifactId>
+			<version>${spring.bootstrap.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -223,14 +228,9 @@
 			</resource>
 		</resources>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.bootstrap</groupId>
-				<artifactId>spring-bootstrap-maven-plugin</artifactId>
-				<version>${spring.bootstrap.version}</version>
-				<configuration>
-					<mainClass>${start-class}</mainClass>
-				</configuration>
-			</plugin>
+			<!-- plugin> <groupId>org.springframework.bootstrap</groupId> <artifactId>spring-bootstrap-maven-plugin</artifactId> 
+				<version>${spring.bootstrap.version}</version> <configuration> <mainClass>${start-class}</mainClass> 
+				</configuration> </plugin -->
 			<plugin>
 				<groupId>pl.project13.maven</groupId>
 				<artifactId>git-commit-id-plugin</artifactId>
@@ -282,6 +282,10 @@
 					</resources>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -331,15 +335,6 @@
 			</snapshots>
 		</repository>
 		<repository>
-			<id>spring-aws-snapshots</id>
-			<name>Spring Snapshots</name>
-			<!-- TODO Remove -->
-			<url>http://s3.amazonaws.com/maven.springframework.org/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
 			<url>http://repo.springsource.org/milestone</url>
@@ -353,15 +348,6 @@
 			<id>spring-snapshots</id>
 			<name>Spring Snapshots</name>
 			<url>http://repo.springsource.org/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-aws-snapshots</id>
-			<name>Spring Snapshots</name>
-			<!-- TODO Remove -->
-			<url>http://s3.amazonaws.com/maven.springframework.org/snapshot</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
