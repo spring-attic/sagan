@@ -106,3 +106,46 @@ Now run the following to produce a single executable JAR file containing all nec
 
 [maven-shade-plugin]: https://maven.apache.org/plugins/maven-shade-plugin
 </#macro>
+
+<#macro build_the_application>
+Build the application
+------------------------
+
+To build this application, you need to add some extra bits to your pom.xml file.
+
+```xml
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>hello.Application</mainClass>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+```
+
+The [Maven Shade plugin][maven-shade-plugin] extracts classes from all jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
+
+Now run the following to produce a single executable JAR file containing all necessary dependency classes and resources:
+
+    mvn package
+
+[maven-shade-plugin]: https://maven.apache.org/plugins/maven-shade-plugin
+</#macro>
