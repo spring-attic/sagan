@@ -11,6 +11,9 @@ info:
     description: ${project.description}
     version: ${project.version}
 
+logging:
+  config: classpath:log4j.properties
+
 spring:
   jpa:
     ddl_auto: update
