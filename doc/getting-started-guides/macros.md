@@ -149,3 +149,13 @@ Now run the following to produce a single executable JAR file containing all nec
 
 [maven-shade-plugin]: https://maven.apache.org/plugins/maven-shade-plugin
 </#macro>
+
+<#macro run_the_application>
+Run the application
+-------------------
+Run your application with `java -jar` at the command line:
+
+    java -jar target/${project_id}-0.1.0.jar
+
+
+</#macro>
