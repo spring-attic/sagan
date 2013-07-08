@@ -28,8 +28,8 @@ public class ElasticSearchConfiguration {
 	}
 
 	@Configuration
-	@Profile({"default", "development", "staging", "production"})
-	protected static class ElasticSearchExternalConfiguration {
+	@Profile({"development", "staging", "production"})
+	protected static class ExternalElasticSearchConfiguration {
 
 		@Value("${elasticsearch.cluster.nodes:ec2-50-112-200-3.us-west-2.compute.amazonaws.com:9300}")
 		private String clusterNodes = "localhost:9300";
@@ -49,8 +49,29 @@ public class ElasticSearchConfiguration {
 	}
 
 	@Configuration
-	@Profile({"local"})
-	protected static class ElasticSearchLocalConfiguration {
+	@Profile({"default"})
+	protected static class LocalElasticSearchConfiguration {
+
+		@Value("${elasticsearch.cluster.nodes:localhost:9300}")
+		private String clusterNodes;
+
+		@Value("${elasticsearch.cluster.name:elasticsearch_pivotal}")
+		private String clusterName;
+
+		@Bean
+		public Client elasticSearchClient() throws Exception {
+			TransportClientFactoryBean transportClient = new TransportClientFactoryBean();
+			transportClient.setClusterNodes(clusterNodes);
+			transportClient.setClusterName(clusterName);
+			transportClient.setClientTransportSniff(false);
+			transportClient.afterPropertiesSet();
+			return transportClient.getObject();
+		}
+	}
+
+	@Configuration
+	@Profile({"memory"})
+	protected static class InMemoryElasticSearchConfiguration {
 
 		@PostConstruct
 		public void deleteSearchIndex() throws Exception {

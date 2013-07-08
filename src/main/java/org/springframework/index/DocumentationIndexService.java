@@ -32,7 +32,6 @@ public class DocumentationIndexService {
 		this.counters = counters;
 	}
 
-	// ten minute delay initially by default
 	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.index.delay:0}")
 	public void indexDocumentation() {
 		logger.info("Indexing project documentation");

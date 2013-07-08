@@ -31,7 +31,6 @@ public class GettingStartedGuideIndexService {
 		this.counters = counters;
 	}
 
-	// ten minute delay initially by default
 	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.index.delay:0}")
 	public void indexGuides() {
 		logger.info("Indexing getting started guides");
