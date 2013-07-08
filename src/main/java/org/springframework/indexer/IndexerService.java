@@ -49,8 +49,8 @@ public class IndexerService {
 		return client;
 	}
 
-	public void crawl(String url, int levels) {
-		CrawlerConfiguration apiConfig = new CrawlerConfiguration.Builder().setStartUrl(url).setMaxLevels(levels).build();
+	public void index(String url, int linkDepth) {
+		CrawlerConfiguration apiConfig = new CrawlerConfiguration.Builder().setStartUrl(url).setMaxLevels(linkDepth).build();
 		DefaultCrawler crawler = new DefaultCrawler(new IndexingResponseFetcher(), Executors.newFixedThreadPool(10), new CompositeURLParser(new FramePageURLParser(), new AhrefPageURLParser()));
 		crawler.getUrls(apiConfig);
 		crawler.shutdown();

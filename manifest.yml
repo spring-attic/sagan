@@ -13,4 +13,4 @@ applications:
   host: sagan-indexer
   domain: cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
-  command: java -Xmx1260m -XX:MaxPermSize=512m -classpath . org.springframework.indexerer.configuration.CrawlerConfiguration --server.port=$PORT --search.indexer.delay=0
+  command: java -Xmx1260m -XX:MaxPermSize=512m -classpath . org.springframework.indexer.configuration.IndexerConfiguration --server.port=$PORT --search.indexer.delay=0

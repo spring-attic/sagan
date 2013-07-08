@@ -6,6 +6,6 @@ import org.springframework.indexer.configuration.IndexerConfiguration;
 
 @Configuration
 @Import({IndexerConfiguration.class, ElasticsearchStubbedConfiguration.class})
-public class CrawlerOfflineConfiguration {
+public class IndexerOfflineConfiguration {
 
 }

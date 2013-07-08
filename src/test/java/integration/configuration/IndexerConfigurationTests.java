@@ -23,7 +23,7 @@ import org.springframework.indexer.configuration.IndexerConfiguration;
 
 import static junit.framework.Assert.assertNotNull;
 
-public class CrawlerConfigurationTests {
+public class IndexerConfigurationTests {
 
 	//TODO make this dynamic
 	public static final int PORT = 9080;
@@ -39,7 +39,7 @@ public class CrawlerConfigurationTests {
 
 	@Test
 	public void testContextLoading() throws Exception {
-		SpringApplication application = IndexerConfiguration.build(CrawlerOfflineConfiguration.class);
+		SpringApplication application = IndexerConfiguration.build(IndexerOfflineConfiguration.class);
 		application.setDefaultCommandLineArgs("--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb", "--search.indexer.delay=6000000");
 		context = (ConfigurableApplicationContext) application.run();
 		IndexerConfiguration configuration = context.getBean(IndexerConfiguration.class);

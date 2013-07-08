@@ -26,14 +26,14 @@ public class DocumentationIndexServiceTests {
 	@Test
 	public void apiDocsAreIndexed() throws Exception {
 		service.process(project);
-		int crawlDepthLevel = 1;
-		verify(indexerService).crawl(contains("api"), eq(crawlDepthLevel));
+		int linkDepthLevel = 1;
+		verify(indexerService).index(contains("api"), eq(linkDepthLevel));
 	}
 
 	@Test
 	public void githubDocsAreIndexed() throws Exception {
 		service.process(project);
-		int crawlDepthLevel = 0;
-		verify(indexerService).crawl(contains("github"), eq(crawlDepthLevel));
+		int linkDepthLevel = 0;
+		verify(indexerService).index(contains("github"), eq(linkDepthLevel));
 	}
 }

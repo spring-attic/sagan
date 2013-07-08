@@ -55,11 +55,10 @@ public class DocumentationIndexService {
 	void process(Project project) {
 		logger.info("Indexing project: " + project.getId());
 		if (!project.getSupportedVersions().isEmpty()) {
-			indexerService.crawl(new UriTemplate(project.getApiAllClassesUrl()).expand(project.getSupportedVersions().get(0)).toString(), 1);
+			indexerService.index(new UriTemplate(project.getApiAllClassesUrl()).expand(project.getSupportedVersions().get(0)).toString(), 1);
 			// TODO: support reference docs when we can work out a way to break them up into manageable pieces
-			// crawlerService.crawl(new UriTemplate(project.getReferenceUrl()).expand(project.getSupportedVersions().get(0)).toString(), 2);
 		}
-		indexerService.crawl(project.getGithubUrl(), 0);
+		indexerService.index(project.getGithubUrl(), 0);
 	}
 
 
