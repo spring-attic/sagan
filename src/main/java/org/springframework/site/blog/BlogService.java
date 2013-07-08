@@ -1,5 +1,6 @@
 package org.springframework.site.blog;
 
+import org.elasticsearch.ElasticSearchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,8 @@ public class BlogService {
 	private DateService dateService;
 
 	private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
+
+	private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(BlogService.class);
 
 	@Autowired
 	public BlogService(PostRepository repository, MarkdownService markdownService, DateService dateService, TeamRepository teamRepository, SearchService searchService) {
@@ -140,7 +143,11 @@ public class BlogService {
 
 	private void saveToIndex(Post post) {
 		if (post.isLiveOn(dateService.now())) {
-			searchService.saveToIndex(mapper.map(post));
+			try {
+				searchService.saveToIndex(mapper.map(post));
+			} catch(ElasticSearchException e) {
+				logger.error(e);
+			}
 		}
 	}
 }

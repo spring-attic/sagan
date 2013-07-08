@@ -1,5 +1,6 @@
 package org.springframework.site.blog;
 
+import org.elasticsearch.client.transport.NoNodeAvailableException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -26,6 +27,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -155,6 +157,15 @@ public class BlogService_ValidPostTests {
 	@Test
 	public void creatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
 		verify(searchService).saveToIndex(any(SearchEntry.class));
+	}
+
+	@Test
+	public void blogIsSavedWhenSearchServiceIsDown() {
+		reset(searchService);
+		NoNodeAvailableException exception = new NoNodeAvailableException();
+		doThrow(exception).when(searchService).saveToIndex(any(SearchEntry.class));
+		post = service.addPost(postForm, AUTHOR_ID);
+		verify(postRepository).save(post);
 	}
 
 	@Test
