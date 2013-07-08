@@ -1,9 +1,10 @@
-package org.springframework.index;
+package org.springframework.indexer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.actuate.metrics.CounterService;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.site.documentation.DocumentationService;
 import org.springframework.site.documentation.Project;
 import org.springframework.stereotype.Service;
@@ -19,19 +20,19 @@ public class DocumentationIndexService {
 
 	private static final long ONE_HOUR = 1000 * 60 * 60;
 	private final DocumentationService documentationService;
-	private final CrawlerService crawlerService;
+	private final IndexerService indexerService;
 	private final CounterService counters;
 
 	private ExecutorService executor = Executors.newFixedThreadPool(10);
 
 	@Autowired
-	public DocumentationIndexService(CrawlerService crawlerService, DocumentationService documentationService, CounterService counters) {
-		this.crawlerService = crawlerService;
+	public DocumentationIndexService(IndexerService indexerService, DocumentationService documentationService, CounterService counters) {
+		this.indexerService = indexerService;
 		this.documentationService = documentationService;
 		this.counters = counters;
 	}
 
-//	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.index.delay:0}")
+	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
 	public void indexDocumentation() {
 		logger.info("Indexing project documentation");
 		for (final Project project : documentationService.getProjects()) {
@@ -54,11 +55,11 @@ public class DocumentationIndexService {
 	void process(Project project) {
 		logger.info("Indexing project: " + project.getId());
 		if (!project.getSupportedVersions().isEmpty()) {
-			crawlerService.crawl(new UriTemplate(project.getApiAllClassesUrl()).expand(project.getSupportedVersions().get(0)).toString(), 1);
+			indexerService.crawl(new UriTemplate(project.getApiAllClassesUrl()).expand(project.getSupportedVersions().get(0)).toString(), 1);
 			// TODO: support reference docs when we can work out a way to break them up into manageable pieces
 			// crawlerService.crawl(new UriTemplate(project.getReferenceUrl()).expand(project.getSupportedVersions().get(0)).toString(), 2);
 		}
-		crawlerService.crawl(project.getGithubUrl(), 0);
+		indexerService.crawl(project.getGithubUrl(), 0);
 	}
 
 

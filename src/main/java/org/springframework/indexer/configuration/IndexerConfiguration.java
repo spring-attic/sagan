@@ -1,4 +1,4 @@
-package org.springframework.index.configuration;
+package org.springframework.indexer.configuration;
 
 import org.springframework.bootstrap.SpringApplication;
 import org.springframework.bootstrap.context.annotation.EnableAutoConfiguration;
@@ -16,13 +16,13 @@ import org.springframework.site.configuration.SecurityConfiguration;
 
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan(basePackages = {"org.springframework.index", "org.springframework.site.search"})
+@ComponentScan(basePackages = {"org.springframework.indexer", "org.springframework.site.search"})
 @EnableScheduling
 @Import({ElasticSearchConfiguration.class, DocumentationConfiguration.class, GitHubConfiguration.class, SecurityConfiguration.class})
-public class CrawlerConfiguration {
+public class IndexerConfiguration {
 
 	public static void main(String[] args) {
-		build(CrawlerConfiguration.class).run(args);
+		build(IndexerConfiguration.class).run(args);
 	}
 
 	public static SpringApplication build(Class<?>... config) {

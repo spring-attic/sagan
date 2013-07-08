@@ -1,4 +1,4 @@
-package org.springframework.index;
+package org.springframework.indexer;
 
 import com.soulgalore.crawler.core.CrawlerConfiguration;
 import com.soulgalore.crawler.core.HTMLPageResponse;
@@ -26,15 +26,15 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 
 @Component
-public class CrawlerService {
+public class IndexerService {
 
-	private static Log logger = LogFactory.getLog(CrawlerService.class);
+	private static Log logger = LogFactory.getLog(IndexerService.class);
 
 	private final SearchService searchService;
 	private WebDocumentSearchEntryMapper mapper = new WebDocumentSearchEntryMapper();
 
 	@Autowired
-	public CrawlerService(SearchService searchService) {
+	public IndexerService(SearchService searchService) {
 		this.searchService = searchService;
 	}
 

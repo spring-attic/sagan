@@ -19,7 +19,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.bootstrap.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.index.configuration.CrawlerConfiguration;
+import org.springframework.indexer.configuration.IndexerConfiguration;
 
 import static junit.framework.Assert.assertNotNull;
 
@@ -39,10 +39,10 @@ public class CrawlerConfigurationTests {
 
 	@Test
 	public void testContextLoading() throws Exception {
-		SpringApplication application = CrawlerConfiguration.build(CrawlerOfflineConfiguration.class);
-		application.setDefaultCommandLineArgs("--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb", "--search.index.delay=6000000");
+		SpringApplication application = IndexerConfiguration.build(CrawlerOfflineConfiguration.class);
+		application.setDefaultCommandLineArgs("--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb", "--search.indexer.delay=6000000");
 		context = (ConfigurableApplicationContext) application.run();
-		CrawlerConfiguration configuration = context.getBean(CrawlerConfiguration.class);
+		IndexerConfiguration configuration = context.getBean(IndexerConfiguration.class);
 		assertNotNull(configuration);
 		context.close();
 	}

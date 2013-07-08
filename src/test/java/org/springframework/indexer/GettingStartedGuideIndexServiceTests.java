@@ -1,9 +1,8 @@
-package org.springframework.index;
+package org.springframework.indexer;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.bootstrap.actuate.metrics.CounterService;
-import org.springframework.index.GettingStartedGuideIndexService;
 import org.springframework.site.guides.GettingStartedGuide;
 import org.springframework.site.guides.GettingStartedService;
 import org.springframework.site.guides.GuideRepo;

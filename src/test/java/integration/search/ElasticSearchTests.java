@@ -62,30 +62,24 @@ public class ElasticSearchTests {
 	public void testIndex() {
 		SearchEntry result = saveSearchEntryToElasticSearch();
 
-		CriteriaQuery criteriaQuery = new CriteriaQuery(
-				new Criteria("rawContent").contains("raw"));
+		CriteriaQuery criteriaQuery = new CriteriaQuery(new Criteria("rawContent").contains("raw"));
 
 		this.elasticsearchTemplate.refresh(SearchEntry.class, true);
 
-		Page<SearchEntry> results = this.elasticsearchTemplate.queryForPage(
-				criteriaQuery, SearchEntry.class);
-		assertThat(results.getContent().get(0).getRawContent(),
-				is(equalTo(result.getRawContent())));
+		Page<SearchEntry> results = this.elasticsearchTemplate.queryForPage(criteriaQuery, SearchEntry.class);
+		assertThat(results.getContent().get(0).getRawContent(), is(equalTo(result.getRawContent())));
 	}
 
 	@Test
 	public void testJestIndex() throws Exception {
 		SearchEntry entry = saveJestEntryToElasticSearch();
-		JestResult result = this.jestClient
-				.execute(new Search(
-						"{\"query\":{\"bool\":{\"must\":[{\"term\":{\"site.rawContent\":\"raw\"}}]}},\"from\":0,\"size\":10}"));
+		String query = "{\"query\":{\"bool\":{\"must\":[{\"term\":{\"site.rawContent\":\"raw\"}}]}},\"from\":0,\"size\":10}";
+		JestResult result = this.jestClient.execute(new Search(query));
 
-		List<SearchEntry> list = result
-				.<List<SearchEntry>> getSourceAsObjectList(SearchEntry.class);
+		List<SearchEntry> list = result.<List<SearchEntry>> getSourceAsObjectList(SearchEntry.class);
 
 		Page<SearchEntry> results = new PageImpl<SearchEntry>(list);
-		assertThat(results.getContent().get(0).getRawContent(),
-				is(equalTo(entry.getRawContent())));
+		assertThat(results.getContent().get(0).getRawContent(),is(equalTo(entry.getRawContent())));
 	}
 
 	@Test
@@ -105,10 +99,8 @@ public class ElasticSearchTests {
 
 		this.elasticsearchTemplate.refresh(SearchEntry.class, true);
 
-		Page<SearchEntry> results = this.elasticsearchTemplate.queryForPage(searchQuery,
-				SearchEntry.class);
-		assertThat(results.getContent().get(0).getRawContent(),
-				is(equalTo(result.getRawContent())));
+		Page<SearchEntry> results = this.elasticsearchTemplate.queryForPage(searchQuery, SearchEntry.class);
+		assertThat(results.getContent().get(0).getRawContent(), is(equalTo(result.getRawContent())));
 	}
 
 	private SearchEntry saveSearchEntryToElasticSearch() {
@@ -124,11 +116,15 @@ public class ElasticSearchTests {
 	}
 
 	private SearchEntry saveJestEntryToElasticSearch() throws Exception {
-		SearchEntry entry = SearchEntryBuilder.entry().title("This week in Spring")
+		SearchEntry entry = SearchEntryBuilder.entry()
+				.title("This week in Spring")
 				.rawContent("This is some raw content").build();
 
-		this.jestClient.execute(new Index.Builder(entry).id("2").index("site")
-				.type("site").build());
+		this.jestClient.execute(new Index.Builder(entry)
+				.id("2")
+				.index("site")
+				.type("site")
+				.build());
 		return entry;
 	}
 

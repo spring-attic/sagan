@@ -1,4 +1,4 @@
-package org.springframework.index;
+package org.springframework.indexer;
 
 import org.jsoup.nodes.Document;
 

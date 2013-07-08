@@ -1,4 +1,4 @@
-package org.springframework.index;
+package org.springframework.indexer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,7 +31,7 @@ public class GettingStartedGuideIndexService {
 		this.counters = counters;
 	}
 
-	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.index.delay:0}")
+	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
 	public void indexGuides() {
 		logger.info("Indexing getting started guides");
 		for (GuideRepo repo : gettingStartedService.listGuides()) {

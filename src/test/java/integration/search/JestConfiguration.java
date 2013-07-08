@@ -19,17 +19,12 @@ import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.ClientConfig;
 import io.searchbox.client.config.ClientConstants;
-
-import java.util.LinkedHashSet;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @author Dave Syer
- * 
- */
+import java.util.LinkedHashSet;
+
 @Configuration
 public class JestConfiguration {
 
