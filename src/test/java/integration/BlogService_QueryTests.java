@@ -18,6 +18,7 @@ import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostRepository;
+import org.springframework.site.search.SearchService;
 import org.springframework.site.team.MemberProfile;
 import org.springframework.site.team.TeamRepository;
 import org.springframework.site.web.PageableFactory;
@@ -71,12 +72,15 @@ public class BlogService_QueryTests {
 
 	@Autowired LocalContainerEntityManagerFactoryBean fb;
 
+	@Mock
+	private SearchService searchService;
+
 	@Before
 	public void setup() {
 		initMocks(this);
 		when(dateService.now()).thenReturn(new Date());
 
-		service = new BlogService(postRepository, markdownService, dateService, teamRepository);
+		service = new BlogService(postRepository, markdownService, dateService, teamRepository, searchService);
 		assertThat(postRepository.findAll().size(), equalTo(0));
 	}
 

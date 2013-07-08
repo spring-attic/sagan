@@ -7,9 +7,12 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchService;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.site.team.TeamRepository;
+import org.springframework.site.test.DateTestUtils;
 
 import java.util.Date;
 
@@ -17,7 +20,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -32,11 +38,11 @@ public class BlogService_UpdatePostTests {
 	private String content = "Rendered HTML\n\nfrom Markdown";
 	private String firstParagraph = "Rendered HTML";
 	private PostCategory category = PostCategory.ENGINEERING;
-	private Date publishAt = new Date();
 	private boolean broadcast = true;
 	private boolean draft = false;
+	private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
 
-	private Date now = new Date();
+	private Date now = DateTestUtils.getDate("2013-07-01 13:00");
 
 	@Mock
 	private PostRepository postRepository;
@@ -50,6 +56,9 @@ public class BlogService_UpdatePostTests {
 	@Mock
 	private TeamRepository teamRepository;
 
+	@Mock
+	private SearchService searchService;
+
 	@Rule
 	public ExpectedException expected = ExpectedException.none();
 
@@ -60,11 +69,11 @@ public class BlogService_UpdatePostTests {
 	public void setup() {
 		when(dateService.now()).thenReturn(now);
 
-		service = new BlogService(postRepository, markdownService, dateService, teamRepository);
+		service = new BlogService(postRepository, markdownService, dateService, teamRepository, searchService);
 		when(markdownService.renderToHtml(content)).thenReturn(RENDERED_HTML_FROM_MARKDOWN);
 		when(markdownService.renderToHtml(firstParagraph)).thenReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 
-		post = PostBuilder.post().author("author_id", ORIGINAL_AUTHOR).build();
+		post = PostBuilder.post().id(123L).author("author_id", ORIGINAL_AUTHOR).build();
 		postForm = new PostForm(post);
 		postForm.setTitle(title);
 		postForm.setContent(content);
@@ -120,5 +129,19 @@ public class BlogService_UpdatePostTests {
 	@Test
 	public void postIsPersisted() {
 		verify(postRepository).save(post);
+	}
+
+	@Test
+	public void updatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
+		verify(searchService).saveToIndex(any(SearchEntry.class));
+	}
+
+	@Test
+	public void updatingABlogPost_doesNotSaveToSearchIndexIfNotLive() throws Exception {
+		reset(searchService);
+		long postId = 123L;
+		Post post = PostBuilder.post().id(postId).draft().build();
+		service.updatePost(post, new PostForm(post));
+		verifyZeroInteractions(searchService);
 	}
 }

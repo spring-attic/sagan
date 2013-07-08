@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.blog.web.EntityNotFoundException;
+import org.springframework.site.search.SearchService;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.site.team.MemberProfile;
@@ -17,45 +18,22 @@ public class BlogService {
 
 	private PostRepository repository;
 	private TeamRepository teamRepository;
+	private SearchService searchService;
 	private MarkdownService markdownService;
 	private DateService dateService;
 
+	private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
+
 	@Autowired
-	public BlogService(PostRepository repository, MarkdownService markdownService, DateService dateService, TeamRepository teamRepository) {
+	public BlogService(PostRepository repository, MarkdownService markdownService, DateService dateService, TeamRepository teamRepository, SearchService searchService) {
 		this.repository = repository;
 		this.markdownService = markdownService;
 		this.dateService = dateService;
 		this.teamRepository = teamRepository;
+		this.searchService = searchService;
 	}
 
-	public Post addPost(PostForm postForm, String authorId) {
-		String content = postForm.getContent();
-		Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
-		MemberProfile profile = teamRepository.findByMemberId(authorId);
-		post.setAuthor(profile);
-		post.setRenderedContent(markdownService.renderToHtml(content));
-		post.setRenderedSummary(markdownService.renderToHtml(extractFirstParagraph(content, 500)));
-		post.setBroadcast(postForm.isBroadcast());
-		post.setDraft(postForm.isDraft());
-		post.setPublishAt(publishDate(postForm));
-		repository.save(post);
-		return post;
-	}
-
-	// package private for testing purposes
-	String extractFirstParagraph(String content, int maxLength) {
-		String paragraph = content.trim();
-		int paragraphBreakpoint = paragraph.indexOf("\n\n");
-		if (paragraphBreakpoint > 0) {
-			paragraph = paragraph.substring(0, paragraphBreakpoint);
-		}
-		if (paragraph.length() > maxLength) {
-			int breakpoint = paragraph.lastIndexOf(" ", maxLength);
-			breakpoint = (breakpoint < 0) ? maxLength : breakpoint;
-			paragraph = paragraph.substring(0, breakpoint);
-		}
-		return paragraph;
-	}
+	// Query methods
 
 	public Post getPost(Long postId) {
 		Post post = repository.findOne(postId);
@@ -101,6 +79,24 @@ public class BlogService {
 		return repository.findAll(pageRequest);
 	}
 
+	// CRUD Operations
+
+	public Post addPost(PostForm postForm, String authorId) {
+		String content = postForm.getContent();
+		Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
+		MemberProfile profile = teamRepository.findByMemberId(authorId);
+		post.setAuthor(profile);
+		post.setRenderedContent(markdownService.renderToHtml(content));
+		post.setRenderedSummary(markdownService.renderToHtml(extractFirstParagraph(content, 500)));
+		post.setBroadcast(postForm.isBroadcast());
+		post.setDraft(postForm.isDraft());
+		post.setPublishAt(publishDate(postForm));
+		repository.save(post);
+		saveToIndex(post);
+
+		return post;
+	}
+
 	public void updatePost(Post post, PostForm postForm) {
 		String content = postForm.getContent();
 
@@ -116,6 +112,7 @@ public class BlogService {
 		post.setPublishAt(publishDate(postForm));
 
 		repository.save(post);
+		saveToIndex(post);
 	}
 
 	public void deletePost(Post post) {
@@ -124,5 +121,26 @@ public class BlogService {
 
 	private Date publishDate(PostForm postForm) {
 		return !postForm.isDraft() && postForm.getPublishAt() == null ? dateService.now() : postForm.getPublishAt();
+	}
+
+	// package private for testing purposes
+	String extractFirstParagraph(String content, int maxLength) {
+		String paragraph = content.trim();
+		int paragraphBreakpoint = paragraph.indexOf("\n\n");
+		if (paragraphBreakpoint > 0) {
+			paragraph = paragraph.substring(0, paragraphBreakpoint);
+		}
+		if (paragraph.length() > maxLength) {
+			int breakpoint = paragraph.lastIndexOf(" ", maxLength);
+			breakpoint = (breakpoint < 0) ? maxLength : breakpoint;
+			paragraph = paragraph.substring(0, breakpoint);
+		}
+		return paragraph;
+	}
+
+	private void saveToIndex(Post post) {
+		if (post.isLiveOn(dateService.now())) {
+			searchService.saveToIndex(mapper.map(post));
+		}
 	}
 }

@@ -9,9 +9,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.site.blog.*;
-import org.springframework.site.search.SearchEntry;
-import org.springframework.site.search.SearchService;
+import org.springframework.site.blog.BlogService;
+import org.springframework.site.blog.Post;
+import org.springframework.site.blog.PostBuilder;
+import org.springframework.site.blog.PostCategory;
+import org.springframework.site.blog.PostForm;
 import org.springframework.site.services.DateService;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.ui.ExtendedModelMap;
@@ -23,10 +25,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.same;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogAdminControllerTests {
@@ -39,9 +48,6 @@ public class BlogAdminControllerTests {
 
 	@Mock
 	private BlogService blogService;
-
-	@Mock
-	private SearchService searchService;
 
 	private ExtendedModelMap model = new ExtendedModelMap();
 	private Principal principal;
@@ -58,13 +64,13 @@ public class BlogAdminControllerTests {
 				return "testUser";
 			}
 		};
-		controller = new BlogAdminController(blogService, postViewFactory, searchService);
+		controller = new BlogAdminController(blogService, postViewFactory);
 	}
 
 	@Test
 	public void dashboardShowsUsersPosts() {
 		postViewFactory = mock(PostViewFactory.class);
-		controller = new BlogAdminController(blogService, postViewFactory, searchService);
+		controller = new BlogAdminController(blogService, postViewFactory);
 
 		Page<Post> drafts = new PageImpl<Post>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
 		Page<Post> published = new PageImpl<Post>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
@@ -124,40 +130,6 @@ public class BlogAdminControllerTests {
 		String result = controller.createPost(principal, postForm, bindingResult, null);
 
 		assertThat(result, equalTo("redirect:/blog/123-post-title"));
-	}
-
-	@Test
-	public void creatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
-		PostForm postForm = new PostForm();
-		when(blogService.addPost(eq(postForm), anyString())).thenReturn(TEST_POST);
-		controller.createPost(principal, postForm, new BindException(postForm, "postForm"), null);
-		verify(searchService).saveToIndex(any(SearchEntry.class));
-	}
-
-	@Test
-	public void creatingABlogPost_doesNotSaveToSearchIndexIfNotLive() throws Exception {
-		PostForm postForm = new PostForm();
-		Post post = PostBuilder.post().draft().build();
-		when(blogService.addPost(eq(postForm), anyString())).thenReturn(post);
-		controller.createPost(principal, postForm, new BindException(postForm, "postForm"), null);
-		verifyZeroInteractions(searchService);
-	}
-
-	@Test
-	public void updatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
-		long postId = TEST_POST.getId();
-		when(blogService.getPost(eq(postId))).thenReturn(TEST_POST);
-		controller.updatePost(postId, new PostForm(), bindingResult, model);
-		verify(searchService).saveToIndex(any(SearchEntry.class));
-	}
-
-	@Test
-	public void updatingABlogPost_doesNotSaveToSearchIndexIfNotLive() throws Exception {
-		long postId = 123L;
-		Post post = PostBuilder.post().id(postId).draft().build();
-		when(blogService.getPost(eq(postId))).thenReturn(post);
-		controller.updatePost(postId, new PostForm(), bindingResult, model);
-		verifyZeroInteractions(searchService);
 	}
 
 
