@@ -2,12 +2,15 @@ package integration.search;
 
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.core.env.Environment;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.search.configuration.InMemoryElasticSearchConfiguration;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.site.search.SearchController;
 import org.springframework.site.search.SearchEntry;
@@ -22,14 +25,11 @@ import java.text.ParseException;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = ApplicationConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
+@ContextConfiguration(classes = {ApplicationConfiguration.class, InMemoryElasticSearchConfiguration.class}, initializers = ConfigFileApplicationContextInitializer.class)
 @ActiveProfiles("local")
 public class SearchIntegrationTests {
 
@@ -42,6 +42,10 @@ public class SearchIntegrationTests {
 	private SearchEntry entry;
 	private ExtendedModelMap model = new ExtendedModelMap();
 
+
+	@Autowired
+	private Environment env;
+
 	@Before
 	public void setUp() throws Exception {
 		elasticsearchTemplate.deleteIndex(SearchEntry.class);
@@ -51,6 +55,8 @@ public class SearchIntegrationTests {
 
 	@Test
 	public void testSearchContent() {
+		String[] activeProfiles = env.getActiveProfiles();
+
 		searchController.search("raw", 1, model);
 
 		List<SearchEntry> entries = (List<SearchEntry>) model.get("results");

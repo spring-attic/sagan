@@ -10,7 +10,7 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.site.configuration.DocumentationConfiguration;
-import org.springframework.site.configuration.ElasticSearchConfiguration;
+import org.springframework.search.configuration.ElasticSearchConfiguration;
 import org.springframework.site.configuration.GitHubConfiguration;
 import org.springframework.site.configuration.SecurityConfiguration;
 

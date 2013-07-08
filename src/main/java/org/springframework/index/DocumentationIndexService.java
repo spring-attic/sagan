@@ -4,7 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.actuate.metrics.CounterService;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.site.documentation.DocumentationService;
 import org.springframework.site.documentation.Project;
 import org.springframework.stereotype.Service;
@@ -32,7 +31,7 @@ public class DocumentationIndexService {
 		this.counters = counters;
 	}
 
-	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.index.delay:0}")
+//	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.index.delay:0}")
 	public void indexDocumentation() {
 		logger.info("Indexing project documentation");
 		for (final Project project : documentationService.getProjects()) {

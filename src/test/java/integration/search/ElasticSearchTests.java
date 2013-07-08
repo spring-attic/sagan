@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.core.env.Environment;
 import org.springframework.bootstrap.context.initializer.LoggingApplicationContextInitializer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -24,6 +25,7 @@ import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.search.configuration.InMemoryElasticSearchConfiguration;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchEntryBuilder;
@@ -40,7 +42,7 @@ import static org.hamcrest.Matchers.is;
 @Ignore("Useful test for validating elasticsearch API")
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { ApplicationConfiguration.class, JestConfiguration.class }, initializers = {
+@ContextConfiguration(classes = { ApplicationConfiguration.class, JestConfiguration.class, InMemoryElasticSearchConfiguration.class }, initializers = {
 		ConfigFileApplicationContextInitializer.class,
 		LoggingApplicationContextInitializer.class })
 public class ElasticSearchTests {
