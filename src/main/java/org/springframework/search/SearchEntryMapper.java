@@ -1,4 +1,4 @@
-package org.springframework.site.search;
+package org.springframework.search;
 
 public interface SearchEntryMapper<T> {
 

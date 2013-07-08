@@ -7,6 +7,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.FacetedPageImpl;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.search.SearchEntry;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.util.ArrayList;

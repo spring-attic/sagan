@@ -16,7 +16,7 @@ import org.springframework.site.configuration.SecurityConfiguration;
 
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan(basePackages = {"org.springframework.indexer", "org.springframework.site.search"})
+@ComponentScan(basePackages = {"org.springframework.indexer", "org.springframework.search"})
 @EnableScheduling
 @Import({ElasticSearchConfiguration.class, DocumentationConfiguration.class, GitHubConfiguration.class, SecurityConfiguration.class})
 public class IndexerConfiguration {

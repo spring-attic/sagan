@@ -18,7 +18,7 @@ import org.springframework.site.blog.Post;
 import org.springframework.site.blog.PostBuilder;
 import org.springframework.site.blog.PostCategory;
 import org.springframework.site.blog.PostRepository;
-import org.springframework.site.search.SearchService;
+import org.springframework.search.SearchService;
 import org.springframework.site.team.MemberProfile;
 import org.springframework.site.team.TeamRepository;
 import org.springframework.site.web.PageableFactory;

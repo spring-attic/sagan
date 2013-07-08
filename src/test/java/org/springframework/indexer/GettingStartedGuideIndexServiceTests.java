@@ -6,8 +6,8 @@ import org.springframework.bootstrap.actuate.metrics.CounterService;
 import org.springframework.site.guides.GettingStartedGuide;
 import org.springframework.site.guides.GettingStartedService;
 import org.springframework.site.guides.GuideRepo;
-import org.springframework.site.search.SearchEntry;
-import org.springframework.site.search.SearchService;
+import org.springframework.search.SearchEntry;
+import org.springframework.search.SearchService;
 import org.springframework.web.client.RestClientException;
 
 import java.util.ArrayList;

@@ -3,6 +3,8 @@ package org.springframework.site.search;
 import org.junit.Test;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.search.SearchEntry;
+import org.springframework.search.SearchService;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;

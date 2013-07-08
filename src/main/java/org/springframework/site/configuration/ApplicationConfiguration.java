@@ -33,7 +33,7 @@ import javax.sql.DataSource;
 
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan(basePackages = "org.springframework.site")
+@ComponentScan(basePackages = {"org.springframework.site", "org.springframework.search"})
 @EnableScheduling
 public class ApplicationConfiguration {
 

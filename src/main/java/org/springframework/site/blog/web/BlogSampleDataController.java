@@ -2,7 +2,7 @@ package org.springframework.site.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.blog.*;
-import org.springframework.site.search.SearchService;
+import org.springframework.search.SearchService;
 import org.springframework.site.team.GeoLocation;
 import org.springframework.site.team.MemberProfile;
 import org.springframework.site.team.TeamRepository;

@@ -5,7 +5,7 @@ import org.elasticsearch.node.NodeBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.site.search.SearchEntry;
+import org.springframework.search.SearchEntry;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

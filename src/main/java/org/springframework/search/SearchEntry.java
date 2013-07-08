@@ -1,4 +1,4 @@
-package org.springframework.site.search;
+package org.springframework.search;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;

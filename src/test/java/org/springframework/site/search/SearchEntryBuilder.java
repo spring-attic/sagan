@@ -1,5 +1,6 @@
 package org.springframework.site.search;
 
+import org.springframework.search.SearchEntry;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.text.ParseException;

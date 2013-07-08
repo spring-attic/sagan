@@ -2,7 +2,6 @@ package integration.search;
 
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.search.configuration.InMemoryElasticSearchConfiguration;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.site.search.SearchController;
-import org.springframework.site.search.SearchEntry;
+import org.springframework.search.SearchEntry;
 import org.springframework.site.search.SearchEntryBuilder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
