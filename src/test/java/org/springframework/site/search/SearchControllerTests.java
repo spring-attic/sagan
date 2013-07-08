@@ -4,10 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.FacetedPageImpl;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.search.SearchEntry;
+import org.springframework.search.SearchService;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.util.ArrayList;
@@ -18,13 +18,13 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 public class SearchControllerTests {
 
 	@Mock
-	private ElasticsearchTemplate elasticsearchTemplate;
+	private SearchService searchService;
 
 	private SearchController controller;
 	private ExtendedModelMap model = new ExtendedModelMap();
@@ -34,11 +34,11 @@ public class SearchControllerTests {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		controller = new SearchController(elasticsearchTemplate);
+		controller = new SearchController(searchService);
 		SearchEntry entry = new SearchEntry();
 		entries.add(entry);
 		resultsPage = new FacetedPageImpl<SearchEntry>(entries);
-		when(elasticsearchTemplate.queryForPage(any(SearchQuery.class), eq(SearchEntry.class))).thenReturn(resultsPage);
+		when(searchService.search(anyString(), any(Pageable.class))).thenReturn(resultsPage);
 	}
 
 	@Test

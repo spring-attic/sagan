@@ -41,10 +41,6 @@ public class SearchIntegrationTests {
 	private SearchEntry entry;
 	private ExtendedModelMap model = new ExtendedModelMap();
 
-
-	@Autowired
-	private Environment env;
-
 	@Before
 	public void setUp() throws Exception {
 		elasticsearchTemplate.deleteIndex(SearchEntry.class);
@@ -54,8 +50,6 @@ public class SearchIntegrationTests {
 
 	@Test
 	public void testSearchContent() {
-		String[] activeProfiles = env.getActiveProfiles();
-
 		searchController.search("raw", 1, model);
 
 		List<SearchEntry> entries = (List<SearchEntry>) model.get("results");
