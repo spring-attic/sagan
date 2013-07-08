@@ -55,4 +55,7 @@ public class SearchService {
 		return entries;
 	}
 
+	public void deleteIndex() {
+		elasticsearchOperations.deleteIndex(SearchEntry.class);
+	}
 }
