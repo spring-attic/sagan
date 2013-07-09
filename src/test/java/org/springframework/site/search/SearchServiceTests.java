@@ -1,23 +1,21 @@
 package org.springframework.site.search;
 
+import io.searchbox.client.JestClient;
+import io.searchbox.core.Index;
 import org.junit.Test;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.search.SearchEntry;
 import org.springframework.search.SearchService;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class SearchServiceTests {
 
-	private ElasticsearchOperations elasticsearch = mock(ElasticsearchOperations.class);
-	private SearchService searchService = new SearchService(elasticsearch);
+	private JestClient jestClient = mock(JestClient.class);
+	private SearchService searchService = new SearchService(jestClient);
 
 	@Test
-	public void saveAnEntry() {
+	public void saveAnEntry() throws Exception {
 		searchService.saveToIndex(new SearchEntry());
-		verify(elasticsearch).index(any(IndexQuery.class));
+		verify(jestClient).execute(any(Index.class));
 	}
 }

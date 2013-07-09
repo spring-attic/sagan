@@ -1,11 +1,11 @@
 package org.springframework.site.blog;
 
-import org.elasticsearch.ElasticSearchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.site.blog.web.EntityNotFoundException;
+import org.springframework.search.SearchException;
 import org.springframework.search.SearchService;
+import org.springframework.site.blog.web.EntityNotFoundException;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
 import org.springframework.site.team.MemberProfile;
@@ -145,7 +145,7 @@ public class BlogService {
 		if (post.isLiveOn(dateService.now())) {
 			try {
 				searchService.saveToIndex(mapper.map(post));
-			} catch(ElasticSearchException e) {
+			} catch(SearchException e) {
 				logger.error(e);
 			}
 		}

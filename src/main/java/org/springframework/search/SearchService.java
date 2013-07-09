@@ -1,58 +1,66 @@
 package org.springframework.search;
 
+import io.searchbox.Action;
+import io.searchbox.Parameters;
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestResult;
+import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.indices.DeleteIndex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.List;
 
-import static org.elasticsearch.index.query.FilterBuilders.*;
-import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
-import static org.elasticsearch.index.query.QueryBuilders.matchPhraseQuery;
 
 @Service
 public class SearchService {
 
-	private ElasticsearchOperations elasticsearchOperations;
+	final SearchQueryBuilder searchQueryBuilder = new SearchQueryBuilder();
+	private final JestClient jestClient;
 
 	@Autowired
-	public SearchService(ElasticsearchOperations elasticsearchOperations) {
-		this.elasticsearchOperations = elasticsearchOperations;
+	public SearchService(JestClient jestClient) {
+		this.jestClient = jestClient;
 	}
 
 	public void saveToIndex(SearchEntry entry) {
-		IndexQuery indexQuery = new IndexQuery();
-		indexQuery.setId(entry.getId());
-		indexQuery.setObject(entry);
-		elasticsearchOperations.index(indexQuery);
-		elasticsearchOperations.refresh(SearchEntry.class, false);
+		Index newIndex = new Index.Builder(entry)
+				.id(entry.getId())
+				.index("site")
+				.type("site")
+				.build();
+
+		newIndex.addParameter(Parameters.REFRESH, true);
+		execute(newIndex);
 	}
 
-	public Page<SearchEntry> search(String query, Pageable pageable) {
-		NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(matchAllQuery());
-		if (!query.equals("")) {
-			searchQueryBuilder
-					.withFilter(
-							andFilter(
-									numericRangeFilter("publishAt").lte(new Date().getTime()),
-									orFilter(
-											queryFilter(matchPhraseQuery("title", query)),
-											queryFilter(matchPhraseQuery("rawContent", query))
-									)
-							)
-					);
+	private JestResult execute(Action action) {
+		try {
+			return jestClient.execute(action);
+		} catch (Exception e) {
+			throw new SearchException(e);
 		}
-		SearchQuery searchQuery = searchQueryBuilder.build();
-		searchQuery.setPageable(pageable);
-		return elasticsearchOperations.queryForPage(searchQuery, SearchEntry.class);
 	}
 
-	public void deleteIndex() {
-		elasticsearchOperations.deleteIndex(SearchEntry.class);
+	public Page<SearchEntry> search(String term, Pageable pageable) {
+		Search search;
+		if (term.equals("")) {
+			search = searchQueryBuilder.forEmptyQuery(pageable);
+		} else {
+			search = searchQueryBuilder.forQuery(term, pageable);
+		}
+
+		JestResult jestResult = execute(search);
+		List<SearchEntry> searchEntries = jestResult.getSourceAsObjectList(SearchEntry.class);
+		return new PageImpl<SearchEntry>(searchEntries);
 	}
+
+	public void deleteIndex()  {
+		execute(new DeleteIndex("site"));
+	}
+
 }
