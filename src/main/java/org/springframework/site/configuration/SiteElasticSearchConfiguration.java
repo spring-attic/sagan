@@ -3,12 +3,12 @@ package org.springframework.site.configuration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
-import org.springframework.search.configuration.ElasticSearchConfiguration;
+import org.springframework.search.configuration.SearchConfiguration;
 import org.springframework.search.configuration.HostedElasticSearchConfiguration;
 import org.springframework.search.configuration.LocalHostElasticSearchConfiguration;
 
 @Configuration
-@Import({ElasticSearchConfiguration.class})
+@Import({SearchConfiguration.class})
 public class SiteElasticSearchConfiguration {
 
 	@Configuration

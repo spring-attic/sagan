@@ -9,7 +9,6 @@ import org.springframework.search.SearchEntry;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.inject.Singleton;
 
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 
@@ -33,7 +32,6 @@ public class InMemoryElasticSearchConfiguration {
 	}
 
 	@Bean
-	@Singleton
 	public Client elasticSearchClient() throws Exception {
 		NodeBuilder nodeBuilder = nodeBuilder().local(false);
 		nodeBuilder.getSettings().put("network.host", "127.0.0.1");

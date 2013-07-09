@@ -1,8 +1,6 @@
 package org.springframework.search;
 
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +30,6 @@ public class SearchEntry {
 
 	// TODO: maybe we don't need this in the index?
 	@Column
-	@Field(type = FieldType.Long)
 	private Date publishAt = new Date();
 
 	public String getSummary() {

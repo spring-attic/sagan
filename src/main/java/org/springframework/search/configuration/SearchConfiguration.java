@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 
 @Configuration
-public class ElasticSearchConfiguration {
+public class SearchConfiguration {
 
 	@Bean
 	public ElasticsearchOperations elasticsearchTemplate(Client client) throws Exception {

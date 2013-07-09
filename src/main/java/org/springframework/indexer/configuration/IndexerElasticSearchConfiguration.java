@@ -10,11 +10,11 @@ public class IndexerElasticSearchConfiguration {
 
 	@Configuration
 	@Profile({"default", "local"})
-	protected static class CrawlerInMemoryConfiguration extends InMemoryElasticSearchConfiguration {}
+	protected static class IndexerInMemoryConfiguration extends InMemoryElasticSearchConfiguration {}
 
 	@Configuration
 	@Profile({"staging"})
-	protected static class CrawlerStagingConfiguration extends HostedElasticSearchConfiguration {}
+	protected static class IndexerStagingConfiguration extends HostedElasticSearchConfiguration {}
 
 
 }

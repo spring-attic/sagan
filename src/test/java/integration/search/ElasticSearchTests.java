@@ -1,13 +1,10 @@
 package integration.search;
 
+import io.searchbox.Parameters;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
-
-import java.util.Date;
-import java.util.List;
-
 import org.elasticsearch.index.query.FilterBuilders;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -19,18 +16,17 @@ import org.springframework.bootstrap.context.initializer.LoggingApplicationConte
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.query.Criteria;
-import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.data.elasticsearch.core.query.*;
+import org.springframework.search.SearchEntry;
 import org.springframework.search.configuration.InMemoryElasticSearchConfiguration;
 import org.springframework.site.configuration.ApplicationConfiguration;
-import org.springframework.search.SearchEntry;
 import org.springframework.site.search.SearchEntryBuilder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import java.util.Date;
+import java.util.List;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 import static org.elasticsearch.index.query.QueryBuilders.matchPhraseQuery;
@@ -119,11 +115,15 @@ public class ElasticSearchTests {
 				.title("This week in Spring")
 				.rawContent("This is some raw content").build();
 
-		this.jestClient.execute(new Index.Builder(entry)
+		Index index = new Index.Builder(entry)
 				.id("2")
 				.index("site")
 				.type("site")
-				.build());
+				.build();
+		index.addParameter(Parameters.REFRESH, true);
+		JestResult result = this.jestClient.execute(index);
+
+		System.out.println(result.getJsonString());
 		return entry;
 	}
 
