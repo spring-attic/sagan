@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.indexer.configuration.IndexerConfiguration;
 
 @Configuration
-@Import({IndexerConfiguration.class, ElasticsearchStubbedConfiguration.class})
+@Import({IndexerConfiguration.class})
 public class IndexerOfflineConfiguration {
 
 }

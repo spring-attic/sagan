@@ -4,22 +4,14 @@ import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.ClientConfig;
 import io.searchbox.client.config.ClientConstants;
-import org.elasticsearch.client.Client;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 
 import java.util.LinkedHashSet;
 
 @Configuration
 public class SearchConfiguration {
-
-	@Bean
-	public ElasticsearchOperations elasticsearchTemplate(Client client) throws Exception {
-		return new ElasticsearchTemplate(client);
-	}
 
 	@Value("${elasticsearch.cluster.nodes:localhost:9300}")
 	private String clusterNodes = "localhost:9300";

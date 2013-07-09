@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class SearchService {
 
@@ -31,7 +30,7 @@ public class SearchService {
 		Index newIndex = new Index.Builder(entry)
 				.id(entry.getId())
 				.index("site")
-				.type("site")
+				.type("site") //TODO this should come from the 'entry'
 				.build();
 
 		newIndex.addParameter(Parameters.REFRESH, true);
@@ -53,7 +52,6 @@ public class SearchService {
 		} else {
 			search = searchQueryBuilder.forQuery(term, pageable);
 		}
-
 		JestResult jestResult = execute(search);
 		List<SearchEntry> searchEntries = jestResult.getSourceAsObjectList(SearchEntry.class);
 		return new PageImpl<SearchEntry>(searchEntries);

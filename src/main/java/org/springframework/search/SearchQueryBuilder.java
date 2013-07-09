@@ -1,7 +1,7 @@
 package org.springframework.search;
 
 import io.searchbox.core.Search;
-import org.joda.time.format.ISODateTimeFormat;
+import org.elasticsearch.common.joda.time.format.ISODateTimeFormat;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Date;

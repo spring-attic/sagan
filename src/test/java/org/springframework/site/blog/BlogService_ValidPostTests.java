@@ -1,6 +1,5 @@
 package org.springframework.site.blog;
 
-import org.elasticsearch.client.transport.NoNodeAvailableException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,6 +10,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 import org.springframework.search.SearchEntry;
+import org.springframework.search.SearchException;
 import org.springframework.search.SearchService;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.MarkdownService;
@@ -22,16 +22,10 @@ import org.springframework.test.util.ReflectionTestUtils;
 import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_ValidPostTests {
@@ -162,8 +156,7 @@ public class BlogService_ValidPostTests {
 	@Test
 	public void blogIsSavedWhenSearchServiceIsDown() {
 		reset(searchService);
-		NoNodeAvailableException exception = new NoNodeAvailableException();
-		doThrow(exception).when(searchService).saveToIndex(any(SearchEntry.class));
+		doThrow(SearchException.class).when(searchService).saveToIndex(any(SearchEntry.class));
 		post = service.addPost(postForm, AUTHOR_ID);
 		verify(postRepository).save(post);
 	}

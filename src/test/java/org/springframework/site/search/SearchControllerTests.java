@@ -4,8 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.FacetedPageImpl;
 import org.springframework.search.SearchEntry;
 import org.springframework.search.SearchService;
 import org.springframework.ui.ExtendedModelMap;
@@ -28,7 +29,7 @@ public class SearchControllerTests {
 
 	private SearchController controller;
 	private ExtendedModelMap model = new ExtendedModelMap();
-	private FacetedPageImpl<SearchEntry> resultsPage;
+	private Page<SearchEntry> resultsPage;
 	private List<SearchEntry> entries = new ArrayList<SearchEntry>();
 
 	@Before
@@ -37,7 +38,7 @@ public class SearchControllerTests {
 		controller = new SearchController(searchService);
 		SearchEntry entry = new SearchEntry();
 		entries.add(entry);
-		resultsPage = new FacetedPageImpl<SearchEntry>(entries);
+		resultsPage = new PageImpl<SearchEntry>(entries);
 		when(searchService.search(anyString(), any(Pageable.class))).thenReturn(resultsPage);
 	}
 
