@@ -114,7 +114,7 @@ public class BlogService_UpdatePostTests {
 	public void draftWithNullPublishDate() {
 		postForm.setDraft(true);
 		postForm.setPublishAt(null);
-		post = service.addPost(postForm, AUTHOR);
+		service.updatePost(post, postForm);
 		assertThat(post.getPublishAt(), is(nullValue()));
 	}
 
@@ -122,7 +122,7 @@ public class BlogService_UpdatePostTests {
 	public void postWithNullPublishDateSetsPublishAtToNow() {
 		postForm.setDraft(false);
 		postForm.setPublishAt(null);
-		post = service.addPost(postForm, AUTHOR);
+		service.updatePost(post, postForm);
 		assertThat(post.getPublishAt(), equalTo(now));
 	}
 
