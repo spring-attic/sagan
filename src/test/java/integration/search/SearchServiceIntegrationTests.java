@@ -14,7 +14,6 @@ import org.springframework.search.SearchService;
 import org.springframework.search.configuration.InMemoryElasticSearchConfiguration;
 import org.springframework.site.configuration.ApplicationConfiguration;
 import org.springframework.site.search.SearchEntryBuilder;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -23,16 +22,12 @@ import java.text.ParseException;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {ApplicationConfiguration.class, InMemoryElasticSearchConfiguration.class},
 		initializers = ConfigFileApplicationContextInitializer.class)
-@ActiveProfiles("local")
 public class SearchServiceIntegrationTests {
 
 	private final Pageable pageable = new PageRequest(0,10);

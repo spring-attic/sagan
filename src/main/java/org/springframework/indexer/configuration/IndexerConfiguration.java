@@ -10,7 +10,7 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.site.configuration.DocumentationConfiguration;
-import org.springframework.search.configuration.SearchConfiguration;
+import org.springframework.search.configuration.SearchClientConfiguration;
 import org.springframework.site.configuration.GitHubConfiguration;
 import org.springframework.site.configuration.SecurityConfiguration;
 
@@ -18,7 +18,7 @@ import org.springframework.site.configuration.SecurityConfiguration;
 @Configuration
 @ComponentScan(basePackages = {"org.springframework.indexer", "org.springframework.search"})
 @EnableScheduling
-@Import({SearchConfiguration.class, DocumentationConfiguration.class, GitHubConfiguration.class, SecurityConfiguration.class})
+@Import({SearchClientConfiguration.class, DocumentationConfiguration.class, GitHubConfiguration.class, SecurityConfiguration.class})
 public class IndexerConfiguration {
 
 	public static void main(String[] args) {
