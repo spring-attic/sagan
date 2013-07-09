@@ -4,12 +4,20 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.node.NodeBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.search.SearchService;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 
 public class InMemoryElasticSearchConfiguration {
+
+	@Autowired
+	private SearchService searchService;
+
+	@Autowired
+	private Client client;
 
 	@Bean
 	public Client elasticSearchClient() throws Exception {
@@ -19,8 +27,10 @@ public class InMemoryElasticSearchConfiguration {
 		return client;
 	}
 
-	@Autowired
-	private Client client;
+	@PostConstruct
+	public void configureSearchService() {
+		searchService.setUseRefresh(true);
+	}
 
 	@PreDestroy
 	public void closeClient() throws Exception {

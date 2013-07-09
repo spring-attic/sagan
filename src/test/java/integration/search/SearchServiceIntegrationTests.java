@@ -40,6 +40,10 @@ public class SearchServiceIntegrationTests {
 	@Before
 	public void setUp() throws Exception {
 		searchService.deleteIndex();
+		searchService.createIndex();
+	}
+
+	private void indexSingleEntry() throws ParseException {
 		entry = createSingleEntry("1");
 		searchService.saveToIndex(entry);
 	}
@@ -62,22 +66,27 @@ public class SearchServiceIntegrationTests {
 	}
 
 	@Test
-	public void testSearchContent() {
+	public void testSearchContent() throws ParseException {
+		indexSingleEntry();
 		assertThatSearchReturnsEntry("raw");
 	}
 
 	@Test
-	public void testSearchTitle() {
+	public void testSearchTitle() throws ParseException {
+		indexSingleEntry();
 		assertThatSearchReturnsEntry("Spring");
 	}
 
 	@Test
-	public void testSearchWithMultipleWords() {
+	public void testSearchWithMultipleWords() throws ParseException {
+		indexSingleEntry();
 		assertThatSearchReturnsEntry("raw content");
 	}
 
 	@Test
 	public void searchOnlyIncludesEntriesMatchingSearchTerm() throws ParseException {
+		indexSingleEntry();
+
 		SearchEntry secondEntry = SearchEntryBuilder.entry()
 				.id("2")
 				.title("Test")
@@ -86,14 +95,13 @@ public class SearchServiceIntegrationTests {
 
 		searchService.saveToIndex(secondEntry);
 		Page<SearchEntry> searchEntries = searchService.search("content", pageable);
-		List<SearchEntry> entries = searchEntries.getContent();;
+		List<SearchEntry> entries = searchEntries.getContent();
 		assertThat(entries.size(), equalTo(1));
 	}
 
 	@Test
 	public void searchPagesProperly() throws ParseException {
-		searchService.deleteIndex();
-		SearchEntryBuilder builder = SearchEntryBuilder.entry()
+		SearchEntryBuilder builder  = SearchEntryBuilder.entry()
 				.rawContent("raw content")
 				.summary("Html summary")
 				.publishAt("2013-01-01 10:00");

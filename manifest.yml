@@ -6,11 +6,11 @@ applications:
   host: sagan
   domain: cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
-  command: chmod +x *.sh && ./site.sh --server.port=$PORT --spring.profiles.active=$SPRING_PROFILE
+  command: chmod +x *.sh && ./site.sh --server.port=$PORT --spring.profiles.active=$SPRING_PROFILE --spring.profiles.active=$SPRING_PROFILE --elasticsearch.client.endpoint=https://qlmsjwfa.api.qbox.io
 - name: sagan-indexer
   memory: 2G
   instances: 1
   host: sagan-indexer
   domain: cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
-  command: chmod +x *.sh && ./indexer.sh --server.port=$PORT --search.indexer.delay=0
+  command: chmod +x *.sh && ./indexer.sh --server.port=$PORT --search.indexer.delay=0 --elasticsearch.client.endpoint=https://qlmsjwfa.api.qbox.io
