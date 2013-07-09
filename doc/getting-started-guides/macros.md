@@ -7,6 +7,16 @@
 [mvn]: http://maven.apache.org/download.cgi
 </#macro>
 
+<#macro prereq-editor-android-buildtools>
+ - A favorite text editor or IDE
+ - [Android SDK][sdk]
+ - [Maven 3.0][mvn] or later
+ - An Android device or Emulator
+
+[sdk]: http://developer.android.com/sdk/index.html
+[mvn]: http://maven.apache.org/download.cgi
+</#macro>
+
 
 <#macro how_to_complete_this_guide jump_ahead='Create a resource representation class'>
 How to complete this guide
@@ -32,6 +42,15 @@ To **skip the basics**, do the following:
 First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Getting Started with Maven](../gs-maven/README.md) or [Getting Started with Gradle](../gs-gradle/README.md).
 </#macro>
 
+<#macro android-build-system-intro>
+In this section you set up a basic build script and then create a simple application. 
+
+> **Note:** If you are new to Android projects, before you proceed, refer to [Getting Started with Android](../gs-android/README.md) to help you configure your development environment. 
+
+You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Getting Started with Maven](../gs-maven-android/README.md) or [Getting Started with Gradle](../gs-gradle-android/README.md).
+ 
+</#macro>
+
 
 <#macro create_directory_structure_hello>
 ### Create the directory structure
@@ -44,6 +63,29 @@ In a project directory of your choosing, create the following subdirectory struc
                 └── hello
 </#macro>
 
+<#macro create-directory-structure-org-hello>
+### Create the directory structure
+
+In a project directory of your choosing, create the following subdirectory structure; for example, with the following command on Mac or Linux:
+
+```sh
+$ mkdir -p src/main/java/org/hello
+```
+
+    └── src
+        └── main
+            └── java
+                └── org
+                    └── hello
+</#macro>
+
+<#macro create-android-manifest>
+### Create an Android manifest
+
+The [Android Manifest] contains all the information required to run an Android application, and it cannot build without one.
+
+[Android Manifest]: http://developer.android.com/guide/topics/manifest/manifest-intro.html
+</#macro>
 
 <#macro build_status>
 [![Build Status](https://drone.io/github.com/springframework-meta/${project_id}/status.png)](https://drone.io/github.com/springframework-meta/${project_id}/latest)
@@ -72,6 +114,18 @@ TODO: mention that we're using Spring Bootstrap's [_starter POMs_](../gs-bootstr
 Note to experienced Maven users who are unaccustomed to using an external parent project: you can take it out later, it's just there to reduce the amount of code you have to write to get started.
 </#macro>
 
+<#macro build-and-run-android>
+Build and run the client
+------------------------
+
+With an attached device or emulator running, invoke the code and see the results of the REST request:
+
+```sh
+$ mvn clean package android:deploy android:run
+```
+
+The command builds the Android app and runs it in the emulator or attached device.
+</#macro>
 
 <#macro build_an_executable_jar>
 ### Build an executable JAR
