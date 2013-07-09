@@ -4,16 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.site.guides.GuideHtml;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.web.client.RestOperations;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class GitHubServiceTests {
@@ -34,15 +34,12 @@ public class GitHubServiceTests {
 		when(gitHub.restOperations()).thenReturn(restOperations);
 
 		String filePath = "/some/path";
-		Map<String, String> response = new HashMap<String, String>();
-		response.put("content", "IyB0aGlzIGlzIGEgaGVhZGVy");
-		when(restOperations.getForObject(eq(GitHubService.HOSTNAME + filePath), eq(Map.class))).thenReturn(response);
-
 		String htmlResponse = "<h1>this is a header</h1>";
-		when(restOperations.postForObject(anyString(), eq("# this is a header"), eq(String.class))).thenReturn(htmlResponse);
-
+		GuideHtml response = new GuideHtml(htmlResponse);
+		when(restOperations.getForObject(anyString(), any(Class.class))).thenReturn(response);
 		String html = new GitHubService(gitHub).getRawFileAsHtml(filePath);
 
+		verify(restOperations).getForObject(eq(GitHubService.HOSTNAME + filePath), eq(GuideHtml.class));
 		assertThat(html, is(htmlResponse));
 	}
 }

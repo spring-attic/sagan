@@ -16,9 +16,14 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring3.SpringTemplateEngine;
+import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,6 +38,9 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	@Autowired
 	private SpringTemplateEngine templateEngine;
 
+	@Autowired
+	private ThymeleafViewResolver resolver;
+
 	private Map<String, MediaType> mimeTypes = new HashMap<String, MediaType>();
 
 	{
@@ -45,6 +53,11 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	public void configureThymeleafSecurity() {
 		templateEngine.addDialect(new SpringSecurityDialect());
 		templateEngine.addDialect(new LayoutDialect());
+	}
+
+	@PostConstruct
+	public void addUtf8EncodingToThymeleaf() {
+		resolver.setCharacterEncoding("UTF-8");
 	}
 
 	@Override

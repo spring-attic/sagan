@@ -4,9 +4,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.site.guides.GuideHtmlConverter;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.impl.GitHubTemplate;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @ComponentScan({"org.springframework.site.guides", "org.springframework.site.services"})
@@ -31,7 +36,21 @@ public class GitHubConfiguration {
 
 	@Bean
 	public GitHub gitHubTemplate() {
-		return new GitHubTemplate(accessToken);
+		return new GuideGitHubTemplate(accessToken);
 	}
 
+	private static class GuideGitHubTemplate extends GitHubTemplate {
+
+		private GuideGitHubTemplate(String accessToken) {
+			super(accessToken);
+		}
+
+		@Override
+		protected List<HttpMessageConverter<?>> getMessageConverters() {
+			List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
+			converters.add(new GuideHtmlConverter());
+			converters.addAll(super.getMessageConverters());
+			return converters;
+		}
+	}
 }
