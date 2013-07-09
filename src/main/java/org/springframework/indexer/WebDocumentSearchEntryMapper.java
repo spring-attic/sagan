@@ -12,7 +12,7 @@ public class WebDocumentSearchEntryMapper implements SearchEntryMapper<WebDocume
 	public SearchEntry map(WebDocument document) {
 		Document input = document.getDocument();
 		SearchEntry entry = new SearchEntry();
-		entry.setId(document.getPath());
+		entry.setId(document.getPath().replaceAll("/", "_"));
 		entry.setPublishAt(new Date(0L));
 		String text = input.text();
 		entry.setRawContent(text);
