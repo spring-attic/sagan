@@ -34,12 +34,9 @@ public class SearchService {
 	}
 
 	public Page<SearchEntry> search(String query, Pageable pageable) {
-		Page<SearchEntry> entries;
-		if (query.equals("")) {
-			SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchAllQuery()).build();
-			entries = elasticsearchOperations.queryForPage(searchQuery, SearchEntry.class);
-		} else {
-			SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchAllQuery())
+		NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(matchAllQuery());
+		if (!query.equals("")) {
+			searchQueryBuilder
 					.withFilter(
 							andFilter(
 									numericRangeFilter("publishAt").lte(new Date().getTime()),
@@ -48,11 +45,11 @@ public class SearchService {
 											queryFilter(matchPhraseQuery("rawContent", query))
 									)
 							)
-					).build();
-			searchQuery.setPageable(pageable);
-			entries = elasticsearchOperations.queryForPage(searchQuery, SearchEntry.class);
+					);
 		}
-		return entries;
+		SearchQuery searchQuery = searchQueryBuilder.build();
+		searchQuery.setPageable(pageable);
+		return elasticsearchOperations.queryForPage(searchQuery, SearchEntry.class);
 	}
 
 	public void deleteIndex() {

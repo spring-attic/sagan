@@ -23,7 +23,10 @@ import java.text.ParseException;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -92,4 +95,26 @@ public class SearchServiceIntegrationTests {
 		assertThat(entries.size(), equalTo(1));
 	}
 
+	@Test
+	public void searchPagesProperly() throws ParseException {
+		searchService.deleteIndex();
+		SearchEntryBuilder builder = SearchEntryBuilder.entry()
+				.rawContent("raw content")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00");
+
+		SearchEntry entry1 = builder.id("item1").title("Item 1").build();
+		searchService.saveToIndex(entry1);
+
+		SearchEntry entry2 = builder.id("item2").title("Item 2").build();
+		searchService.saveToIndex(entry2);
+
+		Pageable page1 = new PageRequest(0,1);
+		Page<SearchEntry> searchEntries1 = searchService.search("content", page1);
+		assertThat(searchEntries1.getContent().get(0).getId(), equalTo(entry1.getId()));
+
+		Pageable page2 = new PageRequest(1,1);
+		Page<SearchEntry> searchEntries2 = searchService.search("content", page2);
+		assertThat(searchEntries2.getContent().get(0).getId(), equalTo(entry2.getId()));
+	}
 }
