@@ -24,7 +24,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.site.blog.feed.BlogPostAtomViewer;
 import org.springframework.site.services.DateService;
 import org.springframework.site.services.SiteUrl;
@@ -34,7 +33,6 @@ import javax.sql.DataSource;
 @EnableAutoConfiguration
 @Configuration
 @ComponentScan(basePackages = {"org.springframework.site", "org.springframework.search"})
-@EnableScheduling
 public class ApplicationConfiguration {
 
 	public static void main(String[] args) {
