@@ -6,7 +6,7 @@
 	<groupId>org.springframework</groupId>
 	<artifactId>springframework-site</artifactId>
 	<version>0.0.1.SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>executable-jar</packaging>
 
 	<name>springframework-site</name>
 
@@ -134,12 +134,12 @@
 			<artifactId>hsqldb</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.2-1002-jdbc4</version>
-            <scope>runtime</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.2-1002-jdbc4</version>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jdbc</artifactId>
@@ -178,11 +178,11 @@
 			</exclusions>
 		</dependency>
 
-        <dependency>
-            <groupId>org.cloudfoundry</groupId>
-            <artifactId>cloudfoundry-runtime</artifactId>
-            <version>0.8.4</version>
-        </dependency>
+		<dependency>
+			<groupId>org.cloudfoundry</groupId>
+			<artifactId>cloudfoundry-runtime</artifactId>
+			<version>0.8.4</version>
+		</dependency>
 
 		<!-- Test scope -->
 
@@ -246,9 +246,14 @@
 			</resource>
 		</resources>
 		<plugins>
-			<!-- plugin> <groupId>org.springframework.bootstrap</groupId> <artifactId>spring-bootstrap-maven-plugin</artifactId> 
-				<version>${spring.bootstrap.version}</version> <configuration> <mainClass>${start-class}</mainClass> 
-				</configuration> </plugin -->
+			<plugin>
+				<groupId>org.springframework.bootstrap</groupId>
+				<artifactId>spring-bootstrap-maven-plugin</artifactId>
+				<version>${spring.bootstrap.version}</version>
+				<configuration>
+					<mainClass>${start-class}</mainClass>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>pl.project13.maven</groupId>
 				<artifactId>git-commit-id-plugin</artifactId>
@@ -299,28 +304,6 @@
 						</resource>
 					</resources>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-                <configuration>
-                    <filters>
-                        <filter>
-                            <artifact>*:*</artifact>
-                            <excludes>
-                                <exclude>META-INF/*.SF</exclude>
-                                <exclude>META-INF/*.DSA</exclude>
-                                <exclude>META-INF/*.RSA</exclude>
-                                <exclude>META-INF/license*</exclude>
-                                <exclude>META-INF/LICENSE*</exclude>
-                                <exclude>LICENSE*</exclude>
-                                <exclude>LICENSE/*</exclude>
-                                <exclude>license*</exclude>
-                                <exclude>license/*</exclude>
-                            </excludes>
-                        </filter>
-                    </filters>
-                </configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
