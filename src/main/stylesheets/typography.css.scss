@@ -1,5 +1,7 @@
 $base-font-family: 'Open Sans', sans-serif;
 $secondary-font-family: Quicksand, sans-serif;
+$slate: #44474C;
+$navy: #3A5056;
 
 body, h1, h2, h3, p, input {
   font-family: $base-font-family;
@@ -8,21 +10,27 @@ body, h1, h2, h3, p, input {
 }
 
 h1 {
-	font-size: 32px;
-  font-family: $secondary-font-family;
+	font-size: 30px;
+  font-weight: 600;
+  color: $slate;
+  line-height: 39px;
 }
 
 h2 {
-	font-size: 19px;
-  font-weight: 400;
+	font-size: 18px;
+  font-weight: 600;
+  line-height: 30px;
+  color: $navy;
 }
 
 h3, .popover-title {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 27px;
 }
 p, .list-link {
   font-size: 14px;
   line-height: 21px;
+  color: #665A6B;
 }
 

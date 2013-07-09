@@ -5,8 +5,9 @@
 	<title>Style guide</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap.css}" href="../../bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap-responsive.css}" href="../../bootstrap/css/bootstrap-responsive.min.css" />
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" />
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,500, 600, 700" />
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Quicksand:400,700" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata:400,700">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/font-awesome/css/font-awesome.min.css}" href="../../font-awesome/css/font-awesome.min.css" />
 
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css.css}" href="../../css/main.css.css" />
@@ -69,16 +70,18 @@
         </h1>
       </div>
       <div class="row-fluid">
-        <p class="header--content-subtitle span8">
+        <h3 class="header--content-subtitle span8">
           Subttile Ligula Risus Tristique Pharetra and a <a href="#" class="header--content-subtitle--link">link</a>
-        </p>
+        </h3>
       </div>
     </div>
  	</div>
 
   <div class="body--container with-filter container-fluid ">
-    <h2>Search Styles</h2>  
-    <h3>Filter on a page</h3>
+    <h1>Search Styles</h2>  
+    <div class="title-divider"></div>
+    <h2>Filter on a page</h2>
+    <div class="title-divder"></div>
     <div class="row-fluid filter--container">
       <i class="icon-search floating-input--icon"></i>
       <input type="text" class="floating-input span6" placeholder="filter">
@@ -94,38 +97,39 @@
     </pre>
     <div class="row--container">
       <div class="row-fluid">
-        <h2>Page List Layouts</h2>    
-        <h3>3 Column layout, with link and descriptions</h3>
+        <h1>Page List Layouts</h1>    
+        <div class="title-divider"></div>
+        <h2>3 Column layout, with link and descriptions</h2>
       </div>
       <div class="row-fluid body--container--row">
         <div class="span4">
-          <a href="#" class="body--container--link">Getting started building a RESTful web service</a>
+          <a href="#" class="body--container--link"> <h3> Getting started building a RESTful web service </h3></a>
           <p>Aenean eu leo quam. Pellentesque ornare sem</p>
         </div>
 
         <div class="span4">
-          <a href="#" class="body--container--link">Getting started building a RESTful web service</a>
+          <a href="#" class="body--container--link"> <h3> Getting started building a RESTful web service </h3></a>
           <p>Aenean eu leo quam. Pellentesque ornare sem</p>
         </div>
 
         <div class="span4">
-          <a href="#" class="body--container--link" >Getting started building a RESTful web service</a>
+          <a href="#" class="body--container--link" > <h3> Getting started building a RESTful web service </h3></a>
           <p>Aenean eu leo quam. Pellentesque ornare sem</p>
         </div>
       </div>
       <div class="row-fluid body--container--row">
         <div class="span4">
-          <a href="#" class="body--container--link">Getting started building a RESTful web service</a>
+          <a href="#" class="body--container--link"> <h3> Getting started building a RESTful web service </h3></a>
           <p>Aenean eu leo quam. Pellentesque ornare sem</p>
         </div>
 
         <div class="span4">
-          <a href="#" class="body--container--link">Getting started building a RESTful web service</a>
+          <a href="#" class="body--container--link"> <h3> Getting started building a RESTful web service </h3></a>
           <p>Aenean eu leo quam. Pellentesque ornare sem</p>
         </div>
 
         <div class="span4">
-          <a href="#" class="body--container--link" >Getting started building a RESTful web service</a>
+          <a href="#" class="body--container--link" > <h3> Getting started building a RESTful web service </h3></a>
           <p>Aenean eu leo quam. Pellentesque ornare sem</p>
         </div>
       </div>
@@ -158,7 +162,7 @@
 
     <div class="row--container">
       <div class="row-fluid">
-        <h3>6 column grid with links and popover</h3>
+        <h2>6 column grid with links and popover</h2>
       </div>
       <div class="row-fluid body--container--row">
         <div class="span2">
@@ -451,7 +455,7 @@
       &lt;/div&gt;
     </pre>
     <div class="row--container">
-      <h3> 3 Column grid with bottom slide</h3>
+      <h2> 3 Column grid with bottom slide</h2>
       <div class="row-fluid body--container--row">
         <div class="span4 bottom-slide--container">
           <a href="">
@@ -538,6 +542,61 @@
           &lt;/div&gt;
         &lt;/div&gt;
       </pre>
+    </div>
+    <div class="row--container">
+      <h2>Content Layout</h2>
+      <div class="row-fluid">
+        <div class="span9">
+          <h1>Donec id elit non mi porta gravida at eget metus. Donec id elit non mi porta gravida at eget metus.</h1>
+          <h3>Nullam quis risus eget urna mollis ornare vel eu leo. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</h3>
+          <div class="title-divider"></div>
+          <div class="body--container--rowr">
+            <h2>What you'll build</h2>
+            <p>This guide will walk you through creating a "hello world" RESTful web service with Spring. The service will accept HTTP GET requests at:</p>
+            <div class="code-snippet">
+              {"id":1,"content":"Hello, World!"}
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="span3">
+          <div class="body--container--row">
+            <h2>Build System</h2>
+            <div class="btn-group">
+              <div class="btn active">
+                Maven
+              </div>
+              <div class="btn">
+                Gradle
+              </div>
+            </div>
+          </div>
+          <div class="body--container--row">
+            <h2>Get the code</h2>
+            <div class="btn-group">
+              <div class="btn active">
+                HTTPS
+              </div>
+              <div class="btn">
+                SSH
+              </div>
+              <div class="btn">
+                Subversion
+              </div>
+            </div>
+            <div class="gh-project-url--container">
+              <input value="git@github.com:springframework-meta/springframework.org.git">
+              <i class="icon-copy icon--pull-right"></i>
+            </div>
+            <div class="btn btn--full-width">
+              <i class="icon-cloud-download"></i>
+              Download
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>

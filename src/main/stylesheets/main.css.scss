@@ -1,11 +1,11 @@
 $off-white: #FCFAFB;
 $black-green: #3A3C2F; 
-$lime: #7E9456;
+$lime: #8CC63F;
 $leaf: #4E681E;
 $bark: #AF9A85;
 $light-grey: #ECEBEB;
 $medium-grey: #DEDEDE;
-$navy: #1F2D36;
+$navy: #3A5056;
 $slate: #44474C;
 $mauve: #665A6B;
 $denim: #8395A1;
@@ -14,7 +14,8 @@ $denim: #8395A1;
 
 
 body {
-  background-color: $off-white;
+  background-color: white;
+  padding-top: 50px;
 }
 
 .container-fluid {
@@ -22,10 +23,25 @@ body {
 	margin: 0 auto;
 }
 
+.title-divider {
+  width: 75%;
+  height: 5px;
+  background-color: #8CC63F;
+  margin: 21px 0;
+}
+
+.code-snippet {
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  background-color: #F9F9F9;
+  padding: 12px 18px;
+  margin: 15px 0;
+  font-size: 13px;
+  line-height: 13px;
+}
 
 
 .header--navbar {
-  margin-bottom: 60px;
   box-shadow: 0 1px 3px rgba(153, 153, 153, 0.75);
   .navbar-inner {
     background-image: url("../img/pattern-blinding-dark-blue.png");
@@ -129,7 +145,6 @@ body {
 .header--container {
   background-color: $medium-grey;
   padding: 60px 0;
-  margin-top: 50px;
   .header--content-subtitle--link {
     color: $lime;
     &:hover {
@@ -162,9 +177,9 @@ body {
 }
 
 .body--container--link {
-  color: $leaf;
+  color: $slate;
   &:hover {
-    color: $lime;
+    color: darken($lime, 15%);
     text-decoration: none;
   }
   &.bold {
@@ -320,5 +335,32 @@ input.floating-input {
       display: inline;
     }
   }
+}
+
+.gh-project-url--container {
+  background-color: #FFF;
+  border: 1px solid #CCC;
+  height: 20px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  margin: 12px 0;
+  input {
+    width: 87%;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  .icon--pull-right {
+    float: right;
+    margin-top: 2px;
+    cursor: pointer;
+  }
+}
+
+.btn--full-width {
+  display: block;
 }
 
