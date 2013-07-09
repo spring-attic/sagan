@@ -2,6 +2,7 @@ package org.springframework.site.blog;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.springframework.site.test.DateTestUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -60,9 +61,15 @@ public class PostTests {
 	}
 
 	@Test
-	public void isLiveIfPublishedInThePast() throws ParseException {
+	 public void isLiveIfPublishedInThePast() throws ParseException {
 		Post post = PostBuilder.post().publishAt("2013-01-01 00:00").build();
 		assertThat(post.isLiveOn(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-28 00:00")), is(true));
+	}
+
+	@Test
+	public void isLiveIfPublishedNow() throws ParseException {
+		Post post = PostBuilder.post().publishAt("2013-01-01 00:00").build();
+		assertThat(post.isLiveOn(DateTestUtils.getDate("2013-01-01 00:00")), is(true));
 	}
 
 }

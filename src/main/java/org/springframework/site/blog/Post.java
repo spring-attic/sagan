@@ -157,7 +157,7 @@ public class Post implements Serializable {
 	}
 
 	public boolean isLiveOn(Date date) {
-		return !isDraft() && publishAt.before(date);
+		return !(isDraft() || publishAt.after(date));
 	}
 
 	@Override
