@@ -23,7 +23,7 @@ public class SearchQueryBuilder {
 					"    \"filters\": [{\n" +
 					"      \"range\": {\n" +
 					"        \"publishAt\": {\n" +
-					"          \"from\": \"19700101\",\n" +
+					"          \"from\": \"\",\n" +
 					"          \"to\": \"%s\",\n" +
 					"          \"include_lower\": true,\n" +
 					"          \"include_upper\": true\n" +
