@@ -1,4 +1,4 @@
-package integration;
+package integration.blog;
 
 import integration.configuration.SiteOfflineConfiguration;
 import org.junit.Before;
@@ -18,13 +18,13 @@ import org.springframework.site.domain.blog.Post;
 import org.springframework.site.domain.blog.PostBuilder;
 import org.springframework.site.domain.blog.PostCategory;
 import org.springframework.site.domain.blog.PostRepository;
-import org.springframework.site.search.SearchService;
-import org.springframework.site.domain.team.MemberProfile;
-import org.springframework.site.domain.team.TeamRepository;
-import org.springframework.site.web.PageableFactory;
-import org.springframework.site.web.blog.EntityNotFoundException;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.domain.services.MarkdownService;
+import org.springframework.site.domain.team.MemberProfile;
+import org.springframework.site.domain.team.TeamRepository;
+import org.springframework.site.search.SearchService;
+import org.springframework.site.web.PageableFactory;
+import org.springframework.site.web.blog.EntityNotFoundException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
