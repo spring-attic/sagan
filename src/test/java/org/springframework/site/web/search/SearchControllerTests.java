@@ -1,5 +1,8 @@
 package org.springframework.site.web.search;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -11,16 +14,10 @@ import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.ui.ExtendedModelMap;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
+import static org.mockito.Matchers.*;
 
 public class SearchControllerTests {
 
@@ -39,7 +36,7 @@ public class SearchControllerTests {
 		SearchEntry entry = new SearchEntry();
 		entries.add(entry);
 		resultsPage = new PageImpl<SearchEntry>(entries);
-		when(searchService.search(anyString(), any(Pageable.class))).thenReturn(resultsPage);
+		given(searchService.search(anyString(), (Pageable) anyObject())).willReturn(resultsPage);
 	}
 
 	@Test

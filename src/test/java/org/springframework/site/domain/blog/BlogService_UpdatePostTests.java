@@ -1,5 +1,7 @@
 package org.springframework.site.domain.blog;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -7,24 +9,17 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.site.search.SearchEntry;
-import org.springframework.site.search.SearchService;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.domain.services.MarkdownService;
 import org.springframework.site.domain.team.TeamRepository;
+import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchService;
 import org.springframework.site.test.DateTestUtils;
 
-import java.util.Date;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.BDDMockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_UpdatePostTests {
@@ -67,11 +62,11 @@ public class BlogService_UpdatePostTests {
 
 	@Before
 	public void setup() {
-		when(dateService.now()).thenReturn(now);
+		given(dateService.now()).willReturn(now);
 
 		service = new BlogService(postRepository, markdownService, dateService, teamRepository, searchService);
-		when(markdownService.renderToHtml(content)).thenReturn(RENDERED_HTML_FROM_MARKDOWN);
-		when(markdownService.renderToHtml(firstParagraph)).thenReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
+		given(markdownService.renderToHtml(content)).willReturn(RENDERED_HTML_FROM_MARKDOWN);
+		given(markdownService.renderToHtml(firstParagraph)).willReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 
 		post = PostBuilder.post().id(123L).author("author_id", ORIGINAL_AUTHOR).build();
 		postForm = new PostForm(post);
@@ -133,7 +128,7 @@ public class BlogService_UpdatePostTests {
 
 	@Test
 	public void updatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
-		verify(searchService).saveToIndex(any(SearchEntry.class));
+		verify(searchService).saveToIndex((SearchEntry) anyObject());
 	}
 
 	@Test

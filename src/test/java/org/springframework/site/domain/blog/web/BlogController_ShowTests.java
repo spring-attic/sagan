@@ -1,5 +1,7 @@
 package org.springframework.site.domain.blog.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -14,11 +16,9 @@ import org.springframework.site.web.blog.PostView;
 import org.springframework.site.web.blog.PostViewFactory;
 import org.springframework.ui.ExtendedModelMap;
 
-import javax.servlet.http.HttpServletRequest;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.BDDMockito.*;
 
 public class BlogController_ShowTests {
 
@@ -43,7 +43,7 @@ public class BlogController_ShowTests {
 		controller = new BlogController(blogService, postViewFactory);
 
 		post = PostBuilder.post().build();
-		when(blogService.getPublishedPost(post.getId())).thenReturn(post);
+		given(blogService.getPublishedPost(post.getId())).willReturn(post);
 		viewName = controller.showPost(post.getId(), "1-post-title", model);
 	}
 

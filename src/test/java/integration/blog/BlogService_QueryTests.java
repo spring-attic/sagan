@@ -1,6 +1,13 @@
 package integration.blog;
 
 import integration.configuration.SiteOfflineConfiguration;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,19 +38,10 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.BDDMockito.*;
+import static org.mockito.MockitoAnnotations.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -78,7 +76,7 @@ public class BlogService_QueryTests {
 	@Before
 	public void setup() {
 		initMocks(this);
-		when(dateService.now()).thenReturn(new Date());
+		given(dateService.now()).willReturn(new Date());
 
 		service = new BlogService(postRepository, markdownService, dateService, teamRepository, searchService);
 		assertThat(postRepository.findAll().size(), equalTo(0));
@@ -115,7 +113,7 @@ public class BlogService_QueryTests {
 		postRepository.save(post);
 
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		when(dateService.now()).thenReturn(today);
+		given(dateService.now()).willReturn(today);
 
 		expected.expect(EntityNotFoundException.class);
 		service.getPublishedPost(post.getId());
@@ -144,7 +142,7 @@ public class BlogService_QueryTests {
 		postRepository.save(PostBuilder.post().publishAt("2013-06-15 00:00").build());
 
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		when(dateService.now()).thenReturn(today);
+		given(dateService.now()).willReturn(today);
 
 		assertThat(service.getPublishedPosts(FIRST_TEN_POSTS), contains(post));
 	}
@@ -156,7 +154,7 @@ public class BlogService_QueryTests {
 		postRepository.save(PostBuilder.post().draft().publishAt("2013-06-15 00:00").build());
 
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		when(dateService.now()).thenReturn(today);
+		given(dateService.now()).willReturn(today);
 
 		assertThat(service.getScheduledPosts(FIRST_TEN_POSTS), contains(post));
 	}
@@ -168,7 +166,7 @@ public class BlogService_QueryTests {
 		postRepository.save(PostBuilder.post().publishAt("2013-06-13 00:00").build());
 
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		when(dateService.now()).thenReturn(today);
+		given(dateService.now()).willReturn(today);
 
 		assertThat(service.getScheduledPosts(FIRST_TEN_POSTS), contains(post));
 	}
@@ -190,7 +188,7 @@ public class BlogService_QueryTests {
 		postRepository.save(PostBuilder.post().publishAt("2013-06-15 00:00").category(PostCategory.ENGINEERING).build());
 
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		when(dateService.now()).thenReturn(today);
+		given(dateService.now()).willReturn(today);
 
 		Page<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, FIRST_TEN_POSTS);
 		assertThat(publishedPosts.getContent(), contains(post));
@@ -227,7 +225,7 @@ public class BlogService_QueryTests {
 		postRepository.save(PostBuilder.post().publishAt("2013-06-15 00:00").isBroadcast().build());
 
 		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		when(dateService.now()).thenReturn(today);
+		given(dateService.now()).willReturn(today);
 
 		Page<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(FIRST_TEN_POSTS);
 		assertThat(publishedBroadcastPosts.getContent(), contains(post));

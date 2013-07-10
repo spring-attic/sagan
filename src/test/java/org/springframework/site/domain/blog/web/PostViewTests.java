@@ -1,5 +1,7 @@
 package org.springframework.site.domain.blog.web;
 
+import java.text.ParseException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -10,11 +12,9 @@ import org.springframework.site.domain.services.DateService;
 import org.springframework.site.test.DateTestUtils;
 import org.springframework.site.web.blog.PostView;
 
-import java.text.ParseException;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
 
 public class PostViewTests {
 
@@ -47,7 +47,7 @@ public class PostViewTests {
 
 	@Test
 	public void draftPath() throws ParseException {
-		when(dateService.now()).thenReturn(DateTestUtils.getDate("2012-07-02 13:42"));
+		given(dateService.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
 		post = PostBuilder.post().id(123L).title("My Post").draft().build();
 		postView = new PostView(post, dateService);
 
@@ -56,7 +56,7 @@ public class PostViewTests {
 
 	@Test
 	public void scheduledPost() throws ParseException {
-		when(dateService.now()).thenReturn(DateTestUtils.getDate("2012-07-02 13:42"));
+		given(dateService.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
 		post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-05 13:42").build();
 		postView = new PostView(post, dateService);
 
@@ -65,7 +65,7 @@ public class PostViewTests {
 
 	@Test
 	public void publishedPost() throws ParseException {
-		when(dateService.now()).thenReturn(DateTestUtils.getDate("2012-07-02 13:42"));
+		given(dateService.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
 		post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-01 13:42").build();
 		postView = new PostView(post, dateService);
 

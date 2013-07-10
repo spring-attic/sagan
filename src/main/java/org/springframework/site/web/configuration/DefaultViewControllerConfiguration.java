@@ -55,7 +55,6 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	@PostConstruct
 	public void configureThymeleafSecurity() {
 		templateEngine.addDialect(new SpringSecurityDialect());
-		templateEngine.addDialect(new LayoutDialect());
 	}
 
 	@PostConstruct

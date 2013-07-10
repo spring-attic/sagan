@@ -1,5 +1,10 @@
 package org.springframework.site.domain.blog.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -8,7 +13,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.site.domain.blog.*;
+import org.springframework.site.domain.blog.BlogService;
+import org.springframework.site.domain.blog.Post;
+import org.springframework.site.domain.blog.PostBuilder;
+import org.springframework.site.domain.blog.PostCategory;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.site.web.PaginationInfo;
 import org.springframework.site.web.blog.BlogController;
@@ -16,14 +24,9 @@ import org.springframework.site.web.blog.PostView;
 import org.springframework.site.web.blog.PostViewFactory;
 import org.springframework.ui.ExtendedModelMap;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.BDDMockito.*;
 
 public class BlogController_PublishedPostsTests {
 
@@ -56,9 +59,9 @@ public class BlogController_PublishedPostsTests {
 
 		page = new PageImpl<PostView>(new ArrayList<PostView>(), testPageable, 1);
 
-		when(blogService.getPublishedPosts(eq(testPageable))).thenReturn(postsPage);
-		when(postViewFactory.createPostViewPage(postsPage)).thenReturn(page);
-		when(request.getServletPath()).thenReturn("/blog/");
+		given(blogService.getPublishedPosts(eq(testPageable))).willReturn(postsPage);
+		given(postViewFactory.createPostViewPage(postsPage)).willReturn(page);
+		given(request.getServletPath()).willReturn("/blog/");
 
 		viewName = controller.listPublishedPosts(model, TEST_PAGE, request);
 	}

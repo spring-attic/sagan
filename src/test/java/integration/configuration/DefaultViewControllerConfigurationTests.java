@@ -1,5 +1,7 @@
 package integration.configuration;
 
+import java.net.URL;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.Resource;
@@ -10,12 +12,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
-import java.net.URL;
-
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.*;
 
 public class DefaultViewControllerConfigurationTests {
 
@@ -32,8 +29,8 @@ public class DefaultViewControllerConfigurationTests {
 		controllerRegistry = mock(ViewControllerRegistry.class);
 		viewRegistration = mock(ViewControllerRegistration.class);
 
-		when(resourceResolver.getResource("classpath:/templates/pages")).thenReturn(resource);
-		when(controllerRegistry.addViewController(anyString())).thenReturn(viewRegistration);
+		given(resourceResolver.getResource("classpath:/templates/pages")).willReturn(resource);
+		given(controllerRegistry.addViewController(anyString())).willReturn(viewRegistration);
 
 		configurer = new DefaultViewControllerConfiguration();
 		ReflectionTestUtils.setField(configurer, "resourceResolver", resourceResolver);
@@ -43,7 +40,7 @@ public class DefaultViewControllerConfigurationTests {
 	 public void mapsHtmlPageToUrls() throws Exception {
 		Resource[] resources = {new UrlResource(new URL("file://test/templates/pages/guides.html"))};
 
-		when(resourceResolver.getResources("classpath:/templates/pages/**/*.html")).thenReturn(resources);
+		given(resourceResolver.getResources("classpath:/templates/pages/**/*.html")).willReturn(resources);
 
 
 		configurer.addViewControllers(controllerRegistry);
@@ -56,7 +53,7 @@ public class DefaultViewControllerConfigurationTests {
 	public void mapsSubdirectoryPagesToUrls() throws Exception {
 		Resource[] resources = {new UrlResource(new URL("file://test/templates/pages/about/jobs.html"))};
 
-		when(resourceResolver.getResources("classpath:/templates/pages/**/*.html")).thenReturn(resources);
+		given(resourceResolver.getResources("classpath:/templates/pages/**/*.html")).willReturn(resources);
 
 		configurer.addViewControllers(controllerRegistry);
 
@@ -68,7 +65,7 @@ public class DefaultViewControllerConfigurationTests {
 	public void mapsIndexPageToUrls() throws Exception {
 		Resource[] resources = {new UrlResource(new URL("file://test/templates/pages/index.html"))};
 
-		when(resourceResolver.getResources("classpath:/templates/pages/**/*.html")).thenReturn(resources);
+		given(resourceResolver.getResources("classpath:/templates/pages/**/*.html")).willReturn(resources);
 
 
 		configurer.addViewControllers(controllerRegistry);
@@ -81,7 +78,7 @@ public class DefaultViewControllerConfigurationTests {
 	public void mapsIndexHtmlPageToUrls() throws Exception {
 		Resource[] resources = {new UrlResource(new URL("file://test/templates/pages/guides/index.html"))};
 
-		when(resourceResolver.getResources("classpath:/templates/pages/**/*.html")).thenReturn(resources);
+		given(resourceResolver.getResources("classpath:/templates/pages/**/*.html")).willReturn(resources);
 
 
 		configurer.addViewControllers(controllerRegistry);

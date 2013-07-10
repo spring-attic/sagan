@@ -15,20 +15,20 @@
  */
 package org.springframework.site.web.configuration;
 
+import javax.sql.DataSource;
+
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
+import org.springframework.autoconfigure.EnableAutoConfiguration;
 import org.springframework.bootstrap.SpringApplication;
-import org.springframework.bootstrap.context.annotation.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.web.SiteUrl;
-
-import javax.sql.DataSource;
+import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
 
 @EnableAutoConfiguration
 @Configuration

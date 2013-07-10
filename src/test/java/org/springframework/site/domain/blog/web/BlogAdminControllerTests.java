@@ -1,6 +1,10 @@
 package org.springframework.site.domain.blog.web;
 
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,22 +27,10 @@ import org.springframework.ui.ExtendedModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.validation.MapBindingResult;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.sameInstance;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.same;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
+import static org.mockito.Matchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogAdminControllerTests {
@@ -79,30 +71,30 @@ public class BlogAdminControllerTests {
 		Page<Post> published = new PageImpl<Post>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
 		Page<Post> scheduled = new PageImpl<Post>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
 
-		when(blogService.getPublishedPosts(any(PageRequest.class))).thenReturn(published);
-		when(blogService.getDraftPosts(any(PageRequest.class))).thenReturn(drafts);
-		when(blogService.getScheduledPosts(any(PageRequest.class))).thenReturn(scheduled);
+		given(blogService.getPublishedPosts((PageRequest) anyObject())).willReturn(published);
+		given(blogService.getDraftPosts((PageRequest) anyObject())).willReturn(drafts);
+		given(blogService.getScheduledPosts((PageRequest) anyObject())).willReturn(scheduled);
 
 		Page<PostView> draftViews = new PageImpl<PostView>(new ArrayList<PostView>());
 		Page<PostView> publishedViews = new PageImpl<PostView>(new ArrayList<PostView>());
 		Page<PostView> scheduledViews = new PageImpl<PostView>(new ArrayList<PostView>());
 
-		when(postViewFactory.createPostViewPage(same(drafts))).thenReturn(draftViews);
-		when(postViewFactory.createPostViewPage(same(published))).thenReturn(publishedViews);
-		when(postViewFactory.createPostViewPage(same(scheduled))).thenReturn(scheduledViews);
+		given(postViewFactory.createPostViewPage(same(drafts))).willReturn(draftViews);
+		given(postViewFactory.createPostViewPage(same(published))).willReturn(publishedViews);
+		given(postViewFactory.createPostViewPage(same(scheduled))).willReturn(scheduledViews);
 
 		ExtendedModelMap model = new ExtendedModelMap();
 		controller.dashboard(model);
 
-		assertThat((Page<PostView>) model.get("drafts"), sameInstance(draftViews));
-		assertThat((Page<PostView>)model.get("posts"), sameInstance(publishedViews));
-		assertThat((Page<PostView>)model.get("scheduled"), sameInstance(scheduledViews));
+		assertThat(model.get("drafts"), sameInstance((Object) draftViews));
+		assertThat(model.get("posts"), sameInstance((Object) publishedViews));
+		assertThat(model.get("scheduled"), sameInstance((Object) scheduledViews));
 	}
 
 	@Test
 	public void showPostModel() {
 		Post post = PostBuilder.post().build();
-		when(blogService.getPost(post.getId())).thenReturn(post);
+		given(blogService.getPost(post.getId())).willReturn(post);
 		controller.showPost(post.getId(), "1-post-title", model);
 		PostView view = (PostView) model.get("post");
 		assertThat(view, is(notNullValue()));
@@ -117,7 +109,7 @@ public class BlogAdminControllerTests {
 	public void creatingABlogPostRecordsTheUser() {
 		PostForm postForm = new PostForm();
 
-		when(blogService.addPost(eq(postForm), anyString())).thenReturn(TEST_POST);
+		given(blogService.addPost(eq(postForm), anyString())).willReturn(TEST_POST);
 		controller.createPost(principal, postForm, new BindException(postForm, "postForm"), null);
 		verify(blogService).addPost(postForm, "testUser");
 	}
@@ -129,7 +121,7 @@ public class BlogAdminControllerTests {
 		postForm.setContent("content");
 		postForm.setCategory(PostCategory.ENGINEERING);
 		Post post = PostBuilder.post().id(123L).publishAt("2013-05-06 00:00").title("Post Title").build();
-		when(blogService.addPost(postForm, principal.getName())).thenReturn(post);
+		given(blogService.addPost(postForm, principal.getName())).willReturn(post);
 		String result = controller.createPost(principal, postForm, bindingResult, null);
 
 		assertThat(result, equalTo("redirect:/blog/123-post-title"));
