@@ -1,11 +1,11 @@
 package org.springframework.site.indexer;
 
+import java.util.Arrays;
+
 import org.junit.Test;
-import org.springframework.bootstrap.actuate.metrics.CounterService;
+import org.springframework.actuate.metrics.CounterService;
 import org.springframework.site.domain.documentation.DocumentationService;
 import org.springframework.site.domain.documentation.Project;
-
-import java.util.Arrays;
 
 import static org.mockito.Matchers.contains;
 import static org.mockito.Matchers.eq;

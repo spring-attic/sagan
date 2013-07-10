@@ -1,17 +1,17 @@
 package org.springframework.site.indexer;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.actuate.metrics.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.bootstrap.actuate.metrics.CounterService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.site.domain.documentation.DocumentationService;
 import org.springframework.site.domain.documentation.Project;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @Service
 public class DocumentationIndexService {
