@@ -8,7 +8,6 @@ public class PostSearchEntryMapper implements SearchEntryMapper<Post> {
 	@Override
 	public SearchEntry map(Post post) {
 		SearchEntry entry = new SearchEntry();
-		entry.setId(post.getId().toString());
 		entry.setTitle(post.getTitle());
 		entry.setSummary(post.getRenderedSummary());
 		entry.setRawContent(post.getRawContent());

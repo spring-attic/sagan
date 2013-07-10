@@ -1,11 +1,10 @@
 package org.springframework.site.search;
 
+import org.springframework.security.crypto.codec.Base64;
+
 import java.util.Date;
 
 public class SearchEntry {
-
-	//TODO what's the ID strategy for search results?
-	private String id;
 
 	private String path;
 
@@ -59,10 +58,8 @@ public class SearchEntry {
 	}
 
 	public String getId() {
-		return id;
+		byte[] encodedId = Base64.encode(path.toLowerCase().getBytes());
+		return new String(encodedId);
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
 }

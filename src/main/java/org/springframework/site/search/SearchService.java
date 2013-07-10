@@ -4,10 +4,13 @@ import io.searchbox.Action;
 import io.searchbox.Parameters;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
+import io.searchbox.core.Delete;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -20,6 +23,8 @@ import java.util.List;
 public class SearchService {
 
 	private static final String INDEX = "site";
+
+	private static Log logger = LogFactory.getLog(SearchService.class);
 
 	private final SearchQueryBuilder searchQueryBuilder = new SearchQueryBuilder();
 	private final JestClient jestClient;
@@ -46,7 +51,9 @@ public class SearchService {
 
 	private JestResult execute(Action action) {
 		try {
-			return jestClient.execute(action);
+			JestResult result = jestClient.execute(action);
+			logger.debug(result.getJsonString());
+			return result;
 		} catch (Exception e) {
 			throw new SearchException(e);
 		}
@@ -75,5 +82,14 @@ public class SearchService {
 
 	public void setUseRefresh(boolean useRefresh) {
 		this.useRefresh = useRefresh;
+	}
+
+	public void removeFromIndex(SearchEntry entry) {
+		Delete delete = new Delete.Builder(entry.getId())
+									.index(INDEX)
+									.type("site") //TODO this should come from the 'entry'
+									.build();
+
+		execute(delete);
 	}
 }

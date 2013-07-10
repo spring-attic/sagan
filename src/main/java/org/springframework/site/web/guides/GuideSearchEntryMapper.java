@@ -11,7 +11,6 @@ public class GuideSearchEntryMapper implements SearchEntryMapper<GettingStartedG
 	@Override
 	public SearchEntry map(GettingStartedGuide guide) {
 		SearchEntry entry = new SearchEntry();
-		entry.setId(guide.getGuideId());
 		entry.setTitle(guide.getGuideId());
 		// TODO: summary should be generated after a search matches, not statically here (so this is purely a hack for now)
 		entry.setSummary(guide.getContent().substring(0, Math.min(500, guide.getContent().length())));

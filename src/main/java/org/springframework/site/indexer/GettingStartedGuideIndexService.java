@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.site.domain.guides.GettingStartedGuide;
 import org.springframework.site.domain.guides.GettingStartedService;
 import org.springframework.site.domain.guides.GuideRepo;
-import org.springframework.site.web.guides.GuideSearchEntryMapper;
 import org.springframework.site.search.SearchService;
+import org.springframework.site.web.guides.GuideSearchEntryMapper;
 import org.springframework.stereotype.Service;
 
 @Service

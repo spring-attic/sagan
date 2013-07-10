@@ -1,7 +1,6 @@
 package org.springframework.site.web.search;
 
 import org.springframework.site.search.SearchEntry;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +8,6 @@ import java.util.Date;
 
 public class SearchEntryBuilder {
 
-	private String id = new Long(System.currentTimeMillis()).toString();
 	private String title = "A random title";
 	private String rawContent = "A random post content";
 	private String summary = "A random post summary";
@@ -21,16 +19,6 @@ public class SearchEntryBuilder {
 
 	public static SearchEntryBuilder entry() {
 		return new SearchEntryBuilder();
-	}
-
-	public SearchEntryBuilder id(String id) {
-		this.id = id;
-		return this;
-	}
-
-	public SearchEntryBuilder id(Long id) {
-		this.id = new Long(id).toString();
-		return this;
 	}
 
 	public SearchEntryBuilder title(String title) {
@@ -70,7 +58,6 @@ public class SearchEntryBuilder {
 		searchResult.setSummary(summary);
 		searchResult.setPublishAt(publishAt);
 		searchResult.setPath(path);
-		ReflectionTestUtils.setField(searchResult, "id", this.id);
 		return searchResult;
 	}
 

@@ -103,13 +103,13 @@ public class SearchServiceIntegrationTests {
 	}
 
 	private void indexSingleEntry() throws ParseException {
-		entry = createSingleEntry("1");
+		entry = createSingleEntry("/some/path");
 		searchService.saveToIndex(entry);
 	}
 
-	private SearchEntry createSingleEntry(String id) throws ParseException {
+	private SearchEntry createSingleEntry(String path) throws ParseException {
 		return SearchEntryBuilder.entry()
-				.id(id)
+				.path(path)
 				.title("This week in Spring")
 				.rawContent("raw content")
 				.summary("Html summary")
@@ -147,7 +147,7 @@ public class SearchServiceIntegrationTests {
 		indexSingleEntry();
 
 		SearchEntry secondEntry = SearchEntryBuilder.entry()
-				.id("2")
+				.path("/another/path")
 				.title("Test")
 				.rawContent("Test body")
 				.build();
@@ -165,10 +165,10 @@ public class SearchServiceIntegrationTests {
 				.summary("Html summary")
 				.publishAt("2013-01-01 10:00");
 
-		SearchEntry entry1 = builder.id("item1").title("Item 1").build();
+		SearchEntry entry1 = builder.path("item1").title("Item 1").build();
 		searchService.saveToIndex(entry1);
 
-		SearchEntry entry2 = builder.id("item2").title("Item 2").build();
+		SearchEntry entry2 = builder.path("item2").title("Item 2").build();
 		searchService.saveToIndex(entry2);
 
 		Pageable page1 = new PageRequest(0,1);
