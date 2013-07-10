@@ -14,9 +14,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.site.guides.GettingStartedGuide;
-import org.springframework.site.guides.GettingStartedService;
-import org.springframework.site.guides.GuideRepo;
+import org.springframework.site.domain.guides.GettingStartedGuide;
+import org.springframework.site.domain.guides.GettingStartedService;
+import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -61,7 +61,7 @@ public class GettingStartedGuidesTests {
 				public List<GuideRepo> listGuides() {
 					ObjectMapper mapper = new ObjectMapper();
 					try {
-						String reposJson = "/org/springframework/site/guides/springframework-meta.repos.offline.json";
+						String reposJson = "/org/springframework/site/domain/guides/springframework-meta.repos.offline.json";
 						InputStream json = new ClassPathResource(reposJson, getClass()).getInputStream();
 						return mapper.readValue(json, new TypeReference<List<GuideRepo>>() {
 						});

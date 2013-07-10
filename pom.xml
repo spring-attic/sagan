@@ -17,7 +17,7 @@
 	</parent>
 
 	<properties>
-		<start-class>org.springframework.site.configuration.ApplicationConfiguration</start-class>
+		<start-class>org.springframework.site.web.configuration.ApplicationConfiguration</start-class>
 		<hamcrest.version>1.3</hamcrest.version>
 	</properties>
 

@@ -19,7 +19,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.bootstrap.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.site.configuration.ApplicationConfiguration;
+import org.springframework.site.web.configuration.ApplicationConfiguration;
 
 public class ApplicationConfigurationTests {
 

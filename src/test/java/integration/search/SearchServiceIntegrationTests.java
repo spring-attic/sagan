@@ -9,11 +9,11 @@ import org.springframework.bootstrap.context.initializer.ConfigFileApplicationCo
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.search.SearchEntry;
-import org.springframework.search.SearchService;
-import org.springframework.search.configuration.InMemoryElasticSearchConfiguration;
-import org.springframework.site.configuration.ApplicationConfiguration;
-import org.springframework.site.search.SearchEntryBuilder;
+import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchService;
+import org.springframework.site.search.configuration.InMemoryElasticSearchConfiguration;
+import org.springframework.site.web.configuration.ApplicationConfiguration;
+import org.springframework.site.web.search.SearchEntryBuilder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;

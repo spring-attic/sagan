@@ -1,7 +1,7 @@
 package org.springframework.site.test;
 
 import org.springframework.context.annotation.Primary;
-import org.springframework.site.services.GitHubService;
+import org.springframework.site.domain.services.GitHubService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 

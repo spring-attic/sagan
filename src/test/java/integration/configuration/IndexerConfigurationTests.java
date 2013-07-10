@@ -19,7 +19,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.bootstrap.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.indexer.configuration.IndexerConfiguration;
+import org.springframework.site.indexer.configuration.IndexerConfiguration;
 
 import static junit.framework.Assert.assertNotNull;
 
