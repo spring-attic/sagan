@@ -1,8 +1,14 @@
 package org.springframework.site.web.blog.feed;
 
-import com.sun.syndication.feed.atom.Entry;
-import com.sun.syndication.feed.atom.Feed;
-import com.sun.syndication.feed.atom.Link;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+import java.util.TimeZone;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.site.domain.blog.Post;
@@ -11,15 +17,13 @@ import org.springframework.site.domain.services.DateService;
 import org.springframework.site.web.SiteUrl;
 import org.springframework.ui.ExtendedModelMap;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import com.sun.syndication.feed.atom.Entry;
+import com.sun.syndication.feed.atom.Feed;
+import com.sun.syndication.feed.atom.Link;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
 
 public class BlogPostAtomViewerTests {
 
@@ -34,7 +38,7 @@ public class BlogPostAtomViewerTests {
 	public void setUp() throws Exception {
 		siteUrl = mock(SiteUrl.class);
 		blogPostAtomViewer = new BlogPostAtomViewer(siteUrl, new DateService());
-		when(request.getServerName()).thenReturn("springsource.org");
+		given(request.getServerName()).willReturn("springsource.org");
 		model.addAttribute("posts", new ArrayList<Post>());
 	}
 
@@ -49,7 +53,7 @@ public class BlogPostAtomViewerTests {
 	public void hasLinkToAssociatedBlogList() {
 		String expectedBlogPath = "/blog/category/engineering";
 		String expectedBlogUrl = "http://localhost:8080/blog/category/engineering";
-		when(siteUrl.getAbsoluteUrl(eq(expectedBlogPath))).thenReturn(expectedBlogUrl);
+		given(siteUrl.getAbsoluteUrl(eq(expectedBlogPath))).willReturn(expectedBlogUrl);
 		model.addAttribute("blog-path", expectedBlogPath);
 
 		blogPostAtomViewer.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
@@ -63,7 +67,7 @@ public class BlogPostAtomViewerTests {
 	public void hasLinkToSelf() {
 		String expectedFeedPath = "/blog/category/engineering.atom";
 		String expectedFeedUrl = "http://localhost:8080/blog/category/engineering.atom";
-		when(siteUrl.getAbsoluteUrl(eq(expectedFeedPath))).thenReturn(expectedFeedUrl);
+		given(siteUrl.getAbsoluteUrl(eq(expectedFeedPath))).willReturn(expectedFeedUrl);
 		model.addAttribute("feed-path", expectedFeedPath);
 
 		blogPostAtomViewer.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
@@ -118,7 +122,7 @@ public class BlogPostAtomViewerTests {
 		calendar.set(2013, 6, 1);
 		Post post = spy(PostBuilder.post().build());
 		post.setCreatedAt(calendar.getTime());
-		when(post.getId()).thenReturn(123L);
+		given(post.getId()).willReturn(123L);
 
 		model.addAttribute("posts", Arrays.asList(post));
 

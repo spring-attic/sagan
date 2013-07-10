@@ -4,9 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
+import org.mockito.BDDMockito.BDDMyOngoingStubbing;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.github.api.GitHub;
@@ -14,11 +14,10 @@ import org.springframework.social.github.api.GitHubUserProfile;
 import org.springframework.social.github.api.UserOperations;
 import org.springframework.web.client.RestOperations;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.BDDMockito.*;
+import static org.mockito.Matchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SignInServiceTests {
@@ -46,10 +45,10 @@ public class SignInServiceTests {
 		GitHubUserProfile userProfile = new GitHubUserProfile(1L, username, name, location, "", "", email, avatarUrl, null);
 		UserOperations userOperations = mock(UserOperations.class);
 
-		when(userOperations.getUserProfile()).thenReturn(userProfile);
-		when(gitHub.userOperations()).thenReturn(userOperations);
+		given(userOperations.getUserProfile()).willReturn(userProfile);
+		given(gitHub.userOperations()).willReturn(userOperations);
 
-		when(teamRepository.findByMemberId(anyString())).thenReturn(null);
+		given(teamRepository.findByMemberId(anyString())).willReturn(null);
 		signInService.createMemberProfileIfNeeded("user", gitHub);
 
 		verify(teamRepository).save(argThat(new ArgumentMatcher<MemberProfile>() {
@@ -67,10 +66,10 @@ public class SignInServiceTests {
 
 	@Test
 	public void doNotCreateAMemberProfileIfOneDoesExist() {
-		when(teamRepository.findByMemberId(anyString())).thenReturn(new MemberProfile());
+		given(teamRepository.findByMemberId(anyString())).willReturn(new MemberProfile());
 		signInService.createMemberProfileIfNeeded("user", gitHub);
 
-		verify(teamRepository, never()).save(any(MemberProfile.class));
+		verify(teamRepository, never()).save((MemberProfile) anyObject());
 	}
 
 	@Test
@@ -89,8 +88,8 @@ public class SignInServiceTests {
 
 	private void mockIsMemberOfTeam(boolean isMember) {
 		RestOperations restOperations = mock(RestOperations.class);
-		when(gitHub.restOperations()).thenReturn(restOperations);
-		OngoingStubbing<ResponseEntity<Void>> expectedResult = when(restOperations
+		given(gitHub.restOperations()).willReturn(restOperations);
+		BDDMyOngoingStubbing<ResponseEntity<Void>> expectedResult = given(restOperations
 				.getForEntity(anyString(),
 						argThat(new ArgumentMatcher<Class<Void>>() {
 							@Override
@@ -100,6 +99,6 @@ public class SignInServiceTests {
 						}), anyString(), anyString()));
 
 		HttpStatus statusCode = isMember ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
-		expectedResult.thenReturn(new ResponseEntity<Void>(statusCode));
+		expectedResult.willReturn(new ResponseEntity<Void>(statusCode));
 	}
 }

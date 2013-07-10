@@ -7,10 +7,8 @@ import org.springframework.actuate.metrics.CounterService;
 import org.springframework.site.domain.documentation.DocumentationService;
 import org.springframework.site.domain.documentation.Project;
 
-import static org.mockito.Matchers.contains;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 public class DocumentationIndexServiceTests {
 

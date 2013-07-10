@@ -1,12 +1,12 @@
 package org.springframework.site.web.security;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
-
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
+
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
 
 /**
  * Simple {@link ConnectionSignUp} implementation that pulls user id from remote
@@ -22,13 +22,13 @@ public class RemoteUsernameConnectionSignUpTests {
 
 	@Test
 	public void transferDisplayNameToUserId() {
-		when(connection.getDisplayName()).thenReturn("dsyer");
+		given(connection.getDisplayName()).willReturn("dsyer");
 		assertEquals("dsyer", signup.execute(connection));
 	}
 
 	@Test
 	public void transferNullToUserId() {
-		when(connection.getDisplayName()).thenReturn(null);
+		given(connection.getDisplayName()).willReturn(null);
 		assertEquals(null, signup.execute(connection));
 	}
 
