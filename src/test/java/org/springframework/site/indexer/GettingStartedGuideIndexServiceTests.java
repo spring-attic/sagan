@@ -1,16 +1,16 @@
 package org.springframework.site.indexer;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.bootstrap.actuate.metrics.CounterService;
+import org.springframework.actuate.metrics.CounterService;
 import org.springframework.site.domain.guides.GettingStartedGuide;
 import org.springframework.site.domain.guides.GettingStartedService;
 import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.web.client.RestClientException;
-
-import java.util.ArrayList;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
