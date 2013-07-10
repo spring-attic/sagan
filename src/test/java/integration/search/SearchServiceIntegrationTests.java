@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.bootstrap.context.initializer.LoggingApplicationContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
@@ -41,7 +42,7 @@ import static org.hamcrest.Matchers.not;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {ApplicationConfiguration.class, SearchServiceIntegrationTests.IntegrationTestElasticSearchConfiguration.class},
-		initializers = ConfigFileApplicationContextInitializer.class)
+		initializers = {ConfigFileApplicationContextInitializer.class, LoggingApplicationContextInitializer.class})
 public class SearchServiceIntegrationTests {
 
 	public static class IntegrationTestElasticSearchConfiguration {
@@ -56,7 +57,7 @@ public class SearchServiceIntegrationTests {
 		public Client elasticSearchClient() throws Exception {
 			NodeBuilder nodeBuilder = nodeBuilder().local(false);
 			nodeBuilder.getSettings().put("network.host", "127.0.0.1");
-			nodeBuilder.getSettings().put("http.port", "9201");
+			nodeBuilder.getSettings().put("http.port", "9250");
 			Client client = nodeBuilder.node().client();
 			return client;
 		}
@@ -82,7 +83,7 @@ public class SearchServiceIntegrationTests {
 		private ClientConfig clientConfig() {
 			ClientConfig clientConfig = new ClientConfig();
 			LinkedHashSet<String> servers = new LinkedHashSet<String>();
-			servers.add("http://localhost:9201");
+			servers.add("http://localhost:9250");
 			clientConfig.getProperties().put(ClientConstants.SERVER_LIST, servers);
 			clientConfig.getProperties().put(ClientConstants.IS_MULTI_THREADED, true);
 			return clientConfig;
