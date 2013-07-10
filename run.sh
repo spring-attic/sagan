@@ -1,4 +1,5 @@
+#!/bin/bash
 git pull --rebase
-mvn clean package -Dmaven.test.skip=true
+mvn clean compile
 mvn sass:watch &
-java -jar target/springframework-site-?.?.*.jar
+mvn exec:java
