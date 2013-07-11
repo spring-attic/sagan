@@ -1,110 +1,110 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-	<title>Layout</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap.css}" href="../../bootstrap/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap-responsive.css}" href="../../bootstrap/css/bootstrap-responsive.min.css" />
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" />
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Quicksand:400,700" />
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/font-awesome/css/font-awesome.min.css}" href="../../font-awesome/css/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}" href="../../bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+  <title>Layout</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap.css}" href="../../bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap-responsive.css}" href="../../bootstrap/css/bootstrap-responsive.min.css" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Quicksand:400,700" />
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/font-awesome/css/font-awesome.min.css}" href="../../font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}" href="../../bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
 
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css.css}" href="../../css/main.css.css" />
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/typography.css.css}" href="../../css/typography.css.css" />
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/application.css.css}" href="../../css/application.css.css" />
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/guide.css.css}" href="../../css/guide.css.css" />
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/team.css.css}" href="../../css/team.css.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css.css}" href="../../css/main.css.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/css/typography.css.css}" href="../../css/typography.css.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/css/application.css.css}" href="../../css/application.css.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/css/guide.css.css}" href="../../css/guide.css.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/css/team.css.css}" href="../../css/team.css.css" />
 
-	<script type="text/javascript" th:src="@{/resources/js/jquery.js}" src="../../js/jquery.js"></script>
-	<script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.min.js}" src="../../bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" th:src="@{/resources/js/ZeroClipboard.js}" src="../../js/ZeroClipboard.js"></script>
-	<script type="text/javascript" th:src="@{/resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}" src="../../bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+  <script type="text/javascript" th:src="@{/resources/js/jquery.js}" src="../../js/jquery.js"></script>
+  <script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.min.js}" src="../../bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" th:src="@{/resources/js/ZeroClipboard.js}" src="../../js/ZeroClipboard.js"></script>
+  <script type="text/javascript" th:src="@{/resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}" src="../../bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
-	<script type="text/javascript" th:src="@{/resources/js/application.js}" src="../../js/application.js"></script>
-	<script type="text/javascript" th:src="@{/resources/js/guide.js}" src="../../js/guide.js"></script>
+  <script type="text/javascript" th:src="@{/resources/js/application.js}" src="../../js/application.js"></script>
+  <script type="text/javascript" th:src="@{/resources/js/guide.js}" src="../../js/guide.js"></script>
 </head>
 <body>
-	<div class="navbar navbar-fixed-top header--navbar">
-		<div class="navbar-inner">
-			<div class="container-fluid">
-				<a class="brand spring-logo" th:href="@{/}" href="/"></a>
-				<ul class="nav pull-right">
-					<li class=" navbar-link">
-						<a th:href="@{/documentation}" href="documentation/index.html">Documentation</a>
-					</li>
-					<li class=" navbar-link active">
-						<a th:href="@{/guides}" href="pages/guides/index.html">Guides</a>
-					</li>
-					<li class=" navbar-link">
-						<a th:href="@{/projects}" href="pages/projects.html">Projects</a>
-					</li>
-					<li class=" navbar-link">
-						<a th:href="@{/blog}" href="pages/blog.html">Blog</a>
-					</li>
-					<li class=" navbar-link">
-						<a href="http://forum.springframework.org">Forum</a>
-					</li>
-					<li class="nav-search">
-					<form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
-						<input type="text" class="search-query input-medium" placeholder="Search Spring" name="q" th:value="${query}" />
-						<button type="submit" class="icon-search"></button>
-					</form>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+  <div class="navbar navbar-fixed-top header--navbar">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="brand spring-logo" th:href="@{/}" href="/"></a>
+        <ul class="nav pull-right">
+          <li class=" navbar-link">
+            <a th:href="@{/documentation}" href="documentation/index.html">Documentation</a>
+          </li>
+          <li class=" navbar-link active">
+            <a th:href="@{/guides}" href="pages/guides/index.html">Guides</a>
+          </li>
+          <li class=" navbar-link">
+            <a th:href="@{/projects}" href="pages/projects.html">Projects</a>
+          </li>
+          <li class=" navbar-link">
+            <a th:href="@{/blog}" href="pages/blog.html">Blog</a>
+          </li>
+          <li class=" navbar-link">
+            <a href="http://forum.springframework.org">Forum</a>
+          </li>
+          <li class="nav-search">
+          <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
+            <input type="text" class="search-query input-medium" placeholder="Search Spring" name="q" th:value="${query}" />
+            <button type="submit" class="icon-search"></button>
+          </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-	<div class="header--container">
-		<div class="header--content container-fluid" layout:fragment="header-content">
-			<div class="row-fluid">
-				<div class="span8">
-					<h1 class="header--content-title" layout:fragment="header">
-						First Last
-					</h1>
-					<p class="header--content-subtitle" layout:fragment="overview">
-						Subttitle Ligula Risus Tristique Pharetra
-					</p>
-				</div>
-				<div class="span4">
-					<div id='authentication' sec:authorize="isFullyAuthenticated()">
-						<span sec:authentication="name">Bob</span>
-						<a th:href="@{/signout}" href="/signout">Sign out</a>
-					</div>
-					<div layout:fragment="header-sidebar"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="header--container" layout:fragment="header-container">
+    <div class="header--content" layout:fragment="header-content">
+      <div class="row-fluid container-fluid">
+        <div class="span8">
+          <h1 class="header--content-title" layout:fragment="header">
+            First Last
+          </h1>
+          <p class="header--content-subtitle" layout:fragment="overview">
+            Subttitle Ligula Risus Tristique Pharetra
+          </p>
+        </div>
+        <div class="span4">
+          <div id='authentication' sec:authorize="isFullyAuthenticated()">
+            <span sec:authentication="name">Bob</span>
+            <a th:href="@{/signout}" href="/signout">Sign out</a>
+          </div>
+          <div layout:fragment="header-sidebar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	<div class="body--container with-filter container-fluid " layout:fragment="content">
-		Fake content
-		<div id="footer-push-down"></div>
-	</div>
+  <div class="body--container with-filter container-fluid " layout:fragment="content">
+    Fake content
+    <div id="footer-push-down"></div>
+  </div>
 
-	<div id="footer">
-		<div class="container">
+  <div id="footer">
+    <div class="container">
 
-			<div class="navbar">
-				<div class="container ">
-					<ul class="nav">
-						<li><a th:href="@{/tools}" href="pages/tools.html">Tools</a></li>
-						<li><a th:href="@{/services}" href="pages/services.html">Services</a></li>
-						<li><a th:href="@{/case-study}" href="pages/case-study.html">Case Studies</a></li>
-						<li><a th:href="@{/newsletter}" href="pages/newsletter.html">Newsletter</a></li>
-						<li><a th:href="@{/about}" href="pages/about.html">About Us</a></li>
-						<li><a th:href="@{/about/jobs}" href="pages/about/jobs.html">Jobs</a></li>
-					</ul>
-				</div>
-			</div>
+      <div class="navbar">
+        <div class="container ">
+          <ul class="nav">
+            <li><a th:href="@{/tools}" href="pages/tools.html">Tools</a></li>
+            <li><a th:href="@{/services}" href="pages/services.html">Services</a></li>
+            <li><a th:href="@{/case-study}" href="pages/case-study.html">Case Studies</a></li>
+            <li><a th:href="@{/newsletter}" href="pages/newsletter.html">Newsletter</a></li>
+            <li><a th:href="@{/about}" href="pages/about.html">About Us</a></li>
+            <li><a th:href="@{/about/jobs}" href="pages/about/jobs.html">Jobs</a></li>
+          </ul>
+        </div>
+      </div>
 
-			&copy; 2013 Go Pivotal, Inc. All Rights Reserved.
-			<a href="http://www.vmware.com/help/legal.html">Terms of Use</a>,
-			<a href="http://www.gopivotal.com/privacy-policy">Privacy</a>, and
-			<a th:href="@{/trademark}" href="pages/trademark.html">Trademark Standards</a>
+      &copy; 2013 Go Pivotal, Inc. All Rights Reserved.
+      <a href="http://www.vmware.com/help/legal.html">Terms of Use</a>,
+      <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>, and
+      <a th:href="@{/trademark}" href="pages/trademark.html">Trademark Standards</a>
 
-		</div>
-	</div>
+    </div>
+  </div>
 
 </body>
 </html>
