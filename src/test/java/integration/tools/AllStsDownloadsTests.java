@@ -65,8 +65,7 @@ public class AllStsDownloadsTests {
 
 		Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
 		assertThat(document.select("h1").text(), equalTo("Spring Tool Suite Downloads"));
-		assertThat(document.select("ul li.mac h3").text(), containsString("3.3.0"));
-		assertThat(document.select("ul li.mac a").text(), containsString("4.3"));
+		assertThat(document.select("ul li.platform h2").text(), containsString("Windows"));
 	}
 
 }

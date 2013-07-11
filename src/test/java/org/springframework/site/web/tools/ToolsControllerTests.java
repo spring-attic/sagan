@@ -13,10 +13,11 @@ import org.springframework.ui.ExtendedModelMap;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.sameInstance;
+import static org.hamcrest.Matchers.contains;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -46,8 +47,7 @@ public class ToolsControllerTests {
 		ToolSuite toolSuite = new ToolSuite(platforms);
 		when(service.getStsDownloads()).thenReturn(toolSuite);
 		controller.allStsDownloads(model);
-		assertThat((Platform) model.get("windows"), sameInstance(windows));
-		assertThat((Platform) model.get("mac"), sameInstance(mac));
-		assertThat((Platform) model.get("linux"), sameInstance(linux));
+
+		assertThat((List<Platform>) model.get("platforms"), contains(windows, mac, linux));
 	}
 }

@@ -10,20 +10,27 @@
 
 <div layout:fragment="content" class="container">
 	<ul>
-		<li class="windows">
-			<h2>Windows</h2>
-		</li>
-		<li class="mac">
-			<h2 th:text="${mac.name}">Mac</h2>
-			<h3 th:text="${mac.releaseName}">1.2.3.RELEASE</h3>
+		<li class="platform" th:each='platform : ${platforms}'>
+			<h2 th:text="${platform.name}">Mac</h2>
+			<h3 th:text="${platform.releaseName}">1.2.3.RELEASE</h3>
 			<ul>
-				<li th:each="eclipseVersion : ${mac.eclipseVersions}">
-					<a href="" th:text="${eclipseVersion.name}">Based on eclipse</a>
+				<li th:each="eclipseVersion : ${platform.eclipseVersions}" class="btn-group">
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" th:text="${eclipseVersion.name}">
+						Action
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li class='list-link' th:each='architecture : ${eclipseVersion.architectures}'>
+							<p th:text='${architecture.name}'>Architecture name</p>
+							<ul>
+								<li class='list-link' th:each='downloadlink : ${architecture.downloadLinks}'>
+									<a th:href='${downloadlink.url}' th:text='${downloadlink.fileType}'>A file type</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
 				</li>
 			</ul>
-		</li>
-		<li class="linux">
-			<h2>Linux</h2>
 		</li>
 	</ul>
 </div>
