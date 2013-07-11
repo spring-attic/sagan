@@ -57,6 +57,13 @@ public class ToolsPagesTests {
 	}
 
 	@Test
+	public void showsToolsIndex() throws Exception {
+		this.mockMvc.perform(get("/tools"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html"));
+	}
+
+	@Test
 	public void showsStsIndex() throws Exception {
 		this.mockMvc.perform(get("/tools/sts"))
 				.andExpect(status().isOk())

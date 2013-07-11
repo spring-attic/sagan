@@ -25,6 +25,11 @@ public class ToolsController {
 		this.toolsService = toolsService;
 	}
 
+	@RequestMapping(value = "", method = { GET, HEAD })
+	public String index() throws Exception {
+		return "tools/index";
+	}
+
 	@RequestMapping(value = "/sts", method = { GET, HEAD })
 	public String stsIndex() throws Exception {
 		return "tools/sts/index";
