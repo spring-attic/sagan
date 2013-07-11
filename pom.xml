@@ -261,6 +261,7 @@
 					<includes>
 						<include>**/*Tests.java</include>
 					</includes>
+                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
 				</configuration>
 			</plugin>
 			<plugin>

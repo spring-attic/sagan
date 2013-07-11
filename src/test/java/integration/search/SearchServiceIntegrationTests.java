@@ -1,6 +1,5 @@
 package integration.search;
 
-
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.ClientConfig;
@@ -22,6 +21,7 @@ import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.site.web.search.SearchEntryBuilder;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -34,15 +34,13 @@ import java.util.List;
 
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {ApplicationConfiguration.class, SearchServiceIntegrationTests.IntegrationTestElasticSearchConfiguration.class},
 		initializers = {ConfigFileApplicationContextInitializer.class, LoggingApplicationContextInitializer.class})
+@DirtiesContext
 public class SearchServiceIntegrationTests {
 
 	public static class IntegrationTestElasticSearchConfiguration {
@@ -58,6 +56,8 @@ public class SearchServiceIntegrationTests {
 			NodeBuilder nodeBuilder = nodeBuilder().local(false);
 			nodeBuilder.getSettings().put("network.host", "127.0.0.1");
 			nodeBuilder.getSettings().put("http.port", "9250");
+			nodeBuilder.getSettings().put("index.number_of_shards", "1");
+			nodeBuilder.getSettings().put("index.number_of_replicas", "0");
 			Client client = nodeBuilder.node().client();
 			return client;
 		}

@@ -25,8 +25,7 @@ import static junit.framework.Assert.assertNotNull;
 
 public class IndexerConfigurationTests {
 
-	//TODO make this dynamic
-	public static final int PORT = 9080;
+	private static final int PORT = 9090;
 
 	private ConfigurableApplicationContext context;
 
@@ -39,8 +38,12 @@ public class IndexerConfigurationTests {
 
 	@Test
 	public void testContextLoading() throws Exception {
-		SpringApplication application = IndexerConfiguration.build(IndexerOfflineConfiguration.class);
-		application.setDefaultCommandLineArgs("--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb", "--search.indexer.delay=6000000");
+		SpringApplication application = IndexerConfiguration.build(IndexerConfiguration.class);
+		application.setDefaultCommandLineArgs("--server.port=" + PORT,
+											  "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb",
+											  "--search.indexer.delay=6000000",
+											  "--spring.profiles.active=integration-test");
+
 		context = (ConfigurableApplicationContext) application.run();
 		IndexerConfiguration configuration = context.getBean(IndexerConfiguration.class);
 		assertNotNull(configuration);
