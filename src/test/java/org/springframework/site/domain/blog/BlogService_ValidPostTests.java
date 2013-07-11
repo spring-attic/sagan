@@ -1,5 +1,7 @@
 package org.springframework.site.domain.blog;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -9,23 +11,20 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
-import org.springframework.site.search.SearchEntry;
-import org.springframework.site.search.SearchException;
-import org.springframework.site.search.SearchService;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.domain.services.MarkdownService;
 import org.springframework.site.domain.team.MemberProfile;
 import org.springframework.site.domain.team.TeamRepository;
+import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchException;
+import org.springframework.site.search.SearchService;
 import org.springframework.site.test.DateTestUtils;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.util.Date;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
+
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_ValidPostTests {
@@ -67,14 +66,14 @@ public class BlogService_ValidPostTests {
 
 	@Before
 	public void setup() {
-		when(dateService.now()).thenReturn(now);
+		given(dateService.now()).willReturn(now);
 
 		MemberProfile profile = new MemberProfile();
 		profile.setMemberId(AUTHOR_ID);
 		profile.setName(AUTHOR_NAME);
 
-		when(teamRepository.findByMemberId(AUTHOR_ID)).thenReturn(profile);
-		when(postRepository.save(any(Post.class))).then(new Answer<Post>() {
+		given(teamRepository.findByMemberId(AUTHOR_ID)).willReturn(profile);
+		given(postRepository.save((Post) anyObject())).will(new Answer<Post>() {
 			@Override
 			public Post answer(InvocationOnMock invocation) throws Throwable {
 				Post post = (Post)invocation.getArguments()[0];
@@ -84,8 +83,8 @@ public class BlogService_ValidPostTests {
 		});
 
 		service = new BlogService(postRepository, markdownService, dateService, teamRepository, searchService);
-		when(markdownService.renderToHtml(content)).thenReturn(RENDERED_HTML_FROM_MARKDOWN);
-		when(markdownService.renderToHtml(firstParagraph)).thenReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
+		given(markdownService.renderToHtml(content)).willReturn(RENDERED_HTML_FROM_MARKDOWN);
+		given(markdownService.renderToHtml(firstParagraph)).willReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 		postForm = new PostForm();
 		postForm.setTitle(title);
 		postForm.setContent(content);
@@ -138,7 +137,7 @@ public class BlogService_ValidPostTests {
 
 	@Test
 	public void postIsPersisted() {
-		verify(postRepository).save(any(Post.class));
+		verify(postRepository).save((Post) anyObject());
 	}
 
 	@Test
@@ -150,13 +149,13 @@ public class BlogService_ValidPostTests {
 
 	@Test
 	public void creatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
-		verify(searchService).saveToIndex(any(SearchEntry.class));
+		verify(searchService).saveToIndex((SearchEntry) anyObject());
 	}
 
 	@Test
 	public void blogIsSavedWhenSearchServiceIsDown() {
 		reset(searchService);
-		doThrow(SearchException.class).when(searchService).saveToIndex(any(SearchEntry.class));
+		willThrow(SearchException.class).given(searchService).saveToIndex((SearchEntry) anyObject());
 		post = service.addPost(postForm, AUTHOR_ID);
 		verify(postRepository).save(post);
 	}

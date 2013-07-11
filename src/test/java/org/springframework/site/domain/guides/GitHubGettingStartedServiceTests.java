@@ -1,6 +1,8 @@
 package org.springframework.site.domain.guides;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -8,18 +10,13 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.services.GitHubService;
 import org.springframework.web.client.RestClientException;
 
-import java.io.IOException;
-import java.util.Map;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.isEmptyString;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.core.IsNull.notNullValue;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
+import static org.junit.Assert.*;
+
+import static org.hamcrest.Matchers.*;
+import static org.mockito.BDDMockito.*;
+import static org.mockito.MockitoAnnotations.*;
 
 public class GitHubGettingStartedServiceTests {
 
@@ -44,14 +41,14 @@ public class GitHubGettingStartedServiceTests {
 
 	@Test
 	public void loadGuideContent() throws IOException {
-		when(gitHubService.getRawFileAsHtml(matches(README))).thenReturn(README_CONTENT);
+		given(gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
 		GettingStartedGuide guide = service.loadGuide(GUIDE_ID);
-		assertThat(guide.getContent(), is(README_CONTENT));
+		assertThat(guide.getContent(), equalTo(README_CONTENT));
 	}
 
 	@Test
 	public void loadGuideSidebar() throws IOException {
-		when(gitHubService.getRawFileAsHtml(matches(SIDEBAR))).thenReturn(SIDEBAR_CONTENT);
+		given(gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willReturn(SIDEBAR_CONTENT);
 		GettingStartedGuide guide = service.loadGuide(GUIDE_ID);
 		assertThat(guide.getSidebar(), is(SIDEBAR_CONTENT));
 	}
@@ -60,14 +57,14 @@ public class GitHubGettingStartedServiceTests {
 	@Test(expected = GuideNotFoundException.class)
 	public void unknownGuide() {
 		String unknownGuideId = "foo";
-		when(gitHubService.getRawFileAsHtml(anyString())).thenThrow(RestClientException.class);
+		given(gitHubService.getRawFileAsHtml(anyString())).willThrow(RestClientException.class);
 		service.loadGuide(unknownGuideId);
 	}
 
 	@Test
 	public void guideWithoutSidebar(){
-		when(gitHubService.getRawFileAsHtml(matches(README))).thenReturn(README_CONTENT);
-		when(gitHubService.getRawFileAsHtml(matches(SIDEBAR))).thenThrow(RestClientException.class);
+		given(gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
+		given(gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willThrow(RestClientException.class);
 
 		GettingStartedGuide guide = service.loadGuide(GUIDE_ID);
 
@@ -84,7 +81,7 @@ public class GitHubGettingStartedServiceTests {
 
 		GuideRepo[] guideRepos = {guideRepo, notAGuideRepo};
 
-		when(gitHubService.getForObject(anyString(), eq(GuideRepo[].class))).thenReturn(guideRepos);
+		given(gitHubService.getForObject(anyString(), eq(GuideRepo[].class))).willReturn(guideRepos);
 
 		assertThat(service.listGuides(), hasItem(guideRepo));
 		assertThat(service.listGuides(), not(hasItem(notAGuideRepo)));
@@ -97,7 +94,7 @@ public class GitHubGettingStartedServiceTests {
 
 		String imageName = "welcome.png";
 
-		when(gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID), eq(imageName))).thenReturn(imageResponseFixture);
+		given(gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID), eq(imageName))).willReturn(imageResponseFixture);
 
 		byte[] result = service.loadImage(GUIDE_ID, imageName);
 
@@ -109,7 +106,7 @@ public class GitHubGettingStartedServiceTests {
 	public void unknownImage() {
 		String unknownImage = "uknown_image.png";
 
-		when(gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID), eq(unknownImage))).thenThrow(RestClientException.class);
+		given(gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID), eq(unknownImage))).willThrow(RestClientException.class);
 
 		service.loadImage(GUIDE_ID, unknownImage);
 	}

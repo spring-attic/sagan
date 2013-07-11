@@ -1,20 +1,20 @@
 package org.springframework.site.domain.guides;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.site.web.guides.GettingStartedController;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.web.client.RestClientException;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.BDDMockito.*;
 
 public class GettingStartedControllerTests {
 
@@ -29,7 +29,7 @@ public class GettingStartedControllerTests {
 
 	@Before
 	public void setup() {
-		initMocks(this);
+		MockitoAnnotations.initMocks(this);
 		controller = new GettingStartedController(guideService);
 		model = new ExtendedModelMap();
 	}
@@ -49,14 +49,14 @@ public class GettingStartedControllerTests {
 	@Test
 	public void guideIsInModel() {
 		GettingStartedGuide guide = new GettingStartedGuide("guide-id", GUIDE_TEXT, "");
-		when(guideService.loadGuide(GUIDE_NAME)).thenReturn(guide);
+		given(guideService.loadGuide(GUIDE_NAME)).willReturn(guide);
 		controller.viewGuide(GUIDE_NAME, model);
 		assertThat(((GettingStartedGuide) model.get("guide")), is(guide));
 	}
 
 	@Test(expected = RestClientException.class)
 	public void failedGuideFetch() {
-		when(guideService.loadGuide(GUIDE_NAME)).thenThrow(new RestClientException("Is GitHub down?"));
+		given(guideService.loadGuide(GUIDE_NAME)).willThrow(new RestClientException("Is GitHub down?"));
 		controller.viewGuide(GUIDE_NAME, model);
 	}
 
@@ -70,7 +70,7 @@ public class GettingStartedControllerTests {
 	@Test
 	public void listGuidesModel(){
 		List<GuideRepo> repoList = new ArrayList<GuideRepo>();
-		when(guideService.listGuides()).thenReturn(repoList);
+		given(guideService.listGuides()).willReturn(repoList);
 		controller.listGuides(model);
 		assertThat((List<GuideRepo>) model.get("guides"), is(repoList));
 	}
@@ -78,7 +78,7 @@ public class GettingStartedControllerTests {
 	@Test
 	public void loadImages() {
 		byte[] image = "animage".getBytes();
-		when(guideService.loadImage(GUIDE_NAME, "welcome.png")).thenReturn(image);
+		given(guideService.loadImage(GUIDE_NAME, "welcome.png")).willReturn(image);
 		ResponseEntity<byte[]> responseEntity = controller.loadImage(GUIDE_NAME, "welcome.png");
 		assertThat(responseEntity.getBody(), is(image));
 	}

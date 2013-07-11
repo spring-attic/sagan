@@ -19,12 +19,9 @@ import org.springframework.social.github.api.GitHub;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.context.request.ServletWebRequest;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.BDDMockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GithubAuthenticationSigninAdapterTests {
@@ -51,7 +48,7 @@ public class GithubAuthenticationSigninAdapterTests {
 
 	@Test
 	public void signInSunnyDay() {
-		when(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).thenReturn(true);
+		given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willReturn(true);
 
 		adapter.signIn("dsyer", connection, new ServletWebRequest(
 				new MockHttpServletRequest()));
@@ -64,7 +61,7 @@ public class GithubAuthenticationSigninAdapterTests {
 
 	@Test
 	public void signInFailure() {
-		when(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).thenReturn(false);
+		given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willReturn(false);
 
 		expectedException.expect(BadCredentialsException.class);
 		adapter.signIn("dsyer", connection, new ServletWebRequest(
@@ -74,7 +71,7 @@ public class GithubAuthenticationSigninAdapterTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void signInFailureAfterRestException() {
-		when(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).thenThrow(RestClientException.class);
+		given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willThrow(RestClientException.class);
 		expectedException.expect(BadCredentialsException.class);
 		adapter.signIn("dsyer", connection, new ServletWebRequest(
 				new MockHttpServletRequest()));

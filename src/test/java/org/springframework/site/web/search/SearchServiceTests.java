@@ -2,6 +2,7 @@ package org.springframework.site.web.search;
 
 import io.searchbox.Action;
 import io.searchbox.client.JestClient;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +10,7 @@ import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchException;
 import org.springframework.site.search.SearchService;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.BDDMockito.*;
 
 public class SearchServiceTests {
 
@@ -27,7 +28,7 @@ public class SearchServiceTests {
 				.publishAt("2013-01-01 10:00")
 				.build();
 
-		when(jestClient.execute(any(Action.class))).thenThrow(Exception.class);
+		given(jestClient.execute(any(Action.class))).willThrow(Exception.class);
 	}
 
 	@Test(expected = SearchException.class)
