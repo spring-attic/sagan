@@ -3,16 +3,15 @@ package org.springframework.site.web;
 import org.springframework.data.domain.Page;
 
 /**
- * Used in views for rendering pagination controls
- * Page numbers are not zero indexed
+ * Used in views for rendering pagination controls Page numbers are not zero indexed
  */
 public class PaginationInfo {
 	private final long currentPage;
 	private final long totalPages;
 
-	public PaginationInfo(Page page) {
-		currentPage = page.getNumber() + 1;
-		totalPages = page.getTotalPages();
+	public PaginationInfo(Page<?> page) {
+		this.currentPage = page.getNumber() + 1;
+		this.totalPages = page.getTotalPages();
 	}
 
 	public boolean isVisible() {
@@ -20,46 +19,50 @@ public class PaginationInfo {
 	}
 
 	public boolean isPreviousVisible() {
-		return currentPage > 1;
+		return this.currentPage > 1;
 	}
 
 	public boolean isNextVisible() {
-		return currentPage < totalPages;
+		return this.currentPage < this.totalPages;
 	}
 
 	public long getNextPageNumber() {
-		return currentPage + 1;
+		return this.currentPage + 1;
 	}
 
 	public long getPreviousPageNumber() {
-		return currentPage - 1;
+		return this.currentPage - 1;
 	}
 
 	public long getCurrentPage() {
-		return currentPage;
+		return this.currentPage;
 	}
 
 	public long getTotalPages() {
-		return totalPages;
+		return this.totalPages;
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
 		PaginationInfo that = (PaginationInfo) o;
 
-		if (currentPage != that.currentPage) return false;
-		if (totalPages != that.totalPages) return false;
+		if (this.currentPage != that.currentPage)
+			return false;
+		if (this.totalPages != that.totalPages)
+			return false;
 
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = (int) (currentPage ^ (currentPage >>> 32));
-		result = 31 * result + (int) (totalPages ^ (totalPages >>> 32));
+		int result = (int) (this.currentPage ^ (this.currentPage >>> 32));
+		result = 31 * result + (int) (this.totalPages ^ (this.totalPages >>> 32));
 		return result;
 	}
 }

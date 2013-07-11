@@ -12,11 +12,18 @@ import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static org.junit.Assert.*;
-
-import static org.hamcrest.Matchers.*;
-import static org.mockito.BDDMockito.*;
-import static org.mockito.MockitoAnnotations.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isEmptyString;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.matches;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 public class GitHubGettingStartedServiceTests {
 
@@ -35,21 +42,23 @@ public class GitHubGettingStartedServiceTests {
 	public void setup() throws IOException {
 		initMocks(this);
 
-		mapper = new ObjectMapper();
-		service = new GitHubGettingStartedService(gitHubService);
+		this.mapper = new ObjectMapper();
+		this.service = new GitHubGettingStartedService(this.gitHubService);
 	}
 
 	@Test
 	public void loadGuideContent() throws IOException {
-		given(gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
-		GettingStartedGuide guide = service.loadGuide(GUIDE_ID);
+		given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(
+				README_CONTENT);
+		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
 		assertThat(guide.getContent(), equalTo(README_CONTENT));
 	}
 
 	@Test
 	public void loadGuideSidebar() throws IOException {
-		given(gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willReturn(SIDEBAR_CONTENT);
-		GettingStartedGuide guide = service.loadGuide(GUIDE_ID);
+		given(this.gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willReturn(
+				SIDEBAR_CONTENT);
+		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
 		assertThat(guide.getSidebar(), is(SIDEBAR_CONTENT));
 	}
 
@@ -57,16 +66,20 @@ public class GitHubGettingStartedServiceTests {
 	@Test(expected = GuideNotFoundException.class)
 	public void unknownGuide() {
 		String unknownGuideId = "foo";
-		given(gitHubService.getRawFileAsHtml(anyString())).willThrow(RestClientException.class);
-		service.loadGuide(unknownGuideId);
+		given(this.gitHubService.getRawFileAsHtml(anyString())).willThrow(
+				RestClientException.class);
+		this.service.loadGuide(unknownGuideId);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
-	public void guideWithoutSidebar(){
-		given(gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
-		given(gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willThrow(RestClientException.class);
+	public void guideWithoutSidebar() {
+		given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(
+				README_CONTENT);
+		given(this.gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willThrow(
+				RestClientException.class);
 
-		GettingStartedGuide guide = service.loadGuide(GUIDE_ID);
+		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
 
 		assertThat(guide.getContent(), is(README_CONTENT));
 		assertThat(guide.getSidebar(), isEmptyString());
@@ -79,24 +92,29 @@ public class GitHubGettingStartedServiceTests {
 		GuideRepo notAGuideRepo = new GuideRepo();
 		notAGuideRepo.setName("not-a-guide");
 
-		GuideRepo[] guideRepos = {guideRepo, notAGuideRepo};
+		GuideRepo[] guideRepos = { guideRepo, notAGuideRepo };
 
-		given(gitHubService.getForObject(anyString(), eq(GuideRepo[].class))).willReturn(guideRepos);
+		given(this.gitHubService.getForObject(anyString(), eq(GuideRepo[].class)))
+				.willReturn(guideRepos);
 
-		assertThat(service.listGuides(), hasItem(guideRepo));
-		assertThat(service.listGuides(), not(hasItem(notAGuideRepo)));
+		assertThat(this.service.listGuides(), hasItem(guideRepo));
+		assertThat(this.service.listGuides(), not(hasItem(notAGuideRepo)));
 	}
 
 	@Test
 	public void loadImage() throws IOException {
 		@SuppressWarnings("unchecked")
-		Map<String, String> imageResponseFixture = mapper.readValue(new ClassPathResource("gs-device-detection.image.json", getClass()).getInputStream(), Map.class);
+		Map<String, String> imageResponseFixture = this.mapper.readValue(
+				new ClassPathResource("gs-device-detection.image.json", getClass())
+						.getInputStream(), Map.class);
 
 		String imageName = "welcome.png";
 
-		given(gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID), eq(imageName))).willReturn(imageResponseFixture);
+		given(
+				this.gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID),
+						eq(imageName))).willReturn(imageResponseFixture);
 
-		byte[] result = service.loadImage(GUIDE_ID, imageName);
+		byte[] result = this.service.loadImage(GUIDE_ID, imageName);
 
 		assertThat(result, is(notNullValue()));
 	}
@@ -106,9 +124,11 @@ public class GitHubGettingStartedServiceTests {
 	public void unknownImage() {
 		String unknownImage = "uknown_image.png";
 
-		given(gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID), eq(unknownImage))).willThrow(RestClientException.class);
+		given(
+				this.gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID),
+						eq(unknownImage))).willThrow(RestClientException.class);
 
-		service.loadImage(GUIDE_ID, unknownImage);
+		this.service.loadImage(GUIDE_ID, unknownImage);
 	}
 
 }

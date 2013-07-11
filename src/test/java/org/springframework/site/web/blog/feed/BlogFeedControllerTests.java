@@ -20,10 +20,12 @@ import org.springframework.site.domain.blog.PostCategory;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.ui.ExtendedModelMap;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.BDDMockito.*;
-import static org.springframework.site.domain.blog.PostCategory.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.springframework.site.domain.blog.PostCategory.ENGINEERING;
 
 public class BlogFeedControllerTests {
 
@@ -38,58 +40,69 @@ public class BlogFeedControllerTests {
 	private List<Post> posts = new ArrayList<Post>();
 	private HttpServletResponse response = new MockHttpServletResponse();
 
-
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		controller = new BlogFeedController(blogService);
-		posts.add(PostBuilder.post().build());
-		page = new PageImpl<Post>(posts, mock(Pageable.class), 20);
-		given(blogService.getPublishedPosts(eq(PageableFactory.forFeeds()))).willReturn(page);
-		given(blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(PageableFactory.forFeeds()))).willReturn(page);
-		given(blogService.getPublishedBroadcastPosts(eq(PageableFactory.forFeeds()))).willReturn(page);
+		this.controller = new BlogFeedController(this.blogService);
+		this.posts.add(PostBuilder.post().build());
+		this.page = new PageImpl<Post>(this.posts, mock(Pageable.class), 20);
+		given(this.blogService.getPublishedPosts(eq(PageableFactory.forFeeds())))
+				.willReturn(this.page);
+		given(
+				this.blogService.getPublishedPosts(eq(TEST_CATEGORY),
+						eq(PageableFactory.forFeeds()))).willReturn(this.page);
+		given(this.blogService.getPublishedBroadcastPosts(eq(PageableFactory.forFeeds())))
+				.willReturn(this.page);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void postsInModelForAllPublishedPosts() {
+		this.controller.listPublishedPosts(this.model, this.response);
+		assertThat((List<Post>) this.model.get("posts"), is(this.posts));
 	}
 
 	@Test
-	public void postsInModelForAllPublishedPosts(){
-		controller.listPublishedPosts(model, response);
-		assertThat((List<Post>) model.get("posts"), is(posts));
+	public void feedMetadataInModelForAllPublishedPosts() {
+		this.controller.listPublishedPosts(this.model, this.response);
+		assertThat((String) this.model.get("feed-title"), is("Spring"));
+		assertThat((String) this.model.get("feed-path"), is("/blog.atom"));
+		assertThat((String) this.model.get("blog-path"), is("/blog"));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void postsInModelForPublishedCategoryPosts() {
+		this.controller.listPublishedPostsForCategory(TEST_CATEGORY, this.model,
+				this.response);
+		assertThat((List<Post>) this.model.get("posts"), is(this.posts));
 	}
 
 	@Test
-	public void feedMetadataInModelForAllPublishedPosts(){
-		controller.listPublishedPosts(model, response);
-		assertThat((String) model.get("feed-title"), is("Spring"));
-		assertThat((String) model.get("feed-path"), is("/blog.atom"));
-		assertThat((String) model.get("blog-path"), is("/blog"));
+	public void feedMetadataInModelForCategoryPosts() {
+		this.controller.listPublishedPostsForCategory(TEST_CATEGORY, this.model,
+				this.response);
+		assertThat((String) this.model.get("feed-title"),
+				is("Spring " + TEST_CATEGORY.getDisplayName()));
+		assertThat((String) this.model.get("feed-path"), is("/blog/category/"
+				+ TEST_CATEGORY.getUrlSlug() + ".atom"));
+		assertThat((String) this.model.get("blog-path"), is("/blog/category/"
+				+ TEST_CATEGORY.getUrlSlug()));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void postsInModelForPublishedBroadcastPosts() {
+		this.controller.listPublishedBroadcastPosts(this.model, this.response);
+		assertThat((List<Post>) this.model.get("posts"), is(this.posts));
 	}
 
 	@Test
-	public void postsInModelForPublishedCategoryPosts(){
-		controller.listPublishedPostsForCategory(TEST_CATEGORY, model, response);
-		assertThat((List<Post>) model.get("posts"), is(posts));
-	}
-
-	@Test
-	public void feedMetadataInModelForCategoryPosts(){
-		controller.listPublishedPostsForCategory(TEST_CATEGORY, model, response);
-		assertThat((String) model.get("feed-title"), is("Spring " + TEST_CATEGORY.getDisplayName()));
-		assertThat((String) model.get("feed-path"), is("/blog/category/" + TEST_CATEGORY.getUrlSlug() + ".atom"));
-		assertThat((String) model.get("blog-path"), is("/blog/category/" + TEST_CATEGORY.getUrlSlug()));
-	}
-
-	@Test
-	public void postsInModelForPublishedBroadcastPosts(){
-		controller.listPublishedBroadcastPosts(model, response);
-		assertThat((List<Post>) model.get("posts"), is(posts));
-	}
-
-	@Test
-	public void feedMetadataInModelForBroadcastPosts(){
-		controller.listPublishedBroadcastPosts(model, response);
-		assertThat((String) model.get("feed-title"), is("Spring Broadcasts"));
-		assertThat((String) model.get("feed-path"), is("/blog/broadcasts.atom"));
-		assertThat((String) model.get("blog-path"), is("/blog/broadcasts"));
+	public void feedMetadataInModelForBroadcastPosts() {
+		this.controller.listPublishedBroadcastPosts(this.model, this.response);
+		assertThat((String) this.model.get("feed-title"), is("Spring Broadcasts"));
+		assertThat((String) this.model.get("feed-path"), is("/blog/broadcasts.atom"));
+		assertThat((String) this.model.get("blog-path"), is("/blog/broadcasts"));
 	}
 
 }

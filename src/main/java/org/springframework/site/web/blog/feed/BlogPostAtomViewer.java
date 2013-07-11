@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.blog.Post;
-import org.springframework.site.web.blog.PostView;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.web.SiteUrl;
+import org.springframework.site.web.blog.PostView;
 import org.springframework.web.servlet.view.feed.AbstractAtomFeedView;
 
 import com.sun.syndication.feed.atom.Category;
@@ -52,6 +52,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 	}
 
 	private void setUpdatedDate(Map<String, Object> model, Feed feed) {
+		@SuppressWarnings("unchecked")
 		List<Post> posts = (List<Post>) model.get("posts");
 		if (posts.size() > 0) {
 			Post latestPost = posts.get(0);
@@ -77,6 +78,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 	@Override
 	protected List<Entry> buildFeedEntries(Map<String, Object> model,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		@SuppressWarnings("unchecked")
 		List<Post> posts = (List<Post>) model.get("posts");
 		List<Entry> entries = new ArrayList<Entry>(posts.size());
 

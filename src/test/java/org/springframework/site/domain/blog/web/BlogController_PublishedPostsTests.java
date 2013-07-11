@@ -24,9 +24,10 @@ import org.springframework.site.web.blog.PostView;
 import org.springframework.site.web.blog.PostViewFactory;
 import org.springframework.ui.ExtendedModelMap;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.BDDMockito.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.eq;
 
 public class BlogController_PublishedPostsTests {
 
@@ -50,45 +51,49 @@ public class BlogController_PublishedPostsTests {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		controller = new BlogController(blogService, postViewFactory);
+		this.controller = new BlogController(this.blogService, this.postViewFactory);
 
 		List<Post> posts = new ArrayList<Post>();
 		posts.add(PostBuilder.post().build());
-		Page postsPage = new PageImpl<Post>(posts, new PageRequest(TEST_PAGE, 10), 20);
+		Page<Post> postsPage = new PageImpl<Post>(posts, new PageRequest(TEST_PAGE, 10),
+				20);
 		Pageable testPageable = PageableFactory.forLists(TEST_PAGE);
 
-		page = new PageImpl<PostView>(new ArrayList<PostView>(), testPageable, 1);
+		this.page = new PageImpl<PostView>(new ArrayList<PostView>(), testPageable, 1);
 
-		given(blogService.getPublishedPosts(eq(testPageable))).willReturn(postsPage);
-		given(postViewFactory.createPostViewPage(postsPage)).willReturn(page);
-		given(request.getServletPath()).willReturn("/blog/");
+		given(this.blogService.getPublishedPosts(eq(testPageable))).willReturn(postsPage);
+		given(this.postViewFactory.createPostViewPage(postsPage)).willReturn(this.page);
+		given(this.request.getServletPath()).willReturn("/blog/");
 
-		viewName = controller.listPublishedPosts(model, TEST_PAGE, request);
+		this.viewName = this.controller.listPublishedPosts(this.model, TEST_PAGE,
+				this.request);
 	}
 
 	@Test
 	public void providesAllCategoriesInModel() {
-		assertThat((PostCategory[]) model.get("categories"), is(PostCategory.values()));
+		assertThat((PostCategory[]) this.model.get("categories"),
+				is(PostCategory.values()));
 	}
 
 	@Test
-	public void providesPaginationInfoInModel(){
-		assertThat((PaginationInfo) model.get("paginationInfo"), is(new PaginationInfo(page)));
+	public void providesPaginationInfoInModel() {
+		assertThat((PaginationInfo) this.model.get("paginationInfo"),
+				is(new PaginationInfo(this.page)));
 	}
 
 	@Test
 	public void viewNameIsIndex() {
-		assertThat(viewName, is("blog/index"));
+		assertThat(this.viewName, is("blog/index"));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void postsInModel(){
-		assertThat((List<PostView>) model.get("posts"), is(posts));
+	public void postsInModel() {
+		assertThat((List<PostView>) this.model.get("posts"), is(this.posts));
 	}
 
 	@Test
-	public void feedUrlInModel(){
-		assertThat((String) model.get("feed_path"), is("/blog.atom"));
+	public void feedUrlInModel() {
+		assertThat((String) this.model.get("feed_path"), is("/blog.atom"));
 	}
 }

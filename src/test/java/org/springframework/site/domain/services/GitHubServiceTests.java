@@ -8,10 +8,13 @@ import org.springframework.site.domain.guides.GuideHtml;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.web.client.RestOperations;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.*;
-import static org.mockito.Matchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
 
 public class GitHubServiceTests {
 
@@ -28,15 +31,19 @@ public class GitHubServiceTests {
 
 	@Test
 	public void convertRawFileToHtml() {
-		given(gitHub.restOperations()).willReturn(restOperations);
+		given(this.gitHub.restOperations()).willReturn(this.restOperations);
 
 		String filePath = "/some/path";
 		String htmlResponse = "<h1>this is a header</h1>";
 		GuideHtml response = new GuideHtml(htmlResponse);
-		given(restOperations.getForObject(anyString(), (Class) anyObject())).willReturn(response);
-		String html = new GitHubService(gitHub).getRawFileAsHtml(filePath);
+		@SuppressWarnings("unchecked")
+		Class<GuideHtml> anyObject = (Class<GuideHtml>) anyObject();
+		given(this.restOperations.getForObject(anyString(), anyObject)).willReturn(
+				response);
+		String html = new GitHubService(this.gitHub).getRawFileAsHtml(filePath);
 
-		verify(restOperations).getForObject(eq(GitHubService.HOSTNAME + filePath), eq(GuideHtml.class));
+		verify(this.restOperations).getForObject(eq(GitHubService.HOSTNAME + filePath),
+				eq(GuideHtml.class));
 		assertThat(html, is(htmlResponse));
 	}
 }

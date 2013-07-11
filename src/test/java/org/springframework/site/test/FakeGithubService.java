@@ -7,7 +7,6 @@ import org.springframework.web.client.RestClientException;
 
 @Service
 @Primary
-@SuppressWarnings("unused")
 public class FakeGithubService extends GitHubService {
 
 	public FakeGithubService() {
@@ -20,7 +19,8 @@ public class FakeGithubService extends GitHubService {
 	}
 
 	@Override
-	public <T> T postForObject(String path, Object request, Class<T> responseType, Object... uriVariables) {
+	public <T> T postForObject(String path, Object request, Class<T> responseType,
+			Object... uriVariables) {
 		try {
 			return responseType.newInstance();
 		} catch (Exception e) {
@@ -29,7 +29,8 @@ public class FakeGithubService extends GitHubService {
 	}
 
 	@Override
-	public <T> T getForObject(String path, Class<T> responseType, Object... uriVariables) throws RestClientException {
+	public <T> T getForObject(String path, Class<T> responseType, Object... uriVariables)
+			throws RestClientException {
 		try {
 			return responseType.newInstance();
 		} catch (Exception e) {

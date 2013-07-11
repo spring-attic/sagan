@@ -16,7 +16,8 @@ import org.springframework.site.web.configuration.SecurityConfiguration;
 @EnableAutoConfiguration
 @Configuration
 @ComponentScan(basePackages = { "org.springframework.site.indexer",
-		"org.springframework.site.search", "org.springframework.site.documentation" })
+		"org.springframework.site.search",
+		"org.springframework.site.domain.documentation" })
 @EnableScheduling
 @Import({ SearchClientConfiguration.class, GitHubConfiguration.class,
 		SecurityConfiguration.class })

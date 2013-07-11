@@ -36,8 +36,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableAutoConfiguration
 @Configuration
 @ComponentScan(basePackages = { "org.springframework.site.web",
-		"org.springframework.site.domain", "org.springframework.site.search",
-		"org.springframework.site.documentation" })
+		"org.springframework.site.domain", "org.springframework.site.search" })
 public class ApplicationConfiguration {
 
 	public static void main(String[] args) {

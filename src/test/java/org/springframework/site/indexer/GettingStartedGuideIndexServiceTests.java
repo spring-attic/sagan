@@ -12,7 +12,12 @@ import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.web.client.RestClientException;
 
-import static org.mockito.BDDMockito.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class GettingStartedGuideIndexServiceTests {
 
@@ -26,22 +31,26 @@ public class GettingStartedGuideIndexServiceTests {
 		GuideRepo repo = new GuideRepo();
 		repo.setName("gs-awesome-guide");
 		repos.add(repo);
-		given(gettingStartedService.listGuides()).willReturn(repos);
-		service = new GettingStartedGuideIndexService(searchService, gettingStartedService, mock(CounterService.class));
+		given(this.gettingStartedService.listGuides()).willReturn(repos);
+		this.service = new GettingStartedGuideIndexService(this.searchService,
+				this.gettingStartedService, mock(CounterService.class));
 	}
 
 	@Test
 	public void savesGuidesToSearchIndex() throws Exception {
-		GettingStartedGuide guide = new GettingStartedGuide("awesome-guide", "some content", "some sidebar");
-		given(gettingStartedService.loadGuide(anyString())).willReturn(guide);
-		service.indexGuides();
-		verify(searchService).saveToIndex(any(SearchEntry.class));
+		GettingStartedGuide guide = new GettingStartedGuide("awesome-guide",
+				"some content", "some sidebar");
+		given(this.gettingStartedService.loadGuide(anyString())).willReturn(guide);
+		this.service.indexGuides();
+		verify(this.searchService).saveToIndex(any(SearchEntry.class));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void skipsGuidesNotFound() throws Exception {
-		given(gettingStartedService.loadGuide(anyString())).willThrow(RestClientException.class);
-		service.indexGuides();
-		verifyZeroInteractions(searchService);
+		given(this.gettingStartedService.loadGuide(anyString())).willThrow(
+				RestClientException.class);
+		this.service.indexGuides();
+		verifyZeroInteractions(this.searchService);
 	}
 }

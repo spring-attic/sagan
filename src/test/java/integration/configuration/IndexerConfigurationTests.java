@@ -21,7 +21,7 @@ import org.springframework.bootstrap.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.site.indexer.configuration.IndexerConfiguration;
 
-import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertNotNull;
 
 public class IndexerConfigurationTests {
 
@@ -31,23 +31,25 @@ public class IndexerConfigurationTests {
 
 	@After
 	public void clean() {
-		if (context != null) {
-			context.close();
+		if (this.context != null) {
+			this.context.close();
 		}
 	}
 
 	@Test
 	public void testContextLoading() throws Exception {
-		SpringApplication application = IndexerConfiguration.build(IndexerConfiguration.class);
+		SpringApplication application = IndexerConfiguration
+				.build(IndexerConfiguration.class);
 		application.setDefaultCommandLineArgs("--server.port=" + PORT,
-											  "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb",
-											  "--search.indexer.delay=6000000",
-											  "--spring.profiles.active=integration-test");
+				"--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb",
+				"--search.indexer.delay=6000000",
+				"--spring.profiles.active=integration-test");
 
-		context = (ConfigurableApplicationContext) application.run();
-		IndexerConfiguration configuration = context.getBean(IndexerConfiguration.class);
+		this.context = (ConfigurableApplicationContext) application.run();
+		IndexerConfiguration configuration = this.context
+				.getBean(IndexerConfiguration.class);
 		assertNotNull(configuration);
-		context.close();
+		this.context.close();
 	}
 
 }

@@ -14,10 +14,13 @@ import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.ui.ExtendedModelMap;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.*;
-import static org.mockito.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
 
 public class SearchControllerTests {
 
@@ -32,34 +35,37 @@ public class SearchControllerTests {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		controller = new SearchController(searchService);
+		this.controller = new SearchController(this.searchService);
 		SearchEntry entry = new SearchEntry();
-		entries.add(entry);
-		resultsPage = new PageImpl<SearchEntry>(entries);
-		given(searchService.search(anyString(), (Pageable) anyObject())).willReturn(resultsPage);
+		this.entries.add(entry);
+		this.resultsPage = new PageImpl<SearchEntry>(this.entries);
+		given(this.searchService.search(anyString(), (Pageable) anyObject())).willReturn(
+				this.resultsPage);
 	}
 
 	@Test
 	public void search_providesQueryInModel() {
-		controller.search("searchTerm", 1, model);
-		assertThat((String) model.get("query"), is(equalTo("searchTerm")));
+		this.controller.search("searchTerm", 1, this.model);
+		assertThat((String) this.model.get("query"), is(equalTo("searchTerm")));
 	}
 
 	@Test
 	public void search_providesPaginationInfoInModel() {
-		controller.search("searchTerm", 1, model);
-		assertThat(model.get("paginationInfo"), is(notNullValue()));
+		this.controller.search("searchTerm", 1, this.model);
+		assertThat(this.model.get("paginationInfo"), is(notNullValue()));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void search_providesResultsInModel() {
-		controller.search("searchTerm", 1, model);
-		assertThat((List<SearchEntry>) model.get("results"), equalTo(entries));
+		this.controller.search("searchTerm", 1, this.model);
+		assertThat((List<SearchEntry>) this.model.get("results"), equalTo(this.entries));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void search_providesAllResultsForBlankQuery() {
-		controller.search("", 1, model);
-		assertThat((List<SearchEntry>) model.get("results"), equalTo(entries));
+		this.controller.search("", 1, this.model);
+		assertThat((List<SearchEntry>) this.model.get("results"), equalTo(this.entries));
 	}
 }

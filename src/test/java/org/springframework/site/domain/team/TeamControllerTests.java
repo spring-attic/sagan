@@ -14,9 +14,9 @@ import org.springframework.site.web.blog.PostViewFactory;
 import org.springframework.site.web.team.TeamController;
 import org.springframework.ui.ExtendedModelMap;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.BDDMockito.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TeamControllerTests {
@@ -33,19 +33,23 @@ public class TeamControllerTests {
 
 	@Before
 	public void setUp() throws Exception {
-		teamController = new TeamController(teamRepository, blogService, new PostViewFactory(new DateService()));
+		this.teamController = new TeamController(this.teamRepository, this.blogService,
+				new PostViewFactory(new DateService()));
 		List<MemberProfile> all = new ArrayList<MemberProfile>();
 
 		all.add(MemberProfileBuilder.profile().name("Norman").geoLocation(10, 5).build());
-		all.add(MemberProfileBuilder.profile().name("Patrick").geoLocation(-5, 15).build());
+		all.add(MemberProfileBuilder.profile().name("Patrick").geoLocation(-5, 15)
+				.build());
 
-		given(teamRepository.findAll()).willReturn(all);
+		given(this.teamRepository.findAll()).willReturn(all);
 	}
 
 	@Test
 	public void includeTeamLocationsInModel() throws Exception {
-		teamController.showTeam(model);
-		List<TeamLocation> teamLocations = (List<TeamLocation>) model.get("teamLocations");
+		this.teamController.showTeam(this.model);
+		@SuppressWarnings("unchecked")
+		List<TeamLocation> teamLocations = (List<TeamLocation>) this.model
+				.get("teamLocations");
 
 		TeamLocation norman = teamLocations.get(0);
 		assertThat(norman.getName(), equalTo("Norman"));

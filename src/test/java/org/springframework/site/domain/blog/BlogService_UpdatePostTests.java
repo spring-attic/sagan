@@ -16,17 +16,21 @@ import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.test.DateTestUtils;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.BDDMockito.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_UpdatePostTests {
 
 	public static final String RENDERED_HTML_FROM_MARKDOWN = "<p>Rendered HTML</p><p>from Markdown</p>";
 	public static final String RENDERED_SUMMARY_HTML_FROM_MARKDOWN = "<p>Rendered HTML</p>";
-	private static final String AUTHOR = "author";
 	private BlogService service;
 	private Post post;
 	private String title = "Title";
@@ -62,81 +66,86 @@ public class BlogService_UpdatePostTests {
 
 	@Before
 	public void setup() {
-		given(dateService.now()).willReturn(now);
+		given(this.dateService.now()).willReturn(this.now);
 
-		service = new BlogService(postRepository, markdownService, dateService, teamRepository, searchService);
-		given(markdownService.renderToHtml(content)).willReturn(RENDERED_HTML_FROM_MARKDOWN);
-		given(markdownService.renderToHtml(firstParagraph)).willReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
+		this.service = new BlogService(this.postRepository, this.markdownService,
+				this.dateService, this.teamRepository, this.searchService);
+		given(this.markdownService.renderToHtml(this.content)).willReturn(
+				RENDERED_HTML_FROM_MARKDOWN);
+		given(this.markdownService.renderToHtml(this.firstParagraph)).willReturn(
+				RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 
-		post = PostBuilder.post().id(123L).author("author_id", ORIGINAL_AUTHOR).build();
-		postForm = new PostForm(post);
-		postForm.setTitle(title);
-		postForm.setContent(content);
-		postForm.setCategory(category);
-		postForm.setBroadcast(broadcast);
-		postForm.setPublishAt(publishAt);
+		this.post = PostBuilder.post().id(123L).author("author_id", this.ORIGINAL_AUTHOR)
+				.build();
+		this.postForm = new PostForm(this.post);
+		this.postForm.setTitle(this.title);
+		this.postForm.setContent(this.content);
+		this.postForm.setCategory(this.category);
+		this.postForm.setBroadcast(this.broadcast);
+		this.postForm.setPublishAt(this.publishAt);
 
-		service.updatePost(post, postForm);
+		this.service.updatePost(this.post, this.postForm);
 	}
 
 	public void postHasCorrectUserEnteredValues() {
-		service.updatePost(post, postForm);
+		this.service.updatePost(this.post, this.postForm);
 
-		assertThat(post.getTitle(), equalTo(title));
-		assertThat(post.getRawContent(), equalTo(content));
-		assertThat(post.getCategory(), equalTo(category));
-		assertThat(post.isBroadcast(), equalTo(broadcast));
-		assertThat(post.isDraft(), equalTo(draft));
-		assertThat(post.getPublishAt(), equalTo(publishAt));
+		assertThat(this.post.getTitle(), equalTo(this.title));
+		assertThat(this.post.getRawContent(), equalTo(this.content));
+		assertThat(this.post.getCategory(), equalTo(this.category));
+		assertThat(this.post.isBroadcast(), equalTo(this.broadcast));
+		assertThat(this.post.isDraft(), equalTo(this.draft));
+		assertThat(this.post.getPublishAt(), equalTo(this.publishAt));
 	}
 
 	@Test
 	public void postRetainsOriginalAuthor() {
-		assertThat(post.getAuthor().getName(), equalTo(ORIGINAL_AUTHOR));
+		assertThat(this.post.getAuthor().getName(), equalTo(this.ORIGINAL_AUTHOR));
 	}
 
 	@Test
 	public void postHasRenderedContent() {
-		assertThat(post.getRenderedContent(), equalTo(RENDERED_HTML_FROM_MARKDOWN));
+		assertThat(this.post.getRenderedContent(), equalTo(RENDERED_HTML_FROM_MARKDOWN));
 	}
 
 	@Test
 	public void postHasRenderedSummary() {
-		assertThat(post.getRenderedSummary(), equalTo(RENDERED_SUMMARY_HTML_FROM_MARKDOWN));
+		assertThat(this.post.getRenderedSummary(),
+				equalTo(RENDERED_SUMMARY_HTML_FROM_MARKDOWN));
 	}
 
 	@Test
 	public void draftWithNullPublishDate() {
-		postForm.setDraft(true);
-		postForm.setPublishAt(null);
-		service.updatePost(post, postForm);
-		assertThat(post.getPublishAt(), is(nullValue()));
+		this.postForm.setDraft(true);
+		this.postForm.setPublishAt(null);
+		this.service.updatePost(this.post, this.postForm);
+		assertThat(this.post.getPublishAt(), is(nullValue()));
 	}
 
 	@Test
 	public void postWithNullPublishDateSetsPublishAtToNow() {
-		postForm.setDraft(false);
-		postForm.setPublishAt(null);
-		service.updatePost(post, postForm);
-		assertThat(post.getPublishAt(), equalTo(now));
+		this.postForm.setDraft(false);
+		this.postForm.setPublishAt(null);
+		this.service.updatePost(this.post, this.postForm);
+		assertThat(this.post.getPublishAt(), equalTo(this.now));
 	}
 
 	@Test
 	public void postIsPersisted() {
-		verify(postRepository).save(post);
+		verify(this.postRepository).save(this.post);
 	}
 
 	@Test
 	public void updatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
-		verify(searchService).saveToIndex((SearchEntry) anyObject());
+		verify(this.searchService).saveToIndex((SearchEntry) anyObject());
 	}
 
 	@Test
 	public void updatingABlogPost_doesNotSaveToSearchIndexIfNotLive() throws Exception {
-		reset(searchService);
+		reset(this.searchService);
 		long postId = 123L;
 		Post post = PostBuilder.post().id(postId).draft().build();
-		service.updatePost(post, new PostForm(post));
-		verifyZeroInteractions(searchService);
+		this.service.updatePost(post, new PostForm(post));
+		verifyZeroInteractions(this.searchService);
 	}
 }
