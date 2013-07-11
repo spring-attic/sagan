@@ -1,6 +1,6 @@
 package integration.documentation;
 
-import integration.configuration.SiteOfflineConfiguration;
+import integration.configuration.IntegrationTestsConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = SiteOfflineConfiguration.class)
+@ContextConfiguration(classes = IntegrationTestsConfiguration.class)
 public class ViewDocumentationTests {
 
 	@Autowired

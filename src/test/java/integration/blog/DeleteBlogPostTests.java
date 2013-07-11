@@ -1,6 +1,6 @@
 package integration.blog;
 
-import integration.configuration.SiteOfflineConfiguration;
+import integration.configuration.IntegrationTestsConfiguration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = SiteOfflineConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
+@ContextConfiguration(classes = IntegrationTestsConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
 public class DeleteBlogPostTests {
 
 	@Autowired

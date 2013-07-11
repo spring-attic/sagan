@@ -1,6 +1,6 @@
 package integration.guides;
 
-import integration.configuration.SiteOfflineConfiguration;
+import integration.configuration.IntegrationTestsConfiguration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {SiteOfflineConfiguration.class})
+@ContextConfiguration(classes = {IntegrationTestsConfiguration.class})
 public class GettingStartedGuidesTests {
 	@Autowired
 	private WebApplicationContext wac;
@@ -54,12 +54,12 @@ public class GettingStartedGuidesTests {
 				.andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertThat(html.select("article").text(), is(SiteOfflineConfiguration.GETTING_STARTED_GUIDE.getContent()));
-		assertThat(html.select("aside#sidebar .related_resources").text(), is(SiteOfflineConfiguration.GETTING_STARTED_GUIDE.getSidebar()));
+		assertThat(html.select("article").text(), is(IntegrationTestsConfiguration.GETTING_STARTED_GUIDE.getContent()));
+		assertThat(html.select("aside#sidebar .related_resources").text(), is(IntegrationTestsConfiguration.GETTING_STARTED_GUIDE.getSidebar()));
 
 		Element downloadLink = html.select("aside#sidebar a.github_download").first();
 		assertThat(downloadLink, is(notNullValue()));
-		assertThat(downloadLink.attr("href"), is(SiteOfflineConfiguration.GETTING_STARTED_GUIDE.getZipUrl()));
+		assertThat(downloadLink.attr("href"), is(IntegrationTestsConfiguration.GETTING_STARTED_GUIDE.getZipUrl()));
 	}
 
 }

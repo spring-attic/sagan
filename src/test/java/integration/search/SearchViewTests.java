@@ -1,6 +1,6 @@
 package integration.search;
 
-import integration.configuration.SiteOfflineConfiguration;
+import integration.configuration.IntegrationTestsConfiguration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,10 +13,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.site.web.PageableFactory;
-import org.springframework.site.web.PaginationInfo;
 import org.springframework.site.domain.blog.Post;
 import org.springframework.site.search.SearchEntry;
+import org.springframework.site.web.PageableFactory;
+import org.springframework.site.web.PaginationInfo;
 import org.springframework.site.web.search.SearchEntryBuilder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -41,7 +41,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = SiteOfflineConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
+@ContextConfiguration(classes = IntegrationTestsConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
 public class SearchViewTests {
 
 	@Autowired

@@ -1,6 +1,6 @@
 package integration;
 
-import integration.configuration.SiteOfflineConfiguration;
+import integration.configuration.IntegrationTestsConfiguration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -46,7 +46,7 @@ public class BasicAcceptanceTests {
 							@Override
 							public ConfigurableApplicationContext call() throws Exception {
 								return (ConfigurableApplicationContext) ApplicationConfiguration
-										.build(SiteOfflineConfiguration.class).run("--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb");
+										.build(IntegrationTestsConfiguration.class).run("--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb");
 							}
 						});
 		context = future.get(30, TimeUnit.SECONDS);

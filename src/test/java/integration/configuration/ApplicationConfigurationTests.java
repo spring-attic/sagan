@@ -37,7 +37,7 @@ public class ApplicationConfigurationTests {
 
 	@Test
 	public void testContextLoading() throws Exception {
-		SpringApplication application = ApplicationConfiguration.build(SiteOfflineConfiguration.class);
+		SpringApplication application = ApplicationConfiguration.build(IntegrationTestsConfiguration.class);
 		application.setDefaultCommandLineArgs("--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb");
 		context = (ConfigurableApplicationContext) application.run();
 		ApplicationConfiguration configuration = context
