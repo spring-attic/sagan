@@ -1,4 +1,4 @@
-package org.springframework.site.domain.tools.xml;
+package org.springframework.site.domain.tools.toolsuite.xml;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;

@@ -1,7 +1,7 @@
-package org.springframework.site.domain.tools.parser;
+package org.springframework.site.domain.tools.toolsuite.parser;
 
 import org.springframework.site.domain.tools.toolsuite.DownloadLink;
-import org.springframework.site.domain.tools.xml.Download;
+import org.springframework.site.domain.tools.toolsuite.xml.Download;
 
 public class DownloadLinkExtractor {
 	public DownloadLink createDownloadLink(Download download) {

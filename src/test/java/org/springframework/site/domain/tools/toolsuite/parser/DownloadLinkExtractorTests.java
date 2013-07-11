@@ -1,8 +1,8 @@
-package org.springframework.site.domain.tools.parser;
+package org.springframework.site.domain.tools.toolsuite.parser;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.site.domain.tools.xml.Download;
+import org.springframework.site.domain.tools.toolsuite.xml.Download;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

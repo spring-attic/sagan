@@ -2,9 +2,9 @@ package org.springframework.site.domain.tools;
 
 import org.simpleframework.xml.Serializer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.tools.parser.ToolXmlConverter;
+import org.springframework.site.domain.tools.toolsuite.parser.ToolXmlConverter;
 import org.springframework.site.domain.tools.toolsuite.ToolSuite;
-import org.springframework.site.domain.tools.xml.ToolSuiteXml;
+import org.springframework.site.domain.tools.toolsuite.xml.ToolSuiteXml;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

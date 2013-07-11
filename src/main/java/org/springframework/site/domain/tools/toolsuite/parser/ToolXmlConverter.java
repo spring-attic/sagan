@@ -1,9 +1,9 @@
-package org.springframework.site.domain.tools.parser;
+package org.springframework.site.domain.tools.toolsuite.parser;
 
 import org.springframework.site.domain.tools.toolsuite.ToolSuite;
-import org.springframework.site.domain.tools.xml.Download;
-import org.springframework.site.domain.tools.xml.Release;
-import org.springframework.site.domain.tools.xml.ToolSuiteXml;
+import org.springframework.site.domain.tools.toolsuite.xml.Download;
+import org.springframework.site.domain.tools.toolsuite.xml.Release;
+import org.springframework.site.domain.tools.toolsuite.xml.ToolSuiteXml;
 
 public class ToolXmlConverter {
 

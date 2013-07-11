@@ -12,8 +12,6 @@ import org.springframework.site.domain.tools.toolsuite.DownloadLink;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
 import org.springframework.site.domain.tools.toolsuite.Platform;
 import org.springframework.site.domain.tools.toolsuite.ToolSuite;
-import org.springframework.site.domain.tools.xml.Release;
-import org.springframework.site.domain.tools.xml.ToolSuiteXml;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 
@@ -47,17 +45,6 @@ public class ToolsServiceTests {
 		InputStream response = new ClassPathResource("/sts_downloads.xml", getClass()).getInputStream();
 		responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
 		when(restTemplate.getForObject(anyString(), eq(String.class))).thenReturn(responseXml);
-	}
-
-	@Test
-	public void unmarshal() throws Exception {
-		Serializer serializer = new Persister();
-
-		ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
-		assertThat(toolSuiteXml.getReleases(), notNullValue());
-		assertThat(toolSuiteXml.getReleases().size(), equalTo(4));
-		Release release = toolSuiteXml.getReleases().get(0);
-		assertThat(release.getDownloads().size(), equalTo(16));
 	}
 
 	@Test
