@@ -2,7 +2,6 @@ package integration.configuration;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.elasticsearch.client.Client;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -11,6 +10,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.guides.GettingStartedGuide;
 import org.springframework.site.domain.guides.GettingStartedService;
 import org.springframework.site.domain.guides.GuideRepo;
+import org.springframework.site.search.SearchService;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.web.client.RestTemplate;
 
@@ -64,8 +64,8 @@ public class IntegrationTestsConfiguration {
 
 	@Primary
 	@Bean
-	public Client elasticSearchClient() throws Exception {
-		return mock(Client.class);
+	public SearchService searchService() throws Exception {
+		return mock(SearchService.class);
 	}
 
 }
