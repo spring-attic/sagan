@@ -1,4 +1,4 @@
-package org.springframework.site.test;
+package integration.stubs;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.site.domain.services.GitHubService;
@@ -7,9 +7,11 @@ import org.springframework.web.client.RestClientException;
 
 @Service
 @Primary
-public class FakeGithubService extends GitHubService {
+@SuppressWarnings("unused")
+//Component Scanned
+public class StubGithubService extends GitHubService {
 
-	public FakeGithubService() {
+	public StubGithubService() {
 		super(null);
 	}
 

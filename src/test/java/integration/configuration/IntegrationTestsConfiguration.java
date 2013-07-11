@@ -2,15 +2,11 @@ package integration.configuration;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.guides.GettingStartedGuide;
 import org.springframework.site.domain.guides.GettingStartedService;
 import org.springframework.site.domain.guides.GuideRepo;
-import org.springframework.site.search.SearchService;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,6 +18,7 @@ import static org.mockito.Mockito.mock;
 
 @Configuration
 @Import({ApplicationConfiguration.class})
+@ComponentScan("integration.stubs")
 public class IntegrationTestsConfiguration {
 
 	public static final GettingStartedGuide GETTING_STARTED_GUIDE =
@@ -60,12 +57,6 @@ public class IntegrationTestsConfiguration {
 				return new byte[0];
 			}
 		};
-	}
-
-	@Primary
-	@Bean
-	public SearchService searchService() throws Exception {
-		return mock(SearchService.class);
 	}
 
 }
