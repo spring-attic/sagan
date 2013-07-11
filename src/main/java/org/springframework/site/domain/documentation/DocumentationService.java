@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.bootstrap.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 @Service
+@ConfigurationProperties(path = "${documentation.path:classpath:documentation.yml}")
 public class DocumentationService {
 
 	private List<Project> projects = new ArrayList<Project>();
@@ -16,20 +18,20 @@ public class DocumentationService {
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 		for (Project project : projects) {
-			map.put(project.getId(), project);
+			this.map.put(project.getId(), project);
 		}
 	}
 
 	public List<Project> getProjects() {
-		return projects;
+		return this.projects;
 	}
 
 	public Project getProject(String id) {
-		if (map==null) {
-			map = new HashMap<String, Project>();
-			setProjects(projects);
+		if (this.map == null) {
+			this.map = new HashMap<String, Project>();
+			setProjects(this.projects);
 		}
-		return map.get(id);
+		return this.map.get(id);
 	}
 
 }

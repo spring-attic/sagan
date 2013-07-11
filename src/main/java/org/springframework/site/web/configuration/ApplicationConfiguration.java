@@ -15,6 +15,8 @@
  */
 package org.springframework.site.web.configuration;
 
+import javax.sql.DataSource;
+
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
@@ -31,11 +33,11 @@ import org.springframework.site.web.SiteUrl;
 import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
 import org.springframework.web.client.RestTemplate;
 
-import javax.sql.DataSource;
-
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan(basePackages = {"org.springframework.site.web", "org.springframework.site.domain", "org.springframework.site.search"})
+@ComponentScan(basePackages = { "org.springframework.site.web",
+		"org.springframework.site.domain", "org.springframework.site.search",
+		"org.springframework.site.documentation" })
 public class ApplicationConfiguration {
 
 	public static void main(String[] args) {
@@ -44,26 +46,26 @@ public class ApplicationConfiguration {
 
 	public static SpringApplication build(Class<?>... config) {
 		SpringApplication application = new SpringApplication(config);
-		application.setDefaultCommandLineArgs(
-				"--spring.template.mode=LEGACYHTML5",
+		application.setDefaultCommandLineArgs("--spring.template.mode=LEGACYHTML5",
 				"--spring.template.cache=false");
 		return application;
 	}
 
 	@Configuration
-	@Profile({"development", "staging", "production"})
+	@Profile({ "development", "staging", "production" })
 	protected static class CloudFoundryDataSourceConfiguration {
 		@Bean
 		public DataSource dataSource() {
 			CloudEnvironment cloudEnvironment = new CloudEnvironment();
-			RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db", RdbmsServiceInfo.class);
+			RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db",
+					RdbmsServiceInfo.class);
 			RdbmsServiceCreator serviceCreator = new RdbmsServiceCreator();
 			return serviceCreator.createService(serviceInfo);
 		}
 	}
 
 	@Bean
-	public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl, DateService dateService){
+	public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl, DateService dateService) {
 		return new BlogPostAtomViewer(siteUrl, dateService);
 	}
 

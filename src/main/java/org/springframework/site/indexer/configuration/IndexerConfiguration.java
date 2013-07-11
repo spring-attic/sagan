@@ -10,15 +10,16 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.site.search.configuration.SearchClientConfiguration;
-import org.springframework.site.web.configuration.DocumentationConfiguration;
 import org.springframework.site.web.configuration.GitHubConfiguration;
 import org.springframework.site.web.configuration.SecurityConfiguration;
 
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan(basePackages = {"org.springframework.site.indexer", "org.springframework.site.search"})
+@ComponentScan(basePackages = { "org.springframework.site.indexer",
+		"org.springframework.site.search", "org.springframework.site.documentation" })
 @EnableScheduling
-@Import({SearchClientConfiguration.class, DocumentationConfiguration.class, GitHubConfiguration.class, SecurityConfiguration.class})
+@Import({ SearchClientConfiguration.class, GitHubConfiguration.class,
+		SecurityConfiguration.class })
 public class IndexerConfiguration {
 
 	public static void main(String[] args) {
@@ -27,8 +28,7 @@ public class IndexerConfiguration {
 
 	public static SpringApplication build(Class<?>... config) {
 		SpringApplication application = new SpringApplication(config);
-		application.setDefaultCommandLineArgs(
-				"--server.port=9000");
+		application.setDefaultCommandLineArgs("--server.port=9000");
 		return application;
 	}
 
