@@ -57,7 +57,7 @@ public class AllStsDownloadsTests {
 	}
 
 	@Test
-	public void showsAllStsDownloads() throws Exception {
+	 public void showsAllStsDownloads() throws Exception {
 		MvcResult mvcResult = this.mockMvc.perform(get("/tools/sts/all"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
@@ -66,6 +66,20 @@ public class AllStsDownloadsTests {
 		Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
 		assertThat(document.select("h1").text(), equalTo("Spring Tool Suite Downloads"));
 		assertThat(document.select("ul li.platform h2").text(), containsString("Windows"));
+		assertThat(document.select("ul.dropdown-menu a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
+	}
+
+	@Test
+	public void showsAllGgtsDownloads() throws Exception {
+		MvcResult mvcResult = this.mockMvc.perform(get("/tools/ggts/all"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html"))
+				.andReturn();
+
+		Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
+		assertThat(document.select("h1").text(), equalTo("Groovy Grails Tool Suite Downloads"));
+		assertThat(document.select("ul li.platform h2").text(), containsString("Windows"));
+		assertThat(document.select("ul.dropdown-menu a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
 	}
 
 }

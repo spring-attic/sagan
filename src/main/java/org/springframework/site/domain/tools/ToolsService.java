@@ -25,4 +25,10 @@ public class ToolsService {
 		ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
 		return toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite");
 	}
+
+	public ToolSuite getGgtsDownloads() throws Exception {
+		String responseXml = restTemplate.getForObject("http://dist.springsource.com/release/STS/index-new.xml", String.class);
+		ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
+		return toolXmlConverter.convert(toolSuiteXml, "Groovy/Grails Tool Suite");
+	}
 }

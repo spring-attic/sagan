@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<div layout:fragment="tools-links">
+<ul>
+	<li class="platform" th:each='platform : ${platforms}'>
+		<h2 th:text="${platform.name}">Mac</h2>
+		<h3 th:text="${platform.releaseName}">1.2.3.RELEASE</h3>
+		<ul>
+			<li th:each="eclipseVersion : ${platform.eclipseVersions}" class="btn-group">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" th:text="${eclipseVersion.name}">
+					Action
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li class='list-link' th:each='architecture : ${eclipseVersion.architectures}'>
+						<p th:text='${architecture.name}'>Architecture name</p>
+						<ul>
+							<li class='list-link' th:each='downloadlink : ${architecture.downloadLinks}'>
+								<a th:href='${downloadlink.url}' th:text='${downloadlink.fileType}'>A file type</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+
+<hr />
+
+<h2>Update Site Archives</h2>
+<table>
+	<tr th:each="archive : ${updateSiteArchives}">
+		<td th:text="${archive.version}">e.43</td>
+		<td><a th:href="${archive.url}" th:text="${archive.fileName}">springsource-tool-suite-3.2.0.RELEASE-e4.3-updatesite.zip</a></td>
+		<td th:text="${archive.fileSize}">185MB</td>
+	</tr>
+</table>
+</div>
+</body>
+</html>

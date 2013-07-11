@@ -54,4 +54,23 @@ public class ToolsControllerTests {
 		assertThat((List<Platform>) model.get("platforms"), contains(windows, mac, linux));
 		assertThat((List<UpdateSiteArchive>) model.get("updateSiteArchives"), sameInstance(archives));
 	}
+
+	@Test
+	public void allGgtsDownloadsAddsDownloadsToModel() throws Exception {
+		Map<String, Platform> platforms = new HashMap<String, Platform>();
+		Platform windows = new Platform("windows", "blah", Collections.<EclipseVersion>emptyList());
+		platforms.put("windows", windows);
+		Platform mac = new Platform("mac", "blah", Collections.<EclipseVersion>emptyList());
+		platforms.put("mac", mac);
+		Platform linux = new Platform("linux", "blah", Collections.<EclipseVersion>emptyList());
+		platforms.put("linux", linux);
+
+		List<UpdateSiteArchive> archives = Collections.emptyList();
+		ToolSuite toolSuite = new ToolSuite(platforms, archives);
+		when(service.getGgtsDownloads()).thenReturn(toolSuite);
+		controller.allGgtsDownloads(model);
+
+		assertThat((List<Platform>) model.get("platforms"), contains(windows, mac, linux));
+		assertThat((List<UpdateSiteArchive>) model.get("updateSiteArchives"), sameInstance(archives));
+	}
 }

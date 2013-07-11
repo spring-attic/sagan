@@ -28,7 +28,19 @@ public class ToolsController {
 	@RequestMapping(value = "/sts/all", method = { GET, HEAD })
 	public String allStsDownloads(Model model) throws Exception {
 		ToolSuite stsDownloads = toolsService.getStsDownloads();
-		Map<String,Platform> allPlatforms = stsDownloads.getPlatforms();
+		buildAllDownloadsModel(model, stsDownloads);
+		return "tools/sts/all";
+	}
+
+	@RequestMapping(value = "/ggts/all", method = { GET, HEAD })
+	public String allGgtsDownloads(Model model) throws Exception {
+		ToolSuite ggtsDownloads = toolsService.getGgtsDownloads();
+		buildAllDownloadsModel(model, ggtsDownloads);
+		return "tools/ggts/all";
+	}
+
+	private void buildAllDownloadsModel(Model model, ToolSuite ggtsDownloads) {
+		Map<String,Platform> allPlatforms = ggtsDownloads.getPlatforms();
 
 		List<Platform> platforms = new ArrayList<Platform>();
 		platforms.add(allPlatforms.get("windows"));
@@ -36,9 +48,6 @@ public class ToolsController {
 		platforms.add(allPlatforms.get("linux"));
 
 		model.addAttribute("platforms", platforms);
-		model.addAttribute("updateSiteArchives", stsDownloads.getArchives());
-
-		return "tools/sts/all";
+		model.addAttribute("updateSiteArchives", ggtsDownloads.getArchives());
 	}
-
 }
