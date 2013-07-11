@@ -38,10 +38,11 @@ import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {ApplicationConfiguration.class, SearchServiceIntegrationTests.IntegrationTestElasticSearchConfiguration.class},
+@ContextConfiguration(classes = {ApplicationConfiguration.class, SearchServiceIntegrationTestLocal.IntegrationTestElasticSearchConfiguration.class},
 		initializers = {ConfigFileApplicationContextInitializer.class, LoggingApplicationContextInitializer.class})
 @DirtiesContext
-public class SearchServiceIntegrationTests {
+//Ignore Elasticsearch tests on CI (and maven) by not ending class name with "Tests"
+public class SearchServiceIntegrationTestLocal {
 
 	public static class IntegrationTestElasticSearchConfiguration {
 
@@ -51,11 +52,13 @@ public class SearchServiceIntegrationTests {
 		@Autowired
 		private Client client;
 
+		private String elasticSearchPort = "9260";
+
 		@Bean
 		public Client elasticSearchClient() throws Exception {
 			NodeBuilder nodeBuilder = nodeBuilder().local(false);
 			nodeBuilder.getSettings().put("network.host", "127.0.0.1");
-			nodeBuilder.getSettings().put("http.port", "9251");
+			nodeBuilder.getSettings().put("http.port", elasticSearchPort);
 			nodeBuilder.getSettings().put("index.number_of_shards", "1");
 			nodeBuilder.getSettings().put("index.number_of_replicas", "0");
 			Client client = nodeBuilder.node().client();
@@ -83,7 +86,7 @@ public class SearchServiceIntegrationTests {
 		private ClientConfig clientConfig() {
 			ClientConfig clientConfig = new ClientConfig();
 			LinkedHashSet<String> servers = new LinkedHashSet<String>();
-			servers.add("http://localhost:9251");
+			servers.add("http://localhost:" + elasticSearchPort);
 			clientConfig.getProperties().put(ClientConstants.SERVER_LIST, servers);
 			clientConfig.getProperties().put(ClientConstants.IS_MULTI_THREADED, true);
 			return clientConfig;
