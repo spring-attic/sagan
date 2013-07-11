@@ -1,0 +1,31 @@
+<html   xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+		layout:decorator="layout">
+<head>
+	<title>SpringFramework - STS downloads</title>
+</head>
+<body>
+<h1 layout:fragment="header">Spring Tool Suite Downloads</h1>
+<div layout:fragment="overview">Find any version of the Spring Tool Suite below</div>
+
+<div layout:fragment="content" class="container">
+	<ul>
+		<li class="windows">
+			<h2>Windows</h2>
+		</li>
+		<li class="mac">
+			<h2 th:text="${mac.name}">Mac</h2>
+			<h3 th:text="${mac.releaseName}">1.2.3.RELEASE</h3>
+			<ul>
+				<li th:each="eclipseVersion : ${mac.eclipseVersions}">
+					<a href="" th:text="${eclipseVersion.name}">Based on eclipse</a>
+				</li>
+			</ul>
+		</li>
+		<li class="linux">
+			<h2>Linux</h2>
+		</li>
+	</ul>
+</div>
+</body>
+</html>

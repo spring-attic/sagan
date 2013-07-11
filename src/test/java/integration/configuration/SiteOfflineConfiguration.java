@@ -63,10 +63,13 @@ import org.springframework.site.domain.guides.GettingStartedGuide;
 import org.springframework.site.domain.guides.GettingStartedService;
 import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+import static org.mockito.Mockito.mock;
 
 @Configuration
 @Import({ApplicationConfiguration.class})
@@ -74,6 +77,12 @@ public class SiteOfflineConfiguration {
 
 	public static final GettingStartedGuide GETTING_STARTED_GUIDE =
 			new GettingStartedGuide("awesome-guide", "Awesome getting started guide that isn't helpful", "Related resources");
+
+	@Primary
+	@Bean
+	public RestTemplate mockRestTemplate() {
+		return mock(RestTemplate.class);
+	}
 
 	@Primary
 	@Bean

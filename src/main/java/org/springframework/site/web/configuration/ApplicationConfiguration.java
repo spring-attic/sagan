@@ -18,15 +18,18 @@ package org.springframework.site.web.configuration;
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
 import org.springframework.bootstrap.SpringApplication;
 import org.springframework.bootstrap.context.annotation.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.web.SiteUrl;
+import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
+import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 
@@ -62,6 +65,16 @@ public class ApplicationConfiguration {
 	@Bean
 	public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl, DateService dateService){
 		return new BlogPostAtomViewer(siteUrl, dateService);
+	}
+
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
+	@Bean
+	public Serializer simpleXmlSerializer() {
+		return new Persister();
 	}
 
 }
