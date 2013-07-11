@@ -15,6 +15,7 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
+import utils.FreePortFinder;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
@@ -22,31 +23,30 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class BasicAcceptanceTests {
 
-	//TODO make this dynamic
-	public static final int PORT = 9080;
+	public static int port;
 
 	private static ConfigurableApplicationContext context;
 
-	private String serverAddress = "http://localhost:" + PORT;
+	private static String serverAddress;
+
 
 	@BeforeClass
 	public static void start() throws Exception {
+		port = FreePortFinder.find();
+		serverAddress = "http://localhost:" + port;
+
 		Future<ConfigurableApplicationContext> future = Executors
 				.newSingleThreadExecutor().submit(
 						new Callable<ConfigurableApplicationContext>() {
 							@Override
 							public ConfigurableApplicationContext call() throws Exception {
 								return (ConfigurableApplicationContext) ApplicationConfiguration
-										.build(IntegrationTestsConfiguration.class).run("--server.port=" + PORT, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb");
+										.build(IntegrationTestsConfiguration.class).run("--server.port=" + port, "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb");
 							}
 						});
 		context = future.get(30, TimeUnit.SECONDS);

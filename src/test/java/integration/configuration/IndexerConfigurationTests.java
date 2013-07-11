@@ -20,12 +20,11 @@ import org.junit.Test;
 import org.springframework.bootstrap.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.site.indexer.configuration.IndexerConfiguration;
+import utils.FreePortFinder;
 
 import static org.junit.Assert.assertNotNull;
 
 public class IndexerConfigurationTests {
-
-	private static final int PORT = 9090;
 
 	private ConfigurableApplicationContext context;
 
@@ -38,9 +37,11 @@ public class IndexerConfigurationTests {
 
 	@Test
 	public void testContextLoading() throws Exception {
+		int port = FreePortFinder.find();
+
 		SpringApplication application = IndexerConfiguration
 				.build(IndexerConfiguration.class);
-		application.setDefaultCommandLineArgs("--server.port=" + PORT,
+		application.setDefaultCommandLineArgs("--server.port=" + port,
 				"--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb",
 				"--search.indexer.delay=6000000",
 				"--spring.profiles.active=integration-test");
