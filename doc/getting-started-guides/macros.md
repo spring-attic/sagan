@@ -39,15 +39,15 @@ To **skip the basics**, do the following:
 
 
 <#macro build_system_intro>
-First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Getting Started with Maven](../gs-maven/README.md) or [Getting Started with Gradle](../gs-gradle/README.md).
+First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](../gs-maven/README.md) or [Building Java Projects with Gradle](../gs-gradle/README.md).
 </#macro>
 
 <#macro android_build_system_intro>
 In this section you set up a basic build script and then create a simple application. 
 
-> **Note:** If you are new to Android projects, before you proceed, refer to [Getting Started with Android](../gs-android/README.md) to help you configure your development environment. 
+> **Note:** If you are new to Android projects, before you proceed, refer to [Installing the Android Development Environment](../gs-android/README.md) to help you configure your development environment. 
 
-You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Getting Started with Maven](../gs-maven-android/README.md) or [Getting Started with Gradle](../gs-gradle-android/README.md).
+You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Android Projects with Maven](../gs-maven-android/README.md) or [Building Android Projects with Gradle](../gs-gradle-android/README.md).
  
 </#macro>
 
@@ -128,7 +128,7 @@ The command builds the Android app and runs it in the emulator or attached devic
 </#macro>
 
 <#macro build_an_executable_jar>
-### Build an executable JAR
+###Build an executable JAR
 
 Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
 
