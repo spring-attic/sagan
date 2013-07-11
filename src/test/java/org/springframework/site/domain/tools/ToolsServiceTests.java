@@ -62,16 +62,15 @@ public class ToolsServiceTests {
 
 	@Test
 	public void testGetStsDownloads() throws Exception {
-		ToolSuite downloads = service.getStsDownloads();
-		assertThat(downloads, notNullValue());
+		ToolSuite toolSuite = service.getStsDownloads();
+		assertThat(toolSuite, notNullValue());
 
-		Map<String, Platform> platforms = downloads.getPlatforms();
-		assertThat(platforms.size(), equalTo(4));
+		Map<String, Platform> platforms = toolSuite.getPlatforms();
+		assertThat(platforms.size(), equalTo(3));
 
 		assertThat(platforms.get("windows").getName(), equalTo("Windows"));
 		assertThat(platforms.get("mac").getName(), equalTo("Mac"));
 		assertThat(platforms.get("linux").getName(), equalTo("Linux"));
-		assertThat(platforms.get("all").getName(), equalTo("All"));
 
 		List<EclipseVersion> eclipseVersions = platforms.get("mac").getEclipseVersions();
 		assertThat(eclipseVersions.size(), equalTo(2));
@@ -83,5 +82,11 @@ public class ToolsServiceTests {
 		assertThat(downloadLink.getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
 		downloadLink = platforms.get("windows").getEclipseVersions().get(0).getArchitectures().get(0).getDownloadLinks().get(1);
 		assertThat(downloadLink.getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32.zip"));
+
+		assertThat(toolSuite.getArchives().size(), equalTo(4));
+		assertThat(toolSuite.getArchives().get(0).getVersion(), equalTo("4.3.x"));
+		assertThat(toolSuite.getArchives().get(1).getVersion(), equalTo("4.2.2.x"));
+		assertThat(toolSuite.getArchives().get(2).getVersion(), equalTo("3.8.2.x"));
+		assertThat(toolSuite.getArchives().get(3).getVersion(), equalTo("3.7.2.x"));
 	}
 }

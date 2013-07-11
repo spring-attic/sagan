@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
@@ -27,12 +28,15 @@ public class ToolsController {
 	@RequestMapping(value = "/sts/all", method = { GET, HEAD })
 	public String allStsDownloads(Model model) throws Exception {
 		ToolSuite stsDownloads = toolsService.getStsDownloads();
+		Map<String,Platform> allPlatforms = stsDownloads.getPlatforms();
+
 		List<Platform> platforms = new ArrayList<Platform>();
-		platforms.add(stsDownloads.getPlatforms().get("windows"));
-		platforms.add(stsDownloads.getPlatforms().get("mac"));
-		platforms.add(stsDownloads.getPlatforms().get("linux"));
+		platforms.add(allPlatforms.get("windows"));
+		platforms.add(allPlatforms.get("mac"));
+		platforms.add(allPlatforms.get("linux"));
 
 		model.addAttribute("platforms", platforms);
+		model.addAttribute("updateSiteArchives", stsDownloads.getArchives());
 
 		return "tools/sts/all";
 	}

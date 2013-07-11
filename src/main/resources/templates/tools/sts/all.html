@@ -33,6 +33,19 @@
 			</ul>
 		</li>
 	</ul>
+
+	<hr />
+
+	<h2>Update Site Archives</h2>
+	<table>
+		<tr th:each="archive : ${updateSiteArchives}">
+			<td th:text="${archive.version}">e.43</td>
+			<td><a th:href="${archive.url}" th:text="${archive.fileName}">springsource-tool-suite-3.2.0.RELEASE-e4.3-updatesite.zip</a></td>
+			<td th:text="${archive.fileSize}">185MB</td>
+		</tr>
+	</table>
+
+
 </div>
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.site.domain.tools.ToolsService;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
 import org.springframework.site.domain.tools.toolsuite.Platform;
 import org.springframework.site.domain.tools.toolsuite.ToolSuite;
+import org.springframework.site.domain.tools.toolsuite.UpdateSiteArchive;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.util.Collections;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -44,10 +46,12 @@ public class ToolsControllerTests {
 		Platform linux = new Platform("linux", "blah", Collections.<EclipseVersion>emptyList());
 		platforms.put("linux", linux);
 
-		ToolSuite toolSuite = new ToolSuite(platforms);
+		List<UpdateSiteArchive> archives = Collections.emptyList();
+		ToolSuite toolSuite = new ToolSuite(platforms, archives);
 		when(service.getStsDownloads()).thenReturn(toolSuite);
 		controller.allStsDownloads(model);
 
 		assertThat((List<Platform>) model.get("platforms"), contains(windows, mac, linux));
+		assertThat((List<UpdateSiteArchive>) model.get("updateSiteArchives"), sameInstance(archives));
 	}
 }
