@@ -31,7 +31,7 @@ done;
 
 If you generate guides frequently, it may be useful to put an alias in your ~/.bash_profile like:
 
-alias f=`cat README.ftl.md | fpp > README.md`
+    alias f=`cat README.ftl.md | fpp > README.md`
 
 Then the above command be shortened to:
 
