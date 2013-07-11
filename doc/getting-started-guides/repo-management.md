@@ -5,7 +5,7 @@
 - Clone everything under one parent dir
 - This is the easiest way to get all the repos and keep them up to date
 
-- use `mr`, the multiple repository tool: https://github.com/joeyh/mr
+- use `mr`, the multiple repository tool: https://github.com/joeyh/mr, or if you are using a Mac with homebrew, simply type `brew install mr`.
 - cd to your springframework-meta root directory
 ```sh
 for repo in $(find . -name .git); do
