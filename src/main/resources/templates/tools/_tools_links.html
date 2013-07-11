@@ -4,9 +4,12 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
 <div layout:fragment="tools-links">
+
 <ul>
 	<li class="platform" th:each='platform : ${platforms}'>
-		<h2 th:text="${platform.name}">Mac</h2>
+		<a href="#collapse" data-toggle="collapse" th:attr="data-target='#platform--' + ${platform.name}"><h2 th:text="${platform.name}">Mac</h2></a>
+
+		<div class="collapse in" th:id="'platform--' + ${platform.name}">
 		<h3 th:text="${platform.releaseName}">1.2.3.RELEASE</h3>
 		<ul>
 			<li th:each="eclipseVersion : ${platform.eclipseVersions}" class="btn-group">
@@ -26,8 +29,14 @@
 				</ul>
 			</li>
 		</ul>
+		</div>
 	</li>
 </ul>
+
+<script type="text/javascript">
+	$(".collapse").removeClass('in');
+	$('#platform--' + detectOs()).addClass('in');
+</script>
 
 <hr />
 
