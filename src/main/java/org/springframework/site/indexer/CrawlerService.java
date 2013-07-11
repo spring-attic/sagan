@@ -16,8 +16,6 @@ import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -26,17 +24,13 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 
 @Component
-public class IndexerService {
+public class CrawlerService {
 
-	private static Log logger = LogFactory.getLog(IndexerService.class);
-
-	private final SearchService searchService;
-	private WebDocumentSearchEntryMapper mapper = new WebDocumentSearchEntryMapper();
-
-	@Autowired
-	public IndexerService(SearchService searchService) {
-		this.searchService = searchService;
+	public interface CrawledWebDocumentProcessor {
+		void process(WebDocument document);
 	}
+
+	private static Log logger = LogFactory.getLog(CrawlerService.class);
 
 	private HttpClient httpClient() {
 		PoolingClientConnectionManager connectionManager = new PoolingClientConnectionManager();
@@ -49,17 +43,20 @@ public class IndexerService {
 		return client;
 	}
 
-	public void index(String url, int linkDepth) {
+	public void crawl(String url, int linkDepth, CrawledWebDocumentProcessor processor) {
 		CrawlerConfiguration apiConfig = new CrawlerConfiguration.Builder().setStartUrl(url).setMaxLevels(linkDepth).build();
-		DefaultCrawler crawler = new DefaultCrawler(new IndexingResponseFetcher(), Executors.newFixedThreadPool(10), new CompositeURLParser(new FramePageURLParser(), new AhrefPageURLParser()));
+		DefaultCrawler crawler = new DefaultCrawler(new ResponseFetcher(processor), Executors.newFixedThreadPool(10), new CompositeURLParser(new FramePageURLParser(), new AhrefPageURLParser()));
 		crawler.getUrls(apiConfig);
 		crawler.shutdown();
 	}
 
-	private class IndexingResponseFetcher extends HTTPClientResponseFetcher {
+	private class ResponseFetcher extends HTTPClientResponseFetcher {
 
-		public IndexingResponseFetcher() {
+		private final CrawledWebDocumentProcessor processor;
+
+		public ResponseFetcher(CrawledWebDocumentProcessor processor) {
 			super(httpClient());
+			this.processor = processor;
 		}
 
 		@Override
@@ -68,7 +65,8 @@ public class IndexerService {
 			if (response.getResponseCode() == 200 && response.getResponseType().startsWith("text")) {
 				Document body = response.getBody();
 				logger.debug("Indexing link: " + url);
-				searchService.saveToIndex(mapper.map(new WebDocument(url.getUrl(), body)));
+				WebDocument webDocument = new WebDocument(url.getUrl(), body);
+				processor.process(webDocument);
 			}
 			return response;
 		}

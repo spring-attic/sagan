@@ -7,11 +7,14 @@ import org.springframework.bootstrap.actuate.metrics.CounterService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.site.domain.documentation.DocumentationService;
 import org.springframework.site.domain.documentation.Project;
+import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import static org.springframework.site.indexer.CrawlerService.*;
 
 @Service
 public class DocumentationIndexService {
@@ -20,16 +23,29 @@ public class DocumentationIndexService {
 
 	private static final long ONE_HOUR = 1000 * 60 * 60;
 	private final DocumentationService documentationService;
-	private final IndexerService indexerService;
+	private final CrawlerService crawlerService;
 	private final CounterService counters;
+	private final SearchService searchService;
 
 	private ExecutorService executor = Executors.newFixedThreadPool(10);
 
+
+	private final CrawledWebDocumentProcessor apiDocsProcessor = new CrawledWebDocumentProcessor() {
+		private final WebDocumentSearchEntryMapper mapper = new WebDocumentSearchEntryMapper();
+
+		@Override
+		public void process(WebDocument document) {
+			searchService.saveToIndex(mapper.map(document));
+		}
+	};
+
+
 	@Autowired
-	public DocumentationIndexService(IndexerService indexerService, DocumentationService documentationService, CounterService counters) {
-		this.indexerService = indexerService;
+	public DocumentationIndexService(CrawlerService crawlerService, DocumentationService documentationService, CounterService counters, SearchService searchService) {
+		this.crawlerService = crawlerService;
 		this.documentationService = documentationService;
 		this.counters = counters;
+		this.searchService = searchService;
 	}
 
 	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
@@ -40,7 +56,7 @@ public class DocumentationIndexService {
 				@Override
 				public void run() {
 					try {
-						process(project);
+						index(project);
 						counters.increment("search.indexes.projects.processed");
 					} catch (Exception e) {
 						logger.warn("Unable to load project: " + project.getId() + "(" + e.getClass().getName() + ", " + e.getMessage() + ")");
@@ -52,14 +68,17 @@ public class DocumentationIndexService {
 		counters.increment("search.indexes.projects.refresh.count");
 	}
 
-	void process(Project project) {
+	void index(Project project) {
 		logger.info("Indexing project: " + project.getId());
 		if (!project.getSupportedVersions().isEmpty()) {
-			String url = new UriTemplate(project.getApiAllClassesUrl()).expand(project.getSupportedVersions().get(0)).toString();
-			indexerService.index(url, 1);
+			String currentVersion = project.getSupportedVersions().get(0);
+
+			UriTemplate rawUrl = new UriTemplate(project.getApiAllClassesUrl());
+			String url = rawUrl.expand(currentVersion).toString();
+				crawlerService.crawl(url, 1, apiDocsProcessor);
 			// TODO: support reference docs when we can work out a way to break them up into manageable pieces
 		}
-		indexerService.index(project.getGithubUrl(), 0);
+		crawlerService.crawl(project.getGithubUrl(), 0, apiDocsProcessor);
 	}
 
 
