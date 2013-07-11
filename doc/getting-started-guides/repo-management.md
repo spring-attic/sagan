@@ -18,7 +18,38 @@ mr status;
 mr update;
 ```
 
-- you may get authentication prompts for each of the repositories. Use the osxkeychain git helper to make so you only have to log in once:
+## Regenerate guides when macros.md is updated
+
+From time to time, the macros may get updated. It could something as simple as a single word being edited,
+but it ripples out to every guide. This means they must all be regenerated (assuming CI hasn't been configured).
+
+```sh
+for repo in $(find . -name .git); do
+	cd $(dirname $repo); pwd; cat README.ftl.md | fpp > README.md; cd ..;
+done;
+```
+
+If you generate guides frequently, it may be useful to put an alias in your ~/.bash_profile like:
+
+alias f=`cat README.ftl.md | fpp > README.md`
+
+Then the above command be shortened to:
+
+```sh
+for repo in $(find . -name .git); do
+	cd $(dirname $repo); pwd; f; cd ..;
+done;
+```
+
+Either way, you need to review your changes before committing. (With great power comes great responsibility)
+
+    mr diff
+    
+Review each change. If something is out-of-whack, fix that specific repository. Then:
+
+    mr commit -m "your commit message"
+
+> **Note:** You may get authentication prompts for some of the repositories. Use the osxkeychain git helper to make so you only have to log in once:
 
 > On May 10, 2013, at 9:00 PM, Justin Spahr-Summers (GitHub Staff) <support@github.com> wrote:
 
