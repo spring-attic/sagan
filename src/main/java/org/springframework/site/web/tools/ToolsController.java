@@ -25,6 +25,11 @@ public class ToolsController {
 		this.toolsService = toolsService;
 	}
 
+	@RequestMapping(value = "/sts", method = { GET, HEAD })
+	public String stsIndex() throws Exception {
+		return "tools/sts/index";
+	}
+
 	@RequestMapping(value = "/sts/all", method = { GET, HEAD })
 	public String allStsDownloads(Model model) throws Exception {
 		ToolSuite stsDownloads = toolsService.getStsDownloads();
@@ -32,8 +37,13 @@ public class ToolsController {
 		return "tools/sts/all";
 	}
 
+	@RequestMapping(value = "/ggts", method = { GET, HEAD })
+	public String ggtsIndex() throws Exception {
+		return "tools/ggts/index";
+	}
+
 	@RequestMapping(value = "/ggts/all", method = { GET, HEAD })
-	public String allGgtsDownloads(Model model) throws Exception {
+	 public String allGgtsDownloads(Model model) throws Exception {
 		ToolSuite ggtsDownloads = toolsService.getGgtsDownloads();
 		buildAllDownloadsModel(model, ggtsDownloads);
 		return "tools/ggts/all";

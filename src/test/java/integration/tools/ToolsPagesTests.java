@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = IntegrationTestsConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
-public class AllStsDownloadsTests {
+public class ToolsPagesTests {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -57,6 +57,13 @@ public class AllStsDownloadsTests {
 	}
 
 	@Test
+	public void showsStsIndex() throws Exception {
+		this.mockMvc.perform(get("/tools/sts"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html"));
+	}
+
+	@Test
 	 public void showsAllStsDownloads() throws Exception {
 		MvcResult mvcResult = this.mockMvc.perform(get("/tools/sts/all"))
 				.andExpect(status().isOk())
@@ -67,6 +74,13 @@ public class AllStsDownloadsTests {
 		assertThat(document.select("h1").text(), equalTo("Spring Tool Suite Downloads"));
 		assertThat(document.select("ul li.platform h2").text(), containsString("Windows"));
 		assertThat(document.select("ul.dropdown-menu a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
+	}
+
+	@Test
+	public void showsGgtsIndex() throws Exception {
+		this.mockMvc.perform(get("/tools/ggts"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html"));
 	}
 
 	@Test

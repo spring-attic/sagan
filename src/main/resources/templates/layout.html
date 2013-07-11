@@ -24,53 +24,55 @@
 	<script type="text/javascript" th:src="@{/resources/js/guide.js}" src="../../js/guide.js"></script>
 </head>
 <body>
-<div class="navbar navbar-fixed-top header--navbar">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <a class="brand spring-logo" th:href="@{/}" href="/"></a>
-            <ul class="nav pull-right">
-                <li class=" navbar-link">
-                    <a th:href="@{/documentation}" href="documentation/index.html">Documentation</a>
-                </li>
-                <li class=" navbar-link active">
-                    <a th:href="@{/guides}" href="pages/guides/index.html">Guides</a>
-                </li>
-                <li class=" navbar-link">
-                    <a th:href="@{/projects}" href="pages/projects.html">Projects</a>
-                </li>
-                <li class=" navbar-link">
-                    <a th:href="@{/blog}" href="pages/blog.html">Blog</a>
-                </li>
-                <li class=" navbar-link">
-                    <a href="http://forum.springframework.org">Forum</a>
-                </li>
-                <li class="nav-search">
-				<form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
-					<input type="text" class="search-query input-medium" placeholder="Search Spring" name="q" th:value="${query}" />
-					<button type="submit" class="icon-search"></button>
-				</form>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+	<div class="navbar navbar-fixed-top header--navbar">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="brand spring-logo" th:href="@{/}" href="/"></a>
+				<ul class="nav pull-right">
+					<li class=" navbar-link">
+						<a th:href="@{/documentation}" href="documentation/index.html">Documentation</a>
+					</li>
+					<li class=" navbar-link active">
+						<a th:href="@{/guides}" href="pages/guides/index.html">Guides</a>
+					</li>
+					<li class=" navbar-link">
+						<a th:href="@{/projects}" href="pages/projects.html">Projects</a>
+					</li>
+					<li class=" navbar-link">
+						<a th:href="@{/blog}" href="pages/blog.html">Blog</a>
+					</li>
+					<li class=" navbar-link">
+						<a href="http://forum.springframework.org">Forum</a>
+					</li>
+					<li class="nav-search">
+					<form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
+						<input type="text" class="search-query input-medium" placeholder="Search Spring" name="q" th:value="${query}" />
+						<button type="submit" class="icon-search"></button>
+					</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 
 	<div class="header--container">
 		<div class="header--content container-fluid" layout:fragment="header-content">
 			<div class="row-fluid">
-				<h1 class="header--content-title span8" layout:fragment="header">
-					Header title
-				</h1>
-                <div id='authentication' sec:authorize="isFullyAuthenticated()">
-                    <span sec:authentication="name">Bob</span>
-                    <a th:href="@{/signout}" href="/signout">Sign out</a>
-                </div>
-			</div>
-			<div class="row-fluid">
-				<p class="header--content-subtitle span8" layout:fragment="overview">
-					Subttile Ligula Risus Tristique Pharetra and a <a href="#"
-																	  class="header--content-subtitle--link">link</a>
-				</p>
+				<div class="span8">
+					<h1 class="header--content-title" layout:fragment="header">
+						First Last
+					</h1>
+					<p class="header--content-subtitle" layout:fragment="overview">
+						Subttitle Ligula Risus Tristique Pharetra
+					</p>
+				</div>
+				<div class="span4">
+					<div id='authentication' sec:authorize="isFullyAuthenticated()">
+						<span sec:authentication="name">Bob</span>
+						<a th:href="@{/signout}" href="/signout">Sign out</a>
+					</div>
+					<div layout:fragment="header-sidebar"></div>
+				</div>
 			</div>
 		</div>
 	</div>
