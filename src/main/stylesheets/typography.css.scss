@@ -1,12 +1,12 @@
-$base-font-family: 'Open Sans', sans-serif;
-$secondary-font-family: Quicksand, sans-serif;
+$base-font-family: 'Varela Round', sans-serif;
+$secondary-font-family: 'Montserrat', sans-serif;
 $slate: #44474C;
 $navy: #3A5056;
 
 body, h1, h2, h3, p, input {
-  font-family: $base-font-family;
   margin: 0;
   font-weight: 400;
+  font-family: $base-font-family;
 }
 
 h1 {
@@ -14,6 +14,7 @@ h1 {
   font-weight: 600;
   color: $slate;
   line-height: 39px;
+  font-family: $secondary-font-family;
 }
 
 h2 {
@@ -21,6 +22,7 @@ h2 {
   font-weight: 600;
   line-height: 30px;
   color: $navy;
+  font-family: $secondary-font-family;
 }
 
 h3, .popover-title {

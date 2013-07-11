@@ -1,0 +1,126 @@
+$off-white: #FCFAFB;
+$black-green: #3A3C2F; 
+$lime: #8CC63F;
+$leaf: #4E681E;
+$bark: #AF9A85;
+$light-grey: #ECEBEB;
+$medium-grey: #DEDEDE;
+$navy: #3A5056;
+$slate: #44474C;
+$mauve: #665A6B;
+$denim: #8395A1;
+
+$base-font-family: 'Varela Round', sans-serif;
+$secondary-font-family: 'Montserrat', sans-serif;
+
+.blog--wrapper {
+  margin: 100px 0;
+  a {
+    color: #333;
+    &:hover {
+      text-decoration: none;
+      color: $lime;
+    }
+  }
+}
+
+.blog-preview--container {
+  margin: 0 0 40px 0;
+  padding: 0 0 40px 0;
+  border-bottom: 1px solid #ccc;
+  &:last-child {
+    margin: 0;
+  }
+  .blog-preview--title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-family: $secondary-font-family;
+  }
+  .meta-data--item {
+    display: inline-block;
+    margin: 2px 30px 0 0;
+    font-size: 12px;
+    line-height: 12px;
+    text-transform: uppercase;
+    .meta-data--icon {
+      display: inline-block;
+      background-color: #ddd;
+      border-radius: 20px;
+      height: 20px;
+      width: 20px;
+      vertical-align: middle;
+      margin: -2px 5px 0 0;
+    }
+  }
+  .blog-preview--post {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 20px 0 0;
+    a {
+      color: $lime;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.blog-pagination {
+  margin: 0;
+  ul {
+    box-shadow: none;
+    li {
+      &.active {
+        a {
+          padding-top: 8px;
+          border-top: 2px solid #333;
+          color: #333;
+          background-color: transparent;
+          color: #ddd;
+        }
+      }
+      a {
+        padding: 10px 12px;
+        font-size: 16px;
+        border: none;
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+.blog-category--container {
+  border: 1px solid #ddd;
+  margin: 0 0 40px 0;
+  li {
+    display: block;
+    padding: 12px 0;
+    margin: 0 20px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    line-height: 16px;
+    &:last-child {
+      border-bottom: none;
+    }
+    &.active {
+      font-weight: bold;
+    }
+  }
+}
+
+.blog-social-links--container {
+  
+}
+
+.promo-material {
+  padding: 75px 0;
+  margin: 0 0 40px 0;
+  text-align: center;
+  text-transform: uppercase;
+  border: 6px solid white;
+  box-shadow: 0 0 3px #ccc;
+  color: #ccc;
+  background-color: #ddd; 
+}

@@ -3,14 +3,14 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
-	<ul class='blog-categories' layout:fragment="blog-categories">
+	<ul class='blog-category--container' layout:fragment="blog-categories">
 		<li>
 			<a th:href="@{/blog}">All Posts</a>
-            <a th:href="@{/blog.atom}"><i class="icon-rss"></i></a>
+      <a th:href="@{/blog.atom}"><i class="icon-rss"></i></a>
 		</li>
 		<li>
 			<a th:href="@{/blog/broadcasts}">Broadcasts</a>
-            <a th:href="@{/blog/broadcasts.atom}"><i class="icon-rss"></i></a>
+      <a th:href="@{/blog/broadcasts.atom}"><i class="icon-rss"></i></a>
 		</li>
 		<li th:each="category : ${categories}">
 			<a th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}">Engineering</a>

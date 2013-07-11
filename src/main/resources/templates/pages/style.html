@@ -7,12 +7,14 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap-responsive.css}" href="../../bootstrap/css/bootstrap-responsive.min.css" />
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,500, 600, 700" />
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Quicksand:400,700" />
-  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata:400,700">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata:400,700" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Varela+Round" />
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/font-awesome/css/font-awesome.min.css}" href="../../font-awesome/css/font-awesome.min.css" />
 
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css.css}" href="../../css/main.css.css" />
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/typography.css.css}" href="../../css/typography.css.css" />
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/application.css.css}" href="../../css/application.css.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/css/blog.css.css}" href="../../css/blog.css.css" />
 
 	<script type="text/javascript" th:src="@{/resources/js/jquery.js}" src="../../js/jquery.js"></script>
 	<script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.min.js}" src="../../bootstrap/js/bootstrap.min.js"></script>
@@ -32,6 +34,7 @@
 
 </head>
 <body>
+  <!-- <div class="background-grid"></div> -->
   <div class="navbar navbar-fixed-top header--navbar">
     <div class="navbar-inner">
       <div class="container-fluid">
@@ -544,9 +547,9 @@
       </pre>
     </div>
     <div class="row--container">
-      <h2>Content Layout</h2>
+      <h2>Getting Started Guide Layout</h2>
       <div class="row-fluid">
-        <div class="span9">
+        <div class="span8">
           <h1>Donec id elit non mi porta gravida at eget metus. Donec id elit non mi porta gravida at eget metus.</h1>
           <h3>Nullam quis risus eget urna mollis ornare vel eu leo. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</h3>
           <div class="title-divider"></div>
@@ -557,11 +560,8 @@
               {"id":1,"content":"Hello, World!"}
             </div>
           </div>
-
         </div>
-
-
-        <div class="span3">
+        <div class="span4 right-pane">
           <div class="body--container--row">
             <h2>Build System</h2>
             <div class="btn-group">
@@ -598,6 +598,117 @@
         </div>
       </div>
     </div>
+    <div class="row--container">
+      <h2>Blog Layout</h2>
+      <div class="row-fluid blog--wrapper">
+        <div class="span8">
+          <div class="blog-preview--wrapper">
+            <div class="blog-preview--container">
+              <div class="blog-preview--title">
+                <a href="">
+                  This week in Spring - June 2013
+                </a>
+              </div>
+              <div class="blog-preview--meta-data">
+                <div class="meta-data--item">
+                  <i class="meta-data--icon"></i>
+                  <a href="#">
+                    News & Events
+                  </a>
+                </div>
+                <div class="meta-data--item">
+                  <i class="meta-data--icon"></i>
+                  <a href="#">
+                    Oliver G.
+                  </a>
+                </div>
+                <div class="meta-data--item">
+                  <i class="meta-data--icon"></i>
+                  April 25, 2013
+                </div>
+              </div>
+              <div class="blog-preview--post">
+                Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                <a href="#">Read More...</a>
+              </div>
+            </div>
+            <div class="blog-preview--container">
+              <div class="blog-preview--title">
+                <a href="">
+                  This week in Spring - June 2013
+                </a>
+              </div>
+              <div class="blog-preview--meta-data">
+                <div class="meta-data--item">
+                  <i class="meta-data--icon"></i>
+                  <a href="#">
+                    News & Events
+                  </a>
+                </div>
+                <div class="meta-data--item">
+                  <i class="meta-data--icon"></i>
+                  <a href="#">
+                    Oliver G.
+                  </a>
+                </div>
+                <div class="meta-data--item">
+                  <i class="meta-data--icon"></i>
+                  April 25, 2013
+                </div>
+              </div>
+              <div class="blog-preview--post">
+                Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                <a href="#">Read More...</a>
+              </div>
+            </div>
+          </div>
+          <div class="pagination blog-pagination">
+            <ul>
+              <li><a href="#"><i class="icon-chevron-left"></i></a></li>
+              <li class="active"><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#">6</a></li>
+              <li><a href="#"><i class="icon-chevron-right"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="span4 right-pane">
+          <ul class="blog-category--container">
+            <li class="blog-category active">
+              <a href="#">All Posts</a>
+              <a href="#" class="pull-right"><i class="icon-rss"></i></a>
+            </li>
+            <li class="blog-category">
+              <a href="#">Broadcast</a>
+              <a href="#" class="pull-right"><i class="icon-rss"></i></a>
+            </li>
+            <li class="blog-category">
+              <a href="#">Engineering</a>
+              <a href="#" class="pull-right"><i class="icon-rss"></i></a>
+            </li>
+            <li class="blog-category">
+              <a href="#">Releases</a>
+              <a href="#" class="pull-right"><i class="icon-rss"></i></a>
+            </li>
+            <li class="blog-category">
+              <a href="#">News & Events</a>
+              <a href="#" class="pull-right"><i class="icon-rss"></i></a>
+            </li>
+          </ul>
+          <div class="blog-social-links--container">
+            <i class="icon-twitter"></i>
+            <i class="icon-facebook-sign"></i>
+            <i class="icon-google-plus-sign"></i>
+            <i class="icon-linkedin"></i>
+          </div>
+          <div class="promo-material">Promo</div>
+          <div class="promo-material">Promo</div>
+        </div>
+      </div>
+    </div>  
   </div>
 </body>
 </html>

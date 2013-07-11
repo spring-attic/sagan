@@ -14,8 +14,17 @@ $denim: #8395A1;
 
 
 body {
-  background-color: white;
+  // background-color: white;
   padding-top: 50px;
+}
+
+.background-grid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: -10000px;
+  background-image: url("../img/grid30x30.png");
 }
 
 .container-fluid {
@@ -28,6 +37,9 @@ body {
   height: 5px;
   background-color: #8CC63F;
   margin: 21px 0;
+  &.full-width {
+    width: 100%;
+  }
 }
 
 .code-snippet {
@@ -38,6 +50,11 @@ body {
   margin: 15px 0;
   font-size: 13px;
   line-height: 13px;
+}
+
+.span4.right-pane {
+  width: 26.623932%;
+  margin-left: 7.564103%;
 }
 
 
