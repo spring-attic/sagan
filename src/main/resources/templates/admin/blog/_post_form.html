@@ -17,7 +17,7 @@
         <div class="control-group" th:class="'control-group' + (${#fields.hasErrors('content')}? ' error')">
             <label class="control-label" for="content">Content:</label>
             <div class="controls">
-                <input id="content" type="text" th:field="*{content}" name="content" />
+                <textarea id="content" th:field="*{content}" name="content"></textarea>
                 <span class="help-inline" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Incorrect content</span>
             </div>
         </div>
