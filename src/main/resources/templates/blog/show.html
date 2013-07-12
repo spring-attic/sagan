@@ -3,17 +3,19 @@
       layout:decorator="layout">
 <head>
     <title th:inline="text">SpringFramework - [[${post.title}]]</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/blog.css.css}" href="../../css/blog.css.css" />
 </head>
 <body>
-	<div layout:fragment="content" class="container" th:object="${post}">
-		<div class="row">
-            <div id="content" class="span8 sdfv" layout:include="/blog/_full_post :: full-post" >
-            </div>
+  <div layout:fragment="header-container"></div>
 
-			<div id="sidebar" class="span4">
-				<ul layout:include="blog/_categories :: blog-categories" />
-			</div>
-		</div>
-	</div>
+  <div layout:fragment="content" class="container" th:object="${post}">
+    <div class="row-fluid blog--wrapper">
+      <div id="content" class="span8" layout:include="/blog/_full_post :: full-post" >
+      </div>
+      <div id="sidebar" class="span4">
+        <ul layout:include="blog/_categories :: blog-categories" />
+      </div>
+    </div>
+  </div>
 </body>
 </html>
