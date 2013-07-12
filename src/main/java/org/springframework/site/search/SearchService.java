@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SearchService {
@@ -69,7 +70,9 @@ public class SearchService {
 		search.addIndex(INDEX);
 		JestResult jestResult = execute(search);
 		List<SearchEntry> searchEntries = jestResult.getSourceAsObjectList(SearchEntry.class);
-		return new PageImpl<SearchEntry>(searchEntries);
+		Map<String,Double> hits = (Map<String,Double>) jestResult.getJsonMap().get("hits");
+		int totalResults = hits.get("total").intValue();
+		return new PageImpl<SearchEntry>(searchEntries, pageable, totalResults);
 	}
 
 	public void deleteIndex()  {

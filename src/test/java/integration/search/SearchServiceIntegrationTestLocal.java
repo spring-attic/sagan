@@ -191,4 +191,34 @@ public class SearchServiceIntegrationTestLocal {
 		Page<SearchEntry> searchEntries2 = searchService.search("content", page2);
 		assertThat(searchEntries2.getContent().get(0).getId(), equalTo(entry2.getId()));
 	}
+
+	@Test
+	public void searchQueryReportsPageTotals() throws Exception {
+		SearchEntryBuilder builder  = SearchEntryBuilder.entry()
+				.rawContent("raw content")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00");
+
+		for (int i = 0; i < 25; i++){
+			SearchEntry entry = builder.path("item" + i).title("Item " + i).build();
+			searchService.saveToIndex(entry);
+		}
+
+		int page = 1;
+		Pageable pageable = new PageRequest(page,10);
+		Page<SearchEntry> searchEntries = searchService.search("", pageable);
+		assertThat(searchEntries.getContent().size(), equalTo(10));
+		assertThat(searchEntries.getTotalPages(), equalTo(3));
+		assertThat(searchEntries.getNumber(), equalTo(page));
+	}
+
+	@Test
+	public void searchThatReturnsNoResultsIsEmpty() throws ParseException {
+		indexSingleEntry();
+		Pageable page = new PageRequest(0,10);
+		Page<SearchEntry> searchEntries = searchService.search("somethingthatwillneverappearsupercalifragilousIcantspelltherest", page);
+		assertThat(searchEntries.getContent().size(), equalTo(0));
+		assertThat(searchEntries.getTotalPages(), equalTo(0));
+	}
+
 }
