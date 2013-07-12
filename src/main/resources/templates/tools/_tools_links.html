@@ -11,31 +11,42 @@
 
 		<div class="collapse in" th:id="'platform--' + ${platform.name}">
 		<h3 th:text="${platform.releaseName}">1.2.3.RELEASE</h3>
-		<ul>
-			<li th:each="eclipseVersion : ${platform.eclipseVersions}" class="btn-group">
-				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" th:text="${eclipseVersion.name}">
-					Action
-					<span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu">
-					<li class='list-link' th:each='architecture : ${eclipseVersion.architectures}'>
-						<p th:text='${architecture.name}'>Architecture name</p>
-						<ul>
-							<li class='list-link' th:each='downloadlink : ${architecture.downloadLinks}'>
-								<a th:href='${downloadlink.url}' th:text='${downloadlink.fileType}'>A file type</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-		</ul>
+			<div class="btn-toolbar" >
+				<div th:each="eclipseVersion : ${platform.eclipseVersions}" class="btn-group">
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="">
+						<span th:text="${eclipseVersion.name}"></span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li class='list-link' th:each='architecture : ${eclipseVersion.architectures}'>
+							<p th:text='${architecture.name}'>Architecture name</p>
+							<ul>
+								<li class='list-link' th:each='downloadlink : ${architecture.downloadLinks}'>
+									<a th:href='${downloadlink.url}' th:text='${downloadlink.fileType}'>A file type</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</li>
 </ul>
 
 <script type="text/javascript">
-	$(".collapse").removeClass('in');
-	$('#platform--' + detectOs()).addClass('in');
+
+    $(".collapse")
+		.removeClass('in')
+		.on({
+			shown: function(){
+				$(this).css('overflow','visible');
+			},
+			hide: function(){
+				$(this).css('overflow','hidden');
+			}
+		});
+	$('#platform--' + detectOs()).addClass('in').css('overflow','visible');
+
 </script>
 
 <hr />
