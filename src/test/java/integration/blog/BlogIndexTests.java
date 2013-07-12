@@ -74,7 +74,7 @@ public class BlogIndexTests {
 				.andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertThat(html.select("ul.posts li h2").first().text(), is(post.getTitle()));
+		assertThat(html.select(".blog-preview--title a").first().text(), is(post.getTitle()));
 	}
 
 	private Post createSinglePost() {
@@ -99,12 +99,12 @@ public class BlogIndexTests {
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
 		assertThat(numberOfBlogPosts(html), is(10));
-		assertThat(html.select("ul.posts li .date").first().text(), is("November 11, 2012"));
-		assertThat(html.select("ul.posts li .date").last().text(), is("November 2, 2012"));
+		assertThat(html.select(".blog-preview--container .date").first().text(), is("November 11, 2012"));
+		assertThat(html.select(".blog-preview--container .date").last().text(), is("November 2, 2012"));
 	}
 
 	private int numberOfBlogPosts(Document html) {
-		return html.select("ul.posts li").size();
+		return html.select(".blog-preview--title").size();
 	}
 
 	private void createManyPostsInNovember(int numPostsToCreate) {
@@ -168,7 +168,7 @@ public class BlogIndexTests {
 
 		this.mockMvc.perform(get("/blog/category/" + PostCategory.ENGINEERING.getUrlSlug()))
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("<h2>An Engineering Post</h2>")))
+				.andExpect(content().string(containsString("An Engineering Post")))
 				.andExpect(content().string(not(containsString("DO NOT LOOK AT ME"))))
 				.andExpect(content().string(containsString(PostCategory.ENGINEERING.toString())));
 	}
