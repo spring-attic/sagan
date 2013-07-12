@@ -39,10 +39,11 @@ import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {ApplicationConfiguration.class, SearchServiceIntegrationTests.IntegrationTestElasticSearchConfiguration.class},
+@ContextConfiguration(classes = {ApplicationConfiguration.class, SearchServiceIntegrationTestLocal.IntegrationTestElasticSearchConfiguration.class},
 		initializers = {ConfigFileApplicationContextInitializer.class, LoggingApplicationContextInitializer.class})
 @DirtiesContext
-public class SearchServiceIntegrationTests {
+//Ignore Elasticsearch tests on CI (and maven) by not ending class name with "Tests"
+public class SearchServiceIntegrationTestLocal {
 
 	public static class IntegrationTestElasticSearchConfiguration {
 
