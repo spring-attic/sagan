@@ -30,7 +30,7 @@ public class DocumentationIndexService {
 	private ExecutorService executor = Executors.newFixedThreadPool(10);
 
 
-	private final CrawledWebDocumentProcessor apiDocsProcessor = new CrawledWebDocumentProcessor() {
+	private final CrawledWebDocumentProcessor documentProcessor = new CrawledWebDocumentProcessor() {
 		private final WebDocumentSearchEntryMapper mapper = new WebDocumentSearchEntryMapper();
 
 		@Override
@@ -38,7 +38,6 @@ public class DocumentationIndexService {
 			searchService.saveToIndex(mapper.map(document));
 		}
 	};
-
 
 	@Autowired
 	public DocumentationIndexService(CrawlerService crawlerService, DocumentationService documentationService, CounterService counters, SearchService searchService) {
@@ -75,10 +74,13 @@ public class DocumentationIndexService {
 
 			UriTemplate rawUrl = new UriTemplate(project.getApiAllClassesUrl());
 			String url = rawUrl.expand(currentVersion).toString();
-				crawlerService.crawl(url, 1, apiDocsProcessor);
-			// TODO: support reference docs when we can work out a way to break them up into manageable pieces
+			crawlerService.crawl(url, 1, documentProcessor);
+
+			rawUrl = new UriTemplate(project.getReferenceUrl());
+			url = rawUrl.expand(currentVersion).toString();
+			crawlerService.crawl(url, 1, documentProcessor);
 		}
-		crawlerService.crawl(project.getGithubUrl(), 0, apiDocsProcessor);
+		crawlerService.crawl(project.getGithubUrl(), 0, documentProcessor);
 	}
 
 
