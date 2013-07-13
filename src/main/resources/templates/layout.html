@@ -27,7 +27,10 @@
   <div class="navbar navbar-fixed-top header--navbar">
     <div class="navbar-inner">
       <div class="container-fluid">
-        <a class="brand spring-logo" th:href="@{/}" href="/"></a>
+        <div class="spring-logo--container">
+          <div class="logo-bg"></div>
+          <a class="spring-logo" th:href="@{/}" href="/"></a>
+        </div>
         <ul class="nav pull-right">
           <li class=" navbar-link">
             <a th:href="@{/documentation}" href="documentation/index.html">Documentation</a>
@@ -45,10 +48,12 @@
             <a href="http://forum.springframework.org">Forum</a>
           </li>
           <li class="nav-search">
-          <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
-            <input type="text" class="search-query input-medium" placeholder="Search Spring" name="q" th:value="${query}" />
-            <button type="submit" class="icon-search"></button>
-          </form>
+            <div class="header-nav-search--container js-search-input--container">
+              <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
+                <input type="text" class="search-query input-medium header-nav-search--input js-search-input" placeholder="Search for documention, guides, and posts..." name="q" th:value="${query}" />
+                <i class="icon-search header-nav-search--icon js-search-input-open"></i>
+              </form>
+            </div>
           </li>
         </ul>
       </div>

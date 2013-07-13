@@ -13,6 +13,19 @@ $(function(){
     };
 
     $('.js-spring-popover').springPopover();
+
+    //OPENS SEARCH INPUT
+    $(".js-search-input-open").click(function () {
+      var input = $(".js-search-input");
+      var container = $(".js-search-input--container");
+      container.addClass("js-open");
+      setTimeout(function() {
+        input.focus();
+      }, 100);
+      input.blur(function () {
+        container.removeClass('js-open');
+      });
+    });
 });
 
 var detectOs = function() {

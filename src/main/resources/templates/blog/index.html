@@ -34,9 +34,9 @@
 							</div>
 						</div>
 						<div class='blog-preview--post'>
-							<span th:utext="${post.renderedSummary}">
+							<div th:utext="${post.renderedSummary}">
 								This has been an interesting week.
-							</span>
+							</div>
 							<a th:href="@{${post.path}}">
 								Read more...
 							</a>
