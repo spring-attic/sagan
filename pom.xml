@@ -280,7 +280,7 @@
 							<source>
 								<directory>${basedir}/src/main/stylesheets</directory>
 							</source>
-							<destination>${project.basedir}/src/main/resources/css</destination>
+							<destination>${project.basedir}/target/classes/css</destination>
 						</resource>
 					</resources>
 				</configuration>
