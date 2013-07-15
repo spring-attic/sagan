@@ -6,10 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.http.MediaType;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.site.web.ApplicationDialect;
 import org.springframework.site.web.NavSection;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -19,7 +21,11 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.thymeleaf.spring3.SpringTemplateEngine;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -109,6 +115,7 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 				}
 			}
 		});
+		registry.addWebRequestInterceptor(interceptor());
 	}
 
 	private String relativeFilePath(String basePath, Resource resource)
@@ -126,6 +133,11 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 			}
 		}
 		return requestMapping;
+	}
+
+	@Bean
+	public OpenEntityManagerInViewInterceptor interceptor() {
+		return new OpenEntityManagerInViewInterceptor();
 	}
 
 }
