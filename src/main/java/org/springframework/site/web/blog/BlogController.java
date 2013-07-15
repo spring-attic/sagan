@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.domain.blog.BlogService;
+import org.springframework.site.web.NavSection;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.site.web.PaginationInfo;
 import org.springframework.site.domain.blog.Post;
@@ -22,6 +23,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
 @Controller
 @RequestMapping("/blog")
+@NavSection("blog")
 public class BlogController {
 
 	private final BlogService service;

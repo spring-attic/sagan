@@ -1,6 +1,7 @@
 package org.springframework.site.domain.tools.eclipse.parser;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -50,8 +51,6 @@ public class EclipseDownloadsXmlConverterTests {
 		assertThat(platforms.get("windows").getName() , is("Windows"));
 	}
 
-	// This is likely to change as the UX doesn't map well to the xml data source
-
 	@Test
 	public void excludesGroovyAndStsPackages() throws Exception {
 		List<EclipsePackage> packages = platforms.get("windows").getPackages();
@@ -61,6 +60,7 @@ public class EclipseDownloadsXmlConverterTests {
 		}
 	}
 
+	@Ignore("This needs to be confirmed as the UX doesn't map well to the xml data source")
 	@Test
 	public void hasFourPackages() throws Exception {
 		assertThat(platforms.get("windows").getPackages().size(), is(4));

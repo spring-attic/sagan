@@ -38,7 +38,7 @@
   <div class="navbar navbar-fixed-top header--navbar">
     <div class="navbar-inner">
       <div class="container-fluid">
-        <a class="brand spring-logo" href=""></a>
+        <a class="brand spring-logo" th:href="@{/}"></a>
         <ul class="nav pull-right">
           <li class=" navbar-link">
             <a href="#">Documentation</a>
@@ -675,7 +675,7 @@
             </ul>
           </div>
         </div>
-        <div class="span4 right-pane">
+        <div class="span4">
           <ul class="blog-category--container">
             <li class="blog-category active">
               <a href="#">All Posts</a>
@@ -698,12 +698,13 @@
               <a href="#" class="pull-right"><i class="icon-rss"></i></a>
             </li>
           </ul>
-          <div class="blog-social-links--container">
-            <i class="icon-twitter"></i>
-            <i class="icon-facebook-sign"></i>
-            <i class="icon-google-plus-sign"></i>
-            <i class="icon-linkedin"></i>
-          </div>
+          <ul class="social-btn--container">
+            <li class="social-btn twitter"></li>
+            <li class="social-btn googleplus"></li>
+            <li class="social-btn linkedin"></li>
+            <li class="social-btn facebook"></li>
+            <li class="social-btn youtube"></li>
+          </ul>
           <div class="promo-material">Promo</div>
           <div class="promo-material">Promo</div>
         </div>

@@ -4,6 +4,7 @@ import integration.configuration.IntegrationTestsConfiguration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +105,7 @@ public class ToolsPagesTests {
 		assertThat(document.select("ul.dropdown-menu a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
 	}
 
+	@Ignore("End to end test for /tools/eclipse - to be re-enabled when working on it")
 	@Test
 	public void showsEclipseIndex() throws Exception {
 		InputStream response = new ClassPathResource("/eclipse.xml", getClass()).getInputStream();

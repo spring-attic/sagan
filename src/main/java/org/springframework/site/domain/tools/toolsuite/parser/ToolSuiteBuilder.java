@@ -3,8 +3,8 @@ package org.springframework.site.domain.tools.toolsuite.parser;
 import org.springframework.site.domain.tools.toolsuite.Architecture;
 import org.springframework.site.domain.tools.toolsuite.DownloadLink;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
-import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
+import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.site.domain.tools.toolsuite.UpdateSiteArchive;
 import org.springframework.site.domain.tools.toolsuite.xml.Download;
 

@@ -12,6 +12,7 @@ public class DownloadLinkExtractor {
 		} else {
 			fileType = download.getFile().substring(download.getFile().lastIndexOf(".") + 1);
 		}
-		return new DownloadLink(url, fileType, download.getSize());
+		String architecture = download.getDescription().indexOf("64bit") != -1 ? "64" : "32";
+		return new DownloadLink(url, fileType, download.getSize(), download.getOs(), architecture);
 	}
 }

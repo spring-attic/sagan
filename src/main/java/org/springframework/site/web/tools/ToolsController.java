@@ -33,7 +33,10 @@ public class ToolsController {
 	}
 
 	@RequestMapping(value = "/sts", method = { GET, HEAD })
-	public String stsIndex() throws Exception {
+	public String stsIndex(Model model) throws Exception {
+		ToolSuiteDownloads stsDownloads = toolsService.getStsDownloads();
+		model.addAttribute("downloadLinks", stsDownloads.getPreferredDownloadLinks());
+		model.addAttribute("version", stsDownloads.getPreferredVersion());
 		return "tools/sts/index";
 	}
 
@@ -45,7 +48,10 @@ public class ToolsController {
 	}
 
 	@RequestMapping(value = "/ggts", method = { GET, HEAD })
-	public String ggtsIndex() throws Exception {
+	public String ggtsIndex(Model model) throws Exception {
+		ToolSuiteDownloads ggtsDownloads = toolsService.getGgtsDownloads();
+		model.addAttribute("downloadLinks", ggtsDownloads.getPreferredDownloadLinks());
+		model.addAttribute("version", ggtsDownloads.getPreferredVersion());
 		return "tools/ggts/index";
 	}
 

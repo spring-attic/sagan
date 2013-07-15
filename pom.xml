@@ -5,10 +5,10 @@
 
 	<parent>
 		<groupId>org.springframework.zero</groupId>
-		<artifactId>spring-starter-maven-parent</artifactId>
+		<artifactId>spring-starter-parent</artifactId>
 		<version>0.5.0.BUILD-SNAPSHOT</version>
 	</parent>
-	
+
 	<groupId>org.springframework</groupId>
 	<artifactId>springframework-site</artifactId>
 	<version>0.0.1.SNAPSHOT</version>
@@ -19,7 +19,6 @@
 	<properties>
 		<start-class>org.springframework.site.web.configuration.ApplicationConfiguration</start-class>
 		<spring.version>4.0.0.BUILD-SNAPSHOT</spring.version>
-		<springzero.version>0.5.0.BUILD-SNAPSHOT</springzero.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -31,7 +30,7 @@
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-jdk14</artifactId>
+					<artifactId>slf4j-logback</artifactId>
 				</exclusion>
 				<exclusion>
 					<artifactId>javax.servlet-api</artifactId>
@@ -54,13 +53,11 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>3.1.3.RELEASE</version>
 		</dependency>
 		<dependency>
 			<!-- hidden dependency of thymeleaf-extras-springsecurity3 -->
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-acl</artifactId>
-			<version>3.1.4.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.social</groupId>
@@ -70,17 +67,14 @@
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring3</artifactId>
-			<version>2.0.16</version>
 		</dependency>
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
-			<version>1.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity3</artifactId>
-			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>net.java.dev.rome</groupId>
@@ -108,19 +102,8 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.5</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>2.2.9</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -132,7 +115,6 @@
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jdbc</artifactId>
-			<version>7.0.39</version>
 			<scope>runtime</scope>
 			<exclusions>
 				<exclusion>
@@ -150,40 +132,36 @@
 		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
-			<version>1.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.7.2</version>
 		</dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-oxm</artifactId>
-            <version>4.0.0.BUILD-SNAPSHOT</version>
-        </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+		</dependency>
 
-        <dependency>
-            <groupId>org.simpleframework</groupId>
-            <artifactId>simple-xml</artifactId>
-            <version>2.7</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>stax</artifactId>
-                    <groupId>stax</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>stax-api</artifactId>
-                    <groupId>stax</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>xpp3</artifactId>
-                    <groupId>xpp3</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-
+		<dependency>
+			<groupId>org.simpleframework</groupId>
+			<artifactId>simple-xml</artifactId>
+			<version>2.7</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>stax</artifactId>
+					<groupId>stax</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>stax-api</artifactId>
+					<groupId>stax</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>xpp3</artifactId>
+					<groupId>xpp3</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 		<dependency>
 			<groupId>io.searchbox</groupId>
@@ -202,12 +180,11 @@
 			<artifactId>cloudfoundry-runtime</artifactId>
 			<version>0.8.4</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -230,10 +207,18 @@
 			<plugin>
 				<groupId>org.springframework.zero</groupId>
 				<artifactId>spring-package-maven-plugin</artifactId>
-				<version>${springzero.version}</version>
+				<version>${spring.zero.version}</version>
 				<extensions>true</extensions>
 				<configuration>
 					<mainClass>${start-class}</mainClass>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -261,7 +246,7 @@
 					<includes>
 						<include>**/*Tests.java</include>
 					</includes>
-                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+					<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -283,48 +268,12 @@
 							<source>
 								<directory>${basedir}/src/main/stylesheets</directory>
 							</source>
-							<destination>${project.basedir}/src/main/resources/css</destination>
+							<destination>${project.basedir}/target/classes/css</destination>
 						</resource>
 					</resources>
 				</configuration>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											pl.project13.maven
-										</groupId>
-										<artifactId>
-											git-commit-id-plugin
-										</artifactId>
-										<versionRange>
-											[1.9,)
-										</versionRange>
-										<goals>
-											<goal>revision</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 
 	<repositories>

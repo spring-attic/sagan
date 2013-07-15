@@ -10,8 +10,8 @@ import org.simpleframework.xml.core.Persister;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.tools.toolsuite.DownloadLink;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
-import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
+import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 

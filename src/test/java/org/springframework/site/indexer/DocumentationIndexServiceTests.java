@@ -31,6 +31,13 @@ public class DocumentationIndexServiceTests {
 	}
 
 	@Test
+	public void referenceDocsAreIndexed() throws Exception {
+		service.index(project);
+		int linkDepthLevel = 1;
+		verify(crawlerService).crawl(contains("reference"), eq(linkDepthLevel), any(CrawlerService.CrawledWebDocumentProcessor.class));
+	}
+
+	@Test
 	public void githubDocsAreIndexed() throws Exception {
 		service.index(project);
 		int linkDepthLevel = 0;

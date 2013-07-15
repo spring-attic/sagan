@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+  <div layout:fragment="right-pane">
+    <ul class="blog-category--container">
+      <li class="blog-category">
+        <a th:href="@{/blog}">All Posts</a>
+        <a th:href="@{/blog.atom}" class="pull-right"><i class="icon-rss"></i></a>
+      </li>
+      <li class="blog-category">
+        <a th:href="@{/blog/broadcasts}">Broadcasts</a>
+        <a th:href="@{/blog/broadcasts.atom}" class="pull-right"><i class="icon-rss"></i></a>
+      </li>
+      <li th:each="category : ${categories}" class="blog-category">
+        <a th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}">Engineering</a>
+        <a th:href="@{'/blog/category/'+${category.urlSlug}}+'.atom'" class="pull-right"><i class="icon-rss"></i></a>
+      </li>
+    </ul>
+    <div style="text-align:center; margin-bottom: -20px;">
+      THESE BUTTONS ARE NOT LIVE
+    </div>
+    <ul class="social-btn--container">
+      <li class="social-btn twitter"></li>
+      <li class="social-btn googleplus"></li>
+      <li class="social-btn linkedin"></li>
+      <li class="social-btn facebook"></li>
+      <li class="social-btn youtube"></li>
+    </ul>
+    <div class="promo-material--container">
+      <div class="promo-material">NOT REAL</div>
+      <div class="promo-material">NOT REAL</div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+

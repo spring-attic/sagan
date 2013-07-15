@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.site.domain.guides.GettingStartedGuide;
 import org.springframework.site.domain.guides.GettingStartedService;
+import org.springframework.site.web.NavSection;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
 @Controller
 @RequestMapping(GUIDES_ROOT)
+@NavSection("guides")
 public class GettingStartedController {
 
 	public static final String GUIDES_ROOT = "/guides/gs";

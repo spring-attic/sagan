@@ -1,7 +1,8 @@
-$off-white: #FCFAFB;
+$off-white: #eee;
 $black-green: #3A3C2F; 
 $lime: #8CC63F;
 $leaf: #4E681E;
+$green: #6db33f;
 $bark: #AF9A85;
 $light-grey: #ECEBEB;
 $medium-grey: #DEDEDE;
@@ -14,7 +15,7 @@ $denim: #8395A1;
 
 
 body {
-  // background-color: white;
+  background-color: #f1f1f1;
   padding-top: 50px;
 }
 
@@ -59,35 +60,52 @@ body {
 
 
 .header--navbar {
-  box-shadow: 0 1px 3px rgba(153, 153, 153, 0.75);
+  border-top: 4px solid $green;
   .navbar-inner {
-    background-image: url("../img/pattern-blinding-dark-blue.png");
+    background-image: none;
+    background-color: #34302d;
     border: none;
-    .spring-logo {
-      background-image: url("../img/icon-spring-logo-white.png");
-      width: 120px;
-      height: 34px;
-      background-size: 100%;
-      background-repeat: no-repeat;
-      transition: all 0.15s;
-      -webkit-transition: all 0.15s;
-      -moz-transition: all 0.15s;
-      -o-transition: all 0.15s;
-      -ms-transition: all 0.15s;
-      &:hover {
-        background-image: url("../img/icon-spring-logo-green.png");
+    box-shadow: none;
+    position: relative;
+    .spring-logo--container {
+      display: inline-block;
+      .logo-bg {
+        width: 29px;
+        height: 22px;
+        top: 13px;
+        background-color: $green;
+        position: absolute;
+        z-index: 1034;
+        border-radius: 33px;
+        opacity: 0;
+        transition: opacity 0.15s;
+        -webkit-transition: opacity 0.15s;
+        -moz-transition: opacity 0.15s;
+        -o-transition: opacity 0.15s;
+        -ms-transition: opacity 0.15s;
       }
-      &.brand {
-        padding: 0;
-        margin: 8px 0;
+      .spring-logo {
+        background-image: url("../img/iconsprite.png");
+        width: 134px;
+        height: 34px;
+        background-repeat: no-repeat;
+        background-size: 1827px;
+        background-position: -1px -1px;
+        position: absolute;
+        z-index: 1035;
+        margin-top: -7px;
+      }
+      &:hover {
+        .logo-bg {
+          opacity: 1;
+        }
       }
     }
     .nav {
       .navbar-link {
-        padding: 13px 15px 0;
         &.active a {
-          background-color: transparent;
-          border-bottom: 3px solid $off-white;
+          background-color: $green;
+          box-shadow: none;
         }
         a {
           color: $off-white;
@@ -100,51 +118,86 @@ body {
           -moz-transition: all 0.15s;
           -o-transition: all 0.15s;
           -ms-transition: all 0.15s;
-          padding: 0 1px 2px;
+          padding: 15px 20px;
         }
         &:hover a {
           color: $off-white;
-          border-bottom: 3px solid $off-white;
+          background-color: $green;
         }
       }
       .nav-search {
         padding: 11px 0;
+        &:hover {
+          .header-nav-search--icon {
+            text-shadow: 0 0 10px $green;
+          }
+          .header-nav-search--container.js-open .header-nav-search--icon {
+            text-shadow: none;
+          }
+        }
+        form {
+          margin: 0;
+        }
       }
     }
     .header-nav-search--container {
+      padding: 3px 6px;
       .header-nav-search--icon {
         color: $off-white;
         font-size: 15px;
         padding: 3px 0 3px 12px;
         cursor: pointer;
-        transition: all 0.5;
+        transition: all 0.5s;
         -webkit-transition: all 0.5s;
         -moz-transition: all 0.5s;
         -o-transition: all 0.5s;
         -ms-transition: all 0.5s;
       }
-
       .header-nav-search--input {
         background: transparent;
         border: none;
         box-shadow: none;
-        margin: 0 0 0 -12px;
+        padding: 0;
         width: 0px;
-        -webkit-transition: all 0.5s;
-        -moz-transition: all 0.5s;
-        -o-transition: all 0.5s;
-        -ms-transition: all 0.5s;
+        font-size: 12px;
+        color: transparent;
+        transition: width 0.5s;
+        -webkit-transition: width 0.5s;
+        -moz-transition: width 0.5s;
+        -o-transition: width 0.5s;
+        -ms-transition: width 0.5s;
+        &::-webkit-input-placeholder {
+          color: transparent;
+        }
+        &:-moz-placeholder {
+          color: transparent;
+        }
+        &::-moz-placeholder {
+          color: transparent;
+        }
+        &:-ms-input-placeholder {
+          color: transparent;
+        }
       }
       &.js-open {
         background-color: #fff;
-        border: 1px solid #ccc;
         box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
         margin: 0 0 0 12px;
         .header-nav-search--input {
           width: 250px;
-          margin: 0;
-          font-size: 12px;
-          padding: 3px 6px;
+          color: #666;
+          &::-webkit-input-placeholder {
+            color: #999;
+          }
+          &:-moz-placeholder {
+            color: #999;
+          }
+          &::-moz-placeholder {
+            color: #999;
+          }
+          &:-ms-input-placeholder {
+            color: #999;
+          }
         }
         .header-nav-search--icon {
           color: #333;

@@ -1,18 +1,20 @@
 package org.springframework.site.domain.blog;
 
+import java.util.Date;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.site.search.SearchException;
-import org.springframework.site.search.SearchService;
-import org.springframework.site.web.blog.EntityNotFoundException;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.domain.services.MarkdownService;
 import org.springframework.site.domain.team.MemberProfile;
 import org.springframework.site.domain.team.TeamRepository;
+import org.springframework.site.search.SearchException;
+import org.springframework.site.search.SearchService;
+import org.springframework.site.web.blog.EntityNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service
 public class BlogService {
@@ -25,10 +27,12 @@ public class BlogService {
 
 	private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
-	private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(BlogService.class);
+	private static final Log logger = LogFactory.getLog(BlogService.class);
 
 	@Autowired
-	public BlogService(PostRepository repository, MarkdownService markdownService, DateService dateService, TeamRepository teamRepository, SearchService searchService) {
+	public BlogService(PostRepository repository, MarkdownService markdownService,
+			DateService dateService, TeamRepository teamRepository,
+			SearchService searchService) {
 		this.repository = repository;
 		this.markdownService = markdownService;
 		this.dateService = dateService;
@@ -39,7 +43,7 @@ public class BlogService {
 	// Query methods
 
 	public Post getPost(Long postId) {
-		Post post = repository.findOne(postId);
+		Post post = this.repository.findOne(postId);
 		if (post == null) {
 			throw new EntityNotFoundException("Blog post not found with Id=" + postId);
 		}
@@ -47,7 +51,8 @@ public class BlogService {
 	}
 
 	public Post getPublishedPost(Long postId) {
-		Post post = repository.findByIdAndDraftFalseAndPublishAtBefore(postId, dateService.now());
+		Post post = this.repository.findByIdAndDraftFalseAndPublishAtBefore(postId,
+				this.dateService.now());
 		if (post == null) {
 			throw new EntityNotFoundException("Blog post not found with Id=" + postId);
 		}
@@ -55,31 +60,37 @@ public class BlogService {
 	}
 
 	public Page<Post> getDraftPosts(Pageable pageRequest) {
-		return repository.findByDraftTrue(pageRequest);
+		return this.repository.findByDraftTrue(pageRequest);
 	}
 
 	public Page<Post> getPublishedPosts(Pageable pageRequest) {
-		return repository.findByDraftFalseAndPublishAtBefore(dateService.now(), pageRequest);
+		return this.repository.findByDraftFalseAndPublishAtBefore(this.dateService.now(),
+				pageRequest);
 	}
 
 	public Page<Post> getScheduledPosts(Pageable pageRequest) {
-		return repository.findByDraftFalseAndPublishAtAfter(dateService.now(), pageRequest);
+		return this.repository.findByDraftFalseAndPublishAtAfter(this.dateService.now(),
+				pageRequest);
 	}
 
 	public Page<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
-		return repository.findByCategoryAndDraftFalseAndPublishAtBefore(category, dateService.now(), pageRequest);
+		return this.repository.findByCategoryAndDraftFalseAndPublishAtBefore(category,
+				this.dateService.now(), pageRequest);
 	}
 
 	public Page<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
-		return repository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, dateService.now(), pageRequest);
+		return this.repository.findByBroadcastAndDraftFalseAndPublishAtBefore(true,
+				this.dateService.now(), pageRequest);
 	}
 
-	public Page<Post> getPublishedPostsForMember(MemberProfile profile, Pageable pageRequest) {
-		return repository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, dateService.now(), pageRequest);
+	public Page<Post> getPublishedPostsForMember(MemberProfile profile,
+			Pageable pageRequest) {
+		return this.repository.findByDraftFalseAndAuthorAndPublishAtBefore(profile,
+				this.dateService.now(), pageRequest);
 	}
 
 	public Page<Post> getAllPosts(Pageable pageRequest) {
-		return repository.findAll(pageRequest);
+		return this.repository.findAll(pageRequest);
 	}
 
 	// CRUD Operations
@@ -87,14 +98,15 @@ public class BlogService {
 	public Post addPost(PostForm postForm, String authorId) {
 		String content = postForm.getContent();
 		Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
-		MemberProfile profile = teamRepository.findByMemberId(authorId);
+		MemberProfile profile = this.teamRepository.findByMemberId(authorId);
 		post.setAuthor(profile);
-		post.setRenderedContent(markdownService.renderToHtml(content));
-		post.setRenderedSummary(markdownService.renderToHtml(extractFirstParagraph(content, 500)));
+		post.setRenderedContent(this.markdownService.renderToHtml(content));
+		post.setRenderedSummary(this.markdownService.renderToHtml(extractFirstParagraph(
+				content, 500)));
 		post.setBroadcast(postForm.isBroadcast());
 		post.setDraft(postForm.isDraft());
 		post.setPublishAt(publishDate(postForm));
-		repository.save(post);
+		this.repository.save(post);
 		saveToIndex(post);
 
 		return post;
@@ -107,23 +119,25 @@ public class BlogService {
 		post.setRawContent(content);
 		post.setCategory(postForm.getCategory());
 
-		post.setRenderedContent(markdownService.renderToHtml(content));
-		post.setRenderedSummary(markdownService.renderToHtml(extractFirstParagraph(content, 500)));
+		post.setRenderedContent(this.markdownService.renderToHtml(content));
+		post.setRenderedSummary(this.markdownService.renderToHtml(extractFirstParagraph(
+				content, 500)));
 
 		post.setBroadcast(postForm.isBroadcast());
 		post.setDraft(postForm.isDraft());
 		post.setPublishAt(publishDate(postForm));
 
-		repository.save(post);
+		this.repository.save(post);
 		saveToIndex(post);
 	}
 
 	public void deletePost(Post post) {
-		repository.delete(post);
+		this.repository.delete(post);
 	}
 
 	private Date publishDate(PostForm postForm) {
-		return !postForm.isDraft() && postForm.getPublishAt() == null ? dateService.now() : postForm.getPublishAt();
+		return !postForm.isDraft() && postForm.getPublishAt() == null ? this.dateService
+				.now() : postForm.getPublishAt();
 	}
 
 	// package private for testing purposes
@@ -142,10 +156,10 @@ public class BlogService {
 	}
 
 	private void saveToIndex(Post post) {
-		if (post.isLiveOn(dateService.now())) {
+		if (post.isLiveOn(this.dateService.now())) {
 			try {
-				searchService.saveToIndex(mapper.map(post));
-			} catch(SearchException e) {
+				this.searchService.saveToIndex(this.mapper.map(post));
+			} catch (SearchException e) {
 				logger.error(e);
 			}
 		}

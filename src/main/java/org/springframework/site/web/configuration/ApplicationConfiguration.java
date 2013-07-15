@@ -44,7 +44,7 @@ public class ApplicationConfiguration {
 	}
 
 	public static SpringApplication build(Class<?>... config) {
-		SpringApplication application = new SpringApplication(config);
+		SpringApplication application = new SpringApplication((Object[]) config);
 		application.setDefaultCommandLineArgs("--spring.template.mode=LEGACYHTML5",
 				"--spring.template.cache=false");
 		return application;

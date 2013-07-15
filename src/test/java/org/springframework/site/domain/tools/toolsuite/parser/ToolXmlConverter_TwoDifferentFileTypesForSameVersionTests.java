@@ -2,9 +2,9 @@ package org.springframework.site.domain.tools.toolsuite.parser;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.site.domain.tools.toolsuite.Architecture;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
+import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.site.domain.tools.toolsuite.xml.Download;
 import org.springframework.site.domain.tools.toolsuite.xml.Release;

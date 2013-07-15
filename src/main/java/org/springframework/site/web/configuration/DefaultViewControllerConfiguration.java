@@ -1,33 +1,30 @@
 package org.springframework.site.web.configuration;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.http.MediaType;
-import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
+import org.springframework.site.web.ApplicationDialect;
+import org.springframework.site.web.NavSection;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.thymeleaf.spring3.SpringTemplateEngine;
-import org.thymeleaf.spring3.view.ThymeleafViewResolver;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter {
@@ -37,9 +34,6 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 
 	@Autowired
 	private SpringTemplateEngine templateEngine;
-
-	@Autowired
-	private ThymeleafViewResolver resolver;
 
 	private Map<String, MediaType> mimeTypes = new HashMap<String, MediaType>();
 
@@ -53,13 +47,8 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	}
 
 	@PostConstruct
-	public void configureThymeleafSecurity() {
-		this.templateEngine.addDialect(new SpringSecurityDialect());
-	}
-
-	@PostConstruct
-	public void addUtf8EncodingToThymeleaf() {
-		this.resolver.setCharacterEncoding("UTF-8");
+	public void addCustomDialect() {
+		templateEngine.addDialect(new ApplicationDialect());
 	}
 
 	@Override
@@ -106,6 +95,22 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 		};
 	}
 
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor( new HandlerInterceptorAdapter() {
+			@Override
+			public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+				if (handler instanceof HandlerMethod) {
+					HandlerMethod handlerMethod = (HandlerMethod) handler;
+					NavSection navSection = handlerMethod.getBean().getClass().getAnnotation(NavSection.class);
+					if (navSection != null) {
+						modelAndView.addObject("navSection", navSection.value());
+					}
+				}
+			}
+		});
+	}
+
 	private String relativeFilePath(String basePath, Resource resource)
 			throws IOException {
 		return resource.getURL().getPath().substring(basePath.length())
@@ -121,21 +126,6 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 			}
 		}
 		return requestMapping;
-	}
-
-	@Bean
-	public OpenEntityManagerInViewInterceptor interceptor() {
-		return new OpenEntityManagerInViewInterceptor();
-	}
-
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addWebRequestInterceptor(interceptor());
-	}
-
-	@Bean
-	public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-		return new HiddenHttpMethodFilter();
 	}
 
 }

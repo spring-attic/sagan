@@ -86,6 +86,7 @@ $secondary-font-family: 'Montserrat', sans-serif;
         padding: 10px 12px;
         font-size: 16px;
         border: none;
+        background-color: transparent;
         &:hover {
           background-color: transparent;
         }
@@ -99,22 +100,69 @@ $secondary-font-family: 'Montserrat', sans-serif;
   margin: 0 0 40px 0;
   li {
     display: block;
-    padding: 12px 0;
-    margin: 0 20px;
-    border-bottom: 1px solid #ddd;
+    padding: 12px 20px;
+    border-top: 1px solid white;
     font-size: 16px;
     line-height: 16px;
+    [class^=icon-] {
+      color: #ccc;
+    }
+    &:first-child {
+      border-top: 2px solid #000;
+      margin: -1px 20px 0;
+      padding: 13px 0 12px;
+    }
     &:last-child {
       border-bottom: none;
     }
     &.active {
       font-weight: bold;
+      font-size: 1.2em;
     }
   }
 }
 
-.blog-social-links--container {
-  
+.social-btn--container {
+  margin: 40px 0;
+  text-align: center;
+  .social-btn {
+    background-image: url("../img/iconsprite.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin: 0 4%;
+    &.twitter {
+      background-position: -1px -143px;
+      &:hover {
+        background-position: -84px -143px;
+      }
+    }
+    &.googleplus {
+      background-position: -1px -220px;
+      &:hover {
+        background-position: -84px -220px;
+      }
+    }
+    &.linkedin {
+      background-position: -1px -297px;
+      &:hover {
+        background-position: -84px -297px;
+      }
+    }
+    &.facebook {
+      background-position: -1px -373px;
+      &:hover {
+        background-position: -84px -373px;
+      }
+    }
+    &.youtube {
+      background-position: -1px -450px;
+      &:hover {
+        background-position: -84px -450px;
+      }
+    }
+  }
 }
 
 .promo-material {
@@ -123,7 +171,6 @@ $secondary-font-family: 'Montserrat', sans-serif;
   text-align: center;
   text-transform: uppercase;
   border: 6px solid white;
-  box-shadow: 0 0 3px #ccc;
   color: #ccc;
   background-color: #ddd; 
 }

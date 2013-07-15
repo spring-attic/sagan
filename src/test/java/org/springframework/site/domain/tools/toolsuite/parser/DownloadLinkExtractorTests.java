@@ -34,21 +34,28 @@ public class DownloadLinkExtractorTests {
 
 	@Test
 	public void extractsFileSize() throws Exception {
-		assertThat(extractor.createDownloadLink(download).getFileSize(),
-				equalTo("373MB"));
+		assertThat(extractor.createDownloadLink(download).getFileSize(), equalTo("373MB"));
 	}
 
 	@Test
 	 public void extractsSimpleFileType() throws Exception {
-		assertThat(extractor.createDownloadLink(download).getFileType(),
-				equalTo("dmg"));
+		assertThat(extractor.createDownloadLink(download).getFileType(), equalTo("dmg"));
 	}
 
 	@Test
 	public void extractsTarGzFileType() throws Exception {
 		download.setFile("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.tar.gz");
 
-		assertThat(extractor.createDownloadLink(download).getFileType(),
-				equalTo("tar.gz"));
+		assertThat(extractor.createDownloadLink(download).getFileType(), equalTo("tar.gz"));
+	}
+
+	@Test
+	public void extractsOs() throws Exception {
+		assertThat(extractor.createDownloadLink(download).getOs(), equalTo("mac"));
+	}
+
+	@Test
+	public void extractsArchitecture() throws Exception {
+		assertThat(extractor.createDownloadLink(download).getArchitecture(), equalTo("32"));
 	}
 }

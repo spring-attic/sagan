@@ -28,7 +28,7 @@ public class IndexerConfiguration {
 	}
 
 	public static SpringApplication build(Class<?>... config) {
-		SpringApplication application = new SpringApplication(config);
+		SpringApplication application = new SpringApplication((Object[]) config);
 		application.setDefaultCommandLineArgs("--server.port=9000");
 		return application;
 	}

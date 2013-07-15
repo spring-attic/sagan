@@ -4,8 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.site.domain.tools.toolsuite.Architecture;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
-import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
+import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.site.domain.tools.toolsuite.xml.Download;
 import org.springframework.site.domain.tools.toolsuite.xml.Release;
 import org.springframework.site.domain.tools.toolsuite.xml.ToolSuiteXml;
@@ -24,9 +24,9 @@ public class ToolXmlConverter_SingleDownloadTests {
 	@Before
 	public void setUp() throws Exception {
 		ToolSuiteXml toolSuiteXml = new ToolSuiteXml();
-		List<Release> releases = new ArrayList<Release>();
+		List<Release> releases = new ArrayList<>();
 		Release release = new Release();
-		List<Download> downloads = new ArrayList<Download>();
+		List<Download> downloads = new ArrayList<>();
 
 		Download download = new Download();
 		download.setDescription("Mac OS X (Cocoa)");
@@ -78,5 +78,7 @@ public class ToolXmlConverter_SingleDownloadTests {
 
 		assertThat(architecture.getDownloadLinks().size(), equalTo(1));
 		assertThat(architecture.getDownloadLinks().get(0).getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
+		assertThat(architecture.getDownloadLinks().get(0).getOs(), equalTo("mac"));
+		assertThat(architecture.getDownloadLinks().get(0).getArchitecture(), equalTo("32"));
 	}
 }
