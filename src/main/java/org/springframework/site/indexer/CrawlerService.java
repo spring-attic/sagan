@@ -27,7 +27,7 @@ import java.util.concurrent.Executors;
 public class CrawlerService {
 
 	public interface CrawledWebDocumentProcessor {
-		void process(WebDocument document);
+		void process(Document document);
 	}
 
 	private static Log logger = LogFactory.getLog(CrawlerService.class);
@@ -63,10 +63,8 @@ public class CrawlerService {
 		public HTMLPageResponse get(PageURL url, boolean fetchBody, Map<String, String> requestHeaders) {
 			HTMLPageResponse response = super.get(url, fetchBody, requestHeaders);
 			if (response.getResponseCode() == 200 && response.getResponseType().startsWith("text")) {
-				Document body = response.getBody();
-				logger.debug("Indexing link: " + url);
-				WebDocument webDocument = new WebDocument(url.getUrl(), body);
-				processor.process(webDocument);
+				// TODO - should handle saving searchEntry to search service
+				processor.process(response.getBody());
 			}
 			return response;
 		}

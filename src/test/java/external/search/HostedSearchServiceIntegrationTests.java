@@ -13,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.site.domain.guides.GettingStartedGuide;
 import org.springframework.site.domain.guides.GettingStartedService;
 import org.springframework.site.domain.guides.GuideRepo;
-import org.springframework.site.indexer.WebDocument;
 import org.springframework.site.indexer.WebDocumentSearchEntryMapper;
 import org.springframework.site.indexer.configuration.IndexerConfiguration;
 import org.springframework.site.search.SearchEntry;
@@ -125,9 +124,10 @@ public class HostedSearchServiceIntegrationTests {
 
 		Document testApiDocument = Document.createShell(apiDocsTestClassUrl);
 		testApiDocument.body().text("Somereandomtestcontentthatshouldbeunique");
+		testApiDocument.setBaseUri(apiDocsTestClassUrl);
 
 		WebDocumentSearchEntryMapper mapper = new WebDocumentSearchEntryMapper();
-		entry = mapper.map(new WebDocument(apiDocsTestClassUrl, testApiDocument));
+		entry = mapper.map(testApiDocument);
 
 		entry.setPath(entry.getPath() + "api-docs-indexing-integration-test");
 

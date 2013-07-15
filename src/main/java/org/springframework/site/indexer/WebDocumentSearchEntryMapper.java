@@ -6,18 +6,17 @@ import org.springframework.site.search.SearchEntryMapper;
 
 import java.util.Date;
 
-public class WebDocumentSearchEntryMapper implements SearchEntryMapper<WebDocument> {
+public class WebDocumentSearchEntryMapper implements SearchEntryMapper<Document> {
 
 	@Override
-	public SearchEntry map(WebDocument document) {
-		Document input = document.getDocument();
+	public SearchEntry map(Document document) {
 		SearchEntry entry = new SearchEntry();
 		entry.setPublishAt(new Date(0L));
-		String text = input.text();
+		String text = document.text();
 		entry.setRawContent(text);
 		entry.setSummary(text.substring(0, Math.min(500, text.length())));
-		entry.setTitle(input.title());
-		entry.setPath(document.getPath());
+		entry.setTitle(document.title());
+		entry.setPath(document.baseUri());
 		return entry;
 	}
 

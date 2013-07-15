@@ -2,6 +2,7 @@ package org.springframework.site.indexer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.nodes.Document;
 import org.springframework.actuate.metrics.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -34,7 +35,8 @@ public class DocumentationIndexService {
 		private final WebDocumentSearchEntryMapper mapper = new WebDocumentSearchEntryMapper();
 
 		@Override
-		public void process(WebDocument document) {
+		// todo - change return type to SearchEntry
+		public void process(Document document) {
 			searchService.saveToIndex(mapper.map(document));
 		}
 	};
