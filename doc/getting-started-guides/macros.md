@@ -127,9 +127,19 @@ $ mvn clean package android:deploy android:run
 The command builds the Android app and runs it in the emulator or attached device.
 </#macro>
 
-<#macro build_an_executable_jar>
-###Build an executable JAR
 
+<#macro build_an_executable_jar_mainhead>
+Build an executable JAR
+-----------------------
+</#macro>
+
+
+<#macro build_an_executable_jar_subhead>
+### Build an executable JAR
+-----------------------
+</#macro>
+
+<#macro build_an_executable_jar>
 Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
 
 Add the following configuration to your existing Maven POM:
