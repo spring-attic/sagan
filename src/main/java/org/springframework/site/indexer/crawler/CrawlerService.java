@@ -1,4 +1,4 @@
-package org.springframework.site.indexer;
+package org.springframework.site.indexer.crawler;
 
 import com.soulgalore.crawler.core.CrawlerConfiguration;
 import com.soulgalore.crawler.core.HTMLPageResponse;
@@ -16,9 +16,6 @@ import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.search.SearchEntry;
-import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -28,17 +25,6 @@ import java.util.concurrent.Executors;
 
 @Component
 public class CrawlerService {
-
-	private final SearchService searchService;
-
-	@Autowired
-	public CrawlerService(SearchService searchService) {
-		this.searchService = searchService;
-	}
-
-	public interface CrawledWebDocumentProcessor {
-		SearchEntry process(Document document);
-	}
 
 	private static Log logger = LogFactory.getLog(CrawlerService.class);
 
@@ -53,7 +39,7 @@ public class CrawlerService {
 		return client;
 	}
 
-	public void crawl(String url, int linkDepth, CrawledWebDocumentProcessor processor) {
+	public void crawl(String url, int linkDepth, DocumentProcessor processor) {
 		CrawlerConfiguration apiConfig = new CrawlerConfiguration.Builder().setStartUrl(url).setMaxLevels(linkDepth).build();
 		DefaultCrawler crawler = new DefaultCrawler(new ResponseFetcher(processor), Executors.newFixedThreadPool(10), new CompositeURLParser(new FramePageURLParser(), new AhrefPageURLParser()));
 		crawler.getUrls(apiConfig);
@@ -62,9 +48,9 @@ public class CrawlerService {
 
 	private class ResponseFetcher extends HTTPClientResponseFetcher {
 
-		private final CrawledWebDocumentProcessor processor;
+		private final DocumentProcessor processor;
 
-		public ResponseFetcher(CrawledWebDocumentProcessor processor) {
+		public ResponseFetcher(DocumentProcessor processor) {
 			super(httpClient());
 			this.processor = processor;
 		}
@@ -73,7 +59,7 @@ public class CrawlerService {
 		public HTMLPageResponse get(PageURL url, boolean fetchBody, Map<String, String> requestHeaders) {
 			HTMLPageResponse response = super.get(url, fetchBody, requestHeaders);
 			if (response.getResponseCode() == 200 && response.getResponseType().startsWith("text")) {
-				searchService.saveToIndex(processor.process(response.getBody()));
+				processor.process(response.getBody());
 			}
 			return response;
 		}

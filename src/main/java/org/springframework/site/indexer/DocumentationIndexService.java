@@ -2,21 +2,19 @@ package org.springframework.site.indexer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jsoup.nodes.Document;
 import org.springframework.actuate.metrics.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.site.domain.documentation.DocumentationService;
 import org.springframework.site.domain.documentation.Project;
-import org.springframework.site.search.SearchEntry;
+import org.springframework.site.indexer.crawler.CrawlerService;
+import org.springframework.site.indexer.crawler.DocumentProcessor;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static org.springframework.site.indexer.CrawlerService.CrawledWebDocumentProcessor;
 
 @Service
 public class DocumentationIndexService {
@@ -27,27 +25,19 @@ public class DocumentationIndexService {
 	private final DocumentationService documentationService;
 	private final CrawlerService crawlerService;
 	private final CounterService counters;
-	private final SearchService searchService;
 
 	private ExecutorService executor = Executors.newFixedThreadPool(10);
 
-
-	private final CrawledWebDocumentProcessor documentProcessor = new CrawledWebDocumentProcessor() {
-		private final WebDocumentSearchEntryMapper mapper = new WebDocumentSearchEntryMapper();
-
-		@Override
-		// todo - change return type to SearchEntry
-		public SearchEntry process(Document document) {
-			return mapper.map(document);
-		}
-	};
+	private final DocumentProcessor documentProcessor;
+	private final DocumentProcessor apiProcessor;
 
 	@Autowired
 	public DocumentationIndexService(CrawlerService crawlerService, DocumentationService documentationService, CounterService counters, SearchService searchService) {
 		this.crawlerService = crawlerService;
 		this.documentationService = documentationService;
 		this.counters = counters;
-		this.searchService = searchService;
+		this.documentProcessor = new CrawledWebDocumentProcessor(searchService, new WebDocumentSearchEntryMapper());
+		this.apiProcessor = new CrawledWebDocumentProcessor(searchService, new ApiDocumentMapper());
 	}
 
 	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
@@ -77,7 +67,7 @@ public class DocumentationIndexService {
 
 			UriTemplate rawUrl = new UriTemplate(project.getApiAllClassesUrl());
 			String url = rawUrl.expand(currentVersion).toString();
-			crawlerService.crawl(url, 1, documentProcessor);
+			crawlerService.crawl(url, 1, apiProcessor);
 
 			rawUrl = new UriTemplate(project.getReferenceUrl());
 			url = rawUrl.expand(currentVersion).toString();
