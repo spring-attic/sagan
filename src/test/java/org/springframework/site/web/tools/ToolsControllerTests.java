@@ -74,6 +74,26 @@ public class ToolsControllerTests {
 				sameInstance(archives));
 	}
 
+	@Test
+	public void ggtsIndexHasDownloadLinks() throws Exception {
+		Map<String, Platform> platforms = new HashMap<>();
+		List<DownloadLink> downloadLinks = Collections.singletonList(new DownloadLink("http://example.com/download.dmg", "dmg", "323MB", "mac", "64"));
+		List<Architecture> architectures = Collections.singletonList(new Architecture("Mac OS X (Cocoa, 64bit)", downloadLinks));
+		List<EclipseVersion> eclipseVersions = Collections.singletonList(new EclipseVersion("1.2", architectures));
+
+		Platform windows = new Platform("windows", "3.1.2.RELEASE", eclipseVersions);
+		platforms.put("windows", windows);
+
+		List<UpdateSiteArchive> archives = Collections.emptyList();
+		ToolSuite toolSuite = new ToolSuite(platforms, archives);
+		when(this.service.getGgtsDownloads()).thenReturn(toolSuite);
+		this.controller.ggtsIndex(this.model);
+
+		assertThat((Set<DownloadLink>) this.model.get("downloadLinks"), equalTo(toolSuite.getPreferredDownloadLinks()));
+		assertThat((String) this.model.get("version"), equalTo("3.1.2.RELEASE"));
+
+	}
+
 	@SuppressWarnings("unchecked")
 	@Test
 	public void allGgtsDownloadsAddsDownloadsToModel() throws Exception {

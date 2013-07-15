@@ -46,7 +46,10 @@ public class ToolsController {
 	}
 
 	@RequestMapping(value = "/ggts", method = { GET, HEAD })
-	public String ggtsIndex() throws Exception {
+	public String ggtsIndex(Model model) throws Exception {
+		ToolSuite ggtsDownloads = toolsService.getGgtsDownloads();
+		model.addAttribute("downloadLinks", ggtsDownloads.getPreferredDownloadLinks());
+		model.addAttribute("version", ggtsDownloads.getPreferredVersion());
 		return "tools/ggts/index";
 	}
 

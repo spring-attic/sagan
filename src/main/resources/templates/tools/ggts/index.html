@@ -12,7 +12,15 @@
 	the latest Eclipse releases.
 </div>
 <div layout:fragment="header-sidebar">
-	<a href="all.html" th:href="@{/tools/ggts/all}">See All Versions</a>
+    <ul class='download-links'>
+        <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${downloadLinks}">
+            <a class="btn" th:href="${downloadLink.url}">
+                <h3 th:text="'Download for ' + ${#strings.capitalize(downloadLink.os)}"></h3>
+                <p th:text="'version ' + ${version}"></p>
+            </a>
+        </li>
+    </ul>
+    <a href="all.html" th:href="@{/tools/ggts/all}">See All Versions</a>
 </div>
 
 <div layout:fragment="content" class="container">
