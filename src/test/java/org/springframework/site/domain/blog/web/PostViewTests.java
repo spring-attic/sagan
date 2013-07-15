@@ -1,7 +1,5 @@
 package org.springframework.site.domain.blog.web;
 
-import java.text.ParseException;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -12,9 +10,12 @@ import org.springframework.site.domain.services.DateService;
 import org.springframework.site.test.DateTestUtils;
 import org.springframework.site.web.blog.PostView;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.*;
+import java.text.ParseException;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 
 public class PostViewTests {
 
@@ -70,6 +71,29 @@ public class PostViewTests {
 		postView = new PostView(post, dateService);
 
 		assertThat(postView.getPath(), equalTo("/blog/123-my-post"));
+	}
+
+	@Test
+	public void knowsWhenSummaryAndContentDiffer() throws Exception {
+		Post post = PostBuilder.post().renderedContent("A string")
+				.renderedSummary("A different string")
+				.build();
+
+		postView = new PostView(post, dateService);
+
+		assertThat(postView.showReadMore(), is(true));
+	}
+
+	@Test
+	public void knowsWhenSummaryAndContentAreEqual() throws Exception {
+		String content = "Test content";
+		Post post = PostBuilder.post().renderedContent(content)
+				.renderedSummary(content)
+				.build();
+
+		postView = new PostView(post, dateService);
+
+		assertThat(postView.showReadMore(), is(false));
 	}
 
 }

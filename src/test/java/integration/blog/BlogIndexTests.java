@@ -83,6 +83,41 @@ public class BlogIndexTests {
 		assertThat(html.select(".blog-preview--title a").first().text(), is(post.getTitle()));
 	}
 
+	@Test
+	public void givenPostContentThatIsEqualToSummary_blogIndexShouldNotShow_ReadMore() throws Exception {
+		String summary = "A blog post string that is longish.";
+		String content = summary;
+		Post post = new PostBuilder()
+				.renderedContent(content)
+				.renderedSummary(summary)
+				.build();
+
+		postRepository.save(post);
+
+		MvcResult result = mockMvc.perform(get("/blog")).andReturn();
+		String response = result.getResponse().getContentAsString();
+		assertThat(response, not(containsString("Read more")));
+	}
+
+	@Test
+	public void givenPostContentThatIsLongerThanSummary_blogIndexShouldShow_ReadMore() throws Exception {
+		String summary = "A blog post string that is longish.";
+		String content = "";
+		for (int i = 0; i < 50; i++) {
+			content = content + summary;
+		}
+		Post post = new PostBuilder()
+				.renderedContent(content)
+				.renderedSummary(summary)
+				.build();
+
+		postRepository.save(post);
+
+		MvcResult result = mockMvc.perform(get("/blog")).andReturn();
+		String response = result.getResponse().getContentAsString();
+		assertThat(response, containsString("Read more"));
+	}
+
 	private Post createSinglePost() {
 		Post post = new PostBuilder().title("This week in Spring - June 3, 2013")
 										 .rawContent("Raw content")

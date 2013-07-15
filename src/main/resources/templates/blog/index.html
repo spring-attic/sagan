@@ -37,7 +37,7 @@
 							<div th:utext="${post.renderedSummary}">
 								This has been an interesting week.
 							</div>
-							<a th:href="@{${post.path}}">
+							<a th:href="@{${post.path}}" th:if="${post.showReadMore()}">
 								Read more...
 							</a>
 						</div>

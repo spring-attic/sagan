@@ -1,12 +1,12 @@
 package org.springframework.site.web.blog;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.springframework.site.domain.blog.Post;
 import org.springframework.site.domain.blog.PostCategory;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.domain.team.MemberProfile;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PostView {
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
@@ -77,5 +77,9 @@ public class PostView {
 
 	public Long getId() {
 		return this.post.getId();
+	}
+
+	public boolean showReadMore() {
+		return !this.post.getRenderedContent().equals(this.post.getRenderedSummary());
 	}
 }
