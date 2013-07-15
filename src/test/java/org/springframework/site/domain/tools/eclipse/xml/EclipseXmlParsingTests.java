@@ -15,12 +15,10 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class EclipseXmlParsingTests {
-	private Serializer serializer;
 	private String responseXml;
 
 	@Before
 	public void setUp() throws Exception {
-		serializer = new Persister();
 		InputStream response = new ClassPathResource("/eclipse.xml", getClass()).getInputStream();
 		responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
 	}

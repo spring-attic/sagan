@@ -28,26 +28,13 @@ public class EclipsePackage {
 		this.name = name;
 	}
 
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	public List<Download> getDownloads() {
 		return downloads;
 	}
 
-	public void setDownloads(List<Download> downloads) {
-		this.downloads = downloads;
-	}
 }

@@ -23,8 +23,4 @@ public class Product {
 	public List<EclipsePackage> getPackages() {
 		return packages;
 	}
-
-	public void setPackages(List<EclipsePackage> packages) {
-		this.packages = packages;
-	}
 }
