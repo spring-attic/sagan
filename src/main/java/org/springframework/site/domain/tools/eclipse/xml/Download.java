@@ -36,4 +36,7 @@ public class Download {
 		return file;
 	}
 
+	public String getOs() {
+		return os;
+	}
 }

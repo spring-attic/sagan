@@ -10,7 +10,7 @@ import org.simpleframework.xml.core.Persister;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.tools.toolsuite.DownloadLink;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
-import org.springframework.site.domain.tools.toolsuite.Platform;
+import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
@@ -49,7 +49,7 @@ public class ToolsServiceTests {
 		ToolSuiteDownloads toolSuite = service.getStsDownloads();
 		assertThat(toolSuite, notNullValue());
 
-		Map<String, Platform> platforms = toolSuite.getPlatforms();
+		Map<String, ToolSuitePlatform> platforms = toolSuite.getPlatforms();
 		assertThat(platforms.size(), equalTo(3));
 
 		assertThat(platforms.get("windows").getName(), equalTo("Windows"));
@@ -79,7 +79,7 @@ public class ToolsServiceTests {
 		ToolSuiteDownloads toolSuite = service.getGgtsDownloads();
 		assertThat(toolSuite, notNullValue());
 
-		Map<String, Platform> platforms = toolSuite.getPlatforms();
+		Map<String, ToolSuitePlatform> platforms = toolSuite.getPlatforms();
 		assertThat(platforms.size(), equalTo(3));
 
 		assertThat(platforms.get("windows").getName(), equalTo("Windows"));

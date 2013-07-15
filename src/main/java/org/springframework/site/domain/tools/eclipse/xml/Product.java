@@ -9,8 +9,8 @@ public class Product {
 	@Attribute
 	private String name;
 
-	@ElementList(entry = "package", type = EclipsePackage.class, inline = true)
-	private List<EclipsePackage> packages;
+	@ElementList(entry = "package", type = EclipseXmlPackage.class, inline = true)
+	private List<EclipseXmlPackage> packages;
 
 	public String getName() {
 		return name;
@@ -20,7 +20,7 @@ public class Product {
 		this.name = name;
 	}
 
-	public List<EclipsePackage> getPackages() {
+	public List<EclipseXmlPackage> getPackages() {
 		return packages;
 	}
 }

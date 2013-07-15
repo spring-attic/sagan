@@ -7,15 +7,15 @@ import java.util.Map;
 
 public class ToolSuiteDownloads implements ToolsDownloads {
 
-	private Map<String, Platform> platforms;
+	private Map<String, ToolSuitePlatform> platforms;
 	private List<UpdateSiteArchive> archives;
 
-	public ToolSuiteDownloads(Map<String, Platform> platforms, List<UpdateSiteArchive> archives) {
+	public ToolSuiteDownloads(Map<String, ToolSuitePlatform> platforms, List<UpdateSiteArchive> archives) {
 		this.platforms = platforms;
 		this.archives = archives;
 	}
 
-	public Map<String, Platform> getPlatforms() {
+	public Map<String, ToolSuitePlatform> getPlatforms() {
 		return platforms;
 	}
 

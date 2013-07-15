@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.site.domain.tools.toolsuite.Architecture;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
-import org.springframework.site.domain.tools.toolsuite.Platform;
+import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.site.domain.tools.toolsuite.xml.Download;
 import org.springframework.site.domain.tools.toolsuite.xml.Release;
@@ -57,14 +57,14 @@ public class ToolXmlConverter_SingleDownloadTests {
 
 	@Test
 	public void addsAnEclipseVersionToThePlatform() throws Exception {
-		Platform platform = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform platform = toolSuite.getPlatforms().get("mac");
 		assertThat(platform.getEclipseVersions().size(), equalTo(1));
 		assertThat(platform.getEclipseVersions().get(0).getName(), equalTo("4.3"));
 	}
 
 	@Test
 	public void addsAnArchitectureToTheEclipseVersion() throws Exception {
-		Platform platform = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform platform = toolSuite.getPlatforms().get("mac");
 		EclipseVersion eclipseVersion = platform.getEclipseVersions().get(0);
 		assertThat(eclipseVersion.getArchitectures().size(), equalTo(1));
 		assertThat(eclipseVersion.getArchitectures().get(0).getName(), equalTo("Mac OS X (Cocoa)"));
@@ -72,7 +72,7 @@ public class ToolXmlConverter_SingleDownloadTests {
 
 	@Test
 	public void addsADownloadLinkTheArchitecture() throws Exception {
-		Platform platform = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform platform = toolSuite.getPlatforms().get("mac");
 		EclipseVersion eclipseVersion = platform.getEclipseVersions().get(0);
 		Architecture architecture = eclipseVersion.getArchitectures().get(0);
 

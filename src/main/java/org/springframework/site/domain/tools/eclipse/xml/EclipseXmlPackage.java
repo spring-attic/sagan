@@ -6,7 +6,7 @@ import org.simpleframework.xml.ElementList;
 
 import java.util.List;
 
-public class EclipsePackage {
+public class EclipseXmlPackage {
 
 	@Attribute
 	private String name;

@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.site.domain.tools.toolsuite.Architecture;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
-import org.springframework.site.domain.tools.toolsuite.Platform;
+import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.site.domain.tools.toolsuite.xml.Download;
 import org.springframework.site.domain.tools.toolsuite.xml.Release;
 import org.springframework.site.domain.tools.toolsuite.xml.ToolSuiteXml;
@@ -69,23 +69,23 @@ public class ToolXmlConverter_TwoDifferentPlatformsTests {
 
 	@Test
 	public void addsAnEclipseVersionToEachPlatform() throws Exception {
-		Platform mac = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform mac = toolSuite.getPlatforms().get("mac");
 		assertThat(mac.getEclipseVersions().size(), equalTo(1));
 		assertThat(mac.getEclipseVersions().get(0).getName(), equalTo("4.3"));
 
-		Platform windows = toolSuite.getPlatforms().get("windows");
+		ToolSuitePlatform windows = toolSuite.getPlatforms().get("windows");
 		assertThat(windows.getEclipseVersions().size(), equalTo(1));
 		assertThat(windows.getEclipseVersions().get(0).getName(), equalTo("4.3"));
 	}
 
 	@Test
 	public void addsAnArchitectureToTheEclipseVersionInEachPlatform() throws Exception {
-		Platform mac = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform mac = toolSuite.getPlatforms().get("mac");
 		EclipseVersion eclipseVersion = mac.getEclipseVersions().get(0);
 		assertThat(eclipseVersion.getArchitectures().size(), equalTo(1));
 		assertThat(eclipseVersion.getArchitectures().get(0).getName(), equalTo("Mac OS X (Cocoa)"));
 
-		Platform windows = toolSuite.getPlatforms().get("windows");
+		ToolSuitePlatform windows = toolSuite.getPlatforms().get("windows");
 		EclipseVersion windowsEclipseVersion = windows.getEclipseVersions().get(0);
 		assertThat(windowsEclipseVersion.getArchitectures().size(), equalTo(1));
 		assertThat(windowsEclipseVersion.getArchitectures().get(0).getName(), equalTo("Windows (64bit)"));

@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.site.domain.tools.toolsuite.Architecture;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
-import org.springframework.site.domain.tools.toolsuite.Platform;
+import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.site.domain.tools.toolsuite.xml.Download;
 import org.springframework.site.domain.tools.toolsuite.xml.Release;
 import org.springframework.site.domain.tools.toolsuite.xml.ToolSuiteXml;
@@ -70,7 +70,7 @@ public class ToolXmlConverter_TwoDifferentEclipseVersionsTests {
 
 	@Test
 	public void addsBothEclipseVersionsToThePlatform() throws Exception {
-		Platform mac = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform mac = toolSuite.getPlatforms().get("mac");
 		assertThat(mac.getEclipseVersions().size(), equalTo(2));
 		assertThat(mac.getEclipseVersions().get(0).getName(), equalTo("4.3"));
 		assertThat(mac.getEclipseVersions().get(1).getName(), equalTo("3.8.2"));
@@ -78,7 +78,7 @@ public class ToolXmlConverter_TwoDifferentEclipseVersionsTests {
 
 	@Test
 	public void addsAnArchitectureToEachEclipseVersion() throws Exception {
-		Platform mac = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform mac = toolSuite.getPlatforms().get("mac");
 		EclipseVersion eclipseVersion = mac.getEclipseVersions().get(0);
 		assertThat(eclipseVersion.getArchitectures().size(), equalTo(1));
 		assertThat(eclipseVersion.getArchitectures().get(0).getName(), equalTo("Mac OS X (Cocoa)"));

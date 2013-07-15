@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
@@ -101,6 +102,32 @@ public class ToolsPagesTests {
 		assertThat(document.select("h1").text(), equalTo("Groovy Grails Tool Suite Downloads"));
 		assertThat(document.select("ul li.platform h2").text(), containsString("Windows"));
 		assertThat(document.select("ul.dropdown-menu a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
+	}
+
+	@Test
+	public void showsEclipseIndex() throws Exception {
+		InputStream response = new ClassPathResource("/eclipse.xml", getClass()).getInputStream();
+		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
+		stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
+
+		MvcResult mvcResult = this.mockMvc.perform(get("/tools/eclipse"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html"))
+				.andReturn();
+
+		Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
+
+
+		assertThat(document.select("h1").text(), equalTo("Eclipse"));
+		assertThat(document.text(), containsString("Spring Tool Suite"));
+		assertThat(document.text(), containsString("Groovy/Grails Tool Suite"));
+
+		assertThat(document.select(".platform h2").first().text(), is("Windows"));
+		assertThat(document.select(".platform .package h3").first().text(), is("Eclipse Standard 4.3 (Win32, 0MB)"));
+		assertThat(document.select(".platform .package .eclipse-version h4").first().text(), is("Eclipse Kepler Package Downloads (based on Eclipse 4.3)"));
+		assertThat(document.select(".platform .package .eclipse-version .architecture h5").first().text(), is("32bit"));
+		String fileUri = "release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip";
+		assertThat(document.select(".platform .package .eclipse-version .architecture a").first().attr("href"), is(fileUri));
 	}
 
 }

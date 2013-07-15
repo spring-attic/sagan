@@ -1,0 +1,44 @@
+<html   xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+		layout:decorator="layout">
+<head>
+	<title>SpringFramework - Eclipse</title>
+</head>
+<body>
+<h1 layout:fragment="header">Eclipse</h1>
+<div layout:fragment="overview">
+	The essential tools for any Java developer, including a Java IDE, a CVS client, Git client, XML Editor, Mylyn,
+	Maven integration and WindowBuilder
+</div>
+<div layout:fragment="header-sidebar">
+	<a href="all.html" th:href="@{/tools/sts/all}">See All Versions</a>
+</div>
+
+<div layout:fragment="content" class="container">
+	<h2>Spring Tool Suite</h2>
+	<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod.</p>
+	<h2>Groovy/Grails Tool Suite</h2>
+	<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod.</p>
+
+
+	<ul>
+		<li class="platform" th:each="platform : ${platforms}">
+			<h2 th:text="*{name}">Windows</h2>
+			<div class="package" th:each="package : *{packages}">
+				<h3 th:text="*{name}">Eclipse Standard 4.3 (Win32, 0MB)</h3>
+				<div class="eclipse-version" th:each="eclipseVersion : *{eclipseVersions}">
+					<h4 th:text="*{name}">Eclipse Kepler Package Downloads (based on Eclipse 4.3)</h4>
+					<div class="architecture" th:each="architecture : *{architectures}">
+						<h5 th:text="*{name}">32bit</h5>
+						<div class="download" th:each="download : *{downloadLinks}">
+							<a href='release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip' th:href="*{url}" th:text=*{fileType}>zip</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+
+</div>
+</body>
+</html>

@@ -3,11 +3,10 @@ package org.springframework.site.domain.tools.toolsuite.parser;
 import org.springframework.site.domain.tools.toolsuite.Architecture;
 import org.springframework.site.domain.tools.toolsuite.DownloadLink;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
-import org.springframework.site.domain.tools.toolsuite.Platform;
+import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.site.domain.tools.toolsuite.UpdateSiteArchive;
 import org.springframework.site.domain.tools.toolsuite.xml.Download;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -17,7 +16,7 @@ import java.util.Map;
 public class ToolSuiteBuilder {
 
 	private final DownloadLinkExtractor downloadLinkExtractor = new DownloadLinkExtractor();
-	private Map<String, Platform> platformMap = new LinkedHashMap<String, Platform>();
+	private Map<String, ToolSuitePlatform> platformMap = new LinkedHashMap<String, ToolSuitePlatform>();
 	private List<UpdateSiteArchive> updateSiteArchives = new ArrayList<UpdateSiteArchive>();
 	private Map<String, EclipseVersion> eclipseVersionMap = new LinkedHashMap<String, EclipseVersion>();
 	private Map<String, Architecture> architectureMap = new LinkedHashMap<String, Architecture>();
@@ -31,7 +30,7 @@ public class ToolSuiteBuilder {
 	}
 
 	private void extractPlatformDownloadLink(Download download) {
-		Platform platform = createOrFindPlatform(download.getOs(), download.getVersion());
+		ToolSuitePlatform platform = createOrFindPlatform(download.getOs(), download.getVersion());
 		EclipseVersion eclipseVersion = createOrFindEclipseVersion(download.getEclipseVersion(), platform);
 		Architecture architecture = createOrFindArchitecture(download.getDescription(), eclipseVersion, platform);
 
@@ -51,16 +50,16 @@ public class ToolSuiteBuilder {
 		return new ToolSuiteDownloads(platformMap, updateSiteArchives);
 	}
 
-	private Platform createOrFindPlatform(String os, String name) {
-		Platform platform = platformMap.get(os);
+	private ToolSuitePlatform createOrFindPlatform(String os, String name) {
+		ToolSuitePlatform platform = platformMap.get(os);
 		if (platform == null) {
-			platform = new Platform(StringUtils.capitalize(os), name, new ArrayList<EclipseVersion>());
+			platform = new ToolSuitePlatform(os, name, new ArrayList<EclipseVersion>());
 			platformMap.put(os, platform);
 		}
 		return platform;
 	}
 
-	private EclipseVersion createOrFindEclipseVersion(String eclipseVersionName, Platform platform) {
+	private EclipseVersion createOrFindEclipseVersion(String eclipseVersionName, ToolSuitePlatform platform) {
 		String key = platform.getName() + eclipseVersionName;
 
 		EclipseVersion eclipseVersion = eclipseVersionMap.get(key);
@@ -72,7 +71,7 @@ public class ToolSuiteBuilder {
 		return eclipseVersion;
 	}
 
-	private Architecture createOrFindArchitecture(String architectureName, EclipseVersion eclipseVersion, Platform platform) {
+	private Architecture createOrFindArchitecture(String architectureName, EclipseVersion eclipseVersion, ToolSuitePlatform platform) {
 		String key = platform.getName() + eclipseVersion.getName() + architectureName;
 
 		Architecture architecture = architectureMap.get(key);
