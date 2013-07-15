@@ -9,6 +9,10 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
+
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +20,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class SearchService {
@@ -38,13 +39,11 @@ public class SearchService {
 	}
 
 	public void saveToIndex(SearchEntry entry) {
-		Index newIndex = new Index.Builder(entry)
-				.id(entry.getId())
-				.index(INDEX)
-				.type("site") //TODO this should come from the 'entry'
+		Index newIndex = new Index.Builder(entry).id(entry.getId()).index(INDEX)
+				.type("site") // TODO this should come from the 'entry'
 				.build();
 
-		if (useRefresh) {
+		if (this.useRefresh) {
 			newIndex.addParameter(Parameters.REFRESH, true);
 		}
 		execute(newIndex);
@@ -52,7 +51,7 @@ public class SearchService {
 
 	private JestResult execute(Action action) {
 		try {
-			JestResult result = jestClient.execute(action);
+			JestResult result = this.jestClient.execute(action);
 			logger.debug(result.getJsonString());
 			return result;
 		} catch (Exception e) {
@@ -63,19 +62,22 @@ public class SearchService {
 	public Page<SearchEntry> search(String term, Pageable pageable) {
 		Search search;
 		if (term.equals("")) {
-			search = searchQueryBuilder.forEmptyQuery(pageable);
+			search = this.searchQueryBuilder.forEmptyQuery(pageable);
 		} else {
-			search = searchQueryBuilder.forQuery(term, pageable);
+			search = this.searchQueryBuilder.forQuery(term, pageable);
 		}
 		search.addIndex(INDEX);
 		JestResult jestResult = execute(search);
-		List<SearchEntry> searchEntries = jestResult.getSourceAsObjectList(SearchEntry.class);
-		Map<String,Double> hits = (Map<String,Double>) jestResult.getJsonMap().get("hits");
+		List<SearchEntry> searchEntries = jestResult
+				.getSourceAsObjectList(SearchEntry.class);
+		@SuppressWarnings("unchecked")
+		Map<String, Double> hits = (Map<String, Double>) jestResult.getJsonMap().get(
+				"hits");
 		int totalResults = hits.get("total").intValue();
 		return new PageImpl<SearchEntry>(searchEntries, pageable, totalResults);
 	}
 
-	public void deleteIndex()  {
+	public void deleteIndex() {
 		execute(new DeleteIndex(INDEX));
 	}
 
@@ -88,10 +90,14 @@ public class SearchService {
 	}
 
 	public void removeFromIndex(SearchEntry entry) {
-		Delete delete = new Delete.Builder(entry.getId())
-									.index(INDEX)
-									.type("site") //TODO this should come from the 'entry'
-									.build();
+		Delete delete = new Delete.Builder(entry.getId()).index(INDEX).type("site") // TODO
+																					// this
+																					// should
+																					// come
+																					// from
+																					// the
+																					// 'entry'
+				.build();
 
 		execute(delete);
 	}
