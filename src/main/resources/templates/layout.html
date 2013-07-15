@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:app="http://www.springframework.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <title>Layout</title>
   <link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap.css}" href="../../bootstrap/css/bootstrap.min.css" />
@@ -32,19 +32,19 @@
           <a class="spring-logo" th:href="@{/}" href="/"></a>
         </div>
         <ul class="nav pull-right">
-          <li class=" navbar-link">
+          <li app:navlink="documentation">
             <a th:href="@{/documentation}" href="documentation/index.html">Documentation</a>
           </li>
-          <li class=" navbar-link active">
-            <a th:href="@{/guides}" href="pages/guides/index.html">Guides</a>
+          <li app:navlink="guides">
+            <a th:href="@{/guides}" href="guides/index.html">Guides</a>
           </li>
-          <li class=" navbar-link">
-            <a th:href="@{/projects}" href="pages/projects.html">Projects</a>
+          <li app:navlink="projects">
+            <a th:href="@{/projects}" href="projects/index.html">Projects</a>
           </li>
-          <li class=" navbar-link">
+          <li app:navlink="blog">
             <a th:href="@{/blog}" href="pages/blog.html">Blog</a>
           </li>
-          <li class=" navbar-link">
+          <li app:navlink="forum">
             <a href="http://forum.springframework.org">Forum</a>
           </li>
           <li class="nav-search">

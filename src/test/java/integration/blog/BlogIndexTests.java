@@ -29,12 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -62,6 +57,17 @@ public class BlogIndexTests {
 	@After
 	public void tearDown() throws Exception {
 		postRepository.deleteAll();
+	}
+
+	@Test
+	public void showsToolsIndex() throws Exception {
+		MvcResult result = this.mockMvc.perform(get("/blog"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html"))
+				.andReturn();
+
+		Document document = Jsoup.parse(result.getResponse().getContentAsString());
+		MatcherAssert.assertThat(document.select("ul li.active").text(), equalTo("Blog"));
 	}
 
 	@Test
