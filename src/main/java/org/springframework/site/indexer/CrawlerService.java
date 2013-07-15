@@ -16,6 +16,9 @@ import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -26,8 +29,15 @@ import java.util.concurrent.Executors;
 @Component
 public class CrawlerService {
 
+	private final SearchService searchService;
+
+	@Autowired
+	public CrawlerService(SearchService searchService) {
+		this.searchService = searchService;
+	}
+
 	public interface CrawledWebDocumentProcessor {
-		void process(Document document);
+		SearchEntry process(Document document);
 	}
 
 	private static Log logger = LogFactory.getLog(CrawlerService.class);
@@ -63,8 +73,7 @@ public class CrawlerService {
 		public HTMLPageResponse get(PageURL url, boolean fetchBody, Map<String, String> requestHeaders) {
 			HTMLPageResponse response = super.get(url, fetchBody, requestHeaders);
 			if (response.getResponseCode() == 200 && response.getResponseType().startsWith("text")) {
-				// TODO - should handle saving searchEntry to search service
-				processor.process(response.getBody());
+				searchService.saveToIndex(processor.process(response.getBody()));
 			}
 			return response;
 		}

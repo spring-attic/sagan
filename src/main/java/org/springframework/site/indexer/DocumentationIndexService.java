@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.site.domain.documentation.DocumentationService;
 import org.springframework.site.domain.documentation.Project;
+import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
@@ -36,8 +37,8 @@ public class DocumentationIndexService {
 
 		@Override
 		// todo - change return type to SearchEntry
-		public void process(Document document) {
-			searchService.saveToIndex(mapper.map(document));
+		public SearchEntry process(Document document) {
+			return mapper.map(document);
 		}
 	};
 
