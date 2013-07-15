@@ -2,7 +2,6 @@ package org.springframework.site.domain.tools.toolsuite.parser;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.site.domain.tools.toolsuite.parser.ToolXmlConverter;
 import org.springframework.site.domain.tools.toolsuite.ToolSuite;
 import org.springframework.site.domain.tools.toolsuite.UpdateSiteArchive;
 import org.springframework.site.domain.tools.toolsuite.xml.Download;
@@ -22,9 +21,9 @@ public class ToolXmlConverter_SingleArchiveDownloadTests {
 	@Before
 	public void setUp() throws Exception {
 		ToolSuiteXml toolSuiteXml = new ToolSuiteXml();
-		List<Release> releases = new ArrayList<Release>();
+		List<Release> releases = new ArrayList<>();
 		Release release = new Release();
-		List<Download> downloads = new ArrayList<Download>();
+		List<Download> downloads = new ArrayList<>();
 
 		Download download = new Download();
 		download.setDescription("Update Site");
@@ -53,6 +52,8 @@ public class ToolXmlConverter_SingleArchiveDownloadTests {
 		assertThat(archive.getVersion(), equalTo("4.3.x"));
 		assertThat(archive.getUrl(), equalTo("http://dist.springsource.com/release/TOOLS/update/3.3.0.RELEASE/e4.3/springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
 		assertThat(archive.getFileSize(), equalTo("172MB"));
+		assertThat(archive.getFileName(), equalTo("springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
+		assertThat(archive.getFileName(), equalTo("springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
 		assertThat(archive.getFileName(), equalTo("springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
 	}
 }

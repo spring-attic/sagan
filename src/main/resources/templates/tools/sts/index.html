@@ -12,6 +12,14 @@
 	and Spring, and comes on top of the latest Eclipse releases.
 </div>
 <div layout:fragment="header-sidebar">
+    <ul class='download-links'>
+        <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${downloadLinks}">
+            <a class="btn" th:href="${downloadLink.url}">
+                <h3 th:text="'Download for ' + ${#strings.capitalize(downloadLink.os)}"></h3>
+                <p th:text="'version ' + ${version}"></p>
+            </a>
+        </li>
+    </ul>
 	<a href="all.html" th:href="@{/tools/sts/all}">See All Versions</a>
 </div>
 

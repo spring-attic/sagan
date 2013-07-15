@@ -31,7 +31,10 @@ public class ToolsController {
 	}
 
 	@RequestMapping(value = "/sts", method = { GET, HEAD })
-	public String stsIndex() throws Exception {
+	public String stsIndex(Model model) throws Exception {
+		ToolSuite stsDownloads = toolsService.getStsDownloads();
+		model.addAttribute("downloadLinks", stsDownloads.getPreferredDownloadLinks());
+		model.addAttribute("version", stsDownloads.getPreferredVersion());
 		return "tools/sts/index";
 	}
 

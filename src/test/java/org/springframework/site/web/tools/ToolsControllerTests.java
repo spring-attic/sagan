@@ -1,25 +1,18 @@
 package org.springframework.site.web.tools;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.site.domain.tools.ToolsService;
-import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
-import org.springframework.site.domain.tools.toolsuite.Platform;
-import org.springframework.site.domain.tools.toolsuite.ToolSuite;
-import org.springframework.site.domain.tools.toolsuite.UpdateSiteArchive;
+import org.springframework.site.domain.tools.toolsuite.*;
 import org.springframework.ui.ExtendedModelMap;
 
+import java.util.*;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.sameInstance;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -36,10 +29,30 @@ public class ToolsControllerTests {
 		this.controller = new ToolsController(this.service);
 	}
 
+	@Test
+	public void stsIndexHasDownloadLinks() throws Exception {
+		Map<String, Platform> platforms = new HashMap<>();
+		List<DownloadLink> downloadLinks = Collections.singletonList(new DownloadLink("http://example.com/download.dmg", "dmg", "323MB", "mac", "64"));
+		List<Architecture> architectures = Collections.singletonList(new Architecture("Mac OS X (Cocoa, 64bit)", downloadLinks));
+		List<EclipseVersion> eclipseVersions = Collections.singletonList(new EclipseVersion("1.2", architectures));
+
+		Platform windows = new Platform("windows", "3.1.2.RELEASE", eclipseVersions);
+		platforms.put("windows", windows);
+
+		List<UpdateSiteArchive> archives = Collections.emptyList();
+		ToolSuite toolSuite = new ToolSuite(platforms, archives);
+		when(this.service.getStsDownloads()).thenReturn(toolSuite);
+		this.controller.stsIndex(this.model);
+
+		assertThat((Set<DownloadLink>) this.model.get("downloadLinks"), equalTo(toolSuite.getPreferredDownloadLinks()));
+		assertThat((String) this.model.get("version"), equalTo("3.1.2.RELEASE"));
+
+	}
+
 	@SuppressWarnings("unchecked")
 	@Test
 	public void allStsDownloadsAddsDownloadsToModel() throws Exception {
-		Map<String, Platform> platforms = new HashMap<String, Platform>();
+		Map<String, Platform> platforms = new HashMap<>();
 		Platform windows = new Platform("windows", "blah",
 				Collections.<EclipseVersion> emptyList());
 		platforms.put("windows", windows);
@@ -64,7 +77,7 @@ public class ToolsControllerTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void allGgtsDownloadsAddsDownloadsToModel() throws Exception {
-		Map<String, Platform> platforms = new HashMap<String, Platform>();
+		Map<String, Platform> platforms = new HashMap<>();
 		Platform windows = new Platform("windows", "blah",
 				Collections.<EclipseVersion> emptyList());
 		platforms.put("windows", windows);
