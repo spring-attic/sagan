@@ -4,7 +4,7 @@ import org.springframework.site.domain.tools.toolsuite.Architecture;
 import org.springframework.site.domain.tools.toolsuite.DownloadLink;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
 import org.springframework.site.domain.tools.toolsuite.Platform;
-import org.springframework.site.domain.tools.toolsuite.ToolSuite;
+import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.site.domain.tools.toolsuite.UpdateSiteArchive;
 import org.springframework.site.domain.tools.toolsuite.xml.Download;
 import org.springframework.util.StringUtils;
@@ -47,8 +47,8 @@ public class ToolSuiteBuilder {
 		}
 	}
 
-	public ToolSuite build() {
-		return new ToolSuite(platformMap, updateSiteArchives);
+	public ToolSuiteDownloads build() {
+		return new ToolSuiteDownloads(platformMap, updateSiteArchives);
 	}
 
 	private Platform createOrFindPlatform(String os, String name) {

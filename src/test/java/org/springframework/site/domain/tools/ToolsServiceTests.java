@@ -11,7 +11,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.tools.toolsuite.DownloadLink;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
 import org.springframework.site.domain.tools.toolsuite.Platform;
-import org.springframework.site.domain.tools.toolsuite.ToolSuite;
+import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,21 +35,18 @@ public class ToolsServiceTests {
 	@Mock
 	private RestTemplate restTemplate;
 
-	private Serializer serializer;
-	private String responseXml;
-
 	@Before
 	public void setUp() throws Exception {
-		serializer = new Persister();
+		Serializer serializer = new Persister();
 		service = new ToolsService(restTemplate, serializer);
 		InputStream response = new ClassPathResource("/sts_downloads.xml", getClass()).getInputStream();
-		responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
+		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
 		when(restTemplate.getForObject(anyString(), eq(String.class))).thenReturn(responseXml);
 	}
 
 	@Test
 	public void testGetStsDownloads() throws Exception {
-		ToolSuite toolSuite = service.getStsDownloads();
+		ToolSuiteDownloads toolSuite = service.getStsDownloads();
 		assertThat(toolSuite, notNullValue());
 
 		Map<String, Platform> platforms = toolSuite.getPlatforms();
@@ -79,7 +76,7 @@ public class ToolsServiceTests {
 
 	@Test
 	public void testGetGgtsDownloads() throws Exception {
-		ToolSuite toolSuite = service.getGgtsDownloads();
+		ToolSuiteDownloads toolSuite = service.getGgtsDownloads();
 		assertThat(toolSuite, notNullValue());
 
 		Map<String, Platform> platforms = toolSuite.getPlatforms();

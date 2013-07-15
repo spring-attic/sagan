@@ -1,9 +1,10 @@
 package org.springframework.site.web.tools;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.site.domain.tools.ToolsDownloads;
 import org.springframework.site.domain.tools.ToolsService;
 import org.springframework.site.domain.tools.toolsuite.Platform;
-import org.springframework.site.domain.tools.toolsuite.ToolSuite;
+import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,7 @@ public class ToolsController {
 
 	@RequestMapping(value = "/sts/all", method = { GET, HEAD })
 	public String allStsDownloads(Model model) throws Exception {
-		ToolSuite stsDownloads = toolsService.getStsDownloads();
+		ToolSuiteDownloads stsDownloads = toolsService.getStsDownloads();
 		buildAllDownloadsModel(model, stsDownloads);
 		return "tools/sts/all";
 	}
@@ -49,7 +50,7 @@ public class ToolsController {
 
 	@RequestMapping(value = "/ggts/all", method = { GET, HEAD })
 	 public String allGgtsDownloads(Model model) throws Exception {
-		ToolSuite ggtsDownloads = toolsService.getGgtsDownloads();
+		ToolSuiteDownloads ggtsDownloads = toolsService.getGgtsDownloads();
 		buildAllDownloadsModel(model, ggtsDownloads);
 		return "tools/ggts/all";
 	}

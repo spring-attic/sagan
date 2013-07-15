@@ -1,10 +1,5 @@
 package org.springframework.site.web.tools;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,9 +8,14 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.site.domain.tools.ToolsService;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
 import org.springframework.site.domain.tools.toolsuite.Platform;
-import org.springframework.site.domain.tools.toolsuite.ToolSuite;
+import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.site.domain.tools.toolsuite.UpdateSiteArchive;
 import org.springframework.ui.ExtendedModelMap;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
@@ -51,7 +51,7 @@ public class ToolsControllerTests {
 		platforms.put("linux", linux);
 
 		List<UpdateSiteArchive> archives = Collections.emptyList();
-		ToolSuite toolSuite = new ToolSuite(platforms, archives);
+		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads(platforms, archives);
 		when(this.service.getStsDownloads()).thenReturn(toolSuite);
 		this.controller.allStsDownloads(this.model);
 
@@ -76,7 +76,7 @@ public class ToolsControllerTests {
 		platforms.put("linux", linux);
 
 		List<UpdateSiteArchive> archives = Collections.emptyList();
-		ToolSuite toolSuite = new ToolSuite(platforms, archives);
+		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads(platforms, archives);
 		when(this.service.getGgtsDownloads()).thenReturn(toolSuite);
 		this.controller.allGgtsDownloads(this.model);
 

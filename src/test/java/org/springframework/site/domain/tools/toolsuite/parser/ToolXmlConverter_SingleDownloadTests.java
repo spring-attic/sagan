@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.springframework.site.domain.tools.toolsuite.Architecture;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
 import org.springframework.site.domain.tools.toolsuite.Platform;
-import org.springframework.site.domain.tools.toolsuite.ToolSuite;
+import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import org.springframework.site.domain.tools.toolsuite.xml.Download;
 import org.springframework.site.domain.tools.toolsuite.xml.Release;
 import org.springframework.site.domain.tools.toolsuite.xml.ToolSuiteXml;
@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class ToolXmlConverter_SingleDownloadTests {
 
-	private ToolSuite toolSuite;
+	private ToolSuiteDownloads toolSuite;
 	private ToolXmlConverter toolXmlConverter;
 
 	@Before
