@@ -72,10 +72,6 @@
           </p>
         </div>
         <div class="span4">
-          <div id='authentication' sec:authorize="isFullyAuthenticated()">
-            <span sec:authentication="name">Bob</span>
-            <a th:href="@{/signout}" href="/signout">Sign out</a>
-          </div>
           <div layout:fragment="header-sidebar"></div>
         </div>
       </div>
@@ -107,7 +103,10 @@
       <a href="http://www.vmware.com/help/legal.html">Terms of Use</a>,
       <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>, and
       <a th:href="@{/trademark}" href="pages/trademark.html">Trademark Standards</a>
-
+		<div id='authentication' sec:authorize="isFullyAuthenticated()">
+			<span sec:authentication="name">Bob</span>
+			<a th:href="@{/signout}" href="/signout">Sign out</a>
+		</div>
     </div>
   </div>
 
