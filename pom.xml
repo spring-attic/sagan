@@ -207,8 +207,6 @@
 			<plugin>
 				<groupId>org.springframework.zero</groupId>
 				<artifactId>spring-package-maven-plugin</artifactId>
-				<version>${spring.zero.version}</version>
-				<extensions>true</extensions>
 				<configuration>
 					<mainClass>${start-class}</mainClass>
 				</configuration>
