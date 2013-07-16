@@ -29,7 +29,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -60,14 +66,17 @@ public class BlogIndexTests {
 	}
 
 	@Test
-	public void showsToolsIndex() throws Exception {
+	public void showsBlogIndex() throws Exception {
 		MvcResult result = this.mockMvc.perform(get("/blog"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andReturn();
 
 		Document document = Jsoup.parse(result.getResponse().getContentAsString());
-		MatcherAssert.assertThat(document.select("ul li.active").text(), equalTo("Blog"));
+		assertThat(document.select("ul.nav li.active").text(), equalTo("Blog"));
+
+		assertThat(document.select(".blog-category.active").text(), equalTo("All Posts"));
+
 	}
 
 	@Test
@@ -207,11 +216,17 @@ public class BlogIndexTests {
 		Page<Post> posts = postRepository.findByCategoryAndDraftFalse(PostCategory.ENGINEERING, new PageRequest(0, 10));
 		MatcherAssert.assertThat(posts.getSize(), greaterThanOrEqualTo(1));
 
-		this.mockMvc.perform(get("/blog/category/" + PostCategory.ENGINEERING.getUrlSlug()))
+		MvcResult response = this.mockMvc.perform(get("/blog/category/" + PostCategory.ENGINEERING.getUrlSlug()))
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("An Engineering Post")))
 				.andExpect(content().string(not(containsString("DO NOT LOOK AT ME"))))
-				.andExpect(content().string(containsString(PostCategory.ENGINEERING.toString())));
+				.andExpect(content().string(containsString(PostCategory.ENGINEERING.toString())))
+				.andReturn();
+
+
+		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+
+		assertThat(html.select(".blog-category.active").text(), equalTo(PostCategory.ENGINEERING.getDisplayName()));
 	}
 
 	@Test
@@ -231,6 +246,8 @@ public class BlogIndexTests {
 		MvcResult response = this.mockMvc.perform(get("/blog/broadcasts")).andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+
+		assertThat(html.select(".blog-category.active").text(), equalTo("Broadcasts"));
 
 		assertThat(numberOfBlogPosts(html), is(2));
 	}
