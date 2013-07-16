@@ -136,7 +136,6 @@ Build an executable JAR
 
 <#macro build_an_executable_jar_subhead>
 ### Build an executable JAR
------------------------
 </#macro>
 
 <#macro build_an_executable_jar>
