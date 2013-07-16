@@ -1,11 +1,12 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-		layout:decorator="layout">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	  layout:decorator="layout">
 <head>
 	<title>SpringFramework - Eclipse</title>
 </head>
 <body>
 <h1 layout:fragment="header">Eclipse</h1>
+
 <div layout:fragment="overview">
 	The essential tools for any Java developer, including a Java IDE, a CVS client, Git client, XML Editor, Mylyn,
 	Maven integration and WindowBuilder
@@ -16,28 +17,59 @@
 
 <div layout:fragment="content" class="container">
 	<h2>Spring Tool Suite</h2>
-	<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod.</p>
+
+	<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis
+		euismod.</p>
+
 	<h2>Groovy/Grails Tool Suite</h2>
-	<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod.</p>
+
+	<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis
+		euismod.</p>
 
 
 	<ul>
 		<li class="platform" th:each="platform : ${platforms}">
-			<h2 th:text="*{name}">Windows</h2>
-			<div class="package" th:each="package : *{packages}">
-				<h3 th:text="*{name}">Eclipse Standard 4.3 (Win32, 0MB)</h3>
-				<div class="eclipse-version" th:each="eclipseVersion : *{eclipseVersions}">
-					<h4 th:text="*{name}">Eclipse Kepler Package Downloads (based on Eclipse 4.3)</h4>
-					<div class="architecture" th:each="architecture : *{architectures}">
-						<h5 th:text="*{name}">32bit</h5>
-						<div class="download" th:each="download : *{downloadLinks}">
-							<a href='release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip' th:href="*{url}" th:text=*{fileType}>zip</a>
-						</div>
+			<a href="#collapse" data-toggle="collapse" th:attr="data-target='#platform--' + ${platform.name}">
+				<h2 th:text="${platform.name}">Mac</h2>
+			</a>
+
+			<div class="collapse in" th:id="'platform--' + ${platform.name}">
+
+				<div class="release btn-toolbar" th:each="release : ${platform.releases}">
+					<h3 th:text="${release.name}">Eclipse Kepler Package Downloads (based on Eclipse 4.3)</h3>
+
+					<div class="package btn-group" th:each="package : ${release.packages}">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="">
+							<span th:text="${package.name}">Eclipse Standard 4.3 (Win32, 0MB)</span>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li th:each="download : ${package.downloadLinks}" class="download-link">
+								<a href='release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip'
+								   th:href="${download.url}" th:text='${download.name}'>Windows (64bit)</a>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
 		</li>
 	</ul>
+
+	<script type="text/javascript">
+
+		$(".collapse")
+				.removeClass('in')
+				.on({
+					shown: function () {
+						$(this).css('overflow', 'visible');
+					},
+					hide: function () {
+						$(this).css('overflow', 'hidden');
+					}
+				});
+		$('#platform--' + detectOs()).addClass('in').css('overflow', 'visible');
+
+	</script>
 
 </div>
 </body>

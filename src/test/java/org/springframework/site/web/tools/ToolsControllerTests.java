@@ -8,6 +8,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.site.domain.tools.ToolsService;
 import org.springframework.site.domain.tools.eclipse.EclipseDownloads;
 import org.springframework.site.domain.tools.eclipse.EclipsePlatform;
+import org.springframework.site.domain.tools.eclipse.EclipseRelease;
 import org.springframework.site.domain.tools.toolsuite.Architecture;
 import org.springframework.site.domain.tools.toolsuite.DownloadLink;
 import org.springframework.site.domain.tools.toolsuite.EclipseVersion;
@@ -138,11 +139,11 @@ public class ToolsControllerTests {
 	public void allEclipseDownloadsAddsDownloadsToModel() throws Exception {
 		Map<String, EclipsePlatform> platforms = new HashMap<>();
 
-		EclipsePlatform windows = new EclipsePlatform("windows");
+		EclipsePlatform windows = new EclipsePlatform("windows", Collections.<EclipseRelease>emptyList());
 		platforms.put("windows", windows);
-		EclipsePlatform mac = new EclipsePlatform("mac");
+		EclipsePlatform mac = new EclipsePlatform("mac", Collections.<EclipseRelease>emptyList());
 		platforms.put("mac", mac);
-		EclipsePlatform linux = new EclipsePlatform("linux");
+		EclipsePlatform linux = new EclipsePlatform("linux", Collections.<EclipseRelease>emptyList());
 		platforms.put("linux", linux);
 
 		EclipseDownloads eclipseDownloads = new EclipseDownloads(platforms);

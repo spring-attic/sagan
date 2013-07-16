@@ -4,7 +4,6 @@ import integration.configuration.IntegrationTestsConfiguration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +104,6 @@ public class ToolsPagesTests {
 		assertThat(document.select("ul.dropdown-menu a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
 	}
 
-	@Ignore("End to end test for /tools/eclipse - to be re-enabled when working on it")
 	@Test
 	public void showsEclipseIndex() throws Exception {
 		InputStream response = new ClassPathResource("/eclipse.xml", getClass()).getInputStream();
@@ -125,11 +123,7 @@ public class ToolsPagesTests {
 		assertThat(document.text(), containsString("Groovy/Grails Tool Suite"));
 
 		assertThat(document.select(".platform h2").first().text(), is("Windows"));
-		assertThat(document.select(".platform .package h3").first().text(), is("Eclipse Standard 4.3 (Win32, 0MB)"));
-		assertThat(document.select(".platform .package .eclipse-version h4").first().text(), is("Eclipse Kepler Package Downloads (based on Eclipse 4.3)"));
-		assertThat(document.select(".platform .package .eclipse-version .architecture h5").first().text(), is("32bit"));
-		String fileUri = "release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip";
-		assertThat(document.select(".platform .package .eclipse-version .architecture a").first().attr("href"), is(fileUri));
+		assertThat(document.select("li.download-link a").first().attr("href"), is("http://download.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
 	}
 
 }

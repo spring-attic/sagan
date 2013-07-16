@@ -1,30 +1,21 @@
 package org.springframework.site.domain.tools.eclipse;
 
-public class EclipsePackage {
-	private final String name;
+import java.util.List;
 
-	public EclipsePackage(String name) {
+public class EclipsePackage {
+	private String name;
+	private List<EclipseDownloadLink> downloads;
+
+	public EclipsePackage(String name, List<EclipseDownloadLink> downloadLinks) {
 		this.name = name;
+		this.downloads = downloadLinks;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		EclipsePackage that = (EclipsePackage) o;
-
-		if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
-		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		return name != null ? name.hashCode() : 0;
+	public List<EclipseDownloadLink> getDownloadLinks() {
+		return downloads;
 	}
 }

@@ -7,7 +7,9 @@
 
 <ul>
 	<li class="platform" th:each='platform : ${platforms}'>
-		<a href="#collapse" data-toggle="collapse" th:attr="data-target='#platform--' + ${platform.name}"><h2 th:text="${platform.name}">Mac</h2></a>
+		<a href="#collapse" data-toggle="collapse" th:attr="data-target='#platform--' + ${platform.name}">
+			<h2 th:text="${platform.name}">Mac</h2>
+		</a>
 
 		<div class="collapse in" th:id="'platform--' + ${platform.name}">
 		<h3 th:text="${platform.releaseName}">1.2.3.RELEASE</h3>

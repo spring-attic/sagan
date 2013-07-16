@@ -5,7 +5,7 @@ import org.simpleframework.xml.ElementList;
 
 import java.util.List;
 
-public class Product {
+public class EclipseXmlProduct {
 	@Attribute
 	private String name;
 
@@ -22,5 +22,9 @@ public class Product {
 
 	public List<EclipseXmlPackage> getPackages() {
 		return packages;
+	}
+
+	public void setPackages(List<EclipseXmlPackage> packages) {
+		this.packages = packages;
 	}
 }

@@ -7,10 +7,14 @@ import java.util.List;
 
 @Root(strict=false)
 public class EclipseXml {
-	@ElementList(name="product", inline = true)
-	private List<Product> products;
+	@ElementList(entry="product", type = EclipseXmlProduct.class,  inline = true)
+	private List<EclipseXmlProduct> eclipseXmlProducts;
 
-	public List<Product> getProducts() {
-		return products;
+	public List<EclipseXmlProduct> getEclipseXmlProducts() {
+		return eclipseXmlProducts;
+	}
+
+	public void setEclipseXmlProducts(List<EclipseXmlProduct> eclipseXmlProducts) {
+		this.eclipseXmlProducts = eclipseXmlProducts;
 	}
 }

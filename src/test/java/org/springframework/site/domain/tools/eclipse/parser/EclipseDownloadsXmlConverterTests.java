@@ -1,14 +1,15 @@
 package org.springframework.site.domain.tools.eclipse.parser;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.site.domain.tools.eclipse.EclipseDownloadLink;
 import org.springframework.site.domain.tools.eclipse.EclipseDownloads;
 import org.springframework.site.domain.tools.eclipse.EclipsePackage;
 import org.springframework.site.domain.tools.eclipse.EclipsePlatform;
+import org.springframework.site.domain.tools.eclipse.EclipseRelease;
 import org.springframework.site.domain.tools.eclipse.xml.EclipseXml;
 import org.springframework.util.StreamUtils;
 
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.collection.IsMapContaining.hasKey;
 import static org.hamcrest.core.Is.is;
@@ -53,16 +55,41 @@ public class EclipseDownloadsXmlConverterTests {
 
 	@Test
 	public void excludesGroovyAndStsPackages() throws Exception {
-		List<EclipsePackage> packages = platforms.get("windows").getPackages();
-		for (EclipsePackage eclipsePackage : packages) {
+		List<EclipseRelease> packages = platforms.get("windows").getReleases();
+		for (EclipseRelease eclipsePackage : packages) {
 			assertThat(eclipsePackage.getName(), not(containsString("Spring Tool Suite")));
 			assertThat(eclipsePackage.getName(), not(containsString("Groovy")));
 		}
 	}
 
-	@Ignore("This needs to be confirmed as the UX doesn't map well to the xml data source")
 	@Test
-	public void hasFourPackages() throws Exception {
-		assertThat(platforms.get("windows").getPackages().size(), is(4));
+	public void hasProducts() throws Exception {
+		List<EclipseRelease> products = platforms.get("windows").getReleases();
+		assertThat(products.size(), is(5));
+		assertThat(products.get(0).getName(), equalTo("Eclipse Kepler Package Downloads (based on Eclipse 4.3)"));
+		assertThat(products.get(1).getName(), equalTo("Eclipse Juno Package Downloads (based on Eclipse 4.2.2)"));
+		assertThat(products.get(2).getName(), equalTo("Eclipse Indigo Package Downloads (based on Eclipse 3.7.2)"));
+		assertThat(products.get(3).getName(), equalTo("Eclipse Helios Package Downloads (based on Eclipse 3.6.2)"));
+		assertThat(products.get(4).getName(), equalTo("Eclipse Galileo Package Downloads (based on Eclipse 3.5.2)"));
+	}
+
+	@Test
+	public void productHasPackages() throws Exception {
+		List<EclipsePackage> packages = platforms.get("windows").getReleases().get(0).getPackages();
+		assertThat(packages.size(), is(4));
+		assertThat(packages.get(0).getName(), equalTo("Eclipse Standard 4.3 (Win32, 0MB)"));
+		assertThat(packages.get(1).getName(), equalTo("Eclipse IDE for Java EE Developers (Win32, 245MB)"));
+		assertThat(packages.get(2).getName(), equalTo("Eclipse IDE for Java Developers (Win32, 150MB)"));
+		assertThat(packages.get(3).getName(), equalTo("Eclipse for RCP and RAP Developers (Win32, 235MB)"));
+	}
+
+	@Test
+	public void packageHasDownloads() throws Exception {
+		List<EclipseDownloadLink> downloadLinks = platforms.get("windows").getReleases().get(0).getPackages().get(0).getDownloadLinks();
+		assertThat(downloadLinks.size(), equalTo(2));
+		assertThat(downloadLinks.get(0).getName(), equalTo("Windows"));
+		assertThat(downloadLinks.get(0).getUrl(), equalTo("http://download.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
+		assertThat(downloadLinks.get(1).getName(), equalTo("Windows (64bit)"));
+		assertThat(downloadLinks.get(1).getUrl(), equalTo("http://download.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32-x86_64.zip"));
 	}
 }
