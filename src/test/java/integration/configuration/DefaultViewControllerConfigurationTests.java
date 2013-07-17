@@ -1,18 +1,22 @@
 package integration.configuration;
 
-import java.net.URL;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.site.web.configuration.DefaultViewControllerConfiguration;
+import org.springframework.site.web.configuration.StaticPageMapper;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
-import static org.mockito.BDDMockito.*;
+import java.net.URL;
+
+import static org.mockito.BDDMockito.anyString;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.mock;
+import static org.mockito.BDDMockito.verify;
 
 public class DefaultViewControllerConfigurationTests {
 
@@ -32,8 +36,9 @@ public class DefaultViewControllerConfigurationTests {
 		given(resourceResolver.getResource("classpath:/templates/pages")).willReturn(resource);
 		given(controllerRegistry.addViewController(anyString())).willReturn(viewRegistration);
 
+		StaticPageMapper mapper = new StaticPageMapper(resourceResolver);
 		configurer = new DefaultViewControllerConfiguration();
-		ReflectionTestUtils.setField(configurer, "resourceResolver", resourceResolver);
+		ReflectionTestUtils.setField(configurer, "staticPageMapper", mapper);
 	}
 
 	@Test

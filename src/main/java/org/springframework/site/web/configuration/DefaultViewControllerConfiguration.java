@@ -1,22 +1,8 @@
 package org.springframework.site.web.configuration;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.http.MediaType;
 import org.springframework.site.web.ApplicationDialect;
 import org.springframework.site.web.NavSection;
@@ -29,11 +15,22 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 @Configuration
 public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter {
 
 	@Autowired
-	private ResourcePatternResolver resourceResolver;
+	private StaticPageMapper staticPageMapper;
 
 	private Map<String, MediaType> mimeTypes = new HashMap<String, MediaType>();
 
@@ -54,16 +51,10 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		try {
-			Resource baseResource = this.resourceResolver
-					.getResource("classpath:/templates/pages");
-			String basePath = baseResource.getURL().getPath();
-			Resource[] resources = this.resourceResolver
-					.getResources("classpath:/templates/pages/**/*.html");
-			for (Resource resource : resources) {
-				String filePath = relativeFilePath(basePath, resource);
-				registry.addViewController(buildRequestMapping(filePath)).setViewName(
-						"pages" + filePath);
+			for(StaticPageMapper.StaticPageMapping mapping : staticPageMapper.staticPagePaths()) {
+				registry.addViewController(mapping.getUrlPath()).setViewName("pages" + mapping.getFilePath());
 			}
+
 		} catch (IOException e) {
 			throw new RuntimeException(
 					"Unable to locate static pages: " + e.getMessage(), e);
@@ -112,23 +103,6 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 				}
 			}
 		});
-	}
-
-	private String relativeFilePath(String basePath, Resource resource)
-			throws IOException {
-		return resource.getURL().getPath().substring(basePath.length())
-				.replace(".html", "");
-	}
-
-	private String buildRequestMapping(String filePath) {
-		String requestMapping = filePath;
-		if (requestMapping.endsWith("/index")) {
-			requestMapping = requestMapping.replace("/index", "");
-			if (requestMapping.equals("")) {
-				requestMapping = "/";
-			}
-		}
-		return requestMapping;
 	}
 
 }
