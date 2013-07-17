@@ -6,9 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.site.domain.StaticPageMapper;
 import org.springframework.site.search.configuration.SearchClientConfiguration;
 import org.springframework.site.web.configuration.GitHubConfiguration;
 import org.springframework.site.web.configuration.SecurityConfiguration;
@@ -41,6 +43,11 @@ public class IndexerConfiguration {
 	@Bean
 	public ExecutorService executorService() {
 		return Executors.newFixedThreadPool(10);
+	}
+
+	@Bean
+	public StaticPageMapper staticPageMapper(ResourcePatternResolver resourceResolver) {
+		return new StaticPageMapper(resourceResolver);
 	}
 
 }

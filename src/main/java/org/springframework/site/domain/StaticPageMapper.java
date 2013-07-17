@@ -1,4 +1,4 @@
-package org.springframework.site.web.configuration;
+package org.springframework.site.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -36,7 +36,7 @@ public class StaticPageMapper {
 		this.resourceResolver = resourceResolver;
 	}
 
-	List<StaticPageMapping> staticPagePaths() throws IOException {
+	public List<StaticPageMapping> staticPagePaths() throws IOException {
 		Resource baseResource = resourceResolver
 				.getResource("classpath:/templates/pages");
 		String basePath = baseResource.getURL().getPath();

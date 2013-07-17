@@ -18,13 +18,15 @@ public class IndexScheduler {
 	private final GettingStartedGuideIndexer gettingStartedGuideIndexer;
 	private final IndexerService indexerService;
 	private final ToolsIndexer toolsIndexer;
+	private final StaticPageIndexer staticPageIndexer;
 
 	@Autowired
-	public IndexScheduler(IndexerService indexerService, ProjectDocumentationIndexer projectDocumentationIndexer, GettingStartedGuideIndexer gettingStartedGuideIndexer, ToolsIndexer toolsIndexer) {
+	public IndexScheduler(IndexerService indexerService, ProjectDocumentationIndexer projectDocumentationIndexer, GettingStartedGuideIndexer gettingStartedGuideIndexer, ToolsIndexer toolsIndexer, StaticPageIndexer staticPageIndexer) {
 		this.indexerService = indexerService;
 		this.projectDocumentationIndexer = projectDocumentationIndexer;
 		this.gettingStartedGuideIndexer = gettingStartedGuideIndexer;
 		this.toolsIndexer = toolsIndexer;
+		this.staticPageIndexer = staticPageIndexer;
 	}
 
 	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
@@ -35,6 +37,11 @@ public class IndexScheduler {
 	@Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")
 	public void indexTools() {
 		indexerService.index(toolsIndexer);
+	}
+
+	@Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")
+	public void indexStaticPages() {
+		indexerService.index(staticPageIndexer);
 	}
 
 	@Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")

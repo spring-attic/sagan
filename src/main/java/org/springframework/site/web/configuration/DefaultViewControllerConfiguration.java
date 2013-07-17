@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.site.domain.StaticPageMapper;
 import org.springframework.site.web.ApplicationDialect;
 import org.springframework.site.web.NavSection;
 import org.springframework.util.StringUtils;
