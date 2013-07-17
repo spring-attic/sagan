@@ -15,11 +15,10 @@
  */
 package org.springframework.site.web.configuration;
 
-import javax.sql.DataSource;
-
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
+import org.postgresql.ds.PGSimpleDataSource;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.springframework.autoconfigure.EnableAutoConfiguration;
@@ -32,6 +31,8 @@ import org.springframework.site.domain.services.DateService;
 import org.springframework.site.web.SiteUrl;
 import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
 import org.springframework.web.client.RestTemplate;
+
+import javax.sql.DataSource;
 
 @EnableAutoConfiguration
 @Configuration
@@ -53,6 +54,19 @@ public class ApplicationConfiguration {
 					RdbmsServiceInfo.class);
 			RdbmsServiceCreator serviceCreator = new RdbmsServiceCreator();
 			return serviceCreator.createService(serviceInfo);
+		}
+	}
+
+	@Configuration
+	@Profile({ "local_postgres" })
+	protected static class PostgresConfiguration {
+		@Bean
+		public DataSource dataSource() {
+			PGSimpleDataSource dataSource = new PGSimpleDataSource();
+			dataSource.setPortNumber(5432);
+			dataSource.setDatabaseName("blog_import");
+			dataSource.setServerName("localhost");
+			return dataSource;
 		}
 	}
 
