@@ -49,6 +49,17 @@ server:
 ---
 
 spring:
+  profiles: development,staging,production
+search:
+  indexer:
+    delay: 0
+elasticsearch:
+  client:
+    endpoint: https://qlmsjwfa.api.qbox.io
+
+---
+
+spring:
   profiles: acceptance
   database:
     url: jdbc:hsqldb:mem:acceptancetestdb
