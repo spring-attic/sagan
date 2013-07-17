@@ -1,5 +1,17 @@
 package org.springframework.site.web.configuration;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,24 +28,12 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.thymeleaf.spring3.SpringTemplateEngine;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	private ResourcePatternResolver resourceResolver;
-
-	@Autowired
-	private SpringTemplateEngine templateEngine;
 
 	private Map<String, MediaType> mimeTypes = new HashMap<String, MediaType>();
 
@@ -46,9 +46,9 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 		this.mimeTypes.put("woff", MediaType.valueOf("application/font-woff"));
 	}
 
-	@PostConstruct
-	public void addCustomDialect() {
-		templateEngine.addDialect(new ApplicationDialect());
+	@Bean
+	public ApplicationDialect applicationDialect() {
+		return new ApplicationDialect();
 	}
 
 	@Override
@@ -97,12 +97,15 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor( new HandlerInterceptorAdapter() {
+		registry.addInterceptor(new HandlerInterceptorAdapter() {
 			@Override
-			public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+			public void postHandle(HttpServletRequest request,
+					HttpServletResponse response, Object handler,
+					ModelAndView modelAndView) throws Exception {
 				if (handler instanceof HandlerMethod) {
 					HandlerMethod handlerMethod = (HandlerMethod) handler;
-					NavSection navSection = handlerMethod.getBean().getClass().getAnnotation(NavSection.class);
+					NavSection navSection = handlerMethod.getBean().getClass()
+							.getAnnotation(NavSection.class);
 					if (navSection != null) {
 						modelAndView.addObject("navSection", navSection.value());
 					}

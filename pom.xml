@@ -27,16 +27,6 @@
 			<groupId>org.springframework.zero</groupId>
 			<artifactId>spring-starter-web</artifactId>
 			<scope>compile</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-logback</artifactId>
-				</exclusion>
-				<exclusion>
-					<artifactId>javax.servlet-api</artifactId>
-					<groupId>javax.servlet</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.zero</groupId>
@@ -116,12 +106,6 @@
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jdbc</artifactId>
 			<scope>runtime</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>tomcat-juli</artifactId>
-					<groupId>org.apache.tomcat</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.elasticsearch</groupId>
@@ -267,7 +251,7 @@
 							<source>
 								<directory>${basedir}/src/main/stylesheets</directory>
 							</source>
-							<destination>${project.basedir}/target/classes/static/css</destination>
+							<destination>${project.basedir}/src/main/resources/static/css</destination>
 						</resource>
 					</resources>
 				</configuration>
