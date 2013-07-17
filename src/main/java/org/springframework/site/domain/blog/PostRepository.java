@@ -7,6 +7,7 @@ import org.springframework.site.domain.team.MemberProfile;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
@@ -18,6 +19,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 	Post findByIdAndDraftFalseAndPublishAtBefore(Long postId, Date publishedBefore);
 
 	Page<Post> findByDraftFalseAndPublishAtBefore(Date publishedBefore, Pageable pageRequest);
+
+	List<Post> findByDraftFalseAndPublishAtBefore(Date publishedBefore);
 
 	Page<Post> findByCategoryAndDraftFalseAndPublishAtBefore(PostCategory category, Date publishedBefore, Pageable pageRequest);
 

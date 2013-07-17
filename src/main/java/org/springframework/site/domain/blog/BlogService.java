@@ -1,7 +1,5 @@
 package org.springframework.site.domain.blog;
 
-import java.util.Date;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +9,12 @@ import org.springframework.site.domain.services.DateService;
 import org.springframework.site.domain.services.MarkdownService;
 import org.springframework.site.domain.team.MemberProfile;
 import org.springframework.site.domain.team.TeamRepository;
-import org.springframework.site.search.SearchException;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.web.blog.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class BlogService {
@@ -159,9 +159,16 @@ public class BlogService {
 		if (post.isLiveOn(this.dateService.now())) {
 			try {
 				this.searchService.saveToIndex(this.mapper.map(post));
-			} catch (SearchException e) {
+			} catch (Exception e) {
 				logger.error(e);
 			}
+		}
+	}
+
+	public void reIndexAllPosts() {
+		List<Post> posts = repository.findByDraftFalseAndPublishAtBefore(dateService.now());
+		for (Post post : posts) {
+			saveToIndex(post);
 		}
 	}
 }
