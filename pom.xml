@@ -251,7 +251,7 @@
 							<source>
 								<directory>${basedir}/src/main/stylesheets</directory>
 							</source>
-							<destination>${project.basedir}/src/main/resources/static/css</destination>
+							<destination>${project.build.outputDirectory}/static/css</destination>
 						</resource>
 					</resources>
 				</configuration>
