@@ -23,6 +23,7 @@ public class IndexerService {
 	}
 
 	public <T> void index(final Indexer<T> indexer) {
+		logger.info("Indexing " + indexer.counterName());
 		for (final T indexable : indexer.indexableItems()) {
 			executorService.submit(new Runnable() {
 				@Override

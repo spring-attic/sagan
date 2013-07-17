@@ -27,22 +27,18 @@ public class IndexScheduler {
 		this.toolsIndexer = toolsIndexer;
 	}
 
-	@Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")
-	public void indexProjectDocumentation() {
-		logger.info("Indexing project documentation");
-		indexerService.index(projectDocumentationIndexer);
-	}
-
-
 	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
 	public void indexGuides() {
-		logger.info("Indexing getting started guides");
 		indexerService.index(gettingStartedGuideIndexer);
 	}
 
 	@Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")
 	public void indexTools() {
-		logger.info("Indexing tools");
 		indexerService.index(toolsIndexer);
+	}
+
+	@Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")
+	public void indexProjectDocumentation() {
+		indexerService.index(projectDocumentationIndexer);
 	}
 }
