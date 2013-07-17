@@ -36,6 +36,10 @@ spring:
   template:
     mode: LEGACYHTML5
     cache: false
+  search:
+    indexer:
+      delay: 0
+      base_url: http://localhost:8080
 
 ---
 
@@ -49,7 +53,19 @@ server:
 ---
 
 spring:
-  profiles: development,staging,production
+  profiles: development
+search:
+  indexer:
+    delay: 0
+    base_url: https://sagan.cfapps.io
+elasticsearch:
+  client:
+    endpoint: https://qlmsjwfa.api.qbox.io
+
+---
+
+spring:
+  profiles: staging,production
 search:
   indexer:
     delay: 0

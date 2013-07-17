@@ -17,12 +17,14 @@ public class IndexScheduler {
 	private final ProjectDocumentationIndexer projectDocumentationIndexer;
 	private final GettingStartedGuideIndexer gettingStartedGuideIndexer;
 	private final IndexerService indexerService;
+	private final ToolsIndexer toolsIndexer;
 
 	@Autowired
-	public IndexScheduler(IndexerService indexerService, ProjectDocumentationIndexer projectDocumentationIndexer, GettingStartedGuideIndexer gettingStartedGuideIndexer) {
+	public IndexScheduler(IndexerService indexerService, ProjectDocumentationIndexer projectDocumentationIndexer, GettingStartedGuideIndexer gettingStartedGuideIndexer, ToolsIndexer toolsIndexer) {
 		this.indexerService = indexerService;
 		this.projectDocumentationIndexer = projectDocumentationIndexer;
 		this.gettingStartedGuideIndexer = gettingStartedGuideIndexer;
+		this.toolsIndexer = toolsIndexer;
 	}
 
 	@Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")
@@ -36,5 +38,11 @@ public class IndexScheduler {
 	public void indexGuides() {
 		logger.info("Indexing getting started guides");
 		indexerService.index(gettingStartedGuideIndexer);
+	}
+
+	@Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")
+	public void indexTools() {
+		logger.info("Indexing tools");
+		indexerService.index(toolsIndexer);
 	}
 }

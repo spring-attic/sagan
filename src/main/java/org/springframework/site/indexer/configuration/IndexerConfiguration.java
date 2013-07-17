@@ -28,7 +28,6 @@ public class IndexerConfiguration {
 
 	public static void main(String[] args) {
 		SpringApplication application = new SpringApplication(IndexerConfiguration.class);
-		application.setDefaultCommandLineArgs("--spring.profiles.active=indexer");
 		application.run(args);
 	}
 
