@@ -1,6 +1,10 @@
 package org.springframework.site.domain.team;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +13,9 @@ public class TeamService {
 	private final TeamRepository teamRepository;
 	private final SearchService searchService;
 	private final MemberProfileSearchEntryMapper mapper;
+
+	private static Log logger = LogFactory.getLog(TeamService.class);
+
 
 	@Autowired
 	public TeamService(TeamRepository teamRepository, SearchService searchService, MemberProfileSearchEntryMapper mapper) {
@@ -34,7 +41,19 @@ public class TeamService {
 		existingProfile.setLocation(profile.getLocation());
 		existingProfile.setGeoLocation(profile.getGeoLocation());
 		existingProfile.setVideoEmbeds(profile.getVideoEmbeds());
+		existingProfile.setGravatarEmail(profile.getGravatarEmail());
+
+		if (profile.getGravatarEmail() != null) {
+			PasswordEncoder encoder = new Md5PasswordEncoder();
+			String hashedEmail = encoder.encodePassword(profile.getGravatarEmail(), null);
+			existingProfile.setAvatarUrl(String.format("http://gravatar.com/avatar/%s", hashedEmail));
+		}
+
 		teamRepository.save(existingProfile);
-		searchService.saveToIndex(mapper.map(existingProfile));
+		try {
+			searchService.saveToIndex(mapper.map(existingProfile));
+		} catch (Exception e) {
+			logger.warn("Indexing failed for " + existingProfile.getMemberId(), e);
+		}
 	}
 }

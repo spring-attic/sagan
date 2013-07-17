@@ -21,7 +21,8 @@
         <div>
             <label>Avatar:
                 <img th:src="*{avatarUrl}" />
-                <p>(change your Gravatar settings at
+				<label for="gravatarEmail">Gravatar Email:<input id="gravatarEmail" type="text" th:field="*{gravatarEmail}" name="gravatarEmail" /></label>
+				<p>(change your Gravatar settings at
                    <a href="https://github.com/settings/profile">https://github.com/settings/profile</a>
                    )
                 </p>

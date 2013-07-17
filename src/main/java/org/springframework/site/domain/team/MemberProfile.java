@@ -25,6 +25,9 @@ public class MemberProfile {
 	private String avatarUrl;
 
 	@Column(nullable = true)
+	private String gravatarEmail;
+
+	@Column(nullable = true)
 	private String githubUsername;
 
 	@Column(nullable = true)
@@ -92,6 +95,14 @@ public class MemberProfile {
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+
+	public String getGravatarEmail() {
+		return gravatarEmail;
+	}
+
+	public void setGravatarEmail(String gravatarEmail) {
+		this.gravatarEmail = gravatarEmail;
 	}
 
 	public String getSpeakerdeckUsername() {

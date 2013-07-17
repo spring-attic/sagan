@@ -8,6 +8,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -39,5 +41,20 @@ public class TeamServiceTests {
 		service.updateMemberProfile("memberid", new MemberProfile());
 
 		verify(searchService).saveToIndex(searchEntry);
+	}
+
+	@Test
+	public void updateMemberProfileUpdatesAvatarUrlFromGravatarEmail() {
+		MemberProfile savedProfile = new MemberProfile();
+		given(teamRepository.findByMemberId("memberid")).willReturn(savedProfile);
+
+		SearchEntry searchEntry = new SearchEntry();
+		given(mapper.map(savedProfile)).willReturn(searchEntry);
+		MemberProfile updatedProfile = new MemberProfile();
+		updatedProfile.setGravatarEmail("test@example.com");
+		service.updateMemberProfile("memberid", updatedProfile);
+
+		assertThat(savedProfile.getGravatarEmail(), equalTo("test@example.com"));
+		assertThat(savedProfile.getAvatarUrl(), equalTo("http://gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0"));
 	}
 }
