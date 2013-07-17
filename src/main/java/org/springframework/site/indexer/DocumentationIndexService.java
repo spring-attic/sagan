@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @Service
 public class DocumentationIndexService {
@@ -26,13 +25,14 @@ public class DocumentationIndexService {
 	private final CrawlerService crawlerService;
 	private final CounterService counters;
 
-	private ExecutorService executor = Executors.newFixedThreadPool(10);
+	private ExecutorService executor;
 
 	private final DocumentProcessor documentProcessor;
 	private final DocumentProcessor apiProcessor;
 
 	@Autowired
-	public DocumentationIndexService(CrawlerService crawlerService, DocumentationService documentationService, CounterService counters, SearchService searchService) {
+	public DocumentationIndexService(ExecutorService executor, CrawlerService crawlerService, DocumentationService documentationService, CounterService counters, SearchService searchService) {
+		this.executor = executor;
 		this.crawlerService = crawlerService;
 		this.documentationService = documentationService;
 		this.counters = counters;

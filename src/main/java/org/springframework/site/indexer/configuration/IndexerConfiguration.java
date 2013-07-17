@@ -13,6 +13,9 @@ import org.springframework.site.search.configuration.SearchClientConfiguration;
 import org.springframework.site.web.configuration.GitHubConfiguration;
 import org.springframework.site.web.configuration.SecurityConfiguration;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @EnableAutoConfiguration
 @Configuration
 @ComponentScan(basePackages = { "org.springframework.site.indexer",
@@ -34,6 +37,11 @@ public class IndexerConfiguration {
 		ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
 		scheduler.setPoolSize(10);
 		return scheduler;
+	}
+
+	@Bean
+	public ExecutorService executorService() {
+		return Executors.newFixedThreadPool(10);
 	}
 
 }
