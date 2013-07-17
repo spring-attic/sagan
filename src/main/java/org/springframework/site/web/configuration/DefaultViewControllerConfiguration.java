@@ -8,6 +8,7 @@ import org.springframework.site.domain.StaticPageMapper;
 import org.springframework.site.web.ApplicationDialect;
 import org.springframework.site.web.NavSection;
 import org.springframework.util.StringUtils;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -85,6 +86,14 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 				chain.doFilter(request, response);
 			}
 		};
+	}
+
+	@Bean
+	public Filter characterEncodingFilter() {
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding("UTF-8");
+		filter.setForceEncoding(true);
+		return filter;
 	}
 
 	@Override
