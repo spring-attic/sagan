@@ -57,4 +57,19 @@ public class TeamServiceTests {
 		assertThat(savedProfile.getGravatarEmail(), equalTo("test@example.com"));
 		assertThat(savedProfile.getAvatarUrl(), equalTo("http://gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0"));
 	}
+
+	@Test
+	public void updateMemberProfileDoesNotUpdateAvatarUrlIfGravatarEmailIsEmpty() {
+		MemberProfile savedProfile = new MemberProfile();
+		savedProfile.setAvatarUrl("http://example.com/image.png");
+		given(teamRepository.findByMemberId("memberid")).willReturn(savedProfile);
+
+		SearchEntry searchEntry = new SearchEntry();
+		given(mapper.map(savedProfile)).willReturn(searchEntry);
+		MemberProfile updatedProfile = new MemberProfile();
+		updatedProfile.setGravatarEmail("");
+		service.updateMemberProfile("memberid", updatedProfile);
+
+		assertThat(savedProfile.getAvatarUrl(), equalTo("http://example.com/image.png"));
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 public class TeamService {
@@ -43,7 +44,7 @@ public class TeamService {
 		existingProfile.setVideoEmbeds(profile.getVideoEmbeds());
 		existingProfile.setGravatarEmail(profile.getGravatarEmail());
 
-		if (profile.getGravatarEmail() != null) {
+		if (!StringUtils.isEmpty(profile.getGravatarEmail())) {
 			PasswordEncoder encoder = new Md5PasswordEncoder();
 			String hashedEmail = encoder.encodePassword(profile.getGravatarEmail(), null);
 			existingProfile.setAvatarUrl(String.format("http://gravatar.com/avatar/%s", hashedEmail));
