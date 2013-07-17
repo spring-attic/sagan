@@ -168,6 +168,8 @@ Now run the following to produce a single executable JAR file containing all nec
     mvn package
 
 [maven-shade-plugin]: https://maven.apache.org/plugins/maven-shade-plugin
+
+> **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/gs-convert-jar-to-war) instead.
 </#macro>
 
 <#macro build_the_application>
