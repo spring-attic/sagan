@@ -152,8 +152,8 @@ Add the following configuration to your existing Maven POM:
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
+                <groupId>org.springframework.zero</groupId>
+                <artifactId>spring-package-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
@@ -161,13 +161,13 @@ Add the following configuration to your existing Maven POM:
 
 The `start-class` property tells Maven to create a `META-INF/MANIFEST.MF` file with a `Main-Class: hello.Application` entry. This entry enables you to run the jar with `java -jar`.
 
-The [Maven Shade plugin][maven-shade-plugin] extracts classes from all jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
+The [Spring Package maven plugin][spring-package-maven-plugin] collects all the jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
 
 Now run the following to produce a single executable JAR file containing all necessary dependency classes and resources:
 
     mvn package
 
-[maven-shade-plugin]: https://maven.apache.org/plugins/maven-shade-plugin
+[spring-package-maven-plugin]: https://github.com/SpringSource/spring-zero/tree/master/spring-package-maven-plugin
 
 > **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/content) instead.
 </#macro>
