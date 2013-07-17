@@ -1,0 +1,33 @@
+body, h1, h2, h3, p, input {
+  margin: 0;
+  font-weight: 400;
+  font-family: "Varela Round", sans-serif;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #44474c;
+  line-height: 39px;
+  font-family: "Montserrat", sans-serif;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 30px;
+  color: #3a5056;
+  font-family: "Montserrat", sans-serif;
+}
+
+h3, .popover-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 27px;
+}
+
+p, .list-link {
+  font-size: 14px;
+  line-height: 21px;
+  color: #665A6B;
+}

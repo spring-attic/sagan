@@ -1,0 +1,154 @@
+.blog--wrapper {
+  margin: 100px 0;
+}
+.blog--wrapper a {
+  color: #333;
+}
+.blog--wrapper a:hover {
+  text-decoration: none;
+  color: #8cc63f;
+}
+
+.blog-preview--container {
+  margin: 0 0 40px 0;
+  padding: 0 0 40px 0;
+  border-bottom: 1px solid #ccc;
+}
+.blog-preview--container:last-child {
+  margin: 0;
+}
+.blog-preview--container .blog-preview--title {
+  font-size: 24px;
+  margin-bottom: 15px;
+  font-family: "Montserrat", sans-serif;
+}
+.blog-preview--container .meta-data--item {
+  display: inline-block;
+  margin: 2px 30px 0 0;
+  font-size: 12px;
+  line-height: 12px;
+  text-transform: uppercase;
+}
+.blog-preview--container .meta-data--item .meta-data--icon {
+  display: inline-block;
+  background-color: #ddd;
+  border-radius: 20px;
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+  margin: -2px 5px 0 0;
+}
+.blog-preview--container .blog-preview--post {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 20px 0 0;
+}
+.blog-preview--container .blog-preview--post a {
+  color: #8cc63f;
+}
+.blog-preview--container .blog-preview--post a:hover {
+  text-decoration: underline;
+}
+
+.blog-pagination {
+  margin: 0;
+}
+.blog-pagination ul {
+  box-shadow: none;
+}
+.blog-pagination ul li.active a {
+  padding-top: 8px;
+  border-top: 2px solid #333;
+  color: #333;
+  background-color: transparent;
+  color: #ddd;
+}
+.blog-pagination ul li a {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+}
+.blog-pagination ul li a:hover {
+  background-color: transparent;
+}
+
+.blog-category--container {
+  border: 1px solid #ddd;
+  margin: 0 0 40px 0;
+}
+.blog-category--container li {
+  display: block;
+  padding: 12px 20px;
+  border-top: 1px solid white;
+  font-size: 16px;
+  line-height: 16px;
+}
+.blog-category--container li [class^=icon-] {
+  color: #ccc;
+}
+.blog-category--container li:first-child {
+  border-top: 2px solid #000;
+  margin: -1px 20px 0;
+  padding: 13px 0 12px;
+}
+.blog-category--container li:last-child {
+  border-bottom: none;
+}
+.blog-category--container li.active {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.social-btn--container {
+  margin: 40px 0;
+  text-align: center;
+}
+.social-btn--container .social-btn {
+  background-image: url("../img/iconsprite.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  margin: 0 4%;
+}
+.social-btn--container .social-btn.twitter {
+  background-position: -1px -143px;
+}
+.social-btn--container .social-btn.twitter:hover {
+  background-position: -84px -143px;
+}
+.social-btn--container .social-btn.googleplus {
+  background-position: -1px -220px;
+}
+.social-btn--container .social-btn.googleplus:hover {
+  background-position: -84px -220px;
+}
+.social-btn--container .social-btn.linkedin {
+  background-position: -1px -297px;
+}
+.social-btn--container .social-btn.linkedin:hover {
+  background-position: -84px -297px;
+}
+.social-btn--container .social-btn.facebook {
+  background-position: -1px -373px;
+}
+.social-btn--container .social-btn.facebook:hover {
+  background-position: -84px -373px;
+}
+.social-btn--container .social-btn.youtube {
+  background-position: -1px -450px;
+}
+.social-btn--container .social-btn.youtube:hover {
+  background-position: -84px -450px;
+}
+
+.promo-material {
+  padding: 75px 0;
+  margin: 0 0 40px 0;
+  text-align: center;
+  text-transform: uppercase;
+  border: 6px solid white;
+  color: #ccc;
+  background-color: #ddd;
+}
