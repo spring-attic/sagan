@@ -26,3 +26,29 @@ github:
   client:
     id: fb06c006c2ed62fe9e8b
     secret: 164264e3f6d70c7c21713b7fa64225cb8d6107b2
+
+---
+
+spring:
+  profiles: default,site
+  main:
+    sources: org.springframework.site.web.configuration.ApplicationConfiguration
+  template:
+    mode: LEGACYHTML5
+    cache: false
+
+---
+
+spring:
+  profiles: indexer
+  main:
+    sources: org.springframework.site.indexer.configuration.IndexerConfiguration
+server:
+  port: 9000
+
+---
+
+spring:
+  profiles: acceptance
+  database:
+    url: jdbc:hsqldb:mem:acceptancetestdb

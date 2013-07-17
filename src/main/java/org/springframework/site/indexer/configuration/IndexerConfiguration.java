@@ -24,13 +24,9 @@ import org.springframework.site.web.configuration.SecurityConfiguration;
 public class IndexerConfiguration {
 
 	public static void main(String[] args) {
-		build(IndexerConfiguration.class).run(args);
-	}
-
-	public static SpringApplication build(Class<?>... config) {
-		SpringApplication application = new SpringApplication((Object[]) config);
-		application.setDefaultCommandLineArgs("--server.port=9000");
-		return application;
+		SpringApplication application = new SpringApplication(IndexerConfiguration.class);
+		application.setDefaultCommandLineArgs("--spring.profiles.active=indexer");
+		application.run(args);
 	}
 
 	@Bean

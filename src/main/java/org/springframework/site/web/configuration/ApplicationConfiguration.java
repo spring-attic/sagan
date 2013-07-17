@@ -40,14 +40,7 @@ import org.springframework.web.client.RestTemplate;
 public class ApplicationConfiguration {
 
 	public static void main(String[] args) {
-		build(ApplicationConfiguration.class).run(args);
-	}
-
-	public static SpringApplication build(Class<?>... config) {
-		SpringApplication application = new SpringApplication((Object[]) config);
-		application.setDefaultCommandLineArgs("--spring.template.mode=LEGACYHTML5",
-				"--spring.template.cache=false");
-		return application;
+		SpringApplication.run(ApplicationConfiguration.class, args);
 	}
 
 	@Configuration
