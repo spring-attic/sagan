@@ -36,13 +36,13 @@
 
 			<h2>Scheduled</h2>
 			<table class='table dashboard--posts'>
-				<tr th:each="post : ${scheduled}" layout:include="/admin/blog/index::post-row">
+				<tr th:each="post : ${scheduled}" layout:include="admin/blog/index::post-row">
 				</tr>
 			</table>
 
 			<h2>Published</h2>
 			<table class='table dashboard--posts'>
-				<tr th:each="post : ${posts}" layout:include="/admin/blog/index::post-row">
+				<tr th:each="post : ${posts}" layout:include="admin/blog/index::post-row">
     				</tr>
 			</table>
 		</div>

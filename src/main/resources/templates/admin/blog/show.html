@@ -6,7 +6,7 @@
 </head>
 <body>
 <div layout:fragment="content" class="container" th:object="${post}">
-    <div layout:include="/blog/_full_post :: full-post" th:remove="tag" />
+    <div layout:include="blog/_full_post :: full-post" th:remove="tag" />
 </div>
 </body>
 </html>
