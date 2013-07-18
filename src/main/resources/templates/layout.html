@@ -24,7 +24,7 @@
   <script type="text/javascript" th:src="@{/js/guide.js}" src="../../static/js/guide.js"></script>
 </head>
 <body>
-  <div class="navbar navbar-fixed-top header--navbar">
+  <header class="navbar navbar-fixed-top header--navbar">
     <div class="navbar-inner">
       <div class="container-fluid">
         <div class="spring-logo--container">
@@ -58,7 +58,7 @@
         </ul>
       </div>
     </div>
-  </div>
+  </header>
 
   <div class="header--container" layout:fragment="header-container">
     <div class="header--content" layout:fragment="header-content">
@@ -83,33 +83,47 @@
     <div id="footer-push-down"></div>
   </div>
 
-  <div id="footer">
-    <div class="container">
-
-      <div class="navbar">
-        <div class="container ">
-          <ul class="nav">
-            <li><a th:href="@{/tools}" href="pages/tools.html">Tools</a></li>
-            <li><a th:href="@{/services}" href="pages/services.html">Services</a></li>
-            <li><a th:href="@{/case-study}" href="pages/case-study.html">Case Studies</a></li>
-            <li><a th:href="@{/newsletter}" href="pages/newsletter.html">Newsletter</a></li>
-            <li><a th:href="@{/about}" href="pages/about.html">About Us</a></li>
-            <li><a th:href="@{/about/jobs}" href="pages/about/jobs.html">Jobs</a></li>
-          </ul>
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span8">
+          <div class="navbar">
+            <div class="container">
+              <ul class="nav">
+                <li><a th:href="@{/tools}" href="pages/tools.html">Tools</a></li>
+                <li><a th:href="@{/services}" href="pages/services.html">Services</a></li>
+                <li><a th:href="@{/case-study}" href="pages/case-study.html">Case Studies</a></li>
+                <li><a th:href="@{/newsletter}" href="pages/newsletter.html">Newsletter</a></li>
+                <li><a th:href="@{/about}" href="pages/about.html">About Us</a></li>
+                <li><a th:href="@{/about/jobs}" href="pages/about/jobs.html">Jobs</a></li>
+              </ul>
+            </div>
+          </div>
+          &copy; 2013 Go Pivotal, Inc. All Rights Reserved.
+          <a href="http://www.vmware.com/help/legal.html">Terms of Use</a>,
+          <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>, and
+          <a th:href="@{/trademark}" href="pages/trademark.html">Trademark Standards</a>
+          <div id='authentication' sec:authorize="isFullyAuthenticated()">
+            <span sec:authentication="name">Bob</span>
+            <a th:href="@{/signout}" href="/signout">Sign out</a>
+          </div>
+        </div>
+        <div class="span4">
+          <div class="footer-newsletter--container pull-right">
+            <form>
+              <label>
+                Subscribe to our newsletter
+              </label>
+              <div class="footer-subscribe--input--container">
+                <input class="footer-subscribe--input" placeholder="Email Address (NOT REAL)">
+                <input type="submit" class="btn footer-subscibe--btn" value="Subscribe">
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-
-      &copy; 2013 Go Pivotal, Inc. All Rights Reserved.
-      <a href="http://www.vmware.com/help/legal.html">Terms of Use</a>,
-      <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>, and
-      <a th:href="@{/trademark}" href="pages/trademark.html">Trademark Standards</a>
-		<div id='authentication' sec:authorize="isFullyAuthenticated()">
-			<span sec:authentication="name">Bob</span>
-			<a th:href="@{/signout}" href="/signout">Sign out</a>
-		</div>
     </div>
-  </div>
-
+  </footer>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
