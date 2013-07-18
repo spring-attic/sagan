@@ -22,7 +22,7 @@
 How to complete this guide
 --------------------------
 
-Like all Spring's [Getting Started guides](guides/gs), you can start from scratch and complete each step, or you can bypass basic setup steps that are already familiar to you. Either way, you end up with working code.
+Like all Spring's [Getting Started guides](/guides/gs), you can start from scratch and complete each step, or you can bypass basic setup steps that are already familiar to you. Either way, you end up with working code.
 
 To **start from scratch**, move on to [Set up the project](#scratch).
 
@@ -39,7 +39,7 @@ To **skip the basics**, do the following:
 
 
 <#macro build_system_intro>
-First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](guides/gs/maven/content) or [Building Java Projects with Gradle](guides/gs/gradle/content).
+First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](/guides/gs/maven/content) or [Building Java Projects with Gradle](/guides/gs/gradle/content).
 </#macro>
 
 <#macro android_build_system_intro>
