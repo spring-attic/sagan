@@ -1,6 +1,5 @@
 body {
   background-color: #f1f1f1;
-  padding-top: 78px;
 }
 
 .background-grid {
@@ -29,7 +28,7 @@ body {
 
 .code-snippet {
   border-radius: 2px;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   background-color: #F9F9F9;
   padding: 12px 18px;
   margin: 15px 0;
@@ -44,6 +43,7 @@ body {
 
 .header--navbar {
   border-top: 4px solid #6db33f;
+  margin: 0;
 }
 .header--navbar .navbar-inner {
   background-image: none;
@@ -51,6 +51,7 @@ body {
   border: none;
   box-shadow: none;
   position: relative;
+  border-radius: 0;
 }
 .header--navbar .navbar-inner .spring-logo--container {
   display: inline-block;
@@ -422,7 +423,7 @@ input.floating-input:focus {
 
 .gh-project-url--container {
   background-color: #FFF;
-  border: 1px solid #cccccc;
+  border: 1px solid #CCC;
   height: 20px;
   padding: 4px 6px;
   border-radius: 4px;
