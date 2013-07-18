@@ -17,7 +17,6 @@ $header-bg: #34302d;
 
 body {
   background-color: #f1f1f1;
-  padding-top: 78px;
 }
 
 .background-grid {
@@ -62,12 +61,14 @@ body {
 
 .header--navbar {
   border-top: 4px solid $green;
+  margin: 0;
   .navbar-inner {
     background-image: none;
     background-color: $header-bg;
     border: none;
     box-shadow: none;
     position: relative;
+    border-radius: 0;
     .spring-logo--container {
       display: inline-block;
       padding: 16px 0;
