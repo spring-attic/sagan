@@ -12,7 +12,7 @@
 .blog-preview--container {
   margin: 0 0 40px 0;
   padding: 0 0 40px 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 .blog-preview--container:last-child {
   margin: 0;
@@ -58,7 +58,7 @@
 }
 .blog-pagination ul li.active a {
   padding-top: 8px;
-  border-top: 2px solid #333;
+  border-top: 2px solid #333333;
   color: #333;
   background-color: transparent;
   color: #ddd;
@@ -74,7 +74,7 @@
 }
 
 .blog-category--container {
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   margin: 0 0 40px 0;
 }
 .blog-category--container li {
@@ -88,7 +88,7 @@
   color: #ccc;
 }
 .blog-category--container li:first-child {
-  border-top: 2px solid #000;
+  border-top: 2px solid black;
   margin: -1px 20px 0;
   padding: 13px 0 12px;
 }

@@ -12,7 +12,6 @@ dependency-reduced-pom.xml
 .idea
 *.iml
 src/main/resources/git.properties
-src/main/resources/static/css/
 Gemfile.lock
 .DS_Store
 .sass-cache

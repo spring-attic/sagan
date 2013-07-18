@@ -1,6 +1,6 @@
 body {
   background-color: #f1f1f1;
-  padding-top: 50px;
+  padding-top: 78px;
 }
 
 .background-grid {
@@ -29,7 +29,7 @@ body {
 
 .code-snippet {
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   background-color: #F9F9F9;
   padding: 12px 18px;
   margin: 15px 0;
@@ -54,15 +54,17 @@ body {
 }
 .header--navbar .navbar-inner .spring-logo--container {
   display: inline-block;
+  padding: 16px 0;
 }
 .header--navbar .navbar-inner .spring-logo--container .logo-bg {
-  width: 29px;
-  height: 22px;
+  width: 37px;
+  height: 30px;
+  border-radius: 30px;
+  margin: 10px 0 0 1px;
   top: 13px;
   background-color: #6db33f;
   position: absolute;
   z-index: 1034;
-  border-radius: 33px;
   opacity: 0;
   transition: opacity 0.15s;
   -webkit-transition: opacity 0.15s;
@@ -72,14 +74,13 @@ body {
 }
 .header--navbar .navbar-inner .spring-logo--container .spring-logo {
   background-image: url("../img/iconsprite.png");
-  width: 134px;
-  height: 34px;
+  width: 153px;
+  height: 40px;
   background-repeat: no-repeat;
-  background-size: 1827px;
+  background-size: 2230px;
   background-position: -1px -1px;
   position: absolute;
   z-index: 1035;
-  margin-top: -7px;
 }
 .header--navbar .navbar-inner .spring-logo--container:hover .logo-bg {
   opacity: 1;
@@ -91,22 +92,22 @@ body {
 .header--navbar .navbar-inner .nav .navbar-link a {
   color: #eeeeee;
   text-transform: uppercase;
-  font-weight: 700;
   text-shadow: none;
-  font-size: 11px;
+  font-size: 14px;
+  line-height: 15px;
+  padding: 30px 20px;
   transition: all 0.15s;
   -webkit-transition: all 0.15s;
   -moz-transition: all 0.15s;
   -o-transition: all 0.15s;
   -ms-transition: all 0.15s;
-  padding: 15px 20px;
 }
 .header--navbar .navbar-inner .nav .navbar-link:hover a {
   color: #eeeeee;
   background-color: #6db33f;
 }
 .header--navbar .navbar-inner .nav .nav-search {
-  padding: 11px 0;
+  padding: 19px 0;
 }
 .header--navbar .navbar-inner .nav .nav-search:hover .header-nav-search--icon {
   text-shadow: 0 0 10px #6db33f;
@@ -122,7 +123,7 @@ body {
 }
 .header--navbar .navbar-inner .header-nav-search--container .header-nav-search--icon {
   color: #eeeeee;
-  font-size: 15px;
+  font-size: 24px;
   padding: 3px 0 3px 12px;
   cursor: pointer;
   transition: all 0.5s;
@@ -137,7 +138,8 @@ body {
   box-shadow: none;
   padding: 0;
   width: 0px;
-  font-size: 12px;
+  font-size: 14px;
+  height: 26px;
   color: transparent;
   transition: width 0.5s;
   -webkit-transition: width 0.5s;
@@ -159,11 +161,10 @@ body {
 }
 .header--navbar .navbar-inner .header-nav-search--container.js-open {
   background-color: #fff;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   margin: 0 0 0 12px;
 }
 .header--navbar .navbar-inner .header-nav-search--container.js-open .header-nav-search--input {
-  width: 250px;
+  width: 350px;
   color: #666;
 }
 .header--navbar .navbar-inner .header-nav-search--container.js-open .header-nav-search--input::-webkit-input-placeholder {
@@ -183,6 +184,55 @@ body {
   border: none;
   padding: 0 6px 0 0;
   margin: 0;
+}
+
+.footer {
+  background-color: #34302d;
+  color: #eeeeee;
+  padding: 30px 0;
+}
+.footer a {
+  color: #6db33f;
+}
+.footer .nav li a {
+  color: #eeeeee;
+  text-shadow: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 0 17px;
+}
+.footer .nav li a:hover {
+  color: #6db33f;
+}
+.footer .nav li:first-child a {
+  padding-left: 0;
+}
+.footer .footer-newsletter--container label {
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+.footer .footer-newsletter--container .footer-subscribe--input--container {
+  background-color: white;
+  border: 1px solid #f1f1f1;
+}
+.footer .footer-newsletter--container .footer-subscribe--input--container .footer-subscribe--input {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  font-size: 12px;
+  margin-left: 10px;
+}
+.footer .footer-newsletter--container .footer-subscribe--input--container .footer-subscibe--btn {
+  text-transform: uppercase;
+  background-color: #6db33f;
+  background-image: none;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  color: #eeeeee;
+  text-shadow: none;
+  font-size: 12px;
+  padding: 9px 16px;
 }
 
 .header--content {
@@ -372,7 +422,7 @@ input.floating-input:focus {
 
 .gh-project-url--container {
   background-color: #FFF;
-  border: 1px solid #CCC;
+  border: 1px solid #cccccc;
   height: 20px;
   padding: 4px 6px;
   border-radius: 4px;
