@@ -10,7 +10,7 @@
 
   <div layout:fragment="content" class="container" th:object="${post}">
     <div class="row-fluid blog--wrapper">
-      <div id="content" class="span8" layout:include="/blog/_full_post :: full-post" >
+      <div id="content" class="span8" layout:include="blog/_full_post :: full-post" >
       </div>
       <div id="sidebar" class="span4">
         <div layout:include="blog/_right-pane :: right-pane"></div>
