@@ -57,4 +57,8 @@ public class TeamService {
 			logger.warn("Indexing failed for " + existingProfile.getMemberId(), e);
 		}
 	}
+
+	public void saveMemberProfile(MemberProfile profile) {
+		teamRepository.save(profile);
+	}
 }
