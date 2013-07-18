@@ -1,47 +1,99 @@
 require "blog_importer.rb"
 require "rspec"
 require 'pg'
-#require 'pry'
+require 'httparty'
+
+describe SiteApi do
+
+  it "saves a member profile" do
+    db = PG.connect(dbname: 'blog_import')
+    db.exec("DELETE FROM memberprofile WHERE memberid = 'yada'")
+    db.exec("SELECT count(*) FROM memberprofile WHERE memberid = 'yada'") do |result|
+      result.getvalue(0, 0).to_i.should == 0
+    end
+
+    api = SiteApi.new('localhost:8080')
+    api.save_member_profile(memberId: 'yada')
+
+    db.exec("SELECT count(*) FROM memberprofile WHERE memberid = 'yada'") do |result|
+      result.getvalue(0, 0).to_i.should == 1
+    end
+  end
+
+end
 
 describe BlogImporter do
 
+  test_files = [{ filename: "test_blog_export.xml",
+                  expected_post_count: 2 ,
+                  expected_author_count: 2,
+                  expected_author: {
+                      memberId: 'sample',
+                      githubUsername: 'sample',
+                      gravatarEmail: 'sample@springsource.com',
+                      name: 'Mr Sample'
+                  }
+                } ]
 
-  test_files = [{ filename: "test_blog_export.xml", expected_post_count: 2 } ]
-  test_files << { filename: "full_blog_export.xml", expected_post_count: 525 } if File.exists?("full_blog_export.xml")
+  if File.exists?("full_blog_export.xml")
+    test_files << { filename: "full_blog_export.xml",
+                    expected_post_count: 525,
+                    expected_author_count: 86,
+                    expected_author: {
+                        memberId: 'benh',
+                        githubUsername: 'benh',
+                        gravatarEmail: 'bhale@vmware.com',
+                        name: 'Ben Hale'
+                    }
+                  }
+  end
 
   test_files.each do |test_context|
 
+
     context "After importing #{test_context[:filename]}" do
 
-      before(:all) do
-        importer = BlogImporter.new(test_context[:filename])
+      let(:double_siteapi) { double('siteapi').as_null_object }
+
+      let(:db) { PG.connect(dbname: 'blog_import') }
+
+      let(:importer) { BlogImporter.new(test_context[:filename], double_siteapi) }
+
+      let(:expected_post_count) { test_context[:expected_post_count] }
+      let(:expected_author_count) { test_context[:expected_author_count] }
+      let(:expected_author) { test_context[:expected_author] }
+
+
+      it "creates new memberProfiles for an author" do
+        double_siteapi.should_receive('save_member_profile').exactly(expected_author_count).times
         importer.import!
       end
 
-      let(:expected_post_count) do
-        test_context[:expected_post_count]
+      it "creates memberProfiles with the correct info" do
+        double_siteapi.should_receive('save_member_profile').with(expected_author)
+        importer.import!
       end
 
-      let(:db) do
-        PG.connect(dbname: 'blog_import')
-      end
-
-      it "truncates the table before performing an import" do
-        importer = BlogImporter.new(test_context[:filename])
-        importer.import! # Import a second time, after the before block
+      it "truncates the post table before performing an import" do
+        importer.import!
+        importer.import!
         db.exec("SELECT count(*) FROM post") do |result|
           result.getvalue(0, 0).to_i.should == expected_post_count
         end
       end
 
       it "creates a post for every published post in the import file" do
+        importer.import!
         db.exec("SELECT count(*) FROM post") do |result|
           result.getvalue(0, 0).to_i.should == expected_post_count
         end
       end
 
       context "first post in the database" do
-        subject { db.exec("SELECT * FROM post ORDER BY id ASC LIMIT 1")[0] }
+        subject do
+          importer.import!
+          db.exec("SELECT * FROM post ORDER BY id ASC LIMIT 1")[0]
+        end
 
         its(['title']) { should == "Spring 2.0's JMS Improvements" }
         its(['broadcast']) { should == "f" }

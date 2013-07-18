@@ -1,9 +1,21 @@
 require 'pg'
 require 'nokogiri'
+require 'httparty'
+
+class SiteApi
+  def initialize input_base_uri
+    @base_uri = input_base_uri
+  end
+
+  def save_member_profile(options)
+    HTTParty.post("http://#{@base_uri}/migration/profile", {body: options})
+  end
+end
 
 class BlogImporter
-  def initialize(filename)
+  def initialize(filename, site_api)
     @filename = filename
+    @site_api = site_api
   end
 
   def import!
@@ -13,8 +25,22 @@ class BlogImporter
   def import(force=false)
     return false unless force || user_happy_to_continue
 
-    truncate_post_table
+    truncate_post_table!
+    import_authors
     import_posts
+  end
+
+  def import_authors
+    authors = xml_doc.xpath("//wp:author")
+    authors.each do |author|
+      data = {
+        memberId: author.xpath('wp:author_login').text,
+        githubUsername: author.xpath('wp:author_login').text,
+        gravatarEmail: author.xpath('wp:author_email').text,
+        name: author.xpath('wp:author_display_name').text
+      }
+      @site_api.save_member_profile data
+    end
   end
 
   def import_posts
@@ -39,7 +65,7 @@ class BlogImporter
   end
 
   def print_progress
-    print "."
+    print "~"
     $stdout.flush
   end
 
@@ -48,7 +74,7 @@ class BlogImporter
     gets.chomp == 'yes'
   end
 
-  def truncate_post_table
+  def truncate_post_table!
     conn.exec("TRUNCATE post")
   end
 
@@ -70,3 +96,5 @@ class BlogImporter
 
   end
 end
+
+

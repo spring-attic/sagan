@@ -4,3 +4,4 @@ gem "nokogiri"
 gem "rspec"
 gem "pg"
 gem "pry"
+gem 'httparty'
