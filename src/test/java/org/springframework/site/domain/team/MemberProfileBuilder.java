@@ -6,6 +6,7 @@ public class MemberProfileBuilder {
 
 	private Long id;
 	private String name;
+	private String memberId;
 	private String location;
 	private String bio;
 	private String avatarUrl;
@@ -30,6 +31,11 @@ public class MemberProfileBuilder {
 
 	public MemberProfileBuilder name(String name) {
 		this.name = name;
+		return this;
+	}
+
+	public MemberProfileBuilder memberId(String memberId) {
+		this.memberId = memberId;
 		return this;
 	}
 
@@ -61,6 +67,7 @@ public class MemberProfileBuilder {
 	public MemberProfile build() {
 		MemberProfile profile = new MemberProfile();
 		profile.setName(name);
+		profile.setMemberId(memberId);
 		profile.setLocation(location);
 		profile.setBio(bio);
 		profile.setAvatarUrl(avatarUrl);

@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:data="https://github.com/mxab/thymeleaf-extras-data-attribute"
       layout:decorator="layout">
 <head>
     <title>SpringFramework - Team Members</title>
@@ -32,7 +33,7 @@
     <div class="row">
         <div class="span12">
             <ul class="team-members">
-                <li th:each="profile : ${profiles}">
+                <li th:each="profile : ${profiles}" data:member-id="${profile.memberId}">
                     <a th:href="@{'/about/team/' + ${profile.memberId}}">
                         <img th:src="${profile.avatarUrl}" />
                         <div class="team-member-name" th:text="${profile.name}"></div>
@@ -45,7 +46,7 @@
 
     <script th:inline="javascript">
         /*<![CDATA[*/
-        var teamLocations = /*[[${teamLocations}]]*/ [{name: 'Name', latitude: 30.0, longitude: 1.5}];
+        var teamLocations = /*[[${teamLocations}]]*/ [{memberId: 'memberId', latitude: 30.0, longitude: 1.5}];
         /*]]>*/
     </script>
 </div>

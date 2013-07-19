@@ -174,7 +174,7 @@ public class MemberProfile {
 
 	public TeamLocation getTeamLocation() {
 		if (geoLocation == null) return null;
-		return new TeamLocation(name, geoLocation.getLatitude(), geoLocation.getLongitude());
+		return new TeamLocation(name, geoLocation.getLatitude(), geoLocation.getLongitude(), getMemberId());
 	}
 
 	public String getVideoEmbeds() {

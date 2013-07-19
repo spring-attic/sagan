@@ -1,5 +1,6 @@
 package org.springframework.site.web.configuration;
 
+import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,6 +49,11 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	@Bean
 	public ApplicationDialect applicationDialect() {
 		return new ApplicationDialect();
+	}
+
+	@Bean
+	public DataAttributeDialect dataAttributeDialect() {
+		return new DataAttributeDialect();
 	}
 
 	@Override
