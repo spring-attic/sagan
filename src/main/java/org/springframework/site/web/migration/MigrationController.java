@@ -36,7 +36,7 @@ public class MigrationController {
 
 	@RequestMapping(value = "/migration/blogpost", method = POST)
 	public void migrateBlogPost(HttpServletResponse response, PostForm postForm) {
-		Post post = blogService.getPost(postForm.getTitle(), postForm.getPublishAt());
+		Post post = blogService.getPost(postForm.getTitle(), postForm.getCreatedAt());
 		if (post == null) {
 			blogService.addPost(postForm, postForm.getAuthorMemberId());
 		} else {

@@ -32,5 +32,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
 	Post findByTitle(String title);
 
-	Post findByTitleAndPublishAt(String title, Date publishAt);
+	Post findByTitleAndCreatedAt(String title, Date createdAt);
 }

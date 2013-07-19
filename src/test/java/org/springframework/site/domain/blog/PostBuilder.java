@@ -16,7 +16,7 @@ public class PostBuilder {
 	private String rawContent;
 	private String renderedContent;
 	private String renderedSummary;
-	private Date date;
+	private Date createdAt;
 	private Date publishAt;
 	private boolean broadcast;
 	private boolean draft;
@@ -74,8 +74,13 @@ public class PostBuilder {
 		return this;
 	}
 
-	public PostBuilder dateCreated(Date date) {
-		this.date = date;
+	public PostBuilder createdAt(Date date) {
+		this.createdAt = date;
+		return this;
+	}
+
+	public PostBuilder createdAt(String dateString) throws ParseException {
+		this.createdAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString);
 		return this;
 	}
 
@@ -125,8 +130,8 @@ public class PostBuilder {
 		post.setAuthor(author);
 		post.setRenderedContent(renderedContent);
 		post.setRenderedSummary(renderedSummary);
-		if (date != null) {
-			post.setCreatedAt(date);
+		if (createdAt != null) {
+			post.setCreatedAt(createdAt);
 		}
 		post.setBroadcast(broadcast);
 		post.setDraft(draft);

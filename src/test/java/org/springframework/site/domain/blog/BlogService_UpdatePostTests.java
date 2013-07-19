@@ -152,7 +152,7 @@ public class BlogService_UpdatePostTests {
 	@Test
 	public void updatingABlogPost_doesNotChangeItsCreatedDateByDefault() throws Exception {
 		Date originalDate = DateTestUtils.getDate("2009-11-20 07:00");
-		Post post = PostBuilder.post().dateCreated(originalDate).build();
+		Post post = PostBuilder.post().createdAt(originalDate).build();
 		this.service.updatePost(post, this.postForm);
 		assertThat(post.getCreatedAt(), is(originalDate));
 	}
@@ -160,7 +160,7 @@ public class BlogService_UpdatePostTests {
 	@Test
 	public void updatingABlogPost_usesTheCreatedDateFromThePostFormIfPresent() throws Exception {
 		Date originalDate = DateTestUtils.getDate("2009-11-20 07:00");
-		Post post = PostBuilder.post().dateCreated(originalDate).build();
+		Post post = PostBuilder.post().createdAt(originalDate).build();
 
 		Date newDate = DateTestUtils.getDate("2010-01-11 03:00");
 		postForm.setCreatedAt(newDate);

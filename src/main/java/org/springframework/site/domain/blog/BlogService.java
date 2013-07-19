@@ -50,8 +50,8 @@ public class BlogService {
 		return post;
 	}
 
-	public Post getPost(String title, Date publishAt) {
-		return repository.findByTitleAndPublishAt(title, publishAt);
+	public Post getPost(String title, Date createdAt) {
+		return repository.findByTitleAndCreatedAt(title, createdAt);
 	}
 
 	public Post getPublishedPost(Long postId) {

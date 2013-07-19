@@ -166,7 +166,7 @@ public class BlogIndexTests {
 					.rawContent("Raw content")
 					.renderedContent("Html content")
 					.renderedSummary("Html summary")
-					.dateCreated(calendar.getTime())
+					.createdAt(calendar.getTime())
 					.publishAt(calendar.getTime())
 					.build();
 			posts.add(post);

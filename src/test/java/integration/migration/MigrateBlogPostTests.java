@@ -87,6 +87,7 @@ public class MigrateBlogPostTests {
 						.title("a post title")
 						.rawContent("original post content")
 						.publishAt("2000-01-01 00:00")
+						.createdAt("1999-11-21 10:00")
 						.category(PostCategory.ENGINEERING)
 						.build();
 
@@ -97,6 +98,7 @@ public class MigrateBlogPostTests {
 		migrateBlogPost.param("content", "NEW post content");
 		migrateBlogPost.param("category", "ENGINEERING");
 		migrateBlogPost.param("publishAt", "2000-01-01 00:00");
+		migrateBlogPost.param("createdAt", "1999-11-21 10:00");
 
 		mockMvc.perform(migrateBlogPost).andExpect(status().isOk());
 
