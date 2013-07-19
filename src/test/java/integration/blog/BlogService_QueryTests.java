@@ -78,11 +78,19 @@ public class BlogService_QueryTests {
 	}
 
 	@Test
-	public void postIsRetrievable() {
+	public void postIsRetrievableById() {
 		Post post = PostBuilder.post().build();
 		postRepository.save(post);
 
 		assertThat(service.getPost(post.getId()), equalTo(post));
+	}
+
+	@Test
+	public void postIsRetrievableByTitleAndPublishedDate() {
+		Post post = PostBuilder.post().build();
+		postRepository.save(post);
+
+		assertThat(service.getPost(post.getTitle(), post.getPublishAt()), equalTo(post));
 	}
 
 	@Test

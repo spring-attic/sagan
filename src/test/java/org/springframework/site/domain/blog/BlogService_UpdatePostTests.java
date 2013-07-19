@@ -1,7 +1,5 @@
 package org.springframework.site.domain.blog;
 
-import java.util.Date;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,6 +13,8 @@ import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.test.DateTestUtils;
+
+import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -147,5 +147,25 @@ public class BlogService_UpdatePostTests {
 		Post post = PostBuilder.post().id(postId).draft().build();
 		this.service.updatePost(post, new PostForm(post));
 		verifyZeroInteractions(this.searchService);
+	}
+
+	@Test
+	public void updatingABlogPost_doesNotChangeItsCreatedDateByDefault() throws Exception {
+		Date originalDate = DateTestUtils.getDate("2009-11-20 07:00");
+		Post post = PostBuilder.post().dateCreated(originalDate).build();
+		this.service.updatePost(post, this.postForm);
+		assertThat(post.getCreatedAt(), is(originalDate));
+	}
+
+	@Test
+	public void updatingABlogPost_usesTheCreatedDateFromThePostFormIfPresent() throws Exception {
+		Date originalDate = DateTestUtils.getDate("2009-11-20 07:00");
+		Post post = PostBuilder.post().dateCreated(originalDate).build();
+
+		Date newDate = DateTestUtils.getDate("2010-01-11 03:00");
+		postForm.setCreatedAt(newDate);
+
+		this.service.updatePost(post, this.postForm);
+		assertThat(post.getCreatedAt(), is(newDate));
 	}
 }

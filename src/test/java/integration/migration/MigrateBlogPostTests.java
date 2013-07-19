@@ -60,6 +60,7 @@ public class MigrateBlogPostTests {
 		migrateBlogPost.param("content", "sample post content");
 		migrateBlogPost.param("category", "ENGINEERING");
 		migrateBlogPost.param("publishAt", "2000-01-01 00:00");
+		migrateBlogPost.param("createdAt", "1999-01-01 00:00");
 		migrateBlogPost.param("authorMemberId", author.getMemberId());
 
 		mockMvc.perform(migrateBlogPost).andExpect(status().isOk());
@@ -71,8 +72,12 @@ public class MigrateBlogPostTests {
 		assertThat(post.getAuthor().getMemberId(), is(author.getMemberId()));
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
 		String publishAt = dateFormat.format(post.getPublishAt());
 		assertThat(publishAt, is("2000-01-01 00:00"));
+
+		String createdAt = dateFormat.format(post.getCreatedAt());
+		assertThat(createdAt, is("1999-01-01 00:00"));
 	}
 
 	@Test

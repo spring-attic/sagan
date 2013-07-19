@@ -104,16 +104,26 @@ public class BlogService {
 		Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
 		MemberProfile profile = this.teamRepository.findByMemberId(authorId);
 		post.setAuthor(profile);
+
 		post.setRenderedContent(this.markdownService.renderToHtml(content));
-		post.setRenderedSummary(this.markdownService.renderToHtml(extractFirstParagraph(
-				content, 500)));
+		post.setRenderedSummary(this.markdownService.renderToHtml(extractFirstParagraph( content, 500)));
 		post.setBroadcast(postForm.isBroadcast());
 		post.setDraft(postForm.isDraft());
 		post.setPublishAt(publishDate(postForm));
+		post.setCreatedAt(createdDate(postForm, dateService.now()));
+
 		this.repository.save(post);
 		saveToIndex(post);
 
 		return post;
+	}
+
+	private Date createdDate(PostForm postForm, Date defaultDate) {
+		Date createdAt = postForm.getCreatedAt();
+		if (createdAt == null) {
+			createdAt = defaultDate;
+		}
+		return createdAt;
 	}
 
 	public void updatePost(Post post, PostForm postForm) {
@@ -124,12 +134,11 @@ public class BlogService {
 		post.setCategory(postForm.getCategory());
 
 		post.setRenderedContent(this.markdownService.renderToHtml(content));
-		post.setRenderedSummary(this.markdownService.renderToHtml(extractFirstParagraph(
-				content, 500)));
-
+		post.setRenderedSummary(this.markdownService.renderToHtml(extractFirstParagraph(content, 500)));
 		post.setBroadcast(postForm.isBroadcast());
 		post.setDraft(postForm.isDraft());
 		post.setPublishAt(publishDate(postForm));
+		post.setCreatedAt(createdDate(postForm, post.getCreatedAt()));
 
 		this.repository.save(post);
 		saveToIndex(post);
@@ -140,8 +149,11 @@ public class BlogService {
 	}
 
 	private Date publishDate(PostForm postForm) {
-		return !postForm.isDraft() && postForm.getPublishAt() == null ? this.dateService
-				.now() : postForm.getPublishAt();
+		if (!postForm.isDraft() && postForm.getPublishAt() == null) {
+			return this.dateService.now();
+		} else {
+			return postForm.getPublishAt();
+		}
 	}
 
 	// package private for testing purposes

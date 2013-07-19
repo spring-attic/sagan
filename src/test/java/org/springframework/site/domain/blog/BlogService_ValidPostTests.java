@@ -1,7 +1,5 @@
 package org.springframework.site.domain.blog;
 
-import java.util.Date;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,10 +19,19 @@ import org.springframework.site.search.SearchService;
 import org.springframework.site.test.DateTestUtils;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import static org.hamcrest.Matchers.*;
+import java.util.Date;
 
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.anyObject;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.reset;
+import static org.mockito.BDDMockito.verify;
+import static org.mockito.BDDMockito.verifyZeroInteractions;
+import static org.mockito.BDDMockito.willThrow;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_ValidPostTests {
@@ -166,5 +173,18 @@ public class BlogService_ValidPostTests {
 		postForm.setDraft(true);
 		service.addPost(postForm, AUTHOR_ID);
 		verifyZeroInteractions(searchService);
+	}
+
+	@Test
+	public void postCreatedDateDefaultsToNow() throws Exception {
+		assertThat(post.getCreatedAt(), is(now));
+	}
+
+	@Test
+	public void postCreatedDateCanBeSetFromAPostForm() throws Exception {
+		Date createdAt = DateTestUtils.getDate("2013-05-23 22:58");
+		postForm.setCreatedAt(createdAt);
+		Post post = service.addPost(postForm, AUTHOR_ID);
+		assertThat(post.getCreatedAt(), is(createdAt));
 	}
 }
