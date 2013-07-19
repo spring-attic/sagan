@@ -50,7 +50,7 @@ body {
 }
 .header--navbar .navbar-inner .spring-logo--container {
   display: inline-block;
-  padding: 16px 0;
+  padding: 15px 0;
 }
 .header--navbar .navbar-inner .spring-logo--container .logo-bg {
   width: 37px;
@@ -91,8 +91,8 @@ body {
   text-transform: uppercase;
   text-shadow: none;
   font-size: 14px;
-  line-height: 15px;
-  padding: 30px 20px;
+  line-height: 14px;
+  padding: 28px 20px;
   transition: all 0.15s;
   -webkit-transition: all 0.15s;
   -moz-transition: all 0.15s;
@@ -104,7 +104,7 @@ body {
   background-color: #6db33f;
 }
 .header--navbar .navbar-inner .nav .nav-search {
-  padding: 19px 0;
+  padding: 17px 0;
 }
 .header--navbar .navbar-inner .nav .nav-search:hover .header-nav-search--icon {
   text-shadow: 0 0 10px #6db33f;
@@ -425,11 +425,15 @@ input.floating-input:focus {
 .footer a {
   color: #6db33f;
 }
+.footer .nav {
+  margin-bottom: 12px;
+}
 .footer .nav li a {
   color: #eeeeee;
   text-shadow: none;
   text-transform: uppercase;
   font-size: 12px;
+  line-height: 12px;
   padding: 0 17px;
 }
 .footer .nav li a:hover {
@@ -438,9 +442,19 @@ input.floating-input:focus {
 .footer .nav li:first-child a {
   padding-left: 0;
 }
+.footer .footer-newsletter--wrapper {
+  width: auto;
+  margin: 0;
+}
+.footer .footer-newsletter--container form {
+  margin: 0;
+}
 .footer .footer-newsletter--container label {
   text-transform: uppercase;
   margin-bottom: 15px;
+  line-height: 12px;
+  font-weight: bold;
+  font-size: 12px;
 }
 .footer .footer-newsletter--container .footer-subscribe--input--container {
   background-color: white;
@@ -451,7 +465,10 @@ input.floating-input:focus {
   border: none;
   box-shadow: none;
   font-size: 12px;
-  margin-left: 10px;
+  padding-left: 10px;
+}
+.footer .footer-newsletter--container .footer-subscribe--input--container .footer-subscribe--input:focus {
+  outline: none;
 }
 .footer .footer-newsletter--container .footer-subscribe--input--container .footer-subscibe--btn {
   text-transform: uppercase;

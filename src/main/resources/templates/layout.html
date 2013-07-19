@@ -47,6 +47,7 @@
           <li app:navlink="forum">
             <a href="http://forum.springframework.org">Forum</a>
           </li>
+
           <li class="nav-search">
             <div class="header-nav-search--container js-search-input--container">
               <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
@@ -108,8 +109,8 @@
             <a th:href="@{/signout}" href="/signout">Sign out</a>
           </div>
         </div>
-        <div class="span4">
-          <div class="footer-newsletter--container pull-right">
+        <div class="span4 footer-newsletter--wrapper pull-right">
+          <div class="footer-newsletter--container">
             <form>
               <label>
                 Subscribe to our newsletter

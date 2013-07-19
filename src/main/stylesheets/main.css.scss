@@ -65,7 +65,7 @@ body {
     border-radius: 0;
     .spring-logo--container {
       display: inline-block;
-      padding: 16px 0;
+      padding: 15px 0;
       .logo-bg {
         width: 37px;
         height: 30px;
@@ -110,8 +110,8 @@ body {
           text-transform: uppercase;
           text-shadow: none;
           font-size: 14px;
-          line-height: 15px;
-          padding: 30px 20px;
+          line-height: 14px;
+          padding: 28px 20px;
           transition: all 0.15s;
           -webkit-transition: all 0.15s;
           -moz-transition: all 0.15s;
@@ -124,7 +124,7 @@ body {
         }
       }
       .nav-search {
-        padding: 19px 0;
+        padding: 17px 0;
         &:hover {
           .header-nav-search--icon {
             text-shadow: 0 0 10px $green;
@@ -459,25 +459,39 @@ input.floating-input {
   a {
     color: $green;
   }
-  .nav li {
-    a {
-      color: $off-white;
-      text-shadow: none;
-      text-transform: uppercase;
-      font-size: 12px;
-      padding: 0 17px;
-      &:hover {
-        color: $green;
+  .nav {
+    margin-bottom: 12px;
+    li {
+      a {
+        color: $off-white;
+        text-shadow: none;
+        text-transform: uppercase;
+        font-size: 12px;
+        line-height: 12px;
+        padding: 0 17px;
+        &:hover {
+          color: $green;
+        }
+      } 
+      &:first-child a {
+        padding-left: 0;
       }
-    } 
-    &:first-child a {
-      padding-left: 0;
     }
   }
+  .footer-newsletter--wrapper {
+    width: auto;
+    margin: 0;
+  }
   .footer-newsletter--container {
+    form {
+      margin: 0;
+    }
     label {
       text-transform: uppercase;
       margin-bottom: 15px;
+      line-height: 12px;
+      font-weight: bold;
+      font-size: 12px;
     }
     .footer-subscribe--input--container {
       background-color: white;
@@ -487,8 +501,10 @@ input.floating-input {
         border: none;
         box-shadow: none;
         font-size: 12px;
-        margin-left: 10px;
-
+        padding-left: 10px;
+        &:focus {
+          outline: none;
+        }
       }
       .footer-subscibe--btn {
         text-transform: uppercase;
