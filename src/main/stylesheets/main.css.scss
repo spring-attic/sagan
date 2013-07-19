@@ -11,7 +11,7 @@ $slate: #44474C;
 $mauve: #665A6B;
 $denim: #8395A1;
 $header-bg: #34302d;
-
+$secondary-font-family: 'Montserrat', sans-serif;
 
 
 
@@ -106,6 +106,7 @@ body {
         }
         a {
           color: $off-white;
+          font-family: $secondary-font-family;
           text-transform: uppercase;
           text-shadow: none;
           font-size: 14px;
@@ -209,8 +210,8 @@ body {
 
 .right-pane-widget--container {
   border: 1px solid #ccc;
-  border-top: 4px solid $header-bg;
-  margin: 0 0 40px 0;
+  box-shadow: 0 -4px 0 $header-bg;
+  margin: 4px 0 40px 0;
   li {
     display: block;
     padding: 12px 20px;

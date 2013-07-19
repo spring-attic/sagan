@@ -87,6 +87,7 @@ body {
 }
 .header--navbar .navbar-inner .nav .navbar-link a {
   color: #eeeeee;
+  font-family: "Montserrat", sans-serif;
   text-transform: uppercase;
   text-shadow: none;
   font-size: 14px;
@@ -184,8 +185,8 @@ body {
 
 .right-pane-widget--container {
   border: 1px solid #ccc;
-  border-top: 4px solid #34302d;
-  margin: 0 0 40px 0;
+  box-shadow: 0 -4px 0 #34302d;
+  margin: 4px 0 40px 0;
 }
 .right-pane-widget--container li {
   display: block;
