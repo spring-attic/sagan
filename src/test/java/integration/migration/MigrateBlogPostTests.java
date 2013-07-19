@@ -49,7 +49,7 @@ public class MigrateBlogPostTests {
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 		author = new MemberProfile();
-		author.setMemberId("someguy");
+		author.setMemberId("johndoe");
 		teamRepository.save(author);
 	}
 
@@ -60,6 +60,7 @@ public class MigrateBlogPostTests {
 		migrateBlogPost.param("content", "sample post content");
 		migrateBlogPost.param("category", "ENGINEERING");
 		migrateBlogPost.param("publishAt", "2000-01-01 00:00");
+		migrateBlogPost.param("authorMemberId", author.getMemberId());
 
 		mockMvc.perform(migrateBlogPost).andExpect(status().isOk());
 
@@ -67,6 +68,7 @@ public class MigrateBlogPostTests {
 
 		assertThat(post.getRawContent(), is("sample post content"));
 		assertThat(post.getCategory(), is(PostCategory.ENGINEERING));
+		assertThat(post.getAuthor().getMemberId(), is(author.getMemberId()));
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String publishAt = dateFormat.format(post.getPublishAt());

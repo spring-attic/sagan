@@ -38,7 +38,7 @@ public class MigrationController {
 	public void migrateBlogPost(HttpServletResponse response, PostForm postForm) {
 		Post post = blogService.getPost(postForm.getTitle(), postForm.getPublishAt());
 		if (post == null) {
-			blogService.addPost(postForm, "someguy");
+			blogService.addPost(postForm, postForm.getAuthorMemberId());
 		} else {
 			blogService.updatePost(post, postForm);
 		}
