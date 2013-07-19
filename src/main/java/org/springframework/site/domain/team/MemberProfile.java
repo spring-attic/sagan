@@ -49,6 +49,9 @@ public class MemberProfile {
 	@Type(type="text")
 	private String videoEmbeds;
 
+	@Column
+	private boolean hidden;
+
 	public String getName() {
 		return name;
 	}
@@ -183,5 +186,13 @@ public class MemberProfile {
 
 	public void setVideoEmbeds(String videoEmbeds) {
 		this.videoEmbeds = videoEmbeds;
+	}
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
 	}
 }

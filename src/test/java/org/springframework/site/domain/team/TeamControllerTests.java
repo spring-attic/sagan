@@ -35,12 +35,12 @@ public class TeamControllerTests {
 	public void setUp() throws Exception {
 		this.teamController = new TeamController(this.teamRepository, this.blogService,
 				new PostViewFactory(new DateService()));
-		List<MemberProfile> all = new ArrayList<MemberProfile>();
+		List<MemberProfile> members = new ArrayList<>();
 
-		all.add(MemberProfileBuilder.profile().name("Norman").geoLocation(10, 5).memberId("normy").build());
-		all.add(MemberProfileBuilder.profile().name("Patrick").geoLocation(-5, 15).memberId("pat").build());
+		members.add(MemberProfileBuilder.profile().name("Norman").geoLocation(10, 5).memberId("normy").build());
+		members.add(MemberProfileBuilder.profile().name("Patrick").geoLocation(-5, 15).memberId("pat").build());
 
-		given(this.teamRepository.findAll()).willReturn(all);
+		given(this.teamRepository.findByHidden(false)).willReturn(members);
 	}
 
 	@Test

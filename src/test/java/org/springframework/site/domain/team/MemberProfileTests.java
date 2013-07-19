@@ -108,4 +108,10 @@ public class MemberProfileTests {
 		nick.setLanyrdUsername("");
 		assertThat(nick.getLanyrdLink(), is(nullValue()));
 	}
+
+	@Test
+	public void isNotHiddenByDefault() {
+		MemberProfile nick = new MemberProfile();
+		assertThat(nick.isHidden(), is(false));
+	}
 }

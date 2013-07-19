@@ -27,8 +27,9 @@ public class MigrationController {
 
 	@RequestMapping(value = "/migration/profile", method = POST)
 	public void migrateTeamMember(HttpServletResponse response, MemberProfile profile) {
-		MemberProfile memberProfile = teamService.fetchMemberProfile(profile.getMemberId());
-		if (memberProfile == null) {
+		MemberProfile existingProfile = teamService.fetchMemberProfile(profile.getMemberId());
+		if (existingProfile == null) {
+			profile.setHidden(true);
 			teamService.saveMemberProfile(profile);
 		}
 		response.setContentLength(0);

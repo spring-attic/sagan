@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
@@ -54,10 +55,11 @@ public class MigrateMemberProfileTests {
 
 		MemberProfile profile = teamRepository.findByMemberId("migrate_someguy");
 
-		assertEquals("migrate_someguy", profile.getMemberId());
-		assertEquals("Some_ Guy_", profile.getName());
-		assertEquals("migrate_someguy", profile.getGithubUsername());
-		assertEquals("someguy@example.com", profile.getGravatarEmail());
+		assertThat(profile.getMemberId(), is("migrate_someguy"));
+		assertThat(profile.getName(), is("Some_ Guy_"));
+		assertThat(profile.getGithubUsername(), is("migrate_someguy"));
+		assertThat(profile.getGravatarEmail(), is("someguy@example.com"));
+		assertThat(profile.isHidden(), is(true));
 	}
 
 	@Test
