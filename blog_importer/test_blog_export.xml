@@ -37,6 +37,7 @@
 
 	<wp:author><wp:author_id>1</wp:author_id><wp:author_login>sample</wp:author_login><wp:author_email>sample@springsource.com</wp:author_email><wp:author_display_name><![CDATA[Mr Sample]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Sample]]></wp:author_last_name></wp:author>
 	<wp:author><wp:author_id>3</wp:author_id><wp:author_login>test</wp:author_login><wp:author_email>test@vmware.com</wp:author_email><wp:author_display_name><![CDATA[Mr Test]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Test]]></wp:author_last_name></wp:author>
+	<wp:author><wp:author_id>5</wp:author_id><wp:author_login>dude</wp:author_login><wp:author_email>dude@vmware.com</wp:author_email><wp:author_display_name><![CDATA[Mr Dude]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Dude]]></wp:author_last_name></wp:author>
 
 	<wp:category><wp:term_id>78</wp:term_id><wp:category_nicename>amqp</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[AMQP]]></wp:cat_name></wp:category>
 	<wp:category><wp:term_id>95</wp:term_id><wp:category_nicename>android</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Android]]></wp:cat_name></wp:category>
@@ -417,118 +418,7 @@ So, there you have it. It isn’t very flashy and is probably very similar to so
 		<dc:creator>sample</dc:creator>
 		<guid isPermaLink="false">http://blog.interface21.com/main/2006/04/09/another-reason-to-love-spring-20-interceptor-combining/</guid>
 		<description></description>
-		<content:encoded><![CDATA[Recently I was working on a project that had a Swing client communicating via RMI to a service layer. The service layer was marked with transactions and everything seemed to work fine. However everytime we'd get an exception at the Hibernate DAO layer, Spring would turn the exception into a runtime exception and it would get propagated all the way up the stack and across the RMI connection as a <span style="font-family: courier">RemoteException</span>. Whenever the exception was deserialized there would be an exception on the client (separate from the <span style="font-family: courier">RemoteException</span>.The decision was taken to simply introduce an aspect. Any exception that subclassed <span style="font-family: courier">ServiceAccessException</span> would be let through to the client while anything else would be converted to a <span style="font-family: courier">FilteredServiceAccessException</span> (a subclass of <span style="font-family: courier">ServiceAccessException</span>) and then be thrown. This led to some loss in content, so we made sure to log the original exception on the server where it could be useful and let the client show a generic dialog so the user knew generally what had happened.
-
-Now this was a pretty good plan and seemed on track to work until we tried to implement it. We were using the magic way of autoproxying any bean that had <span style="font-family: courier">@Transactional</span> on it to get our transactional proxies. We could have updated the definition of that autoproxying to make sure that the advice for this exception filtering was added (think <a style="font-family: courier" href="http://static.springframework.org/spring/docs/2.0-m3/api/org/springframework/transaction/interceptor/TransactionProxyFactoryBean.html#setPreInterceptors(java.lang.Object[])">setPreInterceptor</a> in <a style="font-family: courier" href="http://static.springframework.org/spring/docs/2.0-m3/api/org/springframework/transaction/interceptor/TransactionProxyFactoryBean.html">TransactionProxyFactoryBean</a>) but the the autoproxying was catching more than just the service layer.
-
-So where did that leave us? We could either A) explicitly declare each use of the <span style="font-family: courier">TransactionProxyFactoryBean</span>, B) make two different sets of autoproxying and have them be mutually exclusive for one another, or C) ignore the requirement for now and hope something magical happens. Since the product was still six months away from consumers and I try to follow the principal of the '<a href="http://codebetter.com/blogs/jeremy.miller/archive/2006/01/18/136648.aspx">last responsible moment</a>' introduced to me by Jeremy Miller I decided to table the issue with choice A being my backup plan (better to have no magic than twice as much magic).
-
-Lo and behold, Spring 2.0 solved my problem. I cannot for the life of me find where I read it, but starting in one of the milestones of 2.0, when a bean is proxied the proxy factory can now detect that the bean already has a proxy and just add the intended interceptor as another interceptor (if you know where it was leave the link in the comments please). This means that I could just use the new magic (<span style="font-family:courier"><tx:annotation-driven></span>) and simply add an aspect with the proper pointcut that I wanted and I wouldn't have to worry about the transaction proxy and the AOP proxy getting crossed up. Not quite sure what this is all about? How about an example. First an interface and implementation.
-
-[code lang="java"]
-package interceptorcombiningexample;
-
-import org.springframework.transaction.annotation.Transactional;
-
-@Transactional
-public interface ExampleTarget {
-
-	void exampleMethod();
-
-}
-[/code]
-
-[code lang="java"]
-package interceptorcombiningexample;
-
-public class DefaultExampleTarget implements ExampleTarget {
-
-	public void exampleMethod() {
-	}
-}
-[/code]
-
-Notice that the interface is marked <span style="font-family: courier">@Transactional</span>. We'll use that to get some magic autoproxying later on. Next we'll take a look at the bean definitions.
-
-[code lang="XML"]
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/aop 
-       http://www.springframework.org/schema/aop/spring-aop.xsd
-       http://www.springframework.org/schema/tx
-       http://www.springframework.org/schema/tx/spring-tx.xsd">
-
-	<tx:annotation-driven />
-
-	<aop:config>
-		<aop:aspect id="exampleAspect" ref="exampleAdvice">
-			<aop:before method="exampleAdvice"
-				pointcut="execution(* interceptorcombiningexample.ExampleTarget.exampleMethod())" />
-		</aop:aspect>
-	</aop:config>
-
-	<bean id="exampleAdvice"
-		class="interceptorcombiningexample.ExampleAdvice" />
-
-	<bean id="exampleTarget"
-		class="interceptorcombiningexample.DefaultExampleTarget" />
-
-	<bean id="transactionManager"
-		class="interceptorcombiningexample.DummyTransactionManager" />
-
-</beans>
-[/code]
-
-You'll notice that we set up annotation driven transactions which will automatically build a proxy around our <span style="font-family: courier">DefaultExampleTarget</span>. In addition, we define another aspect that should need to proxy the same <span style="font-family: courier">DefaultExampleTarget</span> bean. Finally lets take a look at our executable class.
-
-[code lang="java"]
-package interceptorcombiningexample;
-
-import org.springframework.aop.Advisor;
-import org.springframework.aop.framework.Advised;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-public class InterceptorCombiningExample {
-
-	public static void main(String[] args) {
-		ApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"classpath:interceptorcombiningexample/applicationContext.xml");
-
-		ExampleTarget target = (ExampleTarget) ctx.getBean("exampleTarget");
-		if (target instanceof Advised) {
-			Advised advised = (Advised) target;
-			System.out
-					.println("Advisor count: " + advised.getAdvisors().length);
-			for (Advisor advisor : advised.getAdvisors()) {
-				System.out.println("Advisor type: "
-						+ advisor.getAdvice().getClass().getName());
-			}
-		}
-	}
-
-}
-[/code]
-
-This class takes advantage of a nice little feature of Spring's proxy mechanism. Any Spring created proxy can be cast to the <a style="font-family: courier" href="http://static.springframework.org/spring/docs/2.0-m3/api/org/springframework/aop/framework/Advised.html">Advised</a> interface. This interface will give you access to all of the interceptors in a proxy. When we go ahead and run this class the output shows:
-
-[code]
-Advisor count: 3
-Advisor type: org.springframework.aop.interceptor.ExposeInvocationInterceptor
-Advisor type: org.springframework.transaction.interceptor.TransactionInterceptor
-Advisor type: org.springframework.aop.aspectj.AspectJMethodBeforeAdvice
-[/code]
-
-From this we can see that not only was the <a style="font-family: courier" href="http://static.springframework.org/spring/docs/2.0-m3/api/org/springframework/transaction/interceptor/TransactionInterceptor.html">TransactionInterceptor</a> contained in the proxy, but also the <a style="font-family: courier" href="http://static.springframework.org/spring/docs/2.0-m3/api/org/springframework/aop/aspectj/AspectJMethodBeforeAdvice.html">AspectJMethodBeforeAdvice</a>.
-
-It's important to know that this shouldn't affect any implementations that already exist that attempt to do the same thing. This should just make life easier for all those who've been waiting for the 'last responsible moment' to solve this problem. :)
-
-P.S. As in the last post, I've included an <a id="p8" href="http://blog.springframework.com/benh/wp-content/uploads/2006/04/InterceptorCombiningExample.zip">archive of the project</a> from this example so that you can see the rest of the code if you need it.]]></content:encoded>
+		<content:encoded><![CDATA[Interceptor Combining is out of this world!]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>22</wp:post_id>
 		<wp:post_date>2006-04-09 15:41:19</wp:post_date>
