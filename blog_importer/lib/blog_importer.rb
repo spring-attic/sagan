@@ -23,13 +23,18 @@ class BlogImporter
   end
 
   def import
+    puts "\n\nImporting #{@filename}\n---------\n "
+    puts "\nLoading authors: "
     import_authors
+    puts "\n\nLoading posts: "
     import_posts
+    puts "\n\nImport complete.\n"
   end
 
   def import_authors
     authors = xml_doc.xpath("//wp:author")
     authors.each do |author|
+      print_progress
       data = {
           memberId: author.xpath('wp:author_login').text,
           githubUsername: author.xpath('wp:author_login').text,
@@ -41,7 +46,6 @@ class BlogImporter
   end
 
   def import_posts
-    puts "Importing #{@filename} "
     post_elements = xml_doc.xpath("//item[wp:status/text()='publish'][wp:post_type/text()='post']")
     post_elements.each do |element|
       print_progress
