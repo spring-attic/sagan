@@ -50,6 +50,10 @@ public class BlogService {
 		return post;
 	}
 
+	public Post getPost(String title, Date publishAt) {
+		return repository.findByTitleAndPublishAt(title, publishAt);
+	}
+
 	public Post getPublishedPost(Long postId) {
 		Post post = this.repository.findByIdAndDraftFalseAndPublishAtBefore(postId,
 				this.dateService.now());
