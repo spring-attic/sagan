@@ -30,9 +30,10 @@ $header-bg: #34302d;
 .blog-preview--container {
   margin: 0 0 40px 0;
   padding: 0 0 40px 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ffffff;
   &:last-child {
     margin: 0;
+    border-color: #cccccc;
   }
   .blog-preview--title {
     font-size: 24px;
@@ -113,7 +114,7 @@ $header-bg: #34302d;
     display: inline-block;
     width: 36px;
     height: 36px;
-    margin: 0 4%;
+    margin: 0 3.5%;
     &.twitter {
       background-position: -1px -143px;
       &:hover {

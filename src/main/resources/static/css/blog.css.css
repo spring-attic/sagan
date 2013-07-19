@@ -9,10 +9,11 @@
 .blog-preview--container {
   margin: 0 0 40px 0;
   padding: 0 0 40px 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ffffff;
 }
 .blog-preview--container:last-child {
   margin: 0;
+  border-color: #cccccc;
 }
 .blog-preview--container .blog-preview--title {
   font-size: 24px;
@@ -87,7 +88,7 @@
   display: inline-block;
   width: 36px;
   height: 36px;
-  margin: 0 4%;
+  margin: 0 3.5%;
 }
 .social-btn--container .social-btn.twitter {
   background-position: -1px -143px;
