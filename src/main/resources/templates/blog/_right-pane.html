@@ -5,7 +5,7 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
   <div layout:fragment="right-pane">
-    <ul class="blog-category--container">
+    <ul class="right-pane-widget--container">
       <li app:blog-category-link="'All Posts'">
         <a th:href="@{/blog}">All Posts</a>
         <a th:href="@{/blog.atom}" class="pull-right"><i class="icon-rss"></i></a>
@@ -19,15 +19,12 @@
         <a th:href="@{'/blog/category/'+${category.urlSlug}}+'.atom'" class="pull-right"><i class="icon-rss"></i></a>
       </li>
     </ul>
-    <div style="text-align:center; margin-bottom: -20px;">
-      THESE BUTTONS ARE NOT LIVE
-    </div>
     <ul class="social-btn--container">
-      <li class="social-btn twitter"></li>
-      <li class="social-btn googleplus"></li>
-      <li class="social-btn linkedin"></li>
-      <li class="social-btn facebook"></li>
-      <li class="social-btn youtube"></li>
+      <a href="http://twitter.com/SpringSource" class="social-btn twitter"></a>
+      <a href="https://plus.google.com/u/0/b/109970428231307622681/109970428231307622681" class="social-btn googleplus"></a>
+      <a href="http://www.linkedin.com/groups/Spring-Users-46964" class="social-btn linkedin"></a>
+      <a href="http://www.facebook.com/groups/10463298884/" class="social-btn facebook"></a>
+      <a href="http://www.youtube.com/user/SpringSourceDev" class="social-btn youtube"></a>
     </ul>
     <div class="promo-material--container">
       <div class="promo-material">NOT REAL</div>

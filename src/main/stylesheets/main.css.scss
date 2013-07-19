@@ -53,12 +53,6 @@ body {
   line-height: 13px;
 }
 
-.span4.right-pane {
-  width: 26.623932%;
-  margin-left: 7.564103%;
-}
-
-
 .header--navbar {
   border-top: 4px solid $green;
   margin: 0;
@@ -213,56 +207,30 @@ body {
   }
 }
 
-.footer {
-  background-color: $header-bg;
-  color: $off-white;
-  padding: 30px 0;
-  a {
-    color: $green;
-  }
-  .nav li {
+.right-pane-widget--container {
+  border: 1px solid #ccc;
+  border-top: 4px solid $header-bg;
+  margin: 0 0 40px 0;
+  li {
+    display: block;
+    padding: 12px 20px;
+    border-top: 1px solid white;
+    font-size: 16px;
+    line-height: 16px;
     a {
-      color: $off-white;
-      text-shadow: none;
+      font-size: 14px;
       text-transform: uppercase;
-      font-size: 12px;
-      padding: 0 17px;
-      &:hover {
-        color: $green;
-      }
-    } 
-    &:first-child a {
-      padding-left: 0;
+      color: #888;
     }
-  }
-  .footer-newsletter--container {
-    label {
-      text-transform: uppercase;
-      margin-bottom: 15px;
+    & [class^=icon-] {
+      font-size: 16px;
     }
-    .footer-subscribe--input--container {
-      background-color: white;
-      border: 1px solid #f1f1f1;
-      .footer-subscribe--input {
-        background: transparent;
-        border: none;
-        box-shadow: none;
-        font-size: 12px;
-        margin-left: 10px;
-
-      }
-      .footer-subscibe--btn {
-        text-transform: uppercase;
-        background-color: $green;
-        background-image: none;
-        border-radius: 0;
-        border: none;
-        box-shadow: none;
-        color: $off-white;
-        text-shadow: none;
-        font-size: 12px;
-        padding: 9px 16px;
-      }
+    &:first-child {
+      border-bottom: none;
+    }
+    &.active a {
+      font-weight: bold;
+      color: $header-bg;
     }
   }
 }
@@ -280,13 +248,7 @@ body {
 }
 
 .body--container {
-	padding: 60px 0;
-	&.with-filter {
-		padding-top: 30px;
-		.filter--container {
-			margin-bottom: 30px;
-		}
-	}
+	margin-top: 100px;
 }
 
 .row--container {
@@ -487,5 +449,59 @@ input.floating-input {
 
 .btn--full-width {
   display: block;
+}
+
+.footer {
+  background-color: $header-bg;
+  color: $off-white;
+  padding: 30px 0;
+  a {
+    color: $green;
+  }
+  .nav li {
+    a {
+      color: $off-white;
+      text-shadow: none;
+      text-transform: uppercase;
+      font-size: 12px;
+      padding: 0 17px;
+      &:hover {
+        color: $green;
+      }
+    } 
+    &:first-child a {
+      padding-left: 0;
+    }
+  }
+  .footer-newsletter--container {
+    label {
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+    .footer-subscribe--input--container {
+      background-color: white;
+      border: 1px solid #f1f1f1;
+      .footer-subscribe--input {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        font-size: 12px;
+        margin-left: 10px;
+
+      }
+      .footer-subscibe--btn {
+        text-transform: uppercase;
+        background-color: $green;
+        background-image: none;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        color: $off-white;
+        text-shadow: none;
+        font-size: 12px;
+        padding: 9px 16px;
+      }
+    }
+  }
 }
 

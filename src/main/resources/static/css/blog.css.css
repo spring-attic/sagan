@@ -1,6 +1,3 @@
-.blog--wrapper {
-  margin: 100px 0;
-}
 .blog--wrapper a {
   color: #333;
 }
@@ -41,12 +38,19 @@
 .blog-preview--container .blog-preview--post {
   font-size: 16px;
   line-height: 24px;
-  margin: 20px 0 0;
+  margin: 20px 0 30px;
 }
 .blog-preview--container .blog-preview--post a {
   color: #8cc63f;
 }
 .blog-preview--container .blog-preview--post a:hover {
+  text-decoration: underline;
+}
+.blog-preview--container .blog-preview--readmore {
+  color: #8cc63f;
+  text-transform: uppercase;
+}
+.blog-preview--container .blog-preview--readmore:hover {
   text-decoration: underline;
 }
 
@@ -71,33 +75,6 @@
 }
 .blog-pagination ul li a:hover {
   background-color: transparent;
-}
-
-.blog-category--container {
-  border: 1px solid #ddd;
-  margin: 0 0 40px 0;
-}
-.blog-category--container li {
-  display: block;
-  padding: 12px 20px;
-  border-top: 1px solid white;
-  font-size: 16px;
-  line-height: 16px;
-}
-.blog-category--container li [class^=icon-] {
-  color: #ccc;
-}
-.blog-category--container li:first-child {
-  border-top: 2px solid #000;
-  margin: -1px 20px 0;
-  padding: 13px 0 12px;
-}
-.blog-category--container li:last-child {
-  border-bottom: none;
-}
-.blog-category--container li.active {
-  font-weight: bold;
-  font-size: 1.2em;
 }
 
 .social-btn--container {

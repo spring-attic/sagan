@@ -37,10 +37,10 @@
 							<div th:utext="${post.renderedSummary}">
 								This has been an interesting week.
 							</div>
-							<a th:href="@{${post.path}}" th:if="${post.showReadMore()}">
-								Read more...
-							</a>
 						</div>
+						<a class="blog-preview--readmore"th:href="@{${post.path}}" th:if="${post.showReadMore()}">
+							Read more...
+						</a>
 					</div>
 				</div>
 				<div id='pagination_control' th:if="${paginationInfo.isVisible()}" class="pagination blog-pagination">
