@@ -11,7 +11,8 @@ $mauve: #665A6B;
 $denim: #8395A1;
 $base-font-family: 'Varela Round', sans-serif;
 $secondary-font-family: 'Montserrat', sans-serif;
-$header-bg: #34302d;
+$black-brown: #34302d;
+$link-green: #5fa134;
 
 
 
@@ -19,10 +20,10 @@ $header-bg: #34302d;
 
 .blog--wrapper {
   a {
-    color: #333;
+    color: $black-brown;
     &:hover {
       text-decoration: none;
-      color: $lime;
+      color: $link-green;
     }
   }
 }
@@ -61,14 +62,14 @@ $header-bg: #34302d;
     line-height: 24px;
     margin: 20px 0 30px;
     a {
-      color: $lime;
+      color: $link-green;
       &:hover {
         text-decoration: underline;
       }
     }
   }
   .blog-preview--readmore {
-    color: $lime;
+    color: $link-green;
     text-transform: uppercase;
     &:hover {
       text-decoration: underline;

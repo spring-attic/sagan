@@ -2,32 +2,28 @@ body, h1, h2, h3, p, input {
   margin: 0;
   font-weight: 400;
   font-family: "Varela Round", sans-serif;
+  color: #34302d;
 }
 
 h1 {
-  font-size: 30px;
-  font-weight: 600;
-  color: #44474c;
-  line-height: 39px;
+  font-size: 24px;
+  line-height: 30px;
   font-family: "Montserrat", sans-serif;
 }
 
 h2 {
   font-size: 18px;
-  font-weight: 600;
-  line-height: 30px;
-  color: #3a5056;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 18px;
   font-family: "Montserrat", sans-serif;
 }
 
-h3, .popover-title {
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 27px;
+h3 {
+  font-size: 18px;
 }
 
-p, .list-link {
-  font-size: 14px;
-  line-height: 21px;
-  color: #665A6B;
+p {
+  font-size: 15px;
+  line-height: 24px;
 }

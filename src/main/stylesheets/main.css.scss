@@ -10,8 +10,9 @@ $navy: #3A5056;
 $slate: #44474C;
 $mauve: #665A6B;
 $denim: #8395A1;
-$header-bg: #34302d;
+$black-brown: #34302d;
 $secondary-font-family: 'Montserrat', sans-serif;
+$link-green: #5fa134;
 
 
 
@@ -58,7 +59,7 @@ body {
   margin: 0;
   .navbar-inner {
     background-image: none;
-    background-color: $header-bg;
+    background-color: $black-brown;
     border: none;
     box-shadow: none;
     position: relative;
@@ -210,7 +211,7 @@ body {
 
 .right-pane-widget--container {
   border: 1px solid #ccc;
-  box-shadow: 0 -4px 0 $header-bg;
+  box-shadow: 0 -4px 0 $black-brown;
   margin: 4px 0 40px 0;
   li {
     display: block;
@@ -231,7 +232,7 @@ body {
     }
     &.active a {
       font-weight: bold;
-      color: $header-bg;
+      color: $black-brown;
     }
   }
 }
@@ -452,8 +453,23 @@ input.floating-input {
   display: block;
 }
 
+
+// GENERAL CONTENT STYLES
+
+.content--title {
+  display: inline-block;
+  border-top: 3px solid $green;
+  font-size: 12px;
+  line-height: 12px;
+  text-transform: uppercase;
+  padding-top: 8px;
+  position: absolute;
+  margin-top: -30px;
+  font-family: $secondary-font-family;
+}
+
 .footer {
-  background-color: $header-bg;
+  background-color: $black-brown;
   color: $off-white;
   padding: 30px 0;
   a {

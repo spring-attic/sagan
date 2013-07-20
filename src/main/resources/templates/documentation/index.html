@@ -5,12 +5,10 @@
 	<title>SpringFramework - Documentation</title>
 </head>
 <body>
-<h1 layout:fragment="header">Spring Documentation</h1>
-<div layout:fragment="overview">Spring Documentation is Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-
-<div layout:fragment="content" class="container">
-	<ul class="row">
-		<li th:each="item : ${projects}" th:id="${item.id}" class="span3">
+<div layout:fragment="header-container"></div>
+<div layout:fragment="content" class="container-fluid">
+	<div class="row-fluid">
+		<div th:each="item : ${projects}" th:id="${item.id}" class="span3">
             <p th:text="${item.name}">Spring Framework</p>
             <a th:href="${item.githubUrl}">Github</a>
             <div class="js-spring-popover" data-title="Reference Docs" data-placement="bottom" th:if="${item.referenceUrl}">
@@ -27,8 +25,8 @@
                     </li>
                 </ul>
             </div>
-        </li>
-	</ul>
+        </div>
+	</div>
 </div>
 </body>
 </html>

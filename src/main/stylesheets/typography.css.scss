@@ -2,38 +2,46 @@ $base-font-family: 'Varela Round', sans-serif;
 $secondary-font-family: 'Montserrat', sans-serif;
 $slate: #44474C;
 $navy: #3A5056;
+$black-brown: #34302d;
+$link-green: #5fa134;
 
 body, h1, h2, h3, p, input {
   margin: 0;
   font-weight: 400;
   font-family: $base-font-family;
+  color: $black-brown;
 }
 
-
 h1 {
-	font-size: 30px;
-  font-weight: 600;
-  color: $slate;
-  line-height: 39px;
+	font-size: 24px;
+  line-height: 30px;
   font-family: $secondary-font-family;
 }
 
 h2 {
 	font-size: 18px;
-  font-weight: 600;
-  line-height: 30px;
-  color: $navy;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 18px;
   font-family: $secondary-font-family;
 }
+h3 {
+  font-size: 18px;
+}
 
-h3, .popover-title {
+p {
   font-size: 15px;
-  font-weight: 600;
-  line-height: 27px;
+  line-height: 24px;
 }
-p, .list-link {
-  font-size: 14px;
-  line-height: 21px;
-  color: #665A6B;
-}
+
+// h3, .popover-title {
+//   font-size: 15px;
+//   font-weight: 600;
+//   line-height: 27px;
+// }
+// p, .list-link {
+//   font-size: 14px;
+//   line-height: 21px;
+//   color: #665A6B;
+// }
 

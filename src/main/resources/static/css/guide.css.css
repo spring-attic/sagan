@@ -10,24 +10,6 @@
   text-decoration: none;
 }
 
-.gs-guide-import {
-  display: none;
-}
-
-.copy-button {
-  background-color: #cccccc;
-  margin-bottom: 10px;
-}
-.copy-button.snippet {
-  float: right;
-}
-.copy-button.zeroclipboard-is-hover {
-  background-color: #eeeeee;
-}
-.copy-button.zeroclipboard-is-active {
-  background-color: #aaaaaa;
-}
-
 .clone-url {
   padding: 10px 0;
 }
@@ -39,6 +21,87 @@
   margin-top: 25px;
 }
 
+.content--container {
+  margin-bottom: 100px;
+}
+.content--container h1 {
+  margin-bottom: 50px;
+}
+.content--container a {
+  color: #5fa134;
+}
+.content--container p, .content--container pre {
+  margin-bottom: 18px;
+  border-radius: 0;
+}
+.content--container p code {
+  color: #305CB5;
+  font-size: 14px;
+  padding: 2px 6px;
+}
+.content--container ul {
+  margin-bottom: 30px;
+}
+.content--container ul li {
+  padding: 5px 0;
+}
+.content--container ul li code {
+  color: #305CB5;
+  font-size: 14px;
+  padding: 2px 6px;
+}
+.content--container blockquote {
+  padding: 0 0 0 10px;
+  border-left: 5px solid #DDD;
+}
+
+.content-right-pane--container .right-pane--title {
+  margin: 15px 20px;
+}
+.content-right-pane--container .btn-group {
+  margin: 0 20px;
+}
+.content-right-pane--container .btn-group .btn {
+  font-family: "Varela Round", sans-serif;
+  background: #ffffff;
+  background: -moz-linear-gradient(top, white 0%, #eeeeee 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #eeeeee));
+  background: -webkit-linear-gradient(top, white 0%, #eeeeee 100%);
+  background: -o-linear-gradient(top, white 0%, #eeeeee 100%);
+  background: -ms-linear-gradient(top, white 0%, #eeeeee 100%);
+  background: linear-gradient(to bottom, white 0%, #eeeeee 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 );
+  border: 1px solid #dddddd;
+  box-shadow: none;
+  padding: 18px;
+  font-size: 16px;
+  line-height: 16px;
+}
+.content-right-pane--container .btn-group .btn.active {
+  background: #fff;
+}
+
+.copy-button {
+  background-color: #cccccc;
+  margin: 1px 1px 10px 0;
+  padding: 20px;
+  background-image: url("../img/iconsprite.png");
+  background-repeat: no-repeat;
+  background-position: 9px -75px;
+  width: 20px;
+  height: 22px;
+  border: none;
+  background-color: #34302d;
+}
+.copy-button.snippet {
+  float: right;
+}
+
 a.ci-status {
   float: right;
+  margin-top: -27px;
+}
+
+.gs-guide-import {
+  display: none;
 }

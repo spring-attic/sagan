@@ -1,50 +1,55 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorator="layout">
-<head>
-	<title>SpringFramework - Getting Started Guide</title>
-</head>
-<body>
-<div layout:fragment="content" class="container">
-    <div class="row">
-	    <article class="span8" th:utext="${guide.content}">a guide</article>
-	    <aside id='sidebar' class="span4">
+<html   
+  xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+  <head>
+  	<title>SpringFramework - Getting Started Guide</title>
+  </head>
+  <body>
+    <div layout:fragment="header-container"></div>
+    <div layout:fragment="content" class="container-fluid">
+      <div class="row-fluid">
+        <div class="span8">
+          <div class="content--title">
+            Getting Started
+          </div>
+          <article class="content--container" th:utext="${guide.content}">a guide</article>
+        </div>
+
+
+        <aside id='sidebar' class="span4 content-right-pane--container">
+          <a th:href="${guide.ciLatestUrl}" class="ci-status">
+            <img src="https://drone.io/github.com/springframework-meta/gs-rest-service/status.png" th:src="${guide.ciStatusImageUrl}"/>
+          </a>
+          <div class="right-pane-widget--container">
             <div class="github-actions">
-
-                <h3>Get the code
-                    <a th:href="${guide.ciLatestUrl}" class="ci-status">
-                        <img src="https://drone.io/github.com/springframework-meta/gs-rest-service/status.png" th:src="${guide.ciStatusImageUrl}"/>
-                    </a>
-                </h3>
-
-                <div class="btn-group">
-                    <button class="btn active" data-protocol="https">HTTPS</button>
-                    <button class="btn" data-protocol="ssh">SSH</button>
-                    <button class="btn" data-protocol="subversion">Subversion</button>
-                </div>
-
-                <div class="clone-url https">
-                    <input type="text" id="clone-url-https" value="https://github.com/springframework-meta/gs-rest-service.git" th:value="${guide.gitRepoHttpsUrl}" readonly="readonly"/>
-                    <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoHttpsUrl}" data-toggle="tooltip">Copy</button>
-                </div>
-
-                <div class="clone-url ssh hide">
-                    <input type="text" id="clone-url-ssh" th:value="${guide.gitRepoSshUrl}" readonly="readonly"/>
-                    <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoSshUrl}" data-toggle="tooltip">Copy</button>
-                </div>
-
-                <div class="clone-url subversion hide">
-                    <input type="text" id="clone-url-subversion" th:value="${guide.gitRepoSubversionUrl}" readonly="readonly"/>
-                    <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoSubversionUrl}" data-toggle="tooltip">Copy</button>
-                </div>
-
-                <a class="github_download" th:href='${guide.zipUrl}'>Download ZIP</a>
-                <a class="gs-guide-import" th:href="${guide.githubHttpsUrl}">Import into STS</a>
+              <h2 class="right-pane--title">Get the Code</h2>
+              <div class="btn-group">
+                <button class="btn active" data-protocol="https">HTTPS</button>
+                <button class="btn" data-protocol="ssh">SSH</button>
+                <button class="btn" data-protocol="subversion">Subversion</button>
+              </div>
+              <div class="clone-url https">
+                <input type="text" id="clone-url-https" value="https://github.com/springframework-meta/gs-rest-service.git" th:value="${guide.gitRepoHttpsUrl}" readonly="readonly"/>
+                <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoHttpsUrl}" data-toggle="tooltip"></button>
+              </div>
+              <div class="clone-url ssh hide">
+                <input type="text" id="clone-url-ssh" th:value="${guide.gitRepoSshUrl}" readonly="readonly"/>
+                <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoSshUrl}" data-toggle="tooltip"></button>
+              </div>
+              <div class="clone-url subversion hide">
+                <input type="text" id="clone-url-subversion" th:value="${guide.gitRepoSubversionUrl}" readonly="readonly"/>
+                <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoSubversionUrl}" data-toggle="tooltip"></button>
+              </div>
+              <a class="github_download" th:href='${guide.zipUrl}'>Download ZIP</a>
+              <a class="gs-guide-import" th:href="${guide.githubHttpsUrl}">Import into STS</a>
             </div>
-
+          </div>
+          <div class="right-pane-widget--container">
             <div class='related_resources' th:utext="${guide.sidebar}">Sidebar content</div>
+          </div>
         </aside>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

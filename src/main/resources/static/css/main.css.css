@@ -417,6 +417,18 @@ input.floating-input:focus {
   display: block;
 }
 
+.content--title {
+  display: inline-block;
+  border-top: 3px solid #6db33f;
+  font-size: 12px;
+  line-height: 12px;
+  text-transform: uppercase;
+  padding-top: 8px;
+  position: absolute;
+  margin-top: -30px;
+  font-family: "Montserrat", sans-serif;
+}
+
 .footer {
   background-color: #34302d;
   color: #eeeeee;

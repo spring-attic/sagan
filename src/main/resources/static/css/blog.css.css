@@ -1,9 +1,9 @@
 .blog--wrapper a {
-  color: #333;
+  color: #34302d;
 }
 .blog--wrapper a:hover {
   text-decoration: none;
-  color: #8cc63f;
+  color: #5fa134;
 }
 
 .blog-preview--container {
@@ -42,13 +42,13 @@
   margin: 20px 0 30px;
 }
 .blog-preview--container .blog-preview--post a {
-  color: #8cc63f;
+  color: #5fa134;
 }
 .blog-preview--container .blog-preview--post a:hover {
   text-decoration: underline;
 }
 .blog-preview--container .blog-preview--readmore {
-  color: #8cc63f;
+  color: #5fa134;
   text-transform: uppercase;
 }
 .blog-preview--container .blog-preview--readmore:hover {
