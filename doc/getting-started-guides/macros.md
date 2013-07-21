@@ -69,7 +69,7 @@ In a project directory of your choosing, create the following subdirectory struc
 In a project directory of your choosing, create the following subdirectory structure; for example, with the following command on Mac or Linux:
 
 ```sh
-$ mkdir -p src/main/java/org/hello
+mkdir -p src/main/java/org/hello
 ```
 
     └── src
@@ -121,7 +121,7 @@ Build and run the client
 With an attached device or emulator running, invoke the code and see the results of the REST request:
 
 ```sh
-$ mvn clean package android:deploy android:run
+mvn clean package android:deploy android:run
 ```
 
 The command builds the Android app and runs it in the emulator or attached device.
