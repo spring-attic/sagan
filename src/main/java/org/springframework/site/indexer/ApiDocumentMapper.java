@@ -16,7 +16,7 @@ public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 	public SearchEntry map(Document document) {
 		if (document.baseUri().endsWith("allclasses-frame.html")) return null;
 
-		String text = document.outerHtml();
+		String text = document.text();
 		int start = text.indexOf(START_OF_CLASS_DATA) + START_OF_CLASS_DATA.length();
 		int end = text.indexOf(END_OF_CLASS_DATA);
 		String apiContent;
