@@ -8,19 +8,27 @@ import java.util.Date;
 
 public class SearchQueryBuilder {
 
-	private static final String matchAllQuery =
+	private static final String emptyQuery =
 			"  \"query\": {\n" +
 					"    \"bool\": {\n" +
-					"      \"must\": [{\n" +
+					"      \"should\": [{\n" +
 					"        \"match_all\": {}\n" +
 					"      }]\n" +
 					"    }\n" +
 					"  }";
 
+	private static final String fullQuery =
+			"  \"query\": {\n" +
+					"    \"bool\": {\n" +
+					"      \"should\": [\n" +
+					"        { \"text\": { \"title\": \"%s\" }},\n" +
+					"        { \"text\": { \"rawContent\": \"%s\" }}\n" +
+					"      ]\n" +
+					"    }\n" +
+					"  }";
+
 	private static final String rawQueryFilters =
 			"\"filter\": {\n" +
-					"  \"and\": {\n" +
-					"    \"filters\": [{\n" +
 					"      \"range\": {\n" +
 					"        \"publishAt\": {\n" +
 					"          \"from\": \"\",\n" +
@@ -29,46 +37,26 @@ public class SearchQueryBuilder {
 					"          \"include_upper\": true\n" +
 					"        }\n" +
 					"      }\n" +
-					"    }, {\n" +
-					"      \"or\": {\n" +
-					"        \"filters\": [{\n" +
-					"          \"query\": {\n" +
-					"            \"match\": {\n" +
-					"              \"title\": {\n" +
-					"                \"query\": \"%s\",\n" +
-					"                \"type\": \"phrase\"\n" +
-					"              }\n" +
-					"            }\n" +
-					"          }\n" +
-					"        }, {\n" +
-					"          \"query\": {\n" +
-					"            \"match\": {\n" +
-					"              \"rawContent\": {\n" +
-					"                \"query\": \"%s\",\n" +
-					"                \"type\": \"phrase\"\n" +
-					"              }\n" +
-					"            }\n" +
-					"          }\n" +
-					"        }]\n" +
-					"      }\n" +
-					"    }]\n" +
-					"  }\n" +
-					"}\n";
+					"    }\n";
 
 	SearchQueryBuilder() {
 	}
 
 	Search.Builder forEmptyQuery(Pageable pageable) {
-		return new Search.Builder("{" + matchAllQuery + "," + buildQueryPagination(pageable) + "}");
+		return new Search.Builder("{" + emptyQuery + "," + buildQueryPagination(pageable) + "}");
 	}
 
-	Search.Builder forQuery(String query, Pageable pageable) {
-		return new Search.Builder("{" + matchAllQuery + "," + buildQueryFilters(new Date(), query) + "," + buildQueryPagination(pageable) + "}");
+	Search.Builder forQuery(String queryTerm, Pageable pageable) {
+		return new Search.Builder("{" + buildFullQuery(queryTerm) + "," + buildQueryFilters(new Date()) + "," + buildQueryPagination(pageable) + "}");
 	}
 
-	private String buildQueryFilters(Date toDate, String query) {
+	private String buildFullQuery(String queryTerm) {
+		return String.format(fullQuery, queryTerm, queryTerm);
+	}
+
+	private String buildQueryFilters(Date toDate) {
 		String formattedDate = ISODateTimeFormat.dateTimeNoMillis().print(toDate.getTime());
-		return String.format(rawQueryFilters, formattedDate, query, query);
+		return String.format(rawQueryFilters, formattedDate);
 	}
 
 	private String buildQueryPagination(Pageable pageable) {

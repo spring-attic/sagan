@@ -20,7 +20,7 @@ public class ApiDocumentProcessorTests {
 
 		ApiDocumentMapper apiDocumentProcessor = new ApiDocumentMapper();
 		SearchEntry searchEntry = apiDocumentProcessor.map(document);
-		assertThat(searchEntry.getRawContent(), equalTo("<h2>SomeClass</h2>"));
+		assertThat(searchEntry.getRawContent(), equalTo("SomeClass"));
 	}
 
 	@Test
@@ -30,6 +30,6 @@ public class ApiDocumentProcessorTests {
 
 		ApiDocumentMapper apiDocumentProcessor = new ApiDocumentMapper();
 		SearchEntry searchEntry = apiDocumentProcessor.map(document);
-		assertThat(searchEntry.getRawContent(), equalTo(document.outerHtml()));
+		assertThat(searchEntry.getRawContent(), equalTo(document.text()));
 	}
 }

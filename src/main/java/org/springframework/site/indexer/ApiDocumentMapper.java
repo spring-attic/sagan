@@ -1,7 +1,11 @@
 package org.springframework.site.indexer;
 
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Comment;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchEntryMapper;
@@ -10,12 +14,13 @@ import java.util.Date;
 
 public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 
-	public static final String START_OF_CLASS_DATA = "<!-- ======== START OF CLASS DATA ======== -->";
-	public static final String END_OF_CLASS_DATA = "<!-- ========= END OF CLASS DATA ========= -->";
+	public static final String START_OF_CLASS_DATA = " ======== START OF CLASS DATA ======== ";
+	public static final String END_OF_CLASS_DATA = " ========= END OF CLASS DATA ========= ";
 
 	public SearchEntry map(Document document) {
 		if (document.baseUri().endsWith("allclasses-frame.html")) return null;
 
+		markBoundaries(document);
 		String text = document.text();
 		int start = text.indexOf(START_OF_CLASS_DATA) + START_OF_CLASS_DATA.length();
 		int end = text.indexOf(END_OF_CLASS_DATA);
@@ -41,4 +46,19 @@ public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 		entry.setPath(document.baseUri());
 		return entry;
 	}
+
+	private void markBoundaries(Document document) {
+		for(Element e : document.getAllElements()){
+			for(Node node: e.childNodes()){
+				if(node instanceof Comment){
+					String commentText = ((Comment) node).getData();
+					if (commentText.equals(START_OF_CLASS_DATA) || commentText.equals(END_OF_CLASS_DATA)) {
+						node.replaceWith(new TextNode(commentText, document.baseUri()));
+					}
+				}
+			}
+		}
+	}
+
+
 }
