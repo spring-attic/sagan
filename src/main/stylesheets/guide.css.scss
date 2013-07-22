@@ -62,7 +62,6 @@ $link-green: #5fa134;
   }
   h3 {
     border-top: 1px solid #ddd;
-    border-bottom: 1px solid white;
     padding: 0px 6.2%;
     font-family: $secondary-font-family;
     font-size: 16px;
@@ -71,6 +70,7 @@ $link-green: #5fa134;
   ul {
     margin: 0;
     li {
+      line-height: 21px;
       &:last-child {
         padding-bottom: 28px;
       }
@@ -84,21 +84,17 @@ $link-green: #5fa134;
     display: block;
     .btn {
       font-family: $base-font-family;
-      background: #ffffff;
-      background: -moz-linear-gradient(top,  #ffffff 0%, #eeeeee 100%);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eeeeee)); 
-      background: -webkit-linear-gradient(top,  #ffffff 0%,#eeeeee 100%); 
-      background: -o-linear-gradient(top,  #ffffff 0%,#eeeeee 100%); 
-      background: -ms-linear-gradient(top,  #ffffff 0%,#eeeeee 100%); 
-      background: linear-gradient(to bottom,  #ffffff 0%,#eeeeee 100%); 
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 ); 
-      border: 1px solid #ccc;
-      box-shadow: none;
       padding: 18px 6.4%;
       font-size: 16px;
       line-height: 16px;
+      border: 1px solid #ddd;
+      box-shadow: none;
       &.active {
         background: #fff;
+        box-shadow: none;
+      }
+      &:active {
+        box-shadow: inset 0 1px 3px darken(#eee, 15%);
       }
     }
   }
@@ -136,6 +132,18 @@ $link-green: #5fa134;
     font-family: $secondary-font-family;
     font-size: 14px;
     line-height: 14px;
+    transition: border-color 0.25s;
+    -webkit-transition: border-color 0.25s;
+    -moz-transition: border-color 0.25s;
+    -o-transition: border-color 0.25s;
+    -ms-transition: border-color 0.25s;
+    &:hover {
+      text-decoration: none;
+      border-color: $black-brown;
+    }
+    &:active {
+      box-shadow: inset 0 3px 6px darken($black-brown, 15%);
+    }
   } 
 }
 

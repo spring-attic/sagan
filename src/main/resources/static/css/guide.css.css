@@ -42,7 +42,6 @@
 }
 .content-right-pane--container h3 {
   border-top: 1px solid #ddd;
-  border-bottom: 1px solid white;
   padding: 0px 6.2%;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
@@ -50,6 +49,9 @@
 }
 .content-right-pane--container ul {
   margin: 0;
+}
+.content-right-pane--container ul li {
+  line-height: 21px;
 }
 .content-right-pane--container ul li:last-child {
   padding-bottom: 28px;
@@ -63,22 +65,18 @@
 }
 .content-right-pane--container .btn-group .btn {
   font-family: "Varela Round", sans-serif;
-  background: #ffffff;
-  background: -moz-linear-gradient(top, white 0%, #eeeeee 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #eeeeee));
-  background: -webkit-linear-gradient(top, white 0%, #eeeeee 100%);
-  background: -o-linear-gradient(top, white 0%, #eeeeee 100%);
-  background: -ms-linear-gradient(top, white 0%, #eeeeee 100%);
-  background: linear-gradient(to bottom, white 0%, #eeeeee 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 );
-  border: 1px solid #ccc;
-  box-shadow: none;
   padding: 18px 6.4%;
   font-size: 16px;
   line-height: 16px;
+  border: 1px solid #ddd;
+  box-shadow: none;
 }
 .content-right-pane--container .btn-group .btn.active {
   background: #fff;
+  box-shadow: none;
+}
+.content-right-pane--container .btn-group .btn:active {
+  box-shadow: inset 0 1px 3px #c8c8c8;
 }
 .content-right-pane--container .clone-url {
   border: 1px solid #ccc;
@@ -114,6 +112,18 @@
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   line-height: 14px;
+  transition: border-color 0.25s;
+  -webkit-transition: border-color 0.25s;
+  -moz-transition: border-color 0.25s;
+  -o-transition: border-color 0.25s;
+  -ms-transition: border-color 0.25s;
+}
+.content-right-pane--container .github_download:hover {
+  text-decoration: none;
+  border-color: #34302d;
+}
+.content-right-pane--container .github_download:active {
+  box-shadow: inset 0 3px 6px #0b0a0a;
 }
 
 .copy-button {
