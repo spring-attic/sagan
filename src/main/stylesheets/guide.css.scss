@@ -15,29 +15,6 @@ $secondary-font-family: 'Montserrat', sans-serif;
 $base-font-family: 'Varela Round', sans-serif;
 $link-green: #5fa134;
 
-.github_download {
-    padding: 10px 20px 10px 50px;
-    color: black;
-    border-bottom: 1px solid black;
-    background: url(/img/download_repo.png) no-repeat 13px 8px, #ccc;
-    &:hover {
-      background: url(/img/download_repo.png) no-repeat 13px 8px, #ddd;
-      color: black;
-      text-decoration: none;
-  }
-} 
-
-
-.clone-url {
-  padding: 10px 0;
-  input[type="text"] {
-    cursor: default;
-  }
-}
-
-.related_resources {
-  margin-top: 25px;
-}
 
 .content--container {
   margin-bottom: 100px;
@@ -75,11 +52,36 @@ $link-green: #5fa134;
 }
 
 .content-right-pane--container {
-  .right-pane--title {
-    margin: 15px 20px;
+  h2 {
+    margin: 15px 6.2%;
+  }
+  p {
+    font-size: 14px;
+    line-height: 21px;
+    margin: 15px 6.2%;
+  }
+  h3 {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid white;
+    padding: 0px 6.2%;
+    font-family: $secondary-font-family;
+    font-size: 16px;
+    font-family: 700;
+  }
+  ul {
+    margin: 0;
+    li {
+      &:last-child {
+        padding-bottom: 28px;
+      }
+      &:first-child {
+        padding-bottom: 12px;
+      }
+    }
   }
   .btn-group {
-    margin: 0 20px;
+    margin: 0 6.2%;
+    display: block;
     .btn {
       font-family: $base-font-family;
       background: #ffffff;
@@ -90,9 +92,9 @@ $link-green: #5fa134;
       background: -ms-linear-gradient(top,  #ffffff 0%,#eeeeee 100%); 
       background: linear-gradient(to bottom,  #ffffff 0%,#eeeeee 100%); 
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 ); 
-      border: 1px solid #dddddd;
+      border: 1px solid #ccc;
       box-shadow: none;
-      padding: 18px;
+      padding: 18px 6.4%;
       font-size: 16px;
       line-height: 16px;
       &.active {
@@ -100,6 +102,41 @@ $link-green: #5fa134;
       }
     }
   }
+  .clone-url {
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    margin: 15px 6.2%;
+    input {
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      margin: 0;
+      padding: 14px 0 14px 14px;
+      &:focus {
+        outline: none;
+      }
+    }
+    button {
+      padding: 24px;
+      margin: 0;
+      float: right;
+      background-position: 13px -71px;
+    }
+  }
+  .github_download {
+    display: block;
+    text-align: center;
+    color: #f1f1f1;
+    border: 2px solid #6db341;
+    background-color: $black-brown;
+    margin: 15px 6.2%;
+    padding: 21px 0;
+    text-transform: uppercase;
+    font-family: $secondary-font-family;
+    font-size: 14px;
+    line-height: 14px;
+  } 
 }
 
 .copy-button {

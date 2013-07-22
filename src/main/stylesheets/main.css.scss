@@ -215,24 +215,31 @@ body {
   margin: 4px 0 40px 0;
   li {
     display: block;
-    padding: 12px 20px;
+    padding: 12px 6.2%;
+    line-height: 14px;
     border-top: 1px solid white;
-    font-size: 16px;
-    line-height: 16px;
-    a {
-      font-size: 14px;
-      text-transform: uppercase;
-      color: #888;
-    }
     & [class^=icon-] {
       font-size: 16px;
+    }
+    a {
+      font-size: 14px;
+      line-height: 14px;
+      color: $link-green;
     }
     &:first-child {
       border-bottom: none;
     }
-    &.active a {
-      font-weight: bold;
-      color: $black-brown;
+  }
+  &.secondary-nav {
+    li {
+      a {
+        text-transform: uppercase;
+        color: #888;
+      }
+      &.active a {
+        font-weight: bold;
+        color: $black-brown;
+      }
     }
   }
 }

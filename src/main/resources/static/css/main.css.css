@@ -190,23 +190,26 @@ body {
 }
 .right-pane-widget--container li {
   display: block;
-  padding: 12px 20px;
+  padding: 12px 6.2%;
+  line-height: 14px;
   border-top: 1px solid white;
-  font-size: 16px;
-  line-height: 16px;
-}
-.right-pane-widget--container li a {
-  font-size: 14px;
-  text-transform: uppercase;
-  color: #888;
 }
 .right-pane-widget--container li [class^=icon-] {
   font-size: 16px;
 }
+.right-pane-widget--container li a {
+  font-size: 14px;
+  line-height: 14px;
+  color: #5fa134;
+}
 .right-pane-widget--container li:first-child {
   border-bottom: none;
 }
-.right-pane-widget--container li.active a {
+.right-pane-widget--container.secondary-nav li a {
+  text-transform: uppercase;
+  color: #888;
+}
+.right-pane-widget--container.secondary-nav li.active a {
   font-weight: bold;
   color: #34302d;
 }
