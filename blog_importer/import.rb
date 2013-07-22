@@ -6,7 +6,14 @@ require './lib/site_api'
 site = SiteApi.new "localhost:8080"
 # site = SiteApi.new "sagan.cfapps.io"
 
-ExportCleaner.new.clean("full_dirty_blog_export.xml", "clean_blog_export.xml")
+import_filename = ARGV[0]
+
+if import_filename.nil?
+  puts "Usage: 'ruby import.rb import_filename.xml'"
+  exit(1)
+end
+
+ExportCleaner.new.clean(import_filename, "clean_blog_export.xml")
 importer = BlogImporter.new "clean_blog_export.xml", site, WordpressMarkupProcessor.new
 importer.import
 

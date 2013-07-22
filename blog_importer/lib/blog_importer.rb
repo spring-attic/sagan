@@ -74,7 +74,7 @@ class BlogImporter
 
     if (@xml_doc.errors.size > 0)
       puts "WARNING: Errors in XML import file: #{@xml_doc.errors}"
-      System.exit(1)
+      exit(1)
     end
 
     @xml_doc
