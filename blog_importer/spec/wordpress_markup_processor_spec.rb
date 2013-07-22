@@ -36,6 +36,10 @@ describe WordpressMarkupProcessor do
     processor.processLine('[something]Here is some content[/something]').should == "[something]Here is some content[/something]"
   end
 
+  it "does not partially match markers" do
+    processor.processLine('No unique bean of type [javax.sql.DataSource]').should == "No unique bean of type [javax.sql.DataSource]"
+  end
+
   describe "converts the marker " do
     ["code", "source", "sourcecode"].each do |marker|
 
@@ -48,6 +52,10 @@ describe WordpressMarkupProcessor do
 
           it "'#{supported_attribute}' and converts it to lower case markdown language syntax" do
             processor.processLine("[#{marker} #{supported_attribute}=\"JAVA\"]public class Foo{}[/#{marker}]").should == "```java\npublic class Foo{}\n```"
+          end
+
+          it "'#{supported_attribute}' and converts it ignoring additional attributes" do
+            processor.processLine("[#{marker} #{supported_attribute}=\"java\" other_attribute=\"other\"]public class Foo{}[/#{marker}]").should == "```java\npublic class Foo{}\n```"
           end
 
         end

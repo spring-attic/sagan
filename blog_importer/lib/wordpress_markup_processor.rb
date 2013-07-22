@@ -14,15 +14,15 @@ class WordpressMarkupProcessor
     no_attributes_marker = /(.*)\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\]\n?/
     line = replace_codeblock_with_markdown(line, no_attributes_marker)
 
-    supported_attributes_marker = /(.*)\[(?:code|source|sourcecode) lang.*="([^"]*)"\]/
+    supported_attributes_marker = /(.*)\[(?:code|source|sourcecode) lang\w*="(\w+)"[^]]*\]/
     line = replace_codeblock_with_markdown(line, supported_attributes_marker)
 
-    unsupported_attributes_marker = /(.*)\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE|source|sourcecode)[^]]+\]\n?/
+    unsupported_attributes_marker = /(.*)\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE|source|sourcecode) [^]]+\]\n?/
     line = replace_codeblock_with_markdown(line, unsupported_attributes_marker)
 
     closing_marker = /\n?\[\/(?:source|sourcecode|groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\]/
     line.gsub(closing_marker) do |match|
-      puts "Closed marker #{match}"
+      puts "Closed marker #{match}\n\n"
       "\n```"
     end
   end
@@ -36,7 +36,7 @@ class WordpressMarkupProcessor
       else
         md_marker = "#{preceding_content}\n```#{language}\n"
       end
-      puts "Processed #{wp_marker} to #{md_marker}"
+      puts "From >>> #{wp_marker}\n To  >>> #{md_marker}"
       md_marker
     end
   end

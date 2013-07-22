@@ -39,7 +39,7 @@ class BlogImporter
       post_date = element.xpath('wp:post_date_gmt').text
       content = element.xpath('content:encoded').text
       title = element.xpath('title').text
-      puts "\nImporting: #{i + 1} - #{title}"
+      puts "Importing: #{i + 1} - #{title}"
       processed_content = ""
       content.split("\n").each do |line|
         processed_content << @wp_processor.processLine(line) << "\n"
