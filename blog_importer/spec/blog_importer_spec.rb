@@ -29,7 +29,7 @@ describe SiteApi do
   end
 
   it "saves a blog post" do
-    db.exec("INSERT INTO memberprofile (memberid, id) VALUES ('#{member_id}',130303)")
+    db.exec("INSERT INTO memberprofile (memberid, id, hidden) VALUES ('#{member_id}',130303, 't')")
 
     api = SiteApi.new('localhost:8080')
     api.save_blog_post(title: post_title,
