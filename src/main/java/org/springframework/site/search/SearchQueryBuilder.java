@@ -58,12 +58,12 @@ public class SearchQueryBuilder {
 	SearchQueryBuilder() {
 	}
 
-	Search forEmptyQuery(Pageable pageable) {
-		return new Search("{" + matchAllQuery + "," + buildQueryPagination(pageable) + "}");
+	Search.Builder forEmptyQuery(Pageable pageable) {
+		return new Search.Builder("{" + matchAllQuery + "," + buildQueryPagination(pageable) + "}");
 	}
 
-	Search forQuery(String query, Pageable pageable) {
-		return new Search("{" + matchAllQuery + "," + buildQueryFilters(new Date(), query) + "," + buildQueryPagination(pageable) + "}");
+	Search.Builder forQuery(String query, Pageable pageable) {
+		return new Search.Builder("{" + matchAllQuery + "," + buildQueryFilters(new Date(), query) + "," + buildQueryPagination(pageable) + "}");
 	}
 
 	private String buildQueryFilters(Date toDate, String query) {

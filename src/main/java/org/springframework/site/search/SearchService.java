@@ -1,7 +1,6 @@
 package org.springframework.site.search;
 
 import io.searchbox.Action;
-import io.searchbox.Parameters;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
@@ -9,10 +8,6 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
-
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class SearchService {
@@ -39,14 +37,13 @@ public class SearchService {
 	}
 
 	public void saveToIndex(SearchEntry entry) {
-		Index newIndex = new Index.Builder(entry).id(entry.getId()).index(INDEX)
-				.type("site") // TODO this should come from the 'entry'
-				.build();
+		Index.Builder newIndexBuilder = new Index.Builder(entry).id(entry.getId()).index(INDEX)
+				.type("site");
 
 		if (this.useRefresh) {
-			newIndex.addParameter(Parameters.REFRESH, true);
+			newIndexBuilder.refresh(true);
 		}
-		execute(newIndex);
+		execute(newIndexBuilder.build());
 	}
 
 	private JestResult execute(Action action) {
@@ -60,14 +57,14 @@ public class SearchService {
 	}
 
 	public Page<SearchEntry> search(String term, Pageable pageable) {
-		Search search;
+		Search.Builder searchBuilder;
 		if (term.equals("")) {
-			search = this.searchQueryBuilder.forEmptyQuery(pageable);
+			searchBuilder = this.searchQueryBuilder.forEmptyQuery(pageable);
 		} else {
-			search = this.searchQueryBuilder.forQuery(term, pageable);
+			searchBuilder = this.searchQueryBuilder.forQuery(term, pageable);
 		}
-		search.addIndex(INDEX);
-		JestResult jestResult = execute(search);
+		searchBuilder.addIndex(INDEX);
+		JestResult jestResult = execute(searchBuilder.build());
 		List<SearchEntry> searchEntries = jestResult
 				.getSourceAsObjectList(SearchEntry.class);
 		@SuppressWarnings("unchecked")
@@ -78,11 +75,12 @@ public class SearchService {
 	}
 
 	public void deleteIndex() {
-		execute(new DeleteIndex(INDEX));
+		execute(new DeleteIndex.Builder(INDEX).build());
 	}
 
 	public void createIndex() {
-		execute(new CreateIndex(INDEX));
+		execute(new CreateIndex.Builder(INDEX).build());
+
 	}
 
 	public void setUseRefresh(boolean useRefresh) {
@@ -90,7 +88,7 @@ public class SearchService {
 	}
 
 	public void removeFromIndex(SearchEntry entry) {
-		Delete delete = new Delete.Builder(entry.getId()).index(INDEX).type("site") // TODO
+		Delete delete = new Delete.Builder().id(entry.getId()).index(INDEX).type("site") // TODO
 																					// this
 																					// should
 																					// come

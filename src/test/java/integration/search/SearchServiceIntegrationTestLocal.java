@@ -3,7 +3,6 @@ package integration.search;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.ClientConfig;
-import io.searchbox.client.config.ClientConstants;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.node.NodeBuilder;
 import org.junit.Before;
@@ -35,7 +34,10 @@ import java.util.List;
 
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -92,11 +94,9 @@ public class SearchServiceIntegrationTestLocal {
 		}
 
 		private ClientConfig clientConfig() {
-			ClientConfig clientConfig = new ClientConfig();
 			LinkedHashSet<String> servers = new LinkedHashSet<String>();
 			servers.add("http://localhost:" + getElasticSearchPort());
-			clientConfig.getProperties().put(ClientConstants.SERVER_LIST, servers);
-			clientConfig.getProperties().put(ClientConstants.IS_MULTI_THREADED, true);
+			ClientConfig clientConfig = new ClientConfig.Builder(servers).multiThreaded(true).build();
 			return clientConfig;
 		}
 	}
