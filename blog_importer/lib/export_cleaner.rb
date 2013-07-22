@@ -2,6 +2,8 @@
 class ExportCleaner
 
   def clean(input_filename, output_filename)
+    puts "Cleaning #{input_filename}"
+
     cdata_stack = 0
     File.open(output_filename, 'w') do |output|
       File.open(input_filename) do |input|
@@ -21,16 +23,14 @@ class ExportCleaner
             cdata_stack -= 1
           end
 
-          # ---
-
           line = strip_control_k_and_c(line)
           output.write(line)
-          #output.write("#{line}\n")
         end
 
       end
     end
 
+    puts "Wrote clean file to #{output_filename}"
   end
 
   def inside_encoded_cdata(cdata_stack)

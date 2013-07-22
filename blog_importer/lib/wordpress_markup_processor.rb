@@ -21,7 +21,10 @@ class WordpressMarkupProcessor
     line = replace_codeblock_with_markdown(line, unsupported_attributes_marker)
 
     closing_marker = /\n?\[\/(?:source|sourcecode|groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\]/
-    line.gsub(closing_marker, "\n```")
+    line.gsub(closing_marker) do |match|
+      puts "Closed marker #{match}"
+      "\n```"
+    end
   end
 
   def replace_codeblock_with_markdown(line, regexp)
