@@ -52,7 +52,7 @@ describe BlogImporter do
   let(:importer) { BlogImporter.new(xml_filename, double_siteapi) }
 
   context "After importing test xml file" do
-    let(:xml_filename) { "test_blog_export.xml" }
+    let(:xml_filename) { "./spec/fixtures/test_blog_export.xml" }
 
     it "creates new memberProfiles for an author" do
       double_siteapi.should_receive('save_member_profile').exactly(3).times
