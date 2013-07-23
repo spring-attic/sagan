@@ -6,22 +6,22 @@ describe WordpressMarkupProcessor do
   let(:processor) { WordpressMarkupProcessor.new }
   
   it "converts inline markers to backticks" do
-    processor.process('[plain]Here is some content[/plain]').should == "\n```plain\nHere is some content\n```"
+    processor.process('[plain]Here is some content[/plain]').should == "\n```plain\nHere is some content\n```\n"
   end
 
   it "converts multiline markers to backticks" do
-    processor.process("[plain]Here is some content\n[/plain]").should == "\n```plain\nHere is some content\n\n```"
-    processor.process("[plain]\nHere is some content[/plain]").should == "\n```plain\nHere is some content\n```"
-    processor.process("[plain]\nHere is some content\n[/plain]").should == "\n```plain\nHere is some content\n\n```"
+    processor.process("[plain]Here is some content\n[/plain]").should == "\n```plain\nHere is some content\n\n```\n"
+    processor.process("[plain]\nHere is some content[/plain]").should == "\n```plain\nHere is some content\n```\n"
+    processor.process("[plain]\nHere is some content\n[/plain]").should == "\n```plain\nHere is some content\n\n```\n"
   end
 
   it "converts markers in the middle of a line to backticks" do
-    processor.process('Here is some text [plain]Here is some content[/plain]').should == "Here is some text \n```plain\nHere is some content\n```"
-    processor.process("Here is some text [plain]Here is \nsome content[/plain]").should == "Here is some text \n```plain\nHere is \nsome content\n```"
+    processor.process('Here is some text [plain]Here is some content[/plain]').should == "Here is some text \n```plain\nHere is some content\n```\n"
+    processor.process("Here is some text [plain]Here is \nsome content[/plain]").should == "Here is some text \n```plain\nHere is \nsome content\n```\n"
   end
 
   it "converts markers with content after the close" do
-    processor.process('Here is some text [plain]Here is some content[/plain] some content here').should == "Here is some text \n```plain\nHere is some content\n``` some content here"
+    processor.process('Here is some text [plain]Here is some content[/plain] some content here').should == "Here is some text \n```plain\nHere is some content\n```\n some content here"
   end
 
   it "converts more than one marker in the same content" do
@@ -31,7 +31,7 @@ Here is some text
 some content here
 [java]
 public class Foo{}
-[/java]
+[/java]Bye!
     INPUT
 
 
@@ -41,12 +41,14 @@ Here is some text
 ```plain
 Here is some content
 ```
+
 some content here
 
 ```java
 public class Foo{}
 
 ```
+Bye!
     OUTPUT
 
     processor.process(input).should == expected_output
@@ -55,7 +57,7 @@ public class Foo{}
   describe "converts the language marker" do
     ["plain", "groovy", "html", "java", "python", "scala", "xml", "coldfusion", "js", "plain", "text", "code", "CODE"].each do |language|
       it "#{language}" do
-        processor.process("[#{language}]Here is some content\n[/#{language}]").should == "\n```#{language.downcase}\nHere is some content\n\n```"
+        processor.process("[#{language}]Here is some content\n[/#{language}]").should == "\n```#{language.downcase}\nHere is some content\n\n```\n"
       end
     end
   end
@@ -75,15 +77,15 @@ public class Foo{}
 
         ["lang", "language"].each do |supported_attribute|
           it "'#{supported_attribute}' and converts it to markdown language syntax" do
-            processor.process("[#{marker} #{supported_attribute}=\"java\"]public class Foo{}[/#{marker}]").should == "\n```java\npublic class Foo{}\n```"
+            processor.process("[#{marker} #{supported_attribute}=\"java\"]public class Foo{}[/#{marker}]").should == "\n```java\npublic class Foo{}\n```\n"
           end
 
           it "'#{supported_attribute}' and converts it to lower case markdown language syntax" do
-            processor.process("[#{marker} #{supported_attribute}=\"JAVA\"]public class Foo{}[/#{marker}]").should == "\n```java\npublic class Foo{}\n```"
+            processor.process("[#{marker} #{supported_attribute}=\"JAVA\"]public class Foo{}[/#{marker}]").should == "\n```java\npublic class Foo{}\n```\n"
           end
 
           it "'#{supported_attribute}' and converts it ignoring additional attributes" do
-            processor.process("[#{marker} #{supported_attribute}=\"java\" other_attribute=\"other\"]public class Foo{}[/#{marker}]").should == "\n```java\npublic class Foo{}\n```"
+            processor.process("[#{marker} #{supported_attribute}=\"java\" other_attribute=\"other\"]public class Foo{}[/#{marker}]").should == "\n```java\npublic class Foo{}\n```\n"
           end
 
         end
@@ -92,11 +94,12 @@ public class Foo{}
   end
 
   it "converts markers with unsupported attributes to markdown syntax and ignores the attributes" do
-    processor.process('[groovy highlight="10,15"]public class Foo{}[/groovy]').should == "\n```groovy\npublic class Foo{}\n```"
-    processor.process('[source light="true"]public class Foo{}[/source]').should == "\n```source\npublic class Foo{}\n```"
+    processor.process('[groovy highlight="10,15"]public class Foo{}[/groovy]').should == "\n```groovy\npublic class Foo{}\n```\n"
+    processor.process('[source light="true"]public class Foo{}[/source]').should == "\n```source\npublic class Foo{}\n```\n"
   end
 
   it "unencodes HTML entities inside the code markers" do
+
 
     input = <<-INPUT
 &lt;Text outside does not have &quot;entities&quot; escaped&gt;
@@ -123,10 +126,20 @@ INPUT
 </filter-mapping>
 
 ```
+
 &amp; its done!
     EXPECTED
 
     processor.process(input).should == expected
+  end
+
+  describe "enclosing <pre> tags" do
+    it "directly adjacent to the marker are stripped" do
+      processor.process("Hi <pre>[source]Some code[/plain]</pre> bye").should == "Hi \n```source\nSome code\n```\n bye"
+    end
+    it "on the line preceding the marker are stripped" do
+         processor.process("Hi <pre>\n\t[source]Some code[/plain] \n</pre> bye").should == "Hi \n```source\nSome code\n```\n bye"
+    end
   end
 
 end
