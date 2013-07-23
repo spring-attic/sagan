@@ -1,0 +1,39 @@
+$off-white: #eee;
+$black-green: #3A3C2F; 
+$lime: #8CC63F;
+$leaf: #4E681E;
+$green: #6db33f;
+$bark: #AF9A85;
+$light-grey: #ECEBEB;
+$medium-grey: #DEDEDE;
+$navy: #3A5056;
+$slate: #44474C;
+$mauve: #665A6B;
+$denim: #8395A1;
+$black-brown: #34302d;
+$secondary-font-family: 'Montserrat', sans-serif;
+$base-font-family: 'Varela Round', sans-serif;
+$link-green: #5fa134;
+
+
+.documentation--header {
+  h1 {
+    margin-bottom: 30px;
+  }
+  p a {
+    color: $link-green;
+  }
+  .documentation-icon {
+    background-color: $black-brown;
+    width: 94px;
+    height: 122px;
+    margin: 0 30px 30px 0;
+  }
+}
+
+.documentation--body {
+  margin: 30px 0;
+  border: 1px solid $black-brown;
+  padding: 30px;
+  width: auto;
+}

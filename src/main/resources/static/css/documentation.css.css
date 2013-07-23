@@ -1,0 +1,19 @@
+.documentation--header h1 {
+  margin-bottom: 30px;
+}
+.documentation--header p a {
+  color: #5fa134;
+}
+.documentation--header .documentation-icon {
+  background-color: #34302d;
+  width: 94px;
+  height: 122px;
+  margin: 0 30px 30px 0;
+}
+
+.documentation--body {
+  margin: 30px 0;
+  border: 1px solid #34302d;
+  padding: 30px;
+  width: auto;
+}
