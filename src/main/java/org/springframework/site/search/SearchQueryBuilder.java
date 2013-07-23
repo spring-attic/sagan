@@ -39,15 +39,34 @@ public class SearchQueryBuilder {
 					"      }\n" +
 					"    }\n";
 
-	SearchQueryBuilder() {
-	}
+	private static final String highlight =
+			"\"highlight\": {\n" +
+					"    \"order\": \"score\",\n" +
+					"    \"require_field_match\": false,\n" +
+					"    \"fields\": {\n" +
+					"      \"rawContent\": {\n" +
+					"        \"fragment_size\": 300,\n" +
+					"        \"number_of_fragments\": 1\n" +
+					"      }\n" +
+					"    }\n" +
+					"  }";
+
+
+	SearchQueryBuilder() {}
 
 	Search.Builder forEmptyQuery(Pageable pageable) {
-		return new Search.Builder("{" + emptyQuery + "," + buildQueryPagination(pageable) + "}");
+		return new Search.Builder("{" + emptyQuery + ","
+				+ buildQueryPagination(pageable) + ","
+				+ highlight
+				+ "}");
 	}
 
 	Search.Builder forQuery(String queryTerm, Pageable pageable) {
-		return new Search.Builder("{" + buildFullQuery(queryTerm) + "," + buildQueryFilters(new Date()) + "," + buildQueryPagination(pageable) + "}");
+		return new Search.Builder("{" + buildFullQuery(queryTerm) + ","
+				+ buildQueryFilters(new Date()) + ","
+				+ buildQueryPagination(pageable) + ","
+				+ highlight
+				+  "}");
 	}
 
 	private String buildFullQuery(String queryTerm) {

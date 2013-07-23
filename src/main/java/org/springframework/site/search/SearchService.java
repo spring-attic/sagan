@@ -17,7 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class SearchService {
@@ -30,10 +29,12 @@ public class SearchService {
 	private final JestClient jestClient;
 
 	private boolean useRefresh = false;
+	private SearchResultParser searchResultParser;
 
 	@Autowired
-	public SearchService(JestClient jestClient) {
+	public SearchService(JestClient jestClient, SearchResultParser searchResultParser) {
 		this.jestClient = jestClient;
+		this.searchResultParser = searchResultParser;
 	}
 
 	public void saveToIndex(SearchEntry entry) {
@@ -56,7 +57,7 @@ public class SearchService {
 		}
 	}
 
-	public Page<SearchEntry> search(String term, Pageable pageable) {
+	public Page<SearchResult> search(String term, Pageable pageable) {
 		Search.Builder searchBuilder;
 		if (term.equals("")) {
 			searchBuilder = this.searchQueryBuilder.forEmptyQuery(pageable);
@@ -65,13 +66,10 @@ public class SearchService {
 		}
 		searchBuilder.addIndex(INDEX);
 		JestResult jestResult = execute(searchBuilder.build());
-		List<SearchEntry> searchEntries = jestResult
-				.getSourceAsObjectList(SearchEntry.class);
-		@SuppressWarnings("unchecked")
-		Map<String, Double> hits = (Map<String, Double>) jestResult.getJsonMap().get(
-				"hits");
-		int totalResults = hits.get("total").intValue();
-		return new PageImpl<SearchEntry>(searchEntries, pageable, totalResults);
+		List<SearchResult> searchResults = searchResultParser.parseResults(jestResult);
+
+		int totalResults = jestResult.getJsonObject().getAsJsonObject("hits").get("total").getAsInt();
+		return new PageImpl<>(searchResults, pageable, totalResults);
 	}
 
 	public void deleteIndex() {

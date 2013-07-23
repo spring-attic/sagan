@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchException;
+import org.springframework.site.search.SearchResultParser;
 import org.springframework.site.search.SearchService;
 
 import static org.mockito.BDDMockito.given;
@@ -17,7 +18,7 @@ import static org.mockito.Mockito.mock;
 public class SearchServiceTests {
 
 	private JestClient jestClient = mock(JestClient.class);
-	private SearchService searchService = new SearchService(this.jestClient);
+	private SearchService searchService = new SearchService(this.jestClient, new SearchResultParser());
 	private SearchEntry entry;
 
 	@SuppressWarnings("unchecked")

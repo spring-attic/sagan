@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchResult;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.site.web.search.SearchEntryBuilder;
@@ -130,10 +131,10 @@ public class SearchServiceIntegrationTestLocal {
 	}
 
 	private void assertThatSearchReturnsEntry(String query) {
-		Page<SearchEntry> searchEntries = searchService.search(query, pageable);
-		List<SearchEntry> entries = searchEntries.getContent();
+		Page<SearchResult> searchEntries = searchService.search(query, pageable);
+		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
-		assertThat(entries.get(0).getSummary(), is(equalTo(entry.getSummary())));
+		assertThat(entries.get(0).getTitle(), is(equalTo(entry.getTitle())));
 	}
 
 	@Test
@@ -165,8 +166,8 @@ public class SearchServiceIntegrationTestLocal {
 				.build();
 
 		searchService.saveToIndex(secondEntry);
-		Page<SearchEntry> searchEntries = searchService.search("content", pageable);
-		List<SearchEntry> entries = searchEntries.getContent();
+		Page<SearchResult> searchEntries = searchService.search("content", pageable);
+		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries.size(), equalTo(1));
 	}
 
@@ -184,11 +185,11 @@ public class SearchServiceIntegrationTestLocal {
 		searchService.saveToIndex(entry2);
 
 		Pageable page1 = new PageRequest(0,1);
-		Page<SearchEntry> searchEntries1 = searchService.search("content", page1);
+		Page<SearchResult> searchEntries1 = searchService.search("content", page1);
 		assertThat(searchEntries1.getContent().get(0).getId(), equalTo(entry1.getId()));
 
 		Pageable page2 = new PageRequest(1,1);
-		Page<SearchEntry> searchEntries2 = searchService.search("content", page2);
+		Page<SearchResult> searchEntries2 = searchService.search("content", page2);
 		assertThat(searchEntries2.getContent().get(0).getId(), equalTo(entry2.getId()));
 	}
 
@@ -206,7 +207,7 @@ public class SearchServiceIntegrationTestLocal {
 
 		int page = 1;
 		Pageable pageable = new PageRequest(page,10);
-		Page<SearchEntry> searchEntries = searchService.search("", pageable);
+		Page<SearchResult> searchEntries = searchService.search("", pageable);
 		assertThat(searchEntries.getContent().size(), equalTo(10));
 		assertThat(searchEntries.getTotalPages(), equalTo(3));
 		assertThat(searchEntries.getNumber(), equalTo(page));
@@ -216,7 +217,7 @@ public class SearchServiceIntegrationTestLocal {
 	public void searchThatReturnsNoResultsIsEmpty() throws ParseException {
 		indexSingleEntry();
 		Pageable page = new PageRequest(0,10);
-		Page<SearchEntry> searchEntries = searchService.search("somethingthatwillneverappearsupercalifragilousIcantspelltherest", page);
+		Page<SearchResult> searchEntries = searchService.search("somethingthatwillneverappearsupercalifragilousIcantspelltherest", page);
 		assertThat(searchEntries.getContent().size(), equalTo(0));
 		assertThat(searchEntries.getTotalPages(), equalTo(0));
 	}

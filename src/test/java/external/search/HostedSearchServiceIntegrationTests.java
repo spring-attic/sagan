@@ -16,6 +16,7 @@ import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.site.indexer.WebDocumentSearchEntryMapper;
 import org.springframework.site.indexer.configuration.IndexerConfiguration;
 import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchResult;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.web.guides.GuideSearchEntryMapper;
 import org.springframework.site.web.search.SearchEntryBuilder;
@@ -89,8 +90,8 @@ public class HostedSearchServiceIntegrationTests {
 
 		Thread.sleep(1000);
 
-		Page<SearchEntry> searchEntries = searchService.search("Integration test content", pageable);
-		List<SearchEntry> entries = searchEntries.getContent();
+		Page<SearchResult> searchEntries = searchService.search("Integration test content", pageable);
+		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		assertThat(entries.get(0).getSummary(), is(equalTo(entry.getSummary())));
 	}
@@ -112,8 +113,8 @@ public class HostedSearchServiceIntegrationTests {
 
 		Thread.sleep(1000);
 
-		Page<SearchEntry> searchEntries = searchService.search(testTitle, pageable);
-		List<SearchEntry> entries = searchEntries.getContent();
+		Page<SearchResult> searchEntries = searchService.search(testTitle, pageable);
+		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		assertThat(entries.get(0).getTitle(), is(equalTo(entry.getTitle())));
 	}
@@ -135,10 +136,10 @@ public class HostedSearchServiceIntegrationTests {
 
 		Thread.sleep(1000);
 
-		Page<SearchEntry> searchEntries = searchService.search("Somereandomtestcontentthatshouldbeunique", pageable);
-		List<SearchEntry> entries = searchEntries.getContent();
+		Page<SearchResult> searchEntries = searchService.search("Somereandomtestcontentthatshouldbeunique", pageable);
+		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
-		SearchEntry entry = entries.get(0);
+		SearchResult entry = entries.get(0);
 		assertThat(entry.getTitle(), is(equalTo(entry.getTitle())));
 	}
 

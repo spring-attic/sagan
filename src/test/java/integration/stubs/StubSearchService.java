@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchResult;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class StubSearchService extends SearchService {
 
 	@Autowired
 	public StubSearchService(JestClient jestClient) {
-		super(null);
+		super(null, null);
 	}
 
 	@Override
@@ -26,7 +27,7 @@ public class StubSearchService extends SearchService {
 	}
 
 	@Override
-	public Page<SearchEntry> search(String term, Pageable pageable) {
+	public Page<SearchResult> search(String term, Pageable pageable) {
 		return null;
 	}
 
