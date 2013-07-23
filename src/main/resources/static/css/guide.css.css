@@ -8,6 +8,20 @@
   margin-bottom: 18px;
   border-radius: 0;
 }
+.content--container h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 700;
+  margin: 30px 0 15px;
+}
+.content--container h3, .content--container h4 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 700;
+  margin: 30px 0 15px;
+}
 .content--container p code {
   color: #305CB5;
   font-size: 14px;
@@ -26,7 +40,18 @@
 }
 .content--container blockquote {
   padding: 0 0 0 10px;
-  border-left: 5px solid #dddddd;
+  border-left: 5px solid #DDD;
+}
+.content--container pre {
+  word-break: normal;
+  word-wrap: normal;
+  white-space: pre;
+  overflow-x: scroll;
+  width: 96.9%%;
+}
+.content--container .highlight .copy-button {
+  position: absolute;
+  margin-left: 633px;
 }
 
 .content-right-pane--container h2 {
@@ -38,7 +63,7 @@
   margin: 15px 6.2%;
 }
 .content-right-pane--container h3 {
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #ddd;
   padding: 0px 6.2%;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
@@ -65,7 +90,7 @@
   padding: 18px 6.4%;
   font-size: 16px;
   line-height: 16px;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   box-shadow: none;
 }
 .content-right-pane--container .btn-group .btn.active {
@@ -76,7 +101,7 @@
   box-shadow: inset 0 1px 3px #c8c8c8;
 }
 .content-right-pane--container .clone-url {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   background-color: white;
   cursor: pointer;
   margin: 15px 6.2%;

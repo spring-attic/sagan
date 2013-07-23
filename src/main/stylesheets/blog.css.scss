@@ -19,9 +19,8 @@ $link-green: #5fa134;
   border-bottom: 1px solid #ffffff;
   &.blog-preview {
     margin: 0 0 40px 0;
-    &:last-child {
-      margin: 0;
-      border-color: #cccccc;
+    .meta-data--container {
+      margin-bottom: 0;
     }
     .blog-preview--readmore {
       color: $link-green;
@@ -32,6 +31,10 @@ $link-green: #5fa134;
     }
     .blog--post p {
       margin-bottom: 0;
+    }
+    &:last-child {
+      margin: 0;
+      border-color: #cccccc;
     }
   }
   .blog--title {
@@ -48,26 +51,29 @@ $link-green: #5fa134;
       }
     }
   }
-  .meta-data--item {
-    display: inline-block;
-    margin: 2px 30px 0 0;
-    font-size: 12px;
-    line-height: 12px;
-    text-transform: uppercase;
-    .meta-data--icon {
+  .meta-data--container {
+    margin-bottom: 30px;
+    .meta-data--item {
       display: inline-block;
-      background-color: #ddd;
-      border-radius: 20px;
-      height: 20px;
-      width: 20px;
-      vertical-align: middle;
-      margin: -2px 5px 0 0;
-    }
-    a {
-      color: $black-brown;
-      &:hover {
-        text-decoration: none;
-        color: $link-green;
+      margin: 2px 30px 0 0;
+      font-size: 12px;
+      line-height: 12px;
+      text-transform: uppercase;
+      .meta-data--icon {
+        display: inline-block;
+        background-color: #ddd;
+        border-radius: 20px;
+        height: 20px;
+        width: 20px;
+        vertical-align: middle;
+        margin: -2px 5px 0 0;
+      }
+      a {
+        color: $black-brown;
+        &:hover {
+          text-decoration: none;
+          color: $link-green;
+        }
       }
     }
   }
@@ -94,7 +100,7 @@ $link-green: #5fa134;
       margin: 30px 0 15px;
     }
     p {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
     code {
       color: #305CB5;
@@ -103,7 +109,7 @@ $link-green: #5fa134;
       white-space: normal;
     }
     ul, ol {
-      margin: 15px 0 30px 25px;
+      margin: 15px 0 20px 25px;
       li {
         padding: 6px 0;
         font-size: 15px;
@@ -113,16 +119,16 @@ $link-green: #5fa134;
     img {
       display: block;
       // width: 100%;
-      margin: 30px 0;
+      margin: 20px 0;
     }
     pre {
-      margin: 30px 0;
+      margin: 20px 0;
     }
     blockquote {
       padding: 0 0 0 10px;
       border-left: 5px solid #DDD;
       p {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         font-size: 15px;
         line-height: 24px;
       }
@@ -133,9 +139,18 @@ $link-green: #5fa134;
       }
     }
     .highlight {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       pre {
         border-radius: 0;
+        word-break: normal;
+        word-wrap: normal;
+        white-space: pre;
+        overflow-x: scroll;
+        width: 96.9%%;
+      }
+      .copy-button {
+        position: absolute;
+        margin-left: 633px;
       }
     }
   }

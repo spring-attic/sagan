@@ -28,6 +28,20 @@ $link-green: #5fa134;
     border-radius: 0;
   }
 
+  h2 {
+    font-family: $secondary-font-family;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 700;
+    margin: 30px 0 15px;
+  }
+  h3, h4 {
+    font-family: $secondary-font-family;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 700;
+    margin: 30px 0 15px;
+  }
   p code {
     color: #305CB5;
     font-size: 14px;
@@ -47,6 +61,17 @@ $link-green: #5fa134;
   blockquote {
     padding: 0 0 0 10px;
     border-left: 5px solid #DDD;
+  }
+  pre {
+    word-break: normal;
+    word-wrap: normal;
+    white-space: pre;
+    overflow-x: scroll;
+    width: 96.9%%;
+  }
+  .highlight .copy-button {
+    position: absolute;
+    margin-left: 633px;
   }
 }
 
@@ -161,6 +186,10 @@ $link-green: #5fa134;
     float: right;
   }
 }
+
+
+
+
 
 a.ci-status {
   float: right;
