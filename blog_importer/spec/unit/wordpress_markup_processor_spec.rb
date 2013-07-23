@@ -4,15 +4,15 @@ require './lib/wordpress_markup_processor'
 describe WordpressMarkupProcessor do
 
   let(:processor) { WordpressMarkupProcessor.new }
-  
+
   it "converts inline markers to backticks" do
     processor.process('[plain]Here is some content[/plain]').should == "\n```plain\nHere is some content\n```\n"
   end
 
   it "converts multiline markers to backticks" do
-    processor.process("[plain]Here is some content\n[/plain]").should == "\n```plain\nHere is some content\n\n```\n"
+    processor.process("[plain]Here is some content\n[/plain]").should == "\n```plain\nHere is some content\n```\n"
     processor.process("[plain]\nHere is some content[/plain]").should == "\n```plain\nHere is some content\n```\n"
-    processor.process("[plain]\nHere is some content\n[/plain]").should == "\n```plain\nHere is some content\n\n```\n"
+    processor.process("[plain]\nHere is some content\n[/plain]").should == "\n```plain\nHere is some content\n```\n"
   end
 
   it "converts markers in the middle of a line to backticks" do
@@ -46,7 +46,6 @@ some content here
 
 ```java
 public class Foo{}
-
 ```
 Bye!
     OUTPUT
@@ -57,7 +56,7 @@ Bye!
   describe "converts the language marker" do
     ["plain", "groovy", "html", "java", "python", "scala", "xml", "coldfusion", "js", "plain", "text", "code", "CODE"].each do |language|
       it "#{language}" do
-        processor.process("[#{language}]Here is some content\n[/#{language}]").should == "\n```#{language.downcase}\nHere is some content\n\n```\n"
+        processor.process("[#{language}]Here is some content\n[/#{language}]").should == "\n```#{language.downcase}\nHere is some content\n```\n"
       end
     end
   end
@@ -112,7 +111,7 @@ Bye!
 &lt;/filter-mapping&gt;
 [/xml]
 &amp; its done!
-INPUT
+    INPUT
 
     expected = <<-EXPECTED
 &lt;Text outside does not have &quot;entities&quot; escaped&gt;
@@ -124,7 +123,6 @@ INPUT
   <dispatcher>"ERROR"</dispatcher>
   <dispatcher>REQUEST&TEST</dispatcher>
 </filter-mapping>
-
 ```
 
 &amp; its done!
@@ -138,7 +136,7 @@ INPUT
       processor.process("Hi <pre>[source]Some code[/plain]</pre> bye").should == "Hi \n```source\nSome code\n```\n bye"
     end
     it "on the line preceding the marker are stripped" do
-         processor.process("Hi <pre>\n\t[source]Some code[/plain] \n</pre> bye").should == "Hi \n```source\nSome code\n```\n bye"
+      processor.process("Hi <pre>\n\t[source]Some code[/plain] \n</pre> bye").should == "Hi \n```source\nSome code\n```\n bye"
     end
   end
 

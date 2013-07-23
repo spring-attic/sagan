@@ -14,7 +14,7 @@ class WordpressMarkupProcessor
 
   def process content
     content_marker = "(.*?)"
-    closing_marker = "\\[\\/(?:source|sourcecode|groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\\](?:\\s*?</pre>)?"
+    closing_marker = "\n?\\[\\/(?:source|sourcecode|groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\\](?:\\s*?</pre>)?"
 
     supported_attributes_marker = "(?:<pre>\\s*?)?\\[(?:code|source|sourcecode) lang\\w*=\"(\\w+)\"[^\\]]*\\]"
     supported_attributes = Regexp.new(supported_attributes_marker + content_marker + closing_marker, Regexp::MULTILINE)
