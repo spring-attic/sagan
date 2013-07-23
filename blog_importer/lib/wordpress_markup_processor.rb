@@ -11,13 +11,13 @@ class WordpressMarkupProcessor
   end
 
   def process content
-    no_attributes_marker = /(.*)\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\]\n?/
+    no_attributes_marker = /\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\]\n?/
     content = replace_codeblock_with_markdown(content, no_attributes_marker)
 
-    supported_attributes_marker = /(.*)\[(?:code|source|sourcecode) lang\w*="(\w+)"[^]]*\]/
+    supported_attributes_marker = /\[(?:code|source|sourcecode) lang\w*="(\w+)"[^]]*\]/
     content = replace_codeblock_with_markdown(content, supported_attributes_marker)
 
-    unsupported_attributes_marker = /(.*)\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE|source|sourcecode) [^]]+\]\n?/
+    unsupported_attributes_marker = /\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE|source|sourcecode) [^]]+\]\n?/
     content = replace_codeblock_with_markdown(content, unsupported_attributes_marker)
 
     closing_marker = /\n?\[\/(?:source|sourcecode|groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\]/
@@ -29,13 +29,8 @@ class WordpressMarkupProcessor
 
   def replace_codeblock_with_markdown(line, regexp)
     line.gsub(regexp) do |wp_marker|
-      preceding_content = $1.strip
-      language = $2.downcase
-      if preceding_content == ""
-        md_marker = "```#{language}\n"
-      else
-        md_marker = "#{preceding_content}\n```#{language}\n"
-      end
+      language = $1.downcase
+      md_marker = "\n```#{language}\n"
       puts "From >>> #{wp_marker}\n To  >>> #{md_marker}"
       md_marker
     end
