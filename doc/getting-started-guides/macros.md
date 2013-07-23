@@ -69,7 +69,7 @@ In a project directory of your choosing, create the following subdirectory struc
 In a project directory of your choosing, create the following subdirectory structure; for example, with the following command on Mac or Linux:
 
 ```sh
-mkdir -p src/main/java/org/hello
+$ mkdir -p src/main/java/org/hello
 ```
 
     └── src
@@ -121,7 +121,7 @@ Build and run the client
 With an attached device or emulator running, invoke the code and see the results of the REST request:
 
 ```sh
-mvn clean package android:deploy android:run
+$ mvn clean package android:deploy android:run
 ```
 
 The command builds the Android app and runs it in the emulator or attached device.
@@ -165,7 +165,9 @@ The [Spring Package maven plugin][spring-package-maven-plugin] collects all the 
 
 Now run the following to produce a single executable JAR file containing all necessary dependency classes and resources:
 
-    mvn package
+```sh
+$ mvn package
+```
 
 [spring-package-maven-plugin]: https://github.com/SpringSource/spring-zero/tree/master/spring-package-maven-plugin
 
@@ -210,7 +212,9 @@ The [Maven Shade plugin][maven-shade-plugin] extracts classes from all jars on t
 
 Now run the following to produce a single executable JAR file containing all necessary dependency classes and resources:
 
-    mvn package
+```sh
+$ mvn package
+```
 
 [maven-shade-plugin]: https://maven.apache.org/plugins/maven-shade-plugin
 
@@ -222,7 +226,8 @@ Run the ${module}
 -------------------
 Run your ${module} with `java -jar` at the command line:
 
-    java -jar target/${project_id}-0.1.0.jar
-
+```sh
+$ java -jar target/${project_id}-0.1.0.jar
+```
 
 </#macro>
