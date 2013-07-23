@@ -1,19 +1,21 @@
 package integration.blog;
 
-import integration.configuration.IntegrationTestsConfiguration;
+import integration.IntegrationTestBase;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.site.domain.blog.*;
+import org.springframework.site.domain.blog.BlogService;
+import org.springframework.site.domain.blog.Post;
+import org.springframework.site.domain.blog.PostBuilder;
+import org.springframework.site.domain.blog.PostCategory;
+import org.springframework.site.domain.blog.PostRepository;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.domain.services.MarkdownService;
 import org.springframework.site.domain.team.MemberProfile;
@@ -21,11 +23,6 @@ import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.site.web.blog.EntityNotFoundException;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,16 +31,14 @@ import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration(classes = IntegrationTestsConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
-@TransactionConfiguration(defaultRollback=true)
-@Transactional
-public class BlogService_QueryTests {
+public class BlogService_QueryTests extends IntegrationTestBase {
 
 	private static final Pageable FIRST_TEN_POSTS = PageableFactory.forLists(1);
 	private BlogService service;

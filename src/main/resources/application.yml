@@ -15,6 +15,9 @@ logging:
   config: classpath:log4j.properties
 
 spring:
+  template:
+    mode: LEGACYHTML5
+    cache: false
   jpa:
     ddl_auto: update
 
@@ -33,9 +36,6 @@ spring:
   profiles: default,site
   main:
     sources: org.springframework.site.web.configuration.ApplicationConfiguration
-  template:
-    mode: LEGACYHTML5
-    cache: false
   search:
     indexer:
       delay: 0

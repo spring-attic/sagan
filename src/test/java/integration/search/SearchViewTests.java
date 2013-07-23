@@ -1,14 +1,12 @@
 package integration.search;
 
-import integration.configuration.IntegrationTestsConfiguration;
+import integration.IntegrationTestBase;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -18,9 +16,6 @@ import org.springframework.site.search.SearchEntry;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.site.web.PaginationInfo;
 import org.springframework.site.web.search.SearchEntryBuilder;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.servlet.View;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 
@@ -39,10 +34,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration(classes = IntegrationTestsConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
-public class SearchViewTests {
+public class SearchViewTests extends IntegrationTestBase {
 
 	@Autowired
 	private ThymeleafViewResolver viewResolver;
