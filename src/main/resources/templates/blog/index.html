@@ -13,13 +13,13 @@
 		<div class="row-fluid blog--wrapper">
 			<div class="span8">
 				<div class="blog-preview--wrapper">
-					<div class="blog-preview--container" th:each="post : ${posts}">
-						<div class="blog-preview--title">
+					<div class="blog--container blog-preview" th:each="post : ${posts}">
+						<div class="blog--title">
 							<a th:href="@{${post.path}}" th:text="${post.title}">
 								This week in Spring
 							</a>
 						</div>
-						<div class="blog-preview--meta-data">
+						<div class="meta-data--container">
 							<div class="meta-data--item">
 								<i class="meta-data--icon"></i>
 								<a class='category' th:href="@{'/blog/category/'+${post.category.urlSlug}}" th:text="${post.category}">Category</a>
@@ -33,7 +33,7 @@
 								<span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
 							</div>
 						</div>
-						<div class='blog-preview--post'>
+						<div class='blog--post'>
 							<div th:utext="${post.renderedSummary}">
 								This has been an interesting week.
 							</div>
