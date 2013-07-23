@@ -81,7 +81,7 @@ public class BlogIndexTests extends IntegrationTestBase {
 				.andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertThat(html.select(".blog-preview--title a").first().text(), is(post.getTitle()));
+		assertThat(html.select(".blog--title a").first().text(), is(post.getTitle()));
 	}
 
 	@Test
@@ -141,12 +141,12 @@ public class BlogIndexTests extends IntegrationTestBase {
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
 		assertThat(numberOfBlogPosts(html), is(10));
-		assertThat(html.select(".blog-preview--container .date").first().text(), is("November 11, 2012"));
-		assertThat(html.select(".blog-preview--container .date").last().text(), is("November 2, 2012"));
+		assertThat(html.select(".blog--container .date").first().text(), is("November 11, 2012"));
+		assertThat(html.select(".blog--container .date").last().text(), is("November 2, 2012"));
 	}
 
 	private int numberOfBlogPosts(Document html) {
-		return html.select(".blog-preview--title").size();
+		return html.select(".blog--title").size();
 	}
 
 	private void createManyPostsInNovember(int numPostsToCreate) {

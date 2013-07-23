@@ -82,7 +82,7 @@ public class SearchViewTests extends IntegrationTestBase {
 		view.render(model, new MockHttpServletRequest(), response);
 
 		Document html = Jsoup.parse(response.getContentAsString());
-		Element searchInputBox = html.select("ul.results li").first();
+		Element searchInputBox = html.select("ul.search-results li").first();
 		assertThat(searchInputBox, is(notNullValue()));
 
 		Element message = html.select("#content .warning").first();
