@@ -6,8 +6,6 @@ import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
-import io.searchbox.indices.CreateIndex;
-import io.searchbox.indices.DeleteIndex;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ import java.util.List;
 @Service
 public class SearchService {
 
-	private static final String INDEX = "site";
+	public static final String INDEX = "site";
 
 	private static Log logger = LogFactory.getLog(SearchService.class);
 
@@ -47,16 +45,6 @@ public class SearchService {
 		execute(newIndexBuilder.build());
 	}
 
-	private JestResult execute(Action action) {
-		try {
-			JestResult result = this.jestClient.execute(action);
-			logger.debug(result.getJsonString());
-			return result;
-		} catch (Exception e) {
-			throw new SearchException(e);
-		}
-	}
-
 	public Page<SearchResult> search(String term, Pageable pageable) {
 		Search.Builder searchBuilder;
 		if (term.equals("")) {
@@ -71,16 +59,6 @@ public class SearchService {
 		int totalResults = jestResult.getJsonObject().getAsJsonObject("hits").get("total").getAsInt();
 		return new PageImpl<>(searchResults, pageable, totalResults);
 	}
-
-	public void deleteIndex() {
-		execute(new DeleteIndex.Builder(INDEX).build());
-	}
-
-	public void createIndex() {
-		execute(new CreateIndex.Builder(INDEX).build());
-
-	}
-
 	public void setUseRefresh(boolean useRefresh) {
 		this.useRefresh = useRefresh;
 	}
@@ -96,5 +74,15 @@ public class SearchService {
 				.build();
 
 		execute(delete);
+	}
+
+	private JestResult execute(Action action) {
+		try {
+			JestResult result = this.jestClient.execute(action);
+			logger.debug(result.getJsonString());
+			return result;
+		} catch (Exception e) {
+			throw new SearchException(e);
+		}
 	}
 }

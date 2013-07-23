@@ -1,0 +1,31 @@
+{
+    "site": {
+        "properties": {
+            "title": {
+                "type": "string",
+                "store": "yes",
+                "analyzer": "camel"
+            },
+            "rawContent": {
+                "type": "string",
+                "store": "yes",
+                "term_vector" : "with_positions_offsets",
+                "analyzer": "camel"
+            },
+            "publishAt": {
+                "type": "string",
+                "store": "yes"
+            },
+            "summary": {
+                "type": "string",
+                "store": "yes",
+                "index": "no"
+            },
+            "path": {
+                "type": "string",
+                "store": "yes",
+                "index": "no"
+            }
+        }
+    }
+}

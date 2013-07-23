@@ -46,14 +46,4 @@ public class SearchServiceTests {
 		this.searchService.removeFromIndex(this.entry);
 	}
 
-	@Test(expected = SearchException.class)
-	public void createIndexExceptionHandling() throws Exception {
-		this.searchService.createIndex();
-	}
-
-	@Test(expected = SearchException.class)
-	public void deleteIndexExceptionHandling() throws Exception {
-		this.searchService.deleteIndex();
-	}
-
 }

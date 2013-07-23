@@ -1,0 +1,4 @@
+{
+    "index.analysis.analyzer.camel.type": "pattern",
+    "index.analysis.analyzer.camel.pattern": "([^\\p{L}\\d]+)|(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)|(?<=[\\p{L}&&[^\\p{Lu}]])(?=\\p{Lu})|(?<=\\p{Lu})(?=\\p{Lu}[\\p{L}&&[^\\p{Lu}]])"
+}

@@ -32,14 +32,6 @@ public class StubSearchService extends SearchService {
 	}
 
 	@Override
-	public void deleteIndex() {
-	}
-
-	@Override
-	public void createIndex() {
-	}
-
-	@Override
 	public void setUseRefresh(boolean useRefresh) {
 	}
 

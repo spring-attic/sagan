@@ -107,12 +107,16 @@ public class SearchServiceIntegrationTestLocal {
 	@Autowired
 	private SearchService searchService;
 
+	@Autowired
+	private JestClient jestClient;
+
 	private SearchEntry entry;
 
 	@Before
 	public void setUp() throws Exception {
-		searchService.deleteIndex();
-		searchService.createIndex();
+		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(jestClient);
+		searchIndexSetup.deleteIndex();
+		searchIndexSetup.createIndex();
 	}
 
 	private void indexSingleEntry() throws ParseException {
@@ -220,6 +224,34 @@ public class SearchServiceIntegrationTestLocal {
 		Page<SearchResult> searchEntries = searchService.search("somethingthatwillneverappearsupercalifragilousIcantspelltherest", page);
 		assertThat(searchEntries.getContent().size(), equalTo(0));
 		assertThat(searchEntries.getTotalPages(), equalTo(0));
+	}
+
+	@Test
+	public void searchByCamelCaseTerms() throws ParseException {
+		entry = SearchEntryBuilder.entry()
+				.path("http://example.com")
+				.title("My Entry")
+				.rawContent("SomeCamelCaseThing is here")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.build();
+		searchService.saveToIndex(entry);
+
+		assertThatSearchReturnsEntry("Camel");
+	}
+
+	@Test
+	public void searchisCaseInsensitive() throws ParseException {
+		entry = SearchEntryBuilder.entry()
+				.path("http://example.com")
+				.title("My Entry")
+				.rawContent("SomeCamelCaseThing is here")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.build();
+		searchService.saveToIndex(entry);
+
+		assertThatSearchReturnsEntry("camel");
 	}
 
 }
