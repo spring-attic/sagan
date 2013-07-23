@@ -138,6 +138,9 @@ Bye!
     it "on the line preceding the marker are stripped" do
       processor.process("Hi <pre>\n\t[source]Some code[/plain] \n</pre> bye").should == "Hi \n```source\nSome code\n```\n bye"
     end
+    it "with attributes are stripped" do
+      processor.process("Hi <pre title='a title'>[source]Some code[/plain]</pre> bye").should == "Hi \n```source\nSome code\n```\n bye"
+    end
   end
 
 end

@@ -22,10 +22,11 @@ class BlogImporter
   def import_authors
     authors = xml_doc.xpath("//wp:author")
     authors.each do |author|
-      print_progress
+      username = author.xpath('wp:author_login').text
+      puts "Importing #{username}"
       data = {
-          memberId: author.xpath('wp:author_login').text,
-          githubUsername: author.xpath('wp:author_login').text,
+          memberId: username,
+          githubUsername: username,
           gravatarEmail: author.xpath('wp:author_email').text,
           name: author.xpath('wp:author_display_name').text
       }
@@ -39,7 +40,7 @@ class BlogImporter
       post_date = element.xpath('wp:post_date_gmt').text
       content = element.xpath('content:encoded').text
       title = element.xpath('title').text
-      puts "Importing: #{i + 1} - #{title}"
+      puts "\nImporting: #{i + 1} - #{title}"
       processed_content = @wp_processor.process(content)
 
       hash = {
@@ -56,12 +57,6 @@ class BlogImporter
     end
     true
   end
-
-  def print_progress
-    print "~"
-    $stdout.flush
-  end
-
 
   def xml_doc
     @xml_doc ||= File.open(@filename) do |f|
