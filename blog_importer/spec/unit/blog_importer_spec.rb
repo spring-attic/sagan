@@ -46,12 +46,6 @@ describe BlogImporter do
       importer.import
     end
 
-    it "processes wordpress content in blog posts" do
-      wp_processor.should_receive(:process).ordered.with("[code lang=\"java\"]")
-      wp_processor.should_receive(:process).ordered.with("package jmsexample;")
-      importer.import
-    end
-
   end
 
 end
