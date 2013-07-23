@@ -546,3 +546,10 @@ input.floating-input {
   }
 }
 
+.search-results {
+  em {
+    font-weight: bolder;
+    background: $lime;
+    font-style: normal;
+  }
+}

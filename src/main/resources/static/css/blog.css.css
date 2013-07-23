@@ -1,6 +1,6 @@
 .blog--container {
   padding: 0 0 40px 0;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 1px solid white;
 }
 .blog--container.blog-preview {
   margin: 0 0 40px 0;
@@ -105,7 +105,7 @@
 }
 .blog--container .blog--post blockquote {
   padding: 0 0 0 10px;
-  border-left: 5px solid #DDD;
+  border-left: 5px solid #dddddd;
 }
 .blog--container .blog--post blockquote p {
   margin-bottom: 30px;

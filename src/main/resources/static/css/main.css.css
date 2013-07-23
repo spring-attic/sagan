@@ -28,7 +28,7 @@ body {
 
 .code-snippet {
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   background-color: #F9F9F9;
   padding: 12px 18px;
   margin: 15px 0;
@@ -184,7 +184,7 @@ body {
 }
 
 .right-pane-widget--container {
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   box-shadow: 0 -4px 0 #34302d;
   margin: 4px 0 40px 0;
 }
@@ -396,7 +396,7 @@ input.floating-input:focus {
 
 .gh-project-url--container {
   background-color: #FFF;
-  border: 1px solid #CCC;
+  border: 1px solid #cccccc;
   height: 20px;
   padding: 4px 6px;
   border-radius: 4px;
@@ -497,4 +497,10 @@ input.floating-input:focus {
   text-shadow: none;
   font-size: 12px;
   padding: 9px 16px;
+}
+
+.search-results em {
+  font-weight: bolder;
+  background: #8cc63f;
+  font-style: normal;
 }

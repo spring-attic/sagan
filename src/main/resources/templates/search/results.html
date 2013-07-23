@@ -17,7 +17,7 @@
 				No results found for your query.
 			</div>
 
-			<ul th:if="${!results.empty}" class='results'>
+			<ul th:if="${!results.empty}" class='search-results'>
 				<li th:each="result : ${results}">
 					<a th:href="@{${result.path}}"><h2 th:text="${result.title}">This week in Spring</h2></a>
 					<div th:utext="${result.summary}" class='summary'>This has been an interesting week.</div>
