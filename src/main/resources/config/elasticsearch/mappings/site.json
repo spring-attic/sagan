@@ -4,13 +4,13 @@
             "title": {
                 "type": "string",
                 "store": "yes",
-                "analyzer": "camel"
+                "analyzer": "partial_word"
             },
             "rawContent": {
                 "type": "string",
                 "store": "yes",
                 "term_vector" : "with_positions_offsets",
-                "analyzer": "camel"
+                "analyzer": "partial_word"
             },
             "publishAt": {
                 "type": "string",

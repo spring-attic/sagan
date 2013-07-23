@@ -1,4 +1,16 @@
 {
-    "index.analysis.analyzer.camel.type": "pattern",
-    "index.analysis.analyzer.camel.pattern": "([^\\p{L}\\d]+)|(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)|(?<=[\\p{L}&&[^\\p{Lu}]])(?=\\p{Lu})|(?<=\\p{Lu})(?=\\p{Lu}[\\p{L}&&[^\\p{Lu}]])"
+    "index.analysis.tokenizer.camel.type": "pattern",
+    "index.analysis.tokenizer.camel.pattern": "([^\\p{L}\\d]+)|(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)|(?<=[\\p{L}&&[^\\p{Lu}]])(?=\\p{Lu})|(?<=\\p{Lu})(?=\\p{Lu}[\\p{L}&&[^\\p{Lu}]])",
+
+    "index.analysis.filter.name_ngrams.type": "edgeNGram",
+    "index.analysis.filter.name_ngrams.side": "front",
+    "index.analysis.filter.name_ngrams.max_gram": 20,
+    "index.analysis.filter.name_ngrams.min_gram": 2,
+
+    "index.analysis.analyzer.partial_word.type": "custom",
+    "index.analysis.analyzer.partial_word.tokenizer": "camel",
+    "index.analysis.analyzer.partial_word.filter.0": "standard",
+    "index.analysis.analyzer.partial_word.filter.1": "lowercase",
+    "index.analysis.analyzer.partial_word.filter.2": "asciifolding",
+    "index.analysis.analyzer.partial_word.filter.3": "porterStem"
 }

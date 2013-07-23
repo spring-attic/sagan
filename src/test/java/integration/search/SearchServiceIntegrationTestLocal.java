@@ -254,4 +254,18 @@ public class SearchServiceIntegrationTestLocal {
 		assertThatSearchReturnsEntry("camel");
 	}
 
+	@Test
+	public void searchMatchesPartialWords() throws ParseException {
+		entry = SearchEntryBuilder.entry()
+				.path("http://example.com")
+				.title("My Entry")
+				.rawContent("BlogExporter is here")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.build();
+		searchService.saveToIndex(entry);
+
+		assertThatSearchReturnsEntry("export");
+	}
+
 }
