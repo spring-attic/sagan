@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.site.domain.StaticPageMapper;
-import org.springframework.site.web.ApplicationDialect;
 import org.springframework.site.web.NavSection;
+import org.springframework.site.web.ViewRenderingHelper;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,9 +28,9 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	@Autowired
 	private StaticPageMapper staticPageMapper;
 
-	@Bean
-	public ApplicationDialect applicationDialect() {
-		return new ApplicationDialect();
+	@Bean(name = { "uih", "viewRenderingHelper" })
+	public ViewRenderingHelper viewRenderingHelper() {
+		return new ViewRenderingHelper();
 	}
 
 	@Bean

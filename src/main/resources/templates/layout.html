@@ -32,19 +32,19 @@
           <a class="spring-logo" th:href="@{/}" href="/"></a>
         </div>
         <ul class="nav pull-right">
-          <li app:navlink="documentation">
+          <li th:class="${beans.uih.navClass(navSection?:'','documentation')}">
             <a th:href="@{/documentation}" href="documentation/index.html">Documentation</a>
           </li>
-          <li app:navlink="guides">
+          <li th:class="${beans.uih.navClass(navSection?:'','guides')}">
             <a th:href="@{/guides}" href="guides/index.html">Guides</a>
           </li>
-          <li app:navlink="projects">
+          <li th:class="${beans.uih.navClass(navSection?:'','projects')}">
             <a th:href="@{/projects}" href="projects/index.html">Projects</a>
           </li>
-          <li app:navlink="blog">
+          <li th:class="${beans.uih.navClass(navSection?:'','blog')}">
             <a th:href="@{/blog}" href="pages/blog.html">Blog</a>
           </li>
-          <li app:navlink="forum">
+          <li th:class="${beans.uih.navClass(navSection?:'','forum')}">
             <a href="http://forum.springframework.org">Forum</a>
           </li>
 
