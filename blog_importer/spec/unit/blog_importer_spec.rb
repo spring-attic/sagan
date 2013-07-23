@@ -33,7 +33,7 @@ describe BlogImporter do
     end
 
     it "creates a post with the correct info" do
-      wp_processor.stub(:processLine).and_return("Interceptor Combining is out of this world!")
+      wp_processor.stub(:process).and_return("Interceptor Combining is out of this world!")
       expected_post = {
           title: 'Another Reason to Love Spring 2.0: Interceptor Combining',
           content: 'Interceptor Combining is out of this world!',
@@ -47,27 +47,11 @@ describe BlogImporter do
     end
 
     it "processes wordpress content in blog posts" do
-      wp_processor.should_receive('processLine').ordered.with("[code lang=\"java\"]")
-      wp_processor.should_receive('processLine').ordered.with("package jmsexample;")
+      wp_processor.should_receive(:process).ordered.with("[code lang=\"java\"]")
+      wp_processor.should_receive(:process).ordered.with("package jmsexample;")
       importer.import
     end
 
-  end
-
-  if File.exists?("full_blog_export.xml")
-    context "After importing full xml file" do
-      let(:xml_filename) { "full_blog_export.xml" }
-
-      it "creates new memberProfiles for an author" do
-        siteapi.should_receive('save_member_profile').exactly(86).times
-        importer.import
-      end
-
-      it "creates a post for every published post in the import file" do
-        siteapi.should_receive('save_blog_post').exactly(525).times
-        importer.import
-      end
-    end
   end
 
 end

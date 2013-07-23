@@ -40,9 +40,10 @@ class BlogImporter
       content = element.xpath('content:encoded').text
       title = element.xpath('title').text
       puts "Importing: #{i + 1} - #{title}"
+      #processed_content = @wp_processor.process(content)
       processed_content = ""
       content.split("\n").each do |line|
-        processed_content << @wp_processor.processLine(line) << "\n"
+        processed_content << @wp_processor.process(line) << "\n"
       end
       processed_content = processed_content[0..-2]
 

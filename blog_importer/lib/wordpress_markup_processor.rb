@@ -4,24 +4,24 @@ class WordpressMarkupProcessor
     File.open(output_filename, 'w') do |output|
       File.open(input_filename) do |input|
         input.each do |line|
-          output.write(processLine(line))
+          output.write(process(line))
         end
       end
     end
   end
 
-  def processLine line
+  def process content
     no_attributes_marker = /(.*)\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\]\n?/
-    line = replace_codeblock_with_markdown(line, no_attributes_marker)
+    content = replace_codeblock_with_markdown(content, no_attributes_marker)
 
     supported_attributes_marker = /(.*)\[(?:code|source|sourcecode) lang\w*="(\w+)"[^]]*\]/
-    line = replace_codeblock_with_markdown(line, supported_attributes_marker)
+    content = replace_codeblock_with_markdown(content, supported_attributes_marker)
 
     unsupported_attributes_marker = /(.*)\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE|source|sourcecode) [^]]+\]\n?/
-    line = replace_codeblock_with_markdown(line, unsupported_attributes_marker)
+    content = replace_codeblock_with_markdown(content, unsupported_attributes_marker)
 
     closing_marker = /\n?\[\/(?:source|sourcecode|groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\]/
-    line.gsub(closing_marker) do |match|
+    content.gsub(closing_marker) do |match|
       puts "Closed marker #{match}\n\n"
       "\n```"
     end
