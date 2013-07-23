@@ -1,3 +1,5 @@
+require 'htmlentities'
+
 class WordpressMarkupProcessor
 
   def process(input_filename, output_filename)
@@ -11,28 +13,24 @@ class WordpressMarkupProcessor
   end
 
   def process content
-    no_attributes_marker = /\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\]\n?/
-    content = replace_codeblock_with_markdown(content, no_attributes_marker)
+    content_marker = "(.*?)"
+    closing_marker = "\\[\\/(?:source|sourcecode|groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\\]"
 
-    supported_attributes_marker = /\[(?:code|source|sourcecode) lang\w*="(\w+)"[^]]*\]/
-    content = replace_codeblock_with_markdown(content, supported_attributes_marker)
+    supported_attributes_marker = "\\[(?:code|source|sourcecode) lang\\w*=\"(\\w+)\"[^]]*\\]"
+    supported_attributes = Regexp.new(supported_attributes_marker + content_marker + closing_marker, Regexp::MULTILINE)
+    content = replace_no_attributes(content, supported_attributes)
 
-    unsupported_attributes_marker = /\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE|source|sourcecode) [^]]+\]\n?/
-    content = replace_codeblock_with_markdown(content, unsupported_attributes_marker)
-
-    closing_marker = /\n?\[\/(?:source|sourcecode|groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\]/
-    content.gsub(closing_marker) do |match|
-      puts "Closed marker #{match}\n\n"
-      "\n```"
-    end
+    unsupported_attributes_marker = "\\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE|source|sourcecode)(?: [^]]+)?\\]\n?"
+    unsupported_attributes = Regexp.new(unsupported_attributes_marker + content_marker + closing_marker, Regexp::MULTILINE)
+    replace_no_attributes(content, unsupported_attributes)
   end
 
-  def replace_codeblock_with_markdown(line, regexp)
-    line.gsub(regexp) do |wp_marker|
+  def replace_no_attributes(content, regexp)
+    content.gsub(regexp) do
       language = $1.downcase
-      md_marker = "\n```#{language}\n"
-      puts "From >>> #{wp_marker}\n To  >>> #{md_marker}"
-      md_marker
+      puts "Translated #{language} marker"
+      body = HTMLEntities.new.decode($2)
+      "\n```#{language}\n" + body + "\n```"
     end
   end
 
