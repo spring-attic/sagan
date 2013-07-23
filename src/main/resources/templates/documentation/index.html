@@ -1,32 +1,48 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorator="layout">
-<head>
-	<title>SpringFramework - Documentation</title>
-</head>
-<body>
-<div layout:fragment="header-container"></div>
-<div layout:fragment="content" class="container-fluid">
-	<div class="row-fluid">
-		<div th:each="item : ${projects}" th:id="${item.id}" class="span3">
+<html   
+  xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+  <head>
+  	<title>SpringFramework - Documentation</title>
+  </head>
+  <body>
+    <div layout:fragment="header-container"></div>
+    <div layout:fragment="content" class="container-fluid">
+      <div class="row-fluid documentation--header">
+        <div clas="span12">
+          <h1>Spring Framework Documentation</h1>
+          <div class="documentation-icon pull-left"></div>
+          <p> 
+            Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec id elit non mi porta gravida at eget metus. Integer posuere erat a ante venenatis 
+            <a href="#">venenatis</a>
+            dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem 
+            <a href="#">lacinia</a>  
+            quam venenatis vestibulum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur.
+          </p>
+        </div>
+      </div>
+    	<div class="row-fluid documentation--body">
+        <div class="span12">
+      		<div th:each="item : ${projects}" th:id="${item.id}" class="span3">
             <p th:text="${item.name}">Spring Framework</p>
             <a th:href="${item.githubUrl}">Github</a>
             <div class="js-spring-popover" data-title="Reference Docs" data-placement="bottom" th:if="${item.referenceUrl}">
-                <ul>
-                    <li th:each="documentVersion : ${item.supportedReferenceDocumentVersions}">
-                        <a th:href="${documentVersion.url}" th:text="${documentVersion.versionName}">Reference</a>
-                    </li>
-                </ul>
+              <ul>
+                <li th:each="documentVersion : ${item.supportedReferenceDocumentVersions}">
+                  <a th:href="${documentVersion.url}" th:text="${documentVersion.versionName}">Reference</a>
+                </li>
+              </ul>
             </div>
             <div class="js-spring-popover" data-title="API Docs" data-placement="bottom" th:if="${item.apiUrl}">
-                <ul>
-                    <li th:each="documentVersion : ${item.supportedApiDocsDocumentVersions}">
-                        <a th:href="${documentVersion.url}" th:text="${documentVersion.versionName}">API docs</a>
-                    </li>
-                </ul>
+              <ul>
+                <li th:each="documentVersion : ${item.supportedApiDocsDocumentVersions}">
+                  <a th:href="${documentVersion.url}" th:text="${documentVersion.versionName}">API docs</a>
+                </li>
+              </ul>
             </div>
+          </div>
         </div>
-	</div>
-</div>
-</body>
+    	</div>
+    </div>
+  </body>
 </html>
