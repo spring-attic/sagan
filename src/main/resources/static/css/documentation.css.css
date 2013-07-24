@@ -13,6 +13,8 @@
   height: 122px;
   margin: 0 40px 40px 0;
   padding: 39px;
+  background-image: url("../img/iconsprite.png");
+  background-position: 37px -506px;
 }
 
 .documentation--body {
@@ -27,6 +29,8 @@
   width: 295px;
   vertical-align: top;
   margin: 0 44px 0 0;
+  position: relative;
+  z-index: 800;
 }
 .documentation--item:nth-child(3n+3) {
   margin-right: 0;
@@ -47,18 +51,25 @@
   cursor: pointer;
 }
 
-.js-item--open-dropdown .item--dropdown {
+.documentation--item .item--dropdown {
   display: none;
 }
-.js-item--open-dropdown.js-open .item--title {
+.documentation--item.js-open {
+  z-index: 801;
+}
+.documentation--item.js-open .item--title {
   color: #f1f1f1;
   background-color: #6db33f;
+  position: relative;
+  z-index: 802;
 }
-.js-item--open-dropdown.js-open .item--icon {
+.documentation--item.js-open .item--icon {
   color: #dddddd;
   background-color: #34302d;
+  position: relative;
+  z-index: 803;
 }
-.js-item--open-dropdown.js-open .item--dropdown {
+.documentation--item.js-open .item--dropdown {
   display: block;
 }
 
@@ -67,6 +78,7 @@
   background-color: #34302d;
   padding: 20px;
   width: 255px;
+  z-index: 999;
 }
 .item--dropdown .item--header {
   padding-bottom: 20px;
@@ -103,7 +115,7 @@
 }
 .item--dropdown .item--body .item--body--version {
   border-bottom: 1px solid #4a4540;
-  padding: 5px 0;
+  padding: 7px 0;
 }
 .item--dropdown .item--body .item--body--version p {
   color: #f1f1f1;

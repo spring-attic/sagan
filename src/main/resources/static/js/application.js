@@ -15,13 +15,14 @@ $(function(){
 
     //OPENS DOCUMENTATION DROPDOWN
     $(".js-item--open-dropdown").click(function() {
-      $(this).toggleClass("js-open");
+      $(this).siblings().removeClass("js-open");
+      $(this).addClass("js-open");
+      $("#scrim").addClass("js-show");
+      $("#scrim").click(function() {
+        $(".js-item--open-dropdown").removeClass("js-open");
+        $(this).removeClass("js-show");
+      });
     });
-
-
-
-
-
 
     $('.js-spring-popover').springPopover();
 

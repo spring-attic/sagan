@@ -32,6 +32,8 @@ $link-green: #5fa134;
     height: 122px;
     margin: 0 40px 40px 0;
     padding: 39px;
+    background-image: url("../img/iconsprite.png");
+    background-position: 37px -506px;
   }
 }
 
@@ -47,6 +49,8 @@ $link-green: #5fa134;
   width: 295px;
   vertical-align: top;
   margin: 0 44px 0 0;
+  position: relative;
+  z-index: 800;
   &:nth-child(3n+3) {
     margin-right: 0;
   }
@@ -70,18 +74,23 @@ $link-green: #5fa134;
 }
 
 // OPENS AND CLOSES DOCUMENTATION DROPDOWN
-.js-item--open-dropdown {
+.documentation--item {
   .item--dropdown {
     display: none;
   }
   &.js-open {
+    z-index: 801;
     .item--title {
       color: #f1f1f1;
       background-color: $green;
+      position: relative;
+      z-index: 802;
     }
     .item--icon {
       color: #dddddd;
       background-color: $black-brown;
+      position: relative;
+      z-index: 803;
     }
     .item--dropdown {
       display: block;
@@ -94,6 +103,7 @@ $link-green: #5fa134;
   background-color: $black-brown;
   padding: 20px;
   width: 255px;
+  z-index: 999;
   .item--header{
     padding-bottom: 20px;
     border-bottom: 1px solid #cccbca;
@@ -130,7 +140,7 @@ $link-green: #5fa134;
   .item--body {
     .item--body--version {
       border-bottom: 1px solid #4a4540;
-      padding: 5px 0;
+      padding: 7px 0;
       p {
         color: #f1f1f1;
         font-size: 14px;
