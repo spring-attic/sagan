@@ -15,7 +15,7 @@ echo "\nCheck the settings."
 curl http://qlmsjwfa.api.qbox.io/site/_settings?pretty=true
 
 echo "\nInstall the mapping - do once per type/mapping file."
-curl -XPUT 'http://qlmsjwfa.api.qbox.io/site/site/_mappings' -d @../src/main/resources/config/elasticsearch/mappings/site.json 
+curl -XPOST 'http://qlmsjwfa.api.qbox.io/site/site/_mapping' -d @../src/main/resources/config/elasticsearch/mappings/site.json 
 
 echo "\nCheck the mappings."
-curl http://qlmsjwfa.api.qbox.io/site/site/_mappings?pretty=true
+curl http://qlmsjwfa.api.qbox.io/site/site/_mapping?pretty=true
