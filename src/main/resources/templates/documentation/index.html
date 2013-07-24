@@ -23,22 +23,44 @@
       </div>
     	<div class="row-fluid documentation--body">
         <div class="span12">
-      		<div th:each="item : ${projects}" th:id="${item.id}" class="span3">
-            <p th:text="${item.name}">Spring Framework</p>
-            <a th:href="${item.githubUrl}">Github</a>
-            <div class="js-spring-popover" data-title="Reference Docs" data-placement="bottom" th:if="${item.referenceUrl}">
-              <ul>
-                <li th:each="documentVersion : ${item.supportedReferenceDocumentVersions}">
-                  <a th:href="${documentVersion.url}" th:text="${documentVersion.versionName}">Reference</a>
-                </li>
-              </ul>
-            </div>
-            <div class="js-spring-popover" data-title="API Docs" data-placement="bottom" th:if="${item.apiUrl}">
-              <ul>
-                <li th:each="documentVersion : ${item.supportedApiDocsDocumentVersions}">
-                  <a th:href="${documentVersion.url}" th:text="${documentVersion.versionName}">API docs</a>
-                </li>
-              </ul>
+      		<div th:each="item : ${projects}" th:id="${item.id}" class="documentation--item js-item--open-dropdown">
+            <i class="item--icon icon-reorder"></i>
+            <p class="item--title" th:text="${item.name}">Spring Framework</p>
+            <div class="item--dropdown">
+              <div class="item--header">
+                <!-- link_to project_path -->
+                <a href="#" class="item--header-link item--left-column">
+                  <i class="icon-globe"></i>
+                  Site
+                </a>
+                <a th:href="${item.githubUrl}" class="item--header-link item--right-column">
+                  <i class="icon-github"></i>
+                  Repository
+                </a>
+              </div>
+              <div class="item--body">
+                <div class="item--body-title">
+                  <div class="item--left-column">
+                    Releases
+                  </div>
+                  <div class="item--right-column">
+                    Documentation
+                  </div>
+                </div>
+                <div class="item--body">
+                  <div th:each="documentVersion,iterStat1 : ${item.supportedReferenceDocumentVersions}">
+                    <div class="item--body--version">
+                      <p th:text="${documentVersion.versionName}" class="item--left-column">Version</p>
+                      <div class="item--right-column">
+                        <a class="documentation-link reference-link" th:href="${documentVersion.url}" >Reference</a>
+                        <div class="documentation-link api-link" th:each="documentVersion,iterStat2 : ${item.supportedApiDocsDocumentVersions}" th:if="${iterStat1.count}==${iterStat2.count}">
+                          <a class="documentation-link" th:href="${documentVersion.url}">API</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

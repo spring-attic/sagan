@@ -12,6 +12,17 @@ $(function(){
       return this;
     };
 
+
+    //OPENS DOCUMENTATION DROPDOWN
+    $(".js-item--open-dropdown").click(function() {
+      $(this).toggleClass("js-open");
+    });
+
+
+
+
+
+
     $('.js-spring-popover').springPopover();
 
     //OPENS SEARCH INPUT
