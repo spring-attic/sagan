@@ -11,12 +11,14 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class MigrateMemberProfileTests extends IntegrationTestBase {
@@ -41,7 +43,8 @@ public class MigrateMemberProfileTests extends IntegrationTestBase {
 		migrateProfile.param("githubUsername", "migrate_someguy");
 		migrateProfile.param("gravatarEmail", "someguy@example.com");
 
-		mockMvc.perform(migrateProfile).andExpect(status().isOk());
+		mockMvc.perform(migrateProfile).andExpect(status().isCreated())
+				.andExpect(header().string("Location", containsString("/about/team/migrate_someguy")));
 
 		MemberProfile profile = teamRepository.findByMemberId("migrate_someguy");
 

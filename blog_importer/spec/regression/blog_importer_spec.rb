@@ -18,13 +18,14 @@ With the release of Spring 1.1 ...
 ```java
 
 public class Foo{}
-
 ```
+
 
 
 ```code
 Example Message
 ```
+
 
 One thing to note ...
 
@@ -34,8 +35,8 @@ One thing to note ...
   <dispatcher>"ERROR"</dispatcher>
   <dispatcher>REQUEST&TEST</dispatcher>
 </filter-mapping>
-
 ```
+
 
 
 ```xml
@@ -44,8 +45,8 @@ One thing to note ...
 	class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 	<property name="concurrentConsumers" value="5" />
 </bean>
-
 ```
+
 
 So, there you have it!
 INPUT

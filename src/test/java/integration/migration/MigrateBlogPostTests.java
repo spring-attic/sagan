@@ -17,9 +17,11 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.text.SimpleDateFormat;
 
+import static matchers.RegexMatcher.matches;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class MigrateBlogPostTests extends IntegrationTestBase {
@@ -53,7 +55,8 @@ public class MigrateBlogPostTests extends IntegrationTestBase {
 		migrateBlogPost.param("createdAt", "1999-01-01 00:00");
 		migrateBlogPost.param("authorMemberId", author.getMemberId());
 
-		mockMvc.perform(migrateBlogPost).andExpect(status().isOk());
+		mockMvc.perform(migrateBlogPost).andExpect(status().isCreated())
+				.andExpect(header().string("Location", matches("/blog/\\d+-a-post-title$")));
 
 		Post post = postRepository.findByTitle("a post title");
 
@@ -90,7 +93,8 @@ public class MigrateBlogPostTests extends IntegrationTestBase {
 		migrateBlogPost.param("publishAt", "2000-01-01 00:00");
 		migrateBlogPost.param("createdAt", "1999-11-21 10:00");
 
-		mockMvc.perform(migrateBlogPost).andExpect(status().isOk());
+		mockMvc.perform(migrateBlogPost).andExpect(status().isOk())
+				.andExpect(header().string("Location", matches("/blog/\\d+-a-post-title$")));
 
 		Post updatedPost = postRepository.findByTitle("a post title");
 
