@@ -1,18 +1,14 @@
+# encoding: UTF-8
+
 require 'htmlentities'
 
 class WordpressMarkupProcessor
 
-  def process(input_filename, output_filename)
-    File.open(output_filename, 'w') do |output|
-      File.open(input_filename) do |input|
-        input.each do |line|
-          output.write(process(line))
-        end
-      end
-    end
+  def process(content)
+    convert_incorrectly_encoded_characters(convert_code_blocks(content))
   end
 
-  def process content
+  def convert_code_blocks(content)
     content_marker = "(.*?)"
     closing_marker = "\n?\\[\\/(?:source|sourcecode|groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE)\\](?:\\s*?</pre>)?"
 
@@ -23,6 +19,11 @@ class WordpressMarkupProcessor
     unsupported_attributes_marker = "(?:<pre[^>]*>\\s*?)?\\[(groovy|html|java|python|scala|xml|coldfusion|js|plain|text|code|CODE|source|sourcecode)(?: [^\\]]+)?\\]\n?"
     unsupported_attributes = Regexp.new(unsupported_attributes_marker + content_marker + closing_marker, Regexp::MULTILINE)
     replace_no_attributes(content, unsupported_attributes)
+  end
+
+  def convert_incorrectly_encoded_characters(content)
+    content.gsub('â€™', '&apos;').gsub("\xc3\xa2\xc2\x80\xc2\x9c", "&ldquo;").gsub("\xc3\xa2\xc2\x80\x3f", "&rdquo;")
+      .gsub("\xC3\xA2\xC2\x80\xC2\x99", "&apos;")
   end
 
   def replace_no_attributes(content, regexp)
