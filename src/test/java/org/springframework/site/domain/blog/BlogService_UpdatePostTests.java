@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.site.domain.services.DateService;
-import org.springframework.site.domain.services.MarkdownService;
 import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
@@ -22,6 +21,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -47,9 +47,6 @@ public class BlogService_UpdatePostTests {
 	private PostRepository postRepository;
 
 	@Mock
-	private MarkdownService markdownService;
-
-	@Mock
 	private DateService dateService;
 
 	@Mock
@@ -57,6 +54,9 @@ public class BlogService_UpdatePostTests {
 
 	@Mock
 	private SearchService searchService;
+
+	@Mock
+	private BlogPostContentRenderer postContentRenderer = mock(BlogPostContentRenderer.class);
 
 	@Rule
 	public ExpectedException expected = ExpectedException.none();
@@ -68,11 +68,11 @@ public class BlogService_UpdatePostTests {
 	public void setup() {
 		given(this.dateService.now()).willReturn(this.now);
 
-		this.service = new BlogService(this.postRepository, new BlogPostContentRenderer(markdownService),
+		this.service = new BlogService(this.postRepository, postContentRenderer,
 				this.dateService, this.teamRepository, this.searchService);
-		given(this.markdownService.renderToHtml(this.content)).willReturn(
+		given(postContentRenderer.render(this.content)).willReturn(
 				RENDERED_HTML_FROM_MARKDOWN);
-		given(this.markdownService.renderToHtml(this.firstParagraph)).willReturn(
+		given(postContentRenderer.render(this.firstParagraph)).willReturn(
 				RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 
 		this.post = PostBuilder.post().id(123L).author("author_id", this.ORIGINAL_AUTHOR)
