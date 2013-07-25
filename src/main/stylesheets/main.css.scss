@@ -171,9 +171,10 @@ body {
   .search-dropdown--container {
     position: absolute;
     z-index: 998;
-    margin-top: -80px;
+    margin-top: -90px;
     background-color: rgba(255, 255, 255, 1);
     width: 100%;
+    border-bottom: 1px solid #ddd;
     transition: margin 0.5s;
     -webkit-transition: margin 0.25s;
     -moz-transition: margin 0.25s;
@@ -186,19 +187,29 @@ body {
         border: none;
         box-shadow: none;
         color: #34302D;
-        font-size: 24px;
+        font-size: 21px;
         line-height: 29px;
         height: 30px;
         padding: 25px 0;
         width: 93%;
-        font-family: $secondary-font-family;
+        &::-webkit-input-placeholder { /* WebKit browsers */
+          font-style: italic;
+        }
+        &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+          font-style: italic;
+        }
+        &::-moz-placeholder { /* Mozilla Firefox 19+ */
+          font-style: italic;
+        }
+        &:-ms-input-placeholder { /* Internet Explorer 10+ */
+          font-style: italic;
+        }
       }
       .search-form--submit {
         background-color: transparent;
         border: none;
         float: right;
         padding: 28px 16px 24px 0;
-
       }
       .icon-search {
         font-size: 22px;

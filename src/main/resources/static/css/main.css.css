@@ -148,9 +148,10 @@ body {
 .header--navbar .search-dropdown--container {
   position: absolute;
   z-index: 998;
-  margin-top: -80px;
+  margin-top: -90px;
   background-color: white;
   width: 100%;
+  border-bottom: 1px solid #ddd;
   transition: margin 0.5s;
   -webkit-transition: margin 0.25s;
   -moz-transition: margin 0.25s;
@@ -165,12 +166,27 @@ body {
   border: none;
   box-shadow: none;
   color: #34302D;
-  font-size: 24px;
+  font-size: 21px;
   line-height: 29px;
   height: 30px;
   padding: 25px 0;
   width: 93%;
-  font-family: "Montserrat", sans-serif;
+}
+.header--navbar .search-dropdown--container .form-search .search-form--form::-webkit-input-placeholder {
+  /* WebKit browsers */
+  font-style: italic;
+}
+.header--navbar .search-dropdown--container .form-search .search-form--form:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  font-style: italic;
+}
+.header--navbar .search-dropdown--container .form-search .search-form--form::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  font-style: italic;
+}
+.header--navbar .search-dropdown--container .form-search .search-form--form:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  font-style: italic;
 }
 .header--navbar .search-dropdown--container .form-search .search-form--submit {
   background-color: transparent;
