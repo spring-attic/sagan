@@ -42,4 +42,10 @@ public class StaticPageRequestMappingTests extends IntegrationTestBase {
 				.andExpect(content().string(containsString("Reference Apps")));
 	}
 
+	@Test
+	public void getRobotsFile() throws Exception {
+		this.mockMvc.perform(get("/robots.txt"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("User-agent")));
+	}
 }
