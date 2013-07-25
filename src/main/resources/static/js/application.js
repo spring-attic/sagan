@@ -12,19 +12,25 @@ $(function(){
       return this;
     };
 
-
     //OPENS DOCUMENTATION DROPDOWN
     $(".js-item--open-dropdown").click(function() {
-      $(this).siblings().removeClass("js-open");
-      $(this).addClass("js-open");
+      var documentationItem = $(this).parents(".js-documentation--item");
+      documentationItem.siblings().removeClass("js-open");
+      documentationItem.toggleClass("js-open");
       $("#scrim").addClass("js-show");
       $("#scrim").click(function() {
-        $(".js-item--open-dropdown").removeClass("js-open");
+        $(".js-documentation--item").removeClass("js-open");
         $(this).removeClass("js-show");
       });
     });
 
-    $('.js-spring-popover').springPopover();
+
+
+    $(".documentation--item.js-open").click(function() {
+      $(this).removeClass("js-open");
+    });
+
+    // $('.js-spring-popover').springPopover();
 
     //OPENS SEARCH INPUT
     $(".js-search-input-open").click(function () {

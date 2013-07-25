@@ -23,9 +23,11 @@
       </div>
     	<div class="row-fluid documentation--body">
         <div class="span12">
-      		<div th:each="item : ${projects}" th:id="${item.id}" class="documentation--item js-item--open-dropdown">
-            <i class="item--icon icon-reorder"></i>
-            <p class="item--title" th:text="${item.name}">Spring Framework</p>
+      		<div th:each="item : ${projects}" th:id="${item.id}" class="documentation--item js-documentation--item">
+            <div class="js-item--open-dropdown">
+              <i class="item--icon icon-reorder"></i>
+              <p class="item--title" th:text="${item.name}">Spring Framework</p>
+            </div>
             <div class="item--dropdown">
               <div class="item--header">
                 <!-- link_to project_path -->

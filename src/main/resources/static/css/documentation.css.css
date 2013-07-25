@@ -51,25 +51,25 @@
   cursor: pointer;
 }
 
-.documentation--item .item--dropdown {
+.js-documentation--item .item--dropdown {
   display: none;
 }
-.documentation--item.js-open {
+.js-documentation--item.js-open {
   z-index: 801;
 }
-.documentation--item.js-open .item--title {
+.js-documentation--item.js-open .item--title {
   color: #f1f1f1;
   background-color: #6db33f;
   position: relative;
   z-index: 802;
 }
-.documentation--item.js-open .item--icon {
+.js-documentation--item.js-open .item--icon {
   color: #dddddd;
   background-color: #34302d;
   position: relative;
   z-index: 803;
 }
-.documentation--item.js-open .item--dropdown {
+.js-documentation--item.js-open .item--dropdown {
   display: block;
 }
 
