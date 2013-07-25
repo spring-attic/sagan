@@ -268,4 +268,30 @@ public class SearchServiceIntegrationTestLocal {
 		assertThatSearchReturnsEntry("export");
 	}
 
+	@Test
+	public void boostsTitleMatchesOverContent() throws ParseException {
+		SearchEntry entryContent = SearchEntryBuilder.entry()
+				.path("http://example.com/content")
+				.title("a title")
+				.rawContent("application is in the content")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.build();
+
+		searchService.saveToIndex(entryContent);
+
+		SearchEntry entryTitle = SearchEntryBuilder.entry()
+				.path("http://example.com/title")
+				.title("application is in the title")
+				.rawContent("some content")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.build();
+
+		searchService.saveToIndex(entryTitle);
+
+		List<SearchResult> results = searchService.search("application", pageable).getContent();
+		assertThat(results.get(0).getId(), is(entryTitle.getId()));
+		assertThat(results.get(1).getId(), is(entryContent.getId()));
+	}
 }

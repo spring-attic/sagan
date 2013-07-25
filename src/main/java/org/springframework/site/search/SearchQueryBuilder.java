@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class SearchQueryBuilder {
 
+
 	private static final String emptyQuery =
 			"  \"query\": {\n" +
 					"    \"bool\": {\n" +
@@ -18,11 +19,12 @@ public class SearchQueryBuilder {
 					"  }";
 
 	private static final String fullQuery =
-			"  \"query\": {\n" +
-					"    \"bool\": {\n" +
-					"      \"should\": [\n" +
-					"        { \"text\": { \"title\": \"%s\" }},\n" +
-					"        { \"text\": { \"rawContent\": \"%s\" }}\n" +
+			" \"query\": {\n" +
+					"    \"multi_match\": {\n" +
+					"      \"query\": \"%s\",\n" +
+					"      \"fields\": [\n" +
+					"        \"title^10\",\n" +
+					"        \"rawContent\"\n" +
 					"      ]\n" +
 					"    }\n" +
 					"  }";
@@ -52,7 +54,8 @@ public class SearchQueryBuilder {
 					"  }";
 
 
-	SearchQueryBuilder() {}
+	SearchQueryBuilder() {
+	}
 
 	Search.Builder forEmptyQuery(Pageable pageable) {
 		return new Search.Builder("{" + emptyQuery + ","
@@ -66,7 +69,7 @@ public class SearchQueryBuilder {
 				+ buildQueryFilters(new Date()) + ","
 				+ buildQueryPagination(pageable) + ","
 				+ highlight
-				+  "}");
+				+ "}");
 	}
 
 	private String buildFullQuery(String queryTerm) {
