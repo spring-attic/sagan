@@ -1,0 +1,176 @@
+$off-white: #eee;
+$black-green: #3A3C2F; 
+$lime: #8CC63F;
+$leaf: #4E681E;
+$green: #6db33f;
+$bark: #AF9A85;
+$light-grey: #ECEBEB;
+$medium-grey: #DEDEDE;
+$navy: #3A5056;
+$slate: #44474C;
+$mauve: #665A6B;
+$denim: #8395A1;
+$black-brown: #34302d;
+$secondary-font-family: 'Montserrat', sans-serif;
+$link-green: #5fa134;
+
+.homepage--container {
+  min-height: 425px;
+  .homepage-carousel {
+    position: absolute;
+    height: 425px;
+    left: 0;
+    width: 100%;
+    top: 74px;
+    .carousel-item--wrapper {
+      width: 100%;
+      height: 425px;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      &.carousel-laptop {
+        background-image: url("../img/carousel-laptop-bg.png");
+      }
+      &.carousel-people {
+        background-image: url("../img/carousel-people-bg.png");
+      }
+      &.carousel-seminar {
+        background-image: url("../img/carousel-seminar-bg.png");
+      }
+      &.carousel-social {
+        background-image: url("../img/carousel-social-bg.png");
+      }
+    }
+    .carousel-item--container {
+      padding: 125px 0;
+      color: white;
+      a {
+        color: white;
+      }
+      .homepage--title {
+        font-size: 48px;
+        line-height: 48px;
+        margin-bottom: 30px;
+        font-family: $secondary-font-family;
+      }
+      .homepage--subtitle {
+        margin: -21px 0 30px;
+        font-size: 18px;
+        line-height: 27px;
+        margin-bottom: 30px;
+      }
+      .homepage--text {
+        font-size: 18px;
+        line-height: 27px;
+        margin-bottom: 30px;
+      }
+      .homepage--call-to-action {
+        text-transform: uppercase;
+      }
+      .homepage-blog--meta-data {
+        text-transform: uppercase;
+        font-size: 12px;
+        line-height: 12px;
+        margin-bottom: 6px;
+      }
+      .homepage-blog--title {
+        font-family: $secondary-font-family;
+        font-size: 27px;
+        line-height: 37px;
+        margin-bottom: 15px;
+      }
+      .homepage-blog--preview {
+        font-size: 15px;
+        line-height: 23px;
+        margin-bottom: 15px;
+      }
+      .homepage-blog--read-more {
+        text-transform: uppercase;
+      }
+    }
+    .social-btn {
+      background-image: url("../img/iconsprite.png");
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 45px;
+      height: 45px;
+      margin: 0 32px 0 0;
+      background-size: 2780px;
+      opacity: 0.75;
+      &:hover {
+        opacity: 1;
+      }
+      &.twitter {
+        background-position: -1px -178px;
+      }
+      &.googleplus {
+        background-position: -1px -273px;
+      }
+      &.linkedin {
+        background-position: -1px -370px;
+      }
+      &.facebook {
+        background-position: -1px -464px;
+      }
+      &.youtube {
+        background-position: -1px -560px;
+      }
+    }
+  }
+  .carousel-indicators {
+    left: 50.5%;
+    top: 45px;
+    li {
+      width: 26px;
+      height: 6px;
+      margin-right: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 0;
+      background-color: transparent;
+      cursor: pointer;
+      &.active {
+        border: 2px solid $black-brown;
+        background-color: $black-brown;
+      }
+    }
+  }
+  .carousel-control {
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+    top: 50%;
+  }
+  .homepage--body {
+    margin-top: 325px;
+    padding: 60px 0;
+    .homepage--key-feature {
+      text-align: center;
+      color: #f1f1f1;
+      background-color: $black-brown;
+      padding: 40px;
+      font-family: $secondary-font-family;
+      .key-feature--icon {
+        border: 6px solid #f1f1f1;
+        font-size: 30px;
+        line-height: 30px;
+        display: inline-block;
+        padding: 25px;
+        margin-bottom: 40px;
+      }
+      .key-feature--title {
+        font-size: 15px;
+        line-height: 15px;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+      }
+      .key-feature--text {
+        margin-bottom: 30px;
+      }
+      .key-feature--call-to-action {
+        text-transform: uppercase;
+        color: #f1f1f1;
+      }
+    }
+  }
+}
