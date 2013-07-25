@@ -38,12 +38,14 @@ public class RedirectMappingService {
 		logger.debug("Loading Mappings");
 		for (MappingEntry mapping : mappings) {
 			URL url;
+			String oldUrl = mapping.getOldUrl().replaceAll("/$", "");
+
 			try {
-				url = new URL(mapping.getOldUrl());
+				url = new URL(oldUrl);
 			} catch (MalformedURLException e) {
 				throw new RuntimeException(e);
 			}
-			logger.debug(String.format("Loaded mapping: %s => %s", mapping.getOldUrl(), mapping.getNewUrl()));
+			logger.debug(String.format("Loaded mapping: %s => %s", oldUrl, mapping.getNewUrl()));
 			redirectMappings.put(url.getPath(), mapping.getNewUrl());
 		}
 		logger.debug(String.format("%d Mappings loaded", redirectMappings.size()));
