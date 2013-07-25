@@ -14,7 +14,7 @@ projects:
     name: Spring Security
     githubUrl: https://github.com/SpringSource/spring-security
     referenceUrl: http://static.springsource.org/spring-security/site/docs/{version}/reference/springsecurity.html
-    apiUrl: http://static.springsource.org/spring-security/site/docs/{version}/apidocs/index.html
+    apiUrl: http://static.springsource.org/spring-security/site/docs/{version}/apidocs/
   - id: spring-mobile
     supportedVersions: [1.0.1.RELEASE]
     name: Spring Mobile
@@ -26,13 +26,13 @@ projects:
     name: Spring Web Services
     githubUrl: https://github.com/SpringSource/spring-ws
     referenceUrl: http://static.springsource.org/spring-ws/sites/{version}/reference/html/index.html
-    apiUrl: http://static.springsource.org/spring-ws/sites/{version}/apidocs/index.html
+    apiUrl: http://static.springsource.org/spring-ws/sites/{version}/apidocs/
   - id: spring-data-jpa
     supportedVersions: [1.3.x, 1.4.x]
     name: Spring Data JPA
     githubUrl: https://github.com/SpringSource/spring-data-jpa
     referenceUrl: http://static.springsource.org/spring-data/jpa/docs/{version}/reference/html/index.html
-    apiUrl: http://static.springsource.org/spring-data/jpa/docs/{version}/api/index.html
+    apiUrl: http://static.springsource.org/spring-data/jpa/docs/{version}/api/
   - id: spring-amqp
     githubUrl: https://github.com/SpringSource/spring-amqp
     name: Spring AMQP
