@@ -196,12 +196,13 @@ body {
       .search-form--submit {
         background-color: transparent;
         border: none;
+        float: right;
+        padding: 28px 16px 24px 0;
+
       }
       .icon-search {
         font-size: 22px;
         color: $black-brown;
-        float: right;
-        padding: 24px 0px 24px 10px;
       }
     }
     &.js-show {

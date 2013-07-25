@@ -41,7 +41,7 @@ body {
 
 .code-snippet {
   border-radius: 2px;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   background-color: #F9F9F9;
   padding: 12px 18px;
   margin: 15px 0;
@@ -175,19 +175,19 @@ body {
 .header--navbar .search-dropdown--container .form-search .search-form--submit {
   background-color: transparent;
   border: none;
+  float: right;
+  padding: 28px 16px 24px 0;
 }
 .header--navbar .search-dropdown--container .form-search .icon-search {
   font-size: 22px;
   color: #34302d;
-  float: right;
-  padding: 24px 0px 24px 10px;
 }
 .header--navbar .search-dropdown--container.js-show {
   margin-top: 0;
 }
 
 .right-pane-widget--container {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   box-shadow: 0 -4px 0 #34302d;
   margin: 4px 0 40px 0;
 }
@@ -399,7 +399,7 @@ input.floating-input:focus {
 
 .gh-project-url--container {
   background-color: #FFF;
-  border: 1px solid #cccccc;
+  border: 1px solid #CCC;
   height: 20px;
   padding: 4px 6px;
   border-radius: 4px;
