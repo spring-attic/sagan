@@ -24,26 +24,20 @@ $(function(){
       });
     });
 
-
-
-    $(".documentation--item.js-open").click(function() {
-      $(this).removeClass("js-open");
-    });
-
-    // $('.js-spring-popover').springPopover();
-
-    //OPENS SEARCH INPUT
+    //OPENS SEARCH DROPDOWN
     $(".js-search-input-open").click(function () {
+      $(".nav-search").addClass("js-highlight");
+      var inputContainer = $(".js-search-dropdown");
       var input = $(".js-search-input");
-      var container = $(".js-search-input--container");
-      container.addClass("js-open");
+      inputContainer.addClass("js-show");
       setTimeout(function() {
         input.focus();
       }, 100);
-      input.blur(function () {
-        container.removeClass('js-open');
+      $(".body--container, .js-search-input-close").click(function() {
+        inputContainer.removeClass("js-show");
+        $(".nav-search").removeClass("js-highlight");
       });
-    });
+    })
 
     $.fn.showPreferredLink = function() {
         this.find("li").hide();

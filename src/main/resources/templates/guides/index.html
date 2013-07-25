@@ -5,14 +5,13 @@
 	<title>SpringFramework - Guides</title>
 </head>
 <body>
-<h1 layout:fragment="header">Guides</h1>
-
-<div layout:fragment="content" class="container">
-	<ul>
-		<li><a href="gs/list.html" th:href="@{/guides/gs}">Getting Started</a></li>
-		<li>Tutorials</li>
-		<li>Reference Apps</li>
-	</ul>
+  <div layout:fragment="header-container"></div>
+  <div layout:fragment="content" class="container-fluid">
+  	<ul>
+  		<li><a href="gs/list.html" th:href="@{/guides/gs}">Getting Started</a></li>
+  		<li>Tutorials</li>
+  		<li>Reference Apps</li>
+  	</ul>
 </div>
 </body>
 </html>

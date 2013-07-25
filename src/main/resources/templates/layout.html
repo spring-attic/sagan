@@ -48,20 +48,24 @@
           <li th:class="${beans.uih.navClass(navSection?:'','forum')}">
             <a href="http://forum.springframework.org">Forum</a>
           </li>
-
-          <li class="nav-search">
-            <div class="header-nav-search--container js-search-input--container">
-              <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
-                <input type="text" class="search-query input-medium header-nav-search--input js-search-input" placeholder="Search for documention, guides, and posts..." name="q" th:value="${query}" />
-                <i class="icon-search header-nav-search--icon js-search-input-open"></i>
-              </form>
-            </div>
+          <li class="navbar-link nav-search">
+            <i class="icon-search navbar-search--icon js-search-input-open"></i>
+            <div class="search-input-close js-search-input-close">x</div>
           </li>
         </ul>
       </div>
     </div>
+    <div class="search-dropdown--container js-search-dropdown">
+      <div class="container-fluid">
+        <div class="search-form--container">
+          <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
+            <input type="text" class="search-query search-form--form js-search-input" placeholder="Search for documention, guides, and posts..." name="q" th:value="${query}" />
+            <button type="submit" class="search-form--submit"><i class="icon-search"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
   </header>
-
   <div class="header--container" layout:fragment="header-container">
     <div class="header--content" layout:fragment="header-content">
       <div class="row-fluid container-fluid">
