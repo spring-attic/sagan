@@ -89,7 +89,7 @@ public class BlogService_ValidPostTests {
 			}
 		});
 
-		service = new BlogService(postRepository, markdownService, dateService, teamRepository, searchService);
+		service = new BlogService(postRepository, new BlogPostContentRenderer(markdownService), dateService, teamRepository, searchService);
 		given(markdownService.renderToHtml(content)).willReturn(RENDERED_HTML_FROM_MARKDOWN);
 		given(markdownService.renderToHtml(firstParagraph)).willReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 		postForm = new PostForm();

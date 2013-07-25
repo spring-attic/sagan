@@ -68,7 +68,7 @@ public class BlogService_UpdatePostTests {
 	public void setup() {
 		given(this.dateService.now()).willReturn(this.now);
 
-		this.service = new BlogService(this.postRepository, this.markdownService,
+		this.service = new BlogService(this.postRepository, new BlogPostContentRenderer(markdownService),
 				this.dateService, this.teamRepository, this.searchService);
 		given(this.markdownService.renderToHtml(this.content)).willReturn(
 				RENDERED_HTML_FROM_MARKDOWN);

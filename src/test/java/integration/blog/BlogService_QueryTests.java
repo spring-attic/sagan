@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.site.domain.blog.BlogPostContentRenderer;
 import org.springframework.site.domain.blog.BlogService;
 import org.springframework.site.domain.blog.Post;
 import org.springframework.site.domain.blog.PostBuilder;
@@ -68,7 +69,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 		initMocks(this);
 		given(dateService.now()).willReturn(new Date());
 
-		service = new BlogService(postRepository, markdownService, dateService, teamRepository, searchService);
+		service = new BlogService(postRepository, new BlogPostContentRenderer(markdownService), dateService, teamRepository, searchService);
 		assertThat(postRepository.findAll().size(), equalTo(0));
 	}
 

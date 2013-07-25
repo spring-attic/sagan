@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.domain.services.DateService;
-import org.springframework.site.domain.services.MarkdownService;
 import org.springframework.site.domain.team.MemberProfile;
 import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.site.search.SearchService;
@@ -22,7 +21,7 @@ public class BlogService {
 	private PostRepository repository;
 	private TeamRepository teamRepository;
 	private SearchService searchService;
-	private MarkdownService markdownService;
+	private BlogPostContentRenderer postContentRenderer;
 	private DateService dateService;
 
 	private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
@@ -30,11 +29,11 @@ public class BlogService {
 	private static final Log logger = LogFactory.getLog(BlogService.class);
 
 	@Autowired
-	public BlogService(PostRepository repository, MarkdownService markdownService,
+	public BlogService(PostRepository repository, BlogPostContentRenderer postContentRenderer,
 			DateService dateService, TeamRepository teamRepository,
 			SearchService searchService) {
 		this.repository = repository;
-		this.markdownService = markdownService;
+		this.postContentRenderer = postContentRenderer;
 		this.dateService = dateService;
 		this.teamRepository = teamRepository;
 		this.searchService = searchService;
@@ -105,8 +104,8 @@ public class BlogService {
 		MemberProfile profile = this.teamRepository.findByMemberId(authorId);
 		post.setAuthor(profile);
 
-		post.setRenderedContent(this.markdownService.renderToHtml(content));
-		post.setRenderedSummary(this.markdownService.renderToHtml(extractFirstParagraph( content, 500)));
+		post.setRenderedContent(this.postContentRenderer.render(content));
+		post.setRenderedSummary(this.postContentRenderer.render(extractFirstParagraph(content, 500)));
 		post.setBroadcast(postForm.isBroadcast());
 		post.setDraft(postForm.isDraft());
 		post.setPublishAt(publishDate(postForm));
@@ -133,8 +132,8 @@ public class BlogService {
 		post.setRawContent(content);
 		post.setCategory(postForm.getCategory());
 
-		post.setRenderedContent(this.markdownService.renderToHtml(content));
-		post.setRenderedSummary(this.markdownService.renderToHtml(extractFirstParagraph(content, 500)));
+		post.setRenderedContent(this.postContentRenderer.render(content));
+		post.setRenderedSummary(this.postContentRenderer.render(extractFirstParagraph(content, 500)));
 		post.setBroadcast(postForm.isBroadcast());
 		post.setDraft(postForm.isDraft());
 		post.setPublishAt(publishDate(postForm));
