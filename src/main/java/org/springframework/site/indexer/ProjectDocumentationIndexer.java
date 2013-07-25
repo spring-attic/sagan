@@ -36,15 +36,13 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 	@Override
 	public void indexItem(Project project) {
 		logger.info("Indexing project: " + project.getId());
-		if (!project.getSupportedVersions().isEmpty()) {
-			String currentVersion = project.getSupportedVersions().get(0);
-
+		for (String version : project.getSupportedVersions()) {
 			UriTemplate rawUrl = new UriTemplate(project.getApiAllClassesUrl());
-			String url = rawUrl.expand(currentVersion).toString();
+			String url = rawUrl.expand(version).toString();
 			crawlerService.crawl(url, 1, apiProcessor);
 
 			rawUrl = new UriTemplate(project.getReferenceUrl());
-			url = rawUrl.expand(currentVersion).toString();
+			url = rawUrl.expand(version).toString();
 			crawlerService.crawl(url, 1, documentProcessor);
 		}
 		crawlerService.crawl(project.getGithubUrl(), 0, documentProcessor);

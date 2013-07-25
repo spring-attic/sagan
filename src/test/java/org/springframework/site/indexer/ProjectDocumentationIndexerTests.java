@@ -9,7 +9,6 @@ import org.springframework.site.search.SearchService;
 import java.util.Arrays;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.contains;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -24,26 +23,34 @@ public class ProjectDocumentationIndexerTests {
 			"https://github.com/SpringSource/spring-framework", //
 			"http://static.springsource.org/spring/docs/{version}/reference/", //
 			"http://static.springsource.org/spring/docs/{version}/api/", //
-			Arrays.asList("3.2.3.RELEASE"));
+			Arrays.asList("3.2.3.RELEASE", "3.1.4.RELEASE", "4.0.0.M1"));
+
+	private void assertThatCrawlingIsDoneFor(String url, int linkDepthLevel) {
+		verify(crawlerService).crawl(eq(url), eq(linkDepthLevel), any(CrawledWebDocumentProcessor.class));
+	}
 
 	@Test
 	public void apiDocsAreIndexed() throws Exception {
 		service.indexItem(project);
 		int linkDepthLevel = 1;
-		verify(crawlerService).crawl(contains("api"), eq(linkDepthLevel), any(CrawledWebDocumentProcessor.class));
+		assertThatCrawlingIsDoneFor("http://static.springsource.org/spring/docs/3.2.3.RELEASE/api/allclasses-frame.html", linkDepthLevel);
+		assertThatCrawlingIsDoneFor("http://static.springsource.org/spring/docs/3.1.4.RELEASE/api/allclasses-frame.html", linkDepthLevel);
+		assertThatCrawlingIsDoneFor("http://static.springsource.org/spring/docs/4.0.0.M1/api/allclasses-frame.html", linkDepthLevel);
 	}
 
 	@Test
 	public void referenceDocsAreIndexed() throws Exception {
 		service.indexItem(project);
 		int linkDepthLevel = 1;
-		verify(crawlerService).crawl(contains("reference"), eq(linkDepthLevel), any(CrawledWebDocumentProcessor.class));
+		assertThatCrawlingIsDoneFor("http://static.springsource.org/spring/docs/3.2.3.RELEASE/reference/", linkDepthLevel);
+		assertThatCrawlingIsDoneFor("http://static.springsource.org/spring/docs/3.1.4.RELEASE/reference/", linkDepthLevel);
+		assertThatCrawlingIsDoneFor("http://static.springsource.org/spring/docs/4.0.0.M1/reference/", linkDepthLevel);
 	}
 
 	@Test
 	public void githubDocsAreIndexed() throws Exception {
 		service.indexItem(project);
 		int linkDepthLevel = 0;
-		verify(crawlerService).crawl(contains("github"), eq(linkDepthLevel), any(CrawledWebDocumentProcessor.class));
+		assertThatCrawlingIsDoneFor("https://github.com/SpringSource/spring-framework", linkDepthLevel);
 	}
 }
