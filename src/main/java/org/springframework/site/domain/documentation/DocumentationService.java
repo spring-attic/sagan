@@ -1,18 +1,18 @@
 package org.springframework.site.domain.documentation;
 
+import org.springframework.bootstrap.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.bootstrap.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Service;
-
 @Service
 @ConfigurationProperties(path = "${documentation.path:classpath:documentation.yml}")
 public class DocumentationService {
 
-	private List<Project> projects = new ArrayList<Project>();
+	private List<Project> projects = new ArrayList<>();
 	private Map<String, Project> map;
 
 	public void setProjects(List<Project> projects) {
@@ -28,7 +28,7 @@ public class DocumentationService {
 
 	public Project getProject(String id) {
 		if (this.map == null) {
-			this.map = new HashMap<String, Project>();
+			this.map = new HashMap<>();
 			setProjects(this.projects);
 		}
 		return this.map.get(id);

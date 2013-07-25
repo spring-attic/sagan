@@ -53,6 +53,13 @@ server:
 ---
 
 spring:
+  profiles: redirector
+  main:
+    sources: org.springframework.redirector.RedirectorConfiguration
+
+---
+
+spring:
   profiles: development
 search:
   indexer:
