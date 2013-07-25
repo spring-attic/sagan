@@ -29,7 +29,7 @@ public class StaticPageRequestMappingTests extends IntegrationTestBase {
 		this.mockMvc.perform(get("/"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Hello World")));
+				.andExpect(content().string(containsString("homepage--container")));
 	}
 
 	@Test
