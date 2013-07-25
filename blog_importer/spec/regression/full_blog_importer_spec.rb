@@ -24,12 +24,12 @@ describe "Full Blog Importer", if: File.exists?(xml_import_filename) do
 
     it "creates new memberProfiles for an author" do
       siteapi.should_receive('save_member_profile').exactly(86).times
-      importer.import
+      importer.import(StringIO.new)
     end
 
     it "creates a post for every published post in the import file" do
       siteapi.should_receive('save_blog_post').exactly(525).times
-      importer.import
+      importer.import(StringIO.new)
     end
   end
 end

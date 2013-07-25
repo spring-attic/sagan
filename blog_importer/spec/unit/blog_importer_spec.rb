@@ -13,7 +13,7 @@ describe BlogImporter do
 
     it "creates new memberProfiles for an author" do
       siteapi.should_receive('save_member_profile').exactly(3).times
-      importer.import
+      importer.import(StringIO.new)
     end
 
     it "creates memberProfiles with the correct info" do
@@ -24,12 +24,12 @@ describe BlogImporter do
           name: 'Mr Sample'
       }
       siteapi.should_receive('save_member_profile').with(expected_author)
-      importer.import
+      importer.import(StringIO.new)
     end
 
     it "creates a post for every published post in the import file" do
       siteapi.should_receive('save_blog_post').exactly(2).times
-      importer.import
+      importer.import(StringIO.new)
     end
 
     it "creates a post with the correct info" do
@@ -43,7 +43,28 @@ describe BlogImporter do
           authorMemberId: 'sample',
       }
       siteapi.should_receive('save_blog_post').with(expected_post)
-      importer.import
+      importer.import(StringIO.new)
+    end
+
+    it "writes blog post url mappings to a file" do
+      headers1 = {"Location" => "http://example.com/blog/1-a-post"}
+      headers2 = {"Location" => "http://example.com/blog/2-another-post"}
+
+      siteapi.should_receive('save_blog_post').ordered.and_return(double(:headers => headers1))
+      siteapi.should_receive('save_blog_post').ordered.and_return(double(:headers => headers2))
+      mappings = StringIO.new
+      importer.import(mappings)
+      expected_mappings = [
+        {
+          "old_url" => "http://blog.springsource.org/2006/04/09/spring-20s-jms-improvements/",
+          "new_url" => "http://example.com/blog/1-a-post"
+        },
+        {
+          "old_url" => "http://blog.springsource.org/2006/04/09/another-reason-to-love-spring-20-interceptor-combining/",
+          "new_url" => "http://example.com/blog/2-another-post"
+        }
+      ]
+      mappings.string.should == expected_mappings.to_yaml
     end
 
   end

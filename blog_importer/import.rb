@@ -4,7 +4,7 @@ require './lib/blog_importer'
 require './lib/site_api'
 
 site = SiteApi.new "localhost:8080"
-# site = SiteApi.new "sagan.cfapps.io"
+#site = SiteApi.new "sagan.cfapps.io"
 
 import_filename = ARGV[0]
 
@@ -13,8 +13,11 @@ if import_filename.nil?
   exit(1)
 end
 
-ExportCleaner.new.clean(import_filename, "clean_blog_export.xml")
-importer = BlogImporter.new "clean_blog_export.xml", site, WordpressMarkupProcessor.new
-importer.import
+Tempfile.open('clean_blog_export') do |f|
+  ExportCleaner.new.clean(import_filename, f.path)
+  importer = BlogImporter.new(f.path, site, WordpressMarkupProcessor.new)
 
-File.delete("clean_blog_export.xml")
+  File.open("mappings.txt", "w+") do |f|
+    importer.import(f)
+  end
+end

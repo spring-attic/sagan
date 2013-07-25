@@ -28,28 +28,28 @@ describe WordpressMarkupProcessor do
 
     it "converts more than one marker in the same content" do
       input = <<-INPUT
-  Here is some text
-  [plain]Here is some content[/plain]
-  some content here
-  [java]
-  public class Foo{}
-  [/java]Bye!
-      INPUT
+Here is some text
+[plain]Here is some content[/plain]
+some content here
+[java]
+public class Foo{}
+[/java]Bye!
+    INPUT
 
 
-      expected_output = <<-OUTPUT
-  Here is some text
+    expected_output = <<-OUTPUT
+Here is some text
 
-  ```plain
-  Here is some content
-  ```
+```plain
+Here is some content
+```
 
-  some content here
+some content here
 
-  ```java
-  public class Foo{}
-  ```
-  Bye!
+```java
+public class Foo{}
+```
+Bye!
       OUTPUT
 
       subject.convert_code_blocks(input).should == expected_output
@@ -103,31 +103,31 @@ describe WordpressMarkupProcessor do
 
 
       input = <<-INPUT
-  &lt;Text outside does not have &quot;entities&quot; escaped&gt;
-  [xml]
-  &lt;filter-mapping&gt;
-    &lt;filter-name&gt;springSecurityFilterChain&lt;/filter-name&gt;
-    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-    &lt;dispatcher&gt;&quot;ERROR&quot;&lt;/dispatcher&gt;
-    &lt;dispatcher&gt;REQUEST&amp;TEST&lt;/dispatcher&gt;
-  &lt;/filter-mapping&gt;
-  [/xml]
-  &amp; its done!
-      INPUT
+&lt;Text outside does not have &quot;entities&quot; escaped&gt;
+[xml]
+&lt;filter-mapping&gt;
+  &lt;filter-name&gt;springSecurityFilterChain&lt;/filter-name&gt;
+  &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+  &lt;dispatcher&gt;&quot;ERROR&quot;&lt;/dispatcher&gt;
+  &lt;dispatcher&gt;REQUEST&amp;TEST&lt;/dispatcher&gt;
+&lt;/filter-mapping&gt;
+[/xml]
+&amp; its done!
+    INPUT
 
-      expected = <<-EXPECTED
-  &lt;Text outside does not have &quot;entities&quot; escaped&gt;
+    expected = <<-EXPECTED
+&lt;Text outside does not have &quot;entities&quot; escaped&gt;
 
-  ```xml
-  <filter-mapping>
-    <filter-name>springSecurityFilterChain</filter-name>
-    <url-pattern>/*</url-pattern>
-    <dispatcher>"ERROR"</dispatcher>
-    <dispatcher>REQUEST&TEST</dispatcher>
-  </filter-mapping>
-  ```
+```xml
+<filter-mapping>
+  <filter-name>springSecurityFilterChain</filter-name>
+  <url-pattern>/*</url-pattern>
+  <dispatcher>"ERROR"</dispatcher>
+  <dispatcher>REQUEST&TEST</dispatcher>
+</filter-mapping>
+```
 
-  &amp; its done!
+&amp; its done!
       EXPECTED
 
       subject.convert_code_blocks(input).should == expected

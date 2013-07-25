@@ -10,13 +10,14 @@ class BlogImporter
     @wp_processor = wp_processor
   end
 
-  def import
+  def import(mappings_io)
     puts "\n\nImporting #{@filename}\n---------\n "
     puts "\nLoading authors: "
     import_authors
     puts "\n\nLoading posts: "
-    import_posts
+    mappings = import_posts
     puts "\n\nImport complete.\n"
+    save_mappings(mappings, mappings_io)
   end
 
   def import_authors
@@ -35,27 +36,55 @@ class BlogImporter
   end
 
   def import_posts
-    post_elements = xml_doc.xpath("//item[wp:status/text()='publish'][wp:post_type/text()='post']")
+    mappings = []
     post_elements.each_with_index do |element, i|
-      post_date = element.xpath('wp:post_date_gmt').text
-      content = element.xpath('content:encoded').text
-      title = element.xpath('title').text
-      puts "\nImporting: #{i + 1} - #{title}"
-      processed_content = @wp_processor.process(content)
+      post_data = extract_post_data element
 
-      hash = {
-          title: title,
-          content: processed_content,
-          category: 'ENGINEERING',
-          createdAt: post_date,
-          publishAt: post_date,
-          authorMemberId: element.xpath('dc:creator').text
+      puts "\nImporting: #{i + 1} - #{post_data[:title]}"
+
+      process_content(post_data)
+
+      response = @site_api.save_blog_post(create_post_request(post_data))
+      mapping = {
+          "old_url" => post_data[:link],
+          "new_url" => response.headers["Location"]
       }
-      data = hash
-
-      @site_api.save_blog_post data
+      mappings << mapping
     end
-    true
+    mappings
+  end
+
+  def post_elements
+    xml_doc.xpath("//item[wp:status/text()='publish'][wp:post_type/text()='post']")
+  end
+
+  def save_mappings(mappings, mappings_io)
+    mappings_io.puts mappings.to_yaml
+  end
+
+  def create_post_request(post_data)
+    {
+        title: post_data[:title],
+        content: post_data[:content],
+        category: 'ENGINEERING',
+        createdAt: post_data[:post_date],
+        publishAt: post_data[:post_date],
+        authorMemberId: post_data[:creator]
+    }
+  end
+
+  def extract_post_data element
+    {
+        link: element.xpath('link').text,
+        post_date: element.xpath('wp:post_date_gmt').text,
+        content: element.xpath('content:encoded').text,
+        title: element.xpath('title').text,
+        creator: element.xpath('dc:creator').text
+    }
+  end
+
+  def process_content(post_data)
+    post_data[:content] = @wp_processor.process(post_data[:content])
   end
 
   def xml_doc

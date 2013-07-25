@@ -62,7 +62,7 @@ INPUT
           authorMemberId: 'sample',
       }
       siteapi.should_receive('save_blog_post').with(expected_post)
-      importer.import
+      importer.import(StringIO.new)
     end
 
   end
