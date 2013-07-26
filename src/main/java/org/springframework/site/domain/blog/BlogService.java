@@ -71,6 +71,18 @@ public class BlogService {
 				pageRequest);
 	}
 
+	public Page<Post> getPublishedPostsByDate(int year, int month, int day, Pageable pageRequest) {
+		return this.repository.findByDate(year, month, day, pageRequest);
+	}
+
+	public Page<Post> getPublishedPostsByDate(int year, int month, Pageable pageRequest) {
+		return this.repository.findByDate(year, month, pageRequest);
+	}
+
+	public Page<Post> getPublishedPostsByDate(int year, Pageable pageRequest) {
+		return this.repository.findByDate(year, pageRequest);
+	}
+
 	public Page<Post> getScheduledPosts(Pageable pageRequest) {
 		return this.repository.findByDraftFalseAndPublishAtAfter(this.dateService.now(),
 				pageRequest);
@@ -186,4 +198,5 @@ public class BlogService {
 			saveToIndex(post);
 		}
 	}
+
 }
