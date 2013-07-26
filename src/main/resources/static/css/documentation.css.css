@@ -22,34 +22,22 @@
   border: 1px solid #34302d;
   width: auto;
 }
-.documentation--body.without-title {
-  padding: 20px;
-}
-.documentation--body.without-title .documentation--item {
-  margin: 0 44px 0 0;
-}
-.documentation--body.without-title .documentation--item:nth-child(3n+3) {
-  margin-right: 0;
-}
 .documentation--body .documentation--section-title {
   font-size: 14px;
   line-height: 14px;
   text-transform: uppercase;
-  float: left;
   background-color: #34302D;
   color: #FFF;
   padding: 18px 0;
   width: 327px;
   text-align: center;
-  float: left;
-  margin: 0 32px 0 0;
+  margin: 0;
 }
 .documentation--body .documentation-item--wrapper {
-  padding: 6px 20px;
-  margin-right: -35px;
+  padding: 20px;
 }
-.documentation--body .documentation-item--wrapper .documentation--item {
-  margin-right: 44px;
+.documentation--body .empty-project {
+  margin-bottom: -40px;
 }
 
 .documentation--item {
@@ -58,6 +46,10 @@
   vertical-align: top;
   position: relative;
   z-index: 800;
+  margin: 0 44px 0 0;
+}
+.documentation--item:nth-child(3n+3) {
+  margin-right: 0;
 }
 .documentation--item .item--title {
   padding: 14px 0 14px 20px;
@@ -103,6 +95,9 @@
   padding: 20px;
   width: 255px;
   z-index: 999;
+  border: 1px solid #eeeeee;
+  border-top: none;
+  margin-left: -1px;
 }
 .item--dropdown .item--header {
   padding-bottom: 20px;

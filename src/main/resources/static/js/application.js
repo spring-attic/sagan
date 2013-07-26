@@ -15,9 +15,16 @@ $(function(){
     //OPENS DOCUMENTATION DROPDOWN
     $(".js-item--open-dropdown").click(function() {
       var documentationItem = $(this).parents(".js-documentation--item");
-      documentationItem.siblings().removeClass("js-open");
+      var documentHeight = $(document).height();
+      var headerHeight = $("header").outerHeight()
+      var footerHeight = $("footer").outerHeight();
+      var scrimHeight = documentHeight - headerHeight - footerHeight;
+
       documentationItem.toggleClass("js-open");
-      $("#scrim").addClass("js-show");
+      documentationItem.siblings().removeClass("js-open");
+      $(this).parents(".documentation--body").siblings().find(".js-documentation--item").removeClass("js-open");
+      
+      $("#scrim").addClass("js-show").css("height", scrimHeight).css("top", headerHeight);
       $("#scrim").click(function() {
         $(".js-documentation--item").removeClass("js-open");
         $(this).removeClass("js-show");

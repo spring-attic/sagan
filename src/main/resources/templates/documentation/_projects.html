@@ -4,41 +4,48 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
 
+
+
 <div layout:fragment="projects">
-    <div th:each="item : ${projects}" th:id="${item.id}" class="documentation--item js-documentation--item">
-        <div class="js-item--open-dropdown">
-            <i class="item--icon icon-reorder"></i>
-            <p class="item--title" th:text="${item.name}">Spring Framework</p>
-        </div>
-        <div class="item--dropdown">
-            <div class="item--header">
-                <!-- link_to project_path -->
-                <a href="#" class="item--header-link item--left-column">
-                    <i class="icon-globe"></i>
-                    Site*NR
-                </a>
-                <a th:href="${item.githubUrl}" class="item--header-link item--right-column">
-                    <i class="icon-github"></i>
-                    Repository
-                </a>
+    <div th:if="${projects.empty}">
+        <div class="empty-project"></div>
+    </div>
+    <div class="documentation-item--wrapper">
+        <div th:each="item : ${projects}" th:id="${item.id}" class="documentation--item js-documentation--item">
+            <div class="js-item--open-dropdown">
+                <i class="item--icon icon-reorder"></i>
+                <p class="item--title" th:text="${item.name}">Spring Framework</p>
             </div>
-            <div class="item--body">
-                <div class="item--body-title">
-                    <div class="item--left-column">
-                        Releases
-                    </div>
-                    <div class="item--right-column">
-                        Documentation
-                    </div>
+            <div class="item--dropdown">
+                <div class="item--header">
+                    <!-- link_to project_path -->
+                    <a href="#" class="item--header-link item--left-column">
+                        <i class="icon-globe"></i>
+                        Site*NR
+                    </a>
+                    <a th:href="${item.githubUrl}" class="item--header-link item--right-column">
+                        <i class="icon-github"></i>
+                        Repository
+                    </a>
                 </div>
                 <div class="item--body">
-                    <div th:each="documentVersion,iterStat1 : ${item.supportedReferenceDocumentVersions}">
-                        <div class="item--body--version">
-                            <p th:text="${documentVersion.versionName}" class="item--left-column">Version</p>
-                            <div class="item--right-column">
-                                <a class="documentation-link reference-link" th:href="${documentVersion.url}" >Reference</a>
-                                <div class="documentation-link api-link" th:each="documentVersion,iterStat2 : ${item.supportedApiDocsDocumentVersions}" th:if="${iterStat1.count}==${iterStat2.count}">
-                                    <a class="documentation-link" th:href="${documentVersion.url}">API</a>
+                    <div class="item--body-title">
+                        <div class="item--left-column">
+                            Releases
+                        </div>
+                        <div class="item--right-column">
+                            Documentation
+                        </div>
+                    </div>
+                    <div class="item--body">
+                        <div th:each="documentVersion,iterStat1 : ${item.supportedReferenceDocumentVersions}">
+                            <div class="item--body--version">
+                                <p th:text="${documentVersion.versionName}" class="item--left-column">Version</p>
+                                <div class="item--right-column">
+                                    <a class="documentation-link reference-link" th:href="${documentVersion.url}" >Reference</a>
+                                    <div class="documentation-link api-link" th:each="documentVersion,iterStat2 : ${item.supportedApiDocsDocumentVersions}" th:if="${iterStat1.count}==${iterStat2.count}">
+                                        <a class="documentation-link" th:href="${documentVersion.url}">API</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -47,6 +54,7 @@
             </div>
         </div>
     </div>
+    
 </div>
 
 
