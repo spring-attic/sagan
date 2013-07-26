@@ -192,16 +192,16 @@ body {
         height: 30px;
         padding: 25px 0;
         width: 93%;
-        &::-webkit-input-placeholder { /* WebKit browsers */
+        &::-webkit-input-placeholder {
           font-style: italic;
         }
-        &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        &:-moz-placeholder {
           font-style: italic;
         }
-        &::-moz-placeholder { /* Mozilla Firefox 19+ */
+        &::-moz-placeholder {
           font-style: italic;
         }
-        &:-ms-input-placeholder { /* Internet Explorer 10+ */
+        &:-ms-input-placeholder {
           font-style: italic;
         }
       }
