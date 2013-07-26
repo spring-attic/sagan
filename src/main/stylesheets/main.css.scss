@@ -14,7 +14,13 @@ $black-brown: #34302d;
 $secondary-font-family: 'Montserrat', sans-serif;
 $link-green: #5fa134;
 
-
+//making stuff not responsive
+.container-fluid {
+  width: 1024px !important;
+}
+.navbar-inner, .search-dropdown--container {
+  min-width: 1024px;
+}
 
 
 
@@ -35,18 +41,9 @@ body {
   }
 }
 
-.background-grid {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: -10000px;
-  background-image: url("../img/grid30x30.png");
-}
-
 .container-fluid {
-	max-width: 1024px;
-	margin: 0 auto;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 .title-divider {
@@ -81,6 +78,8 @@ body {
     box-shadow: none;
     position: relative;
     border-radius: 0;
+
+    
     .spring-logo--container {
       display: inline-block;
       padding: 15px 0;

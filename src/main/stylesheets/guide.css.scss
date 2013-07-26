@@ -17,7 +17,69 @@ $link-green: #5fa134;
 
 
 
+.guides--header {
+  margin-bottom: 43px;
+  line-height: 24px;
+}
+.guides--intro {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 70px;
+}
 
+.guides-section--container {
+  border: 1px solid $black-brown;
+  padding: 40px;
+  .section-title--container {
+    background-color: $black-brown;
+    color: $off-white;
+    padding: 40px 0;
+    margin: -40px 40px 40px -40px;
+    float: left;
+    width: 324px;
+    text-align: center;
+    .section-title--icon {
+      height: 100px;
+      width: 72px;
+      display: inline-block;
+      background-image: url("../img/iconsprite.png");
+      &.gs-guides--icon {
+        background-position: 0 -544px;
+      }
+    }
+    .section-title--title {
+      text-transform: uppercase;
+      font-family: $secondary-font-family;
+      font-size: 18px;
+      line-height: 18px;
+      padding: 30px 20px 25px;
+    }
+    .section-title--intro {
+      padding: 0 40px;
+      font-size: 14px;
+      line-height: 21px;
+    }
+  }
+  .guides--wrapper {
+    margin-right: -40px
+  }
+  .guide--container {
+    display: inline-block;
+    width: 284px;
+    margin: 0 40px 20px 0;
+    vertical-align: top;
+    .guide--title {
+      font-size: 16px;
+      color: $link-green;
+      line-height: 22px;
+    }
+    .guide--subtitle {
+      font-size: 14px;
+      line-height: 20px;
+      margin-top: 5px;
+    }
+  }
+}
 
 
 

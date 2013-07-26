@@ -16,14 +16,14 @@ $(function(){
     $(".js-item--open-dropdown").click(function() {
       var documentationItem = $(this).parents(".js-documentation--item");
       var documentHeight = $(document).height();
-      var headerHeight = $("header").outerHeight()
+      var headerHeight = $("header").outerHeight();
       var footerHeight = $("footer").outerHeight();
       var scrimHeight = documentHeight - headerHeight - footerHeight;
 
       documentationItem.toggleClass("js-open");
       documentationItem.siblings().removeClass("js-open");
       $(this).parents(".documentation--body").siblings().find(".js-documentation--item").removeClass("js-open");
-      
+
       $("#scrim").addClass("js-show").css("height", scrimHeight).css("top", headerHeight);
       $("#scrim").click(function() {
         $(".js-documentation--item").removeClass("js-open");
@@ -36,6 +36,7 @@ $(function(){
       $(".nav-search").addClass("js-highlight");
       var inputContainer = $(".js-search-dropdown");
       var input = $(".js-search-input");
+      
       inputContainer.addClass("js-show");
       setTimeout(function() {
         input.focus();
@@ -43,6 +44,7 @@ $(function(){
       $(".body--container, .js-search-input-close").click(function() {
         inputContainer.removeClass("js-show");
         $(".nav-search").removeClass("js-highlight");
+        $("#scrim").removeClass("js-show");
       });
     })
 

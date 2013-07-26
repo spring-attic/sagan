@@ -7,14 +7,23 @@
 <body>
   <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container-fluid">
-    <h1>Spring Framework Guides</h1>
-    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper.</p>
-    <ul>
-    <li th:each="guide : ${guides}" class="guide">
-      <h3 class="title"><a href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/content'}" th:text="${beans.uih.extractTitleFromRepoDescription(guide)}">Building a RESTful Web Service</a></h3>
-      <p class="subtitle" th:text="${beans.uih.extractSubtitleFromRepoDescription(guide)}">YADA Learn how to create a REST web service with Spring</p>
-    </li>
-  </ul>
-</div>
+    <h1 class="guides--header">Spring Framework Guides</h1>
+    <p class="guides--intro">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper.</p>
+    <div class="guides-section--container gs-guides--container">
+      <div class="section-title--container">
+        <div class="section-title--icon gs-guides--icon"></div>
+        <div class="section-title--title">
+          Getting Started Guides
+        </div>
+        <div class="section-title--intro">Spring provides a powerful and flexible collection of technologies to improve your Java application development that is used by millions of developers.</div>
+      </div>
+      <div class="guides--wrapper">
+        <div th:each="guide : ${guides}" class="guide--container">
+          <a class="guide--title" href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/content'}" th:text="${beans.uih.extractTitleFromRepoDescription(guide)}">Building a RESTful Web Service</a>
+          <p class="guide--subtitle" th:text="${beans.uih.extractSubtitleFromRepoDescription(guide)}">YADA Learn how to create a REST web service with Spring</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
