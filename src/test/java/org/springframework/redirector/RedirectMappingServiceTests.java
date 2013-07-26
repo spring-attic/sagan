@@ -20,7 +20,7 @@ public class RedirectMappingServiceTests {
 	}
 
 	@Test
-	public void redirectionIgnoresTrailingSlashes() throws Exception {
+	public void redirectionIgnoresTrailingSlashesFromMappingUrls() throws Exception {
 		RedirectMappingService service = new RedirectMappingService();
 		MappingEntry mappingEntry = new MappingEntry();
 		mappingEntry.setOldUrl("http://example.com/old/");
@@ -29,5 +29,17 @@ public class RedirectMappingServiceTests {
 		service.getMappings().add(mappingEntry);
 
 		assertThat(service.redirectUrlFor("/old"), equalTo(newUrl));
+	}
+
+	@Test
+	public void redirectionIgnoresTrailingSlashesFromIncomingRequestPath() throws Exception {
+		RedirectMappingService service = new RedirectMappingService();
+		MappingEntry mappingEntry = new MappingEntry();
+		mappingEntry.setOldUrl("http://example.com/old/");
+		String newUrl = "http://example.com/new";
+		mappingEntry.setNewUrl(newUrl);
+		service.getMappings().add(mappingEntry);
+
+		assertThat(service.redirectUrlFor("/old/"), equalTo(newUrl));
 	}
 }

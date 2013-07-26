@@ -30,7 +30,7 @@ public class RedirectMappingService {
 		if (redirectMappings == null) {
 			buildMappings();
 		}
-		return redirectMappings.get(path);
+		return redirectMappings.get(path.replaceAll("/$", ""));
 	}
 
 	private void buildMappings() {
