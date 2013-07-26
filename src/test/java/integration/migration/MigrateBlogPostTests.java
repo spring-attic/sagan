@@ -56,7 +56,7 @@ public class MigrateBlogPostTests extends IntegrationTestBase {
 		migrateBlogPost.param("authorMemberId", author.getMemberId());
 
 		mockMvc.perform(migrateBlogPost).andExpect(status().isCreated())
-				.andExpect(header().string("Location", matches("/blog/\\d+-a-post-title$")));
+				.andExpect(header().string("Location", matches("/blog/2000/01/01/a-post-title")));
 
 		Post post = postRepository.findByTitle("a post title");
 
@@ -94,7 +94,7 @@ public class MigrateBlogPostTests extends IntegrationTestBase {
 		migrateBlogPost.param("createdAt", "1999-11-21 10:00");
 
 		mockMvc.perform(migrateBlogPost).andExpect(status().isOk())
-				.andExpect(header().string("Location", matches("/blog/\\d+-a-post-title$")));
+				.andExpect(header().string("Location", matches("/blog/" + post.getPublicSlug())));
 
 		Post updatedPost = postRepository.findByTitle("a post title");
 

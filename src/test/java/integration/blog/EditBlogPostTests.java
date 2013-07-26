@@ -52,7 +52,7 @@ public class EditBlogPostTests extends IntegrationTestBase {
 
 	@Test
 	public void getEditBlogPage() throws Exception {
-		this.mockMvc.perform(get("/admin/blog/" + post.getSlug() + "/edit"))
+		this.mockMvc.perform(get("/admin/blog/" + post.getAdminSlug() + "/edit"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("Edit Blog Post")));
@@ -68,7 +68,7 @@ public class EditBlogPostTests extends IntegrationTestBase {
 					@Override
 					public void match(MvcResult result) {
 						String redirectedUrl = result.getResponse().getRedirectedUrl();
-						assertThat(redirectedUrl, startsWith("/blog/" + post.getId() + "-new-title"));
+						assertThat(redirectedUrl, startsWith("/blog/" + post.getPublicSlug()));
 					}
 				});
 	}
@@ -89,7 +89,7 @@ public class EditBlogPostTests extends IntegrationTestBase {
 
 	@Test
 	public void updateDoesNotPersistInvalidData() throws Exception {
-		MockHttpServletRequestBuilder editPostRequest = put("/admin/blog/" + post.getSlug());
+		MockHttpServletRequestBuilder editPostRequest = put("/admin/blog/" + post.getAdminSlug());
 		editPostRequest.param("title", "");
 		editPostRequest.param("content", "");
 		editPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
@@ -106,7 +106,7 @@ public class EditBlogPostTests extends IntegrationTestBase {
 	}
 
 	private MockHttpServletRequestBuilder createEditPostRequest() {
-		MockHttpServletRequestBuilder editPostRequest = put("/admin/blog/" + post.getSlug());
+		MockHttpServletRequestBuilder editPostRequest = put("/admin/blog/" + post.getAdminSlug());
 		editPostRequest.param("title", "New Title");
 		editPostRequest.param("content", "New Content");
 		editPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());

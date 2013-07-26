@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestClientException;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -88,9 +89,16 @@ public class BlogAdminController {
 			model.addAttribute("post", post);
 			return "admin/blog/edit";
 		} else {
-			service.updatePost(post, postForm);
-			PostView postView = postViewFactory.createPostView(post);
-			return "redirect:" + postView.getPath();
+			try {
+				service.updatePost(post, postForm);
+				PostView postView = postViewFactory.createPostView(post);
+				return "redirect:" + postView.getPath();
+			} catch(RestClientException e) {
+				model.addAttribute("categories", PostCategory.values());
+				model.addAttribute("post", post);
+				model.addAttribute("githubBroken", true);
+				return "admin/blog/edit";
+			}
 		}
 	}
 

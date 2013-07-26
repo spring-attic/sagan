@@ -43,9 +43,11 @@ public class BlogController_ShowTests {
 
 		controller = new BlogController(blogService, postViewFactory);
 
-		post = PostBuilder.post().build();
-		given(blogService.getPublishedPost(post.getId())).willReturn(post);
-		viewName = controller.showPost(post.getId(), "1-post-title", model);
+		post = PostBuilder.post().publishAt("2012-02-01 11:00").build();
+		given(blogService.getPublishedPost("2012/02/01/title")).willReturn(post);
+		viewName = controller.showPost(
+				"2012", "02", "01",
+				"title", model);
 	}
 
 	@Test

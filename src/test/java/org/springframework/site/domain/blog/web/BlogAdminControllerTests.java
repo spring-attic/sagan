@@ -1,10 +1,6 @@
 package org.springframework.site.domain.blog.web;
 
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,10 +23,22 @@ import org.springframework.ui.ExtendedModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.validation.MapBindingResult;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.*;
-import static org.mockito.Matchers.*;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.anyObject;
+import static org.mockito.BDDMockito.anyString;
+import static org.mockito.BDDMockito.eq;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.mock;
+import static org.mockito.BDDMockito.same;
+import static org.mockito.BDDMockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogAdminControllerTests {
@@ -124,7 +132,7 @@ public class BlogAdminControllerTests {
 		given(blogService.addPost(postForm, principal.getName())).willReturn(post);
 		String result = controller.createPost(principal, postForm, bindingResult, null);
 
-		assertThat(result, equalTo("redirect:/blog/123-post-title"));
+		assertThat(result, equalTo("redirect:/blog/2013/05/06/post-title"));
 	}
 
 

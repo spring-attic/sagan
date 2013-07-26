@@ -6,10 +6,13 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
 public class Post implements Serializable {
+
+	private static final SimpleDateFormat SLUG_DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
 
 	@Id
 	@GeneratedValue
@@ -48,6 +51,9 @@ public class Post implements Serializable {
 
 	@Column(nullable = true)
 	private Date publishAt;
+
+	@Column(nullable = true)
+	private String publicSlug;
 
 	@SuppressWarnings("unused")
 	private Post() {
@@ -125,15 +131,7 @@ public class Post implements Serializable {
 
 	public void setPublishAt(Date publishAt) {
 		this.publishAt = publishAt;
-	}
-
-	public String getSlug() {
-		if (title == null) {
-			return "";
-		}
-
-		String cleanedTitle = title.toLowerCase().replace("\n", " ").replaceAll("[^a-z\\d\\s]", " ");
-		return getId() + "-" + StringUtils.arrayToDelimitedString(StringUtils.tokenizeToStringArray(cleanedTitle, " "), "-");
+		this.publicSlug = publishAt == null ? null : generatePublicSlug();
 	}
 
 	public boolean isDraft() {
@@ -158,6 +156,27 @@ public class Post implements Serializable {
 
 	public boolean isLiveOn(Date date) {
 		return !(isDraft() || publishAt.after(date));
+	}
+
+	public String getPublicSlug() {
+		return publicSlug;
+	}
+
+	public String getAdminSlug() {
+		return String.format("%s-%s", getId(), getSlug());
+	}
+
+	private String generatePublicSlug() {
+		return String.format("%s/%s", SLUG_DATE_FORMAT.format(getPublishAt()), getSlug());
+	}
+
+	private String getSlug() {
+		if (title == null) {
+			return "";
+		}
+
+		String cleanedTitle = title.toLowerCase().replace("\n", " ").replaceAll("[^a-z\\d\\s]", " ");
+		return StringUtils.arrayToDelimitedString(StringUtils.tokenizeToStringArray(cleanedTitle, " "), "-");
 	}
 
 	@Override

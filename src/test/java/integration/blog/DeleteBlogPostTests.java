@@ -71,7 +71,7 @@ public class DeleteBlogPostTests extends IntegrationTestBase {
 	}
 
 	private MockHttpServletRequestBuilder createDeletePostRequest() {
-		MockHttpServletRequestBuilder editPostRequest = delete("/admin/blog/" + post.getSlug());
+		MockHttpServletRequestBuilder editPostRequest = delete("/admin/blog/" + post.getAdminSlug());
 		return editPostRequest;
 	}
 

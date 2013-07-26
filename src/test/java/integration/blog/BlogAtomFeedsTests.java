@@ -125,7 +125,7 @@ public class BlogAtomFeedsTests extends IntegrationTestBase {
 
 		String postDate = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedAt());
 		assertThat(atomFeed, containsString(postDate));
-		assertThat(atomFeed, containsString("/blog/" + post.getSlug()));
+		assertThat(atomFeed, containsString("/blog/" + post.getPublicSlug()));
 		assertThat(atomFeed, containsString(PostCategory.ENGINEERING.getDisplayName()));
 		assertThat(atomFeed, containsString("Broadcast"));
 	}

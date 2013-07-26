@@ -9,8 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PostView {
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
-			"MMMM dd, yyyy");
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy");
 
 	private Post post;
 	private DateService dateService;
@@ -26,13 +25,13 @@ public class PostView {
 	}
 
 	public String getPath() {
-		String prefix = this.post.isLiveOn(this.dateService.now()) ? "/blog/"
-				: "/admin/blog/";
-		return prefix + this.post.getSlug();
-	}
-
-	public String getSlug() {
-		return this.post.getSlug();
+		String path;
+		if (this.post.isLiveOn(this.dateService.now())) {
+			path = "/blog/" + post.getPublicSlug();
+		} else {
+			path = "/admin/blog/" + post.getAdminSlug();
+		}
+		return path;
 	}
 
 	public String getTitle() {
@@ -82,4 +81,13 @@ public class PostView {
 	public boolean showReadMore() {
 		return !this.post.getRenderedContent().equals(this.post.getRenderedSummary());
 	}
+
+	public String getEditPath() {
+		return getUpdatePath() + "/edit";
+	}
+
+	public String getUpdatePath() {
+		return "/admin/blog/" + post.getAdminSlug();
+	}
+
 }

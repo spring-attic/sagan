@@ -70,7 +70,7 @@ public class PostViewTests {
 		post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-01 13:42").build();
 		postView = new PostView(post, dateService);
 
-		assertThat(postView.getPath(), equalTo("/blog/123-my-post"));
+		assertThat(postView.getPath(), equalTo("/blog/2012/07/01/my-post"));
 	}
 
 	@Test

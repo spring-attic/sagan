@@ -105,14 +105,12 @@ public class PostBuilder {
 	}
 
 	public PostBuilder publishAt(String dateString) throws ParseException {
-		this.publishAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString);
-		return this;
+		return publishAt(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString));
 	}
 
 	public PostBuilder publishYesterday() {
 		long oneDay = 1000 * 60 * 60 * 24;
-		this.publishAt = new Date(System.currentTimeMillis() - oneDay);
-		return this;
+		return publishAt(new Date(System.currentTimeMillis() - oneDay));
 	}
 
 	public PostBuilder isBroadcast() {
@@ -121,8 +119,7 @@ public class PostBuilder {
 	}
 
 	public PostBuilder scheduled() {
-		publishAt = new Date(System.currentTimeMillis() + 1000000);
-		return this;
+		return publishAt(new Date(System.currentTimeMillis() + 1000000));
 	}
 
 	public Post build() {

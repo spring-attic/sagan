@@ -94,7 +94,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 		Post post = PostBuilder.post().build();
 		postRepository.save(post);
 
-		assertThat(service.getPublishedPost(post.getId()), equalTo(post));
+		assertThat(service.getPublishedPost(post.getPublicSlug()), equalTo(post));
 	}
 
 	@Test
@@ -103,7 +103,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 		postRepository.save(post);
 
 		expected.expect(EntityNotFoundException.class);
-		service.getPublishedPost(post.getId());
+		service.getPublishedPost(post.getPublicSlug());
 	}
 
 	@Test
@@ -115,7 +115,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 		given(dateService.now()).willReturn(today);
 
 		expected.expect(EntityNotFoundException.class);
-		service.getPublishedPost(post.getId());
+		service.getPublishedPost(post.getPublicSlug());
 	}
 
 	@Test

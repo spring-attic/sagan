@@ -127,6 +127,11 @@ public class BlogService_ValidPostTests {
 	}
 
 	@Test
+	public void postHasPublicSlug() {
+		assertThat(post.getPublicSlug(), equalTo("2013/07/01/title"));
+	}
+
+	@Test
 	public void draftWithNullPublishDate() {
 		postForm.setDraft(true);
 		postForm.setPublishAt(null);

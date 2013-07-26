@@ -35,9 +35,10 @@ public class BlogController {
 		this.postViewFactory = postViewFactory;
 	}
 
-	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { GET, HEAD })
-	public String showPost(@PathVariable("postId") Long postId, @PathVariable("slug") String slug, Model model) {
-		Post post = service.getPublishedPost(postId);
+	@RequestMapping(value = "/{year:\\d+}/{month:\\d+}/{day:\\d+}/{slug}", method = { GET, HEAD })
+	public String showPost(@PathVariable String year, @PathVariable String month, @PathVariable String day, @PathVariable String slug, Model model) {
+
+		Post post = service.getPublishedPost(String.format("%s/%s/%s/%s", year, month, day, slug));
 		model.addAttribute("post", postViewFactory.createPostView(post));
 		model.addAttribute("categories", PostCategory.values());
 		model.addAttribute("activeCategory", post.getCategory().getDisplayName());

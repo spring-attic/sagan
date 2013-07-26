@@ -53,11 +53,11 @@ public class BlogService {
 		return repository.findByTitleAndCreatedAt(title, createdAt);
 	}
 
-	public Post getPublishedPost(Long postId) {
-		Post post = this.repository.findByIdAndDraftFalseAndPublishAtBefore(postId,
+	public Post getPublishedPost(String publicSlug) {
+		Post post = this.repository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug,
 				this.dateService.now());
 		if (post == null) {
-			throw new EntityNotFoundException("Blog post not found with Id=" + postId);
+			throw new EntityNotFoundException("Blog post not found with Id=" + publicSlug);
 		}
 		return post;
 	}

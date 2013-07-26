@@ -16,8 +16,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
 	Page<Post> findByDraftTrue(Pageable pageRequest);
 
-	Post findByIdAndDraftFalseAndPublishAtBefore(Long postId, Date publishedBefore);
-
 	Page<Post> findByDraftFalseAndPublishAtBefore(Date publishedBefore, Pageable pageRequest);
 
 	List<Post> findByDraftFalseAndPublishAtBefore(Date publishedBefore);
@@ -33,4 +31,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 	Post findByTitle(String title);
 
 	Post findByTitleAndCreatedAt(String title, Date createdAt);
+
+	Post findByPublicSlugAndDraftFalseAndPublishAtBefore(String publicSlug, Date now);
 }

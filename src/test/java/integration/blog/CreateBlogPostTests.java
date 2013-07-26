@@ -1,14 +1,11 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.blog.Post;
-import org.springframework.site.domain.blog.PostBuilder;
 import org.springframework.site.domain.blog.PostCategory;
 import org.springframework.site.domain.blog.PostRepository;
 import org.springframework.site.domain.team.MemberProfile;
@@ -83,6 +80,7 @@ public class CreateBlogPostTests extends IntegrationTestBase {
 		createPostRequest.param("content", "My Content");
 		createPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
         createPostRequest.param("draft", "false");
+		createPostRequest.param("publishAt", "2013-07-01 13:15");
 
 		this.mockMvc.perform(createPostRequest)
 				.andExpect(status().isFound())
@@ -90,18 +88,9 @@ public class CreateBlogPostTests extends IntegrationTestBase {
 					@Override
 					public void match(MvcResult result) {
 						String redirectedUrl = result.getResponse().getRedirectedUrl();
-						assertTrue("Expected redirect to blog, got: " + redirectedUrl, redirectedUrl.matches("^/blog/\\d+-post-title"));
+						assertTrue("Expected redirect to /blog/2013/07/01/post-title, got: " + redirectedUrl, redirectedUrl.matches("^/blog/2013/07/01/post-title"));
 					}
 				});
-	}
-
-	@Test
-	public void canViewBlogPostAtAnySlugName() throws Exception {
-		Post post = PostBuilder.post().build();
-		postRepository.save(post);
-		this.mockMvc.perform(get("/blog/" + post.getId() + "-random-slug"))
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString(post.getTitle())));
 	}
 
 	@Test
@@ -124,22 +113,6 @@ public class CreateBlogPostTests extends IntegrationTestBase {
 
 	private MockHttpServletRequestBuilder getCreatePostRequest() {
 		return post("/admin/blog").principal(principal);
-	}
-
-	@Test
-	public void persistedPostValuesAreDisplayedCorrectly() throws Exception {
-		Post post = PostBuilder.post().isBroadcast().build();
-		postRepository.save(post);
-
-		MvcResult response = mockMvc.perform(get("/blog/" + post.getId()))
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString(post.getTitle())))
-				.andExpect(content().string(containsString(post.getCategory().getDisplayName())))
-				.andExpect(content().string(containsString("Broadcast")))
-				.andReturn();
-
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertThat(html.title(), containsString(post.getTitle()));
 	}
 
 	@Test

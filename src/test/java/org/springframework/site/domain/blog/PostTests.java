@@ -17,27 +17,27 @@ public class PostTests {
 
 	@Test
 	public void slugReplacesSpacesWithDashes() {
-		assertEquals("1-this-is-a-title", builder.title("This is a title").build().getSlug());
+		assertEquals("1-this-is-a-title", builder.title("This is a title").build().getAdminSlug());
 	}
 
 	@Test
 	public void slugReplacesMultipleSpacesWithASingleDash() {
-		assertEquals("1-this-is-a-title", builder.title("This    is a title").build().getSlug());
+		assertEquals("1-this-is-a-title", builder.title("This    is a title").build().getAdminSlug());
 	}
 
 	@Test
 	public void slugStripsNonAlphanumericCharacters() {
-		assertEquals("1-title-1-with-characters", builder.title("Title 1, with characters';:\\|").build().getSlug());
+		assertEquals("1-title-1-with-characters", builder.title("Title 1, with characters';:\\|").build().getAdminSlug());
 	}
 
 	@Test
 	public void slugStripsNonAlphanumericCharactersUsedAsDividersWithSpaces() {
-		assertEquals("1-title-1-something", builder.title("Title__--1/@something").build().getSlug());
+		assertEquals("1-title-1-something", builder.title("Title__--1/@something").build().getAdminSlug());
 	}
 
 	@Test
 	public void slugStripsNewLineCharacters() {
-		assertEquals("1-title-1-on-multiple-lines", builder.title("Title 1\n on multiple\nlines").build().getSlug());
+		assertEquals("1-title-1-on-multiple-lines", builder.title("Title 1\n on multiple\nlines").build().getAdminSlug());
 	}
 
 	@Test
