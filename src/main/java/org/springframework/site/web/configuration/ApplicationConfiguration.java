@@ -27,12 +27,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.site.domain.documentation.DocumentationService;
+import org.springframework.site.domain.documentation.DocumentationYamlParser;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.web.SiteUrl;
 import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
 import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.InputStream;
 
 @EnableAutoConfiguration
 @Configuration
@@ -83,6 +88,12 @@ public class ApplicationConfiguration {
 	@Bean
 	public Serializer simpleXmlSerializer() {
 		return new Persister();
+	}
+
+	@Bean
+	public DocumentationService documentationService() throws IOException {
+		InputStream yaml = new ClassPathResource("/documentation.yml", getClass()).getInputStream();
+		return new DocumentationService(new DocumentationYamlParser().parse(yaml));
 	}
 
 }

@@ -6,15 +6,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.site.domain.StaticPageMapper;
+import org.springframework.site.domain.documentation.DocumentationService;
+import org.springframework.site.domain.documentation.DocumentationYamlParser;
 import org.springframework.site.search.configuration.SearchClientConfiguration;
 import org.springframework.site.web.configuration.GitHubConfiguration;
 import org.springframework.site.web.configuration.SecurityConfiguration;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -48,6 +53,12 @@ public class IndexerConfiguration {
 	@Bean
 	public StaticPageMapper staticPageMapper(ResourcePatternResolver resourceResolver) {
 		return new StaticPageMapper(resourceResolver);
+	}
+
+	@Bean
+	public DocumentationService documentationService() throws IOException {
+		InputStream yaml = new ClassPathResource("/documentation.yml", getClass()).getInputStream();
+		return new DocumentationService(new DocumentationYamlParser().parse(yaml));
 	}
 
 }
