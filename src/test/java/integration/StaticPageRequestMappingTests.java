@@ -37,9 +37,7 @@ public class StaticPageRequestMappingTests extends IntegrationTestBase {
 		this.mockMvc.perform(get("/guides"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Getting Started")))
-				.andExpect(content().string(containsString("Tutorials")))
-				.andExpect(content().string(containsString("Reference Apps")));
+				.andExpect(content().string(containsString("Spring Framework Guides")));
 	}
 
 	@Test
