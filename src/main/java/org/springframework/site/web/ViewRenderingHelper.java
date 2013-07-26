@@ -1,5 +1,6 @@
 package org.springframework.site.web;
 
+import org.springframework.site.domain.guides.GettingStartedGuide;
 import org.springframework.social.github.api.GitHubRepo;
 
 /**
@@ -26,12 +27,28 @@ public class ViewRenderingHelper {
 	}
 
 	public String extractTitleFromRepoDescription(GitHubRepo repo) {
-		String[] split = repo.getDescription().split("::", 2);
-		return split[0].trim();
+		return extractTitleFromDescription(repo.getDescription());
+	}
+
+	public String extractTitleFromRepoDescription(GettingStartedGuide repo) {
+		return extractTitleFromDescription(repo.getDescription());
+	}
+
+	public String extractSubtitleFromRepoDescription(GettingStartedGuide repo) {
+		return extractSubtitleFromDescription(repo.getDescription());
 	}
 
 	public String extractSubtitleFromRepoDescription(GitHubRepo repo) {
-		String[] split = repo.getDescription().split("::", 2);
+		return extractSubtitleFromDescription(repo.getDescription());
+	}
+
+	private String extractTitleFromDescription(String description) {
+		String[] split = description.split("::", 2);
+		return split[0].trim();
+	}
+
+	private String extractSubtitleFromDescription(String description) {
+		String[] split = description.split("::", 2);
 		return (split.length > 1) ? split[1].trim() : "";
 	}
 

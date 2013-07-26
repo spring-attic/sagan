@@ -15,6 +15,7 @@ import java.util.Map;
 @Service
 public class GitHubGettingStartedService implements GettingStartedService {
 
+	private static final String GITHUB_USERNAME = "springframework-meta";
 	private static final String REPOS_PATH = "/orgs/springframework-meta/repos?per_page=100";
 	private static final String README_PATH = "/repos/springframework-meta/gs-%s/contents/README.md";
 	private static final String SIDEBAR_PATH = "/repos/springframework-meta/gs-%s/contents/SIDEBAR.md";
@@ -31,7 +32,15 @@ public class GitHubGettingStartedService implements GettingStartedService {
 
 	@Override
 	public GettingStartedGuide loadGuide(String guideId) {
-		return new GettingStartedGuide(guideId, getGuideContent(guideId), getGuideSidebar(guideId));
+		return new GettingStartedGuide(guideId, getGuideDescription(guideId), getGuideContent(guideId), getGuideSidebar(guideId));
+	}
+
+	private String getGuideDescription(String guideId) {
+		try {
+			return this.gitHubService.getRepoInfo(GITHUB_USERNAME, guideId).getDescription();
+		} catch (RestClientException e) {
+			return "";
+		}
 	}
 
 	private String getGuideContent(String guideId) {
@@ -57,7 +66,7 @@ public class GitHubGettingStartedService implements GettingStartedService {
 
 	@Override
 	public List<GuideRepo> listGuides() {
-		List<GuideRepo> guideRepos = new ArrayList<GuideRepo>();
+		List<GuideRepo> guideRepos = new ArrayList<>();
 
 		for (GuideRepo guideRepo : this.gitHubService.getForObject(REPOS_PATH,
 				GuideRepo[].class)) {

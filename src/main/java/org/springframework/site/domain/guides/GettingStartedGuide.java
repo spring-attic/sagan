@@ -1,9 +1,10 @@
 package org.springframework.site.domain.guides;
 
 public class GettingStartedGuide {
+	private final String guideId;
+	private final String description;
 	private final String content;
 	private final String sidebar;
-	private final String guideId;
 	private final static String REPO_ZIP_URL = "https://github.com/springframework-meta/gs-%s/archive/master.zip";
 	private final static String REPO_HTTPS_URL = "https://github.com/springframework-meta/gs-%s.git";
 	private final static String GITHUB_HTTPS_URL = "https://github.com/springframework-meta/gs-%s";
@@ -12,10 +13,19 @@ public class GettingStartedGuide {
 	private final static String CI_STATUS_IMAGE_URL = "https://drone.io/github.com/springframework-meta/gs-%s/status.png";
 	private final static String CI_LATEST_URL = "https://drone.io/github.com/springframework-meta/gs-%s/latest";
 
-	public GettingStartedGuide(String guideId, String content, String sidebar) {
+	public GettingStartedGuide(String guideId, String description, String content, String sidebar) {
+		this.guideId = guideId;
+		this.description = description;
 		this.content = content;
 		this.sidebar = sidebar;
-		this.guideId = guideId;
+	}
+
+	public String getGuideId() {
+		return guideId;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public String getContent() {
@@ -24,10 +34,6 @@ public class GettingStartedGuide {
 
 	public String getSidebar() {
 		return sidebar;
-	}
-
-	public String getGuideId() {
-		return guideId;
 	}
 
 	public String getGitRepoHttpsUrl() {

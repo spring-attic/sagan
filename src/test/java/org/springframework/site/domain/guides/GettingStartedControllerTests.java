@@ -1,8 +1,5 @@
 package org.springframework.site.domain.guides;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -12,9 +9,12 @@ import org.springframework.site.web.guides.GettingStartedController;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.web.client.RestClientException;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.BDDMockito.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.BDDMockito.given;
 
 public class GettingStartedControllerTests {
 
@@ -48,7 +48,7 @@ public class GettingStartedControllerTests {
 
 	@Test
 	public void guideIsInModel() {
-		GettingStartedGuide guide = new GettingStartedGuide("guide-id", GUIDE_TEXT, "");
+		GettingStartedGuide guide = new GettingStartedGuide("guide-id", "Title :: Description", GUIDE_TEXT, "");
 		given(guideService.loadGuide(GUIDE_NAME)).willReturn(guide);
 		controller.viewGuide(GUIDE_NAME, model);
 		assertThat(((GettingStartedGuide) model.get("guide")), is(guide));

@@ -14,7 +14,7 @@ public class GettingStartedGuideTests {
 
 	@Before
 	public void setUp() throws Exception {
-		guide = new GettingStartedGuide("rest-service", CONTENT, SIDEBAR);
+		guide = new GettingStartedGuide("rest-service", "Title :: Description", CONTENT, SIDEBAR);
 	}
 
 	@Test

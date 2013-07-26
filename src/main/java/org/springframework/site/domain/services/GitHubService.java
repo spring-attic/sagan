@@ -3,6 +3,7 @@ package org.springframework.site.domain.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.guides.GuideHtml;
 import org.springframework.social.github.api.GitHub;
+import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
@@ -34,4 +35,9 @@ public class GitHubService implements MarkdownService {
 		GuideHtml response = getForObject(path, GuideHtml.class);
 		return response.getHtml();
 	}
+
+	public GitHubRepo getRepoInfo(String githubUsername, String repoName) {
+		return gitHub.repoOperations().getRepo(githubUsername, repoName);
+	}
+
 }

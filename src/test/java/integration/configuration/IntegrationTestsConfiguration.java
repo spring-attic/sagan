@@ -22,7 +22,7 @@ import static org.mockito.Mockito.mock;
 public class IntegrationTestsConfiguration {
 
 	public static final GettingStartedGuide GETTING_STARTED_GUIDE =
-			new GettingStartedGuide("awesome-guide", "Awesome getting started guide that isn't helpful", "Related resources");
+			new GettingStartedGuide("awesome-guide", "Awesome Guide :: Awesome getting started guide that isn't helpful", "Learn awesome stuff with this guide.", "Related resources");
 
 	@Primary
 	@Bean
@@ -34,6 +34,7 @@ public class IntegrationTestsConfiguration {
 	@Bean
 	public GettingStartedService offlineGettingStartedService() {
 		return new GettingStartedService() {
+
 			@Override
 			public GettingStartedGuide loadGuide(String guideId) {
 				return GETTING_STARTED_GUIDE;

@@ -14,7 +14,6 @@ public class ViewRenderingHelperTests {
 		GitHubRepo repo = new GitHubRepo();
 		repo.setDescription("Title :: Subtitle");
 		assertThat(helper.extractTitleFromRepoDescription(repo), equalTo("Title"));
-
 	}
 
 	@Test

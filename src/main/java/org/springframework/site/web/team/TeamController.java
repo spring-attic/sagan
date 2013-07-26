@@ -44,7 +44,7 @@ public class TeamController {
 	public String showTeam(Model model) throws IOException {
 		List<MemberProfile> profiles = teamRepository.findByHidden(false);
 		model.addAttribute("profiles", profiles);
-		List<TeamLocation> teamLocations = new ArrayList<TeamLocation>();
+		List<TeamLocation> teamLocations = new ArrayList<>();
 		for (MemberProfile profile : profiles) {
 			if (profile.getTeamLocation() != null) {
 				teamLocations.add(profile.getTeamLocation());

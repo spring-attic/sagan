@@ -54,8 +54,11 @@ public class GettingStartedGuidesTests extends IntegrationTestBase {
 				.andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertThat(html.select("article").text(), is(IntegrationTestsConfiguration.GETTING_STARTED_GUIDE.getContent()));
+		assertThat(html.select(".article-body").text(), is(IntegrationTestsConfiguration.GETTING_STARTED_GUIDE.getContent()));
 		assertThat(html.select("aside#sidebar .related_resources").text(), is(IntegrationTestsConfiguration.GETTING_STARTED_GUIDE.getSidebar()));
+
+		assertThat(html.select(".title").text(), equalTo("Awesome Guide"));
+		assertThat(html.select(".subtitle").text(), is("Awesome getting started guide that isn't helpful"));
 
 		Element downloadLink = html.select("aside#sidebar a.github_download").first();
 		assertThat(downloadLink, is(notNullValue()));

@@ -1,16 +1,16 @@
 package org.springframework.site.domain.guides;
 
-import java.io.IOException;
-import java.util.Map;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.services.GitHubService;
+import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.web.client.RestClientException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.Map;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
@@ -32,6 +32,8 @@ public class GitHubGettingStartedServiceTests {
 	public static final String README = ".*README.md";
 	public static final String README_CONTENT = "Getting Started: Building a RESTful Web Service";
 	public static final String SIDEBAR_CONTENT = "Related resources";
+	private static final GitHubRepo REPO_INFO = new GitHubRepo();
+
 	@Mock
 	private GitHubService gitHubService;
 
@@ -48,16 +50,25 @@ public class GitHubGettingStartedServiceTests {
 
 	@Test
 	public void loadGuideContent() throws IOException {
-		given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(
-				README_CONTENT);
+		given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
+		given(this.gitHubService.getRepoInfo(anyString(), anyString())).willReturn(REPO_INFO);
 		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
 		assertThat(guide.getContent(), equalTo(README_CONTENT));
 	}
 
 	@Test
+	public void loadGuideSetsDescription() throws IOException {
+		String description = "Awesome Guide :: Learn awesome stuff with this guide";
+		REPO_INFO.setDescription(description);
+		given(this.gitHubService.getRepoInfo("springframework-meta", GUIDE_ID)).willReturn(REPO_INFO);
+		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
+		assertThat(guide.getDescription(), equalTo(description));
+	}
+
+	@Test
 	public void loadGuideSidebar() throws IOException {
-		given(this.gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willReturn(
-				SIDEBAR_CONTENT);
+		given(this.gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willReturn(SIDEBAR_CONTENT);
+		given(this.gitHubService.getRepoInfo(anyString(), anyString())).willReturn(REPO_INFO);
 		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
 		assertThat(guide.getSidebar(), is(SIDEBAR_CONTENT));
 	}
@@ -66,18 +77,17 @@ public class GitHubGettingStartedServiceTests {
 	@Test(expected = GuideNotFoundException.class)
 	public void unknownGuide() {
 		String unknownGuideId = "foo";
-		given(this.gitHubService.getRawFileAsHtml(anyString())).willThrow(
-				RestClientException.class);
+		given(this.gitHubService.getRepoInfo(anyString(), anyString())).willThrow(RestClientException.class);
+		given(this.gitHubService.getRawFileAsHtml(anyString())).willThrow(RestClientException.class);
 		this.service.loadGuide(unknownGuideId);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
 	public void guideWithoutSidebar() {
-		given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(
-				README_CONTENT);
-		given(this.gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willThrow(
-				RestClientException.class);
+		given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
+		given(this.gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willThrow(RestClientException.class);
+		given(this.gitHubService.getRepoInfo(anyString(), anyString())).willReturn(REPO_INFO);
 
 		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
 
