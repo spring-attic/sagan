@@ -37,8 +37,10 @@ public class BlogController {
 
 	@RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { GET, HEAD })
 	public String showPost(@PathVariable("postId") Long postId, @PathVariable("slug") String slug, Model model) {
-		model.addAttribute("post", postViewFactory.createPostView(service.getPublishedPost(postId)));
+		Post post = service.getPublishedPost(postId);
+		model.addAttribute("post", postViewFactory.createPostView(post));
 		model.addAttribute("categories", PostCategory.values());
+		model.addAttribute("activeCategory", post.getCategory().getDisplayName());
 		return "blog/show";
 	}
 

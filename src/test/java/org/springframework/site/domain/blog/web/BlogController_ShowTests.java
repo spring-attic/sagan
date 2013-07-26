@@ -1,7 +1,5 @@
 package org.springframework.site.domain.blog.web;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -16,9 +14,12 @@ import org.springframework.site.web.blog.PostView;
 import org.springframework.site.web.blog.PostViewFactory;
 import org.springframework.ui.ExtendedModelMap;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.BDDMockito.*;
+import javax.servlet.http.HttpServletRequest;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.BDDMockito.given;
 
 public class BlogController_ShowTests {
 
@@ -45,6 +46,11 @@ public class BlogController_ShowTests {
 		post = PostBuilder.post().build();
 		given(blogService.getPublishedPost(post.getId())).willReturn(post);
 		viewName = controller.showPost(post.getId(), "1-post-title", model);
+	}
+
+	@Test
+	public void providesActiveCategoryInModel() {
+		assertThat((String) model.get("activeCategory"), equalTo(post.getCategory().getDisplayName()));
 	}
 
 	@Test
