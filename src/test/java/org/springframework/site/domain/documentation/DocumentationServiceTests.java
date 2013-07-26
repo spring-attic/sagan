@@ -11,7 +11,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
 
@@ -24,6 +27,16 @@ public class DocumentationServiceTests {
 
 		assertEquals(3, documentationService.getProject("spring-framework")
 				.getSupportedVersions().size());
+	}
+
+	@Test
+	public void exposesProjectsForACategory() throws IOException {
+		InputStream yaml = new ClassPathResource("/test-documentation.yml", getClass()).getInputStream();
+		DocumentationService documentationService = new DocumentationService(new DocumentationYamlParser().parse(yaml));
+
+		List<Project> activeProjects = documentationService.getProjectsForCategory("active");
+		assertThat(activeProjects.size(), is(1));
+		assertThat(activeProjects.get(0).getId(), is("spring-framework"));
 	}
 
 	@Test

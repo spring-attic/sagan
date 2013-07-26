@@ -24,7 +24,10 @@ public class DocumentationController {
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listProjects(Model model) {
-		model.addAttribute("projects", service.getProjects());
+		model.addAttribute("activeProjects", service.getProjectsForCategory("active"));
+		model.addAttribute("atticProjects", service.getProjectsForCategory("attic"));
+		model.addAttribute("incubatorProjects", service.getProjectsForCategory("incubator"));
+		model.addAttribute("otherProjects", service.getProjectsForCategory("other"));
 		return "documentation/index";
 	}
 
