@@ -10,9 +10,9 @@
 <div layout:fragment="content" class="container">
 
 	<ul>
-		<li th:each="guide : ${guides}">
-			<h3 ><a href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/content'}" th:text="${guide.guideId}">rest-service</a></h3>
-			<p th:text="${guide.description}">Getting Started: Building a RESTful Web Service</p>
+		<li th:each="guide : ${guides}" class="guide">
+			<h3 class="title"><a href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/content'}" th:text="${beans.uih.extractTitleFromRepoDescription(guide)}">Building a RESTful Web Service</a></h3>
+			<p class="subtitle" th:text="${beans.uih.extractSubtitleFromRepoDescription(guide)}">YADA Learn how to create a REST web service with Spring</p>
 		</li>
 	</ul>
 </div>

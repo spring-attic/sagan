@@ -13,9 +13,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -34,10 +34,16 @@ public class GettingStartedGuidesTests extends IntegrationTestBase {
 
 	@Test
 	public void getGettingStartedGuidesListPage() throws Exception {
-		this.mockMvc.perform(get("/guides/gs"))
+		MvcResult response = this.mockMvc.perform(get("/guides/gs"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("rest-service")));
+				.andReturn();
+
+		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+		Element restServiceGuide = html.select(".guide").first();
+		assertThat(restServiceGuide.select(".title").text(), equalTo("Building a RESTful Web Service"));
+		assertThat(restServiceGuide.select(".subtitle").text(), equalTo("Learn how to create a REST web service with Spring"));
+		assertThat(restServiceGuide.select("a").attr("href"), equalTo("/guides/gs/rest-service/content"));
 	}
 
 	@Test

@@ -1,9 +1,5 @@
 package org.springframework.site.domain.guides;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +7,10 @@ import org.springframework.security.crypto.codec.Base64;
 import org.springframework.site.domain.services.GitHubService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class GitHubGettingStartedService implements GettingStartedService {
@@ -31,15 +31,13 @@ public class GitHubGettingStartedService implements GettingStartedService {
 
 	@Override
 	public GettingStartedGuide loadGuide(String guideId) {
-		return new GettingStartedGuide(guideId, getGuideContent(guideId),
-				getGuideSidebar(guideId));
+		return new GettingStartedGuide(guideId, getGuideContent(guideId), getGuideSidebar(guideId));
 	}
 
 	private String getGuideContent(String guideId) {
 		try {
 			log.info(String.format("Fetching getting started guide for '%s'", guideId));
-			return this.gitHubService.getRawFileAsHtml(String
-					.format(README_PATH, guideId));
+			return this.gitHubService.getRawFileAsHtml(String.format(README_PATH, guideId));
 		} catch (RestClientException e) {
 			String msg = String
 					.format("No getting started guide found for '%s'", guideId);

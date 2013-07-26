@@ -23,7 +23,7 @@
     },
     "private": true,
     "html_url": "https://github.com/springframework-meta/gs-rest-service",
-    "description": "Guide on creating a REST-based service",
+    "description": "Building a RESTful Web Service :: Learn how to create a REST web service with Spring",
     "fork": false,
     "url": "https://api.github.com/repos/springframework-meta/gs-rest-service",
     "forks_url": "https://api.github.com/repos/springframework-meta/gs-rest-service/forks",

@@ -45,7 +45,7 @@ public class GettingStartedController {
 	@RequestMapping(value = "/{guideSlug}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })
 	public ResponseEntity<byte[]> loadImage(@PathVariable String guideSlug, @PathVariable("name") String imageName) {
 		byte[] image = service.loadImage(guideSlug, imageName);
-		return new ResponseEntity<byte[]>(image, HttpStatus.OK);
+		return new ResponseEntity<>(image, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "", method = { GET, HEAD })

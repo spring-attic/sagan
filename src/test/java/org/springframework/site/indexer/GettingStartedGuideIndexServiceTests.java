@@ -37,8 +37,7 @@ public class GettingStartedGuideIndexServiceTests {
 
 	@Test
 	public void savesGuidesToSearchIndex() throws Exception {
-		GettingStartedGuide guide = new GettingStartedGuide("awesome-guide",
-				"some content", "some sidebar");
+		GettingStartedGuide guide = new GettingStartedGuide("awesome-guide", "some content", "some sidebar");
 		given(this.gettingStartedService.loadGuide(anyString())).willReturn(guide);
 		this.service.indexItem(guideRepo);
 		verify(this.searchService).saveToIndex(any(SearchEntry.class));
