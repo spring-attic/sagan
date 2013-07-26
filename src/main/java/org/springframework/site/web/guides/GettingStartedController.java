@@ -22,7 +22,7 @@ public class GettingStartedController {
 
 	public static final String GUIDES_ROOT = "/guides/gs";
 	private static final String CONTENT_PATH = "/content";
-	private static final String SHOW_GUIDE = "/{guideSlug}" + CONTENT_PATH;
+	private static final String SHOW_GUIDE = "/{guideId}" + CONTENT_PATH;
 
 	static String getPath(GettingStartedGuide guide) {
 		return GUIDES_ROOT + "/" + guide.getGuideId() + CONTENT_PATH;
@@ -36,9 +36,9 @@ public class GettingStartedController {
 	}
 
 	@RequestMapping(value = SHOW_GUIDE, method = { GET, HEAD })
-	public String viewGuide(@PathVariable String guideSlug, Model model) {
-		model.addAttribute("guideSlug", guideSlug);
-		model.addAttribute("guide", service.loadGuide(guideSlug));
+	public String viewGuide(@PathVariable String guideId, Model model) {
+		model.addAttribute("guideSlug", guideId);
+		model.addAttribute("guide", service.loadGuide(guideId));
 		return "guides/gs/guide";
 	}
 

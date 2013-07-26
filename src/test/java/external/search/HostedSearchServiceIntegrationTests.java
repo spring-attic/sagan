@@ -1,7 +1,11 @@
 package external.search;
 
 import org.jsoup.nodes.Document;
-import org.junit.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
@@ -12,7 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.domain.guides.GettingStartedGuide;
 import org.springframework.site.domain.guides.GettingStartedService;
-import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.site.indexer.WebDocumentSearchEntryMapper;
 import org.springframework.site.indexer.configuration.IndexerConfiguration;
 import org.springframework.site.search.SearchEntry;
@@ -29,7 +32,10 @@ import java.text.ParseException;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -98,9 +104,9 @@ public class HostedSearchServiceIntegrationTests {
 
 	@Test
 	public void gettingStarteGuideIndexing() throws ParseException, InterruptedException {
-		List<GuideRepo> guideRepos = gettingStartedService.listGuides();
-		GuideRepo firstGuide = guideRepos.get(0);
-		GettingStartedGuide guide = gettingStartedService.loadGuide(firstGuide.getGuideId());
+		List<GettingStartedGuide> guideShells = gettingStartedService.listGuides();
+		GettingStartedGuide guideShell = guideShells.get(0);
+		GettingStartedGuide guide = gettingStartedService.loadGuide(guideShell.getGuideId());
 
 		GuideSearchEntryMapper guideEntryMapper = new GuideSearchEntryMapper();
 		entry = guideEntryMapper.map(guide);

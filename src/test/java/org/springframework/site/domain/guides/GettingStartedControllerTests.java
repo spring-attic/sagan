@@ -18,9 +18,6 @@ import static org.mockito.BDDMockito.given;
 
 public class GettingStartedControllerTests {
 
-	private static final String GUIDE_NAME = "rest-service";
-	private static final String GUIDE_TEXT = "raw guide text";
-
 	@Mock
 	private GitHubGettingStartedService guideService;
 
@@ -36,28 +33,28 @@ public class GettingStartedControllerTests {
 
 	@Test
 	public void guideSlugInModel() {
-		controller.viewGuide(GUIDE_NAME, model);
-		assertThat((String) model.get("guideSlug"), is(GUIDE_NAME));
+		controller.viewGuide("rest-service", model);
+		assertThat((String) model.get("guideSlug"), is("rest-service"));
 	}
 
 	@Test
 	public void guideView() {
-		String view = controller.viewGuide(GUIDE_NAME, model);
+		String view = controller.viewGuide("rest-service", model);
 		assertThat(view, is("guides/gs/guide"));
 	}
 
 	@Test
 	public void guideIsInModel() {
-		GettingStartedGuide guide = new GettingStartedGuide("guide-id", "Title :: Description", GUIDE_TEXT, "");
-		given(guideService.loadGuide(GUIDE_NAME)).willReturn(guide);
-		controller.viewGuide(GUIDE_NAME, model);
+		GettingStartedGuide guide = new GettingStartedGuide("gs-rest-service", "rest-service", "Title :: Description", "raw guide text", "");
+		given(guideService.loadGuide("rest-service")).willReturn(guide);
+		controller.viewGuide("rest-service", model);
 		assertThat(((GettingStartedGuide) model.get("guide")), is(guide));
 	}
 
 	@Test(expected = RestClientException.class)
 	public void failedGuideFetch() {
-		given(guideService.loadGuide(GUIDE_NAME)).willThrow(new RestClientException("Is GitHub down?"));
-		controller.viewGuide(GUIDE_NAME, model);
+		given(guideService.loadGuide("rest-service")).willThrow(new RestClientException("Is GitHub down?"));
+		controller.viewGuide("rest-service", model);
 	}
 
 	@Test
@@ -69,17 +66,20 @@ public class GettingStartedControllerTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void listGuidesModel(){
-		List<GuideRepo> repoList = new ArrayList<GuideRepo>();
-		given(guideService.listGuides()).willReturn(repoList);
+		List<GettingStartedGuide> guideList = new ArrayList<>();
+		GettingStartedGuide guide = new GettingStartedGuide("gs-rest-service", "rest-service", "Title :: Description", "raw guide text", "");
+		guideList.add(guide);
+
+		given(guideService.listGuides()).willReturn(guideList);
 		controller.listGuides(model);
-		assertThat((List<GuideRepo>) model.get("guides"), is(repoList));
+		assertThat((List<GettingStartedGuide>) model.get("guides"), is(guideList));
 	}
 
 	@Test
 	public void loadImages() {
 		byte[] image = "animage".getBytes();
-		given(guideService.loadImage(GUIDE_NAME, "welcome.png")).willReturn(image);
-		ResponseEntity<byte[]> responseEntity = controller.loadImage(GUIDE_NAME, "welcome.png");
+		given(guideService.loadImage("rest-service", "welcome.png")).willReturn(image);
+		ResponseEntity<byte[]> responseEntity = controller.loadImage("rest-service", "welcome.png");
 		assertThat(responseEntity.getBody(), is(image));
 	}
 }

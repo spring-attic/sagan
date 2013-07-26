@@ -10,13 +10,12 @@ import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.web.client.RestClientException;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isEmptyString;
-import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -28,6 +27,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class GitHubGettingStartedServiceTests {
 
 	private static final String GUIDE_ID = "rest-service";
+	private static final String GUIDE_REPO_NAME = "gs-rest-service";
 	public static final String SIDEBAR = ".*SIDEBAR.md";
 	public static final String README = ".*README.md";
 	public static final String README_CONTENT = "Getting Started: Building a RESTful Web Service";
@@ -60,7 +60,7 @@ public class GitHubGettingStartedServiceTests {
 	public void loadGuideSetsDescription() throws IOException {
 		String description = "Awesome Guide :: Learn awesome stuff with this guide";
 		REPO_INFO.setDescription(description);
-		given(this.gitHubService.getRepoInfo("springframework-meta", GUIDE_ID)).willReturn(REPO_INFO);
+		given(this.gitHubService.getRepoInfo("springframework-meta", GUIDE_REPO_NAME)).willReturn(REPO_INFO);
 		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
 		assertThat(guide.getDescription(), equalTo(description));
 	}
@@ -104,11 +104,11 @@ public class GitHubGettingStartedServiceTests {
 
 		GuideRepo[] guideRepos = { guideRepo, notAGuideRepo };
 
-		given(this.gitHubService.getForObject(anyString(), eq(GuideRepo[].class)))
-				.willReturn(guideRepos);
+		given(this.gitHubService.getForObject(anyString(), eq(GuideRepo[].class))).willReturn(guideRepos);
 
-		assertThat(this.service.listGuides(), hasItem(guideRepo));
-		assertThat(this.service.listGuides(), not(hasItem(notAGuideRepo)));
+		List<GettingStartedGuide> guides = this.service.listGuides();
+		assertThat(guides.size(), is(1));
+		assertThat(guides.get(0).getGuideId(), equalTo("rest-service"));
 	}
 
 	@Test
@@ -121,7 +121,7 @@ public class GitHubGettingStartedServiceTests {
 		String imageName = "welcome.png";
 
 		given(
-				this.gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID),
+				this.gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_REPO_NAME),
 						eq(imageName))).willReturn(imageResponseFixture);
 
 		byte[] result = this.service.loadImage(GUIDE_ID, imageName);
@@ -135,7 +135,7 @@ public class GitHubGettingStartedServiceTests {
 		String unknownImage = "uknown_image.png";
 
 		given(
-				this.gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_ID),
+				this.gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_REPO_NAME),
 						eq(unknownImage))).willThrow(RestClientException.class);
 
 		this.service.loadImage(GUIDE_ID, unknownImage);

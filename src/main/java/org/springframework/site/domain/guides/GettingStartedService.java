@@ -6,7 +6,7 @@ public interface GettingStartedService {
 
 	GettingStartedGuide loadGuide(String guideId);
 
-	List<GuideRepo> listGuides();
+	List<GettingStartedGuide> listGuides();
 
-	byte[] loadImage(String guideSlug, String imageName);
+	byte[] loadImage(String guideId, String imageName);
 }

@@ -48,7 +48,7 @@ public class GettingStartedGuidesTests extends IntegrationTestBase {
 
 	@Test
 	public void getGettingStartedGuidesPage() throws Exception {
-		MvcResult response = this.mockMvc.perform(get("/guides/gs/foo-bar/content"))
+		MvcResult response = this.mockMvc.perform(get("/guides/gs/awesome-guide/content"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andReturn();

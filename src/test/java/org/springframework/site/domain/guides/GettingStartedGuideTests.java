@@ -14,7 +14,12 @@ public class GettingStartedGuideTests {
 
 	@Before
 	public void setUp() throws Exception {
-		guide = new GettingStartedGuide("rest-service", "Title :: Description", CONTENT, SIDEBAR);
+		guide = new GettingStartedGuide("gs-rest-service", "rest-service", "Title :: Description", CONTENT, SIDEBAR);
+	}
+
+	@Test
+	public void testGetRepoName() throws Exception {
+		assertThat(guide.getRepoName(), is("gs-rest-service"));
 	}
 
 	@Test
