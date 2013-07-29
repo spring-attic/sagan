@@ -19,15 +19,20 @@ public class SearchQueryBuilder {
 					"  }";
 
 	private static final String fullQuery =
-			" \"query\": {\n" +
-					"    \"multi_match\": {\n" +
-					"      \"query\": \"%s\",\n" +
-					"      \"fields\": [\n" +
-					"        \"title^10\",\n" +
-					"        \"rawContent\"\n" +
-					"      ]\n" +
-					"    }\n" +
-					"  }";
+			"\"query\": {\n" +
+					"  \"custom_score\": {\n" +
+					"    \"query\": {\n" +
+					"      \"multi_match\": {\n" +
+					"        \"query\": \"%s\",\n" +
+					"        \"fields\": [\n" +
+					"          \"title^10\",\n" +
+					"          \"rawContent\"\n" +
+					"        ]\n" +
+					"      }\n" +
+					"    },\n" +
+					"    \"script\": \"_score * (_source.current ? 1.1 : 1.0)\"\n" +
+					"  }\n" +
+					"}";
 
 	private static final String rawQueryFilters =
 			"\"filter\": {\n" +

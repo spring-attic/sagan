@@ -11,6 +11,9 @@ import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Service
 public class ProjectDocumentationIndexer implements Indexer<Project> {
 
@@ -18,15 +21,13 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 
 	private final DocumentationService documentationService;
 	private final CrawlerService crawlerService;
-	private final CrawledWebDocumentProcessor documentProcessor;
-	private final CrawledWebDocumentProcessor apiProcessor;
+	private final SearchService searchService;
 
 	@Autowired
 	public ProjectDocumentationIndexer(CrawlerService crawlerService, SearchService searchService, DocumentationService documentationService) {
+		this.searchService = searchService;
 		this.documentationService = documentationService;
 		this.crawlerService = crawlerService;
-		this.documentProcessor = new CrawledWebDocumentProcessor(searchService, new WebDocumentSearchEntryMapper());
-		this.apiProcessor = new CrawledWebDocumentProcessor(searchService, new ApiDocumentMapper());
 	}
 
 	@Override
@@ -40,13 +41,13 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 		for (SupportedVersion version : project.getSupportedVersions()) {
 			UriTemplate rawUrl = new UriTemplate(project.getApiAllClassesUrl());
 			String url = rawUrl.expand(version.getFullVersion()).toString();
-			crawlerService.crawl(url, 1, apiProcessor);
+			crawlerService.crawl(url, 1, new CrawledWebDocumentProcessor(searchService, new ApiDocumentMapper(version.isCurrent())));
 
 			rawUrl = new UriTemplate(project.getReferenceUrl());
 			url = rawUrl.expand(version.getFullVersion()).toString();
-			crawlerService.crawl(url, 1, documentProcessor);
+			crawlerService.crawl(url, 1, new CrawledWebDocumentProcessor(searchService, new WebDocumentSearchEntryMapper(version.isCurrent())));
 		}
-		crawlerService.crawl(project.getGithubUrl(), 0, documentProcessor);
+		crawlerService.crawl(project.getGithubUrl(), 0, new CrawledWebDocumentProcessor(searchService, new WebDocumentSearchEntryMapper()));
 	}
 
 	@Override

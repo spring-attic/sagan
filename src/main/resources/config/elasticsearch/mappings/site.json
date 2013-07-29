@@ -25,6 +25,11 @@
                 "type": "string",
                 "store": "yes",
                 "index": "no"
+            },
+            "current": {
+                "type": "boolean",
+                "store": "yes",
+                "index": "no"
             }
         }
     }

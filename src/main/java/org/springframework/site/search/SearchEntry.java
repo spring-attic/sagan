@@ -14,7 +14,7 @@ public class SearchEntry {
 
 	private String title;
 
-	private boolean current;
+	private boolean current = true;
 
 	// TODO: maybe we don't need this in the index?
 	private Date publishAt = new Date();

@@ -294,4 +294,32 @@ public class SearchServiceIntegrationTestLocal {
 		assertThat(results.get(0).getId(), is(entryTitle.getId()));
 		assertThat(results.get(1).getId(), is(entryContent.getId()));
 	}
+
+	@Test
+	public void boostsCurrentVersionEntries() throws ParseException {
+		SearchEntry notCurrent = SearchEntryBuilder.entry()
+				.path("http://example.com/content")
+				.title("a title")
+				.rawContent("application is in the content")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.build();
+
+		searchService.saveToIndex(notCurrent);
+
+		SearchEntry current = SearchEntryBuilder.entry()
+				.path("http://example.com/another_one")
+				.title("a title")
+				.rawContent("application is in the content")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.build();
+
+		searchService.saveToIndex(current);
+
+		List<SearchResult> results = searchService.search("application", pageable).getContent();
+		assertThat(results.get(0).getId(), is(current.getId()));
+		assertThat(results.get(1).getId(), is(notCurrent.getId()));
+	}
 }

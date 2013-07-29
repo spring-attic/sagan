@@ -18,7 +18,7 @@ public class ApiDocumentProcessorTests {
 		InputStream html = new ClassPathResource("/apiDocument.html", getClass()).getInputStream();
 		Document document = Jsoup.parse(html, "UTF-8", "http://example.com/docs");
 
-		ApiDocumentMapper apiDocumentProcessor = new ApiDocumentMapper();
+		ApiDocumentMapper apiDocumentProcessor = new ApiDocumentMapper(true);
 		SearchEntry searchEntry = apiDocumentProcessor.map(document);
 		assertThat(searchEntry.getRawContent(), equalTo("SomeClass"));
 	}
@@ -28,7 +28,7 @@ public class ApiDocumentProcessorTests {
 		InputStream html = new ClassPathResource("/invalidApiDocument.html", getClass()).getInputStream();
 		Document document = Jsoup.parse(html, "UTF-8", "http://example.com/docs");
 
-		ApiDocumentMapper apiDocumentProcessor = new ApiDocumentMapper();
+		ApiDocumentMapper apiDocumentProcessor = new ApiDocumentMapper(true);
 		SearchEntry searchEntry = apiDocumentProcessor.map(document);
 		assertThat(searchEntry.getRawContent(), equalTo(document.text()));
 	}

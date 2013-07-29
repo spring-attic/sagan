@@ -17,6 +17,12 @@ public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 	public static final String START_OF_CLASS_DATA = " ======== START OF CLASS DATA ======== ";
 	public static final String END_OF_CLASS_DATA = " ========= END OF CLASS DATA ========= ";
 
+	private boolean isCurrent;
+
+	public ApiDocumentMapper(boolean isCurrent) {
+		this.isCurrent = isCurrent;
+	}
+
 	public SearchEntry map(Document document) {
 		if (document.baseUri().endsWith("allclasses-frame.html")) return null;
 
@@ -44,6 +50,7 @@ public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 		entry.setSummary(summary);
 		entry.setTitle(document.title());
 		entry.setPath(document.baseUri());
+		entry.setCurrent(isCurrent);
 		return entry;
 	}
 
