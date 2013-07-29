@@ -17,16 +17,6 @@ $link-green: #5fa134;
 
 
 
-.guides--header {
-  margin-bottom: 43px;
-  line-height: 24px;
-}
-.guides--intro {
-  font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 70px;
-}
-
 .guides-section--container {
   border: 1px solid $black-brown;
   padding: 40px;
@@ -44,7 +34,7 @@ $link-green: #5fa134;
       display: inline-block;
       background-image: url("../img/iconsprite.png");
       &.gs-guides--icon {
-        background-position: 0 -544px;
+        background-position: -1px -737px;
       }
     }
     .section-title--title {
@@ -208,7 +198,7 @@ $link-green: #5fa134;
       padding: 24px;
       margin: 0;
       float: right;
-      background-position: 13px -71px;
+      background-position: 7px -62px;
     }
   }
   .github_download {
@@ -244,7 +234,7 @@ $link-green: #5fa134;
   padding: 20px;
   background-image: url("../img/iconsprite.png");
   background-repeat: no-repeat;
-  background-position: 9px -75px;
+  background-position: 2px -66px;
   width: 20px;
   height: 22px;
   border: none;

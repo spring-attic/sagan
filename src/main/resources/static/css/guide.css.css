@@ -1,14 +1,3 @@
-.guides--header {
-  margin-bottom: 43px;
-  line-height: 24px;
-}
-
-.guides--intro {
-  font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 70px;
-}
-
 .guides-section--container {
   border: 1px solid #34302d;
   padding: 40px;
@@ -29,7 +18,7 @@
   background-image: url("../img/iconsprite.png");
 }
 .guides-section--container .section-title--container .section-title--icon.gs-guides--icon {
-  background-position: 0 -544px;
+  background-position: -1px -737px;
 }
 .guides-section--container .section-title--container .section-title--title {
   text-transform: uppercase;
@@ -105,7 +94,7 @@
 }
 .content--container blockquote {
   padding: 0 0 0 10px;
-  border-left: 5px solid #dddddd;
+  border-left: 5px solid #DDD;
 }
 .content--container pre {
   word-break: normal;
@@ -128,7 +117,7 @@
   margin: 15px 6.2%;
 }
 .content-right-pane--container h3 {
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #ddd;
   padding: 0px 6.2%;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
@@ -155,7 +144,7 @@
   padding: 18px 6.4%;
   font-size: 16px;
   line-height: 16px;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   box-shadow: none;
 }
 .content-right-pane--container .btn-group .btn.active {
@@ -166,7 +155,7 @@
   box-shadow: inset 0 1px 3px #c8c8c8;
 }
 .content-right-pane--container .clone-url {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   background-color: white;
   cursor: pointer;
   margin: 15px 6.2%;
@@ -185,7 +174,7 @@
   padding: 24px;
   margin: 0;
   float: right;
-  background-position: 13px -71px;
+  background-position: 7px -62px;
 }
 .content-right-pane--container .github_download {
   display: block;
@@ -219,7 +208,7 @@
   padding: 20px;
   background-image: url("../img/iconsprite.png");
   background-repeat: no-repeat;
-  background-position: 9px -75px;
+  background-position: 2px -66px;
   width: 20px;
   height: 22px;
   border: none;

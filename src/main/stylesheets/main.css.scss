@@ -490,6 +490,20 @@ input.floating-input {
   font-family: $secondary-font-family;
 }
 
+.index-page--title {
+  margin-bottom: 30px;
+  line-height: 24px;
+}
+
+.index-page--subtitle {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 60px;
+  a {
+    color: $link-green;
+  }
+}
+
 .footer {
   background-color: $black-brown;
   color: $off-white;
