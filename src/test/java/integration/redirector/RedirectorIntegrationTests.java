@@ -1,13 +1,10 @@
 package integration.redirector;
 
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.redirector.RedirectorConfiguration;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -22,30 +19,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = RedirectorConfiguration.class)
-@DirtiesContext
-public class RedirectControllerTests {
+public class RedirectorIntegrationTests {
 
 	@Autowired
 	private WebApplicationContext wac;
 
 	private MockMvc mockMvc;
-
-	private static String originalMappingsPath;
-
-	@BeforeClass
-	public static void beforeAll() {
-		originalMappingsPath = System.getProperty("redirectMappings.path");
-		System.setProperty("redirectMappings.path", "classpath:test-mappings.yml");
-	}
-
-	@AfterClass
-	public static void afterAll() {
-		if (originalMappingsPath == null) {
-			System.clearProperty("redirectMappings.path");
-		} else {
-			System.setProperty("redirectMappings.path", originalMappingsPath);
-		}
-	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -54,9 +33,8 @@ public class RedirectControllerTests {
 
 	@Test
 	public void redirectsWhenUrlIsFound() throws Exception {
-		this.mockMvc.perform(get("/old"))
+		this.mockMvc.perform(get("http://blog.springsource.org/author/dsyer"))
 				.andExpect(status().isMovedPermanently())
-				.andExpect(header().string("Location", "http://example.com/new"));
+				.andExpect(header().string("Location", "http://sagan.cfapps.io/about/team/dsyer"));
 	}
-
 }
