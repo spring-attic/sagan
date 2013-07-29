@@ -1,5 +1,7 @@
 package org.springframework.site.web.blog;
 
+import org.joda.time.LocalDate;
+import org.joda.time.YearMonth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -78,6 +80,10 @@ public class BlogController {
 
 		Pageable pageRequest = PageableFactory.forLists(page);
 		Page<Post> result = service.getPublishedPostsByDate(year, month, day, pageRequest);
+
+		LocalDate date = new LocalDate(year, month, day);
+		model.addAttribute("title", "Archive for " + date.toString("MMMM dd, yyyy"));
+
 		return renderListOfPosts(result, model, request, "All Posts");
 	}
 
@@ -89,6 +95,8 @@ public class BlogController {
 
 		Pageable pageRequest = PageableFactory.forLists(page);
 		Page<Post> result = service.getPublishedPostsByDate(year, month, pageRequest);
+		YearMonth yearMonth = new YearMonth(year, month);
+		model.addAttribute("title", "Archive for " + yearMonth.toString("MMMM yyyy"));
 		return renderListOfPosts(result, model, request, "All Posts");
 	}
 
@@ -99,6 +107,7 @@ public class BlogController {
 
 		Pageable pageRequest = PageableFactory.forLists(page);
 		Page<Post> result = service.getPublishedPostsByDate(year, pageRequest);
+		model.addAttribute("title", String.format("Archive for %d", year));
 		return renderListOfPosts(result, model, request, "All Posts");
 	}
 

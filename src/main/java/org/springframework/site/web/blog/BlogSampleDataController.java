@@ -93,7 +93,7 @@ public class BlogSampleDataController {
 		postForm.setCategory(categories[(int) (Math.random() * categories.length)]);
 		Date date = new Date(System.currentTimeMillis() - (long) ((Math.random() * 30 - 15) * MILLISECONDS_PER_DAY));
 		postForm.setPublishAt(date);
-		if (Math.random() > 0.5) {
+		if (Math.random() > 0.7) {
 			postForm.setDraft(true);
 		}
 		postForm.setTitle(String.format("This week in Spring - %1$te/%1$tm/%1$tY", date));

@@ -12,6 +12,7 @@
 	<div layout:fragment="content" class="container">
 		<div class="row-fluid blog--wrapper">
 			<div class="span8">
+                <h1 th:text="${title}" th:if="${title}">Title</h1>
 				<div class="blog-preview--wrapper">
 					<div class="blog--container blog-preview" th:each="post : ${posts}">
 						<div class="blog--title">
