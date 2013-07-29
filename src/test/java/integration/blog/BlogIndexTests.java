@@ -1,24 +1,16 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
-import org.hamcrest.MatcherAssert;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.site.domain.blog.Post;
 import org.springframework.site.domain.blog.PostBuilder;
-import org.springframework.site.domain.blog.PostCategory;
 import org.springframework.site.domain.blog.PostRepository;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,7 +18,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
@@ -39,23 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BlogIndexTests extends IntegrationTestBase {
 
 	@Autowired
-	private WebApplicationContext wac;
-
-	@Autowired
 	private PostRepository postRepository;
-
-	private MockMvc mockMvc;
-
-	@Before
-	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-		postRepository.deleteAll();
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		postRepository.deleteAll();
-	}
 
 	@Test
 	public void showsBlogIndex() throws Exception {
@@ -138,6 +113,9 @@ public class BlogIndexTests extends IntegrationTestBase {
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andReturn();
 
+		MockHttpServletRequest request = response.getRequest();
+		System.out.println(request);
+
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
 		assertThat(numberOfBlogPosts(html), is(10));
@@ -192,55 +170,5 @@ public class BlogIndexTests extends IntegrationTestBase {
 		assertThat("No next pagination link found", nextLink, is(notNullValue()));
 		String nextHref = nextLink.attributes().get("href");
 		assertThat(nextHref, is("/blog?page=3"));
-	}
-
-
-	@Test
-	public void viewBlogPostsForCategory() throws Exception {
-		postRepository.save(PostBuilder.post()
-				.title("DO NOT LOOK AT ME")
-				.category(PostCategory.RELEASES).build());
-
-		postRepository.save(PostBuilder.post()
-				.title("An Engineering Post")
-				.category(PostCategory.ENGINEERING).build());
-
-		Page<Post> posts = postRepository.findByCategoryAndDraftFalse(PostCategory.ENGINEERING, new PageRequest(0, 10));
-		MatcherAssert.assertThat(posts.getSize(), greaterThanOrEqualTo(1));
-
-		MvcResult response = this.mockMvc.perform(get("/blog/category/" + PostCategory.ENGINEERING.getUrlSlug()))
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("An Engineering Post")))
-				.andExpect(content().string(not(containsString("DO NOT LOOK AT ME"))))
-				.andExpect(content().string(containsString(PostCategory.ENGINEERING.toString())))
-				.andReturn();
-
-
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-
-		assertThat(html.select(".blog-category.active").text(), equalTo(PostCategory.ENGINEERING.getDisplayName()));
-	}
-
-	@Test
-	public void viewBroadcastBlogPosts() throws Exception {
-		createManyPostsInNovember(5);
-
-		postRepository.save(PostBuilder.post()
-				.title("A broadcast post")
-				.isBroadcast()
-				.build());
-
-		postRepository.save(PostBuilder.post()
-				.title("Another broadcast post")
-				.isBroadcast()
-				.build());
-
-		MvcResult response = this.mockMvc.perform(get("/blog/broadcasts")).andReturn();
-
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-
-		assertThat(html.select(".blog-category.active").text(), equalTo("Broadcasts"));
-
-		assertThat(numberOfBlogPosts(html), is(2));
 	}
 }

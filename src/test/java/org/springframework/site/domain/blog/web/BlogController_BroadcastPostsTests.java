@@ -1,10 +1,5 @@
 package org.springframework.site.domain.blog.web;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -13,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.site.domain.blog.BlogService;
 import org.springframework.site.domain.blog.Post;
 import org.springframework.site.domain.blog.PostBuilder;
@@ -23,6 +19,9 @@ import org.springframework.site.web.blog.BlogController;
 import org.springframework.site.web.blog.PostView;
 import org.springframework.site.web.blog.PostViewFactory;
 import org.springframework.ui.ExtendedModelMap;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -36,8 +35,7 @@ public class BlogController_BroadcastPostsTests {
 	@Mock
 	private BlogService blogService;
 
-	@Mock
-	private HttpServletRequest request;
+	private MockHttpServletRequest request = new MockHttpServletRequest();
 
 	@Mock
 	private PostViewFactory postViewFactory;
@@ -64,7 +62,7 @@ public class BlogController_BroadcastPostsTests {
 		given(this.blogService.getPublishedBroadcastPosts(eq(testPageable))).willReturn(
 				postsPage);
 		given(this.postViewFactory.createPostViewPage(postsPage)).willReturn(this.page);
-		given(this.request.getServletPath()).willReturn("/blog/");
+		request.setServletPath("/blog");
 
 		this.viewName = this.controller.listPublishedBroadcasts(this.model, TEST_PAGE,
 				this.request);
@@ -97,9 +95,9 @@ public class BlogController_BroadcastPostsTests {
 	@Test
 	public void feedUrlInModel() {
 		String path = "/blog/broadcasts";
-		given(this.request.getServletPath()).willReturn(path);
+		request.setServletPath(path);
 		this.controller.listPublishedBroadcasts(this.model, TEST_PAGE, this.request);
-		assertThat((String) this.model.get("feed_path"), is(path + ".atom"));
+		assertThat((String) this.model.get("feedPath"), is(path + ".atom"));
 	}
 
 }

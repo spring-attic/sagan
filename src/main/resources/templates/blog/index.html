@@ -3,7 +3,7 @@
 		layout:decorator="layout">
 <head>
 	<title>SpringFramework - Blog</title>
-	<link rel="alternate" type="application/atom+xml" th:href="${feed_path}" />
+	<link rel="alternate" type="application/atom+xml" th:href="${feedPath}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/blog.css.css}" href="../../static/css/blog.css.css" />
 </head>
 <body>
@@ -44,8 +44,8 @@
 					</div>
 				</div>
 				<div id='pagination_control' th:if="${paginationInfo.isVisible()}" class="pagination blog-pagination">
-					<a th:href="@{/blog(page=${paginationInfo.previousPageNumber})}" href='/blog?page=1' class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
-					<a th:href="@{/blog(page=${paginationInfo.nextPageNumber})}" href='/blog?page=3' class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
+					<a th:href="@{${pagePath}(page=${paginationInfo.previousPageNumber})}" href='/blog?page=1' class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
+					<a th:href="@{${pagePath}(page=${paginationInfo.nextPageNumber})}" href='/blog?page=3' class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
 				</div>
 			</div>
 			<div class="span4">

@@ -1,8 +1,6 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.blog.Post;
@@ -10,11 +8,8 @@ import org.springframework.site.domain.blog.PostBuilder;
 import org.springframework.site.domain.blog.PostCategory;
 import org.springframework.site.domain.blog.PostRepository;
 import org.springframework.site.web.SiteUrl;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -45,28 +40,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BlogAtomFeedsTests extends IntegrationTestBase {
 
 	@Autowired
-	private WebApplicationContext wac;
-
-	@Autowired
 	SiteUrl siteUrl;
 
 	@Autowired
 	private PostRepository postRepository;
 
-	private MockMvc mockMvc;
-
 	private XPath xpath = XPathFactory.newInstance().newXPath();
-
-	@Before
-	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-		postRepository.deleteAll();
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		postRepository.deleteAll();
-	}
 
 	private Document getAtomFeedDocument(MvcResult mvcResult) throws ParserConfigurationException, SAXException, IOException {
 		String atomFeed = mvcResult.getResponse().getContentAsString();

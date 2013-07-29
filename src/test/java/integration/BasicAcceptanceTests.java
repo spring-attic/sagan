@@ -96,15 +96,6 @@ public class BasicAcceptanceTests {
 	}
 
 	@Test
-	public void getDeviceDetectionGuide() throws Exception {
-		ResponseEntity<String> response = doGet("/guides/gs/device-detection/content");
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertTrue(response.getHeaders().getContentType()
-				.isCompatibleWith(MediaType.valueOf("text/html")));
-		assertTrue(response.getBody().contains("<img"));
-	}
-
-	@Test
 	public void adminIsSecure() {
 		ResponseEntity<String> response = doGet("/admin/blog");
 		assertEquals(HttpStatus.OK, response.getStatusCode());

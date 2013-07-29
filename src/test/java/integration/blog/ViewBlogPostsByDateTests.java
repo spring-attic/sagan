@@ -1,6 +1,9 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +11,15 @@ import org.springframework.site.domain.blog.Post;
 import org.springframework.site.domain.blog.PostBuilder;
 import org.springframework.site.domain.blog.PostCategory;
 import org.springframework.site.domain.blog.PostRepository;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.text.ParseException;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -87,4 +94,83 @@ public class ViewBlogPostsByDateTests extends IntegrationTestBase {
 				.andExpect(content().string(containsString("Title 3")))
 				.andExpect(content().string(not(containsString("Old Post"))));
 	}
+
+	@Test
+	public void givenManyPosts_blogYearMonthDayIndexShowsPaginationControl() throws Exception {
+		for (int i = 0; i < 24; ++i) {
+			Post post = PostBuilder.post()
+					.publishAt(String.format("2012-11-02 %02d:00", i))
+					.title(String.format("Title %d", i))
+					.rawContent("Content")
+					.category(PostCategory.ENGINEERING).build();
+			postRepository.save(post);
+		}
+
+		MvcResult response = this.mockMvc.perform(get("/blog/2012/11/02?page=2")).andReturn();
+
+		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+
+		Element previousLink = html.select("#pagination_control a.previous").first();
+		assertThat("No previous pagination link found", previousLink, is(notNullValue()));
+		String previousHref = previousLink.attributes().get("href");
+		assertThat(previousHref, is("/blog/2012/11/02?page=1"));
+
+		Element nextLink = html.select("#pagination_control a.next").first();
+		assertThat("No next pagination link found", nextLink, is(notNullValue()));
+		String nextHref = nextLink.attributes().get("href");
+		assertThat(nextHref, is("/blog/2012/11/02?page=3"));
+	}
+
+	@Test
+	public void givenManyPosts_blogYearMonthIndexShowsPaginationControl() throws Exception {
+		for (int i = 1; i < 25; ++i) {
+			Post post = PostBuilder.post()
+					.publishAt(String.format("2012-06-%02d 11:00", i))
+					.title(String.format("Title %d", i))
+					.rawContent("Content")
+					.category(PostCategory.ENGINEERING).build();
+			postRepository.save(post);
+		}
+
+		MvcResult response = this.mockMvc.perform(get("/blog/2012/06?page=2")).andReturn();
+
+		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+
+		Element previousLink = html.select("#pagination_control a.previous").first();
+		assertThat("No previous pagination link found", previousLink, is(notNullValue()));
+		String previousHref = previousLink.attributes().get("href");
+		assertThat(previousHref, is("/blog/2012/06?page=1"));
+
+		Element nextLink = html.select("#pagination_control a.next").first();
+		assertThat("No next pagination link found", nextLink, is(notNullValue()));
+		String nextHref = nextLink.attributes().get("href");
+		assertThat(nextHref, is("/blog/2012/06?page=3"));
+	}
+
+	@Test
+	public void givenManyPosts_blogYearIndexShowsPaginationControl() throws Exception {
+		for (int i = 1; i < 25; ++i) {
+			Post post = PostBuilder.post()
+					.publishAt(String.format("2012-11-%02d 11:00", i))
+					.title(String.format("Title %d", i))
+					.rawContent("Content")
+					.category(PostCategory.ENGINEERING).build();
+			postRepository.save(post);
+		}
+
+		MvcResult response = this.mockMvc.perform(get("/blog/2012?page=2")).andReturn();
+
+		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+
+		Element previousLink = html.select("#pagination_control a.previous").first();
+		assertThat("No previous pagination link found", previousLink, is(notNullValue()));
+		String previousHref = previousLink.attributes().get("href");
+		assertThat(previousHref, is("/blog/2012?page=1"));
+
+		Element nextLink = html.select("#pagination_control a.next").first();
+		assertThat("No next pagination link found", nextLink, is(notNullValue()));
+		String nextHref = nextLink.attributes().get("href");
+		assertThat(nextHref, is("/blog/2012?page=3"));
+	}
+
 }
