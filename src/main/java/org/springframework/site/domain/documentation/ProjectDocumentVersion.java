@@ -3,13 +3,11 @@ package org.springframework.site.domain.documentation;
 public class ProjectDocumentVersion {
 
     private String url;
-    private String version;
-    private boolean isCurrent;
+    private SupportedVersion version;
 
-    public ProjectDocumentVersion(String url, String version, boolean current) {
+    public ProjectDocumentVersion(String url, SupportedVersion version) {
         this.url = url;
         this.version = version;
-        isCurrent = current;
     }
 
     public String getUrl() {
@@ -17,11 +15,11 @@ public class ProjectDocumentVersion {
     }
 
     public String getVersion() {
-        return version;
+        return version.getFullVersion();
     }
 
     public boolean isCurrent() {
-        return isCurrent;
+        return version.isCurrent();
     }
 
     public String getVersionName() {

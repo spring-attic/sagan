@@ -12,6 +12,7 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 public class DocumentationYamlParserTests {
 
@@ -40,11 +41,19 @@ public class DocumentationYamlParserTests {
 		assertThat(project.getReferenceUrl(), equalTo("http://static.springsource.org/spring/docs/{version}/spring-framework-reference/html/"));
 		assertThat(project.getApiUrl(), equalTo("http://static.springsource.org/spring/docs/{version}/javadoc-api/"));
 		assertThat(project.getGithubUrl(), equalTo("https://github.com/SpringSource/spring-framework"));
+	}
 
-		assertThat(project.getSupportedVersions().size(), equalTo(3));
-		assertThat(project.getSupportedVersions().get(0), equalTo("3.1.4.RELEASE"));
-		assertThat(project.getSupportedVersions().get(1), equalTo("3.2.3.RELEASE"));
-		assertThat(project.getSupportedVersions().get(2), equalTo("4.0.0.M1"));
+	@Test
+	public void projectsHaveSupportedVersionsWithCurrentVersionSet() throws IOException {
+		List<Project> active = projects.get("active");
+		assertThat(active.size(), equalTo(1));
+		Project project = active.get(0);
+
+		assertThat(project.getSupportedVersions(), contains(
+				new SupportedVersion("3.1.4.RELEASE", false),
+				new SupportedVersion("3.2.3.RELEASE", true),
+				new SupportedVersion("4.0.0.M1", false)
+		));
 	}
 
 	@Test

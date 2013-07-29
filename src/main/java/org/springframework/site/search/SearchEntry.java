@@ -14,6 +14,8 @@ public class SearchEntry {
 
 	private String title;
 
+	private boolean current;
+
 	// TODO: maybe we don't need this in the index?
 	private Date publishAt = new Date();
 
@@ -62,4 +64,11 @@ public class SearchEntry {
 		return new String(encodedId);
 	}
 
+	public boolean isCurrent() {
+		return current;
+	}
+
+	public void setCurrent(boolean current) {
+		this.current = current;
+	}
 }

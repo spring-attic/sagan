@@ -9,13 +9,15 @@ public class ProjectDocumentVersionTests {
 
     @Test
     public void getVersionNameForCurrentVersion() {
-        ProjectDocumentVersion version = new ProjectDocumentVersion("http://project.org/api", "1.2.3.Release", true);
-        assertThat(version.getVersionName(), equalTo("1.2.3.Release (Current)"));
+        ProjectDocumentVersion version = new ProjectDocumentVersion("http://project.org/api",
+				new SupportedVersion("1.2.3.RELEASE", true));
+        assertThat(version.getVersionName(), equalTo("1.2.3.RELEASE (Current)"));
     }
 
     @Test
     public void getVersionNameForOtherVersion() {
-        ProjectDocumentVersion version = new ProjectDocumentVersion("http://project.org/api", "1.2.3.Release", false);
-        assertThat(version.getVersionName(), equalTo("1.2.3.Release"));
+        ProjectDocumentVersion version = new ProjectDocumentVersion("http://project.org/api",
+				new SupportedVersion("1.2.3.RELEASE", false));
+        assertThat(version.getVersionName(), equalTo("1.2.3.RELEASE"));
     }
 }

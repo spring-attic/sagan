@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.documentation.DocumentationService;
 import org.springframework.site.domain.documentation.Project;
+import org.springframework.site.domain.documentation.SupportedVersion;
 import org.springframework.site.indexer.crawler.CrawlerService;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
@@ -36,13 +37,13 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 	@Override
 	public void indexItem(Project project) {
 		logger.info("Indexing project: " + project.getId());
-		for (String version : project.getSupportedVersions()) {
+		for (SupportedVersion version : project.getSupportedVersions()) {
 			UriTemplate rawUrl = new UriTemplate(project.getApiAllClassesUrl());
-			String url = rawUrl.expand(version).toString();
+			String url = rawUrl.expand(version.getFullVersion()).toString();
 			crawlerService.crawl(url, 1, apiProcessor);
 
 			rawUrl = new UriTemplate(project.getReferenceUrl());
-			url = rawUrl.expand(version).toString();
+			url = rawUrl.expand(version.getFullVersion()).toString();
 			crawlerService.crawl(url, 1, documentProcessor);
 		}
 		crawlerService.crawl(project.getGithubUrl(), 0, documentProcessor);

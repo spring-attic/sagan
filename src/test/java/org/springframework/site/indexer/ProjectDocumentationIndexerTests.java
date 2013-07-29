@@ -3,6 +3,7 @@ package org.springframework.site.indexer;
 import org.junit.Test;
 import org.springframework.site.domain.documentation.DocumentationService;
 import org.springframework.site.domain.documentation.Project;
+import org.springframework.site.domain.documentation.SupportedVersions;
 import org.springframework.site.indexer.crawler.CrawlerService;
 import org.springframework.site.search.SearchService;
 
@@ -19,11 +20,14 @@ public class ProjectDocumentationIndexerTests {
 	private DocumentationService documentationService = mock(DocumentationService.class);
 	private final SearchService searchService = mock(SearchService.class);
 	private ProjectDocumentationIndexer service = new ProjectDocumentationIndexer(crawlerService, searchService, documentationService);
+
+	private SupportedVersions versions = SupportedVersions.build(Arrays.asList("3.2.3.RELEASE", "3.1.4.RELEASE", "4.0.0.M1"));
+
 	private Project project = new Project("spring", "Spring",  //
 			"https://github.com/SpringSource/spring-framework", //
 			"http://static.springsource.org/spring/docs/{version}/reference/", //
 			"http://static.springsource.org/spring/docs/{version}/api/", //
-			Arrays.asList("3.2.3.RELEASE", "3.1.4.RELEASE", "4.0.0.M1"));
+			versions);
 
 	private void assertThatCrawlingIsDoneFor(String url, int linkDepthLevel) {
 		verify(crawlerService).crawl(eq(url), eq(linkDepthLevel), any(CrawledWebDocumentProcessor.class));

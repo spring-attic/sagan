@@ -10,12 +10,12 @@ public class Project {
 	private String githubUrl;
 	private String referenceUrl;
 	private String apiDocsUrl;
-    private List<String> supportedVersions = new ArrayList<String>();
+    private SupportedVersions supportedVersions;
     
     public Project() {
 	}
 
-	public Project(String id, String name, String githubUrl, String referenceUrl, String apiDocsUrl, List<String> supportedVersions) {
+	public Project(String id, String name, String githubUrl, String referenceUrl, String apiDocsUrl, SupportedVersions supportedVersions) {
 		this.id = id;
 		this.name = name;
 		this.githubUrl = githubUrl;
@@ -48,7 +48,7 @@ public class Project {
 		this.id = id;
 	}
 
-	public List<String> getSupportedVersions() {
+	public SupportedVersions getSupportedVersions() {
 		return supportedVersions;
 	}
 
@@ -68,13 +68,13 @@ public class Project {
 		this.apiDocsUrl = apiDocsUrl;
 	}
 
-	public void setSupportedVersions(List<String> supportedVersions) {
+	public void setSupportedVersions(SupportedVersions supportedVersions) {
 		this.supportedVersions = supportedVersions;
 	}
 
-	private ProjectDocumentVersion buildDocumentVersion(String urlTemplate, String version, boolean isCurrent) {
-        String url = urlTemplate.replaceAll("\\{version\\}", version);
-        return new ProjectDocumentVersion(url, version, isCurrent);
+	private ProjectDocumentVersion buildDocumentVersion(String urlTemplate, SupportedVersion version) {
+        String url = urlTemplate.replaceAll("\\{version\\}", version.getFullVersion());
+        return new ProjectDocumentVersion(url, version);
     }
 
     public List<ProjectDocumentVersion> getSupportedReferenceDocumentVersions() {
@@ -87,9 +87,9 @@ public class Project {
 
     private List<ProjectDocumentVersion> getDocumentVersions(String urlTemplate) {
         List<ProjectDocumentVersion> documentVersions = new ArrayList<ProjectDocumentVersion>();
-        for (int i = 0; i < this.supportedVersions.size(); ++i) {
-            documentVersions.add(buildDocumentVersion(urlTemplate, this.supportedVersions.get(i), i == 0));
-        }
+		for (SupportedVersion supportedVersion : supportedVersions) {
+            documentVersions.add(buildDocumentVersion(urlTemplate, supportedVersion));
+		}
         return documentVersions;
     }
 

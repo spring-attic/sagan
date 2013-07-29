@@ -4,6 +4,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,11 +49,18 @@ public class DocumentationYamlParser {
 		project.setReferenceUrl((String) projectData.get("referenceUrl"));
 		project.setGithubUrl((String) projectData.get("githubUrl"));
 		project.setApiUrl((String) projectData.get("apiUrl"));
+
 		if (projectData.containsKey("supportedVersions")) {
+			List<String> versionStrings = new ArrayList<>();
 			for (Object value : (List)projectData.get("supportedVersions")) {
-				project.getSupportedVersions().add(value.toString());
+				versionStrings.add(value.toString());
 			}
+			SupportedVersions supportedVersions = SupportedVersions.build(versionStrings);
+			project.setSupportedVersions(supportedVersions);
+		} else {
+			project.setSupportedVersions(new SupportedVersions(Collections.<SupportedVersion>emptyList()));
 		}
+
 		return project;
 	}
 }
