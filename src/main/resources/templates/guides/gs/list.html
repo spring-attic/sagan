@@ -11,8 +11,8 @@
 
 	<ul>
 		<li th:each="guide : ${guides}" class="guide">
-			<h3 class="title"><a href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/content'}" th:text="${beans.uih.extractTitleFromRepoDescription(guide)}">Building a RESTful Web Service</a></h3>
-			<p class="subtitle" th:text="${beans.uih.extractSubtitleFromRepoDescription(guide)}">YADA Learn how to create a REST web service with Spring</p>
+			<h3 class="title"><a href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/content'}" th:text="${guide.title}">Building a RESTful Web Service</a></h3>
+			<p class="subtitle" th:text="${guide.subtitle}">YADA Learn how to create a REST web service with Spring</p>
 		</li>
 	</ul>
 </div>

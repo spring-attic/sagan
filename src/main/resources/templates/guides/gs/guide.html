@@ -14,8 +14,7 @@
             Getting Started
           </div>
           <article class="content--container">
-			  <h1 class="title" th:text="${beans.uih.extractTitleFromRepoDescription(guide)}"></h1>
-			  <h2 class="subtitle" th:text="${beans.uih.extractSubtitleFromRepoDescription(guide)}"></h2>
+			  <h1 class="title" th:text="${guide.title}"></h1>
 			  <div class="article-body" th:utext="${guide.content}">a Guide</div>
           </article>
         </div>

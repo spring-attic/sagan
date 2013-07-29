@@ -69,4 +69,14 @@ public class GettingStartedGuide {
 	public String getCiLatestUrl() {
 		return String.format(CI_LATEST_URL, repoName);
 	}
+
+	public String getTitle() {
+		String[] split = description.split("::", 2);
+		return split[0].trim();
+	}
+
+	public String getSubtitle() {
+		String[] split = description.split("::", 2);
+		return (split.length > 1) ? split[1].trim() : "";
+	}
 }
