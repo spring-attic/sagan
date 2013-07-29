@@ -36,8 +36,9 @@ $(function(){
       $(".nav-search").addClass("js-highlight");
       var inputContainer = $(".js-search-dropdown");
       var input = $(".js-search-input");
-      
       inputContainer.addClass("js-show");
+
+      //FOCUSES SEARCH INPUT ON OPEN
       setTimeout(function() {
         input.focus();
       }, 100);
