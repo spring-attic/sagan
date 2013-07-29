@@ -581,3 +581,109 @@ input.floating-input {
     font-style: normal;
   }
 }
+
+
+//TOOLS INDEX 
+.tool--container {
+  background-color: $black-brown;
+  display: inline-block;
+  color: $off-white;
+  text-align: center;
+  width: 48.85%;
+  margin: 0 1.9% 40px 0;
+  line-height: 20px;
+  &:last-child {
+    margin-right: 0;
+  }
+  .tool--icon {
+    height: 134px;
+    display: inline-block;
+    margin: 40px 0;
+    background-image: url("../img/iconsprite.png");
+    &.sts-icon {
+      width: 124px;
+      background-position: -194px 0;
+    }
+    &.ggts-icon {
+      width: 96px;
+      background-position: -204px -140px
+    }
+  }
+  .tool--title {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: $secondary-font-family;
+    line-height: 24px;
+    margin-bottom: 20px;
+  }
+  .tool--description {
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding: 0 40px;
+  }
+  .tool--learn-more {
+    color: $link-green;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .tool--download-btn {
+    text-transform: uppercase;
+    border: 2px solid $green;
+    padding: 12px 0;
+    text-align: center;
+    width: 237px;
+    display: inline-block;
+    color: $off-white;
+    font-size: 14px;
+    line-height: 14px;
+    font-family: $secondary-font-family;
+    p {
+      margin-top: 6px;
+      color: $off-white;
+      font-size: 14px;
+      line-height: 14px;
+      font-family: $secondary-font-family;
+      text-transform: none;
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .tool--see-all-versions {
+    display: block;
+    color: $link-green;
+    line-height: 14px;
+    margin: 26px 0 43px;
+  }
+}
+
+.eclipse--container {
+  border: 1px solid $black-brown;
+  padding: 40px 84px;
+  .eclipse--icon {
+    width: 72px;
+    height: 72px;
+    background-image: url("../img/iconsprite.png");
+    background-position: -216px -282px;
+    float: left;
+    margin: 26px 0;
+  }
+  .eclipse-content--container {
+    margin-left: 156px;
+  }
+  h2 {
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  p {
+    font-size: 15px;
+    line-height: 20px;
+    margin-bottom: 20px;
+  }
+  a {
+    color: $link-green;
+    text-transform: uppercase;
+  }
+}

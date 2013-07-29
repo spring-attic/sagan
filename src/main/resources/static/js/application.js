@@ -32,6 +32,7 @@ $(function(){
     });
 
     //OPENS SEARCH DROPDOWN
+    $(".js-search-input-open").click(openSearchWindow);
     function openSearchWindow () {
       $(".nav-search").addClass("js-highlight");
       var inputContainer = $(".js-search-dropdown");
@@ -53,7 +54,6 @@ $(function(){
 
 
     //AUTO OPENS SEARCH DROPDOWN ON SEARCH VIEW AND 
-    $(".js-search-input-open").click(openSearchWindow);
     if (window.location.pathname == "/search") {
       $(".nav-search").addClass("js-highlight");
       $(".js-search-dropdown").addClass("js-show");
