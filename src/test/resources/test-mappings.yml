@@ -1,4 +1,0 @@
----
-mappings:
-  - old_url: http://example.com/old
-    new_url: http://example.com/new
