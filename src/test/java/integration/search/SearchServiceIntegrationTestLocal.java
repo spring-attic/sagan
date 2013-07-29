@@ -3,14 +3,22 @@ package integration.search;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.ClientConfig;
+
+import java.text.ParseException;
+import java.util.LinkedHashSet;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.elasticsearch.client.Client;
 import org.elasticsearch.node.NodeBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
-import org.springframework.bootstrap.context.initializer.LoggingApplicationContextInitializer;
+import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.boot.context.initializer.LoggingApplicationContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
@@ -25,13 +33,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import utils.FreePortFinder;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import java.text.ParseException;
-import java.util.LinkedHashSet;
-import java.util.List;
+import utils.FreePortFinder;
 
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -42,10 +45,12 @@ import static org.hamcrest.Matchers.not;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {ApplicationConfiguration.class, SearchServiceIntegrationTestLocal.IntegrationTestElasticSearchConfiguration.class},
-		initializers = {ConfigFileApplicationContextInitializer.class, LoggingApplicationContextInitializer.class})
+@ContextConfiguration(classes = { ApplicationConfiguration.class,
+		SearchServiceIntegrationTestLocal.IntegrationTestElasticSearchConfiguration.class }, initializers = {
+		ConfigFileApplicationContextInitializer.class,
+		LoggingApplicationContextInitializer.class })
 @DirtiesContext
-//Ignore Elasticsearch tests on CI (and maven) by not ending class name with "Tests"
+// Ignore Elasticsearch tests on CI (and maven) by not ending class name with "Tests"
 public class SearchServiceIntegrationTestLocal {
 
 	public static class IntegrationTestElasticSearchConfiguration {
@@ -70,20 +75,20 @@ public class SearchServiceIntegrationTestLocal {
 		}
 
 		private String getElasticSearchPort() {
-			if (elasticSearchPort == null) {
-				elasticSearchPort = FreePortFinder.find() + "";
+			if (this.elasticSearchPort == null) {
+				this.elasticSearchPort = FreePortFinder.find() + "";
 			}
-			return elasticSearchPort;
+			return this.elasticSearchPort;
 		}
 
 		@PostConstruct
 		public void configureSearchService() {
-			searchService.setUseRefresh(true);
+			this.searchService.setUseRefresh(true);
 		}
 
 		@PreDestroy
 		public void closeClient() throws Exception {
-			client.close();
+			this.client.close();
 		}
 
 		@Bean
@@ -97,12 +102,13 @@ public class SearchServiceIntegrationTestLocal {
 		private ClientConfig clientConfig() {
 			LinkedHashSet<String> servers = new LinkedHashSet<String>();
 			servers.add("http://localhost:" + getElasticSearchPort());
-			ClientConfig clientConfig = new ClientConfig.Builder(servers).multiThreaded(true).build();
+			ClientConfig clientConfig = new ClientConfig.Builder(servers).multiThreaded(
+					true).build();
 			return clientConfig;
 		}
 	}
 
-	private final Pageable pageable = new PageRequest(0,10);
+	private final Pageable pageable = new PageRequest(0, 10);
 
 	@Autowired
 	private SearchService searchService;
@@ -114,31 +120,28 @@ public class SearchServiceIntegrationTestLocal {
 
 	@Before
 	public void setUp() throws Exception {
-		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(jestClient);
+		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient);
 		searchIndexSetup.deleteIndex();
 		searchIndexSetup.createIndex();
 	}
 
 	private void indexSingleEntry() throws ParseException {
-		entry = createSingleEntry("/some/path");
-		searchService.saveToIndex(entry);
+		this.entry = createSingleEntry("/some/path");
+		this.searchService.saveToIndex(this.entry);
 	}
 
 	private SearchEntry createSingleEntry(String path) throws ParseException {
-		return SearchEntryBuilder.entry()
-				.path(path)
-				.title("This week in Spring")
-				.rawContent("raw content")
-				.summary("Html summary")
-				.publishAt("2013-01-01 10:00")
-				.build();
+		return SearchEntryBuilder.entry().path(path).title("This week in Spring")
+				.rawContent("raw content").summary("Html summary")
+				.publishAt("2013-01-01 10:00").build();
 	}
 
 	private void assertThatSearchReturnsEntry(String query) {
-		Page<SearchResult> searchEntries = searchService.search(query, pageable);
+		Page<SearchResult> searchEntries = this.searchService
+				.search(query, this.pageable);
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
-		assertThat(entries.get(0).getTitle(), is(equalTo(entry.getTitle())));
+		assertThat(entries.get(0).getTitle(), is(equalTo(this.entry.getTitle())));
 	}
 
 	@Test
@@ -163,55 +166,49 @@ public class SearchServiceIntegrationTestLocal {
 	public void searchOnlyIncludesEntriesMatchingSearchTerm() throws ParseException {
 		indexSingleEntry();
 
-		SearchEntry secondEntry = SearchEntryBuilder.entry()
-				.path("/another/path")
-				.title("Test")
-				.rawContent("Test body")
-				.build();
+		SearchEntry secondEntry = SearchEntryBuilder.entry().path("/another/path")
+				.title("Test").rawContent("Test body").build();
 
-		searchService.saveToIndex(secondEntry);
-		Page<SearchResult> searchEntries = searchService.search("content", pageable);
+		this.searchService.saveToIndex(secondEntry);
+		Page<SearchResult> searchEntries = this.searchService.search("content",
+				this.pageable);
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries.size(), equalTo(1));
 	}
 
 	@Test
 	public void searchPagesProperly() throws ParseException {
-		SearchEntryBuilder builder  = SearchEntryBuilder.entry()
-				.rawContent("raw content")
-				.summary("Html summary")
-				.publishAt("2013-01-01 10:00");
+		SearchEntryBuilder builder = SearchEntryBuilder.entry().rawContent("raw content")
+				.summary("Html summary").publishAt("2013-01-01 10:00");
 
 		SearchEntry entry1 = builder.path("item1").title("Item 1").build();
-		searchService.saveToIndex(entry1);
+		this.searchService.saveToIndex(entry1);
 
 		SearchEntry entry2 = builder.path("item2").title("Item 2").build();
-		searchService.saveToIndex(entry2);
+		this.searchService.saveToIndex(entry2);
 
-		Pageable page1 = new PageRequest(0,1);
-		Page<SearchResult> searchEntries1 = searchService.search("content", page1);
+		Pageable page1 = new PageRequest(0, 1);
+		Page<SearchResult> searchEntries1 = this.searchService.search("content", page1);
 		assertThat(searchEntries1.getContent().get(0).getId(), equalTo(entry1.getId()));
 
-		Pageable page2 = new PageRequest(1,1);
-		Page<SearchResult> searchEntries2 = searchService.search("content", page2);
+		Pageable page2 = new PageRequest(1, 1);
+		Page<SearchResult> searchEntries2 = this.searchService.search("content", page2);
 		assertThat(searchEntries2.getContent().get(0).getId(), equalTo(entry2.getId()));
 	}
 
 	@Test
 	public void searchQueryReportsPageTotals() throws Exception {
-		SearchEntryBuilder builder  = SearchEntryBuilder.entry()
-				.rawContent("raw content")
-				.summary("Html summary")
-				.publishAt("2013-01-01 10:00");
+		SearchEntryBuilder builder = SearchEntryBuilder.entry().rawContent("raw content")
+				.summary("Html summary").publishAt("2013-01-01 10:00");
 
-		for (int i = 0; i < 25; i++){
+		for (int i = 0; i < 25; i++) {
 			SearchEntry entry = builder.path("item" + i).title("Item " + i).build();
-			searchService.saveToIndex(entry);
+			this.searchService.saveToIndex(entry);
 		}
 
 		int page = 1;
-		Pageable pageable = new PageRequest(page,10);
-		Page<SearchResult> searchEntries = searchService.search("", pageable);
+		Pageable pageable = new PageRequest(page, 10);
+		Page<SearchResult> searchEntries = this.searchService.search("", pageable);
 		assertThat(searchEntries.getContent().size(), equalTo(10));
 		assertThat(searchEntries.getTotalPages(), equalTo(3));
 		assertThat(searchEntries.getNumber(), equalTo(page));
@@ -220,50 +217,39 @@ public class SearchServiceIntegrationTestLocal {
 	@Test
 	public void searchThatReturnsNoResultsIsEmpty() throws ParseException {
 		indexSingleEntry();
-		Pageable page = new PageRequest(0,10);
-		Page<SearchResult> searchEntries = searchService.search("somethingthatwillneverappearsupercalifragilousIcantspelltherest", page);
+		Pageable page = new PageRequest(0, 10);
+		Page<SearchResult> searchEntries = this.searchService.search(
+				"somethingthatwillneverappearsupercalifragilousIcantspelltherest", page);
 		assertThat(searchEntries.getContent().size(), equalTo(0));
 		assertThat(searchEntries.getTotalPages(), equalTo(0));
 	}
 
 	@Test
 	public void searchByCamelCaseTerms() throws ParseException {
-		entry = SearchEntryBuilder.entry()
-				.path("http://example.com")
-				.title("My Entry")
-				.rawContent("SomeCamelCaseThing is here")
-				.summary("Html summary")
-				.publishAt("2013-01-01 10:00")
-				.build();
-		searchService.saveToIndex(entry);
+		this.entry = SearchEntryBuilder.entry().path("http://example.com")
+				.title("My Entry").rawContent("SomeCamelCaseThing is here")
+				.summary("Html summary").publishAt("2013-01-01 10:00").build();
+		this.searchService.saveToIndex(this.entry);
 
 		assertThatSearchReturnsEntry("Camel");
 	}
 
 	@Test
 	public void searchisCaseInsensitive() throws ParseException {
-		entry = SearchEntryBuilder.entry()
-				.path("http://example.com")
-				.title("My Entry")
-				.rawContent("SomeCamelCaseThing is here")
-				.summary("Html summary")
-				.publishAt("2013-01-01 10:00")
-				.build();
-		searchService.saveToIndex(entry);
+		this.entry = SearchEntryBuilder.entry().path("http://example.com")
+				.title("My Entry").rawContent("SomeCamelCaseThing is here")
+				.summary("Html summary").publishAt("2013-01-01 10:00").build();
+		this.searchService.saveToIndex(this.entry);
 
 		assertThatSearchReturnsEntry("camel");
 	}
 
 	@Test
 	public void searchMatchesPartialWords() throws ParseException {
-		entry = SearchEntryBuilder.entry()
-				.path("http://example.com")
-				.title("My Entry")
-				.rawContent("BlogExporter is here")
-				.summary("Html summary")
-				.publishAt("2013-01-01 10:00")
-				.build();
-		searchService.saveToIndex(entry);
+		this.entry = SearchEntryBuilder.entry().path("http://example.com")
+				.title("My Entry").rawContent("BlogExporter is here")
+				.summary("Html summary").publishAt("2013-01-01 10:00").build();
+		this.searchService.saveToIndex(this.entry);
 
 		assertThatSearchReturnsEntry("export");
 	}
@@ -271,26 +257,21 @@ public class SearchServiceIntegrationTestLocal {
 	@Test
 	public void boostsTitleMatchesOverContent() throws ParseException {
 		SearchEntry entryContent = SearchEntryBuilder.entry()
-				.path("http://example.com/content")
-				.title("a title")
-				.rawContent("application is in the content")
-				.summary("Html summary")
-				.publishAt("2013-01-01 10:00")
-				.build();
+				.path("http://example.com/content").title("a title")
+				.rawContent("application is in the content").summary("Html summary")
+				.publishAt("2013-01-01 10:00").build();
 
-		searchService.saveToIndex(entryContent);
+		this.searchService.saveToIndex(entryContent);
 
 		SearchEntry entryTitle = SearchEntryBuilder.entry()
-				.path("http://example.com/title")
-				.title("application is in the title")
-				.rawContent("some content")
-				.summary("Html summary")
-				.publishAt("2013-01-01 10:00")
-				.build();
+				.path("http://example.com/title").title("application is in the title")
+				.rawContent("some content").summary("Html summary")
+				.publishAt("2013-01-01 10:00").build();
 
-		searchService.saveToIndex(entryTitle);
+		this.searchService.saveToIndex(entryTitle);
 
-		List<SearchResult> results = searchService.search("application", pageable).getContent();
+		List<SearchResult> results = this.searchService.search("application",
+				this.pageable).getContent();
 		assertThat(results.get(0).getId(), is(entryTitle.getId()));
 		assertThat(results.get(1).getId(), is(entryContent.getId()));
 	}

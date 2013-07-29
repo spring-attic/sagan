@@ -11,7 +11,7 @@ public class RedirectMappingService {
 	}
 
 	public String redirectUrlFor(String path) {
-		return redirectMappings.get(path.replaceAll("/$", ""));
+		return this.redirectMappings.get(path.replaceAll("/$", ""));
 	}
 
 }

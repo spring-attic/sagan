@@ -17,7 +17,7 @@ package integration.configuration;
 
 import org.junit.After;
 import org.junit.Test;
-import org.springframework.bootstrap.SpringApplication;
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.site.indexer.configuration.IndexerConfiguration;
 

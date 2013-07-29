@@ -15,14 +15,19 @@
  */
 package org.springframework.site.web.configuration;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.sql.DataSource;
+
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-import org.springframework.autoconfigure.EnableAutoConfiguration;
-import org.springframework.bootstrap.SpringApplication;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -34,10 +39,6 @@ import org.springframework.site.domain.services.DateService;
 import org.springframework.site.web.SiteUrl;
 import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
 import org.springframework.web.client.RestTemplate;
-
-import javax.sql.DataSource;
-import java.io.IOException;
-import java.io.InputStream;
 
 @EnableAutoConfiguration
 @Configuration
@@ -92,7 +93,8 @@ public class ApplicationConfiguration {
 
 	@Bean
 	public DocumentationService documentationService() throws IOException {
-		InputStream yaml = new ClassPathResource("/documentation.yml", getClass()).getInputStream();
+		InputStream yaml = new ClassPathResource("/documentation.yml", getClass())
+				.getInputStream();
 		return new DocumentationService(new DocumentationYamlParser().parse(yaml));
 	}
 

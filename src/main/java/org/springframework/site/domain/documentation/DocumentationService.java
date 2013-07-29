@@ -8,16 +8,17 @@ public class DocumentationService {
 	private final Map<String, List<Project>> projectCategoryMap;
 	private final List<Project> projects;
 
-	public DocumentationService(Map<String, List<Project>>projectCategoryMap) {
+	public DocumentationService(Map<String, List<Project>> projectCategoryMap) {
 		this.projectCategoryMap = projectCategoryMap;
-		projects = new ArrayList<>();
-		for (Map.Entry<String, List<Project>> projectCategory : projectCategoryMap.entrySet()) {
-			projects.addAll(projectCategory.getValue());
+		this.projects = new ArrayList<>();
+		for (Map.Entry<String, List<Project>> projectCategory : projectCategoryMap
+				.entrySet()) {
+			this.projects.addAll(projectCategory.getValue());
 		}
 	}
 
 	public List<Project> getProjectsForCategory(String category) {
-		return projectCategoryMap.get(category);
+		return this.projectCategoryMap.get(category);
 	}
 
 	public List<Project> getProjects() {
@@ -25,7 +26,7 @@ public class DocumentationService {
 	}
 
 	public Project getProject(String id) {
-		for (Project project : projects) {
+		for (Project project : this.projects) {
 			if (project.getId().equals(id)) {
 				return project;
 			}

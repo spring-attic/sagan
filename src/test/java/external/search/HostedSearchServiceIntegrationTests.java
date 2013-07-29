@@ -1,5 +1,8 @@
 package external.search;
 
+import java.text.ParseException;
+import java.util.List;
+
 import org.jsoup.nodes.Document;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -8,8 +11,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.bootstrap.context.initializer.ConfigFileApplicationContextInitializer;
-import org.springframework.bootstrap.context.initializer.LoggingApplicationContextInitializer;
+import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.boot.context.initializer.LoggingApplicationContextInitializer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,9 +31,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.text.ParseException;
-import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
@@ -40,9 +40,9 @@ import static org.hamcrest.Matchers.not;
 @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = IndexerConfiguration.class,
-		initializers = {ConfigFileApplicationContextInitializer.class,
-				        LoggingApplicationContextInitializer.class})
+@ContextConfiguration(classes = IndexerConfiguration.class, initializers = {
+		ConfigFileApplicationContextInitializer.class,
+		LoggingApplicationContextInitializer.class })
 @ActiveProfiles("integration-test")
 @Configuration
 public class HostedSearchServiceIntegrationTests {
@@ -65,7 +65,7 @@ public class HostedSearchServiceIntegrationTests {
 		}
 	}
 
-	private final Pageable pageable = new PageRequest(0,10);
+	private final Pageable pageable = new PageRequest(0, 10);
 
 	@Autowired
 	private SearchService searchService;
@@ -79,50 +79,49 @@ public class HostedSearchServiceIntegrationTests {
 
 	@After
 	public void tearDown() throws Exception {
-		searchService.removeFromIndex(entry);
+		this.searchService.removeFromIndex(this.entry);
 	}
 
 	@Test
 	public void simpleEntryIndexing() throws ParseException, InterruptedException {
-		entry = SearchEntryBuilder.entry()
-				.path("/blog/integration_test-1")
-				.title("Integration Test Title")
-				.rawContent("Integration test content")
-				.summary("Integration summary")
-				.publishAt("2013-01-01 10:00")
-				.build();
+		this.entry = SearchEntryBuilder.entry().path("/blog/integration_test-1")
+				.title("Integration Test Title").rawContent("Integration test content")
+				.summary("Integration summary").publishAt("2013-01-01 10:00").build();
 
-		searchService.saveToIndex(entry);
+		this.searchService.saveToIndex(this.entry);
 
 		Thread.sleep(1000);
 
-		Page<SearchResult> searchEntries = searchService.search("Integration test content", pageable);
+		Page<SearchResult> searchEntries = this.searchService.search(
+				"Integration test content", this.pageable);
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
-		assertThat(entries.get(0).getSummary(), is(equalTo(entry.getSummary())));
+		assertThat(entries.get(0).getSummary(), is(equalTo(this.entry.getSummary())));
 	}
 
 	@Test
 	public void gettingStarteGuideIndexing() throws ParseException, InterruptedException {
-		List<GettingStartedGuide> guideShells = gettingStartedService.listGuides();
+		List<GettingStartedGuide> guideShells = this.gettingStartedService.listGuides();
 		GettingStartedGuide guideShell = guideShells.get(0);
-		GettingStartedGuide guide = gettingStartedService.loadGuide(guideShell.getGuideId());
+		GettingStartedGuide guide = this.gettingStartedService.loadGuide(guideShell
+				.getGuideId());
 
 		GuideSearchEntryMapper guideEntryMapper = new GuideSearchEntryMapper();
-		entry = guideEntryMapper.map(guide);
+		this.entry = guideEntryMapper.map(guide);
 
-		entry.setPath(entry.getPath() + "gsg-integration-test");
+		this.entry.setPath(this.entry.getPath() + "gsg-integration-test");
 		String testTitle = "Somerandomtitlealltogetherwhichiseasierforsearchduringtesting";
-		entry.setTitle(testTitle);
+		this.entry.setTitle(testTitle);
 
-		searchService.saveToIndex(entry);
+		this.searchService.saveToIndex(this.entry);
 
 		Thread.sleep(1000);
 
-		Page<SearchResult> searchEntries = searchService.search(testTitle, pageable);
+		Page<SearchResult> searchEntries = this.searchService.search(testTitle,
+				this.pageable);
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
-		assertThat(entries.get(0).getTitle(), is(equalTo(entry.getTitle())));
+		assertThat(entries.get(0).getTitle(), is(equalTo(this.entry.getTitle())));
 	}
 
 	@Test
@@ -134,20 +133,20 @@ public class HostedSearchServiceIntegrationTests {
 		testApiDocument.setBaseUri(apiDocsTestClassUrl);
 
 		WebDocumentSearchEntryMapper mapper = new WebDocumentSearchEntryMapper();
-		entry = mapper.map(testApiDocument);
+		this.entry = mapper.map(testApiDocument);
 
-		entry.setPath(entry.getPath() + "api-docs-indexing-integration-test");
+		this.entry.setPath(this.entry.getPath() + "api-docs-indexing-integration-test");
 
-		searchService.saveToIndex(entry);
+		this.searchService.saveToIndex(this.entry);
 
 		Thread.sleep(1000);
 
-		Page<SearchResult> searchEntries = searchService.search("Somereandomtestcontentthatshouldbeunique", pageable);
+		Page<SearchResult> searchEntries = this.searchService.search(
+				"Somereandomtestcontentthatshouldbeunique", this.pageable);
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		SearchResult entry = entries.get(0);
 		assertThat(entry.getTitle(), is(equalTo(entry.getTitle())));
 	}
-
 
 }
