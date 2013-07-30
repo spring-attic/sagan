@@ -28,7 +28,13 @@ public class ToolsController {
 	}
 
 	@RequestMapping(value = "", method = { GET, HEAD })
-	public String index() throws Exception {
+	public String index(Model model) throws Exception {
+		ToolSuiteDownloads stsDownloads = toolsService.getStsDownloads();
+		model.addAttribute("stsDownloadLinks", stsDownloads.getPreferredDownloadLinks());
+		model.addAttribute("stsVersion", stsDownloads.getPreferredVersion());
+		ToolSuiteDownloads ggtsDownloads = toolsService.getGgtsDownloads();
+		model.addAttribute("ggtsDownloadLinks", ggtsDownloads.getPreferredDownloadLinks());
+		model.addAttribute("ggtsVersion", ggtsDownloads.getPreferredVersion());
 		return "tools/index";
 	}
 

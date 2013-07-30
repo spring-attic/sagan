@@ -19,11 +19,14 @@
 			<div class="tool--title">Spring Tool Suite&trade;</div>
 			<div class="tool--description">Spring provides a powerful and flexible collection of technologies to improve your Java application development that is used by millions of developers.</div>
 			<a href="sts/index.html" th:href="@{/tools/sts}" class="tool--learn-more">Learn More</a>
-			<!-- ***NEEDS REAL LINKS*** -->
-			<a href="#" class="tool--download-btn">
-				Download STS 
-				<p>(3.3.0 Release for Mac) *NR</p>
-			</a>
+            <ul class='download-links'>
+                <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${stsDownloadLinks}">
+                    <a class="tool--download-btn" th:href="${downloadLink.url}">
+                        Download STS
+                        <p th:text="'(' + ${stsVersion} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
+                    </a>
+                </li>
+            </ul>
 			<a href="all.html" th:href="@{/tools/sts/all}" class="tool--see-all-versions">See all versions</a>
 		</div>
 
@@ -32,11 +35,14 @@
 			<div class="tool--title">Groovy/Grails Tool Suite</div>
 			<div class="tool--description">Groovy/Grails Tool Suite is an Eclipse base development environment for building Groovy and Grails applications. It provides support for the latest versions of Groovy and Grails.</div>
 			<a href="ggts/index.html" th:href="@{/tools/ggts}" class="tool--learn-more">Learn More</a>
-			<!-- ***NEEDS REAL LINKS*** -->
-			<a href="#" class="tool--download-btn">
-				Download GGTS 
-				<p>(3.3.0 Release for Mac) *NR</p>
-			</a>
+            <ul class='download-links'>
+                <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${ggtsDownloadLinks}">
+                    <a class="tool--download-btn" th:href="${downloadLink.url}">
+                        Download STS
+                        <p th:text="'(' + ${ggtsVersion} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
+                    </a>
+                </li>
+            </ul>
 			<a href="all.html" th:href="@{/tools/ggts/all}" class="tool--see-all-versions">See all versions</a>
 		</div>
 	</div>
