@@ -95,13 +95,4 @@ public class BlogController_PublishedPostsForCategoryTests {
 				TEST_PAGE, this.request);
 		assertThat((List<PostView>) this.model.get("posts"), is(this.posts));
 	}
-
-	@Test
-	public void feedUrlInModel() {
-		String path = "/blog/category/" + TEST_CATEGORY.getUrlSlug();
-		request.setServletPath(path);
-		this.controller.listPublishedPostsForCategory(TEST_CATEGORY, this.model,
-				TEST_PAGE, this.request);
-		assertThat((String) this.model.get("feedPath"), is(path + ".atom"));
-	}
 }

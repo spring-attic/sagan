@@ -71,6 +71,8 @@ public class BlogIndex_BroadcastTests extends IntegrationTestBase {
 		assertThat(html.select(".blog-category.active").text(), equalTo("Broadcasts"));
 
 		assertThat(numberOfBlogPosts(html), is(2));
+
+		assertThat(html.head().getElementsByAttributeValue("type", "application/atom+xml").get(0).attr("href"), equalTo("/blog/broadcasts.atom"));
 	}
 
 	@Test

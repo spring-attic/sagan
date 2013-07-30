@@ -91,13 +91,4 @@ public class BlogController_BroadcastPostsTests {
 		this.controller.listPublishedBroadcasts(this.model, TEST_PAGE, this.request);
 		assertThat((List<PostView>) this.model.get("posts"), is(this.posts));
 	}
-
-	@Test
-	public void feedUrlInModel() {
-		String path = "/blog/broadcasts";
-		request.setServletPath(path);
-		this.controller.listPublishedBroadcasts(this.model, TEST_PAGE, this.request);
-		assertThat((String) this.model.get("feedPath"), is(path + ".atom"));
-	}
-
 }

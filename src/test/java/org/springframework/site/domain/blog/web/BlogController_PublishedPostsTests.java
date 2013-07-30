@@ -89,9 +89,4 @@ public class BlogController_PublishedPostsTests {
 	public void postsInModel() {
 		assertThat((List<PostView>) this.model.get("posts"), is(this.posts));
 	}
-
-	@Test
-	public void feedUrlInModel() {
-		assertThat((String) this.model.get("feedPath"), is("/blog.atom"));
-	}
 }

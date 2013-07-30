@@ -122,7 +122,7 @@ public class BlogController {
 		model.addAttribute("categories", PostCategory.values());
 		model.addAttribute("posts", posts);
 		model.addAttribute("paginationInfo", new PaginationInfo(postViewPage));
-		String path = urlPathHelper.getPathWithinServletMapping(request);
+		String path = urlPathHelper.getPathWithinApplication(request);
 		logger.info("PAGE PATH: " + path);
 		model.addAttribute("pagePath", path);
 		model.addAttribute("feedPath", path + ".atom");

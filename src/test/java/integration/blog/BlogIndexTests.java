@@ -43,7 +43,7 @@ public class BlogIndexTests extends IntegrationTestBase {
 		assertThat(document.select("ul.nav li.active").text(), equalTo("Blog"));
 
 		assertThat(document.select(".blog-category.active").text(), equalTo("All Posts"));
-
+		assertThat(document.head().getElementsByAttributeValue("type", "application/atom+xml").get(0).attr("href"), equalTo("/blog.atom"));
 	}
 
 	@Test

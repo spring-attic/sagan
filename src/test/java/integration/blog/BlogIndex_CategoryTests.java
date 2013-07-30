@@ -77,6 +77,8 @@ public class BlogIndex_CategoryTests extends IntegrationTestBase {
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
 		assertThat(html.select(".blog-category.active").text(), equalTo(PostCategory.ENGINEERING.getDisplayName()));
+
+		assertThat(html.head().getElementsByAttributeValue("type", "application/atom+xml").get(0).attr("href"), equalTo("/blog/category/engineering.atom"));
 	}
 
 	@Test
