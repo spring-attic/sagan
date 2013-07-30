@@ -1,5 +1,8 @@
 package org.springframework.site.domain.blog.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -19,9 +22,6 @@ import org.springframework.site.web.blog.BlogController;
 import org.springframework.site.web.blog.PostView;
 import org.springframework.site.web.blog.PostViewFactory;
 import org.springframework.ui.ExtendedModelMap;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -62,10 +62,9 @@ public class BlogController_BroadcastPostsTests {
 		given(this.blogService.getPublishedBroadcastPosts(eq(testPageable))).willReturn(
 				postsPage);
 		given(this.postViewFactory.createPostViewPage(postsPage)).willReturn(this.page);
-		request.setServletPath("/blog");
+		this.request.setServletPath("/blog");
 
-		this.viewName = this.controller.listPublishedBroadcasts(this.model, TEST_PAGE,
-				this.request);
+		this.viewName = this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
 	}
 
 	@Test
@@ -88,7 +87,8 @@ public class BlogController_BroadcastPostsTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void postsInModel() throws Exception {
-		this.controller.listPublishedBroadcasts(this.model, TEST_PAGE, this.request);
+		this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
 		assertThat((List<PostView>) this.model.get("posts"), is(this.posts));
 	}
+
 }

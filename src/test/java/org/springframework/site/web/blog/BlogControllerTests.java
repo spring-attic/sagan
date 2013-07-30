@@ -49,21 +49,21 @@ public class BlogControllerTests {
 
 	@Test
 	public void titleForBlogYearPage() throws Exception {
-		blogController.listPublishedPostsForYear(2013, 1, model, request);
+		blogController.listPublishedPostsForYear(2013, 1, model);
 		String title = (String) model.get("title");
 		assertThat(title, equalTo("Archive for 2013"));
 	}
 
 	@Test
 	public void titleForBlogYearMonthPage() throws Exception {
-		blogController.listPublishedPostsForYearAndMonth(2013, 1, 1, model, request);
+		blogController.listPublishedPostsForYearAndMonth(2013, 1, 1, model);
 		String title = (String) model.get("title");
 		assertThat(title, equalTo("Archive for January 2013"));
 	}
 
 	@Test
 	public void titleForBlogYearMonthDayPage() throws Exception {
-		blogController.listPublishedPostsForDate(2011, 3, 23, 1, model, request);
+		blogController.listPublishedPostsForDate(2011, 3, 23, 1, model);
 		String title = (String) model.get("title");
 		assertThat(title, equalTo("Archive for March 23, 2011"));
 	}

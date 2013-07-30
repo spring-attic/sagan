@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.site.domain.StaticPageMapper;
 import org.springframework.site.web.NavSection;
 import org.springframework.site.web.ViewRenderingHelper;
@@ -29,6 +30,7 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	private StaticPageMapper staticPageMapper;
 
 	@Bean(name = { "uih", "viewRenderingHelper" })
+	@Scope("request")
 	public ViewRenderingHelper viewRenderingHelper() {
 		return new ViewRenderingHelper();
 	}

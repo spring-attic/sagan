@@ -1,7 +1,7 @@
 package org.springframework.site.web.blog;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.List;
+
 import org.joda.time.LocalDate;
 import org.joda.time.YearMonth;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.UrlPathHelper;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
@@ -33,9 +29,6 @@ public class BlogController {
 
 	private final BlogService service;
 	private final PostViewFactory postViewFactory;
-	private final UrlPathHelper urlPathHelper = new UrlPathHelper();
-
-	private static final Log logger = LogFactory.getLog(BlogController.class);
 
 	@Autowired
 	public BlogController(BlogService service, PostViewFactory postViewFactory) {
@@ -43,89 +36,89 @@ public class BlogController {
 		this.postViewFactory = postViewFactory;
 	}
 
-	@RequestMapping(value = "/{year:\\d+}/{month:\\d+}/{day:\\d+}/{slug}", method = { GET, HEAD })
-	public String showPost(@PathVariable String year, @PathVariable String month, @PathVariable String day, @PathVariable String slug, Model model) {
+	@RequestMapping(value = "/{year:\\d+}/{month:\\d+}/{day:\\d+}/{slug}", method = {
+			GET, HEAD })
+	public String showPost(@PathVariable String year, @PathVariable String month,
+			@PathVariable String day, @PathVariable String slug, Model model) {
 
-		Post post = service.getPublishedPost(String.format("%s/%s/%s/%s", year, month, day, slug));
-		model.addAttribute("post", postViewFactory.createPostView(post));
+		Post post = this.service.getPublishedPost(String.format("%s/%s/%s/%s", year,
+				month, day, slug));
+		model.addAttribute("post", this.postViewFactory.createPostView(post));
 		model.addAttribute("categories", PostCategory.values());
 		model.addAttribute("activeCategory", post.getCategory().getDisplayName());
 		return "blog/show";
 	}
 
 	@RequestMapping(value = "", method = { GET, HEAD })
-	public String listPublishedPosts(Model model, @RequestParam(defaultValue = "1") int page, HttpServletRequest request) {
+	public String listPublishedPosts(Model model,
+			@RequestParam(defaultValue = "1") int page) {
 		Pageable pageRequest = PageableFactory.forLists(page);
-		Page<Post> result = service.getPublishedPosts(pageRequest);
-		return renderListOfPosts(result, model, request, "All Posts");
+		Page<Post> result = this.service.getPublishedPosts(pageRequest);
+		return renderListOfPosts(result, model, "All Posts");
 	}
 
 	@RequestMapping(value = "/category/{category}", method = { GET, HEAD })
-	public String listPublishedPostsForCategory(@PathVariable("category") PostCategory category, Model model, @RequestParam(defaultValue = "1", value="page") int page, HttpServletRequest request) {
+	public String listPublishedPostsForCategory(
+			@PathVariable("category") PostCategory category, Model model,
+			@RequestParam(defaultValue = "1", value = "page") int page) {
 		Pageable pageRequest = PageableFactory.forLists(page);
-		Page<Post> result = service.getPublishedPosts(category, pageRequest);
-		return renderListOfPosts(result, model, request, category.getDisplayName());
+		Page<Post> result = this.service.getPublishedPosts(category, pageRequest);
+		return renderListOfPosts(result, model, category.getDisplayName());
 	}
 
 	@RequestMapping(value = "/broadcasts", method = { GET, HEAD })
-	public String listPublishedBroadcasts(Model model, @RequestParam(defaultValue = "1", value="page") int page, HttpServletRequest request) {
+	public String listPublishedBroadcasts(Model model,
+			@RequestParam(defaultValue = "1", value = "page") int page) {
 		Pageable pageRequest = PageableFactory.forLists(page);
-		Page<Post> result = service.getPublishedBroadcastPosts(pageRequest);
-		return renderListOfPosts(result, model, request, "Broadcasts");
+		Page<Post> result = this.service.getPublishedBroadcastPosts(pageRequest);
+		return renderListOfPosts(result, model, "Broadcasts");
 	}
-
 
 	@RequestMapping(value = "/{year:\\d+}/{month:\\d+}/{day:\\d+}", method = { GET, HEAD })
 	public String listPublishedPostsForDate(@PathVariable int year,
-											@PathVariable int month,
-											@PathVariable int day,
-											@RequestParam(defaultValue = "1", value="page") int page,
-											Model model, HttpServletRequest request) {
+			@PathVariable int month, @PathVariable int day,
+			@RequestParam(defaultValue = "1", value = "page") int page, Model model) {
 
 		Pageable pageRequest = PageableFactory.forLists(page);
-		Page<Post> result = service.getPublishedPostsByDate(year, month, day, pageRequest);
+		Page<Post> result = this.service.getPublishedPostsByDate(year, month, day,
+				pageRequest);
 
 		LocalDate date = new LocalDate(year, month, day);
 		model.addAttribute("title", "Archive for " + date.toString("MMMM dd, yyyy"));
 
-		return renderListOfPosts(result, model, request, "All Posts");
+		return renderListOfPosts(result, model, "All Posts");
 	}
 
 	@RequestMapping(value = "/{year:\\d+}/{month:\\d+}", method = { GET, HEAD })
 	public String listPublishedPostsForYearAndMonth(@PathVariable int year,
-													@PathVariable int month,
-													@RequestParam(defaultValue = "1", value = "page") int page,
-													Model model, HttpServletRequest request) {
+			@PathVariable int month,
+			@RequestParam(defaultValue = "1", value = "page") int page, Model model) {
 
 		Pageable pageRequest = PageableFactory.forLists(page);
-		Page<Post> result = service.getPublishedPostsByDate(year, month, pageRequest);
+		Page<Post> result = this.service
+				.getPublishedPostsByDate(year, month, pageRequest);
 		YearMonth yearMonth = new YearMonth(year, month);
 		model.addAttribute("title", "Archive for " + yearMonth.toString("MMMM yyyy"));
-		return renderListOfPosts(result, model, request, "All Posts");
+		return renderListOfPosts(result, model, "All Posts");
 	}
 
 	@RequestMapping(value = "/{year:\\d+}", method = { GET, HEAD })
 	public String listPublishedPostsForYear(@PathVariable int year,
-											@RequestParam(defaultValue = "1", value = "page") int page,
-											Model model, HttpServletRequest request) {
+			@RequestParam(defaultValue = "1", value = "page") int page, Model model) {
 
 		Pageable pageRequest = PageableFactory.forLists(page);
-		Page<Post> result = service.getPublishedPostsByDate(year, pageRequest);
+		Page<Post> result = this.service.getPublishedPostsByDate(year, pageRequest);
 		model.addAttribute("title", String.format("Archive for %d", year));
-		return renderListOfPosts(result, model, request, "All Posts");
+		return renderListOfPosts(result, model, "All Posts");
 	}
 
-	private String renderListOfPosts(Page<Post> page, Model model, HttpServletRequest request, String activeCategory) {
-		Page<PostView> postViewPage = postViewFactory.createPostViewPage(page);
+	private String renderListOfPosts(Page<Post> page, Model model, String activeCategory) {
+		Page<PostView> postViewPage = this.postViewFactory.createPostViewPage(page);
 		List<PostView> posts = postViewPage.getContent();
 		model.addAttribute("activeCategory", activeCategory);
 		model.addAttribute("categories", PostCategory.values());
 		model.addAttribute("posts", posts);
 		model.addAttribute("paginationInfo", new PaginationInfo(postViewPage));
-		String path = urlPathHelper.getPathWithinApplication(request);
-		logger.info("PAGE PATH: " + path);
-		model.addAttribute("pagePath", path);
-		model.addAttribute("feedPath", path + ".atom");
 		return "blog/index";
 	}
 }
