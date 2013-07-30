@@ -1,5 +1,7 @@
 package org.springframework.site.web.blog;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.joda.time.LocalDate;
 import org.joda.time.YearMonth;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,8 @@ public class BlogController {
 	private final BlogService service;
 	private final PostViewFactory postViewFactory;
 	private final UrlPathHelper urlPathHelper = new UrlPathHelper();
+
+	private static final Log logger = LogFactory.getLog(BlogController.class);
 
 	@Autowired
 	public BlogController(BlogService service, PostViewFactory postViewFactory) {
@@ -119,6 +123,7 @@ public class BlogController {
 		model.addAttribute("posts", posts);
 		model.addAttribute("paginationInfo", new PaginationInfo(postViewPage));
 		String path = urlPathHelper.getPathWithinServletMapping(request);
+		logger.info("PAGE PATH: " + path);
 		model.addAttribute("pagePath", path);
 		model.addAttribute("feedPath", path + ".atom");
 		return "blog/index";
