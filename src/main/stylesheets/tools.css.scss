@@ -134,6 +134,9 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   .tools-feature--container {
     vertical-align: top;
+    h3 {
+      font-family: $secondary-font-family;
+    }
     .tools-feature--thumbnail {
       height: 160px;
       width: 100%;
@@ -146,6 +149,7 @@ $icon-sprite: url("../img/iconsprite.png");
     .tools-feature--description {
       font-size: 14px;
       line-height: 20px;
+      padding-right: 40px;
     }
   }
   &.testimonial {
@@ -178,8 +182,16 @@ $icon-sprite: url("../img/iconsprite.png");
         vertical-align: top;
         strong {
           margin-left: -13px;
+          font-family: $secondary-font-family;
         }
       }
+    }
+  }
+  &.screenshot {
+    .sts-screenshot {
+      background-image: url("../img/sts-screenshot.png");
+      height: 318px;
+      margin: 60px 0;
     }
   }
 }

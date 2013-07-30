@@ -118,6 +118,9 @@
 .tools--wrapper .tools-feature--container {
   vertical-align: top;
 }
+.tools--wrapper .tools-feature--container h3 {
+  font-family: "Montserrat", sans-serif;
+}
 .tools--wrapper .tools-feature--container .tools-feature--thumbnail {
   height: 160px;
   width: 100%;
@@ -130,6 +133,7 @@
 .tools--wrapper .tools-feature--container .tools-feature--description {
   font-size: 14px;
   line-height: 20px;
+  padding-right: 40px;
 }
 .tools--wrapper.testimonial {
   padding-top: 60px;
@@ -164,6 +168,12 @@
 }
 .tools--wrapper.testimonial .testimonial--container .quotation--speaker strong {
   margin-left: -13px;
+  font-family: "Montserrat", sans-serif;
+}
+.tools--wrapper.screenshot .sts-screenshot {
+  background-image: url("../img/sts-screenshot.png");
+  height: 318px;
+  margin: 60px 0;
 }
 
 .tools-right-pane {
