@@ -102,7 +102,10 @@ public class BlogSampleDataController {
 				"1.  I'll be doing a webinar on building effective REST APIs with Spring on June 13th. I'll be introducing Spring's deep support for REST services, starting");
 		Post post = blogService.addPost(postForm, authorId);
 		if (post.isLiveOn(new Date())) {
-			searchService.saveToIndex(mapper.map(post));
+			try {
+				searchService.saveToIndex(mapper.map(post));
+			} catch (Exception e) {
+			}
 		}
 	}
 }

@@ -1,9 +1,9 @@
 package org.springframework.site.web;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.util.UrlPathHelper;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class ViewRenderingHelper {
 
@@ -33,8 +33,7 @@ public class ViewRenderingHelper {
 	}
 
 	public String path() {
-		String path = this.urlPathHelper.getPathWithinServletMapping(this.request);
-		return path;
+		return this.urlPathHelper.getPathWithinApplication(this.request);
 	}
 
 }
