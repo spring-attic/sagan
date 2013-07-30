@@ -1,14 +1,17 @@
+ghPagesBaseUrl: http://projects.springframework.io
+docsBaseUrl: http://static.springsource.org
 projects:
   active:
     - id: spring-framework
       name: Spring Framework
+      hasSite: true                                                         # optional, default=false
+      siteUrl: http://projects.springframework.io/spring-framework          # optional, default={ghPagesBaseUrl}/{id}
+      refDocPath: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
+      apiDocPath: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
       supportedVersions:
         - 3.1.4.RELEASE
         - 3.2.3.RELEASE
         - 4.0.0.M1
-      githubUrl: https://github.com/SpringSource/spring-framework
-      referenceUrl: http://static.springsource.org/spring/docs/{version}/spring-framework-reference/html/
-      apiUrl: http://static.springsource.org/spring/docs/{version}/javadoc-api/
     - id: spring-security
       supportedVersions: [3.1.4.RELEASE]
       name: Spring Security
