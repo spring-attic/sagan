@@ -19,7 +19,7 @@ $icon-sprite: url("../img/iconsprite.png");
 .container-fluid {
   width: 1024px !important;
 }
-.navbar-inner, .search-dropdown--container {
+.navbar-inner, .search-dropdown--container, footer {
   min-width: 1024px;
 }
 
@@ -173,11 +173,18 @@ body {
     background-color: rgba(255, 255, 255, 1);
     width: 100%;
     border-bottom: 1px solid #ddd;
-    transition: margin 0.5s;
+    transition: margin 0.25s;
     -webkit-transition: margin 0.25s;
     -moz-transition: margin 0.25s;
     -o-transition: margin 0.25s;
     -ms-transition: margin 0.25s;
+    &.no-animation {
+      transition: none;
+      -webkit-transition: none;
+      -moz-transition: none;
+      -o-transition: none;
+      -ms-transition: none;
+    }
     .form-search {
       margin: 0;
       .search-form--form {

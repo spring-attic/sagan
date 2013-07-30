@@ -94,7 +94,7 @@
 }
 .content--container blockquote {
   padding: 0 0 0 10px;
-  border-left: 5px solid #dddddd;
+  border-left: 5px solid #DDD;
 }
 .content--container pre {
   word-break: normal;
@@ -105,7 +105,7 @@
 }
 .content--container .highlight .copy-button {
   position: absolute;
-  margin-left: 633px;
+  margin-left: 634px;
 }
 
 .content-right-pane--container h2 {
@@ -117,11 +117,10 @@
   margin: 15px 6.2%;
 }
 .content-right-pane--container h3 {
-  border-top: 1px solid #dddddd;
-  padding: 0px 6.2%;
+  border-top: 1px solid #ddd;
+  padding: 6px 6.2%;
   font-family: "Montserrat", sans-serif;
-  font-size: 16px;
-  font-family: 700;
+  margin: 0;
 }
 .content-right-pane--container ul {
   margin: 0;
@@ -144,7 +143,7 @@
   padding: 18px 6.4%;
   font-size: 16px;
   line-height: 16px;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   box-shadow: none;
 }
 .content-right-pane--container .btn-group .btn.active {
@@ -155,7 +154,7 @@
   box-shadow: inset 0 1px 3px #c8c8c8;
 }
 .content-right-pane--container .clone-url {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   background-color: white;
   cursor: pointer;
   margin: 15px 6.2%;

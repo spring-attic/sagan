@@ -56,7 +56,7 @@ $(function(){
     //AUTO OPENS SEARCH DROPDOWN ON SEARCH VIEW AND 
     if (window.location.pathname == "/search") {
       $(".nav-search").addClass("js-highlight");
-      $(".js-search-dropdown").addClass("js-show");
+      $(".js-search-dropdown").addClass("js-show no-animation");
 
       //PREPOPULATES INPUT WITH SEARCH QUERY
       var searchQuery = decodeURIComponent(window.location.search.substr(3).replace(/\+/g," ")); 
@@ -64,7 +64,7 @@ $(function(){
 
       //CLOSES SEARCH DROPDOWN
       $(".js-search-input-close").click(function() {
-        $(".js-search-dropdown").removeClass("js-show");
+        $(".js-search-dropdown").removeClass("js-show no-animation");
         $(".nav-search").removeClass("js-highlight");
       });
     };
