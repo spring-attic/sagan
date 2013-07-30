@@ -4,6 +4,8 @@ import com.google.gson.JsonParser;
 import io.searchbox.client.JestResult;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -59,7 +61,7 @@ public class SearchResultParser_WithHighlightTests {
 			"}\n";
 
 	private SearchResultParser searchResultParser;
-	private List<SearchResult> searchResults;
+	private List<SearchResult> content;
 
 	@Before
 	public void setup() {
@@ -68,31 +70,32 @@ public class SearchResultParser_WithHighlightTests {
 		JestResult jestResult = new JestResult();
 		jestResult.setJsonObject(jsonParser.parse(RESULT_STRING).getAsJsonObject());
 
-		searchResults = searchResultParser.parseResults(jestResult);
+		Pageable pageable = new PageRequest(1, 10);
+		content = searchResultParser.parseResults(jestResult, pageable).getPage().getContent();
 	}
 
 	@Test
 	public void returnsAResultForEveryHit() {
-		assertThat(searchResults.size(), equalTo(2));
+		assertThat(content.size(), equalTo(2));
 	}
 
 	@Test
 	public void id() {
-		assertThat(searchResults.get(0).getId(), equalTo("aHR0cDovL3N0YXRpYy5zcHJpbmdzb3VyY2Uub3JnL3NwcmluZy9kb2NzLzMuMS40LnJlbGVhc2UvamF2YWRvYy1hcGkvb3JnL3NwcmluZ2ZyYW1ld29yay9jb250ZXh0L2FwcGxpY2F0aW9uY29udGV4dC5odG1s"));
+		assertThat(content.get(0).getId(), equalTo("aHR0cDovL3N0YXRpYy5zcHJpbmdzb3VyY2Uub3JnL3NwcmluZy9kb2NzLzMuMS40LnJlbGVhc2UvamF2YWRvYy1hcGkvb3JnL3NwcmluZ2ZyYW1ld29yay9jb250ZXh0L2FwcGxpY2F0aW9uY29udGV4dC5odG1s"));
 	}
 
 	@Test
 	public void title() {
-		assertThat(searchResults.get(0).getTitle(), equalTo("ApplicationContext"));
+		assertThat(content.get(0).getTitle(), equalTo("ApplicationContext"));
 	}
 
 	@Test
 	public void parseHighlightedSummary() {
-		assertThat(searchResults.get(0).getSummary(), equalTo("org.springframework.context Interface <em>ApplicationContext</em> All Superinterfaces: ApplicationEventPublisher, BeanFactory, EnvironmentCapable, HierarchicalBeanFactory, ListableBeanFactory, MessageSource, ResourceLoader, ResourcePatternResolver All Known Subinterfaces: ConfigurableApplicationContext"));
+		assertThat(content.get(0).getSummary(), equalTo("org.springframework.context Interface <em>ApplicationContext</em> All Superinterfaces: ApplicationEventPublisher, BeanFactory, EnvironmentCapable, HierarchicalBeanFactory, ListableBeanFactory, MessageSource, ResourceLoader, ResourcePatternResolver All Known Subinterfaces: ConfigurableApplicationContext"));
 	}
 
 	@Test
 	public void url() {
-		assertThat(searchResults.get(0).getPath(), equalTo("http://static.springsource.org/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html"));
+		assertThat(content.get(0).getPath(), equalTo("http://static.springsource.org/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html"));
 	}
 }

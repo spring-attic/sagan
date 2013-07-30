@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:app="http://www.springframework.org"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+
+<ul layout:fragment="facets">
+    <li th:each="facet : ${root.facets}">
+        <a th:href="@{/blog}" th:text="${facet.linkText}">All Posts</a>
+        <ul th:if="${facet.hasFacets()}" layout:include="search/_facets :: facets" th:with="root=${facet}">
+
+        </ul>
+    </li>
+</ul>
+
+</body>
+</html>
+
+
+
+

@@ -4,7 +4,9 @@ import org.springframework.site.search.SearchEntry;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class SearchEntryBuilder {
 
@@ -13,6 +15,7 @@ public class SearchEntryBuilder {
 	private String summary = "A random post summary";
 	private Date publishAt = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
 	private String path = "/some/path";
+	private List<String> facetPaths = new ArrayList<>();
 	private boolean current = true;
 
 	private SearchEntryBuilder() {
@@ -52,6 +55,11 @@ public class SearchEntryBuilder {
 		return this;
 	}
 
+	public SearchEntryBuilder facetPath(String facetPath) {
+		this.facetPaths.add(facetPath);
+		return this;
+	}
+
 	public SearchEntryBuilder notCurrent() {
 		this.current = false;
 		return this;
@@ -65,6 +73,7 @@ public class SearchEntryBuilder {
 		searchResult.setPublishAt(publishAt);
 		searchResult.setPath(path);
 		searchResult.setCurrent(current);
+		searchResult.setFacetPaths(facetPaths);
 		return searchResult;
 	}
 

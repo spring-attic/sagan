@@ -1,6 +1,7 @@
 package integration.search;
 
 import integration.IntegrationTestBase;
+import io.searchbox.core.Search;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,8 +12,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.site.domain.blog.Post;
 import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchFacet;
+import org.springframework.site.search.SearchResult;
+import org.springframework.site.search.SearchResults;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.site.web.PaginationInfo;
 import org.springframework.site.web.search.SearchEntryBuilder;
@@ -46,12 +49,13 @@ public class SearchViewTests extends IntegrationTestBase {
 	public void setUp() throws Exception {
 		view = viewResolver.resolveViewName("search/results", Locale.UK);
 		response = new MockHttpServletResponse();
-		Page<Post> posts = new PageImpl<Post>(Collections.<Post>emptyList(), PageableFactory.forSearch(1), 0);
+		Page<SearchResult> results = new PageImpl<>(Collections.<SearchResult>emptyList(), PageableFactory.forSearch(1), 0);
 
-		model = new HashMap<String, Object>();
+		model = new HashMap<>();
 		model.put("results", Collections.emptyList());
 		model.put("query", "searchterm");
-		model.put("paginationInfo", new PaginationInfo(posts));
+		model.put("paginationInfo", new PaginationInfo(results));
+		model.put("root", new SearchResults(results, Collections.<SearchFacet>emptyList()));
 	}
 
 	@Test

@@ -1,8 +1,5 @@
 package external.search;
 
-import java.text.ParseException;
-import java.util.List;
-
 import org.jsoup.nodes.Document;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -30,6 +27,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import java.text.ParseException;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
@@ -93,7 +93,7 @@ public class HostedSearchServiceIntegrationTests {
 		Thread.sleep(1000);
 
 		Page<SearchResult> searchEntries = this.searchService.search(
-				"Integration test content", this.pageable);
+				"Integration test content", this.pageable).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		assertThat(entries.get(0).getSummary(), is(equalTo(this.entry.getSummary())));
@@ -118,7 +118,7 @@ public class HostedSearchServiceIntegrationTests {
 		Thread.sleep(1000);
 
 		Page<SearchResult> searchEntries = this.searchService.search(testTitle,
-				this.pageable);
+				this.pageable).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		assertThat(entries.get(0).getTitle(), is(equalTo(this.entry.getTitle())));
@@ -142,7 +142,7 @@ public class HostedSearchServiceIntegrationTests {
 		Thread.sleep(1000);
 
 		Page<SearchResult> searchEntries = this.searchService.search(
-				"Somereandomtestcontentthatshouldbeunique", this.pageable);
+				"Somereandomtestcontentthatshouldbeunique", this.pageable).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		SearchResult entry = entries.get(0);

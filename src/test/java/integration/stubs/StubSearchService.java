@@ -3,10 +3,9 @@ package integration.stubs;
 import io.searchbox.client.JestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.search.SearchEntry;
-import org.springframework.site.search.SearchResult;
+import org.springframework.site.search.SearchResults;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,7 @@ public class StubSearchService extends SearchService {
 	}
 
 	@Override
-	public Page<SearchResult> search(String term, Pageable pageable) {
+	public SearchResults search(String term, Pageable pageable) {
 		return null;
 	}
 

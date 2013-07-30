@@ -2,7 +2,9 @@ package org.springframework.site.search;
 
 import org.springframework.security.crypto.codec.Base64;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class SearchEntry {
 
@@ -13,6 +15,8 @@ public class SearchEntry {
 	private String rawContent;
 
 	private String title;
+
+	private List<String> facetPaths = new ArrayList<>();
 
 	private boolean current = true;
 
@@ -70,5 +74,13 @@ public class SearchEntry {
 
 	public void setCurrent(boolean current) {
 		this.current = current;
+	}
+
+	public List<String> getFacetPaths() {
+		return facetPaths;
+	}
+
+	public void setFacetPaths(List<String> facetPaths) {
+		this.facetPaths = facetPaths;
 	}
 }

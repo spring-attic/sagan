@@ -58,6 +58,13 @@ public class SearchQueryBuilder {
 					"    }\n" +
 					"  }";
 
+	private static final String facets = "\"facets\" : {\n" +
+			"  \"facet_paths_result\" : {\n" +
+			"   \"terms\" : {\n" +
+			"    \"field\" : \"facetPaths\"\n" +
+			"   }\n" +
+			"  }\n" +
+			" }";
 
 	SearchQueryBuilder() {
 	}
@@ -65,7 +72,8 @@ public class SearchQueryBuilder {
 	Search.Builder forEmptyQuery(Pageable pageable) {
 		return new Search.Builder("{" + emptyQuery + ","
 				+ buildQueryPagination(pageable) + ","
-				+ highlight
+				+ highlight + ","
+				+ facets
 				+ "}");
 	}
 
@@ -73,7 +81,8 @@ public class SearchQueryBuilder {
 		return new Search.Builder("{" + buildFullQuery(queryTerm) + ","
 				+ buildQueryFilters(new Date()) + ","
 				+ buildQueryPagination(pageable) + ","
-				+ highlight
+				+ highlight + ","
+				+ facets
 				+ "}");
 	}
 

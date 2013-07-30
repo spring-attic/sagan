@@ -7,11 +7,14 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.site.search.SearchFacet;
 import org.springframework.site.search.SearchResult;
+import org.springframework.site.search.SearchResults;
 import org.springframework.site.search.SearchService;
 import org.springframework.ui.ExtendedModelMap;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -38,9 +41,9 @@ public class SearchControllerTests {
 		this.controller = new SearchController(this.searchService);
 		SearchResult entry = new SearchResult("", "", "", "");
 		this.entries.add(entry);
-		this.resultsPage = new PageImpl<SearchResult>(this.entries);
+		this.resultsPage = new PageImpl<>(this.entries);
 		given(this.searchService.search(anyString(), (Pageable) anyObject())).willReturn(
-				this.resultsPage);
+				new SearchResults(this.resultsPage, Collections.<SearchFacet>emptyList()));
 	}
 
 	@Test

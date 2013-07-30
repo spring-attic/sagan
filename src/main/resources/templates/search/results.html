@@ -10,8 +10,8 @@
 <div layout:fragment="overview"></div>
 
 <div layout:fragment="content" class="container">
-	<div class="row">
-		<div id="content" class="span12">
+	<div class="row-fluid">
+		<div id="content" class="span8">
 
 			<div th:if="${results.empty}" class="warning alert-warning">
 				No results found for your query.
@@ -30,6 +30,13 @@
 			</div>
 
 		</div>
+        <div class="span4">
+            <div class="search-facets">
+                <ul layout:include="search/_facets :: facets" th:with="root=${root}">
+
+                </ul>
+            </div>
+        </div>
 	</div>
 </div>
 </body>

@@ -4,6 +4,9 @@ import com.google.gson.JsonParser;
 import io.searchbox.client.JestResult;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -40,7 +43,8 @@ public class SearchResultParser_WithoutHighlightTests {
 			"}\n";
 
 	private SearchResultParser searchResultParser;
-	private List<SearchResult> searchResults;
+	private SearchResults searchResults;
+	private List<SearchResult> content;
 
 	@Before
 	public void setup() {
@@ -49,26 +53,36 @@ public class SearchResultParser_WithoutHighlightTests {
 		JestResult jestResult = new JestResult();
 		jestResult.setJsonObject(jsonParser.parse(RESULT_STRING).getAsJsonObject());
 
-		searchResults = searchResultParser.parseResults(jestResult);
+		Pageable pageable = new PageRequest(3, 12);
+		searchResults = searchResultParser.parseResults(jestResult, pageable);
+		content = searchResults.getPage().getContent();
+	}
+
+	@Test
+	public void returnsAPageOfResults() {
+		Page<SearchResult> page = searchResults.getPage();
+		assertThat(page.getNumber(), equalTo(3));
+		assertThat(page.getSize(), equalTo(12));
+		assertThat(page.getTotalElements(), equalTo(237L));
 	}
 
 	@Test
 	public void returnsAResultForEveryHit() {
-		assertThat(searchResults.size(), equalTo(1));
+		assertThat(content.size(), equalTo(1));
 	}
 
 	@Test
 	public void title() {
-		assertThat(searchResults.get(0).getTitle(), equalTo("ApplicationContext"));
+		assertThat(content.get(0).getTitle(), equalTo("ApplicationContext"));
 	}
 
 	@Test
 	public void useSourceSummary() {
-		assertThat(searchResults.get(0).getSummary(), equalTo("org.springframework.context Interface ApplicationContext All Superinterfaces: ApplicationEventPublisher, BeanFactory, EnvironmentCapable, HierarchicalBeanFactory, ListableBeanFactory, MessageSource, ResourceLoader, ResourcePatternResolver All Known Subinterfaces: ConfigurableApplicationContext, ConfigurablePortletApplicationContext, ConfigurableWebApplicationContext, WebApplicationContext All Known Implementing Classes: AbstractApplicationContext, AbstractRefreshableApplicationContext, AbstractR"));
+		assertThat(content.get(0).getSummary(), equalTo("org.springframework.context Interface ApplicationContext All Superinterfaces: ApplicationEventPublisher, BeanFactory, EnvironmentCapable, HierarchicalBeanFactory, ListableBeanFactory, MessageSource, ResourceLoader, ResourcePatternResolver All Known Subinterfaces: ConfigurableApplicationContext, ConfigurablePortletApplicationContext, ConfigurableWebApplicationContext, WebApplicationContext All Known Implementing Classes: AbstractApplicationContext, AbstractRefreshableApplicationContext, AbstractR"));
 	}
 
 	@Test
 	public void url() {
-		assertThat(searchResults.get(0).getPath(), equalTo("http://static.springsource.org/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html"));
+		assertThat(content.get(0).getPath(), equalTo("http://static.springsource.org/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html"));
 	}
 }

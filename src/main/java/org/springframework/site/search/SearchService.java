@@ -9,12 +9,8 @@ import io.searchbox.core.Search;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class SearchService {
@@ -45,7 +41,7 @@ public class SearchService {
 		execute(newIndexBuilder.build());
 	}
 
-	public Page<SearchResult> search(String term, Pageable pageable) {
+	public SearchResults search(String term, Pageable pageable) {
 		Search.Builder searchBuilder;
 		if (term.equals("")) {
 			searchBuilder = this.searchQueryBuilder.forEmptyQuery(pageable);
@@ -54,10 +50,8 @@ public class SearchService {
 		}
 		searchBuilder.addIndex(INDEX);
 		JestResult jestResult = execute(searchBuilder.build());
-		List<SearchResult> searchResults = searchResultParser.parseResults(jestResult);
-
-		int totalResults = jestResult.getJsonObject().getAsJsonObject("hits").get("total").getAsInt();
-		return new PageImpl<>(searchResults, pageable, totalResults);
+		logger.info(jestResult.getJsonString());
+		return searchResultParser.parseResults(jestResult, pageable);
 	}
 	public void setUseRefresh(boolean useRefresh) {
 		this.useRefresh = useRefresh;

@@ -30,6 +30,11 @@
                 "type": "boolean",
                 "store": "yes",
                 "index": "no"
+            },
+            "facetPaths" : {
+                "type" : "string",
+                "store" : "no",
+                "index" : "not_analyzed"
             }
         }
     }

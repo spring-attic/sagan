@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.search.SearchResult;
+import org.springframework.site.search.SearchResults;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.site.web.PaginationInfo;
@@ -29,10 +30,12 @@ public class SearchController {
 	@RequestMapping(method = {GET, HEAD})
 	public String search(@RequestParam(value = "q", defaultValue = "") String query, @RequestParam(defaultValue = "1") int page, Model model) {
 		Pageable pageable = PageableFactory.forSearch(page);
-		Page<SearchResult> entries = searchService.search(query, pageable);
+		SearchResults searchResults = searchService.search(query, pageable);
+		Page<SearchResult> entries = searchResults.getPage();
 		model.addAttribute("results", entries.getContent());
 		model.addAttribute("query", query);
 		model.addAttribute("paginationInfo", new PaginationInfo(entries));
+		model.addAttribute("root", searchResults);
 		return "search/results";
 	}
 

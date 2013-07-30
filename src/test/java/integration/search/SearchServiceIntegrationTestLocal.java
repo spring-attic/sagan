@@ -3,14 +3,6 @@ package integration.search;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.ClientConfig;
-
-import java.text.ParseException;
-import java.util.LinkedHashSet;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 import org.elasticsearch.client.Client;
 import org.elasticsearch.node.NodeBuilder;
 import org.junit.Before;
@@ -26,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchResult;
+import org.springframework.site.search.SearchResults;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.site.web.search.SearchEntryBuilder;
@@ -33,8 +26,13 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
 import utils.FreePortFinder;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.text.ParseException;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -138,7 +136,7 @@ public class SearchServiceIntegrationTestLocal {
 
 	private void assertThatSearchReturnsEntry(String query) {
 		Page<SearchResult> searchEntries = this.searchService
-				.search(query, this.pageable);
+				.search(query, this.pageable).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		assertThat(entries.get(0).getTitle(), is(equalTo(this.entry.getTitle())));
@@ -171,7 +169,7 @@ public class SearchServiceIntegrationTestLocal {
 
 		this.searchService.saveToIndex(secondEntry);
 		Page<SearchResult> searchEntries = this.searchService.search("content",
-				this.pageable);
+				this.pageable).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries.size(), equalTo(1));
 	}
@@ -188,11 +186,11 @@ public class SearchServiceIntegrationTestLocal {
 		this.searchService.saveToIndex(entry2);
 
 		Pageable page1 = new PageRequest(0, 1);
-		Page<SearchResult> searchEntries1 = this.searchService.search("content", page1);
+		Page<SearchResult> searchEntries1 = this.searchService.search("content", page1).getPage();
 		assertThat(searchEntries1.getContent().get(0).getId(), equalTo(entry1.getId()));
 
 		Pageable page2 = new PageRequest(1, 1);
-		Page<SearchResult> searchEntries2 = this.searchService.search("content", page2);
+		Page<SearchResult> searchEntries2 = this.searchService.search("content", page2).getPage();
 		assertThat(searchEntries2.getContent().get(0).getId(), equalTo(entry2.getId()));
 	}
 
@@ -208,7 +206,7 @@ public class SearchServiceIntegrationTestLocal {
 
 		int page = 1;
 		Pageable pageable = new PageRequest(page, 10);
-		Page<SearchResult> searchEntries = this.searchService.search("", pageable);
+		Page<SearchResult> searchEntries = this.searchService.search("", pageable).getPage();
 		assertThat(searchEntries.getContent().size(), equalTo(10));
 		assertThat(searchEntries.getTotalPages(), equalTo(3));
 		assertThat(searchEntries.getNumber(), equalTo(page));
@@ -219,7 +217,7 @@ public class SearchServiceIntegrationTestLocal {
 		indexSingleEntry();
 		Pageable page = new PageRequest(0, 10);
 		Page<SearchResult> searchEntries = this.searchService.search(
-				"somethingthatwillneverappearsupercalifragilousIcantspelltherest", page);
+				"somethingthatwillneverappearsupercalifragilousIcantspelltherest", page).getPage();
 		assertThat(searchEntries.getContent().size(), equalTo(0));
 		assertThat(searchEntries.getTotalPages(), equalTo(0));
 	}
@@ -271,7 +269,7 @@ public class SearchServiceIntegrationTestLocal {
 		this.searchService.saveToIndex(entryTitle);
 
 		List<SearchResult> results = this.searchService.search("application",
-				this.pageable).getContent();
+				this.pageable).getPage().getContent();
 		assertThat(results.get(0).getId(), is(entryTitle.getId()));
 		assertThat(results.get(1).getId(), is(entryContent.getId()));
 	}
@@ -299,8 +297,67 @@ public class SearchServiceIntegrationTestLocal {
 
 		searchService.saveToIndex(current);
 
-		List<SearchResult> results = searchService.search("application", pageable).getContent();
+		List<SearchResult> results = searchService.search("application", pageable).getPage().getContent();
 		assertThat(results.get(0).getId(), is(current.getId()));
 		assertThat(results.get(1).getId(), is(notCurrent.getId()));
+	}
+
+	@Test
+	public void facets() throws ParseException {
+		SearchEntry gsg = SearchEntryBuilder.entry()
+				.path("http://example.com/gsg/some")
+				.title("a title")
+				.rawContent("some guide")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.facetPath("Guides")
+				.facetPath("Guides/GettingStarted")
+				.notCurrent()
+				.build();
+
+		searchService.saveToIndex(gsg);
+
+		SearchEntry gsg2 = SearchEntryBuilder.entry()
+				.path("http://example.com/gsg/another")
+				.title("a title")
+				.rawContent("another guide")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.facetPath("Guides")
+				.facetPath("Guides/GettingStarted")
+				.notCurrent()
+				.build();
+
+		searchService.saveToIndex(gsg2);
+
+		SearchEntry tutorial = SearchEntryBuilder.entry()
+				.path("http://example.com/tutorial")
+				.title("a title")
+				.rawContent("a tutorial")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.facetPath("Guides")
+				.facetPath("Guides/Tutorials")
+				.build();
+
+		searchService.saveToIndex(tutorial);
+
+		SearchEntry blog = SearchEntryBuilder.entry()
+				.path("http://example.com/blog")
+				.title("a title")
+				.rawContent("a blog post")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.facetPath("Blog")
+				.facetPath("Blog/Engineering")
+				.build();
+
+		searchService.saveToIndex(blog);
+
+		SearchResults searchResults = searchService.search("title", pageable);
+
+		List<SearchResult> content = searchResults.getPage().getContent();
+		assertThat(content.size(), equalTo(4));
+//		assertThat(searchResults.getFacets().size(), equalTo(2));
 	}
 }
