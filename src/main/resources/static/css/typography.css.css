@@ -30,6 +30,9 @@ p {
   font-size: 15px;
   line-height: 24px;
 }
+p a {
+  color: #5fa134;
+}
 
 code {
   font-size: 14px;

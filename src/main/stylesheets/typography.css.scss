@@ -35,6 +35,9 @@ h3 {
 p {
   font-size: 15px;
   line-height: 24px;
+  a {
+    color: $link-green;
+  }
 }
 
 code {

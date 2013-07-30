@@ -115,6 +115,9 @@
   line-height: 24px;
   margin-bottom: 20px;
 }
+.tools--wrapper h2 {
+  margin-bottom: 25px;
+}
 .tools--wrapper .tools-feature--container {
   vertical-align: top;
 }
@@ -135,6 +138,12 @@
   line-height: 20px;
   padding-right: 40px;
 }
+.tools--wrapper .tools-feature--container .tools-feature--description li {
+  padding: 5px 0;
+}
+.tools--wrapper .tools-feature--container .tools-feature--description a {
+  color: #5fa134;
+}
 .tools--wrapper.testimonial {
   padding-top: 60px;
   border-top: 1px solid white;
@@ -144,7 +153,7 @@
   background-color: white;
   margin: 0 67px;
   padding: 20px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 .tools--wrapper.testimonial .testimonial--container .quotation--icon {
   width: 30px;
@@ -170,10 +179,15 @@
   margin-left: -13px;
   font-family: "Montserrat", sans-serif;
 }
-.tools--wrapper.screenshot .sts-screenshot {
-  background-image: url("../img/sts-screenshot.png");
+.tools--wrapper.screenshot .screenshot {
   height: 318px;
   margin: 60px 0;
+}
+.tools--wrapper.screenshot .screenshot.sts-screenshot {
+  background-image: url("../img/sts-screenshot.png");
+}
+.tools--wrapper.screenshot .screenshot.ggts-screenshot {
+  background-image: url("../img/ggts-screenshot.png");
 }
 
 .tools-right-pane {
