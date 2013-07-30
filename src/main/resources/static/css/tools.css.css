@@ -153,7 +153,7 @@
   background-color: white;
   margin: 0 67px;
   padding: 20px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
 }
 .tools--wrapper.testimonial .testimonial--container .quotation--icon {
   width: 30px;
@@ -193,13 +193,19 @@
 .tools-right-pane {
   text-align: center;
 }
-.tools-right-pane .sts-logo {
+.tools-right-pane .tools-logo {
   display: inline-block;
   background-image: url("../img/iconsprite.png");
-  background-position: -328px 0;
-  width: 124px;
   height: 134px;
   margin: 20px 0;
+}
+.tools-right-pane .tools-logo.sts-logo {
+  background-position: -328px 0;
+  width: 124px;
+}
+.tools-right-pane .tools-logo.ggts-logo {
+  background-position: -338px -140px;
+  width: 96px;
 }
 .tools-right-pane ul {
   margin: 0;

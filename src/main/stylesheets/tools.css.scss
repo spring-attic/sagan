@@ -214,13 +214,19 @@ $icon-sprite: url("../img/iconsprite.png");
 
 .tools-right-pane {
   text-align: center;
-  .sts-logo {
+  .tools-logo {
     display: inline-block;
     background-image: $icon-sprite;
-    background-position: -328px 0;
-    width: 124px;
     height: 134px;
     margin: 20px 0;
+    &.sts-logo {
+      background-position: -328px 0;
+      width: 124px;
+    }
+    &.ggts-logo {
+      background-position: -338px -140px;      
+      width: 96px;
+    }
   }
   ul {
     margin: 0;
