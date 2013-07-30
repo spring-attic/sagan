@@ -163,10 +163,15 @@ The `start-class` property tells Maven to create a `META-INF/MANIFEST.MF` file w
 
 The [Spring Boot maven plugin][spring-boot-maven-plugin] collects all the jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
 
-Now run the following to produce a single executable JAR file containing all necessary dependency classes and resources:
+Now run the following command to produce a single executable JAR file containing all necessary dependency classes and resources:
 
 ```sh
 $ mvn package
+```
+
+To run the package, run this:
+```sh
+$ mvn spring-boot:run
 ```
 
 [spring-boot-maven-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-maven-plugin
