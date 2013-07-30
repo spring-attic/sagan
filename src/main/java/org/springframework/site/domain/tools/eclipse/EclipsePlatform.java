@@ -1,10 +1,8 @@
 package org.springframework.site.domain.tools.eclipse;
 
-import org.springframework.site.domain.tools.ToolsDownloads;
-
 import java.util.List;
 
-public class EclipsePlatform implements ToolsDownloads.ToolsPlatform {
+public class EclipsePlatform {
 	private final List<EclipseRelease> products;
 	private String name;
 

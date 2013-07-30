@@ -24,14 +24,6 @@ public class ToolSuiteTests {
 		assertThat(toolSuite.getPreferredDownloadLinks(), equalTo(links));
 	}
 
-	@Test
-	public void testPreferredVersion() throws Exception {
-		ToolSuiteDownloads toolSuite = buildToolSuite();
-
-		assertThat(toolSuite.getPreferredVersion(), equalTo("3.0.0.RELEASE"));
-
-	}
-
 	private ToolSuiteDownloads buildToolSuite() {
 		Map<String, ToolSuitePlatform> platforms = new HashMap<>();
 
@@ -66,7 +58,7 @@ public class ToolSuiteTests {
 		v3MacArchitectures.add(new Architecture("Mac OS X (Cocoa)", v3Mac32Links));
 		macEclipseVersions.add(new EclipseVersion("3.0", v3MacArchitectures));
 
-		platforms.put("mac", new ToolSuitePlatform("Mac", "3.0.0.RELEASE", macEclipseVersions));
+		platforms.put("mac", new ToolSuitePlatform("Mac", macEclipseVersions));
 
 		os = "windows";
 		List<Architecture> winArchitectures = new ArrayList<>();
@@ -81,7 +73,7 @@ public class ToolSuiteTests {
 		win64Links.add(new DownloadLink("http://example.com/download64.exe", "exe", "323MB", os, architecture));
 		win64Links.add(new DownloadLink("http://example.com/download64.zip", "zip", "323MB", os, architecture));
 		winArchitectures.add(new Architecture("Windows (64bit)", win64Links));
-		platforms.put("windows", new ToolSuitePlatform("Windows", "3.0.0.RELEASE", Collections.singletonList(new EclipseVersion("4.3", winArchitectures))));
+		platforms.put("windows", new ToolSuitePlatform("Windows", Collections.singletonList(new EclipseVersion("4.3", winArchitectures))));
 
 		os = "linux";
 		List<Architecture> linuxArchitectures = new ArrayList<>();
@@ -96,9 +88,9 @@ public class ToolSuiteTests {
 		linux64Links.add(new DownloadLink("http://example.com/linux-x86_64.tar.gz", "tar.gz", "323MB", os, architecture));
 		linux64Links.add(new DownloadLink("http://example.com/linux-x86_64.sh", "sh", "323MB", os, architecture));
 		linuxArchitectures.add(new Architecture("Linux (GTK, 64bit)", linux64Links));
-		platforms.put("linux", new ToolSuitePlatform("Linux", "3.0.0.RELEASE", Collections.singletonList(new EclipseVersion("4.3", linuxArchitectures))));
+		platforms.put("linux", new ToolSuitePlatform("Linux", Collections.singletonList(new EclipseVersion("4.3", linuxArchitectures))));
 
 		List<UpdateSiteArchive> archives = Collections.emptyList();
-		return new ToolSuiteDownloads(platforms, archives);
+		return new ToolSuiteDownloads("3.1.2.RELEASE", platforms, archives);
 	}
 }

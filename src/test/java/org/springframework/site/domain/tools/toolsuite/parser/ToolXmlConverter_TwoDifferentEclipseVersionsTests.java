@@ -62,10 +62,14 @@ public class ToolXmlConverter_TwoDifferentEclipseVersionsTests {
 	}
 
 	@Test
+	public void setsTheReleaseName() {
+		assertThat(toolSuite.getReleaseName(), equalTo("3.3.0.RELEASE"));
+	}
+
+	@Test
 	public void addsOnePlatform() throws Exception {
 		assertThat(toolSuite.getPlatforms().size(), equalTo(1));
 		assertThat(toolSuite.getPlatforms().get("mac").getName(), equalTo("Mac"));
-		assertThat(toolSuite.getPlatforms().get("mac").getReleaseName(), equalTo("3.3.0.RELEASE"));
 	}
 
 	@Test

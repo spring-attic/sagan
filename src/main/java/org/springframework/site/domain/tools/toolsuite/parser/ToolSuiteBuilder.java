@@ -20,11 +20,15 @@ public class ToolSuiteBuilder {
 	private List<UpdateSiteArchive> updateSiteArchives = new ArrayList<UpdateSiteArchive>();
 	private Map<String, EclipseVersion> eclipseVersionMap = new LinkedHashMap<String, EclipseVersion>();
 	private Map<String, Architecture> architectureMap = new LinkedHashMap<String, Architecture>();
+	private String releaseName;
 
 	public void addDownload(Download download) {
 		if (download.getOs().equals("all")) {
 			extractArchive(download);
 		} else {
+			if (releaseName == null) {
+				releaseName = download.getVersion();
+			}
 			extractPlatformDownloadLink(download);
 		}
 	}
@@ -47,13 +51,13 @@ public class ToolSuiteBuilder {
 	}
 
 	public ToolSuiteDownloads build() {
-		return new ToolSuiteDownloads(platformMap, updateSiteArchives);
+		return new ToolSuiteDownloads(releaseName, platformMap, updateSiteArchives);
 	}
 
 	private ToolSuitePlatform createOrFindPlatform(String os, String name) {
 		ToolSuitePlatform platform = platformMap.get(os);
 		if (platform == null) {
-			platform = new ToolSuitePlatform(os, name, new ArrayList<EclipseVersion>());
+			platform = new ToolSuitePlatform(os, new ArrayList<EclipseVersion>());
 			platformMap.put(os, platform);
 		}
 		return platform;

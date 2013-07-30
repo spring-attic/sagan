@@ -5,6 +5,7 @@
 <body>
 <div layout:fragment="tools-links">
 
+<h3 th:text="${version}">1.2.3.RELEASE</h3>
 <ul>
 	<li class="platform" th:each='platform : ${platforms}'>
 		<a href="#collapse" data-toggle="collapse" th:attr="data-target='#platform--' + ${platform.name}">
@@ -12,7 +13,6 @@
 		</a>
 
 		<div class="collapse in" th:id="'platform--' + ${platform.name}">
-		<h3 th:text="${platform.releaseName}">1.2.3.RELEASE</h3>
 			<div class="btn-toolbar" >
 				<div th:each="eclipseVersion : ${platform.eclipseVersions}" class="btn-group">
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="">
@@ -23,8 +23,9 @@
 						<li class='list-link' th:each='architecture : ${eclipseVersion.architectures}'>
 							<p th:text='${architecture.name}'>Architecture name</p>
 							<ul>
-								<li class='list-link' th:each='downloadlink : ${architecture.downloadLinks}'>
-									<a th:href='${downloadlink.url}' th:text='${downloadlink.fileType}'>A file type</a>
+								<li class='list-link' th:each='downloadLink : ${architecture.downloadLinks}'>
+									<a th:href='${downloadLink.url}' th:text='${downloadLink.fileType}'>A file type</a>
+                                    <span class="file-size" th:text="${downloadLink.fileSize}">2 MB</span>
 								</li>
 							</ul>
 						</li>

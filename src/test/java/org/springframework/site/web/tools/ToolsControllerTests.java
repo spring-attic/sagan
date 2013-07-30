@@ -50,11 +50,11 @@ public class ToolsControllerTests {
 		List<Architecture> architectures = Collections.singletonList(new Architecture("Mac OS X (Cocoa, 64bit)", downloadLinks));
 		List<EclipseVersion> eclipseVersions = Collections.singletonList(new EclipseVersion("1.2", architectures));
 
-		ToolSuitePlatform windows = new ToolSuitePlatform("windows", "3.1.2.RELEASE", eclipseVersions);
+		ToolSuitePlatform windows = new ToolSuitePlatform("windows", eclipseVersions);
 		platforms.put("windows", windows);
 
 		List<UpdateSiteArchive> archives = Collections.emptyList();
-		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads(platforms, archives);
+		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("3.1.2.RELEASE", platforms, archives);
 		when(this.service.getStsDownloads()).thenReturn(toolSuite);
 		this.controller.stsIndex(this.model);
 
@@ -67,19 +67,19 @@ public class ToolsControllerTests {
 	@Test
 	public void allStsDownloadsAddsDownloadsToModel() throws Exception {
 		Map<String, ToolSuitePlatform> platforms = new HashMap<>();
-		ToolSuitePlatform windows = new ToolSuitePlatform("windows", "blah",
+		ToolSuitePlatform windows = new ToolSuitePlatform("windows",
 
 				Collections.<EclipseVersion> emptyList());
 		platforms.put("windows", windows);
-		ToolSuitePlatform mac = new ToolSuitePlatform("mac", "blah",
+		ToolSuitePlatform mac = new ToolSuitePlatform("mac",
 				Collections.<EclipseVersion> emptyList());
 		platforms.put("mac", mac);
-		ToolSuitePlatform linux = new ToolSuitePlatform("linux", "blah",
+		ToolSuitePlatform linux = new ToolSuitePlatform("linux",
 				Collections.<EclipseVersion> emptyList());
 		platforms.put("linux", linux);
 
 		List<UpdateSiteArchive> archives = Collections.emptyList();
-		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads(platforms, archives);
+		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("3.1.2.RELEASE", platforms, archives);
 		when(this.service.getStsDownloads()).thenReturn(toolSuite);
 		this.controller.allStsDownloads(this.model);
 
@@ -96,11 +96,11 @@ public class ToolsControllerTests {
 		List<Architecture> architectures = Collections.singletonList(new Architecture("Mac OS X (Cocoa, 64bit)", downloadLinks));
 		List<EclipseVersion> eclipseVersions = Collections.singletonList(new EclipseVersion("1.2", architectures));
 
-		ToolSuitePlatform windows = new ToolSuitePlatform("windows", "3.1.2.RELEASE", eclipseVersions);
+		ToolSuitePlatform windows = new ToolSuitePlatform("windows", eclipseVersions);
 		platforms.put("windows", windows);
 
 		List<UpdateSiteArchive> archives = Collections.emptyList();
-		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads(platforms, archives);
+		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("3.1.2.RELEASE", platforms, archives);
 		when(this.service.getGgtsDownloads()).thenReturn(toolSuite);
 		this.controller.ggtsIndex(this.model);
 
@@ -113,18 +113,18 @@ public class ToolsControllerTests {
 	@Test
 	public void allGgtsDownloadsAddsDownloadsToModel() throws Exception {
 		Map<String, ToolSuitePlatform> platforms = new HashMap<>();
-		ToolSuitePlatform windows = new ToolSuitePlatform("windows", "blah",
+		ToolSuitePlatform windows = new ToolSuitePlatform("windows",
 				Collections.<EclipseVersion> emptyList());
 		platforms.put("windows", windows);
-		ToolSuitePlatform mac = new ToolSuitePlatform("mac", "blah",
+		ToolSuitePlatform mac = new ToolSuitePlatform("mac",
 				Collections.<EclipseVersion> emptyList());
 		platforms.put("mac", mac);
-		ToolSuitePlatform linux = new ToolSuitePlatform("linux", "blah",
+		ToolSuitePlatform linux = new ToolSuitePlatform("linux",
 				Collections.<EclipseVersion> emptyList());
 		platforms.put("linux", linux);
 
 		List<UpdateSiteArchive> archives = Collections.emptyList();
-		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads(platforms, archives);
+		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("3.1.2.RELEASE", platforms, archives);
 		when(this.service.getGgtsDownloads()).thenReturn(toolSuite);
 		this.controller.allGgtsDownloads(this.model);
 

@@ -58,13 +58,17 @@ public class ToolXmlConverter_TwoDifferentPlatformsTests {
 		toolSuite = toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite");
 	}
 
+
+	@Test
+	public void setsTheReleaseName() {
+		assertThat(toolSuite.getReleaseName(), equalTo("3.3.0.RELEASE"));
+	}
+
 	@Test
 	public void addsBothPlatforms() throws Exception {
 		assertThat(toolSuite.getPlatforms().size(), equalTo(2));
 		assertThat(toolSuite.getPlatforms().get("mac").getName(), equalTo("Mac"));
-		assertThat(toolSuite.getPlatforms().get("mac").getReleaseName(), equalTo("3.3.0.RELEASE"));
 		assertThat(toolSuite.getPlatforms().get("windows").getName(), equalTo("Windows"));
-		assertThat(toolSuite.getPlatforms().get("windows").getReleaseName(), equalTo("3.3.0.RELEASE"));
 	}
 
 	@Test

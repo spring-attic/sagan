@@ -1,15 +1,15 @@
 package org.springframework.site.domain.tools.toolsuite;
 
-import org.springframework.site.domain.tools.ToolsDownloads;
-
 import java.util.*;
 
-public class ToolSuiteDownloads implements ToolsDownloads {
+public class ToolSuiteDownloads {
 
 	private Map<String, ToolSuitePlatform> platforms;
 	private List<UpdateSiteArchive> archives;
+	private String releaseName;
 
-	public ToolSuiteDownloads(Map<String, ToolSuitePlatform> platforms, List<UpdateSiteArchive> archives) {
+	public ToolSuiteDownloads(String releaseName, Map<String, ToolSuitePlatform> platforms, List<UpdateSiteArchive> archives) {
+		this.releaseName = releaseName;
 		this.platforms = platforms;
 		this.archives = archives;
 	}
@@ -47,10 +47,7 @@ public class ToolSuiteDownloads implements ToolsDownloads {
 		}
 	}
 
-	public String getPreferredVersion() {
-		for (ToolSuitePlatform platform : platforms.values()) {
-			return platform.getReleaseName();
-		}
-		return "unknown";
+	public String getReleaseName() {
+		return releaseName;
 	}
 }

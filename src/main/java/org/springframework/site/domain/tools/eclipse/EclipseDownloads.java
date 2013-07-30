@@ -1,10 +1,8 @@
 package org.springframework.site.domain.tools.eclipse;
 
-import org.springframework.site.domain.tools.ToolsDownloads;
-
 import java.util.Map;
 
-public class EclipseDownloads implements ToolsDownloads {
+public class EclipseDownloads {
 	private final Map<String, EclipsePlatform> platforms;
 
 	public EclipseDownloads(Map<String, EclipsePlatform> platforms) {

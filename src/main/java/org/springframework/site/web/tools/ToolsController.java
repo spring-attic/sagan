@@ -1,10 +1,11 @@
 package org.springframework.site.web.tools;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.tools.ToolsDownloads;
 import org.springframework.site.domain.tools.ToolsService;
 import org.springframework.site.domain.tools.eclipse.EclipseDownloads;
+import org.springframework.site.domain.tools.eclipse.EclipsePlatform;
 import org.springframework.site.domain.tools.toolsuite.ToolSuiteDownloads;
+import org.springframework.site.domain.tools.toolsuite.ToolSuitePlatform;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.springframework.site.domain.tools.ToolsDownloads.ToolsPlatform;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
@@ -31,10 +31,10 @@ public class ToolsController {
 	public String index(Model model) throws Exception {
 		ToolSuiteDownloads stsDownloads = toolsService.getStsDownloads();
 		model.addAttribute("stsDownloadLinks", stsDownloads.getPreferredDownloadLinks());
-		model.addAttribute("stsVersion", stsDownloads.getPreferredVersion());
+		model.addAttribute("stsVersion", stsDownloads.getReleaseName());
 		ToolSuiteDownloads ggtsDownloads = toolsService.getGgtsDownloads();
 		model.addAttribute("ggtsDownloadLinks", ggtsDownloads.getPreferredDownloadLinks());
-		model.addAttribute("ggtsVersion", ggtsDownloads.getPreferredVersion());
+		model.addAttribute("ggtsVersion", ggtsDownloads.getReleaseName());
 		return "tools/index";
 	}
 
@@ -42,7 +42,7 @@ public class ToolsController {
 	public String stsIndex(Model model) throws Exception {
 		ToolSuiteDownloads stsDownloads = toolsService.getStsDownloads();
 		model.addAttribute("downloadLinks", stsDownloads.getPreferredDownloadLinks());
-		model.addAttribute("version", stsDownloads.getPreferredVersion());
+		model.addAttribute("version", stsDownloads.getReleaseName());
 		return "tools/sts/index";
 	}
 
@@ -57,7 +57,7 @@ public class ToolsController {
 	public String ggtsIndex(Model model) throws Exception {
 		ToolSuiteDownloads ggtsDownloads = toolsService.getGgtsDownloads();
 		model.addAttribute("downloadLinks", ggtsDownloads.getPreferredDownloadLinks());
-		model.addAttribute("version", ggtsDownloads.getPreferredVersion());
+		model.addAttribute("version", ggtsDownloads.getReleaseName());
 		return "tools/ggts/index";
 	}
 
@@ -71,7 +71,12 @@ public class ToolsController {
 	@RequestMapping(value = "/eclipse", method = { GET, HEAD })
 	public String eclipseIndex(Model model) throws Exception {
 		EclipseDownloads eclipseDownloads = toolsService.getEclipseDownloads();
-		addPlatformsToModel(model, eclipseDownloads);
+		Map<String, EclipsePlatform> allPlatforms = eclipseDownloads.getPlatforms();
+		List<EclipsePlatform> platforms = new ArrayList<>();
+		platforms.add(allPlatforms.get("windows"));
+		platforms.add(allPlatforms.get("mac"));
+		platforms.add(allPlatforms.get("linux"));
+		model.addAttribute("platforms", platforms);
 		return "tools/eclipse/index";
 	}
 
@@ -80,13 +85,14 @@ public class ToolsController {
 		model.addAttribute("updateSiteArchives", toolSuite.getArchives());
 	}
 
-	private void addPlatformsToModel(Model model, ToolsDownloads toolsDownloads) {
-		Map<String, ? extends ToolsPlatform> allPlatforms = toolsDownloads.getPlatforms();
-		List<ToolsPlatform> platforms = new ArrayList<ToolsPlatform>();
+	private void addPlatformsToModel(Model model, ToolSuiteDownloads toolsDownloads) {
+		Map<String, ToolSuitePlatform> allPlatforms = toolsDownloads.getPlatforms();
+		List<ToolSuitePlatform> platforms = new ArrayList<>();
 		platforms.add(allPlatforms.get("windows"));
 		platforms.add(allPlatforms.get("mac"));
 		platforms.add(allPlatforms.get("linux"));
 		model.addAttribute("platforms", platforms);
+		model.addAttribute("version", toolsDownloads.getReleaseName());
 	}
 
 }
