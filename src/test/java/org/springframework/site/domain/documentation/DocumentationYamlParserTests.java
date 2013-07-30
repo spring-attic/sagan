@@ -20,7 +20,7 @@ public class DocumentationYamlParserTests {
 
 	@Before
 	public void setUp() throws Exception {
-		InputStream yaml = new ClassPathResource("/test-documentation.yml", getClass()).getInputStream();
+		InputStream yaml = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
 		DocumentationYamlParser parser = new DocumentationYamlParser();
 		projects = parser.parse(yaml);
 	}

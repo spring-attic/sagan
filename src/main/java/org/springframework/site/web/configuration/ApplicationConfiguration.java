@@ -93,7 +93,7 @@ public class ApplicationConfiguration {
 
 	@Bean
 	public DocumentationService documentationService() throws IOException {
-		InputStream yaml = new ClassPathResource("/documentation.yml", getClass())
+		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass())
 				.getInputStream();
 		return new DocumentationService(new DocumentationYamlParser().parse(yaml));
 	}

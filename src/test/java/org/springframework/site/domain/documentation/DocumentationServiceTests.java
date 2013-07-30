@@ -22,7 +22,7 @@ public class DocumentationServiceTests {
 
 	@Test
 	public void bindingToYaml() throws IOException {
-		InputStream yaml = new ClassPathResource("/test-documentation.yml", getClass()).getInputStream();
+		InputStream yaml = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
 		DocumentationService documentationService = new DocumentationService(new DocumentationYamlParser().parse(yaml));
 
 		assertEquals(3, documentationService.getProject("spring-framework")
@@ -31,7 +31,7 @@ public class DocumentationServiceTests {
 
 	@Test
 	public void exposesProjectsForACategory() throws IOException {
-		InputStream yaml = new ClassPathResource("/test-documentation.yml", getClass()).getInputStream();
+		InputStream yaml = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
 		DocumentationService documentationService = new DocumentationService(new DocumentationYamlParser().parse(yaml));
 
 		List<Project> activeProjects = documentationService.getProjectsForCategory("active");
@@ -41,7 +41,7 @@ public class DocumentationServiceTests {
 
 	@Test
 	public void bindingToFullYaml() throws IOException {
-		InputStream yaml = new ClassPathResource("/documentation.yml", getClass()).getInputStream();
+		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
 		DocumentationService documentationService = new DocumentationService(new DocumentationYamlParser().parse(yaml));
 
 		assertEquals(3, documentationService.getProject("spring-framework")
@@ -63,7 +63,7 @@ public class DocumentationServiceTests {
 			public void handleError(ClientHttpResponse response) throws IOException {
 			}
 		});
-		InputStream yaml = new ClassPathResource("/documentation.yml", getClass()).getInputStream();
+		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
 		DocumentationService documentationService = new DocumentationService(new DocumentationYamlParser().parse(yaml));
 
 		StringBuilder builder = new StringBuilder();
