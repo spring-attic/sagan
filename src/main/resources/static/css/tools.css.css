@@ -1,0 +1,225 @@
+.tool--container {
+  background-color: #34302d;
+  display: inline-block;
+  color: #eeeeee;
+  text-align: center;
+  width: 48.85%;
+  margin: 0 1.9% 40px 0;
+  line-height: 20px;
+}
+.tool--container:last-child {
+  margin-right: 0;
+}
+.tool--container .tool--icon {
+  height: 134px;
+  display: inline-block;
+  margin: 40px 0;
+  background-image: url("../img/iconsprite.png");
+}
+.tool--container .tool--icon.sts-icon {
+  width: 124px;
+  background-position: -194px 0;
+}
+.tool--container .tool--icon.ggts-icon {
+  width: 96px;
+  background-position: -204px -140px;
+}
+.tool--container .tool--title {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+.tool--container .tool--description {
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding: 0 40px;
+}
+.tool--container .tool--learn-more {
+  color: #5fa134;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.tool--container .tool--download-btn {
+  text-transform: uppercase;
+  border: 2px solid #6db33f;
+  padding: 12px 0;
+  text-align: center;
+  width: 237px;
+  display: inline-block;
+  color: #eeeeee;
+  font-size: 14px;
+  line-height: 14px;
+  font-family: "Montserrat", sans-serif;
+}
+.tool--container .tool--download-btn p {
+  margin-top: 6px;
+  color: #eeeeee;
+  font-size: 14px;
+  line-height: 14px;
+  font-family: "Montserrat", sans-serif;
+  text-transform: none;
+}
+.tool--container .tool--download-btn:hover {
+  text-decoration: none;
+}
+.tool--container .tool--see-all-versions {
+  display: block;
+  color: #5fa134;
+  line-height: 14px;
+  margin: 26px 0 43px;
+}
+
+.eclipse--container {
+  border: 1px solid #34302d;
+  padding: 40px 84px;
+}
+.eclipse--container .eclipse--icon {
+  width: 72px;
+  height: 72px;
+  background-image: url("../img/iconsprite.png");
+  background-position: -216px -282px;
+  float: left;
+  margin: 23px 0;
+}
+.eclipse--container .eclipse-content--container {
+  margin-left: 156px;
+}
+.eclipse--container h2 {
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.eclipse--container p {
+  font-size: 15px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.eclipse--container a {
+  color: #5fa134;
+  text-transform: uppercase;
+}
+
+.tools--wrapper {
+  margin-bottom: 20px;
+}
+.tools--wrapper .tools--title {
+  margin-bottom: 30px;
+}
+.tools--wrapper .tools--description {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+.tools--wrapper .tools-feature--container {
+  vertical-align: top;
+}
+.tools--wrapper .tools-feature--container .tools-feature--thumbnail {
+  height: 160px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+.tools--wrapper .tools-feature--container .placeholder-img {
+  background-color: #ccc;
+  box-shadow: inset 3px 3px 0 white, inset -3px -3px 0 white;
+}
+.tools--wrapper .tools-feature--container .tools-feature--description {
+  font-size: 14px;
+  line-height: 20px;
+}
+.tools--wrapper.testimonial {
+  padding-top: 60px;
+  border-top: 1px solid white;
+  margin-top: 60px;
+}
+.tools--wrapper.testimonial .testimonial--container {
+  background-color: white;
+  margin: 0 67px;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+.tools--wrapper.testimonial .testimonial--container .quotation--icon {
+  width: 30px;
+  height: 21px;
+  background-image: url("../img/iconsprite.png");
+  background-position: -155px -381px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 15px;
+}
+.tools--wrapper.testimonial .testimonial--container .quotation--text {
+  display: inline-block;
+  width: 70%;
+  vertical-align: top;
+  margin-right: 3%;
+  font-style: italic;
+}
+.tools--wrapper.testimonial .testimonial--container .quotation--speaker {
+  display: inline-block;
+  vertical-align: top;
+}
+.tools--wrapper.testimonial .testimonial--container .quotation--speaker strong {
+  margin-left: -13px;
+}
+
+.tools-right-pane {
+  text-align: center;
+}
+.tools-right-pane .sts-logo {
+  display: inline-block;
+  background-image: url("../img/iconsprite.png");
+  background-position: -328px 0;
+  width: 124px;
+  height: 134px;
+  margin: 20px 0;
+}
+.tools-right-pane ul {
+  margin: 0;
+}
+.tools-right-pane ul li {
+  border: none;
+  padding: 0;
+}
+.tools-right-pane .download-btn {
+  display: inline-block;
+  color: #eeeeee;
+  font-size: 14px;
+  line-height: 14px;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  border: 2px solid #6db33f;
+  background-color: #34302d;
+  text-align: center;
+  width: 237px;
+  padding: 12px 0;
+  margin-bottom: 20px;
+  transition: border-color 0.25s;
+  -webkit-transition: border-color 0.25s;
+  -moz-transition: border-color 0.25s;
+  -o-transition: border-color 0.25s;
+  -ms-transition: border-color 0.25s;
+}
+.tools-right-pane .download-btn p {
+  font-size: 14px;
+  line-height: 14px;
+  margin-top: 4px;
+  color: #eeeeee;
+  text-transform: none;
+}
+.tools-right-pane .download-btn:hover {
+  text-decoration: none;
+  border-color: #34302d;
+}
+.tools-right-pane .download-btn:active {
+  box-shadow: inset 0 3px 6px #0b0a0a;
+}
+.tools-right-pane .all-versions {
+  color: #5fa134;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 20px;
+  display: block;
+}

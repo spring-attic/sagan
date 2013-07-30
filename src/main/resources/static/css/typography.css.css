@@ -15,12 +15,15 @@ h2 {
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   font-family: "Montserrat", sans-serif;
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 10px;
+  font-weight: 700;
 }
 
 p {

@@ -22,11 +22,14 @@ h2 {
 	font-size: 18px;
   font-weight: 700;
   line-height: 24px;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   font-family: $secondary-font-family;
 }
 h3 {
-  font-size: 18px;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 10px;
+  font-weight: 700;
 }
 
 p {
@@ -38,16 +41,4 @@ code {
   font-size: 14px;
 }
 
-
-
-// h3, .popover-title {
-//   font-size: 15px;
-//   font-weight: 600;
-//   line-height: 27px;
-// }
-// p, .list-link {
-//   font-size: 14px;
-//   line-height: 21px;
-//   color: #665A6B;
-// }
 
