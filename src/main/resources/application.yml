@@ -11,9 +11,6 @@ info:
     description: ${project.description}
     version: ${project.version}
 
-logging:
-  config: classpath:log4j.properties
-
 spring:
   template:
     mode: LEGACYHTML5

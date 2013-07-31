@@ -17,7 +17,7 @@
 	<name>springframework-site</name>
 
 	<properties>
-		<start-class>org.springframework.site.web.configuration.ApplicationConfiguration</start-class>
+		<start-class>org.springframework.boot.SpringApplication</start-class>
 		<spring.version>4.0.0.BUILD-SNAPSHOT</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
