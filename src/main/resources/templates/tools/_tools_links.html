@@ -11,7 +11,7 @@
 					<h2 th:text="'STS '+ ${version}" class="tool-versions--version">1.2.3.RELEASE</h2>
 				</div>
 				<div class="tool-versions--container">
-					<li class="platform js-item-dropdown-widget--wrapper" th:each='platform : ${platforms}'>
+					<div class="platform js-item-dropdown-widget--wrapper" th:each='platform : ${platforms}'>
 						<div th:class="${platform.name.toLowerCase()}+'-icon platform--icon'"></div>
 						<h3 th:text="${platform.name}">Mac</h3>
 						<div class="item-dropdown-widget js-item-dropdown--wrapper" th:each="eclipseVersion : ${platform.eclipseVersions}" >
@@ -35,7 +35,7 @@
 								</div>
 							</div>
 						</div>
-					</li>
+					</div>
 				</div>
 			</div>
 			<h2>Update Site Archives</h2>

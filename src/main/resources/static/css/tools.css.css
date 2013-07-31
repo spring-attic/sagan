@@ -154,7 +154,7 @@
   background-color: white;
   margin: 0 67px;
   padding: 20px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 .tools--wrapper.testimonial .testimonial--container .quotation--icon {
   width: 30px;
@@ -283,13 +283,13 @@
 
 .tool-archive--table {
   margin-top: 30px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 .tool-archive--table th {
   text-transform: uppercase;
   font-size: 12px;
   line-height: 12px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 .tool-archive--table td:last-child {
   color: #6c635d;

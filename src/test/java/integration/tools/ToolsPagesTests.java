@@ -72,8 +72,8 @@ public class ToolsPagesTests extends IntegrationTestBase {
 
 		Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
 		assertThat(document.select("h1").text(), equalTo("Spring Tool Suite™ Downloads"));
-		assertThat(document.select("ul li.platform h3").text(), containsString("Windows"));
-		assertThat(document.select("ul.dropdown-menu a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
+		assertThat(document.select(".platform h3").text(), containsString("Windows"));
+		assertThat(document.select(".item--dropdown a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
 	}
 
 	@Test
@@ -92,8 +92,8 @@ public class ToolsPagesTests extends IntegrationTestBase {
 
 		Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
 		assertThat(document.select("h1").text(), equalTo("Groovy/Grails Tool Suite™ Downloads"));
-		assertThat(document.select("ul li.platform h3").text(), containsString("Windows"));
-		assertThat(document.select("ul.dropdown-menu a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
+		assertThat(document.select(".platform h3").text(), containsString("Windows"));
+		assertThat(document.select(".item--dropdown a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
 	}
 
 	@Test
