@@ -109,7 +109,7 @@ There's more to building RESTful web services than is covered here. You may want
 
 
 <#macro bootstrap_starter_pom_disclaimer>
-This guide is using [Spring Boot's starter POMs](/guides/gs/spring-boot/content), where you can find out more about Spring Boot.
+This guide is using [Spring Boot's starter POMs](/guides/gs/spring-boot/content).
 
 Note to experienced Maven users who are unaccustomed to using an external parent project: you can take it out later, it's just there to reduce the amount of code you have to write to get started.
 </#macro>
