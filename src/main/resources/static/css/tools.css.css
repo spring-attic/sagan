@@ -104,11 +104,12 @@
   text-transform: uppercase;
 }
 
+.tools--title {
+  margin-bottom: 30px;
+}
+
 .tools--wrapper {
   margin-bottom: 20px;
-}
-.tools--wrapper .tools--title {
-  margin-bottom: 30px;
 }
 .tools--wrapper .tools--description {
   font-size: 16px;
@@ -153,7 +154,7 @@
   background-color: white;
   margin: 0 67px;
   padding: 20px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
 }
 .tools--wrapper.testimonial .testimonial--container .quotation--icon {
   width: 30px;
