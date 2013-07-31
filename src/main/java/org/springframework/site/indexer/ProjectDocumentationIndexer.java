@@ -7,12 +7,12 @@ import org.springframework.site.domain.documentation.DocumentationService;
 import org.springframework.site.domain.documentation.Project;
 import org.springframework.site.domain.documentation.SupportedVersion;
 import org.springframework.site.indexer.crawler.CrawlerService;
+import org.springframework.site.indexer.mapper.ApiDocumentMapper;
+import org.springframework.site.indexer.mapper.ReferenceDocumentSearchEntryMapper;
+import org.springframework.site.indexer.mapper.WebDocumentSearchEntryMapper;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class ProjectDocumentationIndexer implements Indexer<Project> {
@@ -41,11 +41,11 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 		for (SupportedVersion version : project.getSupportedVersions()) {
 			UriTemplate rawUrl = new UriTemplate(project.getApiAllClassesUrl());
 			String url = rawUrl.expand(version.getFullVersion()).toString();
-			crawlerService.crawl(url, 1, new CrawledWebDocumentProcessor(searchService, new ApiDocumentMapper(version.isCurrent())));
+			crawlerService.crawl(url, 1, new CrawledWebDocumentProcessor(searchService, new ApiDocumentMapper(project, version)));
 
 			rawUrl = new UriTemplate(project.getReferenceUrl());
 			url = rawUrl.expand(version.getFullVersion()).toString();
-			crawlerService.crawl(url, 1, new CrawledWebDocumentProcessor(searchService, new WebDocumentSearchEntryMapper(version.isCurrent())));
+			crawlerService.crawl(url, 1, new CrawledWebDocumentProcessor(searchService, new ReferenceDocumentSearchEntryMapper(project, version)));
 		}
 		crawlerService.crawl(project.getGithubUrl(), 0, new CrawledWebDocumentProcessor(searchService, new WebDocumentSearchEntryMapper()));
 	}

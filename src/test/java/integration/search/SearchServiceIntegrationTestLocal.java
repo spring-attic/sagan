@@ -311,7 +311,7 @@ public class SearchServiceIntegrationTestLocal {
 				.summary("Html summary")
 				.publishAt("2013-01-01 10:00")
 				.facetPath("Guides")
-				.facetPath("Guides/GettingStarted")
+				.facetPath("Guides/Getting Started")
 				.notCurrent()
 				.build();
 
@@ -324,7 +324,7 @@ public class SearchServiceIntegrationTestLocal {
 				.summary("Html summary")
 				.publishAt("2013-01-01 10:00")
 				.facetPath("Guides")
-				.facetPath("Guides/GettingStarted")
+				.facetPath("Guides/Getting Started")
 				.notCurrent()
 				.build();
 
@@ -359,5 +359,7 @@ public class SearchServiceIntegrationTestLocal {
 		List<SearchResult> content = searchResults.getPage().getContent();
 		assertThat(content.size(), equalTo(4));
 		assertThat(searchResults.getFacets().size(), equalTo(2));
+		assertThat(searchResults.getFacets().get(0).getName(), equalTo("Blog"));
+		assertThat(searchResults.getFacets().get(1).getName(), equalTo("Guides"));
 	}
 }

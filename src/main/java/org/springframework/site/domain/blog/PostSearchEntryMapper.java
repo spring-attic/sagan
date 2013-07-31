@@ -16,6 +16,7 @@ public class PostSearchEntryMapper implements SearchEntryMapper<Post> {
 
 		entry.setSummary(summary);
 		entry.setRawContent(content);
+		entry.addFacetPaths("Blog", "Blog/" + post.getCategory().getDisplayName());
 		//TODO this should be encapsulated somewhere else
 		entry.setPath("/blog/" + post.getPublicSlug());
 		entry.setPublishAt(post.getPublishAt());

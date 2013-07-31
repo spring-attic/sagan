@@ -22,7 +22,6 @@ public class StubSearchService extends SearchService {
 
 	@Override
 	public void saveToIndex(SearchEntry entry) {
-		System.out.println("foo");
 	}
 
 	@Override

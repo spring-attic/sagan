@@ -114,7 +114,6 @@ public class BlogIndexTests extends IntegrationTestBase {
 				.andReturn();
 
 		MockHttpServletRequest request = response.getRequest();
-		System.out.println(request);
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 

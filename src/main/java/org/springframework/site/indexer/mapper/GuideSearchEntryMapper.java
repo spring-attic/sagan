@@ -1,4 +1,4 @@
-package org.springframework.site.web.guides;
+package org.springframework.site.indexer.mapper;
 
 import org.jsoup.Jsoup;
 import org.springframework.site.domain.guides.GettingStartedGuide;
@@ -18,7 +18,8 @@ public class GuideSearchEntryMapper implements SearchEntryMapper<GettingStartedG
 
 		entry.setSummary(text.substring(0, Math.min(500, text.length())));
 		entry.setRawContent(text);
-		entry.setPath(GettingStartedController.getPath(guide));
+		entry.setPath("/guides/gs/" + guide.getGuideId() + "/content");
+		entry.addFacetPaths("Guides", "Guides/Getting Started");
 		// TODO: Can we get a publish date form github?
 		entry.setPublishAt(new Date(0L));
 		return entry;

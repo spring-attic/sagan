@@ -21,7 +21,7 @@ public class SearchFacetBuilder {
 			name = term.substring(pathSeparatorIndex + 1);
 		}
 
-		while (!previousFacets.peek().getFullPath().equals(path)) {
+		while (!previousFacets.peek().getFullPath().equals("") && !previousFacets.peek().getFullPath().equals(path)) {
 			previousFacets.pop();
 		}
 

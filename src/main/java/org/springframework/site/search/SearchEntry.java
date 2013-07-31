@@ -3,6 +3,7 @@ package org.springframework.site.search;
 import org.springframework.security.crypto.codec.Base64;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -83,4 +84,9 @@ public class SearchEntry {
 	public void setFacetPaths(List<String> facetPaths) {
 		this.facetPaths = facetPaths;
 	}
+
+	public void addFacetPaths(String ... facetPaths) {
+		this.facetPaths.addAll(Arrays.asList(facetPaths));
+	}
+
 }

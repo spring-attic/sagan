@@ -1,11 +1,15 @@
 package org.springframework.site.web.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.blog.*;
-import org.springframework.site.search.SearchService;
+import org.springframework.site.domain.blog.BlogService;
+import org.springframework.site.domain.blog.Post;
+import org.springframework.site.domain.blog.PostCategory;
+import org.springframework.site.domain.blog.PostForm;
+import org.springframework.site.domain.blog.PostSearchEntryMapper;
 import org.springframework.site.domain.team.GeoLocation;
 import org.springframework.site.domain.team.MemberProfile;
 import org.springframework.site.domain.team.TeamRepository;
+import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

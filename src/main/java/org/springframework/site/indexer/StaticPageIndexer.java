@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.site.domain.StaticPageMapper;
 import org.springframework.site.indexer.crawler.CrawlerService;
+import org.springframework.site.indexer.mapper.WebDocumentSearchEntryMapper;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 

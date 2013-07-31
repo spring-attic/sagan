@@ -61,7 +61,9 @@ public class SearchQueryBuilder {
 	private static final String facets = "\"facets\" : {\n" +
 			"  \"facet_paths_result\" : {\n" +
 			"   \"terms\" : {\n" +
-			"    \"field\" : \"facetPaths\"\n" +
+			"    \"field\" : \"facetPaths\",\n" +
+			"    \"order\" : \"term\",\n" +
+			"    \"size\" : 50\n" +
 			"   }\n" +
 			"  }\n" +
 			" }";

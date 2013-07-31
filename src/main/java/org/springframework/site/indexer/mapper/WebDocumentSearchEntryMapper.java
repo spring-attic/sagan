@@ -1,4 +1,4 @@
-package org.springframework.site.indexer;
+package org.springframework.site.indexer.mapper;
 
 import org.jsoup.nodes.Document;
 import org.springframework.site.search.SearchEntry;
@@ -7,16 +7,6 @@ import org.springframework.site.search.SearchEntryMapper;
 import java.util.Date;
 
 public class WebDocumentSearchEntryMapper implements SearchEntryMapper<Document> {
-
-	private boolean current;
-
-	public WebDocumentSearchEntryMapper() {
-		this(true);
-	}
-
-	public WebDocumentSearchEntryMapper(boolean current) {
-		this.current = current;
-	}
 
 	@Override
 	public SearchEntry map(Document document) {
@@ -27,7 +17,6 @@ public class WebDocumentSearchEntryMapper implements SearchEntryMapper<Document>
 		entry.setSummary(text.substring(0, Math.min(500, text.length())));
 		entry.setTitle(document.title());
 		entry.setPath(document.baseUri());
-		entry.setCurrent(current);
 		return entry;
 	}
 

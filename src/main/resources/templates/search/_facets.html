@@ -7,7 +7,7 @@
 
 <ul layout:fragment="facets">
     <li th:each="facet : ${root.facets}">
-        <a th:href="@{/blog}" th:text="${facet.linkText}">All Posts</a>
+        <a href="#" th:text="${facet.linkText}">All Posts</a>
         <ul th:if="${facet.hasFacets()}" layout:include="search/_facets :: facets" th:with="root=${facet}">
 
         </ul>
