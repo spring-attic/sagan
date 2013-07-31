@@ -5,11 +5,23 @@
 	<title>SpringFramework - GGTS downloads</title>
 </head>
 <body>
-<h1 layout:fragment="header">Groovy Grails Tool Suite Downloads</h1>
+<!-- <h1 layout:fragment="header">Groovy Grails Tool Suite Downloads</h1>
 <div layout:fragment="overview">Find any version of the Spring Tool Suite below</div>
 
 <div layout:fragment="content" class="container">
 	<div layout:include="tools/_tools_links :: tools-links"></div>
+</div> -->
+
+<div layout:fragment="header-container"></div>
+<div layout:fragment="content">
+  <div class="tools--wrapper">
+    <div class="content--title">Tools</div>
+      <h1 class="tools--title">Groovy/Grails Tool Suite&trade; Downloads</h1>
+      <p class="tools--description">Use one of the links below to download an all-in-one distribution for your platform. Choose either a native installer or simple archive, they contain equivalent functionality. Also available are archives of the update sites for use when you need to do offline installation of the components. Please refer to the installation instructions for details on how to install STS.</p>
+      <p class="tools--description">Find any version of the Groovy/Grails Tool Suite below.</p>
+      <div layout:include="tools/_tools_links :: tools-links"></div>
+    </div>
+  </div>
 </div>
 </body>
 </html>
