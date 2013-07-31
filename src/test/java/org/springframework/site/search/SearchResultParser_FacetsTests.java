@@ -3,10 +3,11 @@ package org.springframework.site.search;
 import com.google.gson.JsonParser;
 import io.searchbox.client.JestResult;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -42,10 +43,22 @@ public class SearchResultParser_FacetsTests {
 			"        \"term\": \"Guides/Tutorials\",\n" +
 			"        \"count\": 1\n" +
 			"      }, {\n" +
-			"        \"term\": \"Blog/Engineering\",\n" +
+			"        \"term\": \"Guides/Reference Apps\",\n" +
 			"        \"count\": 1\n" +
 			"      }, {\n" +
-			"        \"term\": \"Blog\",\n" +
+			"        \"term\": \"Projects/Spring Framework\",\n" +
+			"        \"count\": 1\n" +
+			"      }, {\n" +
+			"        \"term\": \"Projects/Spring Framework/3.1.3.RELEASE\",\n" +
+			"        \"count\": 1\n" +
+			"      }, {\n" +
+			"        \"term\": \"Projects/Spring Framework/3.2.3.RELEASE\",\n" +
+			"        \"count\": 1\n" +
+			"      }, {\n" +
+			"        \"term\": \"Projects/Spring Framework/4.0.0.M1\",\n" +
+			"        \"count\": 1\n" +
+			"      }, {\n" +
+			"        \"term\": \"Projects\",\n" +
 			"        \"count\": 1\n" +
 			"      }]\n" +
 			"    }\n" +
@@ -67,9 +80,17 @@ public class SearchResultParser_FacetsTests {
 	}
 
 	@Test
-	@Ignore
 	public void returnTopLevelFacets() {
-		assertThat(searchResults.getFacets().size(), equalTo(2));
+		List<SearchFacet> facets = searchResults.getFacets();
+		assertThat(facets.size(), equalTo(2));
+		assertThat(facets.get(0).getName(), equalTo("Guides"));
+		assertThat(facets.get(1).getName(), equalTo("Projects"));
+	}
+
+	@Test
+	public void returnNestedFacets() {
+		SearchFacet guidesFacet = searchResults.getFacets().get(0);
+		assertThat(guidesFacet.getFacets().size(), equalTo(3));
 	}
 
 }

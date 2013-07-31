@@ -358,6 +358,6 @@ public class SearchServiceIntegrationTestLocal {
 
 		List<SearchResult> content = searchResults.getPage().getContent();
 		assertThat(content.size(), equalTo(4));
-//		assertThat(searchResults.getFacets().size(), equalTo(2));
+		assertThat(searchResults.getFacets().size(), equalTo(2));
 	}
 }
