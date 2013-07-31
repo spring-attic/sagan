@@ -1,8 +1,13 @@
 package org.springframework.site.domain.documentation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import static org.springframework.site.domain.documentation.SupportedVersion.Status.CURRENT;
+import static org.springframework.site.domain.documentation.SupportedVersion.Status.PRERELEASE;
+import static org.springframework.site.domain.documentation.SupportedVersion.Status.SUPPORTED;
 
 public class SupportedVersions implements Iterable<SupportedVersion> {
 
@@ -11,18 +16,22 @@ public class SupportedVersions implements Iterable<SupportedVersion> {
 	public static SupportedVersions build(List<String> versionStrings) {
 		List<SupportedVersion> versions = new ArrayList<>();
 
-		String currentVersion = "";
+		Collections.sort(versionStrings);
+		Collections.reverse(versionStrings);
+
+		String currentVersion = null;
 		for (String versionString : versionStrings) {
-			boolean isPreRelease = versionString.matches("[0-9.]+M\\d+");
-			boolean greaterThanCurrent = versionString.compareToIgnoreCase(currentVersion) > 0;
-			if (!isPreRelease && greaterThanCurrent) {
+			boolean isPreRelease = versionString.matches("[0-9.]+(M|RC)\\d+");
+			SupportedVersion.Status status = SUPPORTED;
+			if (isPreRelease) {
+				status = PRERELEASE;
+			} else if(currentVersion == null) {
 				currentVersion = versionString;
+				status = CURRENT;
 			}
+			versions.add(new SupportedVersion(versionString, status));
 		}
 
-		for (String versionString : versionStrings) {
-			versions.add(new SupportedVersion(versionString, versionString.equals(currentVersion)));
-		}
 		return new SupportedVersions(versions);
 	}
 

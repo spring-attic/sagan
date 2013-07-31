@@ -23,8 +23,6 @@ public class ProjectDocumentVersion {
     }
 
     public String getVersionName() {
-        String name = this.getVersion();
-        if(this.isCurrent()) { name += " (Current)"; }
-        return name;
+		return version.getVersionName();
     }
 }

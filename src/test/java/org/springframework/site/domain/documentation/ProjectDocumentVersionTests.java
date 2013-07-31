@@ -10,14 +10,21 @@ public class ProjectDocumentVersionTests {
     @Test
     public void getVersionNameForCurrentVersion() {
         ProjectDocumentVersion version = new ProjectDocumentVersion("http://project.org/api",
-				new SupportedVersion("1.2.3.RELEASE", true));
+				new SupportedVersion("1.2.3.RELEASE", SupportedVersion.Status.CURRENT));
         assertThat(version.getVersionName(), equalTo("1.2.3.RELEASE (Current)"));
+    }
+
+    @Test
+    public void getVersionNameForPreReleaseVersion() {
+        ProjectDocumentVersion version = new ProjectDocumentVersion("http://project.org/api",
+				new SupportedVersion("1.2.3.M1", SupportedVersion.Status.PRERELEASE));
+        assertThat(version.getVersionName(), equalTo("1.2.3.M1 (Pre-Release)"));
     }
 
     @Test
     public void getVersionNameForOtherVersion() {
         ProjectDocumentVersion version = new ProjectDocumentVersion("http://project.org/api",
-				new SupportedVersion("1.2.3.RELEASE", false));
+				new SupportedVersion("1.2.3.RELEASE", SupportedVersion.Status.SUPPORTED));
         assertThat(version.getVersionName(), equalTo("1.2.3.RELEASE"));
     }
 }

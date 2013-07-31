@@ -13,30 +13,43 @@ public class SupportedVersionsTests {
 	@Test
 	public void setsCurrentVersionWithReleases() throws Exception {
 		SupportedVersions supportedVersions = SupportedVersions.build(
-				Arrays.asList("3.1.5.RELEASE", "3.2.3.RELEASE", "4.0.0.M1"));
+				Arrays.asList(
+						"4.0.0.RC1",
+						"4.0.0.M1",
+						"3.2.3.RELEASE",
+						"3.1.5.RELEASE"
+				));
 		assertThat(supportedVersions, contains(
-				new SupportedVersion("3.1.5.RELEASE", false),
-				new SupportedVersion("3.2.3.RELEASE", true),
-				new SupportedVersion("4.0.0.M1", false)
+				new SupportedVersion("4.0.0.RC1", SupportedVersion.Status.PRERELEASE),
+				new SupportedVersion("4.0.0.M1", SupportedVersion.Status.PRERELEASE),
+				new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Status.CURRENT),
+				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Status.SUPPORTED)
 		));
 	}
 
 	@Test
-	public void setsCurrentVersionWithoutReleases() throws Exception {
+	public void sortsVersionInDescendingOrder() throws Exception {
 		SupportedVersions supportedVersions = SupportedVersions.build(
-				Arrays.asList("3.1.x", "3.2.x", "4.0.0.M1"));
+				Arrays.asList(
+						"3.2.3.RELEASE",
+						"4.0.0.M1",
+						"3.1.5.RELEASE",
+						"4.0.0.RC1"
+				));
 		assertThat(supportedVersions, contains(
-				new SupportedVersion("3.1.x", false),
-				new SupportedVersion("3.2.x", true),
-				new SupportedVersion("4.0.0.M1", false)
+				new SupportedVersion("4.0.0.RC1", SupportedVersion.Status.PRERELEASE),
+				new SupportedVersion("4.0.0.M1", SupportedVersion.Status.PRERELEASE),
+				new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Status.CURRENT),
+				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Status.SUPPORTED)
 		));
 	}
+
 
 	@Test
 	public void getCurrent() {
-		SupportedVersion currentVersion = new SupportedVersion("3.2.3.RELEASE", true);
+		SupportedVersion currentVersion = new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Status.CURRENT);
 		SupportedVersions supportedVersions = new SupportedVersions(Arrays.asList(
-				new SupportedVersion("3.1.5.RELEASE", false),
+				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Status.SUPPORTED),
 				currentVersion
 		));
 		assertThat(supportedVersions.getCurrent(), equalTo(currentVersion));

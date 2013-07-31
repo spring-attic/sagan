@@ -1,22 +1,36 @@
 package org.springframework.site.domain.documentation;
 
-public class SupportedVersion {
-	private String version;
-	private boolean current;
+public class SupportedVersion implements Comparable<SupportedVersion> {
+	public enum Status {
+		CURRENT("Current"), PRERELEASE("Pre-Release"), SUPPORTED("");
 
-	public SupportedVersion(String version, boolean current) {
+		private String displayName;
+
+		private Status(String displayName) {
+			this.displayName = displayName;
+		}
+
+		public String getDisplayName() {
+			return displayName;
+		}
+	}
+
+	private String version;
+	private Status status;
+
+	public SupportedVersion(String version, Status status) {
 		this.version = version;
-		this.current = current;
+		this.status = status;
 	}
 
 	public boolean isCurrent() {
-		return current;
+		return status == Status.CURRENT;
 	}
 
 	@Override
 	public String toString() {
 		return "SupportedVersion{" +
-				version + (current ? ", current" : "") +
+				version + ", status: " + status.name() +
 				"}";
 	}
 
@@ -25,10 +39,10 @@ public class SupportedVersion {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		SupportedVersion that = (SupportedVersion) o;
+		SupportedVersion version1 = (SupportedVersion) o;
 
-		if (current != that.current) return false;
-		if (!version.equals(that.version)) return false;
+		if (status != version1.status) return false;
+		if (!version.equals(version1.version)) return false;
 
 		return true;
 	}
@@ -36,11 +50,25 @@ public class SupportedVersion {
 	@Override
 	public int hashCode() {
 		int result = version.hashCode();
-		result = 31 * result + (current ? 1 : 0);
+		result = 31 * result + status.hashCode();
 		return result;
+	}
+
+	@Override
+	public int compareTo(SupportedVersion other) {
+		return this.version.compareTo(other.version);
 	}
 
 	public String getFullVersion() {
 		return version;
 	}
+
+	public String getVersionName() {
+		String statusDisplay = "";
+		if (status != Status.SUPPORTED) {
+			statusDisplay = String.format(" (%s)", status.getDisplayName());
+		}
+		return version + statusDisplay;
+	}
+
 }
