@@ -12,21 +12,22 @@ $(function(){
       return this;
     };
 
-    //OPENS DOCUMENTATION DROPDOWN
-    $(".js-item--open-dropdown").click(function() {
-      var documentationItem = $(this).parents(".js-documentation--item");
+
+    //OPENS ITEM DROPDOWN WIDGET
+    $(".js-item--open-dropdown").click(function () {
+      var dropdownItem = $(this).parents(".js-item-dropdown--wrapper");
       var documentHeight = $(document).height();
       var headerHeight = $("header").outerHeight();
       var footerHeight = $("footer").outerHeight();
       var scrimHeight = documentHeight - headerHeight - footerHeight;
 
-      documentationItem.toggleClass("js-open");
-      documentationItem.siblings().removeClass("js-open");
-      $(this).parents(".documentation--body").siblings().find(".js-documentation--item").removeClass("js-open");
+      dropdownItem.toggleClass("js-open");
+      dropdownItem.siblings().removeClass("js-open");
+      $(this).parents(".js-item-dropdown-widget--wrapper").siblings().find(".js-item-dropdown--wrapper").removeClass("js-open");
 
       $("#scrim").addClass("js-show").css("height", scrimHeight).css("top", headerHeight);
       $("#scrim").click(function() {
-        $(".js-documentation--item").removeClass("js-open");
+        $(".js-item-dropdown--wrapper").removeClass("js-open");
         $(this).removeClass("js-show");
       });
     });
@@ -74,10 +75,7 @@ $(function(){
         this.find("li." + detectOs() + detectArch()).show();
         return this;
     };
-
     $('.download-links').showPreferredLink();
-
-    
 });
 
 
@@ -109,6 +107,8 @@ var detectArch = function() {
 
     return "32";
 }
+
+
 
 
 

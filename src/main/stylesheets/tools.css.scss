@@ -213,10 +213,11 @@ $icon-sprite: url("../img/iconsprite.png");
 
 .tool-versions--wrapper {
   border: 1px solid $black-brown;
+  margin: 60px 0;
   .tool-versions--icon--container {
     background-color: $black-brown;
-    display: inline-block;
-    width: 241px;
+    float: left;
+    width: 240px;
     text-align: center;
     padding: 30px 0;
     .tool-versions--icon {
@@ -237,7 +238,7 @@ $icon-sprite: url("../img/iconsprite.png");
     }
   }
   .tool-versions--container {
-    display: inline-block;
+    display: block;
     vertical-align: top;
     margin: 0;
     .platform {
@@ -245,7 +246,9 @@ $icon-sprite: url("../img/iconsprite.png");
       border-right: 1px solid white;
       text-align: center;
       vertical-align: top;
-      margin: 40px 0;
+      margin: 40px 0 33px;
+      width: 22.7%;
+      padding: 0 1.3545%;
       &:last-child {
         border-right: none;
       }
@@ -272,13 +275,48 @@ $icon-sprite: url("../img/iconsprite.png");
         }
       }
       h3 {
-        margin-top: 17px;
+        margin: 20px 0;
         font-family: $secondary-font-family;
-        font-style: 16px;
         line-height: 16px;
-        font-weight: 700;
       }
     }
+    .platform-version--dropdown {
+      width: 82.7%;
+      .item--body-title {
+        padding-top: 0;
+        border-bottom: 1px solid #cccbca;
+      }
+      .tool-download-link {
+        .file-type {
+          color: $link-green;
+          line-height: 14px;
+          font-size: 14px;
+          display: inline-block;
+        }
+        .file-size {
+          color: #6c635d;
+          font-size: 12px;
+          float: right;
+        }
+      }
+    }
+  }
+}
+
+.tool-archive--table {
+  margin-top: 30px;
+  border-bottom: 1px solid #ccc;
+  th {
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 12px;
+    border-bottom: 1px solid #ccc;
+  }
+  td:last-child {
+    color: #6c635d;
+  }
+  a {
+    color: $link-green;
   }
 }
 

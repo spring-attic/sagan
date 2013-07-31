@@ -11,12 +11,12 @@
         <div class="empty-project"></div>
     </div>
     <div class="documentation-item--wrapper">
-        <div th:each="item : ${projects}" th:id="${item.id}" class="documentation--item js-documentation--item">
-            <div class="js-item--open-dropdown">
-                <i class="item--icon icon-reorder"></i>
-                <p class="item--title" th:text="${item.name}">Spring Framework</p>
+        <div th:each="item : ${projects}" th:id="${item.id}" class="item-dropdown-widget documentation--item js-item-dropdown--wrapper">
+            <div class="item-dropdown--link js-item--open-dropdown">
+                <i class="item-dropdown--icon icon-reorder pull-right"></i>
+                <p class="item-dropdown--title" th:text="${item.name}">Spring Framework</p>
             </div>
-            <div class="item--dropdown">
+            <div class="item--dropdown documentation-version--dropdown">
                 <div class="item--header">
                     <!-- link_to project_path -->
                     <a href="#" class="item--header-link item--left-column">

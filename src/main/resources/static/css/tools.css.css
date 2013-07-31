@@ -193,11 +193,12 @@
 
 .tool-versions--wrapper {
   border: 1px solid #34302d;
+  margin: 60px 0;
 }
 .tool-versions--wrapper .tool-versions--icon--container {
   background-color: #34302d;
-  display: inline-block;
-  width: 241px;
+  float: left;
+  width: 240px;
   text-align: center;
   padding: 30px 0;
 }
@@ -218,7 +219,7 @@
   line-height: 18px;
 }
 .tool-versions--wrapper .tool-versions--container {
-  display: inline-block;
+  display: block;
   vertical-align: top;
   margin: 0;
 }
@@ -227,7 +228,9 @@
   border-right: 1px solid white;
   text-align: center;
   vertical-align: top;
-  margin: 40px 0;
+  margin: 40px 0 33px;
+  width: 22.7%;
+  padding: 0 1.3545%;
 }
 .tool-versions--wrapper .tool-versions--container .platform:last-child {
   border-right: none;
@@ -255,11 +258,44 @@
   margin-top: -7px;
 }
 .tool-versions--wrapper .tool-versions--container .platform h3 {
-  margin-top: 17px;
+  margin: 20px 0;
   font-family: "Montserrat", sans-serif;
-  font-style: 16px;
   line-height: 16px;
-  font-weight: 700;
+}
+.tool-versions--wrapper .tool-versions--container .platform-version--dropdown {
+  width: 82.7%;
+}
+.tool-versions--wrapper .tool-versions--container .platform-version--dropdown .item--body-title {
+  padding-top: 0;
+  border-bottom: 1px solid #cccbca;
+}
+.tool-versions--wrapper .tool-versions--container .platform-version--dropdown .tool-download-link .file-type {
+  color: #5fa134;
+  line-height: 14px;
+  font-size: 14px;
+  display: inline-block;
+}
+.tool-versions--wrapper .tool-versions--container .platform-version--dropdown .tool-download-link .file-size {
+  color: #6c635d;
+  font-size: 12px;
+  float: right;
+}
+
+.tool-archive--table {
+  margin-top: 30px;
+  border-bottom: 1px solid #ccc;
+}
+.tool-archive--table th {
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 12px;
+  border-bottom: 1px solid #ccc;
+}
+.tool-archive--table td:last-child {
+  color: #6c635d;
+}
+.tool-archive--table a {
+  color: #5fa134;
 }
 
 .tools-right-pane {
