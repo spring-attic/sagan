@@ -38,19 +38,26 @@ public class GettingStartedController {
 	@RequestMapping(value = SHOW_GUIDE, method = { GET, HEAD })
 	public String viewGuide(@PathVariable String guideId, Model model) {
 		model.addAttribute("guideSlug", guideId);
-		model.addAttribute("guide", service.loadGuide(guideId));
+		model.addAttribute("guide", this.service.loadGuide(guideId));
 		return "guides/gs/guide";
 	}
 
-	@RequestMapping(value = "/{guideSlug}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })
-	public ResponseEntity<byte[]> loadImage(@PathVariable String guideSlug, @PathVariable("name") String imageName) {
-		byte[] image = service.loadImage(guideSlug, imageName);
+	@RequestMapping(value = "/{guideSlug}", method = { GET, HEAD })
+	public String viewGuide(@PathVariable String guideSlug) {
+		return "redirect:" + GUIDES_ROOT + "/" + guideSlug + "/content";
+	}
+
+	@RequestMapping(value = "/{guideSlug}/images/{name:[a-zA-Z0-9._-]+}", method = { GET,
+			HEAD })
+	public ResponseEntity<byte[]> loadImage(@PathVariable String guideSlug,
+			@PathVariable("name") String imageName) {
+		byte[] image = this.service.loadImage(guideSlug, imageName);
 		return new ResponseEntity<>(image, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listGuides(Model model) {
-		model.addAttribute("guides", service.listGuides());
+		model.addAttribute("guides", this.service.listGuides());
 		return "guides/gs/list";
 	}
 
