@@ -210,6 +210,77 @@ $icon-sprite: url("../img/iconsprite.png");
   }
 }
 
+.tool-versions--wrapper {
+  border: 1px solid $black-brown;
+  .tool-versions--icon--container {
+    background-color: $black-brown;
+    display: inline-block;
+    width: 241px;
+    text-align: center;
+    padding: 30px 0;
+    .tool-versions--icon {
+      background-image: $icon-sprite;
+      height: 134px;
+      display: inline-block;
+      margin-bottom: 27px;
+      &.sts-icon {
+        width: 124px;
+        background-position: -194px 0;
+      }
+    }
+    .tool-versions--version {
+      color: #f1f1f1;
+      font-weight: 400;
+      margin-bottom: 10px;
+      line-height: 18px;
+    }
+  }
+  .tool-versions--container {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    .platform {
+      display: inline-block;
+      border-right: 1px solid white;
+      text-align: center;
+      vertical-align: top;
+      margin: 40px 0;
+      &:last-child {
+        border-right: none;
+      }
+      .platform--icon {
+        background-image: $icon-sprite;
+        display: inline-block;
+        &.windows-icon {
+          width: 48px;
+          height: 48px;
+          background-position: -364px -282px;
+          margin-top: -12px;
+        }
+        &.mac-icon {
+          width: 46px;
+          height: 56px;
+          background-position: -300px -282px;
+          margin-top: -20px;
+        }
+        &.linux-icon {
+          width: 51px;
+          height: 43px;
+          background-position: -300px -354px;
+          margin-top: -7px;
+        }
+      }
+      h3 {
+        margin-top: 17px;
+        font-family: $secondary-font-family;
+        font-style: 16px;
+        line-height: 16px;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
 
 
 .tools-right-pane {

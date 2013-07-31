@@ -190,6 +190,77 @@
   background-image: url("../img/ggts-screenshot.png");
 }
 
+.tool-versions--wrapper {
+  border: 1px solid #34302d;
+}
+.tool-versions--wrapper .tool-versions--icon--container {
+  background-color: #34302d;
+  display: inline-block;
+  width: 241px;
+  text-align: center;
+  padding: 30px 0;
+}
+.tool-versions--wrapper .tool-versions--icon--container .tool-versions--icon {
+  background-image: url("../img/iconsprite.png");
+  height: 134px;
+  display: inline-block;
+  margin-bottom: 27px;
+}
+.tool-versions--wrapper .tool-versions--icon--container .tool-versions--icon.sts-icon {
+  width: 124px;
+  background-position: -194px 0;
+}
+.tool-versions--wrapper .tool-versions--icon--container .tool-versions--version {
+  color: #f1f1f1;
+  font-weight: 400;
+  margin-bottom: 10px;
+  line-height: 18px;
+}
+.tool-versions--wrapper .tool-versions--container {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+}
+.tool-versions--wrapper .tool-versions--container .platform {
+  display: inline-block;
+  border-right: 1px solid white;
+  text-align: center;
+  vertical-align: top;
+  margin: 40px 0;
+}
+.tool-versions--wrapper .tool-versions--container .platform:last-child {
+  border-right: none;
+}
+.tool-versions--wrapper .tool-versions--container .platform .platform--icon {
+  background-image: url("../img/iconsprite.png");
+  display: inline-block;
+}
+.tool-versions--wrapper .tool-versions--container .platform .platform--icon.windows-icon {
+  width: 48px;
+  height: 48px;
+  background-position: -364px -282px;
+  margin-top: -12px;
+}
+.tool-versions--wrapper .tool-versions--container .platform .platform--icon.mac-icon {
+  width: 46px;
+  height: 56px;
+  background-position: -300px -282px;
+  margin-top: -20px;
+}
+.tool-versions--wrapper .tool-versions--container .platform .platform--icon.linux-icon {
+  width: 51px;
+  height: 43px;
+  background-position: -300px -354px;
+  margin-top: -7px;
+}
+.tool-versions--wrapper .tool-versions--container .platform h3 {
+  margin-top: 17px;
+  font-family: "Montserrat", sans-serif;
+  font-style: 16px;
+  line-height: 16px;
+  font-weight: 700;
+}
+
 .tools-right-pane {
   text-align: center;
 }

@@ -1,40 +1,45 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<body>
-<div layout:fragment="tools-links">
-
-<h3 th:text="${version}">1.2.3.RELEASE</h3>
-<ul>
-	<li class="platform" th:each='platform : ${platforms}'>
-		<a href="#collapse" data-toggle="collapse" th:attr="data-target='#platform--' + ${platform.name}">
-			<h2 th:text="${platform.name}">Mac</h2>
-		</a>
-
-		<div class="collapse in" th:id="'platform--' + ${platform.name}">
-			<div class="btn-toolbar" >
-				<div th:each="eclipseVersion : ${platform.eclipseVersions}" class="btn-group">
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="">
-						<span th:text="${eclipseVersion.name}"></span>
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li class='list-link' th:each='architecture : ${eclipseVersion.architectures}'>
-							<p th:text='${architecture.name}'>Architecture name</p>
-							<ul>
-								<li class='list-link' th:each='downloadLink : ${architecture.downloadLinks}'>
-									<a th:href='${downloadLink.url}' th:text='${downloadLink.fileType}'>A file type</a>
-                                    <span class="file-size" th:text="${downloadLink.fileSize}">2 MB</span>
-								</li>
-							</ul>
-						</li>
-					</ul>
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<body>
+		<div layout:fragment="tools-links">
+			<div class="tool-versions--wrapper">
+				<div class="tool-versions--icon--container">
+					<div class="tool-versions--icon sts-icon"></div>
+					<h2 th:text="'STS '+ ${version}" class="tool-versions--version">1.2.3.RELEASE</h2>
 				</div>
+				<ul class="tool-versions--container">
+					<li class="platform" th:each='platform : ${platforms}'>
+						<a href="#collapse" data-toggle="collapse" th:attr="data-target='#platform--' + ${platform.name}">
+							<div th:class="${platform.name.toLowerCase()}+'-icon platform--icon'"></div>
+							<h3 th:text="${platform.name}">Mac</h3>
+						</a>
+						<div class="collapse in" th:id="'platform--' + ${platform.name}">
+							<div class="btn-toolbar">
+								<div th:each="eclipseVersion : ${platform.eclipseVersions}" class="btn-group">
+									<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="">
+										<span th:text="${eclipseVersion.name}"></span>
+										<span class="caret"></span>
+									</a>
+									<ul class="dropdown-menu">
+										<li class='list-link' th:each='architecture : ${eclipseVersion.architectures}'>
+											<p th:text='${architecture.name}'>Architecture name</p>
+											<ul>
+												<li class='list-link' th:each='downloadLink : ${architecture.downloadLinks}'>
+													<a th:href='${downloadLink.url}' th:text='${downloadLink.fileType}'>A file type</a>
+		                      <span class="file-size" th:text="${downloadLink.fileSize}">2 MB</span>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
 			</div>
-		</div>
-	</li>
-</ul>
 
 <script type="text/javascript">
 
