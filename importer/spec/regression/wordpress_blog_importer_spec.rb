@@ -1,13 +1,13 @@
-require "blog_importer.rb"
+require "wordpress/blog_importer.rb"
 require "rspec"
 require 'pg'
-require 'wordpress_markup_processor'
+require 'wordpress/markup_processor'
 
-describe "BlogImporter Regression" do
+describe "WordpressBlogImporter Regression" do
 
   let(:siteapi) { double('siteapi').as_null_object }
-  let(:wp_processor) { WordpressMarkupProcessor.new }
-  let(:importer) { BlogImporter.new(xml_filename, siteapi, wp_processor) }
+  let(:wp_processor) { Wordpress::MarkupProcessor.new }
+  let(:importer) { Wordpress::BlogImporter.new(xml_filename, siteapi, wp_processor) }
 
   context "After importing test xml file" do
     let(:xml_filename) { "./spec/fixtures/test_blog_export.xml" }

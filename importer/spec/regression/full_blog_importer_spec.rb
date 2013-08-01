@@ -1,5 +1,5 @@
-require "blog_importer.rb"
-require "export_cleaner"
+require "wordpress/blog_importer.rb"
+require "wordpress/export_cleaner"
 require "rspec"
 require 'pg'
 
@@ -10,10 +10,10 @@ describe "Full Blog Importer", if: File.exists?(xml_import_filename) do
 
   let(:siteapi) { double('siteapi').as_null_object }
   let(:wp_processor) { double('wp_processor').as_null_object }
-  let(:importer) { BlogImporter.new(xml_test_filename, siteapi, wp_processor) }
+  let(:importer) { Wordpress::BlogImporter.new(xml_test_filename, siteapi, wp_processor) }
 
   before(:all) do
-    ExportCleaner.new.clean(xml_import_filename, xml_test_filename)
+    Wordpress::ExportCleaner.new.clean(xml_import_filename, xml_test_filename)
   end
 
   after(:all) do

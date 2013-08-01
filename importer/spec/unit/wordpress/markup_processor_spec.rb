@@ -1,9 +1,9 @@
 # encoding: UTF-8
 
 require 'rspec'
-require './lib/wordpress_markup_processor'
+require 'wordpress/markup_processor'
 
-describe WordpressMarkupProcessor do
+describe Wordpress::MarkupProcessor do
 
   describe "convert_code_blocks" do
 

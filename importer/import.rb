@@ -1,6 +1,6 @@
 require './lib/export_cleaner'
 require './lib/wordpress_markup_processor'
-require './lib/blog_importer'
+require './lib/wordpress_blog_importer'
 require './lib/site_api'
 
 site = SiteApi.new "localhost:8080"
@@ -15,7 +15,7 @@ end
 
 Tempfile.open('clean_blog_export') do |f|
   ExportCleaner.new.clean(import_filename, f.path)
-  importer = BlogImporter.new(f.path, site, WordpressMarkupProcessor.new)
+  importer = WordpressBlogImporter.new(f.path, site, WordpressMarkupProcessor.new)
 
   File.open("mappings.txt", "w+") do |f|
     importer.import(f)

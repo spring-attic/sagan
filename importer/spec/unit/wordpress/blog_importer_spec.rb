@@ -1,19 +1,19 @@
-require "blog_importer.rb"
+require "wordpress/blog_importer.rb"
 require "rspec"
 require 'pg'
 
-describe BlogImporter do
+describe Wordpress::BlogImporter do
 
   let(:siteapi) { double('siteapi').as_null_object }
   let(:wp_processor) { double('wp_processor').as_null_object }
-  let(:importer) { BlogImporter.new(xml_filename, siteapi, wp_processor) }
+  subject { Wordpress::BlogImporter.new(xml_filename, siteapi, wp_processor) }
 
   context "After importing test xml file" do
     let(:xml_filename) { "./spec/fixtures/test_blog_export.xml" }
 
     it "creates new memberProfiles for an author" do
       siteapi.should_receive('save_member_profile').exactly(3).times
-      importer.import(StringIO.new)
+      subject.import(StringIO.new)
     end
 
     it "creates memberProfiles with the correct info" do
@@ -24,12 +24,12 @@ describe BlogImporter do
           name: 'Mr Sample'
       }
       siteapi.should_receive('save_member_profile').with(expected_author)
-      importer.import(StringIO.new)
+      subject.import(StringIO.new)
     end
 
     it "creates a post for every published post in the import file" do
       siteapi.should_receive('save_blog_post').exactly(2).times
-      importer.import(StringIO.new)
+      subject.import(StringIO.new)
     end
 
     it "creates a post with the correct info" do
@@ -43,7 +43,7 @@ describe BlogImporter do
           authorMemberId: 'sample',
       }
       siteapi.should_receive('save_blog_post').with(expected_post).and_return(double(:code => 200, :headers => {}))
-      importer.import(StringIO.new)
+      subject.import(StringIO.new)
     end
 
     it "writes blog post url mappings to a file" do
@@ -53,7 +53,7 @@ describe BlogImporter do
       siteapi.should_receive('save_blog_post').ordered.and_return(double(:code => 200, :headers => headers1))
       siteapi.should_receive('save_blog_post').ordered.and_return(double(:code => 200, :headers => headers2))
       mappings = StringIO.new
-      importer.import(mappings)
+      subject.import(mappings)
       expected_mappings = [
         {
           "old_url" => "http://blog.springsource.org/2006/04/09/spring-20s-jms-improvements/",
