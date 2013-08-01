@@ -38,11 +38,11 @@ describe BlogImporter do
           title: 'Another Reason to Love Spring 2.0: Interceptor Combining',
           content: 'Interceptor Combining is out of this world!',
           category: 'ENGINEERING',
-          publishAt: '2006-04-09 20:41:19',
-          createdAt: '2006-04-09 20:41:19',
+          publishAt: '2006-04-09 20:41',
+          createdAt: '2006-04-09 20:41',
           authorMemberId: 'sample',
       }
-      siteapi.should_receive('save_blog_post').with(expected_post)
+      siteapi.should_receive('save_blog_post').with(expected_post).and_return(double(:code => 200, :headers => {}))
       importer.import(StringIO.new)
     end
 
@@ -50,8 +50,8 @@ describe BlogImporter do
       headers1 = {"Location" => "http://example.com/blog/1-a-post"}
       headers2 = {"Location" => "http://example.com/blog/2-another-post"}
 
-      siteapi.should_receive('save_blog_post').ordered.and_return(double(:headers => headers1))
-      siteapi.should_receive('save_blog_post').ordered.and_return(double(:headers => headers2))
+      siteapi.should_receive('save_blog_post').ordered.and_return(double(:code => 200, :headers => headers1))
+      siteapi.should_receive('save_blog_post').ordered.and_return(double(:code => 200, :headers => headers2))
       mappings = StringIO.new
       importer.import(mappings)
       expected_mappings = [

@@ -24,7 +24,6 @@ import java.util.Date;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.anyObject;
 import static org.mockito.BDDMockito.given;
@@ -150,13 +149,6 @@ public class BlogService_ValidPostTests {
 	@Test
 	public void postIsPersisted() {
 		verify(postRepository).save((Post) anyObject());
-	}
-
-	@Test
-	public void extractFirstParagraph() {
-		assertEquals("xx", service.extractFirstParagraph("xxxxx", 2));
-		assertEquals("xx", service.extractFirstParagraph("xx\n\nxxx", 20));
-		assertEquals("xx", service.extractFirstParagraph("xx xx\n\nxxx", 4));
 	}
 
 	@Test

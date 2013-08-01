@@ -45,6 +45,11 @@ class BlogImporter
       process_content(post_data)
 
       response = @site_api.save_blog_post(create_post_request(post_data))
+      if response.code >= 400
+        puts "Error importing blog post: #{response.body}"
+        p create_post_request(post_data)
+      end
+
       mapping = {
           "old_url" => post_data[:link],
           "new_url" => response.headers["Location"]
@@ -74,9 +79,11 @@ class BlogImporter
   end
 
   def extract_post_data element
+    post_date = element.xpath('wp:post_date_gmt').text
+    post_date = post_date.gsub(/:\d\d$/, "")
     {
         link: element.xpath('link').text,
-        post_date: element.xpath('wp:post_date_gmt').text,
+        post_date: post_date,
         content: element.xpath('content:encoded').text,
         title: element.xpath('title').text,
         creator: element.xpath('dc:creator').text

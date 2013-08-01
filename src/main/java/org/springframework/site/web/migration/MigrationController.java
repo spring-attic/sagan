@@ -10,9 +10,14 @@ import org.springframework.site.web.SiteUrl;
 import org.springframework.site.web.blog.PostView;
 import org.springframework.site.web.blog.PostViewFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+import java.io.IOException;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -47,18 +52,26 @@ public class MigrationController {
 	}
 
 	@RequestMapping(value = "/migration/blogpost", method = POST)
-	public void migrateBlogPost(HttpServletResponse response, PostForm postForm) {
-		Post post = blogService.getPost(postForm.getTitle(), postForm.getCreatedAt());
-		response.setContentLength(0);
-		if (post == null) {
-			post = blogService.addPost(postForm, postForm.getAuthorMemberId());
-			response.setStatus(201);
+	public void migrateBlogPost(HttpServletResponse response, @Valid PostForm postForm, BindingResult result) throws IOException {
+		if (result.hasErrors()) {
+			response.setStatus(400);
+			for (ObjectError error : result.getAllErrors()) {
+				response.getWriter().println(error.toString());
+			}
 		} else {
-			blogService.updatePost(post, postForm);
-			response.setStatus(200);
+
+			Post post = blogService.getPost(postForm.getTitle(), postForm.getCreatedAt());
+			response.setContentLength(0);
+			if (post == null) {
+				post = blogService.addPost(postForm, postForm.getAuthorMemberId());
+				response.setStatus(201);
+			} else {
+				blogService.updatePost(post, postForm);
+				response.setStatus(200);
+			}
+			PostView postView = postViewFactory.createPostView(post);
+			response.setHeader("Location", siteUrl.getAbsoluteUrl(postView.getPath()));
 		}
-		PostView postView = postViewFactory.createPostView(post);
-		response.setHeader("Location", siteUrl.getAbsoluteUrl(postView.getPath()));
 	}
 
 }

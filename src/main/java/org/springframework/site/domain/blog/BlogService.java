@@ -26,6 +26,8 @@ public class BlogService {
 
 	private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
+	private FirstParagraphExtractor firstParagraphExtractor = new FirstParagraphExtractor();
+
 	private static final Log logger = LogFactory.getLog(BlogService.class);
 
 	@Autowired
@@ -115,18 +117,23 @@ public class BlogService {
 		Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
 		MemberProfile profile = this.teamRepository.findByMemberId(authorId);
 		post.setAuthor(profile);
-
-		post.setRenderedContent(this.postContentRenderer.render(content));
-		post.setRenderedSummary(this.postContentRenderer.render(extractFirstParagraph(content, 500)));
-		post.setBroadcast(postForm.isBroadcast());
-		post.setDraft(postForm.isDraft());
-		post.setPublishAt(publishDate(postForm));
 		post.setCreatedAt(createdDate(postForm, dateService.now()));
+
+		setPostProperties(postForm, content, post);
 
 		this.repository.save(post);
 		saveToIndex(post);
 
 		return post;
+	}
+
+	private void setPostProperties(PostForm postForm, String content, Post post) {
+		post.setRenderedContent(this.postContentRenderer.render(content));
+		String firstParagraph = firstParagraphExtractor.extract(content, 500);
+		post.setRenderedSummary(postContentRenderer.render(firstParagraph));
+		post.setBroadcast(postForm.isBroadcast());
+		post.setDraft(postForm.isDraft());
+		post.setPublishAt(publishDate(postForm));
 	}
 
 	private Date createdDate(PostForm postForm, Date defaultDate) {
@@ -143,13 +150,9 @@ public class BlogService {
 		post.setTitle(postForm.getTitle());
 		post.setRawContent(content);
 		post.setCategory(postForm.getCategory());
-
-		post.setRenderedContent(this.postContentRenderer.render(content));
-		post.setRenderedSummary(this.postContentRenderer.render(extractFirstParagraph(content, 500)));
-		post.setBroadcast(postForm.isBroadcast());
-		post.setDraft(postForm.isDraft());
-		post.setPublishAt(publishDate(postForm));
 		post.setCreatedAt(createdDate(postForm, post.getCreatedAt()));
+
+		setPostProperties(postForm, content, post);
 
 		this.repository.save(post);
 		saveToIndex(post);
@@ -165,21 +168,6 @@ public class BlogService {
 		} else {
 			return postForm.getPublishAt();
 		}
-	}
-
-	// package private for testing purposes
-	String extractFirstParagraph(String content, int maxLength) {
-		String paragraph = content.trim();
-		int paragraphBreakpoint = paragraph.indexOf("\n\n");
-		if (paragraphBreakpoint > 0) {
-			paragraph = paragraph.substring(0, paragraphBreakpoint);
-		}
-		if (paragraph.length() > maxLength) {
-			int breakpoint = paragraph.lastIndexOf(" ", maxLength);
-			breakpoint = (breakpoint < 0) ? maxLength : breakpoint;
-			paragraph = paragraph.substring(0, breakpoint);
-		}
-		return paragraph;
 	}
 
 	private void saveToIndex(Post post) {
