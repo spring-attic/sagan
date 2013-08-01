@@ -1,12 +1,12 @@
 package org.springframework.site.domain.documentation;
 
 public class SupportedVersion implements Comparable<SupportedVersion> {
-	public enum Status {
+	public enum Release {
 		CURRENT("Current"), PRERELEASE("Pre-Release"), SUPPORTED("");
 
 		private String displayName;
 
-		private Status(String displayName) {
+		private Release(String displayName) {
 			this.displayName = displayName;
 		}
 
@@ -16,21 +16,21 @@ public class SupportedVersion implements Comparable<SupportedVersion> {
 	}
 
 	private String version;
-	private Status status;
+	private Release release;
 
-	public SupportedVersion(String version, Status status) {
+	public SupportedVersion(String version, Release release) {
 		this.version = version;
-		this.status = status;
+		this.release = release;
 	}
 
 	public boolean isCurrent() {
-		return status == Status.CURRENT;
+		return release == Release.CURRENT;
 	}
 
 	@Override
 	public String toString() {
 		return "SupportedVersion{" +
-				version + ", status: " + status.name() +
+				version + ", release: " + release.name() +
 				"}";
 	}
 
@@ -41,7 +41,7 @@ public class SupportedVersion implements Comparable<SupportedVersion> {
 
 		SupportedVersion version1 = (SupportedVersion) o;
 
-		if (status != version1.status) return false;
+		if (release != version1.release) return false;
 		if (!version.equals(version1.version)) return false;
 
 		return true;
@@ -50,7 +50,7 @@ public class SupportedVersion implements Comparable<SupportedVersion> {
 	@Override
 	public int hashCode() {
 		int result = version.hashCode();
-		result = 31 * result + status.hashCode();
+		result = 31 * result + release.hashCode();
 		return result;
 	}
 
@@ -65,10 +65,17 @@ public class SupportedVersion implements Comparable<SupportedVersion> {
 
 	public String getVersionName() {
 		String statusDisplay = "";
-		if (status != Status.SUPPORTED) {
-			statusDisplay = String.format(" (%s)", status.getDisplayName());
+		if (release != Release.SUPPORTED) {
+			statusDisplay = String.format(" (%s)", release.getDisplayName());
 		}
 		return version + statusDisplay;
 	}
 
+	public String getShortName() {
+		return version.replaceAll("(\\.[A-Z]+[0-9]*)?$", "");
+	}
+
+	public String getReleaseName() {
+		return release.getDisplayName();
+	}
 }

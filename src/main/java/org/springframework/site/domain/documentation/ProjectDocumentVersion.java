@@ -25,4 +25,12 @@ public class ProjectDocumentVersion {
     public String getVersionName() {
 		return version.getVersionName();
     }
+
+	public String getShortName() {
+		return version.getShortName();
+	}
+
+	public String getReleaseName() {
+		return version.getReleaseName();
+	}
 }

@@ -40,7 +40,10 @@
                     <div class="item--body">
                         <div th:each="documentVersion,iterStat1 : ${item.supportedReferenceDocumentVersions}">
                             <div class="item--body--version">
-                                <p th:text="${documentVersion.versionName}" class="item--left-column">Version</p>
+                                <div class="item--left-column">
+                                    <p th:text="${documentVersion.shortName}">Version</p>
+                                    <p th:text="'(' + ${documentVersion.releaseName} + ')'" th:unless="${#strings.isEmpty(documentVersion.releaseName)}">Version</p>
+                                </div>
                                 <div class="item--right-column">
                                     <a class="documentation-link reference-link" th:href="${documentVersion.url}" >Reference</a>
                                     <div class="documentation-link api-link" th:each="documentVersion,iterStat2 : ${item.supportedApiDocsDocumentVersions}" th:if="${iterStat1.count}==${iterStat2.count}">

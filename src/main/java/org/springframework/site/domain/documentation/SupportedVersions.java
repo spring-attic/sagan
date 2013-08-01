@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.springframework.site.domain.documentation.SupportedVersion.Status.CURRENT;
-import static org.springframework.site.domain.documentation.SupportedVersion.Status.PRERELEASE;
-import static org.springframework.site.domain.documentation.SupportedVersion.Status.SUPPORTED;
+import static org.springframework.site.domain.documentation.SupportedVersion.Release.CURRENT;
+import static org.springframework.site.domain.documentation.SupportedVersion.Release.PRERELEASE;
+import static org.springframework.site.domain.documentation.SupportedVersion.Release.SUPPORTED;
 
 public class SupportedVersions implements Iterable<SupportedVersion> {
 
@@ -22,14 +22,14 @@ public class SupportedVersions implements Iterable<SupportedVersion> {
 		String currentVersion = null;
 		for (String versionString : versionStrings) {
 			boolean isPreRelease = versionString.matches("[0-9.]+(M|RC)\\d+");
-			SupportedVersion.Status status = SUPPORTED;
+			SupportedVersion.Release release = SUPPORTED;
 			if (isPreRelease) {
-				status = PRERELEASE;
+				release = PRERELEASE;
 			} else if(currentVersion == null) {
 				currentVersion = versionString;
-				status = CURRENT;
+				release = CURRENT;
 			}
-			versions.add(new SupportedVersion(versionString, status));
+			versions.add(new SupportedVersion(versionString, release));
 		}
 
 		return new SupportedVersions(versions);

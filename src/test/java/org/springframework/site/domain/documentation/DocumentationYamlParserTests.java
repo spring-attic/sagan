@@ -50,9 +50,9 @@ public class DocumentationYamlParserTests {
 		Project project = active.get(0);
 
 		assertThat(project.getSupportedVersions(), contains(
-				new SupportedVersion("4.0.0.M1", SupportedVersion.Status.PRERELEASE),
-				new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Status.CURRENT),
-				new SupportedVersion("3.1.4.RELEASE", SupportedVersion.Status.SUPPORTED)
+				new SupportedVersion("4.0.0.M1", SupportedVersion.Release.PRERELEASE),
+				new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Release.CURRENT),
+				new SupportedVersion("3.1.4.RELEASE", SupportedVersion.Release.SUPPORTED)
 		));
 	}
 

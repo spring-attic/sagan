@@ -20,10 +20,10 @@ public class SupportedVersionsTests {
 						"3.1.5.RELEASE"
 				));
 		assertThat(supportedVersions, contains(
-				new SupportedVersion("4.0.0.RC1", SupportedVersion.Status.PRERELEASE),
-				new SupportedVersion("4.0.0.M1", SupportedVersion.Status.PRERELEASE),
-				new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Status.CURRENT),
-				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Status.SUPPORTED)
+				new SupportedVersion("4.0.0.RC1", SupportedVersion.Release.PRERELEASE),
+				new SupportedVersion("4.0.0.M1", SupportedVersion.Release.PRERELEASE),
+				new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Release.CURRENT),
+				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Release.SUPPORTED)
 		));
 	}
 
@@ -37,19 +37,19 @@ public class SupportedVersionsTests {
 						"4.0.0.RC1"
 				));
 		assertThat(supportedVersions, contains(
-				new SupportedVersion("4.0.0.RC1", SupportedVersion.Status.PRERELEASE),
-				new SupportedVersion("4.0.0.M1", SupportedVersion.Status.PRERELEASE),
-				new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Status.CURRENT),
-				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Status.SUPPORTED)
+				new SupportedVersion("4.0.0.RC1", SupportedVersion.Release.PRERELEASE),
+				new SupportedVersion("4.0.0.M1", SupportedVersion.Release.PRERELEASE),
+				new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Release.CURRENT),
+				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Release.SUPPORTED)
 		));
 	}
 
 
 	@Test
 	public void getCurrent() {
-		SupportedVersion currentVersion = new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Status.CURRENT);
+		SupportedVersion currentVersion = new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Release.CURRENT);
 		SupportedVersions supportedVersions = new SupportedVersions(Arrays.asList(
-				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Status.SUPPORTED),
+				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Release.SUPPORTED),
 				currentVersion
 		));
 		assertThat(supportedVersions.getCurrent(), equalTo(currentVersion));
