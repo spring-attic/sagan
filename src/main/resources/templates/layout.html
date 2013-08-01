@@ -60,7 +60,7 @@
       <div class="container-fluid">
         <div class="search-form--container">
           <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
-            <input type="text" class="search-query search-form--form js-search-input" placeholder="Search for documention, guides, and posts..." name="q" th:value="${query}" />
+            <input type="text" class="search-query search-form--form js-search-input" placeholder="Search for documention, guides, and posts..." name="q" th:value="${searchForm != null ? searchForm.q : ''}" />
             <button type="submit" class="search-form--submit"><i class="icon-search"></i></button>
           </form>
         </div>

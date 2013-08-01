@@ -19,6 +19,7 @@ import org.springframework.site.search.SearchResults;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.site.web.PaginationInfo;
 import org.springframework.site.web.search.SearchEntryBuilder;
+import org.springframework.site.web.search.SearchForm;
 import org.springframework.web.servlet.View;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 
@@ -51,9 +52,12 @@ public class SearchViewTests extends IntegrationTestBase {
 		response = new MockHttpServletResponse();
 		Page<SearchResult> results = new PageImpl<>(Collections.<SearchResult>emptyList(), PageableFactory.forSearch(1), 0);
 
+		SearchForm searchForm = new SearchForm();
+		searchForm.setQ("searchterm");
+
 		model = new HashMap<>();
 		model.put("results", Collections.emptyList());
-		model.put("query", "searchterm");
+		model.put("searchForm", searchForm);
 		model.put("paginationInfo", new PaginationInfo(results));
 		model.put("root", new SearchResults(results, Collections.<SearchFacet>emptyList()));
 	}

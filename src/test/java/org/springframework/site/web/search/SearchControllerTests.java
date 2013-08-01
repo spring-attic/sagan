@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 
@@ -42,33 +43,41 @@ public class SearchControllerTests {
 		SearchResult entry = new SearchResult("", "", "", "");
 		this.entries.add(entry);
 		this.resultsPage = new PageImpl<>(this.entries);
-		given(this.searchService.search(anyString(), (Pageable) anyObject())).willReturn(
+		given(this.searchService.search(anyString(), (Pageable) anyObject(), anyList())).willReturn(
 				new SearchResults(this.resultsPage, Collections.<SearchFacet>emptyList()));
 	}
 
 	@Test
 	public void search_providesQueryInModel() {
-		this.controller.search("searchTerm", 1, this.model);
-		assertThat((String) this.model.get("query"), is(equalTo("searchTerm")));
+		SearchForm searchForm = new SearchForm();
+		searchForm.setQ("searchTerm");
+		this.controller.search(searchForm, 1, this.model);
+		assertThat((SearchForm) this.model.get("searchForm"), equalTo(searchForm));
 	}
 
 	@Test
 	public void search_providesPaginationInfoInModel() {
-		this.controller.search("searchTerm", 1, this.model);
+		SearchForm searchForm = new SearchForm();
+		searchForm.setQ("searchTerm");
+		this.controller.search(searchForm, 1, this.model);
 		assertThat(this.model.get("paginationInfo"), is(notNullValue()));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
 	public void search_providesResultsInModel() {
-		this.controller.search("searchTerm", 1, this.model);
+		SearchForm searchForm = new SearchForm();
+		searchForm.setQ("searchTerm");
+		this.controller.search(searchForm, 1, this.model);
 		assertThat((List<SearchResult>) this.model.get("results"), equalTo(this.entries));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
 	public void search_providesAllResultsForBlankQuery() {
-		this.controller.search("", 1, this.model);
+		SearchForm searchForm = new SearchForm();
+		searchForm.setQ("");
+		this.controller.search(searchForm, 1, this.model);
 		assertThat((List<SearchResult>) this.model.get("results"), equalTo(this.entries));
 	}
 }

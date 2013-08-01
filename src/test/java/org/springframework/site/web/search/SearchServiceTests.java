@@ -11,6 +11,8 @@ import org.springframework.site.search.SearchException;
 import org.springframework.site.search.SearchResultParser;
 import org.springframework.site.search.SearchService;
 
+import java.util.Collections;
+
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -38,7 +40,7 @@ public class SearchServiceTests {
 
 	@Test(expected = SearchException.class)
 	public void searchExceptionHandling() throws Exception {
-		this.searchService.search("foo", mock(Pageable.class));
+		this.searchService.search("foo", mock(Pageable.class), Collections.<String>emptyList());
 	}
 
 	@Test(expected = SearchException.class)

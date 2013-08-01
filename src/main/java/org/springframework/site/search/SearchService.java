@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SearchService {
 
@@ -41,16 +43,17 @@ public class SearchService {
 		execute(newIndexBuilder.build());
 	}
 
-	public SearchResults search(String term, Pageable pageable) {
+	public SearchResults search(String term, Pageable pageable, List<String> filter) {
 		Search.Builder searchBuilder;
 		if (term.equals("")) {
-			searchBuilder = this.searchQueryBuilder.forEmptyQuery(pageable);
+			searchBuilder = this.searchQueryBuilder.forEmptyQuery(pageable, filter);
 		} else {
-			searchBuilder = this.searchQueryBuilder.forQuery(term, pageable);
+			searchBuilder = this.searchQueryBuilder.forQuery(term, pageable, filter);
 		}
 		searchBuilder.addIndex(INDEX);
-		JestResult jestResult = execute(searchBuilder.build());
-		logger.info(jestResult.getJsonString());
+		Search search = searchBuilder.build();
+		logger.debug(search.getData());
+		JestResult jestResult = execute(search);
 		return searchResultParser.parseResults(jestResult, pageable);
 	}
 	public void setUseRefresh(boolean useRefresh) {
@@ -58,13 +61,11 @@ public class SearchService {
 	}
 
 	public void removeFromIndex(SearchEntry entry) {
-		Delete delete = new Delete.Builder().id(entry.getId()).index(INDEX).type("site") // TODO
-																					// this
-																					// should
-																					// come
-																					// from
-																					// the
-																					// 'entry'
+		Delete delete = new Delete.Builder()
+				.id(entry.getId())
+				.index(INDEX)
+				// TODO this should come from the 'entry'
+				.type("site")
 				.build();
 
 		execute(delete);

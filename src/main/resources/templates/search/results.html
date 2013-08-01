@@ -25,16 +25,19 @@
 			</ul>
 
 			<div id='pagination_control' th:if="${paginationInfo.isVisible()}">
-				<a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${query})}" href='/search?page=1' class='previous' th:if="${paginationInfo.previousVisible}">Previous</a>
-				<a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${query})}" href='/search?page=3' class='next' th:if="${paginationInfo.nextVisible}">Next</a>
+				<a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" href='/search?page=1' class='previous' th:if="${paginationInfo.previousVisible}">Previous</a>
+				<a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" href='/search?page=3' class='next' th:if="${paginationInfo.nextVisible}">Next</a>
 			</div>
 
 		</div>
         <div class="span4">
             <div class="search-facets">
+                <form th:action="@{/search(q=${searchForm.q})}" method="POST" th:object="${searchForm}">
+                    <input type="submit" value="Update"></input>
                 <ul layout:include="search/_facets :: facets" th:with="root=${root}">
 
                 </ul>
+                </form>
             </div>
         </div>
 	</div>

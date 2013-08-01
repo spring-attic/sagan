@@ -31,6 +31,7 @@ import utils.FreePortFinder;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -136,7 +137,7 @@ public class SearchServiceIntegrationTestLocal {
 
 	private void assertThatSearchReturnsEntry(String query) {
 		Page<SearchResult> searchEntries = this.searchService
-				.search(query, this.pageable).getPage();
+				.search(query, this.pageable, Collections.<String>emptyList()).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		assertThat(entries.get(0).getTitle(), is(equalTo(this.entry.getTitle())));
@@ -169,7 +170,7 @@ public class SearchServiceIntegrationTestLocal {
 
 		this.searchService.saveToIndex(secondEntry);
 		Page<SearchResult> searchEntries = this.searchService.search("content",
-				this.pageable).getPage();
+				this.pageable, Collections.<String>emptyList()).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries.size(), equalTo(1));
 	}
@@ -186,11 +187,11 @@ public class SearchServiceIntegrationTestLocal {
 		this.searchService.saveToIndex(entry2);
 
 		Pageable page1 = new PageRequest(0, 1);
-		Page<SearchResult> searchEntries1 = this.searchService.search("content", page1).getPage();
+		Page<SearchResult> searchEntries1 = this.searchService.search("content", page1, Collections.<String>emptyList()).getPage();
 		assertThat(searchEntries1.getContent().get(0).getId(), equalTo(entry1.getId()));
 
 		Pageable page2 = new PageRequest(1, 1);
-		Page<SearchResult> searchEntries2 = this.searchService.search("content", page2).getPage();
+		Page<SearchResult> searchEntries2 = this.searchService.search("content", page2, Collections.<String>emptyList()).getPage();
 		assertThat(searchEntries2.getContent().get(0).getId(), equalTo(entry2.getId()));
 	}
 
@@ -206,7 +207,7 @@ public class SearchServiceIntegrationTestLocal {
 
 		int page = 1;
 		Pageable pageable = new PageRequest(page, 10);
-		Page<SearchResult> searchEntries = this.searchService.search("", pageable).getPage();
+		Page<SearchResult> searchEntries = this.searchService.search("", pageable, Collections.<String>emptyList()).getPage();
 		assertThat(searchEntries.getContent().size(), equalTo(10));
 		assertThat(searchEntries.getTotalPages(), equalTo(3));
 		assertThat(searchEntries.getNumber(), equalTo(page));
@@ -217,7 +218,7 @@ public class SearchServiceIntegrationTestLocal {
 		indexSingleEntry();
 		Pageable page = new PageRequest(0, 10);
 		Page<SearchResult> searchEntries = this.searchService.search(
-				"somethingthatwillneverappearsupercalifragilousIcantspelltherest", page).getPage();
+				"somethingthatwillneverappearsupercalifragilousIcantspelltherest", page, Collections.<String>emptyList()).getPage();
 		assertThat(searchEntries.getContent().size(), equalTo(0));
 		assertThat(searchEntries.getTotalPages(), equalTo(0));
 	}
@@ -269,7 +270,7 @@ public class SearchServiceIntegrationTestLocal {
 		this.searchService.saveToIndex(entryTitle);
 
 		List<SearchResult> results = this.searchService.search("application",
-				this.pageable).getPage().getContent();
+				this.pageable, Collections.<String>emptyList()).getPage().getContent();
 		assertThat(results.get(0).getId(), is(entryTitle.getId()));
 		assertThat(results.get(1).getId(), is(entryContent.getId()));
 	}
@@ -297,7 +298,7 @@ public class SearchServiceIntegrationTestLocal {
 
 		searchService.saveToIndex(current);
 
-		List<SearchResult> results = searchService.search("application", pageable).getPage().getContent();
+		List<SearchResult> results = searchService.search("application", pageable, Collections.<String>emptyList()).getPage().getContent();
 		assertThat(results.get(0).getId(), is(current.getId()));
 		assertThat(results.get(1).getId(), is(notCurrent.getId()));
 	}
@@ -354,7 +355,7 @@ public class SearchServiceIntegrationTestLocal {
 
 		searchService.saveToIndex(blog);
 
-		SearchResults searchResults = searchService.search("title", pageable);
+		SearchResults searchResults = searchService.search("title", pageable, Collections.<String>emptyList());
 
 		List<SearchResult> content = searchResults.getPage().getContent();
 		assertThat(content.size(), equalTo(4));

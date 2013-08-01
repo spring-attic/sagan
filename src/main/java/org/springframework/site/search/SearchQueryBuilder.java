@@ -1,10 +1,12 @@
 package org.springframework.site.search;
 
+import com.google.common.base.Joiner;
 import io.searchbox.core.Search;
 import org.elasticsearch.common.joda.time.format.ISODateTimeFormat;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Date;
+import java.util.List;
 
 public class SearchQueryBuilder {
 
@@ -68,24 +70,47 @@ public class SearchQueryBuilder {
 			"  }\n" +
 			" }";
 
+	private static final String facetFilter =
+			"      \"filter\": {\n" +
+			"        \"terms\": {\n" +
+			"          \"facetPaths\": [\"%s\"],\n" +
+			"          \"execution\": \"and\"\n" +
+			"        }\n" +
+			"      }\n";
+
 	SearchQueryBuilder() {
 	}
 
-	Search.Builder forEmptyQuery(Pageable pageable) {
-		return new Search.Builder("{" + emptyQuery + ","
+	Search.Builder forEmptyQuery(Pageable pageable, List<String> filters) {
+		return new Search.Builder("{" + buildFilteredQuery(emptyQuery, filters) + ","
 				+ buildQueryPagination(pageable) + ","
 				+ highlight + ","
 				+ facets
 				+ "}");
 	}
 
-	Search.Builder forQuery(String queryTerm, Pageable pageable) {
-		return new Search.Builder("{" + buildFullQuery(queryTerm) + ","
+	Search.Builder forQuery(String queryTerm, Pageable pageable, List<String> filters) {
+		return new Search.Builder("{" + buildFilteredQuery(buildFullQuery(queryTerm), filters) + ","
 				+ buildQueryFilters(new Date()) + ","
 				+ buildQueryPagination(pageable) + ","
 				+ highlight + ","
 				+ facets
 				+ "}");
+	}
+
+	private String buildFilteredQuery(String query, List<String> filters) {
+		if (filters == null || filters.isEmpty()) return query;
+
+		String filter = String.format(facetFilter, Joiner.on("\",\"").join(filters));
+
+		return
+				"  \"query\": {\n" +
+				"    \"filtered\": {\n" +
+				query + "," +
+				filter +
+				"    }\n" +
+				"  }\n";
+
 	}
 
 	private String buildFullQuery(String queryTerm) {

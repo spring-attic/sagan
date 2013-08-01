@@ -29,6 +29,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -93,7 +94,7 @@ public class HostedSearchServiceIntegrationTests {
 		Thread.sleep(1000);
 
 		Page<SearchResult> searchEntries = this.searchService.search(
-				"Integration test content", this.pageable).getPage();
+				"Integration test content", this.pageable, Collections.<String>emptyList()).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		assertThat(entries.get(0).getSummary(), is(equalTo(this.entry.getSummary())));
@@ -118,7 +119,7 @@ public class HostedSearchServiceIntegrationTests {
 		Thread.sleep(1000);
 
 		Page<SearchResult> searchEntries = this.searchService.search(testTitle,
-				this.pageable).getPage();
+				this.pageable, Collections.<String>emptyList()).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		assertThat(entries.get(0).getTitle(), is(equalTo(this.entry.getTitle())));
@@ -142,7 +143,7 @@ public class HostedSearchServiceIntegrationTests {
 		Thread.sleep(1000);
 
 		Page<SearchResult> searchEntries = this.searchService.search(
-				"Somereandomtestcontentthatshouldbeunique", this.pageable).getPage();
+				"Somereandomtestcontentthatshouldbeunique", this.pageable, Collections.<String>emptyList()).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		SearchResult entry = entries.get(0);

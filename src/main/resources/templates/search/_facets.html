@@ -7,7 +7,10 @@
 
 <ul layout:fragment="facets">
     <li th:each="facet : ${root.facets}">
-        <a href="#" th:text="${facet.linkText}">All Posts</a>
+        <label>
+            <input type="checkbox" name="filters" th:value="${facet.fullPath}" th:field="*{filters}" />
+            <span th:text="${facet.linkText}">Facet (123)</span>
+        </label>
         <ul th:if="${facet.hasFacets()}" layout:include="search/_facets :: facets" th:with="root=${facet}">
 
         </ul>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("/search")
@@ -27,16 +28,15 @@ public class SearchController {
 		this.searchService = searchService;
 	}
 
-	@RequestMapping(method = {GET, HEAD})
-	public String search(@RequestParam(value = "q", defaultValue = "") String query, @RequestParam(defaultValue = "1") int page, Model model) {
+	@RequestMapping(method = {GET, HEAD, POST})
+	public String search(SearchForm searchForm, @RequestParam(defaultValue = "1") int page, Model model) {
 		Pageable pageable = PageableFactory.forSearch(page);
-		SearchResults searchResults = searchService.search(query, pageable);
+		SearchResults searchResults = searchService.search(searchForm.getQ(), pageable, searchForm.getFilters());
 		Page<SearchResult> entries = searchResults.getPage();
 		model.addAttribute("results", entries.getContent());
-		model.addAttribute("query", query);
 		model.addAttribute("paginationInfo", new PaginationInfo(entries));
 		model.addAttribute("root", searchResults);
+		model.addAttribute("searchForm", searchForm);
 		return "search/results";
 	}
-
 }

@@ -664,3 +664,10 @@ input.floating-input:focus {
   padding-right: 10px;
   margin-right: 5px;
 }
+
+.search-facets > ul {
+  margin-left: 0px;
+}
+.search-facets ul {
+  list-style-type: none;
+}

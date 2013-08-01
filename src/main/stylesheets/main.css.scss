@@ -588,8 +588,6 @@ input.floating-input {
   }
 }
 
-
-
 .item-dropdown-widget {
   text-align: left;
   z-index: 800;
@@ -754,3 +752,11 @@ input.floating-input {
   }
 }
 
+.search-facets {
+  > ul {
+    margin-left: 0px;
+  }
+  ul {
+    list-style-type: none;
+  }
+}

@@ -9,6 +9,8 @@ import org.springframework.site.search.SearchResults;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Primary
 @SuppressWarnings("unused")
@@ -25,7 +27,7 @@ public class StubSearchService extends SearchService {
 	}
 
 	@Override
-	public SearchResults search(String term, Pageable pageable) {
+	public SearchResults search(String term, Pageable pageable, List<String> filters) {
 		return null;
 	}
 
