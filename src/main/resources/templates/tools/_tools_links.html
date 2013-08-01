@@ -22,7 +22,7 @@
 							<div class="item--dropdown platform-version--dropdown">
 								<div class="item--body">
 									<div class='item--half-column' th:each='architecture : ${eclipseVersion.architectures}'>
-										<p class="item--body-title" th:text='${architecture.name}'>Architecture name</p>
+										<p class="item--body-title" th:text='${architecture.displayName}'>Architecture name</p>
 										<div>
 											<div class='item--body--version' th:each='downloadLink : ${architecture.downloadLinks}'>
 												<a class="tool-download-link" th:href='${downloadLink.url}'> 
