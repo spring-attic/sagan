@@ -169,11 +169,6 @@ Now run the following command to produce a single executable JAR file containing
 $ mvn package
 ```
 
-To run the package, run this:
-```sh
-$ mvn spring-boot:run
-```
-
 [spring-boot-maven-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-maven-plugin
 
 > **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/content) instead.
@@ -224,6 +219,17 @@ $ mvn package
 [maven-shade-plugin]: https://maven.apache.org/plugins/maven-shade-plugin
 
 > **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/content) instead.
+</#macro>
+
+<#macro run_the_application_with_maven module="service">
+Run the ${module}
+-------------------
+Run your ${module} using the spring-boot plugin at the command line:
+
+```sh
+$ mvn spring-boot:run
+```
+
 </#macro>
 
 <#macro run_the_application module="application">
