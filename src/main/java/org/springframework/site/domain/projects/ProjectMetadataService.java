@@ -1,14 +1,14 @@
-package org.springframework.site.domain.documentation;
+package org.springframework.site.domain.projects;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DocumentationService {
+public class ProjectMetadataService {
 	private final Map<String, List<Project>> projectCategoryMap;
 	private final List<Project> projects;
 
-	public DocumentationService(Map<String, List<Project>> projectCategoryMap) {
+	public ProjectMetadataService(Map<String, List<Project>> projectCategoryMap) {
 		this.projectCategoryMap = projectCategoryMap;
 		this.projects = new ArrayList<>();
 		for (Map.Entry<String, List<Project>> projectCategory : projectCategoryMap

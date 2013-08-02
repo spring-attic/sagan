@@ -1,4 +1,4 @@
-package org.springframework.site.domain.documentation;
+package org.springframework.site.domain.projects;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class ProjectTests {
 
     @Test
     public void getSupportedReferenceDocumentVersions() {
-        List<ProjectDocumentVersion> docVersions = project.getSupportedReferenceDocumentVersions();
+        List<ProjectDocumentation> docVersions = project.getSupportedReferenceDocumentVersions();
         assertThat(docVersions.get(0).getUrl(), equalTo("http://project.org/reference/4.0.0.RELEASE/index.html"));
         assertThat(docVersions.get(1).getUrl(), equalTo("http://project.org/reference/3.1.5.RELEASE/index.html"));
         assertThat(docVersions.get(2).getUrl(), equalTo("http://project.org/reference/1.2.3.RELEASE/index.html"));
@@ -32,7 +32,7 @@ public class ProjectTests {
 
     @Test
     public void getSupportedApiDocsUrls() {
-        List<ProjectDocumentVersion> docVersions = project.getSupportedApiDocsDocumentVersions();
+        List<ProjectDocumentation> docVersions = project.getSupportedApiDocsDocumentVersions();
         assertThat(docVersions.get(0).getUrl(), equalTo("http://project.org/api/4.0.0.RELEASE/index.html"));
         assertThat(docVersions.get(1).getUrl(), equalTo("http://project.org/api/3.1.5.RELEASE/index.html"));
         assertThat(docVersions.get(2).getUrl(), equalTo("http://project.org/api/1.2.3.RELEASE/index.html"));

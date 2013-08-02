@@ -1,4 +1,4 @@
-package org.springframework.site.domain.documentation;
+package org.springframework.site.domain.projects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,26 +72,26 @@ public class Project {
 		this.supportedVersions = supportedVersions;
 	}
 
-	private ProjectDocumentVersion buildDocumentVersion(String urlTemplate, SupportedVersion version) {
-        String url = urlTemplate.replaceAll("\\{version\\}", version.getFullVersion());
-        return new ProjectDocumentVersion(url, version);
-    }
-
-    public List<ProjectDocumentVersion> getSupportedReferenceDocumentVersions() {
+    public List<ProjectDocumentation> getSupportedReferenceDocumentVersions() {
         return getDocumentVersions(this.getReferenceUrl());
     }
 
-    public List<ProjectDocumentVersion> getSupportedApiDocsDocumentVersions() {
+    public List<ProjectDocumentation> getSupportedApiDocsDocumentVersions() {
         return getDocumentVersions(this.getApiUrl());
     }
 
-    private List<ProjectDocumentVersion> getDocumentVersions(String urlTemplate) {
-        List<ProjectDocumentVersion> documentVersions = new ArrayList<ProjectDocumentVersion>();
-		for (SupportedVersion supportedVersion : supportedVersions) {
+    private List<ProjectDocumentation> getDocumentVersions(String urlTemplate) {
+        List<ProjectDocumentation> documentVersions = new ArrayList<>();
+		for (Version supportedVersion : supportedVersions) {
             documentVersions.add(buildDocumentVersion(urlTemplate, supportedVersion));
 		}
         return documentVersions;
     }
+
+	private ProjectDocumentation buildDocumentVersion(String urlTemplate, Version version) {
+		String url = urlTemplate.replaceAll("\\{version\\}", version.getFullVersion());
+		return new ProjectDocumentation(url, version);
+	}
 
 	public String getApiAllClassesUrl() {
 		return getApiUrl() + "/allclasses-frame.html";

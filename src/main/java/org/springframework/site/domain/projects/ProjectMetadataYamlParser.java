@@ -1,4 +1,4 @@
-package org.springframework.site.domain.documentation;
+package org.springframework.site.domain.projects;
 
 import org.yaml.snakeyaml.Yaml;
 
@@ -9,12 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DocumentationYamlParser {
+public class ProjectMetadataYamlParser {
 
-	public Map<String, List<Project>> parse(InputStream documentationYaml) {
+	public Map<String, List<Project>> parse(InputStream projectMetadataYml) {
 		Map<String, List<Project>> projects = new HashMap<>();
 
-		Map<String, List> projectsYaml = parseYamlIntoMap(documentationYaml);
+		Map<String, List> projectsYaml = parseYamlIntoMap(projectMetadataYml);
 
 		for (Map.Entry<String, List> entry : projectsYaml.entrySet()) {
 			String category = entry.getKey();
@@ -37,8 +37,8 @@ public class DocumentationYamlParser {
 		return projects;
 	}
 
-	private Map<String, List> parseYamlIntoMap(InputStream documentationYaml) {
-		Map load = (Map) new Yaml().load(documentationYaml);
+	private Map<String, List> parseYamlIntoMap(InputStream projectMetadataYml) {
+		Map load = (Map) new Yaml().load(projectMetadataYml);
 		return (Map) load.get("projects");
 	}
 
@@ -58,7 +58,7 @@ public class DocumentationYamlParser {
 			SupportedVersions supportedVersions = SupportedVersions.build(versionStrings);
 			project.setSupportedVersions(supportedVersions);
 		} else {
-			project.setSupportedVersions(new SupportedVersions(Collections.<SupportedVersion>emptyList()));
+			project.setSupportedVersions(new SupportedVersions(Collections.<Version>emptyList()));
 		}
 
 		return project;

@@ -7,8 +7,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.springframework.site.domain.documentation.Project;
-import org.springframework.site.domain.documentation.SupportedVersion;
+import org.springframework.site.domain.projects.Project;
+import org.springframework.site.domain.projects.Version;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchEntryMapper;
 
@@ -20,9 +20,9 @@ public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 	public static final String END_OF_CLASS_DATA = " ========= END OF CLASS DATA ========= ";
 
 	private Project project;
-	private final SupportedVersion version;
+	private final Version version;
 
-	public ApiDocumentMapper(Project project, SupportedVersion version) {
+	public ApiDocumentMapper(Project project, Version version) {
 		this.project = project;
 		this.version = version;
 	}

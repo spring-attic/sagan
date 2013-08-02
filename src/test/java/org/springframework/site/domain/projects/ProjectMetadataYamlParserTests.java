@@ -1,4 +1,4 @@
-package org.springframework.site.domain.documentation;
+package org.springframework.site.domain.projects;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,14 +14,14 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
-public class DocumentationYamlParserTests {
+public class ProjectMetadataYamlParserTests {
 
 	private Map<String,List<Project>> projects;
 
 	@Before
 	public void setUp() throws Exception {
 		InputStream yaml = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
-		DocumentationYamlParser parser = new DocumentationYamlParser();
+		ProjectMetadataYamlParser parser = new ProjectMetadataYamlParser();
 		projects = parser.parse(yaml);
 	}
 
@@ -50,9 +50,9 @@ public class DocumentationYamlParserTests {
 		Project project = active.get(0);
 
 		assertThat(project.getSupportedVersions(), contains(
-				new SupportedVersion("4.0.0.M1", SupportedVersion.Release.PRERELEASE),
-				new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Release.CURRENT),
-				new SupportedVersion("3.1.4.RELEASE", SupportedVersion.Release.SUPPORTED)
+				new Version("4.0.0.M1", Version.Release.PRERELEASE),
+				new Version("3.2.3.RELEASE", Version.Release.CURRENT),
+				new Version("3.1.4.RELEASE", Version.Release.SUPPORTED)
 		));
 	}
 

@@ -1,6 +1,6 @@
-package org.springframework.site.domain.documentation;
+package org.springframework.site.domain.projects;
 
-public class SupportedVersion implements Comparable<SupportedVersion> {
+public class Version implements Comparable<Version> {
 	public enum Release {
 		CURRENT("Current"), PRERELEASE("Pre-Release"), SUPPORTED("");
 
@@ -18,7 +18,7 @@ public class SupportedVersion implements Comparable<SupportedVersion> {
 	private String version;
 	private Release release;
 
-	public SupportedVersion(String version, Release release) {
+	public Version(String version, Release release) {
 		this.version = version;
 		this.release = release;
 	}
@@ -29,7 +29,7 @@ public class SupportedVersion implements Comparable<SupportedVersion> {
 
 	@Override
 	public String toString() {
-		return "SupportedVersion{" +
+		return "Version{" +
 				version + ", release: " + release.name() +
 				"}";
 	}
@@ -39,7 +39,7 @@ public class SupportedVersion implements Comparable<SupportedVersion> {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		SupportedVersion version1 = (SupportedVersion) o;
+		Version version1 = (Version) o;
 
 		if (release != version1.release) return false;
 		if (!version.equals(version1.version)) return false;
@@ -55,7 +55,7 @@ public class SupportedVersion implements Comparable<SupportedVersion> {
 	}
 
 	@Override
-	public int compareTo(SupportedVersion other) {
+	public int compareTo(Version other) {
 		return this.version.compareTo(other.version);
 	}
 

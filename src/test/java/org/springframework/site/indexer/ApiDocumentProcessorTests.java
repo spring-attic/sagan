@@ -4,8 +4,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.site.domain.documentation.Project;
-import org.springframework.site.domain.documentation.SupportedVersions;
+import org.springframework.site.domain.projects.Project;
+import org.springframework.site.domain.projects.SupportedVersions;
 import org.springframework.site.indexer.mapper.ApiDocumentMapper;
 import org.springframework.site.search.SearchEntry;
 

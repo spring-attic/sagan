@@ -3,9 +3,9 @@ package org.springframework.site.indexer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.documentation.DocumentationService;
-import org.springframework.site.domain.documentation.Project;
-import org.springframework.site.domain.documentation.SupportedVersion;
+import org.springframework.site.domain.projects.ProjectMetadataService;
+import org.springframework.site.domain.projects.Project;
+import org.springframework.site.domain.projects.Version;
 import org.springframework.site.indexer.crawler.CrawlerService;
 import org.springframework.site.indexer.mapper.ApiDocumentMapper;
 import org.springframework.site.indexer.mapper.ReferenceDocumentSearchEntryMapper;
@@ -19,12 +19,12 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 
 	private static final Log logger = LogFactory.getLog(ProjectDocumentationIndexer.class);
 
-	private final DocumentationService documentationService;
+	private final ProjectMetadataService documentationService;
 	private final CrawlerService crawlerService;
 	private final SearchService searchService;
 
 	@Autowired
-	public ProjectDocumentationIndexer(CrawlerService crawlerService, SearchService searchService, DocumentationService documentationService) {
+	public ProjectDocumentationIndexer(CrawlerService crawlerService, SearchService searchService, ProjectMetadataService documentationService) {
 		this.searchService = searchService;
 		this.documentationService = documentationService;
 		this.crawlerService = crawlerService;
@@ -38,7 +38,7 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 	@Override
 	public void indexItem(Project project) {
 		logger.info("Indexing project: " + project.getId());
-		for (SupportedVersion version : project.getSupportedVersions()) {
+		for (Version version : project.getSupportedVersions()) {
 			UriTemplate rawUrl = new UriTemplate(project.getApiAllClassesUrl());
 			String url = rawUrl.expand(version.getFullVersion()).toString();
 			crawlerService.crawl(url, 1, new CrawledWebDocumentProcessor(searchService, new ApiDocumentMapper(project, version)));

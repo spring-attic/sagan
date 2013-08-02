@@ -1,20 +1,20 @@
-package org.springframework.site.domain.documentation;
+package org.springframework.site.domain.projects;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.springframework.site.domain.documentation.SupportedVersion.Release.CURRENT;
-import static org.springframework.site.domain.documentation.SupportedVersion.Release.PRERELEASE;
-import static org.springframework.site.domain.documentation.SupportedVersion.Release.SUPPORTED;
+import static org.springframework.site.domain.projects.Version.Release.CURRENT;
+import static org.springframework.site.domain.projects.Version.Release.PRERELEASE;
+import static org.springframework.site.domain.projects.Version.Release.SUPPORTED;
 
-public class SupportedVersions implements Iterable<SupportedVersion> {
+public class SupportedVersions implements Iterable<Version> {
 
-	private List<SupportedVersion> versions;
+	private List<Version> versions;
 
 	public static SupportedVersions build(List<String> versionStrings) {
-		List<SupportedVersion> versions = new ArrayList<>();
+		List<Version> versions = new ArrayList<>();
 
 		Collections.sort(versionStrings);
 		Collections.reverse(versionStrings);
@@ -22,20 +22,20 @@ public class SupportedVersions implements Iterable<SupportedVersion> {
 		String currentVersion = null;
 		for (String versionString : versionStrings) {
 			boolean isPreRelease = versionString.matches("[0-9.]+(M|RC)\\d+");
-			SupportedVersion.Release release = SUPPORTED;
+			Version.Release release = SUPPORTED;
 			if (isPreRelease) {
 				release = PRERELEASE;
 			} else if(currentVersion == null) {
 				currentVersion = versionString;
 				release = CURRENT;
 			}
-			versions.add(new SupportedVersion(versionString, release));
+			versions.add(new Version(versionString, release));
 		}
 
 		return new SupportedVersions(versions);
 	}
 
-	public SupportedVersions(List<SupportedVersion> versions) {
+	public SupportedVersions(List<Version> versions) {
 		this.versions = versions;
 	}
 
@@ -44,12 +44,12 @@ public class SupportedVersions implements Iterable<SupportedVersion> {
 	}
 
 	@Override
-	public Iterator<SupportedVersion> iterator() {
+	public Iterator<Version> iterator() {
 		return versions.iterator();
 	}
 
-	public SupportedVersion getCurrent() {
-		for (SupportedVersion version : this) {
+	public Version getCurrent() {
+		for (Version version : this) {
 			if (version.isCurrent()) {
 				return version;
 			}

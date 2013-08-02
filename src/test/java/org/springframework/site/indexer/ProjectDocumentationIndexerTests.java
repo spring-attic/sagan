@@ -1,9 +1,9 @@
 package org.springframework.site.indexer;
 
 import org.junit.Test;
-import org.springframework.site.domain.documentation.DocumentationService;
-import org.springframework.site.domain.documentation.Project;
-import org.springframework.site.domain.documentation.SupportedVersions;
+import org.springframework.site.domain.projects.ProjectMetadataService;
+import org.springframework.site.domain.projects.Project;
+import org.springframework.site.domain.projects.SupportedVersions;
 import org.springframework.site.indexer.crawler.CrawlerService;
 import org.springframework.site.search.SearchService;
 
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 public class ProjectDocumentationIndexerTests {
 
 	private CrawlerService crawlerService = mock(CrawlerService.class);
-	private DocumentationService documentationService = mock(DocumentationService.class);
+	private ProjectMetadataService documentationService = mock(ProjectMetadataService.class);
 	private final SearchService searchService = mock(SearchService.class);
 	private ProjectDocumentationIndexer service = new ProjectDocumentationIndexer(crawlerService, searchService, documentationService);
 

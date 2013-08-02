@@ -1,4 +1,4 @@
-package org.springframework.site.domain.documentation;
+package org.springframework.site.domain.projects;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -18,12 +18,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
 
-public class DocumentationServiceTests {
+public class ProjectMetadataServiceTests {
 
 	@Test
 	public void bindingToYaml() throws IOException {
 		InputStream yaml = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
-		DocumentationService documentationService = new DocumentationService(new DocumentationYamlParser().parse(yaml));
+		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 
 		assertEquals(3, documentationService.getProject("spring-framework")
 				.getSupportedVersions().size());
@@ -32,7 +32,7 @@ public class DocumentationServiceTests {
 	@Test
 	public void exposesProjectsForACategory() throws IOException {
 		InputStream yaml = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
-		DocumentationService documentationService = new DocumentationService(new DocumentationYamlParser().parse(yaml));
+		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 
 		List<Project> activeProjects = documentationService.getProjectsForCategory("active");
 		assertThat(activeProjects.size(), is(1));
@@ -42,7 +42,7 @@ public class DocumentationServiceTests {
 	@Test
 	public void bindingToFullYaml() throws IOException {
 		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
-		DocumentationService documentationService = new DocumentationService(new DocumentationYamlParser().parse(yaml));
+		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 
 		assertEquals(3, documentationService.getProject("spring-framework")
 				.getSupportedVersions().size());
@@ -64,11 +64,11 @@ public class DocumentationServiceTests {
 			}
 		});
 		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
-		DocumentationService documentationService = new DocumentationService(new DocumentationYamlParser().parse(yaml));
+		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 
 		StringBuilder builder = new StringBuilder();
 		for (Project project : documentationService.getProjects()) {
-			for (ProjectDocumentVersion version : project
+			for (ProjectDocumentation version : project
 					.getSupportedApiDocsDocumentVersions()) {
 				String url = version.getUrl();
 				ResponseEntity<String> entity = restTemplate.getForEntity(url,
@@ -78,7 +78,7 @@ public class DocumentationServiceTests {
 							+ version.getVersion() + ": " + url + "\n");
 				}
 			}
-			for (ProjectDocumentVersion version : project
+			for (ProjectDocumentation version : project
 					.getSupportedReferenceDocumentVersions()) {
 				String url = version.getUrl();
 				ResponseEntity<String> entity = restTemplate.getForEntity(url,

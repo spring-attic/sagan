@@ -1,11 +1,11 @@
-package org.springframework.site.domain.documentation;
+package org.springframework.site.domain.projects;
 
-public class ProjectDocumentVersion {
+public class ProjectDocumentation {
 
     private String url;
-    private SupportedVersion version;
+    private Version version;
 
-    public ProjectDocumentVersion(String url, SupportedVersion version) {
+    public ProjectDocumentation(String url, Version version) {
         this.url = url;
         this.version = version;
     }

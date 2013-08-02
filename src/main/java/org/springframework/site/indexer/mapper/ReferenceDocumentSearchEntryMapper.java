@@ -1,8 +1,8 @@
 package org.springframework.site.indexer.mapper;
 
 import org.jsoup.nodes.Document;
-import org.springframework.site.domain.documentation.Project;
-import org.springframework.site.domain.documentation.SupportedVersion;
+import org.springframework.site.domain.projects.Project;
+import org.springframework.site.domain.projects.Version;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchEntryMapper;
 
@@ -11,9 +11,9 @@ import java.util.Date;
 public class ReferenceDocumentSearchEntryMapper implements SearchEntryMapper<Document> {
 
 	private final Project project;
-	private final SupportedVersion version;
+	private final Version version;
 
-	public ReferenceDocumentSearchEntryMapper(Project project, SupportedVersion version) {
+	public ReferenceDocumentSearchEntryMapper(Project project, Version version) {
 		this.project = project;
 		this.version = version;
 	}

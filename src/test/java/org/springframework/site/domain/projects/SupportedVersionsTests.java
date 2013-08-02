@@ -1,4 +1,4 @@
-package org.springframework.site.domain.documentation;
+package org.springframework.site.domain.projects;
 
 import org.junit.Test;
 
@@ -20,10 +20,10 @@ public class SupportedVersionsTests {
 						"3.1.5.RELEASE"
 				));
 		assertThat(supportedVersions, contains(
-				new SupportedVersion("4.0.0.RC1", SupportedVersion.Release.PRERELEASE),
-				new SupportedVersion("4.0.0.M1", SupportedVersion.Release.PRERELEASE),
-				new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Release.CURRENT),
-				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Release.SUPPORTED)
+				new Version("4.0.0.RC1", Version.Release.PRERELEASE),
+				new Version("4.0.0.M1", Version.Release.PRERELEASE),
+				new Version("3.2.3.RELEASE", Version.Release.CURRENT),
+				new Version("3.1.5.RELEASE", Version.Release.SUPPORTED)
 		));
 	}
 
@@ -37,19 +37,19 @@ public class SupportedVersionsTests {
 						"4.0.0.RC1"
 				));
 		assertThat(supportedVersions, contains(
-				new SupportedVersion("4.0.0.RC1", SupportedVersion.Release.PRERELEASE),
-				new SupportedVersion("4.0.0.M1", SupportedVersion.Release.PRERELEASE),
-				new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Release.CURRENT),
-				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Release.SUPPORTED)
+				new Version("4.0.0.RC1", Version.Release.PRERELEASE),
+				new Version("4.0.0.M1", Version.Release.PRERELEASE),
+				new Version("3.2.3.RELEASE", Version.Release.CURRENT),
+				new Version("3.1.5.RELEASE", Version.Release.SUPPORTED)
 		));
 	}
 
 
 	@Test
 	public void getCurrent() {
-		SupportedVersion currentVersion = new SupportedVersion("3.2.3.RELEASE", SupportedVersion.Release.CURRENT);
+		Version currentVersion = new Version("3.2.3.RELEASE", Version.Release.CURRENT);
 		SupportedVersions supportedVersions = new SupportedVersions(Arrays.asList(
-				new SupportedVersion("3.1.5.RELEASE", SupportedVersion.Release.SUPPORTED),
+				new Version("3.1.5.RELEASE", Version.Release.SUPPORTED),
 				currentVersion
 		));
 		assertThat(supportedVersions.getCurrent(), equalTo(currentVersion));

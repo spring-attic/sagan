@@ -15,11 +15,6 @@
  */
 package org.springframework.site.web.configuration;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.sql.DataSource;
-
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
@@ -33,12 +28,16 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.site.domain.documentation.DocumentationService;
-import org.springframework.site.domain.documentation.DocumentationYamlParser;
+import org.springframework.site.domain.projects.ProjectMetadataService;
+import org.springframework.site.domain.projects.ProjectMetadataYamlParser;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.web.SiteUrl;
 import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
 import org.springframework.web.client.RestTemplate;
+
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.InputStream;
 
 @EnableAutoConfiguration
 @Configuration
@@ -92,10 +91,10 @@ public class ApplicationConfiguration {
 	}
 
 	@Bean
-	public DocumentationService documentationService() throws IOException {
+	public ProjectMetadataService projectMetadataService() throws IOException {
 		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass())
 				.getInputStream();
-		return new DocumentationService(new DocumentationYamlParser().parse(yaml));
+		return new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 	}
 
 }
