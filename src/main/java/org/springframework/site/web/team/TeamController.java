@@ -6,11 +6,11 @@ import org.springframework.site.domain.blog.BlogService;
 import org.springframework.site.domain.blog.Post;
 import org.springframework.site.domain.team.MemberProfile;
 import org.springframework.site.domain.team.TeamLocation;
-import org.springframework.site.domain.team.TeamRepository;
+import org.springframework.site.domain.team.TeamService;
+import org.springframework.site.web.PageableFactory;
 import org.springframework.site.web.blog.EntityNotFoundException;
 import org.springframework.site.web.blog.PostView;
 import org.springframework.site.web.blog.PostViewFactory;
-import org.springframework.site.web.PageableFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,22 +27,22 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @RequestMapping("/about/team")
 public class TeamController {
 
-	private TeamRepository teamRepository;
-	private BlogService blogService;
-	private PostViewFactory postViewFactory;
+	private final TeamService teamService;
+	private final BlogService blogService;
+	private final PostViewFactory postViewFactory;
 
 	@Autowired
-	public TeamController(TeamRepository teamRepository,
+	public TeamController(TeamService teamService,
 						  BlogService blogService,
 						  PostViewFactory postViewFactory) {
-		this.teamRepository = teamRepository;
+		this.teamService = teamService;
 		this.blogService = blogService;
 		this.postViewFactory = postViewFactory;
 	}
 
 	@RequestMapping(value = "", method = {GET, HEAD})
 	public String showTeam(Model model) throws IOException {
-		List<MemberProfile> profiles = teamRepository.findByHidden(false);
+		List<MemberProfile> profiles = teamService.fetchVisibleMembers();
 		model.addAttribute("profiles", profiles);
 		List<TeamLocation> teamLocations = new ArrayList<>();
 		for (MemberProfile profile : profiles) {
@@ -57,7 +57,7 @@ public class TeamController {
 
 	@RequestMapping(value = "/{memberId:\\w+}", method = {GET, HEAD})
 	public String showProfile(@PathVariable String memberId, Model model){
-		MemberProfile profile = teamRepository.findByMemberId(memberId);
+		MemberProfile profile = teamService.fetchMemberProfile(memberId);
 		if (profile == null) {
 			throw new EntityNotFoundException("Profile not found with Id=" + memberId);
 		}

@@ -13,15 +13,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
+@RequestMapping("/migration")
 public class MigrationController {
 
 	private SiteUrl siteUrl;
@@ -38,7 +42,7 @@ public class MigrationController {
 		this.postViewFactory = postViewFactory;
 	}
 
-	@RequestMapping(value = "/migration/profile", method = POST)
+	@RequestMapping(value = "/profile", method = POST)
 	public void migrateTeamMember(HttpServletResponse response, MemberProfile profile) {
 		MemberProfile existingProfile = teamService.fetchMemberProfile(profile.getMemberId());
 		response.setContentLength(0);
@@ -51,7 +55,7 @@ public class MigrationController {
 		}
 	}
 
-	@RequestMapping(value = "/migration/blogpost", method = POST)
+	@RequestMapping(value = "/blogpost", method = POST)
 	public void migrateBlogPost(HttpServletResponse response, @Valid PostForm postForm, BindingResult result) throws IOException {
 		if (result.hasErrors()) {
 			response.setStatus(400);
@@ -72,6 +76,16 @@ public class MigrationController {
 			PostView postView = postViewFactory.createPostView(post);
 			response.setHeader("Location", siteUrl.getAbsoluteUrl(postView.getPath()));
 		}
+	}
+
+	@RequestMapping(value = "/team_members", method = GET)
+	public @ResponseBody Map<String, String> migrateBlogPost() throws IOException {
+		Map<String, String> authors = new HashMap<>();
+		for (MemberProfile profile : teamService.fetchAllProfiles()) {
+			authors.put(profile.getFullName(), profile.getMemberId());
+		}
+		authors.put("Some Guy", "someguy");
+		return authors;
 	}
 
 }

@@ -2,23 +2,40 @@ require 'nokogiri'
 
 module Drupal
   class BlogImporter
+
+    CATEGORIES = {
+        "blog-news" => "NEWS_AND_EVENTS",
+        "blog-engineering" => "ENGINEERING",
+        "blog-releases" => "RELEASES"
+    }
+
     def initialize(xml_filename, siteapi, authors)
       @filename = xml_filename
       @siteapi = siteapi
       @authors = authors
+      @error_count = 0
     end
 
     def import(io)
 
       post_elements.each_with_index do |element, i|
-        @siteapi.save_blog_post(post_data(element))
+        puts "Importing post #{i}"
+        if element.xpath("body").text.nil? || element.xpath("body").text == ""
+          puts "Skipping empty post"
+          next
+        end
+        response = @siteapi.save_blog_post(post_data(element))
+        if response.code >= 400
+          puts "Error importing blog post: #{response.body}"
+          p post_data(element)
+        end
       end
 
     end
 
     def post_data(element)
-      author = @authors[element.xpath("author").text] || 'fixme'
-      category = element.xpath("category").text.gsub("blog-", "").upcase
+      author = extract_author(element)
+      category = CATEGORIES[element.xpath("category").text]
       publish_date = Time.at(element.xpath("createdTimestamp").text.to_i).utc.strftime("%Y-%m-%d %H:%M")
       {
           title: element.xpath("title").text,
@@ -28,6 +45,25 @@ module Drupal
           createdAt: publish_date,
           authorMemberId: author
       }
+    end
+
+    def extract_author(element)
+      author_name = element.xpath("author").text
+      author_id = @authors[author_name]
+      if author_id.nil? && @authors.values.include?(author_name)
+        author_id = author_name
+      end
+
+      if author_id == nil
+        author_id = author_name.gsub(" ", "_").downcase
+        data = {
+            memberId: author_id,
+            name: author_name
+        }
+        @siteapi.save_member_profile data
+        @authors[author_name] = author_id
+      end
+      author_id
     end
 
     def post_elements

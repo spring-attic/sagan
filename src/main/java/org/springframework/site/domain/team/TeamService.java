@@ -9,6 +9,8 @@ import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 @Service
 public class TeamService {
 	private final TeamRepository teamRepository;
@@ -60,5 +62,13 @@ public class TeamService {
 
 	public void saveMemberProfile(MemberProfile profile) {
 		teamRepository.save(profile);
+	}
+
+	public List<MemberProfile> fetchAllProfiles() {
+		return teamRepository.findAll();
+	}
+
+	public List<MemberProfile> fetchVisibleMembers() {
+		return teamRepository.findByHidden(false);
 	}
 }

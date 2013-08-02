@@ -1,4 +1,3 @@
-require 'pg'
 require 'nokogiri'
 require './lib/site_api'
 require 'pry'

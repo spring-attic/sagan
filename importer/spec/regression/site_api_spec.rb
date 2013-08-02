@@ -25,4 +25,11 @@ describe SiteApi do
     response.code.should satisfy { |v| v == 200 || v == 201 }
   end
 
+  it "fetches team members" do
+    api = SiteApi.new('localhost:8080')
+    response = api.fetch_team_members
+    response.code.should == 200
+    puts response.body
+  end
+
 end

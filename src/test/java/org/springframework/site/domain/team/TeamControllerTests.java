@@ -21,26 +21,27 @@ import static org.mockito.BDDMockito.given;
 @RunWith(MockitoJUnitRunner.class)
 public class TeamControllerTests {
 
-	TeamController teamController;
-
-	@Mock
-	TeamRepository teamRepository;
 
 	@Mock
 	BlogService blogService;
 
+	@Mock
+	private TeamService teamService;
+
 	private ExtendedModelMap model = new ExtendedModelMap();
+
+	TeamController teamController;
 
 	@Before
 	public void setUp() throws Exception {
-		this.teamController = new TeamController(this.teamRepository, this.blogService,
+		this.teamController = new TeamController(this.teamService, this.blogService,
 				new PostViewFactory(new DateService()));
 		List<MemberProfile> members = new ArrayList<>();
 
 		members.add(MemberProfileBuilder.profile().name("Norman").geoLocation(10, 5).memberId("normy").build());
 		members.add(MemberProfileBuilder.profile().name("Patrick").geoLocation(-5, 15).memberId("pat").build());
 
-		given(this.teamRepository.findByHidden(false)).willReturn(members);
+		given(this.teamService.fetchVisibleMembers()).willReturn(members);
 	}
 
 	@Test

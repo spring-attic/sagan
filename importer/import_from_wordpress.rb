@@ -9,7 +9,7 @@ site = SiteApi.new "localhost:8080"
 import_filename = ARGV[0]
 
 if import_filename.nil?
-  puts "Usage: 'ruby import.rb import_filename.xml'"
+  puts "Usage: 'ruby import_from_wordpress.rb import_filename.xml'"
   exit(1)
 end
 
