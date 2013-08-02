@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'yaml'
 
 module Drupal
   class BlogImporter
@@ -17,6 +18,7 @@ module Drupal
     end
 
     def import(io)
+      mappings = []
 
       post_elements.each_with_index do |element, i|
         puts "Importing post #{i}"
@@ -25,12 +27,21 @@ module Drupal
           next
         end
         response = @siteapi.save_blog_post(post_data(element))
+
         if response.code >= 400
           puts "Error importing blog post: #{response.body}"
           p post_data(element)
         end
+
+        mapping = {
+            "old_url" => element.xpath('link').text,
+            "new_url" => response.headers["Location"]
+        }
+        mappings << mapping
+
       end
 
+      io.puts mappings.to_yaml
     end
 
     def post_data(element)

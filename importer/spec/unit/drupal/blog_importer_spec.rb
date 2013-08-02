@@ -1,5 +1,6 @@
 require "drupal/blog_importer.rb"
 require "rspec"
+require "yaml"
 
 describe Drupal::BlogImporter do
 
@@ -28,8 +29,20 @@ describe Drupal::BlogImporter do
           createdAt: '2013-04-30 21:30',
           authorMemberId: 'jlong',
       }
-      siteapi.should_receive('save_blog_post').with(expected_post)
-      subject.import(StringIO.new)
+
+
+      headers1 = {"Location" => "http://example.com/blog/1-a-post"}
+      siteapi.should_receive('save_blog_post').with(expected_post).and_return(double(:code => 200, :headers => headers1))
+
+      mappings = StringIO.new
+      subject.import(mappings)
+      expected_mappings = [
+          {
+              "old_url" => "http://www.springsource.org/node/22600",
+              "new_url" => "http://example.com/blog/1-a-post"
+          }
+      ]
+      mappings.string.should == expected_mappings.to_yaml
     end
 
   end
