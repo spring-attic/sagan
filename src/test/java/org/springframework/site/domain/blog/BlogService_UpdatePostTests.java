@@ -20,7 +20,9 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
@@ -35,7 +37,7 @@ public class BlogService_UpdatePostTests {
 	private Post post;
 	private String title = "Title";
 	private String content = "Rendered HTML\n\nfrom Markdown";
-	private String firstParagraph = "Rendered HTML";
+	private String summary = "Rendered HTML";
 	private PostCategory category = PostCategory.ENGINEERING;
 	private boolean broadcast = true;
 	private boolean draft = false;
@@ -58,21 +60,27 @@ public class BlogService_UpdatePostTests {
 	@Mock
 	private BlogPostContentRenderer postContentRenderer = mock(BlogPostContentRenderer.class);
 
+	@Mock
+	private SummaryExtractor summaryExtractor;
+
 	@Rule
 	public ExpectedException expected = ExpectedException.none();
 
 	private PostForm postForm;
 	private String ORIGINAL_AUTHOR = "original author";
 
+
 	@Before
 	public void setup() {
 		given(this.dateService.now()).willReturn(this.now);
 
+		given(summaryExtractor.extract(anyString(), anyInt())).willReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
+
 		this.service = new BlogService(this.postRepository, postContentRenderer,
-				this.dateService, this.teamRepository, this.searchService);
+				this.dateService, this.teamRepository, this.searchService, summaryExtractor);
 		given(postContentRenderer.render(this.content)).willReturn(
 				RENDERED_HTML_FROM_MARKDOWN);
-		given(postContentRenderer.render(this.firstParagraph)).willReturn(
+		given(postContentRenderer.render(this.summary)).willReturn(
 				RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 
 		this.post = PostBuilder.post().id(123L).author("author_id", this.ORIGINAL_AUTHOR)

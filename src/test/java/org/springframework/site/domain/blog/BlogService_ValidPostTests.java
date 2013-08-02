@@ -31,6 +31,8 @@ import static org.mockito.BDDMockito.reset;
 import static org.mockito.BDDMockito.verify;
 import static org.mockito.BDDMockito.verifyZeroInteractions;
 import static org.mockito.BDDMockito.willThrow;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_ValidPostTests {
@@ -66,6 +68,9 @@ public class BlogService_ValidPostTests {
 	@Mock
 	private SearchService searchService;
 
+	@Mock
+	private SummaryExtractor summaryExtractor;
+
 	@Rule
 	public ExpectedException expected = ExpectedException.none();
 	private PostForm postForm;
@@ -87,8 +92,9 @@ public class BlogService_ValidPostTests {
 				return post;
 			}
 		});
+		given(summaryExtractor.extract(anyString(), anyInt())).willReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 
-		service = new BlogService(postRepository, new BlogPostContentRenderer(markdownService), dateService, teamRepository, searchService);
+		service = new BlogService(postRepository, new BlogPostContentRenderer(markdownService), dateService, teamRepository, searchService, summaryExtractor);
 		given(markdownService.renderToHtml(content)).willReturn(RENDERED_HTML_FROM_MARKDOWN);
 		given(markdownService.renderToHtml(firstParagraph)).willReturn(RENDERED_SUMMARY_HTML_FROM_MARKDOWN);
 		postForm = new PostForm();

@@ -26,19 +26,20 @@ public class BlogService {
 
 	private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
-	private FirstParagraphExtractor firstParagraphExtractor = new FirstParagraphExtractor();
+	private SummaryExtractor summaryExtractor;
 
 	private static final Log logger = LogFactory.getLog(BlogService.class);
 
 	@Autowired
 	public BlogService(PostRepository repository, BlogPostContentRenderer postContentRenderer,
-			DateService dateService, TeamRepository teamRepository,
-			SearchService searchService) {
+					   DateService dateService, TeamRepository teamRepository,
+					   SearchService searchService, SummaryExtractor summaryExtractor) {
 		this.repository = repository;
 		this.postContentRenderer = postContentRenderer;
 		this.dateService = dateService;
 		this.teamRepository = teamRepository;
 		this.searchService = searchService;
+		this.summaryExtractor = summaryExtractor;
 	}
 
 	// Query methods
@@ -129,8 +130,8 @@ public class BlogService {
 
 	private void setPostProperties(PostForm postForm, String content, Post post) {
 		post.setRenderedContent(this.postContentRenderer.render(content));
-		String firstParagraph = firstParagraphExtractor.extract(content, 500);
-		post.setRenderedSummary(postContentRenderer.render(firstParagraph));
+		String summary = summaryExtractor.extract(post.getRenderedContent(), 500);
+		post.setRenderedSummary(summary);
 		post.setBroadcast(postForm.isBroadcast());
 		post.setDraft(postForm.isDraft());
 		post.setPublishAt(publishDate(postForm));
@@ -184,6 +185,15 @@ public class BlogService {
 		List<Post> posts = repository.findByDraftFalseAndPublishAtBefore(dateService.now());
 		for (Post post : posts) {
 			saveToIndex(post);
+		}
+	}
+
+	public void resummarizeAllPosts() {
+		List<Post> posts = repository.findAll();
+		for (Post post : posts) {
+			String summary = summaryExtractor.extract(post.getRenderedContent(), 500);
+			post.setRenderedSummary(summary);
+			this.repository.save(post);
 		}
 	}
 

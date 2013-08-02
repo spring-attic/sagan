@@ -17,6 +17,7 @@ import org.springframework.site.domain.blog.Post;
 import org.springframework.site.domain.blog.PostBuilder;
 import org.springframework.site.domain.blog.PostCategory;
 import org.springframework.site.domain.blog.PostRepository;
+import org.springframework.site.domain.blog.SummaryExtractor;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.domain.services.MarkdownService;
 import org.springframework.site.domain.team.MemberProfile;
@@ -69,7 +70,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 		initMocks(this);
 		given(dateService.now()).willReturn(new Date());
 
-		service = new BlogService(postRepository, new BlogPostContentRenderer(markdownService), dateService, teamRepository, searchService);
+		service = new BlogService(postRepository, new BlogPostContentRenderer(markdownService), dateService, teamRepository, searchService, new SummaryExtractor());
 		assertThat(postRepository.findAll().size(), equalTo(0));
 	}
 

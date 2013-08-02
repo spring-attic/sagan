@@ -15,6 +15,9 @@
 	<form th:action="@{'/admin/blog/reindex'}" action="/admin/blog/reindex" method="post" class='form-inline' style="display: inline">
         <button class="btn btn-primary">Reindex all published posts</button>
     </form>
+    <form th:action="@{'/admin/blog/resummarize'}" action="/admin/blog/resummarize" method="post" class='form-inline' style="display: inline">
+        <button class="btn btn-primary">Resummarize all posts</button>
+    </form>
 </div>
 
 <div layout:fragment="content" class="container">
