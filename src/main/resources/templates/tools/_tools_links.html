@@ -5,31 +5,25 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<body>
 		<div layout:fragment="tools-links">
-			<div class="tool-versions--wrapper">
-				<div class="tool-versions--icon--container">
-					<div class="tool-versions--icon sts-icon"></div>
-					<h2 th:text="'STS '+ ${version}" class="tool-versions--version">1.2.3.RELEASE</h2>
-				</div>
-				<div class="tool-versions--container">
-					<div class="platform js-item-dropdown-widget--wrapper" th:each='platform : ${platforms}'>
-						<div th:class="${platform.name.toLowerCase()}+'-icon platform--icon'"></div>
-						<h3 th:text="${platform.name}">Mac</h3>
-						<div class="item-dropdown-widget js-item-dropdown--wrapper" th:each="eclipseVersion : ${platform.eclipseVersions}" >
-							<div class="item-dropdown--link js-item--open-dropdown">
-								<i class="item-dropdown--icon icon-reorder pull-right"></i>
-								<p class="item-dropdown--title" th:text="'Based on Eclipse '+${eclipseVersion.name}"></p>
-							</div>
-							<div class="item--dropdown platform-version--dropdown">
-								<div class="item--body">
-									<div class='item--half-column' th:each='architecture : ${eclipseVersion.architectures}'>
-										<p class="item--body-title" th:text='${architecture.displayName}'>Architecture name</p>
-										<div>
-											<div class='item--body--version' th:each='downloadLink : ${architecture.downloadLinks}'>
-												<a class="tool-download-link" th:href='${downloadLink.url}'> 
-													<p class="file-type" th:text='${downloadLink.fileType}'>A file type</p>
-		                      <span class="file-size" th:text="${downloadLink.fileSize}">2 MB</span>
-												</a>
-											</div>
+			<div class="tool-versions--container">
+				<div class="platform js-item-dropdown-widget--wrapper" th:each='platform : ${platforms}'>
+					<div th:class="${platform.name.toLowerCase()}+'-icon platform--icon'"></div>
+					<h3 th:text="${platform.name}">Mac</h3>
+					<div class="item-dropdown-widget js-item-dropdown--wrapper" th:each="eclipseVersion : ${platform.eclipseVersions}" >
+						<div class="item-dropdown--link js-item--open-dropdown">
+							<i class="item-dropdown--icon icon-reorder pull-right"></i>
+							<p class="item-dropdown--title" th:text="'Based on Eclipse '+${eclipseVersion.name}"></p>
+						</div>
+						<div class="item--dropdown platform-version--dropdown">
+							<div class="item--body">
+								<div class='item--half-column' th:each='architecture : ${eclipseVersion.architectures}'>
+									<p class="item--body-title" th:text='${architecture.displayName}'>Architecture name</p>
+									<div>
+										<div class='item--body--version' th:each='downloadLink : ${architecture.downloadLinks}'>
+											<a class="tool-download-link" th:href='${downloadLink.url}'> 
+												<p class="file-type" th:text='${downloadLink.fileType}'>A file type</p>
+	                      <span class="file-size" th:text="${downloadLink.fileSize}">2 MB</span>
+											</a>
 										</div>
 									</div>
 								</div>
@@ -38,24 +32,6 @@
 					</div>
 				</div>
 			</div>
-			<h2>Update Site Archives</h2>
-			<p>Curabitur blandit tempus porttitor. Donec ullamcorper nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue. </p>
-			<table class="table table-striped tool-archive--table">
-				<thead>
-					<tr>
-						<th>Release</th>
-						<th>Archives</th>
-						<th>File Size</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="archive : ${updateSiteArchives}">
-						<td th:text="${archive.version}">e.43</td>
-						<td><a th:href="${archive.url}" th:text="${archive.fileName}">springsource-tool-suite-3.2.0.RELEASE-e4.3-updatesite.zip</a></td>
-						<td th:text="${archive.fileSize}">185MB</td>
-					</tr>
-				</tbody>
-</table>
-</div>
-</body>
+		</div>
+	</body>
 </html>

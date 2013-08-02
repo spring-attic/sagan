@@ -212,6 +212,10 @@
   width: 124px;
   background-position: -194px 0;
 }
+.tool-versions--wrapper .tool-versions--icon--container .tool-versions--icon.ggts-icon {
+  width: 96px;
+  background-position: -204px -140px;
+}
 .tool-versions--wrapper .tool-versions--icon--container .tool-versions--version {
   color: #f1f1f1;
   font-weight: 400;
