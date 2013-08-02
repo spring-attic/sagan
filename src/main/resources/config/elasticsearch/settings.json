@@ -12,5 +12,6 @@
     "index.analysis.analyzer.partial_word.filter.0": "standard",
     "index.analysis.analyzer.partial_word.filter.1": "lowercase",
     "index.analysis.analyzer.partial_word.filter.2": "asciifolding",
-    "index.analysis.analyzer.partial_word.filter.3": "porterStem"
+    "index.analysis.analyzer.partial_word.filter.3": "porterStem",
+    "index.analysis.analyzer.partial_word.filter.4": "stop"
 }
