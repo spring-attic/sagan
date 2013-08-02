@@ -20,10 +20,12 @@ public class ApiDocumentProcessorTests {
 	private SupportedVersions versions = SupportedVersions.build(Arrays.asList("3.2.3.RELEASE", "3.1.4.RELEASE", "4.0.0.M1"));
 
 	private Project project = new Project("spring", "Spring",  //
-			"https://github.com/SpringSource/spring-framework", //
+			//
 			"http://static.springsource.org/spring/docs/{version}/reference/", //
 			"http://static.springsource.org/spring/docs/{version}/api/", //
-			versions);
+			versions,
+			"http://www.example.com/repo/spring-framework",
+			"http://www.example.com/spring-framework");
 
 	private ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, versions.getCurrent());
 

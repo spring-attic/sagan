@@ -1,3 +1,6 @@
+githubOrgBaseUrl: http://github.com/SpringSource
+ghPagesBaseUrl: http://projects.springframework.io
+docsBaseUrl: http://static.springsource.org
 projects:
   active:
     - id: spring-framework
@@ -6,737 +9,632 @@ projects:
         - 3.1.4.RELEASE
         - 3.2.3.RELEASE
         - 4.0.0.M1
-      githubUrl: https://github.com/SpringSource/spring-framework
-      referenceUrl: http://static.springsource.org/spring/docs/{version}/spring-framework-reference/html/
-      apiUrl: http://static.springsource.org/spring/docs/{version}/javadoc-api/
+      refDocPath: /spring/docs/{version}/spring-framework-reference/html/
+      apiDocPath: /spring/docs/{version}/javadoc-api/
     - id: spring-security
-      supportedVersions: [3.1.4.RELEASE]
+      supportedVersions:
+      - 3.1.4.RELEASE
       name: Spring Security
-      githubUrl: https://github.com/SpringSource/spring-security
-      referenceUrl: http://static.springsource.org/spring-security/site/docs/{version}/reference/springsecurity.html
-      apiUrl: http://static.springsource.org/spring-security/site/docs/{version}/apidocs/
+      refDocPath: /spring-security/site/docs/{version}/reference/springsecurity.html
+      apiDocPath: /spring-security/site/docs/{version}/apidocs/
     - id: spring-mobile
-      supportedVersions: [1.0.1.RELEASE]
+      supportedVersions:
+      - 1.0.1.RELEASE
       name: Spring Mobile
-      githubUrl: https://github.com/SpringSource/spring-mobile
-      referenceUrl: http://static.springsource.org/spring-mobile/docs/{version}/reference/htmlsingle/
-      apiUrl: http://static.springsource.org/spring-mobile/docs/{version}/api/
+      refDocPath: /spring-mobile/docs/{version}/reference/htmlsingle/
+      apiDocPath: /spring-mobile/docs/{version}/api/
     - id: spring-ws
-      supportedVersions: [2.0]
+      supportedVersions:
+      - 2.0
       name: Spring Web Services
-      githubUrl: https://github.com/SpringSource/spring-ws
-      referenceUrl: http://static.springsource.org/spring-ws/sites/{version}/reference/html/index.html
-      apiUrl: http://static.springsource.org/spring-ws/sites/{version}/apidocs/
+      refDocPath: /spring-ws/sites/{version}/reference/html/index.html
+      apiDocPath: /spring-ws/sites/{version}/apidocs/
     - id: spring-data-jpa
-      supportedVersions: [1.3.x, 1.4.x]
+      supportedVersions:
+      - 1.3.x
+      - 1.4.x
       name: Spring Data JPA
-      githubUrl: https://github.com/SpringSource/spring-data-jpa
-      referenceUrl: http://static.springsource.org/spring-data/jpa/docs/{version}/reference/html/index.html
-      apiUrl: http://static.springsource.org/spring-data/jpa/docs/{version}/api/
+      refDocPath: /spring-data/jpa/docs/{version}/reference/html/index.html
+      apiDocPath: /spring-data/jpa/docs/{version}/api/
     - id: spring-amqp
-      githubUrl: https://github.com/SpringSource/spring-amqp
       name: Spring AMQP
       supportedVersions:
       - 1.1.x
       - 1.2.x
-      referenceUrl: http://static.springsource.org/spring-amqp/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-amqp/docs/{version}/api/
+      refDocPath: /spring-amqp/docs/{version}/reference/
+      apiDocPath: /spring-amqp/docs/{version}/api/
     - id: spring-android
-      githubUrl: https://github.com/SpringSource/spring-android
       name: Spring android
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-android/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-android/docs/{version}/api/
+      refDocPath: /spring-android/docs/{version}/reference/
+      apiDocPath: /spring-android/docs/{version}/api/
     - id: spring-batch
-      githubUrl: https://github.com/SpringSource/spring-batch
       name: Spring batch
       supportedVersions:
       - 2.1.x
       - trunk
-      referenceUrl: http://static.springsource.org/spring-batch/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-batch/{version}/apidocs/
+      refDocPath: /spring-batch/{version}/reference/
+      apiDocPath: /spring-batch/{version}/apidocs/
     - id: spring-batch-admin
-      githubUrl: https://github.com/SpringSource/spring-batch-admin
       name: Spring batch admin
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-batch-admin/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-batch-admin/docs/{version}/api/
+      refDocPath: /spring-batch-admin/docs/{version}/reference/
+      apiDocPath: /spring-batch-admin/docs/{version}/api/
     - id: spring-data-cassandra
-      githubUrl: https://github.com/SpringSource/spring-data-cassandra
       name: Spring data cassandra
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/cassandra/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/cassandra/docs/{version}/api/
+      refDocPath: /spring-data/cassandra/docs/{version}/reference/
+      apiDocPath: /spring-data/cassandra/docs/{version}/api/
     - id: spring-data-commons
-      githubUrl: https://github.com/SpringSource/spring-data-commons
       name: Spring data commons
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/commons/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/commons/docs/{version}/api/
+      refDocPath: /spring-data/commons/docs/{version}/reference/
+      apiDocPath: /spring-data/commons/docs/{version}/api/
     - id: spring-data-couchdb
-      githubUrl: https://github.com/SpringSource/spring-data-couchdb
       name: Spring data couchdb
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/couchdb/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/couchdb/docs/{version}/api/
+      refDocPath: /spring-data/couchdb/docs/{version}/reference/
+      apiDocPath: /spring-data/couchdb/docs/{version}/api/
     - id: spring-data-envers
-      githubUrl: https://github.com/SpringSource/spring-data-envers
       name: Spring data envers
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/envers/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/envers/docs/{version}/api/
+      refDocPath: /spring-data/envers/docs/{version}/reference/
+      apiDocPath: /spring-data/envers/docs/{version}/api/
     - id: spring-data-graph
-      githubUrl: https://github.com/SpringSource/spring-data-graph
       name: Spring data graph
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/data-graph/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/data-graph/docs/{version}/api/
+      refDocPath: /spring-data/data-graph/docs/{version}/reference/
+      apiDocPath: /spring-data/data-graph/docs/{version}/api/
     - id: spring-data-jdbc-ext
-      githubUrl: https://github.com/SpringSource/spring-data-jdbc-ext
       name: Spring data jdbc ext
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/jdbc-ext/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/jdbc-ext/docs/{version}/api/
+      refDocPath: /spring-data/jdbc-ext/docs/{version}/reference/
+      apiDocPath: /spring-data/jdbc-ext/docs/{version}/api/
     - id: spring-data-keyvalue
-      githubUrl: https://github.com/SpringSource/spring-data-keyvalue
       name: Spring data keyvalue
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/keyvalue/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/keyvalue/docs/{version}/api/
+      refDocPath: /spring-data/keyvalue/docs/{version}/reference/
+      apiDocPath: /spring-data/keyvalue/docs/{version}/api/
     - id: spring-data-keyvalue-examples
-      githubUrl: https://github.com/SpringSource/spring-data-keyvalue-examples
       name: Spring data keyvalue examples
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/keyvalue-examples/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/keyvalue-examples/docs/{version}/api/
+      refDocPath: /spring-data/keyvalue-examples/docs/{version}/reference/
+      apiDocPath: /spring-data/keyvalue-examples/docs/{version}/api/
     - id: spring-data-mongodb
-      githubUrl: https://github.com/SpringSource/spring-data-mongodb
       name: Spring data mongodb
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/data-mongodb/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/data-mongodb/docs/{version}/api/
+      refDocPath: /spring-data/data-mongodb/docs/{version}/reference/
+      apiDocPath: /spring-data/data-mongodb/docs/{version}/api/
     - id: spring-data-neo4j
-      githubUrl: https://github.com/SpringSource/spring-data-neo4j
       name: Spring data neo4j
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/data-neo4j/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/data-neo4j/docs/{version}/api/
+      refDocPath: /spring-data/data-neo4j/docs/{version}/reference/
+      apiDocPath: /spring-data/data-neo4j/docs/{version}/api/
     - id: spring-data-redis
-      githubUrl: https://github.com/SpringSource/spring-data-redis
       name: Spring data redis
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/data-redis/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/data-redis/docs/{version}/api/
+      refDocPath: /spring-data/data-redis/docs/{version}/reference/
+      apiDocPath: /spring-data/data-redis/docs/{version}/api/
     - id: spring-data-rest
-      githubUrl: https://github.com/SpringSource/spring-data-rest
       name: Spring data rest
       supportedVersions:
       - 1.0.x
       - 1.1.x
-      referenceUrl: http://static.springsource.org/spring-data/rest/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/rest/docs/{version}/api/
+      refDocPath: /spring-data/rest/docs/{version}/reference/
+      apiDocPath: /spring-data/rest/docs/{version}/api/
     - id: spring-data-riak
-      githubUrl: https://github.com/SpringSource/spring-data-riak
       name: Spring data riak
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/riak/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/riak/docs/{version}/api/
+      refDocPath: /spring-data/riak/docs/{version}/reference/
+      apiDocPath: /spring-data/riak/docs/{version}/api/
     - id: spring-data-services
-      githubUrl: https://github.com/SpringSource/spring-data-services
       name: Spring data services
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/services/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/services/docs/{version}/api/
+      refDocPath: /spring-data/services/docs/{version}/reference/
+      apiDocPath: /spring-data/services/docs/{version}/api/
     - id: spring-flex
-      githubUrl: https://github.com/SpringSource/spring-flex
       name: Spring flex
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-flex/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-flex/docs/{version}/api/
+      refDocPath: /spring-flex/docs/{version}/reference/
+      apiDocPath: /spring-flex/docs/{version}/api/
     - id: spring-gemfire
-      githubUrl: https://github.com/SpringSource/spring-gemfire
       name: Spring gemfire
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-gemfire/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-gemfire/docs/{version}/api/
+      refDocPath: /spring-gemfire/docs/{version}/reference/
+      apiDocPath: /spring-gemfire/docs/{version}/api/
     - id: spring-hadoop
-      githubUrl: https://github.com/SpringSource/spring-hadoop
       name: Spring hadoop
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-hadoop/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-hadoop/docs/{version}/api/
+      refDocPath: /spring-hadoop/docs/{version}/reference/
+      apiDocPath: /spring-hadoop/docs/{version}/api/
     - id: spring-integration
-      githubUrl: https://github.com/SpringSource/spring-integration
       name: Spring integration
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-integration/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-integration/docs/{version}/api/
+      refDocPath: /spring-integration/docs/{version}/reference/
+      apiDocPath: /spring-integration/docs/{version}/api/
     - id: spring-integration-dsl-scala
-      githubUrl: https://github.com/SpringSource/spring-integration-dsl-scala
       name: Spring integration dsl scala
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-integration-dsl-scala/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-integration-dsl-scala/docs/{version}/api/
+      refDocPath: /spring-integration-dsl-scala/docs/{version}/reference/
+      apiDocPath: /spring-integration-dsl-scala/docs/{version}/api/
     - id: spring-mobile-urbanairship
-      githubUrl: https://github.com/SpringSource/spring-mobile-urbanairship
       name: Spring mobile urbanairship
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-mobile-urbanairship/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-mobile-urbanairship/docs/{version}/api/
+      refDocPath: /spring-mobile-urbanairship/docs/{version}/reference/
+      apiDocPath: /spring-mobile-urbanairship/docs/{version}/api/
     - id: spring-plugin
-      githubUrl: https://github.com/SpringSource/spring-plugin
       name: Spring plugin
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-plugin/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-plugin/docs/{version}/api/
+      refDocPath: /spring-plugin/docs/{version}/reference/
+      apiDocPath: /spring-plugin/docs/{version}/api/
     - id: spring-roo
-      githubUrl: https://github.com/SpringSource/spring-roo
       name: Spring roo
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-roo/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-roo/docs/{version}/api/
+      refDocPath: /spring-roo/docs/{version}/reference/
+      apiDocPath: /spring-roo/docs/{version}/api/
     - id: spring-security-kerberos
-      githubUrl: https://github.com/SpringSource/spring-security-kerberos
       name: Spring security kerberos
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-security-kerberos/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-security-kerberos/docs/{version}/api/
+      refDocPath: /spring-security-kerberos/docs/{version}/reference/
+      apiDocPath: /spring-security-kerberos/docs/{version}/api/
     - id: spring-security-oauth
-      githubUrl: https://github.com/SpringSource/spring-security-oauth
       name: Spring security oauth
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-security-oauth/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-security-oauth/docs/{version}/api/
+      refDocPath: /spring-security-oauth/docs/{version}/reference/
+      apiDocPath: /spring-security-oauth/docs/{version}/api/
     - id: spring-security-saml
-      githubUrl: https://github.com/SpringSource/spring-security-saml
       name: Spring security saml
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-security-saml/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-security-saml/docs/{version}/api/
+      refDocPath: /spring-security-saml/docs/{version}/reference/
+      apiDocPath: /spring-security-saml/docs/{version}/api/
     - id: spring-shell
-      githubUrl: https://github.com/SpringSource/spring-shell
       name: Spring shell
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-shell/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-shell/docs/{version}/api/
+      refDocPath: /spring-shell/docs/{version}/reference/
+      apiDocPath: /spring-shell/docs/{version}/api/
     - id: spring-social
-      githubUrl: https://github.com/SpringSource/spring-social
       name: Spring social
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-social/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-social/docs/{version}/api/
+      refDocPath: /spring-social/docs/{version}/reference/
+      apiDocPath: /spring-social/docs/{version}/api/
     - id: spring-social-facebook
-      githubUrl: https://github.com/SpringSource/spring-social-facebook
       name: Spring social facebook
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-social-facebook/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-social-facebook/docs/{version}/api/
+      refDocPath: /spring-social-facebook/docs/{version}/reference/
+      apiDocPath: /spring-social-facebook/docs/{version}/api/
     - id: spring-social-github
-      githubUrl: https://github.com/SpringSource/spring-social-github
       name: Spring social github
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-social-github/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-social-github/docs/{version}/api/
+      refDocPath: /spring-social-github/docs/{version}/reference/
+      apiDocPath: /spring-social-github/docs/{version}/api/
     - id: spring-social-gowalla
-      githubUrl: https://github.com/SpringSource/spring-social-gowalla
       name: Spring social gowalla
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-social-gowalla/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-social-gowalla/docs/{version}/api/
+      refDocPath: /spring-social-gowalla/docs/{version}/reference/
+      apiDocPath: /spring-social-gowalla/docs/{version}/api/
     - id: spring-social-linkedin
-      githubUrl: https://github.com/SpringSource/spring-social-linkedin
       name: Spring social linkedin
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-social-linkedin/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-social-linkedin/docs/{version}/api/
+      refDocPath: /spring-social-linkedin/docs/{version}/reference/
+      apiDocPath: /spring-social-linkedin/docs/{version}/api/
     - id: spring-social-samples
-      githubUrl: https://github.com/SpringSource/spring-social-samples
       name: Spring social samples
     - id: spring-social-tripit
-      githubUrl: https://github.com/SpringSource/spring-social-tripit
       name: Spring social tripit
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-social-tripit/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-social-tripit/docs/{version}/api/
+      refDocPath: /spring-social-tripit/docs/{version}/reference/
+      apiDocPath: /spring-social-tripit/docs/{version}/api/
     - id: spring-social-twitter
-      githubUrl: https://github.com/SpringSource/spring-social-twitter
       name: Spring social twitter
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-social-twitter/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-social-twitter/docs/{version}/api/
+      refDocPath: /spring-social-twitter/docs/{version}/reference/
+      apiDocPath: /spring-social-twitter/docs/{version}/api/
     - id: spring-sqlfire-samples
-      githubUrl: https://github.com/SpringSource/spring-sqlfire-samples
       name: Spring sqlfire samples
     - id: spring-test-mvc
-      githubUrl: https://github.com/SpringSource/spring-test-mvc
       name: Spring test mvc
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-test-mvc/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-test-mvc/docs/{version}/api/
+      refDocPath: /spring-test-mvc/docs/{version}/reference/
+      apiDocPath: /spring-test-mvc/docs/{version}/api/
     - id: spring-webflow
-      githubUrl: https://github.com/SpringSource/spring-webflow
       name: Spring webflow
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-webflow/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-webflow/docs/{version}/api/
+      refDocPath: /spring-webflow/docs/{version}/reference/
+      apiDocPath: /spring-webflow/docs/{version}/api/
     - id: spring-data-couchbase
-      githubUrl: https://github.com/SpringSource/spring-data-couchbase
       name: Spring data couchbase
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/couchbase/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/couchbase/docs/{version}/api/
+      refDocPath: /spring-data/couchbase/docs/{version}/reference/
+      apiDocPath: /spring-data/couchbase/docs/{version}/api/
     - id: spring-data-elasticsearch
-      githubUrl: https://github.com/SpringSource/spring-data-elasticsearch
       name: Spring data elasticsearch
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/elasticsearch/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/elasticsearch/docs/{version}/api/
+      refDocPath: /spring-data/elasticsearch/docs/{version}/reference/
+      apiDocPath: /spring-data/elasticsearch/docs/{version}/api/
     - id: spring-data-gemfire-sts-templates
-      githubUrl: https://github.com/SpringSource/spring-data-gemfire-sts-templates
       name: Spring data gemfire-sts templates
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/gemfire-sts-templates/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/gemfire-sts-templates/docs/{version}/api/
+      refDocPath: /spring-data/gemfire-sts-templates/docs/{version}/reference/
+      apiDocPath: /spring-data/gemfire-sts-templates/docs/{version}/api/
     - id: spring-data-rest-webmvc
-      githubUrl: https://github.com/SpringSource/spring-data-rest-webmvc
       name: Spring data rest webmvc
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/rest-webmvc/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/rest-webmvc/docs/{version}/api/
+      refDocPath: /spring-data/rest-webmvc/docs/{version}/reference/
+      apiDocPath: /spring-data/rest-webmvc/docs/{version}/api/
     - id: spring-data-solr
-      githubUrl: https://github.com/SpringSource/spring-data-solr
       name: Spring data solr
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/solr/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/solr/docs/{version}/api/
+      refDocPath: /spring-data/solr/docs/{version}/reference/
+      apiDocPath: /spring-data/solr/docs/{version}/api/
     - id: spring-hateoas
-      githubUrl: https://github.com/SpringSource/spring-hateoas
       name: Spring hateoas
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-hateoas/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-hateoas/docs/{version}/api/
+      refDocPath: /spring-hateoas/docs/{version}/reference/
+      apiDocPath: /spring-hateoas/docs/{version}/api/
     - id: spring-integration-dsl-groovy
-      githubUrl: https://github.com/SpringSource/spring-integration-dsl-groovy
       name: Spring integration dsl groovy
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-integration-dsl-groovy/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-integration-dsl-groovy/docs/{version}/api/
+      refDocPath: /spring-integration-dsl-groovy/docs/{version}/reference/
+      apiDocPath: /spring-integration-dsl-groovy/docs/{version}/api/
     - id: spring-integration-extensions
-      githubUrl: https://github.com/SpringSource/spring-integration-extensions
       name: Spring integration extensions
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-integration-extensions/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-integration-extensions/docs/{version}/api/
+      refDocPath: /spring-integration-extensions/docs/{version}/reference/
+      apiDocPath: /spring-integration-extensions/docs/{version}/api/
     - id: spring-security-javaconfig
-      githubUrl: https://github.com/SpringSource/spring-security-javaconfig
       name: Spring security javaconfig
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-security-javaconfig/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-security-javaconfig/docs/{version}/api/
+      refDocPath: /spring-security-javaconfig/docs/{version}/reference/
+      apiDocPath: /spring-security-javaconfig/docs/{version}/api/
     - id: spring-security-portlet
-      githubUrl: https://github.com/SpringSource/spring-security-portlet
       name: Spring security portlet
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-security-portlet/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-security-portlet/docs/{version}/api/
+      refDocPath: /spring-security-portlet/docs/{version}/reference/
+      apiDocPath: /spring-security-portlet/docs/{version}/api/
     - id: spring-test-mvc-htmlunit
-      githubUrl: https://github.com/SpringSource/spring-test-mvc-htmlunit
       name: Spring test mvc htmlunit
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-test-mvc-htmlunit/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-test-mvc-htmlunit/docs/{version}/api/
+      refDocPath: /spring-test-mvc-htmlunit/docs/{version}/reference/
+      apiDocPath: /spring-test-mvc-htmlunit/docs/{version}/api/
     - id: spring-xd
-      githubUrl: https://github.com/SpringSource/spring-xd
       name: Spring xd
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-xd/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-xd/docs/{version}/api/
+      refDocPath: /spring-xd/docs/{version}/reference/
+      apiDocPath: /spring-xd/docs/{version}/api/
 
   other:
     - id: spring-ide
-      githubUrl: https://github.com/SpringSource/spring-ide
       name: Spring ide
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-ide/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-ide/docs/{version}/api/
+      refDocPath: /spring-ide/docs/{version}/reference/
+      apiDocPath: /spring-ide/docs/{version}/api/
     - id: spring-insight-plugins
-      githubUrl: https://github.com/SpringSource/spring-insight-plugins
       name: Spring insight plugins
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-insight-plugins/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-insight-plugins/docs/{version}/api/
+      refDocPath: /spring-insight-plugins/docs/{version}/reference/
+      apiDocPath: /spring-insight-plugins/docs/{version}/api/
     - id: spring-migration-analyzer
-      githubUrl: https://github.com/SpringSource/spring-migration-analyzer
       name: Spring migration analyzer
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-migration-analyzer/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-migration-analyzer/docs/{version}/api/
+      refDocPath: /spring-migration-analyzer/docs/{version}/reference/
+      apiDocPath: /spring-migration-analyzer/docs/{version}/api/
 
     - id: spring-net
-      githubUrl: https://github.com/SpringSource/spring-net
       name: Spring net
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net/docs/{version}/api/
+      refDocPath: /spring-net/docs/{version}/reference/
+      apiDocPath: /spring-net/docs/{version}/api/
     - id: spring-net-amqp
-      githubUrl: https://github.com/SpringSource/spring-net-amqp
       name: Spring net amqp
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-amqp/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-amqp/docs/{version}/api/
+      refDocPath: /spring-net-amqp/docs/{version}/reference/
+      apiDocPath: /spring-net-amqp/docs/{version}/api/
     - id: spring-net-amqp-samples
-      githubUrl: https://github.com/SpringSource/spring-net-amqp-samples
       name: Spring net amqp samples
     - id: spring-net-codeconfig
-      githubUrl: https://github.com/SpringSource/spring-net-codeconfig
       name: Spring net codeconfig
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-codeconfig/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-codeconfig/docs/{version}/api/
+      refDocPath: /spring-net-codeconfig/docs/{version}/reference/
+      apiDocPath: /spring-net-codeconfig/docs/{version}/api/
     - id: spring-net-rest
-      githubUrl: https://github.com/SpringSource/spring-net-rest
       name: Spring net rest
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-rest/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-rest/docs/{version}/api/
+      refDocPath: /spring-net-rest/docs/{version}/reference/
+      apiDocPath: /spring-net-rest/docs/{version}/api/
     - id: spring-net-social
-      githubUrl: https://github.com/SpringSource/spring-net-social
       name: Spring net social
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-social/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-social/docs/{version}/api/
+      refDocPath: /spring-net-social/docs/{version}/reference/
+      apiDocPath: /spring-net-social/docs/{version}/api/
     - id: spring-net-social-dropbox
-      githubUrl: https://github.com/SpringSource/spring-net-social-dropbox
       name: Spring net social dropbox
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-social-dropbox/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-social-dropbox/docs/{version}/api/
+      refDocPath: /spring-net-social-dropbox/docs/{version}/reference/
+      apiDocPath: /spring-net-social-dropbox/docs/{version}/api/
     - id: spring-net-social-linkedin
-      githubUrl: https://github.com/SpringSource/spring-net-social-linkedin
       name: Spring net social linkedin
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-social-linkedin/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-social-linkedin/docs/{version}/api/
+      refDocPath: /spring-net-social-linkedin/docs/{version}/reference/
+      apiDocPath: /spring-net-social-linkedin/docs/{version}/api/
     - id: spring-net-social-twitter
-      githubUrl: https://github.com/SpringSource/spring-net-social-twitter
       name: Spring net social twitter
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-social-twitter/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-social-twitter/docs/{version}/api/
+      refDocPath: /spring-net-social-twitter/docs/{version}/reference/
+      apiDocPath: /spring-net-social-twitter/docs/{version}/api/
     - id: spring-net-vsnet
-      githubUrl: https://github.com/SpringSource/spring-net-vsnet
       name: Spring net vsnet
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-vsnet/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-vsnet/docs/{version}/api/
+      refDocPath: /spring-net-vsnet/docs/{version}/reference/
+      apiDocPath: /spring-net-vsnet/docs/{version}/api/
     - id: spring-net-integration
-      githubUrl: https://github.com/SpringSource/spring-net-integration
       name: Spring net integration
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-integration/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-integration/docs/{version}/api/
+      refDocPath: /spring-net-integration/docs/{version}/reference/
+      apiDocPath: /spring-net-integration/docs/{version}/api/
     - id: spring-net-retry
-      githubUrl: https://github.com/SpringSource/spring-net-retry
       name: Spring net retry
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-retry/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-retry/docs/{version}/api/
+      refDocPath: /spring-net-retry/docs/{version}/reference/
+      apiDocPath: /spring-net-retry/docs/{version}/api/
     - id: spring-net-social-facebook
-      githubUrl: https://github.com/SpringSource/spring-net-social-facebook
       name: Spring net social facebook
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-social-facebook/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-social-facebook/docs/{version}/api/
+      refDocPath: /spring-net-social-facebook/docs/{version}/reference/
+      apiDocPath: /spring-net-social-facebook/docs/{version}/api/
     - id: spring-net-threading
-      githubUrl: https://github.com/SpringSource/spring-net-threading
       name: Spring net threading
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-net-threading/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-net-threading/docs/{version}/api/
+      refDocPath: /spring-net-threading/docs/{version}/reference/
+      apiDocPath: /spring-net-threading/docs/{version}/api/
 
     - id: spring-python
-      githubUrl: https://github.com/SpringSource/spring-python
       name: Spring python
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-python/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-python/docs/{version}/api/
+      refDocPath: /spring-python/docs/{version}/reference/
+      apiDocPath: /spring-python/docs/{version}/api/
     - id: spring-data-kickstart
-      githubUrl: https://github.com/SpringSource/spring-data-kickstart
       name: Spring data kickstart
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/kickstart/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/kickstart/docs/{version}/api/
+      refDocPath: /spring-data/kickstart/docs/{version}/reference/
+      apiDocPath: /spring-data/kickstart/docs/{version}/api/
     - id: spring-data-rest-tck
-      githubUrl: https://github.com/SpringSource/spring-data-rest-tck
       name: Spring data rest tck
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/rest-tck/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/rest-tck/docs/{version}/api/
+      refDocPath: /spring-data/rest-tck/docs/{version}/reference/
+      apiDocPath: /spring-data/rest-tck/docs/{version}/api/
 
   incubator:
     - id: spring-scala
-      githubUrl: https://github.com/SpringSource/spring-scala
       name: Spring scala
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-scala/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-scala/docs/{version}/api/
+      refDocPath: /spring-scala/docs/{version}/reference/
+      apiDocPath: /spring-scala/docs/{version}/api/
     - id: spring-retry
-      githubUrl: https://github.com/SpringSource/spring-retry
       name: Spring retry
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-retry/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-retry/docs/{version}/api/
+      refDocPath: /spring-retry/docs/{version}/reference/
+      apiDocPath: /spring-retry/docs/{version}/api/
     - id: spring-tenancy
-      githubUrl: https://github.com/SpringSource/spring-tenancy
       name: Spring tenancy
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-tenancy/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-tenancy/docs/{version}/api/
+      refDocPath: /spring-tenancy/docs/{version}/reference/
+      apiDocPath: /spring-tenancy/docs/{version}/api/
     - id: spring-actionscript
-      githubUrl: https://github.com/SpringSource/spring-actionscript
       name: Spring actionscript
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-actionscript/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-actionscript/docs/{version}/api/
+      refDocPath: /spring-actionscript/docs/{version}/reference/
+      apiDocPath: /spring-actionscript/docs/{version}/api/
     - id: spring-loaded
-      githubUrl: https://github.com/SpringSource/spring-loaded
       name: Spring loaded
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-loaded/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-loaded/docs/{version}/api/
+      refDocPath: /spring-loaded/docs/{version}/reference/
+      apiDocPath: /spring-loaded/docs/{version}/api/
   attic:
 
   discard:
     - id: spring-amqp-samples
-      githubUrl: https://github.com/SpringSource/spring-amqp-samples
       name: Spring amqp samples
     - id: spring-android-samples
-      githubUrl: https://github.com/SpringSource/spring-android-samples
       name: Spring android samples
     - id: spring-build-gradle
-      githubUrl: https://github.com/SpringSource/spring-build-gradle
       name: Spring build gradle
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-build-gradle/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-build-gradle/docs/{version}/api/
+      refDocPath: /spring-build-gradle/docs/{version}/reference/
+      apiDocPath: /spring-build-gradle/docs/{version}/api/
     - id: spring-data-document-examples
-      githubUrl: https://github.com/SpringSource/spring-data-document-examples
       name: Spring data document examples
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/document-examples/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/document-examples/docs/{version}/api/
+      refDocPath: /spring-data/document-examples/docs/{version}/reference/
+      apiDocPath: /spring-data/document-examples/docs/{version}/api/
     - id: spring-data-graph-examples
-      githubUrl: https://github.com/SpringSource/spring-data-graph-examples
       name: Spring data graph examples
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/data-graph-examples/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/data-graph-examples/docs/{version}/api/
+      refDocPath: /spring-data/data-graph-examples/docs/{version}/reference/
+      apiDocPath: /spring-data/data-graph-examples/docs/{version}/api/
     - id: spring-data-jpa-examples
-      githubUrl: https://github.com/SpringSource/spring-data-jpa-examples
       name: Spring data jpa examples
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/jpa-examples/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/jpa-examples/docs/{version}/api/
+      refDocPath: /spring-data/jpa-examples/docs/{version}/reference/
+      apiDocPath: /spring-data/jpa-examples/docs/{version}/api/
     - id: spring-data-multistore-test
-      githubUrl: https://github.com/SpringSource/spring-data-multistore-test
       name: Spring data multistore test
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/multistore-test/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/multistore-test/docs/{version}/api/
+      refDocPath: /spring-data/multistore-test/docs/{version}/reference/
+      apiDocPath: /spring-data/multistore-test/docs/{version}/api/
     - id: spring-flex-roo
-      githubUrl: https://github.com/SpringSource/spring-flex-roo
       name: Spring flex roo
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-flex-roo/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-flex-roo/docs/{version}/api/
+      refDocPath: /spring-flex-roo/docs/{version}/reference/
+      apiDocPath: /spring-flex-roo/docs/{version}/api/
     - id: spring-framework-issues
-      githubUrl: https://github.com/SpringSource/spring-framework-issues
       name: Spring framework issues
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-framework-issues/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-framework-issues/docs/{version}/api/
+      refDocPath: /spring-framework-issues/docs/{version}/reference/
+      apiDocPath: /spring-framework-issues/docs/{version}/api/
     - id: spring-gemfire-examples
-      githubUrl: https://github.com/SpringSource/spring-gemfire-examples
       name: Spring gemfire examples
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-gemfire-examples/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-gemfire-examples/docs/{version}/api/
+      refDocPath: /spring-gemfire-examples/docs/{version}/reference/
+      apiDocPath: /spring-gemfire-examples/docs/{version}/api/
     - id: spring-gemfire-net
-      githubUrl: https://github.com/SpringSource/spring-gemfire-net
       name: Spring gemfire net
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-gemfire-net/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-gemfire-net/docs/{version}/api/
+      refDocPath: /spring-gemfire-net/docs/{version}/reference/
+      apiDocPath: /spring-gemfire-net/docs/{version}/api/
     - id: spring-integration-pattern-catalog
-      githubUrl: https://github.com/SpringSource/spring-integration-pattern-catalog
       name: Spring integration pattern catalog
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-integration-pattern-catalog/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-integration-pattern-catalog/docs/{version}/api/
+      refDocPath: /spring-integration-pattern-catalog/docs/{version}/reference/
+      apiDocPath: /spring-integration-pattern-catalog/docs/{version}/api/
     - id: spring-integration-samples
-      githubUrl: https://github.com/SpringSource/spring-integration-samples
       name: Spring integration samples
     - id: spring-integration-templates
-      githubUrl: https://github.com/SpringSource/spring-integration-templates
       name: Spring integration templates
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-integration-templates/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-integration-templates/docs/{version}/api/
+      refDocPath: /spring-integration-templates/docs/{version}/reference/
+      apiDocPath: /spring-integration-templates/docs/{version}/api/
     - id: spring-interop-samples
-      githubUrl: https://github.com/SpringSource/spring-interop-samples
       name: Spring interop samples
     - id: spring-mobile-samples
-      githubUrl: https://github.com/SpringSource/spring-mobile-samples
       name: Spring mobile samples
     - id: spring-mvc-showcase
-      githubUrl: https://github.com/SpringSource/spring-mvc-showcase
       name: Spring mvc showcase
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-mvc-showcase/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-mvc-showcase/docs/{version}/api/
+      refDocPath: /spring-mvc-showcase/docs/{version}/reference/
+      apiDocPath: /spring-mvc-showcase/docs/{version}/api/
     - id: spring-roo-backend-services
-      githubUrl: https://github.com/SpringSource/spring-roo-backend-services
       name: Spring roo backend services
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-roo-backend-services/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-roo-backend-services/docs/{version}/api/
+      refDocPath: /spring-roo-backend-services/docs/{version}/reference/
+      apiDocPath: /spring-roo-backend-services/docs/{version}/api/
     - id: spring-roo-wrapping
-      githubUrl: https://github.com/SpringSource/spring-roo-wrapping
       name: Spring roo wrapping
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-roo-wrapping/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-roo-wrapping/docs/{version}/api/
+      refDocPath: /spring-roo-wrapping/docs/{version}/reference/
+      apiDocPath: /spring-roo-wrapping/docs/{version}/api/
     - id: spring-webflow-issues
-      githubUrl: https://github.com/SpringSource/spring-webflow-issues
       name: Spring webflow issues
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-webflow-issues/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-webflow-issues/docs/{version}/api/
+      refDocPath: /spring-webflow-issues/docs/{version}/reference/
+      apiDocPath: /spring-webflow-issues/docs/{version}/api/
     - id: spring-data-book
-      githubUrl: https://github.com/SpringSource/spring-data-book
       name: Spring data book
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/book/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/book/docs/{version}/api/
+      refDocPath: /spring-data/book/docs/{version}/reference/
+      apiDocPath: /spring-data/book/docs/{version}/api/
     - id: spring-data-build
-      githubUrl: https://github.com/SpringSource/spring-data-build
       name: Spring data build
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/build/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/build/docs/{version}/api/
+      refDocPath: /spring-data/build/docs/{version}/reference/
+      apiDocPath: /spring-data/build/docs/{version}/api/
     - id: spring-data-solr-examples
-      githubUrl: https://github.com/SpringSource/spring-data-solr-examples
       name: Spring data solr examples
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-data/solr-examples/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-data/solr-examples/docs/{version}/api/
+      refDocPath: /spring-data/solr-examples/docs/{version}/reference/
+      apiDocPath: /spring-data/solr-examples/docs/{version}/api/
     - id: spring-hadoop-admin
-      githubUrl: https://github.com/SpringSource/spring-hadoop-admin
       name: Spring hadoop admin
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-hadoop-admin/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-hadoop-admin/docs/{version}/api/
+      refDocPath: /spring-hadoop-admin/docs/{version}/reference/
+      apiDocPath: /spring-hadoop-admin/docs/{version}/api/
     - id: spring-hadoop-samples
-      githubUrl: https://github.com/SpringSource/spring-hadoop-samples
       name: Spring hadoop samples
     - id: spring-petclinic
-      githubUrl: https://github.com/SpringSource/spring-petclinic
       name: Spring petclinic
       supportedVersions:
       - 1.0.0.RELEASE
-      referenceUrl: http://static.springsource.org/spring-petclinic/docs/{version}/reference/
-      apiUrl: http://static.springsource.org/spring-petclinic/docs/{version}/api/
+      refDocPath: /spring-petclinic/docs/{version}/reference/
+      apiDocPath: /spring-petclinic/docs/{version}/api/
     - id: spring-webflow-samples
-      githubUrl: https://github.com/SpringSource/spring-webflow-samples
       name: Spring webflow samples

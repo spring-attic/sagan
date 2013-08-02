@@ -3,13 +3,12 @@ package org.springframework.site.indexer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.projects.ProjectMetadataService;
 import org.springframework.site.domain.projects.Project;
+import org.springframework.site.domain.projects.ProjectMetadataService;
 import org.springframework.site.domain.projects.Version;
 import org.springframework.site.indexer.crawler.CrawlerService;
 import org.springframework.site.indexer.mapper.ApiDocumentMapper;
 import org.springframework.site.indexer.mapper.ReferenceDocumentSearchEntryMapper;
-import org.springframework.site.indexer.mapper.WebDocumentSearchEntryMapper;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
@@ -47,7 +46,6 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 			url = rawUrl.expand(version.getFullVersion()).toString();
 			crawlerService.crawl(url, 1, new CrawledWebDocumentProcessor(searchService, new ReferenceDocumentSearchEntryMapper(project, version)));
 		}
-		crawlerService.crawl(project.getGithubUrl(), 0, new CrawledWebDocumentProcessor(searchService, new WebDocumentSearchEntryMapper()));
 	}
 
 	@Override

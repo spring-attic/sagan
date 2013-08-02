@@ -17,9 +17,10 @@ public class ProjectTests {
     public void setup() {
 		project = new Project(null,
 				"Name",
-				"https://github.com/someone/project",
 				"http://project.org/reference/{version}/index.html", "http://project.org/api/{version}/index.html",
-				SupportedVersions.build(Arrays.asList("4.0.0.RELEASE", "3.1.5.RELEASE", "1.2.3.RELEASE")));
+				SupportedVersions.build(Arrays.asList("4.0.0.RELEASE", "3.1.5.RELEASE", "1.2.3.RELEASE")),
+				"http://www.example.com/repo/spring-framework",
+				"http://www.example.com/spring-framework");
 	}
 
     @Test

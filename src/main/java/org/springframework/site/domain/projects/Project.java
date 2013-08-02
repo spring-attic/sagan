@@ -7,29 +7,24 @@ public class Project {
 
 	private String id;
 	private String name;
-	private String githubUrl;
 	private String referenceUrl;
 	private String apiDocsUrl;
     private SupportedVersions supportedVersions;
-    
-    public Project() {
-	}
+	private final String repoUrl;
+	private final String siteUrl;
 
-	public Project(String id, String name, String githubUrl, String referenceUrl, String apiDocsUrl, SupportedVersions supportedVersions) {
+	public Project(String id, String name, String referenceUrl, String apiDocsUrl, SupportedVersions supportedVersions, String repoUrl, String siteUrl) {
 		this.id = id;
 		this.name = name;
-		this.githubUrl = githubUrl;
 		this.referenceUrl = referenceUrl;
 		this.apiDocsUrl = apiDocsUrl;
         this.supportedVersions = supportedVersions;
-    }
+		this.repoUrl = repoUrl;
+		this.siteUrl = siteUrl;
+	}
 	
 	public String getName() {
 		return name;
-	}
-
-	public String getGithubUrl() {
-		return githubUrl;
 	}
 
 	public String getReferenceUrl() {
@@ -44,32 +39,8 @@ public class Project {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public SupportedVersions getSupportedVersions() {
 		return supportedVersions;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setGithubUrl(String githubUrl) {
-		this.githubUrl = githubUrl;
-	}
-
-	public void setReferenceUrl(String referenceUrl) {
-		this.referenceUrl = referenceUrl;
-	}
-
-	public void setApiUrl(String apiDocsUrl) {
-		this.apiDocsUrl = apiDocsUrl;
-	}
-
-	public void setSupportedVersions(SupportedVersions supportedVersions) {
-		this.supportedVersions = supportedVersions;
 	}
 
     public List<ProjectDocumentation> getSupportedReferenceDocumentVersions() {
@@ -95,5 +66,17 @@ public class Project {
 
 	public String getApiAllClassesUrl() {
 		return getApiUrl() + "/allclasses-frame.html";
+	}
+
+	public String getRepoUrl() {
+		return repoUrl;
+	}
+
+	public String getSiteUrl() {
+		return siteUrl;
+	}
+
+	public boolean hasSite() {
+		return siteUrl != null;
 	}
 }

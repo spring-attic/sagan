@@ -1,24 +1,44 @@
+githubOrgBaseUrl: http://github.com/springframework
+ghPagesBaseUrl: http://projects.springframework.io
+docsBaseUrl: http://static.springsource.org
 projects:
   active:
     - id: spring-framework
       name: Spring Framework
+      hasSite: true                                                         # optional, default=false
+      siteUrl: http://www.example.com/spring-framework                      # optional, default={ghPagesBaseUrl}/{id}
+      repoUrl: http://www.example.com/repo/spring-framework                 # optional, defaults to {githubOrgBaseUrl}/{id}
+      refDocPath: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
+      apiDocPath: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
       supportedVersions:
         - 3.1.4.RELEASE
         - 3.2.3.RELEASE
         - 4.0.0.M1
-      githubUrl: https://github.com/SpringSource/spring-framework
-      referenceUrl: http://static.springsource.org/spring/docs/{version}/spring-framework-reference/html/
-      apiUrl: http://static.springsource.org/spring/docs/{version}/javadoc-api/
+    - id: spring-framework-nosite
+      name: Spring Framework
+      refDocPath: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
+      apiDocPath: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
+      supportedVersions:
+        - 3.1.4.RELEASE
+        - 3.2.3.RELEASE
+        - 4.0.0.M1
+    - id: spring-framework-defaultsite
+      name: Spring Framework
+      hasSite: true                                                         # optional, default=false
+      refDocPath: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
+      apiDocPath: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
+      supportedVersions:
+        - 3.1.4.RELEASE
+        - 3.2.3.RELEASE
+        - 4.0.0.M1
   other:
     - id: spring-security
       name: Spring Security
-      githubUrl: https://github.com/SpringSource/spring-security
-      referenceUrl: http://static.springsource.org/spring-security/site/docs/{version}/reference/springsecurity.html
-      apiUrl: http://static.springsource.org/spring-security/site/docs/{version}/apidocs/index.html
+      refDocPath: /spring-security/site/docs/{version}/reference/springsecurity.html
+      apiDocPath: /spring-security/site/docs/{version}/apidocs/index.html
   attic:
   discard:
     - id: spring-security
       name: Spring Security
-      githubUrl: https://github.com/SpringSource/spring-security
-      referenceUrl: http://static.springsource.org/spring-security/site/docs/{version}/reference/springsecurity.html
-      apiUrl: http://static.springsource.org/spring-security/site/docs/{version}/apidocs/index.html
+      refDocPath: /spring-security/site/docs/{version}/reference/springsecurity.html
+      apiDocPath: /spring-security/site/docs/{version}/apidocs/index.html

@@ -14,7 +14,13 @@ public class ProjectMetadataYamlParser {
 	public Map<String, List<Project>> parse(InputStream projectMetadataYml) {
 		Map<String, List<Project>> projects = new HashMap<>();
 
-		Map<String, List> projectsYaml = parseYamlIntoMap(projectMetadataYml);
+		Map metadata = (Map) new Yaml().load(projectMetadataYml);
+
+		String githubOrgBaseUrl = metadata.get("githubOrgBaseUrl").toString();
+		String ghPagesBaseUrl = metadata.get("ghPagesBaseUrl").toString();
+		String docsBaseUrl = metadata.get("docsBaseUrl").toString();
+
+		Map<String, List> projectsYaml = (Map) metadata.get("projects");
 
 		for (Map.Entry<String, List> entry : projectsYaml.entrySet()) {
 			String category = entry.getKey();
@@ -28,7 +34,7 @@ public class ProjectMetadataYamlParser {
 
 			for (Object value : entry.getValue()) {
 				Map<String, Object> projectData = (Map<String, Object>) value;
-				categoryProjects.add(buildProject(projectData));
+				categoryProjects.add(buildProject(projectData, githubOrgBaseUrl, ghPagesBaseUrl, docsBaseUrl));
 			}
 			projects.put(category, categoryProjects);
 		}
@@ -37,30 +43,47 @@ public class ProjectMetadataYamlParser {
 		return projects;
 	}
 
-	private Map<String, List> parseYamlIntoMap(InputStream projectMetadataYml) {
-		Map load = (Map) new Yaml().load(projectMetadataYml);
-		return (Map) load.get("projects");
+	private Project buildProject(Map<String, Object> projectData, String githubOrgBaseUrl, String ghPagesBaseUrl, String docsBaseUrl) {
+		String id = projectData.get("id").toString();
+		String name = projectData.get("name").toString();
+		String refDocUrl = docsBaseUrl + projectData.get("refDocPath");
+		String apiDocUrl = docsBaseUrl + projectData.get("apiDocPath");
+		String repoUrl = parseRepoUrl(projectData, githubOrgBaseUrl, id);
+		String siteUrl = parseSiteUrl(projectData, ghPagesBaseUrl, id);
+		SupportedVersions supportedVersions = parseSupportedVersions(projectData);
+		return new Project(id, name, refDocUrl, apiDocUrl, supportedVersions, repoUrl, siteUrl);
 	}
 
-	private Project buildProject(Map<String, Object> projectData) {
-		Project project = new Project();
-		project.setId((String) projectData.get("id"));
-		project.setName((String) projectData.get("name"));
-		project.setReferenceUrl((String) projectData.get("referenceUrl"));
-		project.setGithubUrl((String) projectData.get("githubUrl"));
-		project.setApiUrl((String) projectData.get("apiUrl"));
+	private String parseRepoUrl(Map<String, Object> projectData, String githubOrgBaseUrl, String id) {
+		String repoUrl;
+		if (projectData.containsKey("repoUrl")) {
+			repoUrl = projectData.get("repoUrl").toString();
+		} else {
+			repoUrl = String.format("%s/%s", githubOrgBaseUrl, id);
+		}
+		return repoUrl;
+	}
 
+	private String parseSiteUrl(Map<String, Object> projectData, String ghPagesBaseUrl, String id) {
+		String siteUrl = null;
+		if (projectData.containsKey("hasSite") && Boolean.valueOf(projectData.get("hasSite").toString())) {
+			if (projectData.containsKey("siteUrl")) {
+				siteUrl = projectData.get("siteUrl").toString();
+			} else {
+				siteUrl = String.format("%s/%s", ghPagesBaseUrl, id);
+			}
+		}
+		return siteUrl;
+	}
+
+	private SupportedVersions parseSupportedVersions(Map<String, Object> projectData) {
 		if (projectData.containsKey("supportedVersions")) {
 			List<String> versionStrings = new ArrayList<>();
-			for (Object value : (List)projectData.get("supportedVersions")) {
+			for (Object value : (List) projectData.get("supportedVersions")) {
 				versionStrings.add(value.toString());
 			}
-			SupportedVersions supportedVersions = SupportedVersions.build(versionStrings);
-			project.setSupportedVersions(supportedVersions);
-		} else {
-			project.setSupportedVersions(new SupportedVersions(Collections.<Version>emptyList()));
+			return SupportedVersions.build(versionStrings);
 		}
-
-		return project;
+		return new SupportedVersions(Collections.<Version>emptyList());
 	}
 }

@@ -35,7 +35,7 @@ public class ProjectMetadataServiceTests {
 		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 
 		List<Project> activeProjects = documentationService.getProjectsForCategory("active");
-		assertThat(activeProjects.size(), is(1));
+		assertThat(activeProjects.size(), is(3));
 		assertThat(activeProjects.get(0).getId(), is("spring-framework"));
 	}
 
