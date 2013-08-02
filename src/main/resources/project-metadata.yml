@@ -1,8 +1,192 @@
+
+# TODO: rename
+# githubRepoBaseUrl: http://github.com/springsource
 githubOrgBaseUrl: http://github.com/SpringSource
+
+# TODO: rename
+# ghProjectsBaseUrl: http://projects.springframework.io
 ghPagesBaseUrl: http://projects.springframework.io
+
+# TODO: support
+# ghAtticBaseUrl: http://attic.springframework.io
+
+# TODO: support
+# ghIncubatorBaseUrl: http://incubator.springframework.io
+
+# TODO: waiting on Trevor to update httpd config
+# docsBaseUrl: http://docs.springframework.io
 docsBaseUrl: http://static.springsource.org
+
+# TODO: https://www.pivotaltracker.com/story/show/54564326
+groupId: org.springframework
+
+
+# ------------------------------------
+# Reference and API documentation URLs
+# ------------------------------------
+#
+# These values dictate the value of links in the menus at /documentation and, in
+# conjunction with `supportedVersions`, what gets indexed for search purposes.
+#
+# `refDocPath` and `apiDocPath` may be specified at the project level, e.g:
+#
+#    - id: spring-framework
+#      name: Spring Framework
+#      refDocPath: /spring/docs/{version}/spring-framework-reference/html/
+#      apiDocPath: /spring/docs/{version}/javadoc-api/
+#
+# `refDocPath` and `apiDocPath` may also be specified at the individual version level:
+#    - id: spring-batch
+#      name: Spring Batch
+#      supportedVersions:
+#        - name: 2.2.1.RELEASE
+#          refDocPath: /spring-batch/trunk/reference/html/index.html
+#          apiDocPath: /spring-batch/trunk/apidocs/index.html
+#        - name: 2.1.9.RELEASE
+#          refDocPath: /spring-batch/2.1.x/reference/html/index.html
+#          apiDocPath: /spring-batch/2.1.x/apidocs/index.html
+#
+# if `refDocPath` and/or `apiDocPath` are not specified at all within a given
+# project's metadata, then the value will fall back to the top level template
+# declared below.
+#
+# TODO: waiting on https://www.pivotaltracker.com/story/show/54562726 and
+#       https://www.pivotaltracker.com/story/show/54562226
+# refDocPath: {docsBaseUrl}/{id}/docs/{version}/reference/html
+# apiDocPath: {docsBaseUrl}/{id}/docs/{version}/api/
+
 projects:
+
+  # ========================
+  # Active Spring Projects
+  # TODO "Generally Available" | "Supported" ?
+  # ========================
   active:
+    # ----------------------
+    # Spring AMQP
+    # ----------------------
+    - id: spring-amqp
+      name: Spring AMQP
+      lead: grussell
+      refDocPath: /spring-amqp/docs/{version}/reference/html
+      apiDocPath: /spring-amqp/docs/{version}/api/
+      supportedVersions:
+        - 1.1.4.RELEASE
+        - 1.2.0.RELEASE
+
+    # ----------------------
+    # Spring Android
+    # ----------------------
+    - id: spring-android
+      name: Spring Android
+      lead: rclarkson
+      refDocPath: /spring-android/docs/{version}/reference/html
+      apiDocPath: /spring-android/docs/{version}/api/
+      supportedVersions:
+        - 1.0.1.RELEASE
+
+    # ----------------------
+    # Spring Batch
+    # TODO: blocked by https://www.pivotaltracker.com/story/show/54510094
+    # ----------------------
+    - id: spring-batch
+      name: Spring Batch
+      lead: mminella
+      refDocPath: /TODO # remove when #54510094 is complete
+      apiDocPath: /TODO # remove when #54510094 is complete
+      supportedVersions:
+        - 2.2.1.RELEASE
+        #- name: 2.2.1.RELEASE
+        #  refDocPath: /spring-batch/trunk/reference/html/index.html
+        #  apiDocPath: /spring-batch/trunk/apidocs/index.html
+        - 2.1.9.RELEASE
+        #- name: 2.1.9.RELEASE
+        #  refDocPath: /spring-batch/2.1.x/reference/html/index.html
+        #  apiDocPath: /spring-batch/2.1.x/apidocs/index.html
+
+    # ----------------------
+    # Spring Data
+    # ----------------------
+    - id: spring-data-jpa
+      name: Spring Data JPA
+      lead: ogierke
+      refDocPath: /spring-data/jpa/docs/{version}/reference/html/
+      apiDocPath: /spring-data/jpa/docs/{version}/api/
+      supportedVersions:
+        - 1.4.0.RC1
+        - 1.3.4.RELEASE
+        - 1.2.1.RELEASE # TODO: this version doesn't have docs published, but 1.2.0 does
+
+    - id: spring-data-commons
+      name: Spring Data Commons
+      lead: ogierke
+      refDocPath: /spring-data/data-commons/docs/{version}/reference/html
+      apiDocPath: /spring-data/data-commons/docs/{version}/api/
+      supportedVersions:
+        - 1.6.0.RC1
+        - 1.5.2.RELEASE
+
+    - id: spring-data-jdbc-ext
+      name: Spring Data JDBC Extensions
+      lead: trisberg
+      refDocPath: /spring-data/jdbc/docs/{version}/reference/html
+      apiDocPath: /spring-data/jdbc/docs/{version}/api/
+      supportedVersions:
+        - 1.0.0.RELEASE
+
+    - id: spring-data-mongodb
+      name: Spring Data MongoDB
+      lead: ogierke
+      refDocPath: /spring-data/data-mongo/docs/{version}/reference/html
+      apiDocPath: /spring-data/data-mongo/docs/{version}/api/
+      supportedVersions:
+        - 1.3.0.M1
+        - 1.2.3.RELEASE
+
+    - id: spring-data-neo4j
+      name: Spring Data Neo4J
+      sponsor: ogierke
+      lead: jexp@github # Michael Hunger
+      refDocPath: /spring-data/data-neo4j/docs/{version}/reference/html
+      apiDocPath: /spring-data/data-neo4j/docs/{version}/api/
+      supportedVersions:
+        - 2.3.0.M1
+        - 2.2.2.RELEASE
+
+    - id: spring-data-redis
+      name: Spring Data Redis
+      lead: jhickey
+      refDocPath: /spring-data/data-redis/docs/{version}/reference/html
+      apiDocPath: /spring-data/data-redis/docs/{version}/api/
+      supportedVersions:
+        - 1.1.0.M1
+        - 1.0.5.RELEASE
+
+    - id: spring-data-rest
+      name: Spring Data REST
+      lead: jbrisbin
+      refDocPath: /spring-data/rest/docs/{version}/reference/html
+      apiDocPath: /spring-data/rest/docs/{version}/api/
+      supportedVersions:
+        - 1.0.0.RELEASE
+          # TODO: need to express refDocPath: NONE here, as no ref docs exist
+          # https://www.pivotaltracker.com/story/show/54564958
+        - 1.1.0.M1
+
+    # ----------------------
+    # Spring Flex
+    # ----------------------
+    - id: spring-flex
+      name: Spring Flex
+      lead: jgrelle
+      refDocPath: /spring-flex/docs/{version}/reference/html
+      apiDocPath: /spring-flex/docs/{version}/javadoc-api/
+      supportedVersions:
+        - 1.5.2.RELEASE
+
+    # ----------------------
+    # Spring Framework
+    # ----------------------
     - id: spring-framework
       name: Spring Framework
       refDocPath: /spring/docs/{version}/spring-framework-reference/html/
@@ -12,641 +196,492 @@ projects:
         - 3.2.3.RELEASE
         - 4.0.0.M1
 
+    # ----------------------
+    # Spring GemFire
+    # ----------------------
+    - id: spring-gemfire
+      name: Spring GemFire
+      lead: dturanski
+      refDocPath: /spring-gemfire/docs/{version}/reference/html
+      apiDocPath: /spring-gemfire/docs/{version}/api/
+      supportedVersions:
+      - 1.3.1.RELEASE
+      - 1.2.2.RELEASE
+
+    # ----------------------
+    # Spring for Apache Hadoop
+    # ----------------------
+    - id: spring-hadoop
+      name: Spring for Apache Hadoop
+      sponsor: trisberg
+      lead: jvalkeal@github # Janne Valkealahti
+      refDocPath: /spring-hadoop/docs/{version}/reference/html
+      apiDocPath: /spring-hadoop/docs/{version}/api/
+      supportedVersions:
+        - 1.0.1.RC1
+        - 1.0.0.RELEASE
+
+    # ----------------------
+    # Spring HATEOAS
+    # ----------------------
+    - id: spring-hateoas
+      name: Spring HATEOAS
+      lead: ogierke
+      refDocPath: https://github.com/SpringSource/spring-hateoas/blob/master/readme.md
+      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958 TODO: talk to Ollie
+      supportedVersions:
+        - 0.7.0.RELEASE
+
+    # ----------------------
+    # Spring Integration
+    # ----------------------
+    - id: spring-integration
+      name: Spring Integration
+      lead: mfisher
+      refDocPath: /spring-integration/docs/{version}/reference/html
+      apiDocPath: /spring-integration/docs/{version}/api/
+      supportedVersions:
+        - 3.0.0.M2
+        - 2.2.4.RELEASE
+        - 2.1.6.RELEASE
+
+    # ----------------------
+    # Spring Mobile
+    # ----------------------
+    - id: spring-mobile
+      name: Spring Mobile
+      lead: rclarkson
+      refDocPath: /spring-mobile/docs/{version}/reference/htmlsingle/
+      apiDocPath: /spring-mobile/docs/{version}/api/
+      supportedVersions:
+        - 1.0.1.RELEASE
+        - 1.1.0.M3
+
+    # ----------------------
+    # Spring Roo
+    # ----------------------
+    - id: spring-roo
+      name: Spring Roo
+      sponsor: NONE # TODO
+      lead: alankstewart@github
+      refDocPath: /spring-roo/reference/html/
+      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      supportedVersions:
+        - 1.2.4.RELEASE
+
+    # ----------------------
+    # Spring Security
+    # ----------------------
     - id: spring-security
       name: Spring Security
       refDocPath: /spring-security/site/docs/{version}/reference/springsecurity.html
       apiDocPath: /spring-security/site/docs/{version}/apidocs/
       supportedVersions:
         - 3.1.4.RELEASE
+        - 3.2.0.M2
 
-    - id: spring-mobile
-      name: Spring Mobile
-      refDocPath: /spring-mobile/docs/{version}/reference/htmlsingle/
-      apiDocPath: /spring-mobile/docs/{version}/api/
+    - id: spring-security-oauth
+      name: Spring Security OAuth
+      # TODO: https://www.pivotaltracker.com/story/show/54562226
+      # siteUrl: {docsBaseUrl}/spring-security/oauth/                # desired
+      siteUrl: http://static.springsource.org/spring-security/oauth/ # workaround
       supportedVersions:
-        - 1.0.1.RELEASE
+        - name: 1.0.5.RELEASE
+          # TODO: the "dev guide" seems to be the closest thing to a "reference doc" here.
+          #       requires https://www.pivotaltracker.com/story/show/54562242 to work properly
+          refDocPath: https://github.com/SpringSource/spring-security-oauth/wiki/devguide
+          # TODO: this actually points to 1.0.0.RELEASE - seems to be the latest published api docs
+          apiDocPath: /spring-security/oauth/apidocs/index.html
 
-    # TODO: blocked by https://www.pivotaltracker.com/story/show/54510094
-    - id: spring-ws
-      name: Spring Web Services
+    # ----------------------
+    # Spring Shell
+    # ----------------------
+    - id: spring-shell
+      name: Spring Shell
+      lead: mpollack
+      refDocPath: /spring-shell/docs/{version}/reference/html
+      apiDocPath: /spring-shell/docs/{version}/api/
       supportedVersions:
-        - 2.1.3
-          # refDocPath: /spring-ws/sites/{version}/reference/html/index.html
-          # apiDocPath: /spring-ws/sites/{version}/apidocs/
-
-    - id: spring-data-jpa
-      name: Spring Data JPA
-      refDocPath: /spring-data/jpa/docs/{version}/reference/html/index.html
-      apiDocPath: /spring-data/jpa/docs/{version}/api/
-      supportedVersions:
-        - 1.3.0.RELEASE
-        - 1.2.1.RELEASE
-
-    - id: spring-amqp
-      name: Spring AMQP
-      refDocPath: /spring-amqp/docs/{version}/reference/
-      apiDocPath: /spring-amqp/docs/{version}/api/
-      supportedVersions:
-        - 1.1.x
-        - 1.2.x
-
-    - id: spring-android
-      name: Spring Android
-      refDocPath: /spring-android/docs/{version}/reference/
-      apiDocPath: /spring-android/docs/{version}/api/
-      supportedVersions:
+        - 1.1.0.M1
         - 1.0.0.RELEASE
 
-    # TODO: blocked by https://www.pivotaltracker.com/story/show/54510094
-    - id: spring-batch
-      name: Spring Batch
-      supportedVersions:
-        - 2.2.1.RELEASE
-          # refDocPath: /spring-batch/trunk/reference/html/index.html
-          # apiDocPath: /spring-batch/trunk/apidocs/index.html
-        - 2.1.9.RELEASE
-          # refDocPath: /spring-batch/2.1.x/reference/html/index.html
-          # apiDocPath: /spring-batch/2.1.x/apidocs/index.html
-
-    - id: spring-batch-admin
-      name: Spring batch admin
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-batch-admin/docs/{version}/reference/
-      apiDocPath: /spring-batch-admin/docs/{version}/api/
-    - id: spring-data-cassandra
-      name: Spring data cassandra
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/cassandra/docs/{version}/reference/
-      apiDocPath: /spring-data/cassandra/docs/{version}/api/
-    - id: spring-data-commons
-      name: Spring data commons
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/commons/docs/{version}/reference/
-      apiDocPath: /spring-data/commons/docs/{version}/api/
-    - id: spring-data-couchdb
-      name: Spring data couchdb
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/couchdb/docs/{version}/reference/
-      apiDocPath: /spring-data/couchdb/docs/{version}/api/
-    - id: spring-data-envers
-      name: Spring data envers
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/envers/docs/{version}/reference/
-      apiDocPath: /spring-data/envers/docs/{version}/api/
-    - id: spring-data-graph
-      name: Spring data graph
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/data-graph/docs/{version}/reference/
-      apiDocPath: /spring-data/data-graph/docs/{version}/api/
-    - id: spring-data-jdbc-ext
-      name: Spring data jdbc ext
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/jdbc-ext/docs/{version}/reference/
-      apiDocPath: /spring-data/jdbc-ext/docs/{version}/api/
-    - id: spring-data-keyvalue
-      name: Spring data keyvalue
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/keyvalue/docs/{version}/reference/
-      apiDocPath: /spring-data/keyvalue/docs/{version}/api/
-    - id: spring-data-keyvalue-examples
-      name: Spring data keyvalue examples
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/keyvalue-examples/docs/{version}/reference/
-      apiDocPath: /spring-data/keyvalue-examples/docs/{version}/api/
-    - id: spring-data-mongodb
-      name: Spring data mongodb
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/data-mongodb/docs/{version}/reference/
-      apiDocPath: /spring-data/data-mongodb/docs/{version}/api/
-    - id: spring-data-neo4j
-      name: Spring data neo4j
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/data-neo4j/docs/{version}/reference/
-      apiDocPath: /spring-data/data-neo4j/docs/{version}/api/
-    - id: spring-data-redis
-      name: Spring data redis
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/data-redis/docs/{version}/reference/
-      apiDocPath: /spring-data/data-redis/docs/{version}/api/
-    - id: spring-data-rest
-      name: Spring data rest
-      supportedVersions:
-      - 1.0.x
-      - 1.1.x
-      refDocPath: /spring-data/rest/docs/{version}/reference/
-      apiDocPath: /spring-data/rest/docs/{version}/api/
-    - id: spring-data-riak
-      name: Spring data riak
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/riak/docs/{version}/reference/
-      apiDocPath: /spring-data/riak/docs/{version}/api/
-    - id: spring-data-services
-      name: Spring data services
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/services/docs/{version}/reference/
-      apiDocPath: /spring-data/services/docs/{version}/api/
-    - id: spring-flex
-      name: Spring flex
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-flex/docs/{version}/reference/
-      apiDocPath: /spring-flex/docs/{version}/api/
-    - id: spring-gemfire
-      name: Spring gemfire
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-gemfire/docs/{version}/reference/
-      apiDocPath: /spring-gemfire/docs/{version}/api/
-    - id: spring-hadoop
-      name: Spring hadoop
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-hadoop/docs/{version}/reference/
-      apiDocPath: /spring-hadoop/docs/{version}/api/
-    - id: spring-integration
-      name: Spring integration
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-integration/docs/{version}/reference/
-      apiDocPath: /spring-integration/docs/{version}/api/
-    - id: spring-integration-dsl-scala
-      name: Spring integration dsl scala
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-integration-dsl-scala/docs/{version}/reference/
-      apiDocPath: /spring-integration-dsl-scala/docs/{version}/api/
-    - id: spring-mobile-urbanairship
-      name: Spring mobile urbanairship
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-mobile-urbanairship/docs/{version}/reference/
-      apiDocPath: /spring-mobile-urbanairship/docs/{version}/api/
-    - id: spring-plugin
-      name: Spring plugin
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-plugin/docs/{version}/reference/
-      apiDocPath: /spring-plugin/docs/{version}/api/
-    - id: spring-roo
-      name: Spring roo
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-roo/docs/{version}/reference/
-      apiDocPath: /spring-roo/docs/{version}/api/
-    - id: spring-security-kerberos
-      name: Spring security kerberos
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-security-kerberos/docs/{version}/reference/
-      apiDocPath: /spring-security-kerberos/docs/{version}/api/
-    - id: spring-security-oauth
-      name: Spring security oauth
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-security-oauth/docs/{version}/reference/
-      apiDocPath: /spring-security-oauth/docs/{version}/api/
-    - id: spring-security-saml
-      name: Spring security saml
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-security-saml/docs/{version}/reference/
-      apiDocPath: /spring-security-saml/docs/{version}/api/
-    - id: spring-shell
-      name: Spring shell
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-shell/docs/{version}/reference/
-      apiDocPath: /spring-shell/docs/{version}/api/
+    # ----------------------
+    # Spring Social
+    # ----------------------
     - id: spring-social
-      name: Spring social
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-social/docs/{version}/reference/
+      name: Spring Social
+      lead: cwalls
+      refDocPath: /spring-social/docs/{version}/reference/html
       apiDocPath: /spring-social/docs/{version}/api/
-    - id: spring-social-facebook
-      name: Spring social facebook
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-social-facebook/docs/{version}/reference/
-      apiDocPath: /spring-social-facebook/docs/{version}/api/
-    - id: spring-social-github
-      name: Spring social github
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-social-github/docs/{version}/reference/
-      apiDocPath: /spring-social-github/docs/{version}/api/
-    - id: spring-social-gowalla
-      name: Spring social gowalla
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-social-gowalla/docs/{version}/reference/
-      apiDocPath: /spring-social-gowalla/docs/{version}/api/
-    - id: spring-social-linkedin
-      name: Spring social linkedin
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-social-linkedin/docs/{version}/reference/
-      apiDocPath: /spring-social-linkedin/docs/{version}/api/
-    - id: spring-social-samples
-      name: Spring social samples
-    - id: spring-social-tripit
-      name: Spring social tripit
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-social-tripit/docs/{version}/reference/
-      apiDocPath: /spring-social-tripit/docs/{version}/api/
-    - id: spring-social-twitter
-      name: Spring social twitter
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-social-twitter/docs/{version}/reference/
-      apiDocPath: /spring-social-twitter/docs/{version}/api/
-    - id: spring-sqlfire-samples
-      name: Spring sqlfire samples
-    - id: spring-test-mvc
-      name: Spring test mvc
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-test-mvc/docs/{version}/reference/
-      apiDocPath: /spring-test-mvc/docs/{version}/api/
-    - id: spring-webflow
-      name: Spring webflow
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-webflow/docs/{version}/reference/
-      apiDocPath: /spring-webflow/docs/{version}/api/
-    - id: spring-data-couchbase
-      name: Spring data couchbase
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/couchbase/docs/{version}/reference/
-      apiDocPath: /spring-data/couchbase/docs/{version}/api/
-    - id: spring-data-elasticsearch
-      name: Spring data elasticsearch
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/elasticsearch/docs/{version}/reference/
-      apiDocPath: /spring-data/elasticsearch/docs/{version}/api/
-    - id: spring-data-gemfire-sts-templates
-      name: Spring data gemfire-sts templates
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/gemfire-sts-templates/docs/{version}/reference/
-      apiDocPath: /spring-data/gemfire-sts-templates/docs/{version}/api/
-    - id: spring-data-rest-webmvc
-      name: Spring data rest webmvc
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/rest-webmvc/docs/{version}/reference/
-      apiDocPath: /spring-data/rest-webmvc/docs/{version}/api/
-    - id: spring-data-solr
-      name: Spring data solr
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/solr/docs/{version}/reference/
-      apiDocPath: /spring-data/solr/docs/{version}/api/
-    - id: spring-hateoas
-      name: Spring hateoas
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-hateoas/docs/{version}/reference/
-      apiDocPath: /spring-hateoas/docs/{version}/api/
-    - id: spring-integration-dsl-groovy
-      name: Spring integration dsl groovy
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-integration-dsl-groovy/docs/{version}/reference/
-      apiDocPath: /spring-integration-dsl-groovy/docs/{version}/api/
-    - id: spring-integration-extensions
-      name: Spring integration extensions
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-integration-extensions/docs/{version}/reference/
-      apiDocPath: /spring-integration-extensions/docs/{version}/api/
-    - id: spring-security-javaconfig
-      name: Spring security javaconfig
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-security-javaconfig/docs/{version}/reference/
-      apiDocPath: /spring-security-javaconfig/docs/{version}/api/
-    - id: spring-security-portlet
-      name: Spring security portlet
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-security-portlet/docs/{version}/reference/
-      apiDocPath: /spring-security-portlet/docs/{version}/api/
-    - id: spring-test-mvc-htmlunit
-      name: Spring test mvc htmlunit
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-test-mvc-htmlunit/docs/{version}/reference/
-      apiDocPath: /spring-test-mvc-htmlunit/docs/{version}/api/
-    - id: spring-xd
-      name: Spring xd
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-xd/docs/{version}/reference/
-      apiDocPath: /spring-xd/docs/{version}/api/
+        - 1.1.0.M3
+        - 1.0.3.RELEASE
 
+    - id: spring-social-facebook
+      name: Spring Social Facebook
+      lead: cwalls
+      refDocPath: /spring-social-facebook/docs/{version}/reference/html
+      apiDocPath: /spring-social-facebook/docs/{version}/api/
+      supportedVersions:
+        - 1.1.0.M3
+        - 1.0.3.RELEASE
+
+    - id: spring-social-twitter
+      name: Spring Social Twitter
+      lead: cwalls
+      refDocPath: /spring-social-twitter/docs/{version}/reference/html
+      apiDocPath: /spring-social-twitter/docs/{version}/api/
+      supportedVersions:
+        - 1.1.0.M3
+        - 1.0.5.RELEASE
+
+    # ----------------------
+    # Spring Web Flow
+    # TODO: blocked by https://www.pivotaltracker.com/story/show/54510094
+    # ----------------------
+    - id: spring-webflow
+      name: Spring Web Flow
+      lead: rstoyanchev
+      refDocPath: /spring-webflow/docs/{version}/reference/html
+      supportedVersions:
+        - 2.4.0.M1
+        #- name: 2.4.0.M1
+        #    apiDocPath: /spring-webflow/docs/{version}/api/
+        - 2.3.2.RELEASE
+        #- name: 2.3.2.RELEASE
+        #    apiDocPath: /spring-webflow/docs/{version}/javadoc-api/
+
+    # ----------------------
+    # Spring WS
+    # TODO: blocked by https://www.pivotaltracker.com/story/show/54510094
+    # ----------------------
+    - id: spring-ws
+      name: Spring Web Services
+      lead: apoutsma
+      refDocPath: /TODO
+      apiDocPath: /TODO
+      supportedVersions:
+        - 2.1.3.RELEASE
+        #- name: 2.1.3.RELEASE
+        #  refDocPath: /spring-ws/sites/{version}/reference/html/index.html
+        #  apiDocPath: /spring-ws/sites/{version}/apidocs/
+
+
+  # ========================
+  # Other Spring-Related Projects
+  # ========================
   other:
-    - id: spring-ide
-      name: Spring ide
+    # ----------------------
+    # Spring Loaded
+    # ----------------------
+    - id: spring-loaded #TODO
+      name: Spring Loaded
+      lead: aclement
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-ide/docs/{version}/reference/
+      - 9.9.9.RELEASE
+      refDocPath: /spring-loaded/docs/{version}/reference/html
+      apiDocPath: /spring-loaded/docs/{version}/api/
+
+    - id: spring-ide #TODO
+      name: Spring IDE
+      supportedVersions:
+      - 9.9.9.RELEASE
+      refDocPath: /spring-ide/docs/{version}/reference/html
       apiDocPath: /spring-ide/docs/{version}/api/
-    - id: spring-insight-plugins
-      name: Spring insight plugins
+
+    - id: spring-insight-plugins #TODO
+      name: Spring Insight Plugins
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-insight-plugins/docs/{version}/reference/
+      - 9.9.9.RELEASE
+      refDocPath: /spring-insight-plugins/docs/{version}/reference/html
       apiDocPath: /spring-insight-plugins/docs/{version}/api/
-    - id: spring-migration-analyzer
-      name: Spring migration analyzer
+
+    - id: spring-migration-analyzer #TODO
+      name: Spring Migration Analyzer
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-migration-analyzer/docs/{version}/reference/
+      - 9.9.9.RELEASE
+      refDocPath: /spring-migration-analyzer/docs/{version}/reference/html
       apiDocPath: /spring-migration-analyzer/docs/{version}/api/
 
-    - id: spring-net
-      name: Spring net
+    - id: spring-python #TODO
+      name: Spring Python
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net/docs/{version}/reference/
-      apiDocPath: /spring-net/docs/{version}/api/
-    - id: spring-net-amqp
-      name: Spring net amqp
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-amqp/docs/{version}/reference/
-      apiDocPath: /spring-net-amqp/docs/{version}/api/
-    - id: spring-net-amqp-samples
-      name: Spring net amqp samples
-    - id: spring-net-codeconfig
-      name: Spring net codeconfig
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-codeconfig/docs/{version}/reference/
-      apiDocPath: /spring-net-codeconfig/docs/{version}/api/
-    - id: spring-net-rest
-      name: Spring net rest
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-rest/docs/{version}/reference/
-      apiDocPath: /spring-net-rest/docs/{version}/api/
-    - id: spring-net-social
-      name: Spring net social
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-social/docs/{version}/reference/
-      apiDocPath: /spring-net-social/docs/{version}/api/
-    - id: spring-net-social-dropbox
-      name: Spring net social dropbox
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-social-dropbox/docs/{version}/reference/
-      apiDocPath: /spring-net-social-dropbox/docs/{version}/api/
-    - id: spring-net-social-linkedin
-      name: Spring net social linkedin
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-social-linkedin/docs/{version}/reference/
-      apiDocPath: /spring-net-social-linkedin/docs/{version}/api/
-    - id: spring-net-social-twitter
-      name: Spring net social twitter
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-social-twitter/docs/{version}/reference/
-      apiDocPath: /spring-net-social-twitter/docs/{version}/api/
-    - id: spring-net-vsnet
-      name: Spring net vsnet
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-vsnet/docs/{version}/reference/
-      apiDocPath: /spring-net-vsnet/docs/{version}/api/
-    - id: spring-net-integration
-      name: Spring net integration
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-integration/docs/{version}/reference/
-      apiDocPath: /spring-net-integration/docs/{version}/api/
-    - id: spring-net-retry
-      name: Spring net retry
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-retry/docs/{version}/reference/
-      apiDocPath: /spring-net-retry/docs/{version}/api/
-    - id: spring-net-social-facebook
-      name: Spring net social facebook
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-social-facebook/docs/{version}/reference/
-      apiDocPath: /spring-net-social-facebook/docs/{version}/api/
-    - id: spring-net-threading
-      name: Spring net threading
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-net-threading/docs/{version}/reference/
-      apiDocPath: /spring-net-threading/docs/{version}/api/
-
-    - id: spring-python
-      name: Spring python
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-python/docs/{version}/reference/
+      - 9.9.9.RELEASE
+      refDocPath: /spring-python/docs/{version}/reference/html
       apiDocPath: /spring-python/docs/{version}/api/
-    - id: spring-data-kickstart
-      name: Spring data kickstart
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/kickstart/docs/{version}/reference/
-      apiDocPath: /spring-data/kickstart/docs/{version}/api/
-    - id: spring-data-rest-tck
-      name: Spring data rest tck
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/rest-tck/docs/{version}/reference/
-      apiDocPath: /spring-data/rest-tck/docs/{version}/api/
 
+  # ========================
+  # Incubator
+  # ========================
   incubator:
-    - id: spring-scala
-      name: Spring scala
+    # ----------------------
+    # Spring Boot
+    # ----------------------
+    - id: spring-boot
+      name: Spring Boot
+      lead: dsyer # and pwebb (co-leads represented comma-separated?)
+      refDocPath: https://github.com/SpringSource/spring-boot/blob/master/README.md
+      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-scala/docs/{version}/reference/
-      apiDocPath: /spring-scala/docs/{version}/api/
-    - id: spring-retry
-      name: Spring retry
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-retry/docs/{version}/reference/
-      apiDocPath: /spring-retry/docs/{version}/api/
-    - id: spring-tenancy
-      name: Spring tenancy
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-tenancy/docs/{version}/reference/
-      apiDocPath: /spring-tenancy/docs/{version}/api/
-    - id: spring-actionscript
-      name: Spring actionscript
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-actionscript/docs/{version}/reference/
-      apiDocPath: /spring-actionscript/docs/{version}/api/
-    - id: spring-loaded
-      name: Spring loaded
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-loaded/docs/{version}/reference/
-      apiDocPath: /spring-loaded/docs/{version}/api/
-  attic:
+        - 0.5.0.M1
 
-  discard:
-    - id: spring-amqp-samples
-      name: Spring amqp samples
-    - id: spring-android-samples
-      name: Spring android samples
-    - id: spring-build-gradle
-      name: Spring build gradle
+    # ----------------------
+    # Spring ActionScript
+    # ----------------------
+    - id: spring-actionscript
+      name: Spring ActionScript
+      sponsor: # TODO
+      lead: cherreman@github
+
+    # ----------------------
+    # Spring Security
+    # ----------------------
+    # Appears not yet to have any releases, thus marked as an incubator project
+    # TODO: talk to Mike Wiesner about this.
+    - id: spring-security-kerberos
+      name: Spring Security Kerberos
+      lead: mwiesner
+      siteUrl: http://static.springsource.org/spring-security/site/extensions/saml/
+      refDocPath: /spring-security-kerberos/docs/{version}/reference/html
+      apiDocPath: /spring-security-kerberos/docs/{version}/api/
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-build-gradle/docs/{version}/reference/
-      apiDocPath: /spring-build-gradle/docs/{version}/api/
-    - id: spring-data-document-examples
-      name: Spring data document examples
+        - 1.0.0.CI-SNAPSHOT # TODO: this should be BUILD-SNAPSHOT
+
+    # TODO: in incubator for now, but should be eliminated altogether?
+    # No releases, no commits for ~3 years
+    - id: spring-security-portlet
+      name: Spring Security Portlet
+      lead: rwinch # ltaylor was last committer
+
+    # No GA releases yet, thus marked as an incubator project
+    - id: spring-security-saml
+      name: Spring Security SAML
+      lead: vschafer
+      siteUrl: http://static.springsource.org/spring-security/site/extensions/krb/
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/document-examples/docs/{version}/reference/
-      apiDocPath: /spring-data/document-examples/docs/{version}/api/
-    - id: spring-data-graph-examples
-      name: Spring data graph examples
+        - name: 1.0.0.RC2
+          refDocPath: /spring-security-saml/docs/1.0.x/reference/html/
+          apiDocPath: /spring-security-saml/docs/1.0.x/api/
+
+    # ----------------------
+    # Spring Data
+    # ----------------------
+    # No releases / never actually started?
+    # TODO: Eliminate completely?
+    - id: spring-data-cassandra
+      name: Spring Data Cassandra
+      sponsor: mpollack
+      lead: erezmazor@github
+
+    # No releases
+    - id: spring-data-couchbase
+      name: Spring Data Couchbase
+      sponsor: ogierke
+      lead: daschl@github # Michael Nitschinger
+
+    # No releases
+    - id: spring-data-elasticsearch
+      name: Spring Data Elasticsearch
+      sponsor: ogierke
+      lead: mohsinh@github # Mohsin Husen
+
+    # TODO: what to do with 0.* releases - still in incubation?
+    - id: spring-data-envers
+      name: Spring Data Envers
+      lead: ogierke
+      refDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/data-graph-examples/docs/{version}/reference/
-      apiDocPath: /spring-data/data-graph-examples/docs/{version}/api/
-    - id: spring-data-jpa-examples
-      name: Spring data jpa examples
+        - 0.1.0.RELEASE
+
+    # No releases
+    - id: spring-data-services
+      name: Spring Data Services
+      lead: jbrisbin
+
+    # No GA releases
+    - id: spring-data-solr
+      name: Spring Data Solr
+      sponsor: mpollack
+      lead: christophstrobl@github
+      refDocPath: /spring-data/solr/docs/{version}/reference/html
+      apiDocPath: /spring-data/solr/docs/{version}/api/
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/jpa-examples/docs/{version}/reference/
-      apiDocPath: /spring-data/jpa-examples/docs/{version}/api/
-    - id: spring-data-multistore-test
-      name: Spring data multistore test
+        - 1.0.0.RC1
+
+    # ----------------------
+    # Spring Integration
+    # ----------------------
+    # Irregular versioning, see https://github.com/SpringSource/spring-integration-extensions/releases
+    # No GA releases in any case.
+    - id: spring-integration-extensions
+      name: Spring Integration Extensions
+      lead: ghillert
+
+    - id: spring-integration-dsl-groovy
+      name: Spring Integration Groovy DSL
+      lead: dturanski
+      refDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/multistore-test/docs/{version}/reference/
-      apiDocPath: /spring-data/multistore-test/docs/{version}/api/
-    - id: spring-flex-roo
-      name: Spring flex roo
+        - 1.0.0.M1
+
+    - id: spring-integration-dsl-scala
+      name: Spring Integration Scala DSL
+      lead: ghillert
+      # M2 release was tagged, but only api docs are 1.0.0.BUILD-SNAPSHOT;
+      # no ref docs whatsoever
+      refDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-flex-roo/docs/{version}/reference/
-      apiDocPath: /spring-flex-roo/docs/{version}/api/
-    - id: spring-framework-issues
-      name: Spring framework issues
+        - 1.0.0.M2
+
+    # ----------------------
+    # Spring Mobile
+    # ----------------------
+    # No releases
+    - id: spring-mobile-urbanairship
+      name: Spring Mobile Urban Airship
+      lead: cwalls
+
+    # ----------------------
+    # Spring Plugin
+    # ----------------------
+    # 0.* releases only - still in incubation
+    - id: spring-plugin
+      name: Spring Plugin
+      lead: ogierke
+      refDocPath: https://github.com/SpringSource/spring-plugin/blob/master/README.markdown
+      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-framework-issues/docs/{version}/reference/
-      apiDocPath: /spring-framework-issues/docs/{version}/api/
-    - id: spring-gemfire-examples
-      name: Spring gemfire examples
+      - 0.8.0.RELEASE
+
+    # ----------------------
+    # Spring Retry
+    # ----------------------
+    - id: spring-retry
+      name: Spring Retry
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-gemfire-examples/docs/{version}/reference/
-      apiDocPath: /spring-gemfire-examples/docs/{version}/api/
-    - id: spring-gemfire-net
-      name: Spring gemfire net
+      - 9.9.9.RELEASE
+      refDocPath: /spring-retry/docs/{version}/reference/html
+      apiDocPath: /spring-retry/docs/{version}/api/
+
+    # ----------------------
+    # Spring Scala
+    # ----------------------
+    - id: spring-scala
+      name: Spring Scala
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-gemfire-net/docs/{version}/reference/
-      apiDocPath: /spring-gemfire-net/docs/{version}/api/
-    - id: spring-integration-pattern-catalog
-      name: Spring integration pattern catalog
+      - 9.9.9.RELEASE
+      refDocPath: /spring-scala/docs/{version}/reference/html
+      apiDocPath: /spring-scala/docs/{version}/api/
+
+    # ----------------------
+    # Spring Social
+    # ----------------------
+    # No releases
+    - id: spring-social-github
+      name: Spring Social GitHub
+      lead: cwalls
+
+    # RC release only
+    - id: spring-social-linkedin
+      name: Spring Social LinkedIn
+      lead: cwalls
+      refDocPath: /spring-social-linkedin/docs/{version}/reference/html
+      apiDocPath: /spring-social-linkedin/docs/{version}/api/
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-integration-pattern-catalog/docs/{version}/reference/
-      apiDocPath: /spring-integration-pattern-catalog/docs/{version}/api/
-    - id: spring-integration-samples
-      name: Spring integration samples
-    - id: spring-integration-templates
-      name: Spring integration templates
+        - 1.0.0.RC2
+
+    # No releases
+    - id: spring-social-tripit
+      name: Spring Social TripIt
+      lead: cwalls
+
+    # ----------------------
+    # Spring Tenancy
+    # ----------------------
+    - id: spring-tenancy
+      name: Spring Tenancy
+      lead: dgreen99@github # David Green w/ Tasktop
+      sponsor: dsyer
+
+    # ----------------------
+    # Spring Test MVC HTMLUnit
+    # ----------------------
+    # No releases
+    - id: spring-test-mvc-htmlunit
+      name: Spring Test MVC HTMLUnit
+      lead: rwinch
+
+    # ----------------------
+    # Spring XD
+    # ----------------------
+    - id: spring-xd
+      name: Spring XD
+      siteUrl: https://github.com/springsource/spring-xd/wiki
+      # TODO: eliminate in favor of defaults (https://www.pivotaltracker.com/story/show/54562726)
+      refDocPath: /spring-xd/docs/{version}/reference/html
+      apiDocPath: /spring-xd/docs/{version}/api/
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-integration-templates/docs/{version}/reference/
-      apiDocPath: /spring-integration-templates/docs/{version}/api/
-    - id: spring-interop-samples
-      name: Spring interop samples
-    - id: spring-mobile-samples
-      name: Spring mobile samples
-    - id: spring-mvc-showcase
-      name: Spring mvc showcase
+        - 1.0.0.M1
+
+
+  # ========================
+  # Attic
+  # ========================
+  attic:
+    # ----------------------
+    # Spring Data
+    # ----------------------
+    # No releases, last commit ~2 years ago
+    # TODO: Eliminate entirely? In favor of spring-data-couchbase?
+    - id: spring-data-couchdb
+      name: Spring Data CouchDB
+      lead: mpollack
+
+    # Classic example of an attic project. Releases were shipped, but the
+    # project is now deprecated in favor of spring-data-neo4j
+    - id: spring-data-graph
+      name: Spring Data Graph
+      lead: mpollack
+      refDocPath: /spring-data/data-graph/docs/{version}/reference/html
+      apiDocPath: /spring-data/data-graph/docs/{version}/api/
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-mvc-showcase/docs/{version}/reference/
-      apiDocPath: /spring-mvc-showcase/docs/{version}/api/
-    - id: spring-roo-backend-services
-      name: Spring roo backend services
+        - 1.1.0.RELEASE
+
+    # TODO: Eliminate entirely. No GA releases, and now deprecated in favor
+    # of spring-data-redis and (theoretically) spring-data-riak
+    - id: spring-data-keyvalue
+      name: Spring Data Key/Value
+      lead: mpollack
+
+    # TODO: Eliminate entirely. No releases, no code.
+    - id: spring-data-riak
+      name: Spring Data Riak
+      lead: mpollack
+
+    # ----------------------
+    # Spring Social
+    # ----------------------
+    # TODO: Eliminate entirely. No releases, and Gowalla is dead
+    - id: spring-social-gowalla
+      name: Spring Social Gowalla
+      lead: cwalls
+
+    # ----------------------
+    # Spring Framework
+    # ----------------------
+    # Never had a GA release, but README says that Spring 3.1.x projects can
+    # still work against milestones here. TODO: Talk to rossen about eliminating
+    - id: spring-test-mvc
+      name: Spring Test MVC
+      lead: rstoyanchev
+      refDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-roo-backend-services/docs/{version}/reference/
-      apiDocPath: /spring-roo-backend-services/docs/{version}/api/
-    - id: spring-roo-wrapping
-      name: Spring roo wrapping
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-roo-wrapping/docs/{version}/reference/
-      apiDocPath: /spring-roo-wrapping/docs/{version}/api/
-    - id: spring-webflow-issues
-      name: Spring webflow issues
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-webflow-issues/docs/{version}/reference/
-      apiDocPath: /spring-webflow-issues/docs/{version}/api/
-    - id: spring-data-book
-      name: Spring data book
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/book/docs/{version}/reference/
-      apiDocPath: /spring-data/book/docs/{version}/api/
-    - id: spring-data-build
-      name: Spring data build
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/build/docs/{version}/reference/
-      apiDocPath: /spring-data/build/docs/{version}/api/
-    - id: spring-data-solr-examples
-      name: Spring data solr examples
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-data/solr-examples/docs/{version}/reference/
-      apiDocPath: /spring-data/solr-examples/docs/{version}/api/
-    - id: spring-hadoop-admin
-      name: Spring hadoop admin
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-hadoop-admin/docs/{version}/reference/
-      apiDocPath: /spring-hadoop-admin/docs/{version}/api/
-    - id: spring-hadoop-samples
-      name: Spring hadoop samples
-    - id: spring-petclinic
-      name: Spring petclinic
-      supportedVersions:
-      - 1.0.0.RELEASE
-      refDocPath: /spring-petclinic/docs/{version}/reference/
-      apiDocPath: /spring-petclinic/docs/{version}/api/
-    - id: spring-webflow-samples
-      name: Spring webflow samples
+        - 1.0.0.M2
+
+
+# TODO: move out of springsource org:
+# - id: spring-data-rest-webmvc (examples / samples)
