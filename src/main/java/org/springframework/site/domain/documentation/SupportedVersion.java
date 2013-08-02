@@ -72,7 +72,7 @@ public class SupportedVersion implements Comparable<SupportedVersion> {
 	}
 
 	public String getShortName() {
-		return version.replaceAll("(\\.[A-Z]+[0-9]*)?$", "");
+		return version.replaceAll(".RELEASE$", "");
 	}
 
 	public String getReleaseName() {

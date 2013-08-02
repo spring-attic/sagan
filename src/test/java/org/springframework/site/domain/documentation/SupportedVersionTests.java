@@ -34,12 +34,12 @@ public class SupportedVersionTests {
 	@Test
 	public void getShortNameForPreReleaseVersion() {
 		SupportedVersion version = new SupportedVersion("1.2.3.M1", SupportedVersion.Release.PRERELEASE);
-		assertThat(version.getShortName(), equalTo("1.2.3"));
+		assertThat(version.getShortName(), equalTo("1.2.3.M1"));
 	}
 
 	@Test
 	public void getShortNameForOtherVersion() {
 		SupportedVersion version = new SupportedVersion("1.2.3.RC1", SupportedVersion.Release.PRERELEASE);
-		assertThat(version.getShortName(), equalTo("1.2.3"));
+		assertThat(version.getShortName(), equalTo("1.2.3.RC1"));
 	}
 }
