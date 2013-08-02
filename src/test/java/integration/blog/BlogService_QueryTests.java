@@ -10,18 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.site.domain.blog.BlogPostContentRenderer;
 import org.springframework.site.domain.blog.BlogService;
 import org.springframework.site.domain.blog.Post;
 import org.springframework.site.domain.blog.PostBuilder;
 import org.springframework.site.domain.blog.PostCategory;
+import org.springframework.site.domain.blog.PostFormAdapter;
 import org.springframework.site.domain.blog.PostRepository;
-import org.springframework.site.domain.blog.SummaryExtractor;
 import org.springframework.site.domain.services.DateService;
-import org.springframework.site.domain.services.MarkdownService;
 import org.springframework.site.domain.team.MemberProfile;
-import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.site.web.blog.EntityNotFoundException;
@@ -43,34 +39,30 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class BlogService_QueryTests extends IntegrationTestBase {
 
 	private static final Pageable FIRST_TEN_POSTS = PageableFactory.forLists(1);
-	private BlogService service;
-
-	@Autowired
-	private PostRepository postRepository;
-
-	@Mock
-	private MarkdownService markdownService;
 
 	@Mock
 	private DateService dateService;
 
 	@Mock
-	private TeamRepository teamRepository;
+	private SearchService searchService;
+
+	@Mock
+	private PostFormAdapter postFormAdapter;
 
 	@Rule
 	public ExpectedException expected = ExpectedException.none();
 
-	@Autowired LocalContainerEntityManagerFactoryBean fb;
+	@Autowired
+	private PostRepository postRepository;
 
-	@Mock
-	private SearchService searchService;
+	private BlogService service;
 
 	@Before
 	public void setup() {
 		initMocks(this);
 		given(dateService.now()).willReturn(new Date());
 
-		service = new BlogService(postRepository, new BlogPostContentRenderer(markdownService), dateService, teamRepository, searchService, new SummaryExtractor());
+		service = new BlogService(postRepository, postFormAdapter, dateService,searchService);
 		assertThat(postRepository.findAll().size(), equalTo(0));
 	}
 
@@ -196,7 +188,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 
 	@Test
 	public void paginationInfoBasedOnCurrentPageAndTotalPosts() {
-		List<Post> posts = new ArrayList<Post>();
+		List<Post> posts = new ArrayList<>();
 		long itemCount = 11;
 		for (int i = 0; i < itemCount; ++i) {
 			posts.add(PostBuilder.post().build());
@@ -247,7 +239,6 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 	public void getPublishedPostsForAuthorOnlyShowsAuthorsPosts() {
 		MemberProfile profile = new MemberProfile();
 		profile.setMemberId("myauthor");
-		teamRepository.save(profile);
 
 		Post post = PostBuilder.post().author(profile).build();
 		postRepository.save(post);
@@ -261,7 +252,6 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 	public void getPublishedPostsForAuthorOnlyShowsPublishedPosts() {
 		MemberProfile profile = new MemberProfile();
 		profile.setMemberId("myauthor");
-		teamRepository.save(profile);
 
 		Post post = PostBuilder.post().author(profile).build();
 		postRepository.save(post);

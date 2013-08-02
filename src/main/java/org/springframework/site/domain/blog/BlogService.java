@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.domain.services.DateService;
 import org.springframework.site.domain.team.MemberProfile;
-import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.web.blog.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -18,28 +17,22 @@ import java.util.List;
 @Service
 public class BlogService {
 
+	private PostFormAdapter postFormAdapter;
 	private PostRepository repository;
-	private TeamRepository teamRepository;
 	private SearchService searchService;
-	private BlogPostContentRenderer postContentRenderer;
 	private DateService dateService;
-
 	private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
-
-	private SummaryExtractor summaryExtractor;
 
 	private static final Log logger = LogFactory.getLog(BlogService.class);
 
 	@Autowired
-	public BlogService(PostRepository repository, BlogPostContentRenderer postContentRenderer,
-					   DateService dateService, TeamRepository teamRepository,
-					   SearchService searchService, SummaryExtractor summaryExtractor) {
+	public BlogService(PostRepository repository, PostFormAdapter postFormAdapter,
+					   DateService dateService,
+					   SearchService searchService) {
 		this.repository = repository;
-		this.postContentRenderer = postContentRenderer;
+		this.postFormAdapter = postFormAdapter;
 		this.dateService = dateService;
-		this.teamRepository = teamRepository;
 		this.searchService = searchService;
-		this.summaryExtractor = summaryExtractor;
 	}
 
 	// Query methods
@@ -111,64 +104,21 @@ public class BlogService {
 		return this.repository.findAll(pageRequest);
 	}
 
-	// CRUD Operations
-
 	public Post addPost(PostForm postForm, String authorId) {
-		String content = postForm.getContent();
-		Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
-		MemberProfile profile = this.teamRepository.findByMemberId(authorId);
-		post.setAuthor(profile);
-		post.setCreatedAt(createdDate(postForm, dateService.now()));
-
-		setPostProperties(postForm, content, post);
-
+		Post post = postFormAdapter.createPostFromPostForm(postForm, authorId);
 		this.repository.save(post);
 		saveToIndex(post);
-
 		return post;
 	}
 
-	private void setPostProperties(PostForm postForm, String content, Post post) {
-		post.setRenderedContent(this.postContentRenderer.render(content));
-		String summary = summaryExtractor.extract(post.getRenderedContent(), 500);
-		post.setRenderedSummary(summary);
-		post.setBroadcast(postForm.isBroadcast());
-		post.setDraft(postForm.isDraft());
-		post.setPublishAt(publishDate(postForm));
-	}
-
-	private Date createdDate(PostForm postForm, Date defaultDate) {
-		Date createdAt = postForm.getCreatedAt();
-		if (createdAt == null) {
-			createdAt = defaultDate;
-		}
-		return createdAt;
-	}
-
 	public void updatePost(Post post, PostForm postForm) {
-		String content = postForm.getContent();
-
-		post.setTitle(postForm.getTitle());
-		post.setRawContent(content);
-		post.setCategory(postForm.getCategory());
-		post.setCreatedAt(createdDate(postForm, post.getCreatedAt()));
-
-		setPostProperties(postForm, content, post);
-
+		postFormAdapter.updatePostFromPostForm(post, postForm);
 		this.repository.save(post);
 		saveToIndex(post);
 	}
 
 	public void deletePost(Post post) {
 		this.repository.delete(post);
-	}
-
-	private Date publishDate(PostForm postForm) {
-		if (!postForm.isDraft() && postForm.getPublishAt() == null) {
-			return this.dateService.now();
-		} else {
-			return postForm.getPublishAt();
-		}
 	}
 
 	private void saveToIndex(Post post) {
@@ -191,8 +141,7 @@ public class BlogService {
 	public void resummarizeAllPosts() {
 		List<Post> posts = repository.findAll();
 		for (Post post : posts) {
-			String summary = summaryExtractor.extract(post.getRenderedContent(), 500);
-			post.setRenderedSummary(summary);
+			postFormAdapter.summarize(post);
 			this.repository.save(post);
 		}
 	}
