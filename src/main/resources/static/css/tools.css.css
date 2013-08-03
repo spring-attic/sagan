@@ -116,8 +116,12 @@
   line-height: 24px;
   margin-bottom: 20px;
 }
+.tools--wrapper .tools--description.small-font {
+  font-size: 14px;
+  line-height: 24px;
+}
 .tools--wrapper h2 {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 .tools--wrapper .tools-feature--container {
   vertical-align: top;
@@ -285,6 +289,56 @@
   float: right;
 }
 
+.eclipse-platform--container {
+  border: 1px solid #34302D;
+  margin-bottom: 40px;
+}
+.eclipse-platform--container .eclipse-platform-dropdown-link {
+  display: block;
+}
+.eclipse-platform--container .platform-dropdown--icon {
+  color: #EEE;
+  padding: 18px;
+  background-color: #34302D;
+}
+.eclipse-platform--container .platform--name {
+  background-color: #34302D;
+  display: inline-block;
+  width: 327px;
+  text-align: center;
+}
+.eclipse-platform--container .platform--name .platform--icon-small {
+  display: inline-block;
+  background-color: #EEE;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  background-color: #eeeeee;
+}
+.eclipse-platform--container .platform--name h3 {
+  display: inline-block;
+  color: #EEE;
+  line-height: 16px;
+  vertical-align: middle;
+  margin: 17px 0 17px 15px;
+}
+.eclipse-platform--container .platform-versions--container {
+  padding: 0 20px;
+  overflow: hidden;
+  height: 0;
+  margin-left: -3%;
+}
+.eclipse-platform--container .platform-versions--container .release {
+  margin: 20px 2% 20px;
+  width: 29.33497%;
+  display: inline-block;
+}
+.eclipse-platform--container .platform-versions--container .platform-release--name {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+
 .tool-archive--table {
   margin-top: 30px;
   border-bottom: 1px solid #ccc;
@@ -318,6 +372,18 @@
 .tools-right-pane .tools-logo.ggts-logo {
   background-position: -338px -140px;
   width: 96px;
+}
+.tools-right-pane .tools-logo-small {
+  background-image: url("../img/iconsprite.png");
+  margin: 0 20px 0 0;
+  width: 43px;
+  height: 58px;
+}
+.tools-right-pane .tools-logo-small.sts-logo {
+  background-position: -231px -367px;
+}
+.tools-right-pane .tools-logo-small.ggts-logo {
+  background-position: -231px -433px;
 }
 .tools-right-pane ul {
   margin: 0;
@@ -364,4 +430,20 @@
   font-family: "Montserrat", sans-serif;
   margin-bottom: 20px;
   display: block;
+}
+.tools-right-pane .other-tools--container {
+  margin: 20px;
+  text-align: left;
+}
+.tools-right-pane .other-tools--container:first-child {
+  border-bottom: 1px solid #FFF;
+}
+.tools-right-pane .other-tools--container .other-tools--link {
+  color: #5FA134;
+  font-size: 16px;
+}
+.tools-right-pane .other-tools--container p {
+  font-size: 14px;
+  line-height: 18px;
+  margin: 0 0 20px 63px;
 }
