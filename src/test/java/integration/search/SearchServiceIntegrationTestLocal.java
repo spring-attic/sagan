@@ -31,6 +31,7 @@ import utils.FreePortFinder;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -142,6 +143,12 @@ public class SearchServiceIntegrationTestLocal {
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		assertThat(entries.get(0).getTitle(), is(equalTo(this.entry.getTitle())));
+	}
+
+	@Test
+	public void testSearchAll() throws ParseException {
+		indexSingleEntry();
+		assertThatSearchReturnsEntry("");
 	}
 
 	@Test
@@ -363,6 +370,66 @@ public class SearchServiceIntegrationTestLocal {
 		assertThat(searchResults.getFacets().size(), equalTo(2));
 		assertThat(searchResults.getFacets().get(0).getName(), equalTo("Blog"));
 		assertThat(searchResults.getFacets().get(1).getName(), equalTo("Guides"));
+	}
+
+	@Test
+	public void filterByFacets() throws ParseException {
+		SearchEntry gsg = SearchEntryBuilder.entry()
+				.path("http://example.com/gsg/some")
+				.title("a title")
+				.rawContent("some guide")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.facetPath("Guides")
+				.facetPath("Guides/Getting Started")
+				.notCurrent()
+				.build();
+
+		searchService.saveToIndex(gsg);
+
+		SearchEntry gsg2 = SearchEntryBuilder.entry()
+				.path("http://example.com/gsg/another")
+				.title("a title")
+				.rawContent("another guide")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.facetPath("Guides")
+				.facetPath("Guides/Getting Started")
+				.notCurrent()
+				.build();
+
+		searchService.saveToIndex(gsg2);
+
+		SearchEntry tutorial = SearchEntryBuilder.entry()
+				.path("http://example.com/tutorial")
+				.title("a title")
+				.rawContent("a tutorial")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.facetPath("Guides")
+				.facetPath("Guides/Tutorials")
+				.build();
+
+		searchService.saveToIndex(tutorial);
+
+		SearchEntry blog = SearchEntryBuilder.entry()
+				.path("http://example.com/blog")
+				.title("a title")
+				.rawContent("a blog post")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.facetPath("Blog")
+				.facetPath("Blog/Engineering")
+				.build();
+
+		searchService.saveToIndex(blog);
+
+		SearchResults searchResults = searchService.search("title", pageable, Arrays.asList("Guides"));
+
+		List<SearchResult> content = searchResults.getPage().getContent();
+		assertThat(content.size(), equalTo(3));
+		assertThat(searchResults.getFacets().size(), equalTo(1));
+		assertThat(searchResults.getFacets().get(0).getName(), equalTo("Guides"));
 	}
 
 	@Test
