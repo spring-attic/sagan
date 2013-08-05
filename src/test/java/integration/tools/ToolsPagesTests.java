@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
@@ -114,8 +113,7 @@ public class ToolsPagesTests extends IntegrationTestBase {
 		assertThat(document.text(), containsString("Spring Tool Suite"));
 		assertThat(document.text(), containsString("Groovy/Grails Tool Suite"));
 
-		assertThat(document.select(".platform h2").first().text(), is("Windows"));
-		assertThat(document.select("li.download-link a").first().attr("href"), is("http://download.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
+		assertThat(document.text(), containsString("Windows"));
 	}
 
 }
