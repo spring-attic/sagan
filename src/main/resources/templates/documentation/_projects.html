@@ -38,17 +38,15 @@
                         </div>
                     </div>
                     <div class="item--body">
-                        <div th:each="documentVersion,iterStat1 : ${item.supportedReferenceDocumentVersions}">
+                        <div th:each="documentation : ${item.projectDocumentationList}">
                             <div class="item--body--version">
                                 <div class="item--left-column">
-                                    <p th:text="${documentVersion.shortName}">Version</p>
-                                    <p th:text="'(' + ${documentVersion.releaseName} + ')'" th:unless="${#strings.isEmpty(documentVersion.releaseName)}">Version</p>
+                                    <p th:text="${documentation.versionShortName}">1.2.3</p>
+                                    <p th:text="'(' + ${documentation.releaseDisplayName} + ')'" th:if="${documentation.hasReleaseDisplayName()}">(CURRENT)</p>
                                 </div>
                                 <div class="item--right-column">
-                                    <a class="documentation-link reference-link" th:href="${documentVersion.url}" >Reference</a>
-                                    <div class="documentation-link api-link" th:each="documentVersion,iterStat2 : ${item.supportedApiDocsDocumentVersions}" th:if="${iterStat1.count}==${iterStat2.count}">
-                                        <a class="documentation-link" th:href="${documentVersion.url}">API</a>
-                                    </div>
+                                    <a class="documentation-link reference-link" th:href="${documentation.refDocUrl}" >Reference</a>
+                                    <a class="documentation-link api-link" th:href="${documentation.apiDocUrl}">API</a>
                                 </div>
                             </div>
                         </div>

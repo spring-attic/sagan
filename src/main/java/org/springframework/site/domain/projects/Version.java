@@ -75,7 +75,7 @@ public class Version implements Comparable<Version> {
 		return version.replaceAll(".RELEASE$", "");
 	}
 
-	public String getReleaseName() {
+	public String getReleaseDisplayName() {
 		return release.getDisplayName();
 	}
 }

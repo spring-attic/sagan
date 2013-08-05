@@ -39,7 +39,6 @@ public class ProjectMetadataYamlParser {
 			projects.put(category, categoryProjects);
 		}
 
-
 		return projects;
 	}
 
@@ -50,8 +49,8 @@ public class ProjectMetadataYamlParser {
 		String apiDocUrl = docsBaseUrl + projectData.get("apiDocPath");
 		String repoUrl = parseRepoUrl(projectData, githubOrgBaseUrl, id);
 		String siteUrl = parseSiteUrl(projectData, ghPagesBaseUrl, id);
-		SupportedVersions supportedVersions = parseSupportedVersions(projectData);
-		return new Project(id, name, refDocUrl, apiDocUrl, supportedVersions, repoUrl, siteUrl);
+		List<ProjectDocumentation> documentationList = parseProjectDocumentation(refDocUrl, apiDocUrl, projectData);
+		return new Project(id, name, repoUrl, siteUrl, documentationList);
 	}
 
 	private String parseRepoUrl(Map<String, Object> projectData, String githubOrgBaseUrl, String id) {
@@ -76,7 +75,7 @@ public class ProjectMetadataYamlParser {
 		return siteUrl;
 	}
 
-	private SupportedVersions parseSupportedVersions(Map<String, Object> projectData) {
+	private List<Version> parseSupportedVersions(Map<String, Object> projectData) {
 		if (projectData.containsKey("supportedVersions")) {
 			List<String> versionStrings = new ArrayList<>();
 			for (Object value : (List) projectData.get("supportedVersions")) {
@@ -84,6 +83,18 @@ public class ProjectMetadataYamlParser {
 			}
 			return SupportedVersions.build(versionStrings);
 		}
-		return new SupportedVersions(Collections.<Version>emptyList());
+		return Collections.emptyList();
+	}
+
+	private List<ProjectDocumentation> parseProjectDocumentation(String refDocTemplate, String apiDocTemplate, Map<String, Object> projectData) {
+		List<ProjectDocumentation> list = new ArrayList<>();
+		List<Version> supportedVersions = parseSupportedVersions(projectData);
+		for (Version version : supportedVersions) {
+			String refDocUrl = refDocTemplate.replaceAll("\\{version\\}", version.getFullVersion());
+			String apiDocUrl = apiDocTemplate.replaceAll("\\{version\\}", version.getFullVersion());
+			ProjectDocumentation projectDocumentation = new ProjectDocumentation(refDocUrl, apiDocUrl, version);
+			list.add(projectDocumentation);
+		}
+		return list;
 	}
 }

@@ -5,29 +5,26 @@ import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.projects.Project;
-import org.springframework.site.domain.projects.SupportedVersions;
+import org.springframework.site.domain.projects.ProjectDocumentation;
+import org.springframework.site.domain.projects.Version;
 import org.springframework.site.indexer.mapper.ApiDocumentMapper;
 import org.springframework.site.search.SearchEntry;
 
 import java.io.InputStream;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class ApiDocumentMapperTests {
 
-	private SupportedVersions versions = SupportedVersions.build(Arrays.asList("3.2.3.RELEASE", "3.1.4.RELEASE", "4.0.0.M1"));
-
-	private Project project = new Project("spring", "Spring",  //
-			//
-			"http://static.springsource.org/spring/docs/{version}/reference/", //
-			"http://static.springsource.org/spring/docs/{version}/api/", //
-			versions,
+	private Project project = new Project("spring",
+			"Spring",
 			"http://www.example.com/repo/spring-framework",
-			"http://www.example.com/spring-framework");
+			"http://www.example.com/spring-framework",
+			Collections.<ProjectDocumentation>emptyList());
 
-	private ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, versions.getCurrent());
+	private ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, new Version("3.2.1.RELEASE", Version.Release.CURRENT));
 
 	@Test
 	public void mapOlderJdkApiDoc() throws Exception {

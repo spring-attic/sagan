@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.projects.Project;
+import org.springframework.site.domain.projects.ProjectDocumentation;
 import org.springframework.site.domain.projects.ProjectMetadataService;
 import org.springframework.site.domain.projects.Version;
 import org.springframework.site.indexer.crawler.CrawlerService;
@@ -11,7 +12,6 @@ import org.springframework.site.indexer.mapper.ApiDocumentMapper;
 import org.springframework.site.indexer.mapper.ReferenceDocumentSearchEntryMapper;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriTemplate;
 
 @Service
 public class ProjectDocumentationIndexer implements Indexer<Project> {
@@ -37,14 +37,18 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 	@Override
 	public void indexItem(Project project) {
 		logger.info("Indexing project: " + project.getId());
-		for (Version version : project.getSupportedVersions()) {
-			UriTemplate rawUrl = new UriTemplate(project.getApiAllClassesUrl());
-			String url = rawUrl.expand(version.getFullVersion()).toString();
-			crawlerService.crawl(url, 1, new CrawledWebDocumentProcessor(searchService, new ApiDocumentMapper(project, version)));
+		for (ProjectDocumentation documentation : project.getProjectDocumentationList()) {
+			Version version = documentation.getVersion();
 
-			rawUrl = new UriTemplate(project.getReferenceUrl());
-			url = rawUrl.expand(version.getFullVersion()).toString();
-			crawlerService.crawl(url, 1, new CrawledWebDocumentProcessor(searchService, new ReferenceDocumentSearchEntryMapper(project, version)));
+			String apiDocUrl = documentation.getApiDocUrl() + "/allclasses-frame.html";
+			ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, version);
+			CrawledWebDocumentProcessor apiDocProcessor = new CrawledWebDocumentProcessor(searchService, apiDocumentMapper);
+			crawlerService.crawl(apiDocUrl, 1, apiDocProcessor);
+
+			String refDocUrl = documentation.getRefDocUrl();
+			ReferenceDocumentSearchEntryMapper documentMapper = new ReferenceDocumentSearchEntryMapper(project, version);
+			CrawledWebDocumentProcessor refDocProcessor = new CrawledWebDocumentProcessor(searchService, documentMapper);
+			crawlerService.crawl(refDocUrl, 1, refDocProcessor);
 		}
 	}
 

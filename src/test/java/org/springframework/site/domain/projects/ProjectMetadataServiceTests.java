@@ -26,7 +26,7 @@ public class ProjectMetadataServiceTests {
 		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 
 		assertEquals(3, documentationService.getProject("spring-framework")
-				.getSupportedVersions().size());
+				.getProjectDocumentationList().size());
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class ProjectMetadataServiceTests {
 		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 
 		assertEquals(3, documentationService.getProject("spring-framework")
-				.getSupportedVersions().size());
+				.getProjectDocumentationList().size());
 	}
 
 	@Test
@@ -68,29 +68,24 @@ public class ProjectMetadataServiceTests {
 
 		StringBuilder builder = new StringBuilder();
 		for (Project project : documentationService.getProjects()) {
-			for (ProjectDocumentation version : project
-					.getSupportedApiDocsDocumentVersions()) {
-				String url = version.getUrl();
-				ResponseEntity<String> entity = restTemplate.getForEntity(url,
-						String.class);
+			for (ProjectDocumentation documentation : project.getProjectDocumentationList()) {
+				String apiDocUrl = documentation.getApiDocUrl();
+				ResponseEntity<String> entity = restTemplate.getForEntity(apiDocUrl,String.class);
 				if (entity.getStatusCode() != HttpStatus.OK) {
 					builder.append(project.getId() + ".invalid.apiUrl."
-							+ version.getVersion() + ": " + url + "\n");
+							+ documentation.getVersion() + ": " + apiDocUrl + "\n");
 				}
-			}
-			for (ProjectDocumentation version : project
-					.getSupportedReferenceDocumentVersions()) {
-				String url = version.getUrl();
-				ResponseEntity<String> entity = restTemplate.getForEntity(url,
+
+				String refDocUrl = documentation.getRefDocUrl();
+				entity = restTemplate.getForEntity(refDocUrl,
 						String.class);
 				if (entity.getStatusCode() != HttpStatus.OK) {
 					builder.append(project.getId() + ".invalid.referenceUrl."
-							+ version.getVersion() + ": " + url + "\n");
+							+ documentation.getVersion() + ": " + refDocUrl + "\n");
 				}
 			}
 		}
 		System.err.println(builder);
-		assertEquals(3, documentationService.getProject("spring-framework")
-				.getSupportedVersions().size());
+		assertEquals(3, documentationService.getProject("spring-framework").getProjectDocumentationList().size());
 	}
 }
