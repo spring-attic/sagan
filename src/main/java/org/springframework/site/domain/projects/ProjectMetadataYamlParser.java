@@ -87,8 +87,8 @@ public class ProjectMetadataYamlParser {
 
 	class SupportedVersion {
 		String name;
-		String refDocPath;
-		String apiDocPath;
+		String refDocUrl;
+		String apiDocUrl;
 	}
 
 	private List<SupportedVersion> parseSupportedVersions(Map<String, Object> projectData) {
@@ -97,19 +97,19 @@ public class ProjectMetadataYamlParser {
 
 			for (Object value : (List) projectData.get("supportedVersions")) {
 				SupportedVersion supportedVersion = new SupportedVersion();
-				supportedVersion.refDocPath = "" + projectData.get("refDocPath");
-				supportedVersion.apiDocPath = "" + projectData.get("apiDocPath");
+				supportedVersion.refDocUrl = "" + projectData.get("refDocUrl");
+				supportedVersion.apiDocUrl = "" + projectData.get("apiDocUrl");
 
 				if (value instanceof String) {
 					supportedVersion.name = value.toString();
 				} else {
 					Map<String, String> versionMap = (Map<String, String>) value;
 					supportedVersion.name = versionMap.get("name");
-					if (versionMap.containsKey("refDocPath")) {
-						supportedVersion.refDocPath = versionMap.get("refDocPath");
+					if (versionMap.containsKey("refDocUrl")) {
+						supportedVersion.refDocUrl = versionMap.get("refDocUrl");
 					}
-					if (versionMap.containsKey("apiDocPath")) {
-						supportedVersion.apiDocPath = versionMap.get("apiDocPath");
+					if (versionMap.containsKey("apiDocUrl")) {
+						supportedVersion.apiDocUrl = versionMap.get("apiDocUrl");
 					}
 				}
 				versions.add(supportedVersion);
@@ -122,8 +122,8 @@ public class ProjectMetadataYamlParser {
 		List<ProjectVersion> projectVersions = new ArrayList<>();
 		Version currentVersion = null;
 		for (SupportedVersion supportedVersion : supportedVersions) {
-			String refDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.name, supportedVersion.refDocPath);
-			String apiDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.name, supportedVersion.apiDocPath);
+			String refDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.name, supportedVersion.refDocUrl);
+			String apiDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.name, supportedVersion.apiDocUrl);
 			Version version = buildVersion(supportedVersion.name, currentVersion);
 			if (currentVersion == null && version.isCurrent()) {
 				currentVersion = version;

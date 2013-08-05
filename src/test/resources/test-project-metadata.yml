@@ -8,16 +8,16 @@ projects:
       hasSite: true                                                         # optional, default=false
       siteUrl: http://www.example.com/spring-framework                      # optional, default={ghPagesBaseUrl}/{id}
       repoUrl: http://www.example.com/repo/spring-framework                 # optional, defaults to {githubOrgBaseUrl}/{id}
-      refDocPath: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
-      apiDocPath: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
+      refDocUrl: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
+      apiDocUrl: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
       supportedVersions:
         - 3.1.4.RELEASE
         - 3.2.3.RELEASE
         - 4.0.0.M1
     - id: spring-framework-nosite
       name: Spring Framework
-      refDocPath: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
-      apiDocPath: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
+      refDocUrl: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
+      apiDocUrl: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
       supportedVersions:
         - 3.1.4.RELEASE
         - 3.2.3.RELEASE
@@ -25,8 +25,8 @@ projects:
     - id: spring-framework-defaultsite
       name: Spring Framework
       hasSite: true                                                         # optional, default=false
-      refDocPath: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
-      apiDocPath: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
+      refDocUrl: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
+      apiDocUrl: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
       supportedVersions:
         - 3.1.4.RELEASE
         - 3.2.3.RELEASE
@@ -36,50 +36,50 @@ projects:
       hasSite: true                                                         # optional, default=false
       supportedVersions:
         - name: 2.2.1.RELEASE
-          refDocPath: /spring/trunk/reference/html/index.html
-          apiDocPath: /spring/trunk/apidocs/index.html
+          refDocUrl: /spring/trunk/reference/html/index.html
+          apiDocUrl: /spring/trunk/apidocs/index.html
     - id: mixed-docs-override
       name: Spring Framework
       hasSite: true
-      refDocPath: /spring/docs/{version}/spring-framework-reference/html/
-      apiDocPath: /spring/docs/{version}/javadoc-api/
+      refDocUrl: /spring/docs/{version}/spring-framework-reference/html/
+      apiDocUrl: /spring/docs/{version}/javadoc-api/
       supportedVersions:
         - name: 2.2.1.RELEASE
-          refDocPath: /spring/trunk/reference/html/index.html
-          apiDocPath: /spring/trunk/apidocs/index.html
+          refDocUrl: /spring/trunk/reference/html/index.html
+          apiDocUrl: /spring/trunk/apidocs/index.html
         - 2.1.2.RELEASE
     - id: override-just-api-docs
       name: Spring Api Docs
-      refDocPath: /spring/docs/{version}/reference/html
+      refDocUrl: /spring/docs/{version}/reference/html
       supportedVersions:
         - name: 2.4.0.M1
-          apiDocPath: /spring/docs/{version}/api/
+          apiDocUrl: /spring/docs/{version}/api/
         - name: 2.3.2.RELEASE
-          apiDocPath: /spring/docs/{version}/javadoc-api/
+          apiDocUrl: /spring/docs/{version}/javadoc-api/
     - id: override-just-ref-docs
       name: Spring Ref Docs
-      apiDocPath: /spring/docs/{version}/api/html
+      apiDocUrl: /spring/docs/{version}/api/html
       supportedVersions:
         - name: 2.4.0.M1
-          refDocPath: /spring/docs/{version}/reference/
+          refDocUrl: /spring/docs/{version}/reference/
         - name: 2.3.2.RELEASE
-          refDocPath: /spring/docs/{version}/other-reference/
+          refDocUrl: /spring/docs/{version}/other-reference/
     - id: project-docs-full-http-url
       name: Spring Ref Docs
-      apiDocPath: http://www.example.com/spring/docs/{version}/api/html
+      apiDocUrl: http://www.example.com/spring/docs/{version}/api/html
       supportedVersions:
         - name: 2.4.0.RELEASE
-          refDocPath: http://www.example.com//spring/docs/{version}/reference/
+          refDocUrl: http://www.example.com//spring/docs/{version}/reference/
 
 
   other:
     - id: spring-security
       name: Spring Security
-      refDocPath: /spring-security/site/docs/{version}/reference/springsecurity.html
-      apiDocPath: /spring-security/site/docs/{version}/apidocs/index.html
+      refDocUrl: /spring-security/site/docs/{version}/reference/springsecurity.html
+      apiDocUrl: /spring-security/site/docs/{version}/apidocs/index.html
   attic:
   discard:
     - id: spring-security
       name: Spring Security
-      refDocPath: /spring-security/site/docs/{version}/reference/springsecurity.html
-      apiDocPath: /spring-security/site/docs/{version}/apidocs/index.html
+      refDocUrl: /spring-security/site/docs/{version}/reference/springsecurity.html
+      apiDocUrl: /spring-security/site/docs/{version}/apidocs/index.html

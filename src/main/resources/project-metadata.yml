@@ -28,32 +28,32 @@ groupId: org.springframework
 # These values dictate the value of links in the menus at /documentation and, in
 # conjunction with `supportedVersions`, what gets indexed for search purposes.
 #
-# `refDocPath` and `apiDocPath` may be specified at the project level, e.g:
+# `refDocUrl` and `apiDocUrl` may be specified at the project level, e.g:
 #
 #    - id: spring-framework
 #      name: Spring Framework
-#      refDocPath: /spring/docs/{version}/spring-framework-reference/html/
-#      apiDocPath: /spring/docs/{version}/javadoc-api/
+#      refDocUrl: /spring/docs/{version}/spring-framework-reference/html/
+#      apiDocUrl: /spring/docs/{version}/javadoc-api/
 #
-# `refDocPath` and `apiDocPath` may also be specified at the individual version level:
+# `refDocUrl` and `apiDocUrl` may also be specified at the individual version level:
 #    - id: spring-batch
 #      name: Spring Batch
 #      supportedVersions:
 #        - name: 2.2.1.RELEASE
-#          refDocPath: /spring-batch/trunk/reference/html/index.html
-#          apiDocPath: /spring-batch/trunk/apidocs/index.html
+#          refDocUrl: /spring-batch/trunk/reference/html/index.html
+#          apiDocUrl: /spring-batch/trunk/apidocs/index.html
 #        - name: 2.1.9.RELEASE
-#          refDocPath: /spring-batch/2.1.x/reference/html/index.html
-#          apiDocPath: /spring-batch/2.1.x/apidocs/index.html
+#          refDocUrl: /spring-batch/2.1.x/reference/html/index.html
+#          apiDocUrl: /spring-batch/2.1.x/apidocs/index.html
 #
-# if `refDocPath` and/or `apiDocPath` are not specified at all within a given
+# if `refDocUrl` and/or `apiDocUrl` are not specified at all within a given
 # project's metadata, then the value will fall back to the top level template
 # declared below.
 #
 # TODO: waiting on https://www.pivotaltracker.com/story/show/54562726 and
 #       https://www.pivotaltracker.com/story/show/54562226
-# refDocPath: {docsBaseUrl}/{id}/docs/{version}/reference/html
-# apiDocPath: {docsBaseUrl}/{id}/docs/{version}/api/
+# refDocUrl: {docsBaseUrl}/{id}/docs/{version}/reference/html
+# apiDocUrl: {docsBaseUrl}/{id}/docs/{version}/api/
 
 projects:
 
@@ -69,8 +69,8 @@ projects:
       name: Spring AMQP
       lead: grussell
       hasSite: true
-      refDocPath: /spring-amqp/docs/{version}/reference/html
-      apiDocPath: /spring-amqp/docs/{version}/api/
+      refDocUrl: /spring-amqp/docs/{version}/reference/html
+      apiDocUrl: /spring-amqp/docs/{version}/api/
       supportedVersions:
         - 1.1.4.RELEASE
         - 1.2.0.RELEASE
@@ -81,8 +81,8 @@ projects:
     - id: spring-android
       name: Spring Android
       lead: rclarkson
-      refDocPath: /spring-android/docs/{version}/reference/html
-      apiDocPath: /spring-android/docs/{version}/api/
+      refDocUrl: /spring-android/docs/{version}/reference/html
+      apiDocUrl: /spring-android/docs/{version}/api/
       supportedVersions:
         - 1.0.1.RELEASE
 
@@ -93,17 +93,15 @@ projects:
     - id: spring-batch
       name: Spring Batch
       lead: mminella
-      refDocPath: /TODO # remove when #54510094 is complete
-      apiDocPath: /TODO # remove when #54510094 is complete
+      refDocUrl: /TODO # remove when #54510094 is complete
+      apiDocUrl: /TODO # remove when #54510094 is complete
       supportedVersions:
-        - 2.2.1.RELEASE
-        #- name: 2.2.1.RELEASE
-        #  refDocPath: /spring-batch/trunk/reference/html/index.html
-        #  apiDocPath: /spring-batch/trunk/apidocs/index.html
-        - 2.1.9.RELEASE
-        #- name: 2.1.9.RELEASE
-        #  refDocPath: /spring-batch/2.1.x/reference/html/index.html
-        #  apiDocPath: /spring-batch/2.1.x/apidocs/index.html
+        - name: 2.2.1.RELEASE
+          refDocUrl: /spring-batch/trunk/reference/html/index.html
+          apiDocUrl: /spring-batch/trunk/apidocs/index.html
+        - name: 2.1.9.RELEASE
+          refDocUrl: /spring-batch/2.1.x/reference/html/index.html
+          apiDocUrl: /spring-batch/2.1.x/apidocs/index.html
 
     # ----------------------
     # Spring Data
@@ -111,8 +109,8 @@ projects:
     - id: spring-data-jpa
       name: Spring Data JPA
       lead: ogierke
-      refDocPath: /spring-data/jpa/docs/{version}/reference/html/
-      apiDocPath: /spring-data/jpa/docs/{version}/api/
+      refDocUrl: /spring-data/jpa/docs/{version}/reference/html/
+      apiDocUrl: /spring-data/jpa/docs/{version}/api/
       supportedVersions:
         - 1.4.0.RC1
         - 1.3.4.RELEASE
@@ -121,8 +119,8 @@ projects:
     - id: spring-data-commons
       name: Spring Data Commons
       lead: ogierke
-      refDocPath: /spring-data/data-commons/docs/{version}/reference/html
-      apiDocPath: /spring-data/data-commons/docs/{version}/api/
+      refDocUrl: /spring-data/data-commons/docs/{version}/reference/html
+      apiDocUrl: /spring-data/data-commons/docs/{version}/api/
       supportedVersions:
         - 1.6.0.RC1
         - 1.5.2.RELEASE
@@ -130,16 +128,16 @@ projects:
     - id: spring-data-jdbc-ext
       name: Spring Data JDBC Extensions
       lead: trisberg
-      refDocPath: /spring-data/jdbc/docs/{version}/reference/html
-      apiDocPath: /spring-data/jdbc/docs/{version}/api/
+      refDocUrl: /spring-data/jdbc/docs/{version}/reference/html
+      apiDocUrl: /spring-data/jdbc/docs/{version}/api/
       supportedVersions:
         - 1.0.0.RELEASE
 
     - id: spring-data-mongodb
       name: Spring Data MongoDB
       lead: ogierke
-      refDocPath: /spring-data/data-mongo/docs/{version}/reference/html
-      apiDocPath: /spring-data/data-mongo/docs/{version}/api/
+      refDocUrl: /spring-data/data-mongo/docs/{version}/reference/html
+      apiDocUrl: /spring-data/data-mongo/docs/{version}/api/
       supportedVersions:
         - 1.3.0.M1
         - 1.2.3.RELEASE
@@ -148,8 +146,8 @@ projects:
       name: Spring Data Neo4J
       sponsor: ogierke
       lead: jexp@github # Michael Hunger
-      refDocPath: /spring-data/data-neo4j/docs/{version}/reference/html
-      apiDocPath: /spring-data/data-neo4j/docs/{version}/api/
+      refDocUrl: /spring-data/data-neo4j/docs/{version}/reference/html
+      apiDocUrl: /spring-data/data-neo4j/docs/{version}/api/
       supportedVersions:
         - 2.3.0.M1
         - 2.2.2.RELEASE
@@ -157,8 +155,8 @@ projects:
     - id: spring-data-redis
       name: Spring Data Redis
       lead: jhickey
-      refDocPath: /spring-data/data-redis/docs/{version}/reference/html
-      apiDocPath: /spring-data/data-redis/docs/{version}/api/
+      refDocUrl: /spring-data/data-redis/docs/{version}/reference/html
+      apiDocUrl: /spring-data/data-redis/docs/{version}/api/
       supportedVersions:
         - 1.1.0.M1
         - 1.0.5.RELEASE
@@ -166,11 +164,11 @@ projects:
     - id: spring-data-rest
       name: Spring Data REST
       lead: jbrisbin
-      refDocPath: /spring-data/rest/docs/{version}/reference/html
-      apiDocPath: /spring-data/rest/docs/{version}/api/
+      refDocUrl: /spring-data/rest/docs/{version}/reference/html
+      apiDocUrl: /spring-data/rest/docs/{version}/api/
       supportedVersions:
         - 1.0.0.RELEASE
-          # TODO: need to express refDocPath: NONE here, as no ref docs exist
+          # TODO: need to express refDocUrl: NONE here, as no ref docs exist
           # https://www.pivotaltracker.com/story/show/54564958
         - 1.1.0.M1
 
@@ -180,8 +178,8 @@ projects:
     - id: spring-flex
       name: Spring Flex
       lead: jgrelle
-      refDocPath: /spring-flex/docs/{version}/reference/html
-      apiDocPath: /spring-flex/docs/{version}/javadoc-api/
+      refDocUrl: /spring-flex/docs/{version}/reference/html
+      apiDocUrl: /spring-flex/docs/{version}/javadoc-api/
       supportedVersions:
         - 1.5.2.RELEASE
 
@@ -190,8 +188,8 @@ projects:
     # ----------------------
     - id: spring-framework
       name: Spring Framework
-      refDocPath: /spring/docs/{version}/spring-framework-reference/html/
-      apiDocPath: /spring/docs/{version}/javadoc-api/
+      refDocUrl: /spring/docs/{version}/spring-framework-reference/html/
+      apiDocUrl: /spring/docs/{version}/javadoc-api/
       supportedVersions:
         - 3.1.4.RELEASE
         - 3.2.3.RELEASE
@@ -203,8 +201,8 @@ projects:
     - id: spring-gemfire
       name: Spring GemFire
       lead: dturanski
-      refDocPath: /spring-gemfire/docs/{version}/reference/html
-      apiDocPath: /spring-gemfire/docs/{version}/api/
+      refDocUrl: /spring-gemfire/docs/{version}/reference/html
+      apiDocUrl: /spring-gemfire/docs/{version}/api/
       supportedVersions:
       - 1.3.1.RELEASE
       - 1.2.2.RELEASE
@@ -216,8 +214,8 @@ projects:
       name: Spring for Apache Hadoop
       sponsor: trisberg
       lead: jvalkeal@github # Janne Valkealahti
-      refDocPath: /spring-hadoop/docs/{version}/reference/html
-      apiDocPath: /spring-hadoop/docs/{version}/api/
+      refDocUrl: /spring-hadoop/docs/{version}/reference/html
+      apiDocUrl: /spring-hadoop/docs/{version}/api/
       supportedVersions:
         - 1.0.1.RC1
         - 1.0.0.RELEASE
@@ -228,8 +226,8 @@ projects:
     - id: spring-hateoas
       name: Spring HATEOAS
       lead: ogierke
-      refDocPath: https://github.com/SpringSource/spring-hateoas/blob/master/readme.md
-      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958 TODO: talk to Ollie
+      refDocUrl: https://github.com/SpringSource/spring-hateoas/blob/master/readme.md
+      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958 TODO: talk to Ollie
       supportedVersions:
         - 0.7.0.RELEASE
 
@@ -239,8 +237,8 @@ projects:
     - id: spring-integration
       name: Spring Integration
       lead: mfisher
-      refDocPath: /spring-integration/docs/{version}/reference/html
-      apiDocPath: /spring-integration/docs/{version}/api/
+      refDocUrl: /spring-integration/docs/{version}/reference/html
+      apiDocUrl: /spring-integration/docs/{version}/api/
       supportedVersions:
         - 3.0.0.M2
         - 2.2.4.RELEASE
@@ -252,8 +250,8 @@ projects:
     - id: spring-mobile
       name: Spring Mobile
       lead: rclarkson
-      refDocPath: /spring-mobile/docs/{version}/reference/htmlsingle/
-      apiDocPath: /spring-mobile/docs/{version}/api/
+      refDocUrl: /spring-mobile/docs/{version}/reference/htmlsingle/
+      apiDocUrl: /spring-mobile/docs/{version}/api/
       supportedVersions:
         - 1.0.1.RELEASE
         - 1.1.0.M3
@@ -265,8 +263,8 @@ projects:
       name: Spring Roo
       sponsor: NONE # TODO
       lead: alankstewart@github
-      refDocPath: /spring-roo/reference/html/
-      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      refDocUrl: /spring-roo/reference/html/
+      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
         - 1.2.4.RELEASE
 
@@ -275,8 +273,8 @@ projects:
     # ----------------------
     - id: spring-security
       name: Spring Security
-      refDocPath: /spring-security/site/docs/{version}/reference/springsecurity.html
-      apiDocPath: /spring-security/site/docs/{version}/apidocs/
+      refDocUrl: /spring-security/site/docs/{version}/reference/springsecurity.html
+      apiDocUrl: /spring-security/site/docs/{version}/apidocs/
       supportedVersions:
         - 3.1.4.RELEASE
         - 3.2.0.M2
@@ -290,9 +288,9 @@ projects:
         - name: 1.0.5.RELEASE
           # TODO: the "dev guide" seems to be the closest thing to a "reference doc" here.
           #       requires https://www.pivotaltracker.com/story/show/54562242 to work properly
-          refDocPath: https://github.com/SpringSource/spring-security-oauth/wiki/devguide
+          refDocUrl: https://github.com/SpringSource/spring-security-oauth/wiki/devguide
           # TODO: this actually points to 1.0.0.RELEASE - seems to be the latest published api docs
-          apiDocPath: /spring-security/oauth/apidocs/index.html
+          apiDocUrl: /spring-security/oauth/apidocs/index.html
 
     # ----------------------
     # Spring Shell
@@ -300,8 +298,8 @@ projects:
     - id: spring-shell
       name: Spring Shell
       lead: mpollack
-      refDocPath: /spring-shell/docs/{version}/reference/html
-      apiDocPath: /spring-shell/docs/{version}/api/
+      refDocUrl: /spring-shell/docs/{version}/reference/html
+      apiDocUrl: /spring-shell/docs/{version}/api/
       supportedVersions:
         - 1.1.0.M1
         - 1.0.0.RELEASE
@@ -312,8 +310,8 @@ projects:
     - id: spring-social
       name: Spring Social
       lead: cwalls
-      refDocPath: /spring-social/docs/{version}/reference/html
-      apiDocPath: /spring-social/docs/{version}/api/
+      refDocUrl: /spring-social/docs/{version}/reference/html
+      apiDocUrl: /spring-social/docs/{version}/api/
       supportedVersions:
         - 1.1.0.M3
         - 1.0.3.RELEASE
@@ -321,8 +319,8 @@ projects:
     - id: spring-social-facebook
       name: Spring Social Facebook
       lead: cwalls
-      refDocPath: /spring-social-facebook/docs/{version}/reference/html
-      apiDocPath: /spring-social-facebook/docs/{version}/api/
+      refDocUrl: /spring-social-facebook/docs/{version}/reference/html
+      apiDocUrl: /spring-social-facebook/docs/{version}/api/
       supportedVersions:
         - 1.1.0.M3
         - 1.0.3.RELEASE
@@ -330,8 +328,8 @@ projects:
     - id: spring-social-twitter
       name: Spring Social Twitter
       lead: cwalls
-      refDocPath: /spring-social-twitter/docs/{version}/reference/html
-      apiDocPath: /spring-social-twitter/docs/{version}/api/
+      refDocUrl: /spring-social-twitter/docs/{version}/reference/html
+      apiDocUrl: /spring-social-twitter/docs/{version}/api/
       supportedVersions:
         - 1.1.0.M3
         - 1.0.5.RELEASE
@@ -343,14 +341,14 @@ projects:
     - id: spring-webflow
       name: Spring Web Flow
       lead: rstoyanchev
-      refDocPath: /spring-webflow/docs/{version}/reference/html
+      refDocUrl: /spring-webflow/docs/{version}/reference/html
       supportedVersions:
         - 2.4.0.M1
         #- name: 2.4.0.M1
-        #    apiDocPath: /spring-webflow/docs/{version}/api/
+        #    apiDocUrl: /spring-webflow/docs/{version}/api/
         - 2.3.2.RELEASE
         #- name: 2.3.2.RELEASE
-        #    apiDocPath: /spring-webflow/docs/{version}/javadoc-api/
+        #    apiDocUrl: /spring-webflow/docs/{version}/javadoc-api/
 
     # ----------------------
     # Spring WS
@@ -359,13 +357,13 @@ projects:
     - id: spring-ws
       name: Spring Web Services
       lead: apoutsma
-      refDocPath: /TODO
-      apiDocPath: /TODO
+      refDocUrl: /TODO
+      apiDocUrl: /TODO
       supportedVersions:
         - 2.1.3.RELEASE
         #- name: 2.1.3.RELEASE
-        #  refDocPath: /spring-ws/sites/{version}/reference/html/index.html
-        #  apiDocPath: /spring-ws/sites/{version}/apidocs/
+        #  refDocUrl: /spring-ws/sites/{version}/reference/html/index.html
+        #  apiDocUrl: /spring-ws/sites/{version}/apidocs/
 
 
   # ========================
@@ -380,36 +378,36 @@ projects:
       lead: aclement
       supportedVersions:
       - 9.9.9.RELEASE
-      refDocPath: /spring-loaded/docs/{version}/reference/html
-      apiDocPath: /spring-loaded/docs/{version}/api/
+      refDocUrl: /spring-loaded/docs/{version}/reference/html
+      apiDocUrl: /spring-loaded/docs/{version}/api/
 
     - id: spring-ide #TODO
       name: Spring IDE
       supportedVersions:
       - 9.9.9.RELEASE
-      refDocPath: /spring-ide/docs/{version}/reference/html
-      apiDocPath: /spring-ide/docs/{version}/api/
+      refDocUrl: /spring-ide/docs/{version}/reference/html
+      apiDocUrl: /spring-ide/docs/{version}/api/
 
     - id: spring-insight-plugins #TODO
       name: Spring Insight Plugins
       supportedVersions:
       - 9.9.9.RELEASE
-      refDocPath: /spring-insight-plugins/docs/{version}/reference/html
-      apiDocPath: /spring-insight-plugins/docs/{version}/api/
+      refDocUrl: /spring-insight-plugins/docs/{version}/reference/html
+      apiDocUrl: /spring-insight-plugins/docs/{version}/api/
 
     - id: spring-migration-analyzer #TODO
       name: Spring Migration Analyzer
       supportedVersions:
       - 9.9.9.RELEASE
-      refDocPath: /spring-migration-analyzer/docs/{version}/reference/html
-      apiDocPath: /spring-migration-analyzer/docs/{version}/api/
+      refDocUrl: /spring-migration-analyzer/docs/{version}/reference/html
+      apiDocUrl: /spring-migration-analyzer/docs/{version}/api/
 
     - id: spring-python #TODO
       name: Spring Python
       supportedVersions:
       - 9.9.9.RELEASE
-      refDocPath: /spring-python/docs/{version}/reference/html
-      apiDocPath: /spring-python/docs/{version}/api/
+      refDocUrl: /spring-python/docs/{version}/reference/html
+      apiDocUrl: /spring-python/docs/{version}/api/
 
   # ========================
   # Incubator
@@ -421,8 +419,8 @@ projects:
     - id: spring-boot
       name: Spring Boot
       lead: dsyer # and pwebb (co-leads represented comma-separated?)
-      refDocPath: https://github.com/SpringSource/spring-boot/blob/master/README.md
-      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      refDocUrl: https://github.com/SpringSource/spring-boot/blob/master/README.md
+      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
         - 0.5.0.M1
 
@@ -443,8 +441,8 @@ projects:
       name: Spring Security Kerberos
       lead: mwiesner
       siteUrl: http://static.springsource.org/spring-security/site/extensions/saml/
-      refDocPath: /spring-security-kerberos/docs/{version}/reference/html
-      apiDocPath: /spring-security-kerberos/docs/{version}/api/
+      refDocUrl: /spring-security-kerberos/docs/{version}/reference/html
+      apiDocUrl: /spring-security-kerberos/docs/{version}/api/
       supportedVersions:
         - 1.0.0.CI-SNAPSHOT # TODO: this should be BUILD-SNAPSHOT
 
@@ -461,8 +459,8 @@ projects:
       siteUrl: http://static.springsource.org/spring-security/site/extensions/krb/
       supportedVersions:
         - name: 1.0.0.RC2
-          refDocPath: /spring-security-saml/docs/1.0.x/reference/html/
-          apiDocPath: /spring-security-saml/docs/1.0.x/api/
+          refDocUrl: /spring-security-saml/docs/1.0.x/reference/html/
+          apiDocUrl: /spring-security-saml/docs/1.0.x/api/
 
     # ----------------------
     # Spring Data
@@ -490,8 +488,8 @@ projects:
     - id: spring-data-envers
       name: Spring Data Envers
       lead: ogierke
-      refDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
-      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      refDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
         - 0.1.0.RELEASE
 
@@ -505,8 +503,8 @@ projects:
       name: Spring Data Solr
       sponsor: mpollack
       lead: christophstrobl@github
-      refDocPath: /spring-data/solr/docs/{version}/reference/html
-      apiDocPath: /spring-data/solr/docs/{version}/api/
+      refDocUrl: /spring-data/solr/docs/{version}/reference/html
+      apiDocUrl: /spring-data/solr/docs/{version}/api/
       supportedVersions:
         - 1.0.0.RC1
 
@@ -522,8 +520,8 @@ projects:
     - id: spring-integration-dsl-groovy
       name: Spring Integration Groovy DSL
       lead: dturanski
-      refDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
-      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      refDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
         - 1.0.0.M1
 
@@ -532,8 +530,8 @@ projects:
       lead: ghillert
       # M2 release was tagged, but only api docs are 1.0.0.BUILD-SNAPSHOT;
       # no ref docs whatsoever
-      refDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
-      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      refDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
         - 1.0.0.M2
 
@@ -552,8 +550,8 @@ projects:
     - id: spring-plugin
       name: Spring Plugin
       lead: ogierke
-      refDocPath: https://github.com/SpringSource/spring-plugin/blob/master/README.markdown
-      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      refDocUrl: https://github.com/SpringSource/spring-plugin/blob/master/README.markdown
+      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
       - 0.8.0.RELEASE
 
@@ -564,8 +562,8 @@ projects:
       name: Spring Retry
       supportedVersions:
       - 9.9.9.RELEASE
-      refDocPath: /spring-retry/docs/{version}/reference/html
-      apiDocPath: /spring-retry/docs/{version}/api/
+      refDocUrl: /spring-retry/docs/{version}/reference/html
+      apiDocUrl: /spring-retry/docs/{version}/api/
 
     # ----------------------
     # Spring Scala
@@ -574,8 +572,8 @@ projects:
       name: Spring Scala
       supportedVersions:
       - 9.9.9.RELEASE
-      refDocPath: /spring-scala/docs/{version}/reference/html
-      apiDocPath: /spring-scala/docs/{version}/api/
+      refDocUrl: /spring-scala/docs/{version}/reference/html
+      apiDocUrl: /spring-scala/docs/{version}/api/
 
     # ----------------------
     # Spring Social
@@ -589,8 +587,8 @@ projects:
     - id: spring-social-linkedin
       name: Spring Social LinkedIn
       lead: cwalls
-      refDocPath: /spring-social-linkedin/docs/{version}/reference/html
-      apiDocPath: /spring-social-linkedin/docs/{version}/api/
+      refDocUrl: /spring-social-linkedin/docs/{version}/reference/html
+      apiDocUrl: /spring-social-linkedin/docs/{version}/api/
       supportedVersions:
         - 1.0.0.RC2
 
@@ -622,8 +620,8 @@ projects:
       name: Spring XD
       siteUrl: https://github.com/springsource/spring-xd/wiki
       # TODO: eliminate in favor of defaults (https://www.pivotaltracker.com/story/show/54562726)
-      refDocPath: /spring-xd/docs/{version}/reference/html
-      apiDocPath: /spring-xd/docs/{version}/api/
+      refDocUrl: /spring-xd/docs/{version}/reference/html
+      apiDocUrl: /spring-xd/docs/{version}/api/
       supportedVersions:
         - 1.0.0.M1
 
@@ -646,8 +644,8 @@ projects:
     - id: spring-data-graph
       name: Spring Data Graph
       lead: mpollack
-      refDocPath: /spring-data/data-graph/docs/{version}/reference/html
-      apiDocPath: /spring-data/data-graph/docs/{version}/api/
+      refDocUrl: /spring-data/data-graph/docs/{version}/reference/html
+      apiDocUrl: /spring-data/data-graph/docs/{version}/api/
       supportedVersions:
         - 1.1.0.RELEASE
 
@@ -678,8 +676,8 @@ projects:
     - id: spring-test-mvc
       name: Spring Test MVC
       lead: rstoyanchev
-      refDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
-      apiDocPath: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      refDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
       supportedVersions:
         - 1.0.0.M2
 
