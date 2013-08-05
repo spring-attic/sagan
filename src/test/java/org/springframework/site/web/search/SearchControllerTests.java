@@ -40,7 +40,7 @@ public class SearchControllerTests {
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		this.controller = new SearchController(this.searchService);
-		SearchResult entry = new SearchResult("", "", "", "");
+		SearchResult entry = new SearchResult("", "", "", "", "", "", "original search term");
 		this.entries.add(entry);
 		this.resultsPage = new PageImpl<>(this.entries);
 		given(this.searchService.search(anyString(), (Pageable) anyObject(), anyList())).willReturn(

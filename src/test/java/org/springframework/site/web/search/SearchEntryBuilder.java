@@ -17,6 +17,7 @@ public class SearchEntryBuilder {
 	private String path = "/some/path";
 	private List<String> facetPaths = new ArrayList<>();
 	private boolean current = true;
+	private String type;
 
 	private SearchEntryBuilder() {
 	}
@@ -74,7 +75,14 @@ public class SearchEntryBuilder {
 		searchResult.setPath(path);
 		searchResult.setCurrent(current);
 		searchResult.setFacetPaths(facetPaths);
+		if (type != null) {
+			searchResult.setType(type);
+		}
 		return searchResult;
 	}
 
+	public SearchEntryBuilder type(String type) {
+		this.type = type;
+		return this;
+	}
 }

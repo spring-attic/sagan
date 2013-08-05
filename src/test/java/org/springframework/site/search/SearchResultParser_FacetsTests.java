@@ -76,7 +76,7 @@ public class SearchResultParser_FacetsTests {
 		jestResult.setJsonObject(jsonParser.parse(RESULT_STRING).getAsJsonObject());
 
 		Pageable pageable = new PageRequest(1, 10);
-		searchResults = searchResultParser.parseResults(jestResult, pageable);
+		searchResults = searchResultParser.parseResults(jestResult, pageable, "search term");
 	}
 
 	@Test

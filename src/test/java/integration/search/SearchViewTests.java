@@ -1,7 +1,6 @@
 package integration.search;
 
 import integration.IntegrationTestBase;
-import io.searchbox.core.Search;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,6 +19,7 @@ import org.springframework.site.web.PageableFactory;
 import org.springframework.site.web.PaginationInfo;
 import org.springframework.site.web.search.SearchEntryBuilder;
 import org.springframework.site.web.search.SearchForm;
+import org.springframework.site.web.search.SearchResultBuilder;
 import org.springframework.web.servlet.View;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 
@@ -99,7 +99,7 @@ public class SearchViewTests extends IntegrationTestBase {
 
 	@Test
 	public void displaysPaginationControl() throws Exception {
-		Page<SearchEntry> entries = new PageImpl<SearchEntry>(buildManySearchEntriesInNovember(10), PageableFactory.forSearch(1), 11);
+		Page<SearchResult> entries = new PageImpl<>(buildManySearchEntriesInNovember(10), PageableFactory.forSearch(1), 11);
 		model.put("results", entries.getContent());
 		model.put("paginationInfo", new PaginationInfo(entries));
 		view.render(model, new MockHttpServletRequest(), response);
@@ -109,27 +109,27 @@ public class SearchViewTests extends IntegrationTestBase {
 		assertThat(searchInputBox, is(notNullValue()));
 	}
 
-	private SearchEntry createSingleSearchEntry() {
-		return SearchEntryBuilder.entry()
+	private SearchResult createSingleSearchEntry() {
+		return SearchResultBuilder.entry()
 				.title("This week in Spring - June 3, 2013")
 				.summary("Html summary")
 				.rawContent("Raw Content")
-				.publishAt(new Date(System.currentTimeMillis() - 1000000))
 				.path("/blog/" + 1)
 				.build();
 	}
 
-	private List<SearchEntry> buildManySearchEntriesInNovember(int numberToCreate) {
+	private List<SearchResult> buildManySearchEntriesInNovember(int numberToCreate) {
 		Calendar calendar = Calendar.getInstance();
-		List<SearchEntry> entries = new ArrayList<SearchEntry>();
+		List<SearchResult> entries = new ArrayList<>();
 		for (int number = 1; number <= numberToCreate; number++) {
 			calendar.set(2012, 10, number);
 
-			SearchEntry entry = SearchEntryBuilder.entry()
+			SearchResult entry = SearchResultBuilder.entry()
 					.title("This week in Spring - November " + number + ", 2012")
 					.summary("Html summary")
 					.rawContent("Raw Content")
-					.publishAt(calendar.getTime())
+					.type("site")
+					.highlight("highlight")
 					.path("/blog/" + number)
 					.build();
 

@@ -17,12 +17,12 @@ import java.util.List;
 @Service
 public class SearchResultParser {
 
-	public SearchResults parseResults(JestResult jestResult, Pageable pageable) {
+	public SearchResults parseResults(JestResult jestResult, Pageable pageable, String originalSearchTerm) {
 		JsonObject response = jestResult.getJsonObject();
 		JsonObject hits = response.getAsJsonObject("hits");
 		JsonArray resultsArray = hits.getAsJsonArray("hits");
 
-		ArrayList<SearchResult> results = prepareResults(resultsArray);
+		ArrayList<SearchResult> results = prepareResults(resultsArray, originalSearchTerm);
 
 		int totalResults = hits.get("total").getAsInt();
 		PageImpl<SearchResult> page = new PageImpl<>(results, pageable, totalResults);
@@ -64,33 +64,35 @@ public class SearchResultParser {
 		return list;
 	}
 
-	private ArrayList<SearchResult> prepareResults(JsonArray hits) {
+	private ArrayList<SearchResult> prepareResults(JsonArray hits, String originalSearchTerm) {
 		ArrayList<SearchResult> results = new ArrayList<>();
 		for (JsonElement element : hits) {
 			JsonObject hit = element.getAsJsonObject();
-			String summary = extractSummary(hit);
 			String id = hit.get("_id").getAsString();
 
 			JsonObject source = hit.getAsJsonObject("_source");
 			String title = source.get("title").getAsString();
 			String url = source.get("path").getAsString();
+			String type = hit.get("_type").getAsString();
+			String summary = source.get("summary").getAsString();
 
-			SearchResult result = new SearchResult(id, title, summary, url);
+			String highlight = extractHighlight(hit);
+
+			SearchResult result = new SearchResult(id, title, summary, url, type, highlight, originalSearchTerm);
 			results.add(result);
 		}
 		return results;
 	}
 
-	private String extractSummary(JsonObject hit) {
-		String summary;
+	private String extractHighlight(JsonObject hit) {
+		String summary = null;
 		JsonObject highlight = hit.getAsJsonObject("highlight");
-		if (highlight == null) {
-			JsonObject source = hit.getAsJsonObject("_source");
-			summary = source.get("summary").getAsString();
-		} else {
+
+		if (highlight != null) {
 			JsonArray rawContent = highlight.getAsJsonArray("rawContent");
-			summary = rawContent.get(0).getAsString();
+			summary =  rawContent.get(0).getAsString();
 		}
+
 		return summary;
 	}
 }

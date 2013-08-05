@@ -54,7 +54,7 @@ public class SearchResultParser_WithoutHighlightTests {
 		jestResult.setJsonObject(jsonParser.parse(RESULT_STRING).getAsJsonObject());
 
 		Pageable pageable = new PageRequest(3, 12);
-		searchResults = searchResultParser.parseResults(jestResult, pageable);
+		searchResults = searchResultParser.parseResults(jestResult, pageable, "search term");
 		content = searchResults.getPage().getContent();
 	}
 
@@ -84,5 +84,15 @@ public class SearchResultParser_WithoutHighlightTests {
 	@Test
 	public void url() {
 		assertThat(content.get(0).getPath(), equalTo("http://static.springsource.org/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html"));
+	}
+
+	@Test
+	public void type() {
+		assertThat(content.get(0).getType(), equalTo("site"));
+	}
+
+	@Test
+	public void originalSearchTerm() {
+		assertThat(content.get(0).getOriginalSearchTerm(), equalTo("search term"));
 	}
 }

@@ -42,5 +42,6 @@ public class ApiDocumentMapperTests {
 
 		SearchEntry searchEntry = apiDocumentMapper.map(document);
 		assertThat(searchEntry.getRawContent(), equalTo(document.select(".block").text()));
+		assertThat(searchEntry.getType(), equalTo("apiDoc"));
 	}
 }

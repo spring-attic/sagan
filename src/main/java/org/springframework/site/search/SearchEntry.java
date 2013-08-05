@@ -23,6 +23,7 @@ public class SearchEntry {
 
 	// TODO: maybe we don't need this in the index?
 	private Date publishAt = new Date();
+	private String type = "site";
 
 	public String getSummary() {
 		return summary;
@@ -89,4 +90,11 @@ public class SearchEntry {
 		this.facetPaths.addAll(Arrays.asList(facetPaths));
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 }

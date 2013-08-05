@@ -35,7 +35,7 @@ public class SearchService {
 
 	public void saveToIndex(SearchEntry entry) {
 		Index.Builder newIndexBuilder = new Index.Builder(entry).id(entry.getId()).index(INDEX)
-				.type("site");
+				.type(entry.getType());
 
 		if (this.useRefresh) {
 			newIndexBuilder.refresh(true);
@@ -54,7 +54,7 @@ public class SearchService {
 		Search search = searchBuilder.build();
 		logger.debug(search.getData());
 		JestResult jestResult = execute(search);
-		return searchResultParser.parseResults(jestResult, pageable);
+		return searchResultParser.parseResults(jestResult, pageable, term);
 	}
 	public void setUseRefresh(boolean useRefresh) {
 		this.useRefresh = useRefresh;

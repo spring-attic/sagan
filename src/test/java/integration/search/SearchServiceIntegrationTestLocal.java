@@ -37,6 +37,7 @@ import java.util.List;
 
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -362,5 +363,27 @@ public class SearchServiceIntegrationTestLocal {
 		assertThat(searchResults.getFacets().size(), equalTo(2));
 		assertThat(searchResults.getFacets().get(0).getName(), equalTo("Blog"));
 		assertThat(searchResults.getFacets().get(1).getName(), equalTo("Guides"));
+	}
+
+	@Test
+	public void returnsApiDocSearchResult() throws ParseException {
+		SearchEntry apiDoc = SearchEntryBuilder.entry()
+				.path("http://example.com/content")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.type("apiDoc")
+				.build();
+
+		searchService.saveToIndex(apiDoc);
+
+		List<SearchResult> results = searchService.search("ApplicationContext", pageable, Collections.<String>emptyList()).getPage().getContent();
+		assertThat(results.get(0).getId(), is(apiDoc.getId()));
+		assertThat(results.get(0).getSummary(), is("class level description"));
+		assertThat(results.get(0).getHighlight(), containsString("Application"));
+		assertThat(results.get(0).getHighlight(), containsString("Context"));
+		assertThat(results.get(0).getOriginalSearchTerm(), equalTo("ApplicationContext"));
 	}
 }

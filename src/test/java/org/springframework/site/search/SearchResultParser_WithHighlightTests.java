@@ -71,7 +71,7 @@ public class SearchResultParser_WithHighlightTests {
 		jestResult.setJsonObject(jsonParser.parse(RESULT_STRING).getAsJsonObject());
 
 		Pageable pageable = new PageRequest(1, 10);
-		content = searchResultParser.parseResults(jestResult, pageable).getPage().getContent();
+		content = searchResultParser.parseResults(jestResult, pageable, "search term").getPage().getContent();
 	}
 
 	@Test
@@ -90,8 +90,13 @@ public class SearchResultParser_WithHighlightTests {
 	}
 
 	@Test
-	public void parseHighlightedSummary() {
-		assertThat(content.get(0).getSummary(), equalTo("org.springframework.context Interface <em>ApplicationContext</em> All Superinterfaces: ApplicationEventPublisher, BeanFactory, EnvironmentCapable, HierarchicalBeanFactory, ListableBeanFactory, MessageSource, ResourceLoader, ResourcePatternResolver All Known Subinterfaces: ConfigurableApplicationContext"));
+	public void summary() {
+		assertThat(content.get(0).getSummary(), equalTo("org.springframework.context Interface ApplicationContext All Superinterfaces: ApplicationEventPublisher, BeanFactory, EnvironmentCapable, HierarchicalBeanFactory, ListableBeanFactory, MessageSource, ResourceLoader, ResourcePatternResolver All Known Subinterfaces: ConfigurableApplicationContext, ConfigurablePortletApplicationContext, ConfigurableWebApplicationContext, WebApplicationContext All Known Implementing Classes: AbstractApplicationContext, AbstractRefreshableApplicationContext, AbstractR"));
+	}
+
+	@Test
+	public void parseHighlightFromResult() {
+		assertThat(content.get(0).getHighlight(), equalTo("org.springframework.context Interface <em>ApplicationContext</em> All Superinterfaces: ApplicationEventPublisher, BeanFactory, EnvironmentCapable, HierarchicalBeanFactory, ListableBeanFactory, MessageSource, ResourceLoader, ResourcePatternResolver All Known Subinterfaces: ConfigurableApplicationContext"));
 	}
 
 	@Test
