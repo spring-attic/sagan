@@ -4,6 +4,7 @@ import io.searchbox.Action;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
+import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import org.apache.commons.logging.Log;
@@ -23,6 +24,7 @@ public class SearchService {
 
 	private final SearchQueryBuilder searchQueryBuilder = new SearchQueryBuilder();
 	private final JestClient jestClient;
+	private final DeleteQueryBuilder deleteQueryBuilder = new DeleteQueryBuilder();
 
 	private boolean useRefresh = false;
 	private SearchResultParser searchResultParser;
@@ -69,6 +71,12 @@ public class SearchService {
 				.build();
 
 		execute(delete);
+	}
+
+	public void removeOldApiDocsFromIndex(String projectId, List<String> supportedVersions) {
+		String query = deleteQueryBuilder.unsupportedApiDocsQuery(projectId, supportedVersions);
+
+		execute(new DeleteByQuery.Builder(query).build());
 	}
 
 	private JestResult execute(Action action) {

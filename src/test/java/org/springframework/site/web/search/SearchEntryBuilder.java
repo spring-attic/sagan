@@ -18,6 +18,8 @@ public class SearchEntryBuilder {
 	private List<String> facetPaths = new ArrayList<>();
 	private boolean current = true;
 	private String type;
+	private String version;
+	private String projectId;
 
 	private SearchEntryBuilder() {
 	}
@@ -67,22 +69,36 @@ public class SearchEntryBuilder {
 	}
 
 	public SearchEntry build() {
-		SearchEntry searchResult = new SearchEntry();
-		searchResult.setTitle(title);
-		searchResult.setRawContent(rawContent);
-		searchResult.setSummary(summary);
-		searchResult.setPublishAt(publishAt);
-		searchResult.setPath(path);
-		searchResult.setCurrent(current);
-		searchResult.setFacetPaths(facetPaths);
+		SearchEntry searchEntry = new SearchEntry();
+
+		searchEntry.setTitle(title);
+		searchEntry.setRawContent(rawContent);
+		searchEntry.setSummary(summary);
+		searchEntry.setPublishAt(publishAt);
+		searchEntry.setPath(path);
+		searchEntry.setCurrent(current);
+		searchEntry.setFacetPaths(facetPaths);
+		searchEntry.setVersion(version);
+		searchEntry.setProjectId(projectId);
+
 		if (type != null) {
-			searchResult.setType(type);
+			searchEntry.setType(type);
 		}
-		return searchResult;
+		return searchEntry;
 	}
 
 	public SearchEntryBuilder type(String type) {
 		this.type = type;
+		return this;
+	}
+
+	public SearchEntryBuilder version(String version) {
+		this.version = version;
+		return this;
+	}
+
+	public SearchEntryBuilder projectId(String projectId) {
+		this.projectId = projectId;
 		return this;
 	}
 }

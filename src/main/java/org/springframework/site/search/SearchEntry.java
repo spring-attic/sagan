@@ -24,6 +24,8 @@ public class SearchEntry {
 	// TODO: maybe we don't need this in the index?
 	private Date publishAt = new Date();
 	private String type = "site";
+	private String version;
+	private String projectId;
 
 	public String getSummary() {
 		return summary;
@@ -96,5 +98,21 @@ public class SearchEntry {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getProjectId() {
+		return projectId;
 	}
 }

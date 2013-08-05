@@ -4,14 +4,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.projects.Project;
-import org.springframework.site.domain.projects.ProjectVersion;
 import org.springframework.site.domain.projects.ProjectMetadataService;
+import org.springframework.site.domain.projects.ProjectVersion;
 import org.springframework.site.domain.projects.Version;
 import org.springframework.site.indexer.crawler.CrawlerService;
 import org.springframework.site.indexer.mapper.ApiDocumentMapper;
 import org.springframework.site.indexer.mapper.ReferenceDocumentSearchEntryMapper;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ProjectDocumentationIndexer implements Indexer<Project> {
@@ -37,6 +40,14 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 	@Override
 	public void indexItem(Project project) {
 		logger.info("Indexing project: " + project.getId());
+
+		List<String> projectVersions = new ArrayList<>();
+		for (ProjectVersion projectVersion : project.getProjectVersions()) {
+			projectVersions.add(projectVersion.getVersion().getFullVersion());
+		}
+
+		searchService.removeOldApiDocsFromIndex(project.getId(), projectVersions);
+
 		for (ProjectVersion documentation : project.getProjectVersions()) {
 			Version version = documentation.getVersion();
 

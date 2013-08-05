@@ -453,4 +453,95 @@ public class SearchServiceIntegrationTestLocal {
 		assertThat(results.get(0).getHighlight(), containsString("Context"));
 		assertThat(results.get(0).getOriginalSearchTerm(), equalTo("ApplicationContext"));
 	}
+
+
+	@Test
+	public void deleteOldApiDocs() throws ParseException {
+		SearchEntry oldApiDoc1 = SearchEntryBuilder.entry()
+				.path("http://example.com/content1")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.version("1.2.3.RELEASE")
+				.notCurrent()
+				.projectId("project id to delete")
+				.type("apiDoc")
+				.build();
+
+		searchService.saveToIndex(oldApiDoc1);
+
+		SearchEntry oldApiDoc2 = SearchEntryBuilder.entry()
+				.path("http://example.com/content2")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.version("1.5.3.M1")
+				.notCurrent()
+				.projectId("project id to delete")
+				.type("apiDoc")
+				.build();
+
+		searchService.saveToIndex(oldApiDoc2);
+
+		SearchEntry newApiDoc1 = SearchEntryBuilder.entry()
+				.path("http://example.com/content3")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.version("2.0.0.RELEASE")
+				.notCurrent()
+				.projectId("project id to delete")
+				.type("apiDoc")
+				.build();
+
+		searchService.saveToIndex(newApiDoc1);
+
+		SearchEntry newApiDoc2 = SearchEntryBuilder.entry()
+				.path("http://example.com/content4")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.version("2.1.0.M1")
+				.notCurrent()
+				.projectId("project id to delete")
+				.type("apiDoc")
+				.build();
+
+		searchService.saveToIndex(newApiDoc2);
+
+		SearchEntry nonApiDoc = SearchEntryBuilder.entry()
+				.path("http://example.com/content5")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.type("site")
+				.build();
+
+		searchService.saveToIndex(nonApiDoc);
+
+		SearchEntry otherApiDoc = SearchEntryBuilder.entry()
+				.path("http://example.com/content6")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.projectId("not id to delete")
+				.version("3.4.5.RELEASE")
+				.type("apiDoc")
+				.build();
+
+		searchService.saveToIndex(otherApiDoc);
+
+		searchService.removeOldApiDocsFromIndex("project id to delete", Arrays.asList("2.0.0.RELEASE", "2.1.0.M1"));
+
+		List<SearchResult> results = searchService.search("ApplicationContext", pageable, Collections.<String>emptyList()).getPage().getContent();
+		assertThat(results.size(), equalTo(4));
+	}
 }

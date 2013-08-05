@@ -33,6 +33,7 @@ public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 
 
 		SearchEntry entry = new SearchEntry();
+
 		entry.setPublishAt(new Date(0L));
 		entry.setRawContent(apiContent);
 		entry.setSummary(apiContent.substring(0, Math.min(apiContent.length(), 500)));
@@ -40,6 +41,9 @@ public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 		entry.setPath(document.baseUri());
 		entry.setCurrent(version.isCurrent());
 		entry.setType("apiDoc");
+		entry.setVersion(version.getFullVersion());
+		entry.setProjectId(project.getId());
+
 		entry.addFacetPaths("Documentation", "Documentation/Api", "Projects", "Projects/" + project.getName(),
 				"Projects/" + project.getName() + "/" + version.getFullVersion());
 		return entry;

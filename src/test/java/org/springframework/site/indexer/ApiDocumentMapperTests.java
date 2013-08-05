@@ -33,6 +33,8 @@ public class ApiDocumentMapperTests {
 
 		SearchEntry searchEntry = apiDocumentMapper.map(document);
 		assertThat(searchEntry.getRawContent(), equalTo("SomeClass"));
+		assertThat(searchEntry.getVersion(), equalTo("3.2.1.RELEASE"));
+		assertThat(searchEntry.getProjectId(), equalTo(project.getId()));
 	}
 
 	@Test
@@ -43,5 +45,7 @@ public class ApiDocumentMapperTests {
 		SearchEntry searchEntry = apiDocumentMapper.map(document);
 		assertThat(searchEntry.getRawContent(), equalTo(document.select(".block").text()));
 		assertThat(searchEntry.getType(), equalTo("apiDoc"));
+		assertThat(searchEntry.getVersion(), equalTo("3.2.1.RELEASE"));
+		assertThat(searchEntry.getProjectId(), equalTo(project.getId()));
 	}
 }
