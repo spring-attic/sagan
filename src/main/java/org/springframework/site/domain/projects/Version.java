@@ -63,14 +63,6 @@ public class Version implements Comparable<Version> {
 		return version;
 	}
 
-	public String getVersionName() {
-		String statusDisplay = "";
-		if (release != Release.SUPPORTED) {
-			statusDisplay = String.format(" (%s)", release.getDisplayName());
-		}
-		return version + statusDisplay;
-	}
-
 	public String getShortName() {
 		return version.replaceAll(".RELEASE$", "");
 	}

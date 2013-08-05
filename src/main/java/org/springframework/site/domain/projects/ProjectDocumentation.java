@@ -16,10 +16,6 @@ public class ProjectDocumentation {
         return version;
     }
 
-    public String getVersionName() {
-		return version.getVersionName();
-    }
-
 	public String getVersionShortName() {
 		return version.getShortName();
 	}
