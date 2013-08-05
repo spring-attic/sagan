@@ -87,13 +87,10 @@ projects:
 
     # ----------------------
     # Spring Batch
-    # TODO: blocked by https://www.pivotaltracker.com/story/show/54510094
     # ----------------------
     - id: spring-batch
       name: Spring Batch
       lead: mminella
-      refDocUrl: /TODO # remove when #54510094 is complete
-      apiDocUrl: /TODO # remove when #54510094 is complete
       supportedVersions:
         - name: 2.2.1.RELEASE
           refDocUrl: /spring-batch/trunk/reference/html/index.html
@@ -334,34 +331,29 @@ projects:
 
     # ----------------------
     # Spring Web Flow
-    # TODO: blocked by https://www.pivotaltracker.com/story/show/54510094
     # ----------------------
     - id: spring-webflow
       name: Spring Web Flow
       lead: rstoyanchev
       refDocUrl: /spring-webflow/docs/{version}/reference/html
       supportedVersions:
-        - 2.4.0.M1
-        #- name: 2.4.0.M1
-        #    apiDocUrl: /spring-webflow/docs/{version}/api/
-        - 2.3.2.RELEASE
-        #- name: 2.3.2.RELEASE
-        #    apiDocUrl: /spring-webflow/docs/{version}/javadoc-api/
+        - name: 2.4.0.M1
+          apiDocUrl: /spring-webflow/docs/{version}/api/
+        - name: 2.3.2.RELEASE
+          apiDocUrl: /spring-webflow/docs/{version}/javadoc-api/
 
     # ----------------------
     # Spring WS
-    # TODO: blocked by https://www.pivotaltracker.com/story/show/54510094
     # ----------------------
     - id: spring-ws
       name: Spring Web Services
       lead: apoutsma
-      refDocUrl: /TODO
-      apiDocUrl: /TODO
+      siteUrl: http://static.springsource.org/spring-ws/sites/2.0
+      hasSite: true
       supportedVersions:
-        - 2.1.3.RELEASE
-        #- name: 2.1.3.RELEASE
-        #  refDocUrl: /spring-ws/sites/{version}/reference/html/index.html
-        #  apiDocUrl: /spring-ws/sites/{version}/apidocs/
+        - name: 2.1.3.RELEASE
+          refDocUrl: /spring-ws/sites/2.0/reference/html/index.html
+          apiDocUrl: /spring-ws/sites/2.0/apidocs/index.html
 
 
   # ========================
@@ -454,6 +446,7 @@ projects:
     - id: spring-security-saml
       name: Spring Security SAML
       lead: vschafer
+      hasSite: true
       siteUrl: http://static.springsource.org/spring-security/site/extensions/krb/
       supportedVersions:
         - name: 1.0.0.RC2
