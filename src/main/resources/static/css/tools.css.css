@@ -152,7 +152,7 @@
 .tools--wrapper.testimonial {
   padding-top: 60px;
   border-top: 1px solid white;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 .tools--wrapper.testimonial .testimonial--container {
   background-color: white;
@@ -193,6 +193,28 @@
 }
 .tools--wrapper.screenshot .screenshot.ggts-screenshot {
   background-image: url("../img/ggts-screenshot.png");
+}
+.tools--wrapper.tools-feature--wrapper .tools-feature--container {
+  min-height: 175px;
+  padding: 30px 30px 40px 0;
+  border-top: 1px solid white;
+  clear: both;
+}
+.tools--wrapper.tools-feature--wrapper .tools-feature--container .tools-feature--thumbnail {
+  float: left;
+  width: 45.8%;
+  margin: 0 7% 0 0;
+  height: 188px;
+}
+.tools--wrapper.tools-feature--wrapper .tools-feature--container:nth-child(even) .tools-feature--thumbnail {
+  float: right;
+  margin: 0 1.4% 0 6%;
+}
+.tools--wrapper.tools-feature--wrapper .tools-feature--container h3 {
+  padding-top: 30px;
+}
+.tools--wrapper.tools-feature--wrapper .tools-feature--container p {
+  padding: 0;
 }
 
 .tool-versions--wrapper {
