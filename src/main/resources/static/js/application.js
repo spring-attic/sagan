@@ -63,6 +63,9 @@ $(function(){
       var searchQuery = decodeURIComponent(window.location.search.substr(3).replace(/\+/g," ")); 
       $(".js-search-input").val(searchQuery);
 
+      //PREPOPULATES TITLE WITH SEARCH QUERY
+      $(".search-results--title").html(searchQuery);
+
       //CLOSES SEARCH DROPDOWN
       $(".js-search-input-close").click(function() {
         $(".js-search-dropdown").removeClass("js-show no-animation");
