@@ -142,7 +142,7 @@ projects:
       refDocUrl: /spring-data/data-neo4j/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-neo4j/docs/{version}/api/
       supportedVersions:
-        - 2.3.0.M1
+        - 2.3.0.RC1
         - 2.2.2.RELEASE
 
     - id: spring-data-redis
