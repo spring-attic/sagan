@@ -68,6 +68,7 @@ projects:
     - id: spring-amqp
       name: Spring AMQP
       lead: grussell
+      hasSite: true
       refDocPath: /spring-amqp/docs/{version}/reference/html
       apiDocPath: /spring-amqp/docs/{version}/api/
       supportedVersions:
