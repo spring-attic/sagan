@@ -26,6 +26,7 @@ curl $ENDPOINT/site/_settings?pretty=true
 
 echo "\nInstall the mapping - do once per type/mapping file."
 curl -XPOST "$ENDPOINT/site/site/_mapping" -d @../src/main/resources/config/elasticsearch/mappings/site.json 
+curl -XPOST "$ENDPOINT/site/apiDoc/_mapping" -d @../src/main/resources/config/elasticsearch/mappings/apiDoc.json
 
 echo "\nCheck the mappings."
-curl $ENDPOINT/site/site/_mapping?pretty=true
+curl $ENDPOINT/site/_mapping?pretty=true
