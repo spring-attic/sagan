@@ -300,6 +300,7 @@
   color: #EEE;
   padding: 18px;
   background-color: #34302D;
+  text-decoration: none;
 }
 .eclipse-platform--container .platform--name {
   background-color: #34302D;
@@ -309,11 +310,21 @@
 }
 .eclipse-platform--container .platform--name .platform--icon-small {
   display: inline-block;
-  background-color: #EEE;
-  width: 30px;
-  height: 30px;
   vertical-align: middle;
-  background-color: #eeeeee;
+  background-image: url("../img/iconsprite.png");
+  width: 24px;
+}
+.eclipse-platform--container .platform--name .platform--icon-small.mac-icon {
+  height: 28px;
+  background-position: -285px -406px;
+}
+.eclipse-platform--container .platform--name .platform--icon-small.windows-icon {
+  height: 24px;
+  background-position: -328px -409px;
+}
+.eclipse-platform--container .platform--name .platform--icon-small.linux-icon {
+  height: 21px;
+  background-position: -369px -412px;
 }
 .eclipse-platform--container .platform--name h3 {
   display: inline-block;
@@ -337,6 +348,9 @@
   font-family: "Montserrat", sans-serif;
   text-transform: uppercase;
   padding: 0 20px;
+}
+.eclipse-platform--container .ecplise-version--dropdown {
+  width: 86.5%;
 }
 
 .tool-archive--table {

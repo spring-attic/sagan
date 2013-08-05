@@ -15,6 +15,9 @@
 .blog--container.blog-preview .blog-preview--readmore:hover {
   text-decoration: underline;
 }
+.blog--container.blog-preview .blog--post ul, .blog--container.blog-preview .blog--post ol, .blog--container.blog-preview .blog--post table, .blog--container.blog-preview .blog--post h3, .blog--container.blog-preview .blog--post h2 {
+  display: none;
+}
 .blog--container.blog-preview .blog--post p {
   margin-bottom: 0;
 }

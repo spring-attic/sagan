@@ -29,8 +29,13 @@ $link-green: #5fa134;
         text-decoration: underline;
       }
     }
-    .blog--post p {
-      margin-bottom: 0;
+    .blog--post {
+      ul, ol, table, h3, h2 {
+        display: none;
+      }
+      p {
+        margin-bottom: 0;
+      }
     }
     &:last-child {
       margin: 0;

@@ -41,7 +41,7 @@
 		<a href="#collapse" data-toggle="collapse" th:attr="data-target='#platform--' + ${platform.name}" class="js-dropdown-link eclipse-platform-dropdown-link">
 			<i class="platform-dropdown--icon icon-chevron-down pull-right"></i>
 			<div class="platform--name">
-				<div class="windows-icon platform--icon-small"></div>
+				<div th:class="${platform.name.toLowerCase()}+'-icon platform--icon-small'"></div>
 				<h3 th:text="${platform.name}">Mac</h3>
 			</div>
 		</a>
@@ -53,10 +53,11 @@
 						<i class="item-dropdown--icon icon-reorder pull-right"></i>
 						<p class="item-dropdown--title" th:text="${package.name}">Eclipse Standard 4.3 (Win32, 0MB)</p>
 					</div>
-					<div class="item--dropdown">
-						<div class="download-link" th:each="download : ${package.downloadLinks}" class="download-link">
-							<a href='release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip'
-							   th:href="${download.url}" th:text='${download.name}'>Windows (64bit)</a>
+					<div class="item--dropdown ecplise-version--dropdown">
+						<div class="item--body">
+							<div class="download-link" th:each="download : ${package.downloadLinks}" class="download-link">
+								<a href='release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip' th:href="${download.url}" th:text='${download.name}'>Windows (64bit)</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -67,16 +68,17 @@
 	<script type="text/javascript">
 
 		$(".collapse")
+
 				.removeClass('in')
 				.on({
 					shown: function () {
-						$(this).css('overflow', 'visible').css("height", "auto");
+						$(this).css('overflow', 'visible').css("height", "auto").parent().find(".platform-dropdown--icon").removeClass("icon-chevron-down").addClass("icon-chevron-up");
 					},
 					hide: function () {
-						$(this).css('overflow', 'hidden').css("height", "0");
+						$(this).css('overflow', 'hidden').css("height", "0").parent().find(".platform-dropdown--icon").removeClass("icon-chevron-up").addClass("icon-chevron-down");
 					}
 				});
-		$('#platform--' + detectOs()).addClass('in').css('overflow', 'visible').css("height", "auto");
+		$('#platform--' + detectOs()).addClass('in').css('overflow', 'visible').css("height", "auto").parent().find(".platform-dropdown--icon").removeClass("icon-chevron-down").addClass("icon-chevron-up");
 
 	</script>
 

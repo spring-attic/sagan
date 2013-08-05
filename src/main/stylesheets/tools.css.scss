@@ -321,6 +321,7 @@ $icon-sprite: url("../img/iconsprite.png");
     color: #EEE;
     padding: 18px;
     background-color: #34302D;
+    text-decoration: none;
   }
   .platform--name {
     background-color: #34302D;
@@ -329,12 +330,22 @@ $icon-sprite: url("../img/iconsprite.png");
     text-align: center;
     .platform--icon-small {
       display: inline-block;
-      background-color: #EEE;
-      width: 30px;
-      height: 30px;
       vertical-align: middle;
-      background-color: $off-white;
-    }
+      background-image: $icon-sprite;
+      width: 24px;
+      &.mac-icon {
+        height: 28px;
+        background-position: -285px -406px;
+      }
+      &.windows-icon {
+        height: 24px;
+        background-position: -328px -409px;
+      }
+      &.linux-icon {
+        height: 21px;
+        background-position: -369px -412px;
+      }
+    }   
     h3 {
       display: inline-block;
       color: #EEE;
@@ -358,6 +369,9 @@ $icon-sprite: url("../img/iconsprite.png");
       text-transform: uppercase;
       padding: 0 20px;
     }
+  }
+  .ecplise-version--dropdown {
+    width: 86.5%;
   }
 }
 

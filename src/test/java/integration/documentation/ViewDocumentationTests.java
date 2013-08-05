@@ -33,9 +33,7 @@ public class ViewDocumentationTests extends IntegrationTestBase {
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("Spring Security")))
-				.andExpect(
-						content()
-								.string(containsString("http://static.springsource.org/spring-mobile/docs/1.0.1.RELEASE/reference/htmlsingle/")));
+				.andExpect(content().string(containsString("http://static.springsource.org/spring-mobile/docs/1.1.0.M3/reference/html")));
 	}
 
 	@Test
