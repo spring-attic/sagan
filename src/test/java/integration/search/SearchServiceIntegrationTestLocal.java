@@ -539,7 +539,97 @@ public class SearchServiceIntegrationTestLocal {
 
 		searchService.saveToIndex(otherApiDoc);
 
-		searchService.removeOldApiDocsFromIndex("project id to delete", Arrays.asList("2.0.0.RELEASE", "2.1.0.M1"));
+		searchService.removeOldProjectEntriesFromIndex("project id to delete", Arrays.asList("2.0.0.RELEASE", "2.1.0.M1"));
+
+		List<SearchResult> results = searchService.search("ApplicationContext", pageable, Collections.<String>emptyList()).getPage().getContent();
+		assertThat(results.size(), equalTo(4));
+	}
+
+	@Test
+	public void deleteOldReferenceDocs() throws ParseException {
+		SearchEntry oldReferenceDoc1 = SearchEntryBuilder.entry()
+				.path("http://example.com/content1")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.version("1.2.3.RELEASE")
+				.notCurrent()
+				.projectId("project id to delete")
+				.type("site")
+				.build();
+
+		searchService.saveToIndex(oldReferenceDoc1);
+
+		SearchEntry oldReferenceDoc2 = SearchEntryBuilder.entry()
+				.path("http://example.com/content2")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.version("1.5.3.M1")
+				.notCurrent()
+				.projectId("project id to delete")
+				.type("site")
+				.build();
+
+		searchService.saveToIndex(oldReferenceDoc2);
+
+		SearchEntry newReferenceDoc1 = SearchEntryBuilder.entry()
+				.path("http://example.com/content3")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.version("2.0.0.RELEASE")
+				.notCurrent()
+				.projectId("project id to delete")
+				.type("site")
+				.build();
+
+		searchService.saveToIndex(newReferenceDoc1);
+
+		SearchEntry newReferenceDoc2 = SearchEntryBuilder.entry()
+				.path("http://example.com/content4")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.version("2.1.0.M1")
+				.notCurrent()
+				.projectId("project id to delete")
+				.type("site")
+				.build();
+
+		searchService.saveToIndex(newReferenceDoc2);
+
+		SearchEntry nonReferenceDoc = SearchEntryBuilder.entry()
+				.path("http://example.com/content5")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.type("site")
+				.build();
+
+		searchService.saveToIndex(nonReferenceDoc);
+
+		SearchEntry othersite = SearchEntryBuilder.entry()
+				.path("http://example.com/content6")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.projectId("not id to delete")
+				.version("3.4.5.RELEASE")
+				.type("site")
+				.build();
+
+		searchService.saveToIndex(othersite);
+
+		searchService.removeOldProjectEntriesFromIndex("project id to delete", Arrays.asList("2.0.0.RELEASE", "2.1.0.M1"));
 
 		List<SearchResult> results = searchService.search("ApplicationContext", pageable, Collections.<String>emptyList()).getPage().getContent();
 		assertThat(results.size(), equalTo(4));

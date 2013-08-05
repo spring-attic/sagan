@@ -46,7 +46,7 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 			projectVersions.add(projectVersion.getVersion().getFullVersion());
 		}
 
-		searchService.removeOldApiDocsFromIndex(project.getId(), projectVersions);
+		searchService.removeOldProjectEntriesFromIndex(project.getId(), projectVersions);
 
 		for (ProjectVersion documentation : project.getProjectVersions()) {
 			Version version = documentation.getVersion();

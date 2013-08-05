@@ -73,8 +73,8 @@ public class SearchService {
 		execute(delete);
 	}
 
-	public void removeOldApiDocsFromIndex(String projectId, List<String> supportedVersions) {
-		String query = deleteQueryBuilder.unsupportedApiDocsQuery(projectId, supportedVersions);
+	public void removeOldProjectEntriesFromIndex(String projectId, List<String> supportedVersions) {
+		String query = deleteQueryBuilder.unsupportedProjectEntriesQuery(projectId, supportedVersions);
 
 		execute(new DeleteByQuery.Builder(query).build());
 	}

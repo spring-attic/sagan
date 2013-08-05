@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DeleteQueryBuilder {
 
-	public String unsupportedApiDocsQuery(String projectId, List<String> supportedVersions) {
+	public String unsupportedProjectEntriesQuery(String projectId, List<String> supportedVersions) {
 		QueryBuilder query = QueryBuilders.matchAllQuery();
 
 
@@ -20,9 +20,8 @@ public class DeleteQueryBuilder {
 		NotFilterBuilder notSupportedVersionFilter = new NotFilterBuilder(supportedVersionsFilter);
 
 		TermFilterBuilder projectFilter = new TermFilterBuilder("projectId", projectId);
-		TermFilterBuilder apiDocFilter = new TermFilterBuilder("_type", "apiDoc");
 
-		AndFilterBuilder filter = new AndFilterBuilder(notSupportedVersionFilter, projectFilter, apiDocFilter);
+		AndFilterBuilder filter = new AndFilterBuilder(notSupportedVersionFilter, projectFilter);
 
 		FilteredQueryBuilder filteredQuery = QueryBuilders.filteredQuery(query, filter);
 
