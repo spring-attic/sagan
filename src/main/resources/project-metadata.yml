@@ -269,8 +269,6 @@ projects:
       siteUrl: http://static.springsource.org/spring-security/oauth/ # workaround
       supportedVersions:
         - name: 1.0.5.RELEASE
-          # TODO: the "dev guide" seems to be the closest thing to a "reference doc" here.
-          #       requires https://www.pivotaltracker.com/story/show/54562242 to work properly
           refDocUrl: https://github.com/SpringSource/spring-security-oauth/wiki/devguide
           # TODO: this actually points to 1.0.0.RELEASE - seems to be the latest published api docs
           apiDocUrl: /spring-security/oauth/apidocs/index.html
