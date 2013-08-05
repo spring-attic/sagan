@@ -214,7 +214,7 @@ projects:
       name: Spring HATEOAS
       lead: ogierke
       refDocUrl: https://github.com/SpringSource/spring-hateoas/blob/master/readme.md
-      apiDocUrl: NONE # TODO: talk to Ollie
+      apiDocUrl: NONE
       supportedVersions:
         - 0.7.0.RELEASE
 
@@ -244,7 +244,7 @@ projects:
     # ----------------------
     - id: spring-roo
       name: Spring Roo
-      sponsor: NONE # TODO
+      sponsor: NONE
       lead: alankstewart@github
       refDocUrl: /spring-roo/reference/html/
       apiDocUrl: NONE
@@ -470,8 +470,8 @@ projects:
       name: Spring Data Solr
       sponsor: mpollack
       lead: christophstrobl@github
-      refDocUrl: /spring-data/solr/docs/{version}/reference/html
-      apiDocUrl: /spring-data/solr/docs/{version}/api/
+      refDocUrl: NONE
+      apiDocUrl: NONE
       supportedVersions:
         - 1.0.0.RC1
 
