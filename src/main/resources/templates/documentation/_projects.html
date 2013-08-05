@@ -19,13 +19,13 @@
             <div class="item--dropdown documentation-version--dropdown">
                 <div class="item--header">
                     <!-- link_to project_path -->
-                    <a th:href="${item.siteUrl}" class="item--header-link item--left-column" th:if="${item.hasSite()}">
-                        <i class="icon-globe"></i>
-                        Site
-                    </a>
                     <a th:href="${item.repoUrl}" class="item--header-link item--right-column">
                         <i class="icon-github"></i>
                         Repository
+                    </a>
+                    <a th:href="${item.siteUrl}" class="item--header-link item--left-column" th:if="${item.hasSite()}">
+                        <i class="icon-globe"></i>
+                        Site
                     </a>
                 </div>
                 <div class="item--body">
