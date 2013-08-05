@@ -166,9 +166,8 @@ projects:
       refDocUrl: /spring-data/rest/docs/{version}/reference/html
       apiDocUrl: /spring-data/rest/docs/{version}/api/
       supportedVersions:
-        - 1.0.0.RELEASE
-          # TODO: need to express refDocUrl: NONE here, as no ref docs exist
-          # https://www.pivotaltracker.com/story/show/54564958
+        - name: 1.0.0.RELEASE
+          refDocUrl: NONE
         - 1.1.0.M1
 
     # ----------------------
@@ -226,7 +225,7 @@ projects:
       name: Spring HATEOAS
       lead: ogierke
       refDocUrl: https://github.com/SpringSource/spring-hateoas/blob/master/readme.md
-      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958 TODO: talk to Ollie
+      apiDocUrl: NONE # TODO: talk to Ollie
       supportedVersions:
         - 0.7.0.RELEASE
 
@@ -263,7 +262,7 @@ projects:
       sponsor: NONE # TODO
       lead: alankstewart@github
       refDocUrl: /spring-roo/reference/html/
-      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      apiDocUrl: NONE
       supportedVersions:
         - 1.2.4.RELEASE
 
@@ -419,7 +418,7 @@ projects:
       name: Spring Boot
       lead: dsyer # and pwebb (co-leads represented comma-separated?)
       refDocUrl: https://github.com/SpringSource/spring-boot/blob/master/README.md
-      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      apiDocUrl: NONE
       supportedVersions:
         - 0.5.0.M1
 
@@ -487,8 +486,8 @@ projects:
     - id: spring-data-envers
       name: Spring Data Envers
       lead: ogierke
-      refDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
-      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      refDocUrl: NONE
+      apiDocUrl: NONE
       supportedVersions:
         - 0.1.0.RELEASE
 
@@ -519,8 +518,8 @@ projects:
     - id: spring-integration-dsl-groovy
       name: Spring Integration Groovy DSL
       lead: dturanski
-      refDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
-      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      refDocUrl: NONE
+      apiDocUrl: NONE
       supportedVersions:
         - 1.0.0.M1
 
@@ -529,8 +528,8 @@ projects:
       lead: ghillert
       # M2 release was tagged, but only api docs are 1.0.0.BUILD-SNAPSHOT;
       # no ref docs whatsoever
-      refDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
-      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      refDocUrl: NONE
+      apiDocUrl: NONE
       supportedVersions:
         - 1.0.0.M2
 
@@ -550,7 +549,7 @@ projects:
       name: Spring Plugin
       lead: ogierke
       refDocUrl: https://github.com/SpringSource/spring-plugin/blob/master/README.markdown
-      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      apiDocUrl: NONE
       supportedVersions:
       - 0.8.0.RELEASE
 
@@ -672,8 +671,8 @@ projects:
     - id: spring-test-mvc
       name: Spring Test MVC
       lead: rstoyanchev
-      refDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
-      apiDocUrl: /NONE # TODO https://www.pivotaltracker.com/story/show/54564958
+      refDocUrl: NONE
+      apiDocUrl: NONE
       supportedVersions:
         - 1.0.0.M2
 

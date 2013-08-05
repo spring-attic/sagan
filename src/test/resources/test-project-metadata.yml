@@ -74,7 +74,25 @@ projects:
       name: Spring Ref Docs Omitted
       supportedVersions:
         - 2.4.0.RELEASE
+    - id: project-docs-urls-can-be-none
+      refDocUrl: NONE
+      apiDocUrl: NONE
+      name: Spring Ref Docs Explicitly Excluded
+      supportedVersions:
+        - 2.4.0.RELEASE
+        - name: 2.3.0.RELEASE
+          refDocUrl: http://www.example.com/spring/docs/{version}/reference/html
+          apiDocUrl: http://www.example.com/spring/docs/{version}/api/
 
+    - id: project-docs-urls-can-be-overridden-to-none
+      refDocUrl: http://www.example.com/spring/docs/{version}/reference/html
+      apiDocUrl: http://www.example.com/spring/docs/{version}/api/
+      name: Spring Ref Docs Explicitly Excluded
+      supportedVersions:
+        - 2.4.0.RELEASE
+        - name: 2.3.0.RELEASE
+          refDocUrl: NONE
+          apiDocUrl: NONE
 
   other:
     - id: spring-security

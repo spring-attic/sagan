@@ -146,6 +146,8 @@ public class ProjectMetadataYamlParser {
 		String docTemplate;
 		if (docPath.isEmpty()) {
 			docTemplate = String.format("%s/%s/docs/%s/%s", docsBaseUrl, projectId, versionName, defaultDocSuffix);
+		} else if (docPath.equals("NONE")) {
+			docTemplate = "";
 		} else if (docPath.startsWith("http")) {
 			docTemplate = docPath;
 		} else {

@@ -45,8 +45,8 @@
                                     <p th:text="'(' + ${version.releaseDisplayName} + ')'" th:if="${version.hasReleaseDisplayName()}">(CURRENT)</p>
                                 </div>
                                 <div class="item--right-column">
-                                    <a class="documentation-link reference-link" th:href="${version.refDocUrl}" >Reference</a>
-                                    <a class="documentation-link api-link" th:href="${version.apiDocUrl}">API</a>
+                                    <a class="documentation-link reference-link" th:href="${version.refDocUrl}" th:if="${version.hasRefDocUrl()}">Reference</a>
+                                    <a class="documentation-link api-link" th:href="${version.apiDocUrl}" th:if="${version.hasApiDocUrl()}">API</a>
                                 </div>
                             </div>
                         </div>

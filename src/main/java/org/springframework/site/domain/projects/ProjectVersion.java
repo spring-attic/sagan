@@ -32,7 +32,16 @@ public class ProjectVersion {
 		return refDocUrl;
 	}
 
+	public boolean hasRefDocUrl() {
+		return !refDocUrl.isEmpty();
+	}
+
 	public String getApiDocUrl() {
 		return apiDocUrl;
 	}
+
+	public boolean hasApiDocUrl() {
+		return !apiDocUrl.isEmpty();
+	}
+
 }
