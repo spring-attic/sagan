@@ -50,7 +50,8 @@ groupId: org.springframework
 # project's metadata, then the value will fall back to the top level template
 # declared below.
 #
-# TODO: waiting on https://www.pivotaltracker.com/story/show/54562226
+# TODO: waiting on https://www.pivotaltracker.com/story/show/54562226 and
+# https://www.pivotaltracker.com/story/show/54562726
 # refDocUrl: {docsBaseUrl}/{id}/docs/{version}/reference/html
 # apiDocUrl: {docsBaseUrl}/{id}/docs/{version}/api/
 
@@ -68,8 +69,6 @@ projects:
       name: Spring AMQP
       lead: grussell
       hasSite: true
-      refDocUrl: /spring-amqp/docs/{version}/reference/html
-      apiDocUrl: /spring-amqp/docs/{version}/api/
       supportedVersions:
         - 1.1.4.RELEASE
         - 1.2.0.RELEASE
@@ -80,8 +79,6 @@ projects:
     - id: spring-android
       name: Spring Android
       lead: rclarkson
-      refDocUrl: /spring-android/docs/{version}/reference/html
-      apiDocUrl: /spring-android/docs/{version}/api/
       supportedVersions:
         - 1.0.1.RELEASE
 
@@ -173,7 +170,6 @@ projects:
     - id: spring-flex
       name: Spring Flex
       lead: jgrelle
-      refDocUrl: /spring-flex/docs/{version}/reference/html
       apiDocUrl: /spring-flex/docs/{version}/javadoc-api/
       supportedVersions:
         - 1.5.2.RELEASE
@@ -196,8 +192,6 @@ projects:
     - id: spring-gemfire
       name: Spring GemFire
       lead: dturanski
-      refDocUrl: /spring-gemfire/docs/{version}/reference/html
-      apiDocUrl: /spring-gemfire/docs/{version}/api/
       supportedVersions:
       - 1.3.1.RELEASE
       - 1.2.2.RELEASE
@@ -209,8 +203,6 @@ projects:
       name: Spring for Apache Hadoop
       sponsor: trisberg
       lead: jvalkeal@github # Janne Valkealahti
-      refDocUrl: /spring-hadoop/docs/{version}/reference/html
-      apiDocUrl: /spring-hadoop/docs/{version}/api/
       supportedVersions:
         - 1.0.1.RC1
         - 1.0.0.RELEASE
@@ -232,8 +224,6 @@ projects:
     - id: spring-integration
       name: Spring Integration
       lead: mfisher
-      refDocUrl: /spring-integration/docs/{version}/reference/html
-      apiDocUrl: /spring-integration/docs/{version}/api/
       supportedVersions:
         - 3.0.0.M2
         - 2.2.4.RELEASE
@@ -245,8 +235,6 @@ projects:
     - id: spring-mobile
       name: Spring Mobile
       lead: rclarkson
-      refDocUrl: /spring-mobile/docs/{version}/reference/htmlsingle/
-      apiDocUrl: /spring-mobile/docs/{version}/api/
       supportedVersions:
         - 1.0.1.RELEASE
         - 1.1.0.M3
@@ -293,8 +281,6 @@ projects:
     - id: spring-shell
       name: Spring Shell
       lead: mpollack
-      refDocUrl: /spring-shell/docs/{version}/reference/html
-      apiDocUrl: /spring-shell/docs/{version}/api/
       supportedVersions:
         - 1.1.0.M1
         - 1.0.0.RELEASE
@@ -305,8 +291,6 @@ projects:
     - id: spring-social
       name: Spring Social
       lead: cwalls
-      refDocUrl: /spring-social/docs/{version}/reference/html
-      apiDocUrl: /spring-social/docs/{version}/api/
       supportedVersions:
         - 1.1.0.M3
         - 1.0.3.RELEASE
@@ -314,8 +298,6 @@ projects:
     - id: spring-social-facebook
       name: Spring Social Facebook
       lead: cwalls
-      refDocUrl: /spring-social-facebook/docs/{version}/reference/html
-      apiDocUrl: /spring-social-facebook/docs/{version}/api/
       supportedVersions:
         - 1.1.0.M3
         - 1.0.3.RELEASE
@@ -323,8 +305,6 @@ projects:
     - id: spring-social-twitter
       name: Spring Social Twitter
       lead: cwalls
-      refDocUrl: /spring-social-twitter/docs/{version}/reference/html
-      apiDocUrl: /spring-social-twitter/docs/{version}/api/
       supportedVersions:
         - 1.1.0.M3
         - 1.0.5.RELEASE
@@ -335,10 +315,8 @@ projects:
     - id: spring-webflow
       name: Spring Web Flow
       lead: rstoyanchev
-      refDocUrl: /spring-webflow/docs/{version}/reference/html
       supportedVersions:
-        - name: 2.4.0.M1
-          apiDocUrl: /spring-webflow/docs/{version}/api/
+        - 2.4.0.M1
         - name: 2.3.2.RELEASE
           apiDocUrl: /spring-webflow/docs/{version}/javadoc-api/
 
