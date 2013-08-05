@@ -122,20 +122,25 @@ public class ProjectMetadataYamlParser {
 		List<ProjectVersion> projectVersions = new ArrayList<>();
 		Version currentVersion = null;
 		for (SupportedVersion supportedVersion : supportedVersions) {
-			String projectRefDocTemplate = docsBaseUrl + supportedVersion.refDocPath;
-			String refDocUrl = projectRefDocTemplate.replaceAll("\\{version\\}", supportedVersion.name);
-
-			String projectApiDocTemplate = docsBaseUrl + supportedVersion.apiDocPath;
-			String apiDocUrl = projectApiDocTemplate.replaceAll("\\{version\\}", supportedVersion.name);
-
+			String refDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.name, supportedVersion.refDocPath);
+			String apiDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.name, supportedVersion.apiDocPath);
 			Version version = buildVersion(supportedVersion.name, currentVersion);
 			if (currentVersion == null && version.isCurrent()) {
 				currentVersion = version;
 			}
-
 			projectVersions.add(new ProjectVersion(refDocUrl, apiDocUrl, version));
 		}
 		return projectVersions;
+	}
+
+	private String buildDocUrl(String docsBaseUrl, String versionName, String docPath) {
+		String projectRefDocTemplate;
+		if (docPath.startsWith("http")) {
+			projectRefDocTemplate = docPath;
+		} else {
+			projectRefDocTemplate = docsBaseUrl + docPath;
+		}
+		return projectRefDocTemplate.replaceAll("\\{version\\}", versionName);
 	}
 
 	private void orderVersions(List<SupportedVersion> supportedVersions) {
@@ -147,7 +152,7 @@ public class ProjectMetadataYamlParser {
 		});
 	}
 
-	private static Version buildVersion(String versionName, Version currentVersion) {
+	private Version buildVersion(String versionName, Version currentVersion) {
 		boolean isPreRelease = versionName.matches("[0-9.]+(M|RC)\\d+");
 		Version.Release release = SUPPORTED;
 		if (isPreRelease) {

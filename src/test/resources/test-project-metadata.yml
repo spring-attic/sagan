@@ -64,6 +64,12 @@ projects:
           refDocPath: /spring/docs/{version}/reference/
         - name: 2.3.2.RELEASE
           refDocPath: /spring/docs/{version}/other-reference/
+    - id: project-docs-full-http-url
+      name: Spring Ref Docs
+      apiDocPath: http://www.example.com/spring/docs/{version}/api/html
+      supportedVersions:
+        - name: 2.4.0.RELEASE
+          refDocPath: http://www.example.com//spring/docs/{version}/reference/
 
 
   other:

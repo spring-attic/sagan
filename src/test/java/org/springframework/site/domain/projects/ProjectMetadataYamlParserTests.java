@@ -34,7 +34,7 @@ public class ProjectMetadataYamlParserTests {
 	@Test
 	public void categoriesHaveListOfProjects() throws IOException {
 		List<Project> active = projects.get("active");
-		assertThat(active.size(), equalTo(7));
+		assertThat(active.size(), equalTo(8));
 	}
 
 	@Test
@@ -148,5 +148,14 @@ public class ProjectMetadataYamlParserTests {
 		assertThat(documentation.getVersion(), equalTo(new Version("2.3.2.RELEASE", Version.Release.CURRENT)));
 		assertThat(documentation.getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.3.2.RELEASE/api/html"));
 		assertThat(documentation.getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.3.2.RELEASE/other-reference/"));
+	}
+
+	@Test
+	public void docsUrlCanBeFullHttp() throws Exception {
+		Project project = projects.get("active").get(7);
+		ProjectVersion documentation = project.getProjectVersions().get(0);
+		assertThat(documentation.getVersion(), equalTo(new Version("2.4.0.RELEASE", Version.Release.CURRENT)));
+		assertThat(documentation.getApiDocUrl(), equalTo("http://www.example.com/spring/docs/2.4.0.RELEASE/api/html"));
+		assertThat(documentation.getRefDocUrl(), equalTo("http://www.example.com//spring/docs/2.4.0.RELEASE/reference/"));
 	}
 }
