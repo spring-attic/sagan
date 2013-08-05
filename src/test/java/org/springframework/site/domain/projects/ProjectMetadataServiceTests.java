@@ -27,15 +27,8 @@ public class ProjectMetadataServiceTests {
 
 		assertEquals(3, documentationService.getProject("spring-framework")
 				.getProjectVersions().size());
-	}
-
-	@Test
-	public void exposesProjectsForACategory() throws IOException {
-		InputStream yaml = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
-		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 
 		List<Project> activeProjects = documentationService.getProjectsForCategory("active");
-		assertThat(activeProjects.size(), is(8));
 		assertThat(activeProjects.get(0).getId(), is("spring-framework"));
 	}
 

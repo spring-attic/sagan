@@ -80,9 +80,10 @@ public class ProjectMetadataYamlParser {
 
 
 	private List<ProjectVersion> parseProjectDocumentation(Map<String, Object> projectData, String docsBaseUrl) {
+		String id = projectData.get("id").toString();
 		List<SupportedVersion> supportedVersions = parseSupportedVersions(projectData);
 		orderVersions(supportedVersions);
-		return buildProjectVersions(docsBaseUrl, supportedVersions);
+		return buildProjectVersions(docsBaseUrl, supportedVersions, id);
 	}
 
 	class SupportedVersion {
@@ -94,11 +95,19 @@ public class ProjectMetadataYamlParser {
 	private List<SupportedVersion> parseSupportedVersions(Map<String, Object> projectData) {
 		List<SupportedVersion> versions = new ArrayList<>();
 		if (projectData.containsKey("supportedVersions")) {
+			String projectRefDocUrl = "";
+			if (projectData.containsKey("refDocUrl")) {
+				projectRefDocUrl = (String) projectData.get("refDocUrl");
+			}
+			String projectApiDocUrl = "";
+			if (projectData.containsKey("apiDocUrl")) {
+				projectApiDocUrl = (String) projectData.get("apiDocUrl");
+			}
 
 			for (Object value : (List) projectData.get("supportedVersions")) {
 				SupportedVersion supportedVersion = new SupportedVersion();
-				supportedVersion.refDocUrl = "" + projectData.get("refDocUrl");
-				supportedVersion.apiDocUrl = "" + projectData.get("apiDocUrl");
+				supportedVersion.refDocUrl = projectRefDocUrl;
+				supportedVersion.apiDocUrl = projectApiDocUrl;
 
 				if (value instanceof String) {
 					supportedVersion.name = value.toString();
@@ -118,12 +127,12 @@ public class ProjectMetadataYamlParser {
 		return versions;
 	}
 
-	private List<ProjectVersion> buildProjectVersions(String docsBaseUrl, List<SupportedVersion> supportedVersions) {
+	private List<ProjectVersion> buildProjectVersions(String docsBaseUrl, List<SupportedVersion> supportedVersions, String projectId) {
 		List<ProjectVersion> projectVersions = new ArrayList<>();
 		Version currentVersion = null;
 		for (SupportedVersion supportedVersion : supportedVersions) {
-			String refDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.name, supportedVersion.refDocUrl);
-			String apiDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.name, supportedVersion.apiDocUrl);
+			String refDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.refDocUrl, supportedVersion.name, projectId, "reference/html");
+			String apiDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.apiDocUrl, supportedVersion.name, projectId, "api");
 			Version version = buildVersion(supportedVersion.name, currentVersion);
 			if (currentVersion == null && version.isCurrent()) {
 				currentVersion = version;
@@ -133,14 +142,16 @@ public class ProjectMetadataYamlParser {
 		return projectVersions;
 	}
 
-	private String buildDocUrl(String docsBaseUrl, String versionName, String docPath) {
-		String projectRefDocTemplate;
-		if (docPath.startsWith("http")) {
-			projectRefDocTemplate = docPath;
+	private String buildDocUrl(String docsBaseUrl, String docPath, String versionName, String projectId, String defaultDocSuffix) {
+		String docTemplate;
+		if (docPath.isEmpty()) {
+			docTemplate = String.format("%s/%s/docs/%s/%s", docsBaseUrl, projectId, versionName, defaultDocSuffix);
+		} else if (docPath.startsWith("http")) {
+			docTemplate = docPath;
 		} else {
-			projectRefDocTemplate = docsBaseUrl + docPath;
+			docTemplate = docsBaseUrl + docPath;
 		}
-		return projectRefDocTemplate.replaceAll("\\{version\\}", versionName);
+		return docTemplate.replaceAll("\\{version\\}", versionName);
 	}
 
 	private void orderVersions(List<SupportedVersion> supportedVersions) {

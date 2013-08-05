@@ -69,7 +69,11 @@ projects:
       apiDocUrl: http://www.example.com/spring/docs/{version}/api/html
       supportedVersions:
         - name: 2.4.0.RELEASE
-          refDocUrl: http://www.example.com//spring/docs/{version}/reference/
+          refDocUrl: http://www.example.com/spring/docs/{version}/reference/
+    - id: project-docs-urls-omitted
+      name: Spring Ref Docs Omitted
+      supportedVersions:
+        - 2.4.0.RELEASE
 
 
   other:

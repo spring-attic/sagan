@@ -34,7 +34,7 @@ public class ProjectMetadataYamlParserTests {
 	@Test
 	public void categoriesHaveListOfProjects() throws IOException {
 		List<Project> active = projects.get("active");
-		assertThat(active.size(), equalTo(8));
+		assertThat(active.size(), equalTo(9));
 	}
 
 	@Test
@@ -156,6 +156,15 @@ public class ProjectMetadataYamlParserTests {
 		ProjectVersion documentation = project.getProjectVersions().get(0);
 		assertThat(documentation.getVersion(), equalTo(new Version("2.4.0.RELEASE", Version.Release.CURRENT)));
 		assertThat(documentation.getApiDocUrl(), equalTo("http://www.example.com/spring/docs/2.4.0.RELEASE/api/html"));
-		assertThat(documentation.getRefDocUrl(), equalTo("http://www.example.com//spring/docs/2.4.0.RELEASE/reference/"));
+		assertThat(documentation.getRefDocUrl(), equalTo("http://www.example.com/spring/docs/2.4.0.RELEASE/reference/"));
+	}
+
+	@Test
+	public void omittedDocsUrlsAreBuiltFromDefaults() throws Exception {
+		Project project = projects.get("active").get(8);
+		ProjectVersion documentation = project.getProjectVersions().get(0);
+		assertThat(documentation.getVersion(), equalTo(new Version("2.4.0.RELEASE", Version.Release.CURRENT)));
+		assertThat(documentation.getApiDocUrl(), equalTo("http://static.springsource.org/project-docs-urls-omitted/docs/2.4.0.RELEASE/api"));
+		assertThat(documentation.getRefDocUrl(), equalTo("http://static.springsource.org/project-docs-urls-omitted/docs/2.4.0.RELEASE/reference/html"));
 	}
 }
