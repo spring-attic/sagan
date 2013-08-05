@@ -5,9 +5,14 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.springframework.site.domain.projects.Version.Release.CURRENT;
+import static org.springframework.site.domain.projects.Version.Release.PRERELEASE;
+import static org.springframework.site.domain.projects.Version.Release.SUPPORTED;
 
 public class ProjectMetadataYamlParser {
 
@@ -49,7 +54,7 @@ public class ProjectMetadataYamlParser {
 		String apiDocUrl = docsBaseUrl + projectData.get("apiDocPath");
 		String repoUrl = parseRepoUrl(projectData, githubOrgBaseUrl, id);
 		String siteUrl = parseSiteUrl(projectData, ghPagesBaseUrl, id);
-		List<ProjectDocumentation> documentationList = parseProjectDocumentation(refDocUrl, apiDocUrl, projectData);
+		List<ProjectVersion> documentationList = parseProjectDocumentation(projectData, docsBaseUrl, refDocUrl, apiDocUrl);
 		return new Project(id, name, repoUrl, siteUrl, documentationList);
 	}
 
@@ -75,26 +80,72 @@ public class ProjectMetadataYamlParser {
 		return siteUrl;
 	}
 
-	private List<Version> parseSupportedVersions(Map<String, Object> projectData) {
+	private List<ProjectVersion> parseProjectDocumentation(Map<String, Object> projectData, String docsBaseUrl, String refDocTemplate, String apiDocTemplate) {
+		List<ProjectVersion> projectVersions = new ArrayList<>();
 		if (projectData.containsKey("supportedVersions")) {
-			List<String> versionStrings = new ArrayList<>();
-			for (Object value : (List) projectData.get("supportedVersions")) {
-				versionStrings.add(value.toString());
+			List versionList = getOrderedVersionList(projectData);
+
+			Version currentVersion = null;
+			for (Object value : versionList) {
+
+				String projectRefDocTemplate = refDocTemplate;
+				String projectApiDocTemplate = apiDocTemplate;
+				String versionName;
+				if (value instanceof String) {
+					versionName = value.toString();
+				} else {
+					Map<String, String> versionMap = (Map<String, String>) value;
+					versionName = versionMap.get("name");
+					if (versionMap.containsKey("refDocPath")) {
+						projectRefDocTemplate = docsBaseUrl + versionMap.get("refDocPath");
+					}
+					if (versionMap.containsKey("apiDocPath")) {
+						projectApiDocTemplate = docsBaseUrl + versionMap.get("apiDocPath");
+					}
+				}
+				String refDocUrl = projectRefDocTemplate.replaceAll("\\{version\\}", versionName);
+				String apiDocUrl = projectApiDocTemplate.replaceAll("\\{version\\}", versionName);
+
+				Version version = buildVersion(versionName, currentVersion);
+				if (currentVersion == null && version.isCurrent()) {
+					currentVersion = version;
+				}
+
+				projectVersions.add(new ProjectVersion(refDocUrl, apiDocUrl, version));
+
 			}
-			return SupportedVersions.build(versionStrings);
 		}
-		return Collections.emptyList();
+		return projectVersions;
 	}
 
-	private List<ProjectDocumentation> parseProjectDocumentation(String refDocTemplate, String apiDocTemplate, Map<String, Object> projectData) {
-		List<ProjectDocumentation> list = new ArrayList<>();
-		List<Version> supportedVersions = parseSupportedVersions(projectData);
-		for (Version version : supportedVersions) {
-			String refDocUrl = refDocTemplate.replaceAll("\\{version\\}", version.getFullVersion());
-			String apiDocUrl = apiDocTemplate.replaceAll("\\{version\\}", version.getFullVersion());
-			ProjectDocumentation projectDocumentation = new ProjectDocumentation(refDocUrl, apiDocUrl, version);
-			list.add(projectDocumentation);
+	private static Version buildVersion(String versionName, Version currentVersion) {
+		boolean isPreRelease = versionName.matches("[0-9.]+(M|RC)\\d+");
+		Version.Release release = SUPPORTED;
+		if (isPreRelease) {
+			release = PRERELEASE;
+		} else if (currentVersion == null) {
+			release = CURRENT;
 		}
-		return list;
+		return new Version(versionName, release);
 	}
+
+	private List getOrderedVersionList(Map<String, Object> projectData) {
+		List versionList = (List) projectData.get("supportedVersions");
+
+		Collections.sort(versionList, new Comparator() {
+			@Override
+			public int compare(Object v1, Object v2) {
+				return getVersionName(v2).compareTo(getVersionName(v1));
+			}
+
+			private String getVersionName(Object o) {
+				if (o instanceof Map) {
+					return ((Map) o).get("name").toString();
+				}
+				return o.toString();
+			}
+		});
+		return versionList;
+	}
+
 }

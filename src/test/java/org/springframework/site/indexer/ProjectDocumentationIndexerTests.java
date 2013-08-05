@@ -2,7 +2,7 @@ package org.springframework.site.indexer;
 
 import org.junit.Test;
 import org.springframework.site.domain.projects.Project;
-import org.springframework.site.domain.projects.ProjectDocumentation;
+import org.springframework.site.domain.projects.ProjectVersion;
 import org.springframework.site.domain.projects.ProjectMetadataService;
 import org.springframework.site.domain.projects.Version;
 import org.springframework.site.indexer.crawler.CrawlerService;
@@ -23,10 +23,10 @@ public class ProjectDocumentationIndexerTests {
 	private final SearchService searchService = mock(SearchService.class);
 	private ProjectDocumentationIndexer service = new ProjectDocumentationIndexer(crawlerService, searchService, documentationService);
 
-	private List<ProjectDocumentation> documentationList = Arrays.asList(
-			new ProjectDocumentation("http://reference.example.com/3", "http://api.example.com/3", new Version("3", Version.Release.CURRENT)),
-			new ProjectDocumentation("http://reference.example.com/2", "http://api.example.com/2", new Version("2", Version.Release.SUPPORTED)),
-			new ProjectDocumentation("http://reference.example.com/1", "http://api.example.com/1", new Version("1", Version.Release.SUPPORTED))
+	private List<ProjectVersion> documentationList = Arrays.asList(
+			new ProjectVersion("http://reference.example.com/3", "http://api.example.com/3", new Version("3", Version.Release.CURRENT)),
+			new ProjectVersion("http://reference.example.com/2", "http://api.example.com/2", new Version("2", Version.Release.SUPPORTED)),
+			new ProjectVersion("http://reference.example.com/1", "http://api.example.com/1", new Version("1", Version.Release.SUPPORTED))
 	);
 
 	private Project project = new Project("spring",

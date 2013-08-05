@@ -12,7 +12,7 @@ public class SupportedVersionsTests {
 
 	@Test
 	public void setsCurrentVersionWithReleases() throws Exception {
-		List<Version> supportedVersions = SupportedVersions.build(
+		List<Version> supportedVersions = SupportedVersions.assignVersions(
 				Arrays.asList(
 						"4.0.0.RC1",
 						"4.0.0.M1",
@@ -30,7 +30,7 @@ public class SupportedVersionsTests {
 
 	@Test
 	public void sortsVersionInDescendingOrder() throws Exception {
-		List<Version> supportedVersions = SupportedVersions.build(
+		List<Version> supportedVersions = SupportedVersions.assignVersions(
 				Arrays.asList(
 						"3.2.3.RELEASE",
 						"4.0.0.M1",

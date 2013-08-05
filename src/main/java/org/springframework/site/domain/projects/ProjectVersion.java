@@ -1,12 +1,12 @@
 package org.springframework.site.domain.projects;
 
-public class ProjectDocumentation {
+public class ProjectVersion {
 
 	private final String refDocUrl;
 	private final String apiDocUrl;
 	private Version version;
 
-    public ProjectDocumentation(String refDocUrl, String apiDocUrl, Version version) {
+    public ProjectVersion(String refDocUrl, String apiDocUrl, Version version) {
 		this.refDocUrl = refDocUrl;
 		this.apiDocUrl = apiDocUrl;
         this.version = version;

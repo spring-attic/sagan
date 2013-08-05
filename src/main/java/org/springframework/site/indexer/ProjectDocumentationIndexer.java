@@ -4,7 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.projects.Project;
-import org.springframework.site.domain.projects.ProjectDocumentation;
+import org.springframework.site.domain.projects.ProjectVersion;
 import org.springframework.site.domain.projects.ProjectMetadataService;
 import org.springframework.site.domain.projects.Version;
 import org.springframework.site.indexer.crawler.CrawlerService;
@@ -37,7 +37,7 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 	@Override
 	public void indexItem(Project project) {
 		logger.info("Indexing project: " + project.getId());
-		for (ProjectDocumentation documentation : project.getProjectDocumentationList()) {
+		for (ProjectVersion documentation : project.getProjectVersions()) {
 			Version version = documentation.getVersion();
 
 			String apiDocUrl = documentation.getApiDocUrl() + "/allclasses-frame.html";

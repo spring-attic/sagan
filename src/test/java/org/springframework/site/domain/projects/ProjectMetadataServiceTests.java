@@ -26,7 +26,7 @@ public class ProjectMetadataServiceTests {
 		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 
 		assertEquals(3, documentationService.getProject("spring-framework")
-				.getProjectDocumentationList().size());
+				.getProjectVersions().size());
 	}
 
 	@Test
@@ -35,7 +35,7 @@ public class ProjectMetadataServiceTests {
 		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 
 		List<Project> activeProjects = documentationService.getProjectsForCategory("active");
-		assertThat(activeProjects.size(), is(3));
+		assertThat(activeProjects.size(), is(7));
 		assertThat(activeProjects.get(0).getId(), is("spring-framework"));
 	}
 
@@ -45,7 +45,7 @@ public class ProjectMetadataServiceTests {
 		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 
 		assertEquals(3, documentationService.getProject("spring-framework")
-				.getProjectDocumentationList().size());
+				.getProjectVersions().size());
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class ProjectMetadataServiceTests {
 
 		StringBuilder builder = new StringBuilder();
 		for (Project project : documentationService.getProjects()) {
-			for (ProjectDocumentation documentation : project.getProjectDocumentationList()) {
+			for (ProjectVersion documentation : project.getProjectVersions()) {
 				String apiDocUrl = documentation.getApiDocUrl();
 				ResponseEntity<String> entity = restTemplate.getForEntity(apiDocUrl,String.class);
 				if (entity.getStatusCode() != HttpStatus.OK) {
@@ -86,6 +86,6 @@ public class ProjectMetadataServiceTests {
 			}
 		}
 		System.err.println(builder);
-		assertEquals(3, documentationService.getProject("spring-framework").getProjectDocumentationList().size());
+		assertEquals(3, documentationService.getProject("spring-framework").getProjectVersions().size());
 	}
 }

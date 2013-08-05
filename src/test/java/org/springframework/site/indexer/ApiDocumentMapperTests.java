@@ -5,7 +5,7 @@ import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.projects.Project;
-import org.springframework.site.domain.projects.ProjectDocumentation;
+import org.springframework.site.domain.projects.ProjectVersion;
 import org.springframework.site.domain.projects.Version;
 import org.springframework.site.indexer.mapper.ApiDocumentMapper;
 import org.springframework.site.search.SearchEntry;
@@ -22,7 +22,7 @@ public class ApiDocumentMapperTests {
 			"Spring",
 			"http://www.example.com/repo/spring-framework",
 			"http://www.example.com/spring-framework",
-			Collections.<ProjectDocumentation>emptyList());
+			Collections.<ProjectVersion>emptyList());
 
 	private ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, new Version("3.2.1.RELEASE", Version.Release.CURRENT));
 

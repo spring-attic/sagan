@@ -10,7 +10,7 @@ import static org.springframework.site.domain.projects.Version.Release.SUPPORTED
 
 public class SupportedVersions {
 
-	public static List<Version> build(List<String> versionStrings) {
+	public static List<Version> assignVersions(List<String> versionStrings) {
 		List<Version> versions = new ArrayList<>();
 
 		Collections.sort(versionStrings);

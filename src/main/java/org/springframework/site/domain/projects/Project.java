@@ -8,13 +8,13 @@ public class Project {
 	private String name;
 	private final String repoUrl;
 	private final String siteUrl;
-	private final List<ProjectDocumentation> documentationList;
+	private final List<ProjectVersion> documentationList;
 
 	public Project(String id,
 				   String name,
 				   String repoUrl,
 				   String siteUrl,
-				   List<ProjectDocumentation> documentationList) {
+				   List<ProjectVersion> documentationList) {
 		this.id = id;
 		this.name = name;
 		this.repoUrl = repoUrl;
@@ -30,7 +30,7 @@ public class Project {
 		return id;
 	}
 
-    public List<ProjectDocumentation> getProjectDocumentationList() {
+    public List<ProjectVersion> getProjectVersions() {
 		return documentationList;
     }
 

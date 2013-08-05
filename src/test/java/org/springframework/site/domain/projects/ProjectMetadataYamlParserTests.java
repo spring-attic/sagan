@@ -34,7 +34,7 @@ public class ProjectMetadataYamlParserTests {
 	@Test
 	public void categoriesHaveListOfProjects() throws IOException {
 		List<Project> active = projects.get("active");
-		assertThat(active.size(), equalTo(3));
+		assertThat(active.size(), equalTo(7));
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void projectsHasDocumentationWithCurrentVersionSet() throws IOException {
-		List<ProjectDocumentation> documentationList = projects.get("active").get(0).getProjectDocumentationList();
+		List<ProjectVersion> documentationList = projects.get("active").get(0).getProjectVersions();
 		assertThat(documentationList.get(0).getVersion(), equalTo(new Version("4.0.0.M1", Version.Release.PRERELEASE)));
 		assertThat(documentationList.get(1).getVersion(), equalTo(new Version("3.2.3.RELEASE", Version.Release.CURRENT)));
 		assertThat(documentationList.get(2).getVersion(), equalTo(new Version("3.1.4.RELEASE", Version.Release.SUPPORTED)));
@@ -80,12 +80,12 @@ public class ProjectMetadataYamlParserTests {
 		List<Project> active = projects.get("other");
 		assertThat(active.size(), equalTo(1));
 		Project project = active.get(0);
-		assertThat(project.getProjectDocumentationList().size(), equalTo(0));
+		assertThat(project.getProjectVersions().size(), equalTo(0));
 	}
 
 	@Test
 	public void getSupportedReferenceDocumentVersions() {
-		List<ProjectDocumentation> docVersions = projects.get("active").get(0).getProjectDocumentationList();
+		List<ProjectVersion> docVersions = projects.get("active").get(0).getProjectVersions();
 		assertThat(docVersions.get(0).getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/4.0.0.M1/spring-framework-reference/html/"));
 		assertThat(docVersions.get(1).getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/3.2.3.RELEASE/spring-framework-reference/html/"));
 		assertThat(docVersions.get(2).getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/"));
@@ -93,10 +93,60 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void getSupportedApiDocsUrls() {
-		List<ProjectDocumentation> docVersions = projects.get("active").get(0).getProjectDocumentationList();
+		List<ProjectVersion> docVersions = projects.get("active").get(0).getProjectVersions();
 		assertThat(docVersions.get(0).getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/4.0.0.M1/javadoc-api/"));
 		assertThat(docVersions.get(1).getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/3.2.3.RELEASE/javadoc-api/"));
 		assertThat(docVersions.get(2).getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/3.1.4.RELEASE/javadoc-api/"));
 	}
 
+	@Test
+	public void apiAndReferenceDocsUrlsCanBeOverridden() throws Exception {
+		Project project = projects.get("active").get(3);
+		ProjectVersion documentation = project.getProjectVersions().get(0);
+		assertThat(documentation.getVersion(), equalTo(new Version("2.2.1.RELEASE", Version.Release.CURRENT)));
+		assertThat(documentation.getApiDocUrl(), equalTo("http://static.springsource.org/spring/trunk/apidocs/index.html"));
+		assertThat(documentation.getRefDocUrl(), equalTo("http://static.springsource.org/spring/trunk/reference/html/index.html"));
+	}
+
+	@Test
+	public void apiAndReferenceDocsUrlsCanBeOverriddenInAMixedWay() throws Exception {
+		Project project = projects.get("active").get(4);
+		ProjectVersion documentation = project.getProjectVersions().get(0);
+		assertThat(documentation.getVersion(), equalTo(new Version("2.2.1.RELEASE", Version.Release.CURRENT)));
+		assertThat(documentation.getApiDocUrl(), equalTo("http://static.springsource.org/spring/trunk/apidocs/index.html"));
+		assertThat(documentation.getRefDocUrl(), equalTo("http://static.springsource.org/spring/trunk/reference/html/index.html"));
+
+		documentation = project.getProjectVersions().get(1);
+		assertThat(documentation.getVersion(), equalTo(new Version("2.1.2.RELEASE", Version.Release.SUPPORTED)));
+		assertThat(documentation.getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.1.2.RELEASE/javadoc-api/"));
+		assertThat(documentation.getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.1.2.RELEASE/spring-framework-reference/html/"));
+	}
+
+	@Test
+	public void justApiDocsUrlCanBeOverridden() throws Exception {
+		Project project = projects.get("active").get(5);
+		ProjectVersion documentation = project.getProjectVersions().get(0);
+		assertThat(documentation.getVersion(), equalTo(new Version("2.4.0.M1", Version.Release.PRERELEASE)));
+		assertThat(documentation.getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.4.0.M1/api/"));
+		assertThat(documentation.getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.4.0.M1/reference/html"));
+
+		documentation = project.getProjectVersions().get(1);
+		assertThat(documentation.getVersion(), equalTo(new Version("2.3.2.RELEASE", Version.Release.CURRENT)));
+		assertThat(documentation.getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.3.2.RELEASE/javadoc-api/"));
+		assertThat(documentation.getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.3.2.RELEASE/reference/html"));
+	}
+
+	@Test
+	public void justRefDocsUrlCanBeOverridden() throws Exception {
+		Project project = projects.get("active").get(6);
+		ProjectVersion documentation = project.getProjectVersions().get(0);
+		assertThat(documentation.getVersion(), equalTo(new Version("2.4.0.M1", Version.Release.PRERELEASE)));
+		assertThat(documentation.getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.4.0.M1/api/html"));
+		assertThat(documentation.getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.4.0.M1/reference/"));
+
+		documentation = project.getProjectVersions().get(1);
+		assertThat(documentation.getVersion(), equalTo(new Version("2.3.2.RELEASE", Version.Release.CURRENT)));
+		assertThat(documentation.getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.3.2.RELEASE/api/html"));
+		assertThat(documentation.getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/2.3.2.RELEASE/other-reference/"));
+	}
 }
