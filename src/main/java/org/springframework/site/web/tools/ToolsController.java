@@ -46,6 +46,11 @@ public class ToolsController {
 		return "tools/sts/index";
 	}
 
+	@RequestMapping(value = "/sts/welcome", method = { GET, HEAD })
+	public String stsWelcome(Model model) throws Exception {
+		return "tools/sts/welcome";
+	}
+
 	@RequestMapping(value = "/sts/all", method = { GET, HEAD })
 	public String allStsDownloads(Model model) throws Exception {
 		ToolSuiteDownloads stsDownloads = toolsService.getStsDownloads();

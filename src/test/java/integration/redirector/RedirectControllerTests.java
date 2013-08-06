@@ -54,4 +54,12 @@ public class RedirectControllerTests {
 				.andExpect(header().string("Location", "http://example.com/new"));
 	}
 
+
+	@Test
+	public void redirectsPreservingQueryString() throws Exception {
+		this.mockMvc.perform(get("/old?foo=bar"))
+				.andExpect(status().isMovedPermanently())
+				.andExpect(header().string("Location", "http://example.com/new?foo=bar"));
+	}
+
 }

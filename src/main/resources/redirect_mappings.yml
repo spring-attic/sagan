@@ -114,6 +114,10 @@ mappings:
   - old_url: http://blog.springsource.org/author/trisberg
     new_url: http://sagan.cfapps.io/about/team/trisberg
 
+  #tools
+  - old_url: http://www.springsource.org/sts/welcome
+    new_url: http://sagan.cfapps.io/tools/sts/welcome
+
   #blog
   - old_url: http://blog.springsource.org/2006/04/09/spring-20s-jms-improvements/
     new_url:

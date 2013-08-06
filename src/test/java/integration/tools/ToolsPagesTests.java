@@ -117,4 +117,12 @@ public class ToolsPagesTests extends IntegrationTestBase {
 		assertThat(document.text(), containsString("Windows"));
 	}
 
+	@Test
+	public void showsStsWelcome() throws Exception {
+		this.mockMvc.perform(get("/tools/sts/welcome?version=3.2.0.RELEASE&os=macosx.cocoa.x86_64"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html"));
+
+	}
+
 }

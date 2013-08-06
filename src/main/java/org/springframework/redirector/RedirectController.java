@@ -33,6 +33,12 @@ public class RedirectController {
 			logger.info(String.format("No mapping found for %s, redirecting to default site: %s", requestedUrl, redirectedUrl));
 		}
 
+
+		String queryString = request.getQueryString();
+		if (queryString != null) {
+			redirectedUrl = redirectedUrl + "?" + queryString;
+		}
+
 		logger.info(String.format("REDIRECT: %s => %s", requestedUrl, redirectedUrl));
 		RedirectView redirectView = new RedirectView(redirectedUrl);
 		redirectView.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
