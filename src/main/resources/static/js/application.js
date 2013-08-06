@@ -58,12 +58,15 @@ $(function(){
       $(".nav-search").addClass("js-highlight");
       $(".js-search-dropdown").addClass("js-show no-animation");
 
-      //PREPOPULATES INPUT WITH SEARCH QUERY
-      var searchQuery = decodeURIComponent(window.location.search.substr(3).replace(/\+/g," ")); 
-      $(".js-search-results--title").val(searchQuery);
+      //PREPOPULATES INPUT WITH SEARCH QUERY AND
+      var searchQuery = decodeURIComponent(window.location.search.replace(/\+/g," "));
+      var seachStart = searchQuery.search("q=");
+      var searchString = searchQuery.substr(seachStart+2);
+
+      $(".js-search-input").val(searchString);
 
       //PREPOPULATES TITLE WITH SEARCH QUERY
-      $(".js-search-results--title").html(searchQuery);
+      $(".js-search-results--title").html(searchString);
 
       //CLOSES SEARCH DROPDOWN
       $(".js-search-input-close").click(function() {
