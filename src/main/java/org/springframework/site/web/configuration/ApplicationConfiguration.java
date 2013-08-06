@@ -41,6 +41,7 @@ import org.springframework.site.domain.services.DateService;
 import org.springframework.site.web.SiteUrl;
 import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
 @EnableAutoConfiguration
@@ -115,4 +116,10 @@ public class ApplicationConfiguration {
 	public Filter rewriteFilter() {
 		return new UrlRewriteFilter();
 	}
+
+	@Bean
+	public DispatcherServlet dispatcherServlet() {
+		return new DispatcherServlet();
+	}
+
 }
