@@ -120,12 +120,12 @@ mappings:
 
   #blog
   - old_url: http://blog.springsource.org/2006/04/09/spring-20s-jms-improvements/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2006/04/09/spring-2-0-s-jms-improvements
   - old_url: http://blog.springsource.org/2006/04/09/another-reason-to-love-spring-20-interceptor-combining/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2006/04/09/another-reason-to-love-spring-2-0-interceptor-combining
   - old_url: http://blog.springsource.org/2006/04/25/message-flow-tracing-with-aspectj-and-jmx/
     new_url: http://sagan.cfapps.io/blog/2006/04/25/message-flow-tracing-with-aspectj-and-jmx
-  - old_url: http://blog.springsource.org/2006/05/25/atlanta-d\evcon-2006/
+  - old_url: http://blog.springsource.org/2006/05/25/atlanta-devcon-2006/
     new_url: http://sagan.cfapps.io/blog/2006/05/26/atlanta-devcon-2006
   - old_url: http://blog.springsource.org/2006/07/07/the-interface21-team-blog/
     new_url: http://sagan.cfapps.io/blog/2006/07/07/welcome-to-the-interface21-team-blog
@@ -152,7 +152,7 @@ mappings:
   - old_url: http://blog.springsource.org/2006/08/07/using-jpa-in-spring-without-referencing-spring/
     new_url: http://sagan.cfapps.io/blog/2006/08/07/using-jpa-in-spring-without-referencing-spring
   - old_url: http://blog.springsource.org/2006/08/10/simplifying-enterprise-applications-with-spring-20-and-aspectj/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2006/08/10/simplifying-enterprise-applications-with-spring-2-0-and-aspectj
   - old_url: http://blog.springsource.org/2006/08/11/message-driven-pojos/
     new_url: http://sagan.cfapps.io/blog/2006/08/11/message-driven-pojos
   - old_url: http://blog.springsource.org/2006/08/13/my-new-home/
@@ -162,7 +162,7 @@ mappings:
   - old_url: http://blog.springsource.org/2006/08/28/creating-a-spring-20-namespace-use-springs-abstractbeandefintionparser-hierarchy/
     new_url: http://sagan.cfapps.io/blog/2006/08/28/creating-a-spring-2-0-namespace-use-spring-s-abstractbeandefintionparser-hierarchy
   - old_url: http://blog.springsource.org/2006/08/25/validation-logic-and-my-first-post/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2006/08/25/validation-logic-and-my-first-post
   - old_url: http://blog.springsource.org/2006/09/05/before-advice-in-spring-20/
     new_url: http://sagan.cfapps.io/blog/2006/09/05/before-advice-in-spring-2-0
   - old_url: http://blog.springsource.org/2006/09/07/spring-osgi-support-gaining-momentum/
@@ -290,7 +290,7 @@ mappings:
   - old_url: http://blog.springsource.org/2007/06/11/asm-version-incompatibilities-using-spring-autowired-with-hibernate/
     new_url: http://sagan.cfapps.io/blog/2007/06/11/asm-version-incompatibilities-using-spring-autowired-with-hibernate
   - old_url: http://blog.springsource.org/2007/06/11/using-a-shared-parent-application-context-in-a-multi-war-spring-application/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2007/06/11/using-a-shared-parent-application-context-in-a-multi-war-spring-application
   - old_url: http://blog.springsource.org/2007/06/13/spring-the-de-facto-standard-in-enterprise-java-programming/
     new_url: http://sagan.cfapps.io/blog/2007/06/13/spring-the-de-facto-standard-in-enterprise-java-programming
   - old_url: http://blog.springsource.org/2007/06/14/source-for-demos-shown-at-nl-jug-session-june-13th-2007/
@@ -350,7 +350,7 @@ mappings:
   - old_url: http://blog.springsource.org/2007/11/14/annotated-web-mvc-controllers-in-spring-25/
     new_url: http://sagan.cfapps.io/blog/2007/11/14/annotated-web-mvc-controllers-in-spring-2-5
   - old_url: http://blog.springsource.org/2007/11/15/the-spring-web-flow-20-vision/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2007/11/15/the-spring-web-flow-2-0-vision
   - old_url: http://blog.springsource.org/2007/11/18/interface21-becomes-springsource/
     new_url: http://sagan.cfapps.io/blog/2007/11/19/interface21-becomes-springsource
   - old_url: http://blog.springsource.org/2007/11/26/spring-framework-maven-artifacts/
@@ -462,7 +462,7 @@ mappings:
   - old_url: http://blog.springsource.org/2008/08/20/amsterdam-java-meetup-september-12th/
     new_url: http://sagan.cfapps.io/blog/2008/08/20/amsterdam-java-meetup-september-12th
   - old_url: http://blog.springsource.org/2008/08/22/who-is-the-chief-of-the-apache-projects/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2008/08/22/who-is-the-chief-of-the-apache-projects
   - old_url: http://blog.springsource.org/2008/09/01/early-draft-of-osgi-service-platform-release-42-specification-now-available/
     new_url: http://sagan.cfapps.io/blog/2008/09/01/early-draft-of-osgi-service-platform-release-4-2-specification-now-available
   - old_url: http://blog.springsource.org/2008/09/11/springsource-dm-server-10-rc2-released/
@@ -474,7 +474,7 @@ mappings:
   - old_url: http://blog.springsource.org/2008/09/23/springsource-seminar-day-linz-in-review/
     new_url: http://sagan.cfapps.io/blog/2008/09/23/springsource-seminar-day-linz-in-review
   - old_url: http://blog.springsource.org/2008/09/30/springsource-dm-server-100-reaches-ga/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2008/09/30/springsource-dm-server-1-0-0-reaches-ga
   - old_url: http://blog.springsource.org/2008/10/03/the-common-service-locator-library/
     new_url: http://sagan.cfapps.io/blog/2008/10/03/the-common-service-locator-library
   - old_url: http://blog.springsource.org/2008/10/07/a-question-of-balance-tuning-the-maintenance-policy/
@@ -506,7 +506,7 @@ mappings:
   - old_url: http://blog.springsource.org/2008/12/05/spring-framework-30-m1-released/
     new_url: http://sagan.cfapps.io/blog/2008/12/05/first-spring-framework-3-0-milestone-released
   - old_url: http://blog.springsource.org/2008/12/11/slides-and-demos-from-springone-americas-2008/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2008/12/11/slides-and-demos-from-springone-americas-2008
   - old_url: http://blog.springsource.org/2008/12/11/spring-integration-in-grails-part-1/
     new_url: http://sagan.cfapps.io/blog/2008/12/11/spring-integration-in-grails-part-1
   - old_url: http://blog.springsource.org/2008/12/17/using-spring-blazeds-integration-m1/
@@ -558,11 +558,11 @@ mappings:
   - old_url: http://blog.springsource.org/2009/03/30/announcing-dm-server-getting-started-guide/
     new_url: http://sagan.cfapps.io/blog/2009/03/30/announcing-dm-server-getting-started-guide
   - old_url: http://blog.springsource.org/2009/04/01/springsource-dm-server-roadmap/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2009/04/01/springsource-dm-server-roadmap
   - old_url: http://blog.springsource.org/2009/04/02/announcing-dm-server-20-m1/
     new_url: http://sagan.cfapps.io/blog/2009/04/02/announcing-dm-server-2-0-m1
   - old_url: http://blog.springsource.org/2009/04/07/write-your-google-app-engine-applications-in-groovy/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2009/04/08/write-your-google-app-engine-applications-in-groovy
   - old_url: http://blog.springsource.org/2009/04/14/proxies-in-osgi/
     new_url: http://sagan.cfapps.io/blog/2009/04/14/proxies-in-osgi
   - old_url: http://blog.springsource.org/2009/04/14/enterprise-java-and-the-american-motors-gremlin/
@@ -596,7 +596,7 @@ mappings:
   - old_url: http://blog.springsource.org/2009/05/27/introduction-to-the-osgi-web-container/
     new_url: http://sagan.cfapps.io/blog/2009/05/27/introduction-to-the-osgi-web-container
   - old_url: http://blog.springsource.org/2009/06/01/what-the-osgi-web-container-means-for-dm-server/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2009/06/01/what-the-osgi-web-container-means-for-dm-server
   - old_url: http://blog.springsource.org/2009/06/03/spring-security-300m1-released/
     new_url: http://sagan.cfapps.io/blog/2009/06/03/spring-security-3-0-0-m1-released
   - old_url: http://blog.springsource.org/2009/06/03/red-hat-reacts-to-springsources-leadership/
@@ -614,7 +614,7 @@ mappings:
   - old_url: http://blog.springsource.org/2009/06/23/osgi-test-stubs/
     new_url: http://sagan.cfapps.io/blog/2009/06/23/osgi-test-stubs-1-0-0-m1
   - old_url: http://blog.springsource.org/2009/06/23/messaging-meets-osgi-at-osgi-devcon-europe/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2009/06/23/messaging-meets-osgi-at-osgi-devcon-europe
   - old_url: http://blog.springsource.org/2009/06/24/maven-par-plugin-100m1/
     new_url: http://sagan.cfapps.io/blog/2009/06/24/maven-par-plugin-1-0-0-m1
   - old_url: http://blog.springsource.org/2009/06/24/installing-sts-into-eclipse-35/
@@ -648,7 +648,7 @@ mappings:
   - old_url: http://blog.springsource.org/2009/08/13/virtualization-enterprise-java/
     new_url: http://sagan.cfapps.io/blog/2009/08/13/virtualization-enterprise-java
   - old_url: http://blog.springsource.org/2009/08/19/cloud-foundry/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2009/08/19/springsource-launches-enterprise-java-cloud
   - old_url: http://blog.springsource.org/2009/08/27/update-on-groovy-and-grails-tools/
     new_url: http://sagan.cfapps.io/blog/2009/08/27/update-on-groovy-and-grails-tools
   - old_url: http://blog.springsource.org/2009/09/28/spring-security-kerberos/
@@ -660,7 +660,7 @@ mappings:
   - old_url: http://blog.springsource.org/2009/09/26/bundlor-adds-support-for-the-blueprint-service/
     new_url: http://sagan.cfapps.io/blog/2009/09/26/bundlor-adds-support-for-the-blueprint-service
   - old_url: http://blog.springsource.org/2009/09/29/spring-framework-3-0-rc1-released/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2009/09/29/spring-framework-3-0-rc1-released
   - old_url: http://blog.springsource.org/2009/10/07/new-cloud-foundry-feature-save-deployment-blueprints-as-templates/
     new_url: http://sagan.cfapps.io/blog/2009/10/07/new-cloud-foundry-feature-save-deployment-blueprints-as-templates
   - old_url: http://blog.springsource.org/2009/10/13/regions/
@@ -670,7 +670,7 @@ mappings:
   - old_url: http://blog.springsource.org/2009/10/15/the-dm-shell/
     new_url: http://sagan.cfapps.io/blog/2009/10/15/the-dm-shell
   - old_url: http://blog.springsource.org/2009/10/21/dm-console-demo-screencast/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2009/10/21/dm-admin-console-demo-screencast
   - old_url: http://blog.springsource.org/2009/10/12/dm-server-2-0-0-m5/
     new_url: http://sagan.cfapps.io/blog/2009/10/12/dm-server-2-0-0-m5
   - old_url: http://blog.springsource.org/2009/10/19/dm-kernel/
@@ -696,7 +696,7 @@ mappings:
   - old_url: http://blog.springsource.org/2009/12/02/obtaining-spring-3-artifacts-with-maven/
     new_url: http://sagan.cfapps.io/blog/2009/12/02/obtaining-spring-3-artifacts-with-maven
   - old_url: http://blog.springsource.org/2009/12/01/spring-framework-3-0-rc3-released/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2009/12/01/spring-framework-3-0-rc3-released
   - old_url: http://blog.springsource.org/2009/12/04/logging-dependencies-in-spring/
     new_url: http://sagan.cfapps.io/blog/2009/12/04/logging-dependencies-in-spring
   - old_url: http://blog.springsource.org/2009/12/08/3537/
@@ -714,7 +714,7 @@ mappings:
   - old_url: http://blog.springsource.org/2009/12/23/bundlor-1-0-0-rc1-available/
     new_url: http://sagan.cfapps.io/blog/2009/12/23/bundlor-1-0-0-rc1-available
   - old_url: http://blog.springsource.org/2009/12/23/grails-1-2-released/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2009/12/23/grails-1-2-released
   - old_url: http://blog.springsource.org/2009/12/31/spring-roo-1-0-0-released/
     new_url: http://sagan.cfapps.io/blog/2009/12/31/spring-roo-1-0-0-released
   - old_url: http://blog.springsource.org/2010/01/05/task-scheduling-simplifications-in-spring-3-0/
@@ -732,7 +732,7 @@ mappings:
   - old_url: http://blog.springsource.org/2010/02/15/practical-use-of-spring-batch-and-spring-integration/
     new_url: http://sagan.cfapps.io/blog/2010/02/15/practical-use-of-spring-batch-and-spring-integration
   - old_url: http://blog.springsource.org/2010/02/18/spring-framework-3-0-1-released/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2010/02/18/spring-framework-3-0-1-released
   - old_url: http://blog.springsource.org/2010/03/10/springsource-tc-server-2-0/
     new_url: http://sagan.cfapps.io/blog/2010/03/10/introducing-springsource-tc-server-2-0
   - old_url: http://blog.springsource.org/2010/03/10/springsource-s2g-forum-munich-next-week/
@@ -768,7 +768,7 @@ mappings:
   - old_url: http://blog.springsource.org/2010/05/24/spring-python-1-1-book-is-published/
     new_url: http://sagan.cfapps.io/blog/2010/05/24/spring-python-1-1-book-is-published
   - old_url: http://blog.springsource.org/2010/05/26/spring-insight-1-0-0-m3-released/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2010/05/26/spring-insight-1-0-0-m3-released
   - old_url: http://blog.springsource.org/2010/05/27/springsource-dm-server-2-0-2-is-released-today/
     new_url: http://sagan.cfapps.io/blog/2010/05/27/springsource-dm-server-2-0-2-is-released-today
   - old_url: http://blog.springsource.org/2010/06/01/whats-a-plugin-oriented-architecture/
@@ -834,7 +834,7 @@ mappings:
   - old_url: http://blog.springsource.org/2010/08/31/cloud-platform/
     new_url: http://sagan.cfapps.io/blog/2010/08/31/vmware-vfabric-powers-cloud-application-platform-vision
   - old_url: http://blog.springsource.org/2010/09/07/announcing-gorm-for-redis/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2010/09/07/announcing-gorm-for-redis
   - old_url: http://blog.springsource.org/2010/09/03/virgo-milestone-4-ships/
     new_url: http://sagan.cfapps.io/blog/2010/09/03/virgo-milestone-4-ships
   - old_url: http://blog.springsource.org/2010/09/08/gemini-web-milestone-4/
@@ -872,7 +872,7 @@ mappings:
   - old_url: http://blog.springsource.org/2010/11/15/yet-another-flavour-of-gorm-mongodb/
     new_url: http://sagan.cfapps.io/blog/2010/11/15/yet-another-flavour-of-gorm-mongodb
   - old_url: http://blog.springsource.org/2010/11/19/spring-into-mobile-application-development/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2010/11/20/spring-into-mobile-application-development
   - old_url: http://blog.springsource.org/2010/11/23/spring-integration-2-0-ga-released/
     new_url: http://sagan.cfapps.io/blog/2010/11/23/spring-integration-2-0-ga-released
   - old_url: http://blog.springsource.org/2010/11/30/vfabric-cloud-application-platform-update/
@@ -892,7 +892,7 @@ mappings:
   - old_url: http://blog.springsource.org/2011/01/11/spring-web-services-2-0-released/
     new_url: http://sagan.cfapps.io/blog/2011/01/11/spring-web-services-2-0-released
   - old_url: http://blog.springsource.org/2011/01/11/whats-new-in-spring-roo-1-1-1/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2011/01/11/what-s-new-in-spring-roo-1-1-1
   - old_url: http://blog.springsource.org/2011/01/17/green-beans-getting-started-with-maven-and-spring/
     new_url: http://sagan.cfapps.io/blog/2011/01/17/green-beans-getting-started-with-maven-and-spring
   - old_url: http://blog.springsource.org/2011/01/25/green-beans-getting-started-with-enterprise-messaging-and-spring/
@@ -906,13 +906,13 @@ mappings:
   - old_url: http://blog.springsource.org/2011/02/14/spring-3-1-m1-introducing-profile/
     new_url: http://sagan.cfapps.io/blog/2011/02/14/spring-3-1-m1-introducing-profile
   - old_url: http://blog.springsource.org/2011/02/15/gorm-for-mongodb-new-milestone-richer-experience/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2011/02/15/gorm-for-mongodb-new-milestone-richer-experience
   - old_url: http://blog.springsource.org/2011/02/15/spring-3-1-m1-unified-property-management/
     new_url: http://sagan.cfapps.io/blog/2011/02/16/spring-3-1-m1-unified-property-management
   - old_url: http://blog.springsource.org/2011/02/21/spring-3-1-m1-mvc-namespace-enhancements-and-configuration/
     new_url: http://sagan.cfapps.io/blog/2011/02/21/spring-3-1-m1-mvc-namespace-enhancements-and-configuration
   - old_url: http://blog.springsource.org/2011/02/17/spring-3-1-m1-featurespec/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2011/02/18/spring-3-1-m1-introducing-featurespecification-support
   - old_url: http://blog.springsource.org/2011/02/23/spring-3-1-m1-caching/
     new_url: http://sagan.cfapps.io/blog/2011/02/23/spring-3-1-m1-cache-abstraction
   - old_url: http://blog.springsource.org/2011/02/23/green-beans-getting-started-with-spring-integration/
@@ -964,7 +964,7 @@ mappings:
   - old_url: http://blog.springsource.org/2011/06/13/spring-3-1-m2-spring-mvc-enhancements-2/
     new_url: http://sagan.cfapps.io/blog/2011/06/13/spring-3-1-m2-spring-mvc-enhancements
   - old_url: http://blog.springsource.org/2011/06/21/spring-3-1-m2-testing-with-configuration-classes-and-profiles/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2011/06/21/spring-3-1-m2-testing-with-configuration-classes-and-profiles
   - old_url: http://blog.springsource.org/2011/06/30/countdown-to-grails-2-0-static-resources/
     new_url: http://sagan.cfapps.io/blog/2011/06/30/countdown-to-grails-2-0-static-resources
   - old_url: http://blog.springsource.org/2011/08/01/spring-security-configuration-with-scala/
@@ -988,13 +988,13 @@ mappings:
   - old_url: http://blog.springsource.org/2011/08/16/chatting-in-the-cloud-part-1/
     new_url: http://sagan.cfapps.io/blog/2011/08/16/chatting-in-the-cloud-part-1
   - old_url: http://blog.springsource.org/2011/08/29/rabbitmq-enabling-grails-full-text-search-on-cloud-foundry/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2011/08/29/rabbitmq-enabling-grails-full-text-search-on-cloud-foundry
   - old_url: http://blog.springsource.org/2011/08/24/using-micro-cloud-foundry-from-grails/
     new_url: http://sagan.cfapps.io/blog/2011/08/24/using-micro-cloud-foundry-from-grails
   - old_url: http://blog.springsource.org/2011/08/24/micro-cloud-foundry-for-spring-developers/
     new_url: http://sagan.cfapps.io/blog/2011/08/24/micro-cloud-foundry-for-spring-developers
   - old_url: http://blog.springsource.org/2011/08/30/using-postgres-on-cloud-foundry/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2011/08/30/using-postgres-on-cloud-foundry
   - old_url: http://blog.springsource.org/2011/09/08/spring-social-1-0-what-a-year-makes/
     new_url: http://sagan.cfapps.io/blog/2011/09/08/spring-social-1-0-what-a-year-makes
   - old_url: http://blog.springsource.org/2011/09/14/new-application-layering-and-persistence-choices-in-spring-roo/
@@ -1052,7 +1052,7 @@ mappings:
   - old_url: http://blog.springsource.org/2012/03/28/secure-data-binding-with-grails/
     new_url: http://sagan.cfapps.io/blog/2012/03/28/secure-data-binding-with-grails
   - old_url: http://blog.springsource.org/2012/04/06/migrating-to-spring-3-1-and-hibernate-4-1/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2012/04/06/migrating-to-spring-3-1-and-hibernate-4-1
   - old_url: http://blog.springsource.org/2012/05/06/spring-mvc-3-2-preview-introducing-servlet-3-async-support/
     new_url: http://sagan.cfapps.io/blog/2012/05/07/spring-mvc-3-2-preview-introducing-servlet-3-async-support
   - old_url: http://blog.springsource.org/2012/05/08/spring-mvc-3-2-preview-techniques-for-real-time-updates/
@@ -1080,7 +1080,7 @@ mappings:
   - old_url: http://blog.springsource.org/2012/08/03/the-most-amazing-java-type-declaration-ever/
     new_url: http://sagan.cfapps.io/blog/2012/08/03/the-most-amazing-java-type-declaration-ever
   - old_url: http://blog.springsource.org/2012/08/13/springsource-tool-suites-3-0-0-released-reorganized-open-sourced-and-at-github/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2012/08/13/springsource-tool-suites-3-0-0-released-reorganized-open-sourced-and-at-github
   - old_url: http://blog.springsource.org/2012/10/09/spring-integration-2-2-retry-and-more/
     new_url: http://sagan.cfapps.io/blog/2012/10/09/what-s-new-in-spring-integration-2-2-part-4-retry-and-more
   - old_url: http://blog.springsource.org/2012/08/23/spring-integration-extensions/
@@ -1106,11 +1106,11 @@ mappings:
   - old_url: http://blog.springsource.org/2012/11/05/spring-framework-3-2-rc1-released/
     new_url: http://sagan.cfapps.io/blog/2012/11/05/spring-framework-3-2-rc1-released
   - old_url: http://blog.springsource.org/2012/11/07/spring-framework-3-2-rc1-new-testing-features/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2012/11/07/spring-framework-3-2-rc1-new-testing-features
   - old_url: http://blog.springsource.org/2012/11/12/spring-framework-3-2-rc1-spring-mvc-test-framework/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2012/11/12/spring-framework-3-2-rc1-spring-mvc-test-framework
   - old_url: http://blog.springsource.org/2012/11/20/scripted-dependency-analysis/
-    new_url:
+    new_url: http://sagan.cfapps.io/blog/2012/11/20/dependency-analysis-in-scripted
   - old_url: http://blog.springsource.org/2012/11/27/introducing-spring-migration-analyzer/
     new_url: http://sagan.cfapps.io/blog/2012/11/27/introducing-spring-migration-analyzer
   - old_url: http://blog.springsource.org/2012/12/10/introducing-spring-scala/
