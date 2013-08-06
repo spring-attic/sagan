@@ -3,14 +3,12 @@ package org.springframework.site.domain.guides;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.site.domain.services.GitHubService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class GitHubGettingStartedService implements GettingStartedService {
@@ -70,7 +68,7 @@ public class GitHubGettingStartedService implements GettingStartedService {
 
 	@Override
 	public List<GettingStartedGuide> listGuides() {
-		GuideRepo[] guideRepos = this.gitHubService.getForObject(REPOS_PATH, GuideRepo[].class);
+		GuideRepo[] guideRepos = this.gitHubService.getGuideRepos(REPOS_PATH);
 		return mapGuideReposToGettingStartedGuides(guideRepos);
 	}
 
@@ -87,15 +85,13 @@ public class GitHubGettingStartedService implements GettingStartedService {
 	@Override
 	public byte[] loadImage(String guideId, String imageName) {
 		try {
-			@SuppressWarnings("unchecked")
-			Map<String, String> response = this.gitHubService.getForObject(IMAGES_PATH,
-					Map.class, getRepoNameFromGuideId(guideId), imageName);
-			return Base64.decode(response.get("content").getBytes());
+			return this.gitHubService.getImage(IMAGES_PATH, getRepoNameFromGuideId(guideId), imageName);
 		} catch (RestClientException e) {
 			String msg = String.format("Could not load image '%s' for guide id '%s'", imageName, guideId);
 			log.warn(msg, e);
 			throw new ImageNotFoundException(msg, e);
 		}
 	}
+
 
 }

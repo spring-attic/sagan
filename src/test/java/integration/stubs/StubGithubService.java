@@ -1,9 +1,10 @@
 package integration.stubs;
 
 import org.springframework.context.annotation.Primary;
+import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.site.domain.services.GitHubService;
+import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 
 @Service
 @Primary
@@ -21,27 +22,22 @@ public class StubGithubService extends GitHubService {
 	}
 
 	@Override
-	public <T> T postForObject(String path, Object request, Class<T> responseType,
-			Object... uriVariables) {
-		try {
-			return responseType.newInstance();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Override
-	public <T> T getForObject(String path, Class<T> responseType, Object... uriVariables)
-			throws RestClientException {
-		try {
-			return responseType.newInstance();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Override
 	public String getRawFileAsHtml(String path) {
 		return "HTML";
+	}
+
+	@Override
+	public GitHubRepo getRepoInfo(String githubUsername, String repoName) {
+		return new GitHubRepo();
+	}
+
+	@Override
+	public GuideRepo[] getGuideRepos(String reposPath) {
+		return new GuideRepo[]{};
+	}
+
+	@Override
+	public byte[] getImage(String imagesPath, String repoName, String imageName) {
+		return new byte[]{};
 	}
 }

@@ -4,19 +4,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.services.GitHubService;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.web.client.RestClientException;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isEmptyString;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
@@ -102,9 +99,9 @@ public class GitHubGettingStartedServiceTests {
 		GuideRepo notAGuideRepo = new GuideRepo();
 		notAGuideRepo.setName("not-a-guide");
 
-		GuideRepo[] guideRepos = { guideRepo, notAGuideRepo };
+		GuideRepo[] guideRepos = {guideRepo, notAGuideRepo};
 
-		given(this.gitHubService.getForObject(anyString(), eq(GuideRepo[].class))).willReturn(guideRepos);
+		given(this.gitHubService.getGuideRepos(anyString())).willReturn(guideRepos);
 
 		List<GettingStartedGuide> guides = this.service.listGuides();
 		assertThat(guides.size(), is(1));
@@ -113,20 +110,16 @@ public class GitHubGettingStartedServiceTests {
 
 	@Test
 	public void loadImage() throws IOException {
-		@SuppressWarnings("unchecked")
-		Map<String, String> imageResponseFixture = this.mapper.readValue(
-				new ClassPathResource("gs-device-detection.image.json", getClass())
-						.getInputStream(), Map.class);
-
+		byte[] bytes = new byte[]{'a'};
 		String imageName = "welcome.png";
 
 		given(
-				this.gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_REPO_NAME),
-						eq(imageName))).willReturn(imageResponseFixture);
+				this.gitHubService.getImage(anyString(), eq(GUIDE_REPO_NAME),
+						eq(imageName))).willReturn(bytes);
 
 		byte[] result = this.service.loadImage(GUIDE_ID, imageName);
 
-		assertThat(result, is(notNullValue()));
+		assertThat(result, equalTo(bytes));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -135,8 +128,8 @@ public class GitHubGettingStartedServiceTests {
 		String unknownImage = "uknown_image.png";
 
 		given(
-				this.gitHubService.getForObject(anyString(), eq(Map.class), eq(GUIDE_REPO_NAME),
-						eq(unknownImage))).willThrow(RestClientException.class);
+				this.gitHubService.getImage(anyString(), eq(GUIDE_REPO_NAME), eq(unknownImage))
+		).willThrow(RestClientException.class);
 
 		this.service.loadImage(GUIDE_ID, unknownImage);
 	}

@@ -47,10 +47,9 @@ public class GettingStartedController {
 		return "redirect:" + GUIDES_ROOT + "/" + guideSlug + "/content";
 	}
 
-	@RequestMapping(value = "/{guideSlug}/images/{name:[a-zA-Z0-9._-]+}", method = { GET,
-			HEAD })
+	@RequestMapping(value = "/{guideSlug}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })
 	public ResponseEntity<byte[]> loadImage(@PathVariable String guideSlug,
-			@PathVariable("name") String imageName) {
+											@PathVariable("name") String imageName) {
 		byte[] image = this.service.loadImage(guideSlug, imageName);
 		return new ResponseEntity<>(image, HttpStatus.OK);
 	}

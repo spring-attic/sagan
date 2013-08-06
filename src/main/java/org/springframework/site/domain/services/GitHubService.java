@@ -1,11 +1,15 @@
 package org.springframework.site.domain.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.site.domain.guides.GuideHtml;
+import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
+
+import java.util.Map;
 
 @Service
 public class GitHubService implements MarkdownService {
@@ -23,14 +27,6 @@ public class GitHubService implements MarkdownService {
 		return postForObject("/markdown/raw", markdownSource, String.class);
 	}
 
-	public <T> T postForObject(String path, Object request, Class<T> responseType, Object... uriVariables) {
-		return gitHub.restOperations().postForObject(HOSTNAME + path, request, responseType, uriVariables);
-	}
-
-	public <T> T getForObject(String path, Class<T> responseType, Object... uriVariables) throws RestClientException {
-		return gitHub.restOperations().getForObject(HOSTNAME + path, responseType, uriVariables);
-	}
-
 	public String getRawFileAsHtml(String path) {
 		GuideHtml response = getForObject(path, GuideHtml.class);
 		return response.getHtml();
@@ -40,4 +36,22 @@ public class GitHubService implements MarkdownService {
 		return gitHub.repoOperations().getRepo(githubUsername, repoName);
 	}
 
+	public GuideRepo[] getGuideRepos(String reposPath) {
+		return getForObject(reposPath, GuideRepo[].class);
+	}
+
+	@SuppressWarnings("unchecked")
+	public byte[] getImage(String imagesPath, String repoName, String imageName) {
+		Map<String, String> response = getForObject(imagesPath, Map.class, repoName, imageName);
+
+		return Base64.decode(response.get("content").getBytes());
+	}
+
+	private <T> T postForObject(String path, Object request, Class<T> responseType, Object... uriVariables) {
+		return gitHub.restOperations().postForObject(HOSTNAME + path, request, responseType, uriVariables);
+	}
+
+	private <T> T getForObject(String path, Class<T> responseType, Object... uriVariables) throws RestClientException {
+		return gitHub.restOperations().getForObject(HOSTNAME + path, responseType, uriVariables);
+	}
 }
