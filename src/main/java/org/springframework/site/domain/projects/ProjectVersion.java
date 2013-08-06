@@ -20,12 +20,12 @@ public class ProjectVersion {
 		return version.getShortName();
 	}
 
-	public String getReleaseDisplayName() {
-		return version.getReleaseDisplayName();
+	public boolean isCurrent() {
+		return version.isCurrent();
 	}
 
-	public boolean hasReleaseDisplayName() {
-		return !version.getReleaseDisplayName().isEmpty();
+	public boolean isPreRelease() {
+		return version.isPreRelease();
 	}
 
 	public String getRefDocUrl() {

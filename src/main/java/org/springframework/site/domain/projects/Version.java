@@ -1,18 +1,9 @@
 package org.springframework.site.domain.projects;
 
 public class Version implements Comparable<Version> {
+
 	public enum Release {
-		CURRENT("Current"), PRERELEASE("Pre-Release"), SUPPORTED("");
-
-		private String displayName;
-
-		private Release(String displayName) {
-			this.displayName = displayName;
-		}
-
-		public String getDisplayName() {
-			return displayName;
-		}
+		CURRENT, PRERELEASE, SUPPORTED;
 	}
 
 	private String version;
@@ -25,6 +16,10 @@ public class Version implements Comparable<Version> {
 
 	public boolean isCurrent() {
 		return release == Release.CURRENT;
+	}
+
+	public boolean isPreRelease() {
+		return release == Release.PRERELEASE;
 	}
 
 	@Override
@@ -67,7 +62,4 @@ public class Version implements Comparable<Version> {
 		return version.replaceAll(".RELEASE$", "");
 	}
 
-	public String getReleaseDisplayName() {
-		return release.getDisplayName();
-	}
 }
