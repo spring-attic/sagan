@@ -1,24 +1,25 @@
+variables:
 
-# TODO: rename
-# githubRepoBaseUrl: http://github.com/springsource
-githubOrgBaseUrl: http://github.com/SpringSource
+  # TODO: rename
+  # githubRepoBaseUrl: http://github.com/springsource
+  githubOrgBaseUrl: http://github.com/SpringSource
 
-# TODO: rename
-# ghProjectsBaseUrl: http://projects.springframework.io
-ghPagesBaseUrl: http://projects.springframework.io
+  # TODO: rename
+  # ghProjectsBaseUrl: http://projects.springframework.io
+  ghPagesBaseUrl: http://projects.springframework.io
 
-# TODO: support
-# ghAtticBaseUrl: http://attic.springframework.io
+  # TODO: support
+  # ghAtticBaseUrl: http://attic.springframework.io
 
-# TODO: support
-# ghIncubatorBaseUrl: http://incubator.springframework.io
+  # TODO: support
+  # ghIncubatorBaseUrl: http://incubator.springframework.io
 
-# TODO: waiting on Trevor to update httpd config
-# docsBaseUrl: http://docs.springframework.io
-docsBaseUrl: http://static.springsource.org
+  # TODO: waiting on Trevor to update httpd config
+  # docsBaseUrl: http://docs.springframework.io
+  docsBaseUrl: http://static.springsource.org
 
-# TODO: https://www.pivotaltracker.com/story/show/54564326
-groupId: org.springframework
+  # TODO: https://www.pivotaltracker.com/story/show/54564326
+  groupId: org.springframework
 
 
 # ------------------------------------
@@ -50,10 +51,12 @@ groupId: org.springframework
 # project's metadata, then the value will fall back to the top level template
 # declared below.
 #
-# TODO: waiting on https://www.pivotaltracker.com/story/show/54562226 and
-# https://www.pivotaltracker.com/story/show/54562726
-# refDocUrl: {docsBaseUrl}/{id}/docs/{version}/reference/html
-# apiDocUrl: {docsBaseUrl}/{id}/docs/{version}/api/
+
+defaultUrls:
+  refDocUrl: "{docsBaseUrl}/{id}/docs/{version}/reference/html"
+  apiDocUrl: "{docsBaseUrl}/{id}/docs/{version}/api/"
+  siteUrl: "{ghPagesBaseUrl}/{id}"
+  repoUrl: "{githubOrgBaseUrl}/{id}"
 
 projects:
 
@@ -264,9 +267,8 @@ projects:
 
     - id: spring-security-oauth
       name: Spring Security OAuth
-      # TODO: https://www.pivotaltracker.com/story/show/54562226
-      # siteUrl: {docsBaseUrl}/spring-security/oauth/                # desired
-      siteUrl: http://static.springsource.org/spring-security/oauth/ # workaround
+      hasSite: true
+      siteUrl: "{docsBaseUrl}/spring-security/oauth/"
       supportedVersions:
         - name: 1.0.5.RELEASE
           refDocUrl: https://github.com/SpringSource/spring-security-oauth/wiki/devguide

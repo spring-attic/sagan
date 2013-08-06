@@ -1,6 +1,14 @@
-githubOrgBaseUrl: http://github.com/springframework
-ghPagesBaseUrl: http://projects.springframework.io
-docsBaseUrl: http://static.springsource.org
+variables:
+  githubOrgBaseUrl: http://github.com/springframework
+  ghPagesBaseUrl: http://projects.springframework.io
+  docsBaseUrl: http://static.springsource.org
+
+defaultUrls:
+  refDocUrl: "{docsBaseUrl}/{id}/docs/{version}/reference/html"
+  apiDocUrl: "{docsBaseUrl}/{id}/docs/{version}/api/"
+  siteUrl: "{ghPagesBaseUrl}/{id}"
+  repoUrl: "{githubOrgBaseUrl}/{id}"
+
 projects:
   active:
     - id: spring-framework
@@ -83,7 +91,6 @@ projects:
         - name: 2.3.0.RELEASE
           refDocUrl: http://www.example.com/spring/docs/{version}/reference/html
           apiDocUrl: http://www.example.com/spring/docs/{version}/api/
-
     - id: project-docs-urls-can-be-overridden-to-none
       refDocUrl: http://www.example.com/spring/docs/{version}/reference/html
       apiDocUrl: http://www.example.com/spring/docs/{version}/api/
@@ -93,6 +100,18 @@ projects:
         - name: 2.3.0.RELEASE
           refDocUrl: NONE
           apiDocUrl: NONE
+    - id: project-with-variables-in-urls
+      name: Spring Framework
+      hasSite: true
+      siteUrl: "{ghPagesBaseUrl}/foo/{id}/"
+      repoUrl: "{githubOrgBaseUrl}/foo/{id}/"
+      refDocUrl: "{ghPagesBaseUrl}/docs/{id}/{version}/html/"
+      apiDocUrl: /spring/docs/{id}/{version}/javadoc-api/
+      supportedVersions:
+        - name: 3.1.4.RELEASE
+          refDocUrl: "{ghPagesBaseUrl}/docs/overridden/{id}/{version}"
+          apiDocUrl: /spring/docs/overridden/{id}/{version}/javadoc-api/
+        - 3.1.1.RELEASE
 
   other:
     - id: spring-security

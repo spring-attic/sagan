@@ -12,7 +12,6 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.nullValue;
 
 public class ProjectMetadataYamlParserTests {
 
@@ -34,7 +33,7 @@ public class ProjectMetadataYamlParserTests {
 	@Test
 	public void categoriesHaveListOfProjects() throws IOException {
 		List<Project> active = projects.get("active");
-		assertThat(active.size(), equalTo(11));
+		assertThat(active.size(), equalTo(12));
 	}
 
 	@Test
@@ -63,7 +62,7 @@ public class ProjectMetadataYamlParserTests {
 		assertThat(project.getId(), equalTo("spring-framework-nosite"));
 		assertThat(project.getName(), equalTo("Spring Framework"));
 		assertThat(project.getRepoUrl(), equalTo("http://github.com/springframework/spring-framework-nosite"));
-		assertThat(project.getSiteUrl(), nullValue());
+		assertThat(project.getSiteUrl(), equalTo(""));
 		assertThat(project.hasSite(), equalTo(false));
 	}
 
@@ -164,7 +163,7 @@ public class ProjectMetadataYamlParserTests {
 		Project project = projects.get("active").get(8);
 		ProjectVersion version = project.getProjectVersions().get(0);
 		assertThat(version.getVersion(), equalTo(new Version("2.4.0.RELEASE", Version.Release.CURRENT)));
-		assertThat(version.getApiDocUrl(), equalTo("http://static.springsource.org/project-docs-urls-omitted/docs/2.4.0.RELEASE/api"));
+		assertThat(version.getApiDocUrl(), equalTo("http://static.springsource.org/project-docs-urls-omitted/docs/2.4.0.RELEASE/api/"));
 		assertThat(version.getRefDocUrl(), equalTo("http://static.springsource.org/project-docs-urls-omitted/docs/2.4.0.RELEASE/reference/html"));
 	}
 
@@ -196,5 +195,19 @@ public class ProjectMetadataYamlParserTests {
 		assertThat(version.getRefDocUrl(), equalTo(""));
 	}
 
+	@Test
+	public void urlsInProjectsCanHaveVariables() throws Exception {
+		Project project = projects.get("active").get(11);
+		assertThat(project.getSiteUrl(), equalTo("http://projects.springframework.io/foo/project-with-variables-in-urls/"));
+		assertThat(project.getRepoUrl(), equalTo("http://github.com/springframework/foo/project-with-variables-in-urls/"));
+
+		ProjectVersion version = project.getProjectVersions().get(0);
+		assertThat(version.getRefDocUrl(), equalTo("http://projects.springframework.io/docs/overridden/project-with-variables-in-urls/3.1.4.RELEASE"));
+		assertThat(version.getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/overridden/project-with-variables-in-urls/3.1.4.RELEASE/javadoc-api/"));
+
+		version = project.getProjectVersions().get(1);
+		assertThat(version.getRefDocUrl(), equalTo("http://projects.springframework.io/docs/project-with-variables-in-urls/3.1.1.RELEASE/html/"));
+		assertThat(version.getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/project-with-variables-in-urls/3.1.1.RELEASE/javadoc-api/"));
+	}
 
 }

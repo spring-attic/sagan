@@ -1,5 +1,6 @@
 package org.springframework.site.domain.projects;
 
+import org.springframework.web.util.UriTemplate;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
@@ -21,10 +22,8 @@ public class ProjectMetadataYamlParser {
 
 		Map metadata = (Map) new Yaml().load(projectMetadataYml);
 
-		String githubOrgBaseUrl = metadata.get("githubOrgBaseUrl").toString();
-		String ghPagesBaseUrl = metadata.get("ghPagesBaseUrl").toString();
-		String docsBaseUrl = metadata.get("docsBaseUrl").toString();
-
+		Map<String, String> variables = (Map<String, String>) metadata.get("variables");
+		Map<String, String> defaultUrls = (Map<String, String>) metadata.get("defaultUrls");
 		Map<String, List> projectsYaml = (Map) metadata.get("projects");
 
 		for (Map.Entry<String, List> entry : projectsYaml.entrySet()) {
@@ -39,7 +38,7 @@ public class ProjectMetadataYamlParser {
 
 			for (Object value : entry.getValue()) {
 				Map<String, Object> projectData = (Map<String, Object>) value;
-				categoryProjects.add(buildProject(projectData, githubOrgBaseUrl, ghPagesBaseUrl, docsBaseUrl));
+				categoryProjects.add(buildProject(projectData, variables, defaultUrls));
 			}
 			projects.put(category, categoryProjects);
 		}
@@ -47,43 +46,45 @@ public class ProjectMetadataYamlParser {
 		return projects;
 	}
 
-	private Project buildProject(Map<String, Object> projectData, String githubOrgBaseUrl, String ghPagesBaseUrl, String docsBaseUrl) {
+	private Project buildProject(Map<String, Object> projectData, Map<String, String> variables, Map<String, String> defaultUrls) {
 		String id = projectData.get("id").toString();
+		variables.put("id", id);
 		String name = projectData.get("name").toString();
-		String repoUrl = parseRepoUrl(projectData, githubOrgBaseUrl, id);
-		String siteUrl = parseSiteUrl(projectData, ghPagesBaseUrl, id);
-		List<ProjectVersion> documentationList = parseProjectDocumentation(projectData, docsBaseUrl);
+		String repoUrl = parseRepoUrl(projectData, variables, defaultUrls);
+		String siteUrl = parseSiteUrl(projectData, variables, defaultUrls);
+		List<ProjectVersion> documentationList = parseProjectDocumentation(projectData, variables, defaultUrls);
+		variables.remove("id");
 		return new Project(id, name, repoUrl, siteUrl, documentationList);
 	}
 
-	private String parseRepoUrl(Map<String, Object> projectData, String githubOrgBaseUrl, String id) {
+	private String parseRepoUrl(Map<String, Object> projectData, Map<String, String> variables, Map<String, String> defaultUrls) {
 		String repoUrl;
 		if (projectData.containsKey("repoUrl")) {
 			repoUrl = projectData.get("repoUrl").toString();
 		} else {
-			repoUrl = String.format("%s/%s", githubOrgBaseUrl, id);
+			repoUrl = defaultUrls.get("repoUrl");
 		}
-		return repoUrl;
+		return new UriTemplate(repoUrl).expand(variables).toString();
 	}
 
-	private String parseSiteUrl(Map<String, Object> projectData, String ghPagesBaseUrl, String id) {
-		String siteUrl = null;
+	private String parseSiteUrl(Map<String, Object> projectData, Map<String, String> variables, Map<String, String> defaultUrls) {
 		if (projectData.containsKey("hasSite") && Boolean.valueOf(projectData.get("hasSite").toString())) {
+			String siteUrl;
 			if (projectData.containsKey("siteUrl")) {
 				siteUrl = projectData.get("siteUrl").toString();
 			} else {
-				siteUrl = String.format("%s/%s", ghPagesBaseUrl, id);
+				siteUrl = defaultUrls.get("siteUrl");
 			}
+			return new UriTemplate(siteUrl).expand(variables).toString();
+		} else {
+			return "";
 		}
-		return siteUrl;
 	}
 
-
-	private List<ProjectVersion> parseProjectDocumentation(Map<String, Object> projectData, String docsBaseUrl) {
-		String id = projectData.get("id").toString();
+	private List<ProjectVersion> parseProjectDocumentation(Map<String, Object> projectData, Map<String, String> variables, Map<String, String> defaultUrls) {
 		List<SupportedVersion> supportedVersions = parseSupportedVersions(projectData);
 		orderVersions(supportedVersions);
-		return buildProjectVersions(docsBaseUrl, supportedVersions, id);
+		return buildProjectVersions(supportedVersions, variables, defaultUrls);
 	}
 
 	class SupportedVersion {
@@ -127,12 +128,14 @@ public class ProjectMetadataYamlParser {
 		return versions;
 	}
 
-	private List<ProjectVersion> buildProjectVersions(String docsBaseUrl, List<SupportedVersion> supportedVersions, String projectId) {
+	private List<ProjectVersion> buildProjectVersions(List<SupportedVersion> supportedVersions, Map<String, String> variables, Map<String, String> defaultUrls) {
 		List<ProjectVersion> projectVersions = new ArrayList<>();
 		Version currentVersion = null;
 		for (SupportedVersion supportedVersion : supportedVersions) {
-			String refDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.refDocUrl, supportedVersion.name, projectId, "reference/html");
-			String apiDocUrl = buildDocUrl(docsBaseUrl, supportedVersion.apiDocUrl, supportedVersion.name, projectId, "api");
+			variables.put("version", supportedVersion.name);
+			String refDocUrl = buildDocUrl(supportedVersion.refDocUrl, variables, defaultUrls, "refDocUrl");
+			String apiDocUrl = buildDocUrl(supportedVersion.apiDocUrl, variables, defaultUrls, "apiDocUrl");
+			variables.remove("version");
 			Version version = buildVersion(supportedVersion.name, currentVersion);
 			if (currentVersion == null && version.isCurrent()) {
 				currentVersion = version;
@@ -142,18 +145,20 @@ public class ProjectMetadataYamlParser {
 		return projectVersions;
 	}
 
-	private String buildDocUrl(String docsBaseUrl, String docPath, String versionName, String projectId, String defaultDocSuffix) {
-		String docTemplate;
-		if (docPath.isEmpty()) {
-			docTemplate = String.format("%s/%s/docs/%s/%s", docsBaseUrl, projectId, versionName, defaultDocSuffix);
-		} else if (docPath.equals("NONE")) {
-			docTemplate = "";
-		} else if (docPath.startsWith("http")) {
-			docTemplate = docPath;
-		} else {
-			docTemplate = docsBaseUrl + docPath;
+	private String buildDocUrl(String docPath, Map<String, String> variables, Map<String, String> defaultUrls, String defaultUrlKey) {
+		if (docPath.equals("NONE")) {
+			return "";
 		}
-		return docTemplate.replaceAll("\\{version\\}", versionName);
+
+		if (docPath.isEmpty()) {
+			docPath = defaultUrls.get(defaultUrlKey);
+		}
+
+		String docUrl = new UriTemplate(docPath).expand(variables).toString();
+		if (!docUrl.startsWith("http")) {
+			return variables.get("docsBaseUrl") + docUrl;
+		}
+		return docUrl;
 	}
 
 	private void orderVersions(List<SupportedVersion> supportedVersions) {

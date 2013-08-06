@@ -43,6 +43,6 @@ public class Project {
 	}
 
 	public boolean hasSite() {
-		return siteUrl != null;
+		return !siteUrl.isEmpty();
 	}
 }
