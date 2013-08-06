@@ -8,36 +8,33 @@
 <body>
 <div layout:fragment="header-container"></div>
 <div layout:fragment="content" class="container">
-  <div class="content--title">Search Results For:</div>
-  <div class="content--container">
-    <h1 class="content--title search-results--title"></h1>
-  	<div class="row-fluid">
-  		<div id="content" class="span8">
-  			<div th:if="${results.empty}" class="warning alert-warning">
-  				No results found for your query.
-  			</div>
-  			<ul th:if="${!results.empty}" class='search-results'>
-  				<li th:each="result : ${results}">
-  					<a th:href="@{${result.path}}"><h2 th:text="${result.title}">This week in Spring</h2></a>
-  					<div th:utext="${result.displayText}" class='summary'>This has been an interesting week.</div>
-  				</li>
-  			</ul>
-  			<div id='pagination_control' th:if="${paginationInfo.isVisible()}">
-  				<a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" href='/search?page=1' class='previous' th:if="${paginationInfo.previousVisible}">Previous</a>
-  				<a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" href='/search?page=3' class='next' th:if="${paginationInfo.nextVisible}">Next</a>
-  			</div>
-
-  		</div>
-      <div class="span4">
-        <div class="search-facets">
-          <form th:action="@{/search(q=${searchForm.q})}" method="POST" th:object="${searchForm}">
-            <input type="submit" value="Update"></input>
-            <ul layout:include="search/_facets :: facets" th:with="root=${root}">
-            </ul>
-          </form>
-        </div>
+	<div class="row-fluid">
+		<div id="content" class="span8">
+      <div class="content--title search-title">Search Results For:</div>
+      <h1 class="index-page--title js-search-results--title"></h1>
+			<div th:if="${results.empty}" class="warning alert-warning">
+				No results found for your query.
+			</div>
+			<div th:if="${!results.empty}" class='search-results'>
+				<div th:each="result : ${results}">
+					<a th:href="@{${result.path}}" th:text="${result.title}" class="search-result--title">This week in Spring</a>
+					<div th:utext="${result.displayText}" class='search-result--summary'>This has been an interesting week.</div>
+			 	</div>
+			</div>
+			<div id='pagination_control' th:if="${paginationInfo.isVisible()}">
+				<a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" href='/search?page=1' class='previous' th:if="${paginationInfo.previousVisible}">Previous</a>
+				<a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" href='/search?page=3' class='next' th:if="${paginationInfo.nextVisible}">Next</a>
+			</div>
+		</div>
+    <div class="span4">
+      <div class="search-facets">
+        <form th:action="@{/search(q=${searchForm.q})}" method="POST" th:object="${searchForm}">
+          <input type="submit" value="Update"></input>
+          <ul layout:include="search/_facets :: facets" th:with="root=${root}">
+          </ul>
+        </form>
       </div>
-  	</div>
+	 </div>
   
   </div>
 </div>

@@ -453,6 +453,9 @@ input.floating-input:focus {
   margin-top: -30px;
   font-family: "Montserrat", sans-serif;
 }
+.content--title.search-title {
+  position: relative;
+}
 
 .index-page--title {
   margin-bottom: 30px;
@@ -466,6 +469,26 @@ input.floating-input:focus {
 }
 .index-page--subtitle a {
   color: #5fa134;
+}
+
+.search-result--title {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 6px;
+}
+
+.search-result--summary {
+  font-size: 14px;
+  line-height: 18px;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 30px;
+}
+.search-result--summary em {
+  font-weight: bold;
+  font-style: normal;
+  color: black;
 }
 
 .footer {
@@ -532,12 +555,6 @@ input.floating-input:focus {
   text-shadow: none;
   font-size: 12px;
   padding: 9px 16px;
-}
-
-.search-results em {
-  font-weight: bolder;
-  background: #8cc63f;
-  font-style: normal;
 }
 
 .item-dropdown-widget {

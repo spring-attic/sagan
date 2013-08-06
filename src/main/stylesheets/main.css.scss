@@ -494,6 +494,9 @@ input.floating-input {
   position: absolute;
   margin-top: -30px;
   font-family: $secondary-font-family;
+  &.search-title {
+    position: relative;
+  }
 }
 
 .index-page--title {
@@ -510,6 +513,28 @@ input.floating-input {
   }
 }
 
+//SEARCH RESULT STYLES
+.search-result--title {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: $secondary-font-family;
+  margin-bottom: 6px;
+}
+.search-result--summary {
+  font-size: 14px;
+  line-height: 18px;
+  font-family: $secondary-font-family;
+  margin-bottom: 30px;
+  em {
+    font-weight: bold;
+    font-style: normal;
+    color: black;
+  }
+}
+
+
+//FOOTER
 .footer {
   background-color: $black-brown;
   color: $off-white;
@@ -577,14 +602,6 @@ input.floating-input {
         padding: 9px 16px;
       }
     }
-  }
-}
-
-.search-results {
-  em {
-    font-weight: bolder;
-    background: $lime;
-    font-style: normal;
   }
 }
 

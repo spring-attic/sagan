@@ -61,10 +61,10 @@ $(function(){
 
       //PREPOPULATES INPUT WITH SEARCH QUERY
       var searchQuery = decodeURIComponent(window.location.search.substr(3).replace(/\+/g," ")); 
-      $(".js-search-input").val(searchQuery);
+      $(".js-search-results--title").val(searchQuery);
 
       //PREPOPULATES TITLE WITH SEARCH QUERY
-      $(".search-results--title").html(searchQuery);
+      $(".js-search-results--title").html(searchQuery);
 
       //CLOSES SEARCH DROPDOWN
       $(".js-search-input-close").click(function() {
