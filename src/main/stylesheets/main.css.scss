@@ -516,11 +516,15 @@ input.floating-input {
 //SEARCH RESULT STYLES
 .search-result--title {
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 24px;
   font-weight: bold;
   font-family: $secondary-font-family;
   margin-bottom: 6px;
   color: $link-green;
+  &:hover {
+    color: $link-green;
+  }
 }
 .search-result--summary {
   font-size: 14px;
