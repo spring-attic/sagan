@@ -61,20 +61,20 @@ public class ProjectMetadataServiceTests {
 
 		StringBuilder builder = new StringBuilder();
 		for (Project project : documentationService.getProjects()) {
-			for (ProjectVersion documentation : project.getProjectVersions()) {
-				String apiDocUrl = documentation.getApiDocUrl();
+			for (ProjectVersion version : project.getProjectVersions()) {
+				String apiDocUrl = version.getApiDocUrl();
 				ResponseEntity<String> entity = restTemplate.getForEntity(apiDocUrl,String.class);
 				if (entity.getStatusCode() != HttpStatus.OK) {
 					builder.append(project.getId() + ".invalid.apiUrl."
-							+ documentation.getVersion() + ": " + apiDocUrl + "\n");
+							+ version.getFullName() + ": " + apiDocUrl + "\n");
 				}
 
-				String refDocUrl = documentation.getRefDocUrl();
+				String refDocUrl = version.getRefDocUrl();
 				entity = restTemplate.getForEntity(refDocUrl,
 						String.class);
 				if (entity.getStatusCode() != HttpStatus.OK) {
 					builder.append(project.getId() + ".invalid.referenceUrl."
-							+ documentation.getVersion() + ": " + refDocUrl + "\n");
+							+ version.getFullName() + ": " + refDocUrl + "\n");
 				}
 			}
 		}

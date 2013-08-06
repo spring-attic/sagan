@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.projects.Project;
 import org.springframework.site.domain.projects.ProjectVersion;
-import org.springframework.site.domain.projects.Version;
 import org.springframework.site.indexer.mapper.ApiDocumentMapper;
 import org.springframework.site.search.SearchEntry;
 
@@ -24,7 +23,8 @@ public class ApiDocumentMapperTests {
 			"http://www.example.com/spring-framework",
 			Collections.<ProjectVersion>emptyList());
 
-	private ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, new Version("3.2.1.RELEASE", Version.Release.CURRENT));
+	private ProjectVersion version = new ProjectVersion("3.2.1.RELEASE", ProjectVersion.Release.CURRENT, "", "");
+	private ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, version);
 
 	@Test
 	public void mapOlderJdkApiDoc() throws Exception {

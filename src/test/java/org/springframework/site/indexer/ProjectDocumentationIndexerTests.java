@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.springframework.site.domain.projects.Project;
 import org.springframework.site.domain.projects.ProjectVersion;
 import org.springframework.site.domain.projects.ProjectMetadataService;
-import org.springframework.site.domain.projects.Version;
 import org.springframework.site.indexer.crawler.CrawlerService;
 import org.springframework.site.search.SearchService;
 
@@ -24,9 +23,9 @@ public class ProjectDocumentationIndexerTests {
 	private ProjectDocumentationIndexer service = new ProjectDocumentationIndexer(crawlerService, searchService, documentationService);
 
 	private List<ProjectVersion> documentationList = Arrays.asList(
-			new ProjectVersion("http://reference.example.com/3", "http://api.example.com/3", new Version("3", Version.Release.CURRENT)),
-			new ProjectVersion("http://reference.example.com/2", "http://api.example.com/2", new Version("2", Version.Release.SUPPORTED)),
-			new ProjectVersion("http://reference.example.com/1", "http://api.example.com/1", new Version("1", Version.Release.SUPPORTED))
+			new ProjectVersion("3", ProjectVersion.Release.CURRENT, "http://reference.example.com/3", "http://api.example.com/3"),
+			new ProjectVersion("2", ProjectVersion.Release.SUPPORTED, "http://reference.example.com/2", "http://api.example.com/2"),
+			new ProjectVersion("1", ProjectVersion.Release.SUPPORTED, "http://reference.example.com/1", "http://api.example.com/1")
 	);
 
 	private Project project = new Project("spring",

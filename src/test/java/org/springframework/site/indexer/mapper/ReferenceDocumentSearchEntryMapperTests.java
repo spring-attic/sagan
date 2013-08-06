@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.site.domain.projects.Project;
 import org.springframework.site.domain.projects.ProjectVersion;
-import org.springframework.site.domain.projects.Version;
 import org.springframework.site.search.SearchEntry;
 
 import java.util.Collections;
@@ -23,14 +22,13 @@ public class ReferenceDocumentSearchEntryMapperTests {
 			"http://www.example.com/spring-framework",
 			Collections.<ProjectVersion>emptyList());
 
-	private ReferenceDocumentSearchEntryMapper mapper = new ReferenceDocumentSearchEntryMapper(project, new Version("3.2.1.RELEASE", Version.Release.CURRENT));
+	private ProjectVersion version = new ProjectVersion("3.2.1.RELEASE", ProjectVersion.Release.CURRENT, "", "");
+	private ReferenceDocumentSearchEntryMapper mapper = new ReferenceDocumentSearchEntryMapper(project, version);
 	private SearchEntry entry;
 
 	@Before
 	public void setUp() throws Exception {
-
 		Document document = Jsoup.parse("<p>ref doc</p>");
-
 		entry = mapper.map(document);
 	}
 

@@ -11,9 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.springframework.site.domain.projects.Version.Release.CURRENT;
-import static org.springframework.site.domain.projects.Version.Release.PRERELEASE;
-import static org.springframework.site.domain.projects.Version.Release.SUPPORTED;
+import static org.springframework.site.domain.projects.ProjectVersion.Release.CURRENT;
+import static org.springframework.site.domain.projects.ProjectVersion.Release.PRERELEASE;
+import static org.springframework.site.domain.projects.ProjectVersion.Release.SUPPORTED;
 
 public class ProjectMetadataYamlParser {
 
@@ -127,19 +127,28 @@ public class ProjectMetadataYamlParser {
 		return versions;
 	}
 
+	private void orderVersions(List<SupportedVersion> supportedVersions) {
+		Collections.sort(supportedVersions, new Comparator<SupportedVersion>() {
+			@Override
+			public int compare(SupportedVersion v1, SupportedVersion v2) {
+				return v2.name.compareTo(v1.name);
+			}
+		});
+	}
+
 	private List<ProjectVersion> buildProjectVersions(List<SupportedVersion> supportedVersions, Map<String, String> variables, Map<String, String> defaultUrls) {
 		List<ProjectVersion> projectVersions = new ArrayList<>();
-		Version currentVersion = null;
+		String currentVersion = null;
 		for (SupportedVersion supportedVersion : supportedVersions) {
 			variables.put("version", supportedVersion.name);
 			String refDocUrl = buildDocUrl(supportedVersion.refDocUrl, variables, defaultUrls, "refDocUrl");
 			String apiDocUrl = buildDocUrl(supportedVersion.apiDocUrl, variables, defaultUrls, "apiDocUrl");
 			variables.remove("version");
-			Version version = buildVersion(supportedVersion.name, currentVersion);
-			if (currentVersion == null && version.isCurrent()) {
-				currentVersion = version;
+			ProjectVersion.Release release = getVersionRelease(supportedVersion.name, currentVersion);
+			if (currentVersion == null && release == CURRENT) {
+				currentVersion = supportedVersion.name;
 			}
-			projectVersions.add(new ProjectVersion(refDocUrl, apiDocUrl, version));
+			projectVersions.add(new ProjectVersion(supportedVersion.name, release, refDocUrl, apiDocUrl));
 		}
 		return projectVersions;
 	}
@@ -160,24 +169,15 @@ public class ProjectMetadataYamlParser {
 		return docUrl;
 	}
 
-	private void orderVersions(List<SupportedVersion> supportedVersions) {
-		Collections.sort(supportedVersions, new Comparator<SupportedVersion>() {
-			@Override
-			public int compare(SupportedVersion v1, SupportedVersion v2) {
-				return v2.name.compareTo(v1.name);
-			}
-		});
-	}
-
-	private Version buildVersion(String versionName, Version currentVersion) {
+	private ProjectVersion.Release getVersionRelease(String versionName, String currentVersion) {
 		boolean isPreRelease = versionName.matches("[0-9.]+(M|RC)\\d+");
-		Version.Release release = SUPPORTED;
 		if (isPreRelease) {
-			release = PRERELEASE;
+			return PRERELEASE;
 		} else if (currentVersion == null) {
-			release = CURRENT;
+			return CURRENT;
+		} else {
+			return SUPPORTED;
 		}
-		return new Version(versionName, release);
 	}
 
 }

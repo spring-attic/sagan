@@ -3,7 +3,7 @@ package org.springframework.site.indexer.mapper;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.site.domain.projects.Project;
-import org.springframework.site.domain.projects.Version;
+import org.springframework.site.domain.projects.ProjectVersion;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchEntryMapper;
 
@@ -12,9 +12,9 @@ import java.util.Date;
 public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 
 	private Project project;
-	private final Version version;
+	private final ProjectVersion version;
 
-	public ApiDocumentMapper(Project project, Version version) {
+	public ApiDocumentMapper(Project project, ProjectVersion version) {
 		this.project = project;
 		this.version = version;
 	}
@@ -41,11 +41,11 @@ public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 		entry.setPath(document.baseUri());
 		entry.setCurrent(version.isCurrent());
 		entry.setType("apiDoc");
-		entry.setVersion(version.getFullVersion());
+		entry.setVersion(version.getFullName());
 		entry.setProjectId(project.getId());
 
 		entry.addFacetPaths("Documentation", "Documentation/Api", "Projects", "Projects/" + project.getName(),
-				"Projects/" + project.getName() + "/" + version.getFullVersion());
+				"Projects/" + project.getName() + "/" + version.getFullName());
 		return entry;
 	}
 }

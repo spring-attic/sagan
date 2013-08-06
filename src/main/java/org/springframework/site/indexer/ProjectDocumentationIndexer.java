@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.projects.Project;
 import org.springframework.site.domain.projects.ProjectMetadataService;
 import org.springframework.site.domain.projects.ProjectVersion;
-import org.springframework.site.domain.projects.Version;
 import org.springframework.site.indexer.crawler.CrawlerService;
 import org.springframework.site.indexer.mapper.ApiDocumentMapper;
 import org.springframework.site.indexer.mapper.ReferenceDocumentSearchEntryMapper;
@@ -43,20 +42,18 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 
 		List<String> projectVersions = new ArrayList<>();
 		for (ProjectVersion projectVersion : project.getProjectVersions()) {
-			projectVersions.add(projectVersion.getVersion().getFullVersion());
+			projectVersions.add(projectVersion.getFullName());
 		}
 
 		searchService.removeOldProjectEntriesFromIndex(project.getId(), projectVersions);
 
-		for (ProjectVersion documentation : project.getProjectVersions()) {
-			Version version = documentation.getVersion();
-
-			String apiDocUrl = documentation.getApiDocUrl() + "/allclasses-frame.html";
+		for (ProjectVersion version : project.getProjectVersions()) {
+			String apiDocUrl = version.getApiDocUrl() + "/allclasses-frame.html";
 			ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, version);
 			CrawledWebDocumentProcessor apiDocProcessor = new CrawledWebDocumentProcessor(searchService, apiDocumentMapper);
 			crawlerService.crawl(apiDocUrl, 1, apiDocProcessor);
 
-			String refDocUrl = documentation.getRefDocUrl();
+			String refDocUrl = version.getRefDocUrl();
 			ReferenceDocumentSearchEntryMapper documentMapper = new ReferenceDocumentSearchEntryMapper(project, version);
 			CrawledWebDocumentProcessor refDocProcessor = new CrawledWebDocumentProcessor(searchService, documentMapper);
 			crawlerService.crawl(refDocUrl, 1, refDocProcessor);
