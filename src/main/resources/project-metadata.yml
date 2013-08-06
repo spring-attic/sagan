@@ -385,7 +385,8 @@ projects:
     - id: spring-boot
       name: Spring Boot
       lead: dsyer # and pwebb (co-leads represented comma-separated?)
-      refDocUrl: https://github.com/SpringSource/spring-boot/blob/master/README.md
+      siteUrl: http://springsource.github.io/spring-boot
+      refDocUrl: http://springsource.github.io/spring-boot
       apiDocUrl: NONE
       supportedVersions:
         - 0.5.0.M1
