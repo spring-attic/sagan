@@ -1,7 +1,68 @@
+$off-white: #eee;
+$black-green: #3A3C2F; 
+$lime: #8CC63F;
+$leaf: #4E681E;
+$green: #6db33f;
+$bark: #AF9A85;
+$light-grey: #ECEBEB;
+$medium-grey: #DEDEDE;
+$navy: #3A5056;
+$slate: #44474C;
+$mauve: #665A6B;
+$denim: #8395A1;
+$black-brown: #34302d;
+$secondary-font-family: 'Montserrat', sans-serif;
+$link-green: #5fa134;
+$icon-sprite: url("../img/iconsprite.png");
+
+
+.team-map--wrapper {
+  position: absolute;
+  top: 74px;
+  left: 0;
+  right: 0;
+  #map {
+    height: 425px;
+    border-bottom: 1px solid $black-brown;
+  }
+  .team-map--container {
+    position: absolute;
+    z-index: 600;
+    width: 70%;
+    margin: 0 15%;
+    text-align: center;
+    margin-top: 212px;
+    .team-map--title, .team-map--subtitle {
+      background: rgba(52, 48, 45, 0.8);
+      color: white;
+      display: inline-block;
+    }
+    .team-map--title {
+      font-size: 48px;
+      line-height: 68px;
+      font-family: $secondary-font-family;
+      padding: 0 15px;
+      letter-spacing: -2px;
+    }
+    .team-map--subtitle {
+      font-size: 18px;
+      line-height: 18px;
+      padding: 12px 19px;
+      &.subtitle-bottom {
+        padding-top: 0;
+      }
+    }
+  }
+}
+
+.team-members--wrapper {
+  margin-top: 326px;
+}
+
+
 .avatar {
     margin-right: 10px; }
 
-#map { height: 300px; }
 
 ul.team-members {
   margin: 50px 0 0 0;

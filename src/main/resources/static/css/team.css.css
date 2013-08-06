@@ -1,9 +1,48 @@
-.avatar {
-  margin-right: 10px;
+.team-map--wrapper {
+  position: absolute;
+  top: 74px;
+  left: 0;
+  right: 0;
+}
+.team-map--wrapper #map {
+  height: 425px;
+  border-bottom: 1px solid #34302d;
+}
+.team-map--wrapper .team-map--container {
+  position: absolute;
+  z-index: 600;
+  width: 70%;
+  margin: 0 15%;
+  text-align: center;
+  margin-top: 212px;
+}
+.team-map--wrapper .team-map--container .team-map--title, .team-map--wrapper .team-map--container .team-map--subtitle {
+  background: rgba(52, 48, 45, 0.8);
+  color: white;
+  display: inline-block;
+}
+.team-map--wrapper .team-map--container .team-map--title {
+  font-size: 48px;
+  line-height: 68px;
+  font-family: "Montserrat", sans-serif;
+  padding: 0 15px;
+  letter-spacing: -2px;
+}
+.team-map--wrapper .team-map--container .team-map--subtitle {
+  font-size: 18px;
+  line-height: 18px;
+  padding: 12px 19px;
+}
+.team-map--wrapper .team-map--container .team-map--subtitle.subtitle-bottom {
+  padding-top: 0;
 }
 
-#map {
-  height: 300px;
+.team-members--wrapper {
+  margin-top: 326px;
+}
+
+.avatar {
+  margin-right: 10px;
 }
 
 ul.team-members {
