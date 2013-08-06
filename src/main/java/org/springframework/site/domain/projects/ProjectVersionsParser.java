@@ -12,7 +12,7 @@ import static org.springframework.site.domain.projects.ProjectVersion.Release.CU
 import static org.springframework.site.domain.projects.ProjectVersion.Release.PRERELEASE;
 import static org.springframework.site.domain.projects.ProjectVersion.Release.SUPPORTED;
 
-public class ProjectVersionsParser {
+class ProjectVersionsParser {
 
 	private final Map<String, String> variables;
 	private final Map<String, String> defaultUrls;
@@ -23,12 +23,12 @@ public class ProjectVersionsParser {
 		String apiDocUrl;
 	}
 
-	public ProjectVersionsParser(Map<String, String> variables, Map<String, String> defaultUrls) {
+	ProjectVersionsParser(Map<String, String> variables, Map<String, String> defaultUrls) {
 		this.variables = variables;
 		this.defaultUrls = defaultUrls;
 	}
 
-	public List<ProjectVersion> parse(Map<String, Object> projectData) {
+	List<ProjectVersion> parse(Map<String, Object> projectData) {
 		List<SupportedVersion> supportedVersions = parseSupportedVersions(projectData);
 		orderVersions(supportedVersions);
 		return buildProjectVersions(supportedVersions);
