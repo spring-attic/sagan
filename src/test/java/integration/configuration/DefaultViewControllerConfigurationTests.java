@@ -56,14 +56,14 @@ public class DefaultViewControllerConfigurationTests {
 
 	@Test
 	public void mapsSubdirectoryPagesToUrls() throws Exception {
-		Resource[] resources = {new UrlResource(new URL("file://test/templates/pages/about/jobs.html"))};
+		Resource[] resources = {new UrlResource(new URL("file://test/templates/pages/jobs.html"))};
 
 		given(resourceResolver.getResources("classpath:/templates/pages/**/*.html")).willReturn(resources);
 
 		configurer.addViewControllers(controllerRegistry);
 
-		verify(controllerRegistry).addViewController("/about/jobs");
-		verify(viewRegistration).setViewName("pages/about/jobs");
+		verify(controllerRegistry).addViewController("/jobs");
+		verify(viewRegistration).setViewName("pages/jobs");
 	}
 
 	@Test
