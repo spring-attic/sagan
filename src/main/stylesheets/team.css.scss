@@ -91,11 +91,12 @@ $icon-sprite: url("../img/iconsprite.png");
       }
       .team-member--bio {
         margin-top: 6px;
+        height: 61px;
         p {
           font-size: 14px;
           line-height: 18px;
           &.team-member--position {
-            height: 36px;
+            max-height: 36px;
             overflow: hidden;
             margin-bottom: 5px;
           }
