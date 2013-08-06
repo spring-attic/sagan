@@ -6,11 +6,17 @@ import org.springframework.site.domain.services.GitHubService;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 @Primary
 @SuppressWarnings("unused")
 //Component Scanned
 public class StubGithubService extends GitHubService {
+
+	private final HashMap<String, String> rawFileMappings = new HashMap<>();
+	private RuntimeException exceptionToBeThrown;
 
 	public StubGithubService() {
 		super(null);
@@ -23,7 +29,20 @@ public class StubGithubService extends GitHubService {
 
 	@Override
 	public String getRawFileAsHtml(String path) {
+		if (exceptionToBeThrown != null) {
+			throw exceptionToBeThrown;
+		}
+
+		for (Map.Entry<String, String> entry : rawFileMappings.entrySet()) {
+			if (path.matches(entry.getKey())) {
+				return entry.getValue();
+			}
+		}
 		return "HTML";
+	}
+
+	public void addRawFileMapping(String path, String html) {
+		rawFileMappings.put(path, html);
 	}
 
 	@Override
@@ -39,5 +58,14 @@ public class StubGithubService extends GitHubService {
 	@Override
 	public byte[] getImage(String imagesPath, String repoName, String imageName) {
 		return new byte[]{};
+	}
+
+	public void addExceptionToBeThrown(RuntimeException exception) {
+		exceptionToBeThrown = exception;
+	}
+
+	public void clearStubs() {
+		exceptionToBeThrown = null;
+		rawFileMappings.clear();
 	}
 }

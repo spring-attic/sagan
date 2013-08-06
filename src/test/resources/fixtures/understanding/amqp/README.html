@@ -1,0 +1,30 @@
+<h1><a name="understanding-amqp" class="anchor" href="#understanding-amqp"><span class="octicon octicon-link"></span></a>Understanding: AMQP</h1>
+
+<h2><a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol">AMQP</a>, or <strong>Asychronous Message Queueing Protocol</strong>, is an openly published, wire specification for asynchronous messaging. This means that every byte of transmitted data specified. This has allowed libraries to be written in many languages, on multiple operating systems, running on multiple CPU architectures, leading to a truly interoperable, cross platform messaging standard.</p>
+
+<p>In the Java community, the most common messaging system known is <a href="http://en.wikipedia.org/wiki/Java_Message_Service">JMS (Java Message Service)</a>. JMS and AMQP are often compared in Java developer circles. A keen limitation of JMS is that the APIs are specified, but the format of the messages is not. There is no requirement on how the messages are actually formed and transmitted.</p>
+
+<p>The differences between AMQP and JMS can perhaps best be highlighted by the fact that <a href="http://gopivotal.com">Pivotal</a> has released a JMS on Rabbit project, a library that implements the JMS APIs but uses RabbitmQ, an AMQP broker to actually transport the messages.</p>
+
+<p>AMQP <a href="http://www.amqp.org/resources/download">publishes it's specifications</a> in a downloadable, XML format. This has made it easy for library maintainers to generate APIs driven by these specs while also automating construction of algorithms to marshal and demarshal messages.</p>
+
+<p>That combined with the openness of the spec has led to the rise of multiple brokers supporting AMQP. Here are some:</p>
+
+<ul>
+    <li><a href="http://rabbitmq.com">RabbitMQ</a></li>
+    <li><a href="http://activemq.apache.org/">ActiveMQ</a></li>
+    <li><a href="http://qpid.apache.org/index.html">Qpid</a></li>
+</ul>
+
+<h2><a name="comparison-between-amqp-and-jms" class="anchor" href="#comparison-between-amqp-and-jms"><span class="octicon octicon-link"></span></a>Comparison between AMQP and JMS</h2>
+
+<p>Developers familiar with <a href="http://en.wikipedia.org/wiki/Java_Message_Service">JMS</a> may encounter confusing usage of terms when they start using an AMQP-based message solution.</p>
+
+<ul>
+    <li>JMS has queues and topics. A message sent on a JMS queue will be consumed by no more than one client. A message sent on a JMS topic may be consumed by multiple consumers. AMQP only has queues. A message sent on an AMQP queue may reach one or more consumers.</li>
+    <li>JMS and AMQP both have an equivalent message header, providing the means to sort and route messages.</li>
+    <li>JMS and AMQP both have brokers responsible for receiving, routing, and ultimately dispensing messages to consumers.</li>
+    <li>AMQP has exchanges and routes. Messages are published to exchanges. Routes define on which queue(s) to publish the message.</li>
+</ul>
