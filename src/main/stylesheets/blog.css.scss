@@ -1,7 +1,8 @@
-$off-white: #FCFAFB;
+$off-white: #eee;
 $black-green: #3A3C2F; 
 $lime: #8CC63F;
 $leaf: #4E681E;
+$green: #6db33f;
 $bark: #AF9A85;
 $light-grey: #ECEBEB;
 $medium-grey: #DEDEDE;
@@ -9,10 +10,10 @@ $navy: #3A5056;
 $slate: #44474C;
 $mauve: #665A6B;
 $denim: #8395A1;
-$base-font-family: 'Varela Round', sans-serif;
-$secondary-font-family: 'Montserrat', sans-serif;
 $black-brown: #34302d;
+$secondary-font-family: 'Montserrat', sans-serif;
 $link-green: #5fa134;
+$icon-sprite: url("../img/iconsprite.png");
 
 .blog--container {
   padding: 0 0 40px 0;
@@ -157,6 +158,24 @@ $link-green: #5fa134;
       .copy-button {
         position: absolute;
         margin-left: 633px;
+      }
+    }
+    .callout {
+      border-left: 4px solid $green;
+      background-color: #EBF1E7;
+      padding: 25px 20px;
+      font-family: $secondary-font-family;
+      margin-bottom: 20px 30px;
+      .callout-title {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: bold;
+        margin-bottom: 6px;
+      }
+      p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 20px;
       }
     }
   }
