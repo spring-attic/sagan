@@ -33,8 +33,7 @@ $(function(){
     });
 
     //OPENS SEARCH DROPDOWN
-    $(".js-search-input-open").click(openSearchWindow);
-    function openSearchWindow () {
+    $(".js-search-input-open").click(function() {
       $(".nav-search").addClass("js-highlight");
       var inputContainer = $(".js-search-dropdown");
       var input = $(".js-search-input");
@@ -51,7 +50,7 @@ $(function(){
         $(".nav-search").removeClass("js-highlight");
         $("#scrim").removeClass("js-show");
       });
-    };
+    });
 
 
     //AUTO OPENS SEARCH DROPDOWN ON SEARCH VIEW AND 

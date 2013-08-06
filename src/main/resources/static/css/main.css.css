@@ -477,6 +477,7 @@ input.floating-input:focus {
   font-weight: bold;
   font-family: "Montserrat", sans-serif;
   margin-bottom: 6px;
+  color: #5fa134;
 }
 
 .search-result--summary {
