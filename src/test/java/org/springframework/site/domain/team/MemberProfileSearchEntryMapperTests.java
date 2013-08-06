@@ -38,6 +38,6 @@ public class MemberProfileSearchEntryMapperTests {
 
 	@Test
 	public void setPath() {
-		assertThat(searchEntry.getPath(), equalTo("/about/team/jdoe"));
+		assertThat(searchEntry.getPath(), equalTo("/team/jdoe"));
 	}
 }

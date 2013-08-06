@@ -47,7 +47,7 @@ public class MigrationController {
 		MemberProfile existingProfile = teamService.fetchMemberProfile(profile.getMemberId());
 		response.setContentLength(0);
 		response.setStatus(200);
-		response.setHeader("Location", siteUrl.getAbsoluteUrl("/about/team/" + profile.getMemberId()));
+		response.setHeader("Location", siteUrl.getAbsoluteUrl("/team/" + profile.getMemberId()));
 		if (existingProfile == null) {
 			profile.setHidden(true);
 			teamService.saveMemberProfile(profile);

@@ -48,7 +48,7 @@ public class ViewTeamTests extends IntegrationTestBase {
 
 		teamRepository.save(hidden);
 
-		this.mockMvc.perform(get("/about/team"))
+		this.mockMvc.perform(get("/team"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("First Last")))

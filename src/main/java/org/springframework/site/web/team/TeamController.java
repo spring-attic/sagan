@@ -24,7 +24,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
 @Controller
-@RequestMapping("/about/team")
+@RequestMapping("/team")
 public class TeamController {
 
 	private final TeamService teamService;

@@ -44,7 +44,7 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
 
 		teamRepository.save(profile);
 
-		this.mockMvc.perform(get("/about/team/someguy"))
+		this.mockMvc.perform(get("/team/someguy"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("First Last")))
@@ -63,7 +63,7 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
 		Post post = PostBuilder.post().author(profile).title("My Post").build();
 		postRepository.save(post);
 
-		this.mockMvc.perform(get("/about/team/someguy"))
+		this.mockMvc.perform(get("/team/someguy"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("My Post")));
@@ -71,7 +71,7 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
 
 	@Test
 	public void getNonExistentTeamMemberPage() throws Exception {
-		this.mockMvc.perform(get("/about/team/someguy"))
+		this.mockMvc.perform(get("/team/someguy"))
 				.andExpect(status().isNotFound());
 	}
 }

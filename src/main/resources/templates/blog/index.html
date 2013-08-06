@@ -27,7 +27,7 @@
 							</div>
 							<div class="meta-data--item">
 								<img class="meta-data--icon" th:src="@{${post.author.avatarUrl} + '?s=20&amp;d=mm'}" />
-								<a class='author' th:text="${post.author.name}" th:href="@{'/about/team/'+${post.author.memberId}}">Author</a>
+								<a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.memberId}}">Author</a>
 							</div>
 							<div class="meta-data--item">
 								<i class="meta-data--icon"></i>

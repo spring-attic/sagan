@@ -28,7 +28,7 @@
 				<tr th:each="post : ${drafts}" layout:fragment="post-row">
 					<td class="date" th:text="${post.formattedPublishDate}">June 18, 2013</td>
 					<td class="author">
-                        <a class='author' th:text="${post.author.name}" th:href="@{'/about/team/'+${post.author.memberId}}">Author</a>
+                        <a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.memberId}}">Author</a>
                     </td>
 					<td th:text="${post.title}">This week in Spring</td>
 					<td>

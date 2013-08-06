@@ -34,7 +34,7 @@
         <div class="span12">
             <ul class="team-members">
                 <li th:each="profile : ${profiles}" data:member-id="${profile.memberId}">
-                    <a th:href="@{'/about/team/' + ${profile.memberId}}">
+                    <a th:href="@{'/team/' + ${profile.memberId}}">
                         <img th:src="${profile.avatarUrl}" />
                         <div class="team-member-name" th:text="${profile.name}"></div>
                         <div class="team-member-location" th:text="${profile.location}"></div>

@@ -44,7 +44,7 @@ public class MigrateMemberProfileTests extends IntegrationTestBase {
 		migrateProfile.param("gravatarEmail", "someguy@example.com");
 
 		mockMvc.perform(migrateProfile).andExpect(status().isCreated())
-				.andExpect(header().string("Location", containsString("/about/team/migrate_someguy")));
+				.andExpect(header().string("Location", containsString("/team/migrate_someguy")));
 
 		MemberProfile profile = teamRepository.findByMemberId("migrate_someguy");
 

@@ -35,6 +35,6 @@ public class RedirectorIntegrationTests {
 	public void redirectsWhenUrlIsFound() throws Exception {
 		this.mockMvc.perform(get("http://blog.springsource.org/author/dsyer"))
 				.andExpect(status().isMovedPermanently())
-				.andExpect(header().string("Location", "http://sagan.cfapps.io/about/team/dsyer"));
+				.andExpect(header().string("Location", "http://sagan.cfapps.io/team/dsyer"));
 	}
 }

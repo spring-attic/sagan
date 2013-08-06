@@ -55,7 +55,7 @@ public class BlogSampleDataController {
 		for (int i = 0; i < 8; i++) {
 			generateRandomTeamMember(i);
 		}
-		return "redirect:/about/team";
+		return "redirect:/team";
 	}
 
 	private static String[] locations = {
