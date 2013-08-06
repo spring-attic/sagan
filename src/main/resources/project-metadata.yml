@@ -144,8 +144,8 @@ projects:
 
     - id: spring-data-neo4j
       name: Spring Data Neo4J
-      sponsor: ogierke
       lead: jexp@github # Michael Hunger
+      sponsor: ogierke
       siteUrl: NONE
       refDocUrl: /spring-data/data-neo4j/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-neo4j/docs/{version}/api/
@@ -214,8 +214,8 @@ projects:
     # ----------------------
     - id: spring-hadoop
       name: Spring for Apache Hadoop
-      sponsor: trisberg
       lead: jvalkeal@github # Janne Valkealahti
+      sponsor: trisberg
       siteUrl: NONE
       supportedVersions:
         - 1.0.1.RC1
@@ -260,8 +260,8 @@ projects:
     # ----------------------
     - id: spring-roo
       name: Spring Roo
-      sponsor: NONE
       lead: alankstewart@github
+      sponsor: NONE
       siteUrl: NONE
       refDocUrl: /spring-roo/reference/html/
       apiDocUrl: NONE
@@ -390,6 +390,7 @@ projects:
       supportedVersions:
       refDocUrl: /spring-migration-analyzer/docs/{version}/reference/html
       apiDocUrl: /spring-migration-analyzer/docs/{version}/api/
+      supportedVersions:
         - 9.9.9.RELEASE
 
     - id: spring-python #TODO
@@ -463,22 +464,22 @@ projects:
     # TODO: Eliminate completely?
     - id: spring-data-cassandra
       name: Spring Data Cassandra
-      sponsor: mpollack
       lead: erezmazor@github
+      sponsor: mpollack
       siteUrl: NONE
 
     # No releases
     - id: spring-data-couchbase
       name: Spring Data Couchbase
-      sponsor: ogierke
       lead: daschl@github # Michael Nitschinger
+      sponsor: ogierke
       siteUrl: NONE
 
     # No releases
     - id: spring-data-elasticsearch
       name: Spring Data Elasticsearch
-      sponsor: ogierke
       lead: mohsinh@github # Mohsin Husen
+      sponsor: ogierke
       siteUrl: NONE
 
     # TODO: what to do with 0.* releases - still in incubation?
@@ -500,8 +501,8 @@ projects:
     # No GA releases
     - id: spring-data-solr
       name: Spring Data Solr
-      sponsor: mpollack
       lead: christophstrobl@github
+      sponsor: mpollack
       siteUrl: NONE
       refDocUrl: NONE
       apiDocUrl: NONE
