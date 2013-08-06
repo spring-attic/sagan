@@ -2,7 +2,6 @@ package org.springframework.site.domain.tools.eclipse.parser;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.site.domain.tools.eclipse.EclipseDownloadLink;
 import org.springframework.site.domain.tools.eclipse.EclipseDownloads;
 import org.springframework.site.domain.tools.eclipse.EclipsePackage;
 import org.springframework.site.domain.tools.eclipse.EclipseRelease;
@@ -10,6 +9,7 @@ import org.springframework.site.domain.tools.eclipse.xml.EclipseXml;
 import org.springframework.site.domain.tools.eclipse.xml.EclipseXmlDownload;
 import org.springframework.site.domain.tools.eclipse.xml.EclipseXmlPackage;
 import org.springframework.site.domain.tools.eclipse.xml.EclipseXmlProduct;
+import org.springframework.site.domain.tools.toolsuite.DownloadLink;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,12 +29,14 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForSamePackageWithDifferen
 		win32Download.setDescription("Windows");
 		win32Download.setFile("release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip");
 		win32Download.setBucket("http://eclipseXmlDownload.springsource.com/");
+		win32Download.setSize("123MB");
 
 		EclipseXmlDownload win64Download = new EclipseXmlDownload();
 		win64Download.setOs("windows");
 		win64Download.setDescription("Windows (64bit)");
-		win64Download.setFile("release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32-x86_64.zip");
+		win64Download.setFile("release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win64-x86_64.zip");
 		win64Download.setBucket("http://eclipseXmlDownload.springsource.com/");
+		win64Download.setSize("456MB");
 
 		EclipseXmlPackage eclipseXmlPackage = new EclipseXmlPackage();
 		eclipseXmlPackage.setName("Eclipse Standard 4.3 (Win32, 0MB)");
@@ -60,27 +62,37 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForSamePackageWithDifferen
 	public void addsAProductToThePlatform() throws Exception {
 		List<EclipseRelease> windowsProducts = eclipseDownloads.getPlatforms().get("windows").getReleases();
 		assertThat(windowsProducts.size(), equalTo(1));
-		assertThat(windowsProducts.get(0).getName(), equalTo("Eclipse Kepler Package Downloads (based on Eclipse 4.3)"));
+		assertThat(windowsProducts.get(0).getName(), equalTo("Eclipse Kepler"));
 	}
 
 	@Test
 	public void addsAPackage() throws Exception {
 		List<EclipsePackage> windowsPackages = eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
 		assertThat(windowsPackages.size(), equalTo(1));
-		assertThat(windowsPackages.get(0).getName(), equalTo("Eclipse Standard 4.3 (Win32, 0MB)"));
+		assertThat(windowsPackages.get(0).getName(), equalTo("Eclipse Standard 4.3"));
 	}
 
 	@Test
 	public void addsTwoDownloadLinksToThePackage() throws Exception {
 		List<EclipsePackage> windowsPackages = eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
-		List<EclipseDownloadLink> windowsDownloadLinks = windowsPackages.get(0).getDownloadLinks();
+		List<DownloadLink> win32DownloadLinks = windowsPackages.get(0).getArchitectures().get(0).getDownloadLinks();
 
-		assertThat(windowsDownloadLinks.size(), equalTo(2));
+		assertThat(win32DownloadLinks.size(), equalTo(1));
 
-		assertThat(windowsDownloadLinks.get(0).getName(), equalTo("Windows"));
-		assertThat(windowsDownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
+		assertThat(win32DownloadLinks.get(0).getOs(), equalTo("windows"));
+		assertThat(win32DownloadLinks.get(0).getArchitecture(), equalTo("32"));
+		assertThat(win32DownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
+		assertThat(win32DownloadLinks.get(0).getFileSize(), equalTo("123MB"));
+		assertThat(win32DownloadLinks.get(0).getFileType(), equalTo("zip"));
 
-		assertThat(windowsDownloadLinks.get(1).getName(), equalTo("Windows (64bit)"));
-		assertThat(windowsDownloadLinks.get(1).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32-x86_64.zip"));
+		List<DownloadLink> win64DownloadLinks = windowsPackages.get(0).getArchitectures().get(1).getDownloadLinks();
+
+		assertThat(win64DownloadLinks.size(), equalTo(1));
+		
+		assertThat(win64DownloadLinks.get(0).getOs(), equalTo("windows"));
+		assertThat(win64DownloadLinks.get(0).getArchitecture(), equalTo("64"));
+		assertThat(win64DownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win64-x86_64.zip"));
+		assertThat(win64DownloadLinks.get(0).getFileSize(), equalTo("456MB"));
+		assertThat(win64DownloadLinks.get(0).getFileType(), equalTo("zip"));
 	}
 }

@@ -5,14 +5,20 @@ import java.util.List;
 public class EclipseRelease {
 	private final String name;
 	private List<EclipsePackage> packages;
+	private String eclipseVersion;
 
-	public EclipseRelease(String name, List<EclipsePackage> packages) {
+	public EclipseRelease(String name, String eclipseVersion, List<EclipsePackage> packages) {
 		this.name = name;
+		this.eclipseVersion = eclipseVersion;
 		this.packages = packages;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public String getEclipseVersion() {
+		return eclipseVersion;
 	}
 
 	@Override

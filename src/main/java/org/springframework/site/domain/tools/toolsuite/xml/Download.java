@@ -3,7 +3,7 @@ package org.springframework.site.domain.tools.toolsuite.xml;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
-public class Download {
+public class Download implements FileDownload {
 
 	@Attribute
 	private String os;

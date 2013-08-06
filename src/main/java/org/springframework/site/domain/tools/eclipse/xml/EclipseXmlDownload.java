@@ -2,8 +2,9 @@ package org.springframework.site.domain.tools.eclipse.xml;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.springframework.site.domain.tools.toolsuite.xml.FileDownload;
 
-public class EclipseXmlDownload {
+public class EclipseXmlDownload implements FileDownload {
 
 	@Attribute
 	private String os;

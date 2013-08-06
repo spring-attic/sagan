@@ -2,7 +2,6 @@ package org.springframework.site.domain.tools.eclipse.parser;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.site.domain.tools.eclipse.EclipseDownloadLink;
 import org.springframework.site.domain.tools.eclipse.EclipseDownloads;
 import org.springframework.site.domain.tools.eclipse.EclipsePackage;
 import org.springframework.site.domain.tools.eclipse.EclipseRelease;
@@ -10,6 +9,7 @@ import org.springframework.site.domain.tools.eclipse.xml.EclipseXml;
 import org.springframework.site.domain.tools.eclipse.xml.EclipseXmlDownload;
 import org.springframework.site.domain.tools.eclipse.xml.EclipseXmlPackage;
 import org.springframework.site.domain.tools.eclipse.xml.EclipseXmlProduct;
+import org.springframework.site.domain.tools.toolsuite.DownloadLink;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -61,36 +61,36 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForDifferentPlatformsTests
 	public void addsAProductToEachPlatform() throws Exception {
 		List<EclipseRelease> macProducts = eclipseDownloads.getPlatforms().get("mac").getReleases();
 		assertThat(macProducts.size(), equalTo(1));
-		assertThat(macProducts.get(0).getName(), equalTo("Eclipse Kepler Package Downloads (based on Eclipse 4.3)"));
+		assertThat(macProducts.get(0).getName(), equalTo("Eclipse Kepler"));
 
 		List<EclipseRelease> windowsProducts = eclipseDownloads.getPlatforms().get("windows").getReleases();
 		assertThat(windowsProducts.size(), equalTo(1));
-		assertThat(windowsProducts.get(0).getName(), equalTo("Eclipse Kepler Package Downloads (based on Eclipse 4.3)"));
+		assertThat(windowsProducts.get(0).getName(), equalTo("Eclipse Kepler"));
 	}
 
 	@Test
 	public void addsTwoPackages() throws Exception {
 		List<EclipsePackage> macPackages = eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages();
 		assertThat(macPackages.size(), equalTo(1));
-		assertThat(macPackages.get(0).getName(), equalTo("Eclipse Standard 4.3 (Win32, 0MB)"));
+		assertThat(macPackages.get(0).getName(), equalTo("Eclipse Standard 4.3"));
 
 		List<EclipsePackage> windowsPackages = eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
 		assertThat(windowsPackages.size(), equalTo(1));
-		assertThat(windowsPackages.get(0).getName(), equalTo("Eclipse Standard 4.3 (Win32, 0MB)"));
+		assertThat(windowsPackages.get(0).getName(), equalTo("Eclipse Standard 4.3"));
 	}
 
 	@Test
-	public void addsDownloadLinksToThePackages() throws Exception {
+	public void addsDownloadLinksToTheArchitectures() throws Exception {
 		List<EclipsePackage> macPackages = eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages();
-		List<EclipseDownloadLink> macDownloadLinks = macPackages.get(0).getDownloadLinks();
+		List<DownloadLink> macDownloadLinks = macPackages.get(0).getArchitectures().get(0).getDownloadLinks();
 		assertThat(macDownloadLinks.size(), equalTo(1));
-		assertThat(macDownloadLinks.get(0).getName(), equalTo("Mac OS X (Cocoa)"));
+		assertThat(macDownloadLinks.get(0).getOs(), equalTo("mac"));
 		assertThat(macDownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz"));
 
 		List<EclipsePackage> windowsPackages = eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
-		List<EclipseDownloadLink> windowsDownloadLinks = windowsPackages.get(0).getDownloadLinks();
+		List<DownloadLink> windowsDownloadLinks = windowsPackages.get(0).getArchitectures().get(0).getDownloadLinks();
 		assertThat(windowsDownloadLinks.size(), equalTo(1));
-		assertThat(windowsDownloadLinks.get(0).getName(), equalTo("Windows (64bit)"));
+		assertThat(windowsDownloadLinks.get(0).getOs(), equalTo("windows"));
 		assertThat(windowsDownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32-x86_64.zip"));
 	}
 }

@@ -37,6 +37,7 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="eclipse-platform--container" th:each="platform : ${platforms}">
 		<a href="#collapse" data-toggle="collapse" th:attr="data-target='#platform--' + ${platform.name}" class="js-dropdown-link eclipse-platform-dropdown-link">
 			<i class="platform-dropdown--icon icon-chevron-down pull-right"></i>
@@ -55,8 +56,16 @@
 					</div>
 					<div class="item--dropdown ecplise-version--dropdown">
 						<div class="item--body">
-							<div class="download-link" th:each="download : ${package.downloadLinks}" class="download-link">
-								<a href='release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip' th:href="${download.url}" th:text='${download.name}'>Windows (64bit)</a>
+							<div class='item--half-column' th:each='architecture : ${package.architectures}'>
+								<p class="item--body-title" th:text='${architecture.displayName}'>Architecture name</p>
+								<div>
+									<div class='item--body--version' th:each='downloadLink : ${architecture.downloadLinks}'>
+										<a class="tool-download-link" th:href='${downloadLink.url}'>
+											<p class="file-type" th:text='${downloadLink.fileType}'>A file type</p>
+											<span class="file-size" th:text="${downloadLink.fileSize}">2 MB</span>
+										</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -64,6 +73,8 @@
 			</div>
 		</div>
 	</div>
+
+
 
 	<script type="text/javascript">
 

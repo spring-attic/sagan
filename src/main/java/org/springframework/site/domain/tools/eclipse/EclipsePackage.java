@@ -1,21 +1,23 @@
 package org.springframework.site.domain.tools.eclipse;
 
+import org.springframework.site.domain.tools.toolsuite.Architecture;
+
 import java.util.List;
 
 public class EclipsePackage {
 	private String name;
-	private List<EclipseDownloadLink> downloads;
+	private List<Architecture> architectures;
 
-	public EclipsePackage(String name, List<EclipseDownloadLink> downloadLinks) {
+	public EclipsePackage(String name, List<Architecture> architectures) {
 		this.name = name;
-		this.downloads = downloadLinks;
+		this.architectures = architectures;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public List<EclipseDownloadLink> getDownloadLinks() {
-		return downloads;
+	public List<Architecture> getArchitectures() {
+		return architectures;
 	}
 }

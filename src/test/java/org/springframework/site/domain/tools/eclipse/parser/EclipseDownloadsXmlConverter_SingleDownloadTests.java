@@ -2,7 +2,6 @@ package org.springframework.site.domain.tools.eclipse.parser;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.site.domain.tools.eclipse.EclipseDownloadLink;
 import org.springframework.site.domain.tools.eclipse.EclipseDownloads;
 import org.springframework.site.domain.tools.eclipse.EclipsePackage;
 import org.springframework.site.domain.tools.eclipse.EclipseRelease;
@@ -10,6 +9,7 @@ import org.springframework.site.domain.tools.eclipse.xml.EclipseXml;
 import org.springframework.site.domain.tools.eclipse.xml.EclipseXmlDownload;
 import org.springframework.site.domain.tools.eclipse.xml.EclipseXmlPackage;
 import org.springframework.site.domain.tools.eclipse.xml.EclipseXmlProduct;
+import org.springframework.site.domain.tools.toolsuite.DownloadLink;
 
 import java.util.Collections;
 import java.util.List;
@@ -56,22 +56,33 @@ public class EclipseDownloadsXmlConverter_SingleDownloadTests {
 		List<EclipseRelease> products = eclipseDownloads.getPlatforms().get("mac").getReleases();
 
 		assertThat(products.size(), equalTo(1));
-		assertThat(products.get(0).getName(), equalTo("Eclipse Kepler Package Downloads (based on Eclipse 4.3)"));
+		assertThat(products.get(0).getName(), equalTo("Eclipse Kepler"));
+		assertThat(products.get(0).getEclipseVersion(), equalTo("Eclipse 4.3"));
 	}
 
 	@Test
 	public void addsAPackage() throws Exception {
 		List<EclipsePackage> packages = eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages();
 		assertThat(packages.size(), equalTo(1));
-		assertThat(packages.get(0).getName(), equalTo("Eclipse Standard 4.3 (Win32, 0MB)"));
+		assertThat(packages.get(0).getName(), equalTo("Eclipse Standard 4.3"));
+	}
+
+	@Test
+	public void addsAnArchitecture() throws Exception {
+		EclipsePackage eclipsePackage = eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages().get(0);
+		assertThat(eclipsePackage.getArchitectures().size(), equalTo(1));
+		assertThat(eclipsePackage.getArchitectures().get(0).getName(), equalTo("Mac OS X (Cocoa)"));
 	}
 
 	@Test
 	public void addsADownloadLink() throws Exception {
-		List<EclipsePackage> packages = eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages();
-		List<EclipseDownloadLink> downloadLinks = packages.get(0).getDownloadLinks();
+		EclipsePackage eclipsePackage = eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages().get(0);
+		List<DownloadLink> downloadLinks = eclipsePackage.getArchitectures().get(0).getDownloadLinks();
 		assertThat(downloadLinks.size(), equalTo(1));
-		assertThat(downloadLinks.get(0).getName(), equalTo("Mac OS X (Cocoa)"));
+		assertThat(downloadLinks.get(0).getOs(), equalTo("mac"));
+		assertThat(downloadLinks.get(0).getArchitecture(), equalTo("32"));
 		assertThat(downloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz"));
+		assertThat(downloadLinks.get(0).getFileSize(), equalTo("196MB"));
+		assertThat(downloadLinks.get(0).getFileType(), equalTo("tar.gz"));
 	}
 }
