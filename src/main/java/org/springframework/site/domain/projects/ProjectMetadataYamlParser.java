@@ -68,17 +68,16 @@ public class ProjectMetadataYamlParser {
 	}
 
 	private String parseSiteUrl(Map<String, Object> projectData, Map<String, String> variables, Map<String, String> defaultUrls) {
-		if (projectData.containsKey("hasSite") && Boolean.valueOf(projectData.get("hasSite").toString())) {
-			String siteUrl;
-			if (projectData.containsKey("siteUrl")) {
-				siteUrl = projectData.get("siteUrl").toString();
-			} else {
-				siteUrl = defaultUrls.get("siteUrl");
+		String siteUrl;
+		if (projectData.containsKey("siteUrl")) {
+			siteUrl = projectData.get("siteUrl").toString();
+			if (siteUrl.equals("NONE")) {
+				return "";
 			}
-			return new UriTemplate(siteUrl).expand(variables).toString();
 		} else {
-			return "";
+			siteUrl = defaultUrls.get("siteUrl");
 		}
+		return new UriTemplate(siteUrl).expand(variables).toString();
 	}
 
 	private List<ProjectVersion> parseProjectDocumentation(Map<String, Object> projectData, Map<String, String> variables, Map<String, String> defaultUrls) {

@@ -71,7 +71,6 @@ projects:
     - id: spring-amqp
       name: Spring AMQP
       lead: grussell
-      hasSite: true
       supportedVersions:
         - 1.1.4.RELEASE
         - 1.2.0.RELEASE
@@ -82,6 +81,7 @@ projects:
     - id: spring-android
       name: Spring Android
       lead: rclarkson
+      siteUrl: NONE
       supportedVersions:
         - 1.0.1.RELEASE
 
@@ -267,7 +267,6 @@ projects:
 
     - id: spring-security-oauth
       name: Spring Security OAuth
-      hasSite: true
       siteUrl: "{docsBaseUrl}/spring-security/oauth/"
       supportedVersions:
         - name: 1.0.5.RELEASE
@@ -327,7 +326,6 @@ projects:
       name: Spring Web Services
       lead: apoutsma
       siteUrl: http://static.springsource.org/spring-ws/sites/2.0
-      hasSite: true
       supportedVersions:
         - name: 2.1.3.RELEASE
           refDocUrl: /spring-ws/sites/2.0/reference/html/index.html
@@ -424,7 +422,6 @@ projects:
     - id: spring-security-saml
       name: Spring Security SAML
       lead: vschafer
-      hasSite: true
       siteUrl: http://static.springsource.org/spring-security/site/extensions/krb/
       supportedVersions:
         - name: 1.0.0.RC2

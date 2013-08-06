@@ -13,7 +13,6 @@ projects:
   active:
     - id: spring-framework
       name: Spring Framework
-      hasSite: true                                                         # optional, default=false
       siteUrl: http://www.example.com/spring-framework                      # optional, default={ghPagesBaseUrl}/{id}
       repoUrl: http://www.example.com/repo/spring-framework                 # optional, defaults to {githubOrgBaseUrl}/{id}
       refDocUrl: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
@@ -24,6 +23,7 @@ projects:
         - 4.0.0.M1
     - id: spring-framework-nosite
       name: Spring Framework
+      siteUrl: NONE
       refDocUrl: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
       apiDocUrl: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
       supportedVersions:
@@ -32,7 +32,6 @@ projects:
         - 4.0.0.M1
     - id: spring-framework-defaultsite
       name: Spring Framework
-      hasSite: true                                                         # optional, default=false
       refDocUrl: /spring/docs/{version}/spring-framework-reference/html/   # appended to {docsBaseUrl} to form whole link
       apiDocUrl: /spring/docs/{version}/javadoc-api/                       # appended to {docsBaseUrl} to form whole link
       supportedVersions:
@@ -41,14 +40,12 @@ projects:
         - 4.0.0.M1
     - id: docs-override
       name: Spring Framework
-      hasSite: true                                                         # optional, default=false
       supportedVersions:
         - name: 2.2.1.RELEASE
           refDocUrl: /spring/trunk/reference/html/index.html
           apiDocUrl: /spring/trunk/apidocs/index.html
     - id: mixed-docs-override
       name: Spring Framework
-      hasSite: true
       refDocUrl: /spring/docs/{version}/spring-framework-reference/html/
       apiDocUrl: /spring/docs/{version}/javadoc-api/
       supportedVersions:
@@ -102,7 +99,6 @@ projects:
           apiDocUrl: NONE
     - id: project-with-variables-in-urls
       name: Spring Framework
-      hasSite: true
       siteUrl: "{ghPagesBaseUrl}/foo/{id}/"
       repoUrl: "{githubOrgBaseUrl}/foo/{id}/"
       refDocUrl: "{ghPagesBaseUrl}/docs/{id}/{version}/html/"
