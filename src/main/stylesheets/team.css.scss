@@ -34,7 +34,7 @@ $icon-sprite: url("../img/iconsprite.png");
     margin-top: 212px;
     .team-map--title, .team-map--subtitle {
       background: rgba(52, 48, 45, 0.8);
-      color: white;
+      color: $off-white;
       display: inline-block;
     }
     .team-map--title {
@@ -57,12 +57,98 @@ $icon-sprite: url("../img/iconsprite.png");
 
 .team-members--wrapper {
   margin-top: 326px;
+  .team-member--container {
+    background-color: white;
+    border: 1px solid $off-white;
+    display: inline-block;
+    float: left;
+    padding: 10px;
+    width: 319px;
+    .team-member--avatar {
+      display: inline-block;
+      img {
+        display: inline-block;
+        width: 153px;
+        height: 153px;
+        margin-right: 13px;
+      }
+    }
+    .team-member--info {
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 20px;
+      width: 149px;
+      .team-member--name {
+        color: $link-green;
+        font-size: 16px;
+        line-height: 16px;
+        width: 149px;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+      }
+      .team-member--bio {
+        margin-top: 6px;
+        p {
+          font-size: 14px;
+          line-height: 18px;
+          &.team-member--position {
+            height: 36px;
+            overflow: hidden;
+            margin-bottom: 5px;
+          }
+          &.team-member--location {
+            width: 149px;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+      .team-member--social {
+        margin-top: 12px;
+        .team-member--social--icon {
+          width: 24px;
+          height: 24px;
+          display: inline-block;
+          float: left;
+          margin-right: 5px;
+          background-image: $icon-sprite;
+          &.twitter-small {
+            background-position: -314px -452px;
+            &:hover {
+              background-position: -314px -486px;
+            }
+          }
+          &.github-small {
+            background-position: -344px -452px;
+            &:hover {
+              background-position: -344px -486px;
+            }
+          }
+          &.speakerdeck-small {
+            background-position: -374px -452px;
+            &:hover {
+              background-position: -374px -486px;
+            }
+          }
+          &.lanyrd-small {
+            background-position: -284px -452px;
+            &:hover {
+              background-position: -284px -486px;
+            }
+          }
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
 }
-
-
-.avatar {
-    margin-right: 10px; }
-
 
 ul.team-members {
   margin: 50px 0 0 0;

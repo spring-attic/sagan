@@ -30,17 +30,22 @@
       <div id="map"></div>
     </div> 
     <div class="team-members--wrapper">
-      <div class="row">
-        <div class="span12">
-          <ul class="team-members">
-            <li th:each="profile : ${profiles}" data:member-id="${profile.memberId}">
-              <a th:href="@{'/team/' + ${profile.memberId}}">
-                <img th:src="${profile.avatarUrl}" />
-                <div class="team-member-name" th:text="${profile.name}"></div>
-                <div class="team-member-location" th:text="${profile.location}"></div>
-              </a>
-            </li>
-          </ul>
+      <div class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.memberId}">
+        <a th:href="@{'/team/' + ${profile.memberId}}" class="team-member--avatar">
+          <img th:src="${profile.avatarUrl}" />
+        </a>
+        <div class="team-member--info">
+          <a h:href="@{'/team/' + ${profile.memberId}}" class="team-member--name" th:text="${profile.name}">Member Name</a>
+          <div class="team-member--bio">
+            <p class="team-member--position" th:text="${profile.bio}">Some bio</p>
+            <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
+          </div>
+          <div class="team-member--social">
+            <a class="team-member--social--icon twitter-small" th:href="'twitter.com/'+ ${profile.twitterUsername}" th:if="${profile.twitterUsername}"></a>
+            <a class="team-member--social--icon github-small" th:href="'github.com/'+ ${profile.githubUsername}" th:if="${profile.githubUsername}"></a>
+            <a class="team-member--social--icon speakerdeck-small" th:href="'speakerdeck.com/'+ ${profile.speakerdeckUsername}" th:if="${profile.speakerdeckUsername}"></a>
+            <a class="team-member--social--icon lanyrd-small" th:href="'lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:if="${profile.lanyrdUsername}"></a>
+          </div>
         </div>
       </div>
     </div>
