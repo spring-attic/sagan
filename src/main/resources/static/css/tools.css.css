@@ -138,6 +138,15 @@
   background-color: #ccc;
   box-shadow: inset 3px 3px 0 white, inset -3px -3px 0 white;
 }
+.tools--wrapper .tools-feature--container .screenshot-ggts-editing {
+  background: url("../img/screenshot-ggts-editing.png") transparent no-repeat;
+}
+.tools--wrapper .tools-feature--container .screenshot-ggts-support {
+  background: url("../img/screenshot-ggts-support.png") transparent no-repeat;
+}
+.tools--wrapper .tools-feature--container .screenshot-ggts-integration {
+  background: url("../img/screenshot-ggts-integration.png") transparent no-repeat;
+}
 .tools--wrapper .tools-feature--container .tools-feature--description {
   font-size: 14px;
   line-height: 20px;

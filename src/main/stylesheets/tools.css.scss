@@ -154,6 +154,15 @@ $icon-sprite: url("../img/iconsprite.png");
       background-color: #ccc;
       box-shadow: inset 3px 3px 0 white, inset -3px -3px 0 white;
     }
+    .screenshot-ggts-editing {
+      background: url("../img/screenshot-ggts-editing.png") transparent no-repeat;
+    }
+    .screenshot-ggts-support {
+      background: url("../img/screenshot-ggts-support.png") transparent no-repeat;
+    }
+    .screenshot-ggts-integration {
+      background: url("../img/screenshot-ggts-integration.png") transparent no-repeat;
+    }
     .tools-feature--description {
       font-size: 14px;
       line-height: 20px;
