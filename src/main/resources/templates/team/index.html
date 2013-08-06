@@ -35,7 +35,7 @@
           <img th:src="${profile.avatarUrl}" />
         </a>
         <div class="team-member--info">
-          <a h:href="@{'/team/' + ${profile.memberId}}" class="team-member--name" th:text="${profile.name}">Member Name</a>
+          <a th:href="@{'/team/' + ${profile.memberId}}" class="team-member--name" th:text="${profile.name}">Member Name</a>
           <div class="team-member--bio">
             <p class="team-member--position" th:text="${profile.bio}">Some bio</p>
             <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
