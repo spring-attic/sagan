@@ -15,6 +15,12 @@
  */
 package org.springframework.site.web.configuration;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.servlet.Filter;
+import javax.sql.DataSource;
+
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
@@ -23,6 +29,7 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -34,10 +41,7 @@ import org.springframework.site.domain.services.DateService;
 import org.springframework.site.web.SiteUrl;
 import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
 import org.springframework.web.client.RestTemplate;
-
-import javax.sql.DataSource;
-import java.io.IOException;
-import java.io.InputStream;
+import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
 @EnableAutoConfiguration
 @Configuration
@@ -97,4 +101,18 @@ public class ApplicationConfiguration {
 		return new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
 	}
 
+	// http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html#filterparams
+	@Bean
+	public FilterRegistrationBean rewriteFilterConfig() {
+		FilterRegistrationBean reg = new FilterRegistrationBean();
+		reg.setFilter(rewriteFilter());
+		reg.addInitParameter("confReloadCheckInterval", "0");
+		reg.addInitParameter("confPath", "urlrewrite.xml");
+		return reg;
+	}
+
+	@Bean
+	public Filter rewriteFilter() {
+		return new UrlRewriteFilter();
+	}
 }
