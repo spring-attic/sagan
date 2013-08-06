@@ -41,10 +41,10 @@
             <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
           </div>
           <div class="team-member--social">
-            <a class="team-member--social--icon twitter-small" th:href="'twitter.com/'+ ${profile.twitterUsername}" th:if="${profile.twitterUsername}"></a>
-            <a class="team-member--social--icon github-small" th:href="'github.com/'+ ${profile.githubUsername}" th:if="${profile.githubUsername}"></a>
-            <a class="team-member--social--icon speakerdeck-small" th:href="'speakerdeck.com/'+ ${profile.speakerdeckUsername}" th:if="${profile.speakerdeckUsername}"></a>
-            <a class="team-member--social--icon lanyrd-small" th:href="'lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:if="${profile.lanyrdUsername}"></a>
+            <a class="team-member--social--icon twitter-small" th:href="'http://twitter.com/'+ ${profile.twitterUsername}" th:unless="${profile.twitterUsername}"></a>
+            <a class="team-member--social--icon github-small" th:href="'http://github.com/'+ ${profile.githubUsername}" th:unless="${profile.githubUsername}"></a>
+            <a class="team-member--social--icon speakerdeck-small" th:href="'http://speakerdeck.com/'+ ${profile.speakerdeckUsername}" th:unless="${profile.speakerdeckUsername}"></a>
+            <a class="team-member--social--icon lanyrd-small" th:href="'http://lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:unless="${profile.lanyrdUsername}"></a>
           </div>
         </div>
       </div>
