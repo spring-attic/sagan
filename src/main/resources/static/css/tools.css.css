@@ -158,7 +158,7 @@
   background-color: white;
   margin: 0 67px;
   padding: 20px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
 }
 .tools--wrapper.testimonial .testimonial--container .quotation--icon {
   width: 30px;
@@ -295,24 +295,9 @@
 .tool-versions--wrapper .tool-versions--container .platform-version--dropdown {
   width: 82.7%;
 }
-.tool-versions--wrapper .tool-versions--container .platform-version--dropdown .item--body-title {
-  padding-top: 0;
-  border-bottom: 1px solid #cccbca;
-}
-.tool-versions--wrapper .tool-versions--container .platform-version--dropdown .tool-download-link .file-type {
-  color: #5fa134;
-  line-height: 14px;
-  font-size: 14px;
-  display: inline-block;
-}
-.tool-versions--wrapper .tool-versions--container .platform-version--dropdown .tool-download-link .file-size {
-  color: #6c635d;
-  font-size: 12px;
-  float: right;
-}
 
 .eclipse-platform--container {
-  border: 1px solid #34302d;
+  border: 1px solid #34302D;
   margin-bottom: 40px;
 }
 .eclipse-platform--container .eclipse-platform-dropdown-link {
@@ -359,11 +344,11 @@
   padding: 0 20px;
   overflow: hidden;
   height: 0;
-  margin-left: -3%;
+  margin-left: -1.5%;
 }
 .eclipse-platform--container .platform-versions--container .release {
-  margin: 20px 2% 20px;
-  width: 29.33497%;
+  margin: 20px 1% 20px;
+  width: 31.33467%;
   display: inline-block;
 }
 .eclipse-platform--container .platform-versions--container .platform-release--name {
@@ -372,18 +357,18 @@
   padding: 0 20px;
 }
 .eclipse-platform--container .ecplise-version--dropdown {
-  width: 86.5%;
+  width: 87.2%;
 }
 
 .tool-archive--table {
   margin-top: 30px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
 }
 .tool-archive--table th {
   text-transform: uppercase;
   font-size: 12px;
   line-height: 12px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
 }
 .tool-archive--table td:last-child {
   color: #6c635d;
@@ -472,7 +457,7 @@
   text-align: left;
 }
 .tools-right-pane .other-tools--container:first-child {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #FFF;
 }
 .tools-right-pane .other-tools--container .other-tools--link {
   color: #5FA134;

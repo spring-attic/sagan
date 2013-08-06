@@ -732,13 +732,16 @@ input.floating-input {
     width: 50%;
     &:first-child {
       .item--body-title, .item--body--version {
-        padding-right: 7px;
+        padding-right: 15px;
       }
     }
-    &:last-child {
+    &:nth-child(2) {
       .item--body-title, .item--body--version {
-        padding-left: 7px;
+        padding-left: 15px;
       }
+    }
+    &:nth-child(3) {
+      margin-top: 20px;
     }
   }
   .item--body-title {
@@ -772,7 +775,28 @@ input.floating-input {
       }
     }
   }
+  &.no-item--header {
+    .item--body-title {
+      padding-top: 0;
+      border-bottom: 1px solid #cccbca;
+    }
+    .tool-download-link {
+      .file-type {
+        color: $link-green;
+        line-height: 14px;
+        font-size: 14px;
+        display: inline-block;
+      }
+      .file-size {
+        color: #6c635d;
+        font-size: 12px;
+        float: right;
+      }
+    }
+  }
 }
+
+
 
 .search-facets {
   > ul {

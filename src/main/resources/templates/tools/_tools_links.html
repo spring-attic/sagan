@@ -14,7 +14,7 @@
 							<i class="item-dropdown--icon icon-reorder pull-right"></i>
 							<p class="item-dropdown--title" th:text="'Based on Eclipse '+${eclipseVersion.name}"></p>
 						</div>
-						<div class="item--dropdown platform-version--dropdown">
+						<div class="item--dropdown no-item--header platform-version--dropdown">
 							<div class="item--body">
 								<div class='item--half-column' th:each='architecture : ${eclipseVersion.architectures}'>
 									<p class="item--body-title" th:text='${architecture.displayName}'>Architecture name</p>

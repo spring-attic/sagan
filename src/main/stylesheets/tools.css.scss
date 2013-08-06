@@ -316,23 +316,6 @@ $icon-sprite: url("../img/iconsprite.png");
     }
     .platform-version--dropdown {
       width: 82.7%;
-      .item--body-title {
-        padding-top: 0;
-        border-bottom: 1px solid #cccbca;
-      }
-      .tool-download-link {
-        .file-type {
-          color: $link-green;
-          line-height: 14px;
-          font-size: 14px;
-          display: inline-block;
-        }
-        .file-size {
-          color: #6c635d;
-          font-size: 12px;
-          float: right;
-        }
-      }
     }
   }
 }
@@ -384,10 +367,10 @@ $icon-sprite: url("../img/iconsprite.png");
     padding: 0 20px;
     overflow: hidden;
     height: 0;
-    margin-left: -3%;
+    margin-left: -1.5%;
     .release {
-      margin: 20px 2% 20px;
-      width: 29.33497%;
+      margin: 20px 1% 20px;
+      width: 31.33467%;
       display: inline-block;
     }
     .platform-release--name {
@@ -397,7 +380,7 @@ $icon-sprite: url("../img/iconsprite.png");
     }
   }
   .ecplise-version--dropdown {
-    width: 86.5%;
+    width: 87.2%;
   }
 }
 

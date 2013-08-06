@@ -37,8 +37,7 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="eclipse-platform--container" th:each="platform : ${platforms}">
+	<div class="eclipse-platform--container js-item-dropdown-widget--wrapper" th:each="platform : ${platforms}">
 		<a href="#collapse" data-toggle="collapse" th:attr="data-target='#platform--' + ${platform.name}" class="js-dropdown-link eclipse-platform-dropdown-link">
 			<i class="platform-dropdown--icon icon-chevron-down pull-right"></i>
 			<div class="platform--name">
@@ -54,7 +53,7 @@
 						<i class="item-dropdown--icon icon-reorder pull-right"></i>
 						<p class="item-dropdown--title" th:text="${package.name}">Eclipse Standard 4.3 (Win32, 0MB)</p>
 					</div>
-					<div class="item--dropdown ecplise-version--dropdown">
+					<div class="item--dropdown no-item--header ecplise-version--dropdown">
 						<div class="item--body">
 							<div class='item--half-column' th:each='architecture : ${package.architectures}'>
 								<p class="item--body-title" th:text='${architecture.displayName}'>Architecture name</p>
