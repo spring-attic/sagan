@@ -23,7 +23,7 @@ public class ProjectMetadataServiceTests {
 	@Test
 	public void bindingToYaml() throws IOException {
 		InputStream yaml = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
-		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
+		ProjectMetadataService documentationService = new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
 
 		assertEquals(3, documentationService.getProject("spring-framework")
 				.getProjectVersions().size());
@@ -35,7 +35,7 @@ public class ProjectMetadataServiceTests {
 	@Test
 	public void bindingToFullYaml() throws IOException {
 		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
-		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
+		ProjectMetadataService documentationService = new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
 
 		assertEquals(3, documentationService.getProject("spring-framework")
 				.getProjectVersions().size());
@@ -57,7 +57,7 @@ public class ProjectMetadataServiceTests {
 			}
 		});
 		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
-		ProjectMetadataService documentationService = new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
+		ProjectMetadataService documentationService = new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
 
 		StringBuilder builder = new StringBuilder();
 		for (Project project : documentationService.getProjects()) {

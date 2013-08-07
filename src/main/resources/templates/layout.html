@@ -42,7 +42,7 @@
             <a th:href="@{/guides}" href="guides/index.html">Guides</a>
           </li>
           <li th:class="${beans.uih.navClass(navSection?:'','projects')}">
-            <a th:href="@{/projects}" href="projects/index.html">Projects</a>
+            <a th:href="${beans.uih.ghPagesUrl}" href="projects/index.html">Projects</a>
           </li>
           <li th:class="${beans.uih.navClass(navSection?:'','blog')}">
             <a th:href="@{/blog}" href="pages/blog.html">Blog</a>

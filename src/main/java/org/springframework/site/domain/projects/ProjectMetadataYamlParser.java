@@ -11,8 +11,16 @@ import java.util.Map;
 
 public class ProjectMetadataYamlParser {
 
-	public Map<String, List<Project>> parse(InputStream projectMetadataYml) {
+	public ProjectMetadataService createServiceFromYaml(InputStream projectMetadataYml) {
 		Map metadata = (Map) new Yaml().load(projectMetadataYml);
+		return new ProjectMetadataService(parseProjects(metadata), parseGhPagesBaseUrl(metadata));
+	}
+
+	private String parseGhPagesBaseUrl(Map metadata) {
+		return (String) ((Map)metadata.get("variables")).get("ghPagesBaseUrl");
+	}
+
+	private Map<String, List<Project>> parseProjects(Map metadata) {
 		ProjectParser projectParser = new ProjectParser(metadata);
 		Map<String, List> projectsYaml = (Map) metadata.get("projects");
 		Map<String, List<Project>> projects = new HashMap<>();

@@ -15,12 +15,6 @@
  */
 package org.springframework.site.web.configuration;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.servlet.Filter;
-import javax.sql.DataSource;
-
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
@@ -43,6 +37,11 @@ import org.springframework.site.web.blog.feed.BlogPostAtomViewer;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
+
+import javax.servlet.Filter;
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.InputStream;
 
 @EnableAutoConfiguration
 @Configuration
@@ -97,9 +96,8 @@ public class ApplicationConfiguration {
 
 	@Bean
 	public ProjectMetadataService projectMetadataService() throws IOException {
-		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass())
-				.getInputStream();
-		return new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
+		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
+		return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
 	}
 
 	// http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html#filterparams

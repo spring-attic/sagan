@@ -63,7 +63,7 @@ public class IndexerConfiguration {
 	public ProjectMetadataService projectMetadataService() throws IOException {
 		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass())
 				.getInputStream();
-		return new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
+		return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
 	}
 
 	@Bean

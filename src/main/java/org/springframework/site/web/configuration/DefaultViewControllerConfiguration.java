@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.site.domain.StaticPageMapper;
+import org.springframework.site.domain.projects.ProjectMetadataService;
 import org.springframework.site.web.NavSection;
 import org.springframework.site.web.ViewRenderingHelper;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -70,6 +71,7 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 			public void postHandle(HttpServletRequest request,
 					HttpServletResponse response, Object handler,
 					ModelAndView modelAndView) throws Exception {
+
 				if (handler instanceof HandlerMethod) {
 					HandlerMethod handlerMethod = (HandlerMethod) handler;
 					NavSection navSection = handlerMethod.getBean().getClass()

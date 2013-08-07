@@ -6,10 +6,12 @@ import java.util.Map;
 
 public class ProjectMetadataService {
 	private final Map<String, List<Project>> projectCategoryMap;
+	private final String ghPagesBaseUrl;
 	private final List<Project> projects;
 
-	public ProjectMetadataService(Map<String, List<Project>> projectCategoryMap) {
+	public ProjectMetadataService(Map<String, List<Project>> projectCategoryMap, String ghPagesBaseUrl) {
 		this.projectCategoryMap = projectCategoryMap;
+		this.ghPagesBaseUrl = ghPagesBaseUrl;
 		this.projects = new ArrayList<>();
 		for (Map.Entry<String, List<Project>> projectCategory : projectCategoryMap
 				.entrySet()) {
@@ -32,5 +34,9 @@ public class ProjectMetadataService {
 			}
 		}
 		return null;
+	}
+
+	public String getGhPagesBaseUrl() {
+		return ghPagesBaseUrl;
 	}
 }

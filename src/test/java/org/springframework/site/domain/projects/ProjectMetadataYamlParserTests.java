@@ -7,38 +7,37 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ProjectMetadataYamlParserTests {
 
-	private Map<String,List<Project>> projects;
+	private ProjectMetadataYamlParser parser;
+	private InputStream yamlInputStream;
+	private ProjectMetadataService service;
 
 	@Before
 	public void setUp() throws Exception {
-		InputStream yaml = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
-		ProjectMetadataYamlParser parser = new ProjectMetadataYamlParser();
-		projects = parser.parse(yaml);
+		yamlInputStream = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
+		parser = new ProjectMetadataYamlParser();
+		service = parser.createServiceFromYaml(yamlInputStream);
 	}
 
 	@Test
-	public void parseCategoriesIgnoresDiscardCategory() throws IOException {
-		assertThat(projects.size(), equalTo(3));
-		assertThat(projects.keySet(), containsInAnyOrder("active", "other", "attic"));
+	public void parsesGhPagesBaseUrl() throws IOException {
+		assertThat(service.getGhPagesBaseUrl(), equalTo("http://projects.springframework.io"));
 	}
 
 	@Test
 	public void categoriesHaveListOfProjects() throws IOException {
-		List<Project> active = projects.get("active");
+		List<Project> active = service.getProjectsForCategory("active");
 		assertThat(active.size(), equalTo(12));
 	}
 
 	@Test
 	public void projectWithCustomSiteAndRepo() throws IOException {
-		Project project =  projects.get("active").get(0);
+		Project project =  service.getProjectsForCategory("active").get(0);
 		assertThat(project.getId(), equalTo("spring-framework"));
 		assertThat(project.getName(), equalTo("Spring Framework"));
 		assertThat(project.getRepoUrl(), equalTo("http://www.example.com/repo/spring-framework"));
@@ -48,7 +47,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void projectWithDefaultSiteAndRepo() throws IOException {
-		Project project =  projects.get("active").get(2);
+		Project project =  service.getProjectsForCategory("active").get(2);
 		assertThat(project.getId(), equalTo("spring-framework-defaultsite"));
 		assertThat(project.getName(), equalTo("Spring Framework"));
 		assertThat(project.getRepoUrl(), equalTo("http://github.com/springframework/spring-framework-defaultsite"));
@@ -58,7 +57,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void projectWithNoSite() throws IOException {
-		Project project =  projects.get("active").get(1);
+		Project project =  service.getProjectsForCategory("active").get(1);
 		assertThat(project.getId(), equalTo("spring-framework-nosite"));
 		assertThat(project.getName(), equalTo("Spring Framework"));
 		assertThat(project.getRepoUrl(), equalTo("http://github.com/springframework/spring-framework-nosite"));
@@ -68,7 +67,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void projectsHasDocumentationWithCurrentVersionSet() throws IOException {
-		List<ProjectVersion> versionList = projects.get("active").get(0).getProjectVersions();
+		List<ProjectVersion> versionList = service.getProjectsForCategory("active").get(0).getProjectVersions();
 		assertThat(versionList.get(0).getFullName(), equalTo("4.0.0.M1"));
 		assertThat(versionList.get(0).isPreRelease(), equalTo(true));
 		assertThat(versionList.get(1).getFullName(), equalTo("3.2.3.RELEASE"));
@@ -79,7 +78,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void projectHasNoSupportedVersions() throws IOException {
-		List<Project> active = projects.get("other");
+		List<Project> active = service.getProjectsForCategory("other");
 		assertThat(active.size(), equalTo(1));
 		Project project = active.get(0);
 		assertThat(project.getProjectVersions().size(), equalTo(0));
@@ -87,7 +86,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void getSupportedReferenceDocumentVersions() {
-		List<ProjectVersion> docVersions = projects.get("active").get(0).getProjectVersions();
+		List<ProjectVersion> docVersions = service.getProjectsForCategory("active").get(0).getProjectVersions();
 		assertThat(docVersions.get(0).getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/4.0.0.M1/spring-framework-reference/html/"));
 		assertThat(docVersions.get(1).getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/3.2.3.RELEASE/spring-framework-reference/html/"));
 		assertThat(docVersions.get(2).getRefDocUrl(), equalTo("http://static.springsource.org/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/"));
@@ -95,7 +94,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void getSupportedApiDocsUrls() {
-		List<ProjectVersion> docVersions = projects.get("active").get(0).getProjectVersions();
+		List<ProjectVersion> docVersions = service.getProjectsForCategory("active").get(0).getProjectVersions();
 		assertThat(docVersions.get(0).getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/4.0.0.M1/javadoc-api/"));
 		assertThat(docVersions.get(1).getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/3.2.3.RELEASE/javadoc-api/"));
 		assertThat(docVersions.get(2).getApiDocUrl(), equalTo("http://static.springsource.org/spring/docs/3.1.4.RELEASE/javadoc-api/"));
@@ -103,7 +102,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void apiAndReferenceDocsUrlsCanBeOverridden() throws Exception {
-		Project project = projects.get("active").get(3);
+		Project project = service.getProjectsForCategory("active").get(3);
 		ProjectVersion version = project.getProjectVersions().get(0);
 		assertThat(version.getFullName(), equalTo("2.2.1.RELEASE"));
 		assertThat(version.isCurrent(), equalTo(true));
@@ -113,7 +112,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void apiAndReferenceDocsUrlsCanBeOverriddenInAMixedWay() throws Exception {
-		Project project = projects.get("active").get(4);
+		Project project = service.getProjectsForCategory("active").get(4);
 		ProjectVersion version = project.getProjectVersions().get(0);
 		assertThat(version.getFullName(), equalTo("2.2.1.RELEASE"));
 		assertThat(version.isCurrent(), equalTo(true));
@@ -129,7 +128,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void justApiDocsUrlCanBeOverridden() throws Exception {
-		Project project = projects.get("active").get(5);
+		Project project = service.getProjectsForCategory("active").get(5);
 		ProjectVersion version = project.getProjectVersions().get(0);
 		assertThat(version.getFullName(), equalTo("2.4.0.M1"));
 		assertThat(version.isPreRelease(), equalTo(true));
@@ -145,7 +144,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void justRefDocsUrlCanBeOverridden() throws Exception {
-		Project project = projects.get("active").get(6);
+		Project project = service.getProjectsForCategory("active").get(6);
 		ProjectVersion version = project.getProjectVersions().get(0);
 		assertThat(version.getFullName(), equalTo("2.4.0.M1"));
 		assertThat(version.isPreRelease(), equalTo(true));
@@ -161,7 +160,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void docsUrlCanBeFullHttp() throws Exception {
-		Project project = projects.get("active").get(7);
+		Project project = service.getProjectsForCategory("active").get(7);
 		ProjectVersion version = project.getProjectVersions().get(0);
 		assertThat(version.getFullName(), equalTo("2.4.0.RELEASE"));
 		assertThat(version.isCurrent(), equalTo(true));
@@ -171,7 +170,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void omittedDocsUrlsAreBuiltFromDefaults() throws Exception {
-		Project project = projects.get("active").get(8);
+		Project project = service.getProjectsForCategory("active").get(8);
 		ProjectVersion version = project.getProjectVersions().get(0);
 		assertThat(version.getFullName(), equalTo("2.4.0.RELEASE"));
 		assertThat(version.isCurrent(), equalTo(true));
@@ -181,7 +180,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void docsUrlsCanBeExplicitlyExcluded() throws Exception {
-		Project project = projects.get("active").get(9);
+		Project project = service.getProjectsForCategory("active").get(9);
 		ProjectVersion version = project.getProjectVersions().get(0);
 		assertThat(version.getFullName(), equalTo("2.4.0.RELEASE"));
 		assertThat(version.isCurrent(), equalTo(true));
@@ -197,7 +196,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void docsUrlsCanBeExplicitlyExcludedInOverride() throws Exception {
-		Project project = projects.get("active").get(10);
+		Project project = service.getProjectsForCategory("active").get(10);
 		ProjectVersion version = project.getProjectVersions().get(0);
 		assertThat(version.getFullName(), equalTo("2.4.0.RELEASE"));
 		assertThat(version.isCurrent(), equalTo(true));
@@ -213,7 +212,7 @@ public class ProjectMetadataYamlParserTests {
 
 	@Test
 	public void urlsInProjectsCanHaveVariables() throws Exception {
-		Project project = projects.get("active").get(11);
+		Project project = service.getProjectsForCategory("active").get(11);
 		assertThat(project.getSiteUrl(), equalTo("http://projects.springframework.io/foo/project-with-variables-in-urls/"));
 		assertThat(project.getRepoUrl(), equalTo("http://github.com/springframework/foo/project-with-variables-in-urls/"));
 

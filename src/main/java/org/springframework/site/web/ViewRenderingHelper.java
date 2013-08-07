@@ -1,6 +1,7 @@
 package org.springframework.site.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.site.domain.projects.ProjectMetadataService;
 import org.springframework.web.util.UrlPathHelper;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,9 @@ public class ViewRenderingHelper {
 	private final UrlPathHelper urlPathHelper = new UrlPathHelper();
 
 	private HttpServletRequest request;
+
+	@Autowired
+	private ProjectMetadataService projectMetadataService;
 
 	@Autowired
 	public void setRequest(HttpServletRequest request) {
@@ -34,6 +38,10 @@ public class ViewRenderingHelper {
 
 	public String path() {
 		return this.urlPathHelper.getPathWithinApplication(this.request);
+	}
+
+	public String getGhPagesUrl() {
+		return projectMetadataService.getGhPagesBaseUrl();
 	}
 
 }
