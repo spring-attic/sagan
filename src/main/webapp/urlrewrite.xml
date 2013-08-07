@@ -10,6 +10,12 @@
 -->
 <urlrewrite use-query-string="true">
     <rule>
+        <note>Support GGTS welcome page requests [#54276930]</note>
+        <condition name="host">www.springsource.org</condition>
+        <from>/ggts/welcome</from>
+        <to type="temporary-redirect" last="true">http://grails.org/products/ggts</to>
+    </rule>
+    <rule>
         <note>Support legacy STS welcome page requests [#54679580]</note>
         <condition name="host">www.springsource.org</condition>
         <from>/sts/welcome</from>
