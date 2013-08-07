@@ -2,8 +2,8 @@ package examples.indexer;
 
 
 import com.google.common.collect.Iterables;
+import integration.search.SearchServiceIntegrationTestLocal;
 import integration.search.SearchIndexSetup;
-import examples.search.SearchServiceIntegrationExamples;
 import io.searchbox.client.JestClient;
 import org.junit.After;
 import org.junit.Before;
@@ -37,7 +37,7 @@ import static org.hamcrest.Matchers.is;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {IndexerConfiguration.class,
-								 SearchServiceIntegrationExamples.IntegrationTestElasticSearchConfiguration.class },
+								 SearchServiceIntegrationTestLocal.IntegrationTestElasticSearchConfiguration.class },
 					  initializers = {ConfigFileApplicationContextInitializer.class,
 									  LoggingApplicationContextInitializer.class })
 @DirtiesContext

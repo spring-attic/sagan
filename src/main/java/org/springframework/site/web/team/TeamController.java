@@ -55,7 +55,7 @@ public class TeamController {
 	}
 
 
-	@RequestMapping(value = "/{memberId:\\w+}", method = {GET, HEAD})
+	@RequestMapping(value = "/{memberId}", method = {GET, HEAD})
 	public String showProfile(@PathVariable String memberId, Model model){
 		MemberProfile profile = teamService.fetchMemberProfile(memberId);
 		if (profile == null) {

@@ -74,4 +74,21 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
 		this.mockMvc.perform(get("/team/someguy"))
 				.andExpect(status().isNotFound());
 	}
+
+	@Test
+	public void getTeamMemberPageForNameWithDashes() throws Exception {
+		MemberProfile profile = new MemberProfile();
+		profile.setName("First Last");
+		profile.setGithubUsername("some-guy");
+		profile.setMemberId("some-guy");
+
+		teamRepository.save(profile);
+
+		this.mockMvc.perform(get("/team/some-guy"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html"))
+				.andExpect(content().string(containsString("First Last")))
+				.andExpect(content().string(containsString("some-guy")));
+	}
+
 }

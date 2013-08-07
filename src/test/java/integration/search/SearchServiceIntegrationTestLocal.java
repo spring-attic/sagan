@@ -1,6 +1,5 @@
-package examples.search;
+package integration.search;
 
-import integration.search.SearchIndexSetup;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.ClientConfig;
@@ -48,11 +47,11 @@ import static org.hamcrest.Matchers.not;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { ApplicationConfiguration.class,
-		SearchServiceIntegrationExamples.IntegrationTestElasticSearchConfiguration.class }, initializers = {
+		SearchServiceIntegrationTestLocal.IntegrationTestElasticSearchConfiguration.class }, initializers = {
 		ConfigFileApplicationContextInitializer.class,
 		LoggingApplicationContextInitializer.class })
 @DirtiesContext
-public class SearchServiceIntegrationExamples {
+public class SearchServiceIntegrationTestLocal {
 
 	public static class IntegrationTestElasticSearchConfiguration {
 
