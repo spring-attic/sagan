@@ -50,4 +50,38 @@ public class SearchFacet {
 	public String getLinkText() {
 		return String.format("%s (%d)", name, count);
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		SearchFacet that = (SearchFacet) o;
+
+		if (count != that.count) return false;
+		if (!facets.equals(that.facets)) return false;
+		if (!name.equals(that.name)) return false;
+		if (!path.equals(that.path)) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = path.hashCode();
+		result = 31 * result + name.hashCode();
+		result = 31 * result + count;
+		result = 31 * result + facets.hashCode();
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "SearchFacet{" +
+				"path='" + path + '\'' +
+				", name='" + name + '\'' +
+				", count=" + count +
+				", facets=" + facets +
+				'}';
+	}
 }

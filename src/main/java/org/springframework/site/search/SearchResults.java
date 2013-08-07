@@ -18,6 +18,17 @@ public class SearchResults {
 	}
 
 	public List<SearchFacet> getFacets() {
+		SearchFacet project = null;
+		for (SearchFacet facet : facets) {
+			if (facet.getName().equals("Projects")) {
+				project = facet;
+				break;
+			}
+		}
+
+		facets.remove(project);
+		facets.add(project);
+
 		return facets;
 	}
 
