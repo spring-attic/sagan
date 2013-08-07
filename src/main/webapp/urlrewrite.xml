@@ -28,6 +28,26 @@
         <to type="permanent-redirect" last="true">/tools/ggts</to>
     </rule>
     <rule>
+        <name>Case study PDFs</name>
+        <note>https://www.pivotaltracker.com/story/show/54370286
+        Temporarily serving case study PDFs from old drupal site (with a new name) until
+        we move everything over to the new assets S3 bucket (see
+        https://www.pivotaltracker.com/epic/show/749753)</note>
+        <condition name="host">www.springsource.org</condition>
+        <from>^(/files/uploads/.*)$</from>
+        <to type="temporary-redirect" last="true">http://drupal.springframework.io$1</to>
+    </rule>
+    <rule>
+        <name>Blog images</name>
+        <note>https://www.pivotaltracker.com/story/show/54370286
+        Temporarily serving blog images from old blog site (with a new name) until
+        we move everything over to the new assets S3 bucket (see
+        https://www.pivotaltracker.com/epic/show/749753)</note>
+        <condition name="host">blog.springsource.org</condition>
+        <from>^(/wp-content/uploads/.*)$</from>
+        <to type="temporary-redirect" last="true">http://wp.springframework.io$1</to>
+    </rule>
+    <rule>
         <note>Redirect all blog requests [#54767200]. Note that the new blog has the same
         date-based slug scheme, so most blog paths should redirect in a generic fashion</note>
         <condition name="host">blog.springsource.org</condition>
