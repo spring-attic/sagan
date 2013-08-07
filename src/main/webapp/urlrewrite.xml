@@ -19,25 +19,25 @@
         <note>Support legacy STS welcome page requests [#54679580]</note>
         <condition name="host">www.springsource.org</condition>
         <from>/sts/welcome</from>
-        <to type="permanent-redirect">/tools/sts/welcome</to>
+        <to type="permanent-redirect" last="true">/tools/sts/welcome</to>
     </rule>
     <rule>
         <note>Support inbound link from http://grails.org/products/ggts [#54277050]</note>
         <condition name="host">www.springsource.org</condition>
         <from>/groovy-grails-tool-suite-download</from>
-        <to type="permanent-redirect">/tools/ggts</to>
+        <to type="permanent-redirect" last="true">/tools/ggts</to>
     </rule>
     <rule>
         <note>Redirect all blog requests [#54767200]. Note that the new blog has the same
         date-based slug scheme, so most blog paths should redirect in a generic fashion</note>
         <condition name="host">blog.springsource.org</condition>
         <from>^(.*)$</from>
-        <to type="permanent-redirect">http://springframework.io/blog$1</to>
+        <to type="permanent-redirect" last="true">http://springframework.io/blog$1</to>
     </rule>
     <rule>
         <note>Redirect all www requests for all domains [#54747656]</note>
         <condition name="host">www.(.*)</condition>
         <from>^(.*)$</from>
-        <to type="permanent-redirect">http://springframework.io$1</to>
+        <to type="permanent-redirect" last="true">http://springframework.io$1</to>
     </rule>
 </urlrewrite>
