@@ -1,10 +1,9 @@
 package org.springframework.site.domain.guides;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.springframework.site.domain.services.GitHubService;
+import org.springframework.site.domain.services.github.GitHubService;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.web.client.RestClientException;
 
@@ -35,13 +34,11 @@ public class GitHubGettingStartedServiceTests {
 	private GitHubService gitHubService;
 
 	private GitHubGettingStartedService service;
-	private ObjectMapper mapper;
 
 	@Before
 	public void setup() throws IOException {
 		initMocks(this);
 
-		this.mapper = new ObjectMapper();
 		this.service = new GitHubGettingStartedService(this.gitHubService);
 	}
 
@@ -113,9 +110,7 @@ public class GitHubGettingStartedServiceTests {
 		byte[] bytes = new byte[]{'a'};
 		String imageName = "welcome.png";
 
-		given(
-				this.gitHubService.getImage(anyString(), eq(GUIDE_REPO_NAME),
-						eq(imageName))).willReturn(bytes);
+		given(this.gitHubService.getGuideImage(eq(GUIDE_REPO_NAME), eq(imageName))).willReturn(bytes);
 
 		byte[] result = this.service.loadImage(GUIDE_ID, imageName);
 
@@ -128,7 +123,7 @@ public class GitHubGettingStartedServiceTests {
 		String unknownImage = "uknown_image.png";
 
 		given(
-				this.gitHubService.getImage(anyString(), eq(GUIDE_REPO_NAME), eq(unknownImage))
+            this.gitHubService.getGuideImage(eq(GUIDE_REPO_NAME), eq(unknownImage))
 		).willThrow(RestClientException.class);
 
 		this.service.loadImage(GUIDE_ID, unknownImage);

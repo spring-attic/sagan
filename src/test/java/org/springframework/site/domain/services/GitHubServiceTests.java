@@ -1,132 +1,78 @@
 package org.springframework.site.domain.services;
 
+import org.apache.xerces.impl.dv.util.Base64;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatcher;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.site.domain.guides.GuideHtml;
-import org.springframework.social.github.api.GitHub;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestOperations;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.site.domain.guides.GuideRepo;
+import org.springframework.site.domain.services.github.CachingGitHubRestClient;
+import org.springframework.site.domain.services.github.GitHubService;
+import org.springframework.site.test.FixtureLoader;
+import org.springframework.social.github.api.GitHubRepo;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.verify;
 
+@RunWith(MockitoJUnitRunner.class)
 public class GitHubServiceTests {
 
-	private static final String CACHED_CONTENT = "<h1>cached document</h1>";
 	@Mock
-	GitHub gitHub;
-
-	@Mock
-	RestOperations restOperations;
-
-	CacheService cacheService = new InMemoryCacheService();
+	CachingGitHubRestClient gitHubRestClient;
+	private GitHubService service;
 
 	@Before
 	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
-		cacheService.cacheContent("/cached/path", "a cached etag", CACHED_CONTENT);
+		service = new GitHubService(gitHubRestClient, null);
 	}
 
 	@Test
-	@SuppressWarnings("unchecked")
-	public void convertRawFileToHtml_notCached_returnsContentFromGithub_andCaches() {
-		given(gitHub.restOperations()).willReturn(this.restOperations);
+	public void getRawFileAsHtml_fetchesRenderedHtmlFromGitHub() throws Exception {
+		given(gitHubRestClient.sendRequestForHtml("/path/to/html")).willReturn("<h1>Something</h1>");
 
-		String filePath = "/not_cached/path";
-		String htmlResponse = "<h1>this is a header</h1>";
-		String etag = "\"etagToCache\"";
-
-		stubResponseOK(htmlResponse, etag);
-
-		String html = getRawFileAsHtml(filePath);
-
-		verify(restOperations).exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), (Class<GuideHtml>) anyObject());
-
-		assertThat(html, is(htmlResponse));
-		assertThat(cacheService.getContentForPath("/not_cached/path"), is(htmlResponse));
-		assertThat(cacheService.getEtagForPath("/not_cached/path"), is(etag));
+		assertThat(service.getRawFileAsHtml("/path/to/html"), equalTo("<h1>Something</h1>"));
 	}
 
 	@Test
-	@SuppressWarnings("unchecked")
-	public void convertRawFileToHtml_isCached_andContentNotModified_returnsContentFromCache() {
-		given(gitHub.restOperations()).willReturn(this.restOperations);
+	public void getRepoInfo_fetchesGitHubRepos() {
+		String response = FixtureLoader.load("/fixtures/github/githubRepo.json");
 
-		String filePath = "/cached/path";
+		given(gitHubRestClient.sendRequestForJson("/repos/{user}/{repo}", "user", "repo")).willReturn(response);
 
-		stubResponseNotModified();
-
-		String html = getRawFileAsHtml(filePath);
-
-		ArgumentMatcher<HttpEntity> requestEntityEtagHeaderMatch = new ArgumentMatcher<HttpEntity>() {
-			@Override
-			public boolean matches(Object argument) {
-				HttpEntity entity = (HttpEntity) argument;
-				return entity.getHeaders().getIfNoneMatch().get(0).equals("a cached etag");
-			}
-		};
-
-		verify(this.restOperations).exchange(anyString(), (HttpMethod) anyObject(), argThat(requestEntityEtagHeaderMatch), (Class<GuideHtml>) anyObject());
-
-		assertThat(html, is(CACHED_CONTENT));
+		GitHubRepo repoInfo = service.getRepoInfo("user", "repo");
+		assertThat(repoInfo.getName(), equalTo("spring-boot"));
 	}
 
 	@Test
-	@SuppressWarnings("unchecked")
-	public void convertRawFileToHtml_isCached_andContentModified_returnsContentFromResponse_andCachesNewContent() {
-		given(gitHub.restOperations()).willReturn(this.restOperations);
+	public void renderToHtml_sendsMarkdownToGithub_returnsHtml() {
+		String response = "<h3>Title</h3>";
 
-		String filePath = "/cached/path";
-		String htmlResponse = "<h1>this is a header</h1>";
-		String etag = "\"etagToCache\"";
+		given(gitHubRestClient.sendPostRequestForHtml("/markdown/raw", "### Title")).willReturn(response);
 
-		stubResponseOK(htmlResponse, etag);
-
-		String html = getRawFileAsHtml(filePath);
-
-		verify(this.restOperations).exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), (Class<GuideHtml>) anyObject());
-
-		assertThat(html, is(htmlResponse));
-		assertThat(cacheService.getContentForPath("/cached/path"), is(htmlResponse));
-		assertThat(cacheService.getEtagForPath("/cached/path"), is(etag));
+		assertThat(service.renderToHtml("### Title"), equalTo(response));
 	}
 
-	private String getRawFileAsHtml(String filePath) {
-		return new GitHubService(gitHub, cacheService).getRawFileAsHtml(filePath);
+	@Test
+	public void getImage_fetchesImageFromGitHub() {
+		byte[] expected = {1, 2, 3};
+		String encoded = Base64.encode(expected);
+		String response = String.format("{\"content\":\"%s\"}", encoded);
+
+		given(gitHubRestClient.sendRequestForJson("/repos/springframework-meta/{guideId}/contents/images/{imageName}", "my-repo", "image.png")).willReturn(response);
+
+		assertThat(service.getGuideImage("my-repo", "image.png"), equalTo(expected));
 	}
 
-	private void stubResponseNotModified() {
-		ResponseEntity<GuideHtml> entity = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+	@Test
+	public void getGuideRepos_fetchesGuideReposGitHub() {
+		String response = FixtureLoader.load("/fixtures/github/githubRepoList.json");
 
-		Class<GuideHtml> guideHtmlClass = anyObject();
-		given(restOperations.exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), guideHtmlClass))
-				.willReturn(entity);
-	}
+		given(gitHubRestClient.sendRequestForJson("/path/to/guide/repos")).willReturn(response);
 
-	private void stubResponseOK(String htmlResponse, String etag) {
-		GuideHtml response = new GuideHtml(htmlResponse);
-
-		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-		headers.add("ETag", etag);
-
-		ResponseEntity<GuideHtml> entity = new ResponseEntity<>(response, headers, HttpStatus.OK);
-
-		Class<GuideHtml> guideHtmlClass = anyObject();
-		given(restOperations.exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), guideHtmlClass))
-				.willReturn(entity);
+		GuideRepo[] repos = service.getGuideRepos("/path/to/guide/repos");
+		assertThat(repos[0].getName(), equalTo("Spring-Integration-in-Action"));
 	}
 
 }

@@ -1,7 +1,7 @@
 package org.springframework.site.domain.understanding;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.services.GitHubService;
+import org.springframework.site.domain.services.github.GitHubService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 

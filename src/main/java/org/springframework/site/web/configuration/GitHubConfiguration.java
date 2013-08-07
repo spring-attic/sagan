@@ -5,11 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.site.domain.guides.GuideHtmlConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.site.domain.services.github.JsonStringConverter;
+import org.springframework.site.domain.services.github.MarkdownHtmlConverter;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.impl.GitHubTemplate;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +50,10 @@ public class GitHubConfiguration {
 
 		@Override
 		protected List<HttpMessageConverter<?>> getMessageConverters() {
-			List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
-			converters.add(new GuideHtmlConverter());
-			converters.addAll(super.getMessageConverters());
+			List<HttpMessageConverter<?>> converters = new ArrayList<>();
+			converters.add(new JsonStringConverter());
+			converters.add(new MarkdownHtmlConverter());
+			converters.add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
 			return converters;
 		}
 	}

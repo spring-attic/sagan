@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
 import org.springframework.site.domain.guides.GuideRepo;
-import org.springframework.site.domain.services.GitHubService;
+import org.springframework.site.domain.services.github.GitHubService;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.test.context.ContextConfiguration;
@@ -29,21 +29,18 @@ public class GitHubServiceIntegrationExamples {
 	@Test
 	public void testGuideRepoRequest() throws Exception {
 		GuideRepo[] guideRepos = gitHubService.getGuideRepos("/orgs/springframework-meta/repos?per_page=100");
-
 		assertThat(guideRepos.length, greaterThan(0));
 	}
 
 	@Test
 	public void getImage() {
-		byte[] imageBytes = gitHubService.getImage("/repos/springframework-meta/{guideId}/contents/src/main/resources/static/img/{imageName}", "springframework.org", "icon-spring-logo-green.png");
+		byte[] imageBytes = gitHubService.getGuideImage("gs-device-detection", "normal-browser.png");
 		assertThat(imageBytes.length, greaterThan(0));
 	}
 
 	@Test
 	public void rawFileAsHtml() {
 		String html = gitHubService.getRawFileAsHtml("/repos/springframework-meta/springframework.org/contents/README.md");
-		html = gitHubService.getRawFileAsHtml("/repos/springframework-meta/springframework.org/contents/README.md");
-
 		assertThat(Jsoup.parse(html).select("h1").text(), equalTo("springframework.org"));
 	}
 
@@ -56,7 +53,7 @@ public class GitHubServiceIntegrationExamples {
 	@Test
 	public void renderToHtml() {
 		String html = gitHubService.renderToHtml("Heading\n===");
-
 		assertThat(Jsoup.parse(html).select("h1").text(), equalTo("Heading"));
 	}
+
 }

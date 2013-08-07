@@ -7,13 +7,9 @@ import org.jsoup.nodes.Document;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.site.test.FixtureLoader;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestClientException;
-
-import java.io.InputStream;
-import java.nio.charset.Charset;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
@@ -33,12 +29,10 @@ public class UnderstandingGuidesTests extends IntegrationTestBase {
 
 	@Test
 	public void getExistingGuide() throws Exception {
-		InputStream stream = new ClassPathResource("/fixtures/understanding/amqp/README.html", getClass()).getInputStream();
-		String readmeHtml = StreamUtils.copyToString(stream, Charset.forName("UTF-8"));
+		String readmeHtml = FixtureLoader.load("/fixtures/understanding/amqp/README.html");
 		stubGitHubService.addRawFileMapping(".*/README.md", readmeHtml);
 
-		stream = new ClassPathResource("/fixtures/understanding/amqp/SIDEBAR.html", getClass()).getInputStream();
-		String sidebarHtml = StreamUtils.copyToString(stream, Charset.forName("UTF-8"));
+		String sidebarHtml = FixtureLoader.load("/fixtures/understanding/amqp/SIDEBAR.html");
 		stubGitHubService.addRawFileMapping(".*/SIDEBAR.md", sidebarHtml);
 
 		MvcResult response = this.mockMvc.perform(get("/understanding/amqp"))

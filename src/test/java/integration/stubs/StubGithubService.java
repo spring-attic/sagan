@@ -2,7 +2,7 @@ package integration.stubs;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.site.domain.guides.GuideRepo;
-import org.springframework.site.domain.services.GitHubService;
+import org.springframework.site.domain.services.github.GitHubService;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +56,7 @@ public class StubGithubService extends GitHubService {
 	}
 
 	@Override
-	public byte[] getImage(String imagesPath, String repoName, String imageName) {
+	public byte[] getGuideImage(String repoName, String imageName) {
 		return new byte[]{};
 	}
 

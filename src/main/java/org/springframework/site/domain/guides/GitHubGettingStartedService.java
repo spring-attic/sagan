@@ -3,7 +3,7 @@ package org.springframework.site.domain.guides;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.services.GitHubService;
+import org.springframework.site.domain.services.github.GitHubService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
@@ -17,7 +17,6 @@ public class GitHubGettingStartedService implements GettingStartedService {
 	private static final String REPOS_PATH = "/orgs/springframework-meta/repos?per_page=100";
 	private static final String README_PATH = "/repos/springframework-meta/%s/contents/README.md";
 	private static final String SIDEBAR_PATH = "/repos/springframework-meta/%s/contents/SIDEBAR.md";
-	private static final String IMAGES_PATH = "/repos/springframework-meta/{guideId}/contents/images/{imageName}";
 
 	private static final Log log = LogFactory.getLog(GitHubGettingStartedService.class);
 
@@ -85,7 +84,7 @@ public class GitHubGettingStartedService implements GettingStartedService {
 	@Override
 	public byte[] loadImage(String guideId, String imageName) {
 		try {
-			return this.gitHubService.getImage(IMAGES_PATH, getRepoNameFromGuideId(guideId), imageName);
+			return this.gitHubService.getGuideImage(getRepoNameFromGuideId(guideId), imageName);
 		} catch (RestClientException e) {
 			String msg = String.format("Could not load image '%s' for guide id '%s'", imageName, guideId);
 			log.warn(msg, e);
