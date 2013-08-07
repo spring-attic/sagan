@@ -26,8 +26,10 @@ public class SearchResults {
 			}
 		}
 
-		facets.remove(project);
-		facets.add(project);
+		if (project != null) {
+			facets.remove(project);
+			facets.add(project);
+		}
 
 		return facets;
 	}
