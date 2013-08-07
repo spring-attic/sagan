@@ -14,24 +14,27 @@ public class IndexScheduler {
 
 	private static final Log logger = LogFactory.getLog(IndexScheduler.class);
 
-	private final ProjectDocumentationIndexer projectDocumentationIndexer;
-	private final GettingStartedGuideIndexer gettingStartedGuideIndexer;
-	private final IndexerService indexerService;
-	private final ToolsIndexer toolsIndexer;
-	private final StaticPageIndexer staticPageIndexer;
-
 	@Autowired
-	public IndexScheduler(IndexerService indexerService, ProjectDocumentationIndexer projectDocumentationIndexer, GettingStartedGuideIndexer gettingStartedGuideIndexer, ToolsIndexer toolsIndexer, StaticPageIndexer staticPageIndexer) {
-		this.indexerService = indexerService;
-		this.projectDocumentationIndexer = projectDocumentationIndexer;
-		this.gettingStartedGuideIndexer = gettingStartedGuideIndexer;
-		this.toolsIndexer = toolsIndexer;
-		this.staticPageIndexer = staticPageIndexer;
-	}
+	private ProjectDocumentationIndexer projectDocumentationIndexer;
+	@Autowired
+	private GettingStartedGuideIndexer gettingStartedGuideIndexer;
+	@Autowired
+	private IndexerService indexerService;
+	@Autowired
+	private ToolsIndexer toolsIndexer;
+	@Autowired
+	private StaticPageIndexer staticPageIndexer;
+	@Autowired
+	private UnderstandingGuideIndexer understandingGuideIndexer;
 
 	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
 	public void indexGuides() {
 		indexerService.index(gettingStartedGuideIndexer);
+	}
+
+	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
+	public void indexUnderstandingGuides() {
+		indexerService.index(understandingGuideIndexer);
 	}
 
 	@Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")

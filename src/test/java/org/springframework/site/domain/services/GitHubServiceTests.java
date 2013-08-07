@@ -15,6 +15,8 @@ import org.springframework.social.github.api.GitHubRepo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GitHubServiceTests {
@@ -25,7 +27,7 @@ public class GitHubServiceTests {
 
 	@Before
 	public void setUp() throws Exception {
-		service = new GitHubService(gitHubRestClient, null);
+		service = new GitHubService(gitHubRestClient);
 	}
 
 	@Test
@@ -39,7 +41,7 @@ public class GitHubServiceTests {
 	public void getRepoInfo_fetchesGitHubRepos() {
 		String response = FixtureLoader.load("/fixtures/github/githubRepo.json");
 
-		given(gitHubRestClient.sendRequestForJson("/repos/{user}/{repo}", "user", "repo")).willReturn(response);
+		given(gitHubRestClient.sendRequestForJson(anyString(), eq("user"), eq("repo"))).willReturn(response);
 
 		GitHubRepo repoInfo = service.getRepoInfo("user", "repo");
 		assertThat(repoInfo.getName(), equalTo("spring-boot"));
@@ -49,7 +51,7 @@ public class GitHubServiceTests {
 	public void renderToHtml_sendsMarkdownToGithub_returnsHtml() {
 		String response = "<h3>Title</h3>";
 
-		given(gitHubRestClient.sendPostRequestForHtml("/markdown/raw", "### Title")).willReturn(response);
+		given(gitHubRestClient.sendPostRequestForHtml(anyString(), eq("### Title"))).willReturn(response);
 
 		assertThat(service.renderToHtml("### Title"), equalTo(response));
 	}
@@ -60,7 +62,7 @@ public class GitHubServiceTests {
 		String encoded = Base64.encode(expected);
 		String response = String.format("{\"content\":\"%s\"}", encoded);
 
-		given(gitHubRestClient.sendRequestForJson("/repos/springframework-meta/{guideId}/contents/images/{imageName}", "my-repo", "image.png")).willReturn(response);
+		given(gitHubRestClient.sendRequestForJson(anyString(), eq("my-repo"), eq("image.png"))).willReturn(response);
 
 		assertThat(service.getGuideImage("my-repo", "image.png"), equalTo(expected));
 	}
@@ -69,7 +71,7 @@ public class GitHubServiceTests {
 	public void getGuideRepos_fetchesGuideReposGitHub() {
 		String response = FixtureLoader.load("/fixtures/github/githubRepoList.json");
 
-		given(gitHubRestClient.sendRequestForJson("/path/to/guide/repos")).willReturn(response);
+		given(gitHubRestClient.sendRequestForJson(anyString())).willReturn(response);
 
 		GuideRepo[] repos = service.getGuideRepos("/path/to/guide/repos");
 		assertThat(repos[0].getName(), equalTo("Spring-Integration-in-Action"));

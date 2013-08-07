@@ -1,16 +1,16 @@
 package org.springframework.site.domain.services.github;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.site.domain.services.MarkdownService;
-import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -18,16 +18,16 @@ public class GitHubService implements MarkdownService {
 
 	public static final String API_URL_BASE = "https://api.github.com";
 	private final CachingGitHubRestClient gitHubRestClient;
-	private final GitHub gitHub;
 	private ObjectMapper objectMapper = new ObjectMapper();
 
-	private static final String GUIDE_IMAGES_PATH = "/repos/springframework-meta/{guideId}/contents/images/{imageName}";
+
+	private static final String REPO_CONTENTS_PATH = "/repos/springframework-meta/{repoId}/contents";
+	private static final String GUIDE_IMAGES_PATH =  REPO_CONTENTS_PATH + "/images/{imageName}";
 
 
 	@Autowired
-	public GitHubService(CachingGitHubRestClient cachingGitHubRestClient, GitHub gitHub) {
+	public GitHubService(CachingGitHubRestClient cachingGitHubRestClient) {
 		this.gitHubRestClient = cachingGitHubRestClient;
-		this.gitHub = gitHub;
 	}
 
 	@Override
@@ -70,12 +70,13 @@ public class GitHubService implements MarkdownService {
 		}
 	}
 
-	private <T> T postForObject(String path, Object request, Class<T> responseType, Object... uriVariables) {
-		return gitHub.restOperations().postForObject(API_URL_BASE + path, request, responseType, uriVariables);
-	}
-
-	private <T> T getForObject(String path, Class<T> responseType, Object... uriVariables) throws RestClientException {
-		return gitHub.restOperations().getForObject(API_URL_BASE + path, responseType, uriVariables);
+	public List<RepoContent> getRepoContents(String repoId) {
+		String jsonResponse = gitHubRestClient.sendRequestForJson(REPO_CONTENTS_PATH, repoId);
+		try {
+			return objectMapper.readValue(jsonResponse, new TypeReference<List<RepoContent>>(){});
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private String buildRepoUri(String path) {

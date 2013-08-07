@@ -1,4 +1,4 @@
-package integration.services;
+package examples.services;
 
 import org.jsoup.Jsoup;
 import org.junit.Test;
@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
 import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.site.domain.services.github.GitHubService;
+import org.springframework.site.domain.services.github.RepoContent;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -56,4 +59,9 @@ public class GitHubServiceIntegrationExamples {
 		assertThat(Jsoup.parse(html).select("h1").text(), equalTo("Heading"));
 	}
 
+	@Test
+	public void fetchRepoContents() throws Exception {
+		List<RepoContent> repoContents = gitHubService.getRepoContents("understanding");
+		assertThat(repoContents.size(), greaterThan(8));
+	}
 }

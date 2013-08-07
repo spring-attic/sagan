@@ -1,5 +1,6 @@
-package integration.search;
+package examples.search;
 
+import integration.search.SearchIndexSetup;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.ClientConfig;
@@ -47,12 +48,11 @@ import static org.hamcrest.Matchers.not;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { ApplicationConfiguration.class,
-		SearchServiceIntegrationTestLocal.IntegrationTestElasticSearchConfiguration.class }, initializers = {
+		SearchServiceIntegrationExamples.IntegrationTestElasticSearchConfiguration.class }, initializers = {
 		ConfigFileApplicationContextInitializer.class,
 		LoggingApplicationContextInitializer.class })
 @DirtiesContext
-// Ignore Elasticsearch tests on CI (and maven) by not ending class name with "Tests"
-public class SearchServiceIntegrationTestLocal {
+public class SearchServiceIntegrationExamples {
 
 	public static class IntegrationTestElasticSearchConfiguration {
 

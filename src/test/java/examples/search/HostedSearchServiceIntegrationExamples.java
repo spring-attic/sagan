@@ -21,6 +21,7 @@ import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchResult;
 import org.springframework.site.search.SearchService;
 import org.springframework.site.web.search.SearchEntryBuilder;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -44,10 +45,15 @@ import static org.hamcrest.Matchers.not;
 		LoggingApplicationContextInitializer.class })
 @ActiveProfiles("integration-test")
 @Configuration
+@DirtiesContext
 public class HostedSearchServiceIntegrationExamples {
 
 	@ClassRule
-	public static SetSystemProperty systemProperty = new SetSystemProperty("elasticsearch.client.endpoint", "https://qlmsjwfa.api.qbox.io");
+	public static SetSystemProperty elasticSearchEndpoint = new SetSystemProperty("elasticsearch.client.endpoint", "https://qlmsjwfa.api.qbox.io");
+
+	@ClassRule
+	public static SetSystemProperty searchIndexerDelay = new SetSystemProperty("search.indexer.delay", "60000000");
+
 
 	private final Pageable pageable = new PageRequest(0, 10);
 

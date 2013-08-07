@@ -3,6 +3,8 @@ package org.springframework.site.indexer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.understanding.UnderstandingGuide;
 import org.springframework.site.domain.understanding.UnderstandingGuidesService;
+import org.springframework.site.indexer.mapper.UnderstandingGuideMapper;
+import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 
@@ -19,20 +21,22 @@ public class UnderstandingGuideIndexer implements Indexer<UnderstandingGuide> {
 
 	@Override
 	public Iterable<UnderstandingGuide> indexableItems() {
-		return guidesService.getGuidesList();
+		return guidesService.getGuides();
 	}
 
 	@Override
 	public void indexItem(UnderstandingGuide indexable) {
+		SearchEntry entry = new UnderstandingGuideMapper().map(indexable);
+		searchService.saveToIndex(entry);
 	}
 
 	@Override
 	public String counterName() {
-		return null;
+		return "understanding";
 	}
 
 	@Override
 	public String getId(UnderstandingGuide indexable) {
-		return null;
+		return "understanding " + indexable.getSubject();
 	}
 }
