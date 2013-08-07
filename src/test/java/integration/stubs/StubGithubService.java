@@ -19,7 +19,7 @@ public class StubGithubService extends GitHubService {
 	private RuntimeException exceptionToBeThrown;
 
 	public StubGithubService() {
-		super(null);
+		super(null, null);
 	}
 
 	@Override

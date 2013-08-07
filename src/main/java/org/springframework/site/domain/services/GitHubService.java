@@ -1,12 +1,18 @@
 package org.springframework.site.domain.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.site.domain.guides.GuideHtml;
 import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 
 import java.util.Map;
@@ -15,11 +21,13 @@ import java.util.Map;
 public class GitHubService implements MarkdownService {
 
 	public static final String HOSTNAME = "https://api.github.com";
+	private final CacheService cacheService;
 	private GitHub gitHub;
 
 	@Autowired
-	public GitHubService(GitHub gitHub) {
+	public GitHubService(GitHub gitHub, CacheService cacheService) {
 		this.gitHub = gitHub;
+		this.cacheService = cacheService;
 	}
 
 	@Override
@@ -28,8 +36,21 @@ public class GitHubService implements MarkdownService {
 	}
 
 	public String getRawFileAsHtml(String path) {
-		GuideHtml response = getForObject(path, GuideHtml.class);
-		return response.getHtml();
+		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+
+		String etag = cacheService.getEtagForPath(path);
+		if (etag != null) {
+			headers.add("If-None-Match", etag);
+		}
+
+		ResponseEntity<GuideHtml> entity = gitHub.restOperations().exchange(HOSTNAME + path, HttpMethod.GET, new HttpEntity<>(headers), GuideHtml.class);
+
+		if (entity.getStatusCode().equals(HttpStatus.NOT_MODIFIED)) {
+			return cacheService.getContentForPath(path);
+		} else {
+			cacheService.cacheContent(path, entity.getHeaders().getETag(), entity.getBody().getHtml());
+			return entity.getBody().getHtml();
+		}
 	}
 
 	public GitHubRepo getRepoInfo(String githubUsername, String repoName) {
