@@ -109,6 +109,7 @@ public class ApplicationConfiguration {
 		reg.setFilter(rewriteFilter());
 		reg.addInitParameter("confReloadCheckInterval", "0");
 		reg.addInitParameter("confPath", "urlrewrite.xml");
+		reg.addInitParameter("logLevel", "DEBUG");
 		return reg;
 	}
 
