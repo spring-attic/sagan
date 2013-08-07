@@ -1,62 +1,111 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="layout">
+<html 
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorator="layout">
 <head>
     <title>SpringFramework - Team Member Profile</title>
 </head>
 <body>
-<div layout:fragment="header-content" class="header--content container-fluid" th:object="${profile}">
-
-    <div class="row-fluid">
-        <div class="span8">
-            <img th:src="*{avatarUrl}" class="pull-left avatar" th:unless="${#strings.isEmpty(profile.avatarUrl)}"/>
-            <h1 class="header--content-title" th:text="*{fullName}">
-                First Last
-            </h1>
-            <p class="header--content-subtitle" th:text="*{bio}">
-                Subttitle Ligula Risus Tristique Pharetra
-            </p>
+  <div layout:fragment="header-container"></div>
+  <div layout:fragment="content" class="container" th:object="${profile}">
+    <div class="team-map--wrapper">
+      <div class="team-member--container">
+        <div class="container-fluid">
+          <div  class="content--title">Spring Team</div>
+          <div class="row-fluid">
+            <div class="span4">
+              <img th:src="*{avatarUrl} + '?s=250'" class="team-member--avatar" th:unless="${#strings.isEmpty(profile.avatarUrl)}"/>
+            </div>
+            <div class="span8">
+              <div class="team-member-info--container">
+                <div class="team-member-social pull-right">
+                  <a class="team-member--social--icon twitter-small" th:href="'http://twitter.com/'+ ${profile.twitterUsername}" th:unless="${#strings.isEmpty(profile.twitterUsername)}"></a>
+                  <a class="team-member--social--icon github-small" th:href="'http://github.com/'+ ${profile.githubUsername}" th:unless="${#strings.isEmpty(profile.githubUsername)}"></a>
+                  <a class="team-member--social--icon speakerdeck-small" th:href="'http://speakerdeck.com/'+ ${profile.speakerdeckUsername}" th:unless="${#strings.isEmpty(profile.speakerdeckUsername)}"></a>
+                  <a class="team-member--social--icon lanyrd-small" th:href="'http://lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:unless="${#strings.isEmpty(profile.lanyrdUsername)}"></a>
+                </div>
+                <h1 class="team-member--name" th:text="*{fullName}">First Last</h1>
+                <div class="team-member--sub-info">
+                  <!-- REPLACE WITH PROFILE.TITLE -->
+                  <p>Some Cool Title *NR</p>
+                  <p th:text="*{location}" th:unless="${#strings.isEmpty(profile.location)}">Location</p>
+                </div>
+                <div class="team-member--bio" th:text="*{bio}">Subttitle Ligula Risus Tristique Pharetra</div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div id="map" class="placeholder-bg"></div>
+    </div> 
+    <div class="team-members--wrapper with-padding">
+      <div class="row-fluid">
         <div class="span4">
-            <ul>
-                <li th:text="*{location}" th:unless="${#strings.isEmpty(profile.location)}">Location</li>
-                <li th:if="*{twitterLink}">
-                    <a th:href="*{twitterLink.href}" th:text="*{twitterLink.text}">Twitter</a>
-                </li>
-                <li th:if="*{githubLink}">
-                    <a th:href="*{githubLink.href}" th:text="*{githubLink.text}">Github</a>
-                </li>
-                <li th:if="*{lanyrdLink}">
-                    <a th:href="*{lanyrdLink.href}" th:text="*{lanyrdLink.text}">Lanyrd</a>
-                </li>
-                <li th:if="*{speakerdeckLink}">
-                    <a th:href="*{speakerdeckLink.href}" th:text="*{speakerdeckLink.text}">Speakerdeck</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+          <div class="member-twitter--wrapper" th:object="${profile}">
+            <div class="member-twitter--header">
+              <div th:if="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-handle">@SpringSource</div>
+              <div th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-handle" th:text="'@'+${profile.twitterUsername}"></div>
 
-<div layout:fragment="content" class="container">
-    <div class="row">
-        <div id="content" class="span8">
-            <h2 th:inline="text">Blog Posts by [[${profile.name}]]</h2>
-            <ul class='posts'>
-                <li th:each="post : ${posts}">
-                    <a th:href="@{${post.path}}"><h2 th:text="${post.title}">This week in Spring</h2></a>
-                    <div class="byline">
-                        <span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
-                        <span class='category' th:text="${post.category}">Category</span>
-                        <span class='broadcast' th:if="${post.broadcast}">Broadcast</span>
-                    </div>
-                    <div th:utext="${post.renderedSummary}" class='summary'>This has been an interesting week.</div>
-                </li>
-            </ul>
-            <h2 th:inline="text" th:unless="${#strings.isEmpty(profile.videoEmbeds)}">Videos by [[${profile.name}]]</h2>
-            <div th:utext="${profile.videoEmbeds}"></div>
+              <a th:if="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fplatform.twitter.com%2Fwidgets%2Ffollow_button.1375828408.html&partner=undefined&region=follow_link&screen_name=springsource&tw_p=followbutton&variant=2.0">
+                <i class="icon-twitter"></i>
+                Follow
+              </a>
+
+              <a th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" th:href="'https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fplatform.twitter.com%2Fwidgets%2Ffollow_button.1375828408.html&partner=undefined&region=follow_link&screen_name=' + ${profile.twitterUsername} + '&tw_p=followbutton&variant=2.0'">
+                <i class="icon-twitter"></i>
+                Follow
+              </a>
+
+            </div>
+            <div class="member-twitter--body">
+              <div th:if="${#strings.isEmpty(profile.twitterUsername)}">
+                <a class="twitter-timeline" href="'https://twitter.com/springsource" data-widget-id="365190455274635264" data-screen-name="springsource" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
+              </div>
+              <a class="twitter-timeline" href="'https://twitter.com/springsource" data-widget-id="365190455274635264" th:attr="data-screen-name=${profile.twitterUsername}" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
+              <script>
+                !function(d,s,id){
+                  var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+                  if(!d.getElementById(id)){
+                    js=d.createElement(s);
+                    js.id=id;
+                    js.src=p+"://platform.twitter.com/widgets.js";
+                    fjs.parentNode.insertBefore(js,fjs);
+                  }}(document,"script","twitter-wjs");
+              </script>
+            </div>
+          </div>
         </div>
+        <div id="content" class="span8">
+          <div class="content-container--wrapper">
+            <div class="content-container--title" th:inline="text">Blog Posts by [[${profile.name}]]</div>
+            <div class='content-items--container posts'>
+              <div class="member-post--container" th:each="post : ${posts}">
+                <a th:href="@{${post.path}}"><h1 class="member-post--title" th:text="${post.title}">This week in Spring</h1></a>
+                <div class="byline">
+                  <!-- <span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
+                  <span class='category' th:text="${post.category}">Category</span>
+                  <span class='broadcast' th:if="${post.broadcast}">Broadcast</span> -->
+                </div>
+                <div th:utext="${post.renderedSummary}" class='member-post--summary'>This has been an interesting week.</div>
+                <div class="blog-preview--readmore">Read More...</div>
+              </div>
+            </div>
+          </div>
+          <div class="content-container--wrapper" th:unless="${#strings.isEmpty(profile.videoEmbeds)}">
+            <div class="content-container--title"th:inline="text">Videos by [[${profile.name}]]</div>
+            <div class="content-items--container">
+              <div class="embedded-video" th:utext="${profile.videoEmbeds}"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+
 </body>
+<script>
+  $("iframe.twitter-timeline.twitter-timeline-rendered html body").css("background-color", "red")
+
+</script>
 </html>

@@ -8,6 +8,10 @@
   height: 425px;
   border-bottom: 1px solid #34302d;
 }
+.team-map--wrapper #map.placeholder-bg {
+  background: url("../img/carousel-laptop-bg.png") no-repeat;
+  background-size: cover;
+}
 .team-map--wrapper .team-map--container {
   position: absolute;
   z-index: 600;
@@ -36,6 +40,50 @@
 .team-map--wrapper .team-map--container .team-map--subtitle.subtitle-bottom {
   padding-top: 0;
 }
+.team-map--wrapper .team-member--container {
+  position: absolute;
+  z-index: 600;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 80px;
+}
+.team-map--wrapper .team-member--container .content--title {
+  color: #ebf1e7;
+}
+.team-map--wrapper .team-member--container .team-member--avatar {
+  border: 10px solid rgba(52, 48, 45, 0.75);
+}
+.team-map--wrapper .team-member--container .team-member-info--container {
+  padding: 40px;
+  background-color: rgba(52, 48, 45, 0.75);
+  color: #ebf1e7;
+  height: 190px;
+}
+.team-map--wrapper .team-member--container .team-member-info--container .team-member-social .team-member--social--icon {
+  opacity: 0.8;
+  margin-right: 10px;
+}
+.team-map--wrapper .team-member--container .team-member-info--container .team-member-social .team-member--social--icon:last-child {
+  margin: 0;
+}
+.team-map--wrapper .team-member--container .team-member-info--container .team-member--name {
+  color: #ebf1e7;
+  line-height: 24px;
+}
+.team-map--wrapper .team-member--container .team-member-info--container .team-member--sub-info {
+  margin-top: 6px;
+}
+.team-map--wrapper .team-member--container .team-member-info--container .team-member--sub-info p {
+  font-size: 14px;
+  line-height: 21px;
+  color: white;
+}
+.team-map--wrapper .team-member--container .team-member-info--container .team-member--bio {
+  margin-top: 20px;
+  color: #ebf1e7;
+  max-height: 120px;
+  overflow: hidden;
+}
 
 .team-members--wrapper {
   margin-top: 326px;
@@ -53,8 +101,6 @@
 }
 .team-members--wrapper .team-member--container .team-member--avatar img {
   display: inline-block;
-  width: 153px;
-  height: 153px;
   margin-right: 13px;
 }
 .team-members--wrapper .team-member--container .team-member--info {
@@ -97,7 +143,39 @@
 .team-members--wrapper .team-member--container .team-member--info .team-member--social {
   margin-top: 12px;
 }
-.team-members--wrapper .team-member--container .team-member--info .team-member--social .team-member--social--icon {
+.team-members--wrapper .content-items--container {
+  padding: 40px;
+}
+.team-members--wrapper .member-post--container .member-post--title {
+  margin-top: 40px;
+}
+.team-members--wrapper .member-post--container .member-post--summary p {
+  font-size: 14px;
+  line-height: 20px;
+  margin: 10px 0 20px;
+}
+.team-members--wrapper .member-post--container .member-post--summary p:first-child {
+  margin: 20px 0 10px;
+}
+.team-members--wrapper .member-post--container:first-child {
+  border-bottom: 1px solid white;
+  padding-bottom: 40px;
+}
+.team-members--wrapper .member-post--container:first-child .member-post--title {
+  margin-top: 0;
+}
+.team-members--wrapper .blog-preview--readmore {
+  color: #5fa134;
+  text-transform: uppercase;
+}
+.team-members--wrapper .blog-preview--readmore:hover {
+  text-decoration: underline;
+}
+.team-members--wrapper.with-padding {
+  padding-top: 100px;
+}
+
+.team-member--social--icon {
   width: 24px;
   height: 24px;
   display: inline-block;
@@ -105,53 +183,78 @@
   margin-right: 5px;
   background-image: url("../img/iconsprite.png");
 }
-.team-members--wrapper .team-member--container .team-member--info .team-member--social .team-member--social--icon.twitter-small {
+.team-member--social--icon.twitter-small {
   background-position: -314px -452px;
 }
-.team-members--wrapper .team-member--container .team-member--info .team-member--social .team-member--social--icon.twitter-small:hover {
+.team-member--social--icon.twitter-small:hover {
   background-position: -314px -486px;
 }
-.team-members--wrapper .team-member--container .team-member--info .team-member--social .team-member--social--icon.github-small {
+.team-member--social--icon.github-small {
   background-position: -344px -452px;
 }
-.team-members--wrapper .team-member--container .team-member--info .team-member--social .team-member--social--icon.github-small:hover {
+.team-member--social--icon.github-small:hover {
   background-position: -344px -486px;
 }
-.team-members--wrapper .team-member--container .team-member--info .team-member--social .team-member--social--icon.speakerdeck-small {
+.team-member--social--icon.speakerdeck-small {
   background-position: -374px -452px;
 }
-.team-members--wrapper .team-member--container .team-member--info .team-member--social .team-member--social--icon.speakerdeck-small:hover {
+.team-member--social--icon.speakerdeck-small:hover {
   background-position: -374px -486px;
 }
-.team-members--wrapper .team-member--container .team-member--info .team-member--social .team-member--social--icon.lanyrd-small {
+.team-member--social--icon.lanyrd-small {
   background-position: -284px -452px;
 }
-.team-members--wrapper .team-member--container .team-member--info .team-member--social .team-member--social--icon.lanyrd-small:hover {
+.team-member--social--icon.lanyrd-small:hover {
   background-position: -284px -486px;
 }
-.team-members--wrapper .team-member--container .team-member--info .team-member--social .team-member--social--icon:last-child {
+.team-member--social--icon:last-child {
   margin-right: 0;
 }
 
-ul.team-members {
-  margin: 50px 0 0 0;
+.member-twitter--wrapper {
+  width: 270px;
+  border: 1px solid #34302d;
 }
-ul.team-members li {
-  list-style: none;
+.member-twitter--wrapper .member-twitter--header {
+  background-color: #34302d;
+  padding: 15px 20px;
+}
+.member-twitter--wrapper .member-twitter--header .twitter-handle {
+  color: #eeeeee;
   display: inline-block;
-  vertical-align: top;
-  width: 180px;
-  margin-bottom: 20px;
 }
-ul.team-members li a {
-  color: black;
+.member-twitter--wrapper .member-twitter--header .twitter-follow-btn {
+  border: 2px solid #6db33f;
+  color: #eeeeee;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 6px 9px;
+  float: right;
+  margin-top: -4px;
+  transition: background-color 0.15s;
+  -webkit-transition: background-color 0.15s;
+  -moz-transition: background-color 0.15s;
+  -ms-transition: background-color 0.15s;
+  -o-transition: background-color 0.15s;
 }
-ul.team-members li a:hover {
+.member-twitter--wrapper .member-twitter--header .twitter-follow-btn .icon-twitter {
+  color: #d4d4d6;
+  margin-right: 3px;
+}
+.member-twitter--wrapper .member-twitter--header .twitter-follow-btn:hover {
+  background-color: #6db33f;
   text-decoration: none;
+  color: white;
 }
-ul.team-members li .team-member-name {
-  font-weight: bold;
+.member-twitter--wrapper .member-twitter--header .twitter-follow-btn:hover .icon-twitter {
+  color: white;
 }
-ul.team-members li .team-member-location {
-  font-size: 0.9em;
+.member-twitter--wrapper .member-twitter--header .twitter-follow-btn:active {
+  background-color: #6db33f;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  border: none;
+  padding: 8px 11px;
+}
+.member-twitter--wrapper .member-twitter--body {
+  padding: 0 20px;
 }

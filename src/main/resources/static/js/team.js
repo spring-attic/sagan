@@ -11,7 +11,7 @@ $(document).ready(function () {
     for (var i = 0; i < length; i++) {
         teamLocation = teamLocations[i];
 
-        var element = $('ul.team-members').find("[data-member-id='" + teamLocation.memberId + "']");
+        var element = $('.team-members--wrapper').find("[data-member-id='" + teamLocation.memberId + "']");
         if (element) {
             var marker = L.marker([teamLocation.latitude, teamLocation.longitude], {title: teamLocation.name});
             marker.bindPopup(element.html());

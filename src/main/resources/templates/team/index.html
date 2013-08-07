@@ -32,7 +32,7 @@
     <div class="team-members--wrapper">
       <div class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.memberId}">
         <a th:href="@{'/team/' + ${profile.memberId}}" class="team-member--avatar">
-          <img th:src="${profile.avatarUrl}" />
+          <img th:src="${profile.avatarUrl} + '?s=153'" />
         </a>
         <div class="team-member--info">
           <a th:href="@{'/team/' + ${profile.memberId}}" class="team-member--name" th:text="${profile.name}">Member Name</a>
@@ -41,10 +41,10 @@
             <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
           </div>
           <div class="team-member--social">
-            <a class="team-member--social--icon twitter-small" th:href="'http://twitter.com/'+ ${profile.twitterUsername}" th:unless="${#lists.isEmpty(profile.twitterUsername)}"></a>
-            <a class="team-member--social--icon github-small" th:href="'http://github.com/'+ ${profile.githubUsername}" th:unless="${#lists.isEmpty(profile.githubUsername)}"></a>
-            <a class="team-member--social--icon speakerdeck-small" th:href="'http://speakerdeck.com/'+ ${profile.speakerdeckUsername}" th:unless="${#lists.isEmpty(profile.speakerdeckUsername)}"></a>
-            <a class="team-member--social--icon lanyrd-small" th:href="'http://lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:unless="${#lists.isEmpty(profile.lanyrdUsername)}"></a>
+            <a class="team-member--social--icon twitter-small" th:href="'http://twitter.com/'+ ${profile.twitterUsername}" th:unless="${#strings.isEmpty(profile.twitterUsername)}"></a>
+            <a class="team-member--social--icon github-small" th:href="'http://github.com/'+ ${profile.githubUsername}" th:unless="${#strings.isEmpty(profile.githubUsername)}"></a>
+            <a class="team-member--social--icon speakerdeck-small" th:href="'http://speakerdeck.com/'+ ${profile.speakerdeckUsername}" th:unless="${#strings.isEmpty(profile.speakerdeckUsername)}"></a>
+            <a class="team-member--social--icon lanyrd-small" th:href="'http://lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:unless="${#strings.isEmpty(profile.lanyrdUsername)}"></a>
           </div>
         </div>
       </div>

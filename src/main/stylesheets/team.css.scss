@@ -24,6 +24,10 @@ $icon-sprite: url("../img/iconsprite.png");
   #map {
     height: 425px;
     border-bottom: 1px solid $black-brown;
+    &.placeholder-bg {
+      background: url("../img/carousel-laptop-bg.png") no-repeat;
+      background-size: cover;
+    }
   }
   .team-map--container {
     position: absolute;
@@ -53,7 +57,55 @@ $icon-sprite: url("../img/iconsprite.png");
       }
     }
   }
+  .team-member--container {
+    position: absolute;
+    z-index: 600;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 80px;
+    .content--title {
+      color: #ebf1e7;
+    }
+    .team-member--avatar {
+      border: 10px solid rgba(52, 48, 45, 0.75);
+    }
+    .team-member-info--container {
+      padding: 40px;
+      background-color: rgba(52, 48, 45, 0.75); 
+      color: #ebf1e7;
+      height: 190px;
+      .team-member-social {
+        .team-member--social--icon {
+          opacity: 0.8;
+          margin-right: 10px;
+          &:last-child {
+            margin: 0;
+          }
+        }
+      }
+      .team-member--name {
+        color: #ebf1e7;
+        line-height: 24px;
+      }
+      .team-member--sub-info {
+        margin-top: 6px;
+        p {
+          font-size: 14px;
+          line-height: 21px;
+          color: white;
+        }
+      }
+      .team-member--bio {
+        margin-top: 20px;
+        color: #ebf1e7;
+        max-height: 120px;
+        overflow: hidden;
+      }
+    }
+  }
 }
+
+
 
 .team-members--wrapper {
   margin-top: 326px;
@@ -68,8 +120,6 @@ $icon-sprite: url("../img/iconsprite.png");
       display: inline-block;
       img {
         display: inline-block;
-        width: 153px;
-        height: 153px;
         margin-right: 13px;
       }
     }
@@ -111,67 +161,128 @@ $icon-sprite: url("../img/iconsprite.png");
       }
       .team-member--social {
         margin-top: 12px;
-        .team-member--social--icon {
-          width: 24px;
-          height: 24px;
-          display: inline-block;
-          float: left;
-          margin-right: 5px;
-          background-image: $icon-sprite;
-          &.twitter-small {
-            background-position: -314px -452px;
-            &:hover {
-              background-position: -314px -486px;
-            }
-          }
-          &.github-small {
-            background-position: -344px -452px;
-            &:hover {
-              background-position: -344px -486px;
-            }
-          }
-          &.speakerdeck-small {
-            background-position: -374px -452px;
-            &:hover {
-              background-position: -374px -486px;
-            }
-          }
-          &.lanyrd-small {
-            background-position: -284px -452px;
-            &:hover {
-              background-position: -284px -486px;
-            }
-          }
-          &:last-child {
-            margin-right: 0;
-          }
+      }
+    }
+  }
+  .content-items--container  {
+    padding: 40px;
+  }
+  .member-post--container {
+    .member-post--title {
+      margin-top: 40px;
+      
+    }
+    .member-post--summary p {
+      font-size: 14px;
+      line-height: 20px;
+      margin: 10px 0 20px;
+      &:first-child {
+        margin: 20px 0 10px;
+      }
+    }
+    &:first-child {
+      border-bottom: 1px solid white;
+      padding-bottom: 40px;
+      .member-post--title {
+        margin-top: 0;
+      }
+    }    
+  }
+
+  .blog-preview--readmore {
+    color: $link-green;
+    text-transform: uppercase;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &.with-padding {
+    padding-top: 100px;
+  }
+}
+
+.team-member--social--icon {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  float: left;
+  margin-right: 5px;
+  background-image: $icon-sprite;
+  &.twitter-small {
+    background-position: -314px -452px;
+    &:hover {
+      background-position: -314px -486px;
+    }
+  }
+  &.github-small {
+    background-position: -344px -452px;
+    &:hover {
+      background-position: -344px -486px;
+    }
+  }
+  &.speakerdeck-small {
+    background-position: -374px -452px;
+    &:hover {
+      background-position: -374px -486px;
+    }
+  }
+  &.lanyrd-small {
+    background-position: -284px -452px;
+    &:hover {
+      background-position: -284px -486px;
+    }
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+
+.member-twitter--wrapper {
+  width: 270px;
+  border: 1px solid $black-brown;
+  .member-twitter--header {
+    background-color: $black-brown;
+    padding: 15px 20px;
+    .twitter-handle {
+      color: $off-white;
+      display: inline-block;
+    }
+    .twitter-follow-btn {
+      border: 2px solid $green;
+      color: $off-white;
+      font-size: 12px;
+      line-height: 12px;
+      padding: 6px 9px;
+      float: right;
+      margin-top: -4px;
+      transition: background-color 0.15s;
+      -webkit-transition: background-color 0.15s;
+      -moz-transition: background-color 0.15s;
+      -ms-transition: background-color 0.15s;
+      -o-transition: background-color 0.15s;
+      .icon-twitter {
+        color: #d4d4d6;
+        margin-right: 3px;
+      }
+      &:hover {
+        background-color: $green;
+        text-decoration: none;
+        color: white;
+        .icon-twitter {
+          color: white;
         }
       }
-    }
-  }
-}
-
-ul.team-members {
-  margin: 50px 0 0 0;
-  li {
-    list-style: none;
-    display: inline-block;
-    vertical-align: top;
-    width: 180px;
-    margin-bottom: 20px;
-    a {
-      color: black;
-      &:hover {
-        text-decoration: none;
+      &:active {
+        background-color: $green;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        border: none;
+        padding: 8px 11px;
       }
     }
-
-    .team-member-name {
-      font-weight: bold;
-    }
-
-    .team-member-location {
-      font-size: 0.9em;
-    }
+  }
+  .member-twitter--body {
+    padding: 0 20px;
   }
 }
+

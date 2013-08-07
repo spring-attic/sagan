@@ -10,19 +10,7 @@
 
 .documentation--body {
   margin: 40px 0;
-  border: 1px solid #34302d;
   width: auto;
-}
-.documentation--body .documentation--section-title {
-  font-size: 14px;
-  line-height: 14px;
-  text-transform: uppercase;
-  background-color: #34302D;
-  color: #FFF;
-  padding: 18px 0;
-  width: 327px;
-  text-align: center;
-  margin: 0;
 }
 .documentation--body .documentation-item--wrapper {
   padding: 20px;

@@ -669,34 +669,6 @@ input.floating-input {
   }
 }
 
-
-
-
-// OPENS AND CLOSES DOCUMENTATION DROPDOWN
-// .js-documentation--item {
-//   .item--dropdown {
-//     display: none;
-//   }
-//   &.js-open {
-//     z-index: 801;
-//     .item--title {
-//       color: #f1f1f1;
-//       background-color: $green;
-//       position: relative;
-//       z-index: 802;
-//     }
-//     .item--icon {
-//       color: #dddddd;
-//       background-color: $black-brown;
-//       position: relative;
-//       z-index: 803;
-//     }
-//     .item--dropdown {
-//       display: block;
-//     }
-//   }
-// }
-
 .item--dropdown {
   position: absolute;
   background-color: $black-brown;
@@ -799,6 +771,28 @@ input.floating-input {
         float: right;
       }
     }
+  }
+}
+
+.content-container--wrapper {
+  border: 1px solid #34302D;
+  margin-top: -1px;
+  &:first-child {
+    margin: 0;
+  }
+  .content-container--title {
+    font-size: 14px;
+    line-height: 14px;
+    text-transform: uppercase;
+    background-color: #34302D;
+    color: #FFF;
+    padding: 18px 0;
+    width: 327px;
+    text-align: center;
+    margin: 0;
+  }
+  .content-items--container {
+    padding: 20px;
   }
 }
 
