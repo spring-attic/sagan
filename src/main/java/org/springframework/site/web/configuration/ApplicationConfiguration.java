@@ -107,9 +107,9 @@ public class ApplicationConfiguration {
 	public FilterRegistrationBean rewriteFilterConfig() {
 		FilterRegistrationBean reg = new FilterRegistrationBean();
 		reg.setFilter(rewriteFilter());
-		reg.addInitParameter("confReloadCheckInterval", "0");
 		reg.addInitParameter("confPath", "urlrewrite.xml");
-		reg.addInitParameter("logLevel", "DEBUG");
+		reg.addInitParameter("confReloadCheckInterval", "-1");
+		reg.addInitParameter("logLevel", "WARN");
 		return reg;
 	}
 
