@@ -17,6 +17,8 @@ public class SearchEntry {
 
 	private String title;
 
+	private String subTitle;
+
 	private List<String> facetPaths = new ArrayList<>();
 
 	private boolean current = true;
@@ -49,6 +51,14 @@ public class SearchEntry {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
 	}
 
 	public Date getPublishAt() {

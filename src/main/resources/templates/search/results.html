@@ -19,9 +19,7 @@
 				<div class="search-result" th:each="result : ${results}">
 					<a th:href="@{${result.path}}" th:text="${result.title}" class="search-result--title">This week in Spring</a>
 					<div class="metadata">
-						<span class="badge search-result--type" th:text="${result.type}">apiDoc</span>
-						<span class="badge search-result--project" th:text="${result.projectId}" th:if="${result.projectId}">spring-framework</span>
-						<span class="badge search-result--version" th:text="${result.version}" th:if="${result.version}">1.0.0.M1</span>
+						<span class="badge search-result--subtitle" th:text="${result.subTitle}" th:if="${result.subTitle}">Blog Post</span>
 					</div>
 					<div th:utext="${result.displayText}" class='search-result--summary'>This has been an interesting week.</div>
 					<div class="search-result--path" th:text="${result.path}">/path/to/result</div>

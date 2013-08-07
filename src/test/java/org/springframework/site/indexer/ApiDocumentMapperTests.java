@@ -18,7 +18,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class ApiDocumentMapperTests {
 
 	private Project project = new Project("spring",
-			"Spring",
+			"Spring Project",
 			"http://www.example.com/repo/spring-framework",
 			"http://www.example.com/spring-framework",
 			Collections.<ProjectVersion>emptyList());
@@ -27,25 +27,32 @@ public class ApiDocumentMapperTests {
 	private ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, version);
 
 	@Test
-	public void mapOlderJdkApiDoc() throws Exception {
+	public void mapOlderJdkApiDocContent() throws Exception {
 		InputStream html = new ClassPathResource("/fixtures/apidocs/apiDocument.html", getClass()).getInputStream();
 		Document document = Jsoup.parse(html, "UTF-8", "http://example.com/docs");
 
 		SearchEntry searchEntry = apiDocumentMapper.map(document);
 		assertThat(searchEntry.getRawContent(), equalTo("SomeClass"));
-		assertThat(searchEntry.getVersion(), equalTo("3.2.1.RELEASE"));
-		assertThat(searchEntry.getProjectId(), equalTo(project.getId()));
 	}
 
 	@Test
-	public void mapJdk7ApiDoc() throws Exception {
+	public void mapJdk7ApiDocContent() throws Exception {
 		InputStream html = new ClassPathResource("/fixtures/apidocs/jdk7javaDoc.html", getClass()).getInputStream();
 		Document document = Jsoup.parse(html, "UTF-8", "http://example.com/docs");
 
 		SearchEntry searchEntry = apiDocumentMapper.map(document);
 		assertThat(searchEntry.getRawContent(), equalTo(document.select(".block").text()));
+	}
+
+	@Test
+	public void mapApiDoc() throws Exception {
+		InputStream html = new ClassPathResource("/fixtures/apidocs/jdk7javaDoc.html", getClass()).getInputStream();
+		Document document = Jsoup.parse(html, "UTF-8", "http://example.com/docs");
+
+		SearchEntry searchEntry = apiDocumentMapper.map(document);
 		assertThat(searchEntry.getType(), equalTo("apiDoc"));
 		assertThat(searchEntry.getVersion(), equalTo("3.2.1.RELEASE"));
 		assertThat(searchEntry.getProjectId(), equalTo(project.getId()));
+		assertThat(searchEntry.getSubTitle(), equalTo("Spring Project (3.2.1.RELEASE API)"));
 	}
 }

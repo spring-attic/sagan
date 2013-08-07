@@ -10,6 +10,7 @@ public class PostSearchEntryMapper implements SearchEntryMapper<Post> {
 	public SearchEntry map(Post post) {
 		SearchEntry entry = new SearchEntry();
 		entry.setTitle(post.getTitle());
+		entry.setSubTitle("Blog Post");
 
 		String summary = Jsoup.parse(post.getRenderedSummary()).text();
 		String content = Jsoup.parse(post.getRenderedContent()).text();

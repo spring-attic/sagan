@@ -75,12 +75,11 @@ public class SearchResultParser {
 			String url = source.get("path").getAsString();
 			String type = hit.get("_type").getAsString();
 			String summary = source.get("summary").getAsString();
-			String projectId = safelyLookupFieldString(source, "projectId");
-			String version = safelyLookupFieldString(source, "version");
+			String subtitle = safelyLookupFieldString(source, "subTitle");
 
 			String highlight = extractHighlight(hit);
 
-			SearchResult result = new SearchResult(id, title, summary, url, type, highlight, originalSearchTerm, projectId, version);
+			SearchResult result = new SearchResult(id, title, subtitle, summary, url, type, highlight, originalSearchTerm);
 			results.add(result);
 		}
 		return results;

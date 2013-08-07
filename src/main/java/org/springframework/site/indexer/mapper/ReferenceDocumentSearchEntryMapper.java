@@ -27,6 +27,7 @@ public class ReferenceDocumentSearchEntryMapper implements SearchEntryMapper<Doc
 		entry.setRawContent(text);
 		entry.setSummary(text.substring(0, Math.min(500, text.length())));
 		entry.setTitle(document.title());
+		entry.setSubTitle(String.format("%s (%s Reference)", project.getName(), version.getFullName()));
 		entry.setPath(document.baseUri());
 		entry.setCurrent(version.isCurrent());
 		entry.setProjectId(project.getId());

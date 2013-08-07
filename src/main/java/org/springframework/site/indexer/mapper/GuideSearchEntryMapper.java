@@ -12,7 +12,8 @@ public class GuideSearchEntryMapper implements SearchEntryMapper<GettingStartedG
 	@Override
 	public SearchEntry map(GettingStartedGuide guide) {
 		SearchEntry entry = new SearchEntry();
-		entry.setTitle(guide.getGuideId());
+		entry.setTitle(guide.getTitle());
+		entry.setSubTitle("Getting Started Guide");
 
 		String text = Jsoup.parse(guide.getContent()).text();
 

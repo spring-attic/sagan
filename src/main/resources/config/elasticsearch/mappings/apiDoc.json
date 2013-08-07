@@ -45,6 +45,11 @@
                 "type" : "string",
                 "store" : "yes",
                 "index" : "not_analyzed"
+            },
+            "subTitle" : {
+                "type" : "string",
+                "store" : "yes",
+                "index" : "no"
             }
         }
     }

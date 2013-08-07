@@ -12,8 +12,7 @@ public class SearchResultBuilder {
 	private String highlight = "highlight";
 	private String id = "id";
 	private String originalSearchTerm = "term";
-	private String projectId = "project-id";
-	private String version = "1.2.3.RELEASE";
+	private String subtitle = "subtitle";
 
 	private SearchResultBuilder() {
 	}
@@ -43,7 +42,7 @@ public class SearchResultBuilder {
 	}
 
 	public SearchResult build() {
-		SearchResult searchResult = new SearchResult(id, title, summary, path, type, highlight, originalSearchTerm, projectId, version);
+		SearchResult searchResult = new SearchResult(id, title, subtitle, summary, path, type, highlight, originalSearchTerm);
 		return searchResult;
 	}
 
@@ -67,13 +66,8 @@ public class SearchResultBuilder {
 		return this;
 	}
 
-	public SearchResultBuilder projectId(String projectId) {
-		this.projectId = projectId;
-		return this;
-	}
-
-	public SearchResultBuilder version(String version) {
-		this.version = version;
+	public SearchResultBuilder subtitle(String subtitle) {
+		this.subtitle = subtitle;
 		return this;
 	}
 }

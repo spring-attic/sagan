@@ -17,7 +17,7 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 public class ReferenceDocumentSearchEntryMapperTests {
 
 	private Project project = new Project("spring",
-			"Spring",
+			"Spring Project",
 			"http://www.example.com/repo/spring-framework",
 			"http://www.example.com/spring-framework",
 			Collections.<ProjectVersion>emptyList());
@@ -45,6 +45,11 @@ public class ReferenceDocumentSearchEntryMapperTests {
 	@Test
 	public void version() {
 		assertThat(entry.getVersion(), equalTo("3.2.1.RELEASE"));
+	}
+
+	@Test
+	public void subTitle() {
+		assertThat(entry.getSubTitle(), equalTo("Spring Project (3.2.1.RELEASE Reference)"));
 	}
 
 }
