@@ -5,6 +5,8 @@ import org.springframework.site.domain.services.github.GitHubService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
+import java.util.Arrays;
+
 @Service
 public class UnderstandingGuidesService {
 
@@ -37,5 +39,9 @@ public class UnderstandingGuidesService {
 		} catch (RestClientException e) {
 			return "";
 		}
+	}
+
+	public Iterable<UnderstandingGuide> getGuidesList() {
+		return Arrays.asList(new UnderstandingGuide("content", "sidebar"));
 	}
 }

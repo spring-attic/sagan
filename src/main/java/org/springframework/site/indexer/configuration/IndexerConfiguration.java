@@ -1,5 +1,7 @@
 package org.springframework.site.indexer.configuration;
 
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +19,7 @@ import org.springframework.site.domain.projects.ProjectMetadataYamlParser;
 import org.springframework.site.search.configuration.SearchClientConfiguration;
 import org.springframework.site.web.configuration.GitHubConfiguration;
 import org.springframework.site.web.configuration.SecurityConfiguration;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +28,9 @@ import java.util.concurrent.Executors;
 
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan(basePackages = { "org.springframework.site.indexer",
+@ComponentScan(basePackages = {
+		"org.springframework.site.indexer",
+		"org.springframework.site.domain",
 		"org.springframework.site.search"})
 @EnableScheduling
 @Import({ SearchClientConfiguration.class, GitHubConfiguration.class,
@@ -59,6 +64,16 @@ public class IndexerConfiguration {
 		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass())
 				.getInputStream();
 		return new ProjectMetadataService(new ProjectMetadataYamlParser().parse(yaml));
+	}
+
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
+	@Bean
+	public Serializer simpleXmlSerializer() {
+		return new Persister();
 	}
 
 }

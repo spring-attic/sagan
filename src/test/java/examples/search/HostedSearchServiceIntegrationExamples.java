@@ -1,10 +1,8 @@
-package external.search;
+package examples.search;
 
 import org.jsoup.nodes.Document;
 import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +14,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.domain.guides.GettingStartedGuide;
 import org.springframework.site.domain.guides.GettingStartedService;
-import org.springframework.site.indexer.mapper.WebDocumentSearchEntryMapper;
 import org.springframework.site.indexer.configuration.IndexerConfiguration;
+import org.springframework.site.indexer.mapper.GuideSearchEntryMapper;
+import org.springframework.site.indexer.mapper.WebDocumentSearchEntryMapper;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchResult;
 import org.springframework.site.search.SearchService;
-import org.springframework.site.indexer.mapper.GuideSearchEntryMapper;
 import org.springframework.site.web.search.SearchEntryBuilder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import utils.SetSystemProperty;
 
 import java.text.ParseException;
 import java.util.Collections;
@@ -38,7 +37,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = IndexerConfiguration.class, initializers = {
@@ -46,25 +44,10 @@ import static org.hamcrest.Matchers.not;
 		LoggingApplicationContextInitializer.class })
 @ActiveProfiles("integration-test")
 @Configuration
-public class HostedSearchServiceIntegrationTests {
+public class HostedSearchServiceIntegrationExamples {
 
-	public static final String SEARCH_ENDPOINT = "elasticsearch.client.endpoint";
-	public static String originalSearchEndpoint;
-
-	@BeforeClass
-	public static void setUp() {
-		originalSearchEndpoint = System.getProperty(SEARCH_ENDPOINT);
-		System.setProperty(SEARCH_ENDPOINT, "https://qlmsjwfa.api.qbox.io");
-	}
-
-	@AfterClass
-	public static void clear() {
-		if (originalSearchEndpoint == null) {
-			System.clearProperty(SEARCH_ENDPOINT);
-		} else {
-			System.setProperty(SEARCH_ENDPOINT, originalSearchEndpoint);
-		}
-	}
+	@ClassRule
+	public static SetSystemProperty systemProperty = new SetSystemProperty("elasticsearch.client.endpoint", "https://qlmsjwfa.api.qbox.io");
 
 	private final Pageable pageable = new PageRequest(0, 10);
 

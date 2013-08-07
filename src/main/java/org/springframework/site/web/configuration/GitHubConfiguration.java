@@ -2,7 +2,6 @@ package org.springframework.site.web.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -17,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-@ComponentScan({"org.springframework.site.domain.guides", "org.springframework.site.domain.services"})
+//@ComponentScan({
+//		"org.springframework.site.domain.guides",
+//		"org.springframework.site.domain.services"})
 public class GitHubConfiguration {
 
 	@Value("${GITHUB_CLIENT_ID:${github.client.id:none}}")
