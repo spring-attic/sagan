@@ -131,8 +131,8 @@ projects:
       refDocUrl: /spring-data/data-redis/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-redis/docs/{version}/api/
       supportedVersions:
-        - 1.1.0.M1
-        - 1.0.5.RELEASE
+        - 1.1.0.M2
+        - 1.0.6.RELEASE
 
     - id: spring-data-rest
       name: Spring Data REST
@@ -166,8 +166,8 @@ projects:
       apiDocUrl: /spring/docs/{version}/javadoc-api/
       supportedVersions:
         - 3.1.4.RELEASE
-        - 3.2.3.RELEASE
-        - 4.0.0.M1
+        - 3.2.4.RELEASE
+        - 4.0.0.M2
 
     # ----------------------
     # Spring GemFire
