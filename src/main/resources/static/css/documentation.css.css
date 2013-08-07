@@ -43,3 +43,21 @@
 .documentation--item .documentation-version--dropdown {
   width: 86.5%;
 }
+.documentation--item .documentation-version--dropdown p {
+  display: inline-block;
+}
+.documentation--item .documentation-version--dropdown .current-version--icon, .documentation--item .documentation-version--dropdown .pre-release-version--icon {
+  background-image: url("../img/iconsprite.png");
+  display: inline-block;
+  height: 13px;
+  vertical-align: top;
+  margin: 2px 0 0 6px;
+}
+.documentation--item .documentation-version--dropdown .current-version--icon {
+  background-position: -284px -520px;
+  width: 42px;
+}
+.documentation--item .documentation-version--dropdown .pre-release-version--icon {
+  background-position: -344px -520px;
+  width: 23px;
+}

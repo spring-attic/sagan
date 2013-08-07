@@ -42,8 +42,8 @@
                             <div class="item--body--version">
                                 <div class="item--left-column">
                                     <p th:text="${version.shortName}">1.2.3</p>
-                                    <p th:if="${version.isCurrent()}">Current</p>
-                                    <p th:if="${version.isPreRelease()}">Pre</p>
+                                    <div th:if="${version.isCurrent()}"class="current-version--icon"></div>
+                                    <div th:if="${version.isPreRelease()}" class="pre-release-version--icon"></div>
                                 </div>
                                 <div class="item--right-column">
                                     <a class="documentation-link reference-link" th:href="${version.refDocUrl}" th:if="${version.hasRefDocUrl()}">Reference</a>
