@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.nullValue;
 
 public class SearchResultParser_WithoutHighlightTests {
 
@@ -89,6 +90,16 @@ public class SearchResultParser_WithoutHighlightTests {
 	@Test
 	public void type() {
 		assertThat(content.get(0).getType(), equalTo("site"));
+	}
+
+	@Test
+	public void projectId() {
+		assertThat(content.get(0).getProjectId(), nullValue());
+	}
+
+	@Test
+	public void version() {
+		assertThat(content.get(0).getVersion(), nullValue());
 	}
 
 	@Test

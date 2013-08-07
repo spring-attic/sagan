@@ -514,6 +514,10 @@ input.floating-input {
 }
 
 //SEARCH RESULT STYLES
+.search-result {
+  margin-bottom: 30px;
+}
+
 .search-result--title {
   display: inline-block;
   font-size: 18px;
@@ -530,7 +534,6 @@ input.floating-input {
   font-size: 14px;
   line-height: 18px;
   font-family: $secondary-font-family;
-  margin-bottom: 30px;
   em {
     font-weight: bold;
     font-style: normal;
@@ -538,6 +541,9 @@ input.floating-input {
   }
 }
 
+.search-result--path {
+  color: $denim;
+}
 
 //FOOTER
 .footer {

@@ -471,6 +471,10 @@ input.floating-input:focus {
   color: #5fa134;
 }
 
+.search-result {
+  margin-bottom: 30px;
+}
+
 .search-result--title {
   display: inline-block;
   font-size: 18px;
@@ -488,12 +492,15 @@ input.floating-input:focus {
   font-size: 14px;
   line-height: 18px;
   font-family: "Montserrat", sans-serif;
-  margin-bottom: 30px;
 }
 .search-result--summary em {
   font-weight: bold;
   font-style: normal;
   color: black;
+}
+
+.search-result--path {
+  color: #8395a1;
 }
 
 .footer {

@@ -2,14 +2,16 @@ package org.springframework.site.search;
 
 public class SearchResult {
 	private final String type;
-	private String title;
-	private String summary;
-	private String path;
-	private String id;
-	private String highlight;
+	private final String title;
+	private final String summary;
+	private final String path;
+	private final String id;
+	private final String highlight;
 	private final String originalSearchTerm;
+	private final String projectId;
+	private final String version;
 
-	public SearchResult(String id, String title, String summary, String path, String type, String highlight, String originalSearchTerm) {
+	public SearchResult(String id, String title, String summary, String path, String type, String highlight, String originalSearchTerm, String projectId, String version) {
 		this.title = title;
 		this.summary = summary;
 		this.path = path;
@@ -17,6 +19,8 @@ public class SearchResult {
 		this.type = type;
 		this.highlight = highlight;
 		this.originalSearchTerm = originalSearchTerm;
+		this.projectId = projectId;
+		this.version = version;
 	}
 
 	public String getTitle() {
@@ -45,6 +49,14 @@ public class SearchResult {
 
 	public String getOriginalSearchTerm() {
 		return originalSearchTerm;
+	}
+
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public String getVersion() {
+		return version;
 	}
 
 	public String getDisplayText() {

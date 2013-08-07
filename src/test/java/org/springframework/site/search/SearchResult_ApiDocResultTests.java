@@ -10,19 +10,19 @@ public class SearchResult_ApiDocResultTests {
 
 	@Test
 	public void resultText_returnsSummary_whenNoHighlight() {
-		SearchResult result = new SearchResult("id", "title", "summary", "path", "apiDoc", null, "original search term");
+		SearchResult result = new SearchResult("id", "title", "summary", "path", "apiDoc", null, "original search term", "projectId", "version");
 		assertThat(result.getDisplayText(), equalTo("summary"));
 	}
 
 	@Test
 	public void resultText_returnsHighlight_whenPresent() {
-		SearchResult result = new SearchResult("id", "title", "summary", "path", "apiDoc", "highlight", "original search term");
+		SearchResult result = new SearchResult("id", "title", "summary", "path", "apiDoc", "highlight", "original search term", "projectId", "version");
 		assertThat(result.getDisplayText(), equalTo("highlight"));
 	}
 
 	@Test
 	public void resultText_returnsSummary_whenTermMatchesTitle_ignoringHighlight() {
-		SearchResult result = new SearchResult("id", "title", "summary", "path", "apiDoc", "highlight", "title");
+		SearchResult result = new SearchResult("id", "title", "summary", "path", "apiDoc", "highlight", "title", "projectId", "version");
 		assertThat(result.getDisplayText(), equalTo("summary"));
 	}
 

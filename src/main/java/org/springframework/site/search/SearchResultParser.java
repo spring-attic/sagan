@@ -75,13 +75,20 @@ public class SearchResultParser {
 			String url = source.get("path").getAsString();
 			String type = hit.get("_type").getAsString();
 			String summary = source.get("summary").getAsString();
+			String projectId = safelyLookupFieldString(source, "projectId");
+			String version = safelyLookupFieldString(source, "version");
 
 			String highlight = extractHighlight(hit);
 
-			SearchResult result = new SearchResult(id, title, summary, url, type, highlight, originalSearchTerm);
+			SearchResult result = new SearchResult(id, title, summary, url, type, highlight, originalSearchTerm, projectId, version);
 			results.add(result);
 		}
 		return results;
+	}
+
+	private String safelyLookupFieldString(JsonObject source, String field) {
+		JsonElement fieldElement = source.get(field);
+		return (fieldElement != null) ? fieldElement.getAsString() : "";
 	}
 
 	private String extractHighlight(JsonObject hit) {
