@@ -77,7 +77,7 @@ public class SearchQueryBuilder {
 	}
 
 	private QueryBuilder addFiltersByFacets(List<String> filters, QueryBuilder query) {
-		if (!filters.isEmpty()) {
+		if (filters != null && !filters.isEmpty()) {
 			TermsFilterBuilder termsFilterBuilder = new TermsFilterBuilder("facetPaths", filters).execution("and");
 			query = QueryBuilders.filteredQuery(query, termsFilterBuilder);
 		}

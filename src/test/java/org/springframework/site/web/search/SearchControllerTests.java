@@ -35,6 +35,7 @@ public class SearchControllerTests {
 	private ExtendedModelMap model = new ExtendedModelMap();
 	private Page<SearchResult> resultsPage;
 	private List<SearchResult> entries = new ArrayList<>();
+	private SearchForm searchForm = new SearchForm();
 
 	@Before
 	public void setUp() throws Exception {
@@ -49,7 +50,6 @@ public class SearchControllerTests {
 
 	@Test
 	public void search_providesQueryInModel() {
-		SearchForm searchForm = new SearchForm();
 		searchForm.setQ("searchTerm");
 		this.controller.search(searchForm, 1, this.model);
 		assertThat((SearchForm) this.model.get("searchForm"), equalTo(searchForm));
@@ -57,7 +57,6 @@ public class SearchControllerTests {
 
 	@Test
 	public void search_providesPaginationInfoInModel() {
-		SearchForm searchForm = new SearchForm();
 		searchForm.setQ("searchTerm");
 		this.controller.search(searchForm, 1, this.model);
 		assertThat(this.model.get("paginationInfo"), is(notNullValue()));
@@ -66,7 +65,6 @@ public class SearchControllerTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void search_providesResultsInModel() {
-		SearchForm searchForm = new SearchForm();
 		searchForm.setQ("searchTerm");
 		this.controller.search(searchForm, 1, this.model);
 		assertThat((List<SearchResult>) this.model.get("results"), equalTo(this.entries));
@@ -75,9 +73,9 @@ public class SearchControllerTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void search_providesAllResultsForBlankQuery() {
-		SearchForm searchForm = new SearchForm();
 		searchForm.setQ("");
 		this.controller.search(searchForm, 1, this.model);
 		assertThat((List<SearchResult>) this.model.get("results"), equalTo(this.entries));
 	}
+
 }

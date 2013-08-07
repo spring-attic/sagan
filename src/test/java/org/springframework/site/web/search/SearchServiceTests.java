@@ -24,7 +24,7 @@ import static org.mockito.Mockito.verify;
 public class SearchServiceTests {
 
 	private JestClient jestClient = mock(JestClient.class);
-	private SearchService searchService = new SearchService(this.jestClient, new SearchResultParser());
+	private SearchService searchService = new SearchService(this.jestClient, mock(SearchResultParser.class));
 	private SearchEntry entry;
 
 	@Before
@@ -71,4 +71,9 @@ public class SearchServiceTests {
 		}));
 	}
 
+	@Test
+	public void handlesNullFilters() throws Exception {
+		given(this.jestClient.execute(any(Action.class))).willReturn(new JestResult());
+		this.searchService.search("foo", mock(Pageable.class), null);
+	}
 }
