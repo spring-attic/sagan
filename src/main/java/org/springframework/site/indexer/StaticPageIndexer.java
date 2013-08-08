@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.site.domain.StaticPageMapper;
 import org.springframework.site.indexer.crawler.CrawlerService;
-import org.springframework.site.indexer.mapper.WebDocumentSearchEntryMapper;
+import org.springframework.site.indexer.mapper.LocalStaticPagesSearchEntryMapper;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class StaticPageIndexer implements Indexer<String> {
 	public StaticPageIndexer(CrawlerService crawlerService, SearchService searchService, StaticPageMapper staticPageMapper) {
 		this.crawlerService = crawlerService;
 		this.staticPageMapper = staticPageMapper;
-		this.documentProcessor = new CrawledWebDocumentProcessor(searchService, new WebDocumentSearchEntryMapper());
+		this.documentProcessor = new CrawledWebDocumentProcessor(searchService, new LocalStaticPagesSearchEntryMapper());
 	}
 
 	@Override
