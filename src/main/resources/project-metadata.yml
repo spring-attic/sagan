@@ -223,8 +223,8 @@ projects:
       name: Spring Mobile
       lead: rclarkson
       supportedVersions:
-        - 1.0.1.RELEASE
-        - 1.1.0.M3
+        - 1.0.2.RELEASE
+        - 1.1.0.RC1
 
     # ----------------------
     # Spring Roo
