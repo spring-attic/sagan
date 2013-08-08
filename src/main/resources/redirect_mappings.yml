@@ -1165,20 +1165,44 @@ mappings:
     new_url: http://sagan.cfapps.io/blog/2013/06/10/first-milestone-of-spring-data-release-train-babbage-arrived
   - old_url: http://blog.springsource.org/2013/06/12/spring-xd-1-0-milestone-1-released/
     new_url: http://sagan.cfapps.io/blog/2013/06/12/spring-xd-1-0-milestone-1-released
+  - old_url: http://blog.springsource.org/2013/07/11/eclipse-quick-search/
+    new_url: http://sagan.cfapps.io/blog/2013/07/11/eclipse-quick-search
   - old_url: http://blog.springsource.org/2013/07/02/spring-security-java-config-preview-introduction/
     new_url: http://sagan.cfapps.io/blog/2013/07/02/spring-security-java-config-preview-introduction
   - old_url: http://blog.springsource.org/2013/07/03/spring-security-java-config-preview-web-security/
     new_url: http://sagan.cfapps.io/blog/2013/07/03/spring-security-java-config-preview-web-security
+  - old_url: http://blog.springsource.org/2013/07/04/spring-security-java-config-preview-method-security/
+    new_url: http://sagan.cfapps.io/blog/2013/07/04/spring-security-java-config-preview-method-security
+  - old_url: http://blog.springsource.org/2013/07/05/spring-security-java-config-preview-oauth/
+    new_url: http://sagan.cfapps.io/blog/2013/07/05/spring-security-java-config-preview-oauth
+  - old_url: http://blog.springsource.org/2013/07/11/spring-security-java-config-preview-readability/
+    new_url: http://sagan.cfapps.io/blog/2013/07/11/spring-security-java-config-preview-readability
+  - old_url: http://blog.springsource.org/2013/07/18/javaconfig-support-in-the-spring-tool-suite/
+    new_url: http://sagan.cfapps.io/blog/2013/07/18/javaconfig-support-in-the-spring-tool-suite
+  - old_url: http://blog.springsource.org/2013/07/18/reactor-1-0-0-m1-a-foundation-for-asynchronous-fast-data-applications-on-the-jvm/
+    new_url: http://sagan.cfapps.io/blog/2013/07/18/reactor-1-0-0-m1-a-foundation-for-asynchronous-fast-data-applications-on-the-jvm
+  - old_url: http://blog.springsource.org/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures/
+    new_url: http://sagan.cfapps.io/blog/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures
+  - old_url: http://blog.springsource.org/2013/08/06/spring-boot-simplifying-spring-for-everyone/
+    new_url: http://sagan.cfapps.io/blog/2013/08/06/spring-boot-simplifying-spring-for-everyone
 
-# drupal
+  # Drupal
   - old_url: http://www.springsource.org/BusinessIntelligenceWithSpringAndBIRT
     new_url: http://sagan.cfapps.io/blog/2012/01/30/spring-framework-birt
+  - old_url: http://www.springsource.org/node/3266
+    new_url: http://sagan.cfapps.io/blog/2011/09/21/springsource-at-goto-amsterdam
+  - old_url: http://www.springsource.org/node/22628
+    new_url: http://sagan.cfapps.io/blog/2013/06/10/hadoop-101-programming-mapreduce-with-native-libraries-hive-pig-and-cascading
   - old_url: http://www.springsource.org/node/22605
     new_url: http://sagan.cfapps.io/blog/2013/05/07/this-week-in-spring-7-may-2013
   - old_url: http://www.springsource.org/node/22600
     new_url: http://sagan.cfapps.io/blog/2013/04/30/this-week-in-spring-april-30th-2013
+  - old_url: http://www.springsource.org/node/3309
+    new_url: http://sagan.cfapps.io/blog/2011/11/21/video-interview-with-costin-leau-from-javaone-2011
   - old_url: http://www.springsource.org/node/3738
     new_url: http://sagan.cfapps.io/blog/2012/11/16/springone-2gx-2012-web-track-what-s-new-in-spring-mvc-3-2-extending-spring-mvc-with-spring-mobile-and-javascript
+  - old_url: http://www.springsource.org/node/4308
+    new_url: http://sagan.cfapps.io/blog/2013/04/01/webinar-replay-extending-spring-integration-for-splunk
   - old_url: http://www.springsource.org/node/4249
     new_url: http://sagan.cfapps.io/blog/2013/03/12/springone-2gx-2012-replays-addressing-messaging-challenges-using-open-technologies-introduction-to-spring-integration-and-spring-batch
   - old_url: http://www.springsource.org/node/4274
@@ -1209,6 +1233,26 @@ mappings:
     new_url: http://sagan.cfapps.io/blog/2012/08/16/video-introduction-to-spring-data-neo4j
   - old_url: http://www.springsource.org/node/3633
     new_url: http://sagan.cfapps.io/blog/2012/08/16/video-spring-roo-not-just-another-rad-tool
+  - old_url: http://www.springsource.org/node/3567
+    new_url: http://sagan.cfapps.io/blog/2012/05/30/video-spring-dependency-injection-styles
+  - old_url: http://www.springsource.org/node/3536
+    new_url: http://sagan.cfapps.io/blog/2012/04/26/video-practical-tips-and-tricks-with-spring-integration
+  - old_url: http://www.springsource.org/node/3550
+    new_url: http://sagan.cfapps.io/blog/2012/05/11/video-more-practical-tips-and-tricks-with-spring-integration
+  - old_url: http://www.springsource.org/node/3506
+    new_url: http://sagan.cfapps.io/blog/2012/03/13/video-springone-2gx-spring-integration-tips-n-tricks
+  - old_url: http://www.springsource.org/node/3504
+    new_url: http://sagan.cfapps.io/blog/2012/03/12/video-creating-spring-insight-plugins
+  - old_url: http://www.springsource.org/node/3520
+    new_url: http://sagan.cfapps.io/blog/2012/04/06/spring-integration-2-1-1-released
+  - old_url: http://www.springsource.org/node/3516
+    new_url: http://sagan.cfapps.io/blog/2012/03/27/spring-web-flow-2-3-1-released
+  - old_url: http://www.springsource.org/node/3514
+    new_url: http://sagan.cfapps.io/blog/2012/03/23/springsource-tool-suite-2-9-1-released
+  - old_url: http://www.springsource.org/node/3512
+    new_url: http://sagan.cfapps.io/blog/2012/03/20/spring-gemfire-1-2-m1-released-for-java
+  - old_url: http://www.springsource.org/node/3515
+    new_url: http://sagan.cfapps.io/blog/2012/03/23/cloud-foundry-integration-for-eclipse-1-0-released
   - old_url: http://www.springsource.org/node/3473
     new_url: http://sagan.cfapps.io/blog/2012/02/16/video-springone-2gx-tuning-java-for-virtual-environments-with-em4j
   - old_url: http://www.springsource.org/node/3475
@@ -1237,8 +1281,6 @@ mappings:
     new_url: http://sagan.cfapps.io/blog/2012/01/24/modern-enterprise-java-architectures-with-spring-3-1
   - old_url: http://www.springsource.org/node/3340
     new_url: http://sagan.cfapps.io/blog/2011/12/16/video-interview-with-oleg-zhurakousky-from-javaone-2011
-  - old_url: http://www.springsource.org/node/3351
-    new_url: http://sagan.cfapps.io/blog/2012/01/03/video-interview-with-graeme-rocher-about-grails-from-javaone-2011
   - old_url: http://www.springsource.org/node/3343
     new_url: http://sagan.cfapps.io/blog/2011/12/20/video-springone-2gx-making-the-mobile-web-native-with-phonegap
   - old_url: http://www.springsource.org/node/3353
@@ -1257,8 +1299,16 @@ mappings:
     new_url: http://sagan.cfapps.io/blog/2012/01/14/video-springone-2gx-writing-applications-for-cloud-foundry-using-spring-and-mongodb
   - old_url: http://www.springsource.org/node/3349
     new_url: http://sagan.cfapps.io/blog/2011/12/27/this-year-in-spring
-  - old_url: http://www.springsource.org/node/3300
-    new_url: http://sagan.cfapps.io/blog/2011/11/09/video-better-productivity-grails-2-0
+  - old_url: http://www.springsource.org/node/3277
+    new_url: http://sagan.cfapps.io/blog/2011/09/06/spring-data-jpa-1-0-1-and-1-1-0-m1-released
+  - old_url: http://www.springsource.org/node/3200
+    new_url: http://sagan.cfapps.io/blog/2011/08/08/video-adrian-colyer-discusses-enterprise-apps-in-2011-and-beyond
+  - old_url: http://www.springsource.org/node/3271
+    new_url: http://sagan.cfapps.io/blog/2011/09/14/save-over-350-on-core-spring-amsterdam-registration
+  - old_url: http://www.springsource.org/video-springsocial
+    new_url: http://sagan.cfapps.io/blog/2011/10/04/video-an-introduction-to-spring-social
+  - old_url: http://www.springsource.org/node/3267
+    new_url: http://sagan.cfapps.io/blog/2011/09/20/this-week-in-spring-september-20th-2011
   - old_url: http://www.springsource.org/node/3216
     new_url: http://sagan.cfapps.io/blog/2011/08/24/micro-cloud-foundry-gives-developers-their-own-personal-cloud
   - old_url: http://www.springsource.org/S2GForum2011slides
@@ -1353,6 +1403,8 @@ mappings:
     new_url: http://sagan.cfapps.io/blog/2011/11/23/this-week-in-spring-november-22nd-2011
   - old_url: http://www.springsource.org/node/3319
     new_url: http://sagan.cfapps.io/blog/2011/11/30/this-week-in-spring-november-29th-2011
+  - old_url: http://www.springsource.org/UsingMongoDBAndSpringInTheCloud
+    new_url: http://sagan.cfapps.io/blog/2011/12/06/video-introduction-to-using-mongodb-and-spring-on-cloud-foundry
   - old_url: http://www.springsource.org/node/3326
     new_url: http://sagan.cfapps.io/blog/2011/12/07/this-week-in-spring-december-6th-2011
   - old_url: http://www.springsource.org/node/3344
@@ -1521,6 +1573,40 @@ mappings:
     new_url: http://sagan.cfapps.io/blog/2013/07/10/this-week-in-spring-july-9-2013
   - old_url: http://www.springsource.org/node/22653
     new_url: http://sagan.cfapps.io/blog/2013/07/16/this-week-in-spring-july-15-2013
+  - old_url: http://www.springsource.org/node/22661
+    new_url: http://sagan.cfapps.io/blog/2013/08/04/webinar-replay-spring-with-cucumber-for-automation
+  - old_url: http://www.springsource.org/node/22660
+    new_url: http://sagan.cfapps.io/blog/2013/08/01/webinar-replay-functional-programming-without-lambdas
+  - old_url: http://www.springsource.org/node/22659
+    new_url: http://sagan.cfapps.io/blog/2013/07/31/this-week-in-spring-july-30-2013
+  - old_url: http://www.springsource.org/node/22655
+    new_url: http://sagan.cfapps.io/blog/2013/07/24/this-week-in-spring-july-23-2013
+  - old_url: http://www.springsource.org/node/22653
+    new_url: http://sagan.cfapps.io/blog/2013/07/16/this-week-in-spring-july-15-2013
+  - old_url: http://www.springsource.org/node/22649
+    new_url: http://sagan.cfapps.io/blog/2013/07/10/this-week-in-spring-july-9-2013
+  - old_url: http://www.springsource.org/node/22648
+    new_url: http://sagan.cfapps.io/blog/2013/07/08/webinar-resistance-is-not-futile-how-to-talk-spring-and-influence-people
+  - old_url: http://www.springsource.org/node/22646
+    new_url: http://sagan.cfapps.io/blog/2013/07/03/this-week-in-spring-july-2nd-2013
+  - old_url: http://www.springsource.org/node/22638
+    new_url: http://sagan.cfapps.io/blog/2013/06/26/webinar-introducing-reactor-a-framework-for-asynchronous-applications-on-the-jvm
+  - old_url: http://www.springsource.org/node/22637
+    new_url: http://sagan.cfapps.io/blog/2013/06/26/this-week-in-spring-june-25-2013
+  - old_url: http://www.springsource.org/node/22636
+    new_url: http://sagan.cfapps.io/blog/2013/06/25/webinar-replay-building-rest-ful-services-with-spring
+  - old_url: http://www.springsource.org/node/22633
+    new_url: http://sagan.cfapps.io/blog/2013/06/19/this-week-in-spring-june-18-2013
+  - old_url: http://www.springsource.org/node/22630
+    new_url: http://sagan.cfapps.io/blog/2013/06/11/this-week-in-spring-june-11-2013
+  - old_url: http://www.springsource.org/node/22621
+    new_url: http://sagan.cfapps.io/blog/2013/06/05/this-week-in-spring-june-4-2013
+  - old_url: http://www.springsource.org/node/22611
+    new_url: http://sagan.cfapps.io/blog/2013/05/22/this-week-in-spring-may-21-2013
+  - old_url: http://www.springsource.org/node/22614
+    new_url: http://sagan.cfapps.io/blog/2013/05/29/this-week-in-spring-may-28-2013
+  - old_url: http://www.springsource.org/node/22608
+    new_url: http://sagan.cfapps.io/blog/2013/05/15/this-week-in-spring-may-14-2013
   - old_url: http://www.springsource.org/spring-android/news/1.0.1-released
     new_url: http://sagan.cfapps.io/blog/2012/12/06/spring-for-android-1-0-1-released
   - old_url: http://www.springsource.org/spring-android/news/1.0.0-released
@@ -1543,8 +1629,8 @@ mappings:
     new_url: http://sagan.cfapps.io/blog/2012/10/15/spring-data-release-train-arrives
   - old_url: http://www.springsource.org/node/3813
     new_url: http://sagan.cfapps.io/blog/2013/02/15/spring-integration-3-0-0-milestone-1-is-released
-  - old_url: http://www.springsource.org/node/4305
-    new_url: http://sagan.cfapps.io/blog/2013/03/28/spring-integration-2-2-3-is-now-available
+  - old_url: http://www.springsource.org/node/2962
+    new_url: http://sagan.cfapps.io/blog/2010/11/30/maven-configuration-for-spring-integration
   - old_url: http://www.springsource.org/spring-mobile/news/1.1.0.m3-released
     new_url: http://sagan.cfapps.io/blog/2013/04/05/spring-mobile-1-1-0-m3-released
   - old_url: http://www.springsource.org/spring-mobile/news/1.1.0.m2-released
@@ -1805,8 +1891,6 @@ mappings:
     new_url: http://sagan.cfapps.io/blog/2011/07/12/springsource-tool-suite-2-7-1-released
   - old_url: http://www.springsource.org/node/3173
     new_url: http://sagan.cfapps.io/blog/2011/07/12/spring-roo-1-1-5-released
-  - old_url: http://www.springsource.org/node/3193
-    new_url: http://sagan.cfapps.io/blog/2011/08/01/grails-2-0-0-m1-now-available
   - old_url: http://www.springsource.org/node/3175
     new_url: http://sagan.cfapps.io/blog/2011/07/12/sts-cloud-foundry-integration-2-7-0-m3-released
   - old_url: http://www.springsource.org/node/3180
@@ -1823,8 +1907,6 @@ mappings:
     new_url: http://sagan.cfapps.io/blog/2011/06/08/spring-3-1-0-m2-released
   - old_url: http://www.springsource.org/node/3167
     new_url: http://sagan.cfapps.io/blog/2011/07/05/springsource-tool-suite-2-7-0-released
-  - old_url: http://www.springsource.org/spring-social/news/1.0.0.rc1-released
-    new_url: http://sagan.cfapps.io/blog/2011/06/23/spring-social-1-0-0-rc1-released
   - old_url: http://www.springsource.org/node/3152
     new_url: http://sagan.cfapps.io/blog/2011/06/14/spring-data-graph-1-1-0-m1-with-neo4j-support-released
   - old_url: http://www.springsource.org/node/3164
@@ -1895,12 +1977,12 @@ mappings:
     new_url: http://sagan.cfapps.io/blog/2010/08/19/spring-3-0-4-is-now-available
   - old_url: http://www.springsource.org/node/2811
     new_url: http://sagan.cfapps.io/blog/2010/08/30/rabbitmq-2-0-is-now-available
-  - old_url: http://www.springsource.org/node/2733
-    new_url: http://sagan.cfapps.io/blog/2010/08/09/grails-1-3-4-released
   - old_url: http://www.springsource.org/node/2713
     new_url: http://sagan.cfapps.io/blog/2010/07/16/new-milestone-update-for-springsource-tool-suite-2-3-2-m2
   - old_url: http://www.springsource.org/node/2705
     new_url: http://sagan.cfapps.io/blog/2010/06/29/apache-tomcat-7-0-0-beta-is-now-available
+  - old_url: http://www.springsource.org/node/2513
+    new_url: http://sagan.cfapps.io/blog/2010/05/07/spring-web-flow-2-1-0-milestone-1-released
   - old_url: http://www.springsource.org/groovy-eclipse-2-0-0-released
     new_url: http://sagan.cfapps.io/blog/2010/01/15/groovy-eclipse-2-0-0-released
   - old_url: http://www.springsource.org/node/2975
@@ -2196,7 +2278,7 @@ mappings:
   - old_url: http://www.springsource.org/node/1863
     new_url: http://sagan.cfapps.io/blog/2009/08/04/spring-net-1-3-0-rc1-released
   - old_url: http://www.springsource.org/node/1864
-    new_url: http://sagan.cfapps.io/blog/2009/08/06/now-available-springsource-tool-suite-2-1-0-and-dm-server-2-0-milestone-4
+    new_url: http://sagan.cfapps.io/blog/2009/08/06/now-available-springsource-tool-suite-2-1-0
   - old_url: http://www.springsource.org/node/1865
     new_url: http://sagan.cfapps.io/blog/2009/08/07/spring-web-flow-2-0-8-released
   - old_url: http://www.springsource.org/node/1868
@@ -2359,3 +2441,47 @@ mappings:
     new_url: http://sagan.cfapps.io/blog/2013/07/11/spring-for-apache-hadoop-1-0-1-rc1-released-adding-hadoop-2-0-and-pivotal-hd-1-0-support
   - old_url: http://www.springsource.org/node/22652
     new_url: http://sagan.cfapps.io/blog/2013/07/15/spring-amqp-1-2-0-for-java-released
+  - old_url: http://www.springsource.org/node/22662
+    new_url: http://sagan.cfapps.io/blog/2013/08/05/spring-data-babbage-rc1-released
+  - old_url: http://www.springsource.org/node/22658
+    new_url: http://sagan.cfapps.io/blog/2013/07/26/spring-batch-2-2-1-release-is-now-available
+  - old_url: http://www.springsource.org/node/22656
+    new_url: http://sagan.cfapps.io/blog/2013/07/26/spring-shell-1-1-0-m1-released
+  - old_url: http://www.springsource.org/node/22654
+    new_url: http://sagan.cfapps.io/blog/2013/07/22/spring-data-arora-service-release-2-available
+  - old_url: http://www.springsource.org/node/22652
+    new_url: http://sagan.cfapps.io/blog/2013/07/15/spring-amqp-1-2-0-for-java-released
+  - old_url: http://www.springsource.org/node/22651
+    new_url: http://sagan.cfapps.io/blog/2013/07/11/spring-for-apache-hadoop-1-0-1-rc1-released-adding-hadoop-2-0-and-pivotal-hd-1-0-support
+  - old_url: http://www.springsource.org/node/22650
+    new_url: http://sagan.cfapps.io/blog/2013/07/10/spring-tool-suite-and-groovy-grails-tool-suite-3-3-0-released
+  - old_url: http://www.springsource.org/spring-social/news/1.1.0.m3-released
+    new_url: http://sagan.cfapps.io/blog/2013/07/05/spring-social-1-0-0-m3-released
+  - old_url: http://www.springsource.org/node/22642
+    new_url: http://sagan.cfapps.io/blog/2013/07/02/spring-data-redis-1-1-m1-and-1-0-5-released
+  - old_url: http://www.springsource.org/node/22640
+    new_url: http://sagan.cfapps.io/blog/2013/07/01/spring-security-java-configuration-1-0-0-m1-released
+  - old_url: http://www.springsource.org/node/22639
+    new_url: http://sagan.cfapps.io/blog/2013/07/01/spring-security-3-2-0-m2-released
+  - old_url: http://www.springsource.org/node/22635
+    new_url: http://sagan.cfapps.io/blog/2013/06/20/spring-amqp-1-2-0-release-candidate-is-now-available
+  - old_url: http://www.springsource.org/spring-social/news/spring-social-facebook-1.0.3-released
+    new_url: http://sagan.cfapps.io/blog/2013/06/19/spring-social-facebook-1-0-3-released
+  - old_url: http://www.springsource.org/spring-xd/news/spring-xd-1.0.0.M1-released
+    new_url: http://sagan.cfapps.io/blog/2013/06/12/spring-xd-1-0-0-m1-released
+  - old_url: http://www.springsource.org/node/22629
+    new_url: http://sagan.cfapps.io/blog/2013/06/11/spring-integration-2-2-4-and-2-1-6-releases-available
+  - old_url: http://www.springsource.org/spring-social/news/spring-social-twitter-1.0.5-released
+    new_url: http://sagan.cfapps.io/blog/2013/06/10/spring-social-twitter-1-0-5-released
+  - old_url: http://www.springsource.org/node/22625
+    new_url: http://sagan.cfapps.io/blog/2013/06/06/spring-batch-2-2-0-release-is-now-available
+  - old_url: http://www.springsource.org/node/22622
+    new_url: http://sagan.cfapps.io/blog/2013/06/05/spring-tool-suite-and-groovy-grails-tool-suite-3-3-0-m2-released
+  - old_url: http://www.springsource.org/spring-social/news/spring-social-twitter-1.0.4-released
+    new_url: http://sagan.cfapps.io/blog/2013/06/06/spring-social-twitter-1-0-4-and-spring-social-1-0-3-released
+  - old_url: http://www.springsource.org/node/22609
+    new_url: http://sagan.cfapps.io/blog/2013/05/16/spring-batch-2-2-0-rc2-is-now-available
+  - old_url: http://www.springsource.org/node/22613
+    new_url: http://sagan.cfapps.io/blog/2013/05/24/spring-integration-3-0-milestone-2-is-now-available
+  - old_url: http://www.springsource.org/node/22642
+    new_url: http://sagan.cfapps.io/blog/2013/07/02/spring-data-redis-1-1-m1-and-1-0-5-released
