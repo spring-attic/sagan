@@ -6,12 +6,12 @@ applications:
   host: sagan
   domain: cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
-  command: chmod +x *.sh && ./main.sh --server.port=$PORT --spring.profiles.active=$SPRING_PROFILE
+  command: chmod +x *.sh && ./main.sh -Dserver.port=$PORT -Dspring.profiles.active=$SPRING_PROFILE
 - name: sagan-indexer
   memory: 2G
   instances: 1
   host: sagan-indexer
   domain: cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
-  command: chmod +x *.sh && ./main.sh --server.port=$PORT --spring.profiles.active=$SPRING_PROFILE
+  command: chmod +x *.sh && ./main.sh -Dserver.port=$PORT -Dspring.profiles.active=$SPRING_PROFILE
 
