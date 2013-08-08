@@ -52,12 +52,10 @@
             <div class="member-twitter--header">
               <div th:if="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-handle">@SpringSource</div>
               <div th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-handle" th:text="'@'+${profile.twitterUsername}"></div>
-
               <a th:if="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fplatform.twitter.com%2Fwidgets%2Ffollow_button.1375828408.html&partner=undefined&region=follow_link&screen_name=springsource&tw_p=followbutton&variant=2.0">
                 <i class="icon-twitter"></i>
                 Follow
               </a>
-
               <a th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" th:href="'https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fplatform.twitter.com%2Fwidgets%2Ffollow_button.1375828408.html&partner=undefined&region=follow_link&screen_name=' + ${profile.twitterUsername} + '&tw_p=followbutton&variant=2.0'">
                 <i class="icon-twitter"></i>
                 Follow
@@ -68,7 +66,9 @@
               <div th:if="${#strings.isEmpty(profile.twitterUsername)}">
                 <a class="twitter-timeline" href="'https://twitter.com/springsource" data-widget-id="365190455274635264" data-screen-name="springsource" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
               </div>
-              <a class="twitter-timeline" href="'https://twitter.com/springsource" data-widget-id="365190455274635264" th:attr="data-screen-name=${profile.twitterUsername}" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
+              <div th:unless="${#strings.isEmpty(profile.twitterUsername)}">
+                <a class="twitter-timeline" href="'https://twitter.com/springsource" data-widget-id="365190455274635264" th:attr="data-screen-name=${profile.twitterUsername}" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
+              </div>
               <script>
                 !function(d,s,id){
                   var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
