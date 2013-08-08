@@ -14,11 +14,4 @@ applications:
   domain: cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
   command: chmod +x *.sh && ./main.sh --server.port=$PORT --spring.profiles.active=$SPRING_PROFILE
-- name: sagan-redirector
-  memory: 1G
-  instances: 1
-  host: sagan-redirector
-  domain: cfapps.io
-  path: target/springframework-site-0.0.1.SNAPSHOT.jar
-  command: chmod +x *.sh && ./main.sh --server.port=$PORT --spring.profiles.active=$SPRING_PROFILE
 
