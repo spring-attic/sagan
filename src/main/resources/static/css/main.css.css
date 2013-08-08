@@ -734,6 +734,100 @@ input.floating-input:focus {
   padding: 20px;
 }
 
+.projects--wrapper {
+  margin-left: -8px;
+}
+.projects--wrapper .project--container {
+  border: 1px solid #34302d;
+  display: inline-block;
+  width: 286px;
+  height: 338px;
+  margin: 0 6px 20px 6px;
+  vertical-align: top;
+  text-align: center;
+  padding: 30px 20px;
+}
+.projects--wrapper .project--container .project-logo--container {
+  margin-bottom: 25px;
+  height: 137px;
+  vertical-align: middle;
+}
+.projects--wrapper .project--container .project-logo--container .project--logo {
+  display: inline-block;
+  vertical-align: middle;
+}
+.projects--wrapper .project--container .project--title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.projects--wrapper .project--container .project--description {
+  font-size: 14px;
+  line-height: 20px;
+}
+.projects--wrapper .project--container .project-links--container {
+  position: absolute;
+  background-color: rgba(109, 179, 63, 0.95);
+  padding: 13px 0;
+  width: 326px;
+  margin: 127px 0 0 -20px;
+  height: 58px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  -webkit-transition: opacity 0.15s;
+  -moz-transition: opacity 0.15s;
+  -o-transition: opacity 0.15s;
+  -ms-transition: opacity 0.15s;
+}
+.projects--wrapper .project--container .project-links--container .project-link {
+  display: inline-block;
+  margin: 0 15px;
+}
+.projects--wrapper .project--container .project-links--container .project-link [class^=icon-] {
+  font-size: 34px;
+  width: 34px;
+  height: 34px;
+  color: rgba(241, 241, 241, 0.75);
+}
+.projects--wrapper .project--container .project-links--container .project-link p {
+  margin: 6px 0;
+  color: rgba(241, 241, 241, 0.75);
+  font-size: 14px;
+  line-height: 14px;
+}
+.projects--wrapper .project--container .project-links--container .project-link:hover {
+  text-decoration: none;
+}
+.projects--wrapper .project--container .project-links--container .project-link:hover [class^=icon-] {
+  color: white;
+}
+.projects--wrapper .project--container:hover .project-links--container {
+  opacity: 1;
+}
+.projects--wrapper .project--container.parent-project .child-project-count--wrapper {
+  float: right;
+}
+.projects--wrapper .project--container.parent-project .child-project-count--wrapper .child-project-count--number {
+  position: relative;
+  z-index: 101;
+  color: #f1f1f1;
+  margin: -22px -9px 0 9px;
+}
+.projects--wrapper .project--container.parent-project .child-project-count--wrapper .child-project-count--background {
+  position: absolute;
+  margin: -54px 0 0 -5px;
+  z-index: 100;
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-bottom: 40px solid transparent;
+  border-left: 40px solid #6db33f;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
 .search-facets > ul {
   margin-left: 0px;
 }
