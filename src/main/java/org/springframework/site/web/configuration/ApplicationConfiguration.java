@@ -38,7 +38,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
-import javax.servlet.Filter;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
@@ -101,19 +100,27 @@ public class ApplicationConfiguration {
 	}
 
 	// http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html#filterparams
+	// Blog filter must be declared first, to ensure its rules are applied before the general rules
 	@Bean
-	public FilterRegistrationBean rewriteFilterConfig() {
+	public FilterRegistrationBean blogRewriteFilterConfig() {
 		FilterRegistrationBean reg = new FilterRegistrationBean();
-		reg.setFilter(rewriteFilter());
-		reg.addInitParameter("confPath", "urlrewrite.xml");
+		reg.setName("mappingsRewriteFilter");
+		reg.setFilter(new UrlRewriteFilter());
+		reg.addInitParameter("confPath", "mappings_rewrite.xml");
 		reg.addInitParameter("confReloadCheckInterval", "-1");
 		reg.addInitParameter("logLevel", "WARN");
 		return reg;
 	}
 
 	@Bean
-	public Filter rewriteFilter() {
-		return new UrlRewriteFilter();
+	public FilterRegistrationBean rewriteFilterConfig() {
+		FilterRegistrationBean reg = new FilterRegistrationBean();
+		reg.setName("rewriteFilter");
+		reg.setFilter(new UrlRewriteFilter());
+		reg.addInitParameter("confPath", "urlrewrite.xml");
+		reg.addInitParameter("confReloadCheckInterval", "-1");
+		reg.addInitParameter("logLevel", "WARN");
+		return reg;
 	}
 
 	@Bean

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
 <!--
@@ -92,5 +92,11 @@
         Issue 302 redirect from /guides/tutorials to /guides#tutorials</note>
         <from>/guides/tutorials[/]?$</from>
         <to type="temporary-redirect" last="true">/guides#tutorials</to>
+    </rule>
+    <rule>
+        <name>Sts Welcome Page</name>
+        <note>For old STS installations</note>
+        <from>/sts/welcome</from>
+        <to type="permanent-redirect" last="true">/tools/sts/welcome</to>
     </rule>
 </urlrewrite>
