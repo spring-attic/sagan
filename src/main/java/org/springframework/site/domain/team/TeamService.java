@@ -37,7 +37,6 @@ public class TeamService {
 		existingProfile.setTwitterUsername(profile.getTwitterUsername());
 		existingProfile.setBio(profile.getBio());
 		existingProfile.setName(profile.getName());
-		existingProfile.setGithubUsername(profile.getGithubUsername());
 		existingProfile.setTwitterUsername(profile.getTwitterUsername());
 		existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
 		existingProfile.setLanyrdUsername(profile.getLanyrdUsername());

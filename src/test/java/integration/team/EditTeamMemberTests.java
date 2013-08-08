@@ -100,7 +100,6 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 		requestBuilder.param("name", "Some_ Guy_");
 		requestBuilder.param("location", "London_");
 		requestBuilder.param("bio", "I am just a guy_");
-		requestBuilder.param("githubUsername", "gh_someguy_");
 		requestBuilder.param("twitterUsername", "tw_someguy_");
 		requestBuilder.param("speakerdeckUsername", "sd_someguy_");
 		requestBuilder.param("lanyrdUsername", "ly_someguy_");
@@ -112,10 +111,10 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 		MemberProfile profile = teamRepository.findByMemberId("someguy");
 		assertThat(profile, not(nullValue()));
 		assertEquals("someguy", profile.getMemberId());
+		assertEquals("someguy", profile.getGithubUsername());
 		assertEquals("Some_ Guy_", profile.getName());
 		assertEquals("London_", profile.getLocation());
 		assertEquals("I am just a guy_", profile.getBio());
-		assertEquals("gh_someguy_", profile.getGithubUsername());
 		assertEquals("tw_someguy_", profile.getTwitterUsername());
 		assertEquals("sd_someguy_", profile.getSpeakerdeckUsername());
 		assertEquals("ly_someguy_", profile.getLanyrdUsername());
