@@ -1,11 +1,6 @@
 package integration;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -14,30 +9,55 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class StaticPageRequestMappingTests extends IntegrationTestBase {
 
-	@Autowired
-	private WebApplicationContext wac;
-
-	private MockMvc mockMvc;
-
-	@Before
-	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-	}
-
 	@Test
 	public void getHomePage() throws Exception {
-		this.mockMvc.perform(get("/"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("homepage--container")));
+		checkPage("/");
 	}
 
 	@Test
-	public void getGuidesPage() throws Exception {
-		this.mockMvc.perform(get("/guides"))
+	public void getAboutPage() throws Exception {
+		checkPage("/about");
+	}
+
+	@Test
+	public void getJobsPage() throws Exception {
+		checkPage("/jobs");
+	}
+
+	@Test
+	public void getServicesPage() throws Exception {
+		checkPage("/services");
+	}
+
+	@Test
+	public void getSigninPage() throws Exception {
+		checkPage("/signin");
+	}
+
+	@Test
+	public void getStylePage() throws Exception {
+		checkPage("/style");
+	}
+
+	@Test
+	public void getTrademarkPage() throws Exception {
+		checkPage("/trademark");
+	}
+
+	@Test
+	public void getCaseStudiesPage() throws Exception {
+		checkPage("/case-studies");
+	}
+
+	private void checkPage(String page) throws Exception {
+		this.mockMvc.perform(get(page))
 				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Spring Framework Guides")));
+				.andExpect(content().contentTypeCompatibleWith("text/html"));
+	}
+
+	@Test
+	public void getAStaticPageWithSlashAtEnd() throws Exception {
+		checkPage("/about/");
 	}
 
 	@Test
@@ -46,4 +66,11 @@ public class StaticPageRequestMappingTests extends IntegrationTestBase {
 				.andExpect(status().isOk())
 				.andExpect(content().string(containsString("User-agent")));
 	}
+
+	@Test
+	public void doesNotGetIndexPage() throws Exception {
+		this.mockMvc.perform(get("/index"))
+				.andExpect(status().isNotFound());
+	}
+
 }

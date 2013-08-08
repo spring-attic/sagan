@@ -53,8 +53,11 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 		try {
 			for (StaticPageMapper.StaticPageMapping mapping : this.staticPageMapper
 					.staticPagePaths()) {
-				registry.addViewController(mapping.getUrlPath()).setViewName(
-						"pages" + mapping.getFilePath());
+				String urlPath = mapping.getUrlPath();
+				registry.addViewController(urlPath).setViewName("pages" + mapping.getFilePath());
+				if (!urlPath.isEmpty()) {
+					registry.addViewController(urlPath + "/").setViewName("pages" + mapping.getFilePath());
+				}
 			}
 
 		} catch (IOException e) {
