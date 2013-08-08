@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.codec.Base64;
-import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.site.domain.services.MarkdownService;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
@@ -49,11 +48,11 @@ public class GitHubService implements MarkdownService {
 		}
 	}
 
-	public GuideRepo[] getGuideRepos(String reposPath) {
+	public GitHubRepo[] getGitHubRepos(String reposPath) {
 		String response = gitHubRestClient.sendRequestForJson(reposPath);
 
 		try {
-			return objectMapper.readValue(response, GuideRepo[].class);
+			return objectMapper.readValue(response, GitHubRepo[].class);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

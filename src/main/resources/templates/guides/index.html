@@ -24,6 +24,22 @@
         </div>
       </div>
     </div>
+
+	  <div class="guides-section--container gs-guides--container">
+		  <div class="section-title--container">
+			  <div class="section-title--icon gs-guides--icon"></div>
+			  <div class="section-title--title">
+				  Tutorials
+			  </div>
+			  <div class="section-title--intro">Learn how to do stuff.</div>
+		  </div>
+		  <div class="guides--wrapper">
+			  <div th:each="tutorial : ${tutorials}" class="guide--container">
+				  <a class="guide--title" th:href="@{'/guides/tutorials/'+${tutorial.guideId}+'/'}" th:text="${tutorial.title}">Building a RESTful Web Service</a>
+				  <p class="guide--subtitle" th:text="${tutorial.subtitle}">Learn how to create a REST web service with Spring</p>
+			  </div>
+		  </div>
+	  </div>
   </div>
 </body>
 </html>

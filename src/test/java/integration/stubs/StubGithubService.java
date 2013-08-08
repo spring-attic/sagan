@@ -1,7 +1,6 @@
 package integration.stubs;
 
 import org.springframework.context.annotation.Primary;
-import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.site.domain.services.github.GitHubService;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
@@ -51,8 +50,8 @@ public class StubGithubService extends GitHubService {
 	}
 
 	@Override
-	public GuideRepo[] getGuideRepos(String reposPath) {
-		return new GuideRepo[]{};
+	public GitHubRepo[] getGitHubRepos(String reposPath) {
+		return new GitHubRepo[]{};
 	}
 
 	@Override

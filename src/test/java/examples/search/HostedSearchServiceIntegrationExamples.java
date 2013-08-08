@@ -13,7 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.domain.guides.GettingStartedGuide;
-import org.springframework.site.domain.guides.GettingStartedService;
+import org.springframework.site.domain.guides.GuidesService;
 import org.springframework.site.indexer.configuration.IndexerConfiguration;
 import org.springframework.site.indexer.mapper.GuideSearchEntryMapper;
 import org.springframework.site.indexer.mapper.WebDocumentSearchEntryMapper;
@@ -61,7 +61,7 @@ public class HostedSearchServiceIntegrationExamples {
 	private SearchService searchService;
 
 	@Autowired
-	private GettingStartedService gettingStartedService;
+	private GuidesService guidesService;
 
 	private SearchEntry entry;
 
@@ -91,9 +91,9 @@ public class HostedSearchServiceIntegrationExamples {
 
 	@Test
 	public void gettingStarteGuideIndexing() throws ParseException, InterruptedException {
-		List<GettingStartedGuide> guideShells = this.gettingStartedService.listGuides();
+		List<GettingStartedGuide> guideShells = this.guidesService.listGettingStartedGuides();
 		GettingStartedGuide guideShell = guideShells.get(0);
-		GettingStartedGuide guide = this.gettingStartedService.loadGuide(guideShell
+		GettingStartedGuide guide = this.guidesService.loadGuide(guideShell
 				.getGuideId());
 
 		GuideSearchEntryMapper guideEntryMapper = new GuideSearchEntryMapper();

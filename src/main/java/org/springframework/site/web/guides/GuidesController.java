@@ -1,7 +1,7 @@
 package org.springframework.site.web.guides;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.guides.GettingStartedService;
+import org.springframework.site.domain.guides.GuidesService;
 import org.springframework.site.web.NavSection;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,16 +15,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @NavSection("guides")
 public class GuidesController {
 
-	private GettingStartedService service;
+	private GuidesService service;
 
 	@Autowired
-	public GuidesController(GettingStartedService service) {
+	public GuidesController(GuidesService service) {
 		this.service = service;
 	}
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String index(Model model) {
-		model.addAttribute("guides", service.listGuides());
+		model.addAttribute("guides", service.listGettingStartedGuides());
+		model.addAttribute("tutorials", service.listTutorials());
 		return "guides/index";
 	}
 }

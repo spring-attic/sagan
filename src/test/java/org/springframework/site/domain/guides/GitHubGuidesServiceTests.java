@@ -20,7 +20,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.matches;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class GitHubGettingStartedServiceTests {
+public class GitHubGuidesServiceTests {
 
 	private static final String GUIDE_ID = "rest-service";
 	private static final String GUIDE_REPO_NAME = "gs-rest-service";
@@ -33,13 +33,13 @@ public class GitHubGettingStartedServiceTests {
 	@Mock
 	private GitHubService gitHubService;
 
-	private GitHubGettingStartedService service;
+	private GitHubGuidesService service;
 
 	@Before
 	public void setup() throws IOException {
 		initMocks(this);
 
-		this.service = new GitHubGettingStartedService(this.gitHubService);
+		this.service = new GitHubGuidesService(this.gitHubService);
 	}
 
 	@Test
@@ -91,18 +91,34 @@ public class GitHubGettingStartedServiceTests {
 
 	@Test
 	public void listsGuides() {
-		GuideRepo guideRepo = new GuideRepo();
+		GitHubRepo guideRepo = new GitHubRepo();
 		guideRepo.setName("gs-rest-service");
-		GuideRepo notAGuideRepo = new GuideRepo();
+		GitHubRepo notAGuideRepo = new GitHubRepo();
 		notAGuideRepo.setName("not-a-guide");
 
-		GuideRepo[] guideRepos = {guideRepo, notAGuideRepo};
+		GitHubRepo[] guideRepos = {guideRepo, notAGuideRepo};
 
-		given(this.gitHubService.getGuideRepos(anyString())).willReturn(guideRepos);
+		given(this.gitHubService.getGitHubRepos(anyString())).willReturn(guideRepos);
 
-		List<GettingStartedGuide> guides = this.service.listGuides();
+		List<GettingStartedGuide> guides = this.service.listGettingStartedGuides();
 		assertThat(guides.size(), is(1));
 		assertThat(guides.get(0).getGuideId(), equalTo("rest-service"));
+	}
+
+	@Test
+	public void listsTutorials() {
+		GitHubRepo tutorialRepo = new GitHubRepo();
+		tutorialRepo.setName("tut-rest");
+		GitHubRepo notAGuideRepo = new GitHubRepo();
+		notAGuideRepo.setName("gs-not-a-tutorial");
+
+		GitHubRepo[] guideRepos = {tutorialRepo, notAGuideRepo};
+
+		given(this.gitHubService.getGitHubRepos(anyString())).willReturn(guideRepos);
+
+		List<GettingStartedGuide> tutorials = this.service.listTutorials();
+		assertThat(tutorials.size(), is(1));
+		assertThat(tutorials.get(0).getGuideId(), equalTo("rest"));
 	}
 
 	@Test

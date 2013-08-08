@@ -8,6 +8,7 @@ import org.jsoup.nodes.Element;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MvcResult;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -20,16 +21,14 @@ public class GettingStartedGuidesTests extends IntegrationTestBase {
 
 	@Test
 	public void getGettingStartedGuidesListPage() throws Exception {
-		MvcResult response = this.mockMvc.perform(get("/guides/gs"))
+		MvcResult response = this.mockMvc.perform(get("/guides"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		Element restServiceGuide = html.select(".guide").first();
-		assertThat(restServiceGuide.select(".title").text(), equalTo("Building a RESTful Web Service"));
-		assertThat(restServiceGuide.select(".subtitle").text(), equalTo("Learn how to create a REST web service with Spring"));
-		assertThat(restServiceGuide.select("a").attr("href"), equalTo("/guides/gs/rest-service/"));
+		assertThat(html.text(), containsString("Building a RESTful Web Service"));
+		assertThat(html.text(), containsString("Learn how to create a REST web service with Spring"));
 	}
 
 	@Test

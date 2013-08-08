@@ -1,8 +1,5 @@
 package org.springframework.site.domain.guides;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -19,7 +16,7 @@ import static org.mockito.BDDMockito.given;
 public class GettingStartedControllerTests {
 
 	@Mock
-	private GitHubGettingStartedService guideService;
+	private GitHubGuidesService guideService;
 
 	private ExtendedModelMap model;
 	private GettingStartedController controller;
@@ -57,25 +54,6 @@ public class GettingStartedControllerTests {
 		given(this.guideService.loadGuide("rest-service")).willThrow(
 				new RestClientException("Is GitHub down?"));
 		this.controller.viewGuide("rest-service", this.model);
-	}
-
-	@Test
-	public void listGuidesView() {
-		String view = this.controller.listGuides(this.model);
-		assertThat(view, is("guides/gs/list"));
-	}
-
-	@SuppressWarnings("unchecked")
-	@Test
-	public void listGuidesModel() {
-		List<GettingStartedGuide> guideList = new ArrayList<>();
-		GettingStartedGuide guide = new GettingStartedGuide("gs-rest-service",
-				"rest-service", "Title :: Description", "raw guide text", "");
-		guideList.add(guide);
-
-		given(this.guideService.listGuides()).willReturn(guideList);
-		this.controller.listGuides(this.model);
-		assertThat((List<GettingStartedGuide>) this.model.get("guides"), is(guideList));
 	}
 
 	@Test

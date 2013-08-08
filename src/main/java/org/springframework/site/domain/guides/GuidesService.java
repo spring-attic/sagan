@@ -2,11 +2,13 @@ package org.springframework.site.domain.guides;
 
 import java.util.List;
 
-public interface GettingStartedService {
+public interface GuidesService {
 
 	GettingStartedGuide loadGuide(String guideId);
 
-	List<GettingStartedGuide> listGuides();
+	List<GettingStartedGuide> listGettingStartedGuides();
+
+	List<GettingStartedGuide> listTutorials();
 
 	byte[] loadImage(String guideId, String imageName);
 }

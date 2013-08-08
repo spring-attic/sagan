@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.site.domain.guides.GettingStartedGuide;
-import org.springframework.site.domain.guides.GettingStartedService;
+import org.springframework.site.domain.guides.GuidesService;
 import org.springframework.site.web.NavSection;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,10 +28,10 @@ public class GettingStartedController {
 		return GUIDES_ROOT + "/" + guide.getGuideId() + TRAILING_SLASH;
 	}
 
-	private GettingStartedService service;
+	private GuidesService service;
 
 	@Autowired
-	public GettingStartedController(GettingStartedService service) {
+	public GettingStartedController(GuidesService service) {
 		this.service = service;
 	}
 
@@ -48,11 +48,4 @@ public class GettingStartedController {
 		byte[] image = this.service.loadImage(guideSlug, imageName);
 		return new ResponseEntity<>(image, HttpStatus.OK);
 	}
-
-	@RequestMapping(value = "", method = { GET, HEAD })
-	public String listGuides(Model model) {
-		model.addAttribute("guides", this.service.listGuides());
-		return "guides/gs/list";
-	}
-
 }

@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.site.domain.guides.GuideRepo;
 import org.springframework.site.domain.services.github.CachingGitHubRestClient;
 import org.springframework.site.domain.services.github.GitHubService;
 import org.springframework.site.test.FixtureLoader;
@@ -68,12 +67,12 @@ public class GitHubServiceTests {
 	}
 
 	@Test
-	public void getGuideRepos_fetchesGuideReposGitHub() {
+	public void getGitHubRepos_fetchesGuideReposGitHub() {
 		String response = FixtureLoader.load("/fixtures/github/githubRepoList.json");
 
 		given(gitHubRestClient.sendRequestForJson(anyString())).willReturn(response);
 
-		GuideRepo[] repos = service.getGuideRepos("/path/to/guide/repos");
+		GitHubRepo[] repos = service.getGitHubRepos("/path/to/guide/repos");
 		assertThat(repos[0].getName(), equalTo("Spring-Integration-in-Action"));
 	}
 

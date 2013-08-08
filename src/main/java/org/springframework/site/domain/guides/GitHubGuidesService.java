@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.services.github.GitHubService;
+import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
@@ -11,19 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class GitHubGettingStartedService implements GettingStartedService {
+public class GitHubGuidesService implements GuidesService {
 
 	private static final String GITHUB_USERNAME = "springframework-meta";
 	private static final String REPOS_PATH = "/orgs/springframework-meta/repos?per_page=100";
 	private static final String README_PATH = "/repos/springframework-meta/%s/contents/README.md";
 	private static final String SIDEBAR_PATH = "/repos/springframework-meta/%s/contents/SIDEBAR.md";
 
-	private static final Log log = LogFactory.getLog(GitHubGettingStartedService.class);
+	private static final Log log = LogFactory.getLog(GitHubGuidesService.class);
 
 	private final GitHubService gitHubService;
 
 	@Autowired
-	public GitHubGettingStartedService(GitHubService gitHubService) {
+	public GitHubGuidesService(GitHubService gitHubService) {
 		this.gitHubService = gitHubService;
 	}
 
@@ -66,16 +67,22 @@ public class GitHubGettingStartedService implements GettingStartedService {
 	}
 
 	@Override
-	public List<GettingStartedGuide> listGuides() {
-		GuideRepo[] guideRepos = this.gitHubService.getGuideRepos(REPOS_PATH);
-		return mapGuideReposToGettingStartedGuides(guideRepos);
+	public List<GettingStartedGuide> listGettingStartedGuides() {
+		GitHubRepo[] guideRepos = this.gitHubService.getGitHubRepos(REPOS_PATH);
+		return mapGuideReposToGettingStartedGuides(guideRepos, "gs-");
 	}
 
-	private List<GettingStartedGuide> mapGuideReposToGettingStartedGuides(GuideRepo[] guideRepos) {
+	@Override
+	public List<GettingStartedGuide> listTutorials() {
+		GitHubRepo[] guideRepos = this.gitHubService.getGitHubRepos(REPOS_PATH);
+		return mapGuideReposToGettingStartedGuides(guideRepos, "tut-");
+	}
+
+	private List<GettingStartedGuide> mapGuideReposToGettingStartedGuides(GitHubRepo[] guideRepos, String prefix) {
 		List<GettingStartedGuide> guides = new ArrayList<>();
-		for (GuideRepo githubRepo : guideRepos) {
-			if (githubRepo.isGettingStartedGuide()) {
-				guides.add(new GettingStartedGuide(githubRepo.getName(), githubRepo.getGuideId(), githubRepo.getDescription(), null, null));
+		for (GitHubRepo githubRepo : guideRepos) {
+			if (githubRepo.getName().startsWith(prefix)) {
+				guides.add(new GettingStartedGuide(githubRepo.getName(), githubRepo.getName().replaceAll("^"+prefix, ""), githubRepo.getDescription(), null, null));
 			}
 		}
 		return guides;
