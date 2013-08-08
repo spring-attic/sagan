@@ -1,5 +1,6 @@
 package org.springframework.site.indexer.mapper;
 
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.springframework.site.domain.understanding.UnderstandingGuide;
 import org.springframework.site.search.SearchEntry;
@@ -51,5 +52,10 @@ public class UnderstandingGuideMapperTests {
 	@Test
 	public void hasPath() throws Exception {
 		assertThat(entry.getPath(), equalTo("understanding/foo"));
+	}
+
+	@Test
+	public void mapsSubTitle() throws Exception {
+		assertThat(entry.getSubTitle(), IsEqual.equalTo("Understanding Doc"));
 	}
 }
