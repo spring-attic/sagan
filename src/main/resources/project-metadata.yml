@@ -13,9 +13,7 @@ variables:
   # TODO: support
   # ghIncubatorBaseUrl: http://incubator.springframework.io
 
-  # TODO: waiting on Trevor to update httpd config
-  # docsBaseUrl: http://docs.springframework.io
-  docsBaseUrl: http://static.springsource.org
+  docsBaseUrl: http://docs.springframework.io
 
   # TODO: https://www.pivotaltracker.com/story/show/54564326
   groupId: org.springframework

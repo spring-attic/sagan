@@ -33,7 +33,7 @@ public class ViewDocumentationTests extends IntegrationTestBase {
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("Spring Security")))
-				.andExpect(content().string(containsString("http://static.springsource.org/spring-mobile/docs/1.1.0.M3/reference/html")));
+				.andExpect(content().string(containsString("http://docs.springframework.io/spring-mobile/docs")));
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class ViewDocumentationTests extends IntegrationTestBase {
 				.andExpect(content().string(containsString("Spring AMQP")))
 				.andExpect(
 						content()
-								.string(not(containsString("http://static.springsource.org/spring-amqp-samples"))));
+								.string(not(containsString("http://docs.springframework.io/spring-amqp-samples"))));
 	}
 
 }

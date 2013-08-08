@@ -1,7 +1,7 @@
 variables:
   githubOrgBaseUrl: http://github.com/springframework
   ghPagesBaseUrl: http://projects.springframework.io
-  docsBaseUrl: http://static.springsource.org
+  docsBaseUrl: http://docs.springframework.io
 
 defaultUrls:
   refDocUrl: "{docsBaseUrl}/{id}/docs/{version}/reference/html"
