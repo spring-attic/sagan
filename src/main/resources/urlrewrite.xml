@@ -10,19 +10,21 @@
 -->
 <urlrewrite use-query-string="true">
     <rule>
-        <name>Getting Started Guides</name>
-        <note>Strip trailing /content from GSGs</note>
+        <name>GSG trailing slash</name>
+        <note>https://www.pivotaltracker.com/story/show/52214321</note>
         <from>/guides/gs/([^/]+)$</from>
         <to type="permanent-redirect" last="true">/guides/gs/$1/</to>
     </rule>
     <rule>
-        <note>Support GGTS welcome page requests [#54276930]</note>
+        <name>Legacy GGTS welcome page</name>
+        <note>https://www.pivotaltracker.com/story/show/54276930</note>
         <condition name="host">www.springsource.org</condition>
         <from>/ggts/welcome</from>
         <to type="temporary-redirect" last="true">http://grails.org/products/ggts</to>
     </rule>
     <rule>
-        <note>Support legacy STS welcome page requests [#54679580]</note>
+        <name>Legacy STS welcome page requests</name>
+        <note>https://www.pivotaltracker.com/story/show/54679580</note>
         <condition name="host">www.springsource.org</condition>
         <from>/sts/welcome</from>
         <to type="permanent-redirect" last="true">http://springframework.io/tools/sts/welcome</to>
@@ -34,7 +36,7 @@
         <to type="permanent-redirect" last="true">http://springframework.io/tools/ggts</to>
     </rule>
     <rule>
-        <name>Case study PDFs</name>
+        <name>Legacy case study PDFs</name>
         <note>https://www.pivotaltracker.com/story/show/54370286
         Temporarily serving case study PDFs from old drupal site (with a new name) until
         we move everything over to the new assets S3 bucket (see
@@ -44,7 +46,7 @@
         <to type="temporary-redirect" last="true">http://drupal.springframework.io$1</to>
     </rule>
     <rule>
-        <name>Blog images</name>
+        <name>Legacy blog images</name>
         <note>https://www.pivotaltracker.com/story/show/54370286
         Temporarily serving blog images from old blog site (with a new name) until
         we move everything over to the new assets S3 bucket (see
@@ -54,6 +56,7 @@
         <to type="temporary-redirect" last="true">http://wp.springframework.io$1</to>
     </rule>
     <rule>
+        <name>Legacy blog posts</name>
         <note>Redirect all blog requests [#54767200]. Note that the new blog has the same
         date-based slug scheme, so most blog paths should redirect in a generic fashion</note>
         <condition name="host">blog.springsource.org</condition>
@@ -61,6 +64,7 @@
         <to type="permanent-redirect" last="true">http://springframework.io/blog$1</to>
     </rule>
     <rule>
+        <name>Strip 'www' subdomain</name>
         <note>Redirect all www requests for all domains [#54747656]</note>
         <condition name="host">www.(.*)</condition>
         <from>^(.*)$</from>
