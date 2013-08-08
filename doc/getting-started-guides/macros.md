@@ -39,15 +39,15 @@ To **skip the basics**, do the following:
 
 
 <#macro build_system_intro>
-First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](/guides/gs/maven/content) or [Building Java Projects with Gradle](/guides/gs/gradle/content).
+First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](/guides/gs/maven) or [Building Java Projects with Gradle](/guides/gs/gradle/).
 </#macro>
 
 <#macro android_build_system_intro>
 In this section you set up a basic build script and then create a simple application. 
 
-> **Note:** If you are new to Android projects, before you proceed, refer to [Installing the Android Development Environment](/guides/gs/android/content) to help you configure your development environment.
+> **Note:** If you are new to Android projects, before you proceed, refer to [Installing the Android Development Environment](/guides/gs/android/) to help you configure your development environment.
 
-You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Android Projects with Maven](/guides/gs/maven-android/content) or [Building Android Projects with Gradle](/guides/gs/gradle-android/content).
+You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Android Projects with Maven](/guides/gs/maven-android/) or [Building Android Projects with Gradle](/guides/gs/gradle-android/).
  
 </#macro>
 
@@ -109,7 +109,7 @@ There's more to building RESTful web services than is covered here. You may want
 
 
 <#macro bootstrap_starter_pom_disclaimer>
-This guide is using [Spring Boot's starter POMs](/guides/gs/spring-boot/content).
+This guide is using [Spring Boot's starter POMs](/guides/gs/spring-boot/).
 
 Note to experienced Maven users who are unaccustomed to using an external parent project: you can take it out later, it's just there to reduce the amount of code you have to write to get started.
 </#macro>
@@ -171,7 +171,7 @@ $ mvn package
 
 [spring-boot-maven-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-maven-plugin
 
-> **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/content) instead.
+> **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
 </#macro>
 
 <#macro build_the_application>
@@ -218,7 +218,7 @@ $ mvn package
 
 [maven-shade-plugin]: https://maven.apache.org/plugins/maven-shade-plugin
 
-> **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/content) instead.
+> **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
 </#macro>
 
 <#macro run_the_application_with_maven module="service">

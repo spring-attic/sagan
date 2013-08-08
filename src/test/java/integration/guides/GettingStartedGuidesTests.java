@@ -29,12 +29,12 @@ public class GettingStartedGuidesTests extends IntegrationTestBase {
 		Element restServiceGuide = html.select(".guide").first();
 		assertThat(restServiceGuide.select(".title").text(), equalTo("Building a RESTful Web Service"));
 		assertThat(restServiceGuide.select(".subtitle").text(), equalTo("Learn how to create a REST web service with Spring"));
-		assertThat(restServiceGuide.select("a").attr("href"), equalTo("/guides/gs/rest-service/content"));
+		assertThat(restServiceGuide.select("a").attr("href"), equalTo("/guides/gs/rest-service/"));
 	}
 
 	@Test
 	public void getGettingStartedGuidesPage() throws Exception {
-		MvcResult response = this.mockMvc.perform(get("/guides/gs/awesome-guide/content"))
+		MvcResult response = this.mockMvc.perform(get("/guides/gs/awesome-guide/"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andReturn();

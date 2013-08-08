@@ -44,12 +44,6 @@ public class GettingStartedControllerTests {
 	}
 
 	@Test
-	public void guideViewWithoutContent() {
-		String view = this.controller.viewGuide("rest-service");
-		assertThat(view, is("redirect:/guides/gs/rest-service/content"));
-	}
-
-	@Test
 	public void guideIsInModel() {
 		GettingStartedGuide guide = new GettingStartedGuide("gs-rest-service",
 				"rest-service", "Title :: Description", "raw guide text", "");

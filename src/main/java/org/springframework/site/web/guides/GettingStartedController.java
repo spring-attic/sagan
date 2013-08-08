@@ -21,11 +21,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 public class GettingStartedController {
 
 	public static final String GUIDES_ROOT = "/guides/gs";
-	private static final String CONTENT_PATH = "/content";
-	private static final String SHOW_GUIDE = "/{guideId}" + CONTENT_PATH;
+	private static final String TRAILING_SLASH = "/";
+	private static final String SHOW_GUIDE = "/{guideId}" + TRAILING_SLASH;
 
 	static String getPath(GettingStartedGuide guide) {
-		return GUIDES_ROOT + "/" + guide.getGuideId() + CONTENT_PATH;
+		return GUIDES_ROOT + "/" + guide.getGuideId() + TRAILING_SLASH;
 	}
 
 	private GettingStartedService service;
@@ -40,11 +40,6 @@ public class GettingStartedController {
 		model.addAttribute("guideSlug", guideId);
 		model.addAttribute("guide", this.service.loadGuide(guideId));
 		return "guides/gs/guide";
-	}
-
-	@RequestMapping(value = "/{guideSlug}", method = { GET, HEAD })
-	public String viewGuide(@PathVariable String guideSlug) {
-		return "redirect:" + GUIDES_ROOT + "/" + guideSlug + "/content";
 	}
 
 	@RequestMapping(value = "/{guideSlug}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })

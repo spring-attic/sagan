@@ -19,7 +19,7 @@ public class GuideSearchEntryMapper implements SearchEntryMapper<GettingStartedG
 
 		entry.setSummary(text.substring(0, Math.min(500, text.length())));
 		entry.setRawContent(text);
-		entry.setPath("/guides/gs/" + guide.getGuideId() + "/content");
+		entry.setPath("/guides/gs/" + guide.getGuideId() + "/");
 		entry.addFacetPaths("Guides", "Guides/Getting Started");
 		// TODO: Can we get a publish date form github?
 		entry.setPublishAt(new Date(0L));

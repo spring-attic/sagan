@@ -19,8 +19,8 @@
       </div>
       <div class="guides--wrapper">
         <div th:each="guide : ${guides}" class="guide--container">
-          <a class="guide--title" href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/content'}" th:text="${guide.title}">Building a RESTful Web Service</a>
-          <p class="guide--subtitle" th:text="${guide.subtitle}">YADA Learn how to create a REST web service with Spring</p>
+          <a class="guide--title" href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/'}" th:text="${guide.title}">Building a RESTful Web Service</a>
+          <p class="guide--subtitle" th:text="${guide.subtitle}">Learn how to create a REST web service with Spring</p>
         </div>
       </div>
     </div>

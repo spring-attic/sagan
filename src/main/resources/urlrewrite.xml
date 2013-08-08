@@ -10,6 +10,12 @@
 -->
 <urlrewrite use-query-string="true">
     <rule>
+        <name>Getting Started Guides</name>
+        <note>Strip trailing /content from GSGs</note>
+        <from>/guides/gs/([^/]+)$</from>
+        <to type="permanent-redirect" last="true">/guides/gs/$1/</to>
+    </rule>
+    <rule>
         <note>Support GGTS welcome page requests [#54276930]</note>
         <condition name="host">www.springsource.org</condition>
         <from>/ggts/welcome</from>
