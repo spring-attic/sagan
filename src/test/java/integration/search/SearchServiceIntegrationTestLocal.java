@@ -6,6 +6,7 @@ import io.searchbox.client.config.ClientConfig;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.node.NodeBuilder;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import utils.FreePortFinder;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -632,5 +634,194 @@ public class SearchServiceIntegrationTestLocal {
 
 		List<SearchResult> results = searchService.search("ApplicationContext", pageable, Collections.<String>emptyList()).getPage().getContent();
 		assertThat(results.size(), equalTo(4));
+	}
+
+	@Test
+	public void testSearchTwoSpecificProjects_And_Documentation() throws Exception {
+		SearchEntry searchedRefDoc = SearchEntryBuilder.entry()
+				.path("http://example.com/framework/refDoc")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.projectId("spring-framework")
+				.version("3.4.5.RELEASE")
+				.type("site")
+				.facetPath("Documentation")
+				.facetPath("Documentation/Reference")
+				.facetPath("Projects")
+				.facetPath("Projects/SpringFramework")
+				.facetPath("Projects/SpringFramework/3.4.5.RELEASE")
+				.build();
+
+		searchService.saveToIndex(searchedRefDoc);
+
+		SearchEntry notFoundRefDoc = SearchEntryBuilder.entry()
+				.path("http://example.com/framework/refDocNotFound")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.projectId("spring-framework")
+				.version("3.4.5.NOT_FOUND")
+				.type("site")
+				.facetPath("Documentation")
+				.facetPath("Documentation/Reference")
+				.facetPath("Projects")
+				.facetPath("Projects/SpringFramework")
+				.facetPath("Projects/SpringFramework/3.4.5.NOT_FOUND")
+				.build();
+
+		searchService.saveToIndex(notFoundRefDoc);
+
+		SearchEntry apiDoc = SearchEntryBuilder.entry()
+				.path("http://example.com/framework/apiDoc")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.projectId("spring-framework")
+				.version("3.4.5.RELEASE")
+				.type("apiDoc")
+				.facetPath("Documentation")
+				.facetPath("Documentation/Api")
+				.facetPath("Projects")
+				.facetPath("Projects/SpringFramework")
+				.facetPath("Projects/SpringFramework/3.4.5.RELEASE")
+				.build();
+
+		searchService.saveToIndex(apiDoc);
+
+		SearchEntry projectNotFound = SearchEntryBuilder.entry()
+				.path("http://example.com/not_found/refDocNotFound")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.projectId("spring-not-found")
+				.version("3.4.5.RELEASE")
+				.type("site")
+				.facetPath("Documentation")
+				.facetPath("Documentation/Reference")
+				.facetPath("Projects")
+				.facetPath("Projects/SpringNotFound")
+				.facetPath("Projects/SpringNotFound/3.4.5.RELEASE")
+				.build();
+
+		searchService.saveToIndex(projectNotFound);
+
+		SearchEntry foundSecurityApiDoc = SearchEntryBuilder.entry()
+				.path("http://example.com/security/refDoc/3.5")
+				.title("ApplicationContext")
+				.rawContent("This is an ref doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.projectId("spring-security")
+				.version("3.5.RELEASE")
+				.type("site")
+				.facetPath("Documentation")
+				.facetPath("Documentation/Reference")
+				.facetPath("Projects")
+				.facetPath("Projects/SpringSecurity")
+				.facetPath("Projects/SpringSecurity/3.5.RELEASE")
+				.build();
+
+		searchService.saveToIndex(foundSecurityApiDoc);
+
+		SearchEntry otherFoundSecurityApiDoc = SearchEntryBuilder.entry()
+				.path("http://example.com/security/apiDoc/3.6")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.projectId("spring-security")
+				.version("3.6.RELEASE")
+				.type("apiDoc")
+				.facetPath("Documentation")
+				.facetPath("Documentation/Api")
+				.facetPath("Projects")
+				.facetPath("Projects/SpringSecurity")
+				.facetPath("Projects/SpringSecurity/3.6.RELEASE")
+				.build();
+
+		searchService.saveToIndex(otherFoundSecurityApiDoc);
+
+		List<String> facetPathFilters = new ArrayList<>();
+		facetPathFilters.add("Documentation/Api");
+		facetPathFilters.add("Documentation/Reference");
+		facetPathFilters.add("Projects/SpringSecurity");
+		facetPathFilters.add("Projects/SpringFramework/3.4.5.RELEASE");
+
+		List<SearchResult> results = searchService.search("ApplicationContext", pageable, facetPathFilters).getPage().getContent();
+
+		assertThat(results.size(), equalTo(4));
+		assertThat(results.get(0).getPath(), equalTo("http://example.com/framework/refDoc"));
+		assertThat(results.get(1).getPath(), equalTo("http://example.com/framework/apiDoc"));
+		assertThat(results.get(2).getPath(), equalTo("http://example.com/security/refDoc/3.5"));
+		assertThat(results.get(3).getPath(), equalTo("http://example.com/security/apiDoc/3.6"));
+
+
+		facetPathFilters = new ArrayList<>();
+		facetPathFilters.add("Projects");
+
+		results = searchService.search("ApplicationContext", pageable, facetPathFilters).getPage().getContent();
+
+		assertThat(results.size(), equalTo(6));
+	}
+
+	@Ignore
+	@Test
+	public void testSearchTwoSpecificProjects_And_Guides_or_Documentation() throws Exception {
+		SearchEntry blog = SearchEntryBuilder.entry()
+				.path("http://example.com/blog")
+				.title("a title")
+				.rawContent("a blog post")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.facetPath("Blog")
+				.facetPath("Blog/Engineering")
+				.build();
+
+		searchService.saveToIndex(blog);
+
+		SearchEntry gsg = SearchEntryBuilder.entry()
+				.path("http://example.com/gsg/some")
+				.title("a title")
+				.rawContent("some guide")
+				.summary("Html summary")
+				.publishAt("2013-01-01 10:00")
+				.facetPath("Guides")
+				.facetPath("Guides/Getting Started")
+				.notCurrent()
+				.build();
+
+		searchService.saveToIndex(gsg);
+
+
+		SearchEntry apiDoc = SearchEntryBuilder.entry()
+				.path("http://example.com/framework")
+				.title("ApplicationContext")
+				.rawContent("This is an api doc for ApplicationContext.")
+				.summary("class level description")
+				.publishAt("2013-01-01 10:00")
+				.notCurrent()
+				.projectId("not id to delete")
+				.version("3.4.5.RELEASE")
+				.type("apiDoc")
+				.facetPath("Documentation")
+				.facetPath("Documentation/Api")
+				.facetPath("Project")
+				.facetPath("Projects/SpringFramework")
+				.facetPath("Projects/SpringFramework/3.4.5.RELEASE")
+				.build();
+
+		searchService.saveToIndex(apiDoc);
+
 	}
 }
