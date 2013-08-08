@@ -25,7 +25,7 @@
         <note>Support legacy STS welcome page requests [#54679580]</note>
         <condition name="host">www.springsource.org</condition>
         <from>/sts/welcome</from>
-        <to type="permanent-redirect" last="true">/tools/sts/welcome</to>
+        <to type="permanent-redirect" last="true">http://springframework.io/tools/sts/welcome</to>
     </rule>
     <rule>
         <note>Support inbound link from http://grails.org/products/ggts [#54277050]</note>
