@@ -1,5 +1,14 @@
 $(document).ready(function () {
-    var map = L.map('map').setView([51.505, -0.09], 2);
+    var map = L.map('map', {
+            zoomControl:false,
+            dragging: false,
+            touchZoom: false,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            boxZoom: false,
+            tap: false
+        }
+    ).setView([51.505, -0.09], 2);
     L.tileLayer('http://{s}.tile.cloudmade.com/dc6ad76c483d4e5c92152aa34375ec28/1/256/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
         maxZoom: 18
@@ -19,5 +28,11 @@ $(document).ready(function () {
             bounds.push(new L.LatLng(teamLocation.latitude, teamLocation.longitude));
         }
     }
-    map.fitBounds(bounds);
+    if (length > 1) {
+        map.fitBounds(bounds);
+    } else if (length == 1) {
+        var latLng = new L.LatLng(teamLocations[0].latitude, teamLocations[0].longitude);
+        map.setView(latLng, 5);
+    }
+
 });

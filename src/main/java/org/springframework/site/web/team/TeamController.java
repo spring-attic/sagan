@@ -66,6 +66,12 @@ public class TeamController {
 		Page<PostView> postViewPage = postViewFactory.createPostViewPage(posts);
 		model.addAttribute("posts", postViewPage);
 
+		List<TeamLocation> teamLocations = new ArrayList<>();
+		if (profile.getTeamLocation() != null) {
+			teamLocations.add(profile.getTeamLocation());
+		}
+		model.addAttribute("teamLocations", teamLocations);
+
 		return "team/show";
 	}
 
