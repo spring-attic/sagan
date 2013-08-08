@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class StaticPageIndexer implements Indexer<String> {
@@ -21,6 +23,13 @@ public class StaticPageIndexer implements Indexer<String> {
 	private final CrawlerService crawlerService;
 	private final StaticPageMapper staticPageMapper;
 	private final CrawledWebDocumentProcessor documentProcessor;
+
+	private static final Set<String> pagesToIgnore = new HashSet<>();
+	static {
+		pagesToIgnore.add("/error");
+		pagesToIgnore.add("/500");
+		pagesToIgnore.add("/404");
+	}
 
 	@Autowired
 	public StaticPageIndexer(CrawlerService crawlerService, SearchService searchService, StaticPageMapper staticPageMapper) {
@@ -34,7 +43,9 @@ public class StaticPageIndexer implements Indexer<String> {
 		List<String> paths = new ArrayList<>();
 		try {
 			for (StaticPageMapper.StaticPageMapping staticPageMapping : staticPageMapper.staticPagePaths()) {
-				paths.add(baseUrl + staticPageMapping.getUrlPath());
+				if (!pagesToIgnore.contains(staticPageMapping.getUrlPath())) {
+					paths.add(baseUrl + staticPageMapping.getUrlPath());
+				}
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
