@@ -120,7 +120,7 @@ public class SearchQueryBuilder {
 	private void addFacets(SearchSourceBuilder searchSourceBuilder) {
 		TermsFacetBuilder facetBuilder = new TermsFacetBuilder("facet_paths_result")
 				.field("facetPaths")
-				.order(TermsFacet.ComparatorType.TERM).size(50);
+				.order(TermsFacet.ComparatorType.TERM).size(100000);
 
 		searchSourceBuilder.facet(facetBuilder);
 	}
