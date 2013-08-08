@@ -9,7 +9,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,18 +33,6 @@ public class ViewDocumentationTests extends IntegrationTestBase {
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("Spring Security")))
 				.andExpect(content().string(containsString("http://docs.springframework.io/spring-mobile/docs")));
-	}
-
-	@Test
-	public void getDocumentationForProjectWithMissingLinks() throws Exception {
-		this.mockMvc
-				.perform(get("/documentation"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Spring AMQP")))
-				.andExpect(
-						content()
-								.string(not(containsString("http://docs.springframework.io/spring-amqp-samples"))));
 	}
 
 }
