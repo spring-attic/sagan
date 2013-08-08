@@ -31,7 +31,7 @@
         <note>Support inbound link from http://grails.org/products/ggts [#54277050]</note>
         <condition name="host">www.springsource.org</condition>
         <from>/groovy-grails-tool-suite-download</from>
-        <to type="permanent-redirect" last="true">/tools/ggts</to>
+        <to type="permanent-redirect" last="true">http://springframework.io/tools/ggts</to>
     </rule>
     <rule>
         <name>Case study PDFs</name>
