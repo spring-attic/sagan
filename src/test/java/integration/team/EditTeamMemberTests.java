@@ -43,7 +43,7 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 		principal = new Principal() {
 			@Override
 			public String getName() {
-				return "someguy";
+				return "some-guy";
 			}
 		};
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
@@ -56,15 +56,15 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 
 	@Test
 	public void getEditOtherTeamMemberPageWithExistingProfile() throws Exception {
-		getEditProfilePage("/admin/team/someguy");
+		getEditProfilePage("/admin/team/some-guy");
 	}
 
 	private void getEditProfilePage(String editTeamUri) throws Exception {
 		MemberProfile profile = new MemberProfile();
 		profile.setName("First Last");
 		profile.setLocation("Location");
-		profile.setGithubUsername("someguy");
-		profile.setMemberId("someguy");
+		profile.setGithubUsername("some-guy");
+		profile.setMemberId("some-guy");
 
 		teamRepository.save(profile);
 
@@ -81,43 +81,43 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 
 	@Test
 	public void saveOtherTeamMemberProfile() throws Exception {
-		saveProfile("/admin/team/someguy");
+		saveProfile("/admin/team/some-guy");
 	}
 
 	private void saveProfile(String editTeamUri) throws Exception {
 		MemberProfile existingProfile = new MemberProfile();
-		existingProfile.setMemberId("someguy");
+		existingProfile.setMemberId("some-guy");
 		existingProfile.setName("Some");
 		existingProfile.setLocation("London");
 		existingProfile.setBio("I am just a guy");
-		existingProfile.setGithubUsername("someguy");
-		existingProfile.setTwitterUsername("tw_someguy");
-		existingProfile.setSpeakerdeckUsername("sd_someguy");
-		existingProfile.setLanyrdUsername("ly_someguy");
+		existingProfile.setGithubUsername("some-guy");
+		existingProfile.setTwitterUsername("tw_some-guy");
+		existingProfile.setSpeakerdeckUsername("sd_some-guy");
+		existingProfile.setLanyrdUsername("ly_some-guy");
 		teamRepository.save(existingProfile);
 
 		MockHttpServletRequestBuilder requestBuilder = put(editTeamUri).principal(principal);
 		requestBuilder.param("name", "Some_ Guy_");
 		requestBuilder.param("location", "London_");
 		requestBuilder.param("bio", "I am just a guy_");
-		requestBuilder.param("twitterUsername", "tw_someguy_");
-		requestBuilder.param("speakerdeckUsername", "sd_someguy_");
-		requestBuilder.param("lanyrdUsername", "ly_someguy_");
+		requestBuilder.param("twitterUsername", "tw_some-guy_");
+		requestBuilder.param("speakerdeckUsername", "sd_some-guy_");
+		requestBuilder.param("lanyrdUsername", "ly_some-guy_");
 		requestBuilder.param("geoLocation", "-12.5,45.3");
 		requestBuilder.param("videoEmbeds", "<iframe width=\"420\" height=\"315\" src=\"//www.youtube.com/embed/J---aiyznGQ\" frameborder=\"0\" allowfullscreen></iframe>");
 
 		performRequestAndExpectRedirect(requestBuilder, editTeamUri);
 
-		MemberProfile profile = teamRepository.findByMemberId("someguy");
+		MemberProfile profile = teamRepository.findByMemberId("some-guy");
 		assertThat(profile, not(nullValue()));
-		assertEquals("someguy", profile.getMemberId());
-		assertEquals("someguy", profile.getGithubUsername());
+		assertEquals("some-guy", profile.getMemberId());
+		assertEquals("some-guy", profile.getGithubUsername());
 		assertEquals("Some_ Guy_", profile.getName());
 		assertEquals("London_", profile.getLocation());
 		assertEquals("I am just a guy_", profile.getBio());
-		assertEquals("tw_someguy_", profile.getTwitterUsername());
-		assertEquals("sd_someguy_", profile.getSpeakerdeckUsername());
-		assertEquals("ly_someguy_", profile.getLanyrdUsername());
+		assertEquals("tw_some-guy_", profile.getTwitterUsername());
+		assertEquals("sd_some-guy_", profile.getSpeakerdeckUsername());
+		assertEquals("ly_some-guy_", profile.getLanyrdUsername());
 		assertEquals("<iframe width=\"420\" height=\"315\" src=\"//www.youtube.com/embed/J---aiyznGQ\" frameborder=\"0\" allowfullscreen></iframe>", profile.getVideoEmbeds());
 
 		assertThat(profile.getGeoLocation(), not(nullValue()));

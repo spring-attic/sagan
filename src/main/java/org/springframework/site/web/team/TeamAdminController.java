@@ -32,7 +32,7 @@ public class TeamAdminController {
 		return "admin/team/edit";
 	}
 
-	@RequestMapping(value = "/admin/team/{memberId:\\w+}", method = {GET, HEAD})
+	@RequestMapping(value = "/admin/team/{memberId}", method = {GET, HEAD})
 	public String editTeamMember(@PathVariable("memberId") String memberId, Model model) {
 		MemberProfile profile = teamService.fetchMemberProfile(memberId);
 		model.addAttribute("profile", profile);
@@ -47,7 +47,7 @@ public class TeamAdminController {
 		return "redirect:/admin/profile";
 	}
 
-	@RequestMapping(value = "/admin/team/{memberId:\\w+}", method = PUT)
+	@RequestMapping(value = "/admin/team/{memberId}", method = PUT)
 	public String saveTeamMember(@PathVariable("memberId") String memberId, MemberProfile profile) {
 		teamService.updateMemberProfile(memberId, profile);
 		return "redirect:/admin/team/" + memberId;
