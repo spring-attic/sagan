@@ -76,21 +76,17 @@
         <to type="temporary-redirect" last="true">http://www.youtube.com/springsourcedev</to>
     </rule>
     <rule>
-        <name>Getting Started Guides</name>
-        <note>Issue 302 redirect from /guides/gs to /guides#gs, /guides/tut to /guides#tut, /guides/app to /guides#app</note>
-        <from>/guides/gs</from>
+        <name>GSG listing</name>
+        <note>https://www.pivotaltracker.com/story/show/54212676
+        Issue 302 redirect from /guides/gs to /guides#gs</note>
+        <from>/guides/gs[/]?$</from>
         <to type="temporary-redirect" last="true">/guides#gs</to>
     </rule>
     <rule>
-        <name>Tutorials</name>
-        <note>Issue 302 redirect from /guides/gs to /guides#gs, /guides/tut to /guides#tut, /guides/app to /guides#app</note>
-        <from>/guides/tut</from>
-        <to type="temporary-redirect" last="true">/guides#tut</to>
-    </rule>
-    <rule>
-        <name>Reference Apps</name>
-        <note>Issue 302 redirect from /guides/gs to /guides#gs, /guides/tut to /guides#tut, /guides/app to /guides#app</note>
-        <from>/guides/app</from>
-        <to type="temporary-redirect" last="true">/guides#app</to>
+        <name>Tutorial listing</name>
+        <note>https://www.pivotaltracker.com/story/show/54212676
+        Issue 302 redirect from /guides/tutorials to /guides#tutorials</note>
+        <from>/guides/tutorials[/]?$</from>
+        <to type="temporary-redirect" last="true">/guides#tutorials</to>
     </rule>
 </urlrewrite>
