@@ -63,7 +63,8 @@ public class RewriteTests {
 
 	@Test
 	public void drupalNodesAreRedirected() throws Exception {
-		validatePermanentRedirect("http://blog.springsource.org/BusinessIntelligenceWithSpringAndBIRT", "http://springframework.io/blog/2012/01/30/spring-framework-birt");
+		validatePermanentRedirect("http://www.springsource.org/node/3762", "http://springframework.io/blog/2012/12/10/spring-framework-3-2-ga-released");
+		validatePermanentRedirect("http://www.springsource.org/BusinessIntelligenceWithSpringAndBIRT", "http://springframework.io/blog/2012/01/30/spring-framework-birt");
 	}
 
 	@Test
