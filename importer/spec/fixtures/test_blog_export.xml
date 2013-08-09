@@ -37,7 +37,7 @@
 
 	<wp:author><wp:author_id>1</wp:author_id><wp:author_login>sample</wp:author_login><wp:author_email>sample@springsource.com</wp:author_email><wp:author_display_name><![CDATA[Mr Sample]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Sample]]></wp:author_last_name></wp:author>
 	<wp:author><wp:author_id>3</wp:author_id><wp:author_login>test</wp:author_login><wp:author_email>test@vmware.com</wp:author_email><wp:author_display_name><![CDATA[Mr Test]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Test]]></wp:author_last_name></wp:author>
-	<wp:author><wp:author_id>5</wp:author_id><wp:author_login>dude</wp:author_login><wp:author_email>dude@vmware.com</wp:author_email><wp:author_display_name><![CDATA[Mr Dude]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Dude]]></wp:author_last_name></wp:author>
+	<wp:author><wp:author_id>5</wp:author_id><wp:author_login>Full Name</wp:author_login><wp:author_email>dude@vmware.com</wp:author_email><wp:author_display_name><![CDATA[Mr Dude]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Dude]]></wp:author_last_name></wp:author>
 
 	<wp:category><wp:term_id>78</wp:term_id><wp:category_nicename>amqp</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[AMQP]]></wp:cat_name></wp:category>
 	<wp:category><wp:term_id>95</wp:term_id><wp:category_nicename>android</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Android]]></wp:cat_name></wp:category>

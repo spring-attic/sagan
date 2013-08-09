@@ -26,6 +26,13 @@ describe Wordpress::BlogImporter do
       subject.import(StringIO.new)
     end
 
+    it 'sanitizes the username' do
+      expected_author = hash_including(username: 'full_name')
+
+      siteapi.should_receive(:save_member_profile).with(expected_author).once
+      subject.import(StringIO.new)
+    end
+
     it "creates a post for every published post in the import file" do
       siteapi.should_receive('save_blog_post').exactly(2).times
       subject.import(StringIO.new)

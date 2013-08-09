@@ -23,7 +23,7 @@ module Wordpress
     def import_authors
       authors = xml_doc.xpath("//wp:author")
       authors.each do |author|
-        username = author.xpath('wp:author_login').text
+        username = author.xpath('wp:author_login').text.downcase.gsub(' ', '_')
         puts "Importing #{username}"
         data = {
             username: username,
