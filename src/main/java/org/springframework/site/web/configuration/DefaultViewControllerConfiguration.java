@@ -7,13 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
-import org.springframework.boot.ops.web.BasicErrorController;
-import org.springframework.boot.ops.web.ErrorController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -37,7 +33,7 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	@Autowired
 	private StaticPageMapper staticPageMapper;
 
-	@Bean(name = {"uih", "viewRenderingHelper"})
+	@Bean(name = { "uih", "viewRenderingHelper" })
 	@Scope("request")
 	public ViewRenderingHelper viewRenderingHelper() {
 		return new ViewRenderingHelper();
@@ -54,9 +50,11 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 			for (StaticPageMapper.StaticPageMapping mapping : this.staticPageMapper
 					.staticPagePaths()) {
 				String urlPath = mapping.getUrlPath();
-				registry.addViewController(urlPath).setViewName("pages" + mapping.getFilePath());
+				registry.addViewController(urlPath).setViewName(
+						"pages" + mapping.getFilePath());
 				if (!urlPath.isEmpty()) {
-					registry.addViewController(urlPath + "/").setViewName("pages" + mapping.getFilePath());
+					registry.addViewController(urlPath + "/").setViewName(
+							"pages" + mapping.getFilePath());
 				}
 			}
 
@@ -79,8 +77,8 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 		registry.addInterceptor(new HandlerInterceptorAdapter() {
 			@Override
 			public void postHandle(HttpServletRequest request,
-								   HttpServletResponse response, Object handler,
-								   ModelAndView modelAndView) throws Exception {
+					HttpServletResponse response, Object handler,
+					ModelAndView modelAndView) throws Exception {
 
 				if (handler instanceof HandlerMethod) {
 					HandlerMethod handlerMethod = (HandlerMethod) handler;
@@ -97,20 +95,10 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	@Configuration
 	public static class ErrorConfiguration implements EmbeddedServletContainerCustomizer {
 
-		@Value("${error.path:/error}")
-		private String errorPath = "/error";
-
-		@Bean
-		@ConditionalOnMissingBean(ErrorController.class)
-		public BasicErrorController basicErrorController() {
-			return new BasicErrorController();
-		}
-
 		@Override
 		public void customize(ConfigurableEmbeddedServletContainerFactory factory) {
 			factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"));
 			factory.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500"));
-			factory.addErrorPages(new ErrorPage(this.errorPath));
 		}
 
 	}
