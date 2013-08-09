@@ -12,7 +12,7 @@ public class MemberProfileTests {
 	@Test
 	public void fullNameUsesNameIfAvailable() {
 		MemberProfile nick = new MemberProfile();
-		nick.setMemberId("nickstreet");
+		nick.setUsername("nickstreet");
 		nick.setName("Nick Street");
 		assertThat(nick.getFullName(), equalTo("Nick Street"));
 	}
@@ -20,7 +20,7 @@ public class MemberProfileTests {
 	@Test
 	public void fullNameFallsBackToUsername() {
 		MemberProfile nick = new MemberProfile();
-		nick.setMemberId("nickstreet");
+		nick.setUsername("nickstreet");
 		nick.setName(null);
 		assertThat(nick.getFullName(), equalTo("nickstreet"));
 	}

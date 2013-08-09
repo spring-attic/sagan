@@ -12,7 +12,7 @@ public class MemberProfileSearchEntryMapper  implements SearchEntryMapper<Member
 		entry.setTitle(profile.getFullName());
 		entry.setSummary(profile.getBio());
 		entry.setRawContent(profile.getBio());
-		entry.setPath("/team/" + profile.getMemberId());
+		entry.setPath("/team/" + profile.getUsername());
 		return entry;
 	}
 }

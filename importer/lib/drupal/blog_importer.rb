@@ -68,7 +68,7 @@ module Drupal
       if author_id == nil
         author_id = author_name.gsub(" ", "_").downcase
         data = {
-            memberId: author_id,
+            username: author_id,
             name: author_name
         }
         @siteapi.save_member_profile data

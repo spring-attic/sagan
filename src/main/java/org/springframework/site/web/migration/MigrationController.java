@@ -12,6 +12,7 @@ import org.springframework.site.web.blog.PostViewFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -43,20 +44,23 @@ public class MigrationController {
 	}
 
 	@RequestMapping(value = "/profile", method = POST)
-	public void migrateTeamMember(HttpServletResponse response, MemberProfile profile) {
-		MemberProfile existingProfile = teamService.fetchMemberProfile(profile.getMemberId());
-		response.setContentLength(0);
-		response.setStatus(200);
-		response.setHeader("Location", siteUrl.getAbsoluteUrl("/team/" + profile.getMemberId()));
+	public void migrateTeamMember( HttpServletResponse response, MemberProfile profile) {
+		MemberProfile existingProfile = teamService.fetchMemberProfileUsername(profile.getUsername());
+
 		if (existingProfile == null) {
 			profile.setHidden(true);
 			teamService.saveMemberProfile(profile);
 			response.setStatus(201);
+		} else {
+			response.setStatus(200);
 		}
+
+		response.setContentLength(0);
+		response.setHeader("Location", siteUrl.getAbsoluteUrl("/team/" + profile.getUsername()));
 	}
 
-	@RequestMapping(value = "/blogpost", method = POST)
-	public void migrateBlogPost(HttpServletResponse response, @Valid PostForm postForm, BindingResult result) throws IOException {
+	@RequestMapping(value = "/blogpost/{username}", method = POST)
+	public void migrateBlogPost(@PathVariable(value="username") String username, HttpServletResponse response, @Valid PostForm postForm, BindingResult result) throws IOException {
 		if (result.hasErrors()) {
 			response.setStatus(400);
 			for (ObjectError error : result.getAllErrors()) {
@@ -67,7 +71,7 @@ public class MigrationController {
 			Post post = blogService.getPost(postForm.getTitle(), postForm.getCreatedAt());
 			response.setContentLength(0);
 			if (post == null) {
-				post = blogService.addPost(postForm, postForm.getAuthorMemberId());
+				post = blogService.addPost(postForm, username);
 				response.setStatus(201);
 			} else {
 				blogService.updatePost(post, postForm);
@@ -82,7 +86,7 @@ public class MigrationController {
 	public @ResponseBody Map<String, String> migrateBlogPost() throws IOException {
 		Map<String, String> authors = new HashMap<>();
 		for (MemberProfile profile : teamService.fetchAllProfiles()) {
-			authors.put(profile.getFullName(), profile.getMemberId());
+			authors.put(profile.getFullName(), profile.getUsername());
 		}
 		authors.put("Some Guy", "someguy");
 		return authors;

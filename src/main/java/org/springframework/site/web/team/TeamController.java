@@ -55,11 +55,11 @@ public class TeamController {
 	}
 
 
-	@RequestMapping(value = "/{memberId}", method = {GET, HEAD})
-	public String showProfile(@PathVariable String memberId, Model model){
-		MemberProfile profile = teamService.fetchMemberProfile(memberId);
+	@RequestMapping(value = "/{username}", method = {GET, HEAD})
+	public String showProfile(@PathVariable String username, Model model){
+		MemberProfile profile = teamService.fetchMemberProfileUsername(username);
 		if (profile == null) {
-			throw new EntityNotFoundException("Profile not found with Id=" + memberId);
+			throw new EntityNotFoundException("Profile not found with Id=" + username);
 		}
 		model.addAttribute("profile", profile);
 		Page<Post> posts = blogService.getPublishedPostsForMember(profile, PageableFactory.forLists(1));

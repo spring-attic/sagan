@@ -28,7 +28,7 @@ import static org.mockito.BDDMockito.willThrow;
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_ValidPostTests {
 
-	private static final String AUTHOR_ID = "author";
+	private static final String AUTHOR_USERNAME = "username";
 	private Post post;
 	private PostForm postForm = new PostForm();
 	private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
@@ -68,15 +68,15 @@ public class BlogService_ValidPostTests {
 		post = PostBuilder.post()
 				.publishAt(publishAt)
 				.build();
-		given(postFormAdapter.createPostFromPostForm(postForm, AUTHOR_ID)).willReturn(post);
+		given(postFormAdapter.createPostFromPostForm(postForm, AUTHOR_USERNAME)).willReturn(post);
 
 		service = new BlogService(postRepository, postFormAdapter, dateService, searchService);
-		service.addPost(postForm, AUTHOR_ID);
+		service.addPost(postForm, AUTHOR_USERNAME);
 	}
 
 	@Test
 	public void createsAPost() {
-		verify(postFormAdapter).createPostFromPostForm(postForm, AUTHOR_ID);
+		verify(postFormAdapter).createPostFromPostForm(postForm, AUTHOR_USERNAME);
 	}
 
 	@Test
@@ -93,7 +93,7 @@ public class BlogService_ValidPostTests {
 	public void blogIsSavedWhenSearchServiceIsDown() {
 		reset(postRepository);
 		willThrow(SearchException.class).given(searchService).saveToIndex((SearchEntry) anyObject());
-		post = service.addPost(postForm, AUTHOR_ID);
+		post = service.addPost(postForm, AUTHOR_USERNAME);
 		verify(postRepository).save(post);
 	}
 
@@ -105,9 +105,9 @@ public class BlogService_ValidPostTests {
 		draftPostForm.setDraft(true);
 
 		Post draft = PostBuilder.post().draft().build();
-		given(postFormAdapter.createPostFromPostForm(draftPostForm, AUTHOR_ID)).willReturn(draft);
+		given(postFormAdapter.createPostFromPostForm(draftPostForm, AUTHOR_USERNAME)).willReturn(draft);
 
-		service.addPost(draftPostForm, AUTHOR_ID);
+		service.addPost(draftPostForm, AUTHOR_USERNAME);
 		verifyZeroInteractions(searchService);
 	}
 

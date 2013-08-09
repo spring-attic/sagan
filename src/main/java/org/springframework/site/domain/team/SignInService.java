@@ -19,17 +19,21 @@ public class SignInService {
 		this.teamRepository = teamRepository;
 	}
 
-	public void createMemberProfileIfNeeded(String userId, GitHub gitHub) {
-		MemberProfile profile = teamRepository.findByMemberId(userId);
+	public MemberProfile getOrCreateMemberProfile(Long githubId, GitHub gitHub) {
+		MemberProfile profile = teamRepository.findByGithubId(githubId);
+
 		if (profile == null) {
 			GitHubUserProfile remoteProfile = gitHub.userOperations().getUserProfile();
 			profile = new MemberProfile();
-			profile.setMemberId(userId);
-			profile.setGithubUsername(userId);
+			profile.setGithubId(githubId);
+			profile.setUsername(remoteProfile.getUsername());
+			profile.setGithubUsername(remoteProfile.getUsername());
 			profile.setAvatarUrl(remoteProfile.getProfileImageUrl());
 			profile.setName(remoteProfile.getName());
-			teamRepository.save(profile);
+			profile = teamRepository.save(profile);
 		}
+
+		return profile;
 	}
 
 	public boolean isSpringMember(String userId, GitHub gitHub) {

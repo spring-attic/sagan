@@ -5,6 +5,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.site.domain.team.MemberProfile;
 import org.springframework.site.domain.team.SignInService;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
@@ -24,28 +25,26 @@ public class GithubAuthenticationSigninAdapter implements SignInAdapter {
 	}
 
 	@Override
-	public String signIn(String userId, Connection<?> connection,
+	public String signIn(String githubId, Connection<?> connection,
 			NativeWebRequest request) {
-
 		GitHub gitHub = (GitHub) connection.getApi();
+		String githubUsername = connection.getDisplayName();
+
 		try {
-			if (!signInService.isSpringMember(userId, gitHub)) {
+			if (!signInService.isSpringMember(githubUsername, gitHub)) {
 				throw new BadCredentialsException("User not member of required org");
 			}
-			signInService.createMemberProfileIfNeeded(userId, gitHub);
+
+			MemberProfile member = signInService.getOrCreateMemberProfile(new Long(githubId), gitHub);
+			Authentication authentication = new UsernamePasswordAuthenticationToken(
+					member.getId(), "N/A",
+					AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			return path;
+
 		} catch (RestClientException e) {
 			throw new BadCredentialsException("User not member of required org");
 		}
-
-		Authentication authentication = new UsernamePasswordAuthenticationToken(
-				userId, "N/A",
-				AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
-		// Populate Spring SecurityContext (i.e. assume authentication complete
-		// at this point)
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-
-		return path;
-
 	}
 
 }

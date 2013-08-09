@@ -30,12 +30,12 @@
       <div id="map"></div>
     </div> 
     <div class="team-members--wrapper">
-      <div class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.memberId}">
-        <a th:href="@{'/team/' + ${profile.memberId}}" class="team-member--avatar">
+      <div class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
+        <a th:href="@{'/team/' + ${profile.username}}" class="team-member--avatar">
           <img th:src="${profile.avatarUrl} + '?s=153'" />
         </a>
         <div class="team-member--info">
-          <a th:href="@{'/team/' + ${profile.memberId}}" class="team-member--name" th:text="${profile.name}">Member Name</a>
+          <a th:href="@{'/team/' + ${profile.username}}" class="team-member--name" th:text="${profile.name}">Member Name</a>
           <div class="team-member--bio">
             <p class="team-member--position" th:text="${profile.bio}">Some bio</p>
             <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
@@ -51,7 +51,7 @@
     </div>
     <script th:inline="javascript">
       /*<![CDATA[*/
-      var teamLocations = /*[[${teamLocations}]]*/ [{memberId: 'memberId', latitude: 30.0, longitude: 1.5}];
+      var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
       /*]]>*/
     </script>
   </div>

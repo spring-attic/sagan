@@ -7,7 +7,9 @@ import java.util.List;
 
 @Repository
 public interface TeamRepository extends JpaRepository<MemberProfile, Long> {
-	MemberProfile findByMemberId(String memberId);
+	MemberProfile findById(Long id);
+	MemberProfile findByGithubId(Long githubId);
+	MemberProfile findByUsername(String username);
 
 	List<MemberProfile> findByHidden(boolean b);
 }

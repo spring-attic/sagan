@@ -15,7 +15,7 @@ public class MemberProfileSearchEntryMapperTests {
 
 	@Before
 	public void setUp() throws Exception {
-		profile.setMemberId("jdoe");
+		profile.setUsername("jdoe");
 		profile.setName("First Last");
 		profile.setBio("A very good developer!");
 		searchEntry = mapper.map(profile);

@@ -27,12 +27,24 @@ public class TeamService {
 		this.mapper = mapper;
 	}
 
-	public MemberProfile fetchMemberProfile(String memberId) {
-		return teamRepository.findByMemberId(memberId);
+	public MemberProfile fetchMemberProfile(Long id) {
+		return teamRepository.findById(id);
 	}
 
-	public void updateMemberProfile(String memberId, MemberProfile profile) {
-		MemberProfile existingProfile = fetchMemberProfile(memberId);
+
+	public MemberProfile fetchMemberProfileUsername(String username) {
+		return teamRepository.findByUsername(username);
+	}
+
+	public void updateMemberProfile(Long id, MemberProfile profile) {
+		updateMemberProfile(profile, fetchMemberProfile(id));
+	}
+
+	public void updateMemberProfile(String username, MemberProfile updatedProfile) {
+		updateMemberProfile(updatedProfile, fetchMemberProfileUsername(username));
+	}
+
+	private void updateMemberProfile(MemberProfile profile, MemberProfile existingProfile) {
 		existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
 		existingProfile.setTwitterUsername(profile.getTwitterUsername());
 		existingProfile.setBio(profile.getBio());
@@ -55,7 +67,7 @@ public class TeamService {
 		try {
 			searchService.saveToIndex(mapper.map(existingProfile));
 		} catch (Exception e) {
-			logger.warn("Indexing failed for " + existingProfile.getMemberId(), e);
+			logger.warn("Indexing failed for " + existingProfile.getId(), e);
 		}
 	}
 

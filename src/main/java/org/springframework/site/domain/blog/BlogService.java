@@ -104,8 +104,8 @@ public class BlogService {
 		return this.repository.findAll(pageRequest);
 	}
 
-	public Post addPost(PostForm postForm, String authorId) {
-		Post post = postFormAdapter.createPostFromPostForm(postForm, authorId);
+	public Post addPost(PostForm postForm, String username) {
+		Post post = postFormAdapter.createPostFromPostForm(postForm, username);
 		this.repository.save(post);
 		saveToIndex(post);
 		return post;

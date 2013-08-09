@@ -15,6 +15,8 @@ import org.springframework.site.domain.blog.PostBuilder;
 import org.springframework.site.domain.blog.PostCategory;
 import org.springframework.site.domain.blog.PostForm;
 import org.springframework.site.domain.services.DateService;
+import org.springframework.site.domain.team.MemberProfile;
+import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.site.web.blog.BlogAdminController;
 import org.springframework.site.web.blog.PostView;
@@ -57,6 +59,9 @@ public class BlogAdminControllerTests {
 	private PostViewFactory postViewFactory;
 	private MapBindingResult bindingResult;
 
+	@Mock
+	private TeamRepository teamRepository;
+
 	@Before
 	public void setup() {
 		bindingResult = new MapBindingResult(new HashMap<Object, Object>(), "postForm");
@@ -64,16 +69,18 @@ public class BlogAdminControllerTests {
 		principal = new Principal() {
 			@Override
 			public String getName() {
-				return "testUser";
+				return "12345";
 			}
 		};
-		controller = new BlogAdminController(blogService, postViewFactory);
+
+//		given(teamRepository.findById(anyLong())).willReturn()
+		controller = new BlogAdminController(blogService, postViewFactory, teamRepository);
 	}
 
 	@Test
 	public void dashboardShowsUsersPosts() {
 		postViewFactory = mock(PostViewFactory.class);
-		controller = new BlogAdminController(blogService, postViewFactory);
+		controller = new BlogAdminController(blogService, postViewFactory, teamRepository);
 
 		Page<Post> drafts = new PageImpl<Post>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
 		Page<Post> published = new PageImpl<Post>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
@@ -115,21 +122,34 @@ public class BlogAdminControllerTests {
 
 	@Test
 	public void creatingABlogPostRecordsTheUser() {
+		String username = "username";
+
+		MemberProfile member = new MemberProfile();
+		member.setUsername(username);
+
+		given(teamRepository.findById(12345L)).willReturn(member);
 		PostForm postForm = new PostForm();
 
 		given(blogService.addPost(eq(postForm), anyString())).willReturn(TEST_POST);
 		controller.createPost(principal, postForm, new BindException(postForm, "postForm"), null);
-		verify(blogService).addPost(postForm, "testUser");
+		verify(blogService).addPost(postForm, username);
 	}
 
 	@Test
 	public void redirectToPostAfterCreation() throws Exception {
+		String username = "username";
+
+		MemberProfile member = new MemberProfile();
+		member.setUsername(username);
+
+		given(teamRepository.findById(12345L)).willReturn(member);
+
 		PostForm postForm = new PostForm();
 		postForm.setTitle("title");
 		postForm.setContent("content");
 		postForm.setCategory(PostCategory.ENGINEERING);
 		Post post = PostBuilder.post().id(123L).publishAt("2013-05-06 00:00").title("Post Title").build();
-		given(blogService.addPost(postForm, principal.getName())).willReturn(post);
+		given(blogService.addPost(postForm, username)).willReturn(post);
 		String result = controller.createPost(principal, postForm, bindingResult, null);
 
 		assertThat(result, equalTo("redirect:/blog/2013/05/06/post-title"));

@@ -14,10 +14,16 @@ import org.springframework.social.github.api.GitHubUserProfile;
 import org.springframework.social.github.api.UserOperations;
 import org.springframework.web.client.RestOperations;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.BDDMockito.*;
-import static org.mockito.Matchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.BDDMockito.anyLong;
+import static org.mockito.BDDMockito.anyObject;
+import static org.mockito.BDDMockito.anyString;
+import static org.mockito.BDDMockito.argThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.mock;
+import static org.mockito.BDDMockito.never;
+import static org.mockito.BDDMockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SignInServiceTests {
@@ -48,15 +54,15 @@ public class SignInServiceTests {
 		given(userOperations.getUserProfile()).willReturn(userProfile);
 		given(gitHub.userOperations()).willReturn(userOperations);
 
-		given(teamRepository.findByMemberId(anyString())).willReturn(null);
-		signInService.createMemberProfileIfNeeded("user", gitHub);
+		given(teamRepository.findByGithubId(anyLong())).willReturn(null);
+		signInService.getOrCreateMemberProfile(1234L, gitHub);
 
 		verify(teamRepository).save(argThat(new ArgumentMatcher<MemberProfile>() {
 			@Override
 			public boolean matches(Object argument) {
 				MemberProfile profile = (MemberProfile)argument;
 				return profile != null &&
-						username.equals(profile.getMemberId()) &&
+						username.equals(profile.getUsername()) &&
 						name.equals(profile.getName()) &&
 						username.equals(profile.getGithubUsername()) &&
 						avatarUrl.equals(profile.getAvatarUrl());
@@ -66,8 +72,8 @@ public class SignInServiceTests {
 
 	@Test
 	public void doNotCreateAMemberProfileIfOneDoesExist() {
-		given(teamRepository.findByMemberId(anyString())).willReturn(new MemberProfile());
-		signInService.createMemberProfileIfNeeded("user", gitHub);
+		given(teamRepository.findByGithubId(anyLong())).willReturn(new MemberProfile());
+		signInService.getOrCreateMemberProfile(1234L, gitHub);
 
 		verify(teamRepository, never()).save((MemberProfile) anyObject());
 	}

@@ -82,7 +82,7 @@ public class BlogSampleDataController {
 
 	private void generateRandomTeamMember(int index) {
 		MemberProfile profile = new MemberProfile();
-		profile.setMemberId("member" + index);
+		profile.setUsername("member_" + index);
 		profile.setName("Member " + index);
 		profile.setLocation(locations[index % locations.length]);
 		profile.setGeoLocation(geoLocations[index % geoLocations.length]);
@@ -90,7 +90,7 @@ public class BlogSampleDataController {
 		teamRepository.save(profile);
 	}
 
-	private void generateRandomBlogPost(String authorId) {
+	private void generateRandomBlogPost(String authorMemberName) {
 		PostCategory[] categories = PostCategory.values();
 		long MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
 		PostForm postForm = new PostForm();
@@ -104,7 +104,7 @@ public class BlogSampleDataController {
 		postForm.setContent("Welcome to another installment of This Week in **Spring**. The SpringOne2GX super early bird registration discount expires on June 10th, 2013, so make your arrangements now to secure the discount. Also, we've got three webinars coming up this month, check out the details below. As usual, we've got a lot to cover, so let's get to it!\n" +
 				"\n" +
 				"1.  I'll be doing a webinar on building effective REST APIs with Spring on June 13th. I'll be introducing Spring's deep support for REST services, starting");
-		Post post = blogService.addPost(postForm, authorId);
+		Post post = blogService.addPost(postForm, authorMemberName);
 		if (post.isLiveOn(new Date())) {
 			try {
 				searchService.saveToIndex(mapper.map(post));

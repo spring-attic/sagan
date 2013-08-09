@@ -25,32 +25,32 @@ public class TeamAdminController {
 	}
 
 	@RequestMapping(value = "/admin/profile", method = {GET, HEAD})
-	public String editProfile(Principal principal, Model model) {
-		MemberProfile profile = teamService.fetchMemberProfile(principal.getName());
+	public String editProfileForm(Principal principal, Model model) {
+		MemberProfile profile = teamService.fetchMemberProfile(new Long(principal.getName()));
 		model.addAttribute("profile", profile);
 		model.addAttribute("formAction", "/admin/profile");
 		return "admin/team/edit";
 	}
 
-	@RequestMapping(value = "/admin/team/{memberId}", method = {GET, HEAD})
-	public String editTeamMember(@PathVariable("memberId") String memberId, Model model) {
-		MemberProfile profile = teamService.fetchMemberProfile(memberId);
+	@RequestMapping(value = "/admin/team/{username}", method = {GET, HEAD})
+	public String editTeamMemberForm(@PathVariable("username") String username, Model model) {
+		MemberProfile profile = teamService.fetchMemberProfileUsername(username);
 		model.addAttribute("profile", profile);
-		model.addAttribute("formAction", "/admin/team/" + memberId);
+		model.addAttribute("formAction", "/admin/team/" + username);
 		return "admin/team/edit";
 	}
 
 
 	@RequestMapping(value = "/admin/profile", method = PUT)
 	public String saveProfile(Principal principal, MemberProfile profile) {
-		teamService.updateMemberProfile(principal.getName(), profile);
+		teamService.updateMemberProfile(new Long(principal.getName()), profile);
 		return "redirect:/admin/profile";
 	}
 
-	@RequestMapping(value = "/admin/team/{memberId}", method = PUT)
-	public String saveTeamMember(@PathVariable("memberId") String memberId, MemberProfile profile) {
-		teamService.updateMemberProfile(memberId, profile);
-		return "redirect:/admin/team/" + memberId;
+	@RequestMapping(value = "/admin/team/{username}", method = PUT)
+	public String saveTeamMember(@PathVariable("username") String username, MemberProfile profile) {
+		teamService.updateMemberProfile(username, profile);
+		return "redirect:/admin/team/" + username;
 	}
 
 }

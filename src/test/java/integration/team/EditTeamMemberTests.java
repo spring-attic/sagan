@@ -40,10 +40,22 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 
 	@Before
 	public void setup() {
+		MemberProfile existingProfile = new MemberProfile();
+		existingProfile.setUsername("some-guy");
+		existingProfile.setName("Some");
+		existingProfile.setLocation("London");
+		existingProfile.setBio("I am just a guy");
+		existingProfile.setGithubUsername("gh-some-guy");
+		existingProfile.setTwitterUsername("tw_some-guy");
+		existingProfile.setSpeakerdeckUsername("sd_some-guy");
+		existingProfile.setLanyrdUsername("ly_some-guy");
+
+		final MemberProfile memberProfile = teamRepository.save(existingProfile);
+
 		principal = new Principal() {
 			@Override
 			public String getName() {
-				return "some-guy";
+				return memberProfile.getId().toString();
 			}
 		};
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
@@ -60,14 +72,6 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 	}
 
 	private void getEditProfilePage(String editTeamUri) throws Exception {
-		MemberProfile profile = new MemberProfile();
-		profile.setName("First Last");
-		profile.setLocation("Location");
-		profile.setGithubUsername("some-guy");
-		profile.setMemberId("some-guy");
-
-		teamRepository.save(profile);
-
 		this.mockMvc.perform(get(editTeamUri).principal(principal))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
@@ -85,17 +89,6 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 	}
 
 	private void saveProfile(String editTeamUri) throws Exception {
-		MemberProfile existingProfile = new MemberProfile();
-		existingProfile.setMemberId("some-guy");
-		existingProfile.setName("Some");
-		existingProfile.setLocation("London");
-		existingProfile.setBio("I am just a guy");
-		existingProfile.setGithubUsername("some-guy");
-		existingProfile.setTwitterUsername("tw_some-guy");
-		existingProfile.setSpeakerdeckUsername("sd_some-guy");
-		existingProfile.setLanyrdUsername("ly_some-guy");
-		teamRepository.save(existingProfile);
-
 		MockHttpServletRequestBuilder requestBuilder = put(editTeamUri).principal(principal);
 		requestBuilder.param("name", "Some_ Guy_");
 		requestBuilder.param("location", "London_");
@@ -108,10 +101,10 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 
 		performRequestAndExpectRedirect(requestBuilder, editTeamUri);
 
-		MemberProfile profile = teamRepository.findByMemberId("some-guy");
+		MemberProfile profile = teamRepository.findByUsername("some-guy");
 		assertThat(profile, not(nullValue()));
-		assertEquals("some-guy", profile.getMemberId());
-		assertEquals("some-guy", profile.getGithubUsername());
+		assertEquals("some-guy", profile.getUsername());
+		assertEquals("gh-some-guy", profile.getGithubUsername());
 		assertEquals("Some_ Guy_", profile.getName());
 		assertEquals("London_", profile.getLocation());
 		assertEquals("I am just a guy_", profile.getBio());

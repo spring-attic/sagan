@@ -14,7 +14,7 @@
 </head>
 <body>
   <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container" th:object="${profile}" data:member-id="${profile.memberId}">
+  <div layout:fragment="content" class="container" th:object="${profile}" data:member-id="${profile.id}">
     <div class="team-map--wrapper">
       <div class="team-member--container">
         <div class="container-fluid">
@@ -109,7 +109,7 @@
     </div>
   <script th:inline="javascript">
 	  /*<![CDATA[*/
-	  var teamLocations = /*[[${teamLocations}]]*/ [{memberId: 'memberId', latitude: 30.0, longitude: 1.5}];
+	  var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
 	  /*]]>*/
   </script>
   </div>

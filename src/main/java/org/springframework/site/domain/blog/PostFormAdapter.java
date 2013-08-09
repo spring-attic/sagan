@@ -25,10 +25,10 @@ public class PostFormAdapter {
 		this.teamRepository = teamRepository;
 	}
 
-	public Post createPostFromPostForm(PostForm postForm, String authorId) {
+	public Post createPostFromPostForm(PostForm postForm, String username) {
 		String content = postForm.getContent();
 		Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
-		MemberProfile profile = this.teamRepository.findByMemberId(authorId);
+		MemberProfile profile = this.teamRepository.findByUsername(username);
 		post.setAuthor(profile);
 		post.setCreatedAt(createdDate(postForm, dateService.now()));
 

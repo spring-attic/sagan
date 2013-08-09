@@ -30,6 +30,9 @@ public class MemberProfile {
 	@Column(nullable = true)
 	private String githubUsername;
 
+	@Column(nullable = false)
+	private String username;
+
 	@Column(nullable = true)
 	private String speakerdeckUsername;
 
@@ -39,8 +42,8 @@ public class MemberProfile {
 	@Column(nullable = true)
 	private String lanyrdUsername;
 
-	@Column(nullable = false)
-	private String memberId;
+	@Column(nullable = true)
+	private Long githubId;
 
 	@Column
 	private GeoLocation geoLocation;
@@ -51,6 +54,10 @@ public class MemberProfile {
 
 	@Column
 	private boolean hidden;
+
+	public Long getId() {
+		return id;
+	}
 
 	public String getName() {
 		return name;
@@ -92,12 +99,12 @@ public class MemberProfile {
 		this.githubUsername = githubUsername;
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public Long getGithubId() {
+		return githubId;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setGithubId(Long githubId) {
+		this.githubId = githubId;
 	}
 
 	public String getGravatarEmail() {
@@ -133,7 +140,7 @@ public class MemberProfile {
 	}
 
 	public String getFullName() {
-		return name == null ? getMemberId() : name;
+		return name == null ? getUsername() : name;
 	}
 
 	public Link getTwitterLink() {
@@ -177,7 +184,7 @@ public class MemberProfile {
 
 	public TeamLocation getTeamLocation() {
 		if (geoLocation == null) return null;
-		return new TeamLocation(name, geoLocation.getLatitude(), geoLocation.getLongitude(), getMemberId());
+		return new TeamLocation(name, geoLocation.getLatitude(), geoLocation.getLongitude(), getId());
 	}
 
 	public String getVideoEmbeds() {
@@ -194,5 +201,13 @@ public class MemberProfile {
 
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

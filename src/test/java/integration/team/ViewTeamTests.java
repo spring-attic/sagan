@@ -36,14 +36,14 @@ public class ViewTeamTests extends IntegrationTestBase {
 		MemberProfile visible = new MemberProfile();
 		visible.setName("First Last");
 		visible.setGithubUsername("someguy");
-		visible.setMemberId("someguy");
+		visible.setUsername("someguy");
 
 		teamRepository.save(visible);
 
 		MemberProfile hidden = new MemberProfile();
 		hidden.setName("Other dude");
 		hidden.setGithubUsername("dude");
-		hidden.setMemberId("dude");
+		hidden.setUsername("dude");
 		hidden.setHidden(true);
 
 		teamRepository.save(hidden);

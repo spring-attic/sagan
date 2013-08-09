@@ -6,6 +6,8 @@ import org.springframework.site.domain.blog.BlogService;
 import org.springframework.site.domain.blog.Post;
 import org.springframework.site.domain.blog.PostCategory;
 import org.springframework.site.domain.blog.PostForm;
+import org.springframework.site.domain.team.MemberProfile;
+import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.site.web.PageableFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +31,13 @@ public class BlogAdminController {
 
 	private BlogService service;
 	private PostViewFactory postViewFactory;
+	private TeamRepository teamRepository;
 
 	@Autowired
-	public BlogAdminController(BlogService service, PostViewFactory postViewFactory) {
+	public BlogAdminController(BlogService service, PostViewFactory postViewFactory, TeamRepository teamRepository) {
 		this.service = service;
 		this.postViewFactory = postViewFactory;
+		this.teamRepository = teamRepository;
 	}
 
 	@RequestMapping(value = "", method = { GET, HEAD })
@@ -75,7 +79,8 @@ public class BlogAdminController {
 			model.addAttribute("categories", PostCategory.values());
 			return "admin/blog/new";
 		} else {
-			Post post = service.addPost(postForm, principal.getName());
+			MemberProfile memberProfile = teamRepository.findById(new Long(principal.getName()));
+			Post post = service.addPost(postForm, memberProfile.getUsername());
 			PostView postView = postViewFactory.createPostView(post);
 			return "redirect:" + postView.getPath();
 		}

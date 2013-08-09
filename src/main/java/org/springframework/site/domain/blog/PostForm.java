@@ -25,8 +25,6 @@ public class PostForm {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date createdAt;
 
-	private String authorMemberId;
-
 	public PostForm() { }
 
 	public PostForm(Post post) {
@@ -86,13 +84,6 @@ public class PostForm {
 		this.publishAt = publishAt;
 	}
 
-	public String getAuthorMemberId() {
-		return authorMemberId;
-	}
-
-	public void setAuthorMemberId(String authorMemberId) {
-		this.authorMemberId = authorMemberId;
-	}
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -100,5 +91,4 @@ public class PostForm {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-
 }

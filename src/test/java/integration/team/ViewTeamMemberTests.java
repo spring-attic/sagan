@@ -40,7 +40,7 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
 		MemberProfile profile = new MemberProfile();
 		profile.setName("First Last");
 		profile.setGithubUsername("someguy");
-		profile.setMemberId("someguy");
+		profile.setUsername("someguy");
 
 		teamRepository.save(profile);
 
@@ -56,7 +56,7 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
 		MemberProfile profile = new MemberProfile();
 		profile.setName("First Last");
 		profile.setGithubUsername("someguy");
-		profile.setMemberId("someguy");
+		profile.setUsername("someguy");
 
 		teamRepository.save(profile);
 
@@ -80,7 +80,7 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
 		MemberProfile profile = new MemberProfile();
 		profile.setName("First Last");
 		profile.setGithubUsername("some-guy");
-		profile.setMemberId("some-guy");
+		profile.setUsername("some-guy");
 
 		teamRepository.save(profile);
 

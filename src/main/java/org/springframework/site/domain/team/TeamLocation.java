@@ -4,12 +4,12 @@ public class TeamLocation {
 	private String name;
 	private float latitude;
 	private float longitude;
-	private String memberId;
+	private Long memberId;
 
 	public TeamLocation() {
 	}
 
-	public TeamLocation(String name, float latitude, float longitude, String memberId) {
+	public TeamLocation(String name, float latitude, float longitude, Long memberId) {
 		this.name = name;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -40,7 +40,7 @@ public class TeamLocation {
 		this.longitude = longitude;
 	}
 
-	public String getMemberId() {
+	public Long getMemberId() {
 		return memberId;
 	}
 }

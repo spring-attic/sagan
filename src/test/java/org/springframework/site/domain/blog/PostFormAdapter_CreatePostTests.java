@@ -27,7 +27,7 @@ public class PostFormAdapter_CreatePostTests {
 
 	public static final String RENDERED_HTML = "<p>Rendered HTML</p><p>from Markdown</p>";
 	public static final String RENDERED_SUMMARY = "<p>Rendered HTML</p>";
-	private static final String AUTHOR_ID = "author";
+	private static final String AUTHOR_USERNAME = "author";
 	private static final String AUTHOR_NAME = "mr author";
 	private Post post;
 	private String title = "Title";
@@ -60,9 +60,9 @@ public class PostFormAdapter_CreatePostTests {
 	@Before
 	public void setup() {
 		MemberProfile profile = new MemberProfile();
-		profile.setMemberId(AUTHOR_ID);
+		profile.setUsername(AUTHOR_USERNAME);
 		profile.setName(AUTHOR_NAME);
-		given(teamRepository.findByMemberId(AUTHOR_ID)).willReturn(profile);
+		given(teamRepository.findByUsername(AUTHOR_USERNAME)).willReturn(profile);
 
 		given(renderer.render(content)).willReturn(RENDERED_HTML);
 		given(summaryExtractor.extract(anyString(), anyInt())).willReturn(RENDERED_SUMMARY);
@@ -77,7 +77,7 @@ public class PostFormAdapter_CreatePostTests {
 		postForm.setBroadcast(broadcast);
 		postForm.setPublishAt(publishAt);
 
-		post = adapter.createPostFromPostForm(postForm, AUTHOR_ID);
+		post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
 	}
 
 
@@ -115,7 +115,7 @@ public class PostFormAdapter_CreatePostTests {
 	public void draftWithNullPublishDate() {
 		postForm.setDraft(true);
 		postForm.setPublishAt(null);
-		post = adapter.createPostFromPostForm(postForm, AUTHOR_ID);
+		post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
 		assertThat(post.getPublishAt(), is(nullValue()));
 	}
 
@@ -123,7 +123,7 @@ public class PostFormAdapter_CreatePostTests {
 	public void postWithNullPublishDateSetsPublishAtToNow() {
 		postForm.setDraft(false);
 		postForm.setPublishAt(null);
-		post = adapter.createPostFromPostForm(postForm, AUTHOR_ID);
+		post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
 		assertThat(post.getPublishAt(), equalTo(now));
 	}
 
@@ -136,7 +136,7 @@ public class PostFormAdapter_CreatePostTests {
 	public void postCreatedDateCanBeSetFromAPostForm() throws Exception {
 		Date createdAt = DateTestUtils.getDate("2013-05-23 22:58");
 		postForm.setCreatedAt(createdAt);
-		Post post = adapter.createPostFromPostForm(postForm, AUTHOR_ID);
+		Post post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
 		assertThat(post.getCreatedAt(), is(createdAt));
 	}
 }

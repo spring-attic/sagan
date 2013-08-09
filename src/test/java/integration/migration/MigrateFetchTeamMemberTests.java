@@ -34,13 +34,13 @@ public class MigrateFetchTeamMemberTests extends IntegrationTestBase {
 	public void postToMigrateMemberProfile() throws Exception {
 		MemberProfile john = new MemberProfile();
 		john.setName("John Doe");
-		john.setMemberId("jdoe");
+		john.setUsername("jdoe");
 
 		teamRepository.save(john);
 
 		MemberProfile guy = new MemberProfile();
 		guy.setName("Some Guy");
-		guy.setMemberId("someguy");
+		guy.setUsername("someguy");
 
 		teamRepository.save(guy);
 

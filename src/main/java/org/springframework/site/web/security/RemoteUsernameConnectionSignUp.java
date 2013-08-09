@@ -13,7 +13,6 @@ import org.springframework.social.connect.ConnectionSignUp;
 public class RemoteUsernameConnectionSignUp implements ConnectionSignUp {
 	@Override
 	public String execute(Connection<?> connection) {
-		return connection.getDisplayName() != null ? connection
-				.getDisplayName() : null;
+		return connection.getKey().getProviderUserId() != null ? connection.getKey().getProviderUserId() : null;
 	}
 }

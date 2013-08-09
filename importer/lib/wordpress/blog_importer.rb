@@ -26,8 +26,7 @@ module Wordpress
         username = author.xpath('wp:author_login').text
         puts "Importing #{username}"
         data = {
-            memberId: username,
-            githubUsername: username,
+            memberName: username,
             gravatarEmail: author.xpath('wp:author_email').text,
             name: author.xpath('wp:author_display_name').text
         }
@@ -48,6 +47,7 @@ module Wordpress
         if response.code >= 400
           puts "Error importing blog post: #{response.body}"
           p create_post_request(post_data)
+          # TODO - change create post URI to include member name
         end
 
         mapping = {
@@ -74,7 +74,7 @@ module Wordpress
           category: 'ENGINEERING',
           createdAt: post_data[:post_date],
           publishAt: post_data[:post_date],
-          authorMemberId: post_data[:creator]
+          authorMemberName: post_data[:creator]
       }
     end
 

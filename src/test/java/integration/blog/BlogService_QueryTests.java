@@ -238,7 +238,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 	@Test
 	public void getPublishedPostsForAuthorOnlyShowsAuthorsPosts() {
 		MemberProfile profile = new MemberProfile();
-		profile.setMemberId("myauthor");
+		profile.setUsername("myauthor");
 
 		Post post = PostBuilder.post().author(profile).build();
 		postRepository.save(post);
@@ -251,7 +251,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 	@Test
 	public void getPublishedPostsForAuthorOnlyShowsPublishedPosts() {
 		MemberProfile profile = new MemberProfile();
-		profile.setMemberId("myauthor");
+		profile.setUsername("myauthor");
 
 		Post post = PostBuilder.post().author(profile).build();
 		postRepository.save(post);

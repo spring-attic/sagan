@@ -38,7 +38,7 @@ public class MigrateMemberProfileTests extends IntegrationTestBase {
 	@Test
 	public void postToMigrateMemberProfile() throws Exception {
 		MockHttpServletRequestBuilder migrateProfile = post("/migration/profile");
-		migrateProfile.param("memberId", "migrate_someguy");
+		migrateProfile.param("username", "migrate_someguy");
 		migrateProfile.param("name", "Some_ Guy_");
 		migrateProfile.param("githubUsername", "migrate_someguy");
 		migrateProfile.param("gravatarEmail", "someguy@example.com");
@@ -46,9 +46,9 @@ public class MigrateMemberProfileTests extends IntegrationTestBase {
 		mockMvc.perform(migrateProfile).andExpect(status().isCreated())
 				.andExpect(header().string("Location", containsString("/team/migrate_someguy")));
 
-		MemberProfile profile = teamRepository.findByMemberId("migrate_someguy");
+		MemberProfile profile = teamRepository.findByUsername("migrate_someguy");
 
-		assertThat(profile.getMemberId(), is("migrate_someguy"));
+		assertThat(profile.getUsername(), is("migrate_someguy"));
 		assertThat(profile.getName(), is("Some_ Guy_"));
 		assertThat(profile.getGithubUsername(), is("migrate_someguy"));
 		assertThat(profile.getGravatarEmail(), is("someguy@example.com"));
@@ -58,14 +58,14 @@ public class MigrateMemberProfileTests extends IntegrationTestBase {
 	@Test
 	public void postToMigrateMemberDoesNotDuplicateProfiles() throws Exception {
 		MemberProfile memberProfile = new MemberProfile();
-		memberProfile.setMemberId("migrate_someguy");
+		memberProfile.setUsername("migrate_someguy");
 		teamRepository.save(memberProfile);
 
 		MockHttpServletRequestBuilder migrateProfile = post("/migration/profile");
-		migrateProfile.param("memberId", "migrate_someguy");
+		migrateProfile.param("username", "migrate_someguy");
 		mockMvc.perform(migrateProfile).andExpect(status().isOk());
 
-		MemberProfile profile = teamRepository.findByMemberId("migrate_someguy");
+		MemberProfile profile = teamRepository.findByUsername("migrate_someguy");
 
 		assertThat(profile, not(nullValue()));
 	}
@@ -73,16 +73,16 @@ public class MigrateMemberProfileTests extends IntegrationTestBase {
 	@Test
 	public void postToMigrateMemberDoesNotUpdateExistingProfiles() throws Exception {
 		MemberProfile memberProfile = new MemberProfile();
-		memberProfile.setMemberId("migrate_someguy");
+		memberProfile.setUsername("migrate_someguy");
 		memberProfile.setName("First Guy");
 		teamRepository.save(memberProfile);
 
 		MockHttpServletRequestBuilder migrateProfile = post("/migration/profile");
-		migrateProfile.param("memberId", "migrate_someguy");
+		migrateProfile.param("username", "migrate_someguy");
 		migrateProfile.param("name", "Second Guy");
 		mockMvc.perform(migrateProfile).andExpect(status().isOk());
 
-		MemberProfile profile = teamRepository.findByMemberId("migrate_someguy");
+		MemberProfile profile = teamRepository.findByUsername("migrate_someguy");
 
 		assertEquals("First Guy", profile.getName());
 	}

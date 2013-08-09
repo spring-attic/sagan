@@ -18,7 +18,7 @@ describe Wordpress::BlogImporter do
 
     it "creates memberProfiles with the correct info" do
       expected_author = {
-          memberId: 'sample',
+          username: 'sample',
           githubUsername: 'sample',
           gravatarEmail: 'sample@springsource.com',
           name: 'Mr Sample'

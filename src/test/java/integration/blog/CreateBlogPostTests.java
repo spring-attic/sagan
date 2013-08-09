@@ -46,14 +46,16 @@ public class CreateBlogPostTests extends IntegrationTestBase {
 	@Before
 	public void setup() {
 		MemberProfile profile = new MemberProfile();
-		profile.setMemberId("author");
+		profile.setUsername("author");
 		profile.setName("Mr Author");
-		teamRepository.save(profile);
+		profile = teamRepository.save(profile);
+
+		final String profileId = profile.getId().toString();
 
 		principal = new Principal() {
 			@Override
 			public String getName() {
-				return "author";
+				return profileId;
 			}
 		};
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();

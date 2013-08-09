@@ -24,7 +24,7 @@ public class PostBuilder {
 	public PostBuilder() {
 		this.title = "My Post";
 		this.author = new MemberProfile();
-		this.author.setMemberId("test");
+		this.author.setUsername("test");
 		this.category =	PostCategory.ENGINEERING;
 		this.rawContent = "post body";
 		this.renderedContent = "post body";
@@ -48,8 +48,8 @@ public class PostBuilder {
 		return this;
 	}
 
-	public PostBuilder author(String authorId, String name) {
-		this.author.setMemberId(authorId);
+	public PostBuilder author(String username, String name) {
+		this.author.setUsername(username);
 		this.author.setName(name);
 		return this;
 	}

@@ -6,7 +6,7 @@ public class MemberProfileBuilder {
 
 	private Long id;
 	private String name;
-	private String memberId;
+	private String username;
 	private String location;
 	private String bio;
 	private String avatarUrl;
@@ -14,6 +14,7 @@ public class MemberProfileBuilder {
 
 	public MemberProfileBuilder() {
 		this.name = "Mr England";
+		this.username = "mr_england";
 		this.location = "London";
 		this.bio = "I am interesting";
 		this.avatarUrl = null;
@@ -34,8 +35,8 @@ public class MemberProfileBuilder {
 		return this;
 	}
 
-	public MemberProfileBuilder memberId(String memberId) {
-		this.memberId = memberId;
+	public MemberProfileBuilder username(String username) {
+		this.username = username;
 		return this;
 	}
 
@@ -67,7 +68,7 @@ public class MemberProfileBuilder {
 	public MemberProfile build() {
 		MemberProfile profile = new MemberProfile();
 		profile.setName(name);
-		profile.setMemberId(memberId);
+		profile.setUsername(username);
 		profile.setLocation(location);
 		profile.setBio(bio);
 		profile.setAvatarUrl(avatarUrl);

@@ -41,19 +41,18 @@ public class MigrateBlogPostTests extends IntegrationTestBase {
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 		author = new MemberProfile();
-		author.setMemberId("johndoe");
+		author.setUsername("johndoe");
 		teamRepository.save(author);
 	}
 
 	@Test
 	public void postToMigrateBlogPost() throws Exception {
-		MockHttpServletRequestBuilder migrateBlogPost = post("/migration/blogpost");
+		MockHttpServletRequestBuilder migrateBlogPost = post("/migration/blogpost/" + author.getUsername());
 		migrateBlogPost.param("title", "a post title");
 		migrateBlogPost.param("content", "sample post content");
 		migrateBlogPost.param("category", "ENGINEERING");
 		migrateBlogPost.param("publishAt", "2000-01-01 00:00");
 		migrateBlogPost.param("createdAt", "1999-01-01 00:00");
-		migrateBlogPost.param("authorMemberId", author.getMemberId());
 
 		mockMvc.perform(migrateBlogPost).andExpect(status().isCreated())
 				.andExpect(header().string("Location", matches("/blog/2000/01/01/a-post-title")));
@@ -62,7 +61,7 @@ public class MigrateBlogPostTests extends IntegrationTestBase {
 
 		assertThat(post.getRawContent(), is("sample post content"));
 		assertThat(post.getCategory(), is(PostCategory.ENGINEERING));
-		assertThat(post.getAuthor().getMemberId(), is(author.getMemberId()));
+		assertThat(post.getAuthor().getUsername(), is(author.getUsername()));
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -86,7 +85,7 @@ public class MigrateBlogPostTests extends IntegrationTestBase {
 
 		postRepository.save(post);
 
-		MockHttpServletRequestBuilder migrateBlogPost = post("/migration/blogpost");
+		MockHttpServletRequestBuilder migrateBlogPost = post("/migration/blogpost/" + author.getUsername());
 		migrateBlogPost.param("title", "a post title");
 		migrateBlogPost.param("content", "NEW post content");
 		migrateBlogPost.param("category", "ENGINEERING");

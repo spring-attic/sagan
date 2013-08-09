@@ -38,8 +38,18 @@ public class TeamControllerTests {
 				new PostViewFactory(new DateService()));
 		List<MemberProfile> members = new ArrayList<>();
 
-		members.add(MemberProfileBuilder.profile().name("Norman").geoLocation(10, 5).memberId("normy").build());
-		members.add(MemberProfileBuilder.profile().name("Patrick").geoLocation(-5, 15).memberId("pat").build());
+		members.add(MemberProfileBuilder.profile()
+				.name("Norman")
+				.geoLocation(10, 5)
+				.username("normy")
+				.id(123L)
+				.build());
+		members.add(MemberProfileBuilder.profile()
+				.name("Patrick")
+				.geoLocation(-5, 15)
+				.username("pat")
+				.id(321L)
+				.build());
 
 		given(this.teamService.fetchVisibleMembers()).willReturn(members);
 	}
@@ -55,12 +65,12 @@ public class TeamControllerTests {
 		assertThat(norman.getName(), equalTo("Norman"));
 		assertThat(norman.getLatitude(), equalTo(10f));
 		assertThat(norman.getLongitude(), equalTo(5f));
-		assertThat(norman.getMemberId(), equalTo("normy"));
+		assertThat(norman.getMemberId(), equalTo(123L));
 
 		TeamLocation patrick = teamLocations.get(1);
 		assertThat(patrick.getName(), equalTo("Patrick"));
 		assertThat(patrick.getLatitude(), equalTo(-5f));
 		assertThat(patrick.getLongitude(), equalTo(15f));
-		assertThat(patrick.getMemberId(), equalTo("pat"));
+		assertThat(patrick.getMemberId(), equalTo(321L));
 	}
 }
