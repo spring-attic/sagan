@@ -64,13 +64,6 @@
         <to type="permanent-redirect" last="true">http://springframework.io/blog$1</to>
     </rule>
     <rule>
-        <name>Strip 'www' subdomain</name>
-        <note>Redirect all www requests for all domains [#54747656]</note>
-        <condition name="host">www.(.*)</condition>
-        <from>^(.*)$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io$1</to>
-    </rule>
-    <rule>
         <name>YouTube</name>
         <note>https://www.pivotaltracker.com/story/show/54309374
         Provide a consistent URL abstraction for our videos while we work out the new
@@ -94,9 +87,10 @@
         <to type="temporary-redirect" last="true">/guides#tutorials</to>
     </rule>
     <rule>
-        <name>Sts Welcome Page</name>
-        <note>For old STS installations</note>
-        <from>/sts/welcome</from>
-        <to type="permanent-redirect" last="true">/tools/sts/welcome</to>
+        <name>Strip 'www' subdomain</name>
+        <note>Redirect all www requests for all domains [#54747656]</note>
+        <condition name="host">www.(.*)</condition>
+        <from>^(.*)$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io$1</to>
     </rule>
 </urlrewrite>
