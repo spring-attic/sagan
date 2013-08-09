@@ -18,9 +18,9 @@ import static org.mockito.Mockito.verify;
 public class ProjectDocumentationIndexerTests {
 
 	private CrawlerService crawlerService = mock(CrawlerService.class);
-	private ProjectMetadataService documentationService = mock(ProjectMetadataService.class);
+	private ProjectMetadataService metadataService = mock(ProjectMetadataService.class);
 	private final SearchService searchService = mock(SearchService.class);
-	private ProjectDocumentationIndexer service = new ProjectDocumentationIndexer(crawlerService, searchService, documentationService);
+	private ProjectDocumentationIndexer service = new ProjectDocumentationIndexer(crawlerService, searchService, metadataService);
 
 	private List<ProjectVersion> documentationList = Arrays.asList(
 			new ProjectVersion("3", ProjectVersion.Release.CURRENT, "http://reference.example.com/3", "http://api.example.com/3"),

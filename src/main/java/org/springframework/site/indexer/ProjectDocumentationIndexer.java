@@ -20,20 +20,20 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 
 	private static final Log logger = LogFactory.getLog(ProjectDocumentationIndexer.class);
 
-	private final ProjectMetadataService documentationService;
+	private final ProjectMetadataService metadataService;
 	private final CrawlerService crawlerService;
 	private final SearchService searchService;
 
 	@Autowired
-	public ProjectDocumentationIndexer(CrawlerService crawlerService, SearchService searchService, ProjectMetadataService documentationService) {
+	public ProjectDocumentationIndexer(CrawlerService crawlerService, SearchService searchService, ProjectMetadataService metadataService) {
 		this.searchService = searchService;
-		this.documentationService = documentationService;
+		this.metadataService = metadataService;
 		this.crawlerService = crawlerService;
 	}
 
 	@Override
 	public Iterable<Project> indexableItems() {
-		return documentationService.getProjects();
+		return metadataService.getProjects();
 	}
 
 	@Override

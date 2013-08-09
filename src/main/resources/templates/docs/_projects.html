@@ -10,13 +10,13 @@
     <div th:if="${projects.empty}">
         <div class="empty-project"></div>
     </div>
-    <div class="documentation-item--wrapper">
-        <div th:each="item : ${projects}" th:id="${item.id}" class="item-dropdown-widget documentation--item js-item-dropdown--wrapper">
+    <div class="docs-item--wrapper">
+        <div th:each="item : ${projects}" th:id="${item.id}" class="item-dropdown-widget docs--item js-item-dropdown--wrapper">
             <div class="item-dropdown--link js-item--open-dropdown">
                 <i class="item-dropdown--icon icon-reorder pull-right"></i>
                 <p class="item-dropdown--title" th:text="${item.name}">Spring Framework</p>
             </div>
-            <div class="item--dropdown documentation-version--dropdown">
+            <div class="item--dropdown docs-version--dropdown">
                 <div class="item--header">
                     <!-- link_to project_path -->
                     <a th:href="${item.repoUrl}" class="item--header-link item--right-column">
@@ -46,8 +46,8 @@
                                     <div th:if="${version.isPreRelease()}" class="pre-release-version--icon"></div>
                                 </div>
                                 <div class="item--right-column">
-                                    <a class="documentation-link reference-link" th:href="${version.refDocUrl}" th:if="${version.hasRefDocUrl()}">Reference</a>
-                                    <a class="documentation-link api-link" th:href="${version.apiDocUrl}" th:if="${version.hasApiDocUrl()}">API</a>
+                                    <a class="docs-link reference-link" th:href="${version.refDocUrl}" th:if="${version.hasRefDocUrl()}">Reference</a>
+                                    <a class="docs-link api-link" th:href="${version.apiDocUrl}" th:if="${version.hasApiDocUrl()}">API</a>
                                 </div>
                             </div>
                         </div>

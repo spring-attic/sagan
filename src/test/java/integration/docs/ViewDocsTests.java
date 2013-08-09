@@ -1,4 +1,4 @@
-package integration.documentation;
+package integration.docs;
 
 import integration.IntegrationTestBase;
 import org.junit.Before;
@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ViewDocumentationTests extends IntegrationTestBase {
+public class ViewDocsTests extends IntegrationTestBase {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -26,9 +26,9 @@ public class ViewDocumentationTests extends IntegrationTestBase {
 	}
 
 	@Test
-	public void getDocumentationPage() throws Exception {
+	public void getDocsPage() throws Exception {
 		this.mockMvc
-				.perform(get("/documentation"))
+				.perform(get("/docs"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andExpect(content().string(containsString("Spring Security")))

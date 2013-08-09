@@ -1,4 +1,4 @@
-package org.springframework.site.web.documentation;
+package org.springframework.site.web.docs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.projects.ProjectMetadataService;
@@ -11,14 +11,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
 @Controller
-@RequestMapping("/documentation")
-@NavSection("documentation")
-public class DocumentationController {
+@RequestMapping("/docs")
+@NavSection("docs")
+public class DocsController {
 
 	private ProjectMetadataService service;
 
 	@Autowired
-	public DocumentationController(ProjectMetadataService service) {
+	public DocsController(ProjectMetadataService service) {
 		this.service = service;
 	}
 
@@ -28,7 +28,7 @@ public class DocumentationController {
 		model.addAttribute("atticProjects", service.getProjectsForCategory("attic"));
 		model.addAttribute("incubatorProjects", service.getProjectsForCategory("incubator"));
 		model.addAttribute("otherProjects", service.getProjectsForCategory("other"));
-		return "documentation/index";
+		return "docs/index";
 	}
 
 }
