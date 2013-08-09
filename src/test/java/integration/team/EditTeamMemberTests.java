@@ -71,6 +71,11 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 		getEditProfilePage("/admin/team/some-guy");
 	}
 
+	@Test
+	public void getEditTeamMemberPage_404sWhenNoMemberFound() throws Exception {
+		this.mockMvc.perform(get("/admin/team/not-a-user")).andExpect(status().isNotFound());
+	}
+
 	private void getEditProfilePage(String editTeamUri) throws Exception {
 		this.mockMvc.perform(get(editTeamUri).principal(principal))
 				.andExpect(status().isOk())

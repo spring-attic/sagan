@@ -3,6 +3,7 @@ package org.springframework.site.web.team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.team.MemberProfile;
 import org.springframework.site.domain.team.TeamService;
+import org.springframework.site.web.blog.EntityNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,9 @@ public class TeamAdminController {
 	@RequestMapping(value = "/admin/team/{username}", method = {GET, HEAD})
 	public String editTeamMemberForm(@PathVariable("username") String username, Model model) {
 		MemberProfile profile = teamService.fetchMemberProfileUsername(username);
+		if (profile == null) {
+			throw new EntityNotFoundException("Profile not found with Id=" + username);
+		}
 		model.addAttribute("profile", profile);
 		model.addAttribute("formAction", "/admin/team/" + username);
 		return "admin/team/edit";

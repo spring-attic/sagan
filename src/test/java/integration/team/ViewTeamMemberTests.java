@@ -52,6 +52,11 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
 	}
 
 	@Test
+	public void getTeamMemberPage_404sWhenNoMemberFound() throws Exception {
+		this.mockMvc.perform(get("/team/not-a-user")).andExpect(status().isNotFound());
+	}
+
+	@Test
 	public void getTeamMemberPageShowsPosts() throws Exception {
 		MemberProfile profile = new MemberProfile();
 		profile.setName("First Last");
