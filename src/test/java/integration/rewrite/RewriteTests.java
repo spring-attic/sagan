@@ -55,7 +55,7 @@ public class RewriteTests {
 	}
 
 	@Test
-	public void drupalAuthorsAreRedirected() throws Exception {
+	public void blogAuthorsAreRedirected() throws Exception {
 		validatePermanentRedirect("http://blog.springsource.org/author/cbeams", "http://springframework.io/team/cbeams");
 	}
 
