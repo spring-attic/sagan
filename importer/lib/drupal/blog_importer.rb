@@ -54,7 +54,7 @@ module Drupal
           category: category,
           publishAt: publish_date,
           createdAt: publish_date,
-          authorMemberId: author
+          username: author
       }
     end
 

@@ -10,7 +10,7 @@ class SiteApi
   end
 
   def save_blog_post(options)
-    HTTParty.post("http://#{@base_uri}/migration/blogpost", {body: options})
+    HTTParty.post("http://#{@base_uri}/migration/blogpost/#{options.delete(:username)}", {body: options})
   end
 
   def fetch_team_members

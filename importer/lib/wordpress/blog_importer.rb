@@ -26,7 +26,7 @@ module Wordpress
         username = author.xpath('wp:author_login').text
         puts "Importing #{username}"
         data = {
-            memberName: username,
+            username: username,
             gravatarEmail: author.xpath('wp:author_email').text,
             name: author.xpath('wp:author_display_name').text
         }
@@ -74,7 +74,7 @@ module Wordpress
           category: 'ENGINEERING',
           createdAt: post_data[:post_date],
           publishAt: post_data[:post_date],
-          authorMemberName: post_data[:creator]
+          username: post_data[:creator]
       }
     end
 

@@ -27,7 +27,7 @@ describe Drupal::BlogImporter do
           category: 'NEWS_AND_EVENTS',
           publishAt: '2013-04-30 21:30',
           createdAt: '2013-04-30 21:30',
-          authorMemberId: 'jlong',
+          username: 'jlong',
       }
 
 

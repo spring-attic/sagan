@@ -59,7 +59,7 @@ INPUT
           category: 'ENGINEERING',
           publishAt: '2006-04-09 20:22',
           createdAt: '2006-04-09 20:22',
-          authorMemberId: 'sample',
+          username: 'sample',
       }
       siteapi.should_receive('save_blog_post').with(expected_post)
       importer.import(StringIO.new)

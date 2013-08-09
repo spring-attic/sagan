@@ -19,11 +19,10 @@ describe Wordpress::BlogImporter do
     it "creates memberProfiles with the correct info" do
       expected_author = {
           username: 'sample',
-          githubUsername: 'sample',
           gravatarEmail: 'sample@springsource.com',
           name: 'Mr Sample'
       }
-      siteapi.should_receive('save_member_profile').with(expected_author)
+      siteapi.should_receive('save_member_profile').with(expected_author).once
       subject.import(StringIO.new)
     end
 
@@ -40,7 +39,7 @@ describe Wordpress::BlogImporter do
           category: 'ENGINEERING',
           publishAt: '2006-04-09 20:41',
           createdAt: '2006-04-09 20:41',
-          authorMemberId: 'sample',
+          username: 'sample',
       }
       siteapi.should_receive('save_blog_post').with(expected_post).and_return(double(:code => 200, :headers => {}))
       subject.import(StringIO.new)
