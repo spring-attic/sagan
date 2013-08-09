@@ -9,6 +9,7 @@ $icon-sprite: url("../img/iconsprite.png");
       width: 135px;
       height: 133px;
       background-position: -483px 0;
+      margin-top: 2px;
     }
     &.logo-spring-security {
       width: 99px;
@@ -19,26 +20,31 @@ $icon-sprite: url("../img/iconsprite.png");
       width: 111px;
       height: 111px;
       background-position: -483px -325px;
+      margin-top: 13px;
     }
     &.logo-spring-batch {
       width: 104px;
       height: 108px;
       background-position: -641px 0;
+      margin-top: 14px;
     }
     &.logo-spring-integration {
       width: 145px;
       height: 104px;
       background-position: -641px -161px;
+      margin-top: 16px;
     }
     &.logo-spring-amqp {
       width: 109px;
       height: 98px;
       background-position: -641px -325px;
+      margin: 19px;
     }
     &.logo-spring-default {
       width: 100px;
       height: 100px;
       background-position: -805px 0;
+      margin-top: 18px;
     }
     &.logo-spring-mobile {
       width: 104px;
@@ -49,11 +55,13 @@ $icon-sprite: url("../img/iconsprite.png");
       width: 104px;
       height: 126px;
       background-position: -805px -325px;
+      margin-top: 10px;
     }
     &.logo-spring-social {
       width: 130px;
       height: 100px;
       background-position: -483px -481px;
+      margin-top: 18px;
     }
   }
   &.icon-projects {
