@@ -93,4 +93,12 @@
         <from>^(.*)$</from>
         <to type="permanent-redirect" last="true">http://springframework.io$1</to>
     </rule>
+    <rule>
+        <name>Project pages</name>
+        <note>In case anyone attempts to URL-hack their way to /projects/spring-foo,
+        redirect to projects.springframework.io/spring-foo</note>
+        <condition name="host">springframework.io</condition>
+        <from>^/projects(/.+)$</from>
+        <to type="temporary-redirect" last="true">http://projects.springframework.io$1</to>
+    </rule>
 </urlrewrite>

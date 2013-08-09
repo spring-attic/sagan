@@ -2,6 +2,7 @@ package integration.rewrite;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockFilterConfig;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -97,6 +98,22 @@ public class RewriteTests {
 		validatePermanentRedirect("http://www.example.com/something", "http://springframework.io/something");
 	}
 
+	@Test
+	public void projectPageIndexIsNotRedirected() throws ServletException, IOException, URISyntaxException {
+		validateOk("http://springframework.io/projects");
+	}
+
+	@Test
+	public void projectPageIndexWithSlashIsNotRedirected() throws ServletException, IOException, URISyntaxException {
+		validateOk("http://springframework.io/projects/");
+	}
+
+	@Test
+	public void projectPagesAreRedirected() throws ServletException, IOException, URISyntaxException {
+		validateTemporaryRedirect("http://springframework.io/projects/spring-data", "http://projects.springframework.io/spring-data");
+		validateTemporaryRedirect("http://springframework.io/projects/not-exist", "http://projects.springframework.io/not-exist");
+	}
+
 	private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
 		validateRedirect(requestedUrl, redirectedUrl, 302);
 	}
@@ -118,5 +135,19 @@ public class RewriteTests {
 
 		assertThat(servletResponse.getRedirectedUrl(), equalTo(redirectedUrl));
 		assertThat("Incorrect status code for " + redirectedUrl, servletResponse.getStatus(), equalTo(expectedStatus));
+	}
+
+	private void validateOk(String requestedUrl) throws IOException, ServletException, URISyntaxException {
+		MockHttpServletRequest servletRequest = new MockHttpServletRequest();
+		URI requestUrl = new URI(requestedUrl);
+		if (requestUrl.getHost() != null) {
+			servletRequest.addHeader("host", requestUrl.getHost());
+		}
+		servletRequest.setRequestURI(requestUrl.getPath());
+		MockHttpServletResponse servletResponse = new MockHttpServletResponse();
+
+		filterChain.doFilter(servletRequest, servletResponse);
+
+		assertThat(servletResponse.getStatus(), equalTo(HttpStatus.OK.value()));
 	}
 }
