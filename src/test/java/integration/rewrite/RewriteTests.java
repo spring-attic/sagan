@@ -34,6 +34,7 @@ public class RewriteTests {
 		UrlRewriteFilter newFilter = new UrlRewriteFilter();
 		MockFilterConfig filterConfig = new MockFilterConfig(filterName);
 		filterConfig.addInitParameter("confPath", mappingsFile);
+		filterConfig.addInitParameter("logLevel", "WARN");
 		newFilter.init(filterConfig);
 		return newFilter;
 	}
