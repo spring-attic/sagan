@@ -8,10 +8,6 @@
   height: 425px;
   border-bottom: 1px solid #34302d;
 }
-.team-map--wrapper #map.placeholder-bg {
-  background: url("../img/carousel-laptop-bg.png") no-repeat;
-  background-size: cover;
-}
 .team-map--wrapper .team-map--container {
   position: absolute;
   z-index: 600;

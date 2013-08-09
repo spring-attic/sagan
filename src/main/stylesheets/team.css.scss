@@ -24,10 +24,7 @@ $icon-sprite: url("../img/iconsprite.png");
   #map {
     height: 425px;
     border-bottom: 1px solid $black-brown;
-    &.placeholder-bg {
-      background: url("../img/carousel-laptop-bg.png") no-repeat;
-      background-size: cover;
-    }
+    
   }
   .team-map--container {
     position: absolute;
