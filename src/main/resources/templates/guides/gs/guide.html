@@ -18,8 +18,6 @@
 			  <div class="article-body" th:utext="${guide.content}">a Guide</div>
           </article>
         </div>
-
-
         <aside id='sidebar' class="span4 content-right-pane--container">
           <a th:href="${guide.ciLatestUrl}" class="ci-status">
             <img src="https://drone.io/github.com/springframework-meta/gs-rest-service/status.png" th:src="${guide.ciStatusImageUrl}"/>
@@ -44,7 +42,7 @@
                 <input type="text" id="clone-url-subversion" th:value="${guide.gitRepoSubversionUrl}" readonly="readonly"/>
                 <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoSubversionUrl}" data-toggle="tooltip"></button>
               </div>
-              <a class="github_download" th:href='${guide.zipUrl}'>Download ZIP</a>
+              <a class="github_download btn btn-black uppercase" th:href='${guide.zipUrl}'>Download ZIP</a>
               <a class="gs-guide-import" th:href="${guide.githubHttpsUrl}">Import into STS</a>
             </div>
           </div>

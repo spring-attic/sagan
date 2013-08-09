@@ -1,6 +1,11 @@
 .guides-section--container {
   border: 1px solid #34302d;
   padding: 40px;
+  min-height: 200px;
+  margin-top: 50px;
+}
+.guides-section--container:first-child {
+  margin-top: 0;
 }
 .guides-section--container .section-title--container {
   background-color: #34302d;
@@ -94,7 +99,7 @@
 }
 .content--container blockquote {
   padding: 0 0 0 10px;
-  border-left: 5px solid #DDD;
+  border-left: 5px solid #dddddd;
 }
 .content--container pre {
   word-break: normal;
@@ -117,7 +122,7 @@
   margin: 15px 6.2%;
 }
 .content-right-pane--container h3 {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #dddddd;
   padding: 6px 6.2%;
   font-family: "Montserrat", sans-serif;
   margin: 0;
@@ -143,7 +148,7 @@
   padding: 18px 6.4%;
   font-size: 16px;
   line-height: 16px;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   box-shadow: none;
 }
 .content-right-pane--container .btn-group .btn.active {
@@ -154,7 +159,7 @@
   box-shadow: inset 0 1px 3px #c8c8c8;
 }
 .content-right-pane--container .clone-url {
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   background-color: white;
   cursor: pointer;
   margin: 15px 6.2%;
@@ -178,27 +183,7 @@
 .content-right-pane--container .github_download {
   display: block;
   text-align: center;
-  color: #f1f1f1;
-  border: 2px solid #6db341;
-  background-color: #34302d;
   margin: 15px 6.2%;
-  padding: 21px 0;
-  text-transform: uppercase;
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px;
-  line-height: 14px;
-  transition: border-color 0.25s;
-  -webkit-transition: border-color 0.25s;
-  -moz-transition: border-color 0.25s;
-  -o-transition: border-color 0.25s;
-  -ms-transition: border-color 0.25s;
-}
-.content-right-pane--container .github_download:hover {
-  text-decoration: none;
-  border-color: #34302d;
-}
-.content-right-pane--container .github_download:active {
-  box-shadow: inset 0 3px 6px #0b0a0a;
 }
 
 .copy-button {

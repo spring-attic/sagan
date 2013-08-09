@@ -117,8 +117,16 @@ $icon-sprite: url("../img/iconsprite.png");
 }
 
 .project-header--wrapper {
+  .billboard--container {
+    margin-top: 60px;
+  }
   .content--title {
+    position: relative;
     margin-bottom: 30px;
+    margin-top: 0;
+    a {
+      color: #f1f1f1;
+    }
   }
   .project--title {
     font-family: $secondary-font-family;
@@ -146,6 +154,9 @@ $icon-sprite: url("../img/iconsprite.png");
     a {
       color: $link-green;
     }
+  }
+  .project-quickstart-btn {
+    margin-top: 40px;
   }
   .spring-data--bg {
     background-color: #666;

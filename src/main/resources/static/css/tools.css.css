@@ -44,27 +44,15 @@
   text-transform: uppercase;
 }
 .tool--container .tool--download-btn {
-  text-transform: uppercase;
-  border: 2px solid #6db33f;
-  padding: 12px 0;
-  text-align: center;
   width: 237px;
-  display: inline-block;
-  color: #eeeeee;
-  font-size: 14px;
-  line-height: 14px;
-  font-family: "Montserrat", sans-serif;
-}
-.tool--container .tool--download-btn p {
-  margin-top: 6px;
-  color: #eeeeee;
-  font-size: 14px;
-  line-height: 14px;
-  font-family: "Montserrat", sans-serif;
-  text-transform: none;
 }
 .tool--container .tool--download-btn:hover {
-  text-decoration: none;
+  border-color: #6db33f;
+  box-shadow: 0 1px 3px #0b0a0a;
+}
+.tool--container .tool--download-btn:active {
+  box-shadow: 0 1px 3px #0b0a0a, inset 0 3px 6px #0b0a0a;
+  border-color: #6db33f;
 }
 .tool--container .tool--see-all-versions {
   display: block;
@@ -167,7 +155,7 @@
   background-color: white;
   margin: 0 67px;
   padding: 20px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 .tools--wrapper.testimonial .testimonial--container .quotation--icon {
   width: 30px;
@@ -306,7 +294,7 @@
 }
 
 .eclipse-platform--container {
-  border: 1px solid #34302D;
+  border: 1px solid #34302d;
   margin-bottom: 40px;
 }
 .eclipse-platform--container .eclipse-platform-dropdown-link {
@@ -371,13 +359,13 @@
 
 .tool-archive--table {
   margin-top: 30px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 .tool-archive--table th {
   text-transform: uppercase;
   font-size: 12px;
   line-height: 12px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 .tool-archive--table td:last-child {
   color: #6c635d;
@@ -423,37 +411,8 @@
   padding: 0;
 }
 .tools-right-pane .download-btn {
-  display: inline-block;
-  color: #eeeeee;
-  font-size: 14px;
-  line-height: 14px;
-  font-family: "Montserrat", sans-serif;
-  text-transform: uppercase;
-  border: 2px solid #6db33f;
-  background-color: #34302d;
-  text-align: center;
   width: 237px;
-  padding: 12px 0;
   margin-bottom: 20px;
-  transition: border-color 0.25s;
-  -webkit-transition: border-color 0.25s;
-  -moz-transition: border-color 0.25s;
-  -o-transition: border-color 0.25s;
-  -ms-transition: border-color 0.25s;
-}
-.tools-right-pane .download-btn p {
-  font-size: 14px;
-  line-height: 14px;
-  margin-top: 4px;
-  color: #eeeeee;
-  text-transform: none;
-}
-.tools-right-pane .download-btn:hover {
-  text-decoration: none;
-  border-color: #34302d;
-}
-.tools-right-pane .download-btn:active {
-  box-shadow: inset 0 3px 6px #0b0a0a;
 }
 .tools-right-pane .all-versions {
   color: #5fa134;
@@ -466,7 +425,7 @@
   text-align: left;
 }
 .tools-right-pane .other-tools--container:first-child {
-  border-bottom: 1px solid #FFF;
+  border-bottom: 1px solid white;
 }
 .tools-right-pane .other-tools--container .other-tools--link {
   color: #5FA134;

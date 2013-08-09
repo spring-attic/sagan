@@ -25,7 +25,7 @@
             <div class="tools-logo sts-logo"></div>
 				      <ul class='download-links'>
 				        <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${downloadLinks}">
-				          <a class="download-btn" th:href="${downloadLink.url}">
+				          <a class="download-btn btn btn-black uppercase sub-text" th:href="${downloadLink.url}">
 				          	Download STS
 				            <p th:text="'(' + ${version} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
 				          </a>
