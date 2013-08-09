@@ -72,4 +72,12 @@ $icon-sprite: url("../img/iconsprite.png");
       background-position: -641px -521px;
     }
   }
+  &.icon-forum {
+    width: 32px;
+    height: 32px;
+    background-position: -409px -450px;
+    &:hover {
+      background-position: -449px -450px;
+    }
+  }
 }

@@ -139,11 +139,26 @@ $icon-sprite: url("../img/iconsprite.png");
     float: right;
     margin-top: -2px;
     .project-link {
-      font-size: 34px;
-      color: #d4d4d4;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+      [class^=icon-] {
+        font-size: 37px;
+        width: 34px;
+        height: 34px;
+        color: #d4d4d4;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
       &:hover {
         text-decoration: none;
-        color: $green;
+        [class^=icon-] {
+          color: $green;
+        }
+      }
+      div.icon {
+        margin-top: 3px;
       }
     }
   }
@@ -160,5 +175,29 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   .spring-data--bg {
     background-color: #666;
+  }
+}
+
+.project-body--container {
+  .project-body--section {
+    margin-bottom: 30px;
+    padding-right: 20px;
+    p {
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 20px;
+    }
+    li {
+      padding: 5px 0;
+    }
+    .underlined-title {
+      border-bottom: 1px solid white;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    h3 {
+      font-family: $secondary-font-family;
+      font-weight: bold;
+    }
   }
 }

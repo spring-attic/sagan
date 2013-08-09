@@ -69,3 +69,11 @@
 .icon.icon-projects:hover {
   background-position: -641px -521px;
 }
+.icon.icon-forum {
+  width: 32px;
+  height: 32px;
+  background-position: -409px -450px;
+}
+.icon.icon-forum:hover {
+  background-position: -449px -450px;
+}

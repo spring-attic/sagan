@@ -48,10 +48,6 @@
             <i class="icon-globe"></i>
             <p>Site</p>
           </a>
-          <a href="#" class="project-link">
-            <div class="icon icon-projects"></div>
-            <p>Projects</p>
-          </a>
         </div>
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-data"></div>
@@ -62,7 +58,6 @@
       <div class="project--container">
           <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-batch')}">
           </div>
-
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-batch"></div>
         </div>
