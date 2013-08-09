@@ -24,6 +24,7 @@ public class ProjectsController {
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String listProjects(Model model) {
+		model.addAttribute("projectMetadata", service);
 		return "projects/index";
 	}
 

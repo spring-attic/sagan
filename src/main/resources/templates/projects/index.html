@@ -1,4 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
@@ -11,15 +12,7 @@
     <p class="index-page--subtitle">Spring is home to a vibrant community of quality open source projects that simplify the development of business applications and provide rock-solid runtime services. You can get all of these projects through <a href="#">Spring Tool Suite&trade;</a> (STS), but if you'd like to consume Spring technologies individually - or get involved with their development - visit the individual project pages.</p>
     <div class="projects--wrapper">
       <div class="project--container">
-        <div class="project-links--container">
-          <a href="#" class="project-link">
-            <i class="icon-github"></i>
-            <p>Repo</p>
-          </a>
-          <a href="#" class="project-link">
-            <i class="icon-globe"></i>
-            <p>Site</p>
-          </a>
+        <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-framework')}">
         </div>
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-framework"></div>
@@ -33,20 +26,8 @@
           <div class="child-project-count--background">
           </div>
         </div>
-        <div class="project-links--container">
-          <a href="#" class="project-link">
-            <i class="icon-github"></i>
-            <p>Repo</p>
-          </a>
-          <a href="#" class="project-link">
-            <i class="icon-globe"></i>
-            <p>Site</p>
-          </a>
-          <a href="#" class="project-link">
-            <div class="icon icon-projects"></div>
-            <p>Projects</p>
-          </a>
-        </div>
+          <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-security')}">
+          </div>
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-security"></div>
         </div>
@@ -79,16 +60,9 @@
         <p class="project--description">Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
       </div>
       <div class="project--container">
-        <div class="project-links--container">
-          <a href="#" class="project-link">
-            <i class="icon-github"></i>
-            <p>Repo</p>
-          </a>
-          <a href="#" class="project-link">
-            <i class="icon-globe"></i>
-            <p>Site</p>
-          </a>
-        </div>
+          <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-batch')}">
+          </div>
+
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-batch"></div>
         </div>
@@ -96,16 +70,9 @@
         <p class="project--description">Spring Batch is a lightweight, comprehensive batch framework designed to simplify and optimize the work of processing high volume batch operations.</p>
       </div>
       <div class="project--container">
-        <div class="project-links--container">
-          <a href="#" class="project-link">
-            <i class="icon-github"></i>
-            <p>Repo</p>
-          </a>
-          <a href="#" class="project-link">
-            <i class="icon-globe"></i>
-            <p>Site</p>
-          </a>
-        </div>
+          <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-integration')}">
+          </div>
+
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-integration"></div>
         </div>
@@ -113,16 +80,9 @@
         <p class="project--description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Donec sed odio dui. </p>
       </div>
       <div class="project--container">
-        <div class="project-links--container">
-          <a href="#" class="project-link">
-            <i class="icon-github"></i>
-            <p>Repo</p>
-          </a>
-          <a href="#" class="project-link">
-            <i class="icon-globe"></i>
-            <p>Site</p>
-          </a>
-        </div>
+          <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-amqp')}">
+          </div>
+
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-amqp"></div>
         </div>
@@ -130,16 +90,9 @@
         <p class="project--description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Donec sed odio dui. </p>
       </div>
       <div class="project--container">
-        <div class="project-links--container">
-          <a href="#" class="project-link">
-            <i class="icon-github"></i>
-            <p>Repo</p>
-          </a>
-          <a href="#" class="project-link">
-            <i class="icon-globe"></i>
-            <p>Site</p>
-          </a>
-        </div>
+          <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-hateoas')}">
+          </div>
+
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-default"></div>
         </div>
@@ -147,16 +100,9 @@
         <p class="project--description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Donec sed odio dui. </p>
       </div>
       <div class="project--container">
-        <div class="project-links--container">
-          <a href="#" class="project-link">
-            <i class="icon-github"></i>
-            <p>Repo</p>
-          </a>
-          <a href="#" class="project-link">
-            <i class="icon-globe"></i>
-            <p>Site</p>
-          </a>
-        </div>
+          <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-mobile')}">
+          </div>
+
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-mobile"></div>
         </div>
@@ -164,16 +110,9 @@
         <p class="project--description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Donec sed odio dui. </p>
       </div>
       <div class="project--container">
-        <div class="project-links--container">
-          <a href="#" class="project-link">
-            <i class="icon-github"></i>
-            <p>Repo</p>
-          </a>
-          <a href="#" class="project-link">
-            <i class="icon-globe"></i>
-            <p>Site</p>
-          </a>
-        </div>
+          <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-android')}">
+          </div>
+
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-android"></div>
         </div>
@@ -185,16 +124,9 @@
           <div class="child-project-count--number">4</div>
           <div class="child-project-count--background"></div>
         </div>
-        <div class="project-links--container">
-          <a href="#" class="project-link">
-            <i class="icon-github"></i>
-            <p>Repo</p>
-          </a>
-          <a href="#" class="project-link">
-            <i class="icon-globe"></i>
-            <p>Site</p>
-          </a>
-        </div>
+          <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-social')}">
+          </div>
+
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-social"></div>
         </div>
@@ -202,16 +134,9 @@
         <p class="project--description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Donec sed odio dui. </p>
       </div>
       <div class="project--container">
-        <div class="project-links--container">
-          <a href="#" class="project-link">
-            <i class="icon-github"></i>
-            <p>Repo</p>
-          </a>
-          <a href="#" class="project-link">
-            <i class="icon-globe"></i>
-            <p>Site</p>
-          </a>
-        </div>
+          <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-webflow')}">
+          </div>
+
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-default"></div>
         </div>
@@ -219,16 +144,9 @@
         <p class="project--description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Donec sed odio dui. </p>
       </div>
       <div class="project--container">
-        <div class="project-links--container">
-          <a href="#" class="project-link">
-            <i class="icon-github"></i>
-            <p>Repo</p>
-          </a>
-          <a href="#" class="project-link">
-            <i class="icon-globe"></i>
-            <p>Site</p>
-          </a>
-        </div>
+          <div class="project-links--container" layout:include="projects/_project_links :: links" th:with="project=${projectMetadata.getProject('spring-ws')}">
+          </div>
+
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-default"></div>
         </div>
