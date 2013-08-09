@@ -95,8 +95,8 @@ public class RewriteTests {
 
 	@Test
 	public void stripsWwwSubdomain() throws ServletException, IOException, URISyntaxException {
-		validatePermanentRedirect("http://www.springsource.org/something", "http://springframework.io/something");
-		validatePermanentRedirect("http://www.example.com/something", "http://springframework.io/something");
+		validatePermanentRedirect("http://www.springframework.io", "http://springframework.io/");
+		validatePermanentRedirect("http://www.springframework.io/something", "http://springframework.io/something");
 	}
 
 	@Test

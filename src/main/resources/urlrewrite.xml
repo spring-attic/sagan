@@ -87,9 +87,9 @@
         <to type="temporary-redirect" last="true">/guides#tutorials</to>
     </rule>
     <rule>
-        <name>Strip 'www' subdomain</name>
-        <note>Redirect all www requests for all domains [#54747656]</note>
-        <condition name="host">www.(.*)</condition>
+        <name>Remove www</name>
+        <note>Redirect www.springframework.io => springframework.io[#54747656]</note>
+        <condition name="host">www.springframework.io</condition>
         <from>^(.*)$</from>
         <to type="permanent-redirect" last="true">http://springframework.io$1</to>
     </rule>
