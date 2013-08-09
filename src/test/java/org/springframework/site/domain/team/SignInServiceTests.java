@@ -17,12 +17,10 @@ import org.springframework.web.client.RestOperations;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.anyLong;
-import static org.mockito.BDDMockito.anyObject;
 import static org.mockito.BDDMockito.anyString;
 import static org.mockito.BDDMockito.argThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.mock;
-import static org.mockito.BDDMockito.never;
 import static org.mockito.BDDMockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -71,11 +69,27 @@ public class SignInServiceTests {
 	}
 
 	@Test
-	public void doNotCreateAMemberProfileIfOneDoesExist() {
-		given(teamRepository.findByGithubId(anyLong())).willReturn(new MemberProfile());
+	public void updateGithubUsernameOnExistingProfileIfItChanges() {
+		GitHubUserProfile userProfile = new GitHubUserProfile(1234L, "updated_username", name, location, "", "", email, avatarUrl, null);
+		UserOperations userOperations = mock(UserOperations.class);
+
+		given(userOperations.getUserProfile()).willReturn(userProfile);
+		given(gitHub.userOperations()).willReturn(userOperations);
+
+		MemberProfile memberProfile = new MemberProfile();
+		memberProfile.setGithubUsername("old_username");
+		given(teamRepository.findByGithubId(anyLong())).willReturn(memberProfile);
+
 		signInService.getOrCreateMemberProfile(1234L, gitHub);
 
-		verify(teamRepository, never()).save((MemberProfile) anyObject());
+		verify(teamRepository).save(argThat(new ArgumentMatcher<MemberProfile>() {
+			@Override
+			public boolean matches(Object argument) {
+				MemberProfile profile = (MemberProfile)argument;
+				return profile != null && profile.getGithubUsername().equals("updated_username");
+			}
+		}));
+
 	}
 
 	@Test

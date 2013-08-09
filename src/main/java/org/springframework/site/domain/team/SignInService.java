@@ -21,17 +21,18 @@ public class SignInService {
 
 	public MemberProfile getOrCreateMemberProfile(Long githubId, GitHub gitHub) {
 		MemberProfile profile = teamRepository.findByGithubId(githubId);
+		GitHubUserProfile remoteProfile = gitHub.userOperations().getUserProfile();
 
 		if (profile == null) {
-			GitHubUserProfile remoteProfile = gitHub.userOperations().getUserProfile();
 			profile = new MemberProfile();
 			profile.setGithubId(githubId);
 			profile.setUsername(remoteProfile.getUsername());
-			profile.setGithubUsername(remoteProfile.getUsername());
 			profile.setAvatarUrl(remoteProfile.getProfileImageUrl());
 			profile.setName(remoteProfile.getName());
-			profile = teamRepository.save(profile);
 		}
+
+		profile.setGithubUsername(remoteProfile.getUsername());
+		profile = teamRepository.save(profile);
 
 		return profile;
 	}
