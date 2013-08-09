@@ -52,6 +52,14 @@ describe Wordpress::BlogImporter do
       subject.import(StringIO.new)
     end
 
+
+    it "creates a post with the correct username for non-standard usernames" do
+      wp_processor.stub(:process).and_return("Interceptor Combining is out of this world!")
+      expected_post = hash_including(username: 'full_name')
+      siteapi.should_receive('save_blog_post').with(expected_post).and_return(double(:code => 200, :headers => {}))
+      subject.import(StringIO.new)
+    end
+
     it "writes blog post url mappings to a file" do
       headers1 = {"Location" => "http://example.com/blog/1-a-post"}
       headers2 = {"Location" => "http://example.com/blog/2-another-post"}

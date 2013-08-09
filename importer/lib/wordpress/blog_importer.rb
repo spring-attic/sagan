@@ -20,10 +20,14 @@ module Wordpress
       save_mappings(mappings, mappings_io)
     end
 
+    def sanitize_username(username)
+      username.downcase.gsub(' ', '_')
+    end
+
     def import_authors
       authors = xml_doc.xpath("//wp:author")
       authors.each do |author|
-        username = author.xpath('wp:author_login').text.downcase.gsub(' ', '_')
+        username = sanitize_username(author.xpath('wp:author_login').text)
         puts "Importing #{username}"
         data = {
             username: username,
@@ -86,7 +90,7 @@ module Wordpress
           post_date: post_date,
           content: element.xpath('content:encoded').text,
           title: element.xpath('title').text,
-          creator: element.xpath('dc:creator').text
+          creator: sanitize_username(element.xpath('dc:creator').text)
       }
     end
 
