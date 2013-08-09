@@ -31,7 +31,7 @@ public class SearchResultParser_FacetsTests {
 			"    \"facet_paths_result\": {\n" +
 			"      \"_type\": \"terms\",\n" +
 			"      \"missing\": 0,\n" +
-			"      \"total\": 8,\n" +
+			"      \"total\": 15,\n" +
 			"      \"other\": 0,\n" +
 			"      \"terms\": [{\n" +
 			"        \"term\": \"Guides\",\n" +
@@ -57,7 +57,15 @@ public class SearchResultParser_FacetsTests {
 			"      }, {\n" +
 			"        \"term\": \"Projects/Spring Framework/4.0.0.M1\",\n" +
 			"        \"count\": 1\n" +
-			"      }, {\n" +
+			"      },\n" +
+					"{\"term\":\"Projects/Spring Security\",\"count\":797},\n" +
+					"{\"term\":\"Projects/Spring Security/3.1.4.RELEASE\",\"count\":157},\n" +
+					"{\"term\":\"Projects/Spring Security/3.2.0.M2\",\"count\":640},\n" +
+					"{\"term\":\"Projects/Spring Security Kerberos\",\"count\":12},\n" +
+					"{\"term\":\"Projects/Spring Security Kerberos/1.0.0.CI-SNAPSHOT\",\"count\":12},\n" +
+					"{\"term\":\"Projects/Spring Security SAML\",\"count\":105},\n" +
+					"{\"term\":\"Projects/Spring Security SAML/1.0.0.RC2\",\"count\":105}," +
+			"      {\n" +
 			"        \"term\": \"Projects\",\n" +
 			"        \"count\": 1\n" +
 			"      }]\n" +
@@ -91,6 +99,14 @@ public class SearchResultParser_FacetsTests {
 	public void returnNestedFacets() {
 		SearchFacet guidesFacet = searchResults.getFacets().get(0);
 		assertThat(guidesFacet.getFacets().size(), equalTo(3));
+
+		SearchFacet projectsFacet = searchResults.getFacets().get(1);
+		List<SearchFacet> projectsFacetFacets = projectsFacet.getFacets();
+		assertThat(projectsFacetFacets.size(), equalTo(4));
+		assertThat(projectsFacetFacets.get(0).getName(), equalTo("Spring Framework"));
+		assertThat(projectsFacetFacets.get(1).getName(), equalTo("Spring Security"));
+		assertThat(projectsFacetFacets.get(2).getName(), equalTo("Spring Security Kerberos"));
+		assertThat(projectsFacetFacets.get(3).getName(), equalTo("Spring Security SAML"));
 	}
 
 }
