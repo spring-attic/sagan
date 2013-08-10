@@ -116,6 +116,18 @@ public class RewriteTests {
 		validateTemporaryRedirect("http://springframework.io/projects/not-exist", "http://projects.springframework.io/not-exist");
 	}
 
+	@Test
+	public void legacySchemaRequestsAreRedirected() throws Exception {
+		for (String host : new String [] { "springsource.org", "www.springsource.org",
+		                                   "springframework.org", "www.springframework.org"}) {
+			validatePermanentRedirect("http://" + host + "/schema", "http://schema.springframework.io");
+			validatePermanentRedirect("http://" + host + "/schema/", "http://schema.springframework.io/");
+			validatePermanentRedirect("http://" + host + "/schema/oxm", "http://schema.springframework.io/oxm");
+			validatePermanentRedirect("http://" + host + "/schema/oxm/spring-oxm.xsd",
+			                          "http://schema.springframework.io/oxm/spring-oxm.xsd");
+		}
+	}
+
 	private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
 		validateRedirect(requestedUrl, redirectedUrl, 302);
 	}

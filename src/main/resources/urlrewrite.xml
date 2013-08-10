@@ -10,6 +10,11 @@
 -->
 <urlrewrite use-query-string="true">
     <rule>
+        <name>Legacy schema requests</name>
+        <from>^/schema(/?.*)$</from>
+        <to type="permanent-redirect" last="true">http://schema.springframework.io$1</to>
+    </rule>
+    <rule>
         <name>GSG trailing slash</name>
         <note>https://www.pivotaltracker.com/story/show/52214321</note>
         <from>/guides/gs/([^/]+)$</from>
