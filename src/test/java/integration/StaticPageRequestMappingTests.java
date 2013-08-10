@@ -44,11 +44,6 @@ public class StaticPageRequestMappingTests extends IntegrationTestBase {
 		checkPage("/trademark");
 	}
 
-	@Test
-	public void getCaseStudiesPage() throws Exception {
-		checkPage("/case-studies");
-	}
-
 	private void checkPage(String page) throws Exception {
 		this.mockMvc.perform(get(page))
 				.andExpect(status().isOk())
