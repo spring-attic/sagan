@@ -128,6 +128,12 @@ public class RewriteTests {
 		}
 	}
 
+	@Test
+    public void inboundLinksFromEclipseMarketplaceAreRedirected() throws Exception {
+		validateTemporaryRedirect("http://www.springsource.org/eclipse-downloads", "http://springframework.io/tools/eclipse");
+		validateTemporaryRedirect("http://www.springsource.com/products/eclipse-downloads", "http://springframework.io/tools/eclipse");
+    }
+
 	private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
 		validateRedirect(requestedUrl, redirectedUrl, 302);
 	}

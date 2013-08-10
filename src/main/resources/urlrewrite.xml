@@ -35,6 +35,12 @@
         <to type="permanent-redirect" last="true">http://springframework.io/tools/sts/welcome</to>
     </rule>
     <rule>
+        <name>Legacy Eclipse Marketplace requests</name>
+        <condition name="host">www.springsource.(org|com)</condition>
+        <from>(/products)?/eclipse-downloads</from>
+        <to type="temporary-redirect" last="true">http://springframework.io/tools/eclipse</to>
+    </rule>
+    <rule>
         <note>Support inbound link from http://grails.org/products/ggts [#54277050]</note>
         <condition name="host">www.springsource.org</condition>
         <from>/groovy-grails-tool-suite-download</from>
