@@ -35,12 +35,13 @@ public class UnderstandingGuidesTests extends IntegrationTestBase {
 		String sidebarHtml = FixtureLoader.load("/fixtures/understanding/amqp/SIDEBAR.html");
 		stubGitHubService.addRawFileMapping(".*/SIDEBAR.md", sidebarHtml);
 
-		MvcResult response = this.mockMvc.perform(get("/understanding/amqp"))
+		MvcResult response = this.mockMvc.perform(get("/understanding/AMqp"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
+		assertThat(html.select("title").text(), containsString("Understanding AMqp"));
 		assertThat(html.select("h1").text(), containsString("Understanding: AMQP"));
 		assertThat(html.select("aside").text(), containsString("Messaging with RabbitMQ"));
 	}
