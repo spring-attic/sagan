@@ -72,7 +72,7 @@ public class CreateBlogPostTests extends IntegrationTestBase {
 		this.mockMvc.perform(get("/admin/blog/new"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("New Blog Post")));
+				.andExpect(content().string(containsString("Add New Post")));
 	}
 
 	@Test

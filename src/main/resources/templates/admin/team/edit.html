@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorator="layout">
 <head>
-    <title>SpringFramework - Edit Team Member Profile</title>
+    <title th:inline="text">Edit Profile &middot; [[${profile.fullName}]]</title>
 </head>
 <body>
 <div layout:fragment="content" class="container">

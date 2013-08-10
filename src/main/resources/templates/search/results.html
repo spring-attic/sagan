@@ -2,7 +2,7 @@
 		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 		layout:decorator="layout">
 <head>
-	<title>SpringFramework - Blog</title>
+	<title th:inline="text">Search &middot; [[${searchForm.q}]]</title>
 	<link rel="alternate" type="application/atom+xml" th:href="${feedPath}" />
 </head>
 <body>
