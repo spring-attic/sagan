@@ -74,7 +74,6 @@ projects:
     - id: spring-data-jpa
       name: Spring Data JPA
       lead: ogierke
-      siteUrl: NONE
       refDocUrl: /spring-data/jpa/docs/{version}/reference/html/
       apiDocUrl: /spring-data/jpa/docs/{version}/api/
       supportedVersions:
