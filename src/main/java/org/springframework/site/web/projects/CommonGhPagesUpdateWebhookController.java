@@ -1,0 +1,125 @@
+package org.springframework.site.web.projects;
+
+import java.io.IOException;
+import java.net.URI;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.expression.Expression;
+import org.springframework.expression.common.TemplateParserContext;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.site.domain.projects.Project;
+import org.springframework.site.domain.projects.ProjectMetadataService;
+import org.springframework.site.domain.services.github.GitHubService;
+import org.springframework.social.github.api.GitHub;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.StreamUtils;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import static java.lang.String.*;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+
+@Controller
+@RequestMapping("/webhook/gh-pages/{accessToken}")
+public class CommonGhPagesUpdateWebhookController {
+
+	private static final Log logger = LogFactory.getLog(CommonGhPagesUpdateWebhookController.class);
+
+	private final ProjectMetadataService service;
+	private final GitHub gitHub;
+	private final String template;
+
+	@Value("${WEBHOOK_ACCESS_TOKEN:default}")
+	private String expectedToken;
+
+	@Autowired
+	public CommonGhPagesUpdateWebhookController(
+			ProjectMetadataService service, GitHub gitHub) throws IOException {
+		this.service = service;
+		this.gitHub = gitHub;
+		this.template = StreamUtils.copyToString(
+				new ClassPathResource("notifications/gh-pages-updated.md").getInputStream(),
+				Charset.defaultCharset());
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = POST, headers = "content-type=application/x-www-form-urlencoded")
+	@ResponseBody
+	public HttpEntity<String> processUpdate(
+			@RequestParam String payload, @PathVariable String accessToken) throws IOException {
+		HttpHeaders headers = new HttpHeaders();
+		if (!expectedToken.equals(accessToken)) {
+			headers.set("Status", "403 Forbidden");
+			return new HttpEntity<>("{ \"message\": \"Forbidden\" }\n", headers);
+		}
+		ObjectMapper jsonMapper = new ObjectMapper();
+		SpelExpressionParser parser = new SpelExpressionParser();
+		Expression spel = parser.parseExpression(template, new TemplateParserContext());
+
+		Map<?,?> push;
+		try {
+			push = jsonMapper.readValue(payload, Map.class);
+			logger.info("Recieved new webhook payload for push with head_commit message: " +
+					((Map<?,?>)push.get("head_commit")).get("message"));
+		} catch (JsonParseException ex) {
+			headers.set("Status", "400 Bad Request");
+			return new HttpEntity<>("{ \"message\": \"Bad Request\" }\n", headers);
+		}
+
+		StringBuilder commits = new StringBuilder();
+		for (Map<?,?> commit : (List<Map<?,?>>) push.get("commits")) {
+			commits.append(format(" - %s (%s)\n", commit.get("message"), commit.get("id")));
+		}
+		Map<String, Object> root = new HashMap<>();
+		root.put("push", push);
+		root.put("commits", commits);
+		for (Project project : service.getProjects()) {
+			if (hasGhPagesBranch(project)) {
+				root.put("project", project);
+				Map<String,String> newIssue = new HashMap<>();
+				newIssue.put("title", "Please merge the latest changes to common gh-pages");
+				newIssue.put("body", spel.getValue(root, String.class));
+				String projectIssuesUrl = format("%s/repos/spring-projects/%s/issues",
+						GitHubService.API_URL_BASE, project.getId());
+				try {
+					URI newIssueUrl = gitHub.restOperations().postForLocation(
+							projectIssuesUrl, jsonMapper.writeValueAsString(newIssue));
+					logger.info("Notification of new gh-pages changes created at " + newIssueUrl);
+				} catch (RuntimeException ex) {
+					logger.warn("Unable to POST new issue to " + projectIssuesUrl);
+				}
+			}
+		}
+		headers.set("Status", "200 OK");
+		return new HttpEntity<>("{ \"message\": \"Successfully processed update\" }\n", headers);
+	}
+
+	private boolean hasGhPagesBranch(Project project) {
+		if (project.hasSite() && project.getSiteUrl().startsWith("http://projects.springframework.io")) {
+			String ghPagesBranchUrl = format("%s/repos/%s/%s/branches/gh-pages",
+					GitHubService.API_URL_BASE, "spring-projects", project.getId());
+			try {
+				HttpHeaders headers = gitHub.restOperations().headForHeaders(ghPagesBranchUrl);
+				return "200 OK".equals(headers.getFirst("Status"));
+			} catch (Exception ex) {
+				// RestTemplate call above logs at WARN level if anything goes wrong
+			}
+		}
+		return false;
+	}
+}
