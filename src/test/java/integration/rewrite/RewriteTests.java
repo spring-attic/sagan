@@ -40,6 +40,18 @@ public class RewriteTests {
 	}
 
 	@Test
+	public void legacySiteDocrootsAreRedirected() throws Exception {
+		validatePermanentRedirect("http://springsource.org", "http://springframework.io");
+		validatePermanentRedirect("http://www.springsource.org", "http://springframework.io");
+		validatePermanentRedirect("http://springsource.org/", "http://springframework.io");
+		validatePermanentRedirect("http://www.springsource.org/", "http://springframework.io");
+		validatePermanentRedirect("http://springframework.org", "http://springframework.io");
+		validatePermanentRedirect("http://www.springframework.org", "http://springframework.io");
+		validatePermanentRedirect("http://springframework.org/", "http://springframework.io");
+		validatePermanentRedirect("http://www.springframework.org/", "http://springframework.io");
+	}
+
+	@Test
 	public void legacySiteRedirects() throws Exception {
 		validatePermanentRedirect("http://www.springsource.org/sts/welcome", "http://springframework.io/tools/sts/welcome");
 		validatePermanentRedirect("http://www.springsource.org/groovy-grails-tool-suite-download", "http://springframework.io/tools/ggts");
