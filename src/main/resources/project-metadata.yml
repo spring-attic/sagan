@@ -206,7 +206,7 @@ projects:
     # ----------------------
     - id: spring-integration
       name: Spring Integration
-      lead: mfisher
+      lead: grussell
       siteUrl: NONE
       supportedVersions:
         - 3.0.0.M2
