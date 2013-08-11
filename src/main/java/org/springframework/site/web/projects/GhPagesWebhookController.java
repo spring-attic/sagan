@@ -34,21 +34,34 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import static java.lang.String.*;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Accepts requests from GitHub webhook set up at
+ * <a href="https://github.com/spring-projects/gh-pages#readme">the shared gh-pages
+ * repository</a> and notifies project leads to merge those new changes into their own
+ * projects. This notification happens by adding a new GH Issue to each project under the
+ * spring-projects org that has a gh-pages branch.
+ *
+ * <p>The {token} path variable establishes a shared secret between the webhook and this
+ * controller, ensuring that only GitHub can POST and thus create new issues in the
+ * various Spring project repositories.
+ *
+ * @author Chris Beams
+ */
 @Controller
-@RequestMapping("/webhook/gh-pages/{accessToken}")
-public class CommonGhPagesUpdateWebhookController {
+@RequestMapping("/webhook/gh-pages/{token}")
+public class GhPagesWebhookController {
 
-	private static final Log logger = LogFactory.getLog(CommonGhPagesUpdateWebhookController.class);
+	private static final Log logger = LogFactory.getLog(GhPagesWebhookController.class);
 
 	private final ProjectMetadataService service;
 	private final GitHub gitHub;
 	private final String template;
 
 	@Value("${WEBHOOK_ACCESS_TOKEN:default}")
-	private String expectedToken;
+	private String accessToken;
 
 	@Autowired
-	public CommonGhPagesUpdateWebhookController(
+	public GhPagesWebhookController(
 			ProjectMetadataService service, GitHub gitHub) throws IOException {
 		this.service = service;
 		this.gitHub = gitHub;
@@ -61,9 +74,9 @@ public class CommonGhPagesUpdateWebhookController {
 	@RequestMapping(method = POST, headers = "content-type=application/x-www-form-urlencoded")
 	@ResponseBody
 	public HttpEntity<String> processUpdate(
-			@RequestParam String payload, @PathVariable String accessToken) throws IOException {
+			@RequestParam String payload, @PathVariable String token) throws IOException {
 		HttpHeaders headers = new HttpHeaders();
-		if (!expectedToken.equals(accessToken)) {
+		if (!accessToken.equals(token)) {
 			headers.set("Status", "403 Forbidden");
 			return new HttpEntity<>("{ \"message\": \"Forbidden\" }\n", headers);
 		}
