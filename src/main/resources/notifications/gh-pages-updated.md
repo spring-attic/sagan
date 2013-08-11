@@ -1,23 +1,30 @@
-The following commits have been pushed to the shared gh-pages repository at
-#{[push][repository][url]}:
+What's this?
+-----------------------------------
+
+Your project has a gh-pages branch that is probably (hopefully!) based on the shared
+gh-pages project at #{[push][repository][url]}. Some new commits just got pushed to that
+shared repo, and that means it's probably a good idea to sync yours up with it. Here's
+what changed:
 
 #{[commits]}
 
-Please update your Spring project repository's gh-pages branch by issuing the following commands:
+Getting up to date is pretty easy. Just do the following:
 
 
-If you need to do a fresh checkout
+In case you need to do a fresh checkout
 ----------------------------------
+
     git clone git@github.com:spring-projects/#{[project].id}.git
     cd #{[project].id}
 
 
-If you do not yet have the common gh-pages project as an upstream
+If you don't yet have the common gh-pages project as an upstream
 ----------------------------------
+
     git remote add gh-pages-upstream git@github.com:spring-projects/gh-pages.git
 
 
-In any case
+Merge the latest changes
 ----------------------------------
     git checkout gh-pages
     git pull --no-ff gh-pages-upstream gh-pages
@@ -25,10 +32,24 @@ In any case
 
 Analyze changes
 ----------------------------------
+
  - Work out merge conflicts, if any
  - Commit changes as necessary
+ - Take a look at the site locally (see the [readme][1] for instructions how)
 
 
 Push
 -----------------------------------
+
     git push origin gh-pages
+
+... and you're done.
+
+
+Where did this issue come from?
+-----------------------------------
+
+This issue is created by a webhook that's set up on the shared gh-pages project.
+See the [readme][1] for more details.
+
+[1]: https://github.com/spring-projects/gh-pages#readme
