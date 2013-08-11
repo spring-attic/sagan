@@ -15,6 +15,18 @@
         <to type="permanent-redirect" last="true">http://schema.springframework.io$1</to>
     </rule>
     <rule>
+        <name>Legacy static docroot requests</name>
+        <condition name="host">static.spring(framework|source).org</condition>
+        <from>^/?$</from>
+        <to type="temporary-redirect" last="true">http://springframework.io/docs</to>
+    </rule>
+    <rule>
+        <name>Legacy static docs</name>
+        <condition name="host">static.spring(framework|source).org</condition>
+        <from>^(/.+)$</from>
+        <to type="permanent-redirect" last="true">http://docs.springframework.io$1</to>
+    </rule>
+    <rule>
         <name>GSG trailing slash</name>
         <note>https://www.pivotaltracker.com/story/show/52214321</note>
         <from>/guides/gs/([^/]+)$</from>
