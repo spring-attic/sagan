@@ -10,6 +10,7 @@ import org.springframework.social.github.api.GitHub;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriTemplate;
 
 @Service
 public class CachingGitHubRestClient {
@@ -36,8 +37,9 @@ public class CachingGitHubRestClient {
 
 	<T> String sendRequest(String path, Class<T> clazz, HttpMethod method, String body, Object... uriVariables) {
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+		String key = new UriTemplate(path).expand(uriVariables).toString();
 
-		String etag = cacheService.getEtagForPath(path);
+		String etag = cacheService.getEtagForPath(key);
 		if (etag != null) {
 			headers.add("If-None-Match", etag);
 		}
@@ -46,9 +48,9 @@ public class CachingGitHubRestClient {
 		ResponseEntity<T> entity = gitHub.restOperations().exchange(GitHubService.API_URL_BASE + path, method, requestEntity, clazz, uriVariables);
 
 		if (entity.getStatusCode().equals(HttpStatus.NOT_MODIFIED)) {
-			return cacheService.getContentForPath(path);
+			return cacheService.getContentForPath(key);
 		} else {
-			cacheService.cacheContent(path, entity.getHeaders().getETag(), entity.getBody().toString());
+			cacheService.cacheContent(key, entity.getHeaders().getETag(), entity.getBody().toString());
 			return entity.getBody().toString();
 		}
 	}

@@ -1,9 +1,11 @@
 package org.springframework.site.domain.services;
 
+import org.hamcrest.Description;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.HttpEntity;
@@ -24,6 +26,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -138,6 +141,48 @@ public class CachingGitHubRestClientTests {
 		assertThat(cacheService.getEtagForPath("/not_cached/path"), is(etag));
 	}
 
+
+	@Test
+	@SuppressWarnings("unchecked")
+	public void sendRequestForHtml_withSameUriTemplate_doesNotCauseCacheCollisions() {
+		given(gitHub.restOperations()).willReturn(this.restOperations);
+
+		String filePath = "/{id}/path";
+
+		String htmlResponse = "<h1>this is a header</h1>";
+		String etag = "\"etagToCache\"";
+
+		stubResponseOKWithUriVariable(htmlResponse, etag, "foo");
+
+		String html = client.sendRequestForHtml(filePath, "foo");
+
+		assertThat(html, is(htmlResponse));
+
+
+		String otherHtmlResponse = "<h1>this is a different header</h1>";
+		String otherEtag = "\"etagToCache2\"";
+
+		stubResponseOKWithUriVariable(otherHtmlResponse, otherEtag, "bar");
+
+		String otherHtml = client.sendRequestForHtml(filePath, "bar");
+
+		verify(restOperations).exchange(anyString(), (HttpMethod) anyObject(), argThat(new ArgumentMatcher<HttpEntity<?>>() {
+			@Override
+			public boolean matches(Object argument) {
+				HttpEntity entity = (HttpEntity)argument;
+				return !entity.getHeaders().containsKey("If-None-Match");
+			}
+
+			@Override
+			public void describeTo(Description description) {
+				description.appendText("expected header without 'If-None-Match'");
+			}
+		}), Matchers.<Class<MarkdownHtml>>anyObject(), eq("bar"));
+
+		assertThat(otherHtml, is(otherHtmlResponse));
+
+	}
+
 	private void stubResponseNotModified() {
 		ResponseEntity<GuideHtml> entity = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 
@@ -156,6 +201,19 @@ public class CachingGitHubRestClientTests {
 
 		Class<MarkdownHtml> htmlClass = anyObject();
 		given(restOperations.exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), htmlClass))
+				.willReturn(entity);
+	}
+
+	private void stubResponseOKWithUriVariable(String htmlResponse, String etag, String uriVariable) {
+		MarkdownHtml response = new MarkdownHtml(htmlResponse);
+
+		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+		headers.add("ETag", etag);
+
+		ResponseEntity<MarkdownHtml> entity = new ResponseEntity<>(response, headers, HttpStatus.OK);
+
+		Class<MarkdownHtml> htmlClass = anyObject();
+		given(restOperations.exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), htmlClass, eq(uriVariable)))
 				.willReturn(entity);
 	}
 }
