@@ -29,10 +29,14 @@ public class GitHubGuidesService implements GuidesService {
 	}
 
 	@Override
-	public GettingStartedGuide loadGuide(String guideId) {
-		String guideRepoName = getRepoNameFromGuideId(guideId);
-		return new GettingStartedGuide(guideRepoName, guideId, getGuideDescription(guideRepoName), getGuideContent(guideRepoName), getGuideSidebar(guideRepoName));
+	public Guide loadGettingStartedGuide(String guideId) {
+		String repoName = getRepoNameFromGuideId(guideId);
+		String description = getGuideDescription(repoName);
+		String content = getGuideContent(String.format(README_PATH, repoName));
+		String sidebar = getGuideSidebar(repoName);
+		return new Guide(repoName, guideId, description, content, sidebar);
 	}
+
 
 	private String getRepoNameFromGuideId(String guideId) {
 		return "gs-" + guideId;
@@ -46,13 +50,13 @@ public class GitHubGuidesService implements GuidesService {
 		}
 	}
 
-	private String getGuideContent(String guideRepoName) {
+	private String getGuideContent(String path) {
 		try {
-			log.info(String.format("Fetching getting started guide for '%s'", guideRepoName));
-			return this.gitHubService.getRawFileAsHtml(String.format(README_PATH, guideRepoName));
+			log.info(String.format("Fetching getting started guide for '%s'", path));
+			return this.gitHubService.getRawFileAsHtml(path);
 		} catch (RestClientException e) {
 			String msg = String
-					.format("No getting started guide found for '%s'", guideRepoName);
+					.format("No getting started guide found for '%s'", path);
 			log.warn(msg, e);
 			throw new GuideNotFoundException(msg, e);
 		}
@@ -67,22 +71,22 @@ public class GitHubGuidesService implements GuidesService {
 	}
 
 	@Override
-	public List<GettingStartedGuide> listGettingStartedGuides() {
+	public List<Guide> listGettingStartedGuides() {
 		GitHubRepo[] guideRepos = this.gitHubService.getGitHubRepos(REPOS_PATH);
 		return mapGuideReposToGettingStartedGuides(guideRepos, "gs-");
 	}
 
 	@Override
-	public List<GettingStartedGuide> listTutorials() {
+	public List<Guide> listTutorials() {
 		GitHubRepo[] guideRepos = this.gitHubService.getGitHubRepos(REPOS_PATH);
 		return mapGuideReposToGettingStartedGuides(guideRepos, "tut-");
 	}
 
-	private List<GettingStartedGuide> mapGuideReposToGettingStartedGuides(GitHubRepo[] guideRepos, String prefix) {
-		List<GettingStartedGuide> guides = new ArrayList<>();
+	private List<Guide> mapGuideReposToGettingStartedGuides(GitHubRepo[] guideRepos, String prefix) {
+		List<Guide> guides = new ArrayList<>();
 		for (GitHubRepo githubRepo : guideRepos) {
 			if (githubRepo.getName().startsWith(prefix)) {
-				guides.add(new GettingStartedGuide(githubRepo.getName(), githubRepo.getName().replaceAll("^"+prefix, ""), githubRepo.getDescription(), null, null));
+				guides.add(new Guide(githubRepo.getName(), githubRepo.getName().replaceAll("^"+prefix, ""), githubRepo.getDescription(), null, null));
 			}
 		}
 		return guides;
@@ -97,6 +101,21 @@ public class GitHubGuidesService implements GuidesService {
 			log.warn(msg, e);
 			throw new ImageNotFoundException(msg, e);
 		}
+	}
+
+
+	@Override
+	public Guide loadTutorial(String tutorialId) {
+		String repoName = "tut-" + tutorialId;
+		return new Guide(repoName, tutorialId, getGuideDescription(repoName), getGuideContent(String.format(README_PATH, repoName)), "");
+	}
+
+	@Override
+	public Guide loadTutorialPage(String tutorialId, int page) {
+		String repoName = "tut-" + tutorialId;
+		String tutorialPagePath = String.format("/repos/springframework-meta/%s/contents/page%d/README.md", repoName, page);
+
+		return new Guide(repoName, tutorialId, getGuideDescription(repoName), getGuideContent(tutorialPagePath), "");
 	}
 
 

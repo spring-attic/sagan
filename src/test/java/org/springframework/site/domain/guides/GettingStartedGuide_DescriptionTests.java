@@ -8,14 +8,14 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class GettingStartedGuide_DescriptionTests {
 
-	private GettingStartedGuide guide;
-	private GettingStartedGuide guideWithoutTitle;
+	private Guide guide;
+	private Guide guideWithoutTitle;
 
 	@Before
 	public void setUp() throws Exception {
-		this.guide = new GettingStartedGuide("gs-guide-id", "guide-id",
+		this.guide = new Guide("gs-guide-id", "guide-id",
 				"Title :: Subtitle", "Description", "Sidebar");
-		this.guideWithoutTitle = new GettingStartedGuide("gs-guide-id", "guide-id",
+		this.guideWithoutTitle = new Guide("gs-guide-id", "guide-id",
 				"Description", "Description", "Sidebar");
 	}
 

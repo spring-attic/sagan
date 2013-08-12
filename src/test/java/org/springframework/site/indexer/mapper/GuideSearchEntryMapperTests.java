@@ -2,7 +2,7 @@ package org.springframework.site.indexer.mapper;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.site.domain.guides.GettingStartedGuide;
+import org.springframework.site.domain.guides.Guide;
 import org.springframework.site.search.SearchEntry;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -10,7 +10,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class GuideSearchEntryMapperTests {
 
-	private GettingStartedGuide guide = new GettingStartedGuide("guide-repo",
+	private Guide guide = new Guide("guide-repo",
 			"guide-id",
 			"Guide Title :: Guide Subtitle",
 			"Some Guide Content",

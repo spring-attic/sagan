@@ -1,14 +1,14 @@
 package org.springframework.site.indexer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.guides.GettingStartedGuide;
+import org.springframework.site.domain.guides.Guide;
 import org.springframework.site.domain.guides.GuidesService;
 import org.springframework.site.indexer.mapper.GuideSearchEntryMapper;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GettingStartedGuideIndexer implements Indexer<GettingStartedGuide> {
+public class GettingStartedGuideIndexer implements Indexer<Guide> {
 
 	private GuideSearchEntryMapper mapper = new GuideSearchEntryMapper();
 
@@ -22,13 +22,13 @@ public class GettingStartedGuideIndexer implements Indexer<GettingStartedGuide> 
 	}
 
 	@Override
-	public Iterable<GettingStartedGuide> indexableItems() {
+	public Iterable<Guide> indexableItems() {
 		return guidesService.listGettingStartedGuides();
 	}
 
 	@Override
-	public void indexItem(GettingStartedGuide guideShell) {
-		GettingStartedGuide guide = guidesService.loadGuide(guideShell.getGuideId());
+	public void indexItem(Guide guideShell) {
+		Guide guide = guidesService.loadGettingStartedGuide(guideShell.getGuideId());
 		searchService.saveToIndex(mapper.map(guide));
 	}
 
@@ -38,7 +38,7 @@ public class GettingStartedGuideIndexer implements Indexer<GettingStartedGuide> 
 	}
 
 	@Override
-	public String getId(GettingStartedGuide indexable) {
+	public String getId(Guide indexable) {
 		return indexable.getGuideId();
 	}
 }

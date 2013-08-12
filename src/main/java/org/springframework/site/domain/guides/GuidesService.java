@@ -4,11 +4,14 @@ import java.util.List;
 
 public interface GuidesService {
 
-	GettingStartedGuide loadGuide(String guideId);
+	Guide loadGettingStartedGuide(String guideId);
+	Guide loadTutorial(String tutorialId);
 
-	List<GettingStartedGuide> listGettingStartedGuides();
+	List<Guide> listGettingStartedGuides();
 
-	List<GettingStartedGuide> listTutorials();
+	List<Guide> listTutorials();
 
 	byte[] loadImage(String guideId, String imageName);
+
+	Guide loadTutorialPage(String tutorialId, int page);
 }

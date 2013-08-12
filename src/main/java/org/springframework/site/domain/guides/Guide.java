@@ -1,6 +1,6 @@
 package org.springframework.site.domain.guides;
 
-public class GettingStartedGuide {
+public class Guide {
 	private final String repoName;
 	private final String guideId;
 	private final String description;
@@ -14,7 +14,7 @@ public class GettingStartedGuide {
 	private final static String CI_STATUS_IMAGE_URL = "https://drone.io/github.com/springframework-meta/%s/status.png";
 	private final static String CI_LATEST_URL = "https://drone.io/github.com/springframework-meta/%s/latest";
 
-	public GettingStartedGuide(String repoName, String guideId, String description, String content, String sidebar) {
+	public Guide(String repoName, String guideId, String description, String content, String sidebar) {
 		this.repoName = repoName;
 		this.guideId = guideId;
 		this.description = description;

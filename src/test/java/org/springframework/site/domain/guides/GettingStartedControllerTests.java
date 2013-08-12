@@ -42,16 +42,16 @@ public class GettingStartedControllerTests {
 
 	@Test
 	public void guideIsInModel() {
-		GettingStartedGuide guide = new GettingStartedGuide("gs-rest-service",
+		Guide guide = new Guide("gs-rest-service",
 				"rest-service", "Title :: Description", "raw guide text", "");
-		given(this.guideService.loadGuide("rest-service")).willReturn(guide);
+		given(this.guideService.loadGettingStartedGuide("rest-service")).willReturn(guide);
 		this.controller.viewGuide("rest-service", this.model);
-		assertThat(((GettingStartedGuide) this.model.get("guide")), is(guide));
+		assertThat(((Guide) this.model.get("guide")), is(guide));
 	}
 
 	@Test(expected = RestClientException.class)
 	public void failedGuideFetch() {
-		given(this.guideService.loadGuide("rest-service")).willThrow(
+		given(this.guideService.loadGettingStartedGuide("rest-service")).willThrow(
 				new RestClientException("Is GitHub down?"));
 		this.controller.viewGuide("rest-service", this.model);
 	}

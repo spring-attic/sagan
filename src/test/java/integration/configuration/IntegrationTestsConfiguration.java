@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.site.domain.guides.GettingStartedGuide;
+import org.springframework.site.domain.guides.Guide;
 import org.springframework.site.domain.guides.GuidesService;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.social.github.api.GitHubRepo;
@@ -27,8 +27,10 @@ import static org.mockito.Mockito.mock;
 @ComponentScan("integration.stubs")
 public class IntegrationTestsConfiguration {
 
-	public static final GettingStartedGuide GETTING_STARTED_GUIDE =
-			new GettingStartedGuide("gs-awesome-guide", "awesome-guide", "Awesome Guide :: Awesome getting started guide that isn't helpful", "Learn awesome stuff with this guide.", "Related resources");
+	public static final Guide GETTING_STARTED_GUIDE =
+			new Guide("gs-awesome-guide", "awesome-guide",
+					"Awesome Guide :: Awesome getting started guide that isn't helpful",
+					"Learn awesome stuff with this guide.", "Related resources");
 
 	@Primary
 	@Bean
@@ -42,12 +44,17 @@ public class IntegrationTestsConfiguration {
 		return new GuidesService() {
 
 			@Override
-			public GettingStartedGuide loadGuide(String guideId) {
+			public Guide loadGettingStartedGuide(String guideId) {
 				return GETTING_STARTED_GUIDE;
 			}
 
 			@Override
-			public List<GettingStartedGuide> listGettingStartedGuides() {
+			public Guide loadTutorial(String guideId) {
+				return GETTING_STARTED_GUIDE;
+			}
+
+			@Override
+			public List<Guide> listGettingStartedGuides() {
 				ObjectMapper mapper = new ObjectMapper();
 				try {
 					String reposJson = "/org/springframework/site/domain/guides/springframework-meta.repos.offline.json";
@@ -59,11 +66,11 @@ public class IntegrationTestsConfiguration {
 				}
 			}
 
-			private List<GettingStartedGuide> mapGuideReposToGettingStartedGuides(List<GitHubRepo> guideRepos, String prefix) {
-				List<GettingStartedGuide> guides = new ArrayList<>();
+			private List<Guide> mapGuideReposToGettingStartedGuides(List<GitHubRepo> guideRepos, String prefix) {
+				List<Guide> guides = new ArrayList<>();
 				for (GitHubRepo githubRepo : guideRepos) {
 					if (githubRepo.getName().startsWith(prefix)) {
-						guides.add(new GettingStartedGuide(githubRepo.getName(), githubRepo.getName().replaceAll("^" + prefix, ""), githubRepo.getDescription(), null, null));
+						guides.add(new Guide(githubRepo.getName(), githubRepo.getName().replaceAll("^" + prefix, ""), githubRepo.getDescription(), null, null));
 					}
 				}
 				return guides;
@@ -75,7 +82,12 @@ public class IntegrationTestsConfiguration {
 			}
 
 			@Override
-			public List<GettingStartedGuide> listTutorials() {
+			public Guide loadTutorialPage(String tutorialId, int page) {
+				return GETTING_STARTED_GUIDE;
+			}
+
+			@Override
+			public List<Guide> listTutorials() {
 				return Arrays.asList();
 			}
 		};

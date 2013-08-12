@@ -1,0 +1,30 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+    <title>SpringFramework - Tutorial</title>
+</head>
+<body>
+<div layout:fragment="header-container"></div>
+<div layout:fragment="content" class="container-fluid">
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="content--title">
+                Tutorial
+            </div>
+            <article class="content--container">
+                <h1 class="title" th:text="${tutorial.title}"></h1>
+                <div class="article-body" th:utext="${tutorial.content}">a Tutorial</div>
+            </article>
+        </div>
+
+        <aside id='sidebar' class="span4 content-right-pane--container">
+            <div class="right-pane-widget--container">
+
+            </div>
+        </aside>
+    </div>
+</div>
+</body>
+</html>

@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.context.initializer.LoggingApplicationContextInitializer;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.site.domain.guides.GettingStartedGuide;
+import org.springframework.site.domain.guides.Guide;
 import org.springframework.site.domain.understanding.UnderstandingGuide;
 import org.springframework.site.indexer.GettingStartedGuideIndexer;
 import org.springframework.site.indexer.UnderstandingGuideIndexer;
@@ -70,13 +70,13 @@ public class IndexerExamples {
 
 	@Test
 	public void gettingStartedGuideIndexer_indexableItems() {
-		Iterable<GettingStartedGuide> items = gettingStartedGuideIndexer.indexableItems();
+		Iterable<Guide> items = gettingStartedGuideIndexer.indexableItems();
 		assertThat(Iterables.size(items), greaterThan(0));
 	}
 
 	@Test
 	public void gettingStartedGuideIndexer_indexesAnItem() {
-		GettingStartedGuide gettingStartedGuide = new GettingStartedGuide("gs-rest-service", "rest-service", "asdf", "asdf", "This is the sidebar!");
+		Guide gettingStartedGuide = new Guide("gs-rest-service", "rest-service", "asdf", "asdf", "This is the sidebar!");
 		gettingStartedGuideIndexer.indexItem(gettingStartedGuide);
 
 		SearchResults searchResults = searchService.search("rest", new PageRequest(0, 10), null);

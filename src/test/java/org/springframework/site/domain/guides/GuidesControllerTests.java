@@ -38,25 +38,25 @@ public class GuidesControllerTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void gettingStartedGuidesAreInModel() {
-		List<GettingStartedGuide> guideList = new ArrayList<>();
-		GettingStartedGuide guide = new GettingStartedGuide("gs-rest-service",
+		List<Guide> guideList = new ArrayList<>();
+		Guide guide = new Guide("gs-rest-service",
 				"rest-service", "Title :: Description", "raw guide text", "");
 		guideList.add(guide);
 
 		given(this.guideService.listGettingStartedGuides()).willReturn(guideList);
 		this.controller.index(this.model);
-		assertThat((List<GettingStartedGuide>) this.model.get("guides"), is(guideList));
+		assertThat((List<Guide>) this.model.get("guides"), is(guideList));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
 	public void tutorialsAreInModel() {
-		List<GettingStartedGuide> tutorialsList = new ArrayList<>();
-		GettingStartedGuide guide = new GettingStartedGuide("tut-rest", "rest", "Title :: Description", "raw guide text", "");
+		List<Guide> tutorialsList = new ArrayList<>();
+		Guide guide = new Guide("tut-rest", "rest", "Title :: Description", "raw guide text", "");
 		tutorialsList.add(guide);
 
 		given(this.guideService.listTutorials()).willReturn(tutorialsList);
 		this.controller.index(this.model);
-		assertThat((List<GettingStartedGuide>) this.model.get("tutorials"), is(tutorialsList));
+		assertThat((List<Guide>) this.model.get("tutorials"), is(tutorialsList));
 	}
 }

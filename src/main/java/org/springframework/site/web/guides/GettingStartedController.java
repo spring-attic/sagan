@@ -3,7 +3,7 @@ package org.springframework.site.web.guides;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.site.domain.guides.GettingStartedGuide;
+import org.springframework.site.domain.guides.Guide;
 import org.springframework.site.domain.guides.GuidesService;
 import org.springframework.site.web.NavSection;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class GettingStartedController {
 	private static final String TRAILING_SLASH = "/";
 	private static final String SHOW_GUIDE = "/{guideId}" + TRAILING_SLASH;
 
-	static String getPath(GettingStartedGuide guide) {
+	static String getPath(Guide guide) {
 		return GUIDES_ROOT + "/" + guide.getGuideId() + TRAILING_SLASH;
 	}
 
@@ -38,7 +38,7 @@ public class GettingStartedController {
 	@RequestMapping(value = SHOW_GUIDE, method = { GET, HEAD })
 	public String viewGuide(@PathVariable String guideId, Model model) {
 		model.addAttribute("guideSlug", guideId);
-		model.addAttribute("guide", this.service.loadGuide(guideId));
+		model.addAttribute("guide", this.service.loadGettingStartedGuide(guideId));
 		return "guides/gs/guide";
 	}
 

@@ -2,7 +2,7 @@ package org.springframework.site.indexer;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.site.domain.guides.GettingStartedGuide;
+import org.springframework.site.domain.guides.Guide;
 import org.springframework.site.domain.guides.GuidesService;
 import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchService;
@@ -23,12 +23,12 @@ public class GettingStartedGuideIndexServiceTests {
 	private SearchService searchService = mock(SearchService.class);
 	private GuidesService guidesService = mock(GuidesService.class);
 	private GettingStartedGuideIndexer service;
-	private GettingStartedGuide guide;
+	private Guide guide;
 
 	@Before
 	public void setUp() throws Exception {
-		guide = new GettingStartedGuide("gs-awesome-guide", "awesome-guide", "Title :: Description", "Content", "Sidebar");
-		ArrayList<GettingStartedGuide> guides = new ArrayList<>();
+		guide = new Guide("gs-awesome-guide", "awesome-guide", "Title :: Description", "Content", "Sidebar");
+		ArrayList<Guide> guides = new ArrayList<>();
 		guides.add(guide);
 		given(this.guidesService.listGettingStartedGuides()).willReturn(guides);
 		this.service = new GettingStartedGuideIndexer(this.searchService, this.guidesService);
@@ -36,7 +36,7 @@ public class GettingStartedGuideIndexServiceTests {
 
 	@Test
 	public void savesGuidesToSearchIndex() throws Exception {
-		given(this.guidesService.loadGuide(anyString())).willReturn(this.guide);
+		given(this.guidesService.loadGettingStartedGuide(anyString())).willReturn(this.guide);
 		this.service.indexItem(this.guide);
 		verify(this.searchService).saveToIndex(any(SearchEntry.class));
 	}
@@ -44,7 +44,7 @@ public class GettingStartedGuideIndexServiceTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void skipsGuidesNotFound() throws Exception {
-		given(this.guidesService.loadGuide(anyString())).willThrow(RestClientException.class);
+		given(this.guidesService.loadGettingStartedGuide(anyString())).willThrow(RestClientException.class);
 		try {
 			this.service.indexItem(guide);
 			fail();

@@ -18,6 +18,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.matches;
+import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class GitHubGuidesServiceTests {
@@ -46,7 +47,7 @@ public class GitHubGuidesServiceTests {
 	public void loadGuideContent() throws IOException {
 		given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
 		given(this.gitHubService.getRepoInfo(anyString(), anyString())).willReturn(REPO_INFO);
-		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
+		Guide guide = this.service.loadGettingStartedGuide(GUIDE_ID);
 		assertThat(guide.getContent(), equalTo(README_CONTENT));
 	}
 
@@ -55,7 +56,7 @@ public class GitHubGuidesServiceTests {
 		String description = "Awesome Guide :: Learn awesome stuff with this guide";
 		REPO_INFO.setDescription(description);
 		given(this.gitHubService.getRepoInfo("springframework-meta", GUIDE_REPO_NAME)).willReturn(REPO_INFO);
-		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
+		Guide guide = this.service.loadGettingStartedGuide(GUIDE_ID);
 		assertThat(guide.getDescription(), equalTo(description));
 	}
 
@@ -63,7 +64,7 @@ public class GitHubGuidesServiceTests {
 	public void loadGuideSidebar() throws IOException {
 		given(this.gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willReturn(SIDEBAR_CONTENT);
 		given(this.gitHubService.getRepoInfo(anyString(), anyString())).willReturn(REPO_INFO);
-		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
+		Guide guide = this.service.loadGettingStartedGuide(GUIDE_ID);
 		assertThat(guide.getSidebar(), is(SIDEBAR_CONTENT));
 	}
 
@@ -73,7 +74,7 @@ public class GitHubGuidesServiceTests {
 		String unknownGuideId = "foo";
 		given(this.gitHubService.getRepoInfo(anyString(), anyString())).willThrow(RestClientException.class);
 		given(this.gitHubService.getRawFileAsHtml(anyString())).willThrow(RestClientException.class);
-		this.service.loadGuide(unknownGuideId);
+		this.service.loadGettingStartedGuide(unknownGuideId);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -83,7 +84,7 @@ public class GitHubGuidesServiceTests {
 		given(this.gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willThrow(RestClientException.class);
 		given(this.gitHubService.getRepoInfo(anyString(), anyString())).willReturn(REPO_INFO);
 
-		GettingStartedGuide guide = this.service.loadGuide(GUIDE_ID);
+		Guide guide = this.service.loadGettingStartedGuide(GUIDE_ID);
 
 		assertThat(guide.getContent(), is(README_CONTENT));
 		assertThat(guide.getSidebar(), isEmptyString());
@@ -100,7 +101,7 @@ public class GitHubGuidesServiceTests {
 
 		given(this.gitHubService.getGitHubRepos(anyString())).willReturn(guideRepos);
 
-		List<GettingStartedGuide> guides = this.service.listGettingStartedGuides();
+		List<Guide> guides = this.service.listGettingStartedGuides();
 		assertThat(guides.size(), is(1));
 		assertThat(guides.get(0).getGuideId(), equalTo("rest-service"));
 	}
@@ -116,7 +117,7 @@ public class GitHubGuidesServiceTests {
 
 		given(this.gitHubService.getGitHubRepos(anyString())).willReturn(guideRepos);
 
-		List<GettingStartedGuide> tutorials = this.service.listTutorials();
+		List<Guide> tutorials = this.service.listTutorials();
 		assertThat(tutorials.size(), is(1));
 		assertThat(tutorials.get(0).getGuideId(), equalTo("rest"));
 	}
@@ -143,6 +144,32 @@ public class GitHubGuidesServiceTests {
 		).willThrow(RestClientException.class);
 
 		this.service.loadImage(GUIDE_ID, unknownImage);
+	}
+
+	@Test
+	public void loadTutorialRootPageContent() throws IOException {
+		GitHubRepo gitHubRepo = new GitHubRepo();
+		gitHubRepo.setUrl("/path/to/tutorial");
+		given(this.gitHubService.getRepoInfo(anyString(), eq("tut-tutorialId"))).willReturn(gitHubRepo);
+		given(this.gitHubService.getRawFileAsHtml(matches("/repos/springframework-meta/tut-tutorialId/contents/README.md"))).willReturn("Tutorial Page 1");
+
+		Guide guide = this.service.loadTutorial("tutorialId");
+		verify(this.gitHubService).getRawFileAsHtml(matches("/repos/springframework-meta/tut-tutorialId/contents/README.md"));
+
+		assertThat(guide.getContent(), equalTo("Tutorial Page 1"));
+	}
+
+	@Test
+	public void loadTutorialPage1Content() throws IOException {
+		GitHubRepo gitHubRepo = new GitHubRepo();
+		gitHubRepo.setUrl("/path/to/tutorial");
+		given(this.gitHubService.getRepoInfo(anyString(), eq("tut-tutorialId"))).willReturn(gitHubRepo);
+		given(this.gitHubService.getRawFileAsHtml(matches("/repos/springframework-meta/tut-tutorialId/contents/page1/README.md"))).willReturn("Tutorial Page 1");
+
+		Guide guide = this.service.loadTutorialPage("tutorialId", 1);
+		verify(this.gitHubService).getRawFileAsHtml(matches("/repos/springframework-meta/tut-tutorialId/contents/page1/README.md"));
+
+		assertThat(guide.getContent(), equalTo("Tutorial Page 1"));
 	}
 
 }

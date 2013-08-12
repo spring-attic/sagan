@@ -10,11 +10,11 @@ public class GettingStartedGuideTests {
 
 	public static final String CONTENT = "";
 	public static final String SIDEBAR = "";
-	private GettingStartedGuide guide;
+	private Guide guide;
 
 	@Before
 	public void setUp() throws Exception {
-		guide = new GettingStartedGuide("gs-rest-service", "rest-service", "Title :: Description", CONTENT, SIDEBAR);
+		guide = new Guide("gs-rest-service", "rest-service", "Title :: Description", CONTENT, SIDEBAR);
 	}
 
 	@Test
