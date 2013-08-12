@@ -94,14 +94,23 @@ public class GitHubGuidesService implements GuidesService {
 	}
 
 	@Override
-	public byte[] loadImage(String guideId, String imageName) {
+	public byte[] loadGettingStartedImage(String guideId, String imageName) {
+		return loadImage(getRepoNameFromGuideId(guideId), imageName);
+	}
+
+	private byte[] loadImage(String repoName, String imageName) {
 		try {
-			return this.gitHubService.getGuideImage(getRepoNameFromGuideId(guideId), imageName);
+			return this.gitHubService.getGuideImage(repoName, imageName);
 		} catch (RestClientException e) {
-			String msg = String.format("Could not load image '%s' for guide id '%s'", imageName, guideId);
+			String msg = String.format("Could not load image '%s' for repo '%s'", imageName, repoName);
 			log.warn(msg, e);
 			throw new ImageNotFoundException(msg, e);
 		}
+	}
+
+	@Override
+	public byte[] loadTutorialImage(String tutorialId, String imageName) {
+		return loadImage("tut-" + tutorialId, imageName);
 	}
 
 

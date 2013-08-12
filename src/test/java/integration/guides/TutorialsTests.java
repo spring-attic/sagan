@@ -25,4 +25,11 @@ public class TutorialsTests extends IntegrationTestBase {
 
 	}
 
+	@Test
+	public void getImage() throws Exception {
+		this.mockMvc.perform(get("/guides/tutorials/my-tutorial/images/image.png"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("image/png"));
+
+	}
 }

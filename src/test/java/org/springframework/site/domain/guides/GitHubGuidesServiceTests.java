@@ -129,7 +129,7 @@ public class GitHubGuidesServiceTests {
 
 		given(this.gitHubService.getGuideImage(eq(GUIDE_REPO_NAME), eq(imageName))).willReturn(bytes);
 
-		byte[] result = this.service.loadImage(GUIDE_ID, imageName);
+		byte[] result = this.service.loadGettingStartedImage(GUIDE_ID, imageName);
 
 		assertThat(result, equalTo(bytes));
 	}
@@ -143,7 +143,7 @@ public class GitHubGuidesServiceTests {
             this.gitHubService.getGuideImage(eq(GUIDE_REPO_NAME), eq(unknownImage))
 		).willThrow(RestClientException.class);
 
-		this.service.loadImage(GUIDE_ID, unknownImage);
+		this.service.loadGettingStartedImage(GUIDE_ID, unknownImage);
 	}
 
 	@Test

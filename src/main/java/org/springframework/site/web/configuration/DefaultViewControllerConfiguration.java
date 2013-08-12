@@ -84,7 +84,7 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 					HandlerMethod handlerMethod = (HandlerMethod) handler;
 					NavSection navSection = handlerMethod.getBean().getClass()
 							.getAnnotation(NavSection.class);
-					if (navSection != null) {
+					if (navSection != null && modelAndView != null) {
 						modelAndView.addObject("navSection", navSection.value());
 					}
 				}

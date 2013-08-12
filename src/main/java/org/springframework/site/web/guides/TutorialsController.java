@@ -1,6 +1,8 @@
 package org.springframework.site.web.guides;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.site.domain.guides.GuidesService;
 import org.springframework.site.web.NavSection;
 import org.springframework.stereotype.Controller;
@@ -36,4 +38,12 @@ public class TutorialsController {
 		model.addAttribute("tutorial", service.loadTutorialPage(tutorialId, pagePath));
 		return "guides/tutorial/show";
 	}
+
+	@RequestMapping(value = "/{tutorialId}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })
+	public ResponseEntity<byte[]> loadImage(@PathVariable String tutorialId,
+											@PathVariable("name") String imageName) {
+		byte[] image = this.service.loadTutorialImage(tutorialId, imageName);
+		return new ResponseEntity<>(image, HttpStatus.OK);
+	}
+
 }

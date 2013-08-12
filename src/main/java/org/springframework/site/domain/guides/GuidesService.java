@@ -11,7 +11,9 @@ public interface GuidesService {
 
 	List<Guide> listTutorials();
 
-	byte[] loadImage(String guideId, String imageName);
+	byte[] loadGettingStartedImage(String guideId, String imageName);
 
 	Guide loadTutorialPage(String tutorialId, String pagePath);
+
+	byte[] loadTutorialImage(String tutorialId, String imageName);
 }

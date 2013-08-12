@@ -59,7 +59,7 @@ public class GettingStartedControllerTests {
 	@Test
 	public void loadImages() {
 		byte[] image = "animage".getBytes();
-		given(this.guideService.loadImage("rest-service", "welcome.png")).willReturn(
+		given(this.guideService.loadGettingStartedImage("rest-service", "welcome.png")).willReturn(
 				image);
 		ResponseEntity<byte[]> responseEntity = this.controller.loadImage("rest-service",
 				"welcome.png");

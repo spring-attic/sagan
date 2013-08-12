@@ -77,13 +77,18 @@ public class IntegrationTestsConfiguration {
 			}
 
 			@Override
-			public byte[] loadImage(String guideSlug, String imageName) {
+			public byte[] loadGettingStartedImage(String guideSlug, String imageName) {
 				return new byte[0];
 			}
 
 			@Override
 			public Guide loadTutorialPage(String tutorialId, String pagePath) {
 				return GETTING_STARTED_GUIDE;
+			}
+
+			@Override
+			public byte[] loadTutorialImage(String tutorialId, String imageName) {
+				return new byte[0];
 			}
 
 			@Override
