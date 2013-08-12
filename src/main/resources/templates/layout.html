@@ -30,6 +30,22 @@
   <script type="text/javascript" th:src="@{/js/application.js}" src="../../static/js/application.js"></script>
   <script type="text/javascript" th:src="@{/js/guide.js}" src="../../static/js/guide.js"></script>
   <meta name="google-site-verification" content="7qGntFPD9lWAVCtUu5U77v4l68PsTHf6xpzgjQv2j2M" />
+  <script type=“text/javascript”>
+    var _gaq = _gaq || []; 
+    var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+    _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+    _gaq.push( 
+      ['_setAccount', 'UA-2728886-20'], 
+      ['_trackPageview']); 
+    _gaq.push( 
+      ['_setAccount', 'UA-2728886-19'], 
+      ['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 </head>
 <body>
   <header class="navbar header--navbar">
@@ -137,15 +153,5 @@
     </div>
   </footer>
   <div id="scrim"></div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-42447510-1', 'cfapps.io');
-    ga('send', 'pageview');
-
-  </script>
 </body>
 </html>
