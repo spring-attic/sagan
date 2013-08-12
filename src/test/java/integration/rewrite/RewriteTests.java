@@ -61,6 +61,7 @@ public class RewriteTests {
 	@Test
 	public void blogPagesAreRedirected() throws Exception {
 		validatePermanentRedirect("http://blog.springsource.org/anything", "http://springframework.io/blog/anything");
+		validatePermanentRedirect("http://blog.springsource.org/anything", "http://springframework.io/blog/anything");
 	}
 
 	@Test
