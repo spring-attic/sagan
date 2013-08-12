@@ -40,8 +40,8 @@ public class StaticPageRequestMappingTests extends IntegrationTestBase {
 	}
 
 	@Test
-	public void getTrademarkPage() throws Exception {
-		checkPage("/trademark");
+	public void getLogosAndUsagePage() throws Exception {
+		checkPage("/logos");
 	}
 
 	private void checkPage(String page) throws Exception {
