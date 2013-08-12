@@ -9,11 +9,12 @@
 <div layout:fragment="content" class="container">
     <form th:action="@{${formAction}}" action="#" method="post" th:object="${profile}">
         <label for="name">Name:<input id="name" type="text" th:field="*{name}" name="name" /></label>
-        <label for="location">Location:<input id="location" type="text" th:field="*{location}" name="location" /></label>
-        <label for="geoLocation">GeoLocation (lat,long):<input id="geoLocation" type="text" th:field="*{geoLocation}" name="geoLocation" /></label>
-        <label for="bio">Bio:<textarea id="bio" th:field="*{bio}" name="bio"></textarea></label>
-        <label>Github Username: <span id="githubUsername" th:text="*{githubUsername}" ></span></label>
-        <label for="speakerdeckUsername">Speakerdeck Username:<input id="speakerdeckUsername" type="text" th:field="*{speakerdeckUsername}" name="speakerdeckUsername" /></label>
+		<label>Username: <span id="username" th:text="*{username}"></span></label>
+		<label for="location">Location:<input id="location" type="text" th:field="*{location}" name="location" /></label>
+		<label for="geoLocation">GeoLocation (lat,long):<input id="geoLocation" type="text" th:field="*{geoLocation}" name="geoLocation" /></label>
+		<label for="bio">Bio:<textarea id="bio" th:field="*{bio}" name="bio"></textarea></label>
+		<label>Github Username: <span id="githubUsername" th:text="*{githubUsername}" ></span></label>
+		<label for="speakerdeckUsername">Speakerdeck Username:<input id="speakerdeckUsername" type="text" th:field="*{speakerdeckUsername}" name="speakerdeckUsername" /></label>
         <label for="twitterUsername">Twitter Username:<input id="twitterUsername" type="text" th:field="*{twitterUsername}" name="twitterUsername" /></label>
         <label for="lanyrdUsername">Lanyrd Username:<input id="lanyrdUsername" type="text" th:field="*{lanyrdUsername}" name="lanrydUsername" /></label>
         <label for="videoEmbeds">Video Embeds:<textarea id="videoEmbeds" th:field="*{videoEmbeds}" name="videoEmbeds"></textarea></label>
