@@ -82,7 +82,7 @@ public class IntegrationTestsConfiguration {
 			}
 
 			@Override
-			public Guide loadTutorialPage(String tutorialId, int page) {
+			public Guide loadTutorialPage(String tutorialId, String pagePath) {
 				return GETTING_STARTED_GUIDE;
 			}
 

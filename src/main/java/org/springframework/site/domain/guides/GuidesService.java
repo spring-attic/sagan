@@ -13,5 +13,5 @@ public interface GuidesService {
 
 	byte[] loadImage(String guideId, String imageName);
 
-	Guide loadTutorialPage(String tutorialId, int page);
+	Guide loadTutorialPage(String tutorialId, String pagePath);
 }

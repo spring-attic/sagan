@@ -30,10 +30,10 @@ public class TutorialsController {
 		return "guides/tutorial/show";
 	}
 
-	@RequestMapping(value = "/{tutorialId}/{page}", method = { GET, HEAD })
-	public String viewTutorialPage(@PathVariable String tutorialId, @PathVariable Integer page, Model model) {
+	@RequestMapping(value = "/{tutorialId}/{pagePath}", method = { GET, HEAD })
+	public String viewTutorialPage(@PathVariable String tutorialId, @PathVariable String pagePath, Model model) {
 		model.addAttribute("tutorialId", tutorialId);
-		model.addAttribute("tutorial", service.loadTutorialPage(tutorialId, page));
+		model.addAttribute("tutorial", service.loadTutorialPage(tutorialId, pagePath));
 		return "guides/tutorial/show";
 	}
 }

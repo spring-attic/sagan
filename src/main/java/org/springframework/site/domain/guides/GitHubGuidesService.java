@@ -22,6 +22,7 @@ public class GitHubGuidesService implements GuidesService {
 	private static final Log log = LogFactory.getLog(GitHubGuidesService.class);
 
 	private final GitHubService gitHubService;
+	private static final String TUTORIAL_PAGE_PATH = "/repos/springframework-meta/%s/contents/%s/README.md";
 
 	@Autowired
 	public GitHubGuidesService(GitHubService gitHubService) {
@@ -111,9 +112,9 @@ public class GitHubGuidesService implements GuidesService {
 	}
 
 	@Override
-	public Guide loadTutorialPage(String tutorialId, int page) {
+	public Guide loadTutorialPage(String tutorialId, String pagePath) {
 		String repoName = "tut-" + tutorialId;
-		String tutorialPagePath = String.format("/repos/springframework-meta/%s/contents/page%d/README.md", repoName, page);
+		String tutorialPagePath = String.format(TUTORIAL_PAGE_PATH, repoName, pagePath);
 
 		return new Guide(repoName, tutorialId, getGuideDescription(repoName), getGuideContent(tutorialPagePath), "");
 	}

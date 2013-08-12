@@ -164,10 +164,10 @@ public class GitHubGuidesServiceTests {
 		GitHubRepo gitHubRepo = new GitHubRepo();
 		gitHubRepo.setUrl("/path/to/tutorial");
 		given(this.gitHubService.getRepoInfo(anyString(), eq("tut-tutorialId"))).willReturn(gitHubRepo);
-		given(this.gitHubService.getRawFileAsHtml(matches("/repos/springframework-meta/tut-tutorialId/contents/page1/README.md"))).willReturn("Tutorial Page 1");
+		given(this.gitHubService.getRawFileAsHtml(matches("/repos/springframework-meta/tut-tutorialId/contents/1/README.md"))).willReturn("Tutorial Page 1");
 
-		Guide guide = this.service.loadTutorialPage("tutorialId", 1);
-		verify(this.gitHubService).getRawFileAsHtml(matches("/repos/springframework-meta/tut-tutorialId/contents/page1/README.md"));
+		Guide guide = this.service.loadTutorialPage("tutorialId", "1");
+		verify(this.gitHubService).getRawFileAsHtml(matches("/repos/springframework-meta/tut-tutorialId/contents/1/README.md"));
 
 		assertThat(guide.getContent(), equalTo("Tutorial Page 1"));
 	}
