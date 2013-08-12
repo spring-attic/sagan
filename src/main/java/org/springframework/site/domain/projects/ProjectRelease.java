@@ -1,33 +1,33 @@
 package org.springframework.site.domain.projects;
 
-public class ProjectVersion implements Comparable<ProjectVersion>{
+public class ProjectRelease implements Comparable<ProjectRelease>{
 
-	public enum Release {
+	public enum ReleaseStatus {
 		CURRENT, PRERELEASE, SUPPORTED;
 	}
 
 	private final String versionName;
-	private final Release release;
+	private final ReleaseStatus releaseStatus;
 	private final String refDocUrl;
 	private final String apiDocUrl;
 
-    public ProjectVersion(String versionName, Release release, String refDocUrl, String apiDocUrl) {
+    public ProjectRelease(String versionName, ReleaseStatus releaseStatus, String refDocUrl, String apiDocUrl) {
         this.versionName = versionName;
-		this.release = release;
+		this.releaseStatus = releaseStatus;
 		this.refDocUrl = refDocUrl;
 		this.apiDocUrl = apiDocUrl;
     }
 
 	public boolean isCurrent() {
-		return release == Release.CURRENT;
+		return releaseStatus == ReleaseStatus.CURRENT;
 	}
 
 	public boolean isPreRelease() {
-		return release == Release.PRERELEASE;
+		return releaseStatus == ReleaseStatus.PRERELEASE;
 	}
 
 	public boolean isSupported() {
-		return release == Release.SUPPORTED;
+		return releaseStatus == ReleaseStatus.SUPPORTED;
 	}
 
 	public String getFullName() {
@@ -55,7 +55,7 @@ public class ProjectVersion implements Comparable<ProjectVersion>{
 	}
 
 	@Override
-	public int compareTo(ProjectVersion other) {
+	public int compareTo(ProjectRelease other) {
 		return this.versionName.compareTo(other.versionName);
 	}
 
@@ -64,11 +64,11 @@ public class ProjectVersion implements Comparable<ProjectVersion>{
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		ProjectVersion that = (ProjectVersion) o;
+		ProjectRelease that = (ProjectRelease) o;
 
 		if (!apiDocUrl.equals(that.apiDocUrl)) return false;
 		if (!refDocUrl.equals(that.refDocUrl)) return false;
-		if (release != that.release) return false;
+		if (releaseStatus != that.releaseStatus) return false;
 		if (!versionName.equals(that.versionName)) return false;
 
 		return true;
@@ -77,7 +77,7 @@ public class ProjectVersion implements Comparable<ProjectVersion>{
 	@Override
 	public int hashCode() {
 		int result = versionName.hashCode();
-		result = 31 * result + release.hashCode();
+		result = 31 * result + releaseStatus.hashCode();
 		result = 31 * result + refDocUrl.hashCode();
 		result = 31 * result + apiDocUrl.hashCode();
 		return result;
@@ -85,9 +85,9 @@ public class ProjectVersion implements Comparable<ProjectVersion>{
 
 	@Override
 	public String toString() {
-		return "ProjectVersion{" +
+		return "ProjectRelease{" +
 				"versionName='" + versionName + '\'' +
-				", release=" + release +
+				", release=" + releaseStatus +
 				", refDocUrl='" + refDocUrl + '\'' +
 				", apiDocUrl='" + apiDocUrl + '\'' +
 				'}';

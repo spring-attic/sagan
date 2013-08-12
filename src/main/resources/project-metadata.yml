@@ -500,7 +500,7 @@ projects:
       name: Spring Integration Scala DSL
       lead: ghillert
       siteUrl: NONE
-      # M2 release was tagged, but only api docs are 1.0.0.BUILD-SNAPSHOT;
+      # M2 releaseStatus was tagged, but only api docs are 1.0.0.BUILD-SNAPSHOT;
       # no ref docs whatsoever
       refDocUrl: NONE
       apiDocUrl: NONE
@@ -560,7 +560,7 @@ projects:
       lead: cwalls
       siteUrl: NONE
 
-    # RC release only
+    # RC releaseStatus only
     - id: spring-social-linkedin
       name: Spring Social LinkedIn
       lead: cwalls
@@ -654,7 +654,7 @@ projects:
     # ----------------------
     # Spring Test MVC
     # ----------------------
-    # Never had a GA release, but README says that Spring 3.1.x projects can
+    # Never had a GA releaseStatus, but README says that Spring 3.1.x projects can
     # still work against milestones here. TODO: Talk to rossen about eliminating
     - id: spring-test-mvc
       name: Spring Test MVC

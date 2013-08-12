@@ -5,7 +5,7 @@ import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.site.domain.projects.Project;
-import org.springframework.site.domain.projects.ProjectVersion;
+import org.springframework.site.domain.projects.ProjectRelease;
 import org.springframework.site.search.SearchEntry;
 
 import java.util.Collections;
@@ -20,9 +20,9 @@ public class ReferenceDocumentSearchEntryMapperTests {
 			"Spring Project",
 			"http://www.example.com/repo/spring-framework",
 			"http://www.example.com/spring-framework",
-			Collections.<ProjectVersion>emptyList());
+			Collections.<ProjectRelease>emptyList());
 
-	private ProjectVersion version = new ProjectVersion("3.2.1.RELEASE", ProjectVersion.Release.CURRENT, "", "");
+	private ProjectRelease version = new ProjectRelease("3.2.1.RELEASE", ProjectRelease.ReleaseStatus.CURRENT, "", "");
 	private ReferenceDocumentSearchEntryMapper mapper = new ReferenceDocumentSearchEntryMapper(project, version);
 	private SearchEntry entry;
 

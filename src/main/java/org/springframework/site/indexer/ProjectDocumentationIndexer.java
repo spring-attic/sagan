@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.projects.Project;
 import org.springframework.site.domain.projects.ProjectMetadataService;
-import org.springframework.site.domain.projects.ProjectVersion;
+import org.springframework.site.domain.projects.ProjectRelease;
 import org.springframework.site.indexer.crawler.CrawlerService;
 import org.springframework.site.indexer.mapper.ApiDocumentMapper;
 import org.springframework.site.indexer.mapper.ReferenceDocumentSearchEntryMapper;
@@ -41,13 +41,13 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 		logger.info("Indexing project: " + project.getId());
 
 		List<String> projectVersions = new ArrayList<>();
-		for (ProjectVersion projectVersion : project.getProjectVersions()) {
-			projectVersions.add(projectVersion.getFullName());
+		for (ProjectRelease projectRelease : project.getProjectReleases()) {
+			projectVersions.add(projectRelease.getFullName());
 		}
 
 		searchService.removeOldProjectEntriesFromIndex(project.getId(), projectVersions);
 
-		for (ProjectVersion version : project.getProjectVersions()) {
+		for (ProjectRelease version : project.getProjectReleases()) {
 			String apiDocUrl = version.getApiDocUrl() + "/allclasses-frame.html";
 			ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, version);
 			CrawledWebDocumentProcessor apiDocProcessor = new CrawledWebDocumentProcessor(searchService, apiDocumentMapper);
