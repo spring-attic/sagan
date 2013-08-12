@@ -18,4 +18,12 @@ public class FixtureLoader {
 		}
 	}
 
+	public static byte[] loadData(String path) {
+		try {
+			InputStream stream = new ClassPathResource(path, FixtureLoader.class).getInputStream();
+			return StreamUtils.copyToByteArray(stream);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

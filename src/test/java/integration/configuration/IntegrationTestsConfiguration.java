@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.guides.Guide;
 import org.springframework.site.domain.guides.GuidesService;
+import org.springframework.site.test.FixtureLoader;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.web.client.RestTemplate;
@@ -78,7 +79,7 @@ public class IntegrationTestsConfiguration {
 
 			@Override
 			public byte[] loadGettingStartedImage(String guideSlug, String imageName) {
-				return new byte[0];
+				return FixtureLoader.loadData("/fixtures/images/testImage.png");
 			}
 
 			@Override
@@ -88,7 +89,7 @@ public class IntegrationTestsConfiguration {
 
 			@Override
 			public byte[] loadTutorialImage(String tutorialId, String imageName) {
-				return new byte[0];
+				return FixtureLoader.loadData("/fixtures/images/testImage.png");
 			}
 
 			@Override
