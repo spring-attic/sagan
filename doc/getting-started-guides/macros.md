@@ -259,6 +259,14 @@ $ java -jar target/${project_id}-0.1.0.jar
 [u-json]: /understanding/JSON
 </#macro>
 
+<#macro u_hateoas>
+[u-hateoas]: /understanding/HATEOAS
+</#macro>
+
+<#macro u_amqp>
+[u-amqp]: /understanding/AMQP
+</#macro>
+
 <#macro u_nosql>
 [u-nosql]: /understanding/NoSQL
 </#macro>
