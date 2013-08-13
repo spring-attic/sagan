@@ -23,9 +23,9 @@ public class ProjectDocumentationIndexerTests {
 	private ProjectDocumentationIndexer service = new ProjectDocumentationIndexer(crawlerService, searchService, metadataService);
 
 	private List<ProjectRelease> documentationList = Arrays.asList(
-			new ProjectRelease("3", ProjectRelease.ReleaseStatus.CURRENT, "http://reference.example.com/3", "http://api.example.com/3"),
-			new ProjectRelease("2", ProjectRelease.ReleaseStatus.SUPPORTED, "http://reference.example.com/2", "http://api.example.com/2"),
-			new ProjectRelease("1", ProjectRelease.ReleaseStatus.SUPPORTED, "http://reference.example.com/1", "http://api.example.com/1")
+			new ProjectRelease("3", ProjectRelease.ReleaseStatus.CURRENT, "http://reference.example.com/3", "http://api.example.com/3", "com.example", "example-framework"),
+			new ProjectRelease("2", ProjectRelease.ReleaseStatus.SUPPORTED, "http://reference.example.com/2", "http://api.example.com/2", "com.example", "example-framework"),
+			new ProjectRelease("1", ProjectRelease.ReleaseStatus.SUPPORTED, "http://reference.example.com/1", "http://api.example.com/1", "com.example", "example-framework")
 	);
 
 	private Project project = new Project("spring",

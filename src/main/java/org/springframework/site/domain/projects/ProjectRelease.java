@@ -10,13 +10,17 @@ public class ProjectRelease implements Comparable<ProjectRelease>{
 	private final ReleaseStatus releaseStatus;
 	private final String refDocUrl;
 	private final String apiDocUrl;
+	private final String groupId;
+	private final String artifactId;
 
-    public ProjectRelease(String versionName, ReleaseStatus releaseStatus, String refDocUrl, String apiDocUrl) {
+    public ProjectRelease(String versionName, ReleaseStatus releaseStatus, String refDocUrl, String apiDocUrl, String groupId, String artifactId) {
         this.versionName = versionName;
 		this.releaseStatus = releaseStatus;
 		this.refDocUrl = refDocUrl;
 		this.apiDocUrl = apiDocUrl;
-    }
+		this.groupId = groupId;
+		this.artifactId = artifactId;
+	}
 
 	public boolean isCurrent() {
 		return releaseStatus == ReleaseStatus.CURRENT;
@@ -52,6 +56,14 @@ public class ProjectRelease implements Comparable<ProjectRelease>{
 
 	public boolean hasApiDocUrl() {
 		return !apiDocUrl.isEmpty();
+	}
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public String getArtifactId() {
+		return artifactId;
 	}
 
 	@Override

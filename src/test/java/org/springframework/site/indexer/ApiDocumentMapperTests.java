@@ -23,7 +23,7 @@ public class ApiDocumentMapperTests {
 			"http://www.example.com/spring-framework",
 			Collections.<ProjectRelease>emptyList());
 
-	private ProjectRelease version = new ProjectRelease("3.2.1.RELEASE", ProjectRelease.ReleaseStatus.CURRENT, "", "");
+	private ProjectRelease version = new ProjectRelease("3.2.1.RELEASE", ProjectRelease.ReleaseStatus.CURRENT, "", "", "", "");
 	private ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, version);
 
 	@Test

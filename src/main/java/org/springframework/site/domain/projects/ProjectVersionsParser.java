@@ -21,6 +21,8 @@ class ProjectVersionsParser {
 		String name;
 		String refDocUrl;
 		String apiDocUrl;
+		String groupId;
+		String artifactId;
 	}
 
 	ProjectVersionsParser(Map<String, String> variables, Map<String, String> defaultUrls) {
@@ -45,11 +47,22 @@ class ProjectVersionsParser {
 			if (projectData.containsKey("apiDocUrl")) {
 				projectApiDocUrl = (String) projectData.get("apiDocUrl");
 			}
+			String projectGroupId = "";
+			if (projectData.containsKey("groupId")) {
+				projectGroupId = (String) projectData.get("groupId");
+			}
+			String projectArtifactId = (String) projectData.get("id");
+			if (projectData.containsKey("artifactId")) {
+				projectArtifactId = (String) projectData.get("artifactId");
+			}
 
 			for (Object value : (List) projectData.get("supportedVersions")) {
 				SupportedVersion supportedVersion = new SupportedVersion();
+				supportedVersion.artifactId = projectArtifactId;
 				supportedVersion.refDocUrl = projectRefDocUrl;
 				supportedVersion.apiDocUrl = projectApiDocUrl;
+				supportedVersion.groupId = projectGroupId;
+				supportedVersion.artifactId = projectArtifactId;
 
 				if (value instanceof String) {
 					supportedVersion.name = value.toString();
@@ -61,6 +74,12 @@ class ProjectVersionsParser {
 					}
 					if (versionMap.containsKey("apiDocUrl")) {
 						supportedVersion.apiDocUrl = versionMap.get("apiDocUrl");
+					}
+					if (versionMap.containsKey("groupId")) {
+						supportedVersion.groupId = versionMap.get("groupId");
+					}
+					if (versionMap.containsKey("artifactId")) {
+						supportedVersion.artifactId = versionMap.get("artifactId");
 					}
 				}
 				versions.add(supportedVersion);
@@ -86,11 +105,17 @@ class ProjectVersionsParser {
 			String refDocUrl = buildDocUrl(supportedVersion.refDocUrl, "refDocUrl");
 			String apiDocUrl = buildDocUrl(supportedVersion.apiDocUrl, "apiDocUrl");
 			variables.remove("version");
+			String groupId = supportedVersion.groupId;
+			if (groupId.isEmpty()) {
+				groupId = variables.get("groupId");
+			}
+			String artifactId = supportedVersion.artifactId;
+
 			ProjectRelease.ReleaseStatus releaseStatus = getVersionRelease(supportedVersion.name, currentVersion);
 			if (currentVersion == null && releaseStatus == CURRENT) {
 				currentVersion = supportedVersion.name;
 			}
-			projectReleases.add(new ProjectRelease(supportedVersion.name, releaseStatus, refDocUrl, apiDocUrl));
+			projectReleases.add(new ProjectRelease(supportedVersion.name, releaseStatus, refDocUrl, apiDocUrl, groupId, artifactId));
 		}
 		return projectReleases;
 	}

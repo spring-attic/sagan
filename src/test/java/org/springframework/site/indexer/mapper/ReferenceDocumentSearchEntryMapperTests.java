@@ -22,7 +22,7 @@ public class ReferenceDocumentSearchEntryMapperTests {
 			"http://www.example.com/spring-framework",
 			Collections.<ProjectRelease>emptyList());
 
-	private ProjectRelease version = new ProjectRelease("3.2.1.RELEASE", ProjectRelease.ReleaseStatus.CURRENT, "", "");
+	private ProjectRelease version = new ProjectRelease("3.2.1.RELEASE", ProjectRelease.ReleaseStatus.CURRENT, "", "", "", "");
 	private ReferenceDocumentSearchEntryMapper mapper = new ReferenceDocumentSearchEntryMapper(project, version);
 	private SearchEntry entry;
 

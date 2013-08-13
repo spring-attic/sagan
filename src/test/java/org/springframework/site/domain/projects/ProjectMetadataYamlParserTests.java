@@ -32,7 +32,7 @@ public class ProjectMetadataYamlParserTests {
 	@Test
 	public void categoriesHaveListOfProjects() throws IOException {
 		List<Project> active = service.getProjectsForCategory("active");
-		assertThat(active.size(), equalTo(12));
+		assertThat(active.size(), equalTo(16));
 	}
 
 	@Test
@@ -225,4 +225,41 @@ public class ProjectMetadataYamlParserTests {
 		assertThat(version.getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/project-with-variables-in-urls/3.1.1.RELEASE/javadoc-api/"));
 	}
 
+	@Test
+	public void projectWithDefaultGroupId() throws IOException {
+		Project project =  service.getProjectsForCategory("active").get(0);
+		assertThat(project.getProjectReleases().get(0).getGroupId(), equalTo("org.springframework"));
+	}
+
+	@Test
+	public void projectWithGroupIdOverriddenInProject() throws IOException {
+		Project project =  service.getProjectsForCategory("active").get(12);
+		assertThat(project.getProjectReleases().get(0).getGroupId(), equalTo("org.something"));
+	}
+
+	@Test
+	public void projectWithGroupIdOverriddenInSupportedVersion() throws IOException {
+		Project project =  service.getProjectsForCategory("active").get(13);
+		assertThat(project.getProjectReleases().get(0).getGroupId(), equalTo("org.something.else"));
+		assertThat(project.getProjectReleases().get(1).getGroupId(), equalTo("org.something"));
+	}
+
+	@Test
+	public void projectWithDefaultArtifactId() throws IOException {
+		Project project =  service.getProjectsForCategory("active").get(0);
+		assertThat(project.getProjectReleases().get(0).getArtifactId(), equalTo("spring-framework"));
+	}
+
+	@Test
+	public void projectWithDefaultArtifactIdOverriddenInProject() throws IOException {
+		Project project =  service.getProjectsForCategory("active").get(14);
+		assertThat(project.getProjectReleases().get(0).getArtifactId(), equalTo("overridden-artifact-id"));
+	}
+
+	@Test
+	public void projectWithDefaultArtifactIdOverriddenInVersion() throws IOException {
+		Project project =  service.getProjectsForCategory("active").get(15);
+		assertThat(project.getProjectReleases().get(0).getArtifactId(), equalTo("overridden-in-version-artifact-id"));
+		assertThat(project.getProjectReleases().get(1).getArtifactId(), equalTo("overridden-artifact-id"));
+	}
 }
