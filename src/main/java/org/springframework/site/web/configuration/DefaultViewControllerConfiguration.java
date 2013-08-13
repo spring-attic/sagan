@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
-import org.springframework.site.domain.StaticPageMapper;
+import org.springframework.site.domain.StaticPagePathFinder;
 import org.springframework.site.web.NavSection;
 import org.springframework.site.web.ViewRenderingHelper;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -31,7 +31,7 @@ import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDiale
 public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter {
 
 	@Autowired
-	private StaticPageMapper staticPageMapper;
+	private StaticPagePathFinder staticPagePathFinder;
 
 	@Bean(name = { "uih", "viewRenderingHelper" })
 	@Scope("request")
@@ -47,14 +47,13 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		try {
-			for (StaticPageMapper.StaticPageMapping mapping : this.staticPageMapper
-					.staticPagePaths()) {
-				String urlPath = mapping.getUrlPath();
+			for (StaticPagePathFinder.PagePaths paths : this.staticPagePathFinder.findPaths()) {
+				String urlPath = paths.getUrlPath();
 				registry.addViewController(urlPath).setViewName(
-						"pages" + mapping.getFilePath());
+						"pages" + paths.getFilePath());
 				if (!urlPath.isEmpty()) {
 					registry.addViewController(urlPath + "/").setViewName(
-							"pages" + mapping.getFilePath());
+							"pages" + paths.getFilePath());
 				}
 			}
 
