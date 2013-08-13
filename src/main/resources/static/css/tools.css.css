@@ -155,7 +155,7 @@
   background-color: white;
   margin: 0 67px;
   padding: 20px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
 }
 .tools--wrapper.testimonial .testimonial--container .quotation--icon {
   width: 30px;
@@ -294,7 +294,7 @@
 }
 
 .eclipse-platform--container {
-  border: 1px solid #34302d;
+  border: 1px solid #34302D;
   margin-bottom: 40px;
 }
 .eclipse-platform--container .eclipse-platform-dropdown-link {
@@ -359,13 +359,13 @@
 
 .tool-archive--table {
   margin-top: 30px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
 }
 .tool-archive--table th {
   text-transform: uppercase;
   font-size: 12px;
   line-height: 12px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
 }
 .tool-archive--table td:last-child {
   color: #6c635d;
@@ -425,7 +425,7 @@
   text-align: left;
 }
 .tools-right-pane .other-tools--container:first-child {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #FFF;
 }
 .tools-right-pane .other-tools--container .other-tools--link {
   color: #5FA134;
