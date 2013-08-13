@@ -34,18 +34,7 @@
 .docs--item .docs-version--dropdown p {
   display: inline-block;
 }
-.docs--item .docs-version--dropdown .current-version--icon, .docs--item .docs-version--dropdown .pre-release-version--icon {
-  background-image: url("../img/iconsprite.png");
-  display: inline-block;
-  height: 13px;
+.docs--item .docs-version--dropdown .icon {
   vertical-align: top;
   margin: 2px 0 0 6px;
-}
-.docs--item .docs-version--dropdown .current-version--icon {
-  background-position: -284px -520px;
-  width: 42px;
-}
-.docs--item .docs-version--dropdown .pre-release-version--icon {
-  background-position: -344px -520px;
-  width: 23px;
 }

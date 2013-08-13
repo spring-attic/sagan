@@ -199,5 +199,124 @@ $icon-sprite: url("../img/iconsprite.png");
       font-family: $secondary-font-family;
       font-weight: bold;
     }
+    pre {
+      border-radius: 0;
+    }
+  }
+}
+
+.quickstart--container {
+  border: 1px solid $black-brown;
+  .quickstart--title {
+    font-family: $secondary-font-family;
+    color: #f1f1f1;
+    background-color: $black-brown;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 17px 0;
+    width: 211px;
+    text-align: center;
+    display: inline-block;
+  }
+  .quickstart--dropdown {
+    display: inline-block;
+    width: 37.7%;
+    margin-left: 16px;
+    .item-dropdown--title {
+      padding: 9px 0 7px 20px;
+      border: 1px solid $black-brown;
+    }
+    .item-dropdown--icon {
+      padding: 9px;
+      background-color: $black-brown;
+    }
+    .project-version--dropdown {
+      width: 100%%;
+      padding: 0;
+      .project-version {
+        color: #f1f1f1;
+        padding: 8px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        &:last-child {
+          border: none;
+        }
+        &:hover {
+          color: white;
+        }
+      }
+    }
+    &.js-open {
+      .item-dropdown--title {
+        border: 1px solid $green;
+      }
+    }
+    &:hover {
+      .item-dropdown--icon {
+        color: white;
+      }
+    }
+  }
+  .quickstart--body {
+    padding: 20px;
+  }
+}
+
+.project-documentation--container {
+  border-color: $black-brown;
+  .item-dropdown--title {
+    background-color: transparent;
+    border-bottom: 1px solid $black-brown;
+    padding: 20px;
+    font-family: $secondary-font-family;
+    font-size: 14px;
+    line-height: 14px;
+  }
+  .item--dropdown {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    .item--body-title {
+      padding-top: 15px;
+      color: $black-brown;
+      margin: 0 20px;
+      border-color: #d7d5d3;
+    }
+    .item--body--version {
+      margin: 0 20px;
+      border-color: #d7d5d3;
+      p {
+        color: $black-brown;
+        display: inline-block
+      }
+      .icon {
+        vertical-align: top;
+        margin: 2px 0 0 6px;
+        &.icon-pre-release {
+          background-color: $black-brown;
+          border-radius: 2px;
+        }
+      }
+      &:last-child {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+.project-sub-link--wrapper {
+  padding: 20px 20px 18px;
+  .project-sub-link {
+    background-color: #cbcaca;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-right: 2.9%;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }

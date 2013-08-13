@@ -234,6 +234,9 @@ body {
   font-weight: bold;
   color: #34302d;
 }
+.right-pane-widget--container.no-top-border {
+  box-shadow: none;
+}
 
 .header--content {
   background-color: #dedede;

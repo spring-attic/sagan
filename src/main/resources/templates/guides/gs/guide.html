@@ -1,9 +1,9 @@
 <html   
   xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="layout">
   <head>
-  	<title th:text="${guide.title}"/>
+    <title th:text="${guide.title}"/>
   </head>
   <body>
     <div layout:fragment="header-container"></div>
@@ -14,8 +14,8 @@
             Getting Started
           </div>
           <article class="content--container">
-			  <h1 class="title" th:text="${guide.title}"></h1>
-			  <div class="article-body" th:utext="${guide.content}">a Guide</div>
+        <h1 class="title" th:text="${guide.title}"></h1>
+        <div class="article-body" th:utext="${guide.content}">a Guide</div>
           </article>
         </div>
         <aside id='sidebar' class="span4 content-right-pane--container">

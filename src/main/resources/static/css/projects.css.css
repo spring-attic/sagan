@@ -176,3 +176,118 @@
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
 }
+.project-body--container .project-body--section pre {
+  border-radius: 0;
+}
+
+.quickstart--container {
+  border: 1px solid #34302d;
+}
+.quickstart--container .quickstart--title {
+  font-family: "Montserrat", sans-serif;
+  color: #f1f1f1;
+  background-color: #34302d;
+  font-size: 16px;
+  line-height: 16px;
+  padding: 17px 0;
+  width: 211px;
+  text-align: center;
+  display: inline-block;
+}
+.quickstart--container .quickstart--dropdown {
+  display: inline-block;
+  width: 37.7%;
+  margin-left: 16px;
+}
+.quickstart--container .quickstart--dropdown .item-dropdown--title {
+  padding: 9px 0 7px 20px;
+  border: 1px solid #34302d;
+}
+.quickstart--container .quickstart--dropdown .item-dropdown--icon {
+  padding: 9px;
+  background-color: #34302d;
+}
+.quickstart--container .quickstart--dropdown .project-version--dropdown {
+  width: 100%%;
+  padding: 0;
+}
+.quickstart--container .quickstart--dropdown .project-version--dropdown .project-version {
+  color: #f1f1f1;
+  padding: 8px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+.quickstart--container .quickstart--dropdown .project-version--dropdown .project-version:last-child {
+  border: none;
+}
+.quickstart--container .quickstart--dropdown .project-version--dropdown .project-version:hover {
+  color: white;
+}
+.quickstart--container .quickstart--dropdown.js-open .item-dropdown--title {
+  border: 1px solid #6db33f;
+}
+.quickstart--container .quickstart--dropdown:hover .item-dropdown--icon {
+  color: white;
+}
+.quickstart--container .quickstart--body {
+  padding: 20px;
+}
+
+.project-documentation--container {
+  border-color: #34302d;
+}
+.project-documentation--container .item-dropdown--title {
+  background-color: transparent;
+  border-bottom: 1px solid #34302d;
+  padding: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  line-height: 14px;
+}
+.project-documentation--container .item--dropdown {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+.project-documentation--container .item--dropdown .item--body-title {
+  padding-top: 15px;
+  color: #34302d;
+  margin: 0 20px;
+  border-color: #d7d5d3;
+}
+.project-documentation--container .item--dropdown .item--body--version {
+  margin: 0 20px;
+  border-color: #d7d5d3;
+}
+.project-documentation--container .item--dropdown .item--body--version p {
+  color: #34302d;
+  display: inline-block;
+}
+.project-documentation--container .item--dropdown .item--body--version .icon {
+  vertical-align: top;
+  margin: 2px 0 0 6px;
+}
+.project-documentation--container .item--dropdown .item--body--version .icon.icon-pre-release {
+  background-color: #34302d;
+  border-radius: 2px;
+}
+.project-documentation--container .item--dropdown .item--body--version:last-child {
+  margin-bottom: 20px;
+}
+
+.project-sub-link--wrapper {
+  padding: 20px 20px 18px;
+}
+.project-sub-link--wrapper .project-sub-link {
+  background-color: #cbcaca;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  margin-right: 2.9%;
+}
+.project-sub-link--wrapper .project-sub-link:last-child {
+  margin-right: 0;
+}

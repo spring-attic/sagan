@@ -53,20 +53,9 @@ $icon-sprite: url("../img/iconsprite.png");
     p {
       display: inline-block;
     }
-    .current-version--icon, .pre-release-version--icon {
-      background-image: $icon-sprite;
-      display: inline-block;
-      height: 13px;
+    .icon {
       vertical-align: top;
       margin: 2px 0 0 6px;
-    }
-    .current-version--icon {
-      background-position: -284px -520px;
-      width: 42px;
-    }
-    .pre-release-version--icon {
-      background-position: -344px -520px;
-      width: 23px;
     }
   }
 }

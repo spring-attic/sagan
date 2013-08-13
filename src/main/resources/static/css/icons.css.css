@@ -77,3 +77,13 @@
 .icon.icon-forum:hover {
   background-position: -449px -450px;
 }
+.icon.icon-current-version {
+  height: 13px;
+  width: 42px;
+  background-position: -284px -520px;
+}
+.icon.icon-pre-release {
+  height: 13px;
+  width: 23px;
+  background-position: -344px -520px;
+}

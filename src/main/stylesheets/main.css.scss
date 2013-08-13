@@ -262,6 +262,9 @@ body {
       }
     }
   }
+  &.no-top-border {
+    box-shadow: none
+  }
 }
 
 .header--content {
@@ -277,7 +280,7 @@ body {
 }
 
 .body--container {
-	margin-top: 100px;
+  margin-top: 100px;
   margin-bottom: 100px;
 }
 
@@ -355,18 +358,18 @@ body {
 }
 
 input.floating-input {
-	background-color: transparent;
-	border: none;
-	border-bottom: 1px solid $medium-grey;
-	box-shadow: none;
-	border-radius: 0;
-	padding: 0 0 0 0;
-	&:focus {
-		border: none;
-		border-bottom: 1px solid $medium-grey;
-		box-shadow: none;
-		background: $light-grey;
-	}
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid $medium-grey;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0 0 0 0;
+  &:focus {
+    border: none;
+    border-bottom: 1px solid $medium-grey;
+    box-shadow: none;
+    background: $light-grey;
+  }
 }
 
 .floating-input--icon {

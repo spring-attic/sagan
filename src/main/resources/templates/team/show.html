@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
     <![endif]-->
     <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
-	<script type="text/javascript" th:src="@{/js/team.js}" src="../../static/js/team.js"></script>
+  <script type="text/javascript" th:src="@{/js/team.js}" src="../../static/js/team.js"></script>
 </head>
 <body>
   <div layout:fragment="header-container"></div>
@@ -64,10 +64,10 @@
             </div>
             <div class="member-twitter--body">
               <div th:if="${#strings.isEmpty(profile.twitterUsername)}">
-                <a class="twitter-timeline" href="'https://twitter.com/springsource" data-widget-id="365190455274635264" data-screen-name="springsource" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
+                <a class="twitter-timeline" href="'https://twitter.com/springsource" data-widget-id="366969513482285056" data-screen-name="springsource" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
               </div>
               <div th:unless="${#strings.isEmpty(profile.twitterUsername)}">
-                <a class="twitter-timeline" href="'https://twitter.com/springsource" data-widget-id="365190455274635264" th:attr="data-screen-name=${profile.twitterUsername}" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
+                <a class="twitter-timeline" href="'https://twitter.com/springsource" data-widget-id="366969513482285056" th:attr="data-screen-name=${profile.twitterUsername}" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
               </div>
               <script>
                 !function(d,s,id){
@@ -108,9 +108,9 @@
       </div>
     </div>
   <script th:inline="javascript">
-	  /*<![CDATA[*/
-	  var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
-	  /*]]>*/
+    /*<![CDATA[*/
+    var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
+    /*]]>*/
   </script>
   </div>
 </body>
