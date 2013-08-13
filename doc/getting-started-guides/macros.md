@@ -243,7 +243,7 @@ $ java -jar target/${project_id}-0.1.0.jar
 
 </#macro>
 
-<#macro u-oauth>
+<#macro u_oauth>
 [u-oauth] /understanding/OAuth
 </#macro>
 
