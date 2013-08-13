@@ -13,7 +13,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-import org.springframework.site.domain.StaticPageMapper;
+import org.springframework.site.domain.StaticPagePathFinder;
 import org.springframework.site.domain.projects.ProjectMetadataService;
 import org.springframework.site.domain.projects.ProjectMetadataYamlParser;
 import org.springframework.site.search.configuration.SearchClientConfiguration;
@@ -55,8 +55,8 @@ public class IndexerConfiguration {
 	}
 
 	@Bean
-	public StaticPageMapper staticPageMapper(ResourcePatternResolver resourceResolver) {
-		return new StaticPageMapper(resourceResolver);
+	public StaticPagePathFinder staticPageMapper(ResourcePatternResolver resourceResolver) {
+		return new StaticPagePathFinder(resourceResolver);
 	}
 
 	@Bean

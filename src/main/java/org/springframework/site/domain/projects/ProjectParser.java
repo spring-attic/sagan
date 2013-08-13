@@ -21,7 +21,7 @@ class ProjectParser {
 		String name = projectData.get("name").toString();
 		String repoUrl = parseRepoUrl(projectData);
 		String siteUrl = parseSiteUrl(projectData);
-		List<ProjectVersion> documentationList = new ProjectVersionsParser(variables, defaultUrls).parse(projectData);
+		List<ProjectRelease> documentationList = new ProjectVersionsParser(variables, defaultUrls).parse(projectData);
 		variables.remove("id");
 		return new Project(id, name, repoUrl, siteUrl, documentationList);
 	}

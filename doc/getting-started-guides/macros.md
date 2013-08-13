@@ -242,3 +242,48 @@ $ java -jar target/${project_id}-0.1.0.jar
 ```
 
 </#macro>
+
+<#macro u_oauth>
+[u-oauth]: /understanding/OAuth
+</#macro>
+
+<#macro u_application_context>
+[u-application-context]: /understanding/application-context
+</#macro>
+
+<#macro u_git>
+[u-git]: /understanding/git
+</#macro>
+
+<#macro u_json>
+[u-json]: /understanding/JSON
+</#macro>
+
+<#macro u_hateoas>
+[u-hateoas]: /understanding/HATEOAS
+</#macro>
+
+<#macro u_amqp>
+[u-amqp]: /understanding/AMQP
+</#macro>
+
+<#macro u_nosql>
+[u-nosql]: /understanding/NoSQL
+</#macro>
+
+<#macro u_rest>
+[u-rest]: /understanding/REST
+</#macro>
+
+<#macro u_tomcat>
+[u-tomcat]: /understanding/Tomcat
+</#macro>
+
+<#macro u_view_templates>
+[u-view-templates]: /understanding/view-templates
+</#macro>
+
+<#macro u_war>
+[u-war]: /understanding/WAR
+</#macro>
+

@@ -2,7 +2,7 @@ package org.springframework.site.indexer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.site.domain.StaticPageMapper;
+import org.springframework.site.domain.StaticPagePathFinder;
 import org.springframework.site.indexer.crawler.CrawlerService;
 import org.springframework.site.indexer.mapper.LocalStaticPagesSearchEntryMapper;
 import org.springframework.site.search.SearchService;
@@ -21,7 +21,7 @@ public class StaticPageIndexer implements Indexer<String> {
 	private String baseUrl;
 
 	private final CrawlerService crawlerService;
-	private final StaticPageMapper staticPageMapper;
+	private final StaticPagePathFinder staticPagePathFinder;
 	private final CrawledWebDocumentProcessor documentProcessor;
 
 	private static final Set<String> pagesToIgnore = new HashSet<>();
@@ -32,9 +32,9 @@ public class StaticPageIndexer implements Indexer<String> {
 	}
 
 	@Autowired
-	public StaticPageIndexer(CrawlerService crawlerService, SearchService searchService, StaticPageMapper staticPageMapper) {
+	public StaticPageIndexer(CrawlerService crawlerService, SearchService searchService, StaticPagePathFinder staticPagePathFinder) {
 		this.crawlerService = crawlerService;
-		this.staticPageMapper = staticPageMapper;
+		this.staticPagePathFinder = staticPagePathFinder;
 		this.documentProcessor = new CrawledWebDocumentProcessor(searchService, new LocalStaticPagesSearchEntryMapper());
 	}
 
@@ -42,9 +42,9 @@ public class StaticPageIndexer implements Indexer<String> {
 	public Iterable<String> indexableItems() {
 		List<String> paths = new ArrayList<>();
 		try {
-			for (StaticPageMapper.StaticPageMapping staticPageMapping : staticPageMapper.staticPagePaths()) {
-				if (!pagesToIgnore.contains(staticPageMapping.getUrlPath())) {
-					paths.add(baseUrl + staticPageMapping.getUrlPath());
+			for (StaticPagePathFinder.PagePaths pagePaths : staticPagePathFinder.findPaths()) {
+				if (!pagesToIgnore.contains(pagePaths.getUrlPath())) {
+					paths.add(baseUrl + pagePaths.getUrlPath());
 				}
 			}
 		} catch (IOException e) {

@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class StaticPageMapper {
+public class StaticPagePathFinder {
 	private ResourcePatternResolver resourceResolver;
 
-	public static class StaticPageMapping {
+	public static class PagePaths {
 		private String filePath;
 		private String urlPath;
 
-		public StaticPageMapping(String filePath, String urlPath) {
+		public PagePaths(String filePath, String urlPath) {
 			this.filePath = filePath;
 			this.urlPath = urlPath;
 		}
@@ -32,20 +32,20 @@ public class StaticPageMapper {
 	}
 
 	@Autowired
-	public StaticPageMapper(ResourcePatternResolver resourceResolver) {
+	public StaticPagePathFinder(ResourcePatternResolver resourceResolver) {
 		this.resourceResolver = resourceResolver;
 	}
 
-	public List<StaticPageMapping> staticPagePaths() throws IOException {
+	public List<PagePaths> findPaths() throws IOException {
 		Resource baseResource = resourceResolver
 				.getResource("classpath:/templates/pages");
 		String basePath = baseResource.getURL().getPath();
 		Resource[] resources = resourceResolver
 				.getResources("classpath:/templates/pages/**/*.html");
-		List<StaticPageMapping> paths = new ArrayList<>();
+		List<PagePaths> paths = new ArrayList<>();
 		for (Resource resource : resources) {
 			String filePath = relativeFilePath(basePath, resource);
-			paths.add(new StaticPageMapping(filePath, buildRequestMapping(filePath)));
+			paths.add(new PagePaths(filePath, buildRequestMapping(filePath)));
 		}
 		return paths;
 	}

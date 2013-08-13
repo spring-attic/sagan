@@ -35,7 +35,19 @@ public class GitHubGuidesService implements GuidesService {
 		String description = getGuideDescription(repoName);
 		String content = getGuideContent(String.format(README_PATH, repoName));
 		String sidebar = getGuideSidebar(repoName);
-		return new Guide(repoName, guideId, description, content, sidebar);
+		String title = parseTitle(description);
+		String subTitle = parseSubTitle(description);
+		return new Guide(repoName, guideId, title, subTitle, content, sidebar);
+	}
+
+	private String parseTitle(String description) {
+		String[] split = description.split("::", 2);
+		return split[0].trim();
+	}
+
+	private String parseSubTitle(String description) {
+		String[] split = description.split("::", 2);
+		return (split.length > 1) ? split[1].trim() : "";
 	}
 
 
@@ -83,11 +95,15 @@ public class GitHubGuidesService implements GuidesService {
 		return mapGuideReposToGettingStartedGuides(guideRepos, "tut-");
 	}
 
-	private List<Guide> mapGuideReposToGettingStartedGuides(GitHubRepo[] guideRepos, String prefix) {
+	protected List<Guide> mapGuideReposToGettingStartedGuides(GitHubRepo[] guideRepos, String prefix) {
 		List<Guide> guides = new ArrayList<>();
 		for (GitHubRepo githubRepo : guideRepos) {
-			if (githubRepo.getName().startsWith(prefix)) {
-				guides.add(new Guide(githubRepo.getName(), githubRepo.getName().replaceAll("^"+prefix, ""), githubRepo.getDescription(), null, null));
+			String repoName = githubRepo.getName();
+			if (repoName.startsWith(prefix)) {
+				String description = githubRepo.getDescription();
+				String title = parseTitle(description);
+				String subTitle = parseSubTitle(description);
+				guides.add(new Guide(repoName, repoName.replaceAll("^" + prefix, ""), title, subTitle, getGuideContent(String.format(README_PATH, repoName)), getGuideSidebar(repoName)));
 			}
 		}
 		return guides;
@@ -113,19 +129,26 @@ public class GitHubGuidesService implements GuidesService {
 		return loadImage("tut-" + tutorialId, imageName);
 	}
 
-
 	@Override
 	public Guide loadTutorial(String tutorialId) {
 		String repoName = "tut-" + tutorialId;
-		return new Guide(repoName, tutorialId, getGuideDescription(repoName), getGuideContent(String.format(README_PATH, repoName)), "");
+		String contentPath = String.format(README_PATH, repoName);
+		return loadTutorial(tutorialId, repoName, contentPath);
 	}
 
 	@Override
 	public Guide loadTutorialPage(String tutorialId, String pagePath) {
 		String repoName = "tut-" + tutorialId;
-		String tutorialPagePath = String.format(TUTORIAL_PAGE_PATH, repoName, pagePath);
+		String contentPath = String.format(TUTORIAL_PAGE_PATH, repoName, pagePath);
+		return loadTutorial(tutorialId, repoName, contentPath);
+	}
 
-		return new Guide(repoName, tutorialId, getGuideDescription(repoName), getGuideContent(tutorialPagePath), "");
+	private Guide loadTutorial(String tutorialId, String repoName, String contentPath) {
+		String content = getGuideContent(contentPath);
+		String description = getGuideDescription(repoName);
+		String title = parseTitle(description);
+		String subTitle = parseSubTitle(description);
+		return new Guide(repoName, tutorialId, title, subTitle, content, "");
 	}
 
 

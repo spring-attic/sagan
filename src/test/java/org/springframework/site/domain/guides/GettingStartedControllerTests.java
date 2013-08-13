@@ -43,7 +43,7 @@ public class GettingStartedControllerTests {
 	@Test
 	public void guideIsInModel() {
 		Guide guide = new Guide("gs-rest-service",
-				"rest-service", "Title :: Description", "raw guide text", "");
+				"rest-service", "Title","Description", "raw guide text", "");
 		given(this.guideService.loadGettingStartedGuide("rest-service")).willReturn(guide);
 		this.controller.viewGuide("rest-service", this.model);
 		assertThat(((Guide) this.model.get("guide")), is(guide));

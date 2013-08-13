@@ -2,6 +2,7 @@ variables:
   githubOrgBaseUrl: http://github.com/springframework
   ghPagesBaseUrl: http://projects.springframework.io
   docsBaseUrl: http://docs.springframework.io
+  groupId: org.springframework
 
 defaultUrls:
   refDocUrl: "{docsBaseUrl}/{id}/docs/{version}/reference/html"
@@ -107,6 +108,50 @@ projects:
         - name: 3.1.4.RELEASE
           refDocUrl: "{ghPagesBaseUrl}/docs/overridden/{id}/{version}"
           apiDocUrl: /spring/docs/overridden/{id}/{version}/javadoc-api/
+        - 3.1.1.RELEASE
+
+    - id: project-with-overridden-group-id
+      name: Spring Framework
+      siteUrl: "{ghPagesBaseUrl}/foo/{id}/"
+      repoUrl: "{githubOrgBaseUrl}/foo/{id}/"
+      refDocUrl: "{ghPagesBaseUrl}/docs/{id}/{version}/html/"
+      apiDocUrl: /spring/docs/{id}/{version}/javadoc-api/
+      groupId: org.something
+      supportedVersions:
+        - 3.1.1.RELEASE
+
+    - id: project-with-overridden-group-id-by-versions
+      name: Spring Framework
+      siteUrl: "{ghPagesBaseUrl}/foo/{id}/"
+      repoUrl: "{githubOrgBaseUrl}/foo/{id}/"
+      refDocUrl: "{ghPagesBaseUrl}/docs/{id}/{version}/html/"
+      apiDocUrl: /spring/docs/{id}/{version}/javadoc-api/
+      groupId: org.something
+      supportedVersions:
+        - name: 3.1.4.RELEASE
+          groupId: org.something.else
+        - 3.1.1.RELEASE
+
+    - id: project-with-overridden-artifactId
+      name: Spring Framework
+      siteUrl: "{ghPagesBaseUrl}/foo/{id}/"
+      repoUrl: "{githubOrgBaseUrl}/foo/{id}/"
+      refDocUrl: "{ghPagesBaseUrl}/docs/{id}/{version}/html/"
+      apiDocUrl: /spring/docs/{id}/{version}/javadoc-api/
+      artifactId: overridden-artifact-id
+      supportedVersions:
+        - 3.1.1.RELEASE
+
+    - id: project-with-overridden-artifactId
+      name: Spring Framework
+      siteUrl: "{ghPagesBaseUrl}/foo/{id}/"
+      repoUrl: "{githubOrgBaseUrl}/foo/{id}/"
+      refDocUrl: "{ghPagesBaseUrl}/docs/{id}/{version}/html/"
+      apiDocUrl: /spring/docs/{id}/{version}/javadoc-api/
+      artifactId: overridden-artifact-id
+      supportedVersions:
+        - name: 3.1.4.RELEASE
+          artifactId: overridden-in-version-artifact-id
         - 3.1.1.RELEASE
 
   other:

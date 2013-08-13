@@ -8,18 +8,18 @@ public class Project {
 	private String name;
 	private final String repoUrl;
 	private final String siteUrl;
-	private final List<ProjectVersion> documentationList;
+	private final List<ProjectRelease> releaseList;
 
 	public Project(String id,
 				   String name,
 				   String repoUrl,
 				   String siteUrl,
-				   List<ProjectVersion> documentationList) {
+				   List<ProjectRelease> releaseList) {
 		this.id = id;
 		this.name = name;
 		this.repoUrl = repoUrl;
 		this.siteUrl = siteUrl;
-		this.documentationList = documentationList;
+		this.releaseList = releaseList;
 	}
 	
 	public String getName() {
@@ -30,8 +30,8 @@ public class Project {
 		return id;
 	}
 
-    public List<ProjectVersion> getProjectVersions() {
-		return documentationList;
+    public List<ProjectRelease> getProjectReleases() {
+		return releaseList;
     }
 
 	public String getRepoUrl() {

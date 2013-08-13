@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.site.domain.StaticPageMapper;
+import org.springframework.site.domain.StaticPagePathFinder;
 import org.springframework.site.indexer.crawler.CrawlerService;
 import org.springframework.site.search.SearchService;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -27,20 +27,20 @@ public class StaticPageIndexerTests {
 	private SearchService searchService;
 
 	@Mock
-	private StaticPageMapper staticPageMapper;
+	private StaticPagePathFinder staticPagePathFinder;
 
 	private StaticPageIndexer indexer;
 
 	@Before
 	public void setUp() throws Exception {
-		indexer = new StaticPageIndexer(crawlerService, searchService, staticPageMapper);
+		indexer = new StaticPageIndexer(crawlerService, searchService, staticPagePathFinder);
 		ReflectionTestUtils.setField(indexer, "baseUrl", "http://www.example.com");
 	}
 
 	@Test
 	public void itReturnsStaticPages() throws IOException {
-		StaticPageMapper.StaticPageMapping mapping = new StaticPageMapper.StaticPageMapping("/template/path", "/foo");
-		given(staticPageMapper.staticPagePaths()).willReturn(Arrays.asList(mapping));
+		StaticPagePathFinder.PagePaths paths = new StaticPagePathFinder.PagePaths("/template/path", "/foo");
+		given(staticPagePathFinder.findPaths()).willReturn(Arrays.asList(paths));
 
 		Iterable<String> pages = indexer.indexableItems();
 
@@ -49,11 +49,11 @@ public class StaticPageIndexerTests {
 
 	@Test
 	public void itIgnoresErrorPages() throws IOException {
-		StaticPageMapper.StaticPageMapping mapping = new StaticPageMapper.StaticPageMapping("/template/path", "/foo");
-		StaticPageMapper.StaticPageMapping error1 = new StaticPageMapper.StaticPageMapping("/template/path", "/error");
-		StaticPageMapper.StaticPageMapping error2 = new StaticPageMapper.StaticPageMapping("/template/path", "/404");
-		StaticPageMapper.StaticPageMapping error3 = new StaticPageMapper.StaticPageMapping("/template/path", "/500");
-		given(staticPageMapper.staticPagePaths()).willReturn(Arrays.asList(mapping, error1, error2, error3));
+		StaticPagePathFinder.PagePaths paths = new StaticPagePathFinder.PagePaths("/template/path", "/foo");
+		StaticPagePathFinder.PagePaths error1 = new StaticPagePathFinder.PagePaths("/template/path", "/error");
+		StaticPagePathFinder.PagePaths error2 = new StaticPagePathFinder.PagePaths("/template/path", "/404");
+		StaticPagePathFinder.PagePaths error3 = new StaticPagePathFinder.PagePaths("/template/path", "/500");
+		given(staticPagePathFinder.findPaths()).willReturn(Arrays.asList(paths, error1, error2, error3));
 
 		Iterable<String> pages = indexer.indexableItems();
 

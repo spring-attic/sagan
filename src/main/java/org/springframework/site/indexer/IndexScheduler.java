@@ -26,15 +26,22 @@ public class IndexScheduler {
 	private StaticPageIndexer staticPageIndexer;
 	@Autowired
 	private UnderstandingGuideIndexer understandingGuideIndexer;
+	@Autowired
+	private TutorialIndexer tutorialIndexer;
 
 	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
-	public void indexGuides() {
+	public void indexGettingStartedGuides() {
 		indexerService.index(gettingStartedGuideIndexer);
 	}
 
 	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
 	public void indexUnderstandingGuides() {
 		indexerService.index(understandingGuideIndexer);
+	}
+
+	@Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
+	public void indexTutorials() {
+		indexerService.index(tutorialIndexer);
 	}
 
 	@Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")

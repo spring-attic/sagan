@@ -3,7 +3,8 @@ package org.springframework.site.domain.guides;
 public class Guide {
 	private final String repoName;
 	private final String guideId;
-	private final String description;
+	private final String title;
+	private final String subtitle;
 	private final String content;
 	private final String sidebar;
 	private final static String REPO_ZIP_URL = "https://github.com/springframework-meta/%s/archive/master.zip";
@@ -14,10 +15,11 @@ public class Guide {
 	private final static String CI_STATUS_IMAGE_URL = "https://drone.io/github.com/springframework-meta/%s/status.png";
 	private final static String CI_LATEST_URL = "https://drone.io/github.com/springframework-meta/%s/latest";
 
-	public Guide(String repoName, String guideId, String description, String content, String sidebar) {
+	public Guide(String repoName, String guideId, String title, String subtitle, String content, String sidebar) {
 		this.repoName = repoName;
 		this.guideId = guideId;
-		this.description = description;
+		this.title = title;
+		this.subtitle = subtitle;
 		this.content = content;
 		this.sidebar = sidebar;
 	}
@@ -28,10 +30,6 @@ public class Guide {
 
 	public String getGuideId() {
 		return guideId;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public String getContent() {
@@ -71,12 +69,10 @@ public class Guide {
 	}
 
 	public String getTitle() {
-		String[] split = description.split("::", 2);
-		return split[0].trim();
+		return title;
 	}
 
 	public String getSubtitle() {
-		String[] split = description.split("::", 2);
-		return (split.length > 1) ? split[1].trim() : "";
+		return subtitle;
 	}
 }

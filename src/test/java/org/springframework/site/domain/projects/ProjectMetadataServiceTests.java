@@ -26,7 +26,7 @@ public class ProjectMetadataServiceTests {
 		ProjectMetadataService metadataService = new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
 
 		assertEquals(3, metadataService.getProject("spring-framework")
-				.getProjectVersions().size());
+				.getProjectReleases().size());
 
 		List<Project> activeProjects = metadataService.getProjectsForCategory("active");
 		assertThat(activeProjects.get(0).getId(), is("spring-framework"));
@@ -38,7 +38,7 @@ public class ProjectMetadataServiceTests {
 		ProjectMetadataService metadataService = new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
 
 		assertEquals(3, metadataService.getProject("spring-framework")
-				.getProjectVersions().size());
+				.getProjectReleases().size());
 	}
 
 	@Test
@@ -61,7 +61,7 @@ public class ProjectMetadataServiceTests {
 
 		StringBuilder builder = new StringBuilder();
 		for (Project project : metadataService.getProjects()) {
-			for (ProjectVersion version : project.getProjectVersions()) {
+			for (ProjectRelease version : project.getProjectReleases()) {
 				String apiDocUrl = version.getApiDocUrl();
 				ResponseEntity<String> entity = restTemplate.getForEntity(apiDocUrl,String.class);
 				if (entity.getStatusCode() != HttpStatus.OK) {
@@ -79,6 +79,6 @@ public class ProjectMetadataServiceTests {
 			}
 		}
 		System.err.println(builder);
-		assertEquals(3, metadataService.getProject("spring-framework").getProjectVersions().size());
+		assertEquals(3, metadataService.getProject("spring-framework").getProjectReleases().size());
 	}
 }

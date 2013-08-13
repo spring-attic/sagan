@@ -9,19 +9,19 @@ public class ProjectVersionTests {
 
 	@Test
 	public void getShortNameForCurrentVersion() {
-		ProjectVersion version = new ProjectVersion("1.2.3.RELEASE", ProjectVersion.Release.CURRENT, "", "");
+		ProjectRelease version = new ProjectRelease("1.2.3.RELEASE", ProjectRelease.ReleaseStatus.CURRENT, "", "", "", "");
 		assertThat(version.getShortName(), equalTo("1.2.3"));
 	}
 
 	@Test
 	public void getShortNameForPreReleaseVersion() {
-		ProjectVersion version = new ProjectVersion("1.2.3.M1", ProjectVersion.Release.PRERELEASE, "", "");
+		ProjectRelease version = new ProjectRelease("1.2.3.M1", ProjectRelease.ReleaseStatus.PRERELEASE, "", "", "", "");
 		assertThat(version.getShortName(), equalTo("1.2.3.M1"));
 	}
 
 	@Test
 	public void getShortNameForOtherVersion() {
-		ProjectVersion version = new ProjectVersion("1.2.3.RC1", ProjectVersion.Release.PRERELEASE,"", "");
+		ProjectRelease version = new ProjectRelease("1.2.3.RC1", ProjectRelease.ReleaseStatus.PRERELEASE,"", "", "", "");
 		assertThat(version.getShortName(), equalTo("1.2.3.RC1"));
 	}
 }
