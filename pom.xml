@@ -175,11 +175,18 @@
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.tuckey</groupId>
 			<artifactId>urlrewritefilter</artifactId>
 			<version>4.0.3</version>
 		</dependency>
+
+        <dependency>
+            <groupId>com.googlecode.flyway</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>2.2</version>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -237,6 +244,14 @@
 					</resources>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>com.googlecode.flyway</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>jdbc:postgresql://localhost/blog_import</url>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 

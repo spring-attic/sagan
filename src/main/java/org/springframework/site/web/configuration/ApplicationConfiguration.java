@@ -15,6 +15,7 @@
  */
 package org.springframework.site.web.configuration;
 
+import com.googlecode.flyway.core.Flyway;
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
@@ -128,4 +129,13 @@ public class ApplicationConfiguration {
 		return new DispatcherServlet();
 	}
 
+	@Bean
+	public Flyway flyway(DataSource dataSource) {
+		Flyway flyway = new Flyway();
+
+		flyway.setDataSource(dataSource);
+		flyway.migrate();
+
+		return flyway;
+	}
 }
