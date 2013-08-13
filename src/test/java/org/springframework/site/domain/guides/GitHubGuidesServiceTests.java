@@ -113,10 +113,16 @@ public class GitHubGuidesServiceTests {
 		GitHubRepo[] guideRepos = {guideRepo, notAGuideRepo};
 
 		given(this.gitHubService.getGitHubRepos(anyString())).willReturn(guideRepos);
+		given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
+		given(this.gitHubService.getRawFileAsHtml(matches(SIDEBAR))).willReturn(SIDEBAR_CONTENT);
 
 		List<Guide> guides = this.service.listGettingStartedGuides();
 		assertThat(guides.size(), is(1));
 		assertThat(guides.get(0).getGuideId(), equalTo("rest-service"));
+		assertThat(guides.get(0).getTitle(), equalTo("Awesome Guide"));
+		assertThat(guides.get(0).getSubtitle(), equalTo("Learn awesome stuff with this guide"));
+		assertThat(guides.get(0).getContent(), equalTo(README_CONTENT));
+		assertThat(guides.get(0).getSidebar(), equalTo(SIDEBAR_CONTENT));
 	}
 
 	@Test
@@ -130,10 +136,14 @@ public class GitHubGuidesServiceTests {
 		GitHubRepo[] guideRepos = {tutorialRepo, notAGuideRepo};
 
 		given(this.gitHubService.getGitHubRepos(anyString())).willReturn(guideRepos);
+		given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
 
 		List<Guide> tutorials = this.service.listTutorials();
 		assertThat(tutorials.size(), is(1));
 		assertThat(tutorials.get(0).getGuideId(), equalTo("rest"));
+		assertThat(tutorials.get(0).getTitle(), equalTo("Rest tutorial"));
+		assertThat(tutorials.get(0).getSubtitle(), equalTo("Learn some rest stuff"));
+		assertThat(tutorials.get(0).getContent(), equalTo(README_CONTENT));
 	}
 
 	@Test

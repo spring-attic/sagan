@@ -2,6 +2,7 @@ package integration.stubs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import integration.configuration.IntegrationTestsConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.guides.GitHubGuidesService;
@@ -20,8 +21,9 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class StubGuidesService extends GitHubGuidesService {
 
-	public StubGuidesService() {
-		super(null);
+	@Autowired
+	public StubGuidesService(StubGithubService githubService) {
+		super(githubService);
 	}
 
 	@Override

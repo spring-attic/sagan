@@ -98,11 +98,12 @@ public class GitHubGuidesService implements GuidesService {
 	protected List<Guide> mapGuideReposToGettingStartedGuides(GitHubRepo[] guideRepos, String prefix) {
 		List<Guide> guides = new ArrayList<>();
 		for (GitHubRepo githubRepo : guideRepos) {
-			if (githubRepo.getName().startsWith(prefix)) {
+			String repoName = githubRepo.getName();
+			if (repoName.startsWith(prefix)) {
 				String description = githubRepo.getDescription();
 				String title = parseTitle(description);
 				String subTitle = parseSubTitle(description);
-				guides.add(new Guide(githubRepo.getName(), githubRepo.getName().replaceAll("^"+prefix, ""), title, subTitle, null, null));
+				guides.add(new Guide(repoName, repoName.replaceAll("^" + prefix, ""), title, subTitle, getGuideContent(String.format(README_PATH, repoName)), getGuideSidebar(repoName)));
 			}
 		}
 		return guides;
