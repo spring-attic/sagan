@@ -242,3 +242,40 @@ $ java -jar target/${project_id}-0.1.0.jar
 ```
 
 </#macro>
+
+<#macro u-oauth>
+[u-oauth] /understanding/OAuth
+</#macro>
+
+<#macro u-application-context>
+[u-application-context] /understanding/application-context
+</#macro>
+
+<#macro u-git>
+[u-git] /understanding/git
+</#macro>
+
+<#macro u-json>
+[u-json] /understanding/JSON
+</#macro>
+
+<#macro u-nosql>
+[u-nosql] /understanding/NoSQL
+</#macro>
+
+<#macro u-rest>
+[u-rest] /understanding/REST
+</#macro>
+
+<#macro u-tomcat>
+[u-tomcat] /understanding/Tomcat
+</#macro>
+
+<#macro u-view-templates>
+[u-view-templates] /understanding/view-templates
+</#macro>
+
+<#macro u-war>
+[u-war] /understanding/WAR
+</#macro>
+
