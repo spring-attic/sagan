@@ -47,17 +47,28 @@ public class GitHubGuidesServiceTests {
 	public void loadGuideContent() throws IOException {
 		given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
 		given(this.gitHubService.getRepoInfo(anyString(), anyString())).willReturn(REPO_INFO);
+		String description = "Awesome Guide :: Learn awesome stuff with this guide";
+		REPO_INFO.setDescription(description);
 		Guide guide = this.service.loadGettingStartedGuide(GUIDE_ID);
 		assertThat(guide.getContent(), equalTo(README_CONTENT));
 	}
 
 	@Test
-	public void loadGuideSetsDescription() throws IOException {
+	public void loadGuideTitle() throws IOException {
 		String description = "Awesome Guide :: Learn awesome stuff with this guide";
 		REPO_INFO.setDescription(description);
 		given(this.gitHubService.getRepoInfo("springframework-meta", GUIDE_REPO_NAME)).willReturn(REPO_INFO);
 		Guide guide = this.service.loadGettingStartedGuide(GUIDE_ID);
-		assertThat(guide.getDescription(), equalTo(description));
+		assertThat(guide.getTitle(), equalTo("Awesome Guide"));
+	}
+
+	@Test
+	public void loadGuideSubTitle() throws IOException {
+		String description = "Awesome Guide :: Learn awesome stuff with this guide";
+		REPO_INFO.setDescription(description);
+		given(this.gitHubService.getRepoInfo("springframework-meta", GUIDE_REPO_NAME)).willReturn(REPO_INFO);
+		Guide guide = this.service.loadGettingStartedGuide(GUIDE_ID);
+		assertThat(guide.getSubtitle(), equalTo("Learn awesome stuff with this guide"));
 	}
 
 	@Test
@@ -94,6 +105,8 @@ public class GitHubGuidesServiceTests {
 	public void listsGuides() {
 		GitHubRepo guideRepo = new GitHubRepo();
 		guideRepo.setName("gs-rest-service");
+		guideRepo.setDescription("Awesome Guide :: Learn awesome stuff with this guide");
+
 		GitHubRepo notAGuideRepo = new GitHubRepo();
 		notAGuideRepo.setName("not-a-guide");
 
@@ -110,6 +123,7 @@ public class GitHubGuidesServiceTests {
 	public void listsTutorials() {
 		GitHubRepo tutorialRepo = new GitHubRepo();
 		tutorialRepo.setName("tut-rest");
+		tutorialRepo.setDescription("Rest tutorial :: Learn some rest stuff");
 		GitHubRepo notAGuideRepo = new GitHubRepo();
 		notAGuideRepo.setName("gs-not-a-tutorial");
 
@@ -150,6 +164,8 @@ public class GitHubGuidesServiceTests {
 	public void loadTutorialRootPageContent() throws IOException {
 		GitHubRepo gitHubRepo = new GitHubRepo();
 		gitHubRepo.setUrl("/path/to/tutorial");
+		gitHubRepo.setDescription("Rest tutorial :: Learn some rest stuff");
+
 		given(this.gitHubService.getRepoInfo(anyString(), eq("tut-tutorialId"))).willReturn(gitHubRepo);
 		given(this.gitHubService.getRawFileAsHtml(matches("/repos/springframework-meta/tut-tutorialId/contents/README.md"))).willReturn("Tutorial Page 1");
 
@@ -163,6 +179,8 @@ public class GitHubGuidesServiceTests {
 	public void loadTutorialPage1Content() throws IOException {
 		GitHubRepo gitHubRepo = new GitHubRepo();
 		gitHubRepo.setUrl("/path/to/tutorial");
+		gitHubRepo.setDescription("Rest tutorial :: Learn some rest stuff");
+
 		given(this.gitHubService.getRepoInfo(anyString(), eq("tut-tutorialId"))).willReturn(gitHubRepo);
 		given(this.gitHubService.getRawFileAsHtml(matches("/repos/springframework-meta/tut-tutorialId/contents/1/README.md"))).willReturn("Tutorial Page 1");
 

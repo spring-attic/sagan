@@ -27,7 +27,7 @@ public class GettingStartedGuideIndexServiceTests {
 
 	@Before
 	public void setUp() throws Exception {
-		guide = new Guide("gs-awesome-guide", "awesome-guide", "Title :: Description", "Content", "Sidebar");
+		guide = new Guide("gs-awesome-guide", "awesome-guide", "Title","Description", "Content", "Sidebar");
 		ArrayList<Guide> guides = new ArrayList<>();
 		guides.add(guide);
 		given(this.guidesService.listGettingStartedGuides()).willReturn(guides);

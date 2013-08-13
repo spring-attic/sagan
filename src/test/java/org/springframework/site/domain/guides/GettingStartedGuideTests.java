@@ -14,7 +14,7 @@ public class GettingStartedGuideTests {
 
 	@Before
 	public void setUp() throws Exception {
-		guide = new Guide("gs-rest-service", "rest-service", "Title :: Description", CONTENT, SIDEBAR);
+		guide = new Guide("gs-rest-service", "rest-service", "Title","Description", CONTENT, SIDEBAR);
 	}
 
 	@Test

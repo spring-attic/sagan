@@ -40,7 +40,7 @@ public class GuidesControllerTests {
 	public void gettingStartedGuidesAreInModel() {
 		List<Guide> guideList = new ArrayList<>();
 		Guide guide = new Guide("gs-rest-service",
-				"rest-service", "Title :: Description", "raw guide text", "");
+				"rest-service", "Title","Description", "raw guide text", "");
 		guideList.add(guide);
 
 		given(this.guideService.listGettingStartedGuides()).willReturn(guideList);
@@ -52,7 +52,7 @@ public class GuidesControllerTests {
 	@Test
 	public void tutorialsAreInModel() {
 		List<Guide> tutorialsList = new ArrayList<>();
-		Guide guide = new Guide("tut-rest", "rest", "Title :: Description", "raw guide text", "");
+		Guide guide = new Guide("tut-rest", "rest", "Title","Description", "raw guide text", "");
 		tutorialsList.add(guide);
 
 		given(this.guideService.listTutorials()).willReturn(tutorialsList);

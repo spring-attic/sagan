@@ -76,7 +76,7 @@ public class IndexerExamples {
 
 	@Test
 	public void gettingStartedGuideIndexer_indexesAnItem() {
-		Guide gettingStartedGuide = new Guide("gs-rest-service", "rest-service", "asdf", "asdf", "This is the sidebar!");
+		Guide gettingStartedGuide = new Guide("gs-rest-service", "rest-service", "title", "subtitle", "asdf", "This is the sidebar!");
 		gettingStartedGuideIndexer.indexItem(gettingStartedGuide);
 
 		SearchResults searchResults = searchService.search("rest", new PageRequest(0, 10), null);
