@@ -220,11 +220,15 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   .quickstart--dropdown {
     display: inline-block;
-    width: 37.7%;
+    width: 34.6%;
     margin-left: 16px;
     .item-dropdown--title {
       padding: 9px 0 7px 20px;
       border: 1px solid $black-brown;
+      .icon {
+        margin: -3px 0 0 6px;
+        vertical-align: middle;
+      }
     }
     .item-dropdown--icon {
       padding: 9px;
@@ -236,13 +240,24 @@ $icon-sprite: url("../img/iconsprite.png");
       .project-version {
         color: #f1f1f1;
         padding: 8px 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        border-top: 1px solid #4a4440;
         cursor: pointer;
-        &:last-child {
+        .icon {
+          margin: -3px 0 0 6px;
+          vertical-align: middle;
+        }
+        &.active {
+          background-color: black;
+          border-color: transparent;
+          &:hover {
+            background-color: black;
+          }
+        }
+        &:first-child {
           border: none;
         }
         &:hover {
-          color: white;
+          background-color: rgba(0, 0, 0, 0.3);
         }
       }
     }

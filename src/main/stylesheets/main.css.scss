@@ -678,7 +678,6 @@ input.floating-input {
   padding: 20px;
   width: 255px;
   z-index: 999;
-
   border: 1px solid $off-white;
   border-top: none;
   margin-left: -1px;
@@ -773,6 +772,61 @@ input.floating-input {
         font-size: 10px;
         line-height: 23px;
         float: right;
+      }
+    }
+  }
+}
+
+.item-slider-widget {
+  display: inline-block;
+  margin-left: 9px;
+  .item--slider {
+    height: 32px;
+    position: absolute;
+    width: 62px;
+    border-radius: 2px;
+    margin-top: -4px;
+    z-index: 800;
+    background: #68605a;
+    background: -moz-linear-gradient(top,  #68605a 0%, #34302d 100%, #020202 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#68605a), color-stop(100%,#34302d), color-stop(100%,#020202));
+    background: -webkit-linear-gradient(top,  #68605a 0%,#34302d 100%,#020202 100%);
+    background: -o-linear-gradient(top,  #68605a 0%,#34302d 100%,#020202 100%);
+    background: -ms-linear-gradient(top,  #68605a 0%,#34302d 100%,#020202 100%);
+    background: linear-gradient(to bottom,  #68605a 0%,#34302d 100%,#020202 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#68605a', endColorstr='#020202',GradientType=0 );
+    cursor: pointer;
+    transition: all 0.25s;
+    -webkit-transition: all 0.25s;
+    -moz-webkit-transition: all 0.25s;
+    -ms--webkit-transition: all 0.25s;
+    -o-webkit-transition: all 0.25s;
+  }
+  .item-slider--container {
+    background-color: white;
+    border: 1px solid #999;
+    padding: 0 3px;
+    .item {
+      display: inline-block;
+      color: #c3c3c3;
+      font-family: $secondary-font-family;
+      font-size: 12px;
+      line-height: 12px;
+      text-transform: uppercase;
+      padding: 7px 6px 5px;
+      cursor: pointer;
+      transition: color 0.25s;
+      -webkit-transition: color 0.25s;
+      -moz-webkit-transition: color 0.25s;
+      -ms--webkit-transition: color 0.25s;
+      -o-webkit-transition: color 0.25s;
+      &:hover {
+        color: black;
+      }
+      &.js-active {
+        z-index: 801;
+        position: relative;
+        color: #f1f1f1;
       }
     }
   }

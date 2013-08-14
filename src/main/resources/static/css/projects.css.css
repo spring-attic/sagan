@@ -196,12 +196,16 @@
 }
 .quickstart--container .quickstart--dropdown {
   display: inline-block;
-  width: 37.7%;
+  width: 34.6%;
   margin-left: 16px;
 }
 .quickstart--container .quickstart--dropdown .item-dropdown--title {
   padding: 9px 0 7px 20px;
   border: 1px solid #34302d;
+}
+.quickstart--container .quickstart--dropdown .item-dropdown--title .icon {
+  margin: -3px 0 0 6px;
+  vertical-align: middle;
 }
 .quickstart--container .quickstart--dropdown .item-dropdown--icon {
   padding: 9px;
@@ -214,14 +218,25 @@
 .quickstart--container .quickstart--dropdown .project-version--dropdown .project-version {
   color: #f1f1f1;
   padding: 8px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid #4a4440;
   cursor: pointer;
 }
-.quickstart--container .quickstart--dropdown .project-version--dropdown .project-version:last-child {
+.quickstart--container .quickstart--dropdown .project-version--dropdown .project-version .icon {
+  margin: -3px 0 0 6px;
+  vertical-align: middle;
+}
+.quickstart--container .quickstart--dropdown .project-version--dropdown .project-version.active {
+  background-color: black;
+  border-color: transparent;
+}
+.quickstart--container .quickstart--dropdown .project-version--dropdown .project-version.active:hover {
+  background-color: black;
+}
+.quickstart--container .quickstart--dropdown .project-version--dropdown .project-version:first-child {
   border: none;
 }
 .quickstart--container .quickstart--dropdown .project-version--dropdown .project-version:hover {
-  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 .quickstart--container .quickstart--dropdown.js-open .item-dropdown--title {
   border: 1px solid #6db33f;

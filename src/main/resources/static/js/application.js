@@ -1,86 +1,110 @@
 $(function(){
 
-    $.fn.springPopover = function(){
-      this.each(function(i,e){
-          var $e = $(e);
-          var contents = $e.html();
+  $.fn.springPopover = function(){
+    this.each(function(i,e){
+        var $e = $(e);
+        var contents = $e.html();
 
-          $e.html("<span class='btn'>"+$e.data('title')+"</span>").
-             popover({content: contents, trigger: 'click', html: true});
-      });
+        $e.html("<span class='btn'>"+$e.data('title')+"</span>").
+           popover({content: contents, trigger: 'click', html: true});
+    });
 
+    return this;
+  };
+
+
+  //OPENS ITEM DROPDOWN WIDGET
+  $(".js-item--open-dropdown").click(function () {
+    var dropdownItem = $(this).parents(".js-item-dropdown--wrapper");
+    var documentHeight = $(document).height();
+    var headerHeight = $("header").outerHeight();
+    var footerHeight = $("footer").outerHeight();
+    var scrimHeight = documentHeight - headerHeight - footerHeight;
+
+    dropdownItem.toggleClass("js-open");
+    dropdownItem.siblings().removeClass("js-open");
+    $(this).parents(".js-item-dropdown-widget--wrapper").siblings().find(".js-item-dropdown--wrapper").removeClass("js-open");
+
+    $("#scrim").addClass("js-show").css("height", scrimHeight).css("top", headerHeight);
+    $("#scrim").click(function() {
+      $(".js-item-dropdown--wrapper").removeClass("js-open");
+      $(this).removeClass("js-show");
+    });
+  });
+
+  //OPENS SEARCH DROPDOWN
+  $(".js-search-input-open").click(function() {
+    $(".nav-search").addClass("js-highlight");
+    var inputContainer = $(".js-search-dropdown");
+    var input = $(".js-search-input");
+    inputContainer.addClass("js-show");
+
+    //FOCUSES SEARCH INPUT ON OPEN
+    setTimeout(function() {
+      input.focus();
+    }, 100);
+
+    //CLOSES SEARCH DROPDOWN
+    $(".body--container, .js-search-input-close").click(function() {
+      inputContainer.removeClass("js-show");
+      $(".nav-search").removeClass("js-highlight");
+      $("#scrim").removeClass("js-show");
+    });
+  });
+
+
+  //AUTO OPENS SEARCH DROPDOWN ON SEARCH VIEW AND 
+  if (window.location.pathname == "/search") {
+    $(".nav-search").addClass("js-highlight");
+    $(".js-search-dropdown").addClass("js-show no-animation");
+
+    //PREPOPULATES INPUT WITH SEARCH QUERY AND
+    var searchQuery = decodeURIComponent(window.location.search.replace(/\+/g," "));
+    var seachStart = searchQuery.search("q=");
+    var searchString = searchQuery.substr(seachStart+2);
+
+    $(".js-search-input").val(searchString);
+
+    //PREPOPULATES TITLE WITH SEARCH QUERY
+    $(".js-search-results--title").html(searchString);
+
+    //CLOSES SEARCH DROPDOWN
+    $(".js-search-input-close").click(function() {
+      $(".js-search-dropdown").removeClass("js-show no-animation");
+      $(".nav-search").removeClass("js-highlight");
+    });
+  };
+
+  $.fn.showPreferredLink = function() {
+      this.find("li").hide();
+      this.find("li." + detectOs() + detectArch()).show();
       return this;
-    };
+  };
+  $('.download-links').showPreferredLink();
 
 
-    //OPENS ITEM DROPDOWN WIDGET
-    $(".js-item--open-dropdown").click(function () {
-      var dropdownItem = $(this).parents(".js-item-dropdown--wrapper");
-      var documentHeight = $(document).height();
-      var headerHeight = $("header").outerHeight();
-      var footerHeight = $("footer").outerHeight();
-      var scrimHeight = documentHeight - headerHeight - footerHeight;
+  var moveItemSlider = function () {
+    var activeItem = $(".js-item-slider--wrapper .js-item.js-active");
+    var activeItemPosition = activeItem.position();
+    var activeItemOffset = activeItemPosition.left;
+    var activeItemWidth = activeItem.outerWidth();
+    
+    var slider = $(".js-item--slider");
+    var sliderPosition = slider.position();
+    var sliderOffset = sliderPosition.left;
+    var sliderTarget = activeItemOffset - sliderOffset;
 
-      dropdownItem.toggleClass("js-open");
-      dropdownItem.siblings().removeClass("js-open");
-      $(this).parents(".js-item-dropdown-widget--wrapper").siblings().find(".js-item-dropdown--wrapper").removeClass("js-open");
+    slider.width(activeItemWidth);
+    slider.css("margin-left", sliderTarget);
+  }
 
-      $("#scrim").addClass("js-show").css("height", scrimHeight).css("top", headerHeight);
-      $("#scrim").click(function() {
-        $(".js-item-dropdown--wrapper").removeClass("js-open");
-        $(this).removeClass("js-show");
-      });
-    });
+  moveItemSlider();
 
-    //OPENS SEARCH DROPDOWN
-    $(".js-search-input-open").click(function() {
-      $(".nav-search").addClass("js-highlight");
-      var inputContainer = $(".js-search-dropdown");
-      var input = $(".js-search-input");
-      inputContainer.addClass("js-show");
-
-      //FOCUSES SEARCH INPUT ON OPEN
-      setTimeout(function() {
-        input.focus();
-      }, 100);
-
-      //CLOSES SEARCH DROPDOWN
-      $(".body--container, .js-search-input-close").click(function() {
-        inputContainer.removeClass("js-show");
-        $(".nav-search").removeClass("js-highlight");
-        $("#scrim").removeClass("js-show");
-      });
-    });
-
-
-    //AUTO OPENS SEARCH DROPDOWN ON SEARCH VIEW AND 
-    if (window.location.pathname == "/search") {
-      $(".nav-search").addClass("js-highlight");
-      $(".js-search-dropdown").addClass("js-show no-animation");
-
-      //PREPOPULATES INPUT WITH SEARCH QUERY AND
-      var searchQuery = decodeURIComponent(window.location.search.replace(/\+/g," "));
-      var seachStart = searchQuery.search("q=");
-      var searchString = searchQuery.substr(seachStart+2);
-
-      $(".js-search-input").val(searchString);
-
-      //PREPOPULATES TITLE WITH SEARCH QUERY
-      $(".js-search-results--title").html(searchString);
-
-      //CLOSES SEARCH DROPDOWN
-      $(".js-search-input-close").click(function() {
-        $(".js-search-dropdown").removeClass("js-show no-animation");
-        $(".nav-search").removeClass("js-highlight");
-      });
-    };
-
-    $.fn.showPreferredLink = function() {
-        this.find("li").hide();
-        this.find("li." + detectOs() + detectArch()).show();
-        return this;
-    };
-    $('.download-links').showPreferredLink();
+  $(".js-item").click(function () {
+    $(this).addClass("js-active");
+    $(this).siblings().removeClass("js-active");
+    moveItemSlider();
+  });
 });
 
 
