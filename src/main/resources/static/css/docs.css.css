@@ -16,7 +16,7 @@
 }
 .docs--body .docs-item--wrapper {
   padding: 0 20px;
-  margin: 0 -22px;
+  margin: 20px -22px;
 }
 .docs--body .empty-project {
   margin-bottom: -40px;
@@ -27,12 +27,6 @@
   width: 295px;
   vertical-align: top;
   margin: 0 22px;
-}
-.docs--item:nth-child(-n+3) {
-  margin-top: 20px;
-}
-.docs--item:last-child {
-  margin-bottom: 20px;
 }
 .docs--item .docs-version--dropdown {
   width: 86.5%;

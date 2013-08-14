@@ -3,6 +3,7 @@
   padding: 40px;
   min-height: 284px;
   margin-top: 50px;
+  display: block !important;
 }
 .guides-section--container:first-child {
   margin-top: 0;

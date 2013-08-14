@@ -35,7 +35,7 @@ $icon-sprite: url("../img/iconsprite.png");
   display: block !important;
   .docs-item--wrapper {
     padding: 0 20px;
-    margin: 0 -22px;
+    margin: 20px -22px;
   }
   .empty-project {
     margin-bottom: -40px;
@@ -47,12 +47,6 @@ $icon-sprite: url("../img/iconsprite.png");
   width: 295px;
   vertical-align: top;
   margin: 0 22px;
-  &:nth-child(-n+3) {
-    margin-top: 20px;
-  }
-  &:last-child {
-    margin-bottom: 20px;
-  }
   .docs-version--dropdown {
     width: 86.5%;
     p {
