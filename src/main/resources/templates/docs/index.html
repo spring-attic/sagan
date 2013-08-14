@@ -20,20 +20,20 @@
             </p>
         </div>
     </div>
-    <h2>[ FILTER GOES HERE ] (<a href="https://www.pivotaltracker.com/story/show/54562316">#54562316</a>)</h2>
-    <div class="row-fluid content-container--wrapper docs--body js-item-dropdown-widget--wrapper">
+    <input type='text' id='doc_filter'/>
+    <div class="row-fluid content-container--wrapper docs--body js-item-dropdown-widget--wrapper" data-filterable-container>
         <div class="content-container--title">SPRING PROJECTS</div>
         <div layout:include="docs/_projects :: projects" th:with="projects=${activeProjects}"></div>
     </div>
-    <div class="row-fluid content-container--wrapper docs--body js-item-dropdown-widget--wrapper">
+    <div class="row-fluid content-container--wrapper docs--body js-item-dropdown-widget--wrapper" data-filterable-container>
         <div class="content-container--title">PROJECTS IN INCUBATION</div>
         <div layout:include="docs/_projects :: projects" th:with="projects=${incubatorProjects}"></div>
     </div>
-    <div class="row-fluid content-container--wrapper docs--body js-item-dropdown-widget--wrapper">
+    <div class="row-fluid content-container--wrapper docs--body js-item-dropdown-widget--wrapper" data-filterable-container>
         <div class="content-container--title">TOOLING-RELATED PROJECTS</div>
         <div layout:include="docs/_projects :: projects" th:with="projects=${otherProjects}"></div>
     </div>
-    <div class="row-fluid content-container--wrapper docs--body js-item-dropdown-widget--wrapper">
+    <div class="row-fluid content-container--wrapper docs--body js-item-dropdown-widget--wrapper" data-filterable-container>
         <div class="content-container--title">PROJECTS IN THE ATTIC</div>
         <div layout:include="docs/_projects :: projects" th:with="projects=${atticProjects}"></div>
     </div>

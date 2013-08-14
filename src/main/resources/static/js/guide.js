@@ -37,6 +37,7 @@ function createCodeCopyButtons() {
 }
 
 function createCopyButton($el){
+    if($el.length === 0) return;
     var zero = new ZeroClipboard($el);
     $(zero.htmlBridge).tooltip({title: "copy to clipboard", placement: 'bottom'});
 }

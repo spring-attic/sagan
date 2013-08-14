@@ -1,4 +1,6 @@
-$(document).ready(function () {
+window.Spring = window.Spring || {};
+
+Spring.CreateMap = function () {
     var map = L.map('map', {
             zoomControl:false,
             dragging: false,
@@ -35,4 +37,4 @@ $(document).ready(function () {
         map.setView(latLng, 5);
     }
 
-});
+};
