@@ -19,7 +19,7 @@ public class TutorialMapper implements SearchEntryMapper<Guide> {
 
 		entry.setSummary(text.substring(0, Math.min(500, text.length())));
 		entry.setRawContent(text);
-		entry.setPath("/guides/tutorial/" + tutorial.getGuideId() + "/");
+		entry.setPath("/guides/tutorials/" + tutorial.getGuideId() + "/");
 		entry.addFacetPaths("Guides", "Guides/Tutorials");
 		entry.setPublishAt(new Date(0L));
 		return entry;
