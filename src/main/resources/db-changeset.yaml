@@ -3,8 +3,6 @@ databaseChangeLog:
       id: 1
       author: jetaggart_gsilva
       changes:
-        - createSequence:
-            sequenceName: hibernate_sequence
 
         - createTable:
             tableName: memberprofile
@@ -12,6 +10,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: bigint
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -68,6 +67,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: bigint
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
