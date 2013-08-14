@@ -34,12 +34,12 @@
   				  <a name="tutorials" ></a>
   				  Tutorials
   			  </div>
-  			  <div class="section-title--intro">Learn how to do stuff.</div>
+  			  <div class="section-title--intro">Learn how to do stuff. Cosmos, paroxysm of global death inconspicuous motes of rock and gas star stuff harvesting star light.</div>
   		  </div>
   		  <div class="guides--wrapper">
   			  <div th:each="tutorial : ${tutorials}" class="guide--container" th:attr="data-filterable=${tutorial.title}">
   				  <a class="guide--title" th:href="@{'/guides/tutorials/'+${tutorial.guideId}+'/'}" th:text="${tutorial.title}">Building a RESTful Web Service</a>
-  				  <p class="guide--subtitle" th:text="${tutorial.subtitle}">Learn how to create a REST web service with Spring</p>
+  				  <p class="guide--subtitle" th:text="${tutorial.subtitle}">Learn how to create a REST web service with Spring </p>
   			  </div>
   		  </div>
   	  </div>

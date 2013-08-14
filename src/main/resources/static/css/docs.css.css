@@ -11,9 +11,12 @@
 .docs--body {
   margin: 40px 0;
   width: auto;
+  min-height: 50px;
+  display: block !important;
 }
 .docs--body .docs-item--wrapper {
-  padding: 20px;
+  padding: 0 20px;
+  margin: 0 -22px;
 }
 .docs--body .empty-project {
   margin-bottom: -40px;
@@ -23,10 +26,13 @@
   display: inline-block;
   width: 295px;
   vertical-align: top;
-  margin: 0 44px 0 0;
+  margin: 0 22px;
 }
-.docs--item:nth-child(3n+3) {
-  margin-right: 0;
+.docs--item:nth-child(-n+3) {
+  margin-top: 20px;
+}
+.docs--item:last-child {
+  margin-bottom: 20px;
 }
 .docs--item .docs-version--dropdown {
   width: 86.5%;

@@ -1,7 +1,7 @@
 .guides-section--container {
   border: 1px solid #34302d;
   padding: 40px;
-  min-height: 200px;
+  min-height: 284px;
   margin-top: 50px;
 }
 .guides-section--container:first-child {
@@ -14,6 +14,7 @@
   margin: -40px 40px 40px -40px;
   float: left;
   width: 324px;
+  height: 284px;
   text-align: center;
 }
 .guides-section--container .section-title--container .section-title--icon {

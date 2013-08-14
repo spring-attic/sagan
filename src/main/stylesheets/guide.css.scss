@@ -20,7 +20,7 @@ $link-green: #5fa134;
 .guides-section--container {
   border: 1px solid $black-brown;
   padding: 40px;
-  min-height: 200px;
+  min-height: 284px;
   margin-top: 50px;
   &:first-child {
     margin-top: 0;
@@ -32,6 +32,7 @@ $link-green: #5fa134;
     margin: -40px 40px 40px -40px;
     float: left;
     width: 324px;
+    height: 284px;
     text-align: center;
     .section-title--icon {
       height: 100px;
