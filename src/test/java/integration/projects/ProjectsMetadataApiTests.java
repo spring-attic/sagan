@@ -22,14 +22,14 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
 
 	@Test
 	public void projectMetadata_respondsWithJavascript() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/projects/spring-framework?callback=a_function_name"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/project_metadata/spring-framework?callback=a_function_name"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/javascript"));
 	}
 
 	@Test
 	public void projectMetadata_respondsWithCallback_andData() throws Exception {
-		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/projects/spring-framework?callback=a_function_name"))
+		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/project_metadata/spring-framework?callback=a_function_name"))
 				.andReturn();
 
 		String content = result.getResponse().getContentAsString();
