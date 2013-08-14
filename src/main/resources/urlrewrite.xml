@@ -39,6 +39,12 @@
         <to type="permanent-redirect" last="true">/guides/gs/$1/</to>
     </rule>
     <rule>
+        <name>Tutorial trailing slash</name>
+        <note>https://www.pivotaltracker.com/story/show/52214321</note>
+        <from>/guides/tutorials/(.+[^/])$</from>
+        <to type="permanent-redirect" last="true">/guides/tutorials/$1/</to>
+    </rule>
+    <rule>
         <name>Legacy GGTS welcome page</name>
         <note>https://www.pivotaltracker.com/story/show/54276930</note>
         <condition name="host">www.springsource.org</condition>

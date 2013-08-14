@@ -93,6 +93,19 @@ public class RewriteTests {
 	@Test
 	public void gsgGuidesShouldAlwaysHaveTrailingSlash() throws ServletException, IOException, URISyntaxException {
 		validatePermanentRedirect("/guides/gs/guide-name", "/guides/gs/guide-name/");
+		validateOk("/guides/gs/guide-name/");
+	}
+
+	@Test
+	public void tutorialRootShouldHaveTrailingSlash() throws ServletException, IOException, URISyntaxException {
+		validatePermanentRedirect("/guides/tutorials/guide-name", "/guides/tutorials/guide-name/");
+		validateOk("/guides/tutorials/guide-name/");
+	}
+
+	@Test
+	public void tutorialPagesShouldAlwaysHaveTrailingSlash() throws ServletException, IOException, URISyntaxException {
+		validatePermanentRedirect("/guides/tutorials/guide-name/1", "/guides/tutorials/guide-name/1/");
+		validateOk("/guides/tutorials/guide-name/1/");
 	}
 
 	@Test
