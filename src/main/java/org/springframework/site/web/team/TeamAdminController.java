@@ -25,6 +25,12 @@ public class TeamAdminController {
 		this.teamService = teamService;
 	}
 
+	@RequestMapping(value = "/admin/team", method = {GET, HEAD})
+	public String getTeamAdminPage(Model model) {
+		model.addAttribute("members", teamService.fetchAllProfiles());
+		return "admin/team/index";
+	}
+
 	@RequestMapping(value = "/admin/profile", method = {GET, HEAD})
 	public String editProfileForm(Principal principal, Model model) {
 		MemberProfile profile = teamService.fetchMemberProfile(new Long(principal.getName()));

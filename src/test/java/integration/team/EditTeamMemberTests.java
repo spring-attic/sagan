@@ -134,4 +134,11 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 				});
 	}
 
+
+	@Test
+	public void getTeamAdminPage() throws Exception {
+		mockMvc.perform(get("/admin/team"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("Some")));
+	}
 }

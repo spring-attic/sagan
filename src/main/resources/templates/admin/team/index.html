@@ -1,0 +1,30 @@
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+    <title>Posts</title>
+</head>
+<body>
+<h1 layout:fragment="header">Hello <span sec:authentication="name">Bob</span></h1>
+
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div id="content" class="span8">
+            <h2>Member profiles</h2>
+            <table class='table dashboard--members'>
+                <tr th:each="member : ${members}" layout:fragment="post-row">
+                    <td>
+                        <a th:text="${member.name}" th:href="@{'/admin/team/'+${member.username}}">Member Name</a>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div id="sidebar" class="span4">
+        </div>
+    </div>
+</div>
+</body>
+</html>
