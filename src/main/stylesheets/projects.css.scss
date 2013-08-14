@@ -335,3 +335,20 @@ $icon-sprite: url("../img/iconsprite.png");
     }
   }
 }
+
+.project-additional-resource--wrapper {
+  padding: 20px;
+  h3 {
+    margin: 5px 0;
+  }
+  ul {
+    margin: 0 0 25px 0;
+    li {
+      border: none;
+      padding: 5px 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
