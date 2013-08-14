@@ -9,9 +9,9 @@
   <div layout:fragment="content" class="container-fluid">
     <h1 class="index-page--title">Spring Guides</h1>
     <p class="index-page--subtitle">The Cras justo odio, dapibus ac facilisis in, egestas eget quam. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper.</p>
-    <h2>[ FILTER GOES HERE ] (<a href="https://www.pivotaltracker.com/story/show/54562342">#54562342</a>)</h2>
+    <input type='text' id='doc_filter'/>
     <div class="guides-section--wrapper">
-      <div class="guides-section--container gs-guides--container">
+      <div class="guides-section--container gs-guides--container" data-filterable-container>
         <div class="section-title--container">
           <div class="section-title--icon gs-guides--icon"></div>
           <div class="section-title--title">
@@ -21,13 +21,13 @@
           <div class="section-title--intro">Spring provides a powerful and flexible collection of technologies to improve your Java application development that is used by millions of developers.</div>
         </div>
         <div class="guides--wrapper">
-          <div th:each="guide : ${guides}" class="guide--container">
+          <div th:each="guide : ${guides}" class="guide--container" th:attr="data-filterable=${guide.title}">
             <a class="guide--title" href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/'}" th:text="${guide.title}">Building a RESTful Web Service</a>
             <p class="guide--subtitle" th:text="${guide.subtitle}">Learn how to create a REST web service with Spring</p>
           </div>
         </div>
       </div>
-  	  <div class="guides-section--container tutorials--container">
+  	  <div class="guides-section--container tutorials--container" data-filterable-container>
   		  <div class="section-title--container">
   			  <div class="section-title--icon gs-guides--icon"></div>
   			  <div class="section-title--title">
@@ -37,7 +37,7 @@
   			  <div class="section-title--intro">Learn how to do stuff.</div>
   		  </div>
   		  <div class="guides--wrapper">
-  			  <div th:each="tutorial : ${tutorials}" class="guide--container">
+  			  <div th:each="tutorial : ${tutorials}" class="guide--container" th:attr="data-filterable=${tutorial.title}">
   				  <a class="guide--title" th:href="@{'/guides/tutorials/'+${tutorial.guideId}+'/'}" th:text="${tutorial.title}">Building a RESTful Web Service</a>
   				  <p class="guide--subtitle" th:text="${tutorial.subtitle}">Learn how to create a REST web service with Spring</p>
   			  </div>
