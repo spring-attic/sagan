@@ -19,6 +19,7 @@ public class MemberProfile {
 	private String location;
 
 	@Column(nullable = true)
+	@Type(type = "text")
 	private String bio;
 
 	@Column(nullable = true)
@@ -49,7 +50,7 @@ public class MemberProfile {
 	private GeoLocation geoLocation;
 
 	@Column
-	@Type(type="text")
+	@Type(type = "text")
 	private String videoEmbeds;
 
 	@Column
