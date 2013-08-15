@@ -11,6 +11,7 @@ import org.springframework.site.domain.services.github.GitHubService;
 import org.springframework.site.domain.services.github.RepoContent;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.social.github.api.GitHubRepo;
+import org.springframework.social.github.api.GitHubUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -76,5 +77,11 @@ public class GitHubServiceIntegrationExamples {
 	public void fetchRepoContents() throws Exception {
 		List<RepoContent> repoContents = gitHubService.getRepoContents("understanding");
 		assertThat(repoContents.size(), greaterThan(8));
+	}
+
+	@Test
+	public void fetchOrgUsers() throws Exception {
+		List<GitHubUser> users = gitHubService.getOrganizationUsers("springframework-meta");
+		assertThat(users.size(), greaterThan(0));
 	}
 }

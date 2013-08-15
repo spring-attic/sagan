@@ -1,28 +1,34 @@
 package org.springframework.site.web.team;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.site.domain.services.github.GitHubService;
 import org.springframework.site.domain.team.MemberProfile;
 import org.springframework.site.domain.team.TeamService;
 import org.springframework.site.web.blog.EntityNotFoundException;
+import org.springframework.social.github.api.GitHubUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @Controller
 public class TeamAdminController {
 
 	private final TeamService teamService;
+	private final GitHubService gitHubService;
 
 	@Autowired
-	public TeamAdminController(TeamService teamService) {
+	public TeamAdminController(TeamService teamService, GitHubService gitHubService) {
 		this.teamService = teamService;
+		this.gitHubService = gitHubService;
 	}
 
 	@RequestMapping(value = "/admin/team", method = {GET, HEAD})
@@ -61,6 +67,19 @@ public class TeamAdminController {
 	public String saveTeamMember(@PathVariable("username") String username, MemberProfile profile) {
 		teamService.updateMemberProfile(username, profile);
 		return "redirect:/admin/team/" + username;
+	}
+
+	@RequestMapping(value = "/admin/team/github_import", method = POST)
+	public String importTeamMembersFromGithub() {
+		List<GitHubUser> users = gitHubService.getOrganizationUsers("springframework-meta");
+		for (GitHubUser user : users) {
+			teamService.createOrUpdateMemberProfile(user.getId(),
+					user.getLogin(),
+					user.getAvatarUrl(),
+					user.getName());
+		}
+
+		return "redirect:/admin/team";
 	}
 
 }

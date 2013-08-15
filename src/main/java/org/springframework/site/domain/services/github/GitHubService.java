@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.site.domain.services.MarkdownService;
 import org.springframework.social.github.api.GitHubRepo;
+import org.springframework.social.github.api.GitHubUser;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class GitHubService implements MarkdownService {
 	}
 
 	public GitHubRepo getRepoInfo(String githubUsername, String repoName) {
-		String response = gitHubRestClient.sendRequestForJson(buildRepoUri(""), githubUsername, repoName);
+		String response = gitHubRestClient.sendRequestForJson("/repos/{user}/{repo}", githubUsername, repoName);
 
 		try {
 			return objectMapper.readValue(response, GitHubRepo.class);
@@ -78,8 +79,12 @@ public class GitHubService implements MarkdownService {
 		}
 	}
 
-	private String buildRepoUri(String path) {
-		return "/repos/{user}/{repo}" + path;
+	public List<GitHubUser> getOrganizationUsers(String organization) {
+		String jsonResponse = gitHubRestClient.sendRequestForJson("/orgs/{organization}/members", organization);
+		try {
+			return objectMapper.readValue(jsonResponse, new TypeReference<List<GitHubUser>>(){});
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
-
 }

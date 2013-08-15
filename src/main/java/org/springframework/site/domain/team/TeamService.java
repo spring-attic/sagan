@@ -81,4 +81,19 @@ public class TeamService {
 	public List<MemberProfile> fetchVisibleMembers() {
 		return teamRepository.findByHidden(false);
 	}
+
+	public MemberProfile createOrUpdateMemberProfile(Long githubId, String username, String avatarUrl, String name) {
+		MemberProfile profile = teamRepository.findByGithubId(githubId);
+
+		if (profile == null) {
+			profile = new MemberProfile();
+			profile.setGithubId(githubId);
+			profile.setUsername(username);
+			profile.setAvatarUrl(avatarUrl);
+			profile.setName(name);
+		}
+
+		profile.setGithubUsername(username);
+		return teamRepository.save(profile);
+	}
 }
