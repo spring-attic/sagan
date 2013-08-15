@@ -16,7 +16,7 @@ import java.util.Map;
 public class GitHubService implements MarkdownService {
 
 	public static final String API_URL_BASE = "https://api.github.com";
-	private final CachingGitHubRestClient gitHubRestClient;
+	private final GitHubRestClient gitHubRestClient;
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 
@@ -25,8 +25,8 @@ public class GitHubService implements MarkdownService {
 
 
 	@Autowired
-	public GitHubService(CachingGitHubRestClient cachingGitHubRestClient) {
-		this.gitHubRestClient = cachingGitHubRestClient;
+	public GitHubService(GitHubRestClient gitHubRestClient) {
+		this.gitHubRestClient = gitHubRestClient;
 	}
 
 	@Override

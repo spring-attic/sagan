@@ -1,7 +1,7 @@
 package integration;
 
 import integration.configuration.IntegrationTestsConfiguration;
-
+import integration.stubs.StubGithubRestClient;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,14 @@ public abstract class IntegrationTestBase {
 	@Autowired
 	protected WebApplicationContext wac;
 
+	@Autowired
+	protected StubGithubRestClient stubRestClient;
+
 	protected MockMvc mockMvc;
 
 	@Before
 	public void setupMockMvc() {
+		stubRestClient.clearResponses();
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 }
