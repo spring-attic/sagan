@@ -28,13 +28,14 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 
 To **skip the basics**, do the following:
 
- - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
+ - [Download][zip] and unzip the source repository for this guide, or clone it using [git][u-git]:
 `git clone https://github.com/springframework-meta/${project_id}.git`
  - cd into `${project_id}/initial`.
  - Jump ahead to [${jump_ahead}](#initial).
 
 **When you're finished**, you can check your results against the code in `${project_id}/complete`.
 [zip]: https://github.com/springframework-meta/${project_id}/archive/master.zip
+<@u_git/>
 </#macro>
 
 
@@ -252,7 +253,7 @@ $ java -jar target/${project_id}-0.1.0.jar
 </#macro>
 
 <#macro u_git>
-[u-git]: /understanding/git
+[u-git]: /understanding/Git
 </#macro>
 
 <#macro u_json>
