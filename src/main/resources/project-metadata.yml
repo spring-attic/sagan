@@ -600,7 +600,7 @@ projects:
       name: Spring XD
       siteUrl: https://github.com/springsource/spring-xd/wiki
       supportedVersions:
-        - 1.0.0.M1
+        - 1.0.0.M2
 
 
   # ========================
