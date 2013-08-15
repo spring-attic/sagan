@@ -1,6 +1,9 @@
 package org.springframework.site.domain.team;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,4 +15,8 @@ public interface TeamRepository extends JpaRepository<MemberProfile, Long> {
 	MemberProfile findByUsername(String username);
 
 	List<MemberProfile> findByHidden(boolean b);
+
+	@Modifying(clearAutomatically = true)
+	@Query("update MemberProfile p set p.hidden = true where p.githubId not in :ids")
+	int showOnlyTeamMembersWithIds(@Param("ids") List<Long> ids);
 }

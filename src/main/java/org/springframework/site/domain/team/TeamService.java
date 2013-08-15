@@ -96,4 +96,8 @@ public class TeamService {
 		profile.setGithubUsername(username);
 		return teamRepository.save(profile);
 	}
+
+	public void showOnlyTeamMembersWithIds(List<Long> userIds) {
+		teamRepository.showOnlyTeamMembersWithIds(userIds);
+	}
 }

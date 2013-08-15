@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-public class TeamGithubImportServiceTests extends IntegrationTestBase {
+public class ImportTeamFromGithubTests extends IntegrationTestBase {
 
 	@Autowired
 	private TeamRepository teamRepository;
@@ -41,10 +41,12 @@ public class TeamGithubImportServiceTests extends IntegrationTestBase {
 		assertThat(profile, not(nullValue()));
 		assertThat(profile.getGithubUsername(), equalTo("jdoe"));
 		assertThat(profile.getUsername(), equalTo("jdoe"));
+		assertThat(profile.isHidden(), equalTo(false));
 
 		MemberProfile profile2 = teamRepository.findByGithubId(987L);
 		assertThat(profile2, not(nullValue()));
 		assertThat(profile2.getGithubUsername(), equalTo("asmith"));
+		assertThat(profile2.isHidden(), equalTo(false));
 	}
 
 	@Test
@@ -67,6 +69,30 @@ public class TeamGithubImportServiceTests extends IntegrationTestBase {
 		assertThat(updatedProfile, not(nullValue()));
 		assertThat(updatedProfile.getGithubUsername(), equalTo("jdoe"));
 		assertThat(updatedProfile.getUsername(), equalTo("oldusername"));
+		assertThat(updatedProfile.isHidden(), equalTo(false));
+	}
+
+	@Test
+	public void importHidesExistingMembersNoLongerOnTheTeam() throws Exception {
+		MemberProfile profile = new MemberProfile();
+		profile.setGithubId(456L);
+		profile.setGithubUsername("quitter");
+		profile.setUsername("quitter");
+		profile.setHidden(false);
+		teamRepository.save(profile);
+
+		mockMvc.perform(post("/admin/team/github_import")).andExpect(new ResultMatcher() {
+			@Override
+			public void match(MvcResult result) {
+				String redirectedUrl = result.getResponse().getRedirectedUrl();
+				assertThat(redirectedUrl, equalTo("/admin/team"));
+			}
+		});
+
+		MemberProfile updatedProfile = teamRepository.findByGithubId(456L);
+		assertThat(updatedProfile, not(nullValue()));
+		assertThat(updatedProfile.getGithubUsername(), equalTo("quitter"));
+		assertThat(updatedProfile.isHidden(), equalTo(true));
 	}
 
 }

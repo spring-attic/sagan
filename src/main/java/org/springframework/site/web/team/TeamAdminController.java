@@ -1,18 +1,16 @@
 package org.springframework.site.web.team;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.services.github.GitHubService;
 import org.springframework.site.domain.team.MemberProfile;
+import org.springframework.site.domain.team.TeamImporter;
 import org.springframework.site.domain.team.TeamService;
 import org.springframework.site.web.blog.EntityNotFoundException;
-import org.springframework.social.github.api.GitHubUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
@@ -23,12 +21,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 public class TeamAdminController {
 
 	private final TeamService teamService;
-	private final GitHubService gitHubService;
+	private final TeamImporter teamImporter;
 
 	@Autowired
-	public TeamAdminController(TeamService teamService, GitHubService gitHubService) {
+	public TeamAdminController(TeamService teamService, TeamImporter teamImporter) {
 		this.teamService = teamService;
-		this.gitHubService = gitHubService;
+		this.teamImporter = teamImporter;
 	}
 
 	@RequestMapping(value = "/admin/team", method = {GET, HEAD})
@@ -69,16 +67,10 @@ public class TeamAdminController {
 		return "redirect:/admin/team/" + username;
 	}
 
+
 	@RequestMapping(value = "/admin/team/github_import", method = POST)
 	public String importTeamMembersFromGithub() {
-		List<GitHubUser> users = gitHubService.getOrganizationUsers("springframework-meta");
-		for (GitHubUser user : users) {
-			teamService.createOrUpdateMemberProfile(user.getId(),
-					user.getLogin(),
-					user.getAvatarUrl(),
-					user.getName());
-		}
-
+		teamImporter.importTeamMembers();
 		return "redirect:/admin/team";
 	}
 
