@@ -5,15 +5,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.site.domain.guides.Guide;
-import org.springframework.site.domain.projects.ProjectMetadataService;
-import org.springframework.site.domain.projects.ProjectMetadataYamlParser;
 import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 import static org.mockito.Mockito.mock;
 
@@ -31,13 +25,6 @@ public class IntegrationTestsConfiguration {
 	@Bean
 	public RestTemplate mockRestTemplate() {
 		return mock(RestTemplate.class);
-	}
-
-	@Primary
-	@Bean
-	public ProjectMetadataService projectMetadataService() throws IOException {
-		InputStream yaml = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
-		return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
 	}
 
 }
