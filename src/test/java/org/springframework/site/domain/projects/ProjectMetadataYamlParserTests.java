@@ -72,7 +72,7 @@ public class ProjectMetadataYamlParserTests {
 		assertThat(versionList.get(0).isPreRelease(), equalTo(true));
 		assertThat(versionList.get(1).getFullName(), equalTo("3.2.3.RELEASE"));
 		assertThat(versionList.get(1).isCurrent(), equalTo(true));
-		assertThat(versionList.get(2).getFullName(), equalTo("3.1.4.RELEASE"));
+		assertThat(versionList.get(2).getFullName(), equalTo("3.1.4.SNAPSHOT"));
 		assertThat(versionList.get(2).isSupported(), equalTo(true));
 	}
 
@@ -89,7 +89,7 @@ public class ProjectMetadataYamlParserTests {
 		List<ProjectRelease> docVersions = service.getProjectsForCategory("active").get(0).getProjectReleases();
 		assertThat(docVersions.get(0).getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/4.0.0.M1/spring-framework-reference/html/"));
 		assertThat(docVersions.get(1).getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/3.2.3.RELEASE/spring-framework-reference/html/"));
-		assertThat(docVersions.get(2).getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/"));
+		assertThat(docVersions.get(2).getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/3.1.4.SNAPSHOT/spring-framework-reference/html/"));
 	}
 
 	@Test
@@ -97,7 +97,7 @@ public class ProjectMetadataYamlParserTests {
 		List<ProjectRelease> docVersions = service.getProjectsForCategory("active").get(0).getProjectReleases();
 		assertThat(docVersions.get(0).getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/4.0.0.M1/javadoc-api/"));
 		assertThat(docVersions.get(1).getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/3.2.3.RELEASE/javadoc-api/"));
-		assertThat(docVersions.get(2).getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/3.1.4.RELEASE/javadoc-api/"));
+		assertThat(docVersions.get(2).getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/3.1.4.SNAPSHOT/javadoc-api/"));
 	}
 
 	@Test
