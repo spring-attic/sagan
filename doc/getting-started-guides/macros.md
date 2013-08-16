@@ -202,6 +202,12 @@ Now run the following command to produce a single executable JAR file containing
 $ ./gradlew build
 ```
 
+Now you can run the JAR by typing:
+
+```sh
+$ java -jar build/libs/${project_id}-0.1.0.jar
+```
+
 [spring-boot-gradle-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-tools/spring-boot-gradle-plugin
 
 > **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
