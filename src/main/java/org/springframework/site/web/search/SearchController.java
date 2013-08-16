@@ -35,7 +35,7 @@ public class SearchController {
 		Page<SearchResult> entries = searchResults.getPage();
 		model.addAttribute("results", entries.getContent());
 		model.addAttribute("paginationInfo", new PaginationInfo(entries));
-		model.addAttribute("root", searchResults);
+		model.addAttribute("searchResults", searchResults);
 		model.addAttribute("searchForm", searchForm);
 		return "search/results";
 	}
