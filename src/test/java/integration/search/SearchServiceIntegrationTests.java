@@ -1,18 +1,10 @@
 package integration.search;
 
+import integration.IntegrationTestBase;
 import io.searchbox.client.JestClient;
-import io.searchbox.client.JestClientFactory;
-import io.searchbox.client.config.ClientConfig;
-import org.elasticsearch.client.Client;
-import org.elasticsearch.node.NodeBuilder;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
-import org.springframework.boot.context.initializer.LoggingApplicationContextInitializer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,94 +12,24 @@ import org.springframework.site.search.SearchEntry;
 import org.springframework.site.search.SearchResult;
 import org.springframework.site.search.SearchResults;
 import org.springframework.site.search.SearchService;
-import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.site.web.search.SearchEntryBuilder;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import utils.FreePortFinder;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
 
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration(classes = { ApplicationConfiguration.class,
-		SearchServiceIntegrationTests.IntegrationTestElasticSearchConfiguration.class }, initializers = {
-		ConfigFileApplicationContextInitializer.class,
-		LoggingApplicationContextInitializer.class })
-@DirtiesContext
-public class SearchServiceIntegrationTests {
-
-	public static class IntegrationTestElasticSearchConfiguration {
-
-		@Autowired
-		private SearchService searchService;
-
-		@Autowired
-		private Client client;
-
-		private String elasticSearchPort;
-
-		@Bean
-		public Client elasticSearchClient() throws Exception {
-			NodeBuilder nodeBuilder = nodeBuilder().local(false);
-			nodeBuilder.getSettings().put("network.host", "127.0.0.1");
-			nodeBuilder.getSettings().put("http.port", getElasticSearchPort());
-			nodeBuilder.getSettings().put("index.number_of_shards", "1");
-			nodeBuilder.getSettings().put("index.number_of_replicas", "0");
-			Client client = nodeBuilder.node().client();
-			return client;
-		}
-
-		private String getElasticSearchPort() {
-			if (this.elasticSearchPort == null) {
-				this.elasticSearchPort = FreePortFinder.find() + "";
-			}
-			return this.elasticSearchPort;
-		}
-
-		@PostConstruct
-		public void configureSearchService() {
-			this.searchService.setUseRefresh(true);
-		}
-
-		@PreDestroy
-		public void closeClient() throws Exception {
-			this.client.close();
-		}
-
-		@Bean
-		@Primary
-		public JestClient jestClient() {
-			JestClientFactory factory = new JestClientFactory();
-			factory.setClientConfig(clientConfig());
-			return factory.getObject();
-		}
-
-		private ClientConfig clientConfig() {
-			LinkedHashSet<String> servers = new LinkedHashSet<String>();
-			servers.add("http://localhost:" + getElasticSearchPort());
-			ClientConfig clientConfig = new ClientConfig.Builder(servers).multiThreaded(
-					true).build();
-			return clientConfig;
-		}
-	}
+public class SearchServiceIntegrationTests extends IntegrationTestBase {
 
 	private final Pageable pageable = new PageRequest(0, 10);
 
@@ -760,11 +682,18 @@ public class SearchServiceIntegrationTests {
 		List<SearchResult> results = searchService.search("ApplicationContext", pageable, facetPathFilters).getPage().getContent();
 
 		assertThat(results.size(), equalTo(4));
-		assertThat(results.get(0).getPath(), equalTo("http://example.com/framework/refDoc"));
-		assertThat(results.get(1).getPath(), equalTo("http://example.com/framework/apiDoc"));
-		assertThat(results.get(2).getPath(), equalTo("http://example.com/security/refDoc/3.5"));
-		assertThat(results.get(3).getPath(), equalTo("http://example.com/security/apiDoc/3.6"));
 
+		ArrayList<String> paths = new ArrayList<>();
+		for (SearchResult result : results) {
+			paths.add(result.getPath());
+		}
+
+		assertThat(paths, containsInAnyOrder(
+				"http://example.com/framework/refDoc",
+				"http://example.com/framework/apiDoc",
+				"http://example.com/security/refDoc/3.5",
+				"http://example.com/security/apiDoc/3.6"
+		));
 
 		facetPathFilters = new ArrayList<>();
 		facetPathFilters.add("Projects");
