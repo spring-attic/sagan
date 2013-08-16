@@ -66,7 +66,7 @@ public class ProjectMetadataServiceTests {
 				ResponseEntity<String> entity = restTemplate.getForEntity(apiDocUrl,String.class);
 				if (entity.getStatusCode() != HttpStatus.OK) {
 					builder.append(project.getId() + ".invalid.apiUrl."
-							+ version.getFullName() + ": " + apiDocUrl + "\n");
+							+ version.getVersion() + ": " + apiDocUrl + "\n");
 				}
 
 				String refDocUrl = version.getRefDocUrl();
@@ -74,7 +74,7 @@ public class ProjectMetadataServiceTests {
 						String.class);
 				if (entity.getStatusCode() != HttpStatus.OK) {
 					builder.append(project.getId() + ".invalid.referenceUrl."
-							+ version.getFullName() + ": " + refDocUrl + "\n");
+							+ version.getVersion() + ": " + refDocUrl + "\n");
 				}
 			}
 		}

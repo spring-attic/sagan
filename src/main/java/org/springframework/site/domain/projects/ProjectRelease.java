@@ -36,11 +36,11 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 		return releaseStatus == ReleaseStatus.SUPPORTED;
 	}
 
-	public String getFullName() {
+	public String getVersion() {
 		return versionName;
 	}
 
-	public String getShortName() {
+	public String getVersionDisplayName() {
 		return versionName.replaceAll(".RELEASE$", "");
 	}
 
