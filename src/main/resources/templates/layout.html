@@ -31,24 +31,25 @@
   <script type="text/javascript" th:src="@{/js/application.js}" src="../../static/js/application.js"></script>
   <script type="text/javascript" th:src="@{/js/guide.js}" src="../../static/js/guide.js"></script>
   <meta name="google-site-verification" content="7qGntFPD9lWAVCtUu5U77v4l68PsTHf6xpzgjQv2j2M" />
-  <script type=“text/javascript”>
-    var _gaq = _gaq || []; 
-    var pluginUrl = 
-     '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
-    _gaq.push(
-      ['_require', 'inpage_linkid', pluginUrl],
-      ['_setAccount', 'UA-2728886-20'],
-      ['_trackPageview'],
-      ['b._require', 'inpage_linkid', pluginUrl],
-      ['b._setAccount', 'UA-2728886-19'],
-      ['b._trackPageview']
-    );
+  <script>
+    //
+      var _gaq = _gaq || [];
+      var pluginUrl = 
+       '//www.google-analytics.com/plugins/ga/inpage_linkid.js';        
+      _gaq.push(
+        ['_require', 'inpage_linkid', pluginUrl],
+        ['_setAccount', 'UA-2728886-20'],
+        ['_trackPageview'],
+        ['b._require', 'inpage_linkid', pluginUrl],
+        ['b._setAccount', 'UA-2728886-19'],
+        ['b._trackPageview']
+      );
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
   </script>
 </head>
 <body>
