@@ -176,6 +176,37 @@ $ mvn package
 > **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
 </#macro>
 
+<#macro build_an_executable_jar_with_gradle>
+Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
+
+Add the following configuration to your existing Gradle build file:
+
+`build.gradle`
+```groovy
+buildscript {
+    ...
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.BUILD-SNAPSHOT")
+    }
+}
+
+apply plugin: 'spring-boot'
+```
+
+The [Spring Boot gradle plugin][spring-boot-gradle-plugin] collects all the jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
+It also searches for the `public static void main()` method to flag as a runnable class.
+
+Now run the following command to produce a single executable JAR file containing all necessary dependency classes and resources:
+
+```sh
+$ ./gradlew build
+```
+
+[spring-boot-gradle-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-tools/spring-boot-gradle-plugin
+
+> **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
+</#macro>
+
 <#macro build_the_application>
 Build the application
 ------------------------
