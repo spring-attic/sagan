@@ -24,8 +24,8 @@ public class GuidesController {
 
 	@RequestMapping(value = "", method = { GET, HEAD })
 	public String index(Model model) {
-		model.addAttribute("guides", service.listGettingStartedGuides());
-		model.addAttribute("tutorials", service.listTutorials());
+		model.addAttribute("guides", service.listGettingStartedGuidesWithoutContent());
+		model.addAttribute("tutorials", service.listTutorialsWithoutContent());
 		return "guides/index";
 	}
 }

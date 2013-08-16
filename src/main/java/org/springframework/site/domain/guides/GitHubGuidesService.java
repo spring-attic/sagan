@@ -50,7 +50,6 @@ public class GitHubGuidesService implements GuidesService {
 		return (split.length > 1) ? split[1].trim() : "";
 	}
 
-
 	private String getRepoNameFromGuideId(String guideId) {
 		return "gs-" + guideId;
 	}
@@ -81,6 +80,32 @@ public class GitHubGuidesService implements GuidesService {
 		} catch (RestClientException e) {
 			return "";
 		}
+	}
+
+	@Override
+	public List<GuideWithoutContent> listGettingStartedGuidesWithoutContent() {
+		GitHubRepo[] guideRepos = this.gitHubService.getGitHubRepos(REPOS_PATH);
+		return listGuidesWithoutContent(guideRepos, "gs-");
+	}
+
+	@Override
+	public List<GuideWithoutContent> listTutorialsWithoutContent() {
+		GitHubRepo[] guideRepos = this.gitHubService.getGitHubRepos(REPOS_PATH);
+		return listGuidesWithoutContent(guideRepos, "tut-");
+	}
+
+	private List<GuideWithoutContent> listGuidesWithoutContent(GitHubRepo[] guideRepos, String prefix) {
+		List<GuideWithoutContent> guides = new ArrayList<>();
+		for (GitHubRepo repo : guideRepos) {
+			String repoName = repo.getName();
+			if (repoName.startsWith(prefix)) {
+				String description = repo.getDescription();
+				String title = parseTitle(description);
+				String subTitle = parseSubTitle(description);
+				guides.add(new GuideWithoutContent(repoName, repoName.replaceAll("^" + prefix, ""), title, subTitle));
+			}
+		}
+		return guides;
 	}
 
 	@Override
@@ -150,6 +175,5 @@ public class GitHubGuidesService implements GuidesService {
 		String subTitle = parseSubTitle(description);
 		return new Guide(repoName, tutorialId, title, subTitle, content, "");
 	}
-
 
 }

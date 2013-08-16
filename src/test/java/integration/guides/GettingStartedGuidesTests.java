@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.springframework.site.test.FixtureLoader;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -20,35 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GettingStartedGuidesTests extends IntegrationTestBase {
 
 	@Test
-	public void getGettingStartedGuidesListPage() throws Exception {
-		String repoList = FixtureLoader.load("/fixtures/github/githubRepoList.json");
-		stubRestClient.putResponse("/orgs/springframework-meta/repos", repoList);
-
-		String gsRestServiceRepo = FixtureLoader.load("/fixtures/github/gs-rest-service-repo.json");
-		stubRestClient.putResponse("/repos/springframework-meta/gs-rest-service", gsRestServiceRepo);
-
-		stubRestClient.putResponse("/repos/springframework-meta/gs-rest-service/contents/README.md",
-				"guide body");
-
-		stubRestClient.putResponse("/repos/springframework-meta/gs-rest-service/contents/SIDEBAR.md",
-				"sidebar content");
-
-		stubRestClient.putResponse("/repos/springframework-meta/tut-rest/contents/README.md",
-				"tutorial body");
-
-
-		MvcResult response = this.mockMvc.perform(get("/guides"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andReturn();
-
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertThat(html.text(), containsString("Building a RESTful Web Service"));
-		assertThat(html.text(), containsString("Learn how to create a RESTful web service with Spring"));
-	}
-
-	@Test
-	public void getGettingStartedGuidesPage() throws Exception {
+	public void showGuide() throws Exception {
 		String gsRestServiceRepo = FixtureLoader.load("/fixtures/github/gs-rest-service-repo.json");
 		stubRestClient.putResponse("/repos/springframework-meta/gs-rest-service", gsRestServiceRepo);
 
