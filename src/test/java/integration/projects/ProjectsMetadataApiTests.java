@@ -67,7 +67,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
 	private void checkRelease(List<Object> releases) {
 		Map<String, Object> release;
 		release = (Map<String, Object>) releases.get(1);
-		assertThat((String) release.get("fullName"), equalTo("3.2.4.RELEASE"));
+		assertThat((String) release.get("version"), equalTo("3.2.4.RELEASE"));
 		assertThat((String) release.get("refDocUrl"), equalTo("http://docs.springframework.io/spring/docs/3.2.4.RELEASE/spring-framework-reference/html/"));
 		assertThat((String) release.get("apiDocUrl"), equalTo("http://docs.springframework.io/spring/docs/3.2.4.RELEASE/javadoc-api/"));
 		assertThat((Boolean) release.get("preRelease"), equalTo(false));
@@ -80,7 +80,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
 
 	private void checkMilestone(List<Object> releases) {
 		Map<String, Object> release = (Map<String, Object>) releases.get(0);
-		assertThat((String) release.get("fullName"), equalTo("4.0.0.M2"));
+		assertThat((String) release.get("version"), equalTo("4.0.0.M2"));
 		assertThat((String) release.get("refDocUrl"), equalTo("http://docs.springframework.io/spring/docs/4.0.0.M2/spring-framework-reference/html/"));
 		assertThat((String) release.get("apiDocUrl"), equalTo("http://docs.springframework.io/spring/docs/4.0.0.M2/javadoc-api/"));
 		assertThat((Boolean) release.get("preRelease"), equalTo(true));
@@ -99,7 +99,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
 	private void checkSnapshot(List<Object> releases) {
 		Map<String, Object> release;
 		release = (Map<String, Object>) releases.get(0);
-		assertThat((String) release.get("fullName"), equalTo("1.0.0.CI-SNAPSHOT"));
+		assertThat((String) release.get("version"), equalTo("1.0.0.CI-SNAPSHOT"));
 		assertThat((String) release.get("refDocUrl"), equalTo("http://docs.springframework.io/spring-security-kerberos/docs/1.0.0.CI-SNAPSHOT/reference/html"));
 		assertThat((String) release.get("apiDocUrl"), equalTo("http://docs.springframework.io/spring-security-kerberos/docs/1.0.0.CI-SNAPSHOT/api/"));
 		assertThat((Boolean) release.get("preRelease"), equalTo(false));
