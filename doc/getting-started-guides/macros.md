@@ -1,9 +1,10 @@
 <#macro prereq_editor_jdk_buildtools java_version="6">
  - A favorite text editor or IDE
  - [JDK ${java_version}][jdk] or later
- - [Maven 3.0][mvn] or later
+ - [Gradle 1.7+][gradle] or [Maven 3.0+][mvn]
 
 [jdk]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+[gradle]: http://www.gradle.org/
 [mvn]: http://maven.apache.org/download.cgi
 </#macro>
 
