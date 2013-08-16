@@ -87,4 +87,14 @@ public class GitHubService implements MarkdownService {
 			throw new RuntimeException(e);
 		}
 	}
+
+	public String getNameForUser(String username) {
+		String jsonResponse = gitHubRestClient.sendRequestForJson("/users/{user}", username);
+		try {
+			Map<String, String> map = objectMapper.readValue(jsonResponse, new TypeReference<Map<String, String>>(){});
+			return map.get("name");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

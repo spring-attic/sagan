@@ -84,4 +84,10 @@ public class GitHubServiceIntegrationExamples {
 		List<GitHubUser> users = gitHubService.getOrganizationUsers("springframework-meta");
 		assertThat(users.size(), greaterThan(0));
 	}
+
+	@Test
+	public void fetchUserName() throws Exception {
+		String userName = gitHubService.getNameForUser("cbeams");
+		assertThat(userName, equalTo("Chris Beams"));
+	}
 }

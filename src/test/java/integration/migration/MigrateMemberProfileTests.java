@@ -58,6 +58,8 @@ public class MigrateMemberProfileTests extends IntegrationTestBase {
 	@Test
 	public void postToMigrateMemberDoesNotDuplicateProfiles() throws Exception {
 		MemberProfile memberProfile = new MemberProfile();
+		memberProfile.setGithubId(123L);
+		memberProfile.setGithubUsername("migrate_someguy");
 		memberProfile.setUsername("migrate_someguy");
 		teamRepository.save(memberProfile);
 

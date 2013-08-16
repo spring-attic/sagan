@@ -25,6 +25,8 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 	public void setUp() throws Exception {
 		String membersJson = FixtureLoader.load("/fixtures/github/ghTeamInfo.json");
 		stubRestClient.putResponse("/orgs/springframework-meta/members", membersJson);
+		stubRestClient.putResponse("/users/jdoe", FixtureLoader.load("/fixtures/github/ghUserProfile-jdoe.json"));
+		stubRestClient.putResponse("/users/asmith", FixtureLoader.load("/fixtures/github/ghUserProfile-asmith.json"));
 	}
 
 	@Test
@@ -37,16 +39,18 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 			}
 		});
 
-		MemberProfile profile = teamRepository.findByGithubId(123L);
-		assertThat(profile, not(nullValue()));
-		assertThat(profile.getGithubUsername(), equalTo("jdoe"));
-		assertThat(profile.getUsername(), equalTo("jdoe"));
-		assertThat(profile.isHidden(), equalTo(false));
+		MemberProfile john = teamRepository.findByGithubId(123L);
+		assertThat(john, not(nullValue()));
+		assertThat(john.getGithubUsername(), equalTo("jdoe"));
+		assertThat(john.getUsername(), equalTo("jdoe"));
+		assertThat(john.getName(), equalTo("John Doe"));
+		assertThat(john.isHidden(), equalTo(false));
 
-		MemberProfile profile2 = teamRepository.findByGithubId(987L);
-		assertThat(profile2, not(nullValue()));
-		assertThat(profile2.getGithubUsername(), equalTo("asmith"));
-		assertThat(profile2.isHidden(), equalTo(false));
+		MemberProfile adam = teamRepository.findByGithubId(987L);
+		assertThat(adam, not(nullValue()));
+		assertThat(adam.getGithubUsername(), equalTo("asmith"));
+		assertThat(adam.getName(), equalTo("Adam Smith"));
+		assertThat(adam.isHidden(), equalTo(false));
 	}
 
 	@Test
