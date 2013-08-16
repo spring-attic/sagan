@@ -1,4 +1,4 @@
-$.fn.filter = function () {
+$.fn.contentFilter = function () {
   this.keyup(function () {
     var rex = new RegExp($(this).val(), 'i');
     $('[data-filterable]').each(function () {

@@ -1,6 +1,6 @@
 $(function () {
 
-  $("#doc_filter").filter();
+  $("#doc_filter").contentFilter();
 
   $.fn.springPopover = function () {
     this.each(function (i, e) {
