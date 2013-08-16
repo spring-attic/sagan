@@ -27,14 +27,14 @@ public class ReferenceDocumentSearchEntryMapper implements SearchEntryMapper<Doc
 		entry.setRawContent(text);
 		entry.setSummary(text.substring(0, Math.min(500, text.length())));
 		entry.setTitle(document.title());
-		entry.setSubTitle(String.format("%s (%s Reference)", project.getName(), version.getFullName()));
+		entry.setSubTitle(String.format("%s (%s Reference)", project.getName(), version.getVersion()));
 		entry.setPath(document.baseUri());
 		entry.setCurrent(version.isCurrent());
 		entry.setProjectId(project.getId());
-		entry.setVersion(version.getFullName());
+		entry.setVersion(version.getVersion());
 
 		entry.addFacetPaths("Documentation", "Documentation/Reference", "Projects", "Projects/" + project.getName(),
-				"Projects/" + project.getName() + "/" + version.getFullName());
+				"Projects/" + project.getName() + "/" + version.getVersion());
 
 		return entry;
 	}

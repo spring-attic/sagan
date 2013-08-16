@@ -73,7 +73,7 @@ public class GitHubServiceTests {
 		given(gitHubRestClient.sendRequestForJson(anyString())).willReturn(response);
 
 		GitHubRepo[] repos = service.getGitHubRepos("/path/to/guide/repos");
-		assertThat(repos[0].getName(), equalTo("Spring-Integration-in-Action"));
+		assertThat(repos[0].getName(), equalTo("gs-rest-service"));
 	}
 
 }

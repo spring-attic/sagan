@@ -42,7 +42,7 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 
 		List<String> projectVersions = new ArrayList<>();
 		for (ProjectRelease projectRelease : project.getProjectReleases()) {
-			projectVersions.add(projectRelease.getFullName());
+			projectVersions.add(projectRelease.getVersion());
 		}
 
 		searchService.removeOldProjectEntriesFromIndex(project.getId(), projectVersions);

@@ -41,7 +41,7 @@
                         <div th:each="version : ${item.projectReleases}">
                             <div class="item--body--version">
                                 <div class="item--left-column">
-                                    <p th:text="${version.shortName}">1.2.3</p>
+                                    <p th:text="${version.versionDisplayName}">1.2.3</p>
                                     <div th:if="${version.isCurrent()}"class="icon icon-current-version"></div>
                                     <div th:if="${version.isPreRelease()}" class="icon icon-pre-release"></div>
                                 </div>

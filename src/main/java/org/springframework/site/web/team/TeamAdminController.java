@@ -2,6 +2,7 @@ package org.springframework.site.web.team;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.team.MemberProfile;
+import org.springframework.site.domain.team.TeamImporter;
 import org.springframework.site.domain.team.TeamService;
 import org.springframework.site.web.blog.EntityNotFoundException;
 import org.springframework.stereotype.Controller;
@@ -13,16 +14,19 @@ import java.security.Principal;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @Controller
 public class TeamAdminController {
 
 	private final TeamService teamService;
+	private final TeamImporter teamImporter;
 
 	@Autowired
-	public TeamAdminController(TeamService teamService) {
+	public TeamAdminController(TeamService teamService, TeamImporter teamImporter) {
 		this.teamService = teamService;
+		this.teamImporter = teamImporter;
 	}
 
 	@RequestMapping(value = "/admin/team", method = {GET, HEAD})
@@ -61,6 +65,13 @@ public class TeamAdminController {
 	public String saveTeamMember(@PathVariable("username") String username, MemberProfile profile) {
 		teamService.updateMemberProfile(username, profile);
 		return "redirect:/admin/team/" + username;
+	}
+
+
+	@RequestMapping(value = "/admin/team/github_import", method = POST)
+	public String importTeamMembersFromGithub() {
+		teamImporter.importTeamMembers();
+		return "redirect:/admin/team";
 	}
 
 }

@@ -32,7 +32,7 @@ body {
 
 .code-snippet {
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   background-color: #F9F9F9;
   padding: 12px 18px;
   margin: 15px 0;
@@ -142,7 +142,7 @@ body {
   margin-top: -90px;
   background-color: white;
   width: 100%;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dddddd;
   transition: margin 0.25s;
   -webkit-transition: margin 0.25s;
   -moz-transition: margin 0.25s;
@@ -197,7 +197,7 @@ body {
 }
 
 .right-pane-widget--container {
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   box-shadow: 0 -4px 0 #34302d;
   margin: 4px 0 40px 0;
 }
@@ -412,7 +412,7 @@ input.floating-input:focus {
 
 .gh-project-url--container {
   background-color: #FFF;
-  border: 1px solid #CCC;
+  border: 1px solid #cccccc;
   height: 20px;
   padding: 4px 6px;
   border-radius: 4px;
@@ -736,7 +736,7 @@ input.floating-input:focus {
 }
 .item-slider-widget .item-slider--container {
   background-color: white;
-  border: 1px solid #999;
+  border: 1px solid #999999;
   padding: 0 3px;
 }
 .item-slider-widget .item-slider--container .item {
@@ -764,7 +764,7 @@ input.floating-input:focus {
 }
 
 .content-container--wrapper {
-  border: 1px solid #34302D;
+  border: 1px solid #34302d;
   margin-top: -1px;
 }
 .content-container--wrapper:first-child {

@@ -10,6 +10,10 @@ public interface GuidesService {
 
 	Guide loadTutorialPage(String tutorialId, String pagePath);
 
+	List<GuideWithoutContent> listGettingStartedGuidesWithoutContent();
+
+	List<GuideWithoutContent> listTutorialsWithoutContent();
+
 	List<Guide> listGettingStartedGuides();
 
 	List<Guide> listTutorials();

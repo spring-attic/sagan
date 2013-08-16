@@ -1,7 +1,7 @@
 variables:
   # TODO: rename
-  # githubRepoBaseUrl: http://github.com/springsource
-  githubOrgBaseUrl: http://github.com/SpringSource
+  # githubRepoBaseUrl: http://github.com/spring-projects
+  githubOrgBaseUrl: http://github.com/spring-projects
 
   # TODO: rename
   # ghProjectsBaseUrl: http://projects.springframework.io
@@ -36,7 +36,6 @@ projects:
     - id: spring-amqp
       name: Spring AMQP
       lead: grussell
-      siteUrl: NONE
       supportedVersions:
         - 1.1.4.RELEASE
         - 1.2.0.RELEASE
@@ -47,7 +46,6 @@ projects:
     - id: spring-android
       name: Spring Android
       lead: rclarkson
-      siteUrl: NONE
       supportedVersions:
         - 1.0.1.RELEASE
 
@@ -57,7 +55,6 @@ projects:
     - id: spring-batch
       name: Spring Batch
       lead: mminella
-      siteUrl: NONE
       supportedVersions:
         - name: 2.2.1.RELEASE
           refDocUrl: /spring-batch/trunk/reference/html/index.html
@@ -69,6 +66,14 @@ projects:
     # ----------------------
     # Spring Data
     # ----------------------
+    - id: spring-data
+      # TODO: indicate this should not show up on /docs https://www.pivotaltracker.com/story/show/55297016
+      name: Spring Data
+      groupId: org.springframework.data
+      lead: mpollack
+      refDocUrl: NONE
+      apiDocUrl: NONE
+
     - id: spring-data-jpa
       name: Spring Data JPA
       groupId: org.springframework.data
@@ -83,7 +88,6 @@ projects:
     - id: spring-data-commons
       name: Spring Data Commons
       lead: ogierke
-      siteUrl: NONE
       refDocUrl: /spring-data/data-commons/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-commons/docs/{version}/api/
       supportedVersions:
@@ -93,7 +97,6 @@ projects:
     - id: spring-data-jdbc-ext
       name: Spring Data JDBC Extensions
       lead: trisberg
-      siteUrl: NONE
       refDocUrl: /spring-data/jdbc/docs/{version}/reference/html
       apiDocUrl: /spring-data/jdbc/docs/{version}/api/
       supportedVersions:
@@ -102,7 +105,6 @@ projects:
     - id: spring-data-mongodb
       name: Spring Data MongoDB
       lead: ogierke
-      siteUrl: NONE
       refDocUrl: /spring-data/data-mongo/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-mongo/docs/{version}/api/
       supportedVersions:
@@ -113,7 +115,6 @@ projects:
       name: Spring Data Neo4J
       lead: jexp@github # Michael Hunger
       sponsor: ogierke
-      siteUrl: NONE
       refDocUrl: /spring-data/data-neo4j/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-neo4j/docs/{version}/api/
       supportedVersions:
@@ -123,7 +124,6 @@ projects:
     - id: spring-data-redis
       name: Spring Data Redis
       lead: jhickey
-      siteUrl: NONE
       refDocUrl: /spring-data/data-redis/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-redis/docs/{version}/api/
       supportedVersions:
@@ -133,7 +133,6 @@ projects:
     - id: spring-data-rest
       name: Spring Data REST
       lead: jbrisbin
-      siteUrl: NONE
       refDocUrl: /spring-data/rest/docs/{version}/reference/html
       apiDocUrl: /spring-data/rest/docs/{version}/api/
       supportedVersions:
@@ -147,7 +146,6 @@ projects:
     - id: spring-flex
       name: Spring Flex
       lead: jgrelle
-      siteUrl: NONE
       apiDocUrl: /spring-flex/docs/{version}/javadoc-api/
       supportedVersions:
         - 1.5.2.RELEASE
@@ -157,7 +155,6 @@ projects:
     # ----------------------
     - id: spring-framework
       name: Spring Framework
-      siteUrl: NONE
       refDocUrl: /spring/docs/{version}/spring-framework-reference/html/
       apiDocUrl: /spring/docs/{version}/javadoc-api/
       supportedVersions:
@@ -171,7 +168,6 @@ projects:
     - id: spring-gemfire
       name: Spring GemFire
       lead: dturanski
-      siteUrl: NONE
       supportedVersions:
       - 1.3.2.RELEASE
       - 1.2.2.RELEASE
@@ -183,7 +179,6 @@ projects:
       name: Spring for Apache Hadoop
       lead: jvalkeal@github # Janne Valkealahti
       sponsor: trisberg
-      siteUrl: NONE
       supportedVersions:
         - 1.0.1.RC1
         - 1.0.0.RELEASE
@@ -194,8 +189,7 @@ projects:
     - id: spring-hateoas
       name: Spring HATEOAS
       lead: ogierke
-      siteUrl: NONE
-      refDocUrl: https://github.com/SpringSource/spring-hateoas/blob/master/readme.md
+      refDocUrl: "{githubOrgBaseUrl}/spring-hateoas/blob/master/readme.md"
       apiDocUrl: NONE
       supportedVersions:
         - 0.7.0.RELEASE
@@ -206,7 +200,6 @@ projects:
     - id: spring-integration
       name: Spring Integration
       lead: grussell
-      siteUrl: NONE
       supportedVersions:
         - 3.0.0.M2
         - 2.2.4.RELEASE
@@ -229,7 +222,6 @@ projects:
       name: Spring Roo
       lead: alankstewart@github
       sponsor: NONE
-      siteUrl: NONE
       refDocUrl: /spring-roo/reference/html/
       apiDocUrl: NONE
       supportedVersions:
@@ -241,7 +233,6 @@ projects:
     - id: spring-security
       name: Spring Security
       lead: rwinch
-      siteUrl: NONE
       refDocUrl: /spring-security/site/docs/{version}/reference/springsecurity.html
       apiDocUrl: /spring-security/site/docs/{version}/apidocs/
       supportedVersions:
@@ -253,7 +244,7 @@ projects:
       lead: dsyer
       supportedVersions:
         - name: 1.0.5.RELEASE
-          refDocUrl: https://github.com/SpringSource/spring-security-oauth/wiki/devguide
+          refDocUrl: "{githubOrgBaseUrl}/spring-security-oauth/wiki/devguide"
           # TODO: this actually points to 1.0.0.RELEASE - seems to be the latest published api docs
           apiDocUrl: /spring-security/oauth/apidocs/index.html
 
@@ -263,7 +254,6 @@ projects:
     - id: spring-shell
       name: Spring Shell
       lead: mpollack
-      siteUrl: NONE
       supportedVersions:
         - 1.1.0.M1
         - 1.0.0.RELEASE
@@ -281,7 +271,6 @@ projects:
     - id: spring-social-facebook
       name: Spring Social Facebook
       lead: cwalls
-      siteUrl: NONE
       supportedVersions:
         - 1.1.0.M3
         - 1.0.3.RELEASE
@@ -289,7 +278,6 @@ projects:
     - id: spring-social-twitter
       name: Spring Social Twitter
       lead: cwalls
-      siteUrl: NONE
       supportedVersions:
         - 1.1.0.M3
         - 1.0.5.RELEASE
@@ -300,7 +288,6 @@ projects:
     - id: spring-webflow
       name: Spring Web Flow
       lead: rstoyanchev
-      siteUrl: NONE
       supportedVersions:
         - 2.4.0.M1
         - name: 2.3.2.RELEASE
@@ -378,8 +365,7 @@ projects:
     - id: spring-boot
       name: Spring Boot
       lead: dsyer # and pwebb (co-leads represented comma-separated?)
-      siteUrl: http://springsource.github.io/spring-boot
-      refDocUrl: http://springsource.github.io/spring-boot
+      refDocUrl: "{ghPagesBaseUrl}/{id}"
       apiDocUrl: NONE
       supportedVersions:
         - 0.5.0.M1
@@ -440,20 +426,17 @@ projects:
       name: Spring Data Couchbase
       lead: daschl@github # Michael Nitschinger
       sponsor: ogierke
-      siteUrl: NONE
 
     # No releases
     - id: spring-data-elasticsearch
       name: Spring Data Elasticsearch
       lead: mohsinh@github # Mohsin Husen
       sponsor: ogierke
-      siteUrl: NONE
 
     # TODO: what to do with 0.* releases - still in incubation?
     - id: spring-data-envers
       name: Spring Data Envers
       lead: ogierke
-      siteUrl: NONE
       refDocUrl: NONE
       apiDocUrl: NONE
       supportedVersions:
@@ -470,7 +453,6 @@ projects:
       name: Spring Data Solr
       lead: christophstrobl@github
       sponsor: mpollack
-      siteUrl: NONE
       refDocUrl: NONE
       apiDocUrl: NONE
       supportedVersions:
@@ -522,8 +504,7 @@ projects:
     - id: spring-plugin
       name: Spring Plugin
       lead: ogierke
-      siteUrl: NONE
-      refDocUrl: https://github.com/SpringSource/spring-plugin/blob/master/README.markdown
+      refDocUrl: "{githubOrgBaseUrl}/spring-plugin/blob/master/README.markdown"
       apiDocUrl: NONE
       supportedVersions:
       - 0.8.0.RELEASE
@@ -533,7 +514,6 @@ projects:
     # ----------------------
     - id: spring-retry
       name: Spring Retry
-      siteUrl: NONE
       refDocUrl: /spring-retry/docs/{version}/reference/html
       apiDocUrl: /spring-retry/docs/{version}/api/
       supportedVersions:
@@ -544,7 +524,6 @@ projects:
     # ----------------------
     - id: spring-scala
       name: Spring Scala
-      siteUrl: NONE
       refDocUrl: /spring-scala/docs/{version}/reference/html
       apiDocUrl: /spring-scala/docs/{version}/api/
       supportedVersions:
@@ -563,7 +542,6 @@ projects:
     - id: spring-social-linkedin
       name: Spring Social LinkedIn
       lead: cwalls
-      siteUrl: NONE
       refDocUrl: /spring-social-linkedin/docs/{version}/reference/html
       apiDocUrl: /spring-social-linkedin/docs/{version}/api/
       supportedVersions:
@@ -573,7 +551,6 @@ projects:
     - id: spring-social-tripit
       name: Spring Social TripIt
       lead: cwalls
-      siteUrl: NONE
 
     # ----------------------
     # Spring Tenancy
@@ -582,7 +559,6 @@ projects:
       name: Spring Tenancy
       lead: dgreen99@github # David Green w/ Tasktop
       sponsor: dsyer
-      siteUrl: NONE
 
     # ----------------------
     # Spring Test MVC HTMLUnit
@@ -598,9 +574,9 @@ projects:
     # ----------------------
     - id: spring-xd
       name: Spring XD
-      siteUrl: https://github.com/springsource/spring-xd/wiki
+      siteUrl: "{githubOrgBaseUrl}/spring-xd/wiki"
       supportedVersions:
-        - 1.0.0.M1
+        - 1.0.0.M2
 
 
   # ========================

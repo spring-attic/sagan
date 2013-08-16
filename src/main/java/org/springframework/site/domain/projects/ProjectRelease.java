@@ -1,6 +1,6 @@
 package org.springframework.site.domain.projects;
 
-public class ProjectRelease implements Comparable<ProjectRelease>{
+public class ProjectRelease implements Comparable<ProjectRelease> {
 
 	public enum ReleaseStatus {
 		CURRENT, PRERELEASE, SUPPORTED;
@@ -12,14 +12,16 @@ public class ProjectRelease implements Comparable<ProjectRelease>{
 	private final String apiDocUrl;
 	private final String groupId;
 	private final String artifactId;
+	private final Repository repository;
 
-    public ProjectRelease(String versionName, ReleaseStatus releaseStatus, String refDocUrl, String apiDocUrl, String groupId, String artifactId) {
-        this.versionName = versionName;
+	public ProjectRelease(String versionName, ReleaseStatus releaseStatus, String refDocUrl, String apiDocUrl, String groupId, String artifactId) {
+		this.versionName = versionName;
 		this.releaseStatus = releaseStatus;
 		this.refDocUrl = refDocUrl;
 		this.apiDocUrl = apiDocUrl;
 		this.groupId = groupId;
 		this.artifactId = artifactId;
+		this.repository = Repository.get(versionName);
 	}
 
 	public boolean isCurrent() {
@@ -34,11 +36,11 @@ public class ProjectRelease implements Comparable<ProjectRelease>{
 		return releaseStatus == ReleaseStatus.SUPPORTED;
 	}
 
-	public String getFullName() {
+	public String getVersion() {
 		return versionName;
 	}
 
-	public String getShortName() {
+	public String getVersionDisplayName() {
 		return versionName.replaceAll(".RELEASE$", "");
 	}
 
@@ -64,6 +66,10 @@ public class ProjectRelease implements Comparable<ProjectRelease>{
 
 	public String getArtifactId() {
 		return artifactId;
+	}
+
+	public Repository getRepository() {
+		return repository;
 	}
 
 	@Override
@@ -105,4 +111,55 @@ public class ProjectRelease implements Comparable<ProjectRelease>{
 				'}';
 	}
 
+	private static class Repository {
+		private String id;
+		private String name;
+		private String url;
+		private Boolean snapshotsEnabled;
+
+		private Repository(String id, String name, String url, Boolean snapshotsEnabled) {
+			this.id = id;
+			this.name = name;
+			this.url = url;
+			this.snapshotsEnabled = snapshotsEnabled;
+		}
+
+		public static Repository get(String versionName) {
+			if (versionName.contains("RELEASE")) {
+				return null;
+			}
+
+			if (versionName.contains("SNAPSHOT")) {
+				return new Repository(
+						"spring-snapshots",
+						"Spring Snapshots",
+						"http://repo.springsource.org/snapshot",
+						true
+				);
+			}
+
+			return new Repository(
+					"spring-milestones",
+					"Spring Milestones",
+					"http://repo.springsource.org/milestone",
+					false
+			);
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+
+		public Boolean getSnapshotsEnabled() {
+			return snapshotsEnabled;
+		}
+	}
 }

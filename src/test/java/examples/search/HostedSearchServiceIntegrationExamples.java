@@ -90,7 +90,7 @@ public class HostedSearchServiceIntegrationExamples {
 	}
 
 	@Test
-	public void gettingStarteGuideIndexing() throws ParseException, InterruptedException {
+	public void gettingStartedGuideIndexing() throws ParseException, InterruptedException {
 		List<Guide> guideShells = this.guidesService.listGettingStartedGuides();
 		Guide guideShell = guideShells.get(0);
 		Guide guide = this.guidesService.loadGettingStartedGuide(guideShell

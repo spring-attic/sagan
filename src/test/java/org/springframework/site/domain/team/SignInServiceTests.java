@@ -16,7 +16,6 @@ import org.springframework.web.client.RestOperations;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.BDDMockito.anyLong;
 import static org.mockito.BDDMockito.anyString;
 import static org.mockito.BDDMockito.argThat;
 import static org.mockito.BDDMockito.given;
@@ -30,7 +29,7 @@ public class SignInServiceTests {
 	private GitHub gitHub;
 
 	@Mock
-	private TeamRepository teamRepository;
+	private TeamService teamService;
 
 	private SignInService signInService;
 	private String username = "user";
@@ -41,55 +40,20 @@ public class SignInServiceTests {
 
 	@Before
 	public void setup() {
-		signInService = new SignInService(teamRepository);
+		signInService = new SignInService(teamService);
 	}
 
 	@Test
-	public void createAMemberProfileIfOneDoesNotExist() {
-		GitHubUserProfile userProfile = new GitHubUserProfile(1L, username, name, location, "", "", email, avatarUrl, null);
+	public void createOrUpdateMemberProfileOnLogin() {
+		GitHubUserProfile userProfile = new GitHubUserProfile(1234L, username, name, location, "", "", email, avatarUrl, null);
 		UserOperations userOperations = mock(UserOperations.class);
 
 		given(userOperations.getUserProfile()).willReturn(userProfile);
 		given(gitHub.userOperations()).willReturn(userOperations);
 
-		given(teamRepository.findByGithubId(anyLong())).willReturn(null);
 		signInService.getOrCreateMemberProfile(1234L, gitHub);
 
-		verify(teamRepository).save(argThat(new ArgumentMatcher<MemberProfile>() {
-			@Override
-			public boolean matches(Object argument) {
-				MemberProfile profile = (MemberProfile)argument;
-				return profile != null &&
-						username.equals(profile.getUsername()) &&
-						name.equals(profile.getName()) &&
-						username.equals(profile.getGithubUsername()) &&
-						avatarUrl.equals(profile.getAvatarUrl());
-			}
-		}));
-	}
-
-	@Test
-	public void updateGithubUsernameOnExistingProfileIfItChanges() {
-		GitHubUserProfile userProfile = new GitHubUserProfile(1234L, "updated_username", name, location, "", "", email, avatarUrl, null);
-		UserOperations userOperations = mock(UserOperations.class);
-
-		given(userOperations.getUserProfile()).willReturn(userProfile);
-		given(gitHub.userOperations()).willReturn(userOperations);
-
-		MemberProfile memberProfile = new MemberProfile();
-		memberProfile.setGithubUsername("old_username");
-		given(teamRepository.findByGithubId(anyLong())).willReturn(memberProfile);
-
-		signInService.getOrCreateMemberProfile(1234L, gitHub);
-
-		verify(teamRepository).save(argThat(new ArgumentMatcher<MemberProfile>() {
-			@Override
-			public boolean matches(Object argument) {
-				MemberProfile profile = (MemberProfile)argument;
-				return profile != null && profile.getGithubUsername().equals("updated_username");
-			}
-		}));
-
+		verify(teamService).createOrUpdateMemberProfile(1234L, username, avatarUrl, name);
 	}
 
 	@Test

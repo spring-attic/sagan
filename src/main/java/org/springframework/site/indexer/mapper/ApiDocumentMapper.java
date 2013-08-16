@@ -38,15 +38,15 @@ public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 		entry.setRawContent(apiContent);
 		entry.setSummary(apiContent.substring(0, Math.min(apiContent.length(), 500)));
 		entry.setTitle(document.title());
-		entry.setSubTitle(String.format("%s (%s API)", project.getName(), version.getFullName()));
+		entry.setSubTitle(String.format("%s (%s API)", project.getName(), version.getVersion()));
 		entry.setPath(document.baseUri());
 		entry.setCurrent(version.isCurrent());
 		entry.setType("apiDoc");
-		entry.setVersion(version.getFullName());
+		entry.setVersion(version.getVersion());
 		entry.setProjectId(project.getId());
 
 		entry.addFacetPaths("Documentation", "Documentation/Api", "Projects", "Projects/" + project.getName(),
-				"Projects/" + project.getName() + "/" + version.getFullName());
+				"Projects/" + project.getName() + "/" + version.getVersion());
 		return entry;
 	}
 }

@@ -3,11 +3,15 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorator="layout">
 <head>
-    <title>Posts</title>
+    <title>Admin &middot; Team</title>
 </head>
 <body>
 <h1 layout:fragment="header">Hello <span sec:authentication="name">Bob</span></h1>
-
+<div layout:fragment="overview">
+    <form th:action="@{'/admin/team/github_import'}" method="post" class='form-inline' style="display: inline">
+        <button class="btn btn-primary">Import Team Members From Github</button>
+    </form>
+</div>
 <div layout:fragment="content" class="container">
     <div class="row">
         <div id="content" class="span8">

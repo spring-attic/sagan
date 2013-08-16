@@ -13,7 +13,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriTemplate;
 
 @Service
-public class CachingGitHubRestClient {
+public class CachingGitHubRestClient implements GitHubRestClient {
 	private final GitHub gitHub;
 	private CacheService cacheService;
 
@@ -23,14 +23,17 @@ public class CachingGitHubRestClient {
 		this.cacheService = cacheService;
 	}
 
+	@Override
 	public String sendRequestForJson(String path, Object... uriVariables) {
 		return sendRequest(path, String.class, HttpMethod.GET, null, uriVariables);
 	}
 
+	@Override
 	public String sendRequestForHtml(String path, Object... uriVariables) {
 		return sendRequest(path, MarkdownHtml.class, HttpMethod.GET, null, uriVariables);
 	}
 
+	@Override
 	public String sendPostRequestForHtml(String path, String body, Object... uriVariables) {
 		return sendRequest(path, String.class, HttpMethod.POST, body, uriVariables);
 	}

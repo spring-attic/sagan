@@ -1,14 +1,13 @@
 package integration.guides;
 
 import integration.IntegrationTestBase;
-import integration.configuration.IntegrationTestsConfiguration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
+import org.springframework.site.test.FixtureLoader;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -20,33 +19,29 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GettingStartedGuidesTests extends IntegrationTestBase {
 
 	@Test
-	public void getGettingStartedGuidesListPage() throws Exception {
-		MvcResult response = this.mockMvc.perform(get("/guides"))
+	public void showGuide() throws Exception {
+		String gsRestServiceRepo = FixtureLoader.load("/fixtures/github/gs-rest-service-repo.json");
+		stubRestClient.putResponse("/repos/springframework-meta/gs-rest-service", gsRestServiceRepo);
+
+		stubRestClient.putResponse("/repos/springframework-meta/gs-rest-service/contents/README.md",
+				"guide body");
+		stubRestClient.putResponse("/repos/springframework-meta/gs-rest-service/contents/SIDEBAR.md",
+				"sidebar content");
+
+		MvcResult response = this.mockMvc.perform(get("/guides/gs/rest-service/"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
 				.andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertThat(html.text(), containsString("Building a RESTful Web Service"));
-		assertThat(html.text(), containsString("Learn how to create a REST web service with Spring"));
-	}
+		assertThat(html.select(".article-body").text(), is("guide body"));
+		assertThat(html.select("aside#sidebar .related_resources").text(), is("sidebar content"));
 
-	@Test
-	public void getGettingStartedGuidesPage() throws Exception {
-		MvcResult response = this.mockMvc.perform(get("/guides/gs/awesome-guide/"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andReturn();
-
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertThat(html.select(".article-body").text(), is(IntegrationTestsConfiguration.GETTING_STARTED_GUIDE.getContent()));
-		assertThat(html.select("aside#sidebar .related_resources").text(), is(IntegrationTestsConfiguration.GETTING_STARTED_GUIDE.getSidebar()));
-
-		assertThat(html.select(".title").text(), equalTo("Awesome Guide"));
+		assertThat(html.select(".title").text(), equalTo("Building a RESTful Web Service"));
 
 		Element downloadLink = html.select("aside#sidebar a.github_download").first();
 		assertThat(downloadLink, is(notNullValue()));
-		assertThat(downloadLink.attr("href"), is(IntegrationTestsConfiguration.GETTING_STARTED_GUIDE.getZipUrl()));
+		assertThat(downloadLink.attr("href"), is("https://github.com/springframework-meta/gs-rest-service/archive/master.zip"));
 	}
 
 }

@@ -4,7 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.site.search.SearchService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -58,7 +57,7 @@ public class TeamService {
 		existingProfile.setGravatarEmail(profile.getGravatarEmail());
 
 		if (!StringUtils.isEmpty(profile.getGravatarEmail())) {
-			PasswordEncoder encoder = new Md5PasswordEncoder();
+			Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			String hashedEmail = encoder.encodePassword(profile.getGravatarEmail(), null);
 			existingProfile.setAvatarUrl(String.format("http://gravatar.com/avatar/%s", hashedEmail));
 		}
@@ -81,5 +80,24 @@ public class TeamService {
 
 	public List<MemberProfile> fetchVisibleMembers() {
 		return teamRepository.findByHidden(false);
+	}
+
+	public MemberProfile createOrUpdateMemberProfile(Long githubId, String username, String avatarUrl, String name) {
+		MemberProfile profile = teamRepository.findByGithubId(githubId);
+
+		if (profile == null) {
+			profile = new MemberProfile();
+			profile.setGithubId(githubId);
+			profile.setUsername(username);
+			profile.setAvatarUrl(avatarUrl);
+			profile.setName(name);
+		}
+
+		profile.setGithubUsername(username);
+		return teamRepository.save(profile);
+	}
+
+	public void showOnlyTeamMembersWithIds(List<Long> userIds) {
+		teamRepository.showOnlyTeamMembersWithIds(userIds);
 	}
 }

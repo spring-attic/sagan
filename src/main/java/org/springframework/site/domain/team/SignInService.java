@@ -12,29 +12,20 @@ public class SignInService {
 
 	public static final String SPRING_METADATA_GROUP_ID = "435080";
 	private static final String IS_MEMBER_URL = "https://api.github.com/teams/{team}/members/{user}";
-	private final TeamRepository teamRepository;
+	private final TeamService teamService;
 
 	@Autowired
-	public SignInService(TeamRepository teamRepository) {
-		this.teamRepository = teamRepository;
+	public SignInService(TeamService teamService) {
+		this.teamService = teamService;
 	}
 
 	public MemberProfile getOrCreateMemberProfile(Long githubId, GitHub gitHub) {
-		MemberProfile profile = teamRepository.findByGithubId(githubId);
 		GitHubUserProfile remoteProfile = gitHub.userOperations().getUserProfile();
 
-		if (profile == null) {
-			profile = new MemberProfile();
-			profile.setGithubId(githubId);
-			profile.setUsername(remoteProfile.getUsername());
-			profile.setAvatarUrl(remoteProfile.getProfileImageUrl());
-			profile.setName(remoteProfile.getName());
-		}
-
-		profile.setGithubUsername(remoteProfile.getUsername());
-		profile = teamRepository.save(profile);
-
-		return profile;
+		return teamService.createOrUpdateMemberProfile(githubId,
+				remoteProfile.getUsername(),
+				remoteProfile.getProfileImageUrl(),
+				remoteProfile.getName());
 	}
 
 	public boolean isSpringMember(String userId, GitHub gitHub) {
