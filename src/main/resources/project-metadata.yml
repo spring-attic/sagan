@@ -1,7 +1,7 @@
 variables:
   # TODO: rename
-  # githubRepoBaseUrl: http://github.com/springsource
-  githubOrgBaseUrl: http://github.com/SpringSource
+  # githubRepoBaseUrl: http://github.com/spring-projects
+  githubOrgBaseUrl: http://github.com/spring-projects
 
   # TODO: rename
   # ghProjectsBaseUrl: http://projects.springframework.io
@@ -157,7 +157,6 @@ projects:
     # ----------------------
     - id: spring-framework
       name: Spring Framework
-      siteUrl: NONE
       refDocUrl: /spring/docs/{version}/spring-framework-reference/html/
       apiDocUrl: /spring/docs/{version}/javadoc-api/
       supportedVersions:
@@ -195,7 +194,7 @@ projects:
       name: Spring HATEOAS
       lead: ogierke
       siteUrl: NONE
-      refDocUrl: https://github.com/SpringSource/spring-hateoas/blob/master/readme.md
+      refDocUrl: "{githubOrgBaseUrl}/spring-hateoas/blob/master/readme.md"
       apiDocUrl: NONE
       supportedVersions:
         - 0.7.0.RELEASE
@@ -253,7 +252,7 @@ projects:
       lead: dsyer
       supportedVersions:
         - name: 1.0.5.RELEASE
-          refDocUrl: https://github.com/SpringSource/spring-security-oauth/wiki/devguide
+          refDocUrl: "{githubOrgBaseUrl}/spring-security-oauth/wiki/devguide"
           # TODO: this actually points to 1.0.0.RELEASE - seems to be the latest published api docs
           apiDocUrl: /spring-security/oauth/apidocs/index.html
 
@@ -378,8 +377,7 @@ projects:
     - id: spring-boot
       name: Spring Boot
       lead: dsyer # and pwebb (co-leads represented comma-separated?)
-      siteUrl: http://springsource.github.io/spring-boot
-      refDocUrl: http://springsource.github.io/spring-boot
+      refDocUrl: "{ghPagesBaseUrl}/{id}"
       apiDocUrl: NONE
       supportedVersions:
         - 0.5.0.M1
@@ -523,7 +521,7 @@ projects:
       name: Spring Plugin
       lead: ogierke
       siteUrl: NONE
-      refDocUrl: https://github.com/SpringSource/spring-plugin/blob/master/README.markdown
+      refDocUrl: "{githubOrgBaseUrl}/spring-plugin/blob/master/README.markdown"
       apiDocUrl: NONE
       supportedVersions:
       - 0.8.0.RELEASE
@@ -598,7 +596,7 @@ projects:
     # ----------------------
     - id: spring-xd
       name: Spring XD
-      siteUrl: https://github.com/springsource/spring-xd/wiki
+      siteUrl: "{githubOrgBaseUrl}/spring-xd/wiki"
       supportedVersions:
         - 1.0.0.M2
 
