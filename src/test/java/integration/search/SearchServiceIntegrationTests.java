@@ -6,7 +6,6 @@ import io.searchbox.client.config.ClientConfig;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.node.NodeBuilder;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +48,11 @@ import static org.hamcrest.Matchers.not;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { ApplicationConfiguration.class,
-		SearchServiceIntegrationTestLocal.IntegrationTestElasticSearchConfiguration.class }, initializers = {
+		SearchServiceIntegrationTests.IntegrationTestElasticSearchConfiguration.class }, initializers = {
 		ConfigFileApplicationContextInitializer.class,
 		LoggingApplicationContextInitializer.class })
 @DirtiesContext
-public class SearchServiceIntegrationTestLocal {
+public class SearchServiceIntegrationTests {
 
 	public static class IntegrationTestElasticSearchConfiguration {
 
