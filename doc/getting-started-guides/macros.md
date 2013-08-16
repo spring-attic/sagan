@@ -177,15 +177,21 @@ $ mvn package
 <#macro build_an_executable_jar_with_gradle>
 Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
 
-Add the following dependency to your Gradle `build.gradle` file's `buildscript` section:
+Update your Gradle `build.gradle` file's `buildscript` section, so that it looks like this:
 
 ```groovy
+buildscript {
+    repositories {
+        maven { url "http://repo.springsource.org/libs-snapshot" }
+        mavenLocal()
+    }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.BUILD-SNAPSHOT")
     }
+}
 ```
 
-Further down inside `build.gradle`, add the following to the list of plugins:
+Further down inside `build.gradle`, add the following to the list of applied plugins:
 
 ```groovy
 apply plugin: 'spring-boot'
