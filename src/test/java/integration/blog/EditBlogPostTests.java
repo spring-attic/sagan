@@ -55,7 +55,7 @@ public class EditBlogPostTests extends IntegrationTestBase {
 		this.mockMvc.perform(get("/admin/blog/" + post.getAdminSlug() + "/edit"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Edit Post")));
+				.andExpect(content().string(containsString("Edit &middot; Original Title")));
 	}
 
 	@Test
