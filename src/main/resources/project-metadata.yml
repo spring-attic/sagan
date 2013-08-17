@@ -83,7 +83,9 @@ projects:
       supportedVersions:
         - 1.4.0.RC1
         - 1.3.4.RELEASE
-        - 1.2.1.RELEASE # TODO: this version doesn't have docs published, but 1.2.0 does
+        - name: 1.2.1.RELEASE
+          refDocUrl: NONE
+          apiDocUrl: NONE
 
     - id: spring-data-commons
       name: Spring Data Commons
@@ -382,13 +384,6 @@ projects:
     # ----------------------
     # Spring Data
     # ----------------------
-    # No releases / never actually started?
-    # TODO: Eliminate completely?
-    - id: spring-data-cassandra
-      name: Spring Data Cassandra
-      lead: erezmazor@github
-      sponsor: mpollack
-      siteUrl: NONE
 
     # No releases
     - id: spring-data-couchbase
@@ -401,6 +396,10 @@ projects:
       name: Spring Data Elasticsearch
       lead: mohsinh@github # Mohsin Husen
       sponsor: ogierke
+      refDocUrl: "{githubOrgBaseUrl}/{id}#readme"
+      apiDocUrl: NONE
+      supportedVersions:
+        - 1.0.0.BUILD-SNAPSHOT
 
     # TODO: what to do with 0.* releases - still in incubation?
     - id: spring-data-envers
