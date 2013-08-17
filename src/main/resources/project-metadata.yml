@@ -360,17 +360,6 @@ projects:
   # ========================
   incubator:
     # ----------------------
-    # Spring Boot
-    # ----------------------
-    - id: spring-boot
-      name: Spring Boot
-      lead: dsyer # and pwebb (co-leads represented comma-separated?)
-      refDocUrl: "{ghPagesBaseUrl}/{id}"
-      apiDocUrl: NONE
-      supportedVersions:
-        - 0.5.0.M1
-
-    # ----------------------
     # Spring ActionScript
     # ----------------------
     - id: spring-actionscript
@@ -380,35 +369,15 @@ projects:
       siteUrl: NONE
 
     # ----------------------
-    # Spring Security
+    # Spring Boot
     # ----------------------
-    # Appears not yet to have any releases, thus marked as an incubator project
-    # TODO: talk to Mike Wiesner about this.
-    - id: spring-security-kerberos
-      name: Spring Security Kerberos
-      lead: mwiesner
-      siteUrl: "{docsBaseUrl}/spring-security/site/extensions/krb/"
-      refDocUrl: /spring-security-kerberos/docs/{version}/reference/html
-      apiDocUrl: /spring-security-kerberos/docs/{version}/api/
+    - id: spring-boot
+      name: Spring Boot
+      lead: dsyer # and pwebb (co-leads represented comma-separated?)
+      refDocUrl: "{ghPagesBaseUrl}/{id}"
+      apiDocUrl: NONE
       supportedVersions:
-        - 1.0.0.CI-SNAPSHOT # TODO: this should be BUILD-SNAPSHOT
-
-    # TODO: in incubator for now, but should be eliminated altogether?
-    # No releases, no commits for ~3 years
-    - id: spring-security-portlet
-      name: Spring Security Portlet
-      lead: rwinch # ltaylor was last committer
-      siteUrl: NONE
-
-    # No GA releases yet, thus marked as an incubator project
-    - id: spring-security-saml
-      name: Spring Security SAML
-      lead: vschafer
-      siteUrl: "{docsBaseUrl}/spring-security/site/extensions/saml/"
-      supportedVersions:
-        - name: 1.0.0.RC2
-          refDocUrl: /spring-security-saml/docs/1.0.x/reference/html/
-          apiDocUrl: /spring-security-saml/docs/1.0.x/api/
+        - 0.5.0.M1
 
     # ----------------------
     # Spring Data
@@ -528,6 +497,37 @@ projects:
       apiDocUrl: /spring-scala/docs/{version}/api/
       supportedVersions:
         - 9.9.9.RELEASE
+
+    # ----------------------
+    # Spring Security
+    # ----------------------
+    # Appears not yet to have any releases, thus marked as an incubator project
+    # TODO: talk to Mike Wiesner about this.
+    - id: spring-security-kerberos
+      name: Spring Security Kerberos
+      lead: mwiesner
+      siteUrl: "{docsBaseUrl}/spring-security/site/extensions/krb/"
+      refDocUrl: /spring-security-kerberos/docs/{version}/reference/html
+      apiDocUrl: /spring-security-kerberos/docs/{version}/api/
+      supportedVersions:
+        - 1.0.0.CI-SNAPSHOT # TODO: this should be BUILD-SNAPSHOT
+
+    # TODO: in incubator for now, but should be eliminated altogether?
+    # No releases, no commits for ~3 years
+    - id: spring-security-portlet
+      name: Spring Security Portlet
+      lead: rwinch # ltaylor was last committer
+      siteUrl: NONE
+
+    # No GA releases yet, thus marked as an incubator project
+    - id: spring-security-saml
+      name: Spring Security SAML
+      lead: vschafer
+      siteUrl: "{docsBaseUrl}/spring-security/site/extensions/saml/"
+      supportedVersions:
+        - name: 1.0.0.RC2
+          refDocUrl: /spring-security-saml/docs/1.0.x/reference/html/
+          apiDocUrl: /spring-security-saml/docs/1.0.x/api/
 
     # ----------------------
     # Spring Social
