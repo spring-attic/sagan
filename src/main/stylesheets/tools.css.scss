@@ -15,6 +15,9 @@ $secondary-font-family: 'Montserrat', sans-serif;
 $link-green: #5fa134;
 $icon-sprite: url("../img/iconsprite.png");
 
+
+
+
 //TOOLS INDEX 
 .tool--container {
   background-color: $black-brown;
@@ -125,8 +128,9 @@ $icon-sprite: url("../img/iconsprite.png");
       line-height: 24px;
     }
   }
-  h2 {
+  .centered-title {
     margin-bottom: 10px;
+    text-align: center;
   }
   .tools-feature--container {
     vertical-align: top;
@@ -137,20 +141,49 @@ $icon-sprite: url("../img/iconsprite.png");
       height: 160px;
       width: 100%;
       margin-bottom: 30px;
+      &.sts-spring-model-detail {
+        background: url("../img/sts-spring-model-detail.png") transparent no-repeat;
+        border: 3px solid #ccc;
+      }
+      &.sts-validations-detail {
+        background: url("../img/sts-validations-detail.png") transparent no-repeat;
+        border: 3px solid #ccc;
+      }
+      &.sts-refactoring-support-detail {
+        background: url("../img/sts-refactoring-support-detail.png") transparent no-repeat;
+        border: 3px solid #ccc;
+      }
+      &.sts-content-assist-detail {
+        background: url("../img/sts-content-assist-detail.png") transparent no-repeat;
+        border: 3px solid #ccc;
+      }
+      &.sts-graphical-editors-detail {
+        background: url("../img/sts-graphical-editors-detail.png") transparent no-repeat;
+        border: 3px solid #ccc;
+      }
+      &.sts-aop-support-detail {
+        background: url("../img/sts-aop-support-detail.png") transparent no-repeat;
+        border: 3px solid #ccc;
+      }
+      &.sts-tcserver-cloudfoundry-detail {
+        background: url("../img/sts-tcserver-cloudfoundry-detail.png") transparent no-repeat;
+        border: 3px solid #ccc;
+      }
+      &.placeholder-img {
+        background-color: #ccc;
+        box-shadow: inset 3px 3px 0 white, inset -3px -3px 0 white;
+      }
+      &.screenshot-ggts-editing {
+        background: url("../img/screenshot-ggts-editing.png") transparent no-repeat;
+      }
+      &.screenshot-ggts-support {
+        background: url("../img/screenshot-ggts-support.png") transparent no-repeat;
+      }
+      &.screenshot-ggts-integration {
+        background: url("../img/screenshot-ggts-integration.png") transparent no-repeat;
+      }
     }
-    .placeholder-img {
-      background-color: #ccc;
-      box-shadow: inset 3px 3px 0 white, inset -3px -3px 0 white;
-    }
-    .screenshot-ggts-editing {
-      background: url("../img/screenshot-ggts-editing.png") transparent no-repeat;
-    }
-    .screenshot-ggts-support {
-      background: url("../img/screenshot-ggts-support.png") transparent no-repeat;
-    }
-    .screenshot-ggts-integration {
-      background: url("../img/screenshot-ggts-integration.png") transparent no-repeat;
-    }
+    
     .tools-feature--description {
       font-size: 14px;
       line-height: 20px;
@@ -164,9 +197,7 @@ $icon-sprite: url("../img/iconsprite.png");
     }
   }
   &.testimonial {
-    padding-top: 60px;
-    border-top: 1px solid white;
-    margin-top: 30px;
+    margin: 45px 0;
     .testimonial--container {
       background-color: white;
       margin: 0 67px;
@@ -213,9 +244,8 @@ $icon-sprite: url("../img/iconsprite.png");
   &.tools-feature--wrapper {
     .tools-feature--container {
       min-height: 175px;
-      padding: 30px 30px 40px 0;
+      padding: 45px 30px 55px 0;
       border-top: 1px solid white;
-      clear: both;
       .tools-feature--thumbnail {
         float: left;
         width: 45.8%;
@@ -229,11 +259,20 @@ $icon-sprite: url("../img/iconsprite.png");
         }
       }
       h3 {
-        padding-top: 30px;
+        padding-top: 15px;
       }
       p {
         padding: 0;
       }
+    }
+  }
+  &.more-feature-list {
+    ul {
+      margin: 0 0 10px 20px;
+      li {
+        padding: 5px 0;
+      }
+      
     }
   }
 }
