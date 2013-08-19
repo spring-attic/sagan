@@ -49,6 +49,10 @@
 .team-map--wrapper .team-member--container .team-member--avatar {
   border: 10px solid rgba(52, 48, 45, 0.75);
 }
+.team-map--wrapper .team-member--container .team-member--avatar img {
+  width: 250px;
+  height: 250px;
+}
 .team-map--wrapper .team-member--container .team-member-info--container {
   padding: 40px;
   background-color: rgba(52, 48, 45, 0.75);
@@ -98,6 +102,8 @@
 .team-members--wrapper .team-member--container .team-member--avatar img {
   display: inline-block;
   margin-right: 13px;
+  width: 153px;
+  height: 153px;
 }
 .team-members--wrapper .team-member--container .team-member--info {
   display: inline-block;

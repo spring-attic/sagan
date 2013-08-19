@@ -65,6 +65,10 @@ $icon-sprite: url("../img/iconsprite.png");
     }
     .team-member--avatar {
       border: 10px solid rgba(52, 48, 45, 0.75);
+      img {
+        width: 250px;
+        height: 250px;
+      }
     }
     .team-member-info--container {
       padding: 40px;
@@ -118,6 +122,8 @@ $icon-sprite: url("../img/iconsprite.png");
       img {
         display: inline-block;
         margin-right: 13px;
+        width: 153px;
+        height: 153px;
       }
     }
     .team-member--info {
