@@ -181,8 +181,19 @@ $icon-sprite: url("../img/iconsprite.png");
   .project-quickstart-btn {
     margin-top: 40px;
   }
-  .spring-data--bg {
+  .billboard-bg {
     background-color: #666;
+    .billboard-icon {
+      width: 330px;
+      height: 364px;
+      position: absolute;
+      right: 0;
+      margin-top: 25px;
+      opacity: 0.5;
+      &.icon-spring-data-large {
+        background-image: url("../img/icon-spring-data-large.png");
+      }
+    }
   }
 }
 

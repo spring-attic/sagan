@@ -157,8 +157,19 @@
 .project-header--wrapper .project-quickstart-btn {
   margin-top: 40px;
 }
-.project-header--wrapper .spring-data--bg {
+.project-header--wrapper .billboard-bg {
   background-color: #666;
+}
+.project-header--wrapper .billboard-bg .billboard-icon {
+  width: 330px;
+  height: 364px;
+  position: absolute;
+  right: 0;
+  margin-top: 25px;
+  opacity: 0.5;
+}
+.project-header--wrapper .billboard-bg .billboard-icon.icon-spring-data-large {
+  background-image: url("../img/icon-spring-data-large.png");
 }
 
 .project-body--container .project-body--section {

@@ -2,7 +2,7 @@
   width: 1024px !important;
 }
 
-.navbar-inner, .search-dropdown--container, footer, .team-map--wrapper {
+.navbar-inner, .search-dropdown--container, footer, .team-map--wrapper, .billboard-bg {
   min-width: 1024px;
 }
 
