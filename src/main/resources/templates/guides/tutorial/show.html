@@ -3,7 +3,7 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorator="layout">
 <head>
-    <title>SpringFramework - Tutorial</title>
+    <title th:inline="text">Tutorial &middot; [[${tutorial.title}]]</title>
 </head>
 <body>
 <div layout:fragment="header-container"></div>

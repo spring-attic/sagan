@@ -2,7 +2,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title th:inline="text">SpringFramework - [[${post.title}]]</title>
+    <title th:inline="text">View &middot; [[${post.title}]]</title>
 </head>
 <body>
 <div layout:fragment="content" class="container" th:object="${post}">

@@ -3,7 +3,7 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorator="layout">
   <head>
-    <title th:text="${guide.title}"/>
+    <title th:inline="text">Getting Started &middot; [[${guide.title}]]</title>
   </head>
   <body>
     <div layout:fragment="header-container"></div>
