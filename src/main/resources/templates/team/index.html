@@ -32,7 +32,7 @@
     <div class="team-members--wrapper">
       <div class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
         <a th:href="@{'/team/' + ${profile.username}}" class="team-member--avatar">
-          <img th:src="${profile.avatarUrl} + '?s=153'" />
+          <img th:src="${profile.avatarUrl} + '?s=153&s=153'" />
         </a>
         <div class="team-member--info">
           <a th:href="@{'/team/' + ${profile.username}}" class="team-member--name" th:text="${profile.name}">Member Name</a>
