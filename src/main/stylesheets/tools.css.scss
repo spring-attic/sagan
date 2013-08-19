@@ -84,23 +84,19 @@ $icon-sprite: url("../img/iconsprite.png");
 
 .eclipse--container {
   border: 1px solid $black-brown;
-  padding: 40px 84px;
-  .eclipse--icon {
-    width: 72px;
-    height: 72px;
-    background-image: $icon-sprite;
-    background-position: -216px -282px;
+  padding: 40px;
+  .logo-eclipse-text {
     float: left;
-    margin: 23px 0;
+    margin: 40px 40px 40px 0;
   }
   .eclipse-content--container {
-    margin-left: 156px;
+    margin-left: 159px;
   }
   h2 {
     font-size: 18px;
     line-height: 18px;
     margin-bottom: 20px;
-    text-transform: uppercase;
+    font-weight: 400;
   }
   p {
     font-size: 15px;
@@ -109,7 +105,9 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   a {
     color: $link-green;
-    text-transform: uppercase;
+    &.learn-more-link {
+      text-transform: uppercase;
+    } 
   }
 }
 
