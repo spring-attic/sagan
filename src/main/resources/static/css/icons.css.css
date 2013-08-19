@@ -91,6 +91,20 @@
   width: 23px;
   background-position: -344px -520px;
 }
+.icon.icon-ga-release {
+  margin-left: 0 !important;
+  height: 13px;
+  width: 9px;
+  background-position: 626px 317px;
+  background-color: #6db33f;
+  padding: 0 2px;
+  border-radius: 10px;
+}
+.icon.icon-snapshot-release {
+  height: 13px;
+  width: 46px;
+  background-position: 603px 317px;
+}
 .icon.icon-social-twitter {
   width: 36px;
   height: 36px;
