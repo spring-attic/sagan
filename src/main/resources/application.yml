@@ -55,18 +55,34 @@ search:
     base_url: https://sagan.cfapps.io
 elasticsearch:
   client:
+    # gonçalo's account at qbox
     endpoint: https://qlmsjwfa.api.qbox.io
 
 ---
 
 spring:
-  profiles: staging,production
+  profiles: staging
 search:
   indexer:
     delay: 0
+    base_url: https://sagan-staging.cfapps.io
 elasticsearch:
   client:
+    # gonçalo's account at qbox
     endpoint: https://qlmsjwfa.api.qbox.io
+
+---
+
+spring:
+  profiles: production
+search:
+  indexer:
+    delay: 0
+    base_url: https://sagan-production.cfapps.io
+elasticsearch:
+  client:
+    # chris' account at qbox
+    endpoint: https://jgzosqbq.api.qbox.io
 
 ---
 
