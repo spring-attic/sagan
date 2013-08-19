@@ -1,30 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-            xmlns:th="http://www.thymeleaf.org"
-            xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<body>
-
-<div layout:fragment="full-post">
-    <div class="blog--container">
-    <div class="blog--title" th:text="*{title}">Blog post</div>
+<html 
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <body>
+    <div layout:fragment="full-post">
+      <div class="blog--container">
+        <div class="blog--title" th:text="*{title}">Blog post</div>
         <div class="meta-data--container">
-            <div class="meta-data--item">
-                <i class="meta-data--icon"></i>
-                <a class='category' th:text="${post.category}">Category</a>
-            </div>
-            <div class="meta-data--item">
-                <img class="meta-data--icon" th:src="@{${post.author.avatarUrl} + '?s=20&amp;d=mm'}" />
-                <a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.username}}">Author</a>
-            </div>
-            <div class="meta-data--item">
-                <i class="meta-data--icon"></i>
-                <span class='date' th:text='${post.formattedPublishDate}'>June 18, 2013</span>
-            </div>
+          <div class="meta-data--item">
+            <i class="meta-data--icon"></i>
+            <a class='category' th:text="${post.category}">Category</a>
+          </div>
+          <div class="meta-data--item">
+            <img class="meta-data--icon" th:src="@{${post.author.avatarUrl} + '?s=20&amp;d=mm'}" />
+            <a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.username}}">Author</a>
+          </div>
+          <div class="meta-data--item">
+            <i class="meta-data--icon"></i>
+            <span class='date' th:text='${post.formattedPublishDate}'>June 18, 2013</span>
+          </div>
         </div>
         <article class="blog--post" th:utext="*{renderedContent}">Blog content</article>
     </div>
-</div>
-
-</body>
+    <div class="blog-comments--wrapper">
+      <div class="blog-comments--container">
+        <div class="blog-comments--header">
+          HAVE COMMENTS? SENS US A TWEET @_springteam
+            <div class="icon icon-social-twitter pull-right"></div> 
+        </div>
+        <p class="blog-comments--body">
+          Make comment and let us (<a href="#">@_springteam</a>) know on Twitter. If you have any questions or find a bug, please send them to <a href="mailto:support@springgramework.org?Subject=Found%20a%20Bug" target="_top">support@springgramework.org</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  </body>
 </html>
 

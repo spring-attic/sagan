@@ -91,3 +91,11 @@
   width: 23px;
   background-position: -344px -520px;
 }
+.icon.icon-social-twitter {
+  width: 36px;
+  height: 36px;
+  background-position: -1px -143px;
+}
+.icon.icon-social-twitter:hover {
+  background-position: -84px -143px;
+}

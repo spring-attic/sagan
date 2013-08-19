@@ -94,5 +94,12 @@ $icon-sprite: url("../img/iconsprite.png");
     width: 23px;
     background-position: -344px -520px;
   }
-
+  &.icon-social-twitter {
+    width: 36px;
+    height: 36px;
+    background-position: -1px -143px;
+    &:hover {
+      background-position: -84px -143px;
+    }
+  }
 }

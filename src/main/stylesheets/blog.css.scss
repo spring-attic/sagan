@@ -17,9 +17,9 @@ $icon-sprite: url("../img/iconsprite.png");
 
 .blog--container {
   padding: 0 0 40px 0;
-  border-bottom: 1px solid #ffffff;
   &.blog-preview {
     margin: 0 0 40px 0;
+    border-bottom: 1px solid #ffffff;
     .meta-data--container {
       margin-bottom: 0;
     }
@@ -179,6 +179,27 @@ $icon-sprite: url("../img/iconsprite.png");
       }
     }
   }
+}
+
+.blog-comments--wrapper {
+  border-top: 1px solid #ccc;
+  padding-top: 30px;
+  .blog-comments--container {
+    border: 1px solid $black-brown;
+    .blog-comments--header {
+      background-color: $black-brown;
+      color: #f1f1f1;
+      font-size: 14px;
+      line-height: 14px;
+      padding: 18px;
+      .icon {
+        margin-top: -11px;
+      }
+    }
+    .blog-comments--body {
+      padding: 18px;
+    }
+  } 
 }
 
 .blog-pagination {

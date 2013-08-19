@@ -1,9 +1,9 @@
 .blog--container {
   padding: 0 0 40px 0;
-  border-bottom: 1px solid #ffffff;
 }
 .blog--container.blog-preview {
   margin: 0 0 40px 0;
+  border-bottom: 1px solid #ffffff;
 }
 .blog--container.blog-preview .meta-data--container {
   margin-bottom: 0;
@@ -159,6 +159,27 @@
   margin: 0;
   font-size: 14px;
   line-height: 20px;
+}
+
+.blog-comments--wrapper {
+  border-top: 1px solid #ccc;
+  padding-top: 30px;
+}
+.blog-comments--wrapper .blog-comments--container {
+  border: 1px solid #34302d;
+}
+.blog-comments--wrapper .blog-comments--container .blog-comments--header {
+  background-color: #34302d;
+  color: #f1f1f1;
+  font-size: 14px;
+  line-height: 14px;
+  padding: 18px;
+}
+.blog-comments--wrapper .blog-comments--container .blog-comments--header .icon {
+  margin-top: -11px;
+}
+.blog-comments--wrapper .blog-comments--container .blog-comments--body {
+  padding: 18px;
 }
 
 .blog-pagination {
