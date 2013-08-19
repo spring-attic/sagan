@@ -33,12 +33,12 @@
 		<div class="tool--container">
 			<div class="tool--icon ggts-icon"></div>
 			<div class="tool--title">Groovy/Grails Tool Suite&trade;</div>
-			<div class="tool--description">Groovy/Grails Tool Suite is an Eclipse base development environment for building Groovy and Grails applications. It provides support for the latest versions of Groovy and Grails.</div>
+			<div class="tool--description">Groovy/Grails Tool Suite is an Eclipse-based development environment for building Groovy and Grails applications. It provides support for the latest versions of Groovy and Grails.</div>
 			<a href="ggts/index.html" th:href="@{/tools/ggts}" class="tool--learn-more">Learn More</a>
             <ul class='download-links'>
                 <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${ggtsDownloadLinks}">
                     <a class="tool--download-btn btn btn-black uppercase sub-text" th:href="${downloadLink.url}">
-                        Download STS
+                        Download GGTS
                         <p th:text="'(' + ${ggtsVersion} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
                     </a>
                 </li>
@@ -50,10 +50,13 @@
 		<div class="eclipse--icon"></div>
 		<div class="eclipse-content--container">
 			<h2>Eclipse</h2>
-			<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna
-				mollis
-				euismod. Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-			<a href="eclipse/index.html" th:href="@{/tools/eclipse}">Learn More</a>	
+				<p>The Spring Tool Suite as well as the Groovy & Grails Tool Suite
+					are built on top of the Eclipse platform, which is provided by the
+					<a href="http://www.eclipse.org">Eclipse Foundation</a> under the
+					<a href="http://www.eclipse.org/org/documents/epl-v10.php">Eclipse
+					Public License</a>.</p>
+				<a href="eclipse/index.html" th:href="@{/tools/eclipse}">Eclipse
+				Download Mirror</a>
 		</div>
 	</div>
 	</div>
