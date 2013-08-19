@@ -15,13 +15,13 @@ $secondary-font-family: 'Montserrat', sans-serif;
 $link-green: #5fa134;
 $icon-sprite: url("../img/iconsprite.png");
 
-// //making stuff not responsive
-// .container-fluid {
-//   width: 1024px !important;
-// }
-// .navbar-inner, .search-dropdown--container, footer, .team-map--wrapper {
-//   min-width: 1024px;
-// }
+//making stuff not responsive
+.container-fluid {
+  width: 1024px !important;
+}
+.navbar-inner, .search-dropdown--container, footer, .team-map--wrapper {
+  min-width: 1024px;
+}
 
 
 
