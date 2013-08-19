@@ -101,7 +101,7 @@
 }
 .content--container blockquote {
   padding: 0 0 0 10px;
-  border-left: 5px solid #dddddd;
+  border-left: 5px solid #DDD;
 }
 .content--container pre {
   word-break: normal;
@@ -124,7 +124,7 @@
   margin: 15px 6.2%;
 }
 .content-right-pane--container h3 {
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #ddd;
   padding: 6px 6.2%;
   font-family: "Montserrat", sans-serif;
   margin: 0;
@@ -150,7 +150,7 @@
   padding: 18px 6.4%;
   font-size: 16px;
   line-height: 16px;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   box-shadow: none;
 }
 .content-right-pane--container .btn-group .btn.active {
@@ -161,7 +161,7 @@
   box-shadow: inset 0 1px 3px #c8c8c8;
 }
 .content-right-pane--container .clone-url {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   background-color: white;
   cursor: pointer;
   margin: 15px 6.2%;

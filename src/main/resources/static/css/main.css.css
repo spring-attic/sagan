@@ -32,7 +32,7 @@ body {
 
 .code-snippet {
   border-radius: 2px;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   background-color: #F9F9F9;
   padding: 12px 18px;
   margin: 15px 0;
@@ -63,7 +63,6 @@ body {
   height: 30px;
   border-radius: 30px;
   margin: 10px 0 0 1px;
-  top: 13px;
   background-color: #6db33f;
   position: absolute;
   z-index: 1034;
@@ -78,9 +77,11 @@ body {
   background-image: url("../img/iconsprite.png");
   width: 153px;
   height: 40px;
-  background-repeat: no-repeat;
-  background-size: 2230px;
-  background-position: -1px -1px;
+  -webkit-background-size: 1001px 837px;
+  -moz-background-size: 1001px 837px;
+  -o-background-size: 1001px 837px;
+  background-size: 1001px 837px;
+  background-position: 1000px 836px;
   position: absolute;
   z-index: 1035;
 }
@@ -142,7 +143,7 @@ body {
   margin-top: -90px;
   background-color: white;
   width: 100%;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #ddd;
   transition: margin 0.25s;
   -webkit-transition: margin 0.25s;
   -moz-transition: margin 0.25s;
@@ -197,7 +198,7 @@ body {
 }
 
 .right-pane-widget--container {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   box-shadow: 0 -4px 0 #34302d;
   margin: 4px 0 40px 0;
 }
@@ -412,7 +413,7 @@ input.floating-input:focus {
 
 .gh-project-url--container {
   background-color: #FFF;
-  border: 1px solid #cccccc;
+  border: 1px solid #CCC;
   height: 20px;
   padding: 4px 6px;
   border-radius: 4px;
@@ -736,7 +737,7 @@ input.floating-input:focus {
 }
 .item-slider-widget .item-slider--container {
   background-color: white;
-  border: 1px solid #999999;
+  border: 1px solid #999;
   padding: 0 3px;
 }
 .item-slider-widget .item-slider--container .item {
@@ -764,7 +765,7 @@ input.floating-input:focus {
 }
 
 .content-container--wrapper {
-  border: 1px solid #34302d;
+  border: 1px solid #34302D;
   margin-top: -1px;
 }
 .content-container--wrapper:first-child {

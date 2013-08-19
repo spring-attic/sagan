@@ -87,7 +87,6 @@ body {
         height: 30px;
         border-radius: 30px;
         margin: 10px 0 0 1px;
-        top: 13px;
         background-color: $green;
         position: absolute;
         z-index: 1034;
@@ -102,9 +101,12 @@ body {
         background-image: $icon-sprite;
         width: 153px;
         height: 40px;
-        background-repeat: no-repeat;
-        background-size: 2230px;
-        background-position: -1px -1px;
+        -webkit-background-size: 1001px 837px;
+        -moz-background-size: 1001px 837px;
+        -o-background-size: 1001px 837px;
+        background-size: 1001px 837px;
+        // background-repeat: no-repeat;
+        background-position: 1000px 836px;
         position: absolute;
         z-index: 1035;
       }

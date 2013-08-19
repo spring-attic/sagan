@@ -2,8 +2,12 @@ $icon-sprite: url("../img/iconsprite.png");
 
 .icon {
   background-image: $icon-sprite;
-  background-repeat: no-repeat;
   display: inline-block !important;
+  &.icon-spring-logo-mobile {
+    background-position: 113px 30px;
+    width: 113px;
+    height: 30px;
+  }
   &.project--logo {
     &.logo-spring-framework {
       width: 135px;

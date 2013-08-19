@@ -96,6 +96,29 @@
         </div>
       </div>
     </header>
+
+
+    <!-- MOBILE NAVIGATION -->
+    <div class="mobile-navigation--wrapper">
+      <div class="navigation-drawer--container">
+        <div class="mobile-search--container">
+          <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
+            <input type="text" class="search-query search-form--form js-search-input" placeholder="Search for documentation, guides, and posts..." name="q" th:value="${searchForm != null ? searchForm.q : ''}" />
+            <button type="submit" class="search-form--submit"><i class="icon-search"></i></button>
+          </form>
+        </div>
+      </div>
+      <div class="mobile-nav">
+        <div class="nav-icon js-open-nav-drawer">
+          <i class="icon-reorder"></i>
+        </div>
+        <div class="header-center-icon">
+          <div class="icon icon-spring-logo-mobile"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN BODY CONTAINER -->
     <div class="header--container" layout:fragment="header-container">
       <div class="header--content" layout:fragment="header-content">
         <div class="row-fluid container-fluid">

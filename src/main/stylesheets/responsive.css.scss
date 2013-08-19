@@ -1,5 +1,112 @@
+$off-white: #eee;
+$black-green: #3A3C2F; 
+$lime: #8CC63F;
+$leaf: #4E681E;
+$green: #6db33f;
+$bark: #AF9A85;
+$light-grey: #ECEBEB;
+$medium-grey: #DEDEDE;
+$navy: #3A5056;
+$slate: #44474C;
+$mauve: #665A6B;
+$denim: #8395A1;
+$black-brown: #34302d;
+$secondary-font-family: 'Montserrat', sans-serif;
+$link-green: #5fa134;
+$icon-sprite: url("../img/iconsprite.png");
+
+.mobile-navigation--wrapper {
+  display: none;
+}
+
 @media (max-width: 800px) {
+  .viewport {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
   .header-web {
     display: none;
+  }
+  .mobile-navigation--wrapper {
+    display: block;
+    .navigation-drawer--container {
+      position: absolute;
+      top: 0;
+      right: 15%;
+      bottom: 0;
+      left: 0;
+      background-color: $black-brown;
+      z-index: 999;
+      box-shadow: inset -1px 0px 2px rgba(0, 0, 0, 0.3);
+
+      transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
+      -moz-transform: translateX(-100%);
+      -ms-transform: translateX(-100%);
+      -o-transform: translateX(-100%);
+
+      transition: all 0.25s;
+      -webkit-transition: all 0.25s;
+      -moz-transition: all 0.25s;
+      -ms-transition: all 0.25s;
+      -o-transition: all 0.25s;
+      &.js-open {
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+      }
+    }
+
+    .mobile-nav {
+      background-color: $black-brown;
+      height: 50px;
+      text-align: center;
+      transition: all 0.25s;
+      -webkit-transition: all 0.25s;
+      -moz-transition: all 0.25s;
+      -ms-transition: all 0.25s;
+      -o-transition: all 0.25s;
+      .nav-icon {
+        position: absolute;
+        padding: 13px;
+        & [class^=icon-] {
+          color: $off-white;
+          font-size: 21px;
+        }
+      }
+      .header-center-icon {
+        display: inline-block;
+        padding: 9px 0 0;
+      }
+
+      &.js-slide-right {
+        transform: translateX(85%);
+        -webkit-transform: translateX(85%);
+        -moz-transform: translateX(85%);
+        -ms-transform: translateX(85%);
+        -o-transform: translateX(85%);
+      }
+    }
+  }
+  .body--container {
+    transition: all 0.25s;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    -ms-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    &.js-slide-right {
+      transform: translateX(85%);
+      -webkit-transform: translateX(85%);
+      -moz-transform: translateX(85%);
+      -ms-transform: translateX(85%);
+      -o-transform: translateX(85%);
+    }
   }
 }
