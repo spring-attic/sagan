@@ -10,10 +10,6 @@
         <a th:href="@{/blog}">All Posts</a>
         <a th:href="@{/blog.atom}" class="pull-right"><i class="icon-rss"></i></a>
       </li>
-      <li th:class="${beans.uih.blogClass(activeCategory?:'','Broadcasts')}">
-        <a th:href="@{/blog/broadcasts}">Broadcasts</a>
-        <a th:href="@{/blog/broadcasts.atom}" class="pull-right"><i class="icon-rss"></i></a>
-      </li>
       <li th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName)}">
         <a th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}">Engineering</a>
         <a th:href="@{'/blog/category/'+${category.urlSlug}}+'.atom'" class="pull-right"><i class="icon-rss"></i></a>
