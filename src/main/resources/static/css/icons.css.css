@@ -118,3 +118,7 @@
 .icon.icon-social-twitter:hover {
   background-position: -84px -143px;
 }
+
+i.icon {
+  background-image: none;
+}

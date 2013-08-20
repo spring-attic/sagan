@@ -340,3 +340,47 @@
 .project-additional-resource--wrapper ul:last-child {
   margin-bottom: 0;
 }
+
+.github-fork-ribbon--wrapper {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  overflow: hidden;
+  margin-top: -102px;
+  z-index: 9999;
+  right: 0;
+}
+.github-fork-ribbon--wrapper .github-fork-ribbon {
+  position: absolute;
+  padding: 2px 0;
+  background-color: #34302d;
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
+  z-index: 9999;
+  top: 42px;
+  right: -43px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+.github-fork-ribbon--wrapper .github-fork-ribbon a {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #f1f1f1;
+  text-decoration: none;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 200px;
+  line-height: 20px;
+  display: inline-block;
+  padding: 2px 0;
+  border: 1px dotted rgba(255, 255, 255, 0.75);
+  border-width: 1px 0;
+}
+.github-fork-ribbon--wrapper .github-fork-ribbon a i {
+  font-size: 23px;
+  vertical-align: middle;
+  margin: 0 3px 0 0;
+  color: black;
+}
