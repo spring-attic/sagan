@@ -114,7 +114,11 @@ $(function () {
     moveItemSlider();
   });
 
-  
+  $(".js-open-nav-drawer").click(function() {
+    $(".navigation-drawer--container").addClass("js-open");
+    $(".body--container").addClass("js-slide-right");
+    $(".mobile-nav").addClass("js-slide-right");
+  });
 
 });
 
