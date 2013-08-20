@@ -19,7 +19,8 @@
             <table class='table dashboard--members'>
                 <tr th:each="member : ${members}" layout:fragment="post-row">
                     <td>
-                        <a th:text="${member.name}" th:href="@{'/admin/team/'+${member.username}}">Member Name</a>
+                        <a th:text="(${member.name}?:'') + ' (' + ${member.username}+ ')'"
+						   th:href="@{'/admin/team/'+${member.username}}">Full Name (username)</a>
                     </td>
                 </tr>
             </table>

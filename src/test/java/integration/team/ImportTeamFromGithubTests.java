@@ -1,43 +1,57 @@
 package integration.team;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import integration.IntegrationTestBase;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.site.domain.team.MemberProfile;
+import org.springframework.site.domain.team.TeamImporter;
 import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.site.test.FixtureLoader;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.social.github.api.GitHub;
+import org.springframework.social.github.api.GitHubUser;
+import org.springframework.web.client.RestOperations;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 public class ImportTeamFromGithubTests extends IntegrationTestBase {
 
 	@Autowired
 	private TeamRepository teamRepository;
 
+	@Autowired
+	private TeamImporter teamImporter;
+
+	private GitHub gitHub = mock(GitHub.class);
+
+	private ObjectMapper mapper = new ObjectMapper();
+
 	@Before
 	public void setUp() throws Exception {
+		RestOperations restOperations = mock(RestOperations.class);
+		given(gitHub.restOperations()).willReturn(restOperations);
+
 		String membersJson = FixtureLoader.load("/fixtures/github/ghTeamInfo.json");
-		stubRestClient.putResponse("/orgs/springframework-meta/members", membersJson);
+		GitHubUser[] gitHubUsers = mapper.readValue(membersJson, GitHubUser[].class);
+		ResponseEntity<GitHubUser[]> responseEntity = new ResponseEntity<>(gitHubUsers, HttpStatus.OK);
+
+		given(restOperations.getForEntity("https://api.github.com/teams/435080/members", GitHubUser[].class)).willReturn(responseEntity);
+
 		stubRestClient.putResponse("/users/jdoe", FixtureLoader.load("/fixtures/github/ghUserProfile-jdoe.json"));
 		stubRestClient.putResponse("/users/asmith", FixtureLoader.load("/fixtures/github/ghUserProfile-asmith.json"));
 	}
 
 	@Test
 	public void importAddsNewTeamMembers() throws Exception {
-		mockMvc.perform(post("/admin/team/github_import")).andExpect(new ResultMatcher() {
-			@Override
-			public void match(MvcResult result) {
-				String redirectedUrl = result.getResponse().getRedirectedUrl();
-				assertThat(redirectedUrl, equalTo("/admin/team"));
-			}
-		});
+		teamImporter.importTeamMembers(gitHub);
 
 		MemberProfile john = teamRepository.findByGithubId(123L);
 		assertThat(john, not(nullValue()));
@@ -54,20 +68,14 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 	}
 
 	@Test
-	public void importUpdatesExistingTeamMembers() throws Exception {
+	public void importUpdatesExistingTeamMembersGithubUsername() throws Exception {
 		MemberProfile profile = new MemberProfile();
 		profile.setGithubId(123L);
 		profile.setGithubUsername("oldusername");
 		profile.setUsername("oldusername");
 		teamRepository.save(profile);
 
-		mockMvc.perform(post("/admin/team/github_import")).andExpect(new ResultMatcher() {
-			@Override
-			public void match(MvcResult result) {
-				String redirectedUrl = result.getResponse().getRedirectedUrl();
-				assertThat(redirectedUrl, equalTo("/admin/team"));
-			}
-		});
+		teamImporter.importTeamMembers(gitHub);
 
 		MemberProfile updatedProfile = teamRepository.findByGithubId(123L);
 		assertThat(updatedProfile, not(nullValue()));
@@ -85,13 +93,7 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 		profile.setHidden(false);
 		teamRepository.save(profile);
 
-		mockMvc.perform(post("/admin/team/github_import")).andExpect(new ResultMatcher() {
-			@Override
-			public void match(MvcResult result) {
-				String redirectedUrl = result.getResponse().getRedirectedUrl();
-				assertThat(redirectedUrl, equalTo("/admin/team"));
-			}
-		});
+		teamImporter.importTeamMembers(gitHub);
 
 		MemberProfile updatedProfile = teamRepository.findByGithubId(456L);
 		assertThat(updatedProfile, not(nullValue()));

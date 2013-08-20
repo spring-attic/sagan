@@ -16,9 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-//@ComponentScan({
-//		"org.springframework.site.domain.guides",
-//		"org.springframework.site.domain.services"})
 public class GitHubConfiguration {
 
 	@Value("${GITHUB_CLIENT_ID:${github.client.id:none}}")
@@ -32,8 +29,7 @@ public class GitHubConfiguration {
 
 	@Bean
 	public GitHubConnectionFactory gitHubConnectionFactory() {
-		GitHubConnectionFactory factory = new GitHubConnectionFactory(githubClientId,
-				githubClientSecret);
+		GitHubConnectionFactory factory = new GitHubConnectionFactory(githubClientId, githubClientSecret);
 		factory.setScope("user");
 		return factory;
 	}

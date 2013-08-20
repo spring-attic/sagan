@@ -78,18 +78,26 @@ public class SecurityConfiguration {
 		}
 
 		@Bean
-		public ProviderSignInController providerSignInController(
-				GitHubConnectionFactory connectionFactory) {
-			ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
+		public ProviderSignInController providerSignInController(GitHubConnectionFactory connectionFactory,
+																 ConnectionFactoryRegistry registry,
+																 InMemoryUsersConnectionRepository repository) {
+
 			registry.addConnectionFactory(connectionFactory);
-			// TODO: do we need this at all?
-			InMemoryUsersConnectionRepository repository = new InMemoryUsersConnectionRepository(
-					registry);
 			repository.setConnectionSignUp(new RemoteUsernameConnectionSignUp());
 			ProviderSignInController controller = new ProviderSignInController(registry, repository,
 					new GithubAuthenticationSigninAdapter(SIGNIN_SUCCESS_PATH, signInService));
 			controller.setSignInUrl("/signin?error=access_denied");
 			return controller;
+		}
+
+		@Bean
+		public ConnectionFactoryRegistry connectionFactoryRegistry() {
+			return new ConnectionFactoryRegistry();
+		}
+
+		@Bean
+		public InMemoryUsersConnectionRepository inMemoryUsersConnectionRepository(ConnectionFactoryRegistry registry) {
+			return new InMemoryUsersConnectionRepository(registry);
 		}
 
 	}
