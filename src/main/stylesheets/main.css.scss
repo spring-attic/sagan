@@ -851,6 +851,35 @@ input.floating-input {
     text-align: center;
     margin: 0;
   }
+  .content-container--header {
+    background-color: #34302D;
+    .content-container--filter {
+      border-radius: 0;
+      box-shadow: none;
+      margin: 9px 20px;
+      font-size: 18px;
+      line-height: 22px;
+      padding: 8px;
+      width: 28.4%;
+       &::-webkit-input-placeholder {
+          font-style: italic;
+          color: #999;
+        }
+        &:-moz-placeholder {
+          font-style: italic;
+          color: #999;
+        }
+        &::-moz-placeholder {
+          font-style: italic;
+          color: #999;
+        }
+        &:-ms-input-placeholder {
+          font-style: italic;
+          color: #999;
+        }
+    } 
+  }
+   
   .content-items--container {
     padding: 20px;
   }
