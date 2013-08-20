@@ -42,7 +42,7 @@ public class TeamController {
 
 	@RequestMapping(value = "", method = {GET, HEAD})
 	public String showTeam(Model model) throws IOException {
-		List<MemberProfile> profiles = teamService.fetchVisibleMembers();
+		List<MemberProfile> profiles = teamService.fetchActiveMembers();
 		model.addAttribute("profiles", profiles);
 		List<TeamLocation> teamLocations = new ArrayList<>();
 		for (MemberProfile profile : profiles) {

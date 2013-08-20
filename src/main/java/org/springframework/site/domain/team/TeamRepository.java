@@ -14,9 +14,10 @@ public interface TeamRepository extends JpaRepository<MemberProfile, Long> {
 	MemberProfile findByGithubId(Long githubId);
 	MemberProfile findByUsername(String username);
 
-	List<MemberProfile> findByHidden(boolean b);
+	List<MemberProfile> findByHiddenOrderByNameAsc(boolean hidden);
 
 	@Modifying(clearAutomatically = true)
 	@Query("update MemberProfile p set p.hidden = true where p.githubId not in :ids")
 	int showOnlyTeamMembersWithIds(@Param("ids") List<Long> ids);
+
 }

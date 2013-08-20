@@ -78,8 +78,12 @@ public class TeamService {
 		return teamRepository.findAll();
 	}
 
-	public List<MemberProfile> fetchVisibleMembers() {
-		return teamRepository.findByHidden(false);
+	public List<MemberProfile> fetchActiveMembers() {
+		return teamRepository.findByHiddenOrderByNameAsc(false);
+	}
+
+	public List<MemberProfile> fetchHiddenMembers() {
+		return teamRepository.findByHiddenOrderByNameAsc(true);
 	}
 
 	public MemberProfile createOrUpdateMemberProfile(Long githubId, String username, String avatarUrl, String name) {

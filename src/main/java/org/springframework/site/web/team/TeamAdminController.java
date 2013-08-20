@@ -37,7 +37,8 @@ public class TeamAdminController {
 
 	@RequestMapping(value = "/admin/team", method = {GET, HEAD})
 	public String getTeamAdminPage(Model model) {
-		model.addAttribute("members", teamService.fetchAllProfiles());
+		model.addAttribute("activeMembers", teamService.fetchActiveMembers());
+		model.addAttribute("hiddenMembers", teamService.fetchHiddenMembers());
 		return "admin/team/index";
 	}
 
