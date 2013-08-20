@@ -102,6 +102,7 @@ public class TeamService {
 	}
 
 	public void showOnlyTeamMembersWithIds(List<Long> userIds) {
-		teamRepository.showOnlyTeamMembersWithIds(userIds);
+		teamRepository.activateTeamMembers(userIds);
+		teamRepository.hideTeamMembersNotInIds(userIds);
 	}
 }

@@ -85,7 +85,24 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 	}
 
 	@Test
-	public void importHidesExistingMembersNoLongerOnTheTeam() throws Exception {
+	public void importWillActivateHiddenMembersThatAreOnTheGithubTeam() throws Exception {
+		MemberProfile profile = new MemberProfile();
+		profile.setGithubId(123L);
+		profile.setGithubUsername("jdoe");
+		profile.setUsername("jdoe");
+		profile.setHidden(true);
+		teamRepository.save(profile);
+
+		teamImporter.importTeamMembers(gitHub);
+
+		MemberProfile updatedProfile = teamRepository.findByGithubId(123L);
+		assertThat(updatedProfile, not(nullValue()));
+		assertThat(updatedProfile.getUsername(), equalTo("jdoe"));
+		assertThat(updatedProfile.isHidden(), equalTo(false));
+	}
+
+	@Test
+	public void importHidesActiveMembersNoLongerOnTheTeam() throws Exception {
 		MemberProfile profile = new MemberProfile();
 		profile.setGithubId(456L);
 		profile.setGithubUsername("quitter");
@@ -98,6 +115,21 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 		MemberProfile updatedProfile = teamRepository.findByGithubId(456L);
 		assertThat(updatedProfile, not(nullValue()));
 		assertThat(updatedProfile.getGithubUsername(), equalTo("quitter"));
+		assertThat(updatedProfile.isHidden(), equalTo(true));
+	}
+
+	@Test
+	public void importHidesActiveMembersNoLongerOnTheTeamWithoutAGithubId() throws Exception {
+		MemberProfile profile = new MemberProfile();
+		profile.setGithubUsername("quitter");
+		profile.setUsername("quitter");
+		profile.setHidden(false);
+		teamRepository.save(profile);
+
+		teamImporter.importTeamMembers(gitHub);
+
+		MemberProfile updatedProfile = teamRepository.findByUsername("quitter");
+		assertThat(updatedProfile, not(nullValue()));
 		assertThat(updatedProfile.isHidden(), equalTo(true));
 	}
 
