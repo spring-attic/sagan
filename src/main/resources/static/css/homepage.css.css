@@ -1,160 +1,137 @@
-.homepage--container {
-  min-height: 425px;
-}
-.homepage--container .homepage-carousel {
-  position: absolute;
-  height: 425px;
-  left: 0;
-  width: 100%;
-  top: 74px;
-}
-.homepage--container .homepage-carousel .carousel-item--wrapper {
-  width: 100%;
-  height: 425px;
-  top: 0;
-  left: 0;
+.homepage-billboard {
+  background-image: url("../img/homepage-bg.png");
   background-size: cover;
   background-repeat: no-repeat;
-}
-.homepage--container .homepage-carousel .carousel-item--wrapper.carousel-laptop {
-  background-image: url("../img/carousel-laptop-bg.png");
-}
-.homepage--container .homepage-carousel .carousel-item--wrapper.carousel-people {
-  background-image: url("../img/carousel-people-bg.png");
-}
-.homepage--container .homepage-carousel .carousel-item--wrapper.carousel-seminar {
-  background-image: url("../img/carousel-seminar-bg.png");
-}
-.homepage--container .homepage-carousel .carousel-item--wrapper.carousel-social {
-  background-image: url("../img/carousel-social-bg.png");
-}
-.homepage--container .homepage-carousel .carousel-item--container {
-  padding: 125px 0;
-  color: white;
-}
-.homepage--container .homepage-carousel .carousel-item--container a {
-  color: white;
-}
-.homepage--container .homepage-carousel .carousel-item--container .homepage--title {
-  font-size: 48px;
-  line-height: 48px;
-  margin-bottom: 30px;
-  font-family: "Montserrat", sans-serif;
-}
-.homepage--container .homepage-carousel .carousel-item--container .homepage--subtitle {
-  margin: -21px 0 30px;
-  font-size: 18px;
-  line-height: 27px;
-  margin-bottom: 30px;
-}
-.homepage--container .homepage-carousel .carousel-item--container .homepage--text {
-  font-size: 18px;
-  line-height: 27px;
-  margin-bottom: 30px;
-}
-.homepage--container .homepage-carousel .carousel-item--container .homepage--call-to-action {
-  text-transform: uppercase;
-}
-.homepage--container .homepage-carousel .carousel-item--container .homepage-blog--meta-data {
-  text-transform: uppercase;
-  font-size: 12px;
-  line-height: 12px;
-  margin-bottom: 6px;
-}
-.homepage--container .homepage-carousel .carousel-item--container .homepage-blog--title {
-  font-family: "Montserrat", sans-serif;
-  font-size: 27px;
-  line-height: 37px;
-  margin-bottom: 15px;
-}
-.homepage--container .homepage-carousel .carousel-item--container .homepage-blog--preview {
-  font-size: 15px;
-  line-height: 23px;
-  margin-bottom: 15px;
-}
-.homepage--container .homepage-carousel .carousel-item--container .homepage-blog--read-more {
-  text-transform: uppercase;
-}
-.homepage--container .homepage-carousel .social-btn {
-  background-image: url("../img/iconsprite.png");
-  background-repeat: no-repeat;
-  display: inline-block;
-  width: 45px;
-  height: 45px;
-  margin: 0 32px 0 0;
-  background-size: 2780px;
-  opacity: 0.75;
-}
-.homepage--container .homepage-carousel .social-btn:hover {
-  opacity: 1;
-}
-.homepage--container .homepage-carousel .social-btn.twitter {
-  background-position: -1px -178px;
-}
-.homepage--container .homepage-carousel .social-btn.googleplus {
-  background-position: -1px -273px;
-}
-.homepage--container .homepage-carousel .social-btn.linkedin {
-  background-position: -1px -370px;
-}
-.homepage--container .homepage-carousel .social-btn.facebook {
-  background-position: -1px -464px;
-}
-.homepage--container .homepage-carousel .social-btn.youtube {
-  background-position: -1px -560px;
-}
-.homepage--container .carousel-indicators {
-  left: 50.5%;
-  top: 45px;
-}
-.homepage--container .carousel-indicators li {
-  width: 26px;
-  height: 6px;
-  margin-right: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 0;
-  background-color: transparent;
-  cursor: pointer;
-}
-.homepage--container .carousel-indicators li.active {
-  border: 2px solid #34302d;
-  background-color: #34302d;
-}
-.homepage--container .carousel-control {
-  background-color: transparent;
-  border: none;
-  font-size: 30px;
-  top: 50%;
-}
-.homepage--container .homepage--body {
-  margin-top: 325px;
-  padding: 60px 0;
-}
-.homepage--container .homepage--body .homepage--key-feature {
+  height: 500px;
   text-align: center;
-  color: #f1f1f1;
-  background-color: #34302d;
-  padding: 40px;
-  font-family: "Montserrat", sans-serif;
 }
-.homepage--container .homepage--body .homepage--key-feature .key-feature--icon {
-  border: 6px solid #f1f1f1;
+.homepage-billboard .billboard--container {
+  margin-top: 60px;
+}
+.homepage-billboard .homepage-title--container {
+  margin-top: 66px;
+}
+.homepage-billboard .homepage-title--container .homepage-title {
+  color: white;
   font-size: 30px;
   line-height: 30px;
+  background-color: rgba(52, 48, 45, 0.6);
   display: inline-block;
-  padding: 25px;
-  margin-bottom: 40px;
+  padding: 10px 20px;
 }
-.homepage--container .homepage--body .homepage--key-feature .key-feature--title {
-  font-size: 15px;
-  line-height: 15px;
+.homepage-billboard .homepage-title--container .homepage-title:first-child {
+  padding: 15px 20px 2px;
+}
+.homepage-billboard .homepage-title--container .homepage-title:last-child {
+  padding: 0 20px 15px;
+}
+
+.homepage--body {
+  padding: 0;
+  margin: 400px 0 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.homepage--body .key-feature--wrapper {
+  background-color: #6db33f;
+  padding: 60px 0;
+}
+.homepage--body .key-feature--wrapper .key-feature--container {
+  text-align: center;
+  color: #f1f1f1;
+}
+.homepage--body .key-feature--wrapper .key-feature--container .key-feature--icon--container {
+  height: 88px;
+  text-align: center;
+  margin-bottom: 44px;
+}
+.homepage--body .key-feature--wrapper .key-feature--container .key-feature--title {
   text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  line-height: 30px;
+  margin-bottom: 20px;
+}
+.homepage--body .key-feature--wrapper .key-feature--container .key-feature--text {
+  font-size: 18px;
+  line-height: 28px;
+}
+.homepage--body .key-feature--wrapper .key-feature--container .key-feature--text.highlight {
+  text-transform: uppercase;
+}
+.homepage--body .offset-feature--container {
+  border-bottom: 1px solid #dddbda;
+  min-width: 1110px;
+}
+.homepage--body .offset-feature--container .feature--content {
+  padding: 90px 0;
+}
+.homepage--body .offset-feature--container .offset-feature--title {
+  font-size: 30px;
+  line-height: 30px;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 20px;
+}
+.homepage--body .offset-feature--container .offset-feature--text {
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 20px;
+}
+.homepage--body .offset-feature--container .offset-feature--link {
+  color: #5fa134;
+  font-size: 18px;
+  line-height: 18px;
+}
+.homepage--body .offset-feature--container .offset-feature--link i {
+  font-size: 18px;
+  line-height: 10px;
+  margin-left: 10px;
+  text-decoration: none;
+}
+.homepage--body .offset-feature--container.feature-guides {
+  background-image: url("../img/homepage-feature-guides.png");
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+}
+.homepage--body .offset-feature--container.feature-sts {
+  background-image: url("../img/homepage-feature-sts.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+.homepage--body .offset-feature--container.feature-projects {
+  background-image: url("../img/homepage-feature-projects.png");
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+}
+.homepage--body .offset-feature--container:last-child {
+  border: none;
+}
+.homepage--body .offset-feature--container:nth-child(even) {
+  background-color: #ebf1e7;
+}
+.homepage--body .support--wrapper {
+  background-color: #292624;
+  padding: 50px 0 60px;
+}
+.homepage--body .support--wrapper .support--container {
+  text-align: center;
+}
+.homepage--body .support--wrapper .support--container .icon {
   margin-bottom: 30px;
 }
-.homepage--container .homepage--body .homepage--key-feature .key-feature--text {
-  margin-bottom: 30px;
-}
-.homepage--container .homepage--body .homepage--key-feature .key-feature--call-to-action {
+.homepage--body .support--wrapper .support--container .support--title {
+  font-size: 18px;
+  line-height: 18px;
   text-transform: uppercase;
   color: #f1f1f1;
+  margin-bottom: 20px;
+}
+.homepage--body .support--wrapper .support--container .support-links a {
+  color: #5fa134;
+  padding: 0 20px;
+}
+
+.homepage-fix {
+  margin-top: 2194px;
 }

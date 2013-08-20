@@ -8,6 +8,11 @@ $icon-sprite: url("../img/iconsprite.png");
     width: 113px;
     height: 30px;
   }
+  &.icon-spring-logo-big {
+    width: 154px;
+    height: 154px;
+    background-position: 154px 191px;
+  }
   &.project--logo {
     &.logo-spring-framework {
       width: 135px;
@@ -120,6 +125,33 @@ $icon-sprite: url("../img/iconsprite.png");
     &:hover {
       background-position: -84px -143px;
     }
+  }
+  &.icon-build-anything {
+    width: 107px;
+    background-position: 107px 279px;
+    height: 88px;
+  }
+  &.icon-run-anywhere {
+    background-position: 120px 344px;
+    width: 120px;
+    height: 65px;
+    margin-top: 11px;
+  }
+  &.icon-rest-assured {
+    background-position: 253px 86px;
+    width: 86px;
+    height: 86px;
+    margin-top: 1px;
+  }
+  &.icon-community-support {
+    width: 97px;
+    height: 97px;
+    background-position: 257px 185px;
+  }
+  &.icon-professional-support {
+    width: 126px;
+    height: 97px;
+    background-position: 272px 282px;
   }
 }
 i.icon {
