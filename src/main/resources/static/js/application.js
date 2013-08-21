@@ -114,6 +114,10 @@ $(function () {
     moveItemSlider();
   });
 
+  window.addEventListener("orientationchange", function() {
+    var deviceHeight = $(window).height();
+    $(".viewport").height(deviceHeight).addClass("constrained");
+  }, false);
   $(".js-open-nav-drawer").click(function() {
     $(".navigation-drawer--container").addClass("js-open");
     $(".body--container").addClass("js-slide-right");
