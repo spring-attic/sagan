@@ -43,7 +43,7 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 		GitHubUser[] gitHubUsers = mapper.readValue(membersJson, GitHubUser[].class);
 		ResponseEntity<GitHubUser[]> responseEntity = new ResponseEntity<>(gitHubUsers, HttpStatus.OK);
 
-		given(restOperations.getForEntity("https://api.github.com/teams/435080/members", GitHubUser[].class)).willReturn(responseEntity);
+		given(restOperations.getForEntity("https://api.github.com/teams/{teamId}/members", GitHubUser[].class, "435080")).willReturn(responseEntity);
 
 		stubRestClient.putResponse("/users/jdoe", FixtureLoader.load("/fixtures/github/ghUserProfile-jdoe.json"));
 		stubRestClient.putResponse("/users/asmith", FixtureLoader.load("/fixtures/github/ghUserProfile-asmith.json"));
