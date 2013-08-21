@@ -10,9 +10,7 @@
 <div layout:fragment="content" class="container-fluid">
     <div class="row-fluid docs--header">
         <div class="span12">
-            <h1 class="index-page--title">Documentation Quick Reference</h1>
-
-            <div class="docs-icon pull-left"></div>
+            <h1 class="index-page--title">Spring Framework Documentation</h1>
             <p class="index-page--subtitle">
                 Looking for detailed reference or API docs for a particular Spring project? Then you've
                 come to the right place. If you're just getting to know Spring or tackling building
@@ -27,15 +25,15 @@
         </div>
         <div data-filterable-container>
             <div class="js-item-dropdown-widget--wrapper">
-                <h3 class="docs-section-title no-border">Spring Projects</h3>
+                <h3 class="content-section-title no-border">Spring Projects</h3>
                 <div layout:include="docs/_projects :: projects" th:with="projects=${activeProjects}"></div>
             </div>
             <div class="js-item-dropdown-widget--wrapper">
-                <h3 class="docs-section-title">Projects in Incubation</h3>
+                <h3 class="content-section-title">Projects in Incubation</h3>
                 <div layout:include="docs/_projects :: projects" th:with="projects=${incubatorProjects}"></div>
             </div>
             <div class="js-item-dropdown-widget--wrapper">
-                <h3 class="docs-section-title">Projects in the Attic</h3>
+                <h3 class="content-section-title">Projects in the Attic</h3>
                 <div layout:include="docs/_projects :: projects" th:with="projects=${atticProjects}"></div>
             </div>
         </div>

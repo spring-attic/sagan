@@ -1,6 +1,5 @@
 .guides-section--container {
   border: 1px solid #34302d;
-  padding: 40px;
   min-height: 284px;
   margin-top: 50px;
   display: block !important;
@@ -44,8 +43,8 @@
 }
 .guides-section--container .guide--container {
   display: inline-block;
-  width: 284px;
-  margin: 0 40px 20px 0;
+  width: 29.269%;
+  margin: 0 4.066% 20px 0;
   vertical-align: top;
 }
 .guides-section--container .guide--container .guide--title {

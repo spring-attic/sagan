@@ -818,6 +818,23 @@ input.floating-input:focus {
   font-style: italic;
   color: #999;
 }
+.content-container--wrapper .content-container--body {
+  padding: 0 20px;
+}
+.content-container--wrapper .content-section-title {
+  margin: 40px 20px 30px;
+  border-top: 1px solid #FFF;
+  padding-top: 40px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+.content-container--wrapper .content-section-title.no-border {
+  border: 0;
+  padding-top: 0;
+}
+.content-container--wrapper .content-section-title.no-margin {
+  margin: 40px 0 30px;
+}
 .content-container--wrapper .content-items--container {
   padding: 20px;
 }

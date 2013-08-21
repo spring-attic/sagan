@@ -7,9 +7,36 @@
 <body>
   <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container-fluid">
-    <h1 class="index-page--title">Spring Guides</h1>
+    <h1 class="index-page--title">Spring Framework Guides</h1>
     <p class="index-page--subtitle">The Cras justo odio, dapibus ac facilisis in, egestas eget quam. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper.</p>
-    <input type='text' id='doc_filter' autofocus="true"/>
+
+
+    <div class="row-fluid content-container--wrapper guides-section--container">
+      <div class="content-container--header">
+        <input type='text' id='doc_filter' autofocus="true" placeholder="Quick Filter" class="content-container--filter"/>
+      </div>
+      <div class="content-container--body">
+        <div data-filterable-container>
+          <div class="float-left icon icon-guides"></div>
+          <h3 class="content-section-title no-border no-margin">Getting Started Guides</h3>
+          <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          
+          <div th:each="guide : ${guides}" class="guide--container" th:attr="data-filterable=${guide.title}">
+            <a class="guide--title" href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/'}" th:text="${guide.title}">Building a RESTful Web Service</a>
+            <p class="guide--subtitle" th:text="${guide.subtitle}">Learn how to create a REST web service with Spring</p>
+          </div>
+
+          <h3 class="content-section-title no-margin">Tutorials</h3>
+          <div th:each="tutorial : ${tutorials}" class="guide--container" th:attr="data-filterable=${tutorial.title}">
+            <a class="guide--title" th:href="@{'/guides/tutorials/'+${tutorial.guideId}+'/'}" th:text="${tutorial.title}">Building a RESTful Web Service</a>
+            <p class="guide--subtitle" th:text="${tutorial.subtitle}">Learn how to create a REST web service with Spring </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+ <!--    <input type='text' id='doc_filter' autofocus="true"/>
     <div class="guides-section--wrapper">
       <div class="guides-section--container gs-guides--container" data-filterable-container>
         <div class="section-title--container">
@@ -43,7 +70,7 @@
   			  </div>
   		  </div>
   	  </div>
-    </div>
+    </div> -->
   </div>
 </body>
 </html>

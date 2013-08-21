@@ -879,7 +879,23 @@ input.floating-input {
         }
     } 
   }
-   
+  .content-container--body {
+    padding: 0 20px;
+  }
+  .content-section-title {
+    margin: 40px 20px 30px;
+    border-top: 1px solid #FFF;
+    padding-top: 40px;
+    font-family: $secondary-font-family;
+    font-weight: bold;
+    &.no-border {
+      border: 0;
+      padding-top: 0;
+    }
+    &.no-margin {
+      margin: 40px 0 30px;
+    }
+  }
   .content-items--container {
     padding: 20px;
   }

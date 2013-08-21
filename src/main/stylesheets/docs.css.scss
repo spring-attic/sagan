@@ -41,17 +41,6 @@ $icon-sprite: url("../img/iconsprite.png");
   .empty-project {
     margin-bottom: -40px;
   }
-  .docs-section-title {
-    margin: 40px 20px 30px;
-    border-top: 1px solid #FFF;
-    padding-top: 40px;
-    font-family: $secondary-font-family;
-    font-weight: bold;
-    &.no-border {
-      border: 0;
-      padding-top: 0;
-    }
-  }
 }
 
 .docs--item {
