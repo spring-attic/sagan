@@ -15,6 +15,7 @@
  */
 package org.springframework.site.web.configuration;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
@@ -128,12 +129,12 @@ public class ApplicationConfiguration {
 		return new DispatcherServlet();
 	}
 
-//	@Bean
-//	public SpringLiquibase springLiquibase(DataSource dataSource) {
-//		SpringLiquibase liquibase = new SpringLiquibase();
-//		liquibase.setDataSource(dataSource);
-//		liquibase.setChangeLog("classpath:db-changeset.yaml");
-//		return liquibase;
-//	}
+	@Bean
+	public SpringLiquibase springLiquibase(DataSource dataSource) {
+		SpringLiquibase liquibase = new SpringLiquibase();
+		liquibase.setDataSource(dataSource);
+		liquibase.setChangeLog("classpath:db-changeset.yaml");
+		return liquibase;
+	}
 
 }

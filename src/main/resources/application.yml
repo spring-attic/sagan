@@ -15,8 +15,6 @@ spring:
   template:
     mode: LEGACYHTML5
     cache: false
-  jpa:
-    ddl_auto: update
 
 security:
   basic:
