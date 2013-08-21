@@ -85,23 +85,6 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 	}
 
 	@Test
-	public void importWillActivateHiddenMembersThatAreOnTheGithubTeam() throws Exception {
-		MemberProfile profile = new MemberProfile();
-		profile.setGithubId(123L);
-		profile.setGithubUsername("jdoe");
-		profile.setUsername("jdoe");
-		profile.setHidden(true);
-		teamRepository.save(profile);
-
-		teamImporter.importTeamMembers(gitHub);
-
-		MemberProfile updatedProfile = teamRepository.findByGithubId(123L);
-		assertThat(updatedProfile, not(nullValue()));
-		assertThat(updatedProfile.getUsername(), equalTo("jdoe"));
-		assertThat(updatedProfile.isHidden(), equalTo(false));
-	}
-
-	@Test
 	public void importHidesActiveMembersNoLongerOnTheTeam() throws Exception {
 		MemberProfile profile = new MemberProfile();
 		profile.setGithubId(456L);
