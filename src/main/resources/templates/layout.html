@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:app="http://www.springframework.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <title>Layout</title>
+  <meta id="Viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}" href="../../bootstrap/css/bootstrap.min.css" />
   <!-- <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-responsive.css}" href="../../bootstrap/css/bootstrap-responsive.min.css" /> -->
   <link href='http://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -103,9 +104,41 @@
       <div class="navigation-drawer--container">
         <div class="mobile-search--container">
           <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
-            <input type="text" class="search-query search-form--form js-search-input" placeholder="Search for documentation, guides, and posts..." name="q" th:value="${searchForm != null ? searchForm.q : ''}" />
             <button type="submit" class="search-form--submit"><i class="icon-search"></i></button>
+            <input type="text" class="search-query search-form--form js-search-input" placeholder="Search..." name="q" th:value="${searchForm != null ? searchForm.q : ''}" />
           </form>
+        </div>
+        <div class="navigation-item-list">
+          <div th:class="${beans.uih.navClass(navSection?:'','index')}">
+            <a th:href="@{/}" href="/">
+              Home
+              <i class="icon-chevron-right pull-right"></i>
+            </a>
+          </div>
+          <div th:class="${beans.uih.navClass(navSection?:'','docs')}">
+            <a th:href="@{/docs}" href="docs/index.html">
+              Docs
+              <i class="icon-chevron-right pull-right"></i>
+            </a>
+          </div>
+          <div th:class="${beans.uih.navClass(navSection?:'','guides')}">
+            <a th:href="@{/guides}" href="guides/index.html">
+              Guides
+              <i class="icon-chevron-right pull-right"></i>
+            </a>
+          </div>
+          <div th:class="${beans.uih.navClass(navSection?:'','projects')}">
+            <a th:href="@{/projects}" href="projects/index.html">
+              Projects
+              <i class="icon-chevron-right pull-right"></i>
+            </a>
+          </div>
+          <div th:class="${beans.uih.navClass(navSection?:'','blog')}">
+            <a th:href="@{/blog}" href="blog/index.html">
+              Blog
+              <i class="icon-chevron-right pull-right"></i>
+            </a>
+          </div>
         </div>
       </div>
       <div class="mobile-nav">
@@ -113,7 +146,9 @@
           <i class="icon-reorder"></i>
         </div>
         <div class="header-center-icon">
-          <div class="icon icon-spring-logo-mobile"></div>
+          <a th:href="@{/}" href="/">
+            <div class="icon icon-spring-logo-mobile"></div>
+          </a>
         </div>
       </div>
     </div>

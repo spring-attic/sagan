@@ -118,8 +118,17 @@ $(function () {
     $(".navigation-drawer--container").addClass("js-open");
     $(".body--container").addClass("js-slide-right");
     $(".mobile-nav").addClass("js-slide-right");
-  });
 
+    var deviceHeight = $(window).height();
+    $(".viewport").height(deviceHeight).addClass("constrained");
+    $("#scrim").addClass("js-show js-open-mobile-nav");
+    $("#scrim").click(function() {
+      $(".navigation-drawer--container").removeClass("js-open");
+      $(".body--container").removeClass("js-slide-right");
+      $(".mobile-nav").removeClass("js-slide-right");
+      $(".viewport").removeClass("constrained");
+    });
+  });
 });
 
 
