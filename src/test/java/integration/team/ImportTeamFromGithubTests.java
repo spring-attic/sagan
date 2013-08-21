@@ -50,7 +50,7 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 	}
 
 	@Test
-	public void importAddsNewTeamMembers() throws Exception {
+	public void importAddsNewTeamMembersAndSetsThemToBeHidden() throws Exception {
 		teamImporter.importTeamMembers(gitHub);
 
 		MemberProfile john = teamRepository.findByGithubId(123L);
@@ -58,13 +58,13 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 		assertThat(john.getGithubUsername(), equalTo("jdoe"));
 		assertThat(john.getUsername(), equalTo("jdoe"));
 		assertThat(john.getName(), equalTo("John Doe"));
-		assertThat(john.isHidden(), equalTo(false));
+		assertThat(john.isHidden(), equalTo(true));
 
 		MemberProfile adam = teamRepository.findByGithubId(987L);
 		assertThat(adam, not(nullValue()));
 		assertThat(adam.getGithubUsername(), equalTo("asmith"));
 		assertThat(adam.getName(), equalTo("Adam Smith"));
-		assertThat(adam.isHidden(), equalTo(false));
+		assertThat(adam.isHidden(), equalTo(true));
 	}
 
 	@Test

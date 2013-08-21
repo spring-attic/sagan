@@ -96,6 +96,7 @@ public class TeamService {
 			profile.setUsername(username);
 			profile.setAvatarUrl(avatarUrl);
 			profile.setName(name);
+			profile.setHidden(true);
 		}
 
 		profile.setGithubUsername(username);
