@@ -18,7 +18,6 @@ import org.springframework.site.domain.projects.ProjectMetadataService;
 import org.springframework.site.domain.projects.ProjectMetadataYamlParser;
 import org.springframework.site.search.configuration.SearchClientConfiguration;
 import org.springframework.site.web.configuration.GitHubConfiguration;
-import org.springframework.site.web.configuration.SecurityConfiguration;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -33,8 +32,7 @@ import java.util.concurrent.Executors;
 		"org.springframework.site.domain",
 		"org.springframework.site.search"})
 @EnableScheduling
-@Import({ SearchClientConfiguration.class, GitHubConfiguration.class,
-		SecurityConfiguration.class })
+@Import({ SearchClientConfiguration.class, GitHubConfiguration.class })
 public class IndexerConfiguration {
 
 	public static void main(String[] args) {

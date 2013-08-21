@@ -4,6 +4,7 @@ import integration.IntegrationTestBase;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.site.domain.blog.Post;
@@ -49,6 +50,7 @@ public class BlogIndex_BroadcastTests extends IntegrationTestBase {
 	}
 
 	@Test
+	@Ignore // the broadcast category has been removed for the time being
 	public void viewBroadcastBlogPosts() throws Exception {
 		createManyPostsInNovember(2);
 

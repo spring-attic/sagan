@@ -129,3 +129,14 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: memberprofile
             constraintName: fk_post_memberprofile
+
+  - changeSet:
+      id: 2
+      author: nstreet_gsilva
+      changes:
+        - addColumn:
+            tableName: memberprofile
+            columns:
+              - column:
+                  name: jobtitle
+                  type: varchar(255)

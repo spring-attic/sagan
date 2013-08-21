@@ -51,7 +51,7 @@ public class TeamControllerTests {
 				.id(321L)
 				.build());
 
-		given(this.teamService.fetchVisibleMembers()).willReturn(members);
+		given(this.teamService.fetchActiveMembers()).willReturn(members);
 	}
 
 	@Test

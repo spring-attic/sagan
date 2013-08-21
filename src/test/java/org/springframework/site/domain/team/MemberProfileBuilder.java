@@ -11,6 +11,7 @@ public class MemberProfileBuilder {
 	private String bio;
 	private String avatarUrl;
 	private GeoLocation geoLocation;
+	private boolean hidden;
 
 	public MemberProfileBuilder() {
 		this.name = "Mr England";
@@ -19,6 +20,7 @@ public class MemberProfileBuilder {
 		this.bio = "I am interesting";
 		this.avatarUrl = null;
 		this.geoLocation = null;
+		this.hidden = false;
 	}
 
 	public static MemberProfileBuilder profile() {
@@ -65,6 +67,11 @@ public class MemberProfileBuilder {
 		return this;
 	}
 
+	public MemberProfileBuilder hidden(boolean hidden) {
+		this.hidden = hidden;
+		return this;
+	}
+
 	public MemberProfile build() {
 		MemberProfile profile = new MemberProfile();
 		profile.setName(name);
@@ -73,6 +80,7 @@ public class MemberProfileBuilder {
 		profile.setBio(bio);
 		profile.setAvatarUrl(avatarUrl);
 		profile.setGeoLocation(geoLocation);
+		profile.setHidden(hidden);
 		ReflectionTestUtils.setField(profile, "id", this.id);
 		return profile;
 	}

@@ -33,8 +33,7 @@
                 </div>
                 <h1 class="team-member--name" th:text="*{fullName}">First Last</h1>
                 <div class="team-member--sub-info">
-                  <!-- REPLACE WITH PROFILE.TITLE -->
-                  <p>Some Cool Title *NR</p>
+                  <p th:text="*{jobTitle}" th:unless="${#strings.isEmpty(profile.jobTitle)}">Rock Star</p>
                   <p th:text="*{location}" th:unless="${#strings.isEmpty(profile.location)}">Location</p>
                 </div>
                 <div class="team-member--bio" th:text="*{bio}">Subttitle Ligula Risus Tristique Pharetra</div>

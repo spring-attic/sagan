@@ -171,9 +171,10 @@ public class GitHubGuidesService implements GuidesService {
 	private Guide loadTutorial(String tutorialId, String repoName, String contentPath) {
 		String content = getGuideContent(contentPath);
 		String description = getGuideDescription(repoName);
+		String sidebar = getGuideSidebar(repoName);
 		String title = parseTitle(description);
 		String subTitle = parseSubTitle(description);
-		return new Guide(repoName, tutorialId, title, subTitle, content, "");
+		return new Guide(repoName, tutorialId, title, subTitle, content, sidebar);
 	}
 
 }

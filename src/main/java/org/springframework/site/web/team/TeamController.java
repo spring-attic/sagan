@@ -42,7 +42,7 @@ public class TeamController {
 
 	@RequestMapping(value = "", method = {GET, HEAD})
 	public String showTeam(Model model) throws IOException {
-		List<MemberProfile> profiles = teamService.fetchVisibleMembers();
+		List<MemberProfile> profiles = teamService.fetchActiveMembers();
 		model.addAttribute("profiles", profiles);
 		List<TeamLocation> teamLocations = new ArrayList<>();
 		for (MemberProfile profile : profiles) {
@@ -60,6 +60,9 @@ public class TeamController {
 		MemberProfile profile = teamService.fetchMemberProfileUsername(username);
 		if (profile == null) {
 			throw new EntityNotFoundException("Profile not found with Id=" + username);
+		}
+		if (profile.isHidden()) {
+			throw new EntityNotFoundException("Profile not active: " + username);
 		}
 		model.addAttribute("profile", profile);
 		Page<Post> posts = blogService.getPublishedPostsForMember(profile, PageableFactory.forLists(1));

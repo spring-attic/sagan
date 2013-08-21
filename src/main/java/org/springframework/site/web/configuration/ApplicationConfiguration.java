@@ -45,8 +45,8 @@ import java.io.InputStream;
 
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan(basePackages = { "org.springframework.site.web",
-		"org.springframework.site.domain", "org.springframework.site.search" })
+@ComponentScan(basePackages = {"org.springframework.site.web",
+		"org.springframework.site.domain", "org.springframework.site.search"})
 public class ApplicationConfiguration {
 
 	public static void main(String[] args) {
@@ -54,7 +54,7 @@ public class ApplicationConfiguration {
 	}
 
 	@Configuration
-	@Profile({ "development", "staging", "production" })
+	@Profile({"development", "staging", "production"})
 	protected static class CloudFoundryDataSourceConfiguration {
 		@Bean
 		public DataSource dataSource() {
@@ -67,7 +67,7 @@ public class ApplicationConfiguration {
 	}
 
 	@Configuration
-	@Profile({ "local_postgres" })
+	@Profile({"local_postgres"})
 	protected static class PostgresConfiguration {
 		@Bean
 		public DataSource dataSource() {

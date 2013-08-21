@@ -48,6 +48,7 @@ public class TeamService {
 		existingProfile.setTwitterUsername(profile.getTwitterUsername());
 		existingProfile.setBio(profile.getBio());
 		existingProfile.setName(profile.getName());
+		existingProfile.setJobTitle(profile.getJobTitle());
 		existingProfile.setTwitterUsername(profile.getTwitterUsername());
 		existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
 		existingProfile.setLanyrdUsername(profile.getLanyrdUsername());
@@ -78,8 +79,12 @@ public class TeamService {
 		return teamRepository.findAll();
 	}
 
-	public List<MemberProfile> fetchVisibleMembers() {
-		return teamRepository.findByHidden(false);
+	public List<MemberProfile> fetchActiveMembers() {
+		return teamRepository.findByHiddenOrderByNameAsc(false);
+	}
+
+	public List<MemberProfile> fetchHiddenMembers() {
+		return teamRepository.findByHiddenOrderByNameAsc(true);
 	}
 
 	public MemberProfile createOrUpdateMemberProfile(Long githubId, String username, String avatarUrl, String name) {
@@ -91,6 +96,7 @@ public class TeamService {
 			profile.setUsername(username);
 			profile.setAvatarUrl(avatarUrl);
 			profile.setName(name);
+			profile.setHidden(true);
 		}
 
 		profile.setGithubUsername(username);
@@ -98,6 +104,6 @@ public class TeamService {
 	}
 
 	public void showOnlyTeamMembersWithIds(List<Long> userIds) {
-		teamRepository.showOnlyTeamMembersWithIds(userIds);
+		teamRepository.hideTeamMembersNotInIds(userIds);
 	}
 }
