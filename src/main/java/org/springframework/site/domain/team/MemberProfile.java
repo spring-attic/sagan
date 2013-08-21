@@ -16,6 +16,9 @@ public class MemberProfile {
 	private String name;
 
 	@Column(nullable = true)
+	private String jobTitle;
+
+	@Column(nullable = true)
 	private String location;
 
 	@Column(nullable = true)
@@ -66,6 +69,18 @@ public class MemberProfile {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getFullName() {
+		return name == null ? getUsername() : name;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+
+	public String getJobTitle() {
+		return jobTitle;
 	}
 
 	public String getLocation() {
@@ -138,10 +153,6 @@ public class MemberProfile {
 
 	public void setLanyrdUsername(String lanyrdUsername) {
 		this.lanyrdUsername = lanyrdUsername;
-	}
-
-	public String getFullName() {
-		return name == null ? getUsername() : name;
 	}
 
 	public Link getTwitterLink() {

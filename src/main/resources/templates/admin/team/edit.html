@@ -9,6 +9,7 @@
 <div layout:fragment="content" class="container">
     <form th:action="@{${formAction}}" action="#" method="post" th:object="${profile}">
         <label for="name">Name:<input id="name" type="text" th:field="*{name}" name="name" /></label>
+        <label for="jobTitle">Job Title:<input id="jobTitle" type="text" th:field="*{jobTitle}" name="jobTitle" /></label>
 		<label>Username: <span id="username" th:text="*{username}"></span></label>
 		<label for="location">Location:<input id="location" type="text" th:field="*{location}" name="location" /></label>
 		<label for="geoLocation">GeoLocation (lat,long):<input id="geoLocation" type="text" th:field="*{geoLocation}" name="geoLocation" /></label>

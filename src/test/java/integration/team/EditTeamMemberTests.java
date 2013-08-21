@@ -43,6 +43,7 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 		MemberProfile existingProfile = new MemberProfile();
 		existingProfile.setUsername("some-guy");
 		existingProfile.setName("Some");
+		existingProfile.setJobTitle("Engineer");
 		existingProfile.setLocation("London");
 		existingProfile.setBio("I am just a guy");
 		existingProfile.setGithubUsername("gh-some-guy");
@@ -96,6 +97,7 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 	private void saveProfile(String editTeamUri) throws Exception {
 		MockHttpServletRequestBuilder requestBuilder = put(editTeamUri).principal(principal);
 		requestBuilder.param("name", "Some_ Guy_");
+		requestBuilder.param("jobTitle", "Rock Star");
 		requestBuilder.param("location", "London_");
 		requestBuilder.param("bio", "I am just a guy_");
 		requestBuilder.param("twitterUsername", "tw_some-guy_");
@@ -111,6 +113,7 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 		assertEquals("some-guy", profile.getUsername());
 		assertEquals("gh-some-guy", profile.getGithubUsername());
 		assertEquals("Some_ Guy_", profile.getName());
+		assertEquals("Rock Star", profile.getJobTitle());
 		assertEquals("London_", profile.getLocation());
 		assertEquals("I am just a guy_", profile.getBio());
 		assertEquals("tw_some-guy_", profile.getTwitterUsername());
