@@ -57,6 +57,19 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
 	}
 
 	@Test
+	public void getTeamMemberPage_404sWhenMemberIsHidden() throws Exception {
+		MemberProfile profile = new MemberProfile();
+		profile.setName("Hidden User");
+		profile.setGithubUsername("hidden-user");
+		profile.setUsername("hidden-user");
+		profile.setHidden(true);
+
+		teamRepository.save(profile);
+
+		this.mockMvc.perform(get("/team/hidden-user")).andExpect(status().isNotFound());
+	}
+
+	@Test
 	public void getTeamMemberPageShowsPosts() throws Exception {
 		MemberProfile profile = new MemberProfile();
 		profile.setName("First Last");
