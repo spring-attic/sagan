@@ -81,7 +81,7 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 		this.mockMvc.perform(get(editTeamUri).principal(principal))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("First Last")));
+				.andExpect(content().string(containsString("Name")));
 	}
 
 	@Test

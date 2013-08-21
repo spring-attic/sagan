@@ -916,3 +916,48 @@ input.floating-input {
     list-style-type: none;
   }
 }
+
+.admin-profile--form {
+  .admin-profile--field {
+    padding: 7px 0;
+    label {
+      display: inline-block;
+      width: 250px;
+      font-family: $secondary-font-family;
+      vertical-align: middle;
+    }
+    input, textarea {
+      width: 30%;
+      margin: 0
+    }
+    .push-right {
+      margin-left: 254px;
+    }
+    .image-note {
+      display: inline-block;
+      width: 10%;
+      vertical-align: bottom;
+      margin-left: 1%;
+      font-size: .9em;
+      line-height: 1.2em;
+    }
+    .note {
+      display: inline-block;
+      vertical-align: middle;
+      color: #666;
+      margin-left: 15px;
+      font-size: 12px;
+    }
+    &.bio {
+      label {
+        vertical-align: top;
+      }
+      textarea {
+        height: 150px;
+      }
+    }
+    &.submit-form {
+      margin-top: 30px;
+    }
+  }
+}
