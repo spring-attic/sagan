@@ -15,6 +15,9 @@ spring:
   template:
     mode: LEGACYHTML5
     cache: false
+  jpa:
+    hibernate:
+      namingstrategy: org.hibernate.cfg.EJB3NamingStrategy
 
 security:
   basic:
