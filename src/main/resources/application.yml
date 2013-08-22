@@ -49,6 +49,9 @@ spring:
   profiles: indexer
   main:
     sources: org.springframework.site.indexer.configuration.IndexerConfiguration
+search:
+  indexer:
+    delay: 0
 server:
   port: 9000
 
@@ -58,7 +61,6 @@ spring:
   profiles: development
 search:
   indexer:
-    delay: 0
     base_url: https://sagan.cfapps.io
 elasticsearch:
   client:
@@ -71,7 +73,6 @@ spring:
   profiles: staging
 search:
   indexer:
-    delay: 0
     base_url: https://sagan-staging.cfapps.io
 elasticsearch:
   client:
@@ -84,7 +85,6 @@ spring:
   profiles: production
 search:
   indexer:
-    delay: 0
     base_url: https://sagan-production.cfapps.io
 elasticsearch:
   client:

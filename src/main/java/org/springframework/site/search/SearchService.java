@@ -42,6 +42,7 @@ public class SearchService {
 		if (this.useRefresh) {
 			newIndexBuilder.refresh(true);
 		}
+		logger.debug("Indexing " + entry.getPath());
 		execute(newIndexBuilder.build());
 	}
 
