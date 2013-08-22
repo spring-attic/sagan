@@ -10,6 +10,8 @@ info:
     name: ${project.name}
     description: ${project.description}
     version: ${project.version}
+  spring:
+    profiles: ${spring.profiles.active:default} 
 
 spring:
   thymeleaf:
@@ -22,6 +24,8 @@ spring:
 security:
   basic:
     path: ""
+    user:
+      password: ${ADMIN_PASSWORD:brianfromkyrgyzstan}
 
 github:
   client:
