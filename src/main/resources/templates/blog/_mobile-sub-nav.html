@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html 
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:app="http://www.springframework.org"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+  <div layout:fragment="mobile-sub-nav">
+    <div class="mobile-sub-nav--wrapper mobile-only">
+      <ul class="mobile-sub-nav--container">
+        <li th:class="${beans.uih.blogClass(activeCategory?:'','All Posts')}">
+          <a th:href="@{/blog}">
+            <i class="icon-volume-up"></i>
+          </a>
+        </li>
+        <li th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName)}">
+          <a th:href="@{'/blog/category/'+${category.urlSlug}}" th:class="${category.displayName}">
+            <i class="icon-volume-up"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

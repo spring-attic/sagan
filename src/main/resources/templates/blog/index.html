@@ -10,8 +10,9 @@
 	<div layout:fragment="header-container"></div>
 
 	<div layout:fragment="content" class="container">
+		<div layout:include="blog/_mobile-sub-nav :: mobile-sub-nav"></div>
 		<div class="row-fluid blog--wrapper">
-			<div class="span8">
+			<div class="span8 blog--left-pane">
         <div class="content--title" th:text="${title}" th:if="${title}">Title</div>
 				<div class="blog-preview--wrapper">
 					<div class="blog--container blog-preview" th:each="post : ${posts}">
@@ -50,7 +51,7 @@
 					<a th:href="@{${beans.uih.path()}(page=${paginationInfo.nextPageNumber})}" href='/blog?page=3' class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
 				</div>
 			</div>
-			<div class="span4">
+			<div class="span4 blog--right-pane">
 				<div layout:include="blog/_right-pane :: right-pane"></div>
 			</div>
 		</div>
