@@ -1,10 +1,7 @@
 #!/bin/bash -x
 
 
-
-
-
-
+cf switch-space production || exit
 
 cf map sagan blog interface21.com &
 cf map sagan blog springsource.com &
