@@ -12,7 +12,7 @@ info:
     version: ${project.version}
 
 spring:
-  template:
+  thymeleaf:
     mode: LEGACYHTML5
     cache: false
   jpa:
