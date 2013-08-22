@@ -1,9 +1,12 @@
 package org.springframework.site.web.configuration;
 
+import javax.servlet.Filter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,25 +15,26 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.site.domain.team.SignInService;
 import org.springframework.site.web.security.GithubAuthenticationSigninAdapter;
 import org.springframework.site.web.security.RemoteUsernameConnectionSignUp;
 import org.springframework.site.web.security.SecurityContextAuthenticationFilter;
-import org.springframework.site.domain.team.SignInService;
 import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
 
-import javax.servlet.Filter;
-
 @Configuration
-@ComponentScan(basePackages = {"org.springframework.site.domain.team", "org.springframework.site.web.security", "org.springframework.site.domain.services", "org.springframework.site.domain.blog"})
+@ComponentScan(basePackages = { "org.springframework.site.domain.team",
+		"org.springframework.site.web.security",
+		"org.springframework.site.domain.services",
+		"org.springframework.site.domain.blog" })
 public class SecurityConfiguration {
 
 	static final String SIGNIN_SUCCESS_PATH = "/signin/success";
 
 	@Configuration
-	@Order(Integer.MAX_VALUE - 1)
+	@Order(Ordered.LOWEST_PRECEDENCE - 100)
 	protected static class SigninAuthenticationConfiguration extends
 			WebSecurityConfigurerAdapter {
 
@@ -38,11 +42,12 @@ public class SecurityConfiguration {
 		protected void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/signin/**")
 					.addFilterBefore(authenticationFilter(),
-							AnonymousAuthenticationFilter.class)
-					.authorizeUrls().anyRequest().anonymous();
+							AnonymousAuthenticationFilter.class).authorizeUrls()
+					.anyRequest().anonymous();
 		}
 
-		// Not a @Bean because we explicitly do not want it added automatically by Bootstrap to all requests
+		// Not a @Bean because we explicitly do not want it added automatically by
+		// Bootstrap to all requests
 		protected Filter authenticationFilter() {
 
 			AbstractAuthenticationProcessingFilter filter = new SecurityContextAuthenticationFilter(
@@ -55,7 +60,7 @@ public class SecurityConfiguration {
 	}
 
 	@Configuration
-	@Order(Integer.MAX_VALUE)
+	@Order(Ordered.LOWEST_PRECEDENCE - 90)
 	protected static class AdminAuthenticationConfiguration extends
 			WebSecurityConfigurerAdapter {
 
@@ -64,28 +69,29 @@ public class SecurityConfiguration {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.exceptionHandling().authenticationEntryPoint(
-					authenticationEntryPoint());
-			http.logout().logoutUrl("/signout").logoutSuccessUrl("/signin?signout=success");
+			http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
+			http.logout().logoutUrl("/signout")
+					.logoutSuccessUrl("/signin?signout=success");
 			http.authorizeUrls().antMatchers("/admin/**", "/signout").authenticated();
 		}
 
 		private AuthenticationEntryPoint authenticationEntryPoint() {
-			// TODO: this causes an interstitial page to pop up in UI. Can we or
-			// should we POST back here (e.g. with forward)?
-			LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint("/signin");
+			LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint(
+					"/signin");
 			return entryPoint;
 		}
 
 		@Bean
-		public ProviderSignInController providerSignInController(GitHubConnectionFactory connectionFactory,
-																 ConnectionFactoryRegistry registry,
-																 InMemoryUsersConnectionRepository repository) {
+		public ProviderSignInController providerSignInController(
+				GitHubConnectionFactory connectionFactory,
+				ConnectionFactoryRegistry registry,
+				InMemoryUsersConnectionRepository repository) {
 
 			registry.addConnectionFactory(connectionFactory);
 			repository.setConnectionSignUp(new RemoteUsernameConnectionSignUp());
-			ProviderSignInController controller = new ProviderSignInController(registry, repository,
-					new GithubAuthenticationSigninAdapter(SIGNIN_SUCCESS_PATH, signInService));
+			ProviderSignInController controller = new ProviderSignInController(registry,
+					repository, new GithubAuthenticationSigninAdapter(
+							SIGNIN_SUCCESS_PATH, this.signInService));
 			controller.setSignInUrl("/signin?error=access_denied");
 			return controller;
 		}
@@ -96,7 +102,8 @@ public class SecurityConfiguration {
 		}
 
 		@Bean
-		public InMemoryUsersConnectionRepository inMemoryUsersConnectionRepository(ConnectionFactoryRegistry registry) {
+		public InMemoryUsersConnectionRepository inMemoryUsersConnectionRepository(
+				ConnectionFactoryRegistry registry) {
 			return new InMemoryUsersConnectionRepository(registry);
 		}
 
