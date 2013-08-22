@@ -8,6 +8,7 @@ public class SearchFacet {
 	private String name;
 	private int count;
 	private List<SearchFacet> facets;
+	private List<SearchFacet> headerFacets = new ArrayList<>();
 
 	public SearchFacet(String path, String name, int count) {
 		this(path, name, count, new ArrayList<SearchFacet>());
@@ -83,5 +84,17 @@ public class SearchFacet {
 				", count=" + count +
 				", facets=" + facets +
 				'}';
+	}
+
+	public List<SearchFacet> getHeaderFacets() {
+		return headerFacets;
+	}
+
+	public void addHeaderFacet(SearchFacet headerFacet) {
+		headerFacets.add(headerFacet);
+	}
+
+	public boolean hasHeaderFacets() {
+		return !headerFacets.isEmpty();
 	}
 }

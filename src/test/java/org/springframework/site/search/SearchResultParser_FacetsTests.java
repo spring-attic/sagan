@@ -89,7 +89,7 @@ public class SearchResultParser_FacetsTests {
 
 	@Test
 	public void returnTopLevelFacets() {
-		List<SearchFacet> facets = searchResults.getFacets();
+		List<SearchFacet> facets = searchResults.getRootFacet().getFacets();
 		assertThat(facets.size(), equalTo(2));
 		assertThat(facets.get(0).getName(), equalTo("Guides"));
 		assertThat(facets.get(1).getName(), equalTo("Projects"));
@@ -97,10 +97,10 @@ public class SearchResultParser_FacetsTests {
 
 	@Test
 	public void returnNestedFacets() {
-		SearchFacet guidesFacet = searchResults.getFacets().get(0);
+		SearchFacet guidesFacet = searchResults.getRootFacet().getFacets().get(0);
 		assertThat(guidesFacet.getFacets().size(), equalTo(3));
 
-		SearchFacet projectsFacet = searchResults.getFacets().get(1);
+		SearchFacet projectsFacet = searchResults.getRootFacet().getFacets().get(1);
 		List<SearchFacet> projectsFacetFacets = projectsFacet.getFacets();
 		assertThat(projectsFacetFacets.size(), equalTo(4));
 		assertThat(projectsFacetFacets.get(0).getName(), equalTo("Spring Framework"));

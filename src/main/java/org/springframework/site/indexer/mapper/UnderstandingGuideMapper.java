@@ -16,7 +16,7 @@ public class UnderstandingGuideMapper implements SearchEntryMapper<Understanding
 		entry.setTitle(guide.getSubject());
 		entry.setPath("understanding/" + guide.getSubject());
 		entry.setSummary(rawContent.substring(0, Math.min(500, rawContent.length())));
-		entry.addFacetPaths("Understanding");
+		entry.addFacetPaths("Guides", "Guides/Understanding");
 		entry.setPublishAt(new Date(0L));
 		entry.setSubTitle("Understanding Doc");
 		return entry;

@@ -45,7 +45,7 @@ public class ApiDocumentMapper implements SearchEntryMapper<Document> {
 		entry.setVersion(version.getVersion());
 		entry.setProjectId(project.getId());
 
-		entry.addFacetPaths("Documentation", "Documentation/Api", "Projects", "Projects/" + project.getName(),
+		entry.addFacetPaths("Projects", "Projects/Api", "Projects/" + project.getName(),
 				"Projects/" + project.getName() + "/" + version.getVersion());
 		return entry;
 	}
