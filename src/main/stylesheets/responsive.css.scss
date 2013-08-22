@@ -191,20 +191,28 @@ $icon-sprite: url("../img/iconsprite.png");
       .blog-category {
         list-style-type: none;
         float: left;
-        background-color: #cdcdcd;
+        background-color: #d4d4d4;
         list-style-type: none;
         float: left;
         width: 25%;
-        box-shadow: inset -1px 0 0 #aaa, 0 1px 0 #aaa;
+        border-right: 1px solid darken($off-white, 20%);
+        border-bottom: 1px solid darken($off-white, 15%);
+        box-shadow: 0 1px 4px darken($off-white, 10%);
+        box-sizing: border-box;
         text-align: center;
-
         a {
-          color: #666;
           display: block;
           padding: 6px 0;
+          .icon {
+            background-color: $black-brown;
+            vertical-align: middle;
+          }
         }
-        &:last-child {
-          box-shadow: 0 1px 0 #aaa;
+        &.active {
+          box-shadow: 0 1px 4px darken($off-white, 10%), inset 1px 1px 3px darken($off-white, 17%), inset -1px 1px 3px darken($off-white, 17%);
+          .icon {
+            background-color: $green;
+          }
         }
       }
     }
@@ -212,6 +220,10 @@ $icon-sprite: url("../img/iconsprite.png");
 
   .blog--wrapper {
     margin-top: 50px;
+    .meta-data--container .meta-data--item {
+      margin-bottom: 15px;
+      display: block;
+    }
     .blog--left-pane {
       width: 100%;
     }

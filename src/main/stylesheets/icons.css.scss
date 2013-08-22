@@ -153,6 +153,25 @@ $icon-sprite: url("../img/iconsprite.png");
     height: 97px;
     background-position: 272px 282px;
   }
+  &.blog-icon {
+    width: 20px;
+    height: 20px;
+    &.icon-all-posts {
+      background-position: 20px 507px;
+    }
+    &.icon-broadcasts {
+      background-position: 20px 480px;
+    }
+    &.icon-engineering {
+      background-position: 20px 448px;
+    }
+    &.icon-releases {
+      background-position: 20px 419px;
+    }
+    &.icon-news-and-events{
+      background-position: 20px 388px;
+    }
+  }
 }
 i.icon {
   background-image: none;
