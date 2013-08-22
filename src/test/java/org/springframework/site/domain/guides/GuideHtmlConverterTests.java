@@ -1,18 +1,17 @@
 package org.springframework.site.domain.guides;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.http.Cookies;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpInputMessage;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpInputMessage;
+
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 public class GuideHtmlConverterTests {
 	private GuideHtmlConverter converter;
@@ -34,11 +33,6 @@ public class GuideHtmlConverterTests {
 
 			@Override
 			public HttpHeaders getHeaders() {
-				return null;
-			}
-
-			@Override
-			public Cookies getCookies() {
 				return null;
 			}
 		};
