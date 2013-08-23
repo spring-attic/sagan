@@ -243,7 +243,7 @@ $ java -jar build/libs/${project_id}-0.1.0.jar
 <#macro build_an_executable_jar_with_both>
 Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
 
-Below are the Gradle steps, but if you are using Maven, you can find the updated pom.xml [right here](https://github.com/springframework-meta/${project_id}/blob/master/complete/pom.xml) and execute `mvn clean package spring-boot:run`.
+Below are the Gradle steps, but if you are using Maven, you can find the updated pom.xml [right here](https://github.com/springframework-meta/${project_id}/blob/master/complete/pom.xml) and build it by typing `mvn clean package`.
 
 Update your Gradle `build.gradle` file's `buildscript` section, so that it looks like this:
 
@@ -275,10 +275,16 @@ Now run the following command to produce a single executable JAR file containing
 $ ./gradlew build
 ```
 
-Now you can run the JAR by typing:
+If you are using Gradle, you can run the JAR by typing:
 
 ```sh
 $ java -jar build/libs/${project_id}-0.1.0.jar
+```
+
+If you are using Maven, you can the JAR by typing:
+
+```sh
+$ java -jar target/${project_id}-0.1.0.jar
 ```
 
 [spring-boot-gradle-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-tools/spring-boot-gradle-plugin
@@ -365,7 +371,11 @@ If you are using Gradle, you can run your ${module} at the command line this way
 $ ./gradlew clean build && java -jar build/libs/${project_id}-0.1.0.jar
 ```
 
-If you are using Maven, just type `mvn spring-boot:run`.
+If you are using Maven, you can run your ${module} by typing:
+
+```sh
+$ mvn clean package && java -jar target/${project_id}-0.1.0.jar
+```
 
 </#macro>
 
