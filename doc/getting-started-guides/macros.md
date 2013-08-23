@@ -390,6 +390,20 @@ $ java -jar target/${project_id}-0.1.0.jar
 
 </#macro>
 
+<#macro run_the_utility>
+To run the utility, simply run it from the command line using [Gradle][gs-gradle] like this:
+
+```sh
+$ ./gradlew clean build && java -jar build/libs/${project_id}-0.1.0.jar
+```
+Or if you are using [Maven][gs-maven], run it like this:
+```sh
+$ mvn package && java -jar target/${project_id}-0.1.0.jar
+```
+[gs-gradle]: /guides/gs/gradle
+[gs-maven]: /guides/gs/maven
+</#macro>
+
 <#macro u_oauth>
 [u-oauth]: /understanding/OAuth
 </#macro>
