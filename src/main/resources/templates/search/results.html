@@ -34,7 +34,7 @@
       <div class="search-facets">
         <form th:action="@{/search(q=${searchForm.q})}" method="POST" th:object="${searchForm}">
           <input type="submit" value="Update"></input>
-          <ul layout:include="search/_facets :: facets" th:with="root=${searchResults}">
+          <ul layout:include="search/_facets :: facets" th:with="root=${searchResults.rootFacet}">
           </ul>
         </form>
       </div>
