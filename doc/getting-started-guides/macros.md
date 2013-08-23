@@ -356,6 +356,19 @@ $ ./gradlew clean build && java -jar build/libs/${project_id}-0.1.0.jar
 
 </#macro>
 
+<#macro run_the_application_with_both module="service">
+Run the ${module}
+-------------------
+If you are using Gradle, you can run your ${module} at the command line this way:
+
+```sh
+$ ./gradlew clean build && java -jar build/libs/${project_id}-0.1.0.jar
+```
+
+If you are using Maven, just type `mvn spring-boot:run`.
+
+</#macro>
+
 <#macro run_the_application module="application">
 Run the ${module}
 -------------------
