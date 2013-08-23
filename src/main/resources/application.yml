@@ -24,8 +24,8 @@ spring:
 security:
   basic:
     path: ""
-    user:
-      password: ${ADMIN_PASSWORD:brianfromkyrgyzstan}
+  user:
+    password: ${ADMIN_PASSWORD:}
 
 github:
   client:
