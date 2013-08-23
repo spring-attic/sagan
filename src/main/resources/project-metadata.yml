@@ -246,7 +246,7 @@ projects:
       lead: dsyer
       supportedVersions:
         - name: 1.0.5.RELEASE
-          refDocUrl: "{githubOrgBaseUrl}/spring-security-oauth/wiki/devguide"
+          refDocUrl: http://springsource.github.io/spring-security-oauth
           # TODO: this actually points to 1.0.0.RELEASE - seems to be the latest published api docs
           apiDocUrl: /spring-security/oauth/apidocs/index.html
 
