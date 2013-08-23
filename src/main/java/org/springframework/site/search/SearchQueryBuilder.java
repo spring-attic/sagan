@@ -2,6 +2,7 @@ package org.springframework.site.search;
 
 import io.searchbox.core.Search;
 import org.elasticsearch.common.joda.time.format.ISODateTimeFormat;
+import org.elasticsearch.index.query.AndFilterBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeFilterBuilder;
@@ -41,30 +42,55 @@ public class SearchQueryBuilder {
 
 	private String buildSearch(QueryBuilder query, List<String> filters, Pageable pageable) {
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-		query = addFiltersByFacets(filters, query);
 
-		addQuery(query, searchSourceBuilder);
 		addPagination(pageable, searchSourceBuilder);
-		addFacets(searchSourceBuilder);
+		addQuery(query, searchSourceBuilder);
+		addFilters(filters, searchSourceBuilder);
+		addFacetPathsResult(searchSourceBuilder);
 		addHighlights(searchSourceBuilder);
 
-		filterFutureResults(searchSourceBuilder);
-
 		return searchSourceBuilder.toString();
+	}
+
+	private void addPagination(Pageable pageable, SearchSourceBuilder searchSourceBuilder) {
+		searchSourceBuilder.from(pageable.getOffset());
+		searchSourceBuilder.size(pageable.getPageSize());
 	}
 
 	private SearchSourceBuilder addQuery(QueryBuilder query, SearchSourceBuilder searchSourceBuilder) {
 		return searchSourceBuilder.query(query);
 	}
 
-	private void filterFutureResults(SearchSourceBuilder searchSourceBuilder) {
+	private void addFilters(List<String> filters, SearchSourceBuilder searchSourceBuilder) {
+		AndFilterBuilder andFilterBuilder = new AndFilterBuilder();
+		filterFutureResults(andFilterBuilder);
+		filterFacets(filters, andFilterBuilder);
+		searchSourceBuilder.filter(andFilterBuilder);
+	}
+
+	private void filterFutureResults(AndFilterBuilder filterBuilder) {
 		String formattedDate = ISODateTimeFormat.dateTimeNoMillis().print(new Date().getTime());
 		RangeFilterBuilder rangeFilterBuilder = new RangeFilterBuilder("publishAt")
 				.to(formattedDate)
 				.includeLower(true)
 				.includeUpper(true);
 
-		searchSourceBuilder.filter(rangeFilterBuilder);
+		filterBuilder.add(rangeFilterBuilder);
+	}
+
+	private void filterFacets(List<String> filters, AndFilterBuilder filterBuilder) {
+		if (filters != null && !filters.isEmpty()) {
+			TermsFilterBuilder facetFilter = new TermsFilterBuilder("facetPaths", filters).execution("or");
+			filterBuilder.add(facetFilter);
+		}
+	}
+
+	private void addFacetPathsResult(SearchSourceBuilder searchSourceBuilder) {
+		TermsFacetBuilder facetBuilder = new TermsFacetBuilder("facet_paths_result")
+				.field("facetPaths")
+				.order(TermsFacet.ComparatorType.TERM).size(100000);
+
+		searchSourceBuilder.facet(facetBuilder);
 	}
 
 	private void addHighlights(SearchSourceBuilder searchSourceBuilder) {
@@ -74,27 +100,6 @@ public class SearchQueryBuilder {
 				.field("rawContent", 300, 1);
 
 		searchSourceBuilder.highlight(highlightBuilder);
-	}
-
-	private QueryBuilder addFiltersByFacets(List<String> filters, QueryBuilder query) {
-		if (filters != null && !filters.isEmpty()) {
-			TermsFilterBuilder facetFilter = new TermsFilterBuilder("facetPaths", filters).execution("or");
-			return QueryBuilders.filteredQuery(query, facetFilter);
-		}
-		return query;
-	}
-
- 	private void addFacets(SearchSourceBuilder searchSourceBuilder) {
-		TermsFacetBuilder facetBuilder = new TermsFacetBuilder("facet_paths_result")
-				.field("facetPaths")
-				.order(TermsFacet.ComparatorType.TERM).size(100000);
-
-		searchSourceBuilder.facet(facetBuilder);
-	}
-
-	private void addPagination(Pageable pageable, SearchSourceBuilder searchSourceBuilder) {
-		searchSourceBuilder.from(pageable.getOffset());
-		searchSourceBuilder.size(pageable.getPageSize());
 	}
 
 }

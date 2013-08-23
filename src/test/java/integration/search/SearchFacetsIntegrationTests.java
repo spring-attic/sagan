@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.site.search.SearchEntry;
+import org.springframework.site.search.SearchFacet;
 import org.springframework.site.search.SearchResult;
 import org.springframework.site.search.SearchResults;
 import org.springframework.site.search.SearchService;
@@ -81,7 +82,8 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 		this.searchService.saveToIndex(gettingStarted);
 		this.searchService.saveToIndex(blog);
 
-		SearchResults searchResults = this.searchService.search("title", this.pageable, Collections.<String>emptyList());
+		List<String> emptyFacetFilters = Collections.emptyList();
+		SearchResults searchResults = this.searchService.search("title", this.pageable, emptyFacetFilters);
 
 		List<SearchResult> content = searchResults.getPage().getContent();
 		assertThat(content.size(), equalTo(2));
@@ -91,7 +93,7 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 	}
 
 	@Test
-	public void filterByFacetsForOneFacetOnly() throws ParseException {
+	public void filterByFacetsReturnsFilteredContent() throws ParseException {
 		this.searchService.saveToIndex(tutorial);
 		this.searchService.saveToIndex(gettingStarted);
 		this.searchService.saveToIndex(blog);
@@ -101,8 +103,6 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 
 		List<SearchResult> content = searchResults.getPage().getContent();
 		assertThat(content.size(), equalTo(2));
-		assertThat(searchResults.getFacets().size(), equalTo(1));
-		assertThat(searchResults.getFacets().get(0).getName(), equalTo("Guides"));
 	}
 
 	@Test
@@ -135,6 +135,50 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 				apiDoc.getPath(),
 				refDoc.getPath())
 		);
+	}
+
+	@Test
+	public void returnedFacetsAreNotAffectedByTheFacetFilters() throws ParseException {
+		this.searchService.saveToIndex(blog);
+		this.searchService.saveToIndex(gettingStarted);
+		this.searchService.saveToIndex(tutorial);
+
+		List<String> facetPathFilters = new ArrayList<>();
+		facetPathFilters.add("Blog");
+
+		SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
+		List<SearchFacet> facets = searchResults.getFacets();
+
+		assertThat(facets.size(), equalTo(2));
+		assertThat(facets.get(0).getName(), equalTo("Blog"));
+		assertThat(facets.get(0).getCount(), equalTo(1));
+		assertThat(facets.get(1).getName(), equalTo("Guides"));
+		assertThat(facets.get(1).getCount(), equalTo(2));
+	}
+
+	@Test
+	public void unpublishedEntriesDoNotAppearInResultsOrFacets() throws ParseException {
+		SearchEntry unpublishedPost = SearchEntryBuilder.entry()
+				.path("http://example.com/blog")
+				.title("a title")
+				.publishAt("2100-12-01 12:32")
+				.facetPath("Blog")
+				.facetPath("Blog/Engineering").build();
+
+		this.searchService.saveToIndex(unpublishedPost);
+		this.searchService.saveToIndex(blog);
+		this.searchService.saveToIndex(gettingStarted);
+
+		SearchResults searchResults = this.searchService.search("title", this.pageable, new ArrayList<String>());
+
+		List<SearchResult> results = searchResults.getPage().getContent();
+		assertThat(results.size(), equalTo(2));
+
+		List<SearchFacet> facets = searchResults.getFacets();
+		assertThat(facets.size(), equalTo(2));
+		assertThat(facets.get(0).getName(), equalTo("Blog"));
+		assertThat(facets.get(0).getCount(), equalTo(1));
+		assertThat(facets.get(1).getName(), equalTo("Guides"));
 	}
 
 }
