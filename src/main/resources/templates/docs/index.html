@@ -27,15 +27,15 @@
         </div>
         <div data-filterable-container>
             <div class="js-item-dropdown-widget--wrapper">
-                <h3 class="docs-section-title no-border">Spring Projects</h3>
+                <h2 class="docs-section-title no-border">Spring Projects</h2>
                 <div layout:include="docs/_projects :: projects" th:with="projects=${activeProjects}"></div>
             </div>
             <div class="js-item-dropdown-widget--wrapper">
-                <h3 class="docs-section-title">Projects in Incubation</h3>
+                <h2 class="docs-section-title">Projects in Incubation</h2>
                 <div layout:include="docs/_projects :: projects" th:with="projects=${incubatorProjects}"></div>
             </div>
             <div class="js-item-dropdown-widget--wrapper">
-                <h3 class="docs-section-title">Projects in the Attic</h3>
+                <h2 class="docs-section-title">Projects in the Attic</h2>
                 <div layout:include="docs/_projects :: projects" th:with="projects=${atticProjects}"></div>
             </div>
         </div>
