@@ -46,14 +46,14 @@ public class CachingGitHubRestClientTests {
 
 	@Before
 	public void setUp() throws Exception {
-		client = new CachingGitHubRestClient(gitHub, cacheService);
-		cacheService.cacheContent("/cached/path", "a cached etag", CACHED_CONTENT);
+		this.client = new CachingGitHubRestClient(this.gitHub, this.cacheService);
+		this.cacheService.cacheContent("/cached/path", "a cached etag", CACHED_CONTENT);
 	}
 
 	@Test
 	@SuppressWarnings("unchecked")
 	public void sendRequestForHtml_notCached_returnsContentFromGithub_andCaches() {
-		given(gitHub.restOperations()).willReturn(this.restOperations);
+		given(this.gitHub.restOperations()).willReturn(this.restOperations);
 
 		String filePath = "/not_cached/path";
 		String htmlResponse = "<h1>this is a header</h1>";
@@ -61,35 +61,39 @@ public class CachingGitHubRestClientTests {
 
 		stubResponseOK(htmlResponse, etag);
 
-		String html = client.sendRequestForHtml(filePath);
+		String html = this.client.sendRequestForHtml(filePath);
 
-		verify(restOperations).exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), (Class<MarkdownHtml>) anyObject());
+		verify(this.restOperations).exchange(anyString(), (HttpMethod) anyObject(),
+				(HttpEntity<?>) anyObject(), (Class<MarkdownHtml>) anyObject());
 
 		assertThat(html, is(htmlResponse));
-		assertThat(cacheService.getContentForPath("/not_cached/path"), is(htmlResponse));
-		assertThat(cacheService.getEtagForPath("/not_cached/path"), is(etag));
+		assertThat(this.cacheService.getContentForPath("/not_cached/path"),
+				is(htmlResponse));
+		assertThat(this.cacheService.getEtagForPath("/not_cached/path"), is(etag));
 	}
 
 	@Test
 	@SuppressWarnings("unchecked")
 	public void sendRequestForHtml_isCached_andContentNotModified_returnsContentFromCache() {
-		given(gitHub.restOperations()).willReturn(this.restOperations);
+		given(this.gitHub.restOperations()).willReturn(this.restOperations);
 
 		String filePath = "/cached/path";
 
 		stubResponseNotModified();
 
-		String html = client.sendRequestForHtml(filePath);
+		String html = this.client.sendRequestForHtml(filePath);
 
-		ArgumentMatcher<HttpEntity> requestEntityEtagHeaderMatch = new ArgumentMatcher<HttpEntity>() {
+		ArgumentMatcher<HttpEntity<?>> requestEntityEtagHeaderMatch = new ArgumentMatcher<HttpEntity<?>>() {
 			@Override
 			public boolean matches(Object argument) {
-				HttpEntity entity = (HttpEntity) argument;
-				return entity.getHeaders().getIfNoneMatch().get(0).equals("a cached etag");
+				HttpEntity<?> entity = (HttpEntity<?>) argument;
+				return entity.getHeaders().getIfNoneMatch().get(0)
+						.equals("a cached etag");
 			}
 		};
 
-		verify(this.restOperations).exchange(anyString(), (HttpMethod) anyObject(), argThat(requestEntityEtagHeaderMatch), (Class<MarkdownHtml>) anyObject());
+		verify(this.restOperations).exchange(anyString(), (HttpMethod) anyObject(),
+				argThat(requestEntityEtagHeaderMatch), (Class<MarkdownHtml>) anyObject());
 
 		assertThat(html, is(CACHED_CONTENT));
 	}
@@ -97,7 +101,7 @@ public class CachingGitHubRestClientTests {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void sendRequestForHtml_isCached_andContentModified_returnsContentFromResponse_andCachesNewContent() {
-		given(gitHub.restOperations()).willReturn(this.restOperations);
+		given(this.gitHub.restOperations()).willReturn(this.restOperations);
 
 		String filePath = "/cached/path";
 		String htmlResponse = "<h1>this is a header</h1>";
@@ -105,19 +109,20 @@ public class CachingGitHubRestClientTests {
 
 		stubResponseOK(htmlResponse, etag);
 
-		String html = client.sendRequestForHtml(filePath);
+		String html = this.client.sendRequestForHtml(filePath);
 
-		verify(this.restOperations).exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), (Class<MarkdownHtml>) anyObject());
+		verify(this.restOperations).exchange(anyString(), (HttpMethod) anyObject(),
+				(HttpEntity<?>) anyObject(), (Class<MarkdownHtml>) anyObject());
 
 		assertThat(html, is(htmlResponse));
-		assertThat(cacheService.getContentForPath("/cached/path"), is(htmlResponse));
-		assertThat(cacheService.getEtagForPath("/cached/path"), is(etag));
+		assertThat(this.cacheService.getContentForPath("/cached/path"), is(htmlResponse));
+		assertThat(this.cacheService.getEtagForPath("/cached/path"), is(etag));
 	}
 
 	@Test
 	@SuppressWarnings("unchecked")
 	public void sendRequestForJson_notCached_returnsContentFromGithub_andCaches() {
-		given(gitHub.restOperations()).willReturn(this.restOperations);
+		given(this.gitHub.restOperations()).willReturn(this.restOperations);
 
 		String filePath = "/not_cached/path";
 		String jsonResponse = "{\"foo\": \"bar\"}";
@@ -126,26 +131,28 @@ public class CachingGitHubRestClientTests {
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 		headers.add("ETag", etag);
 
-		ResponseEntity<String> entity = new ResponseEntity<>(jsonResponse, headers, HttpStatus.OK);
+		ResponseEntity<String> entity = new ResponseEntity<>(jsonResponse, headers,
+				HttpStatus.OK);
 
 		Class<String> stringClass = anyObject();
-		given(restOperations.exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), stringClass))
-				.willReturn(entity);
+		given(
+				this.restOperations.exchange(anyString(), (HttpMethod) anyObject(),
+						(HttpEntity<?>) anyObject(), stringClass)).willReturn(entity);
 
-		String html = client.sendRequestForHtml(filePath);
+		String html = this.client.sendRequestForHtml(filePath);
 
-		verify(restOperations).exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), (Class<String>) anyObject());
+		verify(this.restOperations).exchange(anyString(), (HttpMethod) anyObject(),
+				(HttpEntity<?>) anyObject(), (Class<String>) anyObject());
 
 		assertThat(html, is(jsonResponse));
-		assertThat(cacheService.getContentForPath("/not_cached/path"), is(jsonResponse));
-		assertThat(cacheService.getEtagForPath("/not_cached/path"), is(etag));
+		assertThat(this.cacheService.getContentForPath("/not_cached/path"),
+				is(jsonResponse));
+		assertThat(this.cacheService.getEtagForPath("/not_cached/path"), is(etag));
 	}
 
-
 	@Test
-	@SuppressWarnings("unchecked")
 	public void sendRequestForHtml_withSameUriTemplate_doesNotCauseCacheCollisions() {
-		given(gitHub.restOperations()).willReturn(this.restOperations);
+		given(this.gitHub.restOperations()).willReturn(this.restOperations);
 
 		String filePath = "/{id}/path";
 
@@ -154,30 +161,30 @@ public class CachingGitHubRestClientTests {
 
 		stubResponseOKWithUriVariable(htmlResponse, etag, "foo");
 
-		String html = client.sendRequestForHtml(filePath, "foo");
+		String html = this.client.sendRequestForHtml(filePath, "foo");
 
 		assertThat(html, is(htmlResponse));
-
 
 		String otherHtmlResponse = "<h1>this is a different header</h1>";
 		String otherEtag = "\"etagToCache2\"";
 
 		stubResponseOKWithUriVariable(otherHtmlResponse, otherEtag, "bar");
 
-		String otherHtml = client.sendRequestForHtml(filePath, "bar");
+		String otherHtml = this.client.sendRequestForHtml(filePath, "bar");
 
-		verify(restOperations).exchange(anyString(), (HttpMethod) anyObject(), argThat(new ArgumentMatcher<HttpEntity<?>>() {
-			@Override
-			public boolean matches(Object argument) {
-				HttpEntity entity = (HttpEntity)argument;
-				return !entity.getHeaders().containsKey("If-None-Match");
-			}
+		verify(this.restOperations).exchange(anyString(), (HttpMethod) anyObject(),
+				argThat(new ArgumentMatcher<HttpEntity<?>>() {
+					@Override
+					public boolean matches(Object argument) {
+						HttpEntity<?> entity = (HttpEntity<?>) argument;
+						return !entity.getHeaders().containsKey("If-None-Match");
+					}
 
-			@Override
-			public void describeTo(Description description) {
-				description.appendText("expected header without 'If-None-Match'");
-			}
-		}), Matchers.<Class<MarkdownHtml>>anyObject(), eq("bar"));
+					@Override
+					public void describeTo(Description description) {
+						description.appendText("expected header without 'If-None-Match'");
+					}
+				}), Matchers.<Class<MarkdownHtml>> anyObject(), eq("bar"));
 
 		assertThat(otherHtml, is(otherHtmlResponse));
 
@@ -187,8 +194,9 @@ public class CachingGitHubRestClientTests {
 		ResponseEntity<GuideHtml> entity = new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 
 		Class<GuideHtml> guideHtmlClass = anyObject();
-		given(restOperations.exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), guideHtmlClass))
-				.willReturn(entity);
+		given(
+				this.restOperations.exchange(anyString(), (HttpMethod) anyObject(),
+						(HttpEntity<?>) anyObject(), guideHtmlClass)).willReturn(entity);
 	}
 
 	private void stubResponseOK(String htmlResponse, String etag) {
@@ -197,23 +205,29 @@ public class CachingGitHubRestClientTests {
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 		headers.add("ETag", etag);
 
-		ResponseEntity<MarkdownHtml> entity = new ResponseEntity<>(response, headers, HttpStatus.OK);
+		ResponseEntity<MarkdownHtml> entity = new ResponseEntity<>(response, headers,
+				HttpStatus.OK);
 
 		Class<MarkdownHtml> htmlClass = anyObject();
-		given(restOperations.exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), htmlClass))
-				.willReturn(entity);
+		given(
+				this.restOperations.exchange(anyString(), (HttpMethod) anyObject(),
+						(HttpEntity<?>) anyObject(), htmlClass)).willReturn(entity);
 	}
 
-	private void stubResponseOKWithUriVariable(String htmlResponse, String etag, String uriVariable) {
+	private void stubResponseOKWithUriVariable(String htmlResponse, String etag,
+			String uriVariable) {
 		MarkdownHtml response = new MarkdownHtml(htmlResponse);
 
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 		headers.add("ETag", etag);
 
-		ResponseEntity<MarkdownHtml> entity = new ResponseEntity<>(response, headers, HttpStatus.OK);
+		ResponseEntity<MarkdownHtml> entity = new ResponseEntity<>(response, headers,
+				HttpStatus.OK);
 
 		Class<MarkdownHtml> htmlClass = anyObject();
-		given(restOperations.exchange(anyString(), (HttpMethod) anyObject(), (HttpEntity) anyObject(), htmlClass, eq(uriVariable)))
+		given(
+				this.restOperations.exchange(anyString(), (HttpMethod) anyObject(),
+						(HttpEntity<?>) anyObject(), htmlClass, eq(uriVariable)))
 				.willReturn(entity);
 	}
 }

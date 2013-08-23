@@ -5,7 +5,6 @@ import org.springframework.site.search.SearchResult;
 public class SearchResultBuilder {
 
 	private String title = "A random title";
-	private String rawContent = "A random post content";
 	private String summary = "A random post summary";
 	private String path = "/some/path";
 	private String type = "site";
@@ -26,11 +25,6 @@ public class SearchResultBuilder {
 		return this;
 	}
 
-	public SearchResultBuilder rawContent(String rawContent) {
-		this.rawContent = rawContent;
-		return this;
-	}
-
 	public SearchResultBuilder summary(String summary) {
 		this.summary = summary;
 		return this;
@@ -42,7 +36,9 @@ public class SearchResultBuilder {
 	}
 
 	public SearchResult build() {
-		SearchResult searchResult = new SearchResult(id, title, subtitle, summary, path, type, highlight, originalSearchTerm);
+		SearchResult searchResult = new SearchResult(this.id, this.title, this.subtitle,
+				this.summary, this.path, this.type, this.highlight,
+				this.originalSearchTerm);
 		return searchResult;
 	}
 
