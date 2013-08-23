@@ -93,6 +93,29 @@ The [Android Manifest] contains all the information required to run an Android a
 [![Build Status](https://drone.io/github.com/springframework-meta/${project_id}/status.png)](https://drone.io/github.com/springframework-meta/${project_id}/latest)
 </#macro>
 
+<#macro create_a_gradle_build>
+### Create a Gradle build file
+
+    <@snippet path="build.gradle" prefix="initial"/>
+    
+</#macro>
+
+<#macro create_a_maven_build>
+### Create a Maven build file
+
+    <@snippet path="pom.xml" prefix="initial"/>
+    
+</#macro>
+
+<#macro create_both_builds>
+### Create a Gradle build file
+
+    <@snippet path="build.gradle" prefix="initial"/>
+    
+> **Note:** You can also use Maven. The pom.xml file is included [right here](complete/pom.xml).
+    
+</#macro>
+
 
 <#macro related_resources>
 Related resources
