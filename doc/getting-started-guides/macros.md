@@ -109,7 +109,7 @@ The [Android Manifest] contains all the information required to run an Android a
 
 <#macro create_both_builds>
 ### Create a Gradle build file
-Below is the Gradle build file. But you can also use Maven. The pom.xml file is included [right here](initial/pom.xml).
+Below is the [initial Gradle build file](initial/build.gradle). But you can also use Maven. The pom.xml file is included [right here](initial/pom.xml).
 
     <@snippet path="build.gradle" prefix="initial"/>
     
