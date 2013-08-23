@@ -303,7 +303,7 @@ projects:
       lead: apoutsma
       siteUrl: "{docsBaseUrl}/spring-ws/sites/2.0"
       supportedVersions:
-        - name: 2.1.3.RELEASE
+        - name: 2.1.4.RELEASE
           refDocUrl: /spring-ws/sites/2.0/reference/html/index.html
           apiDocUrl: /spring-ws/sites/2.0/apidocs/index.html
 
