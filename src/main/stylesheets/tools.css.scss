@@ -65,14 +65,6 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   .tool--download-btn {
     width: 237px;
-    &:hover {
-      border-color: $green;
-      box-shadow: 0 1px 3px darken($black-brown, 15%);
-    }
-    &:active {
-      box-shadow: 0 1px 3px darken($black-brown, 15%), inset 0 3px 6px darken($black-brown, 15%);
-      border-color: $green;
-    }
   }
   .tool--see-all-versions {
     display: block;
