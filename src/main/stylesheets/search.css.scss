@@ -54,8 +54,11 @@ $icon-sprite: url("../img/iconsprite.png");
 
 
 .search-facets {
+  form {
+    margin: 0;
+  }
   ul {
-    margin-left: 0px;
+    margin: 0px;
     list-style: none;
     .facet {
       text-align: right;
@@ -66,7 +69,7 @@ $icon-sprite: url("../img/iconsprite.png");
         font-family: $secondary-font-family;
         text-transform: uppercase;
         .facet-name {
-          margin-top: 2px;
+          margin-top: 4px;
           max-width: 161px;
           text-align: left;
           white-space: nowrap;
@@ -127,6 +130,9 @@ $icon-sprite: url("../img/iconsprite.png");
         }
       }
     }
+    &.js-close {
+      display: none;
+    }
   }
 
   .sub-facet--list {
@@ -162,6 +168,9 @@ $icon-sprite: url("../img/iconsprite.png");
         padding-right: 0;       
       }
     }    
+    &.js-close {
+      display: none;
+    }
   }
 
   .projects-facet .facet {
@@ -183,3 +192,4 @@ $icon-sprite: url("../img/iconsprite.png");
     color: $link-green;
   }
 }
+

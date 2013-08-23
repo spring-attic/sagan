@@ -114,6 +114,37 @@ $(function () {
     moveItemSlider();
   });
 
+  var initializeSearch = function () {
+    var searchFacet = $(".search-facets");  
+    if (searchFacet.length == 0) {
+      return;
+    } else {
+      $(".sub-facet--list, .facet-section--header").addClass('js-close');
+
+      $(".js-toggle-sub-facet-list").click(function() {
+        $(this).closest(".facet").find(".sub-facet--list:first").toggleClass('js-close');
+      });
+      
+      $(".projects-facet .js-toggle-sub-facet-list:first").click(function() {
+        $(".facet-section--header").toggleClass('js-close');
+      });
+
+
+      $(".js-checkbox-pill").click(function() {
+        var checkBoxes = $(this).closest(".facet").find("input[type='checkbox']");
+        if (checkBoxes.prop('checked') == false ){
+          $(this).prop('checked', false);
+          $(this).parents(".facet").find("input[type='checkbox']:first").prop('checked',false);
+          $(this).parents(".facet").find("input[type='checkbox']").prop('checked',false);
+        } else {
+          checkBoxes.prop('checked',true);
+        };
+      });
+    }
+  }
+  initializeSearch();
+
+  
   
 
 });

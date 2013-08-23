@@ -33,8 +33,11 @@
   text-overflow: ellipsis;
 }
 
+.search-facets form {
+  margin: 0;
+}
 .search-facets ul {
-  margin-left: 0px;
+  margin: 0px;
   list-style: none;
 }
 .search-facets ul .facet {
@@ -48,7 +51,7 @@
   text-transform: uppercase;
 }
 .search-facets ul .facet .facet--wrapper .facet-name {
-  margin-top: 2px;
+  margin-top: 4px;
   max-width: 161px;
   text-align: left;
   white-space: nowrap;
@@ -103,6 +106,9 @@
   font-family: "Varela Round", sans-serif;
   text-transform: none;
 }
+.search-facets .facet-section--header.js-close {
+  display: none;
+}
 .search-facets .sub-facet--list {
   border-top: 1px solid white;
 }
@@ -136,6 +142,9 @@
   border: none;
   padding-left: 0;
   padding-right: 0;
+}
+.search-facets .sub-facet--list.js-close {
+  display: none;
 }
 .search-facets .projects-facet .facet i {
   display: inline-block;

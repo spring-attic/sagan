@@ -9,8 +9,8 @@
       <div class="facet--wrapper">  
         <div class="facet-name pull-left" th:text="${facet.name}">Facet</div>          
         <div class="facet-actions">
-          <i class="icon-reorder"></i>
-          <label class="checkbox-pill">
+          <i class="icon-reorder js-toggle-sub-facet-list"></i>
+          <label class="checkbox-pill js-checkbox-pill">
             <span class="facet-count" th:text="${facet.count}">(123)</span>
             <span class="checkbox-pill--checkbox">
               <input type="checkbox" name="filters" th:value="${facet.fullPath}" th:field="*{filters}" />
