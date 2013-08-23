@@ -264,7 +264,7 @@ Further down inside `build.gradle`, add the following to the list of applied plu
 ```groovy
 apply plugin: 'spring-boot'
 ```
-You can see the final version of build.gradle [right here]((https://github.com/springframework-meta/${project_id}/blob/master/complete/build.gradle).
+You can see the final version of `build.gradle` [right here]((https://github.com/springframework-meta/${project_id}/blob/master/complete/build.gradle).
 
 The [Spring Boot gradle plugin][spring-boot-gradle-plugin] collects all the jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
 It also searches for the `public static void main()` method to flag as a runnable class.
