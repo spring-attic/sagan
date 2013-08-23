@@ -239,7 +239,7 @@ projects:
       apiDocUrl: /spring-security/site/docs/{version}/apidocs/
       supportedVersions:
         - 3.1.4.RELEASE
-        - 3.2.0.M2
+        - 3.2.0.RC1
 
     - id: spring-security-oauth
       name: Spring Security OAuth
