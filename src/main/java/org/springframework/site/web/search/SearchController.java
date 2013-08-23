@@ -3,6 +3,7 @@ package org.springframework.site.web.search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.site.search.SearchFacet;
 import org.springframework.site.search.SearchResult;
 import org.springframework.site.search.SearchResults;
 import org.springframework.site.search.SearchService;
@@ -35,7 +36,8 @@ public class SearchController {
 		Page<SearchResult> entries = searchResults.getPage();
 		model.addAttribute("results", entries.getContent());
 		model.addAttribute("paginationInfo", new PaginationInfo(entries));
-		model.addAttribute("searchResults", searchResults);
+		SearchFacet root = new SpringFacetsBuilder(searchResults.getFacets()).build();
+		model.addAttribute("rootFacet", root);
 		model.addAttribute("searchForm", searchForm);
 		return "search/results";
 	}

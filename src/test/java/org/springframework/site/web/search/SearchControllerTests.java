@@ -1,9 +1,5 @@
 package org.springframework.site.web.search;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -16,6 +12,10 @@ import org.springframework.site.search.SearchResult;
 import org.springframework.site.search.SearchResults;
 import org.springframework.site.search.SearchService;
 import org.springframework.ui.ExtendedModelMap;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;

@@ -270,9 +270,9 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
 
 		List<SearchResult> content = searchResults.getPage().getContent();
 		assertThat(content.size(), equalTo(4));
-		assertThat(searchResults.getRootFacet().getFacets().size(), equalTo(2));
-		assertThat(searchResults.getRootFacet().getFacets().get(0).getName(), equalTo("Blog"));
-		assertThat(searchResults.getRootFacet().getFacets().get(1).getName(), equalTo("Guides"));
+		assertThat(searchResults.getFacets().size(), equalTo(2));
+		assertThat(searchResults.getFacets().get(0).getName(), equalTo("Blog"));
+		assertThat(searchResults.getFacets().get(1).getName(), equalTo("Guides"));
 	}
 
 	@Test
@@ -312,8 +312,8 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
 
 		List<SearchResult> content = searchResults.getPage().getContent();
 		assertThat(content.size(), equalTo(3));
-		assertThat(searchResults.getRootFacet().getFacets().size(), equalTo(1));
-		assertThat(searchResults.getRootFacet().getFacets().get(0).getName(), equalTo("Guides"));
+		assertThat(searchResults.getFacets().size(), equalTo(1));
+		assertThat(searchResults.getFacets().get(0).getName(), equalTo("Guides"));
 	}
 
 	@Test

@@ -8,14 +8,14 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class SearchFacetBuilderTests {
+public class SearchFacetTreeBuilderTests {
 
-	private SearchFacetBuilder builder;
+	private SearchFacetTreeBuilder builder;
 	private List<SearchFacet> facets;
 
 	@Before
 	public void setUp() throws Exception {
-		builder = new SearchFacetBuilder();
+		builder = new SearchFacetTreeBuilder();
 		builder.addTerm("Guides", 2);
 		builder.addTerm("Guides/GettingStarted", 1);
 		builder.addTerm("Guides/GettingStarted/SomethingElse", 1);

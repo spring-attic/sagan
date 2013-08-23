@@ -4,6 +4,7 @@
 <head>
 	<title th:inline="text">Search &middot; [[${searchForm.q}]]</title>
 	<link rel="alternate" type="application/atom+xml" th:href="${feedPath}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/search.css.css}"/>
 </head>
 <body>
 <div layout:fragment="header-container"></div>
@@ -34,7 +35,7 @@
       <div class="search-facets">
         <form th:action="@{/search(q=${searchForm.q})}" method="POST" th:object="${searchForm}">
           <input type="submit" value="Update"></input>
-          <ul layout:include="search/_facets :: facets" th:with="root=${searchResults.rootFacet}">
+          <ul layout:include="search/_facets :: facets" th:with="root=${rootFacet}">
           </ul>
         </form>
       </div>
