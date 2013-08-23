@@ -267,21 +267,21 @@ projects:
       name: Spring Social
       lead: cwalls
       supportedVersions:
-        - 1.1.0.M3
+        - 1.1.0.M4
         - 1.0.3.RELEASE
 
     - id: spring-social-facebook
       name: Spring Social Facebook
       lead: cwalls
       supportedVersions:
-        - 1.1.0.M3
+        - 1.1.0.M4
         - 1.0.3.RELEASE
 
     - id: spring-social-twitter
       name: Spring Social Twitter
       lead: cwalls
       supportedVersions:
-        - 1.1.0.M3
+        - 1.1.0.M4
         - 1.0.5.RELEASE
 
     # ----------------------
@@ -544,7 +544,7 @@ projects:
       refDocUrl: /spring-social-linkedin/docs/{version}/reference/html
       apiDocUrl: /spring-social-linkedin/docs/{version}/api/
       supportedVersions:
-        - 1.0.0.RC2
+        - 1.0.0.RC3
 
     # No releases
     - id: spring-social-tripit
