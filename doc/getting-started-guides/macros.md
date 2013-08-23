@@ -240,6 +240,53 @@ $ java -jar build/libs/${project_id}-0.1.0.jar
 > **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
 </#macro>
 
+<#macro build_an_executable_jar_with_both>
+Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
+
+Update your Gradle `build.gradle` file's `buildscript` section, so that it looks like this:
+
+```groovy
+buildscript {
+    repositories {
+        maven { url "http://repo.springsource.org/libs-snapshot" }
+        mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.BUILD-SNAPSHOT")
+    }
+}
+```
+
+Further down inside `build.gradle`, add the following to the list of applied plugins:
+
+```groovy
+apply plugin: 'spring-boot'
+```
+You can see the final version of build.gradle [right here](complete/build.gradle).
+
+The [Spring Boot gradle plugin][spring-boot-gradle-plugin] collects all the jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
+It also searches for the `public static void main()` method to flag as a runnable class.
+
+Now run the following command to produce a single executable JAR file containing all necessary dependency classes and resources:
+
+```sh
+$ ./gradlew build
+```
+
+Now you can run the JAR by typing:
+
+```sh
+$ java -jar build/libs/${project_id}-0.1.0.jar
+```
+
+> **Note:** If you are using Maven, the final version of pom.xml is [right here](complete/pom.xml). To build and run, just type `mvn package spring-boot:run`.
+
+[spring-boot-gradle-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-tools/spring-boot-gradle-plugin
+
+> **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
+</#macro>
+
+
 <#macro build_the_application>
 Build the application
 ------------------------
