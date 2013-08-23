@@ -3,7 +3,7 @@
 }
 .blog--container.blog-preview {
   margin: 0 0 40px 0;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 1px solid white;
 }
 .blog--container.blog-preview .meta-data--container {
   margin-bottom: 0;
@@ -115,7 +115,7 @@
 .blog--container .blog--post blockquote {
   margin: 20px 0;
   padding: 0 0 0 10px;
-  border-left: 5px solid #DDD;
+  border-left: 5px solid #dddddd;
 }
 .blog--container .blog--post blockquote p {
   margin-bottom: 20px;
@@ -162,7 +162,7 @@
 }
 
 .blog-comments--wrapper {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #cccccc;
   padding-top: 30px;
 }
 .blog-comments--wrapper .blog-comments--container {

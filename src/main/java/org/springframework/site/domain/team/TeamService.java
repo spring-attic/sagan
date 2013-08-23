@@ -48,6 +48,7 @@ public class TeamService {
 		existingProfile.setTwitterUsername(profile.getTwitterUsername());
 		existingProfile.setBio(profile.getBio());
 		existingProfile.setName(profile.getName());
+		existingProfile.setJobTitle(profile.getJobTitle());
 		existingProfile.setTwitterUsername(profile.getTwitterUsername());
 		existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
 		existingProfile.setLanyrdUsername(profile.getLanyrdUsername());
@@ -95,6 +96,7 @@ public class TeamService {
 			profile.setUsername(username);
 			profile.setAvatarUrl(avatarUrl);
 			profile.setName(name);
+			profile.setHidden(true);
 		}
 
 		profile.setGithubUsername(username);
@@ -102,7 +104,6 @@ public class TeamService {
 	}
 
 	public void showOnlyTeamMembersWithIds(List<Long> userIds) {
-		teamRepository.activateTeamMembers(userIds);
 		teamRepository.hideTeamMembersNotInIds(userIds);
 	}
 }

@@ -39,7 +39,7 @@ public class SearchResultParser {
 		JsonObject pathsResult = facets.getAsJsonObject("facet_paths_result");
 		List<JsonElement> terms = sortedTermElements(pathsResult.getAsJsonArray("terms"));
 
-		SearchFacetBuilder builder = new SearchFacetBuilder();
+		SearchFacetTreeBuilder builder = new SearchFacetTreeBuilder();
 
 		for (JsonElement element : terms) {
 			JsonObject jsonObject = element.getAsJsonObject();

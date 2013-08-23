@@ -1,36 +1,79 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="layout">
-<head>
+<html 
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorator="layout">
+  <head>
     <title th:inline="text">Admin &middot; [[${profile.fullName}]]</title>
-</head>
-<body>
-<div layout:fragment="content" class="container">
-    <form th:action="@{${formAction}}" action="#" method="post" th:object="${profile}">
-        <label for="name">Name:<input id="name" type="text" th:field="*{name}" name="name" /></label>
-		<label>Username: <span id="username" th:text="*{username}"></span></label>
-		<label for="location">Location:<input id="location" type="text" th:field="*{location}" name="location" /></label>
-		<label for="geoLocation">GeoLocation (lat,long):<input id="geoLocation" type="text" th:field="*{geoLocation}" name="geoLocation" /></label>
-		<label for="bio">Bio:<textarea id="bio" th:field="*{bio}" name="bio"></textarea></label>
-		<label>Github Username: <span id="githubUsername" th:text="*{githubUsername}" ></span></label>
-		<label for="speakerdeckUsername">Speakerdeck Username:<input id="speakerdeckUsername" type="text" th:field="*{speakerdeckUsername}" name="speakerdeckUsername" /></label>
-        <label for="twitterUsername">Twitter Username:<input id="twitterUsername" type="text" th:field="*{twitterUsername}" name="twitterUsername" /></label>
-        <label for="lanyrdUsername">Lanyrd Username:<input id="lanyrdUsername" type="text" th:field="*{lanyrdUsername}" name="lanrydUsername" /></label>
-        <label for="videoEmbeds">Video Embeds:<textarea id="videoEmbeds" th:field="*{videoEmbeds}" name="videoEmbeds"></textarea></label>
-        <input type="hidden" name="_method" value="PUT" />
-        <div>
-            <label>Avatar:
-                <img th:src="*{avatarUrl}" />
-				<label for="gravatarEmail">Gravatar Email:<input id="gravatarEmail" type="text" th:field="*{gravatarEmail}" name="gravatarEmail" /></label>
-				<p>(change your Gravatar settings at
-                   <a href="https://github.com/settings/profile">https://github.com/settings/profile</a>
-                   )
-                </p>
-            </label>
+  </head>
+  <body>
+    <div layout:fragment="header-container"></div>
+    <div layout:fragment="content" class="container">
+      <form th:action="@{${formAction}}" action="#" method="post" th:object="${profile}" class="admin-profile--form">
+        <div class="admin-profile--field">
+          <label for="name">Name:</label>
+          <input id="name" type="text" th:field="*{name}" name="name" />
+          <div class="note">Here's a sample note</div>
         </div>
-        <button type="submit">Save Changes</button>
-    </form>
-</div>
-</body>
+        
+        <div class="admin-profile--field">
+          <label for="jobTitle">Job Title:</label>
+          <input id="jobTitle" type="text" th:field="*{jobTitle}" name="jobTitle" />
+        </div>
+        
+        <div class="admin-profile--field">
+          <label>Username:</label>
+          <span id="username" th:text="*{username}"></span>
+        </div>        
+        
+        <div class="admin-profile--field">
+  		    <label for="location">Location:</label>
+          <input id="location" type="text" th:field="*{location}" name="location" />
+        </div>
+        
+        <div class="admin-profile--field">
+  		    <label for="geoLocation">GeoLocation (lat,long):</label>
+          <input id="geoLocation" type="text" th:field="*{geoLocation}" name="geoLocation" placeholder="ex:(34.021944, -118.481389)"/>
+        </div>
+        
+        <div class="admin-profile--field bio">
+  		    <label for="bio">Bio:</label>
+          <textarea id="bio" th:field="*{bio}" name="bio"></textarea>
+        </div>
+        
+        <div class="admin-profile--field">
+  		    <label>Github Username: </label>
+          <span id="githubUsername" th:text="*{githubUsername}" ></span>
+        </div>
+        
+        <div class="admin-profile--field">
+  		    <label for="speakerdeckUsername">Speakerdeck Username:</label>
+          <input id="speakerdeckUsername" type="text" th:field="*{speakerdeckUsername}" name="speakerdeckUsername" />
+        </div>
+        
+        <div class="admin-profile--field">
+          <label for="twitterUsername">Twitter Username:</label>
+          <input id="twitterUsername" type="text" th:field="*{twitterUsername}" name="twitterUsername" />
+        </div>
+        
+        <div class="admin-profile--field">
+          <label for="lanyrdUsername">Lanyrd Username:</label>
+          <input id="lanyrdUsername" type="text" th:field="*{lanyrdUsername}" name="lanrydUsername" />
+        </div>
+        <!-- <label for="videoEmbeds">Video Embeds:<textarea id="videoEmbeds" th:field="*{videoEmbeds}" name="videoEmbeds"></textarea></label> -->
+        <input type="hidden" name="_method" value="PUT" />
+				<div class="admin-profile--field">
+          <label for="gravatarEmail">Gravatar Email:</label>
+          <input id="gravatarEmail" type="text" th:field="*{gravatarEmail}" name="gravatarEmail" />
+        </div>
+        <div class="admin-profile--field">
+          <img th:src="*{avatarUrl}" class="push-right" />
+          <p class="image-note">(change your Gravatar settings at <a href="https://github.com/settings/profile"> https://github.com/settings/profile</a>)</p>
+        </div>
+        <div class="admin-profile--field submit-form">
+          <button type="submit" class="btn btn-black push-right">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>

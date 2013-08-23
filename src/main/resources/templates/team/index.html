@@ -37,7 +37,7 @@
         <div class="team-member--info">
           <a th:href="@{'/team/' + ${profile.username}}" class="team-member--name" th:text="${profile.name}">Member Name</a>
           <div class="team-member--bio">
-            <p class="team-member--position" th:text="${profile.bio}">Some bio</p>
+            <p class="team-member--position" th:text="${profile.jobTitle}">Rock Star</p>
             <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
           </div>
           <div class="team-member--social">
@@ -52,6 +52,7 @@
     <script th:inline="javascript">
       /*<![CDATA[*/
       var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
+	  $(function() { Spring.CreateMap() });
       /*]]>*/
     </script>
   </div>

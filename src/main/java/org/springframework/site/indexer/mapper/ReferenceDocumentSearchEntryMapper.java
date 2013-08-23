@@ -33,7 +33,7 @@ public class ReferenceDocumentSearchEntryMapper implements SearchEntryMapper<Doc
 		entry.setProjectId(project.getId());
 		entry.setVersion(version.getVersion());
 
-		entry.addFacetPaths("Documentation", "Documentation/Reference", "Projects", "Projects/" + project.getName(),
+		entry.addFacetPaths("Projects", "Projects/Reference", "Projects/" + project.getName(),
 				"Projects/" + project.getName() + "/" + version.getVersion());
 
 		return entry;

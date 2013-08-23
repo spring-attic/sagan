@@ -1,20 +1,20 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.site.domain.blog.Post;
 import org.springframework.site.domain.blog.PostBuilder;
 import org.springframework.site.domain.blog.PostRepository;
 import org.springframework.test.web.servlet.MvcResult;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
@@ -34,73 +34,69 @@ public class BlogIndexTests extends IntegrationTestBase {
 
 	@Test
 	public void showsBlogIndex() throws Exception {
-		MvcResult result = this.mockMvc.perform(get("/blog"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andReturn();
+		MvcResult result = this.mockMvc.perform(get("/blog")).andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html")).andReturn();
 
 		Document document = Jsoup.parse(result.getResponse().getContentAsString());
 		assertThat(document.select("ul.nav li.active").text(), equalTo("Blog"));
 
 		assertThat(document.select(".blog-category.active").text(), equalTo("All Posts"));
-		assertThat(document.head().getElementsByAttributeValue("type", "application/atom+xml").get(0).attr("href"), equalTo("/blog.atom"));
+		assertThat(
+				document.head()
+						.getElementsByAttributeValue("type", "application/atom+xml")
+						.get(0).attr("href"), equalTo("/blog.atom"));
 	}
 
 	@Test
 	public void given1Post_blogIndexShowsPostSummary() throws Exception {
 		Post post = createSinglePost();
 
-		MvcResult response = mockMvc.perform(get("/blog"))
+		MvcResult response = this.mockMvc.perform(get("/blog"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andReturn();
+				.andExpect(content().contentTypeCompatibleWith("text/html")).andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 		assertThat(html.select(".blog--title a").first().text(), is(post.getTitle()));
 	}
 
 	@Test
-	public void givenPostContentThatIsEqualToSummary_blogIndexShouldNotShow_ReadMore() throws Exception {
+	public void givenPostContentThatIsEqualToSummary_blogIndexShouldNotShow_ReadMore()
+			throws Exception {
 		String summary = "A blog post string that is longish.";
 		String content = summary;
-		Post post = new PostBuilder()
-				.renderedContent(content)
-				.renderedSummary(summary)
+		Post post = new PostBuilder().renderedContent(content).renderedSummary(summary)
 				.build();
 
-		postRepository.save(post);
+		this.postRepository.save(post);
 
-		MvcResult result = mockMvc.perform(get("/blog")).andReturn();
+		MvcResult result = this.mockMvc.perform(get("/blog")).andReturn();
 		String response = result.getResponse().getContentAsString();
 		assertThat(response, not(containsString("Read more")));
 	}
 
 	@Test
-	public void givenPostContentThatIsLongerThanSummary_blogIndexShouldShow_ReadMore() throws Exception {
+	public void givenPostContentThatIsLongerThanSummary_blogIndexShouldShow_ReadMore()
+			throws Exception {
 		String summary = "A blog post string that is longish.";
 		String content = "";
 		for (int i = 0; i < 50; i++) {
 			content = content + summary;
 		}
-		Post post = new PostBuilder()
-				.renderedContent(content)
-				.renderedSummary(summary)
+		Post post = new PostBuilder().renderedContent(content).renderedSummary(summary)
 				.build();
 
-		postRepository.save(post);
+		this.postRepository.save(post);
 
-		MvcResult result = mockMvc.perform(get("/blog")).andReturn();
+		MvcResult result = this.mockMvc.perform(get("/blog")).andReturn();
 		String response = result.getResponse().getContentAsString();
 		assertThat(response, containsString("Read more"));
 	}
 
 	private Post createSinglePost() {
 		Post post = new PostBuilder().title("This week in Spring - June 3, 2013")
-										 .rawContent("Raw content")
-										 .renderedContent("Html content")
-										 .renderedSummary("Html summary")
-										 .build();
-		postRepository.save(post);
+				.rawContent("Raw content").renderedContent("Html content")
+				.renderedSummary("Html summary").build();
+		this.postRepository.save(post);
 		return post;
 	}
 
@@ -108,18 +104,17 @@ public class BlogIndexTests extends IntegrationTestBase {
 	public void givenManyPosts_blogIndexShowsLatest10PostSummaries() throws Exception {
 		createManyPostsInNovember(11);
 
-		MvcResult response = mockMvc.perform(get("/blog"))
+		MvcResult response = this.mockMvc.perform(get("/blog"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andReturn();
-
-		MockHttpServletRequest request = response.getRequest();
+				.andExpect(content().contentTypeCompatibleWith("text/html")).andReturn();
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
 		assertThat(numberOfBlogPosts(html), is(10));
-		assertThat(html.select(".blog--container .date").first().text(), is("November 11, 2012"));
-		assertThat(html.select(".blog--container .date").last().text(), is("November 2, 2012"));
+		assertThat(html.select(".blog--container .date").first().text(),
+				is("November 11, 2012"));
+		assertThat(html.select(".blog--container .date").last().text(),
+				is("November 2, 2012"));
 	}
 
 	private int numberOfBlogPosts(Document html) {
@@ -131,20 +126,19 @@ public class BlogIndexTests extends IntegrationTestBase {
 		List<Post> posts = new ArrayList<Post>();
 		for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
 			calendar.set(2012, 10, postNumber);
-			Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2012")
-					.rawContent("Raw content")
-					.renderedContent("Html content")
-					.renderedSummary("Html summary")
-					.createdAt(calendar.getTime())
-					.publishAt(calendar.getTime())
-					.build();
+			Post post = new PostBuilder()
+					.title("This week in Spring - November " + postNumber + ", 2012")
+					.rawContent("Raw content").renderedContent("Html content")
+					.renderedSummary("Html summary").createdAt(calendar.getTime())
+					.publishAt(calendar.getTime()).build();
 			posts.add(post);
 		}
-		postRepository.save(posts);
+		this.postRepository.save(posts);
 	}
 
 	@Test
-	public void given1PageOfResults_blogIndexDoesNotShowPaginationControl() throws Exception {
+	public void given1PageOfResults_blogIndexDoesNotShowPaginationControl()
+			throws Exception {
 		createManyPostsInNovember(1);
 
 		MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();

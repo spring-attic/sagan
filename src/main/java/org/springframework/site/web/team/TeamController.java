@@ -61,6 +61,9 @@ public class TeamController {
 		if (profile == null) {
 			throw new EntityNotFoundException("Profile not found with Id=" + username);
 		}
+		if (profile.isHidden()) {
+			throw new EntityNotFoundException("Profile not active: " + username);
+		}
 		model.addAttribute("profile", profile);
 		Page<Post> posts = blogService.getPublishedPostsForMember(profile, PageableFactory.forLists(1));
 		Page<PostView> postViewPage = postViewFactory.createPostViewPage(posts);

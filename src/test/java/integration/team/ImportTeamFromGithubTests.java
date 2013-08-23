@@ -43,14 +43,14 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 		GitHubUser[] gitHubUsers = mapper.readValue(membersJson, GitHubUser[].class);
 		ResponseEntity<GitHubUser[]> responseEntity = new ResponseEntity<>(gitHubUsers, HttpStatus.OK);
 
-		given(restOperations.getForEntity("https://api.github.com/teams/435080/members", GitHubUser[].class)).willReturn(responseEntity);
+		given(restOperations.getForEntity("https://api.github.com/teams/{teamId}/members", GitHubUser[].class, "435080")).willReturn(responseEntity);
 
 		stubRestClient.putResponse("/users/jdoe", FixtureLoader.load("/fixtures/github/ghUserProfile-jdoe.json"));
 		stubRestClient.putResponse("/users/asmith", FixtureLoader.load("/fixtures/github/ghUserProfile-asmith.json"));
 	}
 
 	@Test
-	public void importAddsNewTeamMembers() throws Exception {
+	public void importAddsNewTeamMembersAndSetsThemToBeHidden() throws Exception {
 		teamImporter.importTeamMembers(gitHub);
 
 		MemberProfile john = teamRepository.findByGithubId(123L);
@@ -58,13 +58,13 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 		assertThat(john.getGithubUsername(), equalTo("jdoe"));
 		assertThat(john.getUsername(), equalTo("jdoe"));
 		assertThat(john.getName(), equalTo("John Doe"));
-		assertThat(john.isHidden(), equalTo(false));
+		assertThat(john.isHidden(), equalTo(true));
 
 		MemberProfile adam = teamRepository.findByGithubId(987L);
 		assertThat(adam, not(nullValue()));
 		assertThat(adam.getGithubUsername(), equalTo("asmith"));
 		assertThat(adam.getName(), equalTo("Adam Smith"));
-		assertThat(adam.isHidden(), equalTo(false));
+		assertThat(adam.isHidden(), equalTo(true));
 	}
 
 	@Test
@@ -81,23 +81,6 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
 		assertThat(updatedProfile, not(nullValue()));
 		assertThat(updatedProfile.getGithubUsername(), equalTo("jdoe"));
 		assertThat(updatedProfile.getUsername(), equalTo("oldusername"));
-		assertThat(updatedProfile.isHidden(), equalTo(false));
-	}
-
-	@Test
-	public void importWillActivateHiddenMembersThatAreOnTheGithubTeam() throws Exception {
-		MemberProfile profile = new MemberProfile();
-		profile.setGithubId(123L);
-		profile.setGithubUsername("jdoe");
-		profile.setUsername("jdoe");
-		profile.setHidden(true);
-		teamRepository.save(profile);
-
-		teamImporter.importTeamMembers(gitHub);
-
-		MemberProfile updatedProfile = teamRepository.findByGithubId(123L);
-		assertThat(updatedProfile, not(nullValue()));
-		assertThat(updatedProfile.getUsername(), equalTo("jdoe"));
 		assertThat(updatedProfile.isHidden(), equalTo(false));
 	}
 
