@@ -14,15 +14,15 @@ import java.util.List;
 @Service
 public class GitHubGuidesService implements GuidesService {
 
-	private static final String GITHUB_USERNAME = "springframework-meta";
-	private static final String REPOS_PATH = "/orgs/springframework-meta/repos?per_page=100";
-	private static final String README_PATH = "/repos/springframework-meta/%s/contents/README.md";
-	private static final String SIDEBAR_PATH = "/repos/springframework-meta/%s/contents/SIDEBAR.md";
+	private static final String GITHUB_USERNAME = "spring-guides";
+	private static final String REPOS_PATH = "/orgs/spring-guides/repos?per_page=100";
+	private static final String README_PATH = "/repos/spring-guides/%s/contents/README.md";
+	private static final String SIDEBAR_PATH = "/repos/spring-guides/%s/contents/SIDEBAR.md";
 
 	private static final Log log = LogFactory.getLog(GitHubGuidesService.class);
 
 	private final GitHubService gitHubService;
-	private static final String TUTORIAL_PAGE_PATH = "/repos/springframework-meta/%s/contents/%s/README.md";
+	private static final String TUTORIAL_PAGE_PATH = "/repos/spring-guides/%s/contents/%s/README.md";
 
 	@Autowired
 	public GitHubGuidesService(GitHubService gitHubService) {

@@ -11,8 +11,8 @@ import java.util.List;
 
 @Service
 public class UnderstandingGuidesService {
-	private static final String CONTENT_PATH = "/repos/springframework-meta/understanding/contents/%s/README.md";
-	private static final String SIDEBAR_PATH = "/repos/springframework-meta/understanding/contents/%s/SIDEBAR.md";
+	private static final String CONTENT_PATH = "/repos/spring-guides/understanding/contents/%s/README.md";
+	private static final String SIDEBAR_PATH = "/repos/spring-guides/understanding/contents/%s/SIDEBAR.md";
 
 	private final GitHubService gitHubService;
 
