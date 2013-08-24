@@ -18,10 +18,10 @@ public class UnderstandingGuidesTests extends IntegrationTestBase {
 	@Test
 	public void getExistingGuide() throws Exception {
 		String readmeHtml = FixtureLoader.load("/fixtures/understanding/amqp/README.html");
-		stubRestClient.putResponse("/repos/springframework-meta/understanding/contents/amqp/README.md", readmeHtml);
+		stubRestClient.putResponse("/repos/spring-guides/understanding/contents/amqp/README.md", readmeHtml);
 
 		String sidebarHtml = FixtureLoader.load("/fixtures/understanding/amqp/SIDEBAR.html");
-		stubRestClient.putResponse("/repos/springframework-meta/understanding/contents/amqp/SIDEBAR.md", sidebarHtml);
+		stubRestClient.putResponse("/repos/spring-guides/understanding/contents/amqp/SIDEBAR.md", sidebarHtml);
 
 		MvcResult response = this.mockMvc.perform(get("/understanding/AMqp"))
 				.andExpect(status().isOk())

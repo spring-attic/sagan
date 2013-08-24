@@ -20,7 +20,7 @@
         </div>
         <aside id='sidebar' class="span4 content-right-pane--container">
           <a th:href="${guide.ciLatestUrl}" class="ci-status">
-            <img src="https://drone.io/github.com/springframework-meta/gs-rest-service/status.png" th:src="${guide.ciStatusImageUrl}"/>
+            <img src="https://drone.io/github.com/spring-guides/gs-rest-service/status.png" th:src="${guide.ciStatusImageUrl}"/>
           </a>
           <div class="right-pane-widget--container">
             <div class="github-actions">
@@ -31,7 +31,7 @@
                 <button class="btn" data-protocol="subversion">Subversion</button>
               </div>
               <div class="clone-url https">
-                <input type="text" id="clone-url-https" value="https://github.com/springframework-meta/gs-rest-service.git" th:value="${guide.gitRepoHttpsUrl}" readonly="readonly"/>
+                <input type="text" id="clone-url-https" value="https://github.com/spring-guides/gs-rest-service.git" th:value="${guide.gitRepoHttpsUrl}" readonly="readonly"/>
                 <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoHttpsUrl}" data-toggle="tooltip"></button>
               </div>
               <div class="clone-url ssh hide">
