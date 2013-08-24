@@ -43,6 +43,7 @@ public class SecurityConfiguration {
 			http.antMatcher("/signin/**")
 					.addFilterBefore(authenticationFilter(),
 							AnonymousAuthenticationFilter.class).anonymous();
+			http.csrf().disable();
 		}
 
 		// Not a @Bean because we explicitly do not want it added automatically by
