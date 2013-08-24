@@ -56,14 +56,14 @@ public class GitHubServiceIntegrationExamples {
 
 	@Test
 	public void rawFileAsHtml() {
-		String html = gitHubService.getRawFileAsHtml("/repos/spring-guides/springframework.org/contents/README.md");
-		assertThat(Jsoup.parse(html).select("h1").text(), equalTo("springframework.org"));
+		String html = gitHubService.getRawFileAsHtml("/repos/spring-io/spring.io/contents/README.md");
+		assertThat(Jsoup.parse(html).select("h1").text(), equalTo("spring.io"));
 	}
 
 	@Test
 	public void repoInfo() {
-		GitHubRepo repoInfo = gitHubService.getRepoInfo("spring-guides", "springframework.org");
-		assertThat(repoInfo.getName(), equalTo("springframework.org"));
+		GitHubRepo repoInfo = gitHubService.getRepoInfo("spring-io", "spring.io");
+		assertThat(repoInfo.getName(), equalTo("spring.io"));
 	}
 
 	@Test

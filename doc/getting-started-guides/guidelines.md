@@ -101,7 +101,7 @@ Capitalize the first letter of all major words in titles.
  2. Browse available [snippets][snippets] for use in GSGs
  3. See their use in practice in the [gs-rest-service README](https://github.com/spring-guides/gs-rest-service#readme)
 
-[snippets]: https://github.com/spring-guides/springframework.org/blob/master/doc/getting-started-guides/snippets.md
+[snippets]: https://github.com/spring-io/spring.io/blob/master/doc/getting-started-guides/snippets.md
 
 
 ## Do not mention cloning or downloading the repository in your guide

@@ -21,10 +21,7 @@ Getting Started Guides (GSGs) are:
 
 ## Use
 
-GSGs will have a prominent place in the redesigned springframework.org. Here are the current wireframes:
-
- - [http://springframework.org/getting-started](http://share.axure.com/50MZ29/?Page=Getting_Started_Guide___REST_V3)
- - [http://springframework.org/getting-started/gs-rest-service](http://share.axure.com/50MZ29/?Page=Getting_Started_Guide___REST_V3)
+GSGs have a prominent place at http://spring.io/guides#gs
 
 
 ## Develop
