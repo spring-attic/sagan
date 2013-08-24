@@ -22,6 +22,17 @@
 .docs--body .empty-project {
   margin-bottom: -40px;
 }
+.docs--body .docs-section-title {
+  margin: 40px 20px 30px;
+  border-top: 1px solid white;
+  padding-top: 40px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+.docs--body .docs-section-title.no-border {
+  border: 0;
+  padding-top: 0;
+}
 
 .docs--item {
   display: inline-block;
