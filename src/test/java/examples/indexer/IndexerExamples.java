@@ -44,7 +44,10 @@ import static org.hamcrest.Matchers.is;
 public class IndexerExamples {
 
 	@ClassRule
-	public static SetSystemProperty systemProperty = new SetSystemProperty("search.indexer.delay", "60000000");
+	public static SetSystemProperty delay = new SetSystemProperty("search.indexer.delay", "60000000");
+
+	@ClassRule
+	public static SetSystemProperty index = new SetSystemProperty("elasticsearch.client.index", "sagan-test");
 
 	@Autowired
 	private GettingStartedGuideIndexer gettingStartedGuideIndexer;
@@ -100,7 +103,7 @@ public class IndexerExamples {
 	}
 
 	private void rebuildIndex() {
-		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(jestClient);
+		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(jestClient, "sagan-test");
 		searchIndexSetup.deleteIndex();
 		searchIndexSetup.createIndex();
 	}
