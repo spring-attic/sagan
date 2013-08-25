@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class TeamImporter {
 
-	private static final String SPRING_TEAM_MEMBERS_ID = "435080";
+	private static final String SPRING_TEAM_MEMBERS_ID = "482984";
 
 	@Autowired
 	private GitHubService gitHubService;

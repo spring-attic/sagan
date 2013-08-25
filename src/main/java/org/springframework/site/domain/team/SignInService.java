@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SignInService {
 
-	private static final String SPRING_TEAM_MEMBERS_ID = "435080";
+	private static final String SPRING_TEAM_MEMBERS_ID = "482984";
 	private static final String IS_MEMBER_URL = "https://api.github.com/teams/{team}/members/{user}";
 	private final TeamService teamService;
 
