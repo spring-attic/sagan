@@ -34,6 +34,9 @@ public class SearchResultParser_FacetsTests {
 			"      \"total\": 15,\n" +
 			"      \"other\": 0,\n" +
 			"      \"terms\": [{\n" +
+			"        \"term\": \"Blog\",\n" +
+			"        \"count\": 2\n" +
+			"      }, {\n" +
 			"        \"term\": \"Guides\",\n" +
 			"        \"count\": 3\n" +
 			"      }, {\n" +
@@ -90,17 +93,18 @@ public class SearchResultParser_FacetsTests {
 	@Test
 	public void returnTopLevelFacets() {
 		List<SearchFacet> facets = searchResults.getFacets();
-		assertThat(facets.size(), equalTo(2));
-		assertThat(facets.get(0).getName(), equalTo("Guides"));
-		assertThat(facets.get(1).getName(), equalTo("Projects"));
+		assertThat(facets.size(), equalTo(3));
+		assertThat(facets.get(0).getName(), equalTo("Blog"));
+		assertThat(facets.get(1).getName(), equalTo("Guides"));
+		assertThat(facets.get(2).getName(), equalTo("Projects"));
 	}
 
 	@Test
 	public void returnNestedFacets() {
-		SearchFacet guidesFacet = searchResults.getFacets().get(0);
+		SearchFacet guidesFacet = searchResults.getFacets().get(1);
 		assertThat(guidesFacet.getFacets().size(), equalTo(3));
 
-		SearchFacet projectsFacet = searchResults.getFacets().get(1);
+		SearchFacet projectsFacet = searchResults.getFacets().get(2);
 		List<SearchFacet> projectsFacetFacets = projectsFacet.getFacets();
 		assertThat(projectsFacetFacets.size(), equalTo(4));
 		assertThat(projectsFacetFacets.get(0).getName(), equalTo("Spring Framework"));

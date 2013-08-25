@@ -239,14 +239,14 @@ projects:
       apiDocUrl: /spring-security/site/docs/{version}/apidocs/
       supportedVersions:
         - 3.1.4.RELEASE
-        - 3.2.0.M2
+        - 3.2.0.RC1
 
     - id: spring-security-oauth
       name: Spring Security OAuth
       lead: dsyer
       supportedVersions:
         - name: 1.0.5.RELEASE
-          refDocUrl: "{githubOrgBaseUrl}/spring-security-oauth/wiki/devguide"
+          refDocUrl: http://springsource.github.io/spring-security-oauth
           # TODO: this actually points to 1.0.0.RELEASE - seems to be the latest published api docs
           apiDocUrl: /spring-security/oauth/apidocs/index.html
 
@@ -267,21 +267,21 @@ projects:
       name: Spring Social
       lead: cwalls
       supportedVersions:
-        - 1.1.0.M3
+        - 1.1.0.M4
         - 1.0.3.RELEASE
 
     - id: spring-social-facebook
       name: Spring Social Facebook
       lead: cwalls
       supportedVersions:
-        - 1.1.0.M3
+        - 1.1.0.M4
         - 1.0.3.RELEASE
 
     - id: spring-social-twitter
       name: Spring Social Twitter
       lead: cwalls
       supportedVersions:
-        - 1.1.0.M3
+        - 1.1.0.M4
         - 1.0.5.RELEASE
 
     # ----------------------
@@ -303,7 +303,7 @@ projects:
       lead: apoutsma
       siteUrl: "{docsBaseUrl}/spring-ws/sites/2.0"
       supportedVersions:
-        - name: 2.1.3.RELEASE
+        - name: 2.1.4.RELEASE
           refDocUrl: /spring-ws/sites/2.0/reference/html/index.html
           apiDocUrl: /spring-ws/sites/2.0/apidocs/index.html
 
@@ -544,7 +544,7 @@ projects:
       refDocUrl: /spring-social-linkedin/docs/{version}/reference/html
       apiDocUrl: /spring-social-linkedin/docs/{version}/api/
       supportedVersions:
-        - 1.0.0.RC2
+        - 1.0.0.RC3
 
     # No releases
     - id: spring-social-tripit

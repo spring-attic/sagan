@@ -42,8 +42,8 @@ public class SecurityConfiguration {
 		protected void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/signin/**")
 					.addFilterBefore(authenticationFilter(),
-							AnonymousAuthenticationFilter.class).authorizeUrls()
-					.anyRequest().anonymous();
+							AnonymousAuthenticationFilter.class).anonymous();
+			http.csrf().disable();
 		}
 
 		// Not a @Bean because we explicitly do not want it added automatically by
@@ -70,9 +70,10 @@ public class SecurityConfiguration {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
+			http.requestMatchers().antMatchers("/admin/**", "/signout");
 			http.logout().logoutUrl("/signout")
 					.logoutSuccessUrl("/signin?signout=success");
-			http.authorizeUrls().antMatchers("/admin/**", "/signout").authenticated();
+			http.authorizeRequests().anyRequest().authenticated();
 		}
 
 		private AuthenticationEntryPoint authenticationEntryPoint() {

@@ -30,12 +30,12 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 To **skip the basics**, do the following:
 
  - [Download][zip] and unzip the source repository for this guide, or clone it using [Git][u-git]:
-`git clone https://github.com/springframework-meta/${project_id}.git`
+`git clone https://github.com/spring-guides/${project_id}.git`
  - cd into `${project_id}/initial`.
  - Jump ahead to [${jump_ahead}](#initial).
 
 **When you're finished**, you can check your results against the code in `${project_id}/complete`.
-[zip]: https://github.com/springframework-meta/${project_id}/archive/master.zip
+[zip]: https://github.com/spring-guides/${project_id}/archive/master.zip
 <@u_git/>
 </#macro>
 
@@ -90,7 +90,30 @@ The [Android Manifest] contains all the information required to run an Android a
 </#macro>
 
 <#macro build_status>
-[![Build Status](https://drone.io/github.com/springframework-meta/${project_id}/status.png)](https://drone.io/github.com/springframework-meta/${project_id}/latest)
+[![Build Status](https://drone.io/github.com/spring-guides/${project_id}/status.png)](https://drone.io/github.com/spring-guides/${project_id}/latest)
+</#macro>
+
+<#macro create_a_gradle_build>
+### Create a Gradle build file
+
+    <@snippet path="build.gradle" prefix="initial"/>
+    
+</#macro>
+
+<#macro create_a_maven_build>
+### Create a Maven build file
+
+    <@snippet path="pom.xml" prefix="initial"/>
+    
+</#macro>
+
+<#macro create_both_builds>
+### Create a Gradle build file
+Below is the [initial Gradle build file](https://github.com/spring-guides/${project_id}/blob/master/initial/build.gradle). But you can also use Maven. The pom.xml file is included [right here](https://github.com/spring-guides/${project_id}/blob/master/initial/pom.xml).
+
+    <@snippet path="build.gradle" prefix="initial"/>
+    
+    
 </#macro>
 
 
@@ -104,7 +127,7 @@ There's more to building RESTful web services than is covered here. You may want
 * [Creating self-describing APIs with HATEOAS](TODO)
 * [Securing a REST service with HTTP Basic](TODO)
 * [Securing a REST service with OAuth](TODO)
-* [Consuming REST services](https://github.com/springframework-meta/gs-consuming-rest-core/blob/master/README.md)
+* [Consuming REST services](https://github.com/spring-guides/gs-consuming-rest-core/blob/master/README.md)
 * [Testing REST services](TODO)
 </span>
 </#macro>
@@ -217,6 +240,59 @@ $ java -jar build/libs/${project_id}-0.1.0.jar
 > **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
 </#macro>
 
+<#macro build_an_executable_jar_with_both>
+Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
+
+Below are the Gradle steps, but if you are using Maven, you can find the updated pom.xml [right here](https://github.com/spring-guides/${project_id}/blob/master/complete/pom.xml) and build it by typing `mvn clean package`.
+
+Update your Gradle `build.gradle` file's `buildscript` section, so that it looks like this:
+
+```groovy
+buildscript {
+    repositories {
+        maven { url "http://repo.springsource.org/libs-snapshot" }
+        mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.BUILD-SNAPSHOT")
+    }
+}
+```
+
+Further down inside `build.gradle`, add the following to the list of applied plugins:
+
+```groovy
+apply plugin: 'spring-boot'
+```
+You can see the final version of `build.gradle` [right here]((https://github.com/spring-guides/${project_id}/blob/master/complete/build.gradle).
+
+The [Spring Boot gradle plugin][spring-boot-gradle-plugin] collects all the jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
+It also searches for the `public static void main()` method to flag as a runnable class.
+
+Now run the following command to produce a single executable JAR file containing all necessary dependency classes and resources:
+
+```sh
+$ ./gradlew build
+```
+
+If you are using Gradle, you can run the JAR by typing:
+
+```sh
+$ java -jar build/libs/${project_id}-0.1.0.jar
+```
+
+If you are using Maven, you can run the JAR by typing:
+
+```sh
+$ java -jar target/${project_id}-0.1.0.jar
+```
+
+[spring-boot-gradle-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-tools/spring-boot-gradle-plugin
+
+> **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
+</#macro>
+
+
 <#macro build_the_application>
 Build the application
 ------------------------
@@ -286,6 +362,19 @@ $ ./gradlew clean build && java -jar build/libs/${project_id}-0.1.0.jar
 
 </#macro>
 
+<#macro run_the_application_with_both module="service">
+Run the ${module}
+-------------------
+If you are using Gradle, you can run your ${module} at the command line this way:
+
+```sh
+$ ./gradlew clean build && java -jar build/libs/${project_id}-0.1.0.jar
+```
+
+> **Note:** If you are using Maven, you can run your ${module} by typing `mvn clean package && java -jar target/${project_id}-0.1.0.jar`.
+
+</#macro>
+
 <#macro run_the_application module="application">
 Run the ${module}
 -------------------
@@ -295,6 +384,20 @@ Run your ${module} with `java -jar` at the command line:
 $ java -jar target/${project_id}-0.1.0.jar
 ```
 
+</#macro>
+
+<#macro run_the_utility>
+To run the utility, simply run it from the command line using [Gradle][gs-gradle] like this:
+
+```sh
+$ ./gradlew clean build && java -jar build/libs/${project_id}-0.1.0.jar
+```
+Or if you are using [Maven][gs-maven], run it like this:
+```sh
+$ mvn package && java -jar target/${project_id}-0.1.0.jar
+```
+[gs-gradle]: /guides/gs/gradle
+[gs-maven]: /guides/gs/maven
 </#macro>
 
 <#macro u_oauth>

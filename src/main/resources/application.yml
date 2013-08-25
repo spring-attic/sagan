@@ -10,6 +10,8 @@ info:
     name: ${project.name}
     description: ${project.description}
     version: ${project.version}
+  spring:
+    profiles: ${spring.profiles.active:default} 
 
 spring:
   thymeleaf:
@@ -22,6 +24,8 @@ spring:
 security:
   basic:
     path: ""
+  user:
+    password: ${ADMIN_PASSWORD:}
 
 github:
   client:
@@ -38,6 +42,10 @@ spring:
     indexer:
       delay: 0
       base_url: http://localhost:8080
+elasticsearch:
+  client:
+    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
+    index: sagan-local
 
 ---
 
@@ -45,6 +53,9 @@ spring:
   profiles: indexer
   main:
     sources: org.springframework.site.indexer.configuration.IndexerConfiguration
+search:
+  indexer:
+    delay: 0
 server:
   port: 9000
 
@@ -54,12 +65,11 @@ spring:
   profiles: development
 search:
   indexer:
-    delay: 0
-    base_url: https://sagan.cfapps.io
+    base_url: https://sagan-development.cfapps.io
 elasticsearch:
   client:
-    # gonçalo's account at qbox
-    endpoint: https://qlmsjwfa.api.qbox.io
+    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
+    index: sagan-development
 
 ---
 
@@ -67,12 +77,11 @@ spring:
   profiles: staging
 search:
   indexer:
-    delay: 0
     base_url: https://sagan-staging.cfapps.io
 elasticsearch:
   client:
-    # gonçalo's account at qbox
-    endpoint: https://qlmsjwfa.api.qbox.io
+    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
+    index: sagan-staging
 
 ---
 
@@ -80,12 +89,11 @@ spring:
   profiles: production
 search:
   indexer:
-    delay: 0
     base_url: https://sagan-production.cfapps.io
 elasticsearch:
   client:
-    # chris' account at qbox
-    endpoint: https://jgzosqbq.api.qbox.io
+    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
+    index: sagan-production
 
 ---
 

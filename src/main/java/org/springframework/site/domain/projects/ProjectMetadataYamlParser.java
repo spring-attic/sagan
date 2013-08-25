@@ -1,7 +1,5 @@
 package org.springframework.site.domain.projects;
 
-import org.yaml.snakeyaml.Yaml;
-
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,20 +7,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.yaml.snakeyaml.Yaml;
+
+@SuppressWarnings("rawtypes")
 public class ProjectMetadataYamlParser {
 
 	public ProjectMetadataService createServiceFromYaml(InputStream projectMetadataYml) {
 		Map metadata = (Map) new Yaml().load(projectMetadataYml);
-		return new ProjectMetadataService(parseProjects(metadata), parseGhPagesBaseUrl(metadata));
+		return new ProjectMetadataService(parseProjects(metadata),
+				parseGhPagesBaseUrl(metadata));
 	}
 
 	private String parseGhPagesBaseUrl(Map metadata) {
-		return (String) ((Map)metadata.get("variables")).get("ghPagesBaseUrl");
+		return (String) ((Map) metadata.get("variables")).get("ghPagesBaseUrl");
 	}
 
 	private Map<String, List<Project>> parseProjects(Map metadata) {
+		@SuppressWarnings("unchecked")
 		ProjectParser projectParser = new ProjectParser(metadata);
-		Map<String, List> projectsYaml = (Map) metadata.get("projects");
+		@SuppressWarnings("unchecked")
+		Map<String, List> projectsYaml = (Map<String, List>) metadata.get("projects");
 		Map<String, List<Project>> projects = new HashMap<>();
 
 		for (Map.Entry<String, List> entry : projectsYaml.entrySet()) {
@@ -33,7 +37,7 @@ public class ProjectMetadataYamlParser {
 			}
 
 			if (entry.getValue() == null) {
-				projects.put(category, Collections.<Project>emptyList());
+				projects.put(category, Collections.<Project> emptyList());
 				continue;
 			}
 
@@ -44,9 +48,11 @@ public class ProjectMetadataYamlParser {
 		return projects;
 	}
 
-	private List<Project> buildCategoryProjects(ProjectParser projectParser, Map.Entry<String, List> entry) {
+	private List<Project> buildCategoryProjects(ProjectParser projectParser,
+			Map.Entry<String, List> entry) {
 		List<Project> categoryProjects = new ArrayList<>();
 		for (Object value : entry.getValue()) {
+			@SuppressWarnings("unchecked")
 			Map<String, Object> projectData = (Map<String, Object>) value;
 			categoryProjects.add(projectParser.parse(projectData));
 		}

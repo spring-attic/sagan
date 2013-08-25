@@ -3,11 +3,11 @@ package org.springframework.site.search;
 import java.util.List;
 import java.util.Stack;
 
-public class SearchFacetBuilder {
+public class SearchFacetTreeBuilder {
 	private SearchFacet root = new SearchFacet("", "", 0);
 	private Stack<SearchFacet> previousFacets = new Stack<>();
 
-	public SearchFacetBuilder() {
+	public SearchFacetTreeBuilder() {
 		previousFacets.push(root);
 	}
 

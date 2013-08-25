@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:app="http://www.springframework.org"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
@@ -8,12 +7,20 @@
 <ul layout:fragment="facets">
     <li th:each="facet : ${root.facets}">
         <label>
-            <input type="checkbox" name="filters" th:value="${facet.fullPath}" th:field="*{filters}" />
             <span th:text="${facet.linkText}">Facet (123)</span>
+            <input type="checkbox" name="filters" th:value="${facet.fullPath}" th:field="*{filters}" />
         </label>
-        <ul th:if="${facet.hasFacets()}" layout:include="search/_facets :: facets" th:with="root=${facet}">
 
-        </ul>
+		<ul class='header-facets' th:if="${facet.hasHeaderFacets()}">
+			<li th:each="headerFacet : ${facet.headerFacets}">
+				<label>
+					<span th:text="${headerFacet.name}">Facet</span>
+					<input type="checkbox" name="filters" th:value="${headerFacet.fullPath}" th:field="*{filters}" />
+				</label>
+			</li>
+		</ul>
+
+        <ul th:if="${facet.hasFacets()}" layout:include="search/_facets :: facets" th:with="root=${facet}"></ul>
     </li>
 </ul>
 

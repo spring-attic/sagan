@@ -1,12 +1,12 @@
 # Managing Getting Started Guides
 
 - Use GitHub for Mac|Windows
-- Point it at springframework-meta org
+- Point it at spring-guides org
 - Clone everything under one parent dir
 - This is the easiest way to get all the repos and keep them up to date
 
 - use `mr`, the multiple repository tool: https://github.com/joeyh/mr, or if you are using a Mac with homebrew, simply type `brew install mr`.
-- cd to your springframework-meta root directory
+- cd to your spring-guides root directory
 ```sh
 for repo in $(find . -name .git); do
 	cd $(dirname $repo); pwd; mr register; cd ..;

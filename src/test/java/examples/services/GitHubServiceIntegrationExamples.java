@@ -35,7 +35,7 @@ public class GitHubServiceIntegrationExamples {
 
 	@Test
 	public void testGuideRepoRequest() throws Exception {
-		GitHubRepo[] guideRepos = gitHubService.getGitHubRepos("/orgs/springframework-meta/repos?per_page=100");
+		GitHubRepo[] guideRepos = gitHubService.getGitHubRepos("/orgs/spring-guides/repos?per_page=100");
 		assertThat(guideRepos.length, greaterThan(0));
 
 		Collection<GitHubRepo> tutorials = Collections2.filter(Arrays.asList(guideRepos), new Predicate<GitHubRepo>() {
@@ -56,14 +56,14 @@ public class GitHubServiceIntegrationExamples {
 
 	@Test
 	public void rawFileAsHtml() {
-		String html = gitHubService.getRawFileAsHtml("/repos/springframework-meta/springframework.org/contents/README.md");
-		assertThat(Jsoup.parse(html).select("h1").text(), equalTo("springframework.org"));
+		String html = gitHubService.getRawFileAsHtml("/repos/spring-io/spring.io/contents/README.md");
+		assertThat(Jsoup.parse(html).select("h1").text(), equalTo("spring.io"));
 	}
 
 	@Test
 	public void repoInfo() {
-		GitHubRepo repoInfo = gitHubService.getRepoInfo("springframework-meta", "springframework.org");
-		assertThat(repoInfo.getName(), equalTo("springframework.org"));
+		GitHubRepo repoInfo = gitHubService.getRepoInfo("spring-io", "spring.io");
+		assertThat(repoInfo.getName(), equalTo("spring.io"));
 	}
 
 	@Test

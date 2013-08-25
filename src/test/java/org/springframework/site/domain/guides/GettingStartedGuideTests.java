@@ -24,31 +24,31 @@ public class GettingStartedGuideTests {
 
 	@Test
 	public void testGetZipUrl() throws Exception {
-		assertThat(guide.getZipUrl(), is("https://github.com/springframework-meta/gs-rest-service/archive/master.zip"));
+		assertThat(guide.getZipUrl(), is("https://github.com/spring-guides/gs-rest-service/archive/master.zip"));
 	}
 
 	@Test
 	public void testGetGitRepoHttpsUrl() throws Exception {
-		assertThat(guide.getGitRepoHttpsUrl(), is("https://github.com/springframework-meta/gs-rest-service.git"));
+		assertThat(guide.getGitRepoHttpsUrl(), is("https://github.com/spring-guides/gs-rest-service.git"));
 	}
 
 	@Test
 	public void testGetGitRepoSshUrl() throws Exception {
-		assertThat(guide.getGitRepoSshUrl(), is("git@github.com:springframework-meta/gs-rest-service.git"));
+		assertThat(guide.getGitRepoSshUrl(), is("git@github.com:spring-guides/gs-rest-service.git"));
 	}
 
 	@Test
 	public void testGetRepoSubversionUrl() throws Exception {
-		assertThat(guide.getGitRepoSubversionUrl(), is("https://github.com/springframework-meta/gs-rest-service"));
+		assertThat(guide.getGitRepoSubversionUrl(), is("https://github.com/spring-guides/gs-rest-service"));
 	}
 
 	@Test
 	public void testGetCiStatusImageUrl() throws Exception {
-		assertThat(guide.getCiStatusImageUrl(), is("https://drone.io/github.com/springframework-meta/gs-rest-service/status.png"));
+		assertThat(guide.getCiStatusImageUrl(), is("https://drone.io/github.com/spring-guides/gs-rest-service/status.png"));
 	}
 
 	@Test
 	public void testGetCiLatestUrl() throws Exception {
-		assertThat(guide.getCiLatestUrl(), is("https://drone.io/github.com/springframework-meta/gs-rest-service/latest"));
+		assertThat(guide.getCiLatestUrl(), is("https://drone.io/github.com/spring-guides/gs-rest-service/latest"));
 	}
 }

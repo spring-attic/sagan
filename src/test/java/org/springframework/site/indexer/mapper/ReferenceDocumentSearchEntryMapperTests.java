@@ -34,7 +34,7 @@ public class ReferenceDocumentSearchEntryMapperTests {
 
 	@Test
 	public void facetPaths() {
-		assertThat(entry.getFacetPaths(), contains("Documentation", "Documentation/Reference", "Projects", "Projects/Spring Project", "Projects/Spring Project/3.2.1.RELEASE"));
+		assertThat(entry.getFacetPaths(), contains("Projects", "Projects/Reference", "Projects/Spring Project", "Projects/Spring Project/3.2.1.RELEASE"));
 	}
 
 	@Test

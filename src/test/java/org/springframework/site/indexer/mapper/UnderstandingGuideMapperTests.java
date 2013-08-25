@@ -9,6 +9,7 @@ import org.springframework.site.test.FixtureLoader;
 import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 
 public class UnderstandingGuideMapperTests {
@@ -33,7 +34,7 @@ public class UnderstandingGuideMapperTests {
 
 	@Test
 	public void facetTypeIsUnderstanding() throws Exception {
-		assertThat(entry.getFacetPaths().get(0), equalTo("Understanding"));
+		assertThat(entry.getFacetPaths(), containsInAnyOrder("Guides", "Guides/Understanding"));
 	}
 
 	@Test

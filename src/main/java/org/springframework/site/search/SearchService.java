@@ -10,6 +10,7 @@ import io.searchbox.core.Search;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,6 @@ import java.util.List;
 
 @Service
 public class SearchService {
-
-	public static final String INDEX = "site";
 
 	private static Log logger = LogFactory.getLog(SearchService.class);
 
@@ -29,6 +28,9 @@ public class SearchService {
 	private boolean useRefresh = false;
 	private SearchResultParser searchResultParser;
 
+	@Value("${elasticsearch.client.index}")
+	private String index;
+
 	@Autowired
 	public SearchService(JestClient jestClient, SearchResultParser searchResultParser) {
 		this.jestClient = jestClient;
@@ -36,12 +38,13 @@ public class SearchService {
 	}
 
 	public void saveToIndex(SearchEntry entry) {
-		Index.Builder newIndexBuilder = new Index.Builder(entry).id(entry.getId()).index(INDEX)
+		Index.Builder newIndexBuilder = new Index.Builder(entry).id(entry.getId()).index(index)
 				.type(entry.getType());
 
 		if (this.useRefresh) {
 			newIndexBuilder.refresh(true);
 		}
+		logger.debug("Indexing " + entry.getPath());
 		execute(newIndexBuilder.build());
 	}
 
@@ -52,7 +55,7 @@ public class SearchService {
 		} else {
 			searchBuilder = this.searchQueryBuilder.forQuery(term, pageable, filter);
 		}
-		searchBuilder.addIndex(INDEX);
+		searchBuilder.addIndex(index);
 		Search search = searchBuilder.build();
 		logger.debug(search.getData());
 		JestResult jestResult = execute(search);
@@ -65,7 +68,7 @@ public class SearchService {
 	public void removeFromIndex(SearchEntry entry) {
 		Delete delete = new Delete.Builder()
 				.id(entry.getId())
-				.index(INDEX)
+				.index(index)
 				// TODO this should come from the 'entry'
 				.type("site")
 				.build();

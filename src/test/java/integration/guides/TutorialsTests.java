@@ -12,7 +12,7 @@ public class TutorialsTests extends IntegrationTestBase {
 
 	@Test
 	public void getTutorialRootPage() throws Exception {
-		stubRestClient.putResponse("/repos/springframework-meta/tut-my-tutorial/contents/README.md",
+		stubRestClient.putResponse("/repos/spring-guides/tut-my-tutorial/contents/README.md",
 				"html");
 
 		this.mockMvc.perform(get("/guides/tutorials/my-tutorial"))
@@ -23,7 +23,7 @@ public class TutorialsTests extends IntegrationTestBase {
 
 	@Test
 	public void getTutorialPage1() throws Exception {
-		stubRestClient.putResponse("/repos/springframework-meta/tut-my-tutorial/contents/1/README.md",
+		stubRestClient.putResponse("/repos/spring-guides/tut-my-tutorial/contents/1/README.md",
 				"html");
 
 		this.mockMvc.perform(get("/guides/tutorials/my-tutorial/1"))
@@ -36,7 +36,7 @@ public class TutorialsTests extends IntegrationTestBase {
 	public void getImage() throws Exception {
 		String imageJson = FixtureLoader.load("/fixtures/github/imageResponse.json");
 
-		stubRestClient.putResponse("/repos/springframework-meta/tut-my-tutorial/contents/images/image.png",
+		stubRestClient.putResponse("/repos/spring-guides/tut-my-tutorial/contents/images/image.png",
 				imageJson);
 
 

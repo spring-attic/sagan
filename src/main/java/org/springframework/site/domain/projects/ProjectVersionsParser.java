@@ -1,12 +1,12 @@
 package org.springframework.site.domain.projects;
 
-import org.springframework.web.util.UriTemplate;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.util.UriTemplate;
 
 import static org.springframework.site.domain.projects.ProjectRelease.ReleaseStatus.CURRENT;
 import static org.springframework.site.domain.projects.ProjectRelease.ReleaseStatus.PRERELEASE;
@@ -56,7 +56,7 @@ class ProjectVersionsParser {
 				projectArtifactId = (String) projectData.get("artifactId");
 			}
 
-			for (Object value : (List) projectData.get("supportedVersions")) {
+			for (Object value : (List<?>) projectData.get("supportedVersions")) {
 				SupportedVersion supportedVersion = new SupportedVersion();
 				supportedVersion.artifactId = projectArtifactId;
 				supportedVersion.refDocUrl = projectRefDocUrl;
@@ -67,6 +67,7 @@ class ProjectVersionsParser {
 				if (value instanceof String) {
 					supportedVersion.name = value.toString();
 				} else {
+					@SuppressWarnings("unchecked")
 					Map<String, String> versionMap = (Map<String, String>) value;
 					supportedVersion.name = versionMap.get("name");
 					if (versionMap.containsKey("refDocUrl")) {
@@ -97,25 +98,28 @@ class ProjectVersionsParser {
 		});
 	}
 
-	private List<ProjectRelease> buildProjectVersions(List<SupportedVersion> supportedVersions) {
+	private List<ProjectRelease> buildProjectVersions(
+			List<SupportedVersion> supportedVersions) {
 		List<ProjectRelease> projectReleases = new ArrayList<>();
 		String currentVersion = null;
 		for (SupportedVersion supportedVersion : supportedVersions) {
-			variables.put("version", supportedVersion.name);
+			this.variables.put("version", supportedVersion.name);
 			String refDocUrl = buildDocUrl(supportedVersion.refDocUrl, "refDocUrl");
 			String apiDocUrl = buildDocUrl(supportedVersion.apiDocUrl, "apiDocUrl");
-			variables.remove("version");
+			this.variables.remove("version");
 			String groupId = supportedVersion.groupId;
 			if (groupId.isEmpty()) {
-				groupId = variables.get("groupId");
+				groupId = this.variables.get("groupId");
 			}
 			String artifactId = supportedVersion.artifactId;
 
-			ProjectRelease.ReleaseStatus releaseStatus = getVersionRelease(supportedVersion.name, currentVersion);
+			ProjectRelease.ReleaseStatus releaseStatus = getVersionRelease(
+					supportedVersion.name, currentVersion);
 			if (currentVersion == null && releaseStatus == CURRENT) {
 				currentVersion = supportedVersion.name;
 			}
-			projectReleases.add(new ProjectRelease(supportedVersion.name, releaseStatus, refDocUrl, apiDocUrl, groupId, artifactId));
+			projectReleases.add(new ProjectRelease(supportedVersion.name, releaseStatus,
+					refDocUrl, apiDocUrl, groupId, artifactId));
 		}
 		return projectReleases;
 	}
@@ -126,17 +130,18 @@ class ProjectVersionsParser {
 		}
 
 		if (docPath.isEmpty()) {
-			docPath = defaultUrls.get(defaultUrlKey);
+			docPath = this.defaultUrls.get(defaultUrlKey);
 		}
 
-		String docUrl = new UriTemplate(docPath).expand(variables).toString();
+		String docUrl = new UriTemplate(docPath).expand(this.variables).toString();
 		if (!docUrl.startsWith("http")) {
-			return variables.get("docsBaseUrl") + docUrl;
+			return this.variables.get("docsBaseUrl") + docUrl;
 		}
 		return docUrl;
 	}
 
-	private ProjectRelease.ReleaseStatus getVersionRelease(String versionName, String currentVersion) {
+	private ProjectRelease.ReleaseStatus getVersionRelease(String versionName,
+			String currentVersion) {
 		boolean isPreRelease = versionName.matches("[0-9.]+(M|RC)\\d+");
 		if (isPreRelease) {
 			return PRERELEASE;

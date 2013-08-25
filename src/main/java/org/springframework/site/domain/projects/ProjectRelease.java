@@ -14,7 +14,8 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 	private final String artifactId;
 	private final Repository repository;
 
-	public ProjectRelease(String versionName, ReleaseStatus releaseStatus, String refDocUrl, String apiDocUrl, String groupId, String artifactId) {
+	public ProjectRelease(String versionName, ReleaseStatus releaseStatus,
+			String refDocUrl, String apiDocUrl, String groupId, String artifactId) {
 		this.versionName = versionName;
 		this.releaseStatus = releaseStatus;
 		this.refDocUrl = refDocUrl;
@@ -25,51 +26,51 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 	}
 
 	public boolean isCurrent() {
-		return releaseStatus == ReleaseStatus.CURRENT;
+		return this.releaseStatus == ReleaseStatus.CURRENT;
 	}
 
 	public boolean isPreRelease() {
-		return releaseStatus == ReleaseStatus.PRERELEASE;
+		return this.releaseStatus == ReleaseStatus.PRERELEASE;
 	}
 
 	public boolean isSupported() {
-		return releaseStatus == ReleaseStatus.SUPPORTED;
+		return this.releaseStatus == ReleaseStatus.SUPPORTED;
 	}
 
 	public String getVersion() {
-		return versionName;
+		return this.versionName;
 	}
 
 	public String getVersionDisplayName() {
-		return versionName.replaceAll(".RELEASE$", "");
+		return this.versionName.replaceAll(".RELEASE$", "");
 	}
 
 	public String getRefDocUrl() {
-		return refDocUrl;
+		return this.refDocUrl;
 	}
 
 	public boolean hasRefDocUrl() {
-		return !refDocUrl.isEmpty();
+		return !this.refDocUrl.isEmpty();
 	}
 
 	public String getApiDocUrl() {
-		return apiDocUrl;
+		return this.apiDocUrl;
 	}
 
 	public boolean hasApiDocUrl() {
-		return !apiDocUrl.isEmpty();
+		return !this.apiDocUrl.isEmpty();
 	}
 
 	public String getGroupId() {
-		return groupId;
+		return this.groupId;
 	}
 
 	public String getArtifactId() {
-		return artifactId;
+		return this.artifactId;
 	}
 
 	public Repository getRepository() {
-		return repository;
+		return this.repository;
 	}
 
 	@Override
@@ -79,39 +80,42 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
 		ProjectRelease that = (ProjectRelease) o;
 
-		if (!apiDocUrl.equals(that.apiDocUrl)) return false;
-		if (!refDocUrl.equals(that.refDocUrl)) return false;
-		if (releaseStatus != that.releaseStatus) return false;
-		if (!versionName.equals(that.versionName)) return false;
+		if (!this.apiDocUrl.equals(that.apiDocUrl))
+			return false;
+		if (!this.refDocUrl.equals(that.refDocUrl))
+			return false;
+		if (this.releaseStatus != that.releaseStatus)
+			return false;
+		if (!this.versionName.equals(that.versionName))
+			return false;
 
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = versionName.hashCode();
-		result = 31 * result + releaseStatus.hashCode();
-		result = 31 * result + refDocUrl.hashCode();
-		result = 31 * result + apiDocUrl.hashCode();
+		int result = this.versionName.hashCode();
+		result = 31 * result + this.releaseStatus.hashCode();
+		result = 31 * result + this.refDocUrl.hashCode();
+		result = 31 * result + this.apiDocUrl.hashCode();
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "ProjectRelease{" +
-				"versionName='" + versionName + '\'' +
-				", release=" + releaseStatus +
-				", refDocUrl='" + refDocUrl + '\'' +
-				", apiDocUrl='" + apiDocUrl + '\'' +
-				'}';
+		return "ProjectRelease{" + "versionName='" + this.versionName + '\''
+				+ ", release=" + this.releaseStatus + ", refDocUrl='" + this.refDocUrl
+				+ '\'' + ", apiDocUrl='" + this.apiDocUrl + '\'' + '}';
 	}
 
-	private static class Repository {
+	public static class Repository {
 		private String id;
 		private String name;
 		private String url;
@@ -130,36 +134,28 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 			}
 
 			if (versionName.contains("SNAPSHOT")) {
-				return new Repository(
-						"spring-snapshots",
-						"Spring Snapshots",
-						"http://repo.springsource.org/snapshot",
-						true
-				);
+				return new Repository("spring-snapshots", "Spring Snapshots",
+						"http://repo.springsource.org/snapshot", true);
 			}
 
-			return new Repository(
-					"spring-milestones",
-					"Spring Milestones",
-					"http://repo.springsource.org/milestone",
-					false
-			);
+			return new Repository("spring-milestones", "Spring Milestones",
+					"http://repo.springsource.org/milestone", false);
 		}
 
 		public String getId() {
-			return id;
+			return this.id;
 		}
 
 		public String getName() {
-			return name;
+			return this.name;
 		}
 
 		public String getUrl() {
-			return url;
+			return this.url;
 		}
 
 		public Boolean getSnapshotsEnabled() {
-			return snapshotsEnabled;
+			return this.snapshotsEnabled;
 		}
 	}
 }

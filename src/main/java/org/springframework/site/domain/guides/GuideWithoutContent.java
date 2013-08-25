@@ -7,13 +7,13 @@ public class GuideWithoutContent {
 	private final String title;
 	private final String subtitle;
 
-	private final static String REPO_ZIP_URL = "https://github.com/springframework-meta/%s/archive/master.zip";
-	private final static String REPO_HTTPS_URL = "https://github.com/springframework-meta/%s.git";
-	private final static String GITHUB_HTTPS_URL = "https://github.com/springframework-meta/%s";
-	private final static String REPO_SSH_URL = "git@github.com:springframework-meta/%s.git";
-	private final static String REPO_SUBVERSION_URL = "https://github.com/springframework-meta/%s";
-	private final static String CI_STATUS_IMAGE_URL = "https://drone.io/github.com/springframework-meta/%s/status.png";
-	private final static String CI_LATEST_URL = "https://drone.io/github.com/springframework-meta/%s/latest";
+	private final static String REPO_ZIP_URL = "https://github.com/spring-guides/%s/archive/master.zip";
+	private final static String REPO_HTTPS_URL = "https://github.com/spring-guides/%s.git";
+	private final static String GITHUB_HTTPS_URL = "https://github.com/spring-guides/%s";
+	private final static String REPO_SSH_URL = "git@github.com:spring-guides/%s.git";
+	private final static String REPO_SUBVERSION_URL = "https://github.com/spring-guides/%s";
+	private final static String CI_STATUS_IMAGE_URL = "https://drone.io/github.com/spring-guides/%s/status.png";
+	private final static String CI_LATEST_URL = "https://drone.io/github.com/spring-guides/%s/latest";
 
 	public GuideWithoutContent(String repoName, String guideId, String title, String subtitle) {
 		this.repoName = repoName;
