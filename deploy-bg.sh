@@ -96,3 +96,5 @@ if [ $SPACE == "production" ]; then
     $CF unmap --app $CURRENT --url              www.springsource.io
 
 fi;
+
+$CF push --manifest manifest-$SPACE.yml --name sagan-indexer --host sagan-indexer-$SPACE --reset --start

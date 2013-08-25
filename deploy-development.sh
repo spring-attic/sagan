@@ -24,4 +24,4 @@ rvm use 1.9.3@sagan-ops
 $CF target api.run.pivotal.io || exit
 $CF login --email $USER --password $PASS || exit
 $CF space development || exit
-$CF push --manifest manifest-development.yml --name sagan --reset
+$CF push --manifest manifest-development.yml --reset
