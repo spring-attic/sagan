@@ -24,6 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
 public class EditBlogPostTests extends IntegrationTestBase {
 
@@ -42,7 +43,9 @@ public class EditBlogPostTests extends IntegrationTestBase {
 
 	@Before
 	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+				.addFilters(springSecurityFilterChain)
+				.defaultRequest(get("/").with(csrf()).with(user("user").roles("USER"))).build();
 		post = PostBuilder.post()
 				.title(originalTitle)
 				.rawContent(originalContent)

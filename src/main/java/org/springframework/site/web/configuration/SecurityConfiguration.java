@@ -74,7 +74,6 @@ public class SecurityConfiguration {
 			http.logout().logoutUrl("/signout")
 					.logoutSuccessUrl("/signin?signout=success");
 			http.authorizeRequests().anyRequest().authenticated();
-			http.csrf().disable();
 		}
 
 		private AuthenticationEntryPoint authenticationEntryPoint() {

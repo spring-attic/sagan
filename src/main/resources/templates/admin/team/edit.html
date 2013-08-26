@@ -62,6 +62,7 @@
         </div>
         <!-- <label for="videoEmbeds">Video Embeds:<textarea id="videoEmbeds" th:field="*{videoEmbeds}" name="videoEmbeds"></textarea></label> -->
         <input type="hidden" name="_method" value="PUT" />
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 				<div class="admin-profile--field">
           <label for="gravatarEmail">Gravatar Email:</label>
           <input id="gravatarEmail" type="text" th:field="*{gravatarEmail}" name="gravatarEmail" />
