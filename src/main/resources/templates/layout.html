@@ -136,11 +136,10 @@
                   document.write(d.getFullYear());</script> GoPivotal, Inc. All Rights Reserved.
             <a href="http://www.gopivotal.com/terms-of-use">Terms</a>,
             <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>, and
-            <a th:href="@{/logos}" >Usage</a>
-            <div id='authentication' sec:authorize="isFullyAuthenticated()">
-              <span sec:authentication="name">Bob</span>
-              <a th:href="@{/signout}" >Sign out</a>
-            </div>
+            <a th:href="@{/logos}">Usage</a>
+            <span id='authentication' sec:authorize="isFullyAuthenticated()">
+              [<a th:href="@{/signout}">Sign out</a>]
+            </span>
           </div>
           <div class="span4 footer-newsletter--wrapper pull-right">
             <div class="footer-newsletter--container">
