@@ -16,7 +16,7 @@ public class SearchClientConfiguration {
 
 	private static Log logger = LogFactory.getLog(SearchClientConfiguration.class);
 
-	@Value("${elasticsearch.client.endpoint:http://localhost:9200}")
+	@Value("${elasticsearch.client.endpoint}")
 	private String endpoint;
 
 	@Bean

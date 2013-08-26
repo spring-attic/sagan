@@ -20,7 +20,7 @@ public class GuidesTests extends IntegrationTestBase {
 	@Test
 	public void showGuidesIndex() throws Exception {
 		String repoList = FixtureLoader.load("/fixtures/github/githubRepoList.json");
-		stubRestClient.putResponse("/orgs/springframework-meta/repos", repoList);
+		stubRestClient.putResponse("/orgs/spring-guides/repos", repoList);
 
 		MvcResult response = this.mockMvc.perform(get("/guides"))
 				.andExpect(status().isOk())

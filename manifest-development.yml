@@ -3,14 +3,14 @@ applications:
 - name: sagan
   memory: 2G
   instances: 1
-  host: sagan
+  host: sagan-development
   domain: cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
 - name: sagan-indexer
   memory: 2G
   instances: 1
-  host: sagan-indexer
+  host: sagan-indexer-development
   domain: cfapps.io
   path: target/springframework-site-0.0.1.SNAPSHOT.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack

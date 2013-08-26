@@ -101,7 +101,6 @@ public class SigninTests extends IntegrationTestBase {
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 		Element alert = html.select("#authentication").first();
 		assertThat("No authentication element found ", alert, is(notNullValue()));
-		assertThat(alert.text(), containsString("Nick"));
 
 		Element signOutLink = html.select("#authentication a").first();
 		assertThat(alert.text(), containsString("Sign out"));

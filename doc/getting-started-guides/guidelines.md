@@ -43,7 +43,7 @@ Single-line, subject-only commit messages can be fine as well:
     Edit per guidelines
 
 [progit]: http://progit.org/book/ch5-2.html#commit_guidelines
-[example]: https://github.com/springframework-meta/gs-rest-service/commit/f103b1701926341487233ecb3fdbca026f404d23
+[example]: https://github.com/spring-guides/gs-rest-service/commit/f103b1701926341487233ecb3fdbca026f404d23
 
 ## Common sections in all GSGs
 
@@ -97,11 +97,11 @@ Capitalize the first letter of all major words in titles.
 
 ## Use snippets for common content
 
- 1. Read the [mdp README](https://github.com/springframework-meta/mdp#readme)
+ 1. Read the [mdp README](https://github.com/spring-guides/mdp#readme)
  2. Browse available [snippets][snippets] for use in GSGs
- 3. See their use in practice in the [gs-rest-service README](https://github.com/springframework-meta/gs-rest-service#readme)
+ 3. See their use in practice in the [gs-rest-service README](https://github.com/spring-guides/gs-rest-service#readme)
 
-[snippets]: https://github.com/springframework-meta/springframework.org/blob/master/doc/getting-started-guides/snippets.md
+[snippets]: https://github.com/spring-io/spring.io/blob/master/doc/getting-started-guides/snippets.md
 
 
 ## Do not mention cloning or downloading the repository in your guide
@@ -193,9 +193,9 @@ For example, [JSON][u-json].
 
 ## Set up a build plan at http://drone.io
 
-For example, https://drone.io/github.com/springframework-meta/gs-rest-service
+For example, https://drone.io/github.com/spring-guides/gs-rest-service
 
-Be sure to set up the zapier integration to publish failed build reports to hipchat. This means simply sending email to sagan-ci.Xv6i@zapiermail.com from the settings > notification screen in your build. See https://drone.io/github.com/springframework-meta/gs-rest-service/admin/notifications for an example.
+Be sure to set up the zapier integration to publish failed build reports to hipchat. This means simply sending email to sagan-ci.Xv6i@zapiermail.com from the settings > notification screen in your build. See https://drone.io/github.com/spring-guides/gs-rest-service/admin/notifications for an example.
 
 ## Set up hipchat webhook for your repository
 

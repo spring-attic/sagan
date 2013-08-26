@@ -20,7 +20,7 @@ public class GitHubService implements MarkdownService {
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 
-	private static final String REPO_CONTENTS_PATH = "/repos/springframework-meta/{repoId}/contents";
+	private static final String REPO_CONTENTS_PATH = "/repos/spring-guides/{repoId}/contents";
 	private static final String GUIDE_IMAGES_PATH =  REPO_CONTENTS_PATH + "/images/{imageName}";
 
 

@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
+@Ignore
 public class SearchServiceIntegrationTests extends IntegrationTestBase {
 
 	private final Pageable pageable = new PageRequest(0, 10);
@@ -43,7 +45,7 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
 
 	@Before
 	public void setUp() throws Exception {
-		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient);
+		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient, "sagan-test");
 		searchIndexSetup.deleteIndex();
 		searchIndexSetup.createIndex();
 	}

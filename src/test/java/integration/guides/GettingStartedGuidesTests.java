@@ -21,11 +21,11 @@ public class GettingStartedGuidesTests extends IntegrationTestBase {
 	@Test
 	public void showGuide() throws Exception {
 		String gsRestServiceRepo = FixtureLoader.load("/fixtures/github/gs-rest-service-repo.json");
-		stubRestClient.putResponse("/repos/springframework-meta/gs-rest-service", gsRestServiceRepo);
+		stubRestClient.putResponse("/repos/spring-guides/gs-rest-service", gsRestServiceRepo);
 
-		stubRestClient.putResponse("/repos/springframework-meta/gs-rest-service/contents/README.md",
+		stubRestClient.putResponse("/repos/spring-guides/gs-rest-service/contents/README.md",
 				"guide body");
-		stubRestClient.putResponse("/repos/springframework-meta/gs-rest-service/contents/SIDEBAR.md",
+		stubRestClient.putResponse("/repos/spring-guides/gs-rest-service/contents/SIDEBAR.md",
 				"sidebar content");
 
 		MvcResult response = this.mockMvc.perform(get("/guides/gs/rest-service/"))
@@ -41,7 +41,7 @@ public class GettingStartedGuidesTests extends IntegrationTestBase {
 
 		Element downloadLink = html.select("aside#sidebar a.github_download").first();
 		assertThat(downloadLink, is(notNullValue()));
-		assertThat(downloadLink.attr("href"), is("https://github.com/springframework-meta/gs-rest-service/archive/master.zip"));
+		assertThat(downloadLink.attr("href"), is("https://github.com/spring-guides/gs-rest-service/archive/master.zip"));
 	}
 
 }

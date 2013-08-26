@@ -3,6 +3,7 @@ package integration.search;
 import integration.IntegrationTestBase;
 import io.searchbox.client.JestClient;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 
+@Ignore
 public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 
 	private final Pageable pageable = new PageRequest(0, 10);
@@ -72,7 +74,7 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 
 	@Before
 	public void setUp() throws Exception {
-		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient);
+		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient, "sagan-test");
 		searchIndexSetup.deleteIndex();
 		searchIndexSetup.createIndex();
 	}
