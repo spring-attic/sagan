@@ -72,6 +72,24 @@ $icon-sprite: url("../img/iconsprite.png");
       background-position: -483px -481px;
       margin-top: 18px;
     }
+    &.logo-spring-hateoas {
+      width: 126px;
+      height: 99px;
+      background-position: 518px 256px;
+      margin-top: 19px;
+    }
+    &.logo-spring-webflow {
+      width: 99px;
+      height: 99px;
+      background-position: 619px 256px;
+      margin-top: 19px;
+    }
+    &.logo-spring-web-services {
+      width: 100px;
+      height: 100px;
+      background-position: 532px 155px;
+      margin-top: 19px;
+    }
   }
   &.icon-projects {
     width: 28px;
