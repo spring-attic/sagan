@@ -1,11 +1,15 @@
 package integration;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static requestpostprocessors.SecurityRequestPostProcessors.csrf;
+import static requestpostprocessors.SecurityRequestPostProcessors.user;
 import integration.configuration.IntegrationTestsConfiguration;
 import integration.stubs.StubGithubRestClient;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.site.search.configuration.InMemoryElasticSearchConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -29,11 +33,17 @@ public abstract class IntegrationTestBase {
 	@Autowired
 	protected StubGithubRestClient stubRestClient;
 
+	@Autowired
+	protected FilterChainProxy springSecurityFilterChain;
+
 	protected MockMvc mockMvc;
 
 	@Before
 	public void setupMockMvc() {
 		stubRestClient.clearResponses();
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+				.addFilters(springSecurityFilterChain)
+				.defaultRequest(get("/").with(csrf()).with(user("admin").roles("ADMIN")))
+				.build();
 	}
 }
