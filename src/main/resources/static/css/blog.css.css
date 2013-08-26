@@ -135,7 +135,7 @@
   word-break: normal;
   word-wrap: normal;
   white-space: pre;
-  overflow-x: scroll;
+  overflow-x: auto;
   width: 96.9%%;
 }
 .blog--container .blog--post .highlight .copy-button {
