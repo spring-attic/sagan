@@ -21,6 +21,7 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/tools.css.css}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/projects.css.css}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/highlight.css.css}"/>
+  
 
   <script type="text/javascript" th:src="@{/js/jquery.js}" ></script>
   <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}" ></script>
@@ -136,11 +137,10 @@
                   document.write(d.getFullYear());</script> GoPivotal, Inc. All Rights Reserved.
             <a href="http://www.gopivotal.com/terms-of-use">Terms</a>,
             <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>, and
-            <a th:href="@{/logos}" >Usage</a>
-            <div id='authentication' sec:authorize="isFullyAuthenticated()">
-              <span sec:authentication="name">Bob</span>
-              <a th:href="@{/signout}" >Sign out</a>
-            </div>
+            <a th:href="@{/logos}">Usage</a>
+            <span id='authentication' sec:authorize="isFullyAuthenticated()">
+              [<a th:href="@{/signout}">Sign out</a>]
+            </span>
           </div>
           <div class="span4 footer-newsletter--wrapper pull-right">
             <div class="footer-newsletter--container">
@@ -156,9 +156,31 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>    
     </footer>
     <div id="scrim"></div>
   </div>
+  <script type="text/javascript">
+  (function() {
+    var didInit = false;
+    function initMunchkin() {
+      if(didInit === false) {
+        didInit = true;
+        Munchkin.init('625-IUJ-009');
+      }
+    }
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+    s.onreadystatechange = function() {
+      if (this.readyState == 'complete' || this.readyState == 'loaded') {
+        initMunchkin();
+      }
+    };
+    s.onload = initMunchkin;
+    document.getElementsByTagName('head')[0].appendChild(s);
+  })();
+  </script>
 </body>
 </html>

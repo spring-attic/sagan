@@ -43,6 +43,7 @@ public class SecurityConfiguration {
 			http.antMatcher("/signin/**")
 					.addFilterBefore(authenticationFilter(),
 							AnonymousAuthenticationFilter.class).anonymous();
+			http.csrf().disable();
 		}
 
 		// Not a @Bean because we explicitly do not want it added automatically by
@@ -73,6 +74,7 @@ public class SecurityConfiguration {
 			http.logout().logoutUrl("/signout")
 					.logoutSuccessUrl("/signin?signout=success");
 			http.authorizeRequests().anyRequest().authenticated();
+			http.csrf().disable();
 		}
 
 		private AuthenticationEntryPoint authenticationEntryPoint() {

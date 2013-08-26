@@ -28,17 +28,19 @@ public class SearchIndexSetup {
 
 	private static Log logger = LogFactory.getLog(SearchService.class);
 	private final JestClient jestClient;
+    private String index;
 
-	public SearchIndexSetup(JestClient jestClient) {
+	public SearchIndexSetup(JestClient jestClient, String index) {
 		this.jestClient = jestClient;
+		this.index = index;
 	}
 
 	public void deleteIndex() {
-		execute(new DeleteIndex.Builder(SearchService.INDEX).build());
+		execute(new DeleteIndex.Builder(index).build());
 	}
 
 	public void createIndex() {
-		CreateIndex.Builder builder = new CreateIndex.Builder(SearchService.INDEX);
+		CreateIndex.Builder builder = new CreateIndex.Builder(index);
 
 		builder.settings(loadSettings());
 		execute(builder.build());
@@ -53,7 +55,7 @@ public class SearchIndexSetup {
 			for (final File fileEntry : mappingsDir.listFiles()) {
 				String filenameBase = fileEntry.getName().replaceAll("\\.json$", "");
 				String mappingJson = StreamUtils.copyToString(new FileInputStream(fileEntry), Charset.forName("UTF-8"));
-				PutMapping.Builder mapping = new PutMapping.Builder(SearchService.INDEX, filenameBase, mappingJson);
+				PutMapping.Builder mapping = new PutMapping.Builder(index, filenameBase, mappingJson);
 				execute(mapping.build());
 			}
 		} catch (IOException e) {

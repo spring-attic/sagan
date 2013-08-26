@@ -150,6 +150,16 @@
   height: 97px;
   background-position: 272px 282px;
 }
+.icon.icon-gs-guides {
+  width: 73px;
+  height: 101px;
+  background-position: 356px 101px;
+}
+.icon.icon-tutorial {
+  width: 73px;
+  height: 101px;
+  background-position: 430px 101px;
+}
 
 i.icon {
   background-image: none;

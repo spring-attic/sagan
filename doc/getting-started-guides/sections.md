@@ -30,7 +30,7 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 To **skip the basics**, do the following:
 
  - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
-`git clone https://github.com/springframework-meta/{@project-name}.git`
+`git clone https://github.com/spring-guides/{@project-name}.git`
  - cd into `{@project-name}/initial`
  - Jump ahead to [Create a resource representation class](#initial).
 
@@ -90,7 +90,7 @@ The [Android Manifest] contains all the information required to run an Android a
 {!end#create-android-manifest}
 
 # {!begin#build-status}
-[![Build Status](https://drone.io/github.com/springframework-meta/{@project-name}/status.png)](https://drone.io/github.com/springframework-meta/{@project-name}/latest)
+[![Build Status](https://drone.io/github.com/spring-guides/{@project-name}/status.png)](https://drone.io/github.com/spring-guides/{@project-name}/latest)
 {!end#build-status}
 
 
@@ -103,8 +103,8 @@ You can continue your exploration of Spring and REST with the following Getting 
 * [Creating Self-Describing APIs with HATEOAS](TODO)
 * [Securing a REST Service with HTTP Basic](TODO)
 * [Securing a REST Service with OAuth](TODO)
-* [Building a RESTful Web Service](https://github.com/springframework-meta/gs-rest-service-core/blob/master/README.md)
-* [Consuming RESTful Web Services with Spring](https://github.com/springframework-meta/gs-consuming-rest-core/blob/master/README.md)
+* [Building a RESTful Web Service](https://github.com/spring-guides/gs-rest-service-core/blob/master/README.md)
+* [Consuming RESTful Web Services with Spring](https://github.com/spring-guides/gs-consuming-rest-core/blob/master/README.md)
 * [Testing REST Services](TODO)
 </span>
 {!end#related-resources}

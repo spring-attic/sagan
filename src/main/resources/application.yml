@@ -46,6 +46,10 @@ spring:
     indexer:
       delay: 0
       base_url: http://localhost:8080
+elasticsearch:
+  client:
+    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
+    index: sagan-local
 
 ---
 
@@ -65,11 +69,11 @@ spring:
   profiles: development
 search:
   indexer:
-    base_url: https://sagan.cfapps.io
+    base_url: https://sagan-development.cfapps.io
 elasticsearch:
   client:
-    # gonçalo's account at qbox
-    endpoint: https://qlmsjwfa.api.qbox.io
+    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
+    index: sagan-development
 
 ---
 
@@ -80,8 +84,8 @@ search:
     base_url: https://sagan-staging.cfapps.io
 elasticsearch:
   client:
-    # gonçalo's account at qbox
-    endpoint: https://qlmsjwfa.api.qbox.io
+    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
+    index: sagan-staging
 
 ---
 
@@ -92,8 +96,8 @@ search:
     base_url: https://sagan-production.cfapps.io
 elasticsearch:
   client:
-    # chris' account at qbox
-    endpoint: https://jgzosqbq.api.qbox.io
+    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
+    index: sagan-production
 
 ---
 

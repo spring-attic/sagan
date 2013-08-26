@@ -858,6 +858,30 @@ input.floating-input {
     }
 
   }
+  .content-container--body {
+    padding: 20px;
+    border-top: 1px solid white;
+    &:first-child {
+      border-top: none;
+    }
+    .content-section-title--container {
+      margin: 20px 0 40px;
+    }
+    .icon-gs-guides, .icon-tutorial {
+      margin-right: 20px;
+    }
+    .content-section-title {
+      font-family: $secondary-font-family;
+      font-size: 16px;
+      line-height: 16px;
+      margin-bottom: 20px;
+      padding-top: 10px;
+      font-weight: 400;
+    }
+    .content-section-sub-title {
+      padding-right: 50px;
+    }
+  }
    
   .content-items--container {
     padding: 20px;

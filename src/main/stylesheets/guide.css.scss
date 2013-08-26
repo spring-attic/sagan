@@ -19,7 +19,6 @@ $link-green: #5fa134;
 
 .guides-section--container {
   border: 1px solid $black-brown;
-  padding: 40px;
   min-height: 284px;
   margin-top: 50px;
   display: block !important;
@@ -62,8 +61,8 @@ $link-green: #5fa134;
   }
   .guide--container {
     display: inline-block;
-    width: 284px;
-    margin: 0 40px 20px 0;
+    width: 29.269%;
+    margin: 0 4.066% 20px 0;
     vertical-align: top;
     .guide--title {
       font-size: 16px;
@@ -130,7 +129,7 @@ $link-green: #5fa134;
     word-break: normal;
     word-wrap: normal;
     white-space: pre;
-    overflow-x: scroll;
+    overflow-x: auto;
     width: 96.9%%;
   }
   .highlight .copy-button {

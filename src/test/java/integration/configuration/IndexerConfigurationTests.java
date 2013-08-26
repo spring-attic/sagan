@@ -44,6 +44,8 @@ public class IndexerConfigurationTests {
 				IndexerConfiguration.class, "--server.port=" + port,
 				"--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb",
 				"--search.indexer.delay=6000000",
+				"--elasticsearch.client.endpoint=http://localhost:9200",
+				"--elasticsearch.client.index=sagan-test",
 				"--spring.profiles.active=integration-test");
 
 		IndexerConfiguration configuration = this.context
