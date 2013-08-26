@@ -1,6 +1,17 @@
 package integration.indexer;
 
 import integration.IntegrationTestBase;
+import io.spring.site.domain.StaticPagePathFinder;
+import io.spring.site.domain.guides.Guide;
+import io.spring.site.domain.guides.GuidesService;
+import io.spring.site.indexer.GettingStartedGuideIndexer;
+import io.spring.site.indexer.StaticPageIndexer;
+import io.spring.site.indexer.ToolsIndexer;
+import io.spring.site.indexer.TutorialIndexer;
+import io.spring.site.indexer.crawler.CrawlerService;
+import io.spring.site.indexer.crawler.DocumentProcessor;
+import io.spring.site.search.SearchEntry;
+import io.spring.site.search.SearchService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,17 +25,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.site.domain.StaticPagePathFinder;
-import org.springframework.site.domain.guides.Guide;
-import org.springframework.site.domain.guides.GuidesService;
-import org.springframework.site.indexer.GettingStartedGuideIndexer;
-import org.springframework.site.indexer.StaticPageIndexer;
-import org.springframework.site.indexer.ToolsIndexer;
-import org.springframework.site.indexer.TutorialIndexer;
-import org.springframework.site.indexer.crawler.CrawlerService;
-import org.springframework.site.indexer.crawler.DocumentProcessor;
-import org.springframework.site.search.SearchEntry;
-import org.springframework.site.search.SearchService;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;

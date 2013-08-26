@@ -2,15 +2,16 @@ package integration.team;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import integration.IntegrationTestBase;
+import io.spring.site.domain.team.MemberProfile;
+import io.spring.site.domain.team.TeamImporter;
+import io.spring.site.domain.team.TeamRepository;
+import io.spring.site.test.FixtureLoader;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.site.domain.team.MemberProfile;
-import org.springframework.site.domain.team.TeamImporter;
-import org.springframework.site.domain.team.TeamRepository;
-import org.springframework.site.test.FixtureLoader;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.GitHubUser;
 import org.springframework.web.client.RestOperations;

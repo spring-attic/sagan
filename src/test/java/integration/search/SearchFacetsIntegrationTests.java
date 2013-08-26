@@ -2,18 +2,19 @@ package integration.search;
 
 import integration.IntegrationTestBase;
 import io.searchbox.client.JestClient;
+import io.spring.site.search.SearchEntry;
+import io.spring.site.search.SearchFacet;
+import io.spring.site.search.SearchResult;
+import io.spring.site.search.SearchResults;
+import io.spring.site.search.SearchService;
+import io.spring.site.web.search.SearchEntryBuilder;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.site.search.SearchEntry;
-import org.springframework.site.search.SearchFacet;
-import org.springframework.site.search.SearchResult;
-import org.springframework.site.search.SearchResults;
-import org.springframework.site.search.SearchService;
-import org.springframework.site.web.search.SearchEntryBuilder;
 
 import java.text.ParseException;
 import java.util.ArrayList;

@@ -8,11 +8,12 @@ import io.searchbox.client.JestResult;
 import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.mapping.PutMapping;
+import io.spring.site.search.SearchException;
+import io.spring.site.search.SearchService;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.site.search.SearchException;
-import org.springframework.site.search.SearchService;
 import org.springframework.util.StreamUtils;
 
 import java.io.File;

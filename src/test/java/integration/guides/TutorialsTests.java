@@ -1,8 +1,9 @@
 package integration.guides;
 
 import integration.IntegrationTestBase;
+import io.spring.site.test.FixtureLoader;
+
 import org.junit.Test;
-import org.springframework.site.test.FixtureLoader;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

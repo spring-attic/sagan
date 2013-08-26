@@ -1,16 +1,17 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
+import io.spring.site.domain.blog.Post;
+import io.spring.site.domain.blog.PostBuilder;
+import io.spring.site.domain.blog.PostRepository;
+import io.spring.site.domain.team.MemberProfile;
+import io.spring.site.domain.team.MemberProfileBuilder;
+import io.spring.site.domain.team.TeamRepository;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.blog.Post;
-import org.springframework.site.domain.blog.PostBuilder;
-import org.springframework.site.domain.blog.PostRepository;
-import org.springframework.site.domain.team.MemberProfile;
-import org.springframework.site.domain.team.MemberProfileBuilder;
-import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.hamcrest.CoreMatchers.containsString;

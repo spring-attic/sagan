@@ -37,7 +37,7 @@ github:
 spring:
   profiles: default,site
   main:
-    sources: org.springframework.site.web.configuration.ApplicationConfiguration
+    sources: io.spring.site.web.configuration.ApplicationConfiguration
   search:
     indexer:
       delay: 0
@@ -52,7 +52,7 @@ elasticsearch:
 spring:
   profiles: indexer
   main:
-    sources: org.springframework.site.indexer.configuration.IndexerConfiguration
+    sources: io.spring.site.indexer.configuration.IndexerConfiguration
 search:
   indexer:
     delay: 0

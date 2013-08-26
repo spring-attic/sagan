@@ -2,10 +2,11 @@ package integration.stubs;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
-import org.springframework.site.domain.services.github.GitHubRestClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriTemplate;
+
+import io.spring.site.domain.services.github.GitHubRestClient;
 
 import java.util.HashMap;
 import java.util.Map;
