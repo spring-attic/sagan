@@ -13,11 +13,10 @@
       <p class="tools--description">Use one of the links below to download an all-in-one
           distribution for your platform. Choose either a native installer or simple
           archive, they contain equivalent functionality.</p>
-
       <div class="tool-versions--wrapper">
         <div class="tool-versions--icon--container">
           <div class="tool-versions--icon ggts-icon"></div>
-          <h2 th:text="'GGTS '+ ${version}" class="tool-versions--version">1.2.3.RELEASE</h2>
+          <h2 th:text="'GGTS '+ ${version}" class="tool-versions--version"></h2>
         </div>
         <div layout:include="tools/_tools_links :: tools-links"></div>
       </div>
@@ -36,9 +35,9 @@
         </thead>
         <tbody>
           <tr th:each="archive : ${updateSiteArchives}">
-            <td th:text="${archive.version}">e.43</td>
-            <td><a th:href="${archive.url}" th:text="${archive.fileName}">springsource-tool-suite-3.2.0.RELEASE-e4.3-updatesite.zip</a></td>
-            <td th:text="${archive.fileSize}">185MB</td>
+            <td th:text="${archive.version}"></td>
+            <td><a th:href="${archive.url}" th:text="${archive.fileName}"></a></td>
+            <td th:text="${archive.fileSize}"></td>
           </tr>
         </tbody>
       </table>
