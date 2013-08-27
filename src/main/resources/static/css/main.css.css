@@ -230,10 +230,22 @@ body {
 .right-pane-widget--container.secondary-nav li a {
   text-transform: uppercase;
   color: #888;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  text-decoration: none;
+}
+.right-pane-widget--container.secondary-nav li a:hover {
+  color: #5fa134;
 }
 .right-pane-widget--container.secondary-nav li.active a {
   font-weight: bold;
   color: #34302d;
+}
+.right-pane-widget--container.with-icon li {
+  padding: 12px 6.2% 12px 3%;
+}
+.right-pane-widget--container.with-icon li a {
+  margin-left: 2%;
 }
 .right-pane-widget--container.no-top-border {
   box-shadow: none;

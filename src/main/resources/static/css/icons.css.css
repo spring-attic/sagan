@@ -178,6 +178,29 @@
   height: 101px;
   background-position: 430px 101px;
 }
+.icon.blog-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+.icon.blog-icon.calendar {
+  background-position: 20px 594px;
+}
+.icon.blog-icon.all-posts {
+  background-position: 20px 561px;
+}
+.icon.blog-icon.broadcasts {
+  background-position: 20px 519px;
+}
+.icon.blog-icon.engineering {
+  background-position: 20px 477px;
+}
+.icon.blog-icon.releases {
+  background-position: 20px 433px;
+}
+.icon.blog-icon.news-and-events {
+  background-position: 20px 387px;
+}
 
 i.icon {
   background-image: none;

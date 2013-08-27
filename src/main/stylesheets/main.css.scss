@@ -258,10 +258,26 @@ body {
       a {
         text-transform: uppercase;
         color: #888;
+        font-family: $secondary-font-family;
+        font-weight: 400;
+        text-decoration: none;
+        &:hover {
+          color: $link-green;
+        }
       }
-      &.active a {
-        font-weight: bold;
-        color: $black-brown;
+      &.active {
+        a {
+          font-weight: bold;
+          color: $black-brown;
+        }
+      }
+    }
+  }
+  &.with-icon {
+    li {
+      padding: 12px 6.2% 12px 3%;
+      a {
+        margin-left: 2%;
       }
     }
   }

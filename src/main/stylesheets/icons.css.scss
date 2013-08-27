@@ -181,6 +181,29 @@ $icon-sprite: url("../img/iconsprite.png");
     height: 101px;
     background-position: 430px 101px;
   }
+  &.blog-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    &.calendar {
+      background-position: 20px 594px;
+    }
+    &.all-posts{
+      background-position: 20px 561px;
+    }
+    &.broadcasts {
+      background-position: 20px 519px;
+    }
+    &.engineering {
+      background-position: 20px 477px;
+    }
+    &.releases {
+      background-position: 20px 433px;
+    }
+    &.news-and-events {
+      background-position: 20px 387px;
+    }
+  }
 }
 i.icon {
   background-image: none;

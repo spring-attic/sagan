@@ -51,8 +51,6 @@
 }
 .blog--container .meta-data--container .meta-data--item .meta-data--icon {
   display: inline-block;
-  background-color: #ddd;
-  border-radius: 20px;
   height: 20px;
   width: 20px;
   vertical-align: middle;
@@ -174,6 +172,9 @@
   font-size: 14px;
   line-height: 14px;
   padding: 18px;
+}
+.blog-comments--wrapper .blog-comments--container .blog-comments--header a {
+  color: #5fa134;
 }
 .blog-comments--wrapper .blog-comments--container .blog-comments--header .icon {
   margin-top: -11px;

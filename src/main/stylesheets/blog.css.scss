@@ -67,8 +67,6 @@ $icon-sprite: url("../img/iconsprite.png");
       text-transform: uppercase;
       .meta-data--icon {
         display: inline-block;
-        background-color: #ddd;
-        border-radius: 20px;
         height: 20px;
         width: 20px;
         vertical-align: middle;
@@ -192,6 +190,9 @@ $icon-sprite: url("../img/iconsprite.png");
       font-size: 14px;
       line-height: 14px;
       padding: 18px;
+      a {
+        color: $link-green;
+      }
       .icon {
         margin-top: -11px;
       }
