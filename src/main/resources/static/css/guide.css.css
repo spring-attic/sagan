@@ -146,7 +146,7 @@
 }
 .content-right-pane--container .btn-group .btn {
   font-family: "Varela Round", sans-serif;
-  padding: 18px 6.4%;
+  padding: 12px 6.4% 10px;
   font-size: 16px;
   line-height: 16px;
   border: 1px solid #dddddd;
@@ -170,21 +170,47 @@
   border: none;
   box-shadow: none;
   margin: 0;
-  padding: 14px 0 14px 14px;
+  padding: 10px 0 10px 14px;
 }
 .content-right-pane--container .clone-url input:focus {
   outline: none;
 }
 .content-right-pane--container .clone-url button {
-  padding: 24px;
+  padding: 20px;
   margin: 0;
   float: right;
-  background-position: 7px -62px;
+  background-position: 3px -66px;
 }
 .content-right-pane--container .github_download {
   display: block;
   text-align: center;
   margin: 15px 6.2%;
+}
+
+.go-to-repo--container {
+  margin-top: 40px;
+  padding: 10px 6.2%;
+  border-top: 1px solid white;
+}
+.go-to-repo--container a {
+  vertical-align: middle;
+  color: #5fa134;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  line-height: 24px;
+  text-decoration: none;
+  margin-top: 1px;
+}
+.go-to-repo--container a:hover {
+  color: #6ab43a;
+}
+.go-to-repo--container i {
+  color: #d4d4d4;
+  font-size: 24px;
+  margin-right: 10px;
+  float: left;
+  margin-top: -2px;
 }
 
 .copy-button {

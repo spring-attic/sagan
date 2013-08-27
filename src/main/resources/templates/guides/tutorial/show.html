@@ -40,6 +40,12 @@
                 <button class="copy-button github" th:attr="data-clipboard-text=${tutorial.gitRepoSubversionUrl}" data-toggle="tooltip"></button>
               </div>
               <a class="github_download btn btn-black uppercase" th:href='${tutorial.zipUrl}'>Download ZIP</a>
+              <div class="go-to-repo--container">
+                <a th:href="${tutorial.gitRepoHttpsUrl}">
+                  <i class="icon-github"></i>
+                  Go To Repo
+                </a>
+              </div>
             </div>
           </div>
           <div class="right-pane-widget--container">

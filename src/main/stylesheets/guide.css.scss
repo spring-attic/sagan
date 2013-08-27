@@ -170,7 +170,7 @@ $link-green: #5fa134;
     display: block;
     .btn {
       font-family: $base-font-family;
-      padding: 18px 6.4%;
+      padding: 12px 6.4% 10px;
       font-size: 16px;
       line-height: 16px;
       border: 1px solid #ddd;
@@ -194,22 +194,49 @@ $link-green: #5fa134;
       border: none;
       box-shadow: none;
       margin: 0;
-      padding: 14px 0 14px 14px;
+      padding: 10px 0 10px 14px;
       &:focus {
         outline: none;
       }
     }
     button {
-      padding: 24px;
+      padding: 20px;
       margin: 0;
       float: right;
-      background-position: 7px -62px;
+      background-position: 3px -66px;
+
     }
   }
   .github_download {
     display: block;
     text-align: center;
     margin: 15px 6.2%;
+  }
+}
+
+.go-to-repo--container {
+  margin-top: 40px;
+  padding: 10px 6.2%;
+  border-top: 1px solid white;
+  a {
+    vertical-align: middle;
+    color: $link-green;
+    text-transform: uppercase;
+    font-family: $secondary-font-family;
+    font-size: 12px;
+    line-height: 24px;
+    text-decoration: none;
+    margin-top: 1px;
+    &:hover {
+      color: lighten($link-green, 5%);
+    }
+  }
+  i {
+    color: #d4d4d4;
+    font-size: 24px;
+    margin-right: 10px;
+    float: left;
+    margin-top: -2px;
   }
 }
 
