@@ -94,6 +94,26 @@
   -o-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
 }
+.projects--wrapper .project--container.full-width {
+  background-color: #ddd;
+  border-color: white;
+  display: block;
+  height: auto;
+  width: auto;
+  text-align: left;
+  padding-bottom: 60px;
+}
+.projects--wrapper .project--container.full-width .project--title {
+  margin-bottom: 10px;
+}
+.projects--wrapper .project--container.full-width .project--description {
+  margin-bottom: 20px;
+}
+.projects--wrapper .project--container.full-width .project--link {
+  color: #5fa134;
+  text-transform: uppercase;
+  font-size: 12px;
+}
 .projects--wrapper.project-aggregator .project--container {
   height: 160px;
 }

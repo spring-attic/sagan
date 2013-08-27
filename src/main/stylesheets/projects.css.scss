@@ -113,6 +113,26 @@ $icon-sprite: url("../img/iconsprite.png");
         }
       }
     }
+    &.full-width {
+      background-color: #ddd;
+      border-color: white;
+      display: block;
+      height: auto;
+      width: auto;
+      text-align: left;
+      padding-bottom: 60px;
+      .project--title {
+        margin-bottom: 10px;
+      }
+      .project--description {
+        margin-bottom: 20px;
+      }
+      .project--link {
+        color: $link-green;
+        text-transform: uppercase;
+        font-size: 12px;
+      }
+    }
   }
   &.project-aggregator {
     .project--container {
