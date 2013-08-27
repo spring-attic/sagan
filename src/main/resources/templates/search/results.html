@@ -20,7 +20,7 @@
 				<div class="search-result" th:each="result : ${results}">
 					<a th:href="@{${result.path}}" th:text="${result.title}" class="search-result--title">This week in Spring</a>
 					<div class="metadata">
-						<span class="badge search-result--subtitle" th:text="${result.subTitle}" th:if="${result.subTitle}">Blog Post</span>
+						<div class="search-result--subtitle" th:text="${result.subTitle}" th:if="${result.subTitle}">Blog Post</div>
 					</div>
 					<div th:utext="${result.displayText}" class='search-result--summary'>This has been an interesting week.</div>
 					<div class="search-result--path" th:text="${result.path}">/path/to/result</div>

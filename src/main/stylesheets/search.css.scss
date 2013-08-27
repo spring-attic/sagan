@@ -19,34 +19,40 @@ $icon-sprite: url("../img/iconsprite.png");
 
 //SEARCH RESULT STYLES
 .search-result {
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 .search-result--title {
   display: inline-block;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
   font-family: $secondary-font-family;
-  margin-bottom: 6px;
   color: $link-green;
   &:hover {
     color: $link-green;
   }
 }
+.search-result--subtitle {
+  font-family: $secondary-font-family;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+}
 .search-result--summary {
   font-size: 14px;
   line-height: 18px;
-  font-family: $secondary-font-family;
+  margin-top: 3px;
+  color: #484543;
   em {
-    font-weight: bold;
+    font-family: $secondary-font-family;
     font-style: normal;
-    color: black;
+    color: #000;
+    background-color: #FFF;
   }
 }
 
 .search-result--path {
-  color: $denim;
+  color: $link-green;
   max-width: 675px;
   overflow: hidden;
   text-overflow: ellipsis;

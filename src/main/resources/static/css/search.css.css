@@ -1,33 +1,40 @@
 .search-result {
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 .search-result--title {
   display: inline-block;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
   font-family: "Montserrat", sans-serif;
-  margin-bottom: 6px;
   color: #5fa134;
 }
 .search-result--title:hover {
   color: #5fa134;
 }
 
+.search-result--subtitle {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+}
+
 .search-result--summary {
   font-size: 14px;
   line-height: 18px;
-  font-family: "Montserrat", sans-serif;
+  margin-top: 3px;
+  color: #484543;
 }
 .search-result--summary em {
-  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
-  color: black;
+  color: #000;
+  background-color: #FFF;
 }
 
 .search-result--path {
-  color: #8395a1;
+  color: #5fa134;
   max-width: 675px;
   overflow: hidden;
   text-overflow: ellipsis;
