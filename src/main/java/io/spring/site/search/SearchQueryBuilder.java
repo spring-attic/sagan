@@ -3,6 +3,7 @@ package io.spring.site.search;
 import io.searchbox.core.Search;
 import org.elasticsearch.common.joda.time.format.ISODateTimeFormat;
 import org.elasticsearch.index.query.AndFilterBuilder;
+import org.elasticsearch.index.query.OrFilterBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeFilterBuilder;
@@ -13,8 +14,11 @@ import org.elasticsearch.search.facet.terms.TermsFacetBuilder;
 import org.elasticsearch.search.highlight.HighlightBuilder;
 import org.springframework.data.domain.Pageable;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SearchQueryBuilder {
 	private static final String BOOST_CURRENT_VERSION_SCRIPT = "_score * (_source.current ? 1.1 : 1.0)";
@@ -80,10 +84,55 @@ public class SearchQueryBuilder {
 
 	private void filterFacets(List<String> filters, AndFilterBuilder filterBuilder) {
 		if (filters != null && !filters.isEmpty()) {
-			TermsFilterBuilder facetFilter = new TermsFilterBuilder("facetPaths", filters).execution("or");
-			filterBuilder.add(facetFilter);
+
+			Map<String, List<String>> splitFilters = splitFilters(filters);
+			List<String> projects = splitFilters.get("projects");
+			List<String> apiRef = splitFilters.get("apiRef");
+			List<String> otherFacetPaths = splitFilters.get("others");
+
+			AndFilterBuilder projectApiRefAnded = new AndFilterBuilder();
+			if (apiRef.size() > 0) {
+				projectApiRefAnded.add(new TermsFilterBuilder("facetPaths", apiRef).execution("or"));
+			}
+
+			if (projects.size() > 0) {
+				projectApiRefAnded.add(new TermsFilterBuilder("facetPaths", projects).execution("or"));
+			}
+
+			OrFilterBuilder outermostFilter = new OrFilterBuilder();
+			outermostFilter.add(projectApiRefAnded);
+			if (otherFacetPaths.size() > 0) {
+				outermostFilter.add(new TermsFilterBuilder("facetPaths", otherFacetPaths).execution("or"));
+			}
+
+			filterBuilder.add(outermostFilter);
 		}
 	}
+
+	private Map<String, List<String>> splitFilters(List<String> filters) {
+		ArrayList<String> projects = new ArrayList<>();
+		ArrayList<String> apiRef = new ArrayList<>();
+		ArrayList<String> others = new ArrayList<>();
+
+		for (String filter : filters) {
+			if (filter.startsWith("Projects")) {
+				if (filter.equals("Projects/Api") || filter.equals("Projects/Reference")) {
+					apiRef.add(filter);
+				} else {
+					projects.add(filter);
+				}
+			} else {
+				others.add(filter);
+			}
+		}
+
+		HashMap<String, List<String>> splitFilters = new HashMap<>();
+		splitFilters.put("projects", projects);
+		splitFilters.put("apiRef", apiRef);
+		splitFilters.put("others", others);
+		return splitFilters;
+	}
+
 
 	private void addFacetPathsResult(SearchSourceBuilder searchSourceBuilder) {
 		TermsFacetBuilder facetBuilder = new TermsFacetBuilder("facet_paths_result")

@@ -10,14 +10,11 @@ import io.spring.site.search.SearchService;
 import io.spring.site.web.search.SearchEntryBuilder;
 
 import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import utils.SetSystemProperty;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -59,16 +56,32 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 			.facetPath("Blog")
 			.facetPath("Blog/Engineering").build();
 
-	private SearchEntry apiDoc = SearchEntryBuilder.entry()
-			.path("http://example.com/projects/apiDoc")
+	private SearchEntry springFrameworkApiDoc = SearchEntryBuilder.entry()
+			.path("http://example.com/projects/springFramework/apiDoc")
 			.title("a title")
 			.facetPath("Projects")
 			.facetPath("Projects/Api")
 			.facetPath("Projects/SpringFramework")
 			.facetPath("Projects/SpringFramework/3.4.5.RELEASE").build();
 
-	private SearchEntry refDoc = SearchEntryBuilder.entry()
-			.path("http://example.com/projects/refDoc")
+	private SearchEntry springFrameworkRefDoc = SearchEntryBuilder.entry()
+			.path("http://example.com/projects/springFramework/refDoc")
+			.title("a title")
+			.facetPath("Projects")
+			.facetPath("Projects/Reference")
+			.facetPath("Projects/SpringFramework")
+			.facetPath("Projects/SpringFramework/3.4.5.RELEASE").build();
+
+	private SearchEntry springSecurityApiDoc = SearchEntryBuilder.entry()
+			.path("http://example.com/projects/spring-security/apiDoc")
+			.title("a title")
+			.facetPath("Projects")
+			.facetPath("Projects/Api")
+			.facetPath("Projects/SpringSecurity")
+			.facetPath("Projects/SpringSecurity/1.2.3.RELEASE").build();
+
+	private SearchEntry springSecurityRefDoc = SearchEntryBuilder.entry()
+			.path("http://example.com/projects/spring-security/refDoc")
 			.title("a title")
 			.facetPath("Projects")
 			.facetPath("Projects/Reference")
@@ -118,11 +131,48 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 		this.searchService.saveToIndex(tutorial);
 		this.searchService.saveToIndex(gettingStarted);
 		this.searchService.saveToIndex(blog);
-		this.searchService.saveToIndex(apiDoc);
-		this.searchService.saveToIndex(refDoc);
+		this.searchService.saveToIndex(springSecurityApiDoc);
+		this.searchService.saveToIndex(springSecurityRefDoc);
 
 		List<String> facetPathFilters = new ArrayList<>();
 		facetPathFilters.add("Guides/Tutorials");
+		facetPathFilters.add("Blog");
+		facetPathFilters.add("Projects/SpringSecurity");
+
+		SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
+		List<SearchResult> results = searchResults.getPage().getContent();
+
+		assertThatResultsContains(results,
+				tutorial,
+				blog,
+				springSecurityApiDoc,
+				springSecurityRefDoc);
+	}
+
+	private void assertThatResultsContains(List<SearchResult> results, SearchEntry ... entries) {
+		ArrayList<String> resultPaths = new ArrayList<>();
+		for (SearchResult result : results) {
+			resultPaths.add(result.getPath());
+		}
+
+		ArrayList<String> expectedPaths = new ArrayList<>();
+		for (SearchEntry entry : entries) {
+			expectedPaths.add(entry.getPath());
+		}
+
+		assertThat(resultPaths, containsInAnyOrder(expectedPaths.toArray()));
+	}
+
+	@Test
+	public void filterByMultipleFacetsProjectAndApi_restrictsProjectsToApiAndIncludesAllOtherFacets() throws ParseException {
+		this.searchService.saveToIndex(tutorial);
+		this.searchService.saveToIndex(blog);
+		this.searchService.saveToIndex(springFrameworkApiDoc);
+		this.searchService.saveToIndex(springFrameworkRefDoc);
+		this.searchService.saveToIndex(springSecurityApiDoc);
+		this.searchService.saveToIndex(springSecurityRefDoc);
+
+		List<String> facetPathFilters = new ArrayList<>();
 		facetPathFilters.add("Blog");
 		facetPathFilters.add("Projects/Api");
 		facetPathFilters.add("Projects/SpringSecurity/1.2.3.RELEASE");
@@ -130,19 +180,56 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 		SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
 		List<SearchResult> results = searchResults.getPage().getContent();
 
-		assertThat(results.size(), equalTo(4));
+		assertThatResultsContains(results,
+				blog,
+				springSecurityApiDoc);
+	}
 
-		ArrayList<String> paths = new ArrayList<>();
-		for (SearchResult result : results) {
-			paths.add(result.getPath());
-		}
+	@Test
+	public void filterByMultipleFacetsProjectAndReference_restrictsProjectsToReferenceAndIncludesAllOtherFacets() throws ParseException {
+		this.searchService.saveToIndex(tutorial);
+		this.searchService.saveToIndex(blog);
+		this.searchService.saveToIndex(springFrameworkApiDoc);
+		this.searchService.saveToIndex(springFrameworkRefDoc);
+		this.searchService.saveToIndex(springSecurityApiDoc);
+		this.searchService.saveToIndex(springSecurityRefDoc);
 
-		assertThat(paths, containsInAnyOrder(
-				tutorial.getPath(),
-				blog.getPath(),
-				apiDoc.getPath(),
-				refDoc.getPath())
-		);
+		List<String> facetPathFilters = new ArrayList<>();
+		facetPathFilters.add("Blog");
+		facetPathFilters.add("Projects/Reference");
+		facetPathFilters.add("Projects/SpringFramework");
+
+		SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
+		List<SearchResult> results = searchResults.getPage().getContent();
+
+		assertThatResultsContains(results,
+				blog,
+				springFrameworkRefDoc);
+	}
+
+	@Test
+	public void filterByMultipleProjectVersionsFacets() throws ParseException {
+		this.searchService.saveToIndex(tutorial);
+		this.searchService.saveToIndex(blog);
+		this.searchService.saveToIndex(springFrameworkApiDoc);
+		this.searchService.saveToIndex(springFrameworkRefDoc);
+		this.searchService.saveToIndex(springSecurityApiDoc);
+		this.searchService.saveToIndex(springSecurityRefDoc);
+
+		List<String> facetPathFilters = new ArrayList<>();
+		facetPathFilters.add("Blog");
+		facetPathFilters.add("Projects/SpringFramework/3.4.5.RELEASE");
+		facetPathFilters.add("Projects/SpringSecurity/1.2.3.RELEASE");
+
+		SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
+		List<SearchResult> results = searchResults.getPage().getContent();
+
+		assertThatResultsContains(results,
+				blog,
+				springFrameworkApiDoc,
+				springFrameworkRefDoc,
+				springSecurityApiDoc,
+				springSecurityRefDoc);
 	}
 
 	@Test
