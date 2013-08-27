@@ -144,7 +144,13 @@ $(function () {
   }
   initializeSearch();
 
-  
+  $(".team-map--wrapper").mouseenter(function() {
+    $(".team-map--container").fadeOut("100");
+    $(".team-map--wrapper").mouseleave(function() {
+      $(".team-map--container").fadeIn("100");
+    });
+  });
+
   
 
 });

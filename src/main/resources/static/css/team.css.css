@@ -94,55 +94,6 @@
   padding: 10px;
   width: 319px;
 }
-.team-members--wrapper .team-member--container .team-member--avatar {
-  display: inline-block;
-}
-.team-members--wrapper .team-member--container .team-member--avatar img {
-  display: inline-block;
-  margin-right: 13px;
-  width: 153px;
-  height: 153px;
-}
-.team-members--wrapper .team-member--container .team-member--info {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 20px;
-  width: 149px;
-}
-.team-members--wrapper .team-member--container .team-member--info .team-member--name {
-  color: #5fa134;
-  font-size: 16px;
-  line-height: 16px;
-  width: 149px;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-}
-.team-members--wrapper .team-member--container .team-member--info .team-member--bio {
-  margin-top: 6px;
-  height: 61px;
-}
-.team-members--wrapper .team-member--container .team-member--info .team-member--bio p {
-  font-size: 14px;
-  line-height: 18px;
-}
-.team-members--wrapper .team-member--container .team-member--info .team-member--bio p.team-member--position {
-  max-height: 36px;
-  overflow: hidden;
-  margin-bottom: 5px;
-}
-.team-members--wrapper .team-member--container .team-member--info .team-member--bio p.team-member--location {
-  width: 149px;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.team-members--wrapper .team-member--container .team-member--info .team-member--social {
-  margin-top: 12px;
-}
 .team-members--wrapper .content-items--container {
   padding: 40px;
 }
@@ -173,6 +124,57 @@
 }
 .team-members--wrapper.with-padding {
   padding-top: 100px;
+}
+
+.team-member--avatar {
+  display: inline-block;
+}
+.team-member--avatar img {
+  display: inline-block;
+  margin-right: 13px;
+  width: 153px;
+  height: 153px;
+}
+
+.team-member--info {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20px;
+  width: 149px;
+}
+.team-member--info .team-member--name {
+  color: #5fa134;
+  font-size: 16px;
+  line-height: 16px;
+  width: 149px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.team-member--info .team-member--bio {
+  margin-top: 6px;
+  height: 61px;
+}
+.team-member--info .team-member--bio p {
+  font-size: 14px;
+  line-height: 18px;
+}
+.team-member--info .team-member--bio p.team-member--position {
+  max-height: 36px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.team-member--info .team-member--bio p.team-member--location {
+  width: 149px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.team-member--info .team-member--social {
+  margin-top: 12px;
 }
 
 .team-member--social--icon {
@@ -257,4 +259,18 @@
 }
 .member-twitter--wrapper .member-twitter--body {
   padding: 0 20px;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: #fff;
+  border-radius: 0;
+}
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+  width: 330px !important;
+  border-radius: 0;
+  padding: 0;
+  margin: 10px;
+}
+.leaflet-popup-content-wrapper .leaflet-popup-content p {
+  margin: 0;
 }
