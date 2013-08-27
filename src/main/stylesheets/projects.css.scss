@@ -120,7 +120,6 @@ $icon-sprite: url("../img/iconsprite.png");
       height: auto;
       width: auto;
       text-align: left;
-      padding-bottom: 60px;
       .project--title {
         margin-bottom: 10px;
       }
@@ -157,6 +156,12 @@ $icon-sprite: url("../img/iconsprite.png");
         margin-top: 42px;
       }
     }
+  }
+  &.top-separator {
+    padding-top: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top: 1px solid #ddd;;
   }
 }
 

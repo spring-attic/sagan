@@ -101,7 +101,6 @@
   height: auto;
   width: auto;
   text-align: left;
-  padding-bottom: 60px;
 }
 .projects--wrapper .project--container.full-width .project--title {
   margin-bottom: 10px;
@@ -135,6 +134,12 @@
 }
 .projects--wrapper.project-aggregator .project--container .project-links--container {
   margin-top: 42px;
+}
+.projects--wrapper.top-separator {
+  padding-top: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid #dddddd;
 }
 
 .project-header--wrapper .billboard--container {
