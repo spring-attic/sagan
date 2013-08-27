@@ -1,20 +1,5 @@
 package io.spring.site.indexer.crawler;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.PoolingClientConnectionManager;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.soulgalore.crawler.core.CrawlerConfiguration;
 import com.soulgalore.crawler.core.HTMLPageResponse;
 import com.soulgalore.crawler.core.PageURL;
@@ -22,16 +7,22 @@ import com.soulgalore.crawler.core.PageURLParser;
 import com.soulgalore.crawler.core.impl.AhrefPageURLParser;
 import com.soulgalore.crawler.core.impl.DefaultCrawler;
 import com.soulgalore.crawler.core.impl.HTTPClientResponseFetcher;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.PoolingClientConnectionManager;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Executors;
 
 @Component
 public class CrawlerService {
-
-	private final ExecutorService executorService;
-
-	@Autowired
-	public CrawlerService(ExecutorService executorService) {
-		this.executorService = executorService;
-	}
 
 	private HttpClient httpClient() {
 		PoolingClientConnectionManager connectionManager = new PoolingClientConnectionManager();
@@ -47,9 +38,10 @@ public class CrawlerService {
 	public void crawl(String url, int linkDepth, DocumentProcessor processor) {
 		CrawlerConfiguration apiConfig = new CrawlerConfiguration.Builder()
 				.setStartUrl(url).setMaxLevels(linkDepth).build();
-		DefaultCrawler crawler = new DefaultCrawler(new ResponseFetcher(processor),
-				this.executorService, new CompositeURLParser(new FramePageURLParser(),
-						new AhrefPageURLParser()));
+		DefaultCrawler crawler = new DefaultCrawler(
+				new ResponseFetcher(processor),
+				Executors.newFixedThreadPool(10),
+				new CompositeURLParser(new FramePageURLParser(), new AhrefPageURLParser()));
 		crawler.getUrls(apiConfig);
 		crawler.shutdown();
 	}

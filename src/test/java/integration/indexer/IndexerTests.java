@@ -12,13 +12,6 @@ import io.spring.site.indexer.crawler.CrawlerService;
 import io.spring.site.indexer.crawler.DocumentProcessor;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchService;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.util.Date;
-import java.util.concurrent.Executors;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -28,6 +21,11 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -43,7 +41,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class IndexerTests extends IntegrationTestBase {
 
 	private CrawlerService stubCrawlerService = new CrawlerService(
-			Executors.newSingleThreadExecutor()) {
+	) {
 		@Override
 		public void crawl(String url, int linkDepth, DocumentProcessor processor) {
 			try {

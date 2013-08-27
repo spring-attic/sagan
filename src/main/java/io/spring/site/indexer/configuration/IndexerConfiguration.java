@@ -5,11 +5,6 @@ import io.spring.site.domain.projects.ProjectMetadataService;
 import io.spring.site.domain.projects.ProjectMetadataYamlParser;
 import io.spring.site.search.configuration.SearchClientConfiguration;
 import io.spring.site.web.configuration.GitHubConfiguration;
-
-import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +20,10 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @EnableAutoConfiguration
 @Configuration
@@ -50,7 +49,7 @@ public class IndexerConfiguration {
 
 	@Bean
 	public ExecutorService executorService() {
-		return Executors.newFixedThreadPool(100);
+		return Executors.newFixedThreadPool(10);
 	}
 
 	@Bean
