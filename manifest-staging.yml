@@ -4,18 +4,18 @@ applications:
   memory: 2G
   instances: 1
   domain: cfapps.io
-  path: target/springframework-site-0.0.1.SNAPSHOT.jar
+  path: target/spring-io-site.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
 - name: sagan-green
   memory: 2G
   instances: 1
   domain: cfapps.io
-  path: target/springframework-site-0.0.1.SNAPSHOT.jar
+  path: target/spring-io-site.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
 - name: sagan-indexer
   memory: 2G
   instances: 1
   host: sagan-indexer
   domain: cfapps.io
-  path: target/springframework-site-0.0.1.SNAPSHOT.jar
+  path: target/spring-io-site.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
