@@ -2,7 +2,7 @@
 applications:
 - name: sagan
   memory: 2G
-  instances: 1
+  instances: 2
   host: sagan-development
   domain: cfapps.io
   path: target/spring-io-site.jar
