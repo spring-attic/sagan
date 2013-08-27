@@ -1,15 +1,16 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
+import io.spring.site.domain.blog.Post;
+import io.spring.site.domain.blog.PostCategory;
+import io.spring.site.domain.blog.PostRepository;
+import io.spring.site.domain.team.MemberProfile;
+import io.spring.site.domain.team.TeamRepository;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.blog.Post;
-import org.springframework.site.domain.blog.PostCategory;
-import org.springframework.site.domain.blog.PostRepository;
-import org.springframework.site.domain.team.MemberProfile;
-import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;

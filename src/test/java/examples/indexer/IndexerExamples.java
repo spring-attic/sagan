@@ -5,23 +5,24 @@ import com.google.common.collect.Iterables;
 import integration.configuration.InMemoryElasticSearchConfiguration;
 import integration.search.SearchIndexSetup;
 import io.searchbox.client.JestClient;
+import io.spring.site.domain.guides.Guide;
+import io.spring.site.domain.understanding.UnderstandingGuide;
+import io.spring.site.indexer.GettingStartedGuideIndexer;
+import io.spring.site.indexer.UnderstandingGuideIndexer;
+import io.spring.site.indexer.configuration.IndexerConfiguration;
+import io.spring.site.search.SearchResult;
+import io.spring.site.search.SearchResults;
+import io.spring.site.search.SearchService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.context.initializer.LoggingApplicationContextInitializer;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.site.domain.guides.Guide;
-import org.springframework.site.domain.understanding.UnderstandingGuide;
-import org.springframework.site.indexer.GettingStartedGuideIndexer;
-import org.springframework.site.indexer.UnderstandingGuideIndexer;
-import org.springframework.site.indexer.configuration.IndexerConfiguration;
-import org.springframework.site.search.SearchResult;
-import org.springframework.site.search.SearchResults;
-import org.springframework.site.search.SearchService;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -46,9 +47,6 @@ public class IndexerExamples {
 	@ClassRule
 	public static SetSystemProperty delay = new SetSystemProperty("search.indexer.delay", "60000000");
 
-	@ClassRule
-	public static SetSystemProperty index = new SetSystemProperty("elasticsearch.client.index", "sagan-test");
-
 	@Autowired
 	private GettingStartedGuideIndexer gettingStartedGuideIndexer;
 
@@ -60,6 +58,9 @@ public class IndexerExamples {
 
 	@Autowired
 	private JestClient jestClient;
+
+	@Value("${elasticsearch.client.index}")
+	private String index;
 
 	@Before
 	public void setUp() throws Exception {
@@ -103,7 +104,7 @@ public class IndexerExamples {
 	}
 
 	private void rebuildIndex() {
-		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(jestClient, "sagan-test");
+		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(jestClient, index);
 		searchIndexSetup.deleteIndex();
 		searchIndexSetup.createIndex();
 	}

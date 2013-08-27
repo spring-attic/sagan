@@ -3,13 +3,14 @@ package integration.configuration;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.ClientConfig;
+import io.spring.site.search.SearchService;
+
 import org.elasticsearch.client.Client;
 import org.elasticsearch.node.NodeBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.site.search.SearchService;
 import utils.FreePortFinder;
 
 import javax.annotation.PostConstruct;

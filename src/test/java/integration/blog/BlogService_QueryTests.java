@@ -1,6 +1,18 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
+import io.spring.site.domain.blog.BlogService;
+import io.spring.site.domain.blog.Post;
+import io.spring.site.domain.blog.PostBuilder;
+import io.spring.site.domain.blog.PostCategory;
+import io.spring.site.domain.blog.PostFormAdapter;
+import io.spring.site.domain.blog.PostRepository;
+import io.spring.site.domain.services.DateService;
+import io.spring.site.domain.team.MemberProfile;
+import io.spring.site.search.SearchService;
+import io.spring.site.web.PageableFactory;
+import io.spring.site.web.blog.EntityNotFoundException;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -10,17 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.site.domain.blog.BlogService;
-import org.springframework.site.domain.blog.Post;
-import org.springframework.site.domain.blog.PostBuilder;
-import org.springframework.site.domain.blog.PostCategory;
-import org.springframework.site.domain.blog.PostFormAdapter;
-import org.springframework.site.domain.blog.PostRepository;
-import org.springframework.site.domain.services.DateService;
-import org.springframework.site.domain.team.MemberProfile;
-import org.springframework.site.search.SearchService;
-import org.springframework.site.web.PageableFactory;
-import org.springframework.site.web.blog.EntityNotFoundException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

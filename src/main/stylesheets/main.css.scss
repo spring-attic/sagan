@@ -986,3 +986,71 @@ input.floating-input {
   font-weight: bold;
   font-family: $secondary-font-family;
 }
+
+
+form.lpeRegForm {
+  border: 1px solid #f1f1f1;
+  background-color: white;
+}
+form.lpeRegForm li {
+  padding:0;
+  list-style-type:none
+}
+form.lpeRegForm ul input[type='text'] {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  font-size: 12px;
+  padding: 12px 0 15px 10px;
+  font-family: "Varela Round", sans-serif;
+  color: #666;
+  font-weight: 400;
+}
+
+#mktFrmButtons {
+  margin: -78px -3px 0 222px;
+}
+
+#mktFrmSubmit { 
+  text-transform: uppercase;
+  background-color: #6db33f;
+  background-image: none;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  color: #eeeeee;
+  text-shadow: none;
+  font-size: 12px;
+  padding: 9px 16px !important;
+  height: 40px;
+  cursor:pointer;
+}
+
+form.lpeRegForm label {
+  display:none;
+}
+
+.lpeCElement {
+  left: 0 !important;
+  top:0 !important;
+}
+
+form.lpeRegForm ul {
+  font-size: 12px; 
+  color: black; 
+  font-family: Arial, Helvetica, sans-serif; 
+} 
+
+form.lpeRegForm ul input, form.lpeRegForm ul input[type='text'], form.lpeRegForm ul textarea, form.lpeRegForm ul select {
+  font-size: 12px; 
+  color: black; 
+  font-family: Arial, Helvetica, sans-serif; 
+} 
+
+form.lpeRegForm li {
+  margin-bottom: 10px; 
+} 
+
+form.lpeRegForm .mktInput {
+  padding-left: 0px; 
+}

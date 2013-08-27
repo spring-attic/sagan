@@ -7,14 +7,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
-import org.springframework.site.domain.services.github.GitHubService;
-import org.springframework.site.domain.services.github.RepoContent;
-import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+
+import io.spring.site.domain.services.github.GitHubService;
+import io.spring.site.domain.services.github.RepoContent;
+import io.spring.site.web.configuration.ApplicationConfiguration;
 
 import java.util.Arrays;
 import java.util.Collection;

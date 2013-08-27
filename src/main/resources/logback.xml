@@ -2,6 +2,6 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml"/>	
 	<!-- logger name="org.springframework.web" level="DEBUG"/-->
-	<logger name="org.springframework.site" level="DEBUG" />
+	<logger name="io.spring.site" level="DEBUG" />
 	<logger name="org.apache.http" level="WARN" />
 </configuration>
