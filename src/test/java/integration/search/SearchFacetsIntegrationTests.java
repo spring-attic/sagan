@@ -10,11 +10,14 @@ import io.spring.site.search.SearchService;
 import io.spring.site.web.search.SearchEntryBuilder;
 
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import utils.SetSystemProperty;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -26,7 +29,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 
-@Ignore
 public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 
 	private final Pageable pageable = new PageRequest(0, 10);
@@ -73,9 +75,12 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 			.facetPath("Projects/SpringSecurity")
 			.facetPath("Projects/SpringSecurity/1.2.3.RELEASE").build();
 
+	@Value("${elasticsearch.client.index}")
+	private String index;
+
 	@Before
 	public void setUp() throws Exception {
-		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient, "sagan-test");
+		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient, index);
 		searchIndexSetup.deleteIndex();
 		searchIndexSetup.createIndex();
 	}

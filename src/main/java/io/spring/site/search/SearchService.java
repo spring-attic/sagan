@@ -38,14 +38,14 @@ public class SearchService {
 	}
 
 	public void saveToIndex(SearchEntry entry) {
-		Index.Builder newIndexBuilder = new Index.Builder(entry).id(entry.getId()).index(index)
+		Index.Builder indexEntryBuilder = new Index.Builder(entry).id(entry.getId()).index(index)
 				.type(entry.getType());
 
 		if (this.useRefresh) {
-			newIndexBuilder.refresh(true);
+			indexEntryBuilder.refresh(true);
 		}
 		logger.debug("Indexing " + entry.getPath());
-		execute(newIndexBuilder.build());
+		execute(indexEntryBuilder.build());
 	}
 
 	public SearchResults search(String term, Pageable pageable, List<String> filter) {

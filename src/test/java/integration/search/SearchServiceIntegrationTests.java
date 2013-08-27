@@ -4,24 +4,25 @@ import integration.IntegrationTestBase;
 import io.searchbox.client.JestClient;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchResult;
-import io.spring.site.search.SearchResults;
 import io.spring.site.search.SearchService;
 import io.spring.site.web.search.SearchEntryBuilder;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import utils.SetSystemProperty;
 
+import static junit.framework.Assert.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
@@ -30,7 +31,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
-@Ignore
 public class SearchServiceIntegrationTests extends IntegrationTestBase {
 
 	private final Pageable pageable = new PageRequest(0, 10);
@@ -43,9 +43,12 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
 
 	private SearchEntry entry;
 
+	@Value("${elasticsearch.client.index}")
+	private String index;
+
 	@Before
 	public void setUp() throws Exception {
-		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient, "sagan-test");
+		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient, index);
 		searchIndexSetup.deleteIndex();
 		searchIndexSetup.createIndex();
 	}

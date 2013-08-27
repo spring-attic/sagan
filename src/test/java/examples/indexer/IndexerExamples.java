@@ -13,13 +13,13 @@ import io.spring.site.indexer.configuration.IndexerConfiguration;
 import io.spring.site.search.SearchResult;
 import io.spring.site.search.SearchResults;
 import io.spring.site.search.SearchService;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.context.initializer.LoggingApplicationContextInitializer;
 import org.springframework.data.domain.PageRequest;
@@ -47,9 +47,6 @@ public class IndexerExamples {
 	@ClassRule
 	public static SetSystemProperty delay = new SetSystemProperty("search.indexer.delay", "60000000");
 
-	@ClassRule
-	public static SetSystemProperty index = new SetSystemProperty("elasticsearch.client.index", "sagan-test");
-
 	@Autowired
 	private GettingStartedGuideIndexer gettingStartedGuideIndexer;
 
@@ -61,6 +58,9 @@ public class IndexerExamples {
 
 	@Autowired
 	private JestClient jestClient;
+
+	@Value("${elasticsearch.client.index}")
+	private String index;
 
 	@Before
 	public void setUp() throws Exception {
@@ -104,7 +104,7 @@ public class IndexerExamples {
 	}
 
 	private void rebuildIndex() {
-		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(jestClient, "sagan-test");
+		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(jestClient, index);
 		searchIndexSetup.deleteIndex();
 		searchIndexSetup.createIndex();
 	}
