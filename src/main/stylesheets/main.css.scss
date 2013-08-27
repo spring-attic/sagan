@@ -957,3 +957,16 @@ input.floating-input {
     }
   }
 }
+
+.placeholder-img {
+  background-color: #D5D5D5;
+  border: 3px solid white;
+  padding: 77px 0;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #999;
+  text-shadow: 0 1px 2px white;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: $secondary-font-family;
+}
