@@ -1,14 +1,16 @@
 package io.spring.site.domain.projects;
 
+import org.springframework.web.util.UriTemplate;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.util.UriTemplate;
-
-import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.*;
+import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
+import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.PRERELEASE;
+import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.SNAPSHOT;
 
 
 class ProjectVersionsParser {
@@ -57,7 +59,6 @@ class ProjectVersionsParser {
 
 			for (Object value : (List<?>) projectData.get("supportedVersions")) {
 				SupportedVersion supportedVersion = new SupportedVersion();
-				supportedVersion.artifactId = projectArtifactId;
 				supportedVersion.refDocUrl = projectRefDocUrl;
 				supportedVersion.apiDocUrl = projectApiDocUrl;
 				supportedVersion.groupId = projectGroupId;
@@ -112,13 +113,15 @@ class ProjectVersionsParser {
 			}
 			String artifactId = supportedVersion.artifactId;
 
-			ProjectRelease.ReleaseStatus releaseStatus = getVersionRelease(
-					supportedVersion.name, currentVersion);
-			if (currentVersion == null && releaseStatus == CURRENT) {
+			boolean isCurrent = false;
+			ProjectRelease.ReleaseStatus releaseStatus = getVersionRelease(supportedVersion.name);
+			if (currentVersion == null && releaseStatus == GENERAL_AVAILABILITY) {
 				currentVersion = supportedVersion.name;
+				isCurrent = true;
 			}
-			projectReleases.add(new ProjectRelease(supportedVersion.name, releaseStatus,
-					refDocUrl, apiDocUrl, groupId, artifactId));
+			ProjectRelease release = new ProjectRelease(supportedVersion.name, releaseStatus, isCurrent,
+					refDocUrl, apiDocUrl, groupId, artifactId);
+			projectReleases.add(release);
 		}
 		return projectReleases;
 	}
@@ -139,15 +142,15 @@ class ProjectVersionsParser {
 		return docUrl;
 	}
 
-	private ProjectRelease.ReleaseStatus getVersionRelease(String versionName,
-			String currentVersion) {
+	private ProjectRelease.ReleaseStatus getVersionRelease(String versionName) {
 		boolean isPreRelease = versionName.matches("[0-9.]+(M|RC)\\d+");
+		boolean isSnapshot = versionName.matches("[0-9.].*(SNAPSHOT)");
 		if (isPreRelease) {
 			return PRERELEASE;
-		} else if (currentVersion == null) {
-			return CURRENT;
+		} else if (isSnapshot) {
+			return SNAPSHOT;
 		} else {
-			return SUPPORTED;
+			return GENERAL_AVAILABILITY;
 		}
 	}
 }
