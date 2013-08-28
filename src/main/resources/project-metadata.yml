@@ -266,6 +266,7 @@ projects:
     - id: spring-social
       name: Spring Social
       lead: cwalls
+      groupId: org.springframework.social
       supportedVersions:
         - 1.1.0.M4
         - 1.0.3.RELEASE
@@ -273,6 +274,7 @@ projects:
     - id: spring-social-facebook
       name: Spring Social Facebook
       lead: cwalls
+      groupId: org.springframework.social
       supportedVersions:
         - 1.1.0.M4
         - 1.0.3.RELEASE
@@ -280,6 +282,7 @@ projects:
     - id: spring-social-twitter
       name: Spring Social Twitter
       lead: cwalls
+      groupId: org.springframework.social
       supportedVersions:
         - 1.1.0.M4
         - 1.0.5.RELEASE
@@ -287,18 +290,21 @@ projects:
     - id: spring-social-linkedin
       name: Spring Social LinkedIn
       lead: cwalls
+      groupId: org.springframework.social
       supportedVersions:
         - 1.0.0.RC3
 
     - id: spring-social-github
       name: Spring Social GitHub
       lead: cwalls
+      groupId: org.springframework.social
       supportedVersions:
         - 1.0.0.M3
 
     - id: spring-social-tripit
       name: Spring Social TripIt
       lead: cwalls
+      groupId: org.springframework.social
       supportedVersions:
         - 1.0.0.M3
 
