@@ -59,6 +59,7 @@ body {
   position: absolute;
   z-index: 999;
   background-image: none;
+  filter: none;
   background-color: #34302d;
   border: none;
   border-top: 4px solid #6db33f;
@@ -853,6 +854,7 @@ input.floating-input:focus {
   top: 74px;
   left: 0;
   right: 0;
+  width: 100%;
 }
 .billboard--wrapper .billboard--container {
   position: absolute;
@@ -888,9 +890,14 @@ input.floating-input:focus {
 .billboard--wrapper .billboard-bg {
   height: 425px;
   border-bottom: 1px solid #34302d;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .billboard--wrapper .billboard-bg.about-us--bg {
   background-image: url("../img/about-us-bg.png");
+}
+.billboard--wrapper .billboard-bg.jobs--bg {
+  background-image: url("../img/jobs-bg.png");
 }
 
 .billboard-body--wrapper {
@@ -1064,4 +1071,60 @@ form.lpeRegForm .mktInput {
 
 .about-page-fix {
   margin-top: 201px;
+}
+
+.job-category--container {
+  padding-right: 95px;
+}
+.job-category--container .job-category--title {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+.job-category--container .job--container {
+  margin-bottom: 20px;
+}
+.job-category--container .job--container .title {
+  color: #5fa134;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.job-post--container {
+  padding-bottom: 60px;
+  margin-bottom: 55px;
+  border-bottom: 1px solid white;
+}
+.job-post--container a {
+  color: #5fa134;
+}
+.job-post--container .job-post--title {
+  margin-bottom: 5px;
+}
+.job-post--container .job-post--location {
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.job-post--container .job-post--details p {
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.job-post--container .job-post--details ul {
+  margin-bottom: 30px;
+}
+.job-post--container .job-post--details ul li {
+  line-height: 22px;
+  margin-bottom: 5px;
+}
+.job-post--container .apply-now-link {
+  text-decoration: uppercase;
+}
+.job-post--container:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
 }
