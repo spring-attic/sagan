@@ -1,6 +1,11 @@
 package io.spring.site.domain.projects;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ProjectRelease implements Comparable<ProjectRelease> {
+
+	private static final Pattern VERSION_DISPLAY_REGEX = Pattern.compile("([0-9.]+)\\.(RC\\d+|M\\d+)?");
 
 	public enum ReleaseStatus {
 		PRERELEASE, SNAPSHOT, GENERAL_AVAILABILITY;
@@ -48,7 +53,15 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 	}
 
 	public String getVersionDisplayName() {
-		return this.versionName.replaceAll(".RELEASE$", "");
+		Matcher matcher = VERSION_DISPLAY_REGEX.matcher(versionName);
+		matcher.find();
+		String versionNumber = matcher.group(1);
+		String preReleaseDescription = matcher.group(2);
+
+		if (preReleaseDescription != null) {
+			return versionNumber + " " + preReleaseDescription;
+		}
+		return versionNumber;
 	}
 
 	public String getRefDocUrl() {
