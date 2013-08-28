@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
 public class CreateBlogPostTests extends IntegrationTestBase {
 
@@ -59,7 +60,9 @@ public class CreateBlogPostTests extends IntegrationTestBase {
 				return profileId;
 			}
 		};
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+				.addFilters(springSecurityFilterChain)
+				.defaultRequest(get("/").with(csrf()).with(user(principal.getName()).roles("USER"))).build();
 		postRepository.deleteAll();
 	}
 

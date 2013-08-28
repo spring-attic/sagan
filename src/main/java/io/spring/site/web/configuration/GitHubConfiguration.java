@@ -1,5 +1,7 @@
 package io.spring.site.web.configuration;
 
+import io.spring.site.domain.services.github.JsonStringConverter;
+import io.spring.site.domain.services.github.MarkdownHtmlConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,9 +10,6 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.impl.GitHubTemplate;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
-
-import io.spring.site.domain.services.github.JsonStringConverter;
-import io.spring.site.domain.services.github.MarkdownHtmlConverter;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;

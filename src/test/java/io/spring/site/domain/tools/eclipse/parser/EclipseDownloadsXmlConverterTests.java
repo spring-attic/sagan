@@ -1,21 +1,16 @@
 package io.spring.site.domain.tools.eclipse.parser;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.StreamUtils;
-
 import io.spring.site.domain.tools.eclipse.EclipseDownloads;
 import io.spring.site.domain.tools.eclipse.EclipsePackage;
 import io.spring.site.domain.tools.eclipse.EclipsePlatform;
 import io.spring.site.domain.tools.eclipse.EclipseRelease;
-import io.spring.site.domain.tools.eclipse.parser.EclipseDownloadsXmlConverter;
 import io.spring.site.domain.tools.eclipse.xml.EclipseXml;
+import io.spring.site.test.FixtureLoader;
+import org.junit.Before;
+import org.junit.Test;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
 
-import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +28,7 @@ public class EclipseDownloadsXmlConverterTests {
 
 	@Before
 	public void setUp() throws Exception {
-		InputStream response = new ClassPathResource("/eclipse.xml", getClass()).getInputStream();
-		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
+		String responseXml = FixtureLoader.load("/fixtures/tools/eclipse.xml");
 		Serializer serializer = new Persister();
 		EclipseXml eclipseXml = serializer.read(EclipseXml.class, responseXml);
 		eclipseDownloads = new EclipseDownloadsXmlConverter().convert(eclipseXml);
@@ -89,13 +83,4 @@ public class EclipseDownloadsXmlConverterTests {
 		assertThat(packages.get(3).getName(), equalTo("Eclipse for RCP and RAP Developers"));
 	}
 
-//	@Test
-//	public void packageHasDownloads() throws Exception {
-//		List<DownloadLink> downloadLinks = platforms.get("windows").getReleases().get(0).getPackages().get(0).getDownloadLinks();
-//		assertThat(downloadLinks.size(), equalTo(2));
-//		assertThat(downloadLinks.get(0).getOs(), equalTo("Windows"));
-//		assertThat(downloadLinks.get(0).getUrl(), equalTo("http://download.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
-//		assertThat(downloadLinks.get(1).getOs(), equalTo("Windows (64bit)"));
-//		assertThat(downloadLinks.get(1).getUrl(), equalTo("http://download.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32-x86_64.zip"));
-//	}
 }

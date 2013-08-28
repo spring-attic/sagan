@@ -1,5 +1,6 @@
 package io.spring.site.indexer.mapper;
 
+import io.spring.site.domain.projects.ProjectReleaseBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -7,11 +8,11 @@ import org.junit.Test;
 
 import io.spring.site.domain.projects.Project;
 import io.spring.site.domain.projects.ProjectRelease;
-import io.spring.site.indexer.mapper.ReferenceDocumentSearchEntryMapper;
 import io.spring.site.search.SearchEntry;
 
 import java.util.Collections;
 
+import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
@@ -24,7 +25,11 @@ public class ReferenceDocumentSearchEntryMapperTests {
 			"http://www.example.com/spring-framework",
 			Collections.<ProjectRelease>emptyList());
 
-	private ProjectRelease version = new ProjectRelease("3.2.1.RELEASE", ProjectRelease.ReleaseStatus.CURRENT, "", "", "", "");
+	private ProjectRelease version = new ProjectReleaseBuilder()
+			.versionName("3.2.1.RELEASE")
+			.releaseStatus(GENERAL_AVAILABILITY)
+			.current(true).build();
+
 	private ReferenceDocumentSearchEntryMapper mapper = new ReferenceDocumentSearchEntryMapper(project, version);
 	private SearchEntry entry;
 

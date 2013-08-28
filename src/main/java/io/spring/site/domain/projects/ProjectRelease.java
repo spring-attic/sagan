@@ -1,40 +1,51 @@
 package io.spring.site.domain.projects;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ProjectRelease implements Comparable<ProjectRelease> {
 
+	private static final Pattern VERSION_DISPLAY_REGEX = Pattern.compile("([0-9.]+)\\.(RC\\d+|M\\d+)?");
+
 	public enum ReleaseStatus {
-		CURRENT, PRERELEASE, SUPPORTED;
+		PRERELEASE, SNAPSHOT, GENERAL_AVAILABILITY;
 	}
 
 	private final String versionName;
 	private final ReleaseStatus releaseStatus;
+	private final boolean isCurrent;
 	private final String refDocUrl;
 	private final String apiDocUrl;
 	private final String groupId;
 	private final String artifactId;
-	private final Repository repository;
+	private final ProjectRepository repository;
 
 	public ProjectRelease(String versionName, ReleaseStatus releaseStatus,
-			String refDocUrl, String apiDocUrl, String groupId, String artifactId) {
+						  boolean isCurrent, String refDocUrl, String apiDocUrl, String groupId, String artifactId) {
 		this.versionName = versionName;
 		this.releaseStatus = releaseStatus;
+		this.isCurrent = isCurrent;
 		this.refDocUrl = refDocUrl;
 		this.apiDocUrl = apiDocUrl;
 		this.groupId = groupId;
 		this.artifactId = artifactId;
-		this.repository = Repository.get(versionName);
+		this.repository = ProjectRepository.get(versionName);
 	}
 
 	public boolean isCurrent() {
-		return this.releaseStatus == ReleaseStatus.CURRENT;
+		return isCurrent;
+	}
+
+	public boolean isGeneralAvailability() {
+		return this.releaseStatus == ReleaseStatus.GENERAL_AVAILABILITY;
 	}
 
 	public boolean isPreRelease() {
 		return this.releaseStatus == ReleaseStatus.PRERELEASE;
 	}
 
-	public boolean isSupported() {
-		return this.releaseStatus == ReleaseStatus.SUPPORTED;
+	public boolean isSnapshot() {
+		return this.releaseStatus == ReleaseStatus.SNAPSHOT;
 	}
 
 	public String getVersion() {
@@ -42,7 +53,15 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 	}
 
 	public String getVersionDisplayName() {
-		return this.versionName.replaceAll(".RELEASE$", "");
+		Matcher matcher = VERSION_DISPLAY_REGEX.matcher(versionName);
+		matcher.find();
+		String versionNumber = matcher.group(1);
+		String preReleaseDescription = matcher.group(2);
+
+		if (preReleaseDescription != null) {
+			return versionNumber + " " + preReleaseDescription;
+		}
+		return versionNumber;
 	}
 
 	public String getRefDocUrl() {
@@ -69,7 +88,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 		return this.artifactId;
 	}
 
-	public Repository getRepository() {
+	public ProjectRepository getRepository() {
 		return this.repository;
 	}
 
@@ -115,47 +134,4 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 				+ '\'' + ", apiDocUrl='" + this.apiDocUrl + '\'' + '}';
 	}
 
-	public static class Repository {
-		private String id;
-		private String name;
-		private String url;
-		private Boolean snapshotsEnabled;
-
-		private Repository(String id, String name, String url, Boolean snapshotsEnabled) {
-			this.id = id;
-			this.name = name;
-			this.url = url;
-			this.snapshotsEnabled = snapshotsEnabled;
-		}
-
-		public static Repository get(String versionName) {
-			if (versionName.contains("RELEASE")) {
-				return null;
-			}
-
-			if (versionName.contains("SNAPSHOT")) {
-				return new Repository("spring-snapshots", "Spring Snapshots",
-						"http://repo.springsource.org/snapshot", true);
-			}
-
-			return new Repository("spring-milestones", "Spring Milestones",
-					"http://repo.springsource.org/milestone", false);
-		}
-
-		public String getId() {
-			return this.id;
-		}
-
-		public String getName() {
-			return this.name;
-		}
-
-		public String getUrl() {
-			return this.url;
-		}
-
-		public Boolean getSnapshotsEnabled() {
-			return this.snapshotsEnabled;
-		}
-	}
 }

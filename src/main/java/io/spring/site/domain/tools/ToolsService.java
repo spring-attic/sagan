@@ -1,5 +1,6 @@
 package io.spring.site.domain.tools;
 
+import io.spring.site.domain.services.CachedRestClient;
 import io.spring.site.domain.tools.eclipse.EclipseDownloads;
 import io.spring.site.domain.tools.eclipse.parser.EclipseDownloadsXmlConverter;
 import io.spring.site.domain.tools.eclipse.xml.EclipseXml;
@@ -15,29 +16,31 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ToolsService {
 	private final ToolXmlConverter toolXmlConverter = new ToolXmlConverter();
-	private RestTemplate restTemplate;
-	private Serializer serializer;
+	private final CachedRestClient cachedRestClient;
+	private final RestTemplate restTemplate;
+	private final Serializer serializer;
 
 	@Autowired
-	public ToolsService(RestTemplate restTemplate, Serializer serializer) {
+	public ToolsService(CachedRestClient cachedRestClient, RestTemplate restTemplate, Serializer serializer) {
+		this.cachedRestClient = cachedRestClient;
 		this.restTemplate = restTemplate;
 		this.serializer = serializer;
 	}
 
 	public ToolSuiteDownloads getStsDownloads() throws Exception {
-		String responseXml = restTemplate.getForObject("http://dist.springsource.com/release/STS/index-new.xml", String.class);
+		String responseXml = cachedRestClient.get(restTemplate, "http://download.springsource.com/release/STS/index-new.xml", String.class);
 		ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
 		return toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite");
 	}
 
 	public ToolSuiteDownloads getGgtsDownloads() throws Exception {
-		String responseXml = restTemplate.getForObject("http://dist.springsource.com/release/STS/index-new.xml", String.class);
+		String responseXml = cachedRestClient.get(restTemplate, "http://download.springsource.com/release/STS/index-new.xml", String.class);
 		ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
 		return toolXmlConverter.convert(toolSuiteXml, "Groovy/Grails Tool Suite");
 	}
 
 	public EclipseDownloads getEclipseDownloads() throws Exception {
-		String responseXml = restTemplate.getForObject("http://dist.springsource.com/release/STS/eclipse.xml", String.class);
+		String responseXml = cachedRestClient.get(restTemplate, "http://download.springsource.com/release/STS/eclipse.xml", String.class);
 		EclipseXml eclipseXml = serializer.read(EclipseXml.class, responseXml);
 		return new EclipseDownloadsXmlConverter().convert(eclipseXml);
 	}

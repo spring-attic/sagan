@@ -1,30 +1,16 @@
 package io.spring.site.domain.tools.toolsuite.xml;
 
-import org.junit.Before;
+import io.spring.site.test.FixtureLoader;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.StreamUtils;
-
-import io.spring.site.domain.tools.toolsuite.xml.Release;
-import io.spring.site.domain.tools.toolsuite.xml.ToolSuiteXml;
-
-import java.io.InputStream;
-import java.nio.charset.Charset;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class ToolSuiteXmlParsingTests {
-	private String responseXml;
-
-	@Before
-	public void setUp() throws Exception {
-		InputStream response = new ClassPathResource("/sts_downloads.xml", getClass()).getInputStream();
-		responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
-	}
+	private String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
 
 	@Test
 	public void unmarshal() throws Exception {

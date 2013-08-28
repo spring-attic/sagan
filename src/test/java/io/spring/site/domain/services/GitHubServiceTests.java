@@ -1,9 +1,8 @@
 package io.spring.site.domain.services;
 
-import io.spring.site.domain.services.github.CachingGitHubRestClient;
+import io.spring.site.domain.services.github.GitHubRestClient;
 import io.spring.site.domain.services.github.GitHubService;
 import io.spring.site.test.FixtureLoader;
-
 import org.apache.xerces.impl.dv.util.Base64;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,7 @@ import static org.mockito.Matchers.eq;
 public class GitHubServiceTests {
 
 	@Mock
-	CachingGitHubRestClient gitHubRestClient;
+	GitHubRestClient gitHubRestClient;
 	private GitHubService service;
 
 	@Before

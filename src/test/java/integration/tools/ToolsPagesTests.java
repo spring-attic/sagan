@@ -1,22 +1,19 @@
 package integration.tools;
 
 import integration.IntegrationTestBase;
+import io.spring.site.test.FixtureLoader;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -41,8 +38,7 @@ public class ToolsPagesTests extends IntegrationTestBase {
 
 	@Before
 	public void setup() throws IOException {
-		InputStream response = new ClassPathResource("/sts_downloads.xml", getClass()).getInputStream();
-		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
+		String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
 
 		stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
 
@@ -98,8 +94,7 @@ public class ToolsPagesTests extends IntegrationTestBase {
 
 	@Test
 	public void showsEclipseIndex() throws Exception {
-		InputStream response = new ClassPathResource("/eclipse.xml", getClass()).getInputStream();
-		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
+		String responseXml = FixtureLoader.load("/fixtures/tools/eclipse.xml");
 		stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
 
 		MvcResult mvcResult = this.mockMvc.perform(get("/tools/eclipse"))

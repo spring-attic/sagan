@@ -2,12 +2,11 @@ package io.spring.site.domain.services.github;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.spring.site.domain.services.MarkdownService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
-
-import io.spring.site.domain.services.MarkdownService;
 
 import java.io.IOException;
 import java.util.List;
