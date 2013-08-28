@@ -25,6 +25,10 @@ import org.simpleframework.xml.core.Persister;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
+import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -43,11 +47,13 @@ import io.spring.site.web.blog.feed.BlogPostAtomViewer;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
 @EnableAutoConfiguration
 @Configuration
 @ComponentScan(basePackages = {"io.spring.site.web",
 		"io.spring.site.domain", "io.spring.site.search"})
+@EnableCaching
 public class ApplicationConfiguration {
 
 	public static void main(String[] args) {
@@ -136,6 +142,13 @@ public class ApplicationConfiguration {
 		liquibase.setDataSource(dataSource);
 		liquibase.setChangeLog("classpath:db-changeset.yaml");
 		return liquibase;
+	}
+
+	@Bean
+	public CacheManager cacheManager() {
+		SimpleCacheManager cacheManager = new SimpleCacheManager();
+		cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("cache")));
+		return cacheManager;
 	}
 
 }
