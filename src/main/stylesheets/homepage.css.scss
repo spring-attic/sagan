@@ -89,11 +89,13 @@ $icon-sprite: url("../img/iconsprite.png");
       line-height: 30px;
       font-family: $secondary-font-family;
       margin-bottom: 20px;
+      color: $black-brown;
     }
     .offset-feature--text {
       font-size: 18px;
       line-height: 28px;
       margin-bottom: 20px;
+      color: $black-brown;
     }
     .offset-feature--link {
       color: $link-green;
@@ -126,6 +128,11 @@ $icon-sprite: url("../img/iconsprite.png");
     }
     &:nth-child(even) {
       background-color: #ebf1e7;
+    }
+    &:hover {
+      .offset-feature--link {
+        text-decoration: underline;
+      }
     }
   }
   .support--wrapper {

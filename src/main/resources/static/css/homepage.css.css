@@ -72,11 +72,13 @@
   line-height: 30px;
   font-family: "Montserrat", sans-serif;
   margin-bottom: 20px;
+  color: #34302d;
 }
 .homepage--body .offset-feature--container .offset-feature--text {
   font-size: 18px;
   line-height: 28px;
   margin-bottom: 20px;
+  color: #34302d;
 }
 .homepage--body .offset-feature--container .offset-feature--link {
   color: #5fa134;
@@ -109,6 +111,9 @@
 }
 .homepage--body .offset-feature--container:nth-child(even) {
   background-color: #ebf1e7;
+}
+.homepage--body .offset-feature--container:hover .offset-feature--link {
+  text-decoration: underline;
 }
 .homepage--body .support--wrapper {
   background-color: #292624;
