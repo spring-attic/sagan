@@ -29,9 +29,7 @@ public class GitHubConfiguration {
 
 	@Bean
 	public GitHubConnectionFactory gitHubConnectionFactory() {
-		GitHubConnectionFactory factory = new GitHubConnectionFactory(githubClientId, githubClientSecret);
-		factory.setScope("user");
-		return factory;
+		return new GitHubConnectionFactory(githubClientId, githubClientSecret);
 	}
 
 	@Bean
