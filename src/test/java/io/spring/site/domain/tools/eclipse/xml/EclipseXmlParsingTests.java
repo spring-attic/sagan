@@ -7,9 +7,6 @@ import org.simpleframework.xml.core.Persister;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StreamUtils;
 
-import io.spring.site.domain.tools.eclipse.xml.EclipseXml;
-import io.spring.site.domain.tools.eclipse.xml.EclipseXmlProduct;
-
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
@@ -22,7 +19,7 @@ public class EclipseXmlParsingTests {
 
 	@Before
 	public void setUp() throws Exception {
-		InputStream response = new ClassPathResource("/eclipse.xml", getClass()).getInputStream();
+		InputStream response = new ClassPathResource("/fixtures/tools/eclipse.xml", getClass()).getInputStream();
 		responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
 	}
 

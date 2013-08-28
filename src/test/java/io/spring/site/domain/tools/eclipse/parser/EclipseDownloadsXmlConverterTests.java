@@ -11,7 +11,6 @@ import io.spring.site.domain.tools.eclipse.EclipseDownloads;
 import io.spring.site.domain.tools.eclipse.EclipsePackage;
 import io.spring.site.domain.tools.eclipse.EclipsePlatform;
 import io.spring.site.domain.tools.eclipse.EclipseRelease;
-import io.spring.site.domain.tools.eclipse.parser.EclipseDownloadsXmlConverter;
 import io.spring.site.domain.tools.eclipse.xml.EclipseXml;
 
 import java.io.InputStream;
@@ -33,7 +32,7 @@ public class EclipseDownloadsXmlConverterTests {
 
 	@Before
 	public void setUp() throws Exception {
-		InputStream response = new ClassPathResource("/eclipse.xml", getClass()).getInputStream();
+		InputStream response = new ClassPathResource("/fixtures/tools/eclipse.xml", getClass()).getInputStream();
 		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
 		Serializer serializer = new Persister();
 		EclipseXml eclipseXml = serializer.read(EclipseXml.class, responseXml);

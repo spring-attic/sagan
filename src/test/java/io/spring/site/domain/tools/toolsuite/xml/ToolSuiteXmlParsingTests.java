@@ -7,9 +7,6 @@ import org.simpleframework.xml.core.Persister;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StreamUtils;
 
-import io.spring.site.domain.tools.toolsuite.xml.Release;
-import io.spring.site.domain.tools.toolsuite.xml.ToolSuiteXml;
-
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
@@ -22,7 +19,7 @@ public class ToolSuiteXmlParsingTests {
 
 	@Before
 	public void setUp() throws Exception {
-		InputStream response = new ClassPathResource("/sts_downloads.xml", getClass()).getInputStream();
+		InputStream response = new ClassPathResource("/fixtures/tools/sts_downloads.xml", getClass()).getInputStream();
 		responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
 	}
 

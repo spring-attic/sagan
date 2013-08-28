@@ -41,7 +41,7 @@ public class ToolsPagesTests extends IntegrationTestBase {
 
 	@Before
 	public void setup() throws IOException {
-		InputStream response = new ClassPathResource("/sts_downloads.xml", getClass()).getInputStream();
+		InputStream response = new ClassPathResource("/fixtures/tools/sts_downloads.xml", getClass()).getInputStream();
 		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
 
 		stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
@@ -98,7 +98,7 @@ public class ToolsPagesTests extends IntegrationTestBase {
 
 	@Test
 	public void showsEclipseIndex() throws Exception {
-		InputStream response = new ClassPathResource("/eclipse.xml", getClass()).getInputStream();
+		InputStream response = new ClassPathResource("/fixtures/tools/eclipse.xml", getClass()).getInputStream();
 		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
 		stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
 

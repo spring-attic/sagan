@@ -69,7 +69,7 @@ public class IndexerTests extends IntegrationTestBase {
 
 	@Before
 	public void setup() throws IOException {
-		InputStream response = new ClassPathResource("/sts_downloads.xml", getClass())
+		InputStream response = new ClassPathResource("/fixtures/tools/sts_downloads.xml", getClass())
 				.getInputStream();
 		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
 
