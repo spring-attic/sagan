@@ -81,29 +81,35 @@ $link-green: #5fa134;
 
 .content--container {
   h1 {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
   }
   a {
     color: $link-green;
   }
-  p, pre {
-    margin-bottom: 18px;
+  p, ul {
+    margin-bottom: 20px;
+    border-radius: 0;
+  }
+
+  pre {
+    margin-top: -10px;
+    margin-bottom: 20px;
     border-radius: 0;
   }
 
   h2 {
     font-family: $secondary-font-family;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 28px;
-    font-weight: 700;
-    margin: 30px 0 15px;
+    font-weight: 400;
+    margin: 30px 0 10px;
   }
   h3, h4 {
     font-family: $secondary-font-family;
     font-size: 16px;
     line-height: 26px;
-    font-weight: 700;
-    margin: 30px 0 15px;
+    font-weight: 400;
+    margin: 20px 0 10px;
   }
   p code {
     color: #305CB5;
@@ -111,9 +117,8 @@ $link-green: #5fa134;
     padding: 2px 6px;
   }
   ul {
-    margin-bottom: 30px;
     li {
-      padding: 5px 0;
+      margin-bottom: 5px;
       code {
         color: #305CB5;
         font-size: 14px;
@@ -123,7 +128,22 @@ $link-green: #5fa134;
   }
   blockquote {
     padding: 0 0 0 10px;
-    border-left: 5px solid #DDD;
+    border-left: 4px solid $green;
+    background-color: #EBF1E7;
+    padding: 25px 20px;
+    margin: 30px 0;
+    font-family: $secondary-font-family;
+    strong {
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
   pre {
     word-break: normal;
@@ -135,6 +155,9 @@ $link-green: #5fa134;
   .highlight .copy-button {
     position: absolute;
     margin-left: 634px;
+  }
+  strong {
+    font-family: $secondary-font-family;
   }
 }
 
@@ -215,7 +238,7 @@ $link-green: #5fa134;
 }
 
 .go-to-repo--container {
-  margin-top: 40px;
+  margin-top: 20px;
   padding: 10px 6.2%;
   border-top: 1px solid white;
   a {
