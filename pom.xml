@@ -157,6 +157,24 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        
+        <dependency>
+        	<groupId>org.apache.httpcomponents</groupId>
+        	<artifactId>httpclient</artifactId>
+        	<version>4.3-beta2</version>
+        </dependency>
+
+        <dependency>
+        	<groupId>org.apache.httpcomponents</groupId>
+        	<artifactId>httpcore</artifactId>
+        	<version>4.3-beta2</version>
+        </dependency>
+
+        <dependency>
+        	<groupId>org.apache.httpcomponents</groupId>
+        	<artifactId>httpcore-nio</artifactId>
+        	<version>4.3-beta2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.cloudfoundry</groupId>
@@ -167,7 +185,6 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.2</version>
         </dependency>
 
         <dependency>
@@ -183,7 +200,6 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>3.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.mattbertolini</groupId>
