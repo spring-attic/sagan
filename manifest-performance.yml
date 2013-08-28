@@ -1,0 +1,16 @@
+---
+applications:
+- name: sagan
+  memory: 2G
+  instances: 2
+  host: sagan-performance
+  domain: cfapps.io
+  path: target/spring-io-site.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack
+- name: sagan-indexer
+  memory: 2G
+  instances: 1
+  host: sagan-indexer-performance
+  domain: cfapps.io
+  path: target/spring-io-site.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack
