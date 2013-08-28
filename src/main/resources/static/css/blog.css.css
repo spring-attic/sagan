@@ -19,7 +19,7 @@
   display: none;
 }
 .blog--container.blog-preview .blog--post p {
-  margin-bottom: 0;
+  margin-bottom: 15px;
 }
 .blog--container.blog-preview:last-child {
   margin: 0;
