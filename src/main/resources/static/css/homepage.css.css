@@ -62,7 +62,6 @@
 }
 .homepage--body .offset-feature--container {
   border-bottom: 1px solid #dddbda;
-  min-width: 1110px;
 }
 .homepage--body .offset-feature--container .feature--content {
   padding: 90px 0;
@@ -138,5 +137,5 @@
 }
 
 .homepage-fix {
-  margin-top: 2194px;
+  margin-top: 2185px;
 }
