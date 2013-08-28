@@ -15,6 +15,12 @@
  */
 package io.spring.site.web.configuration;
 
+import com.google.common.cache.CacheBuilder;
+import io.spring.site.domain.projects.ProjectMetadataService;
+import io.spring.site.domain.projects.ProjectMetadataYamlParser;
+import io.spring.site.domain.services.DateService;
+import io.spring.site.web.SiteUrl;
+import io.spring.site.web.blog.feed.BlogPostAtomViewer;
 import liquibase.integration.spring.SpringLiquibase;
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
@@ -22,6 +28,7 @@ import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
@@ -38,23 +45,20 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
-import io.spring.site.domain.projects.ProjectMetadataService;
-import io.spring.site.domain.projects.ProjectMetadataYamlParser;
-import io.spring.site.domain.services.DateService;
-import io.spring.site.web.SiteUrl;
-import io.spring.site.web.blog.feed.BlogPostAtomViewer;
-
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.TimeUnit;
 
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan(basePackages = {"io.spring.site.web",
-		"io.spring.site.domain", "io.spring.site.search"})
+@ComponentScan(basePackages = {"io.spring.site.web", "io.spring.site.domain", "io.spring.site.search"})
 @EnableCaching
 public class ApplicationConfiguration {
+
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApplicationConfiguration.class, args);
@@ -145,9 +149,14 @@ public class ApplicationConfiguration {
 	}
 
 	@Bean
-	public CacheManager cacheManager() {
+	public CacheManager cacheManager(@Value("${cache.timetolive:300}") Long cacheTimeToLive) {
+		ConcurrentMap<Object,Object> cacheMap = CacheBuilder.newBuilder()
+				.expireAfterWrite(cacheTimeToLive, TimeUnit.SECONDS)
+				.build().asMap();
+
+		ConcurrentMapCache concurrentMapCache = new ConcurrentMapCache("cache", cacheMap, false);
 		SimpleCacheManager cacheManager = new SimpleCacheManager();
-		cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("cache")));
+		cacheManager.setCaches(Arrays.asList(concurrentMapCache));
 		return cacheManager;
 	}
 

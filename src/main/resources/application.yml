@@ -66,6 +66,8 @@ search:
 elasticsearch:
   client:
     index: sagan-development
+cache:
+  timetolive: 0
 
 ---
 
