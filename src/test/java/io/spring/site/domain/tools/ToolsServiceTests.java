@@ -1,5 +1,6 @@
 package io.spring.site.domain.tools;
 
+import io.spring.site.domain.services.CachedRestClient;
 import io.spring.site.domain.tools.toolsuite.DownloadLink;
 import io.spring.site.domain.tools.toolsuite.EclipseVersion;
 import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
@@ -20,6 +21,7 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
@@ -32,12 +34,15 @@ public class ToolsServiceTests {
 	@Mock
 	private RestTemplate restTemplate;
 
+	@Mock
+	private CachedRestClient cachedRestClient;
+
 	@Before
 	public void setUp() throws Exception {
 		Serializer serializer = new Persister();
-		service = new ToolsService(restTemplate, serializer);
+		service = new ToolsService(cachedRestClient, restTemplate, serializer);
 		String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
-		when(restTemplate.getForObject(anyString(), eq(String.class))).thenReturn(responseXml);
+		when(cachedRestClient.get(eq(restTemplate), anyString(), (Class<?>) anyObject())).thenReturn(responseXml);
 	}
 
 	@Test

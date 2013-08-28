@@ -21,6 +21,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 import utils.SetSystemProperty;
 
@@ -64,6 +65,12 @@ public class CachingStrategyTests {
 		public GitHub gitHub(){
 			return mock(GitHub.class);
 		}
+
+		@Bean
+		@Primary
+		public RestTemplate restTemplate(){
+			return mock(RestTemplate.class);
+		}
 	}
 
 	@Autowired
@@ -72,9 +79,14 @@ public class CachingStrategyTests {
 	@Autowired
 	private CacheManager cacheManager;
 
+	@Autowired
+	private RestTemplate restTemplate;
+
 	@Before
 	public void setUp() throws Exception {
 		reset(gitHub);
+		reset(restTemplate);
+
 		String requestPath = "https://api.github.com/orgs/spring-guides/repos";
 		String repoList = FixtureLoader.load("/fixtures/github/githubRepoList.json");
 
@@ -108,6 +120,30 @@ public class CachingStrategyTests {
 
 		this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
 		verify(restOperations, times(2)).getForObject(anyString(), (Class<?>) anyObject());
+	}
+
+	@Test
+	public void toolsSTSXmlRequestsAreCached() throws Exception {
+		String stsDownloads = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
+		given(restTemplate.getForObject("http://download.springsource.com/release/STS/index-new.xml", String.class))
+				.willReturn(stsDownloads);
+
+		this.mockMvc.perform(get("/tools")).andExpect(status().isOk());
+		this.mockMvc.perform(get("/tools")).andExpect(status().isOk());
+
+		verify(restTemplate, times(1)).getForObject(anyString(), (Class<?>) anyObject());
+	}
+
+	@Test
+	public void toolsEclipseXmlRequestsAreCached() throws Exception {
+		String eclipse = FixtureLoader.load("/fixtures/tools/eclipse.xml");
+		given(restTemplate.getForObject("http://download.springsource.com/release/STS/eclipse.xml", String.class))
+				.willReturn(eclipse);
+
+		this.mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());
+		this.mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());
+
+		verify(restTemplate, times(1)).getForObject(anyString(), (Class<?>) anyObject());
 	}
 
 }

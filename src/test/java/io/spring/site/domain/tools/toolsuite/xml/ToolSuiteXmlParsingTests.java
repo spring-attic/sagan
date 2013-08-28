@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class ToolSuiteXmlParsingTests {
-	private String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");;
+	private String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
 
 	@Test
 	public void unmarshal() throws Exception {

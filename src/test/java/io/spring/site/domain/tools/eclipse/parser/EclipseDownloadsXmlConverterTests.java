@@ -83,13 +83,4 @@ public class EclipseDownloadsXmlConverterTests {
 		assertThat(packages.get(3).getName(), equalTo("Eclipse for RCP and RAP Developers"));
 	}
 
-//	@Test
-//	public void packageHasDownloads() throws Exception {
-//		List<DownloadLink> downloadLinks = platforms.get("windows").getReleases().get(0).getPackages().get(0).getDownloadLinks();
-//		assertThat(downloadLinks.size(), equalTo(2));
-//		assertThat(downloadLinks.get(0).getOs(), equalTo("Windows"));
-//		assertThat(downloadLinks.get(0).getUrl(), equalTo("http://download.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
-//		assertThat(downloadLinks.get(1).getOs(), equalTo("Windows (64bit)"));
-//		assertThat(downloadLinks.get(1).getUrl(), equalTo("http://download.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32-x86_64.zip"));
-//	}
 }
