@@ -632,6 +632,16 @@ input.floating-input:focus {
 .item--dropdown .item--header .item--header-link:hover [class^=icon-] {
   color: #f1f1f1;
 }
+.item--dropdown .item--header .item--header-link.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.item--dropdown .item--header .item--header-link.disabled:hover {
+  color: #6db33f;
+}
+.item--dropdown .item--header .item--header-link.disabled:hover [class^=icon-] {
+  color: #93918f;
+}
 .item--dropdown .item--left-column, .item--dropdown .item--right-column {
   width: 45%;
   display: inline-block;

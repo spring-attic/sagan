@@ -686,6 +686,16 @@ input.floating-input {
           color: #f1f1f1;
         }
       }
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        &:hover {
+          color: $green;
+          & [class^=icon-] {
+            color: #93918f;
+          }
+        }
+      }
     }
   }
   .item--left-column, .item--right-column {
