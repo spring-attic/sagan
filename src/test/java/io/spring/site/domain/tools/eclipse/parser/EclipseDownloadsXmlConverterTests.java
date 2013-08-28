@@ -1,20 +1,16 @@
 package io.spring.site.domain.tools.eclipse.parser;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.StreamUtils;
-
 import io.spring.site.domain.tools.eclipse.EclipseDownloads;
 import io.spring.site.domain.tools.eclipse.EclipsePackage;
 import io.spring.site.domain.tools.eclipse.EclipsePlatform;
 import io.spring.site.domain.tools.eclipse.EclipseRelease;
 import io.spring.site.domain.tools.eclipse.xml.EclipseXml;
+import io.spring.site.test.FixtureLoader;
+import org.junit.Before;
+import org.junit.Test;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
 
-import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
@@ -32,8 +28,7 @@ public class EclipseDownloadsXmlConverterTests {
 
 	@Before
 	public void setUp() throws Exception {
-		InputStream response = new ClassPathResource("/fixtures/tools/eclipse.xml", getClass()).getInputStream();
-		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
+		String responseXml = FixtureLoader.load("/fixtures/tools/eclipse.xml");
 		Serializer serializer = new Persister();
 		EclipseXml eclipseXml = serializer.read(EclipseXml.class, responseXml);
 		eclipseDownloads = new EclipseDownloadsXmlConverter().convert(eclipseXml);

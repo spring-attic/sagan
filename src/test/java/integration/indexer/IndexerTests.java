@@ -12,19 +12,16 @@ import io.spring.site.indexer.crawler.CrawlerService;
 import io.spring.site.indexer.crawler.DocumentProcessor;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchService;
+import io.spring.site.test.FixtureLoader;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -69,10 +66,7 @@ public class IndexerTests extends IntegrationTestBase {
 
 	@Before
 	public void setup() throws IOException {
-		InputStream response = new ClassPathResource("/fixtures/tools/sts_downloads.xml", getClass())
-				.getInputStream();
-		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
-
+		String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
 		stub(this.restTemplate.getForObject(anyString(), eq(String.class))).toReturn(
 				responseXml);
 	}

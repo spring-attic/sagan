@@ -1,5 +1,10 @@
 package io.spring.site.domain.tools;
 
+import io.spring.site.domain.tools.toolsuite.DownloadLink;
+import io.spring.site.domain.tools.toolsuite.EclipseVersion;
+import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
+import io.spring.site.domain.tools.toolsuite.ToolSuitePlatform;
+import io.spring.site.test.FixtureLoader;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,17 +12,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 
-import io.spring.site.domain.tools.toolsuite.DownloadLink;
-import io.spring.site.domain.tools.toolsuite.EclipseVersion;
-import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
-import io.spring.site.domain.tools.toolsuite.ToolSuitePlatform;
-
-import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
@@ -40,8 +36,7 @@ public class ToolsServiceTests {
 	public void setUp() throws Exception {
 		Serializer serializer = new Persister();
 		service = new ToolsService(restTemplate, serializer);
-		InputStream response = new ClassPathResource("/fixtures/tools/sts_downloads.xml", getClass()).getInputStream();
-		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
+		String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
 		when(restTemplate.getForObject(anyString(), eq(String.class))).thenReturn(responseXml);
 	}
 

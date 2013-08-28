@@ -1,27 +1,17 @@
 package io.spring.site.domain.tools.eclipse.xml;
 
-import org.junit.Before;
+import io.spring.site.test.FixtureLoader;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.StreamUtils;
-
-import java.io.InputStream;
-import java.nio.charset.Charset;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class EclipseXmlParsingTests {
-	private String responseXml;
 
-	@Before
-	public void setUp() throws Exception {
-		InputStream response = new ClassPathResource("/fixtures/tools/eclipse.xml", getClass()).getInputStream();
-		responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
-	}
+	private String responseXml = FixtureLoader.load("/fixtures/tools/eclipse.xml");
 
 	@Test
 	public void unmarshal() throws Exception {
