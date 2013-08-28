@@ -927,10 +927,39 @@ input.floating-input {
     width: 100%;
     margin: 0 auto;
     margin-top: 80px;
+    .billboard--title, .billboard--sub-title {
+      background: rgba(52, 48, 45, 0.8);
+      color: $off-white;
+      display: inline-block;
+    }
+    .billboard--title {
+      font-size: 48px;
+      line-height: 68px;
+      font-family: $secondary-font-family;
+      padding: 0 15px;
+      letter-spacing: -2px;
+    }
+    .billboard--sub-title--container {
+      .billboard--sub-title {
+        font-size: 18px;
+        line-height: 18px;
+        padding: 0 19px 12px;
+        &:first-child {
+          padding-top: 12px;
+        }
+      }
+    }
+    &.center-text {
+      text-align: center;
+      margin-top: 212px;
+    }
   }
   .billboard-bg {
     height: 425px;
     border-bottom: 1px solid $black-brown;
+    &.about-us--bg {
+      background-image: url("../img/about-us-bg.png");
+    }
   }
 }
 .billboard-body--wrapper {
@@ -1066,3 +1095,49 @@ form.lpeRegForm li {
 form.lpeRegForm .mktInput {
   padding-left: 0px; 
 }
+
+.about-feature--container {
+  background-color: $black-brown;
+  text-align: center;
+  padding: 40px 20px;
+  transition: all 0.20s;
+  -webkit-transition: all 0.20s;
+  -moz-transition: all 0.20s;
+  -ms-transition: all 0.20s;
+  -o-transition: all 0.20s;
+  border: 1px solid transparent;
+  .title, .text, .link {
+    color: #f1f1f1;
+  }
+  .title {
+    font-size: 18px;
+    font-family: $secondary-font-family;
+    line-height: 24px;
+    margin: 30px 0 20px;
+    text-transform: uppercase;
+  }
+  .text {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 20px;
+  }
+  .link {
+    font-family: $secondary-font-family;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  &:hover {
+    text-decoration: none;
+    box-shadow: 0 0 9px $green;
+    border-color: $green;
+  }
+  &:active {
+    box-shadow: inset 0 6px 10px darken($black-brown, 10%);
+  }
+}
+.about-page-fix {
+  margin-top: 201px;
+}
+
+

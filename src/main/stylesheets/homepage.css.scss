@@ -134,26 +134,31 @@ $icon-sprite: url("../img/iconsprite.png");
       }
     }
   }
-  .support--wrapper {
-    background-color: darken($black-brown, 4%);
-    padding: 50px 0 60px;
-    .support--container {
-      text-align: center;
-      .icon {
-        margin-bottom: 30px;
-      }
-      .support--title {
-        font-size: 18px;
-        line-height: 18px;
-        text-transform: uppercase;
-        color: #f1f1f1;
-        margin-bottom: 20px;
-      }
-      .support-links a {
-        color: $link-green;
-        padding: 0 20px;
-      }
+}
+.support--wrapper {
+  background-color: darken($black-brown, 4%);
+  padding: 50px 0 60px;
+  .support--container {
+    text-align: center;
+    .icon {
+      margin-bottom: 30px;
     }
+    .support--title {
+      font-size: 18px;
+      line-height: 18px;
+      text-transform: uppercase;
+      color: #f1f1f1;
+      margin-bottom: 20px;
+    }
+    .support-links a {
+      color: $link-green;
+      padding: 0 20px;
+    }
+  }
+  &.about-page {
+    position: absolute;
+    left: 0;
+    right: 0;
   }
 }
 

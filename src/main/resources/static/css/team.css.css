@@ -263,7 +263,7 @@
 
 .leaflet-popup-content-wrapper {
   background-color: #fff;
-  border-radius: 0;
+  border-radius: 0 !important;
 }
 .leaflet-popup-content-wrapper .leaflet-popup-content {
   width: 330px !important;

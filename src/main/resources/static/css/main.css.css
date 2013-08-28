@@ -861,9 +861,36 @@ input.floating-input:focus {
   margin: 0 auto;
   margin-top: 80px;
 }
+.billboard--wrapper .billboard--container .billboard--title, .billboard--wrapper .billboard--container .billboard--sub-title {
+  background: rgba(52, 48, 45, 0.8);
+  color: #eeeeee;
+  display: inline-block;
+}
+.billboard--wrapper .billboard--container .billboard--title {
+  font-size: 48px;
+  line-height: 68px;
+  font-family: "Montserrat", sans-serif;
+  padding: 0 15px;
+  letter-spacing: -2px;
+}
+.billboard--wrapper .billboard--container .billboard--sub-title--container .billboard--sub-title {
+  font-size: 18px;
+  line-height: 18px;
+  padding: 0 19px 12px;
+}
+.billboard--wrapper .billboard--container .billboard--sub-title--container .billboard--sub-title:first-child {
+  padding-top: 12px;
+}
+.billboard--wrapper .billboard--container.center-text {
+  text-align: center;
+  margin-top: 212px;
+}
 .billboard--wrapper .billboard-bg {
   height: 425px;
   border-bottom: 1px solid #34302d;
+}
+.billboard--wrapper .billboard-bg.about-us--bg {
+  background-image: url("../img/about-us-bg.png");
 }
 
 .billboard-body--wrapper {
@@ -992,4 +1019,49 @@ form.lpeRegForm li {
 
 form.lpeRegForm .mktInput {
   padding-left: 0px;
+}
+
+.about-feature--container {
+  background-color: #34302d;
+  text-align: center;
+  padding: 40px 20px;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  border: 1px solid transparent;
+}
+.about-feature--container .title, .about-feature--container .text, .about-feature--container .link {
+  color: #f1f1f1;
+}
+.about-feature--container .title {
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  line-height: 24px;
+  margin: 30px 0 20px;
+  text-transform: uppercase;
+}
+.about-feature--container .text {
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.about-feature--container .link {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 20px;
+}
+.about-feature--container:hover {
+  text-decoration: none;
+  box-shadow: 0 0 9px #6db33f;
+  border-color: #6db33f;
+}
+.about-feature--container:active {
+  box-shadow: inset 0 6px 10px #191715;
+}
+
+.about-page-fix {
+  margin-top: 201px;
 }

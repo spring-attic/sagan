@@ -24,7 +24,6 @@ $icon-sprite: url("../img/iconsprite.png");
   #map {
     height: 425px;
     border-bottom: 1px solid $black-brown;
-    
   }
   .team-map--container {
     position: absolute;
@@ -290,7 +289,7 @@ $icon-sprite: url("../img/iconsprite.png");
 
 .leaflet-popup-content-wrapper {
   background-color: #fff;
-  border-radius: 0;
+  border-radius: 0 !important;
   .leaflet-popup-content {
     width: 330px !important;
     border-radius: 0;

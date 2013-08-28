@@ -201,6 +201,23 @@
 .icon.blog-icon.news-and-events {
   background-position: 20px 387px;
 }
+.icon.about-icon.team {
+  width: 183px;
+  height: 127px;
+  background-position: 902px 202px;
+}
+.icon.about-icon.jobs {
+  width: 112px;
+  height: 85px;
+  background-position: 387px 415px;
+  margin: 21px 0;
+}
+.icon.about-icon.pivotal {
+  width: 93px;
+  height: 114px;
+  background-position: 387px 329px;
+  margin: 6px 0 7px;
+}
 
 i.icon {
   background-image: none;

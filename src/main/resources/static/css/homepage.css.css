@@ -114,26 +114,32 @@
 .homepage--body .offset-feature--container:hover .offset-feature--link {
   text-decoration: underline;
 }
-.homepage--body .support--wrapper {
+
+.support--wrapper {
   background-color: #292624;
   padding: 50px 0 60px;
 }
-.homepage--body .support--wrapper .support--container {
+.support--wrapper .support--container {
   text-align: center;
 }
-.homepage--body .support--wrapper .support--container .icon {
+.support--wrapper .support--container .icon {
   margin-bottom: 30px;
 }
-.homepage--body .support--wrapper .support--container .support--title {
+.support--wrapper .support--container .support--title {
   font-size: 18px;
   line-height: 18px;
   text-transform: uppercase;
   color: #f1f1f1;
   margin-bottom: 20px;
 }
-.homepage--body .support--wrapper .support--container .support-links a {
+.support--wrapper .support--container .support-links a {
   color: #5fa134;
   padding: 0 20px;
+}
+.support--wrapper.about-page {
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 .homepage-fix {
