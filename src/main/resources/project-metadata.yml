@@ -287,27 +287,6 @@ projects:
         - 1.1.0.M4
         - 1.0.5.RELEASE
 
-    - id: spring-social-linkedin
-      name: Spring Social LinkedIn
-      lead: cwalls
-      groupId: org.springframework.social
-      supportedVersions:
-        - 1.0.0.RC3
-
-    - id: spring-social-github
-      name: Spring Social GitHub
-      lead: cwalls
-      groupId: org.springframework.social
-      supportedVersions:
-        - 1.0.0.M3
-
-    - id: spring-social-tripit
-      name: Spring Social TripIt
-      lead: cwalls
-      groupId: org.springframework.social
-      supportedVersions:
-        - 1.0.0.M3
-
     # ----------------------
     # Spring Web Flow
     # ----------------------
@@ -555,11 +534,13 @@ projects:
     # ----------------------
     # Spring Social
     # ----------------------
-    # No releases
+    # Only milestone release
     - id: spring-social-github
       name: Spring Social GitHub
       lead: cwalls
-      siteUrl: NONE
+      groupId: org.springframework.social
+      supportedVersions:
+        - 1.0.0.M3
 
     # RC releaseStatus only
     - id: spring-social-linkedin
@@ -570,10 +551,13 @@ projects:
       supportedVersions:
         - 1.0.0.RC3
 
-    # No releases
+    # Only milestone release
     - id: spring-social-tripit
       name: Spring Social TripIt
       lead: cwalls
+      groupId: org.springframework.social
+      supportedVersions:
+        - 1.0.0.M3
 
     # ----------------------
     # Spring Tenancy
