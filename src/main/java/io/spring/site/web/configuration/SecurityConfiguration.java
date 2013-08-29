@@ -8,11 +8,13 @@ import io.spring.site.web.security.SecurityContextAuthenticationFilter;
 import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -27,8 +29,7 @@ import org.springframework.social.github.connect.GitHubConnectionFactory;
 
 @Configuration
 @ComponentScan(basePackages = { "io.spring.site.domain.team",
-		"io.spring.site.web.security",
-		"io.spring.site.domain.services",
+		"io.spring.site.web.security", "io.spring.site.domain.services",
 		"io.spring.site.domain.blog" })
 public class SecurityConfiguration {
 
@@ -63,10 +64,17 @@ public class SecurityConfiguration {
 	@Configuration
 	@Order(Ordered.LOWEST_PRECEDENCE - 90)
 	protected static class AdminAuthenticationConfiguration extends
-			WebSecurityConfigurerAdapter {
+			WebSecurityConfigurerAdapter implements EnvironmentAware {
 
 		@Autowired
 		private SignInService signInService;
+
+		private Environment environment;
+
+		@Override
+		public void setEnvironment(Environment environment) {
+			this.environment = environment;
+		}
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
@@ -75,12 +83,21 @@ public class SecurityConfiguration {
 			http.logout().logoutUrl("/signout")
 					.logoutSuccessUrl("/signin?signout=success");
 			http.authorizeRequests().anyRequest().authenticated();
+			if (isForceHttps()) {
+				http.requiresChannel().anyRequest().requiresSecure();
+			}
 		}
 
 		private AuthenticationEntryPoint authenticationEntryPoint() {
 			LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint(
 					"/signin");
+			entryPoint.setForceHttps(isForceHttps());
 			return entryPoint;
+		}
+
+		private boolean isForceHttps() {
+			return !this.environment.acceptsProfiles(this.environment
+					.getDefaultProfiles());
 		}
 
 		@Bean
