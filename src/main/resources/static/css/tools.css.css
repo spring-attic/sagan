@@ -235,6 +235,15 @@
 .tools--wrapper.more-feature-list ul li {
   padding: 5px 0;
 }
+.tools--wrapper .tools-bottom--container {
+  margin-top: 60px;
+}
+.tools--wrapper .tools-bottom--container p {
+  margin: 10px 0;
+}
+.tools--wrapper .tools-bottom--container p a:hover {
+  color: #5fa134;
+}
 
 .tool-versions--wrapper {
   border: 1px solid #34302d;

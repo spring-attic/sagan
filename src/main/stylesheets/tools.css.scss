@@ -265,6 +265,15 @@ $icon-sprite: url("../img/iconsprite.png");
       
     }
   }
+  .tools-bottom--container {
+    margin-top: 60px;
+    p {
+      margin: 10px 0;
+      a:hover {
+        color: $link-green;
+      }
+    }
+  }
 }
 
 .tool-versions--wrapper {
