@@ -183,39 +183,6 @@
   padding: 18px;
 }
 
-.blog-pagination {
-  margin: 0;
-}
-.blog-pagination a {
-  color: #8b8b8b;
-  padding: 10px 12px;
-  font-size: 16px;
-  border: none;
-  background-color: transparent;
-}
-.blog-pagination a:hover {
-  background-color: transparent;
-}
-.blog-pagination ul {
-  box-shadow: none;
-}
-.blog-pagination ul li.active a {
-  padding-top: 8px;
-  border-top: 2px solid #34302d;
-  background-color: transparent;
-  color: #34302d;
-}
-.blog-pagination ul li a {
-  color: #8b8b8b;
-  padding: 10px 12px;
-  font-size: 16px;
-  border: none;
-  background-color: transparent;
-}
-.blog-pagination ul li a:hover {
-  background-color: transparent;
-}
-
 .social-btn--container {
   margin: 40px 0;
   text-align: center;

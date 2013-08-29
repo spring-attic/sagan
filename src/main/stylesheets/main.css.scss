@@ -1321,3 +1321,31 @@ form.lpeRegForm .mktInput {
     box-shadow: none;
   }
 }
+
+.pagination {
+  margin: -1px 0 0 0;
+  div, a {
+    display: inline-block;
+    color: #888;
+    text-decoration: none;
+    vertical-align: middle;
+    font-size: 16px;
+    &.next, &.previous {
+      padding: 10px;
+      font-size: 14px;
+      line-height: 14px;
+    }
+    div, a {
+      padding: 10px;
+      color: #888;
+      &.active {
+        color: $black-brown;
+        border-top: 2px solid $black-brown;
+        padding-top: 8px;
+      }
+    }
+    &:hover {
+      color: $black-brown;
+    }
+  }
+}

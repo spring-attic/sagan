@@ -27,14 +27,14 @@
 			 	</div>
 			</div>
 			<div id='pagination_control' th:if="${paginationInfo.isVisible()}">
-				<a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='previous' th:if="${paginationInfo.previousVisible}">Previous</a>
+				<a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
 
 				<div th:each="element : ${paginationInfo.pageElements }" >
 					<a th:href="@{${beans.uih.path()}(page=${element.pageText},q=${searchForm.q},filters=${searchForm.filters})}" th:text="${element.pageText}" th:if="${element.isActive()}" ></a>
-					<div th:text="${element.pageText}" th:unless="${element.isActive()}" ></div>
+					<div th:text="${element.pageText}" th:unless="${element.isActive()}" class="active" ></div>
 				</div>
 
-				<a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='next' th:if="${paginationInfo.nextVisible}">Next</a>
+				<a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
 			</div>
 		</div>
     <div class="span4">

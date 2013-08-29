@@ -1238,3 +1238,31 @@ form.lpeRegForm .mktInput {
 .admin-index--link:active {
   box-shadow: none;
 }
+
+.pagination {
+  margin: -1px 0 0 0;
+}
+.pagination div, .pagination a {
+  display: inline-block;
+  color: #888;
+  text-decoration: none;
+  vertical-align: middle;
+  font-size: 16px;
+}
+.pagination div.next, .pagination div.previous, .pagination a.next, .pagination a.previous {
+  padding: 10px;
+  font-size: 14px;
+  line-height: 14px;
+}
+.pagination div div, .pagination div a, .pagination a div, .pagination a a {
+  padding: 10px;
+  color: #888;
+}
+.pagination div div.active, .pagination div a.active, .pagination a div.active, .pagination a a.active {
+  color: #34302d;
+  border-top: 2px solid #34302d;
+  padding-top: 8px;
+}
+.pagination div:hover, .pagination a:hover {
+  color: #34302d;
+}
