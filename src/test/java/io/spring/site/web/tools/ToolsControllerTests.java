@@ -58,7 +58,7 @@ public class ToolsControllerTests {
 		List<UpdateSiteArchive> archives = Collections.emptyList();
 		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("STS", "3.1.2.RELEASE",
 				platforms, archives);
-		when(this.service.getStsDownloads()).thenReturn(toolSuite);
+		when(this.service.getStsGaDownloads()).thenReturn(toolSuite);
 		this.controller.stsIndex(this.model);
 
 		@SuppressWarnings("unchecked")
@@ -84,7 +84,7 @@ public class ToolsControllerTests {
 		List<UpdateSiteArchive> archives = Collections.emptyList();
 		ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("GGTS", "3.1.2.RELEASE",
 				platforms, archives);
-		when(this.service.getGgtsDownloads()).thenReturn(toolSuite);
+		when(this.service.getGgtsGaDownloads()).thenReturn(toolSuite);
 		this.controller.ggtsIndex(this.model);
 
 		@SuppressWarnings("unchecked")

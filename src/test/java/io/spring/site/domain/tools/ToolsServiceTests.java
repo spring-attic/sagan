@@ -50,7 +50,7 @@ public class ToolsServiceTests {
 
 	@Test
 	public void testGetStsDownloads() throws Exception {
-		ToolSuiteDownloads toolSuite = this.service.getStsDownloads();
+		ToolSuiteDownloads toolSuite = this.service.getStsGaDownloads();
 		assertThat(toolSuite, notNullValue());
 
 		List<ToolSuitePlatform> platforms = toolSuite.getPlatformList();
@@ -90,7 +90,7 @@ public class ToolsServiceTests {
 
 	@Test
 	public void testGetGgtsDownloads() throws Exception {
-		ToolSuiteDownloads toolSuite = this.service.getGgtsDownloads();
+		ToolSuiteDownloads toolSuite = this.service.getGgtsGaDownloads();
 		assertThat(toolSuite, notNullValue());
 
 		List<ToolSuitePlatform> platforms = toolSuite.getPlatformList();

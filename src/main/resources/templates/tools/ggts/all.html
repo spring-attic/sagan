@@ -13,7 +13,8 @@
       <p class="tools--description">Use one of the links below to download an all-in-one
           distribution for your platform. Choose either a native installer or simple
           archive, they contain equivalent functionality.</p>
-			<div layout:include="tools/_tools_versions :: tools-versions" th:with="release=${gaRelease}"></div>
+			<div class="ga--release" layout:include="tools/_tools_versions :: tools-versions" th:with="release=${gaRelease}"></div>
+			<!--<div class="milestone--release" layout:include="tools/_tools_versions :: tools-versions" th:with="release=${milestoneRelease}"></div>-->
       <h2>Update Site Archives</h2>
       <p>You can download archived versions of the update sites, if you
           want to install STS/GGTS into an existing Eclipse installation or if
