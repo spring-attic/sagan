@@ -267,6 +267,7 @@ body {
 .body--container {
   margin-top: 100px;
   margin-bottom: 100px;
+  min-height: 925px;
 }
 
 .row--container {
@@ -422,14 +423,31 @@ input.floating-input:focus {
   opacity: 1;
 }
 
-.dashboard--posts tr:hover .actions {
-  visibility: visible;
+.dashboard--posts td {
+  min-width: 130px;
 }
-.dashboard--posts .actions {
-  visibility: hidden;
+.dashboard--posts td .actions {
+  min-width: 200px;
 }
-.dashboard--posts .actions form {
+.dashboard--posts td .actions form {
   display: inline;
+}
+
+.blog-post--form input, .blog-post--form textarea {
+  width: 90%;
+}
+.blog-post--form textarea {
+  min-height: 300px;
+}
+
+.blog-post-form--right-pane .control-group.inline label {
+  display: inline-block;
+}
+.blog-post-form--right-pane .control-group.inline .controls {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 5px;
+  margin-left: 10px;
 }
 
 .gh-project-url--container {
@@ -1132,14 +1150,13 @@ form.lpeRegForm .mktInput {
   border-bottom: none;
 }
 
-.admin-login--wrapper {
-  min-height: 650px;
+.admin--wrapper {
   text-align: center;
 }
-.admin-login--wrapper .alert, .admin-login--wrapper .admin-login--container {
+.admin--wrapper .alert, .admin--wrapper .admin-login--container {
   text-align: left;
 }
-.admin-login--wrapper .admin-login--container {
+.admin--wrapper .admin-login--container {
   background-color: white;
   padding: 50px;
   display: inline-block;
@@ -1147,21 +1164,101 @@ form.lpeRegForm .mktInput {
   box-shadow: 0 0 3px #cccccc;
   margin-top: 100px;
 }
-.admin-login--wrapper .admin-login--container .admin-login--title {
+.admin--wrapper .admin-login--container .admin-login--title {
   font-size: 24px;
   line-height: 24px;
   margin-bottom: 40px;
 }
-.admin-login--wrapper .admin-login--container form {
+.admin--wrapper .admin-login--container form {
   margin: 0;
   text-align: center;
 }
-.admin-login--wrapper .admin-login--container form button {
+.admin--wrapper .admin-login--container form button {
   font-size: 20px;
   font-family: "Varela Round", sans-serif;
 }
-.admin-login--wrapper .admin-login--container form button i {
+.admin--wrapper .admin-login--container form button i {
   font-size: 30px;
   float: left;
   margin: -10px 15px -10px 0;
+}
+
+.admin-index--title {
+  margin-bottom: 30px;
+}
+.admin-index--title.back-btn {
+  margin-top: -60px;
+}
+
+.admin-index--link {
+  background-color: white;
+  padding: 50px 0;
+  display: inline-block;
+  border-bottom: 1px solid #cccccc;
+  box-shadow: 0 0 3px #cccccc;
+  text-align: center;
+  width: 95%;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+}
+.admin-index--link .icon--container {
+  width: 190px;
+  height: 190px;
+  border-radius: 190px;
+  background-color: #34302d;
+  display: inline-block;
+  text-align: center;
+  border: 1px solid #6db33f;
+  box-shadow: 0 0 6px #6db33f;
+  margin-bottom: 30px;
+}
+.admin-index--link .icon--container .icon {
+  margin: 22px 6px;
+}
+.admin-index--link .icon--container i {
+  color: #FFF;
+  font-size: 150px;
+  margin-top: 11px;
+  display: inline-block;
+}
+.admin-index--link p {
+  font-size: 20px;
+}
+.admin-index--link:hover {
+  box-shadow: 0 0 3px #6db33f;
+  text-decoration: none;
+}
+.admin-index--link:active {
+  box-shadow: none;
+}
+
+.pagination {
+  margin: -1px 0 0 0;
+}
+.pagination div, .pagination a {
+  display: inline-block;
+  color: #888;
+  text-decoration: none;
+  vertical-align: middle;
+  font-size: 16px;
+}
+.pagination div.next, .pagination div.previous, .pagination a.next, .pagination a.previous {
+  padding: 10px;
+  font-size: 14px;
+  line-height: 14px;
+}
+.pagination div div, .pagination div a, .pagination a div, .pagination a a {
+  padding: 10px;
+  color: #888;
+}
+.pagination div div.active, .pagination div a.active, .pagination a div.active, .pagination a a.active {
+  color: #34302d;
+  border-top: 2px solid #34302d;
+  padding-top: 8px;
+}
+.pagination div:hover, .pagination a:hover {
+  color: #34302d;
 }

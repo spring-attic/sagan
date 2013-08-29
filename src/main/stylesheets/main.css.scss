@@ -308,6 +308,7 @@ body {
 .body--container {
   margin-top: 100px;
   margin-bottom: 100px;
+  min-height: 925px;
 }
 
 .row--container {
@@ -469,16 +470,37 @@ input.floating-input {
 }
 
 .dashboard--posts {
-  tr:hover {
+  td {
+    min-width: 130px;
     .actions {
-      visibility: visible;
+      min-width: 200px;
+      form {
+        display: inline;
+      }
     }
   }
+}
 
-  .actions {
-    visibility: hidden;
-    form {
-      display: inline;
+.blog-post--form {
+  input, textarea {
+    width: 90%;
+  }
+  textarea {
+    min-height: 300px;
+  } 
+}
+.blog-post-form--right-pane {
+  .control-group {
+    &.inline {
+      label {
+        display: inline-block
+      }
+      .controls {
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 5px;
+        margin-left: 10px;
+      }
     }
   }
 }
@@ -1218,8 +1240,7 @@ form.lpeRegForm .mktInput {
   }
 }
 
-.admin-login--wrapper {
-  min-height: 650px;
+.admin--wrapper {
   text-align: center;
   .alert, .admin-login--container {
     text-align: left;
@@ -1249,6 +1270,86 @@ form.lpeRegForm .mktInput {
           margin: -10px 15px -10px 0;
         }
       }
+    }
+  }
+}
+
+.admin-index--title {
+  margin-bottom: 30px;
+  &.back-btn {
+    margin-top: -60px;
+  }
+}
+.admin-index--link {
+  background-color: white;
+  padding: 50px 0;
+  display: inline-block;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 3px #ccc;
+  text-align: center;
+  width: 95%;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+  .icon--container {
+    width: 190px;
+    height: 190px;
+    border-radius: 190px;
+    background-color: $black-brown;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid $green;
+    box-shadow: 0 0 6px $green;
+    margin-bottom: 30px;
+    .icon {
+      margin: 22px 6px;
+    }
+    i {
+      color: #FFF;
+      font-size: 150px;
+      margin-top: 11px;
+      display: inline-block;
+    }
+  }
+  p {
+    font-size: 20px;
+
+  }
+  &:hover {
+    box-shadow: 0 0 3px $green;
+    text-decoration: none;
+  }
+  &:active {
+    box-shadow: none;
+  }
+}
+
+.pagination {
+  margin: -1px 0 0 0;
+  div, a {
+    display: inline-block;
+    color: #888;
+    text-decoration: none;
+    vertical-align: middle;
+    font-size: 16px;
+    &.next, &.previous {
+      padding: 10px;
+      font-size: 14px;
+      line-height: 14px;
+    }
+    div, a {
+      padding: 10px;
+      color: #888;
+      &.active {
+        color: $black-brown;
+        border-top: 2px solid $black-brown;
+        padding-top: 8px;
+      }
+    }
+    &:hover {
+      color: $black-brown;
     }
   }
 }

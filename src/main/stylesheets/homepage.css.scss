@@ -128,11 +128,11 @@ $icon-sprite: url("../img/iconsprite.png");
     &:nth-child(even) {
       background-color: #ebf1e7;
     }
-    &:hover {
-      .offset-feature--link {
-        text-decoration: underline;
-      }
-    }
+    // &:hover {
+    //   .offset-feature--link {
+    //     text-decoration: underline;
+    //   }
+    // }
   }
 }
 .support--wrapper {

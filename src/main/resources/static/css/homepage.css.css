@@ -111,9 +111,6 @@
 .homepage--body .offset-feature--container:nth-child(even) {
   background-color: #ebf1e7;
 }
-.homepage--body .offset-feature--container:hover .offset-feature--link {
-  text-decoration: underline;
-}
 
 .support--wrapper {
   background-color: #292624;

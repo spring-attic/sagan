@@ -8,7 +8,6 @@
 </head>
 <body>
 	<div layout:fragment="header-container"></div>
-
 	<div layout:fragment="content" class="container">
 		<div class="desktop-only">
 			<div th:class="${beans.uih.blogClass(activeCategory?:'','All Posts') + ' content--title'}">
@@ -58,7 +57,7 @@
 
 					<div th:each="element : ${paginationInfo.pageElements }" >
 						<a th:href="@{${beans.uih.path()}(page=${element.pageText})}" th:text="${element.pageText}" th:if="${element.isActive()}" ></a>
-						<div th:text="${element.pageText}" th:unless="${element.isActive()}" ></div>
+						<div th:text="${element.pageText}" th:unless="${element.isActive()}" class="active"></div>
 					</div>
 
 					<a th:href="@{${beans.uih.path()}(page=${paginationInfo.nextPageNumber})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>

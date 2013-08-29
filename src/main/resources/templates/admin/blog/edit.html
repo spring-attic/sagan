@@ -5,7 +5,21 @@
     <title th:inline="text">Edit &middot; [[${post.title}]]</title>
 </head>
 <body>
-<div layout:fragment="content" class="container">
+<div layout:fragment="header-container"></div>
+  <div layout:fragment="content" class="container">
+    <div class="admin-index--title back-btn">
+      <p>
+        <a th:href="@{/admin/blog}">
+          <i class="icon-chevron-left"></i>
+          Back
+        </a>
+      </p>
+    </div>
+    <div class="admin-index--title">
+      <div class="content--title search-title">
+        Edit Blog Post
+      </div>
+    </div>
     <p th:if="${githubBroken}">Github failed to generate markdown</p>
     <form layout:include="admin/blog/_post_form :: post-form" th:with="edit=1" th:action="@{'/admin/blog/' + ${post.id}}" method="post" th:object="${postForm}">
     </form>
