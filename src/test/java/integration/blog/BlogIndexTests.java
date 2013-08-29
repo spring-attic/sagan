@@ -40,7 +40,10 @@ public class BlogIndexTests extends IntegrationTestBase {
 		Document document = Jsoup.parse(result.getResponse().getContentAsString());
 		assertThat(document.select("ul.nav li.active").text(), equalTo("Blog"));
 
-		assertThat(document.select(".blog-category.active").text(), equalTo("All Posts"));
+		assertThat(document.select(".secondary-nav .blog-category.active").text(), equalTo("All Posts"));
+
+		assertThat(document.select(".content--title.blog-category.active").text(), equalTo("All Posts"));
+
 		assertThat(
 				document.head()
 						.getElementsByAttributeValue("type", "application/atom+xml")
