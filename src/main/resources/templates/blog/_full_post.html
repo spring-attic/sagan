@@ -5,6 +5,12 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <body>
     <div layout:fragment="full-post">
+      <div th:class="${beans.uih.blogClass(activeCategory?:'','All Posts') + ' content--title'}">
+        All Posts
+      </div>
+      <div th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
+        <div th:text="${category.displayName}">Engineering</div>
+      </div>
       <div class="blog--container">
         <div class="blog--title" th:text="*{title}">Blog post</div>
         <div class="meta-data--container">

@@ -522,6 +522,12 @@ input.floating-input {
   &.search-title {
     position: relative;
   }
+  &.blog-category {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
 }
 
 .index-page--title {
@@ -1108,11 +1114,12 @@ form.lpeRegForm .mktInput {
   background-color: $black-brown;
   text-align: center;
   padding: 40px 20px;
-  transition: all 0.20s;
-  -webkit-transition: all 0.20s;
-  -moz-transition: all 0.20s;
-  -ms-transition: all 0.20s;
-  -o-transition: all 0.20s;
+  height: 409px;
+  transition: border, box-shadow 0.20s;
+  -webkit-transition: border, box-shadow 0.20s;
+  -moz-transition: border, box-shadow 0.20s;
+  -ms-transition: border, box-shadow 0.20s;
+  -o-transition: border, box-shadow 0.20s;
   border: 1px solid transparent;
   .title, .text, .link {
     color: #f1f1f1;
