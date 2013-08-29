@@ -7,7 +7,6 @@ import io.spring.site.domain.tools.toolsuite.Architecture;
 import io.spring.site.domain.tools.toolsuite.EclipseVersion;
 import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import io.spring.site.domain.tools.toolsuite.ToolSuitePlatform;
-import io.spring.site.domain.tools.toolsuite.parser.ToolXmlConverter;
 import io.spring.site.domain.tools.toolsuite.xml.Download;
 import io.spring.site.domain.tools.toolsuite.xml.Release;
 import io.spring.site.domain.tools.toolsuite.xml.ToolSuiteXml;
@@ -57,7 +56,7 @@ public class ToolXmlConverter_TwoDifferentPlatformsTests {
 		toolSuiteXml.setReleases(releases);
 
 		toolXmlConverter = new ToolXmlConverter();
-		toolSuite = toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite");
+		toolSuite = toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite", "STS");
 	}
 
 
@@ -68,30 +67,29 @@ public class ToolXmlConverter_TwoDifferentPlatformsTests {
 
 	@Test
 	public void addsBothPlatforms() throws Exception {
-		assertThat(toolSuite.getPlatforms().size(), equalTo(2));
-		assertThat(toolSuite.getPlatforms().get("mac").getName(), equalTo("Mac"));
-		assertThat(toolSuite.getPlatforms().get("windows").getName(), equalTo("Windows"));
+		assertThat(toolSuite.getPlatformList().get(0).getName(), equalTo("Windows"));
+		assertThat(toolSuite.getPlatformList().get(1).getName(), equalTo("Mac"));
 	}
 
 	@Test
 	public void addsAnEclipseVersionToEachPlatform() throws Exception {
-		ToolSuitePlatform mac = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform mac = toolSuite.getPlatformList().get(0);
 		assertThat(mac.getEclipseVersions().size(), equalTo(1));
 		assertThat(mac.getEclipseVersions().get(0).getName(), equalTo("4.3"));
 
-		ToolSuitePlatform windows = toolSuite.getPlatforms().get("windows");
+		ToolSuitePlatform windows = toolSuite.getPlatformList().get(0);
 		assertThat(windows.getEclipseVersions().size(), equalTo(1));
 		assertThat(windows.getEclipseVersions().get(0).getName(), equalTo("4.3"));
 	}
 
 	@Test
 	public void addsAnArchitectureToTheEclipseVersionInEachPlatform() throws Exception {
-		ToolSuitePlatform mac = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform mac = toolSuite.getPlatformList().get(1);
 		EclipseVersion eclipseVersion = mac.getEclipseVersions().get(0);
 		assertThat(eclipseVersion.getArchitectures().size(), equalTo(1));
 		assertThat(eclipseVersion.getArchitectures().get(0).getName(), equalTo("Mac OS X (Cocoa)"));
 
-		ToolSuitePlatform windows = toolSuite.getPlatforms().get("windows");
+		ToolSuitePlatform windows = toolSuite.getPlatformList().get(0);
 		EclipseVersion windowsEclipseVersion = windows.getEclipseVersions().get(0);
 		assertThat(windowsEclipseVersion.getArchitectures().size(), equalTo(1));
 		assertThat(windowsEclipseVersion.getArchitectures().get(0).getName(), equalTo("Windows (64bit)"));
@@ -99,11 +97,11 @@ public class ToolXmlConverter_TwoDifferentPlatformsTests {
 
 	@Test
 	public void addsADownloadLinkTheArchitectureInEachPlatform() throws Exception {
-		Architecture macArchitecture = toolSuite.getPlatforms().get("mac").getEclipseVersions().get(0).getArchitectures().get(0);
+		Architecture macArchitecture = toolSuite.getPlatformList().get(1).getEclipseVersions().get(0).getArchitectures().get(0);
 		assertThat(macArchitecture.getDownloadLinks().size(), equalTo(1));
 		assertThat(macArchitecture.getDownloadLinks().get(0).getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
 
-		Architecture windowsArchitecture = toolSuite.getPlatforms().get("windows").getEclipseVersions().get(0).getArchitectures().get(0);
+		Architecture windowsArchitecture = toolSuite.getPlatformList().get(0).getEclipseVersions().get(0).getArchitectures().get(0);
 		assertThat(windowsArchitecture.getDownloadLinks().size(), equalTo(1));
 		assertThat(windowsArchitecture.getDownloadLinks().get(0).getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-x86_64-installer.exe"));
 	}

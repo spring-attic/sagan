@@ -6,10 +6,6 @@ import io.spring.site.domain.tools.toolsuite.EclipseVersion;
 import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import io.spring.site.domain.tools.toolsuite.ToolSuitePlatform;
 import io.spring.site.test.FixtureLoader;
-
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +14,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -55,26 +53,29 @@ public class ToolsServiceTests {
 		ToolSuiteDownloads toolSuite = this.service.getStsDownloads();
 		assertThat(toolSuite, notNullValue());
 
-		Map<String, ToolSuitePlatform> platforms = toolSuite.getPlatforms();
+		List<ToolSuitePlatform> platforms = toolSuite.getPlatformList();
 		assertThat(platforms.size(), equalTo(3));
 
-		assertThat(platforms.get("windows").getName(), equalTo("Windows"));
-		assertThat(platforms.get("mac").getName(), equalTo("Mac"));
-		assertThat(platforms.get("linux").getName(), equalTo("Linux"));
+		ToolSuitePlatform windows = platforms.get(0);
+		ToolSuitePlatform mac = platforms.get(1);
 
-		List<EclipseVersion> eclipseVersions = platforms.get("mac").getEclipseVersions();
+		assertThat(windows.getName(), equalTo("Windows"));
+		assertThat(mac.getName(), equalTo("Mac"));
+		assertThat(platforms.get(2).getName(), equalTo("Linux"));
+
+		List<EclipseVersion> eclipseVersions = windows.getEclipseVersions();
 		assertThat(eclipseVersions.size(), equalTo(2));
 		assertThat(eclipseVersions.get(0).getName(), equalTo("4.3"));
 		assertThat(eclipseVersions.get(1).getName(), equalTo("3.8.2"));
 
-		assertThat(platforms.get("windows").getEclipseVersions().get(0)
+		assertThat(windows.getEclipseVersions().get(0)
 				.getArchitectures().get(0).getDownloadLinks().size(), equalTo(2));
-		DownloadLink downloadLink = platforms.get("windows").getEclipseVersions().get(0)
+		DownloadLink downloadLink = windows.getEclipseVersions().get(0)
 				.getArchitectures().get(0).getDownloadLinks().get(0);
 		assertThat(
 				downloadLink.getUrl(),
 				equalTo("http://download.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
-		downloadLink = platforms.get("windows").getEclipseVersions().get(0)
+		downloadLink = windows.getEclipseVersions().get(0)
 				.getArchitectures().get(0).getDownloadLinks().get(1);
 		assertThat(
 				downloadLink.getUrl(),
@@ -92,26 +93,29 @@ public class ToolsServiceTests {
 		ToolSuiteDownloads toolSuite = this.service.getGgtsDownloads();
 		assertThat(toolSuite, notNullValue());
 
-		Map<String, ToolSuitePlatform> platforms = toolSuite.getPlatforms();
+		List<ToolSuitePlatform> platforms = toolSuite.getPlatformList();
 		assertThat(platforms.size(), equalTo(3));
 
-		assertThat(platforms.get("windows").getName(), equalTo("Windows"));
-		assertThat(platforms.get("mac").getName(), equalTo("Mac"));
-		assertThat(platforms.get("linux").getName(), equalTo("Linux"));
+		ToolSuitePlatform windows = platforms.get(0);
+		ToolSuitePlatform mac = platforms.get(1);
+		
+		assertThat(windows.getName(), equalTo("Windows"));
+		assertThat(mac.getName(), equalTo("Mac"));
+		assertThat(platforms.get(2).getName(), equalTo("Linux"));
 
-		List<EclipseVersion> eclipseVersions = platforms.get("mac").getEclipseVersions();
+		List<EclipseVersion> eclipseVersions = mac.getEclipseVersions();
 		assertThat(eclipseVersions.size(), equalTo(2));
 		assertThat(eclipseVersions.get(0).getName(), equalTo("4.3"));
 		assertThat(eclipseVersions.get(1).getName(), equalTo("3.8.2"));
 
-		assertThat(platforms.get("windows").getEclipseVersions().get(0)
+		assertThat(windows.getEclipseVersions().get(0)
 				.getArchitectures().get(0).getDownloadLinks().size(), equalTo(2));
-		DownloadLink downloadLink = platforms.get("windows").getEclipseVersions().get(0)
+		DownloadLink downloadLink = windows.getEclipseVersions().get(0)
 				.getArchitectures().get(0).getDownloadLinks().get(0);
 		assertThat(
 				downloadLink.getUrl(),
 				equalTo("http://download.springsource.com/release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
-		downloadLink = platforms.get("windows").getEclipseVersions().get(0)
+		downloadLink = windows.getEclipseVersions().get(0)
 				.getArchitectures().get(0).getDownloadLinks().get(1);
 		assertThat(
 				downloadLink.getUrl(),

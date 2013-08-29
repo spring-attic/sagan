@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import io.spring.site.domain.tools.toolsuite.UpdateSiteArchive;
-import io.spring.site.domain.tools.toolsuite.parser.ToolXmlConverter;
 import io.spring.site.domain.tools.toolsuite.xml.Download;
 import io.spring.site.domain.tools.toolsuite.xml.Release;
 import io.spring.site.domain.tools.toolsuite.xml.ToolSuiteXml;
@@ -44,7 +43,7 @@ public class ToolXmlConverter_SingleArchiveDownloadTests {
 		toolSuiteXml.setReleases(releases);
 
 		toolXmlConverter = new ToolXmlConverter();
-		toolSuite = toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite");
+		toolSuite = toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite", "STS");
 	}
 
 	@Test

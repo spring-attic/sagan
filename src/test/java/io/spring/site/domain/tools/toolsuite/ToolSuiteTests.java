@@ -2,13 +2,6 @@ package io.spring.site.domain.tools.toolsuite;
 
 import org.junit.Test;
 
-import io.spring.site.domain.tools.toolsuite.Architecture;
-import io.spring.site.domain.tools.toolsuite.DownloadLink;
-import io.spring.site.domain.tools.toolsuite.EclipseVersion;
-import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
-import io.spring.site.domain.tools.toolsuite.ToolSuitePlatform;
-import io.spring.site.domain.tools.toolsuite.UpdateSiteArchive;
-
 import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -98,6 +91,6 @@ public class ToolSuiteTests {
 		platforms.put("linux", new ToolSuitePlatform("Linux", Collections.singletonList(new EclipseVersion("4.3", linuxArchitectures))));
 
 		List<UpdateSiteArchive> archives = Collections.emptyList();
-		return new ToolSuiteDownloads("3.1.2.RELEASE", platforms, archives);
+		return new ToolSuiteDownloads("ShortName", "3.1.2.RELEASE", platforms, archives);
 	}
 }

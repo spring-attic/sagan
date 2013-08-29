@@ -1,15 +1,13 @@
 package io.spring.site.web.tools;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import io.spring.site.domain.tools.ToolsService;
 import io.spring.site.domain.tools.eclipse.EclipseDownloads;
 import io.spring.site.domain.tools.eclipse.EclipsePlatform;
 import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
-import io.spring.site.domain.tools.toolsuite.ToolSuitePlatform;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +53,8 @@ public class ToolsController {
 	@RequestMapping(value = "/sts/all", method = { GET, HEAD })
 	public String allStsDownloads(Model model) throws Exception {
 		ToolSuiteDownloads stsDownloads = toolsService.getStsDownloads();
-		buildAllDownloadsModel(model, stsDownloads);
+		model.addAttribute("gaRelease", stsDownloads);
+		model.addAttribute("updateSiteArchives", stsDownloads.getArchives());
 		return "tools/sts/all";
 	}
 
@@ -70,7 +69,8 @@ public class ToolsController {
 	@RequestMapping(value = "/ggts/all", method = { GET, HEAD })
 	 public String allGgtsDownloads(Model model) throws Exception {
 		ToolSuiteDownloads ggtsDownloads = toolsService.getGgtsDownloads();
-		buildAllDownloadsModel(model, ggtsDownloads);
+		model.addAttribute("gaRelease", ggtsDownloads);
+		model.addAttribute("updateSiteArchives", ggtsDownloads.getArchives());
 		return "tools/ggts/all";
 	}
 
@@ -84,21 +84,6 @@ public class ToolsController {
 		platforms.add(allPlatforms.get("linux"));
 		model.addAttribute("platforms", platforms);
 		return "tools/eclipse/index";
-	}
-
-	private void buildAllDownloadsModel(Model model, ToolSuiteDownloads toolSuite) {
-		addPlatformsToModel(model, toolSuite);
-		model.addAttribute("updateSiteArchives", toolSuite.getArchives());
-	}
-
-	private void addPlatformsToModel(Model model, ToolSuiteDownloads toolsDownloads) {
-		Map<String, ToolSuitePlatform> allPlatforms = toolsDownloads.getPlatforms();
-		List<ToolSuitePlatform> platforms = new ArrayList<>();
-		platforms.add(allPlatforms.get("windows"));
-		platforms.add(allPlatforms.get("mac"));
-		platforms.add(allPlatforms.get("linux"));
-		model.addAttribute("platforms", platforms);
-		model.addAttribute("version", toolsDownloads.getReleaseName());
 	}
 
 }

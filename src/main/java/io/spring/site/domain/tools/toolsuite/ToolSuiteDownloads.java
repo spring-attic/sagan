@@ -4,18 +4,24 @@ import java.util.*;
 
 public class ToolSuiteDownloads {
 
-	private Map<String, ToolSuitePlatform> platforms;
-	private List<UpdateSiteArchive> archives;
-	private String releaseName;
+	private final Map<String, ToolSuitePlatform> platforms;
+	private final List<UpdateSiteArchive> archives;
+	private final String shortName;
+	private final String releaseName;
 
-	public ToolSuiteDownloads(String releaseName, Map<String, ToolSuitePlatform> platforms, List<UpdateSiteArchive> archives) {
+	public ToolSuiteDownloads(String shortName, String releaseName, Map<String, ToolSuitePlatform> platforms, List<UpdateSiteArchive> archives) {
+		this.shortName = shortName;
 		this.releaseName = releaseName;
 		this.platforms = platforms;
 		this.archives = archives;
 	}
 
-	public Map<String, ToolSuitePlatform> getPlatforms() {
-		return platforms;
+	public List<ToolSuitePlatform> getPlatformList() {
+		ArrayList<ToolSuitePlatform> platformList = new ArrayList<>();
+		platformList.add(platforms.get("windows"));
+		platformList.add(platforms.get("mac"));
+		platformList.add(platforms.get("linux"));
+		return platformList;
 	}
 
 	public List<UpdateSiteArchive> getArchives() {
@@ -49,5 +55,9 @@ public class ToolSuiteDownloads {
 
 	public String getReleaseName() {
 		return releaseName;
+	}
+
+	public String getDisplayName() {
+		return String.format("%s %s", shortName, releaseName);
 	}
 }

@@ -30,13 +30,13 @@ public class ToolsService {
 	public ToolSuiteDownloads getStsDownloads() throws Exception {
 		String responseXml = cachedRestClient.get(restTemplate, "http://download.springsource.com/release/STS/index-new.xml", String.class);
 		ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
-		return toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite");
+		return toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite", "STS");
 	}
 
 	public ToolSuiteDownloads getGgtsDownloads() throws Exception {
 		String responseXml = cachedRestClient.get(restTemplate, "http://download.springsource.com/release/STS/index-new.xml", String.class);
 		ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
-		return toolXmlConverter.convert(toolSuiteXml, "Groovy/Grails Tool Suite");
+		return toolXmlConverter.convert(toolSuiteXml, "Groovy/Grails Tool Suite", "GGTS");
 	}
 
 	public EclipseDownloads getEclipseDownloads() throws Exception {

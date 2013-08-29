@@ -1,14 +1,12 @@
 package io.spring.site.domain.tools.toolsuite.parser;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import io.spring.site.domain.tools.toolsuite.Architecture;
 import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
-import io.spring.site.domain.tools.toolsuite.parser.ToolXmlConverter;
 import io.spring.site.domain.tools.toolsuite.xml.Download;
 import io.spring.site.domain.tools.toolsuite.xml.Release;
 import io.spring.site.domain.tools.toolsuite.xml.ToolSuiteXml;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,7 +23,7 @@ public class ToolXmlConverter_TwoDifferentToolSuitesTests {
 	@Before
 	public void setUp() throws Exception {
 		ToolSuiteXml toolSuiteXml = new ToolSuiteXml();
-		List<Release> releases = new ArrayList<Release>();
+		List<Release> releases = new ArrayList<>();
 
 		Download download = new Download();
 		download.setDescription("Mac OS X (Cocoa)");
@@ -58,12 +56,12 @@ public class ToolXmlConverter_TwoDifferentToolSuitesTests {
 		toolSuiteXml.setReleases(releases);
 
 		toolXmlConverter = new ToolXmlConverter();
-		toolSuite = toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite");
+		toolSuite = toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite", "STS");
 	}
 
 	@Test
 	public void addsADownloadLinkForStsOnly() throws Exception {
-		Architecture macArchitecture = toolSuite.getPlatforms().get("mac").getEclipseVersions().get(0).getArchitectures().get(0);
+		Architecture macArchitecture = toolSuite.getPlatformList().get(1).getEclipseVersions().get(0).getArchitectures().get(0);
 		assertThat(macArchitecture.getDownloadLinks().size(), equalTo(1));
 		assertThat(macArchitecture.getDownloadLinks().get(0).getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
 	}
