@@ -1,4 +1,201 @@
-ul.header-facets li {
-  display: inline-block;
-  margin-right: 10px;
+$off-white: #eee;
+$black-green: #3A3C2F; 
+$lime: #8CC63F;
+$leaf: #4E681E;
+$green: #6db33f;
+$bark: #AF9A85;
+$light-grey: #ECEBEB;
+$medium-grey: #DEDEDE;
+$navy: #3A5056;
+$slate: #44474C;
+$mauve: #665A6B;
+$denim: #8395A1;
+$black-brown: #34302d;
+$base-font-family: 'Varela Round', sans-serif;
+$secondary-font-family: 'Montserrat', sans-serif;
+$link-green: #5fa134;
+$icon-sprite: url("../img/iconsprite.png");
+
+
+//SEARCH RESULT STYLES
+.search-result {
+  margin-bottom: 35px;
 }
+
+.search-result--title {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 19px;
+  font-family: $secondary-font-family;
+  color: $link-green;
+  &:hover {
+    color: $link-green;
+  }
+}
+.search-result--subtitle {
+  font-family: $secondary-font-family;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+}
+.search-result--summary {
+  font-size: 14px;
+  line-height: 18px;
+  margin-top: 3px;
+  color: #484543;
+  em {
+    font-family: $secondary-font-family;
+    font-style: normal;
+    color: #000;
+    background-color: #FFF;
+  }
+}
+
+.search-result--path {
+  color: $link-green;
+  max-width: 675px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.search-facets {
+  form {
+    margin: 0;
+  }
+  ul {
+    margin: 0px;
+    list-style: none;
+    .facet {
+      text-align: right;
+      .facet--wrapper {
+        border-top: 1px solid #ddd;
+        padding: 10px 20px;
+        margin: 0;
+        font-family: $secondary-font-family;
+        text-transform: uppercase;
+        .facet-name {
+          margin-top: 4px;
+          max-width: 161px;
+          text-align: left;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      .facet-actions {
+        i {
+          color: #999;
+          margin-right: 10px;
+        }
+      }
+      &.documentation-facet, &.understanding-facet {
+        display: none;
+      }
+    }
+  }
+  
+  .checkbox-pill{
+    display: inline-block;
+    background-color: #dddddd;    
+    border-radius: 3px;    
+    span{
+      padding: 2px 4px;
+      color: #999;
+      font-family: $base-font-family;
+      text-transform: none;
+      &.facet-count {
+        display: inline-block;
+        min-width: 42px;
+        line-height: 19px;
+        vertical-align: bottom;
+      }
+    }
+    .checkbox-pill--checkbox{
+      background: #e7e7e7;
+      margin: 0;
+      display: inline-block;
+      border-radius: 0 3px 3px 0;
+      input[type='checkbox']{
+        margin: 0;
+      }
+    }
+  }
+
+  .facet-section--header {
+    border-top: 1px solid white;
+    text-align: left;
+    li {
+      display: inline-block;
+      .facet--wrapper{
+        border: none;
+        span {
+          color: $black-brown;  
+          font-family: $base-font-family;
+          text-transform: none;
+        }
+      }
+    }
+    &.js-close {
+      display: none;
+    }
+  }
+
+  .sub-facet--list {
+    border-top: 1px solid white;
+    .facet {
+      padding: 0;
+      .facet--wrapper{
+        border-top: 1px solid white;
+        padding: 10px;
+        margin: 0 10px 0 20px;
+        font-family: $base-font-family;
+        text-transform: none;
+      }
+      i {
+        display: none;
+      }
+      &:first-child .facet--wrapper {
+        border-top: none;
+      }
+    }
+    .sub-facet--list {
+      margin: -8px 20px 10px 20px;
+      border-top: none;
+      .facet--wrapper {
+        padding: 2px 20px 2px 5px;
+        margin-right: 0;
+        font-family: $base-font-family;
+        text-transform: none;
+      }
+      .facet .facet--wrapper{
+        border: none;
+        padding-left: 0;
+        padding-right: 0;       
+      }
+    }    
+    &.js-close {
+      display: none;
+    }
+  }
+
+  .projects-facet .facet {
+    i {
+      display: inline-block;
+    }
+    .sub-facet--list {
+      i {
+        display: none;
+      }
+    }
+  }
+}
+
+.facets--clear-filters {
+  color: $black-brown;
+  padding: 5px 20px;
+  &:hover {
+    color: $link-green;
+  }
+}
+

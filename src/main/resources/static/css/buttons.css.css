@@ -15,6 +15,10 @@
   -o-transition: border 0.15s;
   -ms-transition: border 0.15s;
 }
+.btn.btn-black.compact {
+  padding: 6px 12px;
+  font-size: 12px;
+}
 .btn.btn-black.sub-text {
   padding: 12px 0;
 }
@@ -25,6 +29,14 @@
   line-height: 14px;
   font-family: "Montserrat", sans-serif;
   text-transform: none;
+}
+.btn.btn-black.on-black:hover {
+  border-color: #6db33f;
+  box-shadow: 0 1px 3px #0b0a0a;
+}
+.btn.btn-black.on-black:active {
+  box-shadow: 0 1px 3px #0b0a0a, inset 0 3px 6px #0b0a0a;
+  border-color: #6db33f;
 }
 .btn.btn-black:hover {
   border-color: #34302d;

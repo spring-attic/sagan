@@ -1,6 +1,9 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
+import io.spring.site.domain.blog.Post;
+import io.spring.site.domain.blog.PostBuilder;
+import io.spring.site.domain.blog.PostRepository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,9 +14,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.blog.Post;
-import org.springframework.site.domain.blog.PostBuilder;
-import org.springframework.site.domain.blog.PostRepository;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.hamcrest.Matchers.containsString;
@@ -40,7 +40,10 @@ public class BlogIndexTests extends IntegrationTestBase {
 		Document document = Jsoup.parse(result.getResponse().getContentAsString());
 		assertThat(document.select("ul.nav li.active").text(), equalTo("Blog"));
 
-		assertThat(document.select(".blog-category.active").text(), equalTo("All Posts"));
+		assertThat(document.select(".secondary-nav .blog-category.active").text(), equalTo("All Posts"));
+
+		assertThat(document.select(".content--title.blog-category.active").text(), equalTo("All Posts"));
+
 		assertThat(
 				document.head()
 						.getElementsByAttributeValue("type", "application/atom+xml")

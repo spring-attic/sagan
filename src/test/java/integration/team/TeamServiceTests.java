@@ -1,10 +1,11 @@
 package integration.team;
 
 import integration.IntegrationTestBase;
+import io.spring.site.domain.team.MemberProfile;
+import io.spring.site.domain.team.TeamService;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.team.MemberProfile;
-import org.springframework.site.domain.team.TeamService;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

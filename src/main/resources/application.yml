@@ -1,8 +1,8 @@
 project:
-  artifactId: springframework-site
-  name: Sagan
+  artifactId: spring-io
+  name: spring-io
   version: X.X.X.X
-  description: Sagan website
+  description: spring-io
 
 info:
   build:
@@ -11,7 +11,7 @@ info:
     description: ${project.description}
     version: ${project.version}
   spring:
-    profiles: ${spring.profiles.active:default} 
+    profiles: ${spring.profiles.active:default}
 
 spring:
   thymeleaf:
@@ -32,16 +32,6 @@ github:
     id: fb06c006c2ed62fe9e8b
     secret: 164264e3f6d70c7c21713b7fa64225cb8d6107b2
 
----
-
-spring:
-  profiles: default,site
-  main:
-    sources: org.springframework.site.web.configuration.ApplicationConfiguration
-  search:
-    indexer:
-      delay: 0
-      base_url: http://localhost:8080
 elasticsearch:
   client:
     endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
@@ -50,9 +40,16 @@ elasticsearch:
 ---
 
 spring:
+  profiles: site,default
+  main:
+    sources: io.spring.site.web.configuration.ApplicationConfiguration
+
+---
+
+spring:
   profiles: indexer
   main:
-    sources: org.springframework.site.indexer.configuration.IndexerConfiguration
+    sources: io.spring.site.indexer.configuration.IndexerConfiguration
 search:
   indexer:
     delay: 0
@@ -68,8 +65,20 @@ search:
     base_url: https://sagan-development.cfapps.io
 elasticsearch:
   client:
-    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
     index: sagan-development
+cache:
+  timetolive: 0
+
+---
+
+spring:
+  profiles: performance
+search:
+  indexer:
+    base_url: https://sagan-performance.cfapps.io
+elasticsearch:
+  client:
+    index: sagan-performance
 
 ---
 
@@ -80,7 +89,6 @@ search:
     base_url: https://sagan-staging.cfapps.io
 elasticsearch:
   client:
-    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
     index: sagan-staging
 
 ---
@@ -92,7 +100,6 @@ search:
     base_url: https://sagan-production.cfapps.io
 elasticsearch:
   client:
-    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
     index: sagan-production
 
 ---

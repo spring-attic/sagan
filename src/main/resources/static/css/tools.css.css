@@ -46,14 +46,6 @@
 .tool--container .tool--download-btn {
   width: 237px;
 }
-.tool--container .tool--download-btn:hover {
-  border-color: #6db33f;
-  box-shadow: 0 1px 3px #0b0a0a;
-}
-.tool--container .tool--download-btn:active {
-  box-shadow: 0 1px 3px #0b0a0a, inset 0 3px 6px #0b0a0a;
-  border-color: #6db33f;
-}
 .tool--container .tool--see-all-versions {
   display: block;
   color: #5fa134;
@@ -242,6 +234,15 @@
 }
 .tools--wrapper.more-feature-list ul li {
   padding: 5px 0;
+}
+.tools--wrapper .tools-bottom--container {
+  margin-top: 60px;
+}
+.tools--wrapper .tools-bottom--container p {
+  margin: 10px 0;
+}
+.tools--wrapper .tools-bottom--container p a:hover {
+  color: #5fa134;
 }
 
 .tool-versions--wrapper {

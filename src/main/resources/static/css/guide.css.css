@@ -1,6 +1,5 @@
 .guides-section--container {
   border: 1px solid #34302d;
-  padding: 40px;
   min-height: 284px;
   margin-top: 50px;
   display: block !important;
@@ -44,8 +43,8 @@
 }
 .guides-section--container .guide--container {
   display: inline-block;
-  width: 284px;
-  margin: 0 40px 20px 0;
+  width: 29.269%;
+  margin: 0 4.066% 20px 0;
   vertical-align: top;
 }
 .guides-section--container .guide--container .guide--title {
@@ -60,39 +59,41 @@
 }
 
 .content--container h1 {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 .content--container a {
   color: #5fa134;
 }
-.content--container p, .content--container pre {
-  margin-bottom: 18px;
+.content--container p, .content--container ul {
+  margin-bottom: 20px;
+  border-radius: 0;
+}
+.content--container pre {
+  margin-top: -10px;
+  margin-bottom: 20px;
   border-radius: 0;
 }
 .content--container h2 {
   font-family: "Montserrat", sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 28px;
-  font-weight: 700;
-  margin: 30px 0 15px;
+  font-weight: 400;
+  margin: 30px 0 10px;
 }
 .content--container h3, .content--container h4 {
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   line-height: 26px;
-  font-weight: 700;
-  margin: 30px 0 15px;
+  font-weight: 400;
+  margin: 20px 0 10px;
 }
 .content--container p code {
   color: #305CB5;
   font-size: 14px;
   padding: 2px 6px;
 }
-.content--container ul {
-  margin-bottom: 30px;
-}
 .content--container ul li {
-  padding: 5px 0;
+  margin-bottom: 5px;
 }
 .content--container ul li code {
   color: #305CB5;
@@ -102,17 +103,36 @@
 .content--container blockquote {
   padding: 0 0 0 10px;
   border-left: 5px solid #DDD;
+  border-left: 4px solid #6db33f;
+  background-color: #EBF1E7;
+  padding: 25px 20px;
+  margin: 30px 0;
+  font-family: "Montserrat", sans-serif;
+}
+.content--container blockquote strong {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.content--container blockquote p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
 }
 .content--container pre {
   word-break: normal;
   word-wrap: normal;
   white-space: pre;
-  overflow-x: scroll;
+  overflow-x: auto;
   width: 96.9%%;
 }
 .content--container .highlight .copy-button {
   position: absolute;
   margin-left: 634px;
+}
+.content--container strong {
+  font-family: "Montserrat", sans-serif;
 }
 
 .content-right-pane--container h2 {
@@ -147,7 +167,7 @@
 }
 .content-right-pane--container .btn-group .btn {
   font-family: "Varela Round", sans-serif;
-  padding: 18px 6.4%;
+  padding: 12px 6.4% 10px;
   font-size: 16px;
   line-height: 16px;
   border: 1px solid #ddd;
@@ -171,21 +191,47 @@
   border: none;
   box-shadow: none;
   margin: 0;
-  padding: 14px 0 14px 14px;
+  padding: 10px 0 10px 14px;
 }
 .content-right-pane--container .clone-url input:focus {
   outline: none;
 }
 .content-right-pane--container .clone-url button {
-  padding: 24px;
+  padding: 20px;
   margin: 0;
   float: right;
-  background-position: 7px -62px;
+  background-position: 3px -66px;
 }
 .content-right-pane--container .github_download {
   display: block;
   text-align: center;
   margin: 15px 6.2%;
+}
+
+.go-to-repo--container {
+  margin-top: 20px;
+  padding: 10px 6.2%;
+  border-top: 1px solid white;
+}
+.go-to-repo--container a {
+  vertical-align: middle;
+  color: #5fa134;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  line-height: 24px;
+  text-decoration: none;
+  margin-top: 1px;
+}
+.go-to-repo--container a:hover {
+  color: #6ab43a;
+}
+.go-to-repo--container i {
+  color: #d4d4d4;
+  font-size: 24px;
+  margin-right: 10px;
+  float: left;
+  margin-top: -2px;
 }
 
 .copy-button {

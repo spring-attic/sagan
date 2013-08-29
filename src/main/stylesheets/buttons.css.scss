@@ -33,7 +33,11 @@ $icon-sprite: url("../img/iconsprite.png");
     -moz-transition: border 0.15s;
     -o-transition: border 0.15s;
     -ms-transition: border 0.15s;
-    &.sub-text {
+    &.compact{
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+    &.sub-text { 
       padding: 12px 0;
       p {
         margin-top: 6px;
@@ -42,6 +46,16 @@ $icon-sprite: url("../img/iconsprite.png");
         line-height: 14px;
         font-family: $secondary-font-family;
         text-transform: none;
+      }
+    }
+    &.on-black {
+      &:hover {
+        border-color: $green;
+        box-shadow: 0 1px 3px darken($black-brown, 15%);
+      }
+      &:active {
+        box-shadow: 0 1px 3px darken($black-brown, 15%), inset 0 3px 6px darken($black-brown, 15%);
+        border-color: $green;
       }
     }
     &:hover {

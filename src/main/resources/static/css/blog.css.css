@@ -16,7 +16,7 @@
   display: none;
 }
 .blog--container.blog-preview .blog--post p {
-  margin-bottom: 0;
+  margin-bottom: 15px;
 }
 .blog--container.blog-preview:last-child {
   margin: 0;
@@ -33,6 +33,30 @@
   color: #34302d;
 }
 .blog--container .blog--title a:hover {
+  text-decoration: none;
+  color: #5fa134;
+}
+.blog--container .meta-data--container {
+  margin-bottom: 30px;
+}
+.blog--container .meta-data--container .meta-data--item {
+  display: inline-block;
+  margin: 2px 30px 0 0;
+  font-size: 12px;
+  line-height: 12px;
+  text-transform: uppercase;
+}
+.blog--container .meta-data--container .meta-data--item .meta-data--icon {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+  margin: -2px 5px 0 0;
+}
+.blog--container .meta-data--container .meta-data--item a {
+  color: #34302d;
+}
+.blog--container .meta-data--container .meta-data--item a:hover {
   text-decoration: none;
   color: #5fa134;
 }
@@ -106,7 +130,7 @@
   word-break: normal;
   word-wrap: normal;
   white-space: pre;
-  overflow-x: scroll;
+  overflow-x: auto;
   width: 96.9%%;
 }
 .blog--container .blog--post .highlight .copy-button {
@@ -172,6 +196,9 @@
   font-size: 14px;
   line-height: 14px;
   padding: 18px;
+}
+.blog-comments--wrapper .blog-comments--container .blog-comments--header a {
+  color: #5fa134;
 }
 .blog-comments--wrapper .blog-comments--container .blog-comments--header .icon {
   margin-top: -11px;

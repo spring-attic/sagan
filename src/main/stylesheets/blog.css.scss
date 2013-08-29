@@ -32,7 +32,7 @@ $icon-sprite: url("../img/iconsprite.png");
         display: none;
       }
       p {
-        margin-bottom: 0;
+        margin-bottom: 15px;
       }
     }
     &:last-child {
@@ -51,6 +51,30 @@ $icon-sprite: url("../img/iconsprite.png");
       &:hover {
         text-decoration: none;
         color: $link-green;
+      }
+    }
+  }
+  .meta-data--container {
+    margin-bottom: 30px;
+    .meta-data--item {
+      display: inline-block;
+      margin: 2px 30px 0 0;
+      font-size: 12px;
+      line-height: 12px;
+      text-transform: uppercase;
+      .meta-data--icon {
+        display: inline-block;
+        height: 20px;
+        width: 20px;
+        vertical-align: middle;
+        margin: -2px 5px 0 0;
+      }
+      a {
+        color: $black-brown;
+        &:hover {
+          text-decoration: none;
+          color: $link-green;
+        }
       }
     }
   }
@@ -95,7 +119,6 @@ $icon-sprite: url("../img/iconsprite.png");
     }
     img {
       display: block;
-      // width: 100%;
       margin: 20px 0;
     }
     pre {
@@ -123,7 +146,7 @@ $icon-sprite: url("../img/iconsprite.png");
         word-break: normal;
         word-wrap: normal;
         white-space: pre;
-        overflow-x: scroll;
+        overflow-x: auto;
         width: 96.9%%;
       }
       .copy-button {
@@ -190,6 +213,9 @@ $icon-sprite: url("../img/iconsprite.png");
       font-size: 14px;
       line-height: 14px;
       padding: 18px;
+      a {
+        color: $link-green;
+      }
       .icon {
         margin-top: -11px;
       }

@@ -1,14 +1,82 @@
 <html
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorator="layout">
-<head>
-	<title>About</title>
-</head>
-<body>
-<h1 layout:fragment="header">About</h1>
-
-<div layout:fragment="content" class="container">
-	<p>We write code</p>
-</div>
-</body>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+  <head>
+  	<title>About Us</title>
+  </head>
+  <body>
+    <div layout:fragment="header-container"></div>
+    <div layout:fragment="content" class="container">
+    	<div class="billboard--wrapper">
+        <div class="billboard--container center-text">
+          <div class="container-fluid">
+            <div class="billboard--title">
+              About Us
+            </div>
+            <div class="billboard--sub-title--container">
+              <div class="billboard--sub-title">
+                The Spring Framework provides a comprehensive programming and configuration model for modern
+              </div>
+              <div class="billboard--sub-title">
+                Java-based enterprise applications - on any kind of deployment platform.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="billboard-bg about-us--bg"></div>
+      </div> 
+      <div class="billboard-body--wrapper">
+        <div class="row-fluid">
+          <a href="/team" class="span4 about-feature--container">
+            <div class="icon about-icon team"></div>
+            <div class="title">The Team</div>
+            <div class="text">Spring brings together a leading Java development team and a vibrant developer community to push the boundaries of innovations.</div>
+            <div class="link">Meet the Team</div>
+          </a>
+          <a href="/jobs" class="span4 about-feature--container">
+            <div class="icon about-icon jobs"></div>
+            <div class="title">The Jobs</div>
+            <div class="text">Help us solve complex problems and develop applications that matter. Our mission is to build modern java applications.</div>
+            <div class="link">Join the Team</div>
+          </a>
+          <a href="http://gopivotal.com" class="span4 about-feature--container">
+            <div class="icon about-icon pivotal"></div>
+            <div class="title">Pivotal</div>
+            <div class="text">Pivotal is a newly formed company that contributes to the Open Source software development community and is committed to its success.</div>
+            <div class="link">Go Pivotal</div>
+          </a>
+        </div>
+      </div>
+      <div class="support--wrapper about-page">
+          <div class="container-fluid">
+            <div class="row-fluid">
+              <div class="span6 support--container">
+                <div class="icon icon-community-support"></div>
+                <div class="support--title">
+                  Community Support
+                </div>
+                <div class="support-links">
+                  <a href="http://forum.springframework.io">Forum</a>
+                  <a href="http://stackoverflow.com/questions/tagged/spring">Stack Overflow</a>
+                </div>
+              </div>
+              <div class="span6 support--container">
+                <div class="icon icon-professional-support"></div>
+                <div class="support--title">
+                  Professional Support
+                </div>
+                <div class="support-links">
+                  <a href="/unknown">Support *NR</a>
+                  <a href="http://www.gopivotal.com/contact/spring-training">Training</a>
+                  <a href="http://www.gopivotal.com/contact/spring-consulting">Consulting</a>
+                </div>
+              </div>
+            </div>
+          </div>          
+        </div>
+        <div class="about-page-fix"></div>
+    </div>
+  </body>
 </html>
+
+

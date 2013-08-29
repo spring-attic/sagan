@@ -1,3 +1,15 @@
+.container-fluid {
+  width: 1024px !important;
+}
+
+.navbar-inner {
+  min-width: 1060px;
+}
+
+.billboard--wrapper, .key-feature--wrapper, .offset-feature--container, .support--wrapper, footer, .search-dropdown--container, .team-map--wrapper, .billboard-bg {
+  min-width: 1100px;
+}
+
 body {
   background-color: #f1f1f1;
 }
@@ -55,6 +67,7 @@ body {
   position: absolute;
   z-index: 999;
   background-image: none;
+  filter: none;
   background-color: #34302d;
   border: none;
   border-top: 4px solid #6db33f;
@@ -230,10 +243,22 @@ body {
 .right-pane-widget--container.secondary-nav li a {
   text-transform: uppercase;
   color: #888;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  text-decoration: none;
+}
+.right-pane-widget--container.secondary-nav li a:hover {
+  color: #5fa134;
 }
 .right-pane-widget--container.secondary-nav li.active a {
   font-weight: bold;
   color: #34302d;
+}
+.right-pane-widget--container.with-icon li {
+  padding: 12px 6.2% 12px 3%;
+}
+.right-pane-widget--container.with-icon li a {
+  margin-left: 2%;
 }
 .right-pane-widget--container.no-top-border {
   box-shadow: none;
@@ -460,6 +485,12 @@ input.floating-input:focus {
 .content--title.search-title {
   position: relative;
 }
+.content--title.blog-category {
+  display: none;
+}
+.content--title.blog-category.active {
+  display: block;
+}
 
 .index-page--title {
   margin-bottom: 30px;
@@ -473,38 +504,6 @@ input.floating-input:focus {
 }
 .index-page--subtitle a {
   color: #5fa134;
-}
-
-.search-result {
-  margin-bottom: 30px;
-}
-
-.search-result--title {
-  display: inline-block;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: bold;
-  font-family: "Montserrat", sans-serif;
-  margin-bottom: 6px;
-  color: #5fa134;
-}
-.search-result--title:hover {
-  color: #5fa134;
-}
-
-.search-result--summary {
-  font-size: 14px;
-  line-height: 18px;
-  font-family: "Montserrat", sans-serif;
-}
-.search-result--summary em {
-  font-weight: bold;
-  font-style: normal;
-  color: black;
-}
-
-.search-result--path {
-  color: #8395a1;
 }
 
 .footer {
@@ -651,6 +650,16 @@ input.floating-input:focus {
 }
 .item--dropdown .item--header .item--header-link:hover [class^=icon-] {
   color: #f1f1f1;
+}
+.item--dropdown .item--header .item--header-link.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.item--dropdown .item--header .item--header-link.disabled:hover {
+  color: #6db33f;
+}
+.item--dropdown .item--header .item--header-link.disabled:hover [class^=icon-] {
+  color: #93918f;
 }
 .item--dropdown .item--left-column, .item--dropdown .item--right-column {
   width: 45%;
@@ -818,6 +827,38 @@ input.floating-input:focus {
   font-style: italic;
   color: #999;
 }
+.content-container--wrapper .content-container--header .header-title {
+  color: #eeeeee;
+  display: inline-block;
+  margin: 10px;
+}
+.content-container--wrapper .content-container--header .btn {
+  margin: 6px;
+}
+.content-container--wrapper .content-container--body {
+  padding: 20px;
+  border-top: 1px solid white;
+}
+.content-container--wrapper .content-container--body:first-child {
+  border-top: none;
+}
+.content-container--wrapper .content-container--body .content-section-title--container {
+  margin: 20px 0 40px;
+}
+.content-container--wrapper .content-container--body .icon-gs-guides, .content-container--wrapper .content-container--body .icon-tutorial {
+  margin-right: 20px;
+}
+.content-container--wrapper .content-container--body .content-section-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  font-weight: 400;
+}
+.content-container--wrapper .content-container--body .content-section-sub-title {
+  padding-right: 50px;
+}
 .content-container--wrapper .content-items--container {
   padding: 20px;
 }
@@ -827,6 +868,7 @@ input.floating-input:focus {
   top: 74px;
   left: 0;
   right: 0;
+  width: 100%;
 }
 .billboard--wrapper .billboard--container {
   position: absolute;
@@ -835,21 +877,46 @@ input.floating-input:focus {
   margin: 0 auto;
   margin-top: 80px;
 }
+.billboard--wrapper .billboard--container .billboard--title, .billboard--wrapper .billboard--container .billboard--sub-title {
+  background: rgba(52, 48, 45, 0.8);
+  color: #eeeeee;
+  display: inline-block;
+}
+.billboard--wrapper .billboard--container .billboard--title {
+  font-size: 48px;
+  line-height: 68px;
+  font-family: "Montserrat", sans-serif;
+  padding: 0 15px;
+  letter-spacing: -2px;
+}
+.billboard--wrapper .billboard--container .billboard--sub-title--container .billboard--sub-title {
+  font-size: 18px;
+  line-height: 18px;
+  padding: 0 19px 12px;
+}
+.billboard--wrapper .billboard--container .billboard--sub-title--container .billboard--sub-title:first-child {
+  padding-top: 12px;
+}
+.billboard--wrapper .billboard--container.center-text {
+  text-align: center;
+  margin-top: 212px;
+}
 .billboard--wrapper .billboard-bg {
   height: 425px;
   border-bottom: 1px solid #34302d;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.billboard--wrapper .billboard-bg.about-us--bg {
+  background-image: url("../img/about-us-bg.png");
+}
+.billboard--wrapper .billboard-bg.jobs--bg {
+  background-image: url("../img/jobs-bg.png");
 }
 
 .billboard-body--wrapper {
   margin-top: 326px;
   padding: 100px 0;
-}
-
-.search-facets > ul {
-  margin-left: 0px;
-}
-.search-facets ul {
-  list-style-type: none;
 }
 
 .admin-profile--form .admin-profile--field {
@@ -891,4 +958,222 @@ input.floating-input:focus {
 }
 .admin-profile--form .admin-profile--field.submit-form {
   margin-top: 30px;
+}
+
+.placeholder-img {
+  background-color: #D5D5D5;
+  border: 3px solid white;
+  padding: 77px 0;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #999;
+  text-shadow: 0 1px 2px white;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+}
+
+form.lpeRegForm {
+  border: 1px solid #f1f1f1;
+  background-color: white;
+}
+
+form.lpeRegForm li {
+  padding: 0;
+  list-style-type: none;
+}
+
+form.lpeRegForm ul input[type='text'] {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  font-size: 12px;
+  padding: 12px 0 15px 10px;
+  font-family: "Varela Round", sans-serif;
+  color: #666;
+  font-weight: 400;
+}
+
+#mktFrmButtons {
+  margin: -78px -3px 0 222px;
+}
+
+#mktFrmSubmit {
+  text-transform: uppercase;
+  background-color: #6db33f;
+  background-image: none;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  color: #eeeeee;
+  text-shadow: none;
+  font-size: 12px;
+  padding: 9px 16px !important;
+  height: 40px;
+  cursor: pointer;
+}
+
+form.lpeRegForm label {
+  display: none;
+}
+
+.lpeCElement {
+  left: 0 !important;
+  top: 0 !important;
+}
+
+form.lpeRegForm ul {
+  font-size: 12px;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+form.lpeRegForm ul input, form.lpeRegForm ul input[type='text'], form.lpeRegForm ul textarea, form.lpeRegForm ul select {
+  font-size: 12px;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+form.lpeRegForm li {
+  margin-bottom: 10px;
+}
+
+form.lpeRegForm .mktInput {
+  padding-left: 0px;
+}
+
+.about-feature--container {
+  background-color: #34302d;
+  text-align: center;
+  padding: 40px 20px;
+  height: 409px;
+  transition: border, box-shadow 0.2s;
+  -webkit-transition: border, box-shadow 0.2s;
+  -moz-transition: border, box-shadow 0.2s;
+  -ms-transition: border, box-shadow 0.2s;
+  -o-transition: border, box-shadow 0.2s;
+  border: 1px solid transparent;
+}
+.about-feature--container .title, .about-feature--container .text, .about-feature--container .link {
+  color: #f1f1f1;
+}
+.about-feature--container .title {
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  line-height: 24px;
+  margin: 30px 0 20px;
+  text-transform: uppercase;
+}
+.about-feature--container .text {
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.about-feature--container .link {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 20px;
+}
+.about-feature--container:hover {
+  text-decoration: none;
+  box-shadow: 0 0 9px #6db33f;
+  border-color: #6db33f;
+}
+.about-feature--container:active {
+  box-shadow: inset 0 6px 10px #191715;
+}
+
+.about-page-fix {
+  margin-top: 201px;
+}
+
+.job-category--container {
+  padding-right: 95px;
+}
+.job-category--container .job-category--title {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+.job-category--container .job--container {
+  margin-bottom: 20px;
+}
+.job-category--container .job--container .title {
+  color: #5fa134;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.job-post--container {
+  padding-bottom: 60px;
+  margin-bottom: 55px;
+  border-bottom: 1px solid white;
+}
+.job-post--container a {
+  color: #5fa134;
+}
+.job-post--container .job-post--title {
+  margin-bottom: 5px;
+}
+.job-post--container .job-post--location {
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.job-post--container .job-post--details p {
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.job-post--container .job-post--details ul {
+  margin-bottom: 30px;
+}
+.job-post--container .job-post--details ul li {
+  line-height: 22px;
+  margin-bottom: 5px;
+}
+.job-post--container .apply-now-link {
+  text-decoration: uppercase;
+}
+.job-post--container:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.admin-login--wrapper {
+  min-height: 650px;
+  text-align: center;
+}
+.admin-login--wrapper .alert, .admin-login--wrapper .admin-login--container {
+  text-align: left;
+}
+.admin-login--wrapper .admin-login--container {
+  background-color: white;
+  padding: 50px;
+  display: inline-block;
+  border-bottom: 1px solid #cccccc;
+  box-shadow: 0 0 3px #cccccc;
+  margin-top: 100px;
+}
+.admin-login--wrapper .admin-login--container .admin-login--title {
+  font-size: 24px;
+  line-height: 24px;
+  margin-bottom: 40px;
+}
+.admin-login--wrapper .admin-login--container form {
+  margin: 0;
+  text-align: center;
+}
+.admin-login--wrapper .admin-login--container form button {
+  font-size: 20px;
+  font-family: "Varela Round", sans-serif;
+}
+.admin-login--wrapper .admin-login--container form button i {
+  font-size: 30px;
+  float: left;
+  margin: -10px 15px -10px 0;
 }

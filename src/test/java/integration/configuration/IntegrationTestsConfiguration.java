@@ -1,11 +1,12 @@
 package integration.configuration;
 
+import io.spring.site.web.configuration.ApplicationConfiguration;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
-import org.springframework.site.web.configuration.ApplicationConfiguration;
 import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.Mockito.mock;

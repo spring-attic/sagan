@@ -70,6 +70,24 @@
   background-position: -483px -481px;
   margin-top: 18px;
 }
+.icon.project--logo.logo-spring-hateoas {
+  width: 126px;
+  height: 99px;
+  background-position: 518px 256px;
+  margin-top: 19px;
+}
+.icon.project--logo.logo-spring-webflow {
+  width: 99px;
+  height: 99px;
+  background-position: 619px 256px;
+  margin-top: 19px;
+}
+.icon.project--logo.logo-spring-web-services {
+  width: 100px;
+  height: 100px;
+  background-position: 532px 155px;
+  margin-top: 19px;
+}
 .icon.icon-projects {
   width: 28px;
   height: 28px;
@@ -168,6 +186,55 @@
 }
 .icon.blog-icon.icon-news-and-events {
   background-position: 20px 388px;
+.icon.icon-gs-guides {
+  width: 73px;
+  height: 101px;
+  background-position: 356px 101px;
+}
+.icon.icon-tutorial {
+  width: 73px;
+  height: 101px;
+  background-position: 430px 101px;
+}
+.icon.blog-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+.icon.blog-icon.calendar {
+  background-position: 20px 594px;
+}
+.icon.blog-icon.all-posts {
+  background-position: 20px 561px;
+}
+.icon.blog-icon.broadcasts {
+  background-position: 20px 519px;
+}
+.icon.blog-icon.engineering {
+  background-position: 20px 477px;
+}
+.icon.blog-icon.releases {
+  background-position: 20px 433px;
+}
+.icon.blog-icon.news-and-events {
+  background-position: 20px 387px;
+}
+.icon.about-icon.team {
+  width: 183px;
+  height: 127px;
+  background-position: 902px 202px;
+}
+.icon.about-icon.jobs {
+  width: 112px;
+  height: 85px;
+  background-position: 387px 415px;
+  margin: 21px 0;
+}
+.icon.about-icon.pivotal {
+  width: 93px;
+  height: 114px;
+  background-position: 387px 329px;
+  margin: 6px 0 7px;
 }
 
 i.icon {

@@ -21,7 +21,7 @@ $icon-sprite: url("../img/iconsprite.png");
     border: 1px solid $black-brown;
     display: inline-block;
     width: 286px;
-    height: 338px;
+    height: 288px;
     margin: 0 6px 20px 6px;
     vertical-align: top;
     text-align: center;
@@ -113,6 +113,41 @@ $icon-sprite: url("../img/iconsprite.png");
         }
       }
     }
+    &.full-width {
+      background-color: #ddd;
+      border-color: white;
+      display: block;
+      height: auto;
+      width: auto;
+      text-align: left;
+      .project--title {
+        margin-bottom: 10px;
+      }
+      .project--description {
+        margin-bottom: 20px;
+      }
+      .project--link {
+        color: $link-green;
+        text-transform: uppercase;
+        font-size: 12px;
+      }
+    }
+    &.project--container--link {
+      color: $black-brown;
+      transition: all 0.20s;
+      -webkit-transition: all 0.20s;
+      -moz-transition: all 0.20s;
+      -ms-transition: all 0.20s;
+      -o-transition: all 0.20s;
+      &:hover {
+        text-decoration: none;
+        box-shadow: 0 0 3px $green;
+        border-color: $green;
+      }
+      &:active {
+        box-shadow: none;
+      }
+    }
   }
   &.project-aggregator {
     .project--container {
@@ -121,6 +156,12 @@ $icon-sprite: url("../img/iconsprite.png");
         margin-top: 42px;
       }
     }
+  }
+  &.top-separator {
+    padding-top: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top: 1px solid #ddd;;
   }
 }
 

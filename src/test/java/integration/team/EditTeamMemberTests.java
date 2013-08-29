@@ -1,12 +1,13 @@
 package integration.team;
 
 import integration.IntegrationTestBase;
+import io.spring.site.domain.team.MemberProfile;
+import io.spring.site.domain.team.TeamRepository;
+
 import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.team.MemberProfile;
-import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -27,6 +28,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static requestpostprocessors.SecurityRequestPostProcessors.csrf;
+import static requestpostprocessors.SecurityRequestPostProcessors.user;
 
 public class EditTeamMemberTests extends IntegrationTestBase {
 	@Autowired
@@ -59,7 +62,9 @@ public class EditTeamMemberTests extends IntegrationTestBase {
 				return memberProfile.getId().toString();
 			}
 		};
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+				.addFilters(springSecurityFilterChain)
+				.defaultRequest(get("/").with(csrf()).with(user(principal.getName()).roles("USER"))).build();
 	}
 
 	@Test

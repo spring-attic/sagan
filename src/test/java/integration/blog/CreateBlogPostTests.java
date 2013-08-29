@@ -1,15 +1,16 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
+import io.spring.site.domain.blog.Post;
+import io.spring.site.domain.blog.PostCategory;
+import io.spring.site.domain.blog.PostRepository;
+import io.spring.site.domain.team.MemberProfile;
+import io.spring.site.domain.team.TeamRepository;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.site.domain.blog.Post;
-import org.springframework.site.domain.blog.PostCategory;
-import org.springframework.site.domain.blog.PostRepository;
-import org.springframework.site.domain.team.MemberProfile;
-import org.springframework.site.domain.team.TeamRepository;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -27,6 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
 public class CreateBlogPostTests extends IntegrationTestBase {
 
@@ -58,7 +60,9 @@ public class CreateBlogPostTests extends IntegrationTestBase {
 				return profileId;
 			}
 		};
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+				.addFilters(springSecurityFilterChain)
+				.defaultRequest(get("/").with(csrf()).with(user(principal.getName()).roles("USER"))).build();
 		postRepository.deleteAll();
 	}
 

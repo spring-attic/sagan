@@ -80,7 +80,6 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   .offset-feature--container {
     border-bottom: 1px solid #dddbda;
-    min-width: 1110px;
     .feature--content {
       padding: 90px 0;
     }
@@ -89,11 +88,13 @@ $icon-sprite: url("../img/iconsprite.png");
       line-height: 30px;
       font-family: $secondary-font-family;
       margin-bottom: 20px;
+      color: $black-brown;
     }
     .offset-feature--text {
       font-size: 18px;
       line-height: 28px;
       margin-bottom: 20px;
+      color: $black-brown;
     }
     .offset-feature--link {
       color: $link-green;
@@ -127,30 +128,40 @@ $icon-sprite: url("../img/iconsprite.png");
     &:nth-child(even) {
       background-color: #ebf1e7;
     }
-  }
-  .support--wrapper {
-    background-color: darken($black-brown, 4%);
-    padding: 50px 0 60px;
-    .support--container {
-      text-align: center;
-      .icon {
-        margin-bottom: 30px;
-      }
-      .support--title {
-        font-size: 18px;
-        line-height: 18px;
-        text-transform: uppercase;
-        color: #f1f1f1;
-        margin-bottom: 20px;
-      }
-      .support-links a {
-        color: $link-green;
-        padding: 0 20px;
+    &:hover {
+      .offset-feature--link {
+        text-decoration: underline;
       }
     }
   }
 }
+.support--wrapper {
+  background-color: darken($black-brown, 4%);
+  padding: 50px 0 60px;
+  .support--container {
+    text-align: center;
+    .icon {
+      margin-bottom: 30px;
+    }
+    .support--title {
+      font-size: 18px;
+      line-height: 18px;
+      text-transform: uppercase;
+      color: #f1f1f1;
+      margin-bottom: 20px;
+    }
+    .support-links a {
+      color: $link-green;
+      padding: 0 20px;
+    }
+  }
+  &.about-page {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+}
 
 .homepage-fix {
-  margin-top: 2194px;
+  margin-top: 2185px;
 }

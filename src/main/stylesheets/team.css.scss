@@ -24,7 +24,6 @@ $icon-sprite: url("../img/iconsprite.png");
   #map {
     height: 425px;
     border-bottom: 1px solid $black-brown;
-    
   }
   .team-map--container {
     position: absolute;
@@ -115,55 +114,6 @@ $icon-sprite: url("../img/iconsprite.png");
     float: left;
     padding: 10px;
     width: 319px;
-    .team-member--avatar {
-      display: inline-block;
-      img {
-        display: inline-block;
-        margin-right: 13px;
-        width: 153px;
-        height: 153px;
-      }
-    }
-    .team-member--info {
-      display: inline-block;
-      vertical-align: top;
-      margin-top: 20px;
-      width: 149px;
-      .team-member--name {
-        color: $link-green;
-        font-size: 16px;
-        line-height: 16px;
-        width: 149px;
-        display: inline-block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        cursor: pointer;
-      }
-      .team-member--bio {
-        margin-top: 6px;
-        height: 61px;
-        p {
-          font-size: 14px;
-          line-height: 18px;
-          &.team-member--position {
-            max-height: 36px;
-            overflow: hidden;
-            margin-bottom: 5px;
-          }
-          &.team-member--location {
-            width: 149px;
-            display: inline-block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-        }
-      }
-      .team-member--social {
-        margin-top: 12px;
-      }
-    }
   }
   .content-items--container  {
     padding: 40px;
@@ -199,6 +149,56 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   &.with-padding {
     padding-top: 100px;
+  }
+}
+
+.team-member--avatar {
+  display: inline-block;
+  img {
+    display: inline-block;
+    margin-right: 13px;
+    width: 153px;
+    height: 153px;
+  }
+}
+.team-member--info {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20px;
+  width: 149px;
+  .team-member--name {
+    color: $link-green;
+    font-size: 16px;
+    line-height: 16px;
+    width: 149px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+  .team-member--bio {
+    margin-top: 6px;
+    height: 61px;
+    p {
+      font-size: 14px;
+      line-height: 18px;
+      &.team-member--position {
+        max-height: 36px;
+        overflow: hidden;
+        margin-bottom: 5px;
+      }
+      &.team-member--location {
+        width: 149px;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .team-member--social {
+    margin-top: 12px;
   }
 }
 
@@ -287,3 +287,16 @@ $icon-sprite: url("../img/iconsprite.png");
   }
 }
 
+.leaflet-popup-content-wrapper {
+  background-color: #fff;
+  border-radius: 0 !important;
+  .leaflet-popup-content {
+    width: 330px !important;
+    border-radius: 0;
+    padding: 0;
+    margin: 10px;
+    p {
+      margin: 0;
+    }
+  }
+}

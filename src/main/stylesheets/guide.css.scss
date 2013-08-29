@@ -19,7 +19,6 @@ $link-green: #5fa134;
 
 .guides-section--container {
   border: 1px solid $black-brown;
-  padding: 40px;
   min-height: 284px;
   margin-top: 50px;
   display: block !important;
@@ -62,8 +61,8 @@ $link-green: #5fa134;
   }
   .guide--container {
     display: inline-block;
-    width: 284px;
-    margin: 0 40px 20px 0;
+    width: 29.269%;
+    margin: 0 4.066% 20px 0;
     vertical-align: top;
     .guide--title {
       font-size: 16px;
@@ -82,29 +81,35 @@ $link-green: #5fa134;
 
 .content--container {
   h1 {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
   }
   a {
     color: $link-green;
   }
-  p, pre {
-    margin-bottom: 18px;
+  p, ul {
+    margin-bottom: 20px;
+    border-radius: 0;
+  }
+
+  pre {
+    margin-top: -10px;
+    margin-bottom: 20px;
     border-radius: 0;
   }
 
   h2 {
     font-family: $secondary-font-family;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 28px;
-    font-weight: 700;
-    margin: 30px 0 15px;
+    font-weight: 400;
+    margin: 30px 0 10px;
   }
   h3, h4 {
     font-family: $secondary-font-family;
     font-size: 16px;
     line-height: 26px;
-    font-weight: 700;
-    margin: 30px 0 15px;
+    font-weight: 400;
+    margin: 20px 0 10px;
   }
   p code {
     color: #305CB5;
@@ -112,9 +117,8 @@ $link-green: #5fa134;
     padding: 2px 6px;
   }
   ul {
-    margin-bottom: 30px;
     li {
-      padding: 5px 0;
+      margin-bottom: 5px;
       code {
         color: #305CB5;
         font-size: 14px;
@@ -124,18 +128,36 @@ $link-green: #5fa134;
   }
   blockquote {
     padding: 0 0 0 10px;
-    border-left: 5px solid #DDD;
+    border-left: 4px solid $green;
+    background-color: #EBF1E7;
+    padding: 25px 20px;
+    margin: 30px 0;
+    font-family: $secondary-font-family;
+    strong {
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
   pre {
     word-break: normal;
     word-wrap: normal;
     white-space: pre;
-    overflow-x: scroll;
+    overflow-x: auto;
     width: 96.9%%;
   }
   .highlight .copy-button {
     position: absolute;
     margin-left: 634px;
+  }
+  strong {
+    font-family: $secondary-font-family;
   }
 }
 
@@ -171,7 +193,7 @@ $link-green: #5fa134;
     display: block;
     .btn {
       font-family: $base-font-family;
-      padding: 18px 6.4%;
+      padding: 12px 6.4% 10px;
       font-size: 16px;
       line-height: 16px;
       border: 1px solid #ddd;
@@ -195,22 +217,49 @@ $link-green: #5fa134;
       border: none;
       box-shadow: none;
       margin: 0;
-      padding: 14px 0 14px 14px;
+      padding: 10px 0 10px 14px;
       &:focus {
         outline: none;
       }
     }
     button {
-      padding: 24px;
+      padding: 20px;
       margin: 0;
       float: right;
-      background-position: 7px -62px;
+      background-position: 3px -66px;
+
     }
   }
   .github_download {
     display: block;
     text-align: center;
     margin: 15px 6.2%;
+  }
+}
+
+.go-to-repo--container {
+  margin-top: 20px;
+  padding: 10px 6.2%;
+  border-top: 1px solid white;
+  a {
+    vertical-align: middle;
+    color: $link-green;
+    text-transform: uppercase;
+    font-family: $secondary-font-family;
+    font-size: 12px;
+    line-height: 24px;
+    text-decoration: none;
+    margin-top: 1px;
+    &:hover {
+      color: lighten($link-green, 5%);
+    }
+  }
+  i {
+    color: #d4d4d4;
+    font-size: 24px;
+    margin-right: 10px;
+    float: left;
+    margin-top: -2px;
   }
 }
 

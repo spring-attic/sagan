@@ -1,6 +1,11 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
+import io.spring.site.domain.blog.Post;
+import io.spring.site.domain.blog.PostBuilder;
+import io.spring.site.domain.blog.PostCategory;
+import io.spring.site.domain.blog.PostRepository;
+
 import org.hamcrest.MatcherAssert;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -9,10 +14,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.site.domain.blog.Post;
-import org.springframework.site.domain.blog.PostBuilder;
-import org.springframework.site.domain.blog.PostCategory;
-import org.springframework.site.domain.blog.PostRepository;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.ArrayList;
@@ -76,7 +77,9 @@ public class BlogIndex_CategoryTests extends IntegrationTestBase {
 
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
-		assertThat(html.select(".blog-category.active").text(), equalTo(PostCategory.ENGINEERING.getDisplayName()));
+		assertThat(html.select(".secondary-nav .blog-category.active").text(), equalTo(PostCategory.ENGINEERING.getDisplayName()));
+		
+		assertThat(html.select(".content--title.blog-category.active").text(), equalTo(PostCategory.ENGINEERING.getDisplayName()));
 
 		assertThat(html.head().getElementsByAttributeValue("type", "application/atom+xml").get(0).attr("href"), equalTo("/blog/category/engineering.atom"));
 	}

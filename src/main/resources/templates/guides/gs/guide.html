@@ -44,6 +44,12 @@
               </div>
               <a class="github_download btn btn-black uppercase" th:href='${guide.zipUrl}'>Download ZIP</a>
               <a class="gs-guide-import" th:href="${guide.githubHttpsUrl}">Import into STS</a>
+              <div class="go-to-repo--container">
+                <a th:href="${guide.GithubHttpsUrl}">
+                  <i class="icon-github"></i>
+                  Go To Repo
+                </a>
+              </div>
             </div>
           </div>
           <div class="right-pane-widget--container">

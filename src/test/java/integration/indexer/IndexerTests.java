@@ -1,33 +1,28 @@
 package integration.indexer;
 
 import integration.IntegrationTestBase;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.util.Date;
-import java.util.concurrent.Executors;
-
+import io.spring.site.domain.StaticPagePathFinder;
+import io.spring.site.domain.guides.Guide;
+import io.spring.site.domain.guides.GuidesService;
+import io.spring.site.indexer.GettingStartedGuideIndexer;
+import io.spring.site.indexer.StaticPageIndexer;
+import io.spring.site.indexer.ToolsIndexer;
+import io.spring.site.indexer.TutorialIndexer;
+import io.spring.site.indexer.crawler.CrawlerService;
+import io.spring.site.indexer.crawler.DocumentProcessor;
+import io.spring.site.search.SearchEntry;
+import io.spring.site.search.SearchService;
+import io.spring.site.test.FixtureLoader;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.site.domain.StaticPagePathFinder;
-import org.springframework.site.domain.guides.Guide;
-import org.springframework.site.domain.guides.GuidesService;
-import org.springframework.site.indexer.GettingStartedGuideIndexer;
-import org.springframework.site.indexer.StaticPageIndexer;
-import org.springframework.site.indexer.ToolsIndexer;
-import org.springframework.site.indexer.TutorialIndexer;
-import org.springframework.site.indexer.crawler.CrawlerService;
-import org.springframework.site.indexer.crawler.DocumentProcessor;
-import org.springframework.site.search.SearchEntry;
-import org.springframework.site.search.SearchService;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
+import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -43,7 +38,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class IndexerTests extends IntegrationTestBase {
 
 	private CrawlerService stubCrawlerService = new CrawlerService(
-			Executors.newSingleThreadExecutor()) {
+	) {
 		@Override
 		public void crawl(String url, int linkDepth, DocumentProcessor processor) {
 			try {
@@ -71,10 +66,7 @@ public class IndexerTests extends IntegrationTestBase {
 
 	@Before
 	public void setup() throws IOException {
-		InputStream response = new ClassPathResource("/sts_downloads.xml", getClass())
-				.getInputStream();
-		String responseXml = StreamUtils.copyToString(response, Charset.forName("UTF-8"));
-
+		String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
 		stub(this.restTemplate.getForObject(anyString(), eq(String.class))).toReturn(
 				responseXml);
 	}

@@ -1,5 +1,19 @@
 package examples.search;
 
+import io.spring.site.domain.guides.Guide;
+import io.spring.site.domain.guides.GuidesService;
+import io.spring.site.indexer.configuration.IndexerConfiguration;
+import io.spring.site.indexer.mapper.GuideSearchEntryMapper;
+import io.spring.site.indexer.mapper.WebDocumentSearchEntryMapper;
+import io.spring.site.search.SearchEntry;
+import io.spring.site.search.SearchResult;
+import io.spring.site.search.SearchService;
+import io.spring.site.web.search.SearchEntryBuilder;
+
+import java.text.ParseException;
+import java.util.Collections;
+import java.util.List;
+
 import org.jsoup.nodes.Document;
 import org.junit.After;
 import org.junit.ClassRule;
@@ -12,25 +26,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.site.domain.guides.Guide;
-import org.springframework.site.domain.guides.GuidesService;
-import org.springframework.site.indexer.configuration.IndexerConfiguration;
-import org.springframework.site.indexer.mapper.GuideSearchEntryMapper;
-import org.springframework.site.indexer.mapper.WebDocumentSearchEntryMapper;
-import org.springframework.site.search.SearchEntry;
-import org.springframework.site.search.SearchResult;
-import org.springframework.site.search.SearchService;
-import org.springframework.site.web.search.SearchEntryBuilder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import utils.SetSystemProperty;
 
-import java.text.ParseException;
-import java.util.Collections;
-import java.util.List;
+import utils.LongRunning;
+import utils.SetSystemProperty;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
@@ -49,11 +52,15 @@ import static org.hamcrest.Matchers.not;
 public class HostedSearchServiceIntegrationExamples {
 
 	@ClassRule
-	public static SetSystemProperty elasticSearchEndpoint = new SetSystemProperty("elasticsearch.client.endpoint", "https://qlmsjwfa.api.qbox.io");
+	public static LongRunning longRunning = LongRunning.create();
 
 	@ClassRule
-	public static SetSystemProperty searchIndexerDelay = new SetSystemProperty("search.indexer.delay", "60000000");
+	public static SetSystemProperty elasticSearchEndpoint = new SetSystemProperty(
+			"elasticsearch.client.endpoint", "https://qlmsjwfa.api.qbox.io");
 
+	@ClassRule
+	public static SetSystemProperty searchIndexerDelay = new SetSystemProperty(
+			"search.indexer.delay", "60000000");
 
 	private final Pageable pageable = new PageRequest(0, 10);
 
@@ -83,7 +90,8 @@ public class HostedSearchServiceIntegrationExamples {
 		Thread.sleep(1000);
 
 		Page<SearchResult> searchEntries = this.searchService.search(
-				"Integration test content", this.pageable, Collections.<String>emptyList()).getPage();
+				"Integration test content", this.pageable,
+				Collections.<String> emptyList()).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		assertThat(entries.get(0).getSummary(), is(equalTo(this.entry.getSummary())));
@@ -93,8 +101,7 @@ public class HostedSearchServiceIntegrationExamples {
 	public void gettingStartedGuideIndexing() throws ParseException, InterruptedException {
 		List<Guide> guideShells = this.guidesService.listGettingStartedGuides();
 		Guide guideShell = guideShells.get(0);
-		Guide guide = this.guidesService.loadGettingStartedGuide(guideShell
-				.getGuideId());
+		Guide guide = this.guidesService.loadGettingStartedGuide(guideShell.getGuideId());
 
 		GuideSearchEntryMapper guideEntryMapper = new GuideSearchEntryMapper();
 		this.entry = guideEntryMapper.map(guide);
@@ -108,7 +115,7 @@ public class HostedSearchServiceIntegrationExamples {
 		Thread.sleep(1000);
 
 		Page<SearchResult> searchEntries = this.searchService.search(testTitle,
-				this.pageable, Collections.<String>emptyList()).getPage();
+				this.pageable, Collections.<String> emptyList()).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		assertThat(entries.get(0).getTitle(), is(equalTo(this.entry.getTitle())));
@@ -132,7 +139,8 @@ public class HostedSearchServiceIntegrationExamples {
 		Thread.sleep(1000);
 
 		Page<SearchResult> searchEntries = this.searchService.search(
-				"Somereandomtestcontentthatshouldbeunique", this.pageable, Collections.<String>emptyList()).getPage();
+				"Somereandomtestcontentthatshouldbeunique", this.pageable,
+				Collections.<String> emptyList()).getPage();
 		List<SearchResult> entries = searchEntries.getContent();
 		assertThat(entries, not(empty()));
 		SearchResult entry = entries.get(0);

@@ -62,7 +62,6 @@
 }
 .homepage--body .offset-feature--container {
   border-bottom: 1px solid #dddbda;
-  min-width: 1110px;
 }
 .homepage--body .offset-feature--container .feature--content {
   padding: 90px 0;
@@ -72,11 +71,13 @@
   line-height: 30px;
   font-family: "Montserrat", sans-serif;
   margin-bottom: 20px;
+  color: #34302d;
 }
 .homepage--body .offset-feature--container .offset-feature--text {
   font-size: 18px;
   line-height: 28px;
   margin-bottom: 20px;
+  color: #34302d;
 }
 .homepage--body .offset-feature--container .offset-feature--link {
   color: #5fa134;
@@ -110,28 +111,37 @@
 .homepage--body .offset-feature--container:nth-child(even) {
   background-color: #ebf1e7;
 }
-.homepage--body .support--wrapper {
+.homepage--body .offset-feature--container:hover .offset-feature--link {
+  text-decoration: underline;
+}
+
+.support--wrapper {
   background-color: #292624;
   padding: 50px 0 60px;
 }
-.homepage--body .support--wrapper .support--container {
+.support--wrapper .support--container {
   text-align: center;
 }
-.homepage--body .support--wrapper .support--container .icon {
+.support--wrapper .support--container .icon {
   margin-bottom: 30px;
 }
-.homepage--body .support--wrapper .support--container .support--title {
+.support--wrapper .support--container .support--title {
   font-size: 18px;
   line-height: 18px;
   text-transform: uppercase;
   color: #f1f1f1;
   margin-bottom: 20px;
 }
-.homepage--body .support--wrapper .support--container .support-links a {
+.support--wrapper .support--container .support-links a {
   color: #5fa134;
   padding: 0 20px;
 }
+.support--wrapper.about-page {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
 
 .homepage-fix {
-  margin-top: 2194px;
+  margin-top: 2185px;
 }

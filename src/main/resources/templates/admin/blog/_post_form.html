@@ -5,6 +5,7 @@
 <body>
     <form layout:fragment="post-form">
         <input type="hidden" name="_method" value="PUT" th:if="${edit}" />
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
         <div class="control-group" th:class="'control-group' + (${#fields.hasErrors('title')}? ' error')">
             <label class="control-label" for="title">Title:</label>

@@ -18,14 +18,17 @@
             </div>
             <div class="item--dropdown docs-version--dropdown">
                 <div class="item--header">
-                    <!-- link_to project_path -->
-                    <a th:href="${item.repoUrl}" class="item--header-link item--right-column">
-                        <i class="icon-github"></i>
-                        Repo
-                    </a>
                     <a th:href="${item.siteUrl}" class="item--header-link item--left-column" th:if="${item.hasSite()}">
                         <i class="icon-globe"></i>
                         Site
+                    </a>
+                    <div class="item--header-link item--left-column disabled" th:unless="${item.hasSite()}">
+                        <i class="icon-globe"></i>
+                        Site
+                    </div>
+                    <a th:href="${item.repoUrl}" class="item--header-link item--right-column">
+                        <i class="icon-github"></i>
+                        Repo
                     </a>
                 </div>
                 <div class="item--body">
@@ -42,8 +45,10 @@
                             <div class="item--body--version">
                                 <div class="item--left-column">
                                     <p th:text="${version.versionDisplayName}">1.2.3</p>
-                                    <div th:if="${version.isCurrent()}"class="icon icon-current-version"></div>
                                     <div th:if="${version.isPreRelease()}" class="icon icon-pre-release"></div>
+									<div th:if="${version.isSnapshot()}" class="icon icon-snapshot-release"></div>
+                                    <div th:if="${version.isCurrent()}"class="icon icon-current-version"></div>
+									<div th:if="${version.isGeneralAvailability()}" class="icon icon-ga-release"></div>
                                 </div>
                                 <div class="item--right-column">
                                     <a class="docs-link reference-link" th:href="${version.refDocUrl}" th:if="${version.hasRefDocUrl()}">Reference</a>

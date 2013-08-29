@@ -54,7 +54,7 @@
       })();
   </script>
 </head>
-<body>
+<body onload="checkCookie()">
   <div class="viewport">
     <header class="navbar header--navbar header-web">
       <div class="navbar-inner">
@@ -139,23 +139,89 @@
                   document.write(d.getFullYear());</script> GoPivotal, Inc. All Rights Reserved.
             <a href="http://www.gopivotal.com/terms-of-use">Terms</a>,
             <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>, and
-            <a th:href="@{/logos}" >Usage</a>
-            <div id='authentication' sec:authorize="isFullyAuthenticated()">
-              <span sec:authentication="name">Bob</span>
-              <a th:href="@{/signout}" >Sign out</a>
-            </div>
+            <a th:href="@{/logos}">Usage</a>
+            <span id='authentication' sec:authorize="isFullyAuthenticated()">
+              [<a th:href="@{/signout}">Sign out</a>]
+            </span>
           </div>
           <div class="span4 footer-newsletter--wrapper pull-right">
             <div class="footer-newsletter--container">
-              <form>
-                <label>
-                  Subscribe to our newsletter
-                </label>
-                <div class="footer-subscribe--input--container">
-                  <input class="footer-subscribe--input" placeholder="Email Address (NOT REAL)" />
-                  <input type="submit" class="btn footer-subscibe--btn" value="Subscribe" />
-                </div>
+              <label>
+                Subscribe to our newsletter
+              </label>
+              <form class="lpeRegForm formNotEmpty" method="post" enctype="application/x-www-form-urlencoded" action="http://play.gopivotal.com/index.php/leadCapture/save" id="mktForm_1035" name="mktForm_1035">
+                <ul class="mktLblLeft" style="margin: 0;">
+                  <li class="mktField">
+                    <span class="mktInput">
+                      <input class="mktFormText mktFormEmail" name="Email" id="Email" placeholder="Email Address" type="text" value="" title="Email Address" maxlength="255" tabindex="1" style="font-size: 12px; padding: 10px 0 27px 10px; height:21px; font-family: &quot;Varela Round&quot;, sans-serif; color: #666; font-weight: 400;border-radius: 0;width: 310px;">
+                      <span class="mktFormMsg"></span>
+                    </span>
+                  </li>
+                  <li class="mktField" style="display: none;">
+                    <span class="mktInput">
+                      <input class="mktFormHidden" name="OSS__c" id="OSS__c" type="hidden" value="Yes">
+                      <span class="mktFormMsg"></span>
+                    </span>
+                  </li>
+                  <li class="mktField" style="display: none;">
+                    <span class="mktInput">
+                      <input class="mktFormHidden" name="Primary_Product_Interest__c" id="Primary_Product_Interest__c" type="hidden" value="OSS">
+                      <span class="mktFormMsg"></span>
+                    </span>
+                  </li>
+                  <li class="mktField" style="display: none;">
+                    <span class="mktInput">
+                      <input class="mktFormHidden" name="Original_Lead_Source__c" id="Original_Lead_Source__c" type="hidden" value="Website">
+                      <span class="mktFormMsg"></span>
+                    </span>
+                  </li>
+                  <li class="mktField" style="display: none;">
+                    <span class="mktInput">
+                      <input class="mktFormHidden" name="Original_Lead_Source_Description__c" id="Original_Lead_Source_Description__c" type="hidden" value="OSS_Website_SpringNewsletterSubscription">
+                      <span class="mktFormMsg"></span>
+                    </span>
+                  </li>
+                  <li class="mktField" style="display: none;">
+                    <span class="mktInput">
+                      <input class="mktFormHidden" name="LeadSource" id="LeadSource" type="hidden" value="Website"><span class="mktFormMsg"></span>
+                    </span>
+                  </li>
+                  <li class="mktField" style="display: none;">
+                    <span class="mktInput">
+                      <input class="mktFormHidden" name="Most_Recent_Lead_Source_Description__c" id="Most_Recent_Lead_Source_Description__c" type="hidden" value="OSS_Website_SpringNewsletterSubscription">
+                      <span class="mktFormMsg"></span>
+                    </span>
+                  </li>
+                  <li id="mktFrmButtons">
+                    <input id="mktFrmSubmit" type="submit" value="Subscribe" name="submitButton" onclick="setSubscribeCookie(); formSubmit(document.getElementById(&quot;mktForm_1035&quot;)); return false;">&nbsp;<input style="display: none;" id="mktFrmReset" type="reset" value="Clear" name="resetButton" onclick="formReset(document.getElementById(&quot;mktForm_1035&quot;));">
+                  </li>  
+                </ul>
+                <span style="display:none;">
+                  <input type="text" name="_marketo_comments" value="">
+                </span>
+                <input type="hidden" name="lpId" value="-1">
+                <input type="hidden" name="subId" value="137">
+                <input type="hidden" name="munchkinId" value="625-IUJ-009">
+                <input type="hidden" name="kw" value="">
+                <input type="hidden" name="cr" value="">
+                <input type="hidden" name="searchstr" value="">
+                <input type="hidden" name="lpurl" value="http://play.gopivotal.com/OSS_Website_Spring_SpringNewsletterSubscriptionEmailOnly.html?cr={creative}&amp;kw={keyword}">
+                <input type="hidden" name="formid" value="1035">
+                <input type="hidden" name="returnURL" value="" />
+                <input type="hidden" name="retURL" value="" />
+                <input type="hidden" name="returnLPId" value="-1">
+                <input type="hidden" name="_mkt_disp" value="return">
+                <input type="hidden" name="_mkt_trk" value="">
               </form>
+              <script type="text/javascript" src="http://play.gopivotal.com/js/mktFormSupport.js"></script>
+              <script type="text/javascript">
+              function formSubmit(elt) {
+                return Mkto.formSubmit(elt);
+              }
+              function formReset(elt) {
+                return Mkto.formReset(elt);
+              }
+              </script>
             </div>
           </div>
         </div>
@@ -163,27 +229,6 @@
     </footer>
     <div id="scrim"></div>
   </div>
-  <script type="text/javascript">
-  (function() {
-    var didInit = false;
-    function initMunchkin() {
-      if(didInit === false) {
-        didInit = true;
-        Munchkin.init('625-IUJ-009');
-      }
-    }
-    var s = document.createElement('script');
-    s.type = 'text/javascript';
-    s.async = true;
-    s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
-    s.onreadystatechange = function() {
-      if (this.readyState == 'complete' || this.readyState == 'loaded') {
-        initMunchkin();
-      }
-    };
-    s.onload = initMunchkin;
-    document.getElementsByTagName('head')[0].appendChild(s);
-  })();
-  </script>
+  <script type="text/javascript" th:src="@{/js/marketomunchkin.js}" ></script>
 </body>
 </html>

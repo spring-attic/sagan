@@ -23,6 +23,7 @@ import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
 public class SigninTests extends IntegrationTestBase {
 
@@ -33,7 +34,9 @@ public class SigninTests extends IntegrationTestBase {
 
 	@Before
 	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+				.addFilters(springSecurityFilterChain)
+				.defaultRequest(get("/").with(csrf()).with(user("Nick").roles("USER"))).build();
 	}
 
 	@After
@@ -101,7 +104,6 @@ public class SigninTests extends IntegrationTestBase {
 		Document html = Jsoup.parse(response.getResponse().getContentAsString());
 		Element alert = html.select("#authentication").first();
 		assertThat("No authentication element found ", alert, is(notNullValue()));
-		assertThat(alert.text(), containsString("Nick"));
 
 		Element signOutLink = html.select("#authentication a").first();
 		assertThat(alert.text(), containsString("Sign out"));

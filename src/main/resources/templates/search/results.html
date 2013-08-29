@@ -20,25 +20,35 @@
 				<div class="search-result" th:each="result : ${results}">
 					<a th:href="@{${result.path}}" th:text="${result.title}" class="search-result--title">This week in Spring</a>
 					<div class="metadata">
-						<span class="badge search-result--subtitle" th:text="${result.subTitle}" th:if="${result.subTitle}">Blog Post</span>
+						<div class="search-result--subtitle" th:text="${result.subTitle}" th:if="${result.subTitle}">Blog Post</div>
 					</div>
 					<div th:utext="${result.displayText}" class='search-result--summary'>This has been an interesting week.</div>
 					<div class="search-result--path" th:text="${result.path}">/path/to/result</div>
 			 	</div>
 			</div>
 			<div id='pagination_control' th:if="${paginationInfo.isVisible()}">
-				<a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" href='/search?page=1' class='previous' th:if="${paginationInfo.previousVisible}">Previous</a>
-				<a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" href='/search?page=3' class='next' th:if="${paginationInfo.nextVisible}">Next</a>
+				<a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='previous' th:if="${paginationInfo.previousVisible}">Previous</a>
+
+				<div th:each="element : ${paginationInfo.pageElements }" >
+					<a th:href="@{${beans.uih.path()}(page=${element.pageText},q=${searchForm.q},filters=${searchForm.filters})}" th:text="${element.pageText}" th:if="${element.isActive()}" ></a>
+					<div th:text="${element.pageText}" th:unless="${element.isActive()}" ></div>
+				</div>
+
+				<a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='next' th:if="${paginationInfo.nextVisible}">Next</a>
 			</div>
 		</div>
     <div class="span4">
-      <div class="search-facets">
+      <div class="search-facets content-container--wrapper">
         <form th:action="@{/search(q=${searchForm.q})}" method="POST" th:object="${searchForm}">
-          <input type="submit" value="Update"></input>
+          <header class="content-container--header">
+            <h3 class="header-title">Filter Your Results</h3>
+            <input type="submit" value="Filter" class="btn btn-black compact pull-right on-black uppercase"></input>
+          </header>
           <ul layout:include="search/_facets :: facets" th:with="root=${rootFacet}">
           </ul>
         </form>
       </div>
+      <a href="#" class="facets--clear-filters pull-right">Clear Filters</a>
 	 </div>
   
   </div>
