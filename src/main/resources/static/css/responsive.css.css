@@ -21,8 +21,8 @@
     min-height: 279px;
   }
 
-  .header-web {
-    display: none;
+  .desktop-only {
+    display: none !important;
   }
 
   .mobile-only {
@@ -143,7 +143,7 @@
 
   .body--container {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     transition: all 0.25s;
     -webkit-transition: all 0.25s;
     -moz-transition: all 0.25s;
@@ -158,45 +158,26 @@
     -o-transform: translateX(85%);
   }
 
-  .mobile-sub-nav--wrapper {
-    margin: -10px -20px 0;
-  }
-  .mobile-sub-nav--wrapper .mobile-sub-nav--container {
-    margin: 0;
-  }
-  .mobile-sub-nav--wrapper .mobile-sub-nav--container .blog-category {
-    list-style-type: none;
-    float: left;
-    background-color: #d4d4d4;
-    list-style-type: none;
-    float: left;
-    width: 25%;
-    border-right: 1px solid #bebebe;
-    border-bottom: 1px solid #cbcbcb;
-    box-shadow: 0 1px 4px #d7d7d7;
-    box-sizing: border-box;
-    text-align: center;
-  }
-  .mobile-sub-nav--wrapper .mobile-sub-nav--container .blog-category a {
-    display: block;
-    padding: 6px 0;
-  }
-  .mobile-sub-nav--wrapper .mobile-sub-nav--container .blog-category a .icon {
-    background-color: #34302d;
-    vertical-align: middle;
-  }
-  .mobile-sub-nav--wrapper .mobile-sub-nav--container .blog-category.active {
-    box-shadow: 0 1px 4px #d7d7d7, inset 1px 1px 3px #c6c6c6, inset -1px 1px 3px #c6c6c6;
-  }
-  .mobile-sub-nav--wrapper .mobile-sub-nav--container .blog-category.active .icon {
-    background-color: #6db33f;
-  }
-
   .blog--wrapper {
-    margin-top: 50px;
+    margin-top: 10px;
   }
-  .blog--wrapper .meta-data--container .meta-data--item {
-    margin-bottom: 15px;
+  .blog--wrapper .blog--container {
+    padding-bottom: 0;
+  }
+  .blog--wrapper .blog--container .blog--title {
+    font-size: 21px;
+    line-height: 25px;
+  }
+  .blog--wrapper .blog--container .blog--post {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .blog--wrapper .blog--container.blog-preview {
+    margin: 0 0 20px 0;
+    padding: 0 0 25px 0;
+  }
+  .blog--wrapper .blog--container.blog-preview .meta-data--container .meta-data--item {
+    margin-bottom: 0;
     display: block;
   }
   .blog--wrapper .blog--left-pane {

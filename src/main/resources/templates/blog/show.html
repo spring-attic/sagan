@@ -9,7 +9,6 @@
   <div layout:fragment="header-container"></div>
 
   <div layout:fragment="content" class="container" th:object="${post}">
-    <div layout:include="blog/_mobile-sub-nav :: mobile-sub-nav"></div>
     <div class="row-fluid blog--wrapper">
       <div id="content" class="span8 blog--left-pane" layout:include="blog/_full_post :: full-post" >
       </div>

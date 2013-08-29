@@ -37,15 +37,14 @@ $icon-sprite: url("../img/iconsprite.png");
       min-height: 279px;
     }
   }
-  .header-web {
-    display: none;
+  .desktop-only {
+    display: none !important;
   }
 
   .mobile-only {
     display: block;
   }
   .mobile-navigation--wrapper {
-
     .navigation-drawer--container {
       position: absolute;
       top: 0;
@@ -169,7 +168,7 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   .body--container {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     transition: all 0.25s;
     -webkit-transition: all 0.25s;
     -moz-transition: all 0.25s;
@@ -184,45 +183,26 @@ $icon-sprite: url("../img/iconsprite.png");
     }
   }
 
-  .mobile-sub-nav--wrapper {
-    margin: -10px -20px 0;
-    .mobile-sub-nav--container {
-      margin: 0;
-      .blog-category {
-        list-style-type: none;
-        float: left;
-        background-color: #d4d4d4;
-        list-style-type: none;
-        float: left;
-        width: 25%;
-        border-right: 1px solid darken($off-white, 20%);
-        border-bottom: 1px solid darken($off-white, 15%);
-        box-shadow: 0 1px 4px darken($off-white, 10%);
-        box-sizing: border-box;
-        text-align: center;
-        a {
+  .blog--wrapper {
+    margin-top: 10px;
+    .blog--container {
+      padding-bottom: 0;
+      .blog--title {
+        font-size: 21px;
+        line-height: 25px;
+      }
+      .blog--post {
+        font-size: 14px;
+        line-height: 20px;
+      }
+      &.blog-preview {
+        margin: 0 0 20px 0;
+        padding: 0 0 25px 0;
+        .meta-data--container .meta-data--item {
+          margin-bottom: 0;
           display: block;
-          padding: 6px 0;
-          .icon {
-            background-color: $black-brown;
-            vertical-align: middle;
-          }
-        }
-        &.active {
-          box-shadow: 0 1px 4px darken($off-white, 10%), inset 1px 1px 3px darken($off-white, 17%), inset -1px 1px 3px darken($off-white, 17%);
-          .icon {
-            background-color: $green;
-          }
         }
       }
-    }
-  }
-
-  .blog--wrapper {
-    margin-top: 50px;
-    .meta-data--container .meta-data--item {
-      margin-bottom: 15px;
-      display: block;
     }
     .blog--left-pane {
       width: 100%;
