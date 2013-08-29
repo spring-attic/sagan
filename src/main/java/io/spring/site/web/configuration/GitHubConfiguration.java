@@ -2,9 +2,11 @@ package io.spring.site.web.configuration;
 
 import io.spring.site.domain.services.github.JsonStringConverter;
 import io.spring.site.domain.services.github.MarkdownHtmlConverter;
+
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +25,7 @@ public class GitHubConfiguration {
 	@Value("${GITHUB_CLIENT_SECRET:${github.client.secret:none}}")
 	private String githubClientSecret;
 
-	@Value("${GITHUB_ACCESS_TOKEN:${github.access.token:e7bb889c16a4b02c11e3a017acda1aa2b6f84c24}")
+	@Value("${GITHUB_ACCESS_TOKEN:${github.access.token:5a0e089d267693b45926d7f620d85a2eb6a85da6}}")
 	private String accessToken;
 
 	@Bean
