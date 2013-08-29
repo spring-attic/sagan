@@ -168,24 +168,6 @@
   height: 97px;
   background-position: 272px 282px;
 }
-.icon.blog-icon {
-  width: 20px;
-  height: 20px;
-}
-.icon.blog-icon.icon-all-posts {
-  background-position: 20px 507px;
-}
-.icon.blog-icon.icon-broadcasts {
-  background-position: 20px 480px;
-}
-.icon.blog-icon.icon-engineering {
-  background-position: 20px 448px;
-}
-.icon.blog-icon.icon-releases {
-  background-position: 20px 419px;
-}
-.icon.blog-icon.icon-news-and-events {
-  background-position: 20px 388px;
 .icon.icon-gs-guides {
   width: 73px;
   height: 101px;

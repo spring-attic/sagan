@@ -115,31 +115,31 @@
 }
 .tools--wrapper .tools-feature--container .tools-feature--thumbnail.sts-spring-model-detail {
   background: url("../img/sts-spring-model-detail.png") transparent no-repeat;
-  border: 3px solid #ccc;
+  border: 3px solid #cccccc;
 }
 .tools--wrapper .tools-feature--container .tools-feature--thumbnail.sts-validations-detail {
   background: url("../img/sts-validations-detail.png") transparent no-repeat;
-  border: 3px solid #ccc;
+  border: 3px solid #cccccc;
 }
 .tools--wrapper .tools-feature--container .tools-feature--thumbnail.sts-refactoring-support-detail {
   background: url("../img/sts-refactoring-support-detail.png") transparent no-repeat;
-  border: 3px solid #ccc;
+  border: 3px solid #cccccc;
 }
 .tools--wrapper .tools-feature--container .tools-feature--thumbnail.sts-content-assist-detail {
   background: url("../img/sts-content-assist-detail.png") transparent no-repeat;
-  border: 3px solid #ccc;
+  border: 3px solid #cccccc;
 }
 .tools--wrapper .tools-feature--container .tools-feature--thumbnail.sts-graphical-editors-detail {
   background: url("../img/sts-graphical-editors-detail.png") transparent no-repeat;
-  border: 3px solid #ccc;
+  border: 3px solid #cccccc;
 }
 .tools--wrapper .tools-feature--container .tools-feature--thumbnail.sts-aop-support-detail {
   background: url("../img/sts-aop-support-detail.png") transparent no-repeat;
-  border: 3px solid #ccc;
+  border: 3px solid #cccccc;
 }
 .tools--wrapper .tools-feature--container .tools-feature--thumbnail.sts-tcserver-cloudfoundry-detail {
   background: url("../img/sts-tcserver-cloudfoundry-detail.png") transparent no-repeat;
-  border: 3px solid #ccc;
+  border: 3px solid #cccccc;
 }
 .tools--wrapper .tools-feature--container .tools-feature--thumbnail.placeholder-img {
   background-color: #ccc;
@@ -172,7 +172,7 @@
   background-color: white;
   margin: 0 67px;
   padding: 20px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 .tools--wrapper.testimonial .testimonial--container .quotation--icon {
   width: 30px;
@@ -325,7 +325,7 @@
 }
 
 .eclipse-platform--container {
-  border: 1px solid #34302D;
+  border: 1px solid #34302d;
   margin-bottom: 40px;
 }
 .eclipse-platform--container .eclipse-platform-dropdown-link {
@@ -390,13 +390,13 @@
 
 .tool-archive--table {
   margin-top: 30px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 .tool-archive--table th {
   text-transform: uppercase;
   font-size: 12px;
   line-height: 12px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 .tool-archive--table td:last-child {
   color: #6c635d;
@@ -456,7 +456,7 @@
   text-align: left;
 }
 .tools-right-pane .other-tools--container:first-child {
-  border-bottom: 1px solid #FFF;
+  border-bottom: 1px solid white;
 }
 .tools-right-pane .other-tools--container .other-tools--link {
   color: #5FA134;
