@@ -6,26 +6,40 @@
 	<title>Admin &middot; Blog</title>
 </head>
 <body>
-<h1 layout:fragment="header">Hello <span sec:authentication="name">Bob</span></h1>
-<div layout:fragment="overview">
-	<a th:href="@{'/admin/blog/new'}" href="/admin/blog/new" class="btn btn-primary">Create New Post</a>
-	<form th:action="@{'/admin/sample/posts'}" action="/admin/sample/posts" method="post" class='form-inline' style="display: inline">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <button class="btn btn-primary">Create 8 posts</button>
-    </form>
-	<form th:action="@{'/admin/blog/reindex'}" action="/admin/blog/reindex" method="post" class='form-inline' style="display: inline">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <button class="btn btn-primary">Reindex all published posts</button>
-    </form>
-    <form th:action="@{'/admin/blog/resummarize'}" action="/admin/blog/resummarize" method="post" class='form-inline' style="display: inline">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <button class="btn btn-primary">Resummarize all posts</button>
-    </form>
-</div>
+  <div layout:fragment="header-container"></div>
+  <div layout:fragment="content" class="container">
+    <div class="admin-index--title back-btn">
+      <p>
+        <a th:href="@{/admin}">
+          <i class="icon-chevron-left"></i>
+          Back
+        </a>
+      </p>
+    </div>
+    <div class="admin-index--title">
+      <div class="content--title search-title">
+        Admin: Blog
+      </div>
+    </div>
 
-<div layout:fragment="content" class="container">
+  <div class="admin-index--title">
+  	<a th:href="@{'/admin/blog/new'}" href="/admin/blog/new" class="btn">Create New Post</a>
+  	<form th:action="@{'/admin/sample/posts'}" action="/admin/sample/posts" method="post" class='form-inline' style="display: inline">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+          <button class="btn">Create 8 posts</button>
+      </form>
+  	<form th:action="@{'/admin/blog/reindex'}" action="/admin/blog/reindex" method="post" class='form-inline' style="display: inline">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+          <button class="btn">Reindex all published posts</button>
+      </form>
+      <form th:action="@{'/admin/blog/resummarize'}" action="/admin/blog/resummarize" method="post" class='form-inline' style="display: inline">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+          <button class="btn">Resummarize all posts</button>
+      </form>
+  </div>
+
 	<div class="row">
-		<div id="content" class="span8">
+		<div id="content" class="span12">
 			<h2>Drafts</h2>
 			<table class='table dashboard--posts'>
 				<tr th:each="post : ${drafts}" layout:fragment="post-row">

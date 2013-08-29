@@ -33,6 +33,9 @@ p {
 p a {
   color: #5fa134;
 }
+p a:hover {
+  color: #5fa134;
+}
 
 code {
   font-size: 14px;

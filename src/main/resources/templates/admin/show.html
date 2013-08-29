@@ -6,15 +6,30 @@
     <title>Admin</title>
 </head>
 <body>
-<h1 layout:fragment="header">Hello <span sec:authentication="name">Bob</span></h1>
-<div layout:fragment="overview">
-</div>
-
-<div layout:fragment="content" class="container">
-    <ul>
-        <li><a th:href="@{/admin/team}">Manage team members</a></li>
-        <li><a th:href="@{/admin/blog}">Manage blog posts</a></li>
-    </ul>
-</div>
+  <div layout:fragment="header-container"></div>
+  <div layout:fragment="content" class="container">
+    <h1 class="admin-index--title">
+      <span>Welcome</span>
+      <span sec:authentication="name">Bob</span>
+    </h1>
+    <div class="row-fluid">
+      <div class="span6">
+        <a th:href="@{/admin/team}" class="admin-index--link">
+          <div class="icon--container">
+            <div class="icon about-icon team"></div>
+          </div>
+          <p>Manage Team Members</p>
+        </a>
+      </div>
+      <div class="span6">
+        <a th:href="@{/admin/blog}" class="admin-index--link">
+          <div class="icon--container">
+            <i class="icon-comments"></i>
+          </div>
+          <p>Manage Blog Posts</p>
+        </a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

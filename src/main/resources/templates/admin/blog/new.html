@@ -5,9 +5,22 @@
     <title>Add New Post</title>
 </head>
 <body>
-<div layout:fragment="content" class="container">
-    <form layout:include="admin/blog/_post_form :: post-form" th:action="@{/admin/blog}" method="post" th:object="${postForm}">
-    </form>
+  <div layout:fragment="header-container"></div>
+  <div layout:fragment="content" class="container">
+    <div class="admin-index--title back-btn">
+      <p>
+        <a th:href="@{/admin/blog}">
+          <i class="icon-chevron-left"></i>
+          Back
+        </a>
+      </p>
+    </div>
+    <div class="admin-index--title">
+      <div class="content--title search-title">
+        New Blog Post
+      </div>
+    </div>
+  <form layout:include="admin/blog/_post_form :: post-form" th:action="@{/admin/blog}" method="post" th:object="${postForm}"></form>
 </div>
 </body>
 </html>
