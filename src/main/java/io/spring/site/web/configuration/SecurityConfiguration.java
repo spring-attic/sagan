@@ -97,7 +97,8 @@ public class SecurityConfiguration {
 
 		private boolean isForceHttps() {
 			return !this.environment.acceptsProfiles(this.environment
-					.getDefaultProfiles());
+					.getDefaultProfiles())
+					&& !this.environment.acceptsProfiles("acceptance");
 		}
 
 		@Bean
