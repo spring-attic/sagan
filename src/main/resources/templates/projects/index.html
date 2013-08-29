@@ -108,6 +108,13 @@
         <div class="project--title">Spring Web Services</div>
         <p class="project--description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue...</p>
       </a>
+      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-ldap')}">
+        <div class="project-logo--container">
+          <div class="icon project--logo logo-spring-ldap"></div>
+        </div>
+        <div class="project--title">Spring LDAP</div>
+        <p class="project--description">Spring LDAP makes it easier to build Spring-powered applications that use LDAP.</p>
+      </a>
     </div>
     <div class="projects--wrapper project-aggregator top-separator">
       <a href="#" class="project--container project--container--link">
