@@ -36,14 +36,6 @@ public class PaginationInfo {
 		return this.currentPage - 1;
 	}
 
-	public long getCurrentPage() {
-		return this.currentPage;
-	}
-
-	public long getTotalPages() {
-		return this.totalPages;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
