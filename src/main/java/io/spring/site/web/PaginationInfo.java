@@ -2,6 +2,8 @@ package io.spring.site.web;
 
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 /**
  * Used in views for rendering pagination controls Page numbers are not zero indexed
  */
@@ -65,4 +67,9 @@ public class PaginationInfo {
 		result = 31 * result + (int) (this.totalPages ^ (this.totalPages >>> 32));
 		return result;
 	}
+
+	public List<PageElement> getPageElements() {
+		return new PageElementsBuilder(currentPage, totalPages).build();
+	}
+
 }
