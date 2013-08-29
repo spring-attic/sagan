@@ -48,6 +48,13 @@
         <div class="project--title">Spring Batch</div>
         <p class="project--description">A lightweight, comprehensive framework designed to simplify and optimize the work of processing high volume batch...</p>
       </a>
+      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-boot')}">
+        <div class="project-logo--container">
+          <div class="icon project--logo logo-spring-batch"></div>
+        </div>
+        <div class="project--title">Spring Boot</div>
+        <p class="project--description">An opinionated view of Spring and a way to get started writing and running applications as fast as possible.</p>
+      </a>
       <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-integration')}">
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-integration"></div>
