@@ -82,10 +82,10 @@ public class ToolsServiceTests {
 				equalTo("http://download.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32.zip"));
 
 		assertThat(toolSuite.getArchives().size(), equalTo(4));
-		assertThat(toolSuite.getArchives().get(0).getVersion(), equalTo("4.3"));
-		assertThat(toolSuite.getArchives().get(1).getVersion(), equalTo("4.2.2"));
-		assertThat(toolSuite.getArchives().get(2).getVersion(), equalTo("3.8.2"));
-		assertThat(toolSuite.getArchives().get(3).getVersion(), equalTo("3.7.2"));
+		assertThat(toolSuite.getArchives().get(0).getVersion(), equalTo("4.3.x"));
+		assertThat(toolSuite.getArchives().get(1).getVersion(), equalTo("4.2.2.x"));
+		assertThat(toolSuite.getArchives().get(2).getVersion(), equalTo("3.8.2.x"));
+		assertThat(toolSuite.getArchives().get(3).getVersion(), equalTo("3.7.2.x"));
 	}
 
 	@Test
@@ -122,9 +122,9 @@ public class ToolsServiceTests {
 				equalTo("http://download.springsource.com/release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32.zip"));
 
 		assertThat(toolSuite.getArchives().size(), equalTo(4));
-		assertThat(toolSuite.getArchives().get(0).getVersion(), equalTo("4.3"));
-		assertThat(toolSuite.getArchives().get(1).getVersion(), equalTo("4.2.2"));
-		assertThat(toolSuite.getArchives().get(2).getVersion(), equalTo("3.8.2"));
-		assertThat(toolSuite.getArchives().get(3).getVersion(), equalTo("3.7.2"));
+		assertThat(toolSuite.getArchives().get(0).getVersion(), equalTo("4.3.x"));
+		assertThat(toolSuite.getArchives().get(1).getVersion(), equalTo("4.2.2.x"));
+		assertThat(toolSuite.getArchives().get(2).getVersion(), equalTo("3.8.2.x"));
+		assertThat(toolSuite.getArchives().get(3).getVersion(), equalTo("3.7.2.x"));
 	}
 }
