@@ -1128,3 +1128,37 @@ form.lpeRegForm .mktInput {
   margin-bottom: 0;
   border-bottom: none;
 }
+
+.admin-login--wrapper {
+  min-height: 650px;
+  text-align: center;
+}
+.admin-login--wrapper .alert, .admin-login--wrapper .admin-login--container {
+  text-align: left;
+}
+.admin-login--wrapper .admin-login--container {
+  background-color: white;
+  padding: 50px;
+  display: inline-block;
+  border-bottom: 1px solid #cccccc;
+  box-shadow: 0 0 3px #cccccc;
+  margin-top: 100px;
+}
+.admin-login--wrapper .admin-login--container .admin-login--title {
+  font-size: 24px;
+  line-height: 24px;
+  margin-bottom: 40px;
+}
+.admin-login--wrapper .admin-login--container form {
+  margin: 0;
+  text-align: center;
+}
+.admin-login--wrapper .admin-login--container form button {
+  font-size: 20px;
+  font-family: "Varela Round", sans-serif;
+}
+.admin-login--wrapper .admin-login--container form button i {
+  font-size: 30px;
+  float: left;
+  margin: -10px 15px -10px 0;
+}
