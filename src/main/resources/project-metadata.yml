@@ -41,10 +41,10 @@ projects:
         - 1.2.0.RELEASE
 
     # ----------------------
-    # Spring Android
+    # Spring for Android
     # ----------------------
     - id: spring-android
-      name: Spring Android
+      name: Spring for Android
       lead: rclarkson
       supportedVersions:
         - 1.0.1.RELEASE
