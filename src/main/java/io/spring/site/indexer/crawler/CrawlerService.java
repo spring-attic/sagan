@@ -1,5 +1,20 @@
 package io.spring.site.indexer.crawler;
 
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Executors;
+
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
+
 import com.soulgalore.crawler.core.CrawlerConfiguration;
 import com.soulgalore.crawler.core.HTMLPageResponse;
 import com.soulgalore.crawler.core.PageURL;
@@ -7,41 +22,27 @@ import com.soulgalore.crawler.core.PageURLParser;
 import com.soulgalore.crawler.core.impl.AhrefPageURLParser;
 import com.soulgalore.crawler.core.impl.DefaultCrawler;
 import com.soulgalore.crawler.core.impl.HTTPClientResponseFetcher;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.PoolingClientConnectionManager;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.Executors;
 
 @Component
 public class CrawlerService {
 
 	private HttpClient httpClient() {
-		PoolingClientConnectionManager connectionManager = new PoolingClientConnectionManager();
+		PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
 		connectionManager.setMaxTotal(1);
-		HttpClient client = new DefaultHttpClient(connectionManager);
-
-		client.getParams().setParameter("http.socket.timeout", 3000);
-		client.getParams().setParameter("http.connection.timeout", 30000);
-
-		return client;
+		return HttpClientBuilder
+				.create()
+				.setConnectionManager(connectionManager)
+				.setDefaultRequestConfig(
+						RequestConfig.custom().setConnectTimeout(30000)
+								.setSocketTimeout(3000).build()).build();
 	}
 
 	public void crawl(String url, int linkDepth, DocumentProcessor processor) {
 		CrawlerConfiguration apiConfig = new CrawlerConfiguration.Builder()
 				.setStartUrl(url).setMaxLevels(linkDepth).build();
-		DefaultCrawler crawler = new DefaultCrawler(
-				new ResponseFetcher(processor),
-				Executors.newFixedThreadPool(10),
-				new CompositeURLParser(new FramePageURLParser(), new AhrefPageURLParser()));
+		DefaultCrawler crawler = new DefaultCrawler(new ResponseFetcher(processor),
+				Executors.newFixedThreadPool(10), new CompositeURLParser(
+						new FramePageURLParser(), new AhrefPageURLParser()));
 		crawler.getUrls(apiConfig);
 		crawler.shutdown();
 	}

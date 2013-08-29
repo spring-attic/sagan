@@ -7,7 +7,6 @@ import io.spring.site.domain.tools.toolsuite.Architecture;
 import io.spring.site.domain.tools.toolsuite.EclipseVersion;
 import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import io.spring.site.domain.tools.toolsuite.ToolSuitePlatform;
-import io.spring.site.domain.tools.toolsuite.parser.ToolXmlConverter;
 import io.spring.site.domain.tools.toolsuite.xml.Download;
 import io.spring.site.domain.tools.toolsuite.xml.Release;
 import io.spring.site.domain.tools.toolsuite.xml.ToolSuiteXml;
@@ -47,7 +46,7 @@ public class ToolXmlConverter_SingleDownloadTests {
 		toolSuiteXml.setReleases(releases);
 
 		toolXmlConverter = new ToolXmlConverter();
-		toolSuite = toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite");
+		toolSuite = toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite", "STS");
 	}
 
 	@Test
@@ -57,20 +56,20 @@ public class ToolXmlConverter_SingleDownloadTests {
 
 	@Test
 	public void addsAPlatform() throws Exception {
-		assertThat(toolSuite.getPlatforms().size(), equalTo(1));
-		assertThat(toolSuite.getPlatforms().get("mac").getName(), equalTo("Mac"));
+		assertThat(toolSuite.getPlatformList().size(), equalTo(3));
+		assertThat(toolSuite.getPlatformList().get(1).getName(), equalTo("Mac"));
 	}
 
 	@Test
 	public void addsAnEclipseVersionToThePlatform() throws Exception {
-		ToolSuitePlatform platform = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform platform = toolSuite.getPlatformList().get(1);
 		assertThat(platform.getEclipseVersions().size(), equalTo(1));
 		assertThat(platform.getEclipseVersions().get(0).getName(), equalTo("4.3"));
 	}
 
 	@Test
 	public void addsAnArchitectureToTheEclipseVersion() throws Exception {
-		ToolSuitePlatform platform = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform platform = toolSuite.getPlatformList().get(1);
 		EclipseVersion eclipseVersion = platform.getEclipseVersions().get(0);
 		assertThat(eclipseVersion.getArchitectures().size(), equalTo(1));
 		assertThat(eclipseVersion.getArchitectures().get(0).getName(), equalTo("Mac OS X (Cocoa)"));
@@ -78,7 +77,7 @@ public class ToolXmlConverter_SingleDownloadTests {
 
 	@Test
 	public void addsADownloadLinkTheArchitecture() throws Exception {
-		ToolSuitePlatform platform = toolSuite.getPlatforms().get("mac");
+		ToolSuitePlatform platform = toolSuite.getPlatformList().get(1);
 		EclipseVersion eclipseVersion = platform.getEclipseVersions().get(0);
 		Architecture architecture = eclipseVersion.getArchitectures().get(0);
 

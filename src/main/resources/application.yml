@@ -40,7 +40,7 @@ elasticsearch:
 ---
 
 spring:
-  profiles: site
+  profiles: site,default
   main:
     sources: io.spring.site.web.configuration.ApplicationConfiguration
 
@@ -68,6 +68,17 @@ elasticsearch:
     index: sagan-development
 cache:
   timetolive: 0
+
+---
+
+spring:
+  profiles: performance
+search:
+  indexer:
+    base_url: https://sagan-performance.cfapps.io
+elasticsearch:
+  client:
+    index: sagan-performance
 
 ---
 

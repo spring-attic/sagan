@@ -27,16 +27,26 @@ public class ToolsService {
 		this.serializer = serializer;
 	}
 
-	public ToolSuiteDownloads getStsDownloads() throws Exception {
-		String responseXml = cachedRestClient.get(restTemplate, "http://download.springsource.com/release/STS/index-new.xml", String.class);
-		ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
-		return toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite");
+	public ToolSuiteDownloads getStsGaDownloads() throws Exception {
+		return getToolSuiteDownloads("Spring Tool Suite", "STS");
 	}
 
-	public ToolSuiteDownloads getGgtsDownloads() throws Exception {
+	public ToolSuiteDownloads getStsMilestoneDownloads() throws Exception {
+		return getToolSuiteDownloads("Milestone Version - Spring Tool Suite", "STS");
+	}
+
+	public ToolSuiteDownloads getGgtsGaDownloads() throws Exception {
+		return getToolSuiteDownloads("Groovy/Grails Tool Suite", "GGTS");
+	}
+
+	public ToolSuiteDownloads getGgtsMilestoneDownloads() throws Exception {
+		return getToolSuiteDownloads("Milestone Version - Groovy/Grails Tool Suite", "GGTS");
+	}
+
+	private ToolSuiteDownloads getToolSuiteDownloads(String toolSuiteName, String shortName) throws Exception {
 		String responseXml = cachedRestClient.get(restTemplate, "http://download.springsource.com/release/STS/index-new.xml", String.class);
 		ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
-		return toolXmlConverter.convert(toolSuiteXml, "Groovy/Grails Tool Suite");
+		return toolXmlConverter.convert(toolSuiteXml, toolSuiteName, shortName);
 	}
 
 	public EclipseDownloads getEclipseDownloads() throws Exception {

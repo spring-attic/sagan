@@ -2,6 +2,11 @@ package io.spring.site.web.configuration;
 
 import io.spring.site.domain.services.github.JsonStringConverter;
 import io.spring.site.domain.services.github.MarkdownHtmlConverter;
+
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,10 +15,6 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.impl.GitHubTemplate;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
-
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
 
 @Configuration
 public class GitHubConfiguration {
@@ -29,14 +30,15 @@ public class GitHubConfiguration {
 
 	@Bean
 	public GitHubConnectionFactory gitHubConnectionFactory() {
-		GitHubConnectionFactory factory = new GitHubConnectionFactory(githubClientId, githubClientSecret);
+		GitHubConnectionFactory factory = new GitHubConnectionFactory(
+				this.githubClientId, this.githubClientSecret);
 		factory.setScope("user");
 		return factory;
 	}
 
 	@Bean
 	public GitHub gitHubTemplate() {
-		return new GuideGitHubTemplate(accessToken);
+		return new GuideGitHubTemplate(this.accessToken);
 	}
 
 	private static class GuideGitHubTemplate extends GitHubTemplate {

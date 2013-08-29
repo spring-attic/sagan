@@ -48,6 +48,13 @@
         <div class="project--title">Spring Batch</div>
         <p class="project--description">A lightweight, comprehensive framework designed to simplify and optimize the work of processing high volume batch...</p>
       </a>
+      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-boot')}">
+        <div class="project-logo--container">
+          <div class="icon project--logo logo-spring-boot"></div>
+        </div>
+        <div class="project--title">Spring Boot</div>
+        <p class="project--description">An opinionated view of Spring and a way to get started writing and running applications as fast as possible.</p>
+      </a>
       <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-integration')}">
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-integration"></div>
@@ -107,6 +114,13 @@
         </div>
         <div class="project--title">Spring Web Services</div>
         <p class="project--description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue...</p>
+      </a>
+      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-ldap')}">
+        <div class="project-logo--container">
+          <div class="icon project--logo logo-spring-ldap"></div>
+        </div>
+        <div class="project--title">Spring LDAP</div>
+        <p class="project--description">Spring LDAP makes it easier to build Spring-powered applications that use LDAP.</p>
       </a>
     </div>
     <div class="projects--wrapper project-aggregator top-separator">

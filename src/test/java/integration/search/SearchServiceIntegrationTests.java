@@ -13,18 +13,14 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import utils.SetSystemProperty;
 
-import static junit.framework.Assert.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
@@ -48,7 +44,8 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
 
 	@Before
 	public void setUp() throws Exception {
-		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient, index);
+		SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient,
+				this.index);
 		searchIndexSetup.deleteIndex();
 		searchIndexSetup.createIndex();
 	}
@@ -385,6 +382,5 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
 						Collections.<String> emptyList()).getPage().getContent();
 		assertThat(results.size(), equalTo(4));
 	}
-
 
 }
