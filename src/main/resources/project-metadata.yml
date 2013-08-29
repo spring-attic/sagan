@@ -505,10 +505,12 @@ projects:
     # ----------------------
     - id: spring-scala
       name: Spring Scala
-      refDocUrl: /spring-scala/docs/{version}/reference/html
-      apiDocUrl: /spring-scala/docs/{version}/api/
+      lead: apoutsma
+      siteUrl: NONE
+      refDocUrl: NONE
+      apiDocUrl: NONE
       supportedVersions:
-        - 9.9.9.RELEASE
+        - 1.0.0.RC1
 
     # ----------------------
     # Spring Security
