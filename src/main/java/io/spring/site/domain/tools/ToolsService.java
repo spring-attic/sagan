@@ -44,7 +44,7 @@ public class ToolsService {
 	}
 
 	private ToolSuiteDownloads getToolSuiteDownloads(String toolSuiteName, String shortName) throws Exception {
-		String responseXml = cachedRestClient.get(restTemplate, "http://download.springsource.com/release/STS/index-new.xml", String.class);
+		String responseXml = cachedRestClient.get(restTemplate, "http://dist.springsource.com/release/STS/index-v3.xml", String.class);
 		ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
 		return toolXmlConverter.convert(toolSuiteXml, toolSuiteName, shortName);
 	}

@@ -5,7 +5,6 @@ import io.spring.site.test.FixtureLoader;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
@@ -74,7 +73,6 @@ public class ToolsPagesTests extends IntegrationTestBase {
 		assertThat(document.select(".ga--release .item--dropdown a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
 	}
 
-	@Ignore("waiting for live data to be updated")
 	@Test
 	 public void showsAllStsMilestoneDownloads() throws Exception {
 		MvcResult mvcResult = this.mockMvc.perform(get("/tools/sts/all"))
@@ -108,7 +106,6 @@ public class ToolsPagesTests extends IntegrationTestBase {
 		assertThat(document.select(".ga--release .item--dropdown a").attr("href"), containsString("release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
 	}
 
-	@Ignore("waiting for live data to be updated")
 	@Test
 	public void showsAllGgtsMilestoneDownloads() throws Exception {
 		MvcResult mvcResult = this.mockMvc.perform(get("/tools/ggts/all"))

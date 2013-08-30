@@ -132,7 +132,7 @@ public class CachingStrategyTests {
 		String stsDownloads = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
 		given(
 				this.restTemplate.getForObject(
-						"http://download.springsource.com/release/STS/index-new.xml",
+						"http://dist.springsource.com/release/STS/index-v3.xml",
 						String.class)).willReturn(stsDownloads);
 
 		this.mockMvc.perform(get("/tools")).andExpect(status().isOk());
