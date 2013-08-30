@@ -207,9 +207,12 @@ $icon-sprite: url("../img/iconsprite.png");
       &.blog-preview {
         margin: 0 0 20px 0;
         padding: 0 0 25px 0;
-        .meta-data--container .meta-data--item {
-          margin-bottom: 0;
-          display: block;
+        .meta-data--container {
+          margin: 0;
+          .meta-data--item {
+            margin-bottom: 0;
+            display: block;
+          }
         }
       }
     }
@@ -232,7 +235,17 @@ $icon-sprite: url("../img/iconsprite.png");
 
 @media (max-width: 600px) {
 
-
+  .blog--container {
+    .meta-data--container .meta-data--item  {
+      margin-bottom: 10px !important;
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+    &.blog-preview .meta-data--container .meta-data--item {
+      margin-bottom: 0 !important; 
+    }
+  }
   .content-container--wrapper {
     .content-container--header {
       padding: 9px 12px;
