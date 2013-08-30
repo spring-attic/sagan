@@ -42,7 +42,7 @@ public class BlogIndexTests extends IntegrationTestBase {
 
 		assertThat(document.select(".secondary-nav .blog-category.active").text(), equalTo("All Posts"));
 
-		assertThat(document.select(".content--title.blog-category.active").text(), equalTo("All Posts"));
+		assertThat(document.select(".content--title.blog-category.active").text(), equalTo("The Spring Blog"));
 
 		assertThat(
 				document.head()

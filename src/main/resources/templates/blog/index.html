@@ -10,7 +10,7 @@
 	<div layout:fragment="header-container"></div>
 	<div layout:fragment="content" class="container">
 		<div th:class="${beans.uih.blogClass(activeCategory?:'','All Posts') + ' content--title'}">
-			All Posts
+			The Spring Blog
 		</div>
 		<div th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
       <div th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}">Engineering</div>
