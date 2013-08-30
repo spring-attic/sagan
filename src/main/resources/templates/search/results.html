@@ -26,7 +26,7 @@
 					<div class="search-result--path" th:text="${result.path}">/path/to/result</div>
 			 	</div>
 			</div>
-			<div id='pagination_control' th:if="${paginationInfo.isVisible()}">
+			<div id='pagination_control' class="pagination" th:if="${paginationInfo.isVisible()}">
 				<a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
 
 				<div th:each="element : ${paginationInfo.pageElements }" >

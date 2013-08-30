@@ -18,8 +18,15 @@ $icon-sprite: url("../img/iconsprite.png");
 
 
 //SEARCH RESULT STYLES
-.search-result {
-  margin-bottom: 35px;
+.search-results {
+  padding-bottom: 40px;
+  border-bottom: 1px solid #CCC;
+  .search-result {
+    margin-bottom: 35px;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
 }
 
 .search-result--title {
