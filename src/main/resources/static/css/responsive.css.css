@@ -29,6 +29,15 @@
     display: block;
   }
 
+  .index-page--title {
+    line-height: 32px;
+    margin-bottom: 10px;
+  }
+
+  .index-page--subtitle {
+    margin-bottom: 30px;
+  }
+
   .mobile-navigation--wrapper .navigation-drawer--container {
     position: absolute;
     top: 0;
@@ -142,7 +151,7 @@
   }
 
   .body--container {
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 30px;
     transition: all 0.25s;
     -webkit-transition: all 0.25s;
@@ -158,9 +167,6 @@
     -o-transform: translateX(85%);
   }
 
-  .blog--wrapper {
-    margin-top: 10px;
-  }
   .blog--wrapper .blog--container {
     padding-bottom: 0;
   }
@@ -187,7 +193,50 @@
     display: none;
   }
 
+  .guides-section--container {
+    margin-top: 40px;
+  }
+
   footer {
     display: none;
+  }
+}
+@media (max-width: 600px) {
+  .content-container--wrapper .content-container--header {
+    padding: 9px 12px;
+  }
+  .content-container--wrapper .content-container--header .content-container--filter {
+    margin: 0;
+    padding: 4px 1%;
+    width: 98%;
+    display: block;
+  }
+  .content-container--wrapper .content-container--body .content-section-title--container {
+    margin: 0 0 20px;
+  }
+  .content-container--wrapper .content-container--body .content-section-title--container .icon {
+    display: none !important;
+  }
+  .content-container--wrapper .content-container--body .content-section-title--container .content-section-title, .content-container--wrapper .content-container--body .content-section-title--container .content-section-sub-title {
+    padding: 0;
+  }
+  .content-container--wrapper .content-container--body .content-section-title--container .content-section-title {
+    margin-bottom: 10px;
+    font-size: 19px;
+    line-height: 23px;
+  }
+  .content-container--wrapper .content-container--body .content-section-title--container .content-section-sub-title {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .guides-section--container {
+    margin-top: 0;
+  }
+  .guides-section--container .guide--container {
+    display: block;
+    margin: 0;
+    width: auto;
+    margin-bottom: 20px;
   }
 }
