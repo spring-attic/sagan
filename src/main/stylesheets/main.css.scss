@@ -564,6 +564,11 @@ input.floating-input {
   a {
     color: $link-green;
   }
+  &.jobs-subtitle {
+    margin-bottom: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid #ccc;
+  }
 }
 
 //FOOTER
