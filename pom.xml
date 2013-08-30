@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-github</artifactId>
-            <version>1.0.0.BUILD-SNAPSHOT</version>
+            <version>1.0.0.M4</version>
         </dependency>
         <dependency>
             <groupId>org.thymeleaf</groupId>
@@ -291,19 +291,19 @@
 
     <repositories>
         <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>http://repo.springsource.org/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
             <url>http://repo.springsource.org/milestone</url>
             <snapshots>
                 <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-staging-local</id>
+            <name>Spring Milestones</name>
+            <url>http://repo.springsource.org/libs-staging-local</url>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
         <repository>
@@ -313,14 +313,6 @@
         </repository>
     </repositories>
     <pluginRepositories>
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>http://repo.springsource.org/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
         <pluginRepository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
