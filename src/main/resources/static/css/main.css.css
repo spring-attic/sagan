@@ -492,6 +492,12 @@ input.floating-input:focus {
   margin-top: -30px;
   font-family: "Montserrat", sans-serif;
 }
+.content--title a {
+  color: #34302d;
+}
+.content--title a:hover {
+  color: #5fa134;
+}
 .content--title.search-title {
   position: relative;
 }

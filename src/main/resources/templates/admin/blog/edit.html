@@ -7,17 +7,9 @@
 <body>
 <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container">
-    <div class="admin-index--title back-btn">
-      <p>
-        <a th:href="@{/admin/blog}">
-          <i class="icon-chevron-left"></i>
-          Back
-        </a>
-      </p>
-    </div>
     <div class="admin-index--title">
       <div class="content--title search-title">
-        Edit Blog Post
+        <a th:href="@{/admin}">Admin</a> : <a th:href="@{/admin/blog}">Blog</a>: Edit Post
       </div>
     </div>
     <p th:if="${githubBroken}">Github failed to generate markdown</p>

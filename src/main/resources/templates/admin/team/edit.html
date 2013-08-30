@@ -9,17 +9,9 @@
   <body>
     <div layout:fragment="header-container"></div>
     <div layout:fragment="content" class="container">
-      <div class="admin-index--title back-btn">
-        <p>
-          <a th:href="@{/admin/team}">
-            <i class="icon-chevron-left"></i>
-            Back
-          </a>
-        </p>
-      </div>
       <div class="admin-index--title">
         <div class="content--title search-title">
-          Edit Profile
+          <a th:href="@{/admin}">Admin</a> : <a th:href="@{/admin/team}">Team</a> : Edit Profile
         </div>
       </div>
       <form th:action="@{${formAction}}" action="#" method="post" th:object="${profile}" class="admin-profile--form">

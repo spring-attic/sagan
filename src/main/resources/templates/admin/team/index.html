@@ -8,17 +8,9 @@
 <body>
     <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container">
-    <div class="admin-index--title back-btn">
-      <p>
-        <a th:href="@{/admin}">
-          <i class="icon-chevron-left"></i>
-          Back
-        </a>
-      </p>
-    </div>
     <div class="admin-index--title">
       <div class="content--title search-title">
-        Manage Team Members
+        <a th:href="@{/admin}">Admin</a> : Team
       </div>
     </div>
     <form th:action="@{'/admin/team/github_import'}" method="post" class='form-inline admin-index--title'>

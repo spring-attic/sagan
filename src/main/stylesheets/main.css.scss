@@ -541,6 +541,12 @@ input.floating-input {
   position: absolute;
   margin-top: -30px;
   font-family: $secondary-font-family;
+  a {
+    color: $black-brown;
+    &:hover {
+      color: $link-green;
+    }
+  }
   &.search-title {
     position: relative;
   }
