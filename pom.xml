@@ -294,17 +294,6 @@
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
             <url>http://repo.springsource.org/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-staging-local</id>
-            <name>Spring Milestones</name>
-            <url>http://repo.springsource.org/libs-staging-local</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
         </repository>
         <repository>
             <id>sonatype</id>
@@ -317,9 +306,6 @@
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
             <url>http://repo.springsource.org/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
         </pluginRepository>
     </pluginRepositories>
 
