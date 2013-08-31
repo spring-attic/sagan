@@ -35,6 +35,7 @@ projects:
     # ----------------------
     - id: spring-amqp
       name: Spring AMQP
+      groupId: org.springframework.amqp
       lead: grussell
       supportedVersions:
         - 1.1.4.RELEASE
@@ -54,6 +55,7 @@ projects:
     # ----------------------
     - id: spring-batch
       name: Spring Batch
+      groupId: org.springframework.batch
       lead: mminella
       supportedVersions:
         - name: 3.0.0.M1
@@ -204,6 +206,7 @@ projects:
     # ----------------------
     - id: spring-integration
       name: Spring Integration
+      groupId: org.springframework.integration
       lead: grussell
       supportedVersions:
         - 3.0.0.M2
