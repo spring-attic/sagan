@@ -169,6 +169,16 @@ public class RewriteTests {
 		validateTemporaryRedirect("http://www.springsource.com/products/eclipse-downloads", "http://springframework.io/tools/eclipse");
 	}
 
+	@Test
+	public void adminSignoutIsRedirectedToHome() throws Exception {
+		validateTemporaryRedirect("http://springframework.io/signout", "/");
+	}
+
+	@Test
+	public void legacyLinkedInPathIsRedirected() throws Exception {
+		validateTemporaryRedirect("http://www.springsource.org/linkedin", "http://www.linkedin.com/groups/Spring-Users-46964?gid=46964");
+	}
+
 	private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
 		validateRedirect(requestedUrl, redirectedUrl, 302);
 	}

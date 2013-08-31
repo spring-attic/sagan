@@ -145,4 +145,10 @@
         <from>^/signout$</from>
         <to type="temporary-redirect" last="true">/</to>
     </rule>
+    <rule>
+        <name>LinkedIn</name>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/linkedin$</from>
+        <to type="temporary-redirect" last="true">http://www.linkedin.com/groups/Spring-Users-46964?gid=46964</to>
+    </rule>
 </urlrewrite>
