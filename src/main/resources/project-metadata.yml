@@ -248,6 +248,7 @@ projects:
     - id: spring-security
       name: Spring Security
       lead: rwinch
+      groupId: org.springframework.security
       supportedVersions:
         - name: 3.1.4.RELEASE
           refDocUrl: /spring-security/site/docs/{version}/reference/springsecurity.html
@@ -262,6 +263,7 @@ projects:
     - id: spring-security-oauth
       name: Spring Security OAuth
       lead: dsyer
+      groupId: org.springframework.security
       supportedVersions:
         - name: 1.0.5.RELEASE
           refDocUrl: http://springsource.github.io/spring-security-oauth
@@ -531,6 +533,7 @@ projects:
       siteUrl: "{docsBaseUrl}/spring-security/site/extensions/krb/"
       refDocUrl: /spring-security-kerberos/docs/{version}/reference/html
       apiDocUrl: /spring-security-kerberos/docs/{version}/api/
+      groupId: org.springframework.security
       supportedVersions:
         - 1.0.0.CI-SNAPSHOT # TODO: this should be BUILD-SNAPSHOT
 
@@ -540,12 +543,14 @@ projects:
       name: Spring Security Portlet
       lead: rwinch # ltaylor was last committer
       siteUrl: NONE
+      groupId: org.springframework.security
 
     # No GA releases yet, thus marked as an incubator project
     - id: spring-security-saml
       name: Spring Security SAML
       lead: vschafer
       siteUrl: "{docsBaseUrl}/spring-security/site/extensions/saml/"
+      groupId: org.springframework.security
       supportedVersions:
         - name: 1.0.0.RC2
           refDocUrl: /spring-security-saml/docs/1.0.x/reference/html/
@@ -568,6 +573,7 @@ projects:
       lead: cwalls
       refDocUrl: /spring-social-linkedin/docs/{version}/reference/html
       apiDocUrl: /spring-social-linkedin/docs/{version}/api/
+      groupId: org.springframework.social
       supportedVersions:
         - 1.0.0.RC3
 
