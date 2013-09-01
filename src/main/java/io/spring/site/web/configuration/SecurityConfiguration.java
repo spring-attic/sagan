@@ -28,9 +28,8 @@ import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
 
 @Configuration
-@ComponentScan(basePackages = { "io.spring.site.domain.team",
-        "io.spring.site.web.security", "io.spring.site.domain.services",
-        "io.spring.site.domain.blog" })
+@ComponentScan({ "io.spring.site.domain.team", "io.spring.site.web.security",
+        "io.spring.site.domain.services", "io.spring.site.domain.blog" })
 public class SecurityConfiguration {
 
     static final String SIGNIN_SUCCESS_PATH = "/signin/success";

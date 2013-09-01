@@ -54,11 +54,9 @@ import java.util.concurrent.TimeUnit;
 
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan(basePackages = {"io.spring.site.web", "io.spring.site.domain", "io.spring.site.search"})
+@ComponentScan({ "io.spring.site.web", "io.spring.site.domain", "io.spring.site.search" })
 @EnableCaching
 public class ApplicationConfiguration {
-
-
 
     public static void main(String[] args) {
         SpringApplication.run(ApplicationConfiguration.class, args);
