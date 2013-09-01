@@ -1,8 +1,0 @@
-source "http://rubygems.org"
-
-gem "nokogiri"
-gem "rspec"
-gem "pg"
-gem "pry"
-gem 'httparty'
-gem 'htmlentities'
