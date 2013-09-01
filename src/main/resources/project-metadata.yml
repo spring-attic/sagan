@@ -229,6 +229,7 @@ projects:
     - id: spring-mobile
       name: Spring Mobile
       lead: rclarkson
+      groupId: org.springframework.mobile
       supportedVersions:
         - 1.0.2.RELEASE
         - 1.1.0.RC1
