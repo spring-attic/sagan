@@ -38,8 +38,10 @@ projects:
       groupId: org.springframework.amqp
       lead: grussell
       supportedVersions:
-        - 1.1.4.RELEASE
+        - 1.2.1.BUILD-SNAPSHOT
         - 1.2.0.RELEASE
+        - 1.1.5.BUILD-SNAPSHOT
+        - 1.1.4.RELEASE
 
     # ----------------------
     # Spring for Android
@@ -49,6 +51,7 @@ projects:
       lead: rclarkson
       groupId: org.springframework.android
       supportedVersions:
+        - 1.0.2.BUILD-SNAPSHOT
         - 1.0.1.RELEASE
 
     # ----------------------
@@ -166,9 +169,11 @@ projects:
       refDocUrl: /spring/docs/{version}/spring-framework-reference/html/
       apiDocUrl: /spring/docs/{version}/javadoc-api/
       supportedVersions:
-        - 3.1.4.RELEASE
-        - 3.2.4.RELEASE
+        - 4.0.0.BUILD-SNAPSHOT
         - 4.0.0.M2
+        - 3.2.5.BUILD-SNAPSHOT
+        - 3.2.4.RELEASE
+        - 3.1.4.RELEASE
 
     # ----------------------
     # Spring GemFire
