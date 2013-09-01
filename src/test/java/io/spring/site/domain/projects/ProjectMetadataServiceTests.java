@@ -42,7 +42,7 @@ public class ProjectMetadataServiceTests {
 		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
 		ProjectMetadataService metadataService = new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
 
-		assertEquals(3, metadataService.getProject("spring-framework")
+		assertEquals(5, metadataService.getProject("spring-framework")
 				.getProjectReleases().size());
 	}
 

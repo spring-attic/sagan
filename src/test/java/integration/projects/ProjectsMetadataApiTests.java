@@ -6,6 +6,8 @@ import org.springframework.boot.config.JacksonJsonParser;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.hamcrest.CoreMatchers.*;
+
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -73,20 +75,20 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
 	private void checkCurrentRelease(List<Object> releases) {
 		@SuppressWarnings("unchecked")
 		Map<String, Object> release = (Map<String, Object>) releases.get(1);
-		assertThat((String) release.get("version"), equalTo("3.2.4.RELEASE"));
+		assertThat((String) release.get("version"), equalTo("4.0.0.BUILD-SNAPSHOT"));
 		assertThat(
 				(String) release.get("refDocUrl"),
-				equalTo("http://docs.springframework.io/spring/docs/3.2.4.RELEASE/spring-framework-reference/html/"));
+				equalTo("http://docs.springframework.io/spring/docs/4.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/"));
 		assertThat(
 				(String) release.get("apiDocUrl"),
-				equalTo("http://docs.springframework.io/spring/docs/3.2.4.RELEASE/javadoc-api/"));
+				equalTo("http://docs.springframework.io/spring/docs/4.0.0.BUILD-SNAPSHOT/javadoc-api/"));
 		assertThat((Boolean) release.get("preRelease"), equalTo(false));
-		assertThat((Boolean) release.get("current"), equalTo(true));
-		assertThat((Boolean) release.get("generalAvailability"), equalTo(true));
-		assertThat((Boolean) release.get("snapshot"), equalTo(false));
+		assertThat((Boolean) release.get("current"), equalTo(false));
+		assertThat((Boolean) release.get("generalAvailability"), equalTo(false));
+		assertThat((Boolean) release.get("snapshot"), equalTo(true));
 
 		Map<String, Object> repository = getRepository(release);
-		assertThat(repository, nullValue());
+		assertThat(repository, notNullValue());
 	}
 
 
