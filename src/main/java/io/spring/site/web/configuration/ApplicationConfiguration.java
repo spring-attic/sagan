@@ -142,7 +142,7 @@ public class ApplicationConfiguration {
     public SpringLiquibase springLiquibase(DataSource dataSource) {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource);
-        liquibase.setChangeLog("classpath:db-changeset.yaml");
+        liquibase.setChangeLog("classpath:liquibase/changeset.yaml");
         return liquibase;
     }
 
