@@ -28,12 +28,12 @@ sleep 1
 echo "\nInstall the settings, requires closing the index first."
 curl -XPOST "$ENDPOINT/$INDEX/_close"
 sleep 1
-curl -XPUT "$ENDPOINT/$INDEX/_settings" -d @../src/main/resources/config/elasticsearch/settings.json
+curl -XPUT "$ENDPOINT/$INDEX/_settings" -d @../src/main/resources/elasticsearch/settings.json
 sleep 1
 echo "\nInstall the mapping - do once per type/mapping file."
-curl -XPOST "$ENDPOINT/$INDEX/site/_mapping" -d @../src/main/resources/config/elasticsearch/mappings/site.json
+curl -XPOST "$ENDPOINT/$INDEX/site/_mapping" -d @../src/main/resources/elasticsearch/mappings/site.json
 sleep 1
-curl -XPOST "$ENDPOINT/$INDEX/apiDoc/_mapping" -d @../src/main/resources/config/elasticsearch/mappings/apiDoc.json
+curl -XPOST "$ENDPOINT/$INDEX/apiDoc/_mapping" -d @../src/main/resources/elasticsearch/mappings/apiDoc.json
 sleep 1
 curl -XPOST "$ENDPOINT/$INDEX/_open"
 sleep 1

@@ -51,7 +51,7 @@ public class SearchIndexSetup {
     public void createMappings() {
         try {
 
-            File mappingsDir = new ClassPathResource("/config/elasticsearch/mappings", getClass()).getFile();
+            File mappingsDir = new ClassPathResource("/elasticsearch/mappings", getClass()).getFile();
             for (final File fileEntry : mappingsDir.listFiles()) {
                 String filenameBase = fileEntry.getName().replaceAll("\\.json$", "");
                 String mappingJson = StreamUtils.copyToString(new FileInputStream(fileEntry), Charset.forName("UTF-8"));
@@ -66,7 +66,7 @@ public class SearchIndexSetup {
     public Map<String, String> loadSettings() {
         Map<String, String> settings = new HashMap<>();
         try {
-            InputStream settingsStream = new ClassPathResource("/config/elasticsearch/settings.json", getClass()).getInputStream();
+            InputStream settingsStream = new ClassPathResource("/elasticsearch/settings.json", getClass()).getInputStream();
             JsonParser jsonParser = new JsonParser();
             JsonElement root = jsonParser.parse(new InputStreamReader(settingsStream, Charset.forName("UTF-8")));
 
