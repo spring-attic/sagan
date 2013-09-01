@@ -23,7 +23,7 @@
           </div>
           <div class="billboard--sub-title--container">
             <div class="billboard--sub-title">
-              The Spring team is wherever you are building tools and services that get you coding faster. Love us? 
+              The Spring team is wherever you are building tools and services that get you coding faster. Love us?
             </div>
             <div class="billboard--sub-title">
               Check out our jobs or click to learn more about us.
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div id="map" class="billboard-bg"></div>
-    </div> 
+    </div>
     <div class="team-members--wrapper">
       <div class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
         <a th:href="@{'/team/' + ${profile.username}}" class="team-member--avatar">

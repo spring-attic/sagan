@@ -18,9 +18,9 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
  * {@link Authentication} from the {@link SecurityContext} if there is one. This
  * is useful when authentication actually happened in a controller, rather than
  * in the filter chain itself.
- * 
+ *
  * @author Dave Syer
- * 
+ *
  */
 public class SecurityContextAuthenticationFilter extends
         AbstractAuthenticationProcessingFilter {

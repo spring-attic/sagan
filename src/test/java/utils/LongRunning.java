@@ -22,7 +22,7 @@ import org.junit.runners.model.Statement;
 
 /**
  * @author Dave Syer
- * 
+ *
  */
 public class LongRunning implements TestRule {
 

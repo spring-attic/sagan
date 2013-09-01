@@ -21,7 +21,7 @@ public class Project {
         this.siteUrl = siteUrl;
         this.releaseList = releaseList;
     }
-    
+
     public String getName() {
         return name;
     }

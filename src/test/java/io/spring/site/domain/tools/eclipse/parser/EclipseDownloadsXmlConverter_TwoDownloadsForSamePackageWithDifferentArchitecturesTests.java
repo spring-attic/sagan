@@ -90,7 +90,7 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForSamePackageWithDifferen
         List<DownloadLink> win64DownloadLinks = windowsPackages.get(0).getArchitectures().get(1).getDownloadLinks();
 
         assertThat(win64DownloadLinks.size(), equalTo(1));
-        
+
         assertThat(win64DownloadLinks.get(0).getOs(), equalTo("windows"));
         assertThat(win64DownloadLinks.get(0).getArchitecture(), equalTo("64"));
         assertThat(win64DownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win64-x86_64.zip"));

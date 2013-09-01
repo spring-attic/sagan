@@ -53,7 +53,7 @@ public class SearchFacetTreeBuilderTests {
     public void hasNestedFacetName() {
         assertThat(facets.get(0).getFacets().get(0).getName(), equalTo("GettingStarted"));
     }
-    
+
     @Test
     public void hasNestedFacetCount() {
         assertThat(facets.get(0).getFacets().get(0).getCount(), equalTo(1));

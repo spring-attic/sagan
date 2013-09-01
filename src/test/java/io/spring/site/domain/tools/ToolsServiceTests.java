@@ -98,7 +98,7 @@ public class ToolsServiceTests {
 
         ToolSuitePlatform windows = platforms.get(0);
         ToolSuitePlatform mac = platforms.get(1);
-        
+
         assertThat(windows.getName(), equalTo("Windows"));
         assertThat(mac.getName(), equalTo("Mac"));
         assertThat(platforms.get(2).getName(), equalTo("Linux"));
