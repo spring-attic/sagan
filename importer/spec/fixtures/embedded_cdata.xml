@@ -7,13 +7,13 @@
      xmlns:wp="http://wordpress.org/export/1.1/"
         >
 <channel>
-	<item>
-		<content:encoded><![CDATA[Author Page
-		Has some <![CDATA[stuff
-		in a CDATA block
-		]]>
+    <item>
+        <content:encoded><![CDATA[Author Page
+        Has some <![CDATA[stuff
+        in a CDATA block
+        ]]>
 
-		]]></content:encoded>
+        ]]></content:encoded>
     </item>
 </channel>
 </rss>

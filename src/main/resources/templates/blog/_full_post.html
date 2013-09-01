@@ -18,7 +18,7 @@
           <div class="meta-data--item">
             <img class="meta-data--icon" th:src="@{${post.author.avatarUrl} + '?s=20&amp;d=mm'}" />
             <a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.username}}" th:unless="${post.author.hidden}">Author</a>
-		        <span class='author' th:text="${post.author.name}" th:if="${post.author.hidden}">Author</span>
+                <span class='author' th:text="${post.author.name}" th:if="${post.author.hidden}">Author</span>
           </div>
           <div class="meta-data--item">
             <div class="meta-data--icon icon blog-icon calendar"></div>

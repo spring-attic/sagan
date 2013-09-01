@@ -20,18 +20,18 @@
         
       </div class="facet--wrapper">
 
-		<ul th:if="${facet.hasHeaderFacets()}" class="facet-section--header">
-			<li th:each="headerFacet : ${facet.headerFacets}" >
-				<div class="facet--wrapper">
+        <ul th:if="${facet.hasHeaderFacets()}" class="facet-section--header">
+            <li th:each="headerFacet : ${facet.headerFacets}" >
+                <div class="facet--wrapper">
           <label class="checkbox-pill">
             <span th:text="${headerFacet.name}">Facet</span>
             <span class="checkbox-pill--checkbox">
               <input type="checkbox" name="filters" th:value="${headerFacet.fullPath}" th:field="*{filters}" />
             </span>              
           </label>
-				</div class="facet--wrapper">
-			</li>
-		</ul>
+                </div class="facet--wrapper">
+            </li>
+        </ul>
 
     <ul th:if="${facet.hasFacets()}" layout:include="search/_facets :: facets" th:with="root=${facet}" class="sub-facet--list"></ul>
     

@@ -7,10 +7,10 @@
      xmlns:wp="http://wordpress.org/export/1.1/"
         >
 <channel>
-	<item>
-		<content:encoded><![CDATA[
+    <item>
+        <content:encoded><![CDATA[
                 Has some extended characters:  簡體字
-		]]></content:encoded>
+        ]]></content:encoded>
     </item>
 </channel>
 </rss>

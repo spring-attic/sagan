@@ -1,9 +1,9 @@
 <html   
   xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-	layout:decorator="layout">
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="layout">
   <head>
-  	<title>Spring Tool Suite&trade; (STS)</title>
+    <title>Spring Tool Suite&trade; (STS)</title>
   </head>
   <body>
     <div layout:fragment="header-container"></div>
@@ -20,22 +20,22 @@
         <div class="span4">
           <div class="right-pane-widget--container tools-right-pane">
             <div class="tools-logo sts-logo"></div>
-				      <ul class='download-links'>
-				        <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${downloadLinks}">
-				          <a class="download-btn btn btn-black uppercase sub-text" th:href="${downloadLink.url}">
-				          	Download STS
-				            <p th:text="'(' + ${version} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
-				          </a>
-				        </li>
-				      </ul>
-				      <a href="all.html" th:href="@{/tools/sts/all}" class="all-versions">See All Versions</a>
+                      <ul class='download-links'>
+                        <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${downloadLinks}">
+                          <a class="download-btn btn btn-black uppercase sub-text" th:href="${downloadLink.url}">
+                            Download STS
+                            <p th:text="'(' + ${version} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
+                          </a>
+                        </li>
+                      </ul>
+                      <a href="all.html" th:href="@{/tools/sts/all}" class="all-versions">See All Versions</a>
             </div>
           </div>
         </div>
         <div class="tools--wrapper">
           <h2>Feature Highlights</h2>
         </div>
-	      <div class="row-fluid tools--wrapper tools-feature--wrapper">
+          <div class="row-fluid tools--wrapper tools-feature--wrapper">
           <div class="tools-feature--container">
             <div class="tools-feature--thumbnail sts-spring-model-detail"></div>
             <h3>Understands your Spring App</h3>
@@ -104,7 +104,7 @@
             </ul>
           </div>
         </div>
-	      
+          
 
 
         
@@ -116,10 +116,10 @@
         
         
         
-	      <!-- <div class="row-fluid tools--wrapper screenshot">
-	      	<div class="screenshot sts-screenshot"></div>
-	      	<p>Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. See other tools.</p>
-	      </div> -->
+          <!-- <div class="row-fluid tools--wrapper screenshot">
+            <div class="screenshot sts-screenshot"></div>
+            <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. See other tools.</p>
+          </div> -->
       </div>
     </div>
   </body>

@@ -7,12 +7,12 @@
      xmlns:wp="http://wordpress.org/export/1.1/"
         >
 <channel>
-	<item>
-		<content:encoded><![CDATA[
+    <item>
+        <content:encoded><![CDATA[
             Has some invalid characters (invisible but they are there)
             Ctrl-K:
             Ctrl-C:
-		]]></content:encoded>
+        ]]></content:encoded>
     </item>
 </channel>
 </rss>

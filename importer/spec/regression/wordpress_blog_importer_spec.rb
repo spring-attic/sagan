@@ -42,8 +42,8 @@ One thing to note ...
 ```xml
 
 <bean id="listenerContainer"
-	class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-	<property name="concurrentConsumers" value="5" />
+    class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="concurrentConsumers" value="5" />
 </bean>
 ```
 

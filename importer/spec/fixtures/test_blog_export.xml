@@ -18,262 +18,262 @@
 
 <!-- generator="WordPress/3.1.1" created="2013-07-03 16:51" -->
 <rss version="2.0"
-	xmlns:excerpt="http://wordpress.org/export/1.1/excerpt/"
-	xmlns:content="http://purl.org/rss/1.0/modules/content/"
-	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:wp="http://wordpress.org/export/1.1/"
+    xmlns:excerpt="http://wordpress.org/export/1.1/excerpt/"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:wp="http://wordpress.org/export/1.1/"
 >
 
 <channel>
-	<title>SpringSource Team Blog</title>
-	<link>http://blog.springsource.org</link>
-	<description>The voice of SpringSource</description>
-	<pubDate>Wed, 03 Jul 2013 16:51:17 +0000</pubDate>
-	<language>en</language>
-	<wp:wxr_version>1.1</wp:wxr_version>
-	<wp:base_site_url>http://blog.springsource.org</wp:base_site_url>
-	<wp:base_blog_url>http://blog.springsource.org</wp:base_blog_url>
+    <title>SpringSource Team Blog</title>
+    <link>http://blog.springsource.org</link>
+    <description>The voice of SpringSource</description>
+    <pubDate>Wed, 03 Jul 2013 16:51:17 +0000</pubDate>
+    <language>en</language>
+    <wp:wxr_version>1.1</wp:wxr_version>
+    <wp:base_site_url>http://blog.springsource.org</wp:base_site_url>
+    <wp:base_blog_url>http://blog.springsource.org</wp:base_blog_url>
 
-	<wp:author><wp:author_id>1</wp:author_id><wp:author_login>sample</wp:author_login><wp:author_email>sample@springsource.com</wp:author_email><wp:author_display_name><![CDATA[Mr Sample]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Sample]]></wp:author_last_name></wp:author>
-	<wp:author><wp:author_id>3</wp:author_id><wp:author_login>test</wp:author_login><wp:author_email>test@vmware.com</wp:author_email><wp:author_display_name><![CDATA[Mr Test]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Test]]></wp:author_last_name></wp:author>
-	<wp:author><wp:author_id>5</wp:author_id><wp:author_login>Full Name</wp:author_login><wp:author_email>dude@vmware.com</wp:author_email><wp:author_display_name><![CDATA[Mr Dude]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Dude]]></wp:author_last_name></wp:author>
+    <wp:author><wp:author_id>1</wp:author_id><wp:author_login>sample</wp:author_login><wp:author_email>sample@springsource.com</wp:author_email><wp:author_display_name><![CDATA[Mr Sample]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Sample]]></wp:author_last_name></wp:author>
+    <wp:author><wp:author_id>3</wp:author_id><wp:author_login>test</wp:author_login><wp:author_email>test@vmware.com</wp:author_email><wp:author_display_name><![CDATA[Mr Test]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Test]]></wp:author_last_name></wp:author>
+    <wp:author><wp:author_id>5</wp:author_id><wp:author_login>Full Name</wp:author_login><wp:author_email>dude@vmware.com</wp:author_email><wp:author_display_name><![CDATA[Mr Dude]]></wp:author_display_name><wp:author_first_name><![CDATA[Mr]]></wp:author_first_name><wp:author_last_name><![CDATA[Dude]]></wp:author_last_name></wp:author>
 
-	<wp:category><wp:term_id>78</wp:term_id><wp:category_nicename>amqp</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[AMQP]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>95</wp:term_id><wp:category_nicename>android</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Android]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>5</wp:term_id><wp:category_nicename>aop</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[AOP]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>45</wp:term_id><wp:category_nicename>apache-httpd</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Apache httpd]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>42</wp:term_id><wp:category_nicename>apache-tomcat</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Apache Tomcat]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>118</wp:term_id><wp:category_nicename>big-data</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Big Data]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>11</wp:term_id><wp:category_nicename>books</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Books]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>19</wp:term_id><wp:category_nicename>builds</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Builds]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>54</wp:term_id><wp:category_nicename>bundlor</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Bundlor]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>24</wp:term_id><wp:category_nicename>business</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Business]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>48</wp:term_id><wp:category_nicename>cloud-computing</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Cloud Computing]]></wp:cat_name><wp:category_description><![CDATA[Cloud management, monitoring and development]]></wp:category_description></wp:category>
-	<wp:category><wp:term_id>13</wp:term_id><wp:category_nicename>containers</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Containers]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>9</wp:term_id><wp:category_nicename>data-access</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Data Access]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>27</wp:term_id><wp:category_nicename>application-platform</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[dm Server]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>68</wp:term_id><wp:category_nicename>enterprise-integration</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Enterprise Integration]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>93</wp:term_id><wp:category_nicename>green-beans</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Green Beans]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>34</wp:term_id><wp:category_nicename>groovy-grails</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Groovy/Grails]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>119</wp:term_id><wp:category_nicename>hadoop</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Hadoop]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>12</wp:term_id><wp:category_nicename>ioc-container</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[IOC Container]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>15</wp:term_id><wp:category_nicename>java</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Java]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>7</wp:term_id><wp:category_nicename>jms</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[JMS]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>6</wp:term_id><wp:category_nicename>jmx</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[JMX]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>21</wp:term_id><wp:category_nicename>jsf</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[JSF]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>65</wp:term_id><wp:category_nicename>management-tools</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Management Tools]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>23</wp:term_id><wp:category_nicename>open-source</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Open Source]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>17</wp:term_id><wp:category_nicename>osgi</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[OSGi]]></wp:cat_name><wp:category_description><![CDATA[OSGi related content]]></wp:category_description></wp:category>
-	<wp:category><wp:term_id>63</wp:term_id><wp:category_nicename>roo</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Roo]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>109</wp:term_id><wp:category_nicename>scala</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Scala]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>14</wp:term_id><wp:category_nicename>security</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Security]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>49</wp:term_id><wp:category_nicename>slices</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Slices]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>3</wp:term_id><wp:category_nicename>spring</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>71</wp:term_id><wp:category_nicename>spring-batch</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring Batch]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>104</wp:term_id><wp:category_nicename>spring-data</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring Data]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>4</wp:term_id><wp:category_nicename>spring-events</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring Events]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>69</wp:term_id><wp:category_nicename>spring-integration</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring Integration]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>74</wp:term_id><wp:category_nicename>spring-python</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring Python]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>2</wp:term_id><wp:category_nicename>springsource</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[SpringSource]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>46</wp:term_id><wp:category_nicename>tc-server</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[tc Server]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>16</wp:term_id><wp:category_nicename>testing</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Testing]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>41</wp:term_id><wp:category_nicename>tools</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Tools]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>26</wp:term_id><wp:category_nicename>training-certification</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Training/Certification]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>1</wp:term_id><wp:category_nicename>uncategorized</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Uncategorized]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>72</wp:term_id><wp:category_nicename>vmware-springsource</wp:category_nicename><wp:category_parent>springsource</wp:category_parent><wp:cat_name><![CDATA[VMware]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>25</wp:term_id><wp:category_nicename>web</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Web]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>20</wp:term_id><wp:category_nicename>web-flow</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Web Flow]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>18</wp:term_id><wp:category_nicename>web-services</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Web Services]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>8</wp:term_id><wp:category_nicename>20</wp:category_nicename><wp:category_parent>spring</wp:category_parent><wp:cat_name><![CDATA[2.0]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>22</wp:term_id><wp:category_nicename>25-21</wp:category_nicename><wp:category_parent>spring</wp:category_parent><wp:cat_name><![CDATA[2.5/2.1]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>35</wp:term_id><wp:category_nicename>30</wp:category_nicename><wp:category_parent>spring</wp:category_parent><wp:cat_name><![CDATA[3.0]]></wp:cat_name><wp:category_description><![CDATA[News and information about Spring 3.0]]></wp:category_description></wp:category>
-	<wp:category><wp:term_id>97</wp:term_id><wp:category_nicename>31</wp:category_nicename><wp:category_parent>spring</wp:category_parent><wp:cat_name><![CDATA[3.1]]></wp:cat_name><wp:category_description><![CDATA[News and information about Spring 3.1]]></wp:category_description></wp:category>
-	<wp:category><wp:term_id>61</wp:term_id><wp:category_nicename>cloud-foundry</wp:category_nicename><wp:category_parent>vmware-springsource</wp:category_parent><wp:cat_name><![CDATA[Cloud Foundry]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>73</wp:term_id><wp:category_nicename>google-springsource</wp:category_nicename><wp:category_parent>springsource</wp:category_parent><wp:cat_name><![CDATA[Google]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>66</wp:term_id><wp:category_nicename>hyperic-hq</wp:category_nicename><wp:category_parent>management-tools</wp:category_parent><wp:cat_name><![CDATA[Hyperic HQ]]></wp:cat_name></wp:category>
-	<wp:category><wp:term_id>67</wp:term_id><wp:category_nicename>hyperic-iq</wp:category_nicename><wp:category_parent>management-tools</wp:category_parent><wp:cat_name><![CDATA[Hyperic IQ]]></wp:cat_name></wp:category>
-	<wp:tag><wp:term_id>47</wp:term_id><wp:tag_slug>add-new-tag</wp:tag_slug><wp:tag_name><![CDATA[Add new tag]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>78</wp:term_id><wp:tag_slug>amqp</wp:tag_slug><wp:tag_name><![CDATA[AMQP]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>95</wp:term_id><wp:tag_slug>android</wp:tag_slug><wp:tag_name><![CDATA[Android]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>42</wp:term_id><wp:tag_slug>apache-tomcat</wp:tag_slug><wp:tag_name><![CDATA[Apache Tomcat]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>44</wp:term_id><wp:tag_slug>appengine</wp:tag_slug><wp:tag_name><![CDATA[appengine]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>60</wp:term_id><wp:tag_slug>batch</wp:tag_slug><wp:tag_name><![CDATA[Batch]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>102</wp:term_id><wp:tag_slug>binding-patterns</wp:tag_slug><wp:tag_name><![CDATA[Binding Patterns]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>83</wp:term_id><wp:tag_slug>blazeds</wp:tag_slug><wp:tag_name><![CDATA[BlazeDS]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>55</wp:term_id><wp:tag_slug>cloud</wp:tag_slug><wp:tag_name><![CDATA[cloud]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>61</wp:term_id><wp:tag_slug>cloud-foundry</wp:tag_slug><wp:tag_name><![CDATA[Cloud Foundry]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>92</wp:term_id><wp:tag_slug>community</wp:tag_slug><wp:tag_name><![CDATA[Community]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>57</wp:term_id><wp:tag_slug>computing</wp:tag_slug><wp:tag_name><![CDATA[computing]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>114</wp:term_id><wp:tag_slug>cujo-js</wp:tag_slug><wp:tag_name><![CDATA[cujo.js]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>117</wp:term_id><wp:tag_slug>curl-js</wp:tag_slug><wp:tag_name><![CDATA[curl.js]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>112</wp:term_id><wp:tag_slug>data-access-2</wp:tag_slug><wp:tag_name><![CDATA[data access]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>101</wp:term_id><wp:tag_slug>decoupling</wp:tag_slug><wp:tag_name><![CDATA[Decoupling]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>58</wp:term_id><wp:tag_slug>deployment</wp:tag_slug><wp:tag_name><![CDATA[deployment]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>30</wp:term_id><wp:tag_slug>dm-server</wp:tag_slug><wp:tag_name><![CDATA[dm server]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>31</wp:term_id><wp:tag_slug>dmserver</wp:tag_slug><wp:tag_name><![CDATA[dmServer]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>33</wp:term_id><wp:tag_slug>dmsever</wp:tag_slug><wp:tag_name><![CDATA[dmSever]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>39</wp:term_id><wp:tag_slug>dynamic-language</wp:tag_slug><wp:tag_name><![CDATA[dynamic language]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>56</wp:term_id><wp:tag_slug>ec2</wp:tag_slug><wp:tag_name><![CDATA[ec2]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>80</wp:term_id><wp:tag_slug>eclipse</wp:tag_slug><wp:tag_name><![CDATA[Eclipse]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>68</wp:term_id><wp:tag_slug>enterprise-integration</wp:tag_slug><wp:tag_name><![CDATA[Enterprise Integration]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>100</wp:term_id><wp:tag_slug>erlang</wp:tag_slug><wp:tag_name><![CDATA[Erlang]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>87</wp:term_id><wp:tag_slug>esx</wp:tag_slug><wp:tag_name><![CDATA[ESX]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>82</wp:term_id><wp:tag_slug>flex</wp:tag_slug><wp:tag_name><![CDATA[Flex]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>59</wp:term_id><wp:tag_slug>foundry</wp:tag_slug><wp:tag_name><![CDATA[foundry]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>89</wp:term_id><wp:tag_slug>gemini</wp:tag_slug><wp:tag_name><![CDATA[Gemini]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>91</wp:term_id><wp:tag_slug>git</wp:tag_slug><wp:tag_name><![CDATA[Git]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>43</wp:term_id><wp:tag_slug>google</wp:tag_slug><wp:tag_name><![CDATA[google]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>64</wp:term_id><wp:tag_slug>grails</wp:tag_slug><wp:tag_name><![CDATA[Grails]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>107</wp:term_id><wp:tag_slug>graph-database</wp:tag_slug><wp:tag_name><![CDATA[Graph Database]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>94</wp:term_id><wp:tag_slug>green-beans-2</wp:tag_slug><wp:tag_name><![CDATA[green beans]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>37</wp:term_id><wp:tag_slug>groovy</wp:tag_slug><wp:tag_name><![CDATA[groovy]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>32</wp:term_id><wp:tag_slug>gwt</wp:tag_slug><wp:tag_name><![CDATA[GWT]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>53</wp:term_id><wp:tag_slug>hyperic</wp:tag_slug><wp:tag_name><![CDATA[hyperic]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>115</wp:term_id><wp:tag_slug>ioc</wp:tag_slug><wp:tag_name><![CDATA[ioc]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>15</wp:term_id><wp:tag_slug>java</wp:tag_slug><wp:tag_name><![CDATA[Java]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>111</wp:term_id><wp:tag_slug>javascript</wp:tag_slug><wp:tag_name><![CDATA[JavaScript]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>50</wp:term_id><wp:tag_slug>kerberos</wp:tag_slug><wp:tag_name><![CDATA[Kerberos]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>110</wp:term_id><wp:tag_slug>maven</wp:tag_slug><wp:tag_name><![CDATA[maven]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>98</wp:term_id><wp:tag_slug>messaging</wp:tag_slug><wp:tag_name><![CDATA[Messaging]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>96</wp:term_id><wp:tag_slug>mobile</wp:tag_slug><wp:tag_name><![CDATA[Mobile]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>86</wp:term_id><wp:tag_slug>monitoring</wp:tag_slug><wp:tag_name><![CDATA[monitoring]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>106</wp:term_id><wp:tag_slug>neo4j</wp:tag_slug><wp:tag_name><![CDATA[Neo4j]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>105</wp:term_id><wp:tag_slug>nosql</wp:tag_slug><wp:tag_name><![CDATA[NOSQL]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>17</wp:term_id><wp:tag_slug>osgi</wp:tag_slug><wp:tag_name><![CDATA[OSGi]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>76</wp:term_id><wp:tag_slug>performance</wp:tag_slug><wp:tag_name><![CDATA[performance]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>88</wp:term_id><wp:tag_slug>python</wp:tag_slug><wp:tag_name><![CDATA[python]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>79</wp:term_id><wp:tag_slug>rabbitmq</wp:tag_slug><wp:tag_name><![CDATA[RabbitMQ]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>38</wp:term_id><wp:tag_slug>release</wp:tag_slug><wp:tag_name><![CDATA[release]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>40</wp:term_id><wp:tag_slug>rest-mvc</wp:tag_slug><wp:tag_name><![CDATA[REST MVC]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>63</wp:term_id><wp:tag_slug>roo</wp:tag_slug><wp:tag_name><![CDATA[Roo]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>103</wp:term_id><wp:tag_slug>routing-topologies</wp:tag_slug><wp:tag_name><![CDATA[Routing Topologies]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>113</wp:term_id><wp:tag_slug>s2js</wp:tag_slug><wp:tag_name><![CDATA[s2js]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>109</wp:term_id><wp:tag_slug>scala</wp:tag_slug><wp:tag_name><![CDATA[Scala]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>99</wp:term_id><wp:tag_slug>scalability</wp:tag_slug><wp:tag_name><![CDATA[Scalability]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>14</wp:term_id><wp:tag_slug>security</wp:tag_slug><wp:tag_name><![CDATA[Security]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>75</wp:term_id><wp:tag_slug>speed-tracer</wp:tag_slug><wp:tag_name><![CDATA[speed tracer]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>51</wp:term_id><wp:tag_slug>spnego</wp:tag_slug><wp:tag_name><![CDATA[SPNEGO]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>3</wp:term_id><wp:tag_slug>spring</wp:tag_slug><wp:tag_name><![CDATA[Spring]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>108</wp:term_id><wp:tag_slug>spring-3-1</wp:tag_slug><wp:tag_name><![CDATA[spring 3.1]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>90</wp:term_id><wp:tag_slug>spring-amqp</wp:tag_slug><wp:tag_name><![CDATA[Spring AMQP]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>71</wp:term_id><wp:tag_slug>spring-batch</wp:tag_slug><wp:tag_name><![CDATA[Spring Batch]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>104</wp:term_id><wp:tag_slug>spring-data</wp:tag_slug><wp:tag_name><![CDATA[Spring Data]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>77</wp:term_id><wp:tag_slug>spring-insight</wp:tag_slug><wp:tag_name><![CDATA[spring insight]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>69</wp:term_id><wp:tag_slug>spring-integration</wp:tag_slug><wp:tag_name><![CDATA[Spring Integration]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>74</wp:term_id><wp:tag_slug>spring-python</wp:tag_slug><wp:tag_name><![CDATA[Spring Python]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>81</wp:term_id><wp:tag_slug>spring-roo</wp:tag_slug><wp:tag_name><![CDATA[Spring Roo]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>2</wp:term_id><wp:tag_slug>springsource</wp:tag_slug><wp:tag_name><![CDATA[SpringSource]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>62</wp:term_id><wp:tag_slug>springsource-tool-suite</wp:tag_slug><wp:tag_name><![CDATA[SpringSource Tool Suite]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>36</wp:term_id><wp:tag_slug>sts</wp:tag_slug><wp:tag_name><![CDATA[STS]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>84</wp:term_id><wp:tag_slug>vcenter</wp:tag_slug><wp:tag_name><![CDATA[vCenter]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>70</wp:term_id><wp:tag_slug>virgo</wp:tag_slug><wp:tag_name><![CDATA[virgo]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>52</wp:term_id><wp:tag_slug>vmware</wp:tag_slug><wp:tag_name><![CDATA[vmware]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>85</wp:term_id><wp:tag_slug>vsphere</wp:tag_slug><wp:tag_name><![CDATA[vSphere]]></wp:tag_name></wp:tag>
-	<wp:tag><wp:term_id>116</wp:term_id><wp:tag_slug>wire-js</wp:tag_slug><wp:tag_name><![CDATA[wire.js]]></wp:tag_name></wp:tag>
+    <wp:category><wp:term_id>78</wp:term_id><wp:category_nicename>amqp</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[AMQP]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>95</wp:term_id><wp:category_nicename>android</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Android]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>5</wp:term_id><wp:category_nicename>aop</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[AOP]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>45</wp:term_id><wp:category_nicename>apache-httpd</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Apache httpd]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>42</wp:term_id><wp:category_nicename>apache-tomcat</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Apache Tomcat]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>118</wp:term_id><wp:category_nicename>big-data</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Big Data]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>11</wp:term_id><wp:category_nicename>books</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Books]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>19</wp:term_id><wp:category_nicename>builds</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Builds]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>54</wp:term_id><wp:category_nicename>bundlor</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Bundlor]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>24</wp:term_id><wp:category_nicename>business</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Business]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>48</wp:term_id><wp:category_nicename>cloud-computing</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Cloud Computing]]></wp:cat_name><wp:category_description><![CDATA[Cloud management, monitoring and development]]></wp:category_description></wp:category>
+    <wp:category><wp:term_id>13</wp:term_id><wp:category_nicename>containers</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Containers]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>9</wp:term_id><wp:category_nicename>data-access</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Data Access]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>27</wp:term_id><wp:category_nicename>application-platform</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[dm Server]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>68</wp:term_id><wp:category_nicename>enterprise-integration</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Enterprise Integration]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>93</wp:term_id><wp:category_nicename>green-beans</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Green Beans]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>34</wp:term_id><wp:category_nicename>groovy-grails</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Groovy/Grails]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>119</wp:term_id><wp:category_nicename>hadoop</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Hadoop]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>12</wp:term_id><wp:category_nicename>ioc-container</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[IOC Container]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>15</wp:term_id><wp:category_nicename>java</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Java]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>7</wp:term_id><wp:category_nicename>jms</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[JMS]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>6</wp:term_id><wp:category_nicename>jmx</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[JMX]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>21</wp:term_id><wp:category_nicename>jsf</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[JSF]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>65</wp:term_id><wp:category_nicename>management-tools</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Management Tools]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>23</wp:term_id><wp:category_nicename>open-source</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Open Source]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>17</wp:term_id><wp:category_nicename>osgi</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[OSGi]]></wp:cat_name><wp:category_description><![CDATA[OSGi related content]]></wp:category_description></wp:category>
+    <wp:category><wp:term_id>63</wp:term_id><wp:category_nicename>roo</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Roo]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>109</wp:term_id><wp:category_nicename>scala</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Scala]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>14</wp:term_id><wp:category_nicename>security</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Security]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>49</wp:term_id><wp:category_nicename>slices</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Slices]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>3</wp:term_id><wp:category_nicename>spring</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>71</wp:term_id><wp:category_nicename>spring-batch</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring Batch]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>104</wp:term_id><wp:category_nicename>spring-data</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring Data]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>4</wp:term_id><wp:category_nicename>spring-events</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring Events]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>69</wp:term_id><wp:category_nicename>spring-integration</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring Integration]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>74</wp:term_id><wp:category_nicename>spring-python</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Spring Python]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>2</wp:term_id><wp:category_nicename>springsource</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[SpringSource]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>46</wp:term_id><wp:category_nicename>tc-server</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[tc Server]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>16</wp:term_id><wp:category_nicename>testing</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Testing]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>41</wp:term_id><wp:category_nicename>tools</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Tools]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>26</wp:term_id><wp:category_nicename>training-certification</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Training/Certification]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>1</wp:term_id><wp:category_nicename>uncategorized</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Uncategorized]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>72</wp:term_id><wp:category_nicename>vmware-springsource</wp:category_nicename><wp:category_parent>springsource</wp:category_parent><wp:cat_name><![CDATA[VMware]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>25</wp:term_id><wp:category_nicename>web</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Web]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>20</wp:term_id><wp:category_nicename>web-flow</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Web Flow]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>18</wp:term_id><wp:category_nicename>web-services</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Web Services]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>8</wp:term_id><wp:category_nicename>20</wp:category_nicename><wp:category_parent>spring</wp:category_parent><wp:cat_name><![CDATA[2.0]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>22</wp:term_id><wp:category_nicename>25-21</wp:category_nicename><wp:category_parent>spring</wp:category_parent><wp:cat_name><![CDATA[2.5/2.1]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>35</wp:term_id><wp:category_nicename>30</wp:category_nicename><wp:category_parent>spring</wp:category_parent><wp:cat_name><![CDATA[3.0]]></wp:cat_name><wp:category_description><![CDATA[News and information about Spring 3.0]]></wp:category_description></wp:category>
+    <wp:category><wp:term_id>97</wp:term_id><wp:category_nicename>31</wp:category_nicename><wp:category_parent>spring</wp:category_parent><wp:cat_name><![CDATA[3.1]]></wp:cat_name><wp:category_description><![CDATA[News and information about Spring 3.1]]></wp:category_description></wp:category>
+    <wp:category><wp:term_id>61</wp:term_id><wp:category_nicename>cloud-foundry</wp:category_nicename><wp:category_parent>vmware-springsource</wp:category_parent><wp:cat_name><![CDATA[Cloud Foundry]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>73</wp:term_id><wp:category_nicename>google-springsource</wp:category_nicename><wp:category_parent>springsource</wp:category_parent><wp:cat_name><![CDATA[Google]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>66</wp:term_id><wp:category_nicename>hyperic-hq</wp:category_nicename><wp:category_parent>management-tools</wp:category_parent><wp:cat_name><![CDATA[Hyperic HQ]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>67</wp:term_id><wp:category_nicename>hyperic-iq</wp:category_nicename><wp:category_parent>management-tools</wp:category_parent><wp:cat_name><![CDATA[Hyperic IQ]]></wp:cat_name></wp:category>
+    <wp:tag><wp:term_id>47</wp:term_id><wp:tag_slug>add-new-tag</wp:tag_slug><wp:tag_name><![CDATA[Add new tag]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>78</wp:term_id><wp:tag_slug>amqp</wp:tag_slug><wp:tag_name><![CDATA[AMQP]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>95</wp:term_id><wp:tag_slug>android</wp:tag_slug><wp:tag_name><![CDATA[Android]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>42</wp:term_id><wp:tag_slug>apache-tomcat</wp:tag_slug><wp:tag_name><![CDATA[Apache Tomcat]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>44</wp:term_id><wp:tag_slug>appengine</wp:tag_slug><wp:tag_name><![CDATA[appengine]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>60</wp:term_id><wp:tag_slug>batch</wp:tag_slug><wp:tag_name><![CDATA[Batch]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>102</wp:term_id><wp:tag_slug>binding-patterns</wp:tag_slug><wp:tag_name><![CDATA[Binding Patterns]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>83</wp:term_id><wp:tag_slug>blazeds</wp:tag_slug><wp:tag_name><![CDATA[BlazeDS]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>55</wp:term_id><wp:tag_slug>cloud</wp:tag_slug><wp:tag_name><![CDATA[cloud]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>61</wp:term_id><wp:tag_slug>cloud-foundry</wp:tag_slug><wp:tag_name><![CDATA[Cloud Foundry]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>92</wp:term_id><wp:tag_slug>community</wp:tag_slug><wp:tag_name><![CDATA[Community]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>57</wp:term_id><wp:tag_slug>computing</wp:tag_slug><wp:tag_name><![CDATA[computing]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>114</wp:term_id><wp:tag_slug>cujo-js</wp:tag_slug><wp:tag_name><![CDATA[cujo.js]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>117</wp:term_id><wp:tag_slug>curl-js</wp:tag_slug><wp:tag_name><![CDATA[curl.js]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>112</wp:term_id><wp:tag_slug>data-access-2</wp:tag_slug><wp:tag_name><![CDATA[data access]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>101</wp:term_id><wp:tag_slug>decoupling</wp:tag_slug><wp:tag_name><![CDATA[Decoupling]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>58</wp:term_id><wp:tag_slug>deployment</wp:tag_slug><wp:tag_name><![CDATA[deployment]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>30</wp:term_id><wp:tag_slug>dm-server</wp:tag_slug><wp:tag_name><![CDATA[dm server]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>31</wp:term_id><wp:tag_slug>dmserver</wp:tag_slug><wp:tag_name><![CDATA[dmServer]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>33</wp:term_id><wp:tag_slug>dmsever</wp:tag_slug><wp:tag_name><![CDATA[dmSever]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>39</wp:term_id><wp:tag_slug>dynamic-language</wp:tag_slug><wp:tag_name><![CDATA[dynamic language]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>56</wp:term_id><wp:tag_slug>ec2</wp:tag_slug><wp:tag_name><![CDATA[ec2]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>80</wp:term_id><wp:tag_slug>eclipse</wp:tag_slug><wp:tag_name><![CDATA[Eclipse]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>68</wp:term_id><wp:tag_slug>enterprise-integration</wp:tag_slug><wp:tag_name><![CDATA[Enterprise Integration]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>100</wp:term_id><wp:tag_slug>erlang</wp:tag_slug><wp:tag_name><![CDATA[Erlang]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>87</wp:term_id><wp:tag_slug>esx</wp:tag_slug><wp:tag_name><![CDATA[ESX]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>82</wp:term_id><wp:tag_slug>flex</wp:tag_slug><wp:tag_name><![CDATA[Flex]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>59</wp:term_id><wp:tag_slug>foundry</wp:tag_slug><wp:tag_name><![CDATA[foundry]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>89</wp:term_id><wp:tag_slug>gemini</wp:tag_slug><wp:tag_name><![CDATA[Gemini]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>91</wp:term_id><wp:tag_slug>git</wp:tag_slug><wp:tag_name><![CDATA[Git]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>43</wp:term_id><wp:tag_slug>google</wp:tag_slug><wp:tag_name><![CDATA[google]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>64</wp:term_id><wp:tag_slug>grails</wp:tag_slug><wp:tag_name><![CDATA[Grails]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>107</wp:term_id><wp:tag_slug>graph-database</wp:tag_slug><wp:tag_name><![CDATA[Graph Database]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>94</wp:term_id><wp:tag_slug>green-beans-2</wp:tag_slug><wp:tag_name><![CDATA[green beans]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>37</wp:term_id><wp:tag_slug>groovy</wp:tag_slug><wp:tag_name><![CDATA[groovy]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>32</wp:term_id><wp:tag_slug>gwt</wp:tag_slug><wp:tag_name><![CDATA[GWT]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>53</wp:term_id><wp:tag_slug>hyperic</wp:tag_slug><wp:tag_name><![CDATA[hyperic]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>115</wp:term_id><wp:tag_slug>ioc</wp:tag_slug><wp:tag_name><![CDATA[ioc]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>15</wp:term_id><wp:tag_slug>java</wp:tag_slug><wp:tag_name><![CDATA[Java]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>111</wp:term_id><wp:tag_slug>javascript</wp:tag_slug><wp:tag_name><![CDATA[JavaScript]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>50</wp:term_id><wp:tag_slug>kerberos</wp:tag_slug><wp:tag_name><![CDATA[Kerberos]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>110</wp:term_id><wp:tag_slug>maven</wp:tag_slug><wp:tag_name><![CDATA[maven]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>98</wp:term_id><wp:tag_slug>messaging</wp:tag_slug><wp:tag_name><![CDATA[Messaging]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>96</wp:term_id><wp:tag_slug>mobile</wp:tag_slug><wp:tag_name><![CDATA[Mobile]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>86</wp:term_id><wp:tag_slug>monitoring</wp:tag_slug><wp:tag_name><![CDATA[monitoring]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>106</wp:term_id><wp:tag_slug>neo4j</wp:tag_slug><wp:tag_name><![CDATA[Neo4j]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>105</wp:term_id><wp:tag_slug>nosql</wp:tag_slug><wp:tag_name><![CDATA[NOSQL]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>17</wp:term_id><wp:tag_slug>osgi</wp:tag_slug><wp:tag_name><![CDATA[OSGi]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>76</wp:term_id><wp:tag_slug>performance</wp:tag_slug><wp:tag_name><![CDATA[performance]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>88</wp:term_id><wp:tag_slug>python</wp:tag_slug><wp:tag_name><![CDATA[python]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>79</wp:term_id><wp:tag_slug>rabbitmq</wp:tag_slug><wp:tag_name><![CDATA[RabbitMQ]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>38</wp:term_id><wp:tag_slug>release</wp:tag_slug><wp:tag_name><![CDATA[release]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>40</wp:term_id><wp:tag_slug>rest-mvc</wp:tag_slug><wp:tag_name><![CDATA[REST MVC]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>63</wp:term_id><wp:tag_slug>roo</wp:tag_slug><wp:tag_name><![CDATA[Roo]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>103</wp:term_id><wp:tag_slug>routing-topologies</wp:tag_slug><wp:tag_name><![CDATA[Routing Topologies]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>113</wp:term_id><wp:tag_slug>s2js</wp:tag_slug><wp:tag_name><![CDATA[s2js]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>109</wp:term_id><wp:tag_slug>scala</wp:tag_slug><wp:tag_name><![CDATA[Scala]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>99</wp:term_id><wp:tag_slug>scalability</wp:tag_slug><wp:tag_name><![CDATA[Scalability]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>14</wp:term_id><wp:tag_slug>security</wp:tag_slug><wp:tag_name><![CDATA[Security]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>75</wp:term_id><wp:tag_slug>speed-tracer</wp:tag_slug><wp:tag_name><![CDATA[speed tracer]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>51</wp:term_id><wp:tag_slug>spnego</wp:tag_slug><wp:tag_name><![CDATA[SPNEGO]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>3</wp:term_id><wp:tag_slug>spring</wp:tag_slug><wp:tag_name><![CDATA[Spring]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>108</wp:term_id><wp:tag_slug>spring-3-1</wp:tag_slug><wp:tag_name><![CDATA[spring 3.1]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>90</wp:term_id><wp:tag_slug>spring-amqp</wp:tag_slug><wp:tag_name><![CDATA[Spring AMQP]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>71</wp:term_id><wp:tag_slug>spring-batch</wp:tag_slug><wp:tag_name><![CDATA[Spring Batch]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>104</wp:term_id><wp:tag_slug>spring-data</wp:tag_slug><wp:tag_name><![CDATA[Spring Data]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>77</wp:term_id><wp:tag_slug>spring-insight</wp:tag_slug><wp:tag_name><![CDATA[spring insight]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>69</wp:term_id><wp:tag_slug>spring-integration</wp:tag_slug><wp:tag_name><![CDATA[Spring Integration]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>74</wp:term_id><wp:tag_slug>spring-python</wp:tag_slug><wp:tag_name><![CDATA[Spring Python]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>81</wp:term_id><wp:tag_slug>spring-roo</wp:tag_slug><wp:tag_name><![CDATA[Spring Roo]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>2</wp:term_id><wp:tag_slug>springsource</wp:tag_slug><wp:tag_name><![CDATA[SpringSource]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>62</wp:term_id><wp:tag_slug>springsource-tool-suite</wp:tag_slug><wp:tag_name><![CDATA[SpringSource Tool Suite]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>36</wp:term_id><wp:tag_slug>sts</wp:tag_slug><wp:tag_name><![CDATA[STS]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>84</wp:term_id><wp:tag_slug>vcenter</wp:tag_slug><wp:tag_name><![CDATA[vCenter]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>70</wp:term_id><wp:tag_slug>virgo</wp:tag_slug><wp:tag_name><![CDATA[virgo]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>52</wp:term_id><wp:tag_slug>vmware</wp:tag_slug><wp:tag_name><![CDATA[vmware]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>85</wp:term_id><wp:tag_slug>vsphere</wp:tag_slug><wp:tag_name><![CDATA[vSphere]]></wp:tag_name></wp:tag>
+    <wp:tag><wp:term_id>116</wp:term_id><wp:tag_slug>wire-js</wp:tag_slug><wp:tag_name><![CDATA[wire.js]]></wp:tag_name></wp:tag>
 
-	<generator>http://wordpress.org/?v=3.1.1</generator>
+    <generator>http://wordpress.org/?v=3.1.1</generator>
 
-	<item>
-		<title>Author Page</title>
-		<link>http://blog.springsource.org/author-page/</link>
-		<pubDate>Wed, 09 Aug 2006 16:51:21 +0000</pubDate>
-		<dc:creator>test</dc:creator>
-		<guid isPermaLink="false">http://blog.interface21.com/main/author-page/</guid>
-		<description></description>
-		<content:encoded><![CDATA[Author Page]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>54</wp:post_id>
-		<wp:post_date>2006-08-09 11:51:21</wp:post_date>
-		<wp:post_date_gmt>2006-08-09 16:51:21</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>author-page</wp:post_name>
-		<wp:status>publish</wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>page</wp:post_type>
-		<wp:post_password></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-		<wp:postmeta>
-			<wp:meta_key>_edit_last</wp:meta_key>
-			<wp:meta_value><![CDATA[59]]></wp:meta_value>
-		</wp:postmeta>
-		<wp:comment>
-			<wp:comment_id>171591</wp:comment_id>
-			<wp:comment_author><![CDATA[risberg]]></wp:comment_author>
-			<wp:comment_author_email></wp:comment_author_email>
-			<wp:comment_author_url></wp:comment_author_url>
-			<wp:comment_author_IP>24.118.35.80</wp:comment_author_IP>
-			<wp:comment_date>2010-03-10 23:42:21</wp:comment_date>
-			<wp:comment_date_gmt>2010-03-11 04:42:21</wp:comment_date_gmt>
-			<wp:comment_content><![CDATA[[...] Our Sponsors. Sponsor this site. Search AltSearchEngines. View AltSearchEngines Archive. About ...Author Page | SpringSource Team BlogAuthor Page ... 20/09/2007: Replies to Nonsense about Open Source. 28/03/2007: NY Java SIG [...] ]]></wp:comment_content>
-			<wp:comment_approved>1</wp:comment_approved>
-			<wp:comment_type>pingback</wp:comment_type>
-			<wp:comment_parent>0</wp:comment_parent>
-			<wp:comment_user_id>0</wp:comment_user_id>
-		</wp:comment>
-		<wp:comment>
-			<wp:comment_id>256829</wp:comment_id>
-			<wp:comment_author><![CDATA[teaself0]]></wp:comment_author>
-			<wp:comment_author_email></wp:comment_author_email>
-			<wp:comment_author_url></wp:comment_author_url>
-			<wp:comment_author_IP>221.149.123.40</wp:comment_author_IP>
-			<wp:comment_date>2012-09-27 11:40:10</wp:comment_date>
-			<wp:comment_date_gmt>2012-09-27 18:40:10</wp:comment_date_gmt>
-			<wp:comment_content><![CDATA[tory burch outlet is receiving zero-cost boost... through a civic project group!]]></wp:comment_content>
-			<wp:comment_approved>0</wp:comment_approved>
-			<wp:comment_type></wp:comment_type>
-			<wp:comment_parent>0</wp:comment_parent>
-			<wp:comment_user_id>0</wp:comment_user_id>
-		</wp:comment>
-	</item>
-	<item>
-		<title>This is all very difficult, can&#039;t this be done easier?</title>
-		<link>http://blog.springsource.org/?p=202</link>
-		<pubDate>Wed, 30 Nov -0001 00:00:00 +0000</pubDate>
-		<dc:creator>test</dc:creator>
-		<guid isPermaLink="false">http://blog.interface21.com/main/?p=202</guid>
-		<description></description>
-		<content:encoded><![CDATA[This is a public service announcement. As all references to Spring have been removed from the Hibernate web site, I think we should answer
+    <item>
+        <title>Author Page</title>
+        <link>http://blog.springsource.org/author-page/</link>
+        <pubDate>Wed, 09 Aug 2006 16:51:21 +0000</pubDate>
+        <dc:creator>test</dc:creator>
+        <guid isPermaLink="false">http://blog.interface21.com/main/author-page/</guid>
+        <description></description>
+        <content:encoded><![CDATA[Author Page]]></content:encoded>
+        <excerpt:encoded><![CDATA[]]></excerpt:encoded>
+        <wp:post_id>54</wp:post_id>
+        <wp:post_date>2006-08-09 11:51:21</wp:post_date>
+        <wp:post_date_gmt>2006-08-09 16:51:21</wp:post_date_gmt>
+        <wp:comment_status>open</wp:comment_status>
+        <wp:ping_status>open</wp:ping_status>
+        <wp:post_name>author-page</wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>0</wp:menu_order>
+        <wp:post_type>page</wp:post_type>
+        <wp:post_password></wp:post_password>
+        <wp:is_sticky>0</wp:is_sticky>
+        <wp:postmeta>
+            <wp:meta_key>_edit_last</wp:meta_key>
+            <wp:meta_value><![CDATA[59]]></wp:meta_value>
+        </wp:postmeta>
+        <wp:comment>
+            <wp:comment_id>171591</wp:comment_id>
+            <wp:comment_author><![CDATA[risberg]]></wp:comment_author>
+            <wp:comment_author_email></wp:comment_author_email>
+            <wp:comment_author_url></wp:comment_author_url>
+            <wp:comment_author_IP>24.118.35.80</wp:comment_author_IP>
+            <wp:comment_date>2010-03-10 23:42:21</wp:comment_date>
+            <wp:comment_date_gmt>2010-03-11 04:42:21</wp:comment_date_gmt>
+            <wp:comment_content><![CDATA[[...] Our Sponsors. Sponsor this site. Search AltSearchEngines. View AltSearchEngines Archive. About ...Author Page | SpringSource Team BlogAuthor Page ... 20/09/2007: Replies to Nonsense about Open Source. 28/03/2007: NY Java SIG [...] ]]></wp:comment_content>
+            <wp:comment_approved>1</wp:comment_approved>
+            <wp:comment_type>pingback</wp:comment_type>
+            <wp:comment_parent>0</wp:comment_parent>
+            <wp:comment_user_id>0</wp:comment_user_id>
+        </wp:comment>
+        <wp:comment>
+            <wp:comment_id>256829</wp:comment_id>
+            <wp:comment_author><![CDATA[teaself0]]></wp:comment_author>
+            <wp:comment_author_email></wp:comment_author_email>
+            <wp:comment_author_url></wp:comment_author_url>
+            <wp:comment_author_IP>221.149.123.40</wp:comment_author_IP>
+            <wp:comment_date>2012-09-27 11:40:10</wp:comment_date>
+            <wp:comment_date_gmt>2012-09-27 18:40:10</wp:comment_date_gmt>
+            <wp:comment_content><![CDATA[tory burch outlet is receiving zero-cost boost... through a civic project group!]]></wp:comment_content>
+            <wp:comment_approved>0</wp:comment_approved>
+            <wp:comment_type></wp:comment_type>
+            <wp:comment_parent>0</wp:comment_parent>
+            <wp:comment_user_id>0</wp:comment_user_id>
+        </wp:comment>
+    </item>
+    <item>
+        <title>This is all very difficult, can&#039;t this be done easier?</title>
+        <link>http://blog.springsource.org/?p=202</link>
+        <pubDate>Wed, 30 Nov -0001 00:00:00 +0000</pubDate>
+        <dc:creator>test</dc:creator>
+        <guid isPermaLink="false">http://blog.interface21.com/main/?p=202</guid>
+        <description></description>
+        <content:encoded><![CDATA[This is a public service announcement. As all references to Spring have been removed from the Hibernate web site, I think we should answer
 
 http://www.hibernate.org/42.html?cmd=comphist&histnode=478
 
 
 Hibernate can only do so much as a persistence service, managing the persistence service is however the responsibility of the application infrastructure, or framework. The EJB3 programming model makes transaction and persistence context management very easy, use the Hibernate EntityManager to get this API. Either run your EJBs inside a full J2EE application server (previews available from several vendors) or in a lightweight embeddable EJB3 container, JBoss Embeddable EJB3, in any Java environment. The JBoss Seam framework has built-in
 ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>202</wp:post_id>
-		<wp:post_date>0000-00-00 00:00:00</wp:post_date>
-		<wp:post_date_gmt>0000-00-00 00:00:00</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name></wp:post_name>
-		<wp:status>draft</wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>post</wp:post_type>
-		<wp:post_password></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="category" nicename="spring"><![CDATA[Spring]]></category>
-		<wp:postmeta>
-			<wp:meta_key>_edit_last</wp:meta_key>
-			<wp:meta_value><![CDATA[13]]></wp:meta_value>
-		</wp:postmeta>
-		<wp:postmeta>
-			<wp:meta_key>_oembed_35a5cf19dd008c71fb7cc54b635c4432</wp:meta_key>
-			<wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
-		</wp:postmeta>
-	</item>
+        <excerpt:encoded><![CDATA[]]></excerpt:encoded>
+        <wp:post_id>202</wp:post_id>
+        <wp:post_date>0000-00-00 00:00:00</wp:post_date>
+        <wp:post_date_gmt>0000-00-00 00:00:00</wp:post_date_gmt>
+        <wp:comment_status>open</wp:comment_status>
+        <wp:ping_status>open</wp:ping_status>
+        <wp:post_name></wp:post_name>
+        <wp:status>draft</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>0</wp:menu_order>
+        <wp:post_type>post</wp:post_type>
+        <wp:post_password></wp:post_password>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="category" nicename="spring"><![CDATA[Spring]]></category>
+        <wp:postmeta>
+            <wp:meta_key>_edit_last</wp:meta_key>
+            <wp:meta_value><![CDATA[13]]></wp:meta_value>
+        </wp:postmeta>
+        <wp:postmeta>
+            <wp:meta_key>_oembed_35a5cf19dd008c71fb7cc54b635c4432</wp:meta_key>
+            <wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
+        </wp:postmeta>
+    </item>
 
-	<item>
-		<title>Spring 2.0&#039;s JMS Improvements</title>
-		<link>http://blog.springsource.org/2006/04/09/spring-20s-jms-improvements/</link>
-		<pubDate>Sun, 09 Apr 2006 20:22:43 +0000</pubDate>
-		<dc:creator>Full Name</dc:creator>
-		<guid isPermaLink="false">http://blog.interface21.com/main/2006/04/09/spring-20s-jms-improvements/</guid>
-		<description></description>
-		<content:encoded><![CDATA[With the release of Spring 1.1 ...
+    <item>
+        <title>Spring 2.0&#039;s JMS Improvements</title>
+        <link>http://blog.springsource.org/2006/04/09/spring-20s-jms-improvements/</link>
+        <pubDate>Sun, 09 Apr 2006 20:22:43 +0000</pubDate>
+        <dc:creator>Full Name</dc:creator>
+        <guid isPermaLink="false">http://blog.interface21.com/main/2006/04/09/spring-20s-jms-improvements/</guid>
+        <description></description>
+        <content:encoded><![CDATA[With the release of Spring 1.1 ...
 [sourcecode lang="java"]
 public class Foo{}
 [/sourcecode]
@@ -291,78 +291,78 @@ One thing to note ...
 
 [code lang="xml"]
 <bean id="listenerContainer"
-	class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-	<property name="concurrentConsumers" value="5" />
+    class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="concurrentConsumers" value="5" />
 </bean>
 [/code]
 
 So, there you have it!
 ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>21</wp:post_id>
-		<wp:post_date>2006-04-09 15:22:43</wp:post_date>
-		<wp:post_date_gmt>2006-04-09 20:22:43</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>spring-20s-jms-improvements</wp:post_name>
-		<wp:status>publish</wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>post</wp:post_type>
-		<wp:post_password></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="category" nicename="20"><![CDATA[2.0]]></category>
-		<category domain="category" nicename="jms"><![CDATA[JMS]]></category>
-		<category domain="category" nicename="spring"><![CDATA[Spring]]></category>
-		<wp:postmeta>
-			<wp:meta_key>_oembed_c5757dab42939a0690aff4e82264cf0d</wp:meta_key>
-			<wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
-		</wp:postmeta>
-	</item>
-	<item>
-		<title>Another Reason to Love Spring 2.0: Interceptor Combining</title>
-		<link>http://blog.springsource.org/2006/04/09/another-reason-to-love-spring-20-interceptor-combining/</link>
-		<pubDate>Sun, 09 Apr 2006 20:41:19 +0000</pubDate>
-		<dc:creator>sample</dc:creator>
-		<guid isPermaLink="false">http://blog.interface21.com/main/2006/04/09/another-reason-to-love-spring-20-interceptor-combining/</guid>
-		<description></description>
-		<content:encoded><![CDATA[Interceptor Combining is out of this world!]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>22</wp:post_id>
-		<wp:post_date>2006-04-09 15:41:19</wp:post_date>
-		<wp:post_date_gmt>2006-04-09 20:41:19</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>another-reason-to-love-spring-20-interceptor-combining</wp:post_name>
-		<wp:status>publish</wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>post</wp:post_type>
-		<wp:post_password></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="category" nicename="20"><![CDATA[2.0]]></category>
-		<category domain="category" nicename="aop"><![CDATA[AOP]]></category>
-		<category domain="category" nicename="spring"><![CDATA[Spring]]></category>
-		<wp:postmeta>
-			<wp:meta_key>_oembed_a92e6027b2fccf5e25bfc5080af0c0c8</wp:meta_key>
-			<wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
-		</wp:postmeta>
-		<wp:postmeta>
-			<wp:meta_key>_oembed_487cc14003713c6be6725f6572a94631</wp:meta_key>
-			<wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
-		</wp:postmeta>
-		<wp:postmeta>
-			<wp:meta_key>_oembed_9f2bee075abf9758d86b69594ec6610e</wp:meta_key>
-			<wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
-		</wp:postmeta>
-		<wp:postmeta>
-			<wp:meta_key>_oembed_f1f288b1029863387373d07073dddd20</wp:meta_key>
-			<wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
-		</wp:postmeta>
-		<wp:postmeta>
-			<wp:meta_key>_oembed_ac4e1b1053a18a05a912d870361f900d</wp:meta_key>
-			<wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
-		</wp:postmeta>
-	</item>
+        <excerpt:encoded><![CDATA[]]></excerpt:encoded>
+        <wp:post_id>21</wp:post_id>
+        <wp:post_date>2006-04-09 15:22:43</wp:post_date>
+        <wp:post_date_gmt>2006-04-09 20:22:43</wp:post_date_gmt>
+        <wp:comment_status>open</wp:comment_status>
+        <wp:ping_status>open</wp:ping_status>
+        <wp:post_name>spring-20s-jms-improvements</wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>0</wp:menu_order>
+        <wp:post_type>post</wp:post_type>
+        <wp:post_password></wp:post_password>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="category" nicename="20"><![CDATA[2.0]]></category>
+        <category domain="category" nicename="jms"><![CDATA[JMS]]></category>
+        <category domain="category" nicename="spring"><![CDATA[Spring]]></category>
+        <wp:postmeta>
+            <wp:meta_key>_oembed_c5757dab42939a0690aff4e82264cf0d</wp:meta_key>
+            <wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
+        </wp:postmeta>
+    </item>
+    <item>
+        <title>Another Reason to Love Spring 2.0: Interceptor Combining</title>
+        <link>http://blog.springsource.org/2006/04/09/another-reason-to-love-spring-20-interceptor-combining/</link>
+        <pubDate>Sun, 09 Apr 2006 20:41:19 +0000</pubDate>
+        <dc:creator>sample</dc:creator>
+        <guid isPermaLink="false">http://blog.interface21.com/main/2006/04/09/another-reason-to-love-spring-20-interceptor-combining/</guid>
+        <description></description>
+        <content:encoded><![CDATA[Interceptor Combining is out of this world!]]></content:encoded>
+        <excerpt:encoded><![CDATA[]]></excerpt:encoded>
+        <wp:post_id>22</wp:post_id>
+        <wp:post_date>2006-04-09 15:41:19</wp:post_date>
+        <wp:post_date_gmt>2006-04-09 20:41:19</wp:post_date_gmt>
+        <wp:comment_status>open</wp:comment_status>
+        <wp:ping_status>open</wp:ping_status>
+        <wp:post_name>another-reason-to-love-spring-20-interceptor-combining</wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>0</wp:menu_order>
+        <wp:post_type>post</wp:post_type>
+        <wp:post_password></wp:post_password>
+        <wp:is_sticky>0</wp:is_sticky>
+        <category domain="category" nicename="20"><![CDATA[2.0]]></category>
+        <category domain="category" nicename="aop"><![CDATA[AOP]]></category>
+        <category domain="category" nicename="spring"><![CDATA[Spring]]></category>
+        <wp:postmeta>
+            <wp:meta_key>_oembed_a92e6027b2fccf5e25bfc5080af0c0c8</wp:meta_key>
+            <wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
+        </wp:postmeta>
+        <wp:postmeta>
+            <wp:meta_key>_oembed_487cc14003713c6be6725f6572a94631</wp:meta_key>
+            <wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
+        </wp:postmeta>
+        <wp:postmeta>
+            <wp:meta_key>_oembed_9f2bee075abf9758d86b69594ec6610e</wp:meta_key>
+            <wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
+        </wp:postmeta>
+        <wp:postmeta>
+            <wp:meta_key>_oembed_f1f288b1029863387373d07073dddd20</wp:meta_key>
+            <wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
+        </wp:postmeta>
+        <wp:postmeta>
+            <wp:meta_key>_oembed_ac4e1b1053a18a05a912d870361f900d</wp:meta_key>
+            <wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
+        </wp:postmeta>
+    </item>
 </channel>
 </rss>
