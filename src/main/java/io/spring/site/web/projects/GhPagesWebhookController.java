@@ -52,88 +52,88 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/webhook/gh-pages/{token}")
 public class GhPagesWebhookController {
 
-	private static final Log logger = LogFactory.getLog(GhPagesWebhookController.class);
+    private static final Log logger = LogFactory.getLog(GhPagesWebhookController.class);
 
-	private final ProjectMetadataService service;
-	private final GitHub gitHub;
-	private final String template;
+    private final ProjectMetadataService service;
+    private final GitHub gitHub;
+    private final String template;
 
-	@Value("${WEBHOOK_ACCESS_TOKEN:default}")
-	private String accessToken;
+    @Value("${WEBHOOK_ACCESS_TOKEN:default}")
+    private String accessToken;
 
-	@Autowired
-	public GhPagesWebhookController(
-			ProjectMetadataService service, GitHub gitHub) throws IOException {
-		this.service = service;
-		this.gitHub = gitHub;
-		this.template = StreamUtils.copyToString(
-				new ClassPathResource("notifications/gh-pages-updated.md").getInputStream(),
-				Charset.defaultCharset());
-	}
+    @Autowired
+    public GhPagesWebhookController(
+            ProjectMetadataService service, GitHub gitHub) throws IOException {
+        this.service = service;
+        this.gitHub = gitHub;
+        this.template = StreamUtils.copyToString(
+                new ClassPathResource("notifications/gh-pages-updated.md").getInputStream(),
+                Charset.defaultCharset());
+    }
 
-	@SuppressWarnings("unchecked")
-	@RequestMapping(method = POST, headers = "content-type=application/x-www-form-urlencoded")
-	@ResponseBody
-	public HttpEntity<String> processUpdate(
-			@RequestParam String payload, @PathVariable String token) throws IOException {
-		HttpHeaders headers = new HttpHeaders();
-		if (!accessToken.equals(token)) {
-			headers.set("Status", "403 Forbidden");
-			return new HttpEntity<>("{ \"message\": \"Forbidden\" }\n", headers);
-		}
-		ObjectMapper jsonMapper = new ObjectMapper();
-		SpelExpressionParser parser = new SpelExpressionParser();
-		Expression spel = parser.parseExpression(template, new TemplateParserContext());
+    @SuppressWarnings("unchecked")
+    @RequestMapping(method = POST, headers = "content-type=application/x-www-form-urlencoded")
+    @ResponseBody
+    public HttpEntity<String> processUpdate(
+            @RequestParam String payload, @PathVariable String token) throws IOException {
+        HttpHeaders headers = new HttpHeaders();
+        if (!accessToken.equals(token)) {
+            headers.set("Status", "403 Forbidden");
+            return new HttpEntity<>("{ \"message\": \"Forbidden\" }\n", headers);
+        }
+        ObjectMapper jsonMapper = new ObjectMapper();
+        SpelExpressionParser parser = new SpelExpressionParser();
+        Expression spel = parser.parseExpression(template, new TemplateParserContext());
 
-		Map<?,?> push;
-		try {
-			push = jsonMapper.readValue(payload, Map.class);
-			logger.info("Recieved new webhook payload for push with head_commit message: " +
-					((Map<?,?>)push.get("head_commit")).get("message"));
-		} catch (JsonParseException ex) {
-			headers.set("Status", "400 Bad Request");
-			return new HttpEntity<>("{ \"message\": \"Bad Request\" }\n", headers);
-		}
+        Map<?,?> push;
+        try {
+            push = jsonMapper.readValue(payload, Map.class);
+            logger.info("Recieved new webhook payload for push with head_commit message: " +
+                    ((Map<?,?>)push.get("head_commit")).get("message"));
+        } catch (JsonParseException ex) {
+            headers.set("Status", "400 Bad Request");
+            return new HttpEntity<>("{ \"message\": \"Bad Request\" }\n", headers);
+        }
 
-		StringBuilder commits = new StringBuilder();
-		for (Map<?,?> commit : (List<Map<?,?>>) push.get("commits")) {
-			commits.append(format(" - %s (%s)\n", commit.get("message"), commit.get("id")));
-		}
-		Map<String, Object> root = new HashMap<>();
-		root.put("push", push);
-		root.put("commits", commits);
-		for (Project project : service.getProjects()) {
-			if (hasGhPagesBranch(project)) {
-				root.put("project", project);
-				Map<String,String> newIssue = new HashMap<>();
-				newIssue.put("title", "Please merge the latest changes to common gh-pages");
-				newIssue.put("body", spel.getValue(root, String.class));
-				String projectIssuesUrl = format("%s/repos/spring-projects/%s/issues",
-						GitHubService.API_URL_BASE, project.getId());
-				try {
-					URI newIssueUrl = gitHub.restOperations().postForLocation(
-							projectIssuesUrl, jsonMapper.writeValueAsString(newIssue));
-					logger.info("Notification of new gh-pages changes created at " + newIssueUrl);
-				} catch (RuntimeException ex) {
-					logger.warn("Unable to POST new issue to " + projectIssuesUrl);
-				}
-			}
-		}
-		headers.set("Status", "200 OK");
-		return new HttpEntity<>("{ \"message\": \"Successfully processed update\" }\n", headers);
-	}
+        StringBuilder commits = new StringBuilder();
+        for (Map<?,?> commit : (List<Map<?,?>>) push.get("commits")) {
+            commits.append(format(" - %s (%s)\n", commit.get("message"), commit.get("id")));
+        }
+        Map<String, Object> root = new HashMap<>();
+        root.put("push", push);
+        root.put("commits", commits);
+        for (Project project : service.getProjects()) {
+            if (hasGhPagesBranch(project)) {
+                root.put("project", project);
+                Map<String,String> newIssue = new HashMap<>();
+                newIssue.put("title", "Please merge the latest changes to common gh-pages");
+                newIssue.put("body", spel.getValue(root, String.class));
+                String projectIssuesUrl = format("%s/repos/spring-projects/%s/issues",
+                        GitHubService.API_URL_BASE, project.getId());
+                try {
+                    URI newIssueUrl = gitHub.restOperations().postForLocation(
+                            projectIssuesUrl, jsonMapper.writeValueAsString(newIssue));
+                    logger.info("Notification of new gh-pages changes created at " + newIssueUrl);
+                } catch (RuntimeException ex) {
+                    logger.warn("Unable to POST new issue to " + projectIssuesUrl);
+                }
+            }
+        }
+        headers.set("Status", "200 OK");
+        return new HttpEntity<>("{ \"message\": \"Successfully processed update\" }\n", headers);
+    }
 
-	private boolean hasGhPagesBranch(Project project) {
-		if (project.hasSite() && project.getSiteUrl().startsWith("http://projects.springframework.io")) {
-			String ghPagesBranchUrl = format("%s/repos/%s/%s/branches/gh-pages",
-					GitHubService.API_URL_BASE, "spring-projects", project.getId());
-			try {
-				HttpHeaders headers = gitHub.restOperations().headForHeaders(ghPagesBranchUrl);
-				return "200 OK".equals(headers.getFirst("Status"));
-			} catch (Exception ex) {
-				// RestTemplate call above logs at WARN level if anything goes wrong
-			}
-		}
-		return false;
-	}
+    private boolean hasGhPagesBranch(Project project) {
+        if (project.hasSite() && project.getSiteUrl().startsWith("http://projects.springframework.io")) {
+            String ghPagesBranchUrl = format("%s/repos/%s/%s/branches/gh-pages",
+                    GitHubService.API_URL_BASE, "spring-projects", project.getId());
+            try {
+                HttpHeaders headers = gitHub.restOperations().headForHeaders(ghPagesBranchUrl);
+                return "200 OK".equals(headers.getFirst("Status"));
+            } catch (Exception ex) {
+                // RestTemplate call above logs at WARN level if anything goes wrong
+            }
+        }
+        return false;
+    }
 }

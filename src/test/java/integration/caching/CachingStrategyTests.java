@@ -44,117 +44,117 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = { TestConfiguration.class }, initializers = ConfigFileApplicationContextInitializer.class)
 public class CachingStrategyTests {
 
-	@ClassRule
-	public static SetSystemProperty timeToLive = new SetSystemProperty(
-			"cache.timetolive", "1");
+    @ClassRule
+    public static SetSystemProperty timeToLive = new SetSystemProperty(
+            "cache.timetolive", "1");
 
-	@Autowired
-	protected WebApplicationContext wac;
+    @Autowired
+    protected WebApplicationContext wac;
 
-	protected MockMvc mockMvc;
-	private RestOperations restOperations;
+    protected MockMvc mockMvc;
+    private RestOperations restOperations;
 
-	@Before
-	public void setupMockMvc() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-	}
+    @Before
+    public void setupMockMvc() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
 
-	@Configuration
-	@Import({ ApplicationConfiguration.class })
-	public static class TestConfiguration {
-		@Bean
-		@Primary
-		public GitHub gitHub() {
-			return mock(GitHub.class);
-		}
+    @Configuration
+    @Import({ ApplicationConfiguration.class })
+    public static class TestConfiguration {
+        @Bean
+        @Primary
+        public GitHub gitHub() {
+            return mock(GitHub.class);
+        }
 
-		@Bean
-		@Primary
-		public RestTemplate restTemplate() {
-			return mock(RestTemplate.class);
-		}
-	}
+        @Bean
+        @Primary
+        public RestTemplate restTemplate() {
+            return mock(RestTemplate.class);
+        }
+    }
 
-	@Autowired
-	private GitHub gitHub;
+    @Autowired
+    private GitHub gitHub;
 
-	@Autowired
-	private CacheManager cacheManager;
+    @Autowired
+    private CacheManager cacheManager;
 
-	@Autowired
-	private RestTemplate restTemplate;
+    @Autowired
+    private RestTemplate restTemplate;
 
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-		reset(this.gitHub);
-		reset(this.restTemplate);
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        reset(this.gitHub);
+        reset(this.restTemplate);
 
-		String requestPath = "https://api.github.com/orgs/spring-guides/repos";
-		String repoList = FixtureLoader.load("/fixtures/github/githubRepoList.json");
+        String requestPath = "https://api.github.com/orgs/spring-guides/repos";
+        String repoList = FixtureLoader.load("/fixtures/github/githubRepoList.json");
 
-		this.restOperations = mock(RestOperations.class);
-		given(this.gitHub.restOperations()).willReturn(this.restOperations);
-		given(
-				this.restOperations.getForObject(startsWith(requestPath),
-						(Class<String>) anyObject())).willReturn(repoList);
-	}
+        this.restOperations = mock(RestOperations.class);
+        given(this.gitHub.restOperations()).willReturn(this.restOperations);
+        given(
+                this.restOperations.getForObject(startsWith(requestPath),
+                        (Class<String>) anyObject())).willReturn(repoList);
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		for (String name : this.cacheManager.getCacheNames()) {
-			this.cacheManager.getCache(name).clear();
-		}
-	}
+    @After
+    public void tearDown() throws Exception {
+        for (String name : this.cacheManager.getCacheNames()) {
+            this.cacheManager.getCache(name).clear();
+        }
+    }
 
-	@Test
-	public void githubRequestsAreCached() throws Exception {
-		this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
-		this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
-		verify(this.restOperations, times(1)).getForObject(anyString(),
-				(Class<?>) anyObject());
-	}
+    @Test
+    public void githubRequestsAreCached() throws Exception {
+        this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
+        verify(this.restOperations, times(1)).getForObject(anyString(),
+                (Class<?>) anyObject());
+    }
 
-	@Test
-	public void cachedItemsHaveATimeToLive() throws Exception {
-		this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
-		verify(this.restOperations).getForObject(anyString(), (Class<?>) anyObject());
+    @Test
+    public void cachedItemsHaveATimeToLive() throws Exception {
+        this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
+        verify(this.restOperations).getForObject(anyString(), (Class<?>) anyObject());
 
-		Thread.sleep(1500);
+        Thread.sleep(1500);
 
-		this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
-		verify(this.restOperations, times(2)).getForObject(anyString(),
-				(Class<?>) anyObject());
-	}
+        this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
+        verify(this.restOperations, times(2)).getForObject(anyString(),
+                (Class<?>) anyObject());
+    }
 
-	@Test
-	public void toolsSTSXmlRequestsAreCached() throws Exception {
-		String stsDownloads = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
-		given(
-				this.restTemplate.getForObject(
-						"http://dist.springsource.com/release/STS/index-v3.xml",
-						String.class)).willReturn(stsDownloads);
+    @Test
+    public void toolsSTSXmlRequestsAreCached() throws Exception {
+        String stsDownloads = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
+        given(
+                this.restTemplate.getForObject(
+                        "http://dist.springsource.com/release/STS/index-v3.xml",
+                        String.class)).willReturn(stsDownloads);
 
-		this.mockMvc.perform(get("/tools")).andExpect(status().isOk());
-		this.mockMvc.perform(get("/tools")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/tools")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/tools")).andExpect(status().isOk());
 
-		verify(this.restTemplate, times(1)).getForObject(anyString(),
-				(Class<?>) anyObject());
-	}
+        verify(this.restTemplate, times(1)).getForObject(anyString(),
+                (Class<?>) anyObject());
+    }
 
-	@Test
-	public void toolsEclipseXmlRequestsAreCached() throws Exception {
-		String eclipse = FixtureLoader.load("/fixtures/tools/eclipse.xml");
-		given(
-				this.restTemplate.getForObject(
-						"http://download.springsource.com/release/STS/eclipse.xml",
-						String.class)).willReturn(eclipse);
+    @Test
+    public void toolsEclipseXmlRequestsAreCached() throws Exception {
+        String eclipse = FixtureLoader.load("/fixtures/tools/eclipse.xml");
+        given(
+                this.restTemplate.getForObject(
+                        "http://download.springsource.com/release/STS/eclipse.xml",
+                        String.class)).willReturn(eclipse);
 
-		this.mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());
-		this.mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());
 
-		verify(this.restTemplate, times(1)).getForObject(anyString(),
-				(Class<?>) anyObject());
-	}
+        verify(this.restTemplate, times(1)).getForObject(anyString(),
+                (Class<?>) anyObject());
+    }
 
 }

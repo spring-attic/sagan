@@ -11,34 +11,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class TutorialIndexer implements Indexer<Guide> {
 
-	private TutorialMapper mapper = new TutorialMapper();
+    private TutorialMapper mapper = new TutorialMapper();
 
-	private final SearchService searchService;
-	private final GuidesService guidesService;
+    private final SearchService searchService;
+    private final GuidesService guidesService;
 
-	@Autowired
-	public TutorialIndexer(SearchService searchService, GuidesService guidesService) {
-		this.searchService = searchService;
-		this.guidesService = guidesService;
-	}
+    @Autowired
+    public TutorialIndexer(SearchService searchService, GuidesService guidesService) {
+        this.searchService = searchService;
+        this.guidesService = guidesService;
+    }
 
-	@Override
-	public Iterable<Guide> indexableItems() {
-		return guidesService.listTutorials();
-	}
+    @Override
+    public Iterable<Guide> indexableItems() {
+        return guidesService.listTutorials();
+    }
 
-	@Override
-	public void indexItem(Guide tutorial) {
-		searchService.saveToIndex(mapper.map(tutorial));
-	}
+    @Override
+    public void indexItem(Guide tutorial) {
+        searchService.saveToIndex(mapper.map(tutorial));
+    }
 
-	@Override
-	public String counterName() {
-		return "tutorials";
-	}
+    @Override
+    public String counterName() {
+        return "tutorials";
+    }
 
-	@Override
-	public String getId(Guide indexable) {
-		return indexable.getGuideId();
-	}
+    @Override
+    public String getId(Guide indexable) {
+        return indexable.getGuideId();
+    }
 }

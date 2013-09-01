@@ -60,104 +60,104 @@ public class ApplicationConfiguration {
 
 
 
-	public static void main(String[] args) {
-		SpringApplication.run(ApplicationConfiguration.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ApplicationConfiguration.class, args);
+    }
 
-	@Configuration
-	@Profile({"development", "staging", "production"})
-	protected static class CloudFoundryDataSourceConfiguration {
-		@Bean
-		public DataSource dataSource() {
-			CloudEnvironment cloudEnvironment = new CloudEnvironment();
-			RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db",
-					RdbmsServiceInfo.class);
-			RdbmsServiceCreator serviceCreator = new RdbmsServiceCreator();
-			return serviceCreator.createService(serviceInfo);
-		}
-	}
+    @Configuration
+    @Profile({"development", "staging", "production"})
+    protected static class CloudFoundryDataSourceConfiguration {
+        @Bean
+        public DataSource dataSource() {
+            CloudEnvironment cloudEnvironment = new CloudEnvironment();
+            RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db",
+                    RdbmsServiceInfo.class);
+            RdbmsServiceCreator serviceCreator = new RdbmsServiceCreator();
+            return serviceCreator.createService(serviceInfo);
+        }
+    }
 
-	@Configuration
-	@Profile({"local_postgres"})
-	protected static class PostgresConfiguration {
-		@Bean
-		public DataSource dataSource() {
-			PGSimpleDataSource dataSource = new PGSimpleDataSource();
-			dataSource.setPortNumber(5432);
-			dataSource.setDatabaseName("blog_import");
-			dataSource.setServerName("localhost");
-			return dataSource;
-		}
-	}
+    @Configuration
+    @Profile({"local_postgres"})
+    protected static class PostgresConfiguration {
+        @Bean
+        public DataSource dataSource() {
+            PGSimpleDataSource dataSource = new PGSimpleDataSource();
+            dataSource.setPortNumber(5432);
+            dataSource.setDatabaseName("blog_import");
+            dataSource.setServerName("localhost");
+            return dataSource;
+        }
+    }
 
-	@Bean
-	public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl, DateService dateService) {
-		return new BlogPostAtomViewer(siteUrl, dateService);
-	}
+    @Bean
+    public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl, DateService dateService) {
+        return new BlogPostAtomViewer(siteUrl, dateService);
+    }
 
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
-	@Bean
-	public Serializer simpleXmlSerializer() {
-		return new Persister();
-	}
+    @Bean
+    public Serializer simpleXmlSerializer() {
+        return new Persister();
+    }
 
-	@Bean
-	public ProjectMetadataService projectMetadataService() throws IOException {
-		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
-		return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
-	}
+    @Bean
+    public ProjectMetadataService projectMetadataService() throws IOException {
+        InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
+        return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
+    }
 
-	// http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html#filterparams
-	// Blog filter must be declared first, to ensure its rules are applied before the general rules
-	@Bean
-	public FilterRegistrationBean blogRewriteFilterConfig() {
-		FilterRegistrationBean reg = new FilterRegistrationBean();
-		reg.setName("mappingsRewriteFilter");
-		reg.setFilter(new UrlRewriteFilter());
-		reg.addInitParameter("confPath", "mappings_rewrite.xml");
-		reg.addInitParameter("confReloadCheckInterval", "-1");
-		reg.addInitParameter("logLevel", "WARN");
-		return reg;
-	}
+    // http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html#filterparams
+    // Blog filter must be declared first, to ensure its rules are applied before the general rules
+    @Bean
+    public FilterRegistrationBean blogRewriteFilterConfig() {
+        FilterRegistrationBean reg = new FilterRegistrationBean();
+        reg.setName("mappingsRewriteFilter");
+        reg.setFilter(new UrlRewriteFilter());
+        reg.addInitParameter("confPath", "mappings_rewrite.xml");
+        reg.addInitParameter("confReloadCheckInterval", "-1");
+        reg.addInitParameter("logLevel", "WARN");
+        return reg;
+    }
 
-	@Bean
-	public FilterRegistrationBean rewriteFilterConfig() {
-		FilterRegistrationBean reg = new FilterRegistrationBean();
-		reg.setName("rewriteFilter");
-		reg.setFilter(new UrlRewriteFilter());
-		reg.addInitParameter("confPath", "urlrewrite.xml");
-		reg.addInitParameter("confReloadCheckInterval", "-1");
-		reg.addInitParameter("logLevel", "WARN");
-		return reg;
-	}
+    @Bean
+    public FilterRegistrationBean rewriteFilterConfig() {
+        FilterRegistrationBean reg = new FilterRegistrationBean();
+        reg.setName("rewriteFilter");
+        reg.setFilter(new UrlRewriteFilter());
+        reg.addInitParameter("confPath", "urlrewrite.xml");
+        reg.addInitParameter("confReloadCheckInterval", "-1");
+        reg.addInitParameter("logLevel", "WARN");
+        return reg;
+    }
 
-	@Bean
-	public DispatcherServlet dispatcherServlet() {
-		return new DispatcherServlet();
-	}
+    @Bean
+    public DispatcherServlet dispatcherServlet() {
+        return new DispatcherServlet();
+    }
 
-	@Bean
-	public SpringLiquibase springLiquibase(DataSource dataSource) {
-		SpringLiquibase liquibase = new SpringLiquibase();
-		liquibase.setDataSource(dataSource);
-		liquibase.setChangeLog("classpath:db-changeset.yaml");
-		return liquibase;
-	}
+    @Bean
+    public SpringLiquibase springLiquibase(DataSource dataSource) {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setDataSource(dataSource);
+        liquibase.setChangeLog("classpath:db-changeset.yaml");
+        return liquibase;
+    }
 
-	@Bean
-	public CacheManager cacheManager(@Value("${cache.timetolive:300}") Long cacheTimeToLive) {
-		ConcurrentMap<Object,Object> cacheMap = CacheBuilder.newBuilder()
-				.expireAfterWrite(cacheTimeToLive, TimeUnit.SECONDS)
-				.build().asMap();
+    @Bean
+    public CacheManager cacheManager(@Value("${cache.timetolive:300}") Long cacheTimeToLive) {
+        ConcurrentMap<Object,Object> cacheMap = CacheBuilder.newBuilder()
+                .expireAfterWrite(cacheTimeToLive, TimeUnit.SECONDS)
+                .build().asMap();
 
-		ConcurrentMapCache concurrentMapCache = new ConcurrentMapCache("cache", cacheMap, false);
-		SimpleCacheManager cacheManager = new SimpleCacheManager();
-		cacheManager.setCaches(Arrays.asList(concurrentMapCache));
-		return cacheManager;
-	}
+        ConcurrentMapCache concurrentMapCache = new ConcurrentMapCache("cache", cacheMap, false);
+        SimpleCacheManager cacheManager = new SimpleCacheManager();
+        cacheManager.setCaches(Arrays.asList(concurrentMapCache));
+        return cacheManager;
+    }
 
 }

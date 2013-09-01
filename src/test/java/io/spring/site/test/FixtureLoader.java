@@ -9,21 +9,21 @@ import java.nio.charset.Charset;
 
 public class FixtureLoader {
 
-	public static String load(String path) {
-		try {
-			InputStream stream = new ClassPathResource(path, FixtureLoader.class).getInputStream();
-			return StreamUtils.copyToString(stream, Charset.forName("UTF-8"));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    public static String load(String path) {
+        try {
+            InputStream stream = new ClassPathResource(path, FixtureLoader.class).getInputStream();
+            return StreamUtils.copyToString(stream, Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	public static byte[] loadData(String path) {
-		try {
-			InputStream stream = new ClassPathResource(path, FixtureLoader.class).getInputStream();
-			return StreamUtils.copyToByteArray(stream);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    public static byte[] loadData(String path) {
+        try {
+            InputStream stream = new ClassPathResource(path, FixtureLoader.class).getInputStream();
+            return StreamUtils.copyToByteArray(stream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

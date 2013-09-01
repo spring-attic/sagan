@@ -27,87 +27,87 @@ import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
 public class SigninTests extends IntegrationTestBase {
 
-	@Autowired
-	private WebApplicationContext wac;
+    @Autowired
+    private WebApplicationContext wac;
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Before
-	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
-				.addFilters(springSecurityFilterChain)
-				.defaultRequest(get("/").with(csrf()).with(user("Nick").roles("USER"))).build();
-	}
+    @Before
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+                .addFilters(springSecurityFilterChain)
+                .defaultRequest(get("/").with(csrf()).with(user("Nick").roles("USER"))).build();
+    }
 
-	@After
-	public void clean() {
-		SecurityContextHolder.clearContext();
-	}
+    @After
+    public void clean() {
+        SecurityContextHolder.clearContext();
+    }
 
-	@Test
-	public void showsAlertAfterSuccessfulSignOut() throws Exception {
-		MvcResult response = mockMvc.perform(get("/signin?signout=success"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andReturn();
+    @Test
+    public void showsAlertAfterSuccessfulSignOut() throws Exception {
+        MvcResult response = mockMvc.perform(get("/signin?signout=success"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andReturn();
 
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		Element alert = html.select(".alert.alert-success").first();
+        Document html = Jsoup.parse(response.getResponse().getContentAsString());
+        Element alert = html.select(".alert.alert-success").first();
 
-		assertThat("No sign out alert on page", alert, is(notNullValue()));
-		assertThat(alert.text(), containsString("Signed out successfully"));
-	}
+        assertThat("No sign out alert on page", alert, is(notNullValue()));
+        assertThat(alert.text(), containsString("Signed out successfully"));
+    }
 
-	@Test
-	public void showsErrorAlertWhenErrorParameterGiven() throws Exception {
-		MvcResult response = mockMvc.perform(get("/signin?error=foo"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andReturn();
+    @Test
+    public void showsErrorAlertWhenErrorParameterGiven() throws Exception {
+        MvcResult response = mockMvc.perform(get("/signin?error=foo"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andReturn();
 
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		Element alert = html.select(".alert.alert-error").first();
+        Document html = Jsoup.parse(response.getResponse().getContentAsString());
+        Element alert = html.select(".alert.alert-error").first();
 
-		assertThat("No alert on page", alert, is(notNullValue()));
-		assertThat(alert.text(), containsString("You must authenticate and authorize"));
-	}
+        assertThat("No alert on page", alert, is(notNullValue()));
+        assertThat(alert.text(), containsString("You must authenticate and authorize"));
+    }
 
-	@Test
-	public void doesNotShowErrorAlertWhenNoErrorParameterGiven() throws Exception {
-		MvcResult response = mockMvc.perform(get("/signin"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andReturn();
+    @Test
+    public void doesNotShowErrorAlertWhenNoErrorParameterGiven() throws Exception {
+        MvcResult response = mockMvc.perform(get("/signin"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andReturn();
 
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		Element alert = html.select(".alert.alert-error").first();
-		assertThat("Unexpected alert on page ", alert, is(nullValue()));
-	}
+        Document html = Jsoup.parse(response.getResponse().getContentAsString());
+        Element alert = html.select(".alert.alert-error").first();
+        assertThat("Unexpected alert on page ", alert, is(nullValue()));
+    }
 
-	@Test
-	public void showsAuthenticationInformationWhenSignedIn() throws Exception {
-		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-				"Nick",
-				"N/A",
-				AuthorityUtils
-						.commaSeparatedStringToAuthorityList("ROLE_USER"));
-		SecurityContextHolder
-				.getContext()
-				.setAuthentication(
-						authentication);
+    @Test
+    public void showsAuthenticationInformationWhenSignedIn() throws Exception {
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                "Nick",
+                "N/A",
+                AuthorityUtils
+                        .commaSeparatedStringToAuthorityList("ROLE_USER"));
+        SecurityContextHolder
+                .getContext()
+                .setAuthentication(
+                        authentication);
 
-		MvcResult response = mockMvc.perform(get("/admin/blog/new"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andReturn();
+        MvcResult response = mockMvc.perform(get("/admin/blog/new"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andReturn();
 
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		Element alert = html.select("#authentication").first();
-		assertThat("No authentication element found ", alert, is(notNullValue()));
+        Document html = Jsoup.parse(response.getResponse().getContentAsString());
+        Element alert = html.select("#authentication").first();
+        assertThat("No authentication element found ", alert, is(notNullValue()));
 
-		Element signOutLink = html.select("#authentication a").first();
-		assertThat(alert.text(), containsString("Sign out"));
-		assertThat(signOutLink.attr("href"), containsString("/signout"));
-	}
+        Element signOutLink = html.select("#authentication a").first();
+        assertThat(alert.text(), containsString("Sign out"));
+        assertThat(signOutLink.attr("href"), containsString("/signout"));
+    }
 
 }

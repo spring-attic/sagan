@@ -31,65 +31,65 @@ import static org.mockito.Matchers.eq;
 
 public class BlogController_BroadcastPostsTests {
 
-	private static final int TEST_PAGE = 1;
+    private static final int TEST_PAGE = 1;
 
-	@Mock
-	private BlogService blogService;
+    @Mock
+    private BlogService blogService;
 
-	private MockHttpServletRequest request = new MockHttpServletRequest();
+    private MockHttpServletRequest request = new MockHttpServletRequest();
 
-	@Mock
-	private PostViewFactory postViewFactory;
+    @Mock
+    private PostViewFactory postViewFactory;
 
-	private BlogController controller;
-	private ExtendedModelMap model = new ExtendedModelMap();
-	private List<PostView> posts = new ArrayList<PostView>();
-	private Page<PostView> page;
-	private String viewName;
+    private BlogController controller;
+    private ExtendedModelMap model = new ExtendedModelMap();
+    private List<PostView> posts = new ArrayList<PostView>();
+    private Page<PostView> page;
+    private String viewName;
 
-	@Before
-	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
-		this.controller = new BlogController(this.blogService, this.postViewFactory);
+    @Before
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+        this.controller = new BlogController(this.blogService, this.postViewFactory);
 
-		List<Post> posts = new ArrayList<Post>();
-		posts.add(PostBuilder.post().build());
-		Page<Post> postsPage = new PageImpl<Post>(posts, new PageRequest(TEST_PAGE, 10),
-				20);
-		Pageable testPageable = PageableFactory.forLists(TEST_PAGE);
+        List<Post> posts = new ArrayList<Post>();
+        posts.add(PostBuilder.post().build());
+        Page<Post> postsPage = new PageImpl<Post>(posts, new PageRequest(TEST_PAGE, 10),
+                20);
+        Pageable testPageable = PageableFactory.forLists(TEST_PAGE);
 
-		this.page = new PageImpl<PostView>(new ArrayList<PostView>(), testPageable, 1);
+        this.page = new PageImpl<PostView>(new ArrayList<PostView>(), testPageable, 1);
 
-		given(this.blogService.getPublishedBroadcastPosts(eq(testPageable))).willReturn(
-				postsPage);
-		given(this.postViewFactory.createPostViewPage(postsPage)).willReturn(this.page);
-		this.request.setServletPath("/blog");
+        given(this.blogService.getPublishedBroadcastPosts(eq(testPageable))).willReturn(
+                postsPage);
+        given(this.postViewFactory.createPostViewPage(postsPage)).willReturn(this.page);
+        this.request.setServletPath("/blog");
 
-		this.viewName = this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
-	}
+        this.viewName = this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
+    }
 
-	@Test
-	public void providesAllCategoriesInModel() {
-		assertThat((PostCategory[]) this.model.get("categories"),
-				is(PostCategory.values()));
-	}
+    @Test
+    public void providesAllCategoriesInModel() {
+        assertThat((PostCategory[]) this.model.get("categories"),
+                is(PostCategory.values()));
+    }
 
-	@Test
-	public void providesPaginationInfoInModel() {
-		assertThat((PaginationInfo) this.model.get("paginationInfo"),
-				is(new PaginationInfo(this.page)));
-	}
+    @Test
+    public void providesPaginationInfoInModel() {
+        assertThat((PaginationInfo) this.model.get("paginationInfo"),
+                is(new PaginationInfo(this.page)));
+    }
 
-	@Test
-	public void viewNameIsIndex() throws Exception {
-		assertThat(this.viewName, is("blog/index"));
-	}
+    @Test
+    public void viewNameIsIndex() throws Exception {
+        assertThat(this.viewName, is("blog/index"));
+    }
 
-	@SuppressWarnings("unchecked")
-	@Test
-	public void postsInModel() throws Exception {
-		this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
-		assertThat((List<PostView>) this.model.get("posts"), is(this.posts));
-	}
+    @SuppressWarnings("unchecked")
+    @Test
+    public void postsInModel() throws Exception {
+        this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
+        assertThat((List<PostView>) this.model.get("posts"), is(this.posts));
+    }
 
 }

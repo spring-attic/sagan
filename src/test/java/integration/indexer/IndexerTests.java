@@ -37,118 +37,118 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 public class IndexerTests extends IntegrationTestBase {
 
-	private CrawlerService stubCrawlerService = new CrawlerService(
-	) {
-		@Override
-		public void crawl(String url, int linkDepth, DocumentProcessor processor) {
-			try {
-				MvcResult response = IndexerTests.this.mockMvc.perform(get(url))
-						.andReturn();
-				Document html = Jsoup.parse(response.getResponse().getContentAsString());
-				processor.process(html);
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
-	};
+    private CrawlerService stubCrawlerService = new CrawlerService(
+    ) {
+        @Override
+        public void crawl(String url, int linkDepth, DocumentProcessor processor) {
+            try {
+                MvcResult response = IndexerTests.this.mockMvc.perform(get(url))
+                        .andReturn();
+                Document html = Jsoup.parse(response.getResponse().getContentAsString());
+                processor.process(html);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    };
 
-	public SearchEntry indexedEntry;
+    public SearchEntry indexedEntry;
 
-	private SearchService stubSearchService = new SearchService(null, null) {
-		@Override
-		public void saveToIndex(SearchEntry entry) {
-			IndexerTests.this.indexedEntry = entry;
-		}
-	};
+    private SearchService stubSearchService = new SearchService(null, null) {
+        @Override
+        public void saveToIndex(SearchEntry entry) {
+            IndexerTests.this.indexedEntry = entry;
+        }
+    };
 
-	@Autowired
-	private RestTemplate restTemplate;
+    @Autowired
+    private RestTemplate restTemplate;
 
-	@Before
-	public void setup() throws IOException {
-		String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
-		stub(this.restTemplate.getForObject(anyString(), eq(String.class))).toReturn(
-				responseXml);
-	}
+    @Before
+    public void setup() throws IOException {
+        String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
+        stub(this.restTemplate.getForObject(anyString(), eq(String.class))).toReturn(
+                responseXml);
+    }
 
-	@Test
-	public void toolPagesAreNotIndexedWithHeaderOrFooterContent() throws Exception {
-		ToolsIndexer toolsIndexer = new ToolsIndexer(this.stubCrawlerService,
-				this.stubSearchService);
+    @Test
+    public void toolPagesAreNotIndexedWithHeaderOrFooterContent() throws Exception {
+        ToolsIndexer toolsIndexer = new ToolsIndexer(this.stubCrawlerService,
+                this.stubSearchService);
 
-		toolsIndexer.indexItem("/tools");
+        toolsIndexer.indexItem("/tools");
 
-		assertThat(this.indexedEntry.getRawContent(), containsString("Tools"));
+        assertThat(this.indexedEntry.getRawContent(), containsString("Tools"));
 
-		assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
-		assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
-		assertThat(this.indexedEntry.getRawContent(),
-				not(containsString("Documentation")));
-		assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
-		assertThat(this.indexedEntry.getRawContent(),
-				not(containsString("Trademark Standards")));
-		assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
-	}
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
+        assertThat(this.indexedEntry.getRawContent(),
+                not(containsString("Documentation")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
+        assertThat(this.indexedEntry.getRawContent(),
+                not(containsString("Trademark Standards")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
+    }
 
-	@Test
-	public void staticPagesAreNotIndexedWithHeaderOrFooterContent() throws Exception {
-		StaticPageIndexer staticPageIndexer = new StaticPageIndexer(
-				this.stubCrawlerService, this.stubSearchService,
-				mock(StaticPagePathFinder.class));
+    @Test
+    public void staticPagesAreNotIndexedWithHeaderOrFooterContent() throws Exception {
+        StaticPageIndexer staticPageIndexer = new StaticPageIndexer(
+                this.stubCrawlerService, this.stubSearchService,
+                mock(StaticPagePathFinder.class));
 
-		staticPageIndexer.indexItem("/about");
+        staticPageIndexer.indexItem("/about");
 
-		assertThat(this.indexedEntry.getRawContent(), containsString("About"));
+        assertThat(this.indexedEntry.getRawContent(), containsString("About"));
 
-		assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
-		assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
-		assertThat(this.indexedEntry.getRawContent(),
-				not(containsString("Documentation")));
-		assertThat(this.indexedEntry.getRawContent(), not(containsString("Tools")));
-		assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
-		assertThat(this.indexedEntry.getRawContent(),
-				not(containsString("Trademark Standards")));
-		assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
-	}
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
+        assertThat(this.indexedEntry.getRawContent(),
+                not(containsString("Documentation")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Tools")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
+        assertThat(this.indexedEntry.getRawContent(),
+                not(containsString("Trademark Standards")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
+    }
 
-	@Test
-	public void tutorialGuidesAreIndexed() throws Exception {
-		TutorialIndexer tutorialIndexer = new TutorialIndexer(this.stubSearchService,
-				mock(GuidesService.class));
+    @Test
+    public void tutorialGuidesAreIndexed() throws Exception {
+        TutorialIndexer tutorialIndexer = new TutorialIndexer(this.stubSearchService,
+                mock(GuidesService.class));
 
-		Guide restTutorial = new Guide("tut-rest", "rest", "Learn rest", "rest subtitle",
-				"This is the rest tutorial content", "");
-		tutorialIndexer.indexItem(restTutorial);
+        Guide restTutorial = new Guide("tut-rest", "rest", "Learn rest", "rest subtitle",
+                "This is the rest tutorial content", "");
+        tutorialIndexer.indexItem(restTutorial);
 
-		assertThat(this.indexedEntry.getRawContent(),
-				equalTo("This is the rest tutorial content"));
-		assertThat(this.indexedEntry.getFacetPaths(),
-				containsInAnyOrder("Guides", "Guides/Tutorials"));
-		assertThat(this.indexedEntry.getTitle(), equalTo("Learn rest"));
-		assertThat(this.indexedEntry.getSubTitle(), equalTo("Tutorial"));
-		assertThat(this.indexedEntry.getSummary(),
-				equalTo("This is the rest tutorial content"));
-		assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
-	}
+        assertThat(this.indexedEntry.getRawContent(),
+                equalTo("This is the rest tutorial content"));
+        assertThat(this.indexedEntry.getFacetPaths(),
+                containsInAnyOrder("Guides", "Guides/Tutorials"));
+        assertThat(this.indexedEntry.getTitle(), equalTo("Learn rest"));
+        assertThat(this.indexedEntry.getSubTitle(), equalTo("Tutorial"));
+        assertThat(this.indexedEntry.getSummary(),
+                equalTo("This is the rest tutorial content"));
+        assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
+    }
 
-	@Test
-	public void gettingStartedGuidesAreIndexed() throws Exception {
-		GettingStartedGuideIndexer tutorialIndexer = new GettingStartedGuideIndexer(
-				this.stubSearchService, mock(GuidesService.class));
+    @Test
+    public void gettingStartedGuidesAreIndexed() throws Exception {
+        GettingStartedGuideIndexer tutorialIndexer = new GettingStartedGuideIndexer(
+                this.stubSearchService, mock(GuidesService.class));
 
-		Guide restTutorial = new Guide("gs-rest-service", "rest-service",
-				"Learn about rest", "rest subtitle", "This is the rest guide content",
-				"This is the sidebar");
-		tutorialIndexer.indexItem(restTutorial);
+        Guide restTutorial = new Guide("gs-rest-service", "rest-service",
+                "Learn about rest", "rest subtitle", "This is the rest guide content",
+                "This is the sidebar");
+        tutorialIndexer.indexItem(restTutorial);
 
-		assertThat(this.indexedEntry.getRawContent(),
-				equalTo("This is the rest guide content"));
-		assertThat(this.indexedEntry.getFacetPaths(),
-				containsInAnyOrder("Guides", "Guides/Getting Started"));
-		assertThat(this.indexedEntry.getTitle(), equalTo("Learn about rest"));
-		assertThat(this.indexedEntry.getSubTitle(), equalTo("Getting Started Guide"));
-		assertThat(this.indexedEntry.getSummary(),
-				equalTo("This is the rest guide content"));
-		assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
-	}
+        assertThat(this.indexedEntry.getRawContent(),
+                equalTo("This is the rest guide content"));
+        assertThat(this.indexedEntry.getFacetPaths(),
+                containsInAnyOrder("Guides", "Guides/Getting Started"));
+        assertThat(this.indexedEntry.getTitle(), equalTo("Learn about rest"));
+        assertThat(this.indexedEntry.getSubTitle(), equalTo("Getting Started Guide"));
+        assertThat(this.indexedEntry.getSummary(),
+                equalTo("This is the rest guide content"));
+        assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
+    }
 }

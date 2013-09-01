@@ -12,27 +12,27 @@ import java.util.List;
 
 public class DeleteQueryBuilder {
 
-	public String unsupportedProjectEntriesQuery(String projectId, List<String> supportedVersions) {
-		QueryBuilder query = QueryBuilders.matchAllQuery();
+    public String unsupportedProjectEntriesQuery(String projectId, List<String> supportedVersions) {
+        QueryBuilder query = QueryBuilders.matchAllQuery();
 
 
-		OrFilterBuilder supportedVersionsFilter = matchSupportedVersions(supportedVersions);
-		NotFilterBuilder notSupportedVersionFilter = new NotFilterBuilder(supportedVersionsFilter);
+        OrFilterBuilder supportedVersionsFilter = matchSupportedVersions(supportedVersions);
+        NotFilterBuilder notSupportedVersionFilter = new NotFilterBuilder(supportedVersionsFilter);
 
-		TermFilterBuilder projectFilter = new TermFilterBuilder("projectId", projectId);
+        TermFilterBuilder projectFilter = new TermFilterBuilder("projectId", projectId);
 
-		AndFilterBuilder filter = new AndFilterBuilder(notSupportedVersionFilter, projectFilter);
+        AndFilterBuilder filter = new AndFilterBuilder(notSupportedVersionFilter, projectFilter);
 
-		FilteredQueryBuilder filteredQuery = QueryBuilders.filteredQuery(query, filter);
+        FilteredQueryBuilder filteredQuery = QueryBuilders.filteredQuery(query, filter);
 
-		return filteredQuery.toString();
-	}
+        return filteredQuery.toString();
+    }
 
-	private OrFilterBuilder matchSupportedVersions(List<String> supportedVersions) {
-		OrFilterBuilder orFilter = new OrFilterBuilder();
-		for (String supportedVersion : supportedVersions) {
-			orFilter.add(new TermFilterBuilder("version", supportedVersion));
-		}
-		return orFilter;
-	}
+    private OrFilterBuilder matchSupportedVersions(List<String> supportedVersions) {
+        OrFilterBuilder orFilter = new OrFilterBuilder();
+        for (String supportedVersion : supportedVersions) {
+            orFilter.add(new TermFilterBuilder("version", supportedVersion));
+        }
+        return orFilter;
+    }
 }

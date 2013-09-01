@@ -23,28 +23,28 @@ import static requestpostprocessors.SecurityRequestPostProcessors.user;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {IntegrationTestsConfiguration.class,
-		InMemoryElasticSearchConfiguration.class},
-		initializers = ConfigFileApplicationContextInitializer.class)
+        InMemoryElasticSearchConfiguration.class},
+        initializers = ConfigFileApplicationContextInitializer.class)
 @Transactional
 public abstract class IntegrationTestBase {
 
-	@Autowired
-	protected WebApplicationContext wac;
+    @Autowired
+    protected WebApplicationContext wac;
 
-	@Autowired
-	protected StubGithubRestClient stubRestClient;
+    @Autowired
+    protected StubGithubRestClient stubRestClient;
 
-	@Autowired
-	protected FilterChainProxy springSecurityFilterChain;
+    @Autowired
+    protected FilterChainProxy springSecurityFilterChain;
 
-	protected MockMvc mockMvc;
+    protected MockMvc mockMvc;
 
-	@Before
-	public void setupMockMvc() {
-		stubRestClient.clearResponses();
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
-				.addFilters(springSecurityFilterChain)
-				.defaultRequest(get("/").with(csrf()).with(user("admin").roles("ADMIN")))
-				.build();
-	}
+    @Before
+    public void setupMockMvc() {
+        stubRestClient.clearResponses();
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+                .addFilters(springSecurityFilterChain)
+                .defaultRequest(get("/").with(csrf()).with(user("admin").roles("ADMIN")))
+                .build();
+    }
 }

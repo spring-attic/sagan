@@ -16,17 +16,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @NavSection("guides")
 public class GuidesController {
 
-	private GuidesService service;
+    private GuidesService service;
 
-	@Autowired
-	public GuidesController(GuidesService service) {
-		this.service = service;
-	}
+    @Autowired
+    public GuidesController(GuidesService service) {
+        this.service = service;
+    }
 
-	@RequestMapping(value = "", method = { GET, HEAD })
-	public String index(Model model) {
-		model.addAttribute("guides", service.listGettingStartedGuidesWithoutContent());
-		model.addAttribute("tutorials", service.listTutorialsWithoutContent());
-		return "guides/index";
-	}
+    @RequestMapping(value = "", method = { GET, HEAD })
+    public String index(Model model) {
+        model.addAttribute("guides", service.listGettingStartedGuidesWithoutContent());
+        model.addAttribute("tutorials", service.listTutorialsWithoutContent());
+        return "guides/index";
+    }
 }

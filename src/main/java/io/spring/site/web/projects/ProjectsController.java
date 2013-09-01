@@ -16,17 +16,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @NavSection("projects")
 public class ProjectsController {
 
-	private ProjectMetadataService service;
+    private ProjectMetadataService service;
 
-	@Autowired
-	public ProjectsController(ProjectMetadataService service) {
-		this.service = service;
-	}
+    @Autowired
+    public ProjectsController(ProjectMetadataService service) {
+        this.service = service;
+    }
 
-	@RequestMapping(value = "", method = { GET, HEAD })
-	public String listProjects(Model model) {
-		model.addAttribute("projectMetadata", service);
-		return "projects/index";
-	}
+    @RequestMapping(value = "", method = { GET, HEAD })
+    public String listProjects(Model model) {
+        model.addAttribute("projectMetadata", service);
+        return "projects/index";
+    }
 
 }

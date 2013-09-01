@@ -15,25 +15,25 @@ import java.util.List;
 
 public class SecurityContextAuthenticationFilterTests {
 
-	private SecurityContextAuthenticationFilter filter = new SecurityContextAuthenticationFilter("/foo");
+    private SecurityContextAuthenticationFilter filter = new SecurityContextAuthenticationFilter("/foo");
 
-	@After
-	public void clean() {
-		SecurityContextHolder.clearContext();
-	}
+    @After
+    public void clean() {
+        SecurityContextHolder.clearContext();
+    }
 
-	@Test
-	public void testSuccessfulAuthentication() throws Exception {
-		List<GrantedAuthority> roleUser = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
-		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken("Nick","N/A",roleUser);
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+    @Test
+    public void testSuccessfulAuthentication() throws Exception {
+        List<GrantedAuthority> roleUser = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken("Nick","N/A",roleUser);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		assertEquals(authentication, filter.attemptAuthentication(null, null));
-	}
+        assertEquals(authentication, filter.attemptAuthentication(null, null));
+    }
 
-	@Test
-	public void testUnsuccessfulAuthentication() throws Exception {
-		assertEquals(null, filter.attemptAuthentication(null, null));
-	}
+    @Test
+    public void testUnsuccessfulAuthentication() throws Exception {
+        assertEquals(null, filter.attemptAuthentication(null, null));
+    }
 
 }

@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Service
 public class DateService {
-	public Date now() {
-		return new Date();
-	}
+    public Date now() {
+        return new Date();
+    }
 }

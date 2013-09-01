@@ -18,38 +18,38 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class MigrateFetchTeamMemberTests extends IntegrationTestBase {
-	@Autowired
-	private WebApplicationContext wac;
+    @Autowired
+    private WebApplicationContext wac;
 
-	@Autowired
-	private TeamRepository teamRepository;
+    @Autowired
+    private TeamRepository teamRepository;
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Before
-	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-	}
+    @Before
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
 
-	@Test
-	public void postToMigrateMemberProfile() throws Exception {
-		MemberProfile john = new MemberProfile();
-		john.setName("John Doe");
-		john.setUsername("jdoe");
+    @Test
+    public void postToMigrateMemberProfile() throws Exception {
+        MemberProfile john = new MemberProfile();
+        john.setName("John Doe");
+        john.setUsername("jdoe");
 
-		teamRepository.save(john);
+        teamRepository.save(john);
 
-		MemberProfile guy = new MemberProfile();
-		guy.setName("Some Guy");
-		guy.setUsername("someguy");
+        MemberProfile guy = new MemberProfile();
+        guy.setName("Some Guy");
+        guy.setUsername("someguy");
 
-		teamRepository.save(guy);
+        teamRepository.save(guy);
 
-		MockHttpServletRequestBuilder migrateProfile = get("/migration/team_members");
+        MockHttpServletRequestBuilder migrateProfile = get("/migration/team_members");
 
-		mockMvc.perform(migrateProfile).andExpect(status().isOk())
-				.andExpect(content().string(containsString("\"John Doe\":\"jdoe\"")))
-				.andExpect(content().string(containsString("\"Some Guy\":\"someguy\"")));
+        mockMvc.perform(migrateProfile).andExpect(status().isOk())
+                .andExpect(content().string(containsString("\"John Doe\":\"jdoe\"")))
+                .andExpect(content().string(containsString("\"Some Guy\":\"someguy\"")));
 
-	}
+    }
 }

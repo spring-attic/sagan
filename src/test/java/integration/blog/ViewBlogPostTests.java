@@ -19,26 +19,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ViewBlogPostTests extends IntegrationTestBase {
 
-	@Autowired
-	private PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-	private Post post;
+    private Post post;
 
-	@Before
-	public void setup() throws ParseException {
-		post = PostBuilder.post()
-				.publishAt("2013-04-01 11:00")
-				.title("Title")
-				.rawContent("Content")
-				.category(PostCategory.ENGINEERING).build();
-		postRepository.save(post);
-	}
+    @Before
+    public void setup() throws ParseException {
+        post = PostBuilder.post()
+                .publishAt("2013-04-01 11:00")
+                .title("Title")
+                .rawContent("Content")
+                .category(PostCategory.ENGINEERING).build();
+        postRepository.save(post);
+    }
 
-	@Test
-	public void getBlogPage() throws Exception {
-		this.mockMvc.perform(get("/blog/" + post.getPublicSlug()))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Title")));
-	}
+    @Test
+    public void getBlogPage() throws Exception {
+        this.mockMvc.perform(get("/blog/" + post.getPublicSlug()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andExpect(content().string(containsString("Title")));
+    }
 }

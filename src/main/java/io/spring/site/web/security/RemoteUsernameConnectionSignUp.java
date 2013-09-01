@@ -11,8 +11,8 @@ import org.springframework.social.connect.ConnectionSignUp;
  * 
  */
 public class RemoteUsernameConnectionSignUp implements ConnectionSignUp {
-	@Override
-	public String execute(Connection<?> connection) {
-		return connection.getKey().getProviderUserId() != null ? connection.getKey().getProviderUserId() : null;
-	}
+    @Override
+    public String execute(Connection<?> connection) {
+        return connection.getKey().getProviderUserId() != null ? connection.getKey().getProviderUserId() : null;
+    }
 }

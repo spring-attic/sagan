@@ -19,32 +19,32 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @NavSection("guides")
 public class TutorialsController {
 
-	private GuidesService service;
+    private GuidesService service;
 
-	@Autowired
-	public TutorialsController(GuidesService service) {
-		this.service = service;
-	}
+    @Autowired
+    public TutorialsController(GuidesService service) {
+        this.service = service;
+    }
 
-	@RequestMapping(value = "/{tutorialId}", method = { GET, HEAD })
-	public String viewTutorial(@PathVariable String tutorialId, Model model) {
-		model.addAttribute("tutorialId", tutorialId);
-		model.addAttribute("tutorial", service.loadTutorial(tutorialId));
-		return "guides/tutorial/show";
-	}
+    @RequestMapping(value = "/{tutorialId}", method = { GET, HEAD })
+    public String viewTutorial(@PathVariable String tutorialId, Model model) {
+        model.addAttribute("tutorialId", tutorialId);
+        model.addAttribute("tutorial", service.loadTutorial(tutorialId));
+        return "guides/tutorial/show";
+    }
 
-	@RequestMapping(value = "/{tutorialId}/{pagePath}", method = { GET, HEAD })
-	public String viewTutorialPage(@PathVariable String tutorialId, @PathVariable String pagePath, Model model) {
-		model.addAttribute("tutorialId", tutorialId);
-		model.addAttribute("tutorial", service.loadTutorialPage(tutorialId, pagePath));
-		return "guides/tutorial/show";
-	}
+    @RequestMapping(value = "/{tutorialId}/{pagePath}", method = { GET, HEAD })
+    public String viewTutorialPage(@PathVariable String tutorialId, @PathVariable String pagePath, Model model) {
+        model.addAttribute("tutorialId", tutorialId);
+        model.addAttribute("tutorial", service.loadTutorialPage(tutorialId, pagePath));
+        return "guides/tutorial/show";
+    }
 
-	@RequestMapping(value = "/{tutorialId}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })
-	public ResponseEntity<byte[]> loadImage(@PathVariable String tutorialId,
-											@PathVariable("name") String imageName) {
-		byte[] image = this.service.loadTutorialImage(tutorialId, imageName);
-		return new ResponseEntity<>(image, HttpStatus.OK);
-	}
+    @RequestMapping(value = "/{tutorialId}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })
+    public ResponseEntity<byte[]> loadImage(@PathVariable String tutorialId,
+                                            @PathVariable("name") String imageName) {
+        byte[] image = this.service.loadTutorialImage(tutorialId, imageName);
+        return new ResponseEntity<>(image, HttpStatus.OK);
+    }
 
 }

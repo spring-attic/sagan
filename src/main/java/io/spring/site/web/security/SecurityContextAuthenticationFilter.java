@@ -23,27 +23,27 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
  * 
  */
 public class SecurityContextAuthenticationFilter extends
-		AbstractAuthenticationProcessingFilter {
+        AbstractAuthenticationProcessingFilter {
 
-	public SecurityContextAuthenticationFilter(String defaultFilterProcessesUrl) {
-		super(defaultFilterProcessesUrl);
-		setAuthenticationManager(new AuthenticationManager() {
-			// No-op authentication manager is required by base class, but
-			// actually redundant here because the authentication has either
-			// already happened (happy day) or not (user is not authenticated)
-			@Override
-			public Authentication authenticate(Authentication authentication)
-					throws AuthenticationException {
-				throw new IllegalStateException(
-						"Unexpected call for AuthenticationManager");
-			}
-		});
-	}
+    public SecurityContextAuthenticationFilter(String defaultFilterProcessesUrl) {
+        super(defaultFilterProcessesUrl);
+        setAuthenticationManager(new AuthenticationManager() {
+            // No-op authentication manager is required by base class, but
+            // actually redundant here because the authentication has either
+            // already happened (happy day) or not (user is not authenticated)
+            @Override
+            public Authentication authenticate(Authentication authentication)
+                    throws AuthenticationException {
+                throw new IllegalStateException(
+                        "Unexpected call for AuthenticationManager");
+            }
+        });
+    }
 
-	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request,
-			HttpServletResponse response) throws AuthenticationException,
-			IOException, ServletException {
-		return SecurityContextHolder.getContext().getAuthentication();
-	}
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request,
+            HttpServletResponse response) throws AuthenticationException,
+            IOException, ServletException {
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
 }

@@ -20,60 +20,60 @@ import static org.mockito.Matchers.eq;
 @RunWith(MockitoJUnitRunner.class)
 public class GitHubServiceTests {
 
-	@Mock
-	GitHubRestClient gitHubRestClient;
-	private GitHubService service;
+    @Mock
+    GitHubRestClient gitHubRestClient;
+    private GitHubService service;
 
-	@Before
-	public void setUp() throws Exception {
-		service = new GitHubService(gitHubRestClient);
-	}
+    @Before
+    public void setUp() throws Exception {
+        service = new GitHubService(gitHubRestClient);
+    }
 
-	@Test
-	public void getRawFileAsHtml_fetchesRenderedHtmlFromGitHub() throws Exception {
-		given(gitHubRestClient.sendRequestForHtml("/path/to/html")).willReturn("<h1>Something</h1>");
+    @Test
+    public void getRawFileAsHtml_fetchesRenderedHtmlFromGitHub() throws Exception {
+        given(gitHubRestClient.sendRequestForHtml("/path/to/html")).willReturn("<h1>Something</h1>");
 
-		assertThat(service.getRawFileAsHtml("/path/to/html"), equalTo("<h1>Something</h1>"));
-	}
+        assertThat(service.getRawFileAsHtml("/path/to/html"), equalTo("<h1>Something</h1>"));
+    }
 
-	@Test
-	public void getRepoInfo_fetchesGitHubRepos() {
-		String response = FixtureLoader.load("/fixtures/github/githubRepo.json");
+    @Test
+    public void getRepoInfo_fetchesGitHubRepos() {
+        String response = FixtureLoader.load("/fixtures/github/githubRepo.json");
 
-		given(gitHubRestClient.sendRequestForJson(anyString(), eq("user"), eq("repo"))).willReturn(response);
+        given(gitHubRestClient.sendRequestForJson(anyString(), eq("user"), eq("repo"))).willReturn(response);
 
-		GitHubRepo repoInfo = service.getRepoInfo("user", "repo");
-		assertThat(repoInfo.getName(), equalTo("spring-boot"));
-	}
+        GitHubRepo repoInfo = service.getRepoInfo("user", "repo");
+        assertThat(repoInfo.getName(), equalTo("spring-boot"));
+    }
 
-	@Test
-	public void renderToHtml_sendsMarkdownToGithub_returnsHtml() {
-		String response = "<h3>Title</h3>";
+    @Test
+    public void renderToHtml_sendsMarkdownToGithub_returnsHtml() {
+        String response = "<h3>Title</h3>";
 
-		given(gitHubRestClient.sendPostRequestForHtml(anyString(), eq("### Title"))).willReturn(response);
+        given(gitHubRestClient.sendPostRequestForHtml(anyString(), eq("### Title"))).willReturn(response);
 
-		assertThat(service.renderToHtml("### Title"), equalTo(response));
-	}
+        assertThat(service.renderToHtml("### Title"), equalTo(response));
+    }
 
-	@Test
-	public void getImage_fetchesImageFromGitHub() {
-		byte[] expected = {1, 2, 3};
-		String encoded = Base64.encode(expected);
-		String response = String.format("{\"content\":\"%s\"}", encoded);
+    @Test
+    public void getImage_fetchesImageFromGitHub() {
+        byte[] expected = {1, 2, 3};
+        String encoded = Base64.encode(expected);
+        String response = String.format("{\"content\":\"%s\"}", encoded);
 
-		given(gitHubRestClient.sendRequestForJson(anyString(), eq("my-repo"), eq("image.png"))).willReturn(response);
+        given(gitHubRestClient.sendRequestForJson(anyString(), eq("my-repo"), eq("image.png"))).willReturn(response);
 
-		assertThat(service.getGuideImage("my-repo", "image.png"), equalTo(expected));
-	}
+        assertThat(service.getGuideImage("my-repo", "image.png"), equalTo(expected));
+    }
 
-	@Test
-	public void getGitHubRepos_fetchesGuideReposGitHub() {
-		String response = FixtureLoader.load("/fixtures/github/githubRepoList.json");
+    @Test
+    public void getGitHubRepos_fetchesGuideReposGitHub() {
+        String response = FixtureLoader.load("/fixtures/github/githubRepoList.json");
 
-		given(gitHubRestClient.sendRequestForJson(anyString())).willReturn(response);
+        given(gitHubRestClient.sendRequestForJson(anyString())).willReturn(response);
 
-		GitHubRepo[] repos = service.getGitHubRepos("/path/to/guide/repos");
-		assertThat(repos[0].getName(), equalTo("gs-rest-service"));
-	}
+        GitHubRepo[] repos = service.getGitHubRepos("/path/to/guide/repos");
+        assertThat(repos[0].getName(), equalTo("gs-rest-service"));
+    }
 
 }
