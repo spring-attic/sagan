@@ -43,7 +43,7 @@ NEXT=`if [ "$CURRENT" == "sagan-green" ]; then echo sagan-blue; else echo sagan-
 
 echo Next app to be deployed will be $NEXT.
 
-$CF push --manifest manifest-$SPACE.yml --name $NEXT --reset --start || exit
+$CF push --manifest manifest/$SPACE.yml --name $NEXT --reset --start || exit
 
 # Map new app
 $CF map --app $NEXT --host sagan-$SPACE --domain cfapps.io || exit
@@ -97,4 +97,4 @@ if [ $SPACE == "production" ]; then
 
 fi;
 
-$CF push --manifest manifest-$SPACE.yml --name sagan-indexer --host sagan-indexer-$SPACE --reset --start
+$CF push --manifest manifest/$SPACE.yml --name sagan-indexer --host sagan-indexer-$SPACE --reset --start
