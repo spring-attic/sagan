@@ -116,7 +116,7 @@ public class ApplicationConfiguration {
         FilterRegistrationBean reg = new FilterRegistrationBean();
         reg.setName("mappingsRewriteFilter");
         reg.setFilter(new UrlRewriteFilter());
-        reg.addInitParameter("confPath", "mappings_rewrite.xml");
+        reg.addInitParameter("confPath", "urlrewrite/urlrewrite-generated.xml");
         reg.addInitParameter("confReloadCheckInterval", "-1");
         reg.addInitParameter("logLevel", "WARN");
         return reg;
@@ -127,7 +127,7 @@ public class ApplicationConfiguration {
         FilterRegistrationBean reg = new FilterRegistrationBean();
         reg.setName("rewriteFilter");
         reg.setFilter(new UrlRewriteFilter());
-        reg.addInitParameter("confPath", "urlrewrite.xml");
+        reg.addInitParameter("confPath", "urlrewrite/urlrewrite.xml");
         reg.addInitParameter("confReloadCheckInterval", "-1");
         reg.addInitParameter("logLevel", "WARN");
         return reg;

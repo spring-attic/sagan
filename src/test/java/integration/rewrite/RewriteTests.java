@@ -25,8 +25,8 @@ public class RewriteTests {
 
     @Before
     public void setUp() throws Exception {
-        UrlRewriteFilter filter = createUrlFilter("rewriteFilter", "urlrewrite.xml");
-        UrlRewriteFilter mappingsFilter = createUrlFilter("mappingsRewriteFilter", "mappings_rewrite.xml");
+        UrlRewriteFilter filter = createUrlFilter("rewriteFilter", "urlrewrite/urlrewrite.xml");
+        UrlRewriteFilter mappingsFilter = createUrlFilter("mappingsRewriteFilter", "urlrewrite/urlrewrite-generated.xml");
         filterChain = new PassThroughFilterChain(mappingsFilter, new PassThroughFilterChain(filter, new MockFilterChain()));
     }
 
