@@ -47,6 +47,7 @@ projects:
     - id: spring-android
       name: Spring for Android
       lead: rclarkson
+      groupId: org.springframework.android
       supportedVersions:
         - 1.0.1.RELEASE
 
