@@ -4,9 +4,6 @@ import io.spring.site.domain.team.SignInService;
 import io.spring.site.web.security.GithubAuthenticationSigninAdapter;
 import io.spring.site.web.security.RemoteUsernameConnectionSignUp;
 import io.spring.site.web.security.SecurityContextAuthenticationFilter;
-
-import javax.servlet.Filter;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
@@ -16,16 +13,20 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.util.AntPathRequestMatcher;
 import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
+
+import javax.servlet.Filter;
 
 @Configuration
 @ComponentScan({ "io.spring.site.domain.team", "io.spring.site.web.security",
@@ -79,17 +80,17 @@ public class SecurityConfiguration {
         protected void configure(HttpSecurity http) throws Exception {
             http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
             http.requestMatchers().antMatchers("/admin/**", "/signout");
-            http.logout().logoutUrl("/signout")
-                    .logoutSuccessUrl("/signin?signout=success");
+            http.logout()
+					.logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
+					.logoutSuccessUrl("/");
             http.authorizeRequests().anyRequest().authenticated();
             if (isForceHttps()) {
                 http.requiresChannel().anyRequest().requiresSecure();
             }
         }
 
-        private AuthenticationEntryPoint authenticationEntryPoint() {
-            LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint(
-                    "/signin");
+		private AuthenticationEntryPoint authenticationEntryPoint() {
+            LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint("/signin");
             entryPoint.setForceHttps(isForceHttps());
             return entryPoint;
         }

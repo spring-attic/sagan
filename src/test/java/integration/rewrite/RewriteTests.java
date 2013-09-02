@@ -170,11 +170,6 @@ public class RewriteTests {
     }
 
     @Test
-    public void adminSignoutIsRedirectedToHome() throws Exception {
-        validateTemporaryRedirect("http://springframework.io/signout", "/");
-    }
-
-    @Test
     public void legacyLinkedInPathIsRedirected() throws Exception {
         validateTemporaryRedirect("http://www.springsource.org/linkedin", "http://www.linkedin.com/groups/Spring-Users-46964?gid=46964");
     }

@@ -140,12 +140,6 @@
         <to type="temporary-redirect" last="true">http://projects.springframework.io$1</to>
     </rule>
     <rule>
-        <name>Sign out</name>
-        <note>Take the user to home page upon signing out</note>
-        <from>^/signout$</from>
-        <to type="temporary-redirect" last="true">/</to>
-    </rule>
-    <rule>
         <name>LinkedIn</name>
         <condition name="host">www.springsource.org</condition>
         <from>^/linkedin$</from>

@@ -12,6 +12,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -19,13 +20,15 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static requestpostprocessors.SecurityRequestPostProcessors.*;
+import static requestpostprocessors.SecurityRequestPostProcessors.csrf;
+import static requestpostprocessors.SecurityRequestPostProcessors.user;
 
-public class SigninTests extends IntegrationTestBase {
+public class AuthenticationTests extends IntegrationTestBase {
 
     @Autowired
     private WebApplicationContext wac;
@@ -42,20 +45,6 @@ public class SigninTests extends IntegrationTestBase {
     @After
     public void clean() {
         SecurityContextHolder.clearContext();
-    }
-
-    @Test
-    public void showsAlertAfterSuccessfulSignOut() throws Exception {
-        MvcResult response = mockMvc.perform(get("/signin?signout=success"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("text/html"))
-                .andReturn();
-
-        Document html = Jsoup.parse(response.getResponse().getContentAsString());
-        Element alert = html.select(".alert.alert-success").first();
-
-        assertThat("No sign out alert on page", alert, is(notNullValue()));
-        assertThat(alert.text(), containsString("Signed out successfully"));
     }
 
     @Test
@@ -110,4 +99,25 @@ public class SigninTests extends IntegrationTestBase {
         assertThat(signOutLink.attr("href"), containsString("/signout"));
     }
 
+	@Test
+	public void signoutRedirectsToTheHomePage() throws Exception {
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+				"Nick",
+				"N/A",
+				AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+		SecurityContextHolder
+				.getContext()
+				.setAuthentication(authentication);
+
+
+		this.mockMvc.perform(get("/signout"))
+				.andExpect(status().isFound())
+				.andExpect(new ResultMatcher() {
+					@Override
+					public void match(MvcResult result) {
+						String redirectedUrl = result.getResponse().getRedirectedUrl();
+						assertThat(redirectedUrl, equalTo("/"));
+					}
+				});
+	}
 }
