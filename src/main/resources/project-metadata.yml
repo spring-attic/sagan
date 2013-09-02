@@ -40,7 +40,6 @@ projects:
       supportedVersions:
         - 1.2.1.BUILD-SNAPSHOT
         - 1.2.0.RELEASE
-        - 1.1.5.BUILD-SNAPSHOT
         - 1.1.4.RELEASE
 
     # ----------------------
@@ -215,7 +214,9 @@ projects:
       groupId: org.springframework.integration
       lead: grussell
       supportedVersions:
+        - 3.0.0.BUILD-SNAPSHOT
         - 3.0.0.M2
+        - 2.2.5.BUILD-SNAPSHOT
         - 2.2.4.RELEASE
         - 2.1.6.RELEASE
 
