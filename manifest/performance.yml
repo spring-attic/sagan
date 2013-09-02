@@ -8,7 +8,7 @@ applications:
     JBP_LOG_LEVEL: DEBUG
   host: sagan-performance
   domain: cfapps.io
-  path: target/spring-io-site.jar
+  path: ../target/spring-io-site.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
 - name: sagan-indexer
   memory: 2G
@@ -17,5 +17,5 @@ applications:
     SPRING_PROFILES_ACTIVE: indexer,performance
   host: sagan-indexer-performance
   domain: cfapps.io
-  path: target/spring-io-site.jar
+  path: ../target/spring-io-site.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
