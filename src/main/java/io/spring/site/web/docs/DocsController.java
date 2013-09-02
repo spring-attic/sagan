@@ -16,20 +16,20 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @NavSection("docs")
 public class DocsController {
 
-	private ProjectMetadataService service;
+    private ProjectMetadataService service;
 
-	@Autowired
-	public DocsController(ProjectMetadataService service) {
-		this.service = service;
-	}
+    @Autowired
+    public DocsController(ProjectMetadataService service) {
+        this.service = service;
+    }
 
-	@RequestMapping(value = "", method = { GET, HEAD })
-	public String listProjects(Model model) {
-		model.addAttribute("activeProjects", service.getProjectsForCategory("active"));
-		model.addAttribute("atticProjects", service.getProjectsForCategory("attic"));
-		model.addAttribute("incubatorProjects", service.getProjectsForCategory("incubator"));
-		model.addAttribute("otherProjects", service.getProjectsForCategory("other"));
-		return "docs/index";
-	}
+    @RequestMapping(value = "", method = { GET, HEAD })
+    public String listProjects(Model model) {
+        model.addAttribute("activeProjects", service.getProjectsForCategory("active"));
+        model.addAttribute("atticProjects", service.getProjectsForCategory("attic"));
+        model.addAttribute("incubatorProjects", service.getProjectsForCategory("incubator"));
+        model.addAttribute("otherProjects", service.getProjectsForCategory("other"));
+        return "docs/index";
+    }
 
 }

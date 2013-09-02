@@ -1,5 +1,5 @@
 $off-white: #eee;
-$black-green: #3A3C2F; 
+$black-green: #3A3C2F;
 $lime: #8CC63F;
 $leaf: #4E681E;
 $green: #6db33f;
@@ -100,8 +100,8 @@ $icon-sprite: url("../img/iconsprite.png");
           position: absolute;
           margin: -54px 0 0 -5px;
           z-index: 100;
-          width: 0; 
-          height: 0; 
+          width: 0;
+          height: 0;
           border-top: 40px solid transparent;
           border-bottom: 40px solid transparent;
           border-left: 40px solid $green;
@@ -179,7 +179,7 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   .project--title {
     font-family: $secondary-font-family;
-    font-size: 24px; 
+    font-size: 24px;
     line-height: 24px;
     color: #ebf1e7;
   }

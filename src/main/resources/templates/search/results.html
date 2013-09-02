@@ -1,42 +1,42 @@
 <html   xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-		layout:decorator="layout">
+        xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+        layout:decorator="layout">
 <head>
-	<title th:inline="text">Search &middot; [[${searchForm.q}]]</title>
-	<link rel="alternate" type="application/atom+xml" th:href="${feedPath}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/search.css.css}"/>
+    <title th:inline="text">Search &middot; [[${searchForm.q}]]</title>
+    <link rel="alternate" type="application/atom+xml" th:href="${feedPath}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/search.css.css}"/>
 </head>
 <body>
 <div layout:fragment="header-container"></div>
 <div layout:fragment="content" class="container">
-	<div class="row-fluid">
-		<div id="content" class="span8">
+    <div class="row-fluid">
+        <div id="content" class="span8">
       <div class="content--title search-title">Search Results For:</div>
       <h1 class="index-page--title js-search-results--title"></h1>
-			<div th:if="${results.empty}" class="warning alert-warning">
-				No results found for your query.
-			</div>
-			<div th:if="${!results.empty}" class='search-results'>
-				<div class="search-result" th:each="result : ${results}">
-					<a th:href="@{${result.path}}" th:text="${result.title}" class="search-result--title">This week in Spring</a>
-					<div class="metadata">
-						<div class="search-result--subtitle" th:text="${result.subTitle}" th:if="${result.subTitle}">Blog Post</div>
-					</div>
-					<div th:utext="${result.displayText}" class='search-result--summary'>This has been an interesting week.</div>
-					<div class="search-result--path" th:text="${result.path}">/path/to/result</div>
-			 	</div>
-			</div>
-			<div id='pagination_control' class="pagination" th:if="${paginationInfo.isVisible()}">
-				<a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
+            <div th:if="${results.empty}" class="warning alert-warning">
+                No results found for your query.
+            </div>
+            <div th:if="${!results.empty}" class='search-results'>
+                <div class="search-result" th:each="result : ${results}">
+                    <a th:href="@{${result.path}}" th:text="${result.title}" class="search-result--title">This week in Spring</a>
+                    <div class="metadata">
+                        <div class="search-result--subtitle" th:text="${result.subTitle}" th:if="${result.subTitle}">Blog Post</div>
+                    </div>
+                    <div th:utext="${result.displayText}" class='search-result--summary'>This has been an interesting week.</div>
+                    <div class="search-result--path" th:text="${result.path}">/path/to/result</div>
+                </div>
+            </div>
+            <div id='pagination_control' class="pagination" th:if="${paginationInfo.isVisible()}">
+                <a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
 
-				<div th:each="element : ${paginationInfo.pageElements }" >
-					<a th:href="@{${beans.uih.path()}(page=${element.pageText},q=${searchForm.q},filters=${searchForm.filters})}" th:text="${element.pageText}" th:if="${element.isActive()}" ></a>
-					<div th:text="${element.pageText}" th:unless="${element.isActive()}" class="active" ></div>
-				</div>
+                <div th:each="element : ${paginationInfo.pageElements }" >
+                    <a th:href="@{${beans.uih.path()}(page=${element.pageText},q=${searchForm.q},filters=${searchForm.filters})}" th:text="${element.pageText}" th:if="${element.isActive()}" ></a>
+                    <div th:text="${element.pageText}" th:unless="${element.isActive()}" class="active" ></div>
+                </div>
 
-				<a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
-			</div>
-		</div>
+                <a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
+            </div>
+        </div>
     <div class="span4">
       <div class="search-facets content-container--wrapper">
         <form th:action="@{/search(q=${searchForm.q})}" method="POST" th:object="${searchForm}">
@@ -49,8 +49,8 @@
         </form>
       </div>
       <a href="#" class="facets--clear-filters pull-right">Clear Filters</a>
-	 </div>
-  
+     </div>
+
   </div>
 </div>
 </body>

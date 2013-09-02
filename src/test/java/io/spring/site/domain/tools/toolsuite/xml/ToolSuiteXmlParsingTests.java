@@ -10,16 +10,16 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class ToolSuiteXmlParsingTests {
-	private String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
+    private String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
 
-	@Test
-	public void unmarshal() throws Exception {
-		Serializer serializer = new Persister();
+    @Test
+    public void unmarshal() throws Exception {
+        Serializer serializer = new Persister();
 
-		ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
-		assertThat(toolSuiteXml.getReleases(), notNullValue());
-		assertThat(toolSuiteXml.getReleases().size(), equalTo(8));
-		Release release = toolSuiteXml.getReleases().get(0);
-		assertThat(release.getDownloads().size(), equalTo(16));
-	}
+        ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
+        assertThat(toolSuiteXml.getReleases(), notNullValue());
+        assertThat(toolSuiteXml.getReleases().size(), equalTo(8));
+        Release release = toolSuiteXml.getReleases().get(0);
+        assertThat(release.getDownloads().size(), equalTo(16));
+    }
 }

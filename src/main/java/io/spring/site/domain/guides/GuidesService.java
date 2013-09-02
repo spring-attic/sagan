@@ -4,21 +4,21 @@ import java.util.List;
 
 public interface GuidesService {
 
-	Guide loadGettingStartedGuide(String guideId);
+    Guide loadGettingStartedGuide(String guideId);
 
-	Guide loadTutorial(String tutorialId);
+    Guide loadTutorial(String tutorialId);
 
-	Guide loadTutorialPage(String tutorialId, String pagePath);
+    Guide loadTutorialPage(String tutorialId, String pagePath);
 
-	List<GuideWithoutContent> listGettingStartedGuidesWithoutContent();
+    List<GuideWithoutContent> listGettingStartedGuidesWithoutContent();
 
-	List<GuideWithoutContent> listTutorialsWithoutContent();
+    List<GuideWithoutContent> listTutorialsWithoutContent();
 
-	List<Guide> listGettingStartedGuides();
+    List<Guide> listGettingStartedGuides();
 
-	List<Guide> listTutorials();
+    List<Guide> listTutorials();
 
-	byte[] loadGettingStartedImage(String guideId, String imageName);
+    byte[] loadGettingStartedImage(String guideId, String imageName);
 
-	byte[] loadTutorialImage(String tutorialId, String imageName);
+    byte[] loadTutorialImage(String tutorialId, String imageName);
 }

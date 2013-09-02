@@ -1,8 +1,8 @@
 <html   xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-		layout:decorator="layout">
+        xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+        layout:decorator="layout">
 <head>
-	<title>Download STS</title>
+    <title>Download STS</title>
 </head>
 <body>
 <div layout:fragment="header-container"></div>
@@ -14,8 +14,8 @@
           distribution for your platform. Choose either a native installer or simple
           archive, they contain equivalent functionality.</p>
 
-		<div class='ga--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${gaRelease}"></div>
-		<div class='milestone--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${milestoneRelease}"></div>
+        <div class='ga--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${gaRelease}"></div>
+        <div class='milestone--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${milestoneRelease}"></div>
 
       <h2>Update Site Archives</h2>
       <p>You can download archived versions of the update sites, if you

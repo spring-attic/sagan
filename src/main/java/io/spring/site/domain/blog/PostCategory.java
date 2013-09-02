@@ -2,33 +2,33 @@ package io.spring.site.domain.blog;
 
 public enum PostCategory {
 
-	ENGINEERING("Engineering", "engineering"),
-	RELEASES("Releases", "releases"),
-	NEWS_AND_EVENTS("News and Events", "news");
+    ENGINEERING("Engineering", "engineering"),
+    RELEASES("Releases", "releases"),
+    NEWS_AND_EVENTS("News and Events", "news");
 
-	private String displayName;
-	private String urlSlug;
+    private String displayName;
+    private String urlSlug;
 
-	PostCategory(String displayName, String urlSlug) {
-		this.displayName = displayName;
-		this.urlSlug = urlSlug;
-	}
+    PostCategory(String displayName, String urlSlug) {
+        this.displayName = displayName;
+        this.urlSlug = urlSlug;
+    }
 
-	public String getDisplayName() {
-		return displayName;
-	}
+    public String getDisplayName() {
+        return displayName;
+    }
 
-	public String getUrlSlug() {
-		return urlSlug;
-	}
+    public String getUrlSlug() {
+        return urlSlug;
+    }
 
-	public String getId() {
-		return name();
-	}
+    public String getId() {
+        return name();
+    }
 
-	@Override
-	public String toString() {
-		return getDisplayName();
-	}
+    @Override
+    public String toString() {
+        return getDisplayName();
+    }
 
 }

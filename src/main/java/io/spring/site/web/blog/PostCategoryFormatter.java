@@ -12,21 +12,21 @@ import java.util.Map;
 
 @Component
 public class PostCategoryFormatter implements Formatter<PostCategory> {
-	private static Map<String, PostCategory> mapping = new HashMap<String, PostCategory>();
-	{
-		for (PostCategory category : PostCategory.values()) {
-			mapping.put(category.getUrlSlug(), category);
-			mapping.put(category.name(), category);
-		}
-	}
+    private static Map<String, PostCategory> mapping = new HashMap<String, PostCategory>();
+    {
+        for (PostCategory category : PostCategory.values()) {
+            mapping.put(category.getUrlSlug(), category);
+            mapping.put(category.name(), category);
+        }
+    }
 
-	@Override
-	public PostCategory parse(String text, Locale locale) throws ParseException {
-		return mapping.get(text.trim());
-	}
+    @Override
+    public PostCategory parse(String text, Locale locale) throws ParseException {
+        return mapping.get(text.trim());
+    }
 
-	@Override
-	public String print(PostCategory category, Locale locale) {
-		return category.getUrlSlug();
-	}
+    @Override
+    public String print(PostCategory category, Locale locale) {
+        return category.getUrlSlug();
+    }
 }

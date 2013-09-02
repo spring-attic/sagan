@@ -15,28 +15,28 @@ import java.util.List;
 
 public class GuideHtmlConverter implements HttpMessageConverter<GuideHtml> {
 
-	public List<MediaType> getSupportedMediaTypes() {
-		return Collections.singletonList(new MediaType("application", "vnd.github.v3.html+json"));
-	}
+    public List<MediaType> getSupportedMediaTypes() {
+        return Collections.singletonList(new MediaType("application", "vnd.github.v3.html+json"));
+    }
 
-	@Override
-	public GuideHtml read(Class<? extends GuideHtml> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
-		String bodyString = StreamUtils.copyToString(inputMessage.getBody(), Charset.forName("UTF-8"));
-		return new GuideHtml(bodyString);
-	}
+    @Override
+    public GuideHtml read(Class<? extends GuideHtml> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
+        String bodyString = StreamUtils.copyToString(inputMessage.getBody(), Charset.forName("UTF-8"));
+        return new GuideHtml(bodyString);
+    }
 
-	@Override
-	public boolean canRead(Class<?> clazz, MediaType mediaType) {
-		return GuideHtml.class.equals(clazz);
-	}
+    @Override
+    public boolean canRead(Class<?> clazz, MediaType mediaType) {
+        return GuideHtml.class.equals(clazz);
+    }
 
-	@Override
-	public boolean canWrite(Class<?> clazz, MediaType mediaType) {
-		return false;
-	}
+    @Override
+    public boolean canWrite(Class<?> clazz, MediaType mediaType) {
+        return false;
+    }
 
-	@Override
-	public void write(GuideHtml html, MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
-		throw new UnsupportedOperationException("can't write");
-	}
+    @Override
+    public void write(GuideHtml html, MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+        throw new UnsupportedOperationException("can't write");
+    }
 }

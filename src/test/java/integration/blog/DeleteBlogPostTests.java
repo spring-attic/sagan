@@ -25,55 +25,55 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class DeleteBlogPostTests extends IntegrationTestBase {
 
-	@Autowired
-	private WebApplicationContext wac;
+    @Autowired
+    private WebApplicationContext wac;
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Autowired
-	private PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-	private Post post;
+    private Post post;
 
-	@Before
-	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-		postRepository.deleteAll();
-		post = PostBuilder.post().build();
-		postRepository.save(post);
-	}
+    @Before
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        postRepository.deleteAll();
+        post = PostBuilder.post().build();
+        postRepository.save(post);
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		postRepository.deleteAll();
-	}
+    @After
+    public void tearDown() throws Exception {
+        postRepository.deleteAll();
+    }
 
-	@Test
-	public void redirectToIndexAfterDelete() throws Exception {
-		MockHttpServletRequestBuilder editPostRequest = createDeletePostRequest();
+    @Test
+    public void redirectToIndexAfterDelete() throws Exception {
+        MockHttpServletRequestBuilder editPostRequest = createDeletePostRequest();
 
-		this.mockMvc.perform(editPostRequest)
-				.andExpect(status().isFound())
-				.andExpect(new ResultMatcher() {
-					@Override
-					public void match(MvcResult result) {
-						String redirectedUrl = result.getResponse().getRedirectedUrl();
-						assertThat(redirectedUrl, startsWith("/admin/blog"));
-					}
-				});
-	}
+        this.mockMvc.perform(editPostRequest)
+                .andExpect(status().isFound())
+                .andExpect(new ResultMatcher() {
+                    @Override
+                    public void match(MvcResult result) {
+                        String redirectedUrl = result.getResponse().getRedirectedUrl();
+                        assertThat(redirectedUrl, startsWith("/admin/blog"));
+                    }
+                });
+    }
 
-	@Test
-	public void deleteThePost() throws Exception {
-		MockHttpServletRequestBuilder editPostRequest = createDeletePostRequest();
+    @Test
+    public void deleteThePost() throws Exception {
+        MockHttpServletRequestBuilder editPostRequest = createDeletePostRequest();
 
-		this.mockMvc.perform(editPostRequest);
-		assertThat(postRepository.findOne(post.getId()), is(nullValue()));
-	}
+        this.mockMvc.perform(editPostRequest);
+        assertThat(postRepository.findOne(post.getId()), is(nullValue()));
+    }
 
-	private MockHttpServletRequestBuilder createDeletePostRequest() {
-		MockHttpServletRequestBuilder editPostRequest = delete("/admin/blog/" + post.getAdminSlug());
-		return editPostRequest;
-	}
+    private MockHttpServletRequestBuilder createDeletePostRequest() {
+        MockHttpServletRequestBuilder editPostRequest = delete("/admin/blog/" + post.getAdminSlug());
+        return editPostRequest;
+    }
 
 }

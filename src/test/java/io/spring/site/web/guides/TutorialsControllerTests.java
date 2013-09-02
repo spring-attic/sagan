@@ -15,25 +15,25 @@ import static org.mockito.BDDMockito.given;
 
 public class TutorialsControllerTests {
 
-	@Mock
-	private GitHubGuidesService guideService;
+    @Mock
+    private GitHubGuidesService guideService;
 
-	private TutorialsController controller;
+    private TutorialsController controller;
 
-	@Before
-	public void setup() {
-		MockitoAnnotations.initMocks(this);
-		this.controller = new TutorialsController(this.guideService);
-	}
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        this.controller = new TutorialsController(this.guideService);
+    }
 
-	@Test
-	public void loadImages() {
-		byte[] image = "animage".getBytes();
-		given(this.guideService.loadTutorialImage("rest-service", "welcome.png")).willReturn(
-				image);
-		ResponseEntity<byte[]> responseEntity = this.controller.loadImage("rest-service",
-				"welcome.png");
-		assertThat(responseEntity.getBody(), is(image));
-	}
+    @Test
+    public void loadImages() {
+        byte[] image = "animage".getBytes();
+        given(this.guideService.loadTutorialImage("rest-service", "welcome.png")).willReturn(
+                image);
+        ResponseEntity<byte[]> responseEntity = this.controller.loadImage("rest-service",
+                "welcome.png");
+        assertThat(responseEntity.getBody(), is(image));
+    }
 
 }

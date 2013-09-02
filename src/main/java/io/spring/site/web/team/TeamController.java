@@ -28,55 +28,55 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @RequestMapping("/team")
 public class TeamController {
 
-	private final TeamService teamService;
-	private final BlogService blogService;
-	private final PostViewFactory postViewFactory;
+    private final TeamService teamService;
+    private final BlogService blogService;
+    private final PostViewFactory postViewFactory;
 
-	@Autowired
-	public TeamController(TeamService teamService,
-						  BlogService blogService,
-						  PostViewFactory postViewFactory) {
-		this.teamService = teamService;
-		this.blogService = blogService;
-		this.postViewFactory = postViewFactory;
-	}
+    @Autowired
+    public TeamController(TeamService teamService,
+                          BlogService blogService,
+                          PostViewFactory postViewFactory) {
+        this.teamService = teamService;
+        this.blogService = blogService;
+        this.postViewFactory = postViewFactory;
+    }
 
-	@RequestMapping(value = "", method = {GET, HEAD})
-	public String showTeam(Model model) throws IOException {
-		List<MemberProfile> profiles = teamService.fetchActiveMembers();
-		model.addAttribute("profiles", profiles);
-		List<TeamLocation> teamLocations = new ArrayList<>();
-		for (MemberProfile profile : profiles) {
-			if (profile.getTeamLocation() != null) {
-				teamLocations.add(profile.getTeamLocation());
-			}
-		}
-		model.addAttribute("teamLocations", teamLocations);
-		return "team/index";
-	}
+    @RequestMapping(value = "", method = {GET, HEAD})
+    public String showTeam(Model model) throws IOException {
+        List<MemberProfile> profiles = teamService.fetchActiveMembers();
+        model.addAttribute("profiles", profiles);
+        List<TeamLocation> teamLocations = new ArrayList<>();
+        for (MemberProfile profile : profiles) {
+            if (profile.getTeamLocation() != null) {
+                teamLocations.add(profile.getTeamLocation());
+            }
+        }
+        model.addAttribute("teamLocations", teamLocations);
+        return "team/index";
+    }
 
 
-	@RequestMapping(value = "/{username}", method = {GET, HEAD})
-	public String showProfile(@PathVariable String username, Model model){
-		MemberProfile profile = teamService.fetchMemberProfileUsername(username);
-		if (profile == null) {
-			throw new EntityNotFoundException("Profile not found with Id=" + username);
-		}
-		if (profile.isHidden()) {
-			throw new EntityNotFoundException("Profile not active: " + username);
-		}
-		model.addAttribute("profile", profile);
-		Page<Post> posts = blogService.getPublishedPostsForMember(profile, PageableFactory.forLists(1));
-		Page<PostView> postViewPage = postViewFactory.createPostViewPage(posts);
-		model.addAttribute("posts", postViewPage);
+    @RequestMapping(value = "/{username}", method = {GET, HEAD})
+    public String showProfile(@PathVariable String username, Model model){
+        MemberProfile profile = teamService.fetchMemberProfileUsername(username);
+        if (profile == null) {
+            throw new EntityNotFoundException("Profile not found with Id=" + username);
+        }
+        if (profile.isHidden()) {
+            throw new EntityNotFoundException("Profile not active: " + username);
+        }
+        model.addAttribute("profile", profile);
+        Page<Post> posts = blogService.getPublishedPostsForMember(profile, PageableFactory.forLists(1));
+        Page<PostView> postViewPage = postViewFactory.createPostViewPage(posts);
+        model.addAttribute("posts", postViewPage);
 
-		List<TeamLocation> teamLocations = new ArrayList<>();
-		if (profile.getTeamLocation() != null) {
-			teamLocations.add(profile.getTeamLocation());
-		}
-		model.addAttribute("teamLocations", teamLocations);
+        List<TeamLocation> teamLocations = new ArrayList<>();
+        if (profile.getTeamLocation() != null) {
+            teamLocations.add(profile.getTeamLocation());
+        }
+        model.addAttribute("teamLocations", teamLocations);
 
-		return "team/show";
-	}
+        return "team/show";
+    }
 
 }

@@ -10,26 +10,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class SignInService {
 
-	private static final String SPRING_TEAM_MEMBERS_ID = "482984";
-	private static final String IS_MEMBER_URL = "https://api.github.com/teams/{team}/members/{user}";
-	private final TeamService teamService;
+    private static final String SPRING_TEAM_MEMBERS_ID = "482984";
+    private static final String IS_MEMBER_URL = "https://api.github.com/teams/{team}/members/{user}";
+    private final TeamService teamService;
 
-	@Autowired
-	public SignInService(TeamService teamService) {
-		this.teamService = teamService;
-	}
+    @Autowired
+    public SignInService(TeamService teamService) {
+        this.teamService = teamService;
+    }
 
-	public MemberProfile getOrCreateMemberProfile(Long githubId, GitHub gitHub) {
-		GitHubUserProfile remoteProfile = gitHub.userOperations().getUserProfile();
+    public MemberProfile getOrCreateMemberProfile(Long githubId, GitHub gitHub) {
+        GitHubUserProfile remoteProfile = gitHub.userOperations().getUserProfile();
 
-		return teamService.createOrUpdateMemberProfile(githubId,
-				remoteProfile.getUsername(),
-				remoteProfile.getProfileImageUrl(),
-				remoteProfile.getName());
-	}
+        return teamService.createOrUpdateMemberProfile(githubId,
+                remoteProfile.getUsername(),
+                remoteProfile.getProfileImageUrl(),
+                remoteProfile.getName());
+    }
 
-	public boolean isSpringMember(String userId, GitHub gitHub) {
-		ResponseEntity<Void> response = gitHub.restOperations().getForEntity(IS_MEMBER_URL, Void.class, SPRING_TEAM_MEMBERS_ID, userId);
-		return response.getStatusCode() == HttpStatus.NO_CONTENT;
-	}
+    public boolean isSpringMember(String userId, GitHub gitHub) {
+        ResponseEntity<Void> response = gitHub.restOperations().getForEntity(IS_MEMBER_URL, Void.class, SPRING_TEAM_MEMBERS_ID, userId);
+        return response.getStatusCode() == HttpStatus.NO_CONTENT;
+    }
 }

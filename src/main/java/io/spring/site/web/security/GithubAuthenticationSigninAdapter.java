@@ -17,35 +17,35 @@ import org.springframework.web.context.request.NativeWebRequest;
 public class GithubAuthenticationSigninAdapter implements SignInAdapter {
 
 
-	private String path;
-	private final SignInService signInService;
+    private String path;
+    private final SignInService signInService;
 
-	public GithubAuthenticationSigninAdapter(String path, SignInService signInService) {
-		this.path = path;
-		this.signInService = signInService;
-	}
+    public GithubAuthenticationSigninAdapter(String path, SignInService signInService) {
+        this.path = path;
+        this.signInService = signInService;
+    }
 
-	@Override
-	public String signIn(String githubId, Connection<?> connection,
-			NativeWebRequest request) {
-		GitHub gitHub = (GitHub) connection.getApi();
-		String githubUsername = connection.getDisplayName();
+    @Override
+    public String signIn(String githubId, Connection<?> connection,
+            NativeWebRequest request) {
+        GitHub gitHub = (GitHub) connection.getApi();
+        String githubUsername = connection.getDisplayName();
 
-		try {
-			if (!signInService.isSpringMember(githubUsername, gitHub)) {
-				throw new BadCredentialsException("User not member of required org");
-			}
+        try {
+            if (!signInService.isSpringMember(githubUsername, gitHub)) {
+                throw new BadCredentialsException("User not member of required org");
+            }
 
-			MemberProfile member = signInService.getOrCreateMemberProfile(new Long(githubId), gitHub);
-			Authentication authentication = new UsernamePasswordAuthenticationToken(
-					member.getId(), "N/A",
-					AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			return path;
+            MemberProfile member = signInService.getOrCreateMemberProfile(new Long(githubId), gitHub);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                    member.getId(), "N/A",
+                    AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return path;
 
-		} catch (RestClientException e) {
-			throw new BadCredentialsException("User not member of required org");
-		}
-	}
+        } catch (RestClientException e) {
+            throw new BadCredentialsException("User not member of required org");
+        }
+    }
 
 }

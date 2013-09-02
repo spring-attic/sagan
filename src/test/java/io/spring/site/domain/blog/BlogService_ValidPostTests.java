@@ -34,87 +34,87 @@ import static org.mockito.BDDMockito.willThrow;
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_ValidPostTests {
 
-	private static final String AUTHOR_USERNAME = "username";
-	private Post post;
-	private PostForm postForm = new PostForm();
-	private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
-	private Date now = DateTestUtils.getDate("2013-07-01 13:00");
+    private static final String AUTHOR_USERNAME = "username";
+    private Post post;
+    private PostForm postForm = new PostForm();
+    private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
+    private Date now = DateTestUtils.getDate("2013-07-01 13:00");
 
-	@Mock
-	private PostRepository postRepository;
+    @Mock
+    private PostRepository postRepository;
 
-	@Mock
-	private PostFormAdapter postFormAdapter;
+    @Mock
+    private PostFormAdapter postFormAdapter;
 
-	@Mock
-	private DateService dateService;
+    @Mock
+    private DateService dateService;
 
 
-	@Mock
-	private SearchService searchService;
+    @Mock
+    private SearchService searchService;
 
-	@Rule
-	public ExpectedException expected = ExpectedException.none();
+    @Rule
+    public ExpectedException expected = ExpectedException.none();
 
-	private BlogService service;
+    private BlogService service;
 
-	@Before
-	public void setup() {
-		given(dateService.now()).willReturn(now);
+    @Before
+    public void setup() {
+        given(dateService.now()).willReturn(now);
 
-		given(postRepository.save((Post) anyObject())).will(new Answer<Post>() {
-			@Override
-			public Post answer(InvocationOnMock invocation) throws Throwable {
-				Post post = (Post) invocation.getArguments()[0];
-				ReflectionTestUtils.setField(post, "id", 123L);
-				return post;
-			}
-		});
+        given(postRepository.save((Post) anyObject())).will(new Answer<Post>() {
+            @Override
+            public Post answer(InvocationOnMock invocation) throws Throwable {
+                Post post = (Post) invocation.getArguments()[0];
+                ReflectionTestUtils.setField(post, "id", 123L);
+                return post;
+            }
+        });
 
-		post = PostBuilder.post()
-				.publishAt(publishAt)
-				.build();
-		given(postFormAdapter.createPostFromPostForm(postForm, AUTHOR_USERNAME)).willReturn(post);
+        post = PostBuilder.post()
+                .publishAt(publishAt)
+                .build();
+        given(postFormAdapter.createPostFromPostForm(postForm, AUTHOR_USERNAME)).willReturn(post);
 
-		service = new BlogService(postRepository, postFormAdapter, dateService, searchService);
-		service.addPost(postForm, AUTHOR_USERNAME);
-	}
+        service = new BlogService(postRepository, postFormAdapter, dateService, searchService);
+        service.addPost(postForm, AUTHOR_USERNAME);
+    }
 
-	@Test
-	public void createsAPost() {
-		verify(postFormAdapter).createPostFromPostForm(postForm, AUTHOR_USERNAME);
-	}
+    @Test
+    public void createsAPost() {
+        verify(postFormAdapter).createPostFromPostForm(postForm, AUTHOR_USERNAME);
+    }
 
-	@Test
-	public void postIsPersisted() {
-		verify(postRepository).save((Post) anyObject());
-	}
+    @Test
+    public void postIsPersisted() {
+        verify(postRepository).save((Post) anyObject());
+    }
 
-	@Test
-	public void creatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
-		verify(searchService).saveToIndex((SearchEntry) anyObject());
-	}
+    @Test
+    public void creatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
+        verify(searchService).saveToIndex((SearchEntry) anyObject());
+    }
 
-	@Test
-	public void blogIsSavedWhenSearchServiceIsDown() {
-		reset(postRepository);
-		willThrow(SearchException.class).given(searchService).saveToIndex((SearchEntry) anyObject());
-		post = service.addPost(postForm, AUTHOR_USERNAME);
-		verify(postRepository).save(post);
-	}
+    @Test
+    public void blogIsSavedWhenSearchServiceIsDown() {
+        reset(postRepository);
+        willThrow(SearchException.class).given(searchService).saveToIndex((SearchEntry) anyObject());
+        post = service.addPost(postForm, AUTHOR_USERNAME);
+        verify(postRepository).save(post);
+    }
 
-	@Test
-	public void creatingABlogPost_doesNotSaveToSearchIndexIfNotLive() throws Exception {
-		reset(searchService);
+    @Test
+    public void creatingABlogPost_doesNotSaveToSearchIndexIfNotLive() throws Exception {
+        reset(searchService);
 
-		PostForm draftPostForm = new PostForm();
-		draftPostForm.setDraft(true);
+        PostForm draftPostForm = new PostForm();
+        draftPostForm.setDraft(true);
 
-		Post draft = PostBuilder.post().draft().build();
-		given(postFormAdapter.createPostFromPostForm(draftPostForm, AUTHOR_USERNAME)).willReturn(draft);
+        Post draft = PostBuilder.post().draft().build();
+        given(postFormAdapter.createPostFromPostForm(draftPostForm, AUTHOR_USERNAME)).willReturn(draft);
 
-		service.addPost(draftPostForm, AUTHOR_USERNAME);
-		verifyZeroInteractions(searchService);
-	}
+        service.addPost(draftPostForm, AUTHOR_USERNAME);
+        verifyZeroInteractions(searchService);
+    }
 
 }

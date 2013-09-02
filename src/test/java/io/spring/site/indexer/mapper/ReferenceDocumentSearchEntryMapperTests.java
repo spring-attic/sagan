@@ -19,44 +19,44 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 public class ReferenceDocumentSearchEntryMapperTests {
 
-	private Project project = new Project("spring",
-			"Spring Project",
-			"http://www.example.com/repo/spring-framework",
-			"http://www.example.com/spring-framework",
-			Collections.<ProjectRelease>emptyList());
+    private Project project = new Project("spring",
+            "Spring Project",
+            "http://www.example.com/repo/spring-framework",
+            "http://www.example.com/spring-framework",
+            Collections.<ProjectRelease>emptyList());
 
-	private ProjectRelease version = new ProjectReleaseBuilder()
-			.versionName("3.2.1.RELEASE")
-			.releaseStatus(GENERAL_AVAILABILITY)
-			.current(true).build();
+    private ProjectRelease version = new ProjectReleaseBuilder()
+            .versionName("3.2.1.RELEASE")
+            .releaseStatus(GENERAL_AVAILABILITY)
+            .current(true).build();
 
-	private ReferenceDocumentSearchEntryMapper mapper = new ReferenceDocumentSearchEntryMapper(project, version);
-	private SearchEntry entry;
+    private ReferenceDocumentSearchEntryMapper mapper = new ReferenceDocumentSearchEntryMapper(project, version);
+    private SearchEntry entry;
 
-	@Before
-	public void setUp() throws Exception {
-		Document document = Jsoup.parse("<p>ref doc</p>");
-		entry = mapper.map(document);
-	}
+    @Before
+    public void setUp() throws Exception {
+        Document document = Jsoup.parse("<p>ref doc</p>");
+        entry = mapper.map(document);
+    }
 
-	@Test
-	public void facetPaths() {
-		assertThat(entry.getFacetPaths(), contains("Projects", "Projects/Reference", "Projects/Spring Project", "Projects/Spring Project/3.2.1.RELEASE"));
-	}
+    @Test
+    public void facetPaths() {
+        assertThat(entry.getFacetPaths(), contains("Projects", "Projects/Reference", "Projects/Spring Project", "Projects/Spring Project/3.2.1.RELEASE"));
+    }
 
-	@Test
-	public void projectId() {
-		assertThat(entry.getProjectId(), equalTo("spring"));
-	}
+    @Test
+    public void projectId() {
+        assertThat(entry.getProjectId(), equalTo("spring"));
+    }
 
-	@Test
-	public void version() {
-		assertThat(entry.getVersion(), equalTo("3.2.1.RELEASE"));
-	}
+    @Test
+    public void version() {
+        assertThat(entry.getVersion(), equalTo("3.2.1.RELEASE"));
+    }
 
-	@Test
-	public void subTitle() {
-		assertThat(entry.getSubTitle(), equalTo("Spring Project (3.2.1.RELEASE Reference)"));
-	}
+    @Test
+    public void subTitle() {
+        assertThat(entry.getSubTitle(), equalTo("Spring Project (3.2.1.RELEASE Reference)"));
+    }
 
 }

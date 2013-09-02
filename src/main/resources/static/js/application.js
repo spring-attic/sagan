@@ -55,7 +55,7 @@ $(function () {
   });
 
 
-  //AUTO OPENS SEARCH DROPDOWN ON SEARCH VIEW AND 
+  //AUTO OPENS SEARCH DROPDOWN ON SEARCH VIEW AND
   if (window.location.pathname == "/search") {
     $(".nav-search").addClass("js-highlight");
     $(".js-search-dropdown").addClass("js-show no-animation");
@@ -102,7 +102,7 @@ $(function () {
 
       slider.width(activeItemWidth);
       slider.css("margin-left", sliderTarget);
-      
+
     };
   }
 
@@ -115,7 +115,7 @@ $(function () {
   });
 
   var initializeSearch = function () {
-    var searchFacet = $(".search-facets");  
+    var searchFacet = $(".search-facets");
     if (searchFacet.length == 0) {
       return;
     } else {
@@ -124,7 +124,7 @@ $(function () {
       $(".js-toggle-sub-facet-list").click(function() {
         $(this).closest(".facet").find(".sub-facet--list:first").toggleClass('js-close');
       });
-      
+
       $(".projects-facet .js-toggle-sub-facet-list:first").click(function() {
         $(".facet-section--header").toggleClass('js-close');
       });
@@ -151,7 +151,7 @@ $(function () {
     });
   });
 
-  
+
 
 });
 
@@ -237,7 +237,7 @@ function setCookie(c_name,value,exdays)
 
 var subscribed=getCookie("subscribed");
 
-function setSubscribeCookie() 
+function setSubscribeCookie()
 {
   setCookie("subscribed",subscribed,365);
 }

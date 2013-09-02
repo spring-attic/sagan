@@ -28,105 +28,104 @@ import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
 
 @Configuration
-@ComponentScan(basePackages = { "io.spring.site.domain.team",
-		"io.spring.site.web.security", "io.spring.site.domain.services",
-		"io.spring.site.domain.blog" })
+@ComponentScan({ "io.spring.site.domain.team", "io.spring.site.web.security",
+        "io.spring.site.domain.services", "io.spring.site.domain.blog" })
 public class SecurityConfiguration {
 
-	static final String SIGNIN_SUCCESS_PATH = "/signin/success";
+    static final String SIGNIN_SUCCESS_PATH = "/signin/success";
 
-	@Configuration
-	@Order(Ordered.LOWEST_PRECEDENCE - 100)
-	protected static class SigninAuthenticationConfiguration extends
-			WebSecurityConfigurerAdapter {
+    @Configuration
+    @Order(Ordered.LOWEST_PRECEDENCE - 100)
+    protected static class SigninAuthenticationConfiguration extends
+            WebSecurityConfigurerAdapter {
 
-		@Override
-		protected void configure(HttpSecurity http) throws Exception {
-			http.antMatcher("/signin/**")
-					.addFilterBefore(authenticationFilter(),
-							AnonymousAuthenticationFilter.class).anonymous();
-			http.csrf().disable();
-		}
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.antMatcher("/signin/**")
+                    .addFilterBefore(authenticationFilter(),
+                            AnonymousAuthenticationFilter.class).anonymous();
+            http.csrf().disable();
+        }
 
-		// Not a @Bean because we explicitly do not want it added automatically by
-		// Bootstrap to all requests
-		protected Filter authenticationFilter() {
+        // Not a @Bean because we explicitly do not want it added automatically by
+        // Bootstrap to all requests
+        protected Filter authenticationFilter() {
 
-			AbstractAuthenticationProcessingFilter filter = new SecurityContextAuthenticationFilter(
-					SIGNIN_SUCCESS_PATH);
-			SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-			successHandler.setDefaultTargetUrl("/admin/blog");
-			filter.setAuthenticationSuccessHandler(successHandler);
-			return filter;
-		}
-	}
+            AbstractAuthenticationProcessingFilter filter = new SecurityContextAuthenticationFilter(
+                    SIGNIN_SUCCESS_PATH);
+            SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+            successHandler.setDefaultTargetUrl("/admin/blog");
+            filter.setAuthenticationSuccessHandler(successHandler);
+            return filter;
+        }
+    }
 
-	@Configuration
-	@Order(Ordered.LOWEST_PRECEDENCE - 90)
-	protected static class AdminAuthenticationConfiguration extends
-			WebSecurityConfigurerAdapter implements EnvironmentAware {
+    @Configuration
+    @Order(Ordered.LOWEST_PRECEDENCE - 90)
+    protected static class AdminAuthenticationConfiguration extends
+            WebSecurityConfigurerAdapter implements EnvironmentAware {
 
-		@Autowired
-		private SignInService signInService;
+        @Autowired
+        private SignInService signInService;
 
-		private Environment environment;
+        private Environment environment;
 
-		@Override
-		public void setEnvironment(Environment environment) {
-			this.environment = environment;
-		}
+        @Override
+        public void setEnvironment(Environment environment) {
+            this.environment = environment;
+        }
 
-		@Override
-		protected void configure(HttpSecurity http) throws Exception {
-			http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
-			http.requestMatchers().antMatchers("/admin/**", "/signout");
-			http.logout().logoutUrl("/signout")
-					.logoutSuccessUrl("/signin?signout=success");
-			http.authorizeRequests().anyRequest().authenticated();
-			if (isForceHttps()) {
-				http.requiresChannel().anyRequest().requiresSecure();
-			}
-		}
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
+            http.requestMatchers().antMatchers("/admin/**", "/signout");
+            http.logout().logoutUrl("/signout")
+                    .logoutSuccessUrl("/signin?signout=success");
+            http.authorizeRequests().anyRequest().authenticated();
+            if (isForceHttps()) {
+                http.requiresChannel().anyRequest().requiresSecure();
+            }
+        }
 
-		private AuthenticationEntryPoint authenticationEntryPoint() {
-			LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint(
-					"/signin");
-			entryPoint.setForceHttps(isForceHttps());
-			return entryPoint;
-		}
+        private AuthenticationEntryPoint authenticationEntryPoint() {
+            LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint(
+                    "/signin");
+            entryPoint.setForceHttps(isForceHttps());
+            return entryPoint;
+        }
 
-		private boolean isForceHttps() {
-			return !this.environment.acceptsProfiles(this.environment
-					.getDefaultProfiles())
-					&& !this.environment.acceptsProfiles("acceptance");
-		}
+        private boolean isForceHttps() {
+            return !this.environment.acceptsProfiles(this.environment
+                    .getDefaultProfiles())
+                    && !this.environment.acceptsProfiles("acceptance");
+        }
 
-		@Bean
-		public ProviderSignInController providerSignInController(
-				GitHubConnectionFactory connectionFactory,
-				ConnectionFactoryRegistry registry,
-				InMemoryUsersConnectionRepository repository) {
+        @Bean
+        public ProviderSignInController providerSignInController(
+                GitHubConnectionFactory connectionFactory,
+                ConnectionFactoryRegistry registry,
+                InMemoryUsersConnectionRepository repository) {
 
-			registry.addConnectionFactory(connectionFactory);
-			repository.setConnectionSignUp(new RemoteUsernameConnectionSignUp());
-			ProviderSignInController controller = new ProviderSignInController(registry,
-					repository, new GithubAuthenticationSigninAdapter(
-							SIGNIN_SUCCESS_PATH, this.signInService));
-			controller.setSignInUrl("/signin?error=access_denied");
-			return controller;
-		}
+            registry.addConnectionFactory(connectionFactory);
+            repository.setConnectionSignUp(new RemoteUsernameConnectionSignUp());
+            ProviderSignInController controller = new ProviderSignInController(registry,
+                    repository, new GithubAuthenticationSigninAdapter(
+                            SIGNIN_SUCCESS_PATH, this.signInService));
+            controller.setSignInUrl("/signin?error=access_denied");
+            return controller;
+        }
 
-		@Bean
-		public ConnectionFactoryRegistry connectionFactoryRegistry() {
-			return new ConnectionFactoryRegistry();
-		}
+        @Bean
+        public ConnectionFactoryRegistry connectionFactoryRegistry() {
+            return new ConnectionFactoryRegistry();
+        }
 
-		@Bean
-		public InMemoryUsersConnectionRepository inMemoryUsersConnectionRepository(
-				ConnectionFactoryRegistry registry) {
-			return new InMemoryUsersConnectionRepository(registry);
-		}
+        @Bean
+        public InMemoryUsersConnectionRepository inMemoryUsersConnectionRepository(
+                ConnectionFactoryRegistry registry) {
+            return new InMemoryUsersConnectionRepository(registry);
+        }
 
-	}
+    }
 
 }

@@ -1,8 +1,8 @@
 <html   xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorator="layout">
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
 <head>
-	<title>Guides</title>
+    <title>Guides</title>
 </head>
 <body>
   <div layout:fragment="header-container"></div>
@@ -22,7 +22,7 @@
             <h3 class="content-section-title no-border no-margin">Getting Started Guides</h3>
             <p class="content-section-sub-title">Spring provides a powerful and flexible collection of technologies to improve your Java application development that is used by millions of developers..</p>
           </div>
-          
+
           <div th:each="guide : ${guides}" class="guide--container" th:attr="data-filterable=${guide.title}">
             <a class="guide--title" href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/'}" th:text="${guide.title}">Building a RESTful Web Service</a>
             <p class="guide--subtitle" th:text="${guide.subtitle}">Learn how to create a REST web service with Spring</p>

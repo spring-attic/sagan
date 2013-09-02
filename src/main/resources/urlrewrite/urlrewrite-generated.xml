@@ -2,12 +2,10 @@
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
 <!--
-    Configuration file for UrlRewriteFilter. See:
-    http://www.tuckey.org/urlrewrite/
+    Configuration file for UrlRewriteFilter. See: http://www.tuckey.org/urlrewrite/
     http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/guide.html
     http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html
-    http://localhost:8080/rewrite-status (only works when running locally)
--->
+    http://localhost:8080/rewrite-status (only works when running locally) -->
 <urlrewrite use-query-string="true">
     <rule>
         <condition name="host">blog.springsource.org</condition>
@@ -373,11 +371,6 @@
         <condition name="host">www.springsource.org</condition>
         <from>^/node/3783$</from>
         <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/01/15/springone-2gx-2012-replays-automated-provisioning-of-spring-apps-to-ec2-vmware-vcloud-addressing-the-big-data-challenge-with-a-graph</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/SpringOne2GX2012$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2012/10/30/springone-2gx-2012-keynotes</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
@@ -1171,33 +1164,13 @@
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/node/22614$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/05/29/this-week-in-spring-may-28-2013</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
         <from>^/spring-social/news/spring-social-twitter-1.0.4-released$</from>
         <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/06/spring-social-twitter-1-0-4-and-spring-social-1-0-3-released</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/node/22621$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/05/this-week-in-spring-june-4-2013</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
         <from>^/spring-social/news/spring-social-twitter-1.0.5-released$</from>
         <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/10/spring-social-twitter-1-0-5-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22628$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/10/hadoop-101-programming-mapreduce-with-native-libraries-hive-pig-and-cascading</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22630$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/11/this-week-in-spring-june-11-2013</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
@@ -1276,68 +1249,13 @@
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/node/22653$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/16/this-week-in-spring-july-15-2013</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22649$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/10/this-week-in-spring-july-9-2013</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22648$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/08/webinar-resistance-is-not-futile-how-to-talk-spring-and-influence-people</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22646$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/03/this-week-in-spring-july-2nd-2013</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22638$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/26/webinar-introducing-reactor-a-framework-for-asynchronous-applications-on-the-jvm</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22637$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/26/this-week-in-spring-june-25-2013</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22636$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/25/webinar-replay-building-rest-ful-services-with-spring</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22633$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/19/this-week-in-spring-june-18-2013</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
         <from>^/node/22630$</from>
         <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/11/this-week-in-spring-june-11-2013</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/node/22621$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/05/this-week-in-spring-june-4-2013</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22611$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/05/22/this-week-in-spring-may-21-2013</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
         <from>^/node/22614$</from>
         <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/05/29/this-week-in-spring-may-28-2013</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22608$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/05/15/this-week-in-spring-may-14-2013</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
@@ -1398,11 +1316,6 @@
         <condition name="host">www.springsource.org</condition>
         <from>^/node/2962$</from>
         <to type="permanent-redirect" last="true">http://springframework.io/blog/2010/11/30/maven-configuration-for-spring-integration</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/spring-mobile/news/1.1.0.m3-released$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/04/05/spring-mobile-1-1-0-m3-released</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
@@ -2701,11 +2614,6 @@
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/node/536$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2007/10/04/spring-web-flow-1-0-5-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
         <from>^/node/548$</from>
         <to type="permanent-redirect" last="true">http://springframework.io/blog/2007/10/23/spring-framework-2-5-rc1-released</to>
     </rule>
@@ -3276,23 +3184,8 @@
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/node/3167$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2011/07/05/springsource-tool-suite-2-7-0-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
         <from>^/node/3185$</from>
         <to type="permanent-redirect" last="true">http://springframework.io/blog/2011/07/20/spring-data-graph-1-1-0-m2-with-neo4j-support-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/3228$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2011/09/07/spring-web-flow</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/3221$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2011/08/26/feature-tour</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
@@ -3381,16 +3274,6 @@
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/node/22622$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/05/spring-tool-suite-and-groovy-grails-tool-suite-3-3-0-m2-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22625$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/06/spring-batch-2-2-0-release-is-now-available</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
         <from>^/node/22629$</from>
         <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/11/spring-integration-2-2-4-and-2-1-6-releases-available</to>
     </rule>
@@ -3446,63 +3329,8 @@
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/node/22652$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/15/spring-amqp-1-2-0-for-java-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22651$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/11/spring-for-apache-hadoop-1-0-1-rc1-released-adding-hadoop-2-0-and-pivotal-hd-1-0-support</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22650$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/10/spring-tool-suite-and-groovy-grails-tool-suite-3-3-0-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/spring-social/news/1.1.0.m3-released$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/05/spring-social-1-0-0-m3-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22642$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/02/spring-data-redis-1-1-m1-and-1-0-5-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22640$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/01/spring-security-java-configuration-1-0-0-m1-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22639$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/01/spring-security-3-2-0-m2-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
         <from>^/node/22635$</from>
         <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/20/spring-amqp-1-2-0-release-candidate-is-now-available</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/spring-social/news/spring-social-facebook-1.0.3-released$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/19/spring-social-facebook-1-0-3-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/spring-xd/news/spring-xd-1.0.0.M1-released$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/12/spring-xd-1-0-0-m1-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/node/22629$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/11/spring-integration-2-2-4-and-2-1-6-releases-available</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
-        <from>^/spring-social/news/spring-social-twitter-1.0.5-released$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/10/spring-social-twitter-1-0-5-released</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
@@ -3516,22 +3344,377 @@
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/spring-social/news/spring-social-twitter-1.0.4-released$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/06/06/spring-social-twitter-1-0-4-and-spring-social-1-0-3-released</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
         <from>^/node/22609$</from>
         <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/05/16/spring-batch-2-2-0-rc2-is-now-available</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/node/22613$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/05/24/spring-integration-3-0-milestone-2-is-now-available</to>
+        <from>^/features$</from>
+        <to type="permanent-redirect" last="true">http://www.gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/spring-framework</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/node/22642$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog/2013/07/02/spring-data-redis-1-1-m1-and-1-0-5-released</to>
+        <from>^/get-started$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/guides</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/news-events$</from>
+        <to type="permanent-redirect" last="true">http://www.springframework.io/category/news</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/newsletter-subscription$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/#newsletter</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/downloads/sts$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/tools/sts/all</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/projects$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/projects</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/case-studies$</from>
+        <to type="permanent-redirect" last="true">http://www.gopivotal.com/resources</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/consulting$</from>
+        <to type="permanent-redirect" last="true">http://www.springframework.io/support</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/features/modern-web$</from>
+        <to type="permanent-redirect" last="true">http://www.gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/spring-framework</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/features/data-access$</from>
+        <to type="permanent-redirect" last="true">http://www.gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/spring-framework</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/features/integration$</from>
+        <to type="permanent-redirect" last="true">http://www.gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/spring-framework</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/features/mobile$</from>
+        <to type="permanent-redirect" last="true">http://www.gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/spring-framework</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/features/social$</from>
+        <to type="permanent-redirect" last="true">http://www.gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/spring-framework</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/features/security$</from>
+        <to type="permanent-redirect" last="true">http://www.gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/spring-framework</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/features/cloud-ready$</from>
+        <to type="permanent-redirect" last="true">http://www.gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/spring-framework</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/features/big-data$</from>
+        <to type="permanent-redirect" last="true">http://www.gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/spring-framework</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/sts$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/tools</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/tutorials$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/guides</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/samples$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/guides</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/documentation$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/docs</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-amqp$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-amqp</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-android$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-android</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-batch$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-batch</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-data</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-framework$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-framework</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-gemfire$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-gemfire</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-integration$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-integration</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-mobile$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-mobile</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-roo$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-roo</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-security$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-security</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-social$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-social</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-web-flow$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-webflow</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-web-services$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-ws</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/trademark_standards$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/logos</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-tool-suite-download$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/tools/sts</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-flex$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-flex</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-security-oauth$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-security-oauth</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/ldap$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-security-ldap</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data/hadoop$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-hadoop</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-payment$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/spring-payment</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-shell$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/projects/spring-shell</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-beandoc$</from>
+        <to type="permanent-redirect" last="true">http://spring-beandoc.sourceforge.net</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/javaconfig$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-framework</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data/jpa$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-data-jpa</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data/jdbc-extensions$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-data-jdbc-ext</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data/rest$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-data-rest</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data/redis$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-data-redis</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data/mongodb$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-data-mongodb</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data/neo4j$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-data-neo4j</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data/commons$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-data-commons</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data/attic$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-security/$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-security</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data/riak$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/spring-data-riak</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-data/blob$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/spring-data-blob</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-integration/$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-integration</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/spring-migration-analyzer$</from>
+        <to type="permanent-redirect" last="true">http://projects.springframework.io/spring-migration-analyzer</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/node/3764$</from>
+        <to type="permanent-redirect" last="true">http://www.springone2gx.com/conference/washington/2012/10/video_list</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/SpringOne2GX2012$</from>
+        <to type="permanent-redirect" last="true">http://www.springone2gx.com/conference/washington/2012/10/video_list</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/insight/$</from>
+        <to type="permanent-redirect" last="true">http://gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/pivotal-tc-server</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/node/2882$</from>
+        <to type="permanent-redirect" last="true">http://www.eclipse.org/virgo</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/node/2277$</from>
+        <to type="permanent-redirect" last="true">http://www.eclipse.org/virgo/</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/extensions/se-db4o$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/extensions/se-db4o</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/extensions/se-sqlj$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/extensions/se-sqlj</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/extensions/se-workflow$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/extensions/se-workflow</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/extensions/se-surf$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/extensions/se-surf</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/extensions/se-blob$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/extensions/se-blob</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/extensions/se-db4o-net$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/extensions/se-db4o-net</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/extensions/se-springintegration-net$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/extensions/se-springintegration-net</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/extensions/se-threading-net$</from>
+        <to type="permanent-redirect" last="true">http://attic.springframework.io/extensions/se-threading-net</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/extensions/se-springactionscript-as$</from>
+        <to type="permanent-redirect" last="true">http://springframework.io/projects/spring-actionscript</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/insight/download-choose$</from>
+        <to type="permanent-redirect" last="true">http://gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/pivotal-tc-server</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/insight/develop$</from>
+        <to type="permanent-redirect" last="true">http://gopivotal.com/pivotal-products/pivotal-application-cloud-fabric/pivotal-tc-server</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/node/4286$</from>
+        <to type="permanent-redirect" last="true">http://www.springone2gx.com/conference/washington/2012/10/video_list</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/node/22610$</from>
+        <to type="permanent-redirect" last="true">http://www.springone2gx.com/conference/washington/2012/10/video_list</to>
     </rule>
 </urlrewrite>

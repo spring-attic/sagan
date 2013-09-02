@@ -19,42 +19,42 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ViewTeamTests extends IntegrationTestBase {
 
-	@Autowired
-	private WebApplicationContext wac;
+    @Autowired
+    private WebApplicationContext wac;
 
-	@Autowired
-	private TeamRepository teamRepository;
+    @Autowired
+    private TeamRepository teamRepository;
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Before
-	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-	}
+    @Before
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
 
-	@Test
-	public void getTeamPageOnlyShowsNotHiddenMembers() throws Exception {
-		MemberProfile visible = new MemberProfile();
-		visible.setName("First Last");
-		visible.setGithubUsername("someguy");
-		visible.setUsername("someguy");
+    @Test
+    public void getTeamPageOnlyShowsNotHiddenMembers() throws Exception {
+        MemberProfile visible = new MemberProfile();
+        visible.setName("First Last");
+        visible.setGithubUsername("someguy");
+        visible.setUsername("someguy");
 
-		teamRepository.save(visible);
+        teamRepository.save(visible);
 
-		MemberProfile hidden = new MemberProfile();
-		hidden.setName("Other dude");
-		hidden.setGithubUsername("dude");
-		hidden.setUsername("dude");
-		hidden.setHidden(true);
+        MemberProfile hidden = new MemberProfile();
+        hidden.setName("Other dude");
+        hidden.setGithubUsername("dude");
+        hidden.setUsername("dude");
+        hidden.setHidden(true);
 
-		teamRepository.save(hidden);
+        teamRepository.save(hidden);
 
-		this.mockMvc.perform(get("/team"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("First Last")))
-				.andExpect(content().string(containsString("someguy")))
-				.andExpect(content().string(not(containsString("dude"))));
-	}
+        this.mockMvc.perform(get("/team"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andExpect(content().string(containsString("First Last")))
+                .andExpect(content().string(containsString("someguy")))
+                .andExpect(content().string(not(containsString("dude"))));
+    }
 
 }

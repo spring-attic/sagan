@@ -14,23 +14,23 @@ import java.util.LinkedHashSet;
 @Configuration
 public class SearchClientConfiguration {
 
-	private static Log logger = LogFactory.getLog(SearchClientConfiguration.class);
+    private static Log logger = LogFactory.getLog(SearchClientConfiguration.class);
 
-	@Value("${elasticsearch.client.endpoint}")
-	private String endpoint;
+    @Value("${elasticsearch.client.endpoint}")
+    private String endpoint;
 
-	@Bean
-	public JestClient jestClient() {
-		JestClientFactory factory = new JestClientFactory();
-		factory.setClientConfig(clientConfig());
-		return factory.getObject();
-	}
+    @Bean
+    public JestClient jestClient() {
+        JestClientFactory factory = new JestClientFactory();
+        factory.setClientConfig(clientConfig());
+        return factory.getObject();
+    }
 
-	private ClientConfig clientConfig() {
-		LinkedHashSet<String> servers = new LinkedHashSet<>();
-		servers.add(endpoint);
-		logger.info("**** Elastic Search endpoint: " + endpoint);
-		return new ClientConfig.Builder(servers).multiThreaded(true).build();
-	}
+    private ClientConfig clientConfig() {
+        LinkedHashSet<String> servers = new LinkedHashSet<>();
+        servers.add(endpoint);
+        logger.info("**** Elastic Search endpoint: " + endpoint);
+        return new ClientConfig.Builder(servers).multiThreaded(true).build();
+    }
 
 }

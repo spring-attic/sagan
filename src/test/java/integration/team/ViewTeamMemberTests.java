@@ -20,94 +20,94 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ViewTeamMemberTests extends IntegrationTestBase {
-	@Autowired
-	private WebApplicationContext wac;
+    @Autowired
+    private WebApplicationContext wac;
 
-	@Autowired
-	private TeamRepository teamRepository;
+    @Autowired
+    private TeamRepository teamRepository;
 
-	@Autowired
-	private PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Before
-	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-	}
+    @Before
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
 
-	@Test
-	public void getTeamMemberPage() throws Exception {
-		MemberProfile profile = new MemberProfile();
-		profile.setName("First Last");
-		profile.setGithubUsername("someguy");
-		profile.setUsername("someguy");
+    @Test
+    public void getTeamMemberPage() throws Exception {
+        MemberProfile profile = new MemberProfile();
+        profile.setName("First Last");
+        profile.setGithubUsername("someguy");
+        profile.setUsername("someguy");
 
-		teamRepository.save(profile);
+        teamRepository.save(profile);
 
-		this.mockMvc.perform(get("/team/someguy"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("First Last")))
-				.andExpect(content().string(containsString("someguy")));
-	}
+        this.mockMvc.perform(get("/team/someguy"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andExpect(content().string(containsString("First Last")))
+                .andExpect(content().string(containsString("someguy")));
+    }
 
-	@Test
-	public void getTeamMemberPage_404sWhenNoMemberFound() throws Exception {
-		this.mockMvc.perform(get("/team/not-a-user")).andExpect(status().isNotFound());
-	}
+    @Test
+    public void getTeamMemberPage_404sWhenNoMemberFound() throws Exception {
+        this.mockMvc.perform(get("/team/not-a-user")).andExpect(status().isNotFound());
+    }
 
-	@Test
-	public void getTeamMemberPage_404sWhenMemberIsHidden() throws Exception {
-		MemberProfile profile = new MemberProfile();
-		profile.setName("Hidden User");
-		profile.setGithubUsername("hidden-user");
-		profile.setUsername("hidden-user");
-		profile.setHidden(true);
+    @Test
+    public void getTeamMemberPage_404sWhenMemberIsHidden() throws Exception {
+        MemberProfile profile = new MemberProfile();
+        profile.setName("Hidden User");
+        profile.setGithubUsername("hidden-user");
+        profile.setUsername("hidden-user");
+        profile.setHidden(true);
 
-		teamRepository.save(profile);
+        teamRepository.save(profile);
 
-		this.mockMvc.perform(get("/team/hidden-user")).andExpect(status().isNotFound());
-	}
+        this.mockMvc.perform(get("/team/hidden-user")).andExpect(status().isNotFound());
+    }
 
-	@Test
-	public void getTeamMemberPageShowsPosts() throws Exception {
-		MemberProfile profile = new MemberProfile();
-		profile.setName("First Last");
-		profile.setGithubUsername("someguy");
-		profile.setUsername("someguy");
+    @Test
+    public void getTeamMemberPageShowsPosts() throws Exception {
+        MemberProfile profile = new MemberProfile();
+        profile.setName("First Last");
+        profile.setGithubUsername("someguy");
+        profile.setUsername("someguy");
 
-		teamRepository.save(profile);
+        teamRepository.save(profile);
 
-		Post post = PostBuilder.post().author(profile).title("My Post").build();
-		postRepository.save(post);
+        Post post = PostBuilder.post().author(profile).title("My Post").build();
+        postRepository.save(post);
 
-		this.mockMvc.perform(get("/team/someguy"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("My Post")));
-	}
+        this.mockMvc.perform(get("/team/someguy"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andExpect(content().string(containsString("My Post")));
+    }
 
-	@Test
-	public void getNonExistentTeamMemberPage() throws Exception {
-		this.mockMvc.perform(get("/team/someguy"))
-				.andExpect(status().isNotFound());
-	}
+    @Test
+    public void getNonExistentTeamMemberPage() throws Exception {
+        this.mockMvc.perform(get("/team/someguy"))
+                .andExpect(status().isNotFound());
+    }
 
-	@Test
-	public void getTeamMemberPageForNameWithDashes() throws Exception {
-		MemberProfile profile = new MemberProfile();
-		profile.setName("First Last");
-		profile.setGithubUsername("some-guy");
-		profile.setUsername("some-guy");
+    @Test
+    public void getTeamMemberPageForNameWithDashes() throws Exception {
+        MemberProfile profile = new MemberProfile();
+        profile.setName("First Last");
+        profile.setGithubUsername("some-guy");
+        profile.setUsername("some-guy");
 
-		teamRepository.save(profile);
+        teamRepository.save(profile);
 
-		this.mockMvc.perform(get("/team/some-guy"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("First Last")))
-				.andExpect(content().string(containsString("some-guy")));
-	}
+        this.mockMvc.perform(get("/team/some-guy"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andExpect(content().string(containsString("First Last")))
+                .andExpect(content().string(containsString("some-guy")));
+    }
 
 }

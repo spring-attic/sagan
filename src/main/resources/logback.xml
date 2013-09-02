@@ -7,7 +7,7 @@
     <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
 
     <logger name="io.spring.site" level="DEBUG" />
-	<logger name="org.apache.http" level="WARN" />
+    <logger name="org.apache.http" level="WARN" />
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
