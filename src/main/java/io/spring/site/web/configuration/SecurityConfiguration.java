@@ -154,7 +154,7 @@ public class SecurityConfiguration {
         }
     }
 
-	@Profile({"development", "staging", "production", "performance"})
+	@Profile({"prelaunch"})
     @Configuration
     @Order(Ordered.LOWEST_PRECEDENCE - 80)
     protected static class BasicAuthenticationConfiguration extends
