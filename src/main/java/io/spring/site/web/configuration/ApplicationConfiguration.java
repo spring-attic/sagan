@@ -63,7 +63,7 @@ public class ApplicationConfiguration {
     }
 
     @Configuration
-    @Profile({"development", "staging", "production"})
+    @Profile({"development", "staging", "production", "performance"})
     protected static class CloudFoundryDataSourceConfiguration {
         @Bean
         public DataSource dataSource() {
