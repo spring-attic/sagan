@@ -6,7 +6,7 @@
 
     <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
 
-    <logger name="io.spring.site" level="DEBUG" />
+    <logger name="io.spring.site" level="INFO" />
     <logger name="org.apache.http" level="WARN" />
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -34,5 +34,10 @@
         <appender-ref ref="FILE" />
         <appender-ref ref="CONSOLE" />
     </root>
+
+    <logger name="org.hibernate.validator.internal.util.Version" level="WARN"/>
+    <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN"/>
+    <logger name="org.apache.tomcat.util.net.NioSelectorPool" level="WARN"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR"/>
 
 </configuration>

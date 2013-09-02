@@ -18,6 +18,7 @@ spring:
     mode: LEGACYHTML5
     cache: false
   jpa:
+    show_sql: false
     hibernate:
       namingstrategy: org.hibernate.cfg.EJB3NamingStrategy
 
