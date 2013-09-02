@@ -133,11 +133,14 @@ projects:
 
     - id: spring-data-redis
       name: Spring Data Redis
+      groupId: org.springframework.data
       lead: jhickey
       refDocUrl: /spring-data/data-redis/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-redis/docs/{version}/api/
       supportedVersions:
+        - 1.1.0.BUILD-SNAPSHOT
         - 1.1.0.RC1
+        - 1.0.7.BUILD-SNAPSHOT
         - 1.0.6.RELEASE
 
     - id: spring-data-rest
