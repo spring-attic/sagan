@@ -5,11 +5,13 @@
       layout:decorator="layout">
 <head>
     <title th:inline="text">Team &middot; [[${profile.fullName}]]</title>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+
+    <script th:src="@{/leaflet/leaflet.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/leaflet/leaflet.css}" />
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/leaflet/leaflet.ie.css}" />
     <![endif]-->
-    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+
   <script type="text/javascript" th:src="@{/js/team.js}" src="../../static/js/team.js"></script>
 </head>
 <body>
