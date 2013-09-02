@@ -241,8 +241,10 @@ projects:
       lead: rclarkson
       groupId: org.springframework.mobile
       supportedVersions:
-        - 1.0.2.RELEASE
+        - 1.1.0.BUILD-SNAPSHOT
         - 1.1.0.RC1
+        - 1.0.3.BUILD-SNAPSHOT
+        - 1.0.2.RELEASE
 
     # ----------------------
     # Spring Roo
