@@ -64,7 +64,7 @@ public class EditTeamMemberTests extends IntegrationTestBase {
         };
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
                 .addFilters(springSecurityFilterChain)
-                .defaultRequest(get("/").with(csrf()).with(user(principal.getName()).roles("USER"))).build();
+                .defaultRequest(get("/").with(csrf()).with(user(memberProfile.getId()).roles("USER"))).build();
     }
 
     @Test

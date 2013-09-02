@@ -46,7 +46,7 @@ public class EditBlogPostTests extends IntegrationTestBase {
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
                 .addFilters(springSecurityFilterChain)
-                .defaultRequest(get("/").with(csrf()).with(user("user").roles("USER"))).build();
+                .defaultRequest(get("/").with(csrf()).with(user(123L).roles("USER"))).build();
         post = PostBuilder.post()
                 .title(originalTitle)
                 .rawContent(originalContent)

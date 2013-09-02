@@ -1,5 +1,6 @@
 package io.spring.site.web.configuration;
 
+import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.domain.team.SignInService;
 import io.spring.site.web.security.GithubAuthenticationSigninAdapter;
 import io.spring.site.web.security.RemoteUsernameConnectionSignUp;
@@ -30,6 +31,7 @@ import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.Filter;
@@ -38,6 +40,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Principal;
 
 @Configuration
 @ComponentScan({ "io.spring.site.domain.team", "io.spring.site.web.security",
@@ -93,14 +96,11 @@ public class SecurityConfiguration {
             http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
             http.requestMatchers().antMatchers("/admin/**", "/signout");
 			http.addFilterAfter(new OncePerRequestFilter() {
+				//TODO this filter needs to be removed once basic auth is removed
 				@Override
 				protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 					Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-					if (authentication == null || !authentication.isAuthenticated() || !(authentication.getCredentials() instanceof String)) {
-						throw new BadCredentialsException("Unauthenticated!");
-					}
-
-					if (!((String) authentication.getCredentials()).startsWith("github.user=")) {
+					if (authentication == null || !authentication.isAuthenticated() || !(authentication.getPrincipal() instanceof Long)) {
 						throw new BadCredentialsException("Not a github user!");
 					}
 					filterChain.doFilter(request, response);
@@ -157,6 +157,7 @@ public class SecurityConfiguration {
 	@Profile({"prelaunch"})
     @Configuration
     @Order(Ordered.LOWEST_PRECEDENCE - 80)
+	//TODO remove after launch, and also remove OncePerRequestFilter above
     protected static class BasicAuthenticationConfiguration extends
             WebSecurityConfigurerAdapter implements EnvironmentAware {
 

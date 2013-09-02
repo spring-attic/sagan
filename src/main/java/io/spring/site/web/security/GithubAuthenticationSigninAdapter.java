@@ -38,7 +38,7 @@ public class GithubAuthenticationSigninAdapter implements SignInAdapter {
 
             MemberProfile member = signInService.getOrCreateMemberProfile(new Long(githubId), gitHub);
             Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    member.getId(), "github.user="  + githubUsername,
+                    member.getId(), "N/A",
                     AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             return path;

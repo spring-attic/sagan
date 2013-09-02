@@ -52,17 +52,17 @@ public class CreateBlogPostTests extends IntegrationTestBase {
         profile.setName("Mr Author");
         profile = teamRepository.save(profile);
 
-        final String profileId = profile.getId().toString();
+        final Long profileId = profile.getId();
 
         principal = new Principal() {
             @Override
             public String getName() {
-                return profileId;
+                return profileId.toString();
             }
         };
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
                 .addFilters(springSecurityFilterChain)
-                .defaultRequest(get("/").with(csrf()).with(user(principal.getName()).roles("USER"))).build();
+                .defaultRequest(get("/").with(csrf()).with(user(profileId).roles("USER"))).build();
         postRepository.deleteAll();
     }
 

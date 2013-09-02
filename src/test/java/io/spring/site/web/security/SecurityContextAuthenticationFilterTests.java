@@ -1,7 +1,5 @@
 package io.spring.site.web.security;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,9 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import io.spring.site.web.security.SecurityContextAuthenticationFilter;
-
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class SecurityContextAuthenticationFilterTests {
 
@@ -25,7 +23,7 @@ public class SecurityContextAuthenticationFilterTests {
     @Test
     public void testSuccessfulAuthentication() throws Exception {
         List<GrantedAuthority> roleUser = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken("Nick","N/A",roleUser);
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(123L,"N/A",roleUser);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         assertEquals(authentication, filter.attemptAuthentication(null, null));

@@ -44,7 +44,7 @@ public abstract class IntegrationTestBase {
         stubRestClient.clearResponses();
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
                 .addFilters(springSecurityFilterChain)
-                .defaultRequest(get("/").with(csrf()).with(user("admin").roles("ADMIN")))
+                .defaultRequest(get("/").with(csrf()).with(user(123L).roles("ADMIN")))
                 .build();
     }
 }

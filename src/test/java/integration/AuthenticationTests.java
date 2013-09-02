@@ -39,7 +39,7 @@ public class AuthenticationTests extends IntegrationTestBase {
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
                 .addFilters(springSecurityFilterChain)
-                .defaultRequest(get("/").with(csrf()).with(user("Nick").roles("USER"))).build();
+                .defaultRequest(get("/").with(csrf()).with(user(123L).roles("USER"))).build();
     }
 
     @After
@@ -76,7 +76,7 @@ public class AuthenticationTests extends IntegrationTestBase {
     @Test
     public void showsAuthenticationInformationWhenSignedIn() throws Exception {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                "Nick",
+                123L,
                 "N/A",
                 AuthorityUtils
                         .commaSeparatedStringToAuthorityList("ROLE_USER"));
@@ -102,7 +102,7 @@ public class AuthenticationTests extends IntegrationTestBase {
 	@Test
 	public void signoutRedirectsToTheHomePage() throws Exception {
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-				"Nick",
+				123L,
 				"N/A",
 				AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
 		SecurityContextHolder
