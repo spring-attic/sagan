@@ -12,25 +12,25 @@
     <rule>
         <name>Legacy schema requests</name>
         <from>^/schema(/?.*)$</from>
-        <to type="permanent-redirect" last="true">http://schema.springframework.io$1</to>
+        <to type="permanent-redirect" last="true">http://schema.spring.io$1</to>
     </rule>
     <rule>
         <name>Legacy static docroot requests</name>
         <condition name="host">static.spring(framework|source).org</condition>
         <from>^/?$</from>
-        <to type="temporary-redirect" last="true">http://springframework.io/docs</to>
+        <to type="temporary-redirect" last="true">http://spring.io/docs</to>
     </rule>
     <rule>
         <name>Legacy static docs</name>
         <condition name="host">static.spring(framework|source).org</condition>
         <from>^(/.+)$</from>
-        <to type="permanent-redirect" last="true">http://docs.springframework.io$1</to>
+        <to type="permanent-redirect" last="true">http://docs.spring.io$1</to>
     </rule>
     <rule>
         <name>Legacy site docroots</name>
         <condition name="host">(www.)?spring(framework|source).org</condition>
         <from>^(/?)$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io</to>
+        <to type="permanent-redirect" last="true">http://spring.io</to>
     </rule>
     <rule>
         <name>GSG trailing slash</name>
@@ -56,19 +56,19 @@
         <note>https://www.pivotaltracker.com/story/show/54679580</note>
         <condition name="host">www.springsource.org</condition>
         <from>/sts/welcome</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/tools/sts/welcome</to>
+        <to type="permanent-redirect" last="true">http://spring.io/tools/sts/welcome</to>
     </rule>
     <rule>
         <name>Legacy Eclipse Marketplace requests</name>
         <condition name="host">www.springsource.(org|com)</condition>
         <from>(/products)?/eclipse-downloads</from>
-        <to type="temporary-redirect" last="true">http://springframework.io/tools/eclipse</to>
+        <to type="temporary-redirect" last="true">http://spring.io/tools/eclipse</to>
     </rule>
     <rule>
         <note>Support inbound link from http://grails.org/products/ggts [#54277050]</note>
         <condition name="host">www.springsource.org</condition>
         <from>/groovy-grails-tool-suite-download</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/tools/ggts</to>
+        <to type="permanent-redirect" last="true">http://spring.io/tools/ggts</to>
     </rule>
     <rule>
         <name>Legacy case study PDFs</name>
@@ -78,7 +78,7 @@
         https://www.pivotaltracker.com/epic/show/749753)</note>
         <condition name="host">www.springsource.org</condition>
         <from>^(/files/uploads/.*)$</from>
-        <to type="temporary-redirect" last="true">http://drupal.springframework.io$1</to>
+        <to type="temporary-redirect" last="true">http://drupal.spring.io$1</to>
     </rule>
     <rule>
         <name>Legacy blog images</name>
@@ -88,7 +88,7 @@
         https://www.pivotaltracker.com/epic/show/749753)</note>
         <condition name="host">blog.springsource.org</condition>
         <from>^(/wp-content/uploads/.*)$</from>
-        <to type="temporary-redirect" last="true">http://wp.springframework.io$1</to>
+        <to type="temporary-redirect" last="true">http://wp.spring.io$1</to>
     </rule>
     <rule>
         <name>Legacy blog posts</name>
@@ -99,7 +99,7 @@
         blog itself).</note>
         <condition name="host">blog.springsource.(org|com)</condition>
         <from>^(.*)$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io/blog$1</to>
+        <to type="permanent-redirect" last="true">http://spring.io/blog$1</to>
     </rule>
     <rule>
         <name>YouTube</name>
@@ -126,18 +126,18 @@
     </rule>
     <rule>
         <name>Remove www</name>
-        <note>Redirect www.springframework.io => springframework.io[#54747656]</note>
-        <condition name="host">www.springframework.io</condition>
+        <note>Redirect www.spring.io => spring.io[#54747656]</note>
+        <condition name="host">www.spring.io</condition>
         <from>^(.*)$</from>
-        <to type="permanent-redirect" last="true">http://springframework.io$1</to>
+        <to type="permanent-redirect" last="true">http://spring.io$1</to>
     </rule>
     <rule>
         <name>Project pages</name>
         <note>In case anyone attempts to URL-hack their way to /projects/spring-foo,
-        redirect to projects.springframework.io/spring-foo</note>
-        <condition name="host">springframework.io</condition>
+        redirect to projects.spring.io/spring-foo</note>
+        <condition name="host">spring.io</condition>
         <from>^/projects(/.+)$</from>
-        <to type="temporary-redirect" last="true">http://projects.springframework.io$1</to>
+        <to type="temporary-redirect" last="true">http://projects.spring.io$1</to>
     </rule>
     <rule>
         <name>LinkedIn</name>

@@ -24,7 +24,7 @@ public class ProjectMetadataYamlParserTests {
 
     @Test
     public void parsesGhPagesBaseUrl() throws IOException {
-        assertThat(service.getGhPagesBaseUrl(), equalTo("http://projects.springframework.io"));
+        assertThat(service.getGhPagesBaseUrl(), equalTo("http://projects.spring.io"));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class ProjectMetadataYamlParserTests {
         assertThat(project.getId(), equalTo("spring-framework-defaultsite"));
         assertThat(project.getName(), equalTo("Spring Framework"));
         assertThat(project.getRepoUrl(), equalTo("http://github.com/springframework/spring-framework-defaultsite"));
-        assertThat(project.getSiteUrl(), equalTo("http://projects.springframework.io/spring-framework-defaultsite"));
+        assertThat(project.getSiteUrl(), equalTo("http://projects.spring.io/spring-framework-defaultsite"));
         assertThat(project.hasSite(), equalTo(true));
     }
 
@@ -98,17 +98,17 @@ public class ProjectMetadataYamlParserTests {
     @Test
     public void getSupportedReferenceDocumentVersions() {
         List<ProjectRelease> docVersions = service.getProjectsForCategory("active").get(0).getProjectReleases();
-        assertThat(docVersions.get(0).getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/4.0.0.M1/spring-framework-reference/html/"));
-        assertThat(docVersions.get(1).getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/3.2.3.RELEASE/spring-framework-reference/html/"));
-        assertThat(docVersions.get(2).getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/3.1.4.SNAPSHOT/spring-framework-reference/html/"));
+        assertThat(docVersions.get(0).getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/4.0.0.M1/spring-framework-reference/html/"));
+        assertThat(docVersions.get(1).getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/3.2.3.RELEASE/spring-framework-reference/html/"));
+        assertThat(docVersions.get(2).getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/3.1.4.SNAPSHOT/spring-framework-reference/html/"));
     }
 
     @Test
     public void getSupportedApiDocsUrls() {
         List<ProjectRelease> docVersions = service.getProjectsForCategory("active").get(0).getProjectReleases();
-        assertThat(docVersions.get(0).getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/4.0.0.M1/javadoc-api/"));
-        assertThat(docVersions.get(1).getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/3.2.3.RELEASE/javadoc-api/"));
-        assertThat(docVersions.get(2).getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/3.1.4.SNAPSHOT/javadoc-api/"));
+        assertThat(docVersions.get(0).getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/4.0.0.M1/javadoc-api/"));
+        assertThat(docVersions.get(1).getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/3.2.3.RELEASE/javadoc-api/"));
+        assertThat(docVersions.get(2).getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/3.1.4.SNAPSHOT/javadoc-api/"));
     }
 
     @Test
@@ -116,8 +116,8 @@ public class ProjectMetadataYamlParserTests {
         Project project = service.getProjectsForCategory("active").get(3);
         ProjectRelease version = project.getProjectReleases().get(0);
         assertThat(version.getVersion(), equalTo("2.2.1.RELEASE"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.springframework.io/spring/trunk/apidocs/index.html"));
-        assertThat(version.getRefDocUrl(), equalTo("http://docs.springframework.io/spring/trunk/reference/html/index.html"));
+        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/trunk/apidocs/index.html"));
+        assertThat(version.getRefDocUrl(), equalTo("http://docs.spring.io/spring/trunk/reference/html/index.html"));
     }
 
     @Test
@@ -125,13 +125,13 @@ public class ProjectMetadataYamlParserTests {
         Project project = service.getProjectsForCategory("active").get(4);
         ProjectRelease version = project.getProjectReleases().get(0);
         assertThat(version.getVersion(), equalTo("2.2.1.RELEASE"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.springframework.io/spring/trunk/apidocs/index.html"));
-        assertThat(version.getRefDocUrl(), equalTo("http://docs.springframework.io/spring/trunk/reference/html/index.html"));
+        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/trunk/apidocs/index.html"));
+        assertThat(version.getRefDocUrl(), equalTo("http://docs.spring.io/spring/trunk/reference/html/index.html"));
 
         version = project.getProjectReleases().get(1);
         assertThat(version.getVersion(), equalTo("2.1.2.RELEASE"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/2.1.2.RELEASE/javadoc-api/"));
-        assertThat(version.getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/2.1.2.RELEASE/spring-framework-reference/html/"));
+        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.1.2.RELEASE/javadoc-api/"));
+        assertThat(version.getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.1.2.RELEASE/spring-framework-reference/html/"));
     }
 
     @Test
@@ -139,13 +139,13 @@ public class ProjectMetadataYamlParserTests {
         Project project = service.getProjectsForCategory("active").get(5);
         ProjectRelease version = project.getProjectReleases().get(0);
         assertThat(version.getVersion(), equalTo("2.4.0.M1"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/2.4.0.M1/api/"));
-        assertThat(version.getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/2.4.0.M1/reference/html"));
+        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.4.0.M1/api/"));
+        assertThat(version.getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.4.0.M1/reference/html"));
 
         version = project.getProjectReleases().get(1);
         assertThat(version.getVersion(), equalTo("2.3.2.RELEASE"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/2.3.2.RELEASE/javadoc-api/"));
-        assertThat(version.getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/2.3.2.RELEASE/reference/html"));
+        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.3.2.RELEASE/javadoc-api/"));
+        assertThat(version.getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.3.2.RELEASE/reference/html"));
     }
 
     @Test
@@ -153,13 +153,13 @@ public class ProjectMetadataYamlParserTests {
         Project project = service.getProjectsForCategory("active").get(6);
         ProjectRelease version = project.getProjectReleases().get(0);
         assertThat(version.getVersion(), equalTo("2.4.0.M1"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/2.4.0.M1/api/html"));
-        assertThat(version.getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/2.4.0.M1/reference/"));
+        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.4.0.M1/api/html"));
+        assertThat(version.getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.4.0.M1/reference/"));
 
         version = project.getProjectReleases().get(1);
         assertThat(version.getVersion(), equalTo("2.3.2.RELEASE"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/2.3.2.RELEASE/api/html"));
-        assertThat(version.getRefDocUrl(), equalTo("http://docs.springframework.io/spring/docs/2.3.2.RELEASE/other-reference/"));
+        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.3.2.RELEASE/api/html"));
+        assertThat(version.getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.3.2.RELEASE/other-reference/"));
     }
 
     @Test
@@ -176,8 +176,8 @@ public class ProjectMetadataYamlParserTests {
         Project project = service.getProjectsForCategory("active").get(8);
         ProjectRelease version = project.getProjectReleases().get(0);
         assertThat(version.getVersion(), equalTo("2.4.0.RELEASE"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.springframework.io/project-docs-urls-omitted/docs/2.4.0.RELEASE/api/"));
-        assertThat(version.getRefDocUrl(), equalTo("http://docs.springframework.io/project-docs-urls-omitted/docs/2.4.0.RELEASE/reference/html"));
+        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/project-docs-urls-omitted/docs/2.4.0.RELEASE/api/"));
+        assertThat(version.getRefDocUrl(), equalTo("http://docs.spring.io/project-docs-urls-omitted/docs/2.4.0.RELEASE/reference/html"));
     }
 
     @Test
@@ -211,16 +211,16 @@ public class ProjectMetadataYamlParserTests {
     @Test
     public void urlsInProjectsCanHaveVariables() throws Exception {
         Project project = service.getProjectsForCategory("active").get(11);
-        assertThat(project.getSiteUrl(), equalTo("http://projects.springframework.io/foo/project-with-variables-in-urls/"));
+        assertThat(project.getSiteUrl(), equalTo("http://projects.spring.io/foo/project-with-variables-in-urls/"));
         assertThat(project.getRepoUrl(), equalTo("http://github.com/springframework/foo/project-with-variables-in-urls/"));
 
         ProjectRelease version = project.getProjectReleases().get(0);
-        assertThat(version.getRefDocUrl(), equalTo("http://projects.springframework.io/docs/overridden/project-with-variables-in-urls/3.1.4.RELEASE"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/overridden/project-with-variables-in-urls/3.1.4.RELEASE/javadoc-api/"));
+        assertThat(version.getRefDocUrl(), equalTo("http://projects.spring.io/docs/overridden/project-with-variables-in-urls/3.1.4.RELEASE"));
+        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/overridden/project-with-variables-in-urls/3.1.4.RELEASE/javadoc-api/"));
 
         version = project.getProjectReleases().get(1);
-        assertThat(version.getRefDocUrl(), equalTo("http://projects.springframework.io/docs/project-with-variables-in-urls/3.1.1.RELEASE/html/"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.springframework.io/spring/docs/project-with-variables-in-urls/3.1.1.RELEASE/javadoc-api/"));
+        assertThat(version.getRefDocUrl(), equalTo("http://projects.spring.io/docs/project-with-variables-in-urls/3.1.1.RELEASE/html/"));
+        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/project-with-variables-in-urls/3.1.1.RELEASE/javadoc-api/"));
     }
 
     @Test

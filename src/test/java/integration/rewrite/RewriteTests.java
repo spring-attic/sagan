@@ -41,48 +41,48 @@ public class RewriteTests {
 
     @Test
     public void legacySiteDocrootsAreRedirected() throws Exception {
-        validatePermanentRedirect("http://springsource.org", "http://springframework.io");
-        validatePermanentRedirect("http://www.springsource.org", "http://springframework.io");
-        validatePermanentRedirect("http://springsource.org/", "http://springframework.io");
-        validatePermanentRedirect("http://www.springsource.org/", "http://springframework.io");
-        validatePermanentRedirect("http://springframework.org", "http://springframework.io");
-        validatePermanentRedirect("http://www.springframework.org", "http://springframework.io");
-        validatePermanentRedirect("http://springframework.org/", "http://springframework.io");
-        validatePermanentRedirect("http://www.springframework.org/", "http://springframework.io");
+        validatePermanentRedirect("http://springsource.org", "http://spring.io");
+        validatePermanentRedirect("http://www.springsource.org", "http://spring.io");
+        validatePermanentRedirect("http://springsource.org/", "http://spring.io");
+        validatePermanentRedirect("http://www.springsource.org/", "http://spring.io");
+        validatePermanentRedirect("http://springframework.org", "http://spring.io");
+        validatePermanentRedirect("http://www.springframework.org", "http://spring.io");
+        validatePermanentRedirect("http://springframework.org/", "http://spring.io");
+        validatePermanentRedirect("http://www.springframework.org/", "http://spring.io");
     }
 
     @Test
     public void legacySiteRedirects() throws Exception {
-        validatePermanentRedirect("http://www.springsource.org/sts/welcome", "http://springframework.io/tools/sts/welcome");
-        validatePermanentRedirect("http://www.springsource.org/groovy-grails-tool-suite-download", "http://springframework.io/tools/ggts");
+        validatePermanentRedirect("http://www.springsource.org/sts/welcome", "http://spring.io/tools/sts/welcome");
+        validatePermanentRedirect("http://www.springsource.org/groovy-grails-tool-suite-download", "http://spring.io/tools/ggts");
         validateTemporaryRedirect("http://www.springsource.org/ggts/welcome", "http://grails.org/products/ggts");
     }
 
     @Test
     public void blogPagesAreRedirected() throws Exception {
-        validatePermanentRedirect("http://blog.springsource.org/anything", "http://springframework.io/blog/anything");
-        validatePermanentRedirect("http://blog.springsource.org/anything", "http://springframework.io/blog/anything");
+        validatePermanentRedirect("http://blog.springsource.org/anything", "http://spring.io/blog/anything");
+        validatePermanentRedirect("http://blog.springsource.org/anything", "http://spring.io/blog/anything");
     }
 
     @Test
     public void blogAssetsAreRedirected() throws Exception {
-        validateTemporaryRedirect("http://blog.springsource.org/wp-content/uploads/attachment.zip", "http://wp.springframework.io/wp-content/uploads/attachment.zip");
+        validateTemporaryRedirect("http://blog.springsource.org/wp-content/uploads/attachment.zip", "http://wp.spring.io/wp-content/uploads/attachment.zip");
     }
 
     @Test
     public void blogAuthorsAreRedirected() throws Exception {
-        validatePermanentRedirect("http://blog.springsource.org/author/cbeams", "http://springframework.io/team/cbeams");
+        validatePermanentRedirect("http://blog.springsource.org/author/cbeams", "http://spring.io/team/cbeams");
     }
 
     @Test
     public void drupalNodesAreRedirected() throws Exception {
-        validatePermanentRedirect("http://www.springsource.org/node/3762", "http://springframework.io/blog/2012/12/10/spring-framework-3-2-ga-released");
-        validatePermanentRedirect("http://www.springsource.org/BusinessIntelligenceWithSpringAndBIRT", "http://springframework.io/blog/2012/01/30/spring-framework-birt");
+        validatePermanentRedirect("http://www.springsource.org/node/3762", "http://spring.io/blog/2012/12/10/spring-framework-3-2-ga-released");
+        validatePermanentRedirect("http://www.springsource.org/BusinessIntelligenceWithSpringAndBIRT", "http://spring.io/blog/2012/01/30/spring-framework-birt");
     }
 
     @Test
     public void oldCaseStudiesAreRedirected() throws Exception {
-        validateTemporaryRedirect("http://www.springsource.org/files/uploads/file.pdf", "http://drupal.springframework.io/files/uploads/file.pdf");
+        validateTemporaryRedirect("http://www.springsource.org/files/uploads/file.pdf", "http://drupal.spring.io/files/uploads/file.pdf");
     }
 
     @Test
@@ -122,51 +122,51 @@ public class RewriteTests {
 
     @Test
     public void stripsWwwSubdomain() throws ServletException, IOException, URISyntaxException {
-        validatePermanentRedirect("http://www.springframework.io", "http://springframework.io/");
-        validatePermanentRedirect("http://www.springframework.io/something", "http://springframework.io/something");
+        validatePermanentRedirect("http://www.spring.io", "http://spring.io/");
+        validatePermanentRedirect("http://www.spring.io/something", "http://spring.io/something");
     }
 
     @Test
     public void projectPageIndexIsNotRedirected() throws ServletException, IOException, URISyntaxException {
-        validateOk("http://springframework.io/projects");
+        validateOk("http://spring.io/projects");
     }
 
     @Test
     public void projectPageIndexWithSlashIsNotRedirected() throws ServletException, IOException, URISyntaxException {
-        validateOk("http://springframework.io/projects/");
+        validateOk("http://spring.io/projects/");
     }
 
     @Test
     public void projectPagesAreRedirected() throws ServletException, IOException, URISyntaxException {
-        validateTemporaryRedirect("http://springframework.io/projects/spring-data", "http://projects.springframework.io/spring-data");
-        validateTemporaryRedirect("http://springframework.io/projects/not-exist", "http://projects.springframework.io/not-exist");
+        validateTemporaryRedirect("http://spring.io/projects/spring-data", "http://projects.spring.io/spring-data");
+        validateTemporaryRedirect("http://spring.io/projects/not-exist", "http://projects.spring.io/not-exist");
     }
 
     @Test
     public void legacySchemaRequestsAreRedirected() throws Exception {
         for (String host : new String [] { "springsource.org", "www.springsource.org",
                                            "springframework.org", "www.springframework.org"}) {
-            validatePermanentRedirect("http://" + host + "/schema", "http://schema.springframework.io");
-            validatePermanentRedirect("http://" + host + "/schema/", "http://schema.springframework.io/");
-            validatePermanentRedirect("http://" + host + "/schema/oxm", "http://schema.springframework.io/oxm");
+            validatePermanentRedirect("http://" + host + "/schema", "http://schema.spring.io");
+            validatePermanentRedirect("http://" + host + "/schema/", "http://schema.spring.io/");
+            validatePermanentRedirect("http://" + host + "/schema/oxm", "http://schema.spring.io/oxm");
             validatePermanentRedirect("http://" + host + "/schema/oxm/spring-oxm.xsd",
-                                      "http://schema.springframework.io/oxm/spring-oxm.xsd");
+                                      "http://schema.spring.io/oxm/spring-oxm.xsd");
         }
     }
 
     @Test
     public void legacyStaticDocsRequestsAreRedirected() throws Exception {
         for (String host : new String [] { "static.springsource.org", "static.springframework.org" }) {
-            validateTemporaryRedirect("http://" + host + "", "http://springframework.io/docs");
-            validateTemporaryRedirect("http://" + host + "/", "http://springframework.io/docs");
-            validatePermanentRedirect("http://" + host + "/spring-anything", "http://docs.springframework.io/spring-anything");
+            validateTemporaryRedirect("http://" + host + "", "http://spring.io/docs");
+            validateTemporaryRedirect("http://" + host + "/", "http://spring.io/docs");
+            validatePermanentRedirect("http://" + host + "/spring-anything", "http://docs.spring.io/spring-anything");
         }
     }
 
     @Test
     public void inboundLinksFromEclipseMarketplaceAreRedirected() throws Exception {
-        validateTemporaryRedirect("http://www.springsource.org/eclipse-downloads", "http://springframework.io/tools/eclipse");
-        validateTemporaryRedirect("http://www.springsource.com/products/eclipse-downloads", "http://springframework.io/tools/eclipse");
+        validateTemporaryRedirect("http://www.springsource.org/eclipse-downloads", "http://spring.io/tools/eclipse");
+        validateTemporaryRedirect("http://www.springsource.com/products/eclipse-downloads", "http://spring.io/tools/eclipse");
     }
 
     @Test
