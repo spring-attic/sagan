@@ -170,7 +170,7 @@ public class SecurityConfiguration {
         protected void configure(HttpSecurity http) throws Exception {
             http.requestMatchers().antMatchers("/**");
             http.authorizeRequests().anyRequest().authenticated();
-            http.httpBasic();
+            http.httpBasic().realmName("Coming Soon");
             if (isForceHttps()) {
                 http.requiresChannel().anyRequest().requiresSecure();
             }
