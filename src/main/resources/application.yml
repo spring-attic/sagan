@@ -44,7 +44,7 @@ server:
         # See http://tomcat.apache.org/tomcat-7.0-doc/api/org/apache/catalina/valves/AccessLogValve.html
         accessLogEnabled: true
         accessLogPattern: '%h %l %u %t "%r" %s %b %{Host}i %{Location}o'
-        baseDir: target
+        baseDir: ''
         backgroundProcessorDelay: 1
 
 ---
