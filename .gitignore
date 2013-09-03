@@ -25,3 +25,4 @@ classes/
 .new-relic/
 test.log
 logs/
+blog_importer/
