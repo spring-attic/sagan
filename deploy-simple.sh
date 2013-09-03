@@ -4,6 +4,8 @@ if [ $# != 1 ] && [ $# != 4 ] ; then cat << EOM
 
     This script is used for deploying to NON blue/green configured environments
 
+    You should build the app before using this script, eg: 'mvn clean package'
+
     usage: $0 SPACE PATH_TO_CF EMAIL PASSWORD
 
     where SPACE is one of (staging|production)
