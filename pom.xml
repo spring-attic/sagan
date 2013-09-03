@@ -52,12 +52,12 @@
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring3</artifactId>
-            <version>2.0.18</version>
+            <version>2.0.18</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf</artifactId>
-            <version>2.0.18</version>
+            <version>2.0.18</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
