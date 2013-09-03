@@ -46,7 +46,7 @@ import java.io.IOException;
 public class SecurityConfiguration {
 
     static final String
-			SIGNIN_SUCCESS_PATH = "/signin/success";
+            SIGNIN_SUCCESS_PATH = "/signin/success";
 
     @Configuration
     @Order(Ordered.LOWEST_PRECEDENCE - 100)
@@ -93,27 +93,27 @@ public class SecurityConfiguration {
         protected void configure(HttpSecurity http) throws Exception {
             http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
             http.requestMatchers().antMatchers("/admin/**", "/signout");
-			http.addFilterAfter(new OncePerRequestFilter() {
-				//TODO this filter needs to be removed once basic auth is removed
-				@Override
-				protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-					Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-					if (authentication == null || !authentication.isAuthenticated() || !(authentication.getPrincipal() instanceof Long)) {
-						throw new BadCredentialsException("Not a github user!");
-					}
-					filterChain.doFilter(request, response);
-				}
-			}, ExceptionTranslationFilter.class);
+            http.addFilterAfter(new OncePerRequestFilter() {
+                //TODO this filter needs to be removed once basic auth is removed
+                @Override
+                protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+                    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                    if (authentication == null || !authentication.isAuthenticated() || !(authentication.getPrincipal() instanceof Long)) {
+                        throw new BadCredentialsException("Not a github user!");
+                    }
+                    filterChain.doFilter(request, response);
+                }
+            }, ExceptionTranslationFilter.class);
             http.logout()
-					.logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
-					.logoutSuccessUrl("/");
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
+                    .logoutSuccessUrl("/");
             http.authorizeRequests().anyRequest().authenticated();
             if (isForceHttps()) {
                 http.requiresChannel().anyRequest().requiresSecure();
             }
         }
 
-		private AuthenticationEntryPoint authenticationEntryPoint() {
+        private AuthenticationEntryPoint authenticationEntryPoint() {
             LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint("/signin");
             entryPoint.setForceHttps(isForceHttps());
             return entryPoint;
@@ -152,10 +152,10 @@ public class SecurityConfiguration {
         }
     }
 
-	@Profile({"prelaunch"})
+    @Profile({"prelaunch"})
     @Configuration
     @Order(Ordered.LOWEST_PRECEDENCE - 80)
-	//TODO remove after launch, and also remove OncePerRequestFilter above
+    //TODO remove after launch, and also remove OncePerRequestFilter above
     protected static class BasicAuthenticationConfiguration extends
             WebSecurityConfigurerAdapter implements EnvironmentAware {
 
@@ -170,26 +170,26 @@ public class SecurityConfiguration {
         protected void configure(HttpSecurity http) throws Exception {
             http.requestMatchers().antMatchers("/**");
             http.authorizeRequests().anyRequest().authenticated();
-			http.httpBasic();
+            http.httpBasic();
             if (isForceHttps()) {
                 http.requiresChannel().anyRequest().requiresSecure();
             }
         }
 
-		@Override
-		public void configure(WebSecurity web) throws Exception {
-			web.ignoring().antMatchers("/bootstrap/**");
-			web.ignoring().antMatchers("/bootstrap-datetimepicker/**");
-			web.ignoring().antMatchers("/css/**");
-			web.ignoring().antMatchers("/font-awesome/**");
-			web.ignoring().antMatchers("/img/**");
-			web.ignoring().antMatchers("/js/**");
-			web.ignoring().antMatchers("/500");
-			web.ignoring().antMatchers("/404");
-			web.ignoring().antMatchers("/project_metadata/**");
-		}
+        @Override
+        public void configure(WebSecurity web) throws Exception {
+            web.ignoring().antMatchers("/bootstrap/**");
+            web.ignoring().antMatchers("/bootstrap-datetimepicker/**");
+            web.ignoring().antMatchers("/css/**");
+            web.ignoring().antMatchers("/font-awesome/**");
+            web.ignoring().antMatchers("/img/**");
+            web.ignoring().antMatchers("/js/**");
+            web.ignoring().antMatchers("/500");
+            web.ignoring().antMatchers("/404");
+            web.ignoring().antMatchers("/project_metadata/**");
+        }
 
-		private boolean isForceHttps() {
+        private boolean isForceHttps() {
             return !this.environment.acceptsProfiles(this.environment.getDefaultProfiles())
                     && !this.environment.acceptsProfiles("acceptance");
         }

@@ -115,11 +115,11 @@ public class MemberProfile {
         this.githubUsername = githubUsername;
     }
 
-	public boolean hasGithubUsername() {
-		return !StringUtils.isEmpty(githubUsername);
-	}
+    public boolean hasGithubUsername() {
+        return !StringUtils.isEmpty(githubUsername);
+    }
 
-	public Long getGithubId() {
+    public Long getGithubId() {
         return githubId;
     }
 
@@ -143,11 +143,11 @@ public class MemberProfile {
         this.speakerdeckUsername = speakerdeckUsername;
     }
 
-	public boolean hasSpeakerdeckUsername() {
-		return !StringUtils.isEmpty(speakerdeckUsername);
-	}
+    public boolean hasSpeakerdeckUsername() {
+        return !StringUtils.isEmpty(speakerdeckUsername);
+    }
 
-	public String getTwitterUsername() {
+    public String getTwitterUsername() {
         return twitterUsername;
     }
 
@@ -155,11 +155,11 @@ public class MemberProfile {
         this.twitterUsername = twitterUsername;
     }
 
-	public boolean hasTwitterUsername() {
-		return !StringUtils.isEmpty(twitterUsername);
-	}
+    public boolean hasTwitterUsername() {
+        return !StringUtils.isEmpty(twitterUsername);
+    }
 
-	public String getLanyrdUsername() {
+    public String getLanyrdUsername() {
         return lanyrdUsername;
     }
 
@@ -167,9 +167,9 @@ public class MemberProfile {
         this.lanyrdUsername = lanyrdUsername;
     }
 
-	public boolean hasLanyrdUsername() {
-		return !StringUtils.isEmpty(lanyrdUsername);
-	}
+    public boolean hasLanyrdUsername() {
+        return !StringUtils.isEmpty(lanyrdUsername);
+    }
 
     public Link getTwitterLink() {
         if (StringUtils.isEmpty(getTwitterUsername())) {

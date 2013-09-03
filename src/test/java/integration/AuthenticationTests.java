@@ -99,25 +99,25 @@ public class AuthenticationTests extends IntegrationTestBase {
         assertThat(signOutLink.attr("href"), containsString("/signout"));
     }
 
-	@Test
-	public void signoutRedirectsToTheHomePage() throws Exception {
-		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-				123L,
-				"N/A",
-				AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
-		SecurityContextHolder
-				.getContext()
-				.setAuthentication(authentication);
+    @Test
+    public void signoutRedirectsToTheHomePage() throws Exception {
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                123L,
+                "N/A",
+                AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+        SecurityContextHolder
+                .getContext()
+                .setAuthentication(authentication);
 
 
-		this.mockMvc.perform(get("/signout"))
-				.andExpect(status().isFound())
-				.andExpect(new ResultMatcher() {
-					@Override
-					public void match(MvcResult result) {
-						String redirectedUrl = result.getResponse().getRedirectedUrl();
-						assertThat(redirectedUrl, equalTo("/"));
-					}
-				});
-	}
+        this.mockMvc.perform(get("/signout"))
+                .andExpect(status().isFound())
+                .andExpect(new ResultMatcher() {
+                    @Override
+                    public void match(MvcResult result) {
+                        String redirectedUrl = result.getResponse().getRedirectedUrl();
+                        assertThat(redirectedUrl, equalTo("/"));
+                    }
+                });
+    }
 }
