@@ -22,7 +22,6 @@ public class GuideSearchEntryMapper implements SearchEntryMapper<Guide> {
         entry.setRawContent(text);
         entry.setPath("/guides/gs/" + guide.getGuideId() + "/");
         entry.addFacetPaths("Guides", "Guides/Getting Started");
-        // TODO: Can we get a publish date form github?
         entry.setPublishAt(new Date(0L));
         return entry;
     }
