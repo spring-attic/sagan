@@ -23,3 +23,4 @@ PlaygroundTest.java
 *.sw?
 classes/
 .new-relic/
+test.log
