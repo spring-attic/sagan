@@ -1,30 +1,43 @@
 #!/bin/bash
 
-if [ $# != 4 ]; then cat << EOM
+if [ $# != 1 ] && [ $# != 4 ] ; then cat << EOM
 
-    usage: $0 PATH_TO_CF EMAIL PASSWORD SPACE
+    This script is used for deploying to blue/green configured environments
 
-    where PATH_TO_CF is the path to the 'cf' executable
-      and EMAIL and PASSWORD are your CF credentials
-      and SPACE is one of (staging|production)
+    usage: $0 SPACE PATH_TO_CF EMAIL PASSWORD
+
+    where SPACE is one of (staging|production)
+      and (optional) PATH_TO_CF is the path to the 'cf' executable
+      and (optional) EMAIL and PASSWORD are your CF credentials
+
+    *** if the optional arguments are not passed in, it assumes 'cf'
+        is on your path and you are logged in correctly
+
+    *** passing in one optional argument requires all others as well
 
 EOM
     exit
 fi
 
-CF=$1
-USER=$2
-PASS=$3
-SPACE=$4
+SPACE=$1
+CF=$2
+USER=$3
+PASS=$4
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+if [[ -z "$2" ]]; then
+    CF=cf
+    SPACE=$1
+else
+    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-PATH=$PATH:~/.rvm/rubies/ruby-1.9.3-p429/bin/:~/.rvm/bin/
+    PATH=$PATH:~/.rvm/rubies/ruby-1.9.3-p429/bin/:~/.rvm/bin/
 
-rvm use 1.9.3@sagan-ops
+    rvm use 1.9.3@sagan-ops
 
-$CF target api.run.pivotal.io || exit
-$CF login --email $USER --password $PASS || exit
+    $CF target api.run.pivotal.io || exit
+    $CF login --email $USER --password $PASS || exit
+fi
+
 $CF space $SPACE || exit
 
 # check that we don't have >1 or 0 apps running. We might make a case for 0 and deploy sagan-blue.
