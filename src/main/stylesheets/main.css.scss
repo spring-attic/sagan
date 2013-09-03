@@ -60,6 +60,10 @@ body {
   }
 }
 
+.spaced--container {
+  margin: 60px 0;
+}
+
 .code-snippet {
   border-radius: 2px;
   border: 1px solid #ccc;
@@ -1154,6 +1158,21 @@ form.lpeRegForm .mktInput {
   -ms-transition: border, box-shadow 0.20s;
   -o-transition: border, box-shadow 0.20s;
   border: 1px solid transparent;
+  .icon--container {
+    height: 200px;
+    display: inline-block;
+    .icon {
+      vertical-align: middle;
+      position: relative;
+      top: 50%;
+      &.icon-spring-logo-big {
+        margin-top: -77px;
+      }
+      &.icon-spring-logo {
+        margin-top: -20px;
+      }
+    }
+  }
   .title, .text, .link {
     color: #f1f1f1;
   }
@@ -1182,6 +1201,10 @@ form.lpeRegForm .mktInput {
   }
   &:active {
     box-shadow: inset 0 6px 10px darken($black-brown, 10%);
+  }
+  &.no-link {
+    box-shadow: none;
+    border: none;
   }
 }
 
@@ -1304,8 +1327,6 @@ form.lpeRegForm .mktInput {
     background-color: $black-brown;
     display: inline-block;
     text-align: center;
-    border: 1px solid $green;
-    box-shadow: 0 0 6px $green;
     margin-bottom: 30px;
     .icon {
       margin: 22px 6px;
@@ -1329,6 +1350,54 @@ form.lpeRegForm .mktInput {
     box-shadow: none;
   }
 }
+
+.white-btn--container {
+  background-color: white;
+  padding: 50px 0;
+  display: inline-block;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 3px #ccc;
+  text-align: center;
+  width: 95%;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+  .icon--container {
+    width: 190px;
+    height: 190px;
+    border-radius: 190px;
+    background-color: $black-brown;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 30px;
+    .icon {
+      margin: 22px 6px;
+    }
+    i {
+      color: #FFF;
+      font-size: 150px;
+      margin-top: 11px;
+      display: inline-block;
+    }
+    &.white-bg {
+      background-color: white;
+    }
+  }
+  p {
+    font-size: 20px;
+
+  }
+  &:hover {
+    box-shadow: 0 0 3px $green;
+    text-decoration: none;
+  }
+  &:active {
+    box-shadow: none;
+  }
+}
+
 
 .pagination {
   margin: -1px 0 0 0;
@@ -1354,6 +1423,27 @@ form.lpeRegForm .mktInput {
     }
     &:hover {
       color: $black-brown;
+    }
+  }
+}
+
+.usage-lists {
+  margin: 0;
+  list-style: none;
+  li {
+    margin-bottom: 5px;
+  }
+  & [class^="icon-"] {
+    margin-right: 10px;
+  }
+  &.okay {
+    & [class^="icon-"] {
+      color: $green;
+    }
+  }
+  &.not-okay {
+    & [class^="icon-"] {
+      color: #BA4160;
     }
   }
 }

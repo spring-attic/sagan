@@ -58,6 +58,14 @@ $icon-sprite: url("../img/iconsprite.png");
         border-color: $green;
       }
     }
+    &.with-icon {
+      & [class^="icon-"] {
+        margin-right: 21px;
+        font-size: 20px;
+        vertical-align: top;
+        line-height: 10px;
+      }
+    }
     &:hover {
       border-color: $black-brown;
       box-shadow: none;

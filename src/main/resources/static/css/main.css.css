@@ -42,6 +42,10 @@ body {
   width: 100%;
 }
 
+.spaced--container {
+  margin: 60px 0;
+}
+
 .code-snippet {
   border-radius: 2px;
   border: 1px solid #cccccc;
@@ -1075,6 +1079,21 @@ form.lpeRegForm .mktInput {
   -o-transition: border, box-shadow 0.2s;
   border: 1px solid transparent;
 }
+.about-feature--container .icon--container {
+  height: 200px;
+  display: inline-block;
+}
+.about-feature--container .icon--container .icon {
+  vertical-align: middle;
+  position: relative;
+  top: 50%;
+}
+.about-feature--container .icon--container .icon.icon-spring-logo-big {
+  margin-top: -77px;
+}
+.about-feature--container .icon--container .icon.icon-spring-logo {
+  margin-top: -20px;
+}
 .about-feature--container .title, .about-feature--container .text, .about-feature--container .link {
   color: #f1f1f1;
 }
@@ -1103,6 +1122,10 @@ form.lpeRegForm .mktInput {
 }
 .about-feature--container:active {
   box-shadow: inset 0 6px 10px #191715;
+}
+.about-feature--container.no-link {
+  box-shadow: none;
+  border: none;
 }
 
 .job-category--container {
@@ -1222,8 +1245,6 @@ form.lpeRegForm .mktInput {
   background-color: #34302d;
   display: inline-block;
   text-align: center;
-  border: 1px solid #6db33f;
-  box-shadow: 0 0 6px #6db33f;
   margin-bottom: 30px;
 }
 .admin-index--link .icon--container .icon {
@@ -1243,6 +1264,52 @@ form.lpeRegForm .mktInput {
   text-decoration: none;
 }
 .admin-index--link:active {
+  box-shadow: none;
+}
+
+.white-btn--container {
+  background-color: white;
+  padding: 50px 0;
+  display: inline-block;
+  border-bottom: 1px solid #cccccc;
+  box-shadow: 0 0 3px #cccccc;
+  text-align: center;
+  width: 95%;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+}
+.white-btn--container .icon--container {
+  width: 190px;
+  height: 190px;
+  border-radius: 190px;
+  background-color: #34302d;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.white-btn--container .icon--container .icon {
+  margin: 22px 6px;
+}
+.white-btn--container .icon--container i {
+  color: #FFF;
+  font-size: 150px;
+  margin-top: 11px;
+  display: inline-block;
+}
+.white-btn--container .icon--container.white-bg {
+  background-color: white;
+}
+.white-btn--container p {
+  font-size: 20px;
+}
+.white-btn--container:hover {
+  box-shadow: 0 0 3px #6db33f;
+  text-decoration: none;
+}
+.white-btn--container:active {
   box-shadow: none;
 }
 
@@ -1272,4 +1339,21 @@ form.lpeRegForm .mktInput {
 }
 .pagination div:hover, .pagination a:hover {
   color: #34302d;
+}
+
+.usage-lists {
+  margin: 0;
+  list-style: none;
+}
+.usage-lists li {
+  margin-bottom: 5px;
+}
+.usage-lists [class^="icon-"] {
+  margin-right: 10px;
+}
+.usage-lists.okay [class^="icon-"] {
+  color: #6db33f;
+}
+.usage-lists.not-okay [class^="icon-"] {
+  color: #BA4160;
 }
