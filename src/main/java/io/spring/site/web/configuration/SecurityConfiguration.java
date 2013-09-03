@@ -18,6 +18,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -26,7 +27,9 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.header.writers.HstsHeaderWriter;
 import org.springframework.security.web.util.AntPathRequestMatcher;
+import org.springframework.security.web.util.AnyRequestMatcher;
 import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
@@ -55,6 +58,7 @@ public class SecurityConfiguration {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
+            configureHeaders(http.headers());
             http.antMatcher("/signin/**").addFilterBefore(
                     authenticationFilter(), AnonymousAuthenticationFilter.class).anonymous().and()
                 .csrf().disable();
@@ -91,6 +95,7 @@ public class SecurityConfiguration {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
+            configureHeaders(http.headers());
             http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint()).and()
                 .requestMatchers().antMatchers("/admin/**", "/signout").and()
                 .addFilterAfter(new OncePerRequestFilter() {
@@ -173,6 +178,7 @@ public class SecurityConfiguration {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
+            configureHeaders(http.headers());
             http
                 .requestMatchers()
                     .antMatchers("/**")
@@ -207,6 +213,17 @@ public class SecurityConfiguration {
                     && !this.environment.acceptsProfiles("acceptance");
         }
 
+    }
+
+    private static void configureHeaders(HeadersConfigurer<?> headers) throws Exception {
+        HstsHeaderWriter writer = new HstsHeaderWriter(false);
+        writer.setRequestMatcher(new AnyRequestMatcher());
+        headers
+            .contentTypeOptions()
+            .xssProtection()
+            .cacheControl()
+            .addHeaderWriter(writer)
+            .frameOptions();
     }
 
 }
