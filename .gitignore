@@ -24,3 +24,4 @@ PlaygroundTest.java
 classes/
 .new-relic/
 test.log
+logs/
