@@ -1,10 +1,10 @@
 package io.spring.site.web.configuration;
 
-import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.domain.team.SignInService;
 import io.spring.site.web.security.GithubAuthenticationSigninAdapter;
 import io.spring.site.web.security.RemoteUsernameConnectionSignUp;
 import io.spring.site.web.security.SecurityContextAuthenticationFilter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +31,6 @@ import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.Filter;
@@ -40,7 +39,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.Principal;
 
 @Configuration
 @ComponentScan({ "io.spring.site.domain.team", "io.spring.site.web.security",
