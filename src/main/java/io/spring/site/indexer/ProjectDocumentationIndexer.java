@@ -39,7 +39,7 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 
     @Override
     public void indexItem(Project project) {
-        logger.info("Indexing project: " + project.getId());
+        logger.debug("Indexing project: " + project.getId());
 
         List<String> projectVersions = new ArrayList<>();
         for (ProjectRelease projectRelease : project.getProjectReleases()) {
