@@ -116,7 +116,7 @@ $(function () {
 
   var initializeSearch = function () {
     var searchFacet = $(".search-facets");
-    if (searchFacet.length == 0) {
+    if (!searchFacet.length) {
       return;
     } else {
       $(".sub-facet--list, .facet-section--header").addClass('js-close');
@@ -132,12 +132,19 @@ $(function () {
 
       $(".js-checkbox-pill").click(function() {
         var checkBoxes = $(this).closest(".facet").find("input[type='checkbox']");
-        if (checkBoxes.prop('checked') == false ){
+        var checkBox = $(this).closest(".facet").find("input[type='checkbox']").first();
+        if (checkBox.prop('checked') == false ){
+          //IF IT IS CHECKED
+
           $(this).prop('checked', false);
-          $(this).parents(".facet").find("input[type='checkbox']:first").prop('checked',false);
-          $(this).parents(".facet").find("input[type='checkbox']").prop('checked',false);
+          $(this).parents(".sub-facet--list").siblings(".facet--wrapper").find("input[type='checkbox']").first().prop('checked', false);
+          $(this).closest(".sub-facet--list").siblings(".facet--wrapper").find("input[type='checkbox']").first().prop('checked', false);
+          // $(this).parents(".facet").find("input[type='checkbox']").prop('checked',false);
         } else {
+          //IF IT IS NOT CHECKED
+
           checkBoxes.prop('checked',true);
+
         };
       });
     }
