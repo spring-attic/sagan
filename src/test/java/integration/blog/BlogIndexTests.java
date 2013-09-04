@@ -4,11 +4,6 @@ import integration.IntegrationTestBase;
 import io.spring.site.domain.blog.Post;
 import io.spring.site.domain.blog.PostBuilder;
 import io.spring.site.domain.blog.PostRepository;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -16,12 +11,18 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -126,7 +127,7 @@ public class BlogIndexTests extends IntegrationTestBase {
 
     private void createManyPostsInNovember(int numPostsToCreate) {
         Calendar calendar = Calendar.getInstance();
-        List<Post> posts = new ArrayList<Post>();
+        List<Post> posts = new ArrayList<>();
         for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
             calendar.set(2012, 10, postNumber);
             Post post = new PostBuilder()
@@ -137,6 +138,29 @@ public class BlogIndexTests extends IntegrationTestBase {
             posts.add(post);
         }
         this.postRepository.save(posts);
+    }
+
+    @Test
+    public void givenPostsCreatedOutOfOrder_blogIndexShowsPostsOrderedByPublishedDate() throws Exception {
+        createPublishedPost("Happy New Year", "2013-01-01 00:00");
+        createPublishedPost("Back to Work", "2013-01-03 00:00");
+        createPublishedPost("Off to the Sales", "2013-01-02 00:00");
+
+        MvcResult response = this.mockMvc.perform(get("/blog"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        Document html = Jsoup.parse(response.getResponse().getContentAsString());
+        List<String> titles = new ArrayList<>();
+        for (Element elt : html.select(".blog--title")) {
+            titles.add(elt.text());
+        }
+        assertThat(titles, contains("Back to Work", "Off to the Sales", "Happy New Year"));
+    }
+
+    private Post createPublishedPost(String title, String publishAt) throws ParseException {
+        Post post = PostBuilder.post().title(title).publishAt(publishAt).build();
+        return postRepository.save(post);
     }
 
     @Test
