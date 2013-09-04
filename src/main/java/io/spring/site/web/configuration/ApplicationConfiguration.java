@@ -24,8 +24,6 @@ import io.spring.site.web.blog.feed.BlogPostAtomViewer;
 import liquibase.integration.spring.SpringLiquibase;
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
-import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
-import org.postgresql.ds.PGSimpleDataSource;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,27 +66,41 @@ public class ApplicationConfiguration {
         @Bean
         public DataSource dataSource() {
             CloudEnvironment cloudEnvironment = new CloudEnvironment();
-            RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db",
-                    RdbmsServiceInfo.class);
-            RdbmsServiceCreator serviceCreator = new RdbmsServiceCreator();
-            return serviceCreator.createService(serviceInfo);
+            RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db", RdbmsServiceInfo.class);
+			org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
+			dataSource.setDriverClassName("org.postgresql.Driver");
+			dataSource.setUrl(serviceInfo.getUrl());
+			dataSource.setUsername(serviceInfo.getUserName());
+			dataSource.setPassword(serviceInfo.getPassword());
+			dataSource.setMaxActive(100);
+			dataSource.setMaxIdle(8);
+			dataSource.setMinIdle(8);
+			dataSource.setTestOnBorrow(false);
+			dataSource.setTestOnReturn(false);
+			dataSource.setValidationQuery("SELECT 1");
+			return dataSource;
         }
     }
 
-    @Configuration
-    @Profile({"local_postgres"})
-    protected static class PostgresConfiguration {
-        @Bean
-        public DataSource dataSource() {
-            PGSimpleDataSource dataSource = new PGSimpleDataSource();
-            dataSource.setPortNumber(5432);
-            dataSource.setDatabaseName("blog_import");
-            dataSource.setServerName("localhost");
-            return dataSource;
-        }
-    }
+	@Bean
+	@Profile("local_postgres")
+	public DataSource dataSource() {
+		org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/sagan-db");
+		dataSource.setUsername("user");
+		dataSource.setPassword("changeme");
+		dataSource.setMaxActive(100);
+		dataSource.setMaxIdle(8);
+		dataSource.setMinIdle(8);
+		dataSource.setTestOnBorrow(false);
+		dataSource.setTestOnReturn(false);
+		dataSource.setValidationQuery("SELECT 1");
+		return dataSource;
+	}
 
-    @Bean
+
+	@Bean
     public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl, DateService dateService) {
         return new BlogPostAtomViewer(siteUrl, dateService);
     }
