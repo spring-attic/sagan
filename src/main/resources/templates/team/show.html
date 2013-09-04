@@ -100,7 +100,9 @@
                   </div>
                 </div>
                 <div th:utext="${post.renderedSummary}" class='member-post--summary'>This has been an interesting week.</div>
-                <div class="blog-preview--readmore">Read More...</div>
+                <a class="blog-preview--readmore" th:href="@{${post.path}}" th:if="${post.showReadMore()}">
+                  Read more...
+                </a>
               </div>
             </div>
           </div>
