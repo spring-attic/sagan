@@ -1,12 +1,12 @@
 package io.spring.site.indexer;
 
-import java.util.concurrent.ExecutorService;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.ExecutorService;
 
 @Service
 public class IndexerService {
@@ -23,7 +23,7 @@ public class IndexerService {
     }
 
     public <T> void index(final Indexer<T> indexer) {
-        logger.info("Indexing " + indexer.counterName());
+        logger.debug("Indexing " + indexer.counterName());
         for (final T indexable : indexer.indexableItems()) {
             this.executorService.submit(new Runnable() {
                 @Override

@@ -22,7 +22,7 @@ public abstract class PageableFactory {
     }
 
     private static Pageable build(int page, int pageSize) {
-        return new PageRequest(page, pageSize, Sort.Direction.DESC, "createdAt");
+        return new PageRequest(page, pageSize, Sort.Direction.DESC, "publishAt");
     }
 
     public static Pageable forSearch(int page) {

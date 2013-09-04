@@ -120,8 +120,12 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   .member-post--container {
     .member-post--title {
+      font-size: 24px;
+      line-height: 24px;
+      font-weight: normal;
+      font-family: "Montserrat", sans-serif;
       margin-top: 40px;
-
+      margin-bottom: 10px;
     }
     .member-post--summary p {
       font-size: 14px;
@@ -137,6 +141,30 @@ $icon-sprite: url("../img/iconsprite.png");
       .member-post--title {
         margin-top: 0;
       }
+    }
+    .meta-data--container {
+      margin-bottom: 15px;
+    }
+    .meta-data--container .meta-data--item {
+      display: inline-block;
+      margin: 2px 30px 0 0;
+      font-size: 12px;
+      line-height: 12px;
+      text-transform: uppercase;
+    }
+    .meta-data--container .meta-data--item .meta-data--icon {
+      display: inline-block;
+      height: 20px;
+      width: 20px;
+      vertical-align: middle;
+      margin: -2px 5px 0 0;
+    }
+    .meta-data--container .meta-data--item a {
+      color: #34302d;
+    }
+    .meta-data--container .meta-data--item a:hover {
+      text-decoration: none;
+      color: #5fa134;
     }
   }
 

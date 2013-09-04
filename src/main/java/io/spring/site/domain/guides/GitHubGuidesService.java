@@ -65,7 +65,7 @@ public class GitHubGuidesService implements GuidesService {
 
     private String getGuideContent(String path) {
         try {
-            log.info(String.format("Fetching getting started guide for '%s'", path));
+            log.debug(String.format("Fetching getting started guide for '%s'", path));
             return this.gitHubService.getRawFileAsHtml(path);
         } catch (RestClientException e) {
             String msg = String

@@ -1,16 +1,10 @@
 package io.spring.site.web.projects;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.spring.site.domain.projects.Project;
 import io.spring.site.domain.projects.ProjectMetadataService;
 import io.spring.site.domain.services.github.GitHubService;
-
-import java.io.IOException;
-import java.net.URI;
-import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.net.URI;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static java.lang.String.*;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static java.lang.String.format;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Accepts requests from GitHub webhook set up at
@@ -124,7 +122,7 @@ public class GhPagesWebhookController {
     }
 
     private boolean hasGhPagesBranch(Project project) {
-        if (project.hasSite() && project.getSiteUrl().startsWith("http://projects.springframework.io")) {
+        if (project.hasSite() && project.getSiteUrl().startsWith("http://projects.spring.io")) {
             String ghPagesBranchUrl = format("%s/repos/%s/%s/branches/gh-pages",
                     GitHubService.API_URL_BASE, "spring-projects", project.getId());
             try {

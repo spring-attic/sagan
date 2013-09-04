@@ -18,6 +18,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -26,7 +27,9 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.header.writers.HstsHeaderWriter;
 import org.springframework.security.web.util.AntPathRequestMatcher;
+import org.springframework.security.web.util.AnyRequestMatcher;
 import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
@@ -55,19 +58,20 @@ public class SecurityConfiguration {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.antMatcher("/signin/**")
-                    .addFilterBefore(authenticationFilter(),
-                            AnonymousAuthenticationFilter.class).anonymous();
-            http.csrf().disable();
+            configureHeaders(http.headers());
+            http.antMatcher("/signin/**").addFilterBefore(
+                    authenticationFilter(), AnonymousAuthenticationFilter.class).anonymous().and()
+                .csrf().disable();
         }
 
         // Not a @Bean because we explicitly do not want it added automatically by
         // Bootstrap to all requests
         protected Filter authenticationFilter() {
 
-            AbstractAuthenticationProcessingFilter filter = new SecurityContextAuthenticationFilter(
-                    SIGNIN_SUCCESS_PATH);
-            SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+            AbstractAuthenticationProcessingFilter filter =
+                    new SecurityContextAuthenticationFilter(SIGNIN_SUCCESS_PATH);
+            SavedRequestAwareAuthenticationSuccessHandler successHandler =
+                    new SavedRequestAwareAuthenticationSuccessHandler();
             successHandler.setDefaultTargetUrl("/admin");
             filter.setAuthenticationSuccessHandler(successHandler);
             return filter;
@@ -91,23 +95,29 @@ public class SecurityConfiguration {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
-            http.requestMatchers().antMatchers("/admin/**", "/signout");
-            http.addFilterAfter(new OncePerRequestFilter() {
+            configureHeaders(http.headers());
+            http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint()).and()
+                .requestMatchers().antMatchers("/admin/**", "/signout").and()
+                .addFilterAfter(new OncePerRequestFilter() {
+
                 //TODO this filter needs to be removed once basic auth is removed
                 @Override
-                protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+                protected void doFilterInternal(HttpServletRequest request,
+                                                HttpServletResponse response,
+                                                FilterChain filterChain) throws ServletException, IOException {
                     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                    if (authentication == null || !authentication.isAuthenticated() || !(authentication.getPrincipal() instanceof Long)) {
+                    if (authentication == null ||
+                            !authentication.isAuthenticated() ||
+                            !(authentication.getPrincipal() instanceof Long)) {
                         throw new BadCredentialsException("Not a github user!");
                     }
                     filterChain.doFilter(request, response);
                 }
             }, ExceptionTranslationFilter.class);
             http.logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
-                    .logoutSuccessUrl("/");
-            http.authorizeRequests().anyRequest().authenticated();
+                .logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
+                .logoutSuccessUrl("/").and()
+                .authorizeRequests().anyRequest().authenticated();
             if (isForceHttps()) {
                 http.requiresChannel().anyRequest().requiresSecure();
             }
@@ -168,9 +178,16 @@ public class SecurityConfiguration {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.requestMatchers().antMatchers("/**");
-            http.authorizeRequests().anyRequest().authenticated();
-            http.httpBasic().realmName("Coming Soon");
+            configureHeaders(http.headers());
+            http
+                .requestMatchers()
+                    .antMatchers("/**")
+                    .and()
+                .authorizeRequests()
+                    .anyRequest().authenticated()
+                    .and()
+                .httpBasic()
+                    .realmName("Coming Soon");
             if (isForceHttps()) {
                 http.requiresChannel().anyRequest().requiresSecure();
             }
@@ -178,15 +195,17 @@ public class SecurityConfiguration {
 
         @Override
         public void configure(WebSecurity web) throws Exception {
-            web.ignoring().antMatchers("/bootstrap/**");
-            web.ignoring().antMatchers("/bootstrap-datetimepicker/**");
-            web.ignoring().antMatchers("/css/**");
-            web.ignoring().antMatchers("/font-awesome/**");
-            web.ignoring().antMatchers("/img/**");
-            web.ignoring().antMatchers("/js/**");
-            web.ignoring().antMatchers("/500");
-            web.ignoring().antMatchers("/404");
-            web.ignoring().antMatchers("/project_metadata/**");
+            web
+                .ignoring()
+                    .antMatchers("/bootstrap/**")
+                    .antMatchers("/bootstrap-datetimepicker/**")
+                    .antMatchers("/css/**")
+                    .antMatchers("/font-awesome/**")
+                    .antMatchers("/img/**")
+                    .antMatchers("/js/**")
+                    .antMatchers("/500")
+                    .antMatchers("/404")
+                    .antMatchers("/project_metadata/**");
         }
 
         private boolean isForceHttps() {
@@ -194,6 +213,17 @@ public class SecurityConfiguration {
                     && !this.environment.acceptsProfiles("acceptance");
         }
 
+    }
+
+    private static void configureHeaders(HeadersConfigurer<?> headers) throws Exception {
+        HstsHeaderWriter writer = new HstsHeaderWriter(false);
+        writer.setRequestMatcher(new AnyRequestMatcher());
+        headers
+            .contentTypeOptions()
+            .xssProtection()
+            .cacheControl()
+            .addHeaderWriter(writer)
+            .frameOptions();
     }
 
 }

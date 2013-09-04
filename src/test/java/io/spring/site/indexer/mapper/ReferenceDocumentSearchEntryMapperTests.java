@@ -23,7 +23,8 @@ public class ReferenceDocumentSearchEntryMapperTests {
             "Spring Project",
             "http://www.example.com/repo/spring-framework",
             "http://www.example.com/spring-framework",
-            Collections.<ProjectRelease>emptyList());
+            Collections.<ProjectRelease>emptyList(),
+            false);
 
     private ProjectRelease version = new ProjectReleaseBuilder()
             .versionName("3.2.1.RELEASE")

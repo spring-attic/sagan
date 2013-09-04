@@ -58,14 +58,6 @@ $icon-sprite: url("../img/iconsprite.png");
   }
 }
 
-.search-result--path {
-  color: $link-green;
-  max-width: 675px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-
 .search-facets {
   form {
     margin: 0;

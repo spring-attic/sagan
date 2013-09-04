@@ -77,10 +77,10 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         assertThat((String) release.get("version"), equalTo("4.0.0.BUILD-SNAPSHOT"));
         assertThat(
                 (String) release.get("refDocUrl"),
-                equalTo("http://docs.springframework.io/spring/docs/4.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/"));
+                equalTo("http://docs.spring.io/spring/docs/4.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/"));
         assertThat(
                 (String) release.get("apiDocUrl"),
-                equalTo("http://docs.springframework.io/spring/docs/4.0.0.BUILD-SNAPSHOT/javadoc-api/"));
+                equalTo("http://docs.spring.io/spring/docs/4.0.0.BUILD-SNAPSHOT/javadoc-api/"));
         assertThat((Boolean) release.get("preRelease"), equalTo(false));
         assertThat((Boolean) release.get("current"), equalTo(false));
         assertThat((Boolean) release.get("generalAvailability"), equalTo(false));
@@ -98,10 +98,10 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         assertThat((String) release.get("version"), equalTo("4.0.0.M2"));
         assertThat(
                 (String) release.get("refDocUrl"),
-                equalTo("http://docs.springframework.io/spring/docs/4.0.0.M2/spring-framework-reference/html/"));
+                equalTo("http://docs.spring.io/spring/docs/4.0.0.M2/spring-framework-reference/html/"));
         assertThat(
                 (String) release.get("apiDocUrl"),
-                equalTo("http://docs.springframework.io/spring/docs/4.0.0.M2/javadoc-api/"));
+                equalTo("http://docs.spring.io/spring/docs/4.0.0.M2/javadoc-api/"));
         assertThat((Boolean) release.get("preRelease"), equalTo(true));
         assertThat((Boolean) release.get("current"), equalTo(false));
         assertThat((Boolean) release.get("generalAvailability"), equalTo(false));
@@ -112,7 +112,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         assertThat((String) repository.get("id"), equalTo("spring-milestones"));
         assertThat((String) repository.get("name"), equalTo("Spring Milestones"));
         assertThat((String) repository.get("url"),
-                equalTo("http://repo.springsource.org/milestone"));
+                equalTo("http://repo.spring.io/milestone"));
         assertThat((Boolean) repository.get("snapshotsEnabled"), equalTo(false));
 
     }
@@ -123,10 +123,10 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         assertThat((String) release.get("version"), equalTo("1.0.0.CI-SNAPSHOT"));
         assertThat(
                 (String) release.get("refDocUrl"),
-                equalTo("http://docs.springframework.io/spring-security-kerberos/docs/1.0.0.CI-SNAPSHOT/reference/html"));
+                equalTo("http://docs.spring.io/spring-security-kerberos/docs/1.0.0.CI-SNAPSHOT/reference/html"));
         assertThat(
                 (String) release.get("apiDocUrl"),
-                equalTo("http://docs.springframework.io/spring-security-kerberos/docs/1.0.0.CI-SNAPSHOT/api/"));
+                equalTo("http://docs.spring.io/spring-security-kerberos/docs/1.0.0.CI-SNAPSHOT/api/"));
         assertThat((Boolean) release.get("preRelease"), equalTo(false));
         assertThat((Boolean) release.get("current"), equalTo(false));
         assertThat((Boolean) release.get("generalAvailability"), equalTo(false));
@@ -137,7 +137,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         assertThat((String) repository.get("id"), equalTo("spring-snapshots"));
         assertThat((String) repository.get("name"), equalTo("Spring Snapshots"));
         assertThat((String) repository.get("url"),
-                equalTo("http://repo.springsource.org/snapshot"));
+                equalTo("http://repo.spring.io/snapshot"));
         assertThat((Boolean) repository.get("snapshotsEnabled"), equalTo(true));
     }
 

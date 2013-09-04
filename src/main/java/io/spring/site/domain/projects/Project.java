@@ -9,17 +9,20 @@ public class Project {
     private final String repoUrl;
     private final String siteUrl;
     private final List<ProjectRelease> releaseList;
+    private final boolean isAggregator;
 
     public Project(String id,
                    String name,
                    String repoUrl,
                    String siteUrl,
-                   List<ProjectRelease> releaseList) {
+                   List<ProjectRelease> releaseList,
+                   boolean isAggregator) {
         this.id = id;
         this.name = name;
         this.repoUrl = repoUrl;
         this.siteUrl = siteUrl;
         this.releaseList = releaseList;
+        this.isAggregator = isAggregator;
     }
 
     public String getName() {
@@ -44,5 +47,9 @@ public class Project {
 
     public boolean hasSite() {
         return !siteUrl.isEmpty();
+    }
+
+    public boolean isAggregator() {
+        return isAggregator;
     }
 }

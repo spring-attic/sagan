@@ -76,7 +76,7 @@
               <a th:href="@{/blog}" >Blog</a>
             </li>
             <li th:class="${beans.uih.navClass(navSection?:'','forum')}">
-              <a href="http://forum.springframework.io">Forum</a>
+              <a href="http://forum.spring.io">Forum</a>
             </li>
             <li class="navbar-link nav-search">
               <i class="icon-search navbar-search--icon js-search-input-open"></i>
@@ -127,7 +127,7 @@
               <div class="container">
                 <ul class="nav">
                   <li><a th:href="@{/about}">About</a></li>
-                  <li><a th:href="@{/about}">Team</a></li>
+                  <li><a th:href="@{/team}">Team</a></li>
                   <li><a th:href="@{/services}">Services</a></li>
                   <li><a th:href="@{/tools}">Tools</a></li>
                 </ul>
@@ -147,79 +147,7 @@
               <label>
                 Subscribe to our newsletter
               </label>
-              <form class="lpeRegForm formNotEmpty" method="post" enctype="application/x-www-form-urlencoded" action="http://play.gopivotal.com/index.php/leadCapture/save" id="mktForm_1035" name="mktForm_1035">
-                <ul class="mktLblLeft" style="margin: 0;">
-                  <li class="mktField">
-                    <span class="mktInput">
-                      <input class="mktFormText mktFormEmail" name="Email" id="Email" placeholder="Email Address" type="text" value="" title="Email Address" maxlength="255" tabindex="1" style="font-size: 12px; padding: 10px 0 27px 10px; height:21px; font-family: &quot;Varela Round&quot;, sans-serif; color: #666; font-weight: 400;border-radius: 0;width: 310px;">
-                      <span class="mktFormMsg"></span>
-                    </span>
-                  </li>
-                  <li class="mktField" style="display: none;">
-                    <span class="mktInput">
-                      <input class="mktFormHidden" name="OSS__c" id="OSS__c" type="hidden" value="Yes">
-                      <span class="mktFormMsg"></span>
-                    </span>
-                  </li>
-                  <li class="mktField" style="display: none;">
-                    <span class="mktInput">
-                      <input class="mktFormHidden" name="Primary_Product_Interest__c" id="Primary_Product_Interest__c" type="hidden" value="OSS">
-                      <span class="mktFormMsg"></span>
-                    </span>
-                  </li>
-                  <li class="mktField" style="display: none;">
-                    <span class="mktInput">
-                      <input class="mktFormHidden" name="Original_Lead_Source__c" id="Original_Lead_Source__c" type="hidden" value="Website">
-                      <span class="mktFormMsg"></span>
-                    </span>
-                  </li>
-                  <li class="mktField" style="display: none;">
-                    <span class="mktInput">
-                      <input class="mktFormHidden" name="Original_Lead_Source_Description__c" id="Original_Lead_Source_Description__c" type="hidden" value="OSS_Website_SpringNewsletterSubscription">
-                      <span class="mktFormMsg"></span>
-                    </span>
-                  </li>
-                  <li class="mktField" style="display: none;">
-                    <span class="mktInput">
-                      <input class="mktFormHidden" name="LeadSource" id="LeadSource" type="hidden" value="Website"><span class="mktFormMsg"></span>
-                    </span>
-                  </li>
-                  <li class="mktField" style="display: none;">
-                    <span class="mktInput">
-                      <input class="mktFormHidden" name="Most_Recent_Lead_Source_Description__c" id="Most_Recent_Lead_Source_Description__c" type="hidden" value="OSS_Website_SpringNewsletterSubscription">
-                      <span class="mktFormMsg"></span>
-                    </span>
-                  </li>
-                  <li id="mktFrmButtons">
-                    <input id="mktFrmSubmit" type="submit" value="Subscribe" name="submitButton" onclick="setSubscribeCookie(); formSubmit(document.getElementById(&quot;mktForm_1035&quot;)); return false;">&nbsp;<input style="display: none;" id="mktFrmReset" type="reset" value="Clear" name="resetButton" onclick="formReset(document.getElementById(&quot;mktForm_1035&quot;));">
-                  </li>
-                </ul>
-                <span style="display:none;">
-                  <input type="text" name="_marketo_comments" value="">
-                </span>
-                <input type="hidden" name="lpId" value="-1">
-                <input type="hidden" name="subId" value="137">
-                <input type="hidden" name="munchkinId" value="625-IUJ-009">
-                <input type="hidden" name="kw" value="">
-                <input type="hidden" name="cr" value="">
-                <input type="hidden" name="searchstr" value="">
-                <input type="hidden" name="lpurl" value="http://play.gopivotal.com/OSS_Website_Spring_SpringNewsletterSubscriptionEmailOnly.html?cr={creative}&amp;kw={keyword}">
-                <input type="hidden" name="formid" value="1035">
-                <input type="hidden" name="returnURL" value="" />
-                <input type="hidden" name="retURL" value="" />
-                <input type="hidden" name="returnLPId" value="-1">
-                <input type="hidden" name="_mkt_disp" value="return">
-                <input type="hidden" name="_mkt_trk" value="">
-              </form>
-              <script type="text/javascript" src="http://play.gopivotal.com/js/mktFormSupport.js"></script>
-              <script type="text/javascript">
-              function formSubmit(elt) {
-                return Mkto.formSubmit(elt);
-              }
-              function formReset(elt) {
-                return Mkto.formReset(elt);
-              }
-              </script>
+              <iframe src="http://play.gopivotal.com/OSS_Website_Spring_SpringNewsletterSubscriptionEmailOnly.html" frameBorder="0" scrolling="no" height="42px" width="324px" style="border:none"></iframe>
             </div>
           </div>
         </div>

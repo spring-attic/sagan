@@ -4,16 +4,16 @@ variables:
   githubOrgBaseUrl: http://github.com/spring-projects
 
   # TODO: rename
-  # ghProjectsBaseUrl: http://projects.springframework.io
-  ghPagesBaseUrl: http://projects.springframework.io
+  # ghProjectsBaseUrl: http://projects.spring.io
+  ghPagesBaseUrl: http://projects.spring.io
 
   # TODO: support
-  # ghAtticBaseUrl: http://attic.springframework.io
+  # ghAtticBaseUrl: http://attic.spring.io
 
   # TODO: support
-  # ghIncubatorBaseUrl: http://incubator.springframework.io
+  # ghIncubatorBaseUrl: http://incubator.spring.io
 
-  docsBaseUrl: http://docs.springframework.io
+  docsBaseUrl: http://docs.spring.io
 
   groupId: org.springframework
 
@@ -81,6 +81,7 @@ projects:
       lead: mpollack
       refDocUrl: NONE
       apiDocUrl: NONE
+      aggregator: true
 
     - id: spring-data-jpa
       name: Spring Data JPA
@@ -178,12 +179,13 @@ projects:
         - 3.1.4.RELEASE
 
     # ----------------------
-    # Spring GemFire
+    # Spring Data GemFire
     # ----------------------
-    - id: spring-gemfire
-      name: Spring GemFire
+    - id: spring-data-gemfire
+      name: Spring Data GemFire
       lead: dturanski
       supportedVersions:
+      - 1.3.3.BUILD-SNAPSHOT
       - 1.3.2.RELEASE
       - 1.2.2.RELEASE
 
@@ -239,10 +241,13 @@ projects:
     - id: spring-mobile
       name: Spring Mobile
       lead: rclarkson
+      artifactId: spring-mobile-device
       groupId: org.springframework.mobile
       supportedVersions:
-        - 1.0.2.RELEASE
+        - 1.1.0.BUILD-SNAPSHOT
         - 1.1.0.RC1
+        - 1.0.3.BUILD-SNAPSHOT
+        - 1.0.2.RELEASE
 
     # ----------------------
     # Spring Roo
