@@ -4,16 +4,16 @@ variables:
   githubOrgBaseUrl: http://github.com/spring-projects
 
   # TODO: rename
-  # ghProjectsBaseUrl: http://projects.springframework.io
-  ghPagesBaseUrl: http://projects.springframework.io
+  # ghProjectsBaseUrl: http://projects.spring.io
+  ghPagesBaseUrl: http://projects.spring.io
 
   # TODO: support
-  # ghAtticBaseUrl: http://attic.springframework.io
+  # ghAtticBaseUrl: http://attic.spring.io
 
   # TODO: support
-  # ghIncubatorBaseUrl: http://incubator.springframework.io
+  # ghIncubatorBaseUrl: http://incubator.spring.io
 
-  docsBaseUrl: http://docs.springframework.io
+  docsBaseUrl: http://docs.spring.io
 
   groupId: org.springframework
 

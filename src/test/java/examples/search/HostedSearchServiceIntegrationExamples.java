@@ -123,7 +123,7 @@ public class HostedSearchServiceIntegrationExamples {
 
     @Test
     public void apiDocsIndexing() throws ParseException, InterruptedException {
-        String apiDocsTestClassUrl = "http://docs.springframework.io/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/aop/framework/autoproxy/AbstractAdvisorAutoProxyCreator.html";
+        String apiDocsTestClassUrl = "http://docs.spring.io/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/aop/framework/autoproxy/AbstractAdvisorAutoProxyCreator.html";
 
         Document testApiDocument = Document.createShell(apiDocsTestClassUrl);
         testApiDocument.body().text("Somereandomtestcontentthatshouldbeunique");
