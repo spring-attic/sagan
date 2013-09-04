@@ -25,7 +25,7 @@ public class PaginationInfo_PaginationElementsTests {
 
         List<PageElement> pageElements = paginationInfo.getPageElements();
         assertThat(pageElements.size(), is(equalTo(1)));
-        assertInactiveElementOnPage("1", pageElements.get(0));
+        assertNotNavigableElementOnPage("1", pageElements.get(0));
     }
 
     @Test
@@ -36,8 +36,8 @@ public class PaginationInfo_PaginationElementsTests {
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(2)));
-        assertInactiveElementOnPage("1", pageElements.get(0));
-        assertActiveElementOnPage("2", pageElements.get(1));
+        assertNotNavigableElementOnPage("1", pageElements.get(0));
+        assertNavigableElementOnPage("2", pageElements.get(1));
     }
 
     @Test
@@ -48,9 +48,9 @@ public class PaginationInfo_PaginationElementsTests {
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
         assertThat(pageElements.size(), is(equalTo(3)));
-        assertActiveElementOnPage("1", pageElements.get(0));
-        assertInactiveElementOnPage("2", pageElements.get(1));
-        assertActiveElementOnPage("3", pageElements.get(2));
+        assertNavigableElementOnPage("1", pageElements.get(0));
+        assertNotNavigableElementOnPage("2", pageElements.get(1));
+        assertNavigableElementOnPage("3", pageElements.get(2));
     }
 
     @Test
@@ -62,12 +62,12 @@ public class PaginationInfo_PaginationElementsTests {
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(10)));
 
-        assertActiveElementOnPage("3", pageElements.get(2));
-        assertActiveElementOnPage("4", pageElements.get(3));
-        assertInactiveElementOnPage("5", pageElements.get(4));
-        assertActiveElementOnPage("6", pageElements.get(5));
-        assertActiveElementOnPage("7", pageElements.get(6));
-        assertActiveElementOnPage("8", pageElements.get(7));
+        assertNavigableElementOnPage("3", pageElements.get(2));
+        assertNavigableElementOnPage("4", pageElements.get(3));
+        assertNotNavigableElementOnPage("5", pageElements.get(4));
+        assertNavigableElementOnPage("6", pageElements.get(5));
+        assertNavigableElementOnPage("7", pageElements.get(6));
+        assertNavigableElementOnPage("8", pageElements.get(7));
     }
 
     @Test
@@ -79,8 +79,8 @@ public class PaginationInfo_PaginationElementsTests {
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(10)));
 
-        assertActiveElementOnPage("1", pageElements.get(0));
-        assertActiveElementOnPage("10", pageElements.get(9));
+        assertNavigableElementOnPage("1", pageElements.get(0));
+        assertNavigableElementOnPage("10", pageElements.get(9));
     }
 
     @Test
@@ -92,8 +92,8 @@ public class PaginationInfo_PaginationElementsTests {
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(10)));
 
-        assertInactiveElementOnPage("...", pageElements.get(1));
-        assertInactiveElementOnPage("...", pageElements.get(8));
+        assertNotNavigableElementOnPage("...", pageElements.get(1));
+        assertNotNavigableElementOnPage("...", pageElements.get(8));
     }
 
     @Test
@@ -105,13 +105,13 @@ public class PaginationInfo_PaginationElementsTests {
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(7)));
 
-        assertActiveElementOnPage("1", pageElements.get(0));
-        assertActiveElementOnPage("2", pageElements.get(1));
-        assertInactiveElementOnPage("3", pageElements.get(2));
-        assertActiveElementOnPage("4", pageElements.get(3));
-        assertActiveElementOnPage("5", pageElements.get(4));
-        assertActiveElementOnPage("6", pageElements.get(5));
-        assertActiveElementOnPage("7", pageElements.get(6));
+        assertNavigableElementOnPage("1", pageElements.get(0));
+        assertNavigableElementOnPage("2", pageElements.get(1));
+        assertNotNavigableElementOnPage("3", pageElements.get(2));
+		assertNavigableElementOnPage("4", pageElements.get(3));
+        assertNavigableElementOnPage("5", pageElements.get(4));
+        assertNavigableElementOnPage("6", pageElements.get(5));
+        assertNavigableElementOnPage("7", pageElements.get(6));
     }
 
     @Test
@@ -125,14 +125,14 @@ public class PaginationInfo_PaginationElementsTests {
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(8)));
 
-        assertInactiveElementOnPage("1", pageElements.get(0));
-        assertActiveElementOnPage("2", pageElements.get(1));
-        assertActiveElementOnPage("3", pageElements.get(2));
-        assertActiveElementOnPage("4", pageElements.get(3));
-        assertActiveElementOnPage("5", pageElements.get(4));
-        assertActiveElementOnPage("6", pageElements.get(5));
-        assertInactiveElementOnPage("...", pageElements.get(6));
-        assertActiveElementOnPage("14", pageElements.get(7));
+        assertNotNavigableElementOnPage("1", pageElements.get(0));
+		assertNavigableElementOnPage("2", pageElements.get(1));
+        assertNavigableElementOnPage("3", pageElements.get(2));
+        assertNavigableElementOnPage("4", pageElements.get(3));
+        assertNavigableElementOnPage("5", pageElements.get(4));
+        assertNavigableElementOnPage("6", pageElements.get(5));
+        assertNotNavigableElementOnPage("...", pageElements.get(6));
+        assertNavigableElementOnPage("14", pageElements.get(7));
     }
 
     @Test
@@ -146,23 +146,42 @@ public class PaginationInfo_PaginationElementsTests {
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(8)));
 
-        assertActiveElementOnPage("1", pageElements.get(0));
-        assertActiveElementOnPage("2", pageElements.get(1));
-        assertInactiveElementOnPage("3", pageElements.get(2));
-        assertActiveElementOnPage("4", pageElements.get(3));
-        assertActiveElementOnPage("5", pageElements.get(4));
-        assertActiveElementOnPage("6", pageElements.get(5));
-        assertInactiveElementOnPage("...", pageElements.get(6));
-        assertActiveElementOnPage("14", pageElements.get(7));
+        assertNavigableElementOnPage("1", pageElements.get(0));
+        assertNavigableElementOnPage("2", pageElements.get(1));
+        assertNotNavigableElementOnPage("3", pageElements.get(2));
+        assertNavigableElementOnPage("4", pageElements.get(3));
+        assertNavigableElementOnPage("5", pageElements.get(4));
+        assertNavigableElementOnPage("6", pageElements.get(5));
+        assertNotNavigableElementOnPage("...", pageElements.get(6));
+        assertNavigableElementOnPage("14", pageElements.get(7));
     }
 
-    private void assertInactiveElementOnPage(String page, PageElement element) {
-        assertThat(element.isActive(), is(false));
+	@Test
+	public void rendersCurrentPage() throws Exception {
+		int currentPageIndex = 2;
+
+		PageRequest pageRequest = new PageRequest(currentPageIndex, 10);
+		int itemCount = 133;
+		PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(this.content, pageRequest, itemCount));
+		List<PageElement> pageElements = paginationInfo.getPageElements();
+
+		assertThat(pageElements.get(0).isCurrentPage(), is(false));
+		assertThat(pageElements.get(1).isCurrentPage(), is(false));
+		assertThat(pageElements.get(2).isCurrentPage(), is(true));
+		assertThat(pageElements.get(3).isCurrentPage(), is(false));
+		assertThat(pageElements.get(4).isCurrentPage(), is(false));
+		assertThat(pageElements.get(5).isCurrentPage(), is(false));
+		assertThat(pageElements.get(6).isCurrentPage(), is(false));
+		assertThat(pageElements.get(7).isCurrentPage(), is(false));
+	}
+
+	private void assertNotNavigableElementOnPage(String page, PageElement element) {
+        assertThat(element.isNavigable(), is(false));
         assertThat(element.getPageText(), is(page));
     }
 
-    private void assertActiveElementOnPage(String page, PageElement element) {
-        assertThat(element.isActive(), is(true));
+    private void assertNavigableElementOnPage(String page, PageElement element) {
+        assertThat(element.isNavigable(), is(true));
         assertThat(element.getPageText(), is(page));
     }
 }

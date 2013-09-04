@@ -46,20 +46,21 @@ class PageElementsBuilder {
     }
 
     private void addFirstPage(ArrayList<PageElement> elements) {
-        elements.add(new PageElement(1, true));
+        elements.add(new PageElement(1, true, false));
         if (startPage > 2) {
             addEllipsis(elements);
         }
     }
 
     private void addEllipsis(ArrayList<PageElement> elements) {
-        elements.add(new PageElement("...", false));
+        elements.add(new PageElement("...", false, false));
     }
 
     private void addPageElements(ArrayList<PageElement> elements) {
         for (long n = startPage; n <= endPage; n++) {
-            boolean isActive = n != currentPage;
-            elements.add(new PageElement(n, isActive));
+			boolean isCurrentPage = n == currentPage;
+			boolean isNavigable = !isCurrentPage;
+            elements.add(new PageElement(n, isNavigable, isCurrentPage));
         }
     }
 
@@ -67,6 +68,6 @@ class PageElementsBuilder {
         if (endPage < totalPages - 1) {
             addEllipsis(elements);
         }
-        elements.add(new PageElement(totalPages, true));
+        elements.add(new PageElement(totalPages, true, false));
     }
 }
