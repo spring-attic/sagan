@@ -21,9 +21,10 @@ class ProjectParser {
         String name = projectData.get("name").toString();
         String repoUrl = parseRepoUrl(projectData);
         String siteUrl = parseSiteUrl(projectData);
+        boolean isAggregator = parseIsAggregator(projectData);
         List<ProjectRelease> documentationList = new ProjectVersionsParser(variables, defaultUrls).parse(projectData);
         variables.remove("id");
-        return new Project(id, name, repoUrl, siteUrl, documentationList);
+        return new Project(id, name, repoUrl, siteUrl, documentationList, isAggregator);
     }
 
     private String parseRepoUrl(Map<String, Object> projectData) {
@@ -49,4 +50,7 @@ class ProjectParser {
         return new UriTemplate(siteUrl).expand(variables).toString();
     }
 
+    private boolean parseIsAggregator(Map<String, Object> projectData) {
+        return Boolean.TRUE.equals(projectData.get("aggregator"));
+    }
 }

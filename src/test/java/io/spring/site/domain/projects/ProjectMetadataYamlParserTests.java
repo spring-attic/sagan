@@ -255,9 +255,15 @@ public class ProjectMetadataYamlParserTests {
     }
 
     @Test
-    public void projectWithDefaultArtifactIdOverriddenInVersion() throws IOException {
+    public void nonAggregatorProject() throws IOException {
+        Project project =  service.getProjectsForCategory("active").get(14);
+        assertThat(project.isAggregator(), equalTo(false));
+    }
+
+    @Test
+    public void aggregatorProject() throws IOException {
         Project project =  service.getProjectsForCategory("active").get(15);
-        assertThat(project.getProjectReleases().get(0).getArtifactId(), equalTo("overridden-in-version-artifact-id"));
-        assertThat(project.getProjectReleases().get(1).getArtifactId(), equalTo("overridden-artifact-id"));
+        assertThat(project.isAggregator(), equalTo(true));
+        assertThat(project.getId(), equalTo("aggregator-project"));
     }
 }

@@ -144,17 +144,18 @@ projects:
       supportedVersions:
         - 3.1.1.RELEASE
 
-    - id: project-with-overridden-artifactId
+    - id: aggregator-project
       name: Spring Framework
       siteUrl: "{ghPagesBaseUrl}/foo/{id}/"
       repoUrl: "{githubOrgBaseUrl}/foo/{id}/"
       refDocUrl: "{ghPagesBaseUrl}/docs/{id}/{version}/html/"
       apiDocUrl: /spring/docs/{id}/{version}/javadoc-api/
-      artifactId: overridden-artifact-id
+      artifactId: aggregator-artifact-id
       supportedVersions:
         - name: 3.1.4.RELEASE
-          artifactId: overridden-in-version-artifact-id
+          artifactId: aggregator-in-version-artifact-id
         - 3.1.1.RELEASE
+      aggregator: true
 
   other:
     - id: spring-security

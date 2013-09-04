@@ -81,6 +81,7 @@ projects:
       lead: mpollack
       refDocUrl: NONE
       apiDocUrl: NONE
+      aggregator: true
 
     - id: spring-data-jpa
       name: Spring Data JPA
