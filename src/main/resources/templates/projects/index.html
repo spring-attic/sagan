@@ -11,12 +11,51 @@
     <h1 class="index-page--title">Projects</h1>
     <p class="index-page--subtitle">Spring is home to a vibrant community of quality open source projects that simplify the development of business applications and provide rock-solid runtime services. You can get all of these projects through <a href="#">Spring Tool Suite&trade;</a> (STS), but if you'd like to consume Spring technologies individually - or get involved with their development - visit the individual project pages.</p>
     <div class="projects--wrapper">
+      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-boot')}">
+        <div class="project-logo--container">
+          <div class="icon project--logo logo-spring-boot"></div>
+        </div>
+        <div class="project--title">Spring Boot</div>
+        <p class="project--description">An opinionated view of Spring and a way to get started writing and running applications as fast as possible.</p>
+      </a>
       <a th:href="${project.siteUrl}" class="project--container project--container--link" th:with="project=${projectMetadata.getProject('spring-framework')}">
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-framework"></div>
         </div>
         <div class="project--title">Spring Framework</div>
         <p class="project--description">Provides core support for dependency injection, transaction management, web apps, data access, and messaging.</p>
+      </a>
+      <a href="#" class="project--container project--container--link">
+        <div class="project-logo--container">
+          <div class="icon project--logo logo-default"></div>
+        </div>
+        <div class="project--title">Spring XD</div>
+        <p class="project--description">Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      </a>
+      <a class="project--container parent-project project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-data')}">
+        <div class="child-project-count--wrapper">
+          <div class="child-project-count--number">9</div>
+          <div class="child-project-count--background"></div>
+        </div>
+        <div class="project-logo--container">
+          <div class="icon project--logo logo-spring-data"></div>
+        </div>
+        <div class="project--title">Spring Data</div>
+        <p class="project--description">Eases building applications that use data access technologies such as non-relational databases, map-reduce...</p>
+      </a>
+      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-integration')}">
+        <div class="project-logo--container">
+          <div class="icon project--logo logo-spring-integration"></div>
+        </div>
+        <div class="project--title">Spring Integration</div>
+        <p class="project--description">Supports the well-known Enterprise Integration Patterns via lightweight messaging and provides integration...</p>
+      </a>
+      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-batch')}">
+        <div class="project-logo--container">
+          <div class="icon project--logo logo-spring-batch"></div>
+        </div>
+        <div class="project--title">Spring Batch</div>
+        <p class="project--description">A lightweight, comprehensive framework designed to simplify and optimize the work of processing high volume batch...</p>
       </a>
       <a class="project--container parent-project project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-security')}">
         <div class="child-project-count--wrapper">
@@ -30,51 +69,31 @@
         <div class="project--title">Spring Security</div>
         <p class="project--description">A powerful and highly customizable authentication and access-control framework.</p>
       </a>
-      <a class="project--container parent-project project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-data')}">
-        <div class="child-project-count--wrapper">
-          <div class="child-project-count--number">9</div>
-          <div class="child-project-count--background"></div>
-        </div>
-        <div class="project-logo--container">
-          <div class="icon project--logo logo-spring-data"></div>
-        </div>
-        <div class="project--title">Spring Data</div>
-        <p class="project--description">Eases building applications that use data access technologies such as non-relational databases, map-reduce...</p>
-      </a>
-      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-batch')}">
-        <div class="project-logo--container">
-          <div class="icon project--logo logo-spring-batch"></div>
-        </div>
-        <div class="project--title">Spring Batch</div>
-        <p class="project--description">A lightweight, comprehensive framework designed to simplify and optimize the work of processing high volume batch...</p>
-      </a>
-      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-boot')}">
-        <div class="project-logo--container">
-          <div class="icon project--logo logo-spring-boot"></div>
-        </div>
-        <div class="project--title">Spring Boot</div>
-        <p class="project--description">An opinionated view of Spring and a way to get started writing and running applications as fast as possible.</p>
-      </a>
-      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-integration')}">
-        <div class="project-logo--container">
-          <div class="icon project--logo logo-spring-integration"></div>
-        </div>
-        <div class="project--title">Spring Integration</div>
-        <p class="project--description">Supports the well-known Enterprise Integration Patterns via lightweight messaging and provides integration...</p>
-      </a>
-      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-amqp')}">
-        <div class="project-logo--container">
-          <div class="icon project--logo logo-spring-amqp"></div>
-        </div>
-        <div class="project--title">Spring AMQP</div>
-        <p class="project--description">Applies core Spring concepts to the development of AMQP-based messaging solutions including abstractions for...</p>
-      </a>
       <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-hateoas')}">
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-hateoas"></div>
         </div>
         <div class="project--title">Spring Hateoas</div>
         <p class="project--description">Simplifies creating REST representations that follow the HATEOAS principle. The core problem it tries to address is link...</p>
+      </a>
+      <a class="project--container parent-project project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-social')}">
+        <div class="child-project-count--wrapper">
+          <div class="child-project-count--number">4</div>
+          <div class="child-project-count--background"></div>
+        </div>
+        <div class="project-logo--container">
+          <div class="icon project--logo logo-spring-social"></div>
+        </div>
+        <div class="project--title">Spring Social</div>
+        <p class="project--description">Easily connect your applications with third-party APIs such as Facebook, Twitter, LinkedIn, and more.</p>
+      </a>
+      
+      <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-amqp')}">
+        <div class="project-logo--container">
+          <div class="icon project--logo logo-spring-amqp"></div>
+        </div>
+        <div class="project--title">Spring AMQP</div>
+        <p class="project--description">Applies core Spring concepts to the development of AMQP-based messaging solutions including abstractions for...</p>
       </a>
       <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-mobile')}">
         <div class="project-logo--container">
@@ -90,17 +109,7 @@
         <div class="project--title">Spring for Android</div>
         <p class="project--description">Simplifies the development of native Android applications.</p>
       </a>
-      <a class="project--container parent-project project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-social')}">
-        <div class="child-project-count--wrapper">
-          <div class="child-project-count--number">4</div>
-          <div class="child-project-count--background"></div>
-        </div>
-        <div class="project-logo--container">
-          <div class="icon project--logo logo-spring-social"></div>
-        </div>
-        <div class="project--title">Spring Social</div>
-        <p class="project--description">Easily connect your applications with third-party APIs such as Facebook, Twitter, LinkedIn, and more.</p>
-      </a>
+      
       <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-webflow')}">
         <div class="project-logo--container">
           <div class="icon project--logo logo-spring-webflow"></div>
