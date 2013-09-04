@@ -67,40 +67,40 @@ public class ApplicationConfiguration {
         public DataSource dataSource() {
             CloudEnvironment cloudEnvironment = new CloudEnvironment();
             RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db", RdbmsServiceInfo.class);
-			org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
-			dataSource.setDriverClassName("org.postgresql.Driver");
-			dataSource.setUrl(serviceInfo.getUrl());
-			dataSource.setUsername(serviceInfo.getUserName());
-			dataSource.setPassword(serviceInfo.getPassword());
-			dataSource.setMaxActive(100);
-			dataSource.setMaxIdle(8);
-			dataSource.setMinIdle(8);
-			dataSource.setTestOnBorrow(false);
-			dataSource.setTestOnReturn(false);
-			dataSource.setValidationQuery("SELECT 1");
-			return dataSource;
+            org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
+            dataSource.setDriverClassName("org.postgresql.Driver");
+            dataSource.setUrl(serviceInfo.getUrl());
+            dataSource.setUsername(serviceInfo.getUserName());
+            dataSource.setPassword(serviceInfo.getPassword());
+            dataSource.setMaxActive(20);
+            dataSource.setMaxIdle(8);
+            dataSource.setMinIdle(8);
+            dataSource.setTestOnBorrow(false);
+            dataSource.setTestOnReturn(false);
+            dataSource.setValidationQuery("SELECT 1");
+            return dataSource;
         }
     }
 
-	@Bean
-	@Profile("local_postgres")
-	public DataSource dataSource() {
-		org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
-		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/sagan-db");
-		dataSource.setUsername("user");
-		dataSource.setPassword("changeme");
-		dataSource.setMaxActive(100);
-		dataSource.setMaxIdle(8);
-		dataSource.setMinIdle(8);
-		dataSource.setTestOnBorrow(false);
-		dataSource.setTestOnReturn(false);
-		dataSource.setValidationQuery("SELECT 1");
-		return dataSource;
-	}
+    @Bean
+    @Profile("local_postgres")
+    public DataSource dataSource() {
+        org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/sagan-db");
+        dataSource.setUsername("user");
+        dataSource.setPassword("changeme");
+        dataSource.setMaxActive(20);
+        dataSource.setMaxIdle(8);
+        dataSource.setMinIdle(8);
+        dataSource.setTestOnBorrow(false);
+        dataSource.setTestOnReturn(false);
+        dataSource.setValidationQuery("SELECT 1");
+        return dataSource;
+    }
 
 
-	@Bean
+    @Bean
     public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl, DateService dateService) {
         return new BlogPostAtomViewer(siteUrl, dateService);
     }
