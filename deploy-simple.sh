@@ -21,6 +21,8 @@ EOM
     exit
 fi
 
+echo "Starting simple deploy script"
+
 SPACE=$1
 CF=$2
 USER=$3
@@ -30,15 +32,20 @@ if [[ -z "$2" ]]; then
     CF=cf
     SPACE=$1
 else
+    echo "loading RVM"
     [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
     PATH=$PATH:~/.rvm/rubies/ruby-1.9.3-p429/bin/:~/.rvm/bin/
 
     rvm use 1.9.3@sagan-ops
 
+    echo "logging in to CF"
     $CF target api.run.pivotal.io || exit
     $CF login --email $USER --password $PASS || exit
 fi
 
+echo "switching to space $SPACE"
 $CF space $SPACE || exit
+
+echo "pushing to CF"
 $CF push --manifest manifest/$SPACE.yml --reset
