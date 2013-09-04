@@ -40,13 +40,6 @@
   background-color: #FFF;
 }
 
-.search-result--path {
-  color: #5fa134;
-  max-width: 675px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .search-facets form {
   margin: 0;
 }
