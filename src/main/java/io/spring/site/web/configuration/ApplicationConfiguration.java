@@ -28,6 +28,7 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.cache.CacheManager;
@@ -47,6 +48,8 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
@@ -99,6 +102,23 @@ public class ApplicationConfiguration {
         return dataSource;
     }
 
+    @Bean
+    public HealthIndicator<Map<String, Object>> healthIndicator(final org.apache.tomcat.jdbc.pool.DataSource dataSource) {
+        return new HealthIndicator<Map<String, Object>>(){
+            @Override
+            public Map<String, Object> health() {
+                Map<String, Object> health = new HashMap<>();
+                health.put("active", dataSource.getActive());
+                health.put("max_active", dataSource.getMaxActive());
+                health.put("idle", dataSource.getIdle());
+                health.put("max_idle", dataSource.getMaxIdle());
+                health.put("min_idle", dataSource.getMinIdle());
+                health.put("wait_count", dataSource.getWaitCount());
+                health.put("max_wait", dataSource.getMaxWait());
+                return health;
+            }
+        };
+    }
 
     @Bean
     public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl, DateService dateService) {
