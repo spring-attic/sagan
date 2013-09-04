@@ -112,7 +112,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         assertThat((String) repository.get("id"), equalTo("spring-milestones"));
         assertThat((String) repository.get("name"), equalTo("Spring Milestones"));
         assertThat((String) repository.get("url"),
-                equalTo("http://repo.springsource.org/milestone"));
+                equalTo("http://repo.spring.io/milestone"));
         assertThat((Boolean) repository.get("snapshotsEnabled"), equalTo(false));
 
     }
@@ -137,7 +137,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         assertThat((String) repository.get("id"), equalTo("spring-snapshots"));
         assertThat((String) repository.get("name"), equalTo("Spring Snapshots"));
         assertThat((String) repository.get("url"),
-                equalTo("http://repo.springsource.org/snapshot"));
+                equalTo("http://repo.spring.io/snapshot"));
         assertThat((Boolean) repository.get("snapshotsEnabled"), equalTo(true));
     }
 
