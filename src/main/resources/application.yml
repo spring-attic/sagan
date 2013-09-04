@@ -25,6 +25,8 @@ spring:
 security:
   basic:
     enabled: false
+  headers
+    hsts: domain
   user:
     password: ${ADMIN_PASSWORD:}
 
