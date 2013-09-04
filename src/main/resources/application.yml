@@ -24,7 +24,7 @@ spring:
 
 security:
   basic:
-    path: ""
+    enabled: false
   user:
     password: ${ADMIN_PASSWORD:}
 
