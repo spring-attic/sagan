@@ -16,6 +16,8 @@ $link-green: #5fa134;
 $icon-sprite: url("../img/iconsprite.png");
 
 
+
+
 .homepage-billboard {
   background-image: url("../img/homepage-bg.png");
   background-size: cover;
@@ -27,19 +29,26 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   .homepage-title--container {
     margin-top: 66px;
-    .homepage-title {
-      color: white;
-      font-size: 30px;
-      line-height: 30px;
-      background-color: rgba(52, 48, 45, 0.6);
+    .homepage-title, .homepage-subtitle {
+      background: rgba(52, 48, 45, 0.8);
+      color: $off-white;
       display: inline-block;
-      padding: 10px 20px;
-      &:first-child {
-        padding: 15px 20px 2px;
-
-      }
-      &:last-child {
-        padding: 0 20px 15px;
+    }
+    .homepage-title {
+      font-size: 48px;
+      line-height: 68px;
+      font-family: $secondary-font-family;
+      padding: 0 15px;
+      letter-spacing: -2px;
+    }
+    .homepage-subtitle--container {
+      .homepage-subtitle {
+        font-size: 21px;
+        line-height: 18px;
+        padding: 2px 19px 12px;
+        &:first-child {
+          padding-top: 12px;
+        }
       }
     }
   }

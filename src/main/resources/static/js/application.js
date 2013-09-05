@@ -175,13 +175,11 @@ $(function () {
         }
       });
 
-      
-
-
 
       
       if ($(".projects-facet input[type='checkbox']:checked").length) {
         $(".facet-section--header").removeClass("js-close");
+        $(".projects-facet .sub-facet--list").first().removeClass("js-close");
       }
       
       $(".facets--clear-filters").click(function() {

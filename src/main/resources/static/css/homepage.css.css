@@ -11,19 +11,25 @@
 .homepage-billboard .homepage-title--container {
   margin-top: 66px;
 }
-.homepage-billboard .homepage-title--container .homepage-title {
-  color: white;
-  font-size: 30px;
-  line-height: 30px;
-  background-color: rgba(52, 48, 45, 0.6);
+.homepage-billboard .homepage-title--container .homepage-title, .homepage-billboard .homepage-title--container .homepage-subtitle {
+  background: rgba(52, 48, 45, 0.8);
+  color: #eeeeee;
   display: inline-block;
-  padding: 10px 20px;
 }
-.homepage-billboard .homepage-title--container .homepage-title:first-child {
-  padding: 15px 20px 2px;
+.homepage-billboard .homepage-title--container .homepage-title {
+  font-size: 48px;
+  line-height: 68px;
+  font-family: "Montserrat", sans-serif;
+  padding: 0 15px;
+  letter-spacing: -2px;
 }
-.homepage-billboard .homepage-title--container .homepage-title:last-child {
-  padding: 0 20px 15px;
+.homepage-billboard .homepage-title--container .homepage-subtitle--container .homepage-subtitle {
+  font-size: 21px;
+  line-height: 18px;
+  padding: 2px 19px 12px;
+}
+.homepage-billboard .homepage-title--container .homepage-subtitle--container .homepage-subtitle:first-child {
+  padding-top: 12px;
 }
 
 .homepage--body {
