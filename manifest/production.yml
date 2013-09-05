@@ -3,12 +3,14 @@ applications:
 - name: sagan-blue
   memory: 2G
   instances: 2
+  host: sagan-production-blue
   domain: cfapps.io
   path: ../target/spring-io-site.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
 - name: sagan-green
   memory: 2G
   instances: 2
+  host: sagan-production-green
   domain: cfapps.io
   path: ../target/spring-io-site.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
