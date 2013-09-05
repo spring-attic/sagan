@@ -54,7 +54,7 @@ public class TeamAdminController {
     @RequestMapping(value = "/admin/team/{username}", method = {GET, HEAD})
     public String editTeamMemberForm(@PathVariable("username") String username, Model model) {
         MemberProfile profile = teamService.fetchMemberProfileUsername(username);
-        if (profile == null) {
+        if (profile == MemberProfile.NOT_FOUND) {
             throw new EntityNotFoundException("Profile not found with Id=" + username);
         }
         model.addAttribute("profile", profile);

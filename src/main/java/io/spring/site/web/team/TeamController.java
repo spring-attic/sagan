@@ -1,21 +1,19 @@
 package io.spring.site.web.team;
 
+import io.spring.site.domain.blog.BlogService;
+import io.spring.site.domain.blog.Post;
+import io.spring.site.domain.team.MemberProfile;
+import io.spring.site.domain.team.TeamLocation;
+import io.spring.site.web.PageableFactory;
+import io.spring.site.web.blog.EntityNotFoundException;
+import io.spring.site.web.blog.PostView;
+import io.spring.site.web.blog.PostViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import io.spring.site.domain.blog.BlogService;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.domain.team.TeamLocation;
-import io.spring.site.domain.team.TeamService;
-import io.spring.site.web.PageableFactory;
-import io.spring.site.web.blog.EntityNotFoundException;
-import io.spring.site.web.blog.PostView;
-import io.spring.site.web.blog.PostViewFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,12 +26,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @RequestMapping("/team")
 public class TeamController {
 
-    private final TeamService teamService;
+    private final CachedTeamService teamService;
     private final BlogService blogService;
     private final PostViewFactory postViewFactory;
 
     @Autowired
-    public TeamController(TeamService teamService,
+    public TeamController(CachedTeamService teamService,
                           BlogService blogService,
                           PostViewFactory postViewFactory) {
         this.teamService = teamService;
@@ -59,7 +57,7 @@ public class TeamController {
     @RequestMapping(value = "/{username}", method = {GET, HEAD})
     public String showProfile(@PathVariable String username, Model model){
         MemberProfile profile = teamService.fetchMemberProfileUsername(username);
-        if (profile == null) {
+        if (profile == MemberProfile.NOT_FOUND) {
             throw new EntityNotFoundException("Profile not found with Id=" + username);
         }
         if (profile.isHidden()) {
