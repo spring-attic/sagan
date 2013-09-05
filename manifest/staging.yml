@@ -3,6 +3,8 @@ applications:
 - name: sagan-blue
   memory: 2G
   instances: 2
+  env:
+    SPRING_PROFILES_ACTIVE: site,staging
   host: sagan-staging-blue
   domain: cfapps.io
   path: ../target/spring-io-site.jar
@@ -10,6 +12,8 @@ applications:
 - name: sagan-green
   memory: 2G
   instances: 2
+  env:
+    SPRING_PROFILES_ACTIVE: site,staging
   host: sagan-staging-green
   domain: cfapps.io
   path: ../target/spring-io-site.jar
@@ -17,6 +21,8 @@ applications:
 - name: sagan-indexer
   memory: 2G
   instances: 1
+  env:
+    SPRING_PROFILES_ACTIVE: indexer,staging
   host: sagan-indexer
   domain: cfapps.io
   path: ../target/spring-io-site.jar
