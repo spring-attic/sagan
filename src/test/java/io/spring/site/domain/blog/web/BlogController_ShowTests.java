@@ -1,14 +1,13 @@
 package io.spring.site.domain.blog.web;
 
-import io.spring.site.domain.blog.BlogService;
 import io.spring.site.domain.blog.Post;
 import io.spring.site.domain.blog.PostBuilder;
 import io.spring.site.domain.blog.PostCategory;
 import io.spring.site.domain.services.DateService;
 import io.spring.site.web.blog.BlogController;
+import io.spring.site.web.blog.CachedBlogService;
 import io.spring.site.web.blog.PostView;
 import io.spring.site.web.blog.PostViewFactory;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -25,7 +24,7 @@ import static org.mockito.BDDMockito.given;
 public class BlogController_ShowTests {
 
     @Mock
-    private BlogService blogService;
+    private CachedBlogService blogService;
 
     @Mock
     private HttpServletRequest request;

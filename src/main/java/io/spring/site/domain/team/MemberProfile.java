@@ -8,6 +8,8 @@ import javax.persistence.*;
 @Entity
 public class MemberProfile {
 
+    public static final MemberProfile NOT_FOUND = new MemberProfile();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -237,5 +239,58 @@ public class MemberProfile {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+      public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MemberProfile that = (MemberProfile) o;
+
+        if (hidden != that.hidden) return false;
+        if (avatarUrl != null ? !avatarUrl.equals(that.avatarUrl) : that.avatarUrl != null) return false;
+        if (bio != null ? !bio.equals(that.bio) : that.bio != null) return false;
+        if (geoLocation != null ? !geoLocation.equals(that.geoLocation) : that.geoLocation != null) return false;
+        if (githubId != null ? !githubId.equals(that.githubId) : that.githubId != null) return false;
+        if (githubUsername != null ? !githubUsername.equals(that.githubUsername) : that.githubUsername != null)
+            return false;
+        if (gravatarEmail != null ? !gravatarEmail.equals(that.gravatarEmail) : that.gravatarEmail != null)
+            return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (jobTitle != null ? !jobTitle.equals(that.jobTitle) : that.jobTitle != null) return false;
+        if (lanyrdUsername != null ? !lanyrdUsername.equals(that.lanyrdUsername) : that.lanyrdUsername != null)
+            return false;
+        if (location != null ? !location.equals(that.location) : that.location != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (speakerdeckUsername != null ? !speakerdeckUsername.equals(that.speakerdeckUsername) : that.speakerdeckUsername != null)
+            return false;
+        if (twitterUsername != null ? !twitterUsername.equals(that.twitterUsername) : that.twitterUsername != null)
+            return false;
+        if (!username.equals(that.username)) return false;
+        if (videoEmbeds != null ? !videoEmbeds.equals(that.videoEmbeds) : that.videoEmbeds != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (jobTitle != null ? jobTitle.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + (bio != null ? bio.hashCode() : 0);
+        result = 31 * result + (avatarUrl != null ? avatarUrl.hashCode() : 0);
+        result = 31 * result + (gravatarEmail != null ? gravatarEmail.hashCode() : 0);
+        result = 31 * result + (githubUsername != null ? githubUsername.hashCode() : 0);
+        result = 31 * result + username.hashCode();
+        result = 31 * result + (speakerdeckUsername != null ? speakerdeckUsername.hashCode() : 0);
+        result = 31 * result + (twitterUsername != null ? twitterUsername.hashCode() : 0);
+        result = 31 * result + (lanyrdUsername != null ? lanyrdUsername.hashCode() : 0);
+        result = 31 * result + (githubId != null ? githubId.hashCode() : 0);
+        result = 31 * result + (geoLocation != null ? geoLocation.hashCode() : 0);
+        result = 31 * result + (videoEmbeds != null ? videoEmbeds.hashCode() : 0);
+        result = 31 * result + (hidden ? 1 : 0);
+        return result;
     }
 }

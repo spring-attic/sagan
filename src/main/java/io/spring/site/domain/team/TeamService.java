@@ -1,13 +1,12 @@
 package io.spring.site.domain.team;
 
+import io.spring.site.search.SearchService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
-import io.spring.site.search.SearchService;
 
 import java.util.List;
 
@@ -18,7 +17,6 @@ public class TeamService {
     private final MemberProfileSearchEntryMapper mapper;
 
     private static Log logger = LogFactory.getLog(TeamService.class);
-
 
     @Autowired
     public TeamService(TeamRepository teamRepository, SearchService searchService, MemberProfileSearchEntryMapper mapper) {
@@ -31,9 +29,12 @@ public class TeamService {
         return teamRepository.findById(id);
     }
 
-
     public MemberProfile fetchMemberProfileUsername(String username) {
-        return teamRepository.findByUsername(username);
+        MemberProfile profile = teamRepository.findByUsername(username);
+        if (profile == null) {
+            profile = MemberProfile.NOT_FOUND;
+        }
+        return profile;
     }
 
     public void updateMemberProfile(Long id, MemberProfile profile) {
@@ -70,14 +71,6 @@ public class TeamService {
         } catch (Exception e) {
             logger.warn("Indexing failed for " + existingProfile.getId(), e);
         }
-    }
-
-    public void saveMemberProfile(MemberProfile profile) {
-        teamRepository.save(profile);
-    }
-
-    public List<MemberProfile> fetchAllProfiles() {
-        return teamRepository.findAll();
     }
 
     public List<MemberProfile> fetchActiveMembers() {

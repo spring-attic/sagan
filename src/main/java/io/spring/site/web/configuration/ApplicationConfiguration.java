@@ -26,6 +26,7 @@ import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.health.HealthIndicator;
@@ -38,7 +39,7 @@ import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -47,11 +48,14 @@ import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
+
 
 @EnableAutoConfiguration
 @Configuration
@@ -64,17 +68,44 @@ public class ApplicationConfiguration {
     }
 
     @Configuration
-    @Profile({"development", "staging", "production", "performance"})
-    protected static class CloudFoundryDataSourceConfiguration {
+    protected static class DataSourceConfiguration {
+
+        @Autowired
+        private Environment environment;
+
         @Bean
         public DataSource dataSource() {
-            CloudEnvironment cloudEnvironment = new CloudEnvironment();
-            RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db", RdbmsServiceInfo.class);
             org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
-            dataSource.setDriverClassName("org.postgresql.Driver");
-            dataSource.setUrl(serviceInfo.getUrl());
-            dataSource.setUsername(serviceInfo.getUserName());
-            dataSource.setPassword(serviceInfo.getPassword());
+
+            boolean inMemory = this.environment.acceptsProfiles(this.environment
+                    .getDefaultProfiles())
+                    || this.environment.acceptsProfiles("acceptance");
+
+            if (inMemory) {
+                dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
+            } else {
+                dataSource.setDriverClassName("org.postgresql.Driver");
+            }
+
+            CloudEnvironment cloudEnvironment = new CloudEnvironment();
+            if (cloudEnvironment.getServiceDataByName("sagan-db") != null) {
+                RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo(
+                        "sagan-db", RdbmsServiceInfo.class);
+                dataSource.setUrl(serviceInfo.getUrl());
+                dataSource.setUsername(serviceInfo.getUserName());
+                dataSource.setPassword(serviceInfo.getPassword());
+            } else {
+                if (inMemory) {
+                    dataSource.setUrl("jdbc:hsqldb:mem:sagan-db");
+                    dataSource.setUsername("sa");
+                    dataSource.setPassword("");
+                } else {
+                    dataSource.setUrl("jdbc:postgresql://localhost:5432/sagan-db");
+                    dataSource.setUsername("user");
+                    dataSource.setPassword("changeme");
+                }
+            }
+
             dataSource.setMaxActive(20);
             dataSource.setMaxIdle(8);
             dataSource.setMinIdle(8);
@@ -86,36 +117,28 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    @Profile("local_postgres")
-    public DataSource dataSource() {
-        org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/sagan-db");
-        dataSource.setUsername("user");
-        dataSource.setPassword("changeme");
-        dataSource.setMaxActive(20);
-        dataSource.setMaxIdle(8);
-        dataSource.setMinIdle(8);
-        dataSource.setTestOnBorrow(false);
-        dataSource.setTestOnReturn(false);
-        dataSource.setValidationQuery("SELECT 1");
-        return dataSource;
-    }
-
-    @Bean
-    public HealthIndicator<Map<String, Object>> healthIndicator(final org.apache.tomcat.jdbc.pool.DataSource dataSource) {
-        return new HealthIndicator<Map<String, Object>>(){
+    public HealthIndicator<Map<String, Object>> healthIndicator(DataSource dataSource) {
+        if (dataSource instanceof org.apache.tomcat.jdbc.pool.DataSource) {
+            final org.apache.tomcat.jdbc.pool.DataSource tcDataSource = (org.apache.tomcat.jdbc.pool.DataSource) dataSource;
+            return new HealthIndicator<Map<String, Object>>() {
+                @Override
+                public Map<String, Object> health() {
+                    Map<String, Object> health = new HashMap<>();
+                    health.put("active", tcDataSource.getActive());
+                    health.put("max_active", tcDataSource.getMaxActive());
+                    health.put("idle", tcDataSource.getIdle());
+                    health.put("max_idle", tcDataSource.getMaxIdle());
+                    health.put("min_idle", tcDataSource.getMinIdle());
+                    health.put("wait_count", tcDataSource.getWaitCount());
+                    health.put("max_wait", tcDataSource.getMaxWait());
+                    return health;
+                }
+            };
+        }
+        return new HealthIndicator<Map<String, Object>>() {
             @Override
             public Map<String, Object> health() {
-                Map<String, Object> health = new HashMap<>();
-                health.put("active", dataSource.getActive());
-                health.put("max_active", dataSource.getMaxActive());
-                health.put("idle", dataSource.getIdle());
-                health.put("max_idle", dataSource.getMaxIdle());
-                health.put("min_idle", dataSource.getMinIdle());
-                health.put("wait_count", dataSource.getWaitCount());
-                health.put("max_wait", dataSource.getMaxWait());
-                return health;
+                return Collections.emptyMap();
             }
         };
     }
@@ -137,12 +160,14 @@ public class ApplicationConfiguration {
 
     @Bean
     public ProjectMetadataService projectMetadataService() throws IOException {
-        InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
+        InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass())
+                .getInputStream();
         return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
     }
 
     // http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html#filterparams
-    // Blog filter must be declared first, to ensure its rules are applied before the general rules
+    // Blog filter must be declared first, to ensure its rules are applied before the
+    // general rules
     @Bean
     public FilterRegistrationBean blogRewriteFilterConfig() {
         FilterRegistrationBean reg = new FilterRegistrationBean();
@@ -179,15 +204,26 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public CacheManager cacheManager(@Value("${cache.timetolive:300}") Long cacheTimeToLive) {
-        ConcurrentMap<Object,Object> cacheMap = CacheBuilder.newBuilder()
-                .expireAfterWrite(cacheTimeToLive, TimeUnit.SECONDS)
-                .build().asMap();
-
-        ConcurrentMapCache concurrentMapCache = new ConcurrentMapCache("cache", cacheMap, false);
+    public CacheManager cacheManager(@Value("${cache.network.timetolive:300}") Long cacheNetworkTimeToLive,
+                                     @Value("${cache.database.timetolive:60}") Long cacheDatabaseTimeToLive) {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
-        cacheManager.setCaches(Arrays.asList(concurrentMapCache));
+
+        List<ConcurrentMapCache> cacheList = new ArrayList<>();
+        cacheList.add(createConcurrentMapCache(cacheNetworkTimeToLive, "cache.network", -1));
+        cacheList.add(createConcurrentMapCache(cacheDatabaseTimeToLive, "cache.database", 50));
+        cacheManager.setCaches(cacheList);
         return cacheManager;
+    }
+
+    private ConcurrentMapCache createConcurrentMapCache(Long timeToLive, String name, long cacheSize) {
+        CacheBuilder<Object, Object> cacheBuilder = CacheBuilder.newBuilder()
+                .expireAfterWrite(timeToLive, TimeUnit.SECONDS);
+
+        if (cacheSize >= 0) {
+            cacheBuilder.maximumSize(cacheSize);
+        }
+        ConcurrentMap<Object,Object> map = cacheBuilder.build().asMap();
+        return new ConcurrentMapCache(name, map, false);
     }
 
 }

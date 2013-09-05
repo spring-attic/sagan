@@ -36,6 +36,6 @@ public class PostViewFactory {
     public Page<PostView> createPostViewPage(Page<Post> posts) {
         List<PostView> postViews = createPostViewList(posts.getContent());
         PageRequest pageRequest = new PageRequest(posts.getNumber(), posts.getSize(), posts.getSort());
-        return new PageImpl<PostView>(postViews, pageRequest, posts.getTotalElements());
+        return new PageImpl<>(postViews, pageRequest, posts.getTotalElements());
     }
 }

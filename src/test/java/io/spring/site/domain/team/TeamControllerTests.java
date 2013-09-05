@@ -1,19 +1,16 @@
 package io.spring.site.domain.team;
 
+import io.spring.site.domain.services.DateService;
+import io.spring.site.web.blog.CachedBlogService;
+import io.spring.site.web.blog.PostViewFactory;
+import io.spring.site.web.team.CachedTeamService;
+import io.spring.site.web.team.TeamController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ExtendedModelMap;
-
-import io.spring.site.domain.blog.BlogService;
-import io.spring.site.domain.services.DateService;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.domain.team.TeamLocation;
-import io.spring.site.domain.team.TeamService;
-import io.spring.site.web.blog.PostViewFactory;
-import io.spring.site.web.team.TeamController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +22,15 @@ import static org.mockito.BDDMockito.given;
 @RunWith(MockitoJUnitRunner.class)
 public class TeamControllerTests {
 
+    @Mock
+    private CachedBlogService blogService;
 
     @Mock
-    BlogService blogService;
-
-    @Mock
-    private TeamService teamService;
+    private CachedTeamService teamService;
 
     private ExtendedModelMap model = new ExtendedModelMap();
 
-    TeamController teamController;
+    private TeamController teamController;
 
     @Before
     public void setUp() throws Exception {
