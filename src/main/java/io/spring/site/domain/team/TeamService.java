@@ -3,6 +3,7 @@ package io.spring.site.domain.team;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -13,12 +14,14 @@ import java.util.List;
 
 @Service
 public class TeamService {
-    private final TeamRepository teamRepository;
-    private final SearchService searchService;
-    private final MemberProfileSearchEntryMapper mapper;
+    private TeamRepository teamRepository;
+    private SearchService searchService;
+    private MemberProfileSearchEntryMapper mapper;
 
     private static Log logger = LogFactory.getLog(TeamService.class);
 
+    //Required for @Cacheable proxy
+    protected TeamService() { }
 
     @Autowired
     public TeamService(TeamRepository teamRepository, SearchService searchService, MemberProfileSearchEntryMapper mapper) {
@@ -72,14 +75,7 @@ public class TeamService {
         }
     }
 
-    public void saveMemberProfile(MemberProfile profile) {
-        teamRepository.save(profile);
-    }
-
-    public List<MemberProfile> fetchAllProfiles() {
-        return teamRepository.findAll();
-    }
-
+    @Cacheable("cache.database")
     public List<MemberProfile> fetchActiveMembers() {
         return teamRepository.findByHiddenOrderByNameAsc(false);
     }

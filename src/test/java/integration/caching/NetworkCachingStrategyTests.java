@@ -1,6 +1,6 @@
 package integration.caching;
 
-import integration.caching.CachingStrategyTests.TestConfiguration;
+import integration.caching.NetworkCachingStrategyTests.TestConfiguration;
 import io.spring.site.test.FixtureLoader;
 import io.spring.site.web.configuration.ApplicationConfiguration;
 
@@ -42,11 +42,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { TestConfiguration.class }, initializers = ConfigFileApplicationContextInitializer.class)
-public class CachingStrategyTests {
+public class NetworkCachingStrategyTests {
 
     @ClassRule
     public static SetSystemProperty timeToLive = new SetSystemProperty(
-            "cache.timetolive", "1");
+            "cache.network.timetolive", "1");
 
     @Autowired
     protected WebApplicationContext wac;
