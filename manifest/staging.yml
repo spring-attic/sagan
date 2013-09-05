@@ -2,7 +2,7 @@
 applications:
 - name: sagan-blue
   memory: 2G
-  instances: 2
+  instances: 4
   env:
     SPRING_PROFILES_ACTIVE: site,staging
   host: sagan-staging-blue
@@ -11,7 +11,7 @@ applications:
   buildpack: https://github.com/cloudfoundry/java-buildpack
 - name: sagan-green
   memory: 2G
-  instances: 2
+  instances: 4
   env:
     SPRING_PROFILES_ACTIVE: site,staging
   host: sagan-staging-green
