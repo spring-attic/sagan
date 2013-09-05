@@ -25,6 +25,17 @@ spring:
 security:
   basic:
     enabled: false
+  ignored: 
+    - /bootstrap/**
+    - /bootstrap-datetimepicker/**
+    - /css/**
+    - /font-awesome/**
+    - /img/**
+    - /js/**
+    - /error
+    - /500
+    - /404
+    - /project_metadata/**
   headers:
     hsts: domain
   user:
