@@ -579,6 +579,9 @@ input.floating-input {
     padding-bottom: 60px;
     border-bottom: 1px solid #ccc;
   }
+  &.skinny {
+    width: 66%;
+  }
 }
 
 //FOOTER
@@ -988,7 +991,7 @@ input.floating-input {
       .billboard--sub-title {
         font-size: 18px;
         line-height: 18px;
-        padding: 0 19px 12px;
+        padding: 2px 19px 12px;
         &:first-child {
           padding-top: 12px;
         }
