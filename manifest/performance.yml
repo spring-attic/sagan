@@ -2,7 +2,7 @@
 applications:
 - name: sagan
   memory: 2G
-  instances: 2
+  instances: 4
   env:
     SPRING_PROFILES_ACTIVE: site,performance
     JBP_LOG_LEVEL: DEBUG
