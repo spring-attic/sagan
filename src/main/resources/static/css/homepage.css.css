@@ -13,7 +13,7 @@
 }
 .homepage-billboard .homepage-title--container .homepage-title, .homepage-billboard .homepage-title--container .homepage-subtitle {
   background: rgba(52, 48, 45, 0.8);
-  color: #eeeeee;
+  color: #f1f1f1;
   display: inline-block;
 }
 .homepage-billboard .homepage-title--container .homepage-title {
@@ -38,6 +38,42 @@
   position: absolute;
   left: 0;
   right: 0;
+}
+.homepage--body .platform--wrapper {
+  background: url("../img/platform-bg.png") #34302d 50% 0 no-repeat;
+  height: 438px;
+  text-align: center;
+}
+.homepage--body .platform--wrapper .platform--icon {
+  background: url("../img/spring-platform-watermark.png") no-repeat;
+  width: 241px;
+  height: 74px;
+  display: inline-block;
+  margin: 43px 0;
+}
+.homepage--body .platform--wrapper .platform--title {
+  font-family: "Montserrat", sans-serif;
+  color: #f1f1f1;
+  font-size: 30px;
+  line-height: 30px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.homepage--body .platform--wrapper .platform--text {
+  color: #f1f1f1;
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 20px;
+}
+.homepage--body .platform--wrapper .platform--link {
+  font-size: 18px;
+  line-height: 28px;
+}
+.homepage--body .platform--wrapper .platform--link [class^="icon-"] {
+  margin-left: 15px;
+  line-height: 10px;
+  vertical-align: middle;
+  text-decoration: none;
 }
 .homepage--body .key-feature--wrapper {
   background-color: #6db33f;
@@ -119,25 +155,26 @@
 }
 
 .support--wrapper {
-  background-color: #292624;
+  background-color: #5d5d5d;
   padding: 50px 0 60px;
 }
-.support--wrapper .support--container {
-  text-align: center;
-}
 .support--wrapper .support--container .icon {
-  margin-bottom: 30px;
+  float: left;
+  margin-right: 45px;
 }
 .support--wrapper .support--container .support--title {
   font-size: 18px;
   line-height: 18px;
   text-transform: uppercase;
   color: #f1f1f1;
-  margin-bottom: 20px;
+  margin: 22px 0;
 }
 .support--wrapper .support--container .support-links a {
   color: #5fa134;
   padding: 0 20px;
+}
+.support--wrapper .support--container .support-links a:first-child {
+  padding-left: 0;
 }
 .support--wrapper.about-page {
   position: absolute;
@@ -146,5 +183,9 @@
 }
 
 .homepage-fix {
-  margin-top: 2185px;
+  margin-top: 2510px;
+}
+
+.tool-suite {
+  text-align: right;
 }
