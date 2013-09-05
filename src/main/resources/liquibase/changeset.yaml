@@ -140,3 +140,14 @@ databaseChangeLog:
               - column:
                   name: jobtitle
                   type: varchar(255)
+
+  - changeSet:
+      id: 3
+      author: nstreet_gsilva
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: category
+            indexName: idx_category
+            tableName: post
