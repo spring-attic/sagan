@@ -54,7 +54,7 @@ public abstract class IntegrationTestBase {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void clearCaches() throws Exception {
         for (String name : this.cacheManager.getCacheNames()) {
             this.cacheManager.getCache(name).clear();
         }

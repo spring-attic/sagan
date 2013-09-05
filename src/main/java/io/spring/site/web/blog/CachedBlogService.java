@@ -3,6 +3,7 @@ package io.spring.site.web.blog;
 import io.spring.site.domain.blog.BlogService;
 import io.spring.site.domain.blog.Post;
 import io.spring.site.domain.blog.PostCategory;
+import io.spring.site.domain.team.MemberProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -55,5 +56,10 @@ public class CachedBlogService {
     @Cacheable("cache.database")
     public Page<Post> getPublishedPostsByDate(int year, Pageable pageRequest) {
         return blogService.getPublishedPostsByDate(year, pageRequest);
+    }
+
+    @Cacheable("cache.database")
+    public Page<Post> getPublishedPostsForMember(MemberProfile profile, Pageable pageable) {
+        return blogService.getPublishedPostsForMember(profile, pageable);
     }
 }

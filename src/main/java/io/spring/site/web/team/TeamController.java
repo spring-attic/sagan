@@ -1,10 +1,10 @@
 package io.spring.site.web.team;
 
-import io.spring.site.domain.blog.BlogService;
 import io.spring.site.domain.blog.Post;
 import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.domain.team.TeamLocation;
 import io.spring.site.web.PageableFactory;
+import io.spring.site.web.blog.CachedBlogService;
 import io.spring.site.web.blog.EntityNotFoundException;
 import io.spring.site.web.blog.PostView;
 import io.spring.site.web.blog.PostViewFactory;
@@ -27,12 +27,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 public class TeamController {
 
     private final CachedTeamService teamService;
-    private final BlogService blogService;
+    private final CachedBlogService blogService;
     private final PostViewFactory postViewFactory;
 
     @Autowired
     public TeamController(CachedTeamService teamService,
-                          BlogService blogService,
+                          CachedBlogService blogService,
                           PostViewFactory postViewFactory) {
         this.teamService = teamService;
         this.blogService = blogService;

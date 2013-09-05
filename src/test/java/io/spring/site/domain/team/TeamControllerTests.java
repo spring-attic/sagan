@@ -1,7 +1,7 @@
 package io.spring.site.domain.team;
 
-import io.spring.site.domain.blog.BlogService;
 import io.spring.site.domain.services.DateService;
+import io.spring.site.web.blog.CachedBlogService;
 import io.spring.site.web.blog.PostViewFactory;
 import io.spring.site.web.team.CachedTeamService;
 import io.spring.site.web.team.TeamController;
@@ -22,16 +22,15 @@ import static org.mockito.BDDMockito.given;
 @RunWith(MockitoJUnitRunner.class)
 public class TeamControllerTests {
 
-
     @Mock
-    BlogService blogService;
+    private CachedBlogService blogService;
 
     @Mock
     private CachedTeamService teamService;
 
     private ExtendedModelMap model = new ExtendedModelMap();
 
-    TeamController teamController;
+    private TeamController teamController;
 
     @Before
     public void setUp() throws Exception {
