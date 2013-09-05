@@ -160,29 +160,19 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
     }
 
     @Test
-    public void searchByCamelCaseTerms() throws ParseException {
-        this.entry = SearchEntryBuilder.entry().path("http://example.com")
-                .title("My Entry").rawContent("SomeCamelCaseThing is here")
-                .summary("Html summary").publishAt("2013-01-01 10:00").build();
-        this.searchService.saveToIndex(this.entry);
-
-        assertThatSearchReturnsEntry("Camel");
-    }
-
-    @Test
     public void searchisCaseInsensitive() throws ParseException {
         this.entry = SearchEntryBuilder.entry().path("http://example.com")
-                .title("My Entry").rawContent("SomeCamelCaseThing is here")
+                .title("My Entry").rawContent("Uppercase is here")
                 .summary("Html summary").publishAt("2013-01-01 10:00").build();
         this.searchService.saveToIndex(this.entry);
 
-        assertThatSearchReturnsEntry("camel");
+        assertThatSearchReturnsEntry("uppercase");
     }
 
     @Test
     public void searchMatchesPartialWords() throws ParseException {
         this.entry = SearchEntryBuilder.entry().path("http://example.com")
-                .title("My Entry").rawContent("BlogExporter is here")
+                .title("My Entry").rawContent("Exporter is here")
                 .summary("Html summary").publishAt("2013-01-01 10:00").build();
         this.searchService.saveToIndex(this.entry);
 
