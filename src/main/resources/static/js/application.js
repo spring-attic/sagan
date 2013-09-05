@@ -114,7 +114,7 @@ $(function () {
     moveItemSlider();
   });
 
-  var initializeSearch = function () {
+  var initializeFacetSearchWidget = function () {
     var searchFacet = $(".search-facets");
     if (!searchFacet.length) {
       return;
@@ -131,25 +131,66 @@ $(function () {
 
 
       $(".js-checkbox-pill").click(function() {
-        var checkBoxes = $(this).closest(".facet").find("input[type='checkbox']");
-        var checkBox = $(this).closest(".facet").find("input[type='checkbox']").first();
+        var facet = $(this).closest('.facet');
+        var group = facet.parents(".facet").first();
+        var checkBoxes = facet.find("input[type='checkbox']");
+        var checkBox = checkBoxes.first();
+        var uncheckedCheckBoxes = group.find(".sub-facet--list input[type='checkbox']:not(:checked)");
+
+
         if (checkBox.prop('checked') == false ){
           //IF IT IS CHECKED
 
+          //UNCHECKES ITSELF
           $(this).prop('checked', false);
-          $(this).parents(".sub-facet--list").siblings(".facet--wrapper").find("input[type='checkbox']").first().prop('checked', false);
-          $(this).closest(".sub-facet--list").siblings(".facet--wrapper").find("input[type='checkbox']").first().prop('checked', false);
-          // $(this).parents(".facet").find("input[type='checkbox']").prop('checked',false);
+
+          function firstCheckbox(context) {
+            context.siblings(".facet--wrapper").find("input[type='checkbox']").first().prop('checked', false);
+          }
+          // UNCHECKES HIGHEST PARENT 
+          firstCheckbox($(this).parents(".sub-facet--list"));
+
+          // UNCHECKS CLOSEST PARENT
+          firstCheckbox($(this).closest(".sub-facet--list"));
+          
+          // UNCHECKS ALL CHILDRED
+          $(this).parents(".facet--wrapper").siblings(".sub-facet--list, .facet-section--header").find("input[type='checkbox']").prop('checked', false);
+
         } else {
           //IF IT IS NOT CHECKED
 
+          //CHECKS ALL CHILDRED
           checkBoxes.prop('checked',true);
-
         };
+        if (uncheckedCheckBoxes.length == 0) {
+          group.find("input[type='checkbox']").first().prop('checked', true);
+        }
+      });
+
+      $('.sub-facet--list').each(function () {
+        var checkedCheckBoxes = $("input[type='checkbox']:checked", this);
+        var uncheckedBoxes = $("input[type='checkbox']:not(:checked)", this);
+        if (checkedCheckBoxes.length !== 0 && uncheckedBoxes.length !== 0) {
+          $(this).removeClass('js-close');
+        }
+      });
+
+      
+
+
+
+      
+      if ($(".projects-facet input[type='checkbox']:checked").length) {
+        $(".facet-section--header").removeClass("js-close");
+      }
+      
+      $(".facets--clear-filters").click(function() {
+        $(".facet--wrapper input[type='checkbox']:checked").prop('checked', false);
+        $(".sub-facet--list, .facet-section--header").addClass("js-close");
       });
     }
   }
-  initializeSearch();
+  initializeFacetSearchWidget();
 
   $(".js-team-map--wrapper").mouseenter(function() {
     $(".js-team-map--container").fadeOut("100");
@@ -193,3 +234,75 @@ var detectArch = function () {
 
   return "32";
 }
+
+
+
+/* Marketo Newsletter Subscription Form */
+
+function fieldValidate(field) {
+  return true;
+}
+var profiling = {
+  isEnabled: false,
+  numberOfProfilingFields: 3,
+  alwaysShowFields: [ 'mktDummyEntry']
+};
+var mktFormLanguage = 'English'
+function mktoGetForm() {return document.getElementById('mktForm_1035'); }
+
+
+
+/* Subscribed cookie */
+
+function getCookie(c_name)
+{
+var c_value = document.cookie;
+var c_start = c_value.indexOf(" " + c_name + "=");
+if (c_start == -1)
+  {
+  c_start = c_value.indexOf(c_name + "=");
+  }
+if (c_start == -1)
+  {
+  c_value = null;
+  }
+else
+  {
+  c_start = c_value.indexOf("=", c_start) + 1;
+  var c_end = c_value.indexOf(";", c_start);
+  if (c_end == -1)
+    {
+    c_end = c_value.length;
+    }
+  c_value = unescape(c_value.substring(c_start,c_end));
+  }
+return c_value;
+}
+
+function setCookie(c_name,value,exdays)
+{
+  var exdate=new Date();
+  exdate.setDate(exdate.getDate() + exdays);
+  var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+  document.cookie=c_name + "=" + c_value;
+}
+
+var subscribed=getCookie("subscribed");
+
+function setSubscribeCookie()
+{
+  setCookie("subscribed",subscribed,365);
+}
+
+function checkCookie()
+{
+if (subscribed)
+  {
+  document.getElementsByName('Email')[0].placeholder='Subscribed';
+  }
+}
+
+
+
+
+
