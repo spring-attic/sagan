@@ -151,3 +151,20 @@ databaseChangeLog:
                   name: category
             indexName: idx_category
             tableName: post
+
+  - changeSet:
+      id: 4
+      author: nstreet_gsilva
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: publishat
+            indexName: idx_publishat
+            tableName: post
+        - createIndex:
+            columns:
+              - column:
+                  name: draft
+            indexName: idx_draft
+            tableName: post
