@@ -25,9 +25,9 @@
         <div class="project--title">Spring Framework</div>
         <p class="project--description">Provides core support for dependency injection, transaction management, web apps, data access, and messaging.</p>
       </a>
-      <a href="#" class="project--container project--container--link">
+      <a th:href="${project.siteUrl}" class="project--container project--container--link" th:with="project=${projectMetadata.getProject('spring-xd')}">
         <div class="project-logo--container">
-          <div class="icon project--logo logo-default"></div>
+          <div class="icon project--logo logo-spring-xd"></div>
         </div>
         <div class="project--title">Spring XD</div>
         <p class="project--description">Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
