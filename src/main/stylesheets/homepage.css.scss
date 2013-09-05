@@ -1,4 +1,5 @@
-$off-white: #eee;
+
+$off-white: #f1f1f1;
 $black-green: #3A3C2F;
 $lime: #8CC63F;
 $leaf: #4E681E;
@@ -60,6 +61,43 @@ $icon-sprite: url("../img/iconsprite.png");
   position: absolute;
   left: 0;
   right: 0;
+  .platform--wrapper {
+    background: url("../img/platform-bg.png") $black-brown 50% 0 no-repeat;
+    height: 438px;
+    text-align: center;
+    .platform--icon {
+      background: url("../img/spring-platform-watermark.png") no-repeat;
+      width: 241px;
+      height: 74px;
+      display: inline-block;
+      margin: 43px 0;
+    }
+    .platform--title {
+      font-family: $secondary-font-family;
+      color: $off-white;
+      font-size: 30px;
+      line-height: 30px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .platform--text {
+      color: $off-white;
+      font-size: 18px;
+      line-height: 28px;
+      margin-bottom: 20px;
+    }
+    .platform--link {
+      font-size: 18px;
+      line-height: 28px;
+      & [class^="icon-"] {
+        margin-left: 15px;
+        line-height: 10px;
+        vertical-align: middle;
+        text-decoration: none;
+      }
+    }
+  }
+
   .key-feature--wrapper {
     background-color: #6db33f;
     padding: 60px 0;
@@ -145,23 +183,26 @@ $icon-sprite: url("../img/iconsprite.png");
   }
 }
 .support--wrapper {
-  background-color: darken($black-brown, 4%);
+  background-color: #5d5d5d;
   padding: 50px 0 60px;
   .support--container {
-    text-align: center;
     .icon {
-      margin-bottom: 30px;
+      float: left;
+      margin-right: 45px;
     }
     .support--title {
       font-size: 18px;
       line-height: 18px;
       text-transform: uppercase;
       color: #f1f1f1;
-      margin-bottom: 20px;
+      margin: 22px 0;
     }
     .support-links a {
       color: $link-green;
       padding: 0 20px;
+      &:first-child {
+        padding-left: 0;
+      }
     }
   }
   &.about-page {
@@ -172,5 +213,9 @@ $icon-sprite: url("../img/iconsprite.png");
 }
 
 .homepage-fix {
-  margin-top: 2185px;
+  margin-top: 2510px;
+}
+
+.tool-suite {
+  text-align: right;
 }
