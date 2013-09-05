@@ -19,7 +19,7 @@ import java.util.List;
 public class BlogService {
 
     private PostFormAdapter postFormAdapter;
-    private PostRepository repository;
+    private PostRepository postRepository;
     private SearchService searchService;
     private DateService dateService;
     private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
@@ -27,10 +27,10 @@ public class BlogService {
     private static final Log logger = LogFactory.getLog(BlogService.class);
 
     @Autowired
-    public BlogService(PostRepository repository, PostFormAdapter postFormAdapter,
+    public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter,
                        DateService dateService,
                        SearchService searchService) {
-        this.repository = repository;
+        this.postRepository = postRepository;
         this.postFormAdapter = postFormAdapter;
         this.dateService = dateService;
         this.searchService = searchService;
@@ -39,7 +39,7 @@ public class BlogService {
     // Query methods
 
     public Post getPost(Long postId) {
-        Post post = this.repository.findOne(postId);
+        Post post = this.postRepository.findOne(postId);
         if (post == null) {
             throw new EntityNotFoundException("Blog post not found with Id=" + postId);
         }
@@ -47,11 +47,11 @@ public class BlogService {
     }
 
     public Post getPost(String title, Date createdAt) {
-        return repository.findByTitleAndCreatedAt(title, createdAt);
+        return postRepository.findByTitleAndCreatedAt(title, createdAt);
     }
 
     public Post getPublishedPost(String publicSlug) {
-        Post post = this.repository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug,
+        Post post = this.postRepository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug,
                 this.dateService.now());
         if (post == null) {
             throw new EntityNotFoundException("Blog post not found with Id=" + publicSlug);
@@ -60,66 +60,66 @@ public class BlogService {
     }
 
     public Page<Post> getDraftPosts(Pageable pageRequest) {
-        return this.repository.findByDraftTrue(pageRequest);
+        return this.postRepository.findByDraftTrue(pageRequest);
     }
 
     public Page<Post> getPublishedPosts(Pageable pageRequest) {
-        return this.repository.findByDraftFalseAndPublishAtBefore(this.dateService.now(),
+        return this.postRepository.findByDraftFalseAndPublishAtBefore(this.dateService.now(),
                 pageRequest);
     }
 
     public Page<Post> getPublishedPostsByDate(int year, int month, int day, Pageable pageRequest) {
-        return this.repository.findByDate(year, month, day, pageRequest);
+        return this.postRepository.findByDate(year, month, day, pageRequest);
     }
 
     public Page<Post> getPublishedPostsByDate(int year, int month, Pageable pageRequest) {
-        return this.repository.findByDate(year, month, pageRequest);
+        return this.postRepository.findByDate(year, month, pageRequest);
     }
 
     public Page<Post> getPublishedPostsByDate(int year, Pageable pageRequest) {
-        return this.repository.findByDate(year, pageRequest);
+        return this.postRepository.findByDate(year, pageRequest);
     }
 
     public Page<Post> getScheduledPosts(Pageable pageRequest) {
-        return this.repository.findByDraftFalseAndPublishAtAfter(this.dateService.now(),
+        return this.postRepository.findByDraftFalseAndPublishAtAfter(this.dateService.now(),
                 pageRequest);
     }
 
     public Page<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
-        return this.repository.findByCategoryAndDraftFalseAndPublishAtBefore(category,
+        return this.postRepository.findByCategoryAndDraftFalseAndPublishAtBefore(category,
                 this.dateService.now(), pageRequest);
     }
 
     public Page<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
-        return this.repository.findByBroadcastAndDraftFalseAndPublishAtBefore(true,
+        return this.postRepository.findByBroadcastAndDraftFalseAndPublishAtBefore(true,
                 this.dateService.now(), pageRequest);
     }
 
     public Page<Post> getPublishedPostsForMember(MemberProfile profile,
             Pageable pageRequest) {
-        return this.repository.findByDraftFalseAndAuthorAndPublishAtBefore(profile,
+        return this.postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile,
                 this.dateService.now(), pageRequest);
     }
 
     public Page<Post> getAllPosts(Pageable pageRequest) {
-        return this.repository.findAll(pageRequest);
+        return this.postRepository.findAll(pageRequest);
     }
 
     public Post addPost(PostForm postForm, String username) {
         Post post = postFormAdapter.createPostFromPostForm(postForm, username);
-        this.repository.save(post);
+        this.postRepository.save(post);
         saveToIndex(post);
         return post;
     }
 
     public void updatePost(Post post, PostForm postForm) {
         postFormAdapter.updatePostFromPostForm(post, postForm);
-        this.repository.save(post);
+        this.postRepository.save(post);
         saveToIndex(post);
     }
 
     public void deletePost(Post post) {
-        this.repository.delete(post);
+        this.postRepository.delete(post);
     }
 
     private void saveToIndex(Post post) {
@@ -133,17 +133,17 @@ public class BlogService {
     }
 
     public void reIndexAllPosts() {
-        List<Post> posts = repository.findByDraftFalseAndPublishAtBefore(dateService.now());
+        List<Post> posts = postRepository.findByDraftFalseAndPublishAtBefore(dateService.now());
         for (Post post : posts) {
             saveToIndex(post);
         }
     }
 
     public void resummarizeAllPosts() {
-        List<Post> posts = repository.findAll();
+        List<Post> posts = postRepository.findAll();
         for (Post post : posts) {
             postFormAdapter.summarize(post);
-            this.repository.save(post);
+            this.postRepository.save(post);
         }
     }
 

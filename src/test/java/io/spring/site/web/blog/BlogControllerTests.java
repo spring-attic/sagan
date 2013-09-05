@@ -1,13 +1,7 @@
 package io.spring.site.web.blog;
 
-import io.spring.site.domain.blog.BlogService;
 import io.spring.site.domain.blog.Post;
 import io.spring.site.domain.services.DateService;
-import io.spring.site.web.blog.BlogController;
-import io.spring.site.web.blog.PostViewFactory;
-
-import java.util.Collections;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -16,6 +10,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.ExtendedModelMap;
+
+import java.util.Collections;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -28,7 +24,7 @@ public class BlogControllerTests {
     private PostViewFactory postViewFactory;
 
     @Mock
-    private BlogService blogService;
+    private CachedBlogService blogService;
     private BlogController blogController;
 
     private ExtendedModelMap model = new ExtendedModelMap();

@@ -1,18 +1,14 @@
 package io.spring.site.domain.blog.web;
 
-import io.spring.site.domain.blog.BlogService;
 import io.spring.site.domain.blog.Post;
 import io.spring.site.domain.blog.PostBuilder;
 import io.spring.site.domain.blog.PostCategory;
 import io.spring.site.web.PageableFactory;
 import io.spring.site.web.PaginationInfo;
 import io.spring.site.web.blog.BlogController;
+import io.spring.site.web.blog.CachedBlogService;
 import io.spring.site.web.blog.PostView;
 import io.spring.site.web.blog.PostViewFactory;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -24,8 +20,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.ui.ExtendedModelMap;
 
-import static io.spring.site.domain.blog.PostCategory.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import static io.spring.site.domain.blog.PostCategory.ENGINEERING;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
@@ -37,7 +35,7 @@ public class BlogController_PublishedPostsForCategoryTests {
     public static final PostCategory TEST_CATEGORY = ENGINEERING;
 
     @Mock
-    private BlogService blogService;
+    private CachedBlogService blogService;
 
     private MockHttpServletRequest request = new MockHttpServletRequest();
 
@@ -46,7 +44,7 @@ public class BlogController_PublishedPostsForCategoryTests {
 
     private BlogController controller;
     private ExtendedModelMap model = new ExtendedModelMap();
-    private List<PostView> posts = new ArrayList<PostView>();
+    private List<PostView> posts = new ArrayList<>();
     private Page<PostView> page;
     private String viewName;
 
@@ -55,13 +53,12 @@ public class BlogController_PublishedPostsForCategoryTests {
         MockitoAnnotations.initMocks(this);
         this.controller = new BlogController(this.blogService, this.postViewFactory);
 
-        List<Post> posts = new ArrayList<Post>();
+        List<Post> posts = new ArrayList<>();
         posts.add(PostBuilder.post().build());
-        Page<Post> postsPage = new PageImpl<Post>(posts, new PageRequest(TEST_PAGE, 10),
-                20);
+        Page<Post> postsPage = new PageImpl<>(posts, new PageRequest(TEST_PAGE, 10), 20);
         Pageable testPageable = PageableFactory.forLists(TEST_PAGE);
 
-        this.page = new PageImpl<PostView>(new ArrayList<PostView>(), testPageable, 1);
+        this.page = new PageImpl<>(new ArrayList<PostView>(), testPageable, 1);
 
         given(this.blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(testPageable)))
                 .willReturn(postsPage);
@@ -93,8 +90,7 @@ public class BlogController_PublishedPostsForCategoryTests {
     @SuppressWarnings("unchecked")
     @Test
     public void postsInModel() {
-        this.controller.listPublishedPostsForCategory(TEST_CATEGORY, this.model,
-                TEST_PAGE);
+        this.controller.listPublishedPostsForCategory(TEST_CATEGORY, this.model, TEST_PAGE);
         assertThat((List<PostView>) this.model.get("posts"), is(this.posts));
     }
 }
