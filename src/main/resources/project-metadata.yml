@@ -1,20 +1,7 @@
 variables:
-  # TODO: rename
-  # githubRepoBaseUrl: http://github.com/spring-projects
   githubOrgBaseUrl: http://github.com/spring-projects
-
-  # TODO: rename
-  # ghProjectsBaseUrl: http://projects.spring.io
   ghPagesBaseUrl: http://projects.spring.io
-
-  # TODO: support
-  # ghAtticBaseUrl: http://attic.spring.io
-
-  # TODO: support
-  # ghIncubatorBaseUrl: http://incubator.spring.io
-
   docsBaseUrl: http://docs.spring.io
-
   groupId: org.springframework
 
 defaultUrls:
@@ -75,13 +62,12 @@ projects:
     # Spring Data
     # ----------------------
     - id: spring-data
-      # TODO: indicate this should not show up on /docs https://www.pivotaltracker.com/story/show/55297016
       name: Spring Data
       groupId: org.springframework.data
       lead: mpollack
       refDocUrl: NONE
       apiDocUrl: NONE
-      aggregator: true
+      aggregator: true # ensures this project does not show up at /docs
 
     - id: spring-data-jpa
       name: Spring Data JPA
@@ -355,15 +341,6 @@ projects:
   # ========================
   incubator:
     # ----------------------
-    # Spring ActionScript
-    # ----------------------
-    - id: spring-actionscript
-      name: Spring ActionScript
-      lead: cherreman@github
-      sponsor: NONE
-      siteUrl: NONE
-
-    # ----------------------
     # Spring Boot
     # ----------------------
     - id: spring-boot
@@ -377,12 +354,6 @@ projects:
     # ----------------------
     # Spring Data
     # ----------------------
-
-    # No releases
-    - id: spring-data-couchbase
-      name: Spring Data Couchbase
-      lead: daschl@github # Michael Nitschinger
-      sponsor: ogierke
 
     # No releases
     - id: spring-data-elasticsearch
@@ -403,12 +374,6 @@ projects:
       supportedVersions:
         - 0.1.0.RELEASE
 
-    # No releases
-    - id: spring-data-services
-      name: Spring Data Services
-      lead: jbrisbin
-      siteUrl: NONE
-
     # No GA releases
     - id: spring-data-solr
       name: Spring Data Solr
@@ -422,13 +387,6 @@ projects:
     # ----------------------
     # Spring Integration
     # ----------------------
-    # Irregular versioning, see https://github.com/SpringSource/spring-integration-extensions/releases
-    # No GA releases in any case.
-    - id: spring-integration-extensions
-      name: Spring Integration Extensions
-      lead: ghillert
-      siteUrl: NONE
-
     - id: spring-integration-dsl-groovy
       name: Spring Integration Groovy DSL
       lead: dturanski
@@ -442,21 +400,10 @@ projects:
       name: Spring Integration Scala DSL
       lead: ghillert
       siteUrl: NONE
-      # M2 releaseStatus was tagged, but only api docs are 1.0.0.BUILD-SNAPSHOT;
-      # no ref docs whatsoever
       refDocUrl: NONE
       apiDocUrl: NONE
       supportedVersions:
         - 1.0.0.M2
-
-    # ----------------------
-    # Spring Mobile
-    # ----------------------
-    # No releases
-    - id: spring-mobile-urbanairship
-      name: Spring Mobile Urban Airship
-      lead: cwalls
-      siteUrl: NONE
 
     # ----------------------
     # Spring Plugin
@@ -469,16 +416,6 @@ projects:
       apiDocUrl: NONE
       supportedVersions:
       - 0.8.0.RELEASE
-
-    # ----------------------
-    # Spring Retry
-    # ----------------------
-    - id: spring-retry
-      name: Spring Retry
-      refDocUrl: /spring-retry/docs/{version}/reference/html
-      apiDocUrl: /spring-retry/docs/{version}/api/
-      supportedVersions:
-        - 9.9.9.RELEASE
 
     # ----------------------
     # Spring Scala
@@ -495,8 +432,6 @@ projects:
     # ----------------------
     # Spring Security
     # ----------------------
-    # Appears not yet to have any releases, thus marked as an incubator project
-    # TODO: talk to Mike Wiesner about this.
     - id: spring-security-kerberos
       name: Spring Security Kerberos
       lead: mwiesner
@@ -507,15 +442,6 @@ projects:
       supportedVersions:
         - 1.0.0.CI-SNAPSHOT # TODO: this should be BUILD-SNAPSHOT
 
-    # TODO: in incubator for now, but should be eliminated altogether?
-    # No releases, no commits for ~3 years
-    - id: spring-security-portlet
-      name: Spring Security Portlet
-      lead: rwinch # ltaylor was last committer
-      siteUrl: NONE
-      groupId: org.springframework.security
-
-    # No GA releases yet, thus marked as an incubator project
     - id: spring-security-saml
       name: Spring Security SAML
       lead: vschafer
@@ -556,23 +482,6 @@ projects:
         - 1.0.0.M3
 
     # ----------------------
-    # Spring Tenancy
-    # ----------------------
-    - id: spring-tenancy
-      name: Spring Tenancy
-      lead: dgreen99@github # David Green w/ Tasktop
-      sponsor: dsyer
-
-    # ----------------------
-    # Spring Test MVC HTMLUnit
-    # ----------------------
-    # No releases
-    - id: spring-test-mvc-htmlunit
-      name: Spring Test MVC HTMLUnit
-      lead: rwinch
-      siteUrl: NONE
-
-    # ----------------------
     # Spring XD
     # ----------------------
     - id: spring-xd
@@ -586,16 +495,6 @@ projects:
   # Attic
   # ========================
   attic:
-    # ----------------------
-    # Spring Data
-    # ----------------------
-    # No releases, last commit ~2 years ago
-    # TODO: Eliminate entirely? In favor of spring-data-couchbase?
-    - id: spring-data-couchdb
-      name: Spring Data CouchDB
-      lead: mpollack
-      siteUrl: NONE
-
     # Classic example of an attic project. Releases were shipped, but the
     # project is now deprecated in favor of spring-data-neo4j
     - id: spring-data-graph
@@ -607,33 +506,9 @@ projects:
       supportedVersions:
         - 1.1.0.RELEASE
 
-    # TODO: Eliminate entirely. No GA releases, and now deprecated in favor
-    # of spring-data-redis and (theoretically) spring-data-riak
-    - id: spring-data-keyvalue
-      name: Spring Data Key/Value
-      lead: mpollack
-      siteUrl: NONE
-
-    # TODO: Eliminate entirely. No releases, no code.
-    - id: spring-data-riak
-      name: Spring Data Riak
-      lead: mpollack
-      siteUrl: NONE
-
-    # ----------------------
-    # Spring Social
-    # ----------------------
-    # TODO: Eliminate entirely. No releases, and Gowalla is dead
-    - id: spring-social-gowalla
-      name: Spring Social Gowalla
-      lead: cwalls
-      siteUrl: NONE
-
     # ----------------------
     # Spring Test MVC
     # ----------------------
-    # Never had a GA releaseStatus, but README says that Spring 3.1.x projects can
-    # still work against milestones here. TODO: Talk to rossen about eliminating
     - id: spring-test-mvc
       name: Spring Test MVC
       lead: rstoyanchev
@@ -642,7 +517,3 @@ projects:
       apiDocUrl: NONE
       supportedVersions:
         - 1.0.0.M2
-
-
-# TODO: move out of springsource org:
-# - id: spring-data-rest-webmvc (examples / samples)
