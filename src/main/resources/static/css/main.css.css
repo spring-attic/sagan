@@ -513,14 +513,13 @@ input.floating-input:focus {
 }
 
 .index-page--title {
-  margin-bottom: 30px;
   line-height: 24px;
 }
 
 .index-page--subtitle {
   font-size: 16px;
   line-height: 24px;
-  margin-bottom: 60px;
+  margin: 30px 0 60px;
 }
 .index-page--subtitle a {
   color: #5fa134;
