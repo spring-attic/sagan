@@ -174,11 +174,13 @@
   width: 97px;
   height: 97px;
   background-position: 257px 185px;
+  font-size: 0;
 }
 .icon.icon-professional-support {
   width: 126px;
   height: 97px;
   background-position: 272px 282px;
+  font-size: 0;
 }
 .icon.icon-gs-guides {
   width: 73px;
