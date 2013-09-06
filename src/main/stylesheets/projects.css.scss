@@ -17,138 +17,6 @@ $icon-sprite: url("../img/iconsprite.png");
 
 .projects--wrapper {
   margin-left: -8px;
-  .project--container {
-    border: 1px solid $black-brown;
-    display: inline-block;
-    width: 286px;
-    height: 288px;
-    margin: 0 6px 20px 6px;
-    vertical-align: top;
-    text-align: center;
-    padding: 30px 20px;
-    .project-logo--container {
-      margin-bottom: 25px;
-      height: 137px;
-      vertical-align: middle;
-      .project--logo {
-        display: inline-block;
-        vertical-align: middle;
-      }
-    }
-    .project--title {
-      font-family: $secondary-font-family;
-      font-size: 16px;
-      line-height: 20px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-    .project--description {
-      font-size: 14px;
-      line-height: 20px;
-    }
-    .project-links--container {
-      position: absolute;
-      background-color: rgba(109, 179, 63, 0.95);
-      padding: 13px 0;
-      width: 326px;
-      margin: 127px 0 0 -20px;
-      height: 58px;
-      opacity: 0;
-      transition: opacity 0.15s;
-      -webkit-transition: opacity 0.15s;
-      -moz-transition: opacity 0.15s;
-      -o-transition: opacity 0.15s;
-      -ms-transition: opacity 0.15s;
-      .project-link {
-        display: inline-block;
-        margin: 0 15px;
-        [class^=icon-] {
-          font-size: 34px;
-          width: 34px;
-          height: 34px;
-          color: rgba(241, 241, 241, 0.75);
-        }
-        p {
-          margin: 6px 0;
-          color: rgba(241, 241, 241, 0.75);
-          font-size: 14px;
-          line-height: 14px;
-        }
-        &:hover {
-          text-decoration: none;
-          [class^=icon-] {
-            color: white;
-          }
-        }
-      }
-    }
-    &:hover {
-      .project-links--container {
-        opacity: 1;
-      }
-    }
-    &.parent-project {
-      .child-project-count--wrapper {
-        float: right;
-        .child-project-count--number {
-          position: relative;
-          z-index: 101;
-          color: #f1f1f1;
-          margin: -22px -9px 0 9px;
-        }
-        .child-project-count--background {
-          position: absolute;
-          margin: -54px 0 0 -5px;
-          z-index: 100;
-          width: 0;
-          height: 0;
-          border-top: 40px solid transparent;
-          border-bottom: 40px solid transparent;
-          border-left: 40px solid $green;
-          transform: rotate(-45deg);
-          -webkit-transform: rotate(-45deg);
-          -moz-transform: rotate(-45deg);
-          -o-transform: rotate(-45deg);
-          -ms-transform: rotate(-45deg);
-        }
-      }
-    }
-    &.full-width {
-      background-color: #ddd;
-      border-color: white;
-      display: block;
-      height: auto;
-      width: auto;
-      text-align: left;
-      .project--title {
-        margin-bottom: 10px;
-      }
-      .project--description {
-        margin-bottom: 20px;
-      }
-      .project--link {
-        color: $link-green;
-        text-transform: uppercase;
-        font-size: 12px;
-      }
-    }
-    &.project--container--link {
-      color: $black-brown;
-      transition: all 0.20s;
-      -webkit-transition: all 0.20s;
-      -moz-transition: all 0.20s;
-      -ms-transition: all 0.20s;
-      -o-transition: all 0.20s;
-      &:hover {
-        text-decoration: none;
-        box-shadow: 0 0 3px $green;
-        border-color: $green;
-      }
-      &:active {
-        box-shadow: none;
-      }
-    }
-  }
   &.project-aggregator {
     .project--container {
       height: 160px;
@@ -164,6 +32,155 @@ $icon-sprite: url("../img/iconsprite.png");
     border-top: 1px solid #ddd;;
   }
 }
+
+.project--container {
+  border: 1px solid $black-brown;
+  display: inline-block;
+  width: 286px;
+  height: 288px;
+  margin: 0 6px 20px 6px;
+  vertical-align: top;
+  text-align: center;
+  padding: 30px 20px;
+  &.auto-height{
+    height: auto;
+  }
+  &.short-fixed {
+    height: 262px;
+  }
+  &.shorter-fixed {
+    height: 239px;
+  }
+  .project-logo--container {
+    margin-bottom: 25px;
+    height: 137px;
+    vertical-align: middle;
+  }
+  .project--logo {
+    display: inline-block;
+    vertical-align: middle;
+    &.small {
+      margin-bottom: 20px;      
+    }
+  }
+  .project--title {
+    font-family: $secondary-font-family;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .project--description {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .project-links--container {
+    position: absolute;
+    background-color: rgba(109, 179, 63, 0.95);
+    padding: 13px 0;
+    width: 326px;
+    margin: 127px 0 0 -20px;
+    height: 58px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    -webkit-transition: opacity 0.15s;
+    -moz-transition: opacity 0.15s;
+    -o-transition: opacity 0.15s;
+    -ms-transition: opacity 0.15s;
+    .project-link {
+      display: inline-block;
+      margin: 0 15px;
+      [class^=icon-] {
+        font-size: 34px;
+        width: 34px;
+        height: 34px;
+        color: rgba(241, 241, 241, 0.75);
+      }
+      p {
+        margin: 6px 0;
+        color: rgba(241, 241, 241, 0.75);
+        font-size: 14px;
+        line-height: 14px;
+      }
+      &:hover {
+        text-decoration: none;
+        [class^=icon-] {
+          color: white;
+        }
+      }
+    }
+  }
+  &:hover {
+    .project-links--container {
+      opacity: 1;
+    }
+  }
+  &.parent-project {
+    .child-project-count--wrapper {
+      float: right;
+      .child-project-count--number {
+        position: relative;
+        z-index: 101;
+        color: #f1f1f1;
+        margin: -22px -9px 0 9px;
+      }
+      .child-project-count--background {
+        position: absolute;
+        margin: -54px 0 0 -5px;
+        z-index: 100;
+        width: 0;
+        height: 0;
+        border-top: 40px solid transparent;
+        border-bottom: 40px solid transparent;
+        border-left: 40px solid $green;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+      }
+    }
+  }
+  &.full-width {
+    background-color: #ddd;
+    border-color: white;
+    display: block;
+    height: auto;
+    width: auto;
+    text-align: left;
+    .project--title {
+      margin-bottom: 10px;
+    }
+    .project--description {
+      margin-bottom: 20px;
+    }
+    .project--link {
+      color: $link-green;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+  }
+  &.project--container--link {
+    color: $black-brown;
+    transition: all 0.20s;
+    -webkit-transition: all 0.20s;
+    -moz-transition: all 0.20s;
+    -ms-transition: all 0.20s;
+    -o-transition: all 0.20s;
+    &:hover {
+      text-decoration: none;
+      box-shadow: 0 0 3px $green;
+      border-color: $green;
+    }
+    &:active {
+      box-shadow: none;
+    }
+  }
+  &.min-height {
+    height: 308px;
+  }
+}
+
 
 .project-header--wrapper {
   .billboard--container {
