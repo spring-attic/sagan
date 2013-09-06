@@ -89,7 +89,6 @@ body {
     border-radius: 0;
     .spring-logo--container {
       display: inline-block;
-      padding: 15px 0;
       .logo-bg {
         width: 37px;
         height: 30px;
@@ -106,17 +105,19 @@ body {
         -ms-transition: opacity 0.15s;
       }
       .spring-logo {
-        background-image: $icon-sprite;
-        width: 153px;
-        height: 40px;
-        -webkit-background-size: 1001px 837px;
-        -moz-background-size: 1001px 837px;
-        -o-background-size: 1001px 837px;
-        background-size: 1001px 837px;
-        // background-repeat: no-repeat;
-        background-position: 1000px 836px;
-        position: absolute;
-        z-index: 1035;
+        display: inline-block;
+        height: 64px;
+        overflow: hidden;
+        .icon-spring-logo {
+          font-size: 155px;
+          height: 50px;
+          margin: 12px 0 6px;
+          color: white;
+          text-decoration: none;
+        }
+        &:hover .icon-spring-logo {
+          color: $green;
+        }
       }
       &:hover {
         .logo-bg {
