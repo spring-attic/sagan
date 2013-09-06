@@ -15,7 +15,7 @@ fi
 SPACE=$1
 
 echo "switching to space $SPACE"
-$CF space $SPACE || exit
+cf space $SPACE || exit
 
 CURRENT=`cf apps --url sagan-$SPACE.cfapps.io | grep -E 'green|blue'`
 
