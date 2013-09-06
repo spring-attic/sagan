@@ -25,6 +25,7 @@ spring:
 security:
   basic:
     enabled: false
+  require_ssl: false
   ignored: 
     - /bootstrap/**
     - /bootstrap-datetimepicker/**
@@ -78,6 +79,13 @@ search:
     delay: 0
 server:
   port: 9000
+
+---
+
+spring:
+  profiles: development,staging,performance,production
+security:
+  require_ssl: true
 
 ---
 
