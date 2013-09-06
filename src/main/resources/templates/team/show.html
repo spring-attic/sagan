@@ -16,7 +16,7 @@
 </head>
 <body>
   <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container" th:object="${profile}" data:member-id="${profile.id}">
+  <div layout:fragment="full-width--layout" th:object="${profile}" data:member-id="${profile.id}">
     <div class="team-map--wrapper">
       <div class="team-member--container">
         <div class="container-fluid">
@@ -46,6 +46,8 @@
       </div>
       <div id="map"></div>
     </div>
+  </div>
+  <div layout:fragment="content" class="container" th:object="${profile}" data:member-id="${profile.id}">
     <div class="team-members--wrapper with-padding">
       <div class="row-fluid">
         <div class="span4">
