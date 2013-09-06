@@ -362,7 +362,7 @@ projects:
       name: Spring Boot
       groupId: org.springframework.boot
       lead: dsyer # and pwebb (co-leads represented comma-separated?)
-      refDocUrl: "{ghPagesBaseUrl}/{id}"
+      refDocUrl: "{ghPagesBaseUrl}/{id}/docs/README.html"
       apiDocUrl: NONE
       supportedVersions:
         - 0.5.0.M1
