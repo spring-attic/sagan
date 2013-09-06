@@ -11,8 +11,8 @@
 <div layout:fragment="content" class="container">
     <div class="row-fluid">
         <div id="content" class="span8">
-      <div class="content--title search-title">Search Results For:</div>
-      <h1 class="index-page--title js-search-results--title"></h1>
+      <div class="search-results--count" th:inline="text">[[${totalResultsCount}]] results</div>
+
             <div th:if="${results.empty}" class="warning alert-warning">
                 No results found for your query.
             </div>

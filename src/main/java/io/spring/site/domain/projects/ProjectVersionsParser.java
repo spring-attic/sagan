@@ -1,156 +1,156 @@
 package io.spring.site.domain.projects;
 
-import org.springframework.web.util.UriTemplate;
+import io.spring.site.domain.projects.ProjectRelease.ReleaseStatus;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
-import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.PRERELEASE;
-import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.SNAPSHOT;
-
+import org.springframework.util.comparator.CompoundComparator;
+import org.springframework.web.util.UriTemplate;
 
 class ProjectVersionsParser {
+
+    private static final Comparator<? super ProjectRelease> PROJECT_RELEASE_COMPARATOR;
+    static {
+        CompoundComparator<ProjectRelease> comparator = new CompoundComparator<ProjectRelease>();
+        comparator.addComparator(new Comparator<ProjectRelease>() {
+            @Override
+            public int compare(ProjectRelease o1, ProjectRelease o2) {
+                return o2.getVersionDisplayName(false).compareTo(o1.getVersionDisplayName(false));
+            }
+        });
+        comparator.addComparator(new Comparator<ProjectRelease>() {
+            @Override
+            public int compare(ProjectRelease o1, ProjectRelease o2) {
+                return o1.getReleaseStatus().compareTo(o2.getReleaseStatus());
+            }
+        });
+        PROJECT_RELEASE_COMPARATOR = comparator;
+    }
+
 
     private final Map<String, String> variables;
     private final Map<String, String> defaultUrls;
 
-    private class SupportedVersion {
-        String name;
-        String refDocUrl;
-        String apiDocUrl;
-        String groupId;
-        String artifactId;
-    }
-
     ProjectVersionsParser(Map<String, String> variables, Map<String, String> defaultUrls) {
-        this.variables = variables;
-        this.defaultUrls = defaultUrls;
+        this.variables = Collections.unmodifiableMap(variables);
+        this.defaultUrls = Collections.unmodifiableMap(defaultUrls);
     }
 
     List<ProjectRelease> parse(Map<String, Object> projectData) {
-        List<SupportedVersion> supportedVersions = parseSupportedVersions(projectData);
-        orderVersions(supportedVersions);
-        return buildProjectVersions(supportedVersions);
+        List<SupportedVersion> orderedSupportedVersions = parseSupportedVersions(projectData);
+        return buildProjectReleases(orderedSupportedVersions);
     }
 
     private List<SupportedVersion> parseSupportedVersions(Map<String, Object> projectData) {
         List<SupportedVersion> versions = new ArrayList<>();
         if (projectData.containsKey("supportedVersions")) {
-            String projectRefDocUrl = "";
-            if (projectData.containsKey("refDocUrl")) {
-                projectRefDocUrl = (String) projectData.get("refDocUrl");
-            }
-            String projectApiDocUrl = "";
-            if (projectData.containsKey("apiDocUrl")) {
-                projectApiDocUrl = (String) projectData.get("apiDocUrl");
-            }
-            String projectGroupId = "";
-            if (projectData.containsKey("groupId")) {
-                projectGroupId = (String) projectData.get("groupId");
-            }
-            String projectArtifactId = (String) projectData.get("id");
-            if (projectData.containsKey("artifactId")) {
-                projectArtifactId = (String) projectData.get("artifactId");
-            }
-
             for (Object value : (List<?>) projectData.get("supportedVersions")) {
-                SupportedVersion supportedVersion = new SupportedVersion();
-                supportedVersion.refDocUrl = projectRefDocUrl;
-                supportedVersion.apiDocUrl = projectApiDocUrl;
-                supportedVersion.groupId = projectGroupId;
-                supportedVersion.artifactId = projectArtifactId;
-
-                if (value instanceof String) {
-                    supportedVersion.name = value.toString();
-                } else {
-                    @SuppressWarnings("unchecked")
-                    Map<String, String> versionMap = (Map<String, String>) value;
-                    supportedVersion.name = versionMap.get("name");
-                    if (versionMap.containsKey("refDocUrl")) {
-                        supportedVersion.refDocUrl = versionMap.get("refDocUrl");
-                    }
-                    if (versionMap.containsKey("apiDocUrl")) {
-                        supportedVersion.apiDocUrl = versionMap.get("apiDocUrl");
-                    }
-                    if (versionMap.containsKey("groupId")) {
-                        supportedVersion.groupId = versionMap.get("groupId");
-                    }
-                    if (versionMap.containsKey("artifactId")) {
-                        supportedVersion.artifactId = versionMap.get("artifactId");
-                    }
-                }
-                versions.add(supportedVersion);
+                versions.add(parseSupportedVersion(projectData, value));
             }
         }
+        Collections.sort(versions);
         return versions;
     }
 
-    private void orderVersions(List<SupportedVersion> supportedVersions) {
-        Collections.sort(supportedVersions, new Comparator<SupportedVersion>() {
-            @Override
-            public int compare(SupportedVersion v1, SupportedVersion v2) {
-                return v2.name.compareTo(v1.name);
-            }
-        });
+    @SuppressWarnings("unchecked")
+    private SupportedVersion parseSupportedVersion(Map<String, Object> projectData, Object value) {
+        if (value instanceof String) {
+            return new SupportedVersion(value.toString(), projectData);
+        }
+        Map<String, Object> versonData = (Map<String, Object>) value;
+        return new SupportedVersion((String) versonData.get("name"), projectData, versonData);
     }
 
-    private List<ProjectRelease> buildProjectVersions(
-            List<SupportedVersion> supportedVersions) {
+    private List<ProjectRelease> buildProjectReleases(
+            List<SupportedVersion> orderedSupportedVersions) {
+        SupportedVersion currentVersion = getCurrentVersion(orderedSupportedVersions);
         List<ProjectRelease> projectReleases = new ArrayList<>();
-        String currentVersion = null;
-        for (SupportedVersion supportedVersion : supportedVersions) {
-            this.variables.put("version", supportedVersion.name);
-            String refDocUrl = buildDocUrl(supportedVersion.refDocUrl, "refDocUrl");
-            String apiDocUrl = buildDocUrl(supportedVersion.apiDocUrl, "apiDocUrl");
-            this.variables.remove("version");
-            String groupId = supportedVersion.groupId;
-            if (groupId.isEmpty()) {
-                groupId = this.variables.get("groupId");
-            }
-            String artifactId = supportedVersion.artifactId;
-
-            boolean isCurrent = false;
-            ProjectRelease.ReleaseStatus releaseStatus = getVersionRelease(supportedVersion.name);
-            if (currentVersion == null && releaseStatus == GENERAL_AVAILABILITY) {
-                currentVersion = supportedVersion.name;
-                isCurrent = true;
-            }
-            ProjectRelease release = new ProjectRelease(supportedVersion.name, releaseStatus, isCurrent,
-                    refDocUrl, apiDocUrl, groupId, artifactId);
-            projectReleases.add(release);
+        for (SupportedVersion supportedVersion : orderedSupportedVersions) {
+            projectReleases.add(supportedVersion.asProjectRelease(currentVersion));
         }
+        Collections.sort(projectReleases, PROJECT_RELEASE_COMPARATOR);
         return projectReleases;
     }
 
-    private String buildDocUrl(String docPath, String defaultUrlKey) {
-        if (docPath.equals("NONE")) {
-            return "";
+    private SupportedVersion getCurrentVersion(
+            List<SupportedVersion> orderedSupportedVersions) {
+        for (SupportedVersion version : orderedSupportedVersions) {
+            if(version.releaseStatus == ReleaseStatus.GENERAL_AVAILABILITY ){
+                return version;
+            }
         }
-
-        if (docPath.isEmpty()) {
-            docPath = this.defaultUrls.get(defaultUrlKey);
-        }
-
-        String docUrl = new UriTemplate(docPath).expand(this.variables).toString();
-        if (!docUrl.startsWith("http")) {
-            return this.variables.get("docsBaseUrl") + docUrl;
-        }
-        return docUrl;
+        return null;
     }
 
-    private ProjectRelease.ReleaseStatus getVersionRelease(String versionName) {
-        boolean isPreRelease = versionName.matches("[0-9.]+(M|RC)\\d+");
-        boolean isSnapshot = versionName.matches("[0-9.].*(SNAPSHOT)");
-        if (isPreRelease) {
-            return PRERELEASE;
-        } else if (isSnapshot) {
-            return SNAPSHOT;
-        } else {
-            return GENERAL_AVAILABILITY;
+
+    private class SupportedVersion implements Comparable<SupportedVersion> {
+
+        private final String name;
+        private final String refDocUrl;
+        private final String apiDocUrl;
+        private final String groupId;
+        private final String artifactId;
+        private final ReleaseStatus releaseStatus;
+        private final Map<String, String> variables;
+
+        public SupportedVersion(String name, Map<String, Object> projectData) {
+            this(name, projectData, Collections.<String, Object> emptyMap());
         }
+
+        public SupportedVersion(String name, Map<String, Object> projectData, Map<String, Object> versionData) {
+            this.name = name;
+            this.refDocUrl = getValue(projectData, versionData, "refDocUrl", "");
+            this.apiDocUrl = getValue(projectData, versionData, "apiDocUrl", "");
+            this.groupId = getValue(projectData, versionData, "groupId", "");
+            this.artifactId = getValue(projectData, versionData, "artifactId", (String) projectData.get("id"));
+            this.releaseStatus = ReleaseStatus.getFromVersion(name);
+            this.variables = new HashMap<String, String>(ProjectVersionsParser.this.variables);
+            this.variables.put("version", name);
+        }
+
+        private String getValue(Map<String, Object> projectData, Map<String, Object> versionData,
+                String key, String defaultValue) {
+            if(versionData.containsKey(key)) {
+                return (String) versionData.get(key);
+            }
+            if(projectData.containsKey(key)) {
+                return (String) projectData.get(key);
+            }
+            return defaultValue;
+        }
+
+        public ProjectRelease asProjectRelease(SupportedVersion currentVersion) {
+            return new ProjectRelease(this.name, this.releaseStatus, this == currentVersion,
+                    buildDocUrl(this.refDocUrl, "refDocUrl"),
+                    buildDocUrl(this.apiDocUrl, "apiDocUrl"),
+                    groupId.isEmpty() ? this.variables.get("groupId") : groupId,
+                    artifactId);
+        }
+
+        private String buildDocUrl(String docPath, String defaultUrlKey) {
+            if (docPath.equals("NONE")) {
+                return "";
+            }
+            if (docPath.isEmpty()) {
+                docPath = ProjectVersionsParser.this.defaultUrls.get(defaultUrlKey);
+            }
+            String docUrl = new UriTemplate(docPath).expand(this.variables).toString();
+            if (!docUrl.startsWith("http")) {
+                return this.variables.get("docsBaseUrl") + docUrl;
+            }
+            return docUrl;
+        }
+
+        @Override
+        public int compareTo(SupportedVersion o) {
+            return o.name.compareTo(this.name);
+        }
+
     }
+
 }

@@ -35,6 +35,7 @@ public class SearchController {
         Pageable pageable = PageableFactory.forSearch(page);
         SearchResults searchResults = searchService.search(searchForm.getQ(), pageable, searchForm.getFilters());
         Page<SearchResult> entries = searchResults.getPage();
+        model.addAttribute("totalResultsCount", entries.getTotalElements());
         model.addAttribute("results", entries.getContent());
         model.addAttribute("paginationInfo", new PaginationInfo(entries));
         SearchFacet root = new SpringFacetsBuilder(searchResults.getFacets()).build();
