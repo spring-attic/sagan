@@ -6,7 +6,7 @@
   min-width: 1060px;
 }
 
-.billboard--wrapper, .key-feature--wrapper, .offset-feature--container, .support--wrapper, footer, .search-dropdown--container, .team-map--wrapper, .billboard-bg {
+.billboard--wrapper, .key-feature--wrapper, .offset-feature--container, .support--wrapper, footer, .search-dropdown--container, .team-map--wrapper, .billboard-bg, .platform--wrapper {
   min-width: 1100px;
 }
 
@@ -275,7 +275,6 @@ body {
 .body--container {
   margin-top: 100px;
   margin-bottom: 100px;
-  min-height: 925px;
 }
 
 .row--container {
@@ -887,13 +886,6 @@ input.floating-input:focus {
   padding: 20px;
 }
 
-.billboard--wrapper {
-  position: absolute;
-  top: 74px;
-  left: 0;
-  right: 0;
-  width: 100%;
-}
 .billboard--wrapper .billboard--container {
   position: absolute;
   z-index: 600;
@@ -939,8 +931,7 @@ input.floating-input:focus {
 }
 
 .billboard-body--wrapper {
-  margin-top: 326px;
-  padding: 100px 0;
+  padding: 0 0 100px;
 }
 
 .admin-profile--form .admin-profile--field {

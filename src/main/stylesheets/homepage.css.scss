@@ -56,11 +56,7 @@ $icon-sprite: url("../img/iconsprite.png");
 }
 
 .homepage--body {
-  padding: 0;
-  margin: 400px 0 0;
-  position: absolute;
-  left: 0;
-  right: 0;
+  margin-bottom: -200px;
   .platform--wrapper {
     background: url("../img/platform-bg.png") $black-brown 50% 0 no-repeat;
     height: 438px;
@@ -210,10 +206,6 @@ $icon-sprite: url("../img/iconsprite.png");
     left: 0;
     right: 0;
   }
-}
-
-.homepage-fix {
-  margin-top: 2510px;
 }
 
 .tool-suite {
