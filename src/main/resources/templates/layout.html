@@ -62,8 +62,9 @@
       <div class="navbar-inner">
         <div class="container-fluid">
           <div class="spring-logo--container">
-            <div class="logo-bg"></div>
-            <a class="spring-logo" th:href="@{/}" href="/"></a>
+            <a class="spring-logo" th:href="@{/}" href="/">
+              <div class="icon-spring-logo"></div>
+            </a>
           </div>
           <ul class="nav pull-right">
             <li th:class="${beans.uih.navClass(navSection?:'','docs')}">
