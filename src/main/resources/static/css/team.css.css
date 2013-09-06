@@ -1,9 +1,3 @@
-.team-map--wrapper {
-  position: absolute;
-  top: 74px;
-  left: 0;
-  right: 0;
-}
 .team-map--wrapper #map {
   height: 425px;
   border-bottom: 1px solid #34302d;
