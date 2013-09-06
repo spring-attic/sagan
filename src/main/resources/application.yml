@@ -12,6 +12,9 @@ info:
     version: ${project.version}
   spring:
     profiles: ${spring.profiles.active:default}
+  app:
+    name: ${vcap.application.name:sagan}:${vcap.application.instance_index:*}
+    start: ${vcap.application.start:N/A}
 
 spring:
   thymeleaf:
