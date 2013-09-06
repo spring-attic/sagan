@@ -1347,3 +1347,7 @@ form.lpeRegForm .mktInput {
 .usage-lists.not-okay [class^="icon-"] {
   color: #BA4160;
 }
+
+.min-height {
+  min-height: 900px;
+}
