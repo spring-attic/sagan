@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 
+import static org.junit.Assert.*;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -30,7 +32,7 @@ public class ProjectMetadataYamlParserTests {
     @Test
     public void categoriesHaveListOfProjects() throws IOException {
         List<Project> active = service.getProjectsForCategory("active");
-        assertThat(active.size(), equalTo(16));
+        assertThat(active.size(), equalTo(17));
     }
 
     @Test
@@ -85,14 +87,6 @@ public class ProjectMetadataYamlParserTests {
         assertThat(versionList.get(4).getVersion(), equalTo("3.1.4.RELEASE"));
         assertThat(versionList.get(4).isGeneralAvailability(), equalTo(true));
         assertThat(versionList.get(4).isCurrent(), equalTo(false));
-    }
-
-    @Test
-    public void projectHasNoSupportedVersions() throws IOException {
-        List<Project> active = service.getProjectsForCategory("other");
-        assertThat(active.size(), equalTo(1));
-        Project project = active.get(0);
-        assertThat(project.getProjectReleases().size(), equalTo(0));
     }
 
     @Test
@@ -265,5 +259,14 @@ public class ProjectMetadataYamlParserTests {
         Project project =  service.getProjectsForCategory("active").get(15);
         assertThat(project.isAggregator(), equalTo(true));
         assertThat(project.getId(), equalTo("aggregator-project"));
+    }
+
+    @Test
+    public void projectWithNoGaReleaseHasCorrectOrdering() throws Exception {
+        Project project =  service.getProjectsForCategory("active").get(16);
+        assertThat(project.getProjectReleases().get(0).isCurrent(), equalTo(false));
+        assertThat(project.getProjectReleases().get(1).isCurrent(), equalTo(false));
+        assertThat(project.getProjectReleases().get(2).isCurrent(), equalTo(false));
+        assertThat(project.getProjectReleases().get(0).getVersion(), equalTo("4.0.0.BUILD-SNAPSHOT"));
     }
 }

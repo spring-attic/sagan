@@ -12,6 +12,9 @@ info:
     version: ${project.version}
   spring:
     profiles: ${spring.profiles.active:default}
+  app:
+    name: ${vcap.application.name:sagan}:${vcap.application.instance_index:*}
+    start: ${vcap.application.start:N/A}
 
 spring:
   thymeleaf:
@@ -25,6 +28,7 @@ spring:
 security:
   basic:
     enabled: false
+  require_ssl: false
   ignored: 
     - /bootstrap/**
     - /bootstrap-datetimepicker/**
@@ -78,6 +82,13 @@ search:
     delay: 0
 server:
   port: 9000
+
+---
+
+spring:
+  profiles: development,staging,performance,production
+security:
+  require_ssl: true
 
 ---
 

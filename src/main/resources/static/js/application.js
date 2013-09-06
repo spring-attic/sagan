@@ -65,11 +65,6 @@ $(function () {
     var seachStart = searchQuery.search("q=");
     var searchString = searchQuery.substr(seachStart + 2);
 
-    $(".js-search-input").val(searchString);
-
-    //PREPOPULATES TITLE WITH SEARCH QUERY
-    $(".js-search-results--title").html(searchString);
-
     //CLOSES SEARCH DROPDOWN
     $(".js-search-input-close").click(function () {
       $(".js-search-dropdown").removeClass("js-show no-animation");

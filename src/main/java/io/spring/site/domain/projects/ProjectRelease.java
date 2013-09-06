@@ -3,12 +3,27 @@ package io.spring.site.domain.projects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.util.Assert;
+
 public class ProjectRelease implements Comparable<ProjectRelease> {
 
     private static final Pattern VERSION_DISPLAY_REGEX = Pattern.compile("([0-9.]+)\\.(RC\\d+|M\\d+)?");
+    private static final Pattern PREREALSE_PATTERN = Pattern.compile("[0-9.]+(M|RC)\\d+");
+    private static final Pattern SNAPSHOT_PATTERN = Pattern.compile("[0-9.].*(SNAPSHOT)");
 
     public enum ReleaseStatus {
-        PRERELEASE, SNAPSHOT, GENERAL_AVAILABILITY;
+        SNAPSHOT, PRERELEASE, GENERAL_AVAILABILITY;
+
+        public static ReleaseStatus getFromVersion(String version) {
+            Assert.notNull(version, "Version must not be null");
+            if(PREREALSE_PATTERN.matcher(version).matches()) {
+                return PRERELEASE;
+            }
+            if(SNAPSHOT_PATTERN.matcher(version).matches()) {
+                return SNAPSHOT;
+            }
+            return GENERAL_AVAILABILITY;
+        }
     }
 
     private final String versionName;
@@ -48,21 +63,30 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         return this.releaseStatus == ReleaseStatus.SNAPSHOT;
     }
 
+    public ReleaseStatus getReleaseStatus() {
+        return releaseStatus;
+    }
+
     public String getVersion() {
         return this.versionName;
     }
 
     public String getVersionDisplayName() {
+        return getVersionDisplayName(true);
+    }
+
+    public String getVersionDisplayName(boolean includePreReleaseDescription) {
         Matcher matcher = VERSION_DISPLAY_REGEX.matcher(versionName);
         matcher.find();
         String versionNumber = matcher.group(1);
         String preReleaseDescription = matcher.group(2);
 
-        if (preReleaseDescription != null) {
+        if (preReleaseDescription != null && includePreReleaseDescription) {
             return versionNumber + " " + preReleaseDescription;
         }
         return versionNumber;
     }
+
 
     public String getRefDocUrl() {
         return this.refDocUrl;
