@@ -397,9 +397,19 @@
   font-size: 12px;
   line-height: 12px;
   border-bottom: 1px solid #cccccc;
+  font-family: "Montserrat", sans-serif;
 }
 .tool-archive--table td:last-child {
   color: #6c635d;
+}
+.tool-archive--table td:first-child {
+  border-left: 1px solid #cccccc;
+}
+.tool-archive--table td:last-child {
+  border-right: 1px solid #cccccc;
+}
+.tool-archive--table tr:last-child {
+  border-bottom: 1px solid #cccccc;
 }
 .tool-archive--table a {
   color: #5fa134;

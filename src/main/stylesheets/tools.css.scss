@@ -427,9 +427,21 @@ $icon-sprite: url("../img/iconsprite.png");
     font-size: 12px;
     line-height: 12px;
     border-bottom: 1px solid #ccc;
+    font-family: $secondary-font-family;
   }
   td:last-child {
     color: #6c635d;
+  }
+  td:first-child {
+    border-left: 1px solid #ccc;
+  }
+  td:last-child {
+    border-right: 1px solid #ccc;
+
+  }
+  tr:last-child {
+    border-bottom: 1px solid #ccc;
+
   }
   a {
     color: $link-green;
