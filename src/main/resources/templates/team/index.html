@@ -16,7 +16,7 @@
 </head>
 <body>
   <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container">
+  <div layout:fragment="full-width--layout">
     <div class="billboard--wrapper js-team-map--wrapper">
       <div class="billboard--container center-text js-team-map--container">
         <div class="container-fluid">
@@ -35,6 +35,8 @@
       </div>
       <div id="map" class="billboard-bg"></div>
     </div>
+  </div>
+  <div layout:fragment="content">
     <div class="team-members--wrapper">
       <div class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
         <a th:href="@{'/team/' + ${profile.username}}" class="team-member--avatar">

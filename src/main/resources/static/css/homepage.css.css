@@ -33,11 +33,7 @@
 }
 
 .homepage--body {
-  padding: 0;
-  margin: 400px 0 0;
-  position: absolute;
-  left: 0;
-  right: 0;
+  margin-bottom: -200px;
 }
 .homepage--body .platform--wrapper {
   background: url("../img/platform-bg.png") #34302d 50% 0 no-repeat;
@@ -180,10 +176,6 @@
   position: absolute;
   left: 0;
   right: 0;
-}
-
-.homepage-fix {
-  margin-top: 2510px;
 }
 
 .tool-suite {

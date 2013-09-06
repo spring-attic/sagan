@@ -23,7 +23,7 @@ $icon-sprite: url("../img/iconsprite.png");
 .navbar-inner {
   min-width: 1060px;
 }
-.billboard--wrapper, .key-feature--wrapper, .offset-feature--container, .support--wrapper, footer, .search-dropdown--container, .team-map--wrapper, .billboard-bg {
+.billboard--wrapper, .key-feature--wrapper, .offset-feature--container, .support--wrapper, footer, .search-dropdown--container, .team-map--wrapper, .billboard-bg, .platform--wrapper{
   min-width: 1100px;
 }
 
@@ -308,7 +308,6 @@ body {
 .body--container {
   margin-top: 100px;
   margin-bottom: 100px;
-  min-height: 925px;
 }
 
 .row--container {
@@ -960,11 +959,11 @@ input.floating-input {
 }
 
 .billboard--wrapper {
-  position: absolute;
-  top: 74px;
-  left: 0;
-  right: 0;
-  width: 100%;
+  // position: absolute;
+  // top: 74px;
+  // left: 0;
+  // right: 0;
+  // width: 100%;
   .billboard--container {
     position: absolute;
     z-index: 600;
@@ -1012,8 +1011,8 @@ input.floating-input {
   }
 }
 .billboard-body--wrapper {
-  margin-top: 326px;
-  padding: 100px 0;
+  // margin-top: 326px;
+  padding: 0 0 100px;
 }
 
 

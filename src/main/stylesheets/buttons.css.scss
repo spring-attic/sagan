@@ -1,4 +1,4 @@
-$off-white: #f1f1f1;
+$off-white: #eee;
 $black-green: #3A3C2F;
 $lime: #8CC63F;
 $leaf: #4E681E;
@@ -28,11 +28,11 @@ $icon-sprite: url("../img/iconsprite.png");
     border: 2px solid $green;
     padding: 21px 60px;
     text-shadow: none;
-    transition: all 0.15s;
-    -webkit-transition: all 0.15s;
-    -moz-transition: all 0.15s;
-    -o-transition: all 0.15s;
-    -ms-transition: all 0.15s;
+    transition: border 0.15s;
+    -webkit-transition: border 0.15s;
+    -moz-transition: border 0.15s;
+    -o-transition: border 0.15s;
+    -ms-transition: border 0.15s;
     &.compact{
       padding: 6px 12px;
       font-size: 12px;
@@ -67,33 +67,16 @@ $icon-sprite: url("../img/iconsprite.png");
       }
     }
     &:hover {
-      background-color: $green;
+      border-color: $black-brown;
       box-shadow: none;
       text-decoration: none;
-      border-color: darken($green, 10%);
     }
     &:active {
-      background-color: darken($green, 25%);
-      border-color: darken($green, 30%);
+      box-shadow: inset 0 3px 6px darken($black-brown, 15%);
+      border-color: $black-brown;
     }
   }
   &.uppercase {
     text-transform: uppercase;
-  }
-}
-
-.btn-get-started {
-  @extend .btn;
-  @extend .btn.btn-black;
-  @extend .btn.btn-large;
-  @extend .btn.uppercase;
-  font-size: 24px;
-  position: absolute;
-  left: 50%;
-  margin-left: -146px;
-  margin-top: -34px;
-  padding: 26px 60px;
-  &:hover {
-    color: $off-white;
   }
 }
