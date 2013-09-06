@@ -351,55 +351,6 @@ projects:
 
 
   # ========================
-  # Other Spring-Related Projects
-  # ========================
-  other:
-    # ----------------------
-    # Spring Loaded
-    # ----------------------
-    - id: spring-loaded #TODO
-      name: Spring Loaded
-      lead: aclement
-      siteUrl: NONE
-      refDocUrl: /spring-loaded/docs/{version}/reference/html
-      apiDocUrl: /spring-loaded/docs/{version}/api/
-      supportedVersions:
-        - 9.9.9.RELEASE
-
-    - id: spring-ide #TODO
-      name: Spring IDE
-      siteUrl: NONE
-      refDocUrl: /spring-ide/docs/{version}/reference/html
-      apiDocUrl: /spring-ide/docs/{version}/api/
-      supportedVersions:
-        - 9.9.9.RELEASE
-
-    - id: spring-insight-plugins #TODO
-      name: Spring Insight Plugins
-      siteUrl: NONE
-      refDocUrl: /spring-insight-plugins/docs/{version}/reference/html
-      apiDocUrl: /spring-insight-plugins/docs/{version}/api/
-      supportedVersions:
-        - 9.9.9.RELEASE
-
-    - id: spring-migration-analyzer #TODO
-      name: Spring Migration Analyzer
-      siteUrl: NONE
-      supportedVersions:
-      refDocUrl: /spring-migration-analyzer/docs/{version}/reference/html
-      apiDocUrl: /spring-migration-analyzer/docs/{version}/api/
-      supportedVersions:
-        - 9.9.9.RELEASE
-
-    - id: spring-python #TODO
-      name: Spring Python
-      siteUrl: NONE
-      refDocUrl: /spring-python/docs/{version}/reference/html
-      apiDocUrl: /spring-python/docs/{version}/api/
-      supportedVersions:
-        - 9.9.9.RELEASE
-
-  # ========================
   # Incubator
   # ========================
   incubator:

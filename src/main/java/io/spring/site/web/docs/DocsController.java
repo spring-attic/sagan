@@ -31,7 +31,6 @@ public class DocsController {
         model.addAttribute("activeProjects", nonAggregatorsForCategory("active"));
         model.addAttribute("atticProjects", nonAggregatorsForCategory("attic"));
         model.addAttribute("incubatorProjects", nonAggregatorsForCategory("incubator"));
-        model.addAttribute("otherProjects", nonAggregatorsForCategory("other"));
         return "docs/index";
     }
 

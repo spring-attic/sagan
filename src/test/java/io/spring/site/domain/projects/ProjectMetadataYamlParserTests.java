@@ -90,14 +90,6 @@ public class ProjectMetadataYamlParserTests {
     }
 
     @Test
-    public void projectHasNoSupportedVersions() throws IOException {
-        List<Project> active = service.getProjectsForCategory("other");
-        assertThat(active.size(), equalTo(1));
-        Project project = active.get(0);
-        assertThat(project.getProjectReleases().size(), equalTo(0));
-    }
-
-    @Test
     public void getSupportedReferenceDocumentVersions() {
         List<ProjectRelease> docVersions = service.getProjectsForCategory("active").get(0).getProjectReleases();
         assertThat(docVersions.get(0).getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/4.0.0.M1/spring-framework-reference/html/"));
