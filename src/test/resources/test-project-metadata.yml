@@ -157,6 +157,18 @@ projects:
         - 3.1.1.RELEASE
       aggregator: true
 
+    - id: project-with-no-ga-release
+      name: Spring Framework
+      siteUrl: "{ghPagesBaseUrl}/foo/{id}/"
+      repoUrl: "{githubOrgBaseUrl}/foo/{id}/"
+      refDocUrl: "{ghPagesBaseUrl}/docs/{id}/{version}/html/"
+      apiDocUrl: /spring/docs/{id}/{version}/javadoc-api/
+      artifactId: overridden-artifact-id
+      supportedVersions:
+        - 4.0.0.BUILD-SNAPSHOT
+        - 4.0.0.M1
+        - 4.0.0.M2
+
   other:
     - id: spring-security
       name: Spring Security
