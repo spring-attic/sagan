@@ -563,6 +563,9 @@ input.floating-input {
 
 .index-page--title {
   line-height: 24px;
+  &.top-margin {
+    margin-top: 60px;
+  }
 }
 
 .index-page--subtitle {
@@ -1449,3 +1452,70 @@ form.lpeRegForm .mktInput {
 .min-height {
   min-height: 900px;
 }
+
+.platform-index--header {
+  padding: 100px 0;
+  position: relative;
+  &:after {
+    content: "";
+    opacity: 0.1;
+    background: url("../img/platform-bg.png") 100% 0 no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 55%;
+    z-index: -1;
+  }
+  .index-page--subtitle {
+    margin-bottom: 0;
+    padding-right: 20px;
+  }
+
+  .platform-watermark--large {
+    background: url("../img/spring-platform-watermark-large.png") 50% 0 no-repeat;
+    width: 100%;
+    height: 123px;
+  }
+}
+
+.platform-stack--wrapper {
+  background: url("../img/platform-diagram-noise.png") $black-brown;
+  box-shadow: inset 0 15px 30px darken($black-brown, 10%), inset 0 -15px 30px darken($black-brown, 10%);
+  text-align: center;
+  padding: 60px 0;
+}
+
+.platform-project {
+  display: inline-block;
+  clear: both;
+  .project--container {
+    float: left;
+    padding: 20px 10px;
+    height: 300px;
+    box-sizing: border-box;
+    width: 24.153%;
+    margin: 40px 1% 40px 0;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  .project-icon {
+    font-size: 98px;
+    margin-bottom: 20px;
+  }
+  .project--title {
+    margin-bottom: 10px;
+    text-transform: none;
+  }
+  .description {
+    width: 48.306%;
+    float: left;
+    margin-top: 20px;
+    margin-right: 1%;
+    padding-right: 1%;
+  }
+}
+
+

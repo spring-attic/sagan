@@ -6,159 +6,109 @@
   </head>
   <body>
     <div layout:fragment="header-container"></div>
-    <div layout:fragment="full-width--layout">
-      <div class="billboard--wrapper">
-        <div class="billboard--container center-text">
-          <div class="container-fluid">
-            <div class="billboard--title">
-              Work with Us
-            </div>
-            <div class="billboard--sub-title--container">
-              <div class="billboard--sub-title">
-                Join the Spring team! We have a world-class benefits aimed at helping you and your family maintain
-              </div>
-              <div class="billboard--sub-title">
-                a healthy lifestyle, achieve a work-life balance, manage your finances, plan for retirement, and live a
-              </div>
-              <div class="billboard--sub-title">
-                less stressful life. And first class breakfast and snacks!
-              </div>
-            </div>
+    <div layout:fragment="top-content">
+      <div class="platform-index--header">
+        <div class="row-fluid ">
+          <div class="span6">
+            <h1 class="index-page--title">
+              The Spring IO Platform
+            </h1>
+            <p class="index-page--subtitle">Spring IO brings together the core Spring APIs into a cohesive and versioned foundational platform for Spring applications. On top of this foundation it also provides domain-specific execution environments for a variety of enterprise workloads.</p>
+          </div>
+          <div class="span6">
+            <div class="platform-watermark--large"></div>
           </div>
         </div>
-        <div class="billboard-bg jobs--bg"></div>
       </div>
     </div>
-    <div layout:fragment="content" class="container">
-      <div class="billboard-body--wrapper">
-        <div class="row-fluid">
-          <h1 class="index-page--title">
-            You'll love working at Spring
-          </h1>
-          <p class="index-page--subtitle jobs-subtitle">
-            Aenean lacinia bibendum nulla sed consectetur. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-            <br>
-            <br>
-            Donec sed odio dui. Vestibulum id ligula porta felis euismod semper. Donec ullamcorper nulla non metus auctor fringilla. Curabitur blandit tempus porttitor. Maecenas faucibus mollis interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          </p>
+    <div layout:fragment="full-width--layout">
+      <div class="platform-stack--wrapper">
+        <img src="img/platform-stack.png">
+      </div>
+    </div>
+    <div layout:fragment="content">
+      <h1 class="index-page--title">Spring IO Foundation</h1>
+      <p class="index-page--subtitle">Spring IO Foundation is a cohesive set of APIs and embeddable runtime components (Spring modules) enabling you to build applications addressing a wide range of enterprise requirements.  All of the major workload types are represented: enterprise integration, batch processing, big data processing, web applications (including WebSocket support), and the creation of server-side APIs in support of single-page apps, mobile clients, and services. What all of these workload types have in common is a need to interact with data. </p>
+      <h2>Core</h2>
+      <p>At the core of the Spring IO Foundation layer and common across all workload types we find the core framework itself, plus Spring’s security modules. The Groovy language is also part of the foundation, as it is increasingly integrated with the Spring stack. Finally, an emerging component at this layer is Reactor - a foundation for asynchronous processing of event and data-driven applications.</p>
+      <div class="platform-project">
+        <a href="http://projects.spring.io/spring-framework" class="project--container project--container--link">
+          <div class="project-icon icon-spring-framework"></div>
+          <div class="project--title">Framework</div>
+          <p class="project--description">Provides core support for dependency injection, transaction management, web apps, data access, and messaging.</p>
+        </a>
+        <a href="http://projects.spring.io/spring-security" class="project--container project--container--link">
+          <div class="project-icon icon-spring-security"></div>
+          <div class="project--title">Security</div>
+          <p class="project--description">A powerful and highly customizable authentication and access-control framework.</p>
+        </a>
+        <a href="http://groovy.codehaus.org" class="project--container project--container--link">
+          <img class="project--logo small" src="img/platform-groovy.png">
+          <div class="project--title">Groovy</div>
+          <p class="project--description">A powerful and highly customizable authentication and access-control framework.</p>
+        </a>
+        <a href="https://github.com/reactor/reactor" class="project--container project--container--link">
+          <img class="project--logo small" src="img/platform-reactor.png">
+          <div class="project--title">Reactor</div>
+          <p class="project--description">A powerful and highly customizable authentication and access-control framework.</p>
+        </a>
+      </div>
+      <div class="platform-project">
+        <div class="description">
+          <h2>Data</h2>
+          <p>The Spring IO Foundation provides comprehensive support for the rich variety of data found in the modern enterprise: both traditional relational (SQL) and NewSQL stores, non-relational stores, and of course the Hadoop platform.</p>
         </div>
-        <div class="row-fluid">
-          <h1 class="index-page--title">Open Positions</h1>
-        </div>
-        <div class="row-fluid">
-          <div class="span4">
-            <div class="job-category--container">
-              <div class="job-category--title">
-                Engineering
-              </div>
-              <div class="job--container">
-                <a href="#" class="title">
-                  Principal Software Engineer - Spring Framework
-                </a>
-                <div class="location">
-                  San Francisco, CA
-                </div>
-              </div>
-              <div class="job--container">
-                <a href="#" class="title">
-                  Web Developer
-                </a>
-                <div class="location">
-                  San Francisco, CA
-                </div>
-              </div>
-              <div class="job--container">
-                <a href="#" class="title">
-                  Principal Software Platform Engineer - OS Security, Python
-                </a>
-                <div class="location">
-                  San Francisco, CA
-                </div>
-              </div>
-              <div class="job--container">
-                <a href="#" class="title">
-                  Software Engineer
-                </a>
-                <div class="location">
-                  Austin, TX
-                </div>
-              </div>
-              <div class="job--container">
-                <a href="#" class="title">
-                  Software Engineer
-                </a>
-                <div class="location">
-                  San Mateo, CA
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="span8">
-            <div class="job-post--container">
-              <h1 class="job-post--title">
-                Principle Software Engineer - Spring Framework
-              </h1>
-              <div class="job-post--location">
-                San Francisco
-              </div>
-              <div class="job-post--details">
-                <p>The Spring engineering team is looking for an exceptional and passionate developer to contribute to the Spring Framework with a primary focus on web development. In this role, you will be a core member of the Spring JS team, which is responsible for ensuring Spring is the best platform for server-side applications no matter the choice of client-side technologies. We develop JavaScript libraries within the cujoJS project. We believe deeply in the Open Web, utilizing open technologies, contributing to open source projects and participating in creating open standards.</p>
-                <p>Requirements:</p>
-                <ul>
-                  <li>BS/Masters in Computer Science or equivalent work experience</li>
-                  <li>Strong background in web application development.</li>
-                  <li>8+ years of software development experience.</li>
-                  <li>Excellent programming skills in Java and JavaScript.</li>
-                  <li>Experience with front end technologies such as HTML and CSS</li>
-                  <li>Experience working with and contributing to open-source software projects.</li>
-                  <li>Strong communication skills and ability to collaborate remotely.</li>
-                  <li>Mentoring/coaching skills</li>
-                  <li>Presentation skills</li>
-                </ul>
-                <p>Desired Skills:</p>
-                <ul>
-                  <li>Experience with the Spring Framework, including Spring MVC</li>
-                  <li>Familiarity with Inversion of Control, Dependency Injection, Aspect Oriented Programming and Test Driven Development</li>
-                  <li>Ability to reason about highly asynchronous code</li>
-                  <li>Familiarity with cujoJS</li>
-                  <li>Familiarity with other client side libraries, including: Dojo, jQuery, Sencha/Ext, Backbone.js or AngularJS, is a plus</li>
-                </ul>
-                <a href="#" class="apply-now-link">Apply Now</a>
-              </div>
-            </div>
-            <div class="job-post--container">
-              <h1 class="job-post--title">
-                Web Developer
-              </h1>
-              <div class="job-post--location">
-                San Francisco
-              </div>
-              <div class="job-post--details">
-                <p>The Spring engineering team is looking for an exceptional and passionate developer to contribute to the Spring Framework with a primary focus on web development. In this role, you will be a core member of the Spring JS team, which is responsible for ensuring Spring is the best platform for server-side applications no matter the choice of client-side technologies. We develop JavaScript libraries within the cujoJS project. We believe deeply in the Open Web, utilizing open technologies, contributing to open source projects and participating in creating open standards.</p>
-                <p>Requirements:</p>
-                <ul>
-                  <li>BS/Masters in Computer Science or equivalent work experience</li>
-                  <li>Strong background in web application development.</li>
-                  <li>8+ years of software development experience.</li>
-                  <li>Excellent programming skills in Java and JavaScript.</li>
-                  <li>Experience with front end technologies such as HTML and CSS</li>
-                  <li>Experience working with and contributing to open-source software projects.</li>
-                  <li>Strong communication skills and ability to collaborate remotely.</li>
-                  <li>Mentoring/coaching skills</li>
-                  <li>Presentation skills</li>
-                </ul>
-                <p>Desired Skills:</p>
-                <ul>
-                  <li>Experience with the Spring Framework, including Spring MVC</li>
-                  <li>Familiarity with Inversion of Control, Dependency Injection, Aspect Oriented Programming and Test Driven Development</li>
-                  <li>Ability to reason about highly asynchronous code</li>
-                  <li>Familiarity with cujoJS</li>
-                  <li>Familiarity with other client side libraries, including: Dojo, jQuery, Sencha/Ext, Backbone.js or AngularJS, is a plus</li>
-                </ul>
-                <a href="#" class="apply-now-link">Apply Now</a>
-              </div>
-            </div>
-        </div>
+        <a href="http://projects.spring.io/spring-data/" class="project--container project--container--link auto-height">
+          <img class="project--logo small" src="img/platform-relational-db.png">
+          <div class="project--title">Relational</div>
+        </a>
+        <a href="http://projects.spring.io/spring-data/" class="project--container project--container--link auto-height">
+          <img class="project--logo small" src="img/platform-nonrelational-db.png">
+          <div class="project--title">Non-Relational</div>
+        </a>
+      </div>
+      <h2>Spring Powered Workloads</h2>
+      <p>Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla. </p>
+      <div class="platform-project">
+        <a href="http://projects.spring.io/spring-integration/" class="project--container project--container--link short-fixed">
+          <img class="project--logo small" src="img/platform-spring-integration.png">
+          <div class="project--title">Integration</div>
+          <p class="project--description">Channels, Adapters, Filters, Transformers</p>
+        </a>
+        <a href="http://projects.spring.io/spring-batch/" class="project--container project--container--link short-fixed">
+          <div class="project-icon icon-spring-batch"></div>
+          <div class="project--title">Batch</div>
+          <p class="project--description">Jobs, Steps, Readers, Writers</p>
+        </a>
+        <a href="http://projects.spring.io/spring-data/" class="project--container project--container--link short-fixed">
+          <img class="project--logo small" src="img/platform-big-data.png">
+          <div class="project--title">Big Data</div>
+          <p class="project--description">Ingestion, Exports, Orchestration Hadoop</p>
+        </a>
+        <a href="http://docs.spring.io/spring-ws/sites/2.0/" class="project--container project--container--link short-fixed">
+          <img class="project--logo small" src="img/platform-web.png">
+          <div class="project--title">Web</div>
+          <p class="project--description">Controllers, REST, WebSockets</p>
+        </a>
+      </div>
+      <h1 class="index-page--title top-margin">Spring IO Execution</h1>
+      <p class="index-page--subtitle">Spring IO Execution provides direct execution support (domain-specific runtimes, or DSRs) for applications built on the IO Foundation modules. A DSR can run standalone without requiring deployment to an external container. The first release of Spring IO includes three DSRs: Spring XD, Spring Boot, and Grails.</p>
+      <div class="projects--wrapper">
+        <a href="https://github.com/spring-projects/spring-xd/wiki" class="project--container project--container--link shorter-fixed">
+          <img class="project--logo small" src="img/platform-spring-xd.png">
+          <div class="project--title">Spring XD</div>
+          <p class="project--description">Domain-specific runtime for batch and stream based data-oriented applications</p>
+        </a>
+        <a href="http://projects.spring.io/spring-boot/" class="project--container project--container--link shorter-fixed">
+          <img class="project--logo small" src="img/platform-spring-boot.png">
+          <div class="project--title">Spring Boot</div>
+          <p class="project--description">An opinionated view of Spring and a way to get started writing and running applications as fast as possible.</p>
+        </a>
+        <a href="http://grails.org/" class="project--container project--container--link shorter-fixed">
+          <img class="project--logo small" src="img/platform-grails.png">
+          <div class="project--title">Grails</div>
+          <p class="project--description">Full stack, web application framework for the JVM</p>
+        </a>
       </div>
     </div>
   </body>
