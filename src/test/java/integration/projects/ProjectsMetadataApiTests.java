@@ -73,7 +73,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
 
     private void checkCurrentRelease(List<Object> releases) {
         @SuppressWarnings("unchecked")
-        Map<String, Object> release = (Map<String, Object>) releases.get(1);
+        Map<String, Object> release = (Map<String, Object>) releases.get(0);
         assertThat((String) release.get("version"), equalTo("4.0.0.BUILD-SNAPSHOT"));
         assertThat(
                 (String) release.get("refDocUrl"),
@@ -94,7 +94,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
 
     private void checkMilestone(List<Object> releases) {
         @SuppressWarnings("unchecked")
-        Map<String, Object> release = (Map<String, Object>) releases.get(0);
+        Map<String, Object> release = (Map<String, Object>) releases.get(1);
         assertThat((String) release.get("version"), equalTo("4.0.0.M2"));
         assertThat(
                 (String) release.get("refDocUrl"),
@@ -146,4 +146,5 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         Map<String, Object> map = (Map<String, Object>) release.get("repository");
         return map;
     }
+
 }
