@@ -197,7 +197,9 @@ projects:
       lead: jvalkeal@github # Janne Valkealahti
       sponsor: trisberg
       supportedVersions:
-        - 1.0.1.RC1
+        - 2.0.0.BUILD-SNAPSHOT
+        - 2.0.0.M1
+        - 1.0.1.RELEASE
         - 1.0.0.RELEASE
 
     # ----------------------
