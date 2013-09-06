@@ -257,3 +257,55 @@ a.ci-status {
 .gs-guide-import {
   display: none;
 }
+
+.tutorial-text img {
+  border: 6px solid white;
+  box-shadow: 0 0px 4px #cccccc, 0 1px 0 #cccccc;
+}
+.tutorial-text table {
+  border-color: #808080;
+  text-align: left;
+  margin: 60px 0;
+}
+.tutorial-text table th {
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 15px;
+  border-bottom: 1px solid #cccccc;
+  padding: 0 30px 5px 8px;
+  vertical-align: bottom;
+  font-family: "Montserrat", sans-serif;
+}
+.tutorial-text table th:last-child {
+  padding-right: 8px;
+}
+.tutorial-text table tr:last-child {
+  border-bottom: 1px solid #cccccc;
+}
+.tutorial-text table td {
+  padding: 8px 20px 8px 8px;
+  line-height: 20px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+}
+.tutorial-text table td:last-child {
+  padding-right: 8px;
+  border-right: 1px solid #cccccc;
+}
+.tutorial-text table td:first-child {
+  border-left: 1px solid #cccccc;
+}
+.tutorial-text table tr:nth-child(odd) > td, .tutorial-text table .table-striped tbody > tr:nth-child(odd) > th {
+  background-color: #F9F9F9;
+}
+.tutorial-text article.markdown-body h1 {
+  font-size: 21px;
+  line-height: 28px;
+  font-weight: 400;
+  margin: 30px 0 10px;
+}
+.tutorial-text article.markdown-body h2 {
+  font-family: "Varela Round", sans-serif;
+  font-size: 19px;
+}
