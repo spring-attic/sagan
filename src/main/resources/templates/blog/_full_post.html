@@ -30,8 +30,8 @@
     <div class="blog-comments--wrapper">
       <div class="blog-comments--container">
         <div class="blog-comments--header">
-          Have feedback? Let the team know at <a href="https://twitter.com/intent/tweet?text=@springcentral&url=http://spring.io/blog/TODO">@springcentral</a>. We read every mention.
-            <span class="icon icon-social-twitter pull-right"></span>
+          Have feedback? Let the team know at <a th:href="*{twitterFeedbackUrl}">@springcentral</a>. We read every mention.
+          <a th:href="*{twitterFeedbackUrl}"><span class="icon icon-social-twitter pull-right"></span></a>
         </div>
       </div>
     </div>
