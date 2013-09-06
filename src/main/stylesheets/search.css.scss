@@ -29,6 +29,12 @@ $icon-sprite: url("../img/iconsprite.png");
   }
 }
 
+.search-results--count {
+  color: #888;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
 .search-result--title {
   display: inline-block;
   font-size: 16px;
