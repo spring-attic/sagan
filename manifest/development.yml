@@ -9,12 +9,12 @@ applications:
   domain: cfapps.io
   path: ../target/spring-io-site.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
-- name: sagan-indexer
-  memory: 2G
-  instances: 1
-  env:
-    SPRING_PROFILES_ACTIVE: indexer,development
-  host: sagan-indexer-development
-  domain: cfapps.io
-  path: ../target/spring-io-site.jar
-  buildpack: https://github.com/cloudfoundry/java-buildpack
+#- name: sagan-indexer
+#  memory: 2G
+#  instances: 1
+#  env:
+#    SPRING_PROFILES_ACTIVE: indexer,development
+#  host: sagan-indexer-development
+#  domain: cfapps.io
+#  path: ../target/spring-io-site.jar
+#  buildpack: https://github.com/cloudfoundry/java-buildpack
