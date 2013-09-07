@@ -840,19 +840,15 @@ input.floating-input:focus {
   width: 28.4%;
 }
 .content-container--wrapper .content-container--header .content-container--filter::-webkit-input-placeholder {
-  font-style: italic;
   color: #999;
 }
 .content-container--wrapper .content-container--header .content-container--filter:-moz-placeholder {
-  font-style: italic;
   color: #999;
 }
 .content-container--wrapper .content-container--header .content-container--filter::-moz-placeholder {
-  font-style: italic;
   color: #999;
 }
 .content-container--wrapper .content-container--header .content-container--filter:-ms-input-placeholder {
-  font-style: italic;
   color: #999;
 }
 .content-container--wrapper .content-container--header .header-title {

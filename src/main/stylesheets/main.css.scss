@@ -906,19 +906,15 @@ input.floating-input {
       padding: 8px;
       width: 28.4%;
        &::-webkit-input-placeholder {
-          font-style: italic;
           color: #999;
         }
         &:-moz-placeholder {
-          font-style: italic;
           color: #999;
         }
         &::-moz-placeholder {
-          font-style: italic;
           color: #999;
         }
         &:-ms-input-placeholder {
-          font-style: italic;
           color: #999;
         }
     }
