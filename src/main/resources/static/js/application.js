@@ -284,7 +284,7 @@ var subscribed=getCookie("subscribed");
 
 function setSubscribeCookie()
 {
-  setCookie("subscribed",subscribed,365);
+  setCookie("subscribed",subscribed,1);
 }
 
 function checkCookie()
