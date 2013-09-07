@@ -99,7 +99,7 @@
   margin: 15px 0 20px 25px;
 }
 .blog--container .blog--post ul li, .blog--container .blog--post ol li {
-  padding: 6px 0;
+  padding-bottom: 20px;
   font-size: 15px;
   line-height: 18px;
 }
@@ -109,6 +109,9 @@
 }
 .blog--container .blog--post pre {
   margin: 20px 0;
+}
+.blog--container .blog--post strong {
+  font-family: "Montserrat", sans-serif;
 }
 .blog--container .blog--post blockquote {
   margin: 20px 0;

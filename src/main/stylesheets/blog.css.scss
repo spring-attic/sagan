@@ -115,7 +115,7 @@ $icon-sprite: url("../img/iconsprite.png");
     ul, ol {
       margin: 15px 0 20px 25px;
       li {
-        padding: 6px 0;
+        padding-bottom: 20px;
         font-size: 15px;
         line-height: 18px;
       }
@@ -126,6 +126,9 @@ $icon-sprite: url("../img/iconsprite.png");
     }
     pre {
       margin: 20px 0;
+    }
+    strong{
+      font-family: $secondary-font-family;
     }
     blockquote {
       margin: 20px 0;
