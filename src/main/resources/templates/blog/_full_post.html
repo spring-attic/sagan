@@ -30,7 +30,7 @@
     <div class="blog-comments--wrapper">
       <div class="blog-comments--container">
         <div class="blog-comments--header">
-          Have feedback? Let the team know at <a th:href="*{twitterFeedbackUrl}">@springcentral</a>. We read every mention.
+          Have feedback? Let the team know at <a th:href="@{'https://twitter.com/intent/tweet?text=@springcentral&related=springcentral&url=http://spring.io'+${post.path}}">@springcentral</a>. We read every mention.
         </div>
       </div>
     </div>
