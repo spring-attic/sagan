@@ -1420,3 +1420,33 @@ form.lpeRegForm .mktInput {
   margin-right: 1%;
   padding-right: 1%;
 }
+
+.error-page {
+  text-align: center;
+}
+.error-page img {
+  display: inline-block;
+}
+.error-page .big-search--container {
+  display: inline-block;
+  width: 75%;
+  background-color: white;
+  text-align: left;
+  margin-top: 50px;
+}
+.error-page .big-search--container input {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  font-size: 24px;
+  line-height: 30px;
+  padding: 26px 40px;
+}
+.error-page .big-search--container button {
+  float: right;
+  background-color: transparent;
+  border: none;
+  padding: 25px 28px;
+  font-size: 20px;
+  color: #666;
+}
