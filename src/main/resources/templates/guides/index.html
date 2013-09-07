@@ -7,10 +7,11 @@
 <body>
   <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container-fluid">
-    <h1 class="index-page--title">Spring Framework Guides</h1>
-    <p class="index-page--subtitle">The Cras justo odio, dapibus ac facilisis in, egestas eget quam. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper.</p>
+    <h1 class="index-page--title">Guides</h1>
+    <p class="index-page--subtitle">Whatever you're building, these guides are designed to get you productive as quickly as possible &ndash; using the latest Spring project releases and techniques as recommended by the <a href="/team">Spring team</a>.<br/><br/>
+    Have a suggestion for a new guide? Let us know at <a href="https://twitter.com/intent/tweet?text=@springcentral&related=springcentral&hashtags=guides">@springcentral</a>.</p>
 
-
+    <a name="gs"/>
     <div class="row-fluid content-container--wrapper guides-section--container">
       <div class="content-container--header">
         <input type='text' id='doc_filter' style="color:#aaa;" onfocus="this.value=''; this.style.color='#000'; this.style.fontStyle='normal'; this.onfocus='';" value="Find a guide..." placeholder="Find a guide..." class="content-container--filter"/>
@@ -20,12 +21,12 @@
           <div class="content-section-title--container">
             <div class="pull-left icon icon-gs-guides"></div>
             <h3 class="content-section-title no-border no-margin">Getting Started Guides</h3>
-            <p class="content-section-sub-title">Spring provides a powerful and flexible collection of technologies to improve your Java application development that is used by millions of developers..</p>
+            <p class="content-section-sub-title">Designed to be completed in 15-30 minutes, these guides provide quick, hands-on instructions for building the "Hello World" of any development task with Spring. In most cases, the only prerequisites are a JDK and a text editor.</p>
           </div>
 
           <div th:each="guide : ${guides}" class="guide--container" th:attr="data-filterable=${guide.title}">
-            <a class="guide--title" href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/'}" th:text="${guide.title}">Building a RESTful Web Service</a>
-            <p class="guide--subtitle" th:text="${guide.subtitle}">Learn how to create a REST web service with Spring</p>
+            <a class="guide--title" href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/'}" th:text="${guide.title}"></a>
+            <p class="guide--subtitle" th:text="${guide.subtitle}"></p>
           </div>
         </div>
       </div>
@@ -33,12 +34,13 @@
         <div data-filterable-container>
           <div class="content-section-title--container">
             <div class="pull-left icon icon-tutorial"></div>
+            <a name="tutorials"/>
             <h3 class="content-section-title no-margin">Tutorials</h3>
-            <p class="content-section-sub-title">Learn about a new feature, our tutorials explain key concepts simply and provide step by step instructions on how to accomplish specific tasks.</p>
+            <p class="content-section-sub-title">Designed to be completed in 2-3 hours, these guides provide deeper, in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions.</p>
           </div>
           <div th:each="tutorial : ${tutorials}" class="guide--container" th:attr="data-filterable=${tutorial.title}">
-            <a class="guide--title" th:href="@{'/guides/tutorials/'+${tutorial.guideId}+'/'}" th:text="${tutorial.title}">Building a RESTful Web Service</a>
-            <p class="guide--subtitle" th:text="${tutorial.subtitle}">Learn how to create a REST web service with Spring </p>
+            <a class="guide--title" th:href="@{'/guides/tutorials/'+${tutorial.guideId}+'/'}" th:text="${tutorial.title}"></a>
+            <p class="guide--subtitle" th:text="${tutorial.subtitle}"></p>
           </div>
         </div>
       </div>
