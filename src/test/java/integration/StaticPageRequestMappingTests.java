@@ -35,11 +35,6 @@ public class StaticPageRequestMappingTests extends IntegrationTestBase {
     }
 
     @Test
-    public void getStylePage() throws Exception {
-        checkPage("/style");
-    }
-
-    @Test
     public void getLogosAndUsagePage() throws Exception {
         checkPage("/logos");
     }

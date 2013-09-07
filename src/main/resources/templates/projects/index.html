@@ -9,7 +9,7 @@
   <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container">
     <h1 class="index-page--title">Projects</h1>
-    <p class="index-page--subtitle">Spring is home to a vibrant community of quality open source projects that simplify the development of business applications and provide rock-solid runtime services. You can get all of these projects through <a href="#">Spring Tool Suite&trade;</a> (STS), but if you'd like to consume Spring technologies individually - or get involved with their development - visit the individual project pages.</p>
+    <p class="index-page--subtitle">Spring is home to a vibrant community of quality open source projects that simplify the development of business applications and provide rock-solid runtime services. You can get all of these projects through <a href="/tools/sts">Spring Tool Suite&trade;</a> (STS), but if you'd like to consume Spring technologies individually - or get involved with their development - visit the individual project pages.</p>
     <div class="projects--wrapper">
       <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-boot')}">
         <div class="project-logo--container">
