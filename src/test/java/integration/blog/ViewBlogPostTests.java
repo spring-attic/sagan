@@ -44,10 +44,4 @@ public class ViewBlogPostTests extends IntegrationTestBase {
     public void getTitle() throws Exception {
         result.andExpect(content().string(containsString("Title")));
     }
-
-    @Test
-    public void getTwitterUrl() throws Exception {
-        String twitterUrl = "https://twitter.com/intent/tweet?text=@springcentral&amp;url=http://spring.io/blog/" + post.getPublicSlug();
-        result.andExpect(content().string(containsString(twitterUrl)));
-    }
 }

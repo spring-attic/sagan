@@ -90,9 +90,4 @@ public class PostView {
     public String getUpdatePath() {
         return "/admin/blog/" + post.getAdminSlug();
     }
-
-    public String getTwitterFeedbackUrl() {
-        return "https://twitter.com/intent/tweet?text=@springcentral&url=http://spring.io/blog/" + post.getPublicSlug();
-    }
-
 }
