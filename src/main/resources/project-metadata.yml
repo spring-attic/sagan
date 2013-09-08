@@ -306,6 +306,7 @@ projects:
       lead: cwalls
       groupId: org.springframework.social
       supportedVersions:
+        - 1.1.0.BUILD-SNAPSHOT
         - 1.1.0.M4
         - 1.0.3.RELEASE
 
@@ -314,6 +315,7 @@ projects:
       lead: cwalls
       groupId: org.springframework.social
       supportedVersions:
+        - 1.1.0.BUILD-SNAPSHOT
         - 1.1.0.M4
         - 1.0.3.RELEASE
 
@@ -322,6 +324,7 @@ projects:
       lead: cwalls
       groupId: org.springframework.social
       supportedVersions:
+        - 1.1.0.BUILD-SNAPSHOT
         - 1.1.0.M4
         - 1.0.5.RELEASE
 
@@ -486,6 +489,7 @@ projects:
       lead: cwalls
       groupId: org.springframework.social
       supportedVersions:
+        - 1.0.0.BUILD-SNAPSHOT
         - 1.0.0.M3
 
     # RC releaseStatus only
@@ -496,6 +500,7 @@ projects:
       apiDocUrl: /spring-social-linkedin/docs/{version}/api/
       groupId: org.springframework.social
       supportedVersions:
+        - 1.0.0.BUILD-SNAPSHOT
         - 1.0.0.RC3
 
     # Only milestone release
@@ -504,6 +509,7 @@ projects:
       lead: cwalls
       groupId: org.springframework.social
       supportedVersions:
+        - 1.0.0.BUILD-SNAPSHOT
         - 1.0.0.M3
 
     # ----------------------
