@@ -95,6 +95,7 @@ projects:
     - id: spring-data-jdbc-ext
       name: Spring Data JDBC Extensions
       groupId: org.springframework.data
+      artifactId: spring-data-oracle
       lead: trisberg
       refDocUrl: /spring-data/jdbc/docs/{version}/reference/html
       apiDocUrl: /spring-data/jdbc/docs/{version}/api/
@@ -189,6 +190,7 @@ projects:
     - id: spring-hadoop
       name: Spring for Apache Hadoop
       groupId: org.springframework.data
+      artifactId: spring-data-hadoop
       lead: jvalkeal@github # Janne Valkealahti
       sponsor: trisberg
       supportedVersions:
