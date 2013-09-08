@@ -216,9 +216,9 @@ projects:
       lead: grussell
       supportedVersions:
         - 3.0.0.BUILD-SNAPSHOT
-        - 3.0.0.M2
-        - 2.2.5.BUILD-SNAPSHOT
-        - 2.2.4.RELEASE
+        - 3.0.0.M3
+        - 2.2.6.BUILD-SNAPSHOT
+        - 2.2.5.RELEASE
         - 2.1.6.RELEASE
 
     # ----------------------
