@@ -131,7 +131,6 @@
             <div class="navbar">
               <div class="container">
                 <ul class="nav">
-                  <li><a th:href="@{/about}">About</a></li>
                   <li><a th:href="@{/team}">Team</a></li>
                   <li><a th:href="@{/services}">Services</a></li>
                   <li><a th:href="@{/tools}">Tools</a></li>
@@ -139,10 +138,9 @@
               </div>
             </div>
             &copy; <script type="text/javascript"> var d = new Date();
-                  document.write(d.getFullYear());</script> GoPivotal, Inc. All Rights Reserved.
-            <a href="http://www.gopivotal.com/terms-of-use">Terms</a>,
-            <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>, and
-            <a th:href="@{/logos}">Usage</a>
+                  document.write(d.getFullYear());</script> <a href="http://gopivotal.com">GoPivotal</a>, Inc. All Rights Reserved.
+            <a href="http://www.gopivotal.com/terms-of-use">Terms of Use</a> and
+            <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>
             <span id='authentication' sec:authorize="isFullyAuthenticated()">
               [<a th:href="@{/signout}">Sign out</a>]
             </span>
