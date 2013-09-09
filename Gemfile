@@ -1,3 +1,3 @@
 source "http://rubygems.org"
 
-gem "cf", "~> 4.2"
+gem "cf", "~> 5.2"
