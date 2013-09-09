@@ -48,7 +48,7 @@ body {
 
 .code-snippet {
   border-radius: 2px;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   background-color: #F9F9F9;
   padding: 12px 18px;
   margin: 15px 0;
@@ -74,38 +74,12 @@ body {
 .header--navbar .navbar-inner .spring-logo--container {
   display: inline-block;
 }
-.header--navbar .navbar-inner .spring-logo--container .logo-bg {
-  width: 37px;
-  height: 30px;
-  border-radius: 30px;
-  margin: 6px 0 0 1px;
-  background-color: #6db33f;
-  position: absolute;
-  z-index: 1034;
-  opacity: 0;
-  transition: opacity 0.15s;
-  -webkit-transition: opacity 0.15s;
-  -moz-transition: opacity 0.15s;
-  -o-transition: opacity 0.15s;
-  -ms-transition: opacity 0.15s;
-}
 .header--navbar .navbar-inner .spring-logo--container .spring-logo {
-  display: inline-block;
-  height: 64px;
-  overflow: hidden;
-}
-.header--navbar .navbar-inner .spring-logo--container .spring-logo .icon-spring-logo {
-  font-size: 152px;
-  height: 46px;
   margin: 12px 0 6px;
-  color: white;
+  width: 160px;
+  height: 46px;
+  display: inline-block;
   text-decoration: none;
-}
-.header--navbar .navbar-inner .spring-logo--container .spring-logo:hover .icon-spring-logo {
-  color: #6db33f;
-}
-.header--navbar .navbar-inner .spring-logo--container:hover .logo-bg {
-  opacity: 1;
 }
 .header--navbar .navbar-inner .navbar-link.active a {
   background-color: #6db33f;
@@ -162,7 +136,7 @@ body {
   margin-top: -90px;
   background-color: white;
   width: 100%;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #ddd;
   transition: margin 0.25s;
   -webkit-transition: margin 0.25s;
   -moz-transition: margin 0.25s;
@@ -216,8 +190,27 @@ body {
   margin-top: 0;
 }
 
+a.spring-logo {
+  background: url("../img/spring-logo.png") -1px -1px no-repeat;
+}
+
+a.spring-logo span {
+  display: block;
+  width: 160px;
+  height: 46px;
+  background: url("../img/spring-logo.png") -1px -48px no-repeat;
+  opacity: 0;
+  -moz-transition: opacity .12s ease-in-out;
+  -webkit-transition: opacity .12s ease-in-out;
+  -o-transition: opacity .12s ease-in-out;
+}
+
+a:hover.spring-logo span {
+  opacity: 1;
+}
+
 .right-pane-widget--container {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   box-shadow: 0 -4px 0 #34302d;
   margin: 4px 0 40px 0;
 }
@@ -461,7 +454,7 @@ input.floating-input:focus {
 
 .gh-project-url--container {
   background-color: #FFF;
-  border: 1px solid #cccccc;
+  border: 1px solid #CCC;
   height: 20px;
   padding: 4px 6px;
   border-radius: 4px;
@@ -531,7 +524,7 @@ input.floating-input:focus {
 .index-page--subtitle.jobs-subtitle {
   margin-bottom: 60px;
   padding-bottom: 60px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
 }
 
 .footer {
@@ -782,7 +775,7 @@ input.floating-input:focus {
 }
 .item-slider-widget .item-slider--container {
   background-color: white;
-  border: 1px solid #999999;
+  border: 1px solid #999;
   padding: 0 3px;
 }
 .item-slider-widget .item-slider--container .item {
@@ -810,7 +803,7 @@ input.floating-input:focus {
 }
 
 .content-container--wrapper {
-  border: 1px solid #34302d;
+  border: 1px solid #34302D;
   margin-top: -1px;
 }
 .content-container--wrapper:first-child {
@@ -1063,11 +1056,11 @@ form.lpeRegForm .mktInput {
   text-align: center;
   padding: 40px 20px;
   height: 409px;
-  transition: border, box-shadow 0.2s;
-  -webkit-transition: border, box-shadow 0.2s;
-  -moz-transition: border, box-shadow 0.2s;
-  -ms-transition: border, box-shadow 0.2s;
-  -o-transition: border, box-shadow 0.2s;
+  transition: border, box-shadow 0.20s;
+  -webkit-transition: border, box-shadow 0.20s;
+  -moz-transition: border, box-shadow 0.20s;
+  -ms-transition: border, box-shadow 0.20s;
+  -o-transition: border, box-shadow 0.20s;
   border: 1px solid transparent;
 }
 .about-feature--container .icon--container {
@@ -1185,8 +1178,8 @@ form.lpeRegForm .mktInput {
   background-color: white;
   padding: 50px;
   display: inline-block;
-  border-bottom: 1px solid #cccccc;
-  box-shadow: 0 0 3px #cccccc;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 3px #ccc;
   margin-top: 100px;
 }
 .admin--wrapper .admin-login--container .admin-login--title {
@@ -1219,8 +1212,8 @@ form.lpeRegForm .mktInput {
   background-color: white;
   padding: 50px 0;
   display: inline-block;
-  border-bottom: 1px solid #cccccc;
-  box-shadow: 0 0 3px #cccccc;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 3px #ccc;
   text-align: center;
   width: 95%;
   transition: all 0.25s;
@@ -1262,8 +1255,8 @@ form.lpeRegForm .mktInput {
   background-color: white;
   padding: 50px 0;
   display: inline-block;
-  border-bottom: 1px solid #cccccc;
-  box-shadow: 0 0 3px #cccccc;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 3px #ccc;
   text-align: center;
   width: 95%;
   transition: all 0.25s;

@@ -89,40 +89,12 @@ body {
     border-radius: 0;
     .spring-logo--container {
       display: inline-block;
-      .logo-bg {
-        width: 37px;
-        height: 30px;
-        border-radius: 30px;
-        margin: 6px 0 0 1px;
-        background-color: $green;
-        position: absolute;
-        z-index: 1034;
-        opacity: 0;
-        transition: opacity 0.15s;
-        -webkit-transition: opacity 0.15s;
-        -moz-transition: opacity 0.15s;
-        -o-transition: opacity 0.15s;
-        -ms-transition: opacity 0.15s;
-      }
       .spring-logo {
+        margin: 12px 0 6px;
+        width: 160px;
+        height: 46px;
         display: inline-block;
-        height: 64px;
-        overflow: hidden;
-        .icon-spring-logo {
-          font-size: 152px;
-          height: 46px;
-          margin: 12px 0 6px;
-          color: white;
-          text-decoration: none;
-        }
-        &:hover .icon-spring-logo {
-          color: $green;
-        }
-      }
-      &:hover {
-        .logo-bg {
-          opacity: 1;
-        }
+        text-decoration: none;
       }
     }
     .navbar-link {
@@ -238,7 +210,24 @@ body {
   }
 }
 
+a.spring-logo {
+    background: url("../img/spring-logo.png") -1px -1px no-repeat;
+}
 
+a.spring-logo span {
+    display: block;
+    width: 160px;
+    height: 46px;
+    background: url("../img/spring-logo.png") -1px -48px no-repeat;
+    opacity: 0;
+    -moz-transition: opacity .12s ease-in-out;
+    -webkit-transition: opacity .12s ease-in-out;
+    -o-transition: opacity .12s ease-in-out;
+}
+
+a:hover.spring-logo span {
+    opacity: 1;
+}
 
 .right-pane-widget--container {
   border: 1px solid #ccc;

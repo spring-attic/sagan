@@ -1,6 +1,6 @@
 .search-results {
   padding-bottom: 40px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
 }
 .search-results .search-result {
   margin-bottom: 35px;
@@ -57,7 +57,7 @@
   text-align: right;
 }
 .search-facets ul .facet .facet--wrapper {
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #ddd;
   padding: 10px 20px;
   margin: 0;
   font-family: "Montserrat", sans-serif;
