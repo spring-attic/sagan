@@ -39,10 +39,16 @@
         <to type="permanent-redirect" last="true">/guides/gs/$1/</to>
     </rule>
     <rule>
-        <name>Tutorial trailing slash</name>
+        <name>Tutorial root trailing slash</name>
         <note>https://www.pivotaltracker.com/story/show/52214321</note>
-        <from>/guides/tutorials/(.+[^/])$</from>
+        <from>/guides/tutorials/([^/]+)$</from>
         <to type="permanent-redirect" last="true">/guides/tutorials/$1/</to>
+    </rule>
+    <rule>
+        <name>Tutorial page trailing slash</name>
+        <note>https://www.pivotaltracker.com/story/show/52214321</note>
+        <from>/guides/tutorials/(.+)/(\d{1,2})$</from>
+        <to type="permanent-redirect" last="true">/guides/tutorials/$1/$2/</to>
     </rule>
     <rule>
         <name>Legacy GGTS welcome page</name>
