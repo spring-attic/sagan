@@ -1,25 +1,27 @@
 <html
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout">
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="layout">
   <head>
-  	<title>Spring</title>
+    <title>Spring</title>
   </head>
   <body>
-    <div layout:fragment="header-container"></div> 
-    <div layout:fragment="content" class="container-fluid">
+    <div layout:fragment="header-container"></div>
+    <div layout:fragment="full-width--layout">
       <div class="billboard--wrapper homepage-billboard">
         <div class="billboard--container">
           <div class="container-fluid">
             <div class="icon icon-spring-logo-big homepage-icon"></div>
             <div class="homepage-title--container">
               <div class="homepage-title">
-                Spring is an application development platform across the 
+                Let's build a better Enterprise.
               </div>
-              <div class="homepage-title">
-                centuries made in the interiors of collapsing stars. Cosmic ocean 
-              </div>
-              <div class="homepage-title">
-                light years intelligent beings star stuff from which we spring.
+              <div class="homepage-subtitle--container">
+                <div class="homepage-subtitle">
+                  Spring helps development teams everywhere build simple, portable,
+                </div>
+                <div class="homepage-subtitle">
+                  fast and flexible JVM-based systems and applications.
+                </div>
               </div>
             </div>
           </div>
@@ -35,7 +37,7 @@
                 </div>
                 <div class="key-feature--title">Build Anything</div>
                 <div class="key-feature--text">
-                  Cambrian explosion cosmos <span class="highlight">comprehensive</span>. From which we spring Euclid great turbulent clouds bits of moving fluff Drake Equation, rogue network of wormholes galaxies.
+                  Write clean, testable code against the infrastructure components of your choice and accomplish any task &ndash; without re-inventing the wheel.
                 </div>
               </div>
               <div class="span4 key-feature--container">
@@ -44,7 +46,7 @@
                 </div>
                 <div class="key-feature--title">Run Anywhere</div>
                 <div class="key-feature--text">
-                  <span class="highlight">Modern</span> cambrian explosion cosmos. From which we spring Euclid great turbulent clouds bits of moving fluff Drake Equation, rogue network of wormholes galaxies.
+                  Keep it portable &ndash; Spring-based apps run anywhere the JVM does. Deploy standalone, in an app server, on a PaaS or all of the above.
                 </div>
               </div>
               <div class="span4 key-feature--container">
@@ -53,11 +55,21 @@
                 </div>
                 <div class="key-feature--title">Rest Assured</div>
                 <div class="key-feature--text">
-                  Cambrian explosion cosmos <span class="highlight">open</span>. From which we spring Euclid great turbulent clouds bits of moving fluff Drake Equation, rogue network of wormholes galaxies.
+                  Code with confidence &ndash; Spring provides an open programming model that is comprehensive, cohesive, widely understood and well-supported.
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="platform--wrapper">
+          <div class="platform--icon"></div>
+          <div class="platform--title">The Spring IO Platform</div>
+          <div class="platform--text">
+            <div class="container-fluid">
+              Shores of the cosmic ocean cosmic ocean tesseract consectetur adipisicing elit rich in heavy atoms tingling of the spine nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur rich in heavy atoms.
+            </div>
+          </div>
+          <p><a href="/platform" class="platform--link">Preview the Platform<i class="icon-chevron-right"></i></a></p>
         </div>
         <div class="offset-feature--wrapper">
           <div class="offset-feature--container feature-guides">
@@ -65,9 +77,11 @@
               <div class="row-fluid feature--content">
                 <div class="span8">
                   <div class="offset-feature--title">Guides</div>
-                  <div class="offset-feature--text">Emerged into consciousness concept of the number one, a still more glorious dawn awaits? Birth something incredible is waiting to be known worldlets dream of the mind's eye, dispassionate extraterrestrial observer. White dwarf?</div>
+                  <div class="offset-feature--text">
+                    Whether you're an expert or a newcomer our task-focused Getting Started Guides and Tutorials are designed to get you productive with Spring as quickly as possible.
+                  </div>
                   <a href="/guides" class="offset-feature--link">
-                    Browse guides
+                    Browse the Guides
                     <i class="icon-chevron-right"></i>
                   </a>
                 </div>
@@ -77,11 +91,13 @@
           <div class="offset-feature--container feature-sts">
             <div class="container-fluid">
               <div class="row-fluid feature--content">
-                <div class="span8 offset4">
+                <div class="tool-suite span8 offset4">
                   <div class="offset-feature--title">Spring Tool Suite&trade;</div>
-                  <div class="offset-feature--text">Emerged into consciousness concept of the number one, a still more glorious dawn awaits? Birth something incredible is waiting to be known worldlets dream of the mind's eye, dispassionate extraterrestrial observer. White dwarf? Courage of our questions.</div>
+                  <div class="offset-feature--text">
+                    Your tools should be as refined as the code you write. STS is our Eclipse-based IDE crafted to serve the needs of building applications with Spring. We're always working on new features and performance in our mission to make STS the most productive Eclipse distribution available.
+                  </div>
                   <a href="/tools/sts" class="offset-feature--link">
-                    Get Spring Tool Suite
+                    Learn more about STS
                     <i class="icon-chevron-right"></i>
                   </a>
                 </div>
@@ -93,9 +109,11 @@
               <div class="row-fluid feature--content">
                 <div class="span8">
                   <div class="offset-feature--title">Spring Projects</div>
-                  <div class="offset-feature--text">Emerged into consciousness concept of the number one, a still more glorious dawn awaits? Birth something incredible is waiting to be known worldlets dream of the mind's eye, dispassionate extraterrestrial observer. White dwarf? Courage of our questions.</div>
+                  <div class="offset-feature--text">
+                    From configuration to security, web apps to big data &ndash; whatever the infrastructure needs of your application may be, there is a Spring Project to help you build it. Start small and use just what you need &ndash; Spring is modular by design.
+                  </div>
                   <a href="/projects" class="offset-feature--link">
-                    View projects
+                    Explore the Projects
                     <i class="icon-chevron-right"></i>
                   </a>
                 </div>
@@ -112,7 +130,7 @@
                   Community Support
                 </div>
                 <div class="support-links">
-                  <a href="http://forum.springframework.io">Forum</a>
+                  <a href="http://forum.spring.io">Forum</a>
                   <a href="http://stackoverflow.com/questions/tagged/spring">Stack Overflow</a>
                 </div>
               </div>
@@ -122,16 +140,16 @@
                   Professional Support
                 </div>
                 <div class="support-links">
-                  <a href="/unknown">Support *NR</a>
+                  <a href="/services">Support</a>
                   <a href="http://www.gopivotal.com/contact/spring-training">Training</a>
                   <a href="http://www.gopivotal.com/contact/spring-consulting">Consulting</a>
                 </div>
               </div>
             </div>
-          </div>          
+          </div>
         </div>
       </div>
-      <div class="homepage-fix"></div>
     </div>
+    <div layout:fragment="content"></div>
   </body>
 </html>

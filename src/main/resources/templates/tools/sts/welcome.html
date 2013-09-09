@@ -1,15 +1,39 @@
-<html   
+<html
   xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-	layout:decorator="layout">
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="layout">
   <head>
-  	<title>Spring Tool Suite&trade; &middot; Installation Complete</title>
+    <title>Spring Tool Suite&trade; &middot; Installation Complete</title>
   </head>
   <body>
     <div layout:fragment="header-container"></div>
-    <div layout:fragment="content" class="container-fluid ">
-      <div class="content--title">Welcome</div>
-      <h1 class="tools--title">Spring Tool Suite&trade;</h1>
+    <div layout:fragment="content" class="container-fluid">
+      <div class="main-body--wrapper">
+        <div class="min-height">
+          <h1 class="index-page--title">Welcome to the Spring Tool Suite&trade;</h1>
+          <p class="index-page--subtitle">Thank you for installing the Spring Tool Suite</p>
+          <ul>
+            <li>
+              <p>
+                <a href="http://forum.spring.io/forum/spring-projects/springsource-tool-suite">Community Forums:</a>
+                to discuss STS features and usage with other community members.
+              </p>
+            </li>
+            <li>
+              <p>
+                <a href="https://issuetracker.springsource.com/browse/STS">JIRA:</a>
+                to report bugs, problems and request new features.
+              </p>
+            </li>
+            <li>
+              <p>
+                <a th:href="@{/blog}">Spring Blog:</a>
+                to read about the latest news and tips for using STS.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </body>
 </html>

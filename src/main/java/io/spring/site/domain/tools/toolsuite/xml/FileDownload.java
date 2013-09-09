@@ -1,13 +1,13 @@
 package io.spring.site.domain.tools.toolsuite.xml;
 
 public interface FileDownload {
-	String getBucket();
+    String getBucket();
 
-	String getFile();
+    String getFile();
 
-	String getDescription();
+    String getDescription();
 
-	String getSize();
+    String getSize();
 
-	String getOs();
+    String getOs();
 }

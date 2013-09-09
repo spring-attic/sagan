@@ -8,50 +8,52 @@
   <body>
     <div layout:fragment="header-container"></div>
     <div layout:fragment="content" class="container-fluid">
-      <div class="row-fluid">
-        <div class="span8">
-          <div class="content--title">
-            Tutorial
+      <div class="main-body--wrapper">
+        <div class="row-fluid">
+          <div class="span8 tutorial-text">
+            <div class="content--title">
+              Tutorial
+            </div>
+            <article class="content--container">
+              <h1 class="title" th:text="${tutorial.title}"></h1>
+              <div class="article-body" th:utext="${tutorial.content}">a Tutorial</div>
+            </article>
           </div>
-          <article class="content--container">
-            <h1 class="title" th:text="${tutorial.title}"></h1>
-            <div class="article-body" th:utext="${tutorial.content}">a Tutorial</div>
-          </article>
-        </div>
-        <aside id='sidebar' class="span4 content-right-pane--container">
-          <div class="right-pane-widget--container">
-            <div class="github-actions">
-              <h2>Get the Code</h2>
-              <div class="btn-group">
-                <button class="btn active" data-protocol="https">HTTPS</button>
-                <button class="btn" data-protocol="ssh">SSH</button>
-                <button class="btn" data-protocol="subversion">Subversion</button>
-              </div>
-              <div class="clone-url https">
-                <input type="text" id="clone-url-https" value="https://github.com/spring-guides/gs-rest-service.git" th:value="${tutorial.gitRepoHttpsUrl}" readonly="readonly"/>
-                <button class="copy-button github" th:attr="data-clipboard-text=${tutorial.gitRepoHttpsUrl}" data-toggle="tooltip"></button>
-              </div>
-              <div class="clone-url ssh hide">
-                <input type="text" id="clone-url-ssh" th:value="${tutorial.gitRepoSshUrl}" readonly="readonly"/>
-                <button class="copy-button github" th:attr="data-clipboard-text=${tutorial.gitRepoSshUrl}" data-toggle="tooltip"></button>
-              </div>
-              <div class="clone-url subversion hide">
-                <input type="text" id="clone-url-subversion" th:value="${tutorial.gitRepoSubversionUrl}" readonly="readonly"/>
-                <button class="copy-button github" th:attr="data-clipboard-text=${tutorial.gitRepoSubversionUrl}" data-toggle="tooltip"></button>
-              </div>
-              <a class="github_download btn btn-black uppercase" th:href='${tutorial.zipUrl}'>Download ZIP</a>
-              <div class="go-to-repo--container">
-                <a th:href="${tutorial.GithubHttpsUrl}">
-                  <i class="icon-github"></i>
-                  Go To Repo
-                </a>
+          <aside id='sidebar' class="span4 content-right-pane--container">
+            <div class="right-pane-widget--container">
+              <div class="github-actions">
+                <h2>Get the Code</h2>
+                <div class="btn-group">
+                  <button class="btn active" data-protocol="https">HTTPS</button>
+                  <button class="btn" data-protocol="ssh">SSH</button>
+                  <button class="btn" data-protocol="subversion">Subversion</button>
+                </div>
+                <div class="clone-url https">
+                  <input type="text" id="clone-url-https" value="https://github.com/spring-guides/gs-rest-service.git" th:value="${tutorial.gitRepoHttpsUrl}" readonly="readonly"/>
+                  <button class="copy-button github" th:attr="data-clipboard-text=${tutorial.gitRepoHttpsUrl}" data-toggle="tooltip"></button>
+                </div>
+                <div class="clone-url ssh hide">
+                  <input type="text" id="clone-url-ssh" th:value="${tutorial.gitRepoSshUrl}" readonly="readonly"/>
+                  <button class="copy-button github" th:attr="data-clipboard-text=${tutorial.gitRepoSshUrl}" data-toggle="tooltip"></button>
+                </div>
+                <div class="clone-url subversion hide">
+                  <input type="text" id="clone-url-subversion" th:value="${tutorial.gitRepoSubversionUrl}" readonly="readonly"/>
+                  <button class="copy-button github" th:attr="data-clipboard-text=${tutorial.gitRepoSubversionUrl}" data-toggle="tooltip"></button>
+                </div>
+                <a class="github_download btn btn-black uppercase" th:href='${tutorial.zipUrl}'>Download ZIP</a>
+                <div class="go-to-repo--container">
+                  <a th:href="${tutorial.GithubHttpsUrl}">
+                    <i class="icon-github"></i>
+                    Go To Repo
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="right-pane-widget--container">
-            <div class='related_resources' th:utext="${tutorial.sidebar}"></div>
-          </div>
-        </aside>
+            <div class="right-pane-widget--container">
+              <div class='related_resources' th:utext="${tutorial.sidebar}"></div>
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   </body>

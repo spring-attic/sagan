@@ -31,76 +31,76 @@ import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDiale
 @Configuration
 public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter {
 
-	@Autowired
-	private StaticPagePathFinder staticPagePathFinder;
+    @Autowired
+    private StaticPagePathFinder staticPagePathFinder;
 
-	@Bean(name = { "uih", "viewRenderingHelper" })
-	@Scope("request")
-	public ViewRenderingHelper viewRenderingHelper() {
-		return new ViewRenderingHelper();
-	}
+    @Bean(name = { "uih", "viewRenderingHelper" })
+    @Scope("request")
+    public ViewRenderingHelper viewRenderingHelper() {
+        return new ViewRenderingHelper();
+    }
 
-	@Bean
-	public DataAttributeDialect dataAttributeDialect() {
-		return new DataAttributeDialect();
-	}
+    @Bean
+    public DataAttributeDialect dataAttributeDialect() {
+        return new DataAttributeDialect();
+    }
 
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		try {
-			for (StaticPagePathFinder.PagePaths paths : this.staticPagePathFinder.findPaths()) {
-				String urlPath = paths.getUrlPath();
-				registry.addViewController(urlPath).setViewName(
-						"pages" + paths.getFilePath());
-				if (!urlPath.isEmpty()) {
-					registry.addViewController(urlPath + "/").setViewName(
-							"pages" + paths.getFilePath());
-				}
-			}
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        try {
+            for (StaticPagePathFinder.PagePaths paths : this.staticPagePathFinder.findPaths()) {
+                String urlPath = paths.getUrlPath();
+                registry.addViewController(urlPath).setViewName(
+                        "pages" + paths.getFilePath());
+                if (!urlPath.isEmpty()) {
+                    registry.addViewController(urlPath + "/").setViewName(
+                            "pages" + paths.getFilePath());
+                }
+            }
 
-		} catch (IOException e) {
-			throw new RuntimeException(
-					"Unable to locate static pages: " + e.getMessage(), e);
-		}
-	}
+        } catch (IOException e) {
+            throw new RuntimeException(
+                    "Unable to locate static pages: " + e.getMessage(), e);
+        }
+    }
 
-	@Bean
-	public Filter characterEncodingFilter() {
-		CharacterEncodingFilter filter = new CharacterEncodingFilter();
-		filter.setEncoding("UTF-8");
-		filter.setForceEncoding(true);
-		return filter;
-	}
+    @Bean
+    public Filter characterEncodingFilter() {
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
+        return filter;
+    }
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new HandlerInterceptorAdapter() {
-			@Override
-			public void postHandle(HttpServletRequest request,
-					HttpServletResponse response, Object handler,
-					ModelAndView modelAndView) throws Exception {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new HandlerInterceptorAdapter() {
+            @Override
+            public void postHandle(HttpServletRequest request,
+                    HttpServletResponse response, Object handler,
+                    ModelAndView modelAndView) throws Exception {
 
-				if (handler instanceof HandlerMethod) {
-					HandlerMethod handlerMethod = (HandlerMethod) handler;
-					NavSection navSection = handlerMethod.getBean().getClass()
-							.getAnnotation(NavSection.class);
-					if (navSection != null && modelAndView != null) {
-						modelAndView.addObject("navSection", navSection.value());
-					}
-				}
-			}
-		});
-	}
+                if (handler instanceof HandlerMethod) {
+                    HandlerMethod handlerMethod = (HandlerMethod) handler;
+                    NavSection navSection = handlerMethod.getBean().getClass()
+                            .getAnnotation(NavSection.class);
+                    if (navSection != null && modelAndView != null) {
+                        modelAndView.addObject("navSection", navSection.value());
+                    }
+                }
+            }
+        });
+    }
 
-	@Configuration
-	public static class ErrorConfiguration implements EmbeddedServletContainerCustomizer {
+    @Configuration
+    public static class ErrorConfiguration implements EmbeddedServletContainerCustomizer {
 
-		@Override
-		public void customize(ConfigurableEmbeddedServletContainerFactory factory) {
-			factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"));
-			factory.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500"));
-		}
+        @Override
+        public void customize(ConfigurableEmbeddedServletContainerFactory factory) {
+            factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"));
+            factory.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500"));
+        }
 
-	}
+    }
 
 }

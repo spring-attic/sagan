@@ -8,14 +8,14 @@ import java.util.List;
 @Root(strict=false)
 public class ToolSuiteXml {
 
-	@ElementList(name="release", type = Release.class, inline = true)
-	private List<Release> releases;
+    @ElementList(name="release", type = Release.class, inline = true)
+    private List<Release> releases;
 
-	public List<Release> getReleases() {
-		return releases;
-	}
+    public List<Release> getReleases() {
+        return releases;
+    }
 
-	public void setReleases(List<Release> releases) {
-		this.releases = releases;
-	}
+    public void setReleases(List<Release> releases) {
+        this.releases = releases;
+    }
 }

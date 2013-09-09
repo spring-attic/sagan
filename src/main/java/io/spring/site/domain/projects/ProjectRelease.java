@@ -3,135 +3,159 @@ package io.spring.site.domain.projects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.util.Assert;
+
 public class ProjectRelease implements Comparable<ProjectRelease> {
 
-	private static final Pattern VERSION_DISPLAY_REGEX = Pattern.compile("([0-9.]+)\\.(RC\\d+|M\\d+)?");
+    private static final Pattern VERSION_DISPLAY_REGEX = Pattern.compile("([0-9.]+)\\.(RC\\d+|M\\d+)?");
+    private static final Pattern PREREALSE_PATTERN = Pattern.compile("[0-9.]+(M|RC)\\d+");
+    private static final Pattern SNAPSHOT_PATTERN = Pattern.compile("[0-9.].*(SNAPSHOT)");
 
-	public enum ReleaseStatus {
-		PRERELEASE, SNAPSHOT, GENERAL_AVAILABILITY;
-	}
+    public enum ReleaseStatus {
+        SNAPSHOT, PRERELEASE, GENERAL_AVAILABILITY;
 
-	private final String versionName;
-	private final ReleaseStatus releaseStatus;
-	private final boolean isCurrent;
-	private final String refDocUrl;
-	private final String apiDocUrl;
-	private final String groupId;
-	private final String artifactId;
-	private final ProjectRepository repository;
+        public static ReleaseStatus getFromVersion(String version) {
+            Assert.notNull(version, "Version must not be null");
+            if(PREREALSE_PATTERN.matcher(version).matches()) {
+                return PRERELEASE;
+            }
+            if(SNAPSHOT_PATTERN.matcher(version).matches()) {
+                return SNAPSHOT;
+            }
+            return GENERAL_AVAILABILITY;
+        }
+    }
 
-	public ProjectRelease(String versionName, ReleaseStatus releaseStatus,
-						  boolean isCurrent, String refDocUrl, String apiDocUrl, String groupId, String artifactId) {
-		this.versionName = versionName;
-		this.releaseStatus = releaseStatus;
-		this.isCurrent = isCurrent;
-		this.refDocUrl = refDocUrl;
-		this.apiDocUrl = apiDocUrl;
-		this.groupId = groupId;
-		this.artifactId = artifactId;
-		this.repository = ProjectRepository.get(versionName);
-	}
+    private final String versionName;
+    private final ReleaseStatus releaseStatus;
+    private final boolean isCurrent;
+    private final String refDocUrl;
+    private final String apiDocUrl;
+    private final String groupId;
+    private final String artifactId;
+    private final ProjectRepository repository;
 
-	public boolean isCurrent() {
-		return isCurrent;
-	}
+    public ProjectRelease(String versionName, ReleaseStatus releaseStatus,
+                          boolean isCurrent, String refDocUrl, String apiDocUrl, String groupId, String artifactId) {
+        this.versionName = versionName;
+        this.releaseStatus = releaseStatus;
+        this.isCurrent = isCurrent;
+        this.refDocUrl = refDocUrl;
+        this.apiDocUrl = apiDocUrl;
+        this.groupId = groupId;
+        this.artifactId = artifactId;
+        this.repository = ProjectRepository.get(versionName);
+    }
 
-	public boolean isGeneralAvailability() {
-		return this.releaseStatus == ReleaseStatus.GENERAL_AVAILABILITY;
-	}
+    public boolean isCurrent() {
+        return isCurrent;
+    }
 
-	public boolean isPreRelease() {
-		return this.releaseStatus == ReleaseStatus.PRERELEASE;
-	}
+    public boolean isGeneralAvailability() {
+        return this.releaseStatus == ReleaseStatus.GENERAL_AVAILABILITY;
+    }
 
-	public boolean isSnapshot() {
-		return this.releaseStatus == ReleaseStatus.SNAPSHOT;
-	}
+    public boolean isPreRelease() {
+        return this.releaseStatus == ReleaseStatus.PRERELEASE;
+    }
 
-	public String getVersion() {
-		return this.versionName;
-	}
+    public boolean isSnapshot() {
+        return this.releaseStatus == ReleaseStatus.SNAPSHOT;
+    }
 
-	public String getVersionDisplayName() {
-		Matcher matcher = VERSION_DISPLAY_REGEX.matcher(versionName);
-		matcher.find();
-		String versionNumber = matcher.group(1);
-		String preReleaseDescription = matcher.group(2);
+    public ReleaseStatus getReleaseStatus() {
+        return releaseStatus;
+    }
 
-		if (preReleaseDescription != null) {
-			return versionNumber + " " + preReleaseDescription;
-		}
-		return versionNumber;
-	}
+    public String getVersion() {
+        return this.versionName;
+    }
 
-	public String getRefDocUrl() {
-		return this.refDocUrl;
-	}
+    public String getVersionDisplayName() {
+        return getVersionDisplayName(true);
+    }
 
-	public boolean hasRefDocUrl() {
-		return !this.refDocUrl.isEmpty();
-	}
+    public String getVersionDisplayName(boolean includePreReleaseDescription) {
+        Matcher matcher = VERSION_DISPLAY_REGEX.matcher(versionName);
+        matcher.find();
+        String versionNumber = matcher.group(1);
+        String preReleaseDescription = matcher.group(2);
 
-	public String getApiDocUrl() {
-		return this.apiDocUrl;
-	}
+        if (preReleaseDescription != null && includePreReleaseDescription) {
+            return versionNumber + " " + preReleaseDescription;
+        }
+        return versionNumber;
+    }
 
-	public boolean hasApiDocUrl() {
-		return !this.apiDocUrl.isEmpty();
-	}
 
-	public String getGroupId() {
-		return this.groupId;
-	}
+    public String getRefDocUrl() {
+        return this.refDocUrl;
+    }
 
-	public String getArtifactId() {
-		return this.artifactId;
-	}
+    public boolean hasRefDocUrl() {
+        return !this.refDocUrl.isEmpty();
+    }
 
-	public ProjectRepository getRepository() {
-		return this.repository;
-	}
+    public String getApiDocUrl() {
+        return this.apiDocUrl;
+    }
 
-	@Override
-	public int compareTo(ProjectRelease other) {
-		return this.versionName.compareTo(other.versionName);
-	}
+    public boolean hasApiDocUrl() {
+        return !this.apiDocUrl.isEmpty();
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
+    public String getGroupId() {
+        return this.groupId;
+    }
 
-		ProjectRelease that = (ProjectRelease) o;
+    public String getArtifactId() {
+        return this.artifactId;
+    }
 
-		if (!this.apiDocUrl.equals(that.apiDocUrl))
-			return false;
-		if (!this.refDocUrl.equals(that.refDocUrl))
-			return false;
-		if (this.releaseStatus != that.releaseStatus)
-			return false;
-		if (!this.versionName.equals(that.versionName))
-			return false;
+    public ProjectRepository getRepository() {
+        return this.repository;
+    }
 
-		return true;
-	}
+    @Override
+    public int compareTo(ProjectRelease other) {
+        return this.versionName.compareTo(other.versionName);
+    }
 
-	@Override
-	public int hashCode() {
-		int result = this.versionName.hashCode();
-		result = 31 * result + this.releaseStatus.hashCode();
-		result = 31 * result + this.refDocUrl.hashCode();
-		result = 31 * result + this.apiDocUrl.hashCode();
-		return result;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
-	@Override
-	public String toString() {
-		return "ProjectRelease{" + "versionName='" + this.versionName + '\''
-				+ ", release=" + this.releaseStatus + ", refDocUrl='" + this.refDocUrl
-				+ '\'' + ", apiDocUrl='" + this.apiDocUrl + '\'' + '}';
-	}
+        ProjectRelease that = (ProjectRelease) o;
+
+        if (!this.apiDocUrl.equals(that.apiDocUrl))
+            return false;
+        if (!this.refDocUrl.equals(that.refDocUrl))
+            return false;
+        if (this.releaseStatus != that.releaseStatus)
+            return false;
+        if (!this.versionName.equals(that.versionName))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = this.versionName.hashCode();
+        result = 31 * result + this.releaseStatus.hashCode();
+        result = 31 * result + this.refDocUrl.hashCode();
+        result = 31 * result + this.apiDocUrl.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ProjectRelease{" + "versionName='" + this.versionName + '\''
+                + ", release=" + this.releaseStatus + ", refDocUrl='" + this.refDocUrl
+                + '\'' + ", apiDocUrl='" + this.apiDocUrl + '\'' + '}';
+    }
 
 }

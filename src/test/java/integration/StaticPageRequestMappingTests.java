@@ -9,63 +9,58 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class StaticPageRequestMappingTests extends IntegrationTestBase {
 
-	@Test
-	public void getHomePage() throws Exception {
-		checkPage("/");
-	}
+    @Test
+    public void getHomePage() throws Exception {
+        checkPage("/");
+    }
 
-	@Test
-	public void getAboutPage() throws Exception {
-		checkPage("/about");
-	}
+    @Test
+    public void getAboutPage() throws Exception {
+        checkPage("/about");
+    }
 
-	@Test
-	public void getJobsPage() throws Exception {
-		checkPage("/jobs");
-	}
+    @Test
+    public void getJobsPage() throws Exception {
+        checkPage("/jobs");
+    }
 
-	@Test
-	public void getServicesPage() throws Exception {
-		checkPage("/services");
-	}
+    @Test
+    public void getServicesPage() throws Exception {
+        checkPage("/services");
+    }
 
-	@Test
-	public void getSigninPage() throws Exception {
-		checkPage("/signin");
-	}
+    @Test
+    public void getSigninPage() throws Exception {
+        checkPage("/signin");
+    }
 
-	@Test
-	public void getStylePage() throws Exception {
-		checkPage("/style");
-	}
+    @Test
+    public void getLogosAndUsagePage() throws Exception {
+        checkPage("/logos");
+    }
 
-	@Test
-	public void getLogosAndUsagePage() throws Exception {
-		checkPage("/logos");
-	}
+    private void checkPage(String page) throws Exception {
+        this.mockMvc.perform(get(page))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"));
+    }
 
-	private void checkPage(String page) throws Exception {
-		this.mockMvc.perform(get(page))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"));
-	}
+    @Test
+    public void getAStaticPageWithSlashAtEnd() throws Exception {
+        checkPage("/about/");
+    }
 
-	@Test
-	public void getAStaticPageWithSlashAtEnd() throws Exception {
-		checkPage("/about/");
-	}
+    @Test
+    public void getRobotsFile() throws Exception {
+        this.mockMvc.perform(get("/robots.txt"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("User-agent")));
+    }
 
-	@Test
-	public void getRobotsFile() throws Exception {
-		this.mockMvc.perform(get("/robots.txt"))
-				.andExpect(status().isOk())
-				.andExpect(content().string(containsString("User-agent")));
-	}
-
-	@Test
-	public void doesNotGetIndexPage() throws Exception {
-		this.mockMvc.perform(get("/index"))
-				.andExpect(status().isNotFound());
-	}
+    @Test
+    public void doesNotGetIndexPage() throws Exception {
+        this.mockMvc.perform(get("/index"))
+                .andExpect(status().isNotFound());
+    }
 
 }

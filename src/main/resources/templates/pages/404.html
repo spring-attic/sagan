@@ -1,15 +1,28 @@
 <html   xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorator="layout">
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
 <head>
-	<title>Page Not Found</title>
+    <title>Page Not Found</title>
 </head>
 <body>
-<h1 layout:fragment="header">Page Not Found</h1>
+  <div layout:fragment="header-container"></div>
 
 <div layout:fragment="content" class="container">
-	404. Sorry.<br/>
-	<img src="http://ithassoul.com/data/published/05_2011/f1ca80c5e09dcc28cf4912b951a4aa50_pub.jpg"/>
+  <div class="main-body--wrapper">
+    <div class="error-page">
+      <img src="/img/404-icon.png">
+      <div class="error-title">Page not found</div>
+      <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
+        <div class="big-search--container">
+          <input type="text" class="search-query search-form--form js-search-input" placeholder="Search for..." name="q" th:value="${searchForm != null ? searchForm.q : ''}" />
+          <button type="submit" class="search-form--submit"><i class="icon-search"></i></button>
+        </div>
+      </form>
+      <a href="https://twitter.com/springcentral" class="error-bottom-link">
+        <div class="social-icon twitter"></div>@springcentral
+      </a>
+    </div>
+  </div>
 </div>
 
 </body>

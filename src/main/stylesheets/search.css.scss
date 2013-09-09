@@ -1,5 +1,5 @@
 $off-white: #eee;
-$black-green: #3A3C2F; 
+$black-green: #3A3C2F;
 $lime: #8CC63F;
 $leaf: #4E681E;
 $green: #6db33f;
@@ -18,8 +18,21 @@ $icon-sprite: url("../img/iconsprite.png");
 
 
 //SEARCH RESULT STYLES
-.search-result {
-  margin-bottom: 35px;
+.search-results {
+  padding-bottom: 40px;
+  border-bottom: 1px solid #CCC;
+  .search-result {
+    margin-bottom: 35px;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.search-results--count {
+  color: #888;
+  font-size: 16px;
+  margin-bottom: 15px;
 }
 
 .search-result--title {
@@ -50,14 +63,6 @@ $icon-sprite: url("../img/iconsprite.png");
     background-color: #FFF;
   }
 }
-
-.search-result--path {
-  color: $link-green;
-  max-width: 675px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 
 .search-facets {
   form {
@@ -94,11 +99,11 @@ $icon-sprite: url("../img/iconsprite.png");
       }
     }
   }
-  
+
   .checkbox-pill{
     display: inline-block;
-    background-color: #dddddd;    
-    border-radius: 3px;    
+    background-color: #dddddd;
+    border-radius: 3px;
     span{
       padding: 2px 4px;
       color: #999;
@@ -130,7 +135,7 @@ $icon-sprite: url("../img/iconsprite.png");
       .facet--wrapper{
         border: none;
         span {
-          color: $black-brown;  
+          color: $black-brown;
           font-family: $base-font-family;
           text-transform: none;
         }
@@ -171,9 +176,9 @@ $icon-sprite: url("../img/iconsprite.png");
       .facet .facet--wrapper{
         border: none;
         padding-left: 0;
-        padding-right: 0;       
+        padding-right: 0;
       }
-    }    
+    }
     &.js-close {
       display: none;
     }

@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public class SiteUrl {
 
-	public String getUrl() {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-		String requestURL = request.getRequestURL().toString();
-		String requestURI = request.getRequestURI();
-		return requestURL.replace(requestURI, "");
-	}
+    public String getUrl() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        String requestURL = request.getRequestURL().toString();
+        String requestURI = request.getRequestURI();
+        return requestURL.replace(requestURI, "");
+    }
 
-	public String getAbsoluteUrl(String path) {
-		return getUrl() + path;
-	}
+    public String getAbsoluteUrl(String path) {
+        return getUrl() + path;
+    }
 }

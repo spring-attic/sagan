@@ -17,29 +17,29 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
 public class GuideHtmlConverterTests {
-	private GuideHtmlConverter converter;
+    private GuideHtmlConverter converter;
 
-	@Before
-	public void setUp() throws Exception {
-		converter = new GuideHtmlConverter();
-	}
+    @Before
+    public void setUp() throws Exception {
+        converter = new GuideHtmlConverter();
+    }
 
-	@Test
-	public void readInputStreamAsUTF8() throws Exception {
-		final String input = "└── is a unicode char";
+    @Test
+    public void readInputStreamAsUTF8() throws Exception {
+        final String input = "└── is a unicode char";
 
-		HttpInputMessage inputMessage = new HttpInputMessage() {
-			@Override
-			public InputStream getBody() throws IOException {
-				return new ByteArrayInputStream(input.getBytes(Charset.forName("UTF-8")));
-			}
+        HttpInputMessage inputMessage = new HttpInputMessage() {
+            @Override
+            public InputStream getBody() throws IOException {
+                return new ByteArrayInputStream(input.getBytes(Charset.forName("UTF-8")));
+            }
 
-			@Override
-			public HttpHeaders getHeaders() {
-				return null;
-			}
-		};
-		GuideHtml output = converter.read(GuideHtml.class, inputMessage);
-		assertThat(output.getHtml(), equalTo(input));
-	}
+            @Override
+            public HttpHeaders getHeaders() {
+                return null;
+            }
+        };
+        GuideHtml output = converter.read(GuideHtml.class, inputMessage);
+        assertThat(output.getHtml(), equalTo(input));
+    }
 }

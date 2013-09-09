@@ -40,100 +40,100 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class BlogAtomFeedsTests extends IntegrationTestBase {
 
-	@Autowired
-	SiteUrl siteUrl;
+    @Autowired
+    SiteUrl siteUrl;
 
-	@Autowired
-	private PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-	private XPath xpath = XPathFactory.newInstance().newXPath();
+    private XPath xpath = XPathFactory.newInstance().newXPath();
 
-	private Document getAtomFeedDocument(MvcResult mvcResult) throws ParserConfigurationException, SAXException, IOException {
-		String atomFeed = mvcResult.getResponse().getContentAsString();
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		return builder.parse(new ByteArrayInputStream(atomFeed.getBytes()));
-	}
+    private Document getAtomFeedDocument(MvcResult mvcResult) throws ParserConfigurationException, SAXException, IOException {
+        String atomFeed = mvcResult.getResponse().getContentAsString();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        return builder.parse(new ByteArrayInputStream(atomFeed.getBytes()));
+    }
 
-	private Document doGetForDocument(String path) throws Exception {
-		ResultActions resultActions = mockMvc.perform(get(path));
-		MvcResult mvcResult = resultActions.andReturn();
-		return getAtomFeedDocument(mvcResult);
-	}
+    private Document doGetForDocument(String path) throws Exception {
+        ResultActions resultActions = mockMvc.perform(get(path));
+        MvcResult mvcResult = resultActions.andReturn();
+        return getAtomFeedDocument(mvcResult);
+    }
 
-	@Test
-	public void feedHasCorrectMetadata() throws Exception {
-		Document doc = doGetForDocument("/blog.atom");
+    @Test
+    public void feedHasCorrectMetadata() throws Exception {
+        Document doc = doGetForDocument("/blog.atom");
 
-		assertThat(xpath.evaluate("/feed/title", doc), is("Spring"));
-		assertThat(xpath.evaluate("/feed/icon", doc), is(siteUrl.getAbsoluteUrl("/favicon.ico")));
-		assertThat(xpath.evaluate("/feed/link/@href", doc), is(siteUrl.getAbsoluteUrl("/blog")));
-	}
+        assertThat(xpath.evaluate("/feed/title", doc), is("Spring"));
+        assertThat(xpath.evaluate("/feed/icon", doc), is(siteUrl.getAbsoluteUrl("/favicon.ico")));
+        assertThat(xpath.evaluate("/feed/link/@href", doc), is(siteUrl.getAbsoluteUrl("/blog")));
+    }
 
-	@Test
-	public void rendersBroadcastsFeed() throws Exception {
-		Document doc = doGetForDocument("/blog/broadcasts.atom");
+    @Test
+    public void rendersBroadcastsFeed() throws Exception {
+        Document doc = doGetForDocument("/blog/broadcasts.atom");
 
-		assertThat(xpath.evaluate("/feed/title", doc), is("Spring Broadcasts"));
-		assertThat(xpath.evaluate("/feed/link/@href", doc), is(siteUrl.getAbsoluteUrl("/blog/broadcasts")));
-	}
+        assertThat(xpath.evaluate("/feed/title", doc), is("Spring Broadcasts"));
+        assertThat(xpath.evaluate("/feed/link/@href", doc), is(siteUrl.getAbsoluteUrl("/blog/broadcasts")));
+    }
 
-	@Test
-	public void rendersCategoryFeed() throws Exception {
-		Document doc = doGetForDocument("/blog/category/news.atom");
+    @Test
+    public void rendersCategoryFeed() throws Exception {
+        Document doc = doGetForDocument("/blog/category/news.atom");
 
-		assertThat(xpath.evaluate("/feed/title", doc), is("Spring News and Events"));
-		assertThat(xpath.evaluate("/feed/link/@href", doc), is(siteUrl.getAbsoluteUrl("/blog/category/news")));
-	}
+        assertThat(xpath.evaluate("/feed/title", doc), is("Spring News and Events"));
+        assertThat(xpath.evaluate("/feed/link/@href", doc), is(siteUrl.getAbsoluteUrl("/blog/category/news")));
+    }
 
-	@Test
-	public void containsBlogPostFields() throws Exception {
-		Post post = PostBuilder.post().category(PostCategory.ENGINEERING).isBroadcast().build();
-		postRepository.save(post);
+    @Test
+    public void containsBlogPostFields() throws Exception {
+        Post post = PostBuilder.post().category(PostCategory.ENGINEERING).isBroadcast().build();
+        postRepository.save(post);
 
-		ResultActions resultActions = mockMvc.perform(get("/blog.atom"));
-		MvcResult mvcResult = resultActions
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("application/atom+xml"))
-				.andReturn();
+        ResultActions resultActions = mockMvc.perform(get("/blog.atom"));
+        MvcResult mvcResult = resultActions
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/atom+xml"))
+                .andReturn();
 
-		assertThat(mvcResult.getResponse().getCharacterEncoding(), equalTo("utf-8"));
+        assertThat(mvcResult.getResponse().getCharacterEncoding(), equalTo("utf-8"));
 
-		String atomFeed = mvcResult.getResponse().getContentAsString();
-		assertThat(atomFeed, containsString(post.getTitle()));
-		assertThat(atomFeed, containsString(post.getRenderedContent()));
+        String atomFeed = mvcResult.getResponse().getContentAsString();
+        assertThat(atomFeed, containsString(post.getTitle()));
+        assertThat(atomFeed, containsString(post.getRenderedContent()));
 
-		String postDate = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedAt());
-		assertThat(atomFeed, containsString(postDate));
-		assertThat(atomFeed, containsString("/blog/" + post.getPublicSlug()));
-		assertThat(atomFeed, containsString(PostCategory.ENGINEERING.getDisplayName()));
-		assertThat(atomFeed, containsString("Broadcast"));
-	}
+        String postDate = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedAt());
+        assertThat(atomFeed, containsString(postDate));
+        assertThat(atomFeed, containsString("/blog/" + post.getPublicSlug()));
+        assertThat(atomFeed, containsString(PostCategory.ENGINEERING.getDisplayName()));
+        assertThat(atomFeed, containsString("Broadcast"));
+    }
 
-	@Test
-	public void containsAMaximumOf20Posts() throws Exception {
-		createPosts(21);
+    @Test
+    public void containsAMaximumOf20Posts() throws Exception {
+        createPosts(21);
 
-		Document doc = doGetForDocument("/blog.atom");
+        Document doc = doGetForDocument("/blog.atom");
 
-		XPathExpression expression = xpath.compile("//entry");
-		NodeList evaluate = (NodeList) expression.evaluate(doc, XPathConstants.NODESET);
-		assertThat(evaluate.getLength(), is(20));
-	}
+        XPathExpression expression = xpath.compile("//entry");
+        NodeList evaluate = (NodeList) expression.evaluate(doc, XPathConstants.NODESET);
+        assertThat(evaluate.getLength(), is(20));
+    }
 
-	private void createPosts(int numPostsToCreate) {
-		Calendar calendar = Calendar.getInstance();
-		List<Post> posts = new ArrayList<Post>();
-		for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
-			calendar.set(2013, 10, postNumber);
-			Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2013")
-					.rawContent("Raw content")
-					.renderedContent("Html content")
-					.renderedSummary("Html summary")
-					.createdAt(calendar.getTime())
-							.build();
-			posts.add(post);
-		}
-		postRepository.save(posts);
-	}
+    private void createPosts(int numPostsToCreate) {
+        Calendar calendar = Calendar.getInstance();
+        List<Post> posts = new ArrayList<Post>();
+        for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
+            calendar.set(2013, 10, postNumber);
+            Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2013")
+                    .rawContent("Raw content")
+                    .renderedContent("Html content")
+                    .renderedSummary("Html summary")
+                    .createdAt(calendar.getTime())
+                            .build();
+            posts.add(post);
+        }
+        postRepository.save(posts);
+    }
 }

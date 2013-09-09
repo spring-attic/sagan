@@ -8,8 +8,8 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @ResponseStatus(NOT_FOUND)
 public class GuideNotFoundException extends RuntimeException {
 
-	public GuideNotFoundException(String msg, Throwable ex) {
-		super(msg, ex);
-	}
+    public GuideNotFoundException(String msg, Throwable ex) {
+        super(msg, ex);
+    }
 
 }

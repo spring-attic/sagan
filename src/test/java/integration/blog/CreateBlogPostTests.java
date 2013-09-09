@@ -32,100 +32,100 @@ import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
 public class CreateBlogPostTests extends IntegrationTestBase {
 
-	@Autowired
-	private WebApplicationContext wac;
+    @Autowired
+    private WebApplicationContext wac;
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Autowired
-	private PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-	@Autowired
-	private TeamRepository teamRepository;
+    @Autowired
+    private TeamRepository teamRepository;
 
-	private Principal principal;
+    private Principal principal;
 
-	@Before
-	public void setup() {
-		MemberProfile profile = new MemberProfile();
-		profile.setUsername("author");
-		profile.setName("Mr Author");
-		profile = teamRepository.save(profile);
+    @Before
+    public void setup() {
+        MemberProfile profile = new MemberProfile();
+        profile.setUsername("author");
+        profile.setName("Mr Author");
+        profile = teamRepository.save(profile);
 
-		final String profileId = profile.getId().toString();
+        final Long profileId = profile.getId();
 
-		principal = new Principal() {
-			@Override
-			public String getName() {
-				return profileId;
-			}
-		};
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
-				.addFilters(springSecurityFilterChain)
-				.defaultRequest(get("/").with(csrf()).with(user(principal.getName()).roles("USER"))).build();
-		postRepository.deleteAll();
-	}
+        principal = new Principal() {
+            @Override
+            public String getName() {
+                return profileId.toString();
+            }
+        };
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+                .addFilters(springSecurityFilterChain)
+                .defaultRequest(get("/").with(csrf()).with(user(profileId).roles("USER"))).build();
+        postRepository.deleteAll();
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		postRepository.deleteAll();
-	}
+    @After
+    public void tearDown() throws Exception {
+        postRepository.deleteAll();
+    }
 
-	@Test
-	public void getNewBlogPage() throws Exception {
-		this.mockMvc.perform(get("/admin/blog/new"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith("text/html"))
-				.andExpect(content().string(containsString("Add New Post")));
-	}
+    @Test
+    public void getNewBlogPage() throws Exception {
+        this.mockMvc.perform(get("/admin/blog/new"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andExpect(content().string(containsString("Add New Post")));
+    }
 
-	@Test
-	public void redirectToPublishedPostAfterCreation() throws Exception {
-		MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
-		createPostRequest.param("title", "Post Title");
-		createPostRequest.param("content", "My Content");
-		createPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
+    @Test
+    public void redirectToPublishedPostAfterCreation() throws Exception {
+        MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
+        createPostRequest.param("title", "Post Title");
+        createPostRequest.param("content", "My Content");
+        createPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
         createPostRequest.param("draft", "false");
-		createPostRequest.param("publishAt", "2013-07-01 13:15");
+        createPostRequest.param("publishAt", "2013-07-01 13:15");
 
-		this.mockMvc.perform(createPostRequest)
-				.andExpect(status().isFound())
-				.andExpect(new ResultMatcher() {
-					@Override
-					public void match(MvcResult result) {
-						String redirectedUrl = result.getResponse().getRedirectedUrl();
-						assertTrue("Expected redirect to /blog/2013/07/01/post-title, got: " + redirectedUrl, redirectedUrl.matches("^/blog/2013/07/01/post-title"));
-					}
-				});
-	}
+        this.mockMvc.perform(createPostRequest)
+                .andExpect(status().isFound())
+                .andExpect(new ResultMatcher() {
+                    @Override
+                    public void match(MvcResult result) {
+                        String redirectedUrl = result.getResponse().getRedirectedUrl();
+                        assertTrue("Expected redirect to /blog/2013/07/01/post-title, got: " + redirectedUrl, redirectedUrl.matches("^/blog/2013/07/01/post-title"));
+                    }
+                });
+    }
 
-	@Test
-	public void createdPostValuesArePersisted() throws Exception {
-		MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
-		createPostRequest.param("title", "Post Title");
-		createPostRequest.param("content", "My Content");
-		createPostRequest.param("category", PostCategory.ENGINEERING.name());
-		createPostRequest.param("broadcast", "true");
+    @Test
+    public void createdPostValuesArePersisted() throws Exception {
+        MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
+        createPostRequest.param("title", "Post Title");
+        createPostRequest.param("content", "My Content");
+        createPostRequest.param("category", PostCategory.ENGINEERING.name());
+        createPostRequest.param("broadcast", "true");
 
-		mockMvc.perform(createPostRequest);
+        mockMvc.perform(createPostRequest);
 
-		Post post = postRepository.findAll().get(0);
+        Post post = postRepository.findAll().get(0);
 
-		assertThat(post.getTitle(), is("Post Title"));
-		assertThat(post.getRawContent(), is("My Content"));
-		assertThat(post.getCategory(), is(PostCategory.ENGINEERING));
-		assertThat(post.isBroadcast(), is(true));
-	}
+        assertThat(post.getTitle(), is("Post Title"));
+        assertThat(post.getRawContent(), is("My Content"));
+        assertThat(post.getCategory(), is(PostCategory.ENGINEERING));
+        assertThat(post.isBroadcast(), is(true));
+    }
 
-	private MockHttpServletRequestBuilder getCreatePostRequest() {
-		return post("/admin/blog").principal(principal);
-	}
+    private MockHttpServletRequestBuilder getCreatePostRequest() {
+        return post("/admin/blog").principal(principal);
+    }
 
-	@Test
-	public void invalidPostsShowsErrors() throws Exception {
-		MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
-		mockMvc.perform(createPostRequest)
-				.andExpect(status().isOk());
-	}
+    @Test
+    public void invalidPostsShowsErrors() throws Exception {
+        MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
+        mockMvc.perform(createPostRequest)
+                .andExpect(status().isOk());
+    }
 
 }

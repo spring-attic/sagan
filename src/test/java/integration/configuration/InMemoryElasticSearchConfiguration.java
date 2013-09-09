@@ -22,54 +22,54 @@ import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 @Configuration
 public class InMemoryElasticSearchConfiguration {
 
-	@Autowired
-	private SearchService searchService;
+    @Autowired
+    private SearchService searchService;
 
-	@Autowired
-	private Client client;
+    @Autowired
+    private Client client;
 
-	private String elasticSearchPort;
+    private String elasticSearchPort;
 
-	@Bean
-	public Client elasticSearchClient() throws Exception {
-		NodeBuilder nodeBuilder = nodeBuilder().local(false);
-		nodeBuilder.getSettings().put("network.host", "127.0.0.1");
-		nodeBuilder.getSettings().put("http.port", getElasticSearchPort());
-		nodeBuilder.getSettings().put("index.number_of_shards", "1");
-		nodeBuilder.getSettings().put("index.number_of_replicas", "0");
-		Client client = nodeBuilder.node().client();
-		return client;
-	}
+    @Bean
+    public Client elasticSearchClient() throws Exception {
+        NodeBuilder nodeBuilder = nodeBuilder().local(false);
+        nodeBuilder.getSettings().put("network.host", "127.0.0.1");
+        nodeBuilder.getSettings().put("http.port", getElasticSearchPort());
+        nodeBuilder.getSettings().put("index.number_of_shards", "1");
+        nodeBuilder.getSettings().put("index.number_of_replicas", "0");
+        Client client = nodeBuilder.node().client();
+        return client;
+    }
 
-	private String getElasticSearchPort() {
-		if (this.elasticSearchPort == null) {
-			this.elasticSearchPort = FreePortFinder.find() + "";
-		}
-		return this.elasticSearchPort;
-	}
+    private String getElasticSearchPort() {
+        if (this.elasticSearchPort == null) {
+            this.elasticSearchPort = FreePortFinder.find() + "";
+        }
+        return this.elasticSearchPort;
+    }
 
-	@PostConstruct
-	public void configureSearchService() {
-		this.searchService.setUseRefresh(true);
-	}
+    @PostConstruct
+    public void configureSearchService() {
+        this.searchService.setUseRefresh(true);
+    }
 
-	@PreDestroy
-	public void closeClient() throws Exception {
-		this.client.close();
-	}
+    @PreDestroy
+    public void closeClient() throws Exception {
+        this.client.close();
+    }
 
-	@Bean
-	@Primary
-	public JestClient jestClient() {
-		JestClientFactory factory = new JestClientFactory();
-		factory.setClientConfig(clientConfig());
-		return factory.getObject();
-	}
+    @Bean
+    @Primary
+    public JestClient jestClient() {
+        JestClientFactory factory = new JestClientFactory();
+        factory.setClientConfig(clientConfig());
+        return factory.getObject();
+    }
 
-	private ClientConfig clientConfig() {
-		LinkedHashSet<String> servers = new LinkedHashSet<>();
-		servers.add("http://localhost:" + getElasticSearchPort());
-		ClientConfig clientConfig = new ClientConfig.Builder(servers).multiThreaded(true).build();
-		return clientConfig;
-	}
+    private ClientConfig clientConfig() {
+        LinkedHashSet<String> servers = new LinkedHashSet<>();
+        servers.add("http://localhost:" + getElasticSearchPort());
+        ClientConfig clientConfig = new ClientConfig.Builder(servers).multiThreaded(true).build();
+        return clientConfig;
+    }
 }

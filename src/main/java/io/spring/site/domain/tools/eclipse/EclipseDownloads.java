@@ -3,13 +3,13 @@ package io.spring.site.domain.tools.eclipse;
 import java.util.Map;
 
 public class EclipseDownloads {
-	private final Map<String, EclipsePlatform> platforms;
+    private final Map<String, EclipsePlatform> platforms;
 
-	public EclipseDownloads(Map<String, EclipsePlatform> platforms) {
-		this.platforms = platforms;
-	}
+    public EclipseDownloads(Map<String, EclipsePlatform> platforms) {
+        this.platforms = platforms;
+    }
 
-	public Map<String, EclipsePlatform> getPlatforms() {
-		return platforms;
-	}
+    public Map<String, EclipsePlatform> getPlatforms() {
+        return platforms;
+    }
 }

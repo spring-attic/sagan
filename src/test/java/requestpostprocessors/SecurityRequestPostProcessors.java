@@ -15,14 +15,6 @@
  */
 package requestpostprocessors;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -45,6 +37,13 @@ import org.springframework.util.Assert;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Demonstrates how to use a {@link RequestPostProcessor} to add
  * request-building methods for establishing a security context for Spring
@@ -65,7 +64,7 @@ public final class SecurityRequestPostProcessors {
      * details are declarative and do not require that the user actually exists.
      * This means that the authorities or roles need to be specified too.
      */
-    public static UserRequestPostProcessor user(String username) {
+    public static UserRequestPostProcessor user(Object username) {
         return new UserRequestPostProcessor(username);
     }
 
@@ -144,7 +143,7 @@ public final class SecurityRequestPostProcessors {
     public final static class UserRequestPostProcessor
             extends SecurityContextRequestPostProcessorSupport implements RequestPostProcessor {
 
-        private final String username;
+        private final Object username;
 
         private String rolePrefix = "ROLE_";
 
@@ -152,7 +151,7 @@ public final class SecurityRequestPostProcessors {
 
         private List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-        private UserRequestPostProcessor(String username) {
+        private UserRequestPostProcessor(Object username) {
             Assert.notNull(username, "username cannot be null");
             this.username = username;
         }

@@ -15,17 +15,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @Controller
 public class UnderstandingGuidesController {
 
-	private final UnderstandingGuidesService understandingGuidesService;
+    private final UnderstandingGuidesService understandingGuidesService;
 
-	@Autowired
-	public UnderstandingGuidesController(UnderstandingGuidesService understandingGuidesService) {
-		this.understandingGuidesService = understandingGuidesService;
-	}
+    @Autowired
+    public UnderstandingGuidesController(UnderstandingGuidesService understandingGuidesService) {
+        this.understandingGuidesService = understandingGuidesService;
+    }
 
-	@RequestMapping(value = "/understanding/{subject}", method = {GET, HEAD})
-	public String understandingASubject(@PathVariable String subject, Model model) {
-		UnderstandingGuide guide = understandingGuidesService.getGuideForSubject(subject);
-		model.addAttribute("guide", guide);
-		return "understanding/show";
-	}
+    @RequestMapping(value = "/understanding/{subject}", method = {GET, HEAD})
+    public String understandingASubject(@PathVariable String subject, Model model) {
+        UnderstandingGuide guide = understandingGuidesService.getGuideForSubject(subject);
+        model.addAttribute("guide", guide);
+        return "understanding/show";
+    }
 }

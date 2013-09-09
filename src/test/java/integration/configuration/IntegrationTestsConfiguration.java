@@ -16,10 +16,10 @@ import static org.mockito.Mockito.mock;
 @ComponentScan("integration.stubs")
 public class IntegrationTestsConfiguration {
 
-	@Primary
-	@Bean
-	public RestTemplate mockRestTemplate() {
-		return mock(RestTemplate.class);
-	}
+    @Primary
+    @Bean
+    public RestTemplate mockRestTemplate() {
+        return mock(RestTemplate.class);
+    }
 
 }

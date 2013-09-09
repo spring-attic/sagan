@@ -8,17 +8,11 @@
 <body>
     <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container">
-    <div class="admin-index--title back-btn">
-      <p>
-        <a th:href="@{/admin}">
-          <i class="icon-chevron-left"></i>
-          Back
-        </a>
-      </p>
-    </div>
+    <div class="main-body--wrapper">
+
     <div class="admin-index--title">
       <div class="content--title search-title">
-        Manage Team Members
+        <a th:href="@{/admin}">Admin</a> : Team
       </div>
     </div>
     <form th:action="@{'/admin/team/github_import'}" method="post" class='form-inline admin-index--title'>
@@ -33,25 +27,24 @@
                     <td>
                         <p>
                             <a th:text="(${member.name}?:'') + ' (' + ${member.username}+ ')'"
-    						   th:href="@{'/admin/team/'+${member.username}}">Full Name (username)</a>
+                               th:href="@{'/admin/team/'+${member.username}}">Full Name (username)</a>
                         </p>
-                    </td>
-                </tr>
-            </table>
+                        </td>
+                    </tr>
+                </table>
 
-
-            <h2>Hidden Members</h2>
-            <table class='table dashboard--members'>
-                <tr th:each="member : ${hiddenMembers}" layout:fragment="post-row">
-                    <td>
-                        <p>
-                            <a th:text="(${member.name}?:'') + ' (' + ${member.username}+ ')'"
-    						   th:href="@{'/admin/team/'+${member.username}}">Full Name (username)</a>
-                        </p>
-                    </td>
-                </tr>
-            </table>
-
+                <h2>Hidden Members</h2>
+                <table class='table dashboard--members'>
+                    <tr th:each="member : ${hiddenMembers}" layout:fragment="post-row">
+                        <td>
+                            <p>
+                                <a th:text="(${member.name}?:'') + ' (' + ${member.username}+ ')'"
+                                   th:href="@{'/admin/team/'+${member.username}}">Full Name (username)</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>

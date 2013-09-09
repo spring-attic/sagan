@@ -1,17 +1,12 @@
 <!DOCTYPE html>
-<html 
+<html
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <body>
     <div layout:fragment="full-post">
-      <div class="desktop-only">
-        <div th:class="${beans.uih.blogClass(activeCategory?:'','All Posts') + ' content--title'}">
-          All Posts
-        </div>
-        <div th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
-          <div th:text="${category.displayName}">Engineering</div>
-        </div>
+      <div th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
+        <div th:text="${category.displayName}">Engineering</div>
       </div>
       <div class="blog--container">
         <div class="blog--title" th:text="*{title}">Blog post</div>
@@ -23,7 +18,7 @@
           <div class="meta-data--item">
             <img class="meta-data--icon" th:src="@{${post.author.avatarUrl} + '?s=20&amp;d=mm'}" />
             <a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.username}}" th:unless="${post.author.hidden}">Author</a>
-		        <span class='author' th:text="${post.author.name}" th:if="${post.author.hidden}">Author</span>
+                <span class='author' th:text="${post.author.name}" th:if="${post.author.hidden}">Author</span>
           </div>
           <div class="meta-data--item">
             <div class="meta-data--icon icon blog-icon calendar"></div>
@@ -35,12 +30,8 @@
     <div class="blog-comments--wrapper">
       <div class="blog-comments--container desktop-only">
         <div class="blog-comments--header">
-          Have feedback? Let <a href="http://twitter.com/_springteam">@_springteam</a> know on Twitter.
-            <a href="http://twitter.com/_springteam" class="icon icon-social-twitter pull-right"></a>
+          Have feedback? Let the team know at <a th:href="@{'https://twitter.com/intent/tweet?text=@springcentral&related=springcentral&url=http://spring.io'+${post.path}}">@springcentral</a>. We read every mention.
         </div>
-        <p class="blog-comments--body">
-          We read every mention.
-        </p>
       </div>
       <div class="mobile-only">
         <p><a th:href="@{/blog}">

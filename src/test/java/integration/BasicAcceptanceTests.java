@@ -34,83 +34,83 @@ import static org.junit.Assert.assertTrue;
 
 public class BasicAcceptanceTests {
 
-	public static int port;
+    public static int port;
 
-	private static ConfigurableApplicationContext context;
+    private static ConfigurableApplicationContext context;
 
-	private static String serverAddress;
+    private static String serverAddress;
 
-	@BeforeClass
-	public static void start() throws Exception {
-		port = FreePortFinder.find();
-		serverAddress = "http://localhost:" + port;
+    @BeforeClass
+    public static void start() throws Exception {
+        port = FreePortFinder.find();
+        serverAddress = "http://localhost:" + port;
 
-		Future<ConfigurableApplicationContext> future = Executors
-				.newSingleThreadExecutor().submit(
-						new Callable<ConfigurableApplicationContext>() {
-							@Override
-							public ConfigurableApplicationContext call() throws Exception {
-								return (ConfigurableApplicationContext) SpringApplication
-										.run(IntegrationTestsConfiguration.class,
-												"--server.port=" + port,
-												"--spring.profiles.active=site,acceptance");
-							}
-						});
-		context = future.get(30, TimeUnit.SECONDS);
-	}
+        Future<ConfigurableApplicationContext> future = Executors
+                .newSingleThreadExecutor().submit(
+                        new Callable<ConfigurableApplicationContext>() {
+                            @Override
+                            public ConfigurableApplicationContext call() throws Exception {
+                                return (ConfigurableApplicationContext) SpringApplication
+                                        .run(IntegrationTestsConfiguration.class,
+                                                "--server.port=" + port,
+                                                "--spring.profiles.active=site,acceptance");
+                            }
+                        });
+        context = future.get(30, TimeUnit.SECONDS);
+    }
 
-	@AfterClass
-	public static void stop() {
-		if (context != null) {
-			context.close();
-		}
-	}
+    @AfterClass
+    public static void stop() {
+        if (context != null) {
+            context.close();
+        }
+    }
 
-	private ResponseEntity<String> doGet(String path) {
-		return getRestTemplate().getForEntity(serverAddress + path, String.class);
-	}
+    private ResponseEntity<String> doGet(String path) {
+        return getRestTemplate().getForEntity(serverAddress + path, String.class);
+    }
 
-	private RestTemplate getRestTemplate() {
-		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.setErrorHandler(new DefaultResponseErrorHandler() {
-			@Override
-			public boolean hasError(ClientHttpResponse response) throws IOException {
-				return false;
-			}
-		});
-		return restTemplate;
-	}
+    private RestTemplate getRestTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setErrorHandler(new DefaultResponseErrorHandler() {
+            @Override
+            public boolean hasError(ClientHttpResponse response) throws IOException {
+                return false;
+            }
+        });
+        return restTemplate;
+    }
 
-	@Test
-	public void getStaticPage() throws Exception {
-		ResponseEntity<String> response = doGet("/");
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertTrue(response.getHeaders().getContentType()
-				.isCompatibleWith(MediaType.valueOf("text/html")));
-	}
+    @Test
+    public void getStaticPage() throws Exception {
+        ResponseEntity<String> response = doGet("/");
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(response.getHeaders().getContentType()
+                .isCompatibleWith(MediaType.valueOf("text/html")));
+    }
 
-	@Test
-	public void getStyleSheet() throws Exception {
-		ResponseEntity<String> response = doGet("/bootstrap/css/bootstrap.css");
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertTrue(response.getHeaders().getContentType()
-				.isCompatibleWith(MediaType.valueOf("text/css")));
-	}
+    @Test
+    public void getStyleSheet() throws Exception {
+        ResponseEntity<String> response = doGet("/bootstrap/css/bootstrap.css");
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(response.getHeaders().getContentType()
+                .isCompatibleWith(MediaType.valueOf("text/css")));
+    }
 
-	@Test
-	public void adminIsSecure() {
-		ResponseEntity<String> response = doGet("/admin/blog");
-		assertEquals(HttpStatus.OK, response.getStatusCode());
+    @Test
+    public void adminIsSecure() {
+        ResponseEntity<String> response = doGet("/admin/blog");
+        assertEquals(HttpStatus.OK, response.getStatusCode());
 
-		Document html = Jsoup.parse(response.getBody());
-		Element loginButton = html.select(".body--container form button").first();
-		assertThat("No login button found", loginButton, is(notNullValue()));
-		assertThat(loginButton.text(), is(equalTo("Sign in with github")));
-	}
+        Document html = Jsoup.parse(response.getBody());
+        Element loginButton = html.select(".body--container form button").first();
+        assertThat("No login button found", loginButton, is(notNullValue()));
+        assertThat(loginButton.text(), is(equalTo("Sign in with github")));
+    }
 
-	@Test
-	public void userCanSignOut() throws Exception {
-		ResponseEntity<String> response = doGet("/signout");
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-	}
+    @Test
+    public void userCanSignOut() throws Exception {
+        ResponseEntity<String> response = doGet("/signout");
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
 }

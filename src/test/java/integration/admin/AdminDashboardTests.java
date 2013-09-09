@@ -8,8 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class AdminDashboardTests extends IntegrationTestBase {
 
-	@Test
-	public void adminDashboard() throws Exception {
-		mockMvc.perform(get("/admin")).andExpect(status().isOk());
-	}
+    @Test
+    public void adminDashboard() throws Exception {
+        mockMvc.perform(get("/admin")).andExpect(status().isOk());
+    }
 }

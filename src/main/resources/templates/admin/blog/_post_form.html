@@ -42,13 +42,13 @@
                     </div>
                 </div>
 
-                <div class="control-group inline" th:class="'control-group inline ' + (${#fields.hasErrors('broadcast')}? ' error')">
+                <!-- <div class="control-group inline" th:class="'control-group inline ' + (${#fields.hasErrors('broadcast')}? ' error')">
                     <label class="control-label" for="broadcast">Broadcast:</label>
                     <div class="controls">
                         <input type="checkbox" th:field="*{broadcast}" id="broadcast" name="broadcast" />
                         <span class="help-inline" th:if="${#fields.hasErrors('broadcast')}" th:errors="*{broadcast}">Incorrect broadcast</span>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="well">
                     <div class="control-group">
@@ -70,7 +70,7 @@
                 $('#datetimepicker1').datetimepicker({pickSeconds: false});
             });
         </script>
-        
+
     </form>
 </body>
 </html>

@@ -1,5 +1,5 @@
 $off-white: #eee;
-$black-green: #3A3C2F; 
+$black-green: #3A3C2F;
 $lime: #8CC63F;
 $leaf: #4E681E;
 $green: #6db33f;
@@ -64,6 +64,10 @@ body {
   }
 }
 
+.spaced--container {
+  margin: 60px 0;
+}
+
 .code-snippet {
   border-radius: 2px;
   border: 1px solid #ccc;
@@ -89,39 +93,12 @@ body {
     border-radius: 0;
     .spring-logo--container {
       display: inline-block;
-      padding: 15px 0;
-      .logo-bg {
-        width: 37px;
-        height: 30px;
-        border-radius: 30px;
-        margin: 6px 0 0 1px;
-        background-color: $green;
-        position: absolute;
-        z-index: 1034;
-        opacity: 0;
-        transition: opacity 0.15s;
-        -webkit-transition: opacity 0.15s;
-        -moz-transition: opacity 0.15s;
-        -o-transition: opacity 0.15s;
-        -ms-transition: opacity 0.15s;
-      }
       .spring-logo {
-        background-image: $icon-sprite;
-        width: 153px;
-        height: 40px;
-        -webkit-background-size: 1001px 837px;
-        -moz-background-size: 1001px 837px;
-        -o-background-size: 1001px 837px;
-        background-size: 1001px 837px;
-        // background-repeat: no-repeat;
-        background-position: 1000px 836px;
-        position: absolute;
-        z-index: 1035;
-      }
-      &:hover {
-        .logo-bg {
-          opacity: 1;
-        }
+        margin: 12px 0 6px;
+        width: 160px;
+        height: 46px;
+        display: inline-block;
+        text-decoration: none;
       }
     }
     .navbar-link {
@@ -237,7 +214,24 @@ body {
   }
 }
 
+a.spring-logo {
+    background: url("../img/spring-logo.png") -1px -1px no-repeat;
+}
 
+a.spring-logo span {
+    display: block;
+    width: 160px;
+    height: 46px;
+    background: url("../img/spring-logo.png") -1px -48px no-repeat;
+    opacity: 0;
+    -moz-transition: opacity .12s ease-in-out;
+    -webkit-transition: opacity .12s ease-in-out;
+    -o-transition: opacity .12s ease-in-out;
+}
+
+a:hover.spring-logo span {
+    opacity: 1;
+}
 
 .right-pane-widget--container {
   border: 1px solid #ccc;
@@ -305,10 +299,12 @@ body {
   }
 }
 
-.body--container {
+// .body--container {
+// }
+
+.main-body--wrapper {
   margin-top: 100px;
   margin-bottom: 100px;
-  min-height: 925px;
 }
 
 .row--container {
@@ -487,7 +483,7 @@ input.floating-input {
   }
   textarea {
     min-height: 300px;
-  } 
+  }
 }
 .blog-post-form--right-pane {
   .control-group {
@@ -545,6 +541,12 @@ input.floating-input {
   position: absolute;
   margin-top: -30px;
   font-family: $secondary-font-family;
+  a {
+    color: $black-brown;
+    &:hover {
+      color: $link-green;
+    }
+  }
   &.search-title {
     position: relative;
   }
@@ -557,16 +559,32 @@ input.floating-input {
 }
 
 .index-page--title {
-  margin-bottom: 30px;
   line-height: 24px;
+  &.top-margin {
+    margin-top: 60px;
+  }
 }
 
 .index-page--subtitle {
   font-size: 16px;
   line-height: 24px;
-  margin-bottom: 60px;
+  margin: 30px 0 60px;
   a {
     color: $link-green;
+  }
+  &.jobs-subtitle {
+    margin-bottom: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid #ccc;
+  }
+  &.with-subtext {
+    margin-bottom: -30px;
+    .subtext {
+      display: inline-block;
+      font-size: 14px;
+      margin: 21px 0 0;
+      color: rgba(52, 48, 45, 0.9);
+    }
   }
 }
 
@@ -591,7 +609,7 @@ input.floating-input {
         &:hover {
           color: $green;
         }
-      } 
+      }
       &:first-child a {
         padding-left: 0;
       }
@@ -893,19 +911,15 @@ input.floating-input {
       padding: 8px;
       width: 291px;
        &::-webkit-input-placeholder {
-          font-style: italic;
           color: #999;
         }
         &:-moz-placeholder {
-          font-style: italic;
           color: #999;
         }
         &::-moz-placeholder {
-          font-style: italic;
           color: #999;
         }
         &:-ms-input-placeholder {
-          font-style: italic;
           color: #999;
         }
     }
@@ -943,18 +957,14 @@ input.floating-input {
       padding-right: 50px;
     }
   }
-   
+
   .content-items--container {
     padding: 20px;
   }
 }
 
+
 .billboard--wrapper {
-  position: absolute;
-  top: 74px;
-  left: 0;
-  right: 0;
-  width: 100%;
   .billboard--container {
     position: absolute;
     z-index: 600;
@@ -977,7 +987,7 @@ input.floating-input {
       .billboard--sub-title {
         font-size: 18px;
         line-height: 18px;
-        padding: 0 19px 12px;
+        padding: 2px 19px 12px;
         &:first-child {
           padding-top: 12px;
         }
@@ -1002,8 +1012,8 @@ input.floating-input {
   }
 }
 .billboard-body--wrapper {
-  margin-top: 326px;
-  padding: 100px 0;
+  // margin-top: 326px;
+  padding: 0 0 100px;
 }
 
 
@@ -1091,7 +1101,7 @@ form.lpeRegForm ul input[type='text'] {
   margin: -78px -3px 0 222px;
 }
 
-#mktFrmSubmit { 
+#mktFrmSubmit {
   text-transform: uppercase;
   background-color: #6db33f;
   background-image: none;
@@ -1116,23 +1126,23 @@ form.lpeRegForm label {
 }
 
 form.lpeRegForm ul {
-  font-size: 12px; 
-  color: black; 
-  font-family: Arial, Helvetica, sans-serif; 
-} 
+  font-size: 12px;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 form.lpeRegForm ul input, form.lpeRegForm ul input[type='text'], form.lpeRegForm ul textarea, form.lpeRegForm ul select {
-  font-size: 12px; 
-  color: black; 
-  font-family: Arial, Helvetica, sans-serif; 
-} 
+  font-size: 12px;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 form.lpeRegForm li {
-  margin-bottom: 10px; 
-} 
+  margin-bottom: 10px;
+}
 
 form.lpeRegForm .mktInput {
-  padding-left: 0px; 
+  padding-left: 0px;
 }
 
 //ABOUT STYLES
@@ -1147,6 +1157,21 @@ form.lpeRegForm .mktInput {
   -ms-transition: border, box-shadow 0.20s;
   -o-transition: border, box-shadow 0.20s;
   border: 1px solid transparent;
+  .icon--container {
+    height: 200px;
+    display: inline-block;
+    .icon {
+      vertical-align: middle;
+      position: relative;
+      top: 50%;
+      &.icon-spring-logo-big {
+        margin-top: -77px;
+      }
+      &.icon-spring-logo {
+        margin-top: -20px;
+      }
+    }
+  }
   .title, .text, .link {
     color: #f1f1f1;
   }
@@ -1176,9 +1201,10 @@ form.lpeRegForm .mktInput {
   &:active {
     box-shadow: inset 0 6px 10px darken($black-brown, 10%);
   }
-}
-.about-page-fix {
-  margin-top: 201px;
+  &.no-link {
+    box-shadow: none;
+    border: none;
+  }
 }
 
 //JOB STYLES
@@ -1300,8 +1326,6 @@ form.lpeRegForm .mktInput {
     background-color: $black-brown;
     display: inline-block;
     text-align: center;
-    border: 1px solid $green;
-    box-shadow: 0 0 6px $green;
     margin-bottom: 30px;
     .icon {
       margin: 22px 6px;
@@ -1325,6 +1349,54 @@ form.lpeRegForm .mktInput {
     box-shadow: none;
   }
 }
+
+.white-btn--container {
+  background-color: white;
+  padding: 50px 0;
+  display: inline-block;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 3px #ccc;
+  text-align: center;
+  width: 95%;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+  .icon--container {
+    width: 190px;
+    height: 190px;
+    border-radius: 190px;
+    background-color: $black-brown;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 30px;
+    .icon {
+      margin: 22px 6px;
+    }
+    i {
+      color: #FFF;
+      font-size: 150px;
+      margin-top: 11px;
+      display: inline-block;
+    }
+    &.white-bg {
+      background-color: white;
+    }
+  }
+  p {
+    font-size: 20px;
+
+  }
+  &:hover {
+    box-shadow: 0 0 3px $green;
+    text-decoration: none;
+  }
+  &:active {
+    box-shadow: none;
+  }
+}
+
 
 .pagination {
   margin: -1px 0 0 0;
@@ -1350,6 +1422,158 @@ form.lpeRegForm .mktInput {
     }
     &:hover {
       color: $black-brown;
+    }
+  }
+}
+
+.usage-lists {
+  margin: 0;
+  list-style: none;
+  li {
+    margin-bottom: 5px;
+  }
+  & [class^="icon-"] {
+    margin-right: 10px;
+  }
+  &.okay {
+    & [class^="icon-"] {
+      color: $green;
+    }
+  }
+  &.not-okay {
+    & [class^="icon-"] {
+      color: #BA4160;
+    }
+  }
+}
+
+.min-height {
+  min-height: 900px;
+}
+
+.platform-index--header {
+  padding: 100px 0;
+  position: relative;
+  &:after {
+    content: "";
+    opacity: 0.1;
+    background: url("../img/platform-bg.png") 100% 0 no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 55%;
+    z-index: -1;
+  }
+  .index-page--subtitle {
+    margin-bottom: 0;
+    padding-right: 20px;
+  }
+
+  .platform-watermark--large {
+    background: url("../img/spring-platform-watermark-large.png") 50% 0 no-repeat;
+    width: 100%;
+    height: 123px;
+  }
+}
+
+.platform-stack--wrapper {
+  background: url("../img/platform-diagram-noise.png") $black-brown;
+  box-shadow: inset 0 15px 30px darken($black-brown, 10%), inset 0 -15px 30px darken($black-brown, 10%);
+  text-align: center;
+  padding: 60px 0;
+}
+
+.platform-project {
+  display: inline-block;
+  clear: both;
+  .project--container {
+    float: left;
+    padding: 20px 10px;
+    height: 300px;
+    box-sizing: border-box;
+    width: 24.153%;
+    margin: 40px 1% 40px 0;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  .project-icon {
+    font-size: 98px;
+    margin-bottom: 20px;
+  }
+  .project--title {
+    margin-bottom: 10px;
+    text-transform: none;
+  }
+  .description {
+    width: 48.306%;
+    float: left;
+    margin-top: 20px;
+    margin-right: 1%;
+    padding-right: 1%;
+  }
+}
+
+.error-page {
+  text-align: center;
+  img {
+    display: inline-block;
+  }
+  .error-title {
+    font-size: 24px;
+    line-height: 24px;
+    margin: 30px 0 0;
+  }
+  .big-search--container {
+    display: inline-block;
+    width: 64%;
+    background-color: white;
+    text-align: left;
+    margin: 50px 0 40px;
+    padding: 0 40px;
+    position: relative;
+    input {
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      font-size: 24px;
+      line-height: 30px;
+      padding: 26px 0;
+      width: 95%;
+      display: inline-block;
+    }
+    button {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-color: transparent;
+      border: none;
+      padding: 25px 28px;
+      font-size: 20px;
+      color: #666;
+    }
+  }
+  .error-bottom-link {
+    .social-icon.twitter {
+      background-image: url("../img/iconsprite.png");
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      background-position: -1px -143px;
+      vertical-align: middle;
+      margin-right: 15px;
+    }
+    font-size: 14px;
+    color: $link-green;
+    text-decoration: none;
+    &:hover {
+      .twitter {
+        background-position: -84px -143px;
+      }
+      color: lighten($link-green, 5%);
     }
   }
 }

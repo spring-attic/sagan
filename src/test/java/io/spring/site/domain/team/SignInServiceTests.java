@@ -28,64 +28,64 @@ import static org.mockito.BDDMockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class SignInServiceTests {
 
-	@Mock
-	private GitHub gitHub;
+    @Mock
+    private GitHub gitHub;
 
-	@Mock
-	private TeamService teamService;
+    @Mock
+    private TeamService teamService;
 
-	private SignInService signInService;
-	private String username = "user";
-	private String name = "Full Name";
-	private String location = "London";
-	private String email = "user@example.com";
-	private String avatarUrl = "http://gravatar.com/avatar/ABC";
+    private SignInService signInService;
+    private String username = "user";
+    private String name = "Full Name";
+    private String location = "London";
+    private String email = "user@example.com";
+    private String avatarUrl = "http://gravatar.com/avatar/ABC";
 
-	@Before
-	public void setup() {
-		signInService = new SignInService(teamService);
-	}
+    @Before
+    public void setup() {
+        signInService = new SignInService(teamService);
+    }
 
-	@Test
-	public void createOrUpdateMemberProfileOnLogin() {
-		GitHubUserProfile userProfile = new GitHubUserProfile(1234L, username, name, location, "", "", email, avatarUrl, null);
-		UserOperations userOperations = mock(UserOperations.class);
+    @Test
+    public void createOrUpdateMemberProfileOnLogin() {
+        GitHubUserProfile userProfile = new GitHubUserProfile(1234L, username, name, location, "", "", email, avatarUrl, null);
+        UserOperations userOperations = mock(UserOperations.class);
 
-		given(userOperations.getUserProfile()).willReturn(userProfile);
-		given(gitHub.userOperations()).willReturn(userOperations);
+        given(userOperations.getUserProfile()).willReturn(userProfile);
+        given(gitHub.userOperations()).willReturn(userOperations);
 
-		signInService.getOrCreateMemberProfile(1234L, gitHub);
+        signInService.getOrCreateMemberProfile(1234L, gitHub);
 
-		verify(teamService).createOrUpdateMemberProfile(1234L, username, avatarUrl, name);
-	}
+        verify(teamService).createOrUpdateMemberProfile(1234L, username, avatarUrl, name);
+    }
 
-	@Test
-	public void isSpringMember() {
-		mockIsMemberOfTeam(true);
+    @Test
+    public void isSpringMember() {
+        mockIsMemberOfTeam(true);
 
-		assertThat(signInService.isSpringMember("member", gitHub), is(true));
-	}
+        assertThat(signInService.isSpringMember("member", gitHub), is(true));
+    }
 
-	@Test
-	public void isNotSpringMember() {
-		mockIsMemberOfTeam(false);
+    @Test
+    public void isNotSpringMember() {
+        mockIsMemberOfTeam(false);
 
-		assertThat(signInService.isSpringMember("notmember", gitHub), is(false));
-	}
+        assertThat(signInService.isSpringMember("notmember", gitHub), is(false));
+    }
 
-	private void mockIsMemberOfTeam(boolean isMember) {
-		RestOperations restOperations = mock(RestOperations.class);
-		given(gitHub.restOperations()).willReturn(restOperations);
-		BDDMyOngoingStubbing<ResponseEntity<Void>> expectedResult = given(restOperations
-				.getForEntity(anyString(),
-						argThat(new ArgumentMatcher<Class<Void>>() {
-							@Override
-							public boolean matches(Object argument) {
-								return true;
-							}
-						}), anyString(), anyString()));
+    private void mockIsMemberOfTeam(boolean isMember) {
+        RestOperations restOperations = mock(RestOperations.class);
+        given(gitHub.restOperations()).willReturn(restOperations);
+        BDDMyOngoingStubbing<ResponseEntity<Void>> expectedResult = given(restOperations
+                .getForEntity(anyString(),
+                        argThat(new ArgumentMatcher<Class<Void>>() {
+                            @Override
+                            public boolean matches(Object argument) {
+                                return true;
+                            }
+                        }), anyString(), anyString()));
 
-		HttpStatus statusCode = isMember ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
-		expectedResult.willReturn(new ResponseEntity<Void>(statusCode));
-	}
+        HttpStatus statusCode = isMember ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
+        expectedResult.willReturn(new ResponseEntity<Void>(statusCode));
+    }
 }

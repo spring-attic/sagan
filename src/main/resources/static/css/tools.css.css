@@ -93,10 +93,23 @@
   font-size: 16px;
   line-height: 24px;
   margin-bottom: 20px;
+  padding-right: 20px;
 }
 .tools--wrapper .tools--description.small-font {
   font-size: 14px;
   line-height: 24px;
+}
+.tools--wrapper .tools--description li {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.tools--wrapper .tools--description li:last-child {
+  margin-bottom: 40px;
+}
+.tools--wrapper .tools--description em {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: bold;
 }
 .tools--wrapper .centered-title {
   margin-bottom: 10px;
@@ -320,8 +333,16 @@
   font-family: "Montserrat", sans-serif;
   line-height: 16px;
 }
+.tool-versions--wrapper .tool-versions--container .tools-version-dropdown--title {
+  display: block;
+}
+.tool-versions--wrapper .tool-versions--container .place-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 .tool-versions--wrapper .tool-versions--container .platform-version--dropdown {
-  width: 82.7%;
+  width: 82.75%;
 }
 
 .eclipse-platform--container {
@@ -397,9 +418,19 @@
   font-size: 12px;
   line-height: 12px;
   border-bottom: 1px solid #cccccc;
+  font-family: "Montserrat", sans-serif;
 }
 .tool-archive--table td:last-child {
   color: #6c635d;
+}
+.tool-archive--table td:first-child {
+  border-left: 1px solid #cccccc;
+}
+.tool-archive--table td:last-child {
+  border-right: 1px solid #cccccc;
+}
+.tool-archive--table tr:last-child {
+  border-bottom: 1px solid #cccccc;
 }
 .tool-archive--table a {
   color: #5fa134;

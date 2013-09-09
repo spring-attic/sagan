@@ -1,5 +1,5 @@
 $off-white: #eee;
-$black-green: #3A3C2F; 
+$black-green: #3A3C2F;
 $lime: #8CC63F;
 $leaf: #4E681E;
 $green: #6db33f;
@@ -114,7 +114,7 @@ $icon-sprite: url("../img/iconsprite.png");
     ul, ol {
       margin: 15px 0 20px 25px;
       li {
-        padding: 6px 0;
+        padding-bottom: 20px;
         font-size: 15px;
         line-height: 18px;
       }
@@ -125,6 +125,9 @@ $icon-sprite: url("../img/iconsprite.png");
     }
     pre {
       margin: 20px 0;
+    }
+    strong{
+      font-family: $secondary-font-family;
     }
     blockquote {
       margin: 20px 0;
@@ -189,7 +192,7 @@ $icon-sprite: url("../img/iconsprite.png");
       line-height: 14px;
       padding: 18px;
       a {
-        color: $link-green;
+        color: $green;
       }
       .icon {
         margin-top: -11px;
@@ -198,7 +201,7 @@ $icon-sprite: url("../img/iconsprite.png");
     .blog-comments--body {
       padding: 18px;
     }
-  } 
+  }
 }
 
 
@@ -255,5 +258,5 @@ $icon-sprite: url("../img/iconsprite.png");
   text-transform: uppercase;
   border: 6px solid white;
   color: #ccc;
-  background-color: #ddd; 
+  background-color: #ddd;
 }

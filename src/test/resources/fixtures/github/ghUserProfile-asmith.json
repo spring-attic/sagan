@@ -6,7 +6,7 @@
   "url": "https://api.github.com/users/asmith",
   "name": "Adam Smith",
   "company": "Spring",
-  "blog": "https://springframework.io/blog",
+  "blog": "https://spring.io/blog",
   "location": "Antartica",
   "email": "asmith@example.com",
   "hireable": false,

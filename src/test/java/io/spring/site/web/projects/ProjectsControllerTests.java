@@ -16,27 +16,27 @@ import static org.hamcrest.Matchers.equalTo;
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectsControllerTests {
 
-	@Mock
-	private ProjectMetadataService projectMetadataService;
+    @Mock
+    private ProjectMetadataService projectMetadataService;
 
-	private ExtendedModelMap model = new ExtendedModelMap();
-	private ProjectsController controller;
+    private ExtendedModelMap model = new ExtendedModelMap();
+    private ProjectsController controller;
 
-	@Before
-	public void setUp() throws Exception {
-		this.controller = new ProjectsController(this.projectMetadataService);
-	}
+    @Before
+    public void setUp() throws Exception {
+        this.controller = new ProjectsController(this.projectMetadataService);
+    }
 
-	@Test
-	public void listProjects_providesProjectMetadataServiceInModel() {
-		controller.listProjects(model);
-		assertThat((ProjectMetadataService) model.get("projectMetadata"), equalTo(projectMetadataService));
-	}
+    @Test
+    public void listProjects_providesProjectMetadataServiceInModel() {
+        controller.listProjects(model);
+        assertThat((ProjectMetadataService) model.get("projectMetadata"), equalTo(projectMetadataService));
+    }
 
-	@Test
-	public void listProjectReleases_providesReleaseMetadataInJsonPCallback() {
-		controller.listProjects(model);
-		assertThat((ProjectMetadataService) model.get("projectMetadata"), equalTo(projectMetadataService));
-	}
+    @Test
+    public void listProjectReleases_providesReleaseMetadataInJsonPCallback() {
+        controller.listProjects(model);
+        assertThat((ProjectMetadataService) model.get("projectMetadata"), equalTo(projectMetadataService));
+    }
 
 }

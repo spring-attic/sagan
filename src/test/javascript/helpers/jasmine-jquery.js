@@ -474,7 +474,7 @@ jasmine.JQuery.matchersClass = {}
     toContain: function(selector) {
       return this.actual.find(selector).length
     },
-    
+
     toBeMatchedBy: function(selector) {
       return this.actual.filter(selector).length
     },
@@ -662,7 +662,7 @@ beforeEach(function() {
       }
     }
     return jasmine.undefined;
-    
+
   })
 })
 
