@@ -78,6 +78,10 @@ $link-green: #5fa134;
 }
 
 
+a[name="gs"], a[name="tutorials"] {
+  text-decoration: none !important;
+}
+
 
 .content--container {
   h1 {

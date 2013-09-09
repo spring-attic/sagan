@@ -7,41 +7,43 @@
 <body>
 <div layout:fragment="header-container"></div>
 <div layout:fragment="content">
-  <div class="tools--wrapper">
-    <div class="content--title">Tools</div>
-      <h1 class="tools--title">Groovy/Grails Tool Suite&trade; Downloads</h1>
-      <p class="tools--description">Use one of the links below to download an all-in-one
-          distribution for your platform. Choose either a native installer or simple
-          archive, they contain equivalent functionality.</p>
-            <div class="ga--release" layout:include="tools/_tools_versions :: tools-versions" th:with="release=${gaRelease}"></div>
-            <div class="milestone--release" layout:include="tools/_tools_versions :: tools-versions" th:with="release=${milestoneRelease}" th:if="${milestoneRelease.hasPlatforms()}"></div>
-      <h2>Update Site Archives</h2>
-      <p>You can download archived versions of the update sites, if you
-          want to install STS/GGTS into an existing Eclipse installation or if
-          you want to update an existing STS/GGTS installation without
-          accessing the hosted version of the update repository.</p>
-      <table class="table table-striped tool-archive--table">
-        <thead>
-          <tr>
-            <th>Eclipse</th>
-            <th>Archive</th>
-            <th>Size</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="archive : ${updateSiteArchives}">
-            <td th:text="${archive.version}"></td>
-            <td><a th:href="${archive.url}" th:text="${archive.fileName}"></a></td>
-            <td th:text="${archive.fileSize}"></td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="tools-bottom--container">
-        <div>
-          <p><a href="https://issuetracker.springsource.com/browse/STS">File a ticket for STS using our JIRA</a></p>
-        </div>
-        <div>
-          <p><a href="http://forum.spring.io/forum/spring-projects/springsource-tool-suite">Have a question or a problem? Ask the forum for STS</a></p>
+  <div class="main-body--wrapper">
+    <div class="tools--wrapper">
+      <div class="content--title">Tools</div>
+        <h1 class="tools--title">Groovy/Grails Tool Suite&trade; Downloads</h1>
+        <p class="tools--description">Use one of the links below to download an all-in-one
+            distribution for your platform. Choose either a native installer or simple
+            archive, they contain equivalent functionality.</p>
+              <div class="ga--release" layout:include="tools/_tools_versions :: tools-versions" th:with="release=${gaRelease}"></div>
+              <div class="milestone--release" layout:include="tools/_tools_versions :: tools-versions" th:with="release=${milestoneRelease}" th:if="${milestoneRelease.hasPlatforms()}"></div>
+        <h2>Update Site Archives</h2>
+        <p>You can download archived versions of the update sites, if you
+            want to install STS/GGTS into an existing Eclipse installation or if
+            you want to update an existing STS/GGTS installation without
+            accessing the hosted version of the update repository.</p>
+        <table class="table table-striped tool-archive--table">
+          <thead>
+            <tr>
+              <th>Eclipse</th>
+              <th>Archive</th>
+              <th>Size</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="archive : ${updateSiteArchives}">
+              <td th:text="${archive.version}"></td>
+              <td><a th:href="${archive.url}" th:text="${archive.fileName}"></a></td>
+              <td th:text="${archive.fileSize}"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="tools-bottom--container">
+          <div>
+            <p><a href="https://issuetracker.springsource.com/browse/STS">File a ticket for STS using our JIRA</a></p>
+          </div>
+          <div>
+            <p><a href="http://forum.spring.io/forum/spring-projects/springsource-tool-suite">Have a question or a problem? Ask the forum for STS</a></p>
+          </div>
         </div>
       </div>
     </div>

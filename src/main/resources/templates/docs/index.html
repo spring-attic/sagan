@@ -8,31 +8,33 @@
 <body>
 <div layout:fragment="header-container"></div>
 <div layout:fragment="content" class="container-fluid">
-    <div class="row-fluid docs--header">
-        <div class="span12">
-            <h1 class="index-page--title">Documentation</h1>
-            <p class="index-page--subtitle">
-                Here you'll find quick access to API and reference documentation for all Spring projects. If you're just getting to know Spring or tackling building something new, check out our task-focused <a href="/guides#gs">Getting Started Guides</a> and <a href="/guides#tutorials">Tutorials</a>.
-            </p>
+    <div class="main-body--wrapper">
+        <div class="row-fluid docs--header">
+            <div class="span12">
+                <h1 class="index-page--title">Documentation</h1>
+                <p class="index-page--subtitle">
+                    Here you'll find quick access to API and reference documentation for all Spring projects. If you're just getting to know Spring or tackling building something new, check out our task-focused <a href="/guides#gs">Getting Started Guides</a> and <a href="/guides#tutorials">Tutorials</a>.
+                </p>
+            </div>
         </div>
-    </div>
 
-    <div class="row-fluid content-container--wrapper docs--body" >
-        <div class="content-container--header">
-            <input type='text' id='doc_filter' style="color:#aaa;" onfocus="this.value=''; this.style.color='#000'; this.style.fontStyle='normal'; this.onfocus='';" value="Find a project..." placeholder="Find a project..." class="content-container--filter"/>
-        </div>
-        <div data-filterable-container>
-            <div class="js-item-dropdown-widget--wrapper">
-                <h2 class="docs-section-title no-border">Spring Projects</h2>
-                <div layout:include="docs/_projects :: projects" th:with="projects=${activeProjects}"></div>
+        <div class="row-fluid content-container--wrapper docs--body" >
+            <div class="content-container--header">
+                <input type='text' id='doc_filter' style="color:#aaa;" onfocus="this.value=''; this.style.color='#000'; this.style.fontStyle='normal'; this.onfocus='';" value="Find a project..." placeholder="Find a project..." class="content-container--filter"/>
             </div>
-            <div class="js-item-dropdown-widget--wrapper">
-                <h2 class="docs-section-title">Projects in Incubation</h2>
-                <div layout:include="docs/_projects :: projects" th:with="projects=${incubatorProjects}"></div>
-            </div>
-            <div class="js-item-dropdown-widget--wrapper">
-                <h2 class="docs-section-title">Projects in the Attic</h2>
-                <div layout:include="docs/_projects :: projects" th:with="projects=${atticProjects}"></div>
+            <div data-filterable-container>
+                <div class="js-item-dropdown-widget--wrapper">
+                    <h2 class="docs-section-title no-border">Spring Projects</h2>
+                    <div layout:include="docs/_projects :: projects" th:with="projects=${activeProjects}"></div>
+                </div>
+                <div class="js-item-dropdown-widget--wrapper">
+                    <h2 class="docs-section-title">Projects in Incubation</h2>
+                    <div layout:include="docs/_projects :: projects" th:with="projects=${incubatorProjects}"></div>
+                </div>
+                <div class="js-item-dropdown-widget--wrapper">
+                    <h2 class="docs-section-title">Projects in the Attic</h2>
+                    <div layout:include="docs/_projects :: projects" th:with="projects=${atticProjects}"></div>
+                </div>
             </div>
         </div>
     </div>

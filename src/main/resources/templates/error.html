@@ -8,7 +8,9 @@
 <h1 layout:fragment="header">Unexpected Error</h1>
 
 <div layout:fragment="content" class="container">
-There was an unexpected error on the server: <span th:text="${error}">Error</span> (<span th:text="${status}">888</span>).
+  <div class="main-body--wrapper">
+    There was an unexpected error on the server: <span th:text="${error}">Error</span> (<span th:text="${status}">888</span>).
+  </div>
 </div>
 
 </body>
