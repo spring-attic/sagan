@@ -32,9 +32,6 @@
   padding-top: 12px;
 }
 
-.homepage--body {
-  margin-bottom: -200px;
-}
 .homepage--body .platform--wrapper {
   background: url("../img/platform-bg.png") #34302d 50% 0 no-repeat;
   height: 438px;

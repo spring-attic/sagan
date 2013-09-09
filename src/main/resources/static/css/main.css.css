@@ -6,7 +6,7 @@
   min-width: 1060px;
 }
 
-.billboard--wrapper, .key-feature--wrapper, .offset-feature--container, .support--wrapper, footer, .search-dropdown--container, .team-map--wrapper, .billboard-bg, .platform--wrapper {
+.billboard--wrapper, .key-feature--wrapper, .offset-feature--container, .support--wrapper, footer, .search-dropdown--container, .team-map--wrapper, .billboard-bg, .platform--wrapper, .platform-stack--wrapper {
   min-width: 1100px;
 }
 
@@ -267,7 +267,7 @@ a:hover.spring-logo span {
   color: #4e681e;
 }
 
-.body--container {
+.main-body--wrapper {
   margin-top: 100px;
   margin-bottom: 100px;
 }

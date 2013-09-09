@@ -8,17 +8,19 @@
   <body>
     <div layout:fragment="header-container"></div>
     <div layout:fragment="content" class="container-fluid">
-      <div class="row-fluid">
-        <div class="span8">
-          <article class="content--container" th:utext="${guide.content}">
-          </article>
-        </div>
-
-        <aside id='sidebar' class="span4 content-right-pane--container">
-          <div class="right-pane-widget--container">
-            <div class='related_resources' th:utext="${guide.sidebar}">Sidebar content</div>
+      <div class="main-body--wrapper">
+        <div class="row-fluid">
+          <div class="span8">
+            <article class="content--container" th:utext="${guide.content}">
+            </article>
           </div>
-        </aside>
+
+          <aside id='sidebar' class="span4 content-right-pane--container">
+            <div class="right-pane-widget--container">
+              <div class='related_resources' th:utext="${guide.sidebar}">Sidebar content</div>
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   </body>
