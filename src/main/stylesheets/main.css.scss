@@ -573,6 +573,15 @@ input.floating-input {
     padding-bottom: 60px;
     border-bottom: 1px solid #ccc;
   }
+  &.with-subtext {
+    margin-bottom: -30px;
+    .subtext {
+      display: inline-block;
+      font-size: 14px;
+      margin: 21px 0 0;
+      color: rgba(52, 48, 45, 0.9);
+    }
+  }
 }
 
 //FOOTER
