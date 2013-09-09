@@ -109,6 +109,11 @@ public class RewriteTests {
     }
 
     @Test
+    public void tutorialImagesShouldNeverHaveTrailingSlash() throws ServletException, IOException, URISyntaxException {
+        validateOk("/guides/tutorials/rest/images/yummynoodle.jpg");
+    }
+
+    @Test
     public void gsgGuidesListingRedirectsToIndex() throws ServletException, IOException, URISyntaxException {
         validateTemporaryRedirect("/guides/gs/", "/guides#gs");
         validateTemporaryRedirect("/guides/gs", "/guides#gs");
