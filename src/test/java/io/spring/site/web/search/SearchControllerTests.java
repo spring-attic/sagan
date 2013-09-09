@@ -31,58 +31,58 @@ import static org.mockito.Matchers.anyString;
 
 public class SearchControllerTests {
 
-	@Mock
-	private SearchService searchService;
+    @Mock
+    private SearchService searchService;
 
-	private SearchController controller;
-	private ExtendedModelMap model = new ExtendedModelMap();
-	private Page<SearchResult> resultsPage;
-	private List<SearchResult> entries = new ArrayList<>();
-	private SearchForm searchForm = new SearchForm();
+    private SearchController controller;
+    private ExtendedModelMap model = new ExtendedModelMap();
+    private Page<SearchResult> resultsPage;
+    private List<SearchResult> entries = new ArrayList<>();
+    private SearchForm searchForm = new SearchForm();
 
-	@SuppressWarnings("unchecked")
-	@Before
-	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
-		this.controller = new SearchController(this.searchService);
-		SearchResult entry = new SearchResult("", "", "", "", "", "", "",
-				"original search term");
-		this.entries.add(entry);
-		this.resultsPage = new PageImpl<>(this.entries);
-		given(this.searchService.search(anyString(), (Pageable) anyObject(), anyList()))
-				.willReturn(
-						new SearchResults(this.resultsPage, Collections
-								.<SearchFacet> emptyList()));
-	}
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+        this.controller = new SearchController(this.searchService);
+        SearchResult entry = new SearchResult("", "", "", "", "", "", "",
+                "original search term");
+        this.entries.add(entry);
+        this.resultsPage = new PageImpl<>(this.entries);
+        given(this.searchService.search(anyString(), (Pageable) anyObject(), anyList()))
+                .willReturn(
+                        new SearchResults(this.resultsPage, Collections
+                                .<SearchFacet> emptyList()));
+    }
 
-	@Test
-	public void search_providesQueryInModel() {
-		this.searchForm.setQ("searchTerm");
-		this.controller.search(this.searchForm, 1, this.model);
-		assertThat((SearchForm) this.model.get("searchForm"), equalTo(this.searchForm));
-	}
+    @Test
+    public void search_providesQueryInModel() {
+        this.searchForm.setQ("searchTerm");
+        this.controller.search(this.searchForm, 1, this.model);
+        assertThat((SearchForm) this.model.get("searchForm"), equalTo(this.searchForm));
+    }
 
-	@Test
-	public void search_providesPaginationInfoInModel() {
-		this.searchForm.setQ("searchTerm");
-		this.controller.search(this.searchForm, 1, this.model);
-		assertThat(this.model.get("paginationInfo"), is(notNullValue()));
-	}
+    @Test
+    public void search_providesPaginationInfoInModel() {
+        this.searchForm.setQ("searchTerm");
+        this.controller.search(this.searchForm, 1, this.model);
+        assertThat(this.model.get("paginationInfo"), is(notNullValue()));
+    }
 
-	@SuppressWarnings("unchecked")
-	@Test
-	public void search_providesResultsInModel() {
-		this.searchForm.setQ("searchTerm");
-		this.controller.search(this.searchForm, 1, this.model);
-		assertThat((List<SearchResult>) this.model.get("results"), equalTo(this.entries));
-	}
+    @SuppressWarnings("unchecked")
+    @Test
+    public void search_providesResultsInModel() {
+        this.searchForm.setQ("searchTerm");
+        this.controller.search(this.searchForm, 1, this.model);
+        assertThat((List<SearchResult>) this.model.get("results"), equalTo(this.entries));
+    }
 
-	@SuppressWarnings("unchecked")
-	@Test
-	public void search_providesAllResultsForBlankQuery() {
-		this.searchForm.setQ("");
-		this.controller.search(this.searchForm, 1, this.model);
-		assertThat((List<SearchResult>) this.model.get("results"), equalTo(this.entries));
-	}
+    @SuppressWarnings("unchecked")
+    @Test
+    public void search_providesAllResultsForBlankQuery() {
+        this.searchForm.setQ("");
+        this.controller.search(this.searchForm, 1, this.model);
+        assertThat((List<SearchResult>) this.model.get("results"), equalTo(this.entries));
+    }
 
 }

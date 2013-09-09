@@ -5,50 +5,56 @@
       layout:decorator="layout">
 <head>
     <title>Team</title>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+
+    <script th:src="@{/leaflet/leaflet.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/leaflet/leaflet.css}" />
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/leaflet/leaflet.ie.css}" />
     <![endif]-->
-    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+
     <script type="text/javascript" th:src="@{/js/team.js}" src="../../static/js/team.js"></script>
 </head>
 <body>
   <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container">
+  <div layout:fragment="full-width--layout">
     <div class="billboard--wrapper js-team-map--wrapper">
       <div class="billboard--container center-text js-team-map--container">
         <div class="container-fluid">
           <div class="billboard--title">
-            The Spring Team Near You
+            The Spring Team
           </div>
           <div class="billboard--sub-title--container">
             <div class="billboard--sub-title">
-              The Spring team is wherever you are building tools and services that get you coding faster. Love us? 
+              We work together from around the world with one mission &ndash; building quality, open-source
             </div>
             <div class="billboard--sub-title">
-              Check out our jobs or click to learn more about us.
+              software that helps you and your team be more productive on the JVM.
             </div>
           </div>
         </div>
       </div>
       <div id="map" class="billboard-bg"></div>
-    </div> 
-    <div class="team-members--wrapper">
-      <div class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
-        <a th:href="@{'/team/' + ${profile.username}}" class="team-member--avatar">
-          <img th:src="${profile.avatarUrl} + '?s=153&s=153'" />
-        </a>
-        <div class="team-member--info">
-          <a th:href="@{'/team/' + ${profile.username}}" class="team-member--name" th:text="${profile.name}">Member Name</a>
-          <div class="team-member--bio">
-            <p class="team-member--position" th:text="${profile.jobTitle}">Rock Star</p>
-            <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
-          </div>
-          <div class="team-member--social">
-            <a class="team-member--social--icon twitter-small" th:href="'http://twitter.com/'+ ${profile.twitterUsername}" th:unless="${#strings.isEmpty(profile.twitterUsername)}"></a>
-            <a class="team-member--social--icon github-small" th:href="'http://github.com/'+ ${profile.githubUsername}" th:unless="${#strings.isEmpty(profile.githubUsername)}"></a>
-            <a class="team-member--social--icon speakerdeck-small" th:href="'http://speakerdeck.com/'+ ${profile.speakerdeckUsername}" th:unless="${#strings.isEmpty(profile.speakerdeckUsername)}"></a>
-            <a class="team-member--social--icon lanyrd-small" th:href="'http://lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:unless="${#strings.isEmpty(profile.lanyrdUsername)}"></a>
+    </div>
+  </div>
+  <div layout:fragment="content">
+    <div class="main-body--wrapper">
+      <div class="team-members--wrapper">
+        <div class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
+          <a th:href="@{'/team/' + ${profile.username}}" class="team-member--avatar">
+            <img th:src="${profile.avatarUrl} + '?s=153&s=153'" />
+          </a>
+          <div class="team-member--info">
+            <a th:href="@{'/team/' + ${profile.username}}" class="team-member--name" th:text="${profile.name}">Member Name</a>
+            <div class="team-member--bio">
+              <p class="team-member--position" th:text="${profile.jobTitle}">Rock Star</p>
+              <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
+            </div>
+            <div class="team-member--social">
+              <a class="team-member--social--icon twitter-small" th:href="'http://twitter.com/'+ ${profile.twitterUsername}" th:if="${profile.hasTwitterUsername()}"></a>
+              <a class="team-member--social--icon github-small" th:href="'http://github.com/'+ ${profile.githubUsername}" th:if="${profile.hasGithubUsername()}"></a>
+              <a class="team-member--social--icon speakerdeck-small" th:href="'http://speakerdeck.com/'+ ${profile.speakerdeckUsername}" th:if="${profile.hasSpeakerdeckUsername()}"></a>
+              <a class="team-member--social--icon lanyrd-small" th:href="'http://lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:if="${profile.hasLanyrdUsername()}"></a>
+            </div>
           </div>
         </div>
       </div>
@@ -56,7 +62,7 @@
     <script th:inline="javascript">
       /*<![CDATA[*/
       var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
-	  $(function() { Spring.CreateMap() });
+      $(function() { Spring.CreateMap() });
       /*]]>*/
     </script>
   </div>

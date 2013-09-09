@@ -22,32 +22,32 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @NavSection("guides")
 public class GettingStartedController {
 
-	public static final String GUIDES_ROOT = "/guides/gs";
-	private static final String TRAILING_SLASH = "/";
-	private static final String SHOW_GUIDE = "/{guideId}" + TRAILING_SLASH;
+    public static final String GUIDES_ROOT = "/guides/gs";
+    private static final String TRAILING_SLASH = "/";
+    private static final String SHOW_GUIDE = "/{guideId}" + TRAILING_SLASH;
 
-	static String getPath(Guide guide) {
-		return GUIDES_ROOT + "/" + guide.getGuideId() + TRAILING_SLASH;
-	}
+    static String getPath(Guide guide) {
+        return GUIDES_ROOT + "/" + guide.getGuideId() + TRAILING_SLASH;
+    }
 
-	private GuidesService service;
+    private GuidesService service;
 
-	@Autowired
-	public GettingStartedController(GuidesService service) {
-		this.service = service;
-	}
+    @Autowired
+    public GettingStartedController(GuidesService service) {
+        this.service = service;
+    }
 
-	@RequestMapping(value = SHOW_GUIDE, method = { GET, HEAD })
-	public String viewGuide(@PathVariable String guideId, Model model) {
-		model.addAttribute("guideSlug", guideId);
-		model.addAttribute("guide", this.service.loadGettingStartedGuide(guideId));
-		return "guides/gs/guide";
-	}
+    @RequestMapping(value = SHOW_GUIDE, method = { GET, HEAD })
+    public String viewGuide(@PathVariable String guideId, Model model) {
+        model.addAttribute("guideSlug", guideId);
+        model.addAttribute("guide", this.service.loadGettingStartedGuide(guideId));
+        return "guides/gs/guide";
+    }
 
-	@RequestMapping(value = "/{guideSlug}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })
-	public ResponseEntity<byte[]> loadImage(@PathVariable String guideSlug,
-											@PathVariable("name") String imageName) {
-		byte[] image = this.service.loadGettingStartedImage(guideSlug, imageName);
-		return new ResponseEntity<>(image, HttpStatus.OK);
-	}
+    @RequestMapping(value = "/{guideSlug}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })
+    public ResponseEntity<byte[]> loadImage(@PathVariable String guideSlug,
+                                            @PathVariable("name") String imageName) {
+        byte[] image = this.service.loadGettingStartedImage(guideSlug, imageName);
+        return new ResponseEntity<>(image, HttpStatus.OK);
+    }
 }

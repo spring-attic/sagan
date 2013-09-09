@@ -28,31 +28,31 @@ import static org.junit.Assert.assertNotNull;
 
 public class IndexerConfigurationTests {
 
-	private ConfigurableApplicationContext context;
+    private ConfigurableApplicationContext context;
 
-	@After
-	public void clean() {
-		if (this.context != null) {
-			this.context.close();
-		}
-	}
+    @After
+    public void clean() {
+        if (this.context != null) {
+            this.context.close();
+        }
+    }
 
-	@Test
-	public void testContextLoading() throws Exception {
-		int port = FreePortFinder.find();
+    @Test
+    public void testContextLoading() throws Exception {
+        int port = FreePortFinder.find();
 
-		this.context = (ConfigurableApplicationContext) SpringApplication.run(
-				IndexerConfiguration.class, "--server.port=" + port,
-				"--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb",
-				"--search.indexer.delay=6000000",
-				"--elasticsearch.client.endpoint=http://localhost:9200",
-				"--elasticsearch.client.index=sagan-test",
-				"--spring.profiles.active=integration-test");
+        this.context = (ConfigurableApplicationContext) SpringApplication.run(
+                IndexerConfiguration.class, "--server.port=" + port,
+                "--spring.database.url=jdbc:hsqldb:mem:acceptancetestdb",
+                "--search.indexer.delay=6000000",
+                "--elasticsearch.client.endpoint=http://localhost:9200",
+                "--elasticsearch.client.index=sagan-test",
+                "--spring.profiles.active=integration-test");
 
-		IndexerConfiguration configuration = this.context
-				.getBean(IndexerConfiguration.class);
-		assertNotNull(configuration);
-		this.context.close();
-	}
+        IndexerConfiguration configuration = this.context
+                .getBean(IndexerConfiguration.class);
+        assertNotNull(configuration);
+        this.context.close();
+    }
 
 }

@@ -8,8 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ProjectPagesTests extends IntegrationTestBase {
 
-	@Test
-	public void getProjectIndex() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/projects")).andExpect(status().isOk());
-	}
+    @Test
+    public void getProjectIndex() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/projects")).andExpect(status().isOk());
+    }
 }

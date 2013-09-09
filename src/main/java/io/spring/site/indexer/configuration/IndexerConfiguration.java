@@ -32,45 +32,45 @@ import java.util.concurrent.Executors;
 @Import({ SearchClientConfiguration.class, GitHubConfiguration.class })
 public class IndexerConfiguration {
 
-	@Value("classpath:/project-metadata.yml")
-	private Resource projectMetadata;
+    @Value("classpath:/project-metadata.yml")
+    private Resource projectMetadata;
 
-	public static void main(String[] args) {
-		SpringApplication application = new SpringApplication(IndexerConfiguration.class);
-		application.run(args);
-	}
+    public static void main(String[] args) {
+        SpringApplication application = new SpringApplication(IndexerConfiguration.class);
+        application.run(args);
+    }
 
-	@Bean
-	public TaskScheduler scheduler() {
-		ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-		scheduler.setPoolSize(10);
-		return scheduler;
-	}
+    @Bean
+    public TaskScheduler scheduler() {
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.setPoolSize(10);
+        return scheduler;
+    }
 
-	@Bean
-	public ExecutorService executorService() {
-		return Executors.newFixedThreadPool(10);
-	}
+    @Bean
+    public ExecutorService executorService() {
+        return Executors.newFixedThreadPool(10);
+    }
 
-	@Bean
-	public StaticPagePathFinder staticPageMapper(ResourcePatternResolver resourceResolver) {
-		return new StaticPagePathFinder(resourceResolver);
-	}
+    @Bean
+    public StaticPagePathFinder staticPageMapper(ResourcePatternResolver resourceResolver) {
+        return new StaticPagePathFinder(resourceResolver);
+    }
 
-	@Bean
-	public ProjectMetadataService projectMetadataService() throws IOException {
-		return new ProjectMetadataYamlParser().createServiceFromYaml(this.projectMetadata
-				.getInputStream());
-	}
+    @Bean
+    public ProjectMetadataService projectMetadataService() throws IOException {
+        return new ProjectMetadataYamlParser().createServiceFromYaml(this.projectMetadata
+                .getInputStream());
+    }
 
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
-	@Bean
-	public Serializer simpleXmlSerializer() {
-		return new Persister();
-	}
+    @Bean
+    public Serializer simpleXmlSerializer() {
+        return new Persister();
+    }
 
 }

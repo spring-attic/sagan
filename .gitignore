@@ -4,6 +4,7 @@
 target
 .springBeans
 .settings
+!.settings/org.eclipse.wst.html.core.prefs
 .classpath
 .project
 build
@@ -20,7 +21,9 @@ data/
 tmp/
 PlaygroundTest.java
 *.sw?
-full_blog_export.xml
-clean_blog_export.xml
 classes/
-blog_importer
+.new-relic/
+test.log
+logs/
+blog_importer/
+work/

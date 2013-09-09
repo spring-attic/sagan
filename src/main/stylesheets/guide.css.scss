@@ -1,5 +1,5 @@
 $off-white: #eee;
-$black-green: #3A3C2F; 
+$black-green: #3A3C2F;
 $lime: #8CC63F;
 $leaf: #4E681E;
 $green: #6db33f;
@@ -77,6 +77,10 @@ $link-green: #5fa134;
   }
 }
 
+
+a[name="gs"], a[name="tutorials"] {
+  text-decoration: none !important;
+}
 
 
 .content--container {
@@ -279,10 +283,6 @@ $link-green: #5fa134;
   }
 }
 
-
-
-
-
 a.ci-status {
   float: right;
   margin-top: -27px;
@@ -290,4 +290,60 @@ a.ci-status {
 
 .gs-guide-import {
   display: none;
+}
+
+.tutorial-text {
+  img {
+    border: 6px solid white;
+    box-shadow: 0 0px 4px #CCC, 0 1px 0 #ccc;
+  }
+  table {
+    border-color: #808080;
+    text-align: left;
+    margin: 60px 0;
+    th {
+      text-transform: uppercase;
+      font-size: 12px;
+      line-height: 15px;
+      border-bottom: 1px solid #CCC;
+      padding: 0 30px 5px 8px;
+      vertical-align: bottom;
+      font-family: $secondary-font-family;
+      &:last-child{ 
+        padding-right: 8px;
+      }
+    }
+    tr:last-child {
+      border-bottom: 1px solid #ccc;
+    }
+    td {
+      padding: 8px 20px 8px 8px;
+      line-height: 20px;
+      text-align: left;
+      vertical-align: top;
+      border-top: 1px solid #DDD;
+      &:last-child {
+        padding-right: 8px;
+        border-right: 1px solid #ccc;
+      }
+      &:first-child {
+        border-left: 1px solid #ccc;
+      }
+    }
+    tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th {
+      background-color: #F9F9F9;
+    }
+  }
+  article.markdown-body {
+    h1 {
+      font-size: 21px;
+      line-height: 28px;
+      font-weight: 400;
+      margin: 30px 0 10px;
+    }
+    h2 {
+      font-family: $base-font-family;
+      font-size: 19px;
+    }
+  } 
 }

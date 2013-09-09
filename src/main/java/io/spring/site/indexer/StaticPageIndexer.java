@@ -18,54 +18,54 @@ import java.util.Set;
 @Service
 public class StaticPageIndexer implements Indexer<String> {
 
-	@Value(value = "${search.indexer.base_url:http://localhost:8080}")
-	private String baseUrl;
+    @Value(value = "${search.indexer.base_url:http://localhost:8080}")
+    private String baseUrl;
 
-	private final CrawlerService crawlerService;
-	private final StaticPagePathFinder staticPagePathFinder;
-	private final CrawledWebDocumentProcessor documentProcessor;
+    private final CrawlerService crawlerService;
+    private final StaticPagePathFinder staticPagePathFinder;
+    private final CrawledWebDocumentProcessor documentProcessor;
 
-	private static final Set<String> pagesToIgnore = new HashSet<>();
-	static {
-		pagesToIgnore.add("/error");
-		pagesToIgnore.add("/500");
-		pagesToIgnore.add("/404");
-	}
+    private static final Set<String> pagesToIgnore = new HashSet<>();
+    static {
+        pagesToIgnore.add("/error");
+        pagesToIgnore.add("/500");
+        pagesToIgnore.add("/404");
+    }
 
-	@Autowired
-	public StaticPageIndexer(CrawlerService crawlerService, SearchService searchService, StaticPagePathFinder staticPagePathFinder) {
-		this.crawlerService = crawlerService;
-		this.staticPagePathFinder = staticPagePathFinder;
-		this.documentProcessor = new CrawledWebDocumentProcessor(searchService, new LocalStaticPagesSearchEntryMapper());
-	}
+    @Autowired
+    public StaticPageIndexer(CrawlerService crawlerService, SearchService searchService, StaticPagePathFinder staticPagePathFinder) {
+        this.crawlerService = crawlerService;
+        this.staticPagePathFinder = staticPagePathFinder;
+        this.documentProcessor = new CrawledWebDocumentProcessor(searchService, new LocalStaticPagesSearchEntryMapper());
+    }
 
-	@Override
-	public Iterable<String> indexableItems() {
-		List<String> paths = new ArrayList<>();
-		try {
-			for (StaticPagePathFinder.PagePaths pagePaths : staticPagePathFinder.findPaths()) {
-				if (!pagesToIgnore.contains(pagePaths.getUrlPath())) {
-					paths.add(baseUrl + pagePaths.getUrlPath());
-				}
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return paths;
-	}
+    @Override
+    public Iterable<String> indexableItems() {
+        List<String> paths = new ArrayList<>();
+        try {
+            for (StaticPagePathFinder.PagePaths pagePaths : staticPagePathFinder.findPaths()) {
+                if (!pagesToIgnore.contains(pagePaths.getUrlPath())) {
+                    paths.add(baseUrl + pagePaths.getUrlPath());
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return paths;
+    }
 
-	@Override
-	public void indexItem(String path) {
-		crawlerService.crawl(path, 0, documentProcessor);
-	}
+    @Override
+    public void indexItem(String path) {
+        crawlerService.crawl(path, 0, documentProcessor);
+    }
 
-	@Override
-	public String counterName() {
-		return "static";
-	}
+    @Override
+    public String counterName() {
+        return "static";
+    }
 
-	@Override
-	public String getId(String path) {
-		return path;
-	}
+    @Override
+    public String getId(String path) {
+        return path;
+    }
 }

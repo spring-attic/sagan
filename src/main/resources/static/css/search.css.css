@@ -1,5 +1,18 @@
-.search-result {
+.search-results {
+  padding-bottom: 40px;
+  border-bottom: 1px solid #cccccc;
+}
+.search-results .search-result {
   margin-bottom: 35px;
+}
+.search-results .search-result:last-child {
+  margin-bottom: 0px;
+}
+
+.search-results--count {
+  color: #888;
+  font-size: 16px;
+  margin-bottom: 15px;
 }
 
 .search-result--title {
@@ -31,13 +44,6 @@
   font-style: normal;
   color: #000;
   background-color: #FFF;
-}
-
-.search-result--path {
-  color: #5fa134;
-  max-width: 675px;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .search-facets form {

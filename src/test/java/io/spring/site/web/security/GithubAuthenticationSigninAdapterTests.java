@@ -29,60 +29,60 @@ import static org.mockito.BDDMockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class GithubAuthenticationSigninAdapterTests {
 
-	private GithubAuthenticationSigninAdapter adapter;
-	@SuppressWarnings("unchecked")
-	private Connection<GitHub> connection = Mockito.mock(Connection.class);
+    private GithubAuthenticationSigninAdapter adapter;
+    @SuppressWarnings("unchecked")
+    private Connection<GitHub> connection = Mockito.mock(Connection.class);
 
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
-	@Mock
-	private SignInService signInService;
+    @Mock
+    private SignInService signInService;
 
-	@Before
-	public void setup() {
-		adapter = new GithubAuthenticationSigninAdapter("/foo", signInService);
-	}
+    @Before
+    public void setup() {
+        adapter = new GithubAuthenticationSigninAdapter("/foo", signInService);
+    }
 
-	@After
-	public void clean() {
-		SecurityContextHolder.clearContext();
-	}
+    @After
+    public void clean() {
+        SecurityContextHolder.clearContext();
+    }
 
-	@Test
-	public void signInSunnyDay() {
-		MemberProfile newMember = new MemberProfile();
-		given(signInService.getOrCreateMemberProfile(anyLong(), any(GitHub.class))).willReturn(newMember);
-		given(connection.getDisplayName()).willReturn("dsyer");
-		given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willReturn(true);
+    @Test
+    public void signInSunnyDay() {
+        MemberProfile newMember = new MemberProfile();
+        given(signInService.getOrCreateMemberProfile(anyLong(), any(GitHub.class))).willReturn(newMember);
+        given(connection.getDisplayName()).willReturn("dsyer");
+        given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willReturn(true);
 
-		adapter.signIn("12345", connection, new ServletWebRequest(
-				new MockHttpServletRequest()));
-		Authentication authentication = SecurityContextHolder.getContext()
-				.getAuthentication();
-		assertNotNull(authentication);
-		assertTrue(authentication.isAuthenticated());
-		verify(signInService).getOrCreateMemberProfile(eq(12345L), any(GitHub.class));
-	}
+        adapter.signIn("12345", connection, new ServletWebRequest(
+                new MockHttpServletRequest()));
+        Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+        assertNotNull(authentication);
+        assertTrue(authentication.isAuthenticated());
+        verify(signInService).getOrCreateMemberProfile(eq(12345L), any(GitHub.class));
+    }
 
-	@Test
-	public void signInFailure() {
-		given(connection.getDisplayName()).willReturn("dsyer");
-		given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willReturn(false);
+    @Test
+    public void signInFailure() {
+        given(connection.getDisplayName()).willReturn("dsyer");
+        given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willReturn(false);
 
-		expectedException.expect(BadCredentialsException.class);
-		adapter.signIn("12345", connection, new ServletWebRequest(
-				new MockHttpServletRequest()));
-	}
+        expectedException.expect(BadCredentialsException.class);
+        adapter.signIn("12345", connection, new ServletWebRequest(
+                new MockHttpServletRequest()));
+    }
 
-	@SuppressWarnings("unchecked")
-	@Test
-	public void signInFailureAfterRestException() {
-		given(connection.getDisplayName()).willReturn("dsyer");
-		given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willThrow(RestClientException.class);
-		expectedException.expect(BadCredentialsException.class);
-		adapter.signIn("12345", connection, new ServletWebRequest(
-				new MockHttpServletRequest()));
-	}
+    @SuppressWarnings("unchecked")
+    @Test
+    public void signInFailureAfterRestException() {
+        given(connection.getDisplayName()).willReturn("dsyer");
+        given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willThrow(RestClientException.class);
+        expectedException.expect(BadCredentialsException.class);
+        adapter.signIn("12345", connection, new ServletWebRequest(
+                new MockHttpServletRequest()));
+    }
 
 }

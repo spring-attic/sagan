@@ -1,0 +1,29 @@
+---
+applications:
+- name: sagan-blue
+  memory: 2G
+  instances: 4
+  env:
+    SPRING_PROFILES_ACTIVE: site,production
+  host: sagan-production-blue
+  domain: cfapps.io
+  path: ../target/spring-io-site.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack
+- name: sagan-green
+  memory: 2G
+  instances: 4
+  env:
+    SPRING_PROFILES_ACTIVE: site,production
+  host: sagan-production-green
+  domain: cfapps.io
+  path: ../target/spring-io-site.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack
+- name: sagan-indexer
+  memory: 2G
+  instances: 1
+  env:
+    SPRING_PROFILES_ACTIVE: indexer,production
+  host: sagan-indexer
+  domain: cfapps.io
+  path: ../target/spring-io-site.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack

@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>0.5.0.BUILD-SNAPSHOT</version>
+        <version>0.5.0.M4</version>
     </parent>
 
     <groupId>io.spring</groupId>
@@ -47,11 +47,17 @@
         <dependency>
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-github</artifactId>
-            <version>1.0.0.BUILD-SNAPSHOT</version>
+            <version>1.0.0.M4</version>
         </dependency>
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring3</artifactId>
+            <version>2.0.18</version><!--$NO-MVN-MAN-VER$-->
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>2.0.18</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
@@ -109,7 +115,7 @@
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jdbc</artifactId>
-            <scope>runtime</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.elasticsearch</groupId>
@@ -162,23 +168,23 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+
         <dependency>
-        	<groupId>org.apache.httpcomponents</groupId>
-        	<artifactId>httpclient</artifactId>
-        	<version>4.3-beta2</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3-beta2</version>
         </dependency>
 
         <dependency>
-        	<groupId>org.apache.httpcomponents</groupId>
-        	<artifactId>httpcore</artifactId>
-        	<version>4.3-beta2</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.3-beta2</version>
         </dependency>
 
         <dependency>
-        	<groupId>org.apache.httpcomponents</groupId>
-        	<artifactId>httpcore-nio</artifactId>
-        	<version>4.3-beta2</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore-nio</artifactId>
+            <version>4.3-beta2</version>
         </dependency>
 
         <dependency>
@@ -287,24 +293,58 @@
                 </configuration>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings
+                    only. It has no influence on the Maven build itself. It has been
+                    added here to eliminate spurious "lifecycle" errors out of m2e when
+                    running within Eclipse -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.jasig.maven</groupId>
+                                        <artifactId>sass-maven-plugin</artifactId>
+                                        <versionRange>[1.1.0,)</versionRange>
+                                        <goals>
+                                            <goal>update-stylesheets</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>pl.project13.maven</groupId>
+                                        <artifactId>git-commit-id-plugin</artifactId>
+                                        <versionRange>[1.9,)</versionRange>
+                                        <goals>
+                                            <goal>revision</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <repositories>
         <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>http://repo.springsource.org/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>http://repo.springsource.org/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <id>spring-milestone</id>
+            <name>Spring Milestone</name>
+            <url>http://repo.spring.io/milestone</url>
         </repository>
         <repository>
             <id>sonatype</id>
@@ -314,20 +354,9 @@
     </repositories>
     <pluginRepositories>
         <pluginRepository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>http://repo.springsource.org/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
-            <url>http://repo.springsource.org/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <url>http://repo.spring.io/milestone</url>
         </pluginRepository>
     </pluginRepositories>
 

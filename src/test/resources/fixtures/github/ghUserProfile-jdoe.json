@@ -6,7 +6,7 @@
 "url": "https://api.github.com/users/jdoe",
 "name": "John Doe",
 "company": "Spring",
-"blog": "https://springframework.io/blog",
+"blog": "https://spring.io/blog",
 "location": "Antartica",
 "email": "jdoe@example.com",
 "hireable": false,

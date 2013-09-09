@@ -39,226 +39,226 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 public class BlogService_QueryTests extends IntegrationTestBase {
 
-	private static final Pageable FIRST_TEN_POSTS = PageableFactory.forLists(1);
+    private static final Pageable FIRST_TEN_POSTS = PageableFactory.forLists(1);
 
-	@Mock
-	private DateService dateService;
+    @Mock
+    private DateService dateService;
 
-	@Mock
-	private SearchService searchService;
+    @Mock
+    private SearchService searchService;
 
-	@Mock
-	private PostFormAdapter postFormAdapter;
+    @Mock
+    private PostFormAdapter postFormAdapter;
 
-	@Rule
-	public ExpectedException expected = ExpectedException.none();
+    @Rule
+    public ExpectedException expected = ExpectedException.none();
 
-	@Autowired
-	private PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-	private BlogService service;
+    private BlogService service;
 
-	@Before
-	public void setup() {
-		initMocks(this);
-		given(dateService.now()).willReturn(new Date());
+    @Before
+    public void setup() {
+        initMocks(this);
+        given(dateService.now()).willReturn(new Date());
 
-		service = new BlogService(postRepository, postFormAdapter, dateService,searchService);
-		assertThat(postRepository.findAll().size(), equalTo(0));
-	}
+        service = new BlogService(postRepository, postFormAdapter, dateService,searchService);
+        assertThat(postRepository.findAll().size(), equalTo(0));
+    }
 
-	@Test
-	public void postIsRetrievableById() {
-		Post post = PostBuilder.post().build();
-		postRepository.save(post);
+    @Test
+    public void postIsRetrievableById() {
+        Post post = PostBuilder.post().build();
+        postRepository.save(post);
 
-		assertThat(service.getPost(post.getId()), equalTo(post));
-	}
+        assertThat(service.getPost(post.getId()), equalTo(post));
+    }
 
-	@Test
-	public void postIsRetrievableByTitleAndCreatedDate() {
-		Post post = PostBuilder.post().build();
-		postRepository.save(post);
+    @Test
+    public void postIsRetrievableByTitleAndCreatedDate() {
+        Post post = PostBuilder.post().build();
+        postRepository.save(post);
 
-		assertThat(service.getPost(post.getTitle(), post.getCreatedAt()), equalTo(post));
-	}
+        assertThat(service.getPost(post.getTitle(), post.getCreatedAt()), equalTo(post));
+    }
 
-	@Test
-	public void publishedPostIsRetrievable() {
-		Post post = PostBuilder.post().build();
-		postRepository.save(post);
+    @Test
+    public void publishedPostIsRetrievable() {
+        Post post = PostBuilder.post().build();
+        postRepository.save(post);
 
-		assertThat(service.getPublishedPost(post.getPublicSlug()), equalTo(post));
-	}
+        assertThat(service.getPublishedPost(post.getPublicSlug()), equalTo(post));
+    }
 
-	@Test
-	public void getPublishedDoesNotFindDrafts() {
-		Post post = PostBuilder.post().draft().build();
-		postRepository.save(post);
+    @Test
+    public void getPublishedDoesNotFindDrafts() {
+        Post post = PostBuilder.post().draft().build();
+        postRepository.save(post);
 
-		expected.expect(EntityNotFoundException.class);
-		service.getPublishedPost(post.getPublicSlug());
-	}
+        expected.expect(EntityNotFoundException.class);
+        service.getPublishedPost(post.getPublicSlug());
+    }
 
-	@Test
-	public void getPublishedDoesNotFindFutureSchedulePost() throws ParseException {
-		Post post = PostBuilder.post().publishAt("2013-06-15 00:00").build();
-		postRepository.save(post);
+    @Test
+    public void getPublishedDoesNotFindFutureSchedulePost() throws ParseException {
+        Post post = PostBuilder.post().publishAt("2013-06-15 00:00").build();
+        postRepository.save(post);
 
-		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		given(dateService.now()).willReturn(today);
+        Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
+        given(dateService.now()).willReturn(today);
 
-		expected.expect(EntityNotFoundException.class);
-		service.getPublishedPost(post.getPublicSlug());
-	}
+        expected.expect(EntityNotFoundException.class);
+        service.getPublishedPost(post.getPublicSlug());
+    }
 
-	@Test
-	public void nonExistentPostThrowsException() {
-		expected.expect(EntityNotFoundException.class);
-		service.getPost(999L);
-	}
+    @Test
+    public void nonExistentPostThrowsException() {
+        expected.expect(EntityNotFoundException.class);
+        service.getPost(999L);
+    }
 
-	@Test
-	public void getPublishedPostsOnlyShowsPublishedPosts() {
-		Post post = PostBuilder.post().build();
-		postRepository.save(post);
-		postRepository.save(PostBuilder.post().draft().build());
+    @Test
+    public void getPublishedPostsOnlyShowsPublishedPosts() {
+        Post post = PostBuilder.post().build();
+        postRepository.save(post);
+        postRepository.save(PostBuilder.post().draft().build());
 
-		Page<Post> publishedPosts = service.getPublishedPosts(FIRST_TEN_POSTS);
-		assertThat(publishedPosts.getContent(), contains(post));
-	}
+        Page<Post> publishedPosts = service.getPublishedPosts(FIRST_TEN_POSTS);
+        assertThat(publishedPosts.getContent(), contains(post));
+    }
 
-	@Test
-	public void getPublishedPostsDoesNotFindFutureSchedulePost() throws ParseException {
-		Post post = PostBuilder.post().publishAt("2013-06-13 00:00").build();
-		postRepository.save(post);
-		postRepository.save(PostBuilder.post().publishAt("2013-06-15 00:00").build());
+    @Test
+    public void getPublishedPostsDoesNotFindFutureSchedulePost() throws ParseException {
+        Post post = PostBuilder.post().publishAt("2013-06-13 00:00").build();
+        postRepository.save(post);
+        postRepository.save(PostBuilder.post().publishAt("2013-06-15 00:00").build());
 
-		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		given(dateService.now()).willReturn(today);
+        Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
+        given(dateService.now()).willReturn(today);
 
-		assertThat(service.getPublishedPosts(FIRST_TEN_POSTS), contains(post));
-	}
+        assertThat(service.getPublishedPosts(FIRST_TEN_POSTS), contains(post));
+    }
 
-	@Test
-	public void getScheduledPostsOnlyShowsPublishedPosts() throws ParseException {
-		Post post = PostBuilder.post().publishAt("2013-06-15 00:00").build();
-		postRepository.save(post);
-		postRepository.save(PostBuilder.post().draft().publishAt("2013-06-15 00:00").build());
+    @Test
+    public void getScheduledPostsOnlyShowsPublishedPosts() throws ParseException {
+        Post post = PostBuilder.post().publishAt("2013-06-15 00:00").build();
+        postRepository.save(post);
+        postRepository.save(PostBuilder.post().draft().publishAt("2013-06-15 00:00").build());
 
-		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		given(dateService.now()).willReturn(today);
+        Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
+        given(dateService.now()).willReturn(today);
 
-		assertThat(service.getScheduledPosts(FIRST_TEN_POSTS), contains(post));
-	}
+        assertThat(service.getScheduledPosts(FIRST_TEN_POSTS), contains(post));
+    }
 
-	@Test
-	public void getScheduledPostsDoesNotFindFutureSchedulePost() throws ParseException {
-		Post post = PostBuilder.post().publishAt("2013-06-15 00:00").build();
-		postRepository.save(post);
-		postRepository.save(PostBuilder.post().publishAt("2013-06-13 00:00").build());
+    @Test
+    public void getScheduledPostsDoesNotFindFutureSchedulePost() throws ParseException {
+        Post post = PostBuilder.post().publishAt("2013-06-15 00:00").build();
+        postRepository.save(post);
+        postRepository.save(PostBuilder.post().publishAt("2013-06-13 00:00").build());
 
-		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		given(dateService.now()).willReturn(today);
+        Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
+        given(dateService.now()).willReturn(today);
 
-		assertThat(service.getScheduledPosts(FIRST_TEN_POSTS), contains(post));
-	}
+        assertThat(service.getScheduledPosts(FIRST_TEN_POSTS), contains(post));
+    }
 
-	@Test
-	public void listPostsForCategory() {
-		Post post = PostBuilder.post().category(PostCategory.ENGINEERING).build();
-		postRepository.save(post);
-		postRepository.save(PostBuilder.post().category(PostCategory.NEWS_AND_EVENTS).build());
+    @Test
+    public void listPostsForCategory() {
+        Post post = PostBuilder.post().category(PostCategory.ENGINEERING).build();
+        postRepository.save(post);
+        postRepository.save(PostBuilder.post().category(PostCategory.NEWS_AND_EVENTS).build());
 
-		Page<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, FIRST_TEN_POSTS);
-		assertThat(publishedPosts.getContent(), contains(post));
-	}
+        Page<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, FIRST_TEN_POSTS);
+        assertThat(publishedPosts.getContent(), contains(post));
+    }
 
-	@Test
-	public void listPostsForCategoryDoesNotFindFutureSchedulePost() throws ParseException {
-		Post post = PostBuilder.post().publishAt("2013-06-13 00:00").category(PostCategory.ENGINEERING).build();
-		postRepository.save(post);
-		postRepository.save(PostBuilder.post().publishAt("2013-06-15 00:00").category(PostCategory.ENGINEERING).build());
+    @Test
+    public void listPostsForCategoryDoesNotFindFutureSchedulePost() throws ParseException {
+        Post post = PostBuilder.post().publishAt("2013-06-13 00:00").category(PostCategory.ENGINEERING).build();
+        postRepository.save(post);
+        postRepository.save(PostBuilder.post().publishAt("2013-06-15 00:00").category(PostCategory.ENGINEERING).build());
 
-		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		given(dateService.now()).willReturn(today);
+        Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
+        given(dateService.now()).willReturn(today);
 
-		Page<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, FIRST_TEN_POSTS);
-		assertThat(publishedPosts.getContent(), contains(post));
-	}
+        Page<Post> publishedPosts = service.getPublishedPosts(PostCategory.ENGINEERING, FIRST_TEN_POSTS);
+        assertThat(publishedPosts.getContent(), contains(post));
+    }
 
-	@Test
-	public void paginationInfoBasedOnCurrentPageAndTotalPosts() {
-		List<Post> posts = new ArrayList<>();
-		long itemCount = 11;
-		for (int i = 0; i < itemCount; ++i) {
-			posts.add(PostBuilder.post().build());
-		}
-		postRepository.save(posts);
+    @Test
+    public void paginationInfoBasedOnCurrentPageAndTotalPosts() {
+        List<Post> posts = new ArrayList<>();
+        long itemCount = 11;
+        for (int i = 0; i < itemCount; ++i) {
+            posts.add(PostBuilder.post().build());
+        }
+        postRepository.save(posts);
 
-		PageRequest pageRequest = new PageRequest(0, 10);
-		Page<Post> result = service.getAllPosts(pageRequest);
-		assertThat(result.getTotalElements(), is(itemCount));
-	}
+        PageRequest pageRequest = new PageRequest(0, 10);
+        Page<Post> result = service.getAllPosts(pageRequest);
+        assertThat(result.getTotalElements(), is(itemCount));
+    }
 
-	@Test
-	public void listBroadcasts() {
-		Post post = PostBuilder.post().isBroadcast().build();
-		postRepository.save(post);
-		postRepository.save(PostBuilder.post().build());
+    @Test
+    public void listBroadcasts() {
+        Post post = PostBuilder.post().isBroadcast().build();
+        postRepository.save(post);
+        postRepository.save(PostBuilder.post().build());
 
-		Page<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(FIRST_TEN_POSTS);
-		assertThat(publishedBroadcastPosts.getContent(), contains(post));
-	}
+        Page<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(FIRST_TEN_POSTS);
+        assertThat(publishedBroadcastPosts.getContent(), contains(post));
+    }
 
-	@Test
-	public void listBroadcastsDoesNotFindFutureSchedulePost() throws ParseException {
-		Post post = PostBuilder.post().publishAt("2013-06-13 00:00").isBroadcast().build();
-		postRepository.save(post);
-		postRepository.save(PostBuilder.post().publishAt("2013-06-15 00:00").isBroadcast().build());
+    @Test
+    public void listBroadcastsDoesNotFindFutureSchedulePost() throws ParseException {
+        Post post = PostBuilder.post().publishAt("2013-06-13 00:00").isBroadcast().build();
+        postRepository.save(post);
+        postRepository.save(PostBuilder.post().publishAt("2013-06-15 00:00").isBroadcast().build());
 
-		Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
-		given(dateService.now()).willReturn(today);
+        Date today = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-14 00:00");
+        given(dateService.now()).willReturn(today);
 
-		Page<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(FIRST_TEN_POSTS);
-		assertThat(publishedBroadcastPosts.getContent(), contains(post));
-	}
+        Page<Post> publishedBroadcastPosts = service.getPublishedBroadcastPosts(FIRST_TEN_POSTS);
+        assertThat(publishedBroadcastPosts.getContent(), contains(post));
+    }
 
-	@Test
-	public void allPosts() {
-		Post post = PostBuilder.post().build();
-		postRepository.save(post);
+    @Test
+    public void allPosts() {
+        Post post = PostBuilder.post().build();
+        postRepository.save(post);
 
-		Post draft = PostBuilder.post().draft().build();
-		postRepository.save(draft);
+        Post draft = PostBuilder.post().draft().build();
+        postRepository.save(draft);
 
-		Page<Post> allPosts = service.getAllPosts(FIRST_TEN_POSTS);
-		assertThat(allPosts.getContent(), containsInAnyOrder(post, draft));
-	}
+        Page<Post> allPosts = service.getAllPosts(FIRST_TEN_POSTS);
+        assertThat(allPosts.getContent(), containsInAnyOrder(post, draft));
+    }
 
-	@Test
-	public void getPublishedPostsForAuthorOnlyShowsAuthorsPosts() {
-		MemberProfile profile = new MemberProfile();
-		profile.setUsername("myauthor");
+    @Test
+    public void getPublishedPostsForAuthorOnlyShowsAuthorsPosts() {
+        MemberProfile profile = new MemberProfile();
+        profile.setUsername("myauthor");
 
-		Post post = PostBuilder.post().author(profile).build();
-		postRepository.save(post);
-		postRepository.save(PostBuilder.post().build());
+        Post post = PostBuilder.post().author(profile).build();
+        postRepository.save(post);
+        postRepository.save(PostBuilder.post().build());
 
-		Page<Post> publishedPosts = service.getPublishedPostsForMember(profile, FIRST_TEN_POSTS);
-		assertThat(publishedPosts.getContent(), contains(post));
-	}
+        Page<Post> publishedPosts = service.getPublishedPostsForMember(profile, FIRST_TEN_POSTS);
+        assertThat(publishedPosts.getContent(), contains(post));
+    }
 
-	@Test
-	public void getPublishedPostsForAuthorOnlyShowsPublishedPosts() {
-		MemberProfile profile = new MemberProfile();
-		profile.setUsername("myauthor");
+    @Test
+    public void getPublishedPostsForAuthorOnlyShowsPublishedPosts() {
+        MemberProfile profile = new MemberProfile();
+        profile.setUsername("myauthor");
 
-		Post post = PostBuilder.post().author(profile).build();
-		postRepository.save(post);
-		postRepository.save(PostBuilder.post().author(profile).draft().build());
+        Post post = PostBuilder.post().author(profile).build();
+        postRepository.save(post);
+        postRepository.save(PostBuilder.post().author(profile).draft().build());
 
-		Page<Post> publishedPosts = service.getPublishedPostsForMember(profile, FIRST_TEN_POSTS);
-		assertThat(publishedPosts.getContent(), contains(post));
-	}
+        Page<Post> publishedPosts = service.getPublishedPostsForMember(profile, FIRST_TEN_POSTS);
+        assertThat(publishedPosts.getContent(), contains(post));
+    }
 }

@@ -38,6 +38,10 @@ body {
   width: 100%;
 }
 
+.spaced--container {
+  margin: 60px 0;
+}
+
 .code-snippet {
   border-radius: 2px;
   border: 1px solid #cccccc;
@@ -65,37 +69,13 @@ body {
 }
 .header--navbar .navbar-inner .spring-logo--container {
   display: inline-block;
-  padding: 15px 0;
-}
-.header--navbar .navbar-inner .spring-logo--container .logo-bg {
-  width: 37px;
-  height: 30px;
-  border-radius: 30px;
-  margin: 6px 0 0 1px;
-  background-color: #6db33f;
-  position: absolute;
-  z-index: 1034;
-  opacity: 0;
-  transition: opacity 0.15s;
-  -webkit-transition: opacity 0.15s;
-  -moz-transition: opacity 0.15s;
-  -o-transition: opacity 0.15s;
-  -ms-transition: opacity 0.15s;
 }
 .header--navbar .navbar-inner .spring-logo--container .spring-logo {
-  background-image: url("../img/iconsprite.png");
-  width: 153px;
-  height: 40px;
-  -webkit-background-size: 1001px 837px;
-  -moz-background-size: 1001px 837px;
-  -o-background-size: 1001px 837px;
-  background-size: 1001px 837px;
-  background-position: 1000px 836px;
-  position: absolute;
-  z-index: 1035;
-}
-.header--navbar .navbar-inner .spring-logo--container:hover .logo-bg {
-  opacity: 1;
+  margin: 12px 0 6px;
+  width: 160px;
+  height: 46px;
+  display: inline-block;
+  text-decoration: none;
 }
 .header--navbar .navbar-inner .navbar-link.active a {
   background-color: #6db33f;
@@ -206,6 +186,25 @@ body {
   margin-top: 0;
 }
 
+a.spring-logo {
+  background: url("../img/spring-logo.png") -1px -1px no-repeat;
+}
+
+a.spring-logo span {
+  display: block;
+  width: 160px;
+  height: 46px;
+  background: url("../img/spring-logo.png") -1px -48px no-repeat;
+  opacity: 0;
+  -moz-transition: opacity 0.12s ease-in-out;
+  -webkit-transition: opacity 0.12s ease-in-out;
+  -o-transition: opacity 0.12s ease-in-out;
+}
+
+a:hover.spring-logo span {
+  opacity: 1;
+}
+
 .right-pane-widget--container {
   border: 1px solid #cccccc;
   box-shadow: 0 -4px 0 #34302d;
@@ -264,10 +263,9 @@ body {
   color: #4e681e;
 }
 
-.body--container {
+.main-body--wrapper {
   margin-top: 100px;
   margin-bottom: 100px;
-  min-height: 925px;
 }
 
 .row--container {
@@ -488,6 +486,12 @@ input.floating-input:focus {
   margin-top: -30px;
   font-family: "Montserrat", sans-serif;
 }
+.content--title a {
+  color: #34302d;
+}
+.content--title a:hover {
+  color: #5fa134;
+}
 .content--title.search-title {
   position: relative;
 }
@@ -499,17 +503,33 @@ input.floating-input:focus {
 }
 
 .index-page--title {
-  margin-bottom: 30px;
   line-height: 24px;
+}
+.index-page--title.top-margin {
+  margin-top: 60px;
 }
 
 .index-page--subtitle {
   font-size: 16px;
   line-height: 24px;
-  margin-bottom: 60px;
+  margin: 30px 0 60px;
 }
 .index-page--subtitle a {
   color: #5fa134;
+}
+.index-page--subtitle.jobs-subtitle {
+  margin-bottom: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid #cccccc;
+}
+.index-page--subtitle.with-subtext {
+  margin-bottom: -30px;
+}
+.index-page--subtitle.with-subtext .subtext {
+  display: inline-block;
+  font-size: 14px;
+  margin: 21px 0 0;
+  color: rgba(52, 48, 45, 0.9);
 }
 
 .footer {
@@ -818,19 +838,15 @@ input.floating-input:focus {
   width: 291px;
 }
 .content-container--wrapper .content-container--header .content-container--filter::-webkit-input-placeholder {
-  font-style: italic;
   color: #999;
 }
 .content-container--wrapper .content-container--header .content-container--filter:-moz-placeholder {
-  font-style: italic;
   color: #999;
 }
 .content-container--wrapper .content-container--header .content-container--filter::-moz-placeholder {
-  font-style: italic;
   color: #999;
 }
 .content-container--wrapper .content-container--header .content-container--filter:-ms-input-placeholder {
-  font-style: italic;
   color: #999;
 }
 .content-container--wrapper .content-container--header .header-title {
@@ -869,13 +885,6 @@ input.floating-input:focus {
   padding: 20px;
 }
 
-.billboard--wrapper {
-  position: absolute;
-  top: 74px;
-  left: 0;
-  right: 0;
-  width: 100%;
-}
 .billboard--wrapper .billboard--container {
   position: absolute;
   z-index: 600;
@@ -898,7 +907,7 @@ input.floating-input:focus {
 .billboard--wrapper .billboard--container .billboard--sub-title--container .billboard--sub-title {
   font-size: 18px;
   line-height: 18px;
-  padding: 0 19px 12px;
+  padding: 2px 19px 12px;
 }
 .billboard--wrapper .billboard--container .billboard--sub-title--container .billboard--sub-title:first-child {
   padding-top: 12px;
@@ -921,8 +930,7 @@ input.floating-input:focus {
 }
 
 .billboard-body--wrapper {
-  margin-top: 326px;
-  padding: 100px 0;
+  padding: 0 0 100px;
 }
 
 .admin-profile--form .admin-profile--field {
@@ -1060,6 +1068,21 @@ form.lpeRegForm .mktInput {
   -o-transition: border, box-shadow 0.2s;
   border: 1px solid transparent;
 }
+.about-feature--container .icon--container {
+  height: 200px;
+  display: inline-block;
+}
+.about-feature--container .icon--container .icon {
+  vertical-align: middle;
+  position: relative;
+  top: 50%;
+}
+.about-feature--container .icon--container .icon.icon-spring-logo-big {
+  margin-top: -77px;
+}
+.about-feature--container .icon--container .icon.icon-spring-logo {
+  margin-top: -20px;
+}
 .about-feature--container .title, .about-feature--container .text, .about-feature--container .link {
   color: #f1f1f1;
 }
@@ -1089,9 +1112,9 @@ form.lpeRegForm .mktInput {
 .about-feature--container:active {
   box-shadow: inset 0 6px 10px #191715;
 }
-
-.about-page-fix {
-  margin-top: 201px;
+.about-feature--container.no-link {
+  box-shadow: none;
+  border: none;
 }
 
 .job-category--container {
@@ -1211,8 +1234,6 @@ form.lpeRegForm .mktInput {
   background-color: #34302d;
   display: inline-block;
   text-align: center;
-  border: 1px solid #6db33f;
-  box-shadow: 0 0 6px #6db33f;
   margin-bottom: 30px;
 }
 .admin-index--link .icon--container .icon {
@@ -1232,6 +1253,52 @@ form.lpeRegForm .mktInput {
   text-decoration: none;
 }
 .admin-index--link:active {
+  box-shadow: none;
+}
+
+.white-btn--container {
+  background-color: white;
+  padding: 50px 0;
+  display: inline-block;
+  border-bottom: 1px solid #cccccc;
+  box-shadow: 0 0 3px #cccccc;
+  text-align: center;
+  width: 95%;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+}
+.white-btn--container .icon--container {
+  width: 190px;
+  height: 190px;
+  border-radius: 190px;
+  background-color: #34302d;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.white-btn--container .icon--container .icon {
+  margin: 22px 6px;
+}
+.white-btn--container .icon--container i {
+  color: #FFF;
+  font-size: 150px;
+  margin-top: 11px;
+  display: inline-block;
+}
+.white-btn--container .icon--container.white-bg {
+  background-color: white;
+}
+.white-btn--container p {
+  font-size: 20px;
+}
+.white-btn--container:hover {
+  box-shadow: 0 0 3px #6db33f;
+  text-decoration: none;
+}
+.white-btn--container:active {
   box-shadow: none;
 }
 
@@ -1261,4 +1328,151 @@ form.lpeRegForm .mktInput {
 }
 .pagination div:hover, .pagination a:hover {
   color: #34302d;
+}
+
+.usage-lists {
+  margin: 0;
+  list-style: none;
+}
+.usage-lists li {
+  margin-bottom: 5px;
+}
+.usage-lists [class^="icon-"] {
+  margin-right: 10px;
+}
+.usage-lists.okay [class^="icon-"] {
+  color: #6db33f;
+}
+.usage-lists.not-okay [class^="icon-"] {
+  color: #BA4160;
+}
+
+.min-height {
+  min-height: 900px;
+}
+
+.platform-index--header {
+  padding: 100px 0;
+  position: relative;
+}
+.platform-index--header:after {
+  content: "";
+  opacity: 0.1;
+  background: url("../img/platform-bg.png") 100% 0 no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: 55%;
+  z-index: -1;
+}
+.platform-index--header .index-page--subtitle {
+  margin-bottom: 0;
+  padding-right: 20px;
+}
+.platform-index--header .platform-watermark--large {
+  background: url("../img/spring-platform-watermark-large.png") 50% 0 no-repeat;
+  width: 100%;
+  height: 123px;
+}
+
+.platform-stack--wrapper {
+  background: url("../img/platform-diagram-noise.png") #34302d;
+  box-shadow: inset 0 15px 30px #191715, inset 0 -15px 30px #191715;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.platform-project {
+  display: inline-block;
+  clear: both;
+}
+.platform-project .project--container {
+  float: left;
+  padding: 20px 10px;
+  height: 300px;
+  box-sizing: border-box;
+  width: 24.153%;
+  margin: 40px 1% 40px 0;
+}
+.platform-project .project--container:last-child {
+  margin-right: 0;
+}
+.platform-project .project-icon {
+  font-size: 98px;
+  margin-bottom: 20px;
+}
+.platform-project .project--title {
+  margin-bottom: 10px;
+  text-transform: none;
+}
+.platform-project .description {
+  width: 48.306%;
+  float: left;
+  margin-top: 20px;
+  margin-right: 1%;
+  padding-right: 1%;
+}
+
+.error-page {
+  text-align: center;
+}
+.error-page img {
+  display: inline-block;
+}
+.error-page .error-title {
+  font-size: 24px;
+  line-height: 24px;
+  margin: 30px 0 0;
+}
+.error-page .big-search--container {
+  display: inline-block;
+  width: 64%;
+  background-color: white;
+  text-align: left;
+  margin: 50px 0 40px;
+  padding: 0 40px;
+  position: relative;
+}
+.error-page .big-search--container input {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  font-size: 24px;
+  line-height: 30px;
+  padding: 26px 0;
+  width: 95%;
+  display: inline-block;
+}
+.error-page .big-search--container button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: transparent;
+  border: none;
+  padding: 25px 28px;
+  font-size: 20px;
+  color: #666;
+}
+.error-page .error-bottom-link {
+  font-size: 14px;
+  color: #5fa134;
+  text-decoration: none;
+}
+.error-page .error-bottom-link .social-icon.twitter {
+  background-image: url("../img/iconsprite.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background-position: -1px -143px;
+  vertical-align: middle;
+  margin-right: 15px;
+}
+.error-page .error-bottom-link:hover {
+  color: #6ab43a;
+}
+.error-page .error-bottom-link:hover .twitter {
+  background-position: -84px -143px;
 }

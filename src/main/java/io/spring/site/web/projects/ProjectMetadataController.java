@@ -21,23 +21,23 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @RequestMapping("/project_metadata")
 public class ProjectMetadataController {
 
-	private ProjectMetadataService service;
+    private ProjectMetadataService service;
 
-	@Autowired
-	public ProjectMetadataController(ProjectMetadataService service) {
-		this.service = service;
-	}
+    @Autowired
+    public ProjectMetadataController(ProjectMetadataService service) {
+        this.service = service;
+    }
 
-	@RequestMapping(value="/{projectId}", method = { GET, HEAD })
-	public void projectMetadata(@PathVariable("projectId") String projectId, @RequestParam("callback") String callback, HttpServletResponse response) throws IOException {
-		response.setContentType("text/javascript; charset=UTF-8");
-		PrintWriter out = response.getWriter();
+    @RequestMapping(value="/{projectId}", method = { GET, HEAD })
+    public void projectMetadata(@PathVariable("projectId") String projectId, @RequestParam("callback") String callback, HttpServletResponse response) throws IOException {
+        response.setContentType("text/javascript; charset=UTF-8");
+        PrintWriter out = response.getWriter();
 
-		Project project = service.getProject(projectId);
+        Project project = service.getProject(projectId);
 
-		ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
 
-		out.print(callback + String.format("(%s);", objectMapper.writeValueAsString(project)));
-	}
+        out.print(callback + String.format("(%s);", objectMapper.writeValueAsString(project)));
+    }
 
 }

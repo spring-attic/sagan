@@ -1,33 +1,34 @@
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout">
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="layout">
 <head>
 <title>Sign In</title>
 </head>
 <body>
-	<div layout:fragment="header-container"></div>
-	<div layout:fragment="content" class="container">
-    <div class="admin--wrapper">
-  		<div th:if="${param.error}" class="alert alert-error">We could not
-  			authenticate you with Github. You must authenticate and authorize
-  			this application to access your Github profile before you can use the
-  			admin features. This application can not access any private
-  			information (like passwords), from Github, only the public profile.
-      </div>
-  		<div th:if="${param.signout}" class="alert alert-success">Signed out successfully</div>
-      <div class="admin-login--container">
-        <div class="admin-login--title" th:unless="${param.error}">
-          Please sign in with Github to access the admin pages.
+    <div layout:fragment="header-container"></div>
+    <div layout:fragment="content" class="container">
+        <div class="main-body--wrapper">
+            <div class="admin--wrapper">
+                <div th:if="${param.error}" class="alert alert-error">We could not
+                    authenticate you with Github. You must authenticate and authorize
+                    this application to access your Github profile before you can use the
+                    admin features. This application can not access any private
+                    information (like passwords), from Github, only the public profile.
+              </div>
+              <div class="admin-login--container">
+                <div class="admin-login--title" th:unless="${param.error}">
+                  Please sign in with Github to access the admin pages.
+                </div>
+                    <form action="/signin/github" th:action="@{/signin/github}"
+                        method="post">
+                        <button type="submit" class="btn btn-black">
+                    <i class="icon-github"></i>
+                    Sign in with github
+                  </button>
+                    </form>
+              </div>
+            </div>
         </div>
-    		<form action="/signin/github" th:action="@{/signin/github}"
-    			method="post">
-    			<button type="submit" class="btn btn-black">
-            <i class="icon-github"></i>
-            Sign in with github
-          </button>
-    		</form>
-      </div>
     </div>
-	</div>
 </body>
 </html>

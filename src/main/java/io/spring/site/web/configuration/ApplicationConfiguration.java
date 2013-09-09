@@ -24,12 +24,12 @@ import io.spring.site.web.blog.feed.BlogPostAtomViewer;
 import liquibase.integration.spring.SpringLiquibase;
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
-import org.cloudfoundry.runtime.service.relational.RdbmsServiceCreator;
-import org.postgresql.ds.PGSimpleDataSource;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.cache.CacheManager;
@@ -39,7 +39,7 @@ import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -48,116 +48,182 @@ import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
+
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan(basePackages = {"io.spring.site.web", "io.spring.site.domain", "io.spring.site.search"})
+@ComponentScan({ "io.spring.site.web", "io.spring.site.domain", "io.spring.site.search" })
 @EnableCaching
 public class ApplicationConfiguration {
 
+    public static void main(String[] args) {
+        SpringApplication.run(ApplicationConfiguration.class, args);
+    }
 
+    @Configuration
+    protected static class DataSourceConfiguration {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ApplicationConfiguration.class, args);
-	}
+        @Autowired
+        private Environment environment;
 
-	@Configuration
-	@Profile({"development", "staging", "production"})
-	protected static class CloudFoundryDataSourceConfiguration {
-		@Bean
-		public DataSource dataSource() {
-			CloudEnvironment cloudEnvironment = new CloudEnvironment();
-			RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db",
-					RdbmsServiceInfo.class);
-			RdbmsServiceCreator serviceCreator = new RdbmsServiceCreator();
-			return serviceCreator.createService(serviceInfo);
-		}
-	}
+        @Bean
+        public DataSource dataSource() {
+            org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
 
-	@Configuration
-	@Profile({"local_postgres"})
-	protected static class PostgresConfiguration {
-		@Bean
-		public DataSource dataSource() {
-			PGSimpleDataSource dataSource = new PGSimpleDataSource();
-			dataSource.setPortNumber(5432);
-			dataSource.setDatabaseName("blog_import");
-			dataSource.setServerName("localhost");
-			return dataSource;
-		}
-	}
+            boolean inMemory = this.environment.acceptsProfiles(this.environment
+                    .getDefaultProfiles())
+                    || this.environment.acceptsProfiles("acceptance");
 
-	@Bean
-	public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl, DateService dateService) {
-		return new BlogPostAtomViewer(siteUrl, dateService);
-	}
+            if (inMemory) {
+                dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
+            } else {
+                dataSource.setDriverClassName("org.postgresql.Driver");
+            }
 
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+            CloudEnvironment cloudEnvironment = new CloudEnvironment();
+            if (cloudEnvironment.getServiceDataByName("sagan-db") != null) {
+                RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo(
+                        "sagan-db", RdbmsServiceInfo.class);
+                dataSource.setUrl(serviceInfo.getUrl());
+                dataSource.setUsername(serviceInfo.getUserName());
+                dataSource.setPassword(serviceInfo.getPassword());
+            } else {
+                if (inMemory) {
+                    dataSource.setUrl("jdbc:hsqldb:mem:sagan-db");
+                    dataSource.setUsername("sa");
+                    dataSource.setPassword("");
+                } else {
+                    dataSource.setUrl("jdbc:postgresql://localhost:5432/sagan-db");
+                    dataSource.setUsername("user");
+                    dataSource.setPassword("changeme");
+                }
+            }
 
-	@Bean
-	public Serializer simpleXmlSerializer() {
-		return new Persister();
-	}
+            dataSource.setMaxActive(20);
+            dataSource.setMaxIdle(8);
+            dataSource.setMinIdle(8);
+            dataSource.setTestOnBorrow(false);
+            dataSource.setTestOnReturn(false);
+            dataSource.setValidationQuery("SELECT 1");
+            return dataSource;
+        }
+    }
 
-	@Bean
-	public ProjectMetadataService projectMetadataService() throws IOException {
-		InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
-		return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
-	}
+    @Bean
+    public HealthIndicator<Map<String, Object>> healthIndicator(DataSource dataSource) {
+        if (dataSource instanceof org.apache.tomcat.jdbc.pool.DataSource) {
+            final org.apache.tomcat.jdbc.pool.DataSource tcDataSource = (org.apache.tomcat.jdbc.pool.DataSource) dataSource;
+            return new HealthIndicator<Map<String, Object>>() {
+                @Override
+                public Map<String, Object> health() {
+                    Map<String, Object> health = new HashMap<>();
+                    health.put("active", tcDataSource.getActive());
+                    health.put("max_active", tcDataSource.getMaxActive());
+                    health.put("idle", tcDataSource.getIdle());
+                    health.put("max_idle", tcDataSource.getMaxIdle());
+                    health.put("min_idle", tcDataSource.getMinIdle());
+                    health.put("wait_count", tcDataSource.getWaitCount());
+                    health.put("max_wait", tcDataSource.getMaxWait());
+                    return health;
+                }
+            };
+        }
+        return new HealthIndicator<Map<String, Object>>() {
+            @Override
+            public Map<String, Object> health() {
+                return Collections.emptyMap();
+            }
+        };
+    }
 
-	// http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html#filterparams
-	// Blog filter must be declared first, to ensure its rules are applied before the general rules
-	@Bean
-	public FilterRegistrationBean blogRewriteFilterConfig() {
-		FilterRegistrationBean reg = new FilterRegistrationBean();
-		reg.setName("mappingsRewriteFilter");
-		reg.setFilter(new UrlRewriteFilter());
-		reg.addInitParameter("confPath", "mappings_rewrite.xml");
-		reg.addInitParameter("confReloadCheckInterval", "-1");
-		reg.addInitParameter("logLevel", "WARN");
-		return reg;
-	}
+    @Bean
+    public BlogPostAtomViewer blogPostAtomViewer(SiteUrl siteUrl, DateService dateService) {
+        return new BlogPostAtomViewer(siteUrl, dateService);
+    }
 
-	@Bean
-	public FilterRegistrationBean rewriteFilterConfig() {
-		FilterRegistrationBean reg = new FilterRegistrationBean();
-		reg.setName("rewriteFilter");
-		reg.setFilter(new UrlRewriteFilter());
-		reg.addInitParameter("confPath", "urlrewrite.xml");
-		reg.addInitParameter("confReloadCheckInterval", "-1");
-		reg.addInitParameter("logLevel", "WARN");
-		return reg;
-	}
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
-	@Bean
-	public DispatcherServlet dispatcherServlet() {
-		return new DispatcherServlet();
-	}
+    @Bean
+    public Serializer simpleXmlSerializer() {
+        return new Persister();
+    }
 
-	@Bean
-	public SpringLiquibase springLiquibase(DataSource dataSource) {
-		SpringLiquibase liquibase = new SpringLiquibase();
-		liquibase.setDataSource(dataSource);
-		liquibase.setChangeLog("classpath:db-changeset.yaml");
-		return liquibase;
-	}
+    @Bean
+    public ProjectMetadataService projectMetadataService() throws IOException {
+        InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass())
+                .getInputStream();
+        return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
+    }
 
-	@Bean
-	public CacheManager cacheManager(@Value("${cache.timetolive:300}") Long cacheTimeToLive) {
-		ConcurrentMap<Object,Object> cacheMap = CacheBuilder.newBuilder()
-				.expireAfterWrite(cacheTimeToLive, TimeUnit.SECONDS)
-				.build().asMap();
+    // http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html#filterparams
+    // Blog filter must be declared first, to ensure its rules are applied before the
+    // general rules
+    @Bean
+    public FilterRegistrationBean blogRewriteFilterConfig() {
+        FilterRegistrationBean reg = new FilterRegistrationBean();
+        reg.setName("mappingsRewriteFilter");
+        reg.setFilter(new UrlRewriteFilter());
+        reg.addInitParameter("confPath", "urlrewrite/urlrewrite-generated.xml");
+        reg.addInitParameter("confReloadCheckInterval", "-1");
+        reg.addInitParameter("logLevel", "WARN");
+        return reg;
+    }
 
-		ConcurrentMapCache concurrentMapCache = new ConcurrentMapCache("cache", cacheMap, false);
-		SimpleCacheManager cacheManager = new SimpleCacheManager();
-		cacheManager.setCaches(Arrays.asList(concurrentMapCache));
-		return cacheManager;
-	}
+    @Bean
+    public FilterRegistrationBean rewriteFilterConfig() {
+        FilterRegistrationBean reg = new FilterRegistrationBean();
+        reg.setName("rewriteFilter");
+        reg.setFilter(new UrlRewriteFilter());
+        reg.addInitParameter("confPath", "urlrewrite/urlrewrite.xml");
+        reg.addInitParameter("confReloadCheckInterval", "-1");
+        reg.addInitParameter("logLevel", "WARN");
+        return reg;
+    }
+
+    @Bean
+    public DispatcherServlet dispatcherServlet() {
+        return new DispatcherServlet();
+    }
+
+    @Bean
+    public SpringLiquibase springLiquibase(DataSource dataSource) {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setDataSource(dataSource);
+        liquibase.setChangeLog("classpath:liquibase/changeset.yaml");
+        return liquibase;
+    }
+
+    @Bean
+    public CacheManager cacheManager(@Value("${cache.network.timetolive:300}") Long cacheNetworkTimeToLive,
+                                     @Value("${cache.database.timetolive:60}") Long cacheDatabaseTimeToLive) {
+        SimpleCacheManager cacheManager = new SimpleCacheManager();
+
+        List<ConcurrentMapCache> cacheList = new ArrayList<>();
+        cacheList.add(createConcurrentMapCache(cacheNetworkTimeToLive, "cache.network", -1));
+        cacheList.add(createConcurrentMapCache(cacheDatabaseTimeToLive, "cache.database", 50));
+        cacheManager.setCaches(cacheList);
+        return cacheManager;
+    }
+
+    private ConcurrentMapCache createConcurrentMapCache(Long timeToLive, String name, long cacheSize) {
+        CacheBuilder<Object, Object> cacheBuilder = CacheBuilder.newBuilder()
+                .expireAfterWrite(timeToLive, TimeUnit.SECONDS);
+
+        if (cacheSize >= 0) {
+            cacheBuilder.maximumSize(cacheSize);
+        }
+        ConcurrentMap<Object,Object> map = cacheBuilder.build().asMap();
+        return new ConcurrentMapCache(name, map, false);
+    }
 
 }

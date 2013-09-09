@@ -1,5 +1,5 @@
 $off-white: #eee;
-$black-green: #3A3C2F; 
+$black-green: #3A3C2F;
 $lime: #8CC63F;
 $leaf: #4E681E;
 $green: #6db33f;
@@ -18,7 +18,7 @@ $icon-sprite: url("../img/iconsprite.png");
 
 
 
-//TOOLS INDEX 
+//TOOLS INDEX
 .tool--container {
   background-color: $black-brown;
   display: inline-block;
@@ -99,7 +99,7 @@ $icon-sprite: url("../img/iconsprite.png");
     color: $link-green;
     &.learn-more-link {
       text-transform: uppercase;
-    } 
+    }
   }
 }
 
@@ -113,9 +113,22 @@ $icon-sprite: url("../img/iconsprite.png");
     font-size: 16px;
     line-height: 24px;
     margin-bottom: 20px;
+    padding-right: 20px;
     &.small-font {
       font-size: 14px;
       line-height: 24px;
+    }
+    li {
+      margin-bottom: 10px;
+      font-size: 14px;
+      &:last-child {
+        margin-bottom: 40px;
+      }
+    }
+    em {
+      font-family: $secondary-font-family;
+      font-style: normal;
+      font-weight: bold;
     }
   }
   .centered-title {
@@ -173,7 +186,7 @@ $icon-sprite: url("../img/iconsprite.png");
         background: url("../img/screenshot-ggts-integration.png") transparent no-repeat;
       }
     }
-    
+
     .tools-feature--description {
       font-size: 14px;
       line-height: 20px;
@@ -227,7 +240,7 @@ $icon-sprite: url("../img/iconsprite.png");
         background-image: url("../img/sts-screenshot.png");
       }
       &.ggts-screenshot {
-        background-image: url("../img/ggts-screenshot.png"); 
+        background-image: url("../img/ggts-screenshot.png");
       }
     }
   }
@@ -262,7 +275,7 @@ $icon-sprite: url("../img/iconsprite.png");
       li {
         padding: 5px 0;
       }
-      
+
     }
   }
   .tools-bottom--container {
@@ -349,8 +362,16 @@ $icon-sprite: url("../img/iconsprite.png");
         line-height: 16px;
       }
     }
+    .tools-version-dropdown--title {
+      display: block;
+    }
+    .place-right {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
     .platform-version--dropdown {
-      width: 82.7%;
+      width: 82.75%;
     }
   }
 }
@@ -389,7 +410,7 @@ $icon-sprite: url("../img/iconsprite.png");
         height: 21px;
         background-position: -369px -412px;
       }
-    }   
+    }
     h3 {
       display: inline-block;
       color: #EEE;
@@ -427,9 +448,21 @@ $icon-sprite: url("../img/iconsprite.png");
     font-size: 12px;
     line-height: 12px;
     border-bottom: 1px solid #ccc;
+    font-family: $secondary-font-family;
   }
   td:last-child {
     color: #6c635d;
+  }
+  td:first-child {
+    border-left: 1px solid #ccc;
+  }
+  td:last-child {
+    border-right: 1px solid #ccc;
+
+  }
+  tr:last-child {
+    border-bottom: 1px solid #ccc;
+
   }
   a {
     color: $link-green;
@@ -448,7 +481,7 @@ $icon-sprite: url("../img/iconsprite.png");
       width: 124px;
     }
     &.ggts-logo {
-      background-position: -338px -140px;      
+      background-position: -338px -140px;
       width: 96px;
     }
   }

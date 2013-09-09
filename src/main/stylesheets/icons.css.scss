@@ -13,6 +13,11 @@ $icon-sprite: url("../img/iconsprite.png");
     height: 154px;
     background-position: 154px 191px;
   }
+  &.icon-spring-logo {
+    // width: 154px;
+    // height: 45px;
+    // background-position: 1000px 836px;
+  }
   &.project--logo {
     &.logo-spring-framework {
       width: 135px;
@@ -90,6 +95,18 @@ $icon-sprite: url("../img/iconsprite.png");
       background-position: 532px 155px;
       margin-top: 19px;
     }
+    &.logo-spring-xd {
+      width: 104px;
+      height: 113px;
+      background-position: 247px 837px;
+      margin-top: 11px;
+    }
+    &.logo-spring-boot {
+      width: 102px;
+      height: 90px;
+      background-position: 143px 837px;
+      margin-top: 23px;
+    }
   }
   &.icon-projects {
     width: 28px;
@@ -165,11 +182,13 @@ $icon-sprite: url("../img/iconsprite.png");
     width: 97px;
     height: 97px;
     background-position: 257px 185px;
+    font-size: 0;
   }
   &.icon-professional-support {
     width: 126px;
     height: 97px;
     background-position: 272px 282px;
+    font-size: 0;
   }
   &.icon-gs-guides {
     width: 73px;

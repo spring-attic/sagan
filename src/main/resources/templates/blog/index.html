@@ -1,72 +1,74 @@
 <html   xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorator="layout">
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
 <head>
-	<title>The Spring Blog</title>
-	<link rel="alternate" type="application/atom+xml" th:href="${beans.uih.path() + '.atom'}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/blog.css.css}" href="../../static/css/blog.css.css" />
+    <title>The Spring Blog</title>
+    <link rel="alternate" type="application/atom+xml" th:href="${beans.uih.path() + '.atom'}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/blog.css.css}"/>
 </head>
 <body>
-	<div layout:fragment="header-container"></div>
-	<div layout:fragment="content" class="container">
-		<div class="desktop-only">
-			<div th:class="${beans.uih.blogClass(activeCategory?:'','All Posts') + ' content--title'}">
-				All Posts
-			</div>
-			<div th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
-		    <div th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}">Engineering</div>
-			</div>
-		</div>
-	<div class="row-fluid blog--wrapper">
-		<div class="span8 blog--left-pane">
-		<div class="content--title" th:text="${title}" th:if="${title}">Title</div>
-				<div class="blog-preview--wrapper">
-					<div class="blog--container blog-preview" th:each="post : ${posts}">
-						<div class="blog--title">
-							<a th:href="@{${post.path}}" th:text="${post.title}">
-								This week in Spring
-							</a>
-						</div>
-						<div class="meta-data--container">
-							<div class="meta-data--item desktop-only">
-								<div th:class="${'meta-data--icon icon blog-icon '+ #strings.toLowerCase(post.category).replace(' ','-')}"></div>
-								<a class='category' th:href="@{'/blog/category/'+${post.category.urlSlug}}" th:text="${post.category}">Category</a>
-							</div>
-							<div class="meta-data--item desktop-only">
-								<img class="meta-data--icon" th:src="@{${post.author.avatarUrl} + '?s=20&amp;d=mm'}" />
-								<a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.username}}" th:unless="${post.author.hidden}">Author</a>
-								<span class='author' th:text="${post.author.name}" th:if="${post.author.hidden}">Author</span>
-							</div>
-							<div class="meta-data--item">
-								<div class="meta-data--icon icon blog-icon calendar"></div>
-								<span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
-							</div>
-						</div>
-						<div class='blog--post desktop-only'>
-							<div th:utext="${post.renderedSummary}">
-								This has been an interesting week.
-							</div>
-						</div>
-						<a class="blog-preview--readmore desktop-only" th:href="@{${post.path}}" th:if="${post.showReadMore()}">
-							Read more...
-						</a>
-					</div>
-				</div>
-				<div id='pagination_control' th:if="${paginationInfo.isVisible()}" class="pagination blog-pagination">
-					<a th:href="@{${beans.uih.path()}(page=${paginationInfo.previousPageNumber})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
+    <div layout:fragment="header-container"></div>
+    <div layout:fragment="content" class="container">
+        <div class="main-body--wrapper">
+            <div th:unless="${title}">
+                <div th:class="${beans.uih.blogClass(activeCategory?:'','All Posts') + ' content--title'}">
+                    The Spring Blog
+                </div>
+                <div th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
+                    <div th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}">Engineering</div>
+                </div>
+            </div>
 
-					<div th:each="element : ${paginationInfo.pageElements }" >
-						<a th:href="@{${beans.uih.path()}(page=${element.pageText})}" th:text="${element.pageText}" th:if="${element.isActive()}" ></a>
-						<div th:text="${element.pageText}" th:unless="${element.isActive()}" class="active"></div>
-					</div>
-
-					<a th:href="@{${beans.uih.path()}(page=${paginationInfo.nextPageNumber})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
-				</div>
-			</div>
-			<div class="span4 blog--right-pane">
-				<div layout:include="blog/_right-pane :: right-pane"></div>
-			</div>
-		</div>
-	</div>
+            <div class="row-fluid blog--wrapper">
+                <div class="span8">
+            <div class="content--title" th:text="${title}" th:if="${title}">Title</div>
+                    <div class="blog-preview--wrapper">
+                        <div class="blog--container blog-preview" th:each="post : ${posts}">
+                            <div class="blog--title">
+                                <a th:href="@{${post.path}}" th:text="${post.title}">
+                                    This week in Spring
+                                </a>
+                            </div>
+                            <div class="meta-data--container">
+                                <div class="meta-data--item">
+                                    <div th:class="${'meta-data--icon icon blog-icon '+ #strings.toLowerCase(post.category).replace(' ','-')}"></div>
+                                    <a class='category' th:href="@{'/blog/category/'+${post.category.urlSlug}}" th:text="${post.category}">Category</a>
+                                </div>
+                                <div class="meta-data--item">
+                                    <img class="meta-data--icon" th:src="@{${post.author.avatarUrl} + '?s=20&amp;d=mm'}" />
+                                    <a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.username}}" th:unless="${post.author.hidden}">Author</a>
+                                    <span class='author' th:text="${post.author.name}" th:if="${post.author.hidden}">Author</span>
+                                </div>
+                                <div class="meta-data--item">
+                                    <div class="meta-data--icon icon blog-icon calendar"></div>
+                                    <span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
+                                </div>
+                            </div>
+                            <div class='blog--post'>
+                                <div th:utext="${post.renderedSummary}">
+                                    This has been an interesting week.
+                                </div>
+                            </div>
+                            <a class="blog-preview--readmore" th:href="@{${post.path}}" th:if="${post.showReadMore()}">
+                                Read more...
+                            </a>
+                        </div>
+                    </div>
+                    <div id='pagination_control' th:if="${paginationInfo.isVisible()}" class="pagination blog-pagination">
+                        <a th:href="@{${beans.uih.path()}(page=${paginationInfo.previousPageNumber})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
+                        <div th:each="element : ${paginationInfo.pageElements }" >
+                            <a th:href="@{${beans.uih.path()}(page=${element.pageText})}" th:text="${element.pageText}" th:if="${element.navigable}" ></a>
+                            <div th:text="${element.pageText}" th:if="${!element.navigable && element.currentPage}" class="active" ></div>
+                            <div th:text="${element.pageText}" th:unless="${element.navigable || element.currentPage}" ></div>
+                        </div>
+                        <a th:href="@{${beans.uih.path()}(page=${paginationInfo.nextPageNumber})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
+                    </div>
+                </div>
+                <div class="span4 blog--right-pane">
+                    <div layout:include="blog/_right-pane :: right-pane"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

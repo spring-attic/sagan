@@ -12,18 +12,36 @@ info:
     version: ${project.version}
   spring:
     profiles: ${spring.profiles.active:default}
+  app:
+    name: ${vcap.application.name:sagan}:${vcap.application.instance_index:*}
+    start: ${vcap.application.start:N/A}
 
 spring:
   thymeleaf:
     mode: LEGACYHTML5
     cache: false
   jpa:
+    show_sql: false
     hibernate:
       namingstrategy: org.hibernate.cfg.EJB3NamingStrategy
 
 security:
   basic:
-    path: ""
+    enabled: false
+  require_ssl: false
+  ignored: 
+    - /bootstrap/**
+    - /bootstrap-datetimepicker/**
+    - /css/**
+    - /font-awesome/**
+    - /img/**
+    - /js/**
+    - /error
+    - /500
+    - /404
+    - /project_metadata/**
+  headers:
+    hsts: domain
   user:
     password: ${ADMIN_PASSWORD:}
 
@@ -36,6 +54,15 @@ elasticsearch:
   client:
     endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
     index: sagan-local
+
+server:
+    tomcat:
+        # Write access log to target/logs/access_log.YYYY-MM-DD.log
+        # See http://tomcat.apache.org/tomcat-7.0-doc/api/org/apache/catalina/valves/AccessLogValve.html
+        accessLogEnabled: true
+        accessLogPattern: '%h %l %u %t "%r" %s %b %{Host}i %{Location}o'
+        baseDir: ''
+        backgroundProcessorDelay: 1
 
 ---
 
@@ -55,6 +82,13 @@ search:
     delay: 0
 server:
   port: 9000
+
+---
+
+spring:
+  profiles: development,staging,performance,production
+security:
+  require_ssl: true
 
 ---
 

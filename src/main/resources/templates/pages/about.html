@@ -1,13 +1,13 @@
 <html
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout">
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="layout">
   <head>
-  	<title>About Us</title>
+    <title>About Us</title>
   </head>
   <body>
     <div layout:fragment="header-container"></div>
-    <div layout:fragment="content" class="container">
-    	<div class="billboard--wrapper">
+    <div layout:fragment="full-width--layout">
+        <div class="billboard--wrapper">
         <div class="billboard--container center-text">
           <div class="container-fluid">
             <div class="billboard--title">
@@ -24,8 +24,10 @@
           </div>
         </div>
         <div class="billboard-bg about-us--bg"></div>
-      </div> 
-      <div class="billboard-body--wrapper">
+      </div>
+    </div>
+    <div layout:fragment="content">
+      <div class="main-body--wrapper">
         <div class="row-fluid">
           <a href="/team" class="span4 about-feature--container">
             <div class="icon about-icon team"></div>
@@ -47,34 +49,6 @@
           </a>
         </div>
       </div>
-      <div class="support--wrapper about-page">
-          <div class="container-fluid">
-            <div class="row-fluid">
-              <div class="span6 support--container">
-                <div class="icon icon-community-support"></div>
-                <div class="support--title">
-                  Community Support
-                </div>
-                <div class="support-links">
-                  <a href="http://forum.springframework.io">Forum</a>
-                  <a href="http://stackoverflow.com/questions/tagged/spring">Stack Overflow</a>
-                </div>
-              </div>
-              <div class="span6 support--container">
-                <div class="icon icon-professional-support"></div>
-                <div class="support--title">
-                  Professional Support
-                </div>
-                <div class="support-links">
-                  <a href="/unknown">Support *NR</a>
-                  <a href="http://www.gopivotal.com/contact/spring-training">Training</a>
-                  <a href="http://www.gopivotal.com/contact/spring-consulting">Consulting</a>
-                </div>
-              </div>
-            </div>
-          </div>          
-        </div>
-        <div class="about-page-fix"></div>
     </div>
   </body>
 </html>

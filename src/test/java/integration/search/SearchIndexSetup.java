@@ -26,68 +26,68 @@ import java.util.Map;
 
 public class SearchIndexSetup {
 
-	private static Log logger = LogFactory.getLog(SearchService.class);
-	private final JestClient jestClient;
+    private static Log logger = LogFactory.getLog(SearchService.class);
+    private final JestClient jestClient;
     private String index;
 
-	public SearchIndexSetup(JestClient jestClient, String index) {
-		this.jestClient = jestClient;
-		this.index = index;
-	}
+    public SearchIndexSetup(JestClient jestClient, String index) {
+        this.jestClient = jestClient;
+        this.index = index;
+    }
 
-	public void deleteIndex() {
-		execute(new DeleteIndex.Builder(index).build());
-	}
+    public void deleteIndex() {
+        execute(new DeleteIndex.Builder(index).build());
+    }
 
-	public void createIndex() {
-		CreateIndex.Builder builder = new CreateIndex.Builder(index);
+    public void createIndex() {
+        CreateIndex.Builder builder = new CreateIndex.Builder(index);
 
-		builder.settings(loadSettings());
-		execute(builder.build());
+        builder.settings(loadSettings());
+        execute(builder.build());
 
-		createMappings();
-	}
+        createMappings();
+    }
 
-	public void createMappings() {
-		try {
+    public void createMappings() {
+        try {
 
-			File mappingsDir = new ClassPathResource("/config/elasticsearch/mappings", getClass()).getFile();
-			for (final File fileEntry : mappingsDir.listFiles()) {
-				String filenameBase = fileEntry.getName().replaceAll("\\.json$", "");
-				String mappingJson = StreamUtils.copyToString(new FileInputStream(fileEntry), Charset.forName("UTF-8"));
-				PutMapping.Builder mapping = new PutMapping.Builder(index, filenameBase, mappingJson);
-				execute(mapping.build());
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+            File mappingsDir = new ClassPathResource("/elasticsearch/mappings", getClass()).getFile();
+            for (final File fileEntry : mappingsDir.listFiles()) {
+                String filenameBase = fileEntry.getName().replaceAll("\\.json$", "");
+                String mappingJson = StreamUtils.copyToString(new FileInputStream(fileEntry), Charset.forName("UTF-8"));
+                PutMapping.Builder mapping = new PutMapping.Builder(index, filenameBase, mappingJson);
+                execute(mapping.build());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	public Map<String, String> loadSettings() {
-		Map<String, String> settings = new HashMap<>();
-		try {
-			InputStream settingsStream = new ClassPathResource("/config/elasticsearch/settings.json", getClass()).getInputStream();
-			JsonParser jsonParser = new JsonParser();
-			JsonElement root = jsonParser.parse(new InputStreamReader(settingsStream, Charset.forName("UTF-8")));
+    public Map<String, String> loadSettings() {
+        Map<String, String> settings = new HashMap<>();
+        try {
+            InputStream settingsStream = new ClassPathResource("/elasticsearch/settings.json", getClass()).getInputStream();
+            JsonParser jsonParser = new JsonParser();
+            JsonElement root = jsonParser.parse(new InputStreamReader(settingsStream, Charset.forName("UTF-8")));
 
-			for (Map.Entry<String, JsonElement> entry : root.getAsJsonObject().entrySet()) {
-				settings.put(entry.getKey(), entry.getValue().getAsString());
-			}
+            for (Map.Entry<String, JsonElement> entry : root.getAsJsonObject().entrySet()) {
+                settings.put(entry.getKey(), entry.getValue().getAsString());
+            }
 
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return settings;
-	}
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return settings;
+    }
 
-	private JestResult execute(Action action) {
-		try {
-			JestResult result = this.jestClient.execute(action);
-			logger.debug(result.getJsonString());
-			return result;
-		} catch (Exception e) {
-			throw new SearchException(e);
-		}
-	}
+    private JestResult execute(Action action) {
+        try {
+            JestResult result = this.jestClient.execute(action);
+            logger.debug(result.getJsonString());
+            return result;
+        } catch (Exception e) {
+            throw new SearchException(e);
+        }
+    }
 
 }

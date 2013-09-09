@@ -21,83 +21,83 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 public class BlogAuthorTests extends IntegrationTestBase {
 
-	@Autowired
-	private PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-	@Autowired
-	private TeamRepository teamRepository;
+    @Autowired
+    private TeamRepository teamRepository;
 
 
-	@Test
-	public void blogIndexPostsIncludeLinkToAuthor() throws Exception {
-		MemberProfile activeAuthor = MemberProfileBuilder.profile().username("active_author").build();
-		teamRepository.save(activeAuthor);
+    @Test
+    public void blogIndexPostsIncludeLinkToAuthor() throws Exception {
+        MemberProfile activeAuthor = MemberProfileBuilder.profile().username("active_author").build();
+        teamRepository.save(activeAuthor);
 
-		Post post = new PostBuilder().title("Blog Post ")
-				.author(activeAuthor)
-				.build();
-		postRepository.save(post);
+        Post post = new PostBuilder().title("Blog Post ")
+                .author(activeAuthor)
+                .build();
+        postRepository.save(post);
 
-		MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertThat(html.select("a.author").first().attr("href"), containsString(activeAuthor.getUsername()));
-	}
+        MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();
+        Document html = Jsoup.parse(response.getResponse().getContentAsString());
+        assertThat(html.select("a.author").first().attr("href"), containsString(activeAuthor.getUsername()));
+    }
 
-	@Test
-	public void blogIndexPostsDoNotIncludeLinksToHiddenAuthors() throws Exception {
-		MemberProfile activeAuthor = MemberProfileBuilder.profile()
-				.name("Hidden Author")
-				.username("hidden_author")
-				.hidden(true)
-				.build();
-		teamRepository.save(activeAuthor);
+    @Test
+    public void blogIndexPostsDoNotIncludeLinksToHiddenAuthors() throws Exception {
+        MemberProfile activeAuthor = MemberProfileBuilder.profile()
+                .name("Hidden Author")
+                .username("hidden_author")
+                .hidden(true)
+                .build();
+        teamRepository.save(activeAuthor);
 
-		Post post = new PostBuilder().title("Blog Post ")
-				.author(activeAuthor)
-				.build();
-		postRepository.save(post);
+        Post post = new PostBuilder().title("Blog Post ")
+                .author(activeAuthor)
+                .build();
+        postRepository.save(post);
 
-		MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertTrue(html.select("a.author").isEmpty());
-		assertThat(html.text(), containsString("Hidden Author"));
-	}
+        MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();
+        Document html = Jsoup.parse(response.getResponse().getContentAsString());
+        assertTrue(html.select("a.author").isEmpty());
+        assertThat(html.text(), containsString("Hidden Author"));
+    }
 
-	@Test
-	public void blogPostPageIncludesLinkToAuthor() throws Exception {
-		MemberProfile activeAuthor = MemberProfileBuilder.profile()
-				.username("active_author")
-				.build();
-		teamRepository.save(activeAuthor);
+    @Test
+    public void blogPostPageIncludesLinkToAuthor() throws Exception {
+        MemberProfile activeAuthor = MemberProfileBuilder.profile()
+                .username("active_author")
+                .build();
+        teamRepository.save(activeAuthor);
 
-		Post post = new PostBuilder().title("Blog Post ")
-				.author(activeAuthor)
-				.build();
-		postRepository.save(post);
+        Post post = new PostBuilder().title("Blog Post ")
+                .author(activeAuthor)
+                .build();
+        postRepository.save(post);
 
-		MvcResult response = this.mockMvc.perform(get("/blog/" + post.getPublicSlug())).andReturn();
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertThat(html.select("a.author").first().attr("href"), containsString(activeAuthor.getUsername()));
-	}
+        MvcResult response = this.mockMvc.perform(get("/blog/" + post.getPublicSlug())).andReturn();
+        Document html = Jsoup.parse(response.getResponse().getContentAsString());
+        assertThat(html.select("a.author").first().attr("href"), containsString(activeAuthor.getUsername()));
+    }
 
-	@Test
-	public void blogPostPageDoesNotIncludeLinkToHiddenAuthors() throws Exception {
-		MemberProfile activeAuthor = MemberProfileBuilder.profile()
-				.name("Hidden Author")
-				.username("hidden_author")
-				.hidden(true)
-				.build();
-		teamRepository.save(activeAuthor);
+    @Test
+    public void blogPostPageDoesNotIncludeLinkToHiddenAuthors() throws Exception {
+        MemberProfile activeAuthor = MemberProfileBuilder.profile()
+                .name("Hidden Author")
+                .username("hidden_author")
+                .hidden(true)
+                .build();
+        teamRepository.save(activeAuthor);
 
-		Post post = new PostBuilder().title("Blog Post ")
-				.author(activeAuthor)
-				.build();
-		postRepository.save(post);
+        Post post = new PostBuilder().title("Blog Post ")
+                .author(activeAuthor)
+                .build();
+        postRepository.save(post);
 
-		MvcResult response = this.mockMvc.perform(get("/blog/" + post.getPublicSlug())).andReturn();
-		Document html = Jsoup.parse(response.getResponse().getContentAsString());
-		assertTrue(html.select("a.author").isEmpty());
-		assertThat(html.text(), containsString("Hidden Author"));
-	}
+        MvcResult response = this.mockMvc.perform(get("/blog/" + post.getPublicSlug())).andReturn();
+        Document html = Jsoup.parse(response.getResponse().getContentAsString());
+        assertTrue(html.select("a.author").isEmpty());
+        assertThat(html.text(), containsString("Hidden Author"));
+    }
 
 }
