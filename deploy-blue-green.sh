@@ -68,4 +68,4 @@ $CF push --manifest manifest/$SPACE.yml --name $NEXT --reset --start || exit
 
 scripts/mapping-blue-green.sh $SPACE $CF $CURRENT $NEXT
 
-$CF push --manifest manifest/$SPACE.yml --name sagan-indexer --host sagan-indexer-$SPACE --reset --start
+#$CF push --manifest manifest/$SPACE.yml --name sagan-indexer --host sagan-indexer-$SPACE --reset --start
