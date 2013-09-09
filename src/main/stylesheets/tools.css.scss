@@ -349,8 +349,16 @@ $icon-sprite: url("../img/iconsprite.png");
         line-height: 16px;
       }
     }
+    .tools-version-dropdown--title {
+      display: block;
+    }
+    .place-right {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
     .platform-version--dropdown {
-      width: 82.7%;
+      width: 82.75%;
     }
   }
 }
