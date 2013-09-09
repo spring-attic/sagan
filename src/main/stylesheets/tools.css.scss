@@ -113,9 +113,22 @@ $icon-sprite: url("../img/iconsprite.png");
     font-size: 16px;
     line-height: 24px;
     margin-bottom: 20px;
+    padding-right: 20px;
     &.small-font {
       font-size: 14px;
       line-height: 24px;
+    }
+    li {
+      margin-bottom: 10px;
+      font-size: 14px;
+      &:last-child {
+        margin-bottom: 40px;
+      }
+    }
+    em {
+      font-family: $secondary-font-family;
+      font-style: normal;
+      font-weight: bold;
     }
   }
   .centered-title {
