@@ -192,11 +192,11 @@ $(function () {
     });
   });
 
-  $(".spring-logo--container .spring-logo").bind("contextmenu",function(e){
-      var currentWindow = window.location.origin;
-      window.location = currentWindow + '/logos'
-      return false;  
-    });
+  // $(".spring-logo--container .spring-logo").bind("contextmenu",function(e){
+  //   var currentWindow = window.location.origin;
+  //   window.location = currentWindow + '/logos'
+  //   return false;  
+  // });
 
 });
 
