@@ -11,7 +11,7 @@
   padding-top: 30px;
   margin-top: 10px;
   margin-bottom: 10px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #dddddd;
 }
 
 .project--container {
@@ -140,11 +140,11 @@
 }
 .project--container.project--container--link {
   color: #34302d;
-  transition: all 0.20s;
-  -webkit-transition: all 0.20s;
-  -moz-transition: all 0.20s;
-  -ms-transition: all 0.20s;
-  -o-transition: all 0.20s;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
 }
 .project--container.project--container--link:hover {
   text-decoration: none;

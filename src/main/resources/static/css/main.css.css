@@ -48,7 +48,7 @@ body {
 
 .code-snippet {
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   background-color: #F9F9F9;
   padding: 12px 18px;
   margin: 15px 0;
@@ -136,7 +136,7 @@ body {
   margin-top: -90px;
   background-color: white;
   width: 100%;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dddddd;
   transition: margin 0.25s;
   -webkit-transition: margin 0.25s;
   -moz-transition: margin 0.25s;
@@ -200,9 +200,9 @@ a.spring-logo span {
   height: 46px;
   background: url("../img/spring-logo.png") -1px -48px no-repeat;
   opacity: 0;
-  -moz-transition: opacity .12s ease-in-out;
-  -webkit-transition: opacity .12s ease-in-out;
-  -o-transition: opacity .12s ease-in-out;
+  -moz-transition: opacity 0.12s ease-in-out;
+  -webkit-transition: opacity 0.12s ease-in-out;
+  -o-transition: opacity 0.12s ease-in-out;
 }
 
 a:hover.spring-logo span {
@@ -210,7 +210,7 @@ a:hover.spring-logo span {
 }
 
 .right-pane-widget--container {
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   box-shadow: 0 -4px 0 #34302d;
   margin: 4px 0 40px 0;
 }
@@ -454,7 +454,7 @@ input.floating-input:focus {
 
 .gh-project-url--container {
   background-color: #FFF;
-  border: 1px solid #CCC;
+  border: 1px solid #cccccc;
   height: 20px;
   padding: 4px 6px;
   border-radius: 4px;
@@ -524,7 +524,7 @@ input.floating-input:focus {
 .index-page--subtitle.jobs-subtitle {
   margin-bottom: 60px;
   padding-bottom: 60px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 
 .footer {
@@ -775,7 +775,7 @@ input.floating-input:focus {
 }
 .item-slider-widget .item-slider--container {
   background-color: white;
-  border: 1px solid #999;
+  border: 1px solid #999999;
   padding: 0 3px;
 }
 .item-slider-widget .item-slider--container .item {
@@ -803,7 +803,7 @@ input.floating-input:focus {
 }
 
 .content-container--wrapper {
-  border: 1px solid #34302D;
+  border: 1px solid #34302d;
   margin-top: -1px;
 }
 .content-container--wrapper:first-child {
@@ -1056,11 +1056,11 @@ form.lpeRegForm .mktInput {
   text-align: center;
   padding: 40px 20px;
   height: 409px;
-  transition: border, box-shadow 0.20s;
-  -webkit-transition: border, box-shadow 0.20s;
-  -moz-transition: border, box-shadow 0.20s;
-  -ms-transition: border, box-shadow 0.20s;
-  -o-transition: border, box-shadow 0.20s;
+  transition: border, box-shadow 0.2s;
+  -webkit-transition: border, box-shadow 0.2s;
+  -moz-transition: border, box-shadow 0.2s;
+  -ms-transition: border, box-shadow 0.2s;
+  -o-transition: border, box-shadow 0.2s;
   border: 1px solid transparent;
 }
 .about-feature--container .icon--container {
@@ -1178,8 +1178,8 @@ form.lpeRegForm .mktInput {
   background-color: white;
   padding: 50px;
   display: inline-block;
-  border-bottom: 1px solid #ccc;
-  box-shadow: 0 0 3px #ccc;
+  border-bottom: 1px solid #cccccc;
+  box-shadow: 0 0 3px #cccccc;
   margin-top: 100px;
 }
 .admin--wrapper .admin-login--container .admin-login--title {
@@ -1212,8 +1212,8 @@ form.lpeRegForm .mktInput {
   background-color: white;
   padding: 50px 0;
   display: inline-block;
-  border-bottom: 1px solid #ccc;
-  box-shadow: 0 0 3px #ccc;
+  border-bottom: 1px solid #cccccc;
+  box-shadow: 0 0 3px #cccccc;
   text-align: center;
   width: 95%;
   transition: all 0.25s;
@@ -1255,8 +1255,8 @@ form.lpeRegForm .mktInput {
   background-color: white;
   padding: 50px 0;
   display: inline-block;
-  border-bottom: 1px solid #ccc;
-  box-shadow: 0 0 3px #ccc;
+  border-bottom: 1px solid #cccccc;
+  box-shadow: 0 0 3px #cccccc;
   text-align: center;
   width: 95%;
   transition: all 0.25s;
