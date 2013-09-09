@@ -520,8 +520,8 @@ projects:
     - id: spring-xd
       name: Spring XD
       groupId: org.springframework.xd
-      siteUrl: "{githubOrgBaseUrl}/spring-xd/wiki"
       supportedVersions:
+        - 1.0.0.BUILD-SNAPSHOT
         - 1.0.0.M2
 
 
