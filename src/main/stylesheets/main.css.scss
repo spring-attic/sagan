@@ -1508,27 +1508,59 @@ form.lpeRegForm .mktInput {
   img {
     display: inline-block;
   }
+  .error-title {
+    font-size: 24px;
+    line-height: 24px;
+    margin: 30px 0 0;
+  }
   .big-search--container {
     display: inline-block;
-    width: 75%;
+    width: 64%;
     background-color: white;
     text-align: left;
-    margin-top: 50px;
+    margin: 50px 0 40px;
+    padding: 0 40px;
+    position: relative;
     input {
       background-color: transparent;
       border: none;
       box-shadow: none;
       font-size: 24px;
       line-height: 30px;
-      padding: 26px 40px;
+      padding: 26px 0;
+      width: 95%;
+      display: inline-block;
     }
     button {
-      float: right;
+      position: absolute;
+      right: 0;
+      top: 0;
       background-color: transparent;
       border: none;
       padding: 25px 28px;
       font-size: 20px;
       color: #666;
+    }
+  }
+  .error-bottom-link {
+    .social-icon.twitter {
+      background-image: url("../img/iconsprite.png");
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      background-position: -1px -143px;
+      vertical-align: middle;
+      margin-right: 15px;
+    }
+    font-size: 14px;
+    color: $link-green;
+    text-decoration: none;
+    &:hover {
+      .twitter {
+        background-position: -84px -143px;
+      }
+      color: lighten($link-green, 5%);
     }
   }
 }

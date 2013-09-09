@@ -1416,12 +1416,19 @@ form.lpeRegForm .mktInput {
 .error-page img {
   display: inline-block;
 }
+.error-page .error-title {
+  font-size: 24px;
+  line-height: 24px;
+  margin: 30px 0 0;
+}
 .error-page .big-search--container {
   display: inline-block;
-  width: 75%;
+  width: 64%;
   background-color: white;
   text-align: left;
-  margin-top: 50px;
+  margin: 50px 0 40px;
+  padding: 0 40px;
+  position: relative;
 }
 .error-page .big-search--container input {
   background-color: transparent;
@@ -1429,13 +1436,38 @@ form.lpeRegForm .mktInput {
   box-shadow: none;
   font-size: 24px;
   line-height: 30px;
-  padding: 26px 40px;
+  padding: 26px 0;
+  width: 95%;
+  display: inline-block;
 }
 .error-page .big-search--container button {
-  float: right;
+  position: absolute;
+  right: 0;
+  top: 0;
   background-color: transparent;
   border: none;
   padding: 25px 28px;
   font-size: 20px;
   color: #666;
+}
+.error-page .error-bottom-link {
+  font-size: 14px;
+  color: #5fa134;
+  text-decoration: none;
+}
+.error-page .error-bottom-link .social-icon.twitter {
+  background-image: url("../img/iconsprite.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background-position: -1px -143px;
+  vertical-align: middle;
+  margin-right: 15px;
+}
+.error-page .error-bottom-link:hover {
+  color: #6ab43a;
+}
+.error-page .error-bottom-link:hover .twitter {
+  background-position: -84px -143px;
 }
