@@ -21,9 +21,8 @@
                         <div class="item-dropdown-widget js-item-dropdown--wrapper"
                              th:each="eclipseVersion : ${platform.eclipseVersions}">
                             <div class="item-dropdown--link js-item--open-dropdown">
-                                <i class="item-dropdown--icon icon-reorder pull-right"></i>
-
-                                <p class="item-dropdown--title" th:text="'Based on Eclipse '+${eclipseVersion.name}"></p>
+                                <p class="item-dropdown--title tools-version-dropdown--title" th:text="'Based on Eclipse '+${eclipseVersion.name}"></p>
+                                <i class="item-dropdown--icon icon-reorder place-right"></i>
                             </div>
                             <div class="item--dropdown no-item--header platform-version--dropdown">
                                 <div class="item--body">

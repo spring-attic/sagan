@@ -320,8 +320,16 @@
   font-family: "Montserrat", sans-serif;
   line-height: 16px;
 }
+.tool-versions--wrapper .tool-versions--container .tools-version-dropdown--title {
+  display: block;
+}
+.tool-versions--wrapper .tool-versions--container .place-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 .tool-versions--wrapper .tool-versions--container .platform-version--dropdown {
-  width: 82.7%;
+  width: 82.75%;
 }
 
 .eclipse-platform--container {
