@@ -349,7 +349,6 @@ projects:
       name: Spring Web Services
       groupId: org.springframework.ws
       lead: apoutsma
-      siteUrl: "{docsBaseUrl}/spring-ws/sites/2.0"
       supportedVersions:
         - name: 2.1.4.RELEASE
           refDocUrl: /spring-ws/sites/2.0/reference/html/index.html
