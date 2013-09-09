@@ -60,4 +60,8 @@ public class ToolSuiteDownloads {
     public String getDisplayName() {
         return String.format("%s %s", shortName, releaseName);
     }
+
+    public boolean hasPlatforms() {
+        return platforms.size() > 0;
+    }
 }

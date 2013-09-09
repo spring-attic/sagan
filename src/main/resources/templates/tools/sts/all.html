@@ -15,7 +15,7 @@
           archive, they contain equivalent functionality.</p>
 
         <div class='ga--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${gaRelease}"></div>
-        <div class='milestone--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${milestoneRelease}"></div>
+        <div class='milestone--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${milestoneRelease}" th:if="${milestoneRelease.hasPlatforms()}"></div>
 
       <h2>Update Site Archives</h2>
       <p>You can download archived versions of the update sites, if you
