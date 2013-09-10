@@ -6,7 +6,7 @@ if [ $# != 2 ] ; then cat << EOM
 
     It will stop when an app is running or if a maximun number of retries is reached.
 
-    usage: $0 APP_NAME MAX_RETRIES
+    usage: $0 APP_NAME MAX_RETRIES PATH_TO_CF
 EOM
     exit
 fi
@@ -14,12 +14,13 @@ fi
 
 APP_NAME=$1
 MAX_RETRIES=$2
+CF=$3
 
 echo "Polling cf health for $APP_NAME"
 
 RETRY=0
 while [ $RETRY -lt $MAX_RETRIES ]; do
-    HEALTH=`cf health $APP_NAME`
+    HEALTH=`$CF health $APP_NAME`
     if [[ $HEALTH != "stopped" && $HEALTH != "0%" ]]; then
         echo "$APP_NAME is running!"
         exit 0
