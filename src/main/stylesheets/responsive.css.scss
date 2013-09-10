@@ -32,6 +32,7 @@ $icon-sprite: url("../img/iconsprite.png");
     bottom: 0;
     overflow-x: hidden;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     &.constrained {
       overflow: hidden;
       min-height: 279px;
@@ -45,15 +46,49 @@ $icon-sprite: url("../img/iconsprite.png");
     display: block;
   }
 
+  .mobile-left-pane {
+    width: 100% !important;
+
+  }
+  .mobile-right-pane {
+    display: none !important;;
+  }
+
   .index-page--title {
     line-height: 32px;
-    margin-bottom: 10px;
   }
 
   .index-page--subtitle {
+    margin-top: 10px;
     margin-bottom: 30px;
+    &.with-subtext {
+      margin-bottom: 30px;
+    }
   }
 
+  aside {
+    margin-left: 0 !important;
+  }
+  .right-pane-widget--container {
+    margin-top: 60px;
+  }
+
+  .copy-button {
+    display: none;
+  }
+  .content--container {
+    pre {
+      max-width: 94.9%;
+    }
+    code {
+      word-break: normal;
+      word-wrap: normal;
+      white-space: pre;
+      overflow-x: auto;
+      max-width: 97%;
+      display: inline-block;
+    }
+  }
   .mobile-navigation--wrapper {
     .navigation-drawer--container {
       position: absolute;
@@ -177,8 +212,7 @@ $icon-sprite: url("../img/iconsprite.png");
     }
   }
   .body--container {
-    margin-top: 20px;
-    margin-bottom: 30px;
+
     transition: all 0.25s;
     -webkit-transition: all 0.25s;
     -moz-transition: all 0.25s;
@@ -193,6 +227,10 @@ $icon-sprite: url("../img/iconsprite.png");
     }
   }
 
+  .main-body--wrapper {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
   .blog--wrapper {
     .blog--container {
       padding-bottom: 0;
@@ -211,16 +249,9 @@ $icon-sprite: url("../img/iconsprite.png");
           margin: 0;
           .meta-data--item {
             margin-bottom: 0;
-            display: block;
           }
         }
       }
-    }
-    .blog--left-pane {
-      width: 100%;
-    }
-    .blog--right-pane {
-      display: none;
     }
   }
 
@@ -242,9 +273,9 @@ $icon-sprite: url("../img/iconsprite.png");
         margin-bottom: 0 !important;
       }
     }
-    &.blog-preview .meta-data--container .meta-data--item {
-      margin-bottom: 0 !important; 
-    }
+    // &.blog-preview .meta-data--container .meta-data--item {
+    //   margin-bottom: 0 !important; 
+    // }
   }
   .content-container--wrapper {
     .content-container--header {
@@ -262,17 +293,16 @@ $icon-sprite: url("../img/iconsprite.png");
         .icon {
           display: none !important;
         }
-        .content-section-title, .content-section-sub-title{
+        .content-section-title {
           padding: 0;
         }
         .content-section-title {
           margin-bottom: 10px;
-          font-size: 19px;
-          line-height: 23px;
+          font-size: 21px;
+          line-height: 27px;
         }
         .content-section-sub-title {
-          font-size: 14px;
-          line-height: 20px; 
+          display: none;
         }
       }
     }
