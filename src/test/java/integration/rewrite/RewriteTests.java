@@ -52,10 +52,25 @@ public class RewriteTests {
     }
 
     @Test
+    public void interface21Redirects() throws Exception {
+        validatePermanentRedirect("http://interface21.com", "http://spring.io");
+        validatePermanentRedirect("http://www.interface21.com", "http://spring.io");
+        validatePermanentRedirect("http://blog.interface21.com", "http://spring.io/blog");
+    }
+
+    @Test
     public void legacySiteRedirects() throws Exception {
         validatePermanentRedirect("http://www.springsource.org/sts/welcome", "http://spring.io/tools/sts/welcome");
         validatePermanentRedirect("http://www.springsource.org/groovy-grails-tool-suite-download", "http://spring.io/tools/ggts");
         validateTemporaryRedirect("http://www.springsource.org/ggts/welcome", "http://grails.org/products/ggts");
+    }
+
+    @Test
+    public void legacyBlogSiteRequestsAreRedirected() throws Exception {
+        validatePermanentRedirect("http://blog.springsource.org", "http://spring.io/blog/");
+        validatePermanentRedirect("http://blog.springsource.org/", "http://spring.io/blog/");
+        validatePermanentRedirect("http://blog.springsource.com", "http://spring.io/blog/");
+        validatePermanentRedirect("http://blog.springsource.com/", "http://spring.io/blog/");
     }
 
     @Test
@@ -166,6 +181,16 @@ public class RewriteTests {
             validateTemporaryRedirect("http://" + host + "/", "http://spring.io/docs");
             validatePermanentRedirect("http://" + host + "/spring-anything", "http://docs.spring.io/spring-anything");
         }
+    }
+
+    @Test
+    public void legacyForumRequestsAreRedirected() throws Exception {
+        // something is stripping the query strings during testing, but this actually
+        // works against the running site
+        // validatePermanentRedirect("http://forum.springsource.org/showthread.php?48738-Getting-Spring-to-throw-duplicate-bean-definition-exception",
+        //                           "http://forum.spring.io/showthread.php?48738-Getting-Spring-to-throw-duplicate-bean-definition-exception");
+        validatePermanentRedirect("http://forum.springsource.org/showthread.php?48738-Getting-Spring-to-throw-duplicate-bean-definition-exception",
+                                  "http://forum.spring.io/showthread.php");
     }
 
     @Test
