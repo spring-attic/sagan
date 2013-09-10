@@ -7,27 +7,27 @@
   <body>
     <div layout:fragment="header-container"></div>
     <div layout:fragment="full-width--layout">
-      <div class="billboard--wrapper homepage-billboard">
-        <div class="billboard--container">
-          <div class="container-fluid">
-            <div class="icon icon-spring-logo-big homepage-icon"></div>
-            <div class="homepage-title--container">
-              <div class="homepage-title">
-                Let's build a better Enterprise.
-              </div>
-              <div class="homepage-subtitle--container">
-                <div class="homepage-subtitle">
-                  Spring helps development teams everywhere build simple, portable,
+      <div class="homepage--body">
+        <div class="billboard--wrapper homepage-billboard">
+          <div class="billboard--container">
+            <div class="container-fluid">
+              <div class="icon icon-spring-logo-big homepage-icon"></div>
+              <div class="homepage-title--container">
+                <div class="homepage-title">
+                  Let's build a better Enterprise.
                 </div>
-                <div class="homepage-subtitle">
-                  fast and flexible JVM-based systems and applications.
+                <div class="homepage-subtitle--container">
+                  <div class="homepage-subtitle">
+                    Spring helps development teams everywhere build simple, portable,
+                  </div>
+                  <div class="homepage-subtitle">
+                    fast and flexible JVM-based systems and applications.
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="homepage--body">
         <div class="key-feature--wrapper">
           <div class="container-fluid">
             <div class="row-fluid">
@@ -75,7 +75,7 @@
           <div class="offset-feature--container feature-guides">
             <div class="container-fluid">
               <div class="row-fluid feature--content">
-                <div class="span8">
+                <div class="span8 mobile-left-pane">
                   <div class="offset-feature--title">Guides</div>
                   <div class="offset-feature--text">
                     Whether you're an expert or a newcomer our task-focused Getting Started Guides and Tutorials are designed to get you productive with Spring as quickly as possible.
@@ -88,10 +88,10 @@
               </div>
             </div>
           </div>
-          <div class="offset-feature--container feature-sts">
+          <div class="offset-feature--container feature-sts desktop-only">
             <div class="container-fluid">
               <div class="row-fluid feature--content">
-                <div class="tool-suite span8 offset4">
+                <div class="tool-suite span8 offset4 mobile-left-pane">
                   <div class="offset-feature--title">Spring Tool Suite&trade;</div>
                   <div class="offset-feature--text">
                     Your tools should be as refined as the code you write. STS is our Eclipse-based IDE crafted to serve the needs of building applications with Spring. We're always working on new features and performance in our mission to make STS the most productive Eclipse distribution available.
@@ -107,7 +107,7 @@
           <div class="offset-feature--container feature-projects">
             <div class="container-fluid">
               <div class="row-fluid feature--content">
-                <div class="span8">
+                <div class="span8 mobile-left-pane">
                   <div class="offset-feature--title">Spring Projects</div>
                   <div class="offset-feature--text">
                     From configuration to security, web apps to big data &ndash; whatever the infrastructure needs of your application may be, there is a Spring Project to help you build it. Start small and use just what you need &ndash; Spring is modular by design.
@@ -124,7 +124,7 @@
         <div class="support--wrapper">
           <div class="container-fluid">
             <div class="row-fluid">
-              <div class="span6 support--container">
+              <div class="span6 support--container mobile-left-pane">
                 <div class="icon icon-community-support"></div>
                 <div class="support--title">
                   Community Support
@@ -134,7 +134,7 @@
                   <a href="http://stackoverflow.com/questions/tagged/spring">Stack Overflow</a>
                 </div>
               </div>
-              <div class="span6 support--container">
+              <div class="span6 support--container mobile-left-pane">
                 <div class="icon icon-professional-support"></div>
                 <div class="support--title">
                   Professional Support

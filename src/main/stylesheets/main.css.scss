@@ -91,6 +91,7 @@ body {
     box-shadow: none;
     position: relative;
     border-radius: 0;
+    padding: 0;
     .spring-logo--container {
       display: inline-block;
       .spring-logo {
@@ -966,11 +967,7 @@ input.floating-input {
 
 .billboard--wrapper {
   .billboard--container {
-    position: absolute;
-    z-index: 600;
-    width: 100%;
-    margin: 0 auto;
-    margin-top: 80px;
+    padding: 80px 0;
     .billboard--title, .billboard--sub-title {
       background: rgba(52, 48, 45, 0.8);
       color: $off-white;
