@@ -48,7 +48,7 @@ echo "switching to space $SPACE"
 $CF space $SPACE || exit
 
 echo "pushing main app to CF"
-$CF push --manifest manifest/$SPACE.yml --name sagan --host sagan-$SPACE --reset --start || exit
+$CF push --manifest manifest/$SPACE.yml --name sagan --host sagan-$SPACE --reset --start || scripts/wait-for-app-to-start.sh sagan 100 || exit
 
 echo "pushing indexer to CF"
-#$CF push --manifest manifest/$SPACE.yml --name sagan-indexer --host sagan-indexer-$SPACE --reset --start || exit
+$CF push --manifest manifest/$SPACE.yml --name sagan-indexer --host sagan-indexer-$SPACE --reset --start || scripts/wait-for-app-to-start.sh sagan-indexer 100
