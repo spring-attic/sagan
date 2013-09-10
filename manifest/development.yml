@@ -2,7 +2,7 @@
 applications:
 - name: sagan
   memory: 2G
-  instances: 4
+  instances: 1
   env:
     SPRING_PROFILES_ACTIVE: site,development
   host: sagan-development
