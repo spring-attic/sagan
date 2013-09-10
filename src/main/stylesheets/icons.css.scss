@@ -7,7 +7,12 @@ $icon-sprite: url("../img/iconsprite.png");
     width: 204px;
     height: 60px;
     background-position: 904px 302px;
-    zoom: 50%
+    margin-top: -13px;
+    transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    -o-transform: scale(0.5);
+    -ms-transform: scale(0.5);
   }
   &.icon-spring-logo-big {
     width: 154px;
