@@ -167,6 +167,8 @@
     -moz-transition: all 0.25s;
     -ms-transition: all 0.25s;
     -o-transition: all 0.25s;
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
   }
   .mobile-navigation--wrapper .navigation-drawer--container .mobile-search--container {
     margin: 9px;
@@ -238,6 +240,8 @@
     -moz-transition: all 0.25s;
     -ms-transition: all 0.25s;
     -o-transition: all 0.25s;
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
   }
   .mobile-navigation--wrapper .mobile-nav .nav-icon {
     position: absolute;
@@ -259,14 +263,16 @@
     -o-transform: translateX(85%);
   }
 
-  .body--container {
+  .body--container, .homepage--body {
     transition: all 0.25s;
     -webkit-transition: all 0.25s;
     -moz-transition: all 0.25s;
     -ms-transition: all 0.25s;
     -o-transition: all 0.25s;
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
   }
-  .body--container.js-slide-right {
+  .body--container.js-slide-right, .homepage--body.js-slide-right {
     transform: translateX(85%);
     -webkit-transform: translateX(85%);
     -moz-transform: translateX(85%);
@@ -341,6 +347,7 @@
   }
   .homepage--body .platform--wrapper {
     padding: 30px 0 60px;
+    background-size: 404px;
   }
   .homepage--body .platform--wrapper .platform--icon {
     margin-bottom: 15px;
