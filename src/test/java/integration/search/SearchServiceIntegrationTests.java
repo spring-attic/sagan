@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +42,17 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
 
     @Value("${elasticsearch.client.index}")
     private String index;
+    private SearchIndexSetup searchIndexSetup;
 
     @Before
     public void setUp() throws Exception {
-        SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient,
-                this.index);
+        searchIndexSetup = new SearchIndexSetup(this.jestClient, this.index);
+        searchIndexSetup.deleteIndex();
+        searchIndexSetup.createIndex();
+    }
+
+    @After
+    public void tearDown() throws Exception {
         searchIndexSetup.deleteIndex();
         searchIndexSetup.createIndex();
     }
