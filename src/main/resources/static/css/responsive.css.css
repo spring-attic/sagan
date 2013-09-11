@@ -169,6 +169,7 @@
     -o-transition: all 0.25s;
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
   .mobile-navigation--wrapper .navigation-drawer--container .mobile-search--container {
     margin: 9px;
@@ -242,6 +243,7 @@
     -o-transition: all 0.25s;
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
   .mobile-navigation--wrapper .mobile-nav .nav-icon {
     position: absolute;
@@ -271,6 +273,7 @@
     -o-transition: all 0.25s;
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
   .body--container.js-slide-right, .homepage--body.js-slide-right {
     transform: translateX(85%);
@@ -309,6 +312,12 @@
 
   .guides-section--container {
     margin-top: 40px;
+  }
+
+  .project--container {
+    padding: 30px 5%;
+    width: 38.135%;
+    height: 290px;
   }
 
   footer {
@@ -416,6 +425,12 @@
     margin: 0;
     width: auto;
     margin-bottom: 20px;
+  }
+
+  .project--container {
+    padding: 30px 5%;
+    width: 90%;
+    height: 270px;
   }
 }
 @media (min-width: 900px) and (max-width: 1180px) {
