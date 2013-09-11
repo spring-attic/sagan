@@ -529,7 +529,7 @@ projects:
       groupId: org.springframework.xd
       supportedVersions:
         - 1.0.0.BUILD-SNAPSHOT
-        - 1.0.0.M2
+        - 1.0.0.M3
 
 
   # ========================
