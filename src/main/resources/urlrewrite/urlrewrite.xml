@@ -128,7 +128,7 @@
         <note>Everything from legacy blogs gets rewritten to spring.io, but in the case
         of /blog/feed/ (or blog category subfeeds) things should redirect to /blog.atom
         </note>
-        <from>^/blog/(.*/)?feed/?$</from>
+        <from>^/blog/(.*/)?feed/?(atom/)?$</from>
         <to type="temporary-redirect" last="true">http://spring.io/blog.atom</to>
     </rule>
     <rule>
