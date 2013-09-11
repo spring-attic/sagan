@@ -78,6 +78,7 @@ public class RewriteTests {
         validateTemporaryRedirect("http://spring.io/blog/feed", "http://spring.io/blog.atom");
         validateTemporaryRedirect("http://spring.io/blog/feed/", "http://spring.io/blog.atom");
         validateTemporaryRedirect("http://spring.io/blog/category/security/feed/", "http://spring.io/blog.atom");
+        validateTemporaryRedirect("http://spring.io/blog/main/feed/", "http://spring.io/blog.atom");
     }
 
     @Test
