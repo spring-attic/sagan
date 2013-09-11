@@ -124,6 +124,14 @@
         <to type="permanent-redirect" last="true">http://spring.io/blog$1</to>
     </rule>
     <rule>
+        <name>Legacy blog feed</name>
+        <note>Everything from legacy blogs gets rewritten to spring.io, but in the case
+        of /blog/feed/ (or blog category subfeeds) things should redirect to /blog.atom
+        </note>
+        <from>^/blog/(.*/)?feed/?$</from>
+        <to type="temporary-redirect" last="true">http://spring.io/blog.atom</to>
+    </rule>
+    <rule>
         <name>YouTube</name>
         <note>https://www.pivotaltracker.com/story/show/54309374
         Provide a consistent URL abstraction for our videos while we work out the new
