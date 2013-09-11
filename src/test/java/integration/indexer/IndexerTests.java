@@ -98,8 +98,6 @@ public class IndexerTests extends IntegrationTestBase {
 
         staticPageIndexer.indexItem("/about");
 
-        assertThat(this.indexedEntry.getRawContent(), containsString("About"));
-
         assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
         assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
         assertThat(this.indexedEntry.getRawContent(),

@@ -16,17 +16,13 @@ $secondary-font-family: 'Montserrat', sans-serif;
 $link-green: #5fa134;
 $icon-sprite: url("../img/iconsprite.png");
 
-//making stuff not responsive
-.container-fluid {
-  width: 1024px !important;
-}
-.navbar-inner {
-  min-width: 1060px;
-}
-.billboard--wrapper, .key-feature--wrapper, .offset-feature--container, .support--wrapper, footer, .search-dropdown--container, .team-map--wrapper, .billboard-bg, .platform--wrapper, .platform-stack--wrapper{
-  min-width: 1100px;
-}
-
+// //making stuff not responsive
+// .container-fluid {
+//   width: 1024px !important;
+// }
+// .navbar-inner, .search-dropdown--container, footer, .team-map--wrapper, .billboard-bg {
+//   min-width: 1024px;
+// }
 
 body {
   background-color: #f1f1f1;
@@ -87,6 +83,7 @@ body {
     box-shadow: none;
     position: relative;
     border-radius: 0;
+    padding: 0;
     .spring-logo--container {
       display: inline-block;
       .spring-logo {
@@ -905,7 +902,7 @@ input.floating-input {
       font-size: 18px;
       line-height: 22px;
       padding: 8px;
-      width: 28.4%;
+      width: 291px;
        &::-webkit-input-placeholder {
           color: #999;
         }
@@ -962,11 +959,7 @@ input.floating-input {
 
 .billboard--wrapper {
   .billboard--container {
-    position: absolute;
-    z-index: 600;
-    width: 100%;
-    margin: 0 auto;
-    margin-top: 80px;
+    padding: 80px 0;
     .billboard--title, .billboard--sub-title {
       background: rgba(52, 48, 45, 0.8);
       color: $off-white;
@@ -1453,7 +1446,7 @@ form.lpeRegForm .mktInput {
   &:after {
     content: "";
     opacity: 0.1;
-    background: url("../img/platform-bg.png") 100% 0 no-repeat;
+    background: url("../img/platform-bg.png") 100% 50% no-repeat;
     position: absolute;
     top: 0;
     left: 0;
@@ -1468,9 +1461,10 @@ form.lpeRegForm .mktInput {
   }
 
   .platform-watermark--large {
-    background: url("../img/spring-platform-watermark-large.png") 50% 0 no-repeat;
+    background: url("../img/spring-platform-watermark-large.png") 50% no-repeat;
     width: 100%;
-    height: 123px;
+    height: 156px;
+    background-size: 100%;
   }
 }
 

@@ -23,50 +23,46 @@ $icon-sprite: url("../img/iconsprite.png");
   background-image: url("../img/homepage-bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 500px;
   text-align: center;
-  .billboard--container {
-    margin-top: 60px;
-  }
-  .homepage-title--container {
-    margin-top: 66px;
-    .homepage-title, .homepage-subtitle {
-      background: rgba(52, 48, 45, 0.8);
-      color: $off-white;
-      display: inline-block;
-    }
-    .homepage-title {
-      font-size: 48px;
-      line-height: 68px;
-      font-family: $secondary-font-family;
-      padding: 0 15px;
-      letter-spacing: -2px;
-    }
-    .homepage-subtitle--container {
-      .homepage-subtitle {
-        font-size: 22px;
-        line-height: 18px;
-        padding: 2px 19px 12px;
-        &:first-child {
-          padding-top: 12px;
-        }
-      }
-    }
+}
+.homepage-title--container {
+  margin-top: 66px;
+}
+
+.homepage-title, .homepage-subtitle {
+  background: rgba(52, 48, 45, 0.8);
+  color: $off-white;
+  display: inline-block;
+}
+.homepage-title {
+  font-size: 48px;
+  line-height: 68px;
+  font-family: $secondary-font-family;
+  padding: 0 15px;
+  letter-spacing: -2px;
+}
+.homepage-subtitle {
+  font-size: 22px;
+  line-height: 18px;
+  padding: 2px 19px 12px;
+  &:first-child {
+    padding-top: 12px;
   }
 }
 
 .homepage--body {
-  // margin-bottom: -200px;
   .platform--wrapper {
-    background: url("../img/platform-bg.png") $black-brown 50% 0 no-repeat;
-    height: 438px;
+    background: url("../img/platform-bg.png") #34302D 50% 50% no-repeat;
+    height: auto;
     text-align: center;
+    padding: 60px 0;
+    background-size: 694px;
     .platform--icon {
       background: url("../img/spring-platform-watermark.png") no-repeat;
       width: 241px;
       height: 74px;
       display: inline-block;
-      margin: 43px 0;
+      margin-bottom: 43px;
     }
     .platform--title {
       font-family: $secondary-font-family;
@@ -123,6 +119,11 @@ $icon-sprite: url("../img/iconsprite.png");
   }
   .offset-feature--container {
     border-bottom: 1px solid #dddbda;
+    transition: all 0.25s;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    -ms-transition: all 0.25s;
     .feature--content {
       padding: 90px 0;
     }
@@ -153,17 +154,17 @@ $icon-sprite: url("../img/iconsprite.png");
     &.feature-guides {
       background-image: url("../img/homepage-feature-guides.png");
       background-repeat: no-repeat;
-      background-position: 100% 0;
+      background-position: 148% 0;
     }
     &.feature-sts {
       background-image: url("../img/homepage-feature-sts.png");
       background-repeat: no-repeat;
-      background-position: 0 0;
+      background-position: -40% 100%;
     }
     &.feature-projects {
       background-image: url("../img/homepage-feature-projects.png");
       background-repeat: no-repeat;
-      background-position: 100% 0;
+      background-position: 130px 0;
     }
     &:last-child {
       border: none;
@@ -171,11 +172,6 @@ $icon-sprite: url("../img/iconsprite.png");
     &:nth-child(even) {
       background-color: #ebf1e7;
     }
-    // &:hover {
-    //   .offset-feature--link {
-    //     text-decoration: underline;
-    //   }
-    // }
   }
 }
 .support--wrapper {

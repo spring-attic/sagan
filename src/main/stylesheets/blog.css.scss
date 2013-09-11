@@ -19,7 +19,7 @@ $icon-sprite: url("../img/iconsprite.png");
   padding: 0 0 40px 0;
   &.blog-preview {
     margin: 0 0 40px 0;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid #ccc;
     .meta-data--container {
       margin-bottom: 0;
     }
@@ -40,7 +40,6 @@ $icon-sprite: url("../img/iconsprite.png");
     }
     &:last-child {
       margin: 0;
-      border-color: #cccccc;
     }
   }
   .blog--title {

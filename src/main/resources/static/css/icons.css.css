@@ -3,9 +3,15 @@
   display: inline-block !important;
 }
 .icon.icon-spring-logo-mobile {
-  background-position: 113px 30px;
-  width: 113px;
-  height: 30px;
+  width: 204px;
+  height: 60px;
+  background-position: 904px 302px;
+  margin-top: -13px;
+  transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -webkit-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -ms-transform: scale(0.5);
 }
 .icon.icon-spring-logo-big {
   width: 154px;
@@ -143,7 +149,7 @@
 .icon.logo-eclipse-text {
   width: 159px;
   height: 38px;
-  background-position: 785px 287px;
+  background-position: 603px 38px;
 }
 .icon.icon-social-twitter {
   width: 36px;

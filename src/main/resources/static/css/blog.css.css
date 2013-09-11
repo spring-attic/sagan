@@ -3,7 +3,7 @@
 }
 .blog--container.blog-preview {
   margin: 0 0 40px 0;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #cccccc;
 }
 .blog--container.blog-preview .meta-data--container {
   margin-bottom: 0;
@@ -23,7 +23,6 @@
 }
 .blog--container.blog-preview:last-child {
   margin: 0;
-  border-color: #cccccc;
 }
 .blog--container .blog--title {
   font-size: 24px;

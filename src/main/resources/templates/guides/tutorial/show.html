@@ -10,8 +10,8 @@
     <div layout:fragment="content" class="container-fluid">
       <div class="main-body--wrapper">
         <div class="row-fluid">
-          <div class="span8 tutorial-text">
-            <div class="content--title">
+          <div class="span8 tutorial-text mobile-left-pane ">
+            <div class="content--title desktop-only">
               Tutorial
             </div>
             <article class="content--container">
@@ -19,8 +19,8 @@
               <div class="article-body" th:utext="${tutorial.content}">a Tutorial</div>
             </article>
           </div>
-          <aside id='sidebar' class="span4 content-right-pane--container">
-            <div class="right-pane-widget--container">
+          <aside id='sidebar' class="span4 content-right-pane--container mobile-left-pane ">
+            <div class="right-pane-widget--container desktop-only">
               <div class="github-actions">
                 <h2>Get the Code</h2>
                 <div class="btn-group">
