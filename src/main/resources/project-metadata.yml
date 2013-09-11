@@ -76,11 +76,10 @@ projects:
       refDocUrl: /spring-data/jpa/docs/{version}/reference/html/
       apiDocUrl: /spring-data/jpa/docs/{version}/api/
       supportedVersions:
-        - 1.4.0.RC1
+        - 1.5.0.BUILD-SNAPSHOT
+        - 1.4.1.RELEASE
+        - 1.3.5.BUILD-SNAPSHOT
         - 1.3.4.RELEASE
-        - name: 1.2.1.RELEASE
-          refDocUrl: NONE
-          apiDocUrl: NONE
 
     - id: spring-data-commons
       name: Spring Data Commons
@@ -89,7 +88,9 @@ projects:
       refDocUrl: /spring-data/data-commons/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-commons/docs/{version}/api/
       supportedVersions:
-        - 1.6.0.RC1
+        - 1.7.0.BUILD-SNAPSHOT
+        - 1.6.1.RELEASE
+        - 1.5.3.BUILD-SNAPSHOT
         - 1.5.2.RELEASE
 
     - id: spring-data-jdbc-ext
@@ -109,7 +110,9 @@ projects:
       refDocUrl: /spring-data/data-mongo/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-mongo/docs/{version}/api/
       supportedVersions:
-        - 1.3.0.M1
+        - 1.4.0.BUILD-SNAPSHOT
+        - 1.3.1.RELEASE
+        - 1.2.4.BUILD-SNAPSHOT
         - 1.2.3.RELEASE
 
     - id: spring-data-neo4j
@@ -120,7 +123,9 @@ projects:
       refDocUrl: /spring-data/data-neo4j/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-neo4j/docs/{version}/api/
       supportedVersions:
-        - 2.3.0.RC1
+        - 2.4.0.BUILD-SNAPSHOT
+        - 2.3.1.RELEASE
+        - 2.2.3.BUILD-SNAPSHOT
         - 2.2.2.RELEASE
 
     - id: spring-data-redis
@@ -130,20 +135,19 @@ projects:
       refDocUrl: /spring-data/data-redis/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-redis/docs/{version}/api/
       supportedVersions:
-        - 1.1.0.BUILD-SNAPSHOT
-        - 1.1.0.RC1
+        - 1.1.1.BUILD-SNAPSHOT
+        - 1.1.0.RELEASE
         - 1.0.7.BUILD-SNAPSHOT
         - 1.0.6.RELEASE
 
     - id: spring-data-rest
       name: Spring Data REST
       groupId: org.springframework.data
-      lead: jbrisbin
+      lead: ogierke
       refDocUrl: /spring-data/rest/docs/{version}/reference/html
       apiDocUrl: /spring-data/rest/docs/{version}/api/
       supportedVersions:
-        - name: 1.0.0.RELEASE
-          refDocUrl: NONE
+        - 2.0.0.BUILD-SNAPSHOT
         - 1.1.0.M1
 
     # ----------------------
@@ -180,9 +184,9 @@ projects:
       groupId: org.springframework.data
       lead: dturanski
       supportedVersions:
-      - 1.3.3.BUILD-SNAPSHOT
-      - 1.3.2.RELEASE
-      - 1.2.2.RELEASE
+        - 1.3.3.BUILD-SNAPSHOT
+        - 1.3.2.RELEASE
+        - 1.2.2.RELEASE
 
     # ----------------------
     # Spring for Apache Hadoop
@@ -191,11 +195,14 @@ projects:
       name: Spring for Apache Hadoop
       groupId: org.springframework.data
       artifactId: spring-data-hadoop
-      lead: jvalkeal@github # Janne Valkealahti
+      lead: jvalkeal
       sponsor: trisberg
       supportedVersions:
-        - 1.0.1.RC1
+        - 2.0.0.BUILD-SNAPSHOT
+        - 2.0.0.M1
+        - 1.0.1.RELEASE
         - 1.0.0.RELEASE
+
 
     # ----------------------
     # Spring HATEOAS

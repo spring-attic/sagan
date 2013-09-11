@@ -9,6 +9,7 @@ import io.spring.site.search.SearchResults;
 import io.spring.site.search.SearchService;
 import io.spring.site.web.search.SearchEntryBuilder;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,10 +91,17 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 
     @Value("${elasticsearch.client.index}")
     private String index;
+    private SearchIndexSetup searchIndexSetup;
 
     @Before
     public void setUp() throws Exception {
-        SearchIndexSetup searchIndexSetup = new SearchIndexSetup(this.jestClient, index);
+        searchIndexSetup = new SearchIndexSetup(this.jestClient, index);
+        searchIndexSetup.deleteIndex();
+        searchIndexSetup.createIndex();
+    }
+
+    @After
+    public void tearDown() throws Exception {
         searchIndexSetup.deleteIndex();
         searchIndexSetup.createIndex();
     }

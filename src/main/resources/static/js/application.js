@@ -74,7 +74,6 @@ $(function () {
   ;
 
   $.fn.showPreferredLink = function () {
-    this.find("li").hide();
     this.find("li." + detectOs() + detectArch()).show();
     return this;
   };
