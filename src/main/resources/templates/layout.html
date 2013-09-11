@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:app="http://www.springframework.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <title>Layout</title>
+  <meta id="Viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.png}"/>
-
   <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}"  />
   <!-- <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-responsive.css}" /> -->
   <link href='https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -24,7 +24,7 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/tools.css.css}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/projects.css.css}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/highlight.css.css}"/>
-
+  <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css.css}" />
 
   <script type="text/javascript" th:src="@{/js/jquery.js}" ></script>
   <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}" ></script>
@@ -58,7 +58,7 @@
 </head>
 <body>
   <div class="viewport">
-    <header class="navbar header--navbar header-web">
+    <header class="navbar header--navbar desktop-only">
       <div class="navbar-inner">
         <div class="container-fluid">
           <div class="spring-logo--container">
@@ -98,6 +98,7 @@
         </div>
       </div>
     </header>
+    <div layout:include="_mobile-nav :: mobile-nav"></div>
     <div class="header--container" layout:fragment="header-container">
       <div class="header--content" layout:fragment="header-content">
         <div class="row-fluid container-fluid">

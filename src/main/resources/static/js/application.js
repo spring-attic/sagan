@@ -47,7 +47,7 @@ $(function () {
     }, 100);
 
     //CLOSES SEARCH DROPDOWN
-    $(".body--container, .js-search-input-close").click(function () {
+    $(".body--container, .js-search-input-close, .homepage--body").click(function () {
       inputContainer.removeClass("js-show");
       $(".nav-search").removeClass("js-highlight");
       $("#scrim").removeClass("js-show");
@@ -108,6 +108,31 @@ $(function () {
     moveItemSlider();
   });
 
+
+  window.addEventListener("orientationchange", function() {
+    var deviceHeight = $(window).height();
+    var openDrawer = $(".js-open-nav-drawer.js-slide-right");
+    if (!openDrawer.length) {
+      return;
+    } else {
+      $(".viewport").height(deviceHeight).addClass("constrained");
+    }
+  }, false);
+  
+  $(".js-open-nav-drawer").click(function() {
+    $(".navigation-drawer--container").addClass("js-open");
+    $(".mobile-nav, .body--container, .homepage--body").addClass("js-slide-right");
+
+    var deviceHeight = $(window).height();
+    $(".viewport").height(deviceHeight).addClass("constrained");
+    $("#scrim").addClass("js-show js-open-mobile-nav");
+    $("#scrim").click(function() {
+      $(".navigation-drawer--container").removeClass("js-open");
+      $(".mobile-nav, .body--container, .homepage--body").removeClass("js-slide-right");
+      $(".viewport").removeClass("constrained");
+    });
+  });
+  
   var initializeFacetSearchWidget = function () {
     var searchFacet = $(".search-facets");
     if (!searchFacet.length) {
@@ -190,13 +215,6 @@ $(function () {
       $(".js-team-map--container").fadeIn("100");
     });
   });
-
-  // $(".spring-logo--container .spring-logo").bind("contextmenu",function(e){
-  //   var currentWindow = window.location.origin;
-  //   window.location = currentWindow + '/logos'
-  //   return false;  
-  // });
-
 });
 
 

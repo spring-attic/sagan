@@ -1,15 +1,3 @@
-.container-fluid {
-  width: 1024px !important;
-}
-
-.navbar-inner {
-  min-width: 1060px;
-}
-
-.billboard--wrapper, .key-feature--wrapper, .offset-feature--container, .support--wrapper, footer, .search-dropdown--container, .team-map--wrapper, .billboard-bg, .platform--wrapper, .platform-stack--wrapper {
-  min-width: 1100px;
-}
-
 body {
   background-color: #f1f1f1;
 }
@@ -70,6 +58,7 @@ body {
   box-shadow: none;
   position: relative;
   border-radius: 0;
+  padding: 0;
 }
 .header--navbar .navbar-inner .spring-logo--container {
   display: inline-block;
@@ -839,7 +828,7 @@ input.floating-input:focus {
   font-size: 18px;
   line-height: 22px;
   padding: 8px;
-  width: 28.4%;
+  width: 291px;
 }
 .content-container--wrapper .content-container--header .content-container--filter::-webkit-input-placeholder {
   color: #999;
@@ -890,11 +879,7 @@ input.floating-input:focus {
 }
 
 .billboard--wrapper .billboard--container {
-  position: absolute;
-  z-index: 600;
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 80px;
+  padding: 80px 0;
 }
 .billboard--wrapper .billboard--container .billboard--title, .billboard--wrapper .billboard--container .billboard--sub-title {
   background: rgba(52, 48, 45, 0.8);
@@ -1362,7 +1347,7 @@ form.lpeRegForm .mktInput {
 .platform-index--header:after {
   content: "";
   opacity: 0.1;
-  background: url("../img/platform-bg.png") 100% 0 no-repeat;
+  background: url("../img/platform-bg.png") 100% 50% no-repeat;
   position: absolute;
   top: 0;
   left: 0;
@@ -1376,9 +1361,10 @@ form.lpeRegForm .mktInput {
   padding-right: 20px;
 }
 .platform-index--header .platform-watermark--large {
-  background: url("../img/spring-platform-watermark-large.png") 50% 0 no-repeat;
+  background: url("../img/spring-platform-watermark-large.png") 50% no-repeat;
   width: 100%;
-  height: 123px;
+  height: 156px;
+  background-size: 100%;
 }
 
 .platform-stack--wrapper {
