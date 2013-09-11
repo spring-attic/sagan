@@ -320,6 +320,15 @@
     height: 290px;
   }
 
+  .platform-index--header {
+    text-align: center;
+    padding: 60px 0;
+  }
+  .platform-index--header:after {
+    background-position: 50%;
+    background-size: 100%;
+  }
+
   footer {
     display: none;
   }

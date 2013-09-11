@@ -1469,9 +1469,10 @@ form.lpeRegForm .mktInput {
   }
 
   .platform-watermark--large {
-    background: url("../img/spring-platform-watermark-large.png") 50% 0 no-repeat;
+    background: url("../img/spring-platform-watermark-large.png") 50% no-repeat;
     width: 100%;
-    height: 123px;
+    height: 156px;
+    background-size: 100%;
   }
 }
 

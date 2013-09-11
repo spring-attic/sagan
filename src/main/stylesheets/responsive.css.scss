@@ -339,13 +339,19 @@ $icon-sprite: url("../img/iconsprite.png");
     margin-top: 40px;
   }
 
-
-  //PROJECTS
-
   .project--container {
     padding: 30px 5%;
     width: 38.135%;
     height: 290px;
+  }
+
+  .platform-index--header {
+    text-align: center;
+    padding: 60px 0;
+    &:after {
+      background-position: 50%;
+      background-size: 100%;
+    }
   }
 
   footer {
