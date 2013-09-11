@@ -150,7 +150,7 @@
   .mobile-navigation--wrapper .navigation-drawer--container {
     position: absolute;
     top: 0;
-    right: 15%;
+    width: 270px;
     bottom: 0;
     left: 0;
     background-color: #34302d;
@@ -258,11 +258,20 @@
     padding: 9px 0 0;
   }
   .mobile-navigation--wrapper .mobile-nav.js-slide-right {
-    transform: translateX(85%);
-    -webkit-transform: translateX(85%);
-    -moz-transform: translateX(85%);
-    -ms-transform: translateX(85%);
-    -o-transform: translateX(85%);
+    transform: translateX(270px);
+    -webkit-transform: translateX(270px);
+    -moz-transform: translateX(270px);
+    -ms-transform: translateX(270px);
+    -o-transform: translateX(270px);
+  }
+
+  #scrim.js-open-mobile-nav {
+    z-index: 999;
+    transform: translateX(270px);
+    -webkit-transform: translateX(270px);
+    -moz-transform: translateX(270px);
+    -ms-transform: translateX(270px);
+    -o-transform: translateX(270px);
   }
 
   .body--container, .homepage--body {
@@ -276,11 +285,11 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
   .body--container.js-slide-right, .homepage--body.js-slide-right {
-    transform: translateX(85%);
-    -webkit-transform: translateX(85%);
-    -moz-transform: translateX(85%);
-    -ms-transform: translateX(85%);
-    -o-transform: translateX(85%);
+    transform: translateX(270px);
+    -webkit-transform: translateX(270px);
+    -moz-transform: translateX(270px);
+    -ms-transform: translateX(270px);
+    -o-transform: translateX(270px);
   }
 
   .main-body--wrapper {

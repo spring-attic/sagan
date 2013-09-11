@@ -124,12 +124,13 @@ $(function () {
     $(".mobile-nav, .body--container, .homepage--body").addClass("js-slide-right");
 
     var deviceHeight = $(window).height();
+    var deviceWidth = $(window).width();
     $(".viewport").height(deviceHeight).addClass("constrained");
     $("#scrim").addClass("js-show js-open-mobile-nav");
     $("#scrim").click(function() {
       $(".navigation-drawer--container").removeClass("js-open");
       $(".mobile-nav, .body--container, .homepage--body").removeClass("js-slide-right");
-      $(".viewport").removeClass("constrained");
+      $(".viewport").removeClass("constrained").css("width", deviceWidth);
     });
   });
   

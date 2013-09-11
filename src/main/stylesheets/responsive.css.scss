@@ -165,7 +165,7 @@ $icon-sprite: url("../img/iconsprite.png");
     .navigation-drawer--container {
       position: absolute;
       top: 0;
-      right: 15%;
+      width: 270px;
       bottom: 0;
       left: 0;
       background-color: $black-brown;
@@ -253,6 +253,7 @@ $icon-sprite: url("../img/iconsprite.png");
         -o-transform: translateX(0);
       }
     }
+
     .mobile-nav {
       background-color: $black-brown;
       height: 50px;
@@ -281,14 +282,27 @@ $icon-sprite: url("../img/iconsprite.png");
       }
 
       &.js-slide-right {
-        transform: translateX(85%);
-        -webkit-transform: translateX(85%);
-        -moz-transform: translateX(85%);
-        -ms-transform: translateX(85%);
-        -o-transform: translateX(85%);
+        transform: translateX(270px);
+        -webkit-transform: translateX(270px);
+        -moz-transform: translateX(270px);
+        -ms-transform: translateX(270px);
+        -o-transform: translateX(270px);
       }
     }
   }
+
+  #scrim {
+    &.js-open-mobile-nav {
+      z-index: 999;
+      transform: translateX(270px);
+      -webkit-transform: translateX(270px);
+      -moz-transform: translateX(270px);
+      -ms-transform: translateX(270px);
+      -o-transform: translateX(270px);
+    }
+  }
+
+
   .body--container, .homepage--body {
     transition: all 0.25s;
     -webkit-transition: all 0.25s;
@@ -299,11 +313,11 @@ $icon-sprite: url("../img/iconsprite.png");
     -webkit-backface-visibility: hidden;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     &.js-slide-right {
-      transform: translateX(85%);
-      -webkit-transform: translateX(85%);
-      -moz-transform: translateX(85%);
-      -ms-transform: translateX(85%);
-      -o-transform: translateX(85%);
+      transform: translateX(270px);
+      -webkit-transform: translateX(270px);
+      -moz-transform: translateX(270px);
+      -ms-transform: translateX(270px);
+      -o-transform: translateX(270px);
     }
   }
 

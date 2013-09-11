@@ -39,14 +39,6 @@ body {
     right: 0;
     z-index: 700;
   }
-  &.js-open-mobile-nav {
-    z-index: 999;
-    transform: translateX(85%);
-    -webkit-transform: translateX(85%);
-    -moz-transform: translateX(85%);
-    -ms-transform: translateX(85%);
-    -o-transform: translateX(85%);
-  }
 }
 
 .container-fluid {
