@@ -15,6 +15,16 @@
         <to type="permanent-redirect" last="true">http://schema.spring.io$1</to>
     </rule>
     <rule>
+        <name>Legacy interface21 blog requests</name>
+        <condition name="host">blog.interface21.com</condition>
+        <to type="permanent-redirect" last="true">http://spring.io/blog</to>
+    </rule>
+    <rule>
+        <name>Legacy interface21 www requests</name>
+        <condition name="host">^(www.)?interface21.com</condition>
+        <to type="permanent-redirect" last="true">http://spring.io</to>
+    </rule>
+    <rule>
         <name>Legacy static docroot requests</name>
         <condition name="host">static.spring(framework|source).org</condition>
         <from>^/?$</from>
@@ -27,8 +37,14 @@
         <to type="permanent-redirect" last="true">http://docs.spring.io$1</to>
     </rule>
     <rule>
+        <name>Legacy forum requests</name>
+        <condition name="host">forum.spring(framework|source).org</condition>
+        <from>^(/.+)$</from>
+        <to type="permanent-redirect" last="true">http://forum.spring.io$1</to>
+    </rule>
+    <rule>
         <name>Legacy site docroots</name>
-        <condition name="host">(www.)?spring(framework|source).org</condition>
+        <condition name="host">^(www.)?spring(framework|source).org</condition>
         <from>^(/?)$</from>
         <to type="permanent-redirect" last="true">http://spring.io</to>
     </rule>

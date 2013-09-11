@@ -498,3 +498,7 @@
   line-height: 18px;
   margin: 0 0 20px 63px;
 }
+
+.download-links li {
+  display: none;
+}

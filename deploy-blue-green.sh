@@ -64,8 +64,8 @@ NEXT=`if [ "$CURRENT" == "sagan-green" ]; then echo sagan-blue; else echo sagan-
 
 echo Next app to be deployed will be $NEXT.
 
-$CF push --manifest manifest/$SPACE.yml --name $NEXT --reset --start || exit
+$CF push --manifest manifest/$SPACE.yml --name $NEXT --reset --start || scripts/wait-for-app-to-start.sh $NEXT 100 $CF || exit
 
 scripts/mapping-blue-green.sh $SPACE $CF $CURRENT $NEXT
 
-#$CF push --manifest manifest/$SPACE.yml --name sagan-indexer --host sagan-indexer-$SPACE --reset --start
+$CF push --manifest manifest/$SPACE.yml --name sagan-indexer --host sagan-indexer-$SPACE --reset --start || scripts/wait-for-app-to-start.sh sagan-indexer 100 $CF
