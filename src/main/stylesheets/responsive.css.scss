@@ -187,6 +187,7 @@ $icon-sprite: url("../img/iconsprite.png");
       -o-transition: all 0.25s;
       -webkit-perspective: 1000;
       -webkit-backface-visibility: hidden;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
       .mobile-search--container {
         margin: 9px;
         padding: 5px;
@@ -265,6 +266,7 @@ $icon-sprite: url("../img/iconsprite.png");
       -o-transition: all 0.25s;
       -webkit-perspective: 1000;
       -webkit-backface-visibility: hidden;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
       .nav-icon {
         position: absolute;
         padding: 13px;
@@ -295,6 +297,7 @@ $icon-sprite: url("../img/iconsprite.png");
     -o-transition: all 0.25s;
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
     &.js-slide-right {
       transform: translateX(85%);
       -webkit-transform: translateX(85%);
@@ -334,6 +337,15 @@ $icon-sprite: url("../img/iconsprite.png");
 
   .guides-section--container {
     margin-top: 40px;
+  }
+
+
+  //PROJECTS
+
+  .project--container {
+    padding: 30px 5%;
+    width: 38.135%;
+    height: 290px;
   }
 
   footer {
@@ -453,6 +465,12 @@ $icon-sprite: url("../img/iconsprite.png");
       width: auto;
       margin-bottom: 20px;
     }
+  }
+
+  .project--container {
+    padding: 30px 5%;
+    width: 90%;
+    height: 270px;
   }
 }
 

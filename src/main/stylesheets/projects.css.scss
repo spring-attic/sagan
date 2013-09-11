@@ -16,7 +16,7 @@ $link-green: #5fa134;
 $icon-sprite: url("../img/iconsprite.png");
 
 .projects--wrapper {
-  margin-left: -8px;
+  margin-left: -0.5%;
   &.project-aggregator {
     .project--container {
       height: 160px;
@@ -36,12 +36,12 @@ $icon-sprite: url("../img/iconsprite.png");
 .project--container {
   border: 1px solid $black-brown;
   display: inline-block;
-  width: 286px;
-  height: 288px;
-  margin: 0 6px 20px 6px;
+  width: 21%;
+  height: 340px;
+  margin: 0 0.5% 20px 0.5%;
   vertical-align: top;
   text-align: center;
-  padding: 30px 20px;
+  padding: 30px 5%;
   &.auto-height{
     height: auto;
   }
@@ -116,8 +116,11 @@ $icon-sprite: url("../img/iconsprite.png");
     }
   }
   &.parent-project {
+    position: relative;
     .child-project-count--wrapper {
-      float: right;
+      position: absolute;
+      top: 30px;
+      right: 20px;
       .child-project-count--number {
         position: relative;
         z-index: 101;
