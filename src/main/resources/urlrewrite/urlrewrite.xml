@@ -113,6 +113,15 @@
         <to type="temporary-redirect" last="true">http://wp.spring.io$1</to>
     </rule>
     <rule>
+        <name>Legacy STS blog feed requests</name>
+        <note>Redirect to old blog site (now at wp.spring.io) for old versions of STS hard
+        coded to hit blog.springsource.com/main/feed/ and expecting RSS as opposed to Atom.
+        </note>
+        <condition name="host">blog.springsource.com</condition>
+        <from>/main/feed/</from>
+        <to type="temporary-redirect" last="true">http://wp.spring.io/main/feed/</to>
+    </rule>
+    <rule>
         <name>Legacy blog posts</name>
         <note>Redirect all blog requests [#54767200]. Note that the new blog has the same
         date-based slug scheme, so most blog paths should redirect in a generic fashion.
