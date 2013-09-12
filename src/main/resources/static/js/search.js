@@ -3,7 +3,7 @@ function interceptFilterForm(form){
 
     for (var i = 0; i < inputs.length; ++i) {
         var input = inputs[i];
-        if (input.type == "hidden") {
+        if (input.type == "hidden" && input.name == "_filters") {
             input.parentNode.removeChild(input);
         }
     }

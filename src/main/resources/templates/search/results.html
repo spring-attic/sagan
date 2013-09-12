@@ -42,7 +42,8 @@
 
     <div class="span4">
       <div class="search-facets content-container--wrapper">
-        <form th:action="@{/search(q=${searchForm.q})}" method="GET" th:object="${searchForm}" onsubmit="interceptFilterForm(this);">
+        <form th:action="@{/search}" method="GET" th:object="${searchForm}" onsubmit="interceptFilterForm(this);">
+          <input type="hidden" name="q" th:value="${searchForm.q}" />
           <header class="content-container--header">
             <h3 class="header-title">Filter Your Results</h3>
             <input type="submit" value="Filter" class="btn btn-black compact pull-right on-black uppercase" ></input>
