@@ -404,16 +404,35 @@ projects:
       supportedVersions:
         - 0.1.0.RELEASE
 
-    # No GA releases
+    # ----------------------
+    # Spring Data Solr
+    # ----------------------
     - id: spring-data-solr
       name: Spring Data Solr
       groupId: org.springframework.data
       lead: christophstrobl@github
-      sponsor: mpollack
-      refDocUrl: NONE
-      apiDocUrl: NONE
+      sponsor: ogierke
+      refDocUrl: /spring-data/solr/docs/{version}/reference/html/
+      apiDocUrl: /spring-data/solr/docs/{version}/api/
       supportedVersions:
+        - 1.1.0.BUILD-SNAPSHOT
+        - 1.0.1.BUILD-SNAPSHOT
+        - 1.0.0.RELEASE
         - 1.0.0.RC1
+
+    # ----------------------
+    # Spring Data Couchbase
+    # ----------------------
+    - id: spring-data-couchbase
+      name: Spring Data Couchbase
+      groupId: org.springframework.data
+      lead: daschl@github
+      sponsor: ogierke
+      # refDocUrl: /spring-data/couchbase/docs/{version}/reference/html/
+      apiDocUrl: /spring-data/couchbase/docs/{version}/api/
+      supportedVersions:
+        - 1.0.0.BUILD-SNAPSHOT
+        - 1.0.0.M1
 
     # ----------------------
     # Spring Integration
