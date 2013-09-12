@@ -5,6 +5,7 @@
     <title th:inline="text">Search &middot; [[${searchForm.q}]]</title>
     <link rel="alternate" type="application/atom+xml" th:href="${feedPath}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/search.css.css}"/>
+    <script type="text/javascript" th:src="@{/js/search.js}" ></script>
 </head>
 <body>
 <div layout:fragment="header-container"></div>
@@ -38,12 +39,13 @@
                 <a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
             </div>
         </div>
+
     <div class="span4">
       <div class="search-facets content-container--wrapper">
-        <form th:action="@{/search(q=${searchForm.q})}" method="POST" th:object="${searchForm}">
+        <form th:action="@{/search(q=${searchForm.q})}" method="GET" th:object="${searchForm}" onsubmit="interceptFilterForm(this);">
           <header class="content-container--header">
             <h3 class="header-title">Filter Your Results</h3>
-            <input type="submit" value="Filter" class="btn btn-black compact pull-right on-black uppercase"></input>
+            <input type="submit" value="Filter" class="btn btn-black compact pull-right on-black uppercase" ></input>
           </header>
           <ul layout:include="search/_facets :: facets" th:with="root=${rootFacet}">
           </ul>

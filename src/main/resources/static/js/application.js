@@ -244,7 +244,3 @@ var detectArch = function () {
 
   return "32";
 }
-
-
-
-
