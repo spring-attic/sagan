@@ -23,7 +23,7 @@ public class SecurityContextAuthenticationFilterTests {
     @Test
     public void testSuccessfulAuthentication() throws Exception {
         List<GrantedAuthority> roleUser = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(123L,"N/A",roleUser);
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(123L,"githubusername",roleUser);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         assertEquals(authentication, filter.attemptAuthentication(null, null));

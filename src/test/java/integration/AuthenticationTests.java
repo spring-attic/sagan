@@ -77,7 +77,7 @@ public class AuthenticationTests extends IntegrationTestBase {
     public void showsAuthenticationInformationWhenSignedIn() throws Exception {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 123L,
-                "N/A",
+                "githubusername",
                 AuthorityUtils
                         .commaSeparatedStringToAuthorityList("ROLE_USER"));
         SecurityContextHolder
@@ -103,7 +103,7 @@ public class AuthenticationTests extends IntegrationTestBase {
     public void signoutRedirectsToTheHomePage() throws Exception {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 123L,
-                "N/A",
+                "githubusername",
                 AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
         SecurityContextHolder
                 .getContext()
