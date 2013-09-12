@@ -14,6 +14,7 @@ applications:
   instances: 1
   env:
     SPRING_PROFILES_ACTIVE: indexer,development
+    NEW_RELIC_APP_NAME: sagan
   host: sagan-indexer-development
   domain: cfapps.io
   path: ../target/spring-io-site.jar

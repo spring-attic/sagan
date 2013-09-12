@@ -5,6 +5,7 @@ applications:
   instances: 4
   env:
     SPRING_PROFILES_ACTIVE: site,performance
+    NEW_RELIC_APP_NAME: sagan
     JBP_LOG_LEVEL: DEBUG
   host: sagan-performance
   domain: cfapps.io

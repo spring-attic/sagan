@@ -5,6 +5,7 @@ applications:
   instances: 1
   env:
     SPRING_PROFILES_ACTIVE: site,staging
+    NEW_RELIC_APP_NAME: sagan,sagan-blue
   host: sagan-staging-blue
   domain: cfapps.io
   path: ../target/spring-io-site.jar
@@ -14,6 +15,7 @@ applications:
   instances: 1
   env:
     SPRING_PROFILES_ACTIVE: site,staging
+    NEW_RELIC_APP_NAME: sagan,sagan-green
   host: sagan-staging-green
   domain: cfapps.io
   path: ../target/spring-io-site.jar
