@@ -115,12 +115,6 @@ public class BlogAdminController {
         return "redirect:/admin/blog";
     }
 
-    @RequestMapping(value = "reindex", method = POST)
-     public String reIndexAllBlogPosts() {
-        service.reIndexAllPosts();
-        return "redirect:/admin/blog";
-    }
-
     @RequestMapping(value = "resummarize", method = POST)
     public String resummarizeAllBlogPosts() {
         service.resummarizeAllPosts();
