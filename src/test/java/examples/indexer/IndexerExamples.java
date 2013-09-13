@@ -1,6 +1,6 @@
 package examples.indexer;
 
-import integration.configuration.InMemoryElasticSearchConfiguration;
+import com.google.common.collect.Iterables;
 import integration.search.SearchIndexSetup;
 import io.searchbox.client.JestClient;
 import io.spring.site.domain.guides.Guide;
@@ -11,9 +11,6 @@ import io.spring.site.indexer.configuration.IndexerConfiguration;
 import io.spring.site.search.SearchResult;
 import io.spring.site.search.SearchResults;
 import io.spring.site.search.SearchService;
-
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -28,12 +25,10 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
 import utils.LongRunning;
 import utils.SetSystemProperty;
 
-import com.google.common.collect.Iterables;
-
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
@@ -41,8 +36,7 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { IndexerConfiguration.class,
-        InMemoryElasticSearchConfiguration.class }, initializers = {
+@ContextConfiguration(classes = { IndexerConfiguration.class}, initializers = {
         ConfigFileApplicationContextInitializer.class,
         LoggingApplicationContextInitializer.class })
 @DirtiesContext

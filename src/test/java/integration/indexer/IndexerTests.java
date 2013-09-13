@@ -5,6 +5,7 @@ import io.spring.site.domain.StaticPagePathFinder;
 import io.spring.site.domain.guides.Guide;
 import io.spring.site.domain.guides.GuidesService;
 import io.spring.site.indexer.GettingStartedGuideIndexer;
+import io.spring.site.indexer.Indexer;
 import io.spring.site.indexer.StaticPageIndexer;
 import io.spring.site.indexer.ToolsIndexer;
 import io.spring.site.indexer.TutorialIndexer;
@@ -52,7 +53,7 @@ public class IndexerTests extends IntegrationTestBase {
         }
     };
 
-    public SearchEntry indexedEntry;
+    private SearchEntry indexedEntry;
 
     private SearchService stubSearchService = new SearchService(null, null) {
         @Override
@@ -131,7 +132,7 @@ public class IndexerTests extends IntegrationTestBase {
 
     @Test
     public void gettingStartedGuidesAreIndexed() throws Exception {
-        GettingStartedGuideIndexer tutorialIndexer = new GettingStartedGuideIndexer(
+        Indexer<Guide> tutorialIndexer = new GettingStartedGuideIndexer(
                 this.stubSearchService, mock(GuidesService.class));
 
         Guide restTutorial = new Guide("gs-rest-service", "rest-service",

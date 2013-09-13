@@ -68,6 +68,10 @@ public class BlogService {
                 pageRequest);
     }
 
+    public List<Post> getAllPublishedPosts() {
+        return this.postRepository.findByDraftFalseAndPublishAtBefore(this.dateService.now());
+    }
+
     public Page<Post> getPublishedPostsByDate(int year, int month, int day, Pageable pageRequest) {
         return this.postRepository.findByDate(year, month, day, pageRequest);
     }

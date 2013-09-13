@@ -28,6 +28,8 @@ public class IndexScheduler {
     private UnderstandingGuideIndexer understandingGuideIndexer;
     @Autowired
     private TutorialIndexer tutorialIndexer;
+    @Autowired
+    private PublishedBlogPostsIndexer publishedBlogPostsIndexer;
 
     @Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
     public void indexGettingStartedGuides() {
@@ -57,5 +59,10 @@ public class IndexScheduler {
     @Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")
     public void indexProjectDocumentation() {
         indexerService.index(projectDocumentationIndexer);
+    }
+
+    @Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")
+    public void setPublishedBlogPosts() {
+        indexerService.index(publishedBlogPostsIndexer);
     }
 }
