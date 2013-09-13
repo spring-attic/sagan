@@ -1,10 +1,7 @@
 package io.spring.site.domain.blog;
 
-import org.springframework.test.util.ReflectionTestUtils;
-
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostCategory;
 import io.spring.site.domain.team.MemberProfile;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -119,10 +116,6 @@ public class PostBuilder {
     public PostBuilder isBroadcast() {
         broadcast = true;
         return this;
-    }
-
-    public PostBuilder scheduled() {
-        return publishAt(new Date(System.currentTimeMillis() + 1000000));
     }
 
     public Post build() {
