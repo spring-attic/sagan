@@ -983,8 +983,13 @@ input.floating-input {
       }
     }
     &.center-text {
+      position: absolute;
+      z-index: 600;
+      width: 100%;
+      margin: 0 auto;
+      margin-top: 80px;
       text-align: center;
-      margin-top: 212px;
+      //margin-top: 212px;
     }
   }
   .billboard-bg {
