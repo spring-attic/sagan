@@ -136,13 +136,6 @@ public class BlogService {
         }
     }
 
-    public void reIndexAllPosts() {
-        List<Post> posts = postRepository.findByDraftFalseAndPublishAtBefore(dateService.now());
-        for (Post post : posts) {
-            saveToIndex(post);
-        }
-    }
-
     public void resummarizeAllPosts() {
         List<Post> posts = postRepository.findAll();
         for (Post post : posts) {
