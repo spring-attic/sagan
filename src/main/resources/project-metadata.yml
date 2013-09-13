@@ -150,6 +150,19 @@ projects:
         - 2.0.0.BUILD-SNAPSHOT
         - 1.1.0.M1
 
+    - id: spring-data-solr
+      name: Spring Data Solr
+      groupId: org.springframework.data
+      lead: christophstrobl@github
+      sponsor: ogierke
+      refDocUrl: /spring-data/solr/docs/{version}/reference/html/
+      apiDocUrl: /spring-data/solr/docs/{version}/api/
+      supportedVersions:
+        - 1.1.0.BUILD-SNAPSHOT
+        - 1.0.1.BUILD-SNAPSHOT
+        - 1.0.0.RELEASE
+
+
     # ----------------------
     # Spring Flex
     # ----------------------
@@ -403,22 +416,6 @@ projects:
       apiDocUrl: NONE
       supportedVersions:
         - 0.1.0.RELEASE
-
-    # ----------------------
-    # Spring Data Solr
-    # ----------------------
-    - id: spring-data-solr
-      name: Spring Data Solr
-      groupId: org.springframework.data
-      lead: christophstrobl@github
-      sponsor: ogierke
-      refDocUrl: /spring-data/solr/docs/{version}/reference/html/
-      apiDocUrl: /spring-data/solr/docs/{version}/api/
-      supportedVersions:
-        - 1.1.0.BUILD-SNAPSHOT
-        - 1.0.1.BUILD-SNAPSHOT
-        - 1.0.0.RELEASE
-        - 1.0.0.RC1
 
     # ----------------------
     # Spring Data Couchbase
