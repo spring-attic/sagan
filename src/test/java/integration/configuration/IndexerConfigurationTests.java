@@ -47,7 +47,7 @@ public class IndexerConfigurationTests {
                 "--search.indexer.delay=6000000",
                 "--elasticsearch.client.endpoint=http://localhost:9200",
                 "--elasticsearch.client.index=sagan-test",
-                "--spring.profiles.active=integration-test");
+                "--spring.profiles.active=acceptance");
 
         IndexerConfiguration configuration = this.context
                 .getBean(IndexerConfiguration.class);
