@@ -33,9 +33,13 @@ public class IndexerService {
                         IndexerService.this.countersService.increment("search.indexes."
                                 + indexer.counterName() + ".processed");
                     } catch (Exception e) {
-                        logger.warn("Unable to load project: " + indexer.getId(indexable)
-                                + "(" + e.getClass().getName() + ", " + e.getMessage()
-                                + ")");
+                        String message = String.format("Unable to index an entry of '%s' with id: '%s' -> (%s, %s)",
+                                indexer.counterName(),
+                                indexer.getId(indexable),
+                                e.getClass().getName(),
+                                e.getMessage());
+
+                        logger.warn(message);
                         IndexerService.this.countersService.increment("search.indexes."
                                 + indexer.counterName() + ".errors.count");
                     }

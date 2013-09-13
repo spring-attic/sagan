@@ -142,6 +142,15 @@ public class BlogService_QueryTests extends IntegrationTestBase {
     }
 
     @Test
+    public void getAllPublishedPosts() {
+        Post anotherPost = PostBuilder.post().publishAt(yesterday).title("another post").build();
+        postRepository.save(anotherPost);
+        List<Post> publishedPosts = service.getAllPublishedPosts();
+
+        assertThat(publishedPosts, containsInAnyOrder(published, anotherPost));
+    }
+
+    @Test
     public void getPublishedPostsExcludesDrafts() throws ParseException {
         List<Post> publishedPosts = service.getPublishedPosts(FIRST_TEN_POSTS).getContent();
 
