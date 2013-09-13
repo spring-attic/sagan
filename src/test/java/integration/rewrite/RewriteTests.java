@@ -130,9 +130,12 @@ public class RewriteTests {
 
     @Test
     public void videosRedirectToYoutube() throws ServletException, IOException, URISyntaxException {
+        validateTemporaryRedirect("http://spring.io/video", "http://www.youtube.com/springsourcedev");
+        validateTemporaryRedirect("http://spring.io/videos", "http://www.youtube.com/springsourcedev");
         validateTemporaryRedirect("http://www.springsource.org/videos", "http://www.youtube.com/springsourcedev");
         validateTemporaryRedirect("http://www.example.com/videos", "http://www.youtube.com/springsourcedev");
     }
+
     @Test
     public void gsgGuidesShouldAlwaysHaveTrailingSlash() throws ServletException, IOException, URISyntaxException {
         validatePermanentRedirect("/guides/gs/guide-name", "/guides/gs/guide-name/");
