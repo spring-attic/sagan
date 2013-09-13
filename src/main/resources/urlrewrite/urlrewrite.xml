@@ -103,6 +103,16 @@
         <to type="temporary-redirect" last="true">http://drupal.spring.io$1</to>
     </rule>
     <rule>
+        <name>Legacy blog resource reqeusts</name>
+        <from>^(/blog)?(/wp-content/.*)$</from>
+        <to type="temporary-redirect" last="true">http://wp.spring.io$2</to>
+    </rule>
+    <rule>
+        <name>Rossen's WebSocket blog post</name>
+        <from>^.*(/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures/?)</from>
+        <to type="temporary-redirect" last="true">http://wp.spring.io$1</to>
+    </rule>
+    <rule>
         <name>Legacy blog images</name>
         <note>https://www.pivotaltracker.com/story/show/54370286
         Temporarily serving blog images from old blog site (with a new name) until
