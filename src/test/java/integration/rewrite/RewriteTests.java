@@ -83,6 +83,20 @@ public class RewriteTests {
     }
 
     @Test
+    public void legacyBlogResourceRequestsAreRedirectedToOldBlog() throws Exception {
+        validateTemporaryRedirect("http://blog.springsource.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushJava.js",
+                "http://wp.spring.io/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushJava.js");
+        validateTemporaryRedirect("http://wp.spring.io/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushJava.js",
+                "http://wp.spring.io/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushJava.js");
+    }
+
+    @Test
+    public void rossensWebSocketPostIsRedirectedToOldBlog() throws Exception {
+        validateTemporaryRedirect("http://blog.springsource.org/blog/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures",
+                                  "http://wp.spring.io/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures");
+    }
+
+    @Test
     public void legacySTSBlogFeedRequestsAreRedirectedToOldBlog() throws Exception {
         validateTemporaryRedirect("http://blog.springsource.com/main/feed/", "http://wp.spring.io/main/feed/");
     }
