@@ -190,7 +190,9 @@ public class RewriteTests {
     @Test
     public void projectPagesAreRedirected() throws ServletException, IOException, URISyntaxException {
         validateTemporaryRedirect("http://spring.io/projects/spring-data", "http://projects.spring.io/spring-data");
-        validateTemporaryRedirect("http://spring.io/projects/not-exist", "http://projects.spring.io/not-exist");
+        validateTemporaryRedirect("http://spring.io/spring-data", "http://projects.spring.io/spring-data");
+        validateTemporaryRedirect("http://springsource.org/spring-amqp", "http://projects.spring.io/spring-amqp");
+        validatePermanentRedirect("http://www.springsource.org/spring-amqp", "http://projects.spring.io/spring-amqp");
     }
 
     @Test
