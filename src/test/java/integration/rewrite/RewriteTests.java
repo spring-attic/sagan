@@ -64,6 +64,7 @@ public class RewriteTests {
         validatePermanentRedirect("http://www.springsource.org/groovy-grails-tool-suite-download", "http://spring.io/tools/ggts");
         validateTemporaryRedirect("http://www.springsource.org/ggts/welcome", "http://grails.org/products/ggts");
         validatePermanentRedirect("http://www.springsource.org/springsource-tool-suite-download", "http://spring.io/tools/sts");
+        validatePermanentRedirect("http://www.springsource.org/downloads/sts-ggts", "http://spring.io/tools");
     }
 
     @Test
