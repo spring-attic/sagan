@@ -59,10 +59,11 @@ public class RewriteTests {
     }
 
     @Test
-    public void legacySiteRedirects() throws Exception {
+    public void legacyStsGgtsRedirects() throws Exception {
         validatePermanentRedirect("http://www.springsource.org/sts/welcome", "http://spring.io/tools/sts/welcome");
         validatePermanentRedirect("http://www.springsource.org/groovy-grails-tool-suite-download", "http://spring.io/tools/ggts");
         validateTemporaryRedirect("http://www.springsource.org/ggts/welcome", "http://grails.org/products/ggts");
+        validatePermanentRedirect("http://www.springsource.org/springsource-tool-suite-download", "http://spring.io/tools/sts");
     }
 
     @Test
