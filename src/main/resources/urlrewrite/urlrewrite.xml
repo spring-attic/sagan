@@ -90,7 +90,7 @@
         <name>Legacy "community download page" form request</name>
         <note>For now simply redirect to /projects page</note>
         <condition name="host">www.springsource.org</condition>
-        <from>^/spring-community-download</from>
+        <from>^/spring(source)?-community-download</from>
         <to type="temporary-redirect" last="true">http://spring.io/projects</to>
     </rule>
     <rule>
