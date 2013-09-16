@@ -3519,7 +3519,7 @@
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/spring(source)?-tool-suite-download$</from>
+        <from>^/spring(source)?-tool-suite-download</from>
         <to type="permanent-redirect" last="true">http://spring.io/tools/sts</to>
     </rule>
     <rule>
