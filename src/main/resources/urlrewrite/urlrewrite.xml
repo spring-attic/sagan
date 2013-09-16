@@ -83,14 +83,14 @@
         <name>Legacy "community download page" requests</name>
         <note>For now simply redirect to /projects page</note>
         <condition name="host">www.springsource.org</condition>
-        <from>^/download(/community)?$</from>
+        <from>^/download(/community)?</from>
         <to type="temporary-redirect" last="true">http://spring.io/projects</to>
     </rule>
     <rule>
         <name>Legacy "community download page" form request</name>
         <note>For now simply redirect to /projects page</note>
         <condition name="host">www.springsource.org</condition>
-        <from>^/spring-community-download$</from>
+        <from>^/spring-community-download</from>
         <to type="temporary-redirect" last="true">http://spring.io/projects</to>
     </rule>
     <rule>

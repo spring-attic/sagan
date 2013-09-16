@@ -246,6 +246,8 @@ public class RewriteTests {
         validateTemporaryRedirect("http://www.springsource.org/download", "http://spring.io/projects");
         validateTemporaryRedirect("http://www.springsource.org/download/community", "http://spring.io/projects");
         validateTemporaryRedirect("http://www.springsource.org/spring-community-download", "http://spring.io/projects");
+        validateTemporaryRedirect("http://www.springsource.org/spring-community-download?utm_source=eclipse.org&utm_medium=web&utm_content=promotedDL&utm_campaign=STS",
+                                  "http://spring.io/projects");
     }
 
 
