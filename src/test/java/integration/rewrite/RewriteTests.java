@@ -241,6 +241,14 @@ public class RewriteTests {
         validateTemporaryRedirect("http://www.springsource.org/linkedin", "http://www.linkedin.com/groups/Spring-Users-46964?gid=46964");
     }
 
+    @Test
+    public void legacyDownloadRequestsAreRedirectedToProjectsPage() throws Exception {
+        validateTemporaryRedirect("http://www.springsource.org/download", "http://spring.io/projects");
+        validateTemporaryRedirect("http://www.springsource.org/download/community", "http://spring.io/projects");
+        validateTemporaryRedirect("http://www.springsource.org/spring-community-download", "http://spring.io/projects");
+    }
+
+
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);
     }
