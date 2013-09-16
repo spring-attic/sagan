@@ -39,7 +39,6 @@
     <rule>
         <name>Legacy forum requests</name>
         <condition name="host">forum.spring(framework|source).org</condition>
-        <from>^(/.+)$</from>
         <to type="permanent-redirect" last="true">http://forum.spring.io$1</to>
     </rule>
     <rule>

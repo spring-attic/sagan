@@ -218,6 +218,8 @@ public class RewriteTests {
 
     @Test
     public void legacyForumRequestsAreRedirected() throws Exception {
+        validatePermanentRedirect("http://forum.springsource.org", "http://forum.spring.io/");
+        validatePermanentRedirect("http://forum.springframework.org", "http://forum.spring.io/");
         // something is stripping the query strings during testing, but this actually
         // works against the running site
         // validatePermanentRedirect("http://forum.springsource.org/showthread.php?48738-Getting-Spring-to-throw-duplicate-bean-definition-exception",
