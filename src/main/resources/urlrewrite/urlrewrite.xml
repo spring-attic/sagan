@@ -182,11 +182,10 @@
     </rule>
     <rule>
         <name>Project pages</name>
-        <note>In case anyone attempts to URL-hack their way to /projects/spring-foo,
-        redirect to projects.spring.io/spring-foo</note>
-        <condition name="host">spring.io</condition>
-        <from>^/projects(/.+)$</from>
-        <to type="temporary-redirect" last="true">http://projects.spring.io$1</to>
+        <condition name="host" next="or">spring.io</condition>
+        <condition name="host">(www.)?springsource.org</condition>
+        <from>^(/projects)?(/spring-.+)$</from>
+        <to type="temporary-redirect" last="true">http://projects.spring.io$2</to>
     </rule>
     <rule>
         <name>LinkedIn</name>
