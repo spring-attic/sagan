@@ -3524,6 +3524,11 @@
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
+        <from>^/downloads/sts-ggts$</from>
+        <to type="permanent-redirect" last="true">http://spring.io/tools</to>
+    </rule>
+    <rule>
+        <condition name="host">www.springsource.org</condition>
         <from>^/spring-flex$</from>
         <to type="permanent-redirect" last="true">http://projects.spring.io/spring-flex</to>
     </rule>
