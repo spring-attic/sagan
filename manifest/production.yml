@@ -5,7 +5,7 @@ applications:
   instances: 4
   env:
     SPRING_PROFILES_ACTIVE: site,production
-    NEW_RELIC_APP_NAME: sagan,sagan-blue
+    NEW_RELIC_APP_NAME: sagan-blue;sagan
   host: sagan-production-blue
   domain: cfapps.io
   path: ../target/spring-io-site.jar
@@ -15,7 +15,7 @@ applications:
   instances: 4
   env:
     SPRING_PROFILES_ACTIVE: site,production
-    NEW_RELIC_APP_NAME: sagan,sagan-green
+    NEW_RELIC_APP_NAME: sagan-green;sagan
   host: sagan-production-green
   domain: cfapps.io
   path: ../target/spring-io-site.jar
