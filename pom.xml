@@ -11,7 +11,7 @@
 
     <groupId>io.spring</groupId>
     <artifactId>spring-io-site</artifactId>
-    <version>0.1.0.SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>spring-io-site</name>
