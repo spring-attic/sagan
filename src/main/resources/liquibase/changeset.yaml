@@ -168,3 +168,13 @@ databaseChangeLog:
                   name: draft
             indexName: idx_draft
             tableName: post
+
+  - changeSet:
+      id: 5
+      author: cbeams
+      changes:
+      - addUniqueConstraint:
+          columnNames: publicslug
+          constraintName: uniq_slug
+          schemaName: public
+          tableName: post

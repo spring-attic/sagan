@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +28,7 @@ import io.spring.site.web.blog.PostView;
 import io.spring.site.web.blog.PostViewFactory;
 
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -153,6 +155,30 @@ public class BlogAdminControllerTests {
         String result = controller.createPost(principal, postForm, bindingResult, null);
 
         assertThat(result, equalTo("redirect:/blog/2013/05/06/post-title"));
+    }
+
+    @Test
+    public void attemptingToCreateADuplicatePostReturnsToPostForm() throws Exception {
+        String username = "username";
+
+        MemberProfile member = new MemberProfile();
+        member.setUsername(username);
+
+        given(teamRepository.findById(12345L)).willReturn(member);
+
+        PostForm postForm = new PostForm();
+        postForm.setTitle("title");
+        postForm.setContent("content");
+        postForm.setCategory(PostCategory.ENGINEERING);
+        Post post = PostBuilder.post().id(123L).publishAt("2013-05-06 00:00").title("Post Title").build();
+
+        given(blogService.addPost(postForm, username)).willReturn(post);
+        String result1 = controller.createPost(principal, postForm, bindingResult, null);
+        assertThat(result1, equalTo("redirect:/blog/2013/05/06/post-title"));
+
+        given(blogService.addPost(postForm, username)).willThrow(DataIntegrityViolationException.class);
+        String result2 = controller.createPost(principal, postForm, bindingResult, new ExtendedModelMap());
+        assertThat(result2, equalTo("admin/blog/new"));
     }
 
 
