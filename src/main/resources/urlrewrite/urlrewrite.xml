@@ -203,7 +203,12 @@
         <to type="permanent-redirect" last="true">http://spring.io$1</to>
     </rule>
     <rule>
-        <name>Project pages</name>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/(spring-|go-)?web-?flow(.*)$</from>
+        <to type="permanent-redirect" last="true">http://projects.spring.io/spring-webflow</to>
+    </rule>
+    <rule>
+        <name>Project page catch-all</name>
         <condition name="host" next="or">spring.io</condition>
         <condition name="host">(www.)?springsource.org</condition>
         <from>^(/projects)?(/spring-.+)$</from>
