@@ -261,6 +261,12 @@ public class RewriteTests {
         validatePermanentRedirect("http://www.springsource.org/spring-gemfire", "http://projects.spring.io/spring-data-gemfire");
     }
 
+    @Test
+    public void rooIsRedirected() throws Exception {
+        validateTemporaryRedirect("http://www.springsource.org/roo", "https://github.com/spring-projects/spring-roo");
+        validateTemporaryRedirect("http://www.springsource.org/spring-roo", "https://github.com/spring-projects/spring-roo");
+    }
+
 
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);

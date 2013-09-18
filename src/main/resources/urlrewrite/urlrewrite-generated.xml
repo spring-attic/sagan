@@ -3489,8 +3489,9 @@
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/spring-roo$</from>
-        <to type="permanent-redirect" last="true">http://projects.spring.io/spring-roo</to>
+        <from>^/(spring-)?roo$</from>
+        <!--<to type="permanent-redirect" last="true">http://projects.spring.io/spring-roo</to>-->
+        <to type="temporary-redirect" last="true">https://github.com/spring-projects/spring-roo</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
