@@ -267,6 +267,12 @@ public class RewriteTests {
         validateTemporaryRedirect("http://www.springsource.org/spring-roo", "https://github.com/spring-projects/spring-roo");
     }
 
+    @Test
+    public void legacyNewsAndEventsFeedRequestsAreRedirected() throws Exception {
+        validateTemporaryRedirect("http://www.springsource.org/node/feed", "http://drupal.spring.io/node/feed");
+        validateTemporaryRedirect("http://www.springsource.org/newsblog/feed", "http://drupal.spring.io/newsblog/feed");
+    }
+
 
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);
