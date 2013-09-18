@@ -251,6 +251,16 @@ public class RewriteTests {
                                   "http://spring.io/projects");
     }
 
+    @Test
+    public void ldapIsRedirected() throws Exception {
+        validatePermanentRedirect("http://www.springsource.org/ldap", "http://projects.spring.io/spring-ldap");
+    }
+
+    @Test
+    public void gemfireIsRedirected() throws Exception {
+        validatePermanentRedirect("http://www.springsource.org/spring-gemfire", "http://projects.spring.io/spring-data-gemfire");
+    }
+
 
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);
