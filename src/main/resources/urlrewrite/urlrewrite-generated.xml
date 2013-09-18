@@ -3475,7 +3475,7 @@
     <rule>
         <condition name="host">www.springsource.org</condition>
         <from>^/spring-gemfire$</from>
-        <to type="permanent-redirect" last="true">http://projects.spring.io/spring-gemfire</to>
+        <to type="permanent-redirect" last="true">http://projects.spring.io/spring-data-gemfire</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
@@ -3540,7 +3540,7 @@
     <rule>
         <condition name="host">www.springsource.org</condition>
         <from>^/ldap$</from>
-        <to type="permanent-redirect" last="true">http://projects.spring.io/spring-security-ldap</to>
+        <to type="permanent-redirect" last="true">http://projects.spring.io/spring-ldap</to>
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
