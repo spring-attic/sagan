@@ -3505,11 +3505,6 @@
     </rule>
     <rule>
         <condition name="host">www.springsource.org</condition>
-        <from>^/spring-web-flow$</from>
-        <to type="permanent-redirect" last="true">http://projects.spring.io/spring-webflow</to>
-    </rule>
-    <rule>
-        <condition name="host">www.springsource.org</condition>
         <from>^/spring-web-services$</from>
         <to type="permanent-redirect" last="true">http://projects.spring.io/spring-ws</to>
     </rule>

@@ -279,6 +279,16 @@ public class RewriteTests {
         validateTemporaryRedirect("http://www.springsource.org/files/other.jpg", "http://drupal.spring.io/files/other.jpg");
     }
 
+    @Test
+    public void webflowIsRedirected() throws Exception {
+        validatePermanentRedirect("http://www.springsource.org/spring-webflow", "http://projects.spring.io/spring-webflow");
+        validatePermanentRedirect("http://www.springsource.org/spring-web-flow", "http://projects.spring.io/spring-webflow");
+        validatePermanentRedirect("http://www.springsource.org/webflow", "http://projects.spring.io/spring-webflow");
+        validatePermanentRedirect("http://www.springsource.org/go-webflow", "http://projects.spring.io/spring-webflow");
+        validatePermanentRedirect("http://www.springsource.org/webflow-samples", "http://projects.spring.io/spring-webflow");
+        validatePermanentRedirect("http://www.springsource.org/webflow-1.0", "http://projects.spring.io/spring-webflow");
+    }
+
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);
     }
