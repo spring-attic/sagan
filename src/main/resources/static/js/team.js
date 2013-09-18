@@ -1,7 +1,10 @@
 window.Spring = window.Spring || {};
 
 Spring.CreateMap = function () {
-    var map = L.map('map').setView([51.505, -0.09], 2);
+    var map = L.map('map', {
+        scrollWheelZoom: false,
+        touchZoom: false
+    }).setView([51.505, -0.09], 2);
     L.tileLayer('http://{s}.tile.cloudmade.com/dc6ad76c483d4e5c92152aa34375ec28/1/256/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
         maxZoom: 18
@@ -27,5 +30,16 @@ Spring.CreateMap = function () {
         var latLng = new L.LatLng(teamLocations[0].latitude, teamLocations[0].longitude);
         map.setView(latLng, 5);
     }
+
+    $(".js-team-map--wrapper").click(function() {
+        map.scrollWheelZoom.enable();
+        map.touchZoom.enable();
+        $(".js-team-map--container").fadeOut("100");
+        $(".js-team-map--wrapper").mouseleave(function() {
+            map.scrollWheelZoom.disable();
+            map.touchZoom.disable();
+            $(".js-team-map--container").fadeIn("100");
+        });
+      });
 
 };
