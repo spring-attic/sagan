@@ -273,6 +273,11 @@ public class RewriteTests {
         validateTemporaryRedirect("http://www.springsource.org/newsblog/feed", "http://drupal.spring.io/newsblog/feed");
     }
 
+    @Test
+    public void legacyDrupalFilesAreRedirected() throws Exception {
+        validateTemporaryRedirect("http://www.springsource.org/files/SpringOne/2013/training-bg-image.png", "http://drupal.spring.io/files/SpringOne/2013/training-bg-image.png");
+        validateTemporaryRedirect("http://www.springsource.org/files/other.jpg", "http://drupal.spring.io/files/other.jpg");
+    }
 
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);
