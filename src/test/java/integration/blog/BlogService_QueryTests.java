@@ -69,6 +69,8 @@ public class BlogService_QueryTests extends IntegrationTestBase {
     private Post scheduled;
     private Post draft;
 
+    private int px = 0;
+
 
     @Before
     public void setup() throws Exception{
@@ -116,7 +118,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 
     @Test
     public void getPublishedDoesNotFindDrafts() {
-        Post draft = PostBuilder.post().draft().build();
+        Post draft = PostBuilder.post().title(uniqueTitle()).draft().build();
         postRepository.save(draft);
         expected.expect(EntityNotFoundException.class);
         service.getPublishedPost(draft.getPublicSlug());
@@ -173,7 +175,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 
     @Test
     public void getScheduledPostsExcludesScheduledDrafts() throws ParseException {
-        Post scheduledDraft = PostBuilder.post().draft().publishAt(tomorrow).build();
+        Post scheduledDraft = PostBuilder.post().title(uniqueTitle()).draft().publishAt(tomorrow).build();
         postRepository.save(scheduledDraft);
 
         List<Post> scheduledPosts = service.getScheduledPosts(FIRST_TEN_POSTS).getContent();
@@ -190,7 +192,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 
     @Test
     public void listPostsForCategory() {
-        Post newsPost = PostBuilder.post().publishAt(yesterday).category(NEWS_AND_EVENTS).build();
+        Post newsPost = PostBuilder.post().title(uniqueTitle()).publishAt(yesterday).category(NEWS_AND_EVENTS).build();
         postRepository.save(newsPost);
 
         Page<Post> publishedPosts = service.getPublishedPosts(NEWS_AND_EVENTS, FIRST_TEN_POSTS);
@@ -200,9 +202,9 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 
     @Test
     public void listPostsForCategoryExcludesScheduledPosts() throws ParseException {
-        Post publishedRelease = PostBuilder.post().publishAt(yesterday).category(RELEASES).build();
+        Post publishedRelease = PostBuilder.post().title(uniqueTitle()).publishAt(yesterday).category(RELEASES).build();
         postRepository.save(publishedRelease);
-        Post scheduledRelease = PostBuilder.post().publishAt(tomorrow).category(RELEASES).build();
+        Post scheduledRelease = PostBuilder.post().title(uniqueTitle()).publishAt(tomorrow).category(RELEASES).build();
         postRepository.save(scheduledRelease);
 
         List<Post> releases = service.getPublishedPosts(RELEASES, FIRST_TEN_POSTS).getContent();
@@ -217,7 +219,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
         List<Post> posts = new ArrayList<>();
         long itemCount = 11;
         for (int i = 0; i < itemCount; ++i) {
-            posts.add(PostBuilder.post().build());
+            posts.add(PostBuilder.post().title(uniqueTitle()).build());
         }
         postRepository.save(posts);
 
@@ -228,7 +230,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 
     @Test
     public void listBroadcasts() {
-        Post broadcast = PostBuilder.post().isBroadcast().publishAt(yesterday).build();
+        Post broadcast = PostBuilder.post().isBroadcast().title(uniqueTitle()).publishAt(yesterday).build();
         postRepository.save(broadcast);
 
         List<Post> broadcasts = service.getPublishedBroadcastPosts(FIRST_TEN_POSTS).getContent();
@@ -238,9 +240,9 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 
     @Test
     public void listBroadcastsExcludesScheduledPosts() throws ParseException {
-        Post publishedBroadcast = PostBuilder.post().isBroadcast().publishAt(yesterday).build();
+        Post publishedBroadcast = PostBuilder.post().title(uniqueTitle()).isBroadcast().publishAt(yesterday).build();
         postRepository.save(publishedBroadcast);
-        Post scheduledBroadcast = PostBuilder.post().isBroadcast().publishAt(tomorrow).build();
+        Post scheduledBroadcast = PostBuilder.post().title(uniqueTitle()).isBroadcast().publishAt(tomorrow).build();
         postRepository.save(scheduledBroadcast);
 
         List<Post> broadcasts = service.getPublishedBroadcastPosts(FIRST_TEN_POSTS).getContent();
@@ -260,10 +262,10 @@ public class BlogService_QueryTests extends IntegrationTestBase {
         MemberProfile profile = new MemberProfile();
         profile.setUsername("myauthor");
 
-        Post post = PostBuilder.post().author(profile).publishAt(yesterday).build();
+        Post post = PostBuilder.post().author(profile).title(uniqueTitle()).publishAt(yesterday).build();
 
         postRepository.save(post);
-        postRepository.save(PostBuilder.post().build());
+        postRepository.save(PostBuilder.post().title(uniqueTitle()).build());
 
         Page<Post> publishedPosts = service.getPublishedPostsForMember(profile, FIRST_TEN_POSTS);
         assertThat(publishedPosts.getContent(), contains(post));
@@ -274,12 +276,17 @@ public class BlogService_QueryTests extends IntegrationTestBase {
         MemberProfile profile = new MemberProfile();
         profile.setUsername("myauthor");
 
-        Post post = PostBuilder.post().author(profile).publishAt(yesterday).build();
+        Post post = PostBuilder.post().author(profile).title(uniqueTitle()).publishAt(yesterday).build();
 
         postRepository.save(post);
-        postRepository.save(PostBuilder.post().author(profile).draft().build());
+        postRepository.save(PostBuilder.post().title(uniqueTitle()).author(profile).draft().build());
 
         Page<Post> publishedPosts = service.getPublishedPostsForMember(profile, FIRST_TEN_POSTS);
         assertThat(publishedPosts.getContent(), contains(post));
     }
+
+    private String uniqueTitle() {
+        return "post" + ++px;
+    }
+
 }

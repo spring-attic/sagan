@@ -1,6 +1,7 @@
 package io.spring.site.web.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,9 +82,17 @@ public class BlogAdminController {
             return "admin/blog/new";
         } else {
             MemberProfile memberProfile = teamRepository.findById(new Long(principal.getName()));
-            Post post = service.addPost(postForm, memberProfile.getUsername());
-            PostView postView = postViewFactory.createPostView(post);
-            return "redirect:" + postView.getPath();
+            try {
+                Post post = service.addPost(postForm, memberProfile.getUsername());
+                PostView postView = postViewFactory.createPostView(post);
+                return "redirect:" + postView.getPath();
+            } catch (DataIntegrityViolationException ex) {
+                model.addAttribute("categories", PostCategory.values());
+                model.addAttribute("postForm", postForm);
+                bindingResult.rejectValue("title", "duplicate_post",
+                        "A blog post with this publication date and title already exists");
+                return "admin/blog/new";
+            }
         }
     }
 
