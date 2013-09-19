@@ -12,7 +12,7 @@ applications:
   buildpack: https://github.com/cloudfoundry/java-buildpack
 - name: sagan-green
   memory: 2G
-  instances: 1
+  instances: 4
   env:
     SPRING_PROFILES_ACTIVE: site,staging
     NEW_RELIC_APP_NAME: sagan-green;sagan
@@ -22,7 +22,7 @@ applications:
   buildpack: https://github.com/cloudfoundry/java-buildpack
 - name: sagan-indexer
   memory: 2G
-  instances: 4
+  instances: 1
   env:
     SPRING_PROFILES_ACTIVE: indexer,staging
   host: sagan-indexer
