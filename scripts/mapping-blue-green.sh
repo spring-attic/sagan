@@ -25,69 +25,36 @@ echo "Starting blue-green mapping script. Current running app is $CURRENT, next 
 echo "switching to space $SPACE"
 $CF space $SPACE || exit
 
-# Map new app
-$CF map --app $NEXT --host sagan-$SPACE --domain cfapps.io || exit
-# Unmap old app, leaving it running for rollback
-$CF unmap --app $CURRENT --url sagan-$SPACE.cfapps.io
+($CF map $NEXT sagan-$SPACE cfapps.io && $CF unmap sagan-$SPACE.cfapps.io $CURRENT) || exit
 
 if [ $SPACE == "staging" ]; then
 
-    $CF map   --app $NEXT    --host staging --domain spring.io
-    $CF unmap --app $CURRENT --url           staging.spring.io
+    ($CF map $NEXT staging spring.io && $CF unmap staging.spring.io $CURRENT)
 
 elif [ $SPACE == "production" ]; then
 
-    $CF map   --app $NEXT    --domain               spring.io
-    $CF unmap --app $CURRENT --url                 .spring.io &
+    ($CF map $NEXT spring.io && $CF unmap .spring.io $CURRENT) &
+    ($CF map $NEXT static springsource.org && $CF unmap static.springsource.org $CURRENT) &
+    ($CF map $NEXT www springsource.org && $CF unmap www.springsource.org $CURRENT) &
+    ($CF map $NEXT forum springsource.org && $CF unmap forum.springsource.org $CURRENT) &
+    ($CF map $NEXT blog springsource.org && $CF unmap blog.springsource.org $CURRENT) &
+    ($CF map $NEXT springsource.org && $CF unmap .springsource.org $CURRENT) &
+    ($CF map $NEXT springframework.org && $CF unmap .springframework.org $CURRENT) &
+    ($CF map $NEXT www springframework.org && $CF unmap www.springframework.org $CURRENT) &
+    ($CF map $NEXT static springframework.org && $CF unmap static.springframework.org $CURRENT) &
+    ($CF map $NEXT blog springsource.com && $CF unmap blog.springsource.com $CURRENT) &
+    ($CF map $NEXT springsource.com && $CF unmap .springsource.com $CURRENT) &
+    ($CF map $NEXT forum springframework.org && $CF unmap forum.springframework.org $CURRENT) &
+    ($CF map $NEXT blog interface21.com && $CF unmap blog.interface21.com $CURRENT) &
+    ($CF map $NEXT www springsource.com && $CF unmap www.springsource.com $CURRENT) &
+    ($CF map $NEXT interface21.com && $CF unmap .interface21.com $CURRENT) &
+    ($CF map $NEXT www interface21.com && $CF unmap www.interface21.com $CURRENT) &
+    ($CF map $NEXT www spring.io && $CF unmap www.spring.io $CURRENT) &
+    ($CF map $NEXT springframework.io && $CF unmap .springframework.io $CURRENT) &
+    ($CF map $NEXT springsource.io && $CF unmap .springsource.io $CURRENT) &
+    ($CF map $NEXT www springframework.io && $CF unmap www.springframework.io $CURRENT) &
+    ($CF map $NEXT www springsource.io && $CF unmap www.springsource.io $CURRENT) &
 
-    $CF map   --app $NEXT    --host static --domain springsource.org
-    $CF unmap --app $CURRENT --url           static.springsource.org &
-
-    $CF map   --app $NEXT    --host www    --domain springsource.org
-    $CF unmap --app $CURRENT --url              www.springsource.org &
-    $CF map   --app $NEXT    --host www    --domain springframework.org
-    $CF unmap --app $CURRENT --url              www.springframework.org &
-
-    $CF map   --app $NEXT    --host www    --domain spring.io
-    $CF unmap --app $CURRENT --url              www.spring.io &
-
-    $CF map   --app $NEXT    --domain               springsource.org
-    $CF unmap --app $CURRENT --url                 .springsource.org &
-    $CF map   --app $NEXT    --domain               springframework.org
-    $CF unmap --app $CURRENT --url                 .springframework.org &
-    $CF map   --app $NEXT    --domain               springsource.com
-    $CF unmap --app $CURRENT --url                 .springsource.com &
-
-    $CF map   --app $NEXT    --host static --domain springframework.org
-    $CF unmap --app $CURRENT --url           static.springframework.org &
-
-    $CF map   --app $NEXT    --host forum --domain springframework.org
-    $CF unmap --app $CURRENT --url           forum.springframework.org &
-    $CF map   --app $NEXT    --host forum --domain springsource.org
-    $CF unmap --app $CURRENT --url           forum.springsource.org &
-
-    $CF map   --app $NEXT    --host blog   --domain springsource.org
-    $CF unmap --app $CURRENT --url             blog.springsource.org &
-    $CF map   --app $NEXT    --host blog   --domain springsource.com
-    $CF unmap --app $CURRENT --url             blog.springsource.com &
-    $CF map   --app $NEXT    --host blog   --domain interface21.com
-    $CF unmap --app $CURRENT --url             blog.interface21.com &
-
-    $CF map   --app $NEXT    --host www    --domain springsource.com
-    $CF unmap --app $CURRENT --url              www.springsource.com &
-
-    $CF map   --app $NEXT    --domain               interface21.com
-    $CF unmap --app $CURRENT --url                 .interface21.com &
-    $CF map   --app $NEXT    --domain               springframework.io
-    $CF unmap --app $CURRENT --url                 .springframework.io &
-    $CF map   --app $NEXT    --domain               springsource.io
-    $CF unmap --app $CURRENT --url                 .springsource.io &
-
-    $CF map   --app $NEXT    --host www    --domain interface21.com
-    $CF unmap --app $CURRENT --url              www.interface21.com &
-    $CF map   --app $NEXT    --host www    --domain springframework.io
-    $CF unmap --app $CURRENT --url              www.springframework.io &
-    $CF map   --app $NEXT    --host www    --domain springsource.io
-    $CF unmap --app $CURRENT --url              www.springsource.io
+    wait
 fi;
 
