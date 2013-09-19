@@ -30,7 +30,12 @@ $CF map --app $NEXT --host sagan-$SPACE --domain cfapps.io || exit
 # Unmap old app, leaving it running for rollback
 $CF unmap --app $CURRENT --url sagan-$SPACE.cfapps.io
 
-if [ $SPACE == "production" ]; then
+if [ $SPACE == "staging" ]; then
+
+    $CF map   --app $NEXT    --host staging --domain spring.io
+    $CF unmap --app $CURRENT --url           staging.spring.io
+
+elif [ $SPACE == "production" ]; then
 
     $CF map   --app $NEXT    --domain               spring.io
     $CF unmap --app $CURRENT --url                 .spring.io &
