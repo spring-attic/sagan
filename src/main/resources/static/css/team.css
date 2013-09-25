@@ -209,28 +209,28 @@
   background-image: url("../img/iconsprite.png");
 }
 .team-member--social--icon.twitter-small {
-  background-position: -314px -452px;
+  background-position: 687px 385px;
 }
 .team-member--social--icon.twitter-small:hover {
-  background-position: -314px -486px;
+  background-position: 687px 351px;
 }
 .team-member--social--icon.github-small {
-  background-position: -344px -452px;
+  background-position: 657px 385px;
 }
 .team-member--social--icon.github-small:hover {
-  background-position: -344px -486px;
+  background-position: 657px 351px;
 }
 .team-member--social--icon.speakerdeck-small {
-  background-position: -374px -452px;
+  background-position: 627px 385px;
 }
 .team-member--social--icon.speakerdeck-small:hover {
-  background-position: -374px -486px;
+  background-position: 627px 351px;
 }
 .team-member--social--icon.lanyrd-small {
-  background-position: -284px -452px;
+  background-position: 717px 385px;
 }
 .team-member--social--icon.lanyrd-small:hover {
-  background-position: -284px -486px;
+  background-position: 717px 351px;
 }
 .team-member--social--icon:last-child {
   margin-right: 0;
