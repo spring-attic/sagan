@@ -124,6 +124,11 @@ public class RewriteTests {
     }
 
     @Test
+    public void drupalThemeImagesAreRedirected() throws Exception {
+        validateTemporaryRedirect("http://www.springsource.org/sites/all/themes/s2org11/favicon.ico", "http://assets.spring.io/drupal/sites/all/themes/s2org11/favicon.ico");
+    }
+
+    @Test
     public void oldCaseStudiesAreRedirected() throws Exception {
         validateTemporaryRedirect("http://www.springsource.org/files/uploads/file.pdf", "http://assets.spring.io/drupal/files/uploads/file.pdf");
     }
