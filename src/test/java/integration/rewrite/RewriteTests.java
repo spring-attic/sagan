@@ -269,8 +269,8 @@ public class RewriteTests {
 
     @Test
     public void legacyNewsAndEventsFeedRequestsAreRedirected() throws Exception {
-        validateTemporaryRedirect("http://www.springsource.org/node/feed", "http://drupal.spring.io/node/feed");
-        validateTemporaryRedirect("http://www.springsource.org/newsblog/feed", "http://drupal.spring.io/newsblog/feed");
+        validateTemporaryRedirect("http://www.springsource.org/node/feed", "http://assets.spring.io/drupal/node/feed.xml");
+        validateTemporaryRedirect("http://www.springsource.org/newsblog/feed", "http://assets.spring.io/wp/feed.xml");
     }
 
     @Test
