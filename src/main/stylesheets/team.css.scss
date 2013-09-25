@@ -234,27 +234,27 @@ $icon-sprite: url("../img/iconsprite.png");
   margin-right: 5px;
   background-image: $icon-sprite;
   &.twitter-small {
-    background-position: -314px -452px;
+    background-position: 687px 385px;
     &:hover {
-      background-position: -314px -486px;
+      background-position: 687px 351px;
     }
   }
   &.github-small {
-    background-position: -344px -452px;
+    background-position: 657px 385px;
     &:hover {
-      background-position: -344px -486px;
+      background-position: 657px 351px;
     }
   }
   &.speakerdeck-small {
-    background-position: -374px -452px;
+    background-position: 627px 385px;
     &:hover {
-      background-position: -374px -486px;
+      background-position: 627px 351px;
     }
   }
   &.lanyrd-small {
-    background-position: -284px -452px;
+    background-position: 717px 385px;
     &:hover {
-      background-position: -284px -486px;
+      background-position: 717px 351px;
     }
   }
   &:last-child {

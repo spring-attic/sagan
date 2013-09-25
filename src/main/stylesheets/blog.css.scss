@@ -213,39 +213,38 @@ $icon-sprite: url("../img/iconsprite.png");
   text-align: center;
   .social-btn {
     background-image: url("../img/iconsprite.png");
-    background-repeat: no-repeat;
     display: inline-block;
     width: 36px;
     height: 36px;
     margin: 0 3.5%;
     &.twitter {
-      background-position: -1px -143px;
+      background-position: 1000px 694px;
       &:hover {
-        background-position: -84px -143px;
+        background-position: 917px 694px;
       }
     }
     &.googleplus {
-      background-position: -1px -220px;
+      background-position: 1000px 617px;
       &:hover {
-        background-position: -84px -220px;
+        background-position: 917px 617px;
       }
     }
     &.linkedin {
-      background-position: -1px -297px;
+      background-position: 1000px 540px;
       &:hover {
-        background-position: -84px -297px;
+        background-position: 917px 540px;
       }
     }
     &.facebook {
-      background-position: -1px -373px;
+      background-position: 1000px 464px;
       &:hover {
-        background-position: -84px -373px;
+        background-position: 917px 464px;
       }
     }
     &.youtube {
-      background-position: -1px -450px;
+      background-position: 1000px 387px;
       &:hover {
-        background-position: -84px -450px;
+        background-position: 917px 387px;
       }
     }
   }

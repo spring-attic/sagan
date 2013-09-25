@@ -23,36 +23,36 @@ $icon-sprite: url("../img/iconsprite.png");
     &.logo-spring-framework {
       width: 135px;
       height: 133px;
-      background-position: -483px 0;
+      background-position: 518px 837px;
       margin-top: 2px;
     }
     &.logo-spring-security {
       width: 99px;
       height: 137px;
-      background-position: -483px -161px;
+      background-position: 519px 677px;
     }
     &.logo-spring-data {
       width: 111px;
       height: 111px;
-      background-position: -483px -325px;
+      background-position: 519px 512px;
       margin-top: 13px;
     }
     &.logo-spring-batch {
       width: 104px;
       height: 108px;
-      background-position: -641px 0;
+      background-position: 360px 837px;
       margin-top: 14px;
     }
     &.logo-spring-integration {
       width: 145px;
       height: 104px;
-      background-position: -641px -161px;
+      background-position: 361px 677px;
       margin-top: 16px;
     }
     &.logo-spring-amqp {
       width: 109px;
       height: 98px;
-      background-position: -641px -325px;
+      background-position: 361px 513px;
       margin: 19px;
     }
     &.logo-spring-default {
@@ -64,18 +64,18 @@ $icon-sprite: url("../img/iconsprite.png");
     &.logo-spring-mobile {
       width: 104px;
       height: 137px;
-      background-position: -805px -161px;
+      background-position: 196px 677px;
     }
     &.logo-spring-android {
       width: 104px;
       height: 126px;
-      background-position: -805px -325px;
+      background-position: 196px 513px;
       margin-top: 10px;
     }
     &.logo-spring-social {
       width: 130px;
       height: 100px;
-      background-position: -483px -481px;
+      background-position: 518px 357px;
       margin-top: 18px;
     }
     &.logo-spring-hateoas {
@@ -108,6 +108,24 @@ $icon-sprite: url("../img/iconsprite.png");
       background-position: 143px 837px;
       margin-top: 23px;
     }
+    &.logo-spring-ldap {
+      width: 93px;
+      height: 107px;
+      background-position: 247px 944px;
+      margin-top: 19px;
+    }
+    &.logo-grails {
+      width: 107px;
+      height: 100px;
+      background-position: 361px 944px;
+      margin-top: 23px;
+    }
+    &.logo-groovy {
+      width: 183px;
+      height: 92px;
+      background-position: 546px 940px;
+      margin-top: 23px;
+    }
   }
   &.icon-projects {
     width: 28px;
@@ -128,12 +146,12 @@ $icon-sprite: url("../img/iconsprite.png");
   &.icon-current-version {
     height: 13px;
     width: 42px;
-    background-position: -284px -520px;
+    background-position: 718px 317px;
   }
   &.icon-pre-release {
     height: 13px;
     width: 23px;
-    background-position: -344px -520px;
+    background-position: 657px 317px;
   }
   &.icon-ga-release {
     margin-left: 0 !important;
