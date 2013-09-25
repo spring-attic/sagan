@@ -146,12 +146,21 @@
     </rule>
     <rule>
         <name>Legacy STS news and events feed requests</name>
-        <note>Redirect to old Drupal site (now at drupal.spring.io) for old versions of STS hard
+        <note>Redirect to static snapshot of final Drupal feed XML for old versions of STS hard
         coded to hit www.springsource.org/node/feed/ and expecting RSS as opposed to Atom.
         </note>
         <condition name="host">www.springsource.org</condition>
-        <from>^/(node|newsblog)/(feed/?)$</from>
-        <to type="temporary-redirect" last="true">http://drupal.spring.io/$1/$2</to>
+        <from>^/node/feed/?$</from>
+        <to type="temporary-redirect" last="true">http://assets.spring.io/drupal/node/feed.xml</to>
+    </rule>
+    <rule>
+        <name>Legacy STS 'newsblog' feed requests</name>
+        <note>Redirect to static snapshot of final WP feed XML for old versions of STS hard
+        coded to hit www.springsource.org/newsblog/feed/ and expecting RSS as opposed to Atom.
+        </note>
+        <condition name="host">www.springsource.org</condition>
+        <from>^/newsblog/feed/?$</from>
+        <to type="temporary-redirect" last="true">http://assets.spring.io/wp/feed.xml</to>
     </rule>
     <rule>
         <name>Legacy blog posts</name>
