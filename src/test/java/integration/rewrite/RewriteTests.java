@@ -95,7 +95,7 @@ public class RewriteTests {
     @Test
     public void rossensWebSocketPostIsRedirectedToOldBlog() throws Exception {
         validateTemporaryRedirect("http://blog.springsource.org/blog/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures",
-                                  "http://wp.spring.io/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures");
+                                  "http://assets.spring.io/wp/WebSocketBlogPost.html");
     }
 
     @Test

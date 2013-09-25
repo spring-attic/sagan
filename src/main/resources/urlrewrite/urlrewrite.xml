@@ -122,8 +122,8 @@
     </rule>
     <rule>
         <name>Rossen's WebSocket blog post</name>
-        <from>^.*(/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures/?)</from>
-        <to type="temporary-redirect" last="true">http://wp.spring.io$1</to>
+        <from>^.*/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures/?</from>
+        <to type="temporary-redirect" last="true">http://assets.spring.io/wp/WebSocketBlogPost.html</to>
     </rule>
     <rule>
         <name>Legacy blog images</name>
