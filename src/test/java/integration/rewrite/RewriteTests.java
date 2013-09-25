@@ -87,9 +87,7 @@ public class RewriteTests {
     @Test
     public void legacyBlogResourceRequestsAreRedirectedToOldBlog() throws Exception {
         validateTemporaryRedirect("http://blog.springsource.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushJava.js",
-                "http://wp.spring.io/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushJava.js");
-        validateTemporaryRedirect("http://wp.spring.io/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushJava.js",
-                "http://wp.spring.io/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushJava.js");
+                "http://assets.spring.io/wp/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushJava.js");
     }
 
     @Test
@@ -111,7 +109,7 @@ public class RewriteTests {
 
     @Test
     public void blogAssetsAreRedirected() throws Exception {
-        validateTemporaryRedirect("http://blog.springsource.org/wp-content/uploads/attachment.zip", "http://wp.spring.io/wp-content/uploads/attachment.zip");
+        validateTemporaryRedirect("http://blog.springsource.org/wp-content/uploads/attachment.zip", "http://assets.spring.io/wp/wp-content/uploads/attachment.zip");
     }
 
     @Test
@@ -127,7 +125,7 @@ public class RewriteTests {
 
     @Test
     public void oldCaseStudiesAreRedirected() throws Exception {
-        validateTemporaryRedirect("http://www.springsource.org/files/uploads/file.pdf", "http://drupal.spring.io/files/uploads/file.pdf");
+        validateTemporaryRedirect("http://www.springsource.org/files/uploads/file.pdf", "http://assets.spring.io/drupal/files/uploads/file.pdf");
     }
 
     @Test
@@ -275,8 +273,8 @@ public class RewriteTests {
 
     @Test
     public void legacyDrupalFilesAreRedirected() throws Exception {
-        validateTemporaryRedirect("http://www.springsource.org/files/SpringOne/2013/training-bg-image.png", "http://drupal.spring.io/files/SpringOne/2013/training-bg-image.png");
-        validateTemporaryRedirect("http://www.springsource.org/files/other.jpg", "http://drupal.spring.io/files/other.jpg");
+        validateTemporaryRedirect("http://www.springsource.org/files/SpringOne/2013/training-bg-image.png", "http://assets.spring.io/drupal/files/SpringOne/2013/training-bg-image.png");
+        validateTemporaryRedirect("http://www.springsource.org/files/other.jpg", "http://assets.spring.io/drupal/files/other.jpg");
     }
 
     @Test
