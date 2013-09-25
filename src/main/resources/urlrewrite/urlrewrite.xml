@@ -142,7 +142,7 @@
         </note>
         <condition name="host">blog.springsource.com</condition>
         <from>/main/feed/</from>
-        <to type="temporary-redirect" last="true">http://wp.spring.io/main/feed/</to>
+        <to type="temporary-redirect" last="true">http://assets.spring.io/wp/feed.xml</to>
     </rule>
     <rule>
         <name>Legacy STS news and events feed requests</name>

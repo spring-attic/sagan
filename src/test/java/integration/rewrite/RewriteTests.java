@@ -100,7 +100,7 @@ public class RewriteTests {
 
     @Test
     public void legacySTSBlogFeedRequestsAreRedirectedToOldBlog() throws Exception {
-        validateTemporaryRedirect("http://blog.springsource.com/main/feed/", "http://wp.spring.io/main/feed/");
+        validateTemporaryRedirect("http://blog.springsource.com/main/feed/", "http://assets.spring.io/wp/feed.xml");
     }
 
     @Test
