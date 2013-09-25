@@ -223,9 +223,10 @@
     </rule>
     <rule>
         <name>Legacy Drupal files</name>
-        <note>Created to fix 404s on attempt to fetch training banner backgrounds</note>
+        <note>Created to fix 404s on attempt to fetch training banner backgrounds; expanded
+        to cover Drupal "theme" files as well</note>
         <condition name="host">www.springsource.org</condition>
-        <from>^/(files/.+)</from>
+        <from>^/((files|sites)/.+)</from>
         <to type="temporary-redirect" last="true">http://assets.spring.io/drupal/$1</to>
     </rule>
 </urlrewrite>
