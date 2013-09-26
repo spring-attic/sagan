@@ -18,11 +18,11 @@
 }
 .tool--container .tool--icon.sts-icon {
   width: 124px;
-  background-position: -194px 0;
+  background-position: 808px 838px;
 }
 .tool--container .tool--icon.ggts-icon {
   width: 96px;
-  background-position: -204px -140px;
+  background-position: 798px 697px;
 }
 .tool--container .tool--title {
   font-size: 18px;
@@ -277,11 +277,11 @@
 }
 .tool-versions--wrapper .tool-versions--icon--container .tool-versions--icon.sts-icon {
   width: 124px;
-  background-position: -194px 0;
+  background-position: 808px 838px;
 }
 .tool-versions--wrapper .tool-versions--icon--container .tool-versions--icon.ggts-icon {
   width: 96px;
-  background-position: -204px -140px;
+  background-position: 798px 697px;
 }
 .tool-versions--wrapper .tool-versions--icon--container .tool-versions--version {
   color: #f1f1f1;
@@ -313,19 +313,19 @@
 .tool-versions--wrapper .tool-versions--container .platform .platform--icon.windows-icon {
   width: 48px;
   height: 48px;
-  background-position: -364px -282px;
+  background-position: 638px 555px;
   margin-top: -12px;
 }
 .tool-versions--wrapper .tool-versions--container .platform .platform--icon.mac-icon {
   width: 46px;
   height: 56px;
-  background-position: -300px -282px;
+  background-position: 702px 554px;
   margin-top: -20px;
 }
 .tool-versions--wrapper .tool-versions--container .platform .platform--icon.linux-icon {
   width: 51px;
   height: 43px;
-  background-position: -300px -354px;
+  background-position: 702px 483px;
   margin-top: -7px;
 }
 .tool-versions--wrapper .tool-versions--container .platform h3 {
@@ -372,15 +372,16 @@
 }
 .eclipse-platform--container .platform--name .platform--icon-small.mac-icon {
   height: 28px;
-  background-position: -285px -406px;
+  background-position: 717px 432px;
 }
 .eclipse-platform--container .platform--name .platform--icon-small.windows-icon {
   height: 24px;
-  background-position: -328px -409px;
+  background-position: 673px 428px;
 }
 .eclipse-platform--container .platform--name .platform--icon-small.linux-icon {
   height: 21px;
-  background-position: -369px -412px;
+  background-position: 632px 425px;
+  width: 25px;
 }
 .eclipse-platform--container .platform--name h3 {
   display: inline-block;
@@ -446,11 +447,11 @@
   margin: 20px 0;
 }
 .tools-right-pane .tools-logo.sts-logo {
-  background-position: -328px 0;
+  background-position: 673px 838px;
   width: 124px;
 }
 .tools-right-pane .tools-logo.ggts-logo {
-  background-position: -338px -140px;
+  background-position: 664px 698px;
   width: 96px;
 }
 .tools-right-pane .tools-logo-small {
@@ -460,10 +461,10 @@
   height: 58px;
 }
 .tools-right-pane .tools-logo-small.sts-logo {
-  background-position: -231px -367px;
+  background-position: 770px 470px;
 }
 .tools-right-pane .tools-logo-small.ggts-logo {
-  background-position: -231px -433px;
+  background-position: 770px 404px;
 }
 .tools-right-pane ul {
   margin: 0;

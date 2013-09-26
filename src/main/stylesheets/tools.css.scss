@@ -37,11 +37,11 @@ $icon-sprite: url("../img/iconsprite.png");
     background-image: $icon-sprite;
     &.sts-icon {
       width: 124px;
-      background-position: -194px 0;
+      background-position: 808px 838px;
     }
     &.ggts-icon {
       width: 96px;
-      background-position: -204px -140px
+      background-position: 798px 697px;
     }
   }
   .tool--title {
@@ -305,11 +305,11 @@ $icon-sprite: url("../img/iconsprite.png");
       margin-bottom: 27px;
       &.sts-icon {
         width: 124px;
-        background-position: -194px 0;
+        background-position: 808px 838px;
       }
       &.ggts-icon {
         width: 96px;
-        background-position: -204px -140px;
+        background-position: 798px 697px;
       }
     }
     .tool-versions--version {
@@ -340,19 +340,19 @@ $icon-sprite: url("../img/iconsprite.png");
         &.windows-icon {
           width: 48px;
           height: 48px;
-          background-position: -364px -282px;
+          background-position: 638px 555px;
           margin-top: -12px;
         }
         &.mac-icon {
           width: 46px;
           height: 56px;
-          background-position: -300px -282px;
+          background-position: 702px 554px;
           margin-top: -20px;
         }
         &.linux-icon {
           width: 51px;
           height: 43px;
-          background-position: -300px -354px;
+          background-position: 702px 483px;
           margin-top: -7px;
         }
       }
@@ -400,15 +400,16 @@ $icon-sprite: url("../img/iconsprite.png");
       width: 24px;
       &.mac-icon {
         height: 28px;
-        background-position: -285px -406px;
+        background-position: 717px 432px;
       }
       &.windows-icon {
         height: 24px;
-        background-position: -328px -409px;
+        background-position: 673px 428px;
       }
       &.linux-icon {
         height: 21px;
-        background-position: -369px -412px;
+        background-position: 632px 425px;
+        width: 25px;
       }
     }
     h3 {
@@ -477,11 +478,11 @@ $icon-sprite: url("../img/iconsprite.png");
     height: 134px;
     margin: 20px 0;
     &.sts-logo {
-      background-position: -328px 0;
+      background-position: 673px 838px;
       width: 124px;
     }
     &.ggts-logo {
-      background-position: -338px -140px;
+      background-position: 664px 698px;
       width: 96px;
     }
   }
@@ -491,10 +492,10 @@ $icon-sprite: url("../img/iconsprite.png");
     width: 43px;
     height: 58px;
     &.sts-logo {
-      background-position: -231px -367px;
+      background-position: 770px 470px;
     }
     &.ggts-logo {
-      background-position: -231px -433px;
+      background-position: 770px 404px;
     }
   }
   ul {
