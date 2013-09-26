@@ -203,7 +203,6 @@ a[name="gs"], a[name="tutorials"] {
   padding: 20px;
   margin: 0;
   float: right;
-  background-position: 3px -66px;
 }
 .content-right-pane--container .github_download {
   display: block;
@@ -243,7 +242,7 @@ a[name="gs"], a[name="tutorials"] {
   padding: 20px;
   background-image: url("../img/iconsprite.png");
   background-repeat: no-repeat;
-  background-position: 2px -66px;
+  background-position: 2px -429px;
   width: 20px;
   height: 22px;
   border: none;
