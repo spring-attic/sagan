@@ -95,13 +95,13 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
     private void checkMilestone(List<Object> releases) {
         @SuppressWarnings("unchecked")
         Map<String, Object> release = (Map<String, Object>) releases.get(1);
-        assertThat((String) release.get("version"), equalTo("4.0.0.M2"));
+        assertThat((String) release.get("version"), equalTo("4.0.0.M3"));
         assertThat(
                 (String) release.get("refDocUrl"),
-                equalTo("http://docs.spring.io/spring/docs/4.0.0.M2/spring-framework-reference/html/"));
+                equalTo("http://docs.spring.io/spring/docs/4.0.0.M3/spring-framework-reference/html/"));
         assertThat(
                 (String) release.get("apiDocUrl"),
-                equalTo("http://docs.spring.io/spring/docs/4.0.0.M2/javadoc-api/"));
+                equalTo("http://docs.spring.io/spring/docs/4.0.0.M3/javadoc-api/"));
         assertThat((Boolean) release.get("preRelease"), equalTo(true));
         assertThat((Boolean) release.get("current"), equalTo(false));
         assertThat((Boolean) release.get("generalAvailability"), equalTo(false));
