@@ -2,7 +2,7 @@
 applications:
 - name: sagan-blue
   memory: 2G
-  instances: 4
+  instances: 1
   env:
     SPRING_PROFILES_ACTIVE: site,production
     NEW_RELIC_APP_NAME: sagan-blue;sagan
@@ -12,7 +12,7 @@ applications:
   buildpack: https://github.com/cloudfoundry/java-buildpack
 - name: sagan-green
   memory: 2G
-  instances: 4
+  instances: 1
   env:
     SPRING_PROFILES_ACTIVE: site,production
     NEW_RELIC_APP_NAME: sagan-green;sagan
