@@ -253,30 +253,6 @@
                     <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.jasig.maven</groupId>
-                <artifactId>sass-maven-plugin</artifactId>
-                <version>1.1.0</version>
-                <executions>
-                    <execution>
-                        <id>package</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>update-stylesheets</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <resources>
-                        <resource>
-                            <source>
-                                <directory>${basedir}/src/main/stylesheets</directory>
-                            </source>
-                            <destination>${basedir}/src/main/resources/static/css</destination>
-                        </resource>
-                    </resources>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>com.github.searls</groupId>
@@ -306,19 +282,6 @@
                     <configuration>
                         <lifecycleMappingMetadata>
                             <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.jasig.maven</groupId>
-                                        <artifactId>sass-maven-plugin</artifactId>
-                                        <versionRange>[1.1.0,)</versionRange>
-                                        <goals>
-                                            <goal>update-stylesheets</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore></ignore>
-                                    </action>
-                                </pluginExecution>
                                 <pluginExecution>
                                     <pluginExecutionFilter>
                                         <groupId>pl.project13.maven</groupId>
