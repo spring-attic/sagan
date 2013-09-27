@@ -15,6 +15,11 @@
         <to type="permanent-redirect" last="true">http://schema.spring.io$1</to>
     </rule>
     <rule>
+        <name>Legacy DTD requests</name>
+        <from>^(/dtd/?.*)$</from>
+        <to type="permanent-redirect" last="true">http://schema.spring.io$1</to>
+    </rule>
+    <rule>
         <name>Legacy interface21 blog requests</name>
         <condition name="host">blog.interface21.com</condition>
         <to type="permanent-redirect" last="true">http://spring.io/blog</to>
