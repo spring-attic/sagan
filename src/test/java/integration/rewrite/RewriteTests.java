@@ -203,12 +203,22 @@ public class RewriteTests {
     @Test
     public void legacySchemaRequestsAreRedirected() throws Exception {
         for (String host : new String [] { "springsource.org", "www.springsource.org",
-                                           "springframework.org", "www.springframework.org"}) {
+                "springframework.org", "www.springframework.org"}) {
             validatePermanentRedirect("http://" + host + "/schema", "http://schema.spring.io");
             validatePermanentRedirect("http://" + host + "/schema/", "http://schema.spring.io/");
             validatePermanentRedirect("http://" + host + "/schema/oxm", "http://schema.spring.io/oxm");
             validatePermanentRedirect("http://" + host + "/schema/oxm/spring-oxm.xsd",
-                                      "http://schema.spring.io/oxm/spring-oxm.xsd");
+                    "http://schema.spring.io/oxm/spring-oxm.xsd");
+        }
+    }
+
+    @Test
+    public void legacyDTDRequestsAreRedirected() throws Exception {
+        for (String host : new String [] { "springsource.org", "www.springsource.org",
+                                           "springframework.org", "www.springframework.org"}) {
+            validatePermanentRedirect("http://" + host + "/dtd", "http://schema.spring.io/dtd");
+            validatePermanentRedirect("http://" + host + "/dtd/", "http://schema.spring.io/dtd/");
+            validatePermanentRedirect("http://" + host + "/dtd/spring-beans-2.0.dtd", "http://schema.spring.io/dtd/spring-beans-2.0.dtd");
         }
     }
 
