@@ -13,7 +13,7 @@
             <h1 class="index-page--title">
               The Spring IO Platform
             </h1>
-            <p class="index-page--subtitle">Coming Soon &ndash; Spring IO brings together the Spring family of projects into a cohesive and versioned foundational platform for modern applications. On top of this foundation it also provides domain-specific execution environments for a variety of enterprise workloads.</p>
+            <p class="index-page--subtitle">Spring IO brings together the core Spring APIs into a cohesive and versioned foundational platform for Spring applications. On top of this foundation it also provides domain-specific execution environments for a variety of enterprise workloads.</p>
           </div>
           <div class="span6">
             <div class="platform-watermark--large desktop-only"></div>
@@ -24,6 +24,93 @@
     <div layout:fragment="full-width--layout">
       <div class="platform-stack--wrapper">
         <img src="img/platform-stack.png">
+      </div>
+    </div>
+    <div layout:fragment="content">
+      <div class="main-body--wrapper">
+        <h1 class="index-page--title">Spring IO Foundation</h1>
+        <p class="index-page--subtitle">Spring IO Foundation is a cohesive set of APIs and embeddable runtime components (Spring modules) enabling you to build applications addressing a wide range of enterprise requirements.  All of the major workload types are represented: enterprise integration, batch processing, big data processing, web applications (including WebSocket support), and the creation of server-side APIs in support of single-page apps, mobile clients, and services. What all of these workload types have in common is a need to interact with data. </p>
+        <h2>Core</h2>
+        <p>At the core of the Spring IO Foundation layer and common across all workload types we find the core framework itself, plus Spring’s security modules. The Groovy language is also part of the foundation, as it is increasingly integrated with the Spring stack. Finally, an emerging component at this layer is Reactor - a foundation for asynchronous processing of event and data-driven applications.</p>
+        <div class="platform-project">
+          <a href="http://projects.spring.io/spring-framework" class="project--container project--container--link">
+            <div class="project-icon icon-spring-framework"></div>
+            <div class="project--title">Framework</div>
+            <p class="project--description">Provides core support for dependency injection, transaction management, web apps, data access, and messaging.</p>
+          </a>
+          <a href="http://projects.spring.io/spring-security" class="project--container project--container--link">
+            <div class="project-icon icon-spring-security"></div>
+            <div class="project--title">Security</div>
+            <p class="project--description">A powerful and highly customizable authentication and access-control framework.</p>
+          </a>
+          <a href="http://groovy.codehaus.org" class="project--container project--container--link">
+            <img class="project--logo small" src="img/platform-groovy.png">
+            <div class="project--title">Groovy</div>
+            <p class="project--description">A powerful and highly customizable authentication and access-control framework.</p>
+          </a>
+          <a href="https://github.com/reactor/reactor" class="project--container project--container--link">
+            <img class="project--logo small" src="img/platform-reactor.png">
+            <div class="project--title">Reactor</div>
+            <p class="project--description">A powerful and highly customizable authentication and access-control framework.</p>
+          </a>
+        </div>
+        <div class="platform-project">
+          <div class="description">
+            <h2>Data</h2>
+            <p>The Spring IO Foundation provides comprehensive support for the rich variety of data found in the modern enterprise: both traditional relational (SQL) and NewSQL stores, non-relational stores, and of course the Hadoop platform.</p>
+          </div>
+          <a href="http://projects.spring.io/spring-data/" class="project--container project--container--link auto-height">
+            <img class="project--logo small" src="img/platform-relational-db.png">
+            <div class="project--title">Relational</div>
+          </a>
+          <a href="http://projects.spring.io/spring-data/" class="project--container project--container--link auto-height">
+            <img class="project--logo small" src="img/platform-nonrelational-db.png">
+            <div class="project--title">Non-Relational</div>
+          </a>
+        </div>
+        <h2>Spring Powered Workloads</h2>
+        <p>Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla. </p>
+        <div class="platform-project">
+          <a href="http://projects.spring.io/spring-integration/" class="project--container project--container--link short-fixed">
+            <img class="project--logo small" src="img/platform-spring-integration.png">
+            <div class="project--title">Integration</div>
+            <p class="project--description">Channels, Adapters, Filters, Transformers</p>
+          </a>
+          <a href="http://projects.spring.io/spring-batch/" class="project--container project--container--link short-fixed">
+            <div class="project-icon icon-spring-batch"></div>
+            <div class="project--title">Batch</div>
+            <p class="project--description">Jobs, Steps, Readers, Writers</p>
+          </a>
+          <a href="http://projects.spring.io/spring-xd/" class="project--container project--container--link short-fixed">
+            <img class="project--logo small" src="img/platform-big-data.png">
+            <div class="project--title">Big Data</div>
+            <p class="project--description">Ingestion, Exports, Orchestration Hadoop</p>
+          </a>
+          <a href="http://docs.spring.io/spring-ws/sites/2.0/" class="project--container project--container--link short-fixed">
+            <img class="project--logo small" src="img/platform-web.png">
+            <div class="project--title">Web</div>
+            <p class="project--description">Controllers, REST, WebSocket</p>
+          </a>
+        </div>
+        <h1 class="index-page--title top-margin">Spring IO Execution</h1>
+        <p class="index-page--subtitle">Spring IO Execution provides direct execution support (domain-specific runtimes, or DSRs) for applications built on the IO Foundation modules. A DSR can run standalone without requiring deployment to an external container. The first release of Spring IO includes three DSRs: Spring XD, Spring Boot, and Grails.</p>
+        <div class="projects--wrapper">
+          <a href="https://github.com/spring-projects/spring-xd/wiki" class="project--container project--container--link shorter-fixed">
+            <img class="project--logo small" src="img/platform-spring-xd.png">
+            <div class="project--title">Spring XD</div>
+            <p class="project--description">Domain-specific runtime for batch and stream based data-oriented applications</p>
+          </a>
+          <a href="http://projects.spring.io/spring-boot/" class="project--container project--container--link shorter-fixed">
+            <img class="project--logo small" src="img/platform-spring-boot.png">
+            <div class="project--title">Spring Boot</div>
+            <p class="project--description">An opinionated view of Spring and a way to get started writing and running applications as fast as possible.</p>
+          </a>
+          <a href="http://grails.org/" class="project--container project--container--link shorter-fixed">
+            <img class="project--logo small" src="img/platform-grails.png">
+            <div class="project--title">Grails</div>
+            <p class="project--description">Full stack, web application framework for the JVM</p>
+          </a>
+        </div>
       </div>
     </div>
   </body>
