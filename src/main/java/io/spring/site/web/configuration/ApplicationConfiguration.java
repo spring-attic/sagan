@@ -60,6 +60,9 @@ import java.util.concurrent.TimeUnit;
 @Import({DatabaseConfiguration.class})
 public class ApplicationConfiguration {
 
+    public static final String REWRITE_FILTER_NAME = "rewriteFilter";
+    public static final String REWRITE_FILTER_CONF_PATH = "urlrewrite.xml";
+
     public static void main(String[] args) {
         SpringApplication.run(ApplicationConfiguration.class, args);
     }
@@ -113,27 +116,15 @@ public class ApplicationConfiguration {
         return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
     }
 
-    // http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html#filterparams
-    // Blog filter must be declared first, to ensure its rules are applied before the
-    // general rules
-    @Bean
-    public FilterRegistrationBean blogRewriteFilterConfig() {
-        FilterRegistrationBean reg = new FilterRegistrationBean();
-        reg.setName("mappingsRewriteFilter");
-        reg.setFilter(new UrlRewriteFilter());
-        reg.addInitParameter("confPath", "urlrewrite/urlrewrite-generated.xml");
-        reg.addInitParameter("confReloadCheckInterval", "-1");
-        reg.addInitParameter("logLevel", "WARN");
-        return reg;
-    }
-
     @Bean
     public FilterRegistrationBean rewriteFilterConfig() {
         FilterRegistrationBean reg = new FilterRegistrationBean();
-        reg.setName("rewriteFilter");
+        reg.setName(REWRITE_FILTER_NAME);
         reg.setFilter(new UrlRewriteFilter());
-        reg.addInitParameter("confPath", "urlrewrite/urlrewrite.xml");
+        reg.addInitParameter("confPath", REWRITE_FILTER_CONF_PATH);
         reg.addInitParameter("confReloadCheckInterval", "-1");
+        reg.addInitParameter("statusPath", "/redirect");
+        reg.addInitParameter("statusEnabledOnHosts", "*");
         reg.addInitParameter("logLevel", "WARN");
         return reg;
     }
