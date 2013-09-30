@@ -1,5 +1,6 @@
 package integration.rewrite;
 
+import io.spring.site.web.configuration.ApplicationConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,8 @@ public class RewriteTests {
 
     @Before
     public void setUp() throws Exception {
-        UrlRewriteFilter filter = createUrlFilter("rewriteFilter", "urlrewrite/urlrewrite.xml");
+        UrlRewriteFilter filter = createUrlFilter(
+                ApplicationConfiguration.REWRITE_FILTER_NAME, ApplicationConfiguration.REWRITE_FILTER_CONF_PATH);
         filterChain = new PassThroughFilterChain(filter, new MockFilterChain());
     }
 
