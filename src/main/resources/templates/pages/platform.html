@@ -53,12 +53,33 @@
           support), and the creation of server-side APIs in support of single-page
           apps, mobile clients, and services.</p>
 
-        <p>TODO: WORKLOADS IMAGE</p>
-
+        <div class="platform-project">
+          <a href="http://projects.spring.io/spring-integration/" class="project--container project--container--link">
+            <img class="project--logo small" src="img/platform-spring-integration.png">
+            <div class="project--title">Integration</div>
+            <p class="project--description">Channels, Adapters, Filters, Transformers</p>
+          </a>
+          <a href="http://projects.spring.io/spring-batch/" class="project--container project--container--link">
+            <img class="project--logo small" src="img/platform-spring-batch.png">
+            <div class="project--title">Batch</div>
+            <p class="project--description">Jobs, Steps, Readers, Writers</p>
+          </a>
+          <a href="http://projects.spring.io/spring-hadoop/" class="project--container project--container--link">
+            <img class="project--logo small" src="img/platform-big-data.png">
+            <div class="project--title">Big Data</div>
+            <p class="project--description">Ingestion, Exports, Orchestration, Hadoop</p>
+          </a>
+          <a href="http://projects.spring.io/spring-ws/" class="project--container project--container--link">
+            <img class="project--logo small" src="img/platform-web.png">
+            <div class="project--title">Web</div>
+            <p class="project--description">Controllers, REST, WebSockets</p>
+          </a>
+        </div>
         <p>Spring’s web stack has evolved to include comprehensive REST support for the
           creation of RESTful APIs – useful for supporting mobile and rich-client
           application architectures. Spring Framework 4 also adds support for the
           WebSocket programming model.</p>
+
         <p>Integration workloads are another major use case for Spring. For these,
           Spring IO provides a rich programming model based on the Enterprise
           Integration Patterns and the abstractions of channels, adapters, filters,
@@ -84,8 +105,24 @@
           supplements Spring's traditional strengths in these areas to provide all the
           connectivity you need to build big data applications using Spring.
         </p>
+
+        <div class="platform-project">
+          <div class="description">
+            <h2>Data</h2>
+            <p>The data landscape is evolving rapidly. When Spring got started, ‘data’ pretty much meant a traditional relational database, and maybe a cache in front of it if you were lucky. Today we have a wide variety of different data stores covering structured and unstructured data, in-memory and on-disk, standard-size and big. The industry has come to recognize that one size does not fit all, and it’s a matter of choosing the most appropriate store for the task in hand. Spring IO addresses this modern data landscape - including full support for Apache Hadoop - whether it be document, graph, key-value, relational, or simply unstructured files. </p>
+          </div>
+          <a href="http://projects.spring.io/spring-data/" class="project--container project--container--link auto-height">
+            <img class="project--logo small" src="img/platform-relational-db.png">
+            <div class="project--title">Relational</div>
+          </a>
+          <a href="http://projects.spring.io/spring-data/" class="project--container project--container--link auto-height">
+            <img class="project--logo small" src="img/platform-nonrelational-db.png">
+            <div class="project--title">Non-Relational</div>
+          </a>
+        </div>
         <h2>Core</h2>
-        <p>At the core of the Spring IO Foundation layer and common across all workload types we find the core framework itself, plus Spring’s security modules. The Groovy language is also part of the foundation, as it is increasingly integrated with the Spring stack. Finally, an emerging component at this layer is Reactor - a foundation for asynchronous processing of event and data-driven applications.</p>
+        <p>At the center of the Spring IO Foundation layer, and common across all workload types, we find the core framework itself. Via Spring Framework 4.0, Spring IO enables you to take full advantage of Java SE 8 and the latest updates in EE 7. Spring IO has full support for addressing security concerns, and Spring IO's Reactor provides a foundation for building reactive asynchronous event and data-driven applications.</p>
+
         <div class="platform-project">
           <a href="http://projects.spring.io/spring-framework" class="project--container project--container--link">
             <div class="project-icon icon-spring-framework"></div>
@@ -108,21 +145,8 @@
             <p class="project--description">A powerful and highly customizable authentication and access-control framework.</p>
           </a>
         </div>
-        <div class="platform-project">
-          <div class="description">
-            <h2>Data</h2>
-            <p>The Spring IO Foundation provides comprehensive support for the rich variety of data found in the modern enterprise: both traditional relational (SQL) and NewSQL stores, non-relational stores, and of course the Hadoop platform.</p>
-          </div>
-          <a href="http://projects.spring.io/spring-data/" class="project--container project--container--link auto-height">
-            <img class="project--logo small" src="img/platform-relational-db.png">
-            <div class="project--title">Relational</div>
-          </a>
-          <a href="http://projects.spring.io/spring-data/" class="project--container project--container--link auto-height">
-            <img class="project--logo small" src="img/platform-nonrelational-db.png">
-            <div class="project--title">Non-Relational</div>
-          </a>
-        </div>
-        <h2>Spring Powered Workloads</h2>
+        <p>The popular Groovy dynamic language is supported as an integral part of the Spring IO platform. Groovy integrates seamlessly with your existing classes and libraries and works especially well with IO Execution DSRs such as Boot and Grails.</p>
+<!--         <h2>Spring Powered Workloads</h2>
         <p>Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla. </p>
         <div class="platform-project">
           <a href="http://projects.spring.io/spring-integration/" class="project--container project--container--link short-fixed">
@@ -145,9 +169,9 @@
             <div class="project--title">Web</div>
             <p class="project--description">Controllers, REST, WebSocket</p>
           </a>
-        </div>
+        </div> -->
         <h1 class="index-page--title top-margin">Spring IO Execution</h1>
-        <p class="index-page--subtitle">Spring IO Execution provides direct execution support (domain-specific runtimes, or DSRs) for applications built on the IO Foundation modules. A DSR can run standalone without requiring deployment to an external container. The first release of Spring IO includes three DSRs: Spring XD, Spring Boot, and Grails.</p>
+        <p class="index-page--subtitle">The Spring IO Execution layer provides domain-specific runtimes (DSRs) for applications built on the IO Foundation modules. A DSR may run standalone without requiring deployment to an external container. The first release of Spring IO will include three DSRs: Spring XD, Spring Boot, and Grails.</p>
         <div class="projects--wrapper">
           <a href="https://github.com/spring-projects/spring-xd/wiki" class="project--container project--container--link shorter-fixed">
             <img class="project--logo small" src="img/platform-spring-xd.png">
@@ -165,6 +189,9 @@
             <p class="project--description">Full stack, web application framework for the JVM</p>
           </a>
         </div>
+        <p>Spring XD provides a powerful runtime and DSL for describing big data ingestion and analytics, export, and Hadoop workflow management. In many cases, descriptions of streams, taps and jobs can be directly pushed to the XD DSR without requiring any code to be written at all. The set of XD modules (components that can be used in DSL expressions) is easily extended using building blocks based on Spring Integration and Spring Batch. </p>
+        <p>Spring Boot reduces the effort needed to create production-ready, DevOps-friendly, XML-free Spring applications. It simplifies bootstrapping of Spring projects with minimal code, implements an extensible set of operational features such as automated health checking and metrics endpoints, and supports embedded containers enabling the creation of self-contained executables. </p>
+        <p>Grails provides a productive and stream-lined full-stack web framework by combining the power of the Spring IO Foundation components with a set of comprehensive Groovy-based DSLs.</p>
       </div>
     </div>
   </body>
