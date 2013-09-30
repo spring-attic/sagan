@@ -113,20 +113,6 @@ public class ApplicationConfiguration {
         return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
     }
 
-    // http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html#filterparams
-    // Blog filter must be declared first, to ensure its rules are applied before the
-    // general rules
-    @Bean
-    public FilterRegistrationBean blogRewriteFilterConfig() {
-        FilterRegistrationBean reg = new FilterRegistrationBean();
-        reg.setName("mappingsRewriteFilter");
-        reg.setFilter(new UrlRewriteFilter());
-        reg.addInitParameter("confPath", "urlrewrite/urlrewrite-generated.xml");
-        reg.addInitParameter("confReloadCheckInterval", "-1");
-        reg.addInitParameter("logLevel", "WARN");
-        return reg;
-    }
-
     @Bean
     public FilterRegistrationBean rewriteFilterConfig() {
         FilterRegistrationBean reg = new FilterRegistrationBean();
