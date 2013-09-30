@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<!--
+    Configuration file for UrlRewriteFilter. See:
+    http://www.tuckey.org/urlrewrite/
+    http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/guide.html
+    http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html
+    http://localhost:8080/rewrite-status (only works when running locally)
+-->
+<urlrewrite use-query-string="true">
+    <rule>
+        <name>GSG trailing slash</name>
+        <note>https://www.pivotaltracker.com/story/show/52214321</note>
+        <from>/guides/gs/([^/]+)$</from>
+        <to type="permanent-redirect" last="true">/guides/gs/$1/</to>
+    </rule>
+    <rule>
+        <name>Tutorial root trailing slash</name>
+        <note>https://www.pivotaltracker.com/story/show/52214321</note>
+        <from>/guides/tutorials/([^/]+)$</from>
+        <to type="permanent-redirect" last="true">/guides/tutorials/$1/</to>
+    </rule>
+    <rule>
+        <name>Tutorial page trailing slash</name>
+        <note>https://www.pivotaltracker.com/story/show/52214321</note>
+        <from>/guides/tutorials/(.+)/(\d{1,2})$</from>
+        <to type="permanent-redirect" last="true">/guides/tutorials/$1/$2/</to>
+    </rule>
+    <rule>
+        <name>Rossen's WebSocket blog post</name>
+        <from>^.*/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures/?</from>
+        <to type="temporary-redirect" last="true">http://assets.spring.io/wp/WebSocketBlogPost.html</to>
+    </rule>
+    <rule>
+        <name>YouTube</name>
+        <note>https://www.pivotaltracker.com/story/show/54309374
+        Provide a consistent URL abstraction for our videos while we work out the new
+        name of our youtube channel.
+        </note>
+        <from>/videos?</from>
+        <to type="temporary-redirect" last="true">http://www.youtube.com/springsourcedev</to>
+    </rule>
+    <rule>
+        <name>GSG listing</name>
+        <note>https://www.pivotaltracker.com/story/show/54212676
+        Issue 302 redirect from /guides/gs to /guides#gs</note>
+        <from>/guides/gs[/]?$</from>
+        <to type="temporary-redirect" last="true">/guides#gs</to>
+    </rule>
+    <rule>
+        <name>Tutorial listing</name>
+        <note>https://www.pivotaltracker.com/story/show/54212676
+        Issue 302 redirect from /guides/tutorials to /guides#tutorials</note>
+        <from>/guides/tutorials[/]?$</from>
+        <to type="temporary-redirect" last="true">/guides#tutorials</to>
+    </rule>
+    <rule>
+        <name>Remove www</name>
+        <note>Redirect www.spring.io => spring.io[#54747656]</note>
+        <condition name="host">www.spring.io</condition>
+        <from>^(.*)$</from>
+        <to type="permanent-redirect" last="true">http://spring.io$1</to>
+    </rule>
+    <rule>
+        <name>Project page catch-all</name>
+        <from>^(/projects)?(/spring-.+)$</from>
+        <to type="temporary-redirect" last="true">http://projects.spring.io$2</to>
+    </rule>
+</urlrewrite>
