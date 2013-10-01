@@ -19,6 +19,7 @@
     <properties>
         <start-class>org.springframework.boot.SpringApplication</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.version>4.0.0.BUILD-SNAPSHOT</spring.version>
     </properties>
 
     <dependencies>
@@ -304,6 +305,11 @@
     </build>
 
     <repositories>
+        <repository>
+            <id>spring-snapshot</id>
+            <name>Spring Snapshot</name>
+            <url>http://repo.spring.io/snapshot</url>
+        </repository>
         <repository>
             <id>spring-milestone</id>
             <name>Spring Milestone</name>
