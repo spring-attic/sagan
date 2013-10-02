@@ -57,6 +57,12 @@
   </script>
 </head>
 <body>
+  <script type="text/javascript">
+    // Work around Google font rendering issues in webkit browsers on Windows 7
+    if (navigator.userAgent.indexOf("NT 6.1") != -1) {
+      $('body').css( "-webkit-text-stroke", "0.5px" );
+    }
+  </script>
   <div class="viewport">
     <header class="navbar header--navbar desktop-only">
       <div class="navbar-inner">
