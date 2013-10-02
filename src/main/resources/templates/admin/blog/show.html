@@ -2,11 +2,21 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title th:inline="text">View &middot; [[${post.title}]]</title>
+  <title th:inline="text">[[${post.title}]]</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/blog.css}" href="../../static/css/blog.css" />
 </head>
 <body>
+<div layout:fragment="header-container"></div>
 <div layout:fragment="content" class="container" th:object="${post}">
-    <div layout:include="blog/_full_post :: full-post" th:remove="tag" />
+  <div class="main-body--wrapper">
+    <div class="row-fluid blog--wrapper">
+      <div id="content" class="span8 mobile-left-pane" layout:include="blog/_full_post :: full-post" >
+      </div>
+      <div id="sidebar" class="span4 mobile-right-pane">
+        <div layout:include="blog/_right-pane :: right-pane"></div>
+      </div>
+    </div>
+  </div>
 </div>
 </body>
 </html>
