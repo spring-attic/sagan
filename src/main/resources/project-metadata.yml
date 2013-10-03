@@ -263,10 +263,8 @@ projects:
       artifactId: spring-mobile-device
       groupId: org.springframework.mobile
       supportedVersions:
-        - 1.1.0.BUILD-SNAPSHOT
-        - 1.1.0.RC1
-        - 1.0.3.BUILD-SNAPSHOT
-        - 1.0.2.RELEASE
+        - 1.2.0.BUILD-SNAPSHOT
+        - 1.1.0.RELEASE
 
     # ----------------------
     # Spring Roo
