@@ -5,30 +5,25 @@ import io.spring.site.domain.StaticPagePathFinder;
 import io.spring.site.web.NavSection;
 import io.spring.site.web.ViewRenderingHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.resource.FingerprintResourceResolver;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 import org.springframework.web.servlet.resource.ResourceResolver;
 import org.springframework.web.servlet.resource.ResourceUrlFilter;
-import org.springframework.web.servlet.resource.ResourceUrlGenerator;
 
 import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
@@ -44,13 +39,12 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**")
-                .addResourceLocations("classpath:/static/")
-                .setResourceResolvers(
-                        Arrays.<ResourceResolver>asList(
-                                new FingerprintResourceResolver(),
-                                new PathResourceResolver()
-                        ));
+
+		registry.setResourceResolvers(
+			Arrays.<ResourceResolver>asList(
+				new FingerprintResourceResolver(),
+				new PathResourceResolver()
+			));
 
         // order before Spring Boot's ResourceHandler as injected above (see ResourceHandlerRegistry)
         // registry.setOrder(Integer.MAX_VALUE-2);
@@ -59,14 +53,6 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
     @Bean
     public ResourceUrlFilter resourceUrlFilter() {
         return new ResourceUrlFilter();
-    }
-
-    @Bean
-    public ResourceUrlGenerator resourceUrlGenerator(
-            @Qualifier("resourceHandlerMapping") HandlerMapping handlerMapping) {
-        ResourceUrlGenerator resourceUrlGenerator = new ResourceUrlGenerator();
-        resourceUrlGenerator.setResourceHandlerMappings(Arrays.<SimpleUrlHandlerMapping>asList((SimpleUrlHandlerMapping)handlerMapping));
-        return resourceUrlGenerator;
     }
 
     @Bean(name = { "uih", "viewRenderingHelper" })
