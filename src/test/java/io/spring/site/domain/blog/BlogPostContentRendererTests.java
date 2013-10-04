@@ -1,6 +1,5 @@
 package io.spring.site.domain.blog;
 
-import io.spring.site.domain.blog.BlogPostContentRenderer;
 import io.spring.site.domain.services.MarkdownService;
 
 import org.junit.Before;
@@ -31,6 +30,27 @@ public class BlogPostContentRendererTests {
         given(markdownService.renderToHtml("CONTENT")).willReturn("RENDERED CONTENT");
 
         assertThat(renderer.render("CONTENT"), equalTo("RENDERED CONTENT"));
+    }
+
+    @Test
+    public void rendersDecodedHtml() throws Exception {
+        String encoded =
+                "FIRST\n" +
+                "<pre>!{iframe src=\"//www.youtube.com/embed/D6nJSyWB-xA\"}{/iframe}</pre>\n" +
+                "SECOND\n" +
+                "<pre>!{iframe src=\"//www.youtube.com/embed/jplkJIHPGos\"}{/iframe}</pre>\n" +
+                "END";
+
+        String decoded =
+                "FIRST\n" +
+                "<iframe src=\"//www.youtube.com/embed/D6nJSyWB-xA\"></iframe>\n" +
+                "SECOND\n" +
+                "<iframe src=\"//www.youtube.com/embed/jplkJIHPGos\"></iframe>\n" +
+                "END";
+
+        given(markdownService.renderToHtml(encoded)).willReturn(encoded);
+
+        assertThat(renderer.render(encoded), equalTo(decoded));
     }
 
     @Test
