@@ -1390,6 +1390,11 @@ form.lpeRegForm .mktInput {
   width: 24.153%;
   margin: 40px 1% 40px 0;
 }
+@-moz-document url-prefix() {
+  .platform-project .project--container {
+    width: 22%;
+  }
+}
 .platform-project .project--container:last-child {
   margin-right: 0;
 }
