@@ -20,7 +20,18 @@ public class BlogPostContentRenderer {
 
     public String render(String content) {
         String html = markdownService.renderToHtml(content);
-        return renderCallouts(html);
+        return renderCallouts(decode(html));
+    }
+
+    private String decode(String html) {
+        Matcher matcher = Pattern.compile("<pre>!(.*)</pre>").matcher(html);
+
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(1).replace('{', '<').replace('}', '>'));
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 
     private String renderCallouts(String html) {
