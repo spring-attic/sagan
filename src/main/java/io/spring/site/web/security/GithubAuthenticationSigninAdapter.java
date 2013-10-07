@@ -43,8 +43,8 @@ public class GithubAuthenticationSigninAdapter implements SignInAdapter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             return path;
 
-        } catch (RestClientException e) {
-            throw new BadCredentialsException("User not member of required org");
+        } catch (RestClientException ex) {
+            throw new BadCredentialsException("User not member of required org", ex);
         }
     }
 
