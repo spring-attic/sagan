@@ -488,7 +488,7 @@
     background-position: 77% 0;
   }
 }
-@media (max-width: 1060px) {
+@media (max-width: 1080px) {
   .tool-versions--wrapper .tool-versions--container .platform {
     border-right: none;
   }
