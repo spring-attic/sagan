@@ -13,6 +13,6 @@
 	},
 	"scripts": {
 		"test": "buster test -e node",
-		"postinstall": "bower install"
+		"prepublish": "bower install"
 	}
 }
