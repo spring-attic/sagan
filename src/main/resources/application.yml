@@ -141,4 +141,4 @@ elasticsearch:
 spring:
   profiles: acceptance
   database:
-    url: jdbc:hsqldb:mem:acceptancetestdb
+    url: jdbc:h2:mem:acceptancetestdb;MODE=PostgreSQL
