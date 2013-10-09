@@ -388,7 +388,7 @@ projects:
       apiDocUrl: NONE
       supportedVersions:
         - 0.5.0.BUILD-SNAPSHOT
-        - 0.5.0.M4
+        - 0.5.0.M5
 
     # ----------------------
     # Spring Data
