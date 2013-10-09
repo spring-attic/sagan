@@ -36,10 +36,10 @@
   <script type="text/javascript" th:src="@{/js/guide.js}" ></script>
   <meta name="google-site-verification" content="7qGntFPD9lWAVCtUu5U77v4l68PsTHf6xpzgjQv2j2M" />
   <script th:inline="javascript">
-  (function () {
-    var baseUrl = /*[[@{/}]]*/ '';
-    this.curl = { baseUrl: baseUrl, main: 'run' };
-  }(this));
+  (function (global) {
+    var baseUrl = /*[[@{/}]]*/ '../static/';
+    global.curl = { baseUrl: baseUrl, main: 'run' };
+  }(window));
   </script>
   <script th:src="@{/lib/curl/src/curl.js}" ></script>
   <script>
