@@ -20,9 +20,9 @@ public class DatabaseConfiguration {
     public DataSource dataSource() {
         org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
 
-        boolean inMemory = this.environment.acceptsProfiles(this.environment
-                .getDefaultProfiles())
-                || this.environment.acceptsProfiles("acceptance");
+        boolean inMemory =
+                this.environment.acceptsProfiles(this.environment.getDefaultProfiles())
+                        || this.environment.acceptsProfiles("acceptance");
 
         if (inMemory) {
             dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
