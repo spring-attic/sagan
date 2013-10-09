@@ -4,6 +4,7 @@ applications:
   memory: 2G
   instances: 1
   env:
+    GITHUB_CLIENT_ID: 42691b6b79a6387014ef
     SPRING_PROFILES_ACTIVE: site,production
     NEW_RELIC_APP_NAME: sagan-blue;sagan
   host: sagan-production-blue
@@ -14,6 +15,7 @@ applications:
   memory: 2G
   instances: 1
   env:
+    GITHUB_CLIENT_ID: 42691b6b79a6387014ef
     SPRING_PROFILES_ACTIVE: site,production
     NEW_RELIC_APP_NAME: sagan-green;sagan
   host: sagan-production-green
