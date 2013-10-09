@@ -1,43 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="LOG_FILE" value="logs/spring.io.logfile"/>
-    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } [%t] --- %-40.40logger{39} : %m%n%wex"/>
+    <!-- set the LOG_FILE property that will be used by the base.xml include below -->
+    <property name="LOG_FILE" value="logs/application_log"/>
 
-    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <!-- pick up reasonable defaults provided by Spring Boot -->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <logger name="io.spring.site" level="INFO" />
-    <logger name="org.apache.http" level="WARN" />
+    <!-- log at INFO by default -->
+    <root level="INFO"/>
 
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>${LOG_PATTERN}</pattern>
-        </encoder>
-    </appender>
+    <!-- Apache HttpClient is too verbose at INFO level -->
+    <logger level="WARN" name="org.apache.http"/>
 
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <prudent>true</prudent>
+    <!-- log high-level information about application startup time, whether from
+         Boot's main class or the site's main class. The former is in play when
+         running with `java -jar`; the latter when running from within the IDE -->
+    <logger level="INFO" name="io.spring.site.web.configuration.ApplicationConfiguration"/>
+    <logger level="INFO" name="org.springframework.boot.SpringApplication"/>
 
-        <file>${LOG_FILE}</file>
+    <!-- log generated password for admin endpoints -->
+    <logger level="INFO" name="org.springframework.boot.actuate.autoconfigure.SecurityAutoConfiguration$AuthenticationManagerConfiguration"/>
 
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>1</maxHistory>
-        </rollingPolicy>
-
-        <encoder>
-            <pattern>${LOG_PATTERN}</pattern>
-        </encoder>
-    </appender>
-
-    <root level="INFO">
-        <appender-ref ref="FILE" />
-        <appender-ref ref="CONSOLE" />
-    </root>
-
-    <logger name="org.hibernate.validator.internal.util.Version" level="WARN"/>
-    <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN"/>
-    <logger name="org.apache.tomcat.util.net.NioSelectorPool" level="WARN"/>
-    <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR"/>
 
 </configuration>
