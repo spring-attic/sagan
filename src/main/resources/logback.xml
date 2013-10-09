@@ -22,5 +22,4 @@
     <!-- log generated password for admin endpoints -->
     <logger level="INFO" name="org.springframework.boot.actuate.autoconfigure.SecurityAutoConfiguration$AuthenticationManagerConfiguration"/>
 
-
 </configuration>

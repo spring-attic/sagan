@@ -1,6 +1,6 @@
 package io.spring.site.web.configuration;
 
-import liquibase.integration.spring.SpringLiquibase;
+import com.googlecode.flyway.core.Flyway;
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class DatabaseConfiguration {
                         || this.environment.acceptsProfiles("acceptance");
 
         if (inMemory) {
-            dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
+            dataSource.setDriverClassName("org.h2.Driver");
         } else {
             dataSource.setDriverClassName("org.postgresql.Driver");
         }
@@ -39,13 +39,13 @@ public class DatabaseConfiguration {
             dataSource.setPassword(serviceInfo.getPassword());
         } else {
             if (inMemory) {
-                dataSource.setUrl("jdbc:hsqldb:mem:sagan-db");
+                dataSource.setUrl("jdbc:h2:mem:sagan;MODE=PostgreSQL");
                 dataSource.setUsername("sa");
                 dataSource.setPassword("");
             } else {
-                dataSource.setUrl("jdbc:postgresql://localhost:5432/sagan-db");
-                dataSource.setUsername("user");
-                dataSource.setPassword("changeme");
+                dataSource.setUrl("jdbc:postgresql://localhost:5432/sagan");
+                dataSource.setUsername("carl");
+                dataSource.setPassword("");
             }
         }
 
@@ -59,10 +59,11 @@ public class DatabaseConfiguration {
     }
 
     @Bean
-    public SpringLiquibase springLiquibase(DataSource dataSource) {
-        SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setDataSource(dataSource);
-        liquibase.setChangeLog("classpath:liquibase/changeset.yaml");
-        return liquibase;
+    public Flyway flyway() {
+        Flyway flyway = new Flyway();
+        flyway.setLocations("database");
+        flyway.setDataSource(dataSource());
+        flyway.migrate();
+        return flyway;
     }
 }
