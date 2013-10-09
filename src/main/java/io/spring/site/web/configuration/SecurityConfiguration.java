@@ -129,9 +129,9 @@ public class SecurityConfiguration {
         }
 
         private boolean isForceHttps() {
-            return !this.environment.acceptsProfiles(this.environment
-                    .getDefaultProfiles())
-                    && !this.environment.acceptsProfiles("acceptance");
+            return !this.environment.acceptsProfiles(this.environment.getDefaultProfiles())
+                    && !this.environment.acceptsProfiles("acceptance")
+                    && !this.environment.acceptsProfiles("development");
         }
 
         @Bean
@@ -167,5 +167,4 @@ public class SecurityConfiguration {
         headers.contentTypeOptions().xssProtection().cacheControl()
                 .addHeaderWriter(writer).frameOptions();
     }
-
 }
