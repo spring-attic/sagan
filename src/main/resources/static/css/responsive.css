@@ -138,9 +138,7 @@
     word-break: normal;
     word-wrap: normal;
     white-space: pre;
-    overflow-x: auto;
     max-width: 97%;
-    display: inline-block;
   }
 
   .mobile-navigation--wrapper .navigation-drawer--container {
