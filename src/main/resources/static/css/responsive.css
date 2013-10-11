@@ -455,6 +455,9 @@
   .search-facets, .facets--clear-filters {
     display: none;
   }
+  .row-fluid .span8 {
+    width: 100%;
+  }
 }
 @media (min-width: 900px) and (max-width: 1180px) {
   .homepage--body .offset-feature--container.feature-guides {
