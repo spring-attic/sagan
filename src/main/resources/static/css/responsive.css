@@ -131,10 +131,6 @@
     margin-top: 60px;
   }
 
-  .copy-button {
-    display: none;
-  }
-
   .content--container pre {
     max-width: 94.9%;
   }
@@ -478,3 +474,9 @@
     background-position: 77% 0;
   }
 }
+@media (max-width: 1075px) {
+  .copy-button {
+    display: none;
+  }  
+}
+
