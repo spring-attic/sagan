@@ -143,6 +143,7 @@ projects:
     - id: spring-data-rest
       name: Spring Data REST
       groupId: org.springframework.data
+      artifactId: spring-data-rest-webmvc
       lead: ogierke
       refDocUrl: /spring-data/rest/docs/{version}/reference/html
       apiDocUrl: /spring-data/rest/docs/{version}/api/
