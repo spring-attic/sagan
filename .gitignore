@@ -27,4 +27,4 @@ logs/
 blog_importer/
 work/
 src/main/resources/static/lib/
-src/main/resources/static/node_modules/
+node_modules/
