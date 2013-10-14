@@ -27,7 +27,7 @@ applications:
   instances: 1
   env:
     SPRING_PROFILES_ACTIVE: indexer,production
-  host: sagan-indexer
+  host: production-sagan-indexer
   domain: cfapps.io
   path: ../target/spring-io-site.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
