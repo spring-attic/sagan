@@ -1,10 +1,11 @@
-define('run', ['curl'], function (curl) {
+(function (curl, baseUrl) {
 
     var cjsConfig = {
         loader: 'curl/loader/cjsm11'
     };
 
     curl.config({
+        baseUrl: baseUrl,
         packages: {
             curl: { location: 'lib/curl/src/curl/' },
             app: { location: 'app', config: cjsConfig }
@@ -23,4 +24,4 @@ define('run', ['curl'], function (curl) {
         console.log(ex);
     }
 
-});
+}(curl, baseUrl));
