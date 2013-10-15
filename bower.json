@@ -1,0 +1,7 @@
+{
+	"name": "spring.io",
+	"description": "bower components for spring.io UI.",
+	"dependencies": {
+		"curl": "~0.8"
+	}
+}

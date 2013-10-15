@@ -26,3 +26,5 @@ test.log
 logs/
 blog_importer/
 work/
+src/main/resources/static/lib/
+node_modules/
