@@ -34,49 +34,49 @@ public class IndexerSchedulerTests extends IndexerIntegrationTestBase {
         @Bean
         @Primary
         public ProjectDocumentationIndexer mockProjectDocumentationIndexer() {
-            return mock(ProjectDocumentationIndexer.class);
+            return Mockito.mock(ProjectDocumentationIndexer.class);
         }
 
         @Bean
         @Primary
         public GettingStartedGuideIndexer mockGettingStartedGuideIndexer() {
-            return mock(GettingStartedGuideIndexer.class);
+            return Mockito.mock(GettingStartedGuideIndexer.class);
         }
 
         @Bean
         @Primary
         public IndexerService mockIndexerService() {
-            return mock(IndexerService.class);
+            return Mockito.mock(IndexerService.class);
         }
 
         @Bean
         @Primary
         public ToolsIndexer mockToolsIndexer() {
-            return mock(ToolsIndexer.class);
+            return Mockito.mock(ToolsIndexer.class);
         }
 
         @Bean
         @Primary
         public StaticPageIndexer mockStaticPageIndexer() {
-            return mock(StaticPageIndexer.class);
+            return Mockito.mock(StaticPageIndexer.class);
         }
 
         @Bean
         @Primary
         public UnderstandingGuideIndexer mockUnderstandingGuideIndexer() {
-            return mock(UnderstandingGuideIndexer.class);
+            return Mockito.mock(UnderstandingGuideIndexer.class);
         }
 
         @Bean
         @Primary
         public TutorialIndexer mockTutorialIndexer() {
-            return mock(TutorialIndexer.class);
+            return Mockito.mock(TutorialIndexer.class);
         }
 
         @Bean
         @Primary
         public PublishedBlogPostsIndexer mockPublishedBlogPostsIndexer() {
-            return mock(PublishedBlogPostsIndexer.class);
+            return Mockito.mock(PublishedBlogPostsIndexer.class);
         }
     }
 
@@ -105,23 +105,23 @@ public class IndexerSchedulerTests extends IndexerIntegrationTestBase {
     @Test
     public void schedulerStartsTheIndexers() throws Exception {
         Thread.sleep(INDEXER_DELAY);
-        verify(indexerService).index(gettingStartedGuideIndexer);
-        verify(indexerService).index(projectDocumentationIndexer);
-        verify(indexerService).index(toolsIndexer);
-        verify(indexerService).index(staticPageIndexer);
-        verify(indexerService).index(understandingGuideIndexer);
-        verify(indexerService).index(tutorialIndexer);
-        verify(indexerService).index(publishedBlogPostsIndexer);
+        Mockito.verify(indexerService).index(gettingStartedGuideIndexer);
+        Mockito.verify(indexerService).index(projectDocumentationIndexer);
+        Mockito.verify(indexerService).index(toolsIndexer);
+        Mockito.verify(indexerService).index(staticPageIndexer);
+        Mockito.verify(indexerService).index(understandingGuideIndexer);
+        Mockito.verify(indexerService).index(tutorialIndexer);
+        Mockito.verify(indexerService).index(publishedBlogPostsIndexer);
     }
 
     @Test
     public void indexerServiceRespectsTheConfiguredDelay() throws Exception {
-        verify(indexerService, never()).index(gettingStartedGuideIndexer);
-        verify(indexerService, never()).index(projectDocumentationIndexer);
-        verify(indexerService, never()).index(toolsIndexer);
-        verify(indexerService, never()).index(staticPageIndexer);
-        verify(indexerService, never()).index(understandingGuideIndexer);
-        verify(indexerService, never()).index(tutorialIndexer);
-        verify(indexerService, never()).index(publishedBlogPostsIndexer);
+        Mockito.verify(indexerService, Mockito.never()).index(gettingStartedGuideIndexer);
+        Mockito.verify(indexerService, Mockito.never()).index(projectDocumentationIndexer);
+        Mockito.verify(indexerService, Mockito.never()).index(toolsIndexer);
+        Mockito.verify(indexerService, Mockito.never()).index(staticPageIndexer);
+        Mockito.verify(indexerService, Mockito.never()).index(understandingGuideIndexer);
+        Mockito.verify(indexerService, Mockito.never()).index(tutorialIndexer);
+        Mockito.verify(indexerService, Mockito.never()).index(publishedBlogPostsIndexer);
     }
 }

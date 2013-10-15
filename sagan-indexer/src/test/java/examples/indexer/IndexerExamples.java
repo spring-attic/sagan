@@ -11,6 +11,7 @@ import io.spring.site.indexer.configuration.IndexerConfiguration;
 import io.spring.site.search.SearchResult;
 import io.spring.site.search.SearchResults;
 import io.spring.site.search.SearchService;
+import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -77,7 +78,7 @@ public class IndexerExamples {
     @Test
     public void gettingStartedGuideIndexer_indexableItems() {
         Iterable<Guide> items = this.gettingStartedGuideIndexer.indexableItems();
-        assertThat(Iterables.size(items), greaterThan(0));
+        MatcherAssert.assertThat(Iterables.size(items), greaterThan(0));
     }
 
     @Test
@@ -88,14 +89,14 @@ public class IndexerExamples {
 
         SearchResults searchResults = this.searchService.search("rest", new PageRequest(
                 0, 10), null);
-        assertThat(searchResults.getPage().getContent().size(), is(1));
+        MatcherAssert.assertThat(searchResults.getPage().getContent().size(), is(1));
     }
 
     @Test
     public void understandingGuideIndexer_indexableItems() {
         Iterable<UnderstandingGuide> items = this.understandingGuideIndexer
                 .indexableItems();
-        assertThat(Iterables.size(items), greaterThan(8));
+        MatcherAssert.assertThat(Iterables.size(items), greaterThan(8));
     }
 
     @Test

@@ -14,6 +14,7 @@ import io.spring.site.indexer.crawler.DocumentProcessor;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchService;
 import io.spring.site.test.FixtureLoader;
+import org.hamcrest.MatcherAssert;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -43,7 +44,7 @@ public class IndexerTests extends IntegrationTestBase {
         @Override
         public void crawl(String url, int linkDepth, DocumentProcessor processor) {
             try {
-                MvcResult response = IndexerTests.this.mockMvc.perform(get(url))
+                MvcResult response = IndexerTests.this.mockMvc.perform(MockMvcRequestBuilders.get(url))
                         .andReturn();
                 Document html = Jsoup.parse(response.getResponse().getContentAsString());
                 processor.process(html);
@@ -68,7 +69,7 @@ public class IndexerTests extends IntegrationTestBase {
     @Before
     public void setup() throws IOException {
         String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
-        stub(this.restTemplate.getForObject(anyString(), eq(String.class))).toReturn(
+        Mockito.stub(this.restTemplate.getForObject(Matchers.anyString(), Matchers.eq(String.class))).toReturn(
                 responseXml);
     }
 
@@ -79,75 +80,75 @@ public class IndexerTests extends IntegrationTestBase {
 
         toolsIndexer.indexItem("/tools");
 
-        assertThat(this.indexedEntry.getRawContent(), containsString("Tools"));
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), containsString("Tools"));
 
-        assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
-        assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
-        assertThat(this.indexedEntry.getRawContent(),
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
                 not(containsString("Documentation")));
-        assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
-        assertThat(this.indexedEntry.getRawContent(),
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
                 not(containsString("Trademark Standards")));
-        assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
     }
 
     @Test
     public void staticPagesAreNotIndexedWithHeaderOrFooterContent() throws Exception {
         StaticPageIndexer staticPageIndexer = new StaticPageIndexer(
                 this.stubCrawlerService, this.stubSearchService,
-                mock(StaticPagePathFinder.class));
+                Mockito.mock(StaticPagePathFinder.class));
 
         staticPageIndexer.indexItem("/about");
 
-        assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
-        assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
-        assertThat(this.indexedEntry.getRawContent(),
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
                 not(containsString("Documentation")));
-        assertThat(this.indexedEntry.getRawContent(), not(containsString("Tools")));
-        assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
-        assertThat(this.indexedEntry.getRawContent(),
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Tools")));
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
                 not(containsString("Trademark Standards")));
-        assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
     }
 
     @Test
     public void tutorialGuidesAreIndexed() throws Exception {
         TutorialIndexer tutorialIndexer = new TutorialIndexer(this.stubSearchService,
-                mock(GuidesService.class));
+                Mockito.mock(GuidesService.class));
 
         Guide restTutorial = new Guide("tut-rest", "rest", "Learn rest", "rest subtitle",
                 "This is the rest tutorial content", "");
         tutorialIndexer.indexItem(restTutorial);
 
-        assertThat(this.indexedEntry.getRawContent(),
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
                 equalTo("This is the rest tutorial content"));
-        assertThat(this.indexedEntry.getFacetPaths(),
+        MatcherAssert.assertThat(this.indexedEntry.getFacetPaths(),
                 containsInAnyOrder("Guides", "Guides/Tutorials"));
-        assertThat(this.indexedEntry.getTitle(), equalTo("Learn rest"));
-        assertThat(this.indexedEntry.getSubTitle(), equalTo("Tutorial"));
-        assertThat(this.indexedEntry.getSummary(),
+        MatcherAssert.assertThat(this.indexedEntry.getTitle(), equalTo("Learn rest"));
+        MatcherAssert.assertThat(this.indexedEntry.getSubTitle(), equalTo("Tutorial"));
+        MatcherAssert.assertThat(this.indexedEntry.getSummary(),
                 equalTo("This is the rest tutorial content"));
-        assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
+        MatcherAssert.assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
     }
 
     @Test
     public void gettingStartedGuidesAreIndexed() throws Exception {
         Indexer<Guide> tutorialIndexer = new GettingStartedGuideIndexer(
-                this.stubSearchService, mock(GuidesService.class));
+                this.stubSearchService, Mockito.mock(GuidesService.class));
 
         Guide restTutorial = new Guide("gs-rest-service", "rest-service",
                 "Learn about rest", "rest subtitle", "This is the rest guide content",
                 "This is the sidebar");
         tutorialIndexer.indexItem(restTutorial);
 
-        assertThat(this.indexedEntry.getRawContent(),
+        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
                 equalTo("This is the rest guide content"));
-        assertThat(this.indexedEntry.getFacetPaths(),
+        MatcherAssert.assertThat(this.indexedEntry.getFacetPaths(),
                 containsInAnyOrder("Guides", "Guides/Getting Started"));
-        assertThat(this.indexedEntry.getTitle(), equalTo("Learn about rest"));
-        assertThat(this.indexedEntry.getSubTitle(), equalTo("Getting Started Guide"));
-        assertThat(this.indexedEntry.getSummary(),
+        MatcherAssert.assertThat(this.indexedEntry.getTitle(), equalTo("Learn about rest"));
+        MatcherAssert.assertThat(this.indexedEntry.getSubTitle(), equalTo("Getting Started Guide"));
+        MatcherAssert.assertThat(this.indexedEntry.getSummary(),
                 equalTo("This is the rest guide content"));
-        assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
+        MatcherAssert.assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
     }
 }
