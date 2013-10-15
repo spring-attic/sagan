@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- set the LOG_FILE property that will be used by the base.xml include below -->
+    <property name="LOG_FILE" value="logs/application_log"/>
+
+    <!-- pick up reasonable defaults provided by Spring Boot -->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!-- log at INFO by default -->
+    <root level="INFO"/>
+
+    <!-- Apache HttpClient is too verbose at INFO level -->
+    <logger level="WARN" name="org.apache.http"/>
+
+    <!-- log high-level information about application startup time, whether from
+         Boot's main class or the site's main class. The former is in play when
+         running with `java -jar`; the latter when running from within the IDE -->
+    <logger level="INFO" name="sagan.app.site.ApplicationConfiguration"/>
+    <logger level="INFO" name="org.springframework.boot.SpringApplication"/>
+
+    <!-- log generated password for admin endpoints -->
+    <logger level="INFO" name="org.springframework.boot.actuate.autoconfigure.SecurityAutoConfiguration$AuthenticationManagerConfiguration"/>
+
+</configuration>
