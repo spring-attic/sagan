@@ -1,3 +1,4 @@
+/*global curl,baseUrl*/
 (function (curl, baseUrl) {
 
     var cjsConfig = {
@@ -14,7 +15,7 @@
 
     curl(['app/main']).then(start, fail);
 
-    function start (main) {
+    function start (/*main*/) {
         // TODO: are there any startup tasks at this level?
         console.log('it runs!');
     }
