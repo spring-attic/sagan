@@ -1,0 +1,29 @@
+buildscript {
+    ext.bootVersion = '0.5.0.M4'
+
+    repositories {
+        maven { url 'http://repo.spring.io/libs-milestone' }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${bootVersion}"
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    targetCompatibility = 1.7
+    sourceCompatibility = 1.7
+
+    repositories {
+        jcenter()
+        maven { url 'http://repo.spring.io/libs-milestone' }
+    }
+
+    dependencies {
+        compile 'org.slf4j:slf4j-api:1.7.5'
+        testCompile 'junit:junit:4.11'
+        testCompile 'org.hamcrest:hamcrest-library:1.3'
+    }
+}
+

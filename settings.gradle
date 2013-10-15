@@ -1,0 +1,3 @@
+rootProject.name = 'sagan'
+
+include 'api', 'site'

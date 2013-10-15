@@ -26,3 +26,7 @@ test.log
 logs/
 blog_importer/
 work/
+
+# Gradle
+.gradle
+/build
