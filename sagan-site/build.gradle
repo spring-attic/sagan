@@ -1,0 +1,53 @@
+apply plugin: 'spring-boot'
+apply plugin: 'application'
+apply from: '../gradle/integTest.gradle'
+apply from: '../gradle/deploy.gradle'
+
+mainClassName = 'sagan.app.site.ApplicationConfiguration'
+
+run {
+    systemProperties System.properties
+}
+
+springBoot {
+    backupSource = false
+    mainClass = mainClassName
+}
+
+dependencies {
+    compile project(':sagan-common')
+
+    compile "org.springframework.boot:spring-boot-starter-web:${vSpringBoot}"
+    compile "org.springframework.boot:spring-boot-starter-actuator:${vSpringBoot}"
+    compile "org.springframework.boot:spring-boot-starter-security:${vSpringBoot}"
+    compile "org.springframework.security:spring-security-acl:3.2.0.RC1"
+
+    // thymeleaf is used as the template engine for serving HTML
+    compile 'org.thymeleaf:thymeleaf-spring3:2.0.18'
+    compile 'org.thymeleaf:thymeleaf:2.0.18'
+    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.1.1'
+    compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute:1.2'
+    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.0.0'
+
+    // nekohtml is required for thymeleaf's LEGACYHTML5 mode
+    runtime 'net.sourceforge.nekohtml:nekohtml:1.9.15'
+
+    // for use in generating blog atom feeds
+    compile 'net.java.dev.rome:rome:1.0.0'
+
+    // for use by spring-social-github's OAuth2 support
+    // note that 'runtime' scope would be enough, but 'compile'
+    // helps override conflicting httpclient versions
+    compile "org.apache.httpcomponents:httpclient:${vHttpClient}"
+    compile "org.apache.httpcomponents:httpcore:${vHttpClient}"
+    compile "org.apache.httpcomponents:httpcore-nio:${vHttpClient}"
+
+    // for use in serving redirects; see urlrewrite.xml
+    compile 'org.tuckey:urlrewritefilter:4.0.3'
+
+    // for use in mocking http interactions
+    testCompile "org.springframework:spring-test:${vSpringCore}"
+
+    // pick up common test utility classes
+    testCompile project(':sagan-common').sourceSets.testUtil.output
+}
