@@ -240,8 +240,8 @@ projects:
       supportedVersions:
         - 3.0.0.BUILD-SNAPSHOT
         - 3.0.0.M3
-        - 2.2.6.BUILD-SNAPSHOT
-        - 2.2.5.RELEASE
+        - 2.2.7.BUILD-SNAPSHOT
+        - 2.2.6.RELEASE
         - 2.1.6.RELEASE
 
     # ----------------------
