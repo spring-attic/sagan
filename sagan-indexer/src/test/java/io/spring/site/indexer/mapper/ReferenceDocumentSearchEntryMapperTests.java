@@ -1,6 +1,7 @@
 package io.spring.site.indexer.mapper;
 
 import io.spring.site.domain.projects.ProjectReleaseBuilder;
+import io.spring.site.indexer.mapper.ReferenceDocumentSearchEntryMapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
