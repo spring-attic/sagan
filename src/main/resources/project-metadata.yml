@@ -386,7 +386,6 @@ projects:
       groupId: org.springframework.boot
       lead: dsyer # and pwebb
       refDocUrl: "{ghPagesBaseUrl}/{id}/docs/README.html"
-      apiDocUrl: NONE
       supportedVersions:
         - 0.5.0.BUILD-SNAPSHOT
         - 0.5.0.M5
