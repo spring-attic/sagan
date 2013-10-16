@@ -6,13 +6,14 @@
 	},
 	"devDependencies": {
 		"buster": "~0.7",
-		"bower": "~1"
+		"bower": "~1",
+    "jshint": "~2.1"
 	},
 	"directories": {
 		"test": "test"
 	},
 	"scripts": {
-		"test": "buster-test -e node",
+		"test": "jshint . && buster-test -e node",
 		"prepublish": "bower install"
 	}
 }
