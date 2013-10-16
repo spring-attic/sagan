@@ -13,33 +13,13 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'0.5.0.M4'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:'0.5.0.M4'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'0.5.0.M4'
-    compile group: 'org.springframework.security', name: 'spring-security-acl', version:'3.2.0.RC1'
-    compile group: 'org.springframework.social', name: 'spring-social-github', version:'1.0.0.M4'
-    compile group: 'org.thymeleaf', name: 'thymeleaf-spring3', version:'2.0.18'
-    compile group: 'org.thymeleaf', name: 'thymeleaf', version:'2.0.18'
-    compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version:'1.1.1'
-    compile group: 'com.github.mxab.thymeleaf.extras', name: 'thymeleaf-extras-data-attribute', version:'1.2'
-    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity3', version:'2.0.0'
-    compile group: 'net.java.dev.rome', name: 'rome', version:'1.0.0'
-    compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version:'1.9.15'
     compile(group: 'com.soulgalore', name: 'crawler', version:'1.5.1') {
         exclude(module: 'guice')
         exclude(module: 'commons-logging')
     }
-    compile group: 'com.google.guava', name: 'guava', version:'14.0.1'
     compile group: 'org.postgresql', name: 'postgresql', version:'9.2-1002-jdbc4'
     compile group: 'org.apache.tomcat', name: 'tomcat-jdbc', version:'7.0.42'
     compile group: 'org.elasticsearch', name: 'elasticsearch', version:'0.90.2'
-    compile group: 'org.yaml', name: 'snakeyaml', version:'1.12'
-    compile group: 'org.jsoup', name: 'jsoup', version:'1.7.2'
-    compile(group: 'org.springframework', name: 'spring-oxm', version:'4.0.0.M3') {
-        exclude(module: 'commons-lang')
-    }
-    compile(group: 'org.simpleframework', name: 'simple-xml', version:'2.7') {
-        exclude(module: 'stax')
-        exclude(module: 'stax-api')
-        exclude(module: 'xpp3')
-    }
     compile(group: 'io.searchbox', name: 'jest', version:'0.0.4') {
         exclude(module: 'commons-logging')
     }
@@ -47,9 +27,6 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version:'4.3-beta2'
     compile group: 'org.apache.httpcomponents', name: 'httpcore-nio', version:'4.3-beta2'
     compile group: 'org.cloudfoundry', name: 'cloudfoundry-runtime', version:'0.8.4'
-    compile group: 'joda-time', name: 'joda-time', version:'2.3'
-    compile group: 'org.tuckey', name: 'urlrewritefilter', version:'4.0.3'
-    compile group: 'com.googlecode.flyway', name: 'flyway-core', version:'2.2.1'
 
     compile project(':sagan-site')
     testCompile(project(":sagan-site").sourceSets.test.output)
