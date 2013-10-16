@@ -2,6 +2,7 @@ package io.spring.common.config;
 
 //import io.spring.site.search.SearchService;
 
+import io.spring.site.search.SearchService;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.node.NodeBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 
 public class InMemoryElasticSearchConfiguration {
 
-    //@Autowired
-    //private SearchService searchService;
+    @Autowired
+    private SearchService searchService;
 
     @Autowired
     private Client client;
@@ -28,11 +29,10 @@ public class InMemoryElasticSearchConfiguration {
         return client;
     }
 
-    // TODO: trying to avoid dragging SearchService into common
-    //@PostConstruct
-    //public void configureSearchService() {
-    //    searchService.setUseRefresh(true);
-    //}
+    @PostConstruct
+    public void configureSearchService() {
+        searchService.setUseRefresh(true);
+    }
 
     @PreDestroy
     public void closeClient() throws Exception {
