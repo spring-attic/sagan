@@ -1,18 +1,17 @@
 package io.spring.site.indexer.mapper;
 
-import org.hamcrest.core.IsEqual;
-import org.junit.Test;
-
 import io.spring.site.domain.understanding.UnderstandingGuide;
-import io.spring.site.indexer.mapper.UnderstandingGuideMapper;
 import io.spring.site.search.SearchEntry;
-import io.spring.site.test.FixtureLoader;
 
 import java.util.Date;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.equalTo;
+import org.hamcrest.core.IsEqual;
+import org.junit.Test;
+
+import utils.FixtureLoader;
+
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 public class UnderstandingGuideMapperTests {
     private UnderstandingGuideMapper guideMapper = new UnderstandingGuideMapper();

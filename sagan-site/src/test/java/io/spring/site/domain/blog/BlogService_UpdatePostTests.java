@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import utils.DateTestUtils;
+
 import io.spring.site.domain.blog.BlogService;
 import io.spring.site.domain.blog.Post;
 import io.spring.site.domain.blog.PostForm;
@@ -16,7 +18,6 @@ import io.spring.site.domain.blog.PostRepository;
 import io.spring.site.domain.services.DateService;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchService;
-import io.spring.site.test.DateTestUtils;
 
 import java.util.Date;
 

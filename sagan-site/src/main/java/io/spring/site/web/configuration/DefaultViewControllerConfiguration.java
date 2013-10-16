@@ -1,6 +1,7 @@
 package io.spring.site.web.configuration;
 
 import io.spring.site.domain.StaticPagePathFinder;
+import io.spring.site.domain.blog.BlogPostNotFoundException;
 import io.spring.site.web.NavSection;
 import io.spring.site.web.ViewRenderingHelper;
 
@@ -18,6 +19,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,7 +32,10 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 
+import static org.springframework.http.HttpStatus.*;
+
 @Configuration
+@ControllerAdvice
 public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter {
 
     @Autowired
@@ -43,6 +50,11 @@ public class DefaultViewControllerConfiguration extends WebMvcConfigurerAdapter 
     @Bean
     public DataAttributeDialect dataAttributeDialect() {
         return new DataAttributeDialect();
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(NOT_FOUND)
+    public void handleException(BlogPostNotFoundException ex) {
     }
 
     @Override

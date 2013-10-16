@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import io.spring.site.domain.services.DateService;
 import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.search.SearchService;
-import io.spring.site.web.blog.EntityNotFoundException;
 
 import java.util.Date;
 import java.util.List;
@@ -41,7 +40,7 @@ public class BlogService {
     public Post getPost(Long postId) {
         Post post = this.postRepository.findOne(postId);
         if (post == null) {
-            throw new EntityNotFoundException("Blog post not found with Id=" + postId);
+            throw new BlogPostNotFoundException(postId);
         }
         return post;
     }
@@ -54,7 +53,7 @@ public class BlogService {
         Post post = this.postRepository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug,
                 this.dateService.now());
         if (post == null) {
-            throw new EntityNotFoundException("Blog post not found with Id=" + publicSlug);
+            throw new BlogPostNotFoundException(publicSlug);
         }
         return post;
     }

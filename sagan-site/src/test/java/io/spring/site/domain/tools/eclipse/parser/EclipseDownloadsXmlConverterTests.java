@@ -5,11 +5,12 @@ import io.spring.site.domain.tools.eclipse.EclipsePackage;
 import io.spring.site.domain.tools.eclipse.EclipsePlatform;
 import io.spring.site.domain.tools.eclipse.EclipseRelease;
 import io.spring.site.domain.tools.eclipse.xml.EclipseXml;
-import io.spring.site.test.FixtureLoader;
 import org.junit.Before;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+
+import utils.FixtureLoader;
 
 import java.util.List;
 import java.util.Map;

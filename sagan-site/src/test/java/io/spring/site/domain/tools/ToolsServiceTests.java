@@ -5,7 +5,6 @@ import io.spring.site.domain.tools.toolsuite.DownloadLink;
 import io.spring.site.domain.tools.toolsuite.EclipseVersion;
 import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
 import io.spring.site.domain.tools.toolsuite.ToolSuitePlatform;
-import io.spring.site.test.FixtureLoader;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +13,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.springframework.web.client.RestTemplate;
+
+import utils.FixtureLoader;
 
 import java.util.List;
 

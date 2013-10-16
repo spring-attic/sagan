@@ -1,4 +1,4 @@
-package io.spring.site.test;
+package utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

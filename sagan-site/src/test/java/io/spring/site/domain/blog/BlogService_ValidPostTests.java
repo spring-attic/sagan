@@ -11,6 +11,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import utils.DateTestUtils;
+
 import io.spring.site.domain.blog.BlogService;
 import io.spring.site.domain.blog.Post;
 import io.spring.site.domain.blog.PostForm;
@@ -20,7 +22,6 @@ import io.spring.site.domain.services.DateService;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchException;
 import io.spring.site.search.SearchService;
-import io.spring.site.test.DateTestUtils;
 
 import java.util.Date;
 

@@ -1,9 +1,10 @@
 package io.spring.site.domain.tools.toolsuite.xml;
 
-import io.spring.site.test.FixtureLoader;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+
+import utils.FixtureLoader;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

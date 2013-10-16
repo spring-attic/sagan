@@ -1,10 +1,28 @@
 
 dependencies {
+    compile 'org.springframework:spring-context:4.0.0.M3'
+    compile 'org.springframework.security:spring-security-core:3.2.0.RC1'
+    compile 'org.springframework.social:spring-social-github:1.0.0.M4'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:0.5.0.M4'
+
     compile 'org.elasticsearch:elasticsearch:0.90.2'
     compile('io.searchbox:jest:0.0.4') {
         exclude(module: 'commons-logging')
     }
     compile 'org.cloudfoundry:cloudfoundry-runtime:0.8.4'
-    compile 'org.springframework:spring-context:4.0.0.M3'
+
     compile 'org.apache.tomcat:tomcat-jdbc:7.0.42'
+    runtime group: 'org.postgresql', name: 'postgresql', version:'9.2-1002-jdbc4'
+    runtime group: 'com.h2database', name: 'h2', version:'1.3.173'
+
+    compile(group: 'org.simpleframework', name: 'simple-xml', version:'2.7') {
+        exclude(module: 'stax')
+        exclude(module: 'stax-api')
+        exclude(module: 'xpp3')
+    }
+
+    compile 'org.jsoup:jsoup:1.7.2'
+    compile 'org.yaml:snakeyaml:1.12'
+    compile 'joda-time:joda-time:2.3'
+    compile 'org.hibernate:hibernate-validator:4.3.1.Final'
 }

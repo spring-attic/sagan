@@ -3,8 +3,9 @@ package io.spring.site.domain.blog;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import utils.DateTestUtils;
+
 import io.spring.site.domain.blog.Post;
-import io.spring.site.test.DateTestUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

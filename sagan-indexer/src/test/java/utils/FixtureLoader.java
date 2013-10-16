@@ -1,4 +1,4 @@
-package io.spring.site.test;
+package utils;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StreamUtils;
