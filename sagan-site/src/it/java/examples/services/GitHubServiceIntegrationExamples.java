@@ -83,7 +83,7 @@ public class GitHubServiceIntegrationExamples {
     @Test
     public void fetchRepoContents() throws Exception {
         List<RepoContent> repoContents = this.gitHubService
-                .getRepoContents("understanding");
+                .getRepoContents("fixtures/understanding");
         assertThat(repoContents.size(), greaterThan(8));
     }
 

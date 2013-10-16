@@ -24,7 +24,7 @@ public class UnderstandingGuidesTests extends IntegrationTestBase {
         String sidebarHtml = FixtureLoader.load("/fixtures/understanding/amqp/SIDEBAR.html");
         stubRestClient.putResponse("/repos/spring-guides/understanding/contents/amqp/SIDEBAR.md", sidebarHtml);
 
-        MvcResult response = this.mockMvc.perform(get("/understanding/AMqp"))
+        MvcResult response = this.mockMvc.perform(get("/fixtures/understanding/AMqp"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andReturn();
@@ -37,7 +37,7 @@ public class UnderstandingGuidesTests extends IntegrationTestBase {
 
     @Test
     public void nonExistentGuideReturns404() throws Exception {
-        this.mockMvc.perform(get("/understanding/non_existent"))
+        this.mockMvc.perform(get("/fixtures/understanding/non_existent"))
                 .andExpect(status().isNotFound())
                 .andReturn();
     }

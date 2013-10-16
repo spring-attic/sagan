@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import io.spring.site.domain.services.github.GitHubService;
 import io.spring.site.domain.services.github.RepoContent;
-import io.spring.site.domain.understanding.UnderstandingGuide;
-import io.spring.site.domain.understanding.UnderstandingGuidesService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +27,7 @@ public class UnderstandingGuidesServiceTests {
         addRepoContent(repoContents, "rest", "rest", "dir");
         addRepoContent(repoContents, "README.src", "README.src", "file");
         addRepoContent(repoContents, "README.md", "README.md", "file");
-        given(gitHubService.getRepoContents("understanding")).willReturn(repoContents);
+        given(gitHubService.getRepoContents("fixtures/understanding")).willReturn(repoContents);
     }
 
     @Test

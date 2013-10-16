@@ -53,7 +53,7 @@ public class UnderstandingGuideMapperTests {
 
     @Test
     public void hasPath() throws Exception {
-        assertThat(entry.getPath(), equalTo("understanding/foo"));
+        assertThat(entry.getPath(), equalTo("fixtures/understanding/foo"));
     }
 
     @Test

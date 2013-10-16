@@ -65,4 +65,6 @@ dependencies {
     itCompile configurations.testCompile
     itRuntime configurations.runtime
     itRuntime configurations.testRuntime
+
+    testCompile project(':sagan-common').sourceSets.util.output
 }

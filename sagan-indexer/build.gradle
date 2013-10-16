@@ -24,6 +24,8 @@ dependencies {
 
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test:${vSpringCore}"
+
+    testRuntime project(':sagan-common').sourceSets.util.output
 }
 
 task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processResources) {
