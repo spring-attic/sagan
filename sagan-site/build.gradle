@@ -1,7 +1,7 @@
 apply plugin: 'spring-boot'
 apply plugin: 'application'
 
-mainClassName = 'io.spring.site.web.config.ApplicationConfiguration'
+mainClassName = 'io.spring.site.web.configuration.ApplicationConfiguration'
 
 springBoot {
     backupSource = false
