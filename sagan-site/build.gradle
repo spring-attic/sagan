@@ -16,6 +16,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-security:${vSpringBoot}"
     compile "org.springframework.security:spring-security-acl:3.2.0.RC1"
 
+    // thymeleaf is used as the template engine for serving HTML
     compile 'org.thymeleaf:thymeleaf-spring3:2.0.18'
     compile 'org.thymeleaf:thymeleaf:2.0.18'
     compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.1.1'
@@ -28,10 +29,15 @@ dependencies {
     // for use in generating blog atom feeds
     compile 'net.java.dev.rome:rome:1.0.0'
 
+    // for use by spring-social-github's OAuth2 support
     runtime "org.apache.httpcomponents:httpclient:${vHttpClient}"
 
+    // for use in serving redirects; see urlrewrite.xml
     compile 'org.tuckey:urlrewritefilter:4.0.3'
+
+    // for use in on-the-fly database setup and migrations
     compile 'com.googlecode.flyway:flyway-core:2.2.1'
 
+    // for use in mocking http interactions
     testCompile "org.springframework:spring-test:${vSpringCore}"
 }
