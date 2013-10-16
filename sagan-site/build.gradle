@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.Test
+
 apply plugin: 'spring-boot'
 apply plugin: 'application'
 
@@ -7,6 +9,23 @@ springBoot {
     backupSource = false
     mainClass = mainClassName
 }
+
+sourceSets { x ->
+    it
+}
+
+task it(type: Test) {
+    description = "Runs the integration tests."
+
+    testClassesDir = sourceSets['it'].output.classesDir
+    classpath = sourceSets['it'].runtimeClasspath
+
+    // ensure we don't overwrite default report directories used by 'test' task
+    reports.html.destination = "${project.buildDir}/reports/it"
+    reports.junitXml.destination = "${project.buildDir}/it-results"
+}
+
+check.dependsOn it
 
 dependencies {
     compile project(':sagan-common')
@@ -37,4 +56,11 @@ dependencies {
 
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test:${vSpringCore}"
+
+    itCompile configurations.compile
+    itCompile configurations.testCompile
+    itCompile sourceSets.main.output
+    itCompile sourceSets.test.output
+    itRuntime configurations.runtime
+    itRuntime configurations.testRuntime
 }
