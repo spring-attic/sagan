@@ -1,11 +1,13 @@
 buildscript {
-    ext.bootVersion = '0.5.0.M4'
+    ext.vSpringBoot = '0.5.0.M4'
+    ext.vSpringCore = '4.0.0.M3'
+    ext.vHttpClient = '4.3-beta2'
 
     repositories {
         maven { url 'http://repo.spring.io/libs-milestone' }
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:${bootVersion}"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${vSpringBoot}"
     }
 }
 

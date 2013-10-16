@@ -11,10 +11,10 @@ springBoot {
 dependencies {
     compile project(':sagan-common')
 
-    compile 'org.springframework.boot:spring-boot-starter-web:0.5.0.M4'
-    compile 'org.springframework.boot:spring-boot-starter-actuator:0.5.0.M4'
-    compile 'org.springframework.boot:spring-boot-starter-security:0.5.0.M4'
-    compile 'org.springframework.security:spring-security-acl:3.2.0.RC1'
+    compile "org.springframework.boot:spring-boot-starter-web:${vSpringBoot}"
+    compile "org.springframework.boot:spring-boot-starter-actuator:${vSpringBoot}"
+    compile "org.springframework.boot:spring-boot-starter-security:${vSpringBoot}"
+    compile "org.springframework.security:spring-security-acl:3.2.0.RC1"
 
     compile 'org.thymeleaf:thymeleaf-spring3:2.0.18'
     compile 'org.thymeleaf:thymeleaf:2.0.18'
@@ -29,16 +29,14 @@ dependencies {
 
     compile 'com.google.guava:guava:14.0.1'
 
-    compile('org.springframework:spring-oxm:4.0.0.M3') {
+    compile("org.springframework:spring-oxm:${vSpringCore}") {
         exclude(module: 'commons-lang')
     }
 
-    compile 'org.apache.httpcomponents:httpclient:4.3-beta2'
-    compile 'org.apache.httpcomponents:httpcore:4.3-beta2'
-    compile 'org.apache.httpcomponents:httpcore-nio:4.3-beta2'
+    runtime "org.apache.httpcomponents:httpclient:${vHttpClient}"
 
     compile 'org.tuckey:urlrewritefilter:4.0.3'
     compile 'com.googlecode.flyway:flyway-core:2.2.1'
 
-    testCompile 'org.springframework:spring-test:4.0.0.M3'
+    testCompile "org.springframework:spring-test:${vSpringCore}"
 }
