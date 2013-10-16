@@ -5,14 +5,14 @@
 		"cram": "~0"
 	},
 	"devDependencies": {
-		"buster": "~0.6",
+		"buster": "~0.7",
 		"bower": "~1"
 	},
 	"directories": {
 		"test": "test"
 	},
 	"scripts": {
-		"test": "buster test -e node",
+		"test": "buster-test -e node",
 		"prepublish": "bower install"
 	}
 }
