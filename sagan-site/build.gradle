@@ -8,10 +8,6 @@ springBoot {
     mainClass = mainClassName
 }
 
-test {
-    maxHeapSize = '1024m'
-}
-
 dependencies {
     compile project(':sagan-common')
 
