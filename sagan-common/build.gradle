@@ -12,10 +12,10 @@ dependencies {
     compile 'org.cloudfoundry:cloudfoundry-runtime:0.8.4'
 
     compile 'org.apache.tomcat:tomcat-jdbc:7.0.42'
-    runtime group: 'org.postgresql', name: 'postgresql', version:'9.2-1002-jdbc4'
-    runtime group: 'com.h2database', name: 'h2', version:'1.3.173'
+    runtime 'org.postgresql:postgresql:9.2-1002-jdbc4'
+    runtime 'com.h2database:h2:1.3.173'
 
-    compile(group: 'org.simpleframework', name: 'simple-xml', version:'2.7') {
+    compile('org.simpleframework:simple-xml:2.7') {
         exclude(module: 'stax')
         exclude(module: 'stax-api')
         exclude(module: 'xpp3')

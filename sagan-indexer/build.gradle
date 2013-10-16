@@ -11,17 +11,17 @@ springBoot {
 dependencies {
     compile project(':sagan-common')
 
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'0.5.0.M4'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'0.5.0.M4'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:'0.5.0.M4'
-    compile(group: 'com.soulgalore', name: 'crawler', version:'1.5.1') {
+    compile 'org.springframework.boot:spring-boot-starter-web:0.5.0.M4'
+    compile 'org.springframework.boot:spring-boot-starter-actuator:0.5.0.M4'
+    compile 'org.springframework.boot:spring-boot-starter-security:0.5.0.M4'
+    compile('com.soulgalore:crawler:1.5.1') {
         exclude(module: 'guice')
         exclude(module: 'commons-logging')
     }
 
-    compile group: 'org.apache.httpcomponents', name: 'httpclient', version:'4.3-beta2'
-    compile group: 'org.apache.httpcomponents', name: 'httpcore', version:'4.3-beta2'
-    compile group: 'org.apache.httpcomponents', name: 'httpcore-nio', version:'4.3-beta2'
+    compile 'org.apache.httpcomponents:httpclient:4.3-beta2'
+    compile 'org.apache.httpcomponents:httpcore:4.3-beta2'
+    compile 'org.apache.httpcomponents:httpcore-nio:4.3-beta2'
 
-    testCompile group: 'org.springframework', name: 'spring-test', version:'4.0.0.M3'
+    testCompile 'org.springframework:spring-test:4.0.0.M3'
 }
