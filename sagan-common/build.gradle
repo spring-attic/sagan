@@ -1,3 +1,6 @@
+sourceSets {
+    util
+}
 
 dependencies {
     compile 'org.springframework:spring-context:4.0.0.M3'
@@ -29,4 +32,8 @@ dependencies {
     compile 'org.yaml:snakeyaml:1.12'
     compile 'joda-time:joda-time:2.3'
     compile 'org.hibernate:hibernate-validator:4.3.1.Final'
+
+    utilCompile sourceSets.main.output
+    utilCompile configurations.compile
+    utilRuntime configurations.runtime
 }

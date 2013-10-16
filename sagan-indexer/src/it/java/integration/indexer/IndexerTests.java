@@ -1,6 +1,5 @@
 package integration.indexer;
 
-import integration.IntegrationTestBase;
 import io.spring.site.domain.StaticPagePathFinder;
 import io.spring.site.domain.guides.Guide;
 import io.spring.site.domain.guides.GuidesService;
@@ -13,8 +12,6 @@ import io.spring.site.indexer.crawler.CrawlerService;
 import io.spring.site.indexer.crawler.DocumentProcessor;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchService;
-import io.spring.site.test.FixtureLoader;
-import org.hamcrest.MatcherAssert;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -22,6 +19,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.client.RestTemplate;
+import utils.FixtureLoader;
 
 import java.io.IOException;
 import java.util.Date;
@@ -76,14 +74,14 @@ public class IndexerTests extends IntegrationTestBase {
 
         assertThat(this.indexedEntry.getRawContent(), containsString("Tools"));
 
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
+        assertThat(this.indexedEntry.getRawContent(),
                 not(containsString("Documentation")));
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
+        assertThat(this.indexedEntry.getRawContent(),
                 not(containsString("Trademark Standards")));
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
     }
 
     @Test
@@ -94,15 +92,15 @@ public class IndexerTests extends IntegrationTestBase {
 
         staticPageIndexer.indexItem("/about");
 
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
+        assertThat(this.indexedEntry.getRawContent(),
                 not(containsString("Documentation")));
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Tools")));
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Tools")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Privacy")));
+        assertThat(this.indexedEntry.getRawContent(),
                 not(containsString("Trademark Standards")));
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
+        assertThat(this.indexedEntry.getRawContent(), not(containsString("Terms of Use")));
     }
 
     @Test
@@ -114,15 +112,15 @@ public class IndexerTests extends IntegrationTestBase {
                 "This is the rest tutorial content", "");
         tutorialIndexer.indexItem(restTutorial);
 
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
+        assertThat(this.indexedEntry.getRawContent(),
                 equalTo("This is the rest tutorial content"));
-        MatcherAssert.assertThat(this.indexedEntry.getFacetPaths(),
+        assertThat(this.indexedEntry.getFacetPaths(),
                 containsInAnyOrder("Guides", "Guides/Tutorials"));
-        MatcherAssert.assertThat(this.indexedEntry.getTitle(), equalTo("Learn rest"));
-        MatcherAssert.assertThat(this.indexedEntry.getSubTitle(), equalTo("Tutorial"));
-        MatcherAssert.assertThat(this.indexedEntry.getSummary(),
+        assertThat(this.indexedEntry.getTitle(), equalTo("Learn rest"));
+        assertThat(this.indexedEntry.getSubTitle(), equalTo("Tutorial"));
+        assertThat(this.indexedEntry.getSummary(),
                 equalTo("This is the rest tutorial content"));
-        MatcherAssert.assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
+        assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
     }
 
     @Test
@@ -135,14 +133,14 @@ public class IndexerTests extends IntegrationTestBase {
                 "This is the sidebar");
         tutorialIndexer.indexItem(restTutorial);
 
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(),
+        assertThat(this.indexedEntry.getRawContent(),
                 equalTo("This is the rest guide content"));
-        MatcherAssert.assertThat(this.indexedEntry.getFacetPaths(),
+        assertThat(this.indexedEntry.getFacetPaths(),
                 containsInAnyOrder("Guides", "Guides/Getting Started"));
-        MatcherAssert.assertThat(this.indexedEntry.getTitle(), equalTo("Learn about rest"));
-        MatcherAssert.assertThat(this.indexedEntry.getSubTitle(), equalTo("Getting Started Guide"));
-        MatcherAssert.assertThat(this.indexedEntry.getSummary(),
+        assertThat(this.indexedEntry.getTitle(), equalTo("Learn about rest"));
+        assertThat(this.indexedEntry.getSubTitle(), equalTo("Getting Started Guide"));
+        assertThat(this.indexedEntry.getSummary(),
                 equalTo("This is the rest guide content"));
-        MatcherAssert.assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
+        assertThat(this.indexedEntry.getPublishAt(), equalTo(new Date(0L)));
     }
 }

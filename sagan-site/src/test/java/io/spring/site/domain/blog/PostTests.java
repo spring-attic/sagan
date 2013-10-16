@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import utils.DateTestUtils;
 
-import io.spring.site.domain.blog.Post;
+import utils.PostBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

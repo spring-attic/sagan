@@ -2,7 +2,7 @@ package integration.blog;
 
 import integration.IntegrationTestBase;
 import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostBuilder;
+import utils.PostBuilder;
 import io.spring.site.domain.blog.PostRepository;
 
 import org.jsoup.Jsoup;

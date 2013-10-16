@@ -67,6 +67,12 @@ public class Post implements Serializable {
         this.category = category;
     }
 
+    /* For testing only */
+    public Post(Long id, String title, String content, PostCategory category) {
+        this(title, content, category);
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

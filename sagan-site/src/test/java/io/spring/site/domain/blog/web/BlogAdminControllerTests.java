@@ -16,7 +16,7 @@ import org.springframework.validation.MapBindingResult;
 
 import io.spring.site.domain.blog.BlogService;
 import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostBuilder;
+import utils.PostBuilder;
 import io.spring.site.domain.blog.PostCategory;
 import io.spring.site.domain.blog.PostForm;
 import io.spring.site.domain.services.DateService;
@@ -28,7 +28,6 @@ import io.spring.site.web.blog.PostView;
 import io.spring.site.web.blog.PostViewFactory;
 
 import java.security.Principal;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 

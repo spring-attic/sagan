@@ -8,12 +8,6 @@ import io.spring.site.indexer.mapper.WebDocumentSearchEntryMapper;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchResult;
 import io.spring.site.search.SearchService;
-import io.spring.site.web.search.SearchEntryBuilder;
-
-import java.text.ParseException;
-import java.util.Collections;
-import java.util.List;
-
 import org.jsoup.nodes.Document;
 import org.junit.After;
 import org.junit.ClassRule;
@@ -31,15 +25,16 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
 import utils.LongRunning;
+import utils.SearchEntryBuilder;
 import utils.SetSystemProperty;
 
+import java.text.ParseException;
+import java.util.Collections;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

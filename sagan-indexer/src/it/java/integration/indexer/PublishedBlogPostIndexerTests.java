@@ -2,7 +2,6 @@ package integration.indexer;
 
 import integration.IndexerIntegrationTestBase;
 import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostBuilder;
 import io.spring.site.domain.blog.PostCategory;
 import io.spring.site.domain.blog.PostRepository;
 import io.spring.site.indexer.PublishedBlogPostsIndexer;
@@ -15,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
+import utils.PostBuilder;
 
 import java.util.Calendar;
 import java.util.Date;

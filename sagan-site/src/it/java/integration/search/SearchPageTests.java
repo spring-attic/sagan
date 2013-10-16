@@ -3,7 +3,7 @@ package integration.search;
 import integration.IntegrationTestBase;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchService;
-import io.spring.site.web.search.SearchEntryBuilder;
+import utils.SearchEntryBuilder;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

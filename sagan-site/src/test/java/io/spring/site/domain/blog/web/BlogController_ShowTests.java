@@ -1,7 +1,7 @@
 package io.spring.site.domain.blog.web;
 
 import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostBuilder;
+import utils.PostBuilder;
 import io.spring.site.domain.blog.PostCategory;
 import io.spring.site.domain.services.DateService;
 import io.spring.site.web.blog.BlogController;

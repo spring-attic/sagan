@@ -1,13 +1,10 @@
 package examples.services;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import io.spring.site.domain.services.github.GitHubService;
 import io.spring.site.domain.services.github.RepoContent;
 import io.spring.site.web.configuration.ApplicationConfiguration;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 import org.jsoup.Jsoup;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -19,17 +16,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
 import utils.LongRunning;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

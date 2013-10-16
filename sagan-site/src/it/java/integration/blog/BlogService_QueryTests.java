@@ -6,7 +6,6 @@ import io.spring.site.domain.services.DateService;
 import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.search.SearchService;
 import io.spring.site.web.PageableFactory;
-import io.spring.site.web.blog.EntityNotFoundException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import utils.PostBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

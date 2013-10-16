@@ -1,4 +1,4 @@
-package integration.search;
+package utils;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;

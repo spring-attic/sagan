@@ -1,7 +1,8 @@
-package io.spring.site.domain.blog;
+package utils;
 
+import io.spring.site.domain.blog.Post;
+import io.spring.site.domain.blog.PostCategory;
 import io.spring.site.domain.team.MemberProfile;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -119,7 +120,7 @@ public class PostBuilder {
     }
 
     public Post build() {
-        Post post = new Post(title, rawContent, category);
+        Post post = new Post(id, title, rawContent, category);
         post.setAuthor(author);
         post.setRenderedContent(renderedContent);
         post.setRenderedSummary(renderedSummary);
@@ -129,8 +130,6 @@ public class PostBuilder {
         post.setBroadcast(broadcast);
         post.setDraft(draft);
         post.setPublishAt(publishAt);
-
-        ReflectionTestUtils.setField(post, "id", this.id);
 
         return post;
     }

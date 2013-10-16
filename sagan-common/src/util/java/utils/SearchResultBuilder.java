@@ -1,4 +1,4 @@
-package io.spring.site.web.search;
+package utils;
 
 import io.spring.site.search.SearchResult;
 

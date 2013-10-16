@@ -7,7 +7,7 @@ import io.spring.site.search.SearchFacet;
 import io.spring.site.search.SearchResult;
 import io.spring.site.search.SearchResults;
 import io.spring.site.search.SearchService;
-import io.spring.site.web.search.SearchEntryBuilder;
+import utils.SearchEntryBuilder;
 
 import org.junit.After;
 import org.junit.Before;
@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import utils.SearchIndexSetup;
 
 import java.text.ParseException;
 import java.util.ArrayList;

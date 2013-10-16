@@ -1,7 +1,6 @@
 package examples.indexer;
 
 import com.google.common.collect.Iterables;
-import integration.search.SearchIndexSetup;
 import io.searchbox.client.JestClient;
 import io.spring.site.domain.guides.Guide;
 import io.spring.site.domain.understanding.UnderstandingGuide;
@@ -11,7 +10,6 @@ import io.spring.site.indexer.configuration.IndexerConfiguration;
 import io.spring.site.search.SearchResult;
 import io.spring.site.search.SearchResults;
 import io.spring.site.search.SearchService;
-import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -27,6 +25,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import utils.LongRunning;
+import utils.SearchIndexSetup;
 import utils.SetSystemProperty;
 
 import java.util.List;
@@ -78,7 +77,7 @@ public class IndexerExamples {
     @Test
     public void gettingStartedGuideIndexer_indexableItems() {
         Iterable<Guide> items = this.gettingStartedGuideIndexer.indexableItems();
-        MatcherAssert.assertThat(Iterables.size(items), greaterThan(0));
+        assertThat(Iterables.size(items), greaterThan(0));
     }
 
     @Test
@@ -89,14 +88,14 @@ public class IndexerExamples {
 
         SearchResults searchResults = this.searchService.search("rest", new PageRequest(
                 0, 10), null);
-        MatcherAssert.assertThat(searchResults.getPage().getContent().size(), is(1));
+        assertThat(searchResults.getPage().getContent().size(), is(1));
     }
 
     @Test
     public void understandingGuideIndexer_indexableItems() {
         Iterable<UnderstandingGuide> items = this.understandingGuideIndexer
                 .indexableItems();
-        MatcherAssert.assertThat(Iterables.size(items), greaterThan(8));
+        assertThat(Iterables.size(items), greaterThan(8));
     }
 
     @Test
