@@ -25,3 +25,13 @@ dependencies {
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test:${vSpringCore}"
 }
+
+task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processResources) {
+    description = "Copies static html templates from :sagan-site in order to index them"
+
+    from project(':sagan-site').sourceSets.main.output.resourcesDir
+    into sourceSets.main.output.resourcesDir
+    include "templates/pages/**/*"
+}
+
+processResources.dependsOn copyStaticTemplates
