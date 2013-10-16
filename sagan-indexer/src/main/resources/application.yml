@@ -1,0 +1,114 @@
+project:
+  artifactId: sagan-indexer
+  name: sagan-indexer
+  version: X.X.X.X
+  description: sagan-indexer
+
+info:
+  build:
+    artifact: ${project.artifactId}
+    name: ${project.name}
+    description: ${project.description}
+    version: ${project.version}
+  spring:
+    profiles: ${spring.profiles.active:default}
+  app:
+    name: ${vcap.application.name:sagan-indexer}:${vcap.application.instance_index:*}
+    start: ${vcap.application.start:N/A}
+
+spring:
+  jpa:
+    show_sql: false
+    hibernate:
+      namingstrategy: org.hibernate.cfg.EJB3NamingStrategy
+
+security:
+  basic:
+    enabled: false
+  user:
+    password: ${ADMIN_PASSWORD:}
+
+elasticsearch:
+  client:
+    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
+    index: sagan-local
+
+server:
+    tomcat:
+        # Write access log to target/logs/access_log.YYYY-MM-DD.log
+        # See http://tomcat.apache.org/tomcat-7.0-doc/api/org/apache/catalina/valves/AccessLogValve.html
+        accessLogEnabled: true
+        accessLogPattern: '%h %l %u %t "%r" %s %b %{Host}i %{Location}o'
+        baseDir: ''
+        backgroundProcessorDelay: 1
+
+---
+
+spring:
+  profiles: indexer,default
+  main:
+    sources: io.spring.site.indexer.configuration.IndexerConfiguration
+
+---
+
+spring:
+  profiles: indexer
+  main:
+    sources: io.spring.site.indexer.configuration.IndexerConfiguration
+search:
+  indexer:
+    delay: 0
+server:
+  port: 9000
+
+---
+
+spring:
+  profiles: development,staging,performance,production
+security:
+  require_ssl: true
+
+---
+
+spring:
+  profiles: development
+search:
+  indexer:
+    base_url: https://sagan-development.cfapps.io
+elasticsearch:
+  client:
+    index: sagan-development
+
+---
+
+spring:
+  profiles: performance
+search:
+  indexer:
+    base_url: https://sagan-performance.cfapps.io
+elasticsearch:
+  client:
+    index: sagan-performance
+
+---
+
+spring:
+  profiles: staging
+search:
+  indexer:
+    base_url: https://sagan-staging.cfapps.io
+elasticsearch:
+  client:
+    index: sagan-staging
+
+---
+
+spring:
+  profiles: production
+search:
+  indexer:
+    base_url: https://sagan-production.cfapps.io
+elasticsearch:
+  client:
+    index: sagan-production
+
