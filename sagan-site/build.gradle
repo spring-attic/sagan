@@ -28,10 +28,6 @@ dependencies {
     // for use in generating blog atom feeds
     compile 'net.java.dev.rome:rome:1.0.0'
 
-    compile("org.springframework:spring-oxm:${vSpringCore}") {
-        exclude(module: 'commons-lang')
-    }
-
     runtime "org.apache.httpcomponents:httpclient:${vHttpClient}"
 
     compile 'org.tuckey:urlrewritefilter:4.0.3'
