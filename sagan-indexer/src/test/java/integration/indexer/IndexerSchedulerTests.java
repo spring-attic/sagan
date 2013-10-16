@@ -20,10 +20,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
 import utils.SetSystemProperty;
 
+
+import static org.mockito.Mockito.*;
 import static integration.indexer.IndexerSchedulerTests.TestConfiguration;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 
 @ContextConfiguration(classes = { TestConfiguration.class })
 public class IndexerSchedulerTests extends IndexerIntegrationTestBase {
@@ -34,49 +33,49 @@ public class IndexerSchedulerTests extends IndexerIntegrationTestBase {
         @Bean
         @Primary
         public ProjectDocumentationIndexer mockProjectDocumentationIndexer() {
-            return Mockito.mock(ProjectDocumentationIndexer.class);
+            return mock(ProjectDocumentationIndexer.class);
         }
 
         @Bean
         @Primary
         public GettingStartedGuideIndexer mockGettingStartedGuideIndexer() {
-            return Mockito.mock(GettingStartedGuideIndexer.class);
+            return mock(GettingStartedGuideIndexer.class);
         }
 
         @Bean
         @Primary
         public IndexerService mockIndexerService() {
-            return Mockito.mock(IndexerService.class);
+            return mock(IndexerService.class);
         }
 
         @Bean
         @Primary
         public ToolsIndexer mockToolsIndexer() {
-            return Mockito.mock(ToolsIndexer.class);
+            return mock(ToolsIndexer.class);
         }
 
         @Bean
         @Primary
         public StaticPageIndexer mockStaticPageIndexer() {
-            return Mockito.mock(StaticPageIndexer.class);
+            return mock(StaticPageIndexer.class);
         }
 
         @Bean
         @Primary
         public UnderstandingGuideIndexer mockUnderstandingGuideIndexer() {
-            return Mockito.mock(UnderstandingGuideIndexer.class);
+            return mock(UnderstandingGuideIndexer.class);
         }
 
         @Bean
         @Primary
         public TutorialIndexer mockTutorialIndexer() {
-            return Mockito.mock(TutorialIndexer.class);
+            return mock(TutorialIndexer.class);
         }
 
         @Bean
         @Primary
         public PublishedBlogPostsIndexer mockPublishedBlogPostsIndexer() {
-            return Mockito.mock(PublishedBlogPostsIndexer.class);
+            return mock(PublishedBlogPostsIndexer.class);
         }
     }
 
@@ -105,23 +104,23 @@ public class IndexerSchedulerTests extends IndexerIntegrationTestBase {
     @Test
     public void schedulerStartsTheIndexers() throws Exception {
         Thread.sleep(INDEXER_DELAY);
-        Mockito.verify(indexerService).index(gettingStartedGuideIndexer);
-        Mockito.verify(indexerService).index(projectDocumentationIndexer);
-        Mockito.verify(indexerService).index(toolsIndexer);
-        Mockito.verify(indexerService).index(staticPageIndexer);
-        Mockito.verify(indexerService).index(understandingGuideIndexer);
-        Mockito.verify(indexerService).index(tutorialIndexer);
-        Mockito.verify(indexerService).index(publishedBlogPostsIndexer);
+        verify(indexerService).index(gettingStartedGuideIndexer);
+        verify(indexerService).index(projectDocumentationIndexer);
+        verify(indexerService).index(toolsIndexer);
+        verify(indexerService).index(staticPageIndexer);
+        verify(indexerService).index(understandingGuideIndexer);
+        verify(indexerService).index(tutorialIndexer);
+        verify(indexerService).index(publishedBlogPostsIndexer);
     }
 
     @Test
     public void indexerServiceRespectsTheConfiguredDelay() throws Exception {
-        Mockito.verify(indexerService, Mockito.never()).index(gettingStartedGuideIndexer);
-        Mockito.verify(indexerService, Mockito.never()).index(projectDocumentationIndexer);
-        Mockito.verify(indexerService, Mockito.never()).index(toolsIndexer);
-        Mockito.verify(indexerService, Mockito.never()).index(staticPageIndexer);
-        Mockito.verify(indexerService, Mockito.never()).index(understandingGuideIndexer);
-        Mockito.verify(indexerService, Mockito.never()).index(tutorialIndexer);
-        Mockito.verify(indexerService, Mockito.never()).index(publishedBlogPostsIndexer);
+        verify(indexerService, never()).index(gettingStartedGuideIndexer);
+        verify(indexerService, never()).index(projectDocumentationIndexer);
+        verify(indexerService, never()).index(toolsIndexer);
+        verify(indexerService, never()).index(staticPageIndexer);
+        verify(indexerService, never()).index(understandingGuideIndexer);
+        verify(indexerService, never()).index(tutorialIndexer);
+        verify(indexerService, never()).index(publishedBlogPostsIndexer);
     }
 }

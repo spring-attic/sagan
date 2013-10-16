@@ -27,14 +27,9 @@ import java.io.IOException;
 import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.stub;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 public class IndexerTests extends IntegrationTestBase {
@@ -44,8 +39,7 @@ public class IndexerTests extends IntegrationTestBase {
         @Override
         public void crawl(String url, int linkDepth, DocumentProcessor processor) {
             try {
-                MvcResult response = IndexerTests.this.mockMvc.perform(MockMvcRequestBuilders.get(url))
-                        .andReturn();
+                MvcResult response = IndexerTests.this.mockMvc.perform(get(url)).andReturn();
                 Document html = Jsoup.parse(response.getResponse().getContentAsString());
                 processor.process(html);
             } catch (Exception e) {
@@ -69,7 +63,7 @@ public class IndexerTests extends IntegrationTestBase {
     @Before
     public void setup() throws IOException {
         String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
-        Mockito.stub(this.restTemplate.getForObject(Matchers.anyString(), Matchers.eq(String.class))).toReturn(
+        stub(this.restTemplate.getForObject(anyString(), eq(String.class))).toReturn(
                 responseXml);
     }
 
@@ -80,7 +74,7 @@ public class IndexerTests extends IntegrationTestBase {
 
         toolsIndexer.indexItem("/tools");
 
-        MatcherAssert.assertThat(this.indexedEntry.getRawContent(), containsString("Tools"));
+        assertThat(this.indexedEntry.getRawContent(), containsString("Tools"));
 
         MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("<div>")));
         MatcherAssert.assertThat(this.indexedEntry.getRawContent(), not(containsString("Blog")));
@@ -96,7 +90,7 @@ public class IndexerTests extends IntegrationTestBase {
     public void staticPagesAreNotIndexedWithHeaderOrFooterContent() throws Exception {
         StaticPageIndexer staticPageIndexer = new StaticPageIndexer(
                 this.stubCrawlerService, this.stubSearchService,
-                Mockito.mock(StaticPagePathFinder.class));
+                mock(StaticPagePathFinder.class));
 
         staticPageIndexer.indexItem("/about");
 
@@ -114,7 +108,7 @@ public class IndexerTests extends IntegrationTestBase {
     @Test
     public void tutorialGuidesAreIndexed() throws Exception {
         TutorialIndexer tutorialIndexer = new TutorialIndexer(this.stubSearchService,
-                Mockito.mock(GuidesService.class));
+                mock(GuidesService.class));
 
         Guide restTutorial = new Guide("tut-rest", "rest", "Learn rest", "rest subtitle",
                 "This is the rest tutorial content", "");
@@ -134,7 +128,7 @@ public class IndexerTests extends IntegrationTestBase {
     @Test
     public void gettingStartedGuidesAreIndexed() throws Exception {
         Indexer<Guide> tutorialIndexer = new GettingStartedGuideIndexer(
-                this.stubSearchService, Mockito.mock(GuidesService.class));
+                this.stubSearchService, mock(GuidesService.class));
 
         Guide restTutorial = new Guide("gs-rest-service", "rest-service",
                 "Learn about rest", "rest subtitle", "This is the rest guide content",
