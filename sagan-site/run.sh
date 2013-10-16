@@ -1,2 +1,2 @@
 #!/bin/bash
-mvn clean spring-boot:run
+../gradlew :sagan-site:run
