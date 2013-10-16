@@ -10,15 +10,17 @@ springBoot {
     mainClass = mainClassName
 }
 
-sourceSets { x ->
+sourceSets { na ->
     it
 }
 
 task it(type: Test) {
     description = "Runs the integration tests."
 
-    testClassesDir = sourceSets['it'].output.classesDir
-    classpath = sourceSets['it'].runtimeClasspath
+    testClassesDir = sourceSets.it.output.classesDir
+    classpath = sourceSets.it.runtimeClasspath
+
+    maxHeapSize = '1024m'
 
     // ensure we don't overwrite default report directories used by 'test' task
     reports.html.destination = "${project.buildDir}/reports/it"
@@ -57,10 +59,10 @@ dependencies {
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test:${vSpringCore}"
 
-    itCompile configurations.compile
-    itCompile configurations.testCompile
     itCompile sourceSets.main.output
     itCompile sourceSets.test.output
+    itCompile configurations.compile
+    itCompile configurations.testCompile
     itRuntime configurations.runtime
     itRuntime configurations.testRuntime
 }
