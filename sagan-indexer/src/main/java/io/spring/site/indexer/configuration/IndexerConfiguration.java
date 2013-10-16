@@ -1,6 +1,7 @@
 package io.spring.site.indexer.configuration;
 
 import io.spring.common.config.DataSourceConfig;
+import io.spring.common.config.GitHubConfiguration;
 import io.spring.common.config.SearchClientConfiguration;
 import io.spring.site.domain.StaticPagePathFinder;
 import io.spring.site.domain.projects.ProjectMetadataService;

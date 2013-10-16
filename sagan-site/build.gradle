@@ -26,6 +26,9 @@ dependencies {
     compile group: 'com.github.mxab.thymeleaf.extras', name: 'thymeleaf-extras-data-attribute', version:'1.2'
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity3', version:'2.0.0'
 
+    // nekohtml is required for thymeleaf's LEGACYHTML5 mode
+    runtime 'net.sourceforge.nekohtml:nekohtml:1.9.15'
+
     compile group: 'net.java.dev.rome', name: 'rome', version:'1.0.0'
 
     compile group: 'com.google.guava', name: 'guava', version:'14.0.1'

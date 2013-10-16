@@ -16,6 +16,8 @@
 package io.spring.site.web.configuration;
 
 import com.google.common.cache.CacheBuilder;
+import io.spring.common.config.GitHubConfiguration;
+import io.spring.common.config.SearchClientConfiguration;
 import io.spring.site.domain.projects.ProjectMetadataService;
 import io.spring.site.domain.projects.ProjectMetadataYamlParser;
 import io.spring.site.domain.services.DateService;
@@ -57,7 +59,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @ComponentScan({ "io.spring.site.web", "io.spring.site.domain", "io.spring.site.search" })
 @EnableCaching
-@Import({DatabaseConfig.class})
+@Import({DatabaseConfig.class, SearchClientConfiguration.class, GitHubConfiguration.class})
 public class ApplicationConfiguration {
 
     public static final String REWRITE_FILTER_NAME = "rewriteFilter";
