@@ -1,11 +1,7 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
-import io.spring.site.domain.blog.BlogService;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostBuilder;
-import io.spring.site.domain.blog.PostFormAdapter;
-import io.spring.site.domain.blog.PostRepository;
+import io.spring.site.domain.blog.*;
 import io.spring.site.domain.services.DateService;
 import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.search.SearchService;
@@ -120,19 +116,19 @@ public class BlogService_QueryTests extends IntegrationTestBase {
     public void getPublishedDoesNotFindDrafts() {
         Post draft = PostBuilder.post().title(uniqueTitle()).draft().build();
         postRepository.save(draft);
-        expected.expect(EntityNotFoundException.class);
+        expected.expect(BlogPostNotFoundException.class);
         service.getPublishedPost(draft.getPublicSlug());
     }
 
     @Test
     public void getPublishedDoesNotFindScheduledPost() throws ParseException {
-        expected.expect(EntityNotFoundException.class);
+        expected.expect(BlogPostNotFoundException.class);
         service.getPublishedPost(scheduled.getPublicSlug());
     }
 
     @Test
     public void nonExistentPostThrowsException() {
-        expected.expect(EntityNotFoundException.class);
+        expected.expect(BlogPostNotFoundException.class);
         service.getPost(999L);
     }
 
