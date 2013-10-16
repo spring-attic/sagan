@@ -1,7 +1,6 @@
 package integration.tools;
 
 import integration.IntegrationTestBase;
-import io.spring.site.test.FixtureLoader;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -9,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.client.RestTemplate;
+import utils.FixtureLoader;
 
 import java.io.IOException;
 

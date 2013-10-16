@@ -1,13 +1,13 @@
 package integration.guides;
 
 import integration.IntegrationTestBase;
-import io.spring.site.test.FixtureLoader;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MvcResult;
+import utils.FixtureLoader;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;

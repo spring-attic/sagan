@@ -1,7 +1,6 @@
 package integration.caching;
 
 import integration.caching.NetworkCachingStrategyTests.TestConfiguration;
-import io.spring.site.test.FixtureLoader;
 import io.spring.site.web.configuration.ApplicationConfiguration;
 
 import org.junit.After;
@@ -26,6 +25,7 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
+import utils.FixtureLoader;
 import utils.SetSystemProperty;
 
 import static org.mockito.BDDMockito.given;
