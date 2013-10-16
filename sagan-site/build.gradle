@@ -35,9 +35,6 @@ dependencies {
     // for use in serving redirects; see urlrewrite.xml
     compile 'org.tuckey:urlrewritefilter:4.0.3'
 
-    // for use in on-the-fly database setup and migrations
-    compile 'com.googlecode.flyway:flyway-core:2.2.1'
-
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test:${vSpringCore}"
 }

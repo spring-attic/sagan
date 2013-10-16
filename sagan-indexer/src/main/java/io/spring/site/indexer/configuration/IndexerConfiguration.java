@@ -1,6 +1,6 @@
 package io.spring.site.indexer.configuration;
 
-import io.spring.common.config.DataSourceConfig;
+import io.spring.common.config.DatabaseConfig;
 import io.spring.common.config.GitHubConfiguration;
 import io.spring.common.config.SearchClientConfiguration;
 import io.spring.site.domain.StaticPagePathFinder;
@@ -28,9 +28,9 @@ import java.util.concurrent.Executors;
 
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan({ "io.spring.site.indexer", "io.spring.site.domain", "io.spring.site.search" })
 @EnableScheduling
-@Import({ SearchClientConfiguration.class, GitHubConfiguration.class, DataSourceConfig.class})
+@Import({DatabaseConfig.class, SearchClientConfiguration.class, GitHubConfiguration.class})
+@ComponentScan({ "io.spring.site.indexer", "io.spring.site.domain", "io.spring.site.search" })
 public class IndexerConfiguration {
 
     @Value("classpath:/project-metadata.yml")
