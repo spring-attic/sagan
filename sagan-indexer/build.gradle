@@ -1,7 +1,7 @@
 apply plugin: 'spring-boot'
 apply plugin: 'application'
 
-mainClassName = 'io.spring.site.indexer.config.IndexerConfiguration'
+mainClassName = 'io.spring.site.indexer.configuration.IndexerConfiguration'
 
 springBoot {
     backupSource = false
