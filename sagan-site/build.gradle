@@ -1,12 +1,15 @@
 apply plugin: 'spring-boot'
+apply plugin: 'application'
 
-test {
-    maxHeapSize = '1024m'
-}
+mainClassName = 'io.spring.site.web.configuration.ApplicationConfiguration'
 
 springBoot {
     backupSource = false
-    mainClass = 'io.spring.site.web.configuration.ApplicationConfiguration'
+    mainClass = mainClassName
+}
+
+test {
+    maxHeapSize = '1024m'
 }
 
 dependencies {

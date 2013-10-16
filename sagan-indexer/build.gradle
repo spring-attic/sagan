@@ -1,8 +1,11 @@
 apply plugin: 'spring-boot'
+apply plugin: 'application'
+
+mainClassName = 'io.spring.site.indexer.configuration.IndexerConfiguration'
 
 springBoot {
     backupSource = false
-    mainClass = 'io.spring.site.indexer.configuration.IndexerConfiguration'
+    mainClass = mainClassName
 }
 
 dependencies {
