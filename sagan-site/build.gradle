@@ -25,9 +25,8 @@ dependencies {
     // nekohtml is required for thymeleaf's LEGACYHTML5 mode
     runtime 'net.sourceforge.nekohtml:nekohtml:1.9.15'
 
+    // for use in generating blog atom feeds
     compile 'net.java.dev.rome:rome:1.0.0'
-
-    compile 'com.google.guava:guava:14.0.1'
 
     compile("org.springframework:spring-oxm:${vSpringCore}") {
         exclude(module: 'commons-lang')
