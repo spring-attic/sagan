@@ -1,7 +1,7 @@
 apply plugin: 'spring-boot'
 apply plugin: 'application'
 
-mainClassName = 'io.spring.site.web.configuration.ApplicationConfiguration'
+mainClassName = 'io.spring.site.web.config.ApplicationConfiguration'
 
 springBoot {
     backupSource = false
@@ -13,6 +13,8 @@ test {
 }
 
 dependencies {
+    compile project(':sagan-common')
+
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'0.5.0.M4'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'0.5.0.M4'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:'0.5.0.M4'
@@ -32,8 +34,6 @@ dependencies {
     }
     compile group: 'com.google.guava', name: 'guava', version:'14.0.1'
     compile group: 'org.postgresql', name: 'postgresql', version:'9.2-1002-jdbc4'
-    compile group: 'org.apache.tomcat', name: 'tomcat-jdbc', version:'7.0.42'
-    compile group: 'org.elasticsearch', name: 'elasticsearch', version:'0.90.2'
     compile group: 'org.yaml', name: 'snakeyaml', version:'1.12'
     compile group: 'org.jsoup', name: 'jsoup', version:'1.7.2'
     compile(group: 'org.springframework', name: 'spring-oxm', version:'4.0.0.M3') {
@@ -43,9 +43,6 @@ dependencies {
         exclude(module: 'stax')
         exclude(module: 'stax-api')
         exclude(module: 'xpp3')
-    }
-    compile(group: 'io.searchbox', name: 'jest', version:'0.0.4') {
-        exclude(module: 'commons-logging')
     }
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version:'4.3-beta2'
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version:'4.3-beta2'

@@ -1,4 +1,4 @@
-package io.spring.site.web.configuration;
+package io.spring.site.indexer.configuration;
 
 import io.spring.site.domain.services.github.JsonStringConverter;
 import io.spring.site.domain.services.github.MarkdownHtmlConverter;

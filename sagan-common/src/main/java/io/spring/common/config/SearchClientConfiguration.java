@@ -1,4 +1,4 @@
-package io.spring.site.search.configuration;
+package io.spring.common.config;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;

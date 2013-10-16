@@ -57,7 +57,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @ComponentScan({ "io.spring.site.web", "io.spring.site.domain", "io.spring.site.search" })
 @EnableCaching
-@Import({DatabaseConfiguration.class})
+@Import({DatabaseConfig.class})
 public class ApplicationConfiguration {
 
     public static final String REWRITE_FILTER_NAME = "rewriteFilter";

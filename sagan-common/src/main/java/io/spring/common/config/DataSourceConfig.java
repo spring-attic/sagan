@@ -1,6 +1,5 @@
-package io.spring.site.web.configuration;
+package io.spring.common.config;
 
-import com.googlecode.flyway.core.Flyway;
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.core.env.Environment;
 import javax.sql.DataSource;
 
 @Configuration
-public class DatabaseConfiguration {
+public class DataSourceConfig {
 
     @Autowired
     private Environment environment;
@@ -56,14 +55,5 @@ public class DatabaseConfiguration {
         dataSource.setTestOnReturn(false);
         dataSource.setValidationQuery("SELECT 1");
         return dataSource;
-    }
-
-    @Bean
-    public Flyway flyway() {
-        Flyway flyway = new Flyway();
-        flyway.setLocations("database");
-        flyway.setDataSource(dataSource());
-        flyway.migrate();
-        return flyway;
     }
 }

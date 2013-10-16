@@ -1,7 +1,7 @@
 apply plugin: 'spring-boot'
 apply plugin: 'application'
 
-mainClassName = 'io.spring.site.indexer.configuration.IndexerConfiguration'
+mainClassName = 'io.spring.site.indexer.config.IndexerConfiguration'
 
 springBoot {
     backupSource = false
@@ -9,6 +9,8 @@ springBoot {
 }
 
 dependencies {
+    compile project(':sagan-common')
+
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'0.5.0.M4'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'0.5.0.M4'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:'0.5.0.M4'
@@ -19,21 +21,16 @@ dependencies {
     }
     compile group: 'org.postgresql', name: 'postgresql', version:'9.2-1002-jdbc4'
     compile group: 'org.apache.tomcat', name: 'tomcat-jdbc', version:'7.0.42'
-    compile group: 'org.elasticsearch', name: 'elasticsearch', version:'0.90.2'
     compile(group: 'org.simpleframework', name: 'simple-xml', version:'2.7') {
         exclude(module: 'stax')
         exclude(module: 'stax-api')
         exclude(module: 'xpp3')
-    }
-    compile(group: 'io.searchbox', name: 'jest', version:'0.0.4') {
-        exclude(module: 'commons-logging')
     }
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version:'4.3-beta2'
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version:'4.3-beta2'
     compile group: 'org.apache.httpcomponents', name: 'httpcore-nio', version:'4.3-beta2'
     compile group: 'org.cloudfoundry', name: 'cloudfoundry-runtime', version:'0.8.4'
 
-    compile(project(':sagan-site').sourceSets.main.output)
     testCompile(project(":sagan-site").sourceSets.test.output)
 
     runtime group: 'com.h2database', name: 'h2', version:'1.3.173'

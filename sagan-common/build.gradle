@@ -1,0 +1,10 @@
+
+dependencies {
+    compile 'org.elasticsearch:elasticsearch:0.90.2'
+    compile('io.searchbox:jest:0.0.4') {
+        exclude(module: 'commons-logging')
+    }
+    compile 'org.cloudfoundry:cloudfoundry-runtime:0.8.4'
+    compile 'org.springframework:spring-context:4.0.0.M3'
+    compile 'org.apache.tomcat:tomcat-jdbc:7.0.42'
+}
