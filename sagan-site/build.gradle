@@ -14,7 +14,7 @@ sourceSets { na ->
     it
 }
 
-task it(type: Test) {
+task it(type: Test, dependsOn: test) {
     description = "Runs the integration tests."
 
     testClassesDir = sourceSets.it.output.classesDir
