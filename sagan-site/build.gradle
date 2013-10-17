@@ -1,13 +1,30 @@
-apply plugin: 'spring-boot'
-apply plugin: 'application'
-apply from: "${rootProject.projectDir}/gradle/integTest.gradle"
 
+apply plugin: 'application'
 mainClassName = 'io.spring.site.web.configuration.ApplicationConfiguration'
 
+apply plugin: 'spring-boot'
 springBoot {
     backupSource = false
     mainClass = mainClassName
 }
+
+apply plugin: 'cloudfoundry'
+cloudfoundry {
+    target = 'https://api.run.pivotal.io'
+    organization = 'spring.io'
+    space = 'development'
+    application = 'site'
+    file = jar.archivePath
+}
+
+task bgdeploy(type:GreenBlueDeploy)
+task bgswitch(type:GreenBlueMapping) {
+    spaceMappings = [
+            development: [map: ['sagan-site.cfapps.io'], unmap: ['sagan-site.cfapps.io']]
+    ]
+}
+
+apply from: "${rootProject.projectDir}/gradle/integTest.gradle"
 
 dependencies {
     compile project(':sagan-common')
