@@ -48,7 +48,11 @@ dependencies {
     compile 'net.java.dev.rome:rome:1.0.0'
 
     // for use by spring-social-github's OAuth2 support
-    runtime "org.apache.httpcomponents:httpclient:${vHttpClient}"
+    // note that 'runtime' scope would be enough, but 'compile'
+    // helps override conflicting httpclient versions
+    compile "org.apache.httpcomponents:httpclient:${vHttpClient}"
+    compile "org.apache.httpcomponents:httpcore:${vHttpClient}"
+    compile "org.apache.httpcomponents:httpcore-nio:${vHttpClient}"
 
     // for use in serving redirects; see urlrewrite.xml
     compile 'org.tuckey:urlrewritefilter:4.0.3'
