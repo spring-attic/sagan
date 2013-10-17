@@ -76,8 +76,12 @@ projects:
       refDocUrl: /spring-data/jpa/docs/{version}/reference/html/
       apiDocUrl: /spring-data/jpa/docs/{version}/api/
       supportedVersions:
-        - 1.5.0.BUILD-SNAPSHOT
-        - 1.4.2.BUILD-SNAPSHOT
+        - name: 1.5.0.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
+        - name: 1.4.2.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
         - 1.4.1.RELEASE
         - 1.3.5.RELEASE
 
@@ -88,8 +92,12 @@ projects:
       refDocUrl: /spring-data/data-commons/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-commons/docs/{version}/api/
       supportedVersions:
-        - 1.7.0.BUILD-SNAPSHOT
-        - 1.6.2.BUILD-SNAPSHOT
+        - name: 1.7.0.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
+        - name: 1.6.2.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
         - 1.6.1.RELEASE
         - 1.5.3.RELEASE
 
@@ -110,8 +118,12 @@ projects:
       refDocUrl: /spring-data/data-mongo/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-mongo/docs/{version}/api/
       supportedVersions:
-        - 1.4.0.BUILD-SNAPSHOT
-        - 1.3.2.BUILD-SNAPSHOT
+        - name: 1.4.0.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
+        - name: 1.3.2.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
         - 1.3.1.RELEASE
         - 1.2.4.RELEASE
 
@@ -123,8 +135,12 @@ projects:
       refDocUrl: /spring-data/data-neo4j/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-neo4j/docs/{version}/api/
       supportedVersions:
-        - 2.4.0.BUILD-SNAPSHOT
-        - 2.3.2.BUILD-SNAPSHOT
+        - name: 2.4.0.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
+        - name: 2.3.2.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
         - 2.3.1.RELEASE
         - 2.2.3.RELEASE
 
@@ -135,9 +151,13 @@ projects:
       refDocUrl: /spring-data/data-redis/docs/{version}/reference/html
       apiDocUrl: /spring-data/data-redis/docs/{version}/api/
       supportedVersions:
-        - 1.1.1.BUILD-SNAPSHOT
+        - name: 1.1.1.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
         - 1.1.0.RELEASE
-        - 1.0.7.BUILD-SNAPSHOT
+        - name: 1.0.7.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
         - 1.0.6.RELEASE
 
     - id: spring-data-rest
@@ -148,7 +168,9 @@ projects:
       refDocUrl: /spring-data/rest/docs/{version}/reference/html
       apiDocUrl: /spring-data/rest/docs/{version}/api/
       supportedVersions:
-        - 2.0.0.BUILD-SNAPSHOT
+        - name: 2.0.0.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
         - 1.1.0.M1
 
     - id: spring-data-solr
@@ -159,8 +181,12 @@ projects:
       refDocUrl: /spring-data/solr/docs/{version}/reference/html/
       apiDocUrl: /spring-data/solr/docs/{version}/api/
       supportedVersions:
-        - 1.1.0.BUILD-SNAPSHOT
-        - 1.0.1.BUILD-SNAPSHOT
+        - name: 1.1.0.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
+        - name: 1.0.1.BUILD-SNAPSHOT
+          refDocUrl: NONE
+          apiDocUrl: NONE
         - 1.0.0.RELEASE
 
 
