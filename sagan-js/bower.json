@@ -3,6 +3,7 @@
     "description": "bower components for spring.io UI.",
     "dependencies": {
         "curl": "~0.8",
+        "poly": "~0",
         "jquery": "1.8.3",
         "zeroclipboard": "~1.1"
     }

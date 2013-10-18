@@ -42,7 +42,8 @@ var Munchkin, curl, baseUrl; // pre-existing globals
                     }
                 }
             }
-        }
+        },
+        preloads: ['poly/es5']
     });
 
     // Can't document this in bower.json, so I'm documenting it here:
