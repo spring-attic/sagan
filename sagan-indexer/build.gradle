@@ -29,6 +29,7 @@ dependencies {
     testCompile project(':sagan-common').sourceSets.util.output
 }
 
+
 task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processResources) {
     description = "Copies static html templates from :sagan-site in order to index them"
 
@@ -36,5 +37,22 @@ task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processRe
     into sourceSets.main.output.resourcesDir
     include "templates/pages/**/*"
 }
-
 processResources.dependsOn copyStaticTemplates
+
+
+tasks.addRule('Pattern: deploy<Space>') { taskName ->
+    if (taskName.startsWith('deploy')) {
+        def space = taskName - 'deploy'
+        def cfPath = System.getProperty("cf.path")?:''
+        def cfUser = System.getProperty("cf.user")?:''
+        def cfPass = System.getProperty("cf.path")?:''
+        if (space.length() == 0) throw new GradleException('Usage: deploy<Space>')
+        project.task([type: Exec, dependsOn: build], taskName) {
+            commandLine './scripts/deploy-single-app.sh', space.toLowerCase(), cfPath, cfUser, cfPass
+
+            // ensure the indexer is always deployed after the site, because if the
+            // site fails to deploy, we don't want the indexer to deploy at all
+            mustRunAfter project(':sagan-site').tasks[taskName]
+        }
+    }
+}

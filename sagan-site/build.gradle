@@ -45,3 +45,17 @@ dependencies {
 
     testCompile project(':sagan-common').sourceSets.util.output
 }
+
+
+tasks.addRule('Pattern: deploy<Space>') { taskName ->
+    if (taskName.startsWith('deploy')) {
+        def space = taskName - 'deploy'
+        def cfPath = System.getProperty("cf.path")?:''
+        def cfUser = System.getProperty("cf.user")?:''
+        def cfPass = System.getProperty("cf.path")?:''
+        if (space.length() == 0) throw new GradleException('Usage: deploy<Space>')
+        project.task([type: Exec, dependsOn: build], taskName) {
+            commandLine './scripts/deploy-blue-green.sh', space.toLowerCase(), cfPath, cfUser, cfPass
+        }
+    }
+}

@@ -2,7 +2,7 @@
 
 if [ $# != 1 ] && [ $# != 4 ] ; then cat << EOM
 
-    This script is used for deploying to blue/green configured environments
+    This script is used for deploying to single app configured environments (i.e. NON blue/green)
 
     You should build the app before using this script, eg: 'mvn clean package'
 
@@ -21,12 +21,13 @@ EOM
     exit
 fi
 
-echo "Starting blue-green deploy script"
+echo "Starting simple deploy script"
 
 SPACE=$1
 CF=$2
 USER=$3
 PASS=$4
+SCRIPTDIR=$(dirname $0)
 
 if [[ -z "$2" ]]; then
     CF=cf
@@ -47,23 +48,5 @@ fi
 echo "switching to space $SPACE"
 $CF space $SPACE || exit
 
-echo "Checking for running app"
-# check that we don't have >1 or 0 apps running. We might make a case for 0 and deploy sagan-blue.
-CHECK=`$CF apps --url sagan-$SPACE.cfapps.io | grep -E 'green|blue' | wc -l`
-
-if [ $CHECK != 1 ];
-    then echo "There must be exactly one CF green or blue app running. Exiting.";
-    exit 1;
-fi
-
-CURRENT=`$CF apps --url sagan-$SPACE.cfapps.io | grep -E 'green|blue'`
-
-echo App currently running is $CURRENT.
-
-NEXT=`if [ "$CURRENT" == "sagan-green" ]; then echo sagan-blue; else echo sagan-green; fi`
-
-echo Next app to be deployed will be $NEXT.
-
-$CF push --manifest manifest/$SPACE.yml --name $NEXT --reset --start || scripts/wait-for-app-to-start.sh $NEXT 100 $CF || exit
-
-scripts/mapping-blue-green.sh $SPACE $CF $CURRENT $NEXT
+echo "pushing indexer to CF"
+$CF push --manifest $SCRIPTDIR/../manifest/$SPACE.yml --name sagan-indexer --host $SPACE-sagan-indexer --reset --start || $SCRIPTS/wait-for-app-to-start.sh sagan-indexer 100 $CF

@@ -4,8 +4,9 @@ sourceSets { na ->
     it
 }
 
-task it(type: Test, dependsOn: test) {
+task it(type: Test) {
     description = "Runs the integration tests."
+    mustRunAfter test
 
     testClassesDir = sourceSets.it.output.classesDir
     classpath = sourceSets.it.runtimeClasspath

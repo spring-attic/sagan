@@ -31,3 +31,18 @@ subprojects {
     }
 }
 
+/*
+gradle.projectsEvaluated {
+    gradle.taskGraph.whenReady { taskGraph ->
+        def unitTestTasks = taskGraph.allTasks.findAll { it.name == 'test' }
+        println taskGraph.allTasks
+    }
+}
+*/
+
+gradle.projectsEvaluated {
+    project(':sagan-site').tasks['it'].mustRunAfter project(':sagan-indexer').test
+    project(':sagan-indexer').tasks['it'].mustRunAfter project(':sagan-site').test
+    project(':sagan-site').deployStaging.mustRunAfter project(':sagan-indexer').check
+    project(':sagan-indexer').deployStaging.mustRunAfter project(':sagan-site').check
+}
