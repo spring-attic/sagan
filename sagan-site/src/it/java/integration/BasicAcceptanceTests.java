@@ -53,7 +53,7 @@ public class BasicAcceptanceTests {
                                 return (ConfigurableApplicationContext) SpringApplication
                                         .run(IntegrationTestsConfiguration.class,
                                                 "--server.port=" + port,
-                                                "--spring.profiles.active=site,acceptance");
+                                                "--spring.profiles.active=acceptance");
                             }
                         });
         context = future.get(30, TimeUnit.SECONDS);

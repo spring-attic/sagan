@@ -17,6 +17,8 @@ info:
     start: ${vcap.application.start:N/A}
 
 spring:
+  main:
+    sources: io.spring.site.indexer.configuration.IndexerConfiguration
   jpa:
     show_sql: false
     hibernate:
@@ -28,10 +30,16 @@ security:
   user:
     password: ${ADMIN_PASSWORD:}
 
+search:
+  indexer:
+    delay: 0
+server:
+  port: 9000
+
 elasticsearch:
   client:
     endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
-    index: sagan-local
+    index: ${ELASTICSEARCH_INDEX:sagan}
 
 server:
     tomcat:
@@ -41,74 +49,4 @@ server:
         accessLogPattern: '%h %l %u %t "%r" %s %b %{Host}i %{Location}o'
         baseDir: ''
         backgroundProcessorDelay: 1
-
----
-
-spring:
-  profiles: indexer,default
-  main:
-    sources: io.spring.site.indexer.configuration.IndexerConfiguration
-
----
-
-spring:
-  profiles: indexer
-  main:
-    sources: io.spring.site.indexer.configuration.IndexerConfiguration
-search:
-  indexer:
-    delay: 0
-server:
-  port: 9000
-
----
-
-spring:
-  profiles: development,staging,performance,production
-security:
-  require_ssl: true
-
----
-
-spring:
-  profiles: development
-search:
-  indexer:
-    base_url: https://sagan-development.cfapps.io
-elasticsearch:
-  client:
-    index: sagan-development
-
----
-
-spring:
-  profiles: performance
-search:
-  indexer:
-    base_url: https://sagan-performance.cfapps.io
-elasticsearch:
-  client:
-    index: sagan-performance
-
----
-
-spring:
-  profiles: staging
-search:
-  indexer:
-    base_url: https://sagan-staging.cfapps.io
-elasticsearch:
-  client:
-    index: sagan-staging
-
----
-
-spring:
-  profiles: production
-search:
-  indexer:
-    base_url: https://sagan-production.cfapps.io
-elasticsearch:
-  client:
-    index: sagan-production
 

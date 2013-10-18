@@ -4,7 +4,8 @@ applications:
   memory: 2G
   instances: 1
   env:
-    SPRING_PROFILES_ACTIVE: indexer,staging
+    SPRING_PROFILES_ACTIVE: staging
+    ELASTICSEARCH_INDEX: sagan-staging
   host: staging-sagan-indexer
   domain: cfapps.io
   path: ../build/libs/sagan-indexer.jar

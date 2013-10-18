@@ -5,7 +5,8 @@ applications:
   instances: 4
   env:
     GITHUB_CLIENT_ID: 92d0b0a74ad6d5236e01
-    SPRING_PROFILES_ACTIVE: site,staging
+    SPRING_PROFILES_ACTIVE: staging
+    ELASTICSEARCH_INDEX: sagan-staging
     NEW_RELIC_APP_NAME: sagan-blue;sagan
   host: sagan-staging-blue
   domain: cfapps.io
@@ -16,7 +17,8 @@ applications:
   instances: 4
   env:
     GITHUB_CLIENT_ID: 92d0b0a74ad6d5236e01
-    SPRING_PROFILES_ACTIVE: site,staging
+    SPRING_PROFILES_ACTIVE: staging
+    ELASTICSEARCH_INDEX: sagan-staging
     NEW_RELIC_APP_NAME: sagan-green;sagan
   host: sagan-staging-green
   domain: cfapps.io

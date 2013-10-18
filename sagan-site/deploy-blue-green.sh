@@ -67,5 +67,3 @@ echo Next app to be deployed will be $NEXT.
 $CF push --manifest manifest/$SPACE.yml --name $NEXT --reset --start || scripts/wait-for-app-to-start.sh $NEXT 100 $CF || exit
 
 scripts/mapping-blue-green.sh $SPACE $CF $CURRENT $NEXT
-
-#$CF push --manifest manifest/$SPACE.yml --name sagan-indexer --host $SPACE-sagan-indexer --reset --start || scripts/wait-for-app-to-start.sh sagan-indexer 100 $CF
