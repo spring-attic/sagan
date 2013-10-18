@@ -1,11 +1,20 @@
 /**
  * BusterJS extension that injects a webdriverjs session into
  * tests, and adds a path() command for accessing urls relative
- * to a configured baseUrl (which defaults to localhost:8080).
+ * to a configured baseUrl (see Configuration below).
  *
  * Example path command:
  *
  * browser.path('/') // fetch the root url of the site at baseUrl
+ *
+ * Configuration
+ *
+ * The supported config options are:
+ *
+ * baseUrl (default 'http://localhost:8080') - base url (as a string) when
+ *   using the browser.path command (above)
+ * timeout (default 10000) - milliseconds to wait for pages to load before failing
+ * config - webdriver-specific configuration options, see examples below
  *
  * Example configuration for phantomjs:
  * 'buster-webdriverjs': {
@@ -18,7 +27,7 @@
  * }
  *
  * Example config for sauce labs or any remote selenium server
- * {
+ * 'buster-webdriverjs': {
  *    desiredCapabilities: {
  *      browserName: 'safari',
  *      version: '6',
