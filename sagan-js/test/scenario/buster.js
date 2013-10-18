@@ -15,7 +15,6 @@ exports['scenario-phantom'] = {
   extensions: [require('../buster-webdriverjs')],
   testHelpers: ['buster-spec-expose.js'],
   'buster-webdriverjs': {
-    driver: 'webdriverjs',
     config: {
       desiredCapabilities: {
         browserName: 'phantomjs'
