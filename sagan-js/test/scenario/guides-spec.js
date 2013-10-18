@@ -20,7 +20,7 @@ describe('Guides page', function() {
       // Once the autofocus is fixed, change itEventually to it
       return this.browser
           .keys('upload')
-          .elementById('doc_filter')
+          .elementById(filterInputId)
           .getValue().then(function(value) {
             expect(value).toBe('upload');
           });
