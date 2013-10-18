@@ -1,9 +1,0 @@
-
-repositories {
-    maven { url "http://repo.spring.io/libs-snapshot" }
-    mavenLocal()
-}
-
-dependencies {
-    compile 'org.cloudfoundry:cf-gradle-plugin:0.3.0-SNAPSHOT'
-}
