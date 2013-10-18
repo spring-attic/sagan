@@ -1,2 +1,2 @@
 #!/bin/bash
-../gradlew :sagan-site:run
+$(dirname $0)/../gradlew :sagan-site:run
