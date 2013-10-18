@@ -1,5 +1,5 @@
 /**
- * BusterJS extension that injects a webdriverjs session into
+ * BusterJS extension that injects a wd browser session into
  * tests, and adds a path() command for accessing urls relative
  * to a configured baseUrl (see Configuration below).
  *
@@ -17,7 +17,7 @@
  * config - webdriver-specific configuration options, see examples below
  *
  * Example configuration for phantomjs:
- * 'buster-webdriverjs': {
+ * 'buster-wd': {
  *   config: {
  *     desiredCapabilities: {
  *       browserName: 'phantomjs'
@@ -27,7 +27,7 @@
  * }
  *
  * Example config for sauce labs or any remote selenium server
- * 'buster-webdriverjs': {
+ * 'buster-wd': {
  *    desiredCapabilities: {
  *      browserName: 'safari',
  *      version: '6',
@@ -52,7 +52,7 @@ var url = require('url');
 var defaultBaseUrl = 'http://localhost:8080';
 var defaultTimeout = 10000;
 
-exports.name = 'buster-webdriverjs';
+exports.name = 'buster-wd';
 
 exports.create = function(options) {
   var ext = Object.create(this);

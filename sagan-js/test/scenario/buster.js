@@ -18,7 +18,7 @@ exports['scenario-phantom'] = {
   extends: 'scenario-base',
   extensions: [require('../lib/buster-wd')],
   testHelpers: ['lib/buster-spec-expose.js'],
-  'buster-webdriverjs': {
+  'buster-wd': {
     config: {
       desiredCapabilities: {
         browserName: 'phantomjs',
@@ -32,9 +32,9 @@ exports['scenario-phantom'] = {
 // TODO: Enable and configure once selenium server is setup
 //exports['scenario'] = {
 //  extends: 'scenario-base',
-//  extensions: [require('./buster-webdriverjs')],
-//  'buster-webdriverjs': {
-//    driver: 'webdriverjs',
+//  extensions: [require('../lib/buster-wd')],
+//  testHelpers: ['lib/buster-spec-expose.js'],
+//  'buster-wd': {
 //    config: {
 //      // TODO: Change these
 //      desiredCapabilities: {

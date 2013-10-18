@@ -8,6 +8,10 @@ Tests live in the `unit` directory in a parallel structure to the sources.  Run 
 
 `npm test`
 
+### BusterJS docs
+
+http://docs.busterjs.org/en/latest/#user-s-guide
+
 ## Functional Scenario Tests
 
 Tests live in the `scenario` directory.  Until our dedicated selenium server is ready, you can run them locally using Selenium Server and phantomjs:
@@ -21,6 +25,10 @@ Tests live in the `scenario` directory.  Until our dedicated selenium server is 
     1. `cd sagan-js`
         1. If necessary, make sure you have the latest dependencies: `npm install`
     1. `npm run phantom`
+
+### Docs for wd selenium driver
+
+https://github.com/admc/wd
 
 ## Tips
 
