@@ -14,9 +14,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jshint . && buster-test -g unit",
-    "phantom": "buster-test -g scenario-phantom",
-    "scenario": "buster-test -g scenario",
+    "test": "jshint . && buster-test -c test/unit/buster.js",
+    "phantom": "buster-test -c test/scenario/buster.js -g scenario-phantom",
+    "scenario": "buster-test -c test/scenario/buster.js -g scenario",
     "prepublish": "bower install"
   }
 }

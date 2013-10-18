@@ -1,5 +1,3 @@
-require('../buster-spec-expose');
-
 describe('the title', function() {
 
   it('should be correct', function(done) {
