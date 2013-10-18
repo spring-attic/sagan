@@ -17,7 +17,7 @@ cloudfoundry {
     file = jar.archivePath
 }
 
-task bgdeploy(type:GreenBlueDeploy, dependsOn: build)
+task bgdeploy(type:GreenBlueDeploy)
 task bgswitch(type:GreenBlueMapping) {
     spaceMappings = [
             development: [map: ['sagan-site.cfapps.io'], unmap: ['sagan-site.cfapps.io']]
