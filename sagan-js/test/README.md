@@ -15,8 +15,9 @@ Tests live in the `scenario` directory.  Until our dedicated selenium server is 
 1. Start sagan-site
     1. `sagan-site/run.sh`
 1. Start selenium server:
-    1. [Get the JAR here](http://www.seleniumhq.org/download/) if you need
-    1. `java -jar selenium-server-standalone-2.35.0.jar`
+    1. [Get the latest JAR here](http://www.seleniumhq.org/download/) if you need
+    1. `java -jar <selenium-server-standalone JAR you just downloaded>`
 1. Run the tests in sagan-js
     1. `cd sagan-js`
+        1. If necessary, make sure you have the latest dependencies: `npm install`
     1. `npm run phantom`
