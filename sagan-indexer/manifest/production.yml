@@ -1,0 +1,10 @@
+---
+- name: sagan-indexer
+  memory: 2G
+  instances: 1
+  env:
+    SPRING_PROFILES_ACTIVE: indexer,production
+  host: production-sagan-indexer
+  domain: cfapps.io
+  path: ../build/libs/sagan-indexer.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack

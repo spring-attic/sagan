@@ -9,7 +9,7 @@ applications:
     NEW_RELIC_APP_NAME: sagan-blue;sagan
   host: sagan-staging-blue
   domain: cfapps.io
-  path: ../target/spring-io-site.jar
+  path: ../build/libs/sagan-site.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
 - name: sagan-green
   memory: 2G
@@ -20,14 +20,5 @@ applications:
     NEW_RELIC_APP_NAME: sagan-green;sagan
   host: sagan-staging-green
   domain: cfapps.io
-  path: ../target/spring-io-site.jar
-  buildpack: https://github.com/cloudfoundry/java-buildpack
-- name: sagan-indexer
-  memory: 2G
-  instances: 1
-  env:
-    SPRING_PROFILES_ACTIVE: indexer,staging
-  host: staging-sagan-indexer
-  domain: cfapps.io
-  path: ../target/spring-io-site.jar
+  path: ../build/libs/sagan-site.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack
