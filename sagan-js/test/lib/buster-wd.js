@@ -45,7 +45,7 @@
  */
 
 // This will be lazily require()d below
-var webdriverPackage = 'webdriverjs';
+var webdriverPackage = 'wd';
 
 var url = require('url');
 
@@ -63,7 +63,8 @@ exports.create = function(options) {
 
 exports.testRun = function(testRunner) {
   var browser = createBrowser(require(webdriverPackage),
-      this.webdriverConfig, this.options);
+      this.options,
+      this.webdriverConfig.desiredCapabilities);
 
   var timeout = this.options.timeout || defaultTimeout;
 
@@ -77,15 +78,12 @@ exports.testRun = function(testRunner) {
   });
 };
 
-function createBrowser(webdriver, config, options) {
-  var orig = webdriver.remote(config);
+function createBrowser(webdriver, options, capabilities) {
   var baseUrl = options.baseUrl || defaultBaseUrl;
-  var browser = Object.create(orig);
 
-  browser.addCommand('path', function (relativeUrl, callback) {
-    this.url(url.resolve(baseUrl, relativeUrl), callback);
-  });
+  webdriver.webdriver.prototype.path = function(relativeUrl, callback) {
+    this.get(url.resolve(baseUrl, relativeUrl), callback);
+  };
 
-  browser.init();
-  return browser;
+  return webdriver.promiseRemote(options.server).init(capabilities);
 }
