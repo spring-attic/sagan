@@ -5,10 +5,11 @@
     "cram": "~0"
   },
   "devDependencies": {
+    "when": "~2",
     "buster": "~0.7",
     "bower": "~1",
     "jshint": "~2.1",
-    "webdriverjs": "~0.7",
+    "wd": "~0.1",
     "phantomjs": "~1"
   },
   "directories": {

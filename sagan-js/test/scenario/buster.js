@@ -16,7 +16,7 @@ exports['scenario-base'] = {
 // For now, a simple selenium setup that will use phantomjs
 exports['scenario-phantom'] = {
   extends: 'scenario-base',
-  extensions: [require('../lib/buster-webdriverjs')],
+  extensions: [require('../lib/buster-wd')],
   testHelpers: ['lib/buster-spec-expose.js'],
   'buster-webdriverjs': {
     config: {
