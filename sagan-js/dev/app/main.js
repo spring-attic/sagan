@@ -1,1 +1,1 @@
-console.log('main evaluated');
+require('./guide');

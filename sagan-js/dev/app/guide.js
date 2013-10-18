@@ -1,4 +1,10 @@
-ZeroClipboard.setDefaults( { moviePath: '/js/ZeroClipboard.swf' } );
+var ZeroClipboard = require('ZeroClipboard');
+var $ = require('jquery');
+
+// work-around for implicit dependency on $.fn.tooltip
+require('bootstrap');
+
+ZeroClipboard.setDefaults( { moviePath: '/lib/zeroclipboard/ZeroClipboard.swf' } );
 
 $(document).ready(function() {
     if (ZeroClipboard.detectFlashSupport()) {
@@ -14,6 +20,7 @@ $(document).ready(function() {
         $('.clone-url.' + $(this).data('protocol')).show();
     });
 
+    // TODO: figure out what sts_import is. I can't find any other reference.
     if (typeof(sts_import) === 'function') {
         $(".gs-guide-import").show().click(function (e) {
             var linkElement = e.target;
@@ -29,7 +36,7 @@ function createCodeCopyButtons() {
     $('article .highlight pre').each(function(index) {
             var codeBlockId = "code-block-"+ index;
             $(this).attr('id', codeBlockId);
-            var button = $('<button class="copy-button snippet" id="copy-button-"' + index + ' data-clipboard-target="' + codeBlockId + '"></button>');
+            var button = $('<button class="copy-button snippet" id="copy-button-' + index + '" data-clipboard-target="' + codeBlockId + '"></button>');
             $(this).before(button);
             createCopyButton(button);
         }
