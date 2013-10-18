@@ -1,3 +1,6 @@
+/*global sts_import*/
+// TODO: Remove the sts_import code branch below, which appears to be dead code.
+
 var ZeroClipboard = require('ZeroClipboard');
 var $ = require('jquery');
 
@@ -22,10 +25,10 @@ $(document).ready(function() {
 
     // TODO: figure out what sts_import is. I can't find any other reference.
     if (typeof(sts_import) === 'function') {
-        $(".gs-guide-import").show().click(function (e) {
+        $('.gs-guide-import').show().click(function (e) {
             var linkElement = e.target;
             var url = linkElement.href;
-            sts_import("guide", url);
+            sts_import('guide', url);
             e.preventDefault();
         });
     }
@@ -34,7 +37,7 @@ $(document).ready(function() {
 
 function createCodeCopyButtons() {
     $('article .highlight pre').each(function(index) {
-            var codeBlockId = "code-block-"+ index;
+            var codeBlockId = 'code-block-'+ index;
             $(this).attr('id', codeBlockId);
             var button = $('<button class="copy-button snippet" id="copy-button-' + index + '" data-clipboard-target="' + codeBlockId + '"></button>');
             $(this).before(button);
@@ -44,7 +47,9 @@ function createCodeCopyButtons() {
 }
 
 function createCopyButton($el){
-    if($el.length === 0) return;
+    if($el.length === 0) {
+      return;
+    }
     var zero = new ZeroClipboard($el);
-    $(zero.htmlBridge).tooltip({title: "copy to clipboard", placement: 'bottom'});
+    $(zero.htmlBridge).tooltip({title: 'copy to clipboard', placement: 'bottom'});
 }
