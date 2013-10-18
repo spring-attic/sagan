@@ -2,6 +2,10 @@
  * Buster.JS configuration for JavaScript functional scenario tests.
  */
 
+// Sniff environment for phantomjs path override. Otherwise, assume
+// it's been installed via npm
+var phantomjsBin = process.env.SELENIUM_PHANTOMJS_BIN || process.cwd() + '/node_modules/.bin/phantomjs';
+
 // Shared config for all functional scenario tests
 exports['scenario-base'] = {
   rootPath: '..',
@@ -12,12 +16,13 @@ exports['scenario-base'] = {
 // For now, a simple selenium setup that will use phantomjs
 exports['scenario-phantom'] = {
   extends: 'scenario-base',
-  extensions: [require('../buster-webdriverjs')],
-  testHelpers: ['buster-spec-expose.js'],
+  extensions: [require('../lib/buster-webdriverjs')],
+  testHelpers: ['lib/buster-spec-expose.js'],
   'buster-webdriverjs': {
     config: {
       desiredCapabilities: {
-        browserName: 'phantomjs'
+        browserName: 'phantomjs',
+        'phantomjs.binary.path': phantomjsBin
       },
       logLevel: 'silent'
     }
