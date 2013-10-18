@@ -1,17 +1,10 @@
 /**
- * Buster.JS configuration for JavaScript unit and
- * functional scenario tests.
+ * Buster.JS configuration for JavaScript functional scenario tests.
  */
-
-// Basic unit test configuration for tests that can run
-// in node (i.e. no DOM requirements)
-exports.unit = {
-  environment: 'node',
-  tests: ['unit/*-spec.js', 'unit/**/*-spec.js']
-};
 
 // Shared config for all functional scenario tests
 exports['scenario-base'] = {
+  rootPath: '..',
   environment: 'node',
   tests: ['scenario/*-spec.js', 'scenario/**/*-spec.js']
 };
@@ -19,7 +12,8 @@ exports['scenario-base'] = {
 // For now, a simple selenium setup that will use phantomjs
 exports['scenario-phantom'] = {
   extends: 'scenario-base',
-  extensions: [require('./buster-webdriverjs')],
+  extensions: [require('../buster-webdriverjs')],
+  testHelpers: ['buster-spec-expose.js'],
   'buster-webdriverjs': {
     driver: 'webdriverjs',
     config: {
