@@ -41,7 +41,7 @@ var webdriverPackage = 'webdriverjs';
 var url = require('url');
 
 var defaultBaseUrl = 'http://localhost:8080';
-var defaultTimeout = 5000;
+var defaultTimeout = 10000;
 
 exports.name = 'buster-webdriverjs';
 
