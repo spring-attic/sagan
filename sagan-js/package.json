@@ -1,19 +1,24 @@
 {
-	"name": "spring.io",
-	"description": "node.js packages for spring.io UI.",
-	"dependencies": {
-		"cram": "~0"
-	},
-	"devDependencies": {
-		"buster": "~0.7",
-		"bower": "~1",
-    "jshint": "~2.1"
-	},
-	"directories": {
-		"test": "test"
-	},
-	"scripts": {
-		"test": "jshint . && buster-test -e node",
-		"prepublish": "bower install"
-	}
+  "name": "spring.io",
+  "description": "node.js packages for spring.io UI.",
+  "dependencies": {
+    "cram": "~0"
+  },
+  "devDependencies": {
+    "when": "~2",
+    "buster": "~0.7",
+    "bower": "~1",
+    "jshint": "~2.1",
+    "wd": "~0.1",
+    "phantomjs": "~1"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jshint . && buster-test -c test/unit/buster.js",
+    "phantom": "buster-test -c test/scenario/buster.js -g scenario-phantom",
+    "scenario": "buster-test -c test/scenario/buster.js -g scenario",
+    "prepublish": "bower install"
+  }
 }
