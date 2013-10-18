@@ -6,8 +6,6 @@
  * the `done` parameter to the it() callback.
  */
 
-require('../buster-spec-expose');
-
 describe('example test', function() {
 	describe('when expectations are met', function() {
 		it('passes', function() {

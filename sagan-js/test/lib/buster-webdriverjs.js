@@ -1,7 +1,7 @@
 /**
  * BusterJS extension that injects a webdriverjs session into
  * tests, and adds a path() command for accessing urls relative
- * to a configured baseUrl.
+ * to a configured baseUrl (which defaults to localhost:8080).
  *
  * Example path command:
  *
@@ -35,8 +35,12 @@
  *  }
  */
 
+// This will be lazily require()d below
+var webdriverPackage = 'webdriverjs';
+
 var url = require('url');
 
+var defaultBaseUrl = 'http://localhost:8080';
 var defaultTimeout = 5000;
 
 exports.name = 'buster-webdriverjs';
@@ -49,17 +53,10 @@ exports.create = function(options) {
 };
 
 exports.testRun = function(testRunner) {
-  var webdriverjs = require('webdriverjs');
+  var browser = createBrowser(require(webdriverPackage),
+      this.webdriverConfig, this.options);
+
   var timeout = this.options.timeout || defaultTimeout;
-  var orig = webdriverjs.remote(this.webdriverConfig);
-  var baseUrl = this.options.baseUrl || 'http://localhost:8080';
-  var browser = Object.create(orig);
-
-  browser.addCommand('path', function(relativeUrl, callback) {
-    this.url(url.resolve(baseUrl, relativeUrl), callback);
-  });
-
-  browser.init();
 
   testRunner.on('test:setUp', function(context) {
     context.testCase.timeout = timeout;
@@ -70,3 +67,16 @@ exports.testRun = function(testRunner) {
     browser.end();
   });
 };
+
+function createBrowser(webdriver, config, options) {
+  var orig = webdriver.remote(config);
+  var baseUrl = options.baseUrl || defaultBaseUrl;
+  var browser = Object.create(orig);
+
+  browser.addCommand('path', function (relativeUrl, callback) {
+    this.url(url.resolve(baseUrl, relativeUrl), callback);
+  });
+
+  browser.init();
+  return browser;
+}

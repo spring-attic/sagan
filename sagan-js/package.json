@@ -8,7 +8,8 @@
     "buster": "~0.7",
     "bower": "~1",
     "jshint": "~2.1",
-    "webdriverjs": "~0.7"
+    "webdriverjs": "~0.7",
+    "phantomjs": "~1"
   },
   "directories": {
     "test": "test"
