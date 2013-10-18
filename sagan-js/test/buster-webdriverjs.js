@@ -35,7 +35,6 @@
  *  }
  */
 
-var webdriverjs = require('webdriverjs');
 var url = require('url');
 
 var defaultTimeout = 5000;
@@ -50,6 +49,7 @@ exports.create = function(options) {
 };
 
 exports.testRun = function(testRunner) {
+  var webdriverjs = require('webdriverjs');
   var timeout = this.options.timeout || defaultTimeout;
   var orig = webdriverjs.remote(this.webdriverConfig);
   var baseUrl = this.options.baseUrl || 'http://localhost:8080';
