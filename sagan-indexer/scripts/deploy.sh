@@ -49,4 +49,4 @@ echo "switching to space $SPACE"
 $CF space $SPACE || exit
 
 echo "pushing indexer to CF"
-$CF push --manifest $SCRIPTDIR/../manifest/$SPACE.yml --name sagan-indexer --host $SPACE-sagan-indexer --reset --start || $SCRIPTS/wait-for-app-to-start.sh sagan-indexer 100 $CF
+$CF push --manifest $SCRIPTDIR/../manifest/$SPACE.yml --name sagan-indexer --host $SPACE-sagan-indexer --reset --start || $SCRIPTDIR/wait-for-app-to-start.sh sagan-indexer 100 $CF
