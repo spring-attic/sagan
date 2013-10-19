@@ -44,5 +44,6 @@ dependencies {
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test:${vSpringCore}"
 
+    // pick up common test utility classes
     testCompile project(':sagan-common').sourceSets.util.output
 }

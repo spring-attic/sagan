@@ -27,12 +27,13 @@ dependencies {
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test:${vSpringCore}"
 
+    // pick up common test utility classes
     testCompile project(':sagan-common').sourceSets.util.output
 }
 
 
 task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processResources) {
-    description = "Copies static html templates from :sagan-site in order to index them"
+    description = "Copies static html templates from :sagan-site in order to index them at runtime."
 
     from project(':sagan-site').sourceSets.main.output.resourcesDir
     into sourceSets.main.output.resourcesDir
@@ -41,6 +42,8 @@ task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processRe
 processResources.dependsOn copyStaticTemplates
 
 
+// Ensure that site tasks have execution priority over indexer tasks, as it is
+// desirable to identify problems with the site as quickly as possible
 gradle.projectsEvaluated {
     tasks.each { indexerTask ->
         def siteTask = project(':sagan-site').tasks.findByPath(indexerTask.name)
