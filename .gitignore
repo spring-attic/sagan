@@ -28,6 +28,8 @@ work/
 # IDEA
 .idea
 *.iml
+*.ipr
+*.iws
 out
 
 # Gradle

@@ -47,3 +47,8 @@ dependencies {
     // pick up common test utility classes
     testCompile project(':sagan-common').sourceSets.util.output
 }
+
+// Add src/it directories to IDEA .iml files
+idea.module {
+    testSourceDirs += [ file('src/it/java'), file('src/it/resources') ]
+}

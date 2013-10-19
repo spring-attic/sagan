@@ -11,8 +11,12 @@ buildscript {
     }
 }
 
+apply plugin: 'idea'
+idea.project.languageLevel = '1.7'
+
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'idea'
     apply plugin: 'eclipse'
 
     targetCompatibility = 1.7
