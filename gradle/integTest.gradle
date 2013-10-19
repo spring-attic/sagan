@@ -58,3 +58,9 @@ gradle.projectsEvaluated {
 // Run integration tests during the 'check' lifecycle (which already includes 'test')
 check.dependsOn integTest
 
+// Add src/it directories to IDEA .iml files
+if (project.plugins.hasPlugin('idea')) {
+    idea.module {
+        testSourceDirs += (sourceSets.integTest.java.srcDirs + sourceSets.integTest.resources.srcDirs)
+    }
+}
