@@ -12,7 +12,16 @@ buildscript {
 }
 
 apply plugin: 'idea'
-idea.project.languageLevel = '1.7'
+idea.project {
+    languageLevel = '1.7'
+    ipr {
+        withXml { provider ->
+            def mapping = provider.node.component.find { it.@name == 'VcsDirectoryMappings' }.mapping
+            mapping.@vcs = 'Git'
+            mapping.@directory = '$PROJECT_DIR$'
+        }
+    }
+}
 
 subprojects {
     apply plugin: 'java'
