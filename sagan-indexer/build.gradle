@@ -40,12 +40,13 @@ task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processRe
 }
 processResources.dependsOn copyStaticTemplates
 
+
 gradle.projectsEvaluated {
-    test.mustRunAfter project(':sagan-site').test
-    tasks['it'].mustRunAfter project(':sagan-site').tasks['it']
-    check.mustRunAfter project(':sagan-site').check
-    jar.mustRunAfter project(':sagan-site').jar
-    //build.mustRunAfter project(':sagan-site').build
-    //assemble.mustRunAfter project(':sagan-site').assemble
+    tasks.each { indexerTask ->
+        def siteTask = project(':sagan-site').tasks.findByPath(indexerTask.name)
+        if (siteTask != null) {
+            indexerTask.mustRunAfter siteTask
+        }
+    }
 }
 
