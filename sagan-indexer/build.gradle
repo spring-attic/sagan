@@ -40,16 +40,20 @@ task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processRe
 processResources.dependsOn copyStaticTemplates
 
 gradle.projectsEvaluated {
-test.mustRunAfter project(':sagan-site').test
-tasks['it'].mustRunAfter project(':sagan-site').tasks['it']
+    test.mustRunAfter project(':sagan-site').test
+    tasks['it'].mustRunAfter project(':sagan-site').tasks['it']
+    check.mustRunAfter project(':sagan-site').check
+    jar.mustRunAfter project(':sagan-site').jar
+    //build.mustRunAfter project(':sagan-site').build
+    //assemble.mustRunAfter project(':sagan-site').assemble
 }
 
 def checkTasks = []
 gradle.rootProject.allprojects { project ->
-    checkTasks.addAll(project.tasks.findAll { it.name == 'check' })
+    checkTasks.addAll(project.tasks.findAll { it.name == 'build' })
 }
 
-tasks.addRule('Pattern: deploy<Space>') { taskName ->
+tasks.addRule('Pattern: deploy<Space>: Deploys the project to a Cloud Foundry space.') { taskName ->
     if (taskName.startsWith('deploy')) {
         def space = taskName - 'deploy'
         def cfPath = System.getProperty("cf.path")?:''
