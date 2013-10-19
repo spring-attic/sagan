@@ -39,6 +39,15 @@ task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processRe
 }
 processResources.dependsOn copyStaticTemplates
 
+gradle.projectsEvaluated {
+test.mustRunAfter project(':sagan-site').test
+tasks['it'].mustRunAfter project(':sagan-site').tasks['it']
+}
+
+def checkTasks = []
+gradle.rootProject.allprojects { project ->
+    checkTasks.addAll(project.tasks.findAll { it.name == 'check' })
+}
 
 tasks.addRule('Pattern: deploy<Space>') { taskName ->
     if (taskName.startsWith('deploy')) {
@@ -53,6 +62,7 @@ tasks.addRule('Pattern: deploy<Space>') { taskName ->
             // ensure the indexer is always deployed after the site, because if the
             // site fails to deploy, we don't want the indexer to deploy at all
             mustRunAfter project(':sagan-site').tasks[taskName]
+            mustRunAfter checkTasks
         }
     }
 }

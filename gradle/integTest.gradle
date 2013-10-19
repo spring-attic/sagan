@@ -28,3 +28,13 @@ dependencies {
     itRuntime configurations.runtime
     itRuntime configurations.testRuntime
 }
+
+gradle.projectsEvaluated {
+    def unitTestTasks = []
+    gradle.rootProject.allprojects { project ->
+        unitTestTasks.addAll(project.tasks.findAll { it.name == 'test' })
+    }
+    unitTestTasks.each { unitTestTask ->
+        project.tasks['it'].mustRunAfter unitTestTask
+    }
+}

@@ -46,6 +46,10 @@ dependencies {
     testCompile project(':sagan-common').sourceSets.util.output
 }
 
+def checkTasks = []
+gradle.rootProject.allprojects { project ->
+    checkTasks.addAll(project.tasks.findAll { it.name == 'check' })
+}
 
 tasks.addRule('Pattern: deploy<Space>') { taskName ->
     if (taskName.startsWith('deploy')) {
@@ -56,6 +60,7 @@ tasks.addRule('Pattern: deploy<Space>') { taskName ->
         if (space.length() == 0) throw new GradleException('Usage: deploy<Space>')
         project.task([type: Exec, dependsOn: build], taskName) {
             commandLine './scripts/deploy-blue-green.sh', space.toLowerCase(), cfPath, cfUser, cfPass
+            mustRunAfter checkTasks
         }
     }
 }
