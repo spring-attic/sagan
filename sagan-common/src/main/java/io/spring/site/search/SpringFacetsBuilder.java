@@ -1,7 +1,4 @@
-package io.spring.site.web.search;
-
-
-import io.spring.site.search.SearchFacet;
+package io.spring.site.search;
 
 import java.util.ArrayList;
 import java.util.List;

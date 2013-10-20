@@ -1,9 +1,11 @@
 package io.spring.site.web.search;
 
-import io.spring.site.search.SearchFacet;
 import io.spring.site.search.SearchResult;
 import io.spring.site.search.SearchResults;
 import io.spring.site.search.SearchService;
+import io.spring.site.search.SearchFacet;
+import io.spring.site.search.SpringFacetsBuilder;
+
 import io.spring.site.web.PageableFactory;
 import io.spring.site.web.PaginationInfo;
 

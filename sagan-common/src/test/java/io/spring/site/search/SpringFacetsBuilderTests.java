@@ -1,10 +1,10 @@
-package io.spring.site.web.search;
+package io.spring.site.search;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import io.spring.site.search.SearchFacet;
-import io.spring.site.web.search.SpringFacetsBuilder;
+import io.spring.site.search.SpringFacetsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
