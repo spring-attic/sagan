@@ -12,6 +12,7 @@ buildscript {
     }
 }
 
+apply plugin: 'eclipse'
 apply plugin: 'idea'
 idea.project {
     languageLevel = '1.7'
