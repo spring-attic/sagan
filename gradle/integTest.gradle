@@ -22,7 +22,6 @@ sourceSets {
 
 task integTest(type: Test) {
     description = "Runs integration tests."
-    mustRunAfter test
 
     testClassesDir = sourceSets.integTest.output.classesDir
     classpath = sourceSets.integTest.runtimeClasspath
@@ -32,6 +31,10 @@ task integTest(type: Test) {
     // ensure we don't overwrite default report directories used by 'test' task
     reports.html.destination = "${project.buildDir}/reports/integTest"
     reports.junitXml.destination = "${project.buildDir}/integTest-results"
+    binResultsDir = file("${project.buildDir}/integTest-results/binary/integTest")
+
+    // always run integration tests after unit tests in order to fail fast
+    mustRunAfter test
 }
 
 dependencies {
