@@ -1,7 +1,8 @@
-package io.spring.site.domain.tools.toolsuite.parser;
+package io.spring.site.domain.tools.parser;
 
 import io.spring.site.domain.tools.toolsuite.Architecture;
 import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
+import io.spring.site.domain.tools.toolsuite.parser.ToolXmlConverter;
 import io.spring.site.domain.tools.toolsuite.xml.Download;
 import io.spring.site.domain.tools.toolsuite.xml.Release;
 import io.spring.site.domain.tools.toolsuite.xml.ToolSuiteXml;

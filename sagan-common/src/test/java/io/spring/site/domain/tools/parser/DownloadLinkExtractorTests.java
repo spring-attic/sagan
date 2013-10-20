@@ -1,4 +1,4 @@
-package io.spring.site.domain.tools.toolsuite.parser;
+package io.spring.site.domain.tools.parser;
 
 import io.spring.site.domain.tools.toolsuite.parser.DownloadLinkExtractor;
 import io.spring.site.domain.tools.toolsuite.xml.Download;

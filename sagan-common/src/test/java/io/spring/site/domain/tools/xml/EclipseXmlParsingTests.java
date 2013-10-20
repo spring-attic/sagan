@@ -1,5 +1,7 @@
-package io.spring.site.domain.tools.eclipse.xml;
+package io.spring.site.domain.tools.xml;
 
+import io.spring.site.domain.tools.eclipse.xml.EclipseXml;
+import io.spring.site.domain.tools.eclipse.xml.EclipseXmlProduct;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;

@@ -1,5 +1,6 @@
-package io.spring.site.domain.tools.toolsuite.parser;
+package io.spring.site.domain.tools.parser;
 
+import io.spring.site.domain.tools.toolsuite.parser.ToolXmlConverter;
 import org.junit.Before;
 import org.junit.Test;
 

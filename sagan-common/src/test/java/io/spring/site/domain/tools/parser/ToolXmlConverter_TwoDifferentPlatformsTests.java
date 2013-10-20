@@ -1,5 +1,6 @@
-package io.spring.site.domain.tools.toolsuite.parser;
+package io.spring.site.domain.tools.parser;
 
+import io.spring.site.domain.tools.toolsuite.parser.ToolXmlConverter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,8 +18,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class ToolXmlConverter_TwoDifferentFileTypesForSameVersionTests {
-
+public class ToolXmlConverter_TwoDifferentPlatformsTests {
     private ToolSuiteDownloads toolSuite;
     private ToolXmlConverter toolXmlConverter;
 
@@ -41,9 +41,9 @@ public class ToolXmlConverter_TwoDifferentFileTypesForSameVersionTests {
         downloads.add(download);
 
         download = new Download();
-        download.setDescription("Mac OS X (Cocoa)");
-        download.setOs("mac");
-        download.setFile("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.tar.gz");
+        download.setDescription("Windows (64bit)");
+        download.setOs("windows");
+        download.setFile("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-x86_64-installer.exe");
         download.setBucket("http://dist.springsource.com/");
         download.setEclipseVersion("4.3");
         download.setSize("373MB");
@@ -60,40 +60,50 @@ public class ToolXmlConverter_TwoDifferentFileTypesForSameVersionTests {
         toolSuite = toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite", "STS");
     }
 
+
     @Test
     public void setsTheReleaseName() {
         assertThat(toolSuite.getReleaseName(), equalTo("3.3.0.RELEASE"));
     }
 
     @Test
-    public void addsTheMacPlatform() throws Exception {
+    public void addsBothPlatforms() throws Exception {
+        assertThat(toolSuite.getPlatformList().get(0).getName(), equalTo("Windows"));
         assertThat(toolSuite.getPlatformList().get(1).getName(), equalTo("Mac"));
     }
 
     @Test
-    public void addsAnEclipseVersionToThePlatform() throws Exception {
-        ToolSuitePlatform platform = toolSuite.getPlatformList().get(1);
-        assertThat(platform.getEclipseVersions().size(), equalTo(1));
-        assertThat(platform.getEclipseVersions().get(0).getName(), equalTo("4.3"));
+    public void addsAnEclipseVersionToEachPlatform() throws Exception {
+        ToolSuitePlatform mac = toolSuite.getPlatformList().get(0);
+        assertThat(mac.getEclipseVersions().size(), equalTo(1));
+        assertThat(mac.getEclipseVersions().get(0).getName(), equalTo("4.3"));
+
+        ToolSuitePlatform windows = toolSuite.getPlatformList().get(0);
+        assertThat(windows.getEclipseVersions().size(), equalTo(1));
+        assertThat(windows.getEclipseVersions().get(0).getName(), equalTo("4.3"));
     }
 
     @Test
-    public void addsAnArchitectureToTheEclipseVersion() throws Exception {
-        ToolSuitePlatform platform = toolSuite.getPlatformList().get(1);
-        EclipseVersion eclipseVersion = platform.getEclipseVersions().get(0);
+    public void addsAnArchitectureToTheEclipseVersionInEachPlatform() throws Exception {
+        ToolSuitePlatform mac = toolSuite.getPlatformList().get(1);
+        EclipseVersion eclipseVersion = mac.getEclipseVersions().get(0);
         assertThat(eclipseVersion.getArchitectures().size(), equalTo(1));
         assertThat(eclipseVersion.getArchitectures().get(0).getName(), equalTo("Mac OS X (Cocoa)"));
+
+        ToolSuitePlatform windows = toolSuite.getPlatformList().get(0);
+        EclipseVersion windowsEclipseVersion = windows.getEclipseVersions().get(0);
+        assertThat(windowsEclipseVersion.getArchitectures().size(), equalTo(1));
+        assertThat(windowsEclipseVersion.getArchitectures().get(0).getName(), equalTo("Windows (64bit)"));
     }
 
     @Test
-    public void addsADownloadLinkTheArchitecture() throws Exception {
-        ToolSuitePlatform platform = toolSuite.getPlatformList().get(1);
-        EclipseVersion eclipseVersion = platform.getEclipseVersions().get(0);
-        Architecture architecture = eclipseVersion.getArchitectures().get(0);
+    public void addsADownloadLinkTheArchitectureInEachPlatform() throws Exception {
+        Architecture macArchitecture = toolSuite.getPlatformList().get(1).getEclipseVersions().get(0).getArchitectures().get(0);
+        assertThat(macArchitecture.getDownloadLinks().size(), equalTo(1));
+        assertThat(macArchitecture.getDownloadLinks().get(0).getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
 
-        assertThat(architecture.getDownloadLinks().size(), equalTo(2));
-        assertThat(architecture.getDownloadLinks().get(0).getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
-        assertThat(architecture.getDownloadLinks().get(1).getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.tar.gz"));
+        Architecture windowsArchitecture = toolSuite.getPlatformList().get(0).getEclipseVersions().get(0).getArchitectures().get(0);
+        assertThat(windowsArchitecture.getDownloadLinks().size(), equalTo(1));
+        assertThat(windowsArchitecture.getDownloadLinks().get(0).getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-x86_64-installer.exe"));
     }
-
 }

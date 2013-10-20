@@ -1,9 +1,10 @@
-package io.spring.site.domain.tools.eclipse.parser;
+package io.spring.site.domain.tools.parser;
 
 import io.spring.site.domain.tools.eclipse.EclipseDownloads;
 import io.spring.site.domain.tools.eclipse.EclipsePackage;
 import io.spring.site.domain.tools.eclipse.EclipsePlatform;
 import io.spring.site.domain.tools.eclipse.EclipseRelease;
+import io.spring.site.domain.tools.eclipse.parser.EclipseDownloadsXmlConverter;
 import io.spring.site.domain.tools.eclipse.xml.EclipseXml;
 import org.junit.Before;
 import org.junit.Test;

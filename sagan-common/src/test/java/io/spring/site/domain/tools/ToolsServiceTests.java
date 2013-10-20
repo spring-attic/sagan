@@ -1,6 +1,7 @@
 package io.spring.site.domain.tools;
 
 import io.spring.site.domain.services.CachedRestClient;
+import io.spring.site.domain.tools.ToolsService;
 import io.spring.site.domain.tools.toolsuite.DownloadLink;
 import io.spring.site.domain.tools.toolsuite.EclipseVersion;
 import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;

@@ -2,9 +2,6 @@ package io.spring.site.domain.tools.toolsuite;
 
 import org.junit.Test;
 
-import io.spring.site.domain.tools.toolsuite.Architecture;
-import io.spring.site.domain.tools.toolsuite.DownloadLink;
-
 import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;

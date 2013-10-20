@@ -1,4 +1,4 @@
-package io.spring.site.domain.tools.eclipse.parser;
+package io.spring.site.domain.tools.parser;
 
 import org.junit.Before;
 import org.junit.Test;

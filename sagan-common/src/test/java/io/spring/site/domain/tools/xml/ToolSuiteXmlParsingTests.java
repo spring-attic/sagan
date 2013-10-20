@@ -1,5 +1,7 @@
-package io.spring.site.domain.tools.toolsuite.xml;
+package io.spring.site.domain.tools.xml;
 
+import io.spring.site.domain.tools.toolsuite.xml.Release;
+import io.spring.site.domain.tools.toolsuite.xml.ToolSuiteXml;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
