@@ -1,4 +1,4 @@
-package io.spring.site.web.team;
+package io.spring.site.domain.team;
 
 import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.domain.team.TeamService;

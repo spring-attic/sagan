@@ -1,13 +1,18 @@
-package io.spring.site.domain.team;
+package io.spring.site.web.team;
 
 import io.spring.site.domain.services.DateService;
+import io.spring.site.domain.team.MemberProfile;
+import io.spring.site.domain.team.MemberProfileBuilder;
+import io.spring.site.domain.team.TeamLocation;
 import io.spring.site.web.blog.CachedBlogService;
 import io.spring.site.web.blog.PostViewFactory;
-import io.spring.site.web.team.CachedTeamService;
 import io.spring.site.web.team.TeamController;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ExtendedModelMap;
@@ -16,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TeamControllerTests {
@@ -26,7 +29,7 @@ public class TeamControllerTests {
     private CachedBlogService blogService;
 
     @Mock
-    private CachedTeamService teamService;
+    private io.spring.site.domain.team.CachedTeamService teamService;
 
     private ExtendedModelMap model = new ExtendedModelMap();
 
@@ -51,7 +54,7 @@ public class TeamControllerTests {
                 .id(321L)
                 .build());
 
-        given(this.teamService.fetchActiveMembers()).willReturn(members);
+        BDDMockito.given(this.teamService.fetchActiveMembers()).willReturn(members);
     }
 
     @Test
@@ -62,15 +65,15 @@ public class TeamControllerTests {
                 .get("teamLocations");
 
         TeamLocation norman = teamLocations.get(0);
-        assertThat(norman.getName(), equalTo("Norman"));
-        assertThat(norman.getLatitude(), equalTo(10f));
-        assertThat(norman.getLongitude(), equalTo(5f));
-        assertThat(norman.getMemberId(), equalTo(123L));
+        MatcherAssert.assertThat(norman.getName(), Matchers.equalTo("Norman"));
+        MatcherAssert.assertThat(norman.getLatitude(), Matchers.equalTo(10f));
+        MatcherAssert.assertThat(norman.getLongitude(), Matchers.equalTo(5f));
+        MatcherAssert.assertThat(norman.getMemberId(), Matchers.equalTo(123L));
 
         TeamLocation patrick = teamLocations.get(1);
-        assertThat(patrick.getName(), equalTo("Patrick"));
-        assertThat(patrick.getLatitude(), equalTo(-5f));
-        assertThat(patrick.getLongitude(), equalTo(15f));
-        assertThat(patrick.getMemberId(), equalTo(321L));
+        MatcherAssert.assertThat(patrick.getName(), Matchers.equalTo("Patrick"));
+        MatcherAssert.assertThat(patrick.getLatitude(), Matchers.equalTo(-5f));
+        MatcherAssert.assertThat(patrick.getLongitude(), Matchers.equalTo(15f));
+        MatcherAssert.assertThat(patrick.getMemberId(), Matchers.equalTo(321L));
     }
 }

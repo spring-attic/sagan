@@ -1,10 +1,5 @@
 package io.spring.site.domain.team;
 
-import io.spring.site.domain.team.GeoLocation;
-import io.spring.site.domain.team.MemberProfile;
-
-import org.springframework.test.util.ReflectionTestUtils;
-
 public class MemberProfileBuilder {
 
     private Long id;
@@ -76,7 +71,7 @@ public class MemberProfileBuilder {
     }
 
     public MemberProfile build() {
-        MemberProfile profile = new MemberProfile();
+        MemberProfile profile = new MemberProfile(this.id);
         profile.setName(name);
         profile.setUsername(username);
         profile.setLocation(location);
@@ -84,7 +79,6 @@ public class MemberProfileBuilder {
         profile.setAvatarUrl(avatarUrl);
         profile.setGeoLocation(geoLocation);
         profile.setHidden(hidden);
-        ReflectionTestUtils.setField(profile, "id", this.id);
         return profile;
     }
 }

@@ -61,6 +61,14 @@ public class MemberProfile {
     @Column
     private boolean hidden;
 
+    public MemberProfile() {
+    }
+
+    /** For unit testing purposes */
+    MemberProfile(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

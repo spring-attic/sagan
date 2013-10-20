@@ -1,7 +1,5 @@
 package io.spring.site.domain.team;
 
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.domain.team.MemberProfileSearchEntryMapper;
 import io.spring.site.search.SearchEntry;
 
 import org.junit.Before;

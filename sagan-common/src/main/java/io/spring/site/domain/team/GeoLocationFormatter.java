@@ -1,4 +1,4 @@
-package io.spring.site.web.team;
+package io.spring.site.domain.team;
 
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;

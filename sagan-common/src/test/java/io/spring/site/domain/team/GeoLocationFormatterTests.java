@@ -3,9 +3,6 @@ package io.spring.site.domain.team;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.spring.site.domain.team.GeoLocation;
-import io.spring.site.web.team.GeoLocationFormatter;
-
 import java.text.ParseException;
 
 import static org.hamcrest.MatcherAssert.assertThat;

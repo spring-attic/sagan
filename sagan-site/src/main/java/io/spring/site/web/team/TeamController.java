@@ -1,6 +1,7 @@
 package io.spring.site.web.team;
 
 import io.spring.site.domain.blog.Post;
+import io.spring.site.domain.team.CachedTeamService;
 import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.domain.team.TeamLocation;
 import io.spring.site.web.PageableFactory;
