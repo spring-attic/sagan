@@ -36,6 +36,7 @@ dependencies {
     compile 'joda-time:joda-time:2.3'
     compile 'org.hibernate:hibernate-validator:4.3.1.Final'
 
+    testUtilCompile "junit:junit:${vJunit}"
     testUtilCompile sourceSets.main.output
     testUtilCompile configurations.compile
     testUtilRuntime configurations.runtime
