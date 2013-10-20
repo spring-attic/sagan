@@ -1,4 +1,4 @@
-package io.spring.site.domain.blog.web;
+package io.spring.site.web.blog;
 
 import io.spring.site.domain.blog.Post;
 import utils.PostBuilder;

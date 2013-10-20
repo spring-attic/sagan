@@ -1,4 +1,4 @@
-package io.spring.site.domain.blog.web;
+package io.spring.site.web.blog;
 
 import io.spring.site.domain.blog.Post;
 import utils.PostBuilder;
@@ -28,7 +28,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.eq;
 
-public class BlogController_BroadcastPostsTests {
+public class BlogController_PublishedPostsTests {
 
     private static final int TEST_PAGE = 1;
 
@@ -53,16 +53,17 @@ public class BlogController_BroadcastPostsTests {
 
         List<Post> posts = new ArrayList<>();
         posts.add(PostBuilder.post().build());
-        Page<Post> postsPage = new PageImpl<>(posts, new PageRequest(TEST_PAGE, 10), 20);
+        Page<Post> postsPage = new PageImpl<>(posts, new PageRequest(TEST_PAGE, 10),
+                20);
         Pageable testPageable = PageableFactory.forLists(TEST_PAGE);
 
         this.page = new PageImpl<>(new ArrayList<PostView>(), testPageable, 1);
 
-        given(this.blogService.getPublishedBroadcastPosts(eq(testPageable))).willReturn(postsPage);
+        given(this.blogService.getPublishedPosts(eq(testPageable))).willReturn(postsPage);
         given(this.postViewFactory.createPostViewPage(postsPage)).willReturn(this.page);
         this.request.setServletPath("/blog");
 
-        this.viewName = this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
+        this.viewName = this.controller.listPublishedPosts(this.model, TEST_PAGE);
     }
 
     @Test
@@ -78,15 +79,13 @@ public class BlogController_BroadcastPostsTests {
     }
 
     @Test
-    public void viewNameIsIndex() throws Exception {
+    public void viewNameIsIndex() {
         assertThat(this.viewName, is("blog/index"));
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    public void postsInModel() throws Exception {
-        this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
+    public void postsInModel() {
         assertThat((List<PostView>) this.model.get("posts"), is(this.posts));
     }
-
 }

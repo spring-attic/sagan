@@ -1,4 +1,4 @@
-package io.spring.site.domain.blog.web;
+package io.spring.site.web.blog;
 
 import io.spring.site.domain.blog.Post;
 import utils.PostBuilder;
@@ -23,16 +23,14 @@ import org.springframework.ui.ExtendedModelMap;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.spring.site.domain.blog.PostCategory.ENGINEERING;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.eq;
 
-public class BlogController_PublishedPostsForCategoryTests {
+public class BlogController_BroadcastPostsTests {
 
     private static final int TEST_PAGE = 1;
-    public static final PostCategory TEST_CATEGORY = ENGINEERING;
 
     @Mock
     private CachedBlogService blogService;
@@ -60,14 +58,11 @@ public class BlogController_PublishedPostsForCategoryTests {
 
         this.page = new PageImpl<>(new ArrayList<PostView>(), testPageable, 1);
 
-        given(this.blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(testPageable)))
-                .willReturn(postsPage);
+        given(this.blogService.getPublishedBroadcastPosts(eq(testPageable))).willReturn(postsPage);
         given(this.postViewFactory.createPostViewPage(postsPage)).willReturn(this.page);
-
         this.request.setServletPath("/blog");
 
-        this.viewName = this.controller.listPublishedPostsForCategory(TEST_CATEGORY,
-                this.model, TEST_PAGE);
+        this.viewName = this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
     }
 
     @Test
@@ -83,14 +78,15 @@ public class BlogController_PublishedPostsForCategoryTests {
     }
 
     @Test
-    public void viewNameIsIndex() {
+    public void viewNameIsIndex() throws Exception {
         assertThat(this.viewName, is("blog/index"));
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    public void postsInModel() {
-        this.controller.listPublishedPostsForCategory(TEST_CATEGORY, this.model, TEST_PAGE);
+    public void postsInModel() throws Exception {
+        this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
         assertThat((List<PostView>) this.model.get("posts"), is(this.posts));
     }
+
 }
