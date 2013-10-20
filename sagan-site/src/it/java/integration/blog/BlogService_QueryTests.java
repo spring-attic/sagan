@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import utils.PostBuilder;
+import io.spring.site.domain.blog.PostBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package io.spring.common.config;
+package io.spring.site.search;
 
 //import io.spring.site.search.SearchService;
 

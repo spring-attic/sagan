@@ -1,4 +1,4 @@
-package utils;
+package io.spring.site.search;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;

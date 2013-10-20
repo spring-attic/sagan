@@ -2,7 +2,7 @@ package integration.team;
 
 import integration.IntegrationTestBase;
 import io.spring.site.domain.blog.Post;
-import utils.PostBuilder;
+import io.spring.site.domain.blog.PostBuilder;
 import io.spring.site.domain.blog.PostRepository;
 import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.domain.team.MemberProfileBuilder;

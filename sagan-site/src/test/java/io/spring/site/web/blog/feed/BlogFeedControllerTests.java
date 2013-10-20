@@ -2,7 +2,7 @@ package io.spring.site.web.blog.feed;
 
 import io.spring.site.domain.blog.BlogService;
 import io.spring.site.domain.blog.Post;
-import utils.PostBuilder;
+import io.spring.site.domain.blog.PostBuilder;
 import io.spring.site.domain.blog.PostCategory;
 import io.spring.site.web.PageableFactory;
 

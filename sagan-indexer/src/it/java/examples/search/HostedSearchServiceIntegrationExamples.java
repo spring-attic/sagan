@@ -26,7 +26,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import utils.LongRunning;
-import utils.SearchEntryBuilder;
+import io.spring.site.search.SearchEntryBuilder;
 import utils.SetSystemProperty;
 
 import java.text.ParseException;

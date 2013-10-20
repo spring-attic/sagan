@@ -17,7 +17,6 @@ import io.spring.site.domain.services.DateService;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchException;
 import io.spring.site.search.SearchService;
-import utils.PostBuilder;
 
 import java.util.Date;
 

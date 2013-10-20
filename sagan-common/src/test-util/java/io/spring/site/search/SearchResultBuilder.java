@@ -1,6 +1,4 @@
-package utils;
-
-import io.spring.site.search.SearchResult;
+package io.spring.site.search;
 
 public class SearchResultBuilder {
 

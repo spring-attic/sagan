@@ -1,7 +1,5 @@
-package utils;
+package io.spring.site.domain.blog;
 
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostCategory;
 import io.spring.site.domain.team.MemberProfile;
 
 import java.text.ParseException;

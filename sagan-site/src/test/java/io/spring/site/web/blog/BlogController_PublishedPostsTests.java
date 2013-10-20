@@ -1,14 +1,10 @@
 package io.spring.site.web.blog;
 
 import io.spring.site.domain.blog.Post;
-import utils.PostBuilder;
+import io.spring.site.domain.blog.PostBuilder;
 import io.spring.site.domain.blog.PostCategory;
 import io.spring.site.web.PageableFactory;
 import io.spring.site.web.PaginationInfo;
-import io.spring.site.web.blog.BlogController;
-import io.spring.site.web.blog.CachedBlogService;
-import io.spring.site.web.blog.PostView;
-import io.spring.site.web.blog.PostViewFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

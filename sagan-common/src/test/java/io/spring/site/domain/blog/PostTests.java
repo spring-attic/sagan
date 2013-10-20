@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import utils.DateTestUtils;
 
-import utils.PostBuilder;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

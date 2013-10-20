@@ -1,6 +1,4 @@
-package utils;
-
-import io.spring.site.search.SearchEntry;
+package io.spring.site.search;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

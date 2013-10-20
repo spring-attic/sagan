@@ -18,7 +18,7 @@ package io.spring.site.web.configuration;
 import com.google.common.cache.CacheBuilder;
 import io.spring.common.config.DatabaseConfig;
 import io.spring.common.config.GitHubConfiguration;
-import io.spring.common.config.SearchClientConfiguration;
+import io.spring.site.search.SearchClientConfiguration;
 import io.spring.site.domain.projects.ProjectMetadataService;
 import io.spring.site.domain.projects.ProjectMetadataYamlParser;
 import io.spring.site.domain.services.DateService;

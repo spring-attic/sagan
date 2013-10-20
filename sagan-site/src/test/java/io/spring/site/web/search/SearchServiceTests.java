@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 import org.springframework.data.domain.Pageable;
-import utils.SearchEntryBuilder;
+import io.spring.site.search.SearchEntryBuilder;
 
 import java.util.Collections;
 

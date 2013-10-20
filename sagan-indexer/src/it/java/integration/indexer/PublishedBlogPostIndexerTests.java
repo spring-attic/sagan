@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
-import utils.PostBuilder;
+import io.spring.site.domain.blog.PostBuilder;
 
 import java.util.Calendar;
 import java.util.Date;
