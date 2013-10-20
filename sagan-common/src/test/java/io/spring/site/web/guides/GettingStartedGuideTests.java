@@ -1,4 +1,4 @@
-package io.spring.site.domain.guides;
+package io.spring.site.web.guides;
 
 import io.spring.site.domain.guides.Guide;
 

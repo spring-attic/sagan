@@ -40,6 +40,12 @@ dependencies {
     testUtilCompile sourceSets.main.output
     testUtilCompile configurations.compile
     testUtilRuntime configurations.runtime
+
+    // pick up common test utility classes
+    testCompile sourceSets.testUtil.output
+
+    // for use of spring-test's MatcherAssertionErrors.*
+    testCompile "org.springframework:spring-test:${vSpringCore}"
 }
 
 // Add test util source directories to IDEA .iml files

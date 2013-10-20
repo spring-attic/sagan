@@ -1,4 +1,4 @@
-package io.spring.site.domain.blog;
+package io.spring.site.domain.blog.web;
 
 import io.spring.site.web.PageElement;
 import io.spring.site.web.PaginationInfo;
