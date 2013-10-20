@@ -40,3 +40,10 @@ dependencies {
     testUtilCompile configurations.compile
     testUtilRuntime configurations.runtime
 }
+
+// Add test util source directories to IDEA .iml files
+if (project.plugins.hasPlugin('idea')) {
+    idea.module {
+        testSourceDirs += (sourceSets.testUtil.java.srcDirs + sourceSets.testUtil.resources.srcDirs)
+    }
+}
