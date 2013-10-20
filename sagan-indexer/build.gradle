@@ -28,7 +28,7 @@ dependencies {
     testCompile "org.springframework:spring-test:${vSpringCore}"
 
     // pick up common test utility classes
-    testCompile project(':sagan-common').sourceSets.util.output
+    testCompile project(':sagan-common').sourceSets.testUtil.output
 }
 
 
