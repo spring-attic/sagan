@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Bean;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
-
 public class InMemoryElasticSearchConfiguration {
 
     @Autowired

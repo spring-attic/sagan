@@ -1,7 +1,6 @@
 package io.spring.site.domain.blog.web;
 
 import io.spring.site.web.PaginationInfo;
-import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;

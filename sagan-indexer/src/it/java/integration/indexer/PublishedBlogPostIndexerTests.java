@@ -90,37 +90,37 @@ public class PublishedBlogPostIndexerTests extends IndexerIntegrationTestBase{
 
     @Test
     public void indexedEntriesHaveATitle() throws Exception {
-        assertThat(this.indexedEntry.getTitle(), equalTo("Spring is here"));
+        assertThat(indexedEntry.getTitle(), equalTo("Spring is here"));
     }
 
     @Test
     public void indexedEntriesRawContentDoesNotIncludeMarkdownOrHtml() throws Exception {
-        assertThat(this.indexedEntry.getRawContent(), equalTo("Welcome spring!"));
+        assertThat(indexedEntry.getRawContent(), equalTo("Welcome spring!"));
     }
 
     @Test
     public void indexedEntriesFacetPathsContainTheCategory() throws Exception {
-        assertThat(this.indexedEntry.getFacetPaths(), containsInAnyOrder("Blog", "Blog/Releases"));
+        assertThat(indexedEntry.getFacetPaths(), containsInAnyOrder("Blog", "Blog/Releases"));
     }
 
     @Test
     public void indexedEntriesSummaryDoesNotIncludeMarkdownOrHtml() throws Exception {
-        assertThat(this.indexedEntry.getSummary(), equalTo("Welcome"));
+        assertThat(indexedEntry.getSummary(), equalTo("Welcome"));
     }
 
     @Test
     public void indexedEntriesHaveASubtitle() throws Exception {
-        assertThat(this.indexedEntry.getSubTitle(), equalTo("Blog Post"));
+        assertThat(indexedEntry.getSubTitle(), equalTo("Blog Post"));
     }
 
     @Test
     public void indexedEntriesHaveThePostPath() throws Exception {
-        assertThat(this.indexedEntry.getPath(), equalTo("/blog/" + post.getPublicSlug()));
+        assertThat(indexedEntry.getPath(), equalTo("/blog/" + post.getPublicSlug()));
     }
 
     @Test
     public void indexedEntriesHaveThePublishedAtDate() throws Exception {
-        assertThat(this.indexedEntry.getPublishAt(), equalTo(publishedDate));
+        assertThat(indexedEntry.getPublishAt(), equalTo(publishedDate));
     }
 
 }

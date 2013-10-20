@@ -157,6 +157,7 @@ public class BlogAdminControllerTests {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void attemptingToCreateADuplicatePostReturnsToPostForm() throws Exception {
         String username = "username";
 
