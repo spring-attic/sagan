@@ -9,7 +9,7 @@ import io.spring.site.indexer.StaticPageIndexer;
 import io.spring.site.indexer.ToolsIndexer;
 import io.spring.site.indexer.TutorialIndexer;
 import io.spring.site.indexer.UnderstandingGuideIndexer;
-import sagan.app.indexer.IndexerConfiguration;
+import sagan.app.indexer.ApplicationConfiguration;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import static integration.indexer.IndexerSchedulerTests.TestConfiguration;
 public class IndexerSchedulerTests extends IndexerIntegrationTestBase {
 
     @Configuration
-    @Import({IndexerConfiguration.class})
+    @Import({ApplicationConfiguration.class})
     public static class TestConfiguration {
         @Bean
         @Primary

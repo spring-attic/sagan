@@ -6,7 +6,7 @@ import sagan.guides.Guide;
 import sagan.guides.UnderstandingGuide;
 import io.spring.site.indexer.GettingStartedGuideIndexer;
 import io.spring.site.indexer.UnderstandingGuideIndexer;
-import sagan.app.indexer.IndexerConfiguration;
+import sagan.app.indexer.ApplicationConfiguration;
 import sagan.search.SearchResult;
 import sagan.search.SearchResults;
 import sagan.search.service.SearchService;
@@ -36,7 +36,7 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { IndexerConfiguration.class}, initializers = {
+@ContextConfiguration(classes = { ApplicationConfiguration.class}, initializers = {
         ConfigFileApplicationContextInitializer.class,
         LoggingApplicationContextInitializer.class })
 @DirtiesContext

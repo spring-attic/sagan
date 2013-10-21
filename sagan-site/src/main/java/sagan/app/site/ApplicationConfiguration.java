@@ -16,6 +16,7 @@
 package sagan.app.site;
 
 import com.google.common.cache.CacheBuilder;
+import sagan.Packages;
 import sagan.util.service.db.DatabaseConfig;
 import sagan.util.service.github.GitHubConfiguration;
 import sagan.search.SearchClientConfiguration;
@@ -55,10 +56,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
+import static sagan.Packages.sagan;
+
 @EnableAutoConfiguration
 @Configuration
 @EnableCaching
-@ComponentScan("sagan")
+@ComponentScan(sagan)
 public class ApplicationConfiguration {
 
     public static final String REWRITE_FILTER_NAME = "rewriteFilter";

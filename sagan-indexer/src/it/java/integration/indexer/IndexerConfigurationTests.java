@@ -15,7 +15,7 @@
  */
 package integration.indexer;
 
-import sagan.app.indexer.IndexerConfiguration;
+import sagan.app.indexer.ApplicationConfiguration;
 
 import org.junit.After;
 import org.junit.Test;
@@ -42,15 +42,15 @@ public class IndexerConfigurationTests {
         int port = FreePortFinder.find();
 
         this.context = (ConfigurableApplicationContext) SpringApplication.run(
-                IndexerConfiguration.class, "--server.port=" + port,
+                ApplicationConfiguration.class, "--server.port=" + port,
                 "--spring.database.url=jdbc:h2:mem:acceptancetestdb;MODE=PostgreSQL",
                 "--search.indexer.delay=6000000",
                 "--elasticsearch.client.endpoint=http://localhost:9200",
                 "--elasticsearch.client.index=sagan-test",
                 "--spring.profiles.active=acceptance");
 
-        IndexerConfiguration configuration = this.context
-                .getBean(IndexerConfiguration.class);
+        ApplicationConfiguration configuration = this.context
+                .getBean(ApplicationConfiguration.class);
         assertNotNull(configuration);
         this.context.close();
     }

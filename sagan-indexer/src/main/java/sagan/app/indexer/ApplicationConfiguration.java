@@ -1,8 +1,5 @@
 package sagan.app.indexer;
 
-import sagan.util.service.db.DatabaseConfig;
-import sagan.util.service.github.GitHubConfiguration;
-import sagan.search.SearchClientConfiguration;
 import sagan.util.web.StaticPagePathFinder;
 import sagan.projects.service.ProjectMetadataService;
 import sagan.projects.service.ProjectMetadataYamlParser;
@@ -14,7 +11,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.scheduling.TaskScheduler;
@@ -26,18 +22,19 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static sagan.Packages.sagan;
+
 @EnableAutoConfiguration
 @Configuration
 @EnableScheduling
-@Import({DatabaseConfig.class, SearchClientConfiguration.class, GitHubConfiguration.class})
-@ComponentScan({ "io.spring.site.indexer", "io.spring.site.domain", "io.spring.site.search" })
-public class IndexerConfiguration {
+@ComponentScan(sagan)
+public class ApplicationConfiguration {
 
     @Value("classpath:/project-metadata.yml")
     private Resource projectMetadata;
 
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(IndexerConfiguration.class);
+        SpringApplication application = new SpringApplication(ApplicationConfiguration.class);
         application.run(args);
     }
 

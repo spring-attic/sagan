@@ -1,6 +1,6 @@
 package integration;
 
-import sagan.app.indexer.IndexerConfiguration;
+import sagan.app.indexer.ApplicationConfiguration;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
@@ -25,7 +25,7 @@ public abstract class IndexerIntegrationTestBase {
     public static SetSystemProperty delay = new SetSystemProperty("search.indexer.delay", "60000000");
 
     @Configuration
-    @Import({IndexerConfiguration.class})
+    @Import({ApplicationConfiguration.class})
     public static class TestConfiguration {
 
     }

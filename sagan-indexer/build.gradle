@@ -3,7 +3,7 @@ apply plugin: 'application'
 apply from: '../gradle/integTest.gradle'
 apply from: '../gradle/deploy.gradle'
 
-mainClassName = 'sagan.app.indexer.IndexerConfiguration'
+mainClassName = 'sagan.app.indexer.ApplicationConfiguration'
 
 springBoot {
     backupSource = false
