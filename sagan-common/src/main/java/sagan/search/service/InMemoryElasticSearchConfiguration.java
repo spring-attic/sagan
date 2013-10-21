@@ -1,13 +1,13 @@
 package sagan.search.service;
 
-import sagan.search.service.SearchService;
-import org.elasticsearch.client.Client;
-import org.elasticsearch.node.NodeBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+
+import org.elasticsearch.client.Client;
+import org.elasticsearch.node.NodeBuilder;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 
 public class InMemoryElasticSearchConfiguration {
 

@@ -1,13 +1,13 @@
 package sagan.projects.web;
 
 import sagan.projects.service.ProjectMetadataService;
-import sagan.projects.web.ProjectsController;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import org.springframework.ui.ExtendedModelMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;

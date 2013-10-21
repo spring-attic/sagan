@@ -1,11 +1,10 @@
 package sagan.search.web;
 
+import sagan.search.SearchFacet;
 import sagan.search.SearchResult;
 import sagan.search.SearchResults;
-import sagan.search.service.SearchService;
-import sagan.search.SearchFacet;
 import sagan.search.SpringFacetsBuilder;
-
+import sagan.search.service.SearchService;
 import sagan.util.web.PageableFactory;
 import sagan.util.web.PaginationInfo;
 
@@ -17,9 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @RequestMapping("/search")
@@ -32,7 +29,7 @@ public class SearchController {
         this.searchService = searchService;
     }
 
-    @RequestMapping(method = {GET, HEAD, POST})
+    @RequestMapping(method = { GET, HEAD, POST })
     public String search(SearchForm searchForm, @RequestParam(defaultValue = "1") int page, Model model) {
         Pageable pageable = PageableFactory.forSearch(page);
         SearchResults searchResults = searchService.search(searchForm.getQ(), pageable, searchForm.getFilters());

@@ -2,15 +2,15 @@ package sagan.guides.service;
 
 import sagan.guides.UnderstandingGuide;
 import sagan.guides.UnderstandingGuideNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
-
 import sagan.util.service.github.GitHubService;
 import sagan.util.service.github.RepoContent;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 
 @Service
 public class UnderstandingGuidesService {

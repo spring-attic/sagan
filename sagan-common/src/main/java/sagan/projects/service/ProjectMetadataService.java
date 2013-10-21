@@ -15,8 +15,7 @@ public class ProjectMetadataService {
         this.projectCategoryMap = projectCategoryMap;
         this.ghPagesBaseUrl = ghPagesBaseUrl;
         this.projects = new ArrayList<>();
-        for (Map.Entry<String, List<Project>> projectCategory : projectCategoryMap
-                .entrySet()) {
+        for (Map.Entry<String, List<Project>> projectCategory : projectCategoryMap.entrySet()) {
             this.projects.addAll(projectCategory.getValue());
         }
     }

@@ -1,16 +1,13 @@
 package sagan.tools.toolsuite.xml;
 
-import sagan.tools.toolsuite.xml.Release;
-import sagan.tools.toolsuite.xml.ToolSuiteXml;
+import sagan.util.FixtureLoader;
+
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
-import sagan.util.FixtureLoader;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 public class ToolSuiteXmlParsingTests {
     private String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");

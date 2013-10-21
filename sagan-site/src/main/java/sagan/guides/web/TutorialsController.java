@@ -11,8 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @RequestMapping("/guides/tutorials")
@@ -41,8 +40,7 @@ public class TutorialsController {
     }
 
     @RequestMapping(value = "/{tutorialId}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })
-    public ResponseEntity<byte[]> loadImage(@PathVariable String tutorialId,
-                                            @PathVariable("name") String imageName) {
+    public ResponseEntity<byte[]> loadImage(@PathVariable String tutorialId, @PathVariable("name") String imageName) {
         byte[] image = this.service.loadTutorialImage(tutorialId, imageName);
         return new ResponseEntity<>(image, HttpStatus.OK);
     }

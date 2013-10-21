@@ -1,7 +1,5 @@
 package sagan.guides;
 
-import sagan.guides.Guide;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +14,7 @@ public class GettingStartedGuideTests {
 
     @Before
     public void setUp() throws Exception {
-        guide = new Guide("gs-rest-service", "rest-service", "Title","Description", CONTENT, SIDEBAR);
+        guide = new Guide("gs-rest-service", "rest-service", "Title", "Description", CONTENT, SIDEBAR);
     }
 
     @Test
@@ -46,7 +44,8 @@ public class GettingStartedGuideTests {
 
     @Test
     public void testGetCiStatusImageUrl() throws Exception {
-        assertThat(guide.getCiStatusImageUrl(), is("https://drone.io/github.com/spring-guides/gs-rest-service/status.png"));
+        assertThat(guide.getCiStatusImageUrl(),
+                is("https://drone.io/github.com/spring-guides/gs-rest-service/status.png"));
     }
 
     @Test

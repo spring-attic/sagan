@@ -4,21 +4,18 @@ import sagan.tools.eclipse.EclipseDownloads;
 import sagan.tools.eclipse.EclipsePackage;
 import sagan.tools.eclipse.EclipsePlatform;
 import sagan.tools.eclipse.EclipseRelease;
-import sagan.tools.eclipse.parser.EclipseDownloadsXmlConverter;
 import sagan.tools.eclipse.xml.EclipseXml;
-import org.junit.Before;
-import org.junit.Test;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-
 import sagan.util.FixtureLoader;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
+import org.junit.Before;
+import org.junit.Test;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
+
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsMapContaining.hasKey;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -40,14 +37,14 @@ public class EclipseDownloadsXmlConverterTests {
     @Test
     public void hasTheThreePlatforms() throws Exception {
         assertThat(platforms.size(), is(3));
-        assertThat(platforms , hasKey("windows"));
-        assertThat(platforms , hasKey("mac"));
-        assertThat(platforms , hasKey("linux"));
+        assertThat(platforms, hasKey("windows"));
+        assertThat(platforms, hasKey("mac"));
+        assertThat(platforms, hasKey("linux"));
     }
 
     @Test
     public void hasTheCorrectPlatformName() throws Exception {
-        assertThat(platforms.get("windows").getName() , is("Windows"));
+        assertThat(platforms.get("windows").getName(), is("Windows"));
     }
 
     @Test

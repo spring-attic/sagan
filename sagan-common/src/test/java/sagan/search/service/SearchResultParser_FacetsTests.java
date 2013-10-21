@@ -1,17 +1,19 @@
 package sagan.search.service;
 
-import com.google.gson.JsonParser;
-import io.searchbox.client.JestResult;
 import sagan.search.SearchFacet;
 import sagan.search.SearchResults;
-import sagan.search.service.SearchResultParser;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import com.google.gson.JsonParser;
+
+import io.searchbox.client.JestResult;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -65,13 +67,13 @@ public class SearchResultParser_FacetsTests {
             "        \"term\": \"Projects/Spring Framework/4.0.0.M1\",\n" +
             "        \"count\": 1\n" +
             "      },\n" +
-                    "{\"term\":\"Projects/Spring Security\",\"count\":797},\n" +
-                    "{\"term\":\"Projects/Spring Security/3.1.4.RELEASE\",\"count\":157},\n" +
-                    "{\"term\":\"Projects/Spring Security/3.2.0.M2\",\"count\":640},\n" +
-                    "{\"term\":\"Projects/Spring Security Kerberos\",\"count\":12},\n" +
-                    "{\"term\":\"Projects/Spring Security Kerberos/1.0.0.CI-SNAPSHOT\",\"count\":12},\n" +
-                    "{\"term\":\"Projects/Spring Security SAML\",\"count\":105},\n" +
-                    "{\"term\":\"Projects/Spring Security SAML/1.0.0.RC2\",\"count\":105}," +
+            "{\"term\":\"Projects/Spring Security\",\"count\":797},\n" +
+            "{\"term\":\"Projects/Spring Security/3.1.4.RELEASE\",\"count\":157},\n" +
+            "{\"term\":\"Projects/Spring Security/3.2.0.M2\",\"count\":640},\n" +
+            "{\"term\":\"Projects/Spring Security Kerberos\",\"count\":12},\n" +
+            "{\"term\":\"Projects/Spring Security Kerberos/1.0.0.CI-SNAPSHOT\",\"count\":12},\n" +
+            "{\"term\":\"Projects/Spring Security SAML\",\"count\":105},\n" +
+            "{\"term\":\"Projects/Spring Security SAML/1.0.0.RC2\",\"count\":105}," +
             "      {\n" +
             "        \"term\": \"Projects\",\n" +
             "        \"count\": 1\n" +

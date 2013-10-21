@@ -1,11 +1,11 @@
 package sagan.search;
 
-import org.springframework.security.crypto.codec.Base64;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.security.crypto.codec.Base64;
 
 public class SearchEntry {
 
@@ -98,7 +98,7 @@ public class SearchEntry {
         this.facetPaths = facetPaths;
     }
 
-    public void addFacetPaths(String ... facetPaths) {
+    public void addFacetPaths(String... facetPaths) {
         this.facetPaths.addAll(Arrays.asList(facetPaths));
     }
 

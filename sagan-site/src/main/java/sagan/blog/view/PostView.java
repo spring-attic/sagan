@@ -1,10 +1,9 @@
 package sagan.blog.view;
 
-
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.util.service.DateService;
 import sagan.team.MemberProfile;
+import sagan.util.service.DateService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,8 +20,7 @@ public class PostView {
     }
 
     public String getFormattedPublishDate() {
-        return this.post.isScheduled() ? "Unscheduled" : DATE_FORMAT.format(this.post
-                .getPublishAt());
+        return this.post.isScheduled() ? "Unscheduled" : DATE_FORMAT.format(this.post.getPublishAt());
     }
 
     public String getPath() {

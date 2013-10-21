@@ -1,8 +1,8 @@
 package sagan.app.site;
 
-import sagan.util.web.StaticPagePathFinder;
 import sagan.blog.BlogPostNotFoundException;
 import sagan.util.web.NavSection;
+import sagan.util.web.StaticPagePathFinder;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Configuration
 @ControllerAdvice
@@ -61,17 +61,14 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
         try {
             for (StaticPagePathFinder.PagePaths paths : this.staticPagePathFinder.findPaths()) {
                 String urlPath = paths.getUrlPath();
-                registry.addViewController(urlPath).setViewName(
-                        "pages" + paths.getFilePath());
+                registry.addViewController(urlPath).setViewName("pages" + paths.getFilePath());
                 if (!urlPath.isEmpty()) {
-                    registry.addViewController(urlPath + "/").setViewName(
-                            "pages" + paths.getFilePath());
+                    registry.addViewController(urlPath + "/").setViewName("pages" + paths.getFilePath());
                 }
             }
 
         } catch (IOException e) {
-            throw new RuntimeException(
-                    "Unable to locate static pages: " + e.getMessage(), e);
+            throw new RuntimeException("Unable to locate static pages: " + e.getMessage(), e);
         }
     }
 
@@ -87,14 +84,12 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new HandlerInterceptorAdapter() {
             @Override
-            public void postHandle(HttpServletRequest request,
-                    HttpServletResponse response, Object handler,
-                    ModelAndView modelAndView) throws Exception {
+            public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+                                   ModelAndView modelAndView) throws Exception {
 
                 if (handler instanceof HandlerMethod) {
                     HandlerMethod handlerMethod = (HandlerMethod) handler;
-                    NavSection navSection = handlerMethod.getBean().getClass()
-                            .getAnnotation(NavSection.class);
+                    NavSection navSection = handlerMethod.getBean().getClass().getAnnotation(NavSection.class);
                     if (navSection != null && modelAndView != null) {
                         modelAndView.addObject("navSection", navSection.value());
                     }

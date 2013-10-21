@@ -1,12 +1,8 @@
 package sagan.tools.eclipse.parser;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import sagan.tools.eclipse.EclipseDownloads;
 import sagan.tools.eclipse.EclipsePackage;
 import sagan.tools.eclipse.EclipseRelease;
-import sagan.tools.eclipse.parser.EclipseDownloadsXmlConverter;
 import sagan.tools.eclipse.xml.EclipseXml;
 import sagan.tools.eclipse.xml.EclipseXmlDownload;
 import sagan.tools.eclipse.xml.EclipseXmlPackage;
@@ -15,6 +11,9 @@ import sagan.tools.toolsuite.DownloadLink;
 
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -71,19 +70,23 @@ public class EclipseDownloadsXmlConverter_SingleDownloadTests {
 
     @Test
     public void addsAnArchitecture() throws Exception {
-        EclipsePackage eclipsePackage = eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages().get(0);
+        EclipsePackage eclipsePackage =
+                eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages().get(0);
         assertThat(eclipsePackage.getArchitectures().size(), equalTo(1));
         assertThat(eclipsePackage.getArchitectures().get(0).getName(), equalTo("Mac OS X (Cocoa)"));
     }
 
     @Test
     public void addsADownloadLink() throws Exception {
-        EclipsePackage eclipsePackage = eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages().get(0);
+        EclipsePackage eclipsePackage =
+                eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages().get(0);
         List<DownloadLink> downloadLinks = eclipsePackage.getArchitectures().get(0).getDownloadLinks();
         assertThat(downloadLinks.size(), equalTo(1));
         assertThat(downloadLinks.get(0).getOs(), equalTo("mac"));
         assertThat(downloadLinks.get(0).getArchitecture(), equalTo("32"));
-        assertThat(downloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz"));
+        assertThat(
+                downloadLinks.get(0).getUrl(),
+                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz"));
         assertThat(downloadLinks.get(0).getFileSize(), equalTo("196MB"));
         assertThat(downloadLinks.get(0).getFileType(), equalTo("tar.gz"));
     }

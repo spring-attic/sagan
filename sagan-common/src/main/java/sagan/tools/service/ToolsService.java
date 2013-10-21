@@ -1,14 +1,15 @@
 package sagan.tools.service;
 
-import sagan.util.service.CachedRestClient;
 import sagan.tools.eclipse.EclipseDownloads;
 import sagan.tools.eclipse.parser.EclipseDownloadsXmlConverter;
 import sagan.tools.eclipse.xml.EclipseXml;
 import sagan.tools.toolsuite.ToolSuiteDownloads;
 import sagan.tools.toolsuite.parser.ToolXmlConverter;
 import sagan.tools.toolsuite.xml.ToolSuiteXml;
+import sagan.util.service.CachedRestClient;
 
 import org.simpleframework.xml.Serializer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -44,13 +45,17 @@ public class ToolsService {
     }
 
     private ToolSuiteDownloads getToolSuiteDownloads(String toolSuiteName, String shortName) throws Exception {
-        String responseXml = cachedRestClient.get(restTemplate, "http://dist.springsource.com/release/STS/index-new.xml", String.class);
+        String responseXml =
+                cachedRestClient.get(restTemplate, "http://dist.springsource.com/release/STS/index-new.xml",
+                        String.class);
         ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
         return toolXmlConverter.convert(toolSuiteXml, toolSuiteName, shortName);
     }
 
     public EclipseDownloads getEclipseDownloads() throws Exception {
-        String responseXml = cachedRestClient.get(restTemplate, "http://download.springsource.com/release/STS/eclipse.xml", String.class);
+        String responseXml =
+                cachedRestClient.get(restTemplate, "http://download.springsource.com/release/STS/eclipse.xml",
+                        String.class);
         EclipseXml eclipseXml = serializer.read(EclipseXml.class, responseXml);
         return new EclipseDownloadsXmlConverter().convert(eclipseXml);
     }

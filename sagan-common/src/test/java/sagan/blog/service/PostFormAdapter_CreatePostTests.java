@@ -1,5 +1,15 @@
 package sagan.blog.service;
 
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
+import sagan.blog.PostForm;
+import sagan.team.MemberProfile;
+import sagan.team.service.TeamRepository;
+import sagan.util.DateTestUtils;
+import sagan.util.service.DateService;
+
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -8,24 +18,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import sagan.blog.Post;
-import sagan.blog.PostCategory;
-import sagan.blog.PostForm;
-import sagan.util.DateTestUtils;
-
-import sagan.util.service.DateService;
-import sagan.team.MemberProfile;
-import sagan.team.service.TeamRepository;
-
-import java.util.Date;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PostFormAdapter_CreatePostTests {
@@ -53,12 +49,11 @@ public class PostFormAdapter_CreatePostTests {
     private SummaryExtractor summaryExtractor;
 
     @Mock
-    private BlogPostContentRenderer renderer ;
+    private BlogPostContentRenderer renderer;
 
     @Rule
     public ExpectedException expected = ExpectedException.none();
     private PostForm postForm;
-
 
     private PostFormAdapter adapter;
 
@@ -84,7 +79,6 @@ public class PostFormAdapter_CreatePostTests {
 
         post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
     }
-
 
     @Test
     public void postHasCorrectUserEnteredValues() {

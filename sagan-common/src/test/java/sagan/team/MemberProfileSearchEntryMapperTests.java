@@ -1,10 +1,10 @@
 package sagan.team;
 
 import sagan.search.SearchEntry;
+import sagan.team.service.index.MemberProfileSearchEntryMapper;
 
 import org.junit.Before;
 import org.junit.Test;
-import sagan.team.service.index.MemberProfileSearchEntryMapper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

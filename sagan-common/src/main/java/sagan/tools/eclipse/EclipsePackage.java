@@ -1,6 +1,5 @@
 package sagan.tools.eclipse;
 
-
 import sagan.tools.toolsuite.Architecture;
 
 import java.util.List;

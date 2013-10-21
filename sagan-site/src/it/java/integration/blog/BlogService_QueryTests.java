@@ -1,24 +1,15 @@
 package integration.blog;
 
-import integration.IntegrationTestBase;
-import sagan.util.service.DateService;
-import sagan.team.MemberProfile;
-import sagan.search.service.SearchService;
-import sagan.util.web.PageableFactory;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import sagan.blog.BlogPostNotFoundException;
+import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.blog.*;
 import sagan.blog.service.BlogService;
 import sagan.blog.service.PostFormAdapter;
 import sagan.blog.service.PostRepository;
+import sagan.search.service.SearchService;
+import sagan.team.MemberProfile;
+import sagan.util.service.DateService;
+import sagan.util.web.PageableFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,18 +17,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static sagan.blog.PostCategory.ENGINEERING;
-import static sagan.blog.PostCategory.NEWS_AND_EVENTS;
-import static sagan.blog.PostCategory.RELEASES;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.mockito.Mock;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import integration.IntegrationTestBase;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsIn.isIn;
 import static org.hamcrest.core.IsNot.not;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static sagan.blog.PostCategory.*;
 
 public class BlogService_QueryTests extends IntegrationTestBase {
 
@@ -70,16 +69,15 @@ public class BlogService_QueryTests extends IntegrationTestBase {
 
     private int px = 0;
 
-
     @Before
-    public void setup() throws Exception{
+    public void setup() throws Exception {
         initMocks(this);
-        service = new BlogService(postRepository, postFormAdapter, dateService,searchService);
+        service = new BlogService(postRepository, postFormAdapter, dateService, searchService);
         setupDates();
         setupFixtureData();
     }
 
-    private void setupDates() throws Exception{
+    private void setupDates() throws Exception {
         yesterday = new SimpleDateFormat("yyyy-MM-dd").parse("2013-06-13");
         today = new SimpleDateFormat("yyyy-MM-dd").parse("2013-06-14");
         tomorrow = new SimpleDateFormat("yyyy-MM-dd").parse("2013-06-15");
@@ -87,7 +85,7 @@ public class BlogService_QueryTests extends IntegrationTestBase {
         given(dateService.now()).willReturn(today);
     }
 
-    private void setupFixtureData() throws Exception{
+    private void setupFixtureData() throws Exception {
         assertThat(postRepository.findAll().size(), equalTo(0));
 
         scheduled = PostBuilder.post().category(ENGINEERING).publishAt(tomorrow).build();

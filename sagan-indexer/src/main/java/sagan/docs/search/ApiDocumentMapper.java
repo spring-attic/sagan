@@ -1,14 +1,14 @@
 package sagan.docs.search;
 
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
 
 import java.util.Date;
+
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 class ApiDocumentMapper implements SearchEntryMapper<Document> {
 
@@ -21,7 +21,8 @@ class ApiDocumentMapper implements SearchEntryMapper<Document> {
     }
 
     public SearchEntry map(Document document) {
-        if (document.baseUri().endsWith("allclasses-frame.html")) return null;
+        if (document.baseUri().endsWith("allclasses-frame.html"))
+            return null;
 
         String apiContent;
 
@@ -31,7 +32,6 @@ class ApiDocumentMapper implements SearchEntryMapper<Document> {
         } else {
             apiContent = document.select("p").text();
         }
-
 
         SearchEntry entry = new SearchEntry();
 
@@ -46,8 +46,8 @@ class ApiDocumentMapper implements SearchEntryMapper<Document> {
         entry.setVersion(version.getVersion());
         entry.setProjectId(project.getId());
 
-        entry.addFacetPaths("Projects", "Projects/Api", "Projects/" + project.getName(),
-                "Projects/" + project.getName() + "/" + version.getVersion());
+        entry.addFacetPaths("Projects", "Projects/Api", "Projects/" + project.getName(), "Projects/"
+                + project.getName() + "/" + version.getVersion());
         return entry;
     }
 }

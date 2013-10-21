@@ -1,25 +1,26 @@
 package integration.team;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import integration.IntegrationTestBase;
 import sagan.team.MemberProfile;
 import sagan.team.service.TeamImporter;
 import sagan.team.service.TeamRepository;
+import sagan.util.FixtureLoader;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.GitHubUser;
 import org.springframework.web.client.RestOperations;
-import sagan.util.FixtureLoader;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import integration.IntegrationTestBase;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -44,7 +45,9 @@ public class ImportTeamFromGithubTests extends IntegrationTestBase {
         GitHubUser[] gitHubUsers = mapper.readValue(membersJson, GitHubUser[].class);
         ResponseEntity<GitHubUser[]> responseEntity = new ResponseEntity<>(gitHubUsers, HttpStatus.OK);
 
-        given(restOperations.getForEntity("https://api.github.com/teams/{teamId}/members", GitHubUser[].class, "482984")).willReturn(responseEntity);
+        given(
+                restOperations.getForEntity("https://api.github.com/teams/{teamId}/members", GitHubUser[].class,
+                        "482984")).willReturn(responseEntity);
 
         stubRestClient.putResponse("/users/jdoe", FixtureLoader.load("/fixtures/github/ghUserProfile-jdoe.json"));
         stubRestClient.putResponse("/users/asmith", FixtureLoader.load("/fixtures/github/ghUserProfile-asmith.json"));

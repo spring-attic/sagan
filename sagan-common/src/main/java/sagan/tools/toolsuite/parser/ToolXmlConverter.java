@@ -11,7 +11,8 @@ public class ToolXmlConverter {
         ToolSuiteBuilder state = new ToolSuiteBuilder(shortName);
 
         for (Release release : toolSuiteXml.getReleases()) {
-            if (!release.getName().startsWith(toolSuiteName)) continue;
+            if (!release.getName().startsWith(toolSuiteName))
+                continue;
             for (Download download : release.getDownloads()) {
                 state.addDownload(download);
             }

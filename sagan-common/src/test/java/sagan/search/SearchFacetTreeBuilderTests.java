@@ -1,12 +1,9 @@
 package sagan.search;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import sagan.search.SearchFacet;
-import sagan.search.SearchFacetTreeBuilder;
-
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

@@ -1,6 +1,10 @@
 package sagan.tools.toolsuite;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ToolSuiteDownloads {
 
@@ -9,7 +13,8 @@ public class ToolSuiteDownloads {
     private final String shortName;
     private final String releaseName;
 
-    public ToolSuiteDownloads(String shortName, String releaseName, Map<String, ToolSuitePlatform> platforms, List<UpdateSiteArchive> archives) {
+    public ToolSuiteDownloads(String shortName, String releaseName, Map<String, ToolSuitePlatform> platforms,
+                              List<UpdateSiteArchive> archives) {
         this.shortName = shortName;
         this.releaseName = releaseName;
         this.platforms = platforms;
@@ -41,7 +46,8 @@ public class ToolSuiteDownloads {
 
     private void addLinks(Set<DownloadLink> links, String platformString, String fileType) {
         ToolSuitePlatform platform = platforms.get(platformString);
-        if (platform == null) return;
+        if (platform == null)
+            return;
 
         EclipseVersion eclipseVersion = platform.getEclipseVersions().get(0);
         for (Architecture architecture : eclipseVersion.getArchitectures()) {

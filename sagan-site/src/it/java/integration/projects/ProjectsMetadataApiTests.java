@@ -1,23 +1,23 @@
 package integration.projects;
 
-import integration.IntegrationTestBase;
-import org.junit.Test;
-import org.springframework.boot.config.JacksonJsonParser;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import static org.hamcrest.CoreMatchers.*;
-
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.junit.Test;
+
+import org.springframework.boot.config.JacksonJsonParser;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import integration.IntegrationTestBase;
+
 import static junit.framework.TestCase.fail;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class ProjectsMetadataApiTests extends IntegrationTestBase {
 
@@ -58,8 +58,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         if (matcher.find()) {
             assertThat(matcher.group(1), equalTo("a_function_name"));
 
-            Map<String, Object> projectMetadata = new JacksonJsonParser()
-                    .parseMap(matcher.group(2));
+            Map<String, Object> projectMetadata = new JacksonJsonParser().parseMap(matcher.group(2));
 
             assertThat((String) projectMetadata.get("name"), equalTo(expectedProjectName));
             @SuppressWarnings("unchecked")
@@ -75,11 +74,9 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         @SuppressWarnings("unchecked")
         Map<String, Object> release = (Map<String, Object>) releases.get(0);
         assertThat((String) release.get("version"), equalTo("4.0.0.BUILD-SNAPSHOT"));
-        assertThat(
-                (String) release.get("refDocUrl"),
+        assertThat((String) release.get("refDocUrl"),
                 equalTo("http://docs.spring.io/spring/docs/4.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/"));
-        assertThat(
-                (String) release.get("apiDocUrl"),
+        assertThat((String) release.get("apiDocUrl"),
                 equalTo("http://docs.spring.io/spring/docs/4.0.0.BUILD-SNAPSHOT/javadoc-api/"));
         assertThat((Boolean) release.get("preRelease"), equalTo(false));
         assertThat((Boolean) release.get("current"), equalTo(false));
@@ -90,17 +87,13 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         assertThat(repository, notNullValue());
     }
 
-
-
     private void checkMilestone(List<Object> releases) {
         @SuppressWarnings("unchecked")
         Map<String, Object> release = (Map<String, Object>) releases.get(1);
         assertThat((String) release.get("version"), equalTo("4.0.0.M3"));
-        assertThat(
-                (String) release.get("refDocUrl"),
+        assertThat((String) release.get("refDocUrl"),
                 equalTo("http://docs.spring.io/spring/docs/4.0.0.M3/spring-framework-reference/html/"));
-        assertThat(
-                (String) release.get("apiDocUrl"),
+        assertThat((String) release.get("apiDocUrl"),
                 equalTo("http://docs.spring.io/spring/docs/4.0.0.M3/javadoc-api/"));
         assertThat((Boolean) release.get("preRelease"), equalTo(true));
         assertThat((Boolean) release.get("current"), equalTo(false));
@@ -111,8 +104,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
 
         assertThat((String) repository.get("id"), equalTo("spring-milestones"));
         assertThat((String) repository.get("name"), equalTo("Spring Milestones"));
-        assertThat((String) repository.get("url"),
-                equalTo("http://repo.spring.io/milestone"));
+        assertThat((String) repository.get("url"), equalTo("http://repo.spring.io/milestone"));
         assertThat((Boolean) repository.get("snapshotsEnabled"), equalTo(false));
 
     }
@@ -121,11 +113,9 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
         @SuppressWarnings("unchecked")
         Map<String, Object> release = (Map<String, Object>) releases.get(0);
         assertThat((String) release.get("version"), equalTo("1.0.0.CI-SNAPSHOT"));
-        assertThat(
-                (String) release.get("refDocUrl"),
+        assertThat((String) release.get("refDocUrl"),
                 equalTo("http://docs.spring.io/spring-security-kerberos/docs/1.0.0.CI-SNAPSHOT/reference/html"));
-        assertThat(
-                (String) release.get("apiDocUrl"),
+        assertThat((String) release.get("apiDocUrl"),
                 equalTo("http://docs.spring.io/spring-security-kerberos/docs/1.0.0.CI-SNAPSHOT/api/"));
         assertThat((Boolean) release.get("preRelease"), equalTo(false));
         assertThat((Boolean) release.get("current"), equalTo(false));
@@ -136,8 +126,7 @@ public class ProjectsMetadataApiTests extends IntegrationTestBase {
 
         assertThat((String) repository.get("id"), equalTo("spring-snapshots"));
         assertThat((String) repository.get("name"), equalTo("Spring Snapshots"));
-        assertThat((String) repository.get("url"),
-                equalTo("http://repo.spring.io/snapshot"));
+        assertThat((String) repository.get("url"), equalTo("http://repo.spring.io/snapshot"));
         assertThat((Boolean) repository.get("snapshotsEnabled"), equalTo(true));
     }
 

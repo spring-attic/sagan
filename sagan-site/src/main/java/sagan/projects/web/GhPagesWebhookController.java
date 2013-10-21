@@ -1,12 +1,19 @@
 package sagan.projects.web;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import sagan.projects.Project;
 import sagan.projects.service.ProjectMetadataService;
 import sagan.util.service.github.GitHubService;
+
+import java.io.IOException;
+import java.net.URI;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
@@ -23,27 +30,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.IOException;
-import java.net.URI;
-import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static java.lang.String.format;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
- * Accepts requests from GitHub webhook set up at
- * <a href="https://github.com/spring-projects/gh-pages#readme">the shared gh-pages
+ * Accepts requests from GitHub webhook set up at <a
+ * href="https://github.com/spring-projects/gh-pages#readme">the shared gh-pages
  * repository</a> and notifies project leads to merge those new changes into their own
  * projects. This notification happens by adding a new GH Issue to each project under the
  * spring-projects org that has a gh-pages branch.
- *
- * <p>The {token} path variable establishes a shared secret between the webhook and this
+ * 
+ * <p>
+ * The {token} path variable establishes a shared secret between the webhook and this
  * controller, ensuring that only GitHub can POST and thus create new issues in the
  * various Spring project repositories.
- *
+ * 
  * @author Chris Beams
  */
 @Controller
@@ -60,8 +64,7 @@ public class GhPagesWebhookController {
     private String accessToken;
 
     @Autowired
-    public GhPagesWebhookController(
-            ProjectMetadataService service, GitHub gitHub) throws IOException {
+    public GhPagesWebhookController(ProjectMetadataService service, GitHub gitHub) throws IOException {
         this.service = service;
         this.gitHub = gitHub;
         this.template = StreamUtils.copyToString(
@@ -72,8 +75,8 @@ public class GhPagesWebhookController {
     @SuppressWarnings("unchecked")
     @RequestMapping(method = POST, headers = "content-type=application/x-www-form-urlencoded")
     @ResponseBody
-    public HttpEntity<String> processUpdate(
-            @RequestParam String payload, @PathVariable String token) throws IOException {
+    public HttpEntity<String> processUpdate(@RequestParam String payload, @PathVariable String token)
+            throws IOException {
         HttpHeaders headers = new HttpHeaders();
         if (!accessToken.equals(token)) {
             headers.set("Status", "403 Forbidden");
@@ -83,18 +86,18 @@ public class GhPagesWebhookController {
         SpelExpressionParser parser = new SpelExpressionParser();
         Expression spel = parser.parseExpression(template, new TemplateParserContext());
 
-        Map<?,?> push;
+        Map<?, ?> push;
         try {
             push = jsonMapper.readValue(payload, Map.class);
-            logger.info("Recieved new webhook payload for push with head_commit message: " +
-                    ((Map<?,?>)push.get("head_commit")).get("message"));
+            logger.info("Recieved new webhook payload for push with head_commit message: "
+                    + ((Map<?, ?>) push.get("head_commit")).get("message"));
         } catch (JsonParseException ex) {
             headers.set("Status", "400 Bad Request");
             return new HttpEntity<>("{ \"message\": \"Bad Request\" }\n", headers);
         }
 
         StringBuilder commits = new StringBuilder();
-        for (Map<?,?> commit : (List<Map<?,?>>) push.get("commits")) {
+        for (Map<?, ?> commit : (List<Map<?, ?>>) push.get("commits")) {
             commits.append(format(" - %s (%s)\n", commit.get("message"), commit.get("id")));
         }
         Map<String, Object> root = new HashMap<>();
@@ -103,14 +106,15 @@ public class GhPagesWebhookController {
         for (Project project : service.getProjects()) {
             if (hasGhPagesBranch(project)) {
                 root.put("project", project);
-                Map<String,String> newIssue = new HashMap<>();
+                Map<String, String> newIssue = new HashMap<>();
                 newIssue.put("title", "Please merge the latest changes to common gh-pages");
                 newIssue.put("body", spel.getValue(root, String.class));
-                String projectIssuesUrl = format("%s/repos/spring-projects/%s/issues",
-                        GitHubService.API_URL_BASE, project.getId());
+                String projectIssuesUrl =
+                        format("%s/repos/spring-projects/%s/issues", GitHubService.API_URL_BASE, project.getId());
                 try {
-                    URI newIssueUrl = gitHub.restOperations().postForLocation(
-                            projectIssuesUrl, jsonMapper.writeValueAsString(newIssue));
+                    URI newIssueUrl =
+                            gitHub.restOperations().postForLocation(projectIssuesUrl,
+                                    jsonMapper.writeValueAsString(newIssue));
                     logger.info("Notification of new gh-pages changes created at " + newIssueUrl);
                 } catch (RuntimeException ex) {
                     logger.warn("Unable to POST new issue to " + projectIssuesUrl);

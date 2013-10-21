@@ -1,16 +1,18 @@
 package sagan.util.service.github;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import sagan.util.service.MarkdownService;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class GitHubService implements MarkdownService {
@@ -19,10 +21,8 @@ public class GitHubService implements MarkdownService {
     private final GitHubRestClient gitHubRestClient;
     private ObjectMapper objectMapper = new ObjectMapper();
 
-
     private static final String REPO_CONTENTS_PATH = "/repos/spring-guides/{repoId}/contents";
-    private static final String GUIDE_IMAGES_PATH =  REPO_CONTENTS_PATH + "/images/{imageName}";
-
+    private static final String GUIDE_IMAGES_PATH = REPO_CONTENTS_PATH + "/images/{imageName}";
 
     @Autowired
     public GitHubService(GitHubRestClient gitHubRestClient) {
@@ -72,7 +72,8 @@ public class GitHubService implements MarkdownService {
     public List<RepoContent> getRepoContents(String repoId) {
         String jsonResponse = gitHubRestClient.sendRequestForJson(REPO_CONTENTS_PATH, repoId);
         try {
-            return objectMapper.readValue(jsonResponse, new TypeReference<List<RepoContent>>(){});
+            return objectMapper.readValue(jsonResponse, new TypeReference<List<RepoContent>>() {
+            });
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -81,7 +82,8 @@ public class GitHubService implements MarkdownService {
     public String getNameForUser(String username) {
         String jsonResponse = gitHubRestClient.sendRequestForJson("/users/{user}", username);
         try {
-            Map<String, String> map = objectMapper.readValue(jsonResponse, new TypeReference<Map<String, String>>(){});
+            Map<String, String> map = objectMapper.readValue(jsonResponse, new TypeReference<Map<String, String>>() {
+            });
             return map.get("name");
         } catch (IOException e) {
             throw new RuntimeException(e);

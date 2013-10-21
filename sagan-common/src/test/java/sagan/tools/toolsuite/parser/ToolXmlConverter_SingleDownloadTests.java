@@ -1,9 +1,5 @@
 package sagan.tools.toolsuite.parser;
 
-import sagan.tools.toolsuite.parser.ToolXmlConverter;
-import org.junit.Before;
-import org.junit.Test;
-
 import sagan.tools.toolsuite.Architecture;
 import sagan.tools.toolsuite.EclipseVersion;
 import sagan.tools.toolsuite.ToolSuiteDownloads;
@@ -14,6 +10,9 @@ import sagan.tools.toolsuite.xml.ToolSuiteXml;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -83,7 +82,9 @@ public class ToolXmlConverter_SingleDownloadTests {
         Architecture architecture = eclipseVersion.getArchitectures().get(0);
 
         assertThat(architecture.getDownloadLinks().size(), equalTo(1));
-        assertThat(architecture.getDownloadLinks().get(0).getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
+        assertThat(
+                architecture.getDownloadLinks().get(0).getUrl(),
+                equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
         assertThat(architecture.getDownloadLinks().get(0).getOs(), equalTo("mac"));
         assertThat(architecture.getDownloadLinks().get(0).getArchitecture(), equalTo("32"));
     }

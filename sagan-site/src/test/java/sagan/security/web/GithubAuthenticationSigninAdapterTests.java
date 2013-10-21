@@ -2,7 +2,6 @@ package sagan.security.web;
 
 import sagan.team.MemberProfile;
 import sagan.team.service.SignInService;
-import sagan.security.web.GithubAuthenticationSigninAdapter;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
@@ -23,8 +23,10 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
 import static org.mockito.BDDMockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.eq;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GithubAuthenticationSigninAdapterTests {
@@ -56,10 +58,8 @@ public class GithubAuthenticationSigninAdapterTests {
         given(connection.getDisplayName()).willReturn("dsyer");
         given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willReturn(true);
 
-        adapter.signIn("12345", connection, new ServletWebRequest(
-                new MockHttpServletRequest()));
-        Authentication authentication = SecurityContextHolder.getContext()
-                .getAuthentication();
+        adapter.signIn("12345", connection, new ServletWebRequest(new MockHttpServletRequest()));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         assertNotNull(authentication);
         assertTrue(authentication.isAuthenticated());
         verify(signInService).getOrCreateMemberProfile(eq(12345L), any(GitHub.class));
@@ -71,8 +71,7 @@ public class GithubAuthenticationSigninAdapterTests {
         given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willReturn(false);
 
         expectedException.expect(BadCredentialsException.class);
-        adapter.signIn("12345", connection, new ServletWebRequest(
-                new MockHttpServletRequest()));
+        adapter.signIn("12345", connection, new ServletWebRequest(new MockHttpServletRequest()));
     }
 
     @SuppressWarnings("unchecked")
@@ -81,8 +80,7 @@ public class GithubAuthenticationSigninAdapterTests {
         given(connection.getDisplayName()).willReturn("dsyer");
         given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willThrow(RestClientException.class);
         expectedException.expect(BadCredentialsException.class);
-        adapter.signIn("12345", connection, new ServletWebRequest(
-                new MockHttpServletRequest()));
+        adapter.signIn("12345", connection, new ServletWebRequest(new MockHttpServletRequest()));
     }
 
 }

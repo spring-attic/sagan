@@ -1,5 +1,7 @@
 package sagan.projects.service;
 
+import sagan.projects.Project;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,15 +10,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
-import sagan.projects.Project;
 
 @SuppressWarnings("rawtypes")
 public class ProjectMetadataYamlParser {
 
     public ProjectMetadataService createServiceFromYaml(InputStream projectMetadataYml) {
         Map metadata = (Map) new Yaml().load(projectMetadataYml);
-        return new ProjectMetadataService(parseProjects(metadata),
-                parseGhPagesBaseUrl(metadata));
+        return new ProjectMetadataService(parseProjects(metadata), parseGhPagesBaseUrl(metadata));
     }
 
     private String parseGhPagesBaseUrl(Map metadata) {
@@ -49,8 +49,7 @@ public class ProjectMetadataYamlParser {
         return projects;
     }
 
-    private List<Project> buildCategoryProjects(ProjectParser projectParser,
-            Map.Entry<String, List> entry) {
+    private List<Project> buildCategoryProjects(ProjectParser projectParser, Map.Entry<String, List> entry) {
         List<Project> categoryProjects = new ArrayList<>();
         for (Object value : entry.getValue()) {
             @SuppressWarnings("unchecked")

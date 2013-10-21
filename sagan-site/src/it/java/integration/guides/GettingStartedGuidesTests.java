@@ -1,21 +1,20 @@
 package integration.guides;
 
-import integration.IntegrationTestBase;
+import sagan.util.FixtureLoader;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
-import org.springframework.test.web.servlet.MvcResult;
-import sagan.util.FixtureLoader;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import org.springframework.test.web.servlet.MvcResult;
+
+import integration.IntegrationTestBase;
+
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class GettingStartedGuidesTests extends IntegrationTestBase {
 

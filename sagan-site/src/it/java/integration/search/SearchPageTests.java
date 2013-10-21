@@ -1,22 +1,22 @@
 package integration.search;
 
-import integration.IntegrationTestBase;
 import sagan.search.SearchEntry;
-import sagan.search.service.SearchService;
 import sagan.search.SearchEntryBuilder;
+import sagan.search.service.SearchService;
+
+import java.util.Calendar;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.Calendar;
+import integration.IntegrationTestBase;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 

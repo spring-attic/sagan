@@ -1,7 +1,6 @@
 package sagan.guides.search;
 
 import sagan.guides.Guide;
-import sagan.guides.search.GuideSearchEntryMapper;
 import sagan.search.SearchEntry;
 
 import org.junit.Before;
@@ -14,7 +13,7 @@ public class GuideSearchEntryMapperTests {
 
     private Guide guide = new Guide("guide-repo",
             "guide-id",
-            "Guide Title","Guide Subtitle",
+            "Guide Title", "Guide Subtitle",
             "Some Guide Content",
             "Some Sidebar Content");
 

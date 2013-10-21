@@ -35,18 +35,12 @@ public class BlogPostContentRendererTests {
     @Test
     public void rendersDecodedHtml() throws Exception {
         String encoded =
-                "FIRST\n" +
-                "<pre>!{iframe src=\"//www.youtube.com/embed/D6nJSyWB-xA\"}{/iframe}</pre>\n" +
-                "SECOND\n" +
-                "<pre>!{iframe src=\"//www.youtube.com/embed/jplkJIHPGos\"}{/iframe}</pre>\n" +
-                "END";
+                "FIRST\n" + "<pre>!{iframe src=\"//www.youtube.com/embed/D6nJSyWB-xA\"}{/iframe}</pre>\n" + "SECOND\n"
+                        + "<pre>!{iframe src=\"//www.youtube.com/embed/jplkJIHPGos\"}{/iframe}</pre>\n" + "END";
 
         String decoded =
-                "FIRST\n" +
-                "<iframe src=\"//www.youtube.com/embed/D6nJSyWB-xA\"></iframe>\n" +
-                "SECOND\n" +
-                "<iframe src=\"//www.youtube.com/embed/jplkJIHPGos\"></iframe>\n" +
-                "END";
+                "FIRST\n" + "<iframe src=\"//www.youtube.com/embed/D6nJSyWB-xA\"></iframe>\n" + "SECOND\n"
+                        + "<iframe src=\"//www.youtube.com/embed/jplkJIHPGos\"></iframe>\n" + "END";
 
         given(markdownService.renderToHtml(encoded)).willReturn(encoded);
 
@@ -57,25 +51,19 @@ public class BlogPostContentRendererTests {
     public void rendersCallouts() throws Exception {
         given(markdownService.renderToHtml("CONTENT")).willReturn("[callout title=Title]Callout body[/callout]");
 
-        assertThat(renderer.render("CONTENT"), equalTo("<div class=\"callout\">\n" +
-                "<div class=\"callout-title\">Title</div>\n" +
-                "Callout body\n" +
-                "</div>"
-        ));
+        assertThat(renderer.render("CONTENT"), equalTo("<div class=\"callout\">\n"
+                + "<div class=\"callout-title\">Title</div>\n" + "Callout body\n" + "</div>"));
     }
 
     @Test
     public void rendersMultipleCallouts() throws Exception {
-        given(markdownService.renderToHtml("CONTENT")).willReturn("[callout title=Title]Callout body[/callout] other content [callout title=Other Title]Other Callout body[/callout]");
+        given(markdownService.renderToHtml("CONTENT"))
+                .willReturn(
+                        "[callout title=Title]Callout body[/callout] other content [callout title=Other Title]Other Callout body[/callout]");
 
-        assertThat(renderer.render("CONTENT"), equalTo("<div class=\"callout\">\n" +
-                "<div class=\"callout-title\">Title</div>\n" +
-                "Callout body\n" +
-                "</div>" + " other content " +
-                "<div class=\"callout\">\n" +
-                "<div class=\"callout-title\">Other Title</div>\n" +
-                "Other Callout body\n" +
-                "</div>"
-        ));
+        assertThat(renderer.render("CONTENT"), equalTo("<div class=\"callout\">\n"
+                + "<div class=\"callout-title\">Title</div>\n" + "Callout body\n" + "</div>" + " other content "
+                + "<div class=\"callout\">\n" + "<div class=\"callout-title\">Other Title</div>\n"
+                + "Other Callout body\n" + "</div>"));
     }
 }

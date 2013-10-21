@@ -36,19 +36,24 @@ public class UpdateSiteArchive {
     }
 
     public String getFileName() {
-        return url.substring(url.lastIndexOf("/")+1);
+        return url.substring(url.lastIndexOf("/") + 1);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         UpdateSiteArchive that = (UpdateSiteArchive) o;
 
-        if (!fileSize.equals(that.fileSize)) return false;
-        if (!url.equals(that.url)) return false;
-        if (!version.equals(that.version)) return false;
+        if (!fileSize.equals(that.fileSize))
+            return false;
+        if (!url.equals(that.url))
+            return false;
+        if (!version.equals(that.version))
+            return false;
 
         return true;
     }

@@ -1,6 +1,7 @@
 package sagan.util.service.github;
 
 import sagan.util.service.CachedRestClient;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.stereotype.Service;

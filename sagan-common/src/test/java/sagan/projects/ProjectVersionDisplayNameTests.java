@@ -1,8 +1,6 @@
 package sagan.projects;
 
 import org.junit.Test;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectReleaseBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -32,8 +30,7 @@ public class ProjectVersionDisplayNameTests {
     }
 
     private void assertVersionDisplayName(String versionName, String expectedDisplayName) {
-        ProjectRelease version = new ProjectReleaseBuilder()
-                .versionName(versionName).build();
+        ProjectRelease version = new ProjectReleaseBuilder().versionName(versionName).build();
 
         assertThat(version.getVersionDisplayName(), equalTo(expectedDisplayName));
     }

@@ -1,5 +1,16 @@
 package sagan.blog.service;
 
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import sagan.blog.PostForm;
+import sagan.search.SearchEntry;
+import sagan.search.SearchException;
+import sagan.search.service.SearchService;
+import sagan.util.DateTestUtils;
+import sagan.util.service.DateService;
+
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -9,26 +20,10 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
+
 import org.springframework.test.util.ReflectionTestUtils;
 
-import sagan.blog.Post;
-import sagan.blog.PostBuilder;
-import sagan.blog.PostForm;
-import sagan.util.DateTestUtils;
-
-import sagan.util.service.DateService;
-import sagan.search.SearchEntry;
-import sagan.search.SearchException;
-import sagan.search.service.SearchService;
-
-import java.util.Date;
-
-import static org.mockito.BDDMockito.anyObject;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.reset;
-import static org.mockito.BDDMockito.verify;
-import static org.mockito.BDDMockito.verifyZeroInteractions;
-import static org.mockito.BDDMockito.willThrow;
+import static org.mockito.BDDMockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_ValidPostTests {
@@ -47,7 +42,6 @@ public class BlogService_ValidPostTests {
 
     @Mock
     private DateService dateService;
-
 
     @Mock
     private SearchService searchService;
@@ -70,9 +64,7 @@ public class BlogService_ValidPostTests {
             }
         });
 
-        post = PostBuilder.post()
-                .publishAt(publishAt)
-                .build();
+        post = PostBuilder.post().publishAt(publishAt).build();
         given(postFormAdapter.createPostFromPostForm(postForm, AUTHOR_USERNAME)).willReturn(post);
 
         service = new BlogService(postRepository, postFormAdapter, dateService, searchService);

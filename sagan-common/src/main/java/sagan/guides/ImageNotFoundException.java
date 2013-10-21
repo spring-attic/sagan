@@ -13,4 +13,3 @@ public class ImageNotFoundException extends RuntimeException {
     }
 
 }
-

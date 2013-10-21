@@ -1,17 +1,26 @@
 package examples.search;
 
-import sagan.guides.Guide;
-import sagan.guides.service.GuidesService;
 import sagan.app.indexer.config.ApplicationConfiguration;
+import sagan.guides.Guide;
 import sagan.guides.search.GuideSearchEntryMapper;
+import sagan.guides.service.GuidesService;
 import sagan.search.SearchEntry;
+import sagan.search.SearchEntryBuilder;
 import sagan.search.SearchResult;
 import sagan.search.service.SearchService;
+import sagan.util.LongRunning;
+import sagan.util.SetSystemProperty;
+
+import java.text.ParseException;
+import java.util.Collections;
+import java.util.List;
+
 import org.jsoup.nodes.Document;
 import org.junit.After;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.context.initializer.LoggingApplicationContextInitializer;
@@ -24,13 +33,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import sagan.util.LongRunning;
-import sagan.search.SearchEntryBuilder;
-import sagan.util.SetSystemProperty;
-
-import java.text.ParseException;
-import java.util.Collections;
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -38,8 +40,7 @@ import static org.hamcrest.Matchers.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = ApplicationConfiguration.class, initializers = {
-        ConfigFileApplicationContextInitializer.class,
-        LoggingApplicationContextInitializer.class })
+        ConfigFileApplicationContextInitializer.class, LoggingApplicationContextInitializer.class })
 @ActiveProfiles("integration-test")
 @Configuration
 @DirtiesContext
@@ -49,12 +50,11 @@ public class HostedSearchServiceIntegrationExamples {
     public static LongRunning longRunning = LongRunning.create();
 
     @ClassRule
-    public static SetSystemProperty elasticSearchEndpoint = new SetSystemProperty(
-            "elasticsearch.client.endpoint", "https://qlmsjwfa.api.qbox.io");
+    public static SetSystemProperty elasticSearchEndpoint = new SetSystemProperty("elasticsearch.client.endpoint",
+            "https://qlmsjwfa.api.qbox.io");
 
     @ClassRule
-    public static SetSystemProperty searchIndexerDelay = new SetSystemProperty(
-            "search.indexer.delay", "60000000");
+    public static SetSystemProperty searchIndexerDelay = new SetSystemProperty("search.indexer.delay", "60000000");
 
     private final Pageable pageable = new PageRequest(0, 10);
 
@@ -108,8 +108,8 @@ public class HostedSearchServiceIntegrationExamples {
 
         Thread.sleep(1000);
 
-        Page<SearchResult> searchEntries = this.searchService.search(testTitle,
-                this.pageable, Collections.<String> emptyList()).getPage();
+        Page<SearchResult> searchEntries =
+                this.searchService.search(testTitle, this.pageable, Collections.<String> emptyList()).getPage();
         List<SearchResult> entries = searchEntries.getContent();
         assertThat(entries, not(empty()));
         assertThat(entries.get(0).getTitle(), is(equalTo(this.entry.getTitle())));
@@ -117,7 +117,8 @@ public class HostedSearchServiceIntegrationExamples {
 
     @Test
     public void apiDocsIndexing() throws ParseException, InterruptedException {
-        String apiDocsTestClassUrl = "http://docs.spring.io/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/aop/framework/autoproxy/AbstractAdvisorAutoProxyCreator.html";
+        String apiDocsTestClassUrl =
+                "http://docs.spring.io/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/aop/framework/autoproxy/AbstractAdvisorAutoProxyCreator.html";
 
         Document testApiDocument = Document.createShell(apiDocsTestClassUrl);
         testApiDocument.body().text("Somereandomtestcontentthatshouldbeunique");

@@ -7,17 +7,18 @@ import sagan.blog.service.CachedBlogService;
 import sagan.blog.view.PostView;
 import sagan.blog.view.PostViewFactory;
 import sagan.util.service.DateService;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.ui.ExtendedModelMap;
 
-import javax.servlet.http.HttpServletRequest;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.BDDMockito.given;
 
 public class BlogController_ShowTests {
@@ -44,9 +45,7 @@ public class BlogController_ShowTests {
 
         post = PostBuilder.post().publishAt("2012-02-01 11:00").build();
         given(blogService.getPublishedPost("2012/02/01/title")).willReturn(post);
-        viewName = controller.showPost(
-                "2012", "02", "01",
-                "title", model);
+        viewName = controller.showPost("2012", "02", "01", "title", model);
     }
 
     @Test

@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -16,17 +17,12 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static requestpostprocessors.SecurityRequestPostProcessors.csrf;
-import static requestpostprocessors.SecurityRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
 public class AuthenticationTests extends IntegrationTestBase {
 
@@ -80,10 +76,7 @@ public class AuthenticationTests extends IntegrationTestBase {
                 "githubusername",
                 AuthorityUtils
                         .commaSeparatedStringToAuthorityList("ROLE_USER"));
-        SecurityContextHolder
-                .getContext()
-                .setAuthentication(
-                        authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
         MvcResult response = mockMvc.perform(get("/admin/blog/new"))
                 .andExpect(status().isOk())
@@ -108,7 +101,6 @@ public class AuthenticationTests extends IntegrationTestBase {
         SecurityContextHolder
                 .getContext()
                 .setAuthentication(authentication);
-
 
         this.mockMvc.perform(get("/signout"))
                 .andExpect(status().isFound())

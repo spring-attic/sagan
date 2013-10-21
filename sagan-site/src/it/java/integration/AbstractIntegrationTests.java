@@ -1,12 +1,11 @@
 package integration;
 
-import integration.configuration.IntegrationTestsConfiguration;
-import integration.stubs.StubGithubRestClient;
 import sagan.search.service.InMemoryElasticSearchConfiguration;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
 import org.springframework.cache.CacheManager;
@@ -19,17 +18,18 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import integration.configuration.IntegrationTestsConfiguration;
+import integration.stubs.StubGithubRestClient;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static requestpostprocessors.SecurityRequestPostProcessors.csrf;
-import static requestpostprocessors.SecurityRequestPostProcessors.user;
+import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {IntegrationTestsConfiguration.class,
-        InMemoryElasticSearchConfiguration.class},
-        initializers = ConfigFileApplicationContextInitializer.class)
+@ContextConfiguration(classes = { IntegrationTestsConfiguration.class, InMemoryElasticSearchConfiguration.class },
+                      initializers = ConfigFileApplicationContextInitializer.class)
 @Transactional
-public abstract class IntegrationTestBase {
+public abstract class AbstractIntegrationTests {
 
     @Autowired
     protected WebApplicationContext wac;

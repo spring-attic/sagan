@@ -1,15 +1,14 @@
 package sagan.guides.service;
 
-import org.junit.Before;
-import org.junit.Test;
-
+import sagan.guides.UnderstandingGuide;
 import sagan.util.service.github.GitHubService;
 import sagan.util.service.github.RepoContent;
-import sagan.guides.UnderstandingGuide;
-import sagan.guides.service.UnderstandingGuidesService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

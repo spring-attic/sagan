@@ -1,18 +1,5 @@
 package sagan.search;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import io.searchbox.Action;
-import io.searchbox.client.JestClient;
-import io.searchbox.client.JestResult;
-import io.searchbox.indices.CreateIndex;
-import io.searchbox.indices.DeleteIndex;
-import io.searchbox.indices.mapping.PutMapping;
-import sagan.search.SearchException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.StreamUtils;
 import sagan.search.service.SearchService;
 
 import java.io.File;
@@ -23,6 +10,22 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.StreamUtils;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+import io.searchbox.Action;
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestResult;
+import io.searchbox.indices.CreateIndex;
+import io.searchbox.indices.DeleteIndex;
+import io.searchbox.indices.mapping.PutMapping;
 
 public class SearchIndexSetup {
 
@@ -66,7 +69,8 @@ public class SearchIndexSetup {
     public Map<String, String> loadSettings() {
         Map<String, String> settings = new HashMap<>();
         try {
-            InputStream settingsStream = new ClassPathResource("/elasticsearch/settings.json", getClass()).getInputStream();
+            InputStream settingsStream =
+                    new ClassPathResource("/elasticsearch/settings.json", getClass()).getInputStream();
             JsonParser jsonParser = new JsonParser();
             JsonElement root = jsonParser.parse(new InputStreamReader(settingsStream, Charset.forName("UTF-8")));
 

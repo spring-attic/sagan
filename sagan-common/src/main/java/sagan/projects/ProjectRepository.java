@@ -19,12 +19,10 @@ public class ProjectRepository {
         }
 
         if (versionName.contains("SNAPSHOT")) {
-            return new ProjectRepository("spring-snapshots", "Spring Snapshots",
-                    "http://repo.spring.io/snapshot", true);
+            return new ProjectRepository("spring-snapshots", "Spring Snapshots", "http://repo.spring.io/snapshot", true);
         }
 
-        return new ProjectRepository("spring-milestones", "Spring Milestones",
-                "http://repo.spring.io/milestone", false);
+        return new ProjectRepository("spring-milestones", "Spring Milestones", "http://repo.spring.io/milestone", false);
     }
 
     public String getId() {

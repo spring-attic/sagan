@@ -1,8 +1,8 @@
 package sagan.search;
 
-import org.springframework.data.domain.Page;
-
 import java.util.List;
+
+import org.springframework.data.domain.Page;
 
 public class SearchResults {
     private Page<SearchResult> page;

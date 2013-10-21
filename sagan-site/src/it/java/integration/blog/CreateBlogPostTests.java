@@ -1,15 +1,17 @@
 package integration.blog;
 
-import integration.IntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.service.PostRepository;
 import sagan.team.MemberProfile;
 import sagan.team.service.TeamRepository;
 
+import java.security.Principal;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -18,16 +20,13 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.security.Principal;
+import integration.IntegrationTestBase;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
 public class CreateBlogPostTests extends IntegrationTestBase {
@@ -94,7 +93,8 @@ public class CreateBlogPostTests extends IntegrationTestBase {
                     @Override
                     public void match(MvcResult result) {
                         String redirectedUrl = result.getResponse().getRedirectedUrl();
-                        assertTrue("Expected redirect to /blog/2013/07/01/post-title, got: " + redirectedUrl, redirectedUrl.matches("^/blog/2013/07/01/post-title"));
+                        assertTrue("Expected redirect to /blog/2013/07/01/post-title, got: " + redirectedUrl,
+                                redirectedUrl.matches("^/blog/2013/07/01/post-title"));
                     }
                 });
     }
@@ -124,8 +124,7 @@ public class CreateBlogPostTests extends IntegrationTestBase {
     @Test
     public void invalidPostsShowsErrors() throws Exception {
         MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
-        mockMvc.perform(createPostRequest)
-                .andExpect(status().isOk());
+        mockMvc.perform(createPostRequest).andExpect(status().isOk());
     }
 
 }

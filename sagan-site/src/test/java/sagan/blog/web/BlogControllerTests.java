@@ -4,22 +4,23 @@ import sagan.blog.Post;
 import sagan.blog.service.CachedBlogService;
 import sagan.blog.view.PostViewFactory;
 import sagan.util.service.DateService;
+
+import java.util.Collections;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.ExtendedModelMap;
 
-import java.util.Collections;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.*;
 
 public class BlogControllerTests {
 
@@ -35,16 +36,11 @@ public class BlogControllerTests {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         this.postViewFactory = new PostViewFactory(new DateService());
-        PageImpl<Post> page = new PageImpl<>(Collections.<Post> emptyList(),
-                new PageRequest(1, 1), 1);
-        given(this.blogService.getPublishedPostsByDate(anyInt(), any(Pageable.class)))
-                .willReturn(page);
-        given(
-                this.blogService.getPublishedPostsByDate(anyInt(), anyInt(),
-                        any(Pageable.class))).willReturn(page);
-        given(
-                this.blogService.getPublishedPostsByDate(anyInt(), anyInt(), anyInt(),
-                        any(Pageable.class))).willReturn(page);
+        PageImpl<Post> page = new PageImpl<>(Collections.<Post> emptyList(), new PageRequest(1, 1), 1);
+        given(this.blogService.getPublishedPostsByDate(anyInt(), any(Pageable.class))).willReturn(page);
+        given(this.blogService.getPublishedPostsByDate(anyInt(), anyInt(), any(Pageable.class))).willReturn(page);
+        given(this.blogService.getPublishedPostsByDate(anyInt(), anyInt(), anyInt(), any(Pageable.class))).willReturn(
+                page);
 
         this.blogController = new BlogController(this.blogService, this.postViewFactory);
     }

@@ -1,12 +1,8 @@
 package sagan.tools.eclipse.parser;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import sagan.tools.eclipse.EclipseDownloads;
 import sagan.tools.eclipse.EclipsePackage;
 import sagan.tools.eclipse.EclipseRelease;
-import sagan.tools.eclipse.parser.EclipseDownloadsXmlConverter;
 import sagan.tools.eclipse.xml.EclipseXml;
 import sagan.tools.eclipse.xml.EclipseXmlDownload;
 import sagan.tools.eclipse.xml.EclipseXmlPackage;
@@ -16,6 +12,9 @@ import sagan.tools.toolsuite.DownloadLink;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -72,27 +71,35 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForDifferentPlatformsTests
 
     @Test
     public void addsTwoPackages() throws Exception {
-        List<EclipsePackage> macPackages = eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages();
+        List<EclipsePackage> macPackages =
+                eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages();
         assertThat(macPackages.size(), equalTo(1));
         assertThat(macPackages.get(0).getName(), equalTo("Eclipse Standard 4.3"));
 
-        List<EclipsePackage> windowsPackages = eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
+        List<EclipsePackage> windowsPackages =
+                eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
         assertThat(windowsPackages.size(), equalTo(1));
         assertThat(windowsPackages.get(0).getName(), equalTo("Eclipse Standard 4.3"));
     }
 
     @Test
     public void addsDownloadLinksToTheArchitectures() throws Exception {
-        List<EclipsePackage> macPackages = eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages();
+        List<EclipsePackage> macPackages =
+                eclipseDownloads.getPlatforms().get("mac").getReleases().get(0).getPackages();
         List<DownloadLink> macDownloadLinks = macPackages.get(0).getArchitectures().get(0).getDownloadLinks();
         assertThat(macDownloadLinks.size(), equalTo(1));
         assertThat(macDownloadLinks.get(0).getOs(), equalTo("mac"));
-        assertThat(macDownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz"));
+        assertThat(
+                macDownloadLinks.get(0).getUrl(),
+                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz"));
 
-        List<EclipsePackage> windowsPackages = eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
+        List<EclipsePackage> windowsPackages =
+                eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
         List<DownloadLink> windowsDownloadLinks = windowsPackages.get(0).getArchitectures().get(0).getDownloadLinks();
         assertThat(windowsDownloadLinks.size(), equalTo(1));
         assertThat(windowsDownloadLinks.get(0).getOs(), equalTo("windows"));
-        assertThat(windowsDownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32-x86_64.zip"));
+        assertThat(
+                windowsDownloadLinks.get(0).getUrl(),
+                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32-x86_64.zip"));
     }
 }

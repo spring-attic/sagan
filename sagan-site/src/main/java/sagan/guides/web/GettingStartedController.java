@@ -12,10 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static sagan.guides.web.GettingStartedController.*;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static sagan.guides.web.GettingStartedController.GUIDES_ROOT;
 
 @Controller
 @RequestMapping(GUIDES_ROOT)
@@ -45,8 +43,7 @@ public class GettingStartedController {
     }
 
     @RequestMapping(value = "/{guideSlug}/images/{name:[a-zA-Z0-9._-]+}", method = { GET, HEAD })
-    public ResponseEntity<byte[]> loadImage(@PathVariable String guideSlug,
-                                            @PathVariable("name") String imageName) {
+    public ResponseEntity<byte[]> loadImage(@PathVariable String guideSlug, @PathVariable("name") String imageName) {
         byte[] image = this.service.loadGettingStartedImage(guideSlug, imageName);
         return new ResponseEntity<>(image, HttpStatus.OK);
     }

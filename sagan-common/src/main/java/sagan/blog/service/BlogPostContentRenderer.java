@@ -1,12 +1,12 @@
 package sagan.blog.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import sagan.util.service.MarkdownService;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class BlogPostContentRenderer {
@@ -40,10 +40,9 @@ public class BlogPostContentRenderer {
 
         StringBuffer sb = new StringBuffer();
         while (matcher.find()) {
-            matcher.appendReplacement(sb, String.format("<div class=\"callout\">\n" +
-                    "<div class=\"callout-title\">%s</div>\n" +
-                    "%s\n" +
-                    "</div>", matcher.group(1), matcher.group(2)));
+            matcher.appendReplacement(sb,
+                    String.format("<div class=\"callout\">\n" + "<div class=\"callout-title\">%s</div>\n" + "%s\n"
+                            + "</div>", matcher.group(1), matcher.group(2)));
         }
         matcher.appendTail(sb);
         return sb.toString();

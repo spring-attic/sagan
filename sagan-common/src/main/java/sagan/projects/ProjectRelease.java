@@ -16,10 +16,10 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 
         public static ReleaseStatus getFromVersion(String version) {
             Assert.notNull(version, "Version must not be null");
-            if(PREREALSE_PATTERN.matcher(version).matches()) {
+            if (PREREALSE_PATTERN.matcher(version).matches()) {
                 return PRERELEASE;
             }
-            if(SNAPSHOT_PATTERN.matcher(version).matches()) {
+            if (SNAPSHOT_PATTERN.matcher(version).matches()) {
                 return SNAPSHOT;
             }
             return GENERAL_AVAILABILITY;
@@ -35,8 +35,8 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     private final String artifactId;
     private final ProjectRepository repository;
 
-    public ProjectRelease(String versionName, ReleaseStatus releaseStatus,
-                          boolean isCurrent, String refDocUrl, String apiDocUrl, String groupId, String artifactId) {
+    public ProjectRelease(String versionName, ReleaseStatus releaseStatus, boolean isCurrent, String refDocUrl,
+                          String apiDocUrl, String groupId, String artifactId) {
         this.versionName = versionName;
         this.releaseStatus = releaseStatus;
         this.isCurrent = isCurrent;
@@ -86,7 +86,6 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         }
         return versionNumber;
     }
-
 
     public String getRefDocUrl() {
         return this.refDocUrl;
@@ -153,9 +152,8 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 
     @Override
     public String toString() {
-        return "ProjectRelease{" + "versionName='" + this.versionName + '\''
-                + ", release=" + this.releaseStatus + ", refDocUrl='" + this.refDocUrl
-                + '\'' + ", apiDocUrl='" + this.apiDocUrl + '\'' + '}';
+        return "ProjectRelease{" + "versionName='" + this.versionName + '\'' + ", release=" + this.releaseStatus
+                + ", refDocUrl='" + this.refDocUrl + '\'' + ", apiDocUrl='" + this.apiDocUrl + '\'' + '}';
     }
 
 }

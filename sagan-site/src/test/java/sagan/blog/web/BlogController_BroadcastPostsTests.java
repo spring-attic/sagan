@@ -8,19 +8,21 @@ import sagan.blog.view.PostView;
 import sagan.blog.view.PostViewFactory;
 import sagan.util.web.PageableFactory;
 import sagan.util.web.PaginationInfo;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.ui.ExtendedModelMap;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -66,14 +68,12 @@ public class BlogController_BroadcastPostsTests {
 
     @Test
     public void providesAllCategoriesInModel() {
-        assertThat((PostCategory[]) this.model.get("categories"),
-                is(PostCategory.values()));
+        assertThat((PostCategory[]) this.model.get("categories"), is(PostCategory.values()));
     }
 
     @Test
     public void providesPaginationInfoInModel() {
-        assertThat((PaginationInfo) this.model.get("paginationInfo"),
-                is(new PaginationInfo(this.page)));
+        assertThat((PaginationInfo) this.model.get("paginationInfo"), is(new PaginationInfo(this.page)));
     }
 
     @Test

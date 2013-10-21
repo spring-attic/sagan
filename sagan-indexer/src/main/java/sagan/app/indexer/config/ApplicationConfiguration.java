@@ -1,10 +1,16 @@
 package sagan.app.indexer.config;
 
-import sagan.util.web.StaticPagePathFinder;
 import sagan.projects.service.ProjectMetadataService;
 import sagan.projects.service.ProjectMetadataYamlParser;
+import sagan.util.web.StaticPagePathFinder;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -17,10 +23,6 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @EnableAutoConfiguration
 @Configuration
@@ -55,8 +57,7 @@ public class ApplicationConfiguration {
 
     @Bean
     public ProjectMetadataService projectMetadataService() throws IOException {
-        return new ProjectMetadataYamlParser().createServiceFromYaml(this.projectMetadata
-                .getInputStream());
+        return new ProjectMetadataYamlParser().createServiceFromYaml(this.projectMetadata.getInputStream());
     }
 
     @Bean

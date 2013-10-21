@@ -58,8 +58,8 @@ class PageElementsBuilder {
 
     private void addPageElements(ArrayList<PageElement> elements) {
         for (long n = startPage; n <= endPage; n++) {
-			boolean isCurrentPage = n == currentPage;
-			boolean isNavigable = !isCurrentPage;
+            boolean isCurrentPage = n == currentPage;
+            boolean isNavigable = !isCurrentPage;
             elements.add(new PageElement(n, isNavigable, isCurrentPage));
         }
     }

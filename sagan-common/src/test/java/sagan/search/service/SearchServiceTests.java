@@ -1,25 +1,26 @@
 package sagan.search.service;
 
-import io.searchbox.Action;
-import io.searchbox.client.JestClient;
-import io.searchbox.client.JestResult;
-import io.searchbox.core.Index;
 import sagan.search.SearchEntry;
+import sagan.search.SearchEntryBuilder;
 import sagan.search.SearchException;
+
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
-import org.springframework.data.domain.Pageable;
-import sagan.search.SearchEntryBuilder;
 
-import java.util.Collections;
+import org.springframework.data.domain.Pageable;
+
+import io.searchbox.Action;
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestResult;
+import io.searchbox.core.Index;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class SearchServiceTests {
 
@@ -49,7 +50,7 @@ public class SearchServiceTests {
     @Test(expected = SearchException.class)
     public void searchExceptionHandling() throws Exception {
         throwsException();
-        this.searchService.search("foo", mock(Pageable.class), Collections.<String>emptyList());
+        this.searchService.search("foo", mock(Pageable.class), Collections.<String> emptyList());
     }
 
     @Test(expected = SearchException.class)

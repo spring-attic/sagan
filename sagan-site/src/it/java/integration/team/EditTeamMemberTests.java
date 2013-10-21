@@ -1,12 +1,14 @@
 package integration.team;
 
-import integration.IntegrationTestBase;
 import sagan.team.MemberProfile;
 import sagan.team.service.TeamRepository;
+
+import java.security.Principal;
 
 import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -15,21 +17,18 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.security.Principal;
+import integration.IntegrationTestBase;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.closeTo;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static requestpostprocessors.SecurityRequestPostProcessors.csrf;
-import static requestpostprocessors.SecurityRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
 public class EditTeamMemberTests extends IntegrationTestBase {
     @Autowired
@@ -109,7 +108,9 @@ public class EditTeamMemberTests extends IntegrationTestBase {
         requestBuilder.param("speakerdeckUsername", "sd_some-guy_");
         requestBuilder.param("lanyrdUsername", "ly_some-guy_");
         requestBuilder.param("geoLocation", "-12.5,45.3");
-        requestBuilder.param("videoEmbeds", "<iframe width=\"420\" height=\"315\" src=\"//www.youtube.com/embed/J---aiyznGQ\" frameborder=\"0\" allowfullscreen></iframe>");
+        requestBuilder
+                .param("videoEmbeds",
+                        "<iframe width=\"420\" height=\"315\" src=\"//www.youtube.com/embed/J---aiyznGQ\" frameborder=\"0\" allowfullscreen></iframe>");
 
         performRequestAndExpectRedirect(requestBuilder, editTeamUri);
 
@@ -124,14 +125,17 @@ public class EditTeamMemberTests extends IntegrationTestBase {
         assertEquals("tw_some-guy_", profile.getTwitterUsername());
         assertEquals("sd_some-guy_", profile.getSpeakerdeckUsername());
         assertEquals("ly_some-guy_", profile.getLanyrdUsername());
-        assertEquals("<iframe width=\"420\" height=\"315\" src=\"//www.youtube.com/embed/J---aiyznGQ\" frameborder=\"0\" allowfullscreen></iframe>", profile.getVideoEmbeds());
+        assertEquals(
+                "<iframe width=\"420\" height=\"315\" src=\"//www.youtube.com/embed/J---aiyznGQ\" frameborder=\"0\" allowfullscreen></iframe>",
+                profile.getVideoEmbeds());
 
         assertThat(profile.getGeoLocation(), not(nullValue()));
-        assertThat((double)profile.getGeoLocation().getLatitude(), closeTo(-12.5, 0.1));
+        assertThat((double) profile.getGeoLocation().getLatitude(), closeTo(-12.5, 0.1));
         assertThat((double) profile.getGeoLocation().getLongitude(), closeTo(45.3, 0.1));
     }
 
-    private void performRequestAndExpectRedirect(MockHttpServletRequestBuilder requestBuilder, final String expectedRedirectUrl) throws Exception {
+    private void performRequestAndExpectRedirect(MockHttpServletRequestBuilder requestBuilder,
+                                                 final String expectedRedirectUrl) throws Exception {
         this.mockMvc.perform(requestBuilder)
                 .andExpect(new ResultMatcher() {
                     @Override
@@ -141,7 +145,6 @@ public class EditTeamMemberTests extends IntegrationTestBase {
                     }
                 });
     }
-
 
     @Test
     public void getTeamAdminPage() throws Exception {

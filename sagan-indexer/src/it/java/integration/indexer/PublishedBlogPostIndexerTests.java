@@ -1,38 +1,39 @@
 package integration.indexer;
 
-import integration.IndexerIntegrationTestBase;
 import sagan.blog.Post;
+import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.blog.service.PostRepository;
 import sagan.blog.search.PublishedBlogPostsIndexer;
+import sagan.blog.service.PostRepository;
 import sagan.search.SearchEntry;
 import sagan.search.service.SearchService;
+
+import java.util.Calendar;
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
-import sagan.blog.PostBuilder;
 
-import java.util.Calendar;
-import java.util.Date;
+import integration.IndexerIntegrationTestBase;
 
 import static integration.indexer.PublishedBlogPostIndexerTests.TestConfiguration;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 @ContextConfiguration(classes = { TestConfiguration.class })
-public class PublishedBlogPostIndexerTests extends IndexerIntegrationTestBase{
+public class PublishedBlogPostIndexerTests extends IndexerIntegrationTestBase {
 
     @Configuration
     public static class TestConfiguration {
         @Bean
         @Primary
-        public SearchService stubSearchService(){
+        public SearchService stubSearchService() {
             return new SearchService(null, null) {
                 @Override
                 public void saveToIndex(SearchEntry entry) {
@@ -75,7 +76,7 @@ public class PublishedBlogPostIndexerTests extends IndexerIntegrationTestBase{
 
     @Test
     public void usesAPostIdForAnIndexableItemId() throws Exception {
-        assertThat(blogPostIndexer.getId(post), equalTo(post.getId()+""));
+        assertThat(blogPostIndexer.getId(post), equalTo(post.getId() + ""));
     }
 
     @Test

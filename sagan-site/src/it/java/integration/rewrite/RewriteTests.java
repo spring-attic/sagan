@@ -1,21 +1,24 @@
 package integration.rewrite;
 
 import sagan.app.site.ApplicationConfiguration;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockFilterConfig;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.PassThroughFilterChain;
-import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -26,8 +29,9 @@ public class RewriteTests {
 
     @Before
     public void setUp() throws Exception {
-        UrlRewriteFilter filter = createUrlFilter(
-                ApplicationConfiguration.REWRITE_FILTER_NAME, ApplicationConfiguration.REWRITE_FILTER_CONF_PATH);
+        UrlRewriteFilter filter =
+                createUrlFilter(ApplicationConfiguration.REWRITE_FILTER_NAME,
+                        ApplicationConfiguration.REWRITE_FILTER_CONF_PATH);
         filterChain = new PassThroughFilterChain(filter, new MockFilterChain());
     }
 
@@ -42,8 +46,9 @@ public class RewriteTests {
 
     @Test
     public void rossensWebSocketPostIsRedirectedToOldBlog() throws Exception {
-        validateTemporaryRedirect("http://spring.io/blog/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures",
-                                  "http://assets.spring.io/wp/WebSocketBlogPost.html");
+        validateTemporaryRedirect(
+                "http://spring.io/blog/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures",
+                "http://assets.spring.io/wp/WebSocketBlogPost.html");
     }
 
     @Test
@@ -109,15 +114,18 @@ public class RewriteTests {
         validateTemporaryRedirect("http://spring.io/spring-data", "http://projects.spring.io/spring-data");
     }
 
-    private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
+    private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,
+            ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);
     }
 
-    private void validatePermanentRedirect(String requestedUrl, String redirectedUrl) throws IOException, ServletException, URISyntaxException {
+    private void validatePermanentRedirect(String requestedUrl, String redirectedUrl) throws IOException,
+            ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 301);
     }
 
-    private void validateRedirect(String requestedUrl, String redirectedUrl, int expectedStatus) throws IOException, ServletException, URISyntaxException {
+    private void validateRedirect(String requestedUrl, String redirectedUrl, int expectedStatus) throws IOException,
+            ServletException, URISyntaxException {
         MockHttpServletRequest servletRequest = new MockHttpServletRequest();
         URI requestUrl = new URI(requestedUrl);
         if (requestUrl.getHost() != null) {

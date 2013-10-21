@@ -1,9 +1,5 @@
 package sagan.tools.toolsuite.parser;
 
-import sagan.tools.toolsuite.parser.ToolXmlConverter;
-import org.junit.Before;
-import org.junit.Test;
-
 import sagan.tools.toolsuite.ToolSuiteDownloads;
 import sagan.tools.toolsuite.UpdateSiteArchive;
 import sagan.tools.toolsuite.xml.Download;
@@ -12,6 +8,9 @@ import sagan.tools.toolsuite.xml.ToolSuiteXml;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -52,7 +51,9 @@ public class ToolXmlConverter_SingleArchiveDownloadTests {
         assertThat(toolSuite.getArchives().size(), equalTo(1));
         UpdateSiteArchive archive = toolSuite.getArchives().get(0);
         assertThat(archive.getVersion(), equalTo("4.3.x"));
-        assertThat(archive.getUrl(), equalTo("http://dist.springsource.com/release/TOOLS/update/3.3.0.RELEASE/e4.3/springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
+        assertThat(
+                archive.getUrl(),
+                equalTo("http://dist.springsource.com/release/TOOLS/update/3.3.0.RELEASE/e4.3/springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
         assertThat(archive.getFileSize(), equalTo("172MB"));
         assertThat(archive.getFileName(), equalTo("springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
         assertThat(archive.getFileName(), equalTo("springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));

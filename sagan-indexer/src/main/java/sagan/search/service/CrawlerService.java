@@ -13,6 +13,7 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import org.springframework.stereotype.Component;
 
 import com.soulgalore.crawler.core.CrawlerConfiguration;
@@ -38,11 +39,11 @@ public class CrawlerService {
     }
 
     public void crawl(String url, int linkDepth, DocumentProcessor processor) {
-        CrawlerConfiguration apiConfig = new CrawlerConfiguration.Builder()
-                .setStartUrl(url).setMaxLevels(linkDepth).build();
-        DefaultCrawler crawler = new DefaultCrawler(new ResponseFetcher(processor),
-                Executors.newFixedThreadPool(10), new CompositeURLParser(
-                        new FramePageURLParser(), new AhrefPageURLParser()));
+        CrawlerConfiguration apiConfig =
+                new CrawlerConfiguration.Builder().setStartUrl(url).setMaxLevels(linkDepth).build();
+        DefaultCrawler crawler =
+                new DefaultCrawler(new ResponseFetcher(processor), Executors.newFixedThreadPool(10),
+                        new CompositeURLParser(new FramePageURLParser(), new AhrefPageURLParser()));
         crawler.getUrls(apiConfig);
         crawler.shutdown();
     }
@@ -57,11 +58,9 @@ public class CrawlerService {
         }
 
         @Override
-        public HTMLPageResponse get(PageURL url, boolean fetchBody,
-                Map<String, String> requestHeaders) {
+        public HTMLPageResponse get(PageURL url, boolean fetchBody, Map<String, String> requestHeaders) {
             HTMLPageResponse response = super.get(url, fetchBody, requestHeaders);
-            if (response.getResponseCode() == 200
-                    && response.getResponseType().startsWith("text")) {
+            if (response.getResponseCode() == 200 && response.getResponseType().startsWith("text")) {
                 this.processor.process(response.getBody());
             }
             return response;
@@ -101,8 +100,7 @@ public class CrawlerService {
             return urls;
         }
 
-        private Set<PageURL> fetch(String query, String attributeKey, Document doc,
-                String url) {
+        private Set<PageURL> fetch(String query, String attributeKey, Document doc, String url) {
             Set<PageURL> urls = new HashSet<PageURL>();
             Elements elements = doc.select(query);
             for (Element src : elements) {

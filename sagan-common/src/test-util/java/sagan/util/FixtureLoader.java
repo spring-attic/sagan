@@ -1,11 +1,11 @@
 package sagan.util;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.StreamUtils;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.StreamUtils;
 
 public class FixtureLoader {
 

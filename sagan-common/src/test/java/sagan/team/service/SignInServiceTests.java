@@ -1,15 +1,13 @@
 package sagan.team.service;
 
-import sagan.team.service.SignInService;
-import sagan.team.service.TeamService;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
-import org.mockito.BDDMockito.BDDMyOngoingStubbing;
+import org.mockito.BDDMockito.*;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.github.api.GitHub;
@@ -19,11 +17,7 @@ import org.springframework.web.client.RestOperations;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.BDDMockito.anyString;
-import static org.mockito.BDDMockito.argThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.mock;
-import static org.mockito.BDDMockito.verify;
+import static org.mockito.BDDMockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SignInServiceTests {
@@ -48,7 +42,8 @@ public class SignInServiceTests {
 
     @Test
     public void createOrUpdateMemberProfileOnLogin() {
-        GitHubUserProfile userProfile = new GitHubUserProfile(1234L, username, name, location, "", "", email, avatarUrl, null);
+        GitHubUserProfile userProfile =
+                new GitHubUserProfile(1234L, username, name, location, "", "", email, avatarUrl, null);
         UserOperations userOperations = mock(UserOperations.class);
 
         given(userOperations.getUserProfile()).willReturn(userProfile);
@@ -76,14 +71,13 @@ public class SignInServiceTests {
     private void mockIsMemberOfTeam(boolean isMember) {
         RestOperations restOperations = mock(RestOperations.class);
         given(gitHub.restOperations()).willReturn(restOperations);
-        BDDMyOngoingStubbing<ResponseEntity<Void>> expectedResult = given(restOperations
-                .getForEntity(anyString(),
-                        argThat(new ArgumentMatcher<Class<Void>>() {
-                            @Override
-                            public boolean matches(Object argument) {
-                                return true;
-                            }
-                        }), anyString(), anyString()));
+        BDDMyOngoingStubbing<ResponseEntity<Void>> expectedResult =
+                given(restOperations.getForEntity(anyString(), argThat(new ArgumentMatcher<Class<Void>>() {
+                    @Override
+                    public boolean matches(Object argument) {
+                        return true;
+                    }
+                }), anyString(), anyString()));
 
         HttpStatus statusCode = isMember ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
         expectedResult.willReturn(new ResponseEntity<Void>(statusCode));

@@ -1,15 +1,15 @@
 package sagan.blog.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import sagan.util.service.DateService;
-import sagan.team.MemberProfile;
-import sagan.team.service.TeamRepository;
 import sagan.blog.Post;
 import sagan.blog.PostForm;
+import sagan.team.MemberProfile;
+import sagan.team.service.TeamRepository;
+import sagan.util.service.DateService;
 
 import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PostFormAdapter {
@@ -21,7 +21,8 @@ public class PostFormAdapter {
     private final TeamRepository teamRepository;
 
     @Autowired
-    public PostFormAdapter(BlogPostContentRenderer renderer, SummaryExtractor summaryExtractor, DateService dateService, TeamRepository teamRepository) {
+    public PostFormAdapter(BlogPostContentRenderer renderer, SummaryExtractor summaryExtractor,
+                           DateService dateService, TeamRepository teamRepository) {
         this.renderer = renderer;
         this.summaryExtractor = summaryExtractor;
         this.dateService = dateService;

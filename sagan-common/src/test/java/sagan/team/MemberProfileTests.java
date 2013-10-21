@@ -1,13 +1,9 @@
 package sagan.team;
 
-import sagan.team.MemberProfile;
-
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 
 public class MemberProfileTests {
 

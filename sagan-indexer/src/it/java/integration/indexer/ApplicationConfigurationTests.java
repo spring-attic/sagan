@@ -16,13 +16,13 @@
 package integration.indexer;
 
 import sagan.app.indexer.config.ApplicationConfiguration;
+import sagan.util.FreePortFinder;
 
 import org.junit.After;
 import org.junit.Test;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
-import sagan.util.FreePortFinder;
 
 import static org.junit.Assert.assertNotNull;
 

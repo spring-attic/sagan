@@ -17,7 +17,7 @@ public abstract class PageableFactory {
         return build(0, Integer.MAX_VALUE);
     }
 
-    public static Pageable forFeeds(){
+    public static Pageable forFeeds() {
         return build(0, 20);
     }
 

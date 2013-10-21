@@ -1,20 +1,20 @@
 package sagan.tools.web;
 
-import sagan.tools.service.ToolsService;
 import sagan.tools.eclipse.EclipseDownloads;
 import sagan.tools.eclipse.EclipsePlatform;
+import sagan.tools.service.ToolsService;
 import sagan.tools.toolsuite.ToolSuiteDownloads;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @RequestMapping("/tools")
@@ -69,7 +69,7 @@ public class ToolsController {
     }
 
     @RequestMapping(value = "/ggts/all", method = { GET, HEAD })
-     public String allGgtsDownloads(Model model) throws Exception {
+    public String allGgtsDownloads(Model model) throws Exception {
         ToolSuiteDownloads gaDownloads = toolsService.getGgtsGaDownloads();
         ToolSuiteDownloads milestoneDownloads = toolsService.getGgtsMilestoneDownloads();
         model.addAttribute("gaRelease", gaDownloads);

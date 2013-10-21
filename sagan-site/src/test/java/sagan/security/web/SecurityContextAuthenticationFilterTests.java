@@ -1,14 +1,14 @@
 package sagan.security.web;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Test;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
-import sagan.security.web.SecurityContextAuthenticationFilter;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,7 +24,8 @@ public class SecurityContextAuthenticationFilterTests {
     @Test
     public void testSuccessfulAuthentication() throws Exception {
         List<GrantedAuthority> roleUser = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(123L,"githubusername",roleUser);
+        UsernamePasswordAuthenticationToken authentication =
+                new UsernamePasswordAuthenticationToken(123L, "githubusername", roleUser);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         assertEquals(authentication, filter.attemptAuthentication(null, null));

@@ -1,9 +1,9 @@
 package sagan.blog.web.feed;
 
 import sagan.blog.Post;
+import sagan.blog.view.PostView;
 import sagan.util.service.DateService;
 import sagan.util.web.SiteUrl;
-import sagan.blog.view.PostView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,8 +39,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
     }
 
     @Override
-    protected void buildFeedMetadata(Map<String, Object> model, Feed feed,
-            HttpServletRequest request) {
+    protected void buildFeedMetadata(Map<String, Object> model, Feed feed, HttpServletRequest request) {
         String feedPath = (String) model.get("feed-path");
         feed.setTitle((String) model.get("feed-title"));
         feed.setId(String.format("http://springsource.org%s", feedPath));
@@ -77,8 +76,8 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
     }
 
     @Override
-    protected List<Entry> buildFeedEntries(Map<String, Object> model,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    protected List<Entry> buildFeedEntries(Map<String, Object> model, HttpServletRequest request,
+                                           HttpServletResponse response) throws Exception {
         @SuppressWarnings("unchecked")
         List<Post> posts = (List<Post>) model.get("posts");
         List<Entry> entries = new ArrayList<Entry>(posts.size());

@@ -1,10 +1,5 @@
 package sagan.app.indexer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import sagan.blog.search.PublishedBlogPostsIndexer;
 import sagan.docs.search.ProjectDocumentationIndexer;
 import sagan.guides.search.GettingStartedGuideIndexer;
@@ -12,6 +7,13 @@ import sagan.guides.search.TutorialIndexer;
 import sagan.guides.search.UnderstandingGuideIndexer;
 import sagan.staticpage.search.StaticPageIndexer;
 import sagan.tools.search.ToolsIndexer;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 @SuppressWarnings("unused")
 @Component

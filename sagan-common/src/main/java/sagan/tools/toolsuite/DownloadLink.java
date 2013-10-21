@@ -43,16 +43,23 @@ public class DownloadLink {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         DownloadLink link = (DownloadLink) o;
 
-        if (!architecture.equals(link.architecture)) return false;
-        if (!fileSize.equals(link.fileSize)) return false;
-        if (!fileType.equals(link.fileType)) return false;
-        if (!os.equals(link.os)) return false;
-        if (!url.equals(link.url)) return false;
+        if (!architecture.equals(link.architecture))
+            return false;
+        if (!fileSize.equals(link.fileSize))
+            return false;
+        if (!fileType.equals(link.fileType))
+            return false;
+        if (!os.equals(link.os))
+            return false;
+        if (!url.equals(link.url))
+            return false;
 
         return true;
     }
@@ -69,10 +76,7 @@ public class DownloadLink {
 
     @Override
     public String toString() {
-        return "DownloadLink{" +
-                "fileType='" + fileType + '\'' +
-                ", os='" + os + '\'' +
-                ", architecture='" + architecture + '\'' +
-                '}';
+        return "DownloadLink{" + "fileType='" + fileType + '\'' + ", os='" + os + '\'' + ", architecture='"
+                + architecture + '\'' + '}';
     }
 }

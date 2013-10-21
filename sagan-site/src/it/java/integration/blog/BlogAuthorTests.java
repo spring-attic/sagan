@@ -1,6 +1,5 @@
 package integration.blog;
 
-import integration.IntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.service.PostRepository;
@@ -11,12 +10,14 @@ import sagan.team.service.TeamRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 
+import integration.IntegrationTestBase;
+
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 public class BlogAuthorTests extends IntegrationTestBase {
@@ -27,15 +28,12 @@ public class BlogAuthorTests extends IntegrationTestBase {
     @Autowired
     private TeamRepository teamRepository;
 
-
     @Test
     public void blogIndexPostsIncludeLinkToAuthor() throws Exception {
         MemberProfile activeAuthor = MemberProfileBuilder.profile().username("active_author").build();
         teamRepository.save(activeAuthor);
 
-        Post post = new PostBuilder().title("Blog Post ")
-                .author(activeAuthor)
-                .build();
+        Post post = new PostBuilder().title("Blog Post ").author(activeAuthor).build();
         postRepository.save(post);
 
         MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();
@@ -45,16 +43,11 @@ public class BlogAuthorTests extends IntegrationTestBase {
 
     @Test
     public void blogIndexPostsDoNotIncludeLinksToHiddenAuthors() throws Exception {
-        MemberProfile activeAuthor = MemberProfileBuilder.profile()
-                .name("Hidden Author")
-                .username("hidden_author")
-                .hidden(true)
-                .build();
+        MemberProfile activeAuthor =
+                MemberProfileBuilder.profile().name("Hidden Author").username("hidden_author").hidden(true).build();
         teamRepository.save(activeAuthor);
 
-        Post post = new PostBuilder().title("Blog Post ")
-                .author(activeAuthor)
-                .build();
+        Post post = new PostBuilder().title("Blog Post ").author(activeAuthor).build();
         postRepository.save(post);
 
         MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();
@@ -65,14 +58,10 @@ public class BlogAuthorTests extends IntegrationTestBase {
 
     @Test
     public void blogPostPageIncludesLinkToAuthor() throws Exception {
-        MemberProfile activeAuthor = MemberProfileBuilder.profile()
-                .username("active_author")
-                .build();
+        MemberProfile activeAuthor = MemberProfileBuilder.profile().username("active_author").build();
         teamRepository.save(activeAuthor);
 
-        Post post = new PostBuilder().title("Blog Post ")
-                .author(activeAuthor)
-                .build();
+        Post post = new PostBuilder().title("Blog Post ").author(activeAuthor).build();
         postRepository.save(post);
 
         MvcResult response = this.mockMvc.perform(get("/blog/" + post.getPublicSlug())).andReturn();
@@ -82,16 +71,11 @@ public class BlogAuthorTests extends IntegrationTestBase {
 
     @Test
     public void blogPostPageDoesNotIncludeLinkToHiddenAuthors() throws Exception {
-        MemberProfile activeAuthor = MemberProfileBuilder.profile()
-                .name("Hidden Author")
-                .username("hidden_author")
-                .hidden(true)
-                .build();
+        MemberProfile activeAuthor =
+                MemberProfileBuilder.profile().name("Hidden Author").username("hidden_author").hidden(true).build();
         teamRepository.save(activeAuthor);
 
-        Post post = new PostBuilder().title("Blog Post ")
-                .author(activeAuthor)
-                .build();
+        Post post = new PostBuilder().title("Blog Post ").author(activeAuthor).build();
         postRepository.save(post);
 
         MvcResult response = this.mockMvc.perform(get("/blog/" + post.getPublicSlug())).andReturn();

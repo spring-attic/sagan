@@ -33,7 +33,6 @@ class ProjectVersionsParser {
         PROJECT_RELEASE_COMPARATOR = comparator;
     }
 
-
     private final Map<String, String> variables;
     private final Map<String, String> defaultUrls;
 
@@ -67,8 +66,7 @@ class ProjectVersionsParser {
         return new SupportedVersion((String) versonData.get("name"), projectData, versonData);
     }
 
-    private List<ProjectRelease> buildProjectReleases(
-            List<SupportedVersion> orderedSupportedVersions) {
+    private List<ProjectRelease> buildProjectReleases(List<SupportedVersion> orderedSupportedVersions) {
         SupportedVersion currentVersion = getCurrentVersion(orderedSupportedVersions);
         List<ProjectRelease> projectReleases = new ArrayList<>();
         for (SupportedVersion supportedVersion : orderedSupportedVersions) {
@@ -78,16 +76,14 @@ class ProjectVersionsParser {
         return projectReleases;
     }
 
-    private SupportedVersion getCurrentVersion(
-            List<SupportedVersion> orderedSupportedVersions) {
+    private SupportedVersion getCurrentVersion(List<SupportedVersion> orderedSupportedVersions) {
         for (SupportedVersion version : orderedSupportedVersions) {
-            if(version.releaseStatus == ReleaseStatus.GENERAL_AVAILABILITY ){
+            if (version.releaseStatus == ReleaseStatus.GENERAL_AVAILABILITY) {
                 return version;
             }
         }
         return null;
     }
-
 
     private class SupportedVersion implements Comparable<SupportedVersion> {
 
@@ -114,23 +110,21 @@ class ProjectVersionsParser {
             this.variables.put("version", name);
         }
 
-        private String getValue(Map<String, Object> projectData, Map<String, Object> versionData,
-                String key, String defaultValue) {
-            if(versionData.containsKey(key)) {
+        private String getValue(Map<String, Object> projectData, Map<String, Object> versionData, String key,
+                                String defaultValue) {
+            if (versionData.containsKey(key)) {
                 return (String) versionData.get(key);
             }
-            if(projectData.containsKey(key)) {
+            if (projectData.containsKey(key)) {
                 return (String) projectData.get(key);
             }
             return defaultValue;
         }
 
         public ProjectRelease asProjectRelease(SupportedVersion currentVersion) {
-            return new ProjectRelease(this.name, this.releaseStatus, this == currentVersion,
-                    buildDocUrl(this.refDocUrl, "refDocUrl"),
-                    buildDocUrl(this.apiDocUrl, "apiDocUrl"),
-                    groupId.isEmpty() ? this.variables.get("groupId") : groupId,
-                    artifactId);
+            return new ProjectRelease(this.name, this.releaseStatus, this == currentVersion, buildDocUrl(
+                    this.refDocUrl, "refDocUrl"), buildDocUrl(this.apiDocUrl, "apiDocUrl"),
+                    groupId.isEmpty() ? this.variables.get("groupId") : groupId, artifactId);
         }
 
         private String buildDocUrl(String docPath, String defaultUrlKey) {

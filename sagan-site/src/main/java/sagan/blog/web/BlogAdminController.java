@@ -1,5 +1,19 @@
 package sagan.blog.web;
 
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
+import sagan.blog.PostForm;
+import sagan.blog.service.BlogService;
+import sagan.blog.view.PostView;
+import sagan.blog.view.PostViewFactory;
+import sagan.team.MemberProfile;
+import sagan.team.service.TeamRepository;
+import sagan.util.web.PageableFactory;
+
+import java.security.Principal;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
@@ -10,24 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestClientException;
 
-import sagan.blog.service.BlogService;
-import sagan.blog.Post;
-import sagan.blog.PostCategory;
-import sagan.blog.PostForm;
-import sagan.blog.view.PostView;
-import sagan.blog.view.PostViewFactory;
-import sagan.team.MemberProfile;
-import sagan.team.service.TeamRepository;
-import sagan.util.web.PageableFactory;
-
-import javax.validation.Valid;
-import java.security.Principal;
-
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @RequestMapping("/admin/blog")
@@ -60,7 +57,7 @@ public class BlogAdminController {
         return "admin/blog/new";
     }
 
-    @RequestMapping(value = "/{postId:[0-9]+}{slug:.*}/edit", method = {GET, HEAD})
+    @RequestMapping(value = "/{postId:[0-9]+}{slug:.*}/edit", method = { GET, HEAD })
     public String editPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
         Post post = service.getPost(postId);
         PostForm postForm = new PostForm(post);
@@ -71,7 +68,7 @@ public class BlogAdminController {
         return "admin/blog/edit";
     }
 
-    @RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = {GET, HEAD})
+    @RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { GET, HEAD })
     public String showPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
         model.addAttribute("post", postViewFactory.createPostView(service.getPost(postId)));
         return "admin/blog/show";
@@ -99,7 +96,8 @@ public class BlogAdminController {
     }
 
     @RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = PUT)
-    public String updatePost(@PathVariable Long postId, @Valid PostForm postForm, BindingResult bindingResult, Model model) {
+    public String updatePost(@PathVariable Long postId, @Valid PostForm postForm, BindingResult bindingResult,
+                             Model model) {
         Post post = service.getPost(postId);
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", PostCategory.values());
@@ -110,7 +108,7 @@ public class BlogAdminController {
                 service.updatePost(post, postForm);
                 PostView postView = postViewFactory.createPostView(post);
                 return "redirect:" + postView.getPath();
-            } catch(RestClientException e) {
+            } catch (RestClientException e) {
                 model.addAttribute("categories", PostCategory.values());
                 model.addAttribute("post", post);
                 model.addAttribute("githubBroken", true);

@@ -1,6 +1,6 @@
 package sagan.guides;
 
-public class Guide extends GuideWithoutContent{
+public class Guide extends GuideWithoutContent {
     private final String content;
     private final String sidebar;
 

@@ -1,18 +1,19 @@
 package sagan.staticpage.search;
 
+import sagan.search.service.CrawlerService;
+import sagan.search.service.SearchService;
+import sagan.util.web.StaticPagePathFinder;
+
+import java.io.IOException;
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import org.springframework.test.util.ReflectionTestUtils;
-
-import sagan.util.web.StaticPagePathFinder;
-import sagan.search.service.CrawlerService;
-import sagan.search.service.SearchService;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;

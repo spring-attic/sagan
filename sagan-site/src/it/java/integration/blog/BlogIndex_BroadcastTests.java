@@ -1,26 +1,25 @@
 package integration.blog;
 
-import integration.IntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.service.PostRepository;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Ignore;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import integration.IntegrationTestBase;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -51,7 +50,8 @@ public class BlogIndex_BroadcastTests extends IntegrationTestBase {
     }
 
     @Test
-    @Ignore // the broadcast category has been removed for the time being
+    @Ignore
+    // the broadcast category has been removed for the time being
     public void viewBroadcastBlogPosts() throws Exception {
         createManyPostsInNovember(2);
 
@@ -75,7 +75,8 @@ public class BlogIndex_BroadcastTests extends IntegrationTestBase {
 
         assertThat(numberOfBlogPosts(html), is(2));
 
-        assertThat(html.head().getElementsByAttributeValue("type", "application/atom+xml").get(0).attr("href"), equalTo("/blog/broadcasts.atom"));
+        assertThat(html.head().getElementsByAttributeValue("type", "application/atom+xml").get(0).attr("href"),
+                equalTo("/blog/broadcasts.atom"));
     }
 
     @Test

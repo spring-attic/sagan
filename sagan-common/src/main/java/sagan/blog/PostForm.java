@@ -1,10 +1,12 @@
 package sagan.blog;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class PostForm {
     @NotEmpty
@@ -25,7 +27,8 @@ public class PostForm {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date createdAt;
 
-    public PostForm() { }
+    public PostForm() {
+    }
 
     public PostForm(Post post) {
         title = post.getTitle();

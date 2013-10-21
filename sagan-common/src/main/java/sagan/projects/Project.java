@@ -11,11 +11,7 @@ public class Project {
     private final List<ProjectRelease> releaseList;
     private final boolean isAggregator;
 
-    public Project(String id,
-                   String name,
-                   String repoUrl,
-                   String siteUrl,
-                   List<ProjectRelease> releaseList,
+    public Project(String id, String name, String repoUrl, String siteUrl, List<ProjectRelease> releaseList,
                    boolean isAggregator) {
         this.id = id;
         this.name = name;

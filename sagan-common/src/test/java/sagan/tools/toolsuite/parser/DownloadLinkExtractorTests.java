@@ -1,6 +1,5 @@
 package sagan.tools.toolsuite.parser;
 
-import sagan.tools.toolsuite.parser.DownloadLinkExtractor;
 import sagan.tools.toolsuite.xml.Download;
 
 import org.junit.Before;
@@ -30,7 +29,8 @@ public class DownloadLinkExtractorTests {
 
     @Test
     public void extractsUrl() throws Exception {
-        assertThat(extractor.createDownloadLink(download).getUrl(),
+        assertThat(
+                extractor.createDownloadLink(download).getUrl(),
                 equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
     }
 
@@ -40,7 +40,7 @@ public class DownloadLinkExtractorTests {
     }
 
     @Test
-     public void extractsSimpleFileType() throws Exception {
+    public void extractsSimpleFileType() throws Exception {
         assertThat(extractor.createDownloadLink(download).getFileType(), equalTo("dmg"));
     }
 

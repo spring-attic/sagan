@@ -1,6 +1,5 @@
 package sagan.tools.toolsuite.parser;
 
-
 import sagan.tools.toolsuite.Architecture;
 import sagan.tools.toolsuite.DownloadLink;
 import sagan.tools.toolsuite.EclipseVersion;
@@ -82,7 +81,8 @@ public class ToolSuiteBuilder {
         return eclipseVersion;
     }
 
-    private Architecture createOrFindArchitecture(String architectureName, EclipseVersion eclipseVersion, ToolSuitePlatform platform) {
+    private Architecture createOrFindArchitecture(String architectureName, EclipseVersion eclipseVersion,
+                                                  ToolSuitePlatform platform) {
         String key = platform.getName() + eclipseVersion.getName() + architectureName;
 
         Architecture architecture = architectureMap.get(key);

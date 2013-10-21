@@ -1,8 +1,5 @@
 package sagan.util.service.github;
 
-import sagan.util.service.github.JsonStringConverter;
-import sagan.util.service.github.MarkdownHtmlConverter;
-
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +27,7 @@ public class GitHubConfiguration {
 
     @Bean
     public GitHubConnectionFactory gitHubConnectionFactory() {
-        GitHubConnectionFactory factory = new GitHubConnectionFactory(
-                this.githubClientId, this.githubClientSecret);
+        GitHubConnectionFactory factory = new GitHubConnectionFactory(this.githubClientId, this.githubClientSecret);
         factory.setScope("user");
         return factory;
     }

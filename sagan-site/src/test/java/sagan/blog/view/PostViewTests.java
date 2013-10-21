@@ -1,18 +1,16 @@
 package sagan.blog.view;
 
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import sagan.util.DateTestUtils;
+import sagan.util.service.DateService;
+
+import java.text.ParseException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import sagan.blog.view.PostView;
-import sagan.util.DateTestUtils;
-
-import sagan.blog.Post;
-import sagan.blog.PostBuilder;
-import sagan.util.service.DateService;
-
-import java.text.ParseException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;
