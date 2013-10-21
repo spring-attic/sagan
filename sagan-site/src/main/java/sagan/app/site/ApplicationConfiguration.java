@@ -55,11 +55,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
-
 @EnableAutoConfiguration
 @Configuration
 @EnableCaching
-@Import({DatabaseConfig.class, SearchClientConfiguration.class, GitHubConfiguration.class, WebMvcConfiguration.class})
 @ComponentScan("sagan")
 public class ApplicationConfiguration {
 
