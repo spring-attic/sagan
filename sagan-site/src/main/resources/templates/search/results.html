@@ -5,7 +5,6 @@
     <title th:inline="text">Search &middot; [[${searchForm.q}]]</title>
     <link rel="alternate" type="application/atom+xml" th:href="${feedPath}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/search.css}"/>
-    <script type="text/javascript" th:src="@{/js/search.js}" ></script>
 </head>
 <body>
 <div layout:fragment="header-container"></div>
@@ -42,7 +41,7 @@
 
     <div class="span4">
       <div class="search-facets content-container--wrapper">
-        <form th:action="@{/search}" method="GET" th:object="${searchForm}" onsubmit="interceptFilterForm(this);">
+        <form th:action="@{/search}" method="GET" th:object="${searchForm}">
           <input type="hidden" name="q" th:value="${searchForm.q}" />
           <header class="content-container--header">
             <h3 class="header-title">Filter Your Results</h3>
