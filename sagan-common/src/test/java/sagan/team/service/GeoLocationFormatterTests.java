@@ -1,11 +1,11 @@
 package sagan.team.service;
 
-import org.junit.Before;
-import org.junit.Test;
 import sagan.team.GeoLocation;
-import sagan.team.service.GeoLocationFormatter;
 
 import java.text.ParseException;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

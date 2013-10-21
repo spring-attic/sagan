@@ -1,8 +1,8 @@
 package sagan.util.web;
 
-import org.springframework.data.domain.Page;
-
 import java.util.List;
+
+import org.springframework.data.domain.Page;
 
 /**
  * Used in views for rendering pagination controls Page numbers are not zero indexed

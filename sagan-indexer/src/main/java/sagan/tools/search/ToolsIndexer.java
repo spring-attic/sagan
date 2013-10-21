@@ -1,16 +1,16 @@
 package sagan.tools.search;
 
 import sagan.search.service.CrawledWebDocumentProcessor;
+import sagan.search.service.CrawlerService;
+import sagan.search.service.SearchService;
+import sagan.staticpage.search.LocalStaticPagesSearchEntryMapper;
 import sagan.util.index.Indexer;
+
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import sagan.search.service.CrawlerService;
-import sagan.staticpage.search.LocalStaticPagesSearchEntryMapper;
-import sagan.search.service.SearchService;
-
-import java.util.ArrayList;
 
 @Service
 public class ToolsIndexer implements Indexer<String> {
@@ -24,7 +24,8 @@ public class ToolsIndexer implements Indexer<String> {
     @Autowired
     public ToolsIndexer(CrawlerService crawlerService, SearchService searchService) {
         this.crawlerService = crawlerService;
-        this.documentProcessor = new CrawledWebDocumentProcessor(searchService, new LocalStaticPagesSearchEntryMapper());
+        this.documentProcessor =
+                new CrawledWebDocumentProcessor(searchService, new LocalStaticPagesSearchEntryMapper());
     }
 
     @Override
@@ -32,7 +33,7 @@ public class ToolsIndexer implements Indexer<String> {
         return buildItems("/tools", "/tools/eclipse", "/tools/sts", "/tools/ggts", "/tools/sts/all", "/tools/ggts/all");
     }
 
-    private Iterable<String> buildItems(String ... paths) {
+    private Iterable<String> buildItems(String... paths) {
         ArrayList<String> items = new ArrayList<>();
         for (String path : paths) {
             items.add(baseUrl + path);

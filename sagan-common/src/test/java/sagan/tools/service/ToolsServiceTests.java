@@ -1,11 +1,14 @@
 package sagan.tools.service;
 
-import sagan.tools.service.ToolsService;
-import sagan.util.service.CachedRestClient;
 import sagan.tools.toolsuite.DownloadLink;
 import sagan.tools.toolsuite.EclipseVersion;
 import sagan.tools.toolsuite.ToolSuiteDownloads;
 import sagan.tools.toolsuite.ToolSuitePlatform;
+import sagan.util.FixtureLoader;
+import sagan.util.service.CachedRestClient;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,18 +16,12 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+
 import org.springframework.web.client.RestTemplate;
 
-import sagan.util.FixtureLoader;
-
-import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,12 +39,10 @@ public class ToolsServiceTests {
     @Before
     public void setUp() throws Exception {
         Serializer serializer = new Persister();
-        this.service = new ToolsService(this.cachedRestClient, this.restTemplate,
-                serializer);
+        this.service = new ToolsService(this.cachedRestClient, this.restTemplate, serializer);
         String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
-        when(
-                this.cachedRestClient.get(eq(this.restTemplate), anyString(),
-                        (Class<String>) anyObject())).thenReturn(responseXml);
+        when(this.cachedRestClient.get(eq(this.restTemplate), anyString(), (Class<String>) anyObject())).thenReturn(
+                responseXml);
     }
 
     @Test
@@ -70,15 +65,13 @@ public class ToolsServiceTests {
         assertThat(eclipseVersions.get(0).getName(), equalTo("4.3"));
         assertThat(eclipseVersions.get(1).getName(), equalTo("3.8.2"));
 
-        assertThat(windows.getEclipseVersions().get(0)
-                .getArchitectures().get(0).getDownloadLinks().size(), equalTo(2));
-        DownloadLink downloadLink = windows.getEclipseVersions().get(0)
-                .getArchitectures().get(0).getDownloadLinks().get(0);
+        assertThat(windows.getEclipseVersions().get(0).getArchitectures().get(0).getDownloadLinks().size(), equalTo(2));
+        DownloadLink downloadLink =
+                windows.getEclipseVersions().get(0).getArchitectures().get(0).getDownloadLinks().get(0);
         assertThat(
                 downloadLink.getUrl(),
                 equalTo("http://download.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
-        downloadLink = windows.getEclipseVersions().get(0)
-                .getArchitectures().get(0).getDownloadLinks().get(1);
+        downloadLink = windows.getEclipseVersions().get(0).getArchitectures().get(0).getDownloadLinks().get(1);
         assertThat(
                 downloadLink.getUrl(),
                 equalTo("http://download.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32.zip"));
@@ -110,15 +103,13 @@ public class ToolsServiceTests {
         assertThat(eclipseVersions.get(0).getName(), equalTo("4.3"));
         assertThat(eclipseVersions.get(1).getName(), equalTo("3.8.2"));
 
-        assertThat(windows.getEclipseVersions().get(0)
-                .getArchitectures().get(0).getDownloadLinks().size(), equalTo(2));
-        DownloadLink downloadLink = windows.getEclipseVersions().get(0)
-                .getArchitectures().get(0).getDownloadLinks().get(0);
+        assertThat(windows.getEclipseVersions().get(0).getArchitectures().get(0).getDownloadLinks().size(), equalTo(2));
+        DownloadLink downloadLink =
+                windows.getEclipseVersions().get(0).getArchitectures().get(0).getDownloadLinks().get(0);
         assertThat(
                 downloadLink.getUrl(),
                 equalTo("http://download.springsource.com/release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
-        downloadLink = windows.getEclipseVersions().get(0)
-                .getArchitectures().get(0).getDownloadLinks().get(1);
+        downloadLink = windows.getEclipseVersions().get(0).getArchitectures().get(0).getDownloadLinks().get(1);
         assertThat(
                 downloadLink.getUrl(),
                 equalTo("http://download.springsource.com/release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32.zip"));

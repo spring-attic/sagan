@@ -1,13 +1,13 @@
 package sagan.blog;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
 import sagan.util.DateTestUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.junit.Ignore;
+import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
@@ -28,7 +28,8 @@ public class PostTests {
 
     @Test
     public void slugStripsNonAlphanumericCharacters() {
-        assertEquals("1-title-1-with-characters", builder.title("Title 1, with characters';:\\|").build().getAdminSlug());
+        assertEquals("1-title-1-with-characters", builder.title("Title 1, with characters';:\\|").build()
+                .getAdminSlug());
     }
 
     @Test
@@ -38,7 +39,8 @@ public class PostTests {
 
     @Test
     public void slugStripsNewLineCharacters() {
-        assertEquals("1-title-1-on-multiple-lines", builder.title("Title 1\n on multiple\nlines").build().getAdminSlug());
+        assertEquals("1-title-1-on-multiple-lines", builder.title("Title 1\n on multiple\nlines").build()
+                .getAdminSlug());
     }
 
     @Test
@@ -62,7 +64,7 @@ public class PostTests {
     }
 
     @Test
-     public void isLiveIfPublishedInThePast() throws ParseException {
+    public void isLiveIfPublishedInThePast() throws ParseException {
         Post post = PostBuilder.post().publishAt("2013-01-01 00:00").build();
         assertThat(post.isLiveOn(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-28 00:00")), is(true));
     }

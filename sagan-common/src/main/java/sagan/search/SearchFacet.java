@@ -54,15 +54,21 @@ public class SearchFacet {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         SearchFacet that = (SearchFacet) o;
 
-        if (count != that.count) return false;
-        if (!facets.equals(that.facets)) return false;
-        if (!name.equals(that.name)) return false;
-        if (!path.equals(that.path)) return false;
+        if (count != that.count)
+            return false;
+        if (!facets.equals(that.facets))
+            return false;
+        if (!name.equals(that.name))
+            return false;
+        if (!path.equals(that.path))
+            return false;
 
         return true;
     }
@@ -78,12 +84,8 @@ public class SearchFacet {
 
     @Override
     public String toString() {
-        return "SearchFacet{" +
-                "path='" + path + '\'' +
-                ", name='" + name + '\'' +
-                ", count=" + count +
-                ", facets=" + facets +
-                '}';
+        return "SearchFacet{" + "path='" + path + '\'' + ", name='" + name + '\'' + ", count=" + count + ", facets="
+                + facets + '}';
     }
 
     public List<SearchFacet> getHeaderFacets() {

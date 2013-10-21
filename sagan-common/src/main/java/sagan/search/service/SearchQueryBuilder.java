@@ -1,6 +1,11 @@
 package sagan.search.service;
 
-import io.searchbox.core.Search;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.elasticsearch.common.joda.time.format.ISODateTimeFormat;
 import org.elasticsearch.index.query.AndFilterBuilder;
 import org.elasticsearch.index.query.OrFilterBuilder;
@@ -12,13 +17,10 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.facet.terms.TermsFacet;
 import org.elasticsearch.search.facet.terms.TermsFacetBuilder;
 import org.elasticsearch.search.highlight.HighlightBuilder;
+
 import org.springframework.data.domain.Pageable;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import io.searchbox.core.Search;
 
 class SearchQueryBuilder {
     private static final String BOOST_CURRENT_VERSION_SCRIPT = "_score * (_source.current ? 1.1 : 1.0)";
@@ -34,7 +36,6 @@ class SearchQueryBuilder {
         String search = buildSearch(query, filters, pageable);
         return new Search.Builder(search);
     }
-
 
     Search.Builder forQuery(String queryTerm, Pageable pageable, List<String> filters) {
         QueryBuilder query = QueryBuilders.multiMatchQuery(queryTerm, BOOSTED_TITLE_FIELD, RAW_CONTENT_FIELD);
@@ -74,10 +75,8 @@ class SearchQueryBuilder {
 
     private void filterFutureResults(AndFilterBuilder filterBuilder) {
         String formattedDate = ISODateTimeFormat.dateTimeNoMillis().print(new Date().getTime());
-        RangeFilterBuilder rangeFilterBuilder = new RangeFilterBuilder("publishAt")
-                .to(formattedDate)
-                .includeLower(true)
-                .includeUpper(true);
+        RangeFilterBuilder rangeFilterBuilder =
+                new RangeFilterBuilder("publishAt").to(formattedDate).includeLower(true).includeUpper(true);
 
         filterBuilder.add(rangeFilterBuilder);
     }
@@ -133,7 +132,6 @@ class SearchQueryBuilder {
         return splitFilters;
     }
 
-
     private void addFacetPathsResult(SearchSourceBuilder searchSourceBuilder) {
         TermsFacetBuilder facetBuilder = new TermsFacetBuilder("facet_paths_result")
                 .field("facetPaths")
@@ -143,10 +141,8 @@ class SearchQueryBuilder {
     }
 
     private void addHighlights(SearchSourceBuilder searchSourceBuilder) {
-        HighlightBuilder highlightBuilder = new HighlightBuilder()
-                .order("score")
-                .requireFieldMatch(false)
-                .field("rawContent", 300, 1);
+        HighlightBuilder highlightBuilder =
+                new HighlightBuilder().order("score").requireFieldMatch(false).field("rawContent", 300, 1);
 
         searchSourceBuilder.highlight(highlightBuilder);
     }

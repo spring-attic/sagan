@@ -1,12 +1,12 @@
 package sagan.guides.web;
 
 import sagan.guides.service.GitHubGuidesService;
-import sagan.guides.web.TutorialsController;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.http.ResponseEntity;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -29,10 +29,8 @@ public class TutorialsControllerTests {
     @Test
     public void loadImages() {
         byte[] image = "animage".getBytes();
-        given(this.guideService.loadTutorialImage("rest-service", "welcome.png")).willReturn(
-                image);
-        ResponseEntity<byte[]> responseEntity = this.controller.loadImage("rest-service",
-                "welcome.png");
+        given(this.guideService.loadTutorialImage("rest-service", "welcome.png")).willReturn(image);
+        ResponseEntity<byte[]> responseEntity = this.controller.loadImage("rest-service", "welcome.png");
         assertThat(responseEntity.getBody(), is(image));
     }
 

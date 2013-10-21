@@ -1,12 +1,8 @@
 package sagan.tools.eclipse.parser;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import sagan.tools.eclipse.EclipseDownloads;
 import sagan.tools.eclipse.EclipsePackage;
 import sagan.tools.eclipse.EclipseRelease;
-import sagan.tools.eclipse.parser.EclipseDownloadsXmlConverter;
 import sagan.tools.eclipse.xml.EclipseXml;
 import sagan.tools.eclipse.xml.EclipseXmlDownload;
 import sagan.tools.eclipse.xml.EclipseXmlPackage;
@@ -16,6 +12,9 @@ import sagan.tools.toolsuite.DownloadLink;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -69,21 +68,25 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForSamePackageWithDifferen
 
     @Test
     public void addsAPackage() throws Exception {
-        List<EclipsePackage> windowsPackages = eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
+        List<EclipsePackage> windowsPackages =
+                eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
         assertThat(windowsPackages.size(), equalTo(1));
         assertThat(windowsPackages.get(0).getName(), equalTo("Eclipse Standard 4.3"));
     }
 
     @Test
     public void addsTwoDownloadLinksToThePackage() throws Exception {
-        List<EclipsePackage> windowsPackages = eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
+        List<EclipsePackage> windowsPackages =
+                eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
         List<DownloadLink> win32DownloadLinks = windowsPackages.get(0).getArchitectures().get(0).getDownloadLinks();
 
         assertThat(win32DownloadLinks.size(), equalTo(1));
 
         assertThat(win32DownloadLinks.get(0).getOs(), equalTo("windows"));
         assertThat(win32DownloadLinks.get(0).getArchitecture(), equalTo("32"));
-        assertThat(win32DownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
+        assertThat(
+                win32DownloadLinks.get(0).getUrl(),
+                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
         assertThat(win32DownloadLinks.get(0).getFileSize(), equalTo("123MB"));
         assertThat(win32DownloadLinks.get(0).getFileType(), equalTo("zip"));
 
@@ -93,7 +96,9 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForSamePackageWithDifferen
 
         assertThat(win64DownloadLinks.get(0).getOs(), equalTo("windows"));
         assertThat(win64DownloadLinks.get(0).getArchitecture(), equalTo("64"));
-        assertThat(win64DownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win64-x86_64.zip"));
+        assertThat(
+                win64DownloadLinks.get(0).getUrl(),
+                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win64-x86_64.zip"));
         assertThat(win64DownloadLinks.get(0).getFileSize(), equalTo("456MB"));
         assertThat(win64DownloadLinks.get(0).getFileType(), equalTo("zip"));
     }

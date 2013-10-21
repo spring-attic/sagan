@@ -1,11 +1,27 @@
 package sagan.blog.web;
 
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import sagan.blog.PostCategory;
+import sagan.blog.PostForm;
+import sagan.blog.service.BlogService;
+import sagan.blog.view.PostView;
+import sagan.blog.view.PostViewFactory;
+import sagan.team.MemberProfile;
+import sagan.team.service.TeamRepository;
+import sagan.util.service.DateService;
+import sagan.util.web.PageableFactory;
+
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,34 +30,9 @@ import org.springframework.ui.ExtendedModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.validation.MapBindingResult;
 
-import sagan.blog.service.BlogService;
-import sagan.blog.Post;
-import sagan.blog.PostBuilder;
-import sagan.blog.PostCategory;
-import sagan.blog.PostForm;
-import sagan.blog.view.PostView;
-import sagan.blog.view.PostViewFactory;
-import sagan.util.service.DateService;
-import sagan.team.MemberProfile;
-import sagan.team.service.TeamRepository;
-import sagan.util.web.PageableFactory;
-
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.sameInstance;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import static org.mockito.BDDMockito.anyObject;
-import static org.mockito.BDDMockito.anyString;
-import static org.mockito.BDDMockito.eq;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.mock;
-import static org.mockito.BDDMockito.same;
-import static org.mockito.BDDMockito.verify;
+import static org.mockito.BDDMockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogAdminControllerTests {
@@ -179,6 +170,5 @@ public class BlogAdminControllerTests {
         String result2 = controller.createPost(principal, postForm, bindingResult, new ExtendedModelMap());
         assertThat(result2, equalTo("admin/blog/new"));
     }
-
 
 }

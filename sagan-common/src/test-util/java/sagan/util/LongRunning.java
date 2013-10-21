@@ -22,7 +22,6 @@ import org.junit.runners.model.Statement;
 
 /**
  * @author Dave Syer
- *
  */
 public class LongRunning implements TestRule {
 
@@ -31,8 +30,7 @@ public class LongRunning implements TestRule {
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                Assume.assumeTrue("Long running tests not enabled",
-                        Boolean.getBoolean("test.long"));
+                Assume.assumeTrue("Long running tests not enabled", Boolean.getBoolean("test.long"));
                 base.evaluate();
             }
         };

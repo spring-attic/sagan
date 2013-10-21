@@ -1,33 +1,28 @@
 package sagan.search.web;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.ui.ExtendedModelMap;
-
 import sagan.search.SearchFacet;
 import sagan.search.SearchResult;
 import sagan.search.SearchResults;
 import sagan.search.service.SearchService;
-import sagan.search.web.SearchController;
-import sagan.search.web.SearchForm;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.ui.ExtendedModelMap;
+
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyList;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.*;
 
 public class SearchControllerTests {
 
@@ -45,14 +40,11 @@ public class SearchControllerTests {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         this.controller = new SearchController(this.searchService);
-        SearchResult entry = new SearchResult("", "", "", "", "", "", "",
-                "original search term");
+        SearchResult entry = new SearchResult("", "", "", "", "", "", "", "original search term");
         this.entries.add(entry);
         this.resultsPage = new PageImpl<>(this.entries);
-        given(this.searchService.search(anyString(), (Pageable) anyObject(), anyList()))
-                .willReturn(
-                        new SearchResults(this.resultsPage, Collections
-                                .<SearchFacet> emptyList()));
+        given(this.searchService.search(anyString(), (Pageable) anyObject(), anyList())).willReturn(
+                new SearchResults(this.resultsPage, Collections.<SearchFacet> emptyList()));
     }
 
     @Test

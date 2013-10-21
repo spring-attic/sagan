@@ -1,8 +1,10 @@
 package integration.projects;
 
-import integration.IntegrationTestBase;
 import org.junit.Test;
+
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import integration.IntegrationTestBase;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

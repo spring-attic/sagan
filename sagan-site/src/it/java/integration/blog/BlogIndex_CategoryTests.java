@@ -1,32 +1,28 @@
 package integration.blog;
 
-import integration.IntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
 import sagan.blog.service.PostRepository;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import org.hamcrest.MatcherAssert;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import integration.IntegrationTestBase;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -74,14 +70,16 @@ public class BlogIndex_CategoryTests extends IntegrationTestBase {
                 .andExpect(content().string(containsString(PostCategory.ENGINEERING.toString())))
                 .andReturn();
 
-
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
-        assertThat(html.select(".secondary-nav .blog-category.active").text(), equalTo(PostCategory.ENGINEERING.getDisplayName()));
+        assertThat(html.select(".secondary-nav .blog-category.active").text(), equalTo(PostCategory.ENGINEERING
+                .getDisplayName()));
 
-        assertThat(html.select(".content--title.blog-category.active").text(), equalTo(PostCategory.ENGINEERING.getDisplayName()));
+        assertThat(html.select(".content--title.blog-category.active").text(), equalTo(PostCategory.ENGINEERING
+                .getDisplayName()));
 
-        assertThat(html.head().getElementsByAttributeValue("type", "application/atom+xml").get(0).attr("href"), equalTo("/blog/category/engineering.atom"));
+        assertThat(html.head().getElementsByAttributeValue("type", "application/atom+xml").get(0).attr("href"),
+                equalTo("/blog/category/engineering.atom"));
     }
 
     @Test
@@ -97,7 +95,7 @@ public class BlogIndex_CategoryTests extends IntegrationTestBase {
     public void givenManyPosts_blogIndexShowsPaginationControl() throws Exception {
         createManyPostsInNovember(21);
 
-        MvcResult response = this.mockMvc.perform(get(path +"?page=2")).andReturn();
+        MvcResult response = this.mockMvc.perform(get(path + "?page=2")).andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
 

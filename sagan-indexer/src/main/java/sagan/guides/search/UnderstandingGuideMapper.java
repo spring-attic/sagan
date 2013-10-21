@@ -1,12 +1,12 @@
 package sagan.guides.search;
 
-import org.jsoup.Jsoup;
-
 import sagan.guides.UnderstandingGuide;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
 
 import java.util.Date;
+
+import org.jsoup.Jsoup;
 
 class UnderstandingGuideMapper implements SearchEntryMapper<UnderstandingGuide> {
     @Override

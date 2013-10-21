@@ -1,13 +1,18 @@
 package sagan.team.web;
 
 import sagan.blog.Post;
-import sagan.team.service.CachedTeamService;
-import sagan.team.MemberProfile;
-import sagan.team.TeamLocation;
-import sagan.util.web.PageableFactory;
 import sagan.blog.service.CachedBlogService;
 import sagan.blog.view.PostView;
 import sagan.blog.view.PostViewFactory;
+import sagan.team.MemberProfile;
+import sagan.team.TeamLocation;
+import sagan.team.service.CachedTeamService;
+import sagan.util.web.PageableFactory;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -15,12 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @RequestMapping("/team")
@@ -31,15 +31,13 @@ public class TeamController {
     private final PostViewFactory postViewFactory;
 
     @Autowired
-    public TeamController(CachedTeamService teamService,
-                          CachedBlogService blogService,
-                          PostViewFactory postViewFactory) {
+    public TeamController(CachedTeamService teamService, CachedBlogService blogService, PostViewFactory postViewFactory) {
         this.teamService = teamService;
         this.blogService = blogService;
         this.postViewFactory = postViewFactory;
     }
 
-    @RequestMapping(value = "", method = {GET, HEAD})
+    @RequestMapping(value = "", method = { GET, HEAD })
     public String showTeam(Model model) throws IOException {
         List<MemberProfile> profiles = teamService.fetchActiveMembers();
         model.addAttribute("profiles", profiles);
@@ -53,9 +51,8 @@ public class TeamController {
         return "team/index";
     }
 
-
-    @RequestMapping(value = "/{username}", method = {GET, HEAD})
-    public String showProfile(@PathVariable String username, Model model){
+    @RequestMapping(value = "/{username}", method = { GET, HEAD })
+    public String showProfile(@PathVariable String username, Model model) {
         MemberProfile profile = teamService.fetchMemberProfileUsername(username);
         if (profile == MemberProfile.NOT_FOUND) {
             throw new MemberNotFoundException("Profile not found with Id=" + username);

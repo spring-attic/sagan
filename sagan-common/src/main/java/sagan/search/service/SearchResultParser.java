@@ -1,13 +1,5 @@
 package sagan.search.service;
 
-import com.google.common.collect.Lists;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import io.searchbox.client.JestResult;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 import sagan.search.SearchFacet;
 import sagan.search.SearchFacetTreeBuilder;
 import sagan.search.SearchResult;
@@ -17,6 +9,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.google.common.collect.Lists;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import io.searchbox.client.JestResult;
 
 @Service
 public class SearchResultParser {
@@ -83,7 +86,8 @@ public class SearchResultParser {
 
             String highlight = extractHighlight(hit);
 
-            SearchResult result = new SearchResult(id, title, subtitle, summary, url, type, highlight, originalSearchTerm);
+            SearchResult result =
+                    new SearchResult(id, title, subtitle, summary, url, type, highlight, originalSearchTerm);
             results.add(result);
         }
         return results;
@@ -100,7 +104,7 @@ public class SearchResultParser {
 
         if (highlight != null) {
             JsonArray rawContent = highlight.getAsJsonArray("rawContent");
-            summary =  rawContent.get(0).getAsString();
+            summary = rawContent.get(0).getAsString();
         }
 
         return summary;

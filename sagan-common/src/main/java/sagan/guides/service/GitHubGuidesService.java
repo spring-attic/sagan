@@ -1,20 +1,21 @@
 package sagan.guides.service;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.github.api.GitHubRepo;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
-
-import sagan.util.service.github.GitHubService;
 import sagan.guides.Guide;
 import sagan.guides.GuideNotFoundException;
 import sagan.guides.GuideWithoutContent;
 import sagan.guides.ImageNotFoundException;
+import sagan.util.service.github.GitHubService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.github.api.GitHubRepo;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 
 @Service
 public class GitHubGuidesService implements GuidesService {
@@ -72,8 +73,7 @@ public class GitHubGuidesService implements GuidesService {
             log.debug(String.format("Fetching getting started guide for '%s'", path));
             return this.gitHubService.getRawFileAsHtml(path);
         } catch (RestClientException e) {
-            String msg = String
-                    .format("No getting started guide found for '%s'", path);
+            String msg = String.format("No getting started guide found for '%s'", path);
             log.warn(msg, e);
             throw new GuideNotFoundException(msg, e);
         }
@@ -133,7 +133,8 @@ public class GitHubGuidesService implements GuidesService {
                 String description = githubRepo.getDescription();
                 String title = parseTitle(description);
                 String subTitle = parseSubTitle(description);
-                guides.add(new Guide(repoName, repoName.replaceAll("^" + prefix, ""), title, subTitle, getGuideContent(String.format(README_PATH, repoName)), getGuideSidebar(repoName)));
+                guides.add(new Guide(repoName, repoName.replaceAll("^" + prefix, ""), title, subTitle,
+                        getGuideContent(String.format(README_PATH, repoName)), getGuideSidebar(repoName)));
             }
         }
         return guides;

@@ -1,29 +1,25 @@
 package sagan.blog.service;
 
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import sagan.blog.PostCategory;
+import sagan.blog.PostForm;
+import sagan.team.service.TeamRepository;
+import sagan.util.DateTestUtils;
+import sagan.util.service.DateService;
+
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import sagan.blog.Post;
-import sagan.blog.PostBuilder;
-import sagan.blog.PostCategory;
-import sagan.blog.PostForm;
-import sagan.util.DateTestUtils;
-
-import sagan.util.service.DateService;
-import sagan.team.service.TeamRepository;
-
-import java.util.Date;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PostFormAdapter_UpdatePostTests {
@@ -61,10 +57,7 @@ public class PostFormAdapter_UpdatePostTests {
         given(summaryExtractor.extract(anyString(), anyInt())).willReturn(SUMMARY);
         given(renderer.render(this.content)).willReturn(RENDERED_HTML);
 
-        this.post = PostBuilder.post()
-                .id(123L)
-                .author("author_id", this.ORIGINAL_AUTHOR)
-                .build();
+        this.post = PostBuilder.post().id(123L).author("author_id", this.ORIGINAL_AUTHOR).build();
 
         this.postForm = new PostForm(this.post);
         this.postForm.setTitle(this.title);
@@ -98,8 +91,7 @@ public class PostFormAdapter_UpdatePostTests {
 
     @Test
     public void postHasRenderedSummary() {
-        assertThat(this.post.getRenderedSummary(),
-                equalTo(SUMMARY));
+        assertThat(this.post.getRenderedSummary(), equalTo(SUMMARY));
     }
 
     @Test

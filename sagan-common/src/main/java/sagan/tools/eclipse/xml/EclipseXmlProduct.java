@@ -1,9 +1,9 @@
 package sagan.tools.eclipse.xml;
 
+import java.util.List;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
-
-import java.util.List;
 
 public class EclipseXmlProduct {
     @Attribute

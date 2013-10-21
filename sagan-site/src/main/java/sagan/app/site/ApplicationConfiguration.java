@@ -15,14 +15,28 @@
  */
 package sagan.app.site;
 
-import com.google.common.cache.CacheBuilder;
+import sagan.blog.web.feed.BlogPostAtomViewer;
 import sagan.projects.service.ProjectMetadataService;
 import sagan.projects.service.ProjectMetadataYamlParser;
 import sagan.util.service.DateService;
 import sagan.util.web.SiteUrl;
-import sagan.blog.web.feed.BlogPostAtomViewer;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.TimeUnit;
+
+import javax.sql.DataSource;
+
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.health.HealthIndicator;
@@ -38,18 +52,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
-import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
-import javax.sql.DataSource;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
+import com.google.common.cache.CacheBuilder;
 
 @EnableAutoConfiguration
 @Configuration
@@ -67,7 +71,8 @@ public class ApplicationConfiguration {
     @Bean
     public HealthIndicator<Map<String, Object>> healthIndicator(DataSource dataSource) {
         if (dataSource instanceof org.apache.tomcat.jdbc.pool.DataSource) {
-            final org.apache.tomcat.jdbc.pool.DataSource tcDataSource = (org.apache.tomcat.jdbc.pool.DataSource) dataSource;
+            final org.apache.tomcat.jdbc.pool.DataSource tcDataSource =
+                    (org.apache.tomcat.jdbc.pool.DataSource) dataSource;
             return new HealthIndicator<Map<String, Object>>() {
                 @Override
                 public Map<String, Object> health() {
@@ -118,8 +123,7 @@ public class ApplicationConfiguration {
 
     @Bean
     public ProjectMetadataService projectMetadataService() throws IOException {
-        InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass())
-                .getInputStream();
+        InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
         return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
     }
 
@@ -154,13 +158,13 @@ public class ApplicationConfiguration {
     }
 
     private ConcurrentMapCache createConcurrentMapCache(Long timeToLive, String name, long cacheSize) {
-        CacheBuilder<Object, Object> cacheBuilder = CacheBuilder.newBuilder()
-                .expireAfterWrite(timeToLive, TimeUnit.SECONDS);
+        CacheBuilder<Object, Object> cacheBuilder =
+                CacheBuilder.newBuilder().expireAfterWrite(timeToLive, TimeUnit.SECONDS);
 
         if (cacheSize >= 0) {
             cacheBuilder.maximumSize(cacheSize);
         }
-        ConcurrentMap<Object,Object> map = cacheBuilder.build().asMap();
+        ConcurrentMap<Object, Object> map = cacheBuilder.build().asMap();
         return new ConcurrentMapCache(name, map, false);
     }
 

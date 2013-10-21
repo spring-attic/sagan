@@ -1,16 +1,16 @@
 package sagan.projects.service;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
-import sagan.projects.service.ProjectMetadataService;
-import sagan.projects.service.ProjectMetadataYamlParser;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import org.springframework.core.io.ClassPathResource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -39,7 +39,7 @@ public class ProjectMetadataYamlParserTests {
 
     @Test
     public void projectWithCustomSiteAndRepo() throws IOException {
-        Project project =  service.getProjectsForCategory("active").get(0);
+        Project project = service.getProjectsForCategory("active").get(0);
         assertThat(project.getId(), equalTo("spring-framework"));
         assertThat(project.getName(), equalTo("Spring Framework"));
         assertThat(project.getRepoUrl(), equalTo("http://www.example.com/repo/spring-framework"));
@@ -49,7 +49,7 @@ public class ProjectMetadataYamlParserTests {
 
     @Test
     public void projectWithDefaultSiteAndRepo() throws IOException {
-        Project project =  service.getProjectsForCategory("active").get(2);
+        Project project = service.getProjectsForCategory("active").get(2);
         assertThat(project.getId(), equalTo("spring-framework-defaultsite"));
         assertThat(project.getName(), equalTo("Spring Framework"));
         assertThat(project.getRepoUrl(), equalTo("http://github.com/springframework/spring-framework-defaultsite"));
@@ -59,7 +59,7 @@ public class ProjectMetadataYamlParserTests {
 
     @Test
     public void projectWithNoSite() throws IOException {
-        Project project =  service.getProjectsForCategory("active").get(1);
+        Project project = service.getProjectsForCategory("active").get(1);
         assertThat(project.getId(), equalTo("spring-framework-nosite"));
         assertThat(project.getName(), equalTo("Spring Framework"));
         assertThat(project.getRepoUrl(), equalTo("http://github.com/springframework/spring-framework-nosite"));
@@ -94,17 +94,23 @@ public class ProjectMetadataYamlParserTests {
     @Test
     public void getSupportedReferenceDocumentVersions() {
         List<ProjectRelease> docVersions = service.getProjectsForCategory("active").get(0).getProjectReleases();
-        assertThat(docVersions.get(0).getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/4.0.0.M1/spring-framework-reference/html/"));
-        assertThat(docVersions.get(1).getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/3.2.3.RELEASE/spring-framework-reference/html/"));
-        assertThat(docVersions.get(2).getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/3.1.4.SNAPSHOT/spring-framework-reference/html/"));
+        assertThat(docVersions.get(0).getRefDocUrl(),
+                equalTo("http://docs.spring.io/spring/docs/4.0.0.M1/spring-framework-reference/html/"));
+        assertThat(docVersions.get(1).getRefDocUrl(),
+                equalTo("http://docs.spring.io/spring/docs/3.2.3.RELEASE/spring-framework-reference/html/"));
+        assertThat(docVersions.get(2).getRefDocUrl(),
+                equalTo("http://docs.spring.io/spring/docs/3.1.4.SNAPSHOT/spring-framework-reference/html/"));
     }
 
     @Test
     public void getSupportedApiDocsUrls() {
         List<ProjectRelease> docVersions = service.getProjectsForCategory("active").get(0).getProjectReleases();
-        assertThat(docVersions.get(0).getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/4.0.0.M1/javadoc-api/"));
-        assertThat(docVersions.get(1).getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/3.2.3.RELEASE/javadoc-api/"));
-        assertThat(docVersions.get(2).getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/3.1.4.SNAPSHOT/javadoc-api/"));
+        assertThat(docVersions.get(0).getApiDocUrl(),
+                equalTo("http://docs.spring.io/spring/docs/4.0.0.M1/javadoc-api/"));
+        assertThat(docVersions.get(1).getApiDocUrl(),
+                equalTo("http://docs.spring.io/spring/docs/3.2.3.RELEASE/javadoc-api/"));
+        assertThat(docVersions.get(2).getApiDocUrl(),
+                equalTo("http://docs.spring.io/spring/docs/3.1.4.SNAPSHOT/javadoc-api/"));
     }
 
     @Test
@@ -127,7 +133,8 @@ public class ProjectMetadataYamlParserTests {
         version = project.getProjectReleases().get(1);
         assertThat(version.getVersion(), equalTo("2.1.2.RELEASE"));
         assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.1.2.RELEASE/javadoc-api/"));
-        assertThat(version.getRefDocUrl(), equalTo("http://docs.spring.io/spring/docs/2.1.2.RELEASE/spring-framework-reference/html/"));
+        assertThat(version.getRefDocUrl(),
+                equalTo("http://docs.spring.io/spring/docs/2.1.2.RELEASE/spring-framework-reference/html/"));
     }
 
     @Test
@@ -172,8 +179,10 @@ public class ProjectMetadataYamlParserTests {
         Project project = service.getProjectsForCategory("active").get(8);
         ProjectRelease version = project.getProjectReleases().get(0);
         assertThat(version.getVersion(), equalTo("2.4.0.RELEASE"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/project-docs-urls-omitted/docs/2.4.0.RELEASE/api/"));
-        assertThat(version.getRefDocUrl(), equalTo("http://docs.spring.io/project-docs-urls-omitted/docs/2.4.0.RELEASE/reference/html"));
+        assertThat(version.getApiDocUrl(),
+                equalTo("http://docs.spring.io/project-docs-urls-omitted/docs/2.4.0.RELEASE/api/"));
+        assertThat(version.getRefDocUrl(),
+                equalTo("http://docs.spring.io/project-docs-urls-omitted/docs/2.4.0.RELEASE/reference/html"));
     }
 
     @Test
@@ -208,64 +217,70 @@ public class ProjectMetadataYamlParserTests {
     public void urlsInProjectsCanHaveVariables() throws Exception {
         Project project = service.getProjectsForCategory("active").get(11);
         assertThat(project.getSiteUrl(), equalTo("http://projects.spring.io/foo/project-with-variables-in-urls/"));
-        assertThat(project.getRepoUrl(), equalTo("http://github.com/springframework/foo/project-with-variables-in-urls/"));
+        assertThat(project.getRepoUrl(),
+                equalTo("http://github.com/springframework/foo/project-with-variables-in-urls/"));
 
         ProjectRelease version = project.getProjectReleases().get(0);
-        assertThat(version.getRefDocUrl(), equalTo("http://projects.spring.io/docs/overridden/project-with-variables-in-urls/3.1.4.RELEASE"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/overridden/project-with-variables-in-urls/3.1.4.RELEASE/javadoc-api/"));
+        assertThat(version.getRefDocUrl(),
+                equalTo("http://projects.spring.io/docs/overridden/project-with-variables-in-urls/3.1.4.RELEASE"));
+        assertThat(
+                version.getApiDocUrl(),
+                equalTo("http://docs.spring.io/spring/docs/overridden/project-with-variables-in-urls/3.1.4.RELEASE/javadoc-api/"));
 
         version = project.getProjectReleases().get(1);
-        assertThat(version.getRefDocUrl(), equalTo("http://projects.spring.io/docs/project-with-variables-in-urls/3.1.1.RELEASE/html/"));
-        assertThat(version.getApiDocUrl(), equalTo("http://docs.spring.io/spring/docs/project-with-variables-in-urls/3.1.1.RELEASE/javadoc-api/"));
+        assertThat(version.getRefDocUrl(),
+                equalTo("http://projects.spring.io/docs/project-with-variables-in-urls/3.1.1.RELEASE/html/"));
+        assertThat(version.getApiDocUrl(),
+                equalTo("http://docs.spring.io/spring/docs/project-with-variables-in-urls/3.1.1.RELEASE/javadoc-api/"));
     }
 
     @Test
     public void projectWithDefaultGroupId() throws IOException {
-        Project project =  service.getProjectsForCategory("active").get(0);
+        Project project = service.getProjectsForCategory("active").get(0);
         assertThat(project.getProjectReleases().get(0).getGroupId(), equalTo("org.springframework"));
     }
 
     @Test
     public void projectWithGroupIdOverriddenInProject() throws IOException {
-        Project project =  service.getProjectsForCategory("active").get(12);
+        Project project = service.getProjectsForCategory("active").get(12);
         assertThat(project.getProjectReleases().get(0).getGroupId(), equalTo("org.something"));
     }
 
     @Test
     public void projectWithGroupIdOverriddenInSupportedVersion() throws IOException {
-        Project project =  service.getProjectsForCategory("active").get(13);
+        Project project = service.getProjectsForCategory("active").get(13);
         assertThat(project.getProjectReleases().get(0).getGroupId(), equalTo("org.something.else"));
         assertThat(project.getProjectReleases().get(1).getGroupId(), equalTo("org.something"));
     }
 
     @Test
     public void projectWithDefaultArtifactId() throws IOException {
-        Project project =  service.getProjectsForCategory("active").get(0);
+        Project project = service.getProjectsForCategory("active").get(0);
         assertThat(project.getProjectReleases().get(0).getArtifactId(), equalTo("spring-framework"));
     }
 
     @Test
     public void projectWithDefaultArtifactIdOverriddenInProject() throws IOException {
-        Project project =  service.getProjectsForCategory("active").get(14);
+        Project project = service.getProjectsForCategory("active").get(14);
         assertThat(project.getProjectReleases().get(0).getArtifactId(), equalTo("overridden-artifact-id"));
     }
 
     @Test
     public void nonAggregatorProject() throws IOException {
-        Project project =  service.getProjectsForCategory("active").get(14);
+        Project project = service.getProjectsForCategory("active").get(14);
         assertThat(project.isAggregator(), equalTo(false));
     }
 
     @Test
     public void aggregatorProject() throws IOException {
-        Project project =  service.getProjectsForCategory("active").get(15);
+        Project project = service.getProjectsForCategory("active").get(15);
         assertThat(project.isAggregator(), equalTo(true));
         assertThat(project.getId(), equalTo("aggregator-project"));
     }
 
     @Test
     public void projectWithNoGaReleaseHasCorrectOrdering() throws Exception {
-        Project project =  service.getProjectsForCategory("active").get(16);
+        Project project = service.getProjectsForCategory("active").get(16);
         assertThat(project.getProjectReleases().get(0).isCurrent(), equalTo(false));
         assertThat(project.getProjectReleases().get(1).isCurrent(), equalTo(false));
         assertThat(project.getProjectReleases().get(2).isCurrent(), equalTo(false));

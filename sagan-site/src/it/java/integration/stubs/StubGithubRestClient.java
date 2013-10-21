@@ -1,14 +1,15 @@
 package integration.stubs;
 
 import sagan.util.service.github.GitHubRestClient;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriTemplate;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @Primary

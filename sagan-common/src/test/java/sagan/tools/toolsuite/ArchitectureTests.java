@@ -1,10 +1,8 @@
 package sagan.tools.toolsuite;
 
-import org.junit.Test;
-import sagan.tools.toolsuite.Architecture;
-import sagan.tools.toolsuite.DownloadLink;
-
 import java.util.Arrays;
+
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

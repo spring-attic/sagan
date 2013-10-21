@@ -8,10 +8,15 @@ import sagan.blog.view.PostView;
 import sagan.blog.view.PostViewFactory;
 import sagan.util.web.PageableFactory;
 import sagan.util.web.PaginationInfo;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -19,14 +24,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.ui.ExtendedModelMap;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static sagan.blog.PostCategory.ENGINEERING;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.eq;
+import static sagan.blog.PostCategory.ENGINEERING;
 
 public class BlogController_PublishedPostsForCategoryTests {
 
@@ -59,26 +61,22 @@ public class BlogController_PublishedPostsForCategoryTests {
 
         this.page = new PageImpl<>(new ArrayList<PostView>(), testPageable, 1);
 
-        given(this.blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(testPageable)))
-                .willReturn(postsPage);
+        given(this.blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(testPageable))).willReturn(postsPage);
         given(this.postViewFactory.createPostViewPage(postsPage)).willReturn(this.page);
 
         this.request.setServletPath("/blog");
 
-        this.viewName = this.controller.listPublishedPostsForCategory(TEST_CATEGORY,
-                this.model, TEST_PAGE);
+        this.viewName = this.controller.listPublishedPostsForCategory(TEST_CATEGORY, this.model, TEST_PAGE);
     }
 
     @Test
     public void providesAllCategoriesInModel() {
-        assertThat((PostCategory[]) this.model.get("categories"),
-                is(PostCategory.values()));
+        assertThat((PostCategory[]) this.model.get("categories"), is(PostCategory.values()));
     }
 
     @Test
     public void providesPaginationInfoInModel() {
-        assertThat((PaginationInfo) this.model.get("paginationInfo"),
-                is(new PaginationInfo(this.page)));
+        assertThat((PaginationInfo) this.model.get("paginationInfo"), is(new PaginationInfo(this.page)));
     }
 
     @Test

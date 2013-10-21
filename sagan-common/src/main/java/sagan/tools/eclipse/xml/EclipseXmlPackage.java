@@ -1,10 +1,10 @@
 package sagan.tools.eclipse.xml;
 
+import java.util.List;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
-
-import java.util.List;
 
 public class EclipseXmlPackage {
 
@@ -14,7 +14,7 @@ public class EclipseXmlPackage {
     @Attribute
     private String icon;
 
-    @Element( data = true)
+    @Element(data = true)
     private String description;
 
     @ElementList(entry = "download", type = EclipseXmlDownload.class, inline = true)

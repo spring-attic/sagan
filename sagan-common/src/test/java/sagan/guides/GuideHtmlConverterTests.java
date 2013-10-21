@@ -10,11 +10,12 @@ import java.nio.charset.Charset;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class GuideHtmlConverterTests {
     private GuideHtmlConverter converter;

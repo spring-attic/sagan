@@ -2,9 +2,9 @@ package sagan.team.service.index;
 
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
+import sagan.team.MemberProfile;
 
 import org.springframework.stereotype.Component;
-import sagan.team.MemberProfile;
 
 @Component
 public class MemberProfileSearchEntryMapper implements SearchEntryMapper<MemberProfile> {

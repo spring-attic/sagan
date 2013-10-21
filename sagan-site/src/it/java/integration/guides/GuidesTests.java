@@ -1,20 +1,21 @@
 package integration.guides;
 
-import integration.IntegrationTestBase;
+import sagan.util.FixtureLoader;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Assert;
 import org.junit.Test;
+
 import org.springframework.test.web.servlet.MvcResult;
-import sagan.util.FixtureLoader;
+
+import integration.IntegrationTestBase;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class GuidesTests extends IntegrationTestBase {
 
@@ -33,7 +34,8 @@ public class GuidesTests extends IntegrationTestBase {
         Assert.assertThat(html.text(), containsString("Building a RESTful Web Service"));
         Assert.assertThat(html.text(), containsString("Learn how to create a RESTful web service with Spring"));
         Assert.assertThat(html.text(), containsString("Designing and Implementing RESTful Web Services with Spring"));
-        Assert.assertThat(html.text(), containsString("Learn how to design and implement RESTful web services with Spring"));
+        Assert.assertThat(html.text(),
+                containsString("Learn how to design and implement RESTful web services with Spring"));
     }
 
 }

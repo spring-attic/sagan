@@ -1,9 +1,9 @@
 package sagan.blog.service;
 
-import sagan.blog.service.BlogService;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.team.MemberProfile;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -15,8 +15,9 @@ public class CachedBlogService {
 
     private BlogService blogService;
 
-    //Required for @Cacheable proxy
-    protected CachedBlogService() {}
+    // Required for @Cacheable proxy
+    protected CachedBlogService() {
+    }
 
     @Autowired
     public CachedBlogService(BlogService blogService) {

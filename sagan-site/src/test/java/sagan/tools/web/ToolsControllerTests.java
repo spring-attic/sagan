@@ -1,22 +1,15 @@
 package sagan.tools.web;
 
-import sagan.tools.service.ToolsService;
 import sagan.tools.eclipse.EclipseDownloads;
 import sagan.tools.eclipse.EclipsePlatform;
 import sagan.tools.eclipse.EclipseRelease;
+import sagan.tools.service.ToolsService;
 import sagan.tools.toolsuite.Architecture;
 import sagan.tools.toolsuite.DownloadLink;
 import sagan.tools.toolsuite.EclipseVersion;
 import sagan.tools.toolsuite.ToolSuiteDownloads;
 import sagan.tools.toolsuite.ToolSuitePlatform;
 import sagan.tools.toolsuite.UpdateSiteArchive;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.ui.ExtendedModelMap;
-import sagan.tools.web.ToolsController;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,9 +17,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import org.springframework.ui.ExtendedModelMap;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -57,8 +57,7 @@ public class ToolsControllerTests {
         platforms.put("windows", windows);
 
         List<UpdateSiteArchive> archives = Collections.emptyList();
-        ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("STS", "3.1.2.RELEASE",
-                platforms, archives);
+        ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("STS", "3.1.2.RELEASE", platforms, archives);
         when(this.service.getStsGaDownloads()).thenReturn(toolSuite);
         this.controller.stsIndex(this.model);
 
@@ -83,8 +82,7 @@ public class ToolsControllerTests {
         platforms.put("windows", windows);
 
         List<UpdateSiteArchive> archives = Collections.emptyList();
-        ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("GGTS", "3.1.2.RELEASE",
-                platforms, archives);
+        ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("GGTS", "3.1.2.RELEASE", platforms, archives);
         when(this.service.getGgtsGaDownloads()).thenReturn(toolSuite);
         this.controller.ggtsIndex(this.model);
 
@@ -100,14 +98,11 @@ public class ToolsControllerTests {
     public void allEclipseDownloadsAddsDownloadsToModel() throws Exception {
         Map<String, EclipsePlatform> platforms = new HashMap<>();
 
-        EclipsePlatform windows = new EclipsePlatform("windows",
-                Collections.<EclipseRelease> emptyList());
+        EclipsePlatform windows = new EclipsePlatform("windows", Collections.<EclipseRelease> emptyList());
         platforms.put("windows", windows);
-        EclipsePlatform mac = new EclipsePlatform("mac",
-                Collections.<EclipseRelease> emptyList());
+        EclipsePlatform mac = new EclipsePlatform("mac", Collections.<EclipseRelease> emptyList());
         platforms.put("mac", mac);
-        EclipsePlatform linux = new EclipsePlatform("linux",
-                Collections.<EclipseRelease> emptyList());
+        EclipsePlatform linux = new EclipsePlatform("linux", Collections.<EclipseRelease> emptyList());
         platforms.put("linux", linux);
 
         EclipseDownloads eclipseDownloads = new EclipseDownloads(platforms);
@@ -115,7 +110,6 @@ public class ToolsControllerTests {
         when(this.service.getEclipseDownloads()).thenReturn(eclipseDownloads);
         this.controller.eclipseIndex(this.model);
 
-        assertThat((List<EclipsePlatform>) this.model.get("platforms"),
-                contains(windows, mac, linux));
+        assertThat((List<EclipsePlatform>) this.model.get("platforms"), contains(windows, mac, linux));
     }
 }

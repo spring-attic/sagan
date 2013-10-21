@@ -1,22 +1,21 @@
 package sagan.util.service.github;
 
-import sagan.util.service.github.GitHubRestClient;
-import sagan.util.service.github.GitHubService;
-//import org.apache.xerces.impl.dv.util.Base64;
+import sagan.util.FixtureLoader;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.social.github.api.GitHubRepo;
 
-import sagan.util.FixtureLoader;
+import org.springframework.social.github.api.GitHubRepo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.*;
+
+//import org.apache.xerces.impl.dv.util.Base64;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GitHubServiceTests {
@@ -58,17 +57,13 @@ public class GitHubServiceTests {
 
     // TODO: needs xerces
     /*
-    @Test
-    public void getImage_fetchesImageFromGitHub() {
-        byte[] expected = {1, 2, 3};
-        String encoded = Base64.encode(expected);
-        String response = String.format("{\"content\":\"%s\"}", encoded);
-
-        given(gitHubRestClient.sendRequestForJson(anyString(), eq("my-repo"), eq("image.png"))).willReturn(response);
-
-        assertThat(service.getGuideImage("my-repo", "image.png"), equalTo(expected));
-    }
-    */
+     * @Test public void getImage_fetchesImageFromGitHub() { byte[] expected = {1, 2, 3}; String encoded =
+     * Base64.encode(expected); String response = String.format("{\"content\":\"%s\"}", encoded);
+     * 
+     * given(gitHubRestClient.sendRequestForJson(anyString(), eq("my-repo"), eq("image.png"))).willReturn(response);
+     * 
+     * assertThat(service.getGuideImage("my-repo", "image.png"), equalTo(expected)); }
+     */
 
     @Test
     public void getGitHubRepos_fetchesGuideReposGitHub() {

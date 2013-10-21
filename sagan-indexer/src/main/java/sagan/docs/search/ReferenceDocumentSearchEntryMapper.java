@@ -1,13 +1,13 @@
 package sagan.docs.search;
 
-import org.jsoup.nodes.Document;
-
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
 
 import java.util.Date;
+
+import org.jsoup.nodes.Document;
 
 class ReferenceDocumentSearchEntryMapper implements SearchEntryMapper<Document> {
 
@@ -34,8 +34,8 @@ class ReferenceDocumentSearchEntryMapper implements SearchEntryMapper<Document> 
         entry.setProjectId(project.getId());
         entry.setVersion(version.getVersion());
 
-        entry.addFacetPaths("Projects", "Projects/Reference", "Projects/" + project.getName(),
-                "Projects/" + project.getName() + "/" + version.getVersion());
+        entry.addFacetPaths("Projects", "Projects/Reference", "Projects/" + project.getName(), "Projects/"
+                + project.getName() + "/" + version.getVersion());
 
         return entry;
     }

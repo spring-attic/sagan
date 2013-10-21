@@ -1,19 +1,17 @@
 package integration.blog;
 
-import integration.IntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
 import sagan.blog.service.PostRepository;
 import sagan.util.web.SiteUrl;
 
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,21 +20,23 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
+import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+
+import integration.IntegrationTestBase;
+
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class BlogAtomFeedsTests extends IntegrationTestBase {
 
@@ -48,7 +48,8 @@ public class BlogAtomFeedsTests extends IntegrationTestBase {
 
     private XPath xpath = XPathFactory.newInstance().newXPath();
 
-    private Document getAtomFeedDocument(MvcResult mvcResult) throws ParserConfigurationException, SAXException, IOException {
+    private Document getAtomFeedDocument(MvcResult mvcResult) throws ParserConfigurationException, SAXException,
+            IOException {
         String atomFeed = mvcResult.getResponse().getContentAsString();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -131,7 +132,7 @@ public class BlogAtomFeedsTests extends IntegrationTestBase {
                     .renderedContent("Html content")
                     .renderedSummary("Html summary")
                     .createdAt(calendar.getTime())
-                            .build();
+                    .build();
             posts.add(post);
         }
         postRepository.save(posts);

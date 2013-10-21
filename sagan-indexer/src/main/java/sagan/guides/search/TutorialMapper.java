@@ -1,12 +1,12 @@
 package sagan.guides.search;
 
-import org.jsoup.Jsoup;
-
 import sagan.guides.Guide;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
 
 import java.util.Date;
+
+import org.jsoup.Jsoup;
 
 class TutorialMapper implements SearchEntryMapper<Guide> {
 

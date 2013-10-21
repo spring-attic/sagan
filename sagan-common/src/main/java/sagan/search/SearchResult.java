@@ -10,7 +10,8 @@ public class SearchResult {
     private final String highlight;
     private final String originalSearchTerm;
 
-    public SearchResult(String id, String title, String subTitle, String summary, String path, String type, String highlight, String originalSearchTerm) {
+    public SearchResult(String id, String title, String subTitle, String summary, String path, String type,
+                        String highlight, String originalSearchTerm) {
         this.title = title;
         this.subTitle = subTitle;
         this.summary = summary;

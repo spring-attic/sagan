@@ -1,12 +1,8 @@
 package sagan.tools.eclipse.parser;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import sagan.tools.eclipse.EclipseDownloads;
 import sagan.tools.eclipse.EclipsePackage;
 import sagan.tools.eclipse.EclipseRelease;
-import sagan.tools.eclipse.parser.EclipseDownloadsXmlConverter;
 import sagan.tools.eclipse.xml.EclipseXml;
 import sagan.tools.eclipse.xml.EclipseXmlDownload;
 import sagan.tools.eclipse.xml.EclipseXmlPackage;
@@ -16,6 +12,9 @@ import sagan.tools.toolsuite.DownloadLink;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -71,7 +70,8 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForSameReleaseWithDifferen
 
     @Test
     public void addsTwoPackages() throws Exception {
-        List<EclipsePackage> windowsPackages = eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
+        List<EclipsePackage> windowsPackages =
+                eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
         assertThat(windowsPackages.size(), equalTo(2));
         assertThat(windowsPackages.get(0).getName(), equalTo("Eclipse Standard 4.3"));
         assertThat(windowsPackages.get(1).getName(), equalTo("Eclipse IDE for Java EE Developers"));
@@ -79,17 +79,22 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForSameReleaseWithDifferen
 
     @Test
     public void addsDownloadLinkToEachPackage() throws Exception {
-        List<EclipsePackage> windowsPackages = eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
+        List<EclipsePackage> windowsPackages =
+                eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
 
         List<DownloadLink> standardDownloadLinks = windowsPackages.get(0).getArchitectures().get(0).getDownloadLinks();
         List<DownloadLink> javaEEDownloadLinks = windowsPackages.get(1).getArchitectures().get(0).getDownloadLinks();
 
         assertThat(standardDownloadLinks.size(), equalTo(1));
         assertThat(standardDownloadLinks.get(0).getOs(), equalTo("windows"));
-        assertThat(standardDownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
+        assertThat(
+                standardDownloadLinks.get(0).getUrl(),
+                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
 
         assertThat(javaEEDownloadLinks.size(), equalTo(1));
         assertThat(javaEEDownloadLinks.get(0).getOs(), equalTo("windows"));
-        assertThat(javaEEDownloadLinks.get(0).getUrl(), equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-jee-kepler-R-win32.zip"));
+        assertThat(
+                javaEEDownloadLinks.get(0).getUrl(),
+                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-jee-kepler-R-win32.zip"));
     }
 }

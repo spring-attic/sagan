@@ -15,15 +15,14 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 
 /**
  * Thin filter for Spring Security chain that simply transfers an existing
- * {@link Authentication} from the {@link SecurityContext} if there is one. This
- * is useful when authentication actually happened in a controller, rather than
- * in the filter chain itself.
- *
+ * {@link Authentication} from the {@link SecurityContext} if there is one. This is useful
+ * when authentication actually happened in a controller, rather than in the filter chain
+ * itself.
+ * 
  * @author Dave Syer
- *
+ * 
  */
-public class SecurityContextAuthenticationFilter extends
-        AbstractAuthenticationProcessingFilter {
+public class SecurityContextAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     public SecurityContextAuthenticationFilter(String defaultFilterProcessesUrl) {
         super(defaultFilterProcessesUrl);
@@ -32,18 +31,15 @@ public class SecurityContextAuthenticationFilter extends
             // actually redundant here because the authentication has either
             // already happened (happy day) or not (user is not authenticated)
             @Override
-            public Authentication authenticate(Authentication authentication)
-                    throws AuthenticationException {
-                throw new IllegalStateException(
-                        "Unexpected call for AuthenticationManager");
+            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+                throw new IllegalStateException("Unexpected call for AuthenticationManager");
             }
         });
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request,
-            HttpServletResponse response) throws AuthenticationException,
-            IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException, IOException, ServletException {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 }

@@ -1,9 +1,9 @@
 package sagan.guides.search;
 
-import sagan.guides.service.GuidesService;
-import sagan.util.index.Indexer;
 import sagan.guides.Guide;
+import sagan.guides.service.GuidesService;
 import sagan.search.service.SearchService;
+import sagan.util.index.Indexer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

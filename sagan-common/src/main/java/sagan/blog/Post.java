@@ -1,14 +1,24 @@
 package sagan.blog;
 
-import org.hibernate.annotations.Type;
-import org.springframework.util.StringUtils;
-
 import sagan.team.MemberProfile;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Type;
+
+import org.springframework.util.StringUtils;
 
 @Entity
 @SuppressWarnings("serial")
@@ -31,15 +41,15 @@ public class Post implements Serializable {
     private PostCategory category;
 
     @Column(nullable = false)
-    @Type(type="text")
+    @Type(type = "text")
     private String rawContent;
 
     @Column(nullable = false)
-    @Type(type="text")
+    @Type(type = "text")
     private String renderedContent;
 
     @Column(nullable = false)
-    @Type(type="text")
+    @Type(type = "text")
     private String renderedSummary;
 
     @Column(nullable = false)
@@ -189,9 +199,6 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                '}';
+        return "Post{" + "id=" + id + ", title='" + title + '\'' + '}';
     }
 }

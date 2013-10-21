@@ -1,12 +1,16 @@
 package sagan.team.web;
 
-import sagan.team.service.CachedTeamService;
-import sagan.util.service.DateService;
+import sagan.blog.service.CachedBlogService;
+import sagan.blog.view.PostViewFactory;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
 import sagan.team.TeamLocation;
-import sagan.blog.service.CachedBlogService;
-import sagan.blog.view.PostViewFactory;
+import sagan.team.service.CachedTeamService;
+import sagan.util.service.DateService;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -15,12 +19,8 @@ import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import org.springframework.ui.ExtendedModelMap;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TeamControllerTests {
@@ -37,8 +37,8 @@ public class TeamControllerTests {
 
     @Before
     public void setUp() throws Exception {
-        this.teamController = new TeamController(this.teamService, this.blogService,
-                new PostViewFactory(new DateService()));
+        this.teamController =
+                new TeamController(this.teamService, this.blogService, new PostViewFactory(new DateService()));
         List<MemberProfile> members = new ArrayList<>();
 
         members.add(MemberProfileBuilder.profile()
@@ -61,8 +61,7 @@ public class TeamControllerTests {
     public void includeTeamLocationsInModel() throws Exception {
         this.teamController.showTeam(this.model);
         @SuppressWarnings("unchecked")
-        List<TeamLocation> teamLocations = (List<TeamLocation>) this.model
-                .get("teamLocations");
+        List<TeamLocation> teamLocations = (List<TeamLocation>) this.model.get("teamLocations");
 
         TeamLocation norman = teamLocations.get(0);
         MatcherAssert.assertThat(norman.getName(), Matchers.equalTo("Norman"));

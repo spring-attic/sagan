@@ -1,11 +1,11 @@
 package sagan.staticpage.search;
 
-import org.jsoup.nodes.Document;
-
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
 
 import java.util.Date;
+
+import org.jsoup.nodes.Document;
 
 public class LocalStaticPagesSearchEntryMapper implements SearchEntryMapper<Document> {
 

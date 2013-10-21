@@ -9,8 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 public class UnderstandingGuidesController {
@@ -22,7 +21,7 @@ public class UnderstandingGuidesController {
         this.understandingGuidesService = understandingGuidesService;
     }
 
-    @RequestMapping(value = "/understanding/{subject}", method = {GET, HEAD})
+    @RequestMapping(value = "/understanding/{subject}", method = { GET, HEAD })
     public String understandingASubject(@PathVariable String subject, Model model) {
         UnderstandingGuide guide = understandingGuidesService.getGuideForSubject(subject);
         model.addAttribute("guide", guide);

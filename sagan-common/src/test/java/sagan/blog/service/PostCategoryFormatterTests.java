@@ -1,11 +1,10 @@
 package sagan.blog.service;
 
-import org.junit.Test;
-
 import sagan.blog.PostCategory;
-import sagan.blog.service.PostCategoryFormatter;
 
 import java.text.ParseException;
+
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -25,8 +24,8 @@ public class PostCategoryFormatterTests {
 
     @Test
     public void itPrintsAStringThatCanBeParsed() throws ParseException {
-        assertThat(formatter.parse(
-                formatter.print(PostCategory.ENGINEERING, null), null), equalTo(PostCategory.ENGINEERING));
+        assertThat(formatter.parse(formatter.print(PostCategory.ENGINEERING, null), null),
+                equalTo(PostCategory.ENGINEERING));
     }
 
 }

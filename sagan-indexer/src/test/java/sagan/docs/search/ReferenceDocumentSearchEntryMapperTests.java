@@ -1,22 +1,21 @@
 package sagan.docs.search;
 
-import sagan.docs.search.ReferenceDocumentSearchEntryMapper;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
 import sagan.projects.ProjectReleaseBuilder;
+import sagan.search.SearchEntry;
+
+import java.util.Collections;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
 
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.search.SearchEntry;
-
-import java.util.Collections;
-
-import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
 
 public class ReferenceDocumentSearchEntryMapperTests {
 
@@ -24,7 +23,7 @@ public class ReferenceDocumentSearchEntryMapperTests {
             "Spring Project",
             "http://www.example.com/repo/spring-framework",
             "http://www.example.com/spring-framework",
-            Collections.<ProjectRelease>emptyList(),
+            Collections.<ProjectRelease> emptyList(),
             false);
 
     private ProjectRelease version = new ProjectReleaseBuilder()
@@ -43,7 +42,8 @@ public class ReferenceDocumentSearchEntryMapperTests {
 
     @Test
     public void facetPaths() {
-        assertThat(entry.getFacetPaths(), contains("Projects", "Projects/Reference", "Projects/Spring Project", "Projects/Spring Project/3.2.1.RELEASE"));
+        assertThat(entry.getFacetPaths(), contains("Projects", "Projects/Reference", "Projects/Spring Project",
+                "Projects/Spring Project/3.2.1.RELEASE"));
     }
 
     @Test

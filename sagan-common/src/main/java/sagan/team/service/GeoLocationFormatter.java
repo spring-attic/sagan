@@ -1,14 +1,14 @@
 package sagan.team.service;
 
-import org.springframework.format.Formatter;
-import org.springframework.stereotype.Component;
-
 import sagan.team.GeoLocation;
 
 import java.text.ParseException;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.springframework.format.Formatter;
+import org.springframework.stereotype.Component;
 
 @Component
 public class GeoLocationFormatter implements Formatter<GeoLocation> {

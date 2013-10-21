@@ -1,11 +1,12 @@
 package sagan.blog.search;
 
-import sagan.blog.service.index.PostSearchEntryMapper;
-import sagan.util.index.Indexer;
-import sagan.blog.service.BlogService;
 import sagan.blog.Post;
+import sagan.blog.service.BlogService;
+import sagan.blog.service.index.PostSearchEntryMapper;
 import sagan.search.SearchEntry;
 import sagan.search.service.SearchService;
+import sagan.util.index.Indexer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

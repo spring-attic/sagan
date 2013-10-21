@@ -1,11 +1,10 @@
 package integration.search;
 
-import integration.IntegrationTestBase;
-import io.searchbox.client.JestClient;
 import sagan.search.SearchEntry;
+import sagan.search.SearchEntryBuilder;
+import sagan.search.SearchIndexSetup;
 import sagan.search.SearchResult;
 import sagan.search.service.SearchService;
-import sagan.search.SearchEntryBuilder;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -15,19 +14,18 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import sagan.search.SearchIndexSetup;
+
+import integration.IntegrationTestBase;
+import io.searchbox.client.JestClient;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 public class SearchServiceIntegrationTests extends IntegrationTestBase {
 
@@ -70,8 +68,8 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
     }
 
     private void assertThatSearchReturnsEntry(String query) {
-        Page<SearchResult> searchEntries = this.searchService.search(query,
-                this.pageable, Collections.<String> emptyList()).getPage();
+        Page<SearchResult> searchEntries =
+                this.searchService.search(query, this.pageable, Collections.<String> emptyList()).getPage();
         List<SearchResult> entries = searchEntries.getContent();
         assertThat(entries, not(empty()));
         assertThat(entries.get(0).getTitle(), is(equalTo(this.entry.getTitle())));
@@ -105,12 +103,12 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
     public void searchOnlyIncludesEntriesMatchingSearchTerm() throws ParseException {
         indexSingleEntry();
 
-        SearchEntry secondEntry = SearchEntryBuilder.entry().path("/another/path")
-                .title("Test").rawContent("Test body").build();
+        SearchEntry secondEntry =
+                SearchEntryBuilder.entry().path("/another/path").title("Test").rawContent("Test body").build();
 
         this.searchService.saveToIndex(secondEntry);
-        Page<SearchResult> searchEntries = this.searchService.search("content",
-                this.pageable, Collections.<String> emptyList()).getPage();
+        Page<SearchResult> searchEntries =
+                this.searchService.search("content", this.pageable, Collections.<String> emptyList()).getPage();
         List<SearchResult> entries = searchEntries.getContent();
         assertThat(entries.size(), equalTo(1));
     }
@@ -127,13 +125,13 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
         this.searchService.saveToIndex(entry2);
 
         Pageable page1 = new PageRequest(0, 1);
-        Page<SearchResult> searchEntries1 = this.searchService.search("content", page1,
-                Collections.<String> emptyList()).getPage();
+        Page<SearchResult> searchEntries1 =
+                this.searchService.search("content", page1, Collections.<String> emptyList()).getPage();
         assertThat(searchEntries1.getContent().get(0).getId(), equalTo(entry1.getId()));
 
         Pageable page2 = new PageRequest(1, 1);
-        Page<SearchResult> searchEntries2 = this.searchService.search("content", page2,
-                Collections.<String> emptyList()).getPage();
+        Page<SearchResult> searchEntries2 =
+                this.searchService.search("content", page2, Collections.<String> emptyList()).getPage();
         assertThat(searchEntries2.getContent().get(0).getId(), equalTo(entry2.getId()));
     }
 
@@ -149,8 +147,8 @@ public class SearchServiceIntegrationTests extends IntegrationTestBase {
 
         int page = 1;
         Pageable pageable = new PageRequest(page, 10);
-        Page<SearchResult> searchEntries = this.searchService.search("", pageable,
-                Collections.<String> emptyList()).getPage();
+        Page<SearchResult> searchEntries =
+                this.searchService.search("", pageable, Collections.<String> emptyList()).getPage();
         assertThat(searchEntries.getContent().size(), equalTo(10));
         assertThat(searchEntries.getTotalPages(), equalTo(3));
         assertThat(searchEntries.getNumber(), equalTo(page));

@@ -1,34 +1,36 @@
 package integration.indexer;
 
-import integration.IndexerIntegrationTestBase;
-import sagan.guides.search.GettingStartedGuideIndexer;
 import sagan.app.indexer.IndexerService;
-import sagan.docs.search.ProjectDocumentationIndexer;
+import sagan.app.indexer.config.ApplicationConfiguration;
 import sagan.blog.search.PublishedBlogPostsIndexer;
-import sagan.staticpage.search.StaticPageIndexer;
-import sagan.tools.search.ToolsIndexer;
+import sagan.docs.search.ProjectDocumentationIndexer;
+import sagan.guides.search.GettingStartedGuideIndexer;
 import sagan.guides.search.TutorialIndexer;
 import sagan.guides.search.UnderstandingGuideIndexer;
-import sagan.app.indexer.config.ApplicationConfiguration;
+import sagan.staticpage.search.StaticPageIndexer;
+import sagan.tools.search.ToolsIndexer;
+import sagan.util.SetSystemProperty;
+
 import org.junit.ClassRule;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
-import sagan.util.SetSystemProperty;
 
+import integration.IndexerIntegrationTestBase;
 
-import static org.mockito.Mockito.*;
 import static integration.indexer.IndexerSchedulerTests.TestConfiguration;
+import static org.mockito.Mockito.*;
 
 @ContextConfiguration(classes = { TestConfiguration.class })
 public class IndexerSchedulerTests extends IndexerIntegrationTestBase {
 
     @Configuration
-    @Import({ApplicationConfiguration.class})
+    @Import({ ApplicationConfiguration.class })
     public static class TestConfiguration {
         @Bean
         @Primary

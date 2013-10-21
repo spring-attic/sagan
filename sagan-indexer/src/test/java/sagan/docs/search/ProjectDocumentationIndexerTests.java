@@ -1,35 +1,38 @@
 package sagan.docs.search;
 
-import sagan.search.service.CrawledWebDocumentProcessor;
 import sagan.projects.Project;
-import sagan.projects.service.ProjectMetadataService;
 import sagan.projects.ProjectRelease;
+import sagan.projects.service.ProjectMetadataService;
+import sagan.search.service.CrawledWebDocumentProcessor;
 import sagan.search.service.CrawlerService;
 import sagan.search.service.SearchService;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
-import static sagan.projects.ProjectRelease.ReleaseStatus.SNAPSHOT;
+import org.junit.Test;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
+import static sagan.projects.ProjectRelease.ReleaseStatus.*;
 
 public class ProjectDocumentationIndexerTests {
 
     private CrawlerService crawlerService = mock(CrawlerService.class);
     private ProjectMetadataService metadataService = mock(ProjectMetadataService.class);
     private final SearchService searchService = mock(SearchService.class);
-    private ProjectDocumentationIndexer service = new ProjectDocumentationIndexer(crawlerService, searchService, metadataService);
+    private ProjectDocumentationIndexer service = new ProjectDocumentationIndexer(crawlerService, searchService,
+            metadataService);
 
     private List<ProjectRelease> documentationList = Arrays.asList(
-            new ProjectRelease("3", GENERAL_AVAILABILITY, true, "http://reference.example.com/3", "http://api.example.com/3", "com.example", "example-framework"),
-            new ProjectRelease("2", SNAPSHOT, false, "http://reference.example.com/2", "http://api.example.com/2", "com.example", "example-framework"),
-            new ProjectRelease("1", SNAPSHOT, false, "http://reference.example.com/1", "http://api.example.com/1", "com.example", "example-framework")
-    );
+            new ProjectRelease("3", GENERAL_AVAILABILITY, true, "http://reference.example.com/3",
+                    "http://api.example.com/3", "com.example", "example-framework"),
+            new ProjectRelease("2", SNAPSHOT, false, "http://reference.example.com/2", "http://api.example.com/2",
+                    "com.example", "example-framework"),
+            new ProjectRelease("1", SNAPSHOT, false, "http://reference.example.com/1", "http://api.example.com/1",
+                    "com.example", "example-framework")
+            );
 
     private Project project = new Project("spring",
             "Spring",

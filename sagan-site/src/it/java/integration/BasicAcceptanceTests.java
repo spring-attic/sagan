@@ -1,6 +1,6 @@
 package integration;
 
-import integration.configuration.IntegrationTestsConfiguration;
+import sagan.util.FreePortFinder;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
@@ -14,6 +14,7 @@ import org.jsoup.nodes.Element;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -23,14 +24,10 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
-import sagan.util.FreePortFinder;
+import integration.configuration.IntegrationTestsConfiguration;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class BasicAcceptanceTests {
 
@@ -45,17 +42,15 @@ public class BasicAcceptanceTests {
         port = FreePortFinder.find();
         serverAddress = "http://localhost:" + port;
 
-        Future<ConfigurableApplicationContext> future = Executors
-                .newSingleThreadExecutor().submit(
-                        new Callable<ConfigurableApplicationContext>() {
-                            @Override
-                            public ConfigurableApplicationContext call() throws Exception {
-                                return (ConfigurableApplicationContext) SpringApplication
-                                        .run(IntegrationTestsConfiguration.class,
-                                                "--server.port=" + port,
-                                                "--spring.profiles.active=acceptance");
-                            }
-                        });
+        Future<ConfigurableApplicationContext> future =
+                Executors.newSingleThreadExecutor().submit(new Callable<ConfigurableApplicationContext>() {
+                    @Override
+                    public ConfigurableApplicationContext call() throws Exception {
+                        return (ConfigurableApplicationContext) SpringApplication.run(
+                                IntegrationTestsConfiguration.class, "--server.port=" + port,
+                                "--spring.profiles.active=acceptance");
+                    }
+                });
         context = future.get(30, TimeUnit.SECONDS);
     }
 
@@ -85,16 +80,14 @@ public class BasicAcceptanceTests {
     public void getStaticPage() throws Exception {
         ResponseEntity<String> response = doGet("/");
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertTrue(response.getHeaders().getContentType()
-                .isCompatibleWith(MediaType.valueOf("text/html")));
+        assertTrue(response.getHeaders().getContentType().isCompatibleWith(MediaType.valueOf("text/html")));
     }
 
     @Test
     public void getStyleSheet() throws Exception {
         ResponseEntity<String> response = doGet("/bootstrap/css/bootstrap.css");
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertTrue(response.getHeaders().getContentType()
-                .isCompatibleWith(MediaType.valueOf("text/css")));
+        assertTrue(response.getHeaders().getContentType().isCompatibleWith(MediaType.valueOf("text/css")));
     }
 
     @Test

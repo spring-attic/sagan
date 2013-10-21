@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Profile;
 public class IndexerElasticSearchConfiguration {
 
     @Configuration
-    @Profile({"default"})
-    protected static class IndexerInMemoryConfiguration extends InMemoryElasticSearchConfiguration {}
+    @Profile({ "default" })
+    protected static class IndexerInMemoryConfiguration extends InMemoryElasticSearchConfiguration {
+    }
 
 }

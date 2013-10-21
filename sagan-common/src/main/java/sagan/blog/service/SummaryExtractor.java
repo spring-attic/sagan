@@ -3,6 +3,7 @@ package sagan.blog.service;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,8 @@ public class SummaryExtractor {
             builder.append(element.outerHtml());
             builder.append("\n");
             count += element.text().length();
-            if (count >= maxLength) break;
+            if (count >= maxLength)
+                break;
         }
 
         return builder.toString();

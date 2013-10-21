@@ -1,17 +1,22 @@
 package integration.caching;
 
-import integration.IntegrationTestBase;
-import sagan.blog.service.BlogService;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
+import sagan.blog.service.BlogService;
+import sagan.blog.view.PostViewFactory;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
 import sagan.team.service.TeamService;
+import sagan.util.SetSystemProperty;
 import sagan.util.web.PageableFactory;
-import sagan.blog.view.PostViewFactory;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,19 +25,14 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import sagan.util.SetSystemProperty;
 
-import java.util.Arrays;
-import java.util.List;
+import integration.IntegrationTestBase;
 
 import static integration.caching.TeamCachingStrategyTests.TestConfiguration;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ContextConfiguration(classes = { TestConfiguration.class })
 public class TeamCachingStrategyTests extends IntegrationTestBase {

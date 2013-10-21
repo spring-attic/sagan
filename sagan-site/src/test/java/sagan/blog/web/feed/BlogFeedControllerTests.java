@@ -1,9 +1,9 @@
 package sagan.blog.web.feed;
 
-import sagan.blog.service.BlogService;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
+import sagan.blog.service.BlogService;
 import sagan.util.web.PageableFactory;
 
 import java.util.ArrayList;
@@ -15,19 +15,19 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.ui.ExtendedModelMap;
 
-import static sagan.blog.PostCategory.*;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static sagan.blog.PostCategory.ENGINEERING;
 
 public class BlogFeedControllerTests {
 
@@ -48,13 +48,10 @@ public class BlogFeedControllerTests {
         this.controller = new BlogFeedController(this.blogService);
         this.posts.add(PostBuilder.post().build());
         this.page = new PageImpl<Post>(this.posts, mock(Pageable.class), 20);
-        given(this.blogService.getPublishedPosts(eq(PageableFactory.forFeeds())))
-                .willReturn(this.page);
-        given(
-                this.blogService.getPublishedPosts(eq(TEST_CATEGORY),
-                        eq(PageableFactory.forFeeds()))).willReturn(this.page);
-        given(this.blogService.getPublishedBroadcastPosts(eq(PageableFactory.forFeeds())))
-                .willReturn(this.page);
+        given(this.blogService.getPublishedPosts(eq(PageableFactory.forFeeds()))).willReturn(this.page);
+        given(this.blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(PageableFactory.forFeeds()))).willReturn(
+                this.page);
+        given(this.blogService.getPublishedBroadcastPosts(eq(PageableFactory.forFeeds()))).willReturn(this.page);
     }
 
     @SuppressWarnings("unchecked")
@@ -75,21 +72,16 @@ public class BlogFeedControllerTests {
     @SuppressWarnings("unchecked")
     @Test
     public void postsInModelForPublishedCategoryPosts() {
-        this.controller.listPublishedPostsForCategory(TEST_CATEGORY, this.model,
-                this.response);
+        this.controller.listPublishedPostsForCategory(TEST_CATEGORY, this.model, this.response);
         assertThat((List<Post>) this.model.get("posts"), is(this.posts));
     }
 
     @Test
     public void feedMetadataInModelForCategoryPosts() {
-        this.controller.listPublishedPostsForCategory(TEST_CATEGORY, this.model,
-                this.response);
-        assertThat((String) this.model.get("feed-title"),
-                is("Spring " + TEST_CATEGORY.getDisplayName()));
-        assertThat((String) this.model.get("feed-path"), is("/blog/category/"
-                + TEST_CATEGORY.getUrlSlug() + ".atom"));
-        assertThat((String) this.model.get("blog-path"), is("/blog/category/"
-                + TEST_CATEGORY.getUrlSlug()));
+        this.controller.listPublishedPostsForCategory(TEST_CATEGORY, this.model, this.response);
+        assertThat((String) this.model.get("feed-title"), is("Spring " + TEST_CATEGORY.getDisplayName()));
+        assertThat((String) this.model.get("feed-path"), is("/blog/category/" + TEST_CATEGORY.getUrlSlug() + ".atom"));
+        assertThat((String) this.model.get("blog-path"), is("/blog/category/" + TEST_CATEGORY.getUrlSlug()));
     }
 
     @SuppressWarnings("unchecked")

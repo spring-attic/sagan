@@ -1,11 +1,11 @@
 package examples.search;
 
-import org.jsoup.nodes.Document;
-
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
 
 import java.util.Date;
+
+import org.jsoup.nodes.Document;
 
 class WebDocumentSearchEntryMapper implements SearchEntryMapper<Document> {
 

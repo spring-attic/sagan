@@ -8,7 +8,7 @@ import org.springframework.web.client.RestOperations;
 @Service
 public class CachedRestClient {
 
-    @Cacheable(value="cache.network", key="#url")
+    @Cacheable(value = "cache.network", key = "#url")
     public <T> T get(RestOperations operations, String url, Class<T> clazz) {
         return operations.getForObject(url, clazz);
     }

@@ -1,22 +1,12 @@
 package integration.search;
 
-import integration.IntegrationTestBase;
-import io.searchbox.client.JestClient;
 import sagan.search.SearchEntry;
+import sagan.search.SearchEntryBuilder;
 import sagan.search.SearchFacet;
+import sagan.search.SearchIndexSetup;
 import sagan.search.SearchResult;
 import sagan.search.SearchResults;
 import sagan.search.service.SearchService;
-import sagan.search.SearchEntryBuilder;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import sagan.search.SearchIndexSetup;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -24,9 +14,20 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import integration.IntegrationTestBase;
+import io.searchbox.client.JestClient;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 public class SearchFacetsIntegrationTests extends IntegrationTestBase {
 
@@ -44,13 +45,11 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
             .facetPath("Guides")
             .facetPath("Guides/Getting Started").notCurrent().build();
 
-
     private SearchEntry tutorial = SearchEntryBuilder.entry()
             .path("http://example.com/tutorial")
             .title("a title")
             .facetPath("Guides")
             .facetPath("Guides/Tutorials").build();
-
 
     private SearchEntry blog = SearchEntryBuilder.entry()
             .path("http://example.com/blog")
@@ -151,14 +150,10 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
         SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
         List<SearchResult> results = searchResults.getPage().getContent();
 
-        assertThatResultsContains(results,
-                tutorial,
-                blog,
-                springSecurityApiDoc,
-                springSecurityRefDoc);
+        assertThatResultsContains(results, tutorial, blog, springSecurityApiDoc, springSecurityRefDoc);
     }
 
-    private void assertThatResultsContains(List<SearchResult> results, SearchEntry ... entries) {
+    private void assertThatResultsContains(List<SearchResult> results, SearchEntry... entries) {
         ArrayList<String> resultPaths = new ArrayList<>();
         for (SearchResult result : results) {
             resultPaths.add(result.getPath());
@@ -173,7 +168,8 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
     }
 
     @Test
-    public void filterByMultipleFacetsProjectAndApi_restrictsProjectsToApiAndIncludesAllOtherFacets() throws ParseException {
+    public void filterByMultipleFacetsProjectAndApi_restrictsProjectsToApiAndIncludesAllOtherFacets()
+            throws ParseException {
         this.searchService.saveToIndex(tutorial);
         this.searchService.saveToIndex(blog);
         this.searchService.saveToIndex(springFrameworkApiDoc);
@@ -189,13 +185,12 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
         SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
         List<SearchResult> results = searchResults.getPage().getContent();
 
-        assertThatResultsContains(results,
-                blog,
-                springSecurityApiDoc);
+        assertThatResultsContains(results, blog, springSecurityApiDoc);
     }
 
     @Test
-    public void filterByMultipleFacetsProjectAndReference_restrictsProjectsToReferenceAndIncludesAllOtherFacets() throws ParseException {
+    public void filterByMultipleFacetsProjectAndReference_restrictsProjectsToReferenceAndIncludesAllOtherFacets()
+            throws ParseException {
         this.searchService.saveToIndex(tutorial);
         this.searchService.saveToIndex(blog);
         this.searchService.saveToIndex(springFrameworkApiDoc);
@@ -211,9 +206,7 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
         SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
         List<SearchResult> results = searchResults.getPage().getContent();
 
-        assertThatResultsContains(results,
-                blog,
-                springFrameworkRefDoc);
+        assertThatResultsContains(results, blog, springFrameworkRefDoc);
     }
 
     @Test
@@ -233,11 +226,7 @@ public class SearchFacetsIntegrationTests extends IntegrationTestBase {
         SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
         List<SearchResult> results = searchResults.getPage().getContent();
 
-        assertThatResultsContains(results,
-                blog,
-                springFrameworkApiDoc,
-                springFrameworkRefDoc,
-                springSecurityApiDoc,
+        assertThatResultsContains(results, blog, springFrameworkApiDoc, springFrameworkRefDoc, springSecurityApiDoc,
                 springSecurityRefDoc);
     }
 

@@ -1,28 +1,24 @@
 package sagan.guides.service;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.springframework.social.github.api.GitHubRepo;
-import org.springframework.web.client.RestClientException;
-
 import sagan.guides.Guide;
 import sagan.guides.GuideNotFoundException;
 import sagan.guides.ImageNotFoundException;
 import sagan.util.service.github.GitHubService;
-import sagan.guides.service.GitHubGuidesService;
 
 import java.io.IOException;
 import java.util.List;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isEmptyString;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+
+import org.springframework.social.github.api.GitHubRepo;
+import org.springframework.web.client.RestClientException;
+
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.matches;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -115,7 +111,7 @@ public class GitHubGuidesServiceTests {
         GitHubRepo notAGuideRepo = new GitHubRepo();
         notAGuideRepo.setName("not-a-guide");
 
-        GitHubRepo[] guideRepos = {guideRepo, notAGuideRepo};
+        GitHubRepo[] guideRepos = { guideRepo, notAGuideRepo };
 
         given(this.gitHubService.getGitHubRepos(anyString())).willReturn(guideRepos);
         given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
@@ -138,7 +134,7 @@ public class GitHubGuidesServiceTests {
         GitHubRepo notAGuideRepo = new GitHubRepo();
         notAGuideRepo.setName("gs-not-a-tutorial");
 
-        GitHubRepo[] guideRepos = {tutorialRepo, notAGuideRepo};
+        GitHubRepo[] guideRepos = { tutorialRepo, notAGuideRepo };
 
         given(this.gitHubService.getGitHubRepos(anyString())).willReturn(guideRepos);
         given(this.gitHubService.getRawFileAsHtml(matches(README))).willReturn(README_CONTENT);
@@ -153,7 +149,7 @@ public class GitHubGuidesServiceTests {
 
     @Test
     public void loadImage() throws IOException {
-        byte[] bytes = new byte[]{'a'};
+        byte[] bytes = new byte[] { 'a' };
         String imageName = "welcome.png";
 
         given(this.gitHubService.getGuideImage(eq(GUIDE_REPO_NAME), eq(imageName))).willReturn(bytes);
@@ -168,9 +164,8 @@ public class GitHubGuidesServiceTests {
     public void unknownImage() {
         String unknownImage = "uknown_image.png";
 
-        given(
-            this.gitHubService.getGuideImage(eq(GUIDE_REPO_NAME), eq(unknownImage))
-        ).willThrow(RestClientException.class);
+        given(this.gitHubService.getGuideImage(eq(GUIDE_REPO_NAME), eq(unknownImage))).willThrow(
+                RestClientException.class);
 
         this.service.loadGettingStartedImage(GUIDE_ID, unknownImage);
     }
@@ -182,7 +177,8 @@ public class GitHubGuidesServiceTests {
         gitHubRepo.setDescription("Rest tutorial :: Learn some rest stuff");
 
         given(this.gitHubService.getRepoInfo(anyString(), eq("tut-tutorialId"))).willReturn(gitHubRepo);
-        given(this.gitHubService.getRawFileAsHtml(matches("/repos/spring-guides/tut-tutorialId/contents/README.md"))).willReturn("Tutorial Page 1");
+        given(this.gitHubService.getRawFileAsHtml(matches("/repos/spring-guides/tut-tutorialId/contents/README.md")))
+                .willReturn("Tutorial Page 1");
 
         Guide guide = this.service.loadTutorial("tutorialId");
         verify(this.gitHubService).getRawFileAsHtml(matches("/repos/spring-guides/tut-tutorialId/contents/README.md"));
@@ -197,10 +193,12 @@ public class GitHubGuidesServiceTests {
         gitHubRepo.setDescription("Rest tutorial :: Learn some rest stuff");
 
         given(this.gitHubService.getRepoInfo(anyString(), eq("tut-tutorialId"))).willReturn(gitHubRepo);
-        given(this.gitHubService.getRawFileAsHtml(matches("/repos/spring-guides/tut-tutorialId/contents/1/README.md"))).willReturn("Tutorial Page 1");
+        given(this.gitHubService.getRawFileAsHtml(matches("/repos/spring-guides/tut-tutorialId/contents/1/README.md")))
+                .willReturn("Tutorial Page 1");
 
         Guide guide = this.service.loadTutorialPage("tutorialId", "1");
-        verify(this.gitHubService).getRawFileAsHtml(matches("/repos/spring-guides/tut-tutorialId/contents/1/README.md"));
+        verify(this.gitHubService)
+                .getRawFileAsHtml(matches("/repos/spring-guides/tut-tutorialId/contents/1/README.md"));
 
         assertThat(guide.getContent(), equalTo("Tutorial Page 1"));
     }

@@ -1,11 +1,12 @@
 package sagan.projects.service;
 
-import org.springframework.web.util.UriTemplate;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.util.UriTemplate;
 
 class ProjectParser {
 

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.ui.ExtendedModelMap;
 
 import com.sun.syndication.feed.atom.Entry;
@@ -23,7 +24,7 @@ import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.feed.atom.Link;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.*;
 
 public class BlogPostAtomViewerTests {

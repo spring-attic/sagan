@@ -1,9 +1,5 @@
 package sagan.tools.toolsuite.parser;
 
-import sagan.tools.toolsuite.parser.ToolXmlConverter;
-import org.junit.Before;
-import org.junit.Test;
-
 import sagan.tools.toolsuite.Architecture;
 import sagan.tools.toolsuite.EclipseVersion;
 import sagan.tools.toolsuite.ToolSuiteDownloads;
@@ -15,13 +11,15 @@ import sagan.tools.toolsuite.xml.ToolSuiteXml;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ToolXmlConverter_TwoDifferentPlatformsTests {
     private ToolSuiteDownloads toolSuite;
     private ToolXmlConverter toolXmlConverter;
-
 
     @Before
     public void setUp() throws Exception {
@@ -60,7 +58,6 @@ public class ToolXmlConverter_TwoDifferentPlatformsTests {
         toolSuite = toolXmlConverter.convert(toolSuiteXml, "Spring Tool Suite", "STS");
     }
 
-
     @Test
     public void setsTheReleaseName() {
         assertThat(toolSuite.getReleaseName(), equalTo("3.3.0.RELEASE"));
@@ -98,12 +95,18 @@ public class ToolXmlConverter_TwoDifferentPlatformsTests {
 
     @Test
     public void addsADownloadLinkTheArchitectureInEachPlatform() throws Exception {
-        Architecture macArchitecture = toolSuite.getPlatformList().get(1).getEclipseVersions().get(0).getArchitectures().get(0);
+        Architecture macArchitecture =
+                toolSuite.getPlatformList().get(1).getEclipseVersions().get(0).getArchitectures().get(0);
         assertThat(macArchitecture.getDownloadLinks().size(), equalTo(1));
-        assertThat(macArchitecture.getDownloadLinks().get(0).getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
+        assertThat(
+                macArchitecture.getDownloadLinks().get(0).getUrl(),
+                equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
 
-        Architecture windowsArchitecture = toolSuite.getPlatformList().get(0).getEclipseVersions().get(0).getArchitectures().get(0);
+        Architecture windowsArchitecture =
+                toolSuite.getPlatformList().get(0).getEclipseVersions().get(0).getArchitectures().get(0);
         assertThat(windowsArchitecture.getDownloadLinks().size(), equalTo(1));
-        assertThat(windowsArchitecture.getDownloadLinks().get(0).getUrl(), equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-x86_64-installer.exe"));
+        assertThat(
+                windowsArchitecture.getDownloadLinks().get(0).getUrl(),
+                equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-x86_64-installer.exe"));
     }
 }

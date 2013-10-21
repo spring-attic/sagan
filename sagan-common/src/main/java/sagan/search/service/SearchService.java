@@ -1,5 +1,20 @@
 package sagan.search.service;
 
+import sagan.search.DeleteQueryBuilder;
+import sagan.search.SearchEntry;
+import sagan.search.SearchException;
+import sagan.search.SearchResults;
+
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import io.searchbox.Action;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
@@ -7,15 +22,6 @@ import io.searchbox.core.Delete;
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import sagan.search.*;
-
-import java.util.List;
 
 @Service
 public class SearchService {
@@ -39,8 +45,7 @@ public class SearchService {
     }
 
     public void saveToIndex(SearchEntry entry) {
-        Index.Builder indexEntryBuilder = new Index.Builder(entry).id(entry.getId()).index(index)
-                .type(entry.getType());
+        Index.Builder indexEntryBuilder = new Index.Builder(entry).id(entry.getId()).index(index).type(entry.getType());
 
         if (this.useRefresh) {
             indexEntryBuilder.refresh(true);
@@ -62,6 +67,7 @@ public class SearchService {
         JestResult jestResult = execute(search);
         return searchResultParser.parseResults(jestResult, pageable, term);
     }
+
     public void setUseRefresh(boolean useRefresh) {
         this.useRefresh = useRefresh;
     }

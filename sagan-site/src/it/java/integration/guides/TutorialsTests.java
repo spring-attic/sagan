@@ -1,13 +1,13 @@
 package integration.guides;
 
-import integration.IntegrationTestBase;
-
-import org.junit.Test;
 import sagan.util.FixtureLoader;
 
+import org.junit.Test;
+
+import integration.IntegrationTestBase;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class TutorialsTests extends IntegrationTestBase {
 
@@ -37,12 +37,9 @@ public class TutorialsTests extends IntegrationTestBase {
     public void getImage() throws Exception {
         String imageJson = FixtureLoader.load("/fixtures/github/imageResponse.json");
 
-        stubRestClient.putResponse("/repos/spring-guides/tut-my-tutorial/contents/images/image.png",
-                imageJson);
+        stubRestClient.putResponse("/repos/spring-guides/tut-my-tutorial/contents/images/image.png", imageJson);
 
-
-        this.mockMvc.perform(get("/guides/tutorials/my-tutorial/images/image.png"))
-                .andExpect(status().isOk());
+        this.mockMvc.perform(get("/guides/tutorials/my-tutorial/images/image.png")).andExpect(status().isOk());
 
     }
 }

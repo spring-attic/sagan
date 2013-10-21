@@ -1,22 +1,21 @@
 package sagan.guides.search;
 
 import sagan.guides.UnderstandingGuide;
-import sagan.guides.search.UnderstandingGuideMapper;
 import sagan.search.SearchEntry;
+import sagan.util.FixtureLoader;
 
 import java.util.Date;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
-import sagan.util.FixtureLoader;
-
-import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class UnderstandingGuideMapperTests {
     private UnderstandingGuideMapper guideMapper = new UnderstandingGuideMapper();
-    private UnderstandingGuide guide = new UnderstandingGuide("foo", "<h1>Understanding: foo</h1><p>content</p>", "<p>sidebar</p>");
+    private UnderstandingGuide guide = new UnderstandingGuide("foo", "<h1>Understanding: foo</h1><p>content</p>",
+            "<p>sidebar</p>");
     private SearchEntry entry = guideMapper.map(guide);
 
     @Test

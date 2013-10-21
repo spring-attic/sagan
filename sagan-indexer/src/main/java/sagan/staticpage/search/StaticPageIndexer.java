@@ -1,20 +1,20 @@
 package sagan.staticpage.search;
 
 import sagan.search.service.CrawledWebDocumentProcessor;
-import sagan.util.index.Indexer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-import sagan.util.web.StaticPagePathFinder;
 import sagan.search.service.CrawlerService;
 import sagan.search.service.SearchService;
+import sagan.util.index.Indexer;
+import sagan.util.web.StaticPagePathFinder;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 @Service
 public class StaticPageIndexer implements Indexer<String> {
@@ -34,10 +34,12 @@ public class StaticPageIndexer implements Indexer<String> {
     }
 
     @Autowired
-    public StaticPageIndexer(CrawlerService crawlerService, SearchService searchService, StaticPagePathFinder staticPagePathFinder) {
+    public StaticPageIndexer(CrawlerService crawlerService, SearchService searchService,
+                             StaticPagePathFinder staticPagePathFinder) {
         this.crawlerService = crawlerService;
         this.staticPagePathFinder = staticPagePathFinder;
-        this.documentProcessor = new CrawledWebDocumentProcessor(searchService, new LocalStaticPagesSearchEntryMapper());
+        this.documentProcessor =
+                new CrawledWebDocumentProcessor(searchService, new LocalStaticPagesSearchEntryMapper());
     }
 
     @Override

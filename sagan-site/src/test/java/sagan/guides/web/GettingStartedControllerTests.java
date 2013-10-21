@@ -1,13 +1,13 @@
 package sagan.guides.web;
 
-import sagan.guides.service.GitHubGuidesService;
 import sagan.guides.Guide;
-import sagan.guides.web.GettingStartedController;
+import sagan.guides.service.GitHubGuidesService;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.web.client.RestClientException;
@@ -45,8 +45,7 @@ public class GettingStartedControllerTests {
 
     @Test
     public void guideIsInModel() {
-        Guide guide = new Guide("gs-rest-service",
-                "rest-service", "Title","Description", "raw guide text", "");
+        Guide guide = new Guide("gs-rest-service", "rest-service", "Title", "Description", "raw guide text", "");
         given(this.guideService.loadGettingStartedGuide("rest-service")).willReturn(guide);
         this.controller.viewGuide("rest-service", this.model);
         assertThat(((Guide) this.model.get("guide")), is(guide));
@@ -62,10 +61,8 @@ public class GettingStartedControllerTests {
     @Test
     public void loadImages() {
         byte[] image = "animage".getBytes();
-        given(this.guideService.loadGettingStartedImage("rest-service", "welcome.png")).willReturn(
-                image);
-        ResponseEntity<byte[]> responseEntity = this.controller.loadImage("rest-service",
-                "welcome.png");
+        given(this.guideService.loadGettingStartedImage("rest-service", "welcome.png")).willReturn(image);
+        ResponseEntity<byte[]> responseEntity = this.controller.loadImage("rest-service", "welcome.png");
         assertThat(responseEntity.getBody(), is(image));
     }
 }

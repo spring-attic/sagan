@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import static org.mockito.Mockito.mock;
 
 @Configuration
-@Import({ApplicationConfiguration.class})
+@Import({ ApplicationConfiguration.class })
 @ComponentScan("integration.stubs")
 public class IntegrationTestsConfiguration {
 

@@ -1,5 +1,11 @@
 package sagan.team.web;
 
+import sagan.team.MemberProfile;
+import sagan.team.service.TeamImporter;
+import sagan.team.service.TeamService;
+
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
@@ -10,16 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import sagan.team.MemberProfile;
-import sagan.team.service.TeamImporter;
-import sagan.team.service.TeamService;
-
-import java.security.Principal;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 public class TeamAdminController {
@@ -29,20 +26,21 @@ public class TeamAdminController {
     private final InMemoryUsersConnectionRepository usersConnectionRepository;
 
     @Autowired
-    public TeamAdminController(TeamService teamService, TeamImporter teamImporter, InMemoryUsersConnectionRepository usersConnectionRepository) {
+    public TeamAdminController(TeamService teamService, TeamImporter teamImporter,
+                               InMemoryUsersConnectionRepository usersConnectionRepository) {
         this.teamService = teamService;
         this.teamImporter = teamImporter;
         this.usersConnectionRepository = usersConnectionRepository;
     }
 
-    @RequestMapping(value = "/admin/team", method = {GET, HEAD})
+    @RequestMapping(value = "/admin/team", method = { GET, HEAD })
     public String getTeamAdminPage(Model model) {
         model.addAttribute("activeMembers", teamService.fetchActiveMembers());
         model.addAttribute("hiddenMembers", teamService.fetchHiddenMembers());
         return "admin/team/index";
     }
 
-    @RequestMapping(value = "/admin/profile", method = {GET, HEAD})
+    @RequestMapping(value = "/admin/profile", method = { GET, HEAD })
     public String editProfileForm(Principal principal, Model model) {
         MemberProfile profile = teamService.fetchMemberProfile(new Long(principal.getName()));
         model.addAttribute("profile", profile);
@@ -50,7 +48,7 @@ public class TeamAdminController {
         return "admin/team/edit";
     }
 
-    @RequestMapping(value = "/admin/team/{username}", method = {GET, HEAD})
+    @RequestMapping(value = "/admin/team/{username}", method = { GET, HEAD })
     public String editTeamMemberForm(@PathVariable("username") String username, Model model) {
         MemberProfile profile = teamService.fetchMemberProfileUsername(username);
         if (profile == MemberProfile.NOT_FOUND) {
@@ -60,7 +58,6 @@ public class TeamAdminController {
         model.addAttribute("formAction", "/admin/team/" + username);
         return "admin/team/edit";
     }
-
 
     @RequestMapping(value = "/admin/profile", method = PUT)
     public String saveProfile(Principal principal, MemberProfile profile) {

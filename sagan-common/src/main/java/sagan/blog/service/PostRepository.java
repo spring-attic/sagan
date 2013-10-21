@@ -1,17 +1,17 @@
 package sagan.blog.service;
 
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
+import sagan.team.MemberProfile;
+
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import sagan.team.MemberProfile;
-import sagan.blog.Post;
-import sagan.blog.PostCategory;
-
-import java.util.Date;
-import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
@@ -24,13 +24,16 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findByDraftFalseAndPublishAtBefore(Date publishedBefore);
 
-    Page<Post> findByCategoryAndDraftFalseAndPublishAtBefore(PostCategory category, Date publishedBefore, Pageable pageRequest);
+    Page<Post> findByCategoryAndDraftFalseAndPublishAtBefore(PostCategory category, Date publishedBefore,
+                                                             Pageable pageRequest);
 
-    Page<Post> findByBroadcastAndDraftFalseAndPublishAtBefore(boolean broadcast, Date publishedBefore, Pageable pageRequest);
+    Page<Post> findByBroadcastAndDraftFalseAndPublishAtBefore(boolean broadcast, Date publishedBefore,
+                                                              Pageable pageRequest);
 
     Page<Post> findByDraftFalseAndPublishAtAfter(Date now, Pageable pageRequest);
 
-    Page<Post> findByDraftFalseAndAuthorAndPublishAtBefore(MemberProfile profile, Date publishedBefore, Pageable pageRequest);
+    Page<Post> findByDraftFalseAndAuthorAndPublishAtBefore(MemberProfile profile, Date publishedBefore,
+                                                           Pageable pageRequest);
 
     Post findByTitle(String title);
 

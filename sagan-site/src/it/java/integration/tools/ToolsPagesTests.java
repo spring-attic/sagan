@@ -1,27 +1,27 @@
 package integration.tools;
 
-import integration.IntegrationTestBase;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.web.client.RestTemplate;
 import sagan.util.FixtureLoader;
 
 import java.io.IOException;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.junit.Before;
+import org.junit.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.web.client.RestTemplate;
+
+import integration.IntegrationTestBase;
+
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.stub;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class ToolsPagesTests extends IntegrationTestBase {
 
@@ -75,10 +75,10 @@ public class ToolsPagesTests extends IntegrationTestBase {
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
         assertThat(document.text(), containsString("STS 3.3.0.M2"));
 
-        assertThat(document.select(".milestone--release .item--dropdown a").attr("href"),
+        assertThat(
+                document.select(".milestone--release .item--dropdown a").attr("href"),
                 containsString("milestone/STS/3.3.0.M2/dist/e3.8/spring-tool-suite-3.3.0.M2-e3.8.2-win32-installer.exe"));
     }
-
 
     @Test
     public void hidesStsMilestoneDownloadsIfNotAvailable() throws Exception {
@@ -93,7 +93,8 @@ public class ToolsPagesTests extends IntegrationTestBase {
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
         assertThat(document.text(), not(containsString("STS 3.3.0.M2")));
 
-        assertThat(document.select(".milestone--release .item--dropdown a").attr("href"),
+        assertThat(
+                document.select(".milestone--release .item--dropdown a").attr("href"),
                 not(containsString("milestone/STS/3.3.0.M2/dist/e3.8/spring-tool-suite-3.3.0.M2-e3.8.2-win32-installer.exe")));
 
     }
@@ -117,7 +118,8 @@ public class ToolsPagesTests extends IntegrationTestBase {
         assertThat(document.text(), containsString("GGTS 3.3.0.RELEASE"));
         assertThat(document.select(".platform h3").text(), containsString("Windows"));
 
-        assertThat(document.select(".ga--release .item--dropdown a").attr("href"),
+        assertThat(
+                document.select(".ga--release .item--dropdown a").attr("href"),
                 containsString("release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
     }
 
@@ -131,7 +133,8 @@ public class ToolsPagesTests extends IntegrationTestBase {
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
         assertThat(document.text(), containsString("GGTS 3.3.0.M2"));
 
-        assertThat(document.select(".milestone--release .item--dropdown a").attr("href"),
+        assertThat(
+                document.select(".milestone--release .item--dropdown a").attr("href"),
                 containsString("milestone/STS/3.3.0.M2/dist/e3.8/groovy-grails-tool-suite-3.3.0.M2-e3.8.2-win32-installer.exe"));
     }
 
@@ -148,7 +151,8 @@ public class ToolsPagesTests extends IntegrationTestBase {
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
         assertThat(document.text(), not(containsString("GGTS 3.3.0.M2")));
 
-        assertThat(document.select(".milestone--release .item--dropdown a").attr("href"),
+        assertThat(
+                document.select(".milestone--release .item--dropdown a").attr("href"),
                 not(containsString("milestone/STS/3.3.0.M2/dist/e3.8/groovy-grails-tool-suite-3.3.0.M2-e3.8.2-win32-installer.exe")));
     }
 

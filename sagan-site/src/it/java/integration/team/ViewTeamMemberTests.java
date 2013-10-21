@@ -1,6 +1,5 @@
 package integration.team;
 
-import integration.IntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.service.PostRepository;
@@ -8,27 +7,29 @@ import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
 import sagan.team.service.TeamRepository;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
+import integration.IntegrationTestBase;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class ViewTeamMemberTests extends IntegrationTestBase {
     @Autowired
@@ -101,8 +102,7 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
 
     @Test
     public void getNonExistentTeamMemberPage() throws Exception {
-        this.mockMvc.perform(get("/team/someguy"))
-                .andExpect(status().isNotFound());
+        this.mockMvc.perform(get("/team/someguy")).andExpect(status().isNotFound());
     }
 
     @Test
@@ -128,9 +128,7 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
         createAuthoredPost(activeAuthor, "Back to Work", "2013-01-03 00:00");
         createAuthoredPost(activeAuthor, "Off to the Sales", "2013-01-02 00:00");
 
-        MvcResult response = this.mockMvc.perform(get("/team/active_author"))
-                .andExpect(status().isOk())
-                .andReturn();
+        MvcResult response = this.mockMvc.perform(get("/team/active_author")).andExpect(status().isOk()).andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
         List<String> titles = new ArrayList<>();
@@ -144,6 +142,5 @@ public class ViewTeamMemberTests extends IntegrationTestBase {
         Post post = PostBuilder.post().author(author).title(title).publishAt(publishAt).build();
         return postRepository.save(post);
     }
-
 
 }

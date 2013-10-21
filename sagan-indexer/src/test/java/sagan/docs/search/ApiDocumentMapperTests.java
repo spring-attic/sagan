@@ -1,22 +1,22 @@
 package sagan.docs.search;
 
-import sagan.projects.ProjectReleaseBuilder;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
-
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
-import sagan.docs.search.ApiDocumentMapper;
+import sagan.projects.ProjectReleaseBuilder;
 import sagan.search.SearchEntry;
 
 import java.io.InputStream;
 import java.util.Collections;
 
-import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.junit.Test;
+
+import org.springframework.core.io.ClassPathResource;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
 
 public class ApiDocumentMapperTests {
 
@@ -24,7 +24,7 @@ public class ApiDocumentMapperTests {
             "Spring Project",
             "http://www.example.com/repo/spring-framework",
             "http://www.example.com/spring-framework",
-            Collections.<ProjectRelease>emptyList(),
+            Collections.<ProjectRelease> emptyList(),
             false);
 
     private ProjectRelease version = new ProjectReleaseBuilder()

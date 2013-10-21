@@ -1,14 +1,14 @@
 package sagan.blog.service;
 
-import org.springframework.format.Formatter;
-import org.springframework.stereotype.Component;
-
 import sagan.blog.PostCategory;
 
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import org.springframework.format.Formatter;
+import org.springframework.stereotype.Component;
 
 @Component
 public class PostCategoryFormatter implements Formatter<PostCategory> {

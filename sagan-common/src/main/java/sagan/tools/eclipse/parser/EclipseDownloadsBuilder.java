@@ -1,7 +1,5 @@
 package sagan.tools.eclipse.parser;
 
-import org.springframework.util.StringUtils;
-
 import sagan.tools.eclipse.EclipseDownloads;
 import sagan.tools.eclipse.EclipsePackage;
 import sagan.tools.eclipse.EclipsePlatform;
@@ -18,6 +16,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.util.StringUtils;
+
 public class EclipseDownloadsBuilder {
     private final Map<String, EclipsePlatform> platforms = new HashMap<>();
     private final Map<String, EclipsePackage> packages = new HashMap<>();
@@ -26,7 +26,8 @@ public class EclipseDownloadsBuilder {
 
     private final DownloadLinkExtractor downloadLinkExtractor = new DownloadLinkExtractor();
 
-    public void addDownload(EclipseXmlDownload eclipseXmlDownload, EclipseXmlPackage eclipseXmlPackage, EclipseXmlProduct eclipseXmlProduct) {
+    public void addDownload(EclipseXmlDownload eclipseXmlDownload, EclipseXmlPackage eclipseXmlPackage,
+                            EclipseXmlProduct eclipseXmlProduct) {
         String os = eclipseXmlDownload.getOs();
         EclipsePlatform platform = getEclipsePlatform(os);
         EclipseRelease release = getEclipseRelease(eclipseXmlProduct, platform);
@@ -36,7 +37,8 @@ public class EclipseDownloadsBuilder {
         platforms.put(os, platform);
     }
 
-    private Architecture getArchitecture(EclipseXmlDownload eclipseXmlDownload, String os, EclipseRelease release, EclipsePackage eclipsePackage) {
+    private Architecture getArchitecture(EclipseXmlDownload eclipseXmlDownload, String os, EclipseRelease release,
+                                         EclipsePackage eclipsePackage) {
         String key = os + release.getName() + eclipsePackage.getName() + eclipseXmlDownload.getDescription();
         Architecture architecture = architectureMap.get(key);
         if (architecture == null) {

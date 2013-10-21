@@ -1,14 +1,16 @@
 package sagan.util.service.db;
 
-import com.googlecode.flyway.core.Flyway;
+import javax.sql.DataSource;
+
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import javax.sql.DataSource;
+import com.googlecode.flyway.core.Flyway;
 
 @Configuration
 public class DatabaseConfig {
@@ -32,8 +34,7 @@ public class DatabaseConfig {
 
         CloudEnvironment cloudEnvironment = new CloudEnvironment();
         if (cloudEnvironment.getServiceDataByName("sagan-db") != null) {
-            RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo(
-                    "sagan-db", RdbmsServiceInfo.class);
+            RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db", RdbmsServiceInfo.class);
             dataSource.setUrl(serviceInfo.getUrl());
             dataSource.setUsername(serviceInfo.getUserName());
             dataSource.setPassword(serviceInfo.getPassword());

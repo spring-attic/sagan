@@ -1,32 +1,29 @@
 package integration.blog;
 
-import integration.IntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.service.PostRepository;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.junit.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.MvcResult;
+
+import integration.IntegrationTestBase;
+
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class BlogIndexTests extends IntegrationTestBase {
 
@@ -64,12 +61,10 @@ public class BlogIndexTests extends IntegrationTestBase {
     }
 
     @Test
-    public void givenPostContentThatIsEqualToSummary_blogIndexShouldNotShow_ReadMore()
-            throws Exception {
+    public void givenPostContentThatIsEqualToSummary_blogIndexShouldNotShow_ReadMore() throws Exception {
         String summary = "A blog post string that is longish.";
         String content = summary;
-        Post post = new PostBuilder().renderedContent(content).renderedSummary(summary)
-                .build();
+        Post post = new PostBuilder().renderedContent(content).renderedSummary(summary).build();
 
         this.postRepository.save(post);
 
@@ -79,15 +74,13 @@ public class BlogIndexTests extends IntegrationTestBase {
     }
 
     @Test
-    public void givenPostContentThatIsLongerThanSummary_blogIndexShouldShow_ReadMore()
-            throws Exception {
+    public void givenPostContentThatIsLongerThanSummary_blogIndexShouldShow_ReadMore() throws Exception {
         String summary = "A blog post string that is longish.";
         String content = "";
         for (int i = 0; i < 50; i++) {
             content = content + summary;
         }
-        Post post = new PostBuilder().renderedContent(content).renderedSummary(summary)
-                .build();
+        Post post = new PostBuilder().renderedContent(content).renderedSummary(summary).build();
 
         this.postRepository.save(post);
 
@@ -115,10 +108,8 @@ public class BlogIndexTests extends IntegrationTestBase {
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
         assertThat(numberOfBlogPosts(html), is(10));
-        assertThat(html.select(".blog--container .date").first().text(),
-                is("November 11, 2012"));
-        assertThat(html.select(".blog--container .date").last().text(),
-                is("November 2, 2012"));
+        assertThat(html.select(".blog--container .date").first().text(), is("November 11, 2012"));
+        assertThat(html.select(".blog--container .date").last().text(), is("November 2, 2012"));
     }
 
     private int numberOfBlogPosts(Document html) {
@@ -164,8 +155,7 @@ public class BlogIndexTests extends IntegrationTestBase {
     }
 
     @Test
-    public void given1PageOfResults_blogIndexDoesNotShowPaginationControl()
-            throws Exception {
+    public void given1PageOfResults_blogIndexDoesNotShowPaginationControl() throws Exception {
         createManyPostsInNovember(1);
 
         MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();

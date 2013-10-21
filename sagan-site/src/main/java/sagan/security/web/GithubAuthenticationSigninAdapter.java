@@ -16,7 +16,6 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 public class GithubAuthenticationSigninAdapter implements SignInAdapter {
 
-
     private String path;
     private final SignInService signInService;
 
@@ -26,8 +25,7 @@ public class GithubAuthenticationSigninAdapter implements SignInAdapter {
     }
 
     @Override
-    public String signIn(String githubId, Connection<?> connection,
-            NativeWebRequest request) {
+    public String signIn(String githubId, Connection<?> connection, NativeWebRequest request) {
         GitHub gitHub = (GitHub) connection.getApi();
         String githubUsername = connection.getDisplayName();
 

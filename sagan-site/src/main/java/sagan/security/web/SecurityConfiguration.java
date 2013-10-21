@@ -1,9 +1,6 @@
 package sagan.security.web;
 
 import sagan.team.service.SignInService;
-import sagan.security.web.GithubAuthenticationSigninAdapter;
-import sagan.security.web.RemoteUsernameConnectionSignUp;
-import sagan.security.web.SecurityContextAuthenticationFilter;
 
 import java.io.IOException;
 
@@ -16,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -49,8 +45,7 @@ public class SecurityConfiguration {
 
     @Configuration
     @Order(Ordered.LOWEST_PRECEDENCE - 100)
-    protected static class SigninAuthenticationConfiguration extends
-            WebSecurityConfigurerAdapter {
+    protected static class SigninAuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -65,9 +60,10 @@ public class SecurityConfiguration {
         // Bootstrap to all requests
         protected Filter authenticationFilter() {
 
-            AbstractAuthenticationProcessingFilter filter = new SecurityContextAuthenticationFilter(
-                    SIGNIN_SUCCESS_PATH);
-            SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+            AbstractAuthenticationProcessingFilter filter =
+                    new SecurityContextAuthenticationFilter(SIGNIN_SUCCESS_PATH);
+            SavedRequestAwareAuthenticationSuccessHandler successHandler =
+                    new SavedRequestAwareAuthenticationSuccessHandler();
             successHandler.setDefaultTargetUrl("/admin");
             filter.setAuthenticationSuccessHandler(successHandler);
             return filter;
@@ -76,8 +72,8 @@ public class SecurityConfiguration {
 
     @Configuration
     @Order(Ordered.LOWEST_PRECEDENCE - 90)
-    protected static class AdminAuthenticationConfiguration extends
-            WebSecurityConfigurerAdapter implements EnvironmentAware {
+    protected static class AdminAuthenticationConfiguration extends WebSecurityConfigurerAdapter implements
+            EnvironmentAware {
 
         @Autowired
         private SignInService signInService;
@@ -98,13 +94,10 @@ public class SecurityConfiguration {
 
                         // TODO this filter needs to be removed once basic auth is removed
                         @Override
-                        protected void doFilterInternal(HttpServletRequest request,
-                                HttpServletResponse response, FilterChain filterChain)
-                                throws ServletException, IOException {
-                            Authentication authentication = SecurityContextHolder
-                                    .getContext().getAuthentication();
-                            if (authentication == null
-                                    || !authentication.isAuthenticated()
+                        protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+                                                        FilterChain filterChain) throws ServletException, IOException {
+                            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                            if (authentication == null || !authentication.isAuthenticated()
                                     || !(authentication.getPrincipal() instanceof Long)) {
                                 throw new BadCredentialsException("Not a github user!");
                             }
@@ -120,8 +113,7 @@ public class SecurityConfiguration {
         }
 
         private AuthenticationEntryPoint authenticationEntryPoint() {
-            LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint(
-                    "/signin");
+            LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint("/signin");
             entryPoint.setForceHttps(isForceHttps());
             return entryPoint;
         }
@@ -133,15 +125,14 @@ public class SecurityConfiguration {
         }
 
         @Bean
-        public ProviderSignInController providerSignInController(
-                GitHubConnectionFactory connectionFactory,
-                ConnectionFactoryRegistry registry,
-                InMemoryUsersConnectionRepository repository) {
+        public ProviderSignInController providerSignInController(GitHubConnectionFactory connectionFactory,
+                                                                 ConnectionFactoryRegistry registry,
+                                                                 InMemoryUsersConnectionRepository repository) {
 
             registry.addConnectionFactory(connectionFactory);
             repository.setConnectionSignUp(new RemoteUsernameConnectionSignUp());
-            ProviderSignInController controller = new ProviderSignInController(registry,
-                    repository, new GithubAuthenticationSigninAdapter(
+            ProviderSignInController controller =
+                    new ProviderSignInController(registry, repository, new GithubAuthenticationSigninAdapter(
                             SIGNIN_SUCCESS_PATH, this.signInService));
             controller.setSignInUrl("/signin?error=access_denied");
             return controller;
@@ -153,8 +144,7 @@ public class SecurityConfiguration {
         }
 
         @Bean
-        public InMemoryUsersConnectionRepository inMemoryUsersConnectionRepository(
-                ConnectionFactoryRegistry registry) {
+        public InMemoryUsersConnectionRepository inMemoryUsersConnectionRepository(ConnectionFactoryRegistry registry) {
             return new InMemoryUsersConnectionRepository(registry);
         }
     }
@@ -162,7 +152,6 @@ public class SecurityConfiguration {
     private static void configureHeaders(HeadersConfigurer<?> headers) throws Exception {
         HstsHeaderWriter writer = new HstsHeaderWriter(false);
         writer.setRequestMatcher(new AnyRequestMatcher());
-        headers.contentTypeOptions().xssProtection().cacheControl()
-                .addHeaderWriter(writer).frameOptions();
+        headers.contentTypeOptions().xssProtection().cacheControl().addHeaderWriter(writer).frameOptions();
     }
 }

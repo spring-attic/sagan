@@ -9,12 +9,12 @@ public class Download implements FileDownload {
     private String os;
     @Attribute
     private String version;
-    @Attribute(name="eclipse-version")
+    @Attribute(name = "eclipse-version")
     private String eclipseVersion;
     @Attribute
     private String size;
 
-    @Element(name="description")
+    @Element(name = "description")
     private String description;
     @Element
     private String file;
