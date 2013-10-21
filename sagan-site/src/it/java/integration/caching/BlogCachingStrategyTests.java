@@ -19,7 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import utils.SetSystemProperty;
+import sagan.util.SetSystemProperty;
 
 import java.util.Arrays;
 import java.util.List;

@@ -3,7 +3,7 @@ package integration.guides;
 import integration.IntegrationTestBase;
 
 import org.junit.Test;
-import utils.FixtureLoader;
+import sagan.util.FixtureLoader;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

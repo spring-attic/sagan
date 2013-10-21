@@ -11,7 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import utils.DateTestUtils;
+import sagan.util.DateTestUtils;
 
 import io.spring.site.domain.services.DateService;
 import io.spring.site.search.SearchEntry;

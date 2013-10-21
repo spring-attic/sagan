@@ -1,7 +1,6 @@
 package io.spring.site.domain.tools;
 
 import io.spring.site.domain.services.CachedRestClient;
-import io.spring.site.domain.tools.ToolsService;
 import io.spring.site.domain.tools.toolsuite.DownloadLink;
 import io.spring.site.domain.tools.toolsuite.EclipseVersion;
 import io.spring.site.domain.tools.toolsuite.ToolSuiteDownloads;
@@ -15,7 +14,7 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.springframework.web.client.RestTemplate;
 
-import utils.FixtureLoader;
+import sagan.util.FixtureLoader;
 
 import java.util.List;
 

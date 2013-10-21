@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import utils.DateTestUtils;
+import sagan.util.DateTestUtils;
 
 import io.spring.site.domain.blog.Post;
 import io.spring.site.domain.blog.PostBuilder;

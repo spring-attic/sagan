@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.client.RestTemplate;
-import utils.FixtureLoader;
+import sagan.util.FixtureLoader;
 
 import java.io.IOException;
 

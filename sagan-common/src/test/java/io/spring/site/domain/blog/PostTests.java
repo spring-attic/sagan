@@ -3,7 +3,7 @@ package io.spring.site.domain.blog;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import utils.DateTestUtils;
+import sagan.util.DateTestUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

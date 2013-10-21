@@ -8,14 +8,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import utils.DateTestUtils;
+import sagan.util.DateTestUtils;
 
-import io.spring.site.domain.blog.BlogPostContentRenderer;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostCategory;
-import io.spring.site.domain.blog.PostForm;
-import io.spring.site.domain.blog.PostFormAdapter;
-import io.spring.site.domain.blog.SummaryExtractor;
 import io.spring.site.domain.services.DateService;
 import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.domain.team.TeamRepository;

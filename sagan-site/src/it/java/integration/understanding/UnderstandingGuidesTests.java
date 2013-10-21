@@ -6,7 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MvcResult;
-import utils.FixtureLoader;
+import sagan.util.FixtureLoader;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;

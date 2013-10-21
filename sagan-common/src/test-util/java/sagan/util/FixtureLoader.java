@@ -1,4 +1,4 @@
-package utils;
+package sagan.util;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StreamUtils;

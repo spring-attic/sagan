@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import utils.FreePortFinder;
+import sagan.util.FreePortFinder;
 
 import static org.junit.Assert.assertNotNull;
 

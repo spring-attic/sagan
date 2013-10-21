@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
-import utils.FixtureLoader;
+import sagan.util.FixtureLoader;
 
 import java.util.List;
 import java.util.Map;

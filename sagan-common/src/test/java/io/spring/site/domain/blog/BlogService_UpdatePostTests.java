@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import utils.DateTestUtils;
+import sagan.util.DateTestUtils;
 
 import io.spring.site.domain.services.DateService;
 import io.spring.site.search.SearchEntry;

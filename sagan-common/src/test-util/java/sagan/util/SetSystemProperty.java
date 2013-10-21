@@ -1,4 +1,4 @@
-package utils;
+package sagan.util;
 
 import org.junit.rules.ExternalResource;
 

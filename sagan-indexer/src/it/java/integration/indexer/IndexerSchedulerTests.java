@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
-import utils.SetSystemProperty;
+import sagan.util.SetSystemProperty;
 
 
 import static org.mockito.Mockito.*;

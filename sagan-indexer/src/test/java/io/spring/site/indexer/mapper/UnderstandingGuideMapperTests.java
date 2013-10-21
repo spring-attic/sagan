@@ -8,7 +8,7 @@ import java.util.Date;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
-import utils.FixtureLoader;
+import sagan.util.FixtureLoader;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;

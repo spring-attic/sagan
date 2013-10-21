@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.GitHubUser;
 import org.springframework.web.client.RestOperations;
-import utils.FixtureLoader;
+import sagan.util.FixtureLoader;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
