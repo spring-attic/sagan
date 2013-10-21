@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import sagan.blog.service.index.PostSearchEntryMapper;
 import sagan.util.service.DateService;
 import sagan.team.MemberProfile;
 import sagan.search.service.SearchService;

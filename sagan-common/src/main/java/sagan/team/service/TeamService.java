@@ -1,7 +1,7 @@
 package sagan.team.service;
 
 import sagan.team.MemberProfile;
-import sagan.team.MemberProfileSearchEntryMapper;
+import sagan.team.service.index.MemberProfileSearchEntryMapper;
 import sagan.search.service.SearchService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

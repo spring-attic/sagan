@@ -2,9 +2,8 @@ package examples.search;
 
 import sagan.guides.Guide;
 import sagan.guides.service.GuidesService;
-import sagan.app.indexer.ApplicationConfiguration;
-import io.spring.site.indexer.mapper.GuideSearchEntryMapper;
-import io.spring.site.indexer.mapper.WebDocumentSearchEntryMapper;
+import sagan.app.indexer.config.ApplicationConfiguration;
+import sagan.guides.service.index.GuideSearchEntryMapper;
 import sagan.search.SearchEntry;
 import sagan.search.SearchResult;
 import sagan.search.service.SearchService;

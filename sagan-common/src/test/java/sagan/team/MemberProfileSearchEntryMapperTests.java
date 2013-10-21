@@ -4,8 +4,7 @@ import sagan.search.SearchEntry;
 
 import org.junit.Before;
 import org.junit.Test;
-import sagan.team.MemberProfile;
-import sagan.team.MemberProfileSearchEntryMapper;
+import sagan.team.service.index.MemberProfileSearchEntryMapper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

@@ -1,6 +1,6 @@
 package integration;
 
-import sagan.app.indexer.ApplicationConfiguration;
+import sagan.app.indexer.config.ApplicationConfiguration;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;

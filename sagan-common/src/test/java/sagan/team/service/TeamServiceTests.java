@@ -1,9 +1,6 @@
 package sagan.team.service;
 
 import sagan.team.MemberProfile;
-import sagan.team.MemberProfileSearchEntryMapper;
-import sagan.team.service.TeamRepository;
-import sagan.team.service.TeamService;
 import sagan.search.SearchEntry;
 import sagan.search.service.SearchService;
 
@@ -12,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import sagan.team.service.index.MemberProfileSearchEntryMapper;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

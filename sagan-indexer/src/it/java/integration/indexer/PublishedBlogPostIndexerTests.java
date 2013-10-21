@@ -4,7 +4,7 @@ import integration.IndexerIntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.service.PostRepository;
-import io.spring.site.indexer.PublishedBlogPostsIndexer;
+import sagan.blog.service.index.PublishedBlogPostsIndexer;
 import sagan.search.SearchEntry;
 import sagan.search.service.SearchService;
 import org.junit.Before;
