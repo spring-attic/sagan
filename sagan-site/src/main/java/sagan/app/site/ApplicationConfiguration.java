@@ -16,10 +16,6 @@
 package sagan.app.site;
 
 import com.google.common.cache.CacheBuilder;
-import sagan.Packages;
-import sagan.util.service.db.DatabaseConfig;
-import sagan.util.service.github.GitHubConfiguration;
-import sagan.search.SearchClientConfiguration;
 import sagan.projects.service.ProjectMetadataService;
 import sagan.projects.service.ProjectMetadataYamlParser;
 import sagan.util.service.DateService;
@@ -39,7 +35,6 @@ import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -56,12 +51,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
-import static sagan.Packages.sagan;
-
 @EnableAutoConfiguration
 @Configuration
 @EnableCaching
-@ComponentScan(sagan)
+@ComponentScan(basePackageClasses = sagan.Package.class)
 public class ApplicationConfiguration {
 
     public static final String REWRITE_FILTER_NAME = "rewriteFilter";

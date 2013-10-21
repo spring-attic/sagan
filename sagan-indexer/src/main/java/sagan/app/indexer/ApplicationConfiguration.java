@@ -22,12 +22,10 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static sagan.Packages.sagan;
-
 @EnableAutoConfiguration
 @Configuration
 @EnableScheduling
-@ComponentScan(sagan)
+@ComponentScan(basePackageClasses = sagan.Package.class)
 public class ApplicationConfiguration {
 
     @Value("classpath:/project-metadata.yml")
