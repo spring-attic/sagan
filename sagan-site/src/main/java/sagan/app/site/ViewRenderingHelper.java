@@ -1,4 +1,4 @@
-package app.site;
+package sagan.app.site;
 
 import sagan.projects.service.ProjectMetadataService;
 

@@ -1,7 +1,7 @@
 package integration.caching;
 
 import integration.caching.NetworkCachingStrategyTests.TestConfiguration;
-import app.site.ApplicationConfiguration;
+import sagan.app.site.ApplicationConfiguration;
 
 import org.junit.After;
 import org.junit.Before;

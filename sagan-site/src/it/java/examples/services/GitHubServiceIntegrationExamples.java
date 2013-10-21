@@ -4,7 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import sagan.util.service.github.GitHubService;
 import sagan.util.service.github.RepoContent;
-import app.site.ApplicationConfiguration;
+import sagan.app.site.ApplicationConfiguration;
 import org.jsoup.Jsoup;
 import org.junit.ClassRule;
 import org.junit.Test;

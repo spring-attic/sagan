@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.site;
+package sagan.app.site;
 
 import com.google.common.cache.CacheBuilder;
-import sagan.blog.Post;
 import sagan.util.service.db.DatabaseConfig;
 import sagan.util.service.github.GitHubConfiguration;
 import sagan.search.SearchClientConfiguration;

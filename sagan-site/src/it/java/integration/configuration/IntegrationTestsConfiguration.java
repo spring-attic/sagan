@@ -1,6 +1,6 @@
 package integration.configuration;
 
-import app.site.ApplicationConfiguration;
+import sagan.app.site.ApplicationConfiguration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

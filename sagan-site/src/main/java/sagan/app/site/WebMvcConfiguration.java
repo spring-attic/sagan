@@ -1,4 +1,4 @@
-package app.site;
+package sagan.app.site;
 
 import sagan.util.web.StaticPagePathFinder;
 import sagan.blog.BlogPostNotFoundException;

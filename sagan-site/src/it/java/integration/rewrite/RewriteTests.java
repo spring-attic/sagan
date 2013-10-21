@@ -1,6 +1,6 @@
 package integration.rewrite;
 
-import app.site.ApplicationConfiguration;
+import sagan.app.site.ApplicationConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
