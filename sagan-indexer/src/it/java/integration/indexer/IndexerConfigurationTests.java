@@ -15,7 +15,7 @@
  */
 package integration.indexer;
 
-import io.spring.site.indexer.configuration.IndexerConfiguration;
+import sagan.app.indexer.IndexerConfiguration;
 
 import org.junit.After;
 import org.junit.Test;

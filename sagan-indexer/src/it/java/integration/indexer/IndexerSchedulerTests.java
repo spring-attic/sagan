@@ -9,7 +9,7 @@ import io.spring.site.indexer.StaticPageIndexer;
 import io.spring.site.indexer.ToolsIndexer;
 import io.spring.site.indexer.TutorialIndexer;
 import io.spring.site.indexer.UnderstandingGuideIndexer;
-import io.spring.site.indexer.configuration.IndexerConfiguration;
+import sagan.app.indexer.IndexerConfiguration;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

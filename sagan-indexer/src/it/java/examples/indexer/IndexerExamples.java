@@ -6,7 +6,7 @@ import sagan.guides.Guide;
 import sagan.guides.UnderstandingGuide;
 import io.spring.site.indexer.GettingStartedGuideIndexer;
 import io.spring.site.indexer.UnderstandingGuideIndexer;
-import io.spring.site.indexer.configuration.IndexerConfiguration;
+import sagan.app.indexer.IndexerConfiguration;
 import sagan.search.SearchResult;
 import sagan.search.SearchResults;
 import sagan.search.service.SearchService;

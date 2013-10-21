@@ -1,4 +1,4 @@
-package io.spring.site.indexer.configuration;
+package sagan.app.indexer;
 
 import sagan.util.service.db.DatabaseConfig;
 import sagan.util.service.github.GitHubConfiguration;

@@ -43,8 +43,6 @@ import org.springframework.social.github.connect.GitHubConnectionFactory;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Configuration
-@ComponentScan({ "io.spring.site.domain.team", "io.spring.site.web.security",
-        "io.spring.site.domain.services", "io.spring.site.domain.blog" })
 public class SecurityConfiguration {
 
     static final String SIGNIN_SUCCESS_PATH = "/signin/success";

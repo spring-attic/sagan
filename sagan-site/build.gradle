@@ -3,7 +3,7 @@ apply plugin: 'application'
 apply from: '../gradle/integTest.gradle'
 apply from: '../gradle/deploy.gradle'
 
-mainClassName = 'io.spring.site.web.configuration.ApplicationConfiguration'
+mainClassName = 'sagan.app.site.ApplicationConfiguration'
 
 springBoot {
     backupSource = false
