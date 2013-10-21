@@ -59,7 +59,7 @@ var Munchkin, curl, baseUrl; // pre-existing globals
     // used in munchkin.js.  Therefore, we must use the jquery-migrate plugin.
     // Also: I'm ensuring munchkin.js gets loaded last!
 
-    curl(['app', 'jquery', 'app/filter']).then(start, fail);
+    curl(['app', 'jquery']).then(start, fail);
 
     function start(main, $) {
         // tell the jquery migrate plugin to be quiet
