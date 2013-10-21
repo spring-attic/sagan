@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import io.spring.site.domain.blog.Post;
+import sagan.blog.Post;
 import io.spring.site.domain.services.DateService;
 
 import java.util.ArrayList;

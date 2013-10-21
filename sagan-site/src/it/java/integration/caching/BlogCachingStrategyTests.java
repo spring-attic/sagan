@@ -1,10 +1,10 @@
 package integration.caching;
 
 import integration.IntegrationTestBase;
-import io.spring.site.domain.blog.BlogService;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostBuilder;
-import io.spring.site.domain.blog.PostCategory;
+import sagan.blog.BlogService;
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import sagan.blog.PostCategory;
 import io.spring.site.web.PageableFactory;
 import org.junit.Before;
 import org.junit.ClassRule;

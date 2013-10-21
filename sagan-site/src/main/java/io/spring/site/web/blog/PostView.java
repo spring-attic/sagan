@@ -1,8 +1,8 @@
 package io.spring.site.web.blog;
 
 
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostCategory;
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
 import io.spring.site.domain.services.DateService;
 import io.spring.site.domain.team.MemberProfile;
 

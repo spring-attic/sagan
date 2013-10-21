@@ -1,4 +1,4 @@
-package io.spring.site.domain.blog;
+package sagan.blog;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

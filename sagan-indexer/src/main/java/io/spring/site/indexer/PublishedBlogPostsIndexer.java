@@ -1,8 +1,8 @@
 package io.spring.site.indexer;
 
-import io.spring.site.domain.blog.BlogService;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostSearchEntryMapper;
+import sagan.blog.BlogService;
+import sagan.blog.Post;
+import sagan.blog.PostSearchEntryMapper;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;

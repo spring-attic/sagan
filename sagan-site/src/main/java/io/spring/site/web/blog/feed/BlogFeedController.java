@@ -1,8 +1,8 @@
 package io.spring.site.web.blog.feed;
 
-import io.spring.site.domain.blog.BlogService;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostCategory;
+import sagan.blog.BlogService;
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
 import io.spring.site.web.PageableFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;

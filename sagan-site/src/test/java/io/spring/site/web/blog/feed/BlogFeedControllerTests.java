@@ -1,9 +1,9 @@
 package io.spring.site.web.blog.feed;
 
-import io.spring.site.domain.blog.BlogService;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostBuilder;
-import io.spring.site.domain.blog.PostCategory;
+import sagan.blog.BlogService;
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import sagan.blog.PostCategory;
 import io.spring.site.web.PageableFactory;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.ui.ExtendedModelMap;
 
-import static io.spring.site.domain.blog.PostCategory.*;
+import static sagan.blog.PostCategory.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

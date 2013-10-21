@@ -1,8 +1,8 @@
 package io.spring.site.web.blog;
 
-import io.spring.site.domain.blog.BlogService;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostCategory;
+import sagan.blog.BlogService;
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
 import io.spring.site.domain.team.MemberProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;

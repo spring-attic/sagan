@@ -2,8 +2,7 @@ package io.spring.site.web.blog;
 
 import org.junit.Test;
 
-import io.spring.site.domain.blog.PostCategory;
-import io.spring.site.web.blog.PostCategoryFormatter;
+import sagan.blog.PostCategory;
 
 import java.text.ParseException;
 

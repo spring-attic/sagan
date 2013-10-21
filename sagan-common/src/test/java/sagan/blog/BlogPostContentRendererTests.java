@@ -1,4 +1,4 @@
-package io.spring.site.domain.blog;
+package sagan.blog;
 
 import io.spring.site.domain.services.MarkdownService;
 
@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import sagan.blog.BlogPostContentRenderer;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

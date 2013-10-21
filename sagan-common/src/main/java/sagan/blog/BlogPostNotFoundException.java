@@ -1,4 +1,4 @@
-package io.spring.site.domain.blog;
+package sagan.blog;
 
 @SuppressWarnings("serial")
 public class BlogPostNotFoundException extends RuntimeException {

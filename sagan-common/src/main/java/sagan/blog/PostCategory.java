@@ -1,4 +1,4 @@
-package io.spring.site.domain.blog;
+package sagan.blog;
 
 public enum PostCategory {
 

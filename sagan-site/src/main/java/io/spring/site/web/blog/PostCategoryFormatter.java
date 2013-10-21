@@ -3,7 +3,7 @@ package io.spring.site.web.blog;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 
-import io.spring.site.domain.blog.PostCategory;
+import sagan.blog.PostCategory;
 
 import java.text.ParseException;
 import java.util.HashMap;

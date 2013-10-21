@@ -14,11 +14,11 @@ import org.springframework.ui.ExtendedModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.validation.MapBindingResult;
 
-import io.spring.site.domain.blog.BlogService;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostBuilder;
-import io.spring.site.domain.blog.PostCategory;
-import io.spring.site.domain.blog.PostForm;
+import sagan.blog.BlogService;
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import sagan.blog.PostCategory;
+import sagan.blog.PostForm;
 import io.spring.site.domain.services.DateService;
 import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.domain.team.TeamRepository;

@@ -1,4 +1,4 @@
-package io.spring.site.domain.blog;
+package sagan.blog;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

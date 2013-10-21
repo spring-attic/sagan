@@ -1,9 +1,9 @@
 package integration.indexer;
 
 import integration.IndexerIntegrationTestBase;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostCategory;
-import io.spring.site.domain.blog.PostRepository;
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
+import sagan.blog.PostRepository;
 import io.spring.site.indexer.PublishedBlogPostsIndexer;
 import io.spring.site.search.SearchEntry;
 import io.spring.site.search.SearchService;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
-import io.spring.site.domain.blog.PostBuilder;
+import sagan.blog.PostBuilder;
 
 import java.util.Calendar;
 import java.util.Date;

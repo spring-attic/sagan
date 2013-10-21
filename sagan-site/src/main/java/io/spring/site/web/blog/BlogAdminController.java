@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestClientException;
 
-import io.spring.site.domain.blog.BlogService;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostCategory;
-import io.spring.site.domain.blog.PostForm;
+import sagan.blog.BlogService;
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
+import sagan.blog.PostForm;
 import io.spring.site.domain.team.MemberProfile;
 import io.spring.site.domain.team.TeamRepository;
 import io.spring.site.web.PageableFactory;

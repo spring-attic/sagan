@@ -1,6 +1,6 @@
 package io.spring.site.web.blog.feed;
 
-import io.spring.site.domain.blog.Post;
+import sagan.blog.Post;
 import io.spring.site.domain.services.DateService;
 import io.spring.site.web.SiteUrl;
 import io.spring.site.web.blog.PostView;

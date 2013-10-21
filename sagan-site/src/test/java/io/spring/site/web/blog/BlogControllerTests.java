@@ -1,6 +1,6 @@
 package io.spring.site.web.blog;
 
-import io.spring.site.domain.blog.Post;
+import sagan.blog.Post;
 import io.spring.site.domain.services.DateService;
 import org.junit.Before;
 import org.junit.Test;

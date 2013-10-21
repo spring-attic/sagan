@@ -1,4 +1,4 @@
-package io.spring.site.domain.blog;
+package sagan.blog;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import sagan.blog.*;
 import sagan.util.DateTestUtils;
 
 import io.spring.site.domain.services.DateService;

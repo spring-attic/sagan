@@ -1,7 +1,7 @@
 package io.spring.site.web.blog;
 
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostCategory;
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
 import io.spring.site.web.NavSection;
 import io.spring.site.web.PageableFactory;
 import io.spring.site.web.PaginationInfo;

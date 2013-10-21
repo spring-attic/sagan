@@ -1,7 +1,7 @@
 package io.spring.site.web.configuration;
 
 import io.spring.site.domain.StaticPagePathFinder;
-import io.spring.site.domain.blog.BlogPostNotFoundException;
+import sagan.blog.BlogPostNotFoundException;
 import io.spring.site.web.NavSection;
 import io.spring.site.web.ViewRenderingHelper;
 

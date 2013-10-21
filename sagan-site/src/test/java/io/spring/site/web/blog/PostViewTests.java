@@ -7,8 +7,8 @@ import org.mockito.MockitoAnnotations;
 
 import sagan.util.DateTestUtils;
 
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostBuilder;
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
 import io.spring.site.domain.services.DateService;
 
 import java.text.ParseException;
