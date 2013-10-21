@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import sagan.app.indexer.CrawlerService;
+import sagan.util.index.CrawlerService;
 import sagan.staticpage.service.index.LocalStaticPagesSearchEntryMapper;
 import sagan.search.service.SearchService;
 

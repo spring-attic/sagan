@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import sagan.util.web.StaticPagePathFinder;
-import sagan.app.indexer.CrawlerService;
+import sagan.util.index.CrawlerService;
 import sagan.search.service.SearchService;
 
 import java.io.IOException;

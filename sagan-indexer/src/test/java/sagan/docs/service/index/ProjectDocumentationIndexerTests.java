@@ -4,7 +4,7 @@ import sagan.util.index.CrawledWebDocumentProcessor;
 import sagan.projects.Project;
 import sagan.projects.service.ProjectMetadataService;
 import sagan.projects.ProjectRelease;
-import sagan.app.indexer.CrawlerService;
+import sagan.util.index.CrawlerService;
 import sagan.search.service.SearchService;
 import org.junit.Test;
 

@@ -8,7 +8,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import sagan.util.web.StaticPagePathFinder;
-import sagan.app.indexer.CrawlerService;
+import sagan.util.index.CrawlerService;
 import sagan.search.service.SearchService;
 
 import java.io.IOException;

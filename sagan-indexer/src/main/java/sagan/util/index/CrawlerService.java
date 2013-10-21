@@ -1,4 +1,4 @@
-package sagan.app.indexer;
+package sagan.util.index;
 
 import java.util.HashSet;
 import java.util.Map;
