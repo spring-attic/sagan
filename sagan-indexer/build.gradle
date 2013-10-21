@@ -5,6 +5,10 @@ apply from: '../gradle/deploy.gradle'
 
 mainClassName = 'sagan.app.indexer.ApplicationConfiguration'
 
+run {
+    systemProperties System.properties
+}
+
 springBoot {
     backupSource = false
     mainClass = mainClassName
