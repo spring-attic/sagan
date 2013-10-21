@@ -1,13 +1,13 @@
 package examples.search;
 
-import io.spring.site.domain.guides.Guide;
-import io.spring.site.domain.guides.GuidesService;
+import sagan.guides.Guide;
+import sagan.guides.service.GuidesService;
 import io.spring.site.indexer.configuration.IndexerConfiguration;
 import io.spring.site.indexer.mapper.GuideSearchEntryMapper;
 import io.spring.site.indexer.mapper.WebDocumentSearchEntryMapper;
-import io.spring.site.search.SearchEntry;
-import io.spring.site.search.SearchResult;
-import io.spring.site.search.SearchService;
+import sagan.search.SearchEntry;
+import sagan.search.SearchResult;
+import sagan.search.service.SearchService;
 import org.jsoup.nodes.Document;
 import org.junit.After;
 import org.junit.ClassRule;
@@ -26,7 +26,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import sagan.util.LongRunning;
-import io.spring.site.search.SearchEntryBuilder;
+import sagan.search.SearchEntryBuilder;
 import sagan.util.SetSystemProperty;
 
 import java.text.ParseException;

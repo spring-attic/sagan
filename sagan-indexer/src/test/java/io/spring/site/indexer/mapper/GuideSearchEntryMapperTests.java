@@ -1,8 +1,7 @@
 package io.spring.site.indexer.mapper;
 
-import io.spring.site.domain.guides.Guide;
-import io.spring.site.indexer.mapper.GuideSearchEntryMapper;
-import io.spring.site.search.SearchEntry;
+import sagan.guides.Guide;
+import sagan.search.SearchEntry;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,9 +1,9 @@
 package io.spring.site.indexer;
 
 import io.spring.site.indexer.crawler.DocumentProcessor;
-import io.spring.site.search.SearchEntry;
-import io.spring.site.search.SearchEntryMapper;
-import io.spring.site.search.SearchService;
+import sagan.search.SearchEntry;
+import sagan.search.SearchEntryMapper;
+import sagan.search.service.SearchService;
 
 import org.jsoup.nodes.Document;
 

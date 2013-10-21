@@ -3,9 +3,9 @@ package integration.blog;
 import integration.IntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.blog.PostRepository;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.domain.team.TeamRepository;
+import sagan.blog.service.PostRepository;
+import sagan.team.MemberProfile;
+import sagan.team.service.TeamRepository;
 
 import org.junit.After;
 import org.junit.Before;

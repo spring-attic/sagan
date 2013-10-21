@@ -2,9 +2,9 @@ package io.spring.site.indexer.mapper;
 
 import org.jsoup.Jsoup;
 
-import io.spring.site.domain.understanding.UnderstandingGuide;
-import io.spring.site.search.SearchEntry;
-import io.spring.site.search.SearchEntryMapper;
+import sagan.guides.UnderstandingGuide;
+import sagan.search.SearchEntry;
+import sagan.search.SearchEntryMapper;
 
 import java.util.Date;
 

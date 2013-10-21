@@ -1,10 +1,10 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
-import io.spring.site.domain.services.DateService;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.search.SearchService;
-import io.spring.site.web.PageableFactory;
+import sagan.util.service.DateService;
+import sagan.team.MemberProfile;
+import sagan.search.service.SearchService;
+import sagan.util.web.PageableFactory;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,6 +16,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import sagan.blog.PostBuilder;
 import sagan.blog.*;
+import sagan.blog.service.BlogService;
+import sagan.blog.service.PostFormAdapter;
+import sagan.blog.service.PostRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

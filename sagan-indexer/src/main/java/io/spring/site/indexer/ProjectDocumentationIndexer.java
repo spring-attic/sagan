@@ -5,13 +5,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.spring.site.domain.projects.Project;
-import io.spring.site.domain.projects.ProjectMetadataService;
-import io.spring.site.domain.projects.ProjectRelease;
+import sagan.projects.Project;
+import sagan.projects.service.ProjectMetadataService;
+import sagan.projects.ProjectRelease;
 import io.spring.site.indexer.crawler.CrawlerService;
 import io.spring.site.indexer.mapper.ApiDocumentMapper;
 import io.spring.site.indexer.mapper.ReferenceDocumentSearchEntryMapper;
-import io.spring.site.search.SearchService;
+import sagan.search.service.SearchService;
 
 import java.util.ArrayList;
 import java.util.List;

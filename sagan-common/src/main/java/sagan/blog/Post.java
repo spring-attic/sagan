@@ -3,7 +3,7 @@ package sagan.blog;
 import org.hibernate.annotations.Type;
 import org.springframework.util.StringUtils;
 
-import io.spring.site.domain.team.MemberProfile;
+import sagan.team.MemberProfile;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -1,17 +1,17 @@
 package io.spring.site.indexer;
 
-import io.spring.site.domain.projects.Project;
-import io.spring.site.domain.projects.ProjectMetadataService;
-import io.spring.site.domain.projects.ProjectRelease;
+import sagan.projects.Project;
+import sagan.projects.service.ProjectMetadataService;
+import sagan.projects.ProjectRelease;
 import io.spring.site.indexer.crawler.CrawlerService;
-import io.spring.site.search.SearchService;
+import sagan.search.service.SearchService;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
-import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.SNAPSHOT;
+import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
+import static sagan.projects.ProjectRelease.ReleaseStatus.SNAPSHOT;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;

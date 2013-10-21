@@ -1,11 +1,11 @@
 package io.spring.site.indexer.configuration;
 
-import io.spring.common.config.DatabaseConfig;
-import io.spring.common.config.GitHubConfiguration;
-import io.spring.site.search.SearchClientConfiguration;
-import io.spring.site.domain.StaticPagePathFinder;
-import io.spring.site.domain.projects.ProjectMetadataService;
-import io.spring.site.domain.projects.ProjectMetadataYamlParser;
+import sagan.util.service.db.DatabaseConfig;
+import sagan.util.service.github.GitHubConfiguration;
+import sagan.search.SearchClientConfiguration;
+import sagan.util.web.StaticPagePathFinder;
+import sagan.projects.service.ProjectMetadataService;
+import sagan.projects.service.ProjectMetadataYamlParser;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.springframework.beans.factory.annotation.Value;

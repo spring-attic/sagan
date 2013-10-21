@@ -1,20 +1,20 @@
 package io.spring.site.indexer;
 
-import io.spring.site.domain.projects.ProjectReleaseBuilder;
+import sagan.projects.ProjectReleaseBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 
-import io.spring.site.domain.projects.Project;
-import io.spring.site.domain.projects.ProjectRelease;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
 import io.spring.site.indexer.mapper.ApiDocumentMapper;
-import io.spring.site.search.SearchEntry;
+import sagan.search.SearchEntry;
 
 import java.io.InputStream;
 import java.util.Collections;
 
-import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
+import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 

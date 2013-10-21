@@ -1,6 +1,6 @@
 package integration.rewrite;
 
-import io.spring.site.web.configuration.ApplicationConfiguration;
+import app.site.ApplicationConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;

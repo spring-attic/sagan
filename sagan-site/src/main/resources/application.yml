@@ -18,7 +18,7 @@ info:
 
 spring:
   main:
-    sources: io.spring.site.web.configuration.ApplicationConfiguration
+    sources: app.site.ApplicationConfiguration
   thymeleaf:
     mode: LEGACYHTML5
     cache: false

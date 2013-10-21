@@ -1,19 +1,18 @@
 package io.spring.site.indexer.mapper;
 
-import io.spring.site.domain.projects.ProjectReleaseBuilder;
-import io.spring.site.indexer.mapper.ReferenceDocumentSearchEntryMapper;
+import sagan.projects.ProjectReleaseBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.spring.site.domain.projects.Project;
-import io.spring.site.domain.projects.ProjectRelease;
-import io.spring.site.search.SearchEntry;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.search.SearchEntry;
 
 import java.util.Collections;
 
-import static io.spring.site.domain.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
+import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;

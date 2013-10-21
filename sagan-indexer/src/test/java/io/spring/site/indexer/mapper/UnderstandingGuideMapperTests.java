@@ -1,7 +1,7 @@
 package io.spring.site.indexer.mapper;
 
-import io.spring.site.domain.understanding.UnderstandingGuide;
-import io.spring.site.search.SearchEntry;
+import sagan.guides.UnderstandingGuide;
+import sagan.search.SearchEntry;
 
 import java.util.Date;
 

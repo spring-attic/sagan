@@ -3,7 +3,7 @@ package integration.blog;
 import integration.IntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.blog.PostRepository;
+import sagan.blog.service.PostRepository;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

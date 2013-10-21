@@ -3,10 +3,10 @@ package io.spring.site.indexer.mapper;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import io.spring.site.domain.projects.Project;
-import io.spring.site.domain.projects.ProjectRelease;
-import io.spring.site.search.SearchEntry;
-import io.spring.site.search.SearchEntryMapper;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.search.SearchEntry;
+import sagan.search.SearchEntryMapper;
 
 import java.util.Date;
 

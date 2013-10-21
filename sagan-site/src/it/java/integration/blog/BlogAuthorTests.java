@@ -3,10 +3,10 @@ package integration.blog;
 import integration.IntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.blog.PostRepository;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.domain.team.MemberProfileBuilder;
-import io.spring.site.domain.team.TeamRepository;
+import sagan.blog.service.PostRepository;
+import sagan.team.MemberProfile;
+import sagan.team.MemberProfileBuilder;
+import sagan.team.service.TeamRepository;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

@@ -2,14 +2,14 @@ package examples.indexer;
 
 import com.google.common.collect.Iterables;
 import io.searchbox.client.JestClient;
-import io.spring.site.domain.guides.Guide;
-import io.spring.site.domain.understanding.UnderstandingGuide;
+import sagan.guides.Guide;
+import sagan.guides.UnderstandingGuide;
 import io.spring.site.indexer.GettingStartedGuideIndexer;
 import io.spring.site.indexer.UnderstandingGuideIndexer;
 import io.spring.site.indexer.configuration.IndexerConfiguration;
-import io.spring.site.search.SearchResult;
-import io.spring.site.search.SearchResults;
-import io.spring.site.search.SearchService;
+import sagan.search.SearchResult;
+import sagan.search.SearchResults;
+import sagan.search.service.SearchService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -25,7 +25,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import sagan.util.LongRunning;
-import io.spring.site.search.SearchIndexSetup;
+import sagan.search.SearchIndexSetup;
 import sagan.util.SetSystemProperty;
 
 import java.util.List;

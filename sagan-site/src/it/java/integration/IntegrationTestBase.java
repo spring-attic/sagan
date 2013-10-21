@@ -2,7 +2,7 @@ package integration;
 
 import integration.configuration.IntegrationTestsConfiguration;
 import integration.stubs.StubGithubRestClient;
-import io.spring.site.search.InMemoryElasticSearchConfiguration;
+import sagan.search.service.InMemoryElasticSearchConfiguration;
 
 import org.junit.After;
 import org.junit.Before;

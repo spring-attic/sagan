@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import io.spring.site.domain.StaticPagePathFinder;
+import sagan.util.web.StaticPagePathFinder;
 import io.spring.site.indexer.crawler.CrawlerService;
 import io.spring.site.indexer.mapper.LocalStaticPagesSearchEntryMapper;
-import io.spring.site.search.SearchService;
+import sagan.search.service.SearchService;
 
 import java.io.IOException;
 import java.util.ArrayList;

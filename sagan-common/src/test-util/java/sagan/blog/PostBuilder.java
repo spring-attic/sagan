@@ -1,6 +1,6 @@
 package sagan.blog;
 
-import io.spring.site.domain.team.MemberProfile;
+import sagan.team.MemberProfile;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import io.spring.site.indexer.crawler.CrawlerService;
 import io.spring.site.indexer.mapper.LocalStaticPagesSearchEntryMapper;
-import io.spring.site.search.SearchService;
+import sagan.search.service.SearchService;
 
 import java.util.ArrayList;
 

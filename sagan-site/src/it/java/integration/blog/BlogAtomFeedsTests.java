@@ -4,8 +4,8 @@ import integration.IntegrationTestBase;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.blog.PostRepository;
-import io.spring.site.web.SiteUrl;
+import sagan.blog.service.PostRepository;
+import sagan.util.web.SiteUrl;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

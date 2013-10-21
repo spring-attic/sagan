@@ -7,10 +7,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import io.spring.site.domain.StaticPagePathFinder;
-import io.spring.site.indexer.StaticPageIndexer;
+import sagan.util.web.StaticPagePathFinder;
 import io.spring.site.indexer.crawler.CrawlerService;
-import io.spring.site.search.SearchService;
+import sagan.search.service.SearchService;
 
 import java.io.IOException;
 import java.util.Arrays;

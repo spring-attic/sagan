@@ -1,9 +1,9 @@
 package io.spring.site.indexer;
 
-import io.spring.site.domain.guides.Guide;
-import io.spring.site.domain.guides.GuidesService;
+import sagan.guides.Guide;
+import sagan.guides.service.GuidesService;
 import io.spring.site.indexer.mapper.TutorialMapper;
-import io.spring.site.search.SearchService;
+import sagan.search.service.SearchService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

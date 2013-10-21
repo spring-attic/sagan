@@ -1,7 +1,7 @@
 package integration.caching;
 
 import integration.caching.NetworkCachingStrategyTests.TestConfiguration;
-import io.spring.site.web.configuration.ApplicationConfiguration;
+import app.site.ApplicationConfiguration;
 
 import org.junit.After;
 import org.junit.Before;

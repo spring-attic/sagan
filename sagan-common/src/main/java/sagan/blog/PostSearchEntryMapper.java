@@ -1,7 +1,7 @@
 package sagan.blog;
 
-import io.spring.site.search.SearchEntry;
-import io.spring.site.search.SearchEntryMapper;
+import sagan.search.SearchEntry;
+import sagan.search.SearchEntryMapper;
 
 import org.jsoup.Jsoup;
 

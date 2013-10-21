@@ -2,12 +2,12 @@ package integration.search;
 
 import integration.IntegrationTestBase;
 import io.searchbox.client.JestClient;
-import io.spring.site.search.SearchEntry;
-import io.spring.site.search.SearchFacet;
-import io.spring.site.search.SearchResult;
-import io.spring.site.search.SearchResults;
-import io.spring.site.search.SearchService;
-import io.spring.site.search.SearchEntryBuilder;
+import sagan.search.SearchEntry;
+import sagan.search.SearchFacet;
+import sagan.search.SearchResult;
+import sagan.search.SearchResults;
+import sagan.search.service.SearchService;
+import sagan.search.SearchEntryBuilder;
 
 import org.junit.After;
 import org.junit.Before;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import io.spring.site.search.SearchIndexSetup;
+import sagan.search.SearchIndexSetup;
 
 import java.text.ParseException;
 import java.util.ArrayList;

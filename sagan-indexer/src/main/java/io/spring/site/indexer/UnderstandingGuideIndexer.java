@@ -1,10 +1,10 @@
 package io.spring.site.indexer;
 
-import io.spring.site.domain.understanding.UnderstandingGuide;
-import io.spring.site.domain.understanding.UnderstandingGuidesService;
+import sagan.guides.UnderstandingGuide;
+import sagan.guides.service.UnderstandingGuidesService;
 import io.spring.site.indexer.mapper.UnderstandingGuideMapper;
-import io.spring.site.search.SearchEntry;
-import io.spring.site.search.SearchService;
+import sagan.search.SearchEntry;
+import sagan.search.service.SearchService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

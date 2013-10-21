@@ -1,14 +1,14 @@
 package integration.caching;
 
 import integration.IntegrationTestBase;
-import sagan.blog.BlogService;
+import sagan.blog.service.BlogService;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.domain.team.MemberProfileBuilder;
-import io.spring.site.domain.team.TeamService;
-import io.spring.site.web.PageableFactory;
-import io.spring.site.web.blog.PostViewFactory;
+import sagan.team.MemberProfile;
+import sagan.team.MemberProfileBuilder;
+import sagan.team.service.TeamService;
+import sagan.util.web.PageableFactory;
+import sagan.blog.view.PostViewFactory;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
