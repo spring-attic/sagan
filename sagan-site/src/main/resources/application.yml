@@ -17,6 +17,8 @@ info:
     start: ${vcap.application.start:N/A}
 
 spring:
+  main:
+    sources: sagan.app.site.ApplicationConfiguration
   thymeleaf:
     mode: LEGACYHTML5
     cache: false
@@ -45,15 +47,10 @@ security:
   user:
     password: ${ADMIN_PASSWORD:}
 
-github:
-  client:
-    id: fb06c006c2ed62fe9e8b
-    secret: 164264e3f6d70c7c21713b7fa64225cb8d6107b2
-
 elasticsearch:
   client:
     endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
-    index: sagan-local
+    index: ${ELASTICSEARCH_INDEX:sagan}
 
 server:
     tomcat:
@@ -67,26 +64,7 @@ server:
 ---
 
 spring:
-  profiles: site,default
-  main:
-    sources: io.spring.site.web.configuration.ApplicationConfiguration
-
----
-
-spring:
-  profiles: indexer
-  main:
-    sources: io.spring.site.indexer.configuration.IndexerConfiguration
-search:
-  indexer:
-    delay: 0
-server:
-  port: 9000
-
----
-
-spring:
-  profiles: development,staging,performance,production
+  profiles: development,staging,production
 security:
   require_ssl: true
 
@@ -94,47 +72,8 @@ security:
 
 spring:
   profiles: development
-search:
-  indexer:
-    base_url: https://sagan-development.cfapps.io
-elasticsearch:
-  client:
-    index: sagan-development
 cache:
   timetolive: 0
-
----
-
-spring:
-  profiles: performance
-search:
-  indexer:
-    base_url: https://sagan-performance.cfapps.io
-elasticsearch:
-  client:
-    index: sagan-performance
-
----
-
-spring:
-  profiles: staging
-search:
-  indexer:
-    base_url: https://sagan-staging.cfapps.io
-elasticsearch:
-  client:
-    index: sagan-staging
-
----
-
-spring:
-  profiles: production
-search:
-  indexer:
-    base_url: https://sagan-production.cfapps.io
-elasticsearch:
-  client:
-    index: sagan-production
 
 ---
 

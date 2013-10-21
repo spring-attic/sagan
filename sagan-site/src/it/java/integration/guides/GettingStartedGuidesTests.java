@@ -7,7 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MvcResult;
-import utils.FixtureLoader;
+import sagan.util.FixtureLoader;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;

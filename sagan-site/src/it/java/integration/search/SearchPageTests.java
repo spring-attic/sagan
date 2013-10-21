@@ -1,9 +1,9 @@
 package integration.search;
 
 import integration.IntegrationTestBase;
-import io.spring.site.search.SearchEntry;
-import io.spring.site.search.SearchService;
-import utils.SearchEntryBuilder;
+import sagan.search.SearchEntry;
+import sagan.search.service.SearchService;
+import sagan.search.SearchEntryBuilder;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

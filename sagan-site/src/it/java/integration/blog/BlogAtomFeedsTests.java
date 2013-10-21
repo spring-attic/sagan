@@ -1,11 +1,11 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
-import io.spring.site.domain.blog.Post;
-import utils.PostBuilder;
-import io.spring.site.domain.blog.PostCategory;
-import io.spring.site.domain.blog.PostRepository;
-import io.spring.site.web.SiteUrl;
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import sagan.blog.PostCategory;
+import sagan.blog.service.PostRepository;
+import sagan.util.web.SiteUrl;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

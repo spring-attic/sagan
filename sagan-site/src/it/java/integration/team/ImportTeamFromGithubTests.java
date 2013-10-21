@@ -2,9 +2,9 @@ package integration.team;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import integration.IntegrationTestBase;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.domain.team.TeamImporter;
-import io.spring.site.domain.team.TeamRepository;
+import sagan.team.MemberProfile;
+import sagan.team.service.TeamImporter;
+import sagan.team.service.TeamRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.GitHubUser;
 import org.springframework.web.client.RestOperations;
-import utils.FixtureLoader;
+import sagan.util.FixtureLoader;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

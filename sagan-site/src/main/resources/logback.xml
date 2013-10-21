@@ -16,7 +16,7 @@
     <!-- log high-level information about application startup time, whether from
          Boot's main class or the site's main class. The former is in play when
          running with `java -jar`; the latter when running from within the IDE -->
-    <logger level="INFO" name="io.spring.site.web.configuration.ApplicationConfiguration"/>
+    <logger level="INFO" name="sagan.app.site.ApplicationConfiguration"/>
     <logger level="INFO" name="org.springframework.boot.SpringApplication"/>
 
     <!-- log generated password for admin endpoints -->

@@ -2,14 +2,14 @@ package examples.indexer;
 
 import com.google.common.collect.Iterables;
 import io.searchbox.client.JestClient;
-import io.spring.site.domain.guides.Guide;
-import io.spring.site.domain.understanding.UnderstandingGuide;
-import io.spring.site.indexer.GettingStartedGuideIndexer;
-import io.spring.site.indexer.UnderstandingGuideIndexer;
-import io.spring.site.indexer.configuration.IndexerConfiguration;
-import io.spring.site.search.SearchResult;
-import io.spring.site.search.SearchResults;
-import io.spring.site.search.SearchService;
+import sagan.guides.Guide;
+import sagan.guides.UnderstandingGuide;
+import sagan.guides.service.index.GettingStartedGuideIndexer;
+import sagan.guides.service.index.UnderstandingGuideIndexer;
+import sagan.app.indexer.config.ApplicationConfiguration;
+import sagan.search.SearchResult;
+import sagan.search.SearchResults;
+import sagan.search.service.SearchService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -24,9 +24,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import utils.LongRunning;
-import utils.SearchIndexSetup;
-import utils.SetSystemProperty;
+import sagan.util.LongRunning;
+import sagan.search.SearchIndexSetup;
+import sagan.util.SetSystemProperty;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { IndexerConfiguration.class}, initializers = {
+@ContextConfiguration(classes = { ApplicationConfiguration.class}, initializers = {
         ConfigFileApplicationContextInitializer.class,
         LoggingApplicationContextInitializer.class })
 @DirtiesContext

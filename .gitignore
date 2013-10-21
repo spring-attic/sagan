@@ -28,8 +28,13 @@ work/
 # IDEA
 .idea
 *.iml
+*.ipr
+*.iws
 out
 
 # Gradle
 .gradle
 /build
+
+# Structure101
+sagan.java.hsp

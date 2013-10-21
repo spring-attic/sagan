@@ -1,13 +1,12 @@
 package examples.search;
 
-import io.spring.site.domain.guides.Guide;
-import io.spring.site.domain.guides.GuidesService;
-import io.spring.site.indexer.configuration.IndexerConfiguration;
-import io.spring.site.indexer.mapper.GuideSearchEntryMapper;
-import io.spring.site.indexer.mapper.WebDocumentSearchEntryMapper;
-import io.spring.site.search.SearchEntry;
-import io.spring.site.search.SearchResult;
-import io.spring.site.search.SearchService;
+import sagan.guides.Guide;
+import sagan.guides.service.GuidesService;
+import sagan.app.indexer.config.ApplicationConfiguration;
+import sagan.guides.service.index.GuideSearchEntryMapper;
+import sagan.search.SearchEntry;
+import sagan.search.SearchResult;
+import sagan.search.service.SearchService;
 import org.jsoup.nodes.Document;
 import org.junit.After;
 import org.junit.ClassRule;
@@ -25,9 +24,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import utils.LongRunning;
-import utils.SearchEntryBuilder;
-import utils.SetSystemProperty;
+import sagan.util.LongRunning;
+import sagan.search.SearchEntryBuilder;
+import sagan.util.SetSystemProperty;
 
 import java.text.ParseException;
 import java.util.Collections;
@@ -38,7 +37,7 @@ import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = IndexerConfiguration.class, initializers = {
+@ContextConfiguration(classes = ApplicationConfiguration.class, initializers = {
         ConfigFileApplicationContextInitializer.class,
         LoggingApplicationContextInitializer.class })
 @ActiveProfiles("integration-test")

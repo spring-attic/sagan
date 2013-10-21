@@ -1,11 +1,11 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostCategory;
-import io.spring.site.domain.blog.PostRepository;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.domain.team.TeamRepository;
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
+import sagan.blog.service.PostRepository;
+import sagan.team.MemberProfile;
+import sagan.team.service.TeamRepository;
 
 import org.junit.After;
 import org.junit.Before;

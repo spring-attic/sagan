@@ -1,8 +1,8 @@
 package integration.team;
 
 import integration.IntegrationTestBase;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.domain.team.TeamService;
+import sagan.team.MemberProfile;
+import sagan.team.service.TeamService;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

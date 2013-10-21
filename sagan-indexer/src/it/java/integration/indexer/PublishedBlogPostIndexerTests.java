@@ -1,12 +1,12 @@
 package integration.indexer;
 
 import integration.IndexerIntegrationTestBase;
-import io.spring.site.domain.blog.Post;
-import io.spring.site.domain.blog.PostCategory;
-import io.spring.site.domain.blog.PostRepository;
-import io.spring.site.indexer.PublishedBlogPostsIndexer;
-import io.spring.site.search.SearchEntry;
-import io.spring.site.search.SearchService;
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
+import sagan.blog.service.PostRepository;
+import sagan.blog.service.index.PublishedBlogPostsIndexer;
+import sagan.search.SearchEntry;
+import sagan.search.service.SearchService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
-import utils.PostBuilder;
+import sagan.blog.PostBuilder;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -90,37 +90,37 @@ public class PublishedBlogPostIndexerTests extends IndexerIntegrationTestBase{
 
     @Test
     public void indexedEntriesHaveATitle() throws Exception {
-        assertThat(this.indexedEntry.getTitle(), equalTo("Spring is here"));
+        assertThat(indexedEntry.getTitle(), equalTo("Spring is here"));
     }
 
     @Test
     public void indexedEntriesRawContentDoesNotIncludeMarkdownOrHtml() throws Exception {
-        assertThat(this.indexedEntry.getRawContent(), equalTo("Welcome spring!"));
+        assertThat(indexedEntry.getRawContent(), equalTo("Welcome spring!"));
     }
 
     @Test
     public void indexedEntriesFacetPathsContainTheCategory() throws Exception {
-        assertThat(this.indexedEntry.getFacetPaths(), containsInAnyOrder("Blog", "Blog/Releases"));
+        assertThat(indexedEntry.getFacetPaths(), containsInAnyOrder("Blog", "Blog/Releases"));
     }
 
     @Test
     public void indexedEntriesSummaryDoesNotIncludeMarkdownOrHtml() throws Exception {
-        assertThat(this.indexedEntry.getSummary(), equalTo("Welcome"));
+        assertThat(indexedEntry.getSummary(), equalTo("Welcome"));
     }
 
     @Test
     public void indexedEntriesHaveASubtitle() throws Exception {
-        assertThat(this.indexedEntry.getSubTitle(), equalTo("Blog Post"));
+        assertThat(indexedEntry.getSubTitle(), equalTo("Blog Post"));
     }
 
     @Test
     public void indexedEntriesHaveThePostPath() throws Exception {
-        assertThat(this.indexedEntry.getPath(), equalTo("/blog/" + post.getPublicSlug()));
+        assertThat(indexedEntry.getPath(), equalTo("/blog/" + post.getPublicSlug()));
     }
 
     @Test
     public void indexedEntriesHaveThePublishedAtDate() throws Exception {
-        assertThat(this.indexedEntry.getPublishAt(), equalTo(publishedDate));
+        assertThat(indexedEntry.getPublishAt(), equalTo(publishedDate));
     }
 
 }

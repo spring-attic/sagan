@@ -1,6 +1,6 @@
 package integration.stubs;
 
-import io.spring.site.domain.services.github.GitHubRestClient;
+import sagan.util.service.github.GitHubRestClient;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

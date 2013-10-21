@@ -1,9 +1,9 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
-import io.spring.site.domain.blog.Post;
-import utils.PostBuilder;
-import io.spring.site.domain.blog.PostRepository;
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import sagan.blog.service.PostRepository;
 
 import org.junit.After;
 import org.junit.Before;

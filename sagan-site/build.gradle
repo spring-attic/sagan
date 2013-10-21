@@ -1,8 +1,13 @@
 apply plugin: 'spring-boot'
 apply plugin: 'application'
-apply from: "${rootProject.projectDir}/gradle/integTest.gradle"
+apply from: '../gradle/integTest.gradle'
+apply from: '../gradle/deploy.gradle'
 
-mainClassName = 'io.spring.site.web.configuration.ApplicationConfiguration'
+mainClassName = 'sagan.app.site.ApplicationConfiguration'
+
+run {
+    systemProperties System.properties
+}
 
 springBoot {
     backupSource = false
@@ -43,5 +48,6 @@ dependencies {
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test:${vSpringCore}"
 
-    testCompile project(':sagan-common').sourceSets.util.output
+    // pick up common test utility classes
+    testCompile project(':sagan-common').sourceSets.testUtil.output
 }

@@ -1,11 +1,10 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
-import io.spring.site.domain.blog.*;
-import io.spring.site.domain.services.DateService;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.search.SearchService;
-import io.spring.site.web.PageableFactory;
+import sagan.util.service.DateService;
+import sagan.team.MemberProfile;
+import sagan.search.service.SearchService;
+import sagan.util.web.PageableFactory;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,7 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import utils.PostBuilder;
+import sagan.blog.PostBuilder;
+import sagan.blog.*;
+import sagan.blog.service.BlogService;
+import sagan.blog.service.PostFormAdapter;
+import sagan.blog.service.PostRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,9 +26,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static io.spring.site.domain.blog.PostCategory.ENGINEERING;
-import static io.spring.site.domain.blog.PostCategory.NEWS_AND_EVENTS;
-import static io.spring.site.domain.blog.PostCategory.RELEASES;
+import static sagan.blog.PostCategory.ENGINEERING;
+import static sagan.blog.PostCategory.NEWS_AND_EVENTS;
+import static sagan.blog.PostCategory.RELEASES;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;

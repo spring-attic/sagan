@@ -1,14 +1,14 @@
 package integration.caching;
 
 import integration.IntegrationTestBase;
-import io.spring.site.domain.blog.BlogService;
-import io.spring.site.domain.blog.Post;
-import utils.PostBuilder;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.domain.team.MemberProfileBuilder;
-import io.spring.site.domain.team.TeamService;
-import io.spring.site.web.PageableFactory;
-import io.spring.site.web.blog.PostViewFactory;
+import sagan.blog.service.BlogService;
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import sagan.team.MemberProfile;
+import sagan.team.MemberProfileBuilder;
+import sagan.team.service.TeamService;
+import sagan.util.web.PageableFactory;
+import sagan.blog.view.PostViewFactory;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import utils.SetSystemProperty;
+import sagan.util.SetSystemProperty;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,8 +1,13 @@
 apply plugin: 'spring-boot'
 apply plugin: 'application'
-apply from: "${rootProject.projectDir}/gradle/integTest.gradle"
+apply from: '../gradle/integTest.gradle'
+apply from: '../gradle/deploy.gradle'
 
-mainClassName = 'io.spring.site.indexer.configuration.IndexerConfiguration'
+mainClassName = 'sagan.app.indexer.ApplicationConfiguration'
+
+run {
+    systemProperties System.properties
+}
 
 springBoot {
     backupSource = false
@@ -26,15 +31,29 @@ dependencies {
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test:${vSpringCore}"
 
-    testCompile project(':sagan-common').sourceSets.util.output
+    // pick up common test utility classes
+    testCompile project(':sagan-common').sourceSets.testUtil.output
 }
 
+
 task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processResources) {
-    description = "Copies static html templates from :sagan-site in order to index them"
+    description = "Copies static html templates from :sagan-site in order to index them at runtime."
 
     from project(':sagan-site').sourceSets.main.output.resourcesDir
     into sourceSets.main.output.resourcesDir
     include "templates/pages/**/*"
 }
-
 processResources.dependsOn copyStaticTemplates
+
+
+// Ensure that site tasks have execution priority over indexer tasks, as it is
+// desirable to identify problems with the site as quickly as possible
+gradle.projectsEvaluated {
+    tasks.each { indexerTask ->
+        def siteTask = project(':sagan-site').tasks.findByPath(indexerTask.name)
+        if (siteTask != null) {
+            indexerTask.mustRunAfter siteTask
+        }
+    }
+}
+

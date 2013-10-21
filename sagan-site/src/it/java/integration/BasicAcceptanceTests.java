@@ -23,7 +23,7 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
-import utils.FreePortFinder;
+import sagan.util.FreePortFinder;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -53,7 +53,7 @@ public class BasicAcceptanceTests {
                                 return (ConfigurableApplicationContext) SpringApplication
                                         .run(IntegrationTestsConfiguration.class,
                                                 "--server.port=" + port,
-                                                "--spring.profiles.active=site,acceptance");
+                                                "--spring.profiles.active=acceptance");
                             }
                         });
         context = future.get(30, TimeUnit.SECONDS);

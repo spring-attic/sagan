@@ -1,6 +1,6 @@
 package integration;
 
-import io.spring.site.indexer.configuration.IndexerConfiguration;
+import sagan.app.indexer.config.ApplicationConfiguration;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import utils.SetSystemProperty;
+import sagan.util.SetSystemProperty;
 
 import static integration.IndexerIntegrationTestBase.TestConfiguration;
 
@@ -25,7 +25,7 @@ public abstract class IndexerIntegrationTestBase {
     public static SetSystemProperty delay = new SetSystemProperty("search.indexer.delay", "60000000");
 
     @Configuration
-    @Import({IndexerConfiguration.class})
+    @Import({ApplicationConfiguration.class})
     public static class TestConfiguration {
 
     }

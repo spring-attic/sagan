@@ -2,9 +2,9 @@ package examples.services;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import io.spring.site.domain.services.github.GitHubService;
-import io.spring.site.domain.services.github.RepoContent;
-import io.spring.site.web.configuration.ApplicationConfiguration;
+import sagan.util.service.github.GitHubService;
+import sagan.util.service.github.RepoContent;
+import sagan.app.site.ApplicationConfiguration;
 import org.jsoup.Jsoup;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import utils.LongRunning;
+import sagan.util.LongRunning;
 
 import java.util.Arrays;
 import java.util.Collection;

@@ -1,8 +1,8 @@
 package integration.team;
 
 import integration.IntegrationTestBase;
-import io.spring.site.domain.team.MemberProfile;
-import io.spring.site.domain.team.TeamRepository;
+import sagan.team.MemberProfile;
+import sagan.team.service.TeamRepository;
 
 import org.junit.Before;
 import org.junit.Test;

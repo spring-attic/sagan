@@ -1,7 +1,7 @@
 package integration.caching;
 
 import integration.caching.NetworkCachingStrategyTests.TestConfiguration;
-import io.spring.site.web.configuration.ApplicationConfiguration;
+import sagan.app.site.ApplicationConfiguration;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,8 +25,8 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
-import utils.FixtureLoader;
-import utils.SetSystemProperty;
+import sagan.util.FixtureLoader;
+import sagan.util.SetSystemProperty;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyObject;

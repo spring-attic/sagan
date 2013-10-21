@@ -1,10 +1,10 @@
 package integration.blog;
 
 import integration.IntegrationTestBase;
-import io.spring.site.domain.blog.Post;
-import utils.PostBuilder;
-import io.spring.site.domain.blog.PostCategory;
-import io.spring.site.domain.blog.PostRepository;
+import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import sagan.blog.PostCategory;
+import sagan.blog.service.PostRepository;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
