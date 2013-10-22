@@ -15,7 +15,7 @@
  */
 package integration.indexer;
 
-import sagan.app.indexer.config.ApplicationConfiguration;
+import sagan.app.indexer.ApplicationConfiguration;
 import sagan.util.FreePortFinder;
 
 import org.junit.After;

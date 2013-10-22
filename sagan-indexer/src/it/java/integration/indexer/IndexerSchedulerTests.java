@@ -1,7 +1,7 @@
 package integration.indexer;
 
+import sagan.app.indexer.ApplicationConfiguration;
 import sagan.app.indexer.IndexerService;
-import sagan.app.indexer.config.ApplicationConfiguration;
 import sagan.blog.search.PublishedBlogPostsIndexer;
 import sagan.docs.search.ProjectDocumentationIndexer;
 import sagan.guides.search.GettingStartedGuideIndexer;

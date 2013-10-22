@@ -8,16 +8,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 
 @Configuration
-public class ProjectMetadataConfig {
+class ProjectMetadataConfig {
 
-    public static final String PROJECT_METADATA_YML = "classpath:/project-metadata.yml";
+    public static final String PROJECT_METADATA_YAML = "classpath:/project-metadata.yml";
 
-    @Value(PROJECT_METADATA_YML)
+    @Value(PROJECT_METADATA_YAML)
     private Resource metadataYaml;
 
     @Bean
     public ProjectMetadataService projectMetadataService() throws IOException {
-        return new ProjectMetadataYamlParser().parseMetadataYaml(this.metadataYaml);
+        return new ProjectMetadataYamlParser().parse(this.metadataYaml);
     }
-
 }

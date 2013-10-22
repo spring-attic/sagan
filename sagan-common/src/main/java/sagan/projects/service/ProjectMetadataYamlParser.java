@@ -2,7 +2,7 @@ package sagan.projects.service;
 
 import sagan.projects.Project;
 
-import java.io.InputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,12 +11,20 @@ import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
 
-@SuppressWarnings("rawtypes")
-public class ProjectMetadataYamlParser {
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
 
-    public ProjectMetadataService createServiceFromYaml(InputStream projectMetadataYml) {
-        Map metadata = (Map) new Yaml().load(projectMetadataYml);
+@SuppressWarnings("rawtypes")
+class ProjectMetadataYamlParser {
+
+    public ProjectMetadataService parse(Resource projectMetadataYaml) throws IOException {
+        Map metadata = (Map) new Yaml().load(projectMetadataYaml.getInputStream());
         return new ProjectMetadataService(parseProjects(metadata), parseGhPagesBaseUrl(metadata));
+    }
+
+    /** For testing convenience */
+    ProjectMetadataService parse(String projectMetadataYamlPath) throws IOException {
+        return parse(new DefaultResourceLoader().getResource(projectMetadataYamlPath));
     }
 
     private String parseGhPagesBaseUrl(Map metadata) {
