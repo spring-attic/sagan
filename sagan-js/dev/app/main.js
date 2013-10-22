@@ -5,6 +5,7 @@ require('./search/main');
 require('./filter');
 
 var $ = require('jquery');
+var os = require('./os');
 
 $(function () {
 
@@ -81,7 +82,22 @@ $(function () {
 
   // FIXME: Download links exist only on some pages, not all.  This
   // should be moved to a composition plan for those specific pages.
-  $('.download-links li.' + detectOs() + detectArch()).show();
+  $('.download-links li.' + os.type() + os.arch()).show();
+
+  // FIXME: AFAICT, these links are only on the tools/eclipse page, so this should
+  // be moved to a composition plan for that page.  Note that I extracted this
+  // from the sagan-site:resources/templates/tools/eclipse/index.html layout
+  // where it was inlined into the page, and depended on a global function that
+  // was defined in application.js.  There was no indication of this dependency
+  // and I just got lucky in finding it.
+  $('#platform--' + os.type())
+      .addClass('in')
+      .css('overflow', 'visible')
+      .css('height', 'auto')
+      .parent()
+      .find('.platform-dropdown--icon')
+      .removeClass('icon-chevron-down')
+      .addClass('icon-chevron-up');
 
   moveItemSlider();
 
@@ -214,40 +230,4 @@ function initializeFacetSearchWidget() {
     $('.facet--wrapper input[type="checkbox"]:checked').prop('checked', false);
     $('.sub-facet--list, .facet-section--header').addClass('js-close');
   });
-}
-
-function detectOs() {
-  if (navigator.appVersion.indexOf('Win') != -1) {
-    return 'Windows';
-  }
-
-  if (navigator.appVersion.indexOf('Mac') != -1) {
-    return 'Mac';
-  }
-
-  if (navigator.appVersion.indexOf('Linux') != -1) {
-    return 'Linux';
-  }
-
-  return 'Unknown';
-}
-
-function detectArch() {
-  if (navigator.platform.indexOf('Win64') !== -1) {
-    return '64';
-  }
-
-  if (navigator.platform.indexOf('Linux x86_64') !== -1) {
-    return '64';
-  }
-
-  if (/Mac OS X 10.[0-5]/.test(navigator.userAgent)) {
-    return '32';
-  }
-
-  if (navigator.userAgent.indexOf('Mac OS X') !== -1) {
-    return '64';
-  }
-
-  return '32';
 }
