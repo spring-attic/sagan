@@ -45,7 +45,7 @@ function arch(environment) {
     environment = navigator;
   }
 
-  if (/Mac OS X 10.[0-5]/.test(environment.userAgent)) {
+  if (/Mac OS X 10\.[0-5]([\.\s]|$)/.test(environment.userAgent)) {
     return '32';
   }
 
