@@ -1,5 +1,6 @@
 package integration.blog;
 
+import integration.AbstractIntegrationTests;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.service.PostRepository;
@@ -17,13 +18,11 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 
-import integration.IntegrationTestBase;
-
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-public class BlogIndex_BroadcastTests extends IntegrationTestBase {
+public class BlogIndex_BroadcastTests extends AbstractIntegrationTests {
     @Autowired
     private PostRepository postRepository;
 

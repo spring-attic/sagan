@@ -1,5 +1,6 @@
 package integration.blog;
 
+import integration.AbstractIntegrationTests;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
@@ -30,15 +31,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
-import integration.IntegrationTestBase;
-
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class BlogAtomFeedsTests extends IntegrationTestBase {
+public class BlogAtomFeedsTests extends AbstractIntegrationTests {
 
     @Autowired
     SiteUrl siteUrl;

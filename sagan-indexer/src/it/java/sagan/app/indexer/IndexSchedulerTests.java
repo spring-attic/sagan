@@ -1,7 +1,5 @@
-package integration.indexer;
+package sagan.app.indexer;
 
-import sagan.app.indexer.ApplicationConfiguration;
-import sagan.app.indexer.IndexerService;
 import sagan.blog.search.PublishedBlogPostsIndexer;
 import sagan.docs.search.ProjectDocumentationIndexer;
 import sagan.guides.search.GettingStartedGuideIndexer;
@@ -16,21 +14,19 @@ import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
 
-import integration.IndexerIntegrationTestBase;
-
-import static integration.indexer.IndexerSchedulerTests.TestConfiguration;
+import static sagan.app.indexer.IndexSchedulerTests.TestConfiguration;
 import static org.mockito.Mockito.*;
 
-@ContextConfiguration(classes = { TestConfiguration.class })
-public class IndexerSchedulerTests extends IndexerIntegrationTestBase {
+@ContextConfiguration(classes = { ApplicationConfiguration.class, TestConfiguration.class })
+public class IndexSchedulerTests extends AbstractIndexerIntegrationTests {
 
-    @Configuration
-    @Import({ ApplicationConfiguration.class })
+    /*
+     * @Configuration annotation intentionally omitted so as not to interfere with
+     * @ComponentScan on the src/main side of this package.
+     */
     public static class TestConfiguration {
         @Bean
         @Primary

@@ -1,4 +1,4 @@
-package integration.indexer;
+package sagan.app.indexer;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
@@ -16,20 +16,20 @@ import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
 
-import integration.IndexerIntegrationTestBase;
-
-import static integration.indexer.PublishedBlogPostIndexerTests.TestConfiguration;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import static sagan.app.indexer.PublishedBlogPostsIndexerTests.TestConfiguration;
 
 @ContextConfiguration(classes = { TestConfiguration.class })
-public class PublishedBlogPostIndexerTests extends IndexerIntegrationTestBase {
+public class PublishedBlogPostsIndexerTests extends AbstractIndexerIntegrationTests {
 
-    @Configuration
+    /*
+     * @Configuration annotation intentionally omitted so as not to interfere with
+     * @ComponentScan on the src/main side of this package.
+     */
     public static class TestConfiguration {
         @Bean
         @Primary

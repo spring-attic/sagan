@@ -12,7 +12,7 @@ import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class IndexerService {
+class IndexerService {
 
     private final ExecutorService executorService;
     private final CounterService countersService;

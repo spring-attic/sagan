@@ -1,5 +1,6 @@
 package integration.team;
 
+import integration.AbstractIntegrationTests;
 import sagan.team.MemberProfile;
 import sagan.team.service.TeamImporter;
 import sagan.team.service.TeamRepository;
@@ -17,14 +18,12 @@ import org.springframework.web.client.RestOperations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import integration.IntegrationTestBase;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-public class ImportTeamFromGithubTests extends IntegrationTestBase {
+public class ImportTeamFromGithubTests extends AbstractIntegrationTests {
 
     @Autowired
     private TeamRepository teamRepository;

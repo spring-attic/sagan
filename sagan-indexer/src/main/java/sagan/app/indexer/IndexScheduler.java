@@ -8,20 +8,15 @@ import sagan.guides.search.UnderstandingGuideIndexer;
 import sagan.staticpage.search.StaticPageIndexer;
 import sagan.tools.search.ToolsIndexer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-@SuppressWarnings("unused")
 @Component
-public class IndexScheduler {
+@SuppressWarnings("unused")
+class IndexScheduler {
     private static final long ONE_HOUR = 1000 * 60 * 60;
     private static final long ONE_DAY = ONE_HOUR * 24;
-
-    private static final Log logger = LogFactory.getLog(IndexScheduler.class);
 
     @Autowired
     private ProjectDocumentationIndexer projectDocumentationIndexer;

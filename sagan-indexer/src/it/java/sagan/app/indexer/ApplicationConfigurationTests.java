@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package integration.indexer;
+package sagan.app.indexer;
 
 import sagan.app.indexer.ApplicationConfiguration;
 import sagan.util.FreePortFinder;

@@ -5,13 +5,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import integration.AbstractIntegrationTests;
 import org.junit.Test;
 
 import org.springframework.boot.config.JacksonJsonParser;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import integration.IntegrationTestBase;
 
 import static junit.framework.TestCase.fail;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -19,7 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class ProjectsMetadataApiTests extends IntegrationTestBase {
+public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
 
     @Test
     public void projectMetadata_respondsWithJavascript() throws Exception {

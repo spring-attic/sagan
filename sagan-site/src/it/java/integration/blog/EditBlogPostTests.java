@@ -1,5 +1,6 @@
 package integration.blog;
 
+import integration.AbstractIntegrationTests;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
@@ -16,8 +17,6 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import integration.IntegrationTestBase;
-
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.startsWith;
@@ -26,7 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
-public class EditBlogPostTests extends IntegrationTestBase {
+public class EditBlogPostTests extends AbstractIntegrationTests {
 
     @Autowired
     private WebApplicationContext wac;

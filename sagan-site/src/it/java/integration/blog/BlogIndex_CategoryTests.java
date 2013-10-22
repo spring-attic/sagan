@@ -1,5 +1,6 @@
 package integration.blog;
 
+import integration.AbstractIntegrationTests;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
@@ -20,14 +21,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.web.servlet.MvcResult;
 
-import integration.IntegrationTestBase;
-
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-public class BlogIndex_CategoryTests extends IntegrationTestBase {
+public class BlogIndex_CategoryTests extends AbstractIntegrationTests {
     @Autowired
     private PostRepository postRepository;
     private String path = "/blog/category/" + PostCategory.ENGINEERING.getUrlSlug();

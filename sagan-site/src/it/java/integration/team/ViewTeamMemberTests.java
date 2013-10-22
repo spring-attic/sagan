@@ -1,5 +1,6 @@
 package integration.team;
 
+import integration.AbstractIntegrationTests;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.service.PostRepository;
@@ -23,15 +24,13 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import integration.IntegrationTestBase;
-
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class ViewTeamMemberTests extends IntegrationTestBase {
+public class ViewTeamMemberTests extends AbstractIntegrationTests {
     @Autowired
     private WebApplicationContext wac;
 

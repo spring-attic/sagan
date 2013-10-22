@@ -1,5 +1,6 @@
 package integration.team;
 
+import integration.AbstractIntegrationTests;
 import sagan.team.MemberProfile;
 import sagan.team.service.TeamRepository;
 
@@ -17,8 +18,6 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import integration.IntegrationTestBase;
-
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.*;
@@ -30,7 +29,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
-public class EditTeamMemberTests extends IntegrationTestBase {
+public class EditTeamMemberTests extends AbstractIntegrationTests {
     @Autowired
     private WebApplicationContext wac;
 

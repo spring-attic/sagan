@@ -1,5 +1,6 @@
 package integration.caching;
 
+import integration.AbstractIntegrationTests;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
@@ -25,8 +26,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import integration.IntegrationTestBase;
-
 import static integration.caching.BlogCachingStrategyTests.TestConfiguration;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
@@ -37,7 +36,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ContextConfiguration(classes = { TestConfiguration.class })
-public class BlogCachingStrategyTests extends IntegrationTestBase {
+public class BlogCachingStrategyTests extends AbstractIntegrationTests {
 
     private Page<Post> pageOfPosts;
     private Post post = PostBuilder.post().build();
