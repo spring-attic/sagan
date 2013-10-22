@@ -16,13 +16,9 @@
 package sagan.app.site;
 
 import sagan.blog.web.feed.BlogPostAtomViewer;
-import sagan.projects.service.ProjectMetadataService;
-import sagan.projects.service.ProjectMetadataYamlParser;
 import sagan.util.service.DateService;
 import sagan.util.web.SiteUrl;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -49,7 +45,6 @@ import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -119,12 +114,6 @@ public class ApplicationConfiguration {
     @Bean
     public Serializer simpleXmlSerializer() {
         return new Persister();
-    }
-
-    @Bean
-    public ProjectMetadataService projectMetadataService() throws IOException {
-        InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
-        return new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
     }
 
     @Bean

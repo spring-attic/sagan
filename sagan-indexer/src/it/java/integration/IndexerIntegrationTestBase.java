@@ -1,6 +1,6 @@
 package integration;
 
-import sagan.app.indexer.config.ApplicationConfiguration;
+import sagan.app.indexer.ApplicationConfiguration;
 import sagan.util.SetSystemProperty;
 
 import org.junit.ClassRule;

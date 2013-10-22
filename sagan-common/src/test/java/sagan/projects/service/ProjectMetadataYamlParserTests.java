@@ -4,26 +4,23 @@ import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import org.springframework.core.io.ClassPathResource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ProjectMetadataYamlParserTests {
 
+    static final String TEST_PROJECT_METADATA_YAML = "classpath:/test-project-metadata.yml";
+
     private ProjectMetadataService service;
 
     @Before
     public void setUp() throws Exception {
-        InputStream yamlInputStream = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
-        ProjectMetadataYamlParser parser = new ProjectMetadataYamlParser();
-        service = parser.createServiceFromYaml(yamlInputStream);
+        service = new ProjectMetadataYamlParser().parse(TEST_PROJECT_METADATA_YAML);
     }
 
     @Test

@@ -1,6 +1,6 @@
 package examples.indexer;
 
-import sagan.app.indexer.config.ApplicationConfiguration;
+import sagan.app.indexer.ApplicationConfiguration;
 import sagan.guides.Guide;
 import sagan.guides.UnderstandingGuide;
 import sagan.guides.search.GettingStartedGuideIndexer;

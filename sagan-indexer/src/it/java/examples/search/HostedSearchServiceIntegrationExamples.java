@@ -1,6 +1,6 @@
 package examples.search;
 
-import sagan.app.indexer.config.ApplicationConfiguration;
+import sagan.app.indexer.ApplicationConfiguration;
 import sagan.guides.Guide;
 import sagan.guides.search.GuideSearchEntryMapper;
 import sagan.guides.service.GuidesService;

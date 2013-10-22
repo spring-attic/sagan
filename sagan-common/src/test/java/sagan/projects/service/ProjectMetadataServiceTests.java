@@ -4,13 +4,11 @@ import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
@@ -20,13 +18,14 @@ import org.springframework.web.client.RestTemplate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
+import static sagan.projects.service.ProjectMetadataConfig.PROJECT_METADATA_YAML;
+import static sagan.projects.service.ProjectMetadataYamlParserTests.TEST_PROJECT_METADATA_YAML;
 
 public class ProjectMetadataServiceTests {
 
     @Test
-    public void bindingToYaml() throws IOException {
-        InputStream yaml = new ClassPathResource("/test-project-metadata.yml", getClass()).getInputStream();
-        ProjectMetadataService metadataService = new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
+    public void bindingToTestYaml() throws IOException {
+        ProjectMetadataService metadataService = new ProjectMetadataYamlParser().parse(TEST_PROJECT_METADATA_YAML);
 
         assertEquals(3, metadataService.getProject("spring-framework").getProjectReleases().size());
 
@@ -36,8 +35,7 @@ public class ProjectMetadataServiceTests {
 
     @Test
     public void bindingToFullYaml() throws IOException {
-        InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
-        ProjectMetadataService metadataService = new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
+        ProjectMetadataService metadataService = new ProjectMetadataYamlParser().parse(PROJECT_METADATA_YAML);
 
         assertEquals(5, metadataService.getProject("spring-framework").getProjectReleases().size());
     }
@@ -57,8 +55,7 @@ public class ProjectMetadataServiceTests {
             public void handleError(ClientHttpResponse response) throws IOException {
             }
         });
-        InputStream yaml = new ClassPathResource("/project-metadata.yml", getClass()).getInputStream();
-        ProjectMetadataService metadataService = new ProjectMetadataYamlParser().createServiceFromYaml(yaml);
+        ProjectMetadataService metadataService = new ProjectMetadataYamlParser().parse(PROJECT_METADATA_YAML);
 
         StringBuilder builder = new StringBuilder();
         for (Project project : metadataService.getProjects()) {
