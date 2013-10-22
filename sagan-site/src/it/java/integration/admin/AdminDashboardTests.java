@@ -1,13 +1,12 @@
 package integration.admin;
 
+import integration.AbstractIntegrationTests;
 import org.junit.Test;
-
-import integration.IntegrationTestBase;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class AdminDashboardTests extends IntegrationTestBase {
+public class AdminDashboardTests extends AbstractIntegrationTests {
 
     @Test
     public void adminDashboard() throws Exception {

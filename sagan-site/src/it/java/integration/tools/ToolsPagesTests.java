@@ -1,5 +1,6 @@
 package integration.tools;
 
+import integration.AbstractIntegrationTests;
 import sagan.util.FixtureLoader;
 
 import java.io.IOException;
@@ -13,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.client.RestTemplate;
 
-import integration.IntegrationTestBase;
-
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.stub;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class ToolsPagesTests extends IntegrationTestBase {
+public class ToolsPagesTests extends AbstractIntegrationTests {
 
     @Autowired
     private RestTemplate restTemplate;

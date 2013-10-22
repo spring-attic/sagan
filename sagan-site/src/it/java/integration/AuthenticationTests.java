@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
-public class AuthenticationTests extends IntegrationTestBase {
+public class AuthenticationTests extends AbstractIntegrationTests {
 
     @Autowired
     private WebApplicationContext wac;

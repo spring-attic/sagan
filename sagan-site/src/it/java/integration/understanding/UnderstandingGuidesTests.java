@@ -1,5 +1,6 @@
 package integration.understanding;
 
+import integration.AbstractIntegrationTests;
 import sagan.util.FixtureLoader;
 
 import org.jsoup.Jsoup;
@@ -8,14 +9,12 @@ import org.junit.Test;
 
 import org.springframework.test.web.servlet.MvcResult;
 
-import integration.IntegrationTestBase;
-
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class UnderstandingGuidesTests extends IntegrationTestBase {
+public class UnderstandingGuidesTests extends AbstractIntegrationTests {
 
     @Test
     public void getExistingGuide() throws Exception {

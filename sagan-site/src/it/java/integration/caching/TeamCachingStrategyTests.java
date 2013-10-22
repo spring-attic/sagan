@@ -1,5 +1,6 @@
 package integration.caching;
 
+import integration.AbstractIntegrationTests;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.service.BlogService;
@@ -26,8 +27,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import integration.IntegrationTestBase;
-
 import static integration.caching.TeamCachingStrategyTests.TestConfiguration;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
@@ -35,7 +34,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 @ContextConfiguration(classes = { TestConfiguration.class })
-public class TeamCachingStrategyTests extends IntegrationTestBase {
+public class TeamCachingStrategyTests extends AbstractIntegrationTests {
 
     private MemberProfile memberProfile;
 

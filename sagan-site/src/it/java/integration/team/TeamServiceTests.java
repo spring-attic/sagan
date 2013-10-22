@@ -1,5 +1,6 @@
 package integration.team;
 
+import integration.AbstractIntegrationTests;
 import sagan.team.MemberProfile;
 import sagan.team.service.TeamService;
 
@@ -7,12 +8,10 @@ import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import integration.IntegrationTestBase;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TeamServiceTests extends IntegrationTestBase {
+public class TeamServiceTests extends AbstractIntegrationTests {
 
     @Autowired
     private TeamService teamService;

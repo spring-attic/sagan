@@ -1,15 +1,14 @@
 package integration.guides;
 
+import integration.AbstractIntegrationTests;
 import sagan.util.FixtureLoader;
 
 import org.junit.Test;
 
-import integration.IntegrationTestBase;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class TutorialsTests extends IntegrationTestBase {
+public class TutorialsTests extends AbstractIntegrationTests {
 
     @Test
     public void getTutorialRootPage() throws Exception {

@@ -1,5 +1,6 @@
 package integration.blog;
 
+import integration.AbstractIntegrationTests;
 import sagan.blog.BlogPostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
@@ -28,8 +29,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import integration.IntegrationTestBase;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsIn.isIn;
@@ -38,7 +37,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static sagan.blog.PostCategory.*;
 
-public class BlogService_QueryTests extends IntegrationTestBase {
+public class BlogService_QueryTests extends AbstractIntegrationTests {
 
     private static final Pageable FIRST_TEN_POSTS = PageableFactory.forLists(1);
 
