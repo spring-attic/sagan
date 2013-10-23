@@ -16,6 +16,7 @@ $(function () {
   $('#doc_filter').contentFilter();
 
 
+  // TODO: Turn this into a dropdown component?
   //OPENS ITEM DROPDOWN WIDGET
   $('.js-item--open-dropdown').click(function () {
     var dropdownItem = $(this).parents('.js-item-dropdown--wrapper');
@@ -35,6 +36,7 @@ $(function () {
     });
   });
 
+  // TODO: Turn search dropdown into a component
   //OPENS SEARCH DROPDOWN
   $('.js-search-input-open').click(function () {
     $('.nav-search').addClass('js-highlight');
@@ -55,6 +57,7 @@ $(function () {
     });
   });
 
+  // TODO: Integrate this into a search dropdown component (see above)
   // FIXME: Since this is only valid for the search page, it should
   // be moved to a composition plan that is only loaded on the search
   // page.
@@ -136,6 +139,7 @@ $(function () {
   initializeFacetSearchWidget();
 });
 
+// TODO: Turn into an item slider component?
 function moveItemSlider() {
   var activeItem = $('.js-item-slider--wrapper .js-item.js-active');
 
@@ -160,6 +164,9 @@ function firstCheckbox(context) {
   context.siblings('.facet--wrapper').find('input[type="checkbox"]').first().prop('checked', false);
 }
 
+// TODO: Turn into a facet search component?
+// AFAICT, "Search facets" are used to narrow search results, and thus
+// are only used on the search results page.
 function initializeFacetSearchWidget() {
   var searchFacet = $('.search-facets');
 
