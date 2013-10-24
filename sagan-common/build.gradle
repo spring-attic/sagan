@@ -1,0 +1,56 @@
+sourceSets {
+    testUtil {
+        java.srcDir 'src/test-util/java'
+        resources.srcDir 'src/test-util/resources'
+    }
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.0.0.M3'
+    compile 'org.springframework.security:spring-security-core:3.2.0.RC1'
+    compile 'org.springframework.social:spring-social-github:1.0.0.M4'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:0.5.0.M4'
+
+    compile 'org.elasticsearch:elasticsearch:0.90.2'
+    compile('io.searchbox:jest:0.0.4') {
+        exclude(module: 'commons-logging')
+    }
+    compile 'org.cloudfoundry:cloudfoundry-runtime:0.8.4'
+
+    // datasource and connection pool dependencies
+    runtime 'org.postgresql:postgresql:9.2-1002-jdbc4'
+    runtime 'com.h2database:h2:1.3.173'
+    compile 'org.apache.tomcat:tomcat-jdbc:7.0.42'
+
+    // for use in on-the-fly database setup and migrations
+    compile 'com.googlecode.flyway:flyway-core:2.2.1'
+
+    compile('org.simpleframework:simple-xml:2.7') {
+        exclude(module: 'stax')
+        exclude(module: 'stax-api')
+        exclude(module: 'xpp3')
+    }
+
+    compile 'org.jsoup:jsoup:1.7.2'
+    compile 'org.yaml:snakeyaml:1.12'
+    compile 'joda-time:joda-time:2.3'
+    compile 'org.hibernate:hibernate-validator:4.3.1.Final'
+
+    testUtilCompile "junit:junit:${vJunit}"
+    testUtilCompile sourceSets.main.output
+    testUtilCompile configurations.compile
+    testUtilRuntime configurations.runtime
+
+    // pick up common test utility classes
+    testCompile sourceSets.testUtil.output
+
+    // for use of spring-test's MatcherAssertionErrors.*
+    testCompile "org.springframework:spring-test:${vSpringCore}"
+}
+
+// Add test util source directories to IDEA .iml files
+if (project.plugins.hasPlugin('idea')) {
+    idea.module {
+        testSourceDirs += (sourceSets.testUtil.java.srcDirs + sourceSets.testUtil.resources.srcDirs)
+    }
+}

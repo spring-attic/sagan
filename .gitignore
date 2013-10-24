@@ -10,8 +10,6 @@ target
 build
 bin
 dependency-reduced-pom.xml
-.idea
-*.iml
 src/main/resources/git.properties
 Gemfile.lock
 .DS_Store
@@ -26,3 +24,17 @@ test.log
 logs/
 blog_importer/
 work/
+
+# IDEA
+.idea
+*.iml
+*.ipr
+*.iws
+out
+
+# Gradle
+.gradle
+/build
+
+# Structure101
+sagan.java.hsp

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <title>Layout</title>
+  <meta id="Viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.png}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}"  />
+  <!-- <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-responsive.css}" /> -->
+  <link href='https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" th:href="@{/font-awesome/css/font-awesome.min.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/fontcustom.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"/>
+
+  <link rel="stylesheet" type="text/css" th:href="@{/css/icons.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/buttons.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/typography.css}" />
+
+  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/application.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/guide.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/team.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/docs.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/homepage.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/tools.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/projects.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/highlight.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" />
+
+  <script type="text/javascript" th:src="@{/js/jquery.js}" ></script>
+  <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}" ></script>
+  <script type="text/javascript" th:src="@{/js/ZeroClipboard.min.js}" ></script>
+  <script type="text/javascript" th:src="@{/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}" ></script>
+
+  <script type="text/javascript" th:src="@{/js/filter.js}" ></script>
+  <script type="text/javascript" th:src="@{/js/application.js}" ></script>
+  <script type="text/javascript" th:src="@{/js/guide.js}" ></script>
+  <meta name="google-site-verification" content="7qGntFPD9lWAVCtUu5U77v4l68PsTHf6xpzgjQv2j2M" />
+  <script>
+    //
+      var _gaq = _gaq || [];
+      var pluginUrl =
+       '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+      _gaq.push(
+        ['_require', 'inpage_linkid', pluginUrl],
+        ['_setAccount', 'UA-2728886-20'],
+        ['_trackPageview'],
+        ['b._require', 'inpage_linkid', pluginUrl],
+        ['b._setAccount', 'UA-2728886-19'],
+        ['b._trackPageview']
+      );
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+  </script>
+</head>
+<body>
+  <script type="text/javascript">
+    // Work around Google font rendering issues in webkit browsers on Windows 7
+    if (navigator.userAgent.indexOf("NT 6.1") != -1) {
+      $('body').css( "-webkit-text-stroke", "0.5px" );
+    }
+  </script>
+  <div class="viewport">
+    <header class="navbar header--navbar desktop-only">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <div class="spring-logo--container">
+            <a class="spring-logo" th:href="@{/}" href="/"><span></span></a>
+          </div>
+          <ul class="nav pull-right">
+            <li th:class="${beans.uih.navClass(navSection?:'','docs')}">
+              <a th:href="@{/docs}" >Docs</a>
+            </li>
+            <li th:class="${beans.uih.navClass(navSection?:'','guides')}">
+              <a th:href="@{/guides}" >Guides</a>
+            </li>
+            <li th:class="${beans.uih.navClass(navSection?:'','projects')}">
+              <a th:href="@{/projects}" >Projects</a>
+            </li>
+            <li th:class="${beans.uih.navClass(navSection?:'','blog')}">
+              <a th:href="@{/blog}" >Blog</a>
+            </li>
+            <li th:class="${beans.uih.navClass(navSection?:'','forum')}">
+              <a href="http://forum.spring.io">Forum</a>
+            </li>
+            <li class="navbar-link nav-search">
+              <i class="icon-search navbar-search--icon js-search-input-open"></i>
+              <div class="search-input-close js-search-input-close">x</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="search-dropdown--container js-search-dropdown">
+        <div class="container-fluid">
+          <div class="search-form--container">
+            <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
+              <input type="text" class="search-query search-form--form js-search-input" placeholder="Search for documentation, guides, and posts..." name="q" th:value="${searchForm != null ? searchForm.q : ''}" />
+              <button type="submit" class="search-form--submit"><i class="icon-search"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div layout:include="_mobile-nav :: mobile-nav"></div>
+    <div class="header--container" layout:fragment="header-container">
+      <div class="header--content" layout:fragment="header-content">
+        <div class="row-fluid container-fluid">
+          <div class="span8">
+            <h1 class="header--content-title" layout:fragment="header">
+              First Last
+            </h1>
+            <p class="header--content-subtitle" layout:fragment="overview">
+              Subttitle Ligula Risus Tristique Pharetra
+            </p>
+          </div>
+          <div class="span4">
+            <div layout:fragment="header-sidebar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid" layout:fragment="top-content"></div>
+    <div layout:fragment="full-width--layout"></div>
+    <div class="body--container container-fluid " layout:fragment="content">
+      <div id="footer-push-down"></div>
+    </div>
+
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span8">
+            <div class="navbar">
+              <div class="container">
+                <ul class="nav">
+                  <li><a th:href="@{/team}">Team</a></li>
+                  <li><a th:href="@{/services}">Services</a></li>
+                  <li><a th:href="@{/tools}">Tools</a></li>
+                </ul>
+              </div>
+            </div>
+            &copy; <script type="text/javascript"> var d = new Date();
+                  document.write(d.getFullYear());</script> <a href="http://gopivotal.com">GoPivotal</a>, Inc. All Rights Reserved.
+            <a href="http://www.gopivotal.com/terms-of-use">Terms of Use</a> and
+            <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>
+            <span id='authentication' sec:authorize="isFullyAuthenticated()">
+              [<a th:href="@{/signout}">Sign out</a>]
+            </span>
+          </div>
+          <div class="span4 footer-newsletter--wrapper pull-right">
+            <div class="footer-newsletter--container">
+              <label>
+                Subscribe to our newsletter
+              </label>
+              <iframe src="http://play.gopivotal.com/OSS_Website_Spring_SpringNewsletterSubscriptionEmailOnly.html" frameBorder="0" scrolling="no" height="42px" width="324px" style="border:none"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div id="scrim"></div>
+  </div>
+  <script type="text/javascript" th:src="@{/js/marketomunchkin.js}" ></script>
+</body>
+</html>

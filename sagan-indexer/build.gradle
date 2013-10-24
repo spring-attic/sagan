@@ -1,0 +1,59 @@
+apply plugin: 'spring-boot'
+apply plugin: 'application'
+apply from: '../gradle/integTest.gradle'
+apply from: '../gradle/deploy.gradle'
+
+mainClassName = 'sagan.app.indexer.ApplicationConfiguration'
+
+run {
+    systemProperties System.properties
+}
+
+springBoot {
+    backupSource = false
+    mainClass = mainClassName
+}
+
+dependencies {
+    compile project(':sagan-common')
+
+    compile "org.springframework.boot:spring-boot-starter-web:${vSpringBoot}"
+    compile "org.springframework.boot:spring-boot-starter-actuator:${vSpringBoot}"
+    compile "org.springframework.boot:spring-boot-starter-security:${vSpringBoot}"
+
+    // for use in CrawlerService
+    compile "org.apache.httpcomponents:httpclient:${vHttpClient}"
+    compile('com.soulgalore:crawler:1.5.1') {
+        exclude(module: 'guice')
+        exclude(module: 'commons-logging')
+    }
+
+    // for use in mocking http interactions
+    testCompile "org.springframework:spring-test:${vSpringCore}"
+
+    // pick up common test utility classes
+    testCompile project(':sagan-common').sourceSets.testUtil.output
+}
+
+
+task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processResources) {
+    description = "Copies static html templates from :sagan-site in order to index them at runtime."
+
+    from project(':sagan-site').sourceSets.main.output.resourcesDir
+    into sourceSets.main.output.resourcesDir
+    include "templates/pages/**/*"
+}
+processResources.dependsOn copyStaticTemplates
+
+
+// Ensure that site tasks have execution priority over indexer tasks, as it is
+// desirable to identify problems with the site as quickly as possible
+gradle.projectsEvaluated {
+    tasks.each { indexerTask ->
+        def siteTask = project(':sagan-site').tasks.findByPath(indexerTask.name)
+        if (siteTask != null) {
+            indexerTask.mustRunAfter siteTask
+        }
+    }
+}
+
