@@ -1,0 +1,67 @@
+project:
+  artifactId: sagan-indexer
+  name: sagan-indexer
+  version: X.X.X.X
+  description: sagan-indexer
+
+info:
+  build:
+    artifact: ${project.artifactId}
+    name: ${project.name}
+    description: ${project.description}
+    version: ${project.version}
+  spring:
+    profiles: ${spring.profiles.active:default}
+  app:
+    name: ${vcap.application.name:sagan-indexer}:${vcap.application.instance_index:*}
+    start: ${vcap.application.start:N/A}
+
+spring:
+  main:
+    sources: sagan.app.indexer.ApplicationConfiguration
+  jpa:
+    show_sql: false
+    hibernate:
+      namingstrategy: org.hibernate.cfg.EJB3NamingStrategy
+
+security:
+  basic:
+    enabled: false
+  user:
+    password: ${ADMIN_PASSWORD:}
+
+search:
+  indexer:
+    delay: 0
+server:
+  port: 9000
+
+elasticsearch:
+  client:
+    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
+    index: ${ELASTICSEARCH_INDEX:sagan}
+
+server:
+    tomcat:
+        # Write access log to target/logs/access_log.YYYY-MM-DD.log
+        # See http://tomcat.apache.org/tomcat-7.0-doc/api/org/apache/catalina/valves/AccessLogValve.html
+        accessLogEnabled: true
+        accessLogPattern: '%h %l %u %t "%r" %s %b %{Host}i %{Location}o'
+        baseDir: ''
+        backgroundProcessorDelay: 1
+
+---
+
+spring:
+  profiles: staging
+search:
+  indexer:
+    base_url: http://staging.spring.io
+
+---
+
+spring:
+  profiles: production
+search:
+  indexer:
+    base_url: http://spring.io

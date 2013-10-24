@@ -1,0 +1,69 @@
+import org.gradle.api.tasks.testing.Test
+
+/**
+ * This script adds a dedicated integration testing source set (src/it) and task
+ * (integTest) when applied to any Java project.
+ *
+ * Configuration:
+ *     apply from: path/to/integTest.gradle
+ *
+ * Usage:
+ *     gradle integTest
+ *      - or -
+ *     gradle check
+ */
+
+sourceSets {
+    integTest {
+        java.srcDir 'src/it/java'
+        resources.srcDir 'src/it/resources'
+    }
+}
+
+task integTest(type: Test) {
+    description = "Runs integration tests."
+
+    testClassesDir = sourceSets.integTest.output.classesDir
+    classpath = sourceSets.integTest.runtimeClasspath
+
+    maxHeapSize = '1024m'
+
+    // ensure we don't overwrite default report directories used by 'test' task
+    reports.html.destination = "${project.buildDir}/reports/integTest"
+    reports.junitXml.destination = "${project.buildDir}/integTest-results"
+    binResultsDir = file("${project.buildDir}/integTest-results/binary/integTest")
+
+    // always run integration tests after unit tests in order to fail fast
+    mustRunAfter test
+}
+
+dependencies {
+    integTestCompile sourceSets.main.output
+    integTestCompile sourceSets.test.output
+    integTestCompile configurations.compile
+    integTestCompile configurations.testCompile
+    integTestRuntime configurations.runtime
+    integTestRuntime configurations.testRuntime
+}
+
+// Ensure unit test tasks (named 'test') always run before integration tests in
+// order to fail as fast as possible
+gradle.projectsEvaluated {
+    def unitTestTasks = []
+    gradle.rootProject.allprojects { project ->
+        unitTestTasks.addAll(project.tasks.findAll { it.name == 'test' })
+    }
+    unitTestTasks.each { unitTestTask ->
+        project.integTest.mustRunAfter unitTestTask
+    }
+}
+
+// Run integration tests during the 'check' lifecycle (which already includes 'test')
+check.dependsOn integTest
+
+// Add integration test source directories to IDEA .iml files
+if (project.plugins.hasPlugin('idea')) {
+    idea.module {
+        testSourceDirs += (sourceSets.integTest.java.srcDirs + sourceSets.integTest.resources.srcDirs)
+    }
+}

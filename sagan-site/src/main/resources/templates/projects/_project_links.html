@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<div class="project-links--container" layout:fragment="links">
+    <a href="#" th:href="${project.repoUrl}" class="project-link">
+        <i class="icon-github"></i>
+        <p>Repo</p>
+    </a>
+    <a href="#" th:href="${project.siteUrl}" class="project-link">
+        <i class="icon-globe"></i>
+        <p>Site</p>
+    </a>
+</div>
+</body>
+</html>
+
+
+
+
