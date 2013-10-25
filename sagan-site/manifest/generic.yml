@@ -1,0 +1,8 @@
+---
+applications:
+- name: sagan
+  memory: 1G
+  instances: 1
+  domain: cfapps.io
+  path: ../build/libs/sagan-site.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack
