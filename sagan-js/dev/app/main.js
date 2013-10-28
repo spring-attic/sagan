@@ -1,11 +1,16 @@
 require('./guide');
-require('./search/main');
+require('./searchResults/main');
 
 // Implicit dependency on jQuery contentFilter plugin
 require('./filter');
 
 var $ = require('jquery');
 var os = require('./os');
+var initSearch = require('./search/main');
+
+var searchOpenTrigger = '.js-search-input-open';
+var searchCloseTrigger = '.body--container, .js-search-input-close, .homepage--body';
+var searchDropdown = '.js-search-dropdown';
 
 $(function () {
 
@@ -15,6 +20,7 @@ $(function () {
   // on pages where it is never used.
   $('#doc_filter').contentFilter();
 
+  initSearch(window.location.pathname === '/search', $(searchDropdown), $(searchOpenTrigger), $(searchCloseTrigger));
 
   // TODO: Turn this into a dropdown component?
   //OPENS ITEM DROPDOWN WIDGET
@@ -35,53 +41,6 @@ $(function () {
       $(this).removeClass('js-show');
     });
   });
-
-  // TODO: Turn search dropdown into a component
-  //OPENS SEARCH DROPDOWN
-  $('.js-search-input-open').click(function () {
-    $('.nav-search').addClass('js-highlight');
-    var inputContainer = $('.js-search-dropdown');
-    var input = $('.js-search-input');
-    inputContainer.addClass('js-show');
-
-    //FOCUSES SEARCH INPUT ON OPEN
-    setTimeout(function () {
-      input.focus();
-    }, 100);
-
-    //CLOSES SEARCH DROPDOWN
-    $('.body--container, .js-search-input-close, .homepage--body').click(function () {
-      inputContainer.removeClass('js-show');
-      $('.nav-search').removeClass('js-highlight');
-      $('#scrim').removeClass('js-show');
-    });
-  });
-
-  // TODO: Integrate this into a search dropdown component (see above)
-  // FIXME: Since this is only valid for the search page, it should
-  // be moved to a composition plan that is only loaded on the search
-  // page.
-  //AUTO OPENS SEARCH DROPDOWN ON SEARCH VIEW AND
-  if (window.location.pathname == '/search') {
-    $('.nav-search').addClass('js-highlight');
-    $('.js-search-dropdown').addClass('js-show no-animation');
-
-    // TODO: Prepopulate search query.
-    // The original code (below) does not actually prepopulate anything,
-    // but I'm leaving it here, since it may provide a hint as what field
-    // needs to be prepopulated with what data
-
-    //PREPOPULATES INPUT WITH SEARCH QUERY AND
-//    var searchQuery = decodeURIComponent(window.location.search.replace(/\+/g, ' '));
-//    var seachStart = searchQuery.search('q=');
-//    var searchString = searchQuery.substr(seachStart + 2);
-
-    //CLOSES SEARCH DROPDOWN
-    $('.js-search-input-close').click(function () {
-      $('.js-search-dropdown').removeClass('js-show no-animation');
-      $('.nav-search').removeClass('js-highlight');
-    });
-  }
 
   // FIXME: Download links exist only on some pages, not all.  This
   // should be moved to a composition plan for those specific pages.
