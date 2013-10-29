@@ -1,4 +1,4 @@
-## Sagan – the spring.io site and reference application
+## Sagan: the spring.io site and reference application
 
 Welcome! The code in this repository is deployed and running right now at <http://spring.io>. The [blog][], the collection of [guides][], and most everything else you'll see there is implemented right here.
 
