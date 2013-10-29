@@ -320,10 +320,10 @@ projects:
           refDocUrl: /spring-security/site/docs/{version}/reference/springsecurity.html
           apiDocUrl: /spring-security/site/docs/{version}/apidocs/
         - name: 3.2.0.RC1
-          refDocUrl: /spring-security/site/docs/{version}/reference/html/
+          refDocUrl: /spring-security/site/docs/{version}/reference/htmlsingle/
           apiDocUrl: /spring-security/site/docs/{version}/apidocs/
         - name: 3.2.0.CI-SNAPSHOT
-          refDocUrl: /spring-security/site/docs/{version}/reference/html5/
+          refDocUrl: /spring-security/site/docs/{version}/reference/htmlsingle/
           apiDocUrl: /spring-security/site/docs/{version}/apidocs/
 
     - id: spring-security-oauth
