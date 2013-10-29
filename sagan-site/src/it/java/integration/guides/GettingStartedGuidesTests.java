@@ -20,8 +20,10 @@ public class GettingStartedGuidesTests extends AbstractIntegrationTests {
     @Test
     public void showGuide() throws Exception {
         String gsRestServiceRepo = FixtureLoader.load("/fixtures/github/gs-rest-service-repo.json");
+        String gsRestServiceReadme = FixtureLoader.load("/fixtures/github/gs-rest-service-readme.json");
         stubRestClient.putResponse("/repos/spring-guides/gs-rest-service", gsRestServiceRepo);
 
+        stubRestClient.putResponse("/repos/spring-guides/gs-rest-service/readme", gsRestServiceReadme);
         stubRestClient.putResponse("/repos/spring-guides/gs-rest-service/contents/README.md",
                 "guide body");
         stubRestClient.putResponse("/repos/spring-guides/gs-rest-service/contents/SIDEBAR.md",
