@@ -10,7 +10,7 @@ Yeah, [that guy][sagan]. He was a pretty inspiring [explainer of things][cosmos]
 
 ## Getting started
 
-It takes just a few minutes to [build and run the app on your local box][build-and-run] and it's easy to [import the source][import-source] into your IDE. From there, you can focus on the areas that are most important to you. Be sure to browse the rest of the [wiki][] and take note of the README files throughout the application's directory structure.
+It takes just a few minutes to [build][] and [run][] the app on your local box, and it's easy to [import the source][] into your IDE. From there, you can focus on the areas that are most important to you. Be sure to browse the rest of the [wiki][] and take note of the README files throughout the application's directory structure.
 
 ## Issue tracking
 
@@ -31,8 +31,8 @@ TODO
 [blog]: http://spring.io/blog
 [guides]: http://spring.io/guides
 [team]: http://spring.io/team
-[wiki]: https://github.com/cbeams/spring.io/wiki
 [issues]: https://github.com/spring-io/spring.io/issues
-[build-and-run]: https://github.com/cbeams/spring.io/wiki/Build-and-run-locally
-[import-source]: https://github.com/cbeams/spring.io/wiki/Import-sources-into-IDE
-
+[build]: https://github.com/cbeams/spring.io/wiki/Build-everything
+[run]: https://github.com/cbeams/spring.io/wiki/Run-the-site-locally
+[import the source]: https://github.com/cbeams/spring.io/wiki/Use-an-IDE
+[wiki]: https://github.com/cbeams/spring.io/wiki
