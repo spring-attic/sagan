@@ -30,7 +30,7 @@ public class UnderstandingGuidesService {
 
     private String getContent(String subject) {
         try {
-            return this.gitHubService.getRawFileAsHtml(String.format(CONTENT_PATH, subject.toLowerCase()));
+            return this.gitHubService.getMarkdownFileAsHtml(String.format(CONTENT_PATH, subject.toLowerCase()));
         } catch (RestClientException e) {
             String msg = String.format("No getting started guide found for '%s'", subject);
             throw new UnderstandingGuideNotFoundException(msg, e);
@@ -39,7 +39,7 @@ public class UnderstandingGuidesService {
 
     private String getSidebar(String subject) {
         try {
-            return this.gitHubService.getRawFileAsHtml(String.format(SIDEBAR_PATH, subject.toLowerCase()));
+            return this.gitHubService.getMarkdownFileAsHtml(String.format(SIDEBAR_PATH, subject.toLowerCase()));
         } catch (RestClientException e) {
             return "";
         }

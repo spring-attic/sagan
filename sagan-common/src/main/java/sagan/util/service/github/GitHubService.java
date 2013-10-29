@@ -2,17 +2,32 @@ package sagan.util.service.github;
 
 import sagan.util.service.MarkdownService;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.ivy.util.FileUtil;
+import org.asciidoctor.Asciidoctor;
+import org.asciidoctor.OptionsBuilder;
+import org.asciidoctor.SafeMode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StreamUtils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import static org.asciidoctor.Asciidoctor.Factory.create;
 
 @Service
 public class GitHubService implements MarkdownService {
@@ -21,6 +36,7 @@ public class GitHubService implements MarkdownService {
     private final GitHubRestClient gitHubRestClient;
     private ObjectMapper objectMapper = new ObjectMapper();
 
+    private static final Log log = LogFactory.getLog(GitHubService.class);
     private static final String REPO_CONTENTS_PATH = "/repos/spring-guides/{repoId}/contents";
     private static final String GUIDE_IMAGES_PATH = REPO_CONTENTS_PATH + "/images/{imageName}";
 
@@ -29,12 +45,75 @@ public class GitHubService implements MarkdownService {
         this.gitHubRestClient = gitHubRestClient;
     }
 
+    /**
+     * NOTE: Only used for rendering Blog posts. Fetching guides draws straight HTML from
+     * GitHub
+     */
     @Override
     public String renderToHtml(String markdownSource) {
         return gitHubRestClient.sendPostRequestForHtml("/markdown/raw", markdownSource);
     }
 
-    public String getRawFileAsHtml(String path) {
+    public Readme getReadme(String path) {
+        String response = gitHubRestClient.sendRequestForJson(path);
+
+        try {
+            return objectMapper.readValue(response, Readme.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getAsciiDocFileAsHtml(String path) {
+        String content = null;
+
+        byte[] download = gitHubRestClient.sendRequestForDownload(path);
+
+        String tempFilePrefix = path.replace("/", "-");
+        try {
+            // First, write the downloaded stream of bytes into a file
+            File zipball = File.createTempFile(tempFilePrefix, ".zip");
+            zipball.deleteOnExit();
+            FileOutputStream zipOut = new FileOutputStream(zipball);
+            zipOut.write(download);
+            zipOut.close();
+
+            // Open the zip file and unpack it
+            ZipFile zipFile = new ZipFile(zipball);
+            File unzippedRoot = null;
+            for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e
+                    .hasMoreElements();) {
+                ZipEntry entry = e.nextElement();
+                if (entry.isDirectory()) {
+                    File dir = new File(zipball.getParent() + File.separator
+                            + entry.getName());
+                    dir.mkdir();
+                    if (unzippedRoot == null)
+                        unzippedRoot = dir; // first directory is the root
+                } else {
+                    StreamUtils.copy(zipFile.getInputStream(entry), new FileOutputStream(
+                            zipball.getParent() + File.separator + entry.getName()));
+                }
+            }
+
+            // Process the unzipped guide through asciidoctor, rendering HTML content
+            Asciidoctor asciidoctor = create();
+            content = asciidoctor.renderFile(new File(unzippedRoot.getAbsolutePath()
+                    + File.separator + "README.asc"),
+                    OptionsBuilder.options().safe(SafeMode.SAFE));
+
+            // Delete the zipball and the unpacked content
+            FileUtil.forceDelete(zipball);
+            FileUtil.forceDelete(unzippedRoot);
+        } catch (IOException ex) {
+            throw new IllegalStateException("Could not create temp file for source: "
+                    + tempFilePrefix);
+        }
+
+        return content;
+    }
+
+    public String getMarkdownFileAsHtml(String path) {
         return gitHubRestClient.sendRequestForHtml(path);
     }
 
