@@ -38,7 +38,6 @@ dependencies {
 
     // AsciiDoc compilation in-house, since GitHub doesn't provide a service
     compile 'org.asciidoctor:asciidoctor-java-integration:0.1.4'
-    compile 'org.apache.ivy:ivy:2.3.0'
 
     testUtilCompile "junit:junit:${vJunit}"
     testUtilCompile sourceSets.main.output
