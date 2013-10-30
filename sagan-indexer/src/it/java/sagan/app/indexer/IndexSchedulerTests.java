@@ -17,8 +17,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
 
-import static sagan.app.indexer.IndexSchedulerTests.TestConfiguration;
 import static org.mockito.Mockito.*;
+import static sagan.app.indexer.IndexSchedulerTests.TestConfiguration;
 
 @ContextConfiguration(classes = { ApplicationConfiguration.class, TestConfiguration.class })
 public class IndexSchedulerTests extends AbstractIndexerIntegrationTests {

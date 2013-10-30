@@ -1,6 +1,5 @@
 package integration.guides;
 
-import integration.AbstractIntegrationTests;
 import sagan.util.FixtureLoader;
 
 import org.jsoup.Jsoup;
@@ -9,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import org.springframework.test.web.servlet.MvcResult;
+
+import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;

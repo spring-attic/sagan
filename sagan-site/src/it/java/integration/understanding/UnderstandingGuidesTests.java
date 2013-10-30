@@ -1,6 +1,5 @@
 package integration.understanding;
 
-import integration.AbstractIntegrationTests;
 import sagan.util.FixtureLoader;
 
 import org.jsoup.Jsoup;
@@ -8,6 +7,8 @@ import org.jsoup.nodes.Document;
 import org.junit.Test;
 
 import org.springframework.test.web.servlet.MvcResult;
+
+import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;

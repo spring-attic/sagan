@@ -1,6 +1,5 @@
 package integration.blog;
 
-import integration.AbstractIntegrationTests;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
@@ -20,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.web.servlet.MvcResult;
+
+import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;

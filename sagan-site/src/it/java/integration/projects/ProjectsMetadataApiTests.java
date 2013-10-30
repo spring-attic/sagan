@@ -5,12 +5,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import integration.AbstractIntegrationTests;
 import org.junit.Test;
 
 import org.springframework.boot.config.JacksonJsonParser;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import integration.AbstractIntegrationTests;
 
 import static junit.framework.TestCase.fail;
 import static org.hamcrest.CoreMatchers.notNullValue;

@@ -1,9 +1,10 @@
 package integration.guides;
 
-import integration.AbstractIntegrationTests;
 import sagan.util.FixtureLoader;
 
 import org.junit.Test;
+
+import integration.AbstractIntegrationTests;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
