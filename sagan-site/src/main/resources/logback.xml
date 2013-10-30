@@ -13,6 +13,8 @@
     <!-- Apache HttpClient is too verbose at INFO level -->
     <logger level="WARN" name="org.apache.http"/>
 
+    <logger level="DEBUG" name="sagan.guides.support"/>
+
     <!-- log high-level information about application startup time, whether from
          Boot's main class or the site's main class. The former is in play when
          running with `java -jar`; the latter when running from within the IDE -->

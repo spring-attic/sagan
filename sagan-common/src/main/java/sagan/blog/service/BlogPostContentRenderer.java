@@ -1,7 +1,5 @@
 package sagan.blog.service;
 
-import sagan.util.service.MarkdownService;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

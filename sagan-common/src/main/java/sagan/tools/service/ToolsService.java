@@ -17,13 +17,13 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ToolsService {
     private final ToolXmlConverter toolXmlConverter = new ToolXmlConverter();
-    private final CachedRestClient cachedRestClient;
+    private final CachedRestClient restClient;
     private final RestTemplate restTemplate;
     private final Serializer serializer;
 
     @Autowired
-    public ToolsService(CachedRestClient cachedRestClient, RestTemplate restTemplate, Serializer serializer) {
-        this.cachedRestClient = cachedRestClient;
+    public ToolsService(CachedRestClient restClient, RestTemplate restTemplate, Serializer serializer) {
+        this.restClient = restClient;
         this.restTemplate = restTemplate;
         this.serializer = serializer;
     }
@@ -46,7 +46,7 @@ public class ToolsService {
 
     private ToolSuiteDownloads getToolSuiteDownloads(String toolSuiteName, String shortName) throws Exception {
         String responseXml =
-                cachedRestClient.get(restTemplate, "http://dist.springsource.com/release/STS/index-new.xml",
+                restClient.get(restTemplate, "http://dist.springsource.com/release/STS/index-new.xml",
                         String.class);
         ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
         return toolXmlConverter.convert(toolSuiteXml, toolSuiteName, shortName);
@@ -54,7 +54,7 @@ public class ToolsService {
 
     public EclipseDownloads getEclipseDownloads() throws Exception {
         String responseXml =
-                cachedRestClient.get(restTemplate, "http://download.springsource.com/release/STS/eclipse.xml",
+                restClient.get(restTemplate, "http://download.springsource.com/release/STS/eclipse.xml",
                         String.class);
         EclipseXml eclipseXml = serializer.read(EclipseXml.class, responseXml);
         return new EclipseDownloadsXmlConverter().convert(eclipseXml);

@@ -3,7 +3,7 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorator="layout">
   <head>
-    <title th:inline="text">Understanding [[${guide.subject}]]</title>
+    <title th:inline="text">Understanding [[${doc.subject}]]</title>
   </head>
   <body>
     <div layout:fragment="header-container"></div>
@@ -11,13 +11,13 @@
       <div class="main-body--wrapper">
         <div class="row-fluid">
           <div class="span8">
-            <article class="content--container" th:utext="${guide.content}">
+            <article class="content--container" th:utext="${doc.content}">
             </article>
           </div>
 
           <aside id='sidebar' class="span4 content-right-pane--container">
             <div class="right-pane-widget--container">
-              <div class='related_resources' th:utext="${guide.sidebar}">Sidebar content</div>
+              <div class='related_resources' th:utext="${doc.sidebar}">Sidebar content</div>
             </div>
           </aside>
         </div>

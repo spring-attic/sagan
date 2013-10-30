@@ -4,7 +4,7 @@ import sagan.blog.search.PublishedBlogPostsIndexer;
 import sagan.docs.search.ProjectDocumentationIndexer;
 import sagan.guides.search.GettingStartedGuideIndexer;
 import sagan.guides.search.TutorialIndexer;
-import sagan.guides.search.UnderstandingGuideIndexer;
+import sagan.guides.search.UnderstandingDocIndexer;
 import sagan.staticpage.search.StaticPageIndexer;
 import sagan.tools.search.ToolsIndexer;
 import sagan.util.SetSystemProperty;
@@ -60,8 +60,8 @@ public class IndexSchedulerTests extends AbstractIndexerIntegrationTests {
 
         @Bean
         @Primary
-        public UnderstandingGuideIndexer mockUnderstandingGuideIndexer() {
-            return mock(UnderstandingGuideIndexer.class);
+        public UnderstandingDocIndexer mockUnderstandingGuideIndexer() {
+            return mock(UnderstandingDocIndexer.class);
         }
 
         @Bean
@@ -88,7 +88,7 @@ public class IndexSchedulerTests extends AbstractIndexerIntegrationTests {
     @Autowired
     private StaticPageIndexer staticPageIndexer;
     @Autowired
-    private UnderstandingGuideIndexer understandingGuideIndexer;
+    private UnderstandingDocIndexer understandingGuideIndexer;
     @Autowired
     private TutorialIndexer tutorialIndexer;
     @Autowired

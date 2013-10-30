@@ -4,7 +4,7 @@ import sagan.tools.toolsuite.DownloadLink;
 import sagan.tools.toolsuite.EclipseVersion;
 import sagan.tools.toolsuite.ToolSuiteDownloads;
 import sagan.tools.toolsuite.ToolSuitePlatform;
-import sagan.util.FixtureLoader;
+import sagan.util.Fixtures;
 import sagan.util.service.CachedRestClient;
 
 import java.util.List;
@@ -24,6 +24,11 @@ import static org.hamcrest.Matchers.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit tests for {@link ToolsService}.
+ *
+ * @author Chris Beams
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class ToolsServiceTests {
 
@@ -33,21 +38,20 @@ public class ToolsServiceTests {
     private RestTemplate restTemplate;
 
     @Mock
-    private CachedRestClient cachedRestClient;
+    private CachedRestClient restClient;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         Serializer serializer = new Persister();
-        this.service = new ToolsService(this.cachedRestClient, this.restTemplate, serializer);
-        String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
-        when(this.cachedRestClient.get(eq(this.restTemplate), anyString(), (Class<String>) anyObject())).thenReturn(
-                responseXml);
+        service = new ToolsService(restClient, restTemplate, serializer);
+        String responseXml = Fixtures.load("/fixtures/tools/sts_downloads.xml");
+        when(restClient.get(eq(restTemplate), anyString(), (Class<String>) anyObject())).thenReturn(responseXml);
     }
 
     @Test
     public void testGetStsDownloads() throws Exception {
-        ToolSuiteDownloads toolSuite = this.service.getStsGaDownloads();
+        ToolSuiteDownloads toolSuite = service.getStsGaDownloads();
         assertThat(toolSuite, notNullValue());
 
         List<ToolSuitePlatform> platforms = toolSuite.getPlatformList();
@@ -85,7 +89,7 @@ public class ToolsServiceTests {
 
     @Test
     public void testGetGgtsDownloads() throws Exception {
-        ToolSuiteDownloads toolSuite = this.service.getGgtsGaDownloads();
+        ToolSuiteDownloads toolSuite = service.getGgtsGaDownloads();
         assertThat(toolSuite, notNullValue());
 
         List<ToolSuitePlatform> platforms = toolSuite.getPlatformList();

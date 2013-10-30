@@ -2,10 +2,10 @@ package sagan.util.service;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
 
-@Service
+@Component
 public class CachedRestClient {
 
     @Cacheable(value = "cache.network", key = "#url")
@@ -17,4 +17,5 @@ public class CachedRestClient {
         HttpEntity<String> requestEntity = new HttpEntity<>(body);
         return operations.postForObject(url, requestEntity, clazz);
     }
+
 }

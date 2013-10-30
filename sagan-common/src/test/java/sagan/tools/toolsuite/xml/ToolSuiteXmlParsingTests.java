@@ -1,6 +1,6 @@
 package sagan.tools.toolsuite.xml;
 
-import sagan.util.FixtureLoader;
+import sagan.util.Fixtures;
 
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class ToolSuiteXmlParsingTests {
-    private String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
+    private String responseXml = Fixtures.load("/fixtures/tools/sts_downloads.xml");
 
     @Test
     public void unmarshal() throws Exception {

@@ -1,6 +1,6 @@
 package sagan.tools.eclipse.xml;
 
-import sagan.util.FixtureLoader;
+import sagan.util.Fixtures;
 
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.*;
 
 public class EclipseXmlParsingTests {
 
-    private String responseXml = FixtureLoader.load("/fixtures/tools/eclipse.xml");
+    private String responseXml = Fixtures.load("/fixtures/tools/eclipse.xml");
 
     @Test
     public void unmarshal() throws Exception {

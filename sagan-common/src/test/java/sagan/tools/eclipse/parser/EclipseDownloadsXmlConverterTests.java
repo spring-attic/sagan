@@ -5,7 +5,7 @@ import sagan.tools.eclipse.EclipsePackage;
 import sagan.tools.eclipse.EclipsePlatform;
 import sagan.tools.eclipse.EclipseRelease;
 import sagan.tools.eclipse.xml.EclipseXml;
-import sagan.util.FixtureLoader;
+import sagan.util.Fixtures;
 
 import java.util.List;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class EclipseDownloadsXmlConverterTests {
 
     @Before
     public void setUp() throws Exception {
-        String responseXml = FixtureLoader.load("/fixtures/tools/eclipse.xml");
+        String responseXml = Fixtures.load("/fixtures/tools/eclipse.xml");
         Serializer serializer = new Persister();
         EclipseXml eclipseXml = serializer.read(EclipseXml.class, responseXml);
         eclipseDownloads = new EclipseDownloadsXmlConverter().convert(eclipseXml);

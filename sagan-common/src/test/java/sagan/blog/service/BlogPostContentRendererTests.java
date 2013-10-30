@@ -1,7 +1,5 @@
 package sagan.blog.service;
 
-import sagan.util.service.MarkdownService;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

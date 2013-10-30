@@ -1,6 +1,6 @@
 package integration.tools;
 
-import sagan.util.FixtureLoader;
+import sagan.util.Fixtures;
 
 import java.io.IOException;
 
@@ -30,7 +30,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
     @Before
     public void setup() throws IOException {
-        String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
+        String responseXml = Fixtures.load("/fixtures/tools/sts_downloads.xml");
 
         stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
     }
@@ -82,7 +82,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void hidesStsMilestoneDownloadsIfNotAvailable() throws Exception {
-        String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads_without_milestones.xml");
+        String responseXml = Fixtures.load("/fixtures/tools/sts_downloads_without_milestones.xml");
         stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
 
         MvcResult mvcResult = this.mockMvc.perform(get("/tools/sts/all"))
@@ -140,7 +140,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void hidesGgtsMilestoneDownloadsIfNotAvailable() throws Exception {
-        String responseXml = FixtureLoader.load("/fixtures/tools/sts_downloads_without_milestones.xml");
+        String responseXml = Fixtures.load("/fixtures/tools/sts_downloads_without_milestones.xml");
         stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
 
         MvcResult mvcResult = this.mockMvc.perform(get("/tools/ggts/all"))
@@ -158,7 +158,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void showsEclipseIndex() throws Exception {
-        String responseXml = FixtureLoader.load("/fixtures/tools/eclipse.xml");
+        String responseXml = Fixtures.load("/fixtures/tools/eclipse.xml");
         stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
 
         MvcResult mvcResult = this.mockMvc.perform(get("/tools/eclipse"))

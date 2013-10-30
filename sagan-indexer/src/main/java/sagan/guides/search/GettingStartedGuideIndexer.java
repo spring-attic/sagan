@@ -1,7 +1,7 @@
 package sagan.guides.search;
 
-import sagan.guides.Guide;
-import sagan.guides.service.GuidesService;
+import sagan.guides.GettingStartedGuide;
+import sagan.guides.support.GettingStartedGuides;
 import sagan.search.service.SearchService;
 import sagan.util.index.Indexer;
 
@@ -9,26 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GettingStartedGuideIndexer implements Indexer<Guide> {
+public class GettingStartedGuideIndexer implements Indexer<GettingStartedGuide> {
 
     private GuideSearchEntryMapper mapper = new GuideSearchEntryMapper();
 
     private final SearchService searchService;
-    private final GuidesService guidesService;
+    private final GettingStartedGuides gsGuides;
 
     @Autowired
-    public GettingStartedGuideIndexer(SearchService searchService, GuidesService guidesService) {
+    public GettingStartedGuideIndexer(SearchService searchService, GettingStartedGuides gsGuides) {
         this.searchService = searchService;
-        this.guidesService = guidesService;
+        this.gsGuides = gsGuides;
     }
 
     @Override
-    public Iterable<Guide> indexableItems() {
-        return guidesService.listGettingStartedGuides();
+    public Iterable<GettingStartedGuide> indexableItems() {
+        return gsGuides.findAll();
     }
 
     @Override
-    public void indexItem(Guide guide) {
+    public void indexItem(GettingStartedGuide guide) {
         searchService.saveToIndex(mapper.map(guide));
     }
 
@@ -38,7 +38,7 @@ public class GettingStartedGuideIndexer implements Indexer<Guide> {
     }
 
     @Override
-    public String getId(Guide indexable) {
+    public String getId(GettingStartedGuide indexable) {
         return indexable.getGuideId();
     }
 }

@@ -1,7 +1,7 @@
 package integration.caching;
 
 import sagan.app.site.ApplicationConfiguration;
-import sagan.util.FixtureLoader;
+import sagan.util.Fixtures;
 import sagan.util.SetSystemProperty;
 
 import org.junit.After;
@@ -88,13 +88,11 @@ public class NetworkCachingStrategyTests {
         reset(this.restTemplate);
 
         String requestPath = "https://api.github.com/orgs/spring-guides/repos";
-        String repoList = FixtureLoader.load("/fixtures/github/githubRepoList.json");
 
         this.restOperations = mock(RestOperations.class);
         given(this.gitHub.restOperations()).willReturn(this.restOperations);
-        given(
-                this.restOperations.getForObject(startsWith(requestPath),
-                        (Class<String>) anyObject())).willReturn(repoList);
+        given(this.restOperations.getForObject(
+                startsWith(requestPath), (Class<String>) anyObject())).willReturn(Fixtures.githubRepoListJson());
     }
 
     @After
@@ -124,7 +122,7 @@ public class NetworkCachingStrategyTests {
 
     @Test
     public void toolsSTSXmlRequestsAreCached() throws Exception {
-        String stsDownloads = FixtureLoader.load("/fixtures/tools/sts_downloads.xml");
+        String stsDownloads = Fixtures.load("/fixtures/tools/sts_downloads.xml");
         given(
                 this.restTemplate.getForObject(
                         "http://dist.springsource.com/release/STS/index-new.xml",
@@ -138,7 +136,7 @@ public class NetworkCachingStrategyTests {
 
     @Test
     public void toolsEclipseXmlRequestsAreCached() throws Exception {
-        String eclipse = FixtureLoader.load("/fixtures/tools/eclipse.xml");
+        String eclipse = Fixtures.load("/fixtures/tools/eclipse.xml");
         given(
                 this.restTemplate.getForObject(
                         "http://download.springsource.com/release/STS/eclipse.xml",
