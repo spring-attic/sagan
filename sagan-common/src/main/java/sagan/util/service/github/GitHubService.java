@@ -13,7 +13,6 @@ import java.util.zip.ZipFile;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.ivy.util.FileUtil;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.OptionsBuilder;
 import org.asciidoctor.SafeMode;
@@ -22,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StreamUtils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -103,8 +103,8 @@ public class GitHubService implements MarkdownService {
                     OptionsBuilder.options().safe(SafeMode.SAFE));
 
             // Delete the zipball and the unpacked content
-            FileUtil.forceDelete(zipball);
-            FileUtil.forceDelete(unzippedRoot);
+            FileSystemUtils.deleteRecursively(zipball);
+            FileSystemUtils.deleteRecursively(unzippedRoot);
         } catch (IOException ex) {
             throw new IllegalStateException("Could not create temp file for source: "
                     + tempFilePrefix);
