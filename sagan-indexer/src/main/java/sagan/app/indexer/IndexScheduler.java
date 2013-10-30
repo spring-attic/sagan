@@ -4,7 +4,7 @@ import sagan.blog.search.PublishedBlogPostsIndexer;
 import sagan.docs.search.ProjectDocumentationIndexer;
 import sagan.guides.search.GettingStartedGuideIndexer;
 import sagan.guides.search.TutorialIndexer;
-import sagan.guides.search.UnderstandingGuideIndexer;
+import sagan.guides.search.UnderstandingDocIndexer;
 import sagan.staticpage.search.StaticPageIndexer;
 import sagan.tools.search.ToolsIndexer;
 
@@ -29,7 +29,7 @@ class IndexScheduler {
     @Autowired
     private StaticPageIndexer staticPageIndexer;
     @Autowired
-    private UnderstandingGuideIndexer understandingGuideIndexer;
+    private UnderstandingDocIndexer understandingGuideIndexer;
     @Autowired
     private TutorialIndexer tutorialIndexer;
     @Autowired

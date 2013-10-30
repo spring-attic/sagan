@@ -29,7 +29,7 @@
                   <button class="btn" data-protocol="subversion">Subversion</button>
                 </div>
                 <div class="clone-url https">
-                  <input type="text" id="clone-url-https" value="https://github.com/spring-guides/gs-rest-service.git" th:value="${tutorial.gitRepoHttpsUrl}" readonly="readonly"/>
+                  <input type="text" id="clone-url-https" th:value="${tutorial.gitRepoHttpsUrl}" readonly="readonly"/>
                   <button class="copy-button github" th:attr="data-clipboard-text=${tutorial.gitRepoHttpsUrl}" data-toggle="tooltip"></button>
                 </div>
                 <div class="clone-url ssh hide">

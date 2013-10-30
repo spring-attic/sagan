@@ -2,7 +2,7 @@ package sagan.projects.web;
 
 import sagan.projects.Project;
 import sagan.projects.service.ProjectMetadataService;
-import sagan.util.service.github.GitHubService;
+import sagan.util.service.github.GitHubClient;
 
 import java.io.IOException;
 import java.net.URI;
@@ -110,7 +110,7 @@ public class GhPagesWebhookController {
                 newIssue.put("title", "Please merge the latest changes to common gh-pages");
                 newIssue.put("body", spel.getValue(root, String.class));
                 String projectIssuesUrl =
-                        format("%s/repos/spring-projects/%s/issues", GitHubService.API_URL_BASE, project.getId());
+                        format("%s/repos/spring-projects/%s/issues", GitHubClient.API_URL_BASE, project.getId());
                 try {
                     URI newIssueUrl =
                             gitHub.restOperations().postForLocation(projectIssuesUrl,
@@ -128,7 +128,7 @@ public class GhPagesWebhookController {
     private boolean hasGhPagesBranch(Project project) {
         if (project.hasSite() && project.getSiteUrl().startsWith("http://projects.spring.io")) {
             String ghPagesBranchUrl = format("%s/repos/%s/%s/branches/gh-pages",
-                    GitHubService.API_URL_BASE, "spring-projects", project.getId());
+                    GitHubClient.API_URL_BASE, "spring-projects", project.getId());
             try {
                 HttpHeaders headers = gitHub.restOperations().headForHeaders(ghPagesBranchUrl);
                 return "200 OK".equals(headers.getFirst("Status"));

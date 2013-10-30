@@ -2,5 +2,6 @@ package sagan.search;
 
 public interface SearchEntryMapper<T> {
 
-    SearchEntry map(T input);
+    SearchEntry map(T item);
+
 }

@@ -1,7 +1,7 @@
 package sagan.guides.search;
 
-import sagan.guides.Guide;
-import sagan.guides.service.GuidesService;
+import sagan.guides.Tutorial;
+import sagan.guides.support.Tutorials;
 import sagan.search.service.SearchService;
 import sagan.util.index.Indexer;
 
@@ -9,26 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TutorialIndexer implements Indexer<Guide> {
+public class TutorialIndexer implements Indexer<Tutorial> {
 
     private TutorialMapper mapper = new TutorialMapper();
 
     private final SearchService searchService;
-    private final GuidesService guidesService;
+    private final Tutorials tutorials;
 
     @Autowired
-    public TutorialIndexer(SearchService searchService, GuidesService guidesService) {
+    public TutorialIndexer(SearchService searchService, Tutorials tutorials) {
         this.searchService = searchService;
-        this.guidesService = guidesService;
+        this.tutorials = tutorials;
     }
 
     @Override
-    public Iterable<Guide> indexableItems() {
-        return guidesService.listTutorials();
+    public Iterable<Tutorial> indexableItems() {
+        return tutorials.findAll();
     }
 
     @Override
-    public void indexItem(Guide tutorial) {
+    public void indexItem(Tutorial tutorial) {
         searchService.saveToIndex(mapper.map(tutorial));
     }
 
@@ -38,7 +38,7 @@ public class TutorialIndexer implements Indexer<Guide> {
     }
 
     @Override
-    public String getId(Guide indexable) {
-        return indexable.getGuideId();
+    public String getId(Tutorial tutorial) {
+        return tutorial.getGuideId();
     }
 }

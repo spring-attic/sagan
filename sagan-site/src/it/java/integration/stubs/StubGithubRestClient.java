@@ -1,6 +1,6 @@
 package integration.stubs;
 
-import sagan.util.service.github.GitHubRestClient;
+import sagan.util.service.github.GitHubClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ import org.springframework.web.util.UriTemplate;
 
 @Service
 @Primary
-public class StubGithubRestClient extends GitHubRestClient {
+public class StubGithubRestClient extends GitHubClient {
 
     private Map<String, String> responseMap = new HashMap<>();
 

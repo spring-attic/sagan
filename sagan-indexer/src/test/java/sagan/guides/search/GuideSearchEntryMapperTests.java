@@ -1,6 +1,10 @@
 package sagan.guides.search;
 
+import sagan.guides.ContentProvider;
+import sagan.guides.DefaultGuideMetadata;
+import sagan.guides.GettingStartedGuide;
 import sagan.guides.Guide;
+import sagan.guides.ImageProvider;
 import sagan.search.SearchEntry;
 
 import org.junit.Before;
@@ -11,11 +15,21 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class GuideSearchEntryMapperTests {
 
-    private Guide guide = new Guide("guide-repo",
-            "guide-id",
-            "Guide Title", "Guide Subtitle",
-            "Some Guide Content",
-            "Some Sidebar Content");
+    private Guide guide = new GettingStartedGuide(
+            new DefaultGuideMetadata("my-org", "xyz", "gs-xyz", "Guide XYZ Title::Guide XYZ Subtitle"),
+                    new ContentProvider<GettingStartedGuide>() {
+                        @Override
+                        public void populate(GettingStartedGuide guide) {
+                            guide.setContent("Some Guide Content");
+                            guide.setSidebar("Some Sidebar Content");
+                        }
+                    },
+                    new ImageProvider() {
+                        @Override
+                        public byte[] loadImage(Guide guide, String imageName) {
+                            return new byte[0];
+                        }
+                    });
 
     private GuideSearchEntryMapper guideMapper = new GuideSearchEntryMapper();
     private SearchEntry searchEntry;
@@ -32,7 +46,7 @@ public class GuideSearchEntryMapperTests {
 
     @Test
     public void mapsTitle() throws Exception {
-        assertThat(searchEntry.getTitle(), equalTo("Guide Title"));
+        assertThat(searchEntry.getTitle(), equalTo("Guide XYZ Title"));
     }
 
     @Test
