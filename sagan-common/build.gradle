@@ -36,7 +36,7 @@ dependencies {
     compile 'joda-time:joda-time:2.3'
     compile 'org.hibernate:hibernate-validator:4.3.1.Final'
 
-    // AsciiDoc compilation in-house, since GitHub doesn't provide a service
+    // for use in rendering AsciiDoc-based guide content to HTML
     compile 'org.asciidoctor:asciidoctor-java-integration:0.1.4'
 
     testUtilCompile "junit:junit:${vJunit}"
