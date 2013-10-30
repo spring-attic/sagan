@@ -6,11 +6,15 @@ require('./filter');
 
 var $ = require('jquery');
 var os = require('./os');
-var initSearch = require('./search/main');
+var SearchController = require('./search/SearchController');
 
+var navItem = '.nav-search';
+var searchDropdown = '.js-search-dropdown';
 var searchOpenTrigger = '.js-search-input-open';
 var searchCloseTrigger = '.body--container, .js-search-input-close, .homepage--body';
-var searchDropdown = '.js-search-dropdown';
+var noAnimationClass = 'no-animation';
+var enabledClass = 'js-highlight';
+var showHideClass = 'js-show';
 
 $(function () {
 
@@ -20,7 +24,7 @@ $(function () {
   // on pages where it is never used.
   $('#doc_filter').contentFilter();
 
-  initSearch(window.location.pathname === '/search', $(searchDropdown), $(searchOpenTrigger), $(searchCloseTrigger));
+  initSearch(window.location.pathname === '/search', $(searchDropdown).get(0));
 
   // TODO: Turn this into a dropdown component?
   //OPENS ITEM DROPDOWN WIDGET
@@ -95,7 +99,7 @@ $(function () {
     });
   });
 
-  initializeFacetSearchWidget();
+  initSearchResultsFacets();
 });
 
 // TODO: Turn into an item slider component?
@@ -119,14 +123,57 @@ function moveItemSlider() {
   slider.css('margin-left', sliderTarget);
 }
 
-function firstCheckbox(context) {
+function uncheckFirstCheckbox(context) {
   context.siblings('.facet--wrapper').find('input[type="checkbox"]').first().prop('checked', false);
+}
+
+/**
+ * Create and initialize a SearchController for the page-level search
+ * component.  Since the component is used on every page, is owned by
+ * the page, and interacts with other page-level components (like
+ * navigation items) it makes sense to do this initialization at this level.
+ * @param {boolean} initiallyVisible should the search component be visible initially
+ * @param {Node} searchContainer container node of the search component
+ * @returns {SearchController}
+ */
+function initSearch(initiallyVisible, searchContainer) {
+  var searchController = new SearchController(searchContainer, showHideClass);
+
+  $(searchOpenTrigger).on('click', function() {
+    showSearchDropdown();
+  });
+
+  $(searchCloseTrigger).on('click', hideSearchDropdown);
+
+  if (initiallyVisible) {
+    showSearchDropdown(noAnimationClass);
+  }
+
+  return searchController;
+
+  function showSearchDropdown(additionalClass) {
+    if(searchController.isShown()) {
+      return;
+    }
+
+    searchController.show(additionalClass);
+    $(navItem).addClass(enabledClass);
+  }
+
+  function hideSearchDropdown() {
+    if(!searchController.isShown()) {
+      return;
+    }
+
+    searchController.hide();
+    $(navItem).removeClass(enabledClass);
+  }
 }
 
 // TODO: Turn into a facet search component?
 // AFAICT, "Search facets" are used to narrow search results, and thus
 // are only used on the search results page.
-function initializeFacetSearchWidget() {
+function initSearchResultsFacets() {
   var searchFacet = $('.search-facets');
 
   if (!searchFacet.length) {
@@ -145,7 +192,8 @@ function initializeFacetSearchWidget() {
 
 
   $('.js-checkbox-pill').click(function() {
-    var facet = $(this).closest('.facet');
+    var $this = $(this);
+    var facet = $this.closest('.facet');
     var group = facet.parents('.facet').first();
     var checkBoxes = facet.find('input[type="checkbox"]');
     var checkBox = checkBoxes.first();
@@ -156,16 +204,19 @@ function initializeFacetSearchWidget() {
       //IF IT IS CHECKED
 
       //UNCHECKES ITSELF
-      $(this).prop('checked', false);
+      $this.prop('checked', false);
 
       // UNCHECKES HIGHEST PARENT
-      firstCheckbox($(this).parents('.sub-facet--list'));
+      uncheckFirstCheckbox($this.parents('.sub-facet--list'));
 
       // UNCHECKS CLOSEST PARENT
-      firstCheckbox($(this).closest('.sub-facet--list'));
+      uncheckFirstCheckbox($this.closest('.sub-facet--list'));
 
       // UNCHECKS ALL CHILDRED
-      $(this).parents('.facet--wrapper').siblings('.sub-facet--list, .facet-section--header').find('input[type="checkbox"]').prop('checked', false);
+      $this.parents('.facet--wrapper')
+          .siblings('.sub-facet--list, .facet-section--header')
+          .find('input[type="checkbox"]')
+          .prop('checked', false);
 
     } else {
       //IF IT IS NOT CHECKED

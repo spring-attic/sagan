@@ -4,13 +4,9 @@ module.exports = Controller;
 
 function Controller(root, showHideClass) {
   this.root = root;
-  this._input = $('input', root);
+  this._input = $('input', root).get(0);
   this._showHideClass = showHideClass;
   this._isShown = $(root).hasClass(showHideClass);
-}
-
-Controller.prototype.setValue = function(value) {
-  this._input.attr('value', value);
 }
 
 Controller.prototype.isShown = function() {
@@ -32,7 +28,7 @@ Controller.prototype.show = function(additionalClass) {
     this._input.blur();
     this._isShown = false;
     this._hide = noop;
-  }
+  };
 
   $(this.root).addClass(cls);
   this._input.focus();
