@@ -27,8 +27,6 @@ import org.springframework.util.StreamUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static org.asciidoctor.Asciidoctor.Factory.create;
-
 @Service
 public class GitHubService implements MarkdownService {
 
@@ -81,33 +79,31 @@ public class GitHubService implements MarkdownService {
             // Open the zip file and unpack it
             ZipFile zipFile = new ZipFile(zipball);
             File unzippedRoot = null;
-            for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e
-                    .hasMoreElements();) {
+            for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements();) {
                 ZipEntry entry = e.nextElement();
                 if (entry.isDirectory()) {
-                    File dir = new File(zipball.getParent() + File.separator
-                            + entry.getName());
+                    File dir = new File(zipball.getParent() + File.separator + entry.getName());
                     dir.mkdir();
-                    if (unzippedRoot == null)
+                    if (unzippedRoot == null) {
                         unzippedRoot = dir; // first directory is the root
+                    }
                 } else {
-                    StreamUtils.copy(zipFile.getInputStream(entry), new FileOutputStream(
-                            zipball.getParent() + File.separator + entry.getName()));
+                    StreamUtils.copy(zipFile.getInputStream(entry),
+                            new FileOutputStream(zipball.getParent() + File.separator + entry.getName()));
                 }
             }
 
             // Process the unzipped guide through asciidoctor, rendering HTML content
-            Asciidoctor asciidoctor = create();
-            content = asciidoctor.renderFile(new File(unzippedRoot.getAbsolutePath()
-                    + File.separator + "README.asc"),
+            Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+            content = asciidoctor.renderFile(
+                    new File(unzippedRoot.getAbsolutePath() + File.separator + "README.asc"),
                     OptionsBuilder.options().safe(SafeMode.SAFE));
 
             // Delete the zipball and the unpacked content
             FileSystemUtils.deleteRecursively(zipball);
             FileSystemUtils.deleteRecursively(unzippedRoot);
         } catch (IOException ex) {
-            throw new IllegalStateException("Could not create temp file for source: "
-                    + tempFilePrefix);
+            throw new IllegalStateException("Could not create temp file for source: " + tempFilePrefix);
         }
 
         return content;

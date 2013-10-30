@@ -15,13 +15,12 @@ import org.springframework.util.StreamUtils;
 public class DownloadConverter implements HttpMessageConverter<byte[]> {
 
     public List<MediaType> getSupportedMediaTypes() {
-        return Collections
-                .singletonList(new MediaType("application", "vnd.github.v3.raw"));
+        return Collections.singletonList(new MediaType("application", "vnd.github.v3.raw"));
     }
 
     @Override
-    public byte[] read(Class<? extends byte[]> clazz, HttpInputMessage inputMessage)
-            throws IOException, HttpMessageNotReadableException {
+    public byte[] read(Class<? extends byte[]> clazz, HttpInputMessage inputMessage) throws IOException,
+            HttpMessageNotReadableException {
         return StreamUtils.copyToByteArray(inputMessage.getBody());
     }
 
@@ -36,8 +35,7 @@ public class DownloadConverter implements HttpMessageConverter<byte[]> {
     }
 
     @Override
-    public void write(byte[] download, MediaType contentType,
-                      HttpOutputMessage outputMessage) throws IOException,
+    public void write(byte[] download, MediaType contentType, HttpOutputMessage outputMessage)throws IOException,
             HttpMessageNotWritableException {
         throw new UnsupportedOperationException("can't write");
     }
