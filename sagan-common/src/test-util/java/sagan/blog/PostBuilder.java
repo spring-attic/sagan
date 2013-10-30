@@ -29,7 +29,7 @@ public class PostBuilder {
         this.renderedContent = "post body";
         this.renderedSummary = "summary";
         this.broadcast = false;
-        this.publishAt = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+        this.publishAt = new Date(System.currentTimeMillis());
         this.draft = false;
     }
 
