@@ -4,13 +4,13 @@ import sagan.blog.Post;
 import sagan.blog.view.PostView;
 import sagan.util.service.DateService;
 import sagan.util.web.SiteUrl;
+import sagan.util.web.TimeUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,8 +27,6 @@ import com.sun.syndication.feed.atom.Person;
 
 public class BlogPostAtomViewer extends AbstractAtomFeedView {
 
-    private static final TimeZone UTC = TimeZone.getTimeZone("UTC");
-
     private final SiteUrl siteUrl;
     private final DateService dateService;
 
@@ -42,7 +40,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
     protected void buildFeedMetadata(Map<String, Object> model, Feed feed, HttpServletRequest request) {
         String feedPath = (String) model.get("feed-path");
         feed.setTitle((String) model.get("feed-title"));
-        feed.setId(String.format("http://springsource.org%s", feedPath));
+        feed.setId(String.format("http://spring.io%s", feedPath));
         feed.setIcon(this.siteUrl.getAbsoluteUrl("/favicon.ico"));
         setFeedUrl(feedPath, feed);
         setBlogUrl((String) model.get("blog-path"), feed);
@@ -99,7 +97,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 
     private void setId(Post post, Entry entry, HttpServletRequest request) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setTimeZone(UTC);
+        dateFormat.setTimeZone(TimeUtil.UTC);
         String dateString = dateFormat.format(post.getCreatedAt());
         String host = request.getServerName();
         String id = String.format("tag:%s,%s:%s", host, dateString, post.getId());

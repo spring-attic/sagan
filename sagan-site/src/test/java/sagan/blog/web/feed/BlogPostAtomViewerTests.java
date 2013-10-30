@@ -4,12 +4,12 @@ import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.util.service.DateService;
 import sagan.util.web.SiteUrl;
+import sagan.util.web.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +33,7 @@ public class BlogPostAtomViewerTests {
     private SiteUrl siteUrl;
     private BlogPostAtomViewer blogPostAtomViewer;
     private Feed feed = new Feed();
-    private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+    private Calendar calendar = Calendar.getInstance(TimeUtil.UTC);
     private HttpServletRequest request = mock(HttpServletRequest.class);
 
     @Before
@@ -85,7 +85,7 @@ public class BlogPostAtomViewerTests {
 
         blogPostAtomViewer.buildFeedMetadata(model, feed, request);
 
-        assertThat(feed.getId(), is("http://springsource.org/blog.atom"));
+        assertThat(feed.getId(), is("http://spring.io/blog.atom"));
     }
 
     @Test
