@@ -1,6 +1,5 @@
 package integration.search;
 
-import integration.AbstractIntegrationTests;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryBuilder;
 import sagan.search.SearchIndexSetup;
@@ -22,6 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import integration.AbstractIntegrationTests;
 import io.searchbox.client.JestClient;
 
 import static org.hamcrest.MatcherAssert.assertThat;

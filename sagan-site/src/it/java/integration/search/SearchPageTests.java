@@ -1,6 +1,5 @@
 package integration.search;
 
-import integration.AbstractIntegrationTests;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryBuilder;
 import sagan.search.service.SearchService;
@@ -14,6 +13,8 @@ import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
+
+import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;

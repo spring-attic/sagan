@@ -1,6 +1,5 @@
 package integration.tools;
 
-import integration.AbstractIntegrationTests;
 import sagan.util.FixtureLoader;
 
 import java.io.IOException;
@@ -13,6 +12,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.client.RestTemplate;
+
+import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;

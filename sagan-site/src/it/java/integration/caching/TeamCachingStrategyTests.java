@@ -1,6 +1,5 @@
 package integration.caching;
 
-import integration.AbstractIntegrationTests;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.service.BlogService;
@@ -26,6 +25,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import integration.AbstractIntegrationTests;
 
 import static integration.caching.TeamCachingStrategyTests.TestConfiguration;
 import static org.mockito.BDDMockito.given;
