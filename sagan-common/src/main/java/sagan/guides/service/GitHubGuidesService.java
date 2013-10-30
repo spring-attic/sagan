@@ -80,15 +80,15 @@ public class GitHubGuidesService implements GuidesService {
     }
 
     /**
-     * This fetches the "proper" GitHub README, which can then be examined to see if it's
-     * a markdown or asciidoc file.
+     * Fetch the default readme file for this given guide repository, which may be written
+     * in either Markdown or AsciiDoc.
      */
     private Readme getGuideReadme(String path) {
         try {
-            log.debug(String.format("Fetching getting started guide for '%s'", path));
+            log.debug(String.format("Fetching README for '%s'", path));
             return this.gitHubService.getReadme(path);
         } catch (RestClientException e) {
-            String msg = String.format("No getting started guide found for '%s'", path);
+            String msg = String.format("No README found for '%s'", path);
             log.warn(msg, e);
             throw new GuideNotFoundException(msg, e);
         }

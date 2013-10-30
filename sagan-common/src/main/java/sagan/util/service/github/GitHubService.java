@@ -44,8 +44,11 @@ public class GitHubService implements MarkdownService {
     }
 
     /**
-     * NOTE: Only used for rendering Blog posts. Fetching guides draws straight HTML from
-     * GitHub
+     * Process the given markdown through GitHub's Markdown Rendering API. Note that this
+     * approach is used only for rendering blog posts; guides on the other hand are
+     * fetched directly as HTML from GitHub using the Accept: header.
+     *
+     * See http://developer.github.com/v3/markdown
      */
     @Override
     public String renderToHtml(String markdownSource) {
