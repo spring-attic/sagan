@@ -24,7 +24,17 @@ Tests live in the `scenario` directory.  Until our dedicated selenium server is 
 1. Run the tests in sagan-js
     1. `cd sagan-js`
         1. If necessary, make sure you have the latest dependencies: `npm install`
-    1. `npm run phantom`
+    1. `npm run firefox`
+
+### Using phantomjs instead of Firefox
+
+You can run the scenario tests in headless mode against phantomjs:
+
+`npm run phantom`
+
+However, there seems to be a problem with phantomjs always reporting that some elements are "not visible".  Selenium will refuse to click such elements, and tests will fail because of it (the same tests will pass in Firefox and other browsers).
+
+You may still want to run tests against phantomjs selectively, i.e. for quick iterations while working on a particular test.  Probably the best way is using BusterJS's [focus rocket](http://asciinema.org/a/548) to force buster to run only the test you're working on.
 
 ### Docs for wd selenium driver
 

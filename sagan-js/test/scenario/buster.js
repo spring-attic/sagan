@@ -10,14 +10,14 @@ var phantomjsBin = process.env.SELENIUM_PHANTOMJS_BIN || process.cwd() + '/node_
 exports['scenario-base'] = {
   rootPath: '..',
   environment: 'node',
+  extensions: [require('../lib/buster-wd')],
+  testHelpers: ['lib/buster-spec-expose.js'],
   tests: ['scenario/*-spec.js', 'scenario/**/*-spec.js']
 };
 
 // For now, a simple selenium setup that will use phantomjs
 exports['scenario-phantom'] = {
   extends: 'scenario-base',
-  extensions: [require('../lib/buster-wd')],
-  testHelpers: ['lib/buster-spec-expose.js'],
   'buster-wd': {
     config: {
       desiredCapabilities: {
@@ -28,6 +28,19 @@ exports['scenario-phantom'] = {
     }
   }
 };
+
+exports['scenario-firefox'] = {
+  extends: 'scenario-base',
+  'buster-wd': {
+    config: {
+      desiredCapabilities: {
+        browserName: 'firefox'
+      },
+      logLevel: 'silent'
+    }
+  }
+};
+
 
 // TODO: Enable and configure once selenium server is setup
 //exports['scenario'] = {

@@ -74,7 +74,7 @@ exports.testRun = function(testRunner) {
   });
 
   testRunner.on('suite:end', function() {
-    browser.end();
+    browser.quit()
   });
 };
 
@@ -85,5 +85,5 @@ function createBrowser(webdriver, options, capabilities) {
     this.get(url.resolve(baseUrl, relativeUrl), callback);
   };
 
-  return webdriver.promiseRemote(options.server).init(capabilities);
+  return webdriver.promiseChainRemote(options.server).init(capabilities);
 }
