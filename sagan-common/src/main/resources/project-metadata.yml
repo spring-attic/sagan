@@ -321,7 +321,7 @@ projects:
         - name: 3.1.4.RELEASE
           refDocUrl: /spring-security/site/docs/{version}/reference/springsecurity.html
           apiDocUrl: /spring-security/site/docs/{version}/apidocs/
-        - name: 3.2.0.RC1
+        - name: 3.2.0.RC2
           refDocUrl: /spring-security/site/docs/{version}/reference/htmlsingle/
           apiDocUrl: /spring-security/site/docs/{version}/apidocs/
         - name: 3.2.0.CI-SNAPSHOT
