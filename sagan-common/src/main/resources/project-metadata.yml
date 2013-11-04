@@ -207,7 +207,7 @@ projects:
     - id: spring-framework
       name: Spring Framework
       groupId: org.springframework
-      refDocUrl: /spring/docs/{version}/spring-framework-reference/html/
+      refDocUrl: /spring/docs/{version}/spring-framework-reference/htmlsingle/
       apiDocUrl: /spring/docs/{version}/javadoc-api/
       supportedVersions:
         - 4.0.0.BUILD-SNAPSHOT
