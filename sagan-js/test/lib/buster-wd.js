@@ -74,7 +74,7 @@ exports.testRun = function(testRunner) {
   });
 
   testRunner.on('suite:end', function() {
-    browser.quit()
+    browser.quit();
   });
 };
 
