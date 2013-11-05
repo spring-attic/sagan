@@ -8,37 +8,37 @@ var phantomjsBin = process.env.SELENIUM_PHANTOMJS_BIN || process.cwd() + '/node_
 
 // Shared config for all functional scenario tests
 exports['scenario-base'] = {
-  rootPath: '..',
-  environment: 'node',
-  extensions: [require('../lib/buster-wd')],
-  testHelpers: ['lib/buster-spec-expose.js'],
-  tests: ['scenario/*-spec.js', 'scenario/**/*-spec.js']
+    rootPath: '..',
+    environment: 'node',
+    extensions: [require('../lib/buster-wd')],
+    testHelpers: ['lib/buster-spec-expose.js'],
+    tests: ['scenario/*-spec.js', 'scenario/**/*-spec.js']
 };
 
 // For now, a simple selenium setup that will use phantomjs
 exports['scenario-phantom'] = {
-  extends: 'scenario-base',
-  'buster-wd': {
-    config: {
-      desiredCapabilities: {
-        browserName: 'phantomjs',
-        'phantomjs.binary.path': phantomjsBin
-      },
-      logLevel: 'silent'
+    extends: 'scenario-base',
+    'buster-wd': {
+        config: {
+            desiredCapabilities: {
+                browserName: 'phantomjs',
+                'phantomjs.binary.path': phantomjsBin
+            },
+            logLevel: 'silent'
+        }
     }
-  }
 };
 
 exports['scenario-firefox'] = {
-  extends: 'scenario-base',
-  'buster-wd': {
-    config: {
-      desiredCapabilities: {
-        browserName: 'firefox'
-      },
-      logLevel: 'silent'
+    extends: 'scenario-base',
+    'buster-wd': {
+        config: {
+            desiredCapabilities: {
+                browserName: 'firefox'
+            },
+            logLevel: 'silent'
+        }
     }
-  }
 };
 
 

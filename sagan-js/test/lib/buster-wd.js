@@ -54,36 +54,36 @@ var defaultTimeout = 10000;
 
 exports.name = 'buster-wd';
 
-exports.create = function(options) {
-  var ext = Object.create(this);
-  ext.options = options;
-  ext.webdriverConfig = options.config;
-  return ext;
+exports.create = function (options) {
+    var ext = Object.create(this);
+    ext.options = options;
+    ext.webdriverConfig = options.config;
+    return ext;
 };
 
-exports.testRun = function(testRunner) {
-  var browser = createBrowser(require(webdriverPackage),
-      this.options,
-      this.webdriverConfig.desiredCapabilities);
+exports.testRun = function (testRunner) {
+    var browser = createBrowser(require(webdriverPackage),
+        this.options,
+        this.webdriverConfig.desiredCapabilities);
 
-  var timeout = this.options.timeout || defaultTimeout;
+    var timeout = this.options.timeout || defaultTimeout;
 
-  testRunner.on('test:setUp', function(context) {
-    context.testCase.timeout = timeout;
-    context.testCase.browser = browser;
-  });
+    testRunner.on('test:setUp', function (context) {
+        context.testCase.timeout = timeout;
+        context.testCase.browser = browser;
+    });
 
-  testRunner.on('suite:end', function() {
-    browser.quit();
-  });
+    testRunner.on('suite:end', function () {
+        browser.quit();
+    });
 };
 
 function createBrowser(webdriver, options, capabilities) {
-  var baseUrl = options.baseUrl || defaultBaseUrl;
+    var baseUrl = options.baseUrl || defaultBaseUrl;
 
-  webdriver.webdriver.prototype.path = function(relativeUrl, callback) {
-    this.get(url.resolve(baseUrl, relativeUrl), callback);
-  };
+    webdriver.webdriver.prototype.path = function (relativeUrl, callback) {
+        this.get(url.resolve(baseUrl, relativeUrl), callback);
+    };
 
-  return webdriver.promiseChainRemote(options.server).init(capabilities);
+    return webdriver.promiseChainRemote(options.server).init(capabilities);
 }
