@@ -410,30 +410,33 @@
   width: 87.2%;
 }
 
-.tool-archive--table {
+.tool-archive--table, .tool-update-sites--table {
   margin-top: 30px;
   border-bottom: 1px solid #cccccc;
 }
-.tool-archive--table th {
+.tool-archive--table th, .tool-update-sites--table th {
   text-transform: uppercase;
   font-size: 12px;
   line-height: 12px;
   border-bottom: 1px solid #cccccc;
   font-family: "Montserrat", sans-serif;
 }
-.tool-archive--table td:last-child {
+.tool-update-sites--table th:first-child {
+  width: 105px;
+}
+.tool-archive--table td:last-child, .tool-update-sites--table td:last-child {
   color: #6c635d;
 }
-.tool-archive--table td:first-child {
+.tool-archive--table td:first-child, .tool-update-sites--table td:first-child {
   border-left: 1px solid #cccccc;
 }
-.tool-archive--table td:last-child {
+.tool-archive--table td:last-child, .tool-update-sites--table td:last-child {
   border-right: 1px solid #cccccc;
 }
-.tool-archive--table tr:last-child {
+.tool-archive--table tr:last-child, .tool-update-sites--table tr:last-child {
   border-bottom: 1px solid #cccccc;
 }
-.tool-archive--table a {
+.tool-archive--table a, .tool-update-sites--table a {
   color: #5fa134;
 }
 
