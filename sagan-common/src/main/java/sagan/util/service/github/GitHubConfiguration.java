@@ -48,6 +48,7 @@ public class GitHubConfiguration {
             List<HttpMessageConverter<?>> converters = new ArrayList<>();
             converters.add(new JsonStringConverter());
             converters.add(new MarkdownHtmlConverter());
+            converters.add(new DownloadConverter());
             converters.add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
             return converters;
         }

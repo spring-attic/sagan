@@ -33,7 +33,7 @@ public class GitHubServiceTests {
     public void getRawFileAsHtml_fetchesRenderedHtmlFromGitHub() throws Exception {
         given(gitHubRestClient.sendRequestForHtml("/path/to/html")).willReturn("<h1>Something</h1>");
 
-        assertThat(service.getRawFileAsHtml("/path/to/html"), equalTo("<h1>Something</h1>"));
+        assertThat(service.getMarkdownFileAsHtml("/path/to/html"), equalTo("<h1>Something</h1>"));
     }
 
     @Test

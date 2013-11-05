@@ -5,6 +5,7 @@ import sagan.guides.GuideNotFoundException;
 import sagan.guides.GuideWithoutContent;
 import sagan.guides.ImageNotFoundException;
 import sagan.util.service.github.GitHubService;
+import sagan.util.service.github.Readme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -22,13 +24,13 @@ public class GitHubGuidesService implements GuidesService {
 
     private static final String GITHUB_USERNAME = "spring-guides";
     private static final String REPOS_PATH = "/orgs/spring-guides/repos?per_page=100";
-    private static final String README_PATH = "/repos/spring-guides/%s/contents/README.md";
+    private static final String README = "/repos/spring-guides/%s/readme";
+    private static final String README_PATH_MD = "/repos/spring-guides/%s/contents/README.md";
+    private static final String README_PATH_ASC = "/repos/spring-guides/%s/zipball";
     private static final String SIDEBAR_PATH = "/repos/spring-guides/%s/contents/SIDEBAR.md";
-
-    private static final Log log = LogFactory.getLog(GitHubGuidesService.class);
-
-    private final GitHubService gitHubService;
     private static final String TUTORIAL_PAGE_PATH = "/repos/spring-guides/%s/contents/%s/README.md";
+    private static final Log log = LogFactory.getLog(GitHubGuidesService.class);
+    private final GitHubService gitHubService;
 
     @Autowired
     public GitHubGuidesService(GitHubService gitHubService) {
@@ -36,10 +38,19 @@ public class GitHubGuidesService implements GuidesService {
     }
 
     @Override
+    @Cacheable(value = "cache.guide", key = "#guideId")
     public Guide loadGettingStartedGuide(String guideId) {
         String repoName = getRepoNameFromGuideId(guideId);
         String description = getGuideDescription(repoName);
-        String content = getGuideContent(String.format(README_PATH, repoName));
+
+        Readme readme = getGuideReadme(String.format(README, repoName));
+
+        String content = "";
+        if (readme.getName().endsWith(".md")) {
+            content = getMarkdownGuideContentAsHtml(String.format(README_PATH_MD, repoName));
+        } else {
+            content = getAsciiDocGuideContentAsHtml(String.format(README_PATH_ASC, repoName));
+        }
         String sidebar = getGuideSidebar(repoName);
         String title = parseTitle(description);
         String subTitle = parseSubTitle(description);
@@ -68,10 +79,36 @@ public class GitHubGuidesService implements GuidesService {
         }
     }
 
-    private String getGuideContent(String path) {
+    /**
+     * This fetches the "proper" GitHub README, which can then be examined to see if it's
+     * a markdown or asciidoc file.
+     */
+    private Readme getGuideReadme(String path) {
         try {
             log.debug(String.format("Fetching getting started guide for '%s'", path));
-            return this.gitHubService.getRawFileAsHtml(path);
+            return this.gitHubService.getReadme(path);
+        } catch (RestClientException e) {
+            String msg = String.format("No getting started guide found for '%s'", path);
+            log.warn(msg, e);
+            throw new GuideNotFoundException(msg, e);
+        }
+    }
+
+    private String getMarkdownGuideContentAsHtml(String path) {
+        try {
+            log.debug(String.format("Fetching getting started guide for '%s'", path));
+            return this.gitHubService.getMarkdownFileAsHtml(path);
+        } catch (RestClientException e) {
+            String msg = String.format("No getting started guide found for '%s'", path);
+            log.warn(msg, e);
+            throw new GuideNotFoundException(msg, e);
+        }
+    }
+
+    private String getAsciiDocGuideContentAsHtml(String path) {
+        try {
+            log.debug(String.format("Fetching getting started guide for '%s'", path));
+            return this.gitHubService.getAsciiDocFileAsHtml(path);
         } catch (RestClientException e) {
             String msg = String.format("No getting started guide found for '%s'", path);
             log.warn(msg, e);
@@ -81,7 +118,7 @@ public class GitHubGuidesService implements GuidesService {
 
     private String getGuideSidebar(String guideRepoName) {
         try {
-            return this.gitHubService.getRawFileAsHtml(String.format(SIDEBAR_PATH, guideRepoName));
+            return this.gitHubService.getMarkdownFileAsHtml(String.format(SIDEBAR_PATH, guideRepoName));
         } catch (RestClientException e) {
             return "";
         }
@@ -134,7 +171,8 @@ public class GitHubGuidesService implements GuidesService {
                 String title = parseTitle(description);
                 String subTitle = parseSubTitle(description);
                 guides.add(new Guide(repoName, repoName.replaceAll("^" + prefix, ""), title, subTitle,
-                        getGuideContent(String.format(README_PATH, repoName)), getGuideSidebar(repoName)));
+                        getMarkdownGuideContentAsHtml(String.format(README_PATH_MD, repoName)),
+                        getGuideSidebar(repoName)));
             }
         }
         return guides;
@@ -163,7 +201,7 @@ public class GitHubGuidesService implements GuidesService {
     @Override
     public Guide loadTutorial(String tutorialId) {
         String repoName = "tut-" + tutorialId;
-        String contentPath = String.format(README_PATH, repoName);
+        String contentPath = String.format(README_PATH_MD, repoName);
         return loadTutorial(tutorialId, repoName, contentPath);
     }
 
@@ -175,7 +213,7 @@ public class GitHubGuidesService implements GuidesService {
     }
 
     private Guide loadTutorial(String tutorialId, String repoName, String contentPath) {
-        String content = getGuideContent(contentPath);
+        String content = getMarkdownGuideContentAsHtml(contentPath);
         String description = getGuideDescription(repoName);
         String sidebar = getGuideSidebar(repoName);
         String title = parseTitle(description);

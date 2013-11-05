@@ -23,6 +23,11 @@ public class GitHubRestClient {
         return cachedRestClient.get(gitHub.restOperations(), url, String.class);
     }
 
+    public byte[] sendRequestForDownload(String path, Object... uriVariables) {
+        String url = resolveUrl(path, uriVariables);
+        return cachedRestClient.get(gitHub.restOperations(), url, byte[].class);
+    }
+
     public String sendRequestForHtml(String path, Object... uriVariables) {
         String url = resolveUrl(path, uriVariables);
         MarkdownHtml markdownHtml = cachedRestClient.get(gitHub.restOperations(), url, MarkdownHtml.class);

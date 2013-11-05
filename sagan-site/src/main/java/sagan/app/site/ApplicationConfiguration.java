@@ -136,12 +136,14 @@ public class ApplicationConfiguration {
 
     @Bean
     public CacheManager cacheManager(@Value("${cache.network.timetolive:300}") Long cacheNetworkTimeToLive,
-                                     @Value("${cache.database.timetolive:60}") Long cacheDatabaseTimeToLive) {
+                                     @Value("${cache.database.timetolive:60}") Long cacheDatabaseTimeToLive,
+                                     @Value("${cache.guide.timetolive:300}") Long cacheGuideTimeToLive) {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
 
         List<ConcurrentMapCache> cacheList = new ArrayList<>();
         cacheList.add(createConcurrentMapCache(cacheNetworkTimeToLive, "cache.network", -1));
         cacheList.add(createConcurrentMapCache(cacheDatabaseTimeToLive, "cache.database", 50));
+        cacheList.add(createConcurrentMapCache(cacheGuideTimeToLive, "cache.guide", 100));
         cacheManager.setCaches(cacheList);
         return cacheManager;
     }
