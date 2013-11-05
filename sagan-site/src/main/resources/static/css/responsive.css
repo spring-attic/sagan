@@ -458,7 +458,7 @@
   .search-facets, .facets--clear-filters {
     display: none;
   }
-  .row-fluid .span8 {
+  .search-results-page .row-fluid .span8 {
     width: 100%;
   }
 }
