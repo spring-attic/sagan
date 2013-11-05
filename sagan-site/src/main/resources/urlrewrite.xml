@@ -67,4 +67,10 @@
         <from>^(/projects)?(/spring-.+)$</from>
         <to type="temporary-redirect" last="true">http://projects.spring.io$2</to>
     </rule>
+    <rule>
+        <name>GGTS welcome page</name>
+        <note>https://www.pivotaltracker.com/story/show/60153474</note>
+        <from>^/tools/ggts/welcome</from>
+        <to type="temporary-redirect" last="true">http://grails.org/products/ggts/welcome</to>
+    </rule>
 </urlrewrite>
