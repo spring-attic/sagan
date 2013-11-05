@@ -75,7 +75,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         Map<String, Object> release = (Map<String, Object>) releases.get(0);
         assertThat((String) release.get("version"), equalTo("4.0.0.BUILD-SNAPSHOT"));
         assertThat((String) release.get("refDocUrl"),
-                equalTo("http://docs.spring.io/spring/docs/4.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/"));
+                equalTo("http://docs.spring.io/spring/docs/4.0.0.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/"));
         assertThat((String) release.get("apiDocUrl"),
                 equalTo("http://docs.spring.io/spring/docs/4.0.0.BUILD-SNAPSHOT/javadoc-api/"));
         assertThat((Boolean) release.get("preRelease"), equalTo(false));
@@ -92,7 +92,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         Map<String, Object> release = (Map<String, Object>) releases.get(1);
         assertThat((String) release.get("version"), equalTo("4.0.0.RC1"));
         assertThat((String) release.get("refDocUrl"),
-                equalTo("http://docs.spring.io/spring/docs/4.0.0.RC1/spring-framework-reference/html/"));
+                equalTo("http://docs.spring.io/spring/docs/4.0.0.RC1/spring-framework-reference/htmlsingle/"));
         assertThat((String) release.get("apiDocUrl"),
                 equalTo("http://docs.spring.io/spring/docs/4.0.0.RC1/javadoc-api/"));
         assertThat((Boolean) release.get("preRelease"), equalTo(true));
