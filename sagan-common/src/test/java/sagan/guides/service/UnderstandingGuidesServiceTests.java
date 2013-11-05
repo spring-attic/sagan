@@ -42,8 +42,8 @@ public class UnderstandingGuidesServiceTests {
 
     @Test
     public void testGetsContentForGuide() throws Exception {
-        given(gitHubService.getRawFileAsHtml(matches(".*foo.*README.*"))).willReturn("Understanding: foo!");
-        given(gitHubService.getRawFileAsHtml(matches(".*rest.*README.*"))).willReturn("Understanding: rest");
+        given(gitHubService.getMarkdownFileAsHtml(matches(".*foo.*README.*"))).willReturn("Understanding: foo!");
+        given(gitHubService.getMarkdownFileAsHtml(matches(".*rest.*README.*"))).willReturn("Understanding: rest");
 
         List<UnderstandingGuide> guides = understandingGuidesService.getGuides();
 
@@ -53,8 +53,8 @@ public class UnderstandingGuidesServiceTests {
 
     @Test
     public void testGetsSidebarForGuide() throws Exception {
-        given(gitHubService.getRawFileAsHtml(matches(".*foo.*SIDEBAR.*"))).willReturn("foo sidebar");
-        given(gitHubService.getRawFileAsHtml(matches(".*rest.*SIDEBAR.*"))).willReturn("rest sidebar");
+        given(gitHubService.getMarkdownFileAsHtml(matches(".*foo.*SIDEBAR.*"))).willReturn("foo sidebar");
+        given(gitHubService.getMarkdownFileAsHtml(matches(".*rest.*SIDEBAR.*"))).willReturn("rest sidebar");
 
         List<UnderstandingGuide> guides = understandingGuidesService.getGuides();
 
