@@ -5,7 +5,7 @@ import sagan.blog.view.PostViewFactory;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
 import sagan.team.TeamLocation;
-import sagan.team.service.CachedTeamService;
+import sagan.team.service.TeamService;
 import sagan.util.service.DateService;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class TeamControllerTests {
     private BlogService blogService;
 
     @Mock
-    private CachedTeamService teamService;
+    private TeamService teamService;
 
     private ExtendedModelMap model = new ExtendedModelMap();
 
