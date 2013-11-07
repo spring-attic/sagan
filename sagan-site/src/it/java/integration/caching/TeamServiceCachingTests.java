@@ -28,14 +28,20 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import integration.AbstractIntegrationTests;
 
-import static integration.caching.TeamCachingStrategyTests.TestConfiguration;
+import static integration.caching.TeamServiceCachingTests.TestConfiguration;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
-@ContextConfiguration(classes = { TestConfiguration.class })
-public class TeamCachingStrategyTests extends AbstractIntegrationTests {
+/**
+ * Integration tests ensuring that caching functionality works as expected in
+ * {@link TeamService}.
+ *
+ * @author Pivotal Labs
+ */
+@ContextConfiguration(classes = TestConfiguration.class)
+public class TeamServiceCachingTests extends AbstractIntegrationTests {
 
     private MemberProfile memberProfile;
 

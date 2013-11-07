@@ -3,6 +3,7 @@ package integration.caching;
 import sagan.app.site.ApplicationConfiguration;
 import sagan.util.Fixtures;
 import sagan.util.SetSystemProperty;
+import sagan.util.service.CachedRestClient;
 
 import org.junit.After;
 import org.junit.Before;
@@ -27,7 +28,7 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
-import integration.caching.NetworkCachingStrategyTests.TestConfiguration;
+import integration.caching.CachedRestClientTests.TestConfiguration;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyObject;
@@ -37,10 +38,16 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Integration tests ensuring that caching functionality works as expected in
+ * {@link CachedRestClient}.
+ *
+ * @author Pivotal Labs
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = TestConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
-public class NetworkCachingStrategyTests {
+public class CachedRestClientTests {
 
     @ClassRule
     public static SetSystemProperty timeToLive = new SetSystemProperty("cache.network.timetolive", "1");
