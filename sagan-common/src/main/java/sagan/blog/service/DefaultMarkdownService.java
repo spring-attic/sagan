@@ -1,8 +1,9 @@
 package sagan.blog.service;
 
+import sagan.util.service.github.GitHubClient;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sagan.util.service.github.GitHubClient;
 
 @Service
 class DefaultMarkdownService implements MarkdownService {

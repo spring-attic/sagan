@@ -24,9 +24,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.eq;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GithubAuthenticationSigninAdapterTests {

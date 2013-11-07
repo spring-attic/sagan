@@ -1,9 +1,9 @@
 package sagan.team.service;
 
-import org.springframework.cache.annotation.Cacheable;
 import sagan.search.service.SearchService;
 import sagan.team.MemberProfile;
 import sagan.team.service.index.MemberProfileSearchEntryMapper;
+import sagan.util.service.db.DatabaseConfig;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import sagan.util.service.db.DatabaseConfig;
 
 /**
  * Service providing high-level, selectively cached data access and other
