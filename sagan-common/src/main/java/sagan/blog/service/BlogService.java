@@ -22,6 +22,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service providing high-level, selectively cached data access and other {@link Post}
+ * -related operations.
+ * 
+ * @author Pivotal Labs
+ * @author Chris Beams
+ */
 @Service
 public class BlogService {
 
