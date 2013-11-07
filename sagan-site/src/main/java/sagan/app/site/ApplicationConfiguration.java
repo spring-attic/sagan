@@ -1,7 +1,10 @@
 package sagan.app.site;
 
 import sagan.blog.web.feed.BlogPostAtomViewer;
+import sagan.guides.support.GettingStartedGuides;
+import sagan.util.service.CachedRestClient;
 import sagan.util.service.DateService;
+import sagan.util.service.db.DatabaseConfig;
 import sagan.util.web.SiteUrl;
 
 import java.util.ArrayList;
@@ -120,15 +123,15 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public CacheManager cacheManager(@Value("${cache.network.timetolive:300}") Long cacheNetworkTimeToLive,
-                                     @Value("${cache.database.timetolive:60}") Long cacheDatabaseTimeToLive,
-                                     @Value("${cache.guide.timetolive:300}") Long cacheGuideTimeToLive) {
+    public CacheManager cacheManager(@Value(CachedRestClient.CACHE_TTL) Long cacheNetworkTimeToLive,
+                                     @Value(DatabaseConfig.CACHE_TTL) Long cacheDatabaseTimeToLive,
+                                     @Value(GettingStartedGuides.CACHE_TTL) Long cacheGuideTimeToLive) {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
 
         List<ConcurrentMapCache> cacheList = new ArrayList<>();
-        cacheList.add(createConcurrentMapCache(cacheNetworkTimeToLive, "cache.network", -1));
-        cacheList.add(createConcurrentMapCache(cacheDatabaseTimeToLive, "cache.database", 50));
-        cacheList.add(createConcurrentMapCache(cacheGuideTimeToLive, "cache.guide", 100));
+        cacheList.add(createConcurrentMapCache(cacheNetworkTimeToLive, CachedRestClient.CACHE_NAME, -1));
+        cacheList.add(createConcurrentMapCache(cacheDatabaseTimeToLive, DatabaseConfig.CACHE_NAME, 50));
+        cacheList.add(createConcurrentMapCache(cacheGuideTimeToLive, GettingStartedGuides.CACHE_NAME, 100));
         cacheManager.setCaches(cacheList);
         return cacheManager;
     }

@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
@@ -29,6 +30,9 @@ import org.springframework.web.client.RestClientException;
 @Component
 public class GettingStartedGuides extends GitHubBackedGuideRepository
         implements DocRepository<GettingStartedGuide>, ContentProvider<GettingStartedGuide>, ImageProvider {
+
+    public static final String CACHE_NAME = "cache.guides";
+    public static final String CACHE_TTL = "${cache.guides.timetolive:300}";
 
     static final String REPO_PREFIX = "gs-";
 
@@ -46,6 +50,7 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
     }
 
     @Override
+    @Cacheable(CACHE_NAME)
     public GettingStartedGuide find(String guide) {
         String repoName = REPO_PREFIX + guide;
         String description = getRepoDescription(repoName);

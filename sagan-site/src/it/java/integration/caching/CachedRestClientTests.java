@@ -50,7 +50,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CachedRestClientTests {
 
     @ClassRule
-    public static SetSystemProperty timeToLive = new SetSystemProperty("cache.network.timetolive", "1");
+    public static SetSystemProperty timeToLive = new SetSystemProperty(CachedRestClient.CACHE_TTL_KEY, "1");
 
     @Autowired
     protected WebApplicationContext wac;
