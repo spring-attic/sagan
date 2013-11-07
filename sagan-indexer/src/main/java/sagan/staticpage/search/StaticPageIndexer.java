@@ -38,7 +38,7 @@ public class StaticPageIndexer implements Indexer<String> {
                              StaticPagePathFinder staticPagePathFinder) {
         this.crawlerService = crawlerService;
         this.staticPagePathFinder = staticPagePathFinder;
-        this.documentProcessor =
+        documentProcessor =
                 new CrawledWebDocumentProcessor(searchService, new LocalStaticPagesSearchEntryMapper());
     }
 

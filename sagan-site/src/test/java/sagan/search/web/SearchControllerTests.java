@@ -39,42 +39,42 @@ public class SearchControllerTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        this.controller = new SearchController(this.searchService);
+        controller = new SearchController(searchService);
         SearchResult entry = new SearchResult("", "", "", "", "", "", "", "original search term");
-        this.entries.add(entry);
-        this.resultsPage = new PageImpl<>(this.entries);
-        given(this.searchService.search(anyString(), (Pageable) anyObject(), anyList())).willReturn(
-                new SearchResults(this.resultsPage, Collections.<SearchFacet> emptyList()));
+        entries.add(entry);
+        resultsPage = new PageImpl<>(entries);
+        given(searchService.search(anyString(), (Pageable) anyObject(), anyList())).willReturn(
+                new SearchResults(resultsPage, Collections.<SearchFacet> emptyList()));
     }
 
     @Test
     public void search_providesQueryInModel() {
-        this.searchForm.setQ("searchTerm");
-        this.controller.search(this.searchForm, 1, this.model);
-        assertThat((SearchForm) this.model.get("searchForm"), equalTo(this.searchForm));
+        searchForm.setQ("searchTerm");
+        controller.search(searchForm, 1, model);
+        assertThat((SearchForm) model.get("searchForm"), equalTo(searchForm));
     }
 
     @Test
     public void search_providesPaginationInfoInModel() {
-        this.searchForm.setQ("searchTerm");
-        this.controller.search(this.searchForm, 1, this.model);
-        assertThat(this.model.get("paginationInfo"), is(notNullValue()));
+        searchForm.setQ("searchTerm");
+        controller.search(searchForm, 1, model);
+        assertThat(model.get("paginationInfo"), is(notNullValue()));
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void search_providesResultsInModel() {
-        this.searchForm.setQ("searchTerm");
-        this.controller.search(this.searchForm, 1, this.model);
-        assertThat((List<SearchResult>) this.model.get("results"), equalTo(this.entries));
+        searchForm.setQ("searchTerm");
+        controller.search(searchForm, 1, model);
+        assertThat((List<SearchResult>) model.get("results"), equalTo(entries));
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void search_providesAllResultsForBlankQuery() {
-        this.searchForm.setQ("");
-        this.controller.search(this.searchForm, 1, this.model);
-        assertThat((List<SearchResult>) this.model.get("results"), equalTo(this.entries));
+        searchForm.setQ("");
+        controller.search(searchForm, 1, model);
+        assertThat((List<SearchResult>) model.get("results"), equalTo(entries));
     }
 
 }

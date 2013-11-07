@@ -95,7 +95,7 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
 
     @Before
     public void setUp() throws Exception {
-        searchIndexSetup = new SearchIndexSetup(this.jestClient, index);
+        searchIndexSetup = new SearchIndexSetup(jestClient, index);
         searchIndexSetup.deleteIndex();
         searchIndexSetup.createIndex();
     }
@@ -108,11 +108,11 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
 
     @Test
     public void searchReturnsFacetInformation() throws ParseException {
-        this.searchService.saveToIndex(gettingStarted);
-        this.searchService.saveToIndex(blog);
+        searchService.saveToIndex(gettingStarted);
+        searchService.saveToIndex(blog);
 
         List<String> emptyFacetFilters = Collections.emptyList();
-        SearchResults searchResults = this.searchService.search("title", this.pageable, emptyFacetFilters);
+        SearchResults searchResults = searchService.search("title", pageable, emptyFacetFilters);
 
         List<SearchResult> content = searchResults.getPage().getContent();
         assertThat(content.size(), equalTo(2));
@@ -123,12 +123,12 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
 
     @Test
     public void filterByFacetsReturnsFilteredContent() throws ParseException {
-        this.searchService.saveToIndex(tutorial);
-        this.searchService.saveToIndex(gettingStarted);
-        this.searchService.saveToIndex(blog);
+        searchService.saveToIndex(tutorial);
+        searchService.saveToIndex(gettingStarted);
+        searchService.saveToIndex(blog);
 
         List<String> facetFilter = Arrays.asList("Guides");
-        SearchResults searchResults = this.searchService.search("title", this.pageable, facetFilter);
+        SearchResults searchResults = searchService.search("title", pageable, facetFilter);
 
         List<SearchResult> content = searchResults.getPage().getContent();
         assertThat(content.size(), equalTo(2));
@@ -136,18 +136,18 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
 
     @Test
     public void filterByMultipleFacetsAllowsMatchesFromUnrelatedFacets() throws ParseException {
-        this.searchService.saveToIndex(tutorial);
-        this.searchService.saveToIndex(gettingStarted);
-        this.searchService.saveToIndex(blog);
-        this.searchService.saveToIndex(springSecurityApiDoc);
-        this.searchService.saveToIndex(springSecurityRefDoc);
+        searchService.saveToIndex(tutorial);
+        searchService.saveToIndex(gettingStarted);
+        searchService.saveToIndex(blog);
+        searchService.saveToIndex(springSecurityApiDoc);
+        searchService.saveToIndex(springSecurityRefDoc);
 
         List<String> facetPathFilters = new ArrayList<>();
         facetPathFilters.add("Guides/Tutorials");
         facetPathFilters.add("Blog");
         facetPathFilters.add("Projects/SpringSecurity");
 
-        SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
+        SearchResults searchResults = searchService.search("title", pageable, facetPathFilters);
         List<SearchResult> results = searchResults.getPage().getContent();
 
         assertThatResultsContains(results, tutorial, blog, springSecurityApiDoc, springSecurityRefDoc);
@@ -170,19 +170,19 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
     @Test
     public void filterByMultipleFacetsProjectAndApi_restrictsProjectsToApiAndIncludesAllOtherFacets()
             throws ParseException {
-        this.searchService.saveToIndex(tutorial);
-        this.searchService.saveToIndex(blog);
-        this.searchService.saveToIndex(springFrameworkApiDoc);
-        this.searchService.saveToIndex(springFrameworkRefDoc);
-        this.searchService.saveToIndex(springSecurityApiDoc);
-        this.searchService.saveToIndex(springSecurityRefDoc);
+        searchService.saveToIndex(tutorial);
+        searchService.saveToIndex(blog);
+        searchService.saveToIndex(springFrameworkApiDoc);
+        searchService.saveToIndex(springFrameworkRefDoc);
+        searchService.saveToIndex(springSecurityApiDoc);
+        searchService.saveToIndex(springSecurityRefDoc);
 
         List<String> facetPathFilters = new ArrayList<>();
         facetPathFilters.add("Blog");
         facetPathFilters.add("Projects/Api");
         facetPathFilters.add("Projects/SpringSecurity/1.2.3.RELEASE");
 
-        SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
+        SearchResults searchResults = searchService.search("title", pageable, facetPathFilters);
         List<SearchResult> results = searchResults.getPage().getContent();
 
         assertThatResultsContains(results, blog, springSecurityApiDoc);
@@ -191,19 +191,19 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
     @Test
     public void filterByMultipleFacetsProjectAndReference_restrictsProjectsToReferenceAndIncludesAllOtherFacets()
             throws ParseException {
-        this.searchService.saveToIndex(tutorial);
-        this.searchService.saveToIndex(blog);
-        this.searchService.saveToIndex(springFrameworkApiDoc);
-        this.searchService.saveToIndex(springFrameworkRefDoc);
-        this.searchService.saveToIndex(springSecurityApiDoc);
-        this.searchService.saveToIndex(springSecurityRefDoc);
+        searchService.saveToIndex(tutorial);
+        searchService.saveToIndex(blog);
+        searchService.saveToIndex(springFrameworkApiDoc);
+        searchService.saveToIndex(springFrameworkRefDoc);
+        searchService.saveToIndex(springSecurityApiDoc);
+        searchService.saveToIndex(springSecurityRefDoc);
 
         List<String> facetPathFilters = new ArrayList<>();
         facetPathFilters.add("Blog");
         facetPathFilters.add("Projects/Reference");
         facetPathFilters.add("Projects/SpringFramework");
 
-        SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
+        SearchResults searchResults = searchService.search("title", pageable, facetPathFilters);
         List<SearchResult> results = searchResults.getPage().getContent();
 
         assertThatResultsContains(results, blog, springFrameworkRefDoc);
@@ -211,19 +211,19 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
 
     @Test
     public void filterByMultipleProjectVersionsFacets() throws ParseException {
-        this.searchService.saveToIndex(tutorial);
-        this.searchService.saveToIndex(blog);
-        this.searchService.saveToIndex(springFrameworkApiDoc);
-        this.searchService.saveToIndex(springFrameworkRefDoc);
-        this.searchService.saveToIndex(springSecurityApiDoc);
-        this.searchService.saveToIndex(springSecurityRefDoc);
+        searchService.saveToIndex(tutorial);
+        searchService.saveToIndex(blog);
+        searchService.saveToIndex(springFrameworkApiDoc);
+        searchService.saveToIndex(springFrameworkRefDoc);
+        searchService.saveToIndex(springSecurityApiDoc);
+        searchService.saveToIndex(springSecurityRefDoc);
 
         List<String> facetPathFilters = new ArrayList<>();
         facetPathFilters.add("Blog");
         facetPathFilters.add("Projects/SpringFramework/3.4.5.RELEASE");
         facetPathFilters.add("Projects/SpringSecurity/1.2.3.RELEASE");
 
-        SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
+        SearchResults searchResults = searchService.search("title", pageable, facetPathFilters);
         List<SearchResult> results = searchResults.getPage().getContent();
 
         assertThatResultsContains(results, blog, springFrameworkApiDoc, springFrameworkRefDoc, springSecurityApiDoc,
@@ -232,14 +232,14 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
 
     @Test
     public void returnedFacetsAreNotAffectedByTheFacetFilters() throws ParseException {
-        this.searchService.saveToIndex(blog);
-        this.searchService.saveToIndex(gettingStarted);
-        this.searchService.saveToIndex(tutorial);
+        searchService.saveToIndex(blog);
+        searchService.saveToIndex(gettingStarted);
+        searchService.saveToIndex(tutorial);
 
         List<String> facetPathFilters = new ArrayList<>();
         facetPathFilters.add("Blog");
 
-        SearchResults searchResults = this.searchService.search("title", this.pageable, facetPathFilters);
+        SearchResults searchResults = searchService.search("title", pageable, facetPathFilters);
         List<SearchFacet> facets = searchResults.getFacets();
 
         assertThat(facets.size(), equalTo(2));
@@ -258,11 +258,11 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
                 .facetPath("Blog")
                 .facetPath("Blog/Engineering").build();
 
-        this.searchService.saveToIndex(unpublishedPost);
-        this.searchService.saveToIndex(blog);
-        this.searchService.saveToIndex(gettingStarted);
+        searchService.saveToIndex(unpublishedPost);
+        searchService.saveToIndex(blog);
+        searchService.saveToIndex(gettingStarted);
 
-        SearchResults searchResults = this.searchService.search("title", this.pageable, new ArrayList<String>());
+        SearchResults searchResults = searchService.search("title", pageable, new ArrayList<String>());
 
         List<SearchResult> results = searchResults.getPage().getContent();
         assertThat(results.size(), equalTo(2));

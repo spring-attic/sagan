@@ -86,7 +86,7 @@ public class SearchIndexSetup {
 
     private JestResult execute(Action action) {
         try {
-            JestResult result = this.jestClient.execute(action);
+            JestResult result = jestClient.execute(action);
             logger.debug(result.getJsonString());
             return result;
         } catch (Exception e) {

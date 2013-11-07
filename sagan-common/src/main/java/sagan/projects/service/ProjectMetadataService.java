@@ -14,22 +14,22 @@ public class ProjectMetadataService {
     public ProjectMetadataService(Map<String, List<Project>> projectCategoryMap, String ghPagesBaseUrl) {
         this.projectCategoryMap = projectCategoryMap;
         this.ghPagesBaseUrl = ghPagesBaseUrl;
-        this.projects = new ArrayList<>();
+        projects = new ArrayList<>();
         for (Map.Entry<String, List<Project>> projectCategory : projectCategoryMap.entrySet()) {
-            this.projects.addAll(projectCategory.getValue());
+            projects.addAll(projectCategory.getValue());
         }
     }
 
     public List<Project> getProjectsForCategory(String category) {
-        return this.projectCategoryMap.get(category);
+        return projectCategoryMap.get(category);
     }
 
     public List<Project> getProjects() {
-        return this.projects;
+        return projects;
     }
 
     public Project getProject(String id) {
-        for (Project project : this.projects) {
+        for (Project project : projects) {
             if (project.getId().equals(id)) {
                 return project;
             }

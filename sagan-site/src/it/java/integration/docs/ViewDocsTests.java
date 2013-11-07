@@ -24,12 +24,12 @@ public class ViewDocsTests extends AbstractIntegrationTests {
 
     @Before
     public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
     @Test
     public void getDocsPage() throws Exception {
-        this.mockMvc
+        mockMvc
                 .perform(get("/docs"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
@@ -39,7 +39,7 @@ public class ViewDocsTests extends AbstractIntegrationTests {
 
     @Test
     public void doesNotContainAggregatorProjects() throws Exception {
-        this.mockMvc
+        mockMvc
                 .perform(get("/docs"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))

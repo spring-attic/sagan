@@ -27,14 +27,14 @@ public class GitHubConfiguration {
 
     @Bean
     public GitHubConnectionFactory gitHubConnectionFactory() {
-        GitHubConnectionFactory factory = new GitHubConnectionFactory(this.githubClientId, this.githubClientSecret);
+        GitHubConnectionFactory factory = new GitHubConnectionFactory(githubClientId, githubClientSecret);
         factory.setScope("user");
         return factory;
     }
 
     @Bean
     public GitHub gitHubTemplate() {
-        return new GuideGitHubTemplate(this.accessToken);
+        return new GuideGitHubTemplate(accessToken);
     }
 
     private static class GuideGitHubTemplate extends GitHubTemplate {

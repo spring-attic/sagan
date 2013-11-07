@@ -119,9 +119,9 @@ public class SecurityConfiguration {
         }
 
         private boolean isForceHttps() {
-            return !this.environment.acceptsProfiles(this.environment.getDefaultProfiles())
-                    && !this.environment.acceptsProfiles("acceptance")
-                    && !this.environment.acceptsProfiles("development");
+            return !environment.acceptsProfiles(environment.getDefaultProfiles())
+                    && !environment.acceptsProfiles("acceptance")
+                    && !environment.acceptsProfiles("development");
         }
 
         @Bean
@@ -133,7 +133,7 @@ public class SecurityConfiguration {
             repository.setConnectionSignUp(new RemoteUsernameConnectionSignUp());
             ProviderSignInController controller =
                     new ProviderSignInController(registry, repository, new GithubAuthenticationSigninAdapter(
-                            SIGNIN_SUCCESS_PATH, this.signInService));
+                            SIGNIN_SUCCESS_PATH, signInService));
             controller.setSignInUrl("/signin?error=access_denied");
             return controller;
         }

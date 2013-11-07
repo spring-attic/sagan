@@ -38,7 +38,7 @@ class ViewRenderingHelper {
     }
 
     public String path() {
-        return this.urlPathHelper.getPathWithinApplication(this.request);
+        return urlPathHelper.getPathWithinApplication(request);
     }
 
     public String getGhPagesUrl() {

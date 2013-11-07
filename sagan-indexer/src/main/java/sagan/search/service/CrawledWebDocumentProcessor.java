@@ -11,7 +11,7 @@ public class CrawledWebDocumentProcessor implements DocumentProcessor {
 
     public CrawledWebDocumentProcessor(SearchService searchService, SearchEntryMapper<Document> documentMapper) {
         this.searchService = searchService;
-        this.mapper = documentMapper;
+        mapper = documentMapper;
     }
 
     @Override

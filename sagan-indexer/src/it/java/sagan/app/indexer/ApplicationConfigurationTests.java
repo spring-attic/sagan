@@ -31,8 +31,8 @@ public class ApplicationConfigurationTests {
 
     @After
     public void clean() {
-        if (this.context != null) {
-            this.context.close();
+        if (context != null) {
+            context.close();
         }
     }
 
@@ -40,7 +40,7 @@ public class ApplicationConfigurationTests {
     public void testContextLoading() throws Exception {
         int port = FreePortFinder.find();
 
-        this.context = (ConfigurableApplicationContext) SpringApplication.run(
+        context = (ConfigurableApplicationContext) SpringApplication.run(
                 ApplicationConfiguration.class, "--server.port=" + port,
                 "--spring.database.url=jdbc:h2:mem:acceptancetestdb;MODE=PostgreSQL",
                 "--search.indexer.delay=6000000",
@@ -48,10 +48,10 @@ public class ApplicationConfigurationTests {
                 "--elasticsearch.client.index=sagan-test",
                 "--spring.profiles.active=acceptance");
 
-        ApplicationConfiguration configuration = this.context
+        ApplicationConfiguration configuration = context
                 .getBean(ApplicationConfiguration.class);
         assertNotNull(configuration);
-        this.context.close();
+        context.close();
     }
 
 }

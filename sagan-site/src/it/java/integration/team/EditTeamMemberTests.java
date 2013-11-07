@@ -61,7 +61,7 @@ public class EditTeamMemberTests extends AbstractIntegrationTests {
                 return memberProfile.getId().toString();
             }
         };
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .addFilters(springSecurityFilterChain)
                 .defaultRequest(get("/").with(csrf()).with(user(memberProfile.getId()).roles("USER"))).build();
     }
@@ -78,11 +78,11 @@ public class EditTeamMemberTests extends AbstractIntegrationTests {
 
     @Test
     public void getEditTeamMemberPage_404sWhenNoMemberFound() throws Exception {
-        this.mockMvc.perform(get("/admin/team/not-a-user")).andExpect(status().isNotFound());
+        mockMvc.perform(get("/admin/team/not-a-user")).andExpect(status().isNotFound());
     }
 
     private void getEditProfilePage(String editTeamUri) throws Exception {
-        this.mockMvc.perform(get(editTeamUri).principal(principal))
+        mockMvc.perform(get(editTeamUri).principal(principal))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("Name")));
@@ -136,7 +136,7 @@ public class EditTeamMemberTests extends AbstractIntegrationTests {
 
     private void performRequestAndExpectRedirect(MockHttpServletRequestBuilder requestBuilder,
                                                  final String expectedRedirectUrl) throws Exception {
-        this.mockMvc.perform(requestBuilder)
+        mockMvc.perform(requestBuilder)
                 .andExpect(new ResultMatcher() {
                     @Override
                     public void match(MvcResult result) {

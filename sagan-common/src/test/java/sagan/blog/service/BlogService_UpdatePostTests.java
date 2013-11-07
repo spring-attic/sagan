@@ -49,14 +49,14 @@ public class BlogService_UpdatePostTests {
 
     @Before
     public void setup() {
-        given(this.dateService.now()).willReturn(this.now);
+        given(dateService.now()).willReturn(now);
 
-        this.service = new BlogService(this.postRepository, this.postFormAdapter, this.dateService, this.searchService);
+        service = new BlogService(postRepository, postFormAdapter, dateService, searchService);
 
-        this.post = PostBuilder.post().id(123L).publishAt(publishAt).build();
+        post = PostBuilder.post().id(123L).publishAt(publishAt).build();
 
-        this.postForm = new PostForm(this.post);
-        this.service.updatePost(this.post, this.postForm);
+        postForm = new PostForm(post);
+        service.updatePost(post, postForm);
     }
 
     @Test
@@ -66,21 +66,21 @@ public class BlogService_UpdatePostTests {
 
     @Test
     public void postIsPersisted() {
-        verify(this.postRepository).save(this.post);
+        verify(postRepository).save(post);
     }
 
     @Test
     public void updatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
-        verify(this.searchService).saveToIndex((SearchEntry) anyObject());
+        verify(searchService).saveToIndex((SearchEntry) anyObject());
     }
 
     @Test
     public void updatingABlogPost_doesNotSaveToSearchIndexIfNotLive() throws Exception {
-        reset(this.searchService);
+        reset(searchService);
         long postId = 123L;
         Post post = PostBuilder.post().id(postId).draft().build();
-        this.service.updatePost(post, new PostForm(post));
-        verifyZeroInteractions(this.searchService);
+        service.updatePost(post, new PostForm(post));
+        verifyZeroInteractions(searchService);
     }
 
 }

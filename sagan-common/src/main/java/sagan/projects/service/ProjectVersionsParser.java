@@ -101,13 +101,13 @@ class ProjectVersionsParser {
 
         public SupportedVersion(String name, Map<String, Object> projectData, Map<String, Object> versionData) {
             this.name = name;
-            this.refDocUrl = getValue(projectData, versionData, "refDocUrl", "");
-            this.apiDocUrl = getValue(projectData, versionData, "apiDocUrl", "");
-            this.groupId = getValue(projectData, versionData, "groupId", "");
-            this.artifactId = getValue(projectData, versionData, "artifactId", (String) projectData.get("id"));
-            this.releaseStatus = ReleaseStatus.getFromVersion(name);
-            this.variables = new HashMap<String, String>(ProjectVersionsParser.this.variables);
-            this.variables.put("version", name);
+            refDocUrl = getValue(projectData, versionData, "refDocUrl", "");
+            apiDocUrl = getValue(projectData, versionData, "apiDocUrl", "");
+            groupId = getValue(projectData, versionData, "groupId", "");
+            artifactId = getValue(projectData, versionData, "artifactId", (String) projectData.get("id"));
+            releaseStatus = ReleaseStatus.getFromVersion(name);
+            variables = new HashMap<String, String>(ProjectVersionsParser.this.variables);
+            variables.put("version", name);
         }
 
         private String getValue(Map<String, Object> projectData, Map<String, Object> versionData, String key,
@@ -122,9 +122,9 @@ class ProjectVersionsParser {
         }
 
         public ProjectRelease asProjectRelease(SupportedVersion currentVersion) {
-            return new ProjectRelease(this.name, this.releaseStatus, this == currentVersion, buildDocUrl(
-                    this.refDocUrl, "refDocUrl"), buildDocUrl(this.apiDocUrl, "apiDocUrl"),
-                    groupId.isEmpty() ? this.variables.get("groupId") : groupId, artifactId);
+            return new ProjectRelease(name, releaseStatus, this == currentVersion, buildDocUrl(
+                    refDocUrl, "refDocUrl"), buildDocUrl(apiDocUrl, "apiDocUrl"),
+                    groupId.isEmpty() ? variables.get("groupId") : groupId, artifactId);
         }
 
         private String buildDocUrl(String docPath, String defaultUrlKey) {
@@ -132,18 +132,18 @@ class ProjectVersionsParser {
                 return "";
             }
             if (docPath.isEmpty()) {
-                docPath = ProjectVersionsParser.this.defaultUrls.get(defaultUrlKey);
+                docPath = defaultUrls.get(defaultUrlKey);
             }
-            String docUrl = new UriTemplate(docPath).expand(this.variables).toString();
+            String docUrl = new UriTemplate(docPath).expand(variables).toString();
             if (!docUrl.startsWith("http")) {
-                return this.variables.get("docsBaseUrl") + docUrl;
+                return variables.get("docsBaseUrl") + docUrl;
             }
             return docUrl;
         }
 
         @Override
         public int compareTo(SupportedVersion o) {
-            return o.name.compareTo(this.name);
+            return o.name.compareTo(name);
         }
 
     }

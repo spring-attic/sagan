@@ -40,7 +40,7 @@ public class ToolsControllerTests {
 
     @Before
     public void setUp() throws Exception {
-        this.controller = new ToolsController(this.service);
+        controller = new ToolsController(service);
     }
 
     @Test
@@ -58,13 +58,13 @@ public class ToolsControllerTests {
 
         List<UpdateSiteArchive> archives = Collections.emptyList();
         ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("STS", "3.1.2.RELEASE", platforms, archives);
-        when(this.service.getStsGaDownloads()).thenReturn(toolSuite);
-        this.controller.stsIndex(this.model);
+        when(service.getStsGaDownloads()).thenReturn(toolSuite);
+        controller.stsIndex(model);
 
         @SuppressWarnings("unchecked")
-        Set<DownloadLink> actual = (Set<DownloadLink>) this.model.get("downloadLinks");
+        Set<DownloadLink> actual = (Set<DownloadLink>) model.get("downloadLinks");
         assertThat(actual, equalTo(toolSuite.getPreferredDownloadLinks()));
-        assertThat((String) this.model.get("version"), equalTo("3.1.2.RELEASE"));
+        assertThat((String) model.get("version"), equalTo("3.1.2.RELEASE"));
 
     }
 
@@ -83,13 +83,13 @@ public class ToolsControllerTests {
 
         List<UpdateSiteArchive> archives = Collections.emptyList();
         ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("GGTS", "3.1.2.RELEASE", platforms, archives);
-        when(this.service.getGgtsGaDownloads()).thenReturn(toolSuite);
-        this.controller.ggtsIndex(this.model);
+        when(service.getGgtsGaDownloads()).thenReturn(toolSuite);
+        controller.ggtsIndex(model);
 
         @SuppressWarnings("unchecked")
-        Set<DownloadLink> actual = (Set<DownloadLink>) this.model.get("downloadLinks");
+        Set<DownloadLink> actual = (Set<DownloadLink>) model.get("downloadLinks");
         assertThat(actual, equalTo(toolSuite.getPreferredDownloadLinks()));
-        assertThat((String) this.model.get("version"), equalTo("3.1.2.RELEASE"));
+        assertThat((String) model.get("version"), equalTo("3.1.2.RELEASE"));
 
     }
 
@@ -107,9 +107,9 @@ public class ToolsControllerTests {
 
         EclipseDownloads eclipseDownloads = new EclipseDownloads(platforms);
 
-        when(this.service.getEclipseDownloads()).thenReturn(eclipseDownloads);
-        this.controller.eclipseIndex(this.model);
+        when(service.getEclipseDownloads()).thenReturn(eclipseDownloads);
+        controller.eclipseIndex(model);
 
-        assertThat((List<EclipsePlatform>) this.model.get("platforms"), contains(windows, mac, linux));
+        assertThat((List<EclipsePlatform>) model.get("platforms"), contains(windows, mac, linux));
     }
 }

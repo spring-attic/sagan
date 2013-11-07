@@ -26,8 +26,8 @@ public class DatabaseConfig {
         org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
 
         boolean inMemory =
-                this.environment.acceptsProfiles(this.environment.getDefaultProfiles())
-                        || this.environment.acceptsProfiles("acceptance");
+                environment.acceptsProfiles(environment.getDefaultProfiles())
+                        || environment.acceptsProfiles("acceptance");
 
         if (inMemory) {
             dataSource.setDriverClassName("org.h2.Driver");

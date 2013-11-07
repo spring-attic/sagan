@@ -30,7 +30,7 @@ public class ViewTeamTests extends AbstractIntegrationTests {
 
     @Before
     public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ViewTeamTests extends AbstractIntegrationTests {
 
         teamRepository.save(hidden);
 
-        this.mockMvc.perform(get("/team"))
+        mockMvc.perform(get("/team"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("First Last")))

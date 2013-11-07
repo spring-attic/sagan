@@ -42,12 +42,12 @@ public class SearchEntryBuilder {
     }
 
     public SearchEntryBuilder publishAt(Date date) {
-        this.publishAt = date;
+        publishAt = date;
         return this;
     }
 
     public SearchEntryBuilder publishAt(String dateString) throws ParseException {
-        this.publishAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString);
+        publishAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString);
         return this;
     }
 
@@ -57,12 +57,12 @@ public class SearchEntryBuilder {
     }
 
     public SearchEntryBuilder facetPath(String facetPath) {
-        this.facetPaths.add(facetPath);
+        facetPaths.add(facetPath);
         return this;
     }
 
     public SearchEntryBuilder notCurrent() {
-        this.current = false;
+        current = false;
         return this;
     }
 

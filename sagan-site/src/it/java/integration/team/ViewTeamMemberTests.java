@@ -45,7 +45,7 @@ public class ViewTeamMemberTests extends AbstractIntegrationTests {
 
     @Before
     public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
     @Test
@@ -57,7 +57,7 @@ public class ViewTeamMemberTests extends AbstractIntegrationTests {
 
         teamRepository.save(profile);
 
-        this.mockMvc.perform(get("/team/someguy"))
+        mockMvc.perform(get("/team/someguy"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("First Last")))
@@ -66,7 +66,7 @@ public class ViewTeamMemberTests extends AbstractIntegrationTests {
 
     @Test
     public void getTeamMemberPage_404sWhenNoMemberFound() throws Exception {
-        this.mockMvc.perform(get("/team/not-a-user")).andExpect(status().isNotFound());
+        mockMvc.perform(get("/team/not-a-user")).andExpect(status().isNotFound());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class ViewTeamMemberTests extends AbstractIntegrationTests {
 
         teamRepository.save(profile);
 
-        this.mockMvc.perform(get("/team/hidden-user")).andExpect(status().isNotFound());
+        mockMvc.perform(get("/team/hidden-user")).andExpect(status().isNotFound());
     }
 
     @Test
@@ -94,7 +94,7 @@ public class ViewTeamMemberTests extends AbstractIntegrationTests {
         Post post = PostBuilder.post().author(profile).title("My Post").build();
         postRepository.save(post);
 
-        this.mockMvc.perform(get("/team/someguy"))
+        mockMvc.perform(get("/team/someguy"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("My Post")));
@@ -102,7 +102,7 @@ public class ViewTeamMemberTests extends AbstractIntegrationTests {
 
     @Test
     public void getNonExistentTeamMemberPage() throws Exception {
-        this.mockMvc.perform(get("/team/someguy")).andExpect(status().isNotFound());
+        mockMvc.perform(get("/team/someguy")).andExpect(status().isNotFound());
     }
 
     @Test
@@ -114,7 +114,7 @@ public class ViewTeamMemberTests extends AbstractIntegrationTests {
 
         teamRepository.save(profile);
 
-        this.mockMvc.perform(get("/team/some-guy"))
+        mockMvc.perform(get("/team/some-guy"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("First Last")))
@@ -128,7 +128,7 @@ public class ViewTeamMemberTests extends AbstractIntegrationTests {
         createAuthoredPost(activeAuthor, "Back to Work", "2013-01-03 00:00");
         createAuthoredPost(activeAuthor, "Off to the Sales", "2013-01-02 00:00");
 
-        MvcResult response = this.mockMvc.perform(get("/team/active_author")).andExpect(status().isOk()).andReturn();
+        MvcResult response = mockMvc.perform(get("/team/active_author")).andExpect(status().isOk()).andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
         List<String> titles = new ArrayList<>();

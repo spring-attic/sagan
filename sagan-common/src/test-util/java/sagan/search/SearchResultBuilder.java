@@ -35,8 +35,8 @@ public class SearchResultBuilder {
 
     public SearchResult build() {
         SearchResult searchResult =
-                new SearchResult(this.id, this.title, this.subtitle, this.summary, this.path, this.type,
-                        this.highlight, this.originalSearchTerm);
+                new SearchResult(id, title, subtitle, summary, path, type,
+                        highlight, originalSearchTerm);
         return searchResult;
     }
 

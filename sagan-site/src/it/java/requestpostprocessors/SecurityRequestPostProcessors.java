@@ -121,12 +121,12 @@ public final class SecurityRequestPostProcessors {
             HttpServletResponse response = new MockHttpServletResponse();
 
             HttpRequestResponseHolder requestResponseHolder = new HttpRequestResponseHolder(request, response);
-            this.repository.loadContext(requestResponseHolder);
+            repository.loadContext(requestResponseHolder);
 
             request = requestResponseHolder.getRequest();
             response = requestResponseHolder.getResponse();
 
-            this.repository.saveContext(securityContext, request, response);
+            repository.saveContext(securityContext, request, response);
         }
     }
 
@@ -140,7 +140,7 @@ public final class SecurityRequestPostProcessors {
         }
 
         public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
-            save(this.securityContext, request);
+            save(securityContext, request);
             return request;
         }
     }
@@ -188,10 +188,10 @@ public final class SecurityRequestPostProcessors {
         public UserRequestPostProcessor roles(String... roles) {
             List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(roles.length);
             for (String role : roles) {
-                if (this.rolePrefix == null || role.startsWith(this.rolePrefix)) {
+                if (rolePrefix == null || role.startsWith(rolePrefix)) {
                     authorities.add(new SimpleGrantedAuthority(role));
                 } else {
-                    authorities.add(new SimpleGrantedAuthority(this.rolePrefix + role));
+                    authorities.add(new SimpleGrantedAuthority(rolePrefix + role));
                 }
             }
             return this;
@@ -210,7 +210,7 @@ public final class SecurityRequestPostProcessors {
 
         public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
             UsernamePasswordAuthenticationToken authentication =
-                    new UsernamePasswordAuthenticationToken(this.username, this.credentials, this.authorities);
+                    new UsernamePasswordAuthenticationToken(username, credentials, authorities);
             save(authentication, request);
             return request;
         }
@@ -249,16 +249,16 @@ public final class SecurityRequestPostProcessors {
         private UsernamePasswordAuthenticationToken authentication(ServletContext servletContext) {
             ApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
             UserDetailsService userDetailsService = userDetailsService(context);
-            UserDetails userDetails = userDetailsService.loadUserByUsername(this.username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             return new UsernamePasswordAuthenticationToken(
                     userDetails, userDetails.getPassword(), userDetails.getAuthorities());
         }
 
         private UserDetailsService userDetailsService(ApplicationContext context) {
-            if (this.userDetailsServiceBeanId == null) {
+            if (userDetailsServiceBeanId == null) {
                 return context.getBean(UserDetailsService.class);
             }
-            return context.getBean(this.userDetailsServiceBeanId, UserDetailsService.class);
+            return context.getBean(userDetailsServiceBeanId, UserDetailsService.class);
         }
     }
 

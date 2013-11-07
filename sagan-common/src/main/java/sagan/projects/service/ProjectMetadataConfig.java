@@ -17,6 +17,6 @@ class ProjectMetadataConfig {
 
     @Bean
     public ProjectMetadataService projectMetadataService() throws IOException {
-        return new ProjectMetadataYamlParser().parse(this.metadataYaml);
+        return new ProjectMetadataYamlParser().parse(metadataYaml);
     }
 }

@@ -37,7 +37,7 @@ public class DeleteBlogPostTests extends AbstractIntegrationTests {
 
     @Before
     public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         postRepository.deleteAll();
         post = PostBuilder.post().build();
         postRepository.save(post);
@@ -52,7 +52,7 @@ public class DeleteBlogPostTests extends AbstractIntegrationTests {
     public void redirectToIndexAfterDelete() throws Exception {
         MockHttpServletRequestBuilder editPostRequest = createDeletePostRequest();
 
-        this.mockMvc.perform(editPostRequest)
+        mockMvc.perform(editPostRequest)
                 .andExpect(status().isFound())
                 .andExpect(new ResultMatcher() {
                     @Override
@@ -67,7 +67,7 @@ public class DeleteBlogPostTests extends AbstractIntegrationTests {
     public void deleteThePost() throws Exception {
         MockHttpServletRequestBuilder editPostRequest = createDeletePostRequest();
 
-        this.mockMvc.perform(editPostRequest);
+        mockMvc.perform(editPostRequest);
         assertThat(postRepository.findOne(post.getId()), is(nullValue()));
     }
 

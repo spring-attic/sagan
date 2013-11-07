@@ -43,8 +43,8 @@ public class TeamControllerTests {
 
     @Before
     public void setUp() throws Exception {
-        this.teamController =
-                new TeamController(this.teamService, this.blogService, new PostViewFactory(new DateService()));
+        teamController =
+                new TeamController(teamService, blogService, new PostViewFactory(new DateService()));
         List<MemberProfile> members = new ArrayList<>();
 
         members.add(MemberProfileBuilder.profile()
@@ -60,14 +60,14 @@ public class TeamControllerTests {
                 .id(321L)
                 .build());
 
-        BDDMockito.given(this.teamService.fetchActiveMembers()).willReturn(members);
+        BDDMockito.given(teamService.fetchActiveMembers()).willReturn(members);
     }
 
     @Test
     public void includeTeamLocationsInModel() throws Exception {
-        this.teamController.showTeam(this.model);
+        teamController.showTeam(model);
         @SuppressWarnings("unchecked")
-        List<TeamLocation> teamLocations = (List<TeamLocation>) this.model.get("teamLocations");
+        List<TeamLocation> teamLocations = (List<TeamLocation>) model.get("teamLocations");
 
         TeamLocation norman = teamLocations.get(0);
         MatcherAssert.assertThat(norman.getName(), Matchers.equalTo("Norman"));

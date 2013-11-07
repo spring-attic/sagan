@@ -60,7 +60,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         try {
-            for (StaticPagePathFinder.PagePaths paths : this.staticPagePathFinder.findPaths()) {
+            for (StaticPagePathFinder.PagePaths paths : staticPagePathFinder.findPaths()) {
                 String urlPath = paths.getUrlPath();
                 registry.addViewController(urlPath).setViewName("pages" + paths.getFilePath());
                 if (!urlPath.isEmpty()) {

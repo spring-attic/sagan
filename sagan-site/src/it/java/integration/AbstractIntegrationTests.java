@@ -48,7 +48,7 @@ public abstract class AbstractIntegrationTests {
     @Before
     public void setupMockMvc() {
         stubRestClient.clearResponses();
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .addFilters(springSecurityFilterChain)
                 .defaultRequest(get("/").with(csrf()).with(user(123L).roles("ADMIN")))
                 .build();
@@ -56,8 +56,8 @@ public abstract class AbstractIntegrationTests {
 
     @After
     public void clearCaches() throws Exception {
-        for (String name : this.cacheManager.getCacheNames()) {
-            this.cacheManager.getCache(name).clear();
+        for (String name : cacheManager.getCacheNames()) {
+            cacheManager.getCache(name).clear();
         }
     }
 }

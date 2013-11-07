@@ -39,7 +39,7 @@ public class StaticPageRequestMappingTests extends AbstractIntegrationTests {
     }
 
     private void checkPage(String page) throws Exception {
-        this.mockMvc.perform(get(page))
+        mockMvc.perform(get(page))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"));
     }
@@ -51,14 +51,14 @@ public class StaticPageRequestMappingTests extends AbstractIntegrationTests {
 
     @Test
     public void getRobotsFile() throws Exception {
-        this.mockMvc.perform(get("/robots.txt"))
+        mockMvc.perform(get("/robots.txt"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("User-agent")));
     }
 
     @Test
     public void doesNotGetIndexPage() throws Exception {
-        this.mockMvc.perform(get("/index"))
+        mockMvc.perform(get("/index"))
                 .andExpect(status().isNotFound());
     }
 

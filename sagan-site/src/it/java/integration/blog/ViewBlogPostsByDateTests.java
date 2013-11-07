@@ -64,7 +64,7 @@ public class ViewBlogPostsByDateTests extends AbstractIntegrationTests {
 
     @Test
     public void getDateReturnsPostsForDate() throws Exception {
-        this.mockMvc.perform(get("/blog/2013/04/01"))
+        mockMvc.perform(get("/blog/2013/04/01"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("Title 1")))
@@ -75,7 +75,7 @@ public class ViewBlogPostsByDateTests extends AbstractIntegrationTests {
 
     @Test
     public void getMonthReturnsPostsForMonth() throws Exception {
-        this.mockMvc.perform(get("/blog/2013/04"))
+        mockMvc.perform(get("/blog/2013/04"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("Title 1")))
@@ -86,7 +86,7 @@ public class ViewBlogPostsByDateTests extends AbstractIntegrationTests {
 
     @Test
     public void getMonthReturnsPostsForYear() throws Exception {
-        this.mockMvc.perform(get("/blog/2013"))
+        mockMvc.perform(get("/blog/2013"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("Title 1")))
@@ -106,7 +106,7 @@ public class ViewBlogPostsByDateTests extends AbstractIntegrationTests {
             postRepository.save(post);
         }
 
-        MvcResult response = this.mockMvc.perform(get("/blog/2012/11/02?page=2")).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog/2012/11/02?page=2")).andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
@@ -132,7 +132,7 @@ public class ViewBlogPostsByDateTests extends AbstractIntegrationTests {
             postRepository.save(post);
         }
 
-        MvcResult response = this.mockMvc.perform(get("/blog/2012/06?page=2")).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog/2012/06?page=2")).andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
@@ -158,7 +158,7 @@ public class ViewBlogPostsByDateTests extends AbstractIntegrationTests {
             postRepository.save(post);
         }
 
-        MvcResult response = this.mockMvc.perform(get("/blog/2012?page=2")).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog/2012?page=2")).andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
 

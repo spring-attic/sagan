@@ -23,7 +23,7 @@ public class GuideIndexIntegrationTests extends AbstractIntegrationTests {
     public void showGuidesIndex() throws Exception {
         stubRestClient.putResponse("/orgs/spring-guides/repos", Fixtures.githubRepoListJson());
 
-        MvcResult response = this.mockMvc.perform(get("/guides"))
+        MvcResult response = mockMvc.perform(get("/guides"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andReturn();

@@ -60,7 +60,7 @@ public class CachedRestClientTests {
 
     @Before
     public void setupMockMvc() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
     @Configuration
@@ -91,68 +91,68 @@ public class CachedRestClientTests {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        reset(this.gitHub);
-        reset(this.restTemplate);
+        reset(gitHub);
+        reset(restTemplate);
 
         String requestPath = "https://api.github.com/orgs/spring-guides/repos";
 
-        this.restOperations = mock(RestOperations.class);
-        given(this.gitHub.restOperations()).willReturn(this.restOperations);
-        given(this.restOperations.getForObject(
+        restOperations = mock(RestOperations.class);
+        given(gitHub.restOperations()).willReturn(restOperations);
+        given(restOperations.getForObject(
                 startsWith(requestPath), (Class<String>) anyObject())).willReturn(Fixtures.githubRepoListJson());
     }
 
     @After
     public void tearDown() throws Exception {
-        for (String name : this.cacheManager.getCacheNames()) {
-            this.cacheManager.getCache(name).clear();
+        for (String name : cacheManager.getCacheNames()) {
+            cacheManager.getCache(name).clear();
         }
     }
 
     @Test
     public void githubRequestsAreCached() throws Exception {
-        this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
-        this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
-        verify(this.restOperations, times(1)).getForObject(anyString(), (Class<?>) anyObject());
+        mockMvc.perform(get("/guides")).andExpect(status().isOk());
+        mockMvc.perform(get("/guides")).andExpect(status().isOk());
+        verify(restOperations, times(1)).getForObject(anyString(), (Class<?>) anyObject());
     }
 
     @Test
     public void cachedItemsHaveATimeToLive() throws Exception {
-        this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
-        verify(this.restOperations).getForObject(anyString(), (Class<?>) anyObject());
+        mockMvc.perform(get("/guides")).andExpect(status().isOk());
+        verify(restOperations).getForObject(anyString(), (Class<?>) anyObject());
 
         Thread.sleep(1500);
 
-        this.mockMvc.perform(get("/guides")).andExpect(status().isOk());
-        verify(this.restOperations, times(2)).getForObject(anyString(), (Class<?>) anyObject());
+        mockMvc.perform(get("/guides")).andExpect(status().isOk());
+        verify(restOperations, times(2)).getForObject(anyString(), (Class<?>) anyObject());
     }
 
     @Test
     public void toolsSTSXmlRequestsAreCached() throws Exception {
         String stsDownloads = Fixtures.load("/fixtures/tools/sts_downloads.xml");
         given(
-                this.restTemplate.getForObject(
+                restTemplate.getForObject(
                         "http://dist.springsource.com/release/STS/index-new.xml",
                         String.class)).willReturn(stsDownloads);
 
-        this.mockMvc.perform(get("/tools")).andExpect(status().isOk());
-        this.mockMvc.perform(get("/tools")).andExpect(status().isOk());
+        mockMvc.perform(get("/tools")).andExpect(status().isOk());
+        mockMvc.perform(get("/tools")).andExpect(status().isOk());
 
-        verify(this.restTemplate, times(1)).getForObject(anyString(), (Class<?>) anyObject());
+        verify(restTemplate, times(1)).getForObject(anyString(), (Class<?>) anyObject());
     }
 
     @Test
     public void toolsEclipseXmlRequestsAreCached() throws Exception {
         String eclipse = Fixtures.load("/fixtures/tools/eclipse.xml");
         given(
-                this.restTemplate.getForObject(
+                restTemplate.getForObject(
                         "http://download.springsource.com/release/STS/eclipse.xml",
                         String.class)).willReturn(eclipse);
 
-        this.mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());
-        this.mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());
+        mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());
+        mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());
 
-        verify(this.restTemplate, times(1)).getForObject(anyString(), (Class<?>) anyObject());
+        verify(restTemplate, times(1)).getForObject(anyString(), (Class<?>) anyObject());
     }
 
 }

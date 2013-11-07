@@ -38,7 +38,7 @@ public class DefaultTeamImporter implements TeamImporter {
         List<Long> userIds = new ArrayList<>();
         for (GitHubUser user : users) {
             userIds.add(user.getId());
-            String userName = this.getNameForUser(user.getLogin());
+            String userName = getNameForUser(user.getLogin());
 
             teamService.createOrUpdateMemberProfile(user.getId(), user.getLogin(), user.getAvatarUrl(), userName);
         }

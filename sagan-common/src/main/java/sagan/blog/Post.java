@@ -73,7 +73,7 @@ public class Post implements Serializable {
 
     public Post(String title, String content, PostCategory category) {
         this.title = title;
-        this.rawContent = content;
+        rawContent = content;
         this.category = category;
     }
 
@@ -149,7 +149,7 @@ public class Post implements Serializable {
 
     public void setPublishAt(Date publishAt) {
         this.publishAt = publishAt;
-        this.publicSlug = publishAt == null ? null : generatePublicSlug();
+        publicSlug = publishAt == null ? null : generatePublicSlug();
     }
 
     public boolean isDraft() {
@@ -161,7 +161,7 @@ public class Post implements Serializable {
     }
 
     public void setBroadcast(boolean isBroadcast) {
-        this.broadcast = isBroadcast;
+        broadcast = isBroadcast;
     }
 
     public boolean isBroadcast() {

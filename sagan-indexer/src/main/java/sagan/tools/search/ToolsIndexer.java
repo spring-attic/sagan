@@ -24,7 +24,7 @@ public class ToolsIndexer implements Indexer<String> {
     @Autowired
     public ToolsIndexer(CrawlerService crawlerService, SearchService searchService) {
         this.crawlerService = crawlerService;
-        this.documentProcessor =
+        documentProcessor =
                 new CrawledWebDocumentProcessor(searchService, new LocalStaticPagesSearchEntryMapper());
     }
 

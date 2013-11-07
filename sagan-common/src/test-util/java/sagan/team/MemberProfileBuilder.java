@@ -12,13 +12,13 @@ public class MemberProfileBuilder {
     private boolean hidden;
 
     public MemberProfileBuilder() {
-        this.name = "Mr England";
-        this.username = "mr_england";
-        this.location = "London";
-        this.bio = "I am interesting";
-        this.avatarUrl = null;
-        this.geoLocation = null;
-        this.hidden = false;
+        name = "Mr England";
+        username = "mr_england";
+        location = "London";
+        bio = "I am interesting";
+        avatarUrl = null;
+        geoLocation = null;
+        hidden = false;
     }
 
     public static MemberProfileBuilder profile() {
@@ -61,7 +61,7 @@ public class MemberProfileBuilder {
     }
 
     public MemberProfileBuilder geoLocation(float latitude, float longitude) {
-        this.geoLocation = new GeoLocation(latitude, longitude);
+        geoLocation = new GeoLocation(latitude, longitude);
         return this;
     }
 
@@ -71,7 +71,7 @@ public class MemberProfileBuilder {
     }
 
     public MemberProfile build() {
-        MemberProfile profile = new MemberProfile(this.id);
+        MemberProfile profile = new MemberProfile(id);
         profile.setName(name);
         profile.setUsername(username);
         profile.setLocation(location);

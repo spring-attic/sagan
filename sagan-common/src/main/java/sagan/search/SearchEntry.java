@@ -98,8 +98,8 @@ public class SearchEntry {
         this.facetPaths = facetPaths;
     }
 
-    public void addFacetPaths(String... facetPaths) {
-        this.facetPaths.addAll(Arrays.asList(facetPaths));
+    public void addFacetPaths(String... paths) {
+        facetPaths.addAll(Arrays.asList(paths));
     }
 
     public String getType() {

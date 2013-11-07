@@ -47,7 +47,7 @@ public class SearchService {
     public void saveToIndex(SearchEntry entry) {
         Index.Builder indexEntryBuilder = new Index.Builder(entry).id(entry.getId()).index(index).type(entry.getType());
 
-        if (this.useRefresh) {
+        if (useRefresh) {
             indexEntryBuilder.refresh(true);
         }
         logger.debug("Indexing " + entry.getPath());
@@ -57,9 +57,9 @@ public class SearchService {
     public SearchResults search(String term, Pageable pageable, List<String> filter) {
         Search.Builder searchBuilder;
         if (term.equals("")) {
-            searchBuilder = this.searchQueryBuilder.forEmptyQuery(pageable, filter);
+            searchBuilder = searchQueryBuilder.forEmptyQuery(pageable, filter);
         } else {
-            searchBuilder = this.searchQueryBuilder.forQuery(term, pageable, filter);
+            searchBuilder = searchQueryBuilder.forQuery(term, pageable, filter);
         }
         searchBuilder.addIndex(index);
         Search search = searchBuilder.build();
@@ -91,7 +91,7 @@ public class SearchService {
 
     private JestResult execute(Action action) {
         try {
-            JestResult result = this.jestClient.execute(action);
+            JestResult result = jestClient.execute(action);
             logger.debug(result.getJsonString());
             return result;
         } catch (Exception e) {

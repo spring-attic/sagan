@@ -32,7 +32,7 @@ public class BlogIndexTests extends AbstractIntegrationTests {
 
     @Test
     public void showsBlogIndex() throws Exception {
-        MvcResult result = this.mockMvc.perform(get("/blog")).andExpect(status().isOk())
+        MvcResult result = mockMvc.perform(get("/blog")).andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html")).andReturn();
 
         Document document = Jsoup.parse(result.getResponse().getContentAsString());
@@ -52,7 +52,7 @@ public class BlogIndexTests extends AbstractIntegrationTests {
     public void given1Post_blogIndexShowsPostSummary() throws Exception {
         Post post = createSinglePost();
 
-        MvcResult response = this.mockMvc.perform(get("/blog"))
+        MvcResult response = mockMvc.perform(get("/blog"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html")).andReturn();
 
@@ -66,9 +66,9 @@ public class BlogIndexTests extends AbstractIntegrationTests {
         String content = summary;
         Post post = new PostBuilder().renderedContent(content).renderedSummary(summary).build();
 
-        this.postRepository.save(post);
+        postRepository.save(post);
 
-        MvcResult result = this.mockMvc.perform(get("/blog")).andReturn();
+        MvcResult result = mockMvc.perform(get("/blog")).andReturn();
         String response = result.getResponse().getContentAsString();
         assertThat(response, not(containsString("Read more")));
     }
@@ -82,9 +82,9 @@ public class BlogIndexTests extends AbstractIntegrationTests {
         }
         Post post = new PostBuilder().renderedContent(content).renderedSummary(summary).build();
 
-        this.postRepository.save(post);
+        postRepository.save(post);
 
-        MvcResult result = this.mockMvc.perform(get("/blog")).andReturn();
+        MvcResult result = mockMvc.perform(get("/blog")).andReturn();
         String response = result.getResponse().getContentAsString();
         assertThat(response, containsString("Read more"));
     }
@@ -93,7 +93,7 @@ public class BlogIndexTests extends AbstractIntegrationTests {
         Post post = new PostBuilder().title("This week in Spring - June 3, 2013")
                 .rawContent("Raw content").renderedContent("Html content")
                 .renderedSummary("Html summary").build();
-        this.postRepository.save(post);
+        postRepository.save(post);
         return post;
     }
 
@@ -101,7 +101,7 @@ public class BlogIndexTests extends AbstractIntegrationTests {
     public void givenManyPosts_blogIndexShowsLatest10PostSummaries() throws Exception {
         createManyPostsInNovember(11);
 
-        MvcResult response = this.mockMvc.perform(get("/blog"))
+        MvcResult response = mockMvc.perform(get("/blog"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html")).andReturn();
 
@@ -128,7 +128,7 @@ public class BlogIndexTests extends AbstractIntegrationTests {
                     .publishAt(calendar.getTime()).build();
             posts.add(post);
         }
-        this.postRepository.save(posts);
+        postRepository.save(posts);
     }
 
     @Test
@@ -137,7 +137,7 @@ public class BlogIndexTests extends AbstractIntegrationTests {
         createPublishedPost("Back to Work", "2013-01-03 00:00");
         createPublishedPost("Off to the Sales", "2013-01-02 00:00");
 
-        MvcResult response = this.mockMvc.perform(get("/blog"))
+        MvcResult response = mockMvc.perform(get("/blog"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -158,7 +158,7 @@ public class BlogIndexTests extends AbstractIntegrationTests {
     public void given1PageOfResults_blogIndexDoesNotShowPaginationControl() throws Exception {
         createManyPostsInNovember(1);
 
-        MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog")).andReturn();
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
         assertThat(html.select("#pagination_control").first(), is(nullValue()));
     }
@@ -167,7 +167,7 @@ public class BlogIndexTests extends AbstractIntegrationTests {
     public void givenManyPosts_blogIndexShowsPaginationControl() throws Exception {
         createManyPostsInNovember(21);
 
-        MvcResult response = this.mockMvc.perform(get("/blog?page=2")).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog?page=2")).andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
 

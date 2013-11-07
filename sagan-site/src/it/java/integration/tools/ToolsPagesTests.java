@@ -37,21 +37,21 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void showsToolsIndex() throws Exception {
-        this.mockMvc.perform(get("/tools"))
+        mockMvc.perform(get("/tools"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"));
     }
 
     @Test
     public void showsStsIndex() throws Exception {
-        this.mockMvc.perform(get("/tools/sts"))
+        mockMvc.perform(get("/tools/sts"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"));
     }
 
     @Test
     public void showsAllStsGaDownloads() throws Exception {
-        MvcResult mvcResult = this.mockMvc.perform(get("/tools/sts/all"))
+        MvcResult mvcResult = mockMvc.perform(get("/tools/sts/all"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andReturn();
@@ -67,7 +67,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void showsAllStsMilestoneDownloads() throws Exception {
-        MvcResult mvcResult = this.mockMvc.perform(get("/tools/sts/all"))
+        MvcResult mvcResult = mockMvc.perform(get("/tools/sts/all"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andReturn();
@@ -85,7 +85,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
         String responseXml = Fixtures.load("/fixtures/tools/sts_downloads_without_milestones.xml");
         stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
 
-        MvcResult mvcResult = this.mockMvc.perform(get("/tools/sts/all"))
+        MvcResult mvcResult = mockMvc.perform(get("/tools/sts/all"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andReturn();
@@ -101,14 +101,14 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void showsGgtsIndex() throws Exception {
-        this.mockMvc.perform(get("/tools/ggts"))
+        mockMvc.perform(get("/tools/ggts"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"));
     }
 
     @Test
     public void showsAllGgtsGaDownloads() throws Exception {
-        MvcResult mvcResult = this.mockMvc.perform(get("/tools/ggts/all"))
+        MvcResult mvcResult = mockMvc.perform(get("/tools/ggts/all"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andReturn();
@@ -125,7 +125,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void showsAllGgtsMilestoneDownloads() throws Exception {
-        MvcResult mvcResult = this.mockMvc.perform(get("/tools/ggts/all"))
+        MvcResult mvcResult = mockMvc.perform(get("/tools/ggts/all"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andReturn();
@@ -143,7 +143,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
         String responseXml = Fixtures.load("/fixtures/tools/sts_downloads_without_milestones.xml");
         stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
 
-        MvcResult mvcResult = this.mockMvc.perform(get("/tools/ggts/all"))
+        MvcResult mvcResult = mockMvc.perform(get("/tools/ggts/all"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andReturn();
@@ -161,7 +161,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
         String responseXml = Fixtures.load("/fixtures/tools/eclipse.xml");
         stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
 
-        MvcResult mvcResult = this.mockMvc.perform(get("/tools/eclipse"))
+        MvcResult mvcResult = mockMvc.perform(get("/tools/eclipse"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andReturn();
@@ -175,7 +175,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void showsStsWelcome() throws Exception {
-        this.mockMvc.perform(get("/tools/sts/welcome?version=3.2.0.RELEASE&os=macosx.cocoa.x86_64"))
+        mockMvc.perform(get("/tools/sts/welcome?version=3.2.0.RELEASE&os=macosx.cocoa.x86_64"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"));
 
