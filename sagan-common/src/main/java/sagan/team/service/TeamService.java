@@ -14,6 +14,13 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+/**
+ * Service providing high-level data access and other {@link MemberProfile}-related
+ * operations.
+ * 
+ * @author Pivotal Labs
+ * @author Chris Beams
+ */
 @Service
 public class TeamService {
     private final TeamRepository teamRepository;
@@ -23,7 +30,8 @@ public class TeamService {
     private static Log logger = LogFactory.getLog(TeamService.class);
 
     @Autowired
-    public TeamService(TeamRepository teamRepository, SearchService searchService, MemberProfileSearchEntryMapper mapper) {
+    public TeamService(TeamRepository teamRepository, SearchService searchService,
+                       MemberProfileSearchEntryMapper mapper) {
         this.teamRepository = teamRepository;
         this.searchService = searchService;
         this.mapper = mapper;
