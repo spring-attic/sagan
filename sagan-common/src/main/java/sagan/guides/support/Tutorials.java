@@ -21,7 +21,7 @@ import org.springframework.web.client.RestClientException;
 
 /**
  * Repository implementation providing data access services for tutorial guides.
- *
+ * 
  * @author Chris Beams
  */
 @Component
@@ -35,7 +35,6 @@ public class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutor
     private static final String README_PATH_MD = REPO_BASE_PATH + "/contents/README.md";
     private static final String SIDEBAR_PATH = REPO_BASE_PATH + "/contents/SIDEBAR.md";
     private static final String TUTORIAL_PAGE_PATH = REPO_BASE_PATH + "/contents/%d/README.md";
-
 
     private final GuideOrganization org;
 
@@ -66,7 +65,8 @@ public class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutor
         for (GitHubRepo repo : org.findRepositoriesByPrefix(REPO_PREFIX)) {
             String repoName = repo.getName();
             GuideMetadata metadata =
-                    new DefaultGuideMetadata(org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo.getDescription());
+                    new DefaultGuideMetadata(org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo
+                            .getDescription());
             guides.add(new Tutorial(metadata, this, this));
         }
         return guides;
@@ -76,9 +76,9 @@ public class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutor
     public void populate(Tutorial tutorial) {
         tutorial.setContent(
                 loadBodyHtml(
-                        tutorial.getPage() == 0 ?
-                                String.format(README_PATH_MD, org.getName(), tutorial.getRepoName()) :
-                                String.format(TUTORIAL_PAGE_PATH, org.getName(), tutorial.getRepoName(), tutorial.getPage())
+                tutorial.getPage() == 0 ?
+                        String.format(README_PATH_MD, org.getName(), tutorial.getRepoName()) :
+                        String.format(TUTORIAL_PAGE_PATH, org.getName(), tutorial.getRepoName(), tutorial.getPage())
                 ));
         tutorial.setSidebar(loadSidebarHtml(tutorial.getRepoName()));
     }

@@ -23,7 +23,7 @@ import org.springframework.web.client.RestClientException;
 
 /**
  * Repository implementation providing data access services for getting started guides.
- *
+ * 
  * @author Chris Beams
  * @author Greg Turnquist
  */
@@ -63,8 +63,8 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
         List<GettingStartedGuide> guides = new ArrayList<>();
         for (GitHubRepo repo : org.findRepositoriesByPrefix(REPO_PREFIX)) {
             String repoName = repo.getName();
-            GuideMetadata metadata =
-                    new DefaultGuideMetadata(org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo.getDescription());
+            GuideMetadata metadata = new DefaultGuideMetadata(
+                    org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo.getDescription());
             guides.add(new GettingStartedGuide(metadata, this, this));
         }
         return guides;

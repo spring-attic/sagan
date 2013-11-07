@@ -17,19 +17,19 @@ public class GuideSearchEntryMapperTests {
 
     private Guide guide = new GettingStartedGuide(
             new DefaultGuideMetadata("my-org", "xyz", "gs-xyz", "Guide XYZ Title::Guide XYZ Subtitle"),
-                    new ContentProvider<GettingStartedGuide>() {
-                        @Override
-                        public void populate(GettingStartedGuide guide) {
-                            guide.setContent("Some Guide Content");
-                            guide.setSidebar("Some Sidebar Content");
-                        }
-                    },
-                    new ImageProvider() {
-                        @Override
-                        public byte[] loadImage(Guide guide, String imageName) {
-                            return new byte[0];
-                        }
-                    });
+            new ContentProvider<GettingStartedGuide>() {
+                @Override
+                public void populate(GettingStartedGuide guide) {
+                    guide.setContent("Some Guide Content");
+                    guide.setSidebar("Some Sidebar Content");
+                }
+            },
+            new ImageProvider() {
+                @Override
+                public byte[] loadImage(Guide guide, String imageName) {
+                    return new byte[0];
+                }
+            });
 
     private GuideSearchEntryMapper guideMapper = new GuideSearchEntryMapper();
     private SearchEntry searchEntry;

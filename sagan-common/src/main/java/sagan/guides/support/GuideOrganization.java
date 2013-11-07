@@ -31,7 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Repository representing the GitHub organization for guide repositories.
- *
+ * 
  * @author Chris Beams
  */
 @Component

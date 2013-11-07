@@ -8,7 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Unit tests for {@link DefaultGuideMetadata}.
- *
+ * 
  * @author Chris Beams
  */
 public class DefaultGuideMetadataTests {
@@ -17,7 +17,7 @@ public class DefaultGuideMetadataTests {
 
     @Before
     public void setUp() throws Exception {
-        guide =  new DefaultGuideMetadata("my-org", "rest-service", "gs-rest-service", "Title :: Description");
+        guide = new DefaultGuideMetadata("my-org", "rest-service", "gs-rest-service", "Title :: Description");
     }
 
     @Test

@@ -28,7 +28,6 @@ public class GuidesOrgTests {
     private GitHubClient ghClient;
     private GuideOrganization service;
 
-
     @Before
     public void setUp() throws Exception {
         service = new GuideOrganization(ORG_NAME, ghClient);

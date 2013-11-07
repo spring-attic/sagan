@@ -74,7 +74,8 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         @SuppressWarnings("unchecked")
         Map<String, Object> release = (Map<String, Object>) releases.get(0);
         assertThat((String) release.get("version"), equalTo("4.0.0.BUILD-SNAPSHOT"));
-        assertThat((String) release.get("refDocUrl"),
+        assertThat(
+                (String) release.get("refDocUrl"),
                 equalTo("http://docs.spring.io/spring/docs/4.0.0.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/"));
         assertThat((String) release.get("apiDocUrl"),
                 equalTo("http://docs.spring.io/spring/docs/4.0.0.BUILD-SNAPSHOT/javadoc-api/"));

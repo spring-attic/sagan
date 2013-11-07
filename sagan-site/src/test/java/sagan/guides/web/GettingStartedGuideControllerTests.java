@@ -20,7 +20,7 @@ import static org.mockito.Matchers.anyString;
 
 /**
  * Unit tests for {@link GettingStartedGuideController}.
- *
+ * 
  * @author Chris Beams
  */
 public class GettingStartedGuideControllerTests {
@@ -36,7 +36,8 @@ public class GettingStartedGuideControllerTests {
         MockitoAnnotations.initMocks(this);
         controller = new GettingStartedGuideController(guides);
         model = new ExtendedModelMap();
-        guide = new GettingStartedGuide(new DefaultGuideMetadata("my-org", "rest-service", "gs-rest-service", ""), guides, guides);
+        guide = new GettingStartedGuide(
+                new DefaultGuideMetadata("my-org", "rest-service", "gs-rest-service", ""), guides, guides);
     }
 
     @Test

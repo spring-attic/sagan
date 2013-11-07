@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.*;
 
 /**
  * Unit tests for {@link UnderstandingDocMapper}.
- *
+ * 
  * @author Chris Beams
  */
 public class UnderstandingDocMapperTests {
