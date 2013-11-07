@@ -55,7 +55,8 @@ public class DefaultTeamImporter implements TeamImporter {
     public String getNameForUser(String username) {
         String jsonResponse = gitHub.sendRequestForJson("/users/{user}", username);
         try {
-            Map<String, String> map = objectMapper.readValue(jsonResponse, new TypeReference<Map<String, String>>() {});
+            Map<String, String> map = objectMapper.readValue(jsonResponse, new TypeReference<Map<String, String>>() {
+            });
             return map.get("name");
         } catch (IOException e) {
             throw new RuntimeException(e);

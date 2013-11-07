@@ -21,7 +21,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
  * Unit tests for {@link Tutorials}.
- *
+ * 
  * @author Chris Beams
  */
 public class TutorialsTests {
@@ -46,7 +46,7 @@ public class TutorialsTests {
     public void findAll() {
         given(org.findRepositoriesByPrefix(Tutorials.REPO_PREFIX)).willReturn(singletonList(repo));
 
-        List<Tutorial> all= tutorials.findAll();
+        List<Tutorial> all = tutorials.findAll();
         assertThat(all.size(), is(1));
         Tutorial first = all.get(0);
         assertThat(first.getGuideId(), equalTo("rest"));

@@ -202,7 +202,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(entryTitle);
 
         List<SearchResult> results = searchService
-                .search("application", pageable, Collections.<String>emptyList())
+                .search("application", pageable, Collections.<String> emptyList())
                 .getPage().getContent();
         assertThat(results.get(0).getId(), is(entryTitle.getId()));
         assertThat(results.get(1).getId(), is(entryContent.getId()));
@@ -225,7 +225,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(current);
 
         List<SearchResult> results = searchService
-                .search("application", pageable, Collections.<String>emptyList())
+                .search("application", pageable, Collections.<String> emptyList())
                 .getPage().getContent();
         assertThat(results.get(0).getId(), is(current.getId()));
         assertThat(results.get(1).getId(), is(notCurrent.getId()));
@@ -243,7 +243,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
 
         List<SearchResult> results = searchService
                 .search("ApplicationContext", pageable,
-                        Collections.<String>emptyList()).getPage().getContent();
+                        Collections.<String> emptyList()).getPage().getContent();
         assertThat(results.get(0).getId(), is(apiDoc.getId()));
         assertThat(results.get(0).getSummary(), is("class level description"));
         assertThat(results.get(0).getHighlight(), containsString("Application"));
@@ -311,7 +311,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
 
         List<SearchResult> results = searchService
                 .search("ApplicationContext", pageable,
-                        Collections.<String>emptyList()).getPage().getContent();
+                        Collections.<String> emptyList()).getPage().getContent();
         assertThat(results.size(), equalTo(4));
     }
 
@@ -375,7 +375,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
 
         List<SearchResult> results = searchService
                 .search("ApplicationContext", pageable,
-                        Collections.<String>emptyList()).getPage().getContent();
+                        Collections.<String> emptyList()).getPage().getContent();
         assertThat(results.size(), equalTo(4));
     }
 

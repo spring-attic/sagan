@@ -46,11 +46,10 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
- * Demonstrates how to use a {@link RequestPostProcessor} to add
- * request-building methods for establishing a security context for Spring
- * Security. While these are just examples, <a
- * href="https://jira.springsource.org/browse/SEC-2015">official support</a> for
- * Spring Security is planned.
+ * Demonstrates how to use a {@link RequestPostProcessor} to add request-building methods
+ * for establishing a security context for Spring Security. While these are just examples,
+ * <a href="https://jira.springsource.org/browse/SEC-2015">official support</a> for Spring
+ * Security is planned.
  * 
  * @author Rob Winch
  */
@@ -61,16 +60,17 @@ public final class SecurityRequestPostProcessors {
     }
 
     /**
-     * Establish a security context for a user with the specified username. All details are declarative and do not require that the user actually exists.
-     * This means that the authorities or roles need to be specified too.
+     * Establish a security context for a user with the specified username. All details
+     * are declarative and do not require that the user actually exists. This means that
+     * the authorities or roles need to be specified too.
      */
     public static UserRequestPostProcessor user(Object username) {
         return new UserRequestPostProcessor(username);
     }
 
     /**
-     * Establish a security context for a user with the specified username. The
-     * additional details are obtained from the {@link UserDetailsService} declared in the
+     * Establish a security context for a user with the specified username. The additional
+     * details are obtained from the {@link UserDetailsService} declared in the
      * {@link WebApplicationContext}.
      */
     public static UserDetailsRequestPostProcessor userDeatilsService(String username) {
@@ -78,8 +78,8 @@ public final class SecurityRequestPostProcessors {
     }
 
     /**
-     * Establish a security context with the given {@link SecurityContext} and
-     * thus be authenticated with {@link SecurityContext#getAuthentication()}.
+     * Establish a security context with the given {@link SecurityContext} and thus be
+     * authenticated with {@link SecurityContext#getAuthentication()}.
      */
     public SecurityContextRequestPostProcessor securityContext(SecurityContext securityContext) {
         return new SecurityContextRequestPostProcessor(securityContext);
@@ -104,8 +104,8 @@ public final class SecurityRequestPostProcessors {
     }
 
     /**
-     * Support class for {@link RequestPostProcessor}'s that establish a Spring
-     * Security context
+     * Support class for {@link RequestPostProcessor}'s that establish a Spring Security
+     * context
      */
     private static abstract class SecurityContextRequestPostProcessorSupport {
 
@@ -162,9 +162,8 @@ public final class SecurityRequestPostProcessors {
         }
 
         /**
-         * Sets the prefix to append to each role if the role does not already
-         * start with the prefix. If no prefix is desired, an empty String or
-         * null can be used.
+         * Sets the prefix to append to each role if the role does not already start with
+         * the prefix. If no prefix is desired, an empty String or null can be used.
          */
         public UserRequestPostProcessor rolePrefix(String rolePrefix) {
             this.rolePrefix = rolePrefix;
@@ -172,16 +171,13 @@ public final class SecurityRequestPostProcessors {
         }
 
         /**
-         * Specify the roles of the user to authenticate as. This method is
-         * similar to {@link #authorities(GrantedAuthority...)}, but just not as
-         * flexible.
+         * Specify the roles of the user to authenticate as. This method is similar to
+         * {@link #authorities(GrantedAuthority...)}, but just not as flexible.
          * 
-         * @param roles
-         *            The roles to populate. Note that if the role does not
-         *            start with {@link #rolePrefix(String)} it will
-         *            automatically be prepended. This means by default
-         *            {@code roles("ROLE_USER")} and {@code roles("USER")} are
-         *            equivalent.
+         * @param roles The roles to populate. Note that if the role does not start with
+         *        {@link #rolePrefix(String)} it will automatically be prepended. This
+         *        means by default {@code roles("ROLE_USER")} and {@code roles("USER")}
+         *        are equivalent.
          * @see #authorities(GrantedAuthority...)
          * @see #rolePrefix(String)
          */

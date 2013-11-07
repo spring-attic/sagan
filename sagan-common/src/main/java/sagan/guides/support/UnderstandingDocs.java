@@ -15,7 +15,7 @@ import org.springframework.web.client.RestClientException;
 
 /**
  * Repository implementation providing data access services for understanding docs.
- *
+ * 
  * @author Chris Beams
  */
 @Component
@@ -35,7 +35,7 @@ public class UnderstandingDocs implements DocRepository<UnderstandingDoc>, Conte
 
     /**
      * Find and eagerly populate the {@link UnderstandingDoc} for the given subject.
-     *
+     * 
      * @throws ResourceNotFoundException if no content exists for the subject.
      */
     public UnderstandingDoc find(String subject) {
@@ -64,8 +64,10 @@ public class UnderstandingDocs implements DocRepository<UnderstandingDoc>, Conte
     public void populate(UnderstandingDoc document) {
         String lcSubject = document.getSubject().toLowerCase();
         try {
-            document.setContent(org.getMarkdownFileAsHtml(String.format(CONTENT_PATH, org.getName(), repoName, lcSubject)));
-            document.setSidebar(org.getMarkdownFileAsHtml(String.format(SIDEBAR_PATH, org.getName(), repoName, lcSubject)));
+            document.setContent(org.getMarkdownFileAsHtml(String.format(CONTENT_PATH, org.getName(), repoName,
+                    lcSubject)));
+            document.setSidebar(org.getMarkdownFileAsHtml(String.format(SIDEBAR_PATH, org.getName(), repoName,
+                    lcSubject)));
         } catch (RestClientException ex) {
             String msg = String.format("No understanding doc found for subject '%s'", lcSubject);
             throw new ResourceNotFoundException(msg, ex);

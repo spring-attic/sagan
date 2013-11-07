@@ -35,7 +35,7 @@ public class DownloadConverter implements HttpMessageConverter<byte[]> {
     }
 
     @Override
-    public void write(byte[] download, MediaType contentType, HttpOutputMessage outputMessage)throws IOException,
+    public void write(byte[] download, MediaType contentType, HttpOutputMessage outputMessage) throws IOException,
             HttpMessageNotWritableException {
         throw new UnsupportedOperationException("can't write");
     }
