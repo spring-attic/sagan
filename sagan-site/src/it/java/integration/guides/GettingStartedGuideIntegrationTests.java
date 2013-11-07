@@ -30,7 +30,7 @@ public class GettingStartedGuideIntegrationTests extends AbstractIntegrationTest
         stubRestClient.putResponse("/repos/spring-guides/gs-rest-service/contents/SIDEBAR.md",
                 "sidebar content");
 
-        MvcResult response = this.mockMvc.perform(get("/guides/gs/rest-service/"))
+        MvcResult response = mockMvc.perform(get("/guides/gs/rest-service/"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andReturn();

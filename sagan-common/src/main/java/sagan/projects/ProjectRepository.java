@@ -26,18 +26,18 @@ public class ProjectRepository {
     }
 
     public String getId() {
-        return this.id;
+        return id;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public String getUrl() {
-        return this.url;
+        return url;
     }
 
     public Boolean getSnapshotsEnabled() {
-        return this.snapshotsEnabled;
+        return snapshotsEnabled;
     }
 }

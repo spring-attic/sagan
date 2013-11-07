@@ -41,7 +41,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
         String feedPath = (String) model.get("feed-path");
         feed.setTitle((String) model.get("feed-title"));
         feed.setId(String.format("http://spring.io%s", feedPath));
-        feed.setIcon(this.siteUrl.getAbsoluteUrl("/favicon.ico"));
+        feed.setIcon(siteUrl.getAbsoluteUrl("/favicon.ico"));
         setFeedUrl(feedPath, feed);
         setBlogUrl((String) model.get("blog-path"), feed);
         setUpdatedDate(model, feed);
@@ -59,7 +59,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
     }
 
     private void setFeedUrl(String feedPath, Feed feed) {
-        String feedUrl = this.siteUrl.getAbsoluteUrl(feedPath);
+        String feedUrl = siteUrl.getAbsoluteUrl(feedPath);
         Link feedLink = new Link();
         feedLink.setHref(feedUrl);
         feedLink.setRel("self");
@@ -67,7 +67,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
     }
 
     private void setBlogUrl(String blogPath, Feed feed) {
-        String blogUrl = this.siteUrl.getAbsoluteUrl(blogPath);
+        String blogUrl = siteUrl.getAbsoluteUrl(blogPath);
         Link blogLink = new Link();
         blogLink.setHref(blogUrl);
         feed.setAlternateLinks(Arrays.asList(blogLink));
@@ -112,8 +112,8 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
     }
 
     private void setPostUrl(Post post, Entry entry) {
-        PostView postView = new PostView(post, this.dateService);
-        String postUrl = this.siteUrl.getAbsoluteUrl(postView.getPath());
+        PostView postView = new PostView(post, dateService);
+        String postUrl = siteUrl.getAbsoluteUrl(postView.getPath());
         Link postLink = new Link();
         postLink.setHref(postUrl);
         entry.setAlternateLinks(Arrays.asList(postLink));

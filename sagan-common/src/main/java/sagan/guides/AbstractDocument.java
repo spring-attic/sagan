@@ -13,7 +13,7 @@ class AbstractDocument implements Document {
     }
 
     public void setContent(String body) {
-        this.content = body;
+        content = body;
     }
 
     public void setSidebar(String sidebar) {

@@ -67,7 +67,7 @@ public class BlogIndex_BroadcastTests extends AbstractIntegrationTests {
                 .title("Yet another")
                 .build());
 
-        MvcResult response = this.mockMvc.perform(get("/blog/broadcasts")).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog/broadcasts")).andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
 
@@ -83,7 +83,7 @@ public class BlogIndex_BroadcastTests extends AbstractIntegrationTests {
     public void given1PageOfResults_blogIndexDoesNotShowPaginationControl() throws Exception {
         createManyPostsInNovember(1);
 
-        MvcResult response = this.mockMvc.perform(get("/blog/broadcasts")).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog/broadcasts")).andReturn();
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
         assertThat(html.select("#pagination_control").first(), is(nullValue()));
     }
@@ -92,7 +92,7 @@ public class BlogIndex_BroadcastTests extends AbstractIntegrationTests {
     public void givenManyPosts_blogIndexShowsPaginationControl() throws Exception {
         createManyPostsInNovember(21);
 
-        MvcResult response = this.mockMvc.perform(get("/blog/broadcasts?page=2")).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog/broadcasts?page=2")).andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
 

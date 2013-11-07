@@ -53,68 +53,68 @@ public class PostFormAdapter_UpdatePostTests {
 
     @Before
     public void setup() {
-        given(this.dateService.now()).willReturn(this.now);
+        given(dateService.now()).willReturn(now);
         given(summaryExtractor.extract(anyString(), anyInt())).willReturn(SUMMARY);
-        given(renderer.render(this.content)).willReturn(RENDERED_HTML);
+        given(renderer.render(content)).willReturn(RENDERED_HTML);
 
-        this.post = PostBuilder.post().id(123L).author("author_id", this.ORIGINAL_AUTHOR).build();
+        post = PostBuilder.post().id(123L).author("author_id", ORIGINAL_AUTHOR).build();
 
-        this.postForm = new PostForm(this.post);
-        this.postForm.setTitle(this.title);
-        this.postForm.setContent(this.content);
-        this.postForm.setCategory(this.category);
-        this.postForm.setBroadcast(this.broadcast);
-        this.postForm.setPublishAt(this.publishAt);
+        postForm = new PostForm(post);
+        postForm.setTitle(title);
+        postForm.setContent(content);
+        postForm.setCategory(category);
+        postForm.setBroadcast(broadcast);
+        postForm.setPublishAt(publishAt);
 
         postFormAdapter = new PostFormAdapter(renderer, summaryExtractor, dateService, teamRepository);
         postFormAdapter.updatePostFromPostForm(post, postForm);
     }
 
     public void postHasCorrectUserEnteredValues() {
-        assertThat(this.post.getTitle(), equalTo(this.title));
-        assertThat(this.post.getRawContent(), equalTo(this.content));
-        assertThat(this.post.getCategory(), equalTo(this.category));
-        assertThat(this.post.isBroadcast(), equalTo(this.broadcast));
-        assertThat(this.post.isDraft(), equalTo(this.draft));
-        assertThat(this.post.getPublishAt(), equalTo(this.publishAt));
+        assertThat(post.getTitle(), equalTo(title));
+        assertThat(post.getRawContent(), equalTo(content));
+        assertThat(post.getCategory(), equalTo(category));
+        assertThat(post.isBroadcast(), equalTo(broadcast));
+        assertThat(post.isDraft(), equalTo(draft));
+        assertThat(post.getPublishAt(), equalTo(publishAt));
     }
 
     @Test
     public void postRetainsOriginalAuthor() {
-        assertThat(this.post.getAuthor().getName(), equalTo(this.ORIGINAL_AUTHOR));
+        assertThat(post.getAuthor().getName(), equalTo(ORIGINAL_AUTHOR));
     }
 
     @Test
     public void postHasRenderedContent() {
-        assertThat(this.post.getRenderedContent(), equalTo(RENDERED_HTML));
+        assertThat(post.getRenderedContent(), equalTo(RENDERED_HTML));
     }
 
     @Test
     public void postHasRenderedSummary() {
-        assertThat(this.post.getRenderedSummary(), equalTo(SUMMARY));
+        assertThat(post.getRenderedSummary(), equalTo(SUMMARY));
     }
 
     @Test
     public void draftWithNullPublishDate() {
-        this.postForm.setDraft(true);
-        this.postForm.setPublishAt(null);
-        this.postFormAdapter.updatePostFromPostForm(this.post, this.postForm);
-        assertThat(this.post.getPublishAt(), is(nullValue()));
+        postForm.setDraft(true);
+        postForm.setPublishAt(null);
+        postFormAdapter.updatePostFromPostForm(post, postForm);
+        assertThat(post.getPublishAt(), is(nullValue()));
     }
 
     @Test
     public void postWithNullPublishDateSetsPublishAtToNow() {
-        this.postForm.setDraft(false);
-        this.postForm.setPublishAt(null);
-        this.postFormAdapter.updatePostFromPostForm(this.post, this.postForm);
-        assertThat(this.post.getPublishAt(), equalTo(this.now));
+        postForm.setDraft(false);
+        postForm.setPublishAt(null);
+        postFormAdapter.updatePostFromPostForm(post, postForm);
+        assertThat(post.getPublishAt(), equalTo(now));
     }
 
     @Test
     public void updatingABlogPost_doesNotChangeItsCreatedDateByDefault() throws Exception {
         Date originalDate = DateTestUtils.getDate("2009-11-20 07:00");
         Post post = PostBuilder.post().createdAt(originalDate).build();
-        this.postFormAdapter.updatePostFromPostForm(post, this.postForm);
+        postFormAdapter.updatePostFromPostForm(post, postForm);
         assertThat(post.getCreatedAt(), is(originalDate));
     }
 
@@ -126,7 +126,7 @@ public class PostFormAdapter_UpdatePostTests {
         Date newDate = DateTestUtils.getDate("2010-01-11 03:00");
         postForm.setCreatedAt(newDate);
 
-        this.postFormAdapter.updatePostFromPostForm(post, this.postForm);
+        postFormAdapter.updatePostFromPostForm(post, postForm);
         assertThat(post.getCreatedAt(), is(newDate));
     }
 }

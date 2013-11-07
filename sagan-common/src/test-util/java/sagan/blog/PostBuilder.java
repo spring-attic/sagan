@@ -21,16 +21,16 @@ public class PostBuilder {
     private boolean draft;
 
     public PostBuilder() {
-        this.title = "My Post";
-        this.author = new MemberProfile();
-        this.author.setUsername("test");
-        this.category = PostCategory.ENGINEERING;
-        this.rawContent = "post body";
-        this.renderedContent = "post body";
-        this.renderedSummary = "summary";
-        this.broadcast = false;
-        this.publishAt = new Date(System.currentTimeMillis());
-        this.draft = false;
+        title = "My Post";
+        author = new MemberProfile();
+        author.setUsername("test");
+        category = PostCategory.ENGINEERING;
+        rawContent = "post body";
+        renderedContent = "post body";
+        renderedSummary = "summary";
+        broadcast = false;
+        publishAt = new Date(System.currentTimeMillis());
+        draft = false;
     }
 
     public static PostBuilder post() {
@@ -48,8 +48,8 @@ public class PostBuilder {
     }
 
     public PostBuilder author(String username, String name) {
-        this.author.setUsername(username);
-        this.author.setName(name);
+        author.setUsername(username);
+        author.setName(name);
         return this;
     }
 
@@ -74,12 +74,12 @@ public class PostBuilder {
     }
 
     public PostBuilder createdAt(Date date) {
-        this.createdAt = date;
+        createdAt = date;
         return this;
     }
 
     public PostBuilder createdAt(String dateString) throws ParseException {
-        this.createdAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString);
+        createdAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString);
         return this;
     }
 
@@ -89,17 +89,17 @@ public class PostBuilder {
     }
 
     public PostBuilder draft() {
-        this.draft = true;
+        draft = true;
         return this;
     }
 
     public PostBuilder unscheduled() {
-        this.publishAt = null;
+        publishAt = null;
         return this;
     }
 
     public PostBuilder publishAt(Date date) {
-        this.publishAt = date;
+        publishAt = date;
         return this;
     }
 

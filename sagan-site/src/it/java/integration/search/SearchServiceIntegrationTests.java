@@ -45,7 +45,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
 
     @Before
     public void setUp() throws Exception {
-        searchIndexSetup = new SearchIndexSetup(this.jestClient, this.index);
+        searchIndexSetup = new SearchIndexSetup(jestClient, index);
         searchIndexSetup.deleteIndex();
         searchIndexSetup.createIndex();
     }
@@ -57,8 +57,8 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
     }
 
     private void indexSingleEntry() throws ParseException {
-        this.entry = createSingleEntry("/some/path");
-        this.searchService.saveToIndex(this.entry);
+        entry = createSingleEntry("/some/path");
+        searchService.saveToIndex(entry);
     }
 
     private SearchEntry createSingleEntry(String path) throws ParseException {
@@ -69,10 +69,10 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
 
     private void assertThatSearchReturnsEntry(String query) {
         Page<SearchResult> searchEntries =
-                this.searchService.search(query, this.pageable, Collections.<String> emptyList()).getPage();
+                searchService.search(query, pageable, Collections.<String> emptyList()).getPage();
         List<SearchResult> entries = searchEntries.getContent();
         assertThat(entries, not(empty()));
-        assertThat(entries.get(0).getTitle(), is(equalTo(this.entry.getTitle())));
+        assertThat(entries.get(0).getTitle(), is(equalTo(entry.getTitle())));
     }
 
     @Test
@@ -106,9 +106,9 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         SearchEntry secondEntry =
                 SearchEntryBuilder.entry().path("/another/path").title("Test").rawContent("Test body").build();
 
-        this.searchService.saveToIndex(secondEntry);
+        searchService.saveToIndex(secondEntry);
         Page<SearchResult> searchEntries =
-                this.searchService.search("content", this.pageable, Collections.<String> emptyList()).getPage();
+                searchService.search("content", pageable, Collections.<String> emptyList()).getPage();
         List<SearchResult> entries = searchEntries.getContent();
         assertThat(entries.size(), equalTo(1));
     }
@@ -119,19 +119,19 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .summary("Html summary").publishAt("2013-01-01 10:00");
 
         SearchEntry entry1 = builder.path("item1").title("Item 1").build();
-        this.searchService.saveToIndex(entry1);
+        searchService.saveToIndex(entry1);
 
         SearchEntry entry2 = builder.path("item2").title("Item 2").build();
-        this.searchService.saveToIndex(entry2);
+        searchService.saveToIndex(entry2);
 
         Pageable page1 = new PageRequest(0, 1);
         Page<SearchResult> searchEntries1 =
-                this.searchService.search("content", page1, Collections.<String> emptyList()).getPage();
+                searchService.search("content", page1, Collections.<String> emptyList()).getPage();
         assertThat(searchEntries1.getContent().get(0).getId(), equalTo(entry1.getId()));
 
         Pageable page2 = new PageRequest(1, 1);
         Page<SearchResult> searchEntries2 =
-                this.searchService.search("content", page2, Collections.<String> emptyList()).getPage();
+                searchService.search("content", page2, Collections.<String> emptyList()).getPage();
         assertThat(searchEntries2.getContent().get(0).getId(), equalTo(entry2.getId()));
     }
 
@@ -142,13 +142,13 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
 
         for (int i = 0; i < 25; i++) {
             SearchEntry entry = builder.path("item" + i).title("Item " + i).build();
-            this.searchService.saveToIndex(entry);
+            searchService.saveToIndex(entry);
         }
 
         int page = 1;
         Pageable pageable = new PageRequest(page, 10);
         Page<SearchResult> searchEntries =
-                this.searchService.search("", pageable, Collections.<String> emptyList()).getPage();
+                searchService.search("", pageable, Collections.<String> emptyList()).getPage();
         assertThat(searchEntries.getContent().size(), equalTo(10));
         assertThat(searchEntries.getTotalPages(), equalTo(3));
         assertThat(searchEntries.getNumber(), equalTo(page));
@@ -158,7 +158,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
     public void searchThatReturnsNoResultsIsEmpty() throws ParseException {
         indexSingleEntry();
         Pageable page = new PageRequest(0, 10);
-        Page<SearchResult> searchEntries = this.searchService.search(
+        Page<SearchResult> searchEntries = searchService.search(
                 "somethingthatwillneverappearsupercalifragilousIcantspelltherest", page,
                 Collections.<String> emptyList()).getPage();
         assertThat(searchEntries.getContent().size(), equalTo(0));
@@ -167,20 +167,20 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
 
     @Test
     public void searchisCaseInsensitive() throws ParseException {
-        this.entry = SearchEntryBuilder.entry().path("http://example.com")
+        entry = SearchEntryBuilder.entry().path("http://example.com")
                 .title("My Entry").rawContent("Uppercase is here")
                 .summary("Html summary").publishAt("2013-01-01 10:00").build();
-        this.searchService.saveToIndex(this.entry);
+        searchService.saveToIndex(entry);
 
         assertThatSearchReturnsEntry("uppercase");
     }
 
     @Test
     public void searchMatchesPartialWords() throws ParseException {
-        this.entry = SearchEntryBuilder.entry().path("http://example.com")
+        entry = SearchEntryBuilder.entry().path("http://example.com")
                 .title("My Entry").rawContent("Exporter is here")
                 .summary("Html summary").publishAt("2013-01-01 10:00").build();
-        this.searchService.saveToIndex(this.entry);
+        searchService.saveToIndex(entry);
 
         assertThatSearchReturnsEntry("export");
     }
@@ -192,17 +192,17 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .rawContent("application is in the content").summary("Html summary")
                 .publishAt("2013-01-01 10:00").build();
 
-        this.searchService.saveToIndex(entryContent);
+        searchService.saveToIndex(entryContent);
 
         SearchEntry entryTitle = SearchEntryBuilder.entry()
                 .path("http://example.com/title").title("application is in the title")
                 .rawContent("some content").summary("Html summary")
                 .publishAt("2013-01-01 10:00").build();
 
-        this.searchService.saveToIndex(entryTitle);
+        searchService.saveToIndex(entryTitle);
 
-        List<SearchResult> results = this.searchService
-                .search("application", this.pageable, Collections.<String> emptyList())
+        List<SearchResult> results = searchService
+                .search("application", pageable, Collections.<String>emptyList())
                 .getPage().getContent();
         assertThat(results.get(0).getId(), is(entryTitle.getId()));
         assertThat(results.get(1).getId(), is(entryContent.getId()));
@@ -215,17 +215,17 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .rawContent("application is in the content").summary("Html summary")
                 .publishAt("2013-01-01 10:00").notCurrent().build();
 
-        this.searchService.saveToIndex(notCurrent);
+        searchService.saveToIndex(notCurrent);
 
         SearchEntry current = SearchEntryBuilder.entry()
                 .path("http://example.com/another_one").title("a title")
                 .rawContent("application is in the content").summary("Html summary")
                 .publishAt("2013-01-01 10:00").build();
 
-        this.searchService.saveToIndex(current);
+        searchService.saveToIndex(current);
 
-        List<SearchResult> results = this.searchService
-                .search("application", this.pageable, Collections.<String> emptyList())
+        List<SearchResult> results = searchService
+                .search("application", pageable, Collections.<String>emptyList())
                 .getPage().getContent();
         assertThat(results.get(0).getId(), is(current.getId()));
         assertThat(results.get(1).getId(), is(notCurrent.getId()));
@@ -239,11 +239,11 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .notCurrent().type("apiDoc").build();
 
-        this.searchService.saveToIndex(apiDoc);
+        searchService.saveToIndex(apiDoc);
 
-        List<SearchResult> results = this.searchService
-                .search("ApplicationContext", this.pageable,
-                        Collections.<String> emptyList()).getPage().getContent();
+        List<SearchResult> results = searchService
+                .search("ApplicationContext", pageable,
+                        Collections.<String>emptyList()).getPage().getContent();
         assertThat(results.get(0).getId(), is(apiDoc.getId()));
         assertThat(results.get(0).getSummary(), is("class level description"));
         assertThat(results.get(0).getHighlight(), containsString("Application"));
@@ -260,7 +260,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .version("1.2.3.RELEASE").notCurrent().projectId("project id to delete")
                 .type("apiDoc").build();
 
-        this.searchService.saveToIndex(oldApiDoc1);
+        searchService.saveToIndex(oldApiDoc1);
 
         SearchEntry oldApiDoc2 = SearchEntryBuilder.entry()
                 .path("http://example.com/content2").title("ApplicationContext")
@@ -269,7 +269,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .version("1.5.3.M1").notCurrent().projectId("project id to delete")
                 .type("apiDoc").build();
 
-        this.searchService.saveToIndex(oldApiDoc2);
+        searchService.saveToIndex(oldApiDoc2);
 
         SearchEntry newApiDoc1 = SearchEntryBuilder.entry()
                 .path("http://example.com/content3").title("ApplicationContext")
@@ -278,7 +278,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .version("2.0.0.RELEASE").notCurrent().projectId("project id to delete")
                 .type("apiDoc").build();
 
-        this.searchService.saveToIndex(newApiDoc1);
+        searchService.saveToIndex(newApiDoc1);
 
         SearchEntry newApiDoc2 = SearchEntryBuilder.entry()
                 .path("http://example.com/content4").title("ApplicationContext")
@@ -287,7 +287,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .version("2.1.0.M1").notCurrent().projectId("project id to delete")
                 .type("apiDoc").build();
 
-        this.searchService.saveToIndex(newApiDoc2);
+        searchService.saveToIndex(newApiDoc2);
 
         SearchEntry nonApiDoc = SearchEntryBuilder.entry()
                 .path("http://example.com/content5").title("ApplicationContext")
@@ -295,7 +295,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .notCurrent().type("site").build();
 
-        this.searchService.saveToIndex(nonApiDoc);
+        searchService.saveToIndex(nonApiDoc);
 
         SearchEntry otherApiDoc = SearchEntryBuilder.entry()
                 .path("http://example.com/content6").title("ApplicationContext")
@@ -304,14 +304,14 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .notCurrent().projectId("not id to delete").version("3.4.5.RELEASE")
                 .type("apiDoc").build();
 
-        this.searchService.saveToIndex(otherApiDoc);
+        searchService.saveToIndex(otherApiDoc);
 
-        this.searchService.removeOldProjectEntriesFromIndex("project id to delete",
+        searchService.removeOldProjectEntriesFromIndex("project id to delete",
                 Arrays.asList("2.0.0.RELEASE", "2.1.0.M1"));
 
-        List<SearchResult> results = this.searchService
-                .search("ApplicationContext", this.pageable,
-                        Collections.<String> emptyList()).getPage().getContent();
+        List<SearchResult> results = searchService
+                .search("ApplicationContext", pageable,
+                        Collections.<String>emptyList()).getPage().getContent();
         assertThat(results.size(), equalTo(4));
     }
 
@@ -324,7 +324,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .version("1.2.3.RELEASE").notCurrent().projectId("project id to delete")
                 .type("site").build();
 
-        this.searchService.saveToIndex(oldReferenceDoc1);
+        searchService.saveToIndex(oldReferenceDoc1);
 
         SearchEntry oldReferenceDoc2 = SearchEntryBuilder.entry()
                 .path("http://example.com/content2").title("ApplicationContext")
@@ -333,7 +333,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .version("1.5.3.M1").notCurrent().projectId("project id to delete")
                 .type("site").build();
 
-        this.searchService.saveToIndex(oldReferenceDoc2);
+        searchService.saveToIndex(oldReferenceDoc2);
 
         SearchEntry newReferenceDoc1 = SearchEntryBuilder.entry()
                 .path("http://example.com/content3").title("ApplicationContext")
@@ -342,7 +342,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .version("2.0.0.RELEASE").notCurrent().projectId("project id to delete")
                 .type("site").build();
 
-        this.searchService.saveToIndex(newReferenceDoc1);
+        searchService.saveToIndex(newReferenceDoc1);
 
         SearchEntry newReferenceDoc2 = SearchEntryBuilder.entry()
                 .path("http://example.com/content4").title("ApplicationContext")
@@ -351,7 +351,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .version("2.1.0.M1").notCurrent().projectId("project id to delete")
                 .type("site").build();
 
-        this.searchService.saveToIndex(newReferenceDoc2);
+        searchService.saveToIndex(newReferenceDoc2);
 
         SearchEntry nonReferenceDoc = SearchEntryBuilder.entry()
                 .path("http://example.com/content5").title("ApplicationContext")
@@ -359,7 +359,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .notCurrent().type("site").build();
 
-        this.searchService.saveToIndex(nonReferenceDoc);
+        searchService.saveToIndex(nonReferenceDoc);
 
         SearchEntry othersite = SearchEntryBuilder.entry()
                 .path("http://example.com/content6").title("ApplicationContext")
@@ -368,14 +368,14 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .notCurrent().projectId("not id to delete").version("3.4.5.RELEASE")
                 .type("site").build();
 
-        this.searchService.saveToIndex(othersite);
+        searchService.saveToIndex(othersite);
 
-        this.searchService.removeOldProjectEntriesFromIndex("project id to delete",
+        searchService.removeOldProjectEntriesFromIndex("project id to delete",
                 Arrays.asList("2.0.0.RELEASE", "2.1.0.M1"));
 
-        List<SearchResult> results = this.searchService
-                .search("ApplicationContext", this.pageable,
-                        Collections.<String> emptyList()).getPage().getContent();
+        List<SearchResult> results = searchService
+                .search("ApplicationContext", pageable,
+                        Collections.<String>emptyList()).getPage().getContent();
         assertThat(results.size(), equalTo(4));
     }
 

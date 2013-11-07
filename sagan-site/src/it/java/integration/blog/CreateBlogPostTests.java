@@ -59,7 +59,7 @@ public class CreateBlogPostTests extends AbstractIntegrationTests {
                 return profileId.toString();
             }
         };
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .addFilters(springSecurityFilterChain)
                 .defaultRequest(get("/").with(csrf()).with(user(profileId).roles("USER"))).build();
         postRepository.deleteAll();
@@ -72,7 +72,7 @@ public class CreateBlogPostTests extends AbstractIntegrationTests {
 
     @Test
     public void getNewBlogPage() throws Exception {
-        this.mockMvc.perform(get("/admin/blog/new"))
+        mockMvc.perform(get("/admin/blog/new"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("Add New Post")));
@@ -87,7 +87,7 @@ public class CreateBlogPostTests extends AbstractIntegrationTests {
         createPostRequest.param("draft", "false");
         createPostRequest.param("publishAt", "2013-07-01 13:15");
 
-        this.mockMvc.perform(createPostRequest)
+        mockMvc.perform(createPostRequest)
                 .andExpect(status().isFound())
                 .andExpect(new ResultMatcher() {
                     @Override

@@ -24,7 +24,7 @@ public class ProjectsControllerTests {
 
     @Before
     public void setUp() throws Exception {
-        this.controller = new ProjectsController(this.projectMetadataService);
+        controller = new ProjectsController(projectMetadataService);
     }
 
     @Test

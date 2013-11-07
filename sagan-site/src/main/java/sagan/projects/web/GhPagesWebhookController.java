@@ -67,7 +67,7 @@ public class GhPagesWebhookController {
     public GhPagesWebhookController(ProjectMetadataService service, GitHub gitHub) throws IOException {
         this.service = service;
         this.gitHub = gitHub;
-        this.template = StreamUtils.copyToString(
+        template = StreamUtils.copyToString(
                 new ClassPathResource("notifications/gh-pages-updated.md").getInputStream(),
                 Charset.defaultCharset());
     }

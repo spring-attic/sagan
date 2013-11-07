@@ -44,7 +44,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         this.apiDocUrl = apiDocUrl;
         this.groupId = groupId;
         this.artifactId = artifactId;
-        this.repository = ProjectRepository.get(versionName);
+        repository = ProjectRepository.get(versionName);
     }
 
     public boolean isCurrent() {
@@ -52,15 +52,15 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     }
 
     public boolean isGeneralAvailability() {
-        return this.releaseStatus == ReleaseStatus.GENERAL_AVAILABILITY;
+        return releaseStatus == ReleaseStatus.GENERAL_AVAILABILITY;
     }
 
     public boolean isPreRelease() {
-        return this.releaseStatus == ReleaseStatus.PRERELEASE;
+        return releaseStatus == ReleaseStatus.PRERELEASE;
     }
 
     public boolean isSnapshot() {
-        return this.releaseStatus == ReleaseStatus.SNAPSHOT;
+        return releaseStatus == ReleaseStatus.SNAPSHOT;
     }
 
     public ReleaseStatus getReleaseStatus() {
@@ -68,7 +68,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     }
 
     public String getVersion() {
-        return this.versionName;
+        return versionName;
     }
 
     public String getVersionDisplayName() {
@@ -88,36 +88,36 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     }
 
     public String getRefDocUrl() {
-        return this.refDocUrl;
+        return refDocUrl;
     }
 
     public boolean hasRefDocUrl() {
-        return !this.refDocUrl.isEmpty();
+        return !refDocUrl.isEmpty();
     }
 
     public String getApiDocUrl() {
-        return this.apiDocUrl;
+        return apiDocUrl;
     }
 
     public boolean hasApiDocUrl() {
-        return !this.apiDocUrl.isEmpty();
+        return !apiDocUrl.isEmpty();
     }
 
     public String getGroupId() {
-        return this.groupId;
+        return groupId;
     }
 
     public String getArtifactId() {
-        return this.artifactId;
+        return artifactId;
     }
 
     public ProjectRepository getRepository() {
-        return this.repository;
+        return repository;
     }
 
     @Override
     public int compareTo(ProjectRelease other) {
-        return this.versionName.compareTo(other.versionName);
+        return versionName.compareTo(other.versionName);
     }
 
     @Override
@@ -129,13 +129,13 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 
         ProjectRelease that = (ProjectRelease) o;
 
-        if (!this.apiDocUrl.equals(that.apiDocUrl))
+        if (!apiDocUrl.equals(that.apiDocUrl))
             return false;
-        if (!this.refDocUrl.equals(that.refDocUrl))
+        if (!refDocUrl.equals(that.refDocUrl))
             return false;
-        if (this.releaseStatus != that.releaseStatus)
+        if (releaseStatus != that.releaseStatus)
             return false;
-        if (!this.versionName.equals(that.versionName))
+        if (!versionName.equals(that.versionName))
             return false;
 
         return true;
@@ -143,17 +143,17 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 
     @Override
     public int hashCode() {
-        int result = this.versionName.hashCode();
-        result = 31 * result + this.releaseStatus.hashCode();
-        result = 31 * result + this.refDocUrl.hashCode();
-        result = 31 * result + this.apiDocUrl.hashCode();
+        int result = versionName.hashCode();
+        result = 31 * result + releaseStatus.hashCode();
+        result = 31 * result + refDocUrl.hashCode();
+        result = 31 * result + apiDocUrl.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return "ProjectRelease{" + "versionName='" + this.versionName + '\'' + ", release=" + this.releaseStatus
-                + ", refDocUrl='" + this.refDocUrl + '\'' + ", apiDocUrl='" + this.apiDocUrl + '\'' + '}';
+        return "ProjectRelease{" + "versionName='" + versionName + '\'' + ", release=" + releaseStatus
+                + ", refDocUrl='" + refDocUrl + '\'' + ", apiDocUrl='" + apiDocUrl + '\'' + '}';
     }
 
 }

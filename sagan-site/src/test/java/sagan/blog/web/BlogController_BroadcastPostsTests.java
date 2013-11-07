@@ -50,42 +50,42 @@ public class BlogController_BroadcastPostsTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        this.controller = new BlogController(this.blogService, this.postViewFactory);
+        controller = new BlogController(blogService, postViewFactory);
 
         List<Post> posts = new ArrayList<>();
         posts.add(PostBuilder.post().build());
         Page<Post> postsPage = new PageImpl<>(posts, new PageRequest(TEST_PAGE, 10), 20);
         Pageable testPageable = PageableFactory.forLists(TEST_PAGE);
 
-        this.page = new PageImpl<>(new ArrayList<PostView>(), testPageable, 1);
+        page = new PageImpl<>(new ArrayList<PostView>(), testPageable, 1);
 
-        given(this.blogService.getPublishedBroadcastPosts(eq(testPageable))).willReturn(postsPage);
-        given(this.postViewFactory.createPostViewPage(postsPage)).willReturn(this.page);
-        this.request.setServletPath("/blog");
+        given(blogService.getPublishedBroadcastPosts(eq(testPageable))).willReturn(postsPage);
+        given(postViewFactory.createPostViewPage(postsPage)).willReturn(page);
+        request.setServletPath("/blog");
 
-        this.viewName = this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
+        viewName = controller.listPublishedBroadcasts(model, TEST_PAGE);
     }
 
     @Test
     public void providesAllCategoriesInModel() {
-        assertThat((PostCategory[]) this.model.get("categories"), is(PostCategory.values()));
+        assertThat((PostCategory[]) model.get("categories"), is(PostCategory.values()));
     }
 
     @Test
     public void providesPaginationInfoInModel() {
-        assertThat((PaginationInfo) this.model.get("paginationInfo"), is(new PaginationInfo(this.page)));
+        assertThat((PaginationInfo) model.get("paginationInfo"), is(new PaginationInfo(page)));
     }
 
     @Test
     public void viewNameIsIndex() throws Exception {
-        assertThat(this.viewName, is("blog/index"));
+        assertThat(viewName, is("blog/index"));
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void postsInModel() throws Exception {
-        this.controller.listPublishedBroadcasts(this.model, TEST_PAGE);
-        assertThat((List<PostView>) this.model.get("posts"), is(this.posts));
+        controller.listPublishedBroadcasts(model, TEST_PAGE);
+        assertThat((List<PostView>) model.get("posts"), is(posts));
     }
 
 }

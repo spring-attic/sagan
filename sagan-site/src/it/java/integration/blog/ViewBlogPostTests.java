@@ -34,7 +34,7 @@ public class ViewBlogPostTests extends AbstractIntegrationTests {
                 .category(PostCategory.ENGINEERING).build();
         postRepository.save(post);
 
-        result = this.mockMvc.perform(get("/blog/" + post.getPublicSlug())).andExpect(status().isOk());
+        result = mockMvc.perform(get("/blog/" + post.getPublicSlug())).andExpect(status().isOk());
     }
 
     @Test

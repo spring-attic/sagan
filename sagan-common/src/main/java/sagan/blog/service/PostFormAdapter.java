@@ -32,7 +32,7 @@ public class PostFormAdapter {
     public Post createPostFromPostForm(PostForm postForm, String username) {
         String content = postForm.getContent();
         Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
-        MemberProfile profile = this.teamRepository.findByUsername(username);
+        MemberProfile profile = teamRepository.findByUsername(username);
         post.setAuthor(profile);
         post.setCreatedAt(createdDate(postForm, dateService.now()));
 
@@ -69,7 +69,7 @@ public class PostFormAdapter {
 
     private Date publishDate(PostForm postForm) {
         if (!postForm.isDraft() && postForm.getPublishAt() == null) {
-            return this.dateService.now();
+            return dateService.now();
         } else {
             return postForm.getPublishAt();
         }

@@ -15,7 +15,7 @@ public class TutorialIntegrationTests extends AbstractIntegrationTests {
     public void getTutorialRootPage() throws Exception {
         stubRestClient.putResponse("/repos/spring-guides/tut-my-tutorial/contents/README.md", "html");
 
-        this.mockMvc.perform(get("/guides/tutorials/my-tutorial"))
+        mockMvc.perform(get("/guides/tutorials/my-tutorial"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"));
 
@@ -25,7 +25,7 @@ public class TutorialIntegrationTests extends AbstractIntegrationTests {
     public void getTutorialPage1() throws Exception {
         stubRestClient.putResponse("/repos/spring-guides/tut-my-tutorial/contents/1/README.md", "html");
 
-        this.mockMvc.perform(get("/guides/tutorials/my-tutorial/1"))
+        mockMvc.perform(get("/guides/tutorials/my-tutorial/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"));
 
@@ -35,7 +35,7 @@ public class TutorialIntegrationTests extends AbstractIntegrationTests {
     public void getTutorialPage100() throws Exception {
         stubRestClient.putResponse("/repos/spring-guides/tut-my-tutorial/contents/100/README.md", "html");
 
-        this.mockMvc.perform(get("/guides/tutorials/my-tutorial/100"))
+        mockMvc.perform(get("/guides/tutorials/my-tutorial/100"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"));
 
@@ -43,10 +43,10 @@ public class TutorialIntegrationTests extends AbstractIntegrationTests {
 
     @Test
     public void getInvalidTutorialPages() throws Exception {
-        this.mockMvc.perform(get("/guides/tutorials/my-tutorial/0"))
+        mockMvc.perform(get("/guides/tutorials/my-tutorial/0"))
                 .andExpect(status().isNotFound());
 
-        this.mockMvc.perform(get("/guides/tutorials/my-tutorial/NaN"))
+        mockMvc.perform(get("/guides/tutorials/my-tutorial/NaN"))
                 .andExpect(status().isNotFound());
     }
 
@@ -56,7 +56,7 @@ public class TutorialIntegrationTests extends AbstractIntegrationTests {
 
         stubRestClient.putResponse("/repos/spring-guides/tut-my-tutorial/contents/images/image.png", imageJson);
 
-        this.mockMvc.perform(get("/guides/tutorials/my-tutorial/images/image.png")).andExpect(status().isOk());
+        mockMvc.perform(get("/guides/tutorials/my-tutorial/images/image.png")).andExpect(status().isOk());
 
     }
 

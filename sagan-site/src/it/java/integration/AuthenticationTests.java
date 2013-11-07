@@ -33,7 +33,7 @@ public class AuthenticationTests extends AbstractIntegrationTests {
 
     @Before
     public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .addFilters(springSecurityFilterChain)
                 .defaultRequest(get("/").with(csrf()).with(user(123L).roles("USER"))).build();
     }
@@ -102,7 +102,7 @@ public class AuthenticationTests extends AbstractIntegrationTests {
                 .getContext()
                 .setAuthentication(authentication);
 
-        this.mockMvc.perform(get("/signout"))
+        mockMvc.perform(get("/signout"))
                 .andExpect(status().isFound())
                 .andExpect(new ResultMatcher() {
                     @Override

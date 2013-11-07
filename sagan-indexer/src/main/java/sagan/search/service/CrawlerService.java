@@ -61,7 +61,7 @@ public class CrawlerService {
         public HTMLPageResponse get(PageURL url, boolean fetchBody, Map<String, String> requestHeaders) {
             HTMLPageResponse response = super.get(url, fetchBody, requestHeaders);
             if (response.getResponseCode() == 200 && response.getResponseType().startsWith("text")) {
-                this.processor.process(response.getBody());
+                processor.process(response.getBody());
             }
             return response;
         }
@@ -79,7 +79,7 @@ public class CrawlerService {
         @Override
         public Set<PageURL> get(HTMLPageResponse theResponse) {
             Set<PageURL> urls = new HashSet<PageURL>();
-            for (PageURLParser parser : this.parsers) {
+            for (PageURLParser parser : parsers) {
                 urls.addAll(parser.get(theResponse));
             }
             return urls;

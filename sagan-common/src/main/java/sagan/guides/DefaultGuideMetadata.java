@@ -24,8 +24,8 @@ public class DefaultGuideMetadata implements GuideMetadata {
         this.description = description;
 
         String[] split = description.split("::", 2);
-        this.title = split[0].trim();
-        this.subtitle = (split.length > 1) ? split[1].trim() : "";
+        title = split[0].trim();
+        subtitle = (split.length > 1) ? split[1].trim() : "";
     }
 
     public String getGuideId() {

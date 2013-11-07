@@ -52,7 +52,7 @@ public class BlogService {
     // Query methods
 
     public Post getPost(Long postId) {
-        Post post = this.postRepository.findOne(postId);
+        Post post = postRepository.findOne(postId);
         if (post == null) {
             throw new BlogPostNotFoundException(postId);
         }
@@ -64,22 +64,22 @@ public class BlogService {
     }
 
     public Page<Post> getDraftPosts(Pageable pageRequest) {
-        return this.postRepository.findByDraftTrue(pageRequest);
+        return postRepository.findByDraftTrue(pageRequest);
     }
 
     public Page<Post> getScheduledPosts(Pageable pageRequest) {
-        return this.postRepository.findByDraftFalseAndPublishAtAfter(this.dateService.now(), pageRequest);
+        return postRepository.findByDraftFalseAndPublishAtAfter(dateService.now(), pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPosts(Pageable pageRequest) {
-        return this.postRepository.findByDraftFalseAndPublishAtBefore(this.dateService.now(), pageRequest);
+        return postRepository.findByDraftFalseAndPublishAtBefore(dateService.now(), pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Post getPublishedPost(String publicSlug) {
         Post post =
-                this.postRepository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug, this.dateService.now());
+                postRepository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug, dateService.now());
         if (post == null) {
             throw new BlogPostNotFoundException(publicSlug);
         }
@@ -88,67 +88,67 @@ public class BlogService {
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public List<Post> getAllPublishedPosts() {
-        return this.postRepository.findByDraftFalseAndPublishAtBefore(this.dateService.now());
+        return postRepository.findByDraftFalseAndPublishAtBefore(dateService.now());
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsByDate(int year, int month, int day, Pageable pageRequest) {
-        return this.postRepository.findByDate(year, month, day, pageRequest);
+        return postRepository.findByDate(year, month, day, pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsByDate(int year, int month, Pageable pageRequest) {
-        return this.postRepository.findByDate(year, month, pageRequest);
+        return postRepository.findByDate(year, month, pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsByDate(int year, Pageable pageRequest) {
-        return this.postRepository.findByDate(year, pageRequest);
+        return postRepository.findByDate(year, pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
-        return this.postRepository.findByCategoryAndDraftFalseAndPublishAtBefore(category, this.dateService.now(),
+        return postRepository.findByCategoryAndDraftFalseAndPublishAtBefore(category, dateService.now(),
                 pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
-        return this.postRepository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, this.dateService.now(),
+        return postRepository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, dateService.now(),
                 pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsForMember(MemberProfile profile, Pageable pageRequest) {
-        return this.postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, this.dateService.now(),
+        return postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, dateService.now(),
                 pageRequest);
     }
 
     public Page<Post> getAllPosts(Pageable pageRequest) {
-        return this.postRepository.findAll(pageRequest);
+        return postRepository.findAll(pageRequest);
     }
 
     public Post addPost(PostForm postForm, String username) {
         Post post = postFormAdapter.createPostFromPostForm(postForm, username);
-        this.postRepository.save(post);
+        postRepository.save(post);
         saveToIndex(post);
         return post;
     }
 
     public void updatePost(Post post, PostForm postForm) {
         postFormAdapter.updatePostFromPostForm(post, postForm);
-        this.postRepository.save(post);
+        postRepository.save(post);
         saveToIndex(post);
     }
 
     public void deletePost(Post post) {
-        this.postRepository.delete(post);
+        postRepository.delete(post);
     }
 
     private void saveToIndex(Post post) {
-        if (post.isLiveOn(this.dateService.now())) {
+        if (post.isLiveOn(dateService.now())) {
             try {
-                this.searchService.saveToIndex(this.mapper.map(post));
+                searchService.saveToIndex(mapper.map(post));
             } catch (Exception e) {
                 logger.error(e);
             }
@@ -159,7 +159,7 @@ public class BlogService {
         List<Post> posts = postRepository.findAll();
         for (Post post : posts) {
             postFormAdapter.summarize(post);
-            this.postRepository.save(post);
+            postRepository.save(post);
         }
     }
 

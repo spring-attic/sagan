@@ -53,7 +53,7 @@ public class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutor
         String repoName = REPO_PREFIX + guide;
         String description;
         try {
-            description = this.org.getRepoInfo(repoName).getDescription();
+            description = org.getRepoInfo(repoName).getDescription();
         } catch (RestClientException ex) {
             description = "";
         }
@@ -63,7 +63,7 @@ public class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutor
     @Override
     public List<Tutorial> findAll() {
         List<Tutorial> guides = new ArrayList<>();
-        for (GitHubRepo repo : this.org.findRepositoriesByPrefix(REPO_PREFIX)) {
+        for (GitHubRepo repo : org.findRepositoriesByPrefix(REPO_PREFIX)) {
             String repoName = repo.getName();
             GuideMetadata metadata =
                     new DefaultGuideMetadata(org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo.getDescription());
@@ -86,7 +86,7 @@ public class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutor
     private String loadBodyHtml(String path) {
         try {
             log.debug(String.format("Fetching tutorial HTML for '%s'", path));
-            return this.org.getMarkdownFileAsHtml(path);
+            return org.getMarkdownFileAsHtml(path);
         } catch (RestClientException ex) {
             String msg = String.format("No tutorial HTML found for '%s'", path);
             log.warn(msg, ex);
@@ -96,7 +96,7 @@ public class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutor
 
     private String loadSidebarHtml(String repoName) {
         try {
-            return this.org.getMarkdownFileAsHtml(String.format(SIDEBAR_PATH, org.getName(), repoName));
+            return org.getMarkdownFileAsHtml(String.format(SIDEBAR_PATH, org.getName(), repoName));
         } catch (RestClientException ex) {
             return "";
         }
@@ -105,7 +105,7 @@ public class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutor
     @Override
     public byte[] loadImage(Guide guide, String imageName) {
         try {
-            return this.org.getGuideImage(guide.getRepoName(), imageName);
+            return org.getGuideImage(guide.getRepoName(), imageName);
         } catch (RestClientException ex) {
             String msg = String.format("Could not load image '%s' for repo '%s'", imageName, guide.getRepoName());
             log.warn(msg, ex);

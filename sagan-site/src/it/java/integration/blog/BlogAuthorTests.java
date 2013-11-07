@@ -36,7 +36,7 @@ public class BlogAuthorTests extends AbstractIntegrationTests {
         Post post = new PostBuilder().title("Blog Post ").author(activeAuthor).build();
         postRepository.save(post);
 
-        MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog")).andReturn();
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
         assertThat(html.select("a.author").first().attr("href"), containsString(activeAuthor.getUsername()));
     }
@@ -50,7 +50,7 @@ public class BlogAuthorTests extends AbstractIntegrationTests {
         Post post = new PostBuilder().title("Blog Post ").author(activeAuthor).build();
         postRepository.save(post);
 
-        MvcResult response = this.mockMvc.perform(get("/blog")).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog")).andReturn();
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
         assertTrue(html.select("a.author").isEmpty());
         assertThat(html.text(), containsString("Hidden Author"));
@@ -64,7 +64,7 @@ public class BlogAuthorTests extends AbstractIntegrationTests {
         Post post = new PostBuilder().title("Blog Post ").author(activeAuthor).build();
         postRepository.save(post);
 
-        MvcResult response = this.mockMvc.perform(get("/blog/" + post.getPublicSlug())).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog/" + post.getPublicSlug())).andReturn();
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
         assertThat(html.select("a.author").first().attr("href"), containsString(activeAuthor.getUsername()));
     }
@@ -78,7 +78,7 @@ public class BlogAuthorTests extends AbstractIntegrationTests {
         Post post = new PostBuilder().title("Blog Post ").author(activeAuthor).build();
         postRepository.save(post);
 
-        MvcResult response = this.mockMvc.perform(get("/blog/" + post.getPublicSlug())).andReturn();
+        MvcResult response = mockMvc.perform(get("/blog/" + post.getPublicSlug())).andReturn();
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
         assertTrue(html.select("a.author").isEmpty());
         assertThat(html.text(), containsString("Hidden Author"));

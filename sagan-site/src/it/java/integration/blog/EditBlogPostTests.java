@@ -43,7 +43,7 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
 
     @Before
     public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .addFilters(springSecurityFilterChain)
                 .defaultRequest(get("/").with(csrf()).with(user(123L).roles("USER"))).build();
         post = PostBuilder.post()
@@ -55,7 +55,7 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
 
     @Test
     public void getEditBlogPage() throws Exception {
-        this.mockMvc.perform(get("/admin/blog/" + post.getAdminSlug() + "/edit"))
+        mockMvc.perform(get("/admin/blog/" + post.getAdminSlug() + "/edit"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("Edit &middot; Original Title")));
@@ -65,7 +65,7 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
     public void redirectToPublishedPostAfterUpdate() throws Exception {
         MockHttpServletRequestBuilder editPostRequest = createEditPostRequest();
 
-        this.mockMvc.perform(editPostRequest)
+        mockMvc.perform(editPostRequest)
                 .andExpect(status().isFound())
                 .andExpect(new ResultMatcher() {
                     @Override
@@ -80,7 +80,7 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
     public void updatePostSavesNewValues() throws Exception {
         MockHttpServletRequestBuilder editPostRequest = createEditPostRequest();
 
-        this.mockMvc.perform(editPostRequest);
+        mockMvc.perform(editPostRequest);
         Post updatedPost = postRepository.findOne(post.getId());
 
         assertEquals("New Title", updatedPost.getTitle());
@@ -98,7 +98,7 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
         editPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
         editPostRequest.param("draft", "false");
 
-        this.mockMvc.perform(editPostRequest).andExpect(status().isOk());
+        mockMvc.perform(editPostRequest).andExpect(status().isOk());
         Post updatedPost = postRepository.findOne(post.getId());
 
         assertEquals("Original Title", updatedPost.getTitle());

@@ -19,7 +19,7 @@ public class PaginationInfo_PaginationElementsTests {
     public void givenOnePage_rendersCurrentElement() {
         PageRequest pageRequest = new PageRequest(0, 10);
         int itemCount = 3;
-        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(this.content, pageRequest, itemCount));
+        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
 
         List<PageElement> pageElements = paginationInfo.getPageElements();
         assertThat(pageElements.size(), is(equalTo(1)));
@@ -30,7 +30,7 @@ public class PaginationInfo_PaginationElementsTests {
     public void givenTwoPages_rendersCurrentElementAndPageTwo() {
         PageRequest pageRequest = new PageRequest(0, 10);
         int itemCount = 13;
-        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(this.content, pageRequest, itemCount));
+        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(2)));
@@ -42,7 +42,7 @@ public class PaginationInfo_PaginationElementsTests {
     public void givenThreePagesOnPageTwo_rendersCurrentElementAndPageTwo() {
         PageRequest pageRequest = new PageRequest(1, 10);
         int itemCount = 23;
-        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(this.content, pageRequest, itemCount));
+        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
         assertThat(pageElements.size(), is(equalTo(3)));
@@ -55,7 +55,7 @@ public class PaginationInfo_PaginationElementsTests {
     public void givenTenPagesOnPageFive_rendersPreviousTwoPagesAndNextThree() {
         PageRequest pageRequest = new PageRequest(4, 10);
         int itemCount = 93;
-        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(this.content, pageRequest, itemCount));
+        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(10)));
@@ -72,7 +72,7 @@ public class PaginationInfo_PaginationElementsTests {
     public void alwaysRendersFirstAndLastPage() {
         PageRequest pageRequest = new PageRequest(4, 10);
         int itemCount = 93;
-        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(this.content, pageRequest, itemCount));
+        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(10)));
@@ -85,7 +85,7 @@ public class PaginationInfo_PaginationElementsTests {
     public void rendersEllipsesBetweenNonAdjacentPages() {
         PageRequest pageRequest = new PageRequest(4, 10);
         int itemCount = 93;
-        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(this.content, pageRequest, itemCount));
+        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(10)));
@@ -98,7 +98,7 @@ public class PaginationInfo_PaginationElementsTests {
     public void doesNotRenderEllipsesBetweenAdjacentPages() {
         PageRequest pageRequest = new PageRequest(2, 10);
         int itemCount = 63;
-        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(this.content, pageRequest, itemCount));
+        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(7)));
@@ -118,7 +118,7 @@ public class PaginationInfo_PaginationElementsTests {
 
         PageRequest pageRequest = new PageRequest(currentPageIndex, 10);
         int itemCount = 133;
-        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(this.content, pageRequest, itemCount));
+        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(8)));
@@ -139,7 +139,7 @@ public class PaginationInfo_PaginationElementsTests {
 
         PageRequest pageRequest = new PageRequest(currentPageIndex, 10);
         int itemCount = 133;
-        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(this.content, pageRequest, itemCount));
+        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
         assertThat(paginationInfo.getPageElements().size(), is(equalTo(8)));
@@ -160,7 +160,7 @@ public class PaginationInfo_PaginationElementsTests {
 
         PageRequest pageRequest = new PageRequest(currentPageIndex, 10);
         int itemCount = 133;
-        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(this.content, pageRequest, itemCount));
+        PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
         assertThat(pageElements.get(0).isCurrentPage(), is(false));

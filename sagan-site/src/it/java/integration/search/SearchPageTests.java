@@ -68,7 +68,7 @@ public class SearchPageTests extends AbstractIntegrationTests {
     }
 
     private Document performSearch(String search) throws Exception {
-        MvcResult mvcResult = this.mockMvc.perform(get("/search?q=" + search))
+        MvcResult mvcResult = mockMvc.perform(get("/search?q=" + search))
                 .andReturn();
         return Jsoup.parse(mvcResult.getResponse().getContentAsString());
     }

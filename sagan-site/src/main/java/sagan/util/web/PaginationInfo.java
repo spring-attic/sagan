@@ -12,8 +12,8 @@ public class PaginationInfo {
     private final long totalPages;
 
     public PaginationInfo(Page<?> page) {
-        this.currentPage = page.getNumber() + 1;
-        this.totalPages = page.getTotalPages();
+        currentPage = page.getNumber() + 1;
+        totalPages = page.getTotalPages();
     }
 
     public boolean isVisible() {
@@ -21,19 +21,19 @@ public class PaginationInfo {
     }
 
     public boolean isPreviousVisible() {
-        return this.currentPage > 1;
+        return currentPage > 1;
     }
 
     public boolean isNextVisible() {
-        return this.currentPage < this.totalPages;
+        return currentPage < totalPages;
     }
 
     public long getNextPageNumber() {
-        return this.currentPage + 1;
+        return currentPage + 1;
     }
 
     public long getPreviousPageNumber() {
-        return this.currentPage - 1;
+        return currentPage - 1;
     }
 
     @Override
@@ -45,9 +45,9 @@ public class PaginationInfo {
 
         PaginationInfo that = (PaginationInfo) o;
 
-        if (this.currentPage != that.currentPage)
+        if (currentPage != that.currentPage)
             return false;
-        if (this.totalPages != that.totalPages)
+        if (totalPages != that.totalPages)
             return false;
 
         return true;
@@ -55,8 +55,8 @@ public class PaginationInfo {
 
     @Override
     public int hashCode() {
-        int result = (int) (this.currentPage ^ (this.currentPage >>> 32));
-        result = 31 * result + (int) (this.totalPages ^ (this.totalPages >>> 32));
+        int result = (int) (currentPage ^ (currentPage >>> 32));
+        result = 31 * result + (int) (totalPages ^ (totalPages >>> 32));
         return result;
     }
 

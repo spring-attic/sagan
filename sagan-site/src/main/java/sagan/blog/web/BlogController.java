@@ -44,8 +44,8 @@ public class BlogController {
                            @PathVariable String slug, Model model) {
 
         String publicSlug = String.format("%s/%s/%s/%s", year, month, day, slug);
-        Post post = this.service.getPublishedPost(publicSlug);
-        model.addAttribute("post", this.postViewFactory.createPostView(post));
+        Post post = service.getPublishedPost(publicSlug);
+        model.addAttribute("post", postViewFactory.createPostView(post));
         model.addAttribute("categories", PostCategory.values());
         model.addAttribute("activeCategory", post.getCategory().getDisplayName());
         return "blog/show";
@@ -54,7 +54,7 @@ public class BlogController {
     @RequestMapping(value = "", method = { GET, HEAD })
     public String listPublishedPosts(Model model, @RequestParam(defaultValue = "1") int page) {
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = this.service.getPublishedPosts(pageRequest);
+        Page<Post> result = service.getPublishedPosts(pageRequest);
         return renderListOfPosts(result, model, "All Posts");
     }
 
@@ -62,14 +62,14 @@ public class BlogController {
     public String listPublishedPostsForCategory(@PathVariable("category") PostCategory category, Model model,
                                                 @RequestParam(defaultValue = "1", value = "page") int page) {
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = this.service.getPublishedPosts(category, pageRequest);
+        Page<Post> result = service.getPublishedPosts(category, pageRequest);
         return renderListOfPosts(result, model, category.getDisplayName());
     }
 
     @RequestMapping(value = "/broadcasts", method = { GET, HEAD })
     public String listPublishedBroadcasts(Model model, @RequestParam(defaultValue = "1", value = "page") int page) {
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = this.service.getPublishedBroadcastPosts(pageRequest);
+        Page<Post> result = service.getPublishedBroadcastPosts(pageRequest);
         return renderListOfPosts(result, model, "Broadcasts");
     }
 
@@ -78,7 +78,7 @@ public class BlogController {
                                             @RequestParam(defaultValue = "1", value = "page") int page, Model model) {
 
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = this.service.getPublishedPostsByDate(year, month, day, pageRequest);
+        Page<Post> result = service.getPublishedPostsByDate(year, month, day, pageRequest);
 
         LocalDate date = new LocalDate(year, month, day);
         model.addAttribute("title", "Archive for " + date.toString("MMMM dd, yyyy"));
@@ -92,7 +92,7 @@ public class BlogController {
                                                     Model model) {
 
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = this.service.getPublishedPostsByDate(year, month, pageRequest);
+        Page<Post> result = service.getPublishedPostsByDate(year, month, pageRequest);
         YearMonth yearMonth = new YearMonth(year, month);
         model.addAttribute("title", "Archive for " + yearMonth.toString("MMMM yyyy"));
         return renderListOfPosts(result, model, "All Posts");
@@ -103,13 +103,13 @@ public class BlogController {
                                             @RequestParam(defaultValue = "1", value = "page") int page, Model model) {
 
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = this.service.getPublishedPostsByDate(year, pageRequest);
+        Page<Post> result = service.getPublishedPostsByDate(year, pageRequest);
         model.addAttribute("title", String.format("Archive for %d", year));
         return renderListOfPosts(result, model, "All Posts");
     }
 
     private String renderListOfPosts(Page<Post> page, Model model, String activeCategory) {
-        Page<PostView> postViewPage = this.postViewFactory.createPostViewPage(page);
+        Page<PostView> postViewPage = postViewFactory.createPostViewPage(page);
         List<PostView> posts = postViewPage.getContent();
         model.addAttribute("activeCategory", activeCategory);
         model.addAttribute("categories", PostCategory.values());

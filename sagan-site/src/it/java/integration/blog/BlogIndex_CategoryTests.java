@@ -63,7 +63,7 @@ public class BlogIndex_CategoryTests extends AbstractIntegrationTests {
         Page<Post> posts = postRepository.findByCategoryAndDraftFalse(PostCategory.ENGINEERING, new PageRequest(0, 10));
         MatcherAssert.assertThat(posts.getSize(), greaterThanOrEqualTo(1));
 
-        MvcResult response = this.mockMvc.perform(get(path))
+        MvcResult response = mockMvc.perform(get(path))
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("An Engineering Post")))
                 .andExpect(content().string(not(containsString("DO NOT LOOK AT ME"))))
@@ -86,7 +86,7 @@ public class BlogIndex_CategoryTests extends AbstractIntegrationTests {
     public void given1PageOfResults_blogIndexDoesNotShowPaginationControl() throws Exception {
         createManyPostsInNovember(1);
 
-        MvcResult response = this.mockMvc.perform(get(path)).andReturn();
+        MvcResult response = mockMvc.perform(get(path)).andReturn();
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
         assertThat(html.select("#pagination_control").first(), is(nullValue()));
     }
@@ -95,7 +95,7 @@ public class BlogIndex_CategoryTests extends AbstractIntegrationTests {
     public void givenManyPosts_blogIndexShowsPaginationControl() throws Exception {
         createManyPostsInNovember(21);
 
-        MvcResult response = this.mockMvc.perform(get(path + "?page=2")).andReturn();
+        MvcResult response = mockMvc.perform(get(path + "?page=2")).andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
 

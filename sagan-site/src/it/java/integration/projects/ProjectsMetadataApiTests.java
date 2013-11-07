@@ -23,7 +23,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
 
     @Test
     public void projectMetadata_respondsWithJavascript() throws Exception {
-        this.mockMvc
+        mockMvc
                 .perform(
                         MockMvcRequestBuilders
                                 .get("/project_metadata/spring-framework?callback=a_function_name"))
@@ -47,7 +47,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
     }
 
     public List<Object> getAndCheckProjectReleases(String projectId, String expectedProjectName) throws Exception {
-        MvcResult result = this.mockMvc.perform(
+        MvcResult result = mockMvc.perform(
                 MockMvcRequestBuilders.get("/project_metadata/" + projectId
                         + "?callback=a_function_name")).andReturn();
 
