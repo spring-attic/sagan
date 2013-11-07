@@ -1,6 +1,5 @@
 package sagan.app.site;
 
-import sagan.blog.BlogPostNotFoundException;
 import sagan.util.ResourceNotFoundException;
 import sagan.util.web.NavSection;
 import sagan.util.web.StaticPagePathFinder;
