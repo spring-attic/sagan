@@ -3,7 +3,7 @@ package sagan.blog.web;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.blog.service.CachedBlogService;
+import sagan.blog.service.BlogService;
 import sagan.blog.view.PostView;
 import sagan.blog.view.PostViewFactory;
 import sagan.util.web.PageableFactory;
@@ -36,7 +36,7 @@ public class BlogController_PublishedPostsForCategoryTests {
     public static final PostCategory TEST_CATEGORY = ENGINEERING;
 
     @Mock
-    private CachedBlogService blogService;
+    private BlogService blogService;
 
     private MockHttpServletRequest request = new MockHttpServletRequest();
 

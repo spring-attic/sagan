@@ -2,7 +2,7 @@ package sagan.blog.web;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.blog.service.CachedBlogService;
+import sagan.blog.service.BlogService;
 import sagan.blog.view.PostView;
 import sagan.blog.view.PostViewFactory;
 import sagan.util.web.NavSection;
@@ -30,11 +30,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @NavSection("blog")
 public class BlogController {
 
-    private final CachedBlogService service;
+    private final BlogService service;
     private final PostViewFactory postViewFactory;
 
     @Autowired
-    public BlogController(CachedBlogService service, PostViewFactory postViewFactory) {
+    public BlogController(BlogService service, PostViewFactory postViewFactory) {
         this.service = service;
         this.postViewFactory = postViewFactory;
     }

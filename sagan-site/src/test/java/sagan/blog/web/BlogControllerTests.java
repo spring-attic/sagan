@@ -1,7 +1,7 @@
 package sagan.blog.web;
 
 import sagan.blog.Post;
-import sagan.blog.service.CachedBlogService;
+import sagan.blog.service.BlogService;
 import sagan.blog.view.PostViewFactory;
 import sagan.util.service.DateService;
 
@@ -27,7 +27,7 @@ public class BlogControllerTests {
     private PostViewFactory postViewFactory;
 
     @Mock
-    private CachedBlogService blogService;
+    private BlogService blogService;
     private BlogController blogController;
 
     private ExtendedModelMap model = new ExtendedModelMap();

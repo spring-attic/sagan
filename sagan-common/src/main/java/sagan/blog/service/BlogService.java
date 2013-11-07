@@ -8,6 +8,7 @@ import sagan.blog.service.index.PostSearchEntryMapper;
 import sagan.search.service.SearchService;
 import sagan.team.MemberProfile;
 import sagan.util.service.DateService;
+import sagan.util.service.db.DatabaseConfig;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -54,6 +56,20 @@ public class BlogService {
         return postRepository.findByTitleAndCreatedAt(title, createdAt);
     }
 
+    public Page<Post> getDraftPosts(Pageable pageRequest) {
+        return this.postRepository.findByDraftTrue(pageRequest);
+    }
+
+    public Page<Post> getScheduledPosts(Pageable pageRequest) {
+        return this.postRepository.findByDraftFalseAndPublishAtAfter(this.dateService.now(), pageRequest);
+    }
+
+    @Cacheable(DatabaseConfig.CACHE_NAME)
+    public Page<Post> getPublishedPosts(Pageable pageRequest) {
+        return this.postRepository.findByDraftFalseAndPublishAtBefore(this.dateService.now(), pageRequest);
+    }
+
+    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Post getPublishedPost(String publicSlug) {
         Post post =
                 this.postRepository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug, this.dateService.now());
@@ -63,44 +79,39 @@ public class BlogService {
         return post;
     }
 
-    public Page<Post> getDraftPosts(Pageable pageRequest) {
-        return this.postRepository.findByDraftTrue(pageRequest);
-    }
-
-    public Page<Post> getPublishedPosts(Pageable pageRequest) {
-        return this.postRepository.findByDraftFalseAndPublishAtBefore(this.dateService.now(), pageRequest);
-    }
-
+    @Cacheable(DatabaseConfig.CACHE_NAME)
     public List<Post> getAllPublishedPosts() {
         return this.postRepository.findByDraftFalseAndPublishAtBefore(this.dateService.now());
     }
 
+    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsByDate(int year, int month, int day, Pageable pageRequest) {
         return this.postRepository.findByDate(year, month, day, pageRequest);
     }
 
+    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsByDate(int year, int month, Pageable pageRequest) {
         return this.postRepository.findByDate(year, month, pageRequest);
     }
 
+    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsByDate(int year, Pageable pageRequest) {
         return this.postRepository.findByDate(year, pageRequest);
     }
 
-    public Page<Post> getScheduledPosts(Pageable pageRequest) {
-        return this.postRepository.findByDraftFalseAndPublishAtAfter(this.dateService.now(), pageRequest);
-    }
-
+    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
         return this.postRepository.findByCategoryAndDraftFalseAndPublishAtBefore(category, this.dateService.now(),
                 pageRequest);
     }
 
+    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
         return this.postRepository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, this.dateService.now(),
                 pageRequest);
     }
 
+    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsForMember(MemberProfile profile, Pageable pageRequest) {
         return this.postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, this.dateService.now(),
                 pageRequest);
