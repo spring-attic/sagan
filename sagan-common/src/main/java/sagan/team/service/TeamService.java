@@ -1,5 +1,6 @@
 package sagan.team.service;
 
+import org.springframework.cache.annotation.Cacheable;
 import sagan.search.service.SearchService;
 import sagan.team.MemberProfile;
 import sagan.team.service.index.MemberProfileSearchEntryMapper;
@@ -13,10 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import sagan.util.service.db.DatabaseConfig;
 
 /**
- * Service providing high-level data access and other {@link MemberProfile}-related
- * operations.
+ * Service providing high-level, selectively cached data access and other
+ * {@link MemberProfile}-related operations.
  * 
  * @author Pivotal Labs
  * @author Chris Beams
@@ -41,6 +43,7 @@ public class TeamService {
         return teamRepository.findById(id);
     }
 
+    @Cacheable(DatabaseConfig.CACHE_NAME)
     public MemberProfile fetchMemberProfileUsername(String username) {
         MemberProfile profile = teamRepository.findByUsername(username);
         if (profile == null) {
@@ -85,6 +88,7 @@ public class TeamService {
         }
     }
 
+    @Cacheable(DatabaseConfig.CACHE_NAME)
     public List<MemberProfile> fetchActiveMembers() {
         return teamRepository.findByHiddenOrderByNameAsc(false);
     }

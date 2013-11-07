@@ -6,7 +6,7 @@ import sagan.blog.view.PostView;
 import sagan.blog.view.PostViewFactory;
 import sagan.team.MemberProfile;
 import sagan.team.TeamLocation;
-import sagan.team.service.CachedTeamService;
+import sagan.team.service.TeamService;
 import sagan.util.web.PageableFactory;
 
 import java.io.IOException;
@@ -32,12 +32,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/team")
 public class TeamController {
 
-    private final CachedTeamService teamService;
+    private final TeamService teamService;
     private final BlogService blogService;
     private final PostViewFactory postViewFactory;
 
     @Autowired
-    public TeamController(CachedTeamService teamService, BlogService blogService, PostViewFactory postViewFactory) {
+    public TeamController(TeamService teamService, BlogService blogService, PostViewFactory postViewFactory) {
         this.teamService = teamService;
         this.blogService = blogService;
         this.postViewFactory = postViewFactory;
