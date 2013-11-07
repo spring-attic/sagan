@@ -1,7 +1,7 @@
 package sagan.team.web;
 
 import sagan.blog.Post;
-import sagan.blog.service.CachedBlogService;
+import sagan.blog.service.BlogService;
 import sagan.blog.view.PostView;
 import sagan.blog.view.PostViewFactory;
 import sagan.team.MemberProfile;
@@ -27,11 +27,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 public class TeamController {
 
     private final CachedTeamService teamService;
-    private final CachedBlogService blogService;
+    private final BlogService blogService;
     private final PostViewFactory postViewFactory;
 
     @Autowired
-    public TeamController(CachedTeamService teamService, CachedBlogService blogService, PostViewFactory postViewFactory) {
+    public TeamController(CachedTeamService teamService, BlogService blogService, PostViewFactory postViewFactory) {
         this.teamService = teamService;
         this.blogService = blogService;
         this.postViewFactory = postViewFactory;

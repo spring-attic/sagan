@@ -37,7 +37,7 @@ import com.google.common.cache.CacheBuilder;
 
 @EnableAutoConfiguration
 @Configuration
-@EnableCaching
+@EnableCaching(proxyTargetClass = true)
 @ComponentScan(basePackageClasses = sagan.Package.class)
 public class ApplicationConfiguration {
 

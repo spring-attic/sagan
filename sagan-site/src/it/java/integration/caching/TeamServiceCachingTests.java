@@ -39,6 +39,7 @@ import static org.mockito.Mockito.*;
  * {@link TeamService}.
  *
  * @author Pivotal Labs
+ * @author Chris Beams
  */
 @ContextConfiguration(classes = TestConfiguration.class)
 public class TeamServiceCachingTests extends AbstractIntegrationTests {
@@ -101,13 +102,6 @@ public class TeamServiceCachingTests extends AbstractIntegrationTests {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/team/someguy"));
         this.mockMvc.perform(MockMvcRequestBuilders.get("/team/someguy"));
         verify(teamService, times(1)).fetchMemberProfileUsername("someguy");
-    }
-
-    @Test
-    public void cachingTeamMemberProfilePosts() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/team/someguy"));
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/team/someguy"));
-        verify(blogService, times(1)).getPublishedPostsForMember(eq(memberProfile), any(Pageable.class));
     }
 
 }

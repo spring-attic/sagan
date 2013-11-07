@@ -15,6 +15,9 @@ import com.googlecode.flyway.core.Flyway;
 @Configuration
 public class DatabaseConfig {
 
+    public static final String CACHE_NAME = "cache.database";
+    public static final String CACHE_TTL = "${cache.database.timetolive:60}";
+
     @Autowired
     private Environment environment;
 

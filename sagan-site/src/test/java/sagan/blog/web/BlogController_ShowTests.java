@@ -3,7 +3,7 @@ package sagan.blog.web;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.blog.service.CachedBlogService;
+import sagan.blog.service.BlogService;
 import sagan.blog.view.PostView;
 import sagan.blog.view.PostViewFactory;
 import sagan.util.service.DateService;
@@ -24,7 +24,7 @@ import static org.mockito.BDDMockito.given;
 public class BlogController_ShowTests {
 
     @Mock
-    private CachedBlogService blogService;
+    private BlogService blogService;
 
     @Mock
     private HttpServletRequest request;

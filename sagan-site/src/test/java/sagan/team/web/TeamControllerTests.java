@@ -1,6 +1,6 @@
 package sagan.team.web;
 
-import sagan.blog.service.CachedBlogService;
+import sagan.blog.service.BlogService;
 import sagan.blog.view.PostViewFactory;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
@@ -26,7 +26,7 @@ import org.springframework.ui.ExtendedModelMap;
 public class TeamControllerTests {
 
     @Mock
-    private CachedBlogService blogService;
+    private BlogService blogService;
 
     @Mock
     private CachedTeamService teamService;
