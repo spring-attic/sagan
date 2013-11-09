@@ -418,7 +418,7 @@ projects:
       refDocUrl: "{ghPagesBaseUrl}/{id}/docs/README.html"
       supportedVersions:
         - 0.5.0.BUILD-SNAPSHOT
-        - 0.5.0.M5
+        - 0.5.0.M6
 
     # ----------------------
     # Spring Data
