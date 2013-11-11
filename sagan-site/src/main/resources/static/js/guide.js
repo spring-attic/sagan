@@ -26,7 +26,7 @@ $(document).ready(function() {
 });
 
 function createCodeCopyButtons() {
-    $('article .highlight pre').each(function(index) {
+    $('.listingblock pre, .has-copy-button pre, article .highlight pre').each(function(index) {
             var codeBlockId = "code-block-"+ index;
             $(this).attr('id', codeBlockId);
             var button = $('<button class="copy-button snippet" id="copy-button-"' + index + ' data-clipboard-target="' + codeBlockId + '"></button>');
