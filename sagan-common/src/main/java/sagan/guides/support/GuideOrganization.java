@@ -101,7 +101,7 @@ class GuideOrganization {
             // Process the unzipped guide through asciidoctor, rendering HTML content
             Asciidoctor asciidoctor = Asciidoctor.Factory.create();
             content = asciidoctor.renderFile(
-                    new File(unzippedRoot.getAbsolutePath() + File.separator + "README.asc"),
+                    new File(unzippedRoot.getAbsolutePath() + File.separator + "README.adoc"),
                     OptionsBuilder.options().safe(SafeMode.SAFE));
 
             // Delete the zipball and the unpacked content
