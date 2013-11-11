@@ -29,7 +29,7 @@
               <p class="content-section-sub-title">Designed to be completed in 15-30 minutes, these guides provide quick, hands-on instructions for building the "Hello World" of any development task with Spring. In most cases, the only prerequisites are a JDK and a text editor.</p>
             </div>
 
-            <div th:each="guide : ${guides}" class="guide--container" th:attr="data-filterable=${guide.title}">
+            <div th:each="guide : ${guides}" class="guide--container" th:attr="data-filterable=${guide.title}+' '+${guide.subtitle}">
               <a class="guide--title" href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/'}" th:text="${guide.title}"></a>
               <p class="guide--subtitle" th:text="${guide.subtitle}"></p>
             </div>
@@ -43,7 +43,7 @@
               <h3 class="content-section-title no-margin">Tutorials</h3>
               <p class="content-section-sub-title">Designed to be completed in 2-3 hours, these guides provide deeper, in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions.</p>
             </div>
-            <div th:each="tutorial : ${tutorials}" class="guide--container" th:attr="data-filterable=${tutorial.title}">
+            <div th:each="tutorial : ${tutorials}" class="guide--container" th:attr="data-filterable=${tutorial.title}+' '+${tutorial.subtitle}">
               <a class="guide--title" th:href="@{'/guides/tutorials/'+${tutorial.guideId}+'/'}" th:text="${tutorial.title}"></a>
               <p class="guide--subtitle" th:text="${tutorial.subtitle}"></p>
             </div>
