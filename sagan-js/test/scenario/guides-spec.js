@@ -16,13 +16,13 @@ describe('Guides page', function () {
 
     describe('filter field', function () {
 
-        itEventually('should be focused', function () {
+        it('should be focused', function () {
             // Once the autofocus is fixed, change itEventually to it
             return this.browser
-                .keys('upload')
-                .elementById(filterInputId)
-                    .getValue().then(function (value) {
-                        expect(value).toBe('upload');
+                .setImplicitWaitTimeout(5000)
+                    .active()
+                    .getAttribute('id').then(function(id) {
+                        expect(id).toBe('doc_filter');
                     });
         });
 
