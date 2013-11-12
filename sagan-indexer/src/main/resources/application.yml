@@ -23,6 +23,7 @@ spring:
     show_sql: false
     hibernate:
       namingstrategy: org.hibernate.cfg.EJB3NamingStrategy
+      ddl-auto: false
 
 security:
   basic:
