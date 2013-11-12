@@ -20,7 +20,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:${vSpringBoot}"
     compile "org.springframework.boot:spring-boot-starter-actuator:${vSpringBoot}"
     compile "org.springframework.boot:spring-boot-starter-security:${vSpringBoot}"
-    compile "org.springframework.security:spring-security-acl:3.2.0.RC1"
+    compile "org.springframework.security:spring-security-acl:${vSpringSec}"
 
     // thymeleaf is used as the template engine for serving HTML
     compile 'org.thymeleaf:thymeleaf-spring3:2.0.18'
