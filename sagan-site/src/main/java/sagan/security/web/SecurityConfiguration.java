@@ -30,8 +30,8 @@ import org.springframework.security.web.authentication.AnonymousAuthenticationFi
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.header.writers.HstsHeaderWriter;
-import org.springframework.security.web.util.AntPathRequestMatcher;
-import org.springframework.security.web.util.AnyRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.AnyRequestMatcher;
 import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
@@ -151,7 +151,7 @@ public class SecurityConfiguration {
 
     private static void configureHeaders(HeadersConfigurer<?> headers) throws Exception {
         HstsHeaderWriter writer = new HstsHeaderWriter(false);
-        writer.setRequestMatcher(new AnyRequestMatcher());
+        writer.setRequestMatcher(AnyRequestMatcher.INSTANCE);
         headers.contentTypeOptions().xssProtection().cacheControl().addHeaderWriter(writer).frameOptions();
     }
 }
