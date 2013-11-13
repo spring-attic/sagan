@@ -2,7 +2,7 @@ buildscript {
     ext.vSpringBoot = '0.5.0.M4'
     ext.vSpringCore = '4.0.0.RC1'
     ext.vSpringSec = '3.2.0.RC2'
-    ext.vHttpClient = '4.3-beta2'
+    ext.vHttpClient = '4.3'
     ext.vJunit = '4.11'
 
     repositories {
