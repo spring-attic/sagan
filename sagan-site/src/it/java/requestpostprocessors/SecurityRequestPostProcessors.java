@@ -36,6 +36,7 @@ import java.util.List;
  * Security is planned.
  * 
  * @author Rob Winch
+ * @author Chris Beams
  */
 public final class SecurityRequestPostProcessors {
 
@@ -81,7 +82,8 @@ public final class SecurityRequestPostProcessors {
          */
         @Override
         public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
-            CsrfToken token = repository.generateAndSaveToken(request, new MockHttpServletResponse());
+            CsrfToken token = repository.generateToken(request);
+            repository.saveToken(token, request, new MockHttpServletResponse());
             request.setParameter(token.getParameterName(), token.getToken());
             return request;
         }

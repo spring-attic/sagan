@@ -20,14 +20,16 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:${vSpringBoot}"
     compile "org.springframework.boot:spring-boot-starter-actuator:${vSpringBoot}"
     compile "org.springframework.boot:spring-boot-starter-security:${vSpringBoot}"
-    compile "org.springframework.security:spring-security-acl:3.2.0.RC1"
+    compile "org.springframework.security:spring-security-acl:${vSpringSec}"
 
-    // thymeleaf is used as the template engine for serving HTML
-    compile 'org.thymeleaf:thymeleaf-spring3:2.0.18'
-    compile 'org.thymeleaf:thymeleaf:2.0.18'
-    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.1.1'
+    // Thymeleaf is used as the template engine for serving HTML
+    // NOTE: versions below are intended to be in sync with spring-boot-dependencies pom @ ${vSpringBoot}
+    // e.g.: https://github.com/spring-projects/spring-boot/blob/v0.5.0.M6/spring-boot-dependencies/pom.xml
+    compile 'org.thymeleaf:thymeleaf-spring3:2.0.19'
+    compile 'org.thymeleaf:thymeleaf:2.0.19'
+    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.1.3'
     compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute:1.2'
-    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.0.0'
+    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.0.1'
 
     // nekohtml is required for thymeleaf's LEGACYHTML5 mode
     runtime 'net.sourceforge.nekohtml:nekohtml:1.9.15'
