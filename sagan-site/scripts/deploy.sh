@@ -40,9 +40,13 @@ else
 
     rvm use 1.9.3@sagan-ops
 
+    echo "validating $CF executable"
+    if [[ ! -f $CF ]]; then echo "$CF does not exist"; exit 100; fi
+    if [[ ! -x $CF ]]; then echo "$CF is not executable"; exit 101; fi
+
     echo "logging in to CF"
-    $CF target api.run.pivotal.io || exit
-    $CF login --email $USER --password $PASS || exit
+    $CF target api.run.pivotal.io || echo "unable to target api.run.pivotal.io, attempting to continue.."
+    $CF login --email $USER --password $PASS || echo "unable to log in to CF as user [$USER], attempting to continue.."
 fi
 
 echo "switching to space $SPACE"
