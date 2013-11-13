@@ -27,13 +27,15 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/highlight.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" />
 
-  <script type="text/javascript" th:src="@{/js/jquery.js}" ></script>
+  <script type="text/javascript" th:src="@{/lib/jquery/jquery.js}" ></script>
   <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}" ></script>
-  <script type="text/javascript" th:src="@{/js/ZeroClipboard.min.js}" ></script>
   <script type="text/javascript" th:src="@{/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}" ></script>
 
-  <script type="text/javascript" th:src="@{/js/filter.js}" ></script>
-  <script type="text/javascript" th:src="@{/js/application.js}" ></script>
+  <script th:inline="javascript">
+        var baseUrl = /*[[@{/}]]*/ '../static/';
+  </script>
+  <script data-curl-run="/run.js" th:src="@{/lib/curl/src/curl.js}" src="../static/lib/curl/src/curl.js" async ></script>
+
   <meta name="google-site-verification" content="7qGntFPD9lWAVCtUu5U77v4l68PsTHf6xpzgjQv2j2M" />
   <script>
     //
