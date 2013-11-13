@@ -13,8 +13,8 @@
     display: none;
 }
 
-.github-actions .clone-url.https,
-.github-actions.clone-url.ssh,
-.github-actions.clone-url.subversion {
+.github-actions.https .clone-url.https,
+.github-actions.ssh .clone-url.ssh,
+.github-actions.subversion .clone-url.subversion {
     display: block;
 }

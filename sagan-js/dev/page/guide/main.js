@@ -12,8 +12,6 @@ var createClipboard = require('component/clipboard/main');
 var $ = require('jquery');
 var cssSwitch = require('./cssSwitch');
 
-require('css!./states.css');
-
 /**
  * Creates and initializes the plan for decorating guide pages.
  * @constructor
@@ -53,7 +51,7 @@ Guide.prototype = {
         $repoCopyButtons = $actionsSection.find('button.copy-button.github');
         $repoSwitchButtons = $actionsSection.find('[data-protocol]');
 
-        switchRepoAction = cssSwitch($actionsSection[0]);
+        switchRepoAction = cssSwitch($actionsSection[0], 'https');
 
         $repoSwitchButtons.on('click', getProtocol);
         this.eventRemovers.push(function () {
