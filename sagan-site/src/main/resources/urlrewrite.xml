@@ -73,4 +73,10 @@
         <from>^/tools/ggts/welcome</from>
         <to type="temporary-redirect" last="true">http://grails.org/products/ggts/welcome</to>
     </rule>
+    <rule>
+        <name>Google Plus</name>
+        <note>https://github.com/spring-io/sagan/issues/125</note>
+        <from>^/gplus$</from>
+        <to type="temporary-redirect" last="true">https://plus.google.com/+springframework/</to>
+    </rule>
 </urlrewrite>
