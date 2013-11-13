@@ -23,6 +23,7 @@ function cssSwitch (node, initialClasses) {
     return function (classes) {
         $node.removeClass(prevClasses);
         $node.addClass(classes);
+        prevClasses = classes;
         return classes;
     };
 }
