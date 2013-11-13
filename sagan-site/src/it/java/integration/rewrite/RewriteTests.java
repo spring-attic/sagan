@@ -119,6 +119,11 @@ public class RewriteTests {
         validateTemporaryRedirect("http://spring.io/tools/ggts/welcome", "http://grails.org/products/ggts/welcome");
     }
 
+    @Test
+    public void gplusIsRedirected() throws Exception {
+        validateTemporaryRedirect("http://spring.io/gplus", "https://plus.google.com/+springframework/");
+    }
+
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,
             ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);
