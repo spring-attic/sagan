@@ -21,6 +21,9 @@ var Munchkin, curl, baseUrl; // pre-existing globals
             ZeroClipboard: 'lib/zeroclipboard/ZeroClipboard.min',
             jquery: 'lib/jquery/jquery.min',
             bootstrap: {
+                // FIXME: Find a better way to pull in bootstrap dependency
+                // For now, load bootstrap from sagan-site, since pulling it in via
+                // bower pulls the sources, and NOT the built .min.js file that we need
                 location: '/bootstrap/js/bootstrap.min.js',
                 config: {
                     loader: 'curl/loader/legacy',
