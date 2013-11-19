@@ -14,7 +14,7 @@ var Munchkin, curl, baseUrl; // pre-existing globals
             platform: { location: 'platform', config: cjsConfig },
             curl: { location: 'lib/curl/src/curl/' },
             when: { location: 'lib/when', main: 'when' },
-            meld: { location: 'lib/meld', main: 'meld' },
+            most: { location: 'lib/most', main: 'most', config: cjsConfig },
             poly: { location: 'lib/poly' }
         },
         paths: {

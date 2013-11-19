@@ -2,9 +2,9 @@
     "name": "spring.io",
     "description": "bower components for spring.io UI.",
     "dependencies": {
-        "wire": "~0.10",
         "when": "~2",
         "meld": "~1",
+        "most": "~0.2",
         "curl": "~0.8",
         "poly": "~0",
         "jquery": "1.8.3",
