@@ -1,9 +1,11 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout">
+        layout:decorator="layout"
+        data-filterable-list>
 <head>
     <title>Docs</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/filterable-list.css}"/>
 </head>
 <body>
 <div layout:fragment="header-container"></div>

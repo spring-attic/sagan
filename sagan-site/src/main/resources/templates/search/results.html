@@ -1,6 +1,7 @@
 <html   xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-        layout:decorator="layout">
+        layout:decorator="layout"
+        data-search-facets>
 <head>
     <title th:inline="text">Search &middot; [[${searchForm.q}]]</title>
     <link rel="alternate" type="application/atom+xml" th:href="${feedPath}" />

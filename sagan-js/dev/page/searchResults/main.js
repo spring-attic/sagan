@@ -4,7 +4,10 @@
 // 3. Unit and functional tests
 
 module.exports = function(searchFacets) {
-    return new SearchResults(searchFacets);
+    var searchResults = new SearchResults(searchFacets);
+    $(searchResults.ready.bind(searchResults));
+
+    return searchResults;
 };
 
 var $ = require('jquery');

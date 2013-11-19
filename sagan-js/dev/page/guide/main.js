@@ -11,6 +11,7 @@ var buttonTemplate = require('text!./button.html');
 var createClipboard = require('component/clipboard/main');
 var $ = require('jquery');
 var cssSwitch = require('./cssSwitch');
+var sts = require('platform/sts');
 
 /**
  * Creates and initializes the plan for decorating guide pages.
@@ -62,6 +63,9 @@ Guide.prototype = {
 
         this.clipboard.connectToClipboard($repoCopyButtons);
         this.clipboard.attachClipboardElements($codeSnippets);
+
+        // ensure that we connect to STS when the guide page is ready
+        sts('.gs-guide-import');
 
         function getProtocol (e) {
             return switchRepoAction($(e.target).data('protocol'));
