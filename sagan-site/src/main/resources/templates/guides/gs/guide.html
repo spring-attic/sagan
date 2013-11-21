@@ -4,6 +4,11 @@
   layout:decorator="layout">
   <head>
     <title th:inline="text">Getting Started &middot; [[${guide.title}]]</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fix-asciidoctor-styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prettify.min.css}" />
+    <script type="text/javascript" th:src="@{/js/prettify.min.js}"></script>
+    <script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
+    <script type="text/javascript" th:src="@{/js/guide.js}" ></script>
   </head>
   <body>
     <div layout:fragment="header-container"></div>
