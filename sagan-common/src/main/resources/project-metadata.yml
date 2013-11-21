@@ -82,6 +82,7 @@ projects:
         - name: 1.4.3.BUILD-SNAPSHOT
           refDocUrl: NONE
           apiDocUrl: NONE
+        - 1.5.0.M1
         - 1.4.2.RELEASE
         - 1.3.5.RELEASE
 
@@ -98,6 +99,7 @@ projects:
         - name: 1.6.3.BUILD-SNAPSHOT
           refDocUrl: NONE
           apiDocUrl: NONE
+        - 1.7.0.M1
         - 1.6.2.RELEASE
         - 1.5.3.RELEASE
 
@@ -124,6 +126,7 @@ projects:
         - name: 1.3.3.BUILD-SNAPSHOT
           refDocUrl: NONE
           apiDocUrl: NONE
+        - 1.4.0.M1
         - 1.3.2.RELEASE
         - 1.2.4.RELEASE
 
@@ -141,6 +144,7 @@ projects:
         - name: 2.3.3.BUILD-SNAPSHOT
           refDocUrl: NONE
           apiDocUrl: NONE
+        - 3.0.0.M1
         - 2.3.2.RELEASE
         - 2.2.3.RELEASE
 
@@ -171,7 +175,7 @@ projects:
         - name: 2.0.0.BUILD-SNAPSHOT
           refDocUrl: NONE
           apiDocUrl: NONE
-        - 1.1.0.M1
+        - 2.0.0.M1
 
     - id: spring-data-solr
       name: Spring Data Solr
@@ -187,6 +191,7 @@ projects:
         - name: 1.0.1.BUILD-SNAPSHOT
           refDocUrl: NONE
           apiDocUrl: NONE
+        - 1.1.0.M1
         - 1.0.0.RELEASE
 
 
