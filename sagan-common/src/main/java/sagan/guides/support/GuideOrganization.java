@@ -1,5 +1,6 @@
 package sagan.guides.support;
 
+import org.asciidoctor.Attributes;
 import sagan.util.service.github.GitHubClient;
 import sagan.util.service.github.Readme;
 import sagan.util.service.github.RepoContent;
@@ -100,9 +101,11 @@ class GuideOrganization {
 
             // Process the unzipped guide through asciidoctor, rendering HTML content
             Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+            Attributes attributes = new Attributes();
+            attributes.setAllowUriRead(true);
             content = asciidoctor.renderFile(
                     new File(unzippedRoot.getAbsolutePath() + File.separator + "README.adoc"),
-                    OptionsBuilder.options().safe(SafeMode.SAFE));
+                    OptionsBuilder.options().safe(SafeMode.SAFE).attributes(attributes));
 
             // Delete the zipball and the unpacked content
             FileSystemUtils.deleteRecursively(zipball);
