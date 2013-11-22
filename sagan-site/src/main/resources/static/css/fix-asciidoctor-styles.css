@@ -28,7 +28,7 @@
     background-color: #EBF1E7;
     padding: 25px 20px;
     margin: 30px 0;
-    width: 100%;
+    width: auto;
 }
 
 .content--container .admonitionblock .content:before {
