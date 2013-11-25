@@ -34,6 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * Repository representing the GitHub organization for guide repositories.
  * 
  * @author Chris Beams
+ * @author Greg Turnquist
  */
 @Component
 class GuideOrganization {
@@ -44,6 +45,7 @@ class GuideOrganization {
     private final GitHubClient gitHub;
     private final String name;
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
 
     @Autowired
     public GuideOrganization(@Value("${github.org.name:spring-guides}") String name, GitHubClient gitHub) {
@@ -100,7 +102,6 @@ class GuideOrganization {
             }
 
             // Process the unzipped guide through asciidoctor, rendering HTML content
-            Asciidoctor asciidoctor = Asciidoctor.Factory.create();
             Attributes attributes = new Attributes();
             attributes.setAllowUriRead(true);
             content = asciidoctor.renderFile(
