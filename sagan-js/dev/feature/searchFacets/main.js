@@ -3,8 +3,8 @@
 // 2. Jsdoc
 // 3. Unit and functional tests
 
-module.exports = function(searchFacets) {
-    var searchResults = new SearchResults(searchFacets);
+module.exports = function() {
+    var searchResults = new SearchResults($('.search-facets'));
     $(searchResults.ready.bind(searchResults));
 
     return searchResults;

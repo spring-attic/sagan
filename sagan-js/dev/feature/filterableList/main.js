@@ -1,7 +1,11 @@
 var filterableList = require('component/filterableList/filterableList');
 var $ = require('jquery');
 
-module.exports = function(filterInput) {
+module.exports = function initFilterableList() {
+    return createFilterableList(document.getElementById('doc_filter'));
+};
+
+function createFilterableList(filterInput) {
     var filterList;
 
     $(ready);
@@ -26,4 +30,4 @@ module.exports = function(filterInput) {
             $(filterInput).off('keyup', filterList);
         }
     }
-};
+}

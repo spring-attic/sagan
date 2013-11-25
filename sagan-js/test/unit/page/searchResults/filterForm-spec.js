@@ -1,4 +1,4 @@
-var filterForm = require('../../../../dev/page/searchResults/filterForm');
+var filterForm = require('../../../../dev/feature/searchFacets/filterForm');
 
 describe('filterForm', function () {
     it('should disable hidden _filters inputs', function () {
