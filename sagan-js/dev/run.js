@@ -9,6 +9,7 @@ var Munchkin, curl, baseUrl; // pre-existing globals
         baseUrl: baseUrl,
         packages: {
             app: { location: 'app', config: cjsConfig, main: 'main' },
+            feature: { location: 'feature', config: cjsConfig },
             page: { location: 'page', config: cjsConfig },
             component: { location: 'component', config: cjsConfig },
             platform: { location: 'platform', config: cjsConfig },

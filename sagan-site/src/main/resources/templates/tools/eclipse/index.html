@@ -77,22 +77,6 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-
-        $(".collapse")
-
-                .removeClass('in')
-                .on({
-                    shown: function () {
-                        $(this).css('overflow', 'visible').css("height", "auto").parent().find(".platform-dropdown--icon").removeClass("icon-chevron-down").addClass("icon-chevron-up");
-                    },
-                    hide: function () {
-                        $(this).css('overflow', 'hidden').css("height", "0").parent().find(".platform-dropdown--icon").removeClass("icon-chevron-up").addClass("icon-chevron-down");
-                    }
-                });
-        $('#platform--' + detectOs()).addClass('in').css('overflow', 'visible').css("height", "auto").parent().find(".platform-dropdown--icon").removeClass("icon-chevron-down").addClass("icon-chevron-up");
-
-    </script>
 
 </div>
 </body>
