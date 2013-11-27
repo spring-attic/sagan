@@ -76,28 +76,11 @@ Clipboard.prototype = {
      * Called when the dom is ready.
      */
     ready: function () {
-        var switchProtocol, $repoSwitchButtons,
-            $repoCopyButtons, $actionsSection, $codeSnippets;
+        var $copyButtons, $actionsSection, $codeSnippets;
 
         $codeSnippets = $('.listingblock pre, .has-copy-button pre, article .highlight pre');
         $actionsSection = $('.github-actions');
-        $repoCopyButtons = $actionsSection.find('button.copy-button.github');
-        $repoSwitchButtons = $actionsSection.find('[data-protocol]');
-
-// TODO: move repo functions out of here
-        switchProtocol = (function (switcher) {
-            var prevProtocol = 'https';
-            return function (e) {
-                var protocol = $(e.target).data('protocol');
-                switcher(prevProtocol, protocol);
-                prevProtocol = protocol;
-            };
-        }(this.switchProtocol.bind(this, $actionsSection)));
-
-        $repoSwitchButtons.on('click', switchProtocol);
-        this._destroy = function () {
-            $repoSwitchButtons.off('click', switchProtocol);
-        };
+        $copyButtons = $actionsSection.find('button.copy-button');
 
         var zero = this.zero = new ZeroClipboard();
         // add bootstrap tooltip
@@ -106,7 +89,7 @@ Clipboard.prototype = {
             placement: 'bottom'
         });
 
-        this.connectToClipboard($repoCopyButtons);
+        this.connectToClipboard($copyButtons);
         this.attachClipboardElements($codeSnippets);
 
 // TODO: move this out of here
@@ -115,19 +98,9 @@ Clipboard.prototype = {
 
     },
 
-    switchProtocol: function ($root, prevProtocol, protocol) {
-        $root.removeClass(prevProtocol);
-        $root.addClass(protocol);
-        return protocol;
-    },
-
     /**
      * Call this when this component is no longer needed.
      */
-    destroy: function () {
-        this._destroy();
-    },
-
-    _destroy: function () {}
+    destroy: function () {}
 
 };
