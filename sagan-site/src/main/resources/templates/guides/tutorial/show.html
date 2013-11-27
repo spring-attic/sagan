@@ -1,7 +1,9 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorator="layout">
+  layout:decorator="layout"
+  data-clipboard-buttons
+  data-code-sidebar>
   <head>
     <title th:inline="text">Tutorial &middot; [[${tutorial.title}]]</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/code-sidebar.css}"/>
