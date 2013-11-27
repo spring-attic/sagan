@@ -1,4 +1,4 @@
-var filterableList = require('component/filterableList/filterableList');
+var filterableList = require('./filterableList');
 var $ = require('jquery');
 
 module.exports = function initFilterableList() {

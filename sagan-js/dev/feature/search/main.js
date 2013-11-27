@@ -1,4 +1,4 @@
-var SearchController = require('component/search/SearchController');
+var SearchController = require('./SearchController');
 var $ = require('jquery');
 
 var searchDropdown = '.js-search-dropdown';
