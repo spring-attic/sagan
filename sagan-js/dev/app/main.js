@@ -1,8 +1,9 @@
-var createGuide = require('page/guide/main');
+//var createGuide = require('page/guide/main');
 
 var initSearch = require('feature/search/main');
 var initSearchFacets = require('feature/searchFacets/main');
 var initFilterableList = require('feature/filterableList/main');
+var initClipboardButtons = require('feature/clipboardButtons/main');
 var initMobileSupport = require('feature/mobileSupport/main');
 var initInfoPopups = require('feature/infoPopups/main');
 var initPlatformDownloads = require('feature/platformDownloads/main');
@@ -17,8 +18,7 @@ var features = {
     search: initSearch,
     'search-facets': initSearchFacets,
     'filterable-list': initFilterableList,
-    // TODO: Break createGuide into multiple features
-    guide: createGuide,
+    'clipboard-buttons': initClipboardButtons,
     'mobile-support': initMobileSupport,
     'info-popups': initInfoPopups,
     'platform-downloads': initPlatformDownloads
