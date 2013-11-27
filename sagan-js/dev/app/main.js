@@ -5,6 +5,7 @@ var initSearchFacets = require('feature/searchFacets/main');
 var initFilterableList = require('feature/filterableList/main');
 var initClipboardButtons = require('feature/clipboardButtons/main');
 var initCodeSidebar = require('feature/codeSidebar/main');
+var initStsImport = require('feature/stsImport/main');
 var initMobileSupport = require('feature/mobileSupport/main');
 var initInfoPopups = require('feature/infoPopups/main');
 var initPlatformDownloads = require('feature/platformDownloads/main');
@@ -21,6 +22,7 @@ var features = {
     'filterable-list': initFilterableList,
     'clipboard-buttons': initClipboardButtons,
     'code-sidebar': initCodeSidebar,
+    'sts-import': initStsImport,
     'mobile-support': initMobileSupport,
     'info-popups': initInfoPopups,
     'platform-downloads': initPlatformDownloads

@@ -1,7 +1,9 @@
 /*global sts_import */
-module.exports = sts;
-
 var $ = require('jquery');
+
+module.exports = function () {
+    $(function () { sts($('.gs-guide-import')); });
+};
 
 function sts (thing) {
     // `sts_import` is a global that the Spring Tool Suite inerts onto

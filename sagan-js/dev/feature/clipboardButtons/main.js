@@ -92,10 +92,6 @@ Clipboard.prototype = {
         this.connectToClipboard($copyButtons);
         this.attachClipboardElements($codeSnippets);
 
-// TODO: move this out of here
-//       // ensure that we connect to STS when the guide page is ready
-//        sts('.gs-guide-import');
-
     },
 
     /**
