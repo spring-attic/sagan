@@ -54,8 +54,8 @@ security:
 # using GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET, respectively.
 github:
   client:
-    id: fb06c006c2ed62fe9e8b
-    secret: 164264e3f6d70c7c21713b7fa64225cb8d6107b2
+    id: ${GITHUB_CLIENT_ID:fb06c006c2ed62fe9e8b}
+    secret: ${GITHUB_CLIENT_SECRET:164264e3f6d70c7c21713b7fa64225cb8d6107b2}
 
 elasticsearch:
   client:
