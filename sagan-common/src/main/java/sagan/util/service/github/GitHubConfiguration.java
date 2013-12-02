@@ -16,10 +16,10 @@ import org.springframework.social.github.connect.GitHubConnectionFactory;
 @Configuration
 public class GitHubConfiguration {
 
-    @Value("${GITHUB_CLIENT_ID:${github.client.id:none}}")
+    @Value("${github.client.id}")
     private String githubClientId;
 
-    @Value("${GITHUB_CLIENT_SECRET:${github.client.secret:none}}")
+    @Value("${github.client.secret}")
     private String githubClientSecret;
 
     @Value("${GITHUB_ACCESS_TOKEN:${github.access.token:5a0e089d267693b45926d7f620d85a2eb6a85da6}}")
