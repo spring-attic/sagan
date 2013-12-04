@@ -2,7 +2,6 @@
  * docs page functional tests
  */
 
-// For advanced promise combinators like map, reduce.
 var getAttributeValueOfVisible = require('../lib/wd/getAttributeValueOfVisible');
 
 var filterInputId = 'doc_filter';
