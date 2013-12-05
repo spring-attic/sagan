@@ -60,7 +60,7 @@ describe('Docs page', function () {
     describe('info popup', function() {
 
         it('should appear when doc item is clicked and then disappear when clicked again', function() {
-        	return this.browser
+            return this.browser
                 .setImplicitWaitTimeout(5000)
                 .elementByCssSelector(infoPopupTrigger)
                     .click()

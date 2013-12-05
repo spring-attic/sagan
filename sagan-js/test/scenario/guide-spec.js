@@ -32,7 +32,7 @@ describe('Guide page', function() {
         it('should be present on all listingblocks', function() {
             var expected;
 
-        	return this.browser
+            return this.browser
                 // First, count the listing blocks
                 .elementsByCssSelector('.listingblock')
                     .then(function(listings) {

@@ -85,7 +85,5 @@ describe('Search', function () {
                     });
             });
         });
-    })
-
-
+    });
 });

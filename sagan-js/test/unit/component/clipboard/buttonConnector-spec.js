@@ -1,5 +1,5 @@
 /*global describe:true, it:true, expect: true */
-var clipboardProvider = require('../../../../dev/component/clipboard/buttonConnector');
+var clipboardProvider = require('../../../../dev/feature/clipboardButtons/buttonConnector');
 var fauxElement = require('../../../lib/fauxElement');
 
 describe('buttonConnector', function() {
