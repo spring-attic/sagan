@@ -9,5 +9,5 @@ function initPrettify () {
 
     return {
         destroy: function () {}
-    }
+    };
 }

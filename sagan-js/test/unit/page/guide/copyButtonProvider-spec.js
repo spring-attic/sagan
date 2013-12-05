@@ -1,5 +1,5 @@
 /*global describe:true, it:true, expect: true */
-var copyButtonProvider = require('../../../../dev/page/guide/copyButtonProvider');
+var copyButtonProvider = require('../../../../dev/feature/clipboardButtons/copyButtonProvider');
 var fauxElement = require('../../../lib/fauxElement');
 
 describe('copyButtonProvider', function() {

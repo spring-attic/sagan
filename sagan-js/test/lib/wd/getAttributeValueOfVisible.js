@@ -20,4 +20,4 @@ module.exports = function getAttributeValueOfVisible(attributeName) {
             });
         }, []).then(when.all);
     };
-}
+};

@@ -11,6 +11,8 @@ var initInfoPopups = require('feature/infoPopups/main');
 var initPlatformDownloads = require('feature/platformDownloads/main');
 var initFormWidgets = require('feature/formWidgets/main');
 var initPrettify = require('feature/prettify/main');
+var initNewsletterSubscription = require('feature/newsletterSubscription/main');
+var initMap = require('feature/map/main');
 
 var most = require('most');
 var $ = require('jquery');
@@ -29,7 +31,9 @@ var features = {
     'info-popups': initInfoPopups,
     'platform-downloads': initPlatformDownloads,
     'form-widgets': initFormWidgets,
-    'code-prettify': initPrettify
+    'code-prettify': initPrettify,
+    'newsletter-subscription': initNewsletterSubscription,
+    'map': initMap
 };
 
 initFeatures(features, document).each(function(features) {

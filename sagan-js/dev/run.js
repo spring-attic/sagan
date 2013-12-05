@@ -10,13 +10,13 @@ var Munchkin, curl, baseUrl; // pre-existing globals
         packages: {
             app: { location: 'app', config: cjsConfig, main: 'main' },
             feature: { location: 'feature', config: cjsConfig },
-//            page: { location: 'page', config: cjsConfig },
             component: { location: 'component', config: cjsConfig },
             platform: { location: 'platform', config: cjsConfig },
             curl: { location: 'lib/curl/src/curl/' },
             when: { location: 'lib/when', main: 'when' },
             most: { location: 'lib/most', main: 'most', config: cjsConfig },
-            poly: { location: 'lib/poly' }
+            poly: { location: 'lib/poly' },
+            leaflet: { location: 'lib/leaflet', main: 'dist/leaflet', config: cjsConfig }
         },
         paths: {
             ZeroClipboard: 'lib/zeroclipboard/ZeroClipboard.min',
