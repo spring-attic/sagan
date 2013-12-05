@@ -9,6 +9,8 @@ var initStsImport = require('feature/stsImport/main');
 var initMobileSupport = require('feature/mobileSupport/main');
 var initInfoPopups = require('feature/infoPopups/main');
 var initPlatformDownloads = require('feature/platformDownloads/main');
+var initFormWidgets = require('feature/formWidgets/main');
+var initPrettify = require('feature/prettify/main');
 
 var most = require('most');
 var $ = require('jquery');
@@ -25,7 +27,9 @@ var features = {
     'sts-import': initStsImport,
     'mobile-support': initMobileSupport,
     'info-popups': initInfoPopups,
-    'platform-downloads': initPlatformDownloads
+    'platform-downloads': initPlatformDownloads,
+    'form-widgets': initFormWidgets,
+    'code-prettify': initPrettify
 };
 
 initFeatures(features, document).each(function(features) {

@@ -21,6 +21,7 @@ var Munchkin, curl, baseUrl; // pre-existing globals
         paths: {
             ZeroClipboard: 'lib/zeroclipboard/ZeroClipboard.min',
             jquery: 'lib/jquery/jquery.min',
+            'prettify': 'lib/google-code-prettify/src/prettify',
             bootstrap: {
                 // FIXME: Find a better way to pull in bootstrap dependency
                 // For now, load bootstrap from sagan-site, since pulling it in via
