@@ -27,7 +27,7 @@ describe('Guide page', function() {
 
     });
 
-    describe('=>copy to clipboard buttons', function() {
+    describe('copy to clipboard buttons', function() {
 
         it('should be present on all listingblocks', function() {
             var expected;

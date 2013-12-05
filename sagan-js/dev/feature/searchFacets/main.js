@@ -31,6 +31,7 @@ SearchResults.prototype = {
         this.facetCheckboxes.on('click', syncFacetStatus);
 
         this._destroy = function() {
+            this.searchFacets.off('submit', filterForm);
             this.facetCheckboxes.off('click', syncFacetStatus);
             this.facetSectionToggle.off('click', toggleFacetSectionHeaders);
             this.subFacetToggle.off('click', toggleSubFacets);
