@@ -1,10 +1,14 @@
 package sagan.guides;
 
+import java.util.Set;
+
 public interface GuideMetadata {
 
     String getTitle();
 
     String getSubtitle();
+
+    Set<String> getTags();
 
     String getRepoName();
 

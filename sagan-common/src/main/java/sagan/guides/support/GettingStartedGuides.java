@@ -1,5 +1,9 @@
 package sagan.guides.support;
 
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.SetMultimap;
+import org.apache.commons.lang.WordUtils;
+import org.springframework.cache.annotation.Cacheable;
 import sagan.guides.ContentProvider;
 import sagan.guides.DefaultGuideMetadata;
 import sagan.guides.GettingStartedGuide;
@@ -16,7 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
@@ -44,6 +47,8 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
     private static final String README_PATH_ASC = REPO_BASE_PATH + "/zipball";
     private static final String SIDEBAR_PATH = REPO_BASE_PATH + "/contents/SIDEBAR.md";
 
+    private final SetMultimap<String, String> tagMultimap = LinkedHashMultimap.create();
+
     @Autowired
     public GettingStartedGuides(GuideOrganization org) {
         super(org);
@@ -55,7 +60,7 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
         String repoName = REPO_PREFIX + guide;
         String description = getRepoDescription(repoName);
         return new GettingStartedGuide(
-                new DefaultGuideMetadata(org.getName(), guide, repoName, description), this, this);
+                new DefaultGuideMetadata(org.getName(), guide, repoName, description, tagMultimap.get(repoName)), this, this);
     }
 
     @Override
@@ -64,7 +69,7 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
         for (GitHubRepo repo : org.findRepositoriesByPrefix(REPO_PREFIX)) {
             String repoName = repo.getName();
             GuideMetadata metadata = new DefaultGuideMetadata(
-                    org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo.getDescription());
+                    org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo.getDescription(), tagMultimap.get(repoName));
             guides.add(new GettingStartedGuide(metadata, this, this));
         }
         return guides;
@@ -76,15 +81,59 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
 
         Readme readme = getGuideReadme(String.format(README, org.getName(), repoName));
 
-        final String body;
         if (readme.getName().endsWith(".md")) {
-            body = getMarkdownGuideContentAsHtml(String.format(README_PATH_MD, org.getName(), repoName));
+            guide.setContent(getMarkdownGuideContentAsHtml(String.format(README_PATH_MD, org.getName(), repoName)));
+            guide.setSidebar(getGuideSidebar(repoName));
         } else {
-            body = getAsciiDocGuideContentAsHtml(String.format(README_PATH_ASC, org.getName(), repoName));
+            AsciidocGuide asciidocGuide = getAsciidocGuide(String.format(README_PATH_ASC, org.getName(), repoName));
+            tagMultimap.putAll(guide.getRepoName(), asciidocGuide.getTags());
+            guide.setContent(asciidocGuide.getContent());
+            guide.setSidebar(generateDynamicSidebar(asciidocGuide));
         }
 
-        guide.setContent(body);
-        guide.setSidebar(getGuideSidebar(repoName));
+    }
+
+    private String generateDynamicSidebar(AsciidocGuide asciidocGuide) {
+        String sidebar = "<div class='right-pane-widget--container'>\n" +
+                "<div class='related_resources'>\n";
+
+        sidebar += "<h3>" +
+                "<a name='table-of-contents' class='anchor' href='#table-of-contents'></a>" +
+                "Table of contents</h3>\n";
+        sidebar += asciidocGuide.getTableOfContents();
+
+        sidebar += "</div>\n</div>\n" +
+                "<div class='right-pane-widget--container'>\n" +
+                "<div class='related_resources'>\n";
+
+        sidebar += "<h3>" +
+                "<a name='tags' class='anchor' href='#tags'></a>" +
+                "Tags</h3>\n";
+
+        for (String tag : asciidocGuide.getTags()) {
+            sidebar += "<li><a href='/guides?tag=" + tag + "'>" + tag + "</a></li>\n";
+        }
+
+        sidebar += "<h3>" +
+                "<a name='projects' class='anchor' href='#projects'></a>" +
+                "Projects</h3>\n";
+
+        for (String project : asciidocGuide.getProjects()) {
+            sidebar += "<li><a href='http://projects.spring.io/" + project + "'>" + WordUtils.capitalize(project.replaceAll("-", " ")) + "</a></li>\n";
+        }
+
+        sidebar += "<h3>" +
+                "<a name='concepts-and-technologies' class='anchor' href='#concepts-and-technologies'></a>" +
+                "Concepts and technologies</h3>\n" +
+                "<ul>\n";
+        for (String key : asciidocGuide.getUnderstandingDocs().keySet()) {
+            sidebar += "<li><a href='" + key + "'>" + asciidocGuide.getUnderstandingDocs().get(key) + "</a></li>\n";
+        }
+        sidebar += "</ul>\n";
+
+        sidebar += "</div>\n</div>";
+
+        return sidebar;
     }
 
     /**
@@ -113,10 +162,10 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
         }
     }
 
-    private String getAsciiDocGuideContentAsHtml(String path) {
+    private AsciidocGuide getAsciidocGuide(String path) {
         try {
             log.debug(String.format("Fetching getting started guide for '%s'", path));
-            return org.getAsciiDocFileAsHtml(path);
+            return org.getAsciidocGuide(path);
         } catch (RestClientException ex) {
             String msg = String.format("No getting started guide found for '%s'", path);
             log.warn(msg, ex);
@@ -126,7 +175,11 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
 
     private String getGuideSidebar(String repoName) {
         try {
-            return org.getMarkdownFileAsHtml(String.format(SIDEBAR_PATH, org.getName(), repoName));
+            String sidebar = "<div class='right-pane-widget--container'>\n" +
+                    "<div class='related_resources'>\n";
+            sidebar += org.getMarkdownFileAsHtml(String.format(SIDEBAR_PATH, org.getName(), repoName));
+            sidebar += "</div>\n</div>";
+            return sidebar;
         } catch (RestClientException ex) {
             return "";
         }

@@ -22,7 +22,8 @@ import static org.mockito.Matchers.*;
 @RunWith(MockitoJUnitRunner.class)
 public class GuidesOrgTests {
 
-    private static final String ORG_NAME = "my-org";
+    private static final String OWNER_TYPE = "orgs";
+    private static final String OWNER_NAME = "my-org";
 
     @Mock
     private GitHubClient ghClient;
@@ -30,7 +31,7 @@ public class GuidesOrgTests {
 
     @Before
     public void setUp() throws Exception {
-        service = new GuideOrganization(ORG_NAME, ghClient);
+        service = new GuideOrganization(OWNER_NAME, OWNER_TYPE, ghClient);
     }
 
     @Test

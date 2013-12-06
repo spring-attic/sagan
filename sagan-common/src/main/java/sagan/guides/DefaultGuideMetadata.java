@@ -1,5 +1,8 @@
 package sagan.guides;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class DefaultGuideMetadata implements GuideMetadata {
 
     private final static String REPO_ZIP_URL = "https://github.com/%s/%s/archive/master.zip";
@@ -14,14 +17,20 @@ public class DefaultGuideMetadata implements GuideMetadata {
     public final String guideId;
     public final String repoName;
     public final String description;
+    public final Set<String> tags;
     public final String title;
     public final String subtitle;
 
     public DefaultGuideMetadata(String ghOrgName, String guideId, String repoName, String description) {
+        this(ghOrgName, guideId, repoName, description, new HashSet<String>());
+    }
+
+    public DefaultGuideMetadata(String ghOrgName, String guideId, String repoName, String description, Set<String> tags) {
         this.ghOrgName = ghOrgName;
         this.guideId = guideId;
         this.repoName = repoName;
         this.description = description;
+        this.tags = tags;
 
         String[] split = description.split("::", 2);
         title = split[0].trim();
@@ -38,6 +47,10 @@ public class DefaultGuideMetadata implements GuideMetadata {
 
     public String getDescription() {
         return description;
+    }
+
+    public Set<String> getTags() {
+        return tags;
     }
 
     public String getTitle() {

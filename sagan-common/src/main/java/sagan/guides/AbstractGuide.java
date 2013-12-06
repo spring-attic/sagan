@@ -1,5 +1,7 @@
 package sagan.guides;
 
+import java.util.Set;
+
 class AbstractGuide extends AbstractDocument implements Guide {
 
     private final GuideMetadata metadata;
@@ -26,6 +28,11 @@ class AbstractGuide extends AbstractDocument implements Guide {
     @Override
     public String getSubtitle() {
         return metadata.getSubtitle();
+    }
+
+    @Override
+    public Set<String> getTags() {
+        return metadata.getTags();
     }
 
     @Override
