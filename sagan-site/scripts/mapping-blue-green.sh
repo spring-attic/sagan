@@ -23,19 +23,17 @@ NEXT=$4
 echo "Starting blue-green mapping script. Current running app is $CURRENT, next running app will be $NEXT"
 
 echo "switching to space $SPACE"
-$CF space $SPACE || exit
+$CF target -s $SPACE || exit
 
-($CF map $NEXT sagan-$SPACE cfapps.io && $CF unmap sagan-$SPACE.cfapps.io $CURRENT) || exit
+$CF map-route $NEXT cfapps.io -n sagan-$SPACE && $CF unmap-route $CURRENT cfapps.io -n sagan-$SPACE
 
 if [ $SPACE == "staging" ]; then
 
-    $CF map $NEXT staging spring.io && $CF unmap staging.spring.io $CURRENT
+    $CF map-route $NEXT spring.io -n staging && $CF unmap-route $CURRENT spring.io -n staging
 
 elif [ $SPACE == "production" ]; then
 
-    ($CF map $NEXT spring.io && $CF unmap .spring.io $CURRENT) &
-    ($CF map $NEXT www spring.io && $CF unmap www.spring.io $CURRENT) &
+    $CF map-route $NEXT spring.io && $CF unmap-route $CURRENT spring.io
+    $CF map-route $NEXT spring.io -n www && $CF unmap-route $CURRENT spring.io -n www
 
-    wait
 fi
-

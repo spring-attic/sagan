@@ -4,15 +4,15 @@ if [ $# != 1 ] && [ $# != 4 ] ; then cat << EOM
 
     This script is used for deploying to blue/green configured environments
 
-    You should build the app before using this script, eg: 'mvn clean package'
+    You should build the app before using this script, eg: with 'gradle build'
 
     usage: $0 SPACE PATH_TO_CF EMAIL PASSWORD
 
     where SPACE is one of (staging|production)
-      and (optional) PATH_TO_CF is the path to the 'cf' executable
+      and (optional) PATH_TO_CF is the path to the 'gcf' executable
       and (optional) EMAIL and PASSWORD are your CF credentials
 
-    *** if the optional arguments are not passed in, it assumes 'cf'
+    *** if the optional arguments are not passed in, it assumes 'gcf'
         is on your path and you are logged in correctly
 
     *** passing in one optional argument requires all others as well
@@ -21,7 +21,7 @@ EOM
     exit
 fi
 
-echo "Starting blue-green deploy script"
+echo "==> Starting blue-green deploy script"
 
 SPACE=$1
 CF=$2
@@ -30,45 +30,32 @@ PASS=$4
 SCRIPTDIR=$(dirname $0)
 
 if [[ -z "$2" ]]; then
-    CF=cf
+    CF=gcf
     SPACE=$1
+
+    echo "==> Targeting space $SPACE"
+    $CF target -s $SPACE
 else
-    echo "loading RVM"
-    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-    PATH=$PATH:~/.rvm/rubies/ruby-1.9.3-p429/bin/:~/.rvm/bin/
-
-    rvm use 1.9.3@sagan-ops
-
-    echo "validating $CF executable"
+    echo "==> Validating $CF executable"
     if [[ ! -f $CF ]]; then echo "$CF does not exist"; exit 100; fi
     if [[ ! -x $CF ]]; then echo "$CF is not executable"; exit 101; fi
 
-    echo "logging in to CF"
-    $CF target api.run.pivotal.io || echo "unable to target api.run.pivotal.io, attempting to continue.."
-    $CF login --email $USER --password $PASS || echo "unable to log in to CF as user [$USER], attempting to continue.."
+    echo "==> Logging in to CF"
+    $CF login -a https://api.run.pivotal.io -u $USER -p $PASS -o spring.io -s $SPACE || exit
 fi
 
-echo "switching to space $SPACE"
-$CF space $SPACE || exit
-
-echo "Checking for running app"
-# check that we don't have >1 or 0 apps running. We might make a case for 0 and deploy sagan-blue.
-CHECK=`$CF apps --url sagan-$SPACE.cfapps.io | grep -E 'green|blue' | wc -l`
-
-if [ $CHECK != 1 ];
-    then echo "There must be exactly one CF green or blue app running. Exiting.";
-    exit 1;
-fi
-
-CURRENT=`$CF apps --url sagan-$SPACE.cfapps.io | grep -E 'green|blue'`
-
-echo App currently running is $CURRENT.
-
+echo "==> Checking for running app"
+HOST_REGEX=`if [ "$SPACE" == "staging" ]; then echo staging.spring.io; else echo '[^.]spring.io'; fi;`
+BLUE_IS_LIVE=`$CF apps | grep $HOST_REGEX | egrep 'sagan-blue' | wc -l`
+CURRENT=`if [ $BLUE_IS_LIVE == 1 ]; then echo sagan-blue; else echo sagan-green; fi`
 NEXT=`if [ "$CURRENT" == "sagan-green" ]; then echo sagan-blue; else echo sagan-green; fi`
 
-echo Next app to be deployed will be $NEXT.
+echo "==> $CURRENT is currently live, therefore pushing app to $NEXT"
 
-$CF push --manifest $SCRIPTDIR/../manifest/$SPACE.yml --name $NEXT --reset --start || $SCRIPTDIR/wait-for-app-to-start.sh $NEXT 100 $CF || exit
+$CF push $NEXT -m 2G -i 4 -p $SCRIPTDIR/../build/libs/sagan-site.jar -b https://github.com/cloudfoundry/java-buildpack --no-route || $SCRIPTDIR/wait-for-app-to-start.sh $NEXT 100 $CF || exit
+
+echo "==> Successfully pushed app to $NEXT; now mapping routes to $NEXT and unmapping routes from $CURRENT"
 
 $SCRIPTDIR/mapping-blue-green.sh $SPACE $CF $CURRENT $NEXT
+
+echo "==> Deployment complete."
