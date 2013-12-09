@@ -16,16 +16,16 @@ import org.springframework.social.github.connect.GitHubConnectionFactory;
 @Configuration
 public class GitHubConfiguration {
 
-    @Value("${GITHUB_CLIENT_ID:${github.client.id:none}}")
+    @Value("${github.client.id}")
     private String githubClientId;
 
-    @Value("${GITHUB_CLIENT_SECRET:${github.client.secret:none}}")
+    @Value("${github.client.secret}")
     private String githubClientSecret;
 
     @Bean
     public GitHubConnectionFactory gitHubConnectionFactory() {
         GitHubConnectionFactory factory = new GitHubConnectionFactory(githubClientId, githubClientSecret);
-        factory.setScope("user");
+        factory.setScope("read:org");
         return factory;
     }
 
