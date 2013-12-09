@@ -48,6 +48,15 @@ security:
   user:
     password: ${ADMIN_PASSWORD:}
 
+# GitHub OAuth application credentials for use when logging into administrative
+# console at /admin. Default 'id' and 'secret' values apply only when running
+# locally, i.e. at http://localhost:8080. Production values must be overridden
+# using GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET, respectively.
+github:
+  client:
+    id: ${GITHUB_CLIENT_ID:fb06c006c2ed62fe9e8b}
+    secret: ${GITHUB_CLIENT_SECRET:164264e3f6d70c7c21713b7fa64225cb8d6107b2}
+
 elasticsearch:
   client:
     endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
