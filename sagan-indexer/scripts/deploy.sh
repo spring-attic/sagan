@@ -18,10 +18,10 @@ if [ $# != 1 ] && [ $# != 4 ] ; then cat << EOM
     *** passing in one optional argument requires all others as well
 
 EOM
-    exit
+    exit 1
 fi
 
-echo "Starting simple deploy script"
+echo "==> Starting deploy script"
 
 SPACE=$1
 CF=$2
@@ -30,27 +30,25 @@ PASS=$4
 SCRIPTDIR=$(dirname $0)
 
 if [[ -z "$2" ]]; then
-    CF=cf
+    CF=gcf
     SPACE=$1
+
+    echo "==> Targeting space $SPACE"
+    $CF target -s $SPACE
 else
-    echo "loading RVM"
-    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-    PATH=$PATH:~/.rvm/rubies/ruby-1.9.3-p429/bin/:~/.rvm/bin/
-
-    rvm use 1.9.3@sagan-ops
-
-    echo "validating $CF executable"
+    echo "==> Validating $CF executable"
     if [[ ! -f $CF ]]; then echo "$CF does not exist"; exit 100; fi
     if [[ ! -x $CF ]]; then echo "$CF is not executable"; exit 101; fi
 
-    echo "logging in to CF"
-    $CF target api.run.pivotal.io || echo "unable to target api.run.pivotal.io, attempting to continue.."
-    $CF login --email $USER --password $PASS || echo "unable to log in to CF as user [$USER], attempting to continue.."
+    echo "==> Logging in to CF"
+    $CF login -a https://api.run.pivotal.io -u $USER -p $PASS -o spring.io -s $SPACE || exit 102
 fi
 
-echo "switching to space $SPACE"
-$CF space $SPACE || exit
+echo "==> Pushing sagan-indexer"
+$CF push sagan-indexer -m 2G -i 1 -p $SCRIPTDIR/../build/libs/sagan-indexer.jar -b https://github.com/cloudfoundry/java-buildpack --no-route || exit 103
 
-echo "pushing indexer to CF"
-$CF push --manifest $SCRIPTDIR/../manifest/$SPACE.yml --name sagan-indexer --host $SPACE-sagan-indexer --reset --start || $SCRIPTDIR/wait-for-app-to-start.sh sagan-indexer 100 $CF
+echo "==> Mapping routes to sagan-indexer"
+$CF create-route $SPACE cfapps.io -n sagan-indexer-$SPACE || exit 104
+$CF map-route sagan-indexer cfapps.io -n sagan-indexer-$SPACE|| exit 104
+
+echo "==> Deployment complete."
