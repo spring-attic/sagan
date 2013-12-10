@@ -42,6 +42,14 @@ elasticsearch:
     endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
     index: ${ELASTICSEARCH_INDEX:sagan}
 
+# Used to satisfy @Value annotations in GitHubConfiguration that are actually only relevant
+# for the sagan-site application. This arrangement should be refactored so that keeping these
+# entries here on the indexer side is no longer required.
+github:
+  client:
+    id: n/a
+    secret: n/a
+
 server:
     tomcat:
         # Write access log to target/logs/access_log.YYYY-MM-DD.log
