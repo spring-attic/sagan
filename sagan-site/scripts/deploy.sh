@@ -18,7 +18,7 @@ if [ $# != 1 ] && [ $# != 4 ] ; then cat << EOM
     *** passing in one optional argument requires all others as well
 
 EOM
-    exit
+    exit 1
 fi
 
 echo "==> Starting blue-green deploy script"
@@ -41,7 +41,7 @@ else
     if [[ ! -x $CF ]]; then echo "$CF is not executable"; exit 101; fi
 
     echo "==> Logging in to CF"
-    $CF login -a https://api.run.pivotal.io -u $USER -p $PASS -o spring.io -s $SPACE || exit
+    $CF login -a https://api.run.pivotal.io -u $USER -p $PASS -o spring.io -s $SPACE || exit 102
 fi
 
 echo "==> Checking for running app"
@@ -52,7 +52,7 @@ NEXT=`if [ "$CURRENT" == "sagan-green" ]; then echo sagan-blue; else echo sagan-
 
 echo "==> $CURRENT is currently live, therefore pushing app to $NEXT"
 
-$CF push $NEXT -m 2G -i 4 -p $SCRIPTDIR/../build/libs/sagan-site.jar -b https://github.com/cloudfoundry/java-buildpack --no-route || $SCRIPTDIR/wait-for-app-to-start.sh $NEXT 100 $CF || exit
+$CF push $NEXT -m 2G -i 4 -p $SCRIPTDIR/../build/libs/sagan-site.jar -b https://github.com/cloudfoundry/java-buildpack --no-route || exit 103
 
 echo "==> Successfully pushed app to $NEXT; now mapping routes to $NEXT and unmapping routes from $CURRENT"
 
