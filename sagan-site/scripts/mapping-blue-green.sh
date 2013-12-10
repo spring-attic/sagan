@@ -39,12 +39,6 @@ elif [ $SPACE == "production" ]; then
 
 fi
 
-echo "==> Sleeping for three minutes (180 sec) to allow routes to propagate"
-
-date
-sleep 180
-date
-
 echo "==> Unmapping routes from $CURRENT"
 $CF unmap-route $CURRENT cfapps.io -n sagan-$SPACE
 
