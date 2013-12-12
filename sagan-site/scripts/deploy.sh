@@ -54,7 +54,10 @@ echo "==> $CURRENT is currently live, therefore pushing app to $NEXT"
 
 $CF push $NEXT -m 2G -i 4 -p $SCRIPTDIR/../build/libs/sagan-site.jar -b https://github.com/cloudfoundry/java-buildpack --no-route || exit 103
 
-echo "==> Successfully pushed app to $NEXT; now mapping routes to $NEXT and unmapping routes from $CURRENT"
+echo "==> Successfully pushed app to $NEXT; now sleeping for 5 minutes before mapping routes to $NEXT and unmapping routes from $CURRENT"
+
+date
+sleep 60*5
 
 $SCRIPTDIR/mapping-blue-green.sh $SPACE $CF $CURRENT $NEXT
 
