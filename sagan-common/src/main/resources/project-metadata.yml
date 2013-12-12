@@ -215,10 +215,10 @@ projects:
       refDocUrl: /spring/docs/{version}/spring-framework-reference/htmlsingle/
       apiDocUrl: /spring/docs/{version}/javadoc-api/
       supportedVersions:
-        - 4.0.0.BUILD-SNAPSHOT
-        - 4.0.0.RC2
-        - 3.2.6.BUILD-SNAPSHOT
-        - 3.2.5.RELEASE
+        - 4.0.1.BUILD-SNAPSHOT
+        - 4.0.0.RELEASE
+        - 3.2.7.BUILD-SNAPSHOT
+        - 3.2.6.RELEASE
         - 3.1.4.RELEASE
 
     # ----------------------
