@@ -45,7 +45,7 @@ else
 fi
 
 echo "==> Checking for running app"
-HOST_REGEX=`if [ "$SPACE" == "staging" ]; then echo staging.spring.io; else echo '[^.]spring.io'; fi;`
+HOST_REGEX=`if [ "$SPACE" == "staging" ]; then echo sagan-staging.cfapps.io; else echo '[^.]spring.io'; fi;`
 BLUE_IS_LIVE=`$CF apps | grep $HOST_REGEX | egrep 'sagan-blue' | wc -l`
 CURRENT=`if [ $BLUE_IS_LIVE == 1 ]; then echo sagan-blue; else echo sagan-green; fi`
 NEXT=`if [ "$CURRENT" == "sagan-green" ]; then echo sagan-blue; else echo sagan-green; fi`
@@ -57,7 +57,7 @@ $CF push $NEXT -m 2G -i 4 -p $SCRIPTDIR/../build/libs/sagan-site.jar -b https://
 echo "==> Successfully pushed app to $NEXT; now sleeping for 5 minutes before mapping routes to $NEXT and unmapping routes from $CURRENT"
 
 date
-sleep 60*5
+sleep 300
 
 $SCRIPTDIR/mapping-blue-green.sh $SPACE $CF $CURRENT $NEXT
 
