@@ -3,22 +3,81 @@ gradle.rootProject.allprojects { project ->
     checkTasks.addAll(project.tasks.findAll { it.name == 'build' })
 }
 
-tasks.addRule('Pattern: deploy<Space>: Deploys the project to a Cloud Foundry space.') { taskName ->
+tasks.addRule('Pattern: deploy: Deploys the project to a Cloud Foundry space.') { String taskName ->
     if (taskName.startsWith('deploy')) {
-        def space = taskName - 'deploy'
-        def cfPath = System.getProperty("cf.path")?:''
-        def cfUser = System.getProperty("cf.user")?:''
-        def cfPass = System.getProperty("cf.pass")?:''
-        if (space.length() == 0) throw new GradleException('Usage: deploy<Space>')
-        project.task([type: Exec, dependsOn: build], taskName) {
-            commandLine './scripts/deploy.sh', space.toLowerCase(), cfPath, cfUser, cfPass
-
+        project.task([dependsOn: 'build'], taskName) {
             // ensure the indexer is always deployed after the site, because if the
             // site fails to deploy, we don't want the indexer to deploy at all
             if (project.name == 'sagan-indexer') {
                 mustRunAfter project(':sagan-site').tasks[taskName]
             }
             mustRunAfter checkTasks
+
+            if (project.name == 'sagan-site') {
+                finalizedBy 'deployApp'
+            } else {
+                finalizedBy 'pushApp'
+            }
+        }
+    }
+}
+
+task([dependsOn: ['cf-deploy', 'cf-swap-deployed']], "deployApp") {
+}
+
+task([dependsOn: 'cf-push'], "pushApp") {
+}
+
+apply plugin: 'cloudfoundry'
+
+cloudfoundry {
+    target = "http://api.run.pivotal.io"
+    organization = "spring.io"
+
+    file = file("${jar.archivePath}")
+    host = "$application"
+    domain = 'cfapps.io'
+    memory = 2048
+    instances = 4
+    healthCheckTimeout = 180
+
+    versions = ['-blue', '-green']
+}
+
+if (project.name == 'sagan-site') {
+    cloudfoundry {
+        application = 'sagan' // instead of 'sagan-site'
+    }
+}
+
+// Routes can be specified by combining the 'host'/'hosts' field with the 'domain' field, or by the 'uri'/'uris' field.
+// Values for 'host'/'hosts' are modified on cf-deploy to add '-blue' or '-green' as appropriate, and are applied on
+// cf-push and cf-deploy. Values for 'uri'/'uris' are never modified with '-blue' or '-green', and are only applied by
+// cf-push and cf-swap-deployed. Using both forms of specifying routes gives control over which routes are decorated and
+// which routes are undecorated.
+
+if (project.hasProperty('staging')) {
+    cloudfoundry {
+        space = 'staging'
+        host = "$application-${space}"
+    }
+
+    if (project.name == 'sagan-site') {
+        cloudfoundry {
+            uris = [ "${space}.spring.io" ]
+        }
+    }
+}
+
+if (project.hasProperty('prod')) {
+    cloudfoundry {
+        space = 'production'
+        host = "$application-${space}"
+    }
+
+    if (project.name == 'sagan-site') {
+        cloudfoundry {
+            uris = [ "spring.io", "www.spring.io" ]
         }
     }
 }

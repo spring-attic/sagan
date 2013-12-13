@@ -6,10 +6,13 @@ buildscript {
     ext.vJunit = '4.11'
 
     repositories {
+        mavenLocal()
         maven { url 'http://repo.spring.io/libs-milestone' }
+        mavenCentral()
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${vSpringBoot}"
+        classpath 'org.cloudfoundry:cf-gradle-plugin:1.0.2.BUILD-SNAPSHOT'
     }
 }
 
