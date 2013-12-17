@@ -322,15 +322,13 @@ projects:
       name: Spring Security
       lead: rwinch
       groupId: org.springframework.security
+      refDocUrl: /spring-security/site/docs/{version}/reference/htmlsingle/
+      apiDocUrl: /spring-security/site/docs/{version}/apidocs/
       supportedVersions:
+        - name: 3.2.1.CI-SNAPSHOT
+        - name: 3.2.0.RELEASE
         - name: 3.1.4.RELEASE
           refDocUrl: /spring-security/site/docs/{version}/reference/springsecurity.html
-          apiDocUrl: /spring-security/site/docs/{version}/apidocs/
-        - name: 3.2.0.RC2
-          refDocUrl: /spring-security/site/docs/{version}/reference/htmlsingle/
-          apiDocUrl: /spring-security/site/docs/{version}/apidocs/
-        - name: 3.2.0.CI-SNAPSHOT
-          refDocUrl: /spring-security/site/docs/{version}/reference/htmlsingle/
           apiDocUrl: /spring-security/site/docs/{version}/apidocs/
 
     - id: spring-security-oauth
