@@ -28,7 +28,7 @@ public class GitHubConfiguration {
     @Bean
     public GitHubConnectionFactory gitHubConnectionFactory() {
         GitHubConnectionFactory factory = new GitHubConnectionFactory(githubClientId, githubClientSecret);
-        factory.setScope("read:org");
+        factory.setScope("user");
         return factory;
     }
 
