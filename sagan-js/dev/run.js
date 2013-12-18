@@ -1,4 +1,4 @@
-var Munchkin, curl, baseUrl; // pre-existing globals
+var Munchkin, baseUrl; // pre-existing globals
 (function () {
 
     var cjsConfig = {
@@ -16,17 +16,17 @@ var Munchkin, curl, baseUrl; // pre-existing globals
             when: { location: 'lib/when', main: 'when' },
             most: { location: 'lib/most', main: 'most', config: cjsConfig },
             poly: { location: 'lib/poly' },
-            leaflet: { location: 'lib/leaflet', main: 'dist/leaflet', config: cjsConfig }
+            leaflet: { location: 'lib/leaflet', main: 'dist/leaflet-src', config: cjsConfig }
         },
         paths: {
-            ZeroClipboard: 'lib/zeroclipboard/ZeroClipboard.min',
+            ZeroClipboard: 'lib/zeroclipboard/ZeroClipboard',
             jquery: 'lib/jquery/jquery.min',
             'prettify': 'lib/google-code-prettify/src/prettify',
             bootstrap: {
                 // FIXME: Find a better way to pull in bootstrap dependency
                 // For now, load bootstrap from sagan-site, since pulling it in via
                 // bower pulls the sources, and NOT the built .min.js file that we need
-                location: '/bootstrap/js/bootstrap.min.js',
+                location: 'lib/bootstrap/js/bootstrap',
                 config: {
                     loader: 'curl/loader/legacy',
                     requires: [ 'jquery' ],
@@ -35,7 +35,7 @@ var Munchkin, curl, baseUrl; // pre-existing globals
                 }
             },
             'bootstrap-datetimepicker': {
-                location: 'lib/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
+                location: 'lib/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker',
                 config: {
                     loader: 'curl/loader/legacy',
                     requires: [ 'bootstrap' ],
@@ -43,7 +43,7 @@ var Munchkin, curl, baseUrl; // pre-existing globals
                 }
             },
             'jquery-migrate': {
-                location: '//code.jquery.com/jquery-migrate-1.2.1.js',
+                location: '//code.jquery.com/jquery-migrate-1.2.1',
                 config: {
                     loader: 'curl/loader/legacy',
                     requires: [ 'jquery' ],
@@ -51,7 +51,7 @@ var Munchkin, curl, baseUrl; // pre-existing globals
                 }
             },
             munchkin: {
-                location: '//munchkin.marketo.net/munchkin.js',
+                location: '//munchkin.marketo.net/munchkin',
                 config: {
                     loader: 'curl/loader/legacy',
                     requires: [ 'jquery', 'jquery-migrate' ],
