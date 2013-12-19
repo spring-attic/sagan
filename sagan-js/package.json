@@ -16,6 +16,7 @@
     "test": "test"
   },
   "scripts": {
+    "cram": "cram dev/run.js --output dist/run.js --include curl/loader/legacy",
     "test": "jshint . && buster-test -c test/unit/buster.js",
     "phantom": "buster-test -c test/scenario/buster.js -g scenario-phantom",
     "firefox": "buster-test -c test/scenario/buster.js -g scenario-firefox",
