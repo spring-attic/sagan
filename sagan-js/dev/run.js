@@ -23,10 +23,7 @@ var Munchkin, baseUrl; // pre-existing globals
             jquery: 'lib/jquery/jquery.min',
             'prettify': 'lib/google-code-prettify/src/prettify',
             bootstrap: {
-                // FIXME: Find a better way to pull in bootstrap dependency
-                // For now, load bootstrap from sagan-site, since pulling it in via
-                // bower pulls the sources, and NOT the built .min.js file that we need
-                location: 'lib/bootstrap/js/bootstrap',
+                location: 'lib/bootstrap/docs/assets/js/bootstrap',
                 config: {
                     loader: 'curl/loader/legacy',
                     requires: [ 'jquery' ],
