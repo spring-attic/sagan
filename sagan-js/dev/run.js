@@ -6,7 +6,7 @@ var Munchkin, baseUrl; // pre-existing globals
     };
 
     curl.config({
-        baseUrl: baseUrl,
+        baseUrl: baseUrl || '',
         packages: {
             app: { location: 'app', config: cjsConfig, main: 'main' },
             feature: { location: 'feature', config: cjsConfig },
@@ -15,10 +15,10 @@ var Munchkin, baseUrl; // pre-existing globals
             curl: { location: 'lib/curl/src/curl/' },
             when: { location: 'lib/when', main: 'when' },
             most: { location: 'lib/most', main: 'most', config: cjsConfig },
-            poly: { location: 'lib/poly' },
-            leaflet: { location: 'lib/leaflet', main: 'dist/leaflet-src', config: cjsConfig }
+            poly: { location: 'lib/poly' }
         },
         paths: {
+            leaflet: { location: 'lib/leaflet/dist/leaflet-src', config: cjsConfig },
             ZeroClipboard: 'lib/zeroclipboard/ZeroClipboard',
             jquery: 'lib/jquery/jquery.min',
             'prettify': 'lib/google-code-prettify/src/prettify',
