@@ -244,7 +244,7 @@ projects:
       sponsor: trisberg
       supportedVersions:
         - 2.0.0.BUILD-SNAPSHOT
-        - 2.0.0.M3
+        - 2.0.0.M4
         - 1.0.2.RELEASE
         - 1.0.1.RELEASE
 
