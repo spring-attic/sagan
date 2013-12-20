@@ -2,7 +2,10 @@
   "name": "spring.io",
   "description": "node.js packages for spring.io UI.",
   "dependencies": {
-    "cram": "~0"
+    "cram": "~0",
+    "grunt-cli": "~0.1.11",
+    "grunt": "~0.4.2",
+    "grunt-contrib-cssmin": "~0.7.0"
   },
   "devDependencies": {
     "when": "~2",
@@ -16,6 +19,7 @@
     "test": "test"
   },
   "scripts": {
+    "build": "grunt && npm run cram",
     "cram": "cram dev/run.js --output dist/run.js --include curl/loader/legacy",
     "test": "jshint . && buster-test -c test/unit/buster.js",
     "phantom": "buster-test -c test/scenario/buster.js -g scenario-phantom",

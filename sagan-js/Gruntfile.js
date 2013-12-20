@@ -5,8 +5,8 @@ module.exports = function (grunt) {
         cssmin: {
             combine: {
                 files: {
-                    '../sagan-site/build/resources/static/css/main.css': '../sagan-site/src/main/resources/static/css/main.css'
-//                    'dist/css/main.css': '../sagan-site/src/main/resources/static/css/main.css'
+//                    '../sagan-site/build/resources/static/css/main.css': '../sagan-site/src/main/resources/static/css/main.css'
+                    'dist/css/main.css': '../sagan-site/src/main/resources/static/css/main.css'
                 }
             }
         }
