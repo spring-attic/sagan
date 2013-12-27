@@ -51,7 +51,7 @@ projects:
         - name: 3.0.0.M2
           refDocUrl: /spring-batch/trunk/reference/html/index.html
           apiDocUrl: /spring-batch/trunk/apidocs/index.html
-        - name: 2.2.3.RELEASE
+        - name: 2.2.4.RELEASE
           refDocUrl: /spring-batch/2.2.x/reference/html/index.html
           apiDocUrl: /spring-batch/2.2.x/apidocs/index.html
         - name: 2.1.9.RELEASE
