@@ -336,7 +336,7 @@ projects:
     - id: spring-security-oauth
       name: Spring Security OAuth
       lead: dsyer
-      groupId: org.springframework.security
+      groupId: org.springframework.security.oauth
       supportedVersions:
         - name: 1.0.5.RELEASE
           refDocUrl: http://projects.spring.io/spring-security-oauth/docs/Home.html
