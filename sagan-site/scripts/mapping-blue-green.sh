@@ -34,22 +34,22 @@ $CF create-route $SPACE cfapps.io -n sagan-$SPACE || exit
 $CF map-route $NEXT cfapps.io -n sagan-$SPACE || exit
 $CF unmap-route $CURRENT cfapps.io -n sagan-$SPACE
 
-if [ $SPACE == "staging" ]; then
-
-    $CF create-route $SPACE spring.io -n staging || exit
-    $CF map-route $NEXT spring.io -n staging || exit
-    $CF unmap-route $CURRENT spring.io -n staging
-
-elif [ $SPACE == "production" ]; then
-
-    $CF create-route $SPACE spring.io || exit
-    $CF map-route $NEXT spring.io || exit
-    $CF unmap-route $CURRENT spring.io
-
-    $CF create-route $SPACE spring.io -n www || exit
-    $CF map-route $NEXT spring.io -n www || exit
-    $CF unmap-route $CURRENT spring.io -n www
-
-fi
+#if [ $SPACE == "staging" ]; then
+#
+#    $CF create-route $SPACE spring.io -n staging || exit
+#    $CF map-route $NEXT spring.io -n staging || exit
+#    $CF unmap-route $CURRENT spring.io -n staging
+#
+#elif [ $SPACE == "production" ]; then
+#
+#    $CF create-route $SPACE spring.io || exit
+#    $CF map-route $NEXT spring.io || exit
+#    $CF unmap-route $CURRENT spring.io
+#
+#    $CF create-route $SPACE spring.io -n www || exit
+#    $CF map-route $NEXT spring.io -n www || exit
+#    $CF unmap-route $CURRENT spring.io -n www
+#
+#fi
 
 echo "==> Mapping routes to $NEXT complete."
