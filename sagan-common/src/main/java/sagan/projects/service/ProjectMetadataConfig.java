@@ -10,13 +10,8 @@ import org.springframework.core.io.Resource;
 @Configuration
 class ProjectMetadataConfig {
 
-    public static final String PROJECT_METADATA_YAML = "classpath:/project-metadata.yml";
-
-    @Value(PROJECT_METADATA_YAML)
-    private Resource metadataYaml;
-
-    @Bean
-    public ProjectMetadataService projectMetadataService() throws IOException {
-        return new ProjectMetadataYamlParser().parse(metadataYaml);
-    }
+	@Bean
+	public ProjectMetadataService projectMetadataService(ProjectDataRepository repository) throws IOException {
+		return new ProjectMetadataService(repository);
+	}
 }
