@@ -1,11 +1,13 @@
 package sagan.blog.view;
 
+import org.junit.After;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.util.DateTestUtils;
 import sagan.util.service.DateService;
 
 import java.text.ParseException;
+import java.util.Locale;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,12 +24,21 @@ public class PostViewTests {
     @Mock
     private DateService dateService;
 
+    private Locale defaultLocale;
+
     private Post post;
     private PostView postView;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+    }
+
+    @After
+    public void tearDown() {
+        Locale.setDefault(defaultLocale);
     }
 
     @Test

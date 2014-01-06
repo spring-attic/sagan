@@ -28,6 +28,6 @@ public class GeoLocationFormatter implements Formatter<GeoLocation> {
 
     @Override
     public String print(GeoLocation location, Locale locale) {
-        return String.format("%f,%f", location.getLatitude(), location.getLongitude());
+        return String.format(Locale.US, "%f,%f", location.getLatitude(), location.getLongitude());
     }
 }
