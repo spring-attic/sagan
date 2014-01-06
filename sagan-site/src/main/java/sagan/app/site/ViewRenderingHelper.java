@@ -40,9 +40,4 @@ class ViewRenderingHelper {
     public String path() {
         return urlPathHelper.getPathWithinApplication(request);
     }
-
-    public String getGhPagesUrl() {
-        return projectMetadataService.getGhPagesBaseUrl();
-    }
-
 }

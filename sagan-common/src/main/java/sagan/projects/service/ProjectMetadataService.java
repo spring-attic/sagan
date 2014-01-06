@@ -1,43 +1,53 @@
+/*
+ * Copyright 2002-2013 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package sagan.projects.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import sagan.projects.Project;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * @author Rob Winch
+ */
 public class ProjectMetadataService {
-    private final Map<String, List<Project>> projectCategoryMap;
-    private final String ghPagesBaseUrl;
-    private final List<Project> projects;
+	private ProjectDataRepository repository;
 
-    public ProjectMetadataService(Map<String, List<Project>> projectCategoryMap, String ghPagesBaseUrl) {
-        this.projectCategoryMap = projectCategoryMap;
-        this.ghPagesBaseUrl = ghPagesBaseUrl;
-        projects = new ArrayList<>();
-        for (Map.Entry<String, List<Project>> projectCategory : projectCategoryMap.entrySet()) {
-            projects.addAll(projectCategory.getValue());
-        }
-    }
+	public ProjectMetadataService(ProjectDataRepository repository) {
+		this.repository = repository;
+	}
 
-    public List<Project> getProjectsForCategory(String category) {
-        return projectCategoryMap.get(category);
-    }
+	public List<Project> getProjectsForCategory(String category) {
+		return repository.findByCategory(category);
+	}
 
-    public List<Project> getProjects() {
-        return projects;
-    }
+	public List<Project> getProjects() {
+		return repository.findAll(new Sort("id"));
+	}
 
-    public Project getProject(String id) {
-        for (Project project : projects) {
-            if (project.getId().equals(id)) {
-                return project;
-            }
-        }
-        return null;
-    }
+	public Project getProject(String id) {
+		return repository.findOne(id);
+	}
 
-    public String getGhPagesBaseUrl() {
-        return ghPagesBaseUrl;
-    }
+	public Project save(Project project) {
+		return repository.save(project);
+	}
+
+	public void delete(String id) {
+		repository.delete(id);
+	}
 }
