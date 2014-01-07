@@ -1,14 +1,17 @@
 package integration.admin;
 
-import integration.AbstractIntegrationTests;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.service.ProjectMetadataService;
 
 import java.util.List;
+
+import org.junit.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+
+import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
