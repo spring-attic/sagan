@@ -4,5 +4,5 @@ function getUrlFilter() {
     // grab first "filter=..." param in url
     var query = document.location.search;
     var matches = query.match(/[&?]filter=([^&]+)/);
-    return matches ? matches[1] : '';
+    return matches ? decodeURIComponent(matches[1]) : '';
 }
