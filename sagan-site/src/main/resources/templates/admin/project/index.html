@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Admin &middot; Blog</title>
+</head>
+<body>
+  <div layout:fragment="header-container"></div>
+  <div layout:fragment="content" class="container">
+    <div class="main-body--wrapper">
+      <div class="admin-index--title">
+        <div class="content--title search-title">
+          <a th:href="@{/admin}">Admin</a> : Projects
+        </div>
+      </div>
+
+      <div class="admin-index--title">
+          <a th:href="@{/admin/projects/new}" href="edit.html">Add Project</a>
+      </div>
+
+      <div class="row">
+          <div id="content" class="span12">
+              <h2>Projects</h2>
+              <table class='table dashboard--posts'>
+                  <tr th:each="project : ${projects}" layout:fragment="post-row">
+                      <td th:text="${project.id}">spring-framework</td>
+                      <td>
+                          <a th:href="@{'/admin/projects/' + ${project.id}}">Edit</a>
+                      </td>
+                      <td>
+                          <form th:action="@{'/admin/projects/' + ${project.id}}" action="/admin/project/init" method="post" class='form-inline'>
+                              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                              <input type="hidden" name="_method" value="delete"/>
+                              <input type="submit" class="btn" value="Delete"/>
+                          </form>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+
+          <div id="sidebar" class="span4">
+          </div>
+      </div>
+    </div>
+</div>
+</body>
+</html>

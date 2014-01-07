@@ -39,7 +39,8 @@ public class ProjectDocumentationIndexerTests {
             "http://www.example.com/repo/spring-framework",
             "http://www.example.com/spring-framework",
             documentationList,
-            false);
+            false,
+            "release");
 
     private void assertThatCrawlingIsDoneFor(String url, int linkDepthLevel) {
         verify(crawlerService).crawl(eq(url), eq(linkDepthLevel), any(CrawledWebDocumentProcessor.class));
