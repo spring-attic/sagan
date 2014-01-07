@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 
 import org.springframework.util.Assert;
 
+import javax.persistence.*;
+
+@Embeddable
 public class ProjectRelease implements Comparable<ProjectRelease> {
 
     private static final Pattern VERSION_DISPLAY_REGEX = Pattern.compile("([0-9.]+)\\.(RC\\d+|M\\d+)?");
@@ -26,18 +29,21 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         }
     }
 
-    private final String versionName;
-    private final ReleaseStatus releaseStatus;
-    private final boolean isCurrent;
-    private final String refDocUrl;
-    private final String apiDocUrl;
-    private final String groupId;
-    private final String artifactId;
-    private final ProjectRepository repository;
+	private String versionName;
+    private ReleaseStatus releaseStatus;
+    private boolean isCurrent;
+    private String refDocUrl;
+    private String apiDocUrl;
+    private String groupId;
+    private String artifactId;
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+    private ProjectRepository repository;
+
+	public ProjectRelease() {}
 
     public ProjectRelease(String versionName, ReleaseStatus releaseStatus, boolean isCurrent, String refDocUrl,
                           String apiDocUrl, String groupId, String artifactId) {
-        this.versionName = versionName;
+        setVersion(versionName);
         this.releaseStatus = releaseStatus;
         this.isCurrent = isCurrent;
         this.refDocUrl = refDocUrl;
@@ -115,42 +121,63 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         return repository;
     }
 
-    @Override
+	public void setVersion(String versionName) {
+		repository = ProjectRepository.get(versionName);
+		this.releaseStatus = ReleaseStatus.getFromVersion(versionName);
+		this.versionName = versionName;
+	}
+
+	public void setReleaseStatus(ReleaseStatus releaseStatus) {
+		this.releaseStatus = releaseStatus;
+	}
+
+	public void setCurrent(boolean isCurrent) {
+		this.isCurrent = isCurrent;
+	}
+
+	public void setRefDocUrl(String refDocUrl) {
+		this.refDocUrl = refDocUrl;
+	}
+
+	public void setApiDocUrl(String apiDocUrl) {
+		this.apiDocUrl = apiDocUrl;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+
+	public void setArtifactId(String artifactId) {
+		this.artifactId = artifactId;
+	}
+
+	public void setRepository(ProjectRepository repository) {
+		this.repository = repository;
+	}
+
+	@Override
     public int compareTo(ProjectRelease other) {
         return versionName.compareTo(other.versionName);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || !(o instanceof ProjectRelease)) return false;
 
-        ProjectRelease that = (ProjectRelease) o;
+		ProjectRelease that = (ProjectRelease) o;
 
-        if (!apiDocUrl.equals(that.apiDocUrl))
-            return false;
-        if (!refDocUrl.equals(that.refDocUrl))
-            return false;
-        if (releaseStatus != that.releaseStatus)
-            return false;
-        if (!versionName.equals(that.versionName))
-            return false;
+		if (!versionName.equals(that.versionName)) return false;
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public int hashCode() {
-        int result = versionName.hashCode();
-        result = 31 * result + releaseStatus.hashCode();
-        result = 31 * result + refDocUrl.hashCode();
-        result = 31 * result + apiDocUrl.hashCode();
-        return result;
-    }
+	@Override
+	public int hashCode() {
+		return versionName.hashCode();
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "ProjectRelease{" + "versionName='" + versionName + '\'' + ", release=" + releaseStatus
                 + ", refDocUrl='" + refDocUrl + '\'' + ", apiDocUrl='" + apiDocUrl + '\'' + '}';
