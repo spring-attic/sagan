@@ -69,21 +69,3 @@
 </div>
 </body>
 </html>
-
-
-
-
-@ElementCollection
-private List<ProjectRelease> releaseList;
-    private boolean isAggregator;
-
-
-    private String versionName;
-    private ReleaseStatus releaseStatus;
-    private boolean isCurrent;
-    private String refDocUrl;
-    private String apiDocUrl;
-    private String groupId;
-    private String artifactId;
-    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.PERSIST})
-    private ProjectRepository repository;
