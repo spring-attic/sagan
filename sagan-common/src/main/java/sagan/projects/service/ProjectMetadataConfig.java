@@ -10,8 +10,8 @@ import org.springframework.core.io.Resource;
 @Configuration
 class ProjectMetadataConfig {
 
-	@Bean
-	public ProjectMetadataService projectMetadataService(ProjectDataRepository repository) throws IOException {
-		return new ProjectMetadataService(repository);
-	}
+    @Bean
+    public ProjectMetadataService projectMetadataService(ProjectDataRepository repository) throws IOException {
+        return new ProjectMetadataService(repository);
+    }
 }

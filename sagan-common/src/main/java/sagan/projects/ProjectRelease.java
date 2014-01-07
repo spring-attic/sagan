@@ -29,17 +29,17 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         }
     }
 
-	private String versionName;
+    private String versionName;
     private ReleaseStatus releaseStatus;
     private boolean isCurrent;
     private String refDocUrl;
     private String apiDocUrl;
     private String groupId;
     private String artifactId;
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE})
     private ProjectRepository repository;
 
-	public ProjectRelease() {}
+    public ProjectRelease() {}
 
     public ProjectRelease(String versionName, ReleaseStatus releaseStatus, boolean isCurrent, String refDocUrl,
                           String apiDocUrl, String groupId, String artifactId) {
@@ -121,63 +121,63 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         return repository;
     }
 
-	public void setVersion(String versionName) {
-		repository = ProjectRepository.get(versionName);
-		this.releaseStatus = ReleaseStatus.getFromVersion(versionName);
-		this.versionName = versionName;
-	}
+    public void setVersion(String versionName) {
+        repository = ProjectRepository.get(versionName);
+        this.releaseStatus = ReleaseStatus.getFromVersion(versionName);
+        this.versionName = versionName;
+    }
 
-	public void setReleaseStatus(ReleaseStatus releaseStatus) {
-		this.releaseStatus = releaseStatus;
-	}
+    public void setReleaseStatus(ReleaseStatus releaseStatus) {
+        this.releaseStatus = releaseStatus;
+    }
 
-	public void setCurrent(boolean isCurrent) {
-		this.isCurrent = isCurrent;
-	}
+    public void setCurrent(boolean isCurrent) {
+        this.isCurrent = isCurrent;
+    }
 
-	public void setRefDocUrl(String refDocUrl) {
-		this.refDocUrl = refDocUrl;
-	}
+    public void setRefDocUrl(String refDocUrl) {
+        this.refDocUrl = refDocUrl;
+    }
 
-	public void setApiDocUrl(String apiDocUrl) {
-		this.apiDocUrl = apiDocUrl;
-	}
+    public void setApiDocUrl(String apiDocUrl) {
+        this.apiDocUrl = apiDocUrl;
+    }
 
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
-	}
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
 
-	public void setArtifactId(String artifactId) {
-		this.artifactId = artifactId;
-	}
+    public void setArtifactId(String artifactId) {
+        this.artifactId = artifactId;
+    }
 
-	public void setRepository(ProjectRepository repository) {
-		this.repository = repository;
-	}
+    public void setRepository(ProjectRepository repository) {
+        this.repository = repository;
+    }
 
-	@Override
+    @Override
     public int compareTo(ProjectRelease other) {
         return versionName.compareTo(other.versionName);
     }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || !(o instanceof ProjectRelease)) return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof ProjectRelease)) return false;
 
-		ProjectRelease that = (ProjectRelease) o;
+        ProjectRelease that = (ProjectRelease) o;
 
-		if (!versionName.equals(that.versionName)) return false;
+        if (!versionName.equals(that.versionName)) return false;
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public int hashCode() {
-		return versionName.hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return versionName.hashCode();
+    }
 
-	@Override
+    @Override
     public String toString() {
         return "ProjectRelease{" + "versionName='" + versionName + '\'' + ", release=" + releaseStatus
                 + ", refDocUrl='" + refDocUrl + '\'' + ", apiDocUrl='" + apiDocUrl + '\'' + '}';
