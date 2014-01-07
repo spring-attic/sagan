@@ -1,30 +1,19 @@
 package integration.projects;
 
-import integration.AbstractIntegrationTests;
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.RowMapper;
-import sagan.blog.service.PostRepository;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectRepository;
 import sagan.projects.service.ProjectDataRepository;
 import sagan.projects.service.ProjectMetadataService;
-import sagan.projects.service.ProjectDataRepository;
-import sagan.util.web.SiteUrl;
 
-import javax.sql.DataSource;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+
+import org.junit.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
