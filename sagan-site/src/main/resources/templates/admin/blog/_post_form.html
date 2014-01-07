@@ -25,6 +25,9 @@
                         <span class="help-inline" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Incorrect content</span>
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="controls">(Be sure to wrap multiline code blocks with triple backquotes and include a type like text, java, etc.)</label>
+                </div>
                 <div class="">
                     <button name="draft" value="false" type="submit" class="btn btn-large">Publish</button>
                     <button name="draft" value="true" type="submit" class="btn btn-large">Save &amp; View Draft</button>
