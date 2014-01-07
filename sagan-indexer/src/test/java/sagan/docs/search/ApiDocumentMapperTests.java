@@ -26,7 +26,7 @@ public class ApiDocumentMapperTests {
             "http://www.example.com/spring-framework",
             Collections.<ProjectRelease> emptyList(),
             false,
-			"release");
+            "release");
 
     private ProjectRelease version = new ProjectReleaseBuilder()
             .versionName("3.2.1.RELEASE")
