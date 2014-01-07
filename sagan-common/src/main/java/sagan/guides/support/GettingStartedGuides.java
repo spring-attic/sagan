@@ -111,7 +111,7 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
                 "Tags</h3>\n";
 
         for (String tag : asciidocGuide.getTags()) {
-            sidebar += "<li><a href='/guides?tag=" + tag + "'>" + tag + "</a></li>\n";
+            sidebar += "<li><a href='/guides?filter=" + tag + "'>" + tag + "</a></li>\n";
         }
 
         sidebar += "<h3>" +
