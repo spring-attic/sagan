@@ -26,7 +26,7 @@ import org.springframework.web.client.RestClientException;
 
 /**
  * Repository implementation providing data access services for getting started guides.
- * 
+ *
  * @author Chris Beams
  * @author Greg Turnquist
  */
@@ -108,13 +108,13 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
 
         sidebar += "<h3>" +
                 "<a name='tags' class='anchor' href='#tags'></a>" +
-                "Tags</h3>\n";
+                "Tags</h3><ul class='inline'>\n";
 
         for (String tag : asciidocGuide.getTags()) {
             sidebar += "<li><a href='/guides?filter=" + tag + "'>" + tag + "</a></li>\n";
         }
 
-        sidebar += "<h3>" +
+        sidebar += "</ul><h3>" +
                 "<a name='projects' class='anchor' href='#projects'></a>" +
                 "Projects</h3>\n";
 
