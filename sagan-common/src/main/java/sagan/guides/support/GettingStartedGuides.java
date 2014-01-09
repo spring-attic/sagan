@@ -106,30 +106,38 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
                 "<div class='right-pane-widget--container'>\n" +
                 "<div class='related_resources'>\n";
 
-        sidebar += "<h3>" +
-                "<a name='tags' class='anchor' href='#tags'></a>" +
-                "Tags</h3><ul class='inline'>\n";
+        if (asciidocGuide.getTags().size() > 0) {
+            sidebar += "<h3>" +
+                    "<a name='tags' class='anchor' href='#tags'></a>" +
+                    "Tags</h3><ul class='inline'>\n";
 
-        for (String tag : asciidocGuide.getTags()) {
-            sidebar += "<li><a href='/guides?filter=" + tag + "'>" + tag + "</a></li>\n";
+            for (String tag : asciidocGuide.getTags()) {
+                sidebar += "<li><a href='/guides?filter=" + tag + "'>" + tag + "</a></li>\n";
+            }
         }
 
-        sidebar += "</ul><h3>" +
-                "<a name='projects' class='anchor' href='#projects'></a>" +
-                "Projects</h3>\n";
+        if (asciidocGuide.getProjects().size() > 0) {
+            sidebar += "</ul><h3>" +
+                    "<a name='projects' class='anchor' href='#projects'></a>" +
+                    "Projects</h3>\n" +
+                    "<ul>\n";
 
-        for (String project : asciidocGuide.getProjects()) {
-            sidebar += "<li><a href='http://projects.spring.io/" + project + "'>" + WordUtils.capitalize(project.replaceAll("-", " ")) + "</a></li>\n";
+            for (String project : asciidocGuide.getProjects()) {
+                sidebar += "<li><a href='http://projects.spring.io/" + project + "'>" + WordUtils.capitalize(project.replaceAll("-", " ")) + "</a></li>\n";
+            }
+            sidebar += "</ul>\n";
         }
 
-        sidebar += "<h3>" +
-                "<a name='concepts-and-technologies' class='anchor' href='#concepts-and-technologies'></a>" +
-                "Concepts and technologies</h3>\n" +
-                "<ul>\n";
-        for (String key : asciidocGuide.getUnderstandingDocs().keySet()) {
-            sidebar += "<li><a href='" + key + "'>" + asciidocGuide.getUnderstandingDocs().get(key) + "</a></li>\n";
+        if (asciidocGuide.getUnderstandingDocs().size() > 0) {
+            sidebar += "<h3>" +
+                    "<a name='concepts-and-technologies' class='anchor' href='#concepts-and-technologies'></a>" +
+                    "Concepts and technologies</h3>\n" +
+                    "<ul>\n";
+            for (String key : asciidocGuide.getUnderstandingDocs().keySet()) {
+                sidebar += "<li><a href='" + key + "'>" + asciidocGuide.getUnderstandingDocs().get(key) + "</a></li>\n";
+            }
+            sidebar += "</ul>\n";
         }
-        sidebar += "</ul>\n";
 
         sidebar += "</div>\n</div>";
 
