@@ -20,7 +20,7 @@
   },
   "scripts": {
     "build": "grunt && npm run cram",
-    "cram": "node node_modules/cram dev/run.js --output dist/run.js --include curl/loader/legacy --include curl/loader/cjsm11",
+    "cram": "node node_modules/cram dev/run.js --output dist/lib/curl/src/curl.js --loader ./dev/lib/curl/src/curl.js --include curl/loader/legacy --include curl/loader/cjsm11",
     "test": "jshint . && buster-test -c test/unit/buster.js",
     "phantom": "buster-test -c test/scenario/buster.js -g scenario-phantom",
     "firefox": "buster-test -c test/scenario/buster.js -g scenario-firefox",
