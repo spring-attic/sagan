@@ -55,7 +55,7 @@ dependencies {
     testCompile project(':sagan-common').sourceSets.testUtil.output
 }
 
-task copyGeneratedResources(type: Copy, dependsOn: ':sagan-js:cssmin') {
+task copyGeneratedResources(type: Copy) {
     description = "Copies static html templates from :sagan-site in order to index them at runtime."
 
     from "../sagan-js/dist"
