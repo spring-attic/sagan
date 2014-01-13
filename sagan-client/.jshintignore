@@ -1,5 +1,5 @@
 node_modules/
 .git/
 .idea/
-dev/lib
+src/lib
 build/

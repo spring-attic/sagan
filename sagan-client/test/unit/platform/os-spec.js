@@ -1,4 +1,4 @@
-var os = require('../../../dev/platform/os');
+var os = require('../../../src/platform/os');
 
 // TODO: These are good candidates for generative testing. We
 // could consider introducing a generative testing tool

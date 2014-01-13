@@ -6,7 +6,7 @@ module.exports = function (grunt) {
             combine: {
                 files: {
 //                    '../sagan-site/build/resources/static/css/main.css': '../sagan-site/src/main/resources/static/css/main.css'
-                    'dist/css/main.css': '../sagan-site/src/main/resources/static/css/main.css'
+                    'build/resources/css/main.css': '../sagan-site/src/main/resources/static/css/main.css'
                 }
             }
         }

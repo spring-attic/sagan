@@ -51,17 +51,17 @@
 (function (global) {
   var appBaseUrl, curlUrl, commonCfg, callbackKey;
 
-  appBaseUrl = '../../dev/';
+  appBaseUrl = '../../src/';
 
   /*
     These are hard-coded paths and config.  They're hard-coded into
     this central place, rather than copied into every harness.
    */
-  curlUrl = '../../dev/lib/curl/src/curl.js';
+  curlUrl = '../../src/lib/curl/src/curl.js';
   callbackKey = 'harnessCallback';
   commonCfg = [
-    '../../dev/lib/curl/src/curl/plugin/js!'
-        + '/sagan-js/dev/run.js'
+    '../../src/lib/curl/src/curl/plugin/js!'
+        + '/sagan-client/src/run.js'
   ];
 
   /* go! */
