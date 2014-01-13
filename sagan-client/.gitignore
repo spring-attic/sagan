@@ -1,5 +1,4 @@
-dev/lib
+src/lib
 node_modules
 npm-debug.log
-dist/
 .cram/
