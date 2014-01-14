@@ -1,6 +1,6 @@
 var Munchkin, baseUrl; // pre-existing globals
 (function () {
-
+    /*global curl*/
     var cjsConfig = {
         loader: 'curl/loader/cjsm11'
     };
