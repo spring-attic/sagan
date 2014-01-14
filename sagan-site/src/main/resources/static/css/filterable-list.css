@@ -1,0 +1,11 @@
+/*
+    FIXME: This rule should be moved alongside filterable/filter.js in sagan-client
+    This OOCSS state is used to hide/show filterable items (eg gs guides, tutorials,
+    docs), and belongs with it's associated JS controller filterable/filter.js.
+    Instead of starting to fragment the CSS, however, I decided it's best to put
+    it here until we dig into CSS refactoring for real
+*/
+[data-filterable-container] [data-filterable].filterable-non-matching,
+[data-filterable-container].filterable-non-matching {
+    display: none;
+}
