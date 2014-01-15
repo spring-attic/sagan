@@ -1,39 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      data-search data-mobile-support data-newsletter-subscription>
 <head>
   <title>Layout</title>
   <meta id="Viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.png}"/>
-  <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}"  />
-  <!-- <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-responsive.css}" /> -->
   <link href='https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" th:href="@{/font-awesome/css/font-awesome.min.css}"/>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/fontcustom.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"/>
-
-  <link rel="stylesheet" type="text/css" th:href="@{/css/icons.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/buttons.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/typography.css}" />
-
   <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/application.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/markdown-content.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/team.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/docs.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/homepage.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/tools.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/projects.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/highlight.css}"/>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" />
 
-  <script type="text/javascript" th:src="@{/js/jquery.js}" ></script>
-  <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}" ></script>
-  <script type="text/javascript" th:src="@{/js/ZeroClipboard.min.js}" ></script>
-  <script type="text/javascript" th:src="@{/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}" ></script>
+  <script th:inline="javascript">
+        var baseUrl = /*[[@{/}]]*/ '../static/';
+  </script>
+  <script th:src="@{/js/curl.js}" src="../static/js/curl.js" async ></script>
 
-  <script type="text/javascript" th:src="@{/js/filter.js}" ></script>
-  <script type="text/javascript" th:src="@{/js/application.js}" ></script>
   <meta name="google-site-verification" content="7qGntFPD9lWAVCtUu5U77v4l68PsTHf6xpzgjQv2j2M" />
   <script>
     //
@@ -60,7 +40,7 @@
   <script type="text/javascript">
     // Work around Google font rendering issues in webkit browsers on Windows 7
     if (navigator.userAgent.indexOf("NT 6.1") != -1) {
-      $('body').css( "-webkit-text-stroke", "0.5px" );
+      document.body.style.WebkitTextStroke = "0.5px";
     }
   </script>
   <div class="viewport">
@@ -141,8 +121,7 @@
                 </ul>
               </div>
             </div>
-            &copy; <script type="text/javascript"> var d = new Date();
-                  document.write(d.getFullYear());</script> <a href="http://gopivotal.com">Pivotal Software</a>, Inc. All Rights Reserved.
+            &copy; <span th:text="${#calendars.format(#calendars.createToday(),'yyyy')}">2013</span> <a href="http://gopivotal.com">Pivotal Software</a>, Inc. All Rights Reserved.
             <a href="http://www.gopivotal.com/terms-of-use">Terms of Use</a> and
             <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>
             <span id='authentication' sec:authorize="isFullyAuthenticated()">
@@ -150,15 +129,11 @@
             </span>
           </div>
           <div class="span4 footer-newsletter--wrapper pull-right">
-            <div class="footer-newsletter--container">
-              <iframe src="http://play.gopivotal.com/OSS_Website_Spring_SpringNewsletterwithtext.html" frameBorder="0" scrolling="no" height="70px" width="324px" style="border:none"></iframe>
-            </div>
           </div>
         </div>
       </div>
     </footer>
     <div id="scrim"></div>
   </div>
-  <script type="text/javascript" th:src="@{/js/marketomunchkin.js}" ></script>
 </body>
 </html>

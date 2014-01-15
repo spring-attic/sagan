@@ -1,9 +1,12 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorator="layout">
+  layout:decorator="layout"
+  data-clipboard-buttons
+  data-code-sidebar>
   <head>
     <title th:inline="text">Tutorial &middot; [[${tutorial.title}]]</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/code-sidebar.css}"/>
   </head>
   <body>
     <div layout:fragment="header-container"></div>
@@ -21,10 +24,10 @@
           </div>
           <aside id='sidebar' class="span4 content-right-pane--container mobile-left-pane ">
             <div class="right-pane-widget--container desktop-only">
-              <div class="github-actions">
+              <div class="github-actions https">
                 <h2>Get the Code</h2>
                 <div class="btn-group">
-                  <button class="btn active" data-protocol="https">HTTPS</button>
+                  <button class="btn" data-protocol="https">HTTPS</button>
                   <button class="btn" data-protocol="ssh">SSH</button>
                   <button class="btn" data-protocol="subversion">Subversion</button>
                 </div>
@@ -32,11 +35,11 @@
                   <input type="text" id="clone-url-https" th:value="${tutorial.gitRepoHttpsUrl}" readonly="readonly"/>
                   <button class="copy-button github" th:attr="data-clipboard-text=${tutorial.gitRepoHttpsUrl}" data-toggle="tooltip"></button>
                 </div>
-                <div class="clone-url ssh hide">
+                <div class="clone-url ssh">
                   <input type="text" id="clone-url-ssh" th:value="${tutorial.gitRepoSshUrl}" readonly="readonly"/>
                   <button class="copy-button github" th:attr="data-clipboard-text=${tutorial.gitRepoSshUrl}" data-toggle="tooltip"></button>
                 </div>
-                <div class="clone-url subversion hide">
+                <div class="clone-url subversion">
                   <input type="text" id="clone-url-subversion" th:value="${tutorial.gitRepoSubversionUrl}" readonly="readonly"/>
                   <button class="copy-button github" th:attr="data-clipboard-text=${tutorial.gitRepoSubversionUrl}" data-toggle="tooltip"></button>
                 </div>

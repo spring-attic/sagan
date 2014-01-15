@@ -1,0 +1,20 @@
+/* states to highlight the button for the current protocol */
+
+.github-actions.https [data-protocol=https],
+.github-actions.ssh [data-protocol=ssh],
+.github-actions.subversion [data-protocol=subversion] {
+    background: #fff;
+    box-shadow: none;
+}
+
+/* states to highlight the url for the current protocol */
+
+.github-actions .clone-url {
+    display: none;
+}
+
+.github-actions.https .clone-url.https,
+.github-actions.ssh .clone-url.ssh,
+.github-actions.subversion .clone-url.subversion {
+    display: block;
+}

@@ -1,11 +1,11 @@
 <html   xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-        layout:decorator="layout">
+        layout:decorator="layout"
+        data-search-facets>
 <head>
     <title th:inline="text">Search &middot; [[${searchForm.q}]]</title>
     <link rel="alternate" type="application/atom+xml" th:href="${feedPath}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/search.css}"/>
-    <script type="text/javascript" th:src="@{/js/search.js}" ></script>
 </head>
 <body>
 <div layout:fragment="header-container"></div>

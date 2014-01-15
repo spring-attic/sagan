@@ -2,17 +2,20 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:data="https://github.com/mxab/thymeleaf-extras-data-attribute"
-      layout:decorator="layout">
+      layout:decorator="layout"
+      data-map>
 <head>
     <title>Team</title>
 
-    <script th:src="@{/leaflet/leaflet.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/leaflet/leaflet.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/leaflet/dist/leaflet.css}" />
     <!--[if lte IE 8]>
-    <link rel="stylesheet" type="text/css" th:href="@{/leaflet/leaflet.ie.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/leaflet/dist/leaflet.ie.css}" />
     <![endif]-->
-
-    <script type="text/javascript" th:src="@{/js/team.js}" ></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
+        /*]]>*/
+    </script>
 </head>
 <body>
   <div layout:fragment="header-container"></div>
@@ -59,12 +62,6 @@
         </div>
       </div>
     </div>
-    <script th:inline="javascript">
-      /*<![CDATA[*/
-      var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
-      $(function() { Spring.CreateMap() });
-      /*]]>*/
-    </script>
   </div>
 </body>
 </html>

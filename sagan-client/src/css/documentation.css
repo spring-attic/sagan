@@ -1,0 +1,51 @@
+.documentation--header .documentation-icon {
+  background-color: #34302d;
+  width: 94px;
+  height: 122px;
+  margin: 0 40px 40px 0;
+  padding: 39px;
+  background-image: url("../img/iconsprite.png");
+  background-position: 37px -506px;
+}
+
+.documentation--body {
+  margin: 40px 0;
+  width: auto;
+}
+.documentation--body .documentation-item--wrapper {
+  padding: 20px;
+}
+.documentation--body .empty-project {
+  margin-bottom: -40px;
+}
+
+.documentation--item {
+  display: inline-block;
+  width: 295px;
+  vertical-align: top;
+  margin: 0 44px 0 0;
+}
+.documentation--item:nth-child(3n+3) {
+  margin-right: 0;
+}
+.documentation--item .documentation-version--dropdown {
+  width: 86.5%;
+}
+.documentation--item .documentation-version--dropdown p {
+  display: inline-block;
+}
+.documentation--item .documentation-version--dropdown .current-version--icon, .documentation--item .documentation-version--dropdown .pre-release-version--icon {
+  background-image: url("../img/iconsprite.png");
+  display: inline-block;
+  height: 13px;
+  vertical-align: top;
+  margin: 2px 0 0 6px;
+}
+.documentation--item .documentation-version--dropdown .current-version--icon {
+  background-position: -284px -520px;
+  width: 42px;
+}
+.documentation--item .documentation-version--dropdown .pre-release-version--icon {
+  background-position: -344px -520px;
+  width: 23px;
+}
