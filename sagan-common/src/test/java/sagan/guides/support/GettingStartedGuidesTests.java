@@ -95,7 +95,10 @@ public class GettingStartedGuidesTests {
         given(org.getMarkdownFileAsHtml(matches(SIDEBAR))).willReturn(SIDEBAR_CONTENT);
         given(org.getRepoInfo(anyString())).willReturn(REPO_INFO);
         GettingStartedGuide guide = gsGuides.find(GUIDE_ID);
-        assertThat(guide.getSidebar(), is(SIDEBAR_CONTENT));
+        assertThat(guide.getSidebar(), is("<div class='right-pane-widget--container'>\n" +
+                "<div class='related_resources'>\n" +
+                SIDEBAR_CONTENT + "</div>\n" +
+                "</div>"));
     }
 
     @SuppressWarnings("unchecked")
