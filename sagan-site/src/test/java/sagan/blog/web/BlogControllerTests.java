@@ -1,11 +1,13 @@
 package sagan.blog.web;
 
+import org.junit.After;
 import sagan.blog.Post;
 import sagan.blog.service.BlogService;
 import sagan.blog.view.PostViewFactory;
 import sagan.util.service.DateService;
 
 import java.util.Collections;
+import java.util.Locale;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +32,8 @@ public class BlogControllerTests {
     private BlogService blogService;
     private BlogController blogController;
 
+    private Locale defaultLocale;
+
     private ExtendedModelMap model = new ExtendedModelMap();
 
     @Before
@@ -43,6 +47,14 @@ public class BlogControllerTests {
                 page);
 
         blogController = new BlogController(blogService, postViewFactory);
+
+        defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+    }
+
+    @After
+    public void tearDown() {
+        Locale.setDefault(defaultLocale);
     }
 
     @Test
