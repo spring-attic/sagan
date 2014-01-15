@@ -124,6 +124,11 @@ public class RewriteTests {
         validateTemporaryRedirect("http://spring.io/gplus", "https://plus.google.com/+springframework/");
     }
 
+    @Test
+    public void linkedinIsRedirected() throws Exception {
+        validateTemporaryRedirect("http://spring.io/linkedin", "http://www.linkedin.com/groups/Spring-Users-46964");
+    }
+
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,
             ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);
