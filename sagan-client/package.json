@@ -1,0 +1,34 @@
+{
+  "name": "spring.io",
+  "description": "node.js packages for spring.io UI.",
+  "dependencies": {
+    "cram": "~0",
+    "grunt-cli": "~0.1.11",
+    "grunt": "~0.4.2",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-bower-task": "~0.3",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-copy": "~0.5.0"
+  },
+  "devDependencies": {
+    "when": "~2",
+    "buster": "~0.7",
+    "bower": "~1",
+    "jshint": "~2.1",
+    "wd": "~0.2",
+    "phantomjs": "~1"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "npm run cram && grunt optimize",
+    "dump": "npm run cram && grunt dump",
+    "cram": "node node_modules/cram src/run.js --output build/tmp/static/lib/curl/src/curl.js --loader ./src/lib/curl/src/curl.js --include curl/loader/legacy --include curl/loader/cjsm11",
+    "test": "jshint . && buster-test -c test/unit/buster.js",
+    "phantom": "buster-test -c test/scenario/buster.js -g scenario-phantom",
+    "firefox": "buster-test -c test/scenario/buster.js -g scenario-firefox",
+    "scenario": "buster-test -c test/scenario/buster.js -g scenario",
+    "prepublish": "grunt"
+  }
+}
