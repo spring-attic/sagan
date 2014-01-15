@@ -1,23 +1,20 @@
 package sagan.guides.support;
 
-import org.asciidoctor.Attributes;
+import org.apache.commons.lang.WordUtils;
+import org.asciidoctor.*;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.yaml.snakeyaml.Yaml;
 import sagan.util.service.github.GitHubClient;
 import sagan.util.service.github.Readme;
 import sagan.util.service.github.RepoContent;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
-import org.asciidoctor.Asciidoctor;
-import org.asciidoctor.OptionsBuilder;
-import org.asciidoctor.SafeMode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,29 +28,34 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Repository representing the GitHub organization for guide repositories.
+ * Repository representing the GitHub organization (or user account) that contains guide repositories.
  * 
  * @author Chris Beams
  */
 @Component
 class GuideOrganization {
 
-    private static final String REPO_BASE_PATH = "/repos/{org}/{repo}";
+    private static final String REPO_BASE_PATH = "/repos/{name}/{repo}";
     private static final String REPO_CONTENTS_PATH = REPO_BASE_PATH + "/contents";
 
+    private final String type;
     private final GitHubClient gitHub;
     private final String name;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+    private final Yaml yaml = new Yaml();
 
     @Autowired
-    public GuideOrganization(@Value("${github.org.name:spring-guides}") String name, GitHubClient gitHub) {
+    public GuideOrganization(@Value("${github.guides.owner.name}") String name,
+                             @Value("${github.guides.owner.type}") String type,
+                             GitHubClient gitHub) {
         this.name = name;
+        this.type = type;
         this.gitHub = gitHub;
     }
 
     /**
-     * The name of this GitHub organization.
+     * The name of the GitHub organization or user that 'owns' guides.
      */
     public String getName() {
         return name;
@@ -69,8 +71,13 @@ class GuideOrganization {
         }
     }
 
-    public String getAsciiDocFileAsHtml(String path) {
-        String content = null;
+    public AsciidocGuide getAsciidocGuide(String path) {
+        final String htmlContent;
+        final Map<String, List<String>> frontMatter;
+        final HashSet<String> tags;
+        final HashSet<String> projects;
+        final String tableOfContents;
+        final Map<String, String> understandingDocs;
 
         byte[] download = gitHub.sendRequestForDownload(path);
 
@@ -103,9 +110,31 @@ class GuideOrganization {
             // Process the unzipped guide through asciidoctor, rendering HTML content
             Attributes attributes = new Attributes();
             attributes.setAllowUriRead(true);
-            content = asciidoctor.renderFile(
-                    new File(unzippedRoot.getAbsolutePath() + File.separator + "README.adoc"),
-                    OptionsBuilder.options().safe(SafeMode.SAFE).attributes(attributes));
+            attributes.setSkipFrontMatter(true);
+            File readmeAdocFile = new File(unzippedRoot.getAbsolutePath() + File.separator + "README.adoc");
+            String rawHtmlContent = asciidoctor.renderFile(
+                    readmeAdocFile,
+                    OptionsBuilder.options().safe(SafeMode.SAFE).attributes(attributes).headerFooter(true));
+
+            Document doc = Jsoup.parse(rawHtmlContent);
+
+            htmlContent = doc.select("#content").html();
+            frontMatter = parseFrontMatter(readmeAdocFile);
+
+            if (frontMatter.containsKey("tags")) {
+                tags = new HashSet<String>(frontMatter.get("tags"));
+            } else {
+                tags = new HashSet<String>(Arrays.asList(new String[0]));
+            }
+
+            if (frontMatter.containsKey("projects")) {
+                projects = new HashSet<String>(frontMatter.get("projects"));
+            } else {
+                projects = new HashSet<String>(Arrays.asList(new String[0]));
+            }
+
+            tableOfContents = findTableOfContents(doc);
+            understandingDocs = findUnderstandingLinks(doc);
 
             // Delete the zipball and the unpacked content
             FileSystemUtils.deleteRecursively(zipball);
@@ -114,7 +143,60 @@ class GuideOrganization {
             throw new IllegalStateException("Could not create temp file for source: " + tempFilePrefix);
         }
 
-        return content;
+        return new AsciidocGuide(htmlContent, tags, projects, tableOfContents, understandingDocs);
+    }
+
+    /**
+     * Parse front-matter
+     * @param readme asciidoctor file
+     * @return set of categories
+     * @throws IOException
+     */
+    private Map<String, List<String>> parseFrontMatter(File readme) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(readme));
+        String frontMatter = "";
+        String line = reader.readLine();
+        if (line.startsWith("---")) {
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("---")) {
+                    break;
+                } else {
+                    frontMatter += line + "\n";
+                }
+            }
+           return (Map) yaml.load(frontMatter);
+        }
+        return new HashMap<>();
+    }
+
+    /**
+     * Extract top level table-of-content entries, and discard lower level links
+     * @param doc
+     * @return HTML of the top tier table of content entries
+     */
+    private String findTableOfContents(Document doc) {
+        Elements toc = doc.select("div#toc > ul.sectlevel1");
+        for (Element subsection : toc.select("li > ul.sectlevel2")) {
+            subsection.parent().remove();
+        }
+        return toc.toString();
+    }
+
+    /**
+     * Scan document for links to understanding docs
+     * @param doc
+     * @return map of understanding links in the form of (href -> display text)
+     */
+    private Map<String, String> findUnderstandingLinks(Document doc) {
+        Map<String, String> understandingDocs = new HashMap<>();
+        Elements elements = doc.select("a[href]");
+        for (Element element : elements) {
+            String href = element.attr("href");
+            if (!href.equals("") && href.toLowerCase().contains("understanding")) {
+                understandingDocs.put(href, WordUtils.capitalize(element.text()));
+            }
+        }
+        return understandingDocs;
     }
 
     public String getMarkdownFileAsHtml(String path) {
@@ -132,7 +214,7 @@ class GuideOrganization {
     }
 
     public GitHubRepo[] findAllRepositories() {
-        String json = gitHub.sendRequestForJson("/orgs/{org}/repos?per_page=100", name);
+        String json = gitHub.sendRequestForJson("/{type}/{name}/repos?per_page=100", type, name);
 
         try {
             return objectMapper.readValue(json, GitHubRepo[].class);
