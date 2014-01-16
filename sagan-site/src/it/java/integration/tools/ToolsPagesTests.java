@@ -58,11 +58,14 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
         assertThat(document.select("h1").text(), equalTo("Spring Tool Suite™ Downloads"));
-        assertThat(document.text(), containsString("STS 3.3.0.RELEASE"));
+        assertThat(document.select(".ga--release h2.tool-versions--version").text(), allOf(containsString("STS"),
+                containsString("RELEASE")));
         assertThat(document.select(".platform h3").text(), containsString("Windows"));
 
-        assertThat(document.select(".ga--release .item--dropdown a").attr("href"),
-                containsString("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
+        assertThat(document.select(".ga--release .item--dropdown a").attr("href"), allOf(
+                containsString("http://download.springsource.com/release/STS/"),
+                containsString("spring-tool-suite"),
+                containsString("win32-installer.exe")));
     }
 
     @Test
@@ -73,11 +76,14 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 .andReturn();
 
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
-        assertThat(document.text(), containsString("STS 3.3.0.M2"));
+        assertThat(document.select(".milestone--release h2.tool-versions--version").text(), allOf(containsString("STS"),
+                containsString(".M")));
 
         assertThat(
-                document.select(".milestone--release .item--dropdown a").attr("href"),
-                containsString("milestone/STS/3.3.0.M2/dist/e3.8/spring-tool-suite-3.3.0.M2-e3.8.2-win32-installer.exe"));
+                document.select(".milestone--release .item--dropdown a").attr("href"), allOf(
+                containsString("http://download.springsource.com/milestone/STS/"),
+                containsString("spring-tool-suite"),
+                containsString("win32-installer.exe")));
     }
 
     @Test
@@ -91,11 +97,15 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 .andReturn();
 
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
-        assertThat(document.text(), not(containsString("STS 3.3.0.M2")));
+        assertThat(document.select(".milestone--release h2.tool-versions--version").text(),
+                not(allOf(containsString("STS"), containsString(".M"))));
 
         assertThat(
                 document.select(".milestone--release .item--dropdown a").attr("href"),
-                not(containsString("milestone/STS/3.3.0.M2/dist/e3.8/spring-tool-suite-3.3.0.M2-e3.8.2-win32-installer.exe")));
+                not(allOf(
+                        containsString("http://download.springsource.com/milestone/STS/"),
+                        containsString("spring-tool-suite"),
+                        containsString("win32-installer.exe"))));
 
     }
 
@@ -115,12 +125,16 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
         assertThat(document.select("h1").text(), equalTo("Groovy/Grails Tool Suite™ Downloads"));
-        assertThat(document.text(), containsString("GGTS 3.3.0.RELEASE"));
+        assertThat(document.select(".ga--release h2.tool-versions--version").text(),
+                allOf(containsString("GGTS"), containsString("RELEASE")));
         assertThat(document.select(".platform h3").text(), containsString("Windows"));
 
         assertThat(
                 document.select(".ga--release .item--dropdown a").attr("href"),
-                containsString("release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe"));
+                allOf(
+                        containsString("http://download.springsource.com/release/STS/"),
+                        containsString("groovy-grails-tool-suite"),
+                        containsString("win32-installer.exe")));
     }
 
     @Test
@@ -131,11 +145,14 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 .andReturn();
 
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
-        assertThat(document.text(), containsString("GGTS 3.3.0.M2"));
+        assertThat(document.select(".milestone--release h2.tool-versions--version").text(),
+                allOf(containsString("GGTS"), containsString(".M")));
 
         assertThat(
                 document.select(".milestone--release .item--dropdown a").attr("href"),
-                containsString("milestone/STS/3.3.0.M2/dist/e3.8/groovy-grails-tool-suite-3.3.0.M2-e3.8.2-win32-installer.exe"));
+                allOf(containsString("http://download.springsource.com/milestone/STS/"),
+                        containsString("groovy-grails-tool-suite"),
+                        containsString("win32-installer.exe")));
     }
 
     @Test
@@ -149,11 +166,14 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 .andReturn();
 
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
-        assertThat(document.text(), not(containsString("GGTS 3.3.0.M2")));
+        assertThat(document.select(".milestone--release h2.tool-versions--version").text(),
+                not(allOf(containsString("GGTS"), containsString(".M"))));
 
         assertThat(
                 document.select(".milestone--release .item--dropdown a").attr("href"),
-                not(containsString("milestone/STS/3.3.0.M2/dist/e3.8/groovy-grails-tool-suite-3.3.0.M2-e3.8.2-win32-installer.exe")));
+                not(allOf(containsString("http://download.springsource.com/milestone/STS/"),
+                        containsString("groovy-grails-tool-suite"),
+                        containsString("win32-installer.exe"))));
     }
 
     @Test
