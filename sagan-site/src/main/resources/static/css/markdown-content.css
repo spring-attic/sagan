@@ -95,10 +95,6 @@ a[name="gs"], a[name="tutorials"] {
 .content-right-pane--container ul {
     margin: 0;
 }
-.content-right-pane--container ul.inline {
-    padding: 4px;
-    border-top: 1px solid white;
-}
 .content-right-pane--container ul li {
     line-height: 21px;
 }
@@ -107,11 +103,6 @@ a[name="gs"], a[name="tutorials"] {
 }
 .content-right-pane--container ul li:first-child {
     padding-bottom: 12px;
-}
-.content-right-pane--container ul.inline li {
-    border: 1px solid white;
-    padding: 4px;
-    margin: 4px;
 }
 .content-right-pane--container .btn-group {
     margin: 0 6.2%;
