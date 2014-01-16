@@ -1,6 +1,7 @@
-var Munchkin, baseUrl; // pre-existing globals
+/*exported sts_import*/
+/*global curl*/
+var Munchkin, baseUrl, sts_import; // pre-existing globals
 (function () {
-
     var cjsConfig = {
         loader: 'curl/loader/cjsm11'
     };
