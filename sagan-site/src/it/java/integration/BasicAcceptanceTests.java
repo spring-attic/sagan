@@ -85,7 +85,7 @@ public class BasicAcceptanceTests {
 
     @Test
     public void getStyleSheet() throws Exception {
-        ResponseEntity<String> response = doGet("/bootstrap/css/bootstrap.css");
+        ResponseEntity<String> response = doGet("/css/main.css");
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(response.getHeaders().getContentType().isCompatibleWith(MediaType.valueOf("text/css")));
     }
