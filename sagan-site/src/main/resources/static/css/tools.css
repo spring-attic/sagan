@@ -301,7 +301,7 @@
   vertical-align: top;
   margin: 40px 0 33px;
   width: 232px;
-  padding: 0 1.3545%;
+  padding: 0 10px;
 }
 .tool-versions--wrapper .tool-versions--container .platform:last-child {
   border-right: none;
