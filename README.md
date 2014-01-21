@@ -1,8 +1,8 @@
 ## Sagan: the spring.io site and reference application
 
-Welcome! The code in this repository is deployed and running right now at <spring.io>. The [blog][], the collection of [guides][], and most everything else you see there is implemented right here.
+Welcome! The code in this repository is deployed and running right now at [spring.io](http://spring.io). The [blog][], the collection of [guides][], and most everything else you see there is implemented right here.
 
-In addition to the practical purpose of powering Spring's home on the web, this project is designed to serve as a *reference application* – a resource that developers can use to see how the Spring [team][] have used Spring to implement a real-world app with a few interesting requirements. You can learn more about the background and motivation behind the Sagan project on the wiki's [about page][].
+In addition to the practical purpose of powering Spring's home on the web, this project is designed to serve as a *reference application*–a resource that developers can use to see how the Spring [team][] have used Spring to implement a real-world app with a few interesting requirements. You can learn more about the background and motivation behind the Sagan project on the wiki's [about page][].
 
 ## Getting started
 
@@ -20,13 +20,7 @@ If you have any questions, feedback, or feature requests, don't hesitate to [add
 
 ## Licensing
 
-The Sagan application is released under the TODO:TBD license. See [LICENSING.txt](LICENSING.txt) for details.
-
-----
-
-## About the contents of this directory
-
-TODO
+The Sagan application is released under the TODO:TBD license. See [LICENSE.txt](LICENSE.txt) for details.
 
 [blog]: http://spring.io/blog
 [guides]: http://spring.io/guides
