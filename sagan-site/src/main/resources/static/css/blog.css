@@ -161,6 +161,47 @@
   line-height: 20px;
 }
 
+/*
+    Fix styling of tables in GitHub Markdown-generated
+    HTML to match other spring.io tables
+*/
+.blog--container .blog--post table {
+    width: 100%;
+}
+
+.blog--container .blog--post td,
+.blog--container .blog--post th {
+    padding: 8px;
+    line-height: 20px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.blog--container .blog--post th {
+    text-align: left;
+}
+
+.blog--container .blog--post td {
+    border-top: 1px solid #ddd;
+}
+
+.blog--container .blog--post tr > td:first-child {
+    border-left: 1px solid #ccc
+}
+
+.blog--container .blog--post tr > td:last-child {
+    border-right: 1px solid #ccc
+}
+
+.blog--container .blog--post tr:last-child {
+    border-bottom: 1px solid #ccc
+}
+
+.blog--container .blog--post tr:nth-child(odd) > td {
+    background-color: #f9f9f9
+}
+/* end table fix */
+
 .blog-comments--wrapper {
   border-top: 1px solid #cccccc;
   padding-top: 30px;
