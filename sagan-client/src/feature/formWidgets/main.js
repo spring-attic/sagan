@@ -1,5 +1,9 @@
 var $ = require('jquery');
 
+// This implicitly makes $.fn.datetimepicker available
+// Unfortunate, but it's the jquery way.
+require('bootstrap-datetimepicker');
+
 /**
  * The composition plan for pages that use the data-form-widgets feature
  * attribute for decorating forms with jQuery plugins.
