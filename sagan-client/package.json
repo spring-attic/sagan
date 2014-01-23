@@ -2,7 +2,7 @@
   "name": "spring.io",
   "description": "node.js packages for spring.io UI.",
   "dependencies": {
-    "cram": "~0",
+    "cram": "~0.7.12",
     "grunt-cli": "~0.1.11",
     "grunt": "~0.4.2",
     "grunt-contrib-cssmin": "~0.7.0",
