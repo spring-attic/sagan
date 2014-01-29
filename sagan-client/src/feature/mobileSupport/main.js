@@ -41,9 +41,15 @@ function handleOpenNavDrawer() {
 
     $('#scrim')
         .addClass('js-show js-open-mobile-nav')
-        .click(function() {
-            $('.navigation-drawer--container').removeClass('js-open');
-            $('.mobile-nav, .body--container, .homepage--body').removeClass('js-slide-right');
-            $('.viewport').removeClass('constrained');
-        });
+        .on('click', hideMobileNavDrawer);
+}
+
+function hideMobileNavDrawer() {
+    $('#scrim')
+        .removeClass('js-show js-open-mobile-nav')
+        .off('click', hideMobileNavDrawer);
+
+    $('.navigation-drawer--container').removeClass('js-open');
+    $('.mobile-nav, .body--container, .homepage--body').removeClass('js-slide-right');
+    $('.viewport').removeClass('constrained');
 }
