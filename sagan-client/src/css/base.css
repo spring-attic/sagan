@@ -688,7 +688,7 @@ input.floating-input:focus {
 .item--dropdown .item--half-column {
   display: inline-block;
   vertical-align: top;
-  width: 50%;
+  width: 48%;
 }
 .item--dropdown .item--half-column:first-child .item--body-title, .item--dropdown .item--half-column:first-child .item--body--version {
   padding-right: 15px;
