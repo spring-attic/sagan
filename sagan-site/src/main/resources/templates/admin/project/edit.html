@@ -39,6 +39,7 @@
                   <thead>
                     <tr>
                         <td>Delete?</td>
+                        <td>Artifact ID</td>
                         <td>Version</td>
                         <td>Current</td>
                         <td>Reference URL</td>
@@ -48,6 +49,7 @@
                   <tbody>
                       <tr th:each="release,releaseStat : ${project.projectReleases}">
                           <td><input type="checkbox" name="releasesToDelete" th:value="*{projectReleases[__${releaseStat.index}__].version}"></td>
+                          <td><input type="text" th:field="*{projectReleases[__${releaseStat.index}__].artifactId}" /></td>
                           <td><input type="text" th:field="*{projectReleases[__${releaseStat.index}__].version}" /></td>
                           <td><input type="checkbox" th:field="*{projectReleases[__${releaseStat.index}__].current}" value="true"/></td>
                           <td><input type="text" th:field="*{projectReleases[__${releaseStat.index}__].refDocUrl}" /></td>
@@ -56,6 +58,7 @@
                       <tr th:with="size=${project.projectReleases.size()}">
                           <td></td>
                           <td><input type="text" th:field="*{projectReleases[__${size}__].version}" /></td>
+                          <td><input type="text" th:field="*{projectReleases[__${size}__].artifactId}" /></td>
                           <td><input type="checkbox" th:field="*{projectReleases[__${size}__].current}" value="true"/></td>
                           <td><input type="text" th:field="*{projectReleases[__${size}__].refDocUrl}" /></td>
                           <td><input type="text" th:field="*{projectReleases[__${size}__].apiDocUrl}" /></td>
