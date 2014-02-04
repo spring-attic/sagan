@@ -146,7 +146,7 @@ public class CachedRestClientTests {
         String eclipse = Fixtures.load("/fixtures/tools/eclipse.xml");
         given(
                 restTemplate.getForObject(
-                        "http://download.springsource.com/release/STS/eclipse.xml",
+                        "http://dist.springsource.com/release/STS/eclipse.xml",
                         String.class)).willReturn(eclipse);
 
         mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());
