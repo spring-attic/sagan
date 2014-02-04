@@ -54,7 +54,7 @@ public class ToolsService {
 
     public EclipseDownloads getEclipseDownloads() throws Exception {
         String responseXml =
-                restClient.get(restTemplate, "http://download.springsource.com/release/STS/eclipse.xml",
+                restClient.get(restTemplate, "http://dist.springsource.com/release/STS/eclipse.xml",
                         String.class);
         EclipseXml eclipseXml = serializer.read(EclipseXml.class, responseXml);
         return new EclipseDownloadsXmlConverter().convert(eclipseXml);
