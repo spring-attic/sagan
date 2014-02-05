@@ -4,7 +4,7 @@ gradle.rootProject.allprojects { project ->
 }
 
 tasks.addRule('Pattern: deploy: Deploys the project to a Cloud Foundry space.') { String taskName ->
-    if (taskName.startsWith('deploy')) {
+    if (taskName.equals('deploy')) {
         project.task([dependsOn: 'build'], taskName) {
             // ensure the indexer is always deployed after the site, because if the
             // site fails to deploy, we don't want the indexer to deploy at all
@@ -28,10 +28,16 @@ task([dependsOn: ['cf-deploy', 'cf-swap-deployed']], "deployApp") {
 task([dependsOn: 'cf-push'], "pushApp") {
 }
 
+def saganEnvScript = file("${System.getProperty("user.home")}/.gradle/sagan-env.gradle")
+if (saganEnvScript.exists()) {
+    println "Applying environment settings from ${saganEnvScript.path}"
+    apply from: saganEnvScript
+}
+
 apply plugin: 'cloudfoundry'
 
 cloudfoundry {
-    target = "http://api.run.pivotal.io"
+    target = "https://api.run.pivotal.io"
     organization = "spring.io"
 
     file = file("${jar.archivePath}")
@@ -42,24 +48,36 @@ cloudfoundry {
     healthCheckTimeout = 180
 
     versions = ['-blue', '-green']
-
-    services {
-        'sagan-db' {
-            label = 'elephantsql'
-            plan = 'hippo' // TODO: make conditional (it's panda in prod)
-            bind = true
-        }
-        'newrelic' {
-            label = 'newrelic'
-            plan = 'standard'
-            bind = true
-        }
-    }
 }
 
 if (project.name == 'sagan-site') {
     cloudfoundry {
         application = 'sagan' // instead of 'sagan-site'
+    }
+}
+
+// These deployment properties can be set on the command line with "-P" options, in "gradle.properties",
+// or in "~/.gradle/sagan-env.gradle".
+
+if (project.hasProperty('adminPassword') && project.hasProperty('elasticsearchEndpoint') &&
+    project.hasProperty('githubClientId') && project.hasProperty('githubClientSecret') &&
+    project.hasProperty('webhookAccessToken')) {
+
+    cloudfoundry {
+        env << [
+            ADMIN_PASSWORD: adminPassword,
+            ELASTICSEARCH_ENDPOINT: elasticsearchEndpoint,
+        ]
+    }
+
+    if (project.name == 'sagan-site') {
+        cloudfoundry {
+            env << [
+                GITHUB_CLIENT_ID: githubClientId,
+                GITHUB_CLIENT_SECRET: githubClientSecret,
+                WEBHOOK_ACCESS_TOKEN: webhookAccessToken
+            ]
+        }
     }
 }
 
@@ -73,6 +91,27 @@ if (project.hasProperty('staging')) {
     cloudfoundry {
         space = 'staging'
         host = "$application-${space}"
+
+        env << [
+            SPRING_PROFILES_ACTIVE: "${space}",
+            NEW_RELIC_APP_NAME: "sagan-blue;sagan",
+            ELASTICSEARCH_INDEX: "sagan-${space}"
+        ]
+
+        services {
+            'sagan-db' {
+                label = 'elephantsql'
+                provider = 'elephantsql'
+                plan = 'hippo'
+                version = 'n/a'
+            }
+            'newrelic' {
+                label = 'newrelic'
+                provider = 'newrelic'
+                plan = 'standard'
+                version = 'n/a'
+            }
+        }
     }
 
     if (project.name == 'sagan-site') {
@@ -86,6 +125,27 @@ if (project.hasProperty('prod')) {
     cloudfoundry {
         space = 'production'
         host = "$application-${space}"
+
+        env << [
+            SPRING_PROFILES_ACTIVE: "${space}",
+            NEW_RELIC_APP_NAME: "sagan-blue;sagan",
+            ELASTICSEARCH_INDEX: "sagan-${space}"
+        ]
+
+        services {
+            'sagan-db' {
+                label = 'elephantsql'
+                provider = 'elephantsql'
+                plan = 'panda'
+                version = 'n/a'
+            }
+            'newrelic' {
+                label = 'newrelic'
+                provider = 'newrelic'
+                plan = 'standard'
+                version = 'n/a'
+            }
+        }
     }
 
     if (project.name == 'sagan-site') {
