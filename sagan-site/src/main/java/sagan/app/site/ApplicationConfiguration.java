@@ -1,5 +1,8 @@
 package sagan.app.site;
 
+import org.h2.server.web.WebServlet;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.context.annotation.Profile;
 import sagan.blog.web.feed.BlogPostAtomViewer;
 import sagan.guides.support.GettingStartedGuides;
 import sagan.util.service.CachedRestClient;
@@ -114,6 +117,14 @@ public class ApplicationConfiguration {
         reg.addInitParameter("statusPath", "/redirect");
         reg.addInitParameter("statusEnabledOnHosts", "*");
         reg.addInitParameter("logLevel", "WARN");
+        return reg;
+    }
+
+    @Bean
+    @Profile("development")
+    public ServletRegistrationBean h2Console() {
+        ServletRegistrationBean reg = new ServletRegistrationBean(new WebServlet(), "/console/*");
+        reg.setLoadOnStartup(1);
         return reg;
     }
 
