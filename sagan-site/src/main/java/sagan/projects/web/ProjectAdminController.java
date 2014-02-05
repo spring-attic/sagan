@@ -107,7 +107,6 @@ public class ProjectAdminController {
                 iReleases.remove();
             }
             release.setGroupId(groupId);
-            release.setArtifactId(project.getId());
             String version = release.getVersion();
             release.setApiDocUrl(release.getApiDocUrl().replaceAll(VERSION_PATTERN,version));
             release.setRefDocUrl(release.getRefDocUrl().replaceAll(VERSION_PATTERN,version));
