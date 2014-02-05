@@ -42,6 +42,19 @@ cloudfoundry {
     healthCheckTimeout = 180
 
     versions = ['-blue', '-green']
+
+    services {
+        'sagan-db' {
+            label = 'elephantsql'
+            plan = 'hippo' // TODO: make conditional (it's panda in prod)
+            bind = true
+        }
+        'newrelic' {
+            label = 'newrelic'
+            plan = 'standard'
+            bind = true
+        }
+    }
 }
 
 if (project.name == 'sagan-site') {
