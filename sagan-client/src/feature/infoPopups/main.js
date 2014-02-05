@@ -1,5 +1,8 @@
 var $ = require('jquery');
 var openItemPopupsTrigger = '.js-item--open-dropdown';
+var itemPopupWrapper = '.js-item-dropdown--wrapper';
+var itemPopupOpen = 'js-open';
+var itemPopupWrapperOpen = itemPopupWrapper + '.' + itemPopupOpen;
 
 module.exports = function initInfoPopups() {
 
@@ -18,22 +21,38 @@ module.exports = function initInfoPopups() {
     }
 };
 
-function handleItemPopup() {
-    var dropdownItem = $(this).parents('.js-item-dropdown--wrapper');
-    var documentHeight = $(document).height();
-    var headerHeight = $('header').outerHeight();
-    var footerHeight = $('footer').outerHeight();
-    var scrimHeight = documentHeight - headerHeight - footerHeight;
+/**
+ * Show/hide the item popup whose toggle was clicked
+ * @param {Event} e
+ */
+function handleItemPopup(e) {
+    // Enabling the document-level click trap within this event handler
+    // causes disableClickTrap to be executed as part of the same event turn,
+    // thus *hiding* (via hideAll) the popup that was just shown.
+    // Stopping propagation prevents the document-level click handler
+    // from executing immediately after this handler.
+    e.stopImmediatePropagation();
 
-    dropdownItem.toggleClass('js-open');
-    dropdownItem.siblings().removeClass('js-open');
-    $(this).parents('.js-item-dropdown-widget--wrapper').siblings().find('.js-item-dropdown--wrapper').removeClass('js-open');
+    var target = $(this).parents(itemPopupWrapper);
 
-    $('#scrim')
-        .addClass('js-show')
-        .css({ height: scrimHeight, top: headerHeight})
-        .click(function () {
-            $('.js-item-dropdown--wrapper').removeClass('js-open');
-            $(this).removeClass('js-show');
-        });
+    if(target.hasClass(itemPopupOpen)) {
+        target.removeClass(itemPopupOpen);
+    } else {
+        hideAll();
+        enableClickTrap();
+        target.addClass(itemPopupOpen);
+    }
+}
+
+function enableClickTrap() {
+    $(document).on('click', disableClickTrap);
+}
+
+function disableClickTrap() {
+    $(document).off('click', disableClickTrap);
+    hideAll();
+}
+
+function hideAll() {
+    $(itemPopupWrapperOpen).removeClass(itemPopupOpen);
 }
