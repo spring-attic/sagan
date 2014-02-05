@@ -19,7 +19,7 @@ dependencies {
 
     // datasource and connection pool dependencies
     runtime 'org.postgresql:postgresql:9.2-1002-jdbc4'
-    runtime 'com.h2database:h2:1.3.173'
+    compile 'com.h2database:h2:1.3.173'
     compile 'org.apache.tomcat:tomcat-jdbc:7.0.47'
 
     // for use in on-the-fly database setup and migrations
