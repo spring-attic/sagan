@@ -47,7 +47,7 @@ cloudfoundry {
     instances = 4
     healthCheckTimeout = 180
 
-    versions = ['-blue', '-green']
+    variants = ['-blue', '-green']
 }
 
 if (project.name == 'sagan-site') {
