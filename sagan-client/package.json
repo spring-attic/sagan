@@ -24,7 +24,7 @@
   "scripts": {
     "build": "npm run cram && grunt optimize",
     "dump": "npm run cram && grunt dump",
-    "cram": "node node_modules/cram src/run.js --output build/tmp/static/lib/curl/src/curl.js --loader ./src/lib/curl/src/curl.js --include curl/loader/legacy --include curl/loader/cjsm11",
+    "cram": "node node_modules/cram src/run.js cram-config.json --output build/tmp/static/lib/curl/src/curl.js --loader ./src/lib/curl/src/curl.js --include curl/loader/legacy --include curl/loader/cjsm11",
     "test": "jshint . && buster-test -c test/unit/buster.js",
     "phantom": "buster-test -c test/scenario/buster.js -g scenario-phantom",
     "firefox": "buster-test -c test/scenario/buster.js -g scenario-firefox",

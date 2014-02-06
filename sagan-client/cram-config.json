@@ -1,0 +1,5 @@
+{
+    "excludes": {
+        "leaflet": 1
+    }
+}
