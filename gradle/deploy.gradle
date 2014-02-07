@@ -121,7 +121,7 @@ if (project.hasProperty('staging')) {
     }
 }
 
-if (project.hasProperty('prod')) {
+if (project.hasProperty('production')) {
     cloudfoundry {
         space = 'production'
         host = "$application-${space}"
