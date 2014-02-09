@@ -58,6 +58,13 @@ public class RewriteTests {
     }
 
     @Test
+    public void supportRenamedMongodbGSGuide() throws ServletException, IOException, URISyntaxException {
+        validatePermanentRedirect("/guides/gs/accessing-data-mongo", "/guides/gs/accessing-data-mongodb/");
+        validatePermanentRedirect("/guides/gs/accessing-data-mongo/", "/guides/gs/accessing-data-mongodb/");
+        validateOk("/guides/gs/accessing-data-mongodb/");
+    }
+
+    @Test
     public void gsgGuidesShouldAlwaysHaveTrailingSlash() throws ServletException, IOException, URISyntaxException {
         validatePermanentRedirect("/guides/gs/guide-name", "/guides/gs/guide-name/");
         validateOk("/guides/gs/guide-name/");

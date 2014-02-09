@@ -10,6 +10,12 @@
 -->
 <urlrewrite use-query-string="true">
     <rule>
+        <name>Support renamed mongodb GS guide</name>
+        <note>https://github.com/spring-io/sagan/issues/249</note>
+        <from>^/guides/gs/accessing-data-mongo/?$</from>
+        <to type="permanent-redirect" last="true">/guides/gs/accessing-data-mongodb/</to>
+    </rule>
+    <rule>
         <name>GSG trailing slash</name>
         <note>https://www.pivotaltracker.com/story/show/52214321</note>
         <from>/guides/gs/([^/]+)$</from>
