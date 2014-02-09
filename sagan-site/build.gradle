@@ -14,6 +14,12 @@ springBoot {
     mainClass = mainClassName
 }
 
+// configure the CreateStartScripts task provided by the 'application' plugin
+// http://www.gradle.org/docs/current/dsl/org.gradle.api.tasks.application.CreateStartScripts.html
+startScripts {
+    defaultJvmOpts += "-XX:MaxPermSize=128M"
+}
+
 dependencies {
     compile project(':sagan-common')
 
