@@ -10,7 +10,6 @@ target
 build
 bin
 dependency-reduced-pom.xml
-src/main/resources/git.properties
 Gemfile.lock
 .DS_Store
 atlassian-ide-plugin.xml
