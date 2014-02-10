@@ -11,6 +11,7 @@ buildscript {
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${vSpringBoot}"
         classpath 'org.cloudfoundry:cf-gradle-plugin:1.0.2'
+        classpath 'org.ajoberstar:gradle-git:0.6.3'
     }
 }
 
@@ -65,3 +66,19 @@ subprojects {
     }
 }
 
+configure([ project(':sagan-site'), project(':sagan-indexer') ]) {
+    // Populate git commit and branch metadata at http://spring.io/info.
+    // See:
+    //   http://projects.spring.io/spring-boot/docs/spring-boot-actuator/docs/Features.html ("Info Endpoint")
+    //   http://ajoberstar.org/gradle-git/docs/groovydoc/org/ajoberstar/gradle/git/tasks/GitBranchList.html
+    //   https://github.com/ajoberstar/gradle-git
+    task gitProperties(type: org.ajoberstar.gradle.git.tasks.GitBranchList) << {
+        Properties p = new Properties()
+        p['git.branch'] = workingBranch.name
+        p['git.commit.id'] = workingBranch.commit.id
+        p['git.commit.time'] = "N/A"
+        p.store(new FileWriter(file("${sourceSets.main.output.resourcesDir}/git.properties")),
+            "Written by the `processResources` Gradle build task")
+    }
+    processResources.finalizedBy gitProperties
+}
