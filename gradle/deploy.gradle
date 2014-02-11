@@ -22,6 +22,7 @@ tasks.addRule('Pattern: deploy: Deploys the project to a Cloud Foundry space.') 
 
 def saganEnvScript = file("${System.getProperty("user.home")}/.gradle/sagan-env.gradle")
 if (saganEnvScript.exists()) {
+    logger.info("Applying environment settings from ${saganEnvScript.path} to ${project.name}")
     apply from: saganEnvScript
 }
 
