@@ -3,20 +3,14 @@ gradle.rootProject.allprojects { project ->
     checkTasks.addAll(project.tasks.findAll { it.name == 'build' })
 }
 
-tasks.addRule('Pattern: deploy: Deploys the project to a Cloud Foundry space.') { String taskName ->
-    if (taskName.equals('deploy')) {
-        project.task([dependsOn: 'build'], taskName) { task ->
-            mustRunAfter checkTasks
+task deploy(dependsOn: 'build') {
+    description = 'Deploys the project to a Cloud Foundry space (specified with -P<spacename>)'
+    mustRunAfter checkTasks
 
-            if (project.name == 'sagan-site') {
-                task.dependsOn 'cf-deploy', 'cf-swap-deployed'
-            } else {
-                task.dependsOn 'cf-push'
-                // ensure the indexer is always deployed after the site, because if the
-                // site fails to deploy, we don't want the indexer to deploy at all
-                task.mustRunAfter project(':sagan-site').tasks[taskName]
-            }
-        }
+    if (project.name == 'sagan-site') {
+        dependsOn 'cf-deploy', 'cf-swap-deployed'
+    } else {
+        dependsOn 'cf-push'
     }
 }
 
