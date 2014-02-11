@@ -47,26 +47,61 @@ if (project.name == siteProject.name) {
 }
 
 // These deployment properties can be set on the command line with "-P" options, in "gradle.properties",
-// or in "~/.gradle/sagan-env.gradle".
+// or in "~/.gradle/sagan-env.gradle". All are required if the respective 'cf-login' / 'deploy' tasks
+// have been invoked.
 
-if (project.hasProperty('adminPassword') && project.hasProperty('elasticsearchEndpoint') &&
-    project.hasProperty('githubClientId') && project.hasProperty('githubClientSecret') &&
-    project.hasProperty('webhookAccessToken')) {
+def reqLoginVars = [ 'cf.username', 'cf.password' ]
 
-    cloudfoundry {
-        env << [
-            ADMIN_PASSWORD: adminPassword,
-            ELASTICSEARCH_ENDPOINT: elasticsearchEndpoint,
-        ]
+def reqDeployVars = [
+    'adminPassword', 'elasticsearchEndpoint', 'githubClientId',
+    'githubClientSecret', 'webhookAccessToken'
+]
+
+gradle.taskGraph.whenReady {
+    if (gradle.taskGraph.allTasks.collect { it.name.endsWith(":cf-login") }.size() > 0) {
+        def missingVars = []
+        reqLoginVars.each { var ->
+            if (!project.hasProperty(var)) {
+                missingVars << var
+            }
+        }
+        if (missingVars.size() > 0) {
+            throw new InvalidUserDataException(
+                "Missing required variable(s) for the 'cf-login' task: ${missingVars}. " +
+                "Specify them with -Pkey=value or in ${saganEnvScript}");
+        }
     }
 
-    if (project.name == siteProject.name) {
+    if (gradle.taskGraph.hasTask(":${siteProject.name}:${deploy.name}")
+          || gradle.taskGraph.hasTask(":${indexerProject.name}:${deploy.name}")) {
+        def missingVars = []
+        reqDeployVars.each { var ->
+            if (!project.hasProperty(var)) {
+                missingVars << var
+            }
+        }
+        if (missingVars.size() > 0) {
+            throw new InvalidUserDataException(
+                "Missing required variable(s) for the 'deploy' task: ${missingVars}. " +
+                "Specify them with -Pkey=value or in ${saganEnvScript}");
+        }
+
+        // All required env vars are present. Populate the cloudfoundry environment with them.
         cloudfoundry {
             env << [
-                GITHUB_CLIENT_ID: githubClientId,
-                GITHUB_CLIENT_SECRET: githubClientSecret,
-                WEBHOOK_ACCESS_TOKEN: webhookAccessToken
+                ADMIN_PASSWORD: adminPassword,
+                ELASTICSEARCH_ENDPOINT: elasticsearchEndpoint,
             ]
+        }
+
+        if (project.name == siteProject.name) {
+            cloudfoundry {
+                env << [
+                    GITHUB_CLIENT_ID: githubClientId,
+                    GITHUB_CLIENT_SECRET: githubClientSecret,
+                    WEBHOOK_ACCESS_TOKEN: webhookAccessToken
+                ]
+            }
         }
     }
 }
