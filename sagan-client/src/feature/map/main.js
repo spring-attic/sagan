@@ -26,6 +26,8 @@ function initMap() {
 
     require(['leaflet'], function(leaflet) {
         $(function() {
+            // manually set image path since leaflet isn't loaded by a script tag
+            leaflet.Icon.Default.imagePath = '/lib/leaflet/dist/images';
             ready(leaflet);
         });
     });
@@ -105,7 +107,7 @@ function getTeamMemberIdMap(container) {
 
 function createMarker(leaflet, teamLocation, element) {
     var marker = leaflet.marker([teamLocation.latitude, teamLocation.longitude], {title: teamLocation.name});
-    marker.bindPopup(element.html());
+    return marker.bindPopup($(element).html());
 }
 
 function setMapView(leaflet, map, teamLocations, bounds) {
