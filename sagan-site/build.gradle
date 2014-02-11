@@ -29,7 +29,7 @@ dependencies {
     compile 'org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE'
     compile 'org.thymeleaf:thymeleaf:2.1.2.RELEASE'
     compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2'
-    compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute:1.2'
+    compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute:1.3'
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE'
 
     // nekohtml is required for thymeleaf's LEGACYHTML5 mode
