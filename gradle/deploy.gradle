@@ -3,15 +3,19 @@ gradle.rootProject.allprojects { project ->
     checkTasks.addAll(project.tasks.findAll { it.name == 'build' })
 }
 
+def siteProject = project(':sagan-site')
+def indexerProject = project(':sagan-indexer')
+
 task deploy(dependsOn: 'build') {
     description = 'Deploys the project to a Cloud Foundry space (specified with -P<spacename>)'
     mustRunAfter checkTasks
 
-    if (project.name == 'sagan-site') {
+    if (project.name == siteProject.name)
         dependsOn 'cf-deploy', 'cf-swap-deployed'
-    } else {
+    else if (project.name == indexerProject.name)
         dependsOn 'cf-push'
-    }
+    else
+        throw new IllegalArgumentException('Unknown project ${project.name}')
 }
 
 def saganEnvScript = file("${System.getProperty("user.home")}/.gradle/sagan-env.gradle")
@@ -36,7 +40,7 @@ cloudfoundry {
     variants = ['-blue', '-green']
 }
 
-if (project.name == 'sagan-site') {
+if (project.name == siteProject.name) {
     cloudfoundry {
         application = 'sagan' // instead of 'sagan-site'
     }
@@ -56,7 +60,7 @@ if (project.hasProperty('adminPassword') && project.hasProperty('elasticsearchEn
         ]
     }
 
-    if (project.name == 'sagan-site') {
+    if (project.name == siteProject.name) {
         cloudfoundry {
             env << [
                 GITHUB_CLIENT_ID: githubClientId,
@@ -100,7 +104,7 @@ if (project.hasProperty('staging')) {
         }
     }
 
-    if (project.name == 'sagan-site') {
+    if (project.name == siteProject.name) {
         cloudfoundry {
             uris = [ "${space}.spring.io" ]
         }
@@ -134,7 +138,7 @@ if (project.hasProperty('production')) {
         }
     }
 
-    if (project.name == 'sagan-site') {
+    if (project.name == siteProject.name) {
         cloudfoundry {
             uris = [ "spring.io", "www.spring.io" ]
         }
