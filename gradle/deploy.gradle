@@ -58,7 +58,8 @@ def reqDeployVars = [
 ]
 
 gradle.taskGraph.whenReady {
-    if (gradle.taskGraph.allTasks.collect { it.name.endsWith(":cf-login") }.size() > 0) {
+    if (gradle.taskGraph.hasTask(":${siteProject.name}:cf-login")
+          || gradle.taskGraph.hasTask(":${indexerProject.name}:cf-login")) {
         def missingVars = []
         reqLoginVars.each { var ->
             if (!project.hasProperty(var)) {
