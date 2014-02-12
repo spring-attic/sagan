@@ -21,20 +21,18 @@ springBoot {
 dependencies {
     compile project(':sagan-common')
 
-    compile "org.springframework.boot:spring-boot-starter-web:${vSpringBoot}"
-    compile "org.springframework.boot:spring-boot-starter-actuator:${vSpringBoot}"
-    compile "org.springframework.boot:spring-boot-starter-security:${vSpringBoot}"
-    compile "org.springframework.security:spring-security-acl:${vSpringSec}"
+    compile "org.springframework.boot:spring-boot-starter-web"
+	compile "org.apache.tomcat.embed:tomcat-embed-jasper" // until spring-boot #248 is fixed
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.springframework.security:spring-security-acl"
 
     // Thymeleaf is used as the template engine for serving HTML
-    // NOTE: versions below are intended to be in sync with spring-boot-dependencies pom @ ${vSpringBoot}
-    // e.g.: https://github.com/spring-projects/spring-boot/blob/v0.5.0.M6/spring-boot-dependencies/pom.xml
-    compile 'org.thymeleaf:thymeleaf-spring3:2.1.2.RELEASE'
-    compile 'org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE'
-    compile 'org.thymeleaf:thymeleaf:2.1.2.RELEASE'
-    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2'
+    compile 'org.thymeleaf:thymeleaf-spring4'
+    compile 'org.thymeleaf:thymeleaf'
+    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
     compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute:1.3'
-    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE'
+    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3'
 
     // nekohtml is required for thymeleaf's LEGACYHTML5 mode
     runtime 'net.sourceforge.nekohtml:nekohtml:1.9.15'
@@ -53,7 +51,7 @@ dependencies {
     compile 'org.tuckey:urlrewritefilter:4.0.3'
 
     // for use in mocking http interactions
-    testCompile "org.springframework:spring-test:${vSpringCore}"
+    testCompile "org.springframework:spring-test"
 
     // pick up common test utility classes
     testCompile project(':sagan-common').sourceSets.testUtil.output

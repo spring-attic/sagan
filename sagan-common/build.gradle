@@ -1,3 +1,5 @@
+bootRepackage.enabled = false
+
 sourceSets {
     testUtil {
         java.srcDir 'src/test-util/java'
@@ -6,10 +8,10 @@ sourceSets {
 }
 
 dependencies {
-    compile "org.springframework:spring-context:${vSpringCore}"
-    compile "org.springframework.security:spring-security-core:${vSpringSec}"
+    compile "org.springframework:spring-context"
+    compile "org.springframework.security:spring-security-core"
     compile 'org.springframework.social:spring-social-github:1.0.0.M4'
-    compile "org.springframework.boot:spring-boot-starter-data-jpa:${vSpringBoot}"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
 
     compile 'org.elasticsearch:elasticsearch:0.90.2'
     compile('io.searchbox:jest:0.0.4') {
@@ -19,8 +21,8 @@ dependencies {
 
     // datasource and connection pool dependencies
     runtime 'org.postgresql:postgresql:9.2-1002-jdbc4'
-    compile 'com.h2database:h2:1.3.173'
-    compile 'org.apache.tomcat:tomcat-jdbc:7.0.47'
+    compile 'com.h2database:h2'
+    compile 'org.apache.tomcat:tomcat-jdbc'
 
     // for use in on-the-fly database setup and migrations
     compile 'com.googlecode.flyway:flyway-core:2.2.1'
@@ -32,14 +34,14 @@ dependencies {
     }
 
     compile 'org.jsoup:jsoup:1.7.2'
-    compile 'org.yaml:snakeyaml:1.12'
-    compile 'joda-time:joda-time:2.3'
-    compile 'org.hibernate:hibernate-validator:4.3.1.Final'
+    compile 'org.yaml:snakeyaml'
+    compile 'joda-time:joda-time'
+    compile 'org.hibernate:hibernate-validator'
 
     // for use in rendering AsciiDoc-based guide content to HTML
     compile 'org.asciidoctor:asciidoctor-java-integration:0.1.4'
 
-    testUtilCompile "junit:junit:${vJunit}"
+    testUtilCompile "junit:junit"
     testUtilCompile sourceSets.main.output
     testUtilCompile configurations.compile
     testUtilRuntime configurations.runtime
@@ -48,7 +50,7 @@ dependencies {
     testCompile sourceSets.testUtil.output
 
     // for use of spring-test's MatcherAssertionErrors.*
-    testCompile "org.springframework:spring-test:${vSpringCore}"
+    testCompile "org.springframework:spring-test"
 }
 
 // Add test util source directories to IDEA .iml files
