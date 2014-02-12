@@ -5,6 +5,10 @@ apply from: '../gradle/deploy.gradle'
 
 mainClassName = 'sagan.app.site.ApplicationConfiguration'
 
+// Avoid PermGen errors during JRuby/Asciidoctor guide processing on JDK 7 with `gradle :sagan-site:run`
+// http://www.gradle.org/docs/1.7/release-notes#specify-default-jvm-arguments-for-the-application-plugin
+applicationDefaultJvmArgs = [ "-XX:MaxPermSize=128M" ]
+
 run {
     systemProperties System.properties
 }

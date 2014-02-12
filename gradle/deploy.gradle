@@ -3,22 +3,179 @@ gradle.rootProject.allprojects { project ->
     checkTasks.addAll(project.tasks.findAll { it.name == 'build' })
 }
 
-tasks.addRule('Pattern: deploy<Space>: Deploys the project to a Cloud Foundry space.') { taskName ->
-    if (taskName.startsWith('deploy')) {
-        def space = taskName - 'deploy'
-        def cfPath = System.getProperty("cf.path")?:''
-        def cfUser = System.getProperty("cf.user")?:''
-        def cfPass = System.getProperty("cf.pass")?:''
-        if (space.length() == 0) throw new GradleException('Usage: deploy<Space>')
-        project.task([type: Exec, dependsOn: build], taskName) {
-            commandLine './scripts/deploy.sh', space.toLowerCase(), cfPath, cfUser, cfPass
+def siteProject = project(':sagan-site')
+def indexerProject = project(':sagan-indexer')
 
-            // ensure the indexer is always deployed after the site, because if the
-            // site fails to deploy, we don't want the indexer to deploy at all
-            if (project.name == 'sagan-indexer') {
-                mustRunAfter project(':sagan-site').tasks[taskName]
+task deploy(dependsOn: 'build') {
+    description = 'Deploys the project to a Cloud Foundry space (specified with -P<spacename>)'
+    mustRunAfter checkTasks
+
+    if (project.name == siteProject.name)
+        dependsOn 'cf-deploy', 'cf-swap-deployed'
+    else if (project.name == indexerProject.name)
+        dependsOn 'cf-push'
+    else
+        throw new IllegalArgumentException('Unknown project ${project.name}')
+}
+
+def saganEnvScript = file("${System.getProperty("user.home")}/.gradle/sagan-env.gradle")
+if (saganEnvScript.exists()) {
+    logger.info("Applying environment settings from ${saganEnvScript.path} to ${project.name}")
+    apply from: saganEnvScript
+}
+
+apply plugin: 'cloudfoundry'
+
+cloudfoundry {
+    target = "https://api.run.pivotal.io"
+    organization = "spring.io"
+
+    file = file("${jar.archivePath}")
+    host = "$application"
+    domain = 'cfapps.io'
+    memory = 2048
+    instances = 4
+    healthCheckTimeout = 180
+
+    variants = ['-blue', '-green']
+}
+
+if (project.name == siteProject.name) {
+    cloudfoundry {
+        application = 'sagan' // instead of 'sagan-site'
+    }
+}
+
+// These deployment properties can be set on the command line with "-P" options, in "gradle.properties",
+// or in "~/.gradle/sagan-env.gradle". All are required if the respective 'cf-login' / 'deploy' tasks
+// have been invoked.
+
+def reqLoginVars = [ 'cf.username', 'cf.password' ]
+
+def reqDeployVars = [
+    'adminPassword', 'elasticsearchEndpoint', 'githubClientId',
+    'githubClientSecret', 'webhookAccessToken'
+]
+
+gradle.taskGraph.whenReady {
+    if (gradle.taskGraph.allTasks.collect { it.name.endsWith(":cf-login") }.size() > 0) {
+        def missingVars = []
+        reqLoginVars.each { var ->
+            if (!project.hasProperty(var)) {
+                missingVars << var
             }
-            mustRunAfter checkTasks
+        }
+        if (missingVars.size() > 0) {
+            throw new InvalidUserDataException(
+                "Missing required variable(s) for the 'cf-login' task: ${missingVars}. " +
+                "Specify them with -Pkey=value or in ${saganEnvScript}");
+        }
+    }
+
+    if (gradle.taskGraph.hasTask(":${siteProject.name}:${deploy.name}")
+          || gradle.taskGraph.hasTask(":${indexerProject.name}:${deploy.name}")) {
+        def missingVars = []
+        reqDeployVars.each { var ->
+            if (!project.hasProperty(var)) {
+                missingVars << var
+            }
+        }
+        if (missingVars.size() > 0) {
+            throw new InvalidUserDataException(
+                "Missing required variable(s) for the 'deploy' task: ${missingVars}. " +
+                "Specify them with -Pkey=value or in ${saganEnvScript}");
+        }
+
+        // All required env vars are present. Populate the cloudfoundry environment with them.
+        cloudfoundry {
+            env << [
+                ADMIN_PASSWORD: adminPassword,
+                ELASTICSEARCH_ENDPOINT: elasticsearchEndpoint,
+            ]
+        }
+
+        if (project.name == siteProject.name) {
+            cloudfoundry {
+                env << [
+                    GITHUB_CLIENT_ID: githubClientId,
+                    GITHUB_CLIENT_SECRET: githubClientSecret,
+                    WEBHOOK_ACCESS_TOKEN: webhookAccessToken
+                ]
+            }
+        }
+    }
+}
+
+// Routes can be specified by combining the 'host'/'hosts' field with the 'domain' field, or by the 'uri'/'uris' field.
+// Values for 'host'/'hosts' are modified on cf-deploy to add '-blue' or '-green' as appropriate, and are applied on
+// cf-push and cf-deploy. Values for 'uri'/'uris' are never modified with '-blue' or '-green', and are only applied by
+// cf-push and cf-swap-deployed. Using both forms of specifying routes gives control over which routes are decorated and
+// which routes are undecorated.
+
+if (project.hasProperty('staging')) {
+    cloudfoundry {
+        space = 'staging'
+        host = "$application-${space}"
+
+        env << [
+            SPRING_PROFILES_ACTIVE: "${space}",
+            NEW_RELIC_APP_NAME: "sagan-blue;sagan",
+            ELASTICSEARCH_INDEX: "sagan-${space}"
+        ]
+
+        services {
+            'sagan-db' {
+                label = 'elephantsql'
+                provider = 'elephantsql'
+                plan = 'hippo'
+                version = 'n/a'
+            }
+            'newrelic' {
+                label = 'newrelic'
+                provider = 'newrelic'
+                plan = 'standard'
+                version = 'n/a'
+            }
+        }
+    }
+
+    if (project.name == siteProject.name) {
+        cloudfoundry {
+            uris = [ "${space}.spring.io" ]
+        }
+    }
+}
+
+if (project.hasProperty('production')) {
+    cloudfoundry {
+        space = 'production'
+        host = "$application-${space}"
+
+        env << [
+            SPRING_PROFILES_ACTIVE: "${space}",
+            NEW_RELIC_APP_NAME: "sagan-blue;sagan",
+            ELASTICSEARCH_INDEX: "sagan-${space}"
+        ]
+
+        services {
+            'sagan-db' {
+                label = 'elephantsql'
+                provider = 'elephantsql'
+                plan = 'panda'
+                version = 'n/a'
+            }
+            'newrelic' {
+                label = 'newrelic'
+                provider = 'newrelic'
+                plan = 'standard'
+                version = 'n/a'
+            }
+        }
+    }
+
+    if (project.name == siteProject.name) {
+        cloudfoundry {
+            uris = [ "spring.io", "www.spring.io" ]
         }
     }
 }
