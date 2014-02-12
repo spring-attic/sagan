@@ -14,5 +14,38 @@
         "leaflet": "~0.5",
         "zeroclipboard": "1.1.7",
         "google-code-prettify": "~1.0"
+    },
+    "overrides": {
+        "jquery": {
+            "main": "jquery.min.js"
+        },
+        "curl": {
+            "main": "./dist/curl/curl.js"
+        },
+        "meld": {
+            "main": "meld.js"
+        },
+        "most": {
+            "main": "most.js"
+        },
+        "bootstrap": {
+            "main": [
+                "./docs/assets/js/bootstrap.js",
+                "./docs/assets/css/bootstrap.css",
+                "./docs/assets/img/*"
+            ]
+        },
+        "bootstrap-datetimepicker": {
+          "main": "js/bootstrap-datetimepicker.js"
+        },
+        "font-awesome": {
+            "main" : "./font/*"
+        },
+        "leaflet": {
+            "main" : "./dist/**"
+        },
+        "google-code-prettify": {
+            "main": "./src/*"
+        }
     }
 }
