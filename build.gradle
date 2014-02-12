@@ -78,7 +78,7 @@ configure([ project(':sagan-site'), project(':sagan-indexer') ]) {
         p['git.commit.id'] = workingBranch.commit.id
         p['git.commit.time'] = "N/A"
         p.store(new FileWriter(file("${sourceSets.main.output.resourcesDir}/git.properties")),
-            "Written by the `processResources` Gradle build task")
+            "Written by the '${it.name}' Gradle build task")
     }
     processResources.finalizedBy gitProperties
 }
