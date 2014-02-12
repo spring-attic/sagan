@@ -15,7 +15,8 @@ module.exports = function (grunt) {
         uglify: {
             main: {
                 files: {
-                    'build/resources/main/static/js/curl.js': ['build/tmp/static/lib/curl/src/curl.js']
+                    'build/resources/main/static/run.js': ['build/tmp/static/run.js'],
+                    'build/resources/main/static/lib/curl/src/curl.js': ['src/lib/curl/src/curl.js']
                 }
             }
         },

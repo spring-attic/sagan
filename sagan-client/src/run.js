@@ -19,7 +19,7 @@ var Munchkin, baseUrl, sts_import; // pre-existing globals
             poly: { location: 'lib/poly' }
         },
         paths: {
-            leaflet: { location: 'lib/leaflet/dist/leaflet-src', config: cjsConfig },
+            leaflet: { location: 'lib/leaflet/dist/leaflet', config: cjsConfig },
             ZeroClipboard: 'lib/zeroclipboard/ZeroClipboard',
             jquery: 'lib/jquery/jquery.min',
             'prettify': 'lib/google-code-prettify/src/prettify',

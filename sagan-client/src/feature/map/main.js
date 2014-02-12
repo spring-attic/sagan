@@ -1,5 +1,4 @@
 var $ = require('jquery');
-var leaflet = require('leaflet');
 var reduce = Array.prototype.reduce;
 
 var teamMapWrapper = '.js-team-map--wrapper';
@@ -21,17 +20,24 @@ module.exports = initMap;
  */
 function initMap() {
     /*global teamLocations*/
-
     var map, _destroy;
 
-    $(ready);
+    _destroy = function() {};
+
+    require(['leaflet'], function(leaflet) {
+        $(function() {
+            // manually set image path since leaflet isn't loaded by a script tag
+            leaflet.Icon.Default.imagePath = '/lib/leaflet/dist/images';
+            ready(leaflet);
+        });
+    });
 
     return {
         destroy: destroy
     };
 
-    function ready() {
-        map = createMap();
+    function ready(leaflet) {
+        map = createMap(leaflet);
 
         var teamMemberIds = getTeamMemberIdMap($('.team-members--wrapper'));
 
@@ -39,7 +45,7 @@ function initMap() {
             var element = teamMemberIds[teamLocation.memberId];
 
             if (element) {
-                var marker = createMarker(teamLocation, element);
+                var marker = createMarker(leaflet, teamLocation, element);
                 marker.addTo(map);
 
                 bounds.push(new leaflet.LatLng(teamLocation.latitude, teamLocation.longitude));
@@ -48,7 +54,7 @@ function initMap() {
             return bounds;
         }, []);
 
-        setMapView(map, teamLocations, bounds);
+        setMapView(leaflet, map, teamLocations, bounds);
 
         $(teamMapWrapper).on('click', enableMapMouseWheelSupport);
 
@@ -75,7 +81,7 @@ function initMap() {
     }
 }
 
-function createMap() {
+function createMap(leaflet) {
     var map = leaflet.map('map', {
         scrollWheelZoom: false,
         touchZoom: false
@@ -99,12 +105,12 @@ function getTeamMemberIdMap(container) {
     }, {});
 }
 
-function createMarker(teamLocation, element) {
+function createMarker(leaflet, teamLocation, element) {
     var marker = leaflet.marker([teamLocation.latitude, teamLocation.longitude], {title: teamLocation.name});
-    marker.bindPopup(element.html());
+    return marker.bindPopup($(element).html());
 }
 
-function setMapView(map, teamLocations, bounds) {
+function setMapView(leaflet, map, teamLocations, bounds) {
     var length = teamLocations.length;
 
     if (length > 1) {
