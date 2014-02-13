@@ -14,7 +14,7 @@
     "gulp-uglify": "~0.2.0",
     "gulp-imagemin": "~0.1.5",
     "gulp-bower": "~0.0.2",
-    "gulp-bower-files": "~0.1.6",
+    "gulp-bower-files": "~0.1.7",
     "gulp-watch": "~0.5.0",
     "gulp-changed":"~0.1.0",
     "when": "~2",
