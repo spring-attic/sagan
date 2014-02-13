@@ -17,7 +17,7 @@ var paths = {
         root: 'src/css'
     },
     images: ['src/img/**/*'],
-    assets: ['src/*.txt','src/*.html'],
+    assets: ['src/*.txt','src/*.html','src/font*/**','src/css*/filterable-list.css'],
     dest: './dist/'
 };
 
@@ -30,7 +30,7 @@ gulp.task('bower-install', function(){
 // concat and minify CSS files
 gulp.task('minify-css', function() {
     return gulp.src(paths.css.files)
-        .pipe(cssmin({root:paths.css.root, relativeTo:paths.css.root}))
+        .pipe(cssmin({root:paths.css.root}))
         .pipe(gulp.dest(paths.dest+'css'));
 });
 
