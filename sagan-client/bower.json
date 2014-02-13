@@ -20,7 +20,7 @@
             "main": "jquery.min.js"
         },
         "curl": {
-            "main": "./dist/curl/curl.js"
+            "main": "./src/curl.js"
         },
         "meld": {
             "main": "meld.js"
