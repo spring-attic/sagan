@@ -5,7 +5,7 @@ import sagan.util.SetSystemProperty;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 
-import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
