@@ -1,4 +1,4 @@
-var getAttributeValueOfVisible = require('../lib/wd/getAttributeValueOfVisible');
+var getAttributeValueOfDisplayed = require('../lib/wd/getAttributeValueOfDisplayed');
 
 describe('Search Results page', function() {
 
@@ -10,9 +10,8 @@ describe('Search Results page', function() {
                 return this.browser.path('/search?q=rest')
                     .setImplicitWaitTimeout(5000)
                     .elementsByCssSelector('.sub-facet--list input[type=checkbox]')
-                        .then(getAttributeValueOfVisible('checked'))
+                        .then(getAttributeValueOfDisplayed('checked'))
                         .then(function(values) {
-                            expect(values.length).toBeGreaterThan(0);
                             // Fold all the values to a single boolean
                             var result = values.reduce(function(result, value) {
                                 return value || result;
