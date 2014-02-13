@@ -28,6 +28,7 @@ import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
@@ -36,6 +37,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -45,6 +47,8 @@ import com.google.common.cache.CacheBuilder;
 @Configuration
 @EnableCaching(proxyTargetClass = true)
 @ComponentScan(basePackageClasses = sagan.Package.class)
+@EntityScan(basePackageClasses = sagan.Package.class)
+@EnableJpaRepositories(basePackageClasses = sagan.Package.class)
 public class ApplicationConfiguration {
 
     public static final String REWRITE_FILTER_NAME = "rewriteFilter";
