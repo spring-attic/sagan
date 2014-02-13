@@ -37,7 +37,6 @@ subprojects {
     sourceCompatibility = 1.7
 
     repositories {
-        jcenter()
         maven { url 'http://repo.spring.io/libs-milestone' }
     }
 
