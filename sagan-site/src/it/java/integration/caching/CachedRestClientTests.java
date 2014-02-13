@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.initializer.ConfigFileApplicationContextInitializer;
+import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests ensuring that caching functionality works as expected in
  * {@link CachedRestClient}.
- * 
+ *
  * @author Pivotal Labs
  */
 @RunWith(SpringJUnit4ClassRunner.class)
