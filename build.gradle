@@ -38,6 +38,7 @@ subprojects {
 
     repositories {
         maven { url 'http://repo.spring.io/libs-milestone' }
+        mavenLocal()
     }
 
     dependencies {
