@@ -20,6 +20,7 @@ springBoot {
 
 dependencies {
     compile project(':sagan-common')
+    compile project(':sagan-client')
 
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.apache.tomcat.embed:tomcat-embed-jasper" // until spring-boot #248 is fixed
@@ -55,12 +56,4 @@ dependencies {
 
     // pick up common test utility classes
     testCompile project(':sagan-common').sourceSets.testUtil.output
-}
-
-task copyGeneratedResources(type: Copy) {
-    description = "Copies static html templates from :sagan-site in order to index them at runtime."
-
-    from "../sagan-client/build"
-    into sourceSets.main.output.resourcesDir
-    include "**/*"
 }
