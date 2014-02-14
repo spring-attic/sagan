@@ -2,7 +2,7 @@
  * docs page functional tests
  */
 
-var getAttributeValueOfVisible = require('../lib/wd/getAttributeValueOfVisible');
+var getAttributeValueOfDisplayed = require('../lib/wd/getAttributeValueOfDisplayed');
 
 var filterInputId = 'doc_filter';
 var filterAttribute = 'data-filterable';
@@ -34,7 +34,7 @@ describe('Docs page', function () {
                 .elementById(filterInputId)
                 .type(filterText)
                 .elementsByCssSelector('[' + filterAttribute + ']')
-                    .then(getAttributeValueOfVisible(filterAttribute))
+                    .then(getAttributeValueOfDisplayed(filterAttribute))
                     .then(function (attributeValues) {
                         attributeValues.forEach(function (value) {
                             expect(value.toLowerCase()).toContain(filterText);
@@ -49,7 +49,7 @@ describe('Docs page', function () {
                 .elementById(filterInputId)
                     .type(filterText)
                 .elementsByCssSelector('[' + filterAttribute + ']')
-                    .then(getAttributeValueOfVisible(filterAttribute))
+                    .then(getAttributeValueOfDisplayed(filterAttribute))
                     .then(function (attributeValues) {
                         expect(attributeValues.length).toBe(0);
                     });
