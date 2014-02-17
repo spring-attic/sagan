@@ -36,7 +36,7 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
 
     @Override
     public Iterable<Project> indexableItems() {
-        return metadataService.getProjects();
+        return metadataService.getProjectsWithReleases();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
         searchService.removeOldProjectEntriesFromIndex(project.getId(), projectVersions);
 
         for (ProjectRelease version : project.getProjectReleases()) {
-            String apiDocUrl = version.getApiDocUrl() + "/allclasses-frame.html";
+            String apiDocUrl = version.getApiDocUrl().replace("/index.html","") + "/allclasses-frame.html";
             ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, version);
             CrawledWebDocumentProcessor apiDocProcessor =
                     new CrawledWebDocumentProcessor(searchService, apiDocumentMapper);
