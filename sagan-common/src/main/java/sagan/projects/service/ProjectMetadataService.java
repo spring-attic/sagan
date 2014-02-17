@@ -24,6 +24,10 @@ public class ProjectMetadataService {
         return repository.findAll(new Sort("id"));
     }
 
+    public List<Project> getProjectsWithReleases() {
+        return repository.findAllWithReleases(new Sort("id"));
+    }
+
     public Project getProject(String id) {
         return repository.findOne(id);
     }

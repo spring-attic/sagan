@@ -51,8 +51,8 @@ github:
     secret: n/a
   guides:
     owner:
-      name: n/a
-      type: n/a
+      name: spring-guides
+      type: orgs
 
 server:
     tomcat:
