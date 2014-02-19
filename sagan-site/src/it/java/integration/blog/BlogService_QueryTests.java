@@ -88,13 +88,13 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
     private void setupFixtureData() throws Exception {
         assertThat(postRepository.findAll().size(), equalTo(0));
 
-        scheduled = PostBuilder.post().category(ENGINEERING).publishAt(tomorrow).build();
+        scheduled = PostBuilder.post().category(ENGINEERING).title("scheduled").publishAt(tomorrow).build();
         postRepository.save(scheduled);
 
-        published = PostBuilder.post().category(ENGINEERING).publishAt(yesterday).build();
+        published = PostBuilder.post().category(ENGINEERING).title("published").publishAt(yesterday).build();
         postRepository.save(published);
 
-        draft = PostBuilder.post().draft().build();
+        draft = PostBuilder.post().title("draft").draft().build();
         postRepository.save(draft);
     }
 
