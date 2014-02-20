@@ -37,6 +37,7 @@ subprojects {
     sourceCompatibility = 1.7
 
     repositories {
+        maven { url 'http://dl.bintray.com/lordofthejars/maven' }
         maven { url 'http://repo.spring.io/libs-milestone' }
     }
 
