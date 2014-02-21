@@ -14,9 +14,9 @@ import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.ClientConfig;
 
 @Configuration
-public class SearchClientConfiguration {
+public class SearchClientConfig {
 
-    private static Log logger = LogFactory.getLog(SearchClientConfiguration.class);
+    private static Log logger = LogFactory.getLog(SearchClientConfig.class);
 
     @Value("${elasticsearch.client.endpoint}")
     private String endpoint;

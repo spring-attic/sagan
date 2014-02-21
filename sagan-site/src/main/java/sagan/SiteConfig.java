@@ -1,4 +1,4 @@
-package sagan.app.site;
+package sagan;
 
 import sagan.blog.web.feed.BlogPostAtomViewer;
 import sagan.guides.support.GettingStartedGuides;
@@ -23,7 +23,6 @@ import org.simpleframework.xml.core.Persister;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
@@ -46,17 +45,13 @@ import com.google.common.cache.CacheBuilder;
 @EnableAutoConfiguration
 @Configuration
 @EnableCaching(proxyTargetClass = true)
-@ComponentScan(basePackageClasses = sagan.Package.class)
-@EntityScan(basePackageClasses = sagan.Package.class)
-@EnableJpaRepositories(basePackageClasses = sagan.Package.class)
-public class ApplicationConfiguration {
+@ComponentScan
+@EntityScan
+@EnableJpaRepositories
+public class SiteConfig {
 
     public static final String REWRITE_FILTER_NAME = "rewriteFilter";
     public static final String REWRITE_FILTER_CONF_PATH = "urlrewrite.xml";
-
-    public static void main(String[] args) {
-        SpringApplication.run(ApplicationConfiguration.class, args);
-    }
 
     @Bean
     public HealthIndicator<Map<String, Object>> healthIndicator(DataSource dataSource) {

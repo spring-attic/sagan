@@ -1,6 +1,6 @@
 package integration.rewrite;
 
-import sagan.app.site.ApplicationConfiguration;
+import sagan.SiteConfig;
 
 import java.io.IOException;
 import java.net.URI;
@@ -30,8 +30,8 @@ public class RewriteTests {
     @Before
     public void setUp() throws Exception {
         UrlRewriteFilter filter =
-                createUrlFilter(ApplicationConfiguration.REWRITE_FILTER_NAME,
-                        ApplicationConfiguration.REWRITE_FILTER_CONF_PATH);
+                createUrlFilter(SiteConfig.REWRITE_FILTER_NAME,
+                        SiteConfig.REWRITE_FILTER_CONF_PATH);
         filterChain = new PassThroughFilterChain(filter, new MockFilterChain());
     }
 

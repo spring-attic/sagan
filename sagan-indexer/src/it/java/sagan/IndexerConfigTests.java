@@ -1,4 +1,4 @@
-package sagan.app.indexer;
+package sagan;
 
 import sagan.util.FreePortFinder;
 
@@ -10,7 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import static org.junit.Assert.assertNotNull;
 
-public class ApplicationConfigurationTests {
+public class IndexerConfigTests {
 
     private ConfigurableApplicationContext context;
 
@@ -25,16 +25,15 @@ public class ApplicationConfigurationTests {
     public void testContextLoading() throws Exception {
         int port = FreePortFinder.find();
 
-        context = (ConfigurableApplicationContext) SpringApplication.run(
-                ApplicationConfiguration.class, "--server.port=" + port,
+        context = SpringApplication.run(IndexerConfig.class,
+                "--server.port=" + port,
                 "--spring.database.url=jdbc:h2:mem:acceptancetestdb;MODE=PostgreSQL",
                 "--search.indexer.delay=6000000",
                 "--elasticsearch.client.endpoint=http://localhost:9200",
                 "--elasticsearch.client.index=sagan-test",
                 "--spring.profiles.active=acceptance");
 
-        ApplicationConfiguration configuration = context
-                .getBean(ApplicationConfiguration.class);
+        IndexerConfig configuration = context.getBean(IndexerConfig.class);
         assertNotNull(configuration);
         context.close();
     }

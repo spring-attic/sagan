@@ -1,5 +1,6 @@
 package sagan.app.indexer;
 
+import sagan.IndexerConfig;
 import sagan.util.SetSystemProperty;
 
 import org.junit.ClassRule;
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = ApplicationConfiguration.class,
+@ContextConfiguration(classes = IndexerConfig.class,
                       initializers = ConfigFileApplicationContextInitializer.class)
 @Transactional
 public abstract class AbstractIndexerIntegrationTests {

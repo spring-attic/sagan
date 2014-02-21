@@ -39,13 +39,13 @@ import org.springframework.social.github.connect.GitHubConnectionFactory;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Configuration
-public class SecurityConfiguration {
+public class SecurityConfig {
 
     static final String SIGNIN_SUCCESS_PATH = "/signin/success";
 
     @Configuration
     @Order(Ordered.LOWEST_PRECEDENCE - 100)
-    protected static class SigninAuthenticationConfiguration extends WebSecurityConfigurerAdapter {
+    protected static class SigninAuthenticationConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -72,7 +72,7 @@ public class SecurityConfiguration {
 
     @Configuration
     @Order(Ordered.LOWEST_PRECEDENCE - 90)
-    protected static class AdminAuthenticationConfiguration extends WebSecurityConfigurerAdapter implements
+    protected static class AdminAuthenticationConfig extends WebSecurityConfigurerAdapter implements
             EnvironmentAware {
 
         @Autowired
