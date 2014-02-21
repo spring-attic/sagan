@@ -10,7 +10,7 @@ import org.elasticsearch.node.NodeBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
-public class InMemoryElasticSearchConfiguration {
+public class InMemoryElasticSearchConfig {
 
     @Autowired
     private SearchService searchService;

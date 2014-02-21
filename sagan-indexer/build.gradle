@@ -1,5 +1,5 @@
 
-springBoot.mainClass = 'sagan.app.indexer.ApplicationConfiguration'
+springBoot.mainClass = 'sagan.IndexerMain'
 
 dependencies {
     compile project(':sagan-common')

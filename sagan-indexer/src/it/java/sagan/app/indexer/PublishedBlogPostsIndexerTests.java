@@ -21,16 +21,15 @@ import org.springframework.test.context.ContextConfiguration;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import static sagan.app.indexer.PublishedBlogPostsIndexerTests.TestConfiguration;
 
-@ContextConfiguration(classes = { TestConfiguration.class })
+@ContextConfiguration(classes = { PublishedBlogPostsIndexerTests.TestConfig.class })
 public class PublishedBlogPostsIndexerTests extends AbstractIndexerIntegrationTests {
 
     /*
      * @Configuration annotation intentionally omitted so as not to interfere with
      * @ComponentScan on the src/main side of this package.
      */
-    public static class TestConfiguration {
+    public static class TestConfig {
         @Bean
         @Primary
         public SearchService stubSearchService() {

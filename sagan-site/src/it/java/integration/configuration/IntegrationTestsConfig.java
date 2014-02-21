@@ -1,6 +1,6 @@
 package integration.configuration;
 
-import sagan.app.site.ApplicationConfiguration;
+import sagan.SiteConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,9 +12,9 @@ import org.springframework.web.client.RestTemplate;
 import static org.mockito.Mockito.mock;
 
 @Configuration
-@Import({ ApplicationConfiguration.class })
+@Import(SiteConfig.class)
 @ComponentScan("integration.stubs")
-public class IntegrationTestsConfiguration {
+public class IntegrationTestsConfig {
 
     @Primary
     @Bean
