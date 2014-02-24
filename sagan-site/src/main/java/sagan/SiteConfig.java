@@ -120,7 +120,7 @@ public class SiteConfig {
     }
 
     @Bean
-    @Profile("development")
+    @Profile(SaganProfiles.STANDALONE)
     public ServletRegistrationBean h2Console() {
         ServletRegistrationBean reg = new ServletRegistrationBean(new WebServlet(), "/console/*");
         reg.setLoadOnStartup(1);
