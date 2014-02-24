@@ -27,11 +27,10 @@ public class IndexerConfigTests {
 
         context = SpringApplication.run(IndexerConfig.class,
                 "--server.port=" + port,
-                "--spring.database.url=jdbc:h2:mem:acceptancetestdb;MODE=PostgreSQL",
+                "--spring.database.url=jdbc:h2:mem:sagan;MODE=PostgreSQL",
                 "--search.indexer.delay=6000000",
                 "--elasticsearch.client.endpoint=http://localhost:9200",
-                "--elasticsearch.client.index=sagan-test",
-                "--spring.profiles.active=acceptance");
+                "--elasticsearch.client.index=sagan-test");
 
         IndexerConfig configuration = context.getBean(IndexerConfig.class);
         assertNotNull(configuration);

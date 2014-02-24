@@ -81,20 +81,14 @@ server:
 ---
 
 spring:
-  profiles: development,staging,production
+  profiles: default,staging,production
 security:
   require_ssl: true
 
 ---
 
 spring:
-  profiles: development
+  profiles: default
 cache:
   timetolive: 0
 
----
-
-spring:
-  profiles: acceptance
-  database:
-    url: jdbc:h2:mem:acceptancetestdb;MODE=PostgreSQL
