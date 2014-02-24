@@ -10,6 +10,8 @@ import sagan.guides.GettingStartedGuide;
 import sagan.guides.Guide;
 import sagan.guides.GuideMetadata;
 import sagan.guides.ImageProvider;
+import sagan.projects.Project;
+import sagan.projects.service.ProjectMetadataService;
 import sagan.util.ResourceNotFoundException;
 import sagan.util.service.github.Readme;
 
@@ -49,9 +51,12 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
 
     private final SetMultimap<String, String> tagMultimap = LinkedHashMultimap.create();
 
+    private final ProjectMetadataService projectMetadataService;
+
     @Autowired
-    public GettingStartedGuides(GuideOrganization org) {
+    public GettingStartedGuides(GuideOrganization org, ProjectMetadataService projectMetadataService) {
         super(org);
+        this.projectMetadataService = projectMetadataService;
     }
 
     @Override
@@ -123,7 +128,10 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
                     "<ul>\n";
 
             for (String project : asciidocGuide.getProjects()) {
-                sidebar += "<li><a href='http://projects.spring.io/" + project + "'>" + WordUtils.capitalize(project.replaceAll("-", " ")) + "</a></li>\n";
+
+                Project springIoProject = projectMetadataService.getProject(project);
+                sidebar += "<li><a href='" + springIoProject.getSiteUrl() + "'>" + springIoProject.getName()
+                        + "</a></li>\n";
             }
             sidebar += "</ul>\n";
         }
