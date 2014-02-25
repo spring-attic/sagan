@@ -57,9 +57,10 @@ configure([ project(':sagan-site'), project(':sagan-indexer') ]) {
     //   https://github.com/ajoberstar/gradle-git
     task gitProperties(type: org.ajoberstar.gradle.git.tasks.GitBranchList) << {
         Properties p = new Properties()
-        p['git.branch'] = workingBranch.name
-        p['git.commit.id'] = workingBranch.commit.id
-        p['git.commit.time'] = "N/A"
+        p['git.branch'] = workingBranch?.name ?: "detatched HEAD"
+        p['git.commit.id'] = workingBranch?.commit?.abbreviatedId ?: "unknown"
+        p['git.commit.time'] = workingBranch?.commit?.time ?
+                new Date(new Integer(workingBranch.commit.time).longValue()*1000L).format("yyyy-MM-dd HH:mm") : "unknown"
         p.store(new FileWriter(file("${sourceSets.main.output.resourcesDir}/git.properties")),
             "Written by the '${it.name}' Gradle build task")
     }
