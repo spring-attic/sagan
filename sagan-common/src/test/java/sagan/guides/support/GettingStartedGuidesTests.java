@@ -2,6 +2,7 @@ package sagan.guides.support;
 
 import sagan.guides.GettingStartedGuide;
 import sagan.guides.Guide;
+import sagan.projects.service.ProjectMetadataService;
 import sagan.util.ResourceNotFoundException;
 import sagan.util.service.github.Readme;
 
@@ -27,6 +28,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
  * Unit tests for {@link GettingStartedGuides}.
  * 
  * @author Chris Beams
+ * @author Greg Turnquist
  */
 public class GettingStartedGuidesTests {
 
@@ -42,6 +44,9 @@ public class GettingStartedGuidesTests {
     private GuideOrganization org;
 
     @Mock
+    private ProjectMetadataService projectMetadataService;
+
+    @Mock
     private Guide gsRestService;
 
     private GettingStartedGuides gsGuides;
@@ -52,7 +57,7 @@ public class GettingStartedGuidesTests {
         initMocks(this);
         given(org.getName()).willReturn("mock-org");
 
-        gsGuides = new GettingStartedGuides(org);
+        gsGuides = new GettingStartedGuides(org, projectMetadataService);
         readme.setName("README.md");
 
         given(gsRestService.getRepoName()).willReturn(GUIDE_REPO_NAME);
