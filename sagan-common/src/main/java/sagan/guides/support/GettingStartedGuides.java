@@ -2,7 +2,6 @@ package sagan.guides.support;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.SetMultimap;
-import org.apache.commons.lang.WordUtils;
 import org.springframework.cache.annotation.Cacheable;
 import sagan.guides.ContentProvider;
 import sagan.guides.DefaultGuideMetadata;
