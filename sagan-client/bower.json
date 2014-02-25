@@ -17,35 +17,34 @@
     },
     "overrides": {
         "jquery": {
-            "main": "jquery.min.js"
+            "ignore": ["*.json"]
         },
         "curl": {
-            "main": "./src/curl.js"
+            "ignore": ["dist/**", "src/curl/**"]
         },
         "meld": {
-            "main": "meld.js"
+            "ignore": ["aspect/**", "docs/**", "test/**"]
         },
         "most": {
-            "main": "most.js"
+            "ignore": ["test/**"]
         },
         "bootstrap": {
-            "main": [
-                "./docs/assets/js/bootstrap.js",
-                "./docs/assets/css/bootstrap.css",
-                "./docs/assets/img/*"
+            "ignore": [
+                "js/**", "img/**", "less/**", "docs/build/**",
+                "docs/examples/**", "docs/templates/**", "docs/*.html"
             ]
         },
         "bootstrap-datetimepicker": {
-          "main": "js/bootstrap-datetimepicker.js"
+            "ignore": ["build/**", "test/**"]
         },
         "font-awesome": {
-            "main" : "./font/*"
+            "ignore": ["css/**", "less/**", "scss/**", "src/**"]
         },
         "leaflet": {
-            "main" : "./dist/**"
+            "ignore": ["build/**", "debug/**", "spec/**", "src/**"]
         },
         "google-code-prettify": {
-            "main": "./src/*"
+            "ignore": ["styles/**"]
         }
     }
 }

@@ -1,9 +1,9 @@
 var combine = require('gulp-util').combine,
-    filter = require('gulp-filter'),
+    gulpFilter = require('gulp-filter'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     bower = require('gulp-bower'),
-    bowerFiles = require('gulp-bower-files'),
+    bowerSrc = require('gulp-bower-src'),
     cssmin = require('gulp-minify-css'),
     watch = require('gulp-watch'),
     changed = require('gulp-changed'),
@@ -50,9 +50,11 @@ gulp.task('optim-img', function() {
 
 // copy main bower files (see bower.json) and optimize js
 gulp.task('bower-files', function() {
-    // waiting for filter/filter.end sindresorhus/gulp-filter#2 to be fixed.
-    // once fixed, can filter and optimize **/*.js resources
-    return bowerFiles()
+    var filter = gulpFilter(["**/*.js", "!**/*.min/js"]);
+    return bowerSrc()
+        .pipe(filter)
+        .pipe(uglify())
+        .pipe(filter.restore())
         .pipe(gulp.dest(paths.dest+'lib'));
 })
 
@@ -68,7 +70,7 @@ gulp.task('build', ['bower-install', 'minify-css', 'minify-scripts', 'optim-img'
 
 // temp tasks, until live reloading is in configured
 gulp.task('bower-gradle', function() {
-    return bowerFiles()
+    return bowerSrc()
         .pipe(gulp.dest('../sagan-site/build/resources/main/static/'+'lib'));
 })
 
