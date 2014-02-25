@@ -13,7 +13,7 @@ var combine = require('gulp-util').combine,
 var paths = {
     scripts: ['build/tmp/static/run.js'],
     css: {
-        files: ['src/css/main.css'],
+        files: ['src/css/main.css', 'src/css/guide.css'],
         root: 'src/css'
     },
     images: ['src/img/**/*'],
