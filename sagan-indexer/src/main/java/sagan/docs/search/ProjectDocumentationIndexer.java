@@ -51,18 +51,25 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
         searchService.removeOldProjectEntriesFromIndex(project.getId(), projectVersions);
 
         for (ProjectRelease version : project.getProjectReleases()) {
-            String apiDocUrl = version.getApiDocUrl().replace("/index.html","") + "/allclasses-frame.html";
-            ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, version);
-            CrawledWebDocumentProcessor apiDocProcessor =
-                    new CrawledWebDocumentProcessor(searchService, apiDocumentMapper);
-            crawlerService.crawl(apiDocUrl, 1, apiDocProcessor);
+            if(version.getApiDocUrl().isEmpty()) {
+                String message =
+                        String.format("Unable to index API doc for projet id '%s' and version '%s' since API doc URL is empty",
+                                project.getId(), version.getVersion());
+                logger.warn(message);
+            } else {
+                String apiDocUrl = version.getApiDocUrl().replace("/index.html","") + "/allclasses-frame.html";
+                ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, version);
+                CrawledWebDocumentProcessor apiDocProcessor =
+                        new CrawledWebDocumentProcessor(searchService, apiDocumentMapper);
+                crawlerService.crawl(apiDocUrl, 2, apiDocProcessor);
 
-            String refDocUrl = version.getRefDocUrl();
-            ReferenceDocumentSearchEntryMapper documentMapper =
-                    new ReferenceDocumentSearchEntryMapper(project, version);
-            CrawledWebDocumentProcessor refDocProcessor =
-                    new CrawledWebDocumentProcessor(searchService, documentMapper);
-            crawlerService.crawl(refDocUrl, 1, refDocProcessor);
+                String refDocUrl = version.getRefDocUrl();
+                ReferenceDocumentSearchEntryMapper documentMapper =
+                        new ReferenceDocumentSearchEntryMapper(project, version);
+                CrawledWebDocumentProcessor refDocProcessor =
+                        new CrawledWebDocumentProcessor(searchService, documentMapper);
+                crawlerService.crawl(refDocUrl, 1, refDocProcessor);
+            }
         }
     }
 
