@@ -1,5 +1,3 @@
-bootRepackage.enabled = false
-
 sourceSets {
     testUtil {
         java.srcDir 'src/test-util/java'
@@ -53,9 +51,14 @@ dependencies {
     testCompile "org.springframework:spring-test"
 }
 
-// Add test util source directories to IDEA .iml files
-if (project.plugins.hasPlugin('idea')) {
-    idea.module {
-        testSourceDirs += (sourceSets.testUtil.java.srcDirs + sourceSets.testUtil.resources.srcDirs)
-    }
+// Add test-util source directories to IDEA .iml files
+idea.module {
+    testSourceDirs += (sourceSets.testUtil.java.srcDirs + sourceSets.testUtil.resources.srcDirs)
 }
+
+// sagan-common is not technically a "Spring Boot" application--it is just a library.
+// However, we apply the spring-boot plugin here anyway in order to pick up boot's
+// default dependency versioning, such that we stay in sync with other modules that
+// are actually "boot"-style apps.
+apply plugin: 'spring-boot'
+bootRepackage.enabled = false

@@ -6,7 +6,7 @@ gradle.rootProject.allprojects { project ->
 def siteProject = project(':sagan-site')
 def indexerProject = project(':sagan-indexer')
 
-task deploy(dependsOn: 'build') {
+task deploy(dependsOn: [ build, rootProject.gitMetadata ]) {
     description = 'Deploys the project to a Cloud Foundry space (specified with -P<spacename>)'
     mustRunAfter checkTasks
 
