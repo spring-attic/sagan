@@ -1,68 +1,66 @@
-buildscript {
+def vJavaLang = '1.7'
+def javaProjects = [ project(':sagan-site'), project(':sagan-indexer'), project(':sagan-common') ]
+def bootProjects = javaProjects - project(':sagan-common')
+def gradleDir = "${rootProject.rootDir}/gradle"
 
-    ext.vHttpClient = '4.3'
+buildscript {
+    ext.springRepo = 'http://repo.spring.io/libs-milestone'
 
     repositories {
-        maven { url 'http://repo.spring.io/libs-milestone' }
+        maven { url springRepo }
     }
 
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:1.0.0.RC3"
-        classpath 'org.cloudfoundry:cf-gradle-plugin:1.0.2'
-        classpath 'org.ajoberstar:gradle-git:0.6.3'
+        classpath 'org.cloudfoundry:cf-gradle-plugin:1.0.2' // see deploy.gradle
     }
-
 }
 
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-idea.project {
-    languageLevel = '1.7'
-    ipr {
-        withXml { provider ->
-            def mapping = provider.node.component.find { it.@name == 'VcsDirectoryMappings' }.mapping
-            mapping.@vcs = 'Git'
-            mapping.@directory = '$PROJECT_DIR$'
+configure(allprojects) {
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+}
+
+configure(rootProject) {
+    apply from: 'gradle/gitMetadata.gradle'
+
+    idea.project {
+        languageLevel = vJavaLang
+        ipr {
+            withXml { provider ->
+                def mapping = provider.node.component.find { it.@name == 'VcsDirectoryMappings' }.mapping
+                mapping.@vcs = 'Git'
+                mapping.@directory = '$PROJECT_DIR$'
+            }
         }
     }
 }
 
-subprojects {
+configure(javaProjects) {
     apply plugin: 'java'
-    apply plugin: 'idea'
-    apply plugin: 'eclipse'
-    apply plugin: 'spring-boot'
 
-    targetCompatibility = 1.7
-    sourceCompatibility = 1.7
+    targetCompatibility = vJavaLang
+    sourceCompatibility = vJavaLang
 
     repositories {
-        maven { url 'http://repo.spring.io/libs-milestone' }
+        maven { url springRepo }
     }
 
     dependencies {
         compile 'org.slf4j:slf4j-api'
-        testCompile "junit:junit"
+        testCompile 'junit:junit'
         testCompile 'org.hamcrest:hamcrest-library'
         testCompile 'org.mockito:mockito-core'
     }
 
 }
 
-configure([ project(':sagan-site'), project(':sagan-indexer') ]) {
-    // Populate git commit and branch metadata at http://spring.io/info.
-    // See:
-    //   http://projects.spring.io/spring-boot/docs/spring-boot-actuator/docs/Features.html ("Info Endpoint")
-    //   http://ajoberstar.org/gradle-git/docs/groovydoc/org/ajoberstar/gradle/git/tasks/GitBranchList.html
-    //   https://github.com/ajoberstar/gradle-git
-    task gitProperties(type: org.ajoberstar.gradle.git.tasks.GitBranchList) << {
-        Properties p = new Properties()
-        p['git.branch'] = workingBranch?.name ?: "detatched HEAD"
-        p['git.commit.id'] = workingBranch?.commit?.abbreviatedId ?: "unknown"
-        p['git.commit.time'] = workingBranch?.commit?.time ?
-                new Date(new Integer(workingBranch.commit.time).longValue()*1000L).format("yyyy-MM-dd HH:mm") : "unknown"
-        p.store(new FileWriter(file("${sourceSets.main.output.resourcesDir}/git.properties")),
-            "Written by the '${it.name}' Gradle build task")
-    }
-    processResources.finalizedBy gitProperties
+configure(bootProjects) {
+    apply plugin: 'spring-boot'
+    apply from: "$gradleDir/integTest.gradle"
+    apply from: "$gradleDir/deploy.gradle"
+    apply from: "$gradleDir/writeGitPropertiesFile.gradle"
+
+    springBoot.backupSource = false
 }
+

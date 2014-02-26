@@ -1,18 +1,5 @@
-apply plugin: 'spring-boot'
-apply plugin: 'application'
-apply from: '../gradle/integTest.gradle'
-apply from: '../gradle/deploy.gradle'
 
-mainClassName = 'sagan.app.indexer.ApplicationConfiguration'
-
-run {
-    systemProperties System.properties
-}
-
-springBoot {
-    backupSource = false
-    mainClass = mainClassName
-}
+springBoot.mainClass = 'sagan.app.indexer.ApplicationConfiguration'
 
 dependencies {
     compile project(':sagan-common')
@@ -35,7 +22,6 @@ dependencies {
     testCompile project(':sagan-common').sourceSets.testUtil.output
 }
 
-
 task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processResources) {
     description = "Copies static html templates from :sagan-site in order to index them at runtime."
 
@@ -44,7 +30,6 @@ task copyStaticTemplates(type: Copy, dependsOn: project(':sagan-site').processRe
     include "templates/pages/**/*"
 }
 processResources.dependsOn copyStaticTemplates
-
 
 // Ensure that site tasks have execution priority over indexer tasks, as it is
 // desirable to identify problems with the site as quickly as possible
