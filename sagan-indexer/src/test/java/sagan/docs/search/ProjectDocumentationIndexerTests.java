@@ -58,7 +58,7 @@ public class ProjectDocumentationIndexerTests {
     @Test
     public void apiDocsAreIndexed() throws Exception {
         service.indexItem(project);
-        int linkDepthLevel = 1;
+        int linkDepthLevel = 2;
         assertThatCrawlingIsDoneFor("http://api.example.com/3/allclasses-frame.html", linkDepthLevel);
         assertThatCrawlingIsDoneFor("http://api.example.com/2/allclasses-frame.html", linkDepthLevel);
         assertThatCrawlingIsDoneFor("http://api.example.com/1/allclasses-frame.html", linkDepthLevel);

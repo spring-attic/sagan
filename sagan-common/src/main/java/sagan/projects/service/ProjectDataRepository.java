@@ -15,6 +15,6 @@ import java.util.List;
 public interface ProjectDataRepository extends JpaRepository<Project, String> {
     List<Project> findByCategory(String category);
 
-    @Query("SELECT p FROM Project p JOIN FETCH p.releaseList")
+    @Query("SELECT DISTINCT p FROM Project p JOIN FETCH p.releaseList")
     List<Project> findAllWithReleases(Sort sort);
 }
