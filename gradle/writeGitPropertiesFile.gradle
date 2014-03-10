@@ -1,8 +1,9 @@
 /**
- * Populate git commit and branch metadata for inspection at http://spring.io/info.
+ * Modify the `processResources` task to write git commit and branch metadata for inspection at http://spring.io/info.
  * See http://projects.spring.io/spring-boot/docs/spring-boot-actuator/docs/Features.html ("Info Endpoint")
  */
-task writeGitPropertiesFile(dependsOn: rootProject.gitMetadata) << {
+processResources.dependsOn rootProject.gitMetadata
+processResources.doLast {
     new Properties(
             'git.branch' : rootProject.gitMetadata.branch,
             'git.commit.id' : rootProject.gitMetadata.commitId,
@@ -10,4 +11,3 @@ task writeGitPropertiesFile(dependsOn: rootProject.gitMetadata) << {
     ).store(new FileWriter(file("${sourceSets.main.output.resourcesDir}/git.properties")),
             "Written by the '${it.name}' Gradle build task")
 }
-processResources.finalizedBy writeGitPropertiesFile
