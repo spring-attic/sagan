@@ -24,7 +24,7 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
-import integration.configuration.IntegrationTestsConfiguration;
+import integration.configuration.IntegrationTestsConfig;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -47,7 +47,7 @@ public class BasicAcceptanceTests {
                     @Override
                     public ConfigurableApplicationContext call() throws Exception {
                         return (ConfigurableApplicationContext) SpringApplication.run(
-                                IntegrationTestsConfiguration.class, "--server.port=" + port,
+                                IntegrationTestsConfig.class, "--server.port=" + port,
                                 "--spring.profiles.active=acceptance");
                     }
                 });

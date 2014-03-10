@@ -1,5 +1,5 @@
 
-springBoot.mainClass = 'sagan.app.site.ApplicationConfiguration'
+springBoot.mainClass = 'sagan.SiteMain'
 
 dependencies {
     def vHttpClient = '4.3'
