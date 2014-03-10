@@ -46,9 +46,7 @@ public class BasicAcceptanceTests {
                 Executors.newSingleThreadExecutor().submit(new Callable<ConfigurableApplicationContext>() {
                     @Override
                     public ConfigurableApplicationContext call() throws Exception {
-                        return (ConfigurableApplicationContext) SpringApplication.run(
-                                IntegrationTestsConfig.class, "--server.port=" + port,
-                                "--spring.profiles.active=acceptance");
+                        return SpringApplication.run(IntegrationTestsConfig.class, "--server.port=" + port);
                     }
                 });
         context = future.get(30, TimeUnit.SECONDS);

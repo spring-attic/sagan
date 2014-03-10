@@ -1,5 +1,6 @@
 package sagan.security.web;
 
+import sagan.SaganProfiles;
 import sagan.team.service.SignInService;
 
 import java.io.IOException;
@@ -119,9 +120,7 @@ public class SecurityConfig {
         }
 
         private boolean isForceHttps() {
-            return !environment.acceptsProfiles(environment.getDefaultProfiles())
-                    && !environment.acceptsProfiles("acceptance")
-                    && !environment.acceptsProfiles("development");
+            return !environment.acceptsProfiles(SaganProfiles.STANDALONE);
         }
 
         @Bean
