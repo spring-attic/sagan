@@ -1,6 +1,6 @@
 package integration.caching;
 
-import sagan.app.site.ApplicationConfiguration;
+import sagan.SiteConfig;
 import sagan.util.Fixtures;
 import sagan.util.SetSystemProperty;
 import sagan.util.service.CachedRestClient;
@@ -28,7 +28,7 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
-import integration.caching.CachedRestClientTests.TestConfiguration;
+import integration.caching.CachedRestClientTests.TestConfig;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyObject;
@@ -46,7 +46,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = TestConfiguration.class, initializers = ConfigFileApplicationContextInitializer.class)
+@ContextConfiguration(classes = TestConfig.class, initializers = ConfigFileApplicationContextInitializer.class)
 public class CachedRestClientTests {
 
     @ClassRule
@@ -64,8 +64,8 @@ public class CachedRestClientTests {
     }
 
     @Configuration
-    @Import({ ApplicationConfiguration.class })
-    public static class TestConfiguration {
+    @Import(SiteConfig.class)
+    public static class TestConfig {
         @Bean
         @Primary
         public GitHub gitHub() {

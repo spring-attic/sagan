@@ -1,6 +1,6 @@
 package integration;
 
-import sagan.search.service.InMemoryElasticSearchConfiguration;
+import sagan.search.service.InMemoryElasticSearchConfig;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import integration.configuration.IntegrationTestsConfiguration;
+import integration.configuration.IntegrationTestsConfig;
 import integration.stubs.StubGithubRestClient;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -26,7 +26,7 @@ import static requestpostprocessors.SecurityRequestPostProcessors.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { IntegrationTestsConfiguration.class, InMemoryElasticSearchConfiguration.class },
+@ContextConfiguration(classes = { IntegrationTestsConfig.class, InMemoryElasticSearchConfig.class },
                       initializers = ConfigFileApplicationContextInitializer.class)
 @Transactional
 public abstract class AbstractIntegrationTests {

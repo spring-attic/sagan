@@ -14,7 +14,7 @@ import org.springframework.social.github.api.impl.GitHubTemplate;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
 
 @Configuration
-public class GitHubConfiguration {
+public class GitHubConfig {
 
     @Value("${github.client.id}")
     private String githubClientId;

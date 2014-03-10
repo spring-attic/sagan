@@ -35,7 +35,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Configuration
 @ControllerAdvice
-public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private StaticPagePathFinder staticPagePathFinder;
@@ -99,7 +99,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Configuration
-    public static class ErrorConfiguration implements EmbeddedServletContainerCustomizer {
+    public static class ErrorConfig implements EmbeddedServletContainerCustomizer {
 
         @Override
         public void customize(ConfigurableEmbeddedServletContainerFactory factory) {
