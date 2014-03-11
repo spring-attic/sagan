@@ -2,8 +2,9 @@ package sagan.tools.support;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import sagan.tools.FileDownload;
 
-public class EclipseXmlDownload implements FileDownload {
+class EclipseXmlDownload implements FileDownload {
 
     @Attribute
     private String os;

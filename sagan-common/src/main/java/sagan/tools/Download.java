@@ -1,4 +1,4 @@
-package sagan.tools.support;
+package sagan.tools;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;

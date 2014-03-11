@@ -1,10 +1,10 @@
-package sagan.tools.search;
+package sagan.tools.support;
 
+import sagan.Indexer;
 import sagan.search.service.CrawledWebDocumentProcessor;
 import sagan.search.service.CrawlerService;
 import sagan.search.service.SearchService;
 import sagan.staticpage.search.LocalStaticPagesSearchEntryMapper;
-import sagan.Indexer;
 
 import java.util.ArrayList;
 

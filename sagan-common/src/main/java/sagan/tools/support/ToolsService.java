@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class ToolsService {
+class ToolsService {
     private final ToolXmlConverter toolXmlConverter = new ToolXmlConverter();
     private final CachedRestClient restClient;
     private final RestTemplate restTemplate;

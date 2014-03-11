@@ -1,9 +1,8 @@
-package sagan.tools.web;
+package sagan.tools.support;
 
 import sagan.tools.EclipseDownloads;
 import sagan.tools.EclipsePlatform;
 import sagan.tools.EclipseRelease;
-import sagan.tools.support.ToolsService;
 import sagan.tools.Architecture;
 import sagan.tools.DownloadLink;
 import sagan.tools.EclipseVersion;

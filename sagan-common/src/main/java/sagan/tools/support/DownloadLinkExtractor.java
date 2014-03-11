@@ -1,8 +1,9 @@
 package sagan.tools.support;
 
 import sagan.tools.DownloadLink;
+import sagan.tools.FileDownload;
 
-public class DownloadLinkExtractor {
+class DownloadLinkExtractor {
     public DownloadLink createDownloadLink(FileDownload download) {
         String url = download.getBucket() + download.getFile();
         String fileType;

@@ -6,7 +6,7 @@ import sagan.guides.support.GettingStartedGuideIndexer;
 import sagan.guides.support.TutorialIndexer;
 import sagan.guides.support.UnderstandingDocIndexer;
 import sagan.staticpage.search.StaticPageIndexer;
-import sagan.tools.search.ToolsIndexer;
+import sagan.tools.support.ToolsIndexer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

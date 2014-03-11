@@ -6,7 +6,7 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 @Root(strict = false)
-public class EclipseXml {
+class EclipseXml {
     @ElementList(entry = "product", type = EclipseXmlProduct.class, inline = true)
     private List<EclipseXmlProduct> eclipseXmlProducts;
 
