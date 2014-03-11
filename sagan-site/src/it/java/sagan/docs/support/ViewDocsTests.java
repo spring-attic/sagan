@@ -1,4 +1,4 @@
-package integration.docs;
+package sagan.docs.support;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;

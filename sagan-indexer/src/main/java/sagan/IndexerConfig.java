@@ -26,7 +26,7 @@ import org.springframework.web.client.RestTemplate;
 @ComponentScan
 @EntityScan
 @EnableJpaRepositories
-public class IndexerConfig {
+class IndexerConfig {
 
     @Bean
     public TaskScheduler scheduler() {
