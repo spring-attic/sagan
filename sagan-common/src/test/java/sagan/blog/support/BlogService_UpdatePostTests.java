@@ -3,7 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
-import sagan.search.service.SearchService;
+import sagan.search.support.SearchService;
 import sagan.support.DateTestUtils;
 import sagan.support.DateService;
 

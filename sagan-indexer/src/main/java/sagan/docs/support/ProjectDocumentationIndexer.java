@@ -3,9 +3,9 @@ package sagan.docs.support;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.support.ProjectMetadataService;
-import sagan.search.service.CrawledWebDocumentProcessor;
-import sagan.search.service.CrawlerService;
-import sagan.search.service.SearchService;
+import sagan.search.support.CrawledWebDocumentProcessor;
+import sagan.search.support.CrawlerService;
+import sagan.search.support.SearchService;
 import sagan.Indexer;
 
 import java.util.ArrayList;

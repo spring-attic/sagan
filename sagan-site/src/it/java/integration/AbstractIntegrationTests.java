@@ -1,7 +1,5 @@
 package integration;
 
-import sagan.search.service.InMemoryElasticSearchConfig;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -18,7 +16,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import integration.configuration.IntegrationTestsConfig;
 import integration.stubs.StubGithubRestClient;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

@@ -1,7 +1,7 @@
 package sagan.guides.support;
 
 import sagan.guides.UnderstandingDoc;
-import sagan.search.service.SearchService;
+import sagan.search.support.SearchService;
 import sagan.Indexer;
 
 import org.springframework.beans.factory.annotation.Autowired;

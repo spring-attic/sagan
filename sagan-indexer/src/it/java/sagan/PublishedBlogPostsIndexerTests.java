@@ -6,7 +6,7 @@ import sagan.blog.PostCategory;
 import sagan.blog.support.PublishedBlogPostsIndexer;
 import sagan.blog.support.PostRepository;
 import sagan.search.SearchEntry;
-import sagan.search.service.SearchService;
+import sagan.search.support.SearchService;
 
 import java.util.Calendar;
 import java.util.Date;
