@@ -1,7 +1,7 @@
 package sagan.team.web;
 
-import sagan.blog.service.BlogService;
-import sagan.blog.view.PostViewFactory;
+import sagan.blog.support.BlogService;
+import sagan.blog.support.PostViewFactory;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
 import sagan.team.TeamLocation;
