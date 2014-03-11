@@ -6,7 +6,7 @@ import sagan.guides.Guide;
 import sagan.guides.GuideMetadata;
 import sagan.guides.ImageProvider;
 import sagan.guides.Tutorial;
-import sagan.util.ResourceNotFoundException;
+import sagan.support.ResourceNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;

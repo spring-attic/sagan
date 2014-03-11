@@ -3,7 +3,7 @@ package sagan.guides.support;
 import sagan.guides.ContentProvider;
 import sagan.guides.UnderstandingDoc;
 import sagan.search.SearchEntry;
-import sagan.util.Fixtures;
+import sagan.support.Fixtures;
 
 import java.util.Date;
 

@@ -5,8 +5,8 @@ import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.search.service.SearchService;
 import sagan.team.MemberProfile;
-import sagan.util.service.DateService;
-import sagan.util.service.db.DatabaseConfig;
+import sagan.support.DateService;
+import sagan.DatabaseConfig;
 
 import java.util.Date;
 import java.util.List;

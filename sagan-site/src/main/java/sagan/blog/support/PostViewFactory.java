@@ -1,7 +1,7 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
-import sagan.util.service.DateService;
+import sagan.support.DateService;
 
 import java.util.ArrayList;
 import java.util.List;

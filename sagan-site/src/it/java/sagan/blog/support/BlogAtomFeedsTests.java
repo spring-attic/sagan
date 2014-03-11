@@ -3,9 +3,8 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.blog.support.PostRepository;
-import sagan.util.web.SiteUrl;
-import sagan.util.web.TimeUtil;
+import sagan.support.DateService;
+import sagan.support.web.SiteUrl;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -106,7 +105,7 @@ public class BlogAtomFeedsTests extends AbstractIntegrationTests {
         assertThat(atomFeed, containsString(post.getRenderedContent()));
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setTimeZone(TimeUtil.UTC);
+        dateFormat.setTimeZone(DateService.TIME_ZONE);
         String postDate = dateFormat.format(post.getCreatedAt());
         assertThat(atomFeed, containsString(postDate));
         assertThat(atomFeed, containsString("/blog/" + post.getPublicSlug()));

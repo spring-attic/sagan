@@ -2,8 +2,8 @@ package sagan.guides.support;
 
 import sagan.guides.ContentProvider;
 import sagan.guides.UnderstandingDoc;
-import sagan.util.ResourceNotFoundException;
-import sagan.util.service.github.RepoContent;
+import sagan.support.ResourceNotFoundException;
+import sagan.support.github.RepoContent;
 
 import java.util.ArrayList;
 import java.util.List;

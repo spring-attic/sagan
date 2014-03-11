@@ -5,7 +5,7 @@ import sagan.tools.eclipse.EclipsePackage;
 import sagan.tools.eclipse.EclipsePlatform;
 import sagan.tools.eclipse.EclipseRelease;
 import sagan.tools.eclipse.xml.EclipseXml;
-import sagan.util.Fixtures;
+import sagan.support.Fixtures;
 
 import java.util.List;
 import java.util.Map;

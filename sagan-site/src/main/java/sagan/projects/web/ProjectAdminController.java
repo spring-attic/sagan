@@ -3,7 +3,7 @@ package sagan.projects.web;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.service.ProjectMetadataService;
-import sagan.util.web.NavSection;
+import sagan.support.web.NavSection;
 
 import java.util.ArrayList;
 import java.util.Arrays;

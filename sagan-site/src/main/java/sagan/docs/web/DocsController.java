@@ -2,7 +2,7 @@ package sagan.docs.web;
 
 import sagan.projects.Project;
 import sagan.projects.service.ProjectMetadataService;
-import sagan.util.web.NavSection;
+import sagan.support.web.NavSection;
 
 import java.util.ArrayList;
 import java.util.List;

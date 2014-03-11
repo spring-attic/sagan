@@ -6,7 +6,7 @@ import sagan.projects.service.ProjectMetadataService;
 import sagan.search.service.CrawledWebDocumentProcessor;
 import sagan.search.service.CrawlerService;
 import sagan.search.service.SearchService;
-import sagan.util.index.Indexer;
+import sagan.Indexer;
 
 import java.util.ArrayList;
 import java.util.List;

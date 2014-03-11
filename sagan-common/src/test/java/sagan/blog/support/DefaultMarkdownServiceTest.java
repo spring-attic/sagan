@@ -1,6 +1,6 @@
 package sagan.blog.support;
 
-import sagan.util.service.github.GitHubClient;
+import sagan.support.github.GitHubClient;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -5,8 +5,8 @@ import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
 import sagan.team.MemberProfile;
 import sagan.team.service.TeamRepository;
-import sagan.util.service.DateService;
-import sagan.util.web.PageableFactory;
+import sagan.support.DateService;
+import sagan.support.web.PageableFactory;
 
 import java.security.Principal;
 import java.util.ArrayList;

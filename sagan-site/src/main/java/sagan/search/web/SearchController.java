@@ -5,8 +5,8 @@ import sagan.search.SearchResult;
 import sagan.search.SearchResults;
 import sagan.search.SpringFacetsBuilder;
 import sagan.search.service.SearchService;
-import sagan.util.web.PageableFactory;
-import sagan.util.web.PaginationInfo;
+import sagan.support.web.PageableFactory;
+import sagan.support.web.PaginationInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

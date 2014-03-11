@@ -1,6 +1,6 @@
 package sagan.guides.support;
 
-import sagan.util.web.NavSection;
+import sagan.support.web.NavSection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

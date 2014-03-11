@@ -6,7 +6,7 @@ import sagan.tools.eclipse.xml.EclipseXml;
 import sagan.tools.toolsuite.ToolSuiteDownloads;
 import sagan.tools.toolsuite.parser.ToolXmlConverter;
 import sagan.tools.toolsuite.xml.ToolSuiteXml;
-import sagan.util.service.CachedRestClient;
+import sagan.support.cache.CachedRestClient;
 
 import org.simpleframework.xml.Serializer;
 

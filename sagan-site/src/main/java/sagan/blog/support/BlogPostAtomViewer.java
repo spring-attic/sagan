@@ -1,9 +1,8 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
-import sagan.util.service.DateService;
-import sagan.util.web.SiteUrl;
-import sagan.util.web.TimeUtil;
+import sagan.support.DateService;
+import sagan.support.web.SiteUrl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -96,7 +95,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 
     private void setId(Post post, Entry entry, HttpServletRequest request) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setTimeZone(TimeUtil.UTC);
+        dateFormat.setTimeZone(DateService.TIME_ZONE);
         String dateString = dateFormat.format(post.getCreatedAt());
         String host = request.getServerName();
         String id = String.format("tag:%s,%s:%s", host, dateString, post.getId());

@@ -1,6 +1,6 @@
 package sagan.tools.toolsuite.xml;
 
-import sagan.util.Fixtures;
+import sagan.support.Fixtures;
 
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;

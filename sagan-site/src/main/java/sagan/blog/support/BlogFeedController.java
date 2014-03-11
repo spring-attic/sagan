@@ -2,7 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.util.web.PageableFactory;
+import sagan.support.web.PageableFactory;
 
 import javax.servlet.http.HttpServletResponse;
 

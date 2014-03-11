@@ -1,6 +1,6 @@
 package sagan.guides.support;
 
-import sagan.util.Fixtures;
+import sagan.support.Fixtures;
 
 import org.junit.Test;
 

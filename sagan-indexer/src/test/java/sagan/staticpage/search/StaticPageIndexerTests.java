@@ -2,7 +2,7 @@ package sagan.staticpage.search;
 
 import sagan.search.service.CrawlerService;
 import sagan.search.service.SearchService;
-import sagan.util.web.StaticPagePathFinder;
+import sagan.support.StaticPagePathFinder;
 
 import java.io.IOException;
 import java.util.Arrays;

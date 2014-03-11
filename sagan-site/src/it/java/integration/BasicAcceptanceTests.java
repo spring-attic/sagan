@@ -1,6 +1,6 @@
 package integration;
 
-import sagan.util.FreePortFinder;
+import sagan.support.FreePortFinder;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;

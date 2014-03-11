@@ -2,7 +2,7 @@ package sagan.guides.support;
 
 import sagan.guides.Tutorial;
 import sagan.search.service.SearchService;
-import sagan.util.index.Indexer;
+import sagan.Indexer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

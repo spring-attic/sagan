@@ -3,8 +3,8 @@ package sagan.staticpage.search;
 import sagan.search.service.CrawledWebDocumentProcessor;
 import sagan.search.service.CrawlerService;
 import sagan.search.service.SearchService;
-import sagan.util.index.Indexer;
-import sagan.util.web.StaticPagePathFinder;
+import sagan.Indexer;
+import sagan.support.StaticPagePathFinder;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.team.MemberProfile;
-import sagan.util.service.DateService;
+import sagan.support.DateService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
