@@ -1,7 +1,7 @@
 package sagan;
 
 import sagan.blog.support.PublishedBlogPostsIndexer;
-import sagan.docs.search.ProjectDocumentationIndexer;
+import sagan.docs.support.ProjectDocumentationIndexer;
 import sagan.guides.support.GettingStartedGuideIndexer;
 import sagan.guides.support.TutorialIndexer;
 import sagan.guides.support.UnderstandingDocIndexer;

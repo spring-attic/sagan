@@ -1,4 +1,4 @@
-package sagan.docs.web;
+package sagan.docs.support;
 
 import sagan.projects.Project;
 import sagan.projects.service.ProjectMetadataService;
@@ -17,7 +17,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Controller
 @RequestMapping("/docs")
 @NavSection("docs")
-public class DocsController {
+class DocsController {
 
     private ProjectMetadataService service;
 

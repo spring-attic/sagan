@@ -1,4 +1,4 @@
-package sagan.docs.search;
+package sagan.docs.support;
 
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
