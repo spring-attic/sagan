@@ -1,7 +1,6 @@
-package sagan.guides.search;
+package sagan.guides.support;
 
 import sagan.guides.Tutorial;
-import sagan.guides.support.Tutorials;
 import sagan.search.service.SearchService;
 import sagan.util.index.Indexer;
 

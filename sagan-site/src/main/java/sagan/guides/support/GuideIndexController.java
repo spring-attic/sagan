@@ -1,7 +1,5 @@
-package sagan.guides.web;
+package sagan.guides.support;
 
-import sagan.guides.support.GettingStartedGuides;
-import sagan.guides.support.Tutorials;
 import sagan.util.web.NavSection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @NavSection("guides")
-public class GuideIndexController {
+class GuideIndexController {
 
     private final Tutorials tutorials;
     private final GettingStartedGuides gsGuides;

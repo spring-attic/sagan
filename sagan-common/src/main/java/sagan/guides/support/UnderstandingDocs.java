@@ -19,7 +19,7 @@ import org.springframework.web.client.RestClientException;
  * @author Chris Beams
  */
 @Component
-public class UnderstandingDocs implements DocRepository<UnderstandingDoc>, ContentProvider<UnderstandingDoc> {
+class UnderstandingDocs implements DocRepository<UnderstandingDoc>, ContentProvider<UnderstandingDoc> {
 
     private static final String CONTENT_PATH = "/repos/%s/%s/contents/%s/README.md";
     private static final String SIDEBAR_PATH = "/repos/%s/%s/contents/%s/SIDEBAR.md";

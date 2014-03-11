@@ -1,8 +1,7 @@
-package sagan.guides.web;
+package sagan.guides.support;
 
 import sagan.guides.DefaultGuideMetadata;
 import sagan.guides.GettingStartedGuide;
-import sagan.guides.support.GettingStartedGuides;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package integration.understanding;
+package sagan.guides.support;
 
 import sagan.util.Fixtures;
 

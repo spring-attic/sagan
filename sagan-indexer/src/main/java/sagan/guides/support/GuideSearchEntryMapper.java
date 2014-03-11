@@ -1,4 +1,4 @@
-package sagan.guides.search;
+package sagan.guides.support;
 
 import sagan.guides.Guide;
 import sagan.search.SearchEntry;
@@ -8,7 +8,7 @@ import java.util.Date;
 
 import org.jsoup.Jsoup;
 
-public class GuideSearchEntryMapper implements SearchEntryMapper<Guide> {
+class GuideSearchEntryMapper implements SearchEntryMapper<Guide> {
 
     @Override
     public SearchEntry map(Guide guide) {

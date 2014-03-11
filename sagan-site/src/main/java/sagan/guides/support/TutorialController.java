@@ -1,6 +1,5 @@
-package sagan.guides.web;
+package sagan.guides.support;
 
-import sagan.guides.support.Tutorials;
 import sagan.util.web.NavSection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Controller
 @NavSection("guides")
 @RequestMapping(value = "/guides/tutorials", method = { GET, HEAD })
-public class TutorialController {
+class TutorialController {
 
     private Tutorials tutorials;
 
