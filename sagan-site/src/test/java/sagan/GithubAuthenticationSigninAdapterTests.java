@@ -1,4 +1,4 @@
-package sagan.security.web;
+package sagan;
 
 import sagan.team.MemberProfile;
 import sagan.team.service.SignInService;
@@ -24,6 +24,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.*;
+import static sagan.SecurityConfig.GithubAuthenticationSigninAdapter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GithubAuthenticationSigninAdapterTests {

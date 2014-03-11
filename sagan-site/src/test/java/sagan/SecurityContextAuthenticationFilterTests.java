@@ -1,4 +1,4 @@
-package sagan.security.web;
+package sagan;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import static org.junit.Assert.assertEquals;
+import static sagan.SecurityConfig.SecurityContextAuthenticationFilter;
 
 public class SecurityContextAuthenticationFilterTests {
 
