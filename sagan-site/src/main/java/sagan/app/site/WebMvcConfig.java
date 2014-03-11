@@ -1,5 +1,6 @@
 package sagan.app.site;
 
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import sagan.util.ResourceNotFoundException;
 import sagan.util.web.NavSection;
 import sagan.util.web.StaticPagePathFinder;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.context.annotation.Bean;
@@ -102,7 +102,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public static class ErrorConfig implements EmbeddedServletContainerCustomizer {
 
         @Override
-        public void customize(ConfigurableEmbeddedServletContainerFactory factory) {
+        public void customize(ConfigurableEmbeddedServletContainer factory) {
             factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"));
             factory.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500"));
         }
