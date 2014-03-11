@@ -1,6 +1,5 @@
-package sagan.projects.web;
+package sagan.projects.support;
 
-import sagan.projects.service.ProjectMetadataService;
 import sagan.support.web.NavSection;
 
 import org.springframework.beans.factory.annotation.Autowired;

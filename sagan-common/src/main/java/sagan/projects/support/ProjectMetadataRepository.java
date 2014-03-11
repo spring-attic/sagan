@@ -1,4 +1,4 @@
-package sagan.projects.service;
+package sagan.projects.support;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,7 +12,7 @@ import java.util.List;
  * @author Rob Winch
  */
 @Repository
-public interface ProjectDataRepository extends JpaRepository<Project, String> {
+interface ProjectMetadataRepository extends JpaRepository<Project, String> {
     List<Project> findByCategory(String category);
 
     @Query("SELECT DISTINCT p FROM Project p JOIN FETCH p.releaseList")

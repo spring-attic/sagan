@@ -10,7 +10,7 @@ import sagan.guides.Guide;
 import sagan.guides.GuideMetadata;
 import sagan.guides.ImageProvider;
 import sagan.projects.Project;
-import sagan.projects.service.ProjectMetadataService;
+import sagan.projects.support.ProjectMetadataService;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.github.Readme;
 

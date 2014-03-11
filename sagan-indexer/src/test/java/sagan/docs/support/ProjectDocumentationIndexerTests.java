@@ -2,7 +2,7 @@ package sagan.docs.support;
 
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
-import sagan.projects.service.ProjectMetadataService;
+import sagan.projects.support.ProjectMetadataService;
 import sagan.search.service.CrawledWebDocumentProcessor;
 import sagan.search.service.CrawlerService;
 import sagan.search.service.SearchService;

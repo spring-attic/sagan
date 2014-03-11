@@ -1,9 +1,9 @@
-package integration.projects;
+package sagan.projects.support;
 
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
-import sagan.projects.service.ProjectDataRepository;
-import sagan.projects.service.ProjectMetadataService;
+import sagan.projects.support.ProjectMetadataRepository;
+import sagan.projects.support.ProjectMetadataService;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,7 +11,6 @@ import java.util.List;
 import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import integration.AbstractIntegrationTests;
 
@@ -21,12 +20,7 @@ import static org.hamcrest.Matchers.equalTo;
 /**
  * @author Rob Winch
  */
-public class ProjectRepositoryTests extends AbstractIntegrationTests {
-
-    JdbcTemplate jdbc;
-
-    @Autowired
-    private ProjectDataRepository repository;
+public class ProjectMetadataServiceTests extends AbstractIntegrationTests {
 
     @Autowired
     private ProjectMetadataService service;
@@ -109,7 +103,7 @@ public class ProjectRepositoryTests extends AbstractIntegrationTests {
     }
 
     @Autowired
-    private ProjectDataRepository repo;
+    private ProjectMetadataRepository repo;
 
     // Verify we don't have issue with deleting a release that might occur when using @OrderColumn
     // See https://hibernate.atlassian.net/browse/HHH-1268

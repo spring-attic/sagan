@@ -2,7 +2,7 @@ package integration.admin;
 
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
-import sagan.projects.service.ProjectMetadataService;
+import sagan.projects.support.ProjectMetadataService;
 
 import java.util.List;
 

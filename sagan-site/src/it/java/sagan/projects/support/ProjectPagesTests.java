@@ -1,4 +1,4 @@
-package integration.projects;
+package sagan.projects.support;
 
 import org.junit.Test;
 

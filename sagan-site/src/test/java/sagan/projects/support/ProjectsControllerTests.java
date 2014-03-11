@@ -1,6 +1,4 @@
-package sagan.projects.web;
-
-import sagan.projects.service.ProjectMetadataService;
+package sagan.projects.support;
 
 import org.junit.Before;
 import org.junit.Test;
