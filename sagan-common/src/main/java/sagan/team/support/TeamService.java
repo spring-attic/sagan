@@ -1,6 +1,6 @@
 package sagan.team.support;
 
-import sagan.search.service.SearchService;
+import sagan.search.support.SearchService;
 import sagan.team.MemberProfile;
 import sagan.DatabaseConfig;
 

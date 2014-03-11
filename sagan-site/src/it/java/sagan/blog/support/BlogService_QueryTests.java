@@ -3,7 +3,7 @@ package sagan.blog.support;
 import sagan.blog.BlogPostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.search.service.SearchService;
+import sagan.search.support.SearchService;
 import sagan.team.MemberProfile;
 import sagan.support.DateService;
 import sagan.support.web.PageableFactory;

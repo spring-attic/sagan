@@ -24,8 +24,6 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
-import integration.configuration.IntegrationTestsConfig;
-
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 

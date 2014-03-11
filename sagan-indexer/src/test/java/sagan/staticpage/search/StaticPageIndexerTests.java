@@ -1,7 +1,7 @@
 package sagan.staticpage.search;
 
-import sagan.search.service.CrawlerService;
-import sagan.search.service.SearchService;
+import sagan.search.support.CrawlerService;
+import sagan.search.support.SearchService;
 import sagan.support.StaticPagePathFinder;
 
 import java.io.IOException;

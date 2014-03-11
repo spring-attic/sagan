@@ -51,7 +51,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Configuration
-public class SecurityConfig {
+class SecurityConfig {
 
     static final String SIGNIN_SUCCESS_PATH = "/signin/success";
 
