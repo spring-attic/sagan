@@ -1,6 +1,6 @@
 package sagan.team.service;
 
-import sagan.util.service.github.GitHubClient;
+import sagan.support.github.GitHubClient;
 
 import java.io.IOException;
 import java.util.ArrayList;

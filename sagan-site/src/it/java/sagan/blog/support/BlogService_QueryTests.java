@@ -3,13 +3,10 @@ package sagan.blog.support;
 import sagan.blog.BlogPostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.blog.support.BlogService;
-import sagan.blog.support.PostFormAdapter;
-import sagan.blog.support.PostRepository;
 import sagan.search.service.SearchService;
 import sagan.team.MemberProfile;
-import sagan.util.service.DateService;
-import sagan.util.web.PageableFactory;
+import sagan.support.DateService;
+import sagan.support.web.PageableFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

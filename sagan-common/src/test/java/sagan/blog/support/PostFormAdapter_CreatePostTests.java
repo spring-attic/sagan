@@ -4,8 +4,8 @@ import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.team.MemberProfile;
 import sagan.team.service.TeamRepository;
-import sagan.util.DateTestUtils;
-import sagan.util.service.DateService;
+import sagan.support.DateTestUtils;
+import sagan.support.DateService;
 
 import java.util.Date;
 

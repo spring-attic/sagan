@@ -6,7 +6,7 @@ import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
 import sagan.team.TeamLocation;
 import sagan.team.service.TeamService;
-import sagan.util.service.DateService;
+import sagan.support.DateService;
 
 import java.util.ArrayList;
 import java.util.List;

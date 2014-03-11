@@ -2,9 +2,8 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.util.service.DateService;
-import sagan.util.web.SiteUrl;
-import sagan.util.web.TimeUtil;
+import sagan.support.DateService;
+import sagan.support.web.SiteUrl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +32,7 @@ public class BlogPostAtomViewerTests {
     private SiteUrl siteUrl;
     private BlogPostAtomViewer blogPostAtomViewer;
     private Feed feed = new Feed();
-    private Calendar calendar = Calendar.getInstance(TimeUtil.UTC);
+    private Calendar calendar = Calendar.getInstance(DateService.TIME_ZONE);
     private HttpServletRequest request = mock(HttpServletRequest.class);
 
     @Before

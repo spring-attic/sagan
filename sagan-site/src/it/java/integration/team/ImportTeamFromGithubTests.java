@@ -3,7 +3,7 @@ package integration.team;
 import sagan.team.MemberProfile;
 import sagan.team.service.TeamImporter;
 import sagan.team.service.TeamRepository;
-import sagan.util.Fixtures;
+import sagan.support.Fixtures;
 
 import org.junit.Before;
 import org.junit.Test;

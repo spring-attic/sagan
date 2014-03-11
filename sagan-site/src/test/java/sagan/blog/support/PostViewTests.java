@@ -3,9 +3,8 @@ package sagan.blog.support;
 import org.junit.After;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.blog.support.PostView;
-import sagan.util.DateTestUtils;
-import sagan.util.service.DateService;
+import sagan.support.DateTestUtils;
+import sagan.support.DateService;
 
 import java.text.ParseException;
 import java.util.Locale;

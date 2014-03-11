@@ -1,6 +1,6 @@
 package integration.tools;
 
-import sagan.util.Fixtures;
+import sagan.support.Fixtures;
 
 import java.io.IOException;
 

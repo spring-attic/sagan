@@ -3,7 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.util.service.DateService;
+import sagan.support.DateService;
 
 import javax.servlet.http.HttpServletRequest;
 

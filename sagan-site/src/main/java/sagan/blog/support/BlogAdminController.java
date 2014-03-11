@@ -4,7 +4,7 @@ import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.team.MemberProfile;
 import sagan.team.service.TeamRepository;
-import sagan.util.web.PageableFactory;
+import sagan.support.web.PageableFactory;
 
 import java.security.Principal;
 

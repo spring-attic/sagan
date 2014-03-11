@@ -2,7 +2,7 @@ package sagan.blog.support;
 
 import org.junit.After;
 import sagan.blog.Post;
-import sagan.util.service.DateService;
+import sagan.support.DateService;
 
 import java.util.Collections;
 import java.util.Locale;

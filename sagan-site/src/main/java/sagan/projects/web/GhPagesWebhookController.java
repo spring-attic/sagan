@@ -2,7 +2,7 @@ package sagan.projects.web;
 
 import sagan.projects.Project;
 import sagan.projects.service.ProjectMetadataService;
-import sagan.util.service.github.GitHubClient;
+import sagan.support.github.GitHubClient;
 
 import java.io.IOException;
 import java.net.URI;

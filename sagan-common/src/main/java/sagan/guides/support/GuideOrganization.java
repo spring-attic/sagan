@@ -7,9 +7,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.yaml.snakeyaml.Yaml;
-import sagan.util.service.github.GitHubClient;
-import sagan.util.service.github.Readme;
-import sagan.util.service.github.RepoContent;
+import sagan.support.github.GitHubClient;
+import sagan.support.github.Readme;
+import sagan.support.github.RepoContent;
 
 import java.io.*;
 import java.util.*;

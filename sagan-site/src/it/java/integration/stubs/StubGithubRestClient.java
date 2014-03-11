@@ -1,6 +1,6 @@
 package integration.stubs;
 
-import sagan.util.service.github.GitHubClient;
+import sagan.support.github.GitHubClient;
 
 import java.util.HashMap;
 import java.util.Map;

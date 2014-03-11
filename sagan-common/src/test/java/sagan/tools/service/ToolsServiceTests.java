@@ -4,8 +4,8 @@ import sagan.tools.toolsuite.DownloadLink;
 import sagan.tools.toolsuite.EclipseVersion;
 import sagan.tools.toolsuite.ToolSuiteDownloads;
 import sagan.tools.toolsuite.ToolSuitePlatform;
-import sagan.util.Fixtures;
-import sagan.util.service.CachedRestClient;
+import sagan.support.Fixtures;
+import sagan.support.cache.CachedRestClient;
 
 import java.util.List;
 

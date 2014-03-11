@@ -1,6 +1,6 @@
 package sagan.blog.support;
 
-import sagan.util.service.github.GitHubClient;
+import sagan.support.github.GitHubClient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

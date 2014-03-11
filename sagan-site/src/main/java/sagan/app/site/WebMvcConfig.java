@@ -1,9 +1,9 @@
 package sagan.app.site;
 
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import sagan.util.ResourceNotFoundException;
-import sagan.util.web.NavSection;
-import sagan.util.web.StaticPagePathFinder;
+import sagan.support.ResourceNotFoundException;
+import sagan.support.web.NavSection;
+import sagan.support.StaticPagePathFinder;
 
 import java.io.IOException;
 

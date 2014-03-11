@@ -1,7 +1,7 @@
 package integration.caching;
 
 import sagan.team.service.TeamService;
-import sagan.util.service.db.DatabaseConfig;
+import sagan.DatabaseConfig;
 
 import java.lang.reflect.Method;
 

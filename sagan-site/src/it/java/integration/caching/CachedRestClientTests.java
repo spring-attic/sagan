@@ -1,9 +1,9 @@
 package integration.caching;
 
 import sagan.SiteConfig;
-import sagan.util.Fixtures;
-import sagan.util.SetSystemProperty;
-import sagan.util.service.CachedRestClient;
+import sagan.support.Fixtures;
+import sagan.support.SetSystemProperty;
+import sagan.support.cache.CachedRestClient;
 
 import org.junit.After;
 import org.junit.Before;

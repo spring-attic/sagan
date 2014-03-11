@@ -1,6 +1,6 @@
 package sagan.blog.support;
 
-import sagan.util.service.db.DatabaseConfig;
+import sagan.DatabaseConfig;
 
 import java.lang.reflect.Method;
 

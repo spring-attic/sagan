@@ -5,8 +5,8 @@ import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
 import sagan.search.SearchException;
 import sagan.search.service.SearchService;
-import sagan.util.DateTestUtils;
-import sagan.util.service.DateService;
+import sagan.support.DateTestUtils;
+import sagan.support.DateService;
 
 import java.util.Date;
 

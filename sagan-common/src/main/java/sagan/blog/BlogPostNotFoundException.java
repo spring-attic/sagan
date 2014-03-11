@@ -1,6 +1,6 @@
 package sagan.blog;
 
-import sagan.util.ResourceNotFoundException;
+import sagan.support.ResourceNotFoundException;
 
 @SuppressWarnings("serial")
 public class BlogPostNotFoundException extends ResourceNotFoundException {

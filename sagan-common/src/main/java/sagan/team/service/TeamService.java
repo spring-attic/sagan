@@ -3,7 +3,7 @@ package sagan.team.service;
 import sagan.search.service.SearchService;
 import sagan.team.MemberProfile;
 import sagan.team.service.index.MemberProfileSearchEntryMapper;
-import sagan.util.service.db.DatabaseConfig;
+import sagan.DatabaseConfig;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@ import sagan.search.service.CrawledWebDocumentProcessor;
 import sagan.search.service.CrawlerService;
 import sagan.search.service.SearchService;
 import sagan.staticpage.search.LocalStaticPagesSearchEntryMapper;
-import sagan.util.index.Indexer;
+import sagan.Indexer;
 
 import java.util.ArrayList;
 
