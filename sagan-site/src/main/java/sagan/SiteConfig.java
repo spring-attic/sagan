@@ -1,6 +1,6 @@
 package sagan;
 
-import sagan.blog.web.feed.BlogPostAtomViewer;
+import sagan.blog.support.BlogPostAtomViewer;
 import sagan.guides.support.GettingStartedGuides;
 import sagan.util.service.CachedRestClient;
 import sagan.util.service.DateService;

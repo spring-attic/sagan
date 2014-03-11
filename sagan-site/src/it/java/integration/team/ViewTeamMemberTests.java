@@ -2,7 +2,7 @@ package integration.team;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.blog.service.PostRepository;
+import sagan.blog.support.PostRepository;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
 import sagan.team.service.TeamRepository;
