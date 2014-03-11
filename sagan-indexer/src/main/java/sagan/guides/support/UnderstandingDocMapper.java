@@ -1,4 +1,4 @@
-package sagan.guides.search;
+package sagan.guides.support;
 
 import sagan.guides.UnderstandingDoc;
 import sagan.search.SearchEntry;

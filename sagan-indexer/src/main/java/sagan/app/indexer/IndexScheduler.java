@@ -2,9 +2,9 @@ package sagan.app.indexer;
 
 import sagan.blog.support.PublishedBlogPostsIndexer;
 import sagan.docs.search.ProjectDocumentationIndexer;
-import sagan.guides.search.GettingStartedGuideIndexer;
-import sagan.guides.search.TutorialIndexer;
-import sagan.guides.search.UnderstandingDocIndexer;
+import sagan.guides.support.GettingStartedGuideIndexer;
+import sagan.guides.support.TutorialIndexer;
+import sagan.guides.support.UnderstandingDocIndexer;
 import sagan.staticpage.search.StaticPageIndexer;
 import sagan.tools.search.ToolsIndexer;
 

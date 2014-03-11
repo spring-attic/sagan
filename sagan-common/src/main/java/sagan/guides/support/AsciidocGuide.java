@@ -3,7 +3,7 @@ package sagan.guides.support;
 import java.util.Map;
 import java.util.Set;
 
-public class AsciidocGuide {
+class AsciidocGuide {
     private final String content;
     private final Set<String> tags;
     private final Set<String> projects;

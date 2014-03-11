@@ -25,7 +25,7 @@ import org.springframework.web.client.RestClientException;
  * @author Chris Beams
  */
 @Component
-public class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutorial>, ImageProvider {
+class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutorial>, ImageProvider {
 
     static final String REPO_PREFIX = "tut-";
 
