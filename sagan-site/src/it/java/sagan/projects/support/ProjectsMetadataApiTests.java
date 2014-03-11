@@ -1,4 +1,4 @@
-package integration.projects;
+package sagan.projects.support;
 
 import java.util.List;
 import java.util.Map;

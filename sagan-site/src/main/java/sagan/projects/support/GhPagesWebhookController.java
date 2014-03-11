@@ -1,7 +1,6 @@
-package sagan.projects.web;
+package sagan.projects.support;
 
 import sagan.projects.Project;
-import sagan.projects.service.ProjectMetadataService;
 import sagan.support.github.GitHubClient;
 
 import java.io.IOException;

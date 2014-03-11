@@ -1,6 +1,6 @@
 package sagan;
 
-import sagan.projects.service.ProjectMetadataService;
+import sagan.projects.support.ProjectMetadataService;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.StaticPagePathFinder;
 import sagan.support.web.NavSection;
