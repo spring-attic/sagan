@@ -1,4 +1,4 @@
-package integration.tools;
+package sagan.tools.support;
 
 import sagan.support.Fixtures;
 

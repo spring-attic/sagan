@@ -2,7 +2,7 @@ package sagan.tools.support;
 
 import sagan.tools.EclipseDownloads;
 
-public class EclipseDownloadsXmlConverter {
+class EclipseDownloadsXmlConverter {
     public EclipseDownloads convert(EclipseXml xml) {
         EclipseDownloadsBuilder builder = new EclipseDownloadsBuilder();
 

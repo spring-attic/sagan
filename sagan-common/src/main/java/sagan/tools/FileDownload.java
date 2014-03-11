@@ -1,4 +1,4 @@
-package sagan.tools.support;
+package sagan.tools;
 
 public interface FileDownload {
     String getBucket();

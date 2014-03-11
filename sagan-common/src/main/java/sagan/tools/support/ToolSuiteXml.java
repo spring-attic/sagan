@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
+import sagan.tools.Release;
 
 @Root(strict = false)
-public class ToolSuiteXml {
+class ToolSuiteXml {
 
     @ElementList(name = "release", type = Release.class, inline = true)
     private List<Release> releases;

@@ -1,6 +1,7 @@
 package sagan.tools.support;
 
 import sagan.tools.Architecture;
+import sagan.tools.Download;
 import sagan.tools.DownloadLink;
 import sagan.tools.EclipseVersion;
 import sagan.tools.ToolSuiteDownloads;
@@ -12,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ToolSuiteBuilder {
+class ToolSuiteBuilder {
 
     private final DownloadLinkExtractor downloadLinkExtractor = new DownloadLinkExtractor();
     private final String shortName;

@@ -1,5 +1,7 @@
 package sagan.tools.support;
 
+import sagan.tools.Download;
+import sagan.tools.Release;
 import sagan.tools.ToolSuiteDownloads;
 import sagan.tools.UpdateSiteArchive;
 

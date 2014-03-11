@@ -14,7 +14,7 @@ import java.util.Map;
 
 import org.springframework.util.StringUtils;
 
-public class EclipseDownloadsBuilder {
+class EclipseDownloadsBuilder {
     private final Map<String, EclipsePlatform> platforms = new HashMap<>();
     private final Map<String, EclipsePackage> packages = new HashMap<>();
     private final Map<String, EclipseRelease> releases = new HashMap<>();
