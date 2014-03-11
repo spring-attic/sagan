@@ -1,15 +1,15 @@
 package sagan.tools.web;
 
-import sagan.tools.eclipse.EclipseDownloads;
-import sagan.tools.eclipse.EclipsePlatform;
-import sagan.tools.eclipse.EclipseRelease;
-import sagan.tools.service.ToolsService;
-import sagan.tools.toolsuite.Architecture;
-import sagan.tools.toolsuite.DownloadLink;
-import sagan.tools.toolsuite.EclipseVersion;
-import sagan.tools.toolsuite.ToolSuiteDownloads;
-import sagan.tools.toolsuite.ToolSuitePlatform;
-import sagan.tools.toolsuite.UpdateSiteArchive;
+import sagan.tools.EclipseDownloads;
+import sagan.tools.EclipsePlatform;
+import sagan.tools.EclipseRelease;
+import sagan.tools.support.ToolsService;
+import sagan.tools.Architecture;
+import sagan.tools.DownloadLink;
+import sagan.tools.EclipseVersion;
+import sagan.tools.ToolSuiteDownloads;
+import sagan.tools.ToolSuitePlatform;
+import sagan.tools.UpdateSiteArchive;
 
 import java.util.Collections;
 import java.util.HashMap;

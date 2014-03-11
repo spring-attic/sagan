@@ -1,9 +1,9 @@
 package sagan.tools.web;
 
-import sagan.tools.eclipse.EclipseDownloads;
-import sagan.tools.eclipse.EclipsePlatform;
-import sagan.tools.service.ToolsService;
-import sagan.tools.toolsuite.ToolSuiteDownloads;
+import sagan.tools.EclipseDownloads;
+import sagan.tools.EclipsePlatform;
+import sagan.tools.support.ToolsService;
+import sagan.tools.ToolSuiteDownloads;
 
 import java.util.ArrayList;
 import java.util.List;
