@@ -2,9 +2,8 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.blog.support.PostRepository;
 import sagan.team.MemberProfile;
-import sagan.team.service.TeamRepository;
+import sagan.team.support.TeamRepository;
 
 import java.security.Principal;
 

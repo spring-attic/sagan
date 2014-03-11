@@ -4,7 +4,7 @@ import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
 import sagan.team.MemberProfile;
-import sagan.team.service.TeamRepository;
+import sagan.team.support.TeamRepository;
 import sagan.support.DateService;
 import sagan.support.web.PageableFactory;
 

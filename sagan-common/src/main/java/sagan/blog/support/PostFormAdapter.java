@@ -2,7 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.team.MemberProfile;
-import sagan.team.service.TeamRepository;
+import sagan.team.support.TeamRepository;
 import sagan.support.DateService;
 
 import java.util.Date;

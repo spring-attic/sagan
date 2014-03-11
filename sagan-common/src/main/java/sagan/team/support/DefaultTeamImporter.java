@@ -1,4 +1,4 @@
-package sagan.team.service;
+package sagan.team.support;
 
 import sagan.support.github.GitHubClient;
 
@@ -18,7 +18,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class DefaultTeamImporter implements TeamImporter {
+class DefaultTeamImporter implements TeamImporter {
 
     private static final String SPRING_TEAM_MEMBERS_ID = "482984";
 

@@ -1,4 +1,4 @@
-package sagan.team.service;
+package sagan.team.support;
 
 import org.junit.Before;
 import org.junit.Test;

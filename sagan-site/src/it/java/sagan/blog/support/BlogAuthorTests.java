@@ -2,10 +2,9 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.blog.support.PostRepository;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
-import sagan.team.service.TeamRepository;
+import sagan.team.support.TeamRepository;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

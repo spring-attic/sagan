@@ -1,4 +1,4 @@
-package sagan.team.web;
+package sagan.team.support;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 

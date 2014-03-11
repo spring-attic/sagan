@@ -1,8 +1,7 @@
-package sagan.team.service;
+package sagan.team.support;
 
 import sagan.search.service.SearchService;
 import sagan.team.MemberProfile;
-import sagan.team.service.index.MemberProfileSearchEntryMapper;
 import sagan.DatabaseConfig;
 
 import java.util.List;
@@ -24,7 +23,7 @@ import org.springframework.util.StringUtils;
  * @author Chris Beams
  */
 @Service
-public class TeamService {
+class TeamService {
     private final TeamRepository teamRepository;
     private final SearchService searchService;
     private final MemberProfileSearchEntryMapper mapper;

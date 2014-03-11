@@ -1,7 +1,7 @@
-package sagan.team.service;
+package sagan.team.support;
 
 import org.springframework.social.github.api.GitHub;
 
-public interface TeamImporter {
+interface TeamImporter {
     void importTeamMembers(GitHub gitHub);
 }

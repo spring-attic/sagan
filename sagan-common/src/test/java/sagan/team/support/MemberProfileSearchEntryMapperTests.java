@@ -1,7 +1,7 @@
-package sagan.team;
+package sagan.team.support;
 
 import sagan.search.SearchEntry;
-import sagan.team.service.index.MemberProfileSearchEntryMapper;
+import sagan.team.MemberProfile;
 
 import org.junit.Before;
 import org.junit.Test;

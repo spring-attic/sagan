@@ -1,4 +1,4 @@
-package sagan.team.web;
+package sagan.team.support;
 
 import sagan.blog.Post;
 import sagan.blog.support.BlogService;
@@ -6,7 +6,6 @@ import sagan.blog.support.PostView;
 import sagan.blog.support.PostViewFactory;
 import sagan.team.MemberProfile;
 import sagan.team.TeamLocation;
-import sagan.team.service.TeamService;
 import sagan.support.web.PageableFactory;
 
 import java.io.IOException;
