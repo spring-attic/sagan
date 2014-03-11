@@ -1,4 +1,4 @@
-package sagan.team.service;
+package sagan.team.support;
 
 import sagan.team.GeoLocation;
 
@@ -11,7 +11,7 @@ import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GeoLocationFormatter implements Formatter<GeoLocation> {
+class GeoLocationFormatter implements Formatter<GeoLocation> {
 
     public static final Pattern PATTERN = Pattern.compile("(-?\\d+(?:\\.\\d+)?)\\s*,\\s*(-?\\d+(?:\\.\\d+)?)");
 

@@ -1,8 +1,8 @@
-package integration.team;
+package sagan.team.support;
 
 import sagan.team.MemberProfile;
-import sagan.team.service.TeamImporter;
-import sagan.team.service.TeamRepository;
+import sagan.team.support.TeamImporter;
+import sagan.team.support.TeamRepository;
 import sagan.support.Fixtures;
 
 import org.junit.Before;

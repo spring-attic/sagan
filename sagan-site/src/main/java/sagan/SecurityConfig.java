@@ -1,7 +1,7 @@
 package sagan;
 
 import sagan.team.MemberProfile;
-import sagan.team.service.SignInService;
+import sagan.team.support.SignInService;
 
 import java.io.IOException;
 

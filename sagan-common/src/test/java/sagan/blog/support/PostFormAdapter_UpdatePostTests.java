@@ -3,7 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.team.service.TeamRepository;
+import sagan.team.support.TeamRepository;
 import sagan.support.DateTestUtils;
 import sagan.support.DateService;
 

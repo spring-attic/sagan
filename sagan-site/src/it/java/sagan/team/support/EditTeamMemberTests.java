@@ -1,7 +1,7 @@
-package integration.team;
+package sagan.team.support;
 
 import sagan.team.MemberProfile;
-import sagan.team.service.TeamRepository;
+import sagan.team.support.TeamRepository;
 
 import java.security.Principal;
 

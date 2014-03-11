@@ -1,7 +1,7 @@
-package integration.team;
+package sagan.team.support;
 
 import sagan.team.MemberProfile;
-import sagan.team.service.TeamService;
+import sagan.team.support.TeamService;
 
 import org.junit.Test;
 

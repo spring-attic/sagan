@@ -1,8 +1,6 @@
-package sagan.team.web;
+package sagan.team.support;
 
 import sagan.team.MemberProfile;
-import sagan.team.service.TeamImporter;
-import sagan.team.service.TeamService;
 
 import java.security.Principal;
 

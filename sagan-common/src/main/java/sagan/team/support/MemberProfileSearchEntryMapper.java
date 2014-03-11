@@ -1,4 +1,4 @@
-package sagan.team.service.index;
+package sagan.team.support;
 
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
@@ -7,7 +7,7 @@ import sagan.team.MemberProfile;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MemberProfileSearchEntryMapper implements SearchEntryMapper<MemberProfile> {
+class MemberProfileSearchEntryMapper implements SearchEntryMapper<MemberProfile> {
     @Override
     public SearchEntry map(MemberProfile profile) {
         SearchEntry entry = new SearchEntry();

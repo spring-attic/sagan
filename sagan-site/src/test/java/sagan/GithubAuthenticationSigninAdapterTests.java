@@ -1,7 +1,7 @@
 package sagan;
 
 import sagan.team.MemberProfile;
-import sagan.team.service.SignInService;
+import sagan.team.support.SignInService;
 
 import org.junit.After;
 import org.junit.Before;

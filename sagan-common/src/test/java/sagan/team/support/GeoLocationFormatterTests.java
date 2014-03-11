@@ -1,4 +1,4 @@
-package sagan.team.service;
+package sagan.team.support;
 
 import sagan.team.GeoLocation;
 
