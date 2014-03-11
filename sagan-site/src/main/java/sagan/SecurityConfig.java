@@ -1,6 +1,6 @@
-package sagan.security.web;
+package sagan;
 
-import sagan.SaganProfiles;
+import sagan.team.MemberProfile;
 import sagan.team.service.SignInService;
 
 import java.io.IOException;
@@ -18,11 +18,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
@@ -33,10 +38,16 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.security.web.header.writers.HstsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.AnyRequestMatcher;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
+import org.springframework.social.connect.web.SignInAdapter;
+import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Configuration
@@ -153,4 +164,81 @@ public class SecurityConfig {
         writer.setRequestMatcher(AnyRequestMatcher.INSTANCE);
         headers.contentTypeOptions().xssProtection().cacheControl().addHeaderWriter(writer).frameOptions();
     }
+
+    /**
+     * Thin filter for Spring Security chain that simply transfers an existing
+     * {@link Authentication} from the {@link SecurityContext} if there is one. This is useful
+     * when authentication actually happened in a controller, rather than in the filter chain
+     * itself.
+     *
+     * @author Dave Syer
+     */
+    static class SecurityContextAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+
+        public SecurityContextAuthenticationFilter(String defaultFilterProcessesUrl) {
+            super(defaultFilterProcessesUrl);
+            setAuthenticationManager(new AuthenticationManager() {
+                // No-op authentication manager is required by base class, but
+                // actually redundant here because the authentication has either
+                // already happened (happy day) or not (user is not authenticated)
+                @Override
+                public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+                    throw new IllegalStateException("Unexpected call for AuthenticationManager");
+                }
+            });
+        }
+
+        @Override
+        public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+                throws AuthenticationException, IOException, ServletException {
+            return SecurityContextHolder.getContext().getAuthentication();
+        }
+    }
+
+    /**
+     * Simple {@link ConnectionSignUp} implementation that pulls user id from remote user
+     * details in the Social {@link Connection}.
+     *
+     * @author Dave Syer
+     */
+    static class RemoteUsernameConnectionSignUp implements ConnectionSignUp {
+        @Override
+        public String execute(Connection<?> connection) {
+            return connection.getKey().getProviderUserId() != null ? connection.getKey().getProviderUserId() : null;
+        }
+    }
+
+    static class GithubAuthenticationSigninAdapter implements SignInAdapter {
+
+        private String path;
+        private final SignInService signInService;
+
+        public GithubAuthenticationSigninAdapter(String path, SignInService signInService) {
+            this.path = path;
+            this.signInService = signInService;
+        }
+
+        @Override
+        public String signIn(String githubId, Connection<?> connection, NativeWebRequest request) {
+            GitHub gitHub = (GitHub) connection.getApi();
+            String githubUsername = connection.getDisplayName();
+
+            try {
+                if (!signInService.isSpringMember(githubUsername, gitHub)) {
+                    throw new BadCredentialsException("User not member of required org");
+                }
+
+                MemberProfile member = signInService.getOrCreateMemberProfile(new Long(githubId), gitHub);
+                Authentication authentication = new UsernamePasswordAuthenticationToken(
+                        member.getId(), member.getGithubUsername(),
+                        AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                return path;
+
+            } catch (RestClientException ex) {
+                throw new BadCredentialsException("User not member of required org", ex);
+            }
+        }
+    }
 }
+

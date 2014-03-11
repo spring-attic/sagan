@@ -1,9 +1,9 @@
-package sagan.app.site;
+package sagan;
 
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import sagan.projects.service.ProjectMetadataService;
 import sagan.support.ResourceNotFoundException;
-import sagan.support.web.NavSection;
 import sagan.support.StaticPagePathFinder;
+import sagan.support.web.NavSection;
 
 import java.io.IOException;
 
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.util.UrlPathHelper;
 
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 
@@ -35,7 +37,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Configuration
 @ControllerAdvice
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
+class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private StaticPagePathFinder staticPagePathFinder;
@@ -109,4 +111,39 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     }
 
+    static class ViewRenderingHelper {
+
+        private final UrlPathHelper urlPathHelper = new UrlPathHelper();
+
+        private HttpServletRequest request;
+
+        @Autowired
+        private ProjectMetadataService projectMetadataService;
+
+        @Autowired
+        public void setRequest(HttpServletRequest request) {
+            this.request = request;
+        }
+
+        public String navClass(String active, String current) {
+            if (active.equals(current)) {
+                return "navbar-link active";
+            } else {
+                return "navbar-link";
+            }
+        }
+
+        public String blogClass(String active, String current) {
+            if (active.equals(current)) {
+                return "blog-category active";
+            } else {
+                return "blog-category";
+            }
+        }
+
+        public String path() {
+            return urlPathHelper.getPathWithinApplication(request);
+        }
+    }
 }
+
