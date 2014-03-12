@@ -1,8 +1,8 @@
 package sagan.team.support;
 
+import sagan.DatabaseConfig;
 import sagan.search.support.SearchService;
 import sagan.team.MemberProfile;
-import sagan.DatabaseConfig;
 
 import java.util.List;
 

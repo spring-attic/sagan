@@ -1,5 +1,8 @@
 package sagan.blog.support;
 
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
+
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -7,8 +10,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import sagan.blog.Post;
-import sagan.blog.PostCategory;
 
 class PostForm {
     @NotEmpty

@@ -6,8 +6,8 @@ import sagan.guides.support.GettingStartedGuideIndexer;
 import sagan.guides.support.TutorialIndexer;
 import sagan.guides.support.UnderstandingDocIndexer;
 import sagan.staticpage.support.StaticPageIndexer;
-import sagan.tools.support.ToolsIndexer;
 import sagan.support.SetSystemProperty;
+import sagan.tools.support.ToolsIndexer;
 
 import org.junit.ClassRule;
 import org.junit.Test;

@@ -1,6 +1,8 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import saganx.AbstractIntegrationTests;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,8 +16,6 @@ import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
-import sagan.blog.PostBuilder;
-import saganx.AbstractIntegrationTests;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;

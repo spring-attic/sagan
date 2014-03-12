@@ -5,7 +5,6 @@ import java.util.List;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
-import sagan.tools.Download;
 
 @Root(strict = false)
 public class Release {

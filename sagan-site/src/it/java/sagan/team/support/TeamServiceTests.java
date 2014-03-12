@@ -1,11 +1,11 @@
 package sagan.team.support;
 
 import sagan.team.MemberProfile;
+import saganx.AbstractIntegrationTests;
 
 import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import saganx.AbstractIntegrationTests;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

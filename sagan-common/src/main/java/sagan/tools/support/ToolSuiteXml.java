@@ -1,10 +1,11 @@
 package sagan.tools.support;
 
+import sagan.tools.Release;
+
 import java.util.List;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
-import sagan.tools.Release;
 
 @Root(strict = false)
 class ToolSuiteXml {

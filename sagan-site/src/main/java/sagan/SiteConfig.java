@@ -2,8 +2,8 @@ package sagan;
 
 import sagan.blog.support.BlogPostAtomViewer;
 import sagan.guides.support.GettingStartedGuides;
-import sagan.support.cache.CachedRestClient;
 import sagan.support.DateService;
+import sagan.support.cache.CachedRestClient;
 import sagan.support.nav.SiteUrl;
 
 import java.util.ArrayList;

@@ -4,9 +4,10 @@ import sagan.blog.BlogPostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.search.support.SearchService;
-import sagan.team.MemberProfile;
 import sagan.support.DateService;
 import sagan.support.nav.PageableFactory;
+import sagan.team.MemberProfile;
+import saganx.AbstractIntegrationTests;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import saganx.AbstractIntegrationTests;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

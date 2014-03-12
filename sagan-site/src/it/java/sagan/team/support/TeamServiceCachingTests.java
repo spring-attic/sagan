@@ -1,6 +1,5 @@
 package sagan.team.support;
 
-import sagan.team.support.TeamService;
 import sagan.DatabaseConfig;
 import saganx.AbstractIntegrationTests;
 

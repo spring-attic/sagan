@@ -2,8 +2,8 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.team.MemberProfile;
 import sagan.support.DateService;
+import sagan.team.MemberProfile;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

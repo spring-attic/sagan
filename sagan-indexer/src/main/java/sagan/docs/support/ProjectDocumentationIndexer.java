@@ -1,12 +1,12 @@
 package sagan.docs.support;
 
+import sagan.Indexer;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.support.ProjectMetadataService;
 import sagan.search.support.CrawledWebDocumentProcessor;
 import sagan.search.support.CrawlerService;
 import sagan.search.support.SearchService;
-import sagan.Indexer;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,5 @@
 package sagan.guides.support;
 
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.SetMultimap;
-import org.springframework.cache.annotation.Cacheable;
 import sagan.guides.ContentProvider;
 import sagan.guides.DefaultGuideMetadata;
 import sagan.guides.GettingStartedGuide;
@@ -21,9 +18,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
+
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.SetMultimap;
 
 /**
  * Repository implementation providing data access services for getting started guides.

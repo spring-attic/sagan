@@ -1,9 +1,9 @@
 package sagan.blog.support;
 
+import sagan.Indexer;
 import sagan.blog.Post;
 import sagan.search.SearchEntry;
 import sagan.search.support.SearchService;
-import sagan.Indexer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
