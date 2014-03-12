@@ -57,6 +57,7 @@ configure(javaProjects) {
 configure([project(':'), project(':sagan-site'), project(':sagan-indexer')]) {
     idea.module {
         excludeDirs += [
+                file('bin'),      // containing build artifacts from Eclipse (if any)
                 file('work'),     // containing transient artifacts used by embedded Tomcat
                 file('logs'),     // containing app logs written by embedded Tomcat
                 file('data'),     // containing logs and data written by elasticsearch
