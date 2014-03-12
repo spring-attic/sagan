@@ -2,7 +2,7 @@ package sagan.projects.support;
 
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
-import sagan.support.web.NavSection;
+import sagan.support.nav.NavSection;
 
 import java.util.ArrayList;
 import java.util.Arrays;

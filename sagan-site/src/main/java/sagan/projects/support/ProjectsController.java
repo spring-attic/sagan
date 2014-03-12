@@ -1,6 +1,6 @@
 package sagan.projects.support;
 
-import sagan.support.web.NavSection;
+import sagan.support.nav.NavSection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

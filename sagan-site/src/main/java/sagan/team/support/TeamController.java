@@ -6,7 +6,7 @@ import sagan.blog.support.PostView;
 import sagan.blog.support.PostViewFactory;
 import sagan.team.MemberProfile;
 import sagan.team.TeamLocation;
-import sagan.support.web.PageableFactory;
+import sagan.support.nav.PageableFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;

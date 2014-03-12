@@ -4,7 +4,7 @@ import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
 import sagan.support.DateService;
-import sagan.support.web.SiteUrl;
+import sagan.support.nav.SiteUrl;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

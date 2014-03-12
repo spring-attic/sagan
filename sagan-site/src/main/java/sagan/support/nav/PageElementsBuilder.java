@@ -1,4 +1,4 @@
-package sagan.support.web;
+package sagan.support.nav;
 
 import java.util.ArrayList;
 import java.util.List;
