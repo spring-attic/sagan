@@ -1,0 +1,20 @@
+package sagan.tools.support;
+
+import java.util.List;
+
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
+
+@Root(strict = false)
+class EclipseXml {
+    @ElementList(entry = "product", type = EclipseXmlProduct.class, inline = true)
+    private List<EclipseXmlProduct> eclipseXmlProducts;
+
+    public List<EclipseXmlProduct> getEclipseXmlProducts() {
+        return eclipseXmlProducts;
+    }
+
+    public void setEclipseXmlProducts(List<EclipseXmlProduct> eclipseXmlProducts) {
+        this.eclipseXmlProducts = eclipseXmlProducts;
+    }
+}

@@ -2,7 +2,7 @@ package sagan.guides.support;
 
 import org.springframework.web.client.RestClientException;
 
-public class GitHubBackedGuideRepository {
+class GitHubBackedGuideRepository {
     protected final GuideOrganization org;
 
     public GitHubBackedGuideRepository(GuideOrganization org) {

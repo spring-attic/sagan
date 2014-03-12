@@ -1,6 +1,6 @@
 package sagan;
 
-import sagan.util.FreePortFinder;
+import sagan.support.FreePortFinder;
 
 import org.junit.After;
 import org.junit.Test;

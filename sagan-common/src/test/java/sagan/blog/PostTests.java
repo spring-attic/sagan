@@ -1,6 +1,6 @@
 package sagan.blog;
 
-import sagan.util.DateTestUtils;
+import sagan.support.DateTestUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

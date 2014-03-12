@@ -6,7 +6,7 @@ import sagan.guides.Guide;
 import sagan.guides.GuideMetadata;
 import sagan.guides.ImageProvider;
 import sagan.guides.Tutorial;
-import sagan.util.ResourceNotFoundException;
+import sagan.support.ResourceNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import org.springframework.web.client.RestClientException;
  * @author Chris Beams
  */
 @Component
-public class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutorial>, ImageProvider {
+class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutorial>, ImageProvider {
 
     static final String REPO_PREFIX = "tut-";
 

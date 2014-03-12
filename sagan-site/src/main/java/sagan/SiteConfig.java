@@ -1,11 +1,10 @@
 package sagan;
 
-import sagan.blog.web.feed.BlogPostAtomViewer;
+import sagan.blog.support.BlogPostAtomViewer;
 import sagan.guides.support.GettingStartedGuides;
-import sagan.util.service.CachedRestClient;
-import sagan.util.service.DateService;
-import sagan.util.service.db.DatabaseConfig;
-import sagan.util.web.SiteUrl;
+import sagan.support.cache.CachedRestClient;
+import sagan.support.DateService;
+import sagan.support.nav.SiteUrl;
 
 import java.util.ArrayList;
 import java.util.Collections;
