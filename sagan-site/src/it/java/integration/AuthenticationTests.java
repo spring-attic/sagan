@@ -22,7 +22,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static requestpostprocessors.SecurityRequestPostProcessors.*;
+import static sagan.support.SecurityRequestPostProcessors.*;
 
 public class AuthenticationTests extends AbstractIntegrationTests {
 

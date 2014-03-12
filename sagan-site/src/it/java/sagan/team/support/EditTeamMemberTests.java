@@ -1,7 +1,6 @@
 package sagan.team.support;
 
 import sagan.team.MemberProfile;
-import sagan.team.support.TeamRepository;
 
 import java.security.Principal;
 
@@ -28,7 +27,7 @@ import static org.junit.Assert.assertEquals;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static requestpostprocessors.SecurityRequestPostProcessors.*;
+import static sagan.support.SecurityRequestPostProcessors.*;
 
 public class EditTeamMemberTests extends AbstractIntegrationTests {
     @Autowired
