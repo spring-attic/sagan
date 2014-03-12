@@ -1,6 +1,7 @@
 package sagan.blog.support;
 
 import sagan.DatabaseConfig;
+import saganx.AbstractIntegrationTests;
 
 import java.lang.reflect.Method;
 
@@ -13,8 +14,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.interceptor.BeanFactoryCacheOperationSourceAdvisor;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ReflectionUtils;
-
-import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;

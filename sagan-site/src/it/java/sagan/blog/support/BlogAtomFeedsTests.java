@@ -5,6 +5,7 @@ import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
 import sagan.support.DateService;
 import sagan.support.nav.SiteUrl;
+import saganx.AbstractIntegrationTests;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -29,8 +30,6 @@ import org.xml.sax.SAXException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-
-import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.equalTo;

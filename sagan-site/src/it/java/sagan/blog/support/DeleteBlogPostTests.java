@@ -1,6 +1,8 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import saganx.AbstractIntegrationTests;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,9 +15,6 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import integration.AbstractIntegrationTests;
-import sagan.blog.PostBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

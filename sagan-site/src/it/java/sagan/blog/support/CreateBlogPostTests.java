@@ -4,6 +4,7 @@ import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
+import saganx.AbstractIntegrationTests;
 
 import java.security.Principal;
 
@@ -18,8 +19,6 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;

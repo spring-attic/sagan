@@ -1,4 +1,4 @@
-package integration;
+package saganx;
 
 import sagan.support.FreePortFinder;
 

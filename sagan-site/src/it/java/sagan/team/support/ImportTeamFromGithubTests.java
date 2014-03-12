@@ -1,9 +1,7 @@
 package sagan.team.support;
 
-import sagan.team.MemberProfile;
-import sagan.team.support.TeamImporter;
-import sagan.team.support.TeamRepository;
 import sagan.support.Fixtures;
+import sagan.team.MemberProfile;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,8 +14,7 @@ import org.springframework.social.github.api.GitHubUser;
 import org.springframework.web.client.RestOperations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import integration.AbstractIntegrationTests;
+import saganx.AbstractIntegrationTests;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

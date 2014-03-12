@@ -1,6 +1,7 @@
 package sagan.tools.support;
 
 import sagan.support.Fixtures;
+import saganx.AbstractIntegrationTests;
 
 import java.io.IOException;
 
@@ -12,8 +13,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.client.RestTemplate;
-
-import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
