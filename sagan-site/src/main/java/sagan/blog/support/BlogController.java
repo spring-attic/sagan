@@ -2,9 +2,9 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.support.web.NavSection;
-import sagan.support.web.PageableFactory;
-import sagan.support.web.PaginationInfo;
+import sagan.support.nav.NavSection;
+import sagan.support.nav.PageableFactory;
+import sagan.support.nav.PaginationInfo;
 
 import java.util.List;
 

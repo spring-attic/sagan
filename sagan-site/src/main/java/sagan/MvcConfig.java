@@ -3,7 +3,7 @@ package sagan;
 import sagan.projects.support.ProjectMetadataService;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.StaticPagePathFinder;
-import sagan.support.web.NavSection;
+import sagan.support.nav.NavSection;
 
 import java.io.IOException;
 

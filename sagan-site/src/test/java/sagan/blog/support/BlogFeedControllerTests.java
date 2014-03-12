@@ -3,7 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.support.web.PageableFactory;
+import sagan.support.nav.PageableFactory;
 
 import java.util.ArrayList;
 import java.util.List;

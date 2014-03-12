@@ -1,4 +1,4 @@
-package sagan.support.web;
+package sagan.support.nav;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

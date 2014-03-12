@@ -1,7 +1,7 @@
 package sagan.search.support;
 
-import sagan.support.web.PageableFactory;
-import sagan.support.web.PaginationInfo;
+import sagan.support.nav.PageableFactory;
+import sagan.support.nav.PaginationInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

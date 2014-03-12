@@ -2,7 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.support.DateService;
-import sagan.support.web.SiteUrl;
+import sagan.support.nav.SiteUrl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.support.DateService;
-import sagan.support.web.SiteUrl;
+import sagan.support.nav.SiteUrl;
 
 import java.util.ArrayList;
 import java.util.Arrays;

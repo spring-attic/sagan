@@ -6,7 +6,7 @@ import sagan.blog.PostBuilder;
 import sagan.search.support.SearchService;
 import sagan.team.MemberProfile;
 import sagan.support.DateService;
-import sagan.support.web.PageableFactory;
+import sagan.support.nav.PageableFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
