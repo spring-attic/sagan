@@ -1,28 +1,26 @@
-#*
+# Misc
 *~
 .#*
+dependency-reduced-pom.xml
+.DS_Store
+data/
+tmp/
+*.sw?
+classes/
+.new-relic/
+test.log
+logs/
+work/
+
+# Eclipse
 target
 .springBeans
 .settings
 !.settings/org.eclipse.wst.html.core.prefs
 .classpath
 .project
-build
 bin
-dependency-reduced-pom.xml
-Gemfile.lock
-.DS_Store
 atlassian-ide-plugin.xml
-data/
-tmp/
-PlaygroundTest.java
-*.sw?
-classes/
-.new-relic/
-test.log
-logs/
-blog_importer/
-work/
 
 # IDEA
 .idea
@@ -33,6 +31,7 @@ out
 
 # Gradle
 .gradle
+build
 /build
 
 # Structure101
