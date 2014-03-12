@@ -1,4 +1,4 @@
-package integration;
+package saganx;
 
 import org.junit.After;
 import org.junit.Before;

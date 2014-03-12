@@ -1,6 +1,8 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
+import sagan.blog.PostBuilder;
+import saganx.AbstractIntegrationTests;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -14,9 +16,6 @@ import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
-
-import integration.AbstractIntegrationTests;
-import sagan.blog.PostBuilder;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;

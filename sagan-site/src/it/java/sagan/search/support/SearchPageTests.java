@@ -1,8 +1,6 @@
 package sagan.search.support;
 
 import sagan.search.SearchEntry;
-import sagan.search.support.SearchEntryBuilder;
-import sagan.search.support.SearchService;
 
 import java.util.Calendar;
 
@@ -13,8 +11,7 @@ import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
-
-import integration.AbstractIntegrationTests;
+import saganx.AbstractIntegrationTests;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;

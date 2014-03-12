@@ -1,5 +1,7 @@
 package sagan.projects.support;
 
+import saganx.AbstractIntegrationTests;
+
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -10,8 +12,6 @@ import org.junit.Test;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import integration.AbstractIntegrationTests;
 
 import static junit.framework.TestCase.fail;
 import static org.hamcrest.CoreMatchers.notNullValue;

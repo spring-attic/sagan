@@ -2,8 +2,6 @@ package sagan.projects.support;
 
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
-import sagan.projects.support.ProjectMetadataRepository;
-import sagan.projects.support.ProjectMetadataService;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,8 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import integration.AbstractIntegrationTests;
+import saganx.AbstractIntegrationTests;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

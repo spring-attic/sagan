@@ -1,10 +1,10 @@
 package sagan.projects.support;
 
+import saganx.AbstractIntegrationTests;
+
 import org.junit.Test;
 
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import integration.AbstractIntegrationTests;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

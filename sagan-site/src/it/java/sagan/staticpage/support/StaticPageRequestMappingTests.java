@@ -1,7 +1,7 @@
 package sagan.staticpage.support;
 
-import integration.AbstractIntegrationTests;
 import org.junit.Test;
+import saganx.AbstractIntegrationTests;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

@@ -1,4 +1,4 @@
-package integration;
+package saganx;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

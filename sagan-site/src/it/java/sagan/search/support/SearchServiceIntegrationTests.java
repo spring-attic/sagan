@@ -1,6 +1,7 @@
 package sagan.search.support;
 
 import sagan.search.SearchEntry;
+import saganx.AbstractIntegrationTests;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -17,7 +18,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import integration.AbstractIntegrationTests;
 import io.searchbox.client.JestClient;
 
 import static org.hamcrest.MatcherAssert.assertThat;

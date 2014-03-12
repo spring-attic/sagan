@@ -1,6 +1,7 @@
 package sagan.guides.support;
 
 import sagan.support.Fixtures;
+import saganx.AbstractIntegrationTests;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,8 +9,6 @@ import org.jsoup.nodes.Element;
 import org.junit.Test;
 
 import org.springframework.test.web.servlet.MvcResult;
-
-import integration.AbstractIntegrationTests;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
