@@ -1,9 +1,9 @@
-package integration.caching;
+package sagan.support.cache;
 
 import sagan.SiteConfig;
 import sagan.support.Fixtures;
 import sagan.support.SetSystemProperty;
-import sagan.support.cache.CachedRestClient;
+import sagan.support.cache.CachedRestClientTests.TestConfig;
 
 import org.junit.After;
 import org.junit.Before;
@@ -27,8 +27,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
-
-import integration.caching.CachedRestClientTests.TestConfig;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyObject;
@@ -63,7 +61,10 @@ public class CachedRestClientTests {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
-    @Configuration
+    /**
+     * Not marked with @Configuration so as to avoid accidental
+     * component-scanning by {@link SiteConfig} in other tests.
+     */
     @Import(SiteConfig.class)
     public static class TestConfig {
         @Bean
