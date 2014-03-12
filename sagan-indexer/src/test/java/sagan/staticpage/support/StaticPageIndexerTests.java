@@ -1,4 +1,4 @@
-package sagan.staticpage.search;
+package sagan.staticpage.support;
 
 import sagan.search.support.CrawlerService;
 import sagan.search.support.SearchService;

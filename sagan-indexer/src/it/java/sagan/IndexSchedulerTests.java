@@ -5,7 +5,7 @@ import sagan.docs.support.ProjectDocumentationIndexer;
 import sagan.guides.support.GettingStartedGuideIndexer;
 import sagan.guides.support.TutorialIndexer;
 import sagan.guides.support.UnderstandingDocIndexer;
-import sagan.staticpage.search.StaticPageIndexer;
+import sagan.staticpage.support.StaticPageIndexer;
 import sagan.tools.support.ToolsIndexer;
 import sagan.support.SetSystemProperty;
 
