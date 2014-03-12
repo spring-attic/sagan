@@ -1,6 +1,5 @@
 package sagan;
 
-import sagan.IndexerConfig;
 import sagan.support.SetSystemProperty;
 
 import org.junit.ClassRule;

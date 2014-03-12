@@ -5,8 +5,8 @@ import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
 import sagan.search.SearchException;
 import sagan.search.support.SearchService;
-import sagan.support.DateTestUtils;
 import sagan.support.DateService;
+import sagan.support.DateTestUtils;
 
 import java.util.Date;
 
@@ -23,6 +23,7 @@ import org.mockito.stubbing.Answer;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.mockito.BDDMockito.*;
+import static org.mockito.Matchers.anyObject;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_ValidPostTests {

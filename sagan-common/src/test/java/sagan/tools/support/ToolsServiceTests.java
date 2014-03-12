@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for {@link ToolsService}.
- * 
+ *
  * @author Chris Beams
  */
 @RunWith(MockitoJUnitRunner.class)

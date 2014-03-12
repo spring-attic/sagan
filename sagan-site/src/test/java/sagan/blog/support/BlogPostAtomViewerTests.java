@@ -24,7 +24,9 @@ import com.sun.syndication.feed.atom.Link;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
-import static org.mockito.BDDMockito.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.*;
 
 public class BlogPostAtomViewerTests {
 

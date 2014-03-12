@@ -13,7 +13,7 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.util.StreamUtils;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -34,7 +34,8 @@ public class DynamicSidebarTests {
 
     @Test
     public void loadGuideContentWithCategories() throws IOException {
-        InputStream inputStream = new DefaultResourceLoader().getResource("classpath:/gs-rest-service-with-tags.zip").getInputStream();
+        InputStream inputStream =
+                new DefaultResourceLoader().getResource("classpath:/gs-rest-service-with-tags.zip").getInputStream();
         byte[] zipContents = StreamUtils.copyToByteArray(inputStream);
         inputStream.close();
 
@@ -56,7 +57,8 @@ public class DynamicSidebarTests {
 
     @Test
     public void loadGuideContentWithoutCategories() throws IOException {
-        InputStream inputStream = new DefaultResourceLoader().getResource("classpath:/gs-rest-service-without-tags.zip").getInputStream();
+        InputStream inputStream =
+                new DefaultResourceLoader().getResource("classpath:/gs-rest-service-without-tags.zip").getInputStream();
         byte[] zipContents = StreamUtils.copyToByteArray(inputStream);
         inputStream.close();
 
@@ -72,7 +74,9 @@ public class DynamicSidebarTests {
 
     @Test
     public void loadGuideContentWithoutCategoriesOrTableOfContents() throws IOException {
-        InputStream inputStream = new DefaultResourceLoader().getResource("classpath:/gs-rest-service-no-tags-no-toc.zip").getInputStream();
+        InputStream inputStream =
+                new DefaultResourceLoader().getResource("classpath:/gs-rest-service-no-tags-no-toc.zip")
+                        .getInputStream();
         byte[] zipContents = StreamUtils.copyToByteArray(inputStream);
         inputStream.close();
 
@@ -87,7 +91,9 @@ public class DynamicSidebarTests {
 
     @Test
     public void loadGuideWithCategoriesAndProjects() throws IOException {
-        InputStream inputStream = new DefaultResourceLoader().getResource("classpath:/gs-rest-service-with-tags-and-projects.zip").getInputStream();
+        InputStream inputStream =
+                new DefaultResourceLoader().getResource("classpath:/gs-rest-service-with-tags-and-projects.zip")
+                        .getInputStream();
         byte[] zipContents = StreamUtils.copyToByteArray(inputStream);
         inputStream.close();
 

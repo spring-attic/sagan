@@ -3,9 +3,11 @@ package sagan.projects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.util.Assert;
+import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
 
-import javax.persistence.*;
+import org.springframework.util.Assert;
 
 @Embeddable
 public class ProjectRelease implements Comparable<ProjectRelease> {
@@ -36,10 +38,11 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     private String apiDocUrl;
     private String groupId;
     private String artifactId;
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private ProjectRepository repository;
 
-    public ProjectRelease() {}
+    public ProjectRelease() {
+    }
 
     public ProjectRelease(String versionName, ReleaseStatus releaseStatus, boolean isCurrent, String refDocUrl,
                           String apiDocUrl, String groupId, String artifactId) {
@@ -162,12 +165,15 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof ProjectRelease)) return false;
+        if (this == o)
+            return true;
+        if (o == null || !(o instanceof ProjectRelease))
+            return false;
 
         ProjectRelease that = (ProjectRelease) o;
 
-        if (!versionName.equals(that.versionName)) return false;
+        if (!versionName.equals(that.versionName))
+            return false;
 
         return true;
     }
