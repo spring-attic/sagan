@@ -1,4 +1,4 @@
-package integration.rewrite;
+package sagan.rewrite.support;
 
 import sagan.SiteConfig;
 
