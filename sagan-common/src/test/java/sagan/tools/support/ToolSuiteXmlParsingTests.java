@@ -1,11 +1,11 @@
 package sagan.tools.support;
 
 import sagan.support.Fixtures;
+import sagan.tools.Release;
 
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-import sagan.tools.Release;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

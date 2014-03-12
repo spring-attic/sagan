@@ -13,7 +13,7 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.util.StreamUtils;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.initMocks;
 

@@ -3,9 +3,11 @@ package sagan.projects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.util.Assert;
+import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
 
-import javax.persistence.*;
+import org.springframework.util.Assert;
 
 @Embeddable
 public class ProjectRelease implements Comparable<ProjectRelease> {

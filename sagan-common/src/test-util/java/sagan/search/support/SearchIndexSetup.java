@@ -1,7 +1,6 @@
 package sagan.search.support;
 
 import sagan.search.SearchException;
-import sagan.search.support.SearchService;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,15 +17,15 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StreamUtils;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
 import io.searchbox.Action;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.mapping.PutMapping;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 public class SearchIndexSetup {
 
