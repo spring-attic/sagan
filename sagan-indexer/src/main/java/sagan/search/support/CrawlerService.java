@@ -40,7 +40,8 @@ public class CrawlerService {
 
     public void crawl(String url, int linkDepth, DocumentProcessor processor) {
         CrawlerConfiguration apiConfig =
-                new CrawlerConfiguration.Builder().setStartUrl(url).setMaxLevels(linkDepth).setVerifyUrls(false).build();
+                new CrawlerConfiguration.Builder().setStartUrl(url).setMaxLevels(linkDepth).setVerifyUrls(false)
+                        .build();
         DefaultCrawler crawler =
                 new DefaultCrawler(new ResponseFetcher(processor), Executors.newFixedThreadPool(10),
                         new CompositeURLParser(new FramePageURLParser(), new AhrefPageURLParser()));

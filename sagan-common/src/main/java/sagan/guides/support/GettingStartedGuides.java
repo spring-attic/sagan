@@ -65,7 +65,8 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
         String repoName = REPO_PREFIX + guide;
         String description = getRepoDescription(repoName);
         return new GettingStartedGuide(
-                new DefaultGuideMetadata(org.getName(), guide, repoName, description, tagMultimap.get(repoName)), this, this);
+                new DefaultGuideMetadata(
+                        org.getName(), guide, repoName, description, tagMultimap.get(repoName)), this, this);
     }
 
     @Override
@@ -73,8 +74,10 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
         List<GettingStartedGuide> guides = new ArrayList<>();
         for (GitHubRepo repo : org.findRepositoriesByPrefix(REPO_PREFIX)) {
             String repoName = repo.getName();
-            GuideMetadata metadata = new DefaultGuideMetadata(
-                    org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo.getDescription(), tagMultimap.get(repoName));
+            GuideMetadata metadata =
+                    new DefaultGuideMetadata(
+                            org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo.getDescription(),
+                            tagMultimap.get(repoName));
             guides.add(new GettingStartedGuide(metadata, this, this));
         }
         return guides;

@@ -18,7 +18,7 @@ import org.springframework.util.StringUtils;
 /**
  * Service providing high-level, selectively cached data access and other
  * {@link MemberProfile}-related operations.
- * 
+ *
  * @author Pivotal Labs
  * @author Chris Beams
  */

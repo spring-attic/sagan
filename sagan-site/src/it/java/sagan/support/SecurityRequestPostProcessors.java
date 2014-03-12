@@ -35,7 +35,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * for establishing a security context for Spring Security. While these are just examples,
  * <a href="https://jira.springsource.org/browse/SEC-2015">official support</a> for Spring
  * Security is planned.
- * 
+ *
  * @author Rob Winch
  * @author Chris Beams
  */
@@ -160,7 +160,7 @@ public final class SecurityRequestPostProcessors {
         /**
          * Specify the roles of the user to authenticate as. This method is similar to
          * {@link #authorities(GrantedAuthority...)}, but just not as flexible.
-         * 
+         *
          * @param roles The roles to populate. Note that if the role does not start with
          *        {@link #rolePrefix(String)} it will automatically be prepended. This
          *        means by default {@code roles("ROLE_USER")} and {@code roles("USER")}
@@ -182,7 +182,7 @@ public final class SecurityRequestPostProcessors {
 
         /**
          * Populates the user's {@link GrantedAuthority}'s.
-         * 
+         *
          * @param authorities
          * @see #roles(String...)
          */
@@ -213,7 +213,7 @@ public final class SecurityRequestPostProcessors {
         /**
          * Use this method to specify the bean id of the {@link UserDetailsService} to use
          * to look up the {@link UserDetails}.
-         * 
+         *
          * <p>
          * By default a lookup of {@link UserDetailsService} is performed by type. This
          * can be problematic if multiple {@link UserDetailsService} beans are declared.

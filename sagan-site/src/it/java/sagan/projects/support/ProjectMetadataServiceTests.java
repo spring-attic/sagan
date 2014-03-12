@@ -52,11 +52,13 @@ public class ProjectMetadataServiceTests extends AbstractIntegrationTests {
     @Test
     public void getSupportedReferenceDocumentVersionsOrdering() {
         List<ProjectRelease> docVersions = service.getProject("spring-framework").getProjectReleases();
-        assertThat(docVersions.get(0).getRefDocUrl(),
+        assertThat(
+                docVersions.get(0).getRefDocUrl(),
                 equalTo("http://docs.spring.io/spring/docs/4.0.1.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/"));
         assertThat(docVersions.get(1).getRefDocUrl(),
                 equalTo("http://docs.spring.io/spring/docs/4.0.0.RELEASE/spring-framework-reference/htmlsingle/"));
-        assertThat(docVersions.get(2).getRefDocUrl(),
+        assertThat(
+                docVersions.get(2).getRefDocUrl(),
                 equalTo("http://docs.spring.io/spring/docs/3.2.7.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/"));
         assertThat(docVersions.get(3).getRefDocUrl(),
                 equalTo("http://docs.spring.io/spring/docs/3.2.6.RELEASE/spring-framework-reference/htmlsingle/"));
@@ -102,7 +104,8 @@ public class ProjectMetadataServiceTests extends AbstractIntegrationTests {
     @Autowired
     private ProjectMetadataRepository repo;
 
-    // Verify we don't have issue with deleting a release that might occur when using @OrderColumn
+    // Verify we don't have issue with deleting a release that might occur when using
+    // @OrderColumn
     // See https://hibernate.atlassian.net/browse/HHH-1268
     @Test
     public void deleteRelease() {

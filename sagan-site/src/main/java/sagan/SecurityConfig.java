@@ -167,9 +167,9 @@ class SecurityConfig {
 
     /**
      * Thin filter for Spring Security chain that simply transfers an existing
-     * {@link Authentication} from the {@link SecurityContext} if there is one. This is useful
-     * when authentication actually happened in a controller, rather than in the filter chain
-     * itself.
+     * {@link Authentication} from the {@link SecurityContext} if there is one. This is
+     * useful when authentication actually happened in a controller, rather than in the
+     * filter chain itself.
      *
      * @author Dave Syer
      */

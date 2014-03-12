@@ -61,8 +61,8 @@ public class CachedRestClientTests {
     }
 
     /**
-     * Not marked with @Configuration so as to avoid accidental
-     * component-scanning by {@link SiteConfig} in other tests.
+     * Not marked with @Configuration so as to avoid accidental component-scanning by
+     * {@link SiteConfig} in other tests.
      */
     @Import(SiteConfig.class)
     public static class TestConfig {
