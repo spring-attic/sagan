@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 import integration.stubs.StubGithubRestClient;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static requestpostprocessors.SecurityRequestPostProcessors.*;
+import static sagan.support.SecurityRequestPostProcessors.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

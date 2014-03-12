@@ -26,7 +26,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static requestpostprocessors.SecurityRequestPostProcessors.*;
+import static sagan.support.SecurityRequestPostProcessors.*;
 
 public class CreateBlogPostTests extends AbstractIntegrationTests {
 
