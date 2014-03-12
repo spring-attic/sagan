@@ -1,12 +1,12 @@
 package sagan.blog.support;
 
+import sagan.DatabaseConfig;
 import sagan.blog.BlogPostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.search.support.SearchService;
-import sagan.team.MemberProfile;
 import sagan.support.DateService;
-import sagan.DatabaseConfig;
+import sagan.team.MemberProfile;
 
 import java.util.Date;
 import java.util.List;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 /**
  * Service providing high-level, selectively cached data access and other {@link Post}
  * -related operations.
- * 
+ *
  * @author Pivotal Labs
  * @author Chris Beams
  */

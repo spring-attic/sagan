@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.social.github.api.GitHub;
@@ -62,8 +61,8 @@ public class CachedRestClientTests {
     }
 
     /**
-     * Not marked with @Configuration so as to avoid accidental
-     * component-scanning by {@link SiteConfig} in other tests.
+     * Not marked with @Configuration so as to avoid accidental component-scanning by
+     * {@link SiteConfig} in other tests.
      */
     @Import(SiteConfig.class)
     public static class TestConfig {

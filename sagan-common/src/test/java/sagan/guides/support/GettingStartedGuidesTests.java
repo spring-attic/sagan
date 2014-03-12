@@ -26,7 +26,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
  * Unit tests for {@link GettingStartedGuides}.
- * 
+ *
  * @author Chris Beams
  * @author Greg Turnquist
  */

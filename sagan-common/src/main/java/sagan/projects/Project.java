@@ -1,12 +1,12 @@
 package sagan.projects;
 
-import org.hibernate.annotations.Cascade;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OrderBy;
 
 @Entity
 public class Project {
@@ -23,7 +23,7 @@ public class Project {
     private List<ProjectRelease> releaseList = new ArrayList<ProjectRelease>();
     private boolean isAggregator;
 
-    private Project(){
+    private Project() {
     }
 
     public Project(String id, String name, String repoUrl, String siteUrl, List<ProjectRelease> releaseList,
@@ -103,12 +103,15 @@ public class Project {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         Project project = (Project) o;
 
-        if (id != null ? !id.equals(project.id) : project.id != null) return false;
+        if (id != null ? !id.equals(project.id) : project.id != null)
+            return false;
 
         return true;
     }

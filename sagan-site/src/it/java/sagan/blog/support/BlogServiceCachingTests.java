@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 /**
  * Integration tests ensuring that caching functionality works as expected in
  * {@link BlogService}.
- * 
+ *
  * @author Chris Beams
  */
 public class BlogServiceCachingTests extends AbstractIntegrationTests {

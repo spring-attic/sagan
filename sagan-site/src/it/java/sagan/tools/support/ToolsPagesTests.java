@@ -75,14 +75,15 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 .andReturn();
 
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
-        assertThat(document.select(".milestone--release h2.tool-versions--version").text(), allOf(containsString("STS"),
+        assertThat(document.select(".milestone--release h2.tool-versions--version").text(), allOf(
+                containsString("STS"),
                 containsString(".M")));
 
         assertThat(
                 document.select(".milestone--release .item--dropdown a").attr("href"), allOf(
-                containsString("http://download.springsource.com/milestone/STS/"),
-                containsString("spring-tool-suite"),
-                containsString("win32-installer.exe")));
+                        containsString("http://download.springsource.com/milestone/STS/"),
+                        containsString("spring-tool-suite"),
+                        containsString("win32-installer.exe")));
     }
 
     @Test

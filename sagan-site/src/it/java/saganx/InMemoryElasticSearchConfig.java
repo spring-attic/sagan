@@ -1,5 +1,7 @@
 package saganx;
 
+import sagan.search.support.SearchService;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -10,7 +12,6 @@ import org.elasticsearch.node.NodeBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import sagan.search.support.SearchService;
 
 @Configuration
 class InMemoryElasticSearchConfig {

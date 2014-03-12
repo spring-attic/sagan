@@ -3,8 +3,8 @@ package sagan;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.blog.support.PublishedBlogPostsIndexer;
 import sagan.blog.support.PostRepository;
+import sagan.blog.support.PublishedBlogPostsIndexer;
 import sagan.search.SearchEntry;
 import sagan.search.support.SearchService;
 

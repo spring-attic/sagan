@@ -1,5 +1,7 @@
 package saganx;
 
+import sagan.support.github.StubGithubRestClient;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -15,8 +17,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
-
-import sagan.support.github.StubGithubRestClient;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static sagan.support.SecurityRequestPostProcessors.*;

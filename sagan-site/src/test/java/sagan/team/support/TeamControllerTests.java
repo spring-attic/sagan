@@ -2,10 +2,10 @@ package sagan.team.support;
 
 import sagan.blog.support.BlogService;
 import sagan.blog.support.PostViewFactory;
+import sagan.support.DateService;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
 import sagan.team.TeamLocation;
-import sagan.support.DateService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import org.springframework.ui.ExtendedModelMap;
 
 /**
  * Unit tests for {@link TeamController}.
- * 
+ *
  * @author Pivotal Labs
  * @author Chris Beams
  */

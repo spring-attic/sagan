@@ -1,12 +1,12 @@
 package sagan.docs.support;
 
+import sagan.Indexer;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.support.ProjectMetadataService;
 import sagan.search.support.CrawledWebDocumentProcessor;
 import sagan.search.support.CrawlerService;
 import sagan.search.support.SearchService;
-import sagan.Indexer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,13 +51,14 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
         searchService.removeOldProjectEntriesFromIndex(project.getId(), projectVersions);
 
         for (ProjectRelease version : project.getProjectReleases()) {
-            if(version.getApiDocUrl().isEmpty()) {
+            if (version.getApiDocUrl().isEmpty()) {
                 String message =
-                        String.format("Unable to index API doc for projet id '%s' and version '%s' since API doc URL is empty",
+                        String.format(
+                                "Unable to index API doc for projet id '%s' and version '%s' since API doc URL is empty",
                                 project.getId(), version.getVersion());
                 logger.warn(message);
             } else {
-                String apiDocUrl = version.getApiDocUrl().replace("/index.html","") + "/allclasses-frame.html";
+                String apiDocUrl = version.getApiDocUrl().replace("/index.html", "") + "/allclasses-frame.html";
                 ApiDocumentMapper apiDocumentMapper = new ApiDocumentMapper(project, version);
                 CrawledWebDocumentProcessor apiDocProcessor =
                         new CrawledWebDocumentProcessor(searchService, apiDocumentMapper);

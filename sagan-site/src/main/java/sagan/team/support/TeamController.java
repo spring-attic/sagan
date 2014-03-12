@@ -4,9 +4,9 @@ import sagan.blog.Post;
 import sagan.blog.support.BlogService;
 import sagan.blog.support.PostView;
 import sagan.blog.support.PostViewFactory;
+import sagan.support.nav.PageableFactory;
 import sagan.team.MemberProfile;
 import sagan.team.TeamLocation;
-import sagan.support.nav.PageableFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
  * Controller handling HTTP requests for the team section of the site.
- * 
+ *
  * @author Pivotal Labs
  * @author Chris Beams
  */

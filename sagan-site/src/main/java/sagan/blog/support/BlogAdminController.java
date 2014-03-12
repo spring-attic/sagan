@@ -2,9 +2,9 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.support.nav.PageableFactory;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
-import sagan.support.nav.PageableFactory;
 
 import java.security.Principal;
 

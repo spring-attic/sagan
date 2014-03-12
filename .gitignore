@@ -1,28 +1,31 @@
-#*
+# Misc
 *~
 .#*
-target
-.springBeans
-.settings
-!.settings/org.eclipse.wst.html.core.prefs
-.classpath
-.project
-build
-bin
 dependency-reduced-pom.xml
-Gemfile.lock
 .DS_Store
-atlassian-ide-plugin.xml
 data/
 tmp/
-PlaygroundTest.java
 *.sw?
 classes/
 .new-relic/
 test.log
 logs/
-blog_importer/
 work/
+
+# Eclipse
+# > the following should be created by `./gradlew eclipse`
+.classpath
+.project
+# > ignore all eclipse settings by default
+.settings
+# > except the following, primarily for formatting purposes
+!.settings/org.eclipse.jdt.core.prefs
+!.settings/org.eclipse.jdt.ui.prefs
+!.settings/org.eclipse.wst.html.core.prefs
+# > other misc eclipse artifacts
+.springBeans
+bin
+atlassian-ide-plugin.xml
 
 # IDEA
 .idea
@@ -33,6 +36,7 @@ out
 
 # Gradle
 .gradle
+build
 /build
 
 # Structure101

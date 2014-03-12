@@ -1,8 +1,5 @@
 package sagan.guides.support;
 
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.SetMultimap;
-import org.springframework.cache.annotation.Cacheable;
 import sagan.guides.ContentProvider;
 import sagan.guides.DefaultGuideMetadata;
 import sagan.guides.GettingStartedGuide;
@@ -21,9 +18,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
+
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.SetMultimap;
 
 /**
  * Repository implementation providing data access services for getting started guides.
@@ -64,7 +65,8 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
         String repoName = REPO_PREFIX + guide;
         String description = getRepoDescription(repoName);
         return new GettingStartedGuide(
-                new DefaultGuideMetadata(org.getName(), guide, repoName, description, tagMultimap.get(repoName)), this, this);
+                new DefaultGuideMetadata(
+                        org.getName(), guide, repoName, description, tagMultimap.get(repoName)), this, this);
     }
 
     @Override
@@ -72,8 +74,10 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
         List<GettingStartedGuide> guides = new ArrayList<>();
         for (GitHubRepo repo : org.findRepositoriesByPrefix(REPO_PREFIX)) {
             String repoName = repo.getName();
-            GuideMetadata metadata = new DefaultGuideMetadata(
-                    org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo.getDescription(), tagMultimap.get(repoName));
+            GuideMetadata metadata =
+                    new DefaultGuideMetadata(
+                            org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo.getDescription(),
+                            tagMultimap.get(repoName));
             guides.add(new GettingStartedGuide(metadata, this, this));
         }
         return guides;

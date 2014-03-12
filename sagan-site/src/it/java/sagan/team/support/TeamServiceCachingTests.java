@@ -1,6 +1,5 @@
 package sagan.team.support;
 
-import sagan.team.support.TeamService;
 import sagan.DatabaseConfig;
 import saganx.AbstractIntegrationTests;
 
@@ -22,7 +21,7 @@ import static org.junit.Assert.*;
 /**
  * Integration tests ensuring that caching functionality works as expected in
  * {@link TeamService}.
- * 
+ *
  * @author Chris Beams
  */
 public class TeamServiceCachingTests extends AbstractIntegrationTests {

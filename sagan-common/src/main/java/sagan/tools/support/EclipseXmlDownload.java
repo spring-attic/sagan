@@ -1,8 +1,9 @@
 package sagan.tools.support;
 
+import sagan.tools.FileDownload;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
-import sagan.tools.FileDownload;
 
 class EclipseXmlDownload implements FileDownload {
 

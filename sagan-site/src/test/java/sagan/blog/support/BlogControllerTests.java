@@ -1,12 +1,12 @@
 package sagan.blog.support;
 
-import org.junit.After;
 import sagan.blog.Post;
 import sagan.support.DateService;
 
 import java.util.Collections;
 import java.util.Locale;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

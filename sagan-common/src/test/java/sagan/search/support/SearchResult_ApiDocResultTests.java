@@ -1,7 +1,6 @@
 package sagan.search.support;
 
 import org.junit.Test;
-import sagan.search.support.SearchResult;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

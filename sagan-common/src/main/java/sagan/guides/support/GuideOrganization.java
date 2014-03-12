@@ -1,20 +1,34 @@
 package sagan.guides.support;
 
+import sagan.support.github.GitHubClient;
+import sagan.support.github.Readme;
+import sagan.support.github.RepoContent;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
 import org.apache.commons.lang.WordUtils;
-import org.asciidoctor.*;
+import org.asciidoctor.Asciidoctor;
+import org.asciidoctor.Attributes;
+import org.asciidoctor.OptionsBuilder;
+import org.asciidoctor.SafeMode;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.yaml.snakeyaml.Yaml;
-import sagan.support.github.GitHubClient;
-import sagan.support.github.Readme;
-import sagan.support.github.RepoContent;
-
-import java.io.*;
-import java.util.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,8 +42,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Repository representing the GitHub organization (or user account) that contains guide repositories.
- * 
+ * Repository representing the GitHub organization (or user account) that contains guide
+ * repositories.
+ *
  * @author Chris Beams
  */
 @Component
@@ -148,6 +163,7 @@ class GuideOrganization {
 
     /**
      * Parse front-matter
+     *
      * @param readme asciidoctor file
      * @return set of categories
      * @throws IOException
@@ -164,13 +180,14 @@ class GuideOrganization {
                     frontMatter += line + "\n";
                 }
             }
-           return (Map) yaml.load(frontMatter);
+            return (Map) yaml.load(frontMatter);
         }
         return new HashMap<>();
     }
 
     /**
      * Extract top level table-of-content entries, and discard lower level links
+     *
      * @param doc
      * @return HTML of the top tier table of content entries
      */
@@ -184,6 +201,7 @@ class GuideOrganization {
 
     /**
      * Scan document for links to understanding docs
+     *
      * @param doc
      * @return map of understanding links in the form of (href -> display text)
      */

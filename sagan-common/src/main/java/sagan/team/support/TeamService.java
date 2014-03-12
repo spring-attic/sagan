@@ -1,8 +1,8 @@
 package sagan.team.support;
 
+import sagan.DatabaseConfig;
 import sagan.search.support.SearchService;
 import sagan.team.MemberProfile;
-import sagan.DatabaseConfig;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import org.springframework.util.StringUtils;
 /**
  * Service providing high-level, selectively cached data access and other
  * {@link MemberProfile}-related operations.
- * 
+ *
  * @author Pivotal Labs
  * @author Chris Beams
  */

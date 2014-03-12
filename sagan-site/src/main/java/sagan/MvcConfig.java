@@ -146,4 +146,3 @@ class MvcConfig extends WebMvcConfigurerAdapter {
         }
     }
 }
-
