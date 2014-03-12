@@ -1,4 +1,4 @@
-package integration.admin;
+package sagan.admin.support;
 
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;

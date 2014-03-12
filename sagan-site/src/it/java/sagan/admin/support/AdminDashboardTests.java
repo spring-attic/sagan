@@ -1,4 +1,4 @@
-package integration.admin;
+package sagan.admin.support;
 
 import org.junit.Test;
 
