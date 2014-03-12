@@ -1,18 +1,12 @@
-package integration.stubs;
-
-import sagan.support.github.GitHubClient;
+package sagan.support.github;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriTemplate;
 
-@Service
-@Primary
 public class StubGithubRestClient extends GitHubClient {
 
     private Map<String, String> responseMap = new HashMap<>();

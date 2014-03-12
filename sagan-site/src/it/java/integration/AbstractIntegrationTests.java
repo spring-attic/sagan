@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import integration.stubs.StubGithubRestClient;
+import sagan.support.github.StubGithubRestClient;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static sagan.support.SecurityRequestPostProcessors.*;
