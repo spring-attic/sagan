@@ -8,7 +8,7 @@ interface DocRepository<T extends Document> {
 
     /**
      * Return the document with the given name.
-     * 
+     *
      * @param name the unique document identifier
      */
     T find(String name);

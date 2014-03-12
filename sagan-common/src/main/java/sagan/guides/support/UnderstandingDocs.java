@@ -15,7 +15,7 @@ import org.springframework.web.client.RestClientException;
 
 /**
  * Repository implementation providing data access services for understanding docs.
- * 
+ *
  * @author Chris Beams
  */
 @Component
@@ -35,7 +35,7 @@ class UnderstandingDocs implements DocRepository<UnderstandingDoc>, ContentProvi
 
     /**
      * Find and eagerly populate the {@link UnderstandingDoc} for the given subject.
-     * 
+     *
      * @throws ResourceNotFoundException if no content exists for the subject.
      */
     public UnderstandingDoc find(String subject) {
