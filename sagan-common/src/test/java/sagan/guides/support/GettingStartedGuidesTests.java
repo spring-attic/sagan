@@ -2,9 +2,9 @@ package sagan.guides.support;
 
 import sagan.guides.GettingStartedGuide;
 import sagan.guides.Guide;
-import sagan.projects.service.ProjectMetadataService;
-import sagan.util.ResourceNotFoundException;
-import sagan.util.service.github.Readme;
+import sagan.projects.support.ProjectMetadataService;
+import sagan.support.ResourceNotFoundException;
+import sagan.support.github.Readme;
 
 import java.io.IOException;
 import java.util.List;

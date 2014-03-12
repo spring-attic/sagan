@@ -1,7 +1,7 @@
 package sagan.guides.support;
 
-import sagan.util.Fixtures;
-import sagan.util.service.github.GitHubClient;
+import sagan.support.Fixtures;
+import sagan.support.github.GitHubClient;
 
 import java.util.List;
 

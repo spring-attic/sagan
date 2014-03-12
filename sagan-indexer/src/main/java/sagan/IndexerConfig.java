@@ -1,6 +1,6 @@
 package sagan;
 
-import sagan.util.web.StaticPagePathFinder;
+import sagan.support.StaticPagePathFinder;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,7 +26,7 @@ import org.springframework.web.client.RestTemplate;
 @ComponentScan
 @EntityScan
 @EnableJpaRepositories
-public class IndexerConfig {
+class IndexerConfig {
 
     @Bean
     public TaskScheduler scheduler() {
