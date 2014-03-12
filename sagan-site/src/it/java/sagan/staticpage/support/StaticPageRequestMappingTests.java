@@ -1,5 +1,6 @@
-package integration;
+package sagan.staticpage.support;
 
+import integration.AbstractIntegrationTests;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.containsString;
