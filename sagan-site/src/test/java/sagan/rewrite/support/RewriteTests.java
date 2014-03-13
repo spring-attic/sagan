@@ -136,6 +136,13 @@ public class RewriteTests {
         validateTemporaryRedirect("http://spring.io/linkedin", "http://www.linkedin.com/groups/Spring-Users-46964");
     }
 
+    @Test
+    public void springSecurityCvePostIsRedirected() throws Exception {
+        validatePermanentRedirect(
+                "http://spring.io/blog/2014/03/11/cve-2014-009-fixed-in-spring-security-3-2-2-and-3-1-6",
+                "/blog/2014/03/11/cve-2014-0097-fixed-in-spring-security-3-2-2-and-3-1-6");
+    }
+
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,
             ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);
