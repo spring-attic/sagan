@@ -40,7 +40,7 @@ public class SignInServiceTests {
 
     @Before
     public void setup() {
-        signInService = new SignInService(teamService);
+        signInService = new SignInService(teamService, "482984");
     }
 
     @Test

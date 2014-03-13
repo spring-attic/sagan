@@ -50,6 +50,13 @@ security:
 
 github:
 
+  # Credentials are based on users belonging to a particular GitHub team,
+  # by requesting the GitHub API (see github.client configuration keys).
+  # This key can be found in the list of teams in your organization
+  # See http://developer.github.com/v3/orgs/teams/#list-teams
+  team:
+    id: ${GITHUB_TEAM_ID:482984}
+
   # GitHub OAuth application credentials for use when logging into administrative
   # console at /admin. Default 'id' and 'secret' values apply only when running
   # locally, i.e. at http://localhost:8080. Production values must be overridden

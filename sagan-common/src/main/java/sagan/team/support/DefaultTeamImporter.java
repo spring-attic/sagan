@@ -1,5 +1,6 @@
 package sagan.team.support;
 
+import org.springframework.beans.factory.annotation.Value;
 import sagan.support.github.GitHubClient;
 
 import java.io.IOException;
@@ -20,16 +21,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 class DefaultTeamImporter implements TeamImporter {
 
-    private static final String SPRING_TEAM_MEMBERS_ID = "482984";
-
     private final TeamService teamService;
     private final GitHubClient gitHub;
+    private final String gitHubTeamId;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
-    public DefaultTeamImporter(TeamService teamService, GitHubClient gitHub) {
+    public DefaultTeamImporter(TeamService teamService, GitHubClient gitHub,
+                               @Value("${github.team.id}") String gitHubTeamId) {
         this.teamService = teamService;
         this.gitHub = gitHub;
+        this.gitHubTeamId = gitHubTeamId;
     }
 
     @Transactional
@@ -48,7 +50,7 @@ class DefaultTeamImporter implements TeamImporter {
     private GitHubUser[] getGitHubUsers(GitHub gitHub) {
         String membersUrl = GitHubClient.API_URL_BASE + "/teams/{teamId}/members";
         ResponseEntity<GitHubUser[]> entity =
-                gitHub.restOperations().getForEntity(membersUrl, GitHubUser[].class, SPRING_TEAM_MEMBERS_ID);
+                gitHub.restOperations().getForEntity(membersUrl, GitHubUser[].class, gitHubTeamId);
         return entity.getBody();
     }
 
