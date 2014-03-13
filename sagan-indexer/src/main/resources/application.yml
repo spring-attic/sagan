@@ -46,6 +46,8 @@ elasticsearch:
 # for the sagan-site application. This arrangement should be refactored so that keeping these
 # entries here on the indexer side is no longer required.
 github:
+  team:
+    id: n/a
   client:
     id: n/a
     secret: n/a
