@@ -3,6 +3,8 @@ def javaProjects = [ project(':sagan-site'), project(':sagan-indexer'), project(
 def bootProjects = javaProjects - project(':sagan-common')
 def gradleDir = "${rootProject.rootDir}/gradle"
 
+wrapper.gradleVersion = '1.11'
+
 buildscript {
     ext.springRepo = 'http://repo.spring.io/libs-milestone'
 
@@ -19,6 +21,16 @@ buildscript {
 configure(allprojects) {
     apply plugin: 'eclipse'
     apply plugin: 'idea'
+
+    idea.module {
+        excludeDirs += [
+                file('bin'),      // containing build artifacts from Eclipse (if any)
+                file('work'),     // containing transient artifacts used by embedded Tomcat
+                file('logs'),     // containing app logs written by embedded Tomcat
+                file('data'),     // containing logs and data written by elasticsearch
+                file('.settings') // containing intentionally checked-in Eclipse metadata
+        ]
+    }
 }
 
 configure(rootProject) {
@@ -52,18 +64,14 @@ configure(javaProjects) {
         testCompile 'org.hamcrest:hamcrest-library'
         testCompile 'org.mockito:mockito-core'
     }
-}
 
-configure([project(':'), project(':sagan-site'), project(':sagan-indexer')]) {
-    idea.module {
-        excludeDirs += [
-                file('bin'),      // containing build artifacts from Eclipse (if any)
-                file('work'),     // containing transient artifacts used by embedded Tomcat
-                file('logs'),     // containing app logs written by embedded Tomcat
-                file('data'),     // containing logs and data written by elasticsearch
-                file('.settings') // containing intentionally checked-in Eclipse metadata
-        ]
-    }
+    // Skip generation and removal of .settings/org.eclipse.jdt.core.prefs files
+    // during the normal `gradle eclipse` / `gradle cleanEclipse` lifecycle, as
+    // these files have been checked in with formatting settings imported from
+    // style/sagan-format.xml and style/sagan.importorder.
+    // See http://www.gradle.org/docs/current/userguide/eclipse_plugin.html
+    eclipseJdt.onlyIf { false }
+    cleanEclipseJdt.onlyIf { false }
 }
 
 configure(bootProjects) {
