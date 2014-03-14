@@ -1,7 +1,6 @@
 package sagan.blog.support;
 
 import sagan.DatabaseConfig;
-
 import sagan.blog.BlogPostMovedException;
 import sagan.blog.BlogPostNotFoundException;
 import sagan.blog.Post;
@@ -17,6 +16,7 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -82,11 +82,11 @@ public class BlogService {
         Date now = dateService.now();
         Post post =
                 postRepository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug, now);
-        if(post == null) {
+        if (post == null) {
             Set<String> publicSlugAliases = new HashSet<String>();
             publicSlugAliases.add(publicSlug);
             post = postRepository.findByPublicSlugAliasesInAndDraftFalseAndPublishAtBefore(publicSlugAliases, now);
-            if(post != null) {
+            if (post != null) {
                 throw new BlogPostMovedException(post.getPublicSlug());
             }
         }

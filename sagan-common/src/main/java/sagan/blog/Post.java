@@ -20,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Type;
+
 import org.springframework.util.StringUtils;
 
 @Entity
@@ -186,7 +187,7 @@ public class Post implements Serializable {
     }
 
     public void addPublicSlugAlias(String alias) {
-        if(alias != null) {
+        if (alias != null) {
             this.publicSlugAliases.add(alias);
         }
     }
