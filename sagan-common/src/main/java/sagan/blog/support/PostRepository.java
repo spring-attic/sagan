@@ -6,12 +6,14 @@ import sagan.team.MemberProfile;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
@@ -40,6 +42,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Post findByTitleAndCreatedAt(String title, Date createdAt);
 
     Post findByPublicSlugAndDraftFalseAndPublishAtBefore(String publicSlug, Date now);
+
+    Post findByPublicSlugAliasesInAndDraftFalseAndPublishAtBefore(Set<String> publicSlugAlias, Date now);
 
     @Query("select p from Post p where YEAR(p.publishAt) = ?1 and MONTH(p.publishAt) = ?2 and DAY(p.publishAt) = ?3")
     Page<Post> findByDate(int year, int month, int day, Pageable pageRequest);
