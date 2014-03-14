@@ -1,6 +1,5 @@
 package sagan.team.support;
 
-import org.springframework.beans.factory.annotation.Value;
 import sagan.support.github.GitHubClient;
 
 import java.io.IOException;
@@ -9,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.GitHubUser;
