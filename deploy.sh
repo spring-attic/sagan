@@ -36,4 +36,4 @@ fi;
 
 GRADLE_OPTS="-Xmx1024m -Xms1024m"
 
-./gradlew cf-login deploy $@
+./gradlew -d cf-login deploy $@
