@@ -5,9 +5,12 @@ import sagan.team.MemberProfile;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,7 +20,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Type;
-
 import org.springframework.util.StringUtils;
 
 @Entity
@@ -66,6 +68,9 @@ public class Post implements Serializable {
 
     @Column(nullable = true)
     private String publicSlug;
+
+    @ElementCollection
+    private Set<String> publicSlugAliases = new HashSet<String>();
 
     @SuppressWarnings("unused")
     private Post() {
@@ -178,6 +183,12 @@ public class Post implements Serializable {
 
     public String getPublicSlug() {
         return publicSlug;
+    }
+
+    public void addPublicSlugAlias(String alias) {
+        if(alias != null) {
+            this.publicSlugAliases.add(alias);
+        }
     }
 
     public String getAdminSlug() {

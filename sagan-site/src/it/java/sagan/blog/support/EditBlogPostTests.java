@@ -78,6 +78,7 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
     public void updatePostSavesNewValues() throws Exception {
         MockHttpServletRequestBuilder editPostRequest = createEditPostRequest();
 
+        String originalPublicSlug = post.getPublicSlug();
         mockMvc.perform(editPostRequest);
         Post updatedPost = postRepository.findOne(post.getId());
 
@@ -86,6 +87,10 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
         assertEquals(PostCategory.NEWS_AND_EVENTS, updatedPost.getCategory());
         assertEquals(false, updatedPost.isDraft());
         assertThat(updatedPost.getId(), equalTo(post.getId()));
+
+        mockMvc.perform(get("/blog/{slug}", originalPublicSlug))
+            .andExpect(status().is3xxRedirection())
+            .andExpect(redirectedUrl("/blog/"+ updatedPost.getPublicSlug()));
     }
 
     @Test
