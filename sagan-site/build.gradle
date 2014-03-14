@@ -1,6 +1,10 @@
 
 springBoot.mainClass = 'sagan.SiteMain'
 
+// Avoid PermGen errors during JRuby/Asciidoctor guide processing on JDK 7 with `gradle :sagan-site:bootRun`
+// See http://www.gradle.org/docs/1.7/release-notes#specify-default-jvm-arguments-for-the-application-plugin
+applicationDefaultJvmArgs = [ "-XX:MaxPermSize=128M" ]
+
 dependencies {
     def vHttpClient = '4.3'
 
@@ -49,10 +53,3 @@ task copyGeneratedResources(type: Copy) {
     into sourceSets.main.output.resourcesDir
     include "**/*"
 }
-
-// Avoid PermGen errors during JRuby/Asciidoctor guide processing on JDK 7 with `gradle :sagan-site:run`
-// http://www.gradle.org/docs/1.7/release-notes#specify-default-jvm-arguments-for-the-application-plugin
-apply plugin: 'application'
-mainClassName = springBoot.mainClass
-applicationDefaultJvmArgs = [ "-XX:MaxPermSize=128M" ]
-
