@@ -89,8 +89,8 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
         assertThat(updatedPost.getId(), equalTo(post.getId()));
 
         mockMvc.perform(get("/blog/{slug}", originalPublicSlug))
-            .andExpect(status().is3xxRedirection())
-            .andExpect(redirectedUrl("/blog/"+ updatedPost.getPublicSlug()));
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/blog/" + updatedPost.getPublicSlug()));
     }
 
     @Test
