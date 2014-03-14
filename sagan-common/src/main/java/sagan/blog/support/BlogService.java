@@ -1,6 +1,7 @@
 package sagan.blog.support;
 
 import sagan.DatabaseConfig;
+import sagan.blog.BlogPostMovedException;
 import sagan.blog.BlogPostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
@@ -8,6 +9,7 @@ import sagan.search.support.SearchService;
 import sagan.support.DateService;
 import sagan.team.MemberProfile;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -76,9 +78,14 @@ public class BlogService {
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Post getPublishedPost(String publicSlug) {
-        Post post =
-                postRepository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug, dateService.now());
+        Date now = dateService.now();
+        Post post = postRepository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug, now);
         if (post == null) {
+            post = postRepository.findByPublicSlugAliasesInAndDraftFalseAndPublishAtBefore(
+                    Collections.singleton(publicSlug), now);
+            if (post != null) {
+                throw new BlogPostMovedException(post.getPublicSlug());
+            }
             throw new BlogPostNotFoundException(publicSlug);
         }
         return post;

@@ -42,6 +42,7 @@ class PostFormAdapter {
     public void updatePostFromPostForm(Post post, PostForm postForm) {
         String content = postForm.getContent();
 
+        post.addPublicSlugAlias(post.getPublicSlug());
         post.setTitle(postForm.getTitle());
         post.setRawContent(content);
         post.setCategory(postForm.getCategory());
