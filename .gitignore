@@ -5,7 +5,7 @@ dependency-reduced-pom.xml
 .DS_Store
 data/
 tmp/
-*.sw?
+*.sw[op]
 classes/
 .new-relic/
 test.log
