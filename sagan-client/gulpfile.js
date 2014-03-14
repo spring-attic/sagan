@@ -5,9 +5,7 @@ var gulpFilter = require('gulp-filter'),
     bowerSrc = require('gulp-bower-src'),
     cssmin = require('gulp-minify-css'),
     watch = require('gulp-watch'),
-    changed = require('gulp-changed'),
-    gulp = require('gulp'),
-    es = require('event-stream');
+    gulp = require('gulp');
 
 var paths = {
     run: 'src/run.js',
@@ -29,7 +27,7 @@ gulp.task('minify-css', function() {
 });
 
 // cram and uglify JavaScript source files
-gulp.task('build-scripts', function() {
+gulp.task('build-modules', function() {
 
     var opts = {
         includes: [ 'curl/loader/legacy', 'curl/loader/cjsm11'],
@@ -64,9 +62,9 @@ gulp.task('copy-assets', function() {
         .pipe(gulp.dest(paths.dest));
 })
 
-gulp.task('build', ['minify-css', 'build-scripts', 'optim-img', 'copy-assets', 'bower-files'], function(){ });
+gulp.task('build', ['minify-css', 'build-modules', 'optim-img', 'copy-assets', 'bower-files'], function(){ });
 
-// temp tasks, until live reloading is in configured
+// temp tasks, until live reloading is configured
 gulp.task('bower-gradle', function() {
     return bowerSrc()
         .pipe(gulp.dest('../sagan-site/build/resources/main/static/'+'lib'));
