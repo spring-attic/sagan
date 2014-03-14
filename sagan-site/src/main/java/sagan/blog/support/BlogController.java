@@ -1,5 +1,6 @@
 package sagan.blog.support;
 
+import sagan.blog.BlogPostMovedException;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.support.nav.NavSection;
@@ -10,12 +11,12 @@ import java.util.List;
 
 import org.joda.time.LocalDate;
 import org.joda.time.YearMonth;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,6 +104,11 @@ public class BlogController {
         Page<Post> result = service.getPublishedPostsByDate(year, pageRequest);
         model.addAttribute("title", String.format("Archive for %d", year));
         return renderListOfPosts(result, model, "All Posts");
+    }
+
+    @ExceptionHandler
+    public String handle(BlogPostMovedException moved) {
+        return "redirect:/blog/" + moved.getPublicSlug();
     }
 
     private String renderListOfPosts(Page<Post> page, Model model, String activeCategory) {

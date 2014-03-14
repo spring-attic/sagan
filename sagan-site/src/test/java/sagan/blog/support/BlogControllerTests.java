@@ -1,5 +1,6 @@
 package sagan.blog.support;
 
+import sagan.blog.BlogPostMovedException;
 import sagan.blog.Post;
 import sagan.support.DateService;
 
@@ -74,5 +75,12 @@ public class BlogControllerTests {
         blogController.listPublishedPostsForDate(2011, 3, 23, 1, model);
         String title = (String) model.get("title");
         assertThat(title, equalTo("Archive for March 23, 2011"));
+    }
+
+    @Test
+    public void handleBlogPostMovedExceptionRedirects() {
+        String publicSlug = "slug";
+        String result = blogController.handle(new BlogPostMovedException(publicSlug));
+        assertThat(result, equalTo("redirect:/blog/" + publicSlug));
     }
 }

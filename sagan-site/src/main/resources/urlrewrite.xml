@@ -91,16 +91,4 @@
         <from>^/linkedin$</from>
         <to type="temporary-redirect" last="true">http://www.linkedin.com/groups/Spring-Users-46964</to>
     </rule>
-    <rule>
-        <name>Fix blog post slug typo</name>
-        <note>https://github.com/spring-io/sagan/issues/285</note>
-        <from>^/blog/2014/02/19/spring-security-3-2-1-and-3-0-5-released</from>
-        <to type="permanent-redirect" last="true">/blog/2014/02/19/spring-security-3-2-1-and-3-1-5-released</to>
-    </rule>
-    <rule>
-        <name>Redirect Spring Security CVE post</name>
-        <note>https://github.com/spring-io/sagan/issues/296</note>
-        <from>^/blog/2014/03/11/cve-2014-009-fixed-in-spring-security-3-2-2-and-3-1-6</from>
-        <to type="permanent-redirect" last="true">/blog/2014/03/11/cve-2014-0097-fixed-in-spring-security-3-2-2-and-3-1-6</to>
-    </rule>
 </urlrewrite>
