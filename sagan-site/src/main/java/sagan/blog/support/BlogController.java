@@ -15,12 +15,14 @@ import org.joda.time.YearMonth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -108,8 +110,11 @@ public class BlogController {
     }
 
     @ExceptionHandler
-    public String handle(BlogPostMovedException moved) {
-        return "redirect:/blog/" + moved.getPublicSlug();
+    public RedirectView handle(BlogPostMovedException moved) {
+        RedirectView redirect = new RedirectView();
+        redirect.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+        redirect.setUrl("/blog/" + moved.getPublicSlug());
+        return redirect;
     }
 
     private String renderListOfPosts(Page<Post> page, Model model, String activeCategory) {
