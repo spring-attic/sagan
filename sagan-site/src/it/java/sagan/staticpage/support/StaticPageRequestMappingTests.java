@@ -16,16 +16,6 @@ public class StaticPageRequestMappingTests extends AbstractIntegrationTests {
     }
 
     @Test
-    public void getAboutPage() throws Exception {
-        checkPage("/about");
-    }
-
-    @Test
-    public void getJobsPage() throws Exception {
-        checkPage("/jobs");
-    }
-
-    @Test
     public void getServicesPage() throws Exception {
         checkPage("/services");
     }
@@ -33,11 +23,6 @@ public class StaticPageRequestMappingTests extends AbstractIntegrationTests {
     @Test
     public void getSigninPage() throws Exception {
         checkPage("/signin");
-    }
-
-    @Test
-    public void getLogosAndUsagePage() throws Exception {
-        checkPage("/logos");
     }
 
     private void checkPage(String page) throws Exception {
@@ -48,7 +33,7 @@ public class StaticPageRequestMappingTests extends AbstractIntegrationTests {
 
     @Test
     public void getAStaticPageWithSlashAtEnd() throws Exception {
-        checkPage("/about/");
+        checkPage("/services/");
     }
 
     @Test
