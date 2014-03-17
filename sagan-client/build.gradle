@@ -1,5 +1,7 @@
 import org.gradle.api.tasks.Exec
 
+apply plugin: 'java'
+
 jar {
     from 'dist'
     eachFile { details ->
