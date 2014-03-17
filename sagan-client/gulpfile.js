@@ -48,7 +48,7 @@ gulp.task('optim-img', function() {
 
 // copy main bower files (see bower.json) and optimize js
 gulp.task('bower-files', function() {
-    var filter = gulpFilter(["**/*.js", "!**/*.min/js"]);
+    var filter = gulpFilter(["**/*.js", "!**/*.min.js"]);
     return bowerSrc()
         .pipe(filter)
         .pipe(uglify())

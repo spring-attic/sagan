@@ -45,6 +45,9 @@
         },
         "google-code-prettify": {
             "ignore": ["styles/**"]
+        },
+        "zeroclipboard": {
+            "ignore": ["docs/**", "src/**", "test/**"]
         }
     }
 }
