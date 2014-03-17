@@ -1,7 +1,6 @@
 var gulpFilter = require('gulp-filter'),
     cram = require('gulp-cram'),
     uglify = require('gulp-uglify'),
-    imagemin = require('gulp-imagemin'),
     bowerSrc = require('gulp-bower-src'),
     cssmin = require('gulp-minify-css'),
     watch = require('gulp-watch'),
@@ -39,13 +38,6 @@ gulp.task('build-modules', function() {
         .pipe(gulp.dest(paths.dest));
 });
 
-// optimize images
-gulp.task('optim-img', function() {
-    return gulp.src(paths.images)
-        .pipe(imagemin())
-        .pipe(gulp.dest(paths.dest+'img'));
-});
-
 // copy main bower files (see bower.json) and optimize js
 gulp.task('bower-files', function() {
     var filter = gulpFilter(["**/*.js", "!**/*.min.js"]);
@@ -62,7 +54,7 @@ gulp.task('copy-assets', function() {
         .pipe(gulp.dest(paths.dest));
 })
 
-gulp.task('build', ['minify-css', 'build-modules', 'optim-img', 'copy-assets', 'bower-files'], function(){ });
+gulp.task('build', ['minify-css', 'build-modules', 'copy-assets', 'bower-files'], function(){ });
 
 // temp tasks, until live reloading is configured
 gulp.task('bower-gradle', function() {
