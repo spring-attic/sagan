@@ -12,8 +12,7 @@ var paths = {
         files: ['src/css/main.css', 'src/css/guide.css'],
         root: 'src/css'
     },
-    images: ['src/img/**/*'],
-    assets: ['src/*.txt','src/*.html','src/font*/**','src/css*/filterable-list.css'],
+    assets: ['src/img*/**','src/*.txt','src/*.html','src/font*/**','src/css*/filterable-list.css'],
     dest: './dist/'
 };
 
