@@ -65,6 +65,10 @@ configure(javaProjects) {
         testCompile 'org.mockito:mockito-core'
     }
 
+    // Ensure that all Gradle-compiled classes are available to Eclipse's
+    // classpath.
+    eclipseClasspath.dependsOn testClasses
+
     // Skip generation and removal of .settings/org.eclipse.jdt.core.prefs files
     // during the normal `gradle eclipse` / `gradle cleanEclipse` lifecycle, as
     // these files have been checked in with formatting settings imported from
