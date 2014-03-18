@@ -509,3 +509,25 @@
     display: none;
   }
 }
+
+@media (max-width: 1007px) {
+  .tool--container {
+    width: 100%;
+  }
+  .new-noteworthy-box {
+    display: none;
+  }
+  .tools-intro {
+    width: 100%;
+  }
+}
+
+@media (max-width: 777px) {
+   .eclipse--container .logo-eclipse-text {
+     float:none;
+  }
+
+.eclipse--container .eclipse-content--container {
+    margin-left: 0;
+  }
+}
