@@ -36,4 +36,6 @@ fi;
 
 GRADLE_OPTS="-Xmx1024m -Xms1024m"
 
+echo '{"directory": "src/lib","storage":{"packages":".bower-cache","registry":".bower-registry"},"tmp":".bower-tmp"}' > ./sagan-client/.bowerrc
+
 ./gradlew cf-login deploy $@
