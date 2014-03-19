@@ -11,6 +11,7 @@ classes/
 test.log
 logs/
 work/
+.bower-*
 
 # Eclipse
 # > the following should be created by `./gradlew eclipse`
