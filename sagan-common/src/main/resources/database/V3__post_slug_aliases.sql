@@ -1,5 +1,5 @@
 CREATE TABLE post_publicslugaliases (
-    post_id character varying(255) NOT NULL,
+    post_id int NOT NULL,
     publicSlugAliases character varying(255) NOT NULL UNIQUE,
     primary key (post_id,publicSlugAliases)
 );
