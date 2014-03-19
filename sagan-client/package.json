@@ -1,6 +1,6 @@
 {
-  "name": "spring.io",
-  "description": "node.js packages for spring.io UI.",
+  "name": "sagan",
+  "description": "node.js packages for sagan UI.",
   "dependencies": {
 
   },
@@ -15,10 +15,8 @@
     "gulp-bower-src": "~0.0.1",
     "gulp-watch": "~0.5.0",
     "when": "~2",
-    "buster": "~0.7",
     "jshint": "~2.1",
-    "wd": "0.2.10",
-    "phantomjs": "~1"
+    "wd": "0.2.10"
   },
   "directories": {
     "test": "test"
@@ -26,10 +24,6 @@
   "scripts": {
     "prepublish": "bower install --config.interactive=false",
     "build": "gulp build",
-    "watch": "gulp watch",
-    "test": "jshint . && buster-test -c test/unit/buster.js",
-    "phantom": "buster-test -c test/scenario/buster.js -g scenario-phantom",
-    "firefox": "buster-test -c test/scenario/buster.js -g scenario-firefox",
-    "scenario": "buster-test -c test/scenario/buster.js -g scenario"
+    "watch": "gulp watch"
   }
 }
