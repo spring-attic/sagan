@@ -14,5 +14,40 @@
         "leaflet": "~0.5",
         "zeroclipboard": "1.1.7",
         "google-code-prettify": "~1.0"
+    },
+    "overrides": {
+        "jquery": {
+            "ignore": ["*.json"]
+        },
+        "curl": {
+            "ignore": ["dist/**", "src/curl/**"]
+        },
+        "meld": {
+            "ignore": ["aspect/**", "docs/**", "test/**"]
+        },
+        "most": {
+            "ignore": ["test/**"]
+        },
+        "bootstrap": {
+            "ignore": [
+                "js/**", "img/**", "less/**", "docs/build/**",
+                "docs/examples/**", "docs/templates/**", "docs/*.html"
+            ]
+        },
+        "bootstrap-datetimepicker": {
+            "ignore": ["build/**", "test/**"]
+        },
+        "font-awesome": {
+            "ignore": ["css/**", "less/**", "scss/**", "src/**"]
+        },
+        "leaflet": {
+            "ignore": ["build/**", "debug/**", "spec/**", "src/**"]
+        },
+        "google-code-prettify": {
+            "ignore": ["styles/**"]
+        },
+        "zeroclipboard": {
+            "ignore": ["docs/**", "src/**", "test/**"]
+        }
     }
 }

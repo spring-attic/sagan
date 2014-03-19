@@ -1,22 +1,26 @@
-import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.tasks.Exec
 
-task cssmin(type: GruntTask) {
-    gruntArgs = "cssmin"
+apply plugin: 'java'
+
+jar {
+    from 'dist'
+    eachFile { details ->
+        details.path = details.path.startsWith('META-INF') ?: 'static/'+details.path
+    }
+    // Jar contains duplicate empty folders, see Gradle issue:
+    // http://issues.gradle.org/browse/GRADLE-1830
+    // so we need to set includeEmptyDirs to false
+    includeEmptyDirs = false
+
 }
 
-class GruntTask extends Exec {
-    private String gruntExecutable = Os.isFamily(Os.FAMILY_WINDOWS) ? "grunt.cmd" : "grunt"
-    private String switches = "--no-color"
-
-    String gruntArgs = ""
-
-    public GruntTask() {
-        super()
-        this.setExecutable(gruntExecutable)
-    }
-
-    public void setGruntArgs(String gruntArgs) {
-        this.args = "$switches $gruntArgs".trim().split(" ") as List
-    }
+task npmInstall(type:Exec) {
+    commandLine 'npm', 'install'
 }
+
+task npmBuild(dependsOn: npmInstall, type:Exec) {
+    delete 'dist'
+    commandLine 'npm', 'run', 'build'
+}
+
+jar.dependsOn npmBuild
