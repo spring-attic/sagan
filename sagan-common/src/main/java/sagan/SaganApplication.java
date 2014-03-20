@@ -27,8 +27,8 @@ public class SaganApplication extends SpringApplication {
      * {@link SaganProfiles}.
      */
     @Override
-    protected void setupProfiles(ConfigurableEnvironment environment) {
-        super.setupProfiles(environment);
+    protected void configureProfiles(ConfigurableEnvironment environment, String[] args) {
+        super.configureProfiles(environment, args);
 
         boolean standaloneActive = environment.acceptsProfiles(STANDALONE);
         boolean stagingActive = environment.acceptsProfiles(STAGING);
