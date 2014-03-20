@@ -15,10 +15,14 @@ jar {
 }
 
 task npmInstall(type:Exec) {
+    logging.captureStandardOutput LogLevel.INFO
+    logging.captureStandardError LogLevel.INFO
     commandLine 'npm', 'install'
 }
 
 task npmBuild(dependsOn: npmInstall, type:Exec) {
+    logging.captureStandardOutput LogLevel.INFO
+    logging.captureStandardError LogLevel.INFO
     delete 'dist'
     commandLine 'npm', 'run', 'build'
 }
