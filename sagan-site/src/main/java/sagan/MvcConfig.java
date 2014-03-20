@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,6 +28,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -143,6 +146,23 @@ class MvcConfig extends WebMvcConfigurerAdapter {
 
         public String path() {
             return urlPathHelper.getPathWithinApplication(request);
+        }
+    }
+}
+
+@Configuration
+@Profile(SaganProfiles.STANDALONE)
+class ClientResourcesConfig extends WebMvcConfigurerAdapter {
+
+    @Value("${SAGAN_HOME:}")
+    private String saganPath;
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        if (!this.saganPath.isEmpty()) {
+            registry.addResourceHandler("/**")
+                    .addResourceLocations("file://" + this.saganPath + "/sagan-client/src/")
+                    .setCachePeriod(0);
         }
     }
 }

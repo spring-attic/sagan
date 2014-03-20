@@ -3,7 +3,6 @@ var gulpFilter = require('gulp-filter'),
     uglify = require('gulp-uglify'),
     bowerSrc = require('gulp-bower-src'),
     cssmin = require('gulp-minify-css'),
-    watch = require('gulp-watch'),
     gulp = require('gulp');
 
 var paths = {
@@ -54,15 +53,3 @@ gulp.task('copy-assets', function() {
 })
 
 gulp.task('build', ['minify-css', 'build-modules', 'copy-assets', 'bower-files'], function(){ });
-
-// temp tasks, until live reloading is configured
-gulp.task('bower-gradle', function() {
-    return bowerSrc()
-        .pipe(gulp.dest('../sagan-site/build/resources/main/static/'+'lib'));
-})
-
-gulp.task('watch', ['bower-gradle'], function(){
-    return gulp.src(['src/**', '!src/lib/**'])
-        .pipe(watch())
-        .pipe(gulp.dest('../sagan-site/build/resources/main/static/'))
-});
