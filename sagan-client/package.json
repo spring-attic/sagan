@@ -26,7 +26,6 @@
   },
   "scripts": {
     "prepublish": "bower install --config.interactive=false",
-    "build": "gulp build",
-    "watch": "gulp watch"
+    "build": "gulp build"
   }
 }
