@@ -17,6 +17,8 @@ jar {
 task npmInstall(type:Exec) {
     logging.captureStandardOutput LogLevel.INFO
     logging.captureStandardError LogLevel.INFO
+    inputs.files "package.json", "bower.json"
+    outputs.dir "node_modules"
     commandLine 'npm', 'install'
 }
 
