@@ -30,7 +30,7 @@
             <a th:href="${guide.ciLatestUrl}" class="ci-status desktop-only">
               <img th:src="${guide.ciStatusImageUrl}"/>
             </a>
-            <div class="right-pane-widget--container desktop-only">
+            <div class="right-pane-widget--container desktop-only" style="margin-bottom:0px;">
               <div class="github-actions https">
                 <h2>Get the Code</h2>
                 <div class="btn-group">
@@ -60,6 +60,17 @@
                 </div>
               </div>
             </div>
+			<div class='PivotalAdBannerDiv'></div>
+<script>
+(function() {
+var s = document.createElement('script');
+s.type = 'text/javascript';
+s.async = true;
+s.src = 'http://bserv.cfapps.io/gb/spring.io';
+var x = document.getElementsByTagName('script')[0];
+x.parentNode.insertBefore(s, x);
+})();
+</script>
             <div th:utext="${guide.sidebar}">Container</div>
           </aside>
         </div>
