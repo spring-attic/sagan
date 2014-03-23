@@ -8,8 +8,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Unit tests for {@link DefaultGuideMetadata}.
- *
- * @author Chris Beams
  */
 public class DefaultGuideMetadataTests {
 

@@ -21,8 +21,6 @@ import org.springframework.web.client.RestClientException;
 
 /**
  * Repository implementation providing data access services for tutorial guides.
- *
- * @author Chris Beams
  */
 @Component
 class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutorial>, ImageProvider {

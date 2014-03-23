@@ -30,6 +30,9 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static sagan.blog.PostCategory.ENGINEERING;
 
+/**
+ * Unit tests for {@link AtomFeedController}.
+ */
 public class AtomFeedControllerTests {
 
     public static final PostCategory TEST_CATEGORY = ENGINEERING;

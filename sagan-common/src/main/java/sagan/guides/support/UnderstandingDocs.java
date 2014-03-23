@@ -15,8 +15,6 @@ import org.springframework.web.client.RestClientException;
 
 /**
  * Repository implementation providing data access services for understanding docs.
- *
- * @author Chris Beams
  */
 @Component
 class UnderstandingDocs implements DocRepository<UnderstandingDoc>, ContentProvider<UnderstandingDoc> {

@@ -17,6 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles requests for Atom feeds of blog content. All requests return a
+ * single {@link Page} of content, the size of which is defined by
+ * {@link PageableFactory#forFeeds()}.
+ *
+ * @see AtomFeedView
+ */
 @Controller
 class AtomFeedController {
 

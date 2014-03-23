@@ -19,8 +19,6 @@ import static org.mockito.Matchers.anyString;
 
 /**
  * Unit tests for {@link GettingStartedGuideController}.
- *
- * @author Chris Beams
  */
 public class GettingStartedGuideControllerTests {
 

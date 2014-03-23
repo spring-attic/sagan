@@ -44,8 +44,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Repository representing the GitHub organization (or user account) that contains guide
  * repositories.
- *
- * @author Chris Beams
  */
 @Component
 class GuideOrganization {

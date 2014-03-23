@@ -23,9 +23,6 @@ import org.springframework.ui.ExtendedModelMap;
 
 /**
  * Unit tests for {@link TeamController}.
- *
- * @author Pivotal Labs
- * @author Chris Beams
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TeamControllerTests {

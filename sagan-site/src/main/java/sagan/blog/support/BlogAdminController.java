@@ -22,6 +22,11 @@ import org.springframework.web.client.RestClientException;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles administrative blog actions, e.g. creating, editing and
+ * deleting posts. Per rules in {@code sagan.SecurityConfig}, authentication is required
+ * for all requests. See {@link BlogController} for public, read-only operations.
+ */
 @Controller
 @RequestMapping("/admin/blog")
 class BlogAdminController {
