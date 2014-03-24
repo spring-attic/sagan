@@ -2,7 +2,9 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
+import sagan.support.nav.SiteUrl;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,40 +20,44 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Controller
 class BlogAtomFeedController {
 
-    private BlogService service;
+    private final BlogService blogService;
+    private final BlogAtomFeedView blogAtomFeedView;
 
     @Autowired
-    public BlogAtomFeedController(BlogService service) {
-        this.service = service;
+    public BlogAtomFeedController(BlogService blogService, SiteUrl siteUrl, DateFactory dateFactory) {
+        this.blogService = blogService;
+        this.blogAtomFeedView = new BlogAtomFeedView(siteUrl, dateFactory);
     }
 
     @RequestMapping(value = "/blog.atom", method = { GET, HEAD })
-    public String listPublishedPosts(Model model, HttpServletResponse response) {
-        Page<Post> page = service.getPublishedPosts(PageableFactory.forFeeds());
-        return renderBlogFeeds(model, page, "", "", response);
+    public BlogAtomFeedView listPublishedPosts(Model model, HttpServletResponse response) {
+        Page<Post> page = blogService.getPublishedPosts(PageableFactory.forFeeds());
+        prepareResponse(model, response, page, "", "");
+        return blogAtomFeedView;
     }
 
     @RequestMapping(value = "/blog/category/{category}.atom", method = { GET, HEAD })
-    public String listPublishedPostsForCategory(@PathVariable PostCategory category, Model model,
-                                                HttpServletResponse response) {
-        Page<Post> page = service.getPublishedPosts(category, PageableFactory.forFeeds());
-        return renderBlogFeeds(model, page, category.getDisplayName(), "/category/" + category.getUrlSlug(), response);
+    public BlogAtomFeedView listPublishedPostsForCategory(@PathVariable PostCategory category, Model model,
+                                                          HttpServletResponse response) {
+        Page<Post> page = blogService.getPublishedPosts(category, PageableFactory.forFeeds());
+        prepareResponse(model, response, page, category.getDisplayName(), "/category/" + category.getUrlSlug());
+        return blogAtomFeedView;
     }
 
     @RequestMapping(value = "/blog/broadcasts.atom", method = { GET, HEAD })
-    public String listPublishedBroadcastPosts(Model model, HttpServletResponse response) {
-        Page<Post> page = service.getPublishedBroadcastPosts(PageableFactory.forFeeds());
-        return renderBlogFeeds(model, page, "Broadcasts", "/broadcasts", response);
+    public BlogAtomFeedView listPublishedBroadcastPosts(Model model, HttpServletResponse response) {
+        Page<Post> page = blogService.getPublishedBroadcastPosts(PageableFactory.forFeeds());
+        prepareResponse(model, response, page, "Broadcasts", "/broadcasts");
+        return blogAtomFeedView;
     }
 
-    private String renderBlogFeeds(Model model, Page<Post> page, String category, String subPath,
-                                   HttpServletResponse response) {
+    private void prepareResponse(Model model, HttpServletResponse response, Page<Post> page,
+                                 String category, String subPath) {
         response.setCharacterEncoding("utf-8");
         model.addAttribute("posts", page.getContent());
         model.addAttribute("feed-title", ("Spring " + category).trim());
         String blogPath = "/blog" + subPath;
         model.addAttribute("blog-path", blogPath);
         model.addAttribute("feed-path", blogPath + ".atom");
-        return "blogPostAtomViewer";
     }
 }

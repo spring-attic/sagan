@@ -83,21 +83,6 @@ public class SiteConfig {
     }
 
     @Bean
-    public BlogAtomFeedView blogPostAtomViewer() {
-        return new BlogAtomFeedView(siteUrl(), dateFactory());
-    }
-
-    @Bean
-    public SiteUrl siteUrl() {
-        return new SiteUrl();
-    }
-
-    @Bean
-    public DateFactory dateFactory() {
-        return new DateFactory();
-    }
-
-    @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
