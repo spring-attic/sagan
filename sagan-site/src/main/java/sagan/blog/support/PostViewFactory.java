@@ -10,10 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class PostViewFactory {
+
     private DateService dateService;
 
     @Autowired
@@ -25,16 +26,11 @@ public class PostViewFactory {
         return new PostView(post, dateService);
     }
 
-    public List<PostView> createPostViewList(List<Post> posts) {
+    public Page<PostView> createPostViewPage(Page<Post> posts) {
         List<PostView> postViews = new ArrayList<>();
-        for (Post post : posts) {
+        for (Post post : posts.getContent()) {
             postViews.add(createPostView(post));
         }
-        return postViews;
-    }
-
-    public Page<PostView> createPostViewPage(Page<Post> posts) {
-        List<PostView> postViews = createPostViewList(posts.getContent());
         PageRequest pageRequest = new PageRequest(posts.getNumber(), posts.getSize(), posts.getSort());
         return new PageImpl<>(postViews, pageRequest, posts.getTotalElements());
     }
