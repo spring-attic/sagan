@@ -12,7 +12,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Controller
 @RequestMapping("/projects")
 @NavSection("projects")
-public class ProjectsController {
+class ProjectsController {
 
     private ProjectMetadataService service;
 

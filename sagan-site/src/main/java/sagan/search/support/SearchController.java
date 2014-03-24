@@ -19,7 +19,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @RequestMapping("/search")
-public class SearchController {
+class SearchController {
 
     private final SearchService searchService;
 

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
-public class BlogFeedController {
+class BlogFeedController {
 
     private BlogService service;
 

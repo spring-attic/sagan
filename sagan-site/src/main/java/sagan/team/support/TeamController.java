@@ -29,7 +29,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
  */
 @Controller
 @RequestMapping("/team")
-public class TeamController {
+class TeamController {
 
     private final TeamService teamService;
     private final BlogService blogService;

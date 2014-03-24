@@ -3,7 +3,7 @@ package sagan.search.support;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchForm {
+class SearchForm {
     private String q = "";
     private List<String> filters = new ArrayList<>();
 

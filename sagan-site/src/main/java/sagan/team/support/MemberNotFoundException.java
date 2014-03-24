@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @SuppressWarnings("serial")
 @ResponseStatus(NOT_FOUND)
-public class MemberNotFoundException extends RuntimeException {
+class MemberNotFoundException extends RuntimeException {
 
     public MemberNotFoundException(String message) {
         super(message);

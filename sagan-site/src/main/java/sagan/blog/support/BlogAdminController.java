@@ -24,7 +24,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @RequestMapping("/admin/blog")
-public class BlogAdminController {
+class BlogAdminController {
 
     private BlogService service;
     private PostViewFactory postViewFactory;
