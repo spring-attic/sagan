@@ -32,9 +32,9 @@ import com.google.common.collect.SetMultimap;
  * @author Chris Beams
  * @author Greg Turnquist
  */
-@Component
-public class GettingStartedGuides extends GitHubBackedGuideRepository
-        implements DocRepository<GettingStartedGuide>, ContentProvider<GettingStartedGuide>, ImageProvider {
+@Repository
+public class GettingStartedGuides implements DocRepository<GettingStartedGuide>,
+        ContentProvider<GettingStartedGuide>, ImageProvider {
 
     public static final String CACHE_NAME = "cache.guides";
     public static final String CACHE_TTL = "${cache.guides.timetolive:300}";
@@ -49,13 +49,13 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
     private static final String README_PATH_ASC = REPO_BASE_PATH + "/zipball";
     private static final String SIDEBAR_PATH = REPO_BASE_PATH + "/contents/SIDEBAR.md";
 
+    private final GuideOrganization org;
     private final SetMultimap<String, String> tagMultimap = LinkedHashMultimap.create();
-
     private final ProjectMetadataService projectMetadataService;
 
     @Autowired
     public GettingStartedGuides(GuideOrganization org, ProjectMetadataService projectMetadataService) {
-        super(org);
+        this.org = org;
         this.projectMetadataService = projectMetadataService;
     }
 
