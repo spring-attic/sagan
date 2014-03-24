@@ -8,7 +8,7 @@ var gulpFilter = require('gulp-filter'),
 var paths = {
     run: 'src/run.js',
     css: {
-        files: ['src/css/main.css', 'src/css/guide.css'],
+        files: ['src/css/*.css'],
         root: 'src/css'
     },
     assets: ['src/img*/**','src/*.txt','src/*.html','src/font*/**','src/css*/filterable-list.css'],
