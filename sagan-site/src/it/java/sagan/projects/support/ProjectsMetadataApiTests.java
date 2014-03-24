@@ -100,16 +100,6 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         assertThat((Boolean) release.get("current"), equalTo(true));
         assertThat((Boolean) release.get("generalAvailability"), equalTo(true));
         assertThat((Boolean) release.get("snapshot"), equalTo(false));
-
-        Map<String, Object> repository = getRepository(release);
-
-        /*
-        assertThat((String) repository.get("id"), equalTo("spring-milestones"));
-        assertThat((String) repository.get("name"), equalTo("Spring Milestones"));
-        assertThat((String) repository.get("url"), equalTo("http://repo.spring.io/milestone"));
-        assertThat((Boolean) repository.get("snapshotsEnabled"), equalTo(false));
-        */
-
     }
 
     private void checkSnapshot(List<Object> releases) {

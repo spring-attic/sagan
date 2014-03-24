@@ -16,6 +16,7 @@ public class ProjectRepository {
     private String url;
     private Boolean snapshotsEnabled;
 
+    @SuppressWarnings("unused")
     private ProjectRepository() {
     }
 

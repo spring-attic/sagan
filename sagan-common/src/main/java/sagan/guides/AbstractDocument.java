@@ -2,6 +2,7 @@ package sagan.guides;
 
 import org.springframework.util.Assert;
 
+@SuppressWarnings("rawtypes")
 class AbstractDocument implements Document {
 
     private final ContentProvider contentProvider;
@@ -20,6 +21,7 @@ class AbstractDocument implements Document {
         this.sidebar = sidebar;
     }
 
+    @SuppressWarnings("unchecked")
     public String getContent() {
         if (content == null) {
             contentProvider.populate(this);
@@ -29,6 +31,7 @@ class AbstractDocument implements Document {
         return content;
     }
 
+    @SuppressWarnings("unchecked")
     public String getSidebar() {
         if (sidebar == null) {
             contentProvider.populate(this);

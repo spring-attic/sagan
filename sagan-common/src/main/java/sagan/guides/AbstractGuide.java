@@ -7,6 +7,7 @@ class AbstractGuide extends AbstractDocument implements Guide {
     private final GuideMetadata metadata;
     private final ImageProvider imageProvider;
 
+    @SuppressWarnings("rawtypes") 
     public AbstractGuide(GuideMetadata metadata, ContentProvider contentProvider, ImageProvider imageProvider) {
         super(contentProvider);
         this.metadata = metadata;

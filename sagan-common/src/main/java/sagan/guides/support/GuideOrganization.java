@@ -106,19 +106,21 @@ class GuideOrganization {
             zipOut.close();
 
             // Open the zip file and unpack it
-            ZipFile zipFile = new ZipFile(zipball);
-            File unzippedRoot = null;
-            for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements();) {
-                ZipEntry entry = e.nextElement();
-                if (entry.isDirectory()) {
-                    File dir = new File(zipball.getParent() + File.separator + entry.getName());
-                    dir.mkdir();
-                    if (unzippedRoot == null) {
-                        unzippedRoot = dir; // first directory is the root
+            File unzippedRoot;
+            try (ZipFile zipFile = new ZipFile(zipball)) {
+                unzippedRoot = null;
+                for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements();) {
+                    ZipEntry entry = e.nextElement();
+                    if (entry.isDirectory()) {
+                        File dir = new File(zipball.getParent() + File.separator + entry.getName());
+                        dir.mkdir();
+                        if (unzippedRoot == null) {
+                            unzippedRoot = dir; // first directory is the root
+                        }
+                    } else {
+                        StreamUtils.copy(zipFile.getInputStream(entry),
+                                new FileOutputStream(zipball.getParent() + File.separator + entry.getName()));
                     }
-                } else {
-                    StreamUtils.copy(zipFile.getInputStream(entry),
-                            new FileOutputStream(zipball.getParent() + File.separator + entry.getName()));
                 }
             }
 
@@ -137,15 +139,15 @@ class GuideOrganization {
             frontMatter = parseFrontMatter(readmeAdocFile);
 
             if (frontMatter.containsKey("tags")) {
-                tags = new HashSet<String>(frontMatter.get("tags"));
+                tags = new HashSet<>(frontMatter.get("tags"));
             } else {
-                tags = new HashSet<String>(Arrays.asList(new String[0]));
+                tags = new HashSet<>(Arrays.asList(new String[0]));
             }
 
             if (frontMatter.containsKey("projects")) {
-                projects = new HashSet<String>(frontMatter.get("projects"));
+                projects = new HashSet<>(frontMatter.get("projects"));
             } else {
-                projects = new HashSet<String>(Arrays.asList(new String[0]));
+                projects = new HashSet<>(Arrays.asList(new String[0]));
             }
 
             tableOfContents = findTableOfContents(doc);
@@ -168,19 +170,21 @@ class GuideOrganization {
      * @return set of categories
      * @throws IOException
      */
+    @SuppressWarnings("unchecked")
     private Map<String, List<String>> parseFrontMatter(File readme) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(readme));
-        String frontMatter = "";
-        String line = reader.readLine();
-        if (line.startsWith("---")) {
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("---")) {
-                    break;
-                } else {
-                    frontMatter += line + "\n";
+        try (BufferedReader reader = new BufferedReader(new FileReader(readme))) {
+            String frontMatter = "";
+            String line = reader.readLine();
+            if (line.startsWith("---")) {
+                while ((line = reader.readLine()) != null) {
+                    if (line.startsWith("---")) {
+                        break;
+                    } else {
+                        frontMatter += line + "\n";
+                    }
                 }
+                return (Map<String, List<String>>) yaml.load(frontMatter);
             }
-            return (Map) yaml.load(frontMatter);
         }
         return new HashMap<>();
     }

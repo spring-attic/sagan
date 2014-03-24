@@ -23,6 +23,7 @@ public class Project {
     private List<ProjectRelease> releaseList = new ArrayList<ProjectRelease>();
     private boolean isAggregator;
 
+    @SuppressWarnings("unused")
     private Project() {
     }
 
@@ -46,7 +47,7 @@ public class Project {
     }
 
     public void setProjectReleases(List<ProjectRelease> releases) {
-        this.releaseList = releaseList;
+        this.releaseList = releases;
     }
 
     public void setId(String id) {

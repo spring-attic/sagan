@@ -13,7 +13,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-@SuppressWarnings("unused")
 class IndexScheduler {
     private static final long ONE_HOUR = 1000 * 60 * 60;
     private static final long ONE_DAY = ONE_HOUR * 24;
