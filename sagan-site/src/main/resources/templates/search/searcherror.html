@@ -1,0 +1,26 @@
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+    <title th:inline="text">Search</title>
+    <link rel="alternate" type="application/atom+xml" th:href="${feedPath}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/search.css}"/>
+</head>
+<body>
+<div layout:fragment="header-container"></div>
+<div layout:fragment="content" class="container">
+    <div class="main-body--wrapper search-results-page">
+        <div class="row-fluid">
+            <div id="content" class="span12">
+                <h1 class="index-page--title">Search Error</h1>
+                <p class="index-page--subtitle">
+                    Your application may not be properly configured for search.<br>
+                    You should try to <a href="https://github.com/spring-io/sagan/wiki/Enable-search-locally">enable search locally</a> or
+                    <a href="https://github.com/spring-io/sagan/wiki/Enable-search-on-Cloud-Foundry">on your Cloud Foundry hosted application</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
