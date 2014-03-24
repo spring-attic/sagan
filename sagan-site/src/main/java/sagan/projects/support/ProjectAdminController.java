@@ -25,7 +25,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Controller
 @RequestMapping("/admin/projects")
 @NavSection("projects")
-public class ProjectAdminController {
+class ProjectAdminController {
     private static final String VERSION_PLACEHOLDER = "{version}";
     private static final String VERSION_PATTERN = Pattern.quote(VERSION_PLACEHOLDER);
     private static final List<String> CATEGORIES =

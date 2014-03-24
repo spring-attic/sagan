@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
-public class TeamAdminController {
+class TeamAdminController {
 
     private final TeamService teamService;
     private final TeamImporter teamImporter;

@@ -29,7 +29,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Controller
 @RequestMapping("/blog")
 @NavSection("blog")
-public class BlogController {
+class BlogController {
 
     private final BlogService service;
     private final PostViewFactory postViewFactory;
