@@ -1,7 +1,7 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
 
@@ -16,15 +16,15 @@ class PostFormAdapter {
 
     private final PostContentRenderer renderer;
     private final PostSummary postSummary;
-    private final DateService dateService;
+    private final DateFactory dateFactory;
     private final TeamRepository teamRepository;
 
     @Autowired
     public PostFormAdapter(PostContentRenderer renderer, PostSummary postSummary,
-                           DateService dateService, TeamRepository teamRepository) {
+                           DateFactory dateFactory, TeamRepository teamRepository) {
         this.renderer = renderer;
         this.postSummary = postSummary;
-        this.dateService = dateService;
+        this.dateFactory = dateFactory;
         this.teamRepository = teamRepository;
     }
 
@@ -33,7 +33,7 @@ class PostFormAdapter {
         Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
         MemberProfile profile = teamRepository.findByUsername(username);
         post.setAuthor(profile);
-        post.setCreatedAt(createdDate(postForm, dateService.now()));
+        post.setCreatedAt(createdDate(postForm, dateFactory.now()));
 
         setPostProperties(postForm, content, post);
         return post;
@@ -69,7 +69,7 @@ class PostFormAdapter {
 
     private Date publishDate(PostForm postForm) {
         if (!postForm.isDraft() && postForm.getPublishAt() == null) {
-            return dateService.now();
+            return dateFactory.now();
         } else {
             return postForm.getPublishAt();
         }

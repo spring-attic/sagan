@@ -1,7 +1,7 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +15,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class PostViewFactory {
 
-    private DateService dateService;
+    private DateFactory dateFactory;
 
     @Autowired
-    public PostViewFactory(DateService dateService) {
-        this.dateService = dateService;
+    public PostViewFactory(DateFactory dateFactory) {
+        this.dateFactory = dateFactory;
     }
 
     public PostView createPostView(Post post) {
-        return new PostView(post, dateService);
+        return new PostView(post, dateFactory);
     }
 
     public Page<PostView> createPostViewPage(Page<Post> posts) {

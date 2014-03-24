@@ -2,7 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.PostMovedException;
 import sagan.blog.Post;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 
 import java.util.Collections;
 import java.util.Locale;
@@ -39,7 +39,7 @@ public class BlogControllerTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        postViewFactory = new PostViewFactory(new DateService());
+        postViewFactory = new PostViewFactory(new DateFactory());
         PageImpl<Post> page = new PageImpl<>(Collections.<Post> emptyList(), new PageRequest(1, 1), 1);
         given(blogService.getPublishedPostsByDate(anyInt(), any(Pageable.class))).willReturn(page);
         given(blogService.getPublishedPostsByDate(anyInt(), anyInt(), any(Pageable.class))).willReturn(page);

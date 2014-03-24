@@ -3,7 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 import sagan.team.support.TeamRepository;
 
@@ -37,7 +37,7 @@ public class PostFormAdapter_UpdatePostTests {
     private String ORIGINAL_AUTHOR = "original author";
 
     @Mock
-    private DateService dateService;
+    private DateFactory dateFactory;
 
     @Mock
     private TeamRepository teamRepository;
@@ -52,7 +52,7 @@ public class PostFormAdapter_UpdatePostTests {
 
     @Before
     public void setup() {
-        given(dateService.now()).willReturn(now);
+        given(dateFactory.now()).willReturn(now);
         given(postSummary.forContent(anyString(), anyInt())).willReturn(SUMMARY);
         given(renderer.render(content)).willReturn(RENDERED_HTML);
 
@@ -65,7 +65,7 @@ public class PostFormAdapter_UpdatePostTests {
         postForm.setBroadcast(broadcast);
         postForm.setPublishAt(publishAt);
 
-        postFormAdapter = new PostFormAdapter(renderer, postSummary, dateService, teamRepository);
+        postFormAdapter = new PostFormAdapter(renderer, postSummary, dateFactory, teamRepository);
         postFormAdapter.updatePostFromPostForm(post, postForm);
     }
 

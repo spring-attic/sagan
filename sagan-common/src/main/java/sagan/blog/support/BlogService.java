@@ -6,7 +6,7 @@ import sagan.blog.PostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.search.support.SearchService;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 
 import java.util.Collections;
@@ -35,17 +35,17 @@ public class BlogService {
     private PostFormAdapter postFormAdapter;
     private PostRepository postRepository;
     private SearchService searchService;
-    private DateService dateService;
+    private DateFactory dateFactory;
     private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
     private static final Log logger = LogFactory.getLog(BlogService.class);
 
     @Autowired
-    public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter, DateService dateService,
+    public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter, DateFactory dateFactory,
                        SearchService searchService) {
         this.postRepository = postRepository;
         this.postFormAdapter = postFormAdapter;
-        this.dateService = dateService;
+        this.dateFactory = dateFactory;
         this.searchService = searchService;
     }
 
@@ -68,17 +68,17 @@ public class BlogService {
     }
 
     public Page<Post> getScheduledPosts(Pageable pageRequest) {
-        return postRepository.findByDraftFalseAndPublishAtAfter(dateService.now(), pageRequest);
+        return postRepository.findByDraftFalseAndPublishAtAfter(dateFactory.now(), pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPosts(Pageable pageRequest) {
-        return postRepository.findByDraftFalseAndPublishAtBefore(dateService.now(), pageRequest);
+        return postRepository.findByDraftFalseAndPublishAtBefore(dateFactory.now(), pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Post getPublishedPost(String publicSlug) {
-        Date now = dateService.now();
+        Date now = dateFactory.now();
         Post post = postRepository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug, now);
         if (post == null) {
             post = postRepository.findByPublicSlugAliasesInAndDraftFalseAndPublishAtBefore(
@@ -93,7 +93,7 @@ public class BlogService {
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public List<Post> getAllPublishedPosts() {
-        return postRepository.findByDraftFalseAndPublishAtBefore(dateService.now());
+        return postRepository.findByDraftFalseAndPublishAtBefore(dateFactory.now());
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
@@ -113,19 +113,19 @@ public class BlogService {
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
-        return postRepository.findByCategoryAndDraftFalseAndPublishAtBefore(category, dateService.now(),
+        return postRepository.findByCategoryAndDraftFalseAndPublishAtBefore(category, dateFactory.now(),
                 pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
-        return postRepository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, dateService.now(),
+        return postRepository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, dateFactory.now(),
                 pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsForMember(MemberProfile profile, Pageable pageRequest) {
-        return postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, dateService.now(),
+        return postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, dateFactory.now(),
                 pageRequest);
     }
 
@@ -151,7 +151,7 @@ public class BlogService {
     }
 
     private void saveToIndex(Post post) {
-        if (post.isLiveOn(dateService.now())) {
+        if (post.isLiveOn(dateFactory.now())) {
             try {
                 searchService.saveToIndex(mapper.map(post));
             } catch (Exception e) {

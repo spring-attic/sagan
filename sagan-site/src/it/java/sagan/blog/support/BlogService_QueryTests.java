@@ -4,7 +4,7 @@ import sagan.blog.PostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.search.support.SearchService;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 import sagan.team.MemberProfile;
 import saganx.AbstractIntegrationTests;
@@ -39,7 +39,7 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
     private static final Pageable FIRST_TEN_POSTS = PageableFactory.forLists(1);
 
     @Mock
-    private DateService dateService;
+    private DateFactory dateFactory;
 
     @Mock
     private SearchService searchService;
@@ -68,7 +68,7 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
     @Before
     public void setup() throws Exception {
         initMocks(this);
-        service = new BlogService(postRepository, postFormAdapter, dateService, searchService);
+        service = new BlogService(postRepository, postFormAdapter, dateFactory, searchService);
         setupDates();
         setupFixtureData();
     }
@@ -78,7 +78,7 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
         today = new SimpleDateFormat("yyyy-MM-dd").parse("2013-06-14");
         tomorrow = new SimpleDateFormat("yyyy-MM-dd").parse("2013-06-15");
 
-        given(dateService.now()).willReturn(today);
+        given(dateFactory.now()).willReturn(today);
     }
 
     private void setupFixtureData() throws Exception {

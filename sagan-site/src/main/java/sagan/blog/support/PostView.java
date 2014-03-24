@@ -2,7 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 
 import java.text.SimpleDateFormat;
@@ -12,11 +12,11 @@ public class PostView {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy");
 
     private Post post;
-    private DateService dateService;
+    private DateFactory dateFactory;
 
-    public PostView(Post post, DateService dateService) {
+    public PostView(Post post, DateFactory dateFactory) {
         this.post = post;
-        this.dateService = dateService;
+        this.dateFactory = dateFactory;
     }
 
     public String getFormattedPublishDate() {
@@ -25,7 +25,7 @@ public class PostView {
 
     public String getPath() {
         String path;
-        if (post.isLiveOn(dateService.now())) {
+        if (post.isLiveOn(dateFactory.now())) {
             path = "/blog/" + post.getPublicSlug();
         } else {
             path = "/admin/blog/" + post.getAdminSlug();

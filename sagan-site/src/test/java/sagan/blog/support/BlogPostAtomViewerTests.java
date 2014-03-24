@@ -2,7 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.support.nav.SiteUrl;
 
 import java.util.ArrayList;
@@ -34,13 +34,13 @@ public class BlogPostAtomViewerTests {
     private SiteUrl siteUrl;
     private BlogPostAtomViewer blogPostAtomViewer;
     private Feed feed = new Feed();
-    private Calendar calendar = Calendar.getInstance(DateService.TIME_ZONE);
+    private Calendar calendar = Calendar.getInstance(DateFactory.DEFAULT_TIME_ZONE);
     private HttpServletRequest request = mock(HttpServletRequest.class);
 
     @Before
     public void setUp() throws Exception {
         siteUrl = mock(SiteUrl.class);
-        blogPostAtomViewer = new BlogPostAtomViewer(siteUrl, new DateService());
+        blogPostAtomViewer = new BlogPostAtomViewer(siteUrl, new DateFactory());
         given(request.getServerName()).willReturn("springsource.org");
         model.addAttribute("posts", new ArrayList<Post>());
     }
