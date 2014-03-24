@@ -10,9 +10,4 @@ class AdminController {
     public String adminPage() {
         return "admin/show";
     }
-
-    @RequestMapping("/admin/500")
-    public void simulate500() {
-        throw new RuntimeException("Simulated Exception");
-    }
 }
