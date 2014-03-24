@@ -30,7 +30,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static sagan.blog.PostCategory.ENGINEERING;
 
-public class BlogAtomFeedControllerTests {
+public class AtomFeedControllerTests {
 
     public static final PostCategory TEST_CATEGORY = ENGINEERING;
 
@@ -43,7 +43,7 @@ public class BlogAtomFeedControllerTests {
     @Mock
     private DateFactory dateFactory;
 
-    private BlogAtomFeedController controller;
+    private AtomFeedController controller;
     private ExtendedModelMap model = new ExtendedModelMap();
     private Page<Post> page;
     private List<Post> posts = new ArrayList<>();
@@ -52,7 +52,7 @@ public class BlogAtomFeedControllerTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new BlogAtomFeedController(blogService, siteUrl, dateFactory);
+        controller = new AtomFeedController(blogService, siteUrl, dateFactory);
         posts.add(PostBuilder.post().build());
         page = new PageImpl<>(posts, mock(Pageable.class), 20);
         given(blogService.getPublishedPosts(eq(PageableFactory.forFeeds()))).willReturn(page);

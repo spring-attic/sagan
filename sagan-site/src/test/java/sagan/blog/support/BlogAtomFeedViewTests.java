@@ -32,7 +32,7 @@ public class BlogAtomFeedViewTests {
 
     private ExtendedModelMap model = new ExtendedModelMap();
     private SiteUrl siteUrl;
-    private BlogAtomFeedView blogAtomFeedView;
+    private AtomFeedView atomFeedView;
     private Feed feed = new Feed();
     private Calendar calendar = Calendar.getInstance(DateFactory.DEFAULT_TIME_ZONE);
     private HttpServletRequest request = mock(HttpServletRequest.class);
@@ -40,7 +40,7 @@ public class BlogAtomFeedViewTests {
     @Before
     public void setUp() throws Exception {
         siteUrl = mock(SiteUrl.class);
-        blogAtomFeedView = new BlogAtomFeedView(siteUrl, new DateFactory());
+        atomFeedView = new AtomFeedView(siteUrl, new DateFactory());
         given(request.getServerName()).willReturn("springsource.org");
         model.addAttribute("posts", new ArrayList<Post>());
     }
@@ -48,7 +48,7 @@ public class BlogAtomFeedViewTests {
     @Test
     public void hasFeedTitleFromModel() {
         model.addAttribute("feed-title", "Spring Engineering");
-        blogAtomFeedView.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
+        atomFeedView.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
         assertThat(feed.getTitle(), is("Spring Engineering"));
     }
 
@@ -59,7 +59,7 @@ public class BlogAtomFeedViewTests {
         given(siteUrl.getAbsoluteUrl(eq(expectedBlogPath))).willReturn(expectedBlogUrl);
         model.addAttribute("blog-path", expectedBlogPath);
 
-        blogAtomFeedView.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
+        atomFeedView.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
 
         Link feedLink = (Link) feed.getAlternateLinks().get(0);
         assertThat(feedLink.getHref(), is(expectedBlogUrl));
@@ -73,7 +73,7 @@ public class BlogAtomFeedViewTests {
         given(siteUrl.getAbsoluteUrl(eq(expectedFeedPath))).willReturn(expectedFeedUrl);
         model.addAttribute("feed-path", expectedFeedPath);
 
-        blogAtomFeedView.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
+        atomFeedView.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
 
         Link feedLink = (Link) feed.getOtherLinks().get(0);
         assertThat(feedLink.getHref(), is(expectedFeedUrl));
@@ -84,7 +84,7 @@ public class BlogAtomFeedViewTests {
     public void hasCorrectIdForFeed() throws Exception {
         model.addAttribute("feed-path", "/blog.atom");
 
-        blogAtomFeedView.buildFeedMetadata(model, feed, request);
+        atomFeedView.buildFeedMetadata(model, feed, request);
 
         assertThat(feed.getId(), is("http://spring.io/blog.atom"));
     }
@@ -95,7 +95,7 @@ public class BlogAtomFeedViewTests {
         buildPostsWithDate(5, posts);
         model.addAttribute("posts", posts);
 
-        blogAtomFeedView.buildFeedMetadata(model, feed, request);
+        atomFeedView.buildFeedMetadata(model, feed, request);
 
         Post latestPost = posts.get(0);
         assertThat(feed.getUpdated(), is(latestPost.getPublishAt()));
@@ -106,7 +106,7 @@ public class BlogAtomFeedViewTests {
         List<Post> noPosts = new ArrayList<Post>();
         model.addAttribute("posts", noPosts);
 
-        blogAtomFeedView.buildFeedMetadata(model, feed, request);
+        atomFeedView.buildFeedMetadata(model, feed, request);
 
         assertThat(feed.getUpdated(), is(nullValue()));
     }
@@ -129,7 +129,7 @@ public class BlogAtomFeedViewTests {
 
         model.addAttribute("posts", Arrays.asList(post));
 
-        List<Entry> entries = blogAtomFeedView.buildFeedEntries(model, request, mock(HttpServletResponse.class));
+        List<Entry> entries = atomFeedView.buildFeedEntries(model, request, mock(HttpServletResponse.class));
 
         Entry entry = entries.get(0);
         assertThat(entry.getId(), is("tag:springsource.org,2013-07-01:123"));

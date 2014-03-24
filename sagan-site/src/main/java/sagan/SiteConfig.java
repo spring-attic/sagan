@@ -1,10 +1,7 @@
 package sagan;
 
-import sagan.blog.support.BlogAtomFeedView;
 import sagan.guides.support.GettingStartedGuides;
-import sagan.support.DateFactory;
 import sagan.support.cache.CachedRestClient;
-import sagan.support.nav.SiteUrl;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -18,37 +18,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
-class BlogAtomFeedController {
+class AtomFeedController {
 
     private final BlogService blogService;
-    private final BlogAtomFeedView blogAtomFeedView;
+    private final AtomFeedView atomFeedView;
 
     @Autowired
-    public BlogAtomFeedController(BlogService blogService, SiteUrl siteUrl, DateFactory dateFactory) {
+    public AtomFeedController(BlogService blogService, SiteUrl siteUrl, DateFactory dateFactory) {
         this.blogService = blogService;
-        this.blogAtomFeedView = new BlogAtomFeedView(siteUrl, dateFactory);
+        this.atomFeedView = new AtomFeedView(siteUrl, dateFactory);
     }
 
     @RequestMapping(value = "/blog.atom", method = { GET, HEAD })
-    public BlogAtomFeedView listPublishedPosts(Model model, HttpServletResponse response) {
+    public AtomFeedView listPublishedPosts(Model model, HttpServletResponse response) {
         Page<Post> page = blogService.getPublishedPosts(PageableFactory.forFeeds());
         prepareResponse(model, response, page, "", "");
-        return blogAtomFeedView;
+        return atomFeedView;
     }
 
     @RequestMapping(value = "/blog/category/{category}.atom", method = { GET, HEAD })
-    public BlogAtomFeedView listPublishedPostsForCategory(@PathVariable PostCategory category, Model model,
+    public AtomFeedView listPublishedPostsForCategory(@PathVariable PostCategory category, Model model,
                                                           HttpServletResponse response) {
         Page<Post> page = blogService.getPublishedPosts(category, PageableFactory.forFeeds());
         prepareResponse(model, response, page, category.getDisplayName(), "/category/" + category.getUrlSlug());
-        return blogAtomFeedView;
+        return atomFeedView;
     }
 
     @RequestMapping(value = "/blog/broadcasts.atom", method = { GET, HEAD })
-    public BlogAtomFeedView listPublishedBroadcastPosts(Model model, HttpServletResponse response) {
+    public AtomFeedView listPublishedBroadcastPosts(Model model, HttpServletResponse response) {
         Page<Post> page = blogService.getPublishedBroadcastPosts(PageableFactory.forFeeds());
         prepareResponse(model, response, page, "Broadcasts", "/broadcasts");
-        return blogAtomFeedView;
+        return atomFeedView;
     }
 
     private void prepareResponse(Model model, HttpServletResponse response, Page<Post> page,
