@@ -26,7 +26,7 @@ public class PostViewFactory {
     }
 
     public List<PostView> createPostViewList(List<Post> posts) {
-        List<PostView> postViews = new ArrayList<PostView>();
+        List<PostView> postViews = new ArrayList<>();
         for (Post post : posts) {
             postViews.add(createPostView(post));
         }

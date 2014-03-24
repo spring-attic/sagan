@@ -76,7 +76,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
                                            HttpServletResponse response) throws Exception {
         @SuppressWarnings("unchecked")
         List<Post> posts = (List<Post>) model.get("posts");
-        List<Entry> entries = new ArrayList<Entry>(posts.size());
+        List<Entry> entries = new ArrayList<>(posts.size());
 
         for (Post post : posts) {
             Entry entry = new Entry();
@@ -127,7 +127,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
         Category category = new Category();
         category.setLabel(post.getCategory().getDisplayName());
         category.setTerm(post.getCategory().getUrlSlug());
-        List<Category> categories = new ArrayList<Category>();
+        List<Category> categories = new ArrayList<>();
         categories.add(category);
 
         if (post.isBroadcast()) {

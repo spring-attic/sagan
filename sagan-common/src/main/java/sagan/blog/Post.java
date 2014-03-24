@@ -71,7 +71,7 @@ public class Post implements Serializable {
     private String publicSlug;
 
     @ElementCollection
-    private Set<String> publicSlugAliases = new HashSet<String>();
+    private Set<String> publicSlugAliases = new HashSet<>();
 
     @SuppressWarnings("unused")
     private Post() {

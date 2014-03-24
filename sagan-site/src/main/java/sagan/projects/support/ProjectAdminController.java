@@ -58,7 +58,7 @@ class ProjectAdminController {
                 "New Spring Project",
                 "http://github.com/spring-projects/spring-new",
                 "http://projects.spring.io/spring-new",
-                new ArrayList<ProjectRelease>(Arrays.asList(release)),
+                new ArrayList<>(Arrays.asList(release)),
                 false,
                 CATEGORIES.get(0));
 
