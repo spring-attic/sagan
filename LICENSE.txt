@@ -151,18 +151,18 @@ SECTION 2: Apache License, V2.0
    >>> spring-beans-3.2.4.release
    >>> spring-beans-3.2.6.release
    >>> spring-beans-4.0.0.release
-   >>> spring-boot-0.5.0.m7
-   >>> spring-boot-actuator-0.5.0.m7
-   >>> spring-boot-autoconfigure-0.5.0.m7
-   >>> spring-boot-starter-0.5.0.m7
-   >>> spring-boot-starter-actuator-0.5.0.m7
-   >>> spring-boot-starter-aop-0.5.0.m7
-   >>> spring-boot-starter-data-jpa-0.5.0.m7
-   >>> spring-boot-starter-jdbc-0.5.0.m7
-   >>> spring-boot-starter-logging-0.5.0.m7
-   >>> spring-boot-starter-security-0.5.0.m7
-   >>> spring-boot-starter-tomcat-0.5.0.m7
-   >>> spring-boot-starter-web-0.5.0.m7
+   >>> spring-boot-1.0.0.RC5
+   >>> spring-boot-actuator-1.0.0.RC5
+   >>> spring-boot-autoconfigure-1.0.0.RC5
+   >>> spring-boot-starter-1.0.0.RC5
+   >>> spring-boot-starter-actuator-1.0.0.RC5
+   >>> spring-boot-starter-aop-1.0.0.RC5
+   >>> spring-boot-starter-data-jpa-1.0.0.RC5
+   >>> spring-boot-starter-jdbc-1.0.0.RC5
+   >>> spring-boot-starter-logging-1.0.0.RC5
+   >>> spring-boot-starter-security-1.0.0.RC5
+   >>> spring-boot-starter-tomcat-1.0.0.RC5
+   >>> spring-boot-starter-web-1.0.0.RC5
    >>> spring-context-3.1.4.release
    >>> spring-context-3.2.4.release
    >>> spring-context-3.2.6.release
@@ -4516,7 +4516,7 @@ Copyright 2002-2012 the original author or authors.
   limitations under the License.
 
 
->>> spring-boot-0.5.0.m7
+>>> spring-boot-1.0.0.RC5
 
 * Copyright 2012-2014 the original author or authors.
  *
@@ -4548,7 +4548,7 @@ Copyright 2000-2011 the original author or authors.
   http://www.eclipse.org/legal/epl-v10.html
 
 
->>> spring-boot-actuator-0.5.0.m7
+>>> spring-boot-actuator-1.0.0.RC5
 
 * Copyright 2012-2013 the original author or authors.
  *
@@ -4565,7 +4565,7 @@ Copyright 2000-2011 the original author or authors.
  * limitations under the License.
 
 
->>> spring-boot-autoconfigure-0.5.0.m7
+>>> spring-boot-autoconfigure-1.0.0.RC5
 
 Copyright 2012-2013 the original author or authors.
 
@@ -4582,12 +4582,12 @@ Copyright 2012-2013 the original author or authors.
   limitations under the License.
 
 
->>> spring-boot-starter-0.5.0.m7
+>>> spring-boot-starter-1.0.0.RC5
 
 License: Apache 2.0
 
 
->>> spring-boot-starter-actuator-0.5.0.m7
+>>> spring-boot-starter-actuator-1.0.0.RC5
 
 * Copyright 2012-2013 the original author or authors.
  *
@@ -4604,22 +4604,22 @@ License: Apache 2.0
  * limitations under the License.
 
 
->>> spring-boot-starter-aop-0.5.0.m7
+>>> spring-boot-starter-aop-1.0.0.RC5
 
 License: Apache 2.0
 
 
->>> spring-boot-starter-data-jpa-0.5.0.m7
+>>> spring-boot-starter-data-jpa-1.0.0.RC5
 
 License: Apache 2.0
 
 
->>> spring-boot-starter-jdbc-0.5.0.m7
+>>> spring-boot-starter-jdbc-1.0.0.RC5
 
 License: Apache 2.0
 
 
->>> spring-boot-starter-logging-0.5.0.m7
+>>> spring-boot-starter-logging-1.0.0.RC5
 
 * Copyright 2012-2014 the original author or authors.
  *
@@ -4636,7 +4636,7 @@ License: Apache 2.0
  * limitations under the License.
 
 
->>> spring-boot-starter-security-0.5.0.m7
+>>> spring-boot-starter-security-1.0.0.RC5
 
 * Copyright 2012-2013 the original author or authors.
  *
@@ -4653,12 +4653,12 @@ License: Apache 2.0
  * limitations under the License.
 
 
->>> spring-boot-starter-tomcat-0.5.0.m7
+>>> spring-boot-starter-tomcat-1.0.0.RC5
 
 License: Apache 2.0
 
 
->>> spring-boot-starter-web-0.5.0.m7
+>>> spring-boot-starter-web-1.0.0.RC5
 
 License: Apache 2.0
 
