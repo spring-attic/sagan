@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
-class BlogFeedController {
+class BlogAtomFeedController {
 
     private BlogService service;
 
     @Autowired
-    public BlogFeedController(BlogService service) {
+    public BlogAtomFeedController(BlogService service) {
         this.service = service;
     }
 

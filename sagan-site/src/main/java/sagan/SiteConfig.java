@@ -1,6 +1,6 @@
 package sagan;
 
-import sagan.blog.support.BlogPostAtomViewer;
+import sagan.blog.support.BlogAtomFeedView;
 import sagan.guides.support.GettingStartedGuides;
 import sagan.support.DateFactory;
 import sagan.support.cache.CachedRestClient;
@@ -83,8 +83,8 @@ public class SiteConfig {
     }
 
     @Bean
-    public BlogPostAtomViewer blogPostAtomViewer() {
-        return new BlogPostAtomViewer(siteUrl(), dateFactory());
+    public BlogAtomFeedView blogPostAtomViewer() {
+        return new BlogAtomFeedView(siteUrl(), dateFactory());
     }
 
     @Bean

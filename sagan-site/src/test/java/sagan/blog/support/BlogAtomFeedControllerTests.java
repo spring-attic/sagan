@@ -28,14 +28,14 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static sagan.blog.PostCategory.ENGINEERING;
 
-public class BlogFeedControllerTests {
+public class BlogAtomFeedControllerTests {
 
     public static final PostCategory TEST_CATEGORY = ENGINEERING;
 
     @Mock
     private BlogService blogService;
 
-    private BlogFeedController controller;
+    private BlogAtomFeedController controller;
     private ExtendedModelMap model = new ExtendedModelMap();
     private Page<Post> page;
     private List<Post> posts = new ArrayList<Post>();
@@ -44,7 +44,7 @@ public class BlogFeedControllerTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new BlogFeedController(blogService);
+        controller = new BlogAtomFeedController(blogService);
         posts.add(PostBuilder.post().build());
         page = new PageImpl<Post>(posts, mock(Pageable.class), 20);
         given(blogService.getPublishedPosts(eq(PageableFactory.forFeeds()))).willReturn(page);

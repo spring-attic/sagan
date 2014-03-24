@@ -23,13 +23,13 @@ import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.feed.atom.Link;
 import com.sun.syndication.feed.atom.Person;
 
-public class BlogPostAtomViewer extends AbstractAtomFeedView {
+public class BlogAtomFeedView extends AbstractAtomFeedView {
 
     private final SiteUrl siteUrl;
     private final DateFactory dateFactory;
 
     @Autowired
-    public BlogPostAtomViewer(SiteUrl siteUrl, DateFactory dateFactory) {
+    public BlogAtomFeedView(SiteUrl siteUrl, DateFactory dateFactory) {
         this.siteUrl = siteUrl;
         this.dateFactory = dateFactory;
     }
