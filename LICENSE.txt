@@ -1,5 +1,5 @@
 
-Copyright (c) 2013 Pivotal Software, Inc. 
+Copyright (c) 2013 Pivotal Software, Inc.
 
 All rights reserved.
 
@@ -53,10 +53,10 @@ TABLE OF CONTENTS
 Spring.io 1.0.0 GA
 
 Spring.io 1.0.0 GA includes a number of subcomponents with separate copyright
-notices and license terms.  The product that includes this file does not 
-necessarily use all the open source subcomponents referred to below. Your 
+notices and license terms.  The product that includes this file does not
+necessarily use all the open source subcomponents referred to below. Your
 use of the source code for the these subcomponents is subject to the terms and
-conditions of the following licenses. 
+conditions of the following licenses.
 
 
 
@@ -259,13 +259,13 @@ APPENDIX. Standard License Files
    >>> Eclipse Public License, V1.0
 
    >>> Common Development and Distribution License, V1.0
-   
+
    >>> Common Public License Version 1.0
-   
+
    >>> Creative Commons Attribution-ShareAlike 3.0
-   
+
    >>> Common Development and Distribution License (CDDL) Version 1.1
-   
+
    >>> Creative Commons Attribution-ShareAlike 2.5
 
 
@@ -281,29 +281,29 @@ BSD-STYLE, MIT-STYLE, OR SIMILAR STYLE LICENSES are applicable to the following 
 Copyright (c) 2003-2008, Terence Parr
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without modification, are 
+Redistribution and use in source and binary forms, with or without modification, are
 permitted provided that the following conditions are met:
 
-Redistributions of source code must retain the above copyright notice, this list 
+Redistributions of source code must retain the above copyright notice, this list
 of conditions and the following disclaimer.
 
-Redistributions in binary form must reproduce the above copyright notice, this 
-list of conditions and the following disclaimer in the documentation and/or other 
+Redistributions in binary form must reproduce the above copyright notice, this
+list of conditions and the following disclaimer in the documentation and/or other
 materials provided with the distribution.
 
-Neither the name of the author nor the names of its contributors may be used to 
-endorse or promote products derived from this software without specific prior written 
-permission. 
+Neither the name of the author nor the names of its contributors may be used to
+endorse or promote products derived from this software without specific prior written
+permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
-EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
-OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
-SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
-TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
-BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN 
-ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH 
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGE.
 
 
@@ -353,25 +353,25 @@ that the following conditions are met:
 1. Redistributions of source code must retain copyright
    statements and notices.  Redistributions must also contain a
    copy of this document.
- 
+
 2. Redistributions in binary form must reproduce the
    above copyright notice, this list of conditions and the
    following disclaimer in the documentation and/or other
    materials provided with the distribution.
- 
+
 3. The name "DOM4J" must not be used to endorse or promote
    products derived from this Software without prior written
    permission of MetaStuff, Ltd.  For written permission,
    please contact dom4j-info@metastuff.com.
- 
+
 4. Products derived from this Software may not be called "DOM4J"
    nor may "DOM4J" appear in their names without prior written
    permission of MetaStuff, Ltd. DOM4J is a registered
    trademark of MetaStuff, Ltd.
- 
-5. Due credit should be given to the DOM4J Project - 
+
+5. Due credit should be given to the DOM4J Project -
    http://www.dom4j.org
- 
+
 THIS SOFTWARE IS PROVIDED BY METASTUFF, LTD. AND CONTRIBUTORS
 ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT
 NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
@@ -1056,14 +1056,14 @@ The Apache Software Foundation (http://www.apache.org/).
  *
  ******************************************************
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * 
+ *
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is 
- * distributed  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -1116,13 +1116,13 @@ Copyright 2010-2013 Axel Fontaine and the many contributors.
 >>> gson-2.2.3
 
 Copyright (C) 2008 Google Inc.
- 
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
- 
+
   http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -1176,11 +1176,11 @@ Copyright 2009, Red Hat, Inc. and/or its affiliates, and individual contributors
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
 Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,  
+distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- 
+
 See the License for the specific language governing permissions and
 limitations under the License.
 
@@ -1215,7 +1215,7 @@ ADDITIONAL LICENSE INFORMATION:
 
 This project contains annotations derived from JCIP-ANNOTATIONS
 Copyright (c) 2005 Brian Goetz and Tim Peierls.
-See http://www.jcip.net and the Creative Commons Attribution License 
+See http://www.jcip.net and the Creative Commons Attribution License
 (http://creativecommons.org/licenses/by/2.5)
 
 
@@ -1268,7 +1268,7 @@ ADDITIONAL LICENSE INFORMATION:
 
 This project contains annotations derived from JCIP-ANNOTATIONS
 Copyright (c) 2005 Brian Goetz and Tim Peierls.
-See http://www.jcip.net and the Creative Commons Attribution License 
+See http://www.jcip.net and the Creative Commons Attribution License
 (http://creativecommons.org/licenses/by/2.5)
 
 
@@ -1338,9 +1338,9 @@ ADDITIONAL LICENSE INFORMATION:
 =========================================================================
 
 This project contains annotations in the package org.apache.http.annotation
-which are derived from JCIP-ANNOTATIONS 
+which are derived from JCIP-ANNOTATIONS
 Copyright (c) 2005 Brian Goetz and Tim Peierls.
-See http://www.jcip.net and the Creative Commons Attribution License 
+See http://www.jcip.net and the Creative Commons Attribution License
 (http://creativecommons.org/licenses/by/2.5)
 Full text: http://creativecommons.org/licenses/by/2.5/legalcode
 
@@ -1417,9 +1417,9 @@ ADDITIONAL LICENSE INFORMATION:
 =========================================================================
 
 This project contains annotations in the package org.apache.http.annotation
-which are derived from JCIP-ANNOTATIONS 
+which are derived from JCIP-ANNOTATIONS
 Copyright (c) 2005 Brian Goetz and Tim Peierls.
-See http://www.jcip.net and the Creative Commons Attribution License 
+See http://www.jcip.net and the Creative Commons Attribution License
 (http://creativecommons.org/licenses/by/2.5)
 Full text: http://creativecommons.org/licenses/by/2.5/legalcode
 
@@ -1508,9 +1508,9 @@ ADDITIONAL LICENSE INFORMATION:
 =========================================================================
 
 This project contains annotations in the package org.apache.http.annotation
-which are derived from JCIP-ANNOTATIONS 
+which are derived from JCIP-ANNOTATIONS
 Copyright (c) 2005 Brian Goetz and Tim Peierls.
-See http://www.jcip.net and the Creative Commons Attribution License 
+See http://www.jcip.net and the Creative Commons Attribution License
 (http://creativecommons.org/licenses/by/2.5)
 Full text: http://creativecommons.org/licenses/by/2.5/legalcode
 
@@ -1640,7 +1640,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 
 This copy of Jackson JSON processor databind module is licensed under the
 Apache (Software) License, version 2.0 ("the License").
-See the License for details about 
+See the License for details about
 distribution rights, and the specific rights regarding derivative works.
 
 You may obtain a copy of the License at:
@@ -1663,17 +1663,17 @@ http://www.apache.org/licenses/LICENSE-2.0
 >>> javassist-3.18.1-ga
 
 [PLEASE NOTE:  PIVOTAL SOFTWARE, INC. ELECTS TO USE AND DISTRIBUTE THIS COMPONENT UNDER THE TERMS OF THE APACHE 2.0 LICENSE.  PLEASE SEE THE APPENDIX TO REVIEW THE FULL TEXT OF THE APACHE 2.0 .THE ORIGINAL LICENSE TERMS ARE REPRODUCED BELOW ONLY AS A REFERENCE.]
- 
+
 
 Javassist, a Java-bytecode translator toolkit.
   Copyright (C) 1999- Shigeru Chiba. All Rights Reserved.
- 
+
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License.  Alternatively, the contents of this file may be used under
   the terms of the GNU Lesser General Public License Version 2.1 or later,
   or the Apache License Version 2.0.
- 
+
   Software distributed under the License is distributed on an "AS IS" basis,
   WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
   for the specific language governing rights and limitations under the
@@ -1698,13 +1698,13 @@ limitations under the License.
 >>> jcl-over-slf4j-1.7.1
 
 Copyright 2001-2004 The Apache Software Foundation.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
       http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -1751,13 +1751,13 @@ Copyright (C) 2010 the original author or authors.
 >>> jest-0.0.4
 
 Copyright 2012 Real Logic Ltd.
- 
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
- 
+
   http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -1772,7 +1772,7 @@ jest-0.0.4-sources.jar\io\searchbox\client\util\PaddedAtomicReference.java
 
 
   Copyright (c) 2011.  Peter Lawrey
- 
+
   "THE BEER-WARE LICENSE" (Revision 128)
   As long as you retain this notice you can do whatever you want with this stuff.
   If we meet some day, and you think this stuff is worth it, you can buy me a beer in return
@@ -1815,13 +1815,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -1880,7 +1880,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -1892,8 +1892,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -2017,13 +2017,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -2082,7 +2082,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -2094,8 +2094,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -2219,13 +2219,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -2284,7 +2284,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -2296,8 +2296,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -2421,13 +2421,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -2486,7 +2486,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -2498,8 +2498,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -2623,13 +2623,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -2688,7 +2688,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -2700,8 +2700,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -2825,13 +2825,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -2890,7 +2890,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -2902,8 +2902,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -3027,13 +3027,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -3092,7 +3092,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -3104,8 +3104,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -3229,13 +3229,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -3294,7 +3294,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -3306,8 +3306,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -3431,13 +3431,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -3496,7 +3496,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -3508,8 +3508,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -3633,13 +3633,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -3698,7 +3698,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -3710,8 +3710,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -3835,13 +3835,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -3900,7 +3900,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -3912,8 +3912,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -4037,13 +4037,13 @@ Some data files (under analysis/icu/src/data) are derived from Unicode data such
 as the Unicode Character Database. See http://unicode.org/copyright.html for more
 details.
 
-Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is 
+Brics Automaton (under core/src/java/org/apache/lucene/util/automaton) is
 BSD-licensed, created by Anders Mller. See http://www.brics.dk/automaton/
 
 The levenshtein automata tables (under core/src/java/org/apache/lucene/util/automaton) were
 automatically generated with the moman/finenight FSA library, created by
 Jean-Philippe Barrette-LaPierre. This library is available under an MIT license,
-see http://sites.google.com/site/rrettesite/moman and 
+see http://sites.google.com/site/rrettesite/moman and
 http://bitbucket.org/jpbarrette/moman/overview/
 
 The class org.apache.lucene.util.SorterTemplate was inspired by CGLIB's class
@@ -4102,7 +4102,7 @@ analysis/common/src/java/org/apache/lucene/analysis/pt/PortugueseLightStemmer.ja
 analysis/common/src/java/org/apache/lucene/analysis/ru/RussianLightStemmer.java
 analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 
-The Stempel analyzer (stempel) includes BSD-licensed software developed 
+The Stempel analyzer (stempel) includes BSD-licensed software developed
 by the Egothor project http://egothor.sf.net/, created by Leo Galambos, Martin Kvapil,
 and Edmond Nolan.
 
@@ -4114,8 +4114,8 @@ See http://project.carrot2.org/license.html.
 The SmartChineseAnalyzer source code (smartcn) was
 provided by Xiaoping Gao and copyright 2009 by www.imdict.net.
 
-WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/) 
-is derived from Unicode data such as the Unicode Character Database. 
+WordBreakTestUnicode_*.java (under modules/analysis/common/src/test/)
+is derived from Unicode data such as the Unicode Character Database.
 See http://unicode.org/copyright.html for more details.
 
 The Morfologik analyzer (morfologik) includes BSD-licensed software
@@ -4220,13 +4220,13 @@ above as far as the program is concerned.
 >>> nekohtml-1.9.15
 
 * Copyright 2002-2008 The Apache Software Foundation.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -4254,17 +4254,17 @@ above as far as the program is concerned.
 >>> simple-xml-2.7
 
 Copyright (C) 2010, Niall Gallagher <niallg@users.sf.net>
- 
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
- 
+
       http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
-  implied. See the License for the specific language governing 
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+  implied. See the License for the specific language governing
   permissions and limitations under the License.
 
 
@@ -4340,16 +4340,16 @@ license terms. Your use of the source code for the these subcomponents is subjec
 the terms and conditions of the subcomponent's license, as noted in the LICENSE file.
 
 
-=======================================================================   
+=======================================================================
 
-SPRING FRAMEWORK 3.1 SUBCOMPONENTS: 
+SPRING FRAMEWORK 3.1 SUBCOMPONENTS:
 
 Spring Framework 3.1 includes a number of subcomponents with
-separate copyright notices and license terms.  The product that 
-includes this file does not necessarily use all the open source 
+separate copyright notices and license terms.  The product that
+includes this file does not necessarily use all the open source
 subcomponents referred to below. Your use of the source
 code for these subcomponents is subject to the terms and
-conditions of the following licenses. 
+conditions of the following licenses.
 
 >>> asm-2.2.3:
 
@@ -4385,19 +4385,19 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>	
 		
-=======================================================================   
+=======================================================================
 
-To the extent any open source subcomponents are licensed under the EPL and/or other 
-similar licenses that require the source code and/or modifications to 
-source code to be made available (as would be noted above), you may obtain a 
-copy of the source code corresponding to the binaries for such open source 
-components and modifications thereto, if any, (the "Source Files"), by 
-downloading the Source Files from http://www.springsource.org/download, 
-or by sending a request, with your name and address to: VMware, Inc., 3401 Hillview 
-Avenue, Palo Alto, CA 94304, United States of America or email info@vmware.com.  All 
-such requests should clearly specify:  OPEN SOURCE FILES REQUEST, Attention General 
-Counsel.  VMware shall mail a copy of the Source Files to you on a CD or equivalent 
-physical medium.  This offer to obtain a copy of the Source Files is valid for three 
+To the extent any open source subcomponents are licensed under the EPL and/or other
+similar licenses that require the source code and/or modifications to
+source code to be made available (as would be noted above), you may obtain a
+copy of the source code corresponding to the binaries for such open source
+components and modifications thereto, if any, (the "Source Files"), by
+downloading the Source Files from http://www.springsource.org/download,
+or by sending a request, with your name and address to: VMware, Inc., 3401 Hillview
+Avenue, Palo Alto, CA 94304, United States of America or email info@vmware.com.  All
+such requests should clearly specify:  OPEN SOURCE FILES REQUEST, Attention General
+Counsel.  VMware shall mail a copy of the Source Files to you on a CD or equivalent
+physical medium.  This offer to obtain a copy of the Source Files is valid for three
 years from the date you acquired this Software product.
 
 
@@ -4453,13 +4453,13 @@ limitations under the License.
 >>> spring-beans-3.1.4.release
 
 Copyright 2002-2005 the original author or authors.
-  
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
-  
+
        http://www.apache.org/licenses/LICENSE-2.0
-  
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -4502,13 +4502,13 @@ limitations under the License.
 >>> spring-beans-4.0.0.release
 
 Copyright 2002-2012 the original author or authors.
- 
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
- 
+
        http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -4540,11 +4540,11 @@ ADDITIONAL LICENSE INFORMATION:
 \spring-boot-master.zip\spring-boot-master\eclipse\org.eclipse.m2e.maveneclipse.site-0.0.1-SNAPSHOT-site.zip\features\org.eclipse.m2e.maveneclipse.feature_0.0.1.201305082100.jar\META-INF\maven\org.eclipse.m2e.maveneclipse\org.eclipse.m2e.maveneclipse.feature\pom.xml
 
 Copyright 2000-2011 the original author or authors.
- 
+
   All rights reserved. This program and the accompanying materials
   are made available under the terms of the Eclipse Public License v1.0
   which accompanies this distribution, and is available at
- 
+
   http://www.eclipse.org/legal/epl-v10.html
 
 
@@ -4568,13 +4568,13 @@ Copyright 2000-2011 the original author or authors.
 >>> spring-boot-autoconfigure-0.5.0.m7
 
 Copyright 2012-2013 the original author or authors.
- 
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
- 
+
        http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -4675,16 +4675,16 @@ This product may include a number of subcomponents with separate copyright notic
 license terms. Your use of the source code for the these subcomponents is subject to
 the terms and conditions of the subcomponent's license, as noted in the LICENSE file.
 
-=======================================================================   
+=======================================================================
 
-SPRING FRAMEWORK 3.1 SUBCOMPONENTS: 
+SPRING FRAMEWORK 3.1 SUBCOMPONENTS:
 
 Spring Framework 3.1 includes a number of subcomponents with
-separate copyright notices and license terms.  The product that 
-includes this file does not necessarily use all the open source 
+separate copyright notices and license terms.  The product that
+includes this file does not necessarily use all the open source
 subcomponents referred to below. Your use of the source
 code for these subcomponents is subject to the terms and
-conditions of the following licenses. 
+conditions of the following licenses.
 
 >>> asm-2.2.3:
 
@@ -4720,19 +4720,19 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>	
 		
-=======================================================================   
+=======================================================================
 
-To the extent any open source subcomponents are licensed under the EPL and/or other 
-similar licenses that require the source code and/or modifications to 
-source code to be made available (as would be noted above), you may obtain a 
-copy of the source code corresponding to the binaries for such open source 
-components and modifications thereto, if any, (the "Source Files"), by 
-downloading the Source Files from http://www.springsource.org/download, 
-or by sending a request, with your name and address to: VMware, Inc., 3401 Hillview 
-Avenue, Palo Alto, CA 94304, United States of America or email info@vmware.com.  All 
-such requests should clearly specify:  OPEN SOURCE FILES REQUEST, Attention General 
-Counsel.  VMware shall mail a copy of the Source Files to you on a CD or equivalent 
-physical medium.  This offer to obtain a copy of the Source Files is valid for three 
+To the extent any open source subcomponents are licensed under the EPL and/or other
+similar licenses that require the source code and/or modifications to
+source code to be made available (as would be noted above), you may obtain a
+copy of the source code corresponding to the binaries for such open source
+components and modifications thereto, if any, (the "Source Files"), by
+downloading the Source Files from http://www.springsource.org/download,
+or by sending a request, with your name and address to: VMware, Inc., 3401 Hillview
+Avenue, Palo Alto, CA 94304, United States of America or email info@vmware.com.  All
+such requests should clearly specify:  OPEN SOURCE FILES REQUEST, Attention General
+Counsel.  VMware shall mail a copy of the Source Files to you on a CD or equivalent
+physical medium.  This offer to obtain a copy of the Source Files is valid for three
 years from the date you acquired this Software product.
 
 
@@ -4797,16 +4797,16 @@ This product may include a number of subcomponents with separate copyright notic
 license terms. Your use of the source code for the these subcomponents is subject to
 the terms and conditions of the subcomponent's license, as noted in the LICENSE file.
 
-=======================================================================   
+=======================================================================
 
-SPRING FRAMEWORK 3.1 SUBCOMPONENTS: 
+SPRING FRAMEWORK 3.1 SUBCOMPONENTS:
 
 Spring Framework 3.1 includes a number of subcomponents with
-separate copyright notices and license terms.  The product that 
-includes this file does not necessarily use all the open source 
+separate copyright notices and license terms.  The product that
+includes this file does not necessarily use all the open source
 subcomponents referred to below. Your use of the source
 code for these subcomponents is subject to the terms and
-conditions of the following licenses. 
+conditions of the following licenses.
 
 >>> asm-2.2.3:
 
@@ -4842,19 +4842,19 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>	
 		
-=======================================================================   
+=======================================================================
 
-To the extent any open source subcomponents are licensed under the EPL and/or other 
-similar licenses that require the source code and/or modifications to 
-source code to be made available (as would be noted above), you may obtain a 
-copy of the source code corresponding to the binaries for such open source 
-components and modifications thereto, if any, (the "Source Files"), by 
-downloading the Source Files from http://www.springsource.org/download, 
-or by sending a request, with your name and address to: VMware, Inc., 3401 Hillview 
-Avenue, Palo Alto, CA 94304, United States of America or email info@vmware.com.  All 
-such requests should clearly specify:  OPEN SOURCE FILES REQUEST, Attention General 
-Counsel.  VMware shall mail a copy of the Source Files to you on a CD or equivalent 
-physical medium.  This offer to obtain a copy of the Source Files is valid for three 
+To the extent any open source subcomponents are licensed under the EPL and/or other
+similar licenses that require the source code and/or modifications to
+source code to be made available (as would be noted above), you may obtain a
+copy of the source code corresponding to the binaries for such open source
+components and modifications thereto, if any, (the "Source Files"), by
+downloading the Source Files from http://www.springsource.org/download,
+or by sending a request, with your name and address to: VMware, Inc., 3401 Hillview
+Avenue, Palo Alto, CA 94304, United States of America or email info@vmware.com.  All
+such requests should clearly specify:  OPEN SOURCE FILES REQUEST, Attention General
+Counsel.  VMware shall mail a copy of the Source Files to you on a CD or equivalent
+physical medium.  This offer to obtain a copy of the Source Files is valid for three
 years from the date you acquired this Software product.
 
 
@@ -4893,29 +4893,29 @@ subcomponent's license, as noted in the license.txt file.
 >>> spring-core-4.0.0.release
 
 Copyright 2002-2013 the original author or authors.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
       http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
- 
+
 
 ADDITIONAL LICENSE INFORMATION:
 
 > BSD
 
 spring-core-4.0.0.RELEASE-sources.jar\org\springframework\asm\Label.java
- 
+
 Copyright (c) 2000-2011 INRIA, France Telecom
   All rights reserved.
- 
+
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
   are met:
@@ -4927,7 +4927,7 @@ Copyright (c) 2000-2011 INRIA, France Telecom
   3. Neither the name of the copyright holders nor the names of its
      contributors may be used to endorse or promote products derived from
      this software without specific prior written permission.
- 
+
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -4946,8 +4946,8 @@ Copyright (c) 2000-2011 INRIA, France Telecom
 Spring Data Commons 1.6.3
 Copyright (c) [2010-2013] Pivotal, Inc.
 
-This product is licensed to you under the Apache License, Version 2.0 (the "License").  
-You may not use this product except in compliance with the License.  
+This product is licensed to you under the Apache License, Version 2.0 (the "License").
+You may not use this product except in compliance with the License.
 
 This product may include a number of subcomponents with
 separate copyright notices and license terms. Your use of the source
@@ -4960,8 +4960,8 @@ conditions of the subcomponent's license, as noted in the LICENSE file.
 Spring Data JPA 1.4.3 RELEASE
 Copyright (c) [2011-2013] Pivotal Inc.
 
-This product is licensed to you under the Apache License, Version 2.0 (the "License").  
-You may not use this product except in compliance with the License.  
+This product is licensed to you under the Apache License, Version 2.0 (the "License").
+You may not use this product except in compliance with the License.
 
 This product may include a number of subcomponents with
 separate copyright notices and license terms. Your use of the source
@@ -5004,13 +5004,13 @@ subcomponent's license, as noted in the license.txt file.
 >>> spring-expression-4.0.0.release
 
 Copyright 2002-2013 the original author or authors.
- 
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
- 
+
        http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -5263,19 +5263,19 @@ three years from the date you acquired this Software product.
 >>> spring-security-core-3.2.0.rc2
 
 Copyright 2004, 2005, 2006 Acegi Technology Pty Limited
- 
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
- 
+
       http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
- 
+
 
 ADDITIONAL LICENSE INFORMATION:
 
@@ -5387,13 +5387,13 @@ limitations under the License.
 >>> spring-social-web-1.1.0.m4
 
 Copyright 2013 the original author or authors.
- 
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
- 
+
        http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -5413,16 +5413,16 @@ This product may include a number of subcomponents with separate copyright notic
 license terms. Your use of the source code for the these subcomponents is subject to
 the terms and conditions of the subcomponent's license, as noted in the LICENSE file.
 
-=======================================================================   
+=======================================================================
 
-SPRING FRAMEWORK 3.1 SUBCOMPONENTS: 
+SPRING FRAMEWORK 3.1 SUBCOMPONENTS:
 
 Spring Framework 3.1 includes a number of subcomponents with
-separate copyright notices and license terms.  The product that 
-includes this file does not necessarily use all the open source 
+separate copyright notices and license terms.  The product that
+includes this file does not necessarily use all the open source
 subcomponents referred to below. Your use of the source
 code for these subcomponents is subject to the terms and
-conditions of the following licenses. 
+conditions of the following licenses.
 
 >>> asm-2.2.3:
 
@@ -5458,19 +5458,19 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>	
 		
-=======================================================================   
+=======================================================================
 
-To the extent any open source subcomponents are licensed under the EPL and/or other 
-similar licenses that require the source code and/or modifications to 
-source code to be made available (as would be noted above), you may obtain a 
-copy of the source code corresponding to the binaries for such open source 
-components and modifications thereto, if any, (the "Source Files"), by 
-downloading the Source Files from http://www.springsource.org/download, 
-or by sending a request, with your name and address to: VMware, Inc., 3401 Hillview 
-Avenue, Palo Alto, CA 94304, United States of America or email info@vmware.com.  All 
-such requests should clearly specify:  OPEN SOURCE FILES REQUEST, Attention General 
-Counsel.  VMware shall mail a copy of the Source Files to you on a CD or equivalent 
-physical medium.  This offer to obtain a copy of the Source Files is valid for three 
+To the extent any open source subcomponents are licensed under the EPL and/or other
+similar licenses that require the source code and/or modifications to
+source code to be made available (as would be noted above), you may obtain a
+copy of the source code corresponding to the binaries for such open source
+components and modifications thereto, if any, (the "Source Files"), by
+downloading the Source Files from http://www.springsource.org/download,
+or by sending a request, with your name and address to: VMware, Inc., 3401 Hillview
+Avenue, Palo Alto, CA 94304, United States of America or email info@vmware.com.  All
+such requests should clearly specify:  OPEN SOURCE FILES REQUEST, Attention General
+Counsel.  VMware shall mail a copy of the Source Files to you on a CD or equivalent
+physical medium.  This offer to obtain a copy of the Source Files is valid for three
 years from the date you acquired this Software product.
 
 
@@ -5587,13 +5587,13 @@ subcomponent's license, as noted in the license.txt file.
 >>> spring-web-3.2.3.release
 
 Copyright 2002-2012 the original author or authors.
- 
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
- 
+
        http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -5621,13 +5621,13 @@ Copyright 2002-2012 the original author or authors.
 >>> spring-web-4.0.0.release
 
 Copyright 2002-2012 the original author or authors.
- 
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
- 
+
        http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -5826,13 +5826,13 @@ three years from the date you acquired this Software product.
 >>> thymeleaf-2.0.15
 
 *   Copyright (c) 2011-2012, The THYMELEAF team (http://www.thymeleaf.org)
- * 
+ *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
  *   You may obtain a copy of the License at
- * 
+ *
  *       http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *   Unless required by applicable law or agreed to in writing, software
  *   distributed under the License is distributed on an "AS IS" BASIS,
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -5844,13 +5844,13 @@ three years from the date you acquired this Software product.
 >>> thymeleaf-2.1.0.release
 
 Copyright (c) 2011-2013, The THYMELEAF team (http://www.thymeleaf.org)
- 
+
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
- 
+
        http://www.apache.org/licenses/LICENSE-2.0
- 
+
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -5861,13 +5861,13 @@ Copyright (c) 2011-2013, The THYMELEAF team (http://www.thymeleaf.org)
 >>> thymeleaf-2.1.2.release
 
 Copyright (c) 2011-2013, The THYMELEAF team (http://www.thymeleaf.org)
- 
+
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
- 
+
        http://www.apache.org/licenses/LICENSE-2.0
- 
+
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -5883,13 +5883,13 @@ License: Apache 2.0
 >>> thymeleaf-extras-springsecurity3-2.1.1.release
 
 Copyright (c) 2011-2013, The THYMELEAF team (http://www.thymeleaf.org)
- 
+
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
- 
+
        http://www.apache.org/licenses/LICENSE-2.0
- 
+
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -5900,13 +5900,13 @@ Copyright (c) 2011-2013, The THYMELEAF team (http://www.thymeleaf.org)
 >>> thymeleaf-layout-dialect-1.2
 
 * Copyright 2013, Emanuel Rabina (http://www.ultraq.net.nz/)
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -5917,13 +5917,13 @@ Copyright (c) 2011-2013, The THYMELEAF team (http://www.thymeleaf.org)
 >>> thymeleaf-spring3-2.1.2.release
 
 *   Copyright (c) 2011-2013, The THYMELEAF team (http://www.thymeleaf.org)
- * 
+ *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
  *   You may obtain a copy of the License at
- * 
+ *
  *       http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *   Unless required by applicable law or agreed to in writing, software
  *   distributed under the License is distributed on an "AS IS" BASIS,
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -5934,13 +5934,13 @@ Copyright (c) 2011-2013, The THYMELEAF team (http://www.thymeleaf.org)
 >>> thymeleaf-spring4-2.1.2.release
 
 Copyright (c) 2011-2013, The THYMELEAF team (http://www.thymeleaf.org)
- 
+
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
- 
+
        http://www.apache.org/licenses/LICENSE-2.0
- 
+
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -5970,7 +5970,7 @@ ADDITIONAL LICENSE INFORMATION:
 
 > CDDL 1.1
 
-tomcat-embed-core-7.0.47.jar\javax\servlet\resources\ javaee_web_services_client_1_2.xsd 
+tomcat-embed-core-7.0.47.jar\javax\servlet\resources\ javaee_web_services_client_1_2.xsd
 
 [PLEASE NOTE:  PIVOTAL SOFTWARE, INC. ELECTS TO USE AND DISTRIBUTE THIS COMPONENT UNDER THE TERMS OF THE CDDL 1.0.  PLEASE SEE THE APPENDIX TO REVIEW THE FULL TEXT OF THE CDDL 1.0. THE ORIGINAL LICENSE TERMS ARE REPRODUCED BELOW ONLY AS A REFERENCE.]
 
@@ -6256,7 +6256,7 @@ The Apache Software Foundation (http://www.apache.org/).
 Portions of this software were originally based on the following:
      - software copyright (c) 1999, IBM Corporation., http://www.ibm.com.
      - software copyright (c) 1999, Sun Microsystems., http://www.sun.com.
-     - voluntary contributions made by Paul Eng on behalf of the 
+     - voluntary contributions made by Paul Eng on behalf of the
        Apache Software Foundation that were originally developed at iClick, Inc.,
        software copyright (c) 1999.
 
@@ -6309,7 +6309,7 @@ Eclipse Public License, V1.0 is applicable to the following component(s).
 >>> aspectjrt-1.7.2
 
 * Copyright (c) 2006 IBM Corporation and others.
-All rights reserved. This program and the accompanying materials 
+All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
@@ -6321,11 +6321,11 @@ Contributors:
 >>> aspectjrt-1.7.4
 
 Copyright (c) 2006 IBM Corporation and others.
-  All rights reserved. This program and the accompanying materials 
+  All rights reserved. This program and the accompanying materials
   are made available under the terms of the Eclipse Public License v1.0
   which accompanies this distribution, and is available at
   http://www.eclipse.org/legal/epl-v10.html
-  
+
   Contributors:
       Andy Clement - initial implementation
 
@@ -6338,7 +6338,7 @@ Copyright (c) 2012 Contributors.
   under the terms of the Eclipse Public License v1.0
   which accompanies this distribution and is available at
   http://eclipse.org/legal/epl-v10.html
- 
+
   Contributors:
     Lyor Goldstein (vmware)	add support for weaved class being re-defined
 
@@ -6349,38 +6349,38 @@ ADDITIONAL LICENSE INFORMATION:
 aspectjweaver-1.7.4-sources.jar\org\aspectj\apache\bcel\util\ClassLoaderRepository.java
 ====================================================================
   The Apache Software License, Version 1.1
- 
+
   Copyright (c) 2001 The Apache Software Foundation.  All rights
   reserved.
- 
+
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
   are met:
- 
+
   1. Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
- 
+
   2. Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in
      the documentation and/or other materials provided with the
      distribution.
- 
+
   3. The end-user documentation included with the redistribution,
      if any, must include the following acknowledgment:
         "This product includes software developed by the
          Apache Software Foundation (http://www.apache.org/)."
      Alternately, this acknowledgment may appear in the software itself,
      if and wherever such third-party acknowledgments normally appear.
- 
+
   4. The names "Apache" and "Apache Software Foundation" and
      "Apache BCEL" must not be used to endorse or promote products
      derived from this software without prior written permission. For
      written permission, please contact apache@apache.org.
- 
+
   5. Products derived from this software may not be called "Apache",
      "Apache BCEL", nor may "Apache" appear in their name, without
      prior written permission of the Apache Software Foundation.
- 
+
   THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
   WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
   OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -6394,7 +6394,7 @@ aspectjweaver-1.7.4-sources.jar\org\aspectj\apache\bcel\util\ClassLoaderReposito
   OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
   SUCH DAMAGE.
   ====================================================================
- 
+
   This software consists of voluntary contributions made by many
   individuals on behalf of the Apache Software Foundation.  For more
   information on the Apache Software Foundation, please see
@@ -6404,7 +6404,7 @@ aspectjweaver-1.7.4-sources.jar\org\aspectj\apache\bcel\util\ClassLoaderReposito
 >>> h2-1.3.173
 
 [PLEASE NOTE:  PIVOTAL SOFTWARE, INC. ELECTS TO USE AND DISTRIBUTE THIS COMPONENT UNDER THE TERMS OF THE EPL 1.0.  PLEASE SEE THE APPENDIX TO REVIEW THE FULL TEXT OF THE EPL 1.0. THE ORIGINAL LICENSE TERMS ARE REPRODUCED BELOW ONLY AS A REFERENCE.]
- 
+
 
 Copyright 2004-2013 H2 Group. Multiple-Licensed under the H2 License,
   Version 1.0, and under the Eclipse Public License, Version 1.0
@@ -6419,7 +6419,7 @@ Copyright (c) 2008, 2009 Sun Microsystems, Oracle Corporation. All rights reserv
  This program and the accompanying materials are made available under the
  terms of the Eclipse Public License v1.0 and Eclipse Distribution License v. 1.0
  which accompanies this distribution.
- 
+
 The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
  and the Eclipse Distribution License is available at
  http://www.eclipse.org/org/documents/edl-v10.php.
@@ -6458,7 +6458,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 [PLEASE NOTE:  PIVOTAL SOFTWARE, INC. ELECTS TO USE AND DISTRIBUTE THIS COMPONENT UNDER THE TERMS OF THE EPL 1.0 LICENSE.  PLEASE SEE THE APPENDIX TO REVIEW THE FULL TEXT OF THE EPL 1.0 .THE ORIGINAL LICENSE TERMS ARE REPRODUCED BELOW ONLY AS A REFERENCE.]
 
- BEGIN LICENSE BLOCK 
+ BEGIN LICENSE BLOCK
  Version: EPL 1.0/GPL 2.0/LGPL 2.1
 
  The contents of this file are subject to the Common Public
@@ -6479,7 +6479,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
  Copyright (C) 2006 Kresten Krab Thorup <krab@gnu.org>
  Copyright (C) 2007 William N Dortch <bill.dortch@gmail.com>
  Copyright (C) 2007 Miguel Covarrubias <mlcovarrubias@gmail.com>
- 
+
  Alternatively, the contents of this file may be used under the terms of
  either of the GNU General Public License Version 2 or later (the "GPL"),
  or the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -6491,7 +6491,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
  and other provisions required by the GPL or the LGPL. If you do not delete
  the provisions above, a recipient may use your version of this file under
  the terms of any one of the EPL, the GPL or the LGPL.
- END LICENSE BLOCK 
+ END LICENSE BLOCK
 
 require 'jruby/java/java_module'
 
@@ -6551,7 +6551,7 @@ You should have received a copy of the GNU Lesser General Public License,
 v.2.1 along with this distribution; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 MA  02110-1301, USA.
- 
+
 ADDITIONAL LICENSE INFORMATION:
 
 > LGPL 3.0
@@ -6583,7 +6583,7 @@ Hibernate, Relational Persistence for Idiomatic Java
 
 >>> javassist-3.16.1-ga
 
-[PLEASE NOTE:  PIVOTAL SOFTWARE, INC. ELECTS TO USE AND DISTRIBUTE THIS COMPONENT UNDER THE TERMS OF THE LGPL 2.1.  PLEASE SEE THE APPENDIX TO REVIEW THE FULL TEXT OF THE GNU LGPL 2.1. THE ORIGINAL LICENSE TERMS ARE REPRODUCED BELOW ONLY AS A REFERENCE.] 
+[PLEASE NOTE:  PIVOTAL SOFTWARE, INC. ELECTS TO USE AND DISTRIBUTE THIS COMPONENT UNDER THE TERMS OF THE LGPL 2.1.  PLEASE SEE THE APPENDIX TO REVIEW THE FULL TEXT OF THE GNU LGPL 2.1. THE ORIGINAL LICENSE TERMS ARE REPRODUCED BELOW ONLY AS A REFERENCE.]
 
 Copyright (C) 1999- Shigeru Chiba. All Rights Reserved.
 
@@ -6628,17 +6628,17 @@ JBoss, Home of Professional Open Source.
 Copyright 2010, Red Hat Middleware LLC, and individual contributors
 as indicated by the @author tags. See the copyright.txt file in the
 distribution for a full listing of individual contributors.
- 
+
 This is free software; you can redistribute it and/or modify it
 under the terms of the GNU Lesser General Public License as
 published by the Free Software Foundation; either version 2.1 of
 the License, or (at your option) any later version.
- 
+
 This software is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
 Lesser General Public License for more details.
- 
+
 You should have received a copy of the GNU Lesser General Public
 License along with this software; if not, write to the Free
 Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
@@ -6681,13 +6681,13 @@ ADDITIONAL LICENSE INFORMATION:
 hibernate-core-4.2.8.Final-sources.jar\org\hibernate\dialect\unique\DefaultUniqueDelegate.java
 
   Hibernate, Relational Persistence for Idiomatic Java
-  
+
   JBoss, Home of Professional Open Source
   Copyright 2012 Red Hat Inc. and/or its affiliates and other contributors
   as indicated by the @authors tag. All rights reserved.
   See the copyright.txt in the distribution for a
   full listing of individual contributors.
- 
+
   This copyrighted material is made available to anyone wishing to use,
   modify, copy, or redistribute it subject to the terms and conditions
   of the GNU Lesser General Public License, v. 2.1.
@@ -6706,16 +6706,16 @@ Copyright (c) 2009-2011, Red Hat Inc. or third-party contributors as
 indicated by the @author tags or express copyright attribution
 statements applied by the authors.  All third-party contributions are
 distributed under license by Red Hat Inc.
- 
+
 This copyrighted material is made available to anyone wishing to use, modify,
 copy, or redistribute it subject to the terms and conditions of the GNU
 Lesser General Public License, as published by the Free Software Foundation.
- 
+
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
 for more details.
- 
+
 You should have received a copy of the GNU Lesser General Public License
 along with this distribution; if not, write to:
 Free Software Foundation, Inc.
@@ -6730,13 +6730,13 @@ hibernate-entitymanager-4.2.8.Final-sources.jar\org\hibernate\ejb\cfg\spi\Identi
 
 
 Hibernate, Relational Persistence for Idiomatic Java
- 
+
 JBoss, Home of Professional Open Source
 Copyright 2011 Red Hat Inc. and/or its affiliates and other contributors
 as indicated by the @authors tag. All rights reserved.
 See the copyright.txt in the distribution for a
 full listing of individual contributors.
- 
+
 This copyrighted material is made available to anyone wishing to use,
 modify, copy, or redistribute it subject to the terms and conditions
 of the GNU Lesser General Public License, v. 2.1.
@@ -6749,18 +6749,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 MA  02110-1301, USA.
 
 
-=============== APPENDIX. Standard License Files ============== 
+=============== APPENDIX. Standard License Files ==============
 
 
 
 --------------- SECTION 1: Apache License, V2.0 -----------
 
-Apache License 
+Apache License
 
-Version 2.0, January 2004 
-http://www.apache.org/licenses/ 
+Version 2.0, January 2004
+http://www.apache.org/licenses/
 
-TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION 
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 1. Definitions.
 
@@ -6768,7 +6768,7 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 and distribution as defined by Sections 1 through 9 of this document.
 
 "Licensor" shall mean the copyright owner or entity authorized by the
-copyright owner that is granting the License.  
+copyright owner that is granting the License.
 
 "Legal Entity" shall mean the union of the acting entity and all other
 entities that control, are controlled by, or are under common control
@@ -6779,7 +6779,7 @@ of fifty percent (50%) or more of the outstanding shares, or (iii)
 beneficial ownership of such entity.
 
 "You" (or "Your") shall mean an individual or Legal Entity exercising
-permissions granted by this License.  
+permissions granted by this License.
 
 "Source" form shall mean the preferred form for making modifications,
 including but not limited to software source code, documentation source,
@@ -6788,12 +6788,12 @@ and configuration files.
 "Object" form shall mean any form resulting from mechanical transformation
 or translation of a Source form, including but not limited to compiled
 object code, generated documentation, and conversions to other media
-types.  
+types.
 
 "Work" shall mean the work of authorship, whether in Source or
 Object form, made available under the License, as indicated by a copyright
 notice that is included in or attached to the work (an example is provided
-in the Appendix below).  
+in the Appendix below).
 
 "Derivative Works" shall mean any work, whether in Source or Object form,
 that is based on (or derived from) the Work and for which the editorial
@@ -6928,7 +6928,7 @@ hold each Contributor harmless for any liability incurred by, or claims
 asserted against, such Contributor by reason of your accepting any such
 warranty or additional liability.
 
-END OF TERMS AND CONDITIONS 
+END OF TERMS AND CONDITIONS
 
 
 
@@ -7902,7 +7902,7 @@ or management of such entity, whether by contract or otherwise, or (b)
 ownership of more than fifty percent (50%) of the outstanding shares or
 beneficial ownership of such entity.
 
-2. License Grants. 
+2. License Grants.
 
 2.1. The Initial Developer Grant.
 
@@ -8032,7 +8032,7 @@ not governed by the terms of this License and distribute the Larger Work
 as a single product. In such a case, You must make sure the requirements
 of this License are fulfilled for the Covered Software.
 
-4. Versions of the License. 
+4. Versions of the License.
 
 4.1. New Versions.
 
@@ -8078,7 +8078,7 @@ OF ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF
 WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY
 COVERED SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER.
 
-6. TERMINATION. 
+6. TERMINATION.
 
 6.1. This License and the rights granted hereunder will terminate
 automatically if You fail to comply with terms herein and fail to cure
@@ -8280,7 +8280,7 @@ When the Program is made available in source code form:
 
     a) it must be made available under this Agreement; and
 
-    b) a copy of this Agreement must be included with each copy of the Program.  
+    b) a copy of this Agreement must be included with each copy of the Program.
 Contributors may not remove or alter any copyright notices contained
 within the Program.
 
@@ -8767,112 +8767,112 @@ THE POSSIBILITY OF SUCH DAMAGES.
 ---------- SECTION 8: COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)Version 1.1  -----------
 
 
-COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)Version 1.1 
+COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)Version 1.1
 
-1. Definitions. 
+1. Definitions.
 
-1.1. "Contributor" means each individual or entity that creates or contributes to the creation of Modifications. 
+1.1. "Contributor" means each individual or entity that creates or contributes to the creation of Modifications.
 
-1.2. "Contributor Version" means the combination of the Original Software, prior Modifications used by a Contributor (if any), and the Modifications made by that particular Contributor. 
+1.2. "Contributor Version" means the combination of the Original Software, prior Modifications used by a Contributor (if any), and the Modifications made by that particular Contributor.
 
-1.3. "Covered Software∆?" means (a) the Original Software, or (b) Modifications, or (c) the combination of files containing Original Software with files containing Modifications, in each case including portions thereof. 
+1.3. "Covered Software∆?" means (a) the Original Software, or (b) Modifications, or (c) the combination of files containing Original Software with files containing Modifications, in each case including portions thereof.
 
-1.4. "Executable" means the Covered Software in any form other than Source Code. 
+1.4. "Executable" means the Covered Software in any form other than Source Code.
 
-1.5. "Initial Developer" means the individual or entity that first makes Original Software available under this License. 
+1.5. "Initial Developer" means the individual or entity that first makes Original Software available under this License.
 
-1.6. "Larger Work" means a work which combines Covered Software or portions thereof with code not governed by the terms of this License. 
+1.6. "Larger Work" means a work which combines Covered Software or portions thereof with code not governed by the terms of this License.
 
-1.7. "License" means this document. 
+1.7. "License" means this document.
 
-1.8. "Licensable" means having the right to grant, to the maximum extent possible, whether at the time of the initial grant or subsequently acquired, any and all of the rights conveyed herein. 
+1.8. "Licensable" means having the right to grant, to the maximum extent possible, whether at the time of the initial grant or subsequently acquired, any and all of the rights conveyed herein.
 
-1.9. "Modifications" means the Source Code and Executable form of any of the following: 
-A. Any file that results from an addition to, deletion from or modification of the contents of a file containing Original Software or previous Modifications; 
-B. Any new file that contains any part of the Original Software or previous Modification; or 
-C. Any new file that is contributed or otherwise made available under the terms of this License. 
+1.9. "Modifications" means the Source Code and Executable form of any of the following:
+A. Any file that results from an addition to, deletion from or modification of the contents of a file containing Original Software or previous Modifications;
+B. Any new file that contains any part of the Original Software or previous Modification; or
+C. Any new file that is contributed or otherwise made available under the terms of this License.
 
-1.10. "Original Software" means the Source Code and Executable form of computer software code that is originally released under this License. 
+1.10. "Original Software" means the Source Code and Executable form of computer software code that is originally released under this License.
 
-1.11. "Patent Claims" means any patent claim(s), now owned or hereafter acquired, including without limitation, method, process, and apparatus claims, in any patent Licensable by grantor. 
+1.11. "Patent Claims" means any patent claim(s), now owned or hereafter acquired, including without limitation, method, process, and apparatus claims, in any patent Licensable by grantor.
 
-1.12. "Source Code" means (a) the common form of computer software code in which modifications are made and (b) associated documentation included in or with such code. 
+1.12. "Source Code" means (a) the common form of computer software code in which modifications are made and (b) associated documentation included in or with such code.
 
-1.13. "You" (or "Your") means an individual or a legal entity exercising rights under, and complying with all of the terms of, this License. For legal entities, "You" includes any entity which controls, is controlled by, or is under common control with You. For purposes of this definition, "control" means (a) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (b) ownership of more than fifty percent (50%) of the outstanding shares or beneficial ownership of such entity. 
+1.13. "You" (or "Your") means an individual or a legal entity exercising rights under, and complying with all of the terms of, this License. For legal entities, "You" includes any entity which controls, is controlled by, or is under common control with You. For purposes of this definition, "control" means (a) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (b) ownership of more than fifty percent (50%) of the outstanding shares or beneficial ownership of such entity.
 
-2. License Grants. 
+2. License Grants.
 
-2.1. The Initial Developer Grant. 
-Conditioned upon Your compliance with Section 3.1 below and subject to third party intellectual property claims, the Initial Developer hereby grants You a world-wide, royalty-free, non-exclusive license: 
-(a) under intellectual property rights (other than patent or trademark) Licensable by Initial Developer, to use, reproduce, modify, display, perform, sublicense and distribute the Original Software (or portions thereof), with or without Modifications, and/or as part of a Larger Work; and 
-(b) under Patent Claims infringed by the making, using or selling of Original Software, to make, have made, use, practice, sell, and offer for sale, and/or otherwise dispose of the Original Software (or portions thereof). 
-(c) The licenses granted in Sections 2.1(a) and (b) are effective on the date Initial Developer first distributes or otherwise makes the Original Software available to a third party under the terms of this License. 
-(d) Notwithstanding Section 2.1(b) above, no patent license is granted: (1) for code that You delete from the Original Software, or (2) for infringements caused by: (i) the modification of the Original Software, or (ii) the combination of the Original Software with other software or devices. 
+2.1. The Initial Developer Grant.
+Conditioned upon Your compliance with Section 3.1 below and subject to third party intellectual property claims, the Initial Developer hereby grants You a world-wide, royalty-free, non-exclusive license:
+(a) under intellectual property rights (other than patent or trademark) Licensable by Initial Developer, to use, reproduce, modify, display, perform, sublicense and distribute the Original Software (or portions thereof), with or without Modifications, and/or as part of a Larger Work; and
+(b) under Patent Claims infringed by the making, using or selling of Original Software, to make, have made, use, practice, sell, and offer for sale, and/or otherwise dispose of the Original Software (or portions thereof).
+(c) The licenses granted in Sections 2.1(a) and (b) are effective on the date Initial Developer first distributes or otherwise makes the Original Software available to a third party under the terms of this License.
+(d) Notwithstanding Section 2.1(b) above, no patent license is granted: (1) for code that You delete from the Original Software, or (2) for infringements caused by: (i) the modification of the Original Software, or (ii) the combination of the Original Software with other software or devices.
 
-2.2. Contributor Grant. 
-Conditioned upon Your compliance with Section 3.1 below and subject to third party intellectual property claims, each Contributor hereby grants You a world-wide, royalty-free, non-exclusive license: 
-(a) under intellectual property rights (other than patent or trademark) Licensable by Contributor to use, reproduce, modify, display, perform, sublicense and distribute the Modifications created by such Contributor (or portions thereof), either on an unmodified basis, with other Modifications, as Covered Software and/or as part of a Larger Work; and 
-(b) under Patent Claims infringed by the making, using, or selling of Modifications made by that Contributor either alone and/or in combination with its Contributor Version (or portions of such combination), to make, use, sell, offer for sale, have made, and/or otherwise dispose of: (1) Modifications made by that Contributor (or portions thereof); and (2) the combination of Modifications made by that Contributor with its Contributor Version (or portions of such combination). 
-(c) The licenses granted in Sections 2.2(a) and 2.2(b) are effective on the date Contributor first distributes or otherwise makes the Modifications available to a third party. 
-(d) Notwithstanding Section 2.2(b) above, no patent license is granted: (1) for any code that Contributor has deleted from the Contributor Version; (2) for infringements caused by: (i) third party modifications of Contributor Version, or (ii) the combination of Modifications made by that Contributor with other software (except as part of the Contributor Version) or other devices; or (3) under Patent Claims infringed by Covered Software in the absence of Modifications made by that Contributor. 
+2.2. Contributor Grant.
+Conditioned upon Your compliance with Section 3.1 below and subject to third party intellectual property claims, each Contributor hereby grants You a world-wide, royalty-free, non-exclusive license:
+(a) under intellectual property rights (other than patent or trademark) Licensable by Contributor to use, reproduce, modify, display, perform, sublicense and distribute the Modifications created by such Contributor (or portions thereof), either on an unmodified basis, with other Modifications, as Covered Software and/or as part of a Larger Work; and
+(b) under Patent Claims infringed by the making, using, or selling of Modifications made by that Contributor either alone and/or in combination with its Contributor Version (or portions of such combination), to make, use, sell, offer for sale, have made, and/or otherwise dispose of: (1) Modifications made by that Contributor (or portions thereof); and (2) the combination of Modifications made by that Contributor with its Contributor Version (or portions of such combination).
+(c) The licenses granted in Sections 2.2(a) and 2.2(b) are effective on the date Contributor first distributes or otherwise makes the Modifications available to a third party.
+(d) Notwithstanding Section 2.2(b) above, no patent license is granted: (1) for any code that Contributor has deleted from the Contributor Version; (2) for infringements caused by: (i) third party modifications of Contributor Version, or (ii) the combination of Modifications made by that Contributor with other software (except as part of the Contributor Version) or other devices; or (3) under Patent Claims infringed by Covered Software in the absence of Modifications made by that Contributor.
 
-3. Distribution Obligations. 
+3. Distribution Obligations.
 
-3.1. Availability of Source Code. 
-Any Covered Software that You distribute or otherwise make available in Executable form must also be made available in Source Code form and that Source Code form must be distributed only under the terms of this License. You must include a copy of this License with every copy of the Source Code form of the Covered Software You distribute or otherwise make available. You must inform recipients of any such Covered Software in Executable form as to how they can obtain such Covered Software in Source Code form in a reasonable manner on or through a medium customarily used for software exchange. 
+3.1. Availability of Source Code.
+Any Covered Software that You distribute or otherwise make available in Executable form must also be made available in Source Code form and that Source Code form must be distributed only under the terms of this License. You must include a copy of this License with every copy of the Source Code form of the Covered Software You distribute or otherwise make available. You must inform recipients of any such Covered Software in Executable form as to how they can obtain such Covered Software in Source Code form in a reasonable manner on or through a medium customarily used for software exchange.
 
-3.2. Modifications. 
-The Modifications that You create or to which You contribute are governed by the terms of this License. You represent that You believe Your Modifications are Your original creation(s) and/or You have sufficient rights to grant the rights conveyed by this License. 
+3.2. Modifications.
+The Modifications that You create or to which You contribute are governed by the terms of this License. You represent that You believe Your Modifications are Your original creation(s) and/or You have sufficient rights to grant the rights conveyed by this License.
 
-3.3. Required Notices. 
-You must include a notice in each of Your Modifications that identifies You as the Contributor of the Modification. You may not remove or alter any copyright, patent or trademark notices contained within the Covered Software, or any notices of licensing or any descriptive text giving attribution to any Contributor or the Initial Developer. 
+3.3. Required Notices.
+You must include a notice in each of Your Modifications that identifies You as the Contributor of the Modification. You may not remove or alter any copyright, patent or trademark notices contained within the Covered Software, or any notices of licensing or any descriptive text giving attribution to any Contributor or the Initial Developer.
 
-3.4. Application of Additional Terms. 
-You may not offer or impose any terms on any Covered Software in Source Code form that alters or restricts the applicable version of this License or the recipients' rights hereunder. You may choose to offer, and to charge a fee for, warranty, support, indemnity or liability obligations to one or more recipients of Covered Software. However, you may do so only on Your own behalf, and not on behalf of the Initial Developer or any Contributor. You must make it absolutely clear that any such warranty, support, indemnity or liability obligation is offered by You alone, and You hereby agree to indemnify the Initial Developer and every Contributor for any liability incurred by the Initial Developer or such Contributor as a result of warranty, support, indemnity or liability terms You offer. 
+3.4. Application of Additional Terms.
+You may not offer or impose any terms on any Covered Software in Source Code form that alters or restricts the applicable version of this License or the recipients' rights hereunder. You may choose to offer, and to charge a fee for, warranty, support, indemnity or liability obligations to one or more recipients of Covered Software. However, you may do so only on Your own behalf, and not on behalf of the Initial Developer or any Contributor. You must make it absolutely clear that any such warranty, support, indemnity or liability obligation is offered by You alone, and You hereby agree to indemnify the Initial Developer and every Contributor for any liability incurred by the Initial Developer or such Contributor as a result of warranty, support, indemnity or liability terms You offer.
 
-3.5. Distribution of Executable Versions. 
-You may distribute the Executable form of the Covered Software under the terms of this License or under the terms of a license of Your choice, which may contain terms different from this License, provided that You are in compliance with the terms of this License and that the license for the Executable form does not attempt to limit or alter the recipient's rights in the Source Code form from the rights set forth in this License. If You distribute the Covered Software in Executable form under a different license, You must make it absolutely clear that any terms which differ from this License are offered by You alone, not by the Initial Developer or Contributor. You hereby agree to indemnify the Initial Developer and every Contributor for any liability incurred by the Initial Developer or such Contributor as a result of any such terms You offer. 
+3.5. Distribution of Executable Versions.
+You may distribute the Executable form of the Covered Software under the terms of this License or under the terms of a license of Your choice, which may contain terms different from this License, provided that You are in compliance with the terms of this License and that the license for the Executable form does not attempt to limit or alter the recipient's rights in the Source Code form from the rights set forth in this License. If You distribute the Covered Software in Executable form under a different license, You must make it absolutely clear that any terms which differ from this License are offered by You alone, not by the Initial Developer or Contributor. You hereby agree to indemnify the Initial Developer and every Contributor for any liability incurred by the Initial Developer or such Contributor as a result of any such terms You offer.
 
-3.6. Larger Works. 
-You may create a Larger Work by combining Covered Software with other code not governed by the terms of this License and distribute the Larger Work as a single product. In such a case, You must make sure the requirements of this License are fulfilled for the Covered Software. 
+3.6. Larger Works.
+You may create a Larger Work by combining Covered Software with other code not governed by the terms of this License and distribute the Larger Work as a single product. In such a case, You must make sure the requirements of this License are fulfilled for the Covered Software.
 
-4. Versions of the License. 
+4. Versions of the License.
 
-4.1. New Versions. 
-Oracle is the initial license steward and may publish revised and/or new versions of this License from time to time. Each version will be given a distinguishing version number. Except as provided in Section 4.3, no one other than the license steward has the right to modify this License. 
+4.1. New Versions.
+Oracle is the initial license steward and may publish revised and/or new versions of this License from time to time. Each version will be given a distinguishing version number. Except as provided in Section 4.3, no one other than the license steward has the right to modify this License.
 
-4.2. Effect of New Versions. 
-You may always continue to use, distribute or otherwise make the Covered Software available under the terms of the version of the License under which You originally received the Covered Software. If the Initial Developer includes a notice in the Original Software prohibiting it from being distributed or otherwise made available under any subsequent version of the License, You must distribute and make the Covered Software available under the terms of the version of the License under which You originally received the Covered Software. Otherwise, You may also choose to use, distribute or otherwise make the Covered Software available under the terms of any subsequent version of the License published by the license steward. 
+4.2. Effect of New Versions.
+You may always continue to use, distribute or otherwise make the Covered Software available under the terms of the version of the License under which You originally received the Covered Software. If the Initial Developer includes a notice in the Original Software prohibiting it from being distributed or otherwise made available under any subsequent version of the License, You must distribute and make the Covered Software available under the terms of the version of the License under which You originally received the Covered Software. Otherwise, You may also choose to use, distribute or otherwise make the Covered Software available under the terms of any subsequent version of the License published by the license steward.
 
-4.3. Modified Versions. 
-When You are an Initial Developer and You want to create a new license for Your Original Software, You may create and use a modified version of this License if You: (a) rename the license and remove any references to the name of the license steward (except to note that the license differs from this License); and (b) otherwise make it clear that the license contains terms which differ from this License. 
+4.3. Modified Versions.
+When You are an Initial Developer and You want to create a new license for Your Original Software, You may create and use a modified version of this License if You: (a) rename the license and remove any references to the name of the license steward (except to note that the license differs from this License); and (b) otherwise make it clear that the license contains terms which differ from this License.
 
-5. DISCLAIMER OF WARRANTY. 
-COVERED SOFTWARE IS PROVIDED UNDER THIS LICENSE ON AN "AS IS" BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE COVERED SOFTWARE IS FREE OF DEFECTS, MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE COVERED SOFTWARE IS WITH YOU. SHOULD ANY COVERED SOFTWARE PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL DEVELOPER OR ANY OTHER CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY COVERED SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER. 
+5. DISCLAIMER OF WARRANTY.
+COVERED SOFTWARE IS PROVIDED UNDER THIS LICENSE ON AN "AS IS" BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE COVERED SOFTWARE IS FREE OF DEFECTS, MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE COVERED SOFTWARE IS WITH YOU. SHOULD ANY COVERED SOFTWARE PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL DEVELOPER OR ANY OTHER CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY COVERED SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER.
 
-6. TERMINATION. 
+6. TERMINATION.
 
-6.1. This License and the rights granted hereunder will terminate automatically if You fail to comply with terms herein and fail to cure such breach within 30 days of becoming aware of the breach. Provisions which, by their nature, must remain in effect beyond the termination of this License shall survive. 
+6.1. This License and the rights granted hereunder will terminate automatically if You fail to comply with terms herein and fail to cure such breach within 30 days of becoming aware of the breach. Provisions which, by their nature, must remain in effect beyond the termination of this License shall survive.
 
-6.2. If You assert a patent infringement claim (excluding declaratory judgment actions) against Initial Developer or a Contributor (the Initial Developer or Contributor against whom You assert such claim is referred to as "Participant") alleging that the Participant Software (meaning the Contributor Version where the Participant is a Contributor or the Original Software where the Participant is the Initial Developer) directly or indirectly infringes any patent, then any and all rights granted directly or indirectly to You by such Participant, the Initial Developer (if the Initial Developer is not the Participant) and all Contributors under Sections 2.1 and/or 2.2 of this License shall, upon 60 days notice from Participant terminate prospectively and automatically at the expiration of such 60 day notice period, unless if within such 60 day period You withdraw Your claim with respect to the Participant Software against such Participant either unilaterally or pursuant to a written agreement with Participant. 
+6.2. If You assert a patent infringement claim (excluding declaratory judgment actions) against Initial Developer or a Contributor (the Initial Developer or Contributor against whom You assert such claim is referred to as "Participant") alleging that the Participant Software (meaning the Contributor Version where the Participant is a Contributor or the Original Software where the Participant is the Initial Developer) directly or indirectly infringes any patent, then any and all rights granted directly or indirectly to You by such Participant, the Initial Developer (if the Initial Developer is not the Participant) and all Contributors under Sections 2.1 and/or 2.2 of this License shall, upon 60 days notice from Participant terminate prospectively and automatically at the expiration of such 60 day notice period, unless if within such 60 day period You withdraw Your claim with respect to the Participant Software against such Participant either unilaterally or pursuant to a written agreement with Participant.
 
-6.3. If You assert a patent infringement claim against Participant alleging that the Participant Software directly or indirectly infringes any patent where such claim is resolved (such as by license or settlement) prior to the initiation of patent infringement litigation, then the reasonable value of the licenses granted by such Participant under Sections 2.1 or 2.2 shall be taken into account in determining the amount or value of any payment or license. 
+6.3. If You assert a patent infringement claim against Participant alleging that the Participant Software directly or indirectly infringes any patent where such claim is resolved (such as by license or settlement) prior to the initiation of patent infringement litigation, then the reasonable value of the licenses granted by such Participant under Sections 2.1 or 2.2 shall be taken into account in determining the amount or value of any payment or license.
 
-6.4. In the event of termination under Sections 6.1 or 6.2 above, all end user licenses that have been validly granted by You or any distributor hereunder prior to termination (excluding licenses granted to You by any distributor) shall survive termination. 
+6.4. In the event of termination under Sections 6.1 or 6.2 above, all end user licenses that have been validly granted by You or any distributor hereunder prior to termination (excluding licenses granted to You by any distributor) shall survive termination.
 
-7. LIMITATION OF LIABILITY. 
-UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL YOU, THE INITIAL DEVELOPER, ANY OTHER CONTRIBUTOR, OR ANY DISTRIBUTOR OF COVERED SOFTWARE, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES. THIS LIMITATION OF LIABILITY SHALL NOT APPLY TO LIABILITY FOR DEATH OR PERSONAL INJURY RESULTING FROM SUCH PARTY'S NEGLIGENCE TO THE EXTENT APPLICABLE LAW PROHIBITS SUCH LIMITATION. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THIS EXCLUSION AND LIMITATION MAY NOT APPLY TO YOU. 
+7. LIMITATION OF LIABILITY.
+UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL YOU, THE INITIAL DEVELOPER, ANY OTHER CONTRIBUTOR, OR ANY DISTRIBUTOR OF COVERED SOFTWARE, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES. THIS LIMITATION OF LIABILITY SHALL NOT APPLY TO LIABILITY FOR DEATH OR PERSONAL INJURY RESULTING FROM SUCH PARTY'S NEGLIGENCE TO THE EXTENT APPLICABLE LAW PROHIBITS SUCH LIMITATION. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THIS EXCLUSION AND LIMITATION MAY NOT APPLY TO YOU.
 
-8. U.S. GOVERNMENT END USERS. 
-The Covered Software is a "commercial item," as that term is defined in 48 C.F.R. 2.101 (Oct. 1995), consisting of "commercial computer software" (as that term is defined at 48 C.F.R. sec. 252.227-7014(a)(1)) and "commercial computer software documentation" as such terms are used in 48 C.F.R. 12.212 (Sept. 1995). Consistent with 48 C.F.R. 12.212 and 48 C.F.R. 227.7202-1 through 227.7202-4 (June 1995), all U.S. Government End Users acquire Covered Software with only those rights set forth herein. This U.S. Government Rights clause is in lieu of, and supersedes, any other FAR, DFAR, or other clause or provision that addresses Government rights in computer software under this License. 
+8. U.S. GOVERNMENT END USERS.
+The Covered Software is a "commercial item," as that term is defined in 48 C.F.R. 2.101 (Oct. 1995), consisting of "commercial computer software" (as that term is defined at 48 C.F.R. sec. 252.227-7014(a)(1)) and "commercial computer software documentation" as such terms are used in 48 C.F.R. 12.212 (Sept. 1995). Consistent with 48 C.F.R. 12.212 and 48 C.F.R. 227.7202-1 through 227.7202-4 (June 1995), all U.S. Government End Users acquire Covered Software with only those rights set forth herein. This U.S. Government Rights clause is in lieu of, and supersedes, any other FAR, DFAR, or other clause or provision that addresses Government rights in computer software under this License.
 
-9. MISCELLANEOUS. 
-This License represents the complete agreement concerning subject matter hereof. If any provision of this License is held to be unenforceable, such provision shall be reformed only to the extent necessary to make it enforceable. This License shall be governed by the law of the jurisdiction specified in a notice contained within the Original Software (except to the extent applicable law, if any, provides otherwise), excluding such jurisdiction's conflict-of-law provisions. Any litigation relating to this License shall be subject to the jurisdiction of the courts located in the jurisdiction and venue specified in a notice contained within the Original Software, with the losing party responsible for costs, including, without limitation, court costs and reasonable attorneys' fees and expenses. The application of the United Nations Convention on Contracts for the International Sale of Goods is expressly excluded. Any law or regulation which provides that the language of a contract shall be construed against the drafter shall not apply to this License. You agree that You alone are responsible for compliance with the United States export administration regulations (and the export control laws and regulation of any other countries) when You use, distribute or otherwise make available any Covered Software. 
+9. MISCELLANEOUS.
+This License represents the complete agreement concerning subject matter hereof. If any provision of this License is held to be unenforceable, such provision shall be reformed only to the extent necessary to make it enforceable. This License shall be governed by the law of the jurisdiction specified in a notice contained within the Original Software (except to the extent applicable law, if any, provides otherwise), excluding such jurisdiction's conflict-of-law provisions. Any litigation relating to this License shall be subject to the jurisdiction of the courts located in the jurisdiction and venue specified in a notice contained within the Original Software, with the losing party responsible for costs, including, without limitation, court costs and reasonable attorneys' fees and expenses. The application of the United Nations Convention on Contracts for the International Sale of Goods is expressly excluded. Any law or regulation which provides that the language of a contract shall be construed against the drafter shall not apply to this License. You agree that You alone are responsible for compliance with the United States export administration regulations (and the export control laws and regulation of any other countries) when You use, distribute or otherwise make available any Covered Software.
 
-10. RESPONSIBILITY FOR CLAIMS. 
-As between Initial Developer and the Contributors, each party is responsible for claims and damages arising, directly or indirectly, out of its utilization of rights under this License and You agree to work with Initial Developer and Contributors to distribute such responsibility on an equitable basis. Nothing herein is intended or shall be deemed to constitute any admission of liability. 
+10. RESPONSIBILITY FOR CLAIMS.
+As between Initial Developer and the Contributors, each party is responsible for claims and damages arising, directly or indirectly, out of its utilization of rights under this License and You agree to work with Initial Developer and Contributors to distribute such responsibility on an equitable basis. Nothing herein is intended or shall be deemed to constitute any admission of liability.
 
-NOTICE PURSUANT TO SECTION 9 OF THE COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) 
+NOTICE PURSUANT TO SECTION 9 OF THE COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)
 The code released under the CDDL shall be governed by the laws of the State of California (excluding conflict-of-law provisions). Any litigation relating to this License shall be subject to the jurisdiction of the Federal Courts of the Northern District of California and the state courts of the State of California, with venue lying in Santa Clara County, California.
 
 
@@ -8957,7 +8957,7 @@ Works;
    3. to distribute copies or phonorecords of, display publicly, perform
 publicly, and perform publicly by means of a digital audio transmission the
 Work including as incorporated in Collective Works;
-   
+
    4. to distribute copies or phonorecords of, display publicly, perform
 publicly, and perform publicly by means of a digital audio transmission
 Derivative Works.
@@ -9145,14 +9145,14 @@ available (as would be noted above), you may obtain a copy of
 the source code corresponding to the binaries for such open
 source components and modifications thereto, if any, (the
 "Source Files"), by downloading the Source Files from Pivotal's website at
-http://www.gopivotal.com/open-source, or by sending a request, 
+http://www.gopivotal.com/open-source, or by sending a request,
 with your name and address to: Pivotal Software Inc.
-3496 Deer Creek Rd, Palo Alto, CA 94304, Attention: General Counsel. 
+3496 Deer Creek Rd, Palo Alto, CA 94304, Attention: General Counsel.
 All such requests should clearly specify: OPEN SOURCE FILES REQUEST,
 Attention General Counsel. Pivotal shall mail a copy of the
 Source Files to you on a CD or equivalent physical medium. This
 offer to obtain a copy of the Source Files is valid for three
-years from the date you acquired this Software product. 
+years from the date you acquired this Software product.
 Alternatively, the Source Files may accompany the Pivotal product.
 
 [SPRINGIO100GASC032214]
