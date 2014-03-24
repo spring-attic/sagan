@@ -43,17 +43,17 @@ public class PostFormAdapter_UpdatePostTests {
     private TeamRepository teamRepository;
 
     @Mock
-    private BlogPostContentRenderer renderer;
+    private PostContentRenderer renderer;
 
     @Mock
-    private SummaryExtractor summaryExtractor;
+    private PostSummary postSummary;
 
     private PostFormAdapter postFormAdapter;
 
     @Before
     public void setup() {
         given(dateService.now()).willReturn(now);
-        given(summaryExtractor.extract(anyString(), anyInt())).willReturn(SUMMARY);
+        given(postSummary.forContent(anyString(), anyInt())).willReturn(SUMMARY);
         given(renderer.render(content)).willReturn(RENDERED_HTML);
 
         post = PostBuilder.post().id(123L).author("author_id", ORIGINAL_AUTHOR).build();
@@ -65,7 +65,7 @@ public class PostFormAdapter_UpdatePostTests {
         postForm.setBroadcast(broadcast);
         postForm.setPublishAt(publishAt);
 
-        postFormAdapter = new PostFormAdapter(renderer, summaryExtractor, dateService, teamRepository);
+        postFormAdapter = new PostFormAdapter(renderer, postSummary, dateService, teamRepository);
         postFormAdapter.updatePostFromPostForm(post, postForm);
     }
 

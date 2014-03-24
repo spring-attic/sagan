@@ -7,9 +7,9 @@ import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
 @Service
-class SummaryExtractor {
+class PostSummary {
 
-    public String extract(String content, int maxLength) {
+    public String forContent(String content, int maxLength) {
         Document document = Jsoup.parse(content);
         StringBuilder builder = new StringBuilder();
         int count = 0;

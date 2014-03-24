@@ -1,6 +1,6 @@
 package sagan.blog.support;
 
-import sagan.blog.BlogPostMovedException;
+import sagan.blog.PostMovedException;
 import sagan.blog.Post;
 import sagan.support.DateService;
 
@@ -81,7 +81,7 @@ public class BlogControllerTests {
     @Test
     public void handleBlogPostMovedExceptionRedirects() {
         String publicSlug = "slug";
-        RedirectView result = blogController.handle(new BlogPostMovedException(publicSlug));
+        RedirectView result = blogController.handle(new PostMovedException(publicSlug));
         assertThat(result.getUrl(), equalTo("/blog/" + publicSlug));
     }
 }

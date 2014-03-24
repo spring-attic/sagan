@@ -45,10 +45,10 @@ public class PostFormAdapter_CreatePostTests {
     private TeamRepository teamRepository;
 
     @Mock
-    private SummaryExtractor summaryExtractor;
+    private PostSummary postSummary;
 
     @Mock
-    private BlogPostContentRenderer renderer;
+    private PostContentRenderer renderer;
 
     @Rule
     public ExpectedException expected = ExpectedException.none();
@@ -64,10 +64,10 @@ public class PostFormAdapter_CreatePostTests {
         given(teamRepository.findByUsername(AUTHOR_USERNAME)).willReturn(profile);
 
         given(renderer.render(content)).willReturn(RENDERED_HTML);
-        given(summaryExtractor.extract(anyString(), anyInt())).willReturn(RENDERED_SUMMARY);
+        given(postSummary.forContent(anyString(), anyInt())).willReturn(RENDERED_SUMMARY);
         given(dateService.now()).willReturn(now);
 
-        adapter = new PostFormAdapter(renderer, summaryExtractor, dateService, teamRepository);
+        adapter = new PostFormAdapter(renderer, postSummary, dateService, teamRepository);
 
         postForm = new PostForm();
         postForm.setTitle(title);

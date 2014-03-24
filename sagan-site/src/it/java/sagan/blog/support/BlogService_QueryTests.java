@@ -1,6 +1,6 @@
 package sagan.blog.support;
 
-import sagan.blog.BlogPostNotFoundException;
+import sagan.blog.PostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.search.support.SearchService;
@@ -113,19 +113,19 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
     public void getPublishedDoesNotFindDrafts() {
         Post draft = PostBuilder.post().title(uniqueTitle()).draft().build();
         postRepository.save(draft);
-        expected.expect(BlogPostNotFoundException.class);
+        expected.expect(PostNotFoundException.class);
         service.getPublishedPost(draft.getPublicSlug());
     }
 
     @Test
     public void getPublishedDoesNotFindScheduledPost() throws ParseException {
-        expected.expect(BlogPostNotFoundException.class);
+        expected.expect(PostNotFoundException.class);
         service.getPublishedPost(scheduled.getPublicSlug());
     }
 
     @Test
     public void nonExistentPostThrowsException() {
-        expected.expect(BlogPostNotFoundException.class);
+        expected.expect(PostNotFoundException.class);
         service.getPost(999L);
     }
 

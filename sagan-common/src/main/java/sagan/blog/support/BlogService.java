@@ -1,8 +1,8 @@
 package sagan.blog.support;
 
 import sagan.DatabaseConfig;
-import sagan.blog.BlogPostMovedException;
-import sagan.blog.BlogPostNotFoundException;
+import sagan.blog.PostMovedException;
+import sagan.blog.PostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.search.support.SearchService;
@@ -54,7 +54,7 @@ public class BlogService {
     public Post getPost(Long postId) {
         Post post = postRepository.findOne(postId);
         if (post == null) {
-            throw new BlogPostNotFoundException(postId);
+            throw new PostNotFoundException(postId);
         }
         return post;
     }
@@ -84,9 +84,9 @@ public class BlogService {
             post = postRepository.findByPublicSlugAliasesInAndDraftFalseAndPublishAtBefore(
                     Collections.singleton(publicSlug), now);
             if (post != null) {
-                throw new BlogPostMovedException(post.getPublicSlug());
+                throw new PostMovedException(post.getPublicSlug());
             }
-            throw new BlogPostNotFoundException(publicSlug);
+            throw new PostNotFoundException(publicSlug);
         }
         return post;
     }

@@ -13,14 +13,14 @@ import static org.mockito.BDDMockito.given;
 @RunWith(MockitoJUnitRunner.class)
 public class BlogPostContentRendererTests {
 
-    private BlogPostContentRenderer renderer;
+    private PostContentRenderer renderer;
 
     @Mock
     private MarkdownService markdownService;
 
     @Before
     public void setUp() throws Exception {
-        renderer = new BlogPostContentRenderer(markdownService);
+        renderer = new PostContentRenderer(markdownService);
     }
 
     @Test

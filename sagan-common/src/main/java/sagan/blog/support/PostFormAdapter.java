@@ -14,16 +14,16 @@ import org.springframework.stereotype.Service;
 class PostFormAdapter {
     private static final int SUMMARY_LENGTH = 500;
 
-    private final BlogPostContentRenderer renderer;
-    private final SummaryExtractor summaryExtractor;
+    private final PostContentRenderer renderer;
+    private final PostSummary postSummary;
     private final DateService dateService;
     private final TeamRepository teamRepository;
 
     @Autowired
-    public PostFormAdapter(BlogPostContentRenderer renderer, SummaryExtractor summaryExtractor,
+    public PostFormAdapter(PostContentRenderer renderer, PostSummary postSummary,
                            DateService dateService, TeamRepository teamRepository) {
         this.renderer = renderer;
-        this.summaryExtractor = summaryExtractor;
+        this.postSummary = postSummary;
         this.dateService = dateService;
         this.teamRepository = teamRepository;
     }
@@ -76,7 +76,7 @@ class PostFormAdapter {
     }
 
     public void summarize(Post post) {
-        String summary = summaryExtractor.extract(post.getRenderedContent(), SUMMARY_LENGTH);
+        String summary = postSummary.forContent(post.getRenderedContent(), SUMMARY_LENGTH);
         post.setRenderedSummary(summary);
     }
 }

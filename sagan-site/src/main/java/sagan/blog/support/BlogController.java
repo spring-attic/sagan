@@ -1,6 +1,6 @@
 package sagan.blog.support;
 
-import sagan.blog.BlogPostMovedException;
+import sagan.blog.PostMovedException;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.support.nav.NavSection;
@@ -110,7 +110,7 @@ class BlogController {
     }
 
     @ExceptionHandler
-    public RedirectView handle(BlogPostMovedException moved) {
+    public RedirectView handle(PostMovedException moved) {
         RedirectView redirect = new RedirectView();
         redirect.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
         redirect.setUrl("/blog/" + moved.getPublicSlug());
