@@ -1,6 +1,5 @@
 package sagan.blog.support;
 
-import org.springframework.web.servlet.view.RedirectView;
 import sagan.blog.BlogPostMovedException;
 import sagan.blog.Post;
 import sagan.support.DateService;
@@ -18,6 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.ExtendedModelMap;
+import org.springframework.web.servlet.view.RedirectView;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
