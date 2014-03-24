@@ -1,10 +1,10 @@
 package sagan.blog.support;
 
 import sagan.DatabaseConfig;
-import sagan.blog.PostMovedException;
-import sagan.blog.PostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.blog.PostMovedException;
+import sagan.blog.PostNotFoundException;
 import sagan.search.support.SearchService;
 import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
@@ -32,13 +32,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class BlogService {
 
+    private static final Log logger = LogFactory.getLog(BlogService.class);
+
     private PostFormAdapter postFormAdapter;
     private PostRepository postRepository;
     private SearchService searchService;
     private DateFactory dateFactory;
     private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
-
-    private static final Log logger = LogFactory.getLog(BlogService.class);
 
     @Autowired
     public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter, DateFactory dateFactory,
@@ -113,20 +113,17 @@ public class BlogService {
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
-        return postRepository.findByCategoryAndDraftFalseAndPublishAtBefore(category, dateFactory.now(),
-                pageRequest);
+        return postRepository.findByCategoryAndDraftFalseAndPublishAtBefore(category, dateFactory.now(), pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
-        return postRepository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, dateFactory.now(),
-                pageRequest);
+        return postRepository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, dateFactory.now(), pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsForMember(MemberProfile profile, Pageable pageRequest) {
-        return postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, dateFactory.now(),
-                pageRequest);
+        return postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, dateFactory.now(), pageRequest);
     }
 
     public Page<Post> getAllPosts(Pageable pageRequest) {
@@ -167,5 +164,4 @@ public class BlogService {
             postRepository.save(post);
         }
     }
-
 }
