@@ -85,5 +85,6 @@ configure(bootProjects) {
     apply from: "$gradleDir/writeGitPropertiesFile.gradle"
 
     springBoot.backupSource = false
+    bootRun.dependsOn writeGitPropertiesFile
 }
 
