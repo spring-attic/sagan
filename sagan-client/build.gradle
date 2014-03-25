@@ -15,8 +15,10 @@ jar {
 }
 
 task npmInstall(type:Exec) {
+    // be Gradle-like and suppress boilerplate logging
     logging.captureStandardOutput LogLevel.INFO
-    logging.captureStandardError LogLevel.INFO
+    // but we do always want to see downloads in the log
+    logging.captureStandardError LogLevel.LIFECYCLE
     inputs.files "package.json", "bower.json"
     outputs.dir "node_modules"
     commandLine 'npm', 'install'
