@@ -22,7 +22,7 @@ public class GitHubConfig {
     @Value("${github.client.secret}")
     private String githubClientSecret;
 
-    @Value("${GITHUB_ACCESS_TOKEN:${github.access.token:5a0e089d267693b45926d7f620d85a2eb6a85da6}}")
+    @Value("${GITHUB_ACCESS_TOKEN:${github.access.token:a3a02f7e58ad932b3c951c24a1573ff6f74bcce5}}")
     private String accessToken;
 
     @Bean
