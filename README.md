@@ -23,5 +23,5 @@ The Sagan reference application is released under the GPLv3 license. See [LICENS
 [blog]: http://spring.io/blog
 [guides]: http://spring.io/guides
 [Spring team]: http://spring.io/team
-[project wiki]: https://github.com/spring-io/spring.io/wiki/About
-[add an issue]: https://github.com/spring-io/spring.io/issues
+[project wiki]: https://github.com/spring-io/sagan/wiki
+[add an issue]: https://github.com/spring-io/sagan/issues
