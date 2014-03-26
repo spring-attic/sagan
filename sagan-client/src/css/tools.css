@@ -3,7 +3,7 @@
   display: inline-block;
   color: #eeeeee;
   text-align: center;
-  width: 48.85%;
+  width: 48.8%;
   margin: 0 1.9% 40px 0;
   line-height: 20px;
 }
@@ -505,4 +505,35 @@
 
 .download-links li {
   display: none;
+}
+
+.tools-intro {
+  margin-left: 0;
+  width: 73%;
+  margin-right: 10px;
+}
+
+.new-noteworthy-box {
+  margin: 40px 0 0 0;
+  float: right;
+  text-align: center;
+  width: 240px;
+  padding: 12px 0 30px;
+}
+
+.new-noteworthy-box p.title {
+  font-weight: 500;
+  color: #34302d;
+  text-transform:uppercase;
+  font-family: "Montserrat",sans-serif;
+  font-size: 16px;
+  padding-bottom: 13px;
+}
+
+.new-noteworthy-box p {
+  padding-bottom: 10px;
+}
+
+.new-noteworthy-box a {
+  color:#5fa134;
 }
