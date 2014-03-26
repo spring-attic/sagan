@@ -23,12 +23,17 @@ class ToolSuiteBuilder {
     private Map<String, EclipseVersion> eclipseVersionMap = new LinkedHashMap<String, EclipseVersion>();
     private Map<String, Architecture> architectureMap = new LinkedHashMap<String, Architecture>();
     private String releaseName;
+	private String whatsNew;
 
     public ToolSuiteBuilder(String shortName) {
         this.shortName = shortName;
     }
 
-    public void addDownload(Download download) {
+	public void setWhatsNew(String whatsNew) {
+		this.whatsNew = whatsNew;
+	}
+
+	public void addDownload(Download download) {
         if (download.getOs().equals("all")) {
             extractArchive(download);
         } else {
@@ -57,7 +62,7 @@ class ToolSuiteBuilder {
     }
 
     public ToolSuiteDownloads build() {
-        return new ToolSuiteDownloads(shortName, releaseName, platformMap, updateSiteArchives);
+        return new ToolSuiteDownloads(shortName, releaseName, whatsNew, platformMap, updateSiteArchives);
     }
 
     private ToolSuitePlatform createOrFindPlatform(String os, String name) {

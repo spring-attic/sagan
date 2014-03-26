@@ -1,5 +1,6 @@
 package sagan.tools.support;
 
+import org.mockito.Matchers;
 import sagan.support.Fixtures;
 import sagan.tools.Release;
 
@@ -22,5 +23,6 @@ public class ToolSuiteXmlParsingTests {
         assertThat(toolSuiteXml.getReleases().size(), equalTo(8));
         Release release = toolSuiteXml.getReleases().get(0);
         assertThat(release.getDownloads().size(), equalTo(16));
+	    assertThat(release.getWhatsnew(), notNullValue());
     }
 }

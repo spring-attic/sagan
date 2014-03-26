@@ -12,13 +12,15 @@ public class ToolSuiteDownloads {
     private final List<UpdateSiteArchive> archives;
     private final String shortName;
     private final String releaseName;
+	private final String whatsNew;
 
-    public ToolSuiteDownloads(String shortName, String releaseName, Map<String, ToolSuitePlatform> platforms,
-                              List<UpdateSiteArchive> archives) {
+    public ToolSuiteDownloads(String shortName, String releaseName, String whatsNew,
+                              Map<String, ToolSuitePlatform> platforms, List<UpdateSiteArchive> archives) {
         this.shortName = shortName;
         this.releaseName = releaseName;
         this.platforms = platforms;
         this.archives = archives;
+	    this.whatsNew = whatsNew;
     }
 
     public List<ToolSuitePlatform> getPlatformList() {
@@ -67,7 +69,11 @@ public class ToolSuiteDownloads {
         return String.format("%s %s", shortName, releaseName);
     }
 
-    public boolean hasPlatforms() {
+	public String getWhatsNew() {
+		return whatsNew;
+	}
+
+	public boolean hasPlatforms() {
         return platforms.size() > 0;
     }
 }

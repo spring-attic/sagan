@@ -1,5 +1,5 @@
 <downloads>
-  <release name="Spring Tool Suite 3.3.0.RELEASE - based on Eclipse Kepler 4.3">
+  <release name="Spring Tool Suite 3.3.0.RELEASE - based on Eclipse Kepler 4.3" whatsnew="http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html">
     <download os="windows" version="3.3.0.RELEASE" eclipse-version="4.3" size="373MB">
       <description>Windows</description>
       <file>release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe</file>
@@ -113,7 +113,7 @@
       <bucket>http://download.springsource.com/</bucket>
     </download>
   </release>
-  <release name="Groovy/Grails Tool Suite 3.3.0.RELEASE - based on Eclipse Kepler 4.3">
+  <release name="Groovy/Grails Tool Suite 3.3.0.RELEASE - based on Eclipse Kepler 4.3" whatsnew="http://static.springsource.org/ggts/nan/v330/NewAndNoteworthy.html">
     <download os="windows" version="3.3.0.RELEASE" eclipse-version="4.3" size="468MB">
       <description>Windows</description>
       <file>release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe</file>
@@ -227,7 +227,7 @@
       <bucket>http://download.springsource.com/</bucket>
     </download>
   </release>
-  <release name="Spring Tool Suite 3.3.0.RELEASE - based on Eclipse Juno 3.8.2">
+  <release name="Spring Tool Suite 3.3.0.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html">
     <download os="windows" version="3.3.0.RELEASE" eclipse-version="3.8.2" size="368MB">
       <description>Windows</description>
       <file>release/STS/3.3.0/dist/e3.8/spring-tool-suite-3.3.0.RELEASE-e3.8.2-win32-installer.exe</file>
@@ -341,7 +341,7 @@
       <bucket>http://download.springsource.com/</bucket>
     </download>
   </release>
-  <release name="Groovy/Grails Tool Suite 3.3.0.RELEASE - based on Eclipse Juno 3.8.2">
+  <release name="Groovy/Grails Tool Suite 3.3.0.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/ggts/nan/v330/NewAndNoteworthy.html">
     <download os="windows" version="3.3.0.RELEASE" eclipse-version="3.8.2" size="464MB">
       <description>Windows</description>
       <file>release/STS/3.3.0/dist/e3.8/groovy-grails-tool-suite-3.3.0.RELEASE-e3.8.2-win32-installer.exe</file>
@@ -569,7 +569,7 @@
       <bucket>http://download.springsource.com/</bucket>
     </download>
   </release>
-  <release name="Milestone Version - Groovy/Grails Tool Suite 3.3.0.M2 - based on Eclipse Juno 3.8.2">
+  <release name="Milestone Version - Groovy/Grails Tool Suite 3.3.0.M2 - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/ggts/nan/v330m2/NewAndNoteworthy.html">
     <download os="windows" version="3.3.0.M2" eclipse-version="3.8.2" size="463MB">
       <description>Windows</description>
       <file>milestone/STS/3.3.0.M2/dist/e3.8/groovy-grails-tool-suite-3.3.0.M2-e3.8.2-win32-installer.exe</file>
@@ -683,7 +683,7 @@
       <bucket>http://download.springsource.com/</bucket>
     </download>
   </release>
-  <release name="Milestone Version - Spring Tool Suite 3.3.0.M2 - based on Eclipse Kepler 4.3.0.RC2">
+  <release name="Milestone Version - Spring Tool Suite 3.3.0.M2 - based on Eclipse Kepler 4.3.0.RC2" whatsnew="http://static.springsource.org/sts/nan/v330m2/NewAndNoteworthy.html">
     <download os="windows" version="3.3.0.M2" eclipse-version="4.3" size="378MB">
       <description>Windows</description>
       <file>milestone/STS/3.3.0.M2/dist/e4.3/spring-tool-suite-3.3.0.M2-e4.3-win32-installer.exe</file>
@@ -797,7 +797,7 @@
       <bucket>http://download.springsource.com/</bucket>
     </download>
   </release>
-  <release name="Milestone Version - Groovy/Grails Tool Suite 3.3.0.M2 - based on Eclipse 4.3.0.RC2">
+  <release name="Milestone Version - Groovy/Grails Tool Suite 3.3.0.M2 - based on Eclipse 4.3.0.RC2" whatsnew="http://static.springsource.org/sts/nan/v330m2/NewAndNoteworthy.html">
     <download os="windows" version="3.3.0.M2" eclipse-version="4.3" size="471MB">
       <description>Windows</description>
       <file>milestone/STS/3.3.0.M2/dist/e4.3/groovy-grails-tool-suite-3.3.0.M2-e4.3-win32-installer.exe</file>

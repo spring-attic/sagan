@@ -12,6 +12,9 @@ public class Release {
     @Attribute
     private String name;
 
+	@Attribute(required = false)
+	private String whatsnew;
+
     @ElementList(name = "download", type = Download.class, inline = true)
     private List<Download> downloads;
 
@@ -23,7 +26,15 @@ public class Release {
         this.name = name;
     }
 
-    public List<Download> getDownloads() {
+	public String getWhatsnew() {
+		return whatsnew;
+	}
+
+	public void setWhatsnew(String whatsnew) {
+		this.whatsnew = whatsnew;
+	}
+
+	public List<Download> getDownloads() {
         return downloads;
     }
 
