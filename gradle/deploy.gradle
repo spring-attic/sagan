@@ -54,7 +54,7 @@ def reqLoginVars = [ 'cf.username', 'cf.password' ]
 
 def reqDeployVars = [
     'adminPassword', 'elasticsearchEndpoint', 'githubClientId',
-    'githubClientSecret', 'webhookAccessToken'
+    'githubClientSecret', 'githubAccessToken', 'webhookAccessToken'
 ]
 
 gradle.taskGraph.whenReady {
@@ -100,6 +100,7 @@ gradle.taskGraph.whenReady {
                 env << [
                     GITHUB_CLIENT_ID: githubClientId,
                     GITHUB_CLIENT_SECRET: githubClientSecret,
+                    GITHUB_ACCESS_TOKEN: githubAccessToken,
                     WEBHOOK_ACCESS_TOKEN: webhookAccessToken
                 ]
             }

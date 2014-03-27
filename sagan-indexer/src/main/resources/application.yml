@@ -51,6 +51,8 @@ github:
   client:
     id: n/a
     secret: n/a
+  access:
+    token: n/a
   guides:
     owner:
       name: spring-guides
