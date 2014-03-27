@@ -29,7 +29,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
  */
 @Controller
 @RequestMapping("/team")
-public class TeamController {
+class TeamController {
 
     private final TeamService teamService;
     private final BlogService blogService;
@@ -60,10 +60,10 @@ public class TeamController {
     public String showProfile(@PathVariable String username, Model model) {
         MemberProfile profile = teamService.fetchMemberProfileUsername(username);
         if (profile == MemberProfile.NOT_FOUND) {
-            throw new MemberNotFoundException("Profile not found with Id=" + username);
+            throw new MemberNotFoundException(username);
         }
         if (profile.isHidden()) {
-            throw new MemberNotFoundException("Profile not active: " + username);
+            throw new MemberNotFoundException("Member profile for username '%s' is hidden", username);
         }
         model.addAttribute("profile", profile);
         Page<Post> posts = blogService.getPublishedPostsForMember(profile, PageableFactory.forLists(1));

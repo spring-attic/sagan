@@ -6,13 +6,13 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @SuppressWarnings("serial")
 @ResponseStatus(NOT_FOUND)
-public class MemberNotFoundException extends RuntimeException {
+class MemberNotFoundException extends RuntimeException {
 
-    public MemberNotFoundException(String message) {
-        super(message);
+    public MemberNotFoundException(String username) {
+        this("Could not find member profile with username '%s'", username);
     }
 
-    public MemberNotFoundException(String message, Throwable cause) {
-        super(message, cause);
+    public MemberNotFoundException(String message, Object... args) {
+        super(String.format(message, args));
     }
 }

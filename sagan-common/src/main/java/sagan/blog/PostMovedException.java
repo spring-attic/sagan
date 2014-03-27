@@ -1,10 +1,10 @@
 package sagan.blog;
 
 @SuppressWarnings("serial")
-public class BlogPostMovedException extends RuntimeException {
+public class PostMovedException extends RuntimeException {
     private String publicSlug;
 
-    public BlogPostMovedException(String publicSlug) {
+    public PostMovedException(String publicSlug) {
         this.publicSlug = publicSlug;
     }
 

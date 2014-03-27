@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 class PostCategoryFormatter implements Formatter<PostCategory> {
-    private static Map<String, PostCategory> mapping = new HashMap<String, PostCategory>();
+    private static Map<String, PostCategory> mapping = new HashMap<>();
     {
         for (PostCategory category : PostCategory.values()) {
             mapping.put(category.getUrlSlug(), category);

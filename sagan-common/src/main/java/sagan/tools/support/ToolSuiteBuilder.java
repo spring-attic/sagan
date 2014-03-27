@@ -18,10 +18,10 @@ class ToolSuiteBuilder {
     private final DownloadLinkExtractor downloadLinkExtractor = new DownloadLinkExtractor();
     private final String shortName;
 
-    private Map<String, ToolSuitePlatform> platformMap = new LinkedHashMap<String, ToolSuitePlatform>();
-    private List<UpdateSiteArchive> updateSiteArchives = new ArrayList<UpdateSiteArchive>();
-    private Map<String, EclipseVersion> eclipseVersionMap = new LinkedHashMap<String, EclipseVersion>();
-    private Map<String, Architecture> architectureMap = new LinkedHashMap<String, Architecture>();
+    private Map<String, ToolSuitePlatform> platformMap = new LinkedHashMap<>();
+    private List<UpdateSiteArchive> updateSiteArchives = new ArrayList<>();
+    private Map<String, EclipseVersion> eclipseVersionMap = new LinkedHashMap<>();
+    private Map<String, Architecture> architectureMap = new LinkedHashMap<>();
     private String releaseName;
 	private String whatsNew;
 

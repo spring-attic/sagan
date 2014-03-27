@@ -2,7 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
@@ -39,16 +39,16 @@ public class PostFormAdapter_CreatePostTests {
     private Date now = DateTestUtils.getDate("2013-07-01 13:00");
 
     @Mock
-    private DateService dateService;
+    private DateFactory dateFactory;
 
     @Mock
     private TeamRepository teamRepository;
 
     @Mock
-    private SummaryExtractor summaryExtractor;
+    private PostSummary postSummary;
 
     @Mock
-    private BlogPostContentRenderer renderer;
+    private PostContentRenderer renderer;
 
     @Rule
     public ExpectedException expected = ExpectedException.none();
@@ -64,10 +64,10 @@ public class PostFormAdapter_CreatePostTests {
         given(teamRepository.findByUsername(AUTHOR_USERNAME)).willReturn(profile);
 
         given(renderer.render(content)).willReturn(RENDERED_HTML);
-        given(summaryExtractor.extract(anyString(), anyInt())).willReturn(RENDERED_SUMMARY);
-        given(dateService.now()).willReturn(now);
+        given(postSummary.forContent(anyString(), anyInt())).willReturn(RENDERED_SUMMARY);
+        given(dateFactory.now()).willReturn(now);
 
-        adapter = new PostFormAdapter(renderer, summaryExtractor, dateService, teamRepository);
+        adapter = new PostFormAdapter(renderer, postSummary, dateFactory, teamRepository);
 
         postForm = new PostForm();
         postForm.setTitle(title);
