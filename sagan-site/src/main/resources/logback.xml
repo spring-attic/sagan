@@ -7,21 +7,24 @@
     <!-- pick up reasonable defaults provided by Spring Boot -->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <!-- log at INFO by default -->
-    <root level="INFO"/>
+    <!-- log at WARN by default to keep console output to a minimum -->
+    <root level="WARN"/>
 
-    <!-- Apache HttpClient is too verbose at INFO level -->
+    <!-- Apache HttpClient is too verbose at INFO level in most cases -->
     <logger level="WARN" name="org.apache.http"/>
 
-    <logger level="DEBUG" name="sagan.guides.support"/>
+    <!-- turn up to DEBUG to diagnose GitHub API issues -->
+    <logger level="WARN" name="org.apache.http.headers"/>
 
-    <!-- log high-level information about application startup time, whether from
-         Boot's main class or the site's main class. The former is in play when
-         running with `java -jar`; the latter when running from within the IDE -->
-    <logger level="INFO" name="sagan.SiteConfig"/>
-    <logger level="INFO" name="org.springframework.boot.SpringApplication"/>
+    <!-- turn up to DEBUG to see information about guides as they are -->
+    <!-- fetched and processed -->
+    <logger level="WARN" name="sagan.guides.support"/>
 
-    <!-- log generated password for admin endpoints -->
-    <logger level="INFO" name="org.springframework.boot.actuate.autoconfigure.SecurityAutoConfiguration$AuthenticationManagerConfiguration"/>
+    <!-- always log high-level information about application startup -->
+    <logger level="INFO" name="sagan.SiteMain"/>
+
+    <!-- log generated password for admin endpoints, e.g. /env, /beans -->
+    <!-- See http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints -->
+    <logger level="INFO" name="org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration"/>
 
 </configuration>
