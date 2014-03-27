@@ -170,8 +170,6 @@ class SecurityConfig {
      * {@link Authentication} from the {@link SecurityContext} if there is one. This is
      * useful when authentication actually happened in a controller, rather than in the
      * filter chain itself.
-     *
-     * @author Dave Syer
      */
     static class SecurityContextAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -198,8 +196,6 @@ class SecurityConfig {
     /**
      * Simple {@link ConnectionSignUp} implementation that pulls user id from remote user
      * details in the Social {@link Connection}.
-     *
-     * @author Dave Syer
      */
     static class RemoteUsernameConnectionSignUp implements ConnectionSignUp {
         @Override

@@ -27,10 +27,9 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.SetMultimap;
 
 /**
- * Repository implementation providing data access services for getting started guides.
- *
- * @author Chris Beams
- * @author Greg Turnquist
+ * Repository providing access to and caching of documents within the
+ * {@link GettingStartedGuide} Git repositories at GitHub. See
+ * http://github.com/spring-guides.
  */
 @Repository
 public class GettingStartedGuides implements DocRepository<GettingStartedGuide>,

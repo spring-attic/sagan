@@ -26,6 +26,11 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles read-only blog actions, e.g. listing, paging, and showing
+ * individual published {@link Post}s. See {@link BlogAdminController} for administrative
+ * operations.
+ */
 @Controller
 @RequestMapping("/blog")
 @NavSection("blog")

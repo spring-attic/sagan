@@ -42,12 +42,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * projects. This notification happens by adding a new GH Issue to each project under the
  * spring-projects org that has a gh-pages branch.
  *
- * <p>
  * The {token} path variable establishes a shared secret between the webhook and this
  * controller, ensuring that only GitHub can POST and thus create new issues in the
  * various Spring project repositories.
- *
- * @author Chris Beams
  */
 @Controller
 @RequestMapping("/webhook/gh-pages/{token}")

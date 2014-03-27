@@ -35,9 +35,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * for establishing a security context for Spring Security. While these are just examples,
  * <a href="https://jira.springsource.org/browse/SEC-2015">official support</a> for Spring
  * Security is planned.
- *
- * @author Rob Winch
- * @author Chris Beams
  */
 public final class SecurityRequestPostProcessors {
 

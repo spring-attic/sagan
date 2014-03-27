@@ -38,8 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests ensuring that caching functionality works as expected in
  * {@link CachedRestClient}.
- *
- * @author Pivotal Labs
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

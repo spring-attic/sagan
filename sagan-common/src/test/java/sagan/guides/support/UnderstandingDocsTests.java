@@ -17,8 +17,6 @@ import static org.mockito.Mockito.mock;
 
 /**
  * Unit tests for {@link UnderstandingDocs}
- *
- * @author Chris Beams
  */
 public class UnderstandingDocsTests {
 

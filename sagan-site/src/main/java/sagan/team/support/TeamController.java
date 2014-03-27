@@ -23,9 +23,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
  * Controller handling HTTP requests for the team section of the site.
- *
- * @author Pivotal Labs
- * @author Chris Beams
  */
 @Controller
 @RequestMapping("/team")

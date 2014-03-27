@@ -23,6 +23,12 @@ import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.feed.atom.Link;
 import com.sun.syndication.feed.atom.Person;
 
+/**
+ * Spring MVC {@code View} responsible for rendering Atom feeds for the blog and each of
+ * its categories.
+ * 
+ * @see AtomFeedController
+ */
 public class AtomFeedView extends AbstractAtomFeedView {
 
     private final SiteUrl siteUrl;
