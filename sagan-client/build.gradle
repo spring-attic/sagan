@@ -34,3 +34,12 @@ task npmBuild(dependsOn: npmInstall, type:Exec) {
 }
 
 jar.dependsOn npmBuild
+
+idea.module {
+    // see .gitignore
+    excludeDirs += [
+            file('dist'),
+            file('src/lib'),
+            file('node_modules')
+    ]
+}
