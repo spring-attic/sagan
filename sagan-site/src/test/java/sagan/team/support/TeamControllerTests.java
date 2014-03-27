@@ -2,7 +2,7 @@ package sagan.team.support;
 
 import sagan.blog.support.BlogService;
 import sagan.blog.support.PostViewFactory;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
 import sagan.team.TeamLocation;
@@ -23,9 +23,6 @@ import org.springframework.ui.ExtendedModelMap;
 
 /**
  * Unit tests for {@link TeamController}.
- *
- * @author Pivotal Labs
- * @author Chris Beams
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TeamControllerTests {
@@ -43,7 +40,7 @@ public class TeamControllerTests {
     @Before
     public void setUp() throws Exception {
         teamController =
-                new TeamController(teamService, blogService, new PostViewFactory(new DateService()));
+                new TeamController(teamService, blogService, new PostViewFactory(new DateFactory()));
         List<MemberProfile> members = new ArrayList<>();
 
         members.add(MemberProfileBuilder.profile()

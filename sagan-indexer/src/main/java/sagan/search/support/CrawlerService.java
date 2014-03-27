@@ -79,7 +79,7 @@ public class CrawlerService {
 
         @Override
         public Set<PageURL> get(HTMLPageResponse theResponse) {
-            Set<PageURL> urls = new HashSet<PageURL>();
+            Set<PageURL> urls = new HashSet<>();
             for (PageURLParser parser : parsers) {
                 urls.addAll(parser.get(theResponse));
             }
@@ -93,7 +93,7 @@ public class CrawlerService {
 
         public Set<PageURL> get(HTMLPageResponse theResponse) {
             String url = theResponse.getUrl();
-            Set<PageURL> urls = new HashSet<PageURL>();
+            Set<PageURL> urls = new HashSet<>();
             // only populate if we have a valid response, else return empty set
             if (theResponse.getResponseCode() == HttpStatus.SC_OK) {
                 urls = fetch(FRAME, ABS_SRC, theResponse.getBody(), url);
@@ -102,7 +102,7 @@ public class CrawlerService {
         }
 
         private Set<PageURL> fetch(String query, String attributeKey, Document doc, String url) {
-            Set<PageURL> urls = new HashSet<PageURL>();
+            Set<PageURL> urls = new HashSet<>();
             Elements elements = doc.select(query);
             for (Element src : elements) {
                 if (src.attr(attributeKey).isEmpty())

@@ -1,9 +1,8 @@
 package sagan.blog.support;
 
-import org.springframework.web.servlet.view.RedirectView;
-import sagan.blog.BlogPostMovedException;
+import sagan.blog.PostMovedException;
 import sagan.blog.Post;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 
 import java.util.Collections;
 import java.util.Locale;
@@ -18,6 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.ExtendedModelMap;
+import org.springframework.web.servlet.view.RedirectView;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -39,7 +39,7 @@ public class BlogControllerTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        postViewFactory = new PostViewFactory(new DateService());
+        postViewFactory = new PostViewFactory(new DateFactory());
         PageImpl<Post> page = new PageImpl<>(Collections.<Post> emptyList(), new PageRequest(1, 1), 1);
         given(blogService.getPublishedPostsByDate(anyInt(), any(Pageable.class))).willReturn(page);
         given(blogService.getPublishedPostsByDate(anyInt(), anyInt(), any(Pageable.class))).willReturn(page);
@@ -81,7 +81,7 @@ public class BlogControllerTests {
     @Test
     public void handleBlogPostMovedExceptionRedirects() {
         String publicSlug = "slug";
-        RedirectView result = blogController.handle(new BlogPostMovedException(publicSlug));
+        RedirectView result = blogController.handle(new PostMovedException(publicSlug));
         assertThat(result.getUrl(), equalTo("/blog/" + publicSlug));
     }
 }

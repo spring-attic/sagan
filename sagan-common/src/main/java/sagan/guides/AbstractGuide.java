@@ -2,7 +2,7 @@ package sagan.guides;
 
 import java.util.Set;
 
-class AbstractGuide extends AbstractDocument implements Guide {
+abstract class AbstractGuide extends AbstractDocument implements Guide {
 
     private final GuideMetadata metadata;
     private final ImageProvider imageProvider;

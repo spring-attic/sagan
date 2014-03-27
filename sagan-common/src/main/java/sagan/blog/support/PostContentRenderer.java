@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-class BlogPostContentRenderer {
+class PostContentRenderer {
 
     private MarkdownService markdownService;
 
     @Autowired
-    public BlogPostContentRenderer(MarkdownService markdownService) {
+    public PostContentRenderer(MarkdownService markdownService) {
         this.markdownService = markdownService;
     }
 

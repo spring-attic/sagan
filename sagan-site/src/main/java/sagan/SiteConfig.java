@@ -1,10 +1,7 @@
 package sagan;
 
-import sagan.blog.support.BlogPostAtomViewer;
 import sagan.guides.support.GettingStartedGuides;
-import sagan.support.DateService;
 import sagan.support.cache.CachedRestClient;
-import sagan.support.nav.SiteUrl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -80,21 +77,6 @@ public class SiteConfig {
                 return Collections.emptyMap();
             }
         };
-    }
-
-    @Bean
-    public BlogPostAtomViewer blogPostAtomViewer() {
-        return new BlogPostAtomViewer(siteUrl(), dateService());
-    }
-
-    @Bean
-    public SiteUrl siteUrl() {
-        return new SiteUrl();
-    }
-
-    @Bean
-    public DateService dateService() {
-        return new DateService();
     }
 
     @Bean

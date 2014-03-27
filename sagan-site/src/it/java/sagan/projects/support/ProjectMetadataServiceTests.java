@@ -14,9 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-/**
- * @author Rob Winch
- */
 public class ProjectMetadataServiceTests extends AbstractIntegrationTests {
 
     @Autowired

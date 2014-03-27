@@ -3,7 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,7 +36,7 @@ public class BlogController_ShowTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        postViewFactory = new PostViewFactory(new DateService());
+        postViewFactory = new PostViewFactory(new DateFactory());
 
         controller = new BlogController(blogService, postViewFactory);
 

@@ -19,7 +19,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @RequestMapping("/project_metadata")
-public class ProjectMetadataController {
+class ProjectMetadataController {
 
     private ProjectMetadataService service;
 

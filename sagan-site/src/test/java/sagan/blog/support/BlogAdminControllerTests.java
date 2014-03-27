@@ -3,7 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
@@ -58,7 +58,7 @@ public class BlogAdminControllerTests {
     @Before
     public void setup() {
         bindingResult = new MapBindingResult(new HashMap<>(), "postForm");
-        postViewFactory = new PostViewFactory(new DateService());
+        postViewFactory = new PostViewFactory(new DateFactory());
         principal = new Principal() {
             @Override
             public String getName() {

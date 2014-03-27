@@ -21,8 +21,6 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
  * Unit tests for {@link Tutorials}.
- *
- * @author Chris Beams
  */
 public class TutorialsTests {
 
