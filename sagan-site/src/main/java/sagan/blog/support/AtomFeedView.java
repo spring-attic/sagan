@@ -1,7 +1,7 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.support.nav.SiteUrl;
 
 import java.text.SimpleDateFormat;
@@ -23,15 +23,15 @@ import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.feed.atom.Link;
 import com.sun.syndication.feed.atom.Person;
 
-public class BlogPostAtomViewer extends AbstractAtomFeedView {
+public class AtomFeedView extends AbstractAtomFeedView {
 
     private final SiteUrl siteUrl;
-    private final DateService dateService;
+    private final DateFactory dateFactory;
 
     @Autowired
-    public BlogPostAtomViewer(SiteUrl siteUrl, DateService dateService) {
+    public AtomFeedView(SiteUrl siteUrl, DateFactory dateFactory) {
         this.siteUrl = siteUrl;
-        this.dateService = dateService;
+        this.dateFactory = dateFactory;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
                                            HttpServletResponse response) throws Exception {
         @SuppressWarnings("unchecked")
         List<Post> posts = (List<Post>) model.get("posts");
-        List<Entry> entries = new ArrayList<Entry>(posts.size());
+        List<Entry> entries = new ArrayList<>(posts.size());
 
         for (Post post : posts) {
             Entry entry = new Entry();
@@ -95,7 +95,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
 
     private void setId(Post post, Entry entry, HttpServletRequest request) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setTimeZone(DateService.TIME_ZONE);
+        dateFormat.setTimeZone(dateFactory.timeZone());
         String dateString = dateFormat.format(post.getCreatedAt());
         String host = request.getServerName();
         String id = String.format("tag:%s,%s:%s", host, dateString, post.getId());
@@ -110,7 +110,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
     }
 
     private void setPostUrl(Post post, Entry entry) {
-        PostView postView = new PostView(post, dateService);
+        PostView postView = new PostView(post, dateFactory);
         String postUrl = siteUrl.getAbsoluteUrl(postView.getPath());
         Link postLink = new Link();
         postLink.setHref(postUrl);
@@ -127,7 +127,7 @@ public class BlogPostAtomViewer extends AbstractAtomFeedView {
         Category category = new Category();
         category.setLabel(post.getCategory().getDisplayName());
         category.setTerm(post.getCategory().getUrlSlug());
-        List<Category> categories = new ArrayList<Category>();
+        List<Category> categories = new ArrayList<>();
         categories.add(category);
 
         if (post.isBroadcast()) {

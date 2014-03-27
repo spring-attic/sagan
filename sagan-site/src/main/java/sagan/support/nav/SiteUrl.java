@@ -2,11 +2,11 @@ package sagan.support.nav;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-@Service
+@Component
 public class SiteUrl {
 
     public String getUrl() {

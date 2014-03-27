@@ -51,7 +51,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  */
 @Controller
 @RequestMapping("/webhook/gh-pages/{token}")
-public class GhPagesWebhookController {
+class GhPagesWebhookController {
 
     private static final Log logger = LogFactory.getLog(GhPagesWebhookController.class);
 

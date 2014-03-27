@@ -5,7 +5,7 @@ import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
 import sagan.search.SearchException;
 import sagan.search.support.SearchService;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 
 import java.util.Date;
@@ -41,7 +41,7 @@ public class BlogService_ValidPostTests {
     private PostFormAdapter postFormAdapter;
 
     @Mock
-    private DateService dateService;
+    private DateFactory dateFactory;
 
     @Mock
     private SearchService searchService;
@@ -53,7 +53,7 @@ public class BlogService_ValidPostTests {
 
     @Before
     public void setup() {
-        given(dateService.now()).willReturn(now);
+        given(dateFactory.now()).willReturn(now);
 
         given(postRepository.save((Post) anyObject())).will(new Answer<Post>() {
             @Override
@@ -67,7 +67,7 @@ public class BlogService_ValidPostTests {
         post = PostBuilder.post().publishAt(publishAt).build();
         given(postFormAdapter.createPostFromPostForm(postForm, AUTHOR_USERNAME)).willReturn(post);
 
-        service = new BlogService(postRepository, postFormAdapter, dateService, searchService);
+        service = new BlogService(postRepository, postFormAdapter, dateFactory, searchService);
         service.addPost(postForm, AUTHOR_USERNAME);
     }
 

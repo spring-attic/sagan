@@ -1,7 +1,7 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
 
@@ -14,17 +14,17 @@ import org.springframework.stereotype.Service;
 class PostFormAdapter {
     private static final int SUMMARY_LENGTH = 500;
 
-    private final BlogPostContentRenderer renderer;
-    private final SummaryExtractor summaryExtractor;
-    private final DateService dateService;
+    private final PostContentRenderer renderer;
+    private final PostSummary postSummary;
+    private final DateFactory dateFactory;
     private final TeamRepository teamRepository;
 
     @Autowired
-    public PostFormAdapter(BlogPostContentRenderer renderer, SummaryExtractor summaryExtractor,
-                           DateService dateService, TeamRepository teamRepository) {
+    public PostFormAdapter(PostContentRenderer renderer, PostSummary postSummary,
+                           DateFactory dateFactory, TeamRepository teamRepository) {
         this.renderer = renderer;
-        this.summaryExtractor = summaryExtractor;
-        this.dateService = dateService;
+        this.postSummary = postSummary;
+        this.dateFactory = dateFactory;
         this.teamRepository = teamRepository;
     }
 
@@ -33,7 +33,7 @@ class PostFormAdapter {
         Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
         MemberProfile profile = teamRepository.findByUsername(username);
         post.setAuthor(profile);
-        post.setCreatedAt(createdDate(postForm, dateService.now()));
+        post.setCreatedAt(createdDate(postForm, dateFactory.now()));
 
         setPostProperties(postForm, content, post);
         return post;
@@ -69,14 +69,14 @@ class PostFormAdapter {
 
     private Date publishDate(PostForm postForm) {
         if (!postForm.isDraft() && postForm.getPublishAt() == null) {
-            return dateService.now();
+            return dateFactory.now();
         } else {
             return postForm.getPublishAt();
         }
     }
 
     public void summarize(Post post) {
-        String summary = summaryExtractor.extract(post.getRenderedContent(), SUMMARY_LENGTH);
+        String summary = postSummary.forContent(post.getRenderedContent(), SUMMARY_LENGTH);
         post.setRenderedSummary(summary);
     }
 }

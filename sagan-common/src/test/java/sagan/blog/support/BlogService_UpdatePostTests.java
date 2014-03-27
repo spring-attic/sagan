@@ -4,7 +4,7 @@ import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
 import sagan.search.support.SearchService;
-import sagan.support.DateService;
+import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 
 import java.util.Date;
@@ -33,7 +33,7 @@ public class BlogService_UpdatePostTests {
     private PostRepository postRepository;
 
     @Mock
-    private DateService dateService;
+    private DateFactory dateFactory;
 
     @Mock
     private SearchService searchService;
@@ -48,9 +48,9 @@ public class BlogService_UpdatePostTests {
 
     @Before
     public void setup() {
-        given(dateService.now()).willReturn(now);
+        given(dateFactory.now()).willReturn(now);
 
-        service = new BlogService(postRepository, postFormAdapter, dateService, searchService);
+        service = new BlogService(postRepository, postFormAdapter, dateFactory, searchService);
 
         post = PostBuilder.post().id(123L).publishAt(publishAt).build();
 

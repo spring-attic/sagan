@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.social.github.api.GitHubRepo;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestClientException;
 
 import com.google.common.collect.LinkedHashMultimap;
@@ -32,9 +32,9 @@ import com.google.common.collect.SetMultimap;
  * @author Chris Beams
  * @author Greg Turnquist
  */
-@Component
-public class GettingStartedGuides extends GitHubBackedGuideRepository
-        implements DocRepository<GettingStartedGuide>, ContentProvider<GettingStartedGuide>, ImageProvider {
+@Repository
+public class GettingStartedGuides implements DocRepository<GettingStartedGuide>,
+        ContentProvider<GettingStartedGuide>, ImageProvider {
 
     public static final String CACHE_NAME = "cache.guides";
     public static final String CACHE_TTL = "${cache.guides.timetolive:300}";
@@ -45,17 +45,15 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
 
     private static final String REPO_BASE_PATH = "/repos/%s/%s";
     private static final String README = REPO_BASE_PATH + "/readme";
-    private static final String README_PATH_MD = REPO_BASE_PATH + "/contents/README.md";
     private static final String README_PATH_ASC = REPO_BASE_PATH + "/zipball";
-    private static final String SIDEBAR_PATH = REPO_BASE_PATH + "/contents/SIDEBAR.md";
 
+    private final GuideOrganization org;
     private final SetMultimap<String, String> tagMultimap = LinkedHashMultimap.create();
-
     private final ProjectMetadataService projectMetadataService;
 
     @Autowired
     public GettingStartedGuides(GuideOrganization org, ProjectMetadataService projectMetadataService) {
-        super(org);
+        this.org = org;
         this.projectMetadataService = projectMetadataService;
     }
 
@@ -89,18 +87,57 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
 
         Readme readme = getGuideReadme(String.format(README, org.getName(), repoName));
 
-        if (readme.getName().endsWith(".md")) {
-            guide.setContent(getMarkdownGuideContentAsHtml(String.format(README_PATH_MD, org.getName(), repoName)));
-            guide.setSidebar(getGuideSidebar(repoName));
-        } else {
-            AsciidocGuide asciidocGuide = getAsciidocGuide(String.format(README_PATH_ASC, org.getName(), repoName));
-            tagMultimap.putAll(guide.getRepoName(), asciidocGuide.getTags());
-            guide.setContent(asciidocGuide.getContent());
-            guide.setSidebar(generateDynamicSidebar(asciidocGuide));
-        }
-
+        AsciidocGuide asciidocGuide = getAsciidocGuide(String.format(README_PATH_ASC, org.getName(), repoName));
+        tagMultimap.putAll(guide.getRepoName(), asciidocGuide.getTags());
+        guide.setContent(asciidocGuide.getContent());
+        guide.setSidebar(generateDynamicSidebar(asciidocGuide));
     }
 
+    private Readme getGuideReadme(String path) {
+        try {
+            log.debug(String.format("Fetching README for '%s'", path));
+            return org.getReadme(path);
+        } catch (RestClientException ex) {
+            String msg = String.format("No README found for '%s'", path);
+            log.warn(msg, ex);
+            throw new ResourceNotFoundException(msg, ex);
+        }
+    }
+
+    private AsciidocGuide getAsciidocGuide(String path) {
+        try {
+            log.debug(String.format("Fetching getting started guide for '%s'", path));
+            return org.getAsciidocGuide(path);
+        } catch (RestClientException ex) {
+            String msg = String.format("No getting started guide found for '%s'", path);
+            log.warn(msg, ex);
+            throw new ResourceNotFoundException(msg, ex);
+        }
+    }
+
+    @Override
+    public byte[] loadImage(Guide guide, String imageName) {
+        try {
+            return org.getGuideImage(guide.getRepoName(), imageName);
+        } catch (RestClientException ex) {
+            String msg = String.format("Could not load image '%s' for repo '%s'", imageName, guide.getRepoName());
+            log.warn(msg, ex);
+            throw new ResourceNotFoundException(msg, ex);
+        }
+    }
+
+    protected String getRepoDescription(String repoName) {
+        String description;
+        try {
+            description = org.getRepoInfo(repoName).getDescription();
+        } catch (RestClientException ex) {
+            description = "";
+        }
+        return description;
+    }
+
+    // This method's approach to generating HTML directly within code will be refactored
+    // in https://github.com/spring-io/sagan/issues/223
     private String generateDynamicSidebar(AsciidocGuide asciidocGuide) {
         String sidebar = "<div class='right-pane-widget--container'>\n" +
                 "<div class='related_resources'>\n";
@@ -154,65 +191,4 @@ public class GettingStartedGuides extends GitHubBackedGuideRepository
 
         return sidebar;
     }
-
-    /**
-     * Fetch the default readme file for this given guide repository, which may be written
-     * in either Markdown or AsciiDoc.
-     */
-    private Readme getGuideReadme(String path) {
-        try {
-            log.debug(String.format("Fetching README for '%s'", path));
-            return org.getReadme(path);
-        } catch (RestClientException ex) {
-            String msg = String.format("No README found for '%s'", path);
-            log.warn(msg, ex);
-            throw new ResourceNotFoundException(msg, ex);
-        }
-    }
-
-    private String getMarkdownGuideContentAsHtml(String path) {
-        try {
-            log.debug(String.format("Fetching getting started guide for '%s'", path));
-            return org.getMarkdownFileAsHtml(path);
-        } catch (RestClientException ex) {
-            String msg = String.format("No getting started guide found for '%s'", path);
-            log.warn(msg, ex);
-            throw new ResourceNotFoundException(msg, ex);
-        }
-    }
-
-    private AsciidocGuide getAsciidocGuide(String path) {
-        try {
-            log.debug(String.format("Fetching getting started guide for '%s'", path));
-            return org.getAsciidocGuide(path);
-        } catch (RestClientException ex) {
-            String msg = String.format("No getting started guide found for '%s'", path);
-            log.warn(msg, ex);
-            throw new ResourceNotFoundException(msg, ex);
-        }
-    }
-
-    private String getGuideSidebar(String repoName) {
-        try {
-            String sidebar = "<div class='right-pane-widget--container'>\n" +
-                    "<div class='related_resources'>\n";
-            sidebar += org.getMarkdownFileAsHtml(String.format(SIDEBAR_PATH, org.getName(), repoName));
-            sidebar += "</div>\n</div>";
-            return sidebar;
-        } catch (RestClientException ex) {
-            return "";
-        }
-    }
-
-    @Override
-    public byte[] loadImage(Guide guide, String imageName) {
-        try {
-            return org.getGuideImage(guide.getRepoName(), imageName);
-        } catch (RestClientException ex) {
-            String msg = String.format("Could not load image '%s' for repo '%s'", imageName, guide.getRepoName());
-            log.warn(msg, ex);
-            throw new ResourceNotFoundException(msg, ex);
-        }
-    }
-
 }

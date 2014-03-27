@@ -20,7 +20,7 @@ public class Project {
 
     @ElementCollection
     @OrderBy("versionName DESC")
-    private List<ProjectRelease> releaseList = new ArrayList<ProjectRelease>();
+    private List<ProjectRelease> releaseList = new ArrayList<>();
     private boolean isAggregator;
 
     @SuppressWarnings("unused")

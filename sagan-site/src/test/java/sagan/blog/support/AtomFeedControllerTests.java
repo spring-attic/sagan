@@ -3,7 +3,9 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
+import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
+import sagan.support.nav.SiteUrl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,28 +30,33 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static sagan.blog.PostCategory.ENGINEERING;
 
-public class BlogFeedControllerTests {
+public class AtomFeedControllerTests {
 
     public static final PostCategory TEST_CATEGORY = ENGINEERING;
 
     @Mock
     private BlogService blogService;
 
-    private BlogFeedController controller;
+    @Mock
+    private SiteUrl siteUrl;
+
+    @Mock
+    private DateFactory dateFactory;
+
+    private AtomFeedController controller;
     private ExtendedModelMap model = new ExtendedModelMap();
     private Page<Post> page;
-    private List<Post> posts = new ArrayList<Post>();
+    private List<Post> posts = new ArrayList<>();
     private HttpServletResponse response = new MockHttpServletResponse();
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new BlogFeedController(blogService);
+        controller = new AtomFeedController(blogService, siteUrl, dateFactory);
         posts.add(PostBuilder.post().build());
-        page = new PageImpl<Post>(posts, mock(Pageable.class), 20);
+        page = new PageImpl<>(posts, mock(Pageable.class), 20);
         given(blogService.getPublishedPosts(eq(PageableFactory.forFeeds()))).willReturn(page);
-        given(blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(PageableFactory.forFeeds()))).willReturn(
-                page);
+        given(blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(PageableFactory.forFeeds()))).willReturn(page);
         given(blogService.getPublishedBroadcastPosts(eq(PageableFactory.forFeeds()))).willReturn(page);
     }
 

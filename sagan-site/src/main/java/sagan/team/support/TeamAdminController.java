@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
-public class TeamAdminController {
+class TeamAdminController {
 
     private final TeamService teamService;
     private final TeamImporter teamImporter;
@@ -50,7 +50,7 @@ public class TeamAdminController {
     public String editTeamMemberForm(@PathVariable("username") String username, Model model) {
         MemberProfile profile = teamService.fetchMemberProfileUsername(username);
         if (profile == MemberProfile.NOT_FOUND) {
-            throw new MemberNotFoundException("Profile not found with Id=" + username);
+            throw new MemberNotFoundException(username);
         }
         model.addAttribute("profile", profile);
         model.addAttribute("formAction", "/admin/team/" + username);
