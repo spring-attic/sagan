@@ -10,12 +10,29 @@ task deploy(dependsOn: [ build, rootProject.gitMetadata ]) {
     description = 'Deploys the project to a Cloud Foundry space (specified with -P<spacename>)'
     mustRunAfter checkTasks
 
-    if (project.name == siteProject.name)
-        dependsOn 'cf-deploy', 'cf-swap-deployed'
-    else if (project.name == indexerProject.name)
-        dependsOn 'cf-push'
-    else
-        throw new IllegalArgumentException('Unknown project ${project.name}')
+    // Gather information about the build environment. Is it a Travis CI build?
+    def travisBranch = System.getenv().get("TRAVIS_BRANCH")
+    def hasSecureEnv = Boolean.valueOf(System.getenv().get("TRAVIS_SECURE_ENV_VARS"))
+    def isPullRequest = Boolean.valueOf(System.getenv().get("TRAVIS_PULL_REQUEST"))
+    def isTravisBuild = travisBranch != null
+
+    // Always proceed with deployment if it is a local build. If we're on Travis CI, only
+    // deploy if the secure environment vars are available (i.e. this is not a pull request
+    // from a fork) and we're on a branch intended for production deployment.
+    if (!isTravisBuild || (isTravisBuild && !isPullRequest && hasSecureEnv && travisBranch == "master")) {
+        dependsOn 'cf-login'
+
+        // the site gets blue-green deployment
+        if (project.name == siteProject.name)
+            dependsOn 'cf-deploy', 'cf-swap-deployed'
+
+        // the indexer just needs to be pushed
+        else if (project.name == indexerProject.name)
+            dependsOn 'cf-push'
+
+        else
+            throw new IllegalArgumentException('Unknown project ${project.name}')
+    }
 }
 
 def saganEnvScript = file("${System.getProperty("user.home")}/.gradle/sagan-env.gradle")
@@ -50,8 +67,6 @@ if (project.name == siteProject.name) {
 // or in "~/.gradle/sagan-env.gradle". All are required if the respective 'cf-login' / 'deploy' tasks
 // have been invoked.
 
-def reqLoginVars = [ 'cf.username', 'cf.password' ]
-
 def reqDeployVars = [
     'adminPassword', 'elasticsearchEndpoint', 'githubClientId',
     'githubClientSecret', 'githubAccessToken', 'webhookAccessToken'
@@ -61,10 +76,17 @@ gradle.taskGraph.whenReady {
     if (gradle.taskGraph.hasTask(":${siteProject.name}:cf-login")
           || gradle.taskGraph.hasTask(":${indexerProject.name}:cf-login")) {
         def missingVars = []
-        reqLoginVars.each { var ->
-            if (!project.hasProperty(var)) {
-                missingVars << var
-            }
+        // user and pass are provided in Travis CI via environment variables, where '.' breaks things
+        // the cf-gradle-plugin's cf-login task, however, expects the 'cf.' naming, thus the mapping here.
+        if (project.hasProperty('cfUsername')) {
+            project.ext.setProperty('cf.username', project.getProperty('cfUsername'))
+        } else {
+            missingVars << 'cfUsername'
+        }
+        if (project.hasProperty('cfPassword')) {
+            project.ext.setProperty('cf.password', project.getProperty('cfPassword'))
+        } else {
+            missingVars << 'cfPassword'
         }
         if (missingVars.size() > 0) {
             throw new InvalidUserDataException(
