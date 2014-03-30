@@ -1,5 +1,6 @@
 package saganx;
 
+import org.junit.Ignore;
 import sagan.support.FreePortFinder;
 
 import java.io.IOException;
@@ -27,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+@Ignore
 public class BasicAcceptanceTests {
 
     public static int port;
