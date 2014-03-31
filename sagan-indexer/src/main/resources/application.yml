@@ -67,6 +67,8 @@ server:
         baseDir: ''
         backgroundProcessorDelay: 1
 
+disqus_shortname: n/a
+
 ---
 
 spring:

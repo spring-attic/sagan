@@ -54,6 +54,7 @@ class BlogController {
         model.addAttribute("post", postViewFactory.createPostView(post));
         model.addAttribute("categories", PostCategory.values());
         model.addAttribute("activeCategory", post.getCategory().getDisplayName());
+        model.addAttribute("disqusShortname", service.getDisqusShortname());
         return "blog/show";
     }
 

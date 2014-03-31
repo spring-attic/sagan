@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,6 +38,9 @@ public class BlogService {
     private DateFactory dateFactory;
     private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
+    @Value("${disqus_shortname}")
+    private String disqusShortname;
+
     @Autowired
     public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter, DateFactory dateFactory,
                        SearchService searchService) {
@@ -44,6 +48,12 @@ public class BlogService {
         this.postFormAdapter = postFormAdapter;
         this.dateFactory = dateFactory;
         this.searchService = searchService;
+    }
+
+    // Property methods
+
+    public String getDisqusShortname() {
+        return disqusShortname;
     }
 
     // Query methods
