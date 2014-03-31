@@ -3,11 +3,15 @@ gradle.rootProject.allprojects { project ->
     checkTasks.addAll(project.tasks.findAll { it.name == 'build' })
 }
 
+def final TARGET_SPACE = 'space'
+def final PRODUCTION_SPACE = 'production'
+def final STAGING_SPACE = 'staging'
+
 def siteProject = project(':sagan-site')
 def indexerProject = project(':sagan-indexer')
 
 task deploy(dependsOn: [ build, rootProject.gitMetadata ]) {
-    description = 'Deploys the project to a Cloud Foundry space (specified with -P<spacename>)'
+    description = 'Deploys the project to a Cloud Foundry space (specified with -Pspace=<targetspace>)'
     mustRunAfter checkTasks
 
     // Gather information about the build environment. Is it a Travis CI build?
@@ -16,10 +20,22 @@ task deploy(dependsOn: [ build, rootProject.gitMetadata ]) {
     def isPullRequest = Boolean.valueOf(System.getenv().get("TRAVIS_PULL_REQUEST"))
     def isTravisBuild = travisBranch != null
 
+    // User may specify an explicit target space any time, e.g. ./gradlew deploy -Pspace=production
+    // Otherwise, target space will be determined by branch name (assuming we are in a Travis CI build).
+    // If no branch is matched, no space is set, and deployment will be skipped entirely.
+    if (!project.hasProperty(TARGET_SPACE) && travisBranch != null) {
+        if (travisBranch =~ '^master$') {
+            project.ext.setProperty(TARGET_SPACE, PRODUCTION_SPACE)
+        }
+        else if (travisBranch =~ '^stage-.*') {
+            project.ext.setProperty(TARGET_SPACE, STAGING_SPACE)
+        }
+    }
+
     // Always proceed with deployment if it is a local build. If we're on Travis CI, only
     // deploy if the secure environment vars are available (i.e. this is not a pull request
     // from a fork) and we're on a branch intended for production deployment.
-    if (!isTravisBuild || (isTravisBuild && !isPullRequest && hasSecureEnv && travisBranch == "master")) {
+    if (!isTravisBuild || (isTravisBuild && !isPullRequest && hasSecureEnv && project.hasProperty(TARGET_SPACE))) {
         dependsOn 'cf-login'
 
         // the site gets blue-green deployment
@@ -140,9 +156,9 @@ gradle.taskGraph.whenReady {
 // cf-push and cf-swap-deployed. Using both forms of specifying routes gives control over which routes are decorated and
 // which routes are undecorated.
 
-if (project.hasProperty('staging')) {
+if (project.hasProperty(TARGET_SPACE)) {
     cloudfoundry {
-        space = 'staging'
+        space = project.getProperty(TARGET_SPACE)
         host = "$application-${space}"
 
         env << [
@@ -155,7 +171,7 @@ if (project.hasProperty('staging')) {
             'sagan-db' {
                 label = 'elephantsql'
                 provider = 'elephantsql'
-                plan = 'hippo'
+                plan = (space == PRODUCTION_SPACE ? 'panda' : 'hippo')
                 version = 'n/a'
             }
             'newrelic' {
@@ -169,41 +185,9 @@ if (project.hasProperty('staging')) {
 
     if (project.name == siteProject.name) {
         cloudfoundry {
-            uris = [ "${space}.spring.io" ]
+            uris = (space == PRODUCTION_SPACE ? [ "spring.io", "www.spring.io" ] : [ "${space}.spring.io" ])
         }
     }
 }
 
-if (project.hasProperty('production')) {
-    cloudfoundry {
-        space = 'production'
-        host = "$application-${space}"
 
-        env << [
-            SPRING_PROFILES_ACTIVE: "${space}",
-            NEW_RELIC_APP_NAME: "sagan-blue;sagan",
-            ELASTICSEARCH_INDEX: "sagan-${space}"
-        ]
-
-        services {
-            'sagan-db' {
-                label = 'elephantsql'
-                provider = 'elephantsql'
-                plan = 'panda'
-                version = 'n/a'
-            }
-            'newrelic' {
-                label = 'newrelic'
-                provider = 'newrelic'
-                plan = 'standard'
-                version = 'n/a'
-            }
-        }
-    }
-
-    if (project.name == siteProject.name) {
-        cloudfoundry {
-            uris = [ "spring.io", "www.spring.io" ]
-        }
-    }
-}
