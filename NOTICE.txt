@@ -1,58 +1,10 @@
-
-Copyright (c) 2013 Pivotal Software, Inc.
-
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-
-modification, are permitted provided that the following conditions are met:
-
-1. Redistributions of source code must retain the above copyright notice,
-
-this list of conditions and the following disclaimer.
-
-2. Redistributions in binary form must reproduce the above copyright
-
-notice, this list of conditions and the following disclaimer in the
-
-documentation and/or other materials provided with the distribution.
-
-3. Neither the name of Pivotal Software, Inc. nor the names of its
-
-contributors may be used to endorse or promote products derived from this
-
-software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-
-ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-
-LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-
-CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-
-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-
-INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-
-POSSIBILITY OF SUCH DAMAGE.
-
-
 =================================================================
 TABLE OF CONTENTS
 =================================================================
 
-spring.io ("sagan")
+spring.io ("Sagan")
 
-spring.io ("sagan") includes a number of subcomponents with separate copyright
+spring.io ("Sagan") includes a number of subcomponents with separate copyright
 notices and license terms.  The product that includes this file does not
 necessarily use all the open source subcomponents referred to below. Your
 use of the source code for the these subcomponents is subject to the terms and
@@ -4383,8 +4335,8 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 THE POSSIBILITY OF SUCH DAMAGE.
 
-Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>	
-		
+Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>
+
 =======================================================================
 
 To the extent any open source subcomponents are licensed under the EPL and/or other
@@ -4718,8 +4670,8 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 THE POSSIBILITY OF SUCH DAMAGE.
 
-Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>	
-		
+Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>
+
 =======================================================================
 
 To the extent any open source subcomponents are licensed under the EPL and/or other
@@ -4840,8 +4792,8 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 THE POSSIBILITY OF SUCH DAMAGE.
 
-Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>	
-		
+Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>
+
 =======================================================================
 
 To the extent any open source subcomponents are licensed under the EPL and/or other
@@ -5456,8 +5408,8 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 THE POSSIBILITY OF SUCH DAMAGE.
 
-Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>	
-		
+Copyright (c) 1999-2009, OW2 Consortium <http://www.ow2.org/>
+
 =======================================================================
 
 To the extent any open source subcomponents are licensed under the EPL and/or other
@@ -8775,7 +8727,7 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)Version 1.1
 
 1.2. "Contributor Version" means the combination of the Original Software, prior Modifications used by a Contributor (if any), and the Modifications made by that particular Contributor.
 
-1.3. "Covered SoftwareÆ?" means (a) the Original Software, or (b) Modifications, or (c) the combination of files containing Original Software with files containing Modifications, in each case including portions thereof.
+1.3. "Covered Softwareï¿½?" means (a) the Original Software, or (b) Modifications, or (c) the combination of files containing Original Software with files containing Modifications, in each case including portions thereof.
 
 1.4. "Executable" means the Covered Software in any form other than Source Code.
 
