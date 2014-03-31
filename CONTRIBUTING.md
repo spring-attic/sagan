@@ -11,7 +11,7 @@ Everything regarding Sagan is tracked in [GitHub Issues](https://github.com/spri
 
 If you want to contribute code to the project, you'll need to be familiar with GitHub's notion of [pull requests] (they're awesome). See also the section below on `hub`.
 
-We also ask that you sign our [contributor license agreement](http://support.springsource.com/spring_gpl3_committer_signup). It's not too big a deal, just a form to fill out, but it'll get even smoother soon when issue [#121](https://github.com/spring-io/sagan/issues/121) is complete.
+We also ask that you sign our [contributor license agreement](http://support.springsource.com/spring_bsd3_committer_signup). It's not too big a deal, just a form to fill out, but it'll get even smoother soon when issue [#121](https://github.com/spring-io/sagan/issues/121) is complete.
 
 
 ## Coding conventions

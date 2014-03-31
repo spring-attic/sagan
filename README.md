@@ -18,9 +18,10 @@ If you have any questions, feedback, or feature requests, don't hesitate to [add
 
 [Pull requests](http://help.github.com/send-pull-requests) are welcome; see the [contributor guidelines](CONTRIBUTING.md) for details.
 
-## Licensing
+## License
 
-The Sagan reference application is released under the GPLv3 license. See [LICENSE.txt](LICENSE.txt) for details.
+Sagan is released under the [BSD-3 license](LICENSE.md).
+
 
 [blog]: http://spring.io/blog
 [guides]: http://spring.io/guides
