@@ -51,15 +51,19 @@ cloudfoundry {
     host = "$application"
     domain = 'cfapps.io'
     memory = 2048
-    instances = 4
     healthCheckTimeout = 180
-
-    variants = ['-blue', '-green']
 }
 
 if (project.name == siteProject.name) {
     cloudfoundry {
         application = 'sagan' // instead of 'sagan-site'
+        instances = 4
+        variants = ['-blue', '-green']
+    }
+}
+if (project.name == indexerProject.name) {
+    cloudfoundry {
+        instances = 1
     }
 }
 
