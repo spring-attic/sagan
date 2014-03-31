@@ -143,7 +143,7 @@ if (project.hasProperty('staging')) {
 
         env << [
             SPRING_PROFILES_ACTIVE: "${space}",
-            NEW_RELIC_APP_NAME: "sagan-blue;sagan",
+            NEW_RELIC_APP_NAME: "sagan-blue;sagan", // see https://github.com/spring-io/sagan/issues/262
             ELASTICSEARCH_INDEX: "sagan-${space}"
         ]
 
