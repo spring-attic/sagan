@@ -25,7 +25,7 @@
                     <div class="blog-preview--wrapper">
                         <div class="blog--container blog-preview" th:each="post : ${posts}">
                             <div class="blog--title">
-                                <a th:href="@{${post.path}}" th:text="${post.title}">
+                                <a th:href="@{${post.path} + '#disqus_thread'}" th:attr="data-disqus-identifier='article_' + ${post.id} + '_identifier'" th:text="${post.title}">
                                     This week in Spring
                                 </a>
                             </div>
@@ -69,6 +69,16 @@
                 </div>
             </div>
         </div>
+      <script type="text/javascript" th:inline="javascript">
+        var disqus_shortname = /*[[${disqusShortname}]]*/ 'no_shortname';
+
+        (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+      </script>
     </div>
 </body>
 </html>
