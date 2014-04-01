@@ -31,11 +31,11 @@ public class BlogService {
 
     private static final Log logger = LogFactory.getLog(BlogService.class);
 
-    private PostFormAdapter postFormAdapter;
-    private PostRepository postRepository;
-    private SearchService searchService;
-    private DateFactory dateFactory;
-    private PostSearchEntryMapper mapper = new PostSearchEntryMapper();
+    private final PostFormAdapter postFormAdapter;
+    private final PostRepository postRepository;
+    private final SearchService searchService;
+    private final DateFactory dateFactory;
+    private final PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
     @Autowired
     public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter, DateFactory dateFactory,
