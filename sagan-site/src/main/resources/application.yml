@@ -108,4 +108,16 @@ spring:
   profiles: default
 cache:
   timetolive: 0
+disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
 
+---
+
+spring:
+  profiles: staging
+disqus_shortname: ${DISQUS_SHORTNAME:spring-io-staging}
+
+---
+
+spring:
+  profiles: production
+disqus_shortname: ${DISQUS_SHORTNAME:spring-io}

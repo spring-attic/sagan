@@ -42,6 +42,7 @@ public class BlogController_ShowTests {
 
         post = PostBuilder.post().publishAt("2012-02-01 11:00").build();
         given(blogService.getPublishedPost("2012/02/01/title")).willReturn(post);
+        given(blogService.getDisqusShortname()).willReturn("spring-io-test");
         viewName = controller.showPost("2012", "02", "01", "title", model);
     }
 
@@ -53,6 +54,11 @@ public class BlogController_ShowTests {
     @Test
     public void providesAllCategoriesInModel() {
         assertThat((PostCategory[]) model.get("categories"), is(PostCategory.values()));
+    }
+
+    @Test
+    public void providesDisqusShortnameInModel() {
+        assertThat((String) model.get("disqusShortname"), equalTo("spring-io-test"));
     }
 
     @Test
