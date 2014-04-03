@@ -8,6 +8,7 @@ import sagan.support.cache.CachedRestClientTests.TestConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,6 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests ensuring that caching functionality works as expected in
  * {@link CachedRestClient}.
  */
+@Ignore // see #342
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = TestConfig.class, initializers = ConfigFileApplicationContextInitializer.class)
