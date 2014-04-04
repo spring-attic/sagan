@@ -8,14 +8,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class AuthorizationTests extends AbstractIntegrationTests {
 
@@ -37,7 +36,8 @@ public class AuthorizationTests extends AbstractIntegrationTests {
 
     @Test
     public void actuatorPathsRestricted() throws Exception {
-        List<String> actuatorPaths = Arrays.asList("/metrics","/beans","/shutdown","/autoconfig","/env","/mappings","/dump","/configprops","/trace");
+        List<String> actuatorPaths = Arrays.asList(
+                "/metrics", "/beans", "/autoconfig", "/env", "/mappings", "/dump", "/configprops", "/trace");
 
         for(String path : actuatorPaths) {
             mockMvc.perform(get(path)).andExpect(status().isUnauthorized());
@@ -46,5 +46,8 @@ public class AuthorizationTests extends AbstractIntegrationTests {
             mockMvc.perform(get(path + ".")).andExpect(status().is4xxClientError());
             mockMvc.perform(get(path + ".json")).andExpect(status().is4xxClientError());
         }
+
+        // endpoints.shutdown.enabled=true must be specified for /shutdown to be enabled. Ensure it hasn't been.
+        mockMvc.perform(post("/shutdown")).andExpect(status().is4xxClientError());
     }
 }
