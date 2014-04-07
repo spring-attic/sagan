@@ -68,6 +68,7 @@ cloudfoundry {
     domain = 'cfapps.io'
     memory = 2048
     healthCheckTimeout = 180
+    buildpack = 'https://github.com/spring-io/java-buildpack'
 }
 
 if (project.name == siteProject.name) {
