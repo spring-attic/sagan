@@ -4,9 +4,6 @@ import sagan.team.MemberProfile;
 import sagan.team.support.SignInService;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.endpoint.mvc.EndpointHandlerMapping;
-import org.springframework.boot.actuate.endpoint.mvc.MvcEndpoint;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,44 +54,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 class SecurityConfig {
 
     static final String SIGNIN_SUCCESS_PATH = "/signin/success";
-
-    @Configuration
-    @Order(Ordered.LOWEST_PRECEDENCE - 110)
-    protected static class FirewallConfig extends WebSecurityConfigurerAdapter {
-        @Autowired(required = false)
-        private EndpointHandlerMapping endpointHandlerMapping;
-
-        private static final String[] NO_PATHS = new String[0];
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            String[] securePaths = getFirewalledPaths(endpointHandlerMapping);
-
-            configureHeaders(http.headers());
-            http
-                .requestMatchers()
-                    .antMatchers(securePaths)
-                    .and()
-                .authorizeRequests()
-                    .anyRequest().denyAll();
-        }
-
-        private static String[] getFirewalledPaths(EndpointHandlerMapping endpointHandlerMapping) {
-            if (endpointHandlerMapping == null) {
-                return NO_PATHS;
-            }
-
-            Set<? extends MvcEndpoint> endpoints = endpointHandlerMapping.getEndpoints();
-            List<String> paths = new ArrayList<String>(endpoints.size() * 2);
-            for (MvcEndpoint endpoint : endpoints) {
-                if (endpoint.isSensitive()) {
-                    paths.add(endpoint.getPath() + "/");
-                    paths.add(endpoint.getPath() + ".*");
-                }
-            }
-            return paths.toArray(new String[paths.size()]);
-        }
-    }
 
     @Configuration
     @Order(Ordered.LOWEST_PRECEDENCE - 100)
