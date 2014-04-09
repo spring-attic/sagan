@@ -7,6 +7,7 @@ import org.springframework.cloud.CloudFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.util.Assert;
 
 import com.googlecode.flyway.core.Flyway;
 
@@ -15,14 +16,15 @@ public abstract class DatabaseConfig {
     public static final String CACHE_NAME = "cache.database";
     public static final String CACHE_TTL = "${cache.database.timetolive:60}";
 
-    protected void configureDataSource(DataSource dataSource) {
-        org.apache.tomcat.jdbc.pool.DataSource pooledDataSource = getPooledDataSource(dataSource);
+    @Bean
+    public abstract DataSource dataSource();
 
-        pooledDataSource.setMaxActive(20);
-        pooledDataSource.setMaxIdle(8);
-        pooledDataSource.setMinIdle(8);
-        pooledDataSource.setTestOnBorrow(false);
-        pooledDataSource.setTestOnReturn(false);
+    protected void configureDataSource(org.apache.tomcat.jdbc.pool.DataSource dataSource) {
+        dataSource.setMaxActive(20);
+        dataSource.setMaxIdle(8);
+        dataSource.setMinIdle(8);
+        dataSource.setTestOnBorrow(false);
+        dataSource.setTestOnReturn(false);
 
         this.migrateSchema(dataSource);
     }
@@ -32,15 +34,6 @@ public abstract class DatabaseConfig {
         flyway.setLocations("database");
         flyway.setDataSource(dataSource);
         flyway.migrate();
-    }
-
-    private org.apache.tomcat.jdbc.pool.DataSource getPooledDataSource(DataSource dataSource) {
-        if (!org.apache.tomcat.jdbc.pool.DataSource.class.isInstance(dataSource)) {
-            throw new IllegalStateException("DataSource must be of type " +
-                    org.apache.tomcat.jdbc.pool.DataSource.class.getName());
-        }
-
-        return (org.apache.tomcat.jdbc.pool.DataSource) dataSource;
     }
 }
 
@@ -70,14 +63,14 @@ class CloudFoundryDatabaseConfig extends DatabaseConfig {
 
     @Bean
     public Cloud cloud() {
-        CloudFactory cloudFactory = new CloudFactory();
-        return cloudFactory.getCloud();
+        return new CloudFactory().getCloud();
     }
 
     @Bean
-    public DataSource dataSource(Cloud cloud) {
-        DataSource dataSource = cloud.getServiceConnector("sagan-db", DataSource.class, null);
-        configureDataSource(dataSource);
+    public DataSource dataSource() {
+        DataSource dataSource = cloud().getServiceConnector("sagan-db", DataSource.class, null);
+        Assert.isInstanceOf(org.apache.tomcat.jdbc.pool.DataSource.class, dataSource);
+        configureDataSource((org.apache.tomcat.jdbc.pool.DataSource) dataSource);
         return dataSource;
     }
 }
