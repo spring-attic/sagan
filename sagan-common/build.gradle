@@ -16,7 +16,8 @@ dependencies {
     compile('io.searchbox:jest:0.0.4') {
         exclude(module: 'commons-logging')
     }
-    compile 'org.cloudfoundry:cloudfoundry-runtime:0.8.4'
+    compile 'org.springframework.cloud:spring-service-connector:0.9.5'
+    compile 'org.springframework.cloud:cloudfoundry-connector:0.9.5'
 
     // datasource and connection pool dependencies
     runtime 'org.postgresql:postgresql:9.2-1002-jdbc4'

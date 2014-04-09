@@ -2,12 +2,12 @@ package sagan;
 
 import javax.sql.DataSource;
 
-import org.cloudfoundry.runtime.env.CloudEnvironment;
-import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
-
+import org.springframework.cloud.Cloud;
+import org.springframework.cloud.CloudFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.util.Assert;
 
 import com.googlecode.flyway.core.Flyway;
 
@@ -17,23 +17,17 @@ public abstract class DatabaseConfig {
     public static final String CACHE_TTL = "${cache.database.timetolive:60}";
 
     @Bean
-    public DataSource dataSource() {
-        org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
+    public abstract DataSource dataSource();
 
+    protected void configureDataSource(org.apache.tomcat.jdbc.pool.DataSource dataSource) {
         dataSource.setMaxActive(20);
         dataSource.setMaxIdle(8);
         dataSource.setMinIdle(8);
         dataSource.setTestOnBorrow(false);
         dataSource.setTestOnReturn(false);
-        dataSource.setValidationQuery("SELECT 1");
 
-        this.configureDataSource(dataSource);
         this.migrateSchema(dataSource);
-
-        return dataSource;
     }
-
-    protected abstract void configureDataSource(org.apache.tomcat.jdbc.pool.DataSource dataSource);
 
     protected void migrateSchema(DataSource dataSource) {
         Flyway flyway = new Flyway();
@@ -47,12 +41,19 @@ public abstract class DatabaseConfig {
 @Profile(SaganProfiles.STANDALONE)
 class StandaloneDatabaseConfig extends DatabaseConfig {
 
-    @Override
-    public void configureDataSource(org.apache.tomcat.jdbc.pool.DataSource dataSource) {
+    @Bean
+    public DataSource dataSource() {
+        org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
+
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setUrl("jdbc:h2:mem:sagan;MODE=PostgreSQL");
         dataSource.setUsername("sa");
         dataSource.setPassword("");
+        dataSource.setValidationQuery("SELECT 1");
+
+        configureDataSource(dataSource);
+
+        return dataSource;
     }
 }
 
@@ -60,17 +61,16 @@ class StandaloneDatabaseConfig extends DatabaseConfig {
 @Profile(SaganProfiles.CLOUDFOUNDRY)
 class CloudFoundryDatabaseConfig extends DatabaseConfig {
 
-    @Override
-    public void configureDataSource(org.apache.tomcat.jdbc.pool.DataSource dataSource) {
-        CloudEnvironment cloudEnvironment = new CloudEnvironment();
-        if (cloudEnvironment.getServiceDataByName("sagan-db") == null) {
-            throw new IllegalStateException("Could not locate CloudFoundry service 'sagan-db'");
-        }
+    @Bean
+    public Cloud cloud() {
+        return new CloudFactory().getCloud();
+    }
 
-        RdbmsServiceInfo serviceInfo = cloudEnvironment.getServiceInfo("sagan-db", RdbmsServiceInfo.class);
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl(serviceInfo.getUrl());
-        dataSource.setUsername(serviceInfo.getUserName());
-        dataSource.setPassword(serviceInfo.getPassword());
+    @Bean
+    public DataSource dataSource() {
+        DataSource dataSource = cloud().getServiceConnector("sagan-db", DataSource.class, null);
+        Assert.isInstanceOf(org.apache.tomcat.jdbc.pool.DataSource.class, dataSource);
+        configureDataSource((org.apache.tomcat.jdbc.pool.DataSource) dataSource);
+        return dataSource;
     }
 }
