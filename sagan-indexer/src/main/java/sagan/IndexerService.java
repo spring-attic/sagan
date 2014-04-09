@@ -26,21 +26,18 @@ class IndexerService {
     public <T> void index(final Indexer<T> indexer) {
         logger.debug("Indexing " + indexer.counterName());
         for (final T indexable : indexer.indexableItems()) {
-            executorService.submit(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        indexer.indexItem(indexable);
-                        countersService.increment("search.indexes." + indexer.counterName() + ".processed");
-                    } catch (Exception e) {
-                        String message =
-                                String.format("Unable to index an entry of '%s' with id: '%s' -> (%s, %s)", indexer
-                                        .counterName(), indexer.getId(indexable), e.getClass().getName(), e
-                                        .getMessage());
+            executorService.submit(() -> {
+                try {
+                    indexer.indexItem(indexable);
+                    countersService.increment("search.indexes." + indexer.counterName() + ".processed");
+                } catch (Exception e) {
+                    String message =
+                            String.format("Unable to index an entry of '%s' with id: '%s' -> (%s, %s)", indexer
+                                    .counterName(), indexer.getId(indexable), e.getClass().getName(), e
+                                    .getMessage());
 
-                        logger.warn(message);
-                        countersService.increment("search.indexes." + indexer.counterName() + ".errors.count");
-                    }
+                    logger.warn(message);
+                    countersService.increment("search.indexes." + indexer.counterName() + ".errors.count");
                 }
             });
         }
