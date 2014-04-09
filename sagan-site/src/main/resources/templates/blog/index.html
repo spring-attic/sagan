@@ -25,7 +25,7 @@
                     <div class="blog-preview--wrapper">
                         <div class="blog--container blog-preview" th:each="post : ${posts}">
                             <div class="blog--title">
-                                <a th:href="@{${post.path} + '#disqus_thread'}" th:attr="data-disqus-identifier='article_' + ${post.id} + '_identifier'" th:text="${post.title}">
+                                <a th:href="@{${post.path}}" th:attr="data-disqus-identifier='article_' + ${post.id} + '_identifier'" th:text="${post.title}">
                                     This week in Spring
                                 </a>
                             </div>
