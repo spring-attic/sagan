@@ -104,12 +104,9 @@ public class AuthenticationTests extends AbstractIntegrationTests {
 
         mockMvc.perform(get("/signout"))
                 .andExpect(status().isFound())
-                .andExpect(new ResultMatcher() {
-                    @Override
-                    public void match(MvcResult result) {
-                        String redirectedUrl = result.getResponse().getRedirectedUrl();
-                        assertThat(redirectedUrl, equalTo("/"));
-                    }
+                .andExpect(result -> {
+                    String redirectedUrl = result.getResponse().getRedirectedUrl();
+                    assertThat(redirectedUrl, equalTo("/"));
                 });
     }
 }

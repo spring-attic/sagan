@@ -3,8 +3,6 @@ package sagan.team.support;
 import sagan.DatabaseConfig;
 import saganx.AbstractIntegrationTests;
 
-import java.lang.reflect.Method;
-
 import org.junit.Test;
 
 import org.springframework.aop.Advisor;
@@ -45,22 +43,17 @@ public class TeamServiceCachingTests extends AbstractIntegrationTests {
             }
         }
         assertTrue("TeamService is advised, but does not have caching advisor", hasCachingAdvisor);
-        // @formatter:off
-        ReflectionUtils.doWithMethods(TeamService.class, new ReflectionUtils.MethodCallback() { // TODO: lambda
-            @Override
-            public void doWith(Method method) throws IllegalArgumentException, IllegalAccessException {
-                Cacheable cacheable = AnnotationUtils.findAnnotation(method, Cacheable.class);
-                String methodName = method.getName();
-                if (methodName.equals("fetchMemberProfileUsername") || methodName.equals("fetchActiveMembers")) {
-                    assertNotNull("Method " + methodName + " was expected to have Cacheable annotation.", cacheable);
-                    String[] cacheName = cacheable.value();
-                    assertThat(cacheName[0], equalTo(DatabaseConfig.CACHE_NAME));
-                } else {
-                    assertNull("Method " + methodName + " was not expected to have Cacheable annotation.", cacheable);
-                }
+        ReflectionUtils.doWithMethods(TeamService.class, method -> {
+            Cacheable cacheable = AnnotationUtils.findAnnotation(method, Cacheable.class);
+            String methodName = method.getName();
+            if (methodName.equals("fetchMemberProfileUsername") || methodName.equals("fetchActiveMembers")) {
+                assertNotNull("Method " + methodName + " was expected to have Cacheable annotation.", cacheable);
+                String[] cacheName = cacheable.value();
+                assertThat(cacheName[0], equalTo(DatabaseConfig.CACHE_NAME));
+            } else {
+                assertNull("Method " + methodName + " was not expected to have Cacheable annotation.", cacheable);
             }
         });
-        // @formatter:on
     }
 
 }

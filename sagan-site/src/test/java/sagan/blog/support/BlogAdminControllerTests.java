@@ -59,12 +59,7 @@ public class BlogAdminControllerTests {
     public void setup() {
         bindingResult = new MapBindingResult(new HashMap<>(), "postForm");
         postViewFactory = new PostViewFactory(new DateFactory());
-        principal = new Principal() {
-            @Override
-            public String getName() {
-                return "12345";
-            }
-        };
+        principal = () -> "12345";
 
         controller = new BlogAdminController(blogService, postViewFactory, teamRepository);
     }

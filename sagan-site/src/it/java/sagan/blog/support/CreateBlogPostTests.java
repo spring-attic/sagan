@@ -51,12 +51,7 @@ public class CreateBlogPostTests extends AbstractIntegrationTests {
 
         final Long profileId = profile.getId();
 
-        principal = new Principal() {
-            @Override
-            public String getName() {
-                return profileId.toString();
-            }
-        };
+        principal = profileId::toString;
         mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .addFilters(springSecurityFilterChain)
                 .defaultRequest(get("/").with(csrf()).with(user(profileId).roles("USER"))).build();
@@ -87,13 +82,10 @@ public class CreateBlogPostTests extends AbstractIntegrationTests {
 
         mockMvc.perform(createPostRequest)
                 .andExpect(status().isFound())
-                .andExpect(new ResultMatcher() {
-                    @Override
-                    public void match(MvcResult result) {
-                        String redirectedUrl = result.getResponse().getRedirectedUrl();
-                        assertTrue("Expected redirect to /blog/2013/07/01/post-title, got: " + redirectedUrl,
-                                redirectedUrl.matches("^/blog/2013/07/01/post-title"));
-                    }
+                .andExpect(result -> {
+                    String redirectedUrl = result.getResponse().getRedirectedUrl();
+                    assertTrue("Expected redirect to /blog/2013/07/01/post-title, got: " + redirectedUrl,
+                            redirectedUrl.matches("^/blog/2013/07/01/post-title"));
                 });
     }
 

@@ -65,12 +65,9 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
 
         mockMvc.perform(editPostRequest)
                 .andExpect(status().isFound())
-                .andExpect(new ResultMatcher() {
-                    @Override
-                    public void match(MvcResult result) {
-                        String redirectedUrl = result.getResponse().getRedirectedUrl();
-                        assertThat(redirectedUrl, startsWith("/blog/" + post.getPublicSlug()));
-                    }
+                .andExpect(result -> {
+                    String redirectedUrl = result.getResponse().getRedirectedUrl();
+                    assertThat(redirectedUrl, startsWith("/blog/" + post.getPublicSlug()));
                 });
     }
 
