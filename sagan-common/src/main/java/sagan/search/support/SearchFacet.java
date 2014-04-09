@@ -11,7 +11,7 @@ class SearchFacet {
     private List<SearchFacet> headerFacets = new ArrayList<>();
 
     public SearchFacet(String path, String name, int count) {
-        this(path, name, count, new ArrayList<SearchFacet>());
+        this(path, name, count, new ArrayList<>());
     }
 
     public SearchFacet(String path, String name, int count, List<SearchFacet> facets) {
