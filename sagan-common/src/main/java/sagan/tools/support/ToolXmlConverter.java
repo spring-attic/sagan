@@ -14,9 +14,7 @@ class ToolXmlConverter {
                 continue;
             }
             state.setWhatsNew(release.getWhatsnew());
-            for (Download download : release.getDownloads()) {
-                state.addDownload(download);
-            }
+            release.getDownloads().forEach(state::addDownload);
         }
 
         return state.build();

@@ -4,8 +4,8 @@ import sagan.projects.Project;
 import sagan.projects.support.ProjectMetadataService;
 import sagan.support.nav.NavSection;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,12 +35,8 @@ class DocsController {
     }
 
     private List<Project> nonAggregatorsForCategory(String category) {
-        List<Project> nonAggregators = new ArrayList<>();
-        for (Project project : service.getProjectsForCategory(category)) {
-            if (!project.isAggregator()) {
-                nonAggregators.add(project);
-            }
-        }
-        return nonAggregators;
+        return service.getProjectsForCategory(category).stream()
+                .filter(project -> !project.isAggregator())
+                .collect(Collectors.toList());
     }
 }
