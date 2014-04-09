@@ -1,4 +1,4 @@
-def vJavaLang = '1.7'
+def vJavaLang = '1.8'
 def javaProjects = [ project(':sagan-site'), project(':sagan-indexer'), project(':sagan-common') ]
 def bootProjects = javaProjects - project(':sagan-common')
 def gradleDir = "${rootProject.rootDir}/gradle"
