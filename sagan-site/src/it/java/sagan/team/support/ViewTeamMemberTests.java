@@ -8,7 +8,6 @@ import sagan.team.MemberProfileBuilder;
 import saganx.AbstractIntegrationTests;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -23,6 +22,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
@@ -129,10 +129,8 @@ public class ViewTeamMemberTests extends AbstractIntegrationTests {
         MvcResult response = mockMvc.perform(get("/team/active_author")).andExpect(status().isOk()).andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
-        List<String> titles = new ArrayList<>();
-        for (Element elt : html.select(".member-post--title")) {
-            titles.add(elt.text());
-        }
+        List<String> titles = html.select(".member-post--title").stream()
+                .map(Element::text).collect(toList());
         assertThat(titles, contains("Back to Work", "Off to the Sales", "Happy New Year"));
     }
 
