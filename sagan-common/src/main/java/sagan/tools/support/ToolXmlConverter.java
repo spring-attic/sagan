@@ -11,9 +11,9 @@ class ToolXmlConverter {
 
         for (Release release : toolSuiteXml.getReleases()) {
             if (!release.getName().startsWith(toolSuiteName)) {
-	            continue;
+                continue;
             }
-			state.setWhatsNew(release.getWhatsnew());
+            state.setWhatsNew(release.getWhatsnew());
             for (Download download : release.getDownloads()) {
                 state.addDownload(download);
             }
