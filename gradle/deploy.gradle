@@ -10,15 +10,16 @@ def final STAGING_SPACE = 'staging'
 def siteProject = project(':sagan-site')
 def indexerProject = project(':sagan-indexer')
 
+// Gather information about the build environment. Is it a Travis CI build?
+def travisBranch = System.getenv().get("TRAVIS_BRANCH")
+def hasSecureEnv = Boolean.valueOf(System.getenv().get("TRAVIS_SECURE_ENV_VARS"))
+def isPullRequest = Boolean.valueOf(System.getenv().get("TRAVIS_PULL_REQUEST"))
+def isTravisBuild = travisBranch != null
+def isDeployableTravisBuild = isTravisBuild && (!isPullRequest || hasSecureEnv)
+
 task deploy(dependsOn: [ build, rootProject.gitMetadata ]) {
     description = 'Deploys the project to a Cloud Foundry space (specified with -Pspace=<targetspace>)'
     mustRunAfter checkTasks
-
-    // Gather information about the build environment. Is it a Travis CI build?
-    def travisBranch = System.getenv().get("TRAVIS_BRANCH")
-    def hasSecureEnv = Boolean.valueOf(System.getenv().get("TRAVIS_SECURE_ENV_VARS"))
-    def isPullRequest = Boolean.valueOf(System.getenv().get("TRAVIS_PULL_REQUEST"))
-    def isTravisBuild = travisBranch != null
 
     // User may specify an explicit target space any time, e.g. ./gradlew deploy -Pspace=production
     // Otherwise, target space will be determined by branch name (assuming we are in a Travis CI build).
@@ -35,7 +36,7 @@ task deploy(dependsOn: [ build, rootProject.gitMetadata ]) {
     // Always proceed with deployment if it is a local build. If we're on Travis CI, only
     // deploy if the secure environment vars are available (i.e. this is not a pull request
     // from a fork) and we're on a branch intended for production deployment.
-    if (!isTravisBuild || (isTravisBuild && !isPullRequest && hasSecureEnv && project.hasProperty(TARGET_SPACE))) {
+    if (!isTravisBuild || (isDeployableTravisBuild && project.hasProperty(TARGET_SPACE))) {
         dependsOn 'cf-login'
 
         // the site gets blue-green deployment
@@ -48,6 +49,9 @@ task deploy(dependsOn: [ build, rootProject.gitMetadata ]) {
 
         else
             throw new IllegalArgumentException('Unknown project ${project.name}')
+    }
+    else {
+        onlyIf { false }
     }
 }
 
@@ -94,58 +98,66 @@ def reqDeployVars = [
 ]
 
 gradle.taskGraph.whenReady {
-    if (gradle.taskGraph.hasTask(":${siteProject.name}:cf-login")
-          || gradle.taskGraph.hasTask(":${indexerProject.name}:cf-login")) {
-        def missingVars = []
-        // user and pass are provided in Travis CI via environment variables, where '.' breaks things
-        // the cf-gradle-plugin's cf-login task, however, expects the 'cf.' naming, thus the mapping here.
-        if (project.hasProperty('cfUsername')) {
-            project.ext.setProperty('cf.username', project.getProperty('cfUsername'))
-        } else {
-            missingVars << 'cfUsername'
-        }
-        if (project.hasProperty('cfPassword')) {
-            project.ext.setProperty('cf.password', project.getProperty('cfPassword'))
-        } else {
-            missingVars << 'cfPassword'
-        }
-        if (missingVars.size() > 0) {
-            throw new InvalidUserDataException(
-                "Missing required variable(s) for the 'cf-login' task: ${missingVars}. " +
-                "Specify them with -Pkey=value or in ${saganEnvScript}");
-        }
+    if (isTravisBuild && !isDeployableTravisBuild) {
+        // Skip deployment altogether when building pull requests from forks under Travis CI
+        project.tasks.findByPath("deploy").onlyIf { false }
     }
-
-    if (gradle.taskGraph.hasTask(":${siteProject.name}:${deploy.name}")
-          || gradle.taskGraph.hasTask(":${indexerProject.name}:${deploy.name}")) {
-        def missingVars = []
-        reqDeployVars.each { var ->
-            if (!project.hasProperty(var)) {
-                missingVars << var
+    else {
+        // We should have everything we need in order to deploy. Check for required credentials
+        // and populate cloudfoundry environment variables.
+        if (gradle.taskGraph.hasTask(":${siteProject.name}:cf-login")
+                || gradle.taskGraph.hasTask(":${indexerProject.name}:cf-login")) {
+            def missingVars = []
+            // user and pass are provided in Travis CI via environment variables, where '.' breaks things
+            // the cf-gradle-plugin's cf-login task, however, expects the 'cf.' naming, thus the mapping here.
+            if (project.hasProperty('cfUsername')) {
+                project.ext.setProperty('cf.username', project.getProperty('cfUsername'))
+            } else {
+                missingVars << 'cfUsername'
+            }
+            if (project.hasProperty('cfPassword')) {
+                project.ext.setProperty('cf.password', project.getProperty('cfPassword'))
+            } else {
+                missingVars << 'cfPassword'
+            }
+            if (missingVars.size() > 0) {
+                throw new InvalidUserDataException(
+                        "Missing required variable(s) for the 'cf-login' task: ${missingVars}. " +
+                                "Specify them with -Pkey=value or in ${saganEnvScript}");
             }
         }
-        if (missingVars.size() > 0) {
-            throw new InvalidUserDataException(
-                "Missing required variable(s) for the 'deploy' task: ${missingVars}. " +
-                "Specify them with -Pkey=value or in ${saganEnvScript}");
-        }
 
-        // All required env vars are present. Populate the cloudfoundry environment with them.
-        cloudfoundry {
-            env << [
-                ADMIN_PASSWORD: adminPassword,
-                ELASTICSEARCH_ENDPOINT: elasticsearchEndpoint,
-            ]
-        }
+        if (gradle.taskGraph.hasTask(":${siteProject.name}:${deploy.name}")
+                || gradle.taskGraph.hasTask(":${indexerProject.name}:${deploy.name}")) {
+            def missingVars = []
+            reqDeployVars.each { var ->
+                if (!project.hasProperty(var)) {
+                    missingVars << var
+                }
+            }
+            if (missingVars.size() > 0) {
+                throw new InvalidUserDataException(
+                        "Missing required variable(s) for the 'deploy' task: ${missingVars}. " +
+                                "Specify them with -Pkey=value or in ${saganEnvScript}");
+            }
 
-        if (project.name == siteProject.name) {
+            // All required env vars are present. Populate the cloudfoundry environment with them.
             cloudfoundry {
                 env << [
-                    GITHUB_CLIENT_ID: githubClientId,
-                    GITHUB_CLIENT_SECRET: githubClientSecret,
-                    GITHUB_ACCESS_TOKEN: githubAccessToken,
-                    WEBHOOK_ACCESS_TOKEN: webhookAccessToken
+                        ADMIN_PASSWORD: adminPassword,
+                        ELASTICSEARCH_ENDPOINT: elasticsearchEndpoint,
                 ]
+            }
+
+            if (project.name == siteProject.name) {
+                cloudfoundry {
+                    env << [
+                            GITHUB_CLIENT_ID: githubClientId,
+                            GITHUB_CLIENT_SECRET: githubClientSecret,
+                            GITHUB_ACCESS_TOKEN: githubAccessToken,
+                            WEBHOOK_ACCESS_TOKEN: webhookAccessToken
+                    ]
+                }
             }
         }
     }
