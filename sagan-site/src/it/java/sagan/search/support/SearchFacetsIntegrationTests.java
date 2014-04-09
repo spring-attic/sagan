@@ -256,7 +256,7 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(blog);
         searchService.saveToIndex(gettingStarted);
 
-        SearchResults searchResults = searchService.search("title", pageable, new ArrayList<String>());
+        SearchResults searchResults = searchService.search("title", pageable, new ArrayList<>());
 
         List<SearchResult> results = searchResults.getPage().getContent();
         assertThat(results.size(), equalTo(2));

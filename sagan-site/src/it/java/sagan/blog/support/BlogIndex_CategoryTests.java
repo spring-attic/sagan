@@ -32,7 +32,7 @@ public class BlogIndex_CategoryTests extends AbstractIntegrationTests {
 
     private void createManyPostsInNovember(int numPostsToCreate) {
         Calendar calendar = Calendar.getInstance();
-        List<Post> posts = new ArrayList<Post>();
+        List<Post> posts = new ArrayList<>();
         for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
             calendar.set(2012, 10, postNumber);
             Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2012")

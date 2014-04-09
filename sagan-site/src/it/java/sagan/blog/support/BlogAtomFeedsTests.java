@@ -125,7 +125,7 @@ public class BlogAtomFeedsTests extends AbstractIntegrationTests {
 
     private void createPosts(int numPostsToCreate) {
         Calendar calendar = Calendar.getInstance();
-        List<Post> posts = new ArrayList<Post>();
+        List<Post> posts = new ArrayList<>();
         for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
             calendar.set(2013, 10, postNumber);
             Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2013")

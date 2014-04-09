@@ -138,7 +138,7 @@ public final class SecurityRequestPostProcessors {
 
         private Object credentials;
 
-        private List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        private List<GrantedAuthority> authorities = new ArrayList<>();
 
         private UserRequestPostProcessor(Object username) {
             Assert.notNull(username, "username cannot be null");
@@ -166,7 +166,7 @@ public final class SecurityRequestPostProcessors {
          * @see #rolePrefix(String)
          */
         public UserRequestPostProcessor roles(String... roles) {
-            List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(roles.length);
+            List<GrantedAuthority> authorities = new ArrayList<>(roles.length);
             for (String role : roles) {
                 if (rolePrefix == null || role.startsWith(rolePrefix)) {
                     authorities.add(new SimpleGrantedAuthority(role));

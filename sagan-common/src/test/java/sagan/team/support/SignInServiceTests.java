@@ -83,6 +83,6 @@ public class SignInServiceTests {
                 }), anyString(), anyString()));
 
         HttpStatus statusCode = isMember ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
-        expectedResult.willReturn(new ResponseEntity<Void>(statusCode));
+        expectedResult.willReturn(new ResponseEntity<>(statusCode));
     }
 }
