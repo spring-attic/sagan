@@ -25,7 +25,7 @@ public final class SaganProfiles {
     /**
      * When active, indicates that the application is being deployed to the "production"
      * space of a Cloud Foundry instance. Implicitly activates {@link #CLOUDFOUNDRY}
-     * profile, and is mutually exclusive with {@link #STAGING} and {@link #PRODUCTION}
+     * profile, and is mutually exclusive with {@link #STAGING} and {@link #STANDALONE}
      * profiles.
      */
     public static final String PRODUCTION = "production";
