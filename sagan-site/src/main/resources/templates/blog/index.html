@@ -25,7 +25,7 @@
                     <div class="blog-preview--wrapper">
                         <div class="blog--container blog-preview" th:each="post : ${posts}">
                             <div class="blog--title">
-                                <a th:href="@{${post.path}}" th:attr="data-disqus-identifier='article_' + ${post.id} + '_identifier'" th:text="${post.title}">
+                                <a th:href="@{${post.path}}" th:text="${post.title}">
                                     This week in Spring
                                 </a>
                             </div>
@@ -43,6 +43,12 @@
                                     <div class="meta-data--icon icon blog-icon calendar"></div>
                                     <span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
                                 </div>
+                              <div class="meta-data--item">
+                                <!-- TODO: define 'comments' class -->
+                                <!-- TODO: create 'comment-icon', add to sprite -->
+                                <div class="meta-data--icon icon comment-icon comments"></div>
+                                <a class='comments' th:attr="data-disqus-identifier=${post.id}" th:href="@{${post.path} + '#disqus_thread'}"/>
+                              </div>
                             </div>
                             <div class='blog--post desktop-only'>
                                 <div th:utext="${post.renderedSummary}">
