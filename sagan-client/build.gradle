@@ -1,4 +1,5 @@
 import org.gradle.api.tasks.Exec
+import org.apache.tools.ant.taskdefs.condition.Os
 
 apply plugin: 'java'
 
@@ -21,7 +22,11 @@ task npmInstall(type:Exec) {
     logging.captureStandardError LogLevel.LIFECYCLE
     inputs.files "package.json", "bower.json"
     outputs.dir "node_modules"
-    commandLine 'npm', 'install'
+    if(Os.isFamily(Os.FAMILY_WINDOWS)) {
+        commandLine 'cmd', '/c', 'npm', 'install'
+    } else {
+        commandLine 'npm', 'install'
+    }
 }
 
 task npmBuild(dependsOn: npmInstall, type:Exec) {
@@ -30,7 +35,11 @@ task npmBuild(dependsOn: npmInstall, type:Exec) {
     inputs.dir "src"
     inputs.file "gulpfile.js"
     outputs.dir "dist"
-    commandLine 'npm', 'run', 'build'
+    if(Os.isFamily(Os.FAMILY_WINDOWS)) {
+        commandLine 'cmd', '/c', 'npm', 'run', 'build'
+    } else {
+        commandLine 'npm', 'run', 'build'
+    }
 }
 
 jar.dependsOn npmBuild
