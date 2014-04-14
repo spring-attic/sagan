@@ -51,4 +51,12 @@
 .content--container .listingblock .copy-button {
     position: absolute;
     right: 0;
+    display:none;
+}
+
+.content--container .has-copy-button:hover .copy-button,
+.content--container .listingblock:hover .copy-button,
+.content--container .has-copy-button .zeroclipboard-is-hover,
+.content--container .listingblock .zeroclipboard-is-hover {
+    display:block;
 }
