@@ -23,9 +23,9 @@ public class ToolXmlConverter_TwoDifferentPlatformsTests {
     @Before
     public void setUp() throws Exception {
         ToolSuiteXml toolSuiteXml = new ToolSuiteXml();
-        List<Release> releases = new ArrayList<Release>();
+        List<Release> releases = new ArrayList<>();
         Release release = new Release();
-        List<Download> downloads = new ArrayList<Download>();
+        List<Download> downloads = new ArrayList<>();
 
         Download download = new Download();
         download.setDescription("Mac OS X (Cocoa)");

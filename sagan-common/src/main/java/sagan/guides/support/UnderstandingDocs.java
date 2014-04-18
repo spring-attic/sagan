@@ -7,6 +7,7 @@ import sagan.support.github.RepoContent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,14 +49,10 @@ class UnderstandingDocs implements DocRepository<UnderstandingDoc>, ContentProvi
      */
     @Override
     public List<UnderstandingDoc> findAll() {
-        List<RepoContent> repoContents = org.getRepoContents("understanding");
-        List<UnderstandingDoc> understandingDocs = new ArrayList<>();
-        for (RepoContent repoContent : repoContents) {
-            if (repoContent.isDirectory()) {
-                understandingDocs.add(new UnderstandingDoc(repoContent.getName(), this));
-            }
-        }
-        return understandingDocs;
+        return org.getRepoContents("understanding").stream()
+                .filter(RepoContent::isDirectory)
+                .map(repoContent -> new UnderstandingDoc(repoContent.getName(), this))
+                .collect(Collectors.toList());
     }
 
     @Override

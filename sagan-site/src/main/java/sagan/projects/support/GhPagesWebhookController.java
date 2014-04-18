@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static java.lang.String.format;
@@ -99,24 +100,9 @@ class GhPagesWebhookController {
         Map<String, Object> root = new HashMap<>();
         root.put("push", push);
         root.put("commits", commits);
-        for (Project project : service.getProjects()) {
-            if (hasGhPagesBranch(project)) {
-                root.put("project", project);
-                Map<String, String> newIssue = new HashMap<>();
-                newIssue.put("title", "Please merge the latest changes to common gh-pages");
-                newIssue.put("body", spel.getValue(root, String.class));
-                String projectIssuesUrl =
-                        format("%s/repos/spring-projects/%s/issues", GitHubClient.API_URL_BASE, project.getId());
-                try {
-                    URI newIssueUrl =
-                            gitHub.restOperations().postForLocation(projectIssuesUrl,
-                                    jsonMapper.writeValueAsString(newIssue));
-                    logger.info("Notification of new gh-pages changes created at " + newIssueUrl);
-                } catch (RuntimeException ex) {
-                    logger.warn("Unable to POST new issue to " + projectIssuesUrl);
-                }
-            }
-        }
+        service.getProjects().stream()
+                .filter(project -> hasGhPagesBranch(project))
+                .forEach(project -> createGitHubIssue(project, jsonMapper, root, spel));
         headers.set("Status", "200 OK");
         return new HttpEntity<>("{ \"message\": \"Successfully processed update\" }\n", headers);
     }
@@ -134,4 +120,22 @@ class GhPagesWebhookController {
         }
         return false;
     }
+
+    private void createGitHubIssue(Project project, ObjectMapper jsonMapper, Map<String, Object> root, Expression spel) {
+        root.put("project", project);
+        Map<String, String> newIssue = new HashMap<>();
+        newIssue.put("title", "Please merge the latest changes to common gh-pages");
+        newIssue.put("body", spel.getValue(root, String.class));
+        String projectIssuesUrl =
+                format("%s/repos/spring-projects/%s/issues", GitHubClient.API_URL_BASE, project.getId());
+        try {
+            URI newIssueUrl =
+                    gitHub.restOperations().postForLocation(projectIssuesUrl,
+                            jsonMapper.writeValueAsString(newIssue));
+            logger.info("Notification of new gh-pages changes created at " + newIssueUrl);
+        } catch (RuntimeException | JsonProcessingException ex) {
+            logger.warn("Unable to POST new issue to " + projectIssuesUrl);
+        }
+    }
+
 }

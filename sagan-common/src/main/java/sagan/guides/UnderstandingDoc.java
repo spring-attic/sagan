@@ -10,12 +10,9 @@ public class UnderstandingDoc extends AbstractDocument {
     }
 
     public UnderstandingDoc(String subject, final String content, final String sidebar) {
-        super(new ContentProvider<UnderstandingDoc>() {
-            @Override
-            public void populate(UnderstandingDoc doc) {
-                doc.setContent(content);
-                doc.setSidebar(sidebar);
-            }
+        super((ContentProvider<UnderstandingDoc>) (doc) -> {
+            doc.setContent(content);
+            doc.setSidebar(sidebar);
         });
         this.subject = subject;
     }

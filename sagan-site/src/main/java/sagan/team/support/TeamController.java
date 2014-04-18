@@ -11,6 +11,7 @@ import sagan.team.TeamLocation;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,16 +41,13 @@ class TeamController {
     }
 
     @RequestMapping(value = "", method = { GET, HEAD })
-    public String showTeam(Model model) throws IOException {
+    public String showTeam(Model model) {
         List<MemberProfile> profiles = teamService.fetchActiveMembers();
         model.addAttribute("profiles", profiles);
-        List<TeamLocation> teamLocations = new ArrayList<>();
-        for (MemberProfile profile : profiles) {
-            if (profile.getTeamLocation() != null) {
-                teamLocations.add(profile.getTeamLocation());
-            }
-        }
-        model.addAttribute("teamLocations", teamLocations);
+        model.addAttribute("teamLocations", profiles.stream()
+                .filter(profile -> profile.getTeamLocation() != null)
+                .map(MemberProfile::getTeamLocation)
+                .collect(Collectors.toList()));
         return "team/index";
     }
 

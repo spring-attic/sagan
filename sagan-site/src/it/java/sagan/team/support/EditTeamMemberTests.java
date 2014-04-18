@@ -50,12 +50,7 @@ public class EditTeamMemberTests extends AbstractIntegrationTests {
 
         final MemberProfile memberProfile = teamRepository.save(existingProfile);
 
-        principal = new Principal() {
-            @Override
-            public String getName() {
-                return memberProfile.getId().toString();
-            }
-        };
+        principal = () -> memberProfile.getId().toString();
         mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .addFilters(springSecurityFilterChain)
                 .defaultRequest(get("/").with(csrf()).with(user(memberProfile.getId()).roles("USER"))).build();
@@ -132,12 +127,9 @@ public class EditTeamMemberTests extends AbstractIntegrationTests {
     private void performRequestAndExpectRedirect(MockHttpServletRequestBuilder requestBuilder,
                                                  final String expectedRedirectUrl) throws Exception {
         mockMvc.perform(requestBuilder)
-                .andExpect(new ResultMatcher() {
-                    @Override
-                    public void match(MvcResult result) {
-                        String redirectedUrl = result.getResponse().getRedirectedUrl();
-                        MatcherAssert.assertThat(redirectedUrl, startsWith(expectedRedirectUrl));
-                    }
+                .andExpect(result -> {
+                    String redirectedUrl = result.getResponse().getRedirectedUrl();
+                    MatcherAssert.assertThat(redirectedUrl, startsWith(expectedRedirectUrl));
                 });
     }
 

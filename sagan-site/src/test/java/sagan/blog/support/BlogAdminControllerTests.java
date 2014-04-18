@@ -59,12 +59,7 @@ public class BlogAdminControllerTests {
     public void setup() {
         bindingResult = new MapBindingResult(new HashMap<>(), "postForm");
         postViewFactory = new PostViewFactory(new DateFactory());
-        principal = new Principal() {
-            @Override
-            public String getName() {
-                return "12345";
-            }
-        };
+        principal = () -> "12345";
 
         controller = new BlogAdminController(blogService, postViewFactory, teamRepository);
     }
@@ -74,17 +69,17 @@ public class BlogAdminControllerTests {
         postViewFactory = mock(PostViewFactory.class);
         controller = new BlogAdminController(blogService, postViewFactory, teamRepository);
 
-        Page<Post> drafts = new PageImpl<>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
-        Page<Post> published = new PageImpl<>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
-        Page<Post> scheduled = new PageImpl<>(new ArrayList<Post>(), PageableFactory.forDashboard(), 1);
+        Page<Post> drafts = new PageImpl<>(new ArrayList<>(), PageableFactory.forDashboard(), 1);
+        Page<Post> published = new PageImpl<>(new ArrayList<>(), PageableFactory.forDashboard(), 1);
+        Page<Post> scheduled = new PageImpl<>(new ArrayList<>(), PageableFactory.forDashboard(), 1);
 
         given(blogService.getPublishedPosts((PageRequest) anyObject())).willReturn(published);
         given(blogService.getDraftPosts((PageRequest) anyObject())).willReturn(drafts);
         given(blogService.getScheduledPosts((PageRequest) anyObject())).willReturn(scheduled);
 
-        Page<PostView> draftViews = new PageImpl<>(new ArrayList<PostView>());
-        Page<PostView> publishedViews = new PageImpl<>(new ArrayList<PostView>());
-        Page<PostView> scheduledViews = new PageImpl<>(new ArrayList<PostView>());
+        Page<PostView> draftViews = new PageImpl<>(new ArrayList<>());
+        Page<PostView> publishedViews = new PageImpl<>(new ArrayList<>());
+        Page<PostView> scheduledViews = new PageImpl<>(new ArrayList<>());
 
         given(postViewFactory.createPostViewPage(same(drafts))).willReturn(draftViews);
         given(postViewFactory.createPostViewPage(same(published))).willReturn(publishedViews);

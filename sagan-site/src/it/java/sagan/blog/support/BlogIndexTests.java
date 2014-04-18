@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,6 +18,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 
+import static java.util.stream.Collectors.toList;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
@@ -140,10 +142,8 @@ public class BlogIndexTests extends AbstractIntegrationTests {
                 .andReturn();
 
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
-        List<String> titles = new ArrayList<>();
-        for (Element elt : html.select(".blog--title")) {
-            titles.add(elt.text());
-        }
+        List<String> titles = html.select(".blog--title").stream()
+                .map(Element::text).collect(toList());
         assertThat(titles, contains("Back to Work", "Off to the Sales", "Happy New Year"));
     }
 

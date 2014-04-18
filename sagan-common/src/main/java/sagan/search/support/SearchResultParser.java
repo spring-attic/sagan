@@ -55,13 +55,10 @@ class SearchResultParser {
 
     private List<JsonElement> sortedTermElements(JsonArray termArray) {
         ArrayList<JsonElement> list = Lists.newArrayList(termArray);
-        Collections.sort(list, new Comparator<JsonElement>() {
-            @Override
-            public int compare(JsonElement o1, JsonElement o2) {
-                String term1 = o1.getAsJsonObject().get("term").getAsString().replace(" ", "");
-                String term2 = o2.getAsJsonObject().get("term").getAsString().replace(" ", "");
-                return term1.compareTo(term2);
-            }
+        Collections.sort(list, (o1, o2) -> {
+            String term1 = o1.getAsJsonObject().get("term").getAsString().replace(" ", "");
+            String term2 = o2.getAsJsonObject().get("term").getAsString().replace(" ", "");
+            return term1.compareTo(term2);
         });
         return list;
     }

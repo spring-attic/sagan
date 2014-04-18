@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,17 +45,14 @@ public class StaticPageIndexer implements Indexer<String> {
 
     @Override
     public Iterable<String> indexableItems() {
-        List<String> paths = new ArrayList<>();
         try {
-            for (StaticPagePathFinder.PagePaths pagePaths : staticPagePathFinder.findPaths()) {
-                if (!pagesToIgnore.contains(pagePaths.getUrlPath())) {
-                    paths.add(baseUrl + pagePaths.getUrlPath());
-                }
-            }
+            return staticPagePathFinder.findPaths().stream()
+                    .filter(pagePaths -> !pagesToIgnore.contains(pagePaths.getUrlPath()))
+                    .map(pagePaths -> baseUrl + pagePaths.getUrlPath())
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return paths;
     }
 
     @Override

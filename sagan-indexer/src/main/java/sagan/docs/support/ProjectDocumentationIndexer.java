@@ -10,6 +10,7 @@ import sagan.search.support.SearchService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,10 +44,9 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
     public void indexItem(Project project) {
         logger.debug("Indexing project: " + project.getId());
 
-        List<String> projectVersions = new ArrayList<>();
-        for (ProjectRelease projectRelease : project.getProjectReleases()) {
-            projectVersions.add(projectRelease.getVersion());
-        }
+        List<String> projectVersions = project.getProjectReleases().stream()
+                .map(ProjectRelease::getVersion)
+                .collect(Collectors.toList());
 
         searchService.removeOldProjectEntriesFromIndex(project.getId(), projectVersions);
 

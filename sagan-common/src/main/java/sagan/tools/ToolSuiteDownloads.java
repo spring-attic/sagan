@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ToolSuiteDownloads {
 
@@ -53,11 +54,9 @@ public class ToolSuiteDownloads {
 
         EclipseVersion eclipseVersion = platform.getEclipseVersions().get(0);
         for (Architecture architecture : eclipseVersion.getArchitectures()) {
-            for (DownloadLink link : architecture.getDownloadLinks()) {
-                if (link.getFileType().equals(fileType)) {
-                    links.add(link);
-                }
-            }
+            links.addAll(architecture.getDownloadLinks().stream()
+                    .filter(link -> link.getFileType().equals(fileType))
+                    .collect(Collectors.toList()));
         }
     }
 

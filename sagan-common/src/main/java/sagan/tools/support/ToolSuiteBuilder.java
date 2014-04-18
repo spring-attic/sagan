@@ -68,7 +68,7 @@ class ToolSuiteBuilder {
     private ToolSuitePlatform createOrFindPlatform(String os, String name) {
         ToolSuitePlatform platform = platformMap.get(os);
         if (platform == null) {
-            platform = new ToolSuitePlatform(os, new ArrayList<EclipseVersion>());
+            platform = new ToolSuitePlatform(os, new ArrayList<>());
             platformMap.put(os, platform);
         }
         return platform;
@@ -79,7 +79,7 @@ class ToolSuiteBuilder {
 
         EclipseVersion eclipseVersion = eclipseVersionMap.get(key);
         if (eclipseVersion == null) {
-            eclipseVersion = new EclipseVersion(eclipseVersionName, new ArrayList<Architecture>());
+            eclipseVersion = new EclipseVersion(eclipseVersionName, new ArrayList<>());
             platform.getEclipseVersions().add(eclipseVersion);
             eclipseVersionMap.put(key, eclipseVersion);
         }
@@ -92,7 +92,7 @@ class ToolSuiteBuilder {
 
         Architecture architecture = architectureMap.get(key);
         if (architecture == null) {
-            architecture = new Architecture(architectureName, new ArrayList<DownloadLink>());
+            architecture = new Architecture(architectureName, new ArrayList<>());
             eclipseVersion.getArchitectures().add(architecture);
             architectureMap.put(key, architecture);
         }

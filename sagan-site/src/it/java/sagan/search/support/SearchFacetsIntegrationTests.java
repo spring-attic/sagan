@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 
 import io.searchbox.client.JestClient;
 
+import static java.util.stream.Collectors.toList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -148,15 +149,11 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
     }
 
     private void assertThatResultsContains(List<SearchResult> results, SearchEntry... entries) {
-        ArrayList<String> resultPaths = new ArrayList<>();
-        for (SearchResult result : results) {
-            resultPaths.add(result.getPath());
-        }
+        List<String> resultPaths = results.stream()
+                .map(SearchResult::getPath).collect(toList());
 
-        ArrayList<String> expectedPaths = new ArrayList<>();
-        for (SearchEntry entry : entries) {
-            expectedPaths.add(entry.getPath());
-        }
+        List<String> expectedPaths = Arrays.asList(entries).stream()
+                .map(SearchEntry::getPath).collect(toList());
 
         assertThat(resultPaths, containsInAnyOrder(expectedPaths.toArray()));
     }
@@ -256,7 +253,7 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(blog);
         searchService.saveToIndex(gettingStarted);
 
-        SearchResults searchResults = searchService.search("title", pageable, new ArrayList<String>());
+        SearchResults searchResults = searchService.search("title", pageable, new ArrayList<>());
 
         List<SearchResult> results = searchResults.getPage().getContent();
         assertThat(results.size(), equalTo(2));

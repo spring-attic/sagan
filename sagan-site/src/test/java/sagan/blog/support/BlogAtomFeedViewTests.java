@@ -91,7 +91,7 @@ public class BlogAtomFeedViewTests {
 
     @Test
     public void feedUpdatedDateIsMostRecentPublishedPostDate() throws Exception {
-        List<Post> posts = new ArrayList<Post>();
+        List<Post> posts = new ArrayList<>();
         buildPostsWithDate(5, posts);
         model.addAttribute("posts", posts);
 
@@ -103,7 +103,7 @@ public class BlogAtomFeedViewTests {
 
     @Test
     public void feedUpdatedDateIsNotPresentWhenThereAreNoPosts() throws Exception {
-        List<Post> noPosts = new ArrayList<Post>();
+        List<Post> noPosts = new ArrayList<>();
         model.addAttribute("posts", noPosts);
 
         atomFeedView.buildFeedMetadata(model, feed, request);

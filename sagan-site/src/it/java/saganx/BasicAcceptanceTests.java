@@ -43,12 +43,8 @@ public class BasicAcceptanceTests {
         serverAddress = "http://localhost:" + port;
 
         Future<ConfigurableApplicationContext> future =
-                Executors.newSingleThreadExecutor().submit(new Callable<ConfigurableApplicationContext>() {
-                    @Override
-                    public ConfigurableApplicationContext call() throws Exception {
-                        return SpringApplication.run(IntegrationTestsConfig.class, "--server.port=" + port);
-                    }
-                });
+                Executors.newSingleThreadExecutor().submit(() ->
+                        SpringApplication.run(IntegrationTestsConfig.class, "--server.port=" + port));
         context = future.get(30, TimeUnit.SECONDS);
     }
 

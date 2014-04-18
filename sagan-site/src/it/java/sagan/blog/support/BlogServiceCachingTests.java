@@ -45,10 +45,7 @@ public class BlogServiceCachingTests extends AbstractIntegrationTests {
             }
         }
         assertTrue("BlogService is advised, but does not have caching advisor", hasCachingAdvisor);
-        // @formatter:off
-        ReflectionUtils.doWithMethods(BlogService.class, new ReflectionUtils.MethodCallback() { // TODO: lambda
-            @Override
-            public void doWith(Method method) throws IllegalArgumentException, IllegalAccessException {
+        ReflectionUtils.doWithMethods(BlogService.class, (method) -> {
                 Cacheable cacheable = AnnotationUtils.findAnnotation(method, Cacheable.class);
                 String methodName = method.getName();
                 if (methodName.matches("^get.*Published.*$")) {
@@ -58,9 +55,7 @@ public class BlogServiceCachingTests extends AbstractIntegrationTests {
                 } else {
                     assertNull("Method " + methodName + " was not expected to have Cacheable annotation.", cacheable);
                 }
-            }
-        });
-        // @formatter:on
+            });
     }
 
 }

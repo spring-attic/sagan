@@ -52,29 +52,21 @@ public class SiteConfig {
     @Bean
     public HealthIndicator<Map<String, Object>> healthIndicator(DataSource dataSource) {
         if (dataSource instanceof org.apache.tomcat.jdbc.pool.DataSource) {
-            final org.apache.tomcat.jdbc.pool.DataSource tcDataSource =
+            org.apache.tomcat.jdbc.pool.DataSource tcDataSource =
                     (org.apache.tomcat.jdbc.pool.DataSource) dataSource;
-            return new HealthIndicator<Map<String, Object>>() {
-                @Override
-                public Map<String, Object> health() {
-                    Map<String, Object> health = new HashMap<>();
-                    health.put("active", tcDataSource.getActive());
-                    health.put("max_active", tcDataSource.getMaxActive());
-                    health.put("idle", tcDataSource.getIdle());
-                    health.put("max_idle", tcDataSource.getMaxIdle());
-                    health.put("min_idle", tcDataSource.getMinIdle());
-                    health.put("wait_count", tcDataSource.getWaitCount());
-                    health.put("max_wait", tcDataSource.getMaxWait());
-                    return health;
-                }
+            return () -> {
+                Map<String, Object> health = new HashMap<>();
+                health.put("active", tcDataSource.getActive());
+                health.put("max_active", tcDataSource.getMaxActive());
+                health.put("idle", tcDataSource.getIdle());
+                health.put("max_idle", tcDataSource.getMaxIdle());
+                health.put("min_idle", tcDataSource.getMinIdle());
+                health.put("wait_count", tcDataSource.getWaitCount());
+                health.put("max_wait", tcDataSource.getMaxWait());
+                return health;
             };
         }
-        return new HealthIndicator<Map<String, Object>>() {
-            @Override
-            public Map<String, Object> health() {
-                return Collections.emptyMap();
-            }
-        };
+        return Collections::emptyMap;
     }
 
     @Bean

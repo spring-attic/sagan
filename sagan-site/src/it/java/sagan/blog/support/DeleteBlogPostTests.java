@@ -52,12 +52,9 @@ public class DeleteBlogPostTests extends AbstractIntegrationTests {
 
         mockMvc.perform(editPostRequest)
                 .andExpect(status().isFound())
-                .andExpect(new ResultMatcher() {
-                    @Override
-                    public void match(MvcResult result) {
-                        String redirectedUrl = result.getResponse().getRedirectedUrl();
-                        assertThat(redirectedUrl, startsWith("/admin/blog"));
-                    }
+                .andExpect(result -> {
+                    String redirectedUrl = result.getResponse().getRedirectedUrl();
+                    assertThat(redirectedUrl, startsWith("/admin/blog"));
                 });
     }
 

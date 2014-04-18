@@ -22,7 +22,7 @@ public class DefaultGuideMetadata implements GuideMetadata {
     public final String subtitle;
 
     public DefaultGuideMetadata(String ghOrgName, String guideId, String repoName, String description) {
-        this(ghOrgName, guideId, repoName, description, new HashSet<String>());
+        this(ghOrgName, guideId, repoName, description, new HashSet<>());
     }
 
     public DefaultGuideMetadata(String ghOrgName, String guideId, String repoName, String description, Set<String> tags) {

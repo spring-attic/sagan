@@ -55,13 +55,10 @@ public class BlogService_ValidPostTests {
     public void setup() {
         given(dateFactory.now()).willReturn(now);
 
-        given(postRepository.save((Post) anyObject())).will(new Answer<Post>() {
-            @Override
-            public Post answer(InvocationOnMock invocation) throws Throwable {
-                Post post = (Post) invocation.getArguments()[0];
-                ReflectionTestUtils.setField(post, "id", 123L);
-                return post;
-            }
+        given(postRepository.save((Post) anyObject())).will(invocation -> {
+            Post post = (Post) invocation.getArguments()[0];
+            ReflectionTestUtils.setField(post, "id", 123L);
+            return post;
         });
 
         post = PostBuilder.post().publishAt(publishAt).build();

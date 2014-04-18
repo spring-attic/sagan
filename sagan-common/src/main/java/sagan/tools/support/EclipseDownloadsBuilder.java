@@ -39,7 +39,7 @@ class EclipseDownloadsBuilder {
         Architecture architecture = architectureMap.get(key);
         if (architecture == null) {
             String name = eclipseXmlDownload.getDescription();
-            architecture = new Architecture(name, new ArrayList<DownloadLink>());
+            architecture = new Architecture(name, new ArrayList<>());
 
             architectureMap.put(key, architecture);
             eclipsePackage.getArchitectures().add(architecture);
@@ -52,7 +52,7 @@ class EclipseDownloadsBuilder {
         String key = os;
         EclipsePlatform platform = platforms.get(key);
         if (platform == null) {
-            platform = new EclipsePlatform(StringUtils.capitalize(os), new ArrayList<EclipseRelease>());
+            platform = new EclipsePlatform(StringUtils.capitalize(os), new ArrayList<>());
             platforms.put(key, platform);
         }
         return platform;
@@ -64,7 +64,7 @@ class EclipseDownloadsBuilder {
         if (release == null) {
             String name = new String(eclipseXmlProduct.getName()).replaceAll("(.+) Package Downloads.*", "$1");
             String version = new String(eclipseXmlProduct.getName()).replaceAll(".*\\(based on (.*)\\)", "$1");
-            release = new EclipseRelease(name, version, new ArrayList<EclipsePackage>());
+            release = new EclipseRelease(name, version, new ArrayList<>());
             releases.put(key, release);
             platform.getReleases().add(release);
         }
@@ -76,7 +76,7 @@ class EclipseDownloadsBuilder {
         EclipsePackage eclipsePackage = packages.get(key);
         if (eclipsePackage == null) {
             String name = new String(eclipseXmlPackage.getName()).replaceAll(" \\(.*\\)", "");
-            eclipsePackage = new EclipsePackage(name, new ArrayList<Architecture>());
+            eclipsePackage = new EclipsePackage(name, new ArrayList<>());
             packages.put(key, eclipsePackage);
             release.getPackages().add(eclipsePackage);
         }

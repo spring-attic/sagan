@@ -56,7 +56,7 @@ public class BlogController_PublishedPostsForCategoryTests {
         Page<Post> postsPage = new PageImpl<>(posts, new PageRequest(TEST_PAGE, 10), 20);
         Pageable testPageable = PageableFactory.forLists(TEST_PAGE);
 
-        page = new PageImpl<>(new ArrayList<PostView>(), testPageable, 1);
+        page = new PageImpl<>(new ArrayList<>(), testPageable, 1);
 
         given(blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(testPageable))).willReturn(postsPage);
         given(postViewFactory.createPostViewPage(postsPage)).willReturn(page);
