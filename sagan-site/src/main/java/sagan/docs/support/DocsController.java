@@ -37,7 +37,7 @@ class DocsController {
     private List<Project> nonAggregatorsForCategory(String category) {
         return service.getProjectsForCategory(category).stream()
                 .filter(project -> !project.isAggregator())
-                .sorted((p1, p2) -> p1.getId().compareToIgnoreCase(p2.getId()))
+                .sorted((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()))
                 .collect(Collectors.toList());
     }
 }
