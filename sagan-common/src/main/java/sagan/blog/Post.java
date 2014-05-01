@@ -3,8 +3,8 @@ package sagan.blog;
 import sagan.team.MemberProfile;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +27,7 @@ import org.springframework.util.StringUtils;
 @SuppressWarnings("serial")
 public class Post implements Serializable {
 
-    private static final SimpleDateFormat SLUG_DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
+    private static final DateTimeFormatter SLUG_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +56,7 @@ public class Post implements Serializable {
     private String renderedSummary;
 
     @Column(nullable = false)
-    private Date createdAt = new Date();
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(nullable = false)
     private boolean draft = true;
@@ -65,7 +65,7 @@ public class Post implements Serializable {
     private boolean broadcast = false;
 
     @Column(nullable = true)
-    private Date publishAt;
+    private LocalDateTime publishAt;
 
     @Column(nullable = true)
     private String publicSlug;
@@ -141,19 +141,19 @@ public class Post implements Serializable {
         this.renderedSummary = renderedSummary;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getPublishAt() {
+    public LocalDateTime getPublishAt() {
         return publishAt;
     }
 
-    public void setPublishAt(Date publishAt) {
+    public void setPublishAt(LocalDateTime publishAt) {
         this.publishAt = publishAt;
         publicSlug = publishAt == null ? null : generatePublicSlug();
     }
@@ -178,8 +178,8 @@ public class Post implements Serializable {
         return publishAt == null;
     }
 
-    public boolean isLiveOn(Date date) {
-        return !(isDraft() || publishAt.after(date));
+    public boolean isLiveOn(LocalDateTime date) {
+        return !(isDraft() || publishAt.isAfter(date));
     }
 
     public String getPublicSlug() {
