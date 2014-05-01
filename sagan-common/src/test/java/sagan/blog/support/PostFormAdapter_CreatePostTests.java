@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 import sagan.team.MemberProfile;
@@ -86,7 +87,7 @@ public class PostFormAdapter_CreatePostTests {
         assertThat(post.getCategory(), equalTo(category));
         assertThat(post.isBroadcast(), equalTo(broadcast));
         assertThat(post.isDraft(), equalTo(draft));
-        assertThat(post.getPublishAt(), equalTo(publishAt));
+        assertThat(DateConverter.toDate(post.getPublishAt()), equalTo(publishAt));
     }
 
     @Test
@@ -122,12 +123,12 @@ public class PostFormAdapter_CreatePostTests {
         postForm.setDraft(false);
         postForm.setPublishAt(null);
         post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
-        assertThat(post.getPublishAt(), equalTo(now));
+        assertThat(DateConverter.toDate(post.getPublishAt()), equalTo(now));
     }
 
     @Test
     public void postCreatedDateDefaultsToNow() throws Exception {
-        assertThat(post.getCreatedAt(), is(now));
+        assertThat(DateConverter.toDate(post.getCreatedAt()), is(now));
     }
 
     @Test
@@ -135,6 +136,6 @@ public class PostFormAdapter_CreatePostTests {
         Date createdAt = DateTestUtils.getDate("2013-05-23 22:58");
         postForm.setCreatedAt(createdAt);
         Post post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
-        assertThat(post.getCreatedAt(), is(createdAt));
+        assertThat(DateConverter.toDate(post.getCreatedAt()), is(createdAt));
     }
 }

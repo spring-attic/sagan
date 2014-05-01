@@ -1,5 +1,6 @@
 package sagan.blog;
 
+import sagan.support.DateConverter;
 import sagan.team.MemberProfile;
 
 import java.text.ParseException;
@@ -123,11 +124,11 @@ public class PostBuilder {
         post.setRenderedContent(renderedContent);
         post.setRenderedSummary(renderedSummary);
         if (createdAt != null) {
-            post.setCreatedAt(createdAt);
+            post.setCreatedAt(DateConverter.toLocalDateTime(createdAt));
         }
         post.setBroadcast(broadcast);
         post.setDraft(draft);
-        post.setPublishAt(publishAt);
+        post.setPublishAt(DateConverter.toLocalDateTime(publishAt));
 
         return post;
     }

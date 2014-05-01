@@ -2,11 +2,12 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class PostView {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy");
@@ -25,7 +26,7 @@ public class PostView {
 
     public String getPath() {
         String path;
-        if (post.isLiveOn(dateFactory.now())) {
+        if (post.isLiveOn(DateConverter.toLocalDateTime(dateFactory.now()))) {
             path = "/blog/" + post.getPublicSlug();
         } else {
             path = "/admin/blog/" + post.getAdminSlug();
@@ -65,11 +66,11 @@ public class PostView {
         return post.getRenderedContent();
     }
 
-    public Date getPublishAt() {
+    public LocalDateTime getPublishAt() {
         return post.getPublishAt();
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return post.getCreatedAt();
     }
 
