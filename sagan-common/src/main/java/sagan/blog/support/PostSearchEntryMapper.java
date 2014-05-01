@@ -5,6 +5,7 @@ import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
 
 import org.jsoup.Jsoup;
+import sagan.support.DateConverter;
 
 class PostSearchEntryMapper implements SearchEntryMapper<Post> {
 
@@ -21,7 +22,7 @@ class PostSearchEntryMapper implements SearchEntryMapper<Post> {
         entry.setRawContent(content);
         entry.addFacetPaths("Blog", "Blog/" + post.getCategory().getDisplayName());
         entry.setPath("/blog/" + post.getPublicSlug());
-        entry.setPublishAt(post.getPublishAt());
+        entry.setPublishAt(DateConverter.toDate(post.getPublishAt()));
         return entry;
     }
 

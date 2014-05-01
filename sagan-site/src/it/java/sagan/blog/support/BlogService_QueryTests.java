@@ -4,6 +4,7 @@ import sagan.blog.PostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.search.support.SearchService;
+import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 import sagan.team.MemberProfile;
@@ -101,7 +102,7 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
 
     @Test
     public void postIsRetrievableByTitleAndCreatedDate() {
-        assertThat(service.getPost(published.getTitle(), published.getCreatedAt()), equalTo(published));
+        assertThat(service.getPost(published.getTitle(), DateConverter.toDate(published.getCreatedAt())), equalTo(published));
     }
 
     @Test

@@ -5,6 +5,8 @@ import sagan.blog.PostBuilder;
 import sagan.support.DateFactory;
 import sagan.support.nav.SiteUrl;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -113,18 +115,16 @@ public class BlogAtomFeedViewTests {
 
     private void buildPostsWithDate(int numberOfPosts, List<Post> posts) {
         for (int date = numberOfPosts; date > 0; date--) {
-            calendar.set(2013, 6, date);
             Post post = PostBuilder.post().build();
-            post.setPublishAt(calendar.getTime());
+            post.setPublishAt(LocalDateTime.of(2013, Month.JULY, date, 0, 0));
             posts.add(post);
         }
     }
 
     @Test
     public void hasCorrectIdForEntry() throws Exception {
-        calendar.set(2013, 6, 1);
         Post post = spy(PostBuilder.post().build());
-        post.setCreatedAt(calendar.getTime());
+        post.setCreatedAt(LocalDateTime.of(2013, Month.JULY, 1, 0, 0));
         given(post.getId()).willReturn(123L);
 
         model.addAttribute("posts", Arrays.asList(post));
