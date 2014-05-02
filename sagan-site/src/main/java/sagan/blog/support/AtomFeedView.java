@@ -1,14 +1,12 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
+import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.support.nav.SiteUrl;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,7 +56,7 @@ public class AtomFeedView extends AbstractAtomFeedView {
         List<Post> posts = (List<Post>) model.get("posts");
         if (posts.size() > 0) {
             Post latestPost = posts.get(0);
-            feed.setUpdated(latestPost.getPublishAt());
+            feed.setUpdated(DateConverter.toDate(latestPost.getPublishAt()));
         }
     }
 
@@ -88,7 +86,7 @@ public class AtomFeedView extends AbstractAtomFeedView {
             Entry entry = new Entry();
             entry.setTitle(post.getTitle());
             setId(post, entry, request);
-            entry.setUpdated(post.getPublishAt());
+            entry.setUpdated(DateConverter.toDate(post.getPublishAt()));
             setRenderedContent(post, entry);
             setPostUrl(post, entry);
             setAuthor(post, entry);

@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import sagan.support.DateConverter;
 
 class PostForm {
     @NotEmpty
@@ -39,7 +40,7 @@ class PostForm {
         category = post.getCategory();
         broadcast = post.isBroadcast();
         draft = post.isDraft();
-        publishAt = post.getPublishAt();
+        publishAt = DateConverter.toDate(post.getPublishAt());
     }
 
     public String getTitle() {
