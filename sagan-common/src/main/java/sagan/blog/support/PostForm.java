@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.support.DateConverter;
 
 import java.util.Date;
 
@@ -10,7 +11,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import sagan.support.DateConverter;
 
 class PostForm {
     @NotEmpty

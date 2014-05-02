@@ -6,10 +6,10 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
-public class DateConverterTest {
+public class DateConverterTests {
+
     @Test
     public void testConversionToLocalDateTime() {
         String dateFormatString = "2012-07-02 13:42";
