@@ -3,9 +3,9 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
+import sagan.support.DateConverter;
 
 import org.jsoup.Jsoup;
-import sagan.support.DateConverter;
 
 class PostSearchEntryMapper implements SearchEntryMapper<Post> {
 
