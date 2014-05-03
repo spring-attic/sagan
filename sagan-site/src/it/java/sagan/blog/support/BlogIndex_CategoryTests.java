@@ -5,8 +5,9 @@ import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
 import saganx.AbstractIntegrationTests;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.hamcrest.MatcherAssert;
@@ -31,17 +32,16 @@ public class BlogIndex_CategoryTests extends AbstractIntegrationTests {
     private String path = "/blog/category/" + PostCategory.ENGINEERING.getUrlSlug();
 
     private void createManyPostsInNovember(int numPostsToCreate) {
-        Calendar calendar = Calendar.getInstance();
         List<Post> posts = new ArrayList<>();
         for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
-            calendar.set(2012, 10, postNumber);
+            LocalDateTime postDate = LocalDateTime.of(2012, Month.NOVEMBER, postNumber, 0, 0);
             Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2012")
                     .rawContent("Raw content")
                     .renderedContent("Html content")
                     .renderedSummary("Html summary")
                     .category(PostCategory.ENGINEERING)
-                    .createdAt(calendar.getTime())
-                    .publishAt(calendar.getTime())
+                    .createdAt(postDate)
+                    .publishAt(postDate)
                     .build();
             posts.add(post);
         }

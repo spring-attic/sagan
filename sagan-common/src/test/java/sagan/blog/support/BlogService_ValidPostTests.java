@@ -5,10 +5,11 @@ import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
 import sagan.search.SearchException;
 import sagan.search.support.SearchService;
+import sagan.support.DateConverter;
 import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -29,10 +30,11 @@ import static org.mockito.Matchers.anyObject;
 public class BlogService_ValidPostTests {
 
     private static final String AUTHOR_USERNAME = "username";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private Post post;
     private PostForm postForm = new PostForm();
-    private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
-    private Date now = DateTestUtils.getDate("2013-07-01 13:00");
+    private LocalDateTime publishAt = LocalDateTime.parse("2013-07-01 12:00", DATE_TIME_FORMATTER);
+    private LocalDateTime now = LocalDateTime.parse("2013-07-01 13:00", DATE_TIME_FORMATTER);
 
     @Mock
     private PostRepository postRepository;
@@ -53,7 +55,7 @@ public class BlogService_ValidPostTests {
 
     @Before
     public void setup() {
-        given(dateFactory.now()).willReturn(now);
+        given(dateFactory.now()).willReturn(DateConverter.toDate(now));
 
         given(postRepository.save((Post) anyObject())).will(invocation -> {
             Post post = (Post) invocation.getArguments()[0];

@@ -8,6 +8,8 @@ import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 import sagan.team.support.TeamRepository;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.junit.Before;
@@ -26,6 +28,7 @@ public class PostFormAdapter_UpdatePostTests {
 
     public static final String RENDERED_HTML = "<p>Rendered HTML</p><p>from Markdown</p>";
     public static final String SUMMARY = "<p>Rendered HTML</p>";
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private Post post;
     private String title = "Title";
     private String content = "Rendered HTML\n\nfrom Markdown";
@@ -112,21 +115,21 @@ public class PostFormAdapter_UpdatePostTests {
 
     @Test
     public void updatingABlogPost_doesNotChangeItsCreatedDateByDefault() throws Exception {
-        Date originalDate = DateTestUtils.getDate("2009-11-20 07:00");
+        LocalDateTime originalDate = LocalDateTime.parse("2009-11-20 07:00", DATE_TIME_FORMATTER);
         Post post = PostBuilder.post().createdAt(originalDate).build();
         postFormAdapter.updatePostFromPostForm(post, postForm);
-        assertThat(DateConverter.toDate(post.getCreatedAt()), is(originalDate));
+        assertThat(post.getCreatedAt(), is(originalDate));
     }
 
     @Test
     public void updatingABlogPost_usesTheCreatedDateFromThePostFormIfPresent() throws Exception {
-        Date originalDate = DateTestUtils.getDate("2009-11-20 07:00");
+        LocalDateTime originalDate = LocalDateTime.parse("2009-11-20 07:00", DATE_TIME_FORMATTER);
         Post post = PostBuilder.post().createdAt(originalDate).build();
 
-        Date newDate = DateTestUtils.getDate("2010-01-11 03:00");
-        postForm.setCreatedAt(newDate);
+        LocalDateTime newDate = LocalDateTime.parse("2010-01-11 03:00", DATE_TIME_FORMATTER);
+        postForm.setCreatedAt(DateConverter.toDate(newDate));
 
         postFormAdapter.updatePostFromPostForm(post, postForm);
-        assertThat(DateConverter.toDate(post.getCreatedAt()), is(newDate));
+        assertThat(post.getCreatedAt(), is(newDate));
     }
 }

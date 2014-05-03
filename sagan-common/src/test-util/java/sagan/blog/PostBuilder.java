@@ -1,14 +1,14 @@
 package sagan.blog;
 
-import sagan.support.DateConverter;
 import sagan.team.MemberProfile;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class PostBuilder {
 
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private Long id;
     private String title;
     private MemberProfile author;
@@ -16,8 +16,8 @@ public class PostBuilder {
     private String rawContent;
     private String renderedContent;
     private String renderedSummary;
-    private Date createdAt;
-    private Date publishAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime publishAt;
     private boolean broadcast;
     private boolean draft;
 
@@ -30,7 +30,7 @@ public class PostBuilder {
         renderedContent = "post body";
         renderedSummary = "summary";
         broadcast = false;
-        publishAt = new Date(System.currentTimeMillis());
+        publishAt = LocalDateTime.now();
         draft = false;
     }
 
@@ -74,13 +74,13 @@ public class PostBuilder {
         return this;
     }
 
-    public PostBuilder createdAt(Date date) {
+    public PostBuilder createdAt(LocalDateTime date) {
         createdAt = date;
         return this;
     }
 
     public PostBuilder createdAt(String dateString) throws ParseException {
-        createdAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString);
+        createdAt = LocalDateTime.parse(dateString, DATE_TIME_FORMATTER);
         return this;
     }
 
@@ -99,18 +99,17 @@ public class PostBuilder {
         return this;
     }
 
-    public PostBuilder publishAt(Date date) {
+    public PostBuilder publishAt(LocalDateTime date) {
         publishAt = date;
         return this;
     }
 
     public PostBuilder publishAt(String dateString) throws ParseException {
-        return publishAt(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString));
+        return publishAt(LocalDateTime.parse(dateString, DATE_TIME_FORMATTER));
     }
 
     public PostBuilder publishYesterday() {
-        long oneDay = 1000 * 60 * 60 * 24;
-        return publishAt(new Date(System.currentTimeMillis() - oneDay));
+        return publishAt(LocalDateTime.now().minusDays(1));
     }
 
     public PostBuilder isBroadcast() {
@@ -124,11 +123,11 @@ public class PostBuilder {
         post.setRenderedContent(renderedContent);
         post.setRenderedSummary(renderedSummary);
         if (createdAt != null) {
-            post.setCreatedAt(DateConverter.toLocalDateTime(createdAt));
+            post.setCreatedAt(createdAt);
         }
         post.setBroadcast(broadcast);
         post.setDraft(draft);
-        post.setPublishAt(DateConverter.toLocalDateTime(publishAt));
+        post.setPublishAt(publishAt);
 
         return post;
     }

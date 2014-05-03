@@ -1,7 +1,5 @@
 package sagan.blog;
 
-import sagan.support.DateConverter;
-
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -60,7 +58,7 @@ public class PostTests {
     @Test
     public void isScheduledIfPublishDateIsInTheFuture() throws ParseException {
         LocalDateTime futureDate = LocalDateTime.now().plusHours(2);
-        Post post = PostBuilder.post().publishAt(DateConverter.toDate(futureDate)).build();
+        Post post = PostBuilder.post().publishAt(futureDate).build();
         assertThat(post.isScheduled(), is(true));
     }
 

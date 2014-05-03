@@ -10,8 +10,9 @@ import saganx.AbstractIntegrationTests;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -124,15 +125,13 @@ public class BlogAtomFeedsTests extends AbstractIntegrationTests {
     }
 
     private void createPosts(int numPostsToCreate) {
-        Calendar calendar = Calendar.getInstance();
         List<Post> posts = new ArrayList<>();
         for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
-            calendar.set(2013, 10, postNumber);
             Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2013")
                     .rawContent("Raw content")
                     .renderedContent("Html content")
                     .renderedSummary("Html summary")
-                    .createdAt(calendar.getTime())
+                    .createdAt(LocalDateTime.of(2013, Month.NOVEMBER, postNumber, 0, 0))
                     .build();
             posts.add(post);
         }

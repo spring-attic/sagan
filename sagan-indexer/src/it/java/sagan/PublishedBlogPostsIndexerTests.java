@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
+import sagan.support.DateConverter;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -65,7 +66,7 @@ public class PublishedBlogPostsIndexerTests extends AbstractIndexerIntegrationTe
                 .renderedContent("<h1>Welcome spring!</h1>")
                 .renderedSummary("<h1>Welcome<h1>")
                 .category(PostCategory.RELEASES)
-                .publishAt(publishedDate)
+                .publishAt(DateConverter.toLocalDateTime(publishedDate))
                 .author("jdoe", "John Doe").build();
 
         postRepository.save(post);

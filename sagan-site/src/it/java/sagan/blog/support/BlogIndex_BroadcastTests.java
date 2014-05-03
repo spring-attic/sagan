@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
+import sagan.support.DateConverter;
 import saganx.AbstractIntegrationTests;
 
 import java.util.ArrayList;
@@ -39,8 +40,8 @@ public class BlogIndex_BroadcastTests extends AbstractIntegrationTests {
                     .renderedContent("Html content")
                     .renderedSummary("Html summary")
                     .isBroadcast()
-                    .createdAt(calendar.getTime())
-                    .publishAt(calendar.getTime())
+                    .createdAt(DateConverter.toLocalDateTime(calendar.getTime()))
+                    .publishAt(DateConverter.toLocalDateTime(calendar.getTime()))
                     .build();
             posts.add(post);
         }
