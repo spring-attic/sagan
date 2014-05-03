@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
+import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.support.nav.SiteUrl;
 
@@ -100,7 +101,7 @@ public class BlogAtomFeedViewTests {
         atomFeedView.buildFeedMetadata(model, feed, request);
 
         Post latestPost = posts.get(0);
-        assertThat(feed.getUpdated(), is(latestPost.getPublishAt()));
+        assertThat(DateConverter.toLocalDateTime(feed.getUpdated()), is(latestPost.getPublishAt()));
     }
 
     @Test

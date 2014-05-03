@@ -21,7 +21,7 @@ public class PostView {
     }
 
     public String getFormattedPublishDate() {
-        return post.isScheduled() ? "Unscheduled" : DATE_FORMAT.format(post.getPublishAt());
+        return post.isScheduled() ? "Unscheduled" : DATE_FORMAT.format(DateConverter.toDate(post.getPublishAt()));
     }
 
     public String getPath() {

@@ -103,7 +103,7 @@ public class AtomFeedView extends AbstractAtomFeedView {
     private void setId(Post post, Entry entry, HttpServletRequest request) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setTimeZone(dateFactory.timeZone());
-        String dateString = dateFormat.format(post.getCreatedAt());
+        String dateString = dateFormat.format(DateConverter.toZonedDate(post.getCreatedAt(), dateFactory.timeZone()));
         String host = request.getServerName();
         String id = String.format("tag:%s,%s:%s", host, dateString, post.getId());
         entry.setId(id);
