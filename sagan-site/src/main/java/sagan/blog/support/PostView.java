@@ -8,9 +8,10 @@ import sagan.team.MemberProfile;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 public class PostView {
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault());
 
     private Post post;
     private DateFactory dateFactory;
