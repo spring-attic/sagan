@@ -24,7 +24,8 @@ env:
     - secure: "Z1OEibV0KFLukQT+goeCwassBwrcgB9gLdjG9iAI1EE3nVivjRK/kGXb4k1vWvfj2Si4O2KuVo6RZwAqzPCCJpdk0QYwHzKBxDvJCHHDV284On/2Wu+i7xXt53WVs25Xs2+GV2NzyUhexPKo6PvaRemPxfYH0kkPn01W/NO/ow4="
     - secure: "HLVX8ge6FAvgqxTcHX8mIEkSYC9fbK4pfCdJykGjK2AGeiInh8bJgJw4Pe0lEaJPJq8WngTxgvT80zWtALkUw+32Zs4Q20jUFuBAlWR2CcfmkT2ZM04E8UnGfan8ky/D2JUbfQrH2pX5o/MQ+goT1aOhHUImhCGEPuYPWteTQWo="
 
-script: ./gradlew deploy
+script:
+  - 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then ./gradlew deploy; else ./gradlew check; fi'
 
 notifications:
   hipchat:
