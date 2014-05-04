@@ -3,7 +3,7 @@ def javaProjects = [ project(':sagan-site'), project(':sagan-indexer'), project(
 def bootProjects = javaProjects - project(':sagan-common')
 def gradleDir = "${rootProject.rootDir}/gradle"
 
-wrapper.gradleVersion = '1.11'
+wrapper.gradleVersion = '1.12'
 
 buildscript {
     ext.springRepo = 'http://repo.spring.io/libs-release'
