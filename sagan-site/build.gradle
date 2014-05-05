@@ -33,10 +33,6 @@ dependencies {
     // nekohtml is required for thymeleaf's LEGACYHTML5 mode
     runtime 'net.sourceforge.nekohtml:nekohtml:1.9.15'
 
-    // enable the Spring Boot remote shell
-    // http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-remote-shell
-    runtime "org.springframework.boot:spring-boot-starter-remote-shell"
-
     // for use in generating blog atom feeds
     compile 'net.java.dev.rome:rome:1.0.0'
 
