@@ -53,6 +53,7 @@ public class DynamicSidebarTests {
                 "/understanding/Tomcat"));
         assertThat(guide.getUnderstandingDocs().values(), hasItems("JSON", "WAR", "View Technology",
                 "Spring Application Context", "RESTful Web Service", "Tomcat"));
+        assertThat(guide.getContent(), containsString("About 15 minutes"));
     }
 
     @Test
@@ -70,6 +71,7 @@ public class DynamicSidebarTests {
         assertThat(guide.getProjects(), empty());
         assertThat(guide.getTableOfContents(), startsWith("<ul class=\"sectlevel1\">"));
         assertThat(guide.getTableOfContents(), not(containsString("<ul class=\"sectlevel2\">")));
+        assertThat(guide.getContent(), containsString("About 15 minutes"));
     }
 
     @Test
@@ -87,6 +89,7 @@ public class DynamicSidebarTests {
         assertThat(guide.getTags(), empty());
         assertThat(guide.getProjects(), empty());
         assertThat(guide.getTableOfContents(), equalTo(""));
+        assertThat(guide.getContent(), containsString("About 15 minutes"));
     }
 
     @Test
@@ -111,6 +114,7 @@ public class DynamicSidebarTests {
                 "/understanding/Tomcat"));
         assertThat(guide.getUnderstandingDocs().values(), hasItems("JSON", "WAR", "View Technology",
                 "Spring Application Context", "RESTful Web Service", "Tomcat"));
+        assertThat(guide.getContent(), containsString("About 15 minutes"));
     }
 
 }
