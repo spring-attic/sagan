@@ -8,6 +8,6 @@ public class QuestionsController {
 
     @RequestMapping("/questions")
     public String show() {
-        return "questions/show";
+        return "questions/index";
     }
 }

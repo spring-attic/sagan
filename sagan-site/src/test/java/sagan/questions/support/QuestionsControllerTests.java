@@ -20,6 +20,6 @@ public class QuestionsControllerTests {
 
     @Test
     public void show() throws Exception {
-        assertThat(questionsController.show(), equalTo("questions/show"));
+        assertThat(questionsController.show(), equalTo("questions/index"));
     }
 }
