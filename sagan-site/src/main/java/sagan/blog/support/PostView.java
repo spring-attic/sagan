@@ -6,12 +6,13 @@ import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class PostView {
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault());
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMMM dd, yyyy",
+            Locale.getDefault());
 
     private Post post;
     private DateFactory dateFactory;
@@ -22,7 +23,7 @@ public class PostView {
     }
 
     public String getFormattedPublishDate() {
-        return post.isScheduled() ? "Unscheduled" : DATE_FORMAT.format(DateConverter.toDate(post.getPublishAt()));
+        return post.isScheduled() ? "Unscheduled" : DATE_FORMAT.format(post.getPublishAt());
     }
 
     public String getPath() {
