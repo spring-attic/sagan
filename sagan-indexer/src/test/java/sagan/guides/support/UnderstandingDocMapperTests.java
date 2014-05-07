@@ -3,6 +3,7 @@ package sagan.guides.support;
 import sagan.guides.ContentProvider;
 import sagan.guides.UnderstandingDoc;
 import sagan.search.SearchEntry;
+import sagan.support.DateConverter;
 import sagan.support.Fixtures;
 
 import java.util.Date;
@@ -27,7 +28,7 @@ public class UnderstandingDocMapperTests {
 
     @Test
     public void publishAtDateDefaultsTo0() throws Exception {
-        assertThat(entry.getPublishAt(), equalTo(new Date(0L)));
+        assertThat(entry.getPublishAt(), equalTo(DateConverter.toLocalDateTime(new Date(0L))));
     }
 
     @Test

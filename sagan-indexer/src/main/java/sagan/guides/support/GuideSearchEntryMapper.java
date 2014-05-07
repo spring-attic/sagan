@@ -3,6 +3,7 @@ package sagan.guides.support;
 import sagan.guides.Guide;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
+import sagan.support.DateConverter;
 
 import java.util.Date;
 
@@ -22,7 +23,7 @@ class GuideSearchEntryMapper implements SearchEntryMapper<Guide> {
         entry.setRawContent(text);
         entry.setPath("/guides/gs/" + guide.getGuideId() + "/");
         entry.addFacetPaths("Guides", "Guides/Getting Started");
-        entry.setPublishAt(new Date(0L));
+        entry.setPublishAt(DateConverter.toLocalDateTime(new Date(0L)));
         return entry;
     }
 }

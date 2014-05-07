@@ -2,6 +2,7 @@ package sagan.staticpage.support;
 
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
+import sagan.support.DateConverter;
 
 import java.util.Date;
 
@@ -12,7 +13,7 @@ public class LocalStaticPagesSearchEntryMapper implements SearchEntryMapper<Docu
     @Override
     public SearchEntry map(Document document) {
         SearchEntry entry = new SearchEntry();
-        entry.setPublishAt(new Date(0L));
+        entry.setPublishAt(DateConverter.toLocalDateTime(new Date(0L)));
         String text = document.getElementsByClass("body--container").text();
         entry.setRawContent(text);
         entry.setSummary(text.substring(0, Math.min(500, text.length())));

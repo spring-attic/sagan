@@ -4,6 +4,7 @@ import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
+import sagan.support.DateConverter;
 
 import java.util.Date;
 
@@ -35,7 +36,7 @@ class ApiDocumentMapper implements SearchEntryMapper<Document> {
 
         SearchEntry entry = new SearchEntry();
 
-        entry.setPublishAt(new Date(0L));
+        entry.setPublishAt(DateConverter.toLocalDateTime(new Date(0L)));
         entry.setRawContent(apiContent);
         entry.setSummary(apiContent.substring(0, Math.min(apiContent.length(), 500)));
         entry.setTitle(document.title());

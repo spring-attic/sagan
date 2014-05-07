@@ -3,6 +3,7 @@ package sagan.guides.support;
 import sagan.guides.UnderstandingDoc;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
+import sagan.support.DateConverter;
 
 import java.util.Date;
 
@@ -18,7 +19,7 @@ class UnderstandingDocMapper implements SearchEntryMapper<UnderstandingDoc> {
         entry.setPath("understanding/" + guide.getSubject());
         entry.setSummary(rawContent.substring(0, Math.min(500, rawContent.length())));
         entry.addFacetPaths("Guides", "Guides/Understanding");
-        entry.setPublishAt(new Date(0L));
+        entry.setPublishAt(DateConverter.toLocalDateTime(new Date(0L)));
         entry.setSubTitle("Understanding Doc");
         return entry;
     }

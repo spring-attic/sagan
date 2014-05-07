@@ -4,6 +4,7 @@ import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
+import sagan.support.DateConverter;
 
 import java.util.Date;
 
@@ -22,7 +23,7 @@ class ReferenceDocumentSearchEntryMapper implements SearchEntryMapper<Document> 
     @Override
     public SearchEntry map(Document document) {
         SearchEntry entry = new SearchEntry();
-        entry.setPublishAt(new Date(0L));
+        entry.setPublishAt(DateConverter.toLocalDateTime(new Date(0L)));
         String text = document.text();
 
         entry.setRawContent(text);
