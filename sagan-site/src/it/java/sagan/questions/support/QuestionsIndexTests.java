@@ -21,7 +21,17 @@ public class QuestionsIndexTests extends AbstractIntegrationTests {
 
 		Document document = Jsoup.parse(result.getResponse().getContentAsString());
 
+		// questions
 		assertThat(document.select("body").text(), containsString("QUESTIONS"));
+
+		// tags
+		assertThat(document.select("body").text(), containsString("Spring Framework"));
+		assertThat(document.select("body").text(), containsString("spring-framework"));
+		assertThat(document.select("body").text(), containsString("spring-core"));
+		assertThat(document.select("body").text(), containsString("Spring Data"));
+		assertThat(document.select("body").text(), containsString("spring-data"));
+		assertThat(document.select("body").text(), containsString("spring-data-mongodb"));
+
 	}
 
 

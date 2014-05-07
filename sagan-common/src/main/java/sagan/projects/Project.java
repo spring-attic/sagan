@@ -1,7 +1,10 @@
 package sagan.projects;
 
+import org.springframework.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -22,6 +25,8 @@ public class Project {
     @OrderBy("versionName DESC")
     private List<ProjectRelease> releaseList = new ArrayList<>();
     private boolean isAggregator;
+	private String stackOverflowTags;
+
 
     @SuppressWarnings("unused")
     private Project() {
@@ -37,6 +42,12 @@ public class Project {
         this.isAggregator = isAggregator;
         this.category = category;
     }
+
+	public Project(String id, String name, String repoUrl, String siteUrl, List<ProjectRelease> releaseList,
+	               boolean isAggregator, String category, String stackOverflowTags) {
+		this(id, name, repoUrl, siteUrl, releaseList, isAggregator, category);
+		this.setStackOverflowTags(stackOverflowTags);
+	}
 
     public String getCategory() {
         return category;
@@ -102,7 +113,19 @@ public class Project {
         return isAggregator;
     }
 
-    @Override
+	public String getStackOverflowTags() {
+		return stackOverflowTags;
+	}
+
+	public void setStackOverflowTags(String stackOverflowTags) {
+		this.stackOverflowTags = stackOverflowTags;
+	}
+
+	public Set<String> getStackOverflowTagList() {
+		return StringUtils.commaDelimitedListToSet(this.stackOverflowTags);
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -131,6 +154,7 @@ public class Project {
                 ", siteUrl='" + siteUrl + '\'' +
                 ", releaseList=" + releaseList +
                 ", isAggregator=" + isAggregator +
+		        ", stackOverflowTags=" + stackOverflowTags +
                 '}';
     }
 }
