@@ -1,6 +1,8 @@
 package sagan.support;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -14,26 +16,22 @@ public class DateConverter {
         if (date == null) {
             return null;
         }
-        return LocalDateTime.of(date.getYear() + 1900, date.getMonth() + 1, date.getDate(), date.getHours(),
-                date.getMinutes());
+        return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
 
     public static Date toDate(LocalDateTime date) {
         if (date == null) {
             return null;
         }
-        return new Date(date.getYear() - 1900, date.getMonthValue() - 1, date.getDayOfMonth(), date.getHour(),
-                date.getMinute());
+        ZoneOffset zoneOffset = ZoneId.systemDefault().getRules().getOffset(date);
+        return Date.from(date.toInstant(zoneOffset));
     }
 
     public static Date toZonedDate(LocalDateTime date, TimeZone zone) {
         if (date == null) {
             return null;
         }
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeZone(zone);
-        calendar.set(date.getYear(), date.getMonthValue()-1, date.getDayOfMonth(), date.getHour(),
-                date.getMinute());
-        return calendar.getTime();
+        ZoneId zoneId = ZoneId.of(zone.getID());
+        return Date.from(date.toInstant(zoneId.getRules().getOffset(date)));
     }
 }
