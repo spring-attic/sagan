@@ -102,7 +102,7 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
 
     @Test
     public void postIsRetrievableByTitleAndCreatedDate() {
-        assertThat(service.getPost(published.getTitle(), DateConverter.toDate(published.getCreatedAt())), equalTo(published));
+        assertThat(service.getPost(published.getTitle(), published.getCreatedAt()), equalTo(published));
     }
 
     @Test

@@ -10,8 +10,8 @@ import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -67,7 +67,7 @@ public class BlogService {
         return post;
     }
 
-    public Post getPost(String title, Date createdAt) {
+    public Post getPost(String title, LocalDateTime createdAt) {
         return postRepository.findByTitleAndCreatedAt(title, createdAt);
     }
 
@@ -76,17 +76,19 @@ public class BlogService {
     }
 
     public Page<Post> getScheduledPosts(Pageable pageRequest) {
-        return postRepository.findByDraftFalseAndPublishAtAfter(dateFactory.now(), pageRequest);
+        return postRepository.findByDraftFalseAndPublishAtAfter(DateConverter.toLocalDateTime(dateFactory.now()),
+                pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPosts(Pageable pageRequest) {
-        return postRepository.findByDraftFalseAndPublishAtBefore(dateFactory.now(), pageRequest);
+        return postRepository.findByDraftFalseAndPublishAtBefore(DateConverter.toLocalDateTime(dateFactory.now()),
+                pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Post getPublishedPost(String publicSlug) {
-        Date now = dateFactory.now();
+        LocalDateTime now = DateConverter.toLocalDateTime(dateFactory.now());
         Post post = postRepository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug, now);
         if (post == null) {
             post = postRepository.findByPublicSlugAliasesInAndDraftFalseAndPublishAtBefore(
@@ -101,7 +103,7 @@ public class BlogService {
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public List<Post> getAllPublishedPosts() {
-        return postRepository.findByDraftFalseAndPublishAtBefore(dateFactory.now());
+        return postRepository.findByDraftFalseAndPublishAtBefore(DateConverter.toLocalDateTime(dateFactory.now()));
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
@@ -121,17 +123,20 @@ public class BlogService {
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
-        return postRepository.findByCategoryAndDraftFalseAndPublishAtBefore(category, dateFactory.now(), pageRequest);
+        return postRepository.findByCategoryAndDraftFalseAndPublishAtBefore(category,
+                DateConverter.toLocalDateTime(dateFactory.now()), pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
-        return postRepository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, dateFactory.now(), pageRequest);
+        return postRepository.findByBroadcastAndDraftFalseAndPublishAtBefore(true,
+                DateConverter.toLocalDateTime(dateFactory.now()), pageRequest);
     }
 
     @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsForMember(MemberProfile profile, Pageable pageRequest) {
-        return postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, dateFactory.now(), pageRequest);
+        return postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile,
+                DateConverter.toLocalDateTime(dateFactory.now()), pageRequest);
     }
 
     public Page<Post> getAllPosts(Pageable pageRequest) {
@@ -156,8 +161,8 @@ public class BlogService {
     }
 
     private void saveToIndex(Post post) {
-        Date now = dateFactory.now();
-        if (post.isLiveOn(DateConverter.toLocalDateTime(now))) {
+        LocalDateTime now = DateConverter.toLocalDateTime(dateFactory.now());
+        if (post.isLiveOn(now)) {
             try {
                 searchService.saveToIndex(mapper.map(post));
             } catch (Exception e) {
