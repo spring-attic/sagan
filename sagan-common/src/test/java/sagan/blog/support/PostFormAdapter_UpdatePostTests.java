@@ -35,7 +35,7 @@ public class PostFormAdapter_UpdatePostTests {
     private PostCategory category = PostCategory.ENGINEERING;
     private boolean broadcast = true;
     private boolean draft = false;
-    private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
+    private LocalDateTime publishAt = LocalDateTime.parse("2013-07-01 12:00", DATE_TIME_FORMATTER);
     private Date now = DateTestUtils.getDate("2013-07-01 13:00");
     private PostForm postForm;
     private String ORIGINAL_AUTHOR = "original author";
@@ -127,7 +127,7 @@ public class PostFormAdapter_UpdatePostTests {
         Post post = PostBuilder.post().createdAt(originalDate).build();
 
         LocalDateTime newDate = LocalDateTime.parse("2010-01-11 03:00", DATE_TIME_FORMATTER);
-        postForm.setCreatedAt(DateConverter.toDate(newDate));
+        postForm.setCreatedAt(newDate);
 
         postFormAdapter.updatePostFromPostForm(post, postForm);
         assertThat(post.getCreatedAt(), is(newDate));

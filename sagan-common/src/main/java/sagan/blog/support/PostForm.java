@@ -2,9 +2,8 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.support.DateConverter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
 
@@ -26,10 +25,10 @@ class PostForm {
     private boolean draft;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date publishAt;
+    private LocalDateTime publishAt;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     public PostForm() {
     }
@@ -40,7 +39,7 @@ class PostForm {
         category = post.getCategory();
         broadcast = post.isBroadcast();
         draft = post.isDraft();
-        publishAt = DateConverter.toDate(post.getPublishAt());
+        publishAt = post.getPublishAt();
     }
 
     public String getTitle() {
@@ -83,19 +82,19 @@ class PostForm {
         this.draft = draft;
     }
 
-    public Date getPublishAt() {
+    public LocalDateTime getPublishAt() {
         return publishAt;
     }
 
-    public void setPublishAt(Date publishAt) {
+    public void setPublishAt(LocalDateTime publishAt) {
         this.publishAt = publishAt;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 }

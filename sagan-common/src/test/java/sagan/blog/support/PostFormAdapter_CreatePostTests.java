@@ -8,6 +8,8 @@ import sagan.support.DateTestUtils;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.junit.Before;
@@ -30,11 +32,12 @@ public class PostFormAdapter_CreatePostTests {
     public static final String RENDERED_SUMMARY = "<p>Rendered HTML</p>";
     private static final String AUTHOR_USERNAME = "author";
     private static final String AUTHOR_NAME = "mr author";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private Post post;
     private String title = "Title";
     private String content = "Rendered HTML\n\nfrom Markdown";
     private PostCategory category = PostCategory.ENGINEERING;
-    private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
+    private LocalDateTime publishAt = LocalDateTime.parse("2013-07-01 12:00", DATE_TIME_FORMATTER);
     private boolean broadcast = true;
     private boolean draft = false;
     private Date now = DateTestUtils.getDate("2013-07-01 13:00");
@@ -87,7 +90,7 @@ public class PostFormAdapter_CreatePostTests {
         assertThat(post.getCategory(), equalTo(category));
         assertThat(post.isBroadcast(), equalTo(broadcast));
         assertThat(post.isDraft(), equalTo(draft));
-        assertThat(DateConverter.toDate(post.getPublishAt()), equalTo(publishAt));
+        assertThat(post.getPublishAt(), equalTo(publishAt));
     }
 
     @Test
@@ -133,9 +136,9 @@ public class PostFormAdapter_CreatePostTests {
 
     @Test
     public void postCreatedDateCanBeSetFromAPostForm() throws Exception {
-        Date createdAt = DateTestUtils.getDate("2013-05-23 22:58");
+        LocalDateTime createdAt = LocalDateTime.parse("2013-05-23 22:58", DATE_TIME_FORMATTER);
         postForm.setCreatedAt(createdAt);
         Post post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
-        assertThat(DateConverter.toDate(post.getCreatedAt()), is(createdAt));
+        assertThat(post.getCreatedAt(), is(createdAt));
     }
 }

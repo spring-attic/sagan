@@ -7,7 +7,6 @@ import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +34,7 @@ class PostFormAdapter {
         Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
         MemberProfile profile = teamRepository.findByUsername(username);
         post.setAuthor(profile);
-        post.setCreatedAt(createdDate(postForm, dateFactory.now()));
+        post.setCreatedAt(createdDate(postForm, DateConverter.toLocalDateTime(dateFactory.now())));
 
         setPostProperties(postForm, content, post);
         return post;
@@ -48,14 +47,13 @@ class PostFormAdapter {
         post.setTitle(postForm.getTitle());
         post.setRawContent(content);
         post.setCategory(postForm.getCategory());
-        post.setCreatedAt(createdDate(postForm, DateConverter.toDate(post.getCreatedAt())));
+        post.setCreatedAt(createdDate(postForm, post.getCreatedAt()));
 
         setPostProperties(postForm, content, post);
     }
 
-    private LocalDateTime createdDate(PostForm postForm, Date defaultDate) {
-        Date date = postForm.getCreatedAt() == null?defaultDate: postForm.getCreatedAt();
-        return DateConverter.toLocalDateTime(date);
+    private LocalDateTime createdDate(PostForm postForm, LocalDateTime defaultDate) {
+        return postForm.getCreatedAt() == null ? defaultDate : postForm.getCreatedAt();
     }
 
     private void setPostProperties(PostForm postForm, String content, Post post) {
@@ -63,12 +61,12 @@ class PostFormAdapter {
         summarize(post);
         post.setBroadcast(postForm.isBroadcast());
         post.setDraft(postForm.isDraft());
-        post.setPublishAt(DateConverter.toLocalDateTime(publishDate(postForm)));
+        post.setPublishAt(publishDate(postForm));
     }
 
-    private Date publishDate(PostForm postForm) {
+    private LocalDateTime publishDate(PostForm postForm) {
         if (!postForm.isDraft() && postForm.getPublishAt() == null) {
-            return dateFactory.now();
+            return DateConverter.toLocalDateTime(dateFactory.now());
         } else {
             return postForm.getPublishAt();
         }
