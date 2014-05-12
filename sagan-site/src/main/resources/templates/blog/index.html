@@ -44,8 +44,6 @@
                                     <span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
                                 </div>
                               <div class="meta-data--item">
-                                <!-- TODO: define 'comments' class -->
-                                <!-- TODO: create 'comment-icon', add to sprite -->
                                 <div class="meta-data--icon icon blog-icon comments"></div>
                                 <a class='comments' th:attr="data-disqus-identifier=${post.id}" th:href="@{${post.path} + '#disqus_thread'}"/>
                               </div>
@@ -78,12 +76,12 @@
       <script type="text/javascript" th:inline="javascript">
         var disqus_shortname = /*[[${disqusShortname}]]*/ 'no_shortname';
 
-        (function () {
-          var s = document.createElement('script'); s.async = true;
-          s.type = 'text/javascript';
+        (function (disqus_shortname, document) {
+          var s = document.createElement('script');
+          s.async = true;
           s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-        }());
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+        }(disqus_shortname, document));
       </script>
     </div>
 </body>

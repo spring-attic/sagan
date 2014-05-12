@@ -26,6 +26,10 @@
             <div class="meta-data--icon icon blog-icon calendar"></div>
             <span class='date' th:text='${post.formattedPublishDate}'>June 18, 2013</span>
           </div>
+          <div class="meta-data--item">
+            <div class="meta-data--icon icon blog-icon comments"></div>
+            <a class='comments' th:attr="data-disqus-identifier=${post.id}" th:href="@{${post.path} + '#disqus_thread'}"/>
+          </div>
         </div>
         <article class="blog--post" th:utext="*{renderedContent}">Blog content</article>
     </div>
@@ -33,11 +37,19 @@
     <script type="text/javascript" th:inline="javascript">
       var disqus_shortname = /*[[${disqusShortname}]]*/ 'no_shortname';
       var disqus_identifier = /*[[${post.id}]]*/ 'no_id';
-      (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
+
+      (function(disqus_shortname, document) {
+        injectScript('//' + disqus_shortname + '.disqus.com/embed.js');
+        injectScript('//' + disqus_shortname + '.disqus.com/count.js');
+
+        function injectScript(url) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = url;
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+        }
+
+      }(disqus_shortname, document));
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
