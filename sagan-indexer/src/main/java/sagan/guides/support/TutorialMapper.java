@@ -3,9 +3,9 @@ package sagan.guides.support;
 import sagan.guides.Guide;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
-import sagan.support.DateConverter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import org.jsoup.Jsoup;
 
@@ -23,7 +23,7 @@ class TutorialMapper implements SearchEntryMapper<Guide> {
         entry.setRawContent(text);
         entry.setPath("/guides/tutorials/" + tutorial.getGuideId() + "/");
         entry.addFacetPaths("Guides", "Guides/Tutorials");
-        entry.setPublishAt(DateConverter.toLocalDateTime(new Date(0L)));
+        entry.setPublishAt(LocalDateTime.ofEpochSecond(0, 0, ZoneOffset.UTC));
         return entry;
     }
 }
