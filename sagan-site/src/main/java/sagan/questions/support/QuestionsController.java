@@ -30,7 +30,7 @@ public class QuestionsController {
 	private List<Project> projectsWithStackOverflowTags() {
 		return service.getProjects().stream()
 				.filter(project -> !project.getCategory().equals("attic"))
-				.filter(project -> !project.getStackOverflowTags().isEmpty())
+				.filter(project -> !project.getStackOverflowTagList().isEmpty())
 				.sorted((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()))
 				.collect(Collectors.toList());
 	}
