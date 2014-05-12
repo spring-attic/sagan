@@ -23,39 +23,39 @@ import static org.mockito.BDDMockito.given;
  */
 public class QuestionsControllerTests {
 
-	@Mock
-	private ProjectMetadataService projectMetadataService;
+    @Mock
+    private ProjectMetadataService projectMetadataService;
 
-	private QuestionsController questionsController;
+    private QuestionsController questionsController;
 
-	private ExtendedModelMap model;
+    private ExtendedModelMap model;
 
-	@Before
-	public void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
 
-		MockitoAnnotations.initMocks(this);
-		model = new ExtendedModelMap();
+        MockitoAnnotations.initMocks(this);
+        model = new ExtendedModelMap();
 
-		given(projectMetadataService.getProjects()).willReturn(Arrays.asList(
-				new Project("spring-framework", "Spring Framework", null, null,
-						Collections.emptyList(), false, "active", "spring-core, spring-framework, spring"),
-				new Project("spring-data", "Spring Data", null, null,
-						Collections.emptyList(), true, "active", "spring-data,spring-data-mongodb"),
-				new Project("spring-data-mongodb", "Spring Data MongoDB", null, null, Collections.emptyList(), false, "active", ""),
-				new Project("spring-data-graph", "Spring Data Graph", null, null, Collections.emptyList(), false, "attic", ""),
-				new Project("spring-scala", "Spring Scala", null, null, Collections.emptyList(), false, "incubator", "")
-		));
-		questionsController = new QuestionsController(projectMetadataService);
-	}
+        given(projectMetadataService.getProjects()).willReturn(Arrays.asList(
+                new Project("spring-framework", "Spring Framework", null, null,
+                        Collections.emptyList(), false, "active", "spring-core, spring-framework, spring"),
+                new Project("spring-data", "Spring Data", null, null,
+                        Collections.emptyList(), true, "active", "spring-data,spring-data-mongodb"),
+                new Project("spring-data-mongodb", "Spring Data MongoDB", null, null, Collections.emptyList(), false, "active", ""),
+                new Project("spring-data-graph", "Spring Data Graph", null, null, Collections.emptyList(), false, "attic", ""),
+                new Project("spring-scala", "Spring Scala", null, null, Collections.emptyList(), false, "incubator", "")
+        ));
+        questionsController = new QuestionsController(projectMetadataService);
+    }
 
-	@Test
-	public void index() throws Exception {
+    @Test
+    public void index() throws Exception {
 
-		assertThat(questionsController.show(model), equalTo("questions/index"));
-		assertThat(((List<Project>) model.get("projects")).stream()
-				.map(project -> project.getName())
-				.collect(Collectors.toList()),
-			contains("Spring Data", "Spring Framework"));
-	}
-
+        assertThat(questionsController.show(model), equalTo("questions/index"));
+        assertThat(((List<Project>) model.get("projects")).stream()
+                        .map(project -> project.getName())
+                        .collect(Collectors.toList()),
+                contains("Spring Data", "Spring Framework")
+        );
+    }
 }

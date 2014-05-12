@@ -25,7 +25,7 @@ public class Project {
     @OrderBy("versionName DESC")
     private List<ProjectRelease> releaseList = new ArrayList<>();
     private boolean isAggregator;
-	private String stackOverflowTags;
+    private String stackOverflowTags;
 
 
     @SuppressWarnings("unused")
@@ -43,11 +43,11 @@ public class Project {
         this.category = category;
     }
 
-	public Project(String id, String name, String repoUrl, String siteUrl, List<ProjectRelease> releaseList,
-	               boolean isAggregator, String category, String stackOverflowTags) {
-		this(id, name, repoUrl, siteUrl, releaseList, isAggregator, category);
-		this.setStackOverflowTags(stackOverflowTags);
-	}
+    public Project(String id, String name, String repoUrl, String siteUrl, List<ProjectRelease> releaseList,
+                   boolean isAggregator, String category, String stackOverflowTags) {
+        this(id, name, repoUrl, siteUrl, releaseList, isAggregator, category);
+        this.setStackOverflowTags(stackOverflowTags);
+    }
 
     public String getCategory() {
         return category;
@@ -113,19 +113,19 @@ public class Project {
         return isAggregator;
     }
 
-	public String getStackOverflowTags() {
-		return stackOverflowTags;
-	}
+    public String getStackOverflowTags() {
+        return stackOverflowTags;
+    }
 
-	public void setStackOverflowTags(String stackOverflowTags) {
-		this.stackOverflowTags = stackOverflowTags;
-	}
+    public void setStackOverflowTags(String stackOverflowTags) {
+        this.stackOverflowTags = stackOverflowTags;
+    }
 
-	public Set<String> getStackOverflowTagList() {
-		return StringUtils.commaDelimitedListToSet(this.stackOverflowTags);
-	}
+    public Set<String> getStackOverflowTagList() {
+        return StringUtils.commaDelimitedListToSet(this.stackOverflowTags);
+    }
 
-	@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -154,7 +154,7 @@ public class Project {
                 ", siteUrl='" + siteUrl + '\'' +
                 ", releaseList=" + releaseList +
                 ", isAggregator=" + isAggregator +
-		        ", stackOverflowTags=" + stackOverflowTags +
+                ", stackOverflowTags=" + stackOverflowTags +
                 '}';
     }
 }
