@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +36,6 @@ public class BlogAtomFeedViewTests {
     private SiteUrl siteUrl;
     private AtomFeedView atomFeedView;
     private Feed feed = new Feed();
-    private Calendar calendar = Calendar.getInstance(DateFactory.DEFAULT_TIME_ZONE);
     private HttpServletRequest request = mock(HttpServletRequest.class);
 
     @Before

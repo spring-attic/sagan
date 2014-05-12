@@ -5,7 +5,8 @@ import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.support.nav.SiteUrl;
 
-import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -101,9 +102,9 @@ public class AtomFeedView extends AbstractAtomFeedView {
     }
 
     private void setId(Post post, Entry entry, HttpServletRequest request) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setTimeZone(dateFactory.timeZone());
-        String dateString = dateFormat.format(DateConverter.toZonedDate(post.getCreatedAt(), dateFactory.timeZone()));
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        ZonedDateTime postCreateTime = ZonedDateTime.of(post.getCreatedAt(), dateFactory.timeZone());
+        String dateString = dateTimeFormatter.format(postCreateTime);
         String host = request.getServerName();
         String id = String.format("tag:%s,%s:%s", host, dateString, post.getId());
         entry.setId(id);

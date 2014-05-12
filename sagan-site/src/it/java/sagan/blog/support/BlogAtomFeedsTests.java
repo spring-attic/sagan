@@ -9,9 +9,10 @@ import saganx.AbstractIntegrationTests;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,9 +105,9 @@ public class BlogAtomFeedsTests extends AbstractIntegrationTests {
         assertThat(atomFeed, containsString(post.getTitle()));
         assertThat(atomFeed, containsString(post.getRenderedContent()));
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setTimeZone(DateFactory.DEFAULT_TIME_ZONE);
-        String postDate = dateFormat.format(post.getCreatedAt());
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        ZonedDateTime postCreateTime = ZonedDateTime.of(post.getCreatedAt(), DateFactory.DEFAULT_TIME_ZONE);
+        String postDate = dateTimeFormatter.format(postCreateTime);
         assertThat(atomFeed, containsString(postDate));
         assertThat(atomFeed, containsString("/blog/" + post.getPublicSlug()));
         assertThat(atomFeed, containsString(PostCategory.ENGINEERING.getDisplayName()));
