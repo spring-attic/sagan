@@ -1,1 +1,1 @@
-ALTER TABLE project ADD stackoverflowtags character varying(255);
+alter table project add stackoverflowtags character varying(255);
