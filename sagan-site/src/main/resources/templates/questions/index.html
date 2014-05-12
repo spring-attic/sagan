@@ -8,17 +8,12 @@
     <div layout:fragment="content">
     <div id="content">QUESTIONS</div>
     <div id="sidebar">
-        <h3>Spring Framework</h3>
-        <ul>
-            <li>spring-core</li>
-            <li>spring-framework</li>
-        </ul>
-
-        <h3>Spring Data</h3>
-        <ul>
-            <li>spring-data</li>
-            <li>spring-data-mongodb</li>
-        </ul>
+        <div th:each="project : ${projects}" th:id="${project.id}">
+            <h3 th:text="${project.name}">Spring Framework</h3>
+            <ul>
+                <li th:each="tag : ${project.stackOverflowTagList}" th:text="${tag}">spring-core</li>
+            </ul>
+        </div>
     </div>
     </div>
 </body>
