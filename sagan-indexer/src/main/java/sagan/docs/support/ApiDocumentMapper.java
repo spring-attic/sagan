@@ -4,9 +4,9 @@ import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
-import sagan.support.DateConverter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -36,7 +36,7 @@ class ApiDocumentMapper implements SearchEntryMapper<Document> {
 
         SearchEntry entry = new SearchEntry();
 
-        entry.setPublishAt(DateConverter.toLocalDateTime(new Date(0L)));
+        entry.setPublishAt(LocalDateTime.ofEpochSecond(0, 0, ZoneOffset.UTC));
         entry.setRawContent(apiContent);
         entry.setSummary(apiContent.substring(0, Math.min(apiContent.length(), 500)));
         entry.setTitle(document.title());
