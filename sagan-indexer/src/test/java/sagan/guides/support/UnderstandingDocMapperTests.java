@@ -3,10 +3,10 @@ package sagan.guides.support;
 import sagan.guides.ContentProvider;
 import sagan.guides.UnderstandingDoc;
 import sagan.search.SearchEntry;
-import sagan.support.DateConverter;
 import sagan.support.Fixtures;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class UnderstandingDocMapperTests {
 
     @Test
     public void publishAtDateDefaultsTo0() throws Exception {
-        assertThat(entry.getPublishAt(), equalTo(DateConverter.toLocalDateTime(new Date(0L))));
+        assertThat(entry.getPublishAt(), equalTo(LocalDateTime.ofEpochSecond(0, 0, ZoneOffset.UTC)));
     }
 
     @Test
