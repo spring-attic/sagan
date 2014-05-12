@@ -53,7 +53,7 @@ public class QuestionsControllerTests {
 
         assertThat(questionsController.show(model), equalTo("questions/index"));
         assertThat(((List<Project>) model.get("projects")).stream()
-                        .map(project -> project.getName())
+                        .map(Project::getName)
                         .collect(Collectors.toList()),
                 contains("Spring Data", "Spring Framework")
         );
