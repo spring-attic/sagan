@@ -1,7 +1,6 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
-import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
@@ -34,7 +33,7 @@ class PostFormAdapter {
         Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
         MemberProfile profile = teamRepository.findByUsername(username);
         post.setAuthor(profile);
-        post.setCreatedAt(createdDate(postForm, DateConverter.toLocalDateTime(dateFactory.now())));
+        post.setCreatedAt(createdDate(postForm, dateFactory.now()));
 
         setPostProperties(postForm, content, post);
         return post;
@@ -66,7 +65,7 @@ class PostFormAdapter {
 
     private LocalDateTime publishDate(PostForm postForm) {
         if (!postForm.isDraft() && postForm.getPublishAt() == null) {
-            return DateConverter.toLocalDateTime(dateFactory.now());
+            return dateFactory.now();
         } else {
             return postForm.getPublishAt();
         }

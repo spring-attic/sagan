@@ -2,7 +2,6 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 
@@ -28,7 +27,7 @@ public class PostView {
 
     public String getPath() {
         String path;
-        if (post.isLiveOn(DateConverter.toLocalDateTime(dateFactory.now()))) {
+        if (post.isLiveOn(dateFactory.now())) {
             path = "/blog/" + post.getPublicSlug();
         } else {
             path = "/admin/blog/" + post.getAdminSlug();

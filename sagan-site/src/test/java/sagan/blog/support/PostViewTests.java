@@ -3,9 +3,10 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 import org.junit.After;
@@ -28,12 +29,14 @@ public class PostViewTests {
 
     private Post post;
     private PostView postView;
+    private LocalDateTime now;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
+        now = LocalDateTime.parse("2012-07-02 13:42", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     @After
@@ -59,7 +62,7 @@ public class PostViewTests {
 
     @Test
     public void draftPath() throws ParseException {
-        given(dateFactory.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
+        given(dateFactory.now()).willReturn(now);
         post = PostBuilder.post().id(123L).title("My Post").draft().build();
         postView = new PostView(post, dateFactory);
 
@@ -68,7 +71,7 @@ public class PostViewTests {
 
     @Test
     public void scheduledPost() throws ParseException {
-        given(dateFactory.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
+        given(dateFactory.now()).willReturn(now);
         post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-05 13:42").build();
         postView = new PostView(post, dateFactory);
 
@@ -77,7 +80,7 @@ public class PostViewTests {
 
     @Test
     public void publishedPost() throws ParseException {
-        given(dateFactory.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
+        given(dateFactory.now()).willReturn(now);
         post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-01 13:42").build();
         postView = new PostView(post, dateFactory);
 

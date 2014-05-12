@@ -4,7 +4,6 @@ import sagan.blog.PostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.search.support.SearchService;
-import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 import sagan.team.MemberProfile;
@@ -79,7 +78,7 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
         yesterday = today.minusDays(1);
         tomorrow = today.plusDays(1);
 
-        given(dateFactory.now()).willReturn(DateConverter.toDate(today));
+        given(dateFactory.now()).willReturn(today);
     }
 
     private void setupFixtureData() throws Exception {

@@ -5,11 +5,9 @@ import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
 import sagan.search.support.SearchService;
 import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -26,11 +24,11 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_UpdatePostTests {
 
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private BlogService service;
     private Post post;
-    private LocalDateTime publishAt = LocalDateTime.parse("2013-07-01 12:00",
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-    private Date now = DateTestUtils.getDate("2013-07-01 13:00");
+    private LocalDateTime publishAt = LocalDateTime.parse("2013-07-01 12:00", DATE_TIME_FORMATTER);
+    private LocalDateTime now = LocalDateTime.parse("2013-07-01 13:00", DATE_TIME_FORMATTER);
 
     @Mock
     private PostRepository postRepository;

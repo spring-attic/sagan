@@ -1,6 +1,6 @@
 package sagan.support;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.TimeZone;
 
 import org.springframework.stereotype.Component;
@@ -10,8 +10,8 @@ public class DateFactory {
 
     public static final TimeZone DEFAULT_TIME_ZONE = TimeZone.getTimeZone("UTC");
 
-    public Date now() {
-        return new Date();
+    public LocalDateTime now() {
+        return LocalDateTime.now();
     }
 
     public TimeZone timeZone() {

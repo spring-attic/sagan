@@ -5,12 +5,10 @@ import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
 import sagan.support.DateConverter;
 import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
 import sagan.team.support.TeamRepository;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +34,7 @@ public class PostFormAdapter_UpdatePostTests {
     private boolean broadcast = true;
     private boolean draft = false;
     private LocalDateTime publishAt = LocalDateTime.parse("2013-07-01 12:00", DATE_TIME_FORMATTER);
-    private Date now = DateTestUtils.getDate("2013-07-01 13:00");
+    private LocalDateTime now = LocalDateTime.parse("2013-07-01 13:00", DATE_TIME_FORMATTER);
     private PostForm postForm;
     private String ORIGINAL_AUTHOR = "original author";
 
@@ -110,7 +108,7 @@ public class PostFormAdapter_UpdatePostTests {
         postForm.setDraft(false);
         postForm.setPublishAt(null);
         postFormAdapter.updatePostFromPostForm(post, postForm);
-        assertThat(DateConverter.toDate(post.getPublishAt()), equalTo(now));
+        assertThat(post.getPublishAt(), equalTo(now));
     }
 
     @Test

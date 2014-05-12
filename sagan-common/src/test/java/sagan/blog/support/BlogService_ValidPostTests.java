@@ -5,7 +5,6 @@ import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
 import sagan.search.SearchException;
 import sagan.search.support.SearchService;
-import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 
 import java.time.LocalDateTime;
@@ -55,7 +54,7 @@ public class BlogService_ValidPostTests {
 
     @Before
     public void setup() {
-        given(dateFactory.now()).willReturn(DateConverter.toDate(now));
+        given(dateFactory.now()).willReturn(now);
 
         given(postRepository.save((Post) anyObject())).will(invocation -> {
             Post post = (Post) invocation.getArguments()[0];

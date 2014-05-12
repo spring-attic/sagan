@@ -4,13 +4,11 @@ import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.support.DateConverter;
 import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -40,7 +38,7 @@ public class PostFormAdapter_CreatePostTests {
     private LocalDateTime publishAt = LocalDateTime.parse("2013-07-01 12:00", DATE_TIME_FORMATTER);
     private boolean broadcast = true;
     private boolean draft = false;
-    private Date now = DateTestUtils.getDate("2013-07-01 13:00");
+    private LocalDateTime now = LocalDateTime.parse("2013-07-01 13:00", DATE_TIME_FORMATTER);
 
     @Mock
     private DateFactory dateFactory;
@@ -126,12 +124,12 @@ public class PostFormAdapter_CreatePostTests {
         postForm.setDraft(false);
         postForm.setPublishAt(null);
         post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
-        assertThat(DateConverter.toDate(post.getPublishAt()), equalTo(now));
+        assertThat(post.getPublishAt(), equalTo(now));
     }
 
     @Test
     public void postCreatedDateDefaultsToNow() throws Exception {
-        assertThat(DateConverter.toDate(post.getCreatedAt()), is(now));
+        assertThat(post.getCreatedAt(), is(now));
     }
 
     @Test
