@@ -11,7 +11,9 @@
         <div th:each="project : ${projects}" th:id="${project.id}">
             <h3 th:text="${project.name}">Spring Framework</h3>
             <ul>
-                <li th:each="tag : ${project.stackOverflowTagList}" th:text="${tag}">spring-core</li>
+              <li th:each="tag : ${project.stackOverflowTagList}">
+                <a th:href="'http://stackoverflow.com/questions/tagged/' + ${tag}" th:text="'['+${tag}+']'">[spring-core]</a>
+              </li>
             </ul>
         </div>
     </div>

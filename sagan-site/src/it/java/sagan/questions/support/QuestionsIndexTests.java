@@ -27,12 +27,12 @@ public class QuestionsIndexTests extends AbstractIntegrationTests {
 
         // see seed data in sagan-common/src/main/resources/database/V4__stackoverflow_tags.sql
         assertThat(body, containsString("Spring Framework"));
-        assertThat(body, containsString("spring-framework"));
-        assertThat(body, containsString("spring-core"));
-        assertThat(body, containsString("dependency-injection"));
+        assertThat(body, containsString("[spring-framework]"));
+        assertThat(body, containsString("[spring-core]"));
+        assertThat(body, containsString("[dependency-injection]"));
         assertThat(body, containsString("Spring Data"));
-        assertThat(body, containsString("spring-data"));
-        assertThat(body, containsString("spring-data-mongodb"));
-        assertThat(body, containsString("spring-data-neo4j"));
+        assertThat(body, containsString("[spring-data]"));
+        assertThat(body, containsString("[spring-data-mongodb]"));
+        assertThat(body, containsString("[spring-data-neo4j]"));
     }
 }
