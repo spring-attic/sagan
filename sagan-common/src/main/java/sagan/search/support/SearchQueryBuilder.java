@@ -1,7 +1,8 @@
 package sagan.search.support;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +75,8 @@ class SearchQueryBuilder {
     }
 
     private void filterFutureResults(AndFilterBuilder filterBuilder) {
-        String formattedDate = ISODateTimeFormat.dateTimeNoMillis().print(new Date().getTime());
+        String formattedDate =
+                ISODateTimeFormat.dateTimeNoMillis().print(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
         RangeFilterBuilder rangeFilterBuilder =
                 new RangeFilterBuilder("publishAt").to(formattedDate).includeLower(true).includeUpper(true);
 
