@@ -221,6 +221,9 @@
   height: 20px;
   vertical-align: middle;
 }
+.icon.blog-icon.comments {
+  background-position: 20px 636px;
+}
 .icon.blog-icon.calendar {
   background-position: 20px 594px;
 }

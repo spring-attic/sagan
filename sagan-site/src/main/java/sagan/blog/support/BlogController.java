@@ -130,6 +130,7 @@ class BlogController {
         model.addAttribute("categories", PostCategory.values());
         model.addAttribute("posts", posts);
         model.addAttribute("paginationInfo", new PaginationInfo(postViewPage));
+        model.addAttribute("disqusShortname", service.getDisqusShortname());
         return "blog/index";
     }
 }

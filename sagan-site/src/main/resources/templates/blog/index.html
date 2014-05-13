@@ -43,6 +43,10 @@
                                     <div class="meta-data--icon icon blog-icon calendar"></div>
                                     <span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
                                 </div>
+                              <div class="meta-data--item">
+                                <div class="meta-data--icon icon blog-icon comments"></div>
+                                <a class='comments' th:attr="data-disqus-identifier=${post.id}" th:href="@{${post.path} + '#disqus_thread'}"/>
+                              </div>
                             </div>
                             <div class='blog--post desktop-only'>
                                 <div th:utext="${post.renderedSummary}">
@@ -69,6 +73,16 @@
                 </div>
             </div>
         </div>
+      <script type="text/javascript" th:inline="javascript">
+        var disqus_shortname = /*[[${disqusShortname}]]*/ 'no_shortname';
+
+        (function (disqus_shortname, document) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+        }(disqus_shortname, document));
+      </script>
     </div>
 </body>
 </html>
