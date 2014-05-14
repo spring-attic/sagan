@@ -108,7 +108,7 @@
 }
 .icon.project--logo.logo-spring-ldap {
   width: 93px;
-  height: 107px;
+  height: 105px;
   background-position: 247px 944px;
   margin-top: 19px;
 }
@@ -123,6 +123,12 @@
   height: 92px;
   background-position: 546px 940px;
   margin-top: 23px;
+}
+.icon.project--logo.logo-spring-cloud {
+    width: 150px;
+    height: 111px;
+    background-position: 698px 955px;
+    margin-top: 13px;
 }
 .icon.icon-projects {
   width: 28px;
