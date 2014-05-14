@@ -1,5 +1,6 @@
 package sagan.questions.support;
 
+import org.junit.Ignore;
 import saganx.AbstractIntegrationTests;
 
 import org.jsoup.Jsoup;
@@ -19,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 public class QuestionsIndexTests extends AbstractIntegrationTests {
 
+    @Ignore
     @Test
     public void showsQuestionsIndex() throws Exception {
         MvcResult result = mockMvc.perform(get("/questions")).andExpect(status().isOk())
