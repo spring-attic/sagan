@@ -1,5 +1,9 @@
 package sagan;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import sagan.guides.support.GettingStartedGuides;
 import sagan.support.cache.CachedRestClient;
 
@@ -79,7 +83,7 @@ public class SiteConfig {
 
     @Bean
     public RestTemplate restTemplate() {
-        return new RestTemplate();
+        return new RestTemplate(new HttpComponentsClientHttpRequestFactory(HttpClientBuilder.create().build()));
     }
 
     @Bean
