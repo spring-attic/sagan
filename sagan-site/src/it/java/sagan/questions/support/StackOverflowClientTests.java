@@ -9,9 +9,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
-public class SpringStackOverflowClientTests {
+/**
+ * Integration tests for {@link StackOverflowClient}.
+ */
+public class StackOverflowClientTests {
 
     @Test
     public void test() {
@@ -19,7 +20,7 @@ public class SpringStackOverflowClientTests {
         ClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
 
         RestTemplate restTemplate = new RestTemplate(requestFactory);
-        StackOverflowClient client = new SpringStackOverflowClient(restTemplate);
+        StackOverflowClient client = new StackOverflowClient(restTemplate);
         List<Question> questions = client.getQuestionsForTags("spring");
         System.out.println("questions = " + questions);
     }
