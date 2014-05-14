@@ -2,7 +2,9 @@ package sagan.questions.support;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
 
+@ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 class User {
 
@@ -11,12 +13,4 @@ class User {
 
     @JsonProperty("display_name")
     private String name;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

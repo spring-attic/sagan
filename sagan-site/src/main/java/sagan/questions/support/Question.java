@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
 
+@ToString(exclude = "body")
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Question {
 
@@ -19,16 +21,4 @@ class Question {
     public String id;
 
     public User owner;
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "title='" + title + '\'' +
-                ", body.length=" + body.length() +
-                ", tags=" + tags +
-                ", isAnswered=" + isAnswered +
-                ", id='" + id + '\'' +
-                ", owner=" + owner +
-                '}';
-    }
 }

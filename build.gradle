@@ -60,6 +60,7 @@ configure(javaProjects) {
 
     dependencies {
         compile 'org.slf4j:slf4j-api'
+        compile 'org.projectlombok:lombok:1.12.6'
         testCompile 'junit:junit'
         testCompile 'org.hamcrest:hamcrest-library'
         testCompile 'org.mockito:mockito-core'
