@@ -10,4 +10,11 @@ class Questions {
 
     @JsonProperty
     protected List<Question> items;
+
+    @Override
+    public String toString() {
+        return "Questions{" +
+                "items=" + items +
+                '}';
+    }
 }

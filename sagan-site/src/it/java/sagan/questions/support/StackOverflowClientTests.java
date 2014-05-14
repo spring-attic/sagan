@@ -23,7 +23,7 @@ public class StackOverflowClientTests {
         RestTemplate restTemplate = new RestTemplate(requestFactory);
         StackOverflowClient client = new StackOverflowClient(restTemplate);
         List<Question> questions = client.getQuestionsForTags("spring");
-        System.out.println("questions = " + questions);
+        System.out.println(questions);
     }
 
 }

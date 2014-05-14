@@ -19,4 +19,16 @@ class Question {
     public String id;
 
     public User owner;
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "title='" + title + '\'' +
+                ", body.length=" + body.length() +
+                ", tags=" + tags +
+                ", isAnswered=" + isAnswered +
+                ", id='" + id + '\'' +
+                ", owner=" + owner +
+                '}';
+    }
 }
