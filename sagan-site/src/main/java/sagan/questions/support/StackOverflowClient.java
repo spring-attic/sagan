@@ -56,6 +56,8 @@ class StackOverflowClient {
 
         Questions result = restOperations.getForObject(uriComponents.toUri(), Questions.class);
 
+        System.out.println("result = " + result);
+
         return result.items;
     }
 

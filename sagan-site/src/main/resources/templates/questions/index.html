@@ -6,7 +6,9 @@
 </head>
 <body>
     <div layout:fragment="content">
-    <div id="content">QUESTIONS</div>
+    <div id="content" th:each="question : ${questions}">
+        <h3 th:text="${question.title}">Question Title</h3>
+    </div>
     <div id="sidebar">
         <div th:each="project : ${projects}" th:id="${project.id}">
             <h3 th:text="${project.name}">Spring Framework</h3>

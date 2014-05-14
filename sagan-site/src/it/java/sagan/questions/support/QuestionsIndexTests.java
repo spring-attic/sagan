@@ -14,6 +14,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Integration test proving that the /questions page returns content as expected.
+ */
 public class QuestionsIndexTests extends AbstractIntegrationTests {
 
     @Test
@@ -24,10 +27,10 @@ public class QuestionsIndexTests extends AbstractIntegrationTests {
         Document document = Jsoup.parse(result.getResponse().getContentAsString());
         String body = document.select("body").text();
 
-        // questions
-        assertThat(body, containsString("QUESTIONS"));
+        // latest spring-* questions pulled into the left 2/3 of the page
+        assertThat(body, containsString("primeFace validation")); // TODO: this is going to break in a few minutes...
 
-        // see seed data in
+        // tags on the right 1/3 of the page. see seed data in
         // sagan-common/src/main/resources/database/V4__stackoverflow_tags.sql
         assertThat(body, containsString("Spring Framework"));
         assertThat(body, containsString("[spring-framework]"));
