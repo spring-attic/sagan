@@ -12,11 +12,6 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import static sagan.questions.support.StackOverflowClient.StackOverflowResult.Questions;
-
 @Component
 class StackOverflowClient {
 
@@ -73,15 +68,5 @@ class StackOverflowClient {
         }
 
         return builder;
-    }
-
-    static class StackOverflowResult<T> {
-
-        @JsonProperty
-        protected List<T> items;
-
-        @JsonIgnoreProperties(ignoreUnknown = true)
-        static class Questions extends StackOverflowResult<Question> {
-        }
     }
 }
