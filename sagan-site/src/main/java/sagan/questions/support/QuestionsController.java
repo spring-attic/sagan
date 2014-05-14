@@ -13,20 +13,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 class QuestionsController {
 
     private final ProjectMetadataService projectMetadata;
+    private final StackOverflowClient stackOverflow;
 
     @Autowired
-    public QuestionsController(ProjectMetadataService projectMetadata) {
+    public QuestionsController(ProjectMetadataService projectMetadata, StackOverflowClient stackOverflow) {
         this.projectMetadata = projectMetadata;
+        this.stackOverflow = stackOverflow;
     }
 
     @RequestMapping("/questions")
     public String show(Model model) {
+
+        model.addAttribute("questions", stackOverflow.getQuestionsForTags("spring"));
 
         model.addAttribute("projects", projectMetadata.getProjects().stream()
                 .filter(project -> !project.getCategory().equals("attic"))
                 .filter(project -> !project.getStackOverflowTagList().isEmpty())
                 .sorted((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()))
                 .collect(Collectors.toList()));
+
         return "questions/index";
     }
 
