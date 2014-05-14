@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 class QuestionsController {
 
-    private ProjectMetadataService service;
+    private final ProjectMetadataService projectMetadata;
 
     @Autowired
-    public QuestionsController(ProjectMetadataService service) {
-        this.service = service;
+    public QuestionsController(ProjectMetadataService projectMetadata) {
+        this.projectMetadata = projectMetadata;
     }
 
     @RequestMapping("/questions")
     public String show(Model model) {
 
-        model.addAttribute("projects", service.getProjects().stream()
+        model.addAttribute("projects", projectMetadata.getProjects().stream()
                 .filter(project -> !project.getCategory().equals("attic"))
                 .filter(project -> !project.getStackOverflowTagList().isEmpty())
                 .sorted((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()))
