@@ -45,7 +45,7 @@ public class QuestionsControllerTests {
         Question q2 = new Question();
         q2.title = "Question 2";
 
-        given(stackOverflow.getQuestionsForTags("spring")).willReturn(Arrays.asList(q1, q2));
+        given(stackOverflow.searchForQuestionsTagged("spring")).willReturn(Arrays.asList(q1, q2));
 
         given(projectMetadataService.getProjects()).willReturn(Arrays.asList(
                 new Project("spring-framework", "Spring Framework", null, null,

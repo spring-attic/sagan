@@ -24,7 +24,7 @@ class QuestionsController {
     @RequestMapping("/questions")
     public String show(Model model) {
 
-        model.addAttribute("questions", stackOverflow.getQuestionsForTags("spring"));
+        model.addAttribute("questions", stackOverflow.searchForQuestionsTagged("spring"));
 
         model.addAttribute("projects", projectMetadata.getProjects().stream()
                 .filter(project -> !project.getCategory().equals("attic"))

@@ -16,8 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 class StackOverflowClient {
 
     private static final String DEFAULT_BASE_URL = "https://api.stackexchange.com/2.2";
-    private static final String QUESTIONS_TEMPLATE = "/questions";
-    private static final String ANSWERS_TEMPLATE = QUESTIONS_TEMPLATE + "/%s/answers";
+    private static final String SEARCH_TEMPLATE = "/search";
 
     private static final String TAGGED_PARAM = "tagged";
 
@@ -31,19 +30,18 @@ class StackOverflowClient {
     private final RestOperations restOperations;
     private String baseUrl;
 
-    /**
-     * Creates a new {@link StackOverflowClient} using the given {@link RestOperations}.
-     */
     @Autowired
     public StackOverflowClient(RestOperations restOperations) {
-
         this.restOperations = restOperations;
         this.baseUrl = DEFAULT_BASE_URL;
     }
 
-    public List<Question> getQuestionsForTags(String... tags) {
-
-        UriComponentsBuilder builder = getBuilderFor(baseUrl + QUESTIONS_TEMPLATE);
+    /**
+     * Search for questions that have one or more of the given tags.
+     * See https://api.stackexchange.com/docs/search
+     */
+    public List<Question> searchForQuestionsTagged(String... tags) {
+        UriComponentsBuilder builder = getBuilderFor(baseUrl + SEARCH_TEMPLATE);
 
         if (tags.length > 0) {
             String tagsString = StringUtils.arrayToDelimitedString(tags, ";");
@@ -52,17 +50,12 @@ class StackOverflowClient {
 
         UriComponents uriComponents = builder.build();
 
-        System.out.println("builder = " + builder.build().toUri());
-
         Questions result = restOperations.getForObject(uriComponents.toUri(), Questions.class);
-
-        System.out.println("result = " + result);
 
         return result.items;
     }
 
     private UriComponentsBuilder getBuilderFor(String uri) {
-
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri);
 
         for (Entry<String, String> entry : PARAMETERS.entrySet()) {
