@@ -7,7 +7,8 @@
 <body>
     <div layout:fragment="content">
     <div id="content" th:each="question : ${questions}">
-        <h3 th:text="${question.title}">Question Title</h3>
+        <h3 th:text="${question.title}">title</h3>
+        <span th:text="${question.bodySynopsis}">body</span><br/>
     </div>
     <div id="sidebar">
         <div th:each="project : ${projects}" th:id="${project.id}">

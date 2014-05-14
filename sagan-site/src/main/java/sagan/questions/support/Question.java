@@ -21,4 +21,8 @@ class Question {
     public String id;
 
     public User owner;
+
+    public String getBodySynopsis() {
+        return body.substring(0, body.length() > 200 ? 200 : body.length());
+    }
 }
