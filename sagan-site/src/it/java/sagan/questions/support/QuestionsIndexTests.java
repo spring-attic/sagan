@@ -1,10 +1,12 @@
 package sagan.questions.support;
 
+import saganx.AbstractIntegrationTests;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
+
 import org.springframework.test.web.servlet.MvcResult;
-import saganx.AbstractIntegrationTests;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
@@ -25,7 +27,8 @@ public class QuestionsIndexTests extends AbstractIntegrationTests {
         // questions
         assertThat(body, containsString("QUESTIONS"));
 
-        // see seed data in sagan-common/src/main/resources/database/V4__stackoverflow_tags.sql
+        // see seed data in
+        // sagan-common/src/main/resources/database/V4__stackoverflow_tags.sql
         assertThat(body, containsString("Spring Framework"));
         assertThat(body, containsString("[spring-framework]"));
         assertThat(body, containsString("[spring-core]"));

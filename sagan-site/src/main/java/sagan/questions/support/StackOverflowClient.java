@@ -1,7 +1,10 @@
 package sagan.questions.support;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -9,10 +12,8 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static sagan.questions.support.StackOverflowClient.StackOverflowResult.Questions;
 
@@ -37,8 +38,6 @@ class StackOverflowClient {
 
     /**
      * Creates a new {@link StackOverflowClient} using the given {@link RestOperations}.
-     *
-     * @param restOperations
      */
     @Autowired
     public StackOverflowClient(RestOperations restOperations) {
