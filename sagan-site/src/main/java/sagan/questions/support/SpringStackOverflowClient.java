@@ -19,7 +19,7 @@ import static sagan.questions.support.SpringStackOverflowClient.StackOverflowRes
 @Component
 class SpringStackOverflowClient implements StackOverflowClient {
 
-    private static final String DEFAULT_BASE_URL = "https://api.stackexchange.com/2.0";
+    private static final String DEFAULT_BASE_URL = "https://api.stackexchange.com/2.2";
     private static final String QUESTIONS_TEMPLATE = "/questions";
     private static final String ANSWERS_TEMPLATE = QUESTIONS_TEMPLATE + "/%s/answers";
 
