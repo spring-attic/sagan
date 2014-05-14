@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.util.UriComponents;
@@ -15,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static sagan.questions.support.StackOverflowClient.StackOverflowResult.Answers;
 import static sagan.questions.support.StackOverflowClient.StackOverflowResult.Questions;
 
 @Component
@@ -67,16 +65,6 @@ class StackOverflowClient {
         return result.items;
     }
 
-    public Answer getAcceptedAnswerFor(Question question) {
-
-        Assert.isTrue(question.isAnswered, "The question does not have an answer!");
-
-        UriComponentsBuilder builder = getBuilderFor(baseUrl + String.format(ANSWERS_TEMPLATE, question.id));
-
-        Answers answers = restOperations.getForObject(builder.build().toUri(), Answers.class);
-        return answers.getAccepted();
-    }
-
     private UriComponentsBuilder getBuilderFor(String uri) {
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri);
@@ -95,20 +83,6 @@ class StackOverflowClient {
 
         @JsonIgnoreProperties(ignoreUnknown = true)
         static class Questions extends StackOverflowResult<Question> {
-        }
-
-        static class Answers extends StackOverflowResult<Answer> {
-
-            public Answer getAccepted() {
-
-                for (Answer answer : items) {
-                    if (answer.accepted) {
-                        return answer;
-                    }
-                }
-
-                return null;
-            }
         }
     }
 }
