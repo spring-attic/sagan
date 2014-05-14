@@ -1,5 +1,7 @@
 package sagan.questions.support;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -89,8 +91,10 @@ class SpringStackOverflowClient implements StackOverflowClient {
 
     static class StackOverflowResult<T> {
 
+        @JsonProperty
         protected List<T> items;
 
+        @JsonIgnoreProperties(ignoreUnknown = true)
         static class Questions extends StackOverflowResult<Question> {
         }
 
