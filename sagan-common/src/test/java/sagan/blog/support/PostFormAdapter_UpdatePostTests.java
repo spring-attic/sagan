@@ -3,6 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
+import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 import sagan.team.support.TeamRepository;
@@ -106,7 +107,7 @@ public class PostFormAdapter_UpdatePostTests {
         postForm.setDraft(false);
         postForm.setPublishAt(null);
         postFormAdapter.updatePostFromPostForm(post, postForm);
-        assertThat(post.getPublishAt(), equalTo(now));
+        assertThat(DateConverter.toDate(post.getPublishAt()), equalTo(now));
     }
 
     @Test
@@ -114,7 +115,7 @@ public class PostFormAdapter_UpdatePostTests {
         Date originalDate = DateTestUtils.getDate("2009-11-20 07:00");
         Post post = PostBuilder.post().createdAt(originalDate).build();
         postFormAdapter.updatePostFromPostForm(post, postForm);
-        assertThat(post.getCreatedAt(), is(originalDate));
+        assertThat(DateConverter.toDate(post.getCreatedAt()), is(originalDate));
     }
 
     @Test
@@ -126,6 +127,6 @@ public class PostFormAdapter_UpdatePostTests {
         postForm.setCreatedAt(newDate);
 
         postFormAdapter.updatePostFromPostForm(post, postForm);
-        assertThat(post.getCreatedAt(), is(newDate));
+        assertThat(DateConverter.toDate(post.getCreatedAt()), is(newDate));
     }
 }

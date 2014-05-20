@@ -6,6 +6,7 @@ import sagan.blog.PostCategory;
 import sagan.blog.PostMovedException;
 import sagan.blog.PostNotFoundException;
 import sagan.search.support.SearchService;
+import sagan.support.DateConverter;
 import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 
@@ -155,7 +156,8 @@ public class BlogService {
     }
 
     private void saveToIndex(Post post) {
-        if (post.isLiveOn(dateFactory.now())) {
+        Date now = dateFactory.now();
+        if (post.isLiveOn(DateConverter.toLocalDateTime(now))) {
             try {
                 searchService.saveToIndex(mapper.map(post));
             } catch (Exception e) {

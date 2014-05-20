@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.support.DateConverter;
 
 import java.util.Date;
 
@@ -39,7 +40,7 @@ class PostForm {
         category = post.getCategory();
         broadcast = post.isBroadcast();
         draft = post.isDraft();
-        publishAt = post.getPublishAt();
+        publishAt = DateConverter.toDate(post.getPublishAt());
     }
 
     public String getTitle() {
