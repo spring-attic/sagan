@@ -1,5 +1,6 @@
 package sagan.blog;
 
+import sagan.support.JpaDateConverter;
 import sagan.team.MemberProfile;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -56,6 +58,7 @@ public class Post implements Serializable {
     private String renderedSummary;
 
     @Column(nullable = false)
+    @Convert(converter = JpaDateConverter.class)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(nullable = false)
@@ -65,6 +68,7 @@ public class Post implements Serializable {
     private boolean broadcast = false;
 
     @Column(nullable = true)
+    @Convert(converter = JpaDateConverter.class)
     private LocalDateTime publishAt;
 
     @Column(nullable = true)
