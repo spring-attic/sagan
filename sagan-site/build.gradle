@@ -31,7 +31,7 @@ dependencies {
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3'
 
     // nekohtml is required for thymeleaf's LEGACYHTML5 mode
-    runtime 'net.sourceforge.nekohtml:nekohtml:1.9.15'
+    runtime 'net.sourceforge.nekohtml:nekohtml:1.9.20'
 
     // for use in generating blog atom feeds
     compile 'net.java.dev.rome:rome:1.0.0'
