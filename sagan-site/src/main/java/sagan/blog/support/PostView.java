@@ -11,8 +11,8 @@ import java.util.Date;
 public class PostView {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy");
 
-    private Post post;
-    private DateFactory dateFactory;
+    private final Post post;
+    private final DateFactory dateFactory;
 
     public PostView(Post post, DateFactory dateFactory) {
         this.post = post;
