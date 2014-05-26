@@ -8,6 +8,13 @@ import sagan.team.MemberProfile;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * A data transfer object designed to represent a blog {@link Post} at the view layer,
+ * including /blog, /admin/blog, individual /team member pages and blog Atom feeds. Wraps
+ * and delegates to an underlying Post for most operations, but introduces methods such as
+ * {@link #getPath()} and {@link #getUpdatePath()} with awareness of specific Sagan URL
+ * structures not otherwise suitable for inclusion in the Post class.
+ */
 public class PostView {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy");
 
