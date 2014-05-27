@@ -9,17 +9,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles requests for the index page for all guide docs at /guides.
+ *
+ * @see sagan.guides.support.GettingStartedGuideController
+ * @see sagan.guides.support.TutorialController
+ * @see sagan.guides.support.UnderstandingDocController
+ */
 @Controller
 @NavSection("guides")
 class GuideIndexController {
 
-    private final Tutorials tutorials;
     private final GettingStartedGuides gsGuides;
+    private final Tutorials tutorials;
 
     @Autowired
-    public GuideIndexController(Tutorials tutorials, GettingStartedGuides gsGuides) {
-        this.tutorials = tutorials;
+    public GuideIndexController(GettingStartedGuides gsGuides, Tutorials tutorials) {
         this.gsGuides = gsGuides;
+        this.tutorials = tutorials;
     }
 
     @RequestMapping(value = "/guides", method = { GET, HEAD })

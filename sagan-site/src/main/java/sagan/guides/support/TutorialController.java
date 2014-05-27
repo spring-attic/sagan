@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles requests for tutorial docs at /guides/tutorials.
+ *
+ * @see sagan.guides.support.GettingStartedGuideController
+ * @see sagan.guides.support.UnderstandingDocController
+ */
 @Controller
 @NavSection("guides")
 @RequestMapping(value = "/guides/tutorials", method = { GET, HEAD })

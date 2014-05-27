@@ -14,16 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles requests for the /docs documentation page.
+ */
 @Controller
 @RequestMapping("/docs")
 @NavSection("docs")
 class DocsController {
 
-    private ProjectMetadataService service;
+    private ProjectMetadataService projectService;
 
     @Autowired
     public DocsController(ProjectMetadataService service) {
-        this.service = service;
+        this.projectService = service;
     }
 
     @RequestMapping(value = "", method = { GET, HEAD })
@@ -35,7 +38,7 @@ class DocsController {
     }
 
     private List<Project> nonAggregatorsForCategory(String category) {
-        return service.getProjectsForCategory(category).stream()
+        return projectService.getProjectsForCategory(category).stream()
                 .filter(project -> !project.isAggregator())
                 .sorted((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()))
                 .collect(Collectors.toList());
