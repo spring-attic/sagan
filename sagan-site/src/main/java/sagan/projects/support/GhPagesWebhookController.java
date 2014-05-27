@@ -37,7 +37,7 @@ import static java.lang.String.format;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
- * Accepts requests from GitHub webhook set up at <a
+ * Controller that handles requests from GitHub webhook set up at <a
  * href="https://github.com/spring-projects/gh-pages#readme">the shared gh-pages
  * repository</a> and notifies project leads to merge those new changes into their own
  * projects. This notification happens by adding a new GH Issue to each project under the
@@ -53,7 +53,7 @@ class GhPagesWebhookController {
 
     private static final Log logger = LogFactory.getLog(GhPagesWebhookController.class);
 
-    private final ProjectMetadataService service;
+    private final ProjectMetadataService projectMetadataService;
     private final GitHub gitHub;
     private final String template;
 
@@ -62,7 +62,7 @@ class GhPagesWebhookController {
 
     @Autowired
     public GhPagesWebhookController(ProjectMetadataService service, GitHub gitHub) throws IOException {
-        this.service = service;
+        this.projectMetadataService = service;
         this.gitHub = gitHub;
         template = StreamUtils.copyToString(
                 new ClassPathResource("notifications/gh-pages-updated.md").getInputStream(),
@@ -100,7 +100,7 @@ class GhPagesWebhookController {
         Map<String, Object> root = new HashMap<>();
         root.put("push", push);
         root.put("commits", commits);
-        service.getProjects().stream()
+        projectMetadataService.getProjects().stream()
                 .filter(project -> hasGhPagesBranch(project))
                 .forEach(project -> createGitHubIssue(project, jsonMapper, root, spel));
         headers.set("Status", "200 OK");

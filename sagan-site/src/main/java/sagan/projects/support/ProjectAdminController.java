@@ -22,6 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles administrative actions for Spring project metadata, e.g. adding
+ * new releases, updating documentation urls, etc. Per rules in
+ * {@code sagan.SecurityConfig}, authentication is required for all requests. See
+ * {@link ProjectsController} for public, read-only operations.
+ */
 @Controller
 @RequestMapping("/admin/projects")
 @NavSection("projects")
