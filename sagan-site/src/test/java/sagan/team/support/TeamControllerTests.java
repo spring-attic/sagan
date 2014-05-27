@@ -1,7 +1,6 @@
 package sagan.team.support;
 
 import sagan.blog.support.BlogService;
-import sagan.blog.support.PostViewFactory;
 import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
@@ -36,11 +35,11 @@ public class TeamControllerTests {
     private ExtendedModelMap model = new ExtendedModelMap();
 
     private TeamController teamController;
+    private DateFactory dateFactory = new DateFactory();
 
     @Before
     public void setUp() throws Exception {
-        teamController =
-                new TeamController(teamService, blogService, new PostViewFactory(new DateFactory()));
+        teamController = new TeamController(teamService, blogService, dateFactory);
         List<MemberProfile> members = new ArrayList<>();
 
         members.add(MemberProfileBuilder.profile()

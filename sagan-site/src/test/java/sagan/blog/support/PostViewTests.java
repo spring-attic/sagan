@@ -44,7 +44,7 @@ public class PostViewTests {
     @Test
     public void formattedPublishDateForUnscheduledDraft() {
         post = PostBuilder.post().draft().unscheduled().build();
-        postView = new PostView(post, dateFactory);
+        postView = PostView.of(post, dateFactory);
 
         assertThat(postView.getFormattedPublishDate(), equalTo("Unscheduled"));
     }
@@ -52,7 +52,7 @@ public class PostViewTests {
     @Test
     public void formattedPublishDateForPublishedPosts() throws ParseException {
         post = PostBuilder.post().publishAt("2012-07-02 13:42").build();
-        postView = new PostView(post, dateFactory);
+        postView = PostView.of(post, dateFactory);
 
         assertThat(postView.getFormattedPublishDate(), equalTo("July 02, 2012"));
     }
@@ -61,7 +61,7 @@ public class PostViewTests {
     public void draftPath() throws ParseException {
         given(dateFactory.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
         post = PostBuilder.post().id(123L).title("My Post").draft().build();
-        postView = new PostView(post, dateFactory);
+        postView = PostView.of(post, dateFactory);
 
         assertThat(postView.getPath(), equalTo("/admin/blog/123-my-post"));
     }
@@ -70,7 +70,7 @@ public class PostViewTests {
     public void scheduledPost() throws ParseException {
         given(dateFactory.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
         post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-05 13:42").build();
-        postView = new PostView(post, dateFactory);
+        postView = PostView.of(post, dateFactory);
 
         assertThat(postView.getPath(), equalTo("/admin/blog/123-my-post"));
     }
@@ -79,7 +79,7 @@ public class PostViewTests {
     public void publishedPost() throws ParseException {
         given(dateFactory.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
         post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-01 13:42").build();
-        postView = new PostView(post, dateFactory);
+        postView = PostView.of(post, dateFactory);
 
         assertThat(postView.getPath(), equalTo("/blog/2012/07/01/my-post"));
     }
@@ -90,7 +90,7 @@ public class PostViewTests {
                 .renderedSummary("A different string")
                 .build();
 
-        postView = new PostView(post, dateFactory);
+        postView = PostView.of(post, dateFactory);
 
         assertThat(postView.showReadMore(), is(true));
     }
@@ -102,7 +102,7 @@ public class PostViewTests {
                 .renderedSummary(content)
                 .build();
 
-        postView = new PostView(post, dateFactory);
+        postView = PostView.of(post, dateFactory);
 
         assertThat(postView.showReadMore(), is(false));
     }

@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
@@ -32,22 +33,22 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 class BlogAdminController {
 
     private BlogService service;
-    private PostViewFactory postViewFactory;
     private TeamRepository teamRepository;
+    private DateFactory dateFactory;
 
     @Autowired
-    public BlogAdminController(BlogService service, PostViewFactory postViewFactory, TeamRepository teamRepository) {
+    public BlogAdminController(BlogService service, TeamRepository teamRepository, DateFactory dateFactory) {
         this.service = service;
-        this.postViewFactory = postViewFactory;
         this.teamRepository = teamRepository;
+        this.dateFactory = dateFactory;
     }
 
     @RequestMapping(value = "", method = { GET, HEAD })
     public String dashboard(Model model) {
         Pageable pageRequest = PageableFactory.forDashboard();
-        model.addAttribute("posts", postViewFactory.createPostViewPage(service.getPublishedPosts(pageRequest)));
-        model.addAttribute("drafts", postViewFactory.createPostViewPage(service.getDraftPosts(pageRequest)));
-        model.addAttribute("scheduled", postViewFactory.createPostViewPage(service.getScheduledPosts(pageRequest)));
+        model.addAttribute("posts", PostView.pageOf(service.getPublishedPosts(pageRequest), dateFactory));
+        model.addAttribute("drafts", PostView.pageOf(service.getDraftPosts(pageRequest), dateFactory));
+        model.addAttribute("scheduled", PostView.pageOf(service.getScheduledPosts(pageRequest), dateFactory));
         return "admin/blog/index";
     }
 
@@ -71,7 +72,7 @@ class BlogAdminController {
 
     @RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { GET, HEAD })
     public String showPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
-        model.addAttribute("post", postViewFactory.createPostView(service.getPost(postId)));
+        model.addAttribute("post", PostView.of(service.getPost(postId), dateFactory));
         return "admin/blog/show";
     }
 
@@ -84,7 +85,7 @@ class BlogAdminController {
             MemberProfile memberProfile = teamRepository.findById(new Long(principal.getName()));
             try {
                 Post post = service.addPost(postForm, memberProfile.getUsername());
-                PostView postView = postViewFactory.createPostView(post);
+                PostView postView = PostView.of(post, dateFactory);
                 return "redirect:" + postView.getPath();
             } catch (DataIntegrityViolationException ex) {
                 model.addAttribute("categories", PostCategory.values());
@@ -107,7 +108,7 @@ class BlogAdminController {
         } else {
             try {
                 service.updatePost(post, postForm);
-                PostView postView = postViewFactory.createPostView(post);
+                PostView postView = PostView.of(post, dateFactory);
                 return "redirect:" + postView.getPath();
             } catch (RestClientException e) {
                 model.addAttribute("categories", PostCategory.values());

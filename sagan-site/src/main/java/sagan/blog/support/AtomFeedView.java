@@ -116,7 +116,7 @@ public class AtomFeedView extends AbstractAtomFeedView {
     }
 
     private void setPostUrl(Post post, Entry entry) {
-        PostView postView = new PostView(post, dateFactory);
+        PostView postView = PostView.of(post, dateFactory);
         String postUrl = siteUrl.getAbsoluteUrl(postView.getPath());
         Link postLink = new Link();
         postLink.setHref(postUrl);

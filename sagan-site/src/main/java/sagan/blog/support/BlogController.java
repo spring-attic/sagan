@@ -3,6 +3,7 @@ package sagan.blog.support;
 import sagan.blog.PostMovedException;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.support.DateFactory;
 import sagan.support.nav.NavSection;
 import sagan.support.nav.PageableFactory;
 import sagan.support.nav.PaginationInfo;
@@ -37,12 +38,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 class BlogController {
 
     private final BlogService service;
-    private final PostViewFactory postViewFactory;
+    private final DateFactory dateFactory;
 
     @Autowired
-    public BlogController(BlogService service, PostViewFactory postViewFactory) {
+    public BlogController(BlogService service, DateFactory dateFactory) {
         this.service = service;
-        this.postViewFactory = postViewFactory;
+        this.dateFactory = dateFactory;
     }
 
     @RequestMapping(value = "/{year:\\d+}/{month:\\d+}/{day:\\d+}/{slug}", method = { GET, HEAD })
@@ -51,7 +52,7 @@ class BlogController {
 
         String publicSlug = String.format("%s/%s/%s/%s", year, month, day, slug);
         Post post = service.getPublishedPost(publicSlug);
-        model.addAttribute("post", postViewFactory.createPostView(post));
+        model.addAttribute("post", PostView.of(post, dateFactory));
         model.addAttribute("categories", PostCategory.values());
         model.addAttribute("activeCategory", post.getCategory().getDisplayName());
         model.addAttribute("disqusShortname", service.getDisqusShortname());
@@ -124,7 +125,7 @@ class BlogController {
     }
 
     private String renderListOfPosts(Page<Post> page, Model model, String activeCategory) {
-        Page<PostView> postViewPage = postViewFactory.createPostViewPage(page);
+        Page<PostView> postViewPage = PostView.pageOf(page, dateFactory);
         List<PostView> posts = postViewPage.getContent();
         model.addAttribute("activeCategory", activeCategory);
         model.addAttribute("categories", PostCategory.values());

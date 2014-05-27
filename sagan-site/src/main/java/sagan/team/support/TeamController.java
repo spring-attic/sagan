@@ -3,12 +3,11 @@ package sagan.team.support;
 import sagan.blog.Post;
 import sagan.blog.support.BlogService;
 import sagan.blog.support.PostView;
-import sagan.blog.support.PostViewFactory;
+import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 import sagan.team.MemberProfile;
 import sagan.team.TeamLocation;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,13 +30,13 @@ class TeamController {
 
     private final TeamService teamService;
     private final BlogService blogService;
-    private final PostViewFactory postViewFactory;
+    private final DateFactory dateFactory;
 
     @Autowired
-    public TeamController(TeamService teamService, BlogService blogService, PostViewFactory postViewFactory) {
+    public TeamController(TeamService teamService, BlogService blogService, DateFactory dateFactory) {
         this.teamService = teamService;
         this.blogService = blogService;
-        this.postViewFactory = postViewFactory;
+        this.dateFactory = dateFactory;
     }
 
     @RequestMapping(value = "", method = { GET, HEAD })
@@ -62,7 +61,7 @@ class TeamController {
         }
         model.addAttribute("profile", profile);
         Page<Post> posts = blogService.getPublishedPostsForMember(profile, PageableFactory.forLists(1));
-        Page<PostView> postViewPage = postViewFactory.createPostViewPage(posts);
+        Page<PostView> postViewPage = PostView.pageOf(posts, dateFactory);
         model.addAttribute("posts", postViewPage);
 
         List<TeamLocation> teamLocations = new ArrayList<>();
