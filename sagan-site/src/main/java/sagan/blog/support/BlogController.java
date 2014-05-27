@@ -4,7 +4,7 @@ import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.PostMovedException;
 import sagan.support.DateFactory;
-import sagan.support.nav.NavSection;
+import sagan.support.nav.Navigation;
 import sagan.support.nav.PageableFactory;
 import sagan.support.nav.PaginationInfo;
 
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+import sagan.support.nav.Section;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -34,7 +35,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
  */
 @Controller
 @RequestMapping("/blog")
-@NavSection("blog")
+@Navigation(Section.BLOG)
 class BlogController {
 
     private final BlogService service;

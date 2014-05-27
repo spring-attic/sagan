@@ -2,7 +2,7 @@ package sagan.docs.support;
 
 import sagan.projects.Project;
 import sagan.projects.support.ProjectMetadataService;
-import sagan.support.nav.NavSection;
+import sagan.support.nav.Navigation;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sagan.support.nav.Section;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -19,7 +20,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
  */
 @Controller
 @RequestMapping("/docs")
-@NavSection("docs")
+@Navigation(Section.DOCS)
 class DocsController {
 
     private ProjectMetadataService projectService;

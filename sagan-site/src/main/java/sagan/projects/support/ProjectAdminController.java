@@ -2,7 +2,7 @@ package sagan.projects.support;
 
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
-import sagan.support.nav.NavSection;
+import sagan.support.nav.Navigation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import sagan.support.nav.Section;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -30,7 +31,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
  */
 @Controller
 @RequestMapping("/admin/projects")
-@NavSection("projects")
+@Navigation(Section.PROJECTS)
 class ProjectAdminController {
     private static final String VERSION_PLACEHOLDER = "{version}";
     private static final String VERSION_PATTERN = Pattern.quote(VERSION_PLACEHOLDER);
