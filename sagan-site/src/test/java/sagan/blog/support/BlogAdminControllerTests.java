@@ -31,7 +31,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class BlogAdminControllerTests {
     private static final Post TEST_POST = PostBuilder.post()
@@ -81,9 +80,9 @@ public class BlogAdminControllerTests {
         ExtendedModelMap model = new ExtendedModelMap();
         controller.dashboard(model);
 
-        assertThat(((Page<PostView>)model.get("drafts")).getContent().get(0).getTitle(), equalTo("draft post"));
-        assertThat(((Page<PostView>)model.get("scheduled")).getContent().get(0).getTitle(), equalTo("scheduled post"));
-        assertThat(((Page<PostView>)model.get("posts")).getContent().get(0).getTitle(), equalTo("published post"));
+        assertThat(((Page<PostView>) model.get("drafts")).getContent().get(0).getTitle(), equalTo("draft post"));
+        assertThat(((Page<PostView>) model.get("scheduled")).getContent().get(0).getTitle(), equalTo("scheduled post"));
+        assertThat(((Page<PostView>) model.get("posts")).getContent().get(0).getTitle(), equalTo("published post"));
     }
 
     @Test

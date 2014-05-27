@@ -57,7 +57,7 @@ public class ToolsControllerTests {
 
         List<UpdateSiteArchive> archives = Collections.emptyList();
         ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("STS", "3.1.2.RELEASE",
-		        "http://static.springsource.org/sts/nan/v312/NewAndNoteworthy.html", platforms, archives);
+                "http://static.springsource.org/sts/nan/v312/NewAndNoteworthy.html", platforms, archives);
         when(service.getStsGaDownloads()).thenReturn(toolSuite);
         controller.stsIndex(model);
 
@@ -83,7 +83,7 @@ public class ToolsControllerTests {
 
         List<UpdateSiteArchive> archives = Collections.emptyList();
         ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("GGTS", "3.1.2.RELEASE",
-		        "http://static.springsource.org/sts/nan/v312/NewAndNoteworthy.html", platforms, archives);
+                "http://static.springsource.org/sts/nan/v312/NewAndNoteworthy.html", platforms, archives);
         when(service.getGgtsGaDownloads()).thenReturn(toolSuite);
         controller.ggtsIndex(model);
 

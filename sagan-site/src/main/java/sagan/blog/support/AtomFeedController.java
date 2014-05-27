@@ -45,7 +45,7 @@ class AtomFeedController {
 
     @RequestMapping(value = "/blog/category/{category}.atom", method = { GET, HEAD })
     public AtomFeedView listPublishedPostsForCategory(@PathVariable PostCategory category, Model model,
-                                                          HttpServletResponse response) {
+                                                      HttpServletResponse response) {
         Page<Post> page = blogService.getPublishedPosts(category, PageableFactory.forFeeds());
         prepareResponse(model, response, page, category.getDisplayName(), "/category/" + category.getUrlSlug());
         return atomFeedView;

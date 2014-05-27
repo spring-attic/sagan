@@ -42,9 +42,9 @@ class SearchController {
         return "search/results";
     }
 
-	@ExceptionHandler(SearchException.class)
-	public String handleSearchException(SearchException exception, HttpServletResponse response)  {
-		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		return "search/searcherror";
-	}
+    @ExceptionHandler(SearchException.class)
+    public String handleSearchException(SearchException exception, HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        return "search/searcherror";
+    }
 }

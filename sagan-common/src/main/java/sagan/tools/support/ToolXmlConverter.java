@@ -18,5 +18,4 @@ class ToolXmlConverter {
 
         return state.build();
     }
-
 }

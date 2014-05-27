@@ -55,5 +55,4 @@ public class TeamServiceCachingTests extends AbstractIntegrationTests {
             }
         });
     }
-
 }

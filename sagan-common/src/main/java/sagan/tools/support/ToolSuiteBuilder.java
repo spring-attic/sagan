@@ -23,17 +23,17 @@ class ToolSuiteBuilder {
     private Map<String, EclipseVersion> eclipseVersionMap = new LinkedHashMap<>();
     private Map<String, Architecture> architectureMap = new LinkedHashMap<>();
     private String releaseName;
-	private String whatsNew;
+    private String whatsNew;
 
     public ToolSuiteBuilder(String shortName) {
         this.shortName = shortName;
     }
 
-	public void setWhatsNew(String whatsNew) {
-		this.whatsNew = whatsNew;
-	}
+    public void setWhatsNew(String whatsNew) {
+        this.whatsNew = whatsNew;
+    }
 
-	public void addDownload(Download download) {
+    public void addDownload(Download download) {
         if (download.getOs().equals("all")) {
             extractArchive(download);
         } else {

@@ -52,9 +52,9 @@ public class ToolsServiceTests {
         ToolSuiteDownloads toolSuite = service.getStsGaDownloads();
         assertThat(toolSuite, notNullValue());
 
-	    assertThat(
-			    toolSuite.getWhatsNew(),
-			    equalTo("http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html"));
+        assertThat(
+                toolSuite.getWhatsNew(),
+                equalTo("http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html"));
 
         List<ToolSuitePlatform> platforms = toolSuite.getPlatformList();
         assertThat(platforms.size(), equalTo(3));
@@ -94,9 +94,9 @@ public class ToolsServiceTests {
         ToolSuiteDownloads toolSuite = service.getGgtsGaDownloads();
         assertThat(toolSuite, notNullValue());
 
-	    assertThat(
-			    toolSuite.getWhatsNew(),
-			    equalTo("http://static.springsource.org/ggts/nan/v330/NewAndNoteworthy.html"));
+        assertThat(
+                toolSuite.getWhatsNew(),
+                equalTo("http://static.springsource.org/ggts/nan/v330/NewAndNoteworthy.html"));
 
         List<ToolSuitePlatform> platforms = toolSuite.getPlatformList();
         assertThat(platforms.size(), equalTo(3));
