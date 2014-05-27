@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles search requests at /search.
+ */
 @Controller
 @RequestMapping("/search")
 class SearchController {
