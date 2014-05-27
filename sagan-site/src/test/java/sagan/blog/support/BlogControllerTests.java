@@ -1,7 +1,7 @@
 package sagan.blog.support;
 
-import sagan.blog.PostMovedException;
 import sagan.blog.Post;
+import sagan.blog.PostMovedException;
 import sagan.support.DateFactory;
 
 import java.util.Collections;

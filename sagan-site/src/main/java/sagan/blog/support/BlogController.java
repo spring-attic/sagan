@@ -1,8 +1,8 @@
 package sagan.blog.support;
 
-import sagan.blog.PostMovedException;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.blog.PostMovedException;
 import sagan.support.DateFactory;
 import sagan.support.nav.NavSection;
 import sagan.support.nav.PageableFactory;

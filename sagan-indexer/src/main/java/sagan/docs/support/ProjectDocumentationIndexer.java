@@ -8,7 +8,6 @@ import sagan.search.support.CrawledWebDocumentProcessor;
 import sagan.search.support.CrawlerService;
 import sagan.search.support.SearchService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

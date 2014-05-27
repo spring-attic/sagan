@@ -5,7 +5,6 @@ import sagan.guides.UnderstandingDoc;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.github.RepoContent;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

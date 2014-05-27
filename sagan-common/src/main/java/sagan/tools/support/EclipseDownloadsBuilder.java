@@ -1,7 +1,6 @@
 package sagan.tools.support;
 
 import sagan.tools.Architecture;
-import sagan.tools.DownloadLink;
 import sagan.tools.EclipseDownloads;
 import sagan.tools.EclipsePackage;
 import sagan.tools.EclipsePlatform;

@@ -1,6 +1,5 @@
 package sagan.tools.support;
 
-import org.mockito.Matchers;
 import sagan.support.Fixtures;
 import sagan.tools.Release;
 

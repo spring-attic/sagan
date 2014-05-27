@@ -1,8 +1,8 @@
 package sagan.blog.support;
 
-import sagan.blog.PostNotFoundException;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
+import sagan.blog.PostNotFoundException;
 import sagan.search.support.SearchService;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
