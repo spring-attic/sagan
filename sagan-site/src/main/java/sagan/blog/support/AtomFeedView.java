@@ -29,7 +29,7 @@ import com.sun.syndication.feed.atom.Person;
  * 
  * @see AtomFeedController
  */
-public class AtomFeedView extends AbstractAtomFeedView {
+class AtomFeedView extends AbstractAtomFeedView {
 
     private final SiteUrl siteUrl;
     private final DateFactory dateFactory;
