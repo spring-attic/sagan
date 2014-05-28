@@ -1,25 +1,99 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+      layout:decorator="layout"
+      data-timeago>
 <head>
     <title th:inline="text">Questions</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/questions.css}"/>
 </head>
 <body>
-    <div layout:fragment="content">
-    <div id="content" th:each="question : ${questions}">
-        <h3 th:text="${question.title}">title</h3>
-        <span th:text="${question.bodySynopsis}">body</span><br/>
-    </div>
-    <div id="sidebar">
-        <div th:each="project : ${projects}" th:id="${project.id}">
-            <h3 th:text="${project.name}">Spring Framework</h3>
-            <ul>
-              <li th:each="tag : ${project.stackOverflowTagList}">
-                <a th:href="'http://stackoverflow.com/questions/tagged/' + ${tag}" th:text="'['+${tag}+']'">[spring-core]</a>
-              </li>
-            </ul>
+    <div class="header--content" layout:fragment="header-content">
+        <div class="row-fluid container-fluid">
+            <div class="span8 mobile-left-pane">
+                <h1 class="header--content-title" layout:fragment="header">Spring StackOverflow</h1>
+                <p class="header--content-subtitle" layout:fragment="overview">
+                    Welcome to our StackOverflow page, where we maintain a list of StackOverflow tags that our engineering team
+                    monitors and participates in. If you are a previous forum.spring.io user, please read the
+                    <a href="/blog/">blog post</a> about the change or visit the <a href="http://forum.spring.io">read-only archive</a>.
+                </p>
+            </div>
+            <div class="span4 mobile-left-pane">
+                <div layout:fragment="header-sidebar">
+                    <a class="btn btn-large" href="https://stackoverflow.com/questions/ask">Ask a new Question</a>
+                </div>
+            </div>
         </div>
     </div>
+    <div layout:fragment="content">
+
+        <div class="row-fluid">
+            <div class="span8 mobile-left-pane" style="margin-left:0">
+
+                <h2 class="questions-title">Latest questions from StackOverflow</h2>
+                <div id="questions" class="content-padding">
+                    <div th:each="question : ${questions}" class="question-summary" id="question-summary-${question.id}" >
+                        <div class="statscontainer">
+                            <div class="statsarrow"></div>
+                            <div class="stats">
+                                <div class="vote">
+                                    <div class="votes">
+                                        <span class="vote-count-post"><strong th:text="${question.score}">0</strong></span>
+                                        <div class="viewcount">votes</div>
+                                    </div>
+                                </div>
+                                <div class="status" th:classappend="${question.isAnswered} ? 'answered' : 'unanswered'">
+                                    <strong th:text="${question.answerCount}">0</strong>answers
+                                </div>
+                            </div>
+                            <div class="views" th:text="${question.viewCount} + ' views'" th:title="${question.viewCount} + ' views'">2 views</div>
+                        </div>
+                        <div class="summary">
+                            <h3><a th:href="${question.link}" th:text="${question.title}" class="question-hyperlink">Question title</a></h3>
+                            <div class="excerpt" th:text="${question.bodySynopsis}">
+                                I'm getting this error when submitting login form with unit test: org.springframework.web.servlet.PageNotFound noHandlerFound WARNING: No mapping found for HTTP request with URI ...
+                            </div>
+                            <div class="tags" >
+
+                                <a th:each="tag : ${question.tags}" th:href="'http://stackoverflow.com/questions/tagged/' + ${tag}"
+                                   class="post-tag" th:classappend="'t-' + ${tag}"
+                                   th:title="'show questions tagged ' + ${tag}" rel="tag" th:text="${tag}">tagname</a>
+
+                                <div class="post-menu"></div>
+                            </div>
+                            <div class="started fr">
+                                <div class="user-info">
+                                    <div class="user-action-time">
+                                        asked <time th:datetime="${question.creationDate}" class="relativetime timeago"></time>
+                                    </div>
+                                    <div class="user-gravatar32">
+                                        <a th:href="${question.owner.link}"><div class="gravatar-wrapper-32"><img th:src="${question.owner.profileImage}" alt=""></div></a>
+                                    </div>
+                                    <div class="user-details">
+                                        <a th:href="${question.owner.link}" th:text="${question.owner.name}">username</a><br>
+                                        <span class="reputation-score" title="reputation score " dir="ltr" th:text="${question.owner.reputation}">221</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span4 mobile-left-pane">
+                <aside id="sidebar">
+
+                    <div th:each="project : ${projects}" th:id="${project.id}" class="tag-group">
+                        <h4 th:text="${project.name}">Spring Framework</h4>
+                        <div class="tags">
+                            <a th:each="tag : ${project.stackOverflowTagList}"
+                               th:href="'http://stackoverflow.com/questions/tagged/' + ${tag}" th:text="'['+${tag}+']'"
+                               class="post-tag">[spring-core]</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
     </div>
 </body>
 </html>

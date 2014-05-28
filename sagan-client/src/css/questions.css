@@ -1,0 +1,233 @@
+/* styles from SO all.css */
+#questions {
+    clear: both;
+    width: 100%;
+    float: left;
+}
+
+.questions-title {
+    margin-top: 15px;
+}
+
+.question-summary  {
+    border-bottom: 1px solid #cfcfcf;
+    overflow: hidden;
+    padding: 11px 0;
+    width: 100%;
+    float: left;
+}
+
+.statscontainer {
+    width: 13%;
+    float: left;
+    margin-right: 2%;
+}
+
+.statsarrow {
+    float: right;
+    height: 13px;
+    width: 7px;
+    margin-top: 12px;
+    background-position: 0 -435px;
+}
+
+.stats {
+    background: #ddd;
+    margin: 0;
+    padding: 5px 0;
+    width: 100%;
+}
+
+.vote {
+    text-align: center;
+}
+
+.vote-count-post {
+    display: block;
+    font-size: 24px;
+	padding-left: 6px;
+}
+
+.vote-count-post strong {
+    font-weight: normal;
+}
+
+.status {
+    margin-top: -3px;
+    padding: 4px 0 4px;
+    text-align: center;
+}
+
+.status strong {
+    display: block;
+    font-size: 140%
+}
+
+.answered {
+    font-weight: normal;
+}
+
+.unanswered {
+    background: transparent;
+    color: #9a4444;
+}
+
+.views {
+    padding-top: 4px;
+    color: #999;
+    text-align: center;
+}
+
+.summary {
+    float: left;
+	width: 85%;
+}
+
+.summary h3 {
+    font-size: 130%
+}
+
+.summary h3 a {
+	color: #5fa134;
+}
+
+.summary h3 a:hover {
+	color: #005580;
+}
+
+.excerpt {
+    line-height: 1.2;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.excerpt p {
+    margin-bottom: 3px;
+}
+
+.tags {
+    line-height: 18px;
+    float: left;
+}
+
+.tags a:hover {
+    text-decoration: none;
+}
+
+.post-tag {
+    color: #5fa134;
+    background-color: #d8ebcc;
+    border-bottom: 1px solid #6db33f;
+    border-right: 1px solid #6db33f;
+    padding: 3px 4px 3px 4px;
+    margin: 2px 2px 2px 0;
+    text-decoration: none;
+    font-size: 90%;
+    line-height: 1.4;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+a.post-tag:hover {
+    color: #fff;
+	background-color: #6db33f;
+    border-bottom: 1px solid #6db33f;
+    border-right: 1px solid #6db33f;
+    text-decoration: none;
+}
+
+
+.started {
+    width: 185px;
+    color: #999;
+    float: right;
+    line-height: 18px;
+}
+
+.started img {
+    vertical-align: baseline;
+}
+
+.started .reputation-score {
+    margin-left: 1px;
+    font-size: 100% !important;
+    font-weight: normal !important;
+}
+
+.user-info {
+    height: 35px;
+    width: 185px;
+}
+
+.user-info .user-gravatar32 {
+    float: left;
+    width: 32px;
+    height: 32px;
+}
+
+.gravatar-wrapper-32 {
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+}
+
+.gravatar-wrapper-32 img {
+    height: 32px;
+    margin: 0 auto;
+}
+
+.user-info .user-action-time {
+    margin-top: 2px;
+    margin-bottom: 4px;
+}
+
+.user-info .user-details {
+    float: left;
+    margin-left: 5px;
+    width: 145px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.user-details {
+    color: #888;
+    line-height: 17px;
+}
+
+.user-details a {
+	color: #5fa134;
+}
+
+.user-details a:hover {
+	color: #005580;
+}
+
+.relativetime {
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.reputation-score {
+    font-weight: bold;
+    color: #444;
+    font-size: 100%;
+    margin-right: 2px;
+}
+
+/* sidebar */
+
+#sidebar .tags {
+	float: none;
+}
+
+.tag-group {
+	margin-bottom: 15px;
+}
+
+.tag-group h4 {
+	font-size: 14px;
+	margin-bottom: 3px;
+}
+
