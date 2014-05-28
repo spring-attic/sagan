@@ -2,7 +2,6 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.support.DateFactory;
-import sagan.support.nav.SiteUrl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

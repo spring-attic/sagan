@@ -4,7 +4,6 @@ import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
-import sagan.support.nav.SiteUrl;
 
 import javax.servlet.http.HttpServletResponse;
 

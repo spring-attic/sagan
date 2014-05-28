@@ -4,7 +4,6 @@ import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
 import sagan.support.DateFactory;
-import sagan.support.nav.SiteUrl;
 import saganx.AbstractIntegrationTests;
 
 import java.io.ByteArrayInputStream;

@@ -1,4 +1,4 @@
-package sagan.support.nav;
+package sagan.blog.support;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -7,7 +7,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Component
-public class SiteUrl {
+class SiteUrl {
 
     public String getUrl() {
         HttpServletRequest request =

@@ -1,6 +1,6 @@
 package sagan.support.nav;
 
-public class PageElement {
+class PageElement {
     private final String pageText;
     private final boolean isNavigable;
     private final boolean isCurrentPage;
