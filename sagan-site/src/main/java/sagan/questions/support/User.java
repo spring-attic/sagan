@@ -9,8 +9,15 @@ import lombok.ToString;
 class User {
 
     @JsonProperty("user_id")
-    private int id;
+    public int id;
 
     @JsonProperty("display_name")
-    private String name;
+	public String name;
+
+	@JsonProperty("profile_image")
+	public String profileImage;
+
+	public String link;
+
+	public Integer reputation;
 }
