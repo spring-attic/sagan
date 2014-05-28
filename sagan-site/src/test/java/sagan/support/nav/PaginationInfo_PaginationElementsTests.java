@@ -175,11 +175,11 @@ public class PaginationInfo_PaginationElementsTests {
 
     private void assertNotNavigableElementOnPage(String page, PageElement element) {
         assertThat(element.isNavigable(), is(false));
-        assertThat(element.getPageText(), is(page));
+        assertThat(element.getLabel(), is(page));
     }
 
     private void assertNavigableElementOnPage(String page, PageElement element) {
         assertThat(element.isNavigable(), is(true));
-        assertThat(element.getPageText(), is(page));
+        assertThat(element.getLabel(), is(page));
     }
 }

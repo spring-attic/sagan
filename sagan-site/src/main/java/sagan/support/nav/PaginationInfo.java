@@ -5,9 +5,13 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 /**
- * Used in views for rendering pagination controls Page numbers are not zero indexed
+ * Used in views for rendering pagination controls. Note that page numbers are indexed
+ * from 1 as opposed to 0.
+ *
+ * @see PageElement
  */
 public class PaginationInfo {
+
     private final long currentPage;
     private final long totalPages;
 
@@ -36,6 +40,10 @@ public class PaginationInfo {
         return currentPage - 1;
     }
 
+    public List<PageElement> getPageElements() {
+        return new PageElementsBuilder(currentPage, totalPages).build();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -59,9 +67,4 @@ public class PaginationInfo {
         result = 31 * result + (int) (totalPages ^ (totalPages >>> 32));
         return result;
     }
-
-    public List<PageElement> getPageElements() {
-        return new PageElementsBuilder(currentPage, totalPages).build();
-    }
-
 }
