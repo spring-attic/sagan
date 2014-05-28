@@ -13,6 +13,7 @@ var initFormWidgets = require('feature/formWidgets/main');
 var initPrettify = require('feature/prettify/main');
 var initNewsletterSubscription = require('feature/newsletterSubscription/main');
 var initMap = require('feature/map/main');
+var initTimeAgo = require('feature/timeAgo/main');
 
 var most = require('most');
 var $ = require('jquery');
@@ -33,7 +34,8 @@ var features = {
     'form-widgets': initFormWidgets,
     'code-prettify': initPrettify,
     'newsletter-subscription': initNewsletterSubscription,
-    'map': initMap
+    'map': initMap,
+    'timeago': initTimeAgo
 };
 
 initFeatures(features, document).each(function(features) {

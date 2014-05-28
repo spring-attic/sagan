@@ -13,7 +13,8 @@
         "font-awesome": "3.2.1",
         "leaflet": "~0.5",
         "zeroclipboard": "1.1.7",
-        "google-code-prettify": "~1.0"
+        "google-code-prettify": "~1.0",
+        "jquery-timeago": "1.4.1"
     },
     "overrides": {
         "jquery": {
