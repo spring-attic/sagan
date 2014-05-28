@@ -49,6 +49,9 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+/**
+ * Site-wide web security configuration.
+ */
 @Configuration
 class SecurityConfig {
 

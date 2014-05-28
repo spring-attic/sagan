@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
- * Controller handling HTTP requests for the team section of the site.
+ * Controller that handles read-only team actions, e.g. listing all team members at /team
+ * and showing individual team members at /team/{member}. See {@link TeamAdminController}
+ * for administrative operations.
  */
 @Controller
 @RequestMapping("/team")
@@ -39,7 +41,7 @@ class TeamController {
         this.dateFactory = dateFactory;
     }
 
-    @RequestMapping(value = "", method = { GET, HEAD })
+    @RequestMapping(method = { GET, HEAD })
     public String showTeam(Model model) {
         List<MemberProfile> profiles = teamService.fetchActiveMembers();
         model.addAttribute("profiles", profiles);
@@ -72,5 +74,4 @@ class TeamController {
 
         return "team/show";
     }
-
 }

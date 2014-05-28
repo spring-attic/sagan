@@ -38,6 +38,10 @@ import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDiale
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+/**
+ * Site-wide MVC infrastructure configuration. See also {@link SiteConfig} where certain
+ * additional web infrastructure is configured.
+ */
 @Configuration
 @ControllerAdvice
 class MvcConfig extends WebMvcConfigurerAdapter {

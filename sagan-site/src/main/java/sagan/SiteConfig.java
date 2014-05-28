@@ -38,6 +38,13 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 import com.google.common.cache.CacheBuilder;
 
+/**
+ * Main configuration resource for the Sagan web application. The use of @ComponentScan
+ * here ensures that other @Configuration classes such as {@link MvcConfig} and
+ * {@link SecurityConfig} are included as well.
+ *
+ * @see SiteMain#main(String[])
+ */
 @EnableAutoConfiguration
 @Configuration
 @EnableCaching(proxyTargetClass = true)
@@ -129,5 +136,4 @@ public class SiteConfig {
         ConcurrentMap<Object, Object> map = cacheBuilder.build().asMap();
         return new ConcurrentMapCache(name, map, false);
     }
-
 }
