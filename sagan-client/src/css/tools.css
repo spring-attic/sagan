@@ -302,6 +302,7 @@
   margin: 40px 0 33px;
   width: 232px;
   padding: 0 10px;
+  min-height: 182px;
 }
 .tool-versions--wrapper .tool-versions--container .platform:last-child {
   border-right: none;
