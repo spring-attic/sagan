@@ -23,6 +23,9 @@ import org.hibernate.annotations.Type;
 
 import org.springframework.util.StringUtils;
 
+/**
+ * JPA Entity representing an individual blog post.
+ */
 @Entity
 @SuppressWarnings("serial")
 public class Post implements Serializable {

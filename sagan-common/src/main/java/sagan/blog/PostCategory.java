@@ -1,5 +1,8 @@
 package sagan.blog;
 
+/**
+ * Available categories for blog posts.
+ */
 public enum PostCategory {
 
     ENGINEERING("Engineering", "engineering"),
@@ -30,5 +33,4 @@ public enum PostCategory {
     public String toString() {
         return getDisplayName();
     }
-
 }
