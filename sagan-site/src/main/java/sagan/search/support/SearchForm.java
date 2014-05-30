@@ -3,6 +3,11 @@ package sagan.search.support;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Form-backing object used during POST requests to /search.
+ *
+ * @see SearchController
+ */
 class SearchForm {
     private String q = "";
     private List<String> filters = new ArrayList<>();

@@ -3,7 +3,7 @@ package sagan;
 import sagan.projects.support.ProjectMetadataService;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.StaticPagePathFinder;
-import sagan.support.nav.NavSection;
+import sagan.support.nav.Navigation;
 
 import java.io.IOException;
 
@@ -38,6 +38,10 @@ import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDiale
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+/**
+ * Site-wide MVC infrastructure configuration. See also {@link SiteConfig} where certain
+ * additional web infrastructure is configured.
+ */
 @Configuration
 @ControllerAdvice
 class MvcConfig extends WebMvcConfigurerAdapter {
@@ -94,9 +98,9 @@ class MvcConfig extends WebMvcConfigurerAdapter {
 
                 if (handler instanceof HandlerMethod) {
                     HandlerMethod handlerMethod = (HandlerMethod) handler;
-                    NavSection navSection = handlerMethod.getBean().getClass().getAnnotation(NavSection.class);
+                    Navigation navSection = handlerMethod.getBean().getClass().getAnnotation(Navigation.class);
                     if (navSection != null && modelAndView != null) {
-                        modelAndView.addObject("navSection", navSection.value());
+                        modelAndView.addObject("navSection", navSection.value().toString().toLowerCase());
                     }
                 }
             }

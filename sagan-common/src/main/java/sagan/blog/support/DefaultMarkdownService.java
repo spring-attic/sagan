@@ -5,6 +5,9 @@ import sagan.support.github.GitHubClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * A {@link MarkdownService} based on the GitHub Markdown rendering API.
+ */
 @Service
 class DefaultMarkdownService implements MarkdownService {
 
@@ -16,7 +19,7 @@ class DefaultMarkdownService implements MarkdownService {
     }
 
     /**
-     * Process the given markdown through GitHub's Markdown Rendering API. See
+     * Process the given markdown through GitHub's Markdown rendering API. See
      * http://developer.github.com/v3/markdown
      */
     @Override

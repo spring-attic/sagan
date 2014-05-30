@@ -4,7 +4,6 @@ import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
-import sagan.support.nav.SiteUrl;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,7 +44,7 @@ class AtomFeedController {
 
     @RequestMapping(value = "/blog/category/{category}.atom", method = { GET, HEAD })
     public AtomFeedView listPublishedPostsForCategory(@PathVariable PostCategory category, Model model,
-                                                          HttpServletResponse response) {
+                                                      HttpServletResponse response) {
         Page<Post> page = blogService.getPublishedPosts(category, PageableFactory.forFeeds());
         prepareResponse(model, response, page, category.getDisplayName(), "/category/" + category.getUrlSlug());
         return atomFeedView;

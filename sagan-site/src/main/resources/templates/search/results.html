@@ -31,9 +31,9 @@
                 <a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
 
                 <div th:each="element : ${paginationInfo.pageElements }" >
-                    <a th:href="@{${beans.uih.path()}(page=${element.pageText},q=${searchForm.q},filters=${searchForm.filters})}" th:text="${element.pageText}" th:if="${element.navigable}" ></a>
-                    <div th:text="${element.pageText}" th:if="${!element.navigable && element.currentPage}" class="active" ></div>
-                    <div th:text="${element.pageText}" th:unless="${element.navigable || element.currentPage}" ></div>
+                    <a th:href="@{${beans.uih.path()}(page=${element.label},q=${searchForm.q},filters=${searchForm.filters})}" th:text="${element.label}" th:if="${element.navigable}" ></a>
+                    <div th:text="${element.label}" th:if="${!element.navigable && element.currentPage}" class="active" ></div>
+                    <div th:text="${element.label}" th:unless="${element.navigable || element.currentPage}" ></div>
                 </div>
 
                 <a th:href="@{/search(page=${paginationInfo.nextPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>

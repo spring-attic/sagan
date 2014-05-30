@@ -3,8 +3,8 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
+import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
-import sagan.support.nav.PaginationInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.ui.ExtendedModelMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.eq;
 import static sagan.blog.PostCategory.ENGINEERING;
@@ -37,10 +37,8 @@ public class BlogController_PublishedPostsForCategoryTests {
 
     private MockHttpServletRequest request = new MockHttpServletRequest();
 
-    @Mock
-    private PostViewFactory postViewFactory;
-
     private BlogController controller;
+    private DateFactory dateFactory = new DateFactory();
     private ExtendedModelMap model = new ExtendedModelMap();
     private List<PostView> posts = new ArrayList<>();
     private Page<PostView> page;
@@ -49,17 +47,16 @@ public class BlogController_PublishedPostsForCategoryTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new BlogController(blogService, postViewFactory);
+        controller = new BlogController(blogService, dateFactory);
 
         List<Post> posts = new ArrayList<>();
-        posts.add(PostBuilder.post().build());
+        posts.add(PostBuilder.post().title("post title").build());
         Page<Post> postsPage = new PageImpl<>(posts, new PageRequest(TEST_PAGE, 10), 20);
         Pageable testPageable = PageableFactory.forLists(TEST_PAGE);
 
         page = new PageImpl<>(new ArrayList<>(), testPageable, 1);
 
         given(blogService.getPublishedPosts(eq(TEST_CATEGORY), eq(testPageable))).willReturn(postsPage);
-        given(postViewFactory.createPostViewPage(postsPage)).willReturn(page);
 
         request.setServletPath("/blog");
 
@@ -68,12 +65,12 @@ public class BlogController_PublishedPostsForCategoryTests {
 
     @Test
     public void providesAllCategoriesInModel() {
-        assertThat((PostCategory[]) model.get("categories"), is(PostCategory.values()));
+        assertThat(model.get("categories"), is(PostCategory.values()));
     }
 
     @Test
     public void providesPaginationInfoInModel() {
-        assertThat((PaginationInfo) model.get("paginationInfo"), is(new PaginationInfo(page)));
+        assertThat(model.get("paginationInfo"), notNullValue());
     }
 
     @Test
@@ -85,6 +82,6 @@ public class BlogController_PublishedPostsForCategoryTests {
     @Test
     public void postsInModel() {
         controller.listPublishedPostsForCategory(TEST_CATEGORY, model, TEST_PAGE);
-        assertThat((List<PostView>) model.get("posts"), is(posts));
+        assertThat(((List<PostView>) model.get("posts")).get(0).getTitle(), is("post title"));
     }
 }

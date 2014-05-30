@@ -1,29 +1,33 @@
 package sagan.projects.support;
 
-import sagan.support.nav.NavSection;
+import sagan.support.nav.Navigation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sagan.support.nav.Section;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles requests for the projects overview page at /projects.
+ */
 @Controller
 @RequestMapping("/projects")
-@NavSection("projects")
+@Navigation(Section.PROJECTS)
 class ProjectsController {
 
-    private ProjectMetadataService service;
+    private ProjectMetadataService projectMetadataService;
 
     @Autowired
-    public ProjectsController(ProjectMetadataService service) {
-        this.service = service;
+    public ProjectsController(ProjectMetadataService projectMetadataService) {
+        this.projectMetadataService = projectMetadataService;
     }
 
-    @RequestMapping(value = "", method = { GET, HEAD })
+    @RequestMapping(method = { GET, HEAD })
     public String listProjects(Model model) {
-        model.addAttribute("projectMetadata", service);
+        model.addAttribute("projectMetadata", projectMetadataService);
         return "projects/index";
     }
 

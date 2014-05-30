@@ -1,10 +1,10 @@
 package sagan.search.support;
 
-import javax.servlet.http.HttpServletResponse;
-
 import sagan.search.SearchException;
 import sagan.support.nav.PageableFactory;
 import sagan.support.nav.PaginationInfo;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles search requests at /search.
+ */
 @Controller
 @RequestMapping("/search")
 class SearchController {
@@ -42,9 +45,9 @@ class SearchController {
         return "search/results";
     }
 
-	@ExceptionHandler(SearchException.class)
-	public String handleSearchException(SearchException exception, HttpServletResponse response)  {
-		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		return "search/searcherror";
-	}
+    @ExceptionHandler(SearchException.class)
+    public String handleSearchException(SearchException exception, HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        return "search/searcherror";
+    }
 }

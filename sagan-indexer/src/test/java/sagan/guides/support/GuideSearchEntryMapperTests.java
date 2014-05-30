@@ -4,7 +4,6 @@ import sagan.guides.ContentProvider;
 import sagan.guides.DefaultGuideMetadata;
 import sagan.guides.GettingStartedGuide;
 import sagan.guides.Guide;
-import sagan.guides.ImageProvider;
 import sagan.search.SearchEntry;
 
 import org.junit.Before;

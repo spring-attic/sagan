@@ -1,12 +1,12 @@
 package sagan.guides.support;
 
-import org.junit.Ignore;
 import sagan.support.github.GitHubClient;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 

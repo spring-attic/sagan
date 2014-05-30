@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles requests for understanding docs at /understanding.
+ *
+ * @see sagan.guides.support.TutorialController
+ * @see sagan.guides.support.GettingStartedGuideController
+ */
 @Controller
 class UnderstandingDocController {
 

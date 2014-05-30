@@ -1,10 +1,8 @@
 package saganx;
 
-import org.junit.Ignore;
 import sagan.support.FreePortFinder;
 
 import java.io.IOException;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +12,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import org.springframework.boot.SpringApplication;

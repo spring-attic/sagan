@@ -15,9 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles requests for Spring Tool Suite (STS) and Groovy/Grails Tool
+ * Suite (GGTS) pages.
+ *
+ * Note that unlike other sections of the site, there is no "Admin" counterpart for this
+ * controller. Rather, metadata about tools releases and download link locations is
+ * managed in XML files stored at dist.springsource.com. See
+ * {@link sagan.tools.support.ToolsService} for details.
+ */
 @Controller
 @RequestMapping("/tools")
-public class ToolsController {
+class ToolsController {
+
     private ToolsService toolsService;
 
     @Autowired
@@ -25,7 +35,7 @@ public class ToolsController {
         this.toolsService = toolsService;
     }
 
-    @RequestMapping(value = "", method = { GET, HEAD })
+    @RequestMapping(method = { GET, HEAD })
     public String index(Model model) throws Exception {
         ToolSuiteDownloads stsDownloads = toolsService.getStsGaDownloads();
         model.addAttribute("stsDownloadLinks", stsDownloads.getPreferredDownloadLinks());
@@ -88,5 +98,4 @@ public class ToolsController {
         model.addAttribute("platforms", platforms);
         return "tools/eclipse/index";
     }
-
 }

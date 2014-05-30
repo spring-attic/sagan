@@ -26,8 +26,7 @@ public class BlogController_ShowTests {
     @Mock
     private HttpServletRequest request;
 
-    private PostViewFactory postViewFactory;
-
+    private DateFactory dateFactory;
     private BlogController controller;
     private ExtendedModelMap model = new ExtendedModelMap();
     private String viewName;
@@ -36,9 +35,8 @@ public class BlogController_ShowTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        postViewFactory = new PostViewFactory(new DateFactory());
 
-        controller = new BlogController(blogService, postViewFactory);
+        controller = new BlogController(blogService, dateFactory);
 
         post = PostBuilder.post().publishAt("2012-02-01 11:00").build();
         given(blogService.getPublishedPost("2012/02/01/title")).willReturn(post);

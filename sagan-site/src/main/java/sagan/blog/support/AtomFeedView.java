@@ -2,7 +2,6 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.support.DateFactory;
-import sagan.support.nav.SiteUrl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ import com.sun.syndication.feed.atom.Person;
  * 
  * @see AtomFeedController
  */
-public class AtomFeedView extends AbstractAtomFeedView {
+class AtomFeedView extends AbstractAtomFeedView {
 
     private final SiteUrl siteUrl;
     private final DateFactory dateFactory;
@@ -116,7 +115,7 @@ public class AtomFeedView extends AbstractAtomFeedView {
     }
 
     private void setPostUrl(Post post, Entry entry) {
-        PostView postView = new PostView(post, dateFactory);
+        PostView postView = PostView.of(post, dateFactory);
         String postUrl = siteUrl.getAbsoluteUrl(postView.getPath());
         Link postLink = new Link();
         postLink.setHref(postUrl);

@@ -39,7 +39,7 @@ public class AuthorizationTests extends AbstractIntegrationTests {
         List<String> actuatorPaths = Arrays.asList(
                 "/metrics", "/beans", "/autoconfig", "/env", "/mappings", "/dump", "/configprops", "/trace");
 
-        for(String path : actuatorPaths) {
+        for (String path : actuatorPaths) {
             mockMvc.perform(get(path)).andExpect(status().isUnauthorized());
 
             mockMvc.perform(get(path + "/")).andExpect(status().is4xxClientError());
@@ -47,7 +47,8 @@ public class AuthorizationTests extends AbstractIntegrationTests {
             mockMvc.perform(get(path + ".json")).andExpect(status().is4xxClientError());
         }
 
-        // endpoints.shutdown.enabled=true must be specified for /shutdown to be enabled. Ensure it hasn't been.
+        // endpoints.shutdown.enabled=true must be specified for /shutdown to be enabled.
+        // Ensure it hasn't been.
         mockMvc.perform(post("/shutdown")).andExpect(status().is4xxClientError());
     }
 }

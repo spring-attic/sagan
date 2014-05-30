@@ -3,8 +3,6 @@ package sagan.blog.support;
 import sagan.DatabaseConfig;
 import saganx.AbstractIntegrationTests;
 
-import java.lang.reflect.Method;
-
 import org.junit.Test;
 
 import org.springframework.aop.Advisor;
@@ -57,5 +55,4 @@ public class BlogServiceCachingTests extends AbstractIntegrationTests {
                 }
             });
     }
-
 }

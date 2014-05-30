@@ -111,6 +111,7 @@ public class ToolSuiteTests {
                 linuxArchitectures))));
 
         List<UpdateSiteArchive> archives = Collections.emptyList();
-        return new ToolSuiteDownloads("ShortName", "3.1.2.RELEASE", "http://static.springsource.org/sts/nan/latest/NewAndNoteworthy.html",platforms, archives);
+        return new ToolSuiteDownloads("ShortName", "3.1.2.RELEASE",
+                "http://static.springsource.org/sts/nan/latest/NewAndNoteworthy.html", platforms, archives);
     }
 }

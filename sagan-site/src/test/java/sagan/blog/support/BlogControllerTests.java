@@ -1,7 +1,7 @@
 package sagan.blog.support;
 
-import sagan.blog.PostMovedException;
 import sagan.blog.Post;
+import sagan.blog.PostMovedException;
 import sagan.support.DateFactory;
 
 import java.util.Collections;
@@ -26,12 +26,11 @@ import static org.mockito.Matchers.*;
 
 public class BlogControllerTests {
 
-    private PostViewFactory postViewFactory;
-
     @Mock
     private BlogService blogService;
     private BlogController blogController;
 
+    private DateFactory dateFactory = new DateFactory();
     private Locale defaultLocale;
 
     private ExtendedModelMap model = new ExtendedModelMap();
@@ -39,14 +38,13 @@ public class BlogControllerTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        postViewFactory = new PostViewFactory(new DateFactory());
         PageImpl<Post> page = new PageImpl<>(Collections.<Post> emptyList(), new PageRequest(1, 1), 1);
         given(blogService.getPublishedPostsByDate(anyInt(), any(Pageable.class))).willReturn(page);
         given(blogService.getPublishedPostsByDate(anyInt(), anyInt(), any(Pageable.class))).willReturn(page);
         given(blogService.getPublishedPostsByDate(anyInt(), anyInt(), anyInt(), any(Pageable.class))).willReturn(
                 page);
 
-        blogController = new BlogController(blogService, postViewFactory);
+        blogController = new BlogController(blogService, dateFactory);
 
         defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);

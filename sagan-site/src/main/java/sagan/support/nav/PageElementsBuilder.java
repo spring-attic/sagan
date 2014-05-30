@@ -3,6 +3,12 @@ package sagan.support.nav;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility for constructing a list of {@link PageElement}s to be used when rendering
+ * pagination controls at the view layer.
+ *
+ * @see PaginationInfo
+ */
 class PageElementsBuilder {
 
     private final long currentPage;

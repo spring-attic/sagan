@@ -9,7 +9,7 @@ import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
 
 import java.security.Principal;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.junit.Before;
@@ -21,7 +21,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.validation.MapBindingResult;
@@ -29,11 +28,8 @@ import org.springframework.validation.MapBindingResult;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.same;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogAdminControllerTests {
@@ -47,9 +43,9 @@ public class BlogAdminControllerTests {
     @Mock
     private BlogService blogService;
 
+    private DateFactory dateFactory = new DateFactory();
     private ExtendedModelMap model = new ExtendedModelMap();
     private Principal principal;
-    private PostViewFactory postViewFactory;
     private MapBindingResult bindingResult;
 
     @Mock
@@ -58,39 +54,35 @@ public class BlogAdminControllerTests {
     @Before
     public void setup() {
         bindingResult = new MapBindingResult(new HashMap<>(), "postForm");
-        postViewFactory = new PostViewFactory(new DateFactory());
         principal = () -> "12345";
 
-        controller = new BlogAdminController(blogService, postViewFactory, teamRepository);
+        controller = new BlogAdminController(blogService, teamRepository, dateFactory);
     }
 
     @Test
     public void dashboardShowsUsersPosts() {
-        postViewFactory = mock(PostViewFactory.class);
-        controller = new BlogAdminController(blogService, postViewFactory, teamRepository);
+        controller = new BlogAdminController(blogService, teamRepository, dateFactory);
 
-        Page<Post> drafts = new PageImpl<>(new ArrayList<>(), PageableFactory.forDashboard(), 1);
-        Page<Post> published = new PageImpl<>(new ArrayList<>(), PageableFactory.forDashboard(), 1);
-        Page<Post> scheduled = new PageImpl<>(new ArrayList<>(), PageableFactory.forDashboard(), 1);
+        Page<Post> drafts = new PageImpl<>(
+                Arrays.asList(new Post("draft post", "body", PostCategory.ENGINEERING)),
+                PageableFactory.forDashboard(), 1);
+        Page<Post> scheduled = new PageImpl<>(
+                Arrays.asList(new Post("scheduled post", "body", PostCategory.ENGINEERING)),
+                PageableFactory.forDashboard(), 1);
+        Page<Post> published = new PageImpl<>(
+                Arrays.asList(new Post("published post", "body", PostCategory.ENGINEERING)),
+                PageableFactory.forDashboard(), 1);
 
-        given(blogService.getPublishedPosts((PageRequest) anyObject())).willReturn(published);
-        given(blogService.getDraftPosts((PageRequest) anyObject())).willReturn(drafts);
-        given(blogService.getScheduledPosts((PageRequest) anyObject())).willReturn(scheduled);
-
-        Page<PostView> draftViews = new PageImpl<>(new ArrayList<>());
-        Page<PostView> publishedViews = new PageImpl<>(new ArrayList<>());
-        Page<PostView> scheduledViews = new PageImpl<>(new ArrayList<>());
-
-        given(postViewFactory.createPostViewPage(same(drafts))).willReturn(draftViews);
-        given(postViewFactory.createPostViewPage(same(published))).willReturn(publishedViews);
-        given(postViewFactory.createPostViewPage(same(scheduled))).willReturn(scheduledViews);
+        given(blogService.getPublishedPosts(anyObject())).willReturn(published);
+        given(blogService.getDraftPosts(anyObject())).willReturn(drafts);
+        given(blogService.getScheduledPosts(anyObject())).willReturn(scheduled);
 
         ExtendedModelMap model = new ExtendedModelMap();
         controller.dashboard(model);
 
-        assertThat(model.get("drafts"), sameInstance((Object) draftViews));
-        assertThat(model.get("posts"), sameInstance((Object) publishedViews));
-        assertThat(model.get("scheduled"), sameInstance((Object) scheduledViews));
+        assertThat(((Page<PostView>) model.get("drafts")).getContent().get(0).getTitle(), equalTo("draft post"));
+        assertThat(((Page<PostView>) model.get("scheduled")).getContent().get(0).getTitle(), equalTo("scheduled post"));
+        assertThat(((Page<PostView>) model.get("posts")).getContent().get(0).getTitle(), equalTo("published post"));
     }
 
     @Test

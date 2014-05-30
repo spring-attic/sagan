@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Controller that handles administrative team actions, e.g. editing member details and
+ * synchronizing information from the GitHub team where membership is actually managed.
+ * Per rules in {@code sagan.SecurityConfig}, authentication is required for all requests.
+ * See {@link TeamController} for public, read-only operations.
+ */
 @Controller
 class TeamAdminController {
 
@@ -86,5 +92,4 @@ class TeamAdminController {
         }
         throw new RuntimeException("Unable to obtain GitHub connection");
     }
-
 }
