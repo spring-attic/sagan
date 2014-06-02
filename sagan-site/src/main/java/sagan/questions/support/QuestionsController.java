@@ -1,6 +1,8 @@
 package sagan.questions.support;
 
 import sagan.projects.support.ProjectMetadataService;
+import sagan.support.nav.Navigation;
+import sagan.support.nav.Section;
 
 import java.util.stream.Collectors;
 
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@Navigation(Section.QUESTIONS)
 class QuestionsController {
 
     private final ProjectMetadataService projectMetadata;
