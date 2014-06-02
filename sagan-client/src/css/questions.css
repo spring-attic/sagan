@@ -5,6 +5,12 @@
     float: left;
 }
 
+@media (min-width: 800px) {
+    .askquestion {
+        margin: 10%;
+    }
+}
+
 .questions-title {
     margin-top: 15px;
 }
