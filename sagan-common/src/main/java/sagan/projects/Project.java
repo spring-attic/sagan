@@ -118,7 +118,7 @@ public class Project {
     }
 
     public void setStackOverflowTags(String stackOverflowTags) {
-        this.stackOverflowTags = stackOverflowTags;
+        this.stackOverflowTags = stackOverflowTags.replaceAll(" ","");
     }
 
     public Set<String> getStackOverflowTagList() {
