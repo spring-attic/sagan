@@ -9,6 +9,7 @@ dependencies {
     compile "org.springframework:spring-context"
     compile "org.springframework.security:spring-security-core"
     compile 'org.springframework.social:spring-social-github:1.0.0.M4'
+    compile 'org.springframework:spring-webmvc' // Prevents Spring Social from pulling in 3.2.x
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
     compile "org.springframework.data:spring-data-jpa:1.5.1.RELEASE"
 
