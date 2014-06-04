@@ -6,6 +6,7 @@ sourceSets {
 }
 
 dependencies {
+    compile "org.apache.httpcomponents:httpclient" // Prevents Jest from pulling in 4.2.x
     compile "org.springframework:spring-context"
     compile "org.springframework.security:spring-security-core"
     compile 'org.springframework.social:spring-social-github:1.0.0.M4'
