@@ -31,6 +31,15 @@ configure(allprojects) {
                 file('.settings') // containing intentionally checked-in Eclipse metadata
         ]
     }
+    configurations.all {
+      resolutionStrategy {
+        eachDependency { DependencyResolveDetails details ->
+          if (details.requested.group == 'org.springframework') {
+            details.useVersion '4.0.5.RELEASE'
+          }
+        }
+      }
+    }
 }
 
 configure(rootProject) {
@@ -94,4 +103,3 @@ configure(bootProjects) {
     springBoot.backupSource = false
     bootRun.dependsOn writeGitPropertiesFile
 }
-
