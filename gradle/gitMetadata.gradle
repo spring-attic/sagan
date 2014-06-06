@@ -13,7 +13,7 @@ buildscript {
  */
 task gitMetadata(type: org.ajoberstar.gradle.git.tasks.GitBranchList) << {
     ext {
-        branch = workingBranch?.name ?: "detatched HEAD"
+        branch = workingBranch?.name ?: "detached HEAD"
         commitId = workingBranch?.commit?.abbreviatedId ?: "unknown"
         commitTime =  workingBranch?.commit?.time ?
                 new Date(new Integer(workingBranch.commit.time).longValue()*1000L).format("yyyy-MM-dd HH:mm") : "unknown"
