@@ -9,8 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.util.Assert;
 
-import com.googlecode.flyway.core.Flyway;
-
 public abstract class DatabaseConfig {
 
     public static final String CACHE_NAME = "cache.database";
@@ -25,15 +23,6 @@ public abstract class DatabaseConfig {
         dataSource.setMinIdle(8);
         dataSource.setTestOnBorrow(false);
         dataSource.setTestOnReturn(false);
-
-        this.migrateSchema(dataSource);
-    }
-
-    protected void migrateSchema(DataSource dataSource) {
-        Flyway flyway = new Flyway();
-        flyway.setLocations("database");
-        flyway.setDataSource(dataSource);
-        flyway.migrate();
     }
 }
 

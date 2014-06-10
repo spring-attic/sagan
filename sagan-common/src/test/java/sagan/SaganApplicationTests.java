@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 
-import static com.googlecode.flyway.core.util.StringUtils.arrayToCommaDelimitedString;
+import static org.springframework.util.StringUtils.arrayToCommaDelimitedString;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.core.env.AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME;

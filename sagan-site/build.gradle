@@ -18,7 +18,6 @@ dependencies {
     compile project(':sagan-client')
 
     compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.apache.tomcat.embed:tomcat-embed-jasper" // until spring-boot #248 is fixed
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.springframework.security:spring-security-acl"

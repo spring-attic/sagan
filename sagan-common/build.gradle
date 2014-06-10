@@ -11,7 +11,6 @@ dependencies {
     compile 'org.springframework.social:spring-social-github:1.0.0.M4'
     compile 'org.springframework:spring-webmvc' // Prevents Spring Social from pulling in 3.2.x
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
-    compile "org.springframework.data:spring-data-jpa:1.5.1.RELEASE"
 
     compile 'org.elasticsearch:elasticsearch:0.90.2'
     compile('io.searchbox:jest:0.0.4') {
@@ -26,7 +25,7 @@ dependencies {
     compile 'org.apache.tomcat:tomcat-jdbc'
 
     // for use in on-the-fly database setup and migrations
-    compile 'com.googlecode.flyway:flyway-core:2.2.1'
+    compile 'org.flywaydb:flyway-core'
 
     compile('org.simpleframework:simple-xml:2.7') {
         exclude(module: 'stax')
