@@ -2,9 +2,6 @@
 springBoot.mainClass = 'sagan.SiteMain'
 
 applicationDefaultJvmArgs = [
-        // Avoid PermGen errors during JRuby/Asciidoctor guide processing on JDK 7 with `gradle :sagan-site:bootRun`
-        // See http://www.gradle.org/docs/1.7/release-notes#specify-default-jvm-arguments-for-the-application-plugin
-        "-XX:MaxPermSize=128M",
         // Set SAGAN_HOME env variable to the root of sagan project. This allows to register an additional
         // resource handler location and serve static resources directly from the sagan-client module during dev.
         // See sagan.ClientResourcesConfig
