@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.elasticsearch.common.joda.time.format.ISODateTimeFormat;
 import org.elasticsearch.index.query.AndFilterBuilder;
+import org.elasticsearch.index.query.FilterBuilder;
 import org.elasticsearch.index.query.OrFilterBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -32,6 +33,7 @@ class SearchQueryBuilder {
 
     Search.Builder forEmptyQuery(Pageable pageable, List<String> filters) {
         QueryBuilder query = QueryBuilders.boolQuery().should(QueryBuilders.matchAllQuery());
+        query = QueryBuilders.filteredQuery(query, queryFilters());
 
         String search = buildSearch(query, filters, pageable);
         return new Search.Builder(search);
@@ -40,6 +42,7 @@ class SearchQueryBuilder {
     Search.Builder forQuery(String queryTerm, Pageable pageable, List<String> filters) {
         QueryBuilder query = QueryBuilders.multiMatchQuery(queryTerm, BOOSTED_TITLE_FIELD, RAW_CONTENT_FIELD);
         query = QueryBuilders.customScoreQuery(query).script(BOOST_CURRENT_VERSION_SCRIPT);
+        query = QueryBuilders.filteredQuery(query, queryFilters());
 
         String search = buildSearch(query, filters, pageable);
         return new Search.Builder(search);
@@ -50,7 +53,7 @@ class SearchQueryBuilder {
 
         addPagination(pageable, searchSourceBuilder);
         addQuery(query, searchSourceBuilder);
-        addFilters(filters, searchSourceBuilder);
+        addPostFilters(filters, searchSourceBuilder);
         addFacetPathsResult(searchSourceBuilder);
         addHighlights(searchSourceBuilder);
 
@@ -66,19 +69,22 @@ class SearchQueryBuilder {
         return searchSourceBuilder.query(query);
     }
 
-    private void addFilters(List<String> filters, SearchSourceBuilder searchSourceBuilder) {
+    private void addPostFilters(List<String> filters, SearchSourceBuilder searchSourceBuilder) {
         AndFilterBuilder andFilterBuilder = new AndFilterBuilder();
-        filterFutureResults(andFilterBuilder);
         filterFacets(filters, andFilterBuilder);
         searchSourceBuilder.filter(andFilterBuilder);
     }
 
-    private void filterFutureResults(AndFilterBuilder filterBuilder) {
+    private FilterBuilder queryFilters() {
+        return filterFutureResults();
+    }
+
+    private FilterBuilder filterFutureResults() {
         String formattedDate = ISODateTimeFormat.dateTimeNoMillis().print(new Date().getTime());
         RangeFilterBuilder rangeFilterBuilder =
                 new RangeFilterBuilder("publishAt").to(formattedDate).includeLower(true).includeUpper(true);
 
-        filterBuilder.add(rangeFilterBuilder);
+        return rangeFilterBuilder;
     }
 
     private void filterFacets(List<String> filters, AndFilterBuilder filterBuilder) {

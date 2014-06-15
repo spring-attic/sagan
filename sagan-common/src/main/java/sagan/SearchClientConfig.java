@@ -2,6 +2,8 @@ package sagan;
 
 import java.util.LinkedHashSet;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -32,7 +34,8 @@ class SearchClientConfig {
         LinkedHashSet<String> servers = new LinkedHashSet<>();
         servers.add(endpoint);
         logger.info("**** Elastic Search endpoint: " + endpoint);
-        return new ClientConfig.Builder(servers).multiThreaded(true).build();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").create();
+        return new ClientConfig.Builder(servers).multiThreaded(true).gson(gson).build();
     }
 
 }

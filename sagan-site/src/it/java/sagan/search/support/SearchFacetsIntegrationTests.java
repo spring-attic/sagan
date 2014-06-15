@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
@@ -243,9 +244,9 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
     @Test
     public void unpublishedEntriesDoNotAppearInResultsOrFacets() throws ParseException {
         SearchEntry unpublishedPost = SearchEntryBuilder.entry()
-                .path("http://example.com/blog")
+                .path("http://example.com/anotherBlog")
                 .title("a title")
-                .publishAt("2100-12-01 12:32")
+                .publishAt(new Date(System.currentTimeMillis() + (24 * 60 * 60 * 1000)))
                 .facetPath("Blog")
                 .facetPath("Blog/Engineering").build();
 
@@ -257,6 +258,9 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
 
         List<SearchResult> results = searchResults.getPage().getContent();
         assertThat(results.size(), equalTo(2));
+
+        List<String> paths = results.stream().map(SearchResult::getPath).collect(toList());
+        assertThat(paths, hasItems(blog.getPath(), gettingStarted.getPath()));
 
         List<SearchFacet> facets = searchResults.getFacets();
         assertThat(facets.size(), equalTo(2));
