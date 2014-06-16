@@ -3,14 +3,16 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.support.DateFactory;
+import sagan.support.time.DateTimeFactory;
+import sagan.support.time.DateTimeUtils;
 import saganx.AbstractIntegrationTests;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -102,9 +104,7 @@ public class BlogAtomFeedsTests extends AbstractIntegrationTests {
         assertThat(atomFeed, containsString(post.getTitle()));
         assertThat(atomFeed, containsString(post.getRenderedContent()));
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setTimeZone(DateFactory.DEFAULT_TIME_ZONE);
-        String postDate = dateFormat.format(post.getCreatedAt());
+        String postDate = DateTimeUtils.formatAsDate(post.getCreatedAt().atZone(DateTimeFactory.DEFAULT_TIME_ZONE));
         assertThat(atomFeed, containsString(postDate));
         assertThat(atomFeed, containsString("/blog/" + post.getPublicSlug()));
         assertThat(atomFeed, containsString(PostCategory.ENGINEERING.getDisplayName()));
@@ -123,15 +123,14 @@ public class BlogAtomFeedsTests extends AbstractIntegrationTests {
     }
 
     private void createPosts(int numPostsToCreate) {
-        Calendar calendar = Calendar.getInstance();
         List<Post> posts = new ArrayList<>();
         for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
-            calendar.set(2013, 10, postNumber);
+            LocalDateTime dateTime = LocalDateTime.of(2013, Month.NOVEMBER, postNumber, 0, 0);
             Post post = new PostBuilder().title("This week in Spring - November " + postNumber + ", 2013")
                     .rawContent("Raw content")
                     .renderedContent("Html content")
                     .renderedSummary("Html summary")
-                    .createdAt(calendar.getTime())
+                    .createdAt(dateTime)
                     .build();
             posts.add(post);
         }

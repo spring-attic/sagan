@@ -8,8 +8,8 @@ import sagan.blog.support.PublishedBlogPostsIndexer;
 import sagan.search.SearchEntry;
 import sagan.search.support.SearchService;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.Month;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,13 +51,11 @@ public class PublishedBlogPostsIndexerTests extends AbstractIndexerIntegrationTe
     private PostRepository postRepository;
 
     private Post post;
-    private Date publishedDate;
+    private LocalDateTime publishedDate;
 
     @Before
     public void setUp() throws Exception {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2012, 3, 20);
-        publishedDate = calendar.getTime();
+        publishedDate = LocalDateTime.of(2012, Month.APRIL, 20, 0, 0);
 
         post = PostBuilder.post()
                 .title("Spring is here")

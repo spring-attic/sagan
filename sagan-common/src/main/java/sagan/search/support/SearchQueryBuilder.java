@@ -1,10 +1,7 @@
 package sagan.search.support;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.Clock;
+import java.util.*;
 
 import org.elasticsearch.common.joda.time.format.ISODateTimeFormat;
 import org.elasticsearch.index.query.AndFilterBuilder;
@@ -74,7 +71,8 @@ class SearchQueryBuilder {
     }
 
     private void filterFutureResults(AndFilterBuilder filterBuilder) {
-        String formattedDate = ISODateTimeFormat.dateTimeNoMillis().print(new Date().getTime());
+        String formattedDate = ISODateTimeFormat.dateTimeNoMillis().print(Clock.systemDefaultZone().millis());
+
         RangeFilterBuilder rangeFilterBuilder =
                 new RangeFilterBuilder("publishAt").to(formattedDate).includeLower(true).includeUpper(true);
 

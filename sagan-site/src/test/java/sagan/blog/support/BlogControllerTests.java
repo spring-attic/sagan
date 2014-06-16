@@ -2,7 +2,8 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostMovedException;
-import sagan.support.DateFactory;
+import sagan.support.ViewHelper;
+import sagan.support.time.DateTimeFactory;
 
 import java.util.Collections;
 import java.util.Locale;
@@ -30,8 +31,8 @@ public class BlogControllerTests {
     private BlogService blogService;
     private BlogController blogController;
 
-    private DateFactory dateFactory = new DateFactory();
-    private Locale defaultLocale;
+    private DateTimeFactory dateTimeFactory = DateTimeFactory.withDefaultTimeZone();
+    private ViewHelper viewHelper = new ViewHelper(Locale.US);
 
     private ExtendedModelMap model = new ExtendedModelMap();
 
@@ -44,15 +45,8 @@ public class BlogControllerTests {
         given(blogService.getPublishedPostsByDate(anyInt(), anyInt(), anyInt(), any(Pageable.class))).willReturn(
                 page);
 
-        blogController = new BlogController(blogService, dateFactory);
+        blogController = new BlogController(blogService, dateTimeFactory, viewHelper);
 
-        defaultLocale = Locale.getDefault();
-        Locale.setDefault(Locale.US);
-    }
-
-    @After
-    public void tearDown() {
-        Locale.setDefault(defaultLocale);
     }
 
     @Test

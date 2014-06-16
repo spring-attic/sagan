@@ -4,9 +4,8 @@ import sagan.guides.UnderstandingDoc;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
 
-import java.util.Date;
-
 import org.jsoup.Jsoup;
+import sagan.support.time.DateTimeUtils;
 
 class UnderstandingDocMapper implements SearchEntryMapper<UnderstandingDoc> {
     @Override
@@ -18,7 +17,7 @@ class UnderstandingDocMapper implements SearchEntryMapper<UnderstandingDoc> {
         entry.setPath("understanding/" + guide.getSubject());
         entry.setSummary(rawContent.substring(0, Math.min(500, rawContent.length())));
         entry.addFacetPaths("Guides", "Guides/Understanding");
-        entry.setPublishAt(new Date(0L));
+        entry.setPublishAt(DateTimeUtils.epoch());
         entry.setSubTitle("Understanding Doc");
         return entry;
     }

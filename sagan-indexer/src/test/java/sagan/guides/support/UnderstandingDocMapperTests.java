@@ -2,9 +2,8 @@ package sagan.guides.support;
 
 import sagan.guides.UnderstandingDoc;
 import sagan.search.SearchEntry;
+import sagan.support.time.DateTimeUtils;
 import sagan.support.Fixtures;
-
-import java.util.Date;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
@@ -26,7 +25,7 @@ public class UnderstandingDocMapperTests {
 
     @Test
     public void publishAtDateDefaultsTo0() throws Exception {
-        assertThat(entry.getPublishAt(), equalTo(new Date(0L)));
+        assertThat(entry.getPublishAt(), equalTo(DateTimeUtils.epoch()));
     }
 
     @Test

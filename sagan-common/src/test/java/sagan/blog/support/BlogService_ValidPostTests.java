@@ -5,10 +5,9 @@ import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
 import sagan.search.SearchException;
 import sagan.search.support.SearchService;
-import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
+import sagan.support.time.DateTimeFactory;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -19,6 +18,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import org.springframework.test.util.ReflectionTestUtils;
+import sagan.support.time.DateTimeUtils;
 
 import static org.mockito.BDDMockito.*;
 import static org.mockito.Matchers.anyObject;
@@ -29,8 +29,8 @@ public class BlogService_ValidPostTests {
     private static final String AUTHOR_USERNAME = "username";
     private Post post;
     private PostForm postForm = new PostForm();
-    private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
-    private Date now = DateTestUtils.getDate("2013-07-01 13:00");
+    private LocalDateTime publishAt = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 12:00");
+    private LocalDateTime now = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 13:00");
 
     @Mock
     private PostRepository postRepository;
@@ -39,7 +39,7 @@ public class BlogService_ValidPostTests {
     private PostFormAdapter postFormAdapter;
 
     @Mock
-    private DateFactory dateFactory;
+    private DateTimeFactory dateTimeFactory;
 
     @Mock
     private SearchService searchService;
@@ -51,7 +51,7 @@ public class BlogService_ValidPostTests {
 
     @Before
     public void setup() {
-        given(dateFactory.now()).willReturn(now);
+        given(dateTimeFactory.now()).willReturn(now);
 
         given(postRepository.save((Post) anyObject())).will(invocation -> {
             Post post = (Post) invocation.getArguments()[0];
@@ -62,7 +62,7 @@ public class BlogService_ValidPostTests {
         post = PostBuilder.post().publishAt(publishAt).build();
         given(postFormAdapter.createPostFromPostForm(postForm, AUTHOR_USERNAME)).willReturn(post);
 
-        service = new BlogService(postRepository, postFormAdapter, dateFactory, searchService);
+        service = new BlogService(postRepository, postFormAdapter, dateTimeFactory, searchService);
         service.addPost(postForm, AUTHOR_USERNAME);
     }
 

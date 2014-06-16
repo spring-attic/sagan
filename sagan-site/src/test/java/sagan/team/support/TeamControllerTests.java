@@ -1,7 +1,7 @@
 package sagan.team.support;
 
 import sagan.blog.support.BlogService;
-import sagan.support.DateFactory;
+import sagan.support.time.DateTimeFactory;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
 import sagan.team.TeamLocation;
@@ -35,11 +35,11 @@ public class TeamControllerTests {
     private ExtendedModelMap model = new ExtendedModelMap();
 
     private TeamController teamController;
-    private DateFactory dateFactory = new DateFactory();
+    private DateTimeFactory dateTimeFactory = DateTimeFactory.withDefaultTimeZone();
 
     @Before
     public void setUp() throws Exception {
-        teamController = new TeamController(teamService, blogService, dateFactory);
+        teamController = new TeamController(teamService, blogService, dateTimeFactory);
         List<MemberProfile> members = new ArrayList<>();
 
         members.add(MemberProfileBuilder.profile()

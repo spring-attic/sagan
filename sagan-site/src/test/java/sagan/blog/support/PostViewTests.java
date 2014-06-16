@@ -2,8 +2,8 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
+import sagan.support.time.DateTimeFactory;
+import sagan.support.DateTimeTestUtils;
 
 import java.text.ParseException;
 import java.util.Locale;
@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import sagan.support.time.DateTimeUtils;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;
@@ -22,7 +23,7 @@ import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 public class PostViewTests {
 
     @Mock
-    private DateFactory dateFactory;
+    private DateTimeFactory dateTimeFactory;
 
     private Locale defaultLocale;
 
@@ -44,7 +45,7 @@ public class PostViewTests {
     @Test
     public void formattedPublishDateForUnscheduledDraft() {
         post = PostBuilder.post().draft().unscheduled().build();
-        postView = PostView.of(post, dateFactory);
+        postView = PostView.of(post, dateTimeFactory);
 
         assertThat(postView.getFormattedPublishDate(), equalTo("Unscheduled"));
     }
@@ -52,34 +53,34 @@ public class PostViewTests {
     @Test
     public void formattedPublishDateForPublishedPosts() throws ParseException {
         post = PostBuilder.post().publishAt("2012-07-02 13:42").build();
-        postView = PostView.of(post, dateFactory);
+        postView = PostView.of(post, dateTimeFactory);
 
-        assertThat(postView.getFormattedPublishDate(), equalTo("July 02, 2012"));
+        assertThat(postView.getFormattedPublishDate(), equalTo("July 2, 2012"));
     }
 
     @Test
     public void draftPath() throws ParseException {
-        given(dateFactory.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
+        given(dateTimeFactory.now()).willReturn(DateTimeUtils.parseDateTimeNoSeconds("2012-07-02 13:42"));
         post = PostBuilder.post().id(123L).title("My Post").draft().build();
-        postView = PostView.of(post, dateFactory);
+        postView = PostView.of(post, dateTimeFactory);
 
         assertThat(postView.getPath(), equalTo("/admin/blog/123-my-post"));
     }
 
     @Test
     public void scheduledPost() throws ParseException {
-        given(dateFactory.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
+        given(dateTimeFactory.now()).willReturn(DateTimeUtils.parseDateTimeNoSeconds("2012-07-02 13:42"));
         post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-05 13:42").build();
-        postView = PostView.of(post, dateFactory);
+        postView = PostView.of(post, dateTimeFactory);
 
         assertThat(postView.getPath(), equalTo("/admin/blog/123-my-post"));
     }
 
     @Test
     public void publishedPost() throws ParseException {
-        given(dateFactory.now()).willReturn(DateTestUtils.getDate("2012-07-02 13:42"));
+        given(dateTimeFactory.now()).willReturn(DateTimeUtils.parseDateTimeNoSeconds("2012-07-02 13:42"));
         post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-01 13:42").build();
-        postView = PostView.of(post, dateFactory);
+        postView = PostView.of(post, dateTimeFactory);
 
         assertThat(postView.getPath(), equalTo("/blog/2012/07/01/my-post"));
     }
@@ -90,7 +91,7 @@ public class PostViewTests {
                 .renderedSummary("A different string")
                 .build();
 
-        postView = PostView.of(post, dateFactory);
+        postView = PostView.of(post, dateTimeFactory);
 
         assertThat(postView.showReadMore(), is(true));
     }
@@ -102,7 +103,7 @@ public class PostViewTests {
                 .renderedSummary(content)
                 .build();
 
-        postView = PostView.of(post, dateFactory);
+        postView = PostView.of(post, dateTimeFactory);
 
         assertThat(postView.showReadMore(), is(false));
     }

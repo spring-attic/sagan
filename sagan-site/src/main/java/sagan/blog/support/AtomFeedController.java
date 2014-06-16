@@ -2,8 +2,8 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
+import sagan.support.time.DateTimeFactory;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,9 +30,9 @@ class AtomFeedController {
     private final AtomFeedView atomFeedView;
 
     @Autowired
-    public AtomFeedController(BlogService blogService, SiteUrl siteUrl, DateFactory dateFactory) {
+    public AtomFeedController(BlogService blogService, SiteUrl siteUrl, DateTimeFactory dateTimeFactory) {
         this.blogService = blogService;
-        this.atomFeedView = new AtomFeedView(siteUrl, dateFactory);
+        this.atomFeedView = new AtomFeedView(siteUrl, dateTimeFactory);
     }
 
     @RequestMapping(value = "/blog.atom", method = { GET, HEAD })

@@ -3,11 +3,11 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
+import sagan.support.time.DateTimeFactory;
+import sagan.support.time.DateTimeUtils;
 import sagan.team.support.TeamRepository;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,13 +31,13 @@ public class PostFormAdapter_UpdatePostTests {
     private PostCategory category = PostCategory.ENGINEERING;
     private boolean broadcast = true;
     private boolean draft = false;
-    private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
-    private Date now = DateTestUtils.getDate("2013-07-01 13:00");
+    private LocalDateTime publishAt = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 12:00");
+    private LocalDateTime now = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 13:00");
     private PostForm postForm;
     private String ORIGINAL_AUTHOR = "original author";
 
     @Mock
-    private DateFactory dateFactory;
+    private DateTimeFactory dateTimeFactory;
 
     @Mock
     private TeamRepository teamRepository;
@@ -52,7 +52,7 @@ public class PostFormAdapter_UpdatePostTests {
 
     @Before
     public void setup() {
-        given(dateFactory.now()).willReturn(now);
+        given(dateTimeFactory.now()).willReturn(now);
         given(postSummary.forContent(anyString(), anyInt())).willReturn(SUMMARY);
         given(renderer.render(content)).willReturn(RENDERED_HTML);
 
@@ -65,7 +65,7 @@ public class PostFormAdapter_UpdatePostTests {
         postForm.setBroadcast(broadcast);
         postForm.setPublishAt(publishAt);
 
-        postFormAdapter = new PostFormAdapter(renderer, postSummary, dateFactory, teamRepository);
+        postFormAdapter = new PostFormAdapter(renderer, postSummary, dateTimeFactory, teamRepository);
         postFormAdapter.updatePostFromPostForm(post, postForm);
     }
 
@@ -111,7 +111,7 @@ public class PostFormAdapter_UpdatePostTests {
 
     @Test
     public void updatingABlogPost_doesNotChangeItsCreatedDateByDefault() throws Exception {
-        Date originalDate = DateTestUtils.getDate("2009-11-20 07:00");
+        LocalDateTime originalDate = DateTimeUtils.parseDateTimeNoSeconds("2009-11-20 07:00");
         Post post = PostBuilder.post().createdAt(originalDate).build();
         postFormAdapter.updatePostFromPostForm(post, postForm);
         assertThat(post.getCreatedAt(), is(originalDate));
@@ -119,10 +119,10 @@ public class PostFormAdapter_UpdatePostTests {
 
     @Test
     public void updatingABlogPost_usesTheCreatedDateFromThePostFormIfPresent() throws Exception {
-        Date originalDate = DateTestUtils.getDate("2009-11-20 07:00");
+        LocalDateTime originalDate = DateTimeUtils.parseDateTimeNoSeconds("2009-11-20 07:00");
         Post post = PostBuilder.post().createdAt(originalDate).build();
 
-        Date newDate = DateTestUtils.getDate("2010-01-11 03:00");
+        LocalDateTime newDate = DateTimeUtils.parseDateTimeNoSeconds("2010-01-11 03:00");
         postForm.setCreatedAt(newDate);
 
         postFormAdapter.updatePostFromPostForm(post, postForm);
