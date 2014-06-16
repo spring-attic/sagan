@@ -55,7 +55,7 @@ class BlogController {
 
         String publicSlug = String.format("%s/%s/%s/%s", year, month, day, slug);
         Post post = service.getPublishedPost(publicSlug);
-        model.addAttribute("post", PostView.of(post, dateTimeFactory));
+        model.addAttribute("post", PostView.of(post, dateTimeFactory, viewHelper));
         model.addAttribute("categories", PostCategory.values());
         model.addAttribute("activeCategory", post.getCategory().getDisplayName());
         model.addAttribute("disqusShortname", service.getDisqusShortname());
@@ -128,7 +128,7 @@ class BlogController {
     }
 
     private String renderListOfPosts(Page<Post> page, Model model, String activeCategory) {
-        Page<PostView> postViewPage = PostView.pageOf(page, dateTimeFactory);
+        Page<PostView> postViewPage = PostView.pageOf(page, dateTimeFactory, viewHelper);
         List<PostView> posts = postViewPage.getContent();
         model.addAttribute("activeCategory", activeCategory);
         model.addAttribute("categories", PostCategory.values());

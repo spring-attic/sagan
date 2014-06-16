@@ -25,20 +25,21 @@ public final class PostView {
 
     private final Post post;
     private final DateTimeFactory dateTimeFactory;
-    private final ViewHelper viewHelper = new ViewHelper();
+    private final ViewHelper viewHelper;
 
-    private PostView(Post post, DateTimeFactory dateTimeFactory) {
+    private PostView(Post post, DateTimeFactory dateTimeFactory, ViewHelper viewHelper) {
         this.post = post;
         this.dateTimeFactory = dateTimeFactory;
+        this.viewHelper = viewHelper;
     }
 
-    public static PostView of(Post post, DateTimeFactory dateTimeFactory) {
-        return new PostView(post, dateTimeFactory);
+    public static PostView of(Post post, DateTimeFactory dateTimeFactory, ViewHelper viewHelper) {
+        return new PostView(post, dateTimeFactory, viewHelper);
     }
 
-    public static Page<PostView> pageOf(Page<Post> posts, DateTimeFactory dateTimeFactory) {
+    public static Page<PostView> pageOf(Page<Post> posts, DateTimeFactory dateTimeFactory, ViewHelper viewHelper) {
         List<PostView> postViews = posts.getContent().stream()
-                .map(post -> of(post, dateTimeFactory))
+                .map(post -> of(post, dateTimeFactory, viewHelper))
                 .collect(Collectors.toList());
         PageRequest pageRequest = new PageRequest(posts.getNumber(), posts.getSize(), posts.getSort());
         return new PageImpl<>(postViews, pageRequest, posts.getTotalElements());

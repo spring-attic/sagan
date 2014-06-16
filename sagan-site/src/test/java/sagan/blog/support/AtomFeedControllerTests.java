@@ -3,11 +3,13 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
+import sagan.support.ViewHelper;
 import sagan.support.nav.PageableFactory;
 import sagan.support.time.DateTimeFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,6 +47,8 @@ public class AtomFeedControllerTests {
     @Mock
     private DateTimeFactory dateTimeFactory;
 
+    private ViewHelper viewHelper = new ViewHelper(Locale.US);
+
     private AtomFeedController controller;
     private ExtendedModelMap model = new ExtendedModelMap();
     private Page<Post> page;
@@ -54,7 +58,7 @@ public class AtomFeedControllerTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new AtomFeedController(blogService, siteUrl, dateTimeFactory);
+        controller = new AtomFeedController(blogService, siteUrl, dateTimeFactory, viewHelper);
         posts.add(PostBuilder.post().build());
         page = new PageImpl<>(posts, mock(Pageable.class), 20);
         given(blogService.getPublishedPosts(eq(PageableFactory.forFeeds()))).willReturn(page);

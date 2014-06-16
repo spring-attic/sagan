@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.support.ViewHelper;
 import sagan.support.nav.PageableFactory;
 import sagan.support.time.DateTimeFactory;
 
@@ -30,9 +31,9 @@ class AtomFeedController {
     private final AtomFeedView atomFeedView;
 
     @Autowired
-    public AtomFeedController(BlogService blogService, SiteUrl siteUrl, DateTimeFactory dateTimeFactory) {
+    public AtomFeedController(BlogService blogService, SiteUrl siteUrl, DateTimeFactory dateTimeFactory, ViewHelper viewHelper) {
         this.blogService = blogService;
-        this.atomFeedView = new AtomFeedView(siteUrl, dateTimeFactory);
+        this.atomFeedView = new AtomFeedView(siteUrl, dateTimeFactory, viewHelper);
     }
 
     @RequestMapping(value = "/blog.atom", method = { GET, HEAD })

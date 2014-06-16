@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
+import sagan.support.ViewHelper;
 import sagan.support.time.DateTimeFactory;
 
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,12 +38,13 @@ public class BlogAtomFeedViewTests {
     private AtomFeedView atomFeedView;
     private Feed feed = new Feed();
     private LocalDateTime calendar = LocalDateTime.now(DateTimeFactory.DEFAULT_TIME_ZONE);
+    private ViewHelper viewHelper = new ViewHelper(Locale.US);
     private HttpServletRequest request = mock(HttpServletRequest.class);
 
     @Before
     public void setUp() throws Exception {
         siteUrl = mock(SiteUrl.class);
-        atomFeedView = new AtomFeedView(siteUrl, DateTimeFactory.withDefaultTimeZone());
+        atomFeedView = new AtomFeedView(siteUrl, DateTimeFactory.withDefaultTimeZone(), viewHelper);
         given(request.getServerName()).willReturn("springsource.org");
         model.addAttribute("posts", new ArrayList<Post>());
     }

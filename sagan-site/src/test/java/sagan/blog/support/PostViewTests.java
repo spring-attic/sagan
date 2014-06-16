@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
+import sagan.support.ViewHelper;
 import sagan.support.time.DateTimeFactory;
 import sagan.support.DateTimeTestUtils;
 
@@ -25,7 +26,7 @@ public class PostViewTests {
     @Mock
     private DateTimeFactory dateTimeFactory;
 
-    private Locale defaultLocale;
+    private ViewHelper viewHelper = new ViewHelper(Locale.US);
 
     private Post post;
     private PostView postView;
@@ -33,19 +34,12 @@ public class PostViewTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        defaultLocale = Locale.getDefault();
-        Locale.setDefault(Locale.US);
-    }
-
-    @After
-    public void tearDown() {
-        Locale.setDefault(defaultLocale);
     }
 
     @Test
     public void formattedPublishDateForUnscheduledDraft() {
         post = PostBuilder.post().draft().unscheduled().build();
-        postView = PostView.of(post, dateTimeFactory);
+        postView = PostView.of(post, dateTimeFactory, viewHelper);
 
         assertThat(postView.getFormattedPublishDate(), equalTo("Unscheduled"));
     }
@@ -53,7 +47,7 @@ public class PostViewTests {
     @Test
     public void formattedPublishDateForPublishedPosts() throws ParseException {
         post = PostBuilder.post().publishAt("2012-07-02 13:42").build();
-        postView = PostView.of(post, dateTimeFactory);
+        postView = PostView.of(post, dateTimeFactory, viewHelper);
 
         assertThat(postView.getFormattedPublishDate(), equalTo("July 2, 2012"));
     }
@@ -62,7 +56,7 @@ public class PostViewTests {
     public void draftPath() throws ParseException {
         given(dateTimeFactory.now()).willReturn(DateTimeUtils.parseDateTimeNoSeconds("2012-07-02 13:42"));
         post = PostBuilder.post().id(123L).title("My Post").draft().build();
-        postView = PostView.of(post, dateTimeFactory);
+        postView = PostView.of(post, dateTimeFactory, viewHelper);
 
         assertThat(postView.getPath(), equalTo("/admin/blog/123-my-post"));
     }
@@ -71,7 +65,7 @@ public class PostViewTests {
     public void scheduledPost() throws ParseException {
         given(dateTimeFactory.now()).willReturn(DateTimeUtils.parseDateTimeNoSeconds("2012-07-02 13:42"));
         post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-05 13:42").build();
-        postView = PostView.of(post, dateTimeFactory);
+        postView = PostView.of(post, dateTimeFactory, viewHelper);
 
         assertThat(postView.getPath(), equalTo("/admin/blog/123-my-post"));
     }
@@ -80,7 +74,7 @@ public class PostViewTests {
     public void publishedPost() throws ParseException {
         given(dateTimeFactory.now()).willReturn(DateTimeUtils.parseDateTimeNoSeconds("2012-07-02 13:42"));
         post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-01 13:42").build();
-        postView = PostView.of(post, dateTimeFactory);
+        postView = PostView.of(post, dateTimeFactory, viewHelper);
 
         assertThat(postView.getPath(), equalTo("/blog/2012/07/01/my-post"));
     }
@@ -91,7 +85,7 @@ public class PostViewTests {
                 .renderedSummary("A different string")
                 .build();
 
-        postView = PostView.of(post, dateTimeFactory);
+        postView = PostView.of(post, dateTimeFactory, viewHelper);
 
         assertThat(postView.showReadMore(), is(true));
     }
@@ -103,7 +97,7 @@ public class PostViewTests {
                 .renderedSummary(content)
                 .build();
 
-        postView = PostView.of(post, dateTimeFactory);
+        postView = PostView.of(post, dateTimeFactory, viewHelper);
 
         assertThat(postView.showReadMore(), is(false));
     }

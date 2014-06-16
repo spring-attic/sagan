@@ -1,6 +1,7 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
+import sagan.support.ViewHelper;
 import sagan.support.time.DateTimeFactory;
 import sagan.support.time.DateTimeUtils;
 
@@ -35,11 +36,13 @@ class AtomFeedView extends AbstractAtomFeedView {
 
     private final SiteUrl siteUrl;
     private final DateTimeFactory dateTimeFactory;
+    private final ViewHelper viewHelper;
 
     @Autowired
-    public AtomFeedView(SiteUrl siteUrl, DateTimeFactory dateTimeFactory) {
+    public AtomFeedView(SiteUrl siteUrl, DateTimeFactory dateTimeFactory, ViewHelper viewHelper) {
         this.siteUrl = siteUrl;
         this.dateTimeFactory = dateTimeFactory;
+        this.viewHelper = viewHelper;
     }
 
     @Override
@@ -117,7 +120,7 @@ class AtomFeedView extends AbstractAtomFeedView {
     }
 
     private void setPostUrl(Post post, Entry entry) {
-        PostView postView = PostView.of(post, dateTimeFactory);
+        PostView postView = PostView.of(post, dateTimeFactory, viewHelper);
         String postUrl = siteUrl.getAbsoluteUrl(postView.getPath());
         Link postLink = new Link();
         postLink.setHref(postUrl);
