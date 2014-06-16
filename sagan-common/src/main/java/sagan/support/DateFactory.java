@@ -5,6 +5,9 @@ import java.util.TimeZone;
 
 import org.springframework.stereotype.Component;
 
+/**
+ *  @deprecated To be removed once it is no longer in use.
+ */
 @Component
 public class DateFactory {
 
