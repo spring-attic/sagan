@@ -91,6 +91,9 @@ public class SearchService {
         try {
             JestResult result = jestClient.execute(action);
             logger.debug(result.getJsonString());
+            if(!result.isSucceeded()) {
+                logger.warn("Failed to execute Elastic Search action: " + result.getErrorMessage());
+            }
             return result;
         } catch (Exception e) {
             throw new SearchException(e);
