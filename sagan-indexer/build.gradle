@@ -3,8 +3,18 @@ springBoot.mainClass = 'sagan.IndexerMain'
 
 dependencies {
     compile project(':sagan-common')
-
-    compile "org.springframework.boot:spring-boot-starter-web"
+    
+    if ( project.hasProperty('war') ) { 
+      compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude(module: 'tomcat-embed-core')
+        exclude(module: 'tomcat-embed-logging-juli')
+      }
+      providedRuntime 'org.apache.tomcat.embed:tomcat-embed-core'
+      providedCompile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+      providedRuntime 'org.apache.tomcat.embed:tomcat-embed-logging-juli'
+		} else {
+      compile("org.springframework.boot:spring-boot-starter-web")
+		}
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-security"
 

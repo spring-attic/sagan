@@ -49,7 +49,8 @@ public class StaticPagePathFinder {
     }
 
     private String relativeFilePath(String basePath, Resource resource) throws IOException {
-        return resource.getURL().getPath().substring(basePath.length()).replace(".html", "");
+        String path = resource.getURL().getPath().substring(basePath.length()).replace(".html", "");
+        return path.startsWith("/") ? path : "/" + path;
     }
 
     private String buildRequestMapping(String filePath) {

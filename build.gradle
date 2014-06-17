@@ -50,6 +50,8 @@ configure(rootProject) {
 
 configure(javaProjects) {
     apply plugin: 'java'
+    if ( project.hasProperty('war') )
+      apply plugin: 'war'
 
     targetCompatibility = vJavaLang
     sourceCompatibility = vJavaLang
