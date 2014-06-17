@@ -22,7 +22,7 @@ public class ProjectMetadataServiceTests extends AbstractIntegrationTests {
     @Test
     public void categoriesHaveListOfProjects() throws IOException {
         List<Project> active = service.getProjectsForCategory("active");
-        assertThat(active.size(), equalTo(29));
+        assertThat(active.size(), equalTo(30));
     }
 
     @Test

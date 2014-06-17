@@ -1,0 +1,4 @@
+insert into project values('platform','Spring IO Platform','http://github.com/spring-io/platform','active','http://platform.spring.io/platform/','FALSE');
+insert into project_releaselist values('platform', 'spring-milestones','','platform','io.spring.platform','FALSE','http://docs.spring.io/platform/docs/1.0.0.RC1/reference/htmlsingle/','1','1.0.0.RC1');
+insert into project_releaselist values('platform', null,'','platform','io.spring.platform','TRUE','http://docs.spring.io/platform/docs/1.0.0.RELEASE/reference/htmlsingle/','2','1.0.0.RELEASE');
+insert into project_releaselist values('platform', 'spring-snapshots', '','platform','io.spring.platform','FALSE','http://docs.spring.io/platform/docs/1.0.1.BUILD-SNAPSHOT/reference/htmlsingle/','0','1.0.1.BUILD-SNAPSHOT');

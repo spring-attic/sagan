@@ -109,7 +109,7 @@
 .icon.project--logo.logo-spring-ldap {
   width: 93px;
   height: 105px;
-  background-position: 247px 944px;
+  background-position: 225px 1058px;
   margin-top: 19px;
 }
 .icon.project--logo.logo-grails {
@@ -127,8 +127,14 @@
 .icon.project--logo.logo-spring-cloud {
     width: 150px;
     height: 111px;
-    background-position: 698px 955px;
+    background-position: 253px 955px;
     margin-top: 13px;
+}
+.icon.project--logo.logo-platform {
+    width: 116px;
+    height: 105px;
+    background-position: 675px 957px;
+    margin-top: 23px;
 }
 .icon.icon-projects {
   width: 28px;
