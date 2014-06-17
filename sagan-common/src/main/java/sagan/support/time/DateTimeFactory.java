@@ -1,19 +1,21 @@
 package sagan.support.time;
 
+import java.time.*;
+
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-
-import java.time.*;
 
 /**
  * Factory for creating {@link LocalDateTime}s and other date and time related objects.
  * <p>
  * <ul>
  * <li>If not supplied with a {@link Clock}, one will be created with the UTC time-zone.</li>
- * <li>Test classes will typically want to provide a {@link Clock#fixed(java.time.Instant, java.time.ZoneId) fixed clock}
- * or a {@link Clock#tick(java.time.Clock, java.time.Duration) ticking clock} starting at a fixed point in time.</li>
+ * <li>Test classes will typically want to provide a
+ * {@link Clock#fixed(java.time.Instant, java.time.ZoneId) fixed clock} or a
+ * {@link Clock#tick(java.time.Clock, java.time.Duration) ticking clock} starting at a
+ * fixed point in time.</li>
  * </ul>
- *
+ * 
  * @see Clock#fixed(java.time.Instant, java.time.ZoneId)
  * @see Clock#tick(java.time.Clock, java.time.Duration)
  */
@@ -42,7 +44,7 @@ public class DateTimeFactory {
 
     /**
      * Create a {@link DateTimeFactory} with the supplied {@link Clock}.
-     *
+     * 
      * @param clock the {@link Clock} to use, not null
      */
     public static DateTimeFactory from(Clock clock) {

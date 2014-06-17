@@ -1,6 +1,5 @@
 package sagan.support.time;
 
-import org.junit.Test;
 import sagan.support.DateTimeTestUtils;
 
 import java.time.Clock;
@@ -8,9 +7,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
+import org.junit.Test;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-
 
 /**
  * Tests for {@link sagan.support.time.DateTimeFactory}.
@@ -50,7 +50,9 @@ public class DateTimeFactoryTests {
     public void date() {
         assertThat(DateTimeFactory.from(fixedClock).date(), is(LocalDate.of(2014, 12, 24)));
 
-        // this could in theory fail if run at midnight ... but that is like winning in lottery ... ten times in a row.
-        assertThat(DateTimeFactory.withDefaultTimeZone().date(), is(LocalDateTime.now(Clock.system(DateTimeFactory.DEFAULT_TIME_ZONE)).toLocalDate()));
+        // this could in theory fail if run at midnight ... but that is like winning in
+        // lottery ... ten times in a row.
+        assertThat(DateTimeFactory.withDefaultTimeZone().date(), is(LocalDateTime.now(
+                Clock.system(DateTimeFactory.DEFAULT_TIME_ZONE)).toLocalDate()));
     }
 }

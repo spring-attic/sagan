@@ -1,6 +1,5 @@
 package sagan.support.time;
 
-
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -8,18 +7,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
- * Utility class for {@link java.time.LocalDate date} and {@link java.time.LocalDateTime time} related methods.
+ * Utility class for {@link java.time.LocalDate date} and {@link java.time.LocalDateTime
+ * time} related methods.
  */
 public class DateTimeUtils {
 
-    public static final DateTimeFormatter DATE_TIME_FORMATTER_NO_SECONDS = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER_NO_SECONDS = DateTimeFormatter
+            .ofPattern("yyyy-MM-dd HH:mm");
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private DateTimeUtils() {
     }
 
     /**
-     * Parse the {@code dateTimeStr} with format {@code yyyy-MM-dd HH:mm} to a {@link LocalDateTime}
+     * Parse the {@code dateTimeStr} with format {@code yyyy-MM-dd HH:mm} to a
+     * {@link LocalDateTime}
      */
     public static LocalDateTime parseDateTimeNoSeconds(String dateTimeStr) {
         return LocalDateTime.parse(dateTimeStr, DATE_TIME_FORMATTER_NO_SECONDS);
@@ -43,7 +45,7 @@ public class DateTimeUtils {
      * Convert the {@link LocalDateTime} to a {@link Date}
      */
     public static Date toDate(LocalDateTime localDateTime) {
-        if(localDateTime == null) {
+        if (localDateTime == null) {
             return null;
         }
         return Date.from(localDateTime.toInstant(DateTimeFactory.DEFAULT_TIME_ZONE));

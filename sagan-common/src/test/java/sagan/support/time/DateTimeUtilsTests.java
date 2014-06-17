@@ -1,15 +1,14 @@
 package sagan.support.time;
 
-import org.junit.Test;
-
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+import org.junit.Test;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
-
 
 /**
  * Tests for {@link sagan.support.time.DateTimeUtils}.

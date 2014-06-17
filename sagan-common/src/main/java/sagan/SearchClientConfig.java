@@ -52,18 +52,23 @@ class SearchClientConfig {
     /**
      * Gson type adapter for {@link java.time.LocalDateTime}.
      * <p>
-     * <strong>NOTE: </strong> See issue #421. This class is currently implemented to behave the same as
-     * for Gson and {@link java.util.Date}'s (that uses the {@link java.text.DateFormat#MEDIUM} to serialize dates),
+     * <strong>NOTE: </strong> See issue #421. This class is currently implemented to
+     * behave the same as for Gson and {@link java.util.Date}'s (that uses the
+     * {@link java.text.DateFormat#MEDIUM} to serialize dates),
      * <p>
      * See comment below.
      */
-    private static class LocalDateTimeGsonTypeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+    private static class LocalDateTimeGsonTypeAdapter implements JsonSerializer<LocalDateTime>,
+            JsonDeserializer<LocalDateTime> {
 
-        private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MMM d, yyyy hh:mm:ss a");
+        private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter
+                .ofPattern("MMM d, yyyy hh:mm:ss a");
+
         // ref issue 421: DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
 
         @Override
-        public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+                throws JsonParseException {
             return LocalDateTime.parse(json.getAsString(), DATE_TIME_FORMATTER);
         }
 
@@ -72,5 +77,4 @@ class SearchClientConfig {
             return new JsonPrimitive(DATE_TIME_FORMATTER.format(src));
         }
     }
-
 }
