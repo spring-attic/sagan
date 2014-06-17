@@ -13,6 +13,13 @@
       <h1 class="index-page--title">Projects</h1>
       <p class="index-page--subtitle">From configuration to security, web apps to big data &ndash; whatever the infrastructure needs of your application may be, there is a Spring Project to help you build it. Start small and use just what you need &ndash; Spring is modular by design.</p>
       <div class="projects--wrapper">
+          <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('platform')}">
+              <div class="project-logo--container">
+                  <div class="icon project--logo logo-platform"></div>
+              </div>
+              <div class="project--title">Spring IO Platform</div>
+              <p class="project--description">Provides a cohesive, versioned platform for building modern applications. It is a modular, enterprise-grade distribution that delivers a curated set of dependencies.</p>
+          </a>
         <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-boot')}">
           <div class="project-logo--container">
             <div class="icon project--logo logo-spring-boot"></div>
