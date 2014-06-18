@@ -23,7 +23,7 @@ import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 
 public class PostViewTests {
 
-    private DateTimeFactory dateTimeFactory;
+    private DateTimeFactory dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory("2012-07-02 13:42");
 
     private ViewHelper viewHelper = new ViewHelper(Locale.US);
 
@@ -53,7 +53,6 @@ public class PostViewTests {
 
     @Test
     public void draftPath() throws ParseException {
-        dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory("2012-07-02 13:42");
         post = PostBuilder.post().id(123L).title("My Post").draft().build();
         postView = PostView.of(post, dateTimeFactory, viewHelper);
 
@@ -62,7 +61,6 @@ public class PostViewTests {
 
     @Test
     public void scheduledPost() throws ParseException {
-        dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory("2012-07-02 13:42");
         post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-05 13:42").build();
         postView = PostView.of(post, dateTimeFactory, viewHelper);
 
@@ -71,7 +69,6 @@ public class PostViewTests {
 
     @Test
     public void publishedPost() throws ParseException {
-        dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory("2012-07-02 13:42");
         post = PostBuilder.post().id(123L).title("My Post").publishAt("2012-07-01 13:42").build();
         postView = PostView.of(post, dateTimeFactory, viewHelper);
 
