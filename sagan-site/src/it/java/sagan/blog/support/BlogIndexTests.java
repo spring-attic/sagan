@@ -123,6 +123,7 @@ public class BlogIndexTests extends AbstractIntegrationTests {
             Post post = new PostBuilder()
                     .title("This week in Spring - November " + postNumber + ", 2012")
                     .rawContent("Raw content").renderedContent("Html content")
+                    .renderedSummary("Html summary").createdAt(dateTime)
                     .publishAt(dateTime).build();
             posts.add(post);
         }
