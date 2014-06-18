@@ -4,10 +4,10 @@ import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
 import sagan.search.support.SearchService;
-import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
+import sagan.support.DateTimeTestUtils;
+import sagan.support.time.DateTimeFactory;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,6 +16,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import sagan.support.time.DateTimeUtils;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyObject;
@@ -26,14 +27,12 @@ public class BlogService_UpdatePostTests {
 
     private BlogService service;
     private Post post;
-    private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
-    private Date now = DateTestUtils.getDate("2013-07-01 13:00");
+    private LocalDateTime publishAt = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 12:00");
 
     @Mock
     private PostRepository postRepository;
 
-    @Mock
-    private DateFactory dateFactory;
+    private DateTimeFactory dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory("2013-07-01 13:00");
 
     @Mock
     private SearchService searchService;
@@ -48,9 +47,7 @@ public class BlogService_UpdatePostTests {
 
     @Before
     public void setup() {
-        given(dateFactory.now()).willReturn(now);
-
-        service = new BlogService(postRepository, postFormAdapter, dateFactory, searchService);
+        service = new BlogService(postRepository, postFormAdapter, dateTimeFactory, searchService);
 
         post = PostBuilder.post().id(123L).publishAt(publishAt).build();
 

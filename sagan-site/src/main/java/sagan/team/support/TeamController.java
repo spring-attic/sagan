@@ -3,8 +3,9 @@ package sagan.team.support;
 import sagan.blog.Post;
 import sagan.blog.support.BlogService;
 import sagan.blog.support.PostView;
-import sagan.support.DateFactory;
+import sagan.support.ViewHelper;
 import sagan.support.nav.PageableFactory;
+import sagan.support.time.DateTimeFactory;
 import sagan.team.MemberProfile;
 import sagan.team.TeamLocation;
 
@@ -32,13 +33,15 @@ class TeamController {
 
     private final TeamService teamService;
     private final BlogService blogService;
-    private final DateFactory dateFactory;
+    private final DateTimeFactory dateTimeFactory;
+    private final ViewHelper viewHelper;
 
     @Autowired
-    public TeamController(TeamService teamService, BlogService blogService, DateFactory dateFactory) {
+    public TeamController(TeamService teamService, BlogService blogService, DateTimeFactory dateTimeFactory, ViewHelper viewHelper) {
         this.teamService = teamService;
         this.blogService = blogService;
-        this.dateFactory = dateFactory;
+        this.dateTimeFactory = dateTimeFactory;
+        this.viewHelper = viewHelper;
     }
 
     @RequestMapping(method = { GET, HEAD })
@@ -63,7 +66,7 @@ class TeamController {
         }
         model.addAttribute("profile", profile);
         Page<Post> posts = blogService.getPublishedPostsForMember(profile, PageableFactory.forLists(1));
-        Page<PostView> postViewPage = PostView.pageOf(posts, dateFactory);
+        Page<PostView> postViewPage = PostView.pageOf(posts, dateTimeFactory, viewHelper);
         model.addAttribute("posts", postViewPage);
 
         List<TeamLocation> teamLocations = new ArrayList<>();

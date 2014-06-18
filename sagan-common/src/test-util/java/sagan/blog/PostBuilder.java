@@ -1,10 +1,11 @@
 package sagan.blog;
 
+import sagan.support.time.DateTimeFactory;
+import sagan.support.time.DateTimeUtils;
 import sagan.team.MemberProfile;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class PostBuilder {
 
@@ -15,12 +16,17 @@ public class PostBuilder {
     private String rawContent;
     private String renderedContent;
     private String renderedSummary;
-    private Date createdAt;
-    private Date publishAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime publishAt;
     private boolean broadcast;
     private boolean draft;
+    private DateTimeFactory dateTimeFactory;
 
     public PostBuilder() {
+        this(DateTimeFactory.withDefaultTimeZone());
+    }
+
+    public PostBuilder(DateTimeFactory dateTimeFactory) {
         title = "My Post";
         author = new MemberProfile();
         author.setUsername("test");
@@ -29,7 +35,8 @@ public class PostBuilder {
         renderedContent = "post body";
         renderedSummary = "summary";
         broadcast = false;
-        publishAt = new Date(System.currentTimeMillis());
+        this.dateTimeFactory = dateTimeFactory;
+        publishAt = dateTimeFactory.now();
         draft = false;
     }
 
@@ -73,13 +80,13 @@ public class PostBuilder {
         return this;
     }
 
-    public PostBuilder createdAt(Date date) {
+    public PostBuilder createdAt(LocalDateTime date) {
         createdAt = date;
         return this;
     }
 
     public PostBuilder createdAt(String dateString) throws ParseException {
-        createdAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString);
+        createdAt = DateTimeUtils.parseDateTimeNoSeconds(dateString);
         return this;
     }
 
@@ -98,18 +105,17 @@ public class PostBuilder {
         return this;
     }
 
-    public PostBuilder publishAt(Date date) {
+    public PostBuilder publishAt(LocalDateTime date) {
         publishAt = date;
         return this;
     }
 
     public PostBuilder publishAt(String dateString) throws ParseException {
-        return publishAt(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString));
+        return publishAt(DateTimeUtils.parseDateTimeNoSeconds(dateString));
     }
 
     public PostBuilder publishYesterday() {
-        long oneDay = 1000 * 60 * 60 * 24;
-        return publishAt(new Date(System.currentTimeMillis() - oneDay));
+        return publishAt(dateTimeFactory.now().minusDays(1));
     }
 
     public PostBuilder isBroadcast() {

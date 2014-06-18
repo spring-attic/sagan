@@ -2,12 +2,13 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
-import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
+import sagan.support.DateTimeTestUtils;
+import sagan.support.time.DateTimeFactory;
+import sagan.support.time.DateTimeUtils;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -33,13 +34,12 @@ public class PostFormAdapter_CreatePostTests {
     private String title = "Title";
     private String content = "Rendered HTML\n\nfrom Markdown";
     private PostCategory category = PostCategory.ENGINEERING;
-    private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
+    private LocalDateTime publishAt = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 12:00");
     private boolean broadcast = true;
     private boolean draft = false;
-    private Date now = DateTestUtils.getDate("2013-07-01 13:00");
+    private LocalDateTime now = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 13:00");
 
-    @Mock
-    private DateFactory dateFactory;
+    private DateTimeFactory dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory(now);
 
     @Mock
     private TeamRepository teamRepository;
@@ -65,9 +65,8 @@ public class PostFormAdapter_CreatePostTests {
 
         given(renderer.render(content)).willReturn(RENDERED_HTML);
         given(postSummary.forContent(anyString(), anyInt())).willReturn(RENDERED_SUMMARY);
-        given(dateFactory.now()).willReturn(now);
 
-        adapter = new PostFormAdapter(renderer, postSummary, dateFactory, teamRepository);
+        adapter = new PostFormAdapter(renderer, postSummary, dateTimeFactory, teamRepository);
 
         postForm = new PostForm();
         postForm.setTitle(title);
@@ -132,7 +131,7 @@ public class PostFormAdapter_CreatePostTests {
 
     @Test
     public void postCreatedDateCanBeSetFromAPostForm() throws Exception {
-        Date createdAt = DateTestUtils.getDate("2013-05-23 22:58");
+        LocalDateTime createdAt = DateTimeUtils.parseDateTimeNoSeconds("2013-05-23 22:58");
         postForm.setCreatedAt(createdAt);
         Post post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
         assertThat(post.getCreatedAt(), is(createdAt));

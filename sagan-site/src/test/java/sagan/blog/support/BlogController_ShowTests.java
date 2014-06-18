@@ -3,7 +3,8 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.support.DateFactory;
+import sagan.support.ViewHelper;
+import sagan.support.time.DateTimeFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +14,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import org.springframework.ui.ExtendedModelMap;
+
+import java.util.Locale;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -26,7 +29,9 @@ public class BlogController_ShowTests {
     @Mock
     private HttpServletRequest request;
 
-    private DateFactory dateFactory;
+    private DateTimeFactory dateTimeFactory = DateTimeFactory.withDefaultTimeZone();
+    private ViewHelper viewHelper = new ViewHelper(Locale.US);
+
     private BlogController controller;
     private ExtendedModelMap model = new ExtendedModelMap();
     private String viewName;
@@ -36,7 +41,7 @@ public class BlogController_ShowTests {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        controller = new BlogController(blogService, dateFactory);
+        controller = new BlogController(blogService, dateTimeFactory, viewHelper);
 
         post = PostBuilder.post().publishAt("2012-02-01 11:00").build();
         given(blogService.getPublishedPost("2012/02/01/title")).willReturn(post);

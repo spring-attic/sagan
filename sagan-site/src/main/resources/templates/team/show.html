@@ -104,7 +104,7 @@
                     </div>
                     <div class="meta-data--item">
                       <div class="meta-data--icon icon blog-icon calendar"></div>
-                      <span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
+                      <span class='date' th:text='${viewHelper.format(post.publishAt)}'>June 18, 2013</span>
                     </div>
                   </div>
                   <div th:utext="${post.renderedSummary}" class='member-post--summary'>This has been an interesting week.</div>

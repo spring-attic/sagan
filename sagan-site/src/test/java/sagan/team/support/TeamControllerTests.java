@@ -1,13 +1,15 @@
 package sagan.team.support;
 
 import sagan.blog.support.BlogService;
-import sagan.support.DateFactory;
+import sagan.support.ViewHelper;
+import sagan.support.time.DateTimeFactory;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
 import sagan.team.TeamLocation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -35,11 +37,12 @@ public class TeamControllerTests {
     private ExtendedModelMap model = new ExtendedModelMap();
 
     private TeamController teamController;
-    private DateFactory dateFactory = new DateFactory();
+    private DateTimeFactory dateTimeFactory = DateTimeFactory.withDefaultTimeZone();
+    private ViewHelper viewHelper = new ViewHelper(Locale.US);
 
     @Before
     public void setUp() throws Exception {
-        teamController = new TeamController(teamService, blogService, dateFactory);
+        teamController = new TeamController(teamService, blogService, dateTimeFactory, viewHelper);
         List<MemberProfile> members = new ArrayList<>();
 
         members.add(MemberProfileBuilder.profile()

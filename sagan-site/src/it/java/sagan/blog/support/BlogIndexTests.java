@@ -5,8 +5,9 @@ import sagan.blog.PostBuilder;
 import saganx.AbstractIntegrationTests;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -116,15 +117,14 @@ public class BlogIndexTests extends AbstractIntegrationTests {
     }
 
     private void createManyPostsInNovember(int numPostsToCreate) {
-        Calendar calendar = Calendar.getInstance();
         List<Post> posts = new ArrayList<>();
         for (int postNumber = 1; postNumber <= numPostsToCreate; postNumber++) {
-            calendar.set(2012, 10, postNumber);
+            LocalDateTime dateTime = LocalDateTime.of(2012, Month.NOVEMBER, postNumber, 0, 0);
             Post post = new PostBuilder()
                     .title("This week in Spring - November " + postNumber + ", 2012")
                     .rawContent("Raw content").renderedContent("Html content")
-                    .renderedSummary("Html summary").createdAt(calendar.getTime())
-                    .publishAt(calendar.getTime()).build();
+                    .renderedSummary("Html summary").createdAt(dateTime)
+                    .publishAt(dateTime).build();
             posts.add(post);
         }
         postRepository.save(posts);

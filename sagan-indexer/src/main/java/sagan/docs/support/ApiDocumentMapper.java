@@ -4,8 +4,7 @@ import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
-
-import java.util.Date;
+import sagan.support.time.DateTimeUtils;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -35,7 +34,7 @@ class ApiDocumentMapper implements SearchEntryMapper<Document> {
 
         SearchEntry entry = new SearchEntry();
 
-        entry.setPublishAt(new Date(0L));
+        entry.setPublishAt(DateTimeUtils.epoch());
         entry.setRawContent(apiContent);
         entry.setSummary(apiContent.substring(0, Math.min(apiContent.length(), 500)));
         entry.setTitle(document.title());

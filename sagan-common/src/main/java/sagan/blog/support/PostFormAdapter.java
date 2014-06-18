@@ -1,11 +1,11 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
-import sagan.support.DateFactory;
+import sagan.support.time.DateTimeFactory;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,15 +16,15 @@ class PostFormAdapter {
 
     private final PostContentRenderer renderer;
     private final PostSummary postSummary;
-    private final DateFactory dateFactory;
+    private final DateTimeFactory dateTimeFactory;
     private final TeamRepository teamRepository;
 
     @Autowired
     public PostFormAdapter(PostContentRenderer renderer, PostSummary postSummary,
-                           DateFactory dateFactory, TeamRepository teamRepository) {
+                           DateTimeFactory dateTimeFactory, TeamRepository teamRepository) {
         this.renderer = renderer;
         this.postSummary = postSummary;
-        this.dateFactory = dateFactory;
+        this.dateTimeFactory = dateTimeFactory;
         this.teamRepository = teamRepository;
     }
 
@@ -33,7 +33,7 @@ class PostFormAdapter {
         Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
         MemberProfile profile = teamRepository.findByUsername(username);
         post.setAuthor(profile);
-        post.setCreatedAt(createdDate(postForm, dateFactory.now()));
+        post.setCreatedAt(createdDate(postForm, dateTimeFactory.now()));
 
         setPostProperties(postForm, content, post);
         return post;
@@ -51,8 +51,8 @@ class PostFormAdapter {
         setPostProperties(postForm, content, post);
     }
 
-    private Date createdDate(PostForm postForm, Date defaultDate) {
-        Date createdAt = postForm.getCreatedAt();
+    private LocalDateTime createdDate(PostForm postForm, LocalDateTime defaultDate) {
+        LocalDateTime createdAt = postForm.getCreatedAt();
         if (createdAt == null) {
             createdAt = defaultDate;
         }
@@ -67,9 +67,9 @@ class PostFormAdapter {
         post.setPublishAt(publishDate(postForm));
     }
 
-    private Date publishDate(PostForm postForm) {
+    private LocalDateTime publishDate(PostForm postForm) {
         if (!postForm.isDraft() && postForm.getPublishAt() == null) {
-            return dateFactory.now();
+            return dateTimeFactory.now();
         } else {
             return postForm.getPublishAt();
         }

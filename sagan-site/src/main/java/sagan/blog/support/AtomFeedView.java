@@ -1,9 +1,13 @@
 package sagan.blog.support;
 
 import sagan.blog.Post;
-import sagan.support.DateFactory;
+import sagan.support.ViewHelper;
+import sagan.support.time.DateTimeFactory;
+import sagan.support.time.DateTimeUtils;
 
-import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,12 +35,14 @@ import com.sun.syndication.feed.atom.Person;
 class AtomFeedView extends AbstractAtomFeedView {
 
     private final SiteUrl siteUrl;
-    private final DateFactory dateFactory;
+    private final DateTimeFactory dateTimeFactory;
+    private final ViewHelper viewHelper;
 
     @Autowired
-    public AtomFeedView(SiteUrl siteUrl, DateFactory dateFactory) {
+    public AtomFeedView(SiteUrl siteUrl, DateTimeFactory dateTimeFactory, ViewHelper viewHelper) {
         this.siteUrl = siteUrl;
-        this.dateFactory = dateFactory;
+        this.dateTimeFactory = dateTimeFactory;
+        this.viewHelper = viewHelper;
     }
 
     @Override
@@ -57,7 +63,7 @@ class AtomFeedView extends AbstractAtomFeedView {
         List<Post> posts = (List<Post>) model.get("posts");
         if (posts.size() > 0) {
             Post latestPost = posts.get(0);
-            feed.setUpdated(latestPost.getPublishAt());
+            feed.setUpdated(DateTimeUtils.toDate(latestPost.getPublishAt()));
         }
     }
 
@@ -87,7 +93,7 @@ class AtomFeedView extends AbstractAtomFeedView {
             Entry entry = new Entry();
             entry.setTitle(post.getTitle());
             setId(post, entry, request);
-            entry.setUpdated(post.getPublishAt());
+            entry.setUpdated(DateTimeUtils.toDate(post.getPublishAt()));
             setRenderedContent(post, entry);
             setPostUrl(post, entry);
             setAuthor(post, entry);
@@ -99,9 +105,8 @@ class AtomFeedView extends AbstractAtomFeedView {
     }
 
     private void setId(Post post, Entry entry, HttpServletRequest request) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setTimeZone(dateFactory.timeZone());
-        String dateString = dateFormat.format(post.getCreatedAt());
+        String dateString = DateTimeUtils.formatAsDate(post.getCreatedAt().atZone(dateTimeFactory.timeZone()));
+
         String host = request.getServerName();
         String id = String.format("tag:%s,%s:%s", host, dateString, post.getId());
         entry.setId(id);
@@ -115,7 +120,7 @@ class AtomFeedView extends AbstractAtomFeedView {
     }
 
     private void setPostUrl(Post post, Entry entry) {
-        PostView postView = PostView.of(post, dateFactory);
+        PostView postView = PostView.of(post, dateTimeFactory, viewHelper);
         String postUrl = siteUrl.getAbsoluteUrl(postView.getPath());
         Link postLink = new Link();
         postLink.setHref(postUrl);

@@ -3,14 +3,16 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.support.DateFactory;
+import sagan.support.ViewHelper;
 import sagan.support.nav.PageableFactory;
+import sagan.support.time.DateTimeFactory;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
 
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Locale;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +45,8 @@ public class BlogAdminControllerTests {
     @Mock
     private BlogService blogService;
 
-    private DateFactory dateFactory = new DateFactory();
+    private DateTimeFactory dateTimeFactory = DateTimeFactory.withDefaultTimeZone();
+    private ViewHelper viewHelper = new ViewHelper(Locale.US);
     private ExtendedModelMap model = new ExtendedModelMap();
     private Principal principal;
     private MapBindingResult bindingResult;
@@ -56,12 +59,12 @@ public class BlogAdminControllerTests {
         bindingResult = new MapBindingResult(new HashMap<>(), "postForm");
         principal = () -> "12345";
 
-        controller = new BlogAdminController(blogService, teamRepository, dateFactory);
+        controller = new BlogAdminController(blogService, teamRepository, dateTimeFactory, viewHelper);
     }
 
     @Test
     public void dashboardShowsUsersPosts() {
-        controller = new BlogAdminController(blogService, teamRepository, dateFactory);
+        controller = new BlogAdminController(blogService, teamRepository, dateTimeFactory, viewHelper);
 
         Page<Post> drafts = new PageImpl<>(
                 Arrays.asList(new Post("draft post", "body", PostCategory.ENGINEERING)),

@@ -1,10 +1,9 @@
 package sagan.blog;
 
-import sagan.support.DateTestUtils;
+import sagan.support.time.DateTimeUtils;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -46,19 +45,19 @@ public class PostTests {
     @Test
     public void isNotLiveIfDraft() throws ParseException {
         Post post = PostBuilder.post().draft().build();
-        assertThat(post.isLiveOn(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2014-06-28 00:00")), is(false));
+        assertThat(post.isLiveOn(DateTimeUtils.parseDateTimeNoSeconds("2014-06-28 00:00")), is(false));
     }
 
     @Test
     public void isNotLiveIfScheduledInTheFuture() throws ParseException {
-        Post post = PostBuilder.post().publishAt("2013-15-12 00:00").build();
-        assertThat(post.isLiveOn(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-28 00:00")), is(false));
+        Post post = PostBuilder.post().publishAt("2013-12-12 00:00").build();
+        assertThat(post.isLiveOn(DateTimeUtils.parseDateTimeNoSeconds("2013-06-28 00:00")), is(false));
     }
 
     @Ignore("TODO: implement this at some point")
     @Test
     public void isScheduledIfPublishDateIsInTheFuture() throws ParseException {
-        Date futureDate = new Date(System.currentTimeMillis() + 10000000);
+        LocalDateTime futureDate = LocalDateTime.now().plusDays(10);
         Post post = PostBuilder.post().publishAt(futureDate).build();
         assertThat(post.isScheduled(), is(true));
     }
@@ -66,13 +65,13 @@ public class PostTests {
     @Test
     public void isLiveIfPublishedInThePast() throws ParseException {
         Post post = PostBuilder.post().publishAt("2013-01-01 00:00").build();
-        assertThat(post.isLiveOn(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2013-06-28 00:00")), is(true));
+        assertThat(post.isLiveOn(DateTimeUtils.parseDateTimeNoSeconds("2014-06-28 00:00")), is(true));
     }
 
     @Test
     public void isLiveIfPublishedNow() throws ParseException {
         Post post = PostBuilder.post().publishAt("2013-01-01 00:00").build();
-        assertThat(post.isLiveOn(DateTestUtils.getDate("2013-01-01 00:00")), is(true));
+        assertThat(post.isLiveOn(DateTimeUtils.parseDateTimeNoSeconds("2013-01-01 00:00")), is(true));
     }
 
 }

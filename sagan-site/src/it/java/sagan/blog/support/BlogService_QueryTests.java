@@ -4,15 +4,16 @@ import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostNotFoundException;
 import sagan.search.support.SearchService;
-import sagan.support.DateFactory;
+import sagan.support.DateTimeTestUtils;
 import sagan.support.nav.PageableFactory;
+import sagan.support.time.DateTimeFactory;
 import sagan.team.MemberProfile;
 import saganx.AbstractIntegrationTests;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.Before;
@@ -38,8 +39,7 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
 
     private static final Pageable FIRST_TEN_POSTS = PageableFactory.forLists(1);
 
-    @Mock
-    private DateFactory dateFactory;
+    private DateTimeFactory dateTimeFactory;
 
     @Mock
     private SearchService searchService;
@@ -55,9 +55,9 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
 
     private BlogService service;
 
-    private Date yesterday;
-    private Date today;
-    private Date tomorrow;
+    private LocalDateTime yesterday;
+    private LocalDateTime today;
+    private LocalDateTime tomorrow;
 
     private Post published;
     private Post scheduled;
@@ -68,17 +68,17 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
     @Before
     public void setup() throws Exception {
         initMocks(this);
-        service = new BlogService(postRepository, postFormAdapter, dateFactory, searchService);
         setupDates();
+        service = new BlogService(postRepository, postFormAdapter, dateTimeFactory, searchService);
         setupFixtureData();
     }
 
     private void setupDates() throws Exception {
-        yesterday = new SimpleDateFormat("yyyy-MM-dd").parse("2013-06-13");
-        today = new SimpleDateFormat("yyyy-MM-dd").parse("2013-06-14");
-        tomorrow = new SimpleDateFormat("yyyy-MM-dd").parse("2013-06-15");
+        today = LocalDateTime.of(2013, Month.JUNE, 14, 0, 0);
+        yesterday =  today.minusDays(1);
+        tomorrow = today.plusDays(1);
 
-        given(dateFactory.now()).willReturn(today);
+        dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory(today);
     }
 
     private void setupFixtureData() throws Exception {
@@ -237,7 +237,6 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
         postRepository.save(publishedBroadcast);
         Post scheduledBroadcast = PostBuilder.post().title(uniqueTitle()).isBroadcast().publishAt(tomorrow).build();
         postRepository.save(scheduledBroadcast);
-
         List<Post> broadcasts = service.getPublishedBroadcastPosts(FIRST_TEN_POSTS).getContent();
 
         assertThat(scheduledBroadcast, not(isIn(broadcasts)));

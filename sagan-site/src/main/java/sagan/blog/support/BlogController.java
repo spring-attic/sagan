@@ -3,15 +3,15 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.PostMovedException;
-import sagan.support.DateFactory;
+import sagan.support.ViewHelper;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.PageableFactory;
 import sagan.support.nav.PaginationInfo;
+import sagan.support.time.DateTimeFactory;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
-
-import org.joda.time.LocalDate;
-import org.joda.time.YearMonth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,12 +39,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 class BlogController {
 
     private final BlogService service;
-    private final DateFactory dateFactory;
+    private final DateTimeFactory dateTimeFactory;
+    private final ViewHelper viewHelper;
 
     @Autowired
-    public BlogController(BlogService service, DateFactory dateFactory) {
+    public BlogController(BlogService service, DateTimeFactory dateTimeFactory, ViewHelper viewHelper) {
         this.service = service;
-        this.dateFactory = dateFactory;
+        this.dateTimeFactory = dateTimeFactory;
+        this.viewHelper = viewHelper;
     }
 
     @RequestMapping(value = "/{year:\\d+}/{month:\\d+}/{day:\\d+}/{slug}", method = { GET, HEAD })
@@ -53,7 +55,7 @@ class BlogController {
 
         String publicSlug = String.format("%s/%s/%s/%s", year, month, day, slug);
         Post post = service.getPublishedPost(publicSlug);
-        model.addAttribute("post", PostView.of(post, dateFactory));
+        model.addAttribute("post", PostView.of(post, dateTimeFactory, viewHelper));
         model.addAttribute("categories", PostCategory.values());
         model.addAttribute("activeCategory", post.getCategory().getDisplayName());
         model.addAttribute("disqusShortname", service.getDisqusShortname());
@@ -89,8 +91,8 @@ class BlogController {
         Pageable pageRequest = PageableFactory.forLists(page);
         Page<Post> result = service.getPublishedPostsByDate(year, month, day, pageRequest);
 
-        LocalDate date = new LocalDate(year, month, day);
-        model.addAttribute("title", "Archive for " + date.toString("MMMM dd, yyyy"));
+        LocalDate date = LocalDate.of(year, month, day);
+        model.addAttribute("title", "Archive for " + viewHelper.format(date));
 
         return renderListOfPosts(result, model, "All Posts");
     }
@@ -102,8 +104,8 @@ class BlogController {
 
         Pageable pageRequest = PageableFactory.forLists(page);
         Page<Post> result = service.getPublishedPostsByDate(year, month, pageRequest);
-        YearMonth yearMonth = new YearMonth(year, month);
-        model.addAttribute("title", "Archive for " + yearMonth.toString("MMMM yyyy"));
+        YearMonth yearMonth = YearMonth.of(year, month);
+        model.addAttribute("title", "Archive for " + viewHelper.format(yearMonth));
         return renderListOfPosts(result, model, "All Posts");
     }
 
@@ -126,7 +128,7 @@ class BlogController {
     }
 
     private String renderListOfPosts(Page<Post> page, Model model, String activeCategory) {
-        Page<PostView> postViewPage = PostView.pageOf(page, dateFactory);
+        Page<PostView> postViewPage = PostView.pageOf(page, dateTimeFactory, viewHelper);
         List<PostView> posts = postViewPage.getContent();
         model.addAttribute("activeCategory", activeCategory);
         model.addAttribute("categories", PostCategory.values());

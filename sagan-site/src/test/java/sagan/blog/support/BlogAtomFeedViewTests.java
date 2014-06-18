@@ -2,12 +2,15 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.support.DateFactory;
+import sagan.support.ViewHelper;
+import sagan.support.time.DateTimeFactory;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +23,7 @@ import org.springframework.ui.ExtendedModelMap;
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.feed.atom.Link;
+import sagan.support.time.DateTimeUtils;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
@@ -33,13 +37,14 @@ public class BlogAtomFeedViewTests {
     private SiteUrl siteUrl;
     private AtomFeedView atomFeedView;
     private Feed feed = new Feed();
-    private Calendar calendar = Calendar.getInstance(DateFactory.DEFAULT_TIME_ZONE);
+    private LocalDateTime calendar = LocalDateTime.now(DateTimeFactory.DEFAULT_TIME_ZONE);
+    private ViewHelper viewHelper = new ViewHelper(Locale.US);
     private HttpServletRequest request = mock(HttpServletRequest.class);
 
     @Before
     public void setUp() throws Exception {
         siteUrl = mock(SiteUrl.class);
-        atomFeedView = new AtomFeedView(siteUrl, new DateFactory());
+        atomFeedView = new AtomFeedView(siteUrl, DateTimeFactory.withDefaultTimeZone(), viewHelper);
         given(request.getServerName()).willReturn("springsource.org");
         model.addAttribute("posts", new ArrayList<Post>());
     }
@@ -97,7 +102,7 @@ public class BlogAtomFeedViewTests {
         atomFeedView.buildFeedMetadata(model, feed, request);
 
         Post latestPost = posts.get(0);
-        assertThat(feed.getUpdated(), is(latestPost.getPublishAt()));
+        assertThat(feed.getUpdated(), is(DateTimeUtils.toDate(latestPost.getPublishAt())));
     }
 
     @Test
@@ -111,19 +116,19 @@ public class BlogAtomFeedViewTests {
     }
 
     private void buildPostsWithDate(int numberOfPosts, List<Post> posts) {
-        for (int date = numberOfPosts; date > 0; date--) {
-            calendar.set(2013, 6, date);
+        for (int dayOfMonth = numberOfPosts; dayOfMonth > 0; dayOfMonth--) {
+            LocalDateTime dateTime = LocalDateTime.of(2013, Month.JULY, dayOfMonth, 0, 0);
             Post post = PostBuilder.post().build();
-            post.setPublishAt(calendar.getTime());
+            post.setPublishAt(dateTime);
             posts.add(post);
         }
     }
 
     @Test
     public void hasCorrectIdForEntry() throws Exception {
-        calendar.set(2013, 6, 1);
+        LocalDateTime dateTime = LocalDateTime.of(2013, Month.JULY, 1, 0, 0);
         Post post = spy(PostBuilder.post().build());
-        post.setCreatedAt(calendar.getTime());
+        post.setCreatedAt(dateTime);
         given(post.getId()).willReturn(123L);
 
         model.addAttribute("posts", Arrays.asList(post));

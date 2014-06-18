@@ -3,11 +3,13 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
-import sagan.support.DateFactory;
+import sagan.support.ViewHelper;
 import sagan.support.nav.PageableFactory;
+import sagan.support.time.DateTimeFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +40,8 @@ public class BlogController_PublishedPostsForCategoryTests {
     private MockHttpServletRequest request = new MockHttpServletRequest();
 
     private BlogController controller;
-    private DateFactory dateFactory = new DateFactory();
+    private DateTimeFactory dateTimeFactory = DateTimeFactory.withDefaultTimeZone();
+    private ViewHelper viewHelper = new ViewHelper(Locale.US);
     private ExtendedModelMap model = new ExtendedModelMap();
     private List<PostView> posts = new ArrayList<>();
     private Page<PostView> page;
@@ -47,7 +50,7 @@ public class BlogController_PublishedPostsForCategoryTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new BlogController(blogService, dateFactory);
+        controller = new BlogController(blogService, dateTimeFactory, viewHelper);
 
         List<Post> posts = new ArrayList<>();
         posts.add(PostBuilder.post().title("post title").build());

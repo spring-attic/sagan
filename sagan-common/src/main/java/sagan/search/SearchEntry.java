@@ -1,8 +1,8 @@
 package sagan.search;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.crypto.codec.Base64;
@@ -24,7 +24,7 @@ public class SearchEntry {
     private boolean current = true;
 
     // TODO: maybe we don't need this in the index?
-    private Date publishAt = new Date();
+    private LocalDateTime publishAt = LocalDateTime.now();
     private String type = "site";
     private String version;
     private String projectId;
@@ -61,11 +61,11 @@ public class SearchEntry {
         this.subTitle = subTitle;
     }
 
-    public Date getPublishAt() {
+    public LocalDateTime getPublishAt() {
         return publishAt;
     }
 
-    public void setPublishAt(Date publishAt) {
+    public void setPublishAt(LocalDateTime publishAt) {
         this.publishAt = publishAt;
     }
 

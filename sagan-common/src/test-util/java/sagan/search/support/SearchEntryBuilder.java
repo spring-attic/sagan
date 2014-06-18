@@ -1,11 +1,10 @@
 package sagan.search.support;
 
 import sagan.search.SearchEntry;
+import sagan.support.time.DateTimeUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SearchEntryBuilder {
@@ -13,7 +12,7 @@ public class SearchEntryBuilder {
     private String title = "A random title";
     private String rawContent = "A random post content";
     private String summary = "A random post summary";
-    private Date publishAt = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+    private LocalDateTime publishAt = LocalDateTime.now().minusDays(1);
     private String path = "/some/path";
     private List<String> facetPaths = new ArrayList<>();
     private boolean current = true;
@@ -43,13 +42,13 @@ public class SearchEntryBuilder {
         return this;
     }
 
-    public SearchEntryBuilder publishAt(Date date) {
+    public SearchEntryBuilder publishAt(LocalDateTime date) {
         publishAt = date;
         return this;
     }
 
-    public SearchEntryBuilder publishAt(String dateString) throws ParseException {
-        publishAt = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dateString);
+    public SearchEntryBuilder publishAt(String dateString)  {
+        publishAt = DateTimeUtils.parseDateTimeNoSeconds(dateString);
         return this;
     }
 

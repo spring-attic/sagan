@@ -3,7 +3,7 @@ package sagan.search.support;
 import sagan.search.SearchEntry;
 import saganx.AbstractIntegrationTests;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -82,11 +82,12 @@ public class SearchPageTests extends AbstractIntegrationTests {
     }
 
     private void buildManySearchEntries(int numberToCreate) {
-        Calendar calendar = Calendar.getInstance();
         for (int number = 1; number <= numberToCreate; number++) {
-            calendar.set(2012, 10, number);
+
+            LocalDateTime publishAt = LocalDateTime.of(2012, 10, number, 0, 0);
 
             SearchEntry entry = SearchEntryBuilder.entry()
+                    .publishAt(publishAt)
                     .title("This week in Spring - November " + number + ", 2012")
                     .summary("Html summary")
                     .rawContent("Raw Content")
