@@ -5,6 +5,7 @@ import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
 import sagan.search.SearchException;
 import sagan.search.support.SearchService;
+import sagan.support.DateTimeTestUtils;
 import sagan.support.time.DateTimeFactory;
 
 import java.time.LocalDateTime;
@@ -30,7 +31,6 @@ public class BlogService_ValidPostTests {
     private Post post;
     private PostForm postForm = new PostForm();
     private LocalDateTime publishAt = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 12:00");
-    private LocalDateTime now = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 13:00");
 
     @Mock
     private PostRepository postRepository;
@@ -38,8 +38,7 @@ public class BlogService_ValidPostTests {
     @Mock
     private PostFormAdapter postFormAdapter;
 
-    @Mock
-    private DateTimeFactory dateTimeFactory;
+    private DateTimeFactory dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory("2013-07-01 13:00");
 
     @Mock
     private SearchService searchService;
@@ -51,8 +50,6 @@ public class BlogService_ValidPostTests {
 
     @Before
     public void setup() {
-        given(dateTimeFactory.now()).willReturn(now);
-
         given(postRepository.save((Post) anyObject())).will(invocation -> {
             Post post = (Post) invocation.getArguments()[0];
             ReflectionTestUtils.setField(post, "id", 123L);

@@ -4,6 +4,7 @@ import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.search.SearchEntry;
 import sagan.search.support.SearchService;
+import sagan.support.DateTimeTestUtils;
 import sagan.support.time.DateTimeFactory;
 
 import java.time.LocalDateTime;
@@ -27,13 +28,11 @@ public class BlogService_UpdatePostTests {
     private BlogService service;
     private Post post;
     private LocalDateTime publishAt = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 12:00");
-    private LocalDateTime now = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 13:00");
 
     @Mock
     private PostRepository postRepository;
 
-    @Mock
-    private DateTimeFactory dateTimeFactory;
+    private DateTimeFactory dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory("2013-07-01 13:00");
 
     @Mock
     private SearchService searchService;
@@ -48,8 +47,6 @@ public class BlogService_UpdatePostTests {
 
     @Before
     public void setup() {
-        given(dateTimeFactory.now()).willReturn(now);
-
         service = new BlogService(postRepository, postFormAdapter, dateTimeFactory, searchService);
 
         post = PostBuilder.post().id(123L).publishAt(publishAt).build();

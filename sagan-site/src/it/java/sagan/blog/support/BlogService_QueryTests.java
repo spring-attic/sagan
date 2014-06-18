@@ -4,6 +4,7 @@ import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostNotFoundException;
 import sagan.search.support.SearchService;
+import sagan.support.DateTimeTestUtils;
 import sagan.support.nav.PageableFactory;
 import sagan.support.time.DateTimeFactory;
 import sagan.team.MemberProfile;
@@ -38,7 +39,6 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
 
     private static final Pageable FIRST_TEN_POSTS = PageableFactory.forLists(1);
 
-    @Mock
     private DateTimeFactory dateTimeFactory;
 
     @Mock
@@ -68,8 +68,8 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
     @Before
     public void setup() throws Exception {
         initMocks(this);
-        service = new BlogService(postRepository, postFormAdapter, dateTimeFactory, searchService);
         setupDates();
+        service = new BlogService(postRepository, postFormAdapter, dateTimeFactory, searchService);
         setupFixtureData();
     }
 
@@ -78,7 +78,7 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
         yesterday =  today.minusDays(1);
         tomorrow = today.plusDays(1);
 
-        given(dateTimeFactory.now()).willReturn(today);
+        dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory(today);
     }
 
     private void setupFixtureData() throws Exception {
@@ -237,7 +237,6 @@ public class BlogService_QueryTests extends AbstractIntegrationTests {
         postRepository.save(publishedBroadcast);
         Post scheduledBroadcast = PostBuilder.post().title(uniqueTitle()).isBroadcast().publishAt(tomorrow).build();
         postRepository.save(scheduledBroadcast);
-
         List<Post> broadcasts = service.getPublishedBroadcastPosts(FIRST_TEN_POSTS).getContent();
 
         assertThat(scheduledBroadcast, not(isIn(broadcasts)));

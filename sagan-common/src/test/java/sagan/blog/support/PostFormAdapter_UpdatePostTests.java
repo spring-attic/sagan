@@ -3,6 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
+import sagan.support.DateTimeTestUtils;
 import sagan.support.time.DateTimeFactory;
 import sagan.support.time.DateTimeUtils;
 import sagan.team.support.TeamRepository;
@@ -36,8 +37,7 @@ public class PostFormAdapter_UpdatePostTests {
     private PostForm postForm;
     private String ORIGINAL_AUTHOR = "original author";
 
-    @Mock
-    private DateTimeFactory dateTimeFactory;
+    private DateTimeFactory dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory(now);
 
     @Mock
     private TeamRepository teamRepository;
@@ -52,7 +52,6 @@ public class PostFormAdapter_UpdatePostTests {
 
     @Before
     public void setup() {
-        given(dateTimeFactory.now()).willReturn(now);
         given(postSummary.forContent(anyString(), anyInt())).willReturn(SUMMARY);
         given(renderer.render(content)).willReturn(RENDERED_HTML);
 

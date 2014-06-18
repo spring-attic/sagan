@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.support.DateTimeTestUtils;
 import sagan.support.time.DateTimeFactory;
 import sagan.support.time.DateTimeUtils;
 import sagan.team.MemberProfile;
@@ -38,8 +39,7 @@ public class PostFormAdapter_CreatePostTests {
     private boolean draft = false;
     private LocalDateTime now = DateTimeUtils.parseDateTimeNoSeconds("2013-07-01 13:00");
 
-    @Mock
-    private DateTimeFactory dateTimeFactory;
+    private DateTimeFactory dateTimeFactory = DateTimeTestUtils.createFixedTimeFactory(now);
 
     @Mock
     private TeamRepository teamRepository;
@@ -65,7 +65,6 @@ public class PostFormAdapter_CreatePostTests {
 
         given(renderer.render(content)).willReturn(RENDERED_HTML);
         given(postSummary.forContent(anyString(), anyInt())).willReturn(RENDERED_SUMMARY);
-        given(dateTimeFactory.now()).willReturn(now);
 
         adapter = new PostFormAdapter(renderer, postSummary, dateTimeFactory, teamRepository);
 
