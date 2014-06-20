@@ -30,7 +30,7 @@ public class QuestionsIndexTests extends AbstractIntegrationTests {
         String body = document.select("body").text();
 
 		// header title
-		assertThat(body, containsString("Spring StackOverflow"));
+		assertThat(body, containsString("Spring at StackOverflow"));
 
         // latest spring-* questions pulled into the left 2/3 of the page
 
