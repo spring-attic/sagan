@@ -22,6 +22,13 @@ var Munchkin, baseUrl, sts_import; // pre-existing globals
             leaflet: { location: 'lib/leaflet/dist/leaflet', config: cjsConfig },
             ZeroClipboard: 'lib/zeroclipboard/ZeroClipboard',
             jquery: 'lib/jquery/jquery.min',
+            timeago: {
+                location: 'lib/jquery-timeago/jquery.timeago',
+                config: {
+                    requires: [ 'jquery' ],
+                    exports: '$.fn.timeago'
+                }
+            },
             'prettify': 'lib/google-code-prettify/src/prettify',
             bootstrap: {
                 location: 'lib/bootstrap/docs/assets/js/bootstrap',
