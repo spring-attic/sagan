@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +17,15 @@ import org.springframework.social.github.api.GitHub;
 import org.springframework.social.github.api.GitHubUser;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 class DefaultTeamImporter implements TeamImporter {
+
+    private static final Log logger = LogFactory.getLog(DefaultTeamImporter.class);
 
     private final TeamService teamService;
     private final GitHubClient gitHub;
@@ -49,9 +55,14 @@ class DefaultTeamImporter implements TeamImporter {
 
     private GitHubUser[] getGitHubUsers(GitHub gitHub) {
         String membersUrl = GitHubClient.API_URL_BASE + "/teams/{teamId}/members";
-        ResponseEntity<GitHubUser[]> entity =
-                gitHub.restOperations().getForEntity(membersUrl, GitHubUser[].class, gitHubTeamId);
-        return entity.getBody();
+        try {
+            ResponseEntity<GitHubUser[]> entity =
+                    gitHub.restOperations().getForEntity(membersUrl, GitHubUser[].class, gitHubTeamId);
+            return entity.getBody();
+        } catch (RestClientException e) {
+            logger.warn("Failed to retrieve team members. reason=" + e.getMessage());
+            return new GitHubUser[] { };
+        }
     }
 
     public String getNameForUser(String username) {
