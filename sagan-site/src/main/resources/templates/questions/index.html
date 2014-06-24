@@ -27,7 +27,7 @@
     <div layout:fragment="content">
 
         <div class="row-fluid">
-            <div class="span8 mobile-left-pane" style="margin-left:0">
+            <div th:unless="${#lists.isEmpty(questions)}" class="span8 mobile-left-pane" style="margin-left:0">
 
                 <h2 class="questions-title">Active questions on StackOverflow</h2>
                 <div id="questions" class="content-padding">
@@ -77,6 +77,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div th:if="${#lists.isEmpty(questions)}" class="span8 mobile-left-pane" style="margin-left:0">
+                <h2 class="questions-title">Check out <a href="https://stackoverflow.com/tags/spring/">new questions on StackOverflow</a></h2>
             </div>
 
             <div class="span4 mobile-left-pane">

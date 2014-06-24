@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import sagan.SiteConfig;
+import sagan.support.cache.CachedRestClient;
 import saganx.AbstractIntegrationTests;
 
 import static org.hamcrest.Matchers.anyOf;
@@ -23,7 +24,7 @@ public class StackOverflowClientTests extends AbstractIntegrationTests {
 
     @Test
     public void getQuestionsTagged() {
-        StackOverflowClient client = new StackOverflowClient(siteConfig.restTemplate());
+        StackOverflowClient client = new StackOverflowClient(new CachedRestClient(), siteConfig.restTemplate());
         List<Question> questions = client.searchForQuestionsTagged("spring-data-mongodb", "spring-data-neo4j");
         Assert.assertThat(questions.get(0).tags, anyOf(hasItem("spring-data-mongodb"), hasItem("spring-data-neo4j")));
     }

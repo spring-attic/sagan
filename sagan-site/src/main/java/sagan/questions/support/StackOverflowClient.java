@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+import sagan.support.cache.CachedRestClient;
 
 @Component
 class StackOverflowClient {
@@ -28,11 +29,13 @@ class StackOverflowClient {
     }
 
     private final RestOperations restOperations;
+    private final CachedRestClient restClient;
     private String baseUrl;
 
     @Autowired
-    public StackOverflowClient(RestOperations restOperations) {
+    public StackOverflowClient(CachedRestClient restClient, RestOperations restOperations) {
         this.restOperations = restOperations;
+        this.restClient = restClient;
         this.baseUrl = DEFAULT_BASE_URL;
     }
 
@@ -50,7 +53,7 @@ class StackOverflowClient {
 
         UriComponents uriComponents = builder.build();
 
-        Questions result = restOperations.getForObject(uriComponents.toUri(), Questions.class);
+        Questions result = restClient.get(restOperations, uriComponents.toUriString(), Questions.class);
 
         return result.items;
     }
