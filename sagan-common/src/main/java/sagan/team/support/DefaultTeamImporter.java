@@ -5,7 +5,6 @@ import sagan.support.github.GitHubClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +14,7 @@ import org.springframework.social.github.api.GitHubUser;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -57,9 +56,8 @@ class DefaultTeamImporter implements TeamImporter {
     public String getNameForUser(String username) {
         String jsonResponse = gitHub.sendRequestForJson("/users/{user}", username);
         try {
-            Map<String, String> map = objectMapper.readValue(jsonResponse, new TypeReference<Map<String, String>>() {
-            });
-            return map.get("name");
+            JsonNode jsonNode = objectMapper.readTree(jsonResponse);
+            return jsonNode.get("name").asText();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
