@@ -1,5 +1,8 @@
 
-springBoot.mainClass = 'sagan.SiteMain'
+springBoot {
+    mainClass = 'sagan.SiteMain'
+    requiresUnpack = ['org.jruby:jruby-complete']
+}
 
 applicationDefaultJvmArgs = [
         // Set SAGAN_HOME env variable to the root of sagan project. This allows to register an additional
