@@ -37,15 +37,15 @@ task deploy(dependsOn: [ build, rootProject.gitMetadata ]) {
     // deploy if the secure environment vars are available (i.e. this is not a pull request
     // from a fork) and we're on a branch intended for production deployment.
     if (!isTravisBuild || (isDeployableTravisBuild && project.hasProperty(TARGET_SPACE))) {
-        dependsOn 'cf-login'
+        dependsOn 'cfLogin'
 
         // the site gets blue-green deployment
         if (project.name == siteProject.name)
-            dependsOn 'cf-deploy', 'cf-swap-deployed'
+            dependsOn 'cfDeploy', 'cfSwapDeployed'
 
         // the indexer just needs to be pushed
         else if (project.name == indexerProject.name)
-            dependsOn 'cf-push'
+            dependsOn 'cfPush'
 
         else
             throw new IllegalArgumentException('Unknown project ${project.name}')
@@ -89,7 +89,7 @@ if (project.name == indexerProject.name) {
 }
 
 // These deployment properties can be set on the command line with "-P" options, in "gradle.properties",
-// or in "~/.gradle/sagan-env.gradle". All are required if the respective 'cf-login' / 'deploy' tasks
+// or in "~/.gradle/sagan-env.gradle". All are required if the respective 'cfLogin' / 'deploy' tasks
 // have been invoked.
 
 def reqDeployVars = [
@@ -105,24 +105,19 @@ gradle.taskGraph.whenReady {
     else {
         // We should have everything we need in order to deploy. Check for required credentials
         // and populate cloudfoundry environment variables.
-        if (gradle.taskGraph.hasTask(":${siteProject.name}:cf-login")
-                || gradle.taskGraph.hasTask(":${indexerProject.name}:cf-login")) {
+        if (gradle.taskGraph.hasTask(":${siteProject.name}:cfLogin")
+                || gradle.taskGraph.hasTask(":${indexerProject.name}:cfLogin")) {
             def missingVars = []
-            // user and pass are provided in Travis CI via environment variables, where '.' breaks things
-            // the cf-gradle-plugin's cf-login task, however, expects the 'cf.' naming, thus the mapping here.
-            if (project.hasProperty('cfUsername')) {
-                project.ext.setProperty('cf.username', project.getProperty('cfUsername'))
-            } else {
+
+            if (!project.hasProperty('cfUsername')) {
                 missingVars << 'cfUsername'
             }
-            if (project.hasProperty('cfPassword')) {
-                project.ext.setProperty('cf.password', project.getProperty('cfPassword'))
-            } else {
+            if (!project.hasProperty('cfPassword')) {
                 missingVars << 'cfPassword'
             }
             if (missingVars.size() > 0) {
                 throw new InvalidUserDataException(
-                        "Missing required variable(s) for the 'cf-login' task: ${missingVars}. " +
+                        "Missing required variable(s) for the 'cfLogin' task: ${missingVars}. " +
                                 "Specify them with -Pkey=value or in ${saganEnvScript}");
             }
         }
@@ -164,9 +159,9 @@ gradle.taskGraph.whenReady {
 }
 
 // Routes can be specified by combining the 'host'/'hosts' field with the 'domain' field, or by the 'uri'/'uris' field.
-// Values for 'host'/'hosts' are modified on cf-deploy to add '-blue' or '-green' as appropriate, and are applied on
-// cf-push and cf-deploy. Values for 'uri'/'uris' are never modified with '-blue' or '-green', and are only applied by
-// cf-push and cf-swap-deployed. Using both forms of specifying routes gives control over which routes are decorated and
+// Values for 'host'/'hosts' are modified on cfDeploy to add '-blue' or '-green' as appropriate, and are applied on
+// cfPush and cfDeploy. Values for 'uri'/'uris' are never modified with '-blue' or '-green', and are only applied by
+// cfPush and cfSwapDeployed. Using both forms of specifying routes gives control over which routes are decorated and
 // which routes are undecorated.
 
 if (project.hasProperty(TARGET_SPACE)) {
@@ -183,15 +178,11 @@ if (project.hasProperty(TARGET_SPACE)) {
         services {
             'sagan-db' {
                 label = 'elephantsql'
-                provider = 'elephantsql'
                 plan = (space == PRODUCTION_SPACE ? 'panda' : 'hippo')
-                version = 'n/a'
             }
             'newrelic' {
                 label = 'newrelic'
-                provider = 'newrelic'
                 plan = 'standard'
-                version = 'n/a'
             }
         }
     }
