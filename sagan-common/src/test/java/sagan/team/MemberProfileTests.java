@@ -108,6 +108,27 @@ public class MemberProfileTests {
     }
 
     @Test
+    public void gplusLink() {
+        MemberProfile nick = new MemberProfile();
+        nick.setGplusId("123456");
+        assertThat(nick.getGplusLink().getHref(), equalTo("https://plus.google.com/123456"));
+        assertThat(nick.getGplusLink().getText(), equalTo("plus.google.com/123456"));
+    }
+
+    @Test
+    public void emptyGplusLink() {
+        MemberProfile nick = new MemberProfile();
+        assertThat(nick.getGplusLink(), is(nullValue()));
+    }
+
+    @Test
+    public void nullGplusLink() {
+        MemberProfile nick = new MemberProfile();
+        nick.setGplusId("");
+        assertThat(nick.getGplusLink(), is(nullValue()));
+    }
+
+    @Test
     public void isNotHiddenByDefault() {
         MemberProfile nick = new MemberProfile();
         assertThat(nick.isHidden(), is(false));

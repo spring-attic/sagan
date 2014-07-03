@@ -1,0 +1,1 @@
+alter table memberprofile add gplusid character varying(255);

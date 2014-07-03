@@ -32,10 +32,11 @@
             <div class="span8">
               <div class="team-member-info--container">
                 <div class="team-member-social pull-right">
-                  <a class="team-member--social--icon twitter-small" th:href="'http://twitter.com/'+ ${profile.twitterUsername}" th:unless="${#strings.isEmpty(profile.twitterUsername)}"></a>
-                  <a class="team-member--social--icon github-small" th:href="'http://github.com/'+ ${profile.githubUsername}" th:unless="${#strings.isEmpty(profile.githubUsername)}"></a>
-                  <a class="team-member--social--icon speakerdeck-small" th:href="'http://speakerdeck.com/'+ ${profile.speakerdeckUsername}" th:unless="${#strings.isEmpty(profile.speakerdeckUsername)}"></a>
-                  <a class="team-member--social--icon lanyrd-small" th:href="'http://lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:unless="${#strings.isEmpty(profile.lanyrdUsername)}"></a>
+                  <a class="team-member--social--icon twitter-small" rel="me" th:href="${profile.twitterLink.href}" th:if="${profile.hasTwitterUsername()}"></a>
+                  <a class="team-member--social--icon github-small" rel="me" th:href="${profile.githubLink.href}" th:if="${profile.hasGithubUsername()}"></a>
+                  <a class="team-member--social--icon gplus-small" rel="me" th:href="${profile.gplusLink.href}" th:if="${profile.hasGplusId()}">G+</a>
+                  <a class="team-member--social--icon speakerdeck-small" rel="me" th:href="${profile.speakerdeckLink.href}" th:if="${profile.hasSpeakerdeckUsername()}"></a>
+                  <a class="team-member--social--icon lanyrd-small" rel="me" th:href="${profile.lanyrdLink.href}" th:if="${profile.hasLanyrdUsername()}"></a>
                 </div>
                 <h1 class="team-member--name" th:text="*{fullName}">First Last</h1>
                 <div class="team-member--sub-info">
