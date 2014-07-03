@@ -94,5 +94,9 @@ configure(bootProjects) {
 
     springBoot.backupSource = false
     bootRun.dependsOn writeGitPropertiesFile
+
+    dependencies {
+        versionManagement 'io.spring.platform:platform-versions:1.0.0.RELEASE@properties'
+    }
 }
 

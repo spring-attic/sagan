@@ -23,8 +23,8 @@ dependencies {
     compile('io.searchbox:jest:0.0.4') {
         exclude(module: 'commons-logging')
     }
-    compile 'org.springframework.cloud:spring-service-connector:0.9.5'
-    compile 'org.springframework.cloud:cloudfoundry-connector:0.9.5'
+    compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
+    compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 
     // datasource and connection pool dependencies
     runtime 'org.postgresql:postgresql:9.2-1002-jdbc4'
@@ -41,7 +41,6 @@ dependencies {
     }
 
     compile 'org.jsoup:jsoup:1.7.2'
-    compile 'org.yaml:snakeyaml'
     compile 'joda-time:joda-time'
     compile 'org.hibernate:hibernate-validator'
 
@@ -71,3 +70,7 @@ idea.module {
 // are actually "boot"-style apps.
 apply plugin: 'spring-boot'
 bootRepackage.enabled = false
+
+dependencies {
+    versionManagement 'io.spring.platform:platform-versions:1.0.0.RELEASE@properties'
+}
