@@ -1,5 +1,6 @@
 package sagan;
 
+import org.springframework.beans.factory.annotation.*;
 import sagan.team.MemberProfile;
 import sagan.team.support.SignInService;
 
@@ -11,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -94,6 +94,9 @@ class SecurityConfig {
 
         private Environment environment;
 
+        @Value("${github.team.non_member_admin}")
+        private boolean allowNonMemberAdmin;
+
         @Override
         public void setEnvironment(Environment environment) {
             this.environment = environment;
@@ -145,7 +148,7 @@ class SecurityConfig {
             repository.setConnectionSignUp(new RemoteUsernameConnectionSignUp());
             ProviderSignInController controller =
                     new ProviderSignInController(registry, repository, new GithubAuthenticationSigninAdapter(
-                            SIGNIN_SUCCESS_PATH, signInService));
+                            SIGNIN_SUCCESS_PATH, signInService, allowNonMemberAdmin));
             controller.setSignInUrl("/signin?error=access_denied");
             return controller;
         }
@@ -207,10 +210,12 @@ class SecurityConfig {
 
         private String path;
         private final SignInService signInService;
+        private boolean allowNonMember;
 
-        public GithubAuthenticationSigninAdapter(String path, SignInService signInService) {
+        public GithubAuthenticationSigninAdapter(String path, SignInService signInService, boolean allowNonMember) {
             this.path = path;
             this.signInService = signInService;
+            this.allowNonMember = allowNonMember;
         }
 
         @Override
@@ -219,7 +224,7 @@ class SecurityConfig {
             String githubUsername = connection.getDisplayName();
 
             try {
-                if (!signInService.isSpringMember(githubUsername, gitHub)) {
+                if (!allowNonMember && !signInService.isSpringMember(githubUsername, gitHub)) {
                     throw new BadCredentialsException("User not member of required org");
                 }
 

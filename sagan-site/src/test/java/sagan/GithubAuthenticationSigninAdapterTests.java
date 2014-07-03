@@ -43,7 +43,7 @@ public class GithubAuthenticationSigninAdapterTests {
 
     @Before
     public void setup() {
-        adapter = new GithubAuthenticationSigninAdapter("/foo", signInService);
+        adapter = new GithubAuthenticationSigninAdapter("/foo", signInService, false);
     }
 
     @After
@@ -59,10 +59,7 @@ public class GithubAuthenticationSigninAdapterTests {
         given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willReturn(true);
 
         adapter.signIn("12345", connection, new ServletWebRequest(new MockHttpServletRequest()));
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        assertNotNull(authentication);
-        assertTrue(authentication.isAuthenticated());
-        verify(signInService).getOrCreateMemberProfile(eq(12345L), any(GitHub.class));
+        validateSignIn(12345L);
     }
 
     @Test
@@ -81,6 +78,25 @@ public class GithubAuthenticationSigninAdapterTests {
         given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willThrow(RestClientException.class);
         expectedException.expect(BadCredentialsException.class);
         adapter.signIn("12345", connection, new ServletWebRequest(new MockHttpServletRequest()));
+    }
+
+    @Test
+    public void allowSignInNonSpringMember() {
+
+        adapter = new GithubAuthenticationSigninAdapter("/foo", signInService, true);  // allow non member
+
+        MemberProfile newMember = new MemberProfile();
+        given(signInService.getOrCreateMemberProfile(anyLong(), any(GitHub.class))).willReturn(newMember);
+
+        adapter.signIn("12345", connection, new ServletWebRequest(new MockHttpServletRequest()));
+        validateSignIn(12345L);
+    }
+
+    private void validateSignIn(long githubid) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        assertNotNull(authentication);
+        assertTrue(authentication.isAuthenticated());
+        verify(signInService).getOrCreateMemberProfile(eq(githubid), any(GitHub.class));
     }
 
 }
