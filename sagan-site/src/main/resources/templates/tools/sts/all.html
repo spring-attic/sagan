@@ -16,9 +16,9 @@
             distribution for your platform. Choose either a native installer or simple
             archive, they contain equivalent functionality.</p>
 
-          <div class='ga--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${gaRelease}"></div>
-          <div class='milestone--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${milestoneRelease}" th:if="${milestoneRelease.hasPlatforms()}"></div>
-
+          <section class='ga--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${gaRelease}"></section>
+          <section class='milestone--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${milestoneRelease}" th:if="${milestoneRelease.hasPlatforms()}"></section>
+        <section>
         <h2>Update Site Archives</h2>
         <p>You can download archived versions of the update sites, if you
             want to install STS/GGTS into an existing Eclipse installation or if
@@ -40,7 +40,9 @@
             </tr>
           </tbody>
         </table>
+        </section>
         <br>
+        <section>
         <h2>Update Sites</h2>
         <p>
           If you want to install STS/GGTS in an existing Eclipse installation, you can use one of the following update sites. Please choose the one that matches the Eclipse version you're running:
@@ -82,6 +84,7 @@
             <p><a href="https://stackoverflow.com/questions/ask?tags=spring-tool-suite">Have a question or a problem? Ask StackOverflow for STS</a></p>
           </div>
         </div>
+        </section>
       </div>
     </div>
   </div>

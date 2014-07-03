@@ -30,6 +30,8 @@
   font-family: "Montserrat", sans-serif;
   line-height: 24px;
   margin-bottom: 20px;
+  color: #f1f1f1;
+  font-weight: normal;
 }
 .tool--container .tool--description {
   font-size: 14px;

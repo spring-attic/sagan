@@ -23,9 +23,9 @@
     <div class="billboard--wrapper js-team-map--wrapper">
       <div class="billboard--container center-text js-team-map--container">
         <div class="container-fluid">
-          <div class="billboard--title">
+          <h1 class="billboard--title">
             The Spring Team
-          </div>
+          </h1>
           <div class="billboard--sub-title--container">
             <div class="billboard--sub-title">
               We work together from around the world with one mission &ndash; building quality, open-source
@@ -36,13 +36,13 @@
           </div>
         </div>
       </div>
-      <div id="map" class="billboard-bg"></div>
+      <figure id="map" class="billboard-bg"></figure>
     </div>
   </div>
   <div layout:fragment="content">
     <div class="main-body--wrapper">
       <div class="team-members--wrapper">
-        <div class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
+        <section class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
           <a th:href="@{'/team/' + ${profile.username}}" class="team-member--avatar">
             <img th:src="${profile.avatarUrl} + '?s=153&s=153'" />
           </a>
@@ -59,7 +59,7 @@
               <a class="team-member--social--icon lanyrd-small" th:href="'http://lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:if="${profile.hasLanyrdUsername()}"></a>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   </div>

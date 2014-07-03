@@ -19,13 +19,13 @@
                 No results found for your query.
             </div>
             <div th:if="${!results.empty}" class='search-results'>
-                <div class="search-result" th:each="result : ${results}">
+                <section class="search-result" th:each="result : ${results}">
                     <a th:href="@{${result.path}}" th:text="${result.title}" class="search-result--title">This week in Spring</a>
                     <div class="metadata">
                         <div class="search-result--subtitle" th:text="${result.subTitle}" th:if="${result.subTitle}">Blog Post</div>
                     </div>
                     <div th:utext="${result.displayText}" class='search-result--summary'>This has been an interesting week.</div>
-                </div>
+                </section>
             </div>
             <div id='pagination_control' class="pagination" th:if="${paginationInfo.isVisible()}">
                 <a th:href="@{/search(page=${paginationInfo.previousPageNumber},q=${searchForm.q},filters=${searchForm.filters})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-    <div class="span4">
+    <aside class="span4">
       <div class="search-facets content-container--wrapper">
         <form th:action="@{/search}" method="GET" th:object="${searchForm}" onsubmit="interceptFilterForm(this);">
           <input type="hidden" name="q" th:value="${searchForm.q}" />
@@ -53,7 +53,7 @@
         </form>
       </div>
       <a href="#" class="facets--clear-filters pull-right">Clear Filters</a>
-     </div>
+     </aside>
 
   </div>
 </div>

@@ -17,6 +17,7 @@
 
 .homepage-title {
   font-size: 48px;
+  font-weight: normal;
   line-height: 68px;
   font-family: "Montserrat", sans-serif;
   padding: 0 15px;
@@ -30,6 +31,10 @@
 }
 .homepage-subtitle:first-child {
   padding-top: 12px;
+}
+
+.homepage--body h1 {
+    display: none;
 }
 
 .homepage--body .platform--wrapper {
@@ -50,6 +55,7 @@
   font-family: "Montserrat", sans-serif;
   color: #f1f1f1;
   font-size: 30px;
+  font-weight: normal;
   line-height: 30px;
   margin-bottom: 20px;
   text-transform: uppercase;
@@ -87,8 +93,10 @@
   text-transform: uppercase;
   font-family: "Montserrat", sans-serif;
   font-size: 30px;
+  font-weight: normal;
   line-height: 30px;
   margin-bottom: 20px;
+  color: #f1f1f1;
 }
 .homepage--body .key-feature--wrapper .key-feature--container .key-feature--text {
   font-size: 18px;

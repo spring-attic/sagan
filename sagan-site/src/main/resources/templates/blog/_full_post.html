@@ -5,13 +5,14 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <body>
     <div layout:fragment="full-post">
-      <div class="desktop-only">
+      <header class="desktop-only">
         <div th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
           <div th:text="${category.displayName}">Engineering</div>
         </div>
-      </div>
+      </header>
       <div class="blog--container">
-        <div class="blog--title" th:text="*{title}">Blog post</div>
+        <header>
+        <h1 class="blog--title" th:text="*{title}">Blog post</h1>
         <div class="meta-data--container">
           <div class="meta-data--item desktop-only">
             <div th:class="${'meta-data--icon icon blog-icon '+ #strings.toLowerCase(post.category).replace(' ','-')}"></div>
@@ -24,16 +25,17 @@
           </div>
           <div class="meta-data--item">
             <div class="meta-data--icon icon blog-icon calendar"></div>
-            <span class='date' th:text='${post.formattedPublishDate}'>June 18, 2013</span>
+            <time class='date' pubdate th:datetime="${post.publishAt}" th:text='${post.formattedPublishDate}'>June 18, 2013</time>
           </div>
           <div class="meta-data--item">
             <div class="meta-data--icon icon blog-icon comments"></div>
             <a class='comments' th:attr="data-disqus-identifier=${post.id}" th:href="@{${post.path} + '#disqus_thread'}"/>
           </div>
         </div>
-        <article class="blog--post" th:utext="*{renderedContent}">Blog content</article>
+        </header>
+        <div class="blog--post" th:utext="*{renderedContent}">Blog content</div>
     </div>
-    <div id="disqus_thread"></div>
+    <section id="disqus_thread"></section>
     <script type="text/javascript" th:inline="javascript">
       var disqus_shortname = /*[[${disqusShortname}]]*/ 'no_shortname';
       var disqus_identifier = /*[[${post.id}]]*/ 'no_id';

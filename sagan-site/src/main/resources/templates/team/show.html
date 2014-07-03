@@ -23,11 +23,11 @@
   <div layout:fragment="full-width--layout" th:object="${profile}" data:member-id="${profile.id}">
     <div class="team-map--wrapper">
       <div class="team-member--container">
-        <div class="container-fluid">
+        <section class="container-fluid">
           <div  class="content--title">Spring Team</div>
           <div class="row-fluid">
             <div class="span4">
-              <img th:src="*{avatarUrl} + '?s=250&s=250'" class="team-member--avatar" th:unless="${#strings.isEmpty(profile.avatarUrl)}"/>
+              <img th:alt="*{fullName}" th:src="*{avatarUrl} + '?s=250&s=250'" class="team-member--avatar" th:unless="${#strings.isEmpty(profile.avatarUrl)}"/>
             </div>
             <div class="span8">
               <div class="team-member-info--container">
@@ -46,9 +46,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-      <div id="map"></div>
+      <figure id="map"></figure>
     </div>
   </div>
   <div layout:fragment="content" class="container" th:object="${profile}" data:member-id="${profile.id}">
@@ -56,16 +56,16 @@
 
       <div class="team-members--wrapper with-padding">
         <div class="row-fluid">
-          <div class="span4">
+          <aside class="span4">
             <div class="member-twitter--wrapper" th:object="${profile}">
               <div class="member-twitter--header">
                 <div th:if="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-handle">@springcentral</div>
                 <div th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-handle" th:text="'@'+${profile.twitterUsername}"></div>
-                <a th:if="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fplatform.twitter.com%2Fwidgets%2Ffollow_button.1375828408.html&partner=undefined&region=follow_link&screen_name=springcentral&tw_p=followbutton&variant=2.0">
+                <a th:if="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" href="https://twitter.com/intent/user?screen_name=springcentral">
                   <i class="icon-twitter"></i>
                   Follow
                 </a>
-                <a th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" th:href="'https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fplatform.twitter.com%2Fwidgets%2Ffollow_button.1375828408.html&partner=undefined&region=follow_link&screen_name=' + ${profile.twitterUsername} + '&tw_p=followbutton&variant=2.0'">
+                <a th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" th:href="'https://twitter.com/intent/user?screen_name=' + ${profile.twitterUsername}">
                   <i class="icon-twitter"></i>
                   Follow
                 </a>
@@ -90,12 +90,13 @@
                 </script>
               </div>
             </div>
-          </div>
+          </aside>
           <div id="content" class="span8">
             <div class="content-container--wrapper blog--container">
               <div class="content-container--title" th:inline="text">Blog Posts by [[${profile.name}]]</div>
               <div class='content-items--container posts'>
-                <div class="member-post--container" th:each="post : ${posts}">
+                <article class="member-post--container" th:each="post : ${posts}">
+                  <header>
                   <a th:href="@{${post.path}}"><h2 class="member-post--title" th:text="${post.title}">This week in Spring</h2></a>
                   <div class="meta-data--container">
                     <div class="meta-data--item">
@@ -104,14 +105,15 @@
                     </div>
                     <div class="meta-data--item">
                       <div class="meta-data--icon icon blog-icon calendar"></div>
-                      <span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
+                      <time class='date' pubdate th:datetime="${post.publishAt}" th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</time>
                     </div>
                   </div>
-                  <div th:utext="${post.renderedSummary}" class='member-post--summary'>This has been an interesting week.</div>
+                  </header>
+                  <section th:utext="${post.renderedSummary}" class='member-post--summary'>This has been an interesting week.</section>
                   <a class="blog-preview--readmore" th:href="@{${post.path}}" th:if="${post.showReadMore()}">
                     Read more...
                   </a>
-                </div>
+                </article>
               </div>
             </div>
             <div class="content-container--wrapper" th:unless="${#strings.isEmpty(profile.videoEmbeds)}">

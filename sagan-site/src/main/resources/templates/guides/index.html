@@ -10,7 +10,7 @@
 <body>
   <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container-fluid">
-    <div class="main-body--wrapper">
+    <main class="main-body--wrapper">
       <h1 class="index-page--title">Guides</h1>
       <p class="index-page--subtitle with-subtext">Whatever you're building, these guides are designed to get you productive as quickly as possible &ndash; using the latest Spring project releases and techniques as recommended by the <a href="/team">Spring team</a>.<br/>
         <span class="subtext">
@@ -23,7 +23,7 @@
         <div class="content-container--header">
           <input type='text' id='doc_filter' style="color:#aaa;" onfocus="this.value=''; this.style.color='#000'; this.style.fontStyle='normal'; this.onfocus='';" autofocus value="Find a guide..." placeholder="Find a guide..." class="content-container--filter"/>
         </div>
-        <div class="content-container--body">
+        <section class="content-container--body">
           <div data-filterable-container>
             <div class="content-section-title--container">
               <div class="pull-left icon icon-gs-guides"></div>
@@ -36,8 +36,8 @@
               <p class="guide--subtitle" th:text="${guide.subtitle}"></p>
             </div>
           </div>
-        </div>
-        <div class="content-container--body">
+        </section>
+        <section class="content-container--body">
           <div data-filterable-container>
             <div class="content-section-title--container">
               <div class="pull-left icon icon-tutorial"></div>
@@ -50,9 +50,9 @@
               <p class="guide--subtitle" th:text="${tutorial.subtitle}"></p>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   </div>
 </body>
 </html>
