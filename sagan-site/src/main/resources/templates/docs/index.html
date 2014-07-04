@@ -5,7 +5,11 @@
         data-filterable-list data-info-popups>
 <head>
     <title>Docs</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/filterable-list.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/filterable-list.css}" />
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="Spring Documentation" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:description" content="API and reference documentation for all Spring project" />
 </head>
 <body>
 <div layout:fragment="header-container"></div>

@@ -16,7 +16,10 @@
         var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
         /*]]>*/
     </script>
-
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" th:content="'Spring Team: ' + ${profile.fullName}" />
+    <meta property="og:image" th:content="${profile.avatarUrl} + '?s=250&s=250'" />
+    <meta property="og:description" th:content="${profile.fullName} + ' - '+ ${profile.jobTitle}" />
 </head>
 <body>
   <div layout:fragment="header-container"></div>

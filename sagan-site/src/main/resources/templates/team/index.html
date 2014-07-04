@@ -16,6 +16,11 @@
         var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
         /*]]>*/
     </script>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="The Spring team" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:description" content="The Spring team works from around the world with one mission: building
+    quality, open-source software that helps you and your team be more productive on the JVM." />
 </head>
 <body>
   <div layout:fragment="header-container"></div>

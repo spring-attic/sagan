@@ -12,6 +12,13 @@
     <meta name="twitter:description" th:content="${post.renderedSummary}">
     <meta name="twitter:creator" th:if="${post.author.hasTwitterUsername()}" th:content="'@' + ${post.author.twitterUsername}">
     <meta name="twitter:image:src" th:unless="${#strings.isEmpty(post.author.avatarUrl)}" th:content="${post.author.avatarUrl} + '?s=200'">
+
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" th:content="${post.title}">
+    <meta property="og:image" th:unless="${#strings.isEmpty(post.author.avatarUrl)}" th:content="${post.author.avatarUrl} + '?s=200'">
+    <meta property="og:description" th:content="${post.renderedSummary}">
+    <meta property="og:type" content="article">
+    <meta property="og:article:published_time" th:content="${post.publishAt}">
 </head>
 <body>
   <div layout:fragment="header-container"></div>

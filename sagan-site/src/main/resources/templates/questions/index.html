@@ -5,6 +5,11 @@
 <head>
     <title th:inline="text">Questions</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/questions.css}"/>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="Spring at StackOverflow" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:description" content="Welcome to our StackOverflow page, where we maintain a list of
+    StackOverflow tags that our engineering team monitors and participates in" />
 </head>
 <body>
     <header class="header--content" layout:fragment="header-content">
