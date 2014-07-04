@@ -4,6 +4,14 @@
 <head>
     <title th:inline="text">[[${post.title}]]</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/blog.css}" href="../../../../../../sagan-client/src/css/blog.css" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@springcentral">
+    <meta name="twitter:title" th:content="${post.title}">
+    <meta name="twitter:description" th:content="${post.renderedSummary}">
+    <meta name="twitter:creator" th:if="${post.author.hasTwitterUsername()}" th:content="'@' + ${post.author.twitterUsername}">
+    <meta name="twitter:image:src" th:unless="${#strings.isEmpty(post.author.avatarUrl)}" th:content="${post.author.avatarUrl} + '?s=200'">
 </head>
 <body>
   <div layout:fragment="header-container"></div>
