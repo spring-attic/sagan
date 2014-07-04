@@ -1,24 +1,22 @@
 package sagan.tools.support;
 
-import sagan.support.cache.CachedRestClient;
-import sagan.tools.EclipseDownloads;
-import sagan.tools.ToolSuiteDownloads;
-
-import org.simpleframework.xml.Serializer;
-
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import sagan.support.cache.CachedRestClient;
+import sagan.tools.EclipseDownloads;
+import sagan.tools.ToolSuiteDownloads;
 
 @Service
 class ToolsService {
     private final ToolXmlConverter toolXmlConverter = new ToolXmlConverter();
     private final CachedRestClient restClient;
     private final RestTemplate restTemplate;
-    private final Serializer serializer;
+    private final XmlMapper serializer;
 
     @Autowired
-    public ToolsService(CachedRestClient restClient, RestTemplate restTemplate, Serializer serializer) {
+    public ToolsService(CachedRestClient restClient, RestTemplate restTemplate, XmlMapper serializer) {
         this.restClient = restClient;
         this.restTemplate = restTemplate;
         this.serializer = serializer;
@@ -44,7 +42,7 @@ class ToolsService {
         String responseXml =
                 restClient.get(restTemplate, "http://dist.springsource.com/release/STS/index-new.xml",
                         String.class);
-        ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
+        ToolSuiteXml toolSuiteXml = serializer.readValue(responseXml, ToolSuiteXml.class);
         return toolXmlConverter.convert(toolSuiteXml, toolSuiteName, shortName);
     }
 
@@ -52,7 +50,7 @@ class ToolsService {
         String responseXml =
                 restClient.get(restTemplate, "http://dist.springsource.com/release/STS/eclipse.xml",
                         String.class);
-        EclipseXml eclipseXml = serializer.read(EclipseXml.class, responseXml);
+        EclipseXml eclipseXml = serializer.readValue(responseXml, EclipseXml.class);
         return new EclipseDownloadsXmlConverter().convert(eclipseXml);
     }
 }

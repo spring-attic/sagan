@@ -1,33 +1,23 @@
 package sagan.tools.support;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import sagan.tools.FileDownload;
-
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
 
 class EclipseXmlDownload implements FileDownload {
 
-    @Attribute
     private String os;
 
-    @Attribute(name = "version", required = false)
     private String version;
 
-    @Attribute(name = "eclipse-version")
+    @JacksonXmlProperty(isAttribute = true, localName = "eclipse-version")
     private String eclipseVersion;
 
-    @Attribute
     private String size;
 
-    @Element(name = "description")
     private String description;
-    @Element
     private String file;
-    @Element
     private String md5;
-    @Element
     private String sha1;
-    @Element
     private String bucket;
 
     public String getOs() {

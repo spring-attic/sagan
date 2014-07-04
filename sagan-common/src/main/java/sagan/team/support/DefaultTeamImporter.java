@@ -23,14 +23,16 @@ class DefaultTeamImporter implements TeamImporter {
     private final TeamService teamService;
     private final GitHubClient gitHub;
     private final String gitHubTeamId;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
     @Autowired
     public DefaultTeamImporter(TeamService teamService, GitHubClient gitHub,
-                               @Value("${github.team.id}") String gitHubTeamId) {
+                               @Value("${github.team.id}") String gitHubTeamId,
+                               ObjectMapper objectMapper) {
         this.teamService = teamService;
         this.gitHub = gitHub;
         this.gitHubTeamId = gitHubTeamId;
+        this.objectMapper = objectMapper;
     }
 
     @Transactional

@@ -1,5 +1,6 @@
 package sagan.guides.support;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import sagan.support.Fixtures;
 import sagan.support.github.GitHubClient;
 
@@ -31,7 +32,7 @@ public class GuidesOrgTests {
 
     @Before
     public void setUp() throws Exception {
-        service = new GuideOrganization(OWNER_NAME, OWNER_TYPE, ghClient);
+        service = new GuideOrganization(OWNER_NAME, OWNER_TYPE, ghClient, new ObjectMapper());
     }
 
     @Test

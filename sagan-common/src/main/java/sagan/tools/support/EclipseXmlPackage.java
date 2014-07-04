@@ -1,23 +1,20 @@
 package sagan.tools.support;
 
-import java.util.List;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
+import java.util.List;
 
 class EclipseXmlPackage {
 
-    @Attribute
     private String name;
 
-    @Attribute
     private String icon;
 
-    @Element(data = true)
     private String description;
 
-    @ElementList(entry = "download", type = EclipseXmlDownload.class, inline = true)
+    @JacksonXmlProperty(localName = "download")
+    @JacksonXmlElementWrapper(useWrapping=false)
     private List<EclipseXmlDownload> eclipseXmlDownloads;
 
     public String getName() {

@@ -56,17 +56,20 @@ class GhPagesWebhookController {
     private final ProjectMetadataService projectMetadataService;
     private final GitHub gitHub;
     private final String template;
+    private final ObjectMapper objectMapper;
 
     @Value("${WEBHOOK_ACCESS_TOKEN:default}")
     private String accessToken;
 
     @Autowired
-    public GhPagesWebhookController(ProjectMetadataService service, GitHub gitHub) throws IOException {
+    public GhPagesWebhookController(ProjectMetadataService service, GitHub gitHub,
+                                    ObjectMapper objectMapper) throws IOException {
         this.projectMetadataService = service;
         this.gitHub = gitHub;
-        template = StreamUtils.copyToString(
+        this.template = StreamUtils.copyToString(
                 new ClassPathResource("notifications/gh-pages-updated.md").getInputStream(),
                 Charset.defaultCharset());
+        this.objectMapper = objectMapper;
     }
 
     @SuppressWarnings("unchecked")
@@ -79,13 +82,12 @@ class GhPagesWebhookController {
             headers.set("Status", "403 Forbidden");
             return new HttpEntity<>("{ \"message\": \"Forbidden\" }\n", headers);
         }
-        ObjectMapper jsonMapper = new ObjectMapper();
         SpelExpressionParser parser = new SpelExpressionParser();
         Expression spel = parser.parseExpression(template, new TemplateParserContext());
 
         Map<?, ?> push;
         try {
-            push = jsonMapper.readValue(payload, Map.class);
+            push = this.objectMapper.readValue(payload, Map.class);
             logger.info("Recieved new webhook payload for push with head_commit message: "
                     + ((Map<?, ?>) push.get("head_commit")).get("message"));
         } catch (JsonParseException ex) {
@@ -102,7 +104,7 @@ class GhPagesWebhookController {
         root.put("commits", commits);
         projectMetadataService.getProjects().stream()
                 .filter(project -> hasGhPagesBranch(project))
-                .forEach(project -> createGitHubIssue(project, jsonMapper, root, spel));
+                .forEach(project -> createGitHubIssue(project, this.objectMapper, root, spel));
         headers.set("Status", "200 OK");
         return new HttpEntity<>("{ \"message\": \"Successfully processed update\" }\n", headers);
     }

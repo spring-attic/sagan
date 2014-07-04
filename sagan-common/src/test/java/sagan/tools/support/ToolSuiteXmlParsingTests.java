@@ -1,23 +1,22 @@
 package sagan.tools.support;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.junit.Test;
 import sagan.support.Fixtures;
 import sagan.tools.Release;
 
-import org.junit.Test;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 
 public class ToolSuiteXmlParsingTests {
     private String responseXml = Fixtures.load("/fixtures/tools/sts_downloads.xml");
 
     @Test
     public void unmarshal() throws Exception {
-        Serializer serializer = new Persister();
+        XmlMapper serializer = new XmlMapper();
 
-        ToolSuiteXml toolSuiteXml = serializer.read(ToolSuiteXml.class, responseXml);
+        ToolSuiteXml toolSuiteXml = serializer.readValue(responseXml, ToolSuiteXml.class);
         assertThat(toolSuiteXml.getReleases(), notNullValue());
         assertThat(toolSuiteXml.getReleases().size(), equalTo(8));
         Release release = toolSuiteXml.getReleases().get(0);

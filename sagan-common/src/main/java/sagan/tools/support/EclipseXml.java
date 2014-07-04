@@ -1,13 +1,13 @@
 package sagan.tools.support;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.util.List;
 
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Root;
-
-@Root(strict = false)
 class EclipseXml {
-    @ElementList(entry = "product", type = EclipseXmlProduct.class, inline = true)
+    @JacksonXmlProperty(localName = "product")
+    @JacksonXmlElementWrapper(useWrapping=false)
     private List<EclipseXmlProduct> eclipseXmlProducts;
 
     public List<EclipseXmlProduct> getEclipseXmlProducts() {

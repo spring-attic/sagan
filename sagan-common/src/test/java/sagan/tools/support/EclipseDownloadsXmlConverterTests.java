@@ -1,5 +1,8 @@
 package sagan.tools.support;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.junit.Before;
+import org.junit.Test;
 import sagan.support.Fixtures;
 import sagan.tools.EclipseDownloads;
 import sagan.tools.EclipsePackage;
@@ -8,11 +11,6 @@ import sagan.tools.EclipseRelease;
 
 import java.util.List;
 import java.util.Map;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsMapContaining.hasKey;
@@ -27,8 +25,8 @@ public class EclipseDownloadsXmlConverterTests {
     @Before
     public void setUp() throws Exception {
         String responseXml = Fixtures.load("/fixtures/tools/eclipse.xml");
-        Serializer serializer = new Persister();
-        EclipseXml eclipseXml = serializer.read(EclipseXml.class, responseXml);
+        XmlMapper serializer = new XmlMapper();
+        EclipseXml eclipseXml = serializer.readValue(responseXml, EclipseXml.class);
         eclipseDownloads = new EclipseDownloadsXmlConverter().convert(eclipseXml);
         platforms = eclipseDownloads.getPlatforms();
     }

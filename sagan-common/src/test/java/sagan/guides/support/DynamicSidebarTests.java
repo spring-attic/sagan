@@ -1,5 +1,6 @@
 package sagan.guides.support;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import sagan.support.github.GitHubClient;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class DynamicSidebarTests {
     @Before
     public void setup() throws IOException {
         initMocks(this);
-        org = new GuideOrganization("spring-guides", "orgs", github);
+        org = new GuideOrganization("spring-guides", "orgs", github, new ObjectMapper());
     }
 
     @Test

@@ -27,11 +27,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/project_metadata")
 class ProjectMetadataController {
 
-    private ProjectMetadataService service;
+    private final ProjectMetadataService service;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public ProjectMetadataController(ProjectMetadataService service) {
+    public ProjectMetadataController(ProjectMetadataService service, ObjectMapper objectMapper) {
         this.service = service;
+        this.objectMapper = objectMapper;
     }
 
     @RequestMapping(value = "/{projectId}", method = { GET, HEAD })
@@ -42,9 +44,7 @@ class ProjectMetadataController {
 
         Project project = service.getProject(projectId);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        out.print(callback + String.format("(%s);", objectMapper.writeValueAsString(project)));
+        out.print(callback + String.format("(%s);", this.objectMapper.writeValueAsString(project)));
     }
 
 }

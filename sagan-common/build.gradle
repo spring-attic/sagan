@@ -6,6 +6,9 @@ sourceSets {
 }
 
 dependencies {
+
+    def vJackson = '2.4.1'
+
     compile "org.apache.httpcomponents:httpclient" // Prevents Jest from pulling in 4.2.x
     compile "org.springframework:spring-context"
     compile "org.springframework.security:spring-security-core"
@@ -34,11 +37,12 @@ dependencies {
     // for use in on-the-fly database setup and migrations
     compile 'org.flywaydb:flyway-core'
 
-    compile('org.simpleframework:simple-xml:2.7') {
-        exclude(module: 'stax')
-        exclude(module: 'stax-api')
-        exclude(module: 'xpp3')
-    }
+    // jackson, for JSON and XML serialization
+    compile "com.fasterxml.jackson.core:jackson-core:${vJackson}"
+    compile "com.fasterxml.jackson.core:jackson-annotations:${vJackson}"
+    compile "com.fasterxml.jackson.core:jackson-databind:${vJackson}"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${vJackson}"
+    compile "org.codehaus.woodstox:woodstox-core-asl:4.1.4"
 
     compile 'org.jsoup:jsoup:1.7.2'
     compile 'joda-time:joda-time'
