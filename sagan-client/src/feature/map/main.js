@@ -5,6 +5,8 @@ var teamMapWrapper = '.js-team-map--wrapper';
 var teamMapContainer = '.js-team-map--container';
 var fadeDuration = 100;
 
+var mapboxToken = "pk.eyJ1Ijoic2FnYW5vcHMiLCJhIjoiWWdDMV9IOCJ9.vaLPw9uztUp6uvYof0ZM6g";
+
 /**
  * Composition plan for the data-map feature
  * @module
@@ -87,8 +89,8 @@ function createMap(leaflet) {
         touchZoom: false
     }).setView([51.505, -0.09], 2);
 
-    leaflet.tileLayer('http://{s}.tile.cloudmade.com/dc6ad76c483d4e5c92152aa34375ec28/1/256/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+    leaflet.tileLayer('https://{s}.tiles.mapbox.com/v4/saganops.io2c9g52/{z}/{x}/{y}.png?access_token='+mapboxToken, {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18
     }).addTo(map);
 
