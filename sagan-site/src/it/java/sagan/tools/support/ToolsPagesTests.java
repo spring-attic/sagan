@@ -64,7 +64,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
         assertThat(document.select(".ga--release .item--dropdown a").attr("href"), allOf(
                 containsString("http://download.springsource.com/release/STS/"),
                 containsString("spring-tool-suite"),
-                containsString("win32-installer.exe")));
+                containsString("win32.zip")));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 document.select(".milestone--release .item--dropdown a").attr("href"), allOf(
                         containsString("http://download.springsource.com/milestone/STS/"),
                         containsString("spring-tool-suite"),
-                        containsString("win32-installer.exe")));
+                        containsString("win32.zip")));
     }
 
     @Test
@@ -105,7 +105,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 not(allOf(
                         containsString("http://download.springsource.com/milestone/STS/"),
                         containsString("spring-tool-suite"),
-                        containsString("win32-installer.exe"))));
+                        containsString("win32.zip"))));
 
     }
 
@@ -134,7 +134,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 allOf(
                         containsString("http://download.springsource.com/release/STS/"),
                         containsString("groovy-grails-tool-suite"),
-                        containsString("win32-installer.exe")));
+                        containsString("win32.zip")));
     }
 
     @Test
@@ -152,7 +152,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 document.select(".milestone--release .item--dropdown a").attr("href"),
                 allOf(containsString("http://download.springsource.com/milestone/STS/"),
                         containsString("groovy-grails-tool-suite"),
-                        containsString("win32-installer.exe")));
+                        containsString("win32.zip")));
     }
 
     @Test
@@ -173,7 +173,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 document.select(".milestone--release .item--dropdown a").attr("href"),
                 not(allOf(containsString("http://download.springsource.com/milestone/STS/"),
                         containsString("groovy-grails-tool-suite"),
-                        containsString("win32-installer.exe"))));
+                        containsString("win32.zip"))));
     }
 
     @Test

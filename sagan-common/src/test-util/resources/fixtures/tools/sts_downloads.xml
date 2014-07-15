@@ -1,5 +1,108 @@
 
 <downloads>
+    <!-- Fake milestones for test purposes -->
+    <release name="Milestone Version - Spring Tool Suite 3.7.0.M1 - based on Eclipse Luna 4.4" whatsnew="http://static.springsource.org/sts/nan/v370/NewAndNoteworthy.html">
+        <download os="windows" version="3.7.0.M1" eclipse-version="4.4" size="369MB">
+            <description>Windows</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-win32.zip</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-win32.zip.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.7.0.M1" eclipse-version="4.4" size="369MB">
+            <description>Windows (64bit)</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-win32-x86_64.zip</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-win32-x86_64.zip.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.7.0.M1" eclipse-version="4.4" size="366MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-macosx-cocoa.tar.gz</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.7.0.M1" eclipse-version="4.4" size="366MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.7.0.M1" eclipse-version="4.4" size="366MB">
+            <description>Linux (GTK)</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-linux-gtk.tar.gz</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-linux-gtk.tar.gz.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.7.0.M1" eclipse-version="4.4" size="366MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-linux-gtk-x86_64.tar.gz</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/spring-tool-suite-3.7.0.M1-e4.4-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.7.0.M1" eclipse-version="4.3.x" size="178MB">
+            <description>Update Site</description>
+            <file>milestone/TOOLS/update/3.7.0.M1/e4.3/springsource-tool-suite-3.7.0.M1-e4.3-updatesite.zip</file>
+            <md5>milestone/TOOLS/update/3.7.0.M1/e4.3/springsource-tool-suite-3.7.0.M1-e4.3-updatesite.zip.md5</md5>
+            <sha1>milestone/TOOLS/update/3.7.0.M1/e4.3/springsource-tool-suite-3.7.0.M1-e4.3-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </release>
+    <release name="Milestone Version - Groovy/Grails Tool Suite 3.7.0.M1 - based on Eclipse Luna 4.4">
+        <download os="windows" version="3.7.0.M1" eclipse-version="4.4" size="369MB">
+            <description>Windows</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4-win32.zip</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-win32.zip.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.7.0.M1" eclipse-version="4.4" size="369MB">
+            <description>Windows (64bit)</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-win32-x86_64.zip</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-win32-x86_64.zip.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.7.0.M1" eclipse-version="4.4" size="366MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-macosx-cocoa.tar.gz</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.7.0.M1" eclipse-version="4.4" size="366MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.7.0.M1" eclipse-version="4.4" size="366MB">
+            <description>Linux (GTK)</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-linux-gtk.tar.gz</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-linux-gtk.tar.gz.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.7.0.M1" eclipse-version="4.4" size="366MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-linux-gtk-x86_64.tar.gz</file>
+            <md5>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>milestone/STS/3.7.0.M1/dist/e4.4/groovy-grails-tool-suite-3.7.0.M1-e4.4.2-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.7.0.M1" eclipse-version="4.4" size="178MB">
+            <description>Update Site</description>
+            <file>milestone/TOOLS/update/3.7.0.M1/e4.4/springsource-tool-suite-3.7.0.M1-e4.4-updatesite.zip</file>
+            <md5>milestone/TOOLS/update/3.7.0.M1/e4.4/springsource-tool-suite-3.7.0.M1-e4.4-updatesite.zip.md5</md5>
+            <sha1>milestone/TOOLS/update/3.7.0.M1/e4.4/springsource-tool-suite-3.7.0.M1-e4.4-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </release>
     <release name="Spring Tool Suite 3.6.0.RELEASE - based on Eclipse Luna 4.4" whatsnew="http://static.springsource.org/sts/nan/v360/NewAndNoteworthy.html">
         <download os="windows" version="3.6.0.RELEASE" eclipse-version="4.4" size="368MB">
             <description>Windows</description>

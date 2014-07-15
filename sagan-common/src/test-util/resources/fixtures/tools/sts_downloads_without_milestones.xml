@@ -1,5 +1,1560 @@
+
 <downloads>
-    <release name="Spring Tool Suite 3.3.0.RELEASE - based on Eclipse Kepler 4.3" whatsnew="http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html">
+    <release name="Spring Tool Suite 3.6.0.RELEASE - based on Eclipse Luna 4.4" whatsnew="http://static.springsource.org/sts/nan/v360/NewAndNoteworthy.html">
+        <download os="windows" version="3.6.0.RELEASE" eclipse-version="4.4" size="368MB">
+            <description>Windows</description>
+            <file>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-win32.zip</file>
+            <md5>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-win32.zip.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.6.0.RELEASE" eclipse-version="4.4" size="368MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-win32-x86_64.zip</file>
+            <md5>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.6.0.RELEASE" eclipse-version="4.4" size="365MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.6.0.RELEASE" eclipse-version="4.4" size="365MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.6.0.RELEASE" eclipse-version="4.4" size="365MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.6.0.RELEASE" eclipse-version="4.4" size="366MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.6.0.RELEASE" eclipse-version="4.4" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.6.0.RELEASE/e4.4/springsource-tool-suite-3.6.0.RELEASE-e4.4-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.6.0.RELEASE/e4.4/springsource-tool-suite-3.6.0.RELEASE-e4.4-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.6.0.RELEASE/e4.4/springsource-tool-suite-3.6.0.RELEASE-e4.4-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.6.0.RELEASE" eclipse-version="4.3.2" size="141MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.6.0.RELEASE/e4.3/springsource-tool-suite-3.6.0.RELEASE-e4.3.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.6.0.RELEASE/e4.3/springsource-tool-suite-3.6.0.RELEASE-e4.3.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.6.0.RELEASE/e4.3/springsource-tool-suite-3.6.0.RELEASE-e4.3.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.6.0.RELEASE" eclipse-version="4.2.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.6.0.RELEASE/e4.2/springsource-tool-suite-3.6.0.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.6.0.RELEASE/e4.2/springsource-tool-suite-3.6.0.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.6.0.RELEASE/e4.2/springsource-tool-suite-3.6.0.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.6.0.RELEASE" eclipse-version="3.8.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.6.0.RELEASE/e3.8/springsource-tool-suite-3.6.0.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.6.0.RELEASE/e3.8/springsource-tool-suite-3.6.0.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.6.0.RELEASE/e3.8/springsource-tool-suite-3.6.0.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.6.0.RELEASE" eclipse-version="3.7.2" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.6.0.RELEASE/e3.7/springsource-tool-suite-3.6.0.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.6.0.RELEASE/e3.7/springsource-tool-suite-3.6.0.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.6.0.RELEASE/e3.7/springsource-tool-suite-3.6.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </release>
+    <release name="Groovy/Grails Tool Suite 3.6.0.RELEASE - based on Eclipse Luna 4.4" whatsnew="http://static.springsource.org/sts/nan/v360/NewAndNoteworthy.html">
+        <download os="windows" version="3.6.0.RELEASE" eclipse-version="4.4" size="500MB">
+            <description>Windows</description>
+            <file>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-win32.zip</file>
+            <md5>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-win32.zip.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.6.0.RELEASE" eclipse-version="4.4" size="500MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-win32-x86_64.zip</file>
+            <md5>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.6.0.RELEASE" eclipse-version="4.4" size="494MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.6.0.RELEASE" eclipse-version="4.4" size="494MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.6.0.RELEASE" eclipse-version="4.4" size="494MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.6.0.RELEASE" eclipse-version="4.4" size="494MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.6.0/dist/e4.4/groovy-grails-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.6.0.RELEASE" eclipse-version="4.4" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.6.0.RELEASE/e4.4/springsource-tool-suite-3.6.0.RELEASE-e4.4-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.6.0.RELEASE/e4.4/springsource-tool-suite-3.6.0.RELEASE-e4.4-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.6.0.RELEASE/e4.4/springsource-tool-suite-3.6.0.RELEASE-e4.4-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.6.0.RELEASE" eclipse-version="4.3.2" size="141MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.6.0.RELEASE/e4.3/springsource-tool-suite-3.6.0.RELEASE-e4.3.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.6.0.RELEASE/e4.3/springsource-tool-suite-3.6.0.RELEASE-e4.3.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.6.0.RELEASE/e4.3/springsource-tool-suite-3.6.0.RELEASE-e4.3.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.6.0.RELEASE" eclipse-version="4.2.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.6.0.RELEASE/e4.2/springsource-tool-suite-3.6.0.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.6.0.RELEASE/e4.2/springsource-tool-suite-3.6.0.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.6.0.RELEASE/e4.2/springsource-tool-suite-3.6.0.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.6.0.RELEASE" eclipse-version="3.8.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.6.0.RELEASE/e3.8/springsource-tool-suite-3.6.0.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.6.0.RELEASE/e3.8/springsource-tool-suite-3.6.0.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.6.0.RELEASE/e3.8/springsource-tool-suite-3.6.0.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.6.0.RELEASE" eclipse-version="3.7.2" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.6.0.RELEASE/e3.7/springsource-tool-suite-3.6.0.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.6.0.RELEASE/e3.7/springsource-tool-suite-3.6.0.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.6.0.RELEASE/e3.7/springsource-tool-suite-3.6.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </release>
+    <other name="Spring Tool Suite 3.5.1.RELEASE - based on Eclipse Kepler 4.3.2" whatsnew="http://static.springsource.org/sts/nan/v351/NewAndNoteworthy.html">
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="361MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32-installer.exe</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="360MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32.zip</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32.zip.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="361MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="360MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64.zip</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="361MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="357MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="361MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="357MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="360MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="357MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="361MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="357MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.4" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="141MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.2.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="3.7.2" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Groovy/Grails Tool Suite 3.5.1.RELEASE - based on Eclipse Kepler 4.3.2" whatsnew="http://static.springsource.org/sts/nan/v351/NewAndNoteworthy.html">
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="486MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32-installer.exe</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="487MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32.zip</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32.zip.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="486MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="487MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64.zip</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="486MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="481MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="486MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="481MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="486MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="481MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="486MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="481MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e4.3/groovy-grails-tool-suite-3.5.1.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.4" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="141MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.2.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="3.7.2" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Spring Tool Suite 3.5.1.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v351/NewAndNoteworthy.html">
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="349MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32-installer.exe</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="348MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32.zip</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32.zip.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="349MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="348MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64.zip</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="349MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="345MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="349MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="345MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="348MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="345MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="349MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="346MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.4" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="141MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.2.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="3.7.2" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Groovy/Grails Tool Suite 3.5.1.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v351/NewAndNoteworthy.html">
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="474MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32-installer.exe</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="475MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32.zip</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32.zip.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="474MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="475MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64.zip</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="474MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="469MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="474MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="469MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="474MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="469MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="474MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="469MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.1/dist/e3.8/groovy-grails-tool-suite-3.5.1.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.4" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.4/springsource-tool-suite-3.5.1.RELEASE-e4.4-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.3.2" size="141MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.3/springsource-tool-suite-3.5.1.RELEASE-e4.3.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="4.2.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e4.2/springsource-tool-suite-3.5.1.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="3.8.2" size="121MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e3.8/springsource-tool-suite-3.5.1.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.1.RELEASE" eclipse-version="3.7.2" size="123MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.1.RELEASE/e3.7/springsource-tool-suite-3.5.1.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Spring Tool Suite 3.5.0.RELEASE - based on Eclipse Kepler 4.3.2" whatsnew="http://static.springsource.org/sts/nan/v350/NewAndNoteworthy.html">
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="361MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32-installer.exe</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="360MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32.zip</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32.zip.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="361MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="360MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64.zip</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="361MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="358MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="361MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="358MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="361MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="358MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="361MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="358MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="130MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="4.2.2" size="110MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="110MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="3.7.2" size="112MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Groovy/Grails Tool Suite 3.5.0.RELEASE - based on Eclipse Kepler 4.3.2" whatsnew="http://static.springsource.org/sts/nan/v350/NewAndNoteworthy.html">
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="488MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32-installer.exe</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="489MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32.zip</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32.zip.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="488MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="489MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64.zip</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="488MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="482MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="488MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="482MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="487MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="482MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="487MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="482MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e4.3/groovy-grails-tool-suite-3.5.0.RELEASE-e4.3.2-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="130MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="4.2.2" size="110MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="110MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="3.7.2" size="112MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Spring Tool Suite 3.5.0.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v350/NewAndNoteworthy.html">
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="349MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32-installer.exe</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="348MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32.zip</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32.zip.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="349MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="348MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64.zip</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="349MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="345MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="349MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="345MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="348MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="345MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="348MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="345MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/spring-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="130MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="4.2.2" size="110MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="110MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="3.7.2" size="112MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Groovy/Grails Tool Suite 3.5.0.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v350/NewAndNoteworthy.html">
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="475MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32-installer.exe</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="476MB">
+            <description>Windows</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32.zip</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32.zip.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="475MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="476MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64.zip</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="475MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="470MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="475MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="470MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="475MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="470MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="475MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="470MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.5.0/dist/e3.8/groovy-grails-tool-suite-3.5.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="4.3.2" size="130MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e4.3/springsource-tool-suite-3.5.0.RELEASE-e4.3.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="4.2.2" size="110MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e4.2/springsource-tool-suite-3.5.0.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="3.8.2" size="110MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e3.8/springsource-tool-suite-3.5.0.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.5.0.RELEASE" eclipse-version="3.7.2" size="112MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.5.0.RELEASE/e3.7/springsource-tool-suite-3.5.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Spring Tool Suite 3.4.0.RELEASE - based on Eclipse Kepler 4.3.1" whatsnew="http://static.springsource.org/sts/nan/v340/NewAndNoteworthy.html">
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="380MB">
+            <description>Windows</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32-installer.exe</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="379MB">
+            <description>Windows</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32.zip</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32.zip.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="380MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="379MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64.zip</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="380MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="376MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="379MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="376MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="379MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="376MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="379MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="376MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/spring-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="167MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="4.2.2" size="164MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="161MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="3.7.2" size="161MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Groovy/Grails Tool Suite 3.4.0.RELEASE - based on Eclipse Kepler 4.3.1" whatsnew="http://static.springsource.org/sts/nan/v340/NewAndNoteworthy.html">
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="477MB">
+            <description>Windows</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32-installer.exe</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="478MB">
+            <description>Windows</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32.zip</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32.zip.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="477MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="478MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64.zip</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="477MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="472MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="477MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="472MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="477MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="472MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="477MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="472MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e4.3/groovy-grails-tool-suite-3.4.0.RELEASE-e4.3.1-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="167MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="4.2.2" size="164MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="161MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="3.7.2" size="161MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Spring Tool Suite 3.4.0.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v340/NewAndNoteworthy.html">
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="372MB">
+            <description>Windows</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32-installer.exe</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="371MB">
+            <description>Windows</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32.zip</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32.zip.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="372MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="371MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64.zip</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="371MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="368MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="371MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="368MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="371MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="368MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="371MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="368MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/spring-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="167MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="4.2.2" size="164MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="161MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="3.7.2" size="161MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Groovy/Grails Tool Suite 3.4.0.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v340/NewAndNoteworthy.html">
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="469MB">
+            <description>Windows</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32-installer.exe</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32-installer.exe.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="471MB">
+            <description>Windows</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32.zip</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32.zip.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="469MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64-installer.exe</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64-installer.exe.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64-installer.exe.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="windows" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="471MB">
+            <description>Windows (64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64.zip</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64.zip.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-win32-x86_64.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="469MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="464MB">
+            <description>Mac OS X (Cocoa)</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="469MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64-installer.dmg.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="mac" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="464MB">
+            <description>Mac OS X (Cocoa, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-macosx-cocoa-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="469MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-installer.sh</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-installer.sh.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="465MB">
+            <description>Linux (GTK)</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="469MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64-installer.sh.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="linux" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="465MB">
+            <description>Linux (GTK, 64bit)</description>
+            <file>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz</file>
+            <md5>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.md5</md5>
+            <sha1>release/STS/3.4.0/dist/e3.8/groovy-grails-tool-suite-3.4.0.RELEASE-e3.8.2-linux-gtk-x86_64.tar.gz.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="4.3.1" size="167MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e4.3/springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="4.2.2" size="164MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e4.2/springsource-tool-suite-3.4.0.RELEASE-e4.2.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="3.8.2" size="161MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e3.8/springsource-tool-suite-3.4.0.RELEASE-e3.8.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+        <download os="all" version="3.4.0.RELEASE" eclipse-version="3.7.2" size="161MB">
+            <description>Update Site</description>
+            <file>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip</file>
+            <md5>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip.md5</md5>
+            <sha1>release/TOOLS/update/3.4.0.RELEASE/e3.7/springsource-tool-suite-3.4.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
+            <bucket>http://download.springsource.com/</bucket>
+        </download>
+    </other>
+    <other name="Spring Tool Suite 3.3.0.RELEASE - based on Eclipse Kepler 4.3" whatsnew="http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html">
         <download os="windows" version="3.3.0.RELEASE" eclipse-version="4.3" size="373MB">
             <description>Windows</description>
             <file>release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe</file>
@@ -112,8 +1667,8 @@
             <sha1>release/TOOLS/update/3.3.0.RELEASE/e3.7/springsource-tool-suite-3.3.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
             <bucket>http://download.springsource.com/</bucket>
         </download>
-    </release>
-    <release name="Groovy/Grails Tool Suite 3.3.0.RELEASE - based on Eclipse Kepler 4.3" whatsnew="http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html">
+    </other>
+    <other name="Groovy/Grails Tool Suite 3.3.0.RELEASE - based on Eclipse Kepler 4.3" whatsnew="http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html">
         <download os="windows" version="3.3.0.RELEASE" eclipse-version="4.3" size="468MB">
             <description>Windows</description>
             <file>release/STS/3.3.0/dist/e4.3/groovy-grails-tool-suite-3.3.0.RELEASE-e4.3-win32-installer.exe</file>
@@ -226,8 +1781,8 @@
             <sha1>release/TOOLS/update/3.3.0.RELEASE/e3.7/springsource-tool-suite-3.3.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
             <bucket>http://download.springsource.com/</bucket>
         </download>
-    </release>
-    <release name="Spring Tool Suite 3.3.0.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html">
+    </other>
+    <other name="Spring Tool Suite 3.3.0.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html">
         <download os="windows" version="3.3.0.RELEASE" eclipse-version="3.8.2" size="368MB">
             <description>Windows</description>
             <file>release/STS/3.3.0/dist/e3.8/spring-tool-suite-3.3.0.RELEASE-e3.8.2-win32-installer.exe</file>
@@ -340,8 +1895,8 @@
             <sha1>release/TOOLS/update/3.3.0.RELEASE/e3.7/springsource-tool-suite-3.3.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
             <bucket>http://download.springsource.com/</bucket>
         </download>
-    </release>
-    <release name="Groovy/Grails Tool Suite 3.3.0.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html">
+    </other>
+    <other name="Groovy/Grails Tool Suite 3.3.0.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v330/NewAndNoteworthy.html">
         <download os="windows" version="3.3.0.RELEASE" eclipse-version="3.8.2" size="464MB">
             <description>Windows</description>
             <file>release/STS/3.3.0/dist/e3.8/groovy-grails-tool-suite-3.3.0.RELEASE-e3.8.2-win32-installer.exe</file>
@@ -454,7 +2009,7 @@
             <sha1>release/TOOLS/update/3.3.0.RELEASE/e3.7/springsource-tool-suite-3.3.0.RELEASE-e3.7.2-updatesite.zip.sha1</sha1>
             <bucket>http://download.springsource.com/</bucket>
         </download>
-    </release>
+    </other>
     <other name="Spring Tool Suite 3.2.0.RELEASE - based on Eclipse Juno 3.8.2" whatsnew="http://static.springsource.org/sts/nan/v320/NewAndNoteworthy.html">
         <download os="windows" version="3.2.0.RELEASE" eclipse-version="3.8.2" size="364MB">
             <description>Windows</description>

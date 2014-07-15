@@ -18,9 +18,9 @@ public class ToolSuiteXmlParsingTests {
 
         ToolSuiteXml toolSuiteXml = serializer.readValue(responseXml, ToolSuiteXml.class);
         assertThat(toolSuiteXml.getReleases(), notNullValue());
-        assertThat(toolSuiteXml.getReleases().size(), equalTo(2));
+        assertThat(toolSuiteXml.getReleases().size(), equalTo(4));
         Release release = toolSuiteXml.getReleases().get(0);
-        assertThat(release.getDownloads().size(), equalTo(11));
+        assertThat(release.getDownloads().size(), equalTo(7));
         assertThat(release.getWhatsnew(), notNullValue());
     }
 }
