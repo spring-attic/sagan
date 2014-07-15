@@ -149,6 +149,10 @@
   padding-top: 100px;
 }
 
+.team-map--wrapper figure, .js-team-map--wrapper figure {
+  margin: 0;
+}
+
 .team-member--avatar {
   display: inline-block;
 }
