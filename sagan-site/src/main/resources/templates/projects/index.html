@@ -5,14 +5,19 @@
       data-info-popups>
 <head>
     <title>Projects</title>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="Spring Projects" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:description" content="The Spring portfolio has many projects, including Spring Framework,
+    Sprint IO Platform, Spring XD, Spring Boot, Spring Data, Spring Security..." />
 </head>
 <body>
   <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container">
-    <div class="main-body--wrapper">
+    <article class="main-body--wrapper">
       <h1 class="index-page--title">Projects</h1>
       <p class="index-page--subtitle">From configuration to security, web apps to big data &ndash; whatever the infrastructure needs of your application may be, there is a Spring Project to help you build it. Start small and use just what you need &ndash; Spring is modular by design.</p>
-      <div class="projects--wrapper">
+      <section class="projects--wrapper">
           <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('platform')}">
               <div class="project-logo--container">
                   <div class="icon project--logo logo-platform"></div>
@@ -161,8 +166,8 @@
             <div class="project--title">Spring Cloud</div>
             <p class="project--description">Simplifies connecting to services and gaining operating environment awareness in cloud platforms like Cloud Foundry and Heroku.</p>
           </a>
-      </div>
-      <div class="projects--wrapper project-aggregator top-separator">
+      </section>
+      <section class="projects--wrapper project-aggregator top-separator">
         <a href="https://github.com/spring-projects/spring-scala#readme" class="project--container project--container--link">
           <div class="project--title">Spring Scala</div>
           <p class="project--description">Brings the power and expressiveness of Scala together with the productivity and deep ecosystem of Spring.</p>
@@ -187,8 +192,8 @@
           <div class="project--title">REST Shell</div>
           <p class="project--description">Makes writing and testing RESTful applications easier with CLI-based resource discovery and interaction.</p>
         </a>
-      </div>
-    </div>
+      </section>
+    </article>
   </div>
 </body>
 </html>

@@ -33,6 +33,7 @@
 }
 .blog--container .blog--title a {
   color: #34302d;
+  font-weight: normal;
 }
 .blog--container .blog--title a:hover {
   text-decoration: none;

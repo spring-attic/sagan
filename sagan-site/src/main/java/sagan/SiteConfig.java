@@ -1,5 +1,7 @@
 package sagan;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import sagan.guides.support.GettingStartedGuides;
@@ -13,8 +15,6 @@ import java.util.concurrent.TimeUnit;
 import javax.sql.DataSource;
 
 import org.h2.server.web.WebServlet;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -85,8 +85,13 @@ public class SiteConfig {
     }
 
     @Bean
-    public Serializer simpleXmlSerializer() {
-        return new Persister();
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
+
+    @Bean
+    public XmlMapper xmlMapper() {
+        return new XmlMapper();
     }
 
     @Bean

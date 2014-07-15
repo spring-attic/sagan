@@ -1,21 +1,18 @@
 package sagan.tools;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.util.List;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Root;
-
-@Root(strict = false)
 public class Release {
 
-    @Attribute
     private String name;
 
-    @Attribute(required = false)
     private String whatsnew;
 
-    @ElementList(name = "download", type = Download.class, inline = true)
+    @JacksonXmlProperty(localName = "download")
+    @JacksonXmlElementWrapper(useWrapping=false)
     private List<Download> downloads;
 
     public String getName() {

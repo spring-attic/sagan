@@ -45,6 +45,7 @@ public class EditTeamMemberTests extends AbstractIntegrationTests {
         existingProfile.setTwitterUsername("tw_some-guy");
         existingProfile.setSpeakerdeckUsername("sd_some-guy");
         existingProfile.setLanyrdUsername("ly_some-guy");
+        existingProfile.setGplusId("123456");
 
         final MemberProfile memberProfile = teamRepository.save(existingProfile);
 
@@ -95,6 +96,7 @@ public class EditTeamMemberTests extends AbstractIntegrationTests {
         requestBuilder.param("twitterUsername", "tw_some-guy_");
         requestBuilder.param("speakerdeckUsername", "sd_some-guy_");
         requestBuilder.param("lanyrdUsername", "ly_some-guy_");
+        requestBuilder.param("gplusId", "654321");
         requestBuilder.param("geoLocation", "-12.5,45.3");
         requestBuilder
                 .param("videoEmbeds",
@@ -113,6 +115,7 @@ public class EditTeamMemberTests extends AbstractIntegrationTests {
         assertEquals("tw_some-guy_", profile.getTwitterUsername());
         assertEquals("sd_some-guy_", profile.getSpeakerdeckUsername());
         assertEquals("ly_some-guy_", profile.getLanyrdUsername());
+        assertEquals("654321", profile.getGplusId());
         assertEquals(
                 "<iframe width=\"420\" height=\"315\" src=\"//www.youtube.com/embed/J---aiyznGQ\" frameborder=\"0\" allowfullscreen></iframe>",
                 profile.getVideoEmbeds());

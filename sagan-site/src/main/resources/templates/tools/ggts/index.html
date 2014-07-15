@@ -5,20 +5,25 @@
     data-platform-downloads>
   <head>
     <title>Groovy/Grails Tool Suite&trade; (GGTS)</title>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="Groovy/Grails Tool Suite&trade; (GGTS)" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:description" content="The Groovy/Grails Tool Suite is a complete Eclipse-based development
+    environment optimized for developing, debugging and executing Groovy and Grails applications." />
   </head>
   <body>
     <div layout:fragment="header-container"></div>
-    <div layout:fragment="content" class="container-fluid">
+    <article layout:fragment="content" class="container-fluid">
       <div class="main-body--wrapper">
         <div class="content--title">Tools</div>
         <h1 class="tools--title">Groovy/Grails Tool Suite&trade;</h1>
         <div class="row-fluid tools--wrapper">
-          <div class="span8">
+          <section class="span8">
             <p class="tools--description">The Groovy/Grails Tool Suite is a complete Eclipse-based development environment optimized for developing, debugging and executing Groovy and Grails applications. A new perspective, new views and wizards ensure an intuitive and familiar Eclipse experience when working with the Groovy language and Grails framework. It provides support for the latest versions of Groovy and Grails, and comes on top of the latest Eclipse releases.</p>
             <p class="tools--description">Included with the Groovy/Grails Tool Suite is the developer edition of Pivotal tc Server, the drop-in replacement for Apache Tomcat. With its Spring Insight console, tc Server Developer Edition provides a graphical real-time view of application performance metrics that lets developers identify and diagnose problems from their desktops.
             <p class="tools--description">The Groovy/Grails Tool Suite supports application targeting to local, virtual and cloud-based servers. It is freely available for development and internal business operations use with no time limits, fully open-source and licensed under the terms of the Eclipse Public License.</p></p>
             </p>
-          </div>
+          </section>
           <div class="span4">
             <div class="right-pane-widget--container tools-right-pane">
               <div class="tools-logo ggts-logo"></div>
@@ -34,6 +39,7 @@
               </div>
             </div>
           </div>
+          <section>
           <div class="tools--wrapper">
             <h2>Feature Highlights</h2>
           </div>
@@ -54,8 +60,9 @@
               <p class="tools-feature--description">Installable from the GGTS Dashboard, the gradle extension provides comprehensive Gradle project integration.  Easily import gradle projects and have the tools automatically manage dependencies. Also includes an integrated task view enabling direct task invocation with a double click. </p>
             </div>
           </div>
+          </section>
         </div>
       </div>
-    </div>
+    </article>
   </body>
 </html>

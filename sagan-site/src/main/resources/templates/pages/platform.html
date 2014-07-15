@@ -3,6 +3,11 @@
       layout:decorator="layout">
   <head>
     <title>Spring IO Platform</title>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="Spring IO Platform" />
+    <meta property="og:image" content="/img/platform-stack.png" />
+    <meta property="og:description" content="Spring IO is first and foremost a logical description of what many of users
+    will already know and use as a single, cohesive, harmonized platform, centered around Spring." />
     <style>
       p { margin: 20px 0; }
     </style>
@@ -11,7 +16,7 @@
   <body>
     <div layout:fragment="header-container"></div>
     <div layout:fragment="top-content">
-      <div class="platform-index--header">
+      <section class="platform-index--header">
         <div class="row-fluid">
           <div class="span6 mobile-left-pane">
             <h1 class="index-page--title">The Spring IO Platform</h1>
@@ -22,18 +27,19 @@
           <div class="span6">
             <div class="platform-watermark--large desktop-only"></div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
     <div layout:fragment="full-width--layout">
-      <div class="platform-stack--wrapper">
-        <img src="/img/platform-stack.png">
-      </div>
+      <section class="platform-stack--wrapper">
+        <img src="/img/platform-stack.png" alt="Spring IO Platform diagram">
+      </section>
     </div>
     <div layout:fragment="content">
-      <div class="main-body--wrapper">
+      <article class="main-body--wrapper">
         <h1 class="index-page--title">Spring IO Foundation</h1>
         <p class="index-page--subtitle">The Spring IO Foundation layer is a cohesive set of APIs and embeddable runtime components that enable you to build applications addressing a wide range of enterprise requirements. For any given application you will of course only need to include those parts of the foundation that your application actually requires. The foundation makes it easy to identify components that work together; it does not force you to include components you wouldn't otherwise need.</p>
+        <section>
         <h2>Spring-Powered Workloads</h2>
         <p>All of the major workload types are represented: enterprise integration, batch processing, big data processing, web applications (including WebSocket support), and the creation of server-side APIs in support of single-page apps, mobile clients, and services.</p>
         <div class="platform-project">
@@ -62,7 +68,8 @@
         <p>Integration workloads are another major use case for Spring. For these, Spring IO provides a rich programming model based on <a href="http://books.google.com/books/about/Enterprise_Integration_Patterns.html?id=qqB7nrrna_sC"> Enterprise Integration Patterns</a> and its notions of channels, adapters, filters, and transformers.</p>
         <p>Spring IO also defines a domain language for batch processing &ndash; batch jobs are divided into processing steps with readers and writers used to read the data in and write it back out again. Spring IO's comprehensive batch framework enables you to build robust batch applications that process large volumes of records.</p>
         <p>Of course any given application in the enterprise rarely falls neatly into just one of these buckets, and often contains elements of web, batch, and integration processing all in one. Spring's embedded runtime model makes this easy and natural to do. The emerging category of big data workloads is an example of this. It's one thing to lay down a Hadoop cluster but it's quite another to figure out how you're going to ingest data from all over your enterprise into that cluster, how you're going to orchestrate the batch workloads that process that data, and how you're going to get the results of that processing back into a form that can drive the rest of your business. A fundamental insight here is that these "big data problems" have a lot in common with traditional enterprise integration and batch processing. Spring IO supplements Spring's traditional strengths in these areas to provide all the support you need to build robust and maintainable big data applications. </p>
-        <div class="platform-project">
+        </section>
+        <section class="platform-project">
           <div class="description">
             <h2>Data</h2>
             <p>The data landscape is evolving rapidly. When Spring got started, 'data' pretty much meant a traditional relational database, and maybe a cache in front of it if you were lucky. Today we have a wide variety of data stores covering structured and unstructured data, in-memory and on-disk, standard-size and big. The industry has come to recognize that one size does not fit all, and it's a matter of choosing the most appropriate store for the task in hand. Spring IO addresses this modern data landscape&mdash;including full support for Apache Hadoop&mdash;whether it be document, graph, key-value, relational, or simply unstructured files. </p>
@@ -75,7 +82,8 @@
             <img class="project--logo small" src="/img/platform-nonrelational-db.png">
             <div class="project--title">Non-Relational</div>
           </a>
-        </div>
+        </section>
+        <section>
         <h2>Core</h2>
         <p>At the center of the Spring IO Foundation layer, and common across all workload types, we find the core framework itself. Via Spring Framework 4.0, Spring IO enables you to take full advantage of Java SE 8 and the latest updates from EE 7. Spring IO has full support for addressing security concerns, and Spring IO's Reactor provides a foundation for building reactive, asynchronous, event- and data-driven applications.</p>
         <div class="platform-project">
@@ -101,6 +109,8 @@
           </a>
         </div>
         <p>The popular Groovy dynamic language is supported as an integral part of the Spring IO platform. Groovy integrates seamlessly with your existing classes and libraries and works especially well with IO Execution DSRs such as Boot and Grails.</p>
+        </section>
+        <section>
         <h1 class="index-page--title top-margin">Spring IO Execution</h1>
         <p class="index-page--subtitle">The Spring IO Execution layer provides domain-specific runtimes (DSRs) for applications built on the IO Foundation modules. A DSR may run standalone without requiring deployment to an external container. The first release of Spring IO will include three DSRs: Spring XD, Spring Boot, and Grails.</p>
         <div class="projects--wrapper">
@@ -123,7 +133,8 @@
         <p>Spring XD provides a powerful runtime and DSL for describing big data ingestion and analytics, export, and Hadoop workflow management. In many cases, descriptions of streams, taps and jobs can be directly pushed to the XD DSR without requiring any code to be written at all. The set of XD modules (components that can be used in DSL expressions) is easily extended using building blocks based on Spring Integration and Spring Batch. </p>
         <p>Spring Boot reduces the effort needed to create production-ready, DevOps-friendly, XML-free Spring applications. It simplifies bootstrapping of Spring projects with minimal code, implements an extensible set of operational features such as automated health checking and metrics endpoints, and supports embedded containers enabling the creation of self-contained executables. </p>
         <p>Grails provides a productive and stream-lined full-stack web framework by combining the power of the Spring IO Foundation components with a set of comprehensive Groovy-based DSLs.</p>
-      </div>
+        </section>
+      </article>
     </div>
   </body>
 </html>

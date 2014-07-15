@@ -7,11 +7,16 @@
   <head>
     <title th:inline="text">Tutorial &middot; [[${tutorial.title}]]</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/code-sidebar.css}"/>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" th:content="${tutorial.title}" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:description" content="this tutorial is designed to be completed in 2-3 hours, it provides deeper,
+    in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions." />
   </head>
   <body>
     <div layout:fragment="header-container"></div>
     <div layout:fragment="content" class="container-fluid">
-      <div class="main-body--wrapper">
+      <main class="main-body--wrapper">
         <div class="row-fluid">
           <div class="span8 tutorial-text mobile-left-pane ">
             <div class="content--title desktop-only">
@@ -57,7 +62,7 @@
             </div>
           </aside>
         </div>
-      </div>
+      </main>
     </div>
   </body>
 </html>

@@ -1,13 +1,12 @@
 package sagan.tools.support;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.junit.Test;
 import sagan.support.Fixtures;
 
-import org.junit.Test;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 
 public class EclipseXmlParsingTests {
 
@@ -15,9 +14,9 @@ public class EclipseXmlParsingTests {
 
     @Test
     public void unmarshal() throws Exception {
-        Serializer serializer = new Persister();
+        XmlMapper serializer = new XmlMapper();
 
-        EclipseXml eclipseXml = serializer.read(EclipseXml.class, responseXml);
+        EclipseXml eclipseXml = serializer.readValue(responseXml, EclipseXml.class);
         assertThat(eclipseXml.getEclipseXmlProducts(), notNullValue());
         assertThat(eclipseXml.getEclipseXmlProducts().size(), equalTo(6));
 

@@ -16,6 +16,11 @@
         var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
         /*]]>*/
     </script>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="The Spring team" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:description" content="The Spring team works from around the world with one mission: building
+    quality, open-source software that helps you and your team be more productive on the JVM." />
 </head>
 <body>
   <div layout:fragment="header-container"></div>
@@ -23,9 +28,9 @@
     <div class="billboard--wrapper js-team-map--wrapper">
       <div class="billboard--container center-text js-team-map--container">
         <div class="container-fluid">
-          <div class="billboard--title">
+          <h1 class="billboard--title">
             The Spring Team
-          </div>
+          </h1>
           <div class="billboard--sub-title--container">
             <div class="billboard--sub-title">
               We work together from around the world with one mission &ndash; building quality, open-source
@@ -36,13 +41,13 @@
           </div>
         </div>
       </div>
-      <div id="map" class="billboard-bg"></div>
+      <figure id="map" class="billboard-bg"></figure>
     </div>
   </div>
   <div layout:fragment="content">
     <div class="main-body--wrapper">
       <div class="team-members--wrapper">
-        <div class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
+        <section class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
           <a th:href="@{'/team/' + ${profile.username}}" class="team-member--avatar">
             <img th:src="${profile.avatarUrl} + '?s=153&s=153'" />
           </a>
@@ -53,13 +58,14 @@
               <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
             </div>
             <div class="team-member--social">
-              <a class="team-member--social--icon twitter-small" th:href="'http://twitter.com/'+ ${profile.twitterUsername}" th:if="${profile.hasTwitterUsername()}"></a>
-              <a class="team-member--social--icon github-small" th:href="'http://github.com/'+ ${profile.githubUsername}" th:if="${profile.hasGithubUsername()}"></a>
-              <a class="team-member--social--icon speakerdeck-small" th:href="'http://speakerdeck.com/'+ ${profile.speakerdeckUsername}" th:if="${profile.hasSpeakerdeckUsername()}"></a>
-              <a class="team-member--social--icon lanyrd-small" th:href="'http://lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:if="${profile.hasLanyrdUsername()}"></a>
+              <a class="team-member--social--icon twitter-small" rel="me" th:href="${profile.twitterLink.href}" th:if="${profile.hasTwitterUsername()}"></a>
+              <a class="team-member--social--icon github-small" rel="me" th:href="${profile.githubLink.href}" th:if="${profile.hasGithubUsername()}"></a>
+              <a class="team-member--social--icon gplus-small" rel="me" th:href="${profile.gplusLink.href}" th:if="${profile.hasGplusId()}">G+</a>
+              <a class="team-member--social--icon speakerdeck-small" rel="me" th:href="${profile.speakerdeckLink.href}" th:if="${profile.hasSpeakerdeckUsername()}"></a>
+              <a class="team-member--social--icon lanyrd-small" rel="me" th:href="${profile.lanyrdLink.href}" th:if="${profile.hasLanyrdUsername()}"></a>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   </div>

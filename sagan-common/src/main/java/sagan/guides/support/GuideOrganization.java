@@ -54,17 +54,19 @@ class GuideOrganization {
     private final String type;
     private final GitHubClient gitHub;
     private final String name;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
     private final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
     private final Yaml yaml = new Yaml();
 
     @Autowired
     public GuideOrganization(@Value("${github.guides.owner.name}") String name,
                              @Value("${github.guides.owner.type}") String type,
-                             GitHubClient gitHub) {
+                             GitHubClient gitHub,
+                             ObjectMapper objectMapper) {
         this.name = name;
         this.type = type;
         this.gitHub = gitHub;
+        this.objectMapper = objectMapper;
     }
 
     /**

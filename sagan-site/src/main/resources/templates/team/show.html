@@ -16,26 +16,30 @@
         var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
         /*]]>*/
     </script>
-
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" th:content="'Spring Team: ' + ${profile.fullName}" />
+    <meta property="og:image" th:content="${profile.avatarUrl} + '?s=250&s=250'" />
+    <meta property="og:description" th:content="${profile.fullName} + ' - '+ ${profile.jobTitle}" />
 </head>
 <body>
   <div layout:fragment="header-container"></div>
   <div layout:fragment="full-width--layout" th:object="${profile}" data:member-id="${profile.id}">
     <div class="team-map--wrapper">
       <div class="team-member--container">
-        <div class="container-fluid">
+        <section class="container-fluid">
           <div  class="content--title">Spring Team</div>
           <div class="row-fluid">
             <div class="span4">
-              <img th:src="*{avatarUrl} + '?s=250&s=250'" class="team-member--avatar" th:unless="${#strings.isEmpty(profile.avatarUrl)}"/>
+              <img th:alt="*{fullName}" th:src="*{avatarUrl} + '?s=250&s=250'" class="team-member--avatar" th:unless="${#strings.isEmpty(profile.avatarUrl)}"/>
             </div>
             <div class="span8">
               <div class="team-member-info--container">
                 <div class="team-member-social pull-right">
-                  <a class="team-member--social--icon twitter-small" th:href="'http://twitter.com/'+ ${profile.twitterUsername}" th:unless="${#strings.isEmpty(profile.twitterUsername)}"></a>
-                  <a class="team-member--social--icon github-small" th:href="'http://github.com/'+ ${profile.githubUsername}" th:unless="${#strings.isEmpty(profile.githubUsername)}"></a>
-                  <a class="team-member--social--icon speakerdeck-small" th:href="'http://speakerdeck.com/'+ ${profile.speakerdeckUsername}" th:unless="${#strings.isEmpty(profile.speakerdeckUsername)}"></a>
-                  <a class="team-member--social--icon lanyrd-small" th:href="'http://lanyrd.com/profile/'+ ${profile.lanyrdUsername}" th:unless="${#strings.isEmpty(profile.lanyrdUsername)}"></a>
+                  <a class="team-member--social--icon twitter-small" rel="me" th:href="${profile.twitterLink.href}" th:if="${profile.hasTwitterUsername()}"></a>
+                  <a class="team-member--social--icon github-small" rel="me" th:href="${profile.githubLink.href}" th:if="${profile.hasGithubUsername()}"></a>
+                  <a class="team-member--social--icon gplus-small" rel="me" th:href="${profile.gplusLink.href}" th:if="${profile.hasGplusId()}">G+</a>
+                  <a class="team-member--social--icon speakerdeck-small" rel="me" th:href="${profile.speakerdeckLink.href}" th:if="${profile.hasSpeakerdeckUsername()}"></a>
+                  <a class="team-member--social--icon lanyrd-small" rel="me" th:href="${profile.lanyrdLink.href}" th:if="${profile.hasLanyrdUsername()}"></a>
                 </div>
                 <h1 class="team-member--name" th:text="*{fullName}">First Last</h1>
                 <div class="team-member--sub-info">
@@ -46,9 +50,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-      <div id="map"></div>
+      <figure id="map"></figure>
     </div>
   </div>
   <div layout:fragment="content" class="container" th:object="${profile}" data:member-id="${profile.id}">
@@ -56,16 +60,16 @@
 
       <div class="team-members--wrapper with-padding">
         <div class="row-fluid">
-          <div class="span4">
+          <aside class="span4">
             <div class="member-twitter--wrapper" th:object="${profile}">
               <div class="member-twitter--header">
                 <div th:if="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-handle">@springcentral</div>
                 <div th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-handle" th:text="'@'+${profile.twitterUsername}"></div>
-                <a th:if="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fplatform.twitter.com%2Fwidgets%2Ffollow_button.1375828408.html&partner=undefined&region=follow_link&screen_name=springcentral&tw_p=followbutton&variant=2.0">
+                <a th:if="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" href="https://twitter.com/intent/user?screen_name=springcentral">
                   <i class="icon-twitter"></i>
                   Follow
                 </a>
-                <a th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" th:href="'https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fplatform.twitter.com%2Fwidgets%2Ffollow_button.1375828408.html&partner=undefined&region=follow_link&screen_name=' + ${profile.twitterUsername} + '&tw_p=followbutton&variant=2.0'">
+                <a th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn" th:href="'https://twitter.com/intent/user?screen_name=' + ${profile.twitterUsername}">
                   <i class="icon-twitter"></i>
                   Follow
                 </a>
@@ -90,12 +94,13 @@
                 </script>
               </div>
             </div>
-          </div>
+          </aside>
           <div id="content" class="span8">
             <div class="content-container--wrapper blog--container">
               <div class="content-container--title" th:inline="text">Blog Posts by [[${profile.name}]]</div>
               <div class='content-items--container posts'>
-                <div class="member-post--container" th:each="post : ${posts}">
+                <article class="member-post--container" th:each="post : ${posts}">
+                  <header>
                   <a th:href="@{${post.path}}"><h2 class="member-post--title" th:text="${post.title}">This week in Spring</h2></a>
                   <div class="meta-data--container">
                     <div class="meta-data--item">
@@ -104,14 +109,15 @@
                     </div>
                     <div class="meta-data--item">
                       <div class="meta-data--icon icon blog-icon calendar"></div>
-                      <span class='date' th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</span>
+                      <time class='date' pubdate th:datetime="${post.publishAt}" th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</time>
                     </div>
                   </div>
-                  <div th:utext="${post.renderedSummary}" class='member-post--summary'>This has been an interesting week.</div>
+                  </header>
+                  <section th:utext="${post.renderedSummary}" class='member-post--summary'>This has been an interesting week.</section>
                   <a class="blog-preview--readmore" th:href="@{${post.path}}" th:if="${post.showReadMore()}">
                     Read more...
                   </a>
-                </div>
+                </article>
               </div>
             </div>
             <div class="content-container--wrapper" th:unless="${#strings.isEmpty(profile.videoEmbeds)}">

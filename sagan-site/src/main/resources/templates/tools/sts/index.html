@@ -5,35 +5,41 @@
     data-platform-downloads>
   <head>
     <title>Spring Tool Suite&trade; (STS)</title>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="Spring Tool Suite&trade; (STS)" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:description" content="The Spring Tool Suite is an Eclipse-based development environment
+    that is customized for developing Spring applications." />
   </head>
   <body>
     <div layout:fragment="header-container"></div>
-    <div layout:fragment="content" class="container-fluid">
+    <article layout:fragment="content" class="container-fluid">
       <div class="main-body--wrapper">
       <div class="content--title">Tools</div>
       <h1 class="tools--title">Spring Tool Suite&trade;</h1>
       <div class="row-fluid tools--wrapper">
-        <div class="span8">
+        <section class="span8">
           <p class="tools--description">The Spring Tool Suite is an Eclipse-based development environment that is customized for developing Spring applications. It provides a ready-to-use environment to implement, debug, run, and deploy your Spring applications, including integrations for Pivotal tc Server, Pivotal Cloud Foundry, Git, Maven, AspectJ, and comes on top of the latest Eclipse releases.</p>
           <p class="tools--description">Included with the Spring Tool Suite is the developer edition of Pivotal tc Server, the drop-in replacement for Apache Tomcat that's optimized for Spring. With its Spring Insight console, tc Server Developer Edition provides a graphical real-time view of application performance metrics that lets developers identify and diagnose problems from their desktops.</p>
           <p class="tools--description">The Spring Tool suite supports application targeting to local, virtual and cloud-based servers. It is freely available for development and internal business operations use with no time limits, fully open-source and licensed under the terms of the Eclipse Public License.</p>
           </p>
-        </div>
+        </section>
         <div class="span4">
           <div class="right-pane-widget--container tools-right-pane">
             <div class="tools-logo sts-logo"></div>
-                      <ul class='download-links'>
-                        <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${downloadLinks}">
-                          <a class="download-btn btn btn-black uppercase sub-text" th:href="${downloadLink.url}">
-                            Download STS
-                            <p th:text="'(' + ${version} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
-                          </a>
-                        </li>
-                      </ul>
-                      <a href="all.html" th:href="@{/tools/sts/all}" class="all-versions">See All Versions</a>
+              <ul class='download-links'>
+                <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${downloadLinks}">
+                  <a class="download-btn btn btn-black uppercase sub-text" th:href="${downloadLink.url}">
+                    Download STS
+                    <p th:text="'(' + ${version} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
+                  </a>
+                </li>
+              </ul>
+              <a href="all.html" th:href="@{/tools/sts/all}" class="all-versions">See All Versions</a>
             </div>
           </div>
         </div>
+        <section>
         <div class="tools--wrapper">
           <h2>Feature Highlights</h2>
         </div>
@@ -74,6 +80,8 @@
             <p class="tools-feature--description">Deploy your applications directly into a Cloud Foundry of your choice or an tc Server instance (including support for debugging, instance creation, Spring Insight, services, and more).</p>
           </div>
         </div>
+        </section>
+        <section>
         <div class="row-fluid tools--wrapper">
           <h2>&hellip;and many more features</h2>
         </div>
@@ -106,8 +114,9 @@
             </ul>
           </div>
         </div>
+        </section>
       </div>
-      </div>
+      </article>
     </div>
   </body>
 </html>

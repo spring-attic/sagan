@@ -4,17 +4,32 @@
 <head>
     <title th:inline="text">[[${post.title}]]</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/blog.css}" href="../../../../../../sagan-client/src/css/blog.css" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@springcentral">
+    <meta name="twitter:title" th:content="${post.title}">
+    <meta name="twitter:description" th:content="${post.renderedSummary}">
+    <meta name="twitter:creator" th:if="${post.author.hasTwitterUsername()}" th:content="'@' + ${post.author.twitterUsername}">
+    <meta name="twitter:image:src" th:unless="${#strings.isEmpty(post.author.avatarUrl)}" th:content="${post.author.avatarUrl} + '?s=200'">
+
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" th:content="${post.title}">
+    <meta property="og:image" th:unless="${#strings.isEmpty(post.author.avatarUrl)}" th:content="${post.author.avatarUrl} + '?s=200'">
+    <meta property="og:description" th:content="${post.renderedSummary}">
+    <meta property="og:type" content="article">
+    <meta property="og:article:published_time" th:content="${post.publishAt}">
 </head>
 <body>
   <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container" th:object="${post}">
     <div class="main-body--wrapper">
       <div class="row-fluid blog--wrapper">
-        <div id="content" class="span8 mobile-left-pane" layout:include="blog/_full_post :: full-post" >
-        </div>
-        <div id="sidebar" class="span4 mobile-right-pane">
+        <article id="content" class="span8 mobile-left-pane" layout:include="blog/_full_post :: full-post" >
+        </article>
+        <aside id="sidebar" class="span4 mobile-right-pane">
           <div layout:include="blog/_right-pane :: right-pane"></div>
-        </div>
+        </aside>
       </div>
     </div>
   </div>

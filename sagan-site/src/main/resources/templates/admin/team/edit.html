@@ -70,6 +70,12 @@
             <label for="lanyrdUsername">Lanyrd Username:</label>
             <input id="lanyrdUsername" type="text" th:field="*{lanyrdUsername}" name="lanrydUsername" />
           </div>
+
+          <div class="admin-profile--field">
+            <label for="gplusId">Google+ Id:</label>
+            <input id="gplusId" type="text" th:field="*{gplusId}" name="gplusId" />
+            <div class="note">Remember to link your G+ profile to your spring.io user page</div>
+          </div>
           <!-- <label for="videoEmbeds">Video Embeds:<textarea id="videoEmbeds" th:field="*{videoEmbeds}" name="videoEmbeds"></textarea></label> -->
           <input type="hidden" name="_method" value="PUT" />
           <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>

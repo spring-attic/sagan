@@ -1,17 +1,20 @@
 package sagan.tools.support;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import sagan.tools.Release;
 
 import java.util.List;
 
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Root;
-
-@Root(strict = false)
 class ToolSuiteXml {
 
-    @ElementList(name = "release", type = Release.class, inline = true)
+    @JacksonXmlProperty(localName = "release")
+    @JacksonXmlElementWrapper(useWrapping=false)
     private List<Release> releases;
+
+    @JacksonXmlProperty(localName = "other")
+    @JacksonXmlElementWrapper(useWrapping=false)
+    private List<Release> others;
 
     public List<Release> getReleases() {
         return releases;

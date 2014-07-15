@@ -4,6 +4,9 @@
     layout:decorator="layout">
   <head>
     <title th:inline="text">Understanding [[${doc.subject}]]</title>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" th:content="'Understanding : ' + ${doc.subject}" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
   </head>
   <body>
     <div layout:fragment="header-container"></div>
