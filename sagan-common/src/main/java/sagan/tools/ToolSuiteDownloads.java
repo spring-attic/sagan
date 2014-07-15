@@ -38,10 +38,10 @@ public class ToolSuiteDownloads {
 
     public Set<DownloadLink> getPreferredDownloadLinks() {
         Set<DownloadLink> links = new HashSet<>();
-        addLinks(links, "windows", "exe");
-        addLinks(links, "windows", "exe");
-        addLinks(links, "mac", "dmg");
-        addLinks(links, "mac", "dmg");
+        addLinks(links, "windows", "zip");
+        addLinks(links, "windows", "zip");
+        addLinks(links, "mac", "tar.gz");
+        addLinks(links, "mac", "tar.gz");
         addLinks(links, "linux", "tar.gz");
         addLinks(links, "linux", "tar.gz");
         return links;
