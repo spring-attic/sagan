@@ -13,8 +13,7 @@
       <div class="content--title">Tools</div>
         <h1 class="tools--title">Groovy/Grails Tool Suite&trade; Downloads</h1>
         <p class="tools--description">Use one of the links below to download an all-in-one
-            distribution for your platform. Choose either a native installer or simple
-            archive, they contain equivalent functionality.</p>
+            distribution for your platform.</p>
               <div class="ga--release" layout:include="tools/_tools_versions :: tools-versions" th:with="release=${gaRelease},toolsuite='ggts'"></div>
               <div class="milestone--release" layout:include="tools/_tools_versions :: tools-versions" th:with="release=${milestoneRelease},toolsuite='ggts'" th:if="${milestoneRelease.hasPlatforms()}"></div>
         <h2>Update Site Archives</h2>
