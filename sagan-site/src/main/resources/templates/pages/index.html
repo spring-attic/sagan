@@ -1,4 +1,5 @@
 <html
+    xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorator="layout"
     data-platform-downloads>
@@ -11,6 +12,28 @@
     build simple, portable, fast and flexible JVM-based systems and applications." />
   </head>
   <body>
+    <header layout:fragment="header-banner" id="springone-banner">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="mobile-only">
+                    <span class="span6 springone-mtitle">SpringOne 2GX</span>
+                </div>
+
+                <a class="span2 desktop-only" href="http://springone2gx.com">
+                    <img alt="SpringOne 2GX Logo" th:src="@{/img/event/springone-logo.png}"/>
+                </a>
+
+                <div class="springone-event span6 desktop-only">
+                    <h3>SpringOne 2GX</h3>
+                    <h3>Dallas, TX September 8-11, 2014</h3>
+                    <p class="springone-details">Join us at the Spring, Groovy, Grails &amp; Cloud Event of the Year!</p>
+                </div>
+                <div class="span3 springone-register">
+                    <div class="springone-register-btn"><a href="http://springone2gx.com">Register now</a></div>
+                </div>
+            </div>
+        </div>
+    </header>
     <div layout:fragment="header-container"></div>
     <div layout:fragment="full-width--layout">
       <div class="homepage--body">
