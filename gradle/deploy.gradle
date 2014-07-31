@@ -171,7 +171,7 @@ if (project.hasProperty(TARGET_SPACE)) {
 
         env << [
             SPRING_PROFILES_ACTIVE: "${space}",
-            NEW_RELIC_APP_NAME: "sagan-blue;sagan", // see https://github.com/spring-io/sagan/issues/262
+            NEW_RELIC_APP_NAME: { "sagan${currentVariant};sagan" },
             ELASTICSEARCH_INDEX: "sagan-${space}"
         ]
 
