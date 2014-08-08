@@ -50,6 +50,7 @@ function arch(environment) {
   }
 
   if (environment.userAgent.indexOf('Mac OS X') !== -1
+      || environment.userAgent.indexOf('WOW64') !== -1
       || environment.platform.indexOf('Win64') !== -1
       || environment.platform.indexOf('Linux x86_64') !== -1) {
     return '64';
