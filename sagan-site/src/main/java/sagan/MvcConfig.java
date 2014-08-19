@@ -165,7 +165,7 @@ class ClientResourcesConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         if (!this.saganPath.isEmpty()) {
             registry.addResourceHandler("/**")
-                    .addResourceLocations("file://" + this.saganPath + "/sagan-client/src/")
+                    .addResourceLocations("file:///" + this.saganPath + "/sagan-client/src/")
                     .setCachePeriod(0);
         }
     }
