@@ -21,7 +21,6 @@ spring:
     sources: sagan.SiteMain
   thymeleaf:
     mode: LEGACYHTML5
-    cache: false
   jpa:
     show_sql: false
     hibernate:
@@ -106,10 +105,11 @@ security:
 
 spring:
   profiles: default
+  thymeleaf:
+    cache: false
 cache:
   timetolive: 0
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
-
 ---
 
 spring:
