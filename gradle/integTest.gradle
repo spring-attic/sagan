@@ -28,9 +28,6 @@ task integTest(type: Test) {
 
     maxHeapSize = '1024m'
 
-    // prevent OutOfMemoryErrors with JDK<8
-    jvmArgs '-XX:MaxPermSize=128m'
-
     // ensure we don't overwrite default report directories used by 'test' task
     reports.html.destination = "${project.buildDir}/reports/integTest"
     reports.junitXml.destination = "${project.buildDir}/integTest-results"
