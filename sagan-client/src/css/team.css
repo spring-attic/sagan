@@ -167,7 +167,7 @@
   display: inline-block;
   vertical-align: top;
   margin-top: 20px;
-  width: 149px;
+  width: 147px;
 }
 .team-member--info .team-member--name {
   color: #5fa134;
@@ -288,16 +288,5 @@
   padding: 0 20px;
 }
 
-.leaflet-popup-content-wrapper {
-  background-color: #fff;
-  border-radius: 0 !important;
-}
-.leaflet-popup-content-wrapper .leaflet-popup-content {
-  width: 330px !important;
-  border-radius: 0;
-  padding: 0;
-  margin: 10px;
-}
-.leaflet-popup-content-wrapper .leaflet-popup-content p {
-  margin: 0;
+.gm-style-iw .team-member--container{
 }
