@@ -55,13 +55,18 @@
   margin: 26px 0 43px;
 }
 
-.eclipse--container {
+.eclipse--container, .yourkit--container {
   border: 1px solid #34302d;
   padding: 40px;
+  margin-bottom: 40px;
 }
 .eclipse--container .logo-eclipse-text {
   float: left;
-  margin: 20px 40px 40px 0;
+  margin: 20px 66px 40px 0;
+}
+.yourkit--container .logo-yourkit-text {
+    float: left;
+    margin: 0 40px 40px 0;
 }
 .eclipse--container .eclipse-content--container {
   margin-left: 159px;
