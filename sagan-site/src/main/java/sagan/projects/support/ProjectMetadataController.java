@@ -1,5 +1,6 @@
 package sagan.projects.support;
 
+import org.springframework.util.StringUtils;
 import sagan.projects.Project;
 
 import java.io.IOException;
@@ -37,14 +38,19 @@ class ProjectMetadataController {
     }
 
     @RequestMapping(value = "/{projectId}", method = { GET, HEAD })
-    public void projectMetadata(@PathVariable("projectId") String projectId, @RequestParam("callback") String callback,
+    public void projectMetadata(@PathVariable("projectId") String projectId,
+                                @RequestParam(value="callback", required=false) String callback,
                                 HttpServletResponse response) throws IOException {
         response.setContentType("text/javascript; charset=UTF-8");
         PrintWriter out = response.getWriter();
 
         Project project = service.getProject(projectId);
 
-        out.print(callback + String.format("(%s);", this.objectMapper.writeValueAsString(project)));
+        if(callback == null || !StringUtils.hasText(callback)) {
+            out.print(this.objectMapper.writeValueAsString(project));
+        } else {
+            out.print(callback + String.format("(%s);", this.objectMapper.writeValueAsString(project)));
+        }
     }
 
 }
