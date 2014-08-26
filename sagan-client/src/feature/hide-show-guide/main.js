@@ -1,11 +1,10 @@
 var $ = require('jquery');
-var docCookies = require('./docCookie');
-
+var storageProvider = require('./storage');
+var storage = storageProvider();
 var body = $('body');
 var container = $('.content--container');
 
-var guidePreferences = '_guide_preferences';
-var preferencePath = '/guides/gs';
+var guidesBuildPref = '/guides/gs/build';
 var buildOpts = ['gradle', 'maven', 'sts'];
 
 
@@ -47,12 +46,12 @@ function revealSTS() {
 function reveal(cls) {
     hideBuildSteps();
     body.addClass('show-' + cls);
-    docCookies.setItem(guidePreferences, cls, Infinity, preferencePath);
+    storage.setItem(guidesBuildPref, cls);
 }
 
 function hideBuildSteps() {
     body.removeClass('show-gradle show-maven show-sts');
-    docCookies.setItem(guidePreferences, 'none', Infinity, preferencePath);
+    storage.setItem(guidesBuildPref, 'none');
 }
 
 function registerBuildSwitches() {
@@ -62,8 +61,8 @@ function registerBuildSwitches() {
     container.on('click', '.reveal-maven', revealMaven);
     container.on('click', '.reveal-sts', revealSTS);
 
-    if (docCookies.hasItem(guidePreferences)) {
-        var preference = docCookies.getItem(guidePreferences);
+    if (storage.hasItem(guidesBuildPref)) {
+        var preference = storage.getItem(guidesBuildPref);
         if (preference in buildOpts) {
             reveal(preference);
         } else {
