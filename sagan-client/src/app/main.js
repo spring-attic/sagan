@@ -14,6 +14,7 @@ var initPrettify = require('feature/prettify/main');
 var initNewsletterSubscription = require('feature/newsletterSubscription/main');
 var initMap = require('feature/map/main');
 var initTimeAgo = require('feature/timeAgo/main');
+var initHideShowGuide = require('feature/hide-show-guide/main');
 
 var most = require('most');
 var $ = require('jquery');
@@ -35,7 +36,8 @@ var features = {
     'code-prettify': initPrettify,
     'newsletter-subscription': initNewsletterSubscription,
     'map': initMap,
-    'timeago': initTimeAgo
+    'timeago': initTimeAgo,
+    'hide-show-guide': initHideShowGuide
 };
 
 initFeatures(features, document).each(function(features) {

@@ -1,24 +1,7 @@
 package sagan.guides.support;
 
-import sagan.support.github.GitHubClient;
-import sagan.support.github.Readme;
-import sagan.support.github.RepoContent;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang.WordUtils;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Attributes;
@@ -28,8 +11,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.yaml.snakeyaml.Yaml;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.codec.Base64;
@@ -37,9 +18,15 @@ import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StreamUtils;
+import org.yaml.snakeyaml.Yaml;
+import sagan.support.github.GitHubClient;
+import sagan.support.github.Readme;
+import sagan.support.github.RepoContent;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.*;
+import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * Repository representing the GitHub organization (or user account) that contains guide
@@ -197,9 +184,19 @@ class GuideOrganization {
      */
     private String findTableOfContents(Document doc) {
         Elements toc = doc.select("div#toc > ul.sectlevel1");
-        for (Element subsection : toc.select("li > ul.sectlevel2")) {
-            subsection.parent().remove();
-        }
+
+        toc.select("li > ul.sectlevel2").forEach(subsection ->
+            subsection.parent().remove()
+        );
+
+        toc.forEach(part ->
+            part.select("a[href]").stream()
+                .filter(anchor ->
+                        doc.select(anchor.attr("href")).get(0).parent().classNames().stream()
+                                .anyMatch(clazz -> clazz.startsWith("reveal")))
+                .forEach(href -> href.parent().remove())
+        );
+
         return toc.toString();
     }
 
