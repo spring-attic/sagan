@@ -1,5 +1,5 @@
 var $ = require('jquery');
-var prettify = require('prettify');
+var prettify = require("google-code-prettify");
 
 /**
  * The composition plan for the sidebar on pages that use the
