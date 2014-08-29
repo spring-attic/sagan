@@ -2,6 +2,7 @@ var gulpFilter = require('gulp-filter'),
     cram = require('gulp-cram'),
     uglify = require('gulp-uglify'),
     bowerSrc = require('gulp-bower-src'),
+    sourcemaps = require('gulp-sourcemaps'),
     cssmin = require('gulp-minify-css'),
     gulp = require('gulp');
 
@@ -32,7 +33,9 @@ gulp.task('build-modules', function() {
     };
 
     return cram(paths.run, opts).into('run.js')
+        .pipe(sourcemaps.init())
         .pipe(uglify())
+        .pipe(sourcemaps.write("./"))
         .pipe(gulp.dest(paths.dest));
 });
 
@@ -40,9 +43,11 @@ gulp.task('build-modules', function() {
 gulp.task('bower-files', function() {
     var filter = gulpFilter(["**/*.js", "!**/*.min.js"]);
     return bowerSrc()
+        .pipe(sourcemaps.init())
         .pipe(filter)
         .pipe(uglify())
         .pipe(filter.restore())
+        .pipe(sourcemaps.write("./"))
         .pipe(gulp.dest(paths.dest+'lib'));
 })
 
