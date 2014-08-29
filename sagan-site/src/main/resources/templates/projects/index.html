@@ -47,6 +47,19 @@
           <p class="project--description">Simplifies the development of big data applications by addressing ingestion, analytics, batch jobs and data export.</p>
         </a>
         <a class="project--container parent-project project--container--link"
+           th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-cloud')}"
+                title="See Spring Cloud's subprojects">
+          <div class="child-project-count--wrapper">
+            <div class="child-project-count--number">7</div>
+            <div class="child-project-count--background"></div>
+          </div>
+          <div class="project-logo--container">
+            <div class="icon project--logo logo-spring-cloud"></div>
+          </div>
+          <div class="project--title">Spring Cloud</div>
+          <p class="project--description">Provides a set of tools for common patterns in distributed systems. Useful for building and deploying microservices.</p>
+        </a>
+        <a class="project--container parent-project project--container--link"
            th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-data')}"
                 title="See Spring Data's 9 subprojects">
           <div class="child-project-count--wrapper">
@@ -165,13 +178,6 @@
           <div class="project--title">Groovy</div>
           <p class="project--description">Brings high-productivity language features to the JVM including support for static and dynamic programming, scripting, and domain-specific languages.</p>
         </a>
-        <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-cloud')}">
-            <div class="project-logo--container">
-              <div class="icon project--logo logo-spring-cloud"></div>
-            </div>
-            <div class="project--title">Spring Cloud</div>
-            <p class="project--description">Simplifies connecting to services and gaining operating environment awareness in cloud platforms like Cloud Foundry and Heroku.</p>
-          </a>
       </section>
       <section class="projects--wrapper project-aggregator top-separator">
         <a href="https://github.com/spring-projects/spring-scala#readme" class="project--container project--container--link">
