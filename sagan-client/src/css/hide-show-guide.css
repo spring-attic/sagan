@@ -6,27 +6,33 @@
     .use-foo classes are used to mark a section as displayed only when the user wants to see "foo". By default,
     it's hidden.
 */
-.use-gradle {
+.use-gradle, .use-maven, .use-sts {
     display: none;
+    cursor: pointer;
 }
-.use-maven {
-    display: none;
-}
-.use-sts {
-    display: none;
+
+/*
+    .use-foo's need a tiny "▼" to show they are collapsible
+*/
+.use-gradle h2::before, .use-maven h2::before, .use-sts h2::before {
+    content: '▼';
+    margin-right: 0.25em;
 }
 
 /*
     .reveal-foo classes are used to mark bits of HTML that when clicked, will actually reveal the "foo" items.
 */
-.reveal-gradle {
+.reveal-gradle, .reveal-maven, .reveal-sts {
     display: inherit;
+    cursor: pointer;
 }
-.reveal-maven {
-    display: inherit;
-}
-.reveal-sts {
-    display: inherit;
+
+/*
+    .reveal-foo's need a tiny "▶" to show they are collapsible
+*/
+.reveal-gradle h2::before, .reveal-maven h2::before, .reveal-sts h2::before {
+    content: '▶';
+    margin-right: 0.25em;
 }
 
 /*

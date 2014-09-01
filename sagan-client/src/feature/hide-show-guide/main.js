@@ -63,7 +63,7 @@ function registerBuildSwitches() {
 
     if (storage.hasItem(guidesBuildPref)) {
         var preference = storage.getItem(guidesBuildPref);
-        if (preference in buildOpts) {
+        if (buildOpts.indexOf(preference) >= 0) {
             reveal(preference);
         } else {
             hideBuildSteps();
