@@ -11,7 +11,7 @@
         "bootstrap": "~2.3",
         "bootstrap-datetimepicker": "0.0.10",
         "font-awesome": "3.2.1",
-        "leaflet": "~0.5",
+        "gmaps": "0.4.14",
         "zeroclipboard": "1.1.7",
         "google-code-prettify": "~1.0",
         "jquery-timeago": "1.4.1"
@@ -41,8 +41,8 @@
         "font-awesome": {
             "ignore": ["css/**", "less/**", "scss/**", "src/**"]
         },
-        "leaflet": {
-            "ignore": ["build/**", "debug/**", "spec/**", "src/**"]
+        "gmaps": {
+            "ignore": ["examples/**", "test/**"]
         },
         "google-code-prettify": {
             "ignore": ["styles/**"]

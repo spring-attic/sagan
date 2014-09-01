@@ -6,11 +6,7 @@
       data-map>
 <head>
     <title th:inline="text">Team &middot; [[${profile.fullName}]]</title>
-
-    <link rel="stylesheet" type="text/css" th:href="@{/lib/leaflet/dist/leaflet.css}" />
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" type="text/css" th:href="@{/lib/leaflet/dist/leaflet.ie.css}" />
-    <![endif]-->
+    <script type="text/javascript" src="//maps.google.com/maps/api/js"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
         var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];

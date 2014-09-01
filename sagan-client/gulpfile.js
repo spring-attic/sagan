@@ -29,7 +29,7 @@ gulp.task('build-modules', function() {
 
     var opts = {
         includes: [ 'curl/loader/legacy', 'curl/loader/cjsm11'],
-        excludes: ['leaflet']
+        excludes: ['gmaps']
     };
 
     return cram(paths.run, opts).into('run.js')

@@ -19,9 +19,9 @@ var Munchkin, baseUrl, sts_import; // pre-existing globals
             poly: { location: 'lib/poly' }
         },
         paths: {
-            leaflet: { location: 'lib/leaflet/dist/leaflet', config: cjsConfig },
             ZeroClipboard: 'lib/zeroclipboard/ZeroClipboard',
             jquery: 'lib/jquery/jquery.min',
+            gmaps: {location: 'lib/gmaps/gmaps', config: cjsConfig },
             timeago: {
                 location: 'lib/jquery-timeago/jquery.timeago',
                 config: {
@@ -67,7 +67,7 @@ var Munchkin, baseUrl, sts_import; // pre-existing globals
                 }
             }
         },
-        preloads: ['poly/es5']
+        preloads: ['poly/es5', 'poly/array']
     });
 
     // Can't document this in bower.json, so I'm documenting it here:
