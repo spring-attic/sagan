@@ -367,7 +367,7 @@ input.floating-input:focus {
   background-size: cover;
   height: 137px;
   transition: all 0.33s;
-  -wekit-transition: all 0.33s;
+  -webkit-transition: all 0.33s;
   -moz-transition: all 0.33s;
   -o-transition: all 0.33s;
   -ms-transition: all 0.33s;
@@ -377,7 +377,7 @@ input.floating-input:focus {
   padding: 15px 10px;
   border-top: 1px solid #9e9e9e;
   transition: all 0.33s;
-  -wekit-transition: all 0.33s;
+  -webkit-transition: all 0.33s;
   -moz-transition: all 0.33s;
   -o-transition: all 0.33s;
   -ms-transition: all 0.33s;
