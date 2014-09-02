@@ -78,7 +78,7 @@ cloudfoundry {
 if (project.name == siteProject.name) {
     cloudfoundry {
         application = 'sagan' // instead of 'sagan-site'
-        instances = 4
+        instances = 3
         variants = ['-blue', '-green']
     }
 }
