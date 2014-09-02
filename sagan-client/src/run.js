@@ -67,7 +67,7 @@ var Munchkin, baseUrl, sts_import; // pre-existing globals
                 }
             }
         },
-        preloads: ['poly/es5', 'poly/array']
+        preloads: ['poly/es5']
     });
 
     // Can't document this in bower.json, so I'm documenting it here:
