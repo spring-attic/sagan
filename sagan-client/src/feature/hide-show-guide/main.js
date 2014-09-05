@@ -31,22 +31,38 @@ function initHideShowGuide() {
     return plan;
 }
 
-function revealGradle() {
-    reveal('gradle');
+function revealGradle(e) {
+    reveal('gradle', e);
 }
 
-function revealMaven() {
-    reveal('maven');
+function revealMaven(e) {
+    reveal('maven', e);
 }
 
-function revealSTS() {
-    reveal('sts');
+function revealSTS(e) {
+    reveal('sts', e);
 }
 
-function reveal(cls) {
+function reveal(cls, e) {
     hideBuildSteps();
     body.addClass('show-' + cls);
     storage.setItem(guidesBuildPref, cls);
+
+    if (e !== undefined) {
+        if (e.currentTarget.className.indexOf('reveal-gradle') !== -1) {
+            document.querySelector('#scratch').scrollIntoView(true);
+        } else if (e.currentTarget.className.indexOf('reveal-maven') !== -1) {
+            document.querySelector('#use-maven').scrollIntoView(true);
+        } else if (e.currentTarget.className.indexOf('reveal-sts') !== -1) {
+            document.querySelector('#use-sts').scrollIntoView(true);
+        } else if (e.currentTarget.className.indexOf('use-gradle') !== -1) {
+            document.querySelector('#reveal-gradle').scrollIntoView(true);
+        } else if (e.currentTarget.className.indexOf('use-maven') !== -1) {
+            document.querySelector('#reveal-maven').scrollIntoView(true);
+        } else if (e.currentTarget.className.indexOf('use-sts') !== -1) {
+            document.querySelector('#reveal-sts').scrollIntoView(true);
+        }
+    }
 }
 
 function hideBuildSteps() {
@@ -57,14 +73,20 @@ function hideBuildSteps() {
 function registerBuildSwitches() {
     container.on('click', '.use-gradle, .use-maven, .use-sts', hideBuildSteps);
 
-    container.on('click', '.reveal-gradle', revealGradle);
-    container.on('click', '.reveal-maven', revealMaven);
-    container.on('click', '.reveal-sts', revealSTS);
+    container.on('click', '.reveal-gradle', function(e) {
+        revealGradle(e);
+    });
+    container.on('click', '.reveal-maven', function(e) {
+        revealMaven(e);
+    });
+    container.on('click', '.reveal-sts', function(e) {
+        revealSTS(e);
+    });
 
     if (storage.hasItem(guidesBuildPref)) {
         var preference = storage.getItem(guidesBuildPref);
         if (buildOpts.indexOf(preference) >= 0) {
-            reveal(preference);
+            reveal(preference, undefined);
         } else {
             hideBuildSteps();
         }
