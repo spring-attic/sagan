@@ -7,6 +7,14 @@ var container = $('.content--container');
 var guidesBuildPref = '/guides/gs/build';
 var buildOpts = ['gradle', 'maven', 'sts'];
 
+var relatedElementMap = {
+    "reveal-gradle":'#scratch',
+    "reveal-maven":'#use-maven',
+    "reveal-sts":'#use-sts',
+    "use-gradle":'#reveal-gradle',
+    "use-maven":'#reveal-maven',
+    "use-sts":'#reveal-sts'
+};
 
 module.exports = initHideShowGuide;
 
@@ -48,19 +56,10 @@ function reveal(cls, e) {
     body.addClass('show-' + cls);
     storage.setItem(guidesBuildPref, cls);
 
-    var revealMap = {
-        "reveal-gradle":'#scratch',
-        "reveal-maven":'#use-maven',
-        "reveal-sts":'#use-sts',
-        "use-gradle":'#reveal-gradle',
-        "use-maven":'#reveal-maven',
-        "use-sts":'#reveal-sts'
-    };
-
     if (e !== undefined) {
-        for (var k in revealMap) {
+        for (var k in relatedElementMap) {
             if ($(e.currentTarget).hasClass(k)) {
-                $(revealMap[k]).each(function(i, el){el.scrollIntoView(true);});
+                $(relatedElementMap[k]).each(function(i, el){el.scrollIntoView(true);});
                 break;
             }
         }
@@ -76,15 +75,9 @@ function hideBuildSteps() {
 function registerBuildSwitches() {
     container.on('click', '.use-gradle, .use-maven, .use-sts', hideBuildSteps);
 
-    container.on('click', '.reveal-gradle', function(e) {
-        revealGradle(e);
-    });
-    container.on('click', '.reveal-maven', function(e) {
-        revealMaven(e);
-    });
-    container.on('click', '.reveal-sts', function(e) {
-        revealSTS(e);
-    });
+    container.on('click', '.reveal-gradle', revealGradle);
+    container.on('click', '.reveal-maven', revealMaven);
+    container.on('click', '.reveal-sts', revealSTS);
 
     if (storage.hasItem(guidesBuildPref)) {
         var preference = storage.getItem(guidesBuildPref);
