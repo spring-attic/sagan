@@ -123,8 +123,8 @@
               </div>
             </div>
             &copy; <span th:text="${#calendars.format(#calendars.createToday(),'yyyy')}">2013</span> <a href="http://www.pivotal.io/">Pivotal Software</a>, Inc. All Rights Reserved.
-            <a href="http://www.gopivotal.com/terms-of-use">Terms of Use</a> and
-            <a href="http://www.gopivotal.com/privacy-policy">Privacy</a>
+            <a href="http://www.pivotal.io/terms-of-use">Terms of Use</a> and
+            <a href="http://www.pivotal.io/privacy-policy">Privacy</a>
             <span id='authentication' sec:authorize="isFullyAuthenticated()">
               [<a th:href="@{/signout}">Sign out</a>]
             </span>
