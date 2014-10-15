@@ -28,7 +28,7 @@
             </article>
           </div>
           <aside id='sidebar' class="span4 content-right-pane--container mobile-left-pane ">
-            <div class="right-pane-widget--container desktop-only">
+            <div class="right-pane-widget--container desktop-only" style="margin-bottom:0px;">
               <div class="github-actions https">
                 <h2>Get the Code</h2>
                 <div class="btn-group">
@@ -57,6 +57,17 @@
                 </div>
               </div>
             </div>
+            <div class='PivotalAdBannerDiv'></div>
+<script>
+(function() {
+var s = document.createElement('script');
+s.type = 'text/javascript';
+s.async = true;
+s.src = 'http://bserv.cfapps.io/gb/spring.io';
+var x = document.getElementsByTagName('script')[0];
+x.parentNode.insertBefore(s, x);
+})();
+</script>
             <div class="right-pane-widget--container">
               <div class='related_resources' th:utext="${tutorial.sidebar}"></div>
             </div>
