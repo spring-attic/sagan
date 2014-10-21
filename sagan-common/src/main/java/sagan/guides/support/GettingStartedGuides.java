@@ -1,30 +1,20 @@
 package sagan.guides.support;
 
-import sagan.guides.ContentProvider;
-import sagan.guides.DefaultGuideMetadata;
-import sagan.guides.GettingStartedGuide;
-import sagan.guides.Guide;
-import sagan.guides.GuideMetadata;
-import sagan.guides.ImageProvider;
-import sagan.projects.Project;
-import sagan.projects.support.ProjectMetadataService;
-import sagan.support.ResourceNotFoundException;
-import sagan.support.github.Readme;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.SetMultimap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestClientException;
+import sagan.guides.*;
+import sagan.projects.support.ProjectMetadataService;
+import sagan.support.ResourceNotFoundException;
 
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.SetMultimap;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Repository providing access to and caching of documents within the
@@ -43,12 +33,12 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide>,
     private static final Logger log = LoggerFactory.getLogger(GettingStartedGuides.class);
 
     private static final String REPO_BASE_PATH = "/repos/%s/%s";
-    private static final String README = REPO_BASE_PATH + "/readme";
     private static final String README_PATH_ASC = REPO_BASE_PATH + "/zipball";
 
     private final GuideOrganization org;
     private final SetMultimap<String, String> tagMultimap = LinkedHashMultimap.create();
     private final ProjectMetadataService projectMetadataService;
+    private final AsciidoctorUtils asciidoctorUtils = new AsciidoctorUtils();
 
     @Autowired
     public GettingStartedGuides(GuideOrganization org, ProjectMetadataService projectMetadataService) {
@@ -84,34 +74,10 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide>,
     public void populate(GettingStartedGuide guide) {
         String repoName = guide.getRepoName();
 
-        Readme readme = getGuideReadme(String.format(README, org.getName(), repoName));
-
-        AsciidocGuide asciidocGuide = getAsciidocGuide(String.format(README_PATH_ASC, org.getName(), repoName));
+        AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org.getName(), repoName));
         tagMultimap.putAll(guide.getRepoName(), asciidocGuide.getTags());
         guide.setContent(asciidocGuide.getContent());
-        guide.setSidebar(generateDynamicSidebar(asciidocGuide));
-    }
-
-    private Readme getGuideReadme(String path) {
-        try {
-            log.debug(String.format("Fetching README for '%s'", path));
-            return org.getReadme(path);
-        } catch (RestClientException ex) {
-            String msg = String.format("No README found for '%s'", path);
-            log.warn(msg, ex);
-            throw new ResourceNotFoundException(msg, ex);
-        }
-    }
-
-    private AsciidocGuide getAsciidocGuide(String path) {
-        try {
-            log.debug(String.format("Fetching getting started guide for '%s'", path));
-            return org.getAsciidocGuide(path);
-        } catch (RestClientException ex) {
-            String msg = String.format("No getting started guide found for '%s'", path);
-            log.warn(msg, ex);
-            throw new ResourceNotFoundException(msg, ex);
-        }
+        guide.setSidebar(asciidoctorUtils.generateDynamicSidebar(projectMetadataService, asciidocGuide));
     }
 
     @Override
@@ -135,59 +101,4 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide>,
         return description;
     }
 
-    // This method's approach to generating HTML directly within code will be refactored
-    // in https://github.com/spring-io/sagan/issues/223
-    private String generateDynamicSidebar(AsciidocGuide asciidocGuide) {
-        String sidebar = "<div class='right-pane-widget--container'>\n" +
-                "<div class='related_resources'>\n";
-
-        sidebar += "<h3>" +
-                "<a name='table-of-contents' class='anchor' href='#table-of-contents'></a>" +
-                "Table of contents</h3>\n";
-        sidebar += asciidocGuide.getTableOfContents();
-
-        sidebar += "</div>\n</div>\n" +
-                "<div class='right-pane-widget--container'>\n" +
-                "<div class='related_resources'>\n";
-
-        if (asciidocGuide.getTags().size() > 0) {
-            sidebar += "<h3>" +
-                    "<a name='tags' class='anchor' href='#tags'></a>" +
-                    "Tags</h3><ul class='inline'>\n";
-
-            for (String tag : asciidocGuide.getTags()) {
-                sidebar += "<li><a href='/guides?filter=" + tag + "'>" + tag + "</a></li>\n";
-            }
-        }
-
-        if (asciidocGuide.getProjects().size() > 0) {
-            sidebar += "</ul><h3>" +
-                    "<a name='projects' class='anchor' href='#projects'></a>" +
-                    "Projects</h3>\n" +
-                    "<ul>\n";
-
-            for (String project : asciidocGuide.getProjects()) {
-
-                Project springIoProject = projectMetadataService.getProject(project);
-                sidebar += "<li><a href='" + springIoProject.getSiteUrl() + "'>" + springIoProject.getName()
-                        + "</a></li>\n";
-            }
-            sidebar += "</ul>\n";
-        }
-
-        if (asciidocGuide.getUnderstandingDocs().size() > 0) {
-            sidebar += "<h3>" +
-                    "<a name='concepts-and-technologies' class='anchor' href='#concepts-and-technologies'></a>" +
-                    "Concepts and technologies</h3>\n" +
-                    "<ul>\n";
-            for (String key : asciidocGuide.getUnderstandingDocs().keySet()) {
-                sidebar += "<li><a href='" + key + "'>" + asciidocGuide.getUnderstandingDocs().get(key) + "</a></li>\n";
-            }
-            sidebar += "</ul>\n";
-        }
-
-        sidebar += "</div>\n</div>";
-
-        return sidebar;
-    }
 }

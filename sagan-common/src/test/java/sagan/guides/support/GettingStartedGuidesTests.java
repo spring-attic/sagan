@@ -1,5 +1,11 @@
 package sagan.guides.support;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Answers;
+import org.mockito.Mock;
+import org.springframework.social.github.api.GitHubRepo;
+import org.springframework.web.client.RestClientException;
 import sagan.guides.GettingStartedGuide;
 import sagan.guides.Guide;
 import sagan.projects.support.ProjectMetadataService;
@@ -8,18 +14,11 @@ import sagan.support.github.Readme;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Answers;
-import org.mockito.Mock;
-
-import org.springframework.social.github.api.GitHubRepo;
-import org.springframework.web.client.RestClientException;
-
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
@@ -78,9 +77,8 @@ public class GettingStartedGuidesTests {
     @Test(expected = ResourceNotFoundException.class)
     public void unknownGuide() {
         String unknownGuideId = "foo";
-        given(org.getReadme(anyString())).willThrow(RestClientException.class);
-        given(org.getRepoInfo(anyString())).willThrow(RestClientException.class);
-        given(org.getMarkdownFileAsHtml(anyString())).willThrow(RestClientException.class);
+        given(org.getRepoInfo(anyString())).willThrow(ResourceNotFoundException.class);
+        given(org.getAsciidocGuide(anyString())).willThrow(ResourceNotFoundException.class);
         GettingStartedGuide unknownGuide = gsGuides.find(unknownGuideId);
         unknownGuide.getContent(); // should throw
     }
