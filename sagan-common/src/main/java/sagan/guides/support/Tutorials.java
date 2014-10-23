@@ -1,23 +1,17 @@
 package sagan.guides.support;
 
-import sagan.guides.ContentProvider;
-import sagan.guides.DefaultGuideMetadata;
-import sagan.guides.Guide;
-import sagan.guides.GuideMetadata;
-import sagan.guides.ImageProvider;
-import sagan.guides.Tutorial;
-import sagan.support.ResourceNotFoundException;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
+import sagan.guides.*;
+import sagan.projects.support.ProjectMetadataService;
+import sagan.support.ResourceNotFoundException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Repository implementation providing data access services for tutorial guides.
@@ -30,23 +24,24 @@ class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutorial>, I
     private static final Log log = LogFactory.getLog(Tutorials.class);
 
     private static final String REPO_BASE_PATH = "/repos/%s/%s";
-    private static final String README_PATH_MD = REPO_BASE_PATH + "/contents/README.md";
-    private static final String SIDEBAR_PATH = REPO_BASE_PATH + "/contents/SIDEBAR.md";
-    private static final String TUTORIAL_PAGE_PATH = REPO_BASE_PATH + "/contents/%d/README.md";
+    private static final String README_PATH_ASC = REPO_BASE_PATH + "/zipball";
 
     private final GuideOrganization org;
+    private final ProjectMetadataService projectMetadataService;
+    private final AsciidoctorUtils asciidoctorUtils = new AsciidoctorUtils();
 
     @Autowired
-    public Tutorials(GuideOrganization org) {
+    public Tutorials(GuideOrganization org, ProjectMetadataService projectMetadataService) {
         this.org = org;
+        this.projectMetadataService = projectMetadataService;
     }
 
     @Override
     public Tutorial find(String guide) {
-        return findByPage(guide, 0);
+        return findByPage(guide);
     }
 
-    public Tutorial findByPage(String guide, int page) {
+    public Tutorial findByPage(String guide) {
         String repoName = REPO_PREFIX + guide;
         String description;
         try {
@@ -54,7 +49,7 @@ class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutorial>, I
         } catch (RestClientException ex) {
             description = "";
         }
-        return new Tutorial(new DefaultGuideMetadata(org.getName(), guide, repoName, description), this, this, page);
+        return new Tutorial(new DefaultGuideMetadata(org.getName(), guide, repoName, description), this, this);
     }
 
     @Override
@@ -72,32 +67,11 @@ class Tutorials implements DocRepository<Tutorial>, ContentProvider<Tutorial>, I
 
     @Override
     public void populate(Tutorial tutorial) {
-        tutorial.setContent(
-                loadBodyHtml(
-                tutorial.getPage() == 0 ?
-                        String.format(README_PATH_MD, org.getName(), tutorial.getRepoName()) :
-                        String.format(TUTORIAL_PAGE_PATH, org.getName(), tutorial.getRepoName(), tutorial.getPage())
-                ));
-        tutorial.setSidebar(loadSidebarHtml(tutorial.getRepoName()));
-    }
+        String repoName = tutorial.getRepoName();
 
-    private String loadBodyHtml(String path) {
-        try {
-            log.debug(String.format("Fetching tutorial HTML for '%s'", path));
-            return org.getMarkdownFileAsHtml(path);
-        } catch (RestClientException ex) {
-            String msg = String.format("No tutorial HTML found for '%s'", path);
-            log.warn(msg, ex);
-            throw new ResourceNotFoundException(msg, ex);
-        }
-    }
-
-    private String loadSidebarHtml(String repoName) {
-        try {
-            return org.getMarkdownFileAsHtml(String.format(SIDEBAR_PATH, org.getName(), repoName));
-        } catch (RestClientException ex) {
-            return "";
-        }
+        AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org.getName(), repoName));
+        tutorial.setContent(asciidocGuide.getContent());
+        tutorial.setSidebar(asciidoctorUtils.generateDynamicSidebar(projectMetadataService, asciidocGuide));
     }
 
     @Override

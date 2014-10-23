@@ -33,16 +33,10 @@ class TutorialController {
 
     @RequestMapping("/{tutorial}")
     public String viewTutorial(@PathVariable String tutorial, Model model) {
-        model.addAttribute("tutorialId", tutorial);
-        model.addAttribute("tutorial", tutorials.find(tutorial));
-        return "guides/tutorial/show";
-    }
-
-    @RequestMapping("/{tutorial}/{page:[1-9][0-9]*}")
-    public String viewTutorialPage(@PathVariable String tutorial, @PathVariable Integer page, Model model) {
-        model.addAttribute("tutorialId", tutorial);
-        model.addAttribute("tutorial", tutorials.findByPage(tutorial, page));
-        return "guides/tutorial/show";
+        model.addAttribute("guide", tutorials.find(tutorial));
+        model.addAttribute("description", "this tutorial is designed to be completed in 2-3 hours, it provides deeper," +
+                " in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions.");
+        return "guides/gs/guide";
     }
 
     @RequestMapping("/{tutorial}/images/{image:[a-zA-Z0-9._-]+}")

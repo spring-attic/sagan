@@ -1,22 +1,24 @@
 package sagan.guides.support;
 
-import sagan.guides.Tutorial;
-
-import java.io.IOException;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Answers;
 import org.mockito.Mock;
-
 import org.springframework.social.github.api.GitHubRepo;
+import sagan.guides.Tutorial;
+import sagan.support.github.Readme;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 import static java.util.Collections.singletonList;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.eq;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
@@ -29,15 +31,20 @@ public class TutorialsTests {
 
     private Tutorials tutorials;
     private GitHubRepo repo;
+    private Readme readme;
+    private AsciidocGuide tutorial;
 
     @Before
     public void setup() throws IOException {
         initMocks(this);
         given(org.getName()).willReturn("mock-org");
-        tutorials = new Tutorials(org);
+        tutorials = new Tutorials(org, null);
         repo = new GitHubRepo();
         repo.setName("tut-rest");
         repo.setDescription("Rest tutorial :: Learn some rest stuff");
+        readme = new Readme();
+        readme.setName("README.adoc");
+        tutorial = new AsciidocGuide("REST Tutorial", new HashSet<>(), new HashSet<>(), "Table of C", new HashMap<>());
     }
 
     @Test
@@ -55,23 +62,12 @@ public class TutorialsTests {
     @Test
     public void pageZero() throws IOException {
         given(org.getRepoInfo(eq("tut-rest"))).willReturn(repo);
-        given(org.getMarkdownFileAsHtml(matches("/repos/mock-org/tut-rest/contents/README.md")))
-                .willReturn("REST Tutorial Page Zero");
+        given(org.getReadme(eq("/repos/mock-org/tut-rest/readme"))).willReturn(readme);
+        given(org.getAsciidocGuide("/repos/mock-org/tut-rest/zipball")).willReturn(tutorial);
 
         Tutorial tutorial = tutorials.find("rest");
 
-        assertThat(tutorial.getContent(), equalTo("REST Tutorial Page Zero"));
-    }
-
-    @Test
-    public void pageOne() throws IOException {
-        given(org.getRepoInfo(eq("tut-rest"))).willReturn(repo);
-        given(org.getMarkdownFileAsHtml(matches("/repos/mock-org/tut-rest/contents/1/README.md")))
-                .willReturn("REST Tutorial Page One");
-
-        Tutorial guide = tutorials.findByPage("rest", 1);
-
-        assertThat(guide.getContent(), equalTo("REST Tutorial Page One"));
+        assertThat(tutorial.getContent(), equalTo("REST Tutorial"));
     }
 
 }
