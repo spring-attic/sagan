@@ -59,14 +59,13 @@ public class CrawlerService {
         }
 
         @Override
-        public HTMLPageResponse get(PageURL url, boolean fetchBody, Map<String, String> requestHeaders) {
-            HTMLPageResponse response = super.get(url, fetchBody, requestHeaders);
+        public HTMLPageResponse get(PageURL url, boolean fetchBody, Map<String, String> requestHeaders, boolean followRedirectsToNewDomain) {
+            HTMLPageResponse response = super.get(url, fetchBody, requestHeaders, followRedirectsToNewDomain);
             if (response.getResponseCode() == 200 && response.getResponseType().startsWith("text")) {
                 processor.process(response.getBody());
             }
             return response;
         }
-
     }
 
     private static class CompositeURLParser implements PageURLParser {

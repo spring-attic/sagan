@@ -12,7 +12,7 @@ applicationDefaultJvmArgs = [
 ]
 
 dependencies {
-    def vHttpCore = '4.3.2'
+    def vHttpCore = '4.3.3'
 
     compile project(':sagan-common')
     compile project(':sagan-client')
@@ -43,7 +43,7 @@ dependencies {
     compile "org.apache.httpcomponents:httpcore-nio:${vHttpCore}"
 
     // for use in serving redirects; see urlrewrite.xml
-    compile 'org.tuckey:urlrewritefilter:4.0.3'
+    compile 'org.tuckey:urlrewritefilter:4.0.4'
 
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test"

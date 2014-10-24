@@ -5,9 +5,18 @@ sourceSets {
     }
 }
 
+// sagan-common is not technically a "Spring Boot" application--it is just a library.
+// However, we apply the spring-boot plugin here anyway in order to pick up boot's
+// default dependency versioning, such that we stay in sync with other modules that
+// are actually "boot"-style apps.
+apply plugin: 'spring-boot'
+bootRepackage.enabled = false
+
 dependencies {
 
-    def vJackson = '2.4.1'
+    versionManagement 'io.spring.platform:platform-versions:1.0.2.RELEASE@properties'
+
+    def vJackson = '2.4.3'
 
     compile "org.apache.httpcomponents:httpclient" // Prevents Jest from pulling in 4.2.x
     compile "org.springframework:spring-context"
@@ -16,10 +25,7 @@ dependencies {
     compile 'org.springframework:spring-webmvc' // Prevents Spring Social from pulling in 3.2.x
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
 
-    // explicitly depend on 4.0.3 to avoid dragging in 3.2.3
-    compile "org.springframework:spring-web:4.0.3.RELEASE"
-    compile "org.springframework:spring-webmvc:4.0.3.RELEASE"
-    compile "org.apache.httpcomponents:httpclient:4.3"
+    compile "org.apache.httpcomponents:httpclient:4.3.5"
 
 
     compile 'org.elasticsearch:elasticsearch:0.90.2'
@@ -42,9 +48,9 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-annotations:${vJackson}"
     compile "com.fasterxml.jackson.core:jackson-databind:${vJackson}"
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${vJackson}"
-    compile "org.codehaus.woodstox:woodstox-core-asl:4.1.4"
+    compile "org.codehaus.woodstox:woodstox-core-asl:4.4.1"
 
-    compile 'org.jsoup:jsoup:1.7.2'
+    compile 'org.jsoup:jsoup:1.8.1'
     compile 'joda-time:joda-time'
     compile 'org.hibernate:hibernate-validator'
 
@@ -68,13 +74,5 @@ idea.module {
     testSourceDirs += (sourceSets.testUtil.java.srcDirs + sourceSets.testUtil.resources.srcDirs)
 }
 
-// sagan-common is not technically a "Spring Boot" application--it is just a library.
-// However, we apply the spring-boot plugin here anyway in order to pick up boot's
-// default dependency versioning, such that we stay in sync with other modules that
-// are actually "boot"-style apps.
-apply plugin: 'spring-boot'
-bootRepackage.enabled = false
 
-dependencies {
-    versionManagement 'io.spring.platform:platform-versions:1.0.0.RELEASE@properties'
-}
+
