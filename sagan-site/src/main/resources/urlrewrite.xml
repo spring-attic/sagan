@@ -62,6 +62,12 @@
         <to type="temporary-redirect" last="true">/guides#tutorials</to>
     </rule>
     <rule>
+        <name>Deprecated Tutorials</name>
+        <note>https://github.com/spring-io/sagan/pull/475</note>
+        <from>/guides/tutorials/(rest|data|web)/$</from>
+        <to type="temporary-redirect" last="true">/guides</to>
+    </rule>
+    <rule>
         <name>Remove www</name>
         <note>Redirect www.spring.io => spring.io[#54747656]</note>
         <condition name="host">www.spring.io</condition>

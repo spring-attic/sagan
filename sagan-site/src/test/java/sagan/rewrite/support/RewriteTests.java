@@ -136,6 +136,13 @@ public class RewriteTests {
         validateTemporaryRedirect("http://spring.io/linkedin", "http://www.linkedin.com/groups/Spring-Users-46964");
     }
 
+    @Test
+    public void deprecatedTutorialsRedirected() throws Exception {
+        validateTemporaryRedirect("http://spring.io/guides/tutorials/rest/","/guides");
+        validateTemporaryRedirect("http://spring.io/guides/tutorials/data/","/guides");
+        validateTemporaryRedirect("http://spring.io/guides/tutorials/web/","/guides");
+    }
+
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,
             ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);
