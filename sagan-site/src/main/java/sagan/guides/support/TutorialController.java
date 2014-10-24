@@ -44,4 +44,13 @@ class TutorialController {
         return new ResponseEntity<>(tutorials.find(tutorial).getImage(image), HttpStatus.OK);
     }
 
+    /**
+     * Redirect deprecated tutorials to the /guides page
+     * TODO: convert this to an "addRedirectViewController" once Sagan is using Spring 4.1
+     */
+    @RequestMapping(value={"/rest", "/data", "/web"})
+    public String deprecatedTutorials() {
+        return "redirect:/guides";
+    }
+
 }
