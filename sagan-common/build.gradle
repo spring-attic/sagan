@@ -18,20 +18,15 @@ dependencies {
 
     def vJackson = '2.4.3'
 
-    compile "org.apache.httpcomponents:httpclient" // Prevents Jest from pulling in 4.2.x
     compile "org.springframework:spring-context"
     compile "org.springframework.security:spring-security-core"
     compile 'org.springframework.social:spring-social-github:1.0.0.M4'
-    compile 'org.springframework:spring-webmvc' // Prevents Spring Social from pulling in 3.2.x
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
 
-    compile "org.apache.httpcomponents:httpclient:4.3.5"
-
+    compile "org.apache.httpcomponents:httpclient"
 
     compile 'org.elasticsearch:elasticsearch:0.90.2'
-    compile('io.searchbox:jest:0.0.4') {
-        exclude(module: 'commons-logging')
-    }
+    compile 'io.searchbox:jest:0.0.4'
     compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
     compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 
@@ -48,7 +43,7 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-annotations:${vJackson}"
     compile "com.fasterxml.jackson.core:jackson-databind:${vJackson}"
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${vJackson}"
-    compile "org.codehaus.woodstox:woodstox-core-asl:4.4.1"
+    compile "org.codehaus.woodstox:woodstox-core-asl"
 
     compile 'org.jsoup:jsoup:1.8.1'
     compile 'joda-time:joda-time'

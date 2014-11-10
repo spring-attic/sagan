@@ -9,7 +9,6 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-security"
 
     // for use in CrawlerService
-    compile "org.apache.httpcomponents:httpclient"
     compile('com.soulgalore:crawler:1.5.11') {
         exclude(module: 'guice')
         exclude(module: 'commons-logging')

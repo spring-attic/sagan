@@ -73,6 +73,16 @@ configure(javaProjects) {
         all*.exclude group: 'log4j', module: 'log4j'
     }
 
+    configurations.all {
+        resolutionStrategy {
+            eachDependency {
+                if (it.requested.group == 'org.springframework') {
+                    it.useVersion '4.0.8.RELEASE'
+                }
+            }
+        }
+    }
+
     // Ensure that all Gradle-compiled classes are available to Eclipse's
     // classpath.
     eclipseClasspath.dependsOn testClasses
