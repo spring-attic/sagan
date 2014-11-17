@@ -13,7 +13,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.1.6.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.1.9.RELEASE"
         classpath 'org.cloudfoundry:cf-gradle-plugin:1.0.4' // see deploy.gradle
     }
 }
@@ -73,16 +73,6 @@ configure(javaProjects) {
         all*.exclude group: 'log4j', module: 'log4j'
     }
 
-    configurations.all {
-        resolutionStrategy {
-            eachDependency {
-                if (it.requested.group == 'org.springframework') {
-                    it.useVersion '4.0.8.RELEASE'
-                }
-            }
-        }
-    }
-
     // Ensure that all Gradle-compiled classes are available to Eclipse's
     // classpath.
     eclipseClasspath.dependsOn testClasses
@@ -106,7 +96,7 @@ configure(bootProjects) {
     bootRun.dependsOn writeGitPropertiesFile
 
     dependencies {
-        versionManagement 'io.spring.platform:platform-versions:1.0.2.RELEASE@properties'
+        versionManagement 'io.spring.platform:platform-versions:1.0.3.RELEASE@properties'
     }
 }
 

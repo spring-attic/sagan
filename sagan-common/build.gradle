@@ -14,7 +14,7 @@ bootRepackage.enabled = false
 
 dependencies {
 
-    versionManagement 'io.spring.platform:platform-versions:1.0.2.RELEASE@properties'
+    versionManagement 'io.spring.platform:platform-versions:1.0.3.RELEASE@properties'
 
     def vJackson = '2.4.3'
 
