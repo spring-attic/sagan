@@ -83,13 +83,13 @@ elasticsearch:
     index: ${ELASTICSEARCH_INDEX:sagan}
 
 server:
-    tomcat:
-        # Write access log to target/logs/access_log.YYYY-MM-DD.log
-        # See http://tomcat.apache.org/tomcat-7.0-doc/api/org/apache/catalina/valves/AccessLogValve.html
-        accessLogEnabled: true
-        accessLogPattern: '%h %l %u %t "%r" %s %b %{Host}i %{Location}o'
-        baseDir: ''
-        backgroundProcessorDelay: 1
+  tomcat:
+    # Write access log to target/logs/access_log.YYYY-MM-DD.log
+    # See http://tomcat.apache.org/tomcat-7.0-doc/api/org/apache/catalina/valves/AccessLogValve.html
+    accessLogEnabled: true
+    accessLogPattern: '%h %l %u %t "%r" %s %b %{Host}i %{Location}o'
+    baseDir: ''
+    backgroundProcessorDelay: 1
 
 logging:
   file: logs/application_log
@@ -111,6 +111,11 @@ spring:
   profiles: default,staging,production
 security:
   require_ssl: true
+server:
+  # when deployed to CloudFoundry, tomcat is behind a CDN proxy
+  tomcat:
+    remote_ip_header: x-forwarded-for
+    protocol_header: x-forwarded-proto
 
 ---
 
