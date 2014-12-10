@@ -33,9 +33,19 @@
                         </ul>
                     </div>
                 </div>
-                <div class="">
-                    <button name="draft" value="false" type="submit" class="btn btn-large">Publish</button>
-                    <button name="draft" value="true" type="submit" class="btn btn-large">Save &amp; View Draft</button>
+                <div th:if="${create}">
+                    <button name="draft" value="true" type="submit" class="btn btn-large">Create new Draft</button>
+                </div>
+                <div th:if="${edit}">
+                    <button name="draft" th:if="*{!draft}" value="false" type="submit" class="btn btn-large btn-primary">Update</button>
+                    <button name="draft" th:if="*{draft}" value="true" type="submit" class="btn btn-large btn-primary">Save</button>
+
+                    <a th:href="${path}" th:if="*{draft}" target="_blank" class="btn btn-large btn-lg" role="button">Preview</a>
+
+                    <div class="pull-right">
+                        <button name="draft" th:if="*{!draft}" value="true" type="submit" class="btn btn-large btn-warning">Unpublish</button>
+                        <button name="draft" th:if="*{draft}" value="false" type="submit" class="btn btn-large btn-warning">Publish</button>
+                    </div>
                 </div>
 
             </div>
@@ -47,6 +57,16 @@
                             <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.displayName}">Category</option>
                         </select>
                         <span class="help-inline" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Incorrect category</span>
+                    </div>
+                </div>
+
+                <div class="control-group" th:class="'control-group ' + (${#fields.hasErrors('format')}? ' error')">
+                    <label class="control-label" for="format">Format:</label>
+                    <div class="controls">
+                        <select id="format" name="format" th:field="*{format}" >
+                            <option th:each="format : ${formats}" th:value="${format.id}" th:text="${format.displayName}">Format</option>
+                        </select>
+                        <span class="help-inline" th:if="${#fields.hasErrors('format')}" th:errors="*{format}">Incorrect format</span>
                     </div>
                 </div>
 

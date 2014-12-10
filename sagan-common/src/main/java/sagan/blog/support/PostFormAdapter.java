@@ -30,7 +30,7 @@ class PostFormAdapter {
 
     public Post createPostFromPostForm(PostForm postForm, String username) {
         String content = postForm.getContent();
-        Post post = new Post(postForm.getTitle(), content, postForm.getCategory());
+        Post post = new Post(postForm.getTitle(), content, postForm.getCategory(), postForm.getFormat());
         MemberProfile profile = teamRepository.findByUsername(username);
         post.setAuthor(profile);
         post.setCreatedAt(createdDate(postForm, dateFactory.now()));
@@ -46,6 +46,7 @@ class PostFormAdapter {
         post.setTitle(postForm.getTitle());
         post.setRawContent(content);
         post.setCategory(postForm.getCategory());
+        post.setFormat(postForm.getFormat());
         post.setCreatedAt(createdDate(postForm, post.getCreatedAt()));
 
         setPostProperties(postForm, content, post);

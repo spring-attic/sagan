@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,7 +13,7 @@ class PostContentRenderer {
     private MarkdownService markdownService;
 
     @Autowired
-    public PostContentRenderer(MarkdownService markdownService) {
+    public PostContentRenderer(@Qualifier("pegdown") MarkdownService markdownService) {
         this.markdownService = markdownService;
     }
 

@@ -30,6 +30,8 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
     compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 
+    compile 'org.pegdown:pegdown:1.4.2'
+
     // datasource and connection pool dependencies
     runtime 'org.postgresql:postgresql:9.2-1002-jdbc4'
     compile 'com.h2database:h2'

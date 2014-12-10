@@ -12,6 +12,7 @@ public class PostBuilder {
     private String title;
     private MemberProfile author;
     private PostCategory category;
+    private PostFormat format;
     private String rawContent;
     private String renderedContent;
     private String renderedSummary;
@@ -25,6 +26,7 @@ public class PostBuilder {
         author = new MemberProfile();
         author.setUsername("test");
         category = PostCategory.ENGINEERING;
+        format = PostFormat.MARKDOWN;
         rawContent = "post body";
         renderedContent = "post body";
         renderedSummary = "summary";
@@ -118,7 +120,7 @@ public class PostBuilder {
     }
 
     public Post build() {
-        Post post = new Post(id, title, rawContent, category);
+        Post post = new Post(id, title, rawContent, category, format);
         post.setAuthor(author);
         post.setRenderedContent(renderedContent);
         post.setRenderedSummary(renderedSummary);

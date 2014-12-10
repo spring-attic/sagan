@@ -3,6 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
+import sagan.blog.PostFormat;
 import saganx.AbstractIntegrationTests;
 
 import org.junit.Before;
@@ -58,15 +59,11 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
     }
 
     @Test
-    public void redirectToPublishedPostAfterUpdate() throws Exception {
+    public void displayEditPostAfterUpdate() throws Exception {
         MockHttpServletRequestBuilder editPostRequest = createEditPostRequest();
 
         mockMvc.perform(editPostRequest)
-                .andExpect(status().isFound())
-                .andExpect(result -> {
-                    String redirectedUrl = result.getResponse().getRedirectedUrl();
-                    assertThat(redirectedUrl, startsWith("/blog/" + post.getPublicSlug()));
-                });
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -80,6 +77,7 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
         assertEquals("New Title", updatedPost.getTitle());
         assertEquals("New Content", updatedPost.getRawContent());
         assertEquals(PostCategory.NEWS_AND_EVENTS, updatedPost.getCategory());
+        assertEquals(PostFormat.MARKDOWN, updatedPost.getFormat());
         assertEquals(false, updatedPost.isDraft());
         assertThat(updatedPost.getId(), equalTo(post.getId()));
 
@@ -90,7 +88,7 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
 
     @Test
     public void updateDoesNotPersistInvalidData() throws Exception {
-        MockHttpServletRequestBuilder editPostRequest = put("/admin/blog/" + post.getAdminSlug());
+        MockHttpServletRequestBuilder editPostRequest = put("/admin/blog/" + post.getAdminSlug() + "/edit");
         editPostRequest.param("title", "");
         editPostRequest.param("content", "");
         editPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
@@ -107,10 +105,11 @@ public class EditBlogPostTests extends AbstractIntegrationTests {
     }
 
     private MockHttpServletRequestBuilder createEditPostRequest() {
-        MockHttpServletRequestBuilder editPostRequest = put("/admin/blog/" + post.getAdminSlug());
+        MockHttpServletRequestBuilder editPostRequest = put("/admin/blog/" + post.getAdminSlug() + "/edit");
         editPostRequest.param("title", "New Title");
         editPostRequest.param("content", "New Content");
         editPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
+        editPostRequest.param("format", PostFormat.MARKDOWN.name());
         editPostRequest.param("draft", "false");
         return editPostRequest;
     }

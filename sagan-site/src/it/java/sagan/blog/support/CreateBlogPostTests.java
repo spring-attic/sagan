@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.blog.PostFormat;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
 import saganx.AbstractIntegrationTests;
@@ -70,11 +71,12 @@ public class CreateBlogPostTests extends AbstractIntegrationTests {
     }
 
     @Test
-    public void redirectToPublishedPostAfterCreation() throws Exception {
+    public void redirectToEditPostAfterCreation() throws Exception {
         MockHttpServletRequestBuilder createPostRequest = getCreatePostRequest();
         createPostRequest.param("title", "Post Title");
         createPostRequest.param("content", "My Content");
         createPostRequest.param("category", PostCategory.NEWS_AND_EVENTS.name());
+        createPostRequest.param("format", PostFormat.MARKDOWN.name());
         createPostRequest.param("draft", "false");
         createPostRequest.param("publishAt", "2013-07-01 13:15");
 
@@ -83,7 +85,7 @@ public class CreateBlogPostTests extends AbstractIntegrationTests {
                 .andExpect(result -> {
                     String redirectedUrl = result.getResponse().getRedirectedUrl();
                     assertTrue("Expected redirect to /blog/2013/07/01/post-title, got: " + redirectedUrl,
-                            redirectedUrl.matches("^/blog/2013/07/01/post-title"));
+                            redirectedUrl.matches("^/blog/2013/07/01/post-title/edit"));
                 });
     }
 
@@ -93,6 +95,7 @@ public class CreateBlogPostTests extends AbstractIntegrationTests {
         createPostRequest.param("title", "Post Title");
         createPostRequest.param("content", "My Content");
         createPostRequest.param("category", PostCategory.ENGINEERING.name());
+        createPostRequest.param("format", PostFormat.MARKDOWN.name());
         createPostRequest.param("broadcast", "true");
 
         mockMvc.perform(createPostRequest);

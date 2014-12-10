@@ -3,6 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
+import sagan.blog.PostFormat;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 import sagan.team.MemberProfile;
@@ -64,13 +65,13 @@ public class BlogAdminControllerTests {
         controller = new BlogAdminController(blogService, teamRepository, dateFactory);
 
         Page<Post> drafts = new PageImpl<>(
-                Arrays.asList(new Post("draft post", "body", PostCategory.ENGINEERING)),
+                Arrays.asList(new Post("draft post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN)),
                 PageableFactory.forDashboard(), 1);
         Page<Post> scheduled = new PageImpl<>(
-                Arrays.asList(new Post("scheduled post", "body", PostCategory.ENGINEERING)),
+                Arrays.asList(new Post("scheduled post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN)),
                 PageableFactory.forDashboard(), 1);
         Page<Post> published = new PageImpl<>(
-                Arrays.asList(new Post("published post", "body", PostCategory.ENGINEERING)),
+                Arrays.asList(new Post("published post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN)),
                 PageableFactory.forDashboard(), 1);
 
         given(blogService.getPublishedPosts(anyObject())).willReturn(published);
@@ -115,7 +116,7 @@ public class BlogAdminControllerTests {
     }
 
     @Test
-    public void redirectToPostAfterCreation() throws Exception {
+    public void redirectToEditPostAfterCreation() throws Exception {
         String username = "username";
 
         MemberProfile member = new MemberProfile();
@@ -131,12 +132,12 @@ public class BlogAdminControllerTests {
         given(blogService.addPost(postForm, username)).willReturn(post);
         String result = controller.createPost(principal, postForm, bindingResult, null);
 
-        assertThat(result, equalTo("redirect:/blog/2013/05/06/post-title"));
+        assertThat(result, equalTo("redirect:/blog/2013/05/06/post-title/edit"));
     }
 
     @Test
     @SuppressWarnings("unchecked")
-    public void attemptingToCreateADuplicatePostReturnsToPostForm() throws Exception {
+    public void attemptingToCreateADuplicatePostReturnsToEditForm() throws Exception {
         String username = "username";
 
         MemberProfile member = new MemberProfile();
@@ -152,7 +153,7 @@ public class BlogAdminControllerTests {
 
         given(blogService.addPost(postForm, username)).willReturn(post);
         String result1 = controller.createPost(principal, postForm, bindingResult, null);
-        assertThat(result1, equalTo("redirect:/blog/2013/05/06/post-title"));
+        assertThat(result1, equalTo("redirect:/blog/2013/05/06/post-title/edit"));
 
         given(blogService.addPost(postForm, username)).willThrow(DataIntegrityViolationException.class);
         String result2 = controller.createPost(principal, postForm, bindingResult, new ExtendedModelMap());

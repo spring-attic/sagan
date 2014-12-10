@@ -1,5 +1,6 @@
 package sagan.blog.support;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import sagan.support.github.GitHubClient;
 
 import org.springframework.beans.factory.annotation.Autowired;

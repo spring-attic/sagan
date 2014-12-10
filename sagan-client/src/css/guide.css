@@ -1,3 +1,5 @@
+@import "filterable-list.css";
+
 .guides-section--container {
   border: 1px solid #34302d;
   min-height: 284px;

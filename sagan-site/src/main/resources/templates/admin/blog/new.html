@@ -15,7 +15,7 @@
           <a th:href="@{/admin}">Admin</a> : <a th:href="@{/admin/blog}">Blog</a> : New Post
         </div>
       </div>
-    <form layout:include="admin/blog/_post_form :: post-form" th:action="@{/admin/blog}" method="post" th:object="${postForm}"></form>
+    <form layout:include="admin/blog/_post_form :: post-form" th:with="create=1" th:action="@{/admin/blog}" method="post" th:object="${postForm}"></form>
   </div>
 </div>
 </body>

@@ -14,8 +14,7 @@
           <a th:href="@{/admin}">Admin</a> : <a th:href="@{/admin/blog}">Blog</a> : Edit Post
         </div>
       </div>
-      <p th:if="${githubBroken}">Github failed to generate markdown</p>
-      <form layout:include="admin/blog/_post_form :: post-form" th:with="edit=1" th:action="@{'/admin/blog/' + ${post.id}}" method="post" th:object="${postForm}">
+      <form layout:include="admin/blog/_post_form :: post-form" th:with="edit=1" th:action="@{'/admin/blog/' + ${post.id} + '/edit'}" method="post" th:object="${postForm}">
       </form>
     </div>
 </div>

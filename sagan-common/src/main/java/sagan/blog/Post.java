@@ -47,6 +47,10 @@ public class Post implements Serializable {
     private PostCategory category;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PostFormat format;
+
+    @Column(nullable = false)
     @Type(type = "text")
     private String rawContent;
 
@@ -80,15 +84,16 @@ public class Post implements Serializable {
     private Post() {
     }
 
-    public Post(String title, String content, PostCategory category) {
+    public Post(String title, String content, PostCategory category, PostFormat format) {
         this.title = title;
-        rawContent = content;
+        this.rawContent = content;
         this.category = category;
+        this.format = format;
     }
 
     /* For testing only */
-    public Post(Long id, String title, String content, PostCategory category) {
-        this(title, content, category);
+    public Post(Long id, String title, String content, PostCategory category, PostFormat format) {
+        this(title, content, category, format);
         this.id = id;
     }
 
@@ -118,6 +123,14 @@ public class Post implements Serializable {
 
     public void setCategory(PostCategory category) {
         this.category = category;
+    }
+
+    public PostFormat getFormat() {
+        return format;
+    }
+
+    public void setFormat(PostFormat format) {
+        this.format = format;
     }
 
     public String getRawContent() {

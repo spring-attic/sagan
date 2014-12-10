@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import sagan.blog.PostFormat;
 
 class PostForm {
     @NotEmpty
@@ -20,6 +21,9 @@ class PostForm {
 
     @NotNull
     private PostCategory category;
+
+    @NotNull
+    private PostFormat format;
 
     private boolean broadcast;
     private boolean draft;
@@ -64,6 +68,14 @@ class PostForm {
 
     public void setCategory(PostCategory category) {
         this.category = category;
+    }
+
+    public PostFormat getFormat() {
+        return format;
+    }
+
+    public void setFormat(PostFormat format) {
+        this.format = format;
     }
 
     public boolean isBroadcast() {
