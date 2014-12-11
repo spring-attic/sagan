@@ -10,12 +10,16 @@ import org.springframework.data.domain.Sort;
  */
 public abstract class PageableFactory {
 
+    public static Pageable all() {
+        return build(0, Integer.MAX_VALUE);
+    }
+
     public static Pageable forLists(int page) {
         return build(page - 1, 10);
     }
 
-    public static Pageable forDashboard() {
-        return build(0, Integer.MAX_VALUE);
+    public static Pageable forDashboard(int page) {
+        return build(page - 1, 30);
     }
 
     public static Pageable forFeeds() {

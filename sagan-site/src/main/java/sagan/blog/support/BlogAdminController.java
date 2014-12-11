@@ -1,14 +1,19 @@
 package sagan.blog.support;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.web.bind.annotation.RequestParam;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.PostFormat;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
+import sagan.support.nav.PaginationInfo;
 import sagan.team.MemberProfile;
 import sagan.team.support.TeamRepository;
 
 import java.security.Principal;
+import java.util.Collections;
 
 import javax.validation.Valid;
 
@@ -45,11 +50,20 @@ class BlogAdminController {
     }
 
     @RequestMapping(value = "", method = { GET, HEAD })
-    public String dashboard(Model model) {
-        Pageable pageRequest = PageableFactory.forDashboard();
-        model.addAttribute("posts", PostView.pageOf(service.getPublishedPosts(pageRequest), dateFactory));
-        model.addAttribute("drafts", PostView.pageOf(service.getDraftPosts(pageRequest), dateFactory));
-        model.addAttribute("scheduled", PostView.pageOf(service.getScheduledPosts(pageRequest), dateFactory));
+    public String dashboard(Model model, @RequestParam(defaultValue = "1") int page) {
+        Page<PostView> postViewPage = PostView.pageOf(service.getPublishedPosts(PageableFactory.forDashboard(page)), dateFactory);
+        model.addAttribute("posts", postViewPage);
+        model.addAttribute("paginationInfo", new PaginationInfo(postViewPage));
+
+        if(page == 1) {
+            model.addAttribute("drafts", PostView.pageOf(service.getDraftPosts(PageableFactory.all()), dateFactory));
+            model.addAttribute("scheduled", PostView.pageOf(service.getScheduledPosts(PageableFactory.all()), dateFactory));
+        } else {
+            Page<PostView> emptyPage = new PageImpl<PostView>(Collections.emptyList(), PageableFactory.all(), 0);
+            model.addAttribute("drafts", emptyPage);
+            model.addAttribute("scheduled", emptyPage);
+        }
+
         return "admin/blog/index";
     }
 

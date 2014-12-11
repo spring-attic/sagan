@@ -24,31 +24,45 @@
 
       <div class="row">
           <div id="content" class="span12">
-              <h2>Drafts</h2>
-              <table class='table dashboard--posts'>
-                  <tr th:each="post : ${drafts}" layout:fragment="post-row">
-                      <td class="date" th:text="${post.formattedPublishDate}">June 18, 2013</td>
-                      <td class="author">
-                          <a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.username}}">Author</a>
-                      </td>
-                      <td th:text="${post.title}">This week in Spring</td>
-                      <td>
-                          <nav layout:substituteby="admin/blog/_dashboard_actions :: dashboard-actions" />
-                      </td>
-                  </tr>
-              </table>
-
-              <h2>Scheduled</h2>
-              <table class='table dashboard--posts'>
-                  <tr th:each="post : ${scheduled}" layout:include="admin/blog/index::post-row">
-                  </tr>
-              </table>
-
-              <h2>Published</h2>
-              <table class='table dashboard--posts'>
-                  <tr th:each="post : ${posts}" layout:include="admin/blog/index::post-row">
+              <div th:if="${drafts.totalElements}">
+                  <h2>Drafts</h2>
+                  <table class='table dashboard--posts'>
+                      <tr th:each="post : ${drafts}" layout:fragment="post-row">
+                          <td class="date" th:text="${post.formattedPublishDate}">June 18, 2013</td>
+                          <td class="author">
+                              <a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.username}}">Author</a>
+                          </td>
+                          <td th:text="${post.title}">This week in Spring</td>
+                          <td>
+                              <nav layout:substituteby="admin/blog/_dashboard_actions :: dashboard-actions" />
+                          </td>
                       </tr>
-              </table>
+                  </table>
+              </div>
+              <div th:if="${scheduled.totalElements}">
+                  <h2>Scheduled</h2>
+                  <table class='table dashboard--posts'>
+                      <tr th:each="post : ${scheduled}" layout:include="admin/blog/index::post-row">
+                      </tr>
+                  </table>
+              </div>
+              <div th:if="${posts.totalElements}">
+                  <h2>Published</h2>
+                  <table class='table dashboard--posts'>
+                      <tr th:each="post : ${posts}" layout:include="admin/blog/index::post-row">
+                          </tr>
+                  </table>
+              </div>
+
+              <div id='pagination_control' th:if="${paginationInfo.isVisible()}" class="pagination blog-pagination">
+                  <a th:href="@{${beans.uih.path()}(page=${paginationInfo.previousPageNumber})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
+                  <div th:each="element : ${paginationInfo.pageElements }" >
+                      <a th:href="@{${beans.uih.path()}(page=${element.label})}" th:text="${element.label}" th:if="${element.navigable}" ></a>
+                      <div th:text="${element.label}" th:if="${!element.navigable && element.currentPage}" class="active" ></div>
+                      <div th:text="${element.label}" th:unless="${element.navigable || element.currentPage}" ></div>
+                  </div>
+                  <a th:href="@{${beans.uih.path()}(page=${paginationInfo.nextPageNumber})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
+              </div>
           </div>
 
           <div id="sidebar" class="span4">

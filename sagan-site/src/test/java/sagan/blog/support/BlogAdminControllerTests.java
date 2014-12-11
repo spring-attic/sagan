@@ -66,20 +66,20 @@ public class BlogAdminControllerTests {
 
         Page<Post> drafts = new PageImpl<>(
                 Arrays.asList(new Post("draft post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN)),
-                PageableFactory.forDashboard(), 1);
+                PageableFactory.forDashboard(1), 1);
         Page<Post> scheduled = new PageImpl<>(
                 Arrays.asList(new Post("scheduled post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN)),
-                PageableFactory.forDashboard(), 1);
+                PageableFactory.forDashboard(1), 1);
         Page<Post> published = new PageImpl<>(
                 Arrays.asList(new Post("published post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN)),
-                PageableFactory.forDashboard(), 1);
+                PageableFactory.forDashboard(1), 1);
 
         given(blogService.getPublishedPosts(anyObject())).willReturn(published);
         given(blogService.getDraftPosts(anyObject())).willReturn(drafts);
         given(blogService.getScheduledPosts(anyObject())).willReturn(scheduled);
 
         ExtendedModelMap model = new ExtendedModelMap();
-        controller.dashboard(model);
+        controller.dashboard(model, 1);
 
         assertThat(((Page<PostView>) model.get("drafts")).getContent().get(0).getTitle(), equalTo("draft post"));
         assertThat(((Page<PostView>) model.get("scheduled")).getContent().get(0).getTitle(), equalTo("scheduled post"));
