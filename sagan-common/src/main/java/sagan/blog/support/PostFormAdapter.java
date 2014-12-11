@@ -80,4 +80,9 @@ class PostFormAdapter {
         String summary = postSummary.forContent(post.getRenderedContent(), SUMMARY_LENGTH);
         post.setRenderedSummary(summary);
     }
+
+    public void refreshPost(Post post) {
+        post.setRenderedContent(renderer.render(post.getRawContent()));
+        summarize(post);
+    }
 }

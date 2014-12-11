@@ -147,4 +147,10 @@ class BlogAdminController {
         return "redirect:/admin/blog";
     }
 
+    @RequestMapping(value = "refreshall", method = POST)
+    public String refreshAllBlogPosts() {
+        service.refreshAllPosts();
+        return "redirect:/admin/blog";
+    }
+
 }

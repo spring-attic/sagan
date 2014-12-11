@@ -171,4 +171,12 @@ public class BlogService {
             postRepository.save(post);
         }
     }
+
+    public void refreshAllPosts() {
+        List<Post> posts = postRepository.findAll();
+        for (Post post : posts) {
+            postFormAdapter.refreshPost(post);
+            postRepository.save(post);
+        }
+    }
 }
