@@ -1,11 +1,16 @@
-package sagan.blog.support;
+package sagan.support.markdown;
 
 import org.parboiled.common.StringUtils;
 import org.pegdown.Printer;
 import org.pegdown.VerbatimSerializer;
 import org.pegdown.ast.VerbatimNode;
 
-
+/**
+ * This custom {@link org.pegdown.VerbatimSerializer} will replace the default one in Pegdown.
+ * It is quite similar to the {@link org.pegdown.DefaultVerbatimSerializer}, but prints an additional
+ * {@code class="prettyprint"} HTML attribute in order to trigger the JavaScript google-code-prettify library.
+ * @see sagan.blog.support.PegdownMarkdownService
+ */
 public class PrettifyVerbatimSerializer implements VerbatimSerializer {
     public static final PrettifyVerbatimSerializer INSTANCE = new PrettifyVerbatimSerializer();
 

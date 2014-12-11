@@ -14,9 +14,9 @@ public class PegdownMarkdownServiceTests {
     }
 
     @Test
-    public void renderTitle() throws Exception {
-        String markdown = "### Title";
-        Assert.assertEquals("<h3>Title</h3>", service.renderToHtml(markdown));
+    public void renderLink() throws Exception {
+        String markdown = "[my link](http://spring.io)";
+        Assert.assertEquals("<p><a href=\"http://spring.io\">my link</a></p>", service.renderToHtml(markdown));
     }
 
     @Test
@@ -30,18 +30,21 @@ public class PegdownMarkdownServiceTests {
 
     @Test
     public void renderJavaScript() throws Exception {
-        String markdown = "##Title\n" +
-                "<script>alert('hello');</script>";
-        Assert.assertEquals("<h2>Title</h2>\n" +
-                "<script>alert('hello');</script>", service.renderToHtml(markdown));
+        String markdown = "<script>alert('hello');</script>";
+        Assert.assertEquals("<script>alert('hello');</script>", service.renderToHtml(markdown));
     }
 
     @Test
     public void renderRawHtml() throws Exception {
-        String markdown = "#Title\n" +
-                "<p>raw html</p>";
-        Assert.assertEquals("<h1>Title</h1>\n" +
-                "<p>raw html</p>", service.renderToHtml(markdown));
+        String markdown = "raw html<span>inline</span>";
+        Assert.assertEquals("<p>raw html<span>inline</span></p>", service.renderToHtml(markdown));
+    }
+
+    @Test
+    public void renderTitleAnchors() throws Exception {
+        String markdown = "### This is a title";
+        Assert.assertEquals("<h3><a href=\"#this-is-a-title\" class=\"anchor\" name=\"this-is-a-title\"></a>This is a title</h3>",
+                service.renderToHtml(markdown));
     }
 
 }

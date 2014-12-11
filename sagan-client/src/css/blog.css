@@ -73,20 +73,40 @@
 .blog--container .blog--post a:hover {
   text-decoration: underline;
 }
+.blog--container .blog--post h2, .blog--container .blog--post h3, .blog--container .blog--post h4 {
+  margin: 30px 0 15px -1em;
+  padding-left: 1em;
+  font-weight: 700;
+}
 .blog--container .blog--post h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   line-height: 28px;
-  font-weight: 700;
-  margin: 30px 0 15px;
 }
 .blog--container .blog--post h3, .blog--container .blog--post h4 {
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   line-height: 26px;
-  font-weight: 700;
-  margin: 30px 0 15px;
 }
+.blog--container .blog--post h2>a.anchor, .blog--container .blog--post h3>a.anchor,
+.blog--container .blog--post h4>a.anchor {
+  position: absolute;
+  visibility: hidden;
+  display: block;
+  margin-left: -1em;
+  vertical-align: text-top;
+  color: #34302d;
+}
+.blog--container .blog--post h2>a.anchor:before, .blog--container .blog--post h3>a.anchor:before,
+.blog--container .blog--post h4>a.anchor:before {
+  content: "\00A7";
+}
+.blog--container .blog--post h2:hover>a.anchor, .blog--container .blog--post h3:hover>a.anchor,
+.blog--container .blog--post h4:hover>a.anchor {
+  visibility: visible;
+  text-decoration: none;
+}
+
 .blog--container .blog--post p {
   margin-bottom: 20px;
 }
