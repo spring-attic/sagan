@@ -1,6 +1,4 @@
 var $ = require('jquery');
-var subscriptionTemplate = require('text!./subscription.html');
-
 /**
  * Composition plan for the data-newsletter-subscription feature.
  * @module
@@ -20,16 +18,15 @@ function initNewsletterSubscription() {
     // in parallel.  By injecting it dynamically, it doesn't block DOMReady.
 
     $(function() {
-        var subscription = $(subscriptionTemplate);
-
-        subscription
-            .appendTo($('.footer-newsletter--wrapper'))
-            .find('iframe')
+        // <iframe src="http://play.gopivotal.com/OSS_Website_Spring_SpringNewsletterSubscriptionEmailOnly.html" frameborder="0" scrolling="no" height="42px" width="324px" style="border:none" kwframeid="1"></iframe>
+        $('.footer-newsletter--container')
+            .append("<iframe src='/newsletter.html' frameborder='0' scrolling='no' height='42px' width='332px' style='border:none'/>");
+        $('.footer-newsletter--container').find("iframe")
             .load(function() {
                 // This should use an oocss state, like .loading instead
                 // of bootstrap's .invisible, but going with .invisible until
                 // there's time for CSS refactoring
-                subscription.removeClass('invisible');
+                $('.footer-newsletter--container').removeClass('invisible');
             });
     });
 

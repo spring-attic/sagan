@@ -554,8 +554,8 @@ input.floating-input:focus {
   width: auto;
   margin: 0;
 }
-.footer .footer-newsletter--container form {
-  margin: 0;
+.footer .footer-newsletter--container iframe {
+  border: 0;
 }
 .footer .footer-newsletter--container label {
   text-transform: uppercase;
@@ -567,28 +567,6 @@ input.floating-input:focus {
 .footer .footer-newsletter--container .footer-subscribe--input--container {
   background-color: white;
   border: 1px solid #f1f1f1;
-}
-.footer .footer-newsletter--container .footer-subscribe--input--container .footer-subscribe--input {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  font-size: 12px;
-  padding-left: 10px;
-}
-.footer .footer-newsletter--container .footer-subscribe--input--container .footer-subscribe--input:focus {
-  outline: none;
-}
-.footer .footer-newsletter--container .footer-subscribe--input--container .footer-subscibe--btn {
-  text-transform: uppercase;
-  background-color: #6db33f;
-  background-image: none;
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
-  color: #eeeeee;
-  text-shadow: none;
-  font-size: 12px;
-  padding: 9px 16px;
 }
 
 .item-dropdown-widget {
