@@ -1,6 +1,7 @@
 package sagan.guides.support;
 
 import sagan.guides.DefaultGuideMetadata;
+import sagan.guides.GuideMetadata;
 import sagan.guides.Tutorial;
 
 import org.junit.Before;
@@ -19,20 +20,20 @@ public class TutorialControllerTests {
 
     @Mock
     private Tutorials guides;
-    private Tutorial guide;
+    private GuideMetadata guide;
     private TutorialController controller;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         controller = new TutorialController(guides);
-        guide = new Tutorial(new DefaultGuideMetadata("my-org", "rest", "tut-rest", ""), guides, guides);
+        guide = new Tutorial(new DefaultGuideMetadata("my-org", "rest", "tut-rest", ""));
     }
 
     @Test
     public void loadImage() {
         byte[] image = "animage".getBytes();
-        given(guides.find(anyString())).willReturn(guide);
+        given(guides.findMetadata(anyString())).willReturn(guide);
         given(guides.loadImage(guide, "welcome.png")).willReturn(image);
         ResponseEntity<byte[]> responseEntity = controller.loadImage("rest", "welcome.png");
         assertThat(responseEntity.getBody(), is(image));

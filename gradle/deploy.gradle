@@ -184,6 +184,10 @@ if (project.hasProperty(TARGET_SPACE)) {
                 label = 'newrelic'
                 plan = 'standard'
             }
+            'sagan-cache' {
+                label = 'rediscloud'
+                plan = '25mb'
+            }
         }
     }
 

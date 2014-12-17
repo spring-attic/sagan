@@ -1,8 +1,11 @@
 package sagan.guides;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.Set;
 
-public interface GuideMetadata {
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
+public interface GuideMetadata extends DocumentMetadata {
 
     String getTitle();
 

@@ -11,9 +11,6 @@ import org.springframework.util.Assert;
 
 public abstract class DatabaseConfig {
 
-    public static final String CACHE_NAME = "cache.database";
-    public static final String CACHE_TTL = "${cache.database.timetolive:60}";
-
     @Bean
     public abstract DataSource dataSource();
 

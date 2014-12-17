@@ -1,7 +1,7 @@
 package sagan.guides.support;
 
-import sagan.guides.ContentProvider;
-import sagan.guides.UnderstandingDoc;
+import org.springframework.cache.annotation.Cacheable;
+import sagan.guides.*;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.github.RepoContent;
 
@@ -17,7 +17,11 @@ import org.springframework.web.client.RestClientException;
  * Repository implementation providing data access services for understanding docs.
  */
 @Component
-class UnderstandingDocs implements DocRepository<UnderstandingDoc>, ContentProvider<UnderstandingDoc> {
+public class UnderstandingDocs implements DocRepository<UnderstandingDoc, UnderstandingMetadata>, ContentProvider<UnderstandingDoc> {
+
+    public static final String CACHE_NAME = "cache.understanding";
+    public static final Class CACHE_TYPE = UnderstandingDoc.class;
+    public static final String CACHE_TTL = "${cache.docs.timetolive:300}";
 
     private static final String CONTENT_PATH = "/repos/%s/%s/contents/%s/README.md";
     private static final String SIDEBAR_PATH = "/repos/%s/%s/contents/%s/SIDEBAR.md";
@@ -36,26 +40,32 @@ class UnderstandingDocs implements DocRepository<UnderstandingDoc>, ContentProvi
      *
      * @throws ResourceNotFoundException if no content exists for the subject.
      */
+    @Cacheable(value = CACHE_NAME)
     public UnderstandingDoc find(String subject) {
-        UnderstandingDoc doc = new UnderstandingDoc(subject, this);
+        UnderstandingDoc doc = new UnderstandingDoc(subject);
         populate(doc);
         return doc;
     }
 
-    /**
-     * Find all understanding documents, leaving content unpopulated to be lazily loaded
-     * if and when necessary.
-     */
     @Override
-    public List<UnderstandingDoc> findAll() {
+    public List<UnderstandingMetadata> findAllMetadata() {
         return org.getRepoContents("understanding").stream()
                 .filter(RepoContent::isDirectory)
-                .map(repoContent -> new UnderstandingDoc(repoContent.getName(), this))
+                .map(repoContent -> new UnderstandingDoc(repoContent.getName()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void populate(UnderstandingDoc document) {
+    public List<UnderstandingDoc> findAll() {
+        return findAllMetadata()
+                .stream()
+                .map(m -> new UnderstandingDoc(m.getSubject()))
+                .map(t -> populate(t))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public UnderstandingDoc populate(UnderstandingDoc document) {
         String lcSubject = document.getSubject().toLowerCase();
         try {
             document.setContent(org.getMarkdownFileAsHtml(String.format(CONTENT_PATH, org.getName(), repoName,
@@ -66,6 +76,7 @@ class UnderstandingDocs implements DocRepository<UnderstandingDoc>, ContentProvi
             String msg = String.format("No understanding doc found for subject '%s'", lcSubject);
             throw new ResourceNotFoundException(msg, ex);
         }
+        return document;
     }
 
 }

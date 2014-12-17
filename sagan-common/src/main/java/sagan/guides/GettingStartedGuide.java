@@ -2,8 +2,12 @@ package sagan.guides;
 
 public class GettingStartedGuide extends AbstractGuide {
 
+    // only used for JSON serialization
+    public GettingStartedGuide() {
+    }
+
     @SuppressWarnings("rawtypes")
-    public GettingStartedGuide(GuideMetadata metadata, ContentProvider contentProvider, ImageProvider imageProvider) {
-        super(metadata, contentProvider, imageProvider);
+    public GettingStartedGuide(GuideMetadata metadata) {
+        super(metadata);
     }
 }

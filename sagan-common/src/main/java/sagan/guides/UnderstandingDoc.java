@@ -1,24 +1,46 @@
 package sagan.guides;
 
-public class UnderstandingDoc extends AbstractDocument {
+public class UnderstandingDoc implements UnderstandingMetadata, DocumentContent {
 
-    private final String subject;
+    private String subject;
+    private String content;
+    private String sidebar;
 
-    public UnderstandingDoc(String subject, ContentProvider<UnderstandingDoc> contentProvider) {
-        super(contentProvider);
+    // only used for JSON serialization
+    public UnderstandingDoc() {
+    }
+
+    public UnderstandingDoc(String subject) {
         this.subject = subject;
     }
 
     public UnderstandingDoc(String subject, final String content, final String sidebar) {
-        super((ContentProvider<UnderstandingDoc>) (doc) -> {
-            doc.setContent(content);
-            doc.setSidebar(sidebar);
-        });
         this.subject = subject;
+        this.content = content;
+        this.sidebar = sidebar;
     }
 
+    @Override
     public String getSubject() {
         return subject;
+    }
+
+    @Override
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public String getSidebar() {
+        return sidebar;
+    }
+
+    public void setSidebar(String sidebar) {
+        this.sidebar = sidebar;
     }
 
 }

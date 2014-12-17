@@ -1,6 +1,8 @@
 package sagan.support.github;
 
-public class MarkdownHtml {
+import java.io.Serializable;
+
+public class MarkdownHtml implements Serializable {
     private String html;
 
     public MarkdownHtml(String html) {

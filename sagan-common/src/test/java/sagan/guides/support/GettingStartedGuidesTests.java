@@ -13,6 +13,8 @@ import sagan.support.ResourceNotFoundException;
 import sagan.support.github.Readme;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -59,6 +61,8 @@ public class GettingStartedGuidesTests {
         REPO_INFO.setDescription(description);
         given(org.getReadme(anyString())).willReturn(readme);
         given(org.getRepoInfo(GUIDE_REPO_NAME)).willReturn(REPO_INFO);
+        given(org.getAsciidocGuide("/repos/mock-org/gs-rest-service/zipball")).willReturn(
+                new AsciidocGuide("Awesome Guide", new HashSet<>(), new HashSet<>(), "Table of C", new HashMap<>()));
         GettingStartedGuide guide = gsGuides.find(GUIDE_ID);
         assertThat(guide.getTitle(), equalTo("Awesome Guide"));
     }
@@ -69,6 +73,8 @@ public class GettingStartedGuidesTests {
         REPO_INFO.setDescription(description);
         given(org.getReadme(anyString())).willReturn(readme);
         given(org.getRepoInfo(GUIDE_REPO_NAME)).willReturn(REPO_INFO);
+        given(org.getAsciidocGuide("/repos/mock-org/gs-rest-service/zipball")).willReturn(
+                new AsciidocGuide("Awesome Guide", new HashSet<>(), new HashSet<>(), "Table of C", new HashMap<>()));
         GettingStartedGuide guide = gsGuides.find(GUIDE_ID);
         assertThat(guide.getSubtitle(), equalTo("Learn awesome stuff with this guide"));
     }

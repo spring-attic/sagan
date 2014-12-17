@@ -6,15 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestClientException;
 import sagan.guides.*;
 import sagan.projects.support.ProjectMetadataService;
 import sagan.support.ResourceNotFoundException;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Repository providing access to and caching of documents within the
@@ -22,11 +21,12 @@ import java.util.List;
  * http://github.com/spring-guides.
  */
 @Repository
-public class GettingStartedGuides implements DocRepository<GettingStartedGuide>,
+public class GettingStartedGuides implements DocRepository<GettingStartedGuide, GuideMetadata>,
         ContentProvider<GettingStartedGuide>, ImageProvider {
 
     public static final String CACHE_NAME = "cache.guides";
-    public static final String CACHE_TTL = "${cache.guides.timetolive:300}";
+    public static final Class CACHE_TYPE = GettingStartedGuide.class;
+    public static final String CACHE_TTL = "${cache.docs.timetolive:300}";
 
     static final String REPO_PREFIX = "gs-";
 
@@ -51,37 +51,43 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide>,
     public GettingStartedGuide find(String guide) {
         String repoName = REPO_PREFIX + guide;
         String description = getRepoDescription(repoName);
-        return new GettingStartedGuide(
+        GettingStartedGuide gsgGuide =  new GettingStartedGuide(
                 new DefaultGuideMetadata(
-                        org.getName(), guide, repoName, description, tagMultimap.get(repoName)), this, this);
+                        org.getName(), guide, repoName, description, tagMultimap.get(repoName)));
+        return populate(gsgGuide);
     }
 
     @Override
     public List<GettingStartedGuide> findAll() {
-        List<GettingStartedGuide> guides = new ArrayList<>();
-        for (GitHubRepo repo : org.findRepositoriesByPrefix(REPO_PREFIX)) {
-            String repoName = repo.getName();
-            GuideMetadata metadata =
-                    new DefaultGuideMetadata(
-                            org.getName(), repoName.replaceAll("^" + REPO_PREFIX, ""), repoName, repo.getDescription(),
-                            tagMultimap.get(repoName));
-            guides.add(new GettingStartedGuide(metadata, this, this));
-        }
-        return guides;
+        return findAllMetadata()
+                .stream()
+                    .map(m -> new GettingStartedGuide(m))
+                    .map(g -> populate(g))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void populate(GettingStartedGuide guide) {
+    public List<GuideMetadata> findAllMetadata() {
+        return org.findRepositoriesByPrefix(REPO_PREFIX)
+                .stream()
+                .map(repo -> new DefaultGuideMetadata(org.getName(), repo.getName().replaceAll("^" + REPO_PREFIX, ""),
+                        repo.getName(), repo.getDescription(), tagMultimap.get(repo.getName())))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public GettingStartedGuide populate(GettingStartedGuide guide) {
         String repoName = guide.getRepoName();
 
         AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org.getName(), repoName));
         tagMultimap.putAll(guide.getRepoName(), asciidocGuide.getTags());
         guide.setContent(asciidocGuide.getContent());
         guide.setSidebar(asciidoctorUtils.generateDynamicSidebar(projectMetadataService, asciidocGuide));
+        return guide;
     }
 
     @Override
-    public byte[] loadImage(Guide guide, String imageName) {
+    public byte[] loadImage(GuideMetadata guide, String imageName) {
         try {
             return org.getGuideImage(guide.getRepoName(), imageName);
         } catch (RestClientException ex) {

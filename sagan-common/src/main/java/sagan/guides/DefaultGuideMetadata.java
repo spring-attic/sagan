@@ -1,8 +1,12 @@
 package sagan.guides;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.HashSet;
 import java.util.Set;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 public class DefaultGuideMetadata implements GuideMetadata {
 
     private final static String REPO_ZIP_URL = "https://github.com/%s/%s/archive/master.zip";
@@ -13,13 +17,17 @@ public class DefaultGuideMetadata implements GuideMetadata {
     private final static String CI_STATUS_IMAGE_URL = "https://drone.io/github.com/%s/%s/status.png";
     private final static String CI_LATEST_URL = "https://drone.io/github.com/%s/%s/latest";
 
-    public final String ghOrgName;
-    public final String guideId;
-    public final String repoName;
-    public final String description;
-    public final Set<String> tags;
-    public final String title;
-    public final String subtitle;
+    private String ghOrgName;
+    private String guideId;
+    private String repoName;
+    private String description;
+    private Set<String> tags;
+    private String title;
+    private String subtitle;
+
+    // Only used for JSON serialization
+    public DefaultGuideMetadata() {
+    }
 
     public DefaultGuideMetadata(String ghOrgName, String guideId, String repoName, String description) {
         this(ghOrgName, guideId, repoName, description, new HashSet<>());
@@ -35,6 +43,10 @@ public class DefaultGuideMetadata implements GuideMetadata {
         String[] split = description.split("::", 2);
         title = split[0].trim();
         subtitle = (split.length > 1) ? split[1].trim() : "";
+    }
+
+    public String getGhOrgName() {
+        return ghOrgName;
     }
 
     public String getGuideId() {
@@ -61,30 +73,37 @@ public class DefaultGuideMetadata implements GuideMetadata {
         return subtitle;
     }
 
+    @JsonIgnore
     public String getGitRepoHttpsUrl() {
         return String.format(REPO_HTTPS_URL, ghOrgName, repoName);
     }
 
+    @JsonIgnore
     public String getGithubHttpsUrl() {
         return String.format(GITHUB_HTTPS_URL, ghOrgName, repoName);
     }
 
+    @JsonIgnore
     public String getZipUrl() {
         return String.format(REPO_ZIP_URL, ghOrgName, repoName);
     }
 
+    @JsonIgnore
     public String getGitRepoSshUrl() {
         return String.format(REPO_SSH_URL, ghOrgName, repoName);
     }
 
+    @JsonIgnore
     public String getGitRepoSubversionUrl() {
         return String.format(REPO_SUBVERSION_URL, ghOrgName, repoName);
     }
 
+    @JsonIgnore
     public String getCiStatusImageUrl() {
         return String.format(CI_STATUS_IMAGE_URL, ghOrgName, repoName);
     }
 
+    @JsonIgnore
     public String getCiLatestUrl() {
         return String.format(CI_LATEST_URL, ghOrgName, repoName);
     }

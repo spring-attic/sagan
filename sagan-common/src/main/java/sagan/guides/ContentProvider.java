@@ -1,7 +1,7 @@
 package sagan.guides;
 
-public interface ContentProvider<T extends Document> {
+public interface ContentProvider<T extends DocumentContent> {
 
-    void populate(T document);
+    T populate(T document);
 
 }

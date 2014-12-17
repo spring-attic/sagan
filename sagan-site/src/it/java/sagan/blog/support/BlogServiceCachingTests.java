@@ -1,19 +1,18 @@
 package sagan.blog.support;
 
-import sagan.DatabaseConfig;
-import saganx.AbstractIntegrationTests;
-
 import org.junit.Test;
-
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.Advised;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.interceptor.BeanFactoryCacheOperationSourceAdvisor;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ReflectionUtils;
+import saganx.AbstractIntegrationTests;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 /**
@@ -44,15 +43,25 @@ public class BlogServiceCachingTests extends AbstractIntegrationTests {
         }
         assertTrue("BlogService is advised, but does not have caching advisor", hasCachingAdvisor);
         ReflectionUtils.doWithMethods(BlogService.class, (method) -> {
-                Cacheable cacheable = AnnotationUtils.findAnnotation(method, Cacheable.class);
-                String methodName = method.getName();
-                if (methodName.matches("^get.*Published.*$")) {
-                    assertNotNull("Method " + methodName + " was expected to have Cacheable annotation.", cacheable);
-                    String[] cacheName = cacheable.value();
-                    assertThat(cacheName[0], equalTo(DatabaseConfig.CACHE_NAME));
-                } else {
-                    assertNull("Method " + methodName + " was not expected to have Cacheable annotation.", cacheable);
-                }
-            });
+
+            String methodName = method.getName();
+            Cacheable cacheable = AnnotationUtils.findAnnotation(method, Cacheable.class);
+            CacheEvict cacheEvict = AnnotationUtils.findAnnotation(method, CacheEvict.class);
+
+            if (methodName.equals("getPublishedPost")) {
+                assertNotNull("Method " + methodName + " was expected to have Cacheable annotation.", cacheable);
+                String[] cacheName = cacheable.value();
+                assertThat(cacheName[0], equalTo(BlogService.CACHE_NAME));
+            }
+            else if (methodName.equals("deletePost") || methodName.equals("updatePost")) {
+                assertNotNull("Method " + methodName + " was expected to have Cacheable annotation.", cacheEvict);
+                String[] cacheName = cacheEvict.value();
+                assertThat(cacheName[0], equalTo(BlogService.CACHE_NAME));
+            }
+            else {
+                assertNull("Method " + methodName + " was not expected to have Cacheable annotation.", cacheable);
+                assertNull("Method " + methodName + " was not expected to have CacheEvict annotation.", cacheEvict);
+            }
+        });
     }
 }

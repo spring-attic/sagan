@@ -32,8 +32,8 @@ class GuideIndexController {
 
     @RequestMapping(value = "/guides", method = { GET, HEAD })
     public String viewIndex(Model model) {
-        model.addAttribute("guides", gsGuides.findAll());
-        model.addAttribute("tutorials", tutorials.findAll());
+        model.addAttribute("guides", gsGuides.findAllMetadata());
+        model.addAttribute("tutorials", tutorials.findAllMetadata());
         return "guides/index";
     }
 }

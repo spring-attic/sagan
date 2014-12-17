@@ -34,7 +34,7 @@ public class GettingStartedGuideControllerTests {
         controller = new GettingStartedGuideController(guides);
         model = new ExtendedModelMap();
         guide = new GettingStartedGuide(
-                new DefaultGuideMetadata("my-org", "rest-service", "gs-rest-service", ""), guides, guides);
+                new DefaultGuideMetadata("my-org", "rest-service", "gs-rest-service", ""));
     }
 
     @Test

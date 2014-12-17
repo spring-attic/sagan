@@ -11,7 +11,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
  * before deploying to Cloud Foundry.
  *
  * Mutual exclusivity and implicit activation of profiles as described below is enforced
- * by {@link SaganApplication#setupProfiles(ConfigurableEnvironment)}.
+ * by {@link sagan.SaganApplication} {@code configureProfiles} method.
  */
 public final class SaganProfiles {
     /**
@@ -36,7 +36,7 @@ public final class SaganProfiles {
      * as opposed to running {@link #STANDALONE}, and should expect to find data sources,
      * etc as Cloud Foundry services, as opposed to finding them in-memory.
      *
-     * @see sagan.util.service.db.CloudFoundryDatabaseConfig
+     * @see sagan.CloudFoundryDatabaseConfig
      */
     public static final String CLOUDFOUNDRY = "cloudfoundry";
 
@@ -51,7 +51,7 @@ public final class SaganProfiles {
      * code to programmatically activate it. This makes running integration tests that
      * expect in-memory resources simple to set up.
      *
-     * @see sagan.util.service.db.StandaloneDatabaseConfig
+     * @see sagan.StandaloneDatabaseConfig
      * @see org.springframework.core.env.AbstractEnvironment#RESERVED_DEFAULT_PROFILE_NAME
      */
     public static final String STANDALONE = "default";

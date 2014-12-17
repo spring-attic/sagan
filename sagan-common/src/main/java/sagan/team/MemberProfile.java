@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 
 import org.springframework.util.StringUtils;
@@ -89,6 +90,7 @@ public class MemberProfile {
         this.name = name;
     }
 
+    @JsonIgnore
     public String getFullName() {
         return name == null ? getUsername() : name;
     }
@@ -201,6 +203,7 @@ public class MemberProfile {
         return !StringUtils.isEmpty(gplusId);
     }
 
+    @JsonIgnore
     public Link getTwitterLink() {
         if (StringUtils.isEmpty(getTwitterUsername())) {
             return null;
@@ -208,6 +211,7 @@ public class MemberProfile {
         return new Link(String.format("http://twitter.com/%s", getTwitterUsername()), "@" + getTwitterUsername());
     }
 
+    @JsonIgnore
     public Link getSpeakerdeckLink() {
         if (StringUtils.isEmpty(getSpeakerdeckUsername())) {
             return null;
@@ -216,6 +220,7 @@ public class MemberProfile {
         return new Link("https://" + pathAndHost, pathAndHost);
     }
 
+    @JsonIgnore
     public Link getGithubLink() {
         if (StringUtils.isEmpty(getGithubUsername())) {
             return null;
@@ -224,6 +229,7 @@ public class MemberProfile {
         return new Link("https://" + pathAndHost, pathAndHost);
     }
 
+    @JsonIgnore
     public Link getLanyrdLink() {
         if (StringUtils.isEmpty(getLanyrdUsername())) {
             return null;
@@ -232,6 +238,7 @@ public class MemberProfile {
         return new Link("https://" + pathAndHost, pathAndHost);
     }
 
+    @JsonIgnore
     public Link getGplusLink() {
         if (StringUtils.isEmpty(getGplusId())) {
             return null;
@@ -248,6 +255,7 @@ public class MemberProfile {
         this.geoLocation = geoLocation;
     }
 
+    @JsonIgnore
     public TeamLocation getTeamLocation() {
         if (geoLocation == null)
             return null;

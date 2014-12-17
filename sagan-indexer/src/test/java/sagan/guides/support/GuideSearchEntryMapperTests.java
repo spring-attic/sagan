@@ -14,20 +14,16 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class GuideSearchEntryMapperTests {
 
-    private Guide guide = new GettingStartedGuide(
-            new DefaultGuideMetadata("my-org", "xyz", "gs-xyz", "Guide XYZ Title::Guide XYZ Subtitle"),
-            (ContentProvider<GettingStartedGuide>) (gsg) -> {
-                gsg.setContent("Some Guide Content");
-                gsg.setSidebar("Some Sidebar Content");
-            },
-            (gsg, imageName) -> new byte[0]
-    );
-
+    private GettingStartedGuide guide;
     private GuideSearchEntryMapper guideMapper = new GuideSearchEntryMapper();
     private SearchEntry searchEntry;
 
     @Before
     public void setUp() throws Exception {
+        guide = new GettingStartedGuide(
+                new DefaultGuideMetadata("my-org", "xyz", "gs-xyz", "Guide XYZ Title::Guide XYZ Subtitle"));
+        guide.setContent("Some Guide Content");
+        guide.setSidebar("Some Sidebar Content");
         searchEntry = guideMapper.map(guide);
     }
 

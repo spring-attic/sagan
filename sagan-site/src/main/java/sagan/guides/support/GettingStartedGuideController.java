@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sagan.guides.GettingStartedGuide;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.Section;
 
@@ -33,7 +34,8 @@ class GettingStartedGuideController {
 
     @RequestMapping("/{guide}/")
     public String viewGuide(@PathVariable String guide, Model model) {
-        model.addAttribute("guide", guides.find(guide));
+        GettingStartedGuide gsGuide = guides.find(guide);
+        model.addAttribute("guide", gsGuide);
         model.addAttribute("description", "this guide is designed to get you productive as quickly as " +
                 "possible and using the latest Spring project releases and techniques as recommended by the Spring team");
         return "guides/gs/guide";
@@ -41,6 +43,6 @@ class GettingStartedGuideController {
 
     @RequestMapping("/{guide}/images/{image:[a-zA-Z0-9._-]+}")
     public ResponseEntity<byte[]> loadImage(@PathVariable String guide, @PathVariable String image) {
-        return new ResponseEntity<>(guides.find(guide).getImage(image), HttpStatus.OK);
+        return new ResponseEntity<>(guides.loadImage(guides.find(guide), image), HttpStatus.OK);
     }
 }

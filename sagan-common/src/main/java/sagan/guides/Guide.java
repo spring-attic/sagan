@@ -1,7 +1,8 @@
 package sagan.guides;
 
-public interface Guide extends Document, GuideMetadata {
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-    byte[] getImage(String name);
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
+public interface Guide extends DocumentContent, GuideMetadata {
 
 }

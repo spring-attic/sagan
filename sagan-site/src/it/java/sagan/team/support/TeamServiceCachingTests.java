@@ -1,10 +1,6 @@
 package sagan.team.support;
 
-import sagan.DatabaseConfig;
-import saganx.AbstractIntegrationTests;
-
 import org.junit.Test;
-
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.Advised;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +8,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.interceptor.BeanFactoryCacheOperationSourceAdvisor;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ReflectionUtils;
+import saganx.AbstractIntegrationTests;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 /**
@@ -46,11 +44,12 @@ public class TeamServiceCachingTests extends AbstractIntegrationTests {
         ReflectionUtils.doWithMethods(TeamService.class, method -> {
             Cacheable cacheable = AnnotationUtils.findAnnotation(method, Cacheable.class);
             String methodName = method.getName();
-            if (methodName.equals("fetchMemberProfileUsername") || methodName.equals("fetchActiveMembers")) {
+            if (methodName.equals("fetchMemberProfileUsername")) {
                 assertNotNull("Method " + methodName + " was expected to have Cacheable annotation.", cacheable);
                 String[] cacheName = cacheable.value();
-                assertThat(cacheName[0], equalTo(DatabaseConfig.CACHE_NAME));
-            } else {
+                assertThat(cacheName[0], equalTo(TeamService.CACHE_NAME));
+            }
+            else {
                 assertNull("Method " + methodName + " was not expected to have Cacheable annotation.", cacheable);
             }
         });

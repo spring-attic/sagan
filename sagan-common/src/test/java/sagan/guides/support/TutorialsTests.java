@@ -50,6 +50,7 @@ public class TutorialsTests {
     @Test
     public void findAll() {
         given(org.findRepositoriesByPrefix(Tutorials.REPO_PREFIX)).willReturn(singletonList(repo));
+        given(org.getAsciidocGuide("/repos/mock-org/tut-rest/zipball")).willReturn(tutorial);
 
         List<Tutorial> all = tutorials.findAll();
         assertThat(all.size(), is(1));

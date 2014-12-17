@@ -41,7 +41,7 @@ class TutorialController {
 
     @RequestMapping("/{tutorial}/images/{image:[a-zA-Z0-9._-]+}")
     public ResponseEntity<byte[]> loadImage(@PathVariable String tutorial, @PathVariable String image) {
-        return new ResponseEntity<>(tutorials.find(tutorial).getImage(image), HttpStatus.OK);
+        return new ResponseEntity<>(tutorials.loadImage(tutorials.findMetadata(tutorial), image), HttpStatus.OK);
     }
 
 }

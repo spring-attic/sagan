@@ -90,6 +90,7 @@ public class EditTeamMemberTests extends AbstractIntegrationTests {
     private void saveProfile(String editTeamUri) throws Exception {
         MockHttpServletRequestBuilder requestBuilder = put(editTeamUri).principal(principal);
         requestBuilder.param("name", "Some_ Guy_");
+        requestBuilder.param("username", "some-guy");
         requestBuilder.param("jobTitle", "Rock Star");
         requestBuilder.param("location", "London_");
         requestBuilder.param("bio", "I am just a guy_");

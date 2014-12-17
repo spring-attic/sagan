@@ -18,12 +18,12 @@ dependencies {
 
     def vJackson = '2.4.3'
 
-    compile "org.springframework:spring-context"
-    compile "org.springframework.security:spring-security-core"
+    compile 'org.springframework:spring-context'
+    compile 'org.springframework.security:spring-security-core'
     compile 'org.springframework.social:spring-social-github:1.0.0.M4'
-    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    compile "org.apache.httpcomponents:httpclient"
+    compile 'org.apache.httpcomponents:httpclient'
 
     compile 'org.elasticsearch:elasticsearch:0.90.2'
     compile 'io.searchbox:jest:0.0.4'

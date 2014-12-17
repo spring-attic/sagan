@@ -3,21 +3,7 @@ package sagan;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import sagan.guides.support.GettingStartedGuides;
-import sagan.support.cache.CachedRestClient;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
-
-import javax.sql.DataSource;
-
 import org.h2.server.web.WebServlet;
-import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health.Builder;
 import org.springframework.boot.actuate.health.HealthIndicator;
@@ -26,19 +12,17 @@ import org.springframework.boot.autoconfigure.social.SocialWebAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.orm.jpa.EntityScan;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCache;
-import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
-import com.google.common.cache.CacheBuilder;
+import javax.sql.DataSource;
 
 /**
  * Main configuration resource for the Sagan web application. The use of @ComponentScan
@@ -49,7 +33,6 @@ import com.google.common.cache.CacheBuilder;
  */
 @EnableAutoConfiguration(exclude=SocialWebAutoConfiguration.class)
 @Configuration
-@EnableCaching(proxyTargetClass = true)
 @ComponentScan
 @EntityScan
 @EnableJpaRepositories
@@ -120,28 +103,4 @@ public class SiteConfig {
         return new DispatcherServlet();
     }
 
-    @Bean
-    public CacheManager cacheManager(@Value(CachedRestClient.CACHE_TTL) Long cacheNetworkTimeToLive,
-                                     @Value(DatabaseConfig.CACHE_TTL) Long cacheDatabaseTimeToLive,
-                                     @Value(GettingStartedGuides.CACHE_TTL) Long cacheGuideTimeToLive) {
-        SimpleCacheManager cacheManager = new SimpleCacheManager();
-
-        List<ConcurrentMapCache> cacheList = new ArrayList<>();
-        cacheList.add(createConcurrentMapCache(cacheNetworkTimeToLive, CachedRestClient.CACHE_NAME, -1));
-        cacheList.add(createConcurrentMapCache(cacheDatabaseTimeToLive, DatabaseConfig.CACHE_NAME, 50));
-        cacheList.add(createConcurrentMapCache(cacheGuideTimeToLive, GettingStartedGuides.CACHE_NAME, 100));
-        cacheManager.setCaches(cacheList);
-        return cacheManager;
-    }
-
-    private ConcurrentMapCache createConcurrentMapCache(Long timeToLive, String name, long cacheSize) {
-        CacheBuilder<Object, Object> cacheBuilder =
-                CacheBuilder.newBuilder().expireAfterWrite(timeToLive, TimeUnit.SECONDS);
-
-        if (cacheSize >= 0) {
-            cacheBuilder.maximumSize(cacheSize);
-        }
-        ConcurrentMap<Object, Object> map = cacheBuilder.build().asMap();
-        return new ConcurrentMapCache(name, map, false);
-    }
 }

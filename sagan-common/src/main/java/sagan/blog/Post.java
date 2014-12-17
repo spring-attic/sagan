@@ -1,34 +1,22 @@
 package sagan.blog;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
+import org.springframework.util.StringUtils;
 import sagan.team.MemberProfile;
 
-import java.io.Serializable;
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import org.hibernate.annotations.Type;
-
-import org.springframework.util.StringUtils;
 
 /**
  * JPA Entity representing an individual blog post.
  */
 @Entity
 @SuppressWarnings("serial")
-public class Post implements Serializable {
+public class Post {
 
     private static final SimpleDateFormat SLUG_DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -190,10 +178,12 @@ public class Post implements Serializable {
         return broadcast;
     }
 
+    @JsonIgnore
     public boolean isScheduled() {
         return publishAt == null;
     }
 
+    @JsonIgnore
     public boolean isLiveOn(Date date) {
         return !(isDraft() || publishAt.after(date));
     }
@@ -208,6 +198,7 @@ public class Post implements Serializable {
         }
     }
 
+    @JsonIgnore
     public String getAdminSlug() {
         return String.format("%s-%s", getId(), getSlug());
     }
@@ -216,6 +207,7 @@ public class Post implements Serializable {
         return String.format("%s/%s", SLUG_DATE_FORMAT.format(getPublishAt()), getSlug());
     }
 
+    @JsonIgnore
     private String getSlug() {
         if (title == null) {
             return "";

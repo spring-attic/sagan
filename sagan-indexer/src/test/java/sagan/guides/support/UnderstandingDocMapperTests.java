@@ -18,10 +18,10 @@ import static org.hamcrest.Matchers.*;
 public class UnderstandingDocMapperTests {
 
     private final UnderstandingDocMapper mapper = new UnderstandingDocMapper();
-    private final UnderstandingDoc doc = new UnderstandingDoc("foo", udoc -> {
-        udoc.setContent("<h1>Understanding: foo</h1><p>content</p>");
-        udoc.setSidebar("<p>sidebar</p>");
-    });
+    private final UnderstandingDoc doc = new UnderstandingDoc("foo",
+            "<h1>Understanding: foo</h1><p>content</p>",
+            "<p>sidebar</p>");
+
     private final SearchEntry entry = mapper.map(doc);
 
     @Test

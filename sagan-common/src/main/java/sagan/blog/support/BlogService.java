@@ -1,8 +1,16 @@
 package sagan.blog.support;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import sagan.DatabaseConfig;
+import org.springframework.stereotype.Service;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.PostMovedException;
@@ -15,16 +23,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
 /**
  * Service providing high-level, selectively cached data access and other {@link Post}
  * -related operations.
@@ -33,6 +31,10 @@ import org.springframework.stereotype.Service;
 public class BlogService {
 
     private static final Log logger = LogFactory.getLog(BlogService.class);
+
+    public static final String CACHE_NAME = "cache.blog";
+    public static final Class CACHE_TYPE = Post.class;
+    public static final String CACHE_TTL = "${cache.blog.timetolive:60}";
 
     private final PostFormAdapter postFormAdapter;
     private final PostRepository postRepository;
@@ -80,12 +82,11 @@ public class BlogService {
         return postRepository.findByDraftFalseAndPublishAtAfter(dateFactory.now(), pageRequest);
     }
 
-    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPosts(Pageable pageRequest) {
         return postRepository.findByDraftFalseAndPublishAtBefore(dateFactory.now(), pageRequest);
     }
 
-    @Cacheable(DatabaseConfig.CACHE_NAME)
+    @Cacheable(CACHE_NAME)
     public Post getPublishedPost(String publicSlug) {
         Date now = dateFactory.now();
         Post post = postRepository.findByPublicSlugAndDraftFalseAndPublishAtBefore(publicSlug, now);
@@ -100,37 +101,30 @@ public class BlogService {
         return post;
     }
 
-    @Cacheable(DatabaseConfig.CACHE_NAME)
     public List<Post> getAllPublishedPosts() {
         return postRepository.findByDraftFalseAndPublishAtBefore(dateFactory.now());
     }
 
-    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsByDate(int year, int month, int day, Pageable pageRequest) {
         return postRepository.findByDate(year, month, day, pageRequest);
     }
 
-    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsByDate(int year, int month, Pageable pageRequest) {
         return postRepository.findByDate(year, month, pageRequest);
     }
 
-    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsByDate(int year, Pageable pageRequest) {
         return postRepository.findByDate(year, pageRequest);
     }
 
-    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPosts(PostCategory category, Pageable pageRequest) {
         return postRepository.findByCategoryAndDraftFalseAndPublishAtBefore(category, dateFactory.now(), pageRequest);
     }
 
-    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedBroadcastPosts(Pageable pageRequest) {
         return postRepository.findByBroadcastAndDraftFalseAndPublishAtBefore(true, dateFactory.now(), pageRequest);
     }
 
-    @Cacheable(DatabaseConfig.CACHE_NAME)
     public Page<Post> getPublishedPostsForMember(MemberProfile profile, Pageable pageRequest) {
         return postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, dateFactory.now(), pageRequest);
     }
@@ -146,12 +140,14 @@ public class BlogService {
         return post;
     }
 
+    @CacheEvict(value = CACHE_NAME, key = "#post.publicSlug")
     public void updatePost(Post post, PostForm postForm) {
         postFormAdapter.updatePostFromPostForm(post, postForm);
         postRepository.save(post);
         saveToIndex(post);
     }
 
+    @CacheEvict(value = CACHE_NAME, key = "#post.publicSlug")
     public void deletePost(Post post) {
         postRepository.delete(post);
     }
