@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.springframework.social.github.api.GitHubRepo;
+import org.springframework.util.Assert;
 import org.springframework.web.client.RestClientException;
 import sagan.guides.GettingStartedGuide;
 import sagan.guides.Guide;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
@@ -117,6 +119,22 @@ public class GettingStartedGuidesTests {
         given(org.getGuideImage(eq(GUIDE_REPO_NAME), eq(unknownImage))).willThrow(RestClientException.class);
 
         gsGuides.loadImage(gsRestService, unknownImage);
+    }
+
+    @Test
+    public void testParseGuideName() throws Exception {
+        String guideName = gsGuides.parseGuideName("gs-guide-name");
+        assertThat(guideName, is("guide-name"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testParseEmptyGuideName() throws Exception {
+        gsGuides.parseGuideName("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testParseInvalidGuideName() throws Exception {
+        gsGuides.parseGuideName("invalid");
     }
 
 }

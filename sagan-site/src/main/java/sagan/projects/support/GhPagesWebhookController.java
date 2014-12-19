@@ -88,7 +88,7 @@ class GhPagesWebhookController {
         Map<?, ?> push;
         try {
             push = this.objectMapper.readValue(payload, Map.class);
-            logger.info("Recieved new webhook payload for push with head_commit message: "
+            logger.info("Received new webhook payload for push with head_commit message: "
                     + ((Map<?, ?>) push.get("head_commit")).get("message"));
         } catch (JsonParseException ex) {
             headers.set("Status", "400 Bad Request");

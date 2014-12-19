@@ -1,10 +1,12 @@
 package sagan.guides.support;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 import org.springframework.web.client.RestClientException;
 import sagan.guides.*;
 import sagan.projects.support.ProjectMetadataService;
@@ -21,11 +23,11 @@ public class Tutorials implements DocRepository<Tutorial, GuideMetadata>, Conten
 
     static final String REPO_PREFIX = "tut-";
 
-    private static final Log log = LogFactory.getLog(Tutorials.class);
+    private static final Logger log = LoggerFactory.getLogger(Tutorials.class);
 
     public static final String CACHE_NAME = "cache.tutorials";
     public static final Class CACHE_TYPE = Tutorial.class;
-    public static final String CACHE_TTL = "${cache.tutorials.timetolive:300}";
+    public static final String CACHE_TTL = "${cache.tutorials.timetolive:0}"; // never expires
 
     private static final String REPO_BASE_PATH = "/repos/%s/%s";
     private static final String README_PATH_ASC = REPO_BASE_PATH + "/zipball";
@@ -42,24 +44,24 @@ public class Tutorials implements DocRepository<Tutorial, GuideMetadata>, Conten
 
     @Override
     @Cacheable(value = CACHE_NAME)
-    public Tutorial find(String guide) {
-        return findByPage(guide);
+    public Tutorial find(String tutorial) {
+        return findByPage(tutorial);
     }
 
     @Cacheable(value = CACHE_NAME)
-    public Tutorial findByPage(String guide) {
-        return populate(new Tutorial(findMetadata(guide)));
+    public Tutorial findByPage(String tutorial) {
+        return populate(new Tutorial(findMetadata(tutorial)));
     }
 
-    public GuideMetadata findMetadata(String guide) {
-        String repoName = REPO_PREFIX + guide;
+    public GuideMetadata findMetadata(String tutorial) {
+        String repoName = REPO_PREFIX + tutorial;
         String description;
         try {
             description = org.getRepoInfo(repoName).getDescription();
         } catch (RestClientException ex) {
             description = "";
         }
-        return new DefaultGuideMetadata(org.getName(), guide, repoName, description);
+        return new DefaultGuideMetadata(org.getName(), tutorial, repoName, description);
     }
 
     @Override
@@ -93,14 +95,25 @@ public class Tutorials implements DocRepository<Tutorial, GuideMetadata>, Conten
     }
 
     @Override
-    public byte[] loadImage(GuideMetadata guide, String imageName) {
+    public byte[] loadImage(GuideMetadata tutorialMetadata, String imageName) {
         try {
-            return org.getGuideImage(guide.getRepoName(), imageName);
+            return org.getGuideImage(tutorialMetadata.getRepoName(), imageName);
         } catch (RestClientException ex) {
-            String msg = String.format("Could not load image '%s' for repo '%s'", imageName, guide.getRepoName());
+            String msg = String.format("Could not load image '%s' for repo '%s'", imageName, tutorialMetadata.getRepoName());
             log.warn(msg, ex);
             throw new ResourceNotFoundException(msg, ex);
         }
+    }
+
+    public String parseTutorialName(String repositoryName) {
+        Assert.hasText(repositoryName);
+        Assert.isTrue(repositoryName.startsWith(REPO_PREFIX));
+        return repositoryName.substring(REPO_PREFIX.length());
+    }
+
+    @CacheEvict(value = CACHE_NAME)
+    public void evictFromCache(String tutorial) {
+        log.info("Tutorial evicted from cache: {}", tutorial);
     }
 
 }

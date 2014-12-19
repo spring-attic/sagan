@@ -1,18 +1,23 @@
 package sagan.guides.support;
 
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.SetMultimap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import sagan.guides.*;
 import sagan.projects.support.ProjectMetadataService;
 import sagan.support.ResourceNotFoundException;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -26,7 +31,7 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
 
     public static final String CACHE_NAME = "cache.guides";
     public static final Class CACHE_TYPE = GettingStartedGuide.class;
-    public static final String CACHE_TTL = "${cache.docs.timetolive:300}";
+    public static final String CACHE_TTL = "${cache.docs.timetolive:0}"; // never expires
 
     static final String REPO_PREFIX = "gs-";
 
@@ -36,7 +41,7 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
     private static final String README_PATH_ASC = REPO_BASE_PATH + "/zipball";
 
     private final GuideOrganization org;
-    private final SetMultimap<String, String> tagMultimap = LinkedHashMultimap.create();
+    private final MultiValueMap<String, String> tagMultimap = new LinkedMultiValueMap();
     private final ProjectMetadataService projectMetadataService;
     private final AsciidoctorUtils asciidoctorUtils = new AsciidoctorUtils();
 
@@ -51,9 +56,9 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
     public GettingStartedGuide find(String guide) {
         String repoName = REPO_PREFIX + guide;
         String description = getRepoDescription(repoName);
+        Set<String> tags = tagMultimap.get(repoName) != null ? new HashSet<>(tagMultimap.get(repoName)) : Collections.emptySet();
         GettingStartedGuide gsgGuide =  new GettingStartedGuide(
-                new DefaultGuideMetadata(
-                        org.getName(), guide, repoName, description, tagMultimap.get(repoName)));
+                new DefaultGuideMetadata(org.getName(), guide, repoName, description, tags));
         return populate(gsgGuide);
     }
 
@@ -68,10 +73,12 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
 
     @Override
     public List<GuideMetadata> findAllMetadata() {
+
         return org.findRepositoriesByPrefix(REPO_PREFIX)
                 .stream()
                 .map(repo -> new DefaultGuideMetadata(org.getName(), repo.getName().replaceAll("^" + REPO_PREFIX, ""),
-                        repo.getName(), repo.getDescription(), tagMultimap.get(repo.getName())))
+                        repo.getName(), repo.getDescription(),
+                        new HashSet<String>(tagMultimap.getOrDefault(repo.getName(), Collections.emptyList()))))
                 .collect(Collectors.toList());
     }
 
@@ -80,7 +87,7 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
         String repoName = guide.getRepoName();
 
         AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org.getName(), repoName));
-        tagMultimap.putAll(guide.getRepoName(), asciidocGuide.getTags());
+        asciidocGuide.getTags().forEach(tag -> tagMultimap.set(guide.getRepoName(), tag));
         guide.setContent(asciidocGuide.getContent());
         guide.setSidebar(asciidoctorUtils.generateDynamicSidebar(projectMetadataService, asciidocGuide));
         return guide;
@@ -95,6 +102,18 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
             log.warn(msg, ex);
             throw new ResourceNotFoundException(msg, ex);
         }
+    }
+
+    public String parseGuideName(String repositoryName) {
+        Assert.hasText(repositoryName);
+        Assert.isTrue(repositoryName.startsWith(REPO_PREFIX));
+        return repositoryName.substring(REPO_PREFIX.length());
+    }
+
+    @CacheEvict(CACHE_NAME)
+    public void evictFromCache(String guide) {
+        // No op, this method will trigger cache eviction for the guide given as a parameter
+        log.info("Guide evicted from cache: {}", guide);
     }
 
     protected String getRepoDescription(String repoName) {

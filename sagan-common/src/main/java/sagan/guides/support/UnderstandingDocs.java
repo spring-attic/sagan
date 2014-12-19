@@ -1,5 +1,8 @@
 package sagan.guides.support;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import sagan.guides.*;
 import sagan.support.ResourceNotFoundException;
@@ -19,9 +22,11 @@ import org.springframework.web.client.RestClientException;
 @Component
 public class UnderstandingDocs implements DocRepository<UnderstandingDoc, UnderstandingMetadata>, ContentProvider<UnderstandingDoc> {
 
+    private static final Log log = LogFactory.getLog(UnderstandingDocs.class);
+
     public static final String CACHE_NAME = "cache.understanding";
     public static final Class CACHE_TYPE = UnderstandingDoc.class;
-    public static final String CACHE_TTL = "${cache.docs.timetolive:300}";
+    public static final String CACHE_TTL = "${cache.docs.timetolive:0}"; // never expires
 
     private static final String CONTENT_PATH = "/repos/%s/%s/contents/%s/README.md";
     private static final String SIDEBAR_PATH = "/repos/%s/%s/contents/%s/SIDEBAR.md";
@@ -77,6 +82,11 @@ public class UnderstandingDocs implements DocRepository<UnderstandingDoc, Unders
             throw new ResourceNotFoundException(msg, ex);
         }
         return document;
+    }
+
+    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    public void clearCache() {
+        log.info("Clearing all entries from Understanding docs cache");
     }
 
 }

@@ -1,0 +1,112 @@
+{
+  "ref": "refs/heads/master",
+  "after": "a427f3f4db6c96ae5e86b610d0eef149393c9996",
+  "before": "3193db21394092a84d973bef8c4a3741aec1b814",
+  "created": false,
+  "deleted": false,
+  "forced": false,
+  "compare": "https://github.com/spring-guides/gs-test-guide/compare/3193db213940...a427f3f4db6c",
+  "commits": [
+    {
+      "id": "6bdc0feaec5ccc85a9c4fe2a3e62bebe5a69e8fc",
+      "distinct": true,
+      "message": "Touch index-common to trigger gh-pages build",
+      "timestamp": "2013-08-10T15:56:23-07:00",
+      "url": "https://github.com/spring-projects/gs-test-guide/commit/6bdc0feaec5ccc85a9c4fe2a3e62bebe5a69e8fc",
+      "author": {
+        "name": "Chris Beams",
+        "email": "cbeams@gopivotal.com",
+        "username": "cbeams"
+      },
+      "committer": {
+        "name": "Chris Beams",
+        "email": "cbeams@gopivotal.com",
+        "username": "cbeams"
+      },
+      "added": [
+      ],
+      "removed": [
+      ],
+      "modified": [
+        "index-common.html"
+      ]
+    },
+    {
+      "id": "a427f3f4db6c96ae5e86b610d0eef149393c9996",
+      "distinct": true,
+      "message": "Remove empty newline at end of index-common",
+      "timestamp": "2013-08-10T16:12:39-07:00",
+      "url": "https://github.com/spring-guides/gs-test-guide/commit/a427f3f4db6c96ae5e86b610d0eef149393c9996",
+      "author": {
+        "name": "Chris Beams",
+        "email": "cbeams@gopivotal.com",
+        "username": "cbeams"
+      },
+      "committer": {
+        "name": "Chris Beams",
+        "email": "cbeams@gopivotal.com",
+        "username": "cbeams"
+      },
+      "added": [
+      ],
+      "removed": [
+      ],
+      "modified": [
+        "index-common.html"
+      ]
+    }
+  ],
+  "head_commit": {
+    "id": "a427f3f4db6c96ae5e86b610d0eef149393c9996",
+    "distinct": true,
+    "message": "Remove empty newline at end of index-common",
+    "timestamp": "2013-08-10T16:12:39-07:00",
+    "url": "https://github.com/spring-guides/gs-test-guide/commit/a427f3f4db6c96ae5e86b610d0eef149393c9996",
+    "author": {
+      "name": "Chris Beams",
+      "email": "cbeams@gopivotal.com",
+      "username": "cbeams"
+    },
+    "committer": {
+      "name": "Chris Beams",
+      "email": "cbeams@gopivotal.com",
+      "username": "cbeams"
+    },
+    "added": [
+    ],
+    "removed": [
+    ],
+    "modified": [
+      "index-common.html"
+    ]
+  },
+  "repository": {
+    "id": 11634233,
+    "name": "gs-test-guide",
+    "url": "https://github.com/spring-guides/gs-test-guide",
+    "description": "A test guide",
+    "homepage": "",
+    "watchers": 0,
+    "stargazers": 0,
+    "forks": 0,
+    "fork": false,
+    "size": 452,
+    "owner": {
+      "name": "spring-guides",
+      "email": null
+    },
+    "private": false,
+    "open_issues": 0,
+    "has_issues": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "language": "Java",
+    "created_at": 1374668910,
+    "pushed_at": 1376176368,
+    "master_branch": "master",
+    "organization": "spring-guides"
+  },
+  "pusher": {
+    "name": "none"
+  }
+}
