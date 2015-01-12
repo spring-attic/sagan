@@ -3,6 +3,7 @@ package sagan.blog.support;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.PostFormat;
@@ -19,13 +20,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestClientException;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -147,10 +146,14 @@ class BlogAdminController {
         return "redirect:/admin/blog";
     }
 
-    @RequestMapping(value = "refreshall", method = POST)
-    public String refreshAllBlogPosts() {
-        service.refreshAllPosts();
-        return "redirect:/admin/blog";
+    @RequestMapping(value = "refreshblogposts", method = POST)
+    @ResponseBody
+    public String refreshBlogPosts(
+            @RequestParam(value="page", defaultValue = "1", required = false) int page,
+            @RequestParam(value="size", defaultValue = "10", required = false) int size) {
+        Page<Post> posts = service.refreshPosts(page, size);
+        return String.format("{page: %s, pageSize: %s, totalPages: %s, totalElements: %s}",
+                posts.getNumber(), posts.getSize(), posts.getTotalPages(), posts.getTotalElements());
     }
 
 }

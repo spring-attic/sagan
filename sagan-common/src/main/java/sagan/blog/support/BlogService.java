@@ -1,5 +1,7 @@
 package sagan.blog.support;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import sagan.DatabaseConfig;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
@@ -172,11 +174,13 @@ public class BlogService {
         }
     }
 
-    public void refreshAllPosts() {
-        List<Post> posts = postRepository.findAll();
+    public Page<Post> refreshPosts(int page, int size) {
+        PageRequest pageRequest = new PageRequest(page, size, Sort.Direction.DESC, "id");
+        Page<Post> posts = postRepository.findAll(pageRequest);
         for (Post post : posts) {
             postFormAdapter.refreshPost(post);
             postRepository.save(post);
         }
+        return posts;
     }
 }

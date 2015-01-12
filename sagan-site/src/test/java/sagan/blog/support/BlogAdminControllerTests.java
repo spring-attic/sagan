@@ -1,5 +1,7 @@
 package sagan.blog.support;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
@@ -30,6 +32,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -158,6 +161,20 @@ public class BlogAdminControllerTests {
         given(blogService.addPost(postForm, username)).willThrow(DataIntegrityViolationException.class);
         String result2 = controller.createPost(principal, postForm, bindingResult, new ExtendedModelMap());
         assertThat(result2, equalTo("admin/blog/new"));
+    }
+
+    @Test
+    public void reRenderPosts() throws Exception {
+        int page = 1;
+        int pageSize = 20;
+        Page<Post> posts = new PageImpl<>(
+                Arrays.asList(new Post("published post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN),
+                        new Post("another published post", "other body", PostCategory.NEWS_AND_EVENTS, PostFormat.MARKDOWN)),
+                new PageRequest(page, pageSize, Sort.Direction.DESC, "id"), 2);
+        given(blogService.refreshPosts(page, pageSize)).willReturn(posts);
+        String result = controller.refreshBlogPosts(page, pageSize);
+        assertThat(result, equalTo("{page: 1, pageSize: 20, totalPages: 1, totalElements: 2}"));
+        verify(blogService, times(1)).refreshPosts(page, pageSize);
     }
 
 }
