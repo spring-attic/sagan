@@ -91,6 +91,11 @@
               <a href="https://gravatar.com/emails/">edit your Gravatar settings</a>
             </p>
           </div>
+          <div class="admin-profile--field">
+            <label for="hidden">Hidden (Spring Alumni)?</label>
+            <input id="hidden" type="checkbox" th:field="*{hidden}" name="hidden" />
+            <div class="note">Switch on this flag to indicate someone has left the Spring team`</div>
+          </div>
           <div class="admin-profile--field submit-form">
             <button type="submit" class="btn btn-black push-right">Save Changes</button>
           </div>

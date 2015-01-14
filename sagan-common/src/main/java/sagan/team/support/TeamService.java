@@ -1,19 +1,17 @@
 package sagan.team.support;
 
-import sagan.DatabaseConfig;
-import sagan.search.support.SearchService;
-import sagan.team.MemberProfile;
-
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import sagan.DatabaseConfig;
+import sagan.search.support.SearchService;
+import sagan.team.MemberProfile;
+
+import java.util.List;
 
 /**
  * Service providing high-level, selectively cached data access and other
@@ -70,6 +68,7 @@ class TeamService {
         existingProfile.setGeoLocation(profile.getGeoLocation());
         existingProfile.setVideoEmbeds(profile.getVideoEmbeds());
         existingProfile.setGravatarEmail(profile.getGravatarEmail());
+        existingProfile.setHidden(profile.isHidden());
 
         if (!StringUtils.isEmpty(profile.getGravatarEmail())) {
             Md5PasswordEncoder encoder = new Md5PasswordEncoder();
