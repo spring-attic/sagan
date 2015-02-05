@@ -1,7 +1,6 @@
 project:
   artifactId: sagan-indexer
   name: sagan-indexer
-  version: X.X.X.X
   description: sagan-indexer
 
 info:
@@ -9,7 +8,6 @@ info:
     artifact: ${project.artifactId}
     name: ${project.name}
     description: ${project.description}
-    version: ${project.version}
   spring:
     profiles: ${spring.profiles.active:default}
   app:

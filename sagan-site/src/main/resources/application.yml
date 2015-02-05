@@ -1,7 +1,6 @@
 project:
   artifactId: spring-io
   name: spring-io
-  version: X.X.X.X
   description: spring-io
 
 info:
@@ -9,7 +8,6 @@ info:
     artifact: ${project.artifactId}
     name: ${project.name}
     description: ${project.description}
-    version: ${project.version}
   spring:
     profiles: ${spring.profiles.active:default}
   app:
