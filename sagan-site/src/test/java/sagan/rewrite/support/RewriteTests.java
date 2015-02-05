@@ -143,6 +143,11 @@ public class RewriteTests {
         validateTemporaryRedirect("http://spring.io/guides/tutorials/web/","/guides");
     }
 
+    @Test
+    public void deprecatedWarGuideRedirected() throws Exception {
+        validateTemporaryRedirect("http://spring.io/guides/gs/convert-jar-to-war-maven/","/guides/gs/convert-jar-to-war/");
+    }
+
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,
             ServletException, URISyntaxException {
         validateRedirect(requestedUrl, redirectedUrl, 302);
