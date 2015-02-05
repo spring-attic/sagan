@@ -55,7 +55,5 @@ public class ToolXmlConverter_SingleArchiveDownloadTests {
                 equalTo("http://dist.springsource.com/release/TOOLS/update/3.3.0.RELEASE/e4.3/springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
         assertThat(archive.getFileSize(), equalTo("172MB"));
         assertThat(archive.getFileName(), equalTo("springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
-        assertThat(archive.getFileName(), equalTo("springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
-        assertThat(archive.getFileName(), equalTo("springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
     }
 }

@@ -8,6 +8,10 @@ import sagan.support.cache.CachedRestClient;
 import sagan.tools.EclipseDownloads;
 import sagan.tools.ToolSuiteDownloads;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 @Service
 class ToolsService {
     private final ToolXmlConverter toolXmlConverter = new ToolXmlConverter();
@@ -30,6 +34,14 @@ class ToolsService {
         return getToolSuiteDownloads("Milestone Version - Spring Tool Suite", "STS");
     }
 
+    public Collection<ToolSuiteDownloads> getStsLegacyDownloads() throws Exception {
+        List<ToolSuiteDownloads> previousStsDownloads = new ArrayList<>();
+
+        previousStsDownloads.addAll(getLegacyToolSuiteDownloads("Spring Tool Suite", "STS"));
+        previousStsDownloads.addAll(getLegacyToolSuiteDownloads("Previous Version", "STS"));
+        return previousStsDownloads;
+    }
+
     public ToolSuiteDownloads getGgtsGaDownloads() throws Exception {
         return getToolSuiteDownloads("Groovy/Grails Tool Suite", "GGTS");
     }
@@ -44,6 +56,14 @@ class ToolsService {
                         String.class);
         ToolSuiteXml toolSuiteXml = serializer.readValue(responseXml, ToolSuiteXml.class);
         return toolXmlConverter.convert(toolSuiteXml, toolSuiteName, shortName);
+    }
+
+    private Collection<ToolSuiteDownloads> getLegacyToolSuiteDownloads(String toolSuiteName, String shortName) throws Exception {
+        String responseXml =
+                restClient.get(restTemplate, "http://dist.springsource.com/release/STS/index-new.xml",
+                        String.class);
+        ToolSuiteXml toolSuiteXml = serializer.readValue(responseXml, ToolSuiteXml.class);
+        return toolXmlConverter.convertLegacy(toolSuiteXml, toolSuiteName, shortName);
     }
 
     public EclipseDownloads getEclipseDownloads() throws Exception {

@@ -23,4 +23,12 @@ class ToolSuiteXml {
     public void setReleases(List<Release> releases) {
         this.releases = releases;
     }
+
+    public List<Release> getOthers() {
+        return others;
+    }
+
+    public void setOthers(List<Release> others) {
+        this.others = others;
+    }
 }

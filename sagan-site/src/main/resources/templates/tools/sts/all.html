@@ -18,7 +18,8 @@
       <div class="content--title">Tools</div>
         <h1 class="tools--title">Spring Tool Suite&trade; Downloads</h1>
         <p class="tools--description">Use one of the links below to download an all-in-one
-            distribution for your platform.</p>
+            distribution for your platform.<br> Or check the list of
+            <a href="legacy.html" th:href="@{/tools/sts/legacy}" class="all-versions">previous Spring Tool Suite&trade; versions</a>.</p>
 
           <section class='ga--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${gaRelease}"></section>
           <section class='milestone--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${milestoneRelease}" th:if="${milestoneRelease.hasPlatforms()}"></section>
