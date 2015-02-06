@@ -68,6 +68,12 @@
         <to type="temporary-redirect" last="true">/guides</to>
     </rule>
     <rule>
+        <name>Deprecated Spring Boot WAR Guide</name>
+        <note>https://github.com/spring-io/sagan/issues/480</note>
+        <from>/guides/gs/convert-jar-to-war-maven/$</from>
+        <to type="temporary-redirect" last="true">/guides/gs/convert-jar-to-war/</to>
+    </rule>
+    <rule>
         <name>Remove www</name>
         <note>Redirect www.spring.io => spring.io[#54747656]</note>
         <condition name="host">www.spring.io</condition>
