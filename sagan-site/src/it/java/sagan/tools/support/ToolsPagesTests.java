@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.client.RestTemplate;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -107,6 +108,27 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                         containsString("spring-tool-suite"),
                         containsString("win32.zip"))));
 
+    }
+
+    @Test
+    public void showsLegacyStsGaDownloads() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(get("/tools/sts/legacy"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andReturn();
+
+        Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
+        assertThat(document.select("h1").text(), equalTo("Previous Spring Tool Suite™ Downloads"));
+        assertThat(document.select(".ga--release h2.tool-versions--version").text(), allOf(containsString("STS"),
+                containsString("RELEASE")));
+        assertThat(document.select(".platform h3").text(), containsString("Windows"));
+
+        assertThat(document.select(".ga--release .item--dropdown a").first().attr("href"), allOf(
+                containsString("http://download.springsource.com/release/STS/"),
+                containsString("spring-tool-suite"),
+                containsString("win32-installer.exe")));
+
+        assertThat(document.select(".ga--release").size(), equalTo(24));
     }
 
     @Test

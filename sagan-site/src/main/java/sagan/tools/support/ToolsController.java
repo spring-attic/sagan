@@ -5,13 +5,16 @@ import sagan.tools.EclipsePlatform;
 import sagan.tools.ToolSuiteDownloads;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sagan.tools.UpdateSiteArchive;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -67,6 +70,13 @@ class ToolsController {
         model.addAttribute("milestoneRelease", milestoneDownloads);
         model.addAttribute("updateSiteArchives", stsDownloads.getArchives());
         return "tools/sts/all";
+    }
+
+    @RequestMapping(value = "/sts/legacy", method = { GET, HEAD })
+    public String legacyStsDownloads(Model model) throws Exception {
+        Collection<ToolSuiteDownloads> stsDownloads = toolsService.getStsLegacyDownloads();
+        model.addAttribute("legacyReleases", stsDownloads);
+        return "tools/sts/legacy";
     }
 
     @RequestMapping(value = "/ggts", method = { GET, HEAD })
