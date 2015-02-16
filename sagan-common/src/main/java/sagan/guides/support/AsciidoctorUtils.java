@@ -104,6 +104,12 @@ public class AsciidoctorUtils {
 
         sidebar += "</div>\n</div>";
 
+        sidebar += "<div class='right-pane-widget--container' style='display:none'>\n<div class='related_courseware'>\n";
+
+        sidebar += "<h2><a name='courseware' class='anchor' href='#courseware'></a>Related Courseware</h2>\n";
+
+        sidebar += "</div>\n</div>";
+
         return sidebar;
     }
 

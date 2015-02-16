@@ -15,6 +15,7 @@ var initNewsletterSubscription = require('feature/newsletterSubscription/main');
 var initMap = require('feature/map/main');
 var initTimeAgo = require('feature/timeAgo/main');
 var initHideShowGuide = require('feature/hide-show-guide/main');
+var initCourseware = require('feature/courseware/main');
 
 var most = require('most');
 var $ = require('jquery');
@@ -37,7 +38,8 @@ var features = {
     'newsletter-subscription': initNewsletterSubscription,
     'map': initMap,
     'timeago': initTimeAgo,
-    'hide-show-guide': initHideShowGuide
+    'hide-show-guide': initHideShowGuide,
+    'courseware': initCourseware
 };
 
 initFeatures(features, document).each(function(features) {
