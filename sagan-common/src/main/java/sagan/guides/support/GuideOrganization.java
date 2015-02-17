@@ -42,7 +42,7 @@ class GuideOrganization {
     private final GitHubClient gitHub;
     private final String name;
     private final ObjectMapper objectMapper;
-    private final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+    private final Asciidoctor asciidoctor;
     private final Yaml yaml = new Yaml();
 
     @Autowired
@@ -54,6 +54,7 @@ class GuideOrganization {
         this.type = type;
         this.gitHub = gitHub;
         this.objectMapper = objectMapper;
+        this.asciidoctor = Asciidoctor.Factory.create();
     }
 
     /**
@@ -116,11 +117,15 @@ class GuideOrganization {
             attributes.setAllowUriRead(true);
             attributes.setSkipFrontMatter(true);
             File readmeAdocFile = new File(unzippedRoot.getAbsolutePath() + File.separator + "README.adoc");
-            String rawHtmlContent = asciidoctor.renderFile(
-                    readmeAdocFile,
-                    OptionsBuilder.options().safe(SafeMode.SAFE).attributes(attributes).headerFooter(true));
+            OptionsBuilder options = OptionsBuilder.options()
+                    .safe(SafeMode.SAFE)
+                    .baseDir(unzippedRoot)
+                    .headerFooter(true)
+                    .attributes(attributes);
+            StringWriter writer = new StringWriter();
+            asciidoctor.convert(new FileReader(readmeAdocFile), writer, options);
 
-            Document doc = Jsoup.parse(rawHtmlContent);
+            Document doc = Jsoup.parse(writer.toString());
 
             htmlContent = doc.select("#content").html();
             frontMatter = parseFrontMatter(readmeAdocFile);
