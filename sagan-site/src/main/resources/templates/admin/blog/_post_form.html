@@ -10,7 +10,7 @@
                 <input type="hidden" name="_method" value="PUT" th:if="${edit}" />
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-                <div class="control-group" th:class="'control-group' + (${#fields.hasErrors('title')}? ' error')">
+                <div class="control-group" th:classappend="(${#fields.hasErrors('title')}? ' error')">
                     <label class="control-label" for="title">Title:</label>
                     <div class="controls">
                         <input id="title" type="text" th:field="*{title}" name="title" />
@@ -18,7 +18,7 @@
                     </div>
                 </div>
 
-                <div class="control-group" th:class="'control-group' + (${#fields.hasErrors('content')}? ' error')">
+                <div class="control-group" th:classappend="(${#fields.hasErrors('content')}? ' error')">
                     <label class="control-label" for="content">Content:</label>
                     <div class="controls">
                         <textarea id="content" th:field="*{content}" name="content"></textarea>
@@ -50,7 +50,7 @@
 
             </div>
             <div class="span4 blog-post-form--right-pane">
-                <div class="control-group" th:class="'control-group ' + (${#fields.hasErrors('category')}? ' error')">
+                <div class="control-group" th:classappend="(${#fields.hasErrors('category')}? ' error')">
                     <label class="control-label" for="category">Category:</label>
                     <div class="controls">
                         <select id="category" name="category" th:field="*{category}" >
@@ -60,7 +60,7 @@
                     </div>
                 </div>
 
-                <div class="control-group" th:class="'control-group ' + (${#fields.hasErrors('format')}? ' error')">
+                <div class="control-group" th:classappend="(${#fields.hasErrors('format')}? ' error')">
                     <label class="control-label" for="format">Format:</label>
                     <div class="controls">
                         <select id="format" name="format" th:field="*{format}" >
@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                <!-- <div class="control-group inline" th:class="'control-group inline ' + (${#fields.hasErrors('broadcast')}? ' error')">
+                <!-- <div class="control-group inline" th:classappend="(${#fields.hasErrors('broadcast')}? ' error')">
                     <label class="control-label" for="broadcast">Broadcast:</label>
                     <div class="controls">
                         <input type="checkbox" th:field="*{broadcast}" id="broadcast" name="broadcast" />
