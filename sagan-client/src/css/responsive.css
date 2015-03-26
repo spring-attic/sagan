@@ -511,9 +511,6 @@
 }
 
 @media (max-width: 1007px) {
-  .tool--container {
-    width: 100%;
-  }
   .new-noteworthy-box {
     display: none;
   }

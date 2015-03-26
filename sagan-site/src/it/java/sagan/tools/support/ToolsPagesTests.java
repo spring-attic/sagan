@@ -146,7 +146,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 .andReturn();
 
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
-        assertThat(document.select("h1").text(), equalTo("Groovy/Grails Tool Suite™ Downloads"));
+        assertThat(document.select("h1").text(), equalTo("Groovy/Grails Tool Suite™ Downloads will be available from Pivotal for a limited time"));
         assertThat(document.select(".ga--release h2.tool-versions--version").text(),
                 allOf(containsString("GGTS"), containsString("RELEASE")));
         assertThat(document.select(".platform h3").text(), containsString("Windows"));

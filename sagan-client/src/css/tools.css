@@ -3,12 +3,9 @@
   display: inline-block;
   color: #eeeeee;
   text-align: center;
-  width: 48.8%;
-  margin: 0 1.9% 40px 0;
+  width: 100%;
+  margin-bottom: 40px;
   line-height: 20px;
-}
-.tool--container:last-child {
-  margin-right: 0;
 }
 .tool--container .tool--icon {
   height: 134px;

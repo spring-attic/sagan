@@ -13,15 +13,16 @@
 <div layout:fragment="header-container"></div>
 <div layout:fragment="content" class="container-fluid">
     <div class="main-body--wrapper">
-        <h1 class="index-page--title">Spring Tool Suite&trade; & Groovy/Grails Tool Suite&trade;</h1>
+        <h1 class="index-page--title">Spring Tool Suite&trade;</h1>
         <div class="span8 tools-intro">
             <p class="index-page--subtitle">
-                Whether developing with Spring and/or Groovy/Grails we provide a customized all-in-one Eclipse based distribution that makes application development easy. The tool suites provide ready-to-use combinations of language support, framework support, and runtime support, and combine them with the existing Java, Web and Java EE tooling from Eclipse. Out of the box support is also provided for Pivotal tc Server and an integrated dashboard in each distribution makes it trivial to install further extensions that add support for technologies such as Gradle or Pivotal Cloud Foundry. Support for these distributions is always available through our <a href="https://issuetracker.springsource.com/browse/STS">issue tracker</a> or <a href="https://stackoverflow.com/questions/ask?tags=spring-tool-suite">StackOverflow tag</a>.
+                We provide a customized all-in-one Eclipse based distribution that makes application development easy. The tool suites provide ready-to-use combinations of language support, framework support, and runtime support, and combine them with the existing Java, Web and Java EE tooling from Eclipse.  An integrated dashboard in the distribution makes it trivial to install further extensions that add support for technologies such as Pivotal Cloud Foundry, Gradle or Pivotal tcServer. Support for these distributions is always available through our <a href="https://issuetracker.springsource.com/browse/STS">issue tracker</a> or <a href="https://stackoverflow.com/questions/ask?tags=spring-tool-suite">StackOverflow tag</a>.
+                <br/>Looking for Groovy and Grails Tool Suite?  Continue to <a href="@{/tools/ggts/all}">download</a> GGTS 3.6.4 from Pivotal for a limited time.
             </p>
         </div>
         <div class="new-noteworthy-box right-pane-widget--container">
             <p class="title">New & Noteworthy</p>
-            <p>Latest STS/GGTS <br> release notes.</p>
+            <p>Latest STS <br> release notes.</p>
             <a href="http://docs.spring.io/sts/nan/latest/NewAndNoteworthy.html">Read more</a>
         </div>
         <div class="tools--wrapper">
@@ -39,22 +40,6 @@
                     </li>
                 </ul>
                 <a href="all.html" th:href="@{/tools/sts/all}" class="tool--see-all-versions">See all versions</a>
-            </section>
-
-            <section class="tool--container">
-                <div class="tool--icon ggts-icon"></div>
-                <h2 class="tool--title">Groovy/Grails Tool Suite&trade;</h2>
-                <div class="tool--description">The Groovy/Grails Tool Suite is a complete Eclipse-based development environment optimized for developing, debugging and executing Groovy and Grails applications. A new perspective, new views and wizards ensure an intuitive and familiar Eclipse experience when working with the Groovy language and Grails framework.</div>
-                <a href="ggts/index.html" th:href="@{/tools/ggts}" class="tool--learn-more">Learn More</a>
-                <ul class='download-links'>
-                    <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${ggtsDownloadLinks}">
-                        <a class="tool--download-btn btn btn-black uppercase sub-text on-black" th:href="${downloadLink.url}">
-                            Download GGTS
-                            <p th:text="'(' + ${ggtsVersion} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
-                        </a>
-                    </li>
-                </ul>
-                <a href="all.html" th:href="@{/tools/ggts/all}" class="tool--see-all-versions">See all versions</a>
             </section>
         </div>
         <section class="eclipse--container">
