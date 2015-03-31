@@ -1,5 +1,6 @@
 package sagan.questions.support;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import lombok.ToString;
 
 @ToString(exclude = "body")
 @JsonIgnoreProperties(ignoreUnknown = true)
-class Question {
+class Question implements Serializable {
 
     public String title;
     public String body;

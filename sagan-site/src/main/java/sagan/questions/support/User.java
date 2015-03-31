@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-class User {
+class User implements Serializable {
 
     @JsonProperty("user_id")
     public int id;
