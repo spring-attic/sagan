@@ -7,6 +7,7 @@ import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Attributes;
 import org.asciidoctor.OptionsBuilder;
 import org.asciidoctor.SafeMode;
+import org.asciidoctor.internal.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -117,15 +118,14 @@ class GuideOrganization {
             attributes.setAllowUriRead(true);
             attributes.setSkipFrontMatter(true);
             File readmeAdocFile = new File(unzippedRoot.getAbsolutePath() + File.separator + "README.adoc");
-            OptionsBuilder options = OptionsBuilder.options()
-                    .safe(SafeMode.SAFE)
-                    .baseDir(unzippedRoot)
-                    .headerFooter(true)
-                    .attributes(attributes);
-            StringWriter writer = new StringWriter();
-            asciidoctor.convert(new FileReader(readmeAdocFile), writer, options);
+            String asciidoc = IOUtils.readFull(new FileReader(readmeAdocFile));
 
-            Document doc = Jsoup.parse(writer.toString());
+            String html = asciidoctor.render(
+                    asciidoc,
+                    OptionsBuilder.options().safe(SafeMode.SAFE).attributes(attributes).headerFooter(true)
+                        .baseDir(readmeAdocFile.getParentFile()));
+
+            Document doc = Jsoup.parse(html);
 
             htmlContent = doc.select("#content").html();
             frontMatter = parseFrontMatter(readmeAdocFile);

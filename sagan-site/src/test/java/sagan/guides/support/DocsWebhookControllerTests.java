@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +16,7 @@ import java.nio.charset.Charset;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit tests for {@link DocsWebhookController}.
@@ -66,7 +63,7 @@ public class DocsWebhookControllerTests {
         String payload = StreamUtils.copyToString(
                 new ClassPathResource("fixtures/webhooks/pingWebhook.json").getInputStream(), Charset.forName("UTF-8"));
 
-        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=9f4c6a2798428b9b0db9893026f200cfab03525b", "ping");
+        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=7975985CDCA709FF1042DD96A0F3FA0EA7B590B5", "ping");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed ping event\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.gettingStartedGuides, never()).evictFromCache("test-guide");
@@ -78,7 +75,7 @@ public class DocsWebhookControllerTests {
         String payload = StreamUtils.copyToString(
                 new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"));
 
-        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=f808b2905e91e6a7a31526b9f44a95a5a7e3472a", "push");
+        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=372A6699319454075076AE2E9C2821F385682A1B", "push");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.gettingStartedGuides, times(1)).evictFromCache("test-guide");
@@ -90,7 +87,7 @@ public class DocsWebhookControllerTests {
         String payload = StreamUtils.copyToString(
                 new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"));
 
-        ResponseEntity response = this.controller.processTutorialsUpdate(payload, "sha1=f808b2905e91e6a7a31526b9f44a95a5a7e3472a", "push");
+        ResponseEntity response = this.controller.processTutorialsUpdate(payload, "sha1=372A6699319454075076AE2E9C2821F385682A1B", "push");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.tutorials, times(1)).evictFromCache("test-guide");
@@ -101,7 +98,7 @@ public class DocsWebhookControllerTests {
         String payload = StreamUtils.copyToString(
                 new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"));
 
-        ResponseEntity response = this.controller.processUnderstandingUpdate(payload, "sha1=f808b2905e91e6a7a31526b9f44a95a5a7e3472a", "push");
+        ResponseEntity response = this.controller.processUnderstandingUpdate(payload, "sha1=372A6699319454075076AE2E9C2821F385682A1B", "push");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.understandingDocs, times(1)).clearCache();
