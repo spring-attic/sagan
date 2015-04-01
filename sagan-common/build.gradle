@@ -14,7 +14,7 @@ bootRepackage.enabled = false
 
 dependencies {
 
-    versionManagement 'io.spring.platform:platform-versions:1.0.3.RELEASE@properties'
+    versionManagement 'io.spring.platform:platform-versions:1.0.5.RELEASE@properties'
 
     def vJackson = '2.4.3'
 
@@ -30,7 +30,7 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
     compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 
-    compile 'org.pegdown:pegdown:1.4.2'
+    compile 'org.pegdown:pegdown:1.5.0'
 
     // datasource and connection pool dependencies
     runtime 'org.postgresql:postgresql:9.2-1002-jdbc4'

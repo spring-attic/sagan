@@ -22,7 +22,7 @@ public class PegdownMarkdownService implements MarkdownService {
     private final PegDownProcessor pegdown;
 
     public PegdownMarkdownService() {
-        pegdown = new PegDownProcessor(Extensions.ALL);
+        pegdown = new PegDownProcessor(Extensions.ALL ^ Extensions.ANCHORLINKS);
     }
 
     @Override
