@@ -31,7 +31,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * <p>
  * Github requests are signed with a shared secret, using an HMAC sha-1 algorithm.
  */
-@Controller
+@RestController
 @RequestMapping("/webhook/docs/")
 class DocsWebhookController {
 
@@ -77,14 +77,14 @@ class DocsWebhookController {
         return new ResponseEntity("{ \"message\": \"Bad Request\" }\n", HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "guides", method = POST, consumes = "application/json")
-    @ResponseBody
+    @RequestMapping(value = "guides", method = POST,
+            consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> processGuidesUpdate(@RequestBody String payload,
                                                       @RequestHeader("X-Hub-Signature") String signature,
                                                       @RequestHeader("X-GitHub-Event") String event) throws IOException {
 
         verifyHmacSignature(payload, signature);
-        if(PING_EVENT.equals(event)) {
+        if (PING_EVENT.equals(event)) {
             return new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
@@ -97,14 +97,14 @@ class DocsWebhookController {
         return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "tutorials", method = POST, consumes = "application/json")
-    @ResponseBody
+    @RequestMapping(value = "tutorials", method = POST,
+            consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> processTutorialsUpdate(@RequestBody String payload,
                                                          @RequestHeader("X-Hub-Signature") String signature,
                                                          @RequestHeader("X-GitHub-Event") String event) throws IOException {
 
         verifyHmacSignature(payload, signature);
-        if(PING_EVENT.equals(event)) {
+        if (PING_EVENT.equals(event)) {
             new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
@@ -117,14 +117,14 @@ class DocsWebhookController {
         return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "understanding", method = POST, consumes = "application/json")
-    @ResponseBody
+    @RequestMapping(value = "understanding", method = POST,
+            consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> processUnderstandingUpdate(@RequestBody String payload,
                                                              @RequestHeader("X-Hub-Signature") String signature,
                                                              @RequestHeader("X-GitHub-Event") String event) throws IOException {
 
         verifyHmacSignature(payload, signature);
-        if(PING_EVENT.equals(event)) {
+        if (PING_EVENT.equals(event)) {
             new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
