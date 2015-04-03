@@ -164,6 +164,13 @@
           <div class="project--title">Spring LDAP</div>
           <p class="project--description">Simplifies the development of applications using LDAP using Spring's familiar template-based approach.</p>
         </a>
+        <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-session')}">
+          <div class="project-logo--container">
+            <div class="icon project--logo logo-spring-session"></div>
+          </div>
+          <div class="project--title">Spring Session</div>
+          <p class="project--description">Spring Session provides an API and implementations for managing a user’s session information.</p>
+        </a>
       </section>
       <section class="projects--wrapper project-aggregator top-separator">
         <a href="https://github.com/spring-projects/spring-scala#readme" class="project--container project--container--link">
