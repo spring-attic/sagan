@@ -54,7 +54,7 @@ public class BlogServiceCachingTests extends AbstractIntegrationTests {
                 assertThat(cacheName[0], equalTo(BlogService.CACHE_NAME));
             }
             else if (methodName.equals("deletePost") || methodName.equals("updatePost")) {
-                assertNotNull("Method " + methodName + " was expected to have Cacheable annotation.", cacheEvict);
+                assertNotNull("Method " + methodName + " was expected to have CacheEvict annotation.", cacheEvict);
                 String[] cacheName = cacheEvict.value();
                 assertThat(cacheName[0], equalTo(BlogService.CACHE_NAME));
             }

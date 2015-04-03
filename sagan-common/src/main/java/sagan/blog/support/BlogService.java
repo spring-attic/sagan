@@ -140,14 +140,14 @@ public class BlogService {
         return post;
     }
 
-    @CacheEvict(value = CACHE_NAME, key = "#post.publicSlug")
+    @CacheEvict(value = CACHE_NAME, key = "#post.publicSlug", condition="#post.publicSlug != null")
     public void updatePost(Post post, PostForm postForm) {
         postFormAdapter.updatePostFromPostForm(post, postForm);
         postRepository.save(post);
         saveToIndex(post);
     }
 
-    @CacheEvict(value = CACHE_NAME, key = "#post.publicSlug")
+    @CacheEvict(value = CACHE_NAME, key = "#post.publicSlug", condition="#post.publicSlug != null")
     public void deletePost(Post post) {
         postRepository.delete(post);
     }
