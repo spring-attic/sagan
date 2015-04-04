@@ -41,7 +41,7 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
     private static final String README_PATH_ASC = REPO_BASE_PATH + "/zipball";
 
     private final GuideOrganization org;
-    private final MultiValueMap<String, String> tagMultimap = new LinkedMultiValueMap();
+    private final MultiValueMap<String, String> tagMultimap = new LinkedMultiValueMap<>();
     private final ProjectMetadataService projectMetadataService;
     private final AsciidoctorUtils asciidoctorUtils = new AsciidoctorUtils();
 
@@ -66,8 +66,8 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
     public List<GettingStartedGuide> findAll() {
         return findAllMetadata()
                 .stream()
-                    .map(m -> new GettingStartedGuide(m))
-                    .map(g -> populate(g))
+                    .map(GettingStartedGuide::new)
+                    .map(this::populate)
                 .collect(Collectors.toList());
     }
 

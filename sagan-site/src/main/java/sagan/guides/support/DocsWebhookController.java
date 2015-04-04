@@ -97,6 +97,26 @@ class DocsWebhookController {
         return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
     }
 
+    @RequestMapping(value = "guides/{repositoryName}", method = POST,
+            consumes = "application/json", produces = "application/json")
+    public ResponseEntity<String> processGuidesUpdate(@RequestBody String payload,
+                                                      @RequestHeader("X-Hub-Signature") String signature,
+                                                      @RequestHeader("X-GitHub-Event") String event,
+                                                      @PathVariable String repositoryName) throws IOException {
+
+        verifyHmacSignature(payload, signature);
+        if (PING_EVENT.equals(event)) {
+            return new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
+        }
+        Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
+        logger.info("Received new webhook payload for push with head_commit message: "
+                + ((Map<?, ?>) push.get("head_commit")).get("message"));
+
+        String guideName = this.gettingStartedGuides.parseGuideName(repositoryName);
+        this.gettingStartedGuides.evictFromCache(guideName);
+        return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
+    }
+
     @RequestMapping(value = "tutorials", method = POST,
             consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> processTutorialsUpdate(@RequestBody String payload,
@@ -112,6 +132,26 @@ class DocsWebhookController {
                 + ((Map<?, ?>) push.get("head_commit")).get("message"));
 
         String repositoryName = (String) ((Map<?, ?>) push.get("repository")).get("name");
+        String tutorialName = this.tutorials.parseTutorialName(repositoryName);
+        this.tutorials.evictFromCache(tutorialName);
+        return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "tutorials/{repositoryName}", method = POST,
+            consumes = "application/json", produces = "application/json")
+    public ResponseEntity<String> processTutorialsUpdate(@RequestBody String payload,
+                                                         @RequestHeader("X-Hub-Signature") String signature,
+                                                         @RequestHeader("X-GitHub-Event") String event,
+                                                         @PathVariable String repositoryName) throws IOException {
+
+        verifyHmacSignature(payload, signature);
+        if (PING_EVENT.equals(event)) {
+            new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
+        }
+        Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
+        logger.info("Received new webhook payload for push with head_commit message: "
+                + ((Map<?, ?>) push.get("head_commit")).get("message"));
+
         String tutorialName = this.tutorials.parseTutorialName(repositoryName);
         this.tutorials.evictFromCache(tutorialName);
         return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
