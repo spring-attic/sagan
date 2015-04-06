@@ -190,15 +190,15 @@ class GuideOrganization {
     private String findTableOfContents(Document doc) {
         Elements toc = doc.select("div#toc > ul.sectlevel1");
 
-        toc.select("li > ul.sectlevel2").forEach(subsection ->
-            subsection.parent().remove()
+        toc.select("ul.sectlevel2").forEach(subsection ->
+            subsection.remove()
         );
 
         toc.forEach(part ->
             part.select("a[href]").stream()
                 .filter(anchor ->
-                        doc.select(anchor.attr("href")).get(0).parent().classNames().stream()
-                                .anyMatch(clazz -> clazz.startsWith("reveal")))
+                    doc.select(anchor.attr("href")).get(0).parent().classNames().stream()
+                        .anyMatch(clazz -> clazz.startsWith("reveal")))
                 .forEach(href -> href.parent().remove())
         );
 
