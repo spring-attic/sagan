@@ -87,8 +87,7 @@ class DocsWebhookController {
             return new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
-        logger.info("Received new webhook payload for push with head_commit message: "
-                + ((Map<?, ?>) push.get("head_commit")).get("message"));
+        logPayload(push);
 
         String repositoryName = (String) ((Map<?, ?>) push.get("repository")).get("name");
         String guideName = this.gettingStartedGuides.parseGuideName(repositoryName);
@@ -126,8 +125,7 @@ class DocsWebhookController {
             new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
-        logger.info("Received new webhook payload for push with head_commit message: "
-                + ((Map<?, ?>) push.get("head_commit")).get("message"));
+        logPayload(push);
 
         String repositoryName = (String) ((Map<?, ?>) push.get("repository")).get("name");
         String tutorialName = this.tutorials.parseTutorialName(repositoryName);
@@ -165,8 +163,8 @@ class DocsWebhookController {
             new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
-        logger.info("Received new webhook payload for push with head_commit message: "
-                + ((Map<?, ?>) push.get("head_commit")).get("message"));
+        logPayload(push);
+
         // all understanding docs live under the same repository, so clearing all entries
         this.understandingDocs.clearCache();
         return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
@@ -179,4 +177,14 @@ class DocsWebhookController {
             throw new WebhookAuthenticationException(computedSignature, signature);
         }
     }
+
+    private void logPayload(Map<?, ?> push) {
+        if (push.containsKey("head_commit")) {
+            logger.info("Received new webhook payload for push with head_commit message: "
+                    + ((Map<?, ?>) push.get("head_commit")).get("message"));
+        } else {
+            logger.info("Received new webhook payload for push, but with no head_commit");
+        }
+    }
+
 }
