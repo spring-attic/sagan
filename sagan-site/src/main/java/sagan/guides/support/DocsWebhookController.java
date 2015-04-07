@@ -180,8 +180,12 @@ class DocsWebhookController {
 
     private void logPayload(Map<?, ?> push) {
         if (push.containsKey("head_commit")) {
-            logger.info("Received new webhook payload for push with head_commit message: "
-                    + ((Map<?, ?>) push.get("head_commit")).get("message"));
+            final Object headCommit = push.get("head_commit");
+            if (headCommit != null) {
+                final Map<?, ?> headCommitMap = (Map<?, ?>) headCommit;
+                logger.info("Received new webhook payload for push with head_commit message: "
+                        + headCommitMap.get("message"));
+            }
         } else {
             logger.info("Received new webhook payload for push, but with no head_commit");
         }
