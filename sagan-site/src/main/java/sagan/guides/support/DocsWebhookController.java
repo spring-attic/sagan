@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.Mac;
@@ -109,8 +108,7 @@ class DocsWebhookController {
             return new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
-        logger.info("Received new webhook payload for push with head_commit message: "
-                + ((Map<?, ?>) push.get("head_commit")).get("message"));
+        logger.info("Received new webhook payload for push against " + repositoryName);
 
         String guideName = this.gettingStartedGuides.parseGuideName(repositoryName);
         this.gettingStartedGuides.evictFromCache(guideName);
@@ -149,8 +147,7 @@ class DocsWebhookController {
             new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
-        logger.info("Received new webhook payload for push with head_commit message: "
-                + ((Map<?, ?>) push.get("head_commit")).get("message"));
+        logger.info("Received new webhook payload for push against " + repositoryName);
 
         String tutorialName = this.tutorials.parseTutorialName(repositoryName);
         this.tutorials.evictFromCache(tutorialName);
