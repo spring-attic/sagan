@@ -37,21 +37,65 @@
     display: none;
 }
 
-.homepage--body .platform--wrapper {
+.homepage--body .hero--banner {
+  background-color: #34302d;
+  position: relative;
+}
+
+.homepage--body .hero--banner .banner--text {
+  color: #f1f1f1;
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 20px;
+}
+.homepage--body .hero--banner .banner--link {
+  font-size: 18px;
+  line-height: 28px;
+}
+.homepage--body .hero--banner .banner--link [class^="icon-"] {
+  margin-left: 15px;
+  line-height: 10px;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+.homepage--body .hero--banner .blockarrows {
+  position: absolute;
+  bottom: 27px;
+  right: 20px;
+  z-index: 20;
+  max-width: 230px;
+  font-size: 13px;
+  line-height: 2.2em;
+}
+
+.homepage--body .hero--banner .blockarrows .next,
+.homepage--body .hero--banner .blockarrows .previous {
+  display: inline-block;
+  width: 27px;
+  height: 27px;
+  background: rgba(255,255,255,0.7);
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Spring IO Platform Banner */
+
+.homepage--body .hero--banner .platform {
   background: url("../img/platform-bg.png") #34302d 50% 50% no-repeat;
   height: auto;
   text-align: center;
   padding: 60px 0;
-  background-size: 694px;
+  background-size: 450px;
 }
-.homepage--body .platform--wrapper .platform--icon {
+.homepage--body .hero--banner .platform .platform--icon {
   background: url("../img/spring-platform-watermark.png") no-repeat;
   width: 241px;
   height: 74px;
   display: inline-block;
   margin-bottom: 43px;
 }
-.homepage--body .platform--wrapper .platform--title {
+.homepage--body .hero--banner .platform .platform--title {
   font-family: "Montserrat", sans-serif;
   color: #f1f1f1;
   font-size: 30px;
@@ -60,22 +104,30 @@
   margin-bottom: 20px;
   text-transform: uppercase;
 }
-.homepage--body .platform--wrapper .platform--text {
+
+/* Spring Cloud GA banner */
+
+.homepage--body .hero--banner .springcloud10 {
+  padding: 60px;
+  background: url("../img/hero-banner-springcloud10.jpg") #34302d no-repeat;
+  background-size: cover;
+}
+
+.homepage--body .hero--banner .springcloud10 .banner--text {
+    margin-left: 28%;
+}
+
+.homepage--body .hero--banner .springcloud10 .banner--text h2 {
+  font-family: "Montserrat", sans-serif;
   color: #f1f1f1;
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 25px;
+  font-weight: normal;
+  line-height: 30px;
   margin-bottom: 20px;
+  max-width: 430px;
+  text-transform: uppercase;
 }
-.homepage--body .platform--wrapper .platform--link {
-  font-size: 18px;
-  line-height: 28px;
-}
-.homepage--body .platform--wrapper .platform--link [class^="icon-"] {
-  margin-left: 15px;
-  line-height: 10px;
-  vertical-align: middle;
-  text-decoration: none;
-}
+
 .homepage--body .key-feature--wrapper {
   background-color: #6db33f;
   padding: 60px 0;

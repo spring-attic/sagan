@@ -1,5 +1,3 @@
-//var createGuide = require('page/guide/main');
-
 var initSearch = require('feature/search/main');
 var initSearchFacets = require('feature/searchFacets/main');
 var initFilterableList = require('feature/filterableList/main');
@@ -16,6 +14,7 @@ var initMap = require('feature/map/main');
 var initTimeAgo = require('feature/timeAgo/main');
 var initHideShowGuide = require('feature/hide-show-guide/main');
 var initCourseware = require('feature/courseware/main');
+var initHeroBanner = require('feature/heroBanner/main');
 
 var most = require('most');
 var $ = require('jquery');
@@ -39,7 +38,8 @@ var features = {
     'map': initMap,
     'timeago': initTimeAgo,
     'hide-show-guide': initHideShowGuide,
-    'courseware': initCourseware
+    'courseware': initCourseware,
+    'hero-banner': initHeroBanner
 };
 
 initFeatures(features, document).each(function(features) {
