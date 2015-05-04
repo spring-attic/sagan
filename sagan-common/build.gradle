@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.0.RELEASE"
+    }
+}
+
+apply plugin: "io.spring.dependency-management"
+
 sourceSets {
     testUtil {
         java.srcDir 'src/test-util/java'
@@ -5,16 +16,14 @@ sourceSets {
     }
 }
 
-// sagan-common is not technically a "Spring Boot" application--it is just a library.
-// However, we apply the spring-boot plugin here anyway in order to pick up boot's
-// default dependency versioning, such that we stay in sync with other modules that
-// are actually "boot"-style apps.
-apply plugin: 'spring-boot'
-bootRepackage.enabled = false
+dependencyManagement {
+    imports {
+        mavenBom 'io.spring.platform:platform-versions:1.0.5.RELEASE'
+    }
+}
+
 
 dependencies {
-
-    versionManagement 'io.spring.platform:platform-versions:1.0.5.RELEASE@properties'
 
     def vJackson = '2.4.3'
 
@@ -65,11 +74,3 @@ dependencies {
     // for use of spring-test's MatcherAssertionErrors.*
     testCompile "org.springframework:spring-test"
 }
-
-// Add test-util source directories to IDEA .iml files
-idea.module {
-    testSourceDirs += (sourceSets.testUtil.java.srcDirs + sourceSets.testUtil.resources.srcDirs)
-}
-
-
-

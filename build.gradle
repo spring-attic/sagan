@@ -20,32 +20,10 @@ buildscript {
 
 configure(allprojects) {
     apply plugin: 'eclipse'
-    apply plugin: 'idea'
-
-    idea.module {
-        excludeDirs += [
-                file('bin'),      // containing build artifacts from Eclipse (if any)
-                file('work'),     // containing transient artifacts used by embedded Tomcat
-                file('logs'),     // containing app logs written by embedded Tomcat
-                file('data'),     // containing logs and data written by elasticsearch
-                file('.settings') // containing intentionally checked-in Eclipse metadata
-        ]
-    }
 }
 
 configure(rootProject) {
     apply from: 'gradle/gitMetadata.gradle'
-
-    idea.project {
-        languageLevel = vJavaLang
-        ipr {
-            withXml { provider ->
-                def mapping = provider.node.component.find { it.@name == 'VcsDirectoryMappings' }.mapping
-                mapping.@vcs = 'Git'
-                mapping.@directory = '$PROJECT_DIR$'
-            }
-        }
-    }
 }
 
 configure(javaProjects) {
