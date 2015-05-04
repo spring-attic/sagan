@@ -40,7 +40,10 @@
           <tbody>
             <tr th:each="archive : ${updateSiteArchives}">
               <td th:text="${archive.version}"></td>
-              <td><a th:href="${archive.url}" th:text="${archive.fileName}"></a></td>
+              <td><a th:href="${archive.url}" th:text="${archive.fileName}"
+                     th:onclick="'_gaq.push([\'_trackEvent\',\'sts download\',\'' + ${archive.url} + '\'])'"
+                     target="_blank"
+                      ></a></td>
               <td th:text="${archive.fileSize}"></td>
             </tr>
           </tbody>
@@ -50,7 +53,7 @@
         <section>
         <h2>Update Sites</h2>
         <p>
-          If you want to install STS/GGTS in an existing Eclipse installation, you can use one of the following update sites. Please choose the one that matches the Eclipse version you're running:
+          If you want to install STS in an existing Eclipse installation, you can use one of the following update sites. Please choose the one that matches the Eclipse version you're running:
         </p>
         <table class="table table-striped tool-update-sites--table">
           <thead>
@@ -83,7 +86,7 @@
           </tbody>
         </table>
         <p>
-          As an alternative, you can also install STS/GGTS directly from the Eclipse Marketplace.
+          As an alternative, you can also install STS directly from the Eclipse Marketplace.
         </p>
         <div class="tools-bottom--container">
           <div>
