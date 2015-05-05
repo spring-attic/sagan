@@ -1,7 +1,15 @@
-import org.gradle.api.tasks.Exec
-import org.apache.tools.ant.taskdefs.condition.Os
+plugins {
+    id 'com.moowork.node' version '0.10'
+}
 
 apply plugin: 'java'
+apply plugin: 'com.moowork.node'
+
+node {
+    version = '0.10.38'
+    npmVersion = '1.4.28'
+    download = true
+}
 
 jar {
     from 'dist'
@@ -15,31 +23,11 @@ jar {
 
 }
 
-task npmInstall(type:Exec) {
-    // be Gradle-like and suppress boilerplate logging
-    logging.captureStandardOutput LogLevel.INFO
-    // but we do always want to see downloads in the log
-    logging.captureStandardError LogLevel.LIFECYCLE
-    inputs.files "package.json", "bower.json"
-    outputs.dir "node_modules"
-    if(Os.isFamily(Os.FAMILY_WINDOWS)) {
-        commandLine 'cmd', '/c', 'npm', 'install'
-    } else {
-        commandLine 'npm', 'install'
-    }
-}
-
-task npmBuild(dependsOn: npmInstall, type:Exec) {
-    logging.captureStandardOutput LogLevel.INFO
-    logging.captureStandardError LogLevel.INFO
+task npmBuild(dependsOn: npmInstall, type: NpmTask) {
     inputs.dir "src"
     inputs.file "gulpfile.js"
     outputs.dir "dist"
-    if(Os.isFamily(Os.FAMILY_WINDOWS)) {
-        commandLine 'cmd', '/c', 'npm', 'run', 'build'
-    } else {
-        commandLine 'npm', 'run', 'build'
-    }
+    args = ['run', 'build']
 }
 
 jar.dependsOn npmBuild
