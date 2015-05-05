@@ -41,7 +41,8 @@
             <tr th:each="archive : ${updateSiteArchives}">
               <td th:text="${archive.version}"></td>
               <td><a th:href="${archive.url}" th:text="${archive.fileName}"
-                     th:onclick="'_gaq.push([\'_trackEvent\',\'sts download\',\'' + ${archive.url} + '\'])'"
+                     th:onclick="'_gaq.push([\'_trackEvent\',\'download STS Eclipse' +
+                     ${archive.version} + ' updatesite\',\'' + ${archive.url} + '\'])'"
                      target="_blank"
                       ></a></td>
               <td th:text="${archive.fileSize}"></td>

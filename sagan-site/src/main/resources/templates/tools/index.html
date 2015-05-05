@@ -34,7 +34,8 @@
                 <ul class='download-links'>
                     <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${stsDownloadLinks}">
                         <a class="tool--download-btn btn btn-black uppercase sub-text on-black" th:href="${downloadLink.url}"
-                           th:onclick="'_gaq.push([\'_trackEvent\',\'sts download\',\'' + ${downloadLink.url} + '\'])'"
+                           th:onclick="'_gaq.push([\'_trackEvent\',\'download STS ' + ${stsVersion} +
+                           ' ' + ${downloadLink.os} + '\',\'' + ${downloadLink.url} + '\'])'"
                            target="_blank">
                             Download STS
                             <p th:text="'(' + ${stsVersion} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>

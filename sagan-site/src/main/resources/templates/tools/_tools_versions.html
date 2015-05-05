@@ -34,7 +34,9 @@
                                             <div class='item--body--version'
                                                  th:each='downloadLink : ${architecture.downloadLinks}'>
                                                 <a class="tool-download-link" th:href='${downloadLink.url}'
-                                                   th:onclick="'_gaq.push([\'_trackEvent\',\'' + (${toolsuite}?: 'sts') + ' download\',\'' + ${downloadLink.url} + '\'])'"
+                                                   th:onclick="'_gaq.push([\'_trackEvent\',\'download ' +
+                                                   ${release.displayName} + ' ' + ${downloadLink.os} +
+                                                   '\',\'' + ${downloadLink.url} + '\'])'"
                                                    target="_blank">
                                                     <p class="file-type" th:text='${downloadLink.fileType}'>A file type</p>
                                                     <span class="file-size" th:text="${downloadLink.fileSize}">2 MB</span>
