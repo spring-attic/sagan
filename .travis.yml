@@ -1,31 +1,20 @@
-# Configuration for CI build at https://travis-ci.org/spring-io/sagan
-
 language: java
-
 jdk:
-  - oraclejdk8
-
+- oraclejdk8
 node_js:
-  - '0.10'
-
+- '0.10'
 git:
   submodules: false
-
 env:
   global:
-    - GRADLE_OPTS="-Xmx1024m -Xms1024m"
-    - TERM=dumb
-
+  - GRADLE_OPTS="-Xmx1024m -Xms1024m"
+  - TERM=dumb
 script:
-  - 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then ./gradlew deploy; else ./gradlew check; fi'
-
+- 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then ./gradlew deploy; else ./gradlew check; fi'
 sudo: false
-
 cache:
   directories:
   - $HOME/.gradle
-
 notifications:
-  hipchat:
-    rooms:
-      secure: RPubHrQ43LqAeS+OxGsYyCtFztn0XE3BHw5rcEdTs1ewqmC5XusNRuqfijeuHBNJNX1dM7RosdktnBV1C+Jc3auI+AJTt+lQ0PU4dBg3UbjOrdIB+pCaMrgpg+JvHqOrb6iw+D1naqnJyKTKsSEWe5/bUSWGA8nhD3iuKCWXOtg=
+  slack:
+    secure: UeQFhST22VCODXVQzxmXweI9MaWtn8dPHArFVmZ0XM84A8d83hoBu0y22d41raviBPwVDAnua3mmzXNvpdNHm0BzJ5WswGDD5OUQVgO5xcKW958qNp3VmZLQypr7o1a4ZRT9yexQUYznGBJjEBpO3ESKG2FINhA0C0UCpw2r9IE=
