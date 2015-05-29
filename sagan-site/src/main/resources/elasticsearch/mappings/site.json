@@ -13,7 +13,7 @@
                 "analyzer": "partial_word"
             },
             "publishAt": {
-                "type": "string",
+                "type": "date",
                 "store": "yes"
             },
             "summary": {
