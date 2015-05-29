@@ -2,7 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.search.SearchEntry;
+import sagan.search.types.SearchEntry;
 import sagan.search.SearchException;
 import sagan.search.support.SearchService;
 import sagan.support.DateFactory;

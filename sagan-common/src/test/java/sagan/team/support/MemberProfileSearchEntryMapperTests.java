@@ -1,6 +1,6 @@
 package sagan.team.support;
 
-import sagan.search.SearchEntry;
+import sagan.search.types.SearchEntry;
 import sagan.team.MemberProfile;
 
 import org.junit.Before;

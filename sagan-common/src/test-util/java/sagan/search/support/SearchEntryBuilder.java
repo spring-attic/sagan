@@ -1,6 +1,6 @@
 package sagan.search.support;
 
-import sagan.search.SearchEntry;
+import sagan.search.types.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,9 +17,11 @@ public class SearchEntryBuilder {
     private String path = "/some/path";
     private List<String> facetPaths = new ArrayList<>();
     private boolean current = true;
-    private String type;
     private String version;
     private String projectId;
+    private String className;
+    private String packageName;
+
 
     private SearchEntryBuilder() {
     }
@@ -68,30 +70,6 @@ public class SearchEntryBuilder {
         return this;
     }
 
-    public SearchEntry build() {
-        SearchEntry searchEntry = new SearchEntry();
-
-        searchEntry.setTitle(title);
-        searchEntry.setRawContent(rawContent);
-        searchEntry.setSummary(summary);
-        searchEntry.setPublishAt(publishAt);
-        searchEntry.setPath(path);
-        searchEntry.setCurrent(current);
-        searchEntry.setFacetPaths(facetPaths);
-        searchEntry.setVersion(version);
-        searchEntry.setProjectId(projectId);
-
-        if (type != null) {
-            searchEntry.setType(type);
-        }
-        return searchEntry;
-    }
-
-    public SearchEntryBuilder type(String type) {
-        this.type = type;
-        return this;
-    }
-
     public SearchEntryBuilder version(String version) {
         this.version = version;
         return this;
@@ -101,4 +79,58 @@ public class SearchEntryBuilder {
         this.projectId = projectId;
         return this;
     }
+
+    public SearchEntryBuilder className(String className) {
+        this.className = className;
+        return this;
+    }
+
+    public SearchEntryBuilder packageName(String packageName) {
+        this.packageName = packageName;
+        return this;
+    }
+
+    public BlogPost blog() {
+        BlogPost blogPost = build(new BlogPost());
+        blogPost.setPublishAt(this.publishAt);
+        return blogPost;
+    }
+
+    public ApiDoc api() {
+        ApiDoc api = build(new ApiDoc());
+        api.setClassName(this.className);
+        api.setPackageName(this.packageName);
+        api.setCurrent(this.current);
+        api.setVersion(this.version);
+        api.setProjectId(this.projectId);
+        return api;
+    }
+
+    public GuideDoc guide() {
+        GuideDoc guide = build(new GuideDoc());
+        return guide;
+    }
+
+    public ReferenceDoc reference() {
+        ReferenceDoc ref = build(new ReferenceDoc());
+        ref.setCurrent(this.current);
+        ref.setVersion(this.version);
+        ref.setProjectId(this.projectId);
+        return ref;
+    }
+
+    public SitePage page() {
+        SitePage page = build(new SitePage());
+        return page;
+    }
+
+    private <R extends SearchEntry> R build(R searchEntry) {
+        searchEntry.setTitle(title);
+        searchEntry.setRawContent(rawContent);
+        searchEntry.setSummary(summary);
+        searchEntry.setPath(path);
+        searchEntry.setFacetPaths(facetPaths);
+        return searchEntry;
+    }
+
 }

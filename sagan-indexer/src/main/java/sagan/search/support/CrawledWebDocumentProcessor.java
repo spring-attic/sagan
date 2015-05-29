@@ -1,6 +1,6 @@
 package sagan.search.support;
 
-import sagan.search.SearchEntry;
+import sagan.search.types.SearchEntry;
 import sagan.search.SearchEntryMapper;
 
 import org.jsoup.nodes.Document;

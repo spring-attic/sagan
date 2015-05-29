@@ -1,17 +1,15 @@
 package sagan.search.support;
 
-import sagan.search.SearchEntry;
-import saganx.AbstractIntegrationTests;
-
-import java.util.Calendar;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
+import sagan.search.types.SearchEntry;
+import saganx.AbstractIntegrationTests;
+
+import java.util.Calendar;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -76,7 +74,7 @@ public class SearchPageTests extends AbstractIntegrationTests {
                 .summary("Html summary")
                 .rawContent("Raw Content")
                 .path("/blog/" + 1)
-                .build();
+                .blog();
 
         searchService.saveToIndex(searchEntry);
     }
@@ -90,9 +88,8 @@ public class SearchPageTests extends AbstractIntegrationTests {
                     .title("This week in Spring - November " + number + ", 2012")
                     .summary("Html summary")
                     .rawContent("Raw Content")
-                    .type("site")
                     .path("/blog/" + number)
-                    .build();
+                    .blog();
 
             searchService.saveToIndex(entry);
         }

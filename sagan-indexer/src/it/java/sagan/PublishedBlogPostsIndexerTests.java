@@ -1,23 +1,22 @@
 package sagan;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+import org.springframework.test.context.ContextConfiguration;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
 import sagan.blog.support.PostRepository;
 import sagan.blog.support.PublishedBlogPostsIndexer;
-import sagan.search.SearchEntry;
 import sagan.search.support.SearchService;
+import sagan.search.types.BlogPost;
+import sagan.search.types.SearchEntry;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
-import org.springframework.test.context.ContextConfiguration;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -33,16 +32,16 @@ public class PublishedBlogPostsIndexerTests extends AbstractIndexerIntegrationTe
         @Bean
         @Primary
         public SearchService stubSearchService() {
-            return new SearchService(null, null) {
+            return new SearchService(null, null, null) {
                 @Override
                 public void saveToIndex(SearchEntry entry) {
-                    indexedEntry = entry;
+                    indexedEntry = (BlogPost) entry;
                 }
             };
         }
     }
 
-    private static SearchEntry indexedEntry;
+    private static BlogPost indexedEntry;
 
     @Autowired
     private PublishedBlogPostsIndexer blogPostIndexer;
@@ -111,6 +110,11 @@ public class PublishedBlogPostsIndexerTests extends AbstractIndexerIntegrationTe
     @Test
     public void indexedEntriesHaveASubtitle() throws Exception {
         assertThat(indexedEntry.getSubTitle(), equalTo("Blog Post"));
+    }
+
+    @Test
+    public void indexedEntriesHaveAnAuthor() throws Exception {
+        assertThat(indexedEntry.getAuthor(), equalTo("John Doe"));
     }
 
     @Test

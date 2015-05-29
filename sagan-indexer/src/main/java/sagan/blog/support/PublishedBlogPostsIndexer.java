@@ -2,7 +2,7 @@ package sagan.blog.support;
 
 import sagan.Indexer;
 import sagan.blog.Post;
-import sagan.search.SearchEntry;
+import sagan.search.types.SearchEntry;
 import sagan.search.support.SearchService;
 
 import org.springframework.beans.factory.annotation.Autowired;

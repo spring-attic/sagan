@@ -93,7 +93,7 @@ if (project.name == indexerProject.name) {
 // have been invoked.
 
 def reqDeployVars = [
-    'adminPassword', 'elasticsearchEndpoint', 'githubClientId',
+    'adminPassword', 'githubClientId',
     'githubClientSecret', 'githubAccessToken', 'webhookAccessToken'
 ]
 
@@ -140,7 +140,6 @@ gradle.taskGraph.whenReady {
             cloudfoundry {
                 env << [
                         ADMIN_PASSWORD: adminPassword,
-                        ELASTICSEARCH_ENDPOINT: elasticsearchEndpoint,
                 ]
             }
 
@@ -186,8 +185,12 @@ if (project.hasProperty(TARGET_SPACE)) {
             }
             'sagan-cache' {
                 label = 'rediscloud'
-                plan = '25mb'
+                plan = '100mb'
             }
+			'sagan-search' {
+				label = 'searchly'
+				plan = (space == PRODUCTION_SPACE ? 'small' : 'micro')
+			}
         }
     }
 

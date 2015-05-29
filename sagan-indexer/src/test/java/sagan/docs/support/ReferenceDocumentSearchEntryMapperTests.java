@@ -1,16 +1,15 @@
 package sagan.docs.support;
 
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectReleaseBuilder;
-import sagan.search.SearchEntry;
-
-import java.util.Collections;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.projects.ProjectReleaseBuilder;
+import sagan.search.types.ReferenceDoc;
+
+import java.util.Collections;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -33,7 +32,7 @@ public class ReferenceDocumentSearchEntryMapperTests {
             .current(true).build();
 
     private ReferenceDocumentSearchEntryMapper mapper = new ReferenceDocumentSearchEntryMapper(project, version);
-    private SearchEntry entry;
+    private ReferenceDoc entry;
 
     @Before
     public void setUp() throws Exception {

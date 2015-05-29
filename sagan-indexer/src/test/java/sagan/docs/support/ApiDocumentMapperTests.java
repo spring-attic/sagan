@@ -1,18 +1,17 @@
 package sagan.docs.support;
 
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectReleaseBuilder;
-import sagan.search.SearchEntry;
-
-import java.io.InputStream;
-import java.util.Collections;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
-
 import org.springframework.core.io.ClassPathResource;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.projects.ProjectReleaseBuilder;
+import sagan.search.types.ApiDoc;
+import sagan.search.types.SearchType;
+
+import java.io.InputStream;
+import java.util.Collections;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -41,8 +40,9 @@ public class ApiDocumentMapperTests {
         InputStream html = new ClassPathResource("/fixtures/apidocs/apiDocument.html", getClass()).getInputStream();
         Document document = Jsoup.parse(html, "UTF-8", "http://example.com/docs");
 
-        SearchEntry searchEntry = apiDocumentMapper.map(document);
+        ApiDoc searchEntry = apiDocumentMapper.map(document);
         assertThat(searchEntry.getRawContent(), equalTo("SomeClass"));
+        assertThat(searchEntry.getClassName(), equalTo("ClassPathBeanDefinitionScanner"));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ApiDocumentMapperTests {
         InputStream html = new ClassPathResource("/fixtures/apidocs/jdk7javaDoc.html", getClass()).getInputStream();
         Document document = Jsoup.parse(html, "UTF-8", "http://example.com/docs");
 
-        SearchEntry searchEntry = apiDocumentMapper.map(document);
+        ApiDoc searchEntry = apiDocumentMapper.map(document);
         assertThat(searchEntry.getRawContent(), equalTo(document.select(".block").text()));
     }
 
@@ -59,10 +59,12 @@ public class ApiDocumentMapperTests {
         InputStream html = new ClassPathResource("/fixtures/apidocs/jdk7javaDoc.html", getClass()).getInputStream();
         Document document = Jsoup.parse(html, "UTF-8", "http://example.com/docs");
 
-        SearchEntry searchEntry = apiDocumentMapper.map(document);
-        assertThat(searchEntry.getType(), equalTo("apiDoc"));
+        ApiDoc searchEntry = apiDocumentMapper.map(document);
+        assertThat(searchEntry.getType(), equalTo(SearchType.API_DOC.toString()));
         assertThat(searchEntry.getVersion(), equalTo("3.2.1.RELEASE"));
         assertThat(searchEntry.getProjectId(), equalTo(project.getId()));
         assertThat(searchEntry.getSubTitle(), equalTo("Spring Project (3.2.1.RELEASE API)"));
+        assertThat(searchEntry.getClassName(), equalTo("ApplicationContext"));
+        assertThat(searchEntry.getPackageName(), equalTo("org.springframework.context"));
     }
 }

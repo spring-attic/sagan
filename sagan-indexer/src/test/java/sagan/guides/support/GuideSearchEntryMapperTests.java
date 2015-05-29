@@ -1,10 +1,8 @@
 package sagan.guides.support;
 
-import sagan.guides.ContentProvider;
 import sagan.guides.DefaultGuideMetadata;
 import sagan.guides.GettingStartedGuide;
-import sagan.guides.Guide;
-import sagan.search.SearchEntry;
+import sagan.search.types.SearchEntry;
 
 import org.junit.Before;
 import org.junit.Test;
