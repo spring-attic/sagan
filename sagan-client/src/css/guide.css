@@ -43,6 +43,13 @@
 .guides-section--container .guides--wrapper {
   margin-right: -40px;
 }
+
+@media (max-width:600px){
+  .guides-section--container .guide--container {
+    width: 100%;
+  }
+}
+
 .guides-section--container .guide--container {
   display: inline-block;
   width: 29.269%;
