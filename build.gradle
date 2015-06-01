@@ -42,6 +42,7 @@ configure(javaProjects) {
         testCompile 'junit:junit'
         testCompile 'org.hamcrest:hamcrest-library'
         testCompile 'org.mockito:mockito-core'
+        testCompile 'org.objenesis:objenesis'
     }
 
     configurations {

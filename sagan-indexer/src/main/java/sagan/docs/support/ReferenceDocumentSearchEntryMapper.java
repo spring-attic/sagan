@@ -1,13 +1,10 @@
 package sagan.docs.support;
 
+import org.jsoup.nodes.Document;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
-import sagan.search.SearchEntry;
 import sagan.search.SearchEntryMapper;
-
-import java.util.Date;
-
-import org.jsoup.nodes.Document;
+import sagan.search.types.ReferenceDoc;
 
 class ReferenceDocumentSearchEntryMapper implements SearchEntryMapper<Document> {
 
@@ -20,9 +17,8 @@ class ReferenceDocumentSearchEntryMapper implements SearchEntryMapper<Document> 
     }
 
     @Override
-    public SearchEntry map(Document document) {
-        SearchEntry entry = new SearchEntry();
-        entry.setPublishAt(new Date(0L));
+    public ReferenceDoc map(Document document) {
+        ReferenceDoc entry = new ReferenceDoc();
         String text = document.text();
 
         entry.setRawContent(text);

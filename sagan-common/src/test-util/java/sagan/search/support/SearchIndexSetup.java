@@ -1,5 +1,6 @@
 package sagan.search.support;
 
+import io.searchbox.action.Action;
 import sagan.search.SearchException;
 
 import java.io.File;
@@ -17,7 +18,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StreamUtils;
 
-import io.searchbox.Action;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.indices.CreateIndex;

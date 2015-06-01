@@ -1,7 +1,9 @@
 package sagan.search;
 
+import sagan.search.types.SearchEntry;
+
 public interface SearchEntryMapper<T> {
 
-    SearchEntry map(T item);
+    <R extends SearchEntry> R map(T item);
 
 }

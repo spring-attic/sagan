@@ -1,16 +1,15 @@
 package sagan.team.support;
 
-import sagan.search.SearchEntry;
-import sagan.search.SearchEntryMapper;
-import sagan.team.MemberProfile;
-
 import org.springframework.stereotype.Component;
+import sagan.search.SearchEntryMapper;
+import sagan.search.types.SitePage;
+import sagan.team.MemberProfile;
 
 @Component
 class MemberProfileSearchEntryMapper implements SearchEntryMapper<MemberProfile> {
     @Override
-    public SearchEntry map(MemberProfile profile) {
-        SearchEntry entry = new SearchEntry();
+    public SitePage map(MemberProfile profile) {
+        SitePage entry = new SitePage();
         entry.setTitle(profile.getFullName());
         entry.setSummary(profile.getBio());
         entry.setRawContent(profile.getBio());

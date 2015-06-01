@@ -1,16 +1,15 @@
 package sagan.blog.support;
 
-import sagan.blog.Post;
-import sagan.search.SearchEntry;
-import sagan.search.SearchEntryMapper;
-
 import org.jsoup.Jsoup;
+import sagan.blog.Post;
+import sagan.search.SearchEntryMapper;
+import sagan.search.types.BlogPost;
 
 class PostSearchEntryMapper implements SearchEntryMapper<Post> {
 
     @Override
-    public SearchEntry map(Post post) {
-        SearchEntry entry = new SearchEntry();
+    public BlogPost map(Post post) {
+        BlogPost entry = new BlogPost();
         entry.setTitle(post.getTitle());
         entry.setSubTitle("Blog Post");
 
@@ -22,6 +21,7 @@ class PostSearchEntryMapper implements SearchEntryMapper<Post> {
         entry.addFacetPaths("Blog", "Blog/" + post.getCategory().getDisplayName());
         entry.setPath("/blog/" + post.getPublicSlug());
         entry.setPublishAt(post.getPublishAt());
+        entry.setAuthor(post.getAuthor().getFullName());
         return entry;
     }
 

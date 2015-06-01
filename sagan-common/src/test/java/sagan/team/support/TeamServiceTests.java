@@ -1,14 +1,13 @@
 package sagan.team.support;
 
-import sagan.search.SearchEntry;
-import sagan.search.support.SearchService;
-import sagan.team.MemberProfile;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import sagan.search.support.SearchService;
+import sagan.search.types.SitePage;
+import sagan.team.MemberProfile;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -38,7 +37,7 @@ public class TeamServiceTests {
         MemberProfile savedProfile = new MemberProfile();
         given(teamRepository.findById(1234L)).willReturn(savedProfile);
 
-        SearchEntry searchEntry = new SearchEntry();
+        SitePage searchEntry = new SitePage();
         given(mapper.map(savedProfile)).willReturn(searchEntry);
         service.updateMemberProfile(1234L, new MemberProfile());
 
@@ -50,7 +49,7 @@ public class TeamServiceTests {
         MemberProfile savedProfile = new MemberProfile();
         given(teamRepository.findById(1234L)).willReturn(savedProfile);
 
-        SearchEntry searchEntry = new SearchEntry();
+        SitePage searchEntry = new SitePage();
         given(mapper.map(savedProfile)).willReturn(searchEntry);
         MemberProfile updatedProfile = new MemberProfile();
         updatedProfile.setGravatarEmail("test@example.com");
@@ -66,7 +65,7 @@ public class TeamServiceTests {
         savedProfile.setAvatarUrl("http://example.com/image.png");
         given(teamRepository.findById(1234L)).willReturn(savedProfile);
 
-        SearchEntry searchEntry = new SearchEntry();
+        SitePage searchEntry = new SitePage();
         given(mapper.map(savedProfile)).willReturn(searchEntry);
         MemberProfile updatedProfile = new MemberProfile();
         updatedProfile.setGravatarEmail("");

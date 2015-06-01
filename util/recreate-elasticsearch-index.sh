@@ -22,18 +22,21 @@ curl -XDELETE "$ENDPOINT/$INDEX"
 sleep 1
 
 echo "\nCreate the index again."
-curl -X PUT $ENDPOINT/$INDEX -d '{ "number_of_shards" : 1, "number_of_replicas" : 0}'
+curl -X PUT $ENDPOINT/$INDEX -d @../sagan-site/src/main/resources/elasticsearch/settings.json
 sleep 1
-
-echo "\nInstall the settings, requires closing the index first."
+echo "\nClosing index."
 curl -XPOST "$ENDPOINT/$INDEX/_close"
 sleep 1
-curl -XPUT "$ENDPOINT/$INDEX/_settings" -d @../sagan-site/src/main/resources/elasticsearch/settings.json
-sleep 1
 echo "\nInstall the mapping - do once per type/mapping file."
-curl -XPOST "$ENDPOINT/$INDEX/site/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/site.json
+curl -XPOST "$ENDPOINT/$INDEX/apidoc/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/apidoc.json
 sleep 1
-curl -XPOST "$ENDPOINT/$INDEX/apiDoc/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/apiDoc.json
+curl -XPOST "$ENDPOINT/$INDEX/blogpost/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/blogpost.json
+sleep 1
+curl -XPOST "$ENDPOINT/$INDEX/guidedoc/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/guidedoc.json
+sleep 1
+curl -XPOST "$ENDPOINT/$INDEX/referencedoc/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/referencedoc.json
+sleep 1
+curl -XPOST "$ENDPOINT/$INDEX/sitepage/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/sitepage.json
 sleep 1
 curl -XPOST "$ENDPOINT/$INDEX/_open"
 sleep 1

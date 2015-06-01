@@ -1,14 +1,15 @@
 {
-    "index.analysis.filter.name_ngrams.type": "edgeNGram",
-    "index.analysis.filter.name_ngrams.side": "front",
-    "index.analysis.filter.name_ngrams.max_gram": 20,
-    "index.analysis.filter.name_ngrams.min_gram": 2,
-
-    "index.analysis.analyzer.partial_word.type": "custom",
-    "index.analysis.analyzer.partial_word.tokenizer": "standard",
-    "index.analysis.analyzer.partial_word.filter.0": "standard",
-    "index.analysis.analyzer.partial_word.filter.1": "lowercase",
-    "index.analysis.analyzer.partial_word.filter.2": "asciifolding",
-    "index.analysis.analyzer.partial_word.filter.3": "porterStem",
-    "index.analysis.analyzer.partial_word.filter.4": "stop"
+  "settings.number_of_shards": 1,
+  "settings.number_of_replicas": 0,
+  "index.analysis.analyzer.fulltext.tokenizer": "standard",
+  "index.analysis.analyzer.fulltext.char_filter.0": "html_strip",
+  "index.analysis.analyzer.fulltext.filter.0": "standard",
+  "index.analysis.analyzer.fulltext.filter.1": "stop",
+  "index.analysis.analyzer.fulltext.filter.2": "lowercase",
+  "index.analysis.analyzer.fulltext.filter.3": "asciifolding",
+  "index.analysis.analyzer.fulltext.filter.4": "porter_stem",
+  "index.analysis.analyzer.code_autocomplete.tokenizer": "code_ngram",
+  "index.analysis.tokenizer.code_ngram.type": "edgeNGram",
+  "index.analysis.tokenizer.code_ngram.min_gram": 2,
+  "index.analysis.tokenizer.code_ngram.max_gram": 20
 }

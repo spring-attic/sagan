@@ -1,18 +1,15 @@
 package sagan.guides.support;
 
-import sagan.guides.Guide;
-import sagan.search.SearchEntry;
-import sagan.search.SearchEntryMapper;
-
-import java.util.Date;
-
 import org.jsoup.Jsoup;
+import sagan.guides.Guide;
+import sagan.search.SearchEntryMapper;
+import sagan.search.types.GuideDoc;
 
 class TutorialMapper implements SearchEntryMapper<Guide> {
 
     @Override
-    public SearchEntry map(Guide tutorial) {
-        SearchEntry entry = new SearchEntry();
+    public GuideDoc map(Guide tutorial) {
+        GuideDoc entry = new GuideDoc();
         entry.setTitle(tutorial.getTitle());
         entry.setSubTitle("Tutorial");
 
@@ -22,7 +19,6 @@ class TutorialMapper implements SearchEntryMapper<Guide> {
         entry.setRawContent(text);
         entry.setPath("/guides/tutorials/" + tutorial.getGuideId() + "/");
         entry.addFacetPaths("Guides", "Guides/Tutorials");
-        entry.setPublishAt(new Date(0L));
         return entry;
     }
 }

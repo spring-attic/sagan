@@ -1,0 +1,100 @@
+{
+  "from" : 0,
+  "size" : 10,
+  "query" : {
+    "filtered" : {
+      "query" : {
+        "bool" : {
+          "must" : {
+            "multi_match" : {
+              "query" : "spring",
+              "fields" : [ "title^2", "rawContent", "author" ],
+              "fuzziness" : "AUTO",
+              "tie_breaker" : 0.3
+            }
+          },
+          "should" : {
+            "term" : {
+              "current" : {
+                "value" : true,
+                "boost" : 0.5
+              }
+            }
+          }
+        }
+      },
+      "filter" : {
+        "or" : {
+          "filters" : [ {
+            "range" : {
+              "publishAt" : {
+                "from" : null,
+                "to" : "now/d",
+                "include_lower" : true,
+                "include_upper" : true
+              }
+            }
+          }, {
+            "not" : {
+              "filter" : {
+                "type" : {
+                  "value" : "blogpost"
+                }
+              }
+            }
+          } ]
+        }
+      }
+    }
+  },
+  "post_filter" : {
+    "or" : {
+      "filters" : [ {
+        "and" : {
+          "filters" : [ {
+            "terms" : {
+              "facetPaths" : [ "Projects/Api", "Projects/Reference" ],
+              "execution" : "or"
+            }
+          }, {
+            "terms" : {
+              "facetPaths" : [ "Projects/Reactor Project/1.1.0.RELEASE" ],
+              "execution" : "or"
+            }
+          } ]
+        }
+      }, {
+        "terms" : {
+          "facetPaths" : [ "Blog/Engineering" ],
+          "execution" : "or"
+        }
+      } ]
+    }
+  },
+  "sort" : [ {
+    "_score" : { }
+  }, {
+    "publishAt" : {
+      "order" : "desc"
+    }
+  } ],
+  "facets" : {
+    "facet_paths_result" : {
+      "terms" : {
+        "field" : "facetPaths",
+        "size" : 100000,
+        "order" : "term"
+      }
+    }
+  },
+  "highlight" : {
+    "order" : "score",
+    "require_field_match" : false,
+    "fields" : {
+      "rawContent" : {
+        "fragment_size" : 300,
+        "number_of_fragments" : 1
+      }
+    }
+  }
+}

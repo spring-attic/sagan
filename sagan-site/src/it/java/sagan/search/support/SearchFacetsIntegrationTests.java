@@ -1,13 +1,10 @@
 package sagan.search.support;
 
-import sagan.search.SearchEntry;
+import sagan.search.types.SearchEntry;
 import saganx.AbstractIntegrationTests;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,19 +35,19 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
             .path("http://example.com/gettingStarted/some")
             .title("a title")
             .facetPath("Guides")
-            .facetPath("Guides/Getting Started").notCurrent().build();
+            .facetPath("Guides/Getting Started").guide();
 
     private SearchEntry tutorial = SearchEntryBuilder.entry()
             .path("http://example.com/tutorial")
             .title("a title")
             .facetPath("Guides")
-            .facetPath("Guides/Tutorials").build();
+            .facetPath("Guides/Tutorials").guide();
 
     private SearchEntry blog = SearchEntryBuilder.entry()
             .path("http://example.com/blog")
             .title("a title")
             .facetPath("Blog")
-            .facetPath("Blog/Engineering").build();
+            .facetPath("Blog/Engineering").blog();
 
     private SearchEntry springFrameworkApiDoc = SearchEntryBuilder.entry()
             .path("http://example.com/projects/springFramework/apiDoc")
@@ -58,7 +55,7 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
             .facetPath("Projects")
             .facetPath("Projects/Api")
             .facetPath("Projects/SpringFramework")
-            .facetPath("Projects/SpringFramework/3.4.5.RELEASE").build();
+            .facetPath("Projects/SpringFramework/3.4.5.RELEASE").api();
 
     private SearchEntry springFrameworkRefDoc = SearchEntryBuilder.entry()
             .path("http://example.com/projects/springFramework/refDoc")
@@ -66,7 +63,7 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
             .facetPath("Projects")
             .facetPath("Projects/Reference")
             .facetPath("Projects/SpringFramework")
-            .facetPath("Projects/SpringFramework/3.4.5.RELEASE").build();
+            .facetPath("Projects/SpringFramework/3.4.5.RELEASE").reference();
 
     private SearchEntry springSecurityApiDoc = SearchEntryBuilder.entry()
             .path("http://example.com/projects/spring-security/apiDoc")
@@ -74,7 +71,7 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
             .facetPath("Projects")
             .facetPath("Projects/Api")
             .facetPath("Projects/SpringSecurity")
-            .facetPath("Projects/SpringSecurity/1.2.3.RELEASE").build();
+            .facetPath("Projects/SpringSecurity/1.2.3.RELEASE").api();
 
     private SearchEntry springSecurityRefDoc = SearchEntryBuilder.entry()
             .path("http://example.com/projects/spring-security/refDoc")
@@ -82,7 +79,7 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
             .facetPath("Projects")
             .facetPath("Projects/Reference")
             .facetPath("Projects/SpringSecurity")
-            .facetPath("Projects/SpringSecurity/1.2.3.RELEASE").build();
+            .facetPath("Projects/SpringSecurity/1.2.3.RELEASE").reference();
 
     @Value("${elasticsearch.client.index}")
     private String index;
@@ -245,9 +242,9 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
         SearchEntry unpublishedPost = SearchEntryBuilder.entry()
                 .path("http://example.com/blog")
                 .title("a title")
-                .publishAt("2100-12-01 12:32")
+                .publishAt(new Date(System.currentTimeMillis() + (24 * 60 * 60 * 1000)))
                 .facetPath("Blog")
-                .facetPath("Blog/Engineering").build();
+                .facetPath("Blog/Engineering").blog();
 
         searchService.saveToIndex(unpublishedPost);
         searchService.saveToIndex(blog);

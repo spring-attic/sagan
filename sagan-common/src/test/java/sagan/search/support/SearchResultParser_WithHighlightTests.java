@@ -1,16 +1,14 @@
 package sagan.search.support;
 
-import java.util.List;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
+import io.searchbox.client.JestResult;
 import org.junit.Before;
 import org.junit.Test;
-
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import io.searchbox.client.JestResult;
-
-import com.google.gson.JsonParser;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -105,6 +103,7 @@ public class SearchResultParser_WithHighlightTests {
                     "  }\n" +
                     "}\n";
 
+    private Gson gson = new Gson();
     private SearchResultParser searchResultParser;
     private List<SearchResult> content;
 
@@ -112,7 +111,7 @@ public class SearchResultParser_WithHighlightTests {
     public void setup() {
         JsonParser jsonParser = new JsonParser();
         searchResultParser = new SearchResultParser();
-        JestResult jestResult = new JestResult();
+        JestResult jestResult = new JestResult(gson);
         jestResult.setJsonObject(jsonParser.parse(RESULT_STRING).getAsJsonObject());
 
         Pageable pageable = new PageRequest(1, 10);

@@ -1,16 +1,15 @@
 package sagan.guides.support;
 
-import sagan.guides.UnderstandingDoc;
-import sagan.search.SearchEntry;
-import sagan.support.Fixtures;
-
-import java.util.Date;
-
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import sagan.guides.UnderstandingDoc;
+import sagan.search.types.GuideDoc;
+import sagan.search.types.SearchEntry;
+import sagan.support.Fixtures;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
 
 /**
  * Unit tests for {@link UnderstandingDocMapper}.
@@ -22,12 +21,7 @@ public class UnderstandingDocMapperTests {
             "<h1>Understanding: foo</h1><p>content</p>",
             "<p>sidebar</p>");
 
-    private final SearchEntry entry = mapper.map(doc);
-
-    @Test
-    public void publishAtDateDefaultsTo0() throws Exception {
-        assertThat(entry.getPublishAt(), equalTo(new Date(0L)));
-    }
+    private final GuideDoc entry = mapper.map(doc);
 
     @Test
     public void titleIsSubject() throws Exception {

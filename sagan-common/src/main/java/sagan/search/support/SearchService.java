@@ -1,6 +1,10 @@
 package sagan.search.support;
 
-import sagan.search.SearchEntry;
+import com.google.gson.Gson;
+import io.searchbox.action.Action;
+import org.elasticsearch.index.query.FilteredQueryBuilder;
+import org.springframework.util.StringUtils;
+import sagan.search.types.SearchEntry;
 import sagan.search.SearchException;
 
 import java.util.List;
@@ -13,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import io.searchbox.Action;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
@@ -26,9 +29,8 @@ public class SearchService {
 
     private static Log logger = LogFactory.getLog(SearchService.class);
 
-    private final SearchQueryBuilder searchQueryBuilder = new SearchQueryBuilder();
     private final JestClient jestClient;
-    private final DeleteQueryBuilder deleteQueryBuilder = new DeleteQueryBuilder();
+    private final Gson gson;
 
     private boolean useRefresh = false;
     private SearchResultParser searchResultParser;
@@ -37,9 +39,10 @@ public class SearchService {
     private String index;
 
     @Autowired
-    public SearchService(JestClient jestClient, SearchResultParser searchResultParser) {
+    public SearchService(JestClient jestClient, SearchResultParser searchResultParser, Gson gson) {
         this.jestClient = jestClient;
         this.searchResultParser = searchResultParser;
+        this.gson = gson;
     }
 
     public void saveToIndex(SearchEntry entry) {
@@ -54,14 +57,15 @@ public class SearchService {
 
     public SearchResults search(String term, Pageable pageable, List<String> filter) {
         Search.Builder searchBuilder;
-        if (term.equals("")) {
-            searchBuilder = searchQueryBuilder.forEmptyQuery(pageable, filter);
-        } else {
-            searchBuilder = searchQueryBuilder.forQuery(term, pageable, filter);
+        if (StringUtils.isEmpty(term)) {
+            searchBuilder = SaganQueryBuilders.forEmptyQuery(pageable, filter);
+        }
+        else {
+            searchBuilder = SaganQueryBuilders.fullTextSearch(term, pageable, filter);
         }
         searchBuilder.addIndex(index);
         Search search = searchBuilder.build();
-        logger.debug(search.getData());
+        logger.debug(search.getData(this.gson));
         JestResult jestResult = execute(search);
         return searchResultParser.parseResults(jestResult, pageable, term);
     }
@@ -71,19 +75,17 @@ public class SearchService {
     }
 
     public void removeFromIndex(SearchEntry entry) {
-        Delete delete = new Delete.Builder()
-                .id(entry.getId())
+        Delete delete = new Delete.Builder(entry.getId())
                 .index(index)
-                // TODO this should come from the 'entry'
-                .type("site")
+                .type(entry.getType())
                 .build();
 
         execute(delete);
     }
 
     public void removeOldProjectEntriesFromIndex(String projectId, List<String> supportedVersions) {
-        String query = deleteQueryBuilder.unsupportedProjectEntriesQuery(projectId, supportedVersions);
-
+        FilteredQueryBuilder builder = SaganQueryBuilders.matchUnsupportedProjectEntries(projectId, supportedVersions);
+        String query = SaganQueryBuilders.wrapQuery(builder.toString());
         execute(new DeleteByQuery.Builder(query).build());
     }
 
@@ -91,8 +93,9 @@ public class SearchService {
         try {
             JestResult result = jestClient.execute(action);
             logger.debug(result.getJsonString());
-            if(!result.isSucceeded()) {
-                logger.warn("Failed to execute Elastic Search action: " + result.getErrorMessage());
+            if (!result.isSucceeded()) {
+                logger.warn("Failed to execute Elastic Search action: " + result.getErrorMessage()
+                        + " " + result.getJsonString());
             }
             return result;
         } catch (Exception e) {
