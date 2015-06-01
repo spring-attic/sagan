@@ -123,12 +123,12 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         Pageable page1 = new PageRequest(0, 1);
         Page<SearchResult> searchEntries1 =
                 searchService.search("content", page1, Collections.<String> emptyList()).getPage();
-        assertThat(searchEntries1.getContent().get(0).getId(), equalTo(entry1.getId()));
+        assertThat(searchEntries1.getContent().get(0).getId(), isIn(Arrays.asList(entry1.getId(), entry2.getId())));
 
         Pageable page2 = new PageRequest(1, 1);
         Page<SearchResult> searchEntries2 =
                 searchService.search("content", page2, Collections.<String> emptyList()).getPage();
-        assertThat(searchEntries2.getContent().get(0).getId(), equalTo(entry2.getId()));
+        assertThat(searchEntries2.getContent().get(0).getId(), isIn(Arrays.asList(entry1.getId(), entry2.getId())));
     }
 
     @Test

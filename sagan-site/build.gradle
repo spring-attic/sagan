@@ -32,7 +32,7 @@ dependencies {
     runtime 'net.sourceforge.nekohtml:nekohtml'
 
     // for use in generating blog atom feeds
-    compile 'net.java.dev.rome:rome'
+	compile 'com.rometools:rome'
 
     // for use in serving redirects; see urlrewrite.xml
     compile 'org.tuckey:urlrewritefilter:4.0.4'
