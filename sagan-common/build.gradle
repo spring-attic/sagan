@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:0.5.0.RELEASE"
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE"
     }
 }
 
@@ -17,15 +17,13 @@ sourceSets {
 }
 
 dependencyManagement {
-    imports {
-        mavenBom 'io.spring.platform:platform-versions:1.0.5.RELEASE'
-    }
+	imports {
+		mavenBom 'io.spring.platform:platform-bom:1.1.2.RELEASE'
+	}
 }
 
 
 dependencies {
-
-    def vJackson = '2.4.3'
 
     compile 'org.springframework:spring-context'
     compile 'org.springframework.security:spring-security-core'
@@ -43,7 +41,7 @@ dependencies {
     compile 'org.pegdown:pegdown:1.5.0'
 
     // datasource and connection pool dependencies
-    runtime 'org.postgresql:postgresql:9.2-1002-jdbc4'
+    runtime 'org.postgresql:postgresql:9.4-1201-jdbc4'
     compile 'com.h2database:h2'
     compile 'org.apache.tomcat:tomcat-jdbc'
 
@@ -51,10 +49,10 @@ dependencies {
     compile 'org.flywaydb:flyway-core'
 
     // jackson, for JSON and XML serialization
-    compile "com.fasterxml.jackson.core:jackson-core:${vJackson}"
-    compile "com.fasterxml.jackson.core:jackson-annotations:${vJackson}"
-    compile "com.fasterxml.jackson.core:jackson-databind:${vJackson}"
-    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${vJackson}"
+    compile "com.fasterxml.jackson.core:jackson-core"
+    compile "com.fasterxml.jackson.core:jackson-annotations"
+    compile "com.fasterxml.jackson.core:jackson-databind"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
     compile "org.codehaus.woodstox:woodstox-core-asl"
 
     compile 'org.jsoup:jsoup:1.8.1'

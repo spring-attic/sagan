@@ -32,8 +32,6 @@ security:
 search:
   indexer:
     delay: 0
-server:
-  port: 9000
 
 elasticsearch:
   client:
@@ -57,6 +55,7 @@ github:
       type: orgs
 
 server:
+    port: 9000
     tomcat:
         # Write access log to target/logs/access_log.YYYY-MM-DD.log
         # See http://tomcat.apache.org/tomcat-7.0-doc/api/org/apache/catalina/valves/AccessLogValve.html

@@ -1,5 +1,8 @@
 package sagan.blog.support;
 
+import com.rometools.rome.feed.atom.Entry;
+import com.rometools.rome.feed.atom.Feed;
+import com.rometools.rome.feed.atom.Link;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.support.DateFactory;
@@ -17,9 +20,6 @@ import org.junit.Test;
 
 import org.springframework.ui.ExtendedModelMap;
 
-import com.sun.syndication.feed.atom.Entry;
-import com.sun.syndication.feed.atom.Feed;
-import com.sun.syndication.feed.atom.Link;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;

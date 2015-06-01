@@ -3,7 +3,7 @@ def javaProjects = [ project(':sagan-site'), project(':sagan-indexer'), project(
 def bootProjects = javaProjects - project(':sagan-common')
 def gradleDir = "${rootProject.rootDir}/gradle"
 
-wrapper.gradleVersion = '2.3'
+wrapper.gradleVersion = '2.4'
 
 buildscript {
     ext.springRepo = 'http://repo.spring.io/libs-release'
@@ -13,8 +13,9 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.1.12.RELEASE"
-        classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.1' // see deploy.gradle
+		classpath 'io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE"
+        classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.2' // see deploy.gradle
     }
 }
 
@@ -38,7 +39,7 @@ configure(javaProjects) {
 
     dependencies {
         compile 'org.slf4j:slf4j-api'
-        compile 'org.projectlombok:lombok:1.16.2'
+        compile 'org.projectlombok:lombok'
         testCompile 'junit:junit'
         testCompile 'org.hamcrest:hamcrest-library'
         testCompile 'org.mockito:mockito-core'
@@ -66,6 +67,7 @@ configure(javaProjects) {
 }
 
 configure(bootProjects) {
+	apply plugin: "io.spring.dependency-management"
     apply plugin: 'spring-boot'
     apply from: "$gradleDir/integTest.gradle"
     apply from: "$gradleDir/deploy.gradle"
@@ -74,8 +76,10 @@ configure(bootProjects) {
     springBoot.backupSource = false
     bootRun.dependsOn writeGitPropertiesFile
 
-    dependencies {
-        versionManagement 'io.spring.platform:platform-versions:1.0.5.RELEASE@properties'
-    }
+	dependencyManagement {
+		imports {
+			mavenBom 'io.spring.platform:platform-bom:1.1.2.RELEASE'
+		}
+	}
 }
 
