@@ -32,6 +32,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
+import org.springframework.web.servlet.resource.VersionResourceResolver;
 import org.springframework.web.util.UrlPathHelper;
 
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
@@ -88,6 +90,11 @@ class MvcConfig extends WebMvcConfigurerAdapter {
         filter.setForceEncoding(true);
         return filter;
     }
+
+	@Bean
+	public ResourceUrlEncodingFilter resourceUrlEncodingFilter() {
+		return new ResourceUrlEncodingFilter();
+	}
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -156,7 +163,7 @@ class MvcConfig extends WebMvcConfigurerAdapter {
 
 @Configuration
 @Profile(SaganProfiles.STANDALONE)
-class ClientResourcesConfig extends WebMvcConfigurerAdapter {
+class LocalResourceHandlingConfig extends WebMvcConfigurerAdapter {
 
     @Value("${SAGAN_HOME:}")
     private String saganPath;
@@ -164,9 +171,38 @@ class ClientResourcesConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         if (!this.saganPath.isEmpty()) {
+			VersionResourceResolver versionResolver = new VersionResourceResolver()
+					.addFixedVersionStrategy("dev", "/**/*.js", "/**/*.map")
+					.addContentVersionStrategy("/**");
+
             registry.addResourceHandler("/**")
                     .addResourceLocations("file:///" + this.saganPath + "/sagan-client/src/")
-                    .setCachePeriod(0);
+                    .setCachePeriod(0)
+					.resourceChain(false)
+					.addResolver(versionResolver);
         }
     }
+}
+
+@Configuration
+@Profile(SaganProfiles.CLOUDFOUNDRY)
+class CloudResourceHandlingConfig extends WebMvcConfigurerAdapter {
+
+	@Value("${info.git.commit.id:}")
+	private String gitCommitId;
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+		VersionResourceResolver versionResolver = new VersionResourceResolver()
+				.addFixedVersionStrategy(gitCommitId, "/**/*.js", "/**/*.map")
+				.addContentVersionStrategy("/**");
+
+		registry.addResourceHandler("/**")
+			.addResourceLocations("classpath:/static/")
+				.setCachePeriod(3600 * 24 * 30)
+				.resourceChain(true)
+				.addResolver(versionResolver);
+
+	}
 }

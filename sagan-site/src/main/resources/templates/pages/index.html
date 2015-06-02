@@ -1,5 +1,6 @@
 <html
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
     layout:decorator="layout"
     data-platform-downloads data-hero-banner>
   <head>
@@ -76,10 +77,10 @@
         </section>
         <section class="hero--banner">
           <section class="cfsummit">
-            <a href="http://www.cfsummit.com/"><img src="/img/hero-banner-cfsummit2015.jpg"></a>
+            <a href="http://www.cfsummit.com/"><img th:src="@{/img/hero-banner-cfsummit2015.jpg}"></a>
           </section>
           <section class="springone2gx" style="display: none">
-            <a href="http://www.springone2gx.com/"><img src="/img/hero-banner-springone2015.jpg"></a>
+            <a href="http://www.springone2gx.com/"><img th:src="@{/img/hero-banner-springone2015.jpg}"></a>
           </section>
           <section class="springcloud10" style="display: none">
             <div class="banner--text">
