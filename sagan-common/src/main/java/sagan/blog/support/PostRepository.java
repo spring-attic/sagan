@@ -21,9 +21,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Page<Post> findByDraftTrue(Pageable pageRequest);
 
-    Page<Post> findByDraftFalseAndPublishAtBefore(Date publishedBefore, Pageable pageRequest);
+    Page<Post> findByDraftFalseAndPublishAtBeforeOrderByPublishAtDesc(Date publishedBefore, Pageable pageRequest);
 
-    List<Post> findByDraftFalseAndPublishAtBefore(Date publishedBefore);
+    List<Post> findByDraftFalseAndPublishAtBeforeOrderByPublishAtDesc(Date publishedBefore);
 
     Page<Post> findByCategoryAndDraftFalseAndPublishAtBefore(PostCategory category, Date publishedBefore,
                                                              Pageable pageRequest);

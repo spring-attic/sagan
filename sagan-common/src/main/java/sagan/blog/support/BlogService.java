@@ -83,7 +83,7 @@ public class BlogService {
     }
 
     public Page<Post> getPublishedPosts(Pageable pageRequest) {
-        return postRepository.findByDraftFalseAndPublishAtBefore(dateFactory.now(), pageRequest);
+        return postRepository.findByDraftFalseAndPublishAtBeforeOrderByPublishAtDesc(dateFactory.now(), pageRequest);
     }
 
     @Cacheable(CACHE_NAME)
@@ -102,7 +102,7 @@ public class BlogService {
     }
 
     public List<Post> getAllPublishedPosts() {
-        return postRepository.findByDraftFalseAndPublishAtBefore(dateFactory.now());
+        return postRepository.findByDraftFalseAndPublishAtBeforeOrderByPublishAtDesc(dateFactory.now());
     }
 
     public Page<Post> getPublishedPostsByDate(int year, int month, int day, Pageable pageRequest) {
