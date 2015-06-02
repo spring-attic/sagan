@@ -28,7 +28,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
                         MockMvcRequestBuilders
                                 .get("/project_metadata/spring-framework?callback=a_function_name"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("text/javascript"));
+                .andExpect(content().contentTypeCompatibleWith("application/javascript"));
     }
 
     @Test
