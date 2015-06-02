@@ -106,7 +106,7 @@ logging:
 ---
 
 spring:
-  profiles: default,staging,production
+  profiles: staging,production
 security:
   require_ssl: true
 server:
