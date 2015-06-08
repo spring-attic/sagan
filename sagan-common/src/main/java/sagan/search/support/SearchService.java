@@ -2,27 +2,24 @@ package sagan.search.support;
 
 import com.google.gson.Gson;
 import io.searchbox.action.Action;
-import org.elasticsearch.index.query.FilteredQueryBuilder;
-import org.springframework.util.StringUtils;
-import sagan.search.types.SearchEntry;
-import sagan.search.SearchException;
-
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.elasticsearch.index.query.FilteredQueryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import sagan.search.SearchException;
+import sagan.search.types.SearchEntry;
+
+import java.util.List;
 
 @Service
 public class SearchService {
@@ -43,6 +40,10 @@ public class SearchService {
         this.jestClient = jestClient;
         this.searchResultParser = searchResultParser;
         this.gson = gson;
+    }
+
+    public String getIndexName() {
+        return index;
     }
 
     public void saveToIndex(SearchEntry entry) {

@@ -3,49 +3,61 @@ package sagan.support.health;
 import com.google.gson.JsonObject;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
-
+import io.searchbox.indices.Stats;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health.Builder;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ElasticsearchHealthIndicator extends AbstractHealthIndicator {
 
 
-	private final JestClient jestClient;
+    private final JestClient jestClient;
 
-	public ElasticsearchHealthIndicator(JestClient jestClient) {
-		this.jestClient = jestClient;
-	}
+    private final List<String> indices;
 
-	@Override
-	protected void doHealthCheck(Builder builder) throws Exception {
+    public ElasticsearchHealthIndicator(JestClient jestClient) {
+        this.jestClient = jestClient;
+        this.indices = Collections.singletonList("_all");
+    }
 
+    public ElasticsearchHealthIndicator(JestClient jestClient, String... indices) {
+        this.jestClient = jestClient;
+        this.indices = Arrays.asList(indices);
+    }
 
-		JestResult result = jestClient.execute(new io.searchbox.cluster.Health.Builder().build());
-		JsonObject map = result.getJsonObject();
-		switch(getProperty(map, "status")) {
-			case "green":
-			case "yellow":
-				builder.up();
-				break;
-			case "red":
-			default:
-				builder.down();
-				break;
-		}
-		builder.withDetail("cluster_status", getProperty(map, "status"));
-		builder.withDetail("timed_out", getProperty(map, "timed_out"));
-		builder.withDetail("number_of_nodes", getProperty(map, "number_of_nodes"));
-		builder.withDetail("number_of_data_nodes", getProperty(map, "number_of_data_nodes"));
-		builder.withDetail("active_primary_shards", getProperty(map, "active_primary_shards"));
-		builder.withDetail("active_shards", getProperty(map, "active_shards"));
-		builder.withDetail("relocating_shards", getProperty(map, "relocating_shards"));
-		builder.withDetail("initializing_shards", getProperty(map, "initializing_shards"));
-		builder.withDetail("unassigned_shards", getProperty(map, "unassigned_shards"));
-		builder.withDetail("number_of_pending_tasks", getProperty(map, "number_of_pending_tasks"));
+    @Override
+    protected void doHealthCheck(Builder builder) throws Exception {
 
-	}
+        JestResult result = jestClient.execute(new Stats.Builder().addIndex(this.indices).build());
+        JsonObject map = result.getJsonObject();
 
-	private String getProperty(JsonObject map, String prop) {
-		return map.get(prop).getAsString();
-	}
+        if (result.isSucceeded()) {
+            builder.up();
+            for (String indexName : this.indices) {
+                fillStatsForIndex(indexName, map, builder);
+            }
+        }
+        else {
+            builder.down();
+        }
+    }
+
+    private void fillStatsForIndex(String indexName, JsonObject map, Builder builder) {
+
+        JsonObject indexStats = map.getAsJsonObject("indices").getAsJsonObject(indexName);
+        if (indexStats != null) {
+            JsonObject primaries = indexStats.getAsJsonObject("primaries");
+            builder.withDetail(indexName + "." + "docs_count",
+                    primaries.getAsJsonObject("docs").get("count").getAsString());
+            builder.withDetail(indexName + "." + "docs_deleted",
+                    primaries.getAsJsonObject("docs").get("deleted").getAsString());
+            builder.withDetail(indexName + "." + "store_size",
+                    primaries.getAsJsonObject("store").get("size_in_bytes").getAsString());
+            builder.withDetail(indexName + "." + "query_total",
+                    primaries.getAsJsonObject("search").get("query_total").getAsString());
+        }
+    }
 }

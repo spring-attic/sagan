@@ -22,6 +22,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
+import sagan.search.support.SearchService;
 import sagan.support.health.ElasticsearchHealthIndicator;
 
 import javax.sql.DataSource;
@@ -33,7 +34,7 @@ import javax.sql.DataSource;
  *
  * @see SiteMain#main(String[])
  */
-@EnableAutoConfiguration(exclude=SocialWebAutoConfiguration.class)
+@EnableAutoConfiguration(exclude = SocialWebAutoConfiguration.class)
 @Configuration
 @ComponentScan
 @EntityScan
@@ -64,10 +65,10 @@ public class SiteConfig {
         return null;
     }
 
-	@Bean
-	public ElasticsearchHealthIndicator elasticsearch(JestClient jestClient) {
-		return new ElasticsearchHealthIndicator(jestClient);
-	}
+    @Bean
+    public ElasticsearchHealthIndicator elasticsearch(JestClient jestClient, SearchService searchService) {
+        return new ElasticsearchHealthIndicator(jestClient, searchService.getIndexName());
+    }
 
     @Bean
     public RestTemplate restTemplate() {
