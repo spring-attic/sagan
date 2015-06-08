@@ -22,10 +22,12 @@ curl -XDELETE "$ENDPOINT/$INDEX"
 sleep 1
 
 echo "\nCreate the index again."
-curl -X PUT $ENDPOINT/$INDEX -d @../sagan-site/src/main/resources/elasticsearch/settings.json
+curl -X PUT $ENDPOINT/$INDEX -d '{ "number_of_shards" : 5, "number_of_replicas" : 0}'
 sleep 1
 echo "\nClosing index."
 curl -XPOST "$ENDPOINT/$INDEX/_close"
+sleep 1
+curl -XPUT $ENDPOINT/$INDEX/_settings -d @../sagan-site/src/main/resources/elasticsearch/settings.json
 sleep 1
 echo "\nInstall the mapping - do once per type/mapping file."
 curl -XPOST "$ENDPOINT/$INDEX/apidoc/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/apidoc.json

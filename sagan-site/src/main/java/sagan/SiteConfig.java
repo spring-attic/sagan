@@ -2,6 +2,7 @@ package sagan;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import io.searchbox.client.JestClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.h2.server.web.WebServlet;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
@@ -21,6 +22,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
+import sagan.support.health.ElasticsearchHealthIndicator;
 
 import javax.sql.DataSource;
 
@@ -42,7 +44,7 @@ public class SiteConfig {
     public static final String REWRITE_FILTER_CONF_PATH = "/urlrewrite.xml";
 
     @Bean
-    public HealthIndicator healthIndicator(DataSource dataSource) {
+    public HealthIndicator dataSourceHealth(DataSource dataSource) {
         if (dataSource instanceof org.apache.tomcat.jdbc.pool.DataSource) {
             org.apache.tomcat.jdbc.pool.DataSource tcDataSource =
                     (org.apache.tomcat.jdbc.pool.DataSource) dataSource;
@@ -61,6 +63,11 @@ public class SiteConfig {
         }
         return null;
     }
+
+	@Bean
+	public ElasticsearchHealthIndicator elasticsearch(JestClient jestClient) {
+		return new ElasticsearchHealthIndicator(jestClient);
+	}
 
     @Bean
     public RestTemplate restTemplate() {

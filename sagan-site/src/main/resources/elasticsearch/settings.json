@@ -1,6 +1,4 @@
 {
-  "settings.number_of_shards": 1,
-  "settings.number_of_replicas": 0,
   "index.analysis.analyzer.fulltext.tokenizer": "standard",
   "index.analysis.analyzer.fulltext.char_filter.0": "html_strip",
   "index.analysis.analyzer.fulltext.filter.0": "standard",
