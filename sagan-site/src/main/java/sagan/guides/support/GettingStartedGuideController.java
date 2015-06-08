@@ -32,7 +32,7 @@ class GettingStartedGuideController {
         this.guides = guides;
     }
 
-    @RequestMapping("/{guide}/")
+    @RequestMapping("/{guide}")
     public String viewGuide(@PathVariable String guide, Model model) {
         GettingStartedGuide gsGuide = guides.find(guide);
         model.addAttribute("guide", gsGuide);
