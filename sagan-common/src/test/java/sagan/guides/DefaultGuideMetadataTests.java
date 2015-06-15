@@ -50,11 +50,11 @@ public class DefaultGuideMetadataTests {
 
     @Test
     public void testGetCiStatusImageUrl() throws Exception {
-        assertThat(guide.getCiStatusImageUrl(), is("https://drone.io/github.com/my-org/gs-rest-service/status.png"));
+        assertThat(guide.getCiStatusImageUrl(), is("https://travis-ci.org/my-org/gs-rest-service.svg?branch=master"));
     }
 
     @Test
     public void testGetCiLatestUrl() throws Exception {
-        assertThat(guide.getCiLatestUrl(), is("https://drone.io/github.com/my-org/gs-rest-service/latest"));
+        assertThat(guide.getCiLatestUrl(), is("https://travis-ci.org/my-org/gs-rest-service"));
     }
 }
