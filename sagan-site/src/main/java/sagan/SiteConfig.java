@@ -42,7 +42,7 @@ import javax.sql.DataSource;
 public class SiteConfig {
 
     public static final String REWRITE_FILTER_NAME = "rewriteFilter";
-    public static final String REWRITE_FILTER_CONF_PATH = "/urlrewrite.xml";
+    public static final String REWRITE_FILTER_CONF_PATH = "urlrewrite.xml";
 
     @Bean
     public HealthIndicator dataSourceHealth(DataSource dataSource) {
