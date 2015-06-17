@@ -13,7 +13,6 @@ var initNewsletterSubscription = require('feature/newsletterSubscription/main');
 var initMap = require('feature/map/main');
 var initTimeAgo = require('feature/timeAgo/main');
 var initHideShowGuide = require('feature/hide-show-guide/main');
-var initCourseware = require('feature/courseware/main');
 var initHeroBanner = require('feature/heroBanner/main');
 
 var most = require('most');
@@ -38,7 +37,6 @@ var features = {
     'map': initMap,
     'timeago': initTimeAgo,
     'hide-show-guide': initHideShowGuide,
-    'courseware': initCourseware,
     'hero-banner': initHeroBanner
 };
 
