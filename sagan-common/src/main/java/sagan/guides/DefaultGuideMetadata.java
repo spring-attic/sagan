@@ -14,8 +14,8 @@ public class DefaultGuideMetadata implements GuideMetadata {
     private final static String GITHUB_HTTPS_URL = "https://github.com/%s/%s";
     private final static String REPO_SSH_URL = "git@github.com:%s/%s.git";
     private final static String REPO_SUBVERSION_URL = "https://github.com/%s/%s";
-    private final static String CI_STATUS_IMAGE_URL = "https://drone.io/github.com/%s/%s/status.png";
-    private final static String CI_LATEST_URL = "https://drone.io/github.com/%s/%s/latest";
+    private final static String CI_STATUS_IMAGE_URL = "https://travis-ci.org/%s/%s.svg?branch=master";
+    private final static String CI_LATEST_URL = "https://travis-ci.org/%s/%s";
 
     private String ghOrgName;
     private String guideId;
