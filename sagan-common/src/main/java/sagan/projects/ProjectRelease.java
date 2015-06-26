@@ -53,7 +53,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         this.apiDocUrl = apiDocUrl;
         this.groupId = groupId;
         this.artifactId = artifactId;
-        repository = ProjectRepository.get(versionName);
+        repository = ProjectRepository.get(versionName, this.releaseStatus);
     }
 
     public boolean isCurrent() {
@@ -126,8 +126,8 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     }
 
     public void setVersion(String versionName) {
-        repository = ProjectRepository.get(versionName);
         this.releaseStatus = ReleaseStatus.getFromVersion(versionName);
+        repository = ProjectRepository.get(versionName, this.releaseStatus);
         this.versionName = versionName;
     }
 
