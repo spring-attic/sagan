@@ -11,7 +11,7 @@ import org.springframework.util.Assert;
 @Embeddable
 public class ProjectRelease implements Comparable<ProjectRelease> {
 
-    private static final Pattern PREREALSE_PATTERN = Pattern.compile("[A-Za-z0-9.]+(M|RC)\\d+");
+    private static final Pattern PRERElEASE_PATTERN = Pattern.compile("[A-Za-z0-9.]+(M|RC)\\d+");
     private static final Pattern SNAPSHOT_PATTERN = Pattern.compile("[A-Za-z0-9.].*(SNAPSHOT)");
 
     public enum ReleaseStatus {
@@ -19,7 +19,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 
         public static ReleaseStatus getFromVersion(String version) {
             Assert.notNull(version, "Version must not be null");
-            if (PREREALSE_PATTERN.matcher(version).matches()) {
+            if (PRERElEASE_PATTERN.matcher(version).matches()) {
                 return PRERELEASE;
             }
             if (SNAPSHOT_PATTERN.matcher(version).matches()) {
