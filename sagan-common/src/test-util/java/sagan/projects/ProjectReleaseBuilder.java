@@ -2,7 +2,7 @@ package sagan.projects;
 
 public class ProjectReleaseBuilder {
     private String versionName = "";
-    private ProjectRelease.ReleaseStatus releaseStatus = ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
+    private ProjectRelease.ReleaseStatus releaseStatus = null;
     private boolean current = false;
     private String refDocUrl = "";
     private String apiDocUrl = "";
