@@ -11,19 +11,19 @@ import org.springframework.util.Assert;
 @Embeddable
 public class ProjectRelease implements Comparable<ProjectRelease> {
 
-    private static final Pattern PRERElEASE_PATTERN = Pattern.compile("[A-Za-z0-9.]+(M|RC)\\d+");
-    private static final Pattern SNAPSHOT_PATTERN = Pattern.compile("[A-Za-z0-9.].*(SNAPSHOT)");
+    private static final Pattern PRERELEASE_PATTERN = Pattern.compile("[A-Za-z0-9.]+?(M|RC)\\d+");
+    private static final String SNAPSHOT_SUFFIX = "SNAPSHOT";
 
     public enum ReleaseStatus {
         SNAPSHOT, PRERELEASE, GENERAL_AVAILABILITY;
 
         public static ReleaseStatus getFromVersion(String version) {
             Assert.notNull(version, "Version must not be null");
-            if (PRERElEASE_PATTERN.matcher(version).matches()) {
-                return PRERELEASE;
-            }
-            if (SNAPSHOT_PATTERN.matcher(version).matches()) {
+            if (version.endsWith(SNAPSHOT_SUFFIX)) {
                 return SNAPSHOT;
+            }
+            if (PRERELEASE_PATTERN.matcher(version).matches()) {
+                return PRERELEASE;
             }
             return GENERAL_AVAILABILITY;
         }
@@ -45,7 +45,9 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     public ProjectRelease(String versionName, ReleaseStatus releaseStatus, boolean isCurrent, String refDocUrl,
                           String apiDocUrl, String groupId, String artifactId) {
         setVersion(versionName);
-        this.releaseStatus = releaseStatus;
+        if (releaseStatus!=null) {
+            this.releaseStatus = releaseStatus;
+        }
         this.isCurrent = isCurrent;
         this.refDocUrl = refDocUrl;
         this.apiDocUrl = apiDocUrl;
