@@ -1,5 +1,7 @@
 package sagan.projects;
 
+import sagan.projects.ProjectRelease.ReleaseStatus;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -27,12 +29,12 @@ public class ProjectRepository {
         this.snapshotsEnabled = snapshotsEnabled;
     }
 
-    public static ProjectRepository get(String versionName) {
-        if (versionName.contains("RELEASE")) {
+    public static ProjectRepository get(String versionName, ReleaseStatus status) {
+        if (status == ReleaseStatus.GENERAL_AVAILABILITY) {
             return null;
         }
 
-        if (versionName.contains("SNAPSHOT")) {
+        if (status == ReleaseStatus.SNAPSHOT) {
             return SNAPSHOT;
         }
 
