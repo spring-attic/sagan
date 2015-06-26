@@ -29,6 +29,21 @@ public class ProjectVersionDisplayNameTests {
         assertVersionDisplayName("1.2.3.RC1", "1.2.3 RC1");
     }
 
+    @Test
+    public void getDisplayNameForReleaseTrainVersion() {
+        assertVersionDisplayName("Angel.RELEASE", "Angel");
+    }
+
+    @Test
+    public void getDisplayNameForReleaseTrainServiceRelease() {
+        assertVersionDisplayName("Angel.SR1", "Angel SR1");
+    }
+
+    @Test
+    public void getDisplayNameForReleaseTrainSnapshot() {
+        assertVersionDisplayName("Angel.BUILD-SNAPSHOT", "Angel");
+    }
+
     private void assertVersionDisplayName(String versionName, String expectedDisplayName) {
         ProjectRelease version = new ProjectReleaseBuilder().versionName(versionName).build();
 

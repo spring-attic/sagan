@@ -1,25 +1,27 @@
 package sagan.search.support;
 
-import com.google.gson.Gson;
-import io.searchbox.action.Action;
-import io.searchbox.client.JestClient;
-import io.searchbox.client.JestResult;
-import io.searchbox.core.Index;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.ArgumentMatcher;
-import org.springframework.data.domain.Pageable;
 import sagan.search.SearchException;
 import sagan.search.types.SearchEntry;
 import sagan.search.types.SearchType;
 
 import java.util.Collections;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.ArgumentMatcher;
+
+import org.springframework.data.domain.Pageable;
+
+import io.searchbox.action.Action;
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestResult;
+import io.searchbox.core.Index;
+
+import com.google.gson.Gson;
+
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 public class SearchServiceTests {
 
@@ -37,7 +39,7 @@ public class SearchServiceTests {
 
     @SuppressWarnings("unchecked")
     public void throwsException() throws Exception {
-        given(jestClient.execute(any(Action.class))).willThrow(Exception.class);
+        given(jestClient.execute(any(GenericAction.class))).willThrow(Exception.class);
     }
 
     @Test(expected = SearchException.class)
@@ -60,9 +62,9 @@ public class SearchServiceTests {
 
     @Test
     public void usesTheSearchEntriesType() throws Exception {
-        given(jestClient.execute(any(Action.class))).willReturn(mock(JestResult.class));
+        given(jestClient.execute(any(GenericAction.class))).willReturn(mock(JestResult.class));
         searchService.saveToIndex(entry);
-        verify(jestClient).execute(argThat(new ArgumentMatcher<Action>() {
+        verify(jestClient).execute(argThat(new ArgumentMatcher<GenericAction>() {
             @Override
             public boolean matches(Object item) {
                 Index action = (Index) item;
@@ -73,7 +75,9 @@ public class SearchServiceTests {
 
     @Test
     public void handlesNullFilters() throws Exception {
-        given(jestClient.execute(any(Action.class))).willReturn(mock(JestResult.class));
+        given(jestClient.execute(any(GenericAction.class))).willReturn(mock(JestResult.class));
         searchService.search("foo", mock(Pageable.class), null);
     }
+    
+    private interface GenericAction extends Action<JestResult> {} 
 }
