@@ -1,6 +1,5 @@
 package sagan.projects;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.persistence.CascadeType;
@@ -12,9 +11,8 @@ import org.springframework.util.Assert;
 @Embeddable
 public class ProjectRelease implements Comparable<ProjectRelease> {
 
-    private static final Pattern VERSION_DISPLAY_REGEX = Pattern.compile("([0-9.]+)\\.(RC\\d+|M\\d+)?");
-    private static final Pattern PREREALSE_PATTERN = Pattern.compile("[0-9.]+(M|RC)\\d+");
-    private static final Pattern SNAPSHOT_PATTERN = Pattern.compile("[0-9.].*(SNAPSHOT)");
+    private static final Pattern PREREALSE_PATTERN = Pattern.compile("[A-Za-z0-9.]+(M|RC)\\d+");
+    private static final Pattern SNAPSHOT_PATTERN = Pattern.compile("[A-Za-z0-9.].*(SNAPSHOT)");
 
     public enum ReleaseStatus {
         SNAPSHOT, PRERELEASE, GENERAL_AVAILABILITY;
@@ -85,15 +83,16 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     }
 
     public String getVersionDisplayName(boolean includePreReleaseDescription) {
-        Matcher matcher = VERSION_DISPLAY_REGEX.matcher(versionName);
-        matcher.find();
-        String versionNumber = matcher.group(1);
-        String preReleaseDescription = matcher.group(2);
-
-        if (preReleaseDescription != null && includePreReleaseDescription) {
-            return versionNumber + " " + preReleaseDescription;
+        String versionNumber = versionName;
+        String versionLabel = "";
+        if (versionName.contains(".")) {
+            versionNumber = versionName.substring(0, versionName.lastIndexOf("."));
+            versionLabel = " " + versionName.substring(versionName.lastIndexOf(".")+1);
+            if (versionLabel.contains("SNAPSHOT") || versionLabel.equals(" RELEASE")) {
+                versionLabel = "";
+            }
         }
-        return versionNumber;
+        return versionNumber + versionLabel;
     }
 
     public String getRefDocUrl() {
