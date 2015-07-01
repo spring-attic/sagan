@@ -140,15 +140,15 @@ gradle.taskGraph.whenReady {
             cloudfoundry {
                 env << [
                         ADMIN_PASSWORD: adminPassword,
+                        GITHUB_CLIENT_ID: githubClientId,
+                        GITHUB_CLIENT_SECRET: githubClientSecret,
+                        GITHUB_ACCESS_TOKEN: githubAccessToken,
                 ]
             }
 
             if (project.name == siteProject.name) {
                 cloudfoundry {
                     env << [
-                            GITHUB_CLIENT_ID: githubClientId,
-                            GITHUB_CLIENT_SECRET: githubClientSecret,
-                            GITHUB_ACCESS_TOKEN: githubAccessToken,
                             WEBHOOK_ACCESS_TOKEN: webhookAccessToken
                     ]
                 }
