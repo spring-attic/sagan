@@ -38,21 +38,38 @@ elasticsearch:
     endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
     index: ${ELASTICSEARCH_INDEX:sagan}
 
-# Used to satisfy @Value annotations in GitHubConfiguration and GuideOrganization that are actually only relevant
-# for the sagan-site application. This arrangement should be refactored so that keeping these
-# entries here on the indexer side is no longer required.
 github:
+
+  # Credentials are based on users belonging to a particular GitHub team,
+  # by requesting the GitHub API (see github.client configuration keys).
+  # This key can be found in the list of teams in your organization
+  # See http://developer.github.com/v3/orgs/teams/#list-teams
   team:
-    id: n/a
+    id: ${GITHUB_TEAM_ID:482984}
+
+  # GitHub OAuth application credentials for use when logging into administrative
+  # console at /admin. Default 'id' and 'secret' values apply only when running
+  # locally, i.e. at http://localhost:8080. Production values must be overridden
+  # using GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET, respectively.
   client:
-    id: n/a
-    secret: n/a
+    id: ${GITHUB_CLIENT_ID:fb06c006c2ed62fe9e8b}
+    secret: ${GITHUB_CLIENT_SECRET:164264e3f6d70c7c21713b7fa64225cb8d6107b2}
+
+  # This optional property may be assigned using a "personal access token" created
+  # at https://github.com/settings/applications. It is used for accessing GitHub's
+  # API, even for operations that do not require authorization (e.g. Getting Started
+  # Guide repositories). This is done in order to work against higher rate limits
+  # (5000req/hour vs. the default 60req/hour without a token). When running the app
+  # locally, this lower default is fine. When running the app in production, the
+  # token is a must. See http://developer.github.com/v3/#rate-limiting.
   access:
-    token: n/a
+    token: ${GITHUB_ACCESS_TOKEN:}
+
+  # Coordinates for finding guides against the GitHub API
   guides:
     owner:
-      name: spring-guides
-      type: orgs
+      name: ${GITHUB_GUIDES_OWNER_NAME:spring-guides} # any GitHub org or user having publicly-readable guide repos
+      type: ${GITHUB_GUIDES_OWNER_TYPE:orgs}          # 'users' is the other possible value
 
 server:
     port: 9000
@@ -65,6 +82,15 @@ server:
         backgroundProcessorDelay: 1
 
 disqus_shortname: n/a
+
+logging:
+  level:
+    ROOT: WARN
+    org.apache.http: WARN
+    # turn up to DEBUG to diagnose GitHub API issues
+    org.apache.http.headers: WARN
+    # turn up to DEBUG to see information about guides as they are fetched and processed
+    sagan.guides.support: WARN
 
 ---
 
