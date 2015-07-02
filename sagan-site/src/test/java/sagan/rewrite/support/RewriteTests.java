@@ -65,6 +65,12 @@ public class RewriteTests {
     }
 
     @Test
+    public void supportRenamedXDGuide() throws ServletException, IOException, URISyntaxException {
+        validatePermanentRedirect("/guides/gs/spring-xd-osx/", "/guides/gs/spring-xd/");
+        validateOk("/guides/gs/spring-xd/");
+    }
+
+    @Test
     public void gsgGuidesShouldAlwaysHaveTrailingSlash() throws ServletException, IOException, URISyntaxException {
         validatePermanentRedirect("/guides/gs/guide-name", "/guides/gs/guide-name/");
         validateOk("/guides/gs/guide-name/");
