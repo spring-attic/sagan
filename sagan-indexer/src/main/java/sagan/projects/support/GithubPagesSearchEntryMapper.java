@@ -1,10 +1,17 @@
 package sagan.projects.support;
 
 import org.jsoup.nodes.Document;
+import sagan.projects.Project;
 import sagan.search.SearchEntryMapper;
 import sagan.search.types.ProjectPage;
 
 public class GithubPagesSearchEntryMapper implements SearchEntryMapper<Document> {
+
+    private final Project project;
+
+    public GithubPagesSearchEntryMapper(Project project) {
+        this.project = project;
+    }
 
     @Override
     public ProjectPage map(Document document) {
@@ -14,6 +21,7 @@ public class GithubPagesSearchEntryMapper implements SearchEntryMapper<Document>
         entry.setSummary(text.substring(0, Math.min(500, text.length())));
         entry.setTitle(document.title());
         entry.setPath(document.baseUri());
+        entry.addFacetPaths("Projects", "Projects/Homepage", "Projects/" + project.getName());
         return entry;
     }
 

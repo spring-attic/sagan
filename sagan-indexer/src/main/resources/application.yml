@@ -93,7 +93,6 @@ logging:
     org.apache.http.headers: WARN
     # turn up to DEBUG to see information about guides as they are fetched and processed
     sagan.guides.support: WARN
-    sagan.projects.support: DEBUG
 
 ---
 

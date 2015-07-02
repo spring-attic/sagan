@@ -13,14 +13,25 @@
               "tie_breaker" : 0.3
             }
           },
-          "should" : {
+          "should" : [ {
             "term" : {
               "current" : {
                 "value" : true,
                 "boost" : 0.5
               }
             }
-          }
+          }, {
+            "filtered" : {
+              "query" : {
+                "match_all" : { }
+              },
+              "filter" : {
+                "type" : {
+                  "value" : "projectpage"
+                }
+              }
+            }
+          } ]
         }
       },
       "filter" : {

@@ -188,7 +188,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .summary("Html summary").publishAt("2013-01-01 10:00").blog();
         searchService.saveToIndex(entry);
 
-        assertThatSearchReturnsEntry("exmaple");
+        assertThatSearchReturnsEntry("exaaple");
     }
 
     @Test

@@ -10,6 +10,7 @@ import sagan.Indexer;
 import sagan.projects.Project;
 import sagan.search.support.CrawledWebDocumentProcessor;
 import sagan.search.support.CrawlerService;
+import sagan.search.support.DocumentProcessor;
 import sagan.search.support.SearchService;
 
 @Service
@@ -22,13 +23,13 @@ public class ProjectPagesIndexer implements Indexer<Project> {
 
     private final ProjectMetadataService metadataService;
     private final CrawlerService crawlerService;
-    private final CrawledWebDocumentProcessor documentProcessor;
+    private final SearchService searchService;
 
     @Autowired
     public ProjectPagesIndexer(ProjectMetadataService metadataService, CrawlerService crawlerService, SearchService searchService) {
         this.metadataService = metadataService;
         this.crawlerService = crawlerService;
-        this.documentProcessor = new CrawledWebDocumentProcessor(searchService, new GithubPagesSearchEntryMapper());
+        this.searchService = searchService;
     }
 
     @Override
@@ -40,6 +41,8 @@ public class ProjectPagesIndexer implements Indexer<Project> {
     public void indexItem(Project project) {
         logger.debug("Indexing project page for: " + project.getId());
         String projectPageUrl = project.getSiteUrl();
+        GithubPagesSearchEntryMapper mapper = new GithubPagesSearchEntryMapper(project);
+        DocumentProcessor documentProcessor = new CrawledWebDocumentProcessor(searchService, mapper);
         if (StringUtils.commaDelimitedListToSet(githubPagesDomains).stream()
                 .anyMatch(domain -> projectPageUrl.startsWith("http://" + domain) ||
                         projectPageUrl.startsWith("https://" + domain))) {
