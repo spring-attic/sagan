@@ -40,6 +40,8 @@ curl -XPOST "$ENDPOINT/$INDEX/referencedoc/_mapping" -d @../sagan-site/src/main/
 sleep 1
 curl -XPOST "$ENDPOINT/$INDEX/sitepage/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/sitepage.json
 sleep 1
+curl -XPOST "$ENDPOINT/$INDEX/projectpage/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/projectpage.json
+sleep 1
 curl -XPOST "$ENDPOINT/$INDEX/_open"
 sleep 1
 

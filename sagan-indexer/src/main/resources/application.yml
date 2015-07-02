@@ -32,6 +32,8 @@ security:
 search:
   indexer:
     delay: 0
+    gh_pages:
+      domains: projects.spring.io,platform.spring.io,cloud.spring.io
 
 elasticsearch:
   client:
@@ -91,6 +93,7 @@ logging:
     org.apache.http.headers: WARN
     # turn up to DEBUG to see information about guides as they are fetched and processed
     sagan.guides.support: WARN
+    sagan.projects.support: DEBUG
 
 ---
 

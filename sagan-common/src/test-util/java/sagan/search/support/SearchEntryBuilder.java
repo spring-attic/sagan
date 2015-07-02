@@ -119,8 +119,13 @@ public class SearchEntryBuilder {
         return ref;
     }
 
-    public SitePage page() {
+    public SitePage sitePage() {
         SitePage page = build(new SitePage());
+        return page;
+    }
+
+    public ProjectPage projectPage() {
+        ProjectPage page = build(new ProjectPage());
         return page;
     }
 
