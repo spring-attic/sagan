@@ -9,7 +9,7 @@
             "multi_match" : {
               "query" : "spring",
               "fields" : [ "title^2", "rawContent", "author" ],
-              "fuzziness" : "AUTO",
+              "fuzziness" : 1,
               "tie_breaker" : 0.3
             }
           },

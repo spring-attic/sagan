@@ -29,7 +29,7 @@ class SaganQueryBuilders {
 
         MultiMatchQueryBuilder multiMatch = QueryBuilders
                 .multiMatchQuery(queryTerm, BOOSTED_TITLE_FIELD, RAW_CONTENT_FIELD, AUTHOR_FIELD)
-                .fuzziness(Fuzziness.AUTO)
+                .fuzziness(Fuzziness.ONE)
                 .tieBreaker(0.3f);
 
         TermQueryBuilder matchCurrent = QueryBuilders.termQuery("current", true);
