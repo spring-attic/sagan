@@ -15,7 +15,7 @@
   <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container">
     <article class="main-body--wrapper">
-      <h1 class="index-page--title">Projects</h1>
+      <h1 class="index-page--title">Main Projects</h1>
       <p class="index-page--subtitle">From configuration to security, web apps to big data &ndash; whatever the infrastructure needs of your application may be, there is a Spring Project to help you build it. Start small and use just what you need &ndash; Spring is modular by design.</p>
       <section class="projects--wrapper">
           <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('platform')}">
@@ -172,14 +172,18 @@
           <p class="project--description">Spring Session provides an API and implementations for managing a user’s session information.</p>
         </a>
       </section>
+      <h2 class="index-page--title">Community Projects</h2>
+      <section class="projects--wrapper project-aggregator top-separator">
+        <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-roo')}">
+            <div class="project--title">Spring Roo</div>
+            <p class="project--description">Makes it fast and easy to build full Java applications in minutes.</p>
+        </a>
+      </section>
+      <h2 class="index-page--title">Projects in the Attic</h2>
       <section class="projects--wrapper project-aggregator top-separator">
         <a href="https://github.com/spring-projects/spring-scala#readme" class="project--container project--container--link">
           <div class="project--title">Spring Scala</div>
           <p class="project--description">Brings the power and expressiveness of Scala together with the productivity and deep ecosystem of Spring.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-roo')}">
-            <div class="project--title">Spring Roo</div>
-            <p class="project--description">Makes it fast and easy to build full Java applications in minutes.</p>
         </a>
         <a href="https://github.com/spring-projects/spring-flex#readme" class="project--container project--container--link">
           <div class="project--title">Spring BlazeDS Integration</div>
