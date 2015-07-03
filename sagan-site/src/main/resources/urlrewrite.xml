@@ -16,6 +16,12 @@
         <to type="permanent-redirect" last="true">/guides/gs/accessing-data-mongodb/</to>
     </rule>
     <rule>
+        <name>Support renamed Spring XD guide</name>
+        <note>https://github.com/spring-io/sagan/issues/226</note>
+        <from>^/guides/gs/spring-xd-osx/?$</from>
+        <to type="permanent-redirect" last="true">/guides/gs/spring-xd/</to>
+    </rule>
+    <rule>
         <name>GSG trailing slash</name>
         <note>https://www.pivotaltracker.com/story/show/52214321</note>
         <from>/guides/gs/([^/]+)$</from>
