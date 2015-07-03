@@ -5,6 +5,7 @@ import sagan.docs.support.ProjectDocumentationIndexer;
 import sagan.guides.support.GettingStartedGuideIndexer;
 import sagan.guides.support.TutorialIndexer;
 import sagan.guides.support.UnderstandingDocIndexer;
+import sagan.projects.support.ProjectPagesIndexer;
 import sagan.staticpage.support.StaticPageIndexer;
 import sagan.tools.support.ToolsIndexer;
 
@@ -33,6 +34,8 @@ class IndexScheduler {
     private TutorialIndexer tutorialIndexer;
     @Autowired
     private PublishedBlogPostsIndexer publishedBlogPostsIndexer;
+    @Autowired
+    private ProjectPagesIndexer projectPagesIndexer;
 
     @Scheduled(fixedDelay = ONE_HOUR, initialDelayString = "${search.indexer.delay:0}")
     public void indexGettingStartedGuides() {
@@ -65,7 +68,12 @@ class IndexScheduler {
     }
 
     @Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")
-    public void setPublishedBlogPosts() {
+    public void indexProjectPages() {
+        indexerService.index(projectPagesIndexer);
+    }
+
+    @Scheduled(fixedDelay = ONE_DAY, initialDelayString = "${search.indexer.delay:0}")
+    public void indexPublishedBlogPosts() {
         indexerService.index(publishedBlogPostsIndexer);
     }
 }

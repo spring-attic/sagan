@@ -29,14 +29,15 @@ class SaganQueryBuilders {
 
         MultiMatchQueryBuilder multiMatch = QueryBuilders
                 .multiMatchQuery(queryTerm, BOOSTED_TITLE_FIELD, RAW_CONTENT_FIELD, AUTHOR_FIELD)
-                .fuzziness(Fuzziness.AUTO)
+                .fuzziness(Fuzziness.ONE)
                 .tieBreaker(0.3f);
 
         TermQueryBuilder matchCurrent = QueryBuilders.termQuery("current", true);
 
         BoolQueryBuilder query = QueryBuilders.boolQuery()
                 .must(multiMatch)
-                .should(matchCurrent.boost(0.5f));
+                .should(matchCurrent.boost(0.5f))
+                .should(matchProjectPages());
 
         String search = buildSearch(query, filters, pageable);
 
@@ -178,6 +179,11 @@ class SaganQueryBuilders {
             orFilter.add(new TermFilterBuilder("version", supportedVersion));
         }
         return orFilter;
+    }
+
+    private static FilteredQueryBuilder matchProjectPages() {
+        return QueryBuilders.filteredQuery(QueryBuilders.matchAllQuery(),
+                FilterBuilders.typeFilter(SearchType.PROJECT_PAGE.toString()));
     }
 
 }

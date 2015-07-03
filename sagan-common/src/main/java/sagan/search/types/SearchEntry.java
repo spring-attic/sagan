@@ -1,17 +1,11 @@
 package sagan.search.types;
 
-import org.springframework.security.crypto.codec.Base64;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 public abstract class SearchEntry {
-
-    public static final List<String> TYPES = Arrays.asList(SearchType.SITE_PAGE.toString(),
-            SearchType.BLOG_POST.toString(), SearchType.GUIDE.toString(),
-            SearchType.API_DOC.toString(), SearchType.REFERENCE_DOC.toString());
-
 
     private String path;
 
@@ -28,9 +22,7 @@ public abstract class SearchEntry {
     public abstract String getType();
 
     public String getId() {
-        byte[] encodedId = Base64.encode(path.toLowerCase().getBytes());
-
-        return new String(encodedId);
+        return Base64.getEncoder().encodeToString(path.toLowerCase().getBytes());
     }
 
     public String getPath() {

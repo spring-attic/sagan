@@ -32,6 +32,8 @@ security:
 search:
   indexer:
     delay: 0
+    gh_pages:
+      domains: projects.spring.io,platform.spring.io,cloud.spring.io
 
 elasticsearch:
   client:

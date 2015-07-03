@@ -9,18 +9,29 @@
             "multi_match" : {
               "query" : "spring",
               "fields" : [ "title^2", "rawContent", "author" ],
-              "fuzziness" : "AUTO",
+              "fuzziness" : 1,
               "tie_breaker" : 0.3
             }
           },
-          "should" : {
+          "should" : [ {
             "term" : {
               "current" : {
                 "value" : true,
                 "boost" : 0.5
               }
             }
-          }
+          }, {
+            "filtered" : {
+              "query" : {
+                "match_all" : { }
+              },
+              "filter" : {
+                "type" : {
+                  "value" : "projectpage"
+                }
+              }
+            }
+          } ]
         }
       },
       "filter" : {

@@ -16,6 +16,7 @@ class SpringFacetsBuilder {
         ensureFacetExists(1, "Guides");
         SearchFacet projects = ensureFacetExists(2, "Projects");
         moveFacetToHeader(projects, "Api");
+        moveFacetToHeader(projects, "HomePage");
         moveFacetToHeader(projects, "Reference");
         return new SearchFacet("", "", 0, facets);
     }

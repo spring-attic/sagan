@@ -188,7 +188,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .summary("Html summary").publishAt("2013-01-01 10:00").blog();
         searchService.saveToIndex(entry);
 
-        assertThatSearchReturnsEntry("exmaple");
+        assertThatSearchReturnsEntry("exaaple");
     }
 
     @Test
@@ -303,7 +303,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .path("http://example.com/content5").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description").publishAt("2013-01-01 10:00")
-                .notCurrent().page();
+                .notCurrent().sitePage();
 
         searchService.saveToIndex(nonApiDoc);
 
@@ -367,7 +367,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .path("http://example.com/content5").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description").publishAt("2013-01-01 10:00")
-                .notCurrent().page();
+                .notCurrent().sitePage();
 
         searchService.saveToIndex(nonReferenceDoc);
 
@@ -376,7 +376,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .notCurrent().projectId("not id to delete").version("3.4.5.RELEASE")
-                .page();
+                .sitePage();
 
         searchService.saveToIndex(othersite);
 

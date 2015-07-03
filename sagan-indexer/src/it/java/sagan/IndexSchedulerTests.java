@@ -5,6 +5,7 @@ import sagan.docs.support.ProjectDocumentationIndexer;
 import sagan.guides.support.GettingStartedGuideIndexer;
 import sagan.guides.support.TutorialIndexer;
 import sagan.guides.support.UnderstandingDocIndexer;
+import sagan.projects.support.ProjectPagesIndexer;
 import sagan.staticpage.support.StaticPageIndexer;
 import sagan.support.SetSystemProperty;
 import sagan.tools.support.ToolsIndexer;
@@ -31,6 +32,12 @@ public class IndexSchedulerTests extends AbstractIndexerIntegrationTests {
         @Primary
         public ProjectDocumentationIndexer mockProjectDocumentationIndexer() {
             return mock(ProjectDocumentationIndexer.class);
+        }
+
+        @Bean
+        @Primary
+        public ProjectPagesIndexer mockProjectPagesIndexer() {
+            return mock(ProjectPagesIndexer.class);
         }
 
         @Bean
@@ -79,6 +86,8 @@ public class IndexSchedulerTests extends AbstractIndexerIntegrationTests {
     @Autowired
     private ProjectDocumentationIndexer projectDocumentationIndexer;
     @Autowired
+    private ProjectPagesIndexer projectPagesIndexer;
+    @Autowired
     private GettingStartedGuideIndexer gettingStartedGuideIndexer;
     @Autowired
     private IndexerService indexerService;
@@ -103,6 +112,7 @@ public class IndexSchedulerTests extends AbstractIndexerIntegrationTests {
         Thread.sleep(INDEXER_DELAY);
         verify(indexerService).index(gettingStartedGuideIndexer);
         verify(indexerService).index(projectDocumentationIndexer);
+        verify(indexerService).index(projectPagesIndexer);
         verify(indexerService).index(toolsIndexer);
         verify(indexerService).index(staticPageIndexer);
         verify(indexerService).index(understandingGuideIndexer);
@@ -114,6 +124,7 @@ public class IndexSchedulerTests extends AbstractIndexerIntegrationTests {
     public void indexerServiceRespectsTheConfiguredDelay() throws Exception {
         verify(indexerService, never()).index(gettingStartedGuideIndexer);
         verify(indexerService, never()).index(projectDocumentationIndexer);
+        verify(indexerService, never()).index(projectPagesIndexer);
         verify(indexerService, never()).index(toolsIndexer);
         verify(indexerService, never()).index(staticPageIndexer);
         verify(indexerService, never()).index(understandingGuideIndexer);
