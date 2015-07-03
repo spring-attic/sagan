@@ -47,7 +47,7 @@ public class SaganQueryBuildersTests {
     @Test
     public void fullTextSearch() throws Exception {
 
-        String query = "spring";
+        String query = "spring boot";
         List<String> filters = Arrays.asList("Projects/Api", "Projects/Reference", "Blog/Engineering", "Projects/Reactor Project/1.1.0.RELEASE");
 
         Search.Builder builder = SaganQueryBuilders.fullTextSearch(query, new PageRequest(0, 10), filters);

@@ -7,28 +7,27 @@
         "bool" : {
           "must" : {
             "multi_match" : {
-              "query" : "spring",
-              "fields" : [ "title^2", "rawContent", "author" ],
+              "query" : "spring boot",
+              "fields" : [ "title^3", "rawContent", "author" ],
               "fuzziness" : 1,
-              "tie_breaker" : 0.3
+              "minimum_should_match" : "30%"
             }
           },
           "should" : [ {
             "term" : {
-              "current" : {
-                "value" : true,
-                "boost" : 0.5
-              }
+              "current" : true
             }
           }, {
-            "filtered" : {
-              "query" : {
-                "match_all" : { }
-              },
-              "filter" : {
-                "type" : {
-                  "value" : "projectpage"
-                }
+            "term" : {
+              "_type" : "projectpage"
+            }
+          }, {
+            "match" : {
+              "title" : {
+                "query" : "spring boot",
+                "type" : "phrase",
+                "boost" : 3.0,
+                "slop" : 1
               }
             }
           } ]

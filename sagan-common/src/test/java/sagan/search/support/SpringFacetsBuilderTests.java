@@ -18,6 +18,7 @@ public class SpringFacetsBuilderTests {
     private SearchFacet projects = new SearchFacet("Projects", "Projects", 1);
     private SearchFacet api = new SearchFacet("Projects/Api", "Api", 1);
     private SearchFacet reference = new SearchFacet("Projects/Reference", "Reference", 1);
+    private SearchFacet projectPage = new SearchFacet("Projects/Homepage", "Homepage", 1);
     private SearchFacet springFramework = new SearchFacet("Projects/SpringFramework", "Spring Framework", 1);
 
     @Before
@@ -70,7 +71,19 @@ public class SpringFacetsBuilderTests {
     }
 
     @Test
-    public void movesReferenceToBeAHeaderFacetUnderProjects() throws Exception {
+    public void movesProjectPageToBeAHeaderFacetUnderProjects() throws Exception {
+        projects.getFacets().add(projectPage);
+        projects.getFacets().add(springFramework);
+
+        SearchFacet rootFacet = new SpringFacetsBuilder(facets).build();
+
+        SearchFacet projectFacet = rootFacet.getFacets().get(2);
+        assertThat(projectFacet.getHeaderFacets(), contains(projectPage));
+        assertThat(projectFacet.getFacets(), contains(springFramework));
+    }
+
+    @Test
+    public void movesApiToBeAHeaderFacetUnderProjects() throws Exception {
         projects.getFacets().add(api);
         projects.getFacets().add(springFramework);
 
@@ -81,8 +94,9 @@ public class SpringFacetsBuilderTests {
         assertThat(projectFacet.getFacets(), contains(springFramework));
     }
 
+
     @Test
-    public void movesApiToBeAHeaderFacetUnderProjects() throws Exception {
+    public void movesReferenceToBeAHeaderFacetUnderProjects() throws Exception {
         facets.add(projects);
         projects.getFacets().add(reference);
         projects.getFacets().add(springFramework);

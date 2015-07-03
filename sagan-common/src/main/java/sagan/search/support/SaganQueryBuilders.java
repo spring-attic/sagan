@@ -20,28 +20,41 @@ import java.util.Map;
 class SaganQueryBuilders {
 
     private static final String TODAY = "now/d";
-    private static final String BOOSTED_TITLE_FIELD = "title^2";
+    private static final String BOOSTED_TITLE_FIELD = "title^3";
     private static final String RAW_CONTENT_FIELD = "rawContent";
     private static final String AUTHOR_FIELD = "author";
 
 
     static Search.Builder fullTextSearch(String queryTerm, Pageable pageable, List<String> filters) {
 
-        MultiMatchQueryBuilder multiMatch = QueryBuilders
-                .multiMatchQuery(queryTerm, BOOSTED_TITLE_FIELD, RAW_CONTENT_FIELD, AUTHOR_FIELD)
-                .fuzziness(Fuzziness.ONE)
-                .tieBreaker(0.3f);
-
-        TermQueryBuilder matchCurrent = QueryBuilders.termQuery("current", true);
-
         BoolQueryBuilder query = QueryBuilders.boolQuery()
-                .must(multiMatch)
-                .should(matchCurrent.boost(0.5f))
-                .should(matchProjectPages());
+                .must(matchTitleContentAndAuthor(queryTerm))
+                .should(matchMarkedAsCurrent())
+                .should(matchProjectPages())
+                .should(matchPhrase(queryTerm).boost(3f));
 
         String search = buildSearch(query, filters, pageable);
 
         return new Search.Builder(search);
+    }
+
+    private static MultiMatchQueryBuilder matchTitleContentAndAuthor(String queryTerm) {
+        return QueryBuilders
+                .multiMatchQuery(queryTerm, BOOSTED_TITLE_FIELD, RAW_CONTENT_FIELD, AUTHOR_FIELD)
+                .fuzziness(Fuzziness.ONE)
+                .minimumShouldMatch("30%");
+    }
+
+    private static TermQueryBuilder matchMarkedAsCurrent() {
+        return QueryBuilders.termQuery("current", true);
+    }
+
+    private static TermQueryBuilder matchProjectPages() {
+        return QueryBuilders.termQuery("_type", SearchType.PROJECT_PAGE.toString());
+    }
+
+    private static MatchQueryBuilder matchPhrase(String query) {
+        return QueryBuilders.matchPhraseQuery("title", query).slop(1);
     }
 
     static Search.Builder forEmptyQuery(Pageable pageable, List<String> filters) {
@@ -179,11 +192,6 @@ class SaganQueryBuilders {
             orFilter.add(new TermFilterBuilder("version", supportedVersion));
         }
         return orFilter;
-    }
-
-    private static FilteredQueryBuilder matchProjectPages() {
-        return QueryBuilders.filteredQuery(QueryBuilders.matchAllQuery(),
-                FilterBuilders.typeFilter(SearchType.PROJECT_PAGE.toString()));
     }
 
 }
