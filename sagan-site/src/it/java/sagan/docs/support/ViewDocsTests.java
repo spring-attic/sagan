@@ -33,14 +33,26 @@ public class ViewDocsTests extends AbstractIntegrationTests {
                 .perform(get("/docs"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
+                .andExpect(content().string(containsString("Getting Started Guides")))
+                .andExpect(content().string(containsString("Tutorials")))
+                .andExpect(content().string(containsString("Reference Documentation")))
+                .andExpect(content().string(containsString("Sagan Application")));
+    }
+
+    @Test
+    public void getRefDocsPage() throws Exception {
+        mockMvc
+                .perform(get("/docs/reference"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("Spring Security")))
                 .andExpect(content().string(containsString("http://docs.spring.io/spring/docs")));
     }
 
     @Test
-    public void doesNotContainAggregatorProjects() throws Exception {
+    public void refDocsdoesNotContainAggregatorProjects() throws Exception {
         mockMvc
-                .perform(get("/docs"))
+                .perform(get("/docs/reference"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(CoreMatchers.containsString(">Spring Data JPA<")))

@@ -836,9 +836,12 @@ input.floating-input:focus {
   border-top: none;
 }
 .content-container--wrapper .content-container--body .content-section-title--container {
-  margin: 20px 0 40px;
+  margin: 20px 0 60px;
 }
-.content-container--wrapper .content-container--body .icon-gs-guides, .content-container--wrapper .content-container--body .icon-tutorial {
+.content-container--wrapper .content-container--body .icon-gs-guides,
+.content-container--wrapper .content-container--body .icon-tutorial,
+.content-container--wrapper .content-container--body .icon-refdoc,
+.content-container--wrapper .content-container--body .icon-sagan{
   margin-right: 20px;
 }
 .content-container--wrapper .content-container--body .content-section-title {

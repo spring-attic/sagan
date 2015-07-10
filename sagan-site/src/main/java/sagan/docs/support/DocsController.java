@@ -31,11 +31,16 @@ class DocsController {
     }
 
     @RequestMapping(value = "", method = { GET, HEAD })
+    public String listDocumentationTypes() {
+        return "docs/index";
+    }
+
+    @RequestMapping(value = "/reference", method = { GET, HEAD })
     public String listProjects(Model model) {
         model.addAttribute("activeProjects", nonAggregatorsForCategory("active"));
         model.addAttribute("atticProjects", nonAggregatorsForCategory("attic"));
         model.addAttribute("incubatorProjects", nonAggregatorsForCategory("incubator"));
-        return "docs/index";
+        return "docs/reference";
     }
 
     private List<Project> nonAggregatorsForCategory(String category) {

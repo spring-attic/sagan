@@ -1,3 +1,7 @@
+.docs.content-container--wrapper {
+  border: none;
+}
+
 .docs--header .docs-icon {
   background-color: #34302d;
   width: 94px;
@@ -48,4 +52,10 @@
 .docs--item .docs-version--dropdown .icon {
   vertical-align: top;
   margin: 2px 0 0 6px;
+}
+
+@media (min-width: 800px) {
+  .startspringio {
+    margin: 10%;
+  }
 }
