@@ -165,7 +165,7 @@ public class BlogAdminControllerTests {
 
     @Test
     public void reRenderPosts() throws Exception {
-        int page = 1;
+        int page = 0;
         int pageSize = 20;
         Page<Post> posts = new PageImpl<>(
                 Arrays.asList(new Post("published post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN),
@@ -173,7 +173,7 @@ public class BlogAdminControllerTests {
                 new PageRequest(page, pageSize, Sort.Direction.DESC, "id"), 2);
         given(blogService.refreshPosts(page, pageSize)).willReturn(posts);
         String result = controller.refreshBlogPosts(page, pageSize);
-        assertThat(result, equalTo("{page: 1, pageSize: 20, totalPages: 1, totalElements: 2}"));
+        assertThat(result, equalTo("{page: 0, pageSize: 20, totalPages: 1, totalElements: 2}"));
         verify(blogService, times(1)).refreshPosts(page, pageSize);
     }
 

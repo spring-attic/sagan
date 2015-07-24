@@ -13,9 +13,9 @@ buildscript {
     }
 
     dependencies {
-		classpath 'io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE'
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE"
-        classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.2' // see deploy.gradle
+		classpath 'io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE"
+        classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.3' // see deploy.gradle
     }
 }
 
@@ -78,7 +78,7 @@ configure(bootProjects) {
 
 	dependencyManagement {
 		imports {
-			mavenBom 'io.spring.platform:platform-bom:1.1.2.RELEASE'
+			mavenBom 'io.spring.platform:platform-bom:1.1.3.RELEASE'
 		}
 	}
 }
