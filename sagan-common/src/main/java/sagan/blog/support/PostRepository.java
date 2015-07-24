@@ -33,8 +33,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Page<Post> findByDraftFalseAndPublishAtAfter(Date now, Pageable pageRequest);
 
-    Page<Post> findByDraftFalseAndAuthorAndPublishAtBefore(MemberProfile profile, Date publishedBefore,
-                                                           Pageable pageRequest);
+    Page<Post> findByDraftFalseAndAuthorAndPublishAtBeforeOrderByPublishAtDesc(
+            MemberProfile profile, Date publishedBefore, Pageable pageRequest);
 
     Post findByTitle(String title);
 

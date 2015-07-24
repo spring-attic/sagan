@@ -126,7 +126,7 @@ public class BlogService {
     }
 
     public Page<Post> getPublishedPostsForMember(MemberProfile profile, Pageable pageRequest) {
-        return postRepository.findByDraftFalseAndAuthorAndPublishAtBefore(profile, dateFactory.now(), pageRequest);
+        return postRepository.findByDraftFalseAndAuthorAndPublishAtBeforeOrderByPublishAtDesc(profile, dateFactory.now(), pageRequest);
     }
 
     public Page<Post> getAllPosts(Pageable pageRequest) {
