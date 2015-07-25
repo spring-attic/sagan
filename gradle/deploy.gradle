@@ -191,6 +191,9 @@ if (project.hasProperty(TARGET_SPACE)) {
 				label = 'searchly'
 				plan = (space == PRODUCTION_SPACE ? 'small' : 'micro')
 			}
+            if(space == PRODUCTION_SPACE ) {
+                'papertrail' {}
+            }
         }
     }
 
