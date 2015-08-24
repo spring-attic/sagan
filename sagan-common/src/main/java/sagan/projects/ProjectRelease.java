@@ -11,7 +11,7 @@ import org.springframework.util.Assert;
 @Embeddable
 public class ProjectRelease implements Comparable<ProjectRelease> {
 
-    private static final Pattern PRERELEASE_PATTERN = Pattern.compile("[A-Za-z0-9.]+?(M|RC)\\d+");
+    private static final Pattern PRERELEASE_PATTERN = Pattern.compile("[A-Za-z0-9\\.\\-]+?(M|RC)\\d+");
     private static final String SNAPSHOT_SUFFIX = "SNAPSHOT";
 
     public enum ReleaseStatus {

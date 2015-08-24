@@ -93,4 +93,11 @@ public class ProjectReleaseVersionTests {
         assertThat(version.getRepository(), is(nullValue()));
     }
 
+    @Test
+    public void releaseDashSeparatorDetected() {
+        ProjectRelease version = new ProjectReleaseBuilder().versionName("Gosling-RC1").build();
+        assertThat(version.isPreRelease(), equalTo(true));
+        assertThat(version.getRepository().getUrl(), containsString("milestone"));
+    }
+
 }
