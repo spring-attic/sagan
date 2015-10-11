@@ -36,7 +36,7 @@ class ProjectAdminController {
     private static final String VERSION_PLACEHOLDER = "{version}";
     private static final String VERSION_PATTERN = Pattern.quote(VERSION_PLACEHOLDER);
     private static final List<String> CATEGORIES =
-            Collections.unmodifiableList(Arrays.asList("incubator", "active", "attic"));
+            Collections.unmodifiableList(Arrays.asList("incubator", "active", "attic", "community"));
 
     private ProjectMetadataService service;
 
