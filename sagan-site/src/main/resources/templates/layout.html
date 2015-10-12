@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:data="https://github.com/mxab/thymeleaf-extras-data-attribute"
-      data-search data-mobile-support data-newsletter-subscription>
+      data-search data-mobile-support>
 <head>
   <title>Layout</title>
   <meta id="Viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
@@ -112,7 +112,7 @@
     <footer class="footer">
       <div class="container-fluid">
         <div class="row-fluid">
-          <div class="span8">
+          <div class="span12">
             <div class="navbar">
               <div class="container">
                 <ul class="nav">
@@ -128,13 +128,6 @@
             <span id='authentication' sec:authorize="isFullyAuthenticated()">
               [<a th:href="@{/signout}">Sign out</a>]
             </span>
-          </div>
-          <div class="span4 footer-newsletter--wrapper pull-right">
-            <div class="footer-newsletter--container invisible">
-              <label>
-                Subscribe to our newsletter
-              </label>
-            </div>
           </div>
         </div>
       </div>
