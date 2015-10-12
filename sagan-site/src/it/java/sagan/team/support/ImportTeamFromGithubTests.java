@@ -43,11 +43,14 @@ public class ImportTeamFromGithubTests extends AbstractIntegrationTests {
         ResponseEntity<GitHubUser[]> responseEntity = new ResponseEntity<>(gitHubUsers, HttpStatus.OK);
 
         given(
-                restOperations.getForEntity("https://api.github.com/teams/{teamId}/members", GitHubUser[].class,
+                restOperations.getForEntity("https://api.github.com/teams/{teamId}/members?per_page=100", GitHubUser[].class,
                         "482984")).willReturn(responseEntity);
 
-        stubRestClient.putResponse("/users/jdoe", Fixtures.load("/fixtures/github/ghUserProfile-jdoe.json"));
-        stubRestClient.putResponse("/users/asmith", Fixtures.load("/fixtures/github/ghUserProfile-asmith.json"));
+        given(restOperations.getForObject("https://api.github.com/users/{user}", GitHubUser.class, "jdoe"))
+                .willReturn(mapper.readValue(Fixtures.load("/fixtures/github/ghUserProfile-jdoe.json"), GitHubUser.class));
+
+        given(restOperations.getForObject("https://api.github.com/users/{user}", GitHubUser.class, "asmith"))
+                .willReturn(mapper.readValue(Fixtures.load("/fixtures/github/ghUserProfile-asmith.json"), GitHubUser.class));
     }
 
     @Test
