@@ -105,11 +105,10 @@ public class TeamService {
             profile = new MemberProfile();
             profile.setGithubId(githubId);
             profile.setUsername(username);
-            profile.setAvatarUrl(avatarUrl);
-            profile.setName(name);
             profile.setHidden(true);
         }
-
+        profile.setAvatarUrl(avatarUrl);
+        profile.setName(name);
         profile.setGithubUsername(username);
         return teamRepository.save(profile);
     }
