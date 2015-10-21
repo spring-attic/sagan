@@ -3,7 +3,7 @@ def javaProjects = [ project(':sagan-site'), project(':sagan-indexer'), project(
 def bootProjects = javaProjects - project(':sagan-common')
 def gradleDir = "${rootProject.rootDir}/gradle"
 
-wrapper.gradleVersion = '2.4'
+wrapper.gradleVersion = '2.8'
 
 buildscript {
     ext.springRepo = 'http://repo.spring.io/libs-release'
@@ -14,7 +14,7 @@ buildscript {
 
     dependencies {
 		classpath 'io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE'
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.2.7.RELEASE"
         classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.3' // see deploy.gradle
     }
 }
@@ -36,6 +36,9 @@ configure(javaProjects) {
     repositories {
         maven { url springRepo }
     }
+
+    // Override Spring IO Platform versions
+    ext['elasticsearch.version'] = '1.7.1' // see io.searchbox:jest
 
     dependencies {
         compile 'org.slf4j:slf4j-api'
@@ -78,7 +81,7 @@ configure(bootProjects) {
 
 	dependencyManagement {
 		imports {
-			mavenBom 'io.spring.platform:platform-bom:1.1.3.RELEASE'
+			mavenBom 'io.spring.platform:platform-bom:1.1.4.RELEASE'
 		}
 	}
 }
