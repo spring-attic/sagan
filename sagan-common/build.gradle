@@ -18,10 +18,9 @@ sourceSets {
 
 dependencyManagement {
 	imports {
-		mavenBom 'io.spring.platform:platform-bom:1.1.3.RELEASE'
+		mavenBom 'io.spring.platform:platform-bom:1.1.4.RELEASE'
 	}
 }
-
 
 dependencies {
 
@@ -32,13 +31,13 @@ dependencies {
 
     compile 'org.apache.httpcomponents:httpclient'
 
-    compile 'org.elasticsearch:elasticsearch:1.5.2'
+    compile 'org.elasticsearch:elasticsearch'
     compile 'io.searchbox:jest:0.1.6'
     compile 'commons-codec:commons-codec' // needed by Jest's HTTP client?
     compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
     compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 
-    compile 'org.pegdown:pegdown:1.5.0'
+    compile 'org.pegdown:pegdown:1.6.0'
 
     // datasource and connection pool dependencies
     runtime 'org.postgresql:postgresql:9.4-1201-jdbc4'
@@ -55,7 +54,7 @@ dependencies {
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
     compile "org.codehaus.woodstox:woodstox-core-asl"
 
-    compile 'org.jsoup:jsoup:1.8.2'
+    compile 'org.jsoup:jsoup:1.8.3'
     compile 'joda-time:joda-time'
     compile 'org.hibernate:hibernate-validator'
 

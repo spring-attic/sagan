@@ -56,7 +56,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         String functionNameRegex = "^([^(]*)\\((.*)\\);$";
         Matcher matcher = Pattern.compile(functionNameRegex).matcher(content);
         if (matcher.find()) {
-            assertThat(matcher.group(1), equalTo("a_function_name"));
+            assertThat(matcher.group(1), equalTo("/**/a_function_name"));
 
             Map<String, Object> projectMetadata = new JacksonJsonParser().parseMap(matcher.group(2));
 
