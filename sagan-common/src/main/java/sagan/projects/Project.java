@@ -9,7 +9,8 @@ import java.util.Set;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OrderBy;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity
 public class Project {
@@ -22,7 +23,6 @@ public class Project {
     private String category;
 
     @ElementCollection
-    @OrderBy("versionName DESC")
     private List<ProjectRelease> releaseList = new ArrayList<>();
     private boolean isAggregator;
     private String stackOverflowTags;
@@ -94,7 +94,10 @@ public class Project {
     }
 
     public List<ProjectRelease> getProjectReleases() {
-        return releaseList;
+        return releaseList.stream()
+            .sorted((release1, release2) -> release1.getVersionDisplayName().compareTo(release2.getVersionDisplayName()))
+            .sorted(ProjectRelease::compareTo)
+            .collect(toList());
     }
 
     public String getRepoUrl() {
