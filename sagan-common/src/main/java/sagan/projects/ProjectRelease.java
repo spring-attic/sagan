@@ -1,6 +1,6 @@
 package sagan.projects;
 
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
@@ -161,7 +161,38 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 
     @Override
     public int compareTo(ProjectRelease other) {
-        return versionName.compareTo(other.versionName);
+        Pattern pattern = Pattern.compile("([0-9]+)");
+
+        Matcher thisMatcher = pattern.matcher(this.getVersionDisplayName());
+        Matcher otherMatcher = pattern.matcher(other.getVersionDisplayName());
+
+        int versionDiff = 0;
+
+        boolean thisFind = thisMatcher.find();
+        boolean otherFind = otherMatcher.find();
+
+        while (thisFind && otherFind) {
+            int thisFoundVersion = Integer.parseInt(thisMatcher.group(0));
+            int otherFoundVersion = Integer.parseInt(otherMatcher.group(0));
+            versionDiff = otherFoundVersion - thisFoundVersion;
+
+            if (versionDiff != 0) {
+                return versionDiff;
+            }
+
+            thisFind = thisMatcher.find();
+            otherFind = otherMatcher.find();
+        }
+
+        if (thisFind) {
+            return -1;
+        }
+
+        if (otherFind) {
+            return 1;
+        }
+
+        return versionDiff;
     }
 
     @Override
