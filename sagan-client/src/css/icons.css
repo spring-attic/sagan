@@ -192,6 +192,11 @@
     height: 46px;
     background-position: 989px 964px;
 }
+.icon.logo-browserstack-text {
+    background-image: url("../img/icon-browserstack-logo.svg");
+    width: 186px;
+    height: 40px;
+}
 .icon.icon-social-twitter {
   width: 36px;
   height: 36px;
