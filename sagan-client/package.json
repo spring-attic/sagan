@@ -22,10 +22,35 @@
     "when": "3.4.4"
   },
   "directories": {
-    "test": "test"
+    "test": "test",
+    "packages": "jspm_packages"
   },
   "scripts": {
     "prepublish": "bower install --config.interactive=false",
     "build": "gulp build"
+  },
+  "jspm": {
+    "registry": "jspm",
+    "directories": {
+      "test": "test"
+    },
+    "dependencies": {
+      "bootstrap": "github:twbs/bootstrap@^2.3.2",
+      "bootstrap-datetime-picker": "github:Eonasdan/bootstrap-datetimepicker@^2.1.30",
+      "curl": "github:cujojs/curl@^0.8.12",
+      "font-awesome": "npm:font-awesome@^4.4.0",
+      "gmaps": "npm:gmaps@^0.4.14",
+      "google-code-prettify": "github:google/code-prettify@master",
+      "jquery": "npm:jquery@^1.8.3",
+      "jquery-timeago": "github:rmm5t/jquery-timeago@^1.4.1",
+      "meld": "npm:meld@^1.3.2",
+      "most": "npm:most@^0.2.0",
+      "poly": "npm:poly@^0.6.1",
+      "when": "npm:when@^2.8.0",
+      "zeroclipboard": "npm:zeroclipboard@^1.1.7"
+    },
+    "devDependencies": {
+      "jekyll": "github:jekyll/jekyll@^1.0.2"
+    }
   }
 }
