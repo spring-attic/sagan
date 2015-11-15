@@ -1,25 +1,25 @@
 {
   "name": "sagan",
   "description": "node.js packages for sagan UI.",
-  "repository" : {
-      "type" : "git",
-      "url" : "http://github.com/spring-io/sagan.git"
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/spring-io/sagan.git"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "bower": "1.3.2",
     "gulp": "3.8.7",
-    "gulp-util": "3.0.1",
-    "gulp-filter": "1.0.0",
-    "gulp-cram": "0.2.0",
-    "gulp-minify-css": "0.3.7",
-    "gulp-uglify": "0.3.1",
     "gulp-bower-src": "0.1.0",
+    "gulp-cram": "0.2.0",
+    "gulp-filter": "1.0.0",
+    "gulp-minify-css": "0.3.7",
     "gulp-sourcemaps": "1.1.3",
-    "when": "3.4.4",
+    "gulp-uglify": "0.3.1",
+    "gulp-util": "3.0.1",
     "jshint": "2.1",
-    "wd": "0.2.17"
+    "jspm": "^0.16.14",
+    "wd": "0.2.17",
+    "when": "3.4.4"
   },
   "directories": {
     "test": "test"
