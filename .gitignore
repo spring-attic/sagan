@@ -42,3 +42,6 @@ build
 
 # Structure101
 sagan.java.hsp
+
+# jspm
+jspm_packages/
