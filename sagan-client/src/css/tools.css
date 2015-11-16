@@ -52,7 +52,7 @@
   margin: 26px 0 43px;
 }
 
-.eclipse--container, .yourkit--container {
+.eclipse--container, .yourkit--container, .browserstack--container {
   border: 1px solid #34302d;
   padding: 40px;
   margin-bottom: 40px;
@@ -62,6 +62,10 @@
   margin: 20px 66px 40px 0;
 }
 .yourkit--container .logo-yourkit-text {
+    float: left;
+    margin: 0 40px 40px 0;
+}
+.browserstack--container .logo-browserstack-text {
     float: left;
     margin: 0 40px 40px 0;
 }
