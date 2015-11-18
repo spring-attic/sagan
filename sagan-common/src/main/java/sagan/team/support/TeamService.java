@@ -75,12 +75,7 @@ public class TeamService {
         existingProfile.setVideoEmbeds(profile.getVideoEmbeds());
         existingProfile.setGravatarEmail(profile.getGravatarEmail());
         existingProfile.setHidden(profile.isHidden());
-
-        if (!StringUtils.isEmpty(profile.getGravatarEmail())) {
-            Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-            String hashedEmail = encoder.encodePassword(profile.getGravatarEmail(), null);
-            existingProfile.setAvatarUrl(String.format("http://gravatar.com/avatar/%s", hashedEmail));
-        }
+        updateAvatarUrlwithGravatar(existingProfile);
 
         teamRepository.save(existingProfile);
         try {
@@ -110,10 +105,19 @@ public class TeamService {
         profile.setAvatarUrl(avatarUrl);
         profile.setName(name);
         profile.setGithubUsername(username);
+        updateAvatarUrlwithGravatar(profile);
         return teamRepository.save(profile);
     }
 
     public void showOnlyTeamMembersWithIds(List<Long> userIds) {
         teamRepository.hideTeamMembersNotInIds(userIds);
+    }
+
+    private void updateAvatarUrlwithGravatar(MemberProfile profile) {
+        if (!StringUtils.isEmpty(profile.getGravatarEmail())) {
+            Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+            String hashedEmail = encoder.encodePassword(profile.getGravatarEmail(), null);
+            profile.setAvatarUrl(String.format("http://gravatar.com/avatar/%s", hashedEmail));
+        }
     }
 }
