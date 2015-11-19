@@ -117,7 +117,7 @@ public class TeamService {
         if (!StringUtils.isEmpty(profile.getGravatarEmail())) {
             Md5PasswordEncoder encoder = new Md5PasswordEncoder();
             String hashedEmail = encoder.encodePassword(profile.getGravatarEmail(), null);
-            profile.setAvatarUrl(String.format("http://gravatar.com/avatar/%s", hashedEmail));
+            profile.setAvatarUrl(String.format("https://gravatar.com/avatar/%s", hashedEmail));
         }
     }
 }

@@ -56,7 +56,7 @@ public class TeamServiceTests {
         service.updateMemberProfile(1234L, updatedProfile);
 
         assertThat(savedProfile.getGravatarEmail(), equalTo("test@example.com"));
-        assertThat(savedProfile.getAvatarUrl(), equalTo("http://gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0"));
+        assertThat(savedProfile.getAvatarUrl(), equalTo("https://gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0"));
     }
 
     @Test
