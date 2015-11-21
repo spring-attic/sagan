@@ -1,6 +1,6 @@
 var $ = require('jquery');
 var timeAgoSelector = 'time.timeago';
-require('timeago');
+require('jquery-timeago');
 
 module.exports = function initTimeAgo() {
 
