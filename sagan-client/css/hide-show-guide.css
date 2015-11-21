@@ -1,0 +1,59 @@
+/*
+    These styles are use to hide/show various sections of the guide
+*/
+
+/*
+    .use-foo classes are used to mark a section as displayed only when the user wants to see "foo". By default,
+    it's hidden.
+*/
+.use-gradle, .use-maven, .use-sts {
+    display: none;
+    cursor: pointer;
+}
+
+/*
+    .use-foo's need a tiny "▼" to show they are collapsible
+*/
+.use-gradle h2::before, .use-maven h2::before, .use-sts h2::before {
+    content: '▼';
+    margin-right: 0.25em;
+}
+
+/*
+    .reveal-foo classes are used to mark bits of HTML that when clicked, will actually reveal the "foo" items.
+*/
+.reveal-gradle, .reveal-maven, .reveal-sts {
+    display: inherit;
+    cursor: pointer;
+}
+
+/*
+    .reveal-foo's need a tiny "▶" to show they are collapsible
+*/
+.reveal-gradle h2::before, .reveal-maven h2::before, .reveal-sts h2::before {
+    content: '▶';
+    margin-right: 0.25em;
+}
+
+/*
+    .show-foo indicates .use-foo items should be shown, and reveal-foo items should be hidden.
+*/
+.show-gradle .use-gradle {
+    display: inherit;
+}
+.show-maven .use-maven {
+    display: inherit;
+}
+.show-sts .use-sts {
+    display: inherit;
+}
+
+.show-gradle .reveal-gradle {
+    display: none;
+}
+.show-maven .reveal-maven {
+    display: none;
+}
+.show-sts .reveal-sts {
+    display: none;
+}
