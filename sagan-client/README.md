@@ -11,7 +11,6 @@ This module is using several tools for its own build system:
 
 * [node.js and npm](http://nodejs.org)
 * [Cram](https://github.com/cujojs/cram)
-* [Bower](http://bower.io)
 * [Gulp](http://gulpjs.com)
 
 ## Build requirements
@@ -56,15 +55,6 @@ npm dynamically adds binaries listed in `node_modules/.bin` to its own PATH.
 [Cram](https://github.com/cujojs/cram) assembles JavaScript resources into bundles. Cram does not take care of the
 optimizing phase. Cram is run by the [gulp-cram](https://github.com/bclozel/gulp-cram) plugin, as part of the
 gulp build.
-
-### Bower
-
-Bower installs front-end dependencies like jquery or twitter bootstrap into`src/lib`.
-That way, developers don't have to copy/paste/commit those resources manually.
-All dependencies and their versions are listed in `bower.json`; we're also defining overrides in order to specify
-which resources we want to retain when packaging for production (we certainly don't want to add hundreds of files
-that have no use in our application). Those overrides are used by the
-[gulp-bower-src](https://github.com/bclozel/gulp-bower-src) during the gulp build.
 
 ### Gulp
 
