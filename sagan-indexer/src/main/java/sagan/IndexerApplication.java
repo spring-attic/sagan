@@ -2,12 +2,10 @@ package sagan;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.social.SocialWebAutoConfiguration;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.TaskScheduler;
@@ -19,13 +17,15 @@ import sagan.support.StaticPagePathFinder;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@EnableAutoConfiguration(exclude=SocialWebAutoConfiguration.class)
-@Configuration
+@SpringBootApplication(exclude = SocialWebAutoConfiguration.class)
 @EnableScheduling
-@ComponentScan
 @EntityScan
 @EnableJpaRepositories
-class IndexerConfig {
+public class IndexerApplication {
+
+    public static void main(String[] args) {
+        new SaganApplication(IndexerApplication.class).run(args);
+    }
 
     @Bean
     public TaskScheduler scheduler() {
@@ -58,5 +58,4 @@ class IndexerConfig {
     public XmlMapper xmlMapper() {
         return new XmlMapper();
     }
-
 }

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = IndexerConfig.class,
+@ContextConfiguration(classes = IndexerApplication.class,
                       initializers = ConfigFileApplicationContextInitializer.class)
 @Transactional
 public abstract class AbstractIndexerIntegrationTests {

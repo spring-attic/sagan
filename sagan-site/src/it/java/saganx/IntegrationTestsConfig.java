@@ -1,6 +1,6 @@
 package saganx;
 
-import sagan.SiteConfig;
+import sagan.SiteApplication;
 import sagan.support.github.StubGithubRestClient;
 
 import org.springframework.context.annotation.Bean;
@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import static org.mockito.Mockito.mock;
 
 @Configuration
-@Import(SiteConfig.class)
+@Import(SiteApplication.class)
 class IntegrationTestsConfig {
 
     @Primary

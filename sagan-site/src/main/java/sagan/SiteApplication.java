@@ -6,9 +6,10 @@ import io.searchbox.client.JestClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.h2.server.web.WebServlet;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
-import org.springframework.boot.actuate.health.Health.Builder;
+import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.social.SocialWebAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
@@ -28,21 +29,25 @@ import sagan.support.health.ElasticsearchHealthIndicator;
 import javax.sql.DataSource;
 
 /**
+ * The entry point for the Sagan web application.
+ * <p>
  * Main configuration resource for the Sagan web application. The use of @ComponentScan
  * here ensures that other @Configuration classes such as {@link MvcConfig} and
  * {@link SecurityConfig} are included as well.
- *
- * @see SiteMain#main(String[])
  */
-@EnableAutoConfiguration(exclude = SocialWebAutoConfiguration.class)
-@Configuration
-@ComponentScan
+@SpringBootApplication(exclude = SocialWebAutoConfiguration.class)
 @EntityScan
 @EnableJpaRepositories
-public class SiteConfig {
+public class SiteApplication {
 
     public static final String REWRITE_FILTER_NAME = "rewriteFilter";
     public static final String REWRITE_FILTER_CONF_PATH = "urlrewrite.xml";
+
+
+    public static void main(String[] args) {
+        new SaganApplication(SiteApplication.class).run(args);
+    }
+
 
     @Bean
     public HealthIndicator dataSourceHealth(DataSource dataSource) {
@@ -51,7 +56,7 @@ public class SiteConfig {
                     (org.apache.tomcat.jdbc.pool.DataSource) dataSource;
             return new AbstractHealthIndicator() {
                 @Override
-                protected void doHealthCheck(Builder healthBuilder) throws Exception {
+                protected void doHealthCheck(Health.Builder healthBuilder) throws Exception {
                     healthBuilder.up().withDetail("active", tcDataSource.getActive())
                             .withDetail("max_active", tcDataSource.getMaxActive())
                             .withDetail("idle", tcDataSource.getIdle())
@@ -110,5 +115,4 @@ public class SiteConfig {
     public DispatcherServlet dispatcherServlet() {
         return new DispatcherServlet();
     }
-
 }

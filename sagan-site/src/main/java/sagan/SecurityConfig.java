@@ -164,7 +164,8 @@ class SecurityConfig {
     private static void configureHeaders(HeadersConfigurer<?> headers) throws Exception {
         HstsHeaderWriter writer = new HstsHeaderWriter(false);
         writer.setRequestMatcher(AnyRequestMatcher.INSTANCE);
-        headers.contentTypeOptions().xssProtection().cacheControl().addHeaderWriter(writer).frameOptions();
+        headers.contentTypeOptions().and().xssProtection()
+                .and().cacheControl().and().addHeaderWriter(writer).frameOptions();
     }
 
     /**
