@@ -12,7 +12,6 @@ var paths = {
     'node_modules/font-awesome/css/font-awesome.min.css'
   ],
   assets: ['src/img*/**', 'src/*.txt', 'src/*.html', 'src/font*/**', 'src/css*/filterable-list.css'],
-  js: ['config.js', 'build.js', 'build.js.map', 'jspm_packages/system.js', 'src/**/*'],
   dest: './dist/'
 };
 
@@ -35,10 +34,4 @@ gulp.task('copy-assets', function() {
     .pipe(gulp.dest(paths.dest));
 });
 
-// copy javascript
-gulp.task('copy-javascript', function() {
-  return gulp.src(paths.js)
-    .pipe(gulp.dest(paths.dest + 'lib'));
-});
-
-gulp.task('build', ['minify-css', 'copy-external-css', 'copy-assets', 'copy-javascript'], function() { });
+gulp.task('build', ['minify-css', 'copy-external-css', 'copy-assets'], function() { });
