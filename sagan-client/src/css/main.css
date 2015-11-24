@@ -1,7 +1,8 @@
-@import "../lib/bootstrap/docs/assets/css/bootstrap.css";
-@import "../lib/font-awesome/css/font-awesome.min.css";
+@import "../jspm_packages/npm/twitter-bootstrap@2.1.1/docs/assets/css/bootstrap.css";
+@import "../jspm_packages/npm/eonasdan-bootstrap-datetimepicker@4.15.35/build/css/bootstrap-datetimepicker.css";
+@import "../jspm_packages/npm/font-awesome@4.4.0/css/font-awesome.css";
+
 @import "fontcustom.css";
-@import "../lib/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css";
 @import "icons.css";
 @import "buttons.css";
 @import "typography.css";
