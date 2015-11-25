@@ -1,27 +1,18 @@
 System.config({
   defaultJSExtensions: true,
-  transpiler: "babel",
-  babelOptions: {
-    "optional": [
-      "runtime",
-      "optimisation.modules.system"
-    ]
-  },
+  transpiler: "traceur",
   paths: {
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
 
   map: {
-    "babel": "npm:babel-core@5.8.34",
-    "babel-runtime": "npm:babel-runtime@5.8.34",
+    "FortAwesome/font-awesome": "github:FortAwesome/font-awesome@3.2.1",
+    "bootstrap": "github:twbs/bootstrap@2.3.2",
     "bootstrap-datetimepicker": "npm:eonasdan-bootstrap-datetimepicker@4.15.35",
-    "core-js": "npm:core-js@1.2.6",
-    "curl": "github:cujojs/curl@0.8.12",
-    "font-awesome": "npm:font-awesome@4.4.0",
+    "font-awesome": "github:FortAwesome/font-awesome@3.2.1",
     "gmaps": "npm:gmaps@0.4.21",
     "google-code-prettify": "github:tcollard/google-code-prettify@1.0.4",
-    "jekyll": "github:jekyll/jekyll@1.5.1",
     "jquery": "npm:jquery@1.11.3",
     "jquery-timeago": "github:rmm5t/jquery-timeago@1.4.3",
     "meld": "npm:meld@1.3.2",
@@ -29,7 +20,6 @@ System.config({
     "poly": "npm:poly@0.6.1",
     "traceur": "github:jmcriffey/bower-traceur@0.0.92",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.92",
-    "twitter-bootstrap": "npm:twitter-bootstrap@2.1.1",
     "when": "npm:when@2.8.0",
     "zeroclipboard": "npm:zeroclipboard@1.3.5",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -103,10 +93,7 @@ System.config({
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
     },
-    "npm:babel-runtime@5.8.34": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:bootstrap@3.3.5": {
+    "npm:bootstrap@3.3.6": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
@@ -171,12 +158,6 @@ System.config({
       "string_decoder": "github:jspm/nodelibs-string_decoder@0.1.0"
     },
     "npm:constants-browserify@0.0.1": {
-      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
-    },
-    "npm:core-js@1.2.6": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:core-util-is@1.0.2": {
@@ -255,7 +236,7 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:eonasdan-bootstrap-datetimepicker@4.15.35": {
-      "bootstrap": "npm:bootstrap@3.3.5",
+      "bootstrap": "npm:bootstrap@3.3.6",
       "jquery": "npm:jquery@2.1.4",
       "moment": "npm:moment@2.8.4",
       "process": "github:jspm/nodelibs-process@0.1.2"
@@ -269,9 +250,6 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "create-hash": "npm:create-hash@1.1.2",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0"
-    },
-    "npm:font-awesome@4.4.0": {
-      "css": "github:systemjs/plugin-css@0.1.19"
     },
     "npm:hash.js@1.0.3": {
       "inherits": "npm:inherits@2.0.1"
@@ -403,11 +381,6 @@ System.config({
     },
     "npm:timers-browserify@1.4.1": {
       "process": "npm:process@0.11.2"
-    },
-    "npm:twitter-bootstrap@2.1.1": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "http": "github:jspm/nodelibs-http@1.7.1",
-      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:url@0.10.3": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",

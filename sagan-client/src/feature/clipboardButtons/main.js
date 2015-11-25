@@ -16,7 +16,7 @@ var $ = require('jquery');
 
 // This version of bootstrap looks for window.jQuery. ick.
 window.jQuery = $;
-require('twitter-bootstrap/js/bootstrap-tooltip');
+require('bootstrap/js/bootstrap-tooltip');
 
 // ZeroClipboard 1.1.7 needs this
 // I tried updating to ZeroClipboard 1.2.2 and it has major timing issues

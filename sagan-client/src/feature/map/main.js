@@ -24,7 +24,7 @@ function initMap() {
 
     _destroy = function() {};
 
-    require(['gmaps'], function(GMaps) {
+    System.import('gmaps').then(function (GMaps) {
         $(function() {
             ready(GMaps);
         });

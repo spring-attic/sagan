@@ -10,12 +10,11 @@
   <link href='https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
 
+  <script th:src="@{/jspm_packages/system.js}"></script>
   <script th:inline="javascript">
-        var baseUrl = /*[[@{/}]]*/ '../static/';
+    System.config({baseURL: "/"});
   </script>
-
-  <script src="/jspm_packages/system.js"></script>
-  <script src="/config.js"></script>
+  <script th:src="@{/config.js}"></script>
   <script>
       System.import('app/main.js')
   </script>
