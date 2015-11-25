@@ -25,7 +25,7 @@ public class IndexerApplicationTests {
     public void testContextLoading() throws Exception {
         int port = FreePortFinder.find();
 
-        context = SpringApplication.run(IndexerApplication.class,
+        context = new SaganApplication(IndexerApplication.class).run(
                 "--server.port=" + port,
                 "--spring.database.url=jdbc:h2:mem:sagan;MODE=PostgreSQL",
                 "--search.indexer.delay=6000000",

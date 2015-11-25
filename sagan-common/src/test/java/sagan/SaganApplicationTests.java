@@ -20,10 +20,12 @@ public class SaganApplicationTests {
         assertThat(System.getProperty(ACTIVE_PROFILES_PROPERTY_NAME), nullValue());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void unknownProfileSpecified() {
         activateProfiles("bogus");
         runApp();
+        assertThat(runApp().getEnvironment().acceptsProfiles(STANDALONE), is(true));
+        assertThat(runApp().getEnvironment().acceptsProfiles("bogus"), is(true));
     }
 
     @Test(expected = IllegalStateException.class)
@@ -48,7 +50,7 @@ public class SaganApplicationTests {
     public void noProfileSpecified() {
         // activateProfiles(...);
         Environment env = runApp().getEnvironment();
-        assertThat(env.acceptsProfiles(env.getDefaultProfiles()), is(true));
+        assertThat(env.acceptsProfiles(env.getDefaultProfiles()), is(false));
         assertThat(env.acceptsProfiles(CLOUDFOUNDRY), is(false));
         assertThat(env.acceptsProfiles(STANDALONE), is(true));
     }

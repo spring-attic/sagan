@@ -42,17 +42,16 @@ public final class SaganProfiles {
 
     /**
      * The default profile for any {@link SaganApplication}. Indicates that the
-     * application is running locally, i.e. on a developer machine as opposed to running
-     * on {@link #CLOUDFOUNDRY} and should expect to find data sources, etc in-memory as
-     * opposed to finding them as Cloud Foundry services. This profile constant is named
-     * "STANDALONE" to clearly communicate its role, but its value is actually "default",
-     * as this is the "reserved default profile name" in Spring. This means that
-     * "STANDALONE" will always be treated as the default profile without requiring any
-     * code to programmatically activate it. This makes running integration tests that
-     * expect in-memory resources simple to set up.
+     * application is running locally, i.e. on a developer machine, or on any server
+     * in standalone mode. All services are either registered automatically by the application
+     * (e.g. in-memory datasources) or should be provided to the application by environment
+     * variables or configuration values.
+     * As opposed to {@link #CLOUDFOUNDRY}, the application won't try to detect Marketplace
+     * services provided by the PaaS environment.
+     * This profile is automatically added to the environment if neither {@link #PRODUCTION}
+     * nor {@link #STAGING} are activated.
      *
      * @see sagan.StandaloneDatabaseConfig
-     * @see org.springframework.core.env.AbstractEnvironment#RESERVED_DEFAULT_PROFILE_NAME
      */
-    public static final String STANDALONE = "default";
+    public static final String STANDALONE = "standalone";
 }

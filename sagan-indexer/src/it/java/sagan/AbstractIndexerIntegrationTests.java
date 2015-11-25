@@ -1,5 +1,6 @@
 package sagan;
 
+import org.springframework.test.context.ActiveProfiles;
 import sagan.support.SetSystemProperty;
 
 import org.junit.ClassRule;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(classes = IndexerApplication.class,
                       initializers = ConfigFileApplicationContextInitializer.class)
 @Transactional
+@ActiveProfiles(profiles = {SaganProfiles.STANDALONE})
 public abstract class AbstractIndexerIntegrationTests {
 
     @ClassRule

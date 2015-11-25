@@ -30,7 +30,6 @@ public class SaganApplication extends SpringApplication {
     protected void configureProfiles(ConfigurableEnvironment environment, String[] args) {
         super.configureProfiles(environment, args);
 
-        boolean standaloneActive = environment.acceptsProfiles(STANDALONE);
         boolean stagingActive = environment.acceptsProfiles(STAGING);
         boolean productionActive = environment.acceptsProfiles(PRODUCTION);
 
@@ -44,14 +43,10 @@ public class SaganApplication extends SpringApplication {
                     CLOUDFOUNDRY, STAGING, PRODUCTION));
             environment.addActiveProfile(CLOUDFOUNDRY);
         }
-        else if (standaloneActive) {
-            logger.info("The default 'standalone' profile is active because no other profiles have been specified.");
-        }
         else {
-            throw new IllegalStateException(format("Unknown profile(s) specified: [%s]. Valid profiles are: [%s]",
-                    arrayToCommaDelimitedString(environment.getActiveProfiles()),
-                    arrayToCommaDelimitedString(new String[] {
-                            arrayToCommaDelimitedString(environment.getDefaultProfiles()), STAGING, PRODUCTION })));
+            logger.info("The default 'standalone' profile is active because no other profiles have been specified.");
+            environment.addActiveProfile(STANDALONE);
         }
+
     }
 }
