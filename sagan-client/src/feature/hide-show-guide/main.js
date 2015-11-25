@@ -23,7 +23,7 @@ function initHideShowGuide() {
     var plan = {
         ready: ready,
         destroy: function() {
-            container.off('click', '.use-gradle, .use-maven, .use-sts', hideBuildSteps);
+            container.off('click', '.use-gradle h2, .use-maven h2, .use-sts h2', hideBuildSteps);
             container.off('click', '.reveal-gradle', revealGradle);
             container.off('click', '.reveal-maven', revealMaven);
             container.off('click', '.reveal-sts', revealSTS);
@@ -73,7 +73,7 @@ function hideBuildSteps() {
 }
 
 function registerBuildSwitches() {
-    container.on('click', '.use-gradle, .use-maven, .use-sts', hideBuildSteps);
+    container.on('click', '.use-gradle h2, .use-maven h2, .use-sts h2', hideBuildSteps);
 
     container.on('click', '.reveal-gradle', revealGradle);
     container.on('click', '.reveal-maven', revealMaven);

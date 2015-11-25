@@ -6,9 +6,11 @@
     .use-foo classes are used to mark a section as displayed only when the user wants to see "foo". By default,
     it's hidden.
 */
+.use-gradle h2, .use-maven h2, .use-sts h2 {
+    cursor: pointer;
+}
 .use-gradle, .use-maven, .use-sts {
     display: none;
-    cursor: pointer;
 }
 
 /*
