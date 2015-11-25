@@ -1,18 +1,20 @@
 plugins {
-    id 'com.moowork.node' version '0.10'
+    id 'com.moowork.node' version '0.11'
 }
 
 apply plugin: 'java'
 apply plugin: 'com.moowork.node'
 
 node {
-    version = '0.10.38'
-    npmVersion = '1.4.28'
+    version = '4.2.2'
+    npmVersion = '2.14.7'
     download = true
 }
 
+def jsBuildDir = project.buildDir.absolutePath + '/dist'
+
 jar {
-    from 'dist'
+    from jsBuildDir
     eachFile { details ->
         details.path = details.path.startsWith('META-INF') ?: 'static/'+details.path
     }
@@ -25,7 +27,7 @@ jar {
 
 task npmBuild(dependsOn: npmInstall, type: NpmTask) {
     inputs.file 'gulpfile.js'
-    outputs.dir 'dist'
+    outputs.dir jsBuildDir
     args = ['run', 'build']
 }
 
