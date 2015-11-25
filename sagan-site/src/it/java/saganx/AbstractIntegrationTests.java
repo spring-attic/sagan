@@ -1,5 +1,7 @@
 package saganx;
 
+import org.springframework.test.context.ActiveProfiles;
+import sagan.SaganProfiles;
 import sagan.support.github.StubGithubRestClient;
 
 import org.junit.After;
@@ -26,6 +28,7 @@ import static sagan.support.SecurityRequestPostProcessors.*;
 @ContextConfiguration(classes = { IntegrationTestsConfig.class, InMemoryElasticSearchConfig.class },
                       initializers = ConfigFileApplicationContextInitializer.class)
 @Transactional
+@ActiveProfiles(profiles = {SaganProfiles.STANDALONE})
 public abstract class AbstractIntegrationTests {
 
     @Autowired

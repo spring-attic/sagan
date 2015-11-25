@@ -114,7 +114,7 @@ server:
 ---
 
 spring:
-  profiles: default
+  profiles: standalone
   resources:
     static_locations:
       - file:../sagan-client/src/
