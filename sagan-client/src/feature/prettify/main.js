@@ -1,5 +1,5 @@
 var $ = require('jquery');
-var prettify = require("google-code-prettify/src/run_prettify.js");
+var prettify = require("google-code-prettify/bin/prettify.min.js");
 
 /**
  * The composition plan for the sidebar on pages that use the
@@ -17,7 +17,13 @@ module.exports = initPrettify;
 function initPrettify () {
 
     var plan = {
-        ready: prettify.prettyPrint,
+        ready: function() {
+            var code = null;
+            $('pre').addClass('prettyprint').each(function(idx, el){
+                code = el.firstChild;
+                code.innerHTML = prettify.prettyPrintOne(code.innerHTML);
+            });
+        },
         destroy: function () {}
     };
 
