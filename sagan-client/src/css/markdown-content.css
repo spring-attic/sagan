@@ -17,7 +17,6 @@ a[name="gs"], a[name="tutorials"] {
     padding: 4px 11px;
 }
 .content--container pre {
-    margin-top: -10px;
     margin-bottom: 20px;
     border-radius: 0;
 }

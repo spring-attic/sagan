@@ -14,6 +14,13 @@
     margin-bottom: 5px;
 }
 
+.content--container .listingblock .title {
+    color: #305CB5;
+    font-size: 14px;
+    padding: 0.5em;
+    background-color: #ddd;
+}
+
 .content--container .listingblock pre.prettyprint {
     border-color: rgba(0, 0, 0, 0.15);
     padding: 9.5px;
