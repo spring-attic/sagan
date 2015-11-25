@@ -43,6 +43,6 @@ class GettingStartedGuideController {
 
     @RequestMapping("/{guide}/images/{image:[a-zA-Z0-9._-]+}")
     public ResponseEntity<byte[]> loadImage(@PathVariable String guide, @PathVariable String image) {
-        return new ResponseEntity<>(guides.loadImage(guides.find(guide), image), HttpStatus.OK);
+        return ResponseEntity.ok(guides.loadImage(guides.find(guide), image));
     }
 }

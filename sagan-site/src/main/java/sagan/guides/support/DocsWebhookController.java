@@ -67,13 +67,13 @@ class DocsWebhookController {
     @ExceptionHandler(WebhookAuthenticationException.class)
     public ResponseEntity<String> handleWebhookAuthenticationFailure(WebhookAuthenticationException exception) {
         logger.error("Webhook authentication failure: " + exception.getMessage());
-        return new ResponseEntity("{ \"message\": \"Forbidden\" }\n", HttpStatus.FORBIDDEN);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{ \"message\": \"Forbidden\" }\n");
     }
 
     @ExceptionHandler(IOException.class)
     public ResponseEntity<String> handlePayloadParsingException(IOException exception) {
         logger.error("Payload parsing exception", exception);
-        return new ResponseEntity("{ \"message\": \"Bad Request\" }\n", HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body("{ \"message\": \"Bad Request\" }\n");
     }
 
     @RequestMapping(value = "guides", method = POST,
@@ -84,7 +84,7 @@ class DocsWebhookController {
 
         verifyHmacSignature(payload, signature);
         if (PING_EVENT.equals(event)) {
-            return new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
+            return ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
         logPayload(push);
@@ -92,7 +92,7 @@ class DocsWebhookController {
         String repositoryName = (String) ((Map<?, ?>) push.get("repository")).get("name");
         String guideName = this.gettingStartedGuides.parseGuideName(repositoryName);
         this.gettingStartedGuides.evictFromCache(guideName);
-        return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
+        return ResponseEntity.ok("{ \"message\": \"Successfully processed update\" }\n");
     }
 
     @RequestMapping(value = "guides/{repositoryName}", method = POST,
@@ -104,14 +104,14 @@ class DocsWebhookController {
 
         verifyHmacSignature(payload, signature);
         if (PING_EVENT.equals(event)) {
-            return new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
+            return ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
         logger.info("Received new webhook payload for push against " + repositoryName);
 
         String guideName = this.gettingStartedGuides.parseGuideName(repositoryName);
         this.gettingStartedGuides.evictFromCache(guideName);
-        return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
+        return ResponseEntity.ok("{ \"message\": \"Successfully processed update\" }\n");
     }
 
     @RequestMapping(value = "tutorials", method = POST,
@@ -122,7 +122,7 @@ class DocsWebhookController {
 
         verifyHmacSignature(payload, signature);
         if (PING_EVENT.equals(event)) {
-            new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
+            ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
         logPayload(push);
@@ -130,7 +130,7 @@ class DocsWebhookController {
         String repositoryName = (String) ((Map<?, ?>) push.get("repository")).get("name");
         String tutorialName = this.tutorials.parseTutorialName(repositoryName);
         this.tutorials.evictFromCache(tutorialName);
-        return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
+        return ResponseEntity.ok("{ \"message\": \"Successfully processed update\" }\n");
     }
 
     @RequestMapping(value = "tutorials/{repositoryName}", method = POST,
@@ -142,14 +142,14 @@ class DocsWebhookController {
 
         verifyHmacSignature(payload, signature);
         if (PING_EVENT.equals(event)) {
-            new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
+            ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
         logger.info("Received new webhook payload for push against " + repositoryName);
 
         String tutorialName = this.tutorials.parseTutorialName(repositoryName);
         this.tutorials.evictFromCache(tutorialName);
-        return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
+        return ResponseEntity.ok("{ \"message\": \"Successfully processed update\" }\n");
     }
 
     @RequestMapping(value = "understanding", method = POST,
@@ -160,14 +160,14 @@ class DocsWebhookController {
 
         verifyHmacSignature(payload, signature);
         if (PING_EVENT.equals(event)) {
-            new ResponseEntity("{ \"message\": \"Successfully processed ping event\" }\n", HttpStatus.OK);
+            ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
         logPayload(push);
 
         // all understanding docs live under the same repository, so clearing all entries
         this.understandingDocs.clearCache();
-        return new ResponseEntity("{ \"message\": \"Successfully processed update\" }\n", HttpStatus.OK);
+        return ResponseEntity.ok("{ \"message\": \"Successfully processed update\" }\n");
     }
 
     protected void verifyHmacSignature(String message, String signature) {
