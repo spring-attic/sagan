@@ -18,7 +18,7 @@ sourceSets {
 
 dependencyManagement {
 	imports {
-		mavenBom 'io.spring.platform:platform-bom:1.1.4.RELEASE'
+		mavenBom 'io.spring.platform:platform-bom:2.0.0.RELEASE'
 	}
 }
 

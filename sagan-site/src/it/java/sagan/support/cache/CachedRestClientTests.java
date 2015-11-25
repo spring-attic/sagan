@@ -1,6 +1,6 @@
 package sagan.support.cache;
 
-import sagan.SiteConfig;
+import sagan.SiteApplication;
 import sagan.support.Fixtures;
 import sagan.support.SetSystemProperty;
 import sagan.support.cache.CachedRestClientTests.TestConfig;
@@ -62,9 +62,9 @@ public class CachedRestClientTests {
 
     /**
      * Not marked with @Configuration so as to avoid accidental component-scanning by
-     * {@link SiteConfig} in other tests.
+     * {@link SiteApplication} in other tests.
      */
-    @Import(SiteConfig.class)
+    @Import(SiteApplication.class)
     public static class TestConfig {
         @Bean
         @Primary

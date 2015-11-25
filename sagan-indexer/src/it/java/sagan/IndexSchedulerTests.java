@@ -20,7 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import static org.mockito.Mockito.*;
 
-@ContextConfiguration(classes = { IndexerConfig.class, IndexSchedulerTests.TestConfig.class })
+@ContextConfiguration(classes = { IndexerApplication.class, IndexSchedulerTests.TestConfig.class })
 public class IndexSchedulerTests extends AbstractIndexerIntegrationTests {
 
     /*

@@ -1,15 +1,7 @@
-
 springBoot {
-    mainClass = 'sagan.SiteMain'
+    mainClass = 'sagan.SiteApplication'
     requiresUnpack = ['org.jruby:jruby-complete']
 }
-
-applicationDefaultJvmArgs = [
-        // Set SAGAN_HOME env variable to the root of sagan project. This allows to register an additional
-        // resource handler location and serve static resources directly from the sagan-client module during dev.
-        // See sagan.ClientResourcesConfig
-        "-DSAGAN_HOME=${rootProject.rootDir}"
-]
 
 dependencies {
     compile project(':sagan-common')
@@ -19,23 +11,25 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-redis"
     compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.springframework.boot:spring-boot-devtools"
     compile "org.springframework.security:spring-security-acl"
 
+
     // Thymeleaf is used as the template engine for serving HTML
-    compile 'org.thymeleaf:thymeleaf'
-    compile 'org.thymeleaf:thymeleaf-spring4'
-    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute:1.3'
-    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3'
+    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
 
     // nekohtml is required for thymeleaf's LEGACYHTML5 mode
     runtime 'net.sourceforge.nekohtml:nekohtml'
 
     // for use in generating blog atom feeds
-	compile 'com.rometools:rome'
+    compile 'com.rometools:rome'
 
     // for use in serving redirects; see urlrewrite.xml
     compile 'org.tuckey:urlrewritefilter:4.0.4'
+    // override Boot dependency management, since urlrewritefilter uses a more recent version
+    compile 'xml-apis:xml-apis:1.4.01'
 
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test"

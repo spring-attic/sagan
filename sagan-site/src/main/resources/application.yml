@@ -16,7 +16,7 @@ info:
 
 spring:
   main:
-    sources: sagan.SiteMain
+    sources: sagan.SiteApplication
   thymeleaf:
     mode: LEGACYHTML5
   jpa:
@@ -89,7 +89,7 @@ logging:
     # turn up to DEBUG to see information about guides as they are fetched and processed
     sagan.guides.support: WARN
     # always log high-level information about application startup
-    sagan.SiteMain: INFO
+    sagan.SiteApplication: INFO
     # log generated password for admin endpoints, e.g. /env, /beans
     # See http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints
     org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration: INFO
@@ -97,6 +97,12 @@ logging:
 
 spring:
   profiles: staging,production
+  resources:
+    chain:
+      enabled: true
+      strategy:
+        content:
+          enabled: true
 security:
   require_ssl: true
 server:
@@ -109,10 +115,16 @@ server:
 
 spring:
   profiles: default
-  thymeleaf:
-    cache: false
-cache:
-  timetolive: 0
+  resources:
+    static_locations:
+      - file:../sagan-client/src/
+  devtools:
+    restart:
+      additional_paths:
+        - ../sagan-client/src/
+      additional_exclude: /**/*.js,/**/*.css
+
+
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
 ---
 

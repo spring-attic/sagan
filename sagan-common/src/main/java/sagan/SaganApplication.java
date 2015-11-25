@@ -12,7 +12,7 @@ import static sagan.SaganProfiles.*;
 
 /**
  * A specialized {@link SpringApplication} that enforces {@link SaganProfiles} semantics.
- * See sagan.SiteMain and sagan.IndexerMain classes for usage examples.
+ * See sagan.SiteApplication and sagan.IndexerApplication classes for usage examples.
  */
 public class SaganApplication extends SpringApplication {
 

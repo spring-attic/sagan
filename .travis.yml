@@ -12,9 +12,12 @@ env:
 script:
 - 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then ./gradlew deploy; else ./gradlew check; fi'
 sudo: false
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:
   directories:
-  - $HOME/.gradle
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 notifications:
   slack:
     secure: fVnY1ZQQmzIEKBZJtfDTChYDKsp1JhoCWU1pNDE9aE92h4VJLvn/keGb88uROyMO6REIePAOZ+Qi3gH5uah1mVu8jaA0QGlhVG8dzXvbOGQxOnydG61FUNCKf7cL6dSqKdGEPDd/0FoQUKtKePxIZ5eKyS0kWOmto4rATo7gL30=

@@ -16,7 +16,7 @@ info:
 
 spring:
   main:
-    sources: sagan.IndexerConfig
+    sources: sagan.IndexerApplication
   jpa:
     show_sql: false
     hibernate:

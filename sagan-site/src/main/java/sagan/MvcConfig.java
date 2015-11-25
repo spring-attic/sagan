@@ -153,20 +153,3 @@ class MvcConfig extends WebMvcConfigurerAdapter {
         }
     }
 }
-
-@Configuration
-@Profile(SaganProfiles.STANDALONE)
-class ClientResourcesConfig extends WebMvcConfigurerAdapter {
-
-    @Value("${SAGAN_HOME:}")
-    private String saganPath;
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if (!this.saganPath.isEmpty()) {
-            registry.addResourceHandler("/**")
-                    .addResourceLocations("file:///" + this.saganPath + "/sagan-client/src/")
-                    .setCachePeriod(0);
-        }
-    }
-}

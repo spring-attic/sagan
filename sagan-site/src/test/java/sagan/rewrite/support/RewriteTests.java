@@ -1,24 +1,17 @@
 package sagan.rewrite.support;
 
-import sagan.SiteConfig;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.mock.web.*;
+import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
+import sagan.SiteApplication;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.mock.web.MockFilterChain;
-import org.springframework.mock.web.MockFilterConfig;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.mock.web.PassThroughFilterChain;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -30,8 +23,8 @@ public class RewriteTests {
     @Before
     public void setUp() throws Exception {
         UrlRewriteFilter filter =
-                createUrlFilter(SiteConfig.REWRITE_FILTER_NAME,
-                        SiteConfig.REWRITE_FILTER_CONF_PATH);
+                createUrlFilter(SiteApplication.REWRITE_FILTER_NAME,
+                        SiteApplication.REWRITE_FILTER_CONF_PATH);
         filterChain = new PassThroughFilterChain(filter, new MockFilterChain());
     }
 
@@ -144,14 +137,14 @@ public class RewriteTests {
 
     @Test
     public void deprecatedTutorialsRedirected() throws Exception {
-        validateTemporaryRedirect("http://spring.io/guides/tutorials/rest/","/guides");
-        validateTemporaryRedirect("http://spring.io/guides/tutorials/data/","/guides");
-        validateTemporaryRedirect("http://spring.io/guides/tutorials/web/","/guides");
+        validateTemporaryRedirect("http://spring.io/guides/tutorials/rest/", "/guides");
+        validateTemporaryRedirect("http://spring.io/guides/tutorials/data/", "/guides");
+        validateTemporaryRedirect("http://spring.io/guides/tutorials/web/", "/guides");
     }
 
     @Test
     public void deprecatedWarGuideRedirected() throws Exception {
-        validateTemporaryRedirect("http://spring.io/guides/gs/convert-jar-to-war-maven/","/guides/gs/convert-jar-to-war/");
+        validateTemporaryRedirect("http://spring.io/guides/gs/convert-jar-to-war-maven/", "/guides/gs/convert-jar-to-war/");
     }
 
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,
