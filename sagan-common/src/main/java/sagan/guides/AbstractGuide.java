@@ -10,6 +10,7 @@ abstract class AbstractGuide implements Guide {
     private GuideMetadata metadata;
     private String content;
     private String sidebar;
+	private String typeLabel;
 
     public AbstractGuide() {
     }
@@ -46,7 +47,16 @@ abstract class AbstractGuide implements Guide {
         this.sidebar = sidebar;
     }
 
-// --- GuideMetadata delegate methods ---
+	public String getTypeLabel() {
+		return typeLabel;
+	}
+
+	public void setTypeLabel(String typeLabel) {
+		Assert.notNull(typeLabel, "Expected label type to be populated");
+		this.typeLabel = typeLabel;
+	}
+
+	// --- GuideMetadata delegate methods ---
 
     @Override
     @JsonIgnore
