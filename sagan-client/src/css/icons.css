@@ -112,6 +112,12 @@
   background-position: 225px 1058px;
   margin-top: 19px;
 }
+.icon.project--logo.logo-spring-shell {
+    width: 135px;
+    height: 95px;
+    background-position: 375px 1064px;
+    margin-top: 19px;
+}
 .icon.project--logo.logo-spring-session {
   width: 120px;
   height: 125px;
@@ -231,7 +237,7 @@
 .icon.icon-professional-support {
   width: 126px;
   height: 97px;
-  background-position: 272px 282px;
+  background-position: 272px 288px;
   font-size: 0;
 }
 .icon.icon-gs-guides {

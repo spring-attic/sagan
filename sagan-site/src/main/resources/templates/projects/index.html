@@ -171,6 +171,13 @@
           <div class="project--title">Spring Session</div>
           <p class="project--description">Spring Session provides an API and implementations for managing a user’s session information.</p>
         </a>
+        <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-shell')}">
+          <div class="project-logo--container">
+            <div class="icon project--logo logo-spring-shell"></div>
+          </div>
+          <div class="project--title">Spring Shell</div>
+          <p class="project--description">Provides a powerful foundation for building command-line apps using a Spring-based programming model.</p>
+        </a>
       </section>
       <h2 class="index-page--title">Community Projects</h2>
       <section class="projects--wrapper project-aggregator top-separator">
@@ -192,10 +199,6 @@
         <a href="https://github.com/spring-projects/spring-loaded#readme" class="project--container project--container--link">
           <div class="project--title">Spring Loaded</div>
           <p class="project--description">Boosts development productivity by reloading class file changes&mdash;as you make them&mdash;within your app's JVM.</p>
-        </a>
-        <a href="https://github.com/spring-projects/spring-shell#readme" class="project--container project--container--link">
-          <div class="project--title">Spring Shell</div>
-          <p class="project--description">Provides a powerful foundation for building command-line apps using a Spring-based programming model.</p>
         </a>
         <a href="https://github.com/spring-projects/rest-shell#readme" class="project--container project--container--link">
           <div class="project--title">REST Shell</div>
