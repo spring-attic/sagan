@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="header-container"></div>
-<div layout:fragment="content" class="container" th:object="${post}">
+<div layout:fragment="content" class="container-fluid" th:object="${post}">
   <div class="main-body--wrapper">
     <div class="row-fluid blog--wrapper">
       <div id="content" class="span8 mobile-left-pane" layout:include="blog/_full_post :: full-post" >
