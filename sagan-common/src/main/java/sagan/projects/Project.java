@@ -9,7 +9,6 @@ import java.util.Set;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OrderBy;
 
 @Entity
 public class Project {
@@ -22,7 +21,6 @@ public class Project {
     private String category;
 
     @ElementCollection
-    @OrderBy("versionName DESC")
     private List<ProjectRelease> releaseList = new ArrayList<>();
     private boolean isAggregator;
     private String stackOverflowTags;
@@ -94,6 +92,15 @@ public class Project {
     }
 
     public List<ProjectRelease> getProjectReleases() {
+        releaseList.sort((release1, release2) -> {
+            if (release1.getVersion() == null || release2.getVersion() == null) {
+                return 0;
+            }
+
+            return release1.getVersion().compareTo(release2.getVersion());
+        });
+        releaseList.sort(ProjectRelease::compareTo);
+
         return releaseList;
     }
 
