@@ -90,6 +90,7 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
         asciidocGuide.getTags().forEach(tag -> tagMultimap.set(guide.getRepoName(), tag));
         guide.setContent(asciidocGuide.getContent());
         guide.setSidebar(asciidoctorUtils.generateDynamicSidebar(projectMetadataService, asciidocGuide));
+        guide.setDeployToPwsUrl(org.getRunOnPwsMetadataUrl(repoName));
         return guide;
     }
 

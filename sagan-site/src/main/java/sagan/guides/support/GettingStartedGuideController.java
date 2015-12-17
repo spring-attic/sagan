@@ -1,6 +1,7 @@
 package sagan.guides.support;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,9 +28,17 @@ class GettingStartedGuideController {
 
     private GettingStartedGuides guides;
 
+    private String deployToPwsClientId;
+
+    private String deployToPwsRedirectUrl;
+
     @Autowired
-    public GettingStartedGuideController(GettingStartedGuides guides) {
+    public GettingStartedGuideController(GettingStartedGuides guides,
+                                         @Value("${deploytopws.client_id}") String deployToPwsClientId,
+                                         @Value("${deploytopws.redirect_url}") String deployToPwsRedirectUrl) {
         this.guides = guides;
+        this.deployToPwsClientId = deployToPwsClientId;
+        this.deployToPwsRedirectUrl = deployToPwsRedirectUrl;
     }
 
     @RequestMapping("/{guide}")
@@ -38,6 +47,8 @@ class GettingStartedGuideController {
         model.addAttribute("guide", gsGuide);
         model.addAttribute("description", "this guide is designed to get you productive as quickly as " +
                 "possible and using the latest Spring project releases and techniques as recommended by the Spring team");
+        model.addAttribute("deployToPwsClientId", this.deployToPwsClientId);
+        model.addAttribute("deployToPwsRedirectUrl", this.deployToPwsRedirectUrl);
         return "guides/gs/guide";
     }
 

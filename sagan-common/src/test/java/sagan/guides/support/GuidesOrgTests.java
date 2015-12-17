@@ -1,24 +1,25 @@
 package sagan.guides.support;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import sagan.support.Fixtures;
-import sagan.support.github.GitHubClient;
-
-import java.util.List;
-
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
 import org.springframework.social.github.api.GitHubRepo;
+import sagan.support.Fixtures;
+import sagan.support.github.GitHubClient;
+import sagan.support.github.RepoContent;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.anyVararg;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GuidesOrgTests {
@@ -56,6 +57,31 @@ public class GuidesOrgTests {
 
         GitHubRepo[] repos = service.findAllRepositories();
         assertThat(repos[0].getName(), equalTo("gs-rest-service"));
+    }
+
+    @Test
+    public void getGithubRepoContents_fetchesContent() {
+        given(ghClient.sendRequestForJson(anyString(), anyVararg())).willReturn(Fixtures.githubRepoContent());
+
+        List<RepoContent> contents = service.getRepoContents("gs-rest-service");
+        assertThat(contents, hasSize(9));
+        assertThat(contents, Matchers.hasItem(hasProperty("name", equalTo("run-on-pws.json"))));
+    }
+
+    @Test
+    public void getRunOnPwsMetadataUrl_empty() {
+        given(ghClient.sendRequestForJson(anyString(), anyVararg())).willReturn("[]");
+
+        String runOnPwsUrl = service.getRunOnPwsMetadataUrl("gs-rest-service");
+        assertThat(runOnPwsUrl, isEmptyString());
+    }
+
+    @Test
+    public void getRunOnPwsMetadataUrl() {
+        given(ghClient.sendRequestForJson(anyString(), anyVararg())).willReturn(Fixtures.githubRepoContent());
+
+        String runOnPwsUrl = service.getRunOnPwsMetadataUrl("gs-rest-service");
+        assertThat(runOnPwsUrl, equalTo("https://raw.githubusercontent.com/spring-guides/gs-rest-service/master/run-on-pws.json"));
     }
 
     @Test

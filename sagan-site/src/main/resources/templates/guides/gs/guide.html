@@ -15,6 +15,8 @@
     <meta property="og:title" th:content="${guide.title}" />
     <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
     <meta property="og:description" th:content="${description}" />
+
+    <script th:unless="${#strings.isEmpty(guide.deployToPwsUrl)}" type="application/javascript" th:src="@{/pws/pws-1.0.0.min.js}"></script>
   </head>
   <body>
     <div layout:fragment="header-container"></div>
@@ -56,6 +58,9 @@
                 </div>
                 <a class="github_download btn btn-black uppercase" th:href='${guide.zipUrl}'>Download ZIP</a>
                 <a class="gs-guide-import" th:href="${guide.githubHttpsUrl}">Import into STS</a>
+                <div th:unless="${#strings.isEmpty(guide.deployToPwsUrl)}" class="deploy-to-pws--container">
+                  <a id="deployToPws" href="#"></a>
+                </div>
                 <div class="go-to-repo--container">
                   <a th:href="${guide.GithubHttpsUrl}">
                     <i class="icon-github"></i>
@@ -68,6 +73,18 @@
           </aside>
         </div>
       </main>
+      <script th:unless="${#strings.isEmpty(guide.deployToPwsUrl)}" th:inline="javascript" type="application/javascript">
+        /*<![CDATA[*/
+        var clientId = /*[[${deployToPwsClientId}]]*/ 'spring-io-local';
+        var redirectUrl = /*[[${deployToPwsRedirectUrl + '?descriptor=' + #uris.escapeQueryParam(guide.deployToPwsUrl)}]]*/ 'https://localhost:8080/guides/deploy-to-pws';
+        PWS.ui(function (rp) {
+          rp("#deployToPws").deployButton({
+            clientId: clientId,
+            redirectUrl: redirectUrl
+          });
+        });
+        /*]]>*/
+      </script>
     </div>
   </body>
 </html>

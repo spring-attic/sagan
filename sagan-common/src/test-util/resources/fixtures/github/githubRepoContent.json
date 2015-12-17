@@ -1,0 +1,146 @@
+[
+  {
+    "name": ".gitignore",
+    "path": ".gitignore",
+    "sha": "53c02a2fe27832ec6bf68ab4fdccc37ba4c19ba2",
+    "size": 143,
+    "url": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/.gitignore?ref=master",
+    "html_url": "https://github.com/spring-guides/gs-rest-service/blob/master/.gitignore",
+    "git_url": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/53c02a2fe27832ec6bf68ab4fdccc37ba4c19ba2",
+    "download_url": "https://raw.githubusercontent.com/spring-guides/gs-rest-service/master/.gitignore",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/.gitignore?ref=master",
+      "git": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/53c02a2fe27832ec6bf68ab4fdccc37ba4c19ba2",
+      "html": "https://github.com/spring-guides/gs-rest-service/blob/master/.gitignore"
+    }
+  },
+  {
+    "name": ".travis.yml",
+    "path": ".travis.yml",
+    "sha": "2e7d795177b7449db981f68ef75d8ca189a2385a",
+    "size": 264,
+    "url": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/.travis.yml?ref=master",
+    "html_url": "https://github.com/spring-guides/gs-rest-service/blob/master/.travis.yml",
+    "git_url": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/2e7d795177b7449db981f68ef75d8ca189a2385a",
+    "download_url": "https://raw.githubusercontent.com/spring-guides/gs-rest-service/master/.travis.yml",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/.travis.yml?ref=master",
+      "git": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/2e7d795177b7449db981f68ef75d8ca189a2385a",
+      "html": "https://github.com/spring-guides/gs-rest-service/blob/master/.travis.yml"
+    }
+  },
+  {
+    "name": "LICENSE.code.txt",
+    "path": "LICENSE.code.txt",
+    "sha": "36bd6bb6baad83f98da6460e58441a8c5416a0cb",
+    "size": 721,
+    "url": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/LICENSE.code.txt?ref=master",
+    "html_url": "https://github.com/spring-guides/gs-rest-service/blob/master/LICENSE.code.txt",
+    "git_url": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/36bd6bb6baad83f98da6460e58441a8c5416a0cb",
+    "download_url": "https://raw.githubusercontent.com/spring-guides/gs-rest-service/master/LICENSE.code.txt",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/LICENSE.code.txt?ref=master",
+      "git": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/36bd6bb6baad83f98da6460e58441a8c5416a0cb",
+      "html": "https://github.com/spring-guides/gs-rest-service/blob/master/LICENSE.code.txt"
+    }
+  },
+  {
+    "name": "LICENSE.writing.txt",
+    "path": "LICENSE.writing.txt",
+    "sha": "90247b3fe1aef4e804fb6baa0a7966e0ff4ec127",
+    "size": 105,
+    "url": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/LICENSE.writing.txt?ref=master",
+    "html_url": "https://github.com/spring-guides/gs-rest-service/blob/master/LICENSE.writing.txt",
+    "git_url": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/90247b3fe1aef4e804fb6baa0a7966e0ff4ec127",
+    "download_url": "https://raw.githubusercontent.com/spring-guides/gs-rest-service/master/LICENSE.writing.txt",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/LICENSE.writing.txt?ref=master",
+      "git": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/90247b3fe1aef4e804fb6baa0a7966e0ff4ec127",
+      "html": "https://github.com/spring-guides/gs-rest-service/blob/master/LICENSE.writing.txt"
+    }
+  },
+  {
+    "name": "README.adoc",
+    "path": "README.adoc",
+    "sha": "1a6374fb62ae7ca4a21b044df2b6a2a2d60f19a2",
+    "size": 8685,
+    "url": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/README.adoc?ref=master",
+    "html_url": "https://github.com/spring-guides/gs-rest-service/blob/master/README.adoc",
+    "git_url": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/1a6374fb62ae7ca4a21b044df2b6a2a2d60f19a2",
+    "download_url": "https://raw.githubusercontent.com/spring-guides/gs-rest-service/master/README.adoc",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/README.adoc?ref=master",
+      "git": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/1a6374fb62ae7ca4a21b044df2b6a2a2d60f19a2",
+      "html": "https://github.com/spring-guides/gs-rest-service/blob/master/README.adoc"
+    }
+  },
+  {
+    "name": "complete",
+    "path": "complete",
+    "sha": "8b9feac5f3df5c6bb19b8c391b43d66edce7cba3",
+    "size": 0,
+    "url": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/complete?ref=master",
+    "html_url": "https://github.com/spring-guides/gs-rest-service/tree/master/complete",
+    "git_url": "https://api.github.com/repos/spring-guides/gs-rest-service/git/trees/8b9feac5f3df5c6bb19b8c391b43d66edce7cba3",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/complete?ref=master",
+      "git": "https://api.github.com/repos/spring-guides/gs-rest-service/git/trees/8b9feac5f3df5c6bb19b8c391b43d66edce7cba3",
+      "html": "https://github.com/spring-guides/gs-rest-service/tree/master/complete"
+    }
+  },
+  {
+    "name": "initial",
+    "path": "initial",
+    "sha": "ede164e7e06cb5bb4161678d3868369fe3297cc1",
+    "size": 0,
+    "url": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/initial?ref=master",
+    "html_url": "https://github.com/spring-guides/gs-rest-service/tree/master/initial",
+    "git_url": "https://api.github.com/repos/spring-guides/gs-rest-service/git/trees/ede164e7e06cb5bb4161678d3868369fe3297cc1",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/initial?ref=master",
+      "git": "https://api.github.com/repos/spring-guides/gs-rest-service/git/trees/ede164e7e06cb5bb4161678d3868369fe3297cc1",
+      "html": "https://github.com/spring-guides/gs-rest-service/tree/master/initial"
+    }
+  },
+  {
+    "name": "run-on-pws.json",
+    "path": "run-on-pws.json",
+    "sha": "ad11489c296f06a544ab2a92fafd53ccbe39ecf7",
+    "size": 938,
+    "url": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/run-on-pws.json?ref=master",
+    "html_url": "https://github.com/spring-guides/gs-rest-service/blob/master/run-on-pws.json",
+    "git_url": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/ad11489c296f06a544ab2a92fafd53ccbe39ecf7",
+    "download_url": "https://raw.githubusercontent.com/spring-guides/gs-rest-service/master/run-on-pws.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/run-on-pws.json?ref=master",
+      "git": "https://api.github.com/repos/spring-guides/gs-rest-service/git/blobs/ad11489c296f06a544ab2a92fafd53ccbe39ecf7",
+      "html": "https://github.com/spring-guides/gs-rest-service/blob/master/run-on-pws.json"
+    }
+  },
+  {
+    "name": "test",
+    "path": "test",
+    "sha": "f273f607f5148b2992fc1d52e6710d321ec38f61",
+    "size": 0,
+    "url": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/test?ref=master",
+    "html_url": "https://github.com/spring-guides/gs-rest-service/tree/master/test",
+    "git_url": "https://api.github.com/repos/spring-guides/gs-rest-service/git/trees/f273f607f5148b2992fc1d52e6710d321ec38f61",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/spring-guides/gs-rest-service/contents/test?ref=master",
+      "git": "https://api.github.com/repos/spring-guides/gs-rest-service/git/trees/f273f607f5148b2992fc1d52e6710d321ec38f61",
+      "html": "https://github.com/spring-guides/gs-rest-service/tree/master/test"
+    }
+  }
+]

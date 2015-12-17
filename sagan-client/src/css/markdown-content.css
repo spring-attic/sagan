@@ -184,6 +184,14 @@ a[name="gs"], a[name="tutorials"] {
     margin-top: -2px;
 }
 
+.deploy-to-pws--container {
+    margin-top: 20px;
+    padding: 10px 16% 0;
+    border-top: 1px solid white;
+}
+
+
+
 .copy-button {
     background-color: #cccccc;
     margin: 1px 1px 10px 0;

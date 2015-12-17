@@ -91,6 +91,7 @@ public class Tutorials implements DocRepository<Tutorial, GuideMetadata>, Conten
         AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org.getName(), repoName));
         tutorial.setContent(asciidocGuide.getContent());
         tutorial.setSidebar(asciidoctorUtils.generateDynamicSidebar(projectMetadataService, asciidocGuide));
+        tutorial.setDeployToPwsUrl(org.getRunOnPwsMetadataUrl(repoName));
         return tutorial;
     }
 

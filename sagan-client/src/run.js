@@ -55,6 +55,13 @@ var Munchkin, baseUrl, sts_import; // pre-existing globals
                     exports: '$.migrateWarnings'
                 }
             },
+            'pws-sdk': {
+                location: 'pws/pws-1.0.0.min.js',
+                config: {
+                    loader: 'curl/loader/legacy',
+                    exports: 'PWS'
+                }
+            },
             munchkin: {
                 location: '//munchkin.marketo.net/munchkin',
                 config: {
