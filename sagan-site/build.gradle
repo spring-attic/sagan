@@ -1,6 +1,6 @@
 springBoot {
     mainClass = 'sagan.SiteApplication'
-    requiresUnpack = ['org.jruby:jruby-complete']
+    requiresUnpack = ['org.jruby:jruby-complete', 'org.asciidoctor:asciidoctorj']
 }
 
 dependencies {
