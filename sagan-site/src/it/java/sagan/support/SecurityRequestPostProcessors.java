@@ -56,7 +56,7 @@ public final class SecurityRequestPostProcessors {
      * details are obtained from the {@link UserDetailsService} declared in the
      * {@link WebApplicationContext}.
      */
-    public static UserDetailsRequestPostProcessor userDeatilsService(String username) {
+    public static UserDetailsRequestPostProcessor userDetailsService(String username) {
         return new UserDetailsRequestPostProcessor(username);
     }
 
