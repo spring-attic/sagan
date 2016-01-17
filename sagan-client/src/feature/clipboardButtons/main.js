@@ -1,103 +1,95 @@
-/**
- * The composition plan for clipboard components.
- * @module
- * @type {function(Object): Clipboard}
- * @see Clipboard
- */
-module.exports = function () {
-    return new Clipboard();
-};
-
-var ZeroClipboard = require('zeroclipboard');
-var clipboardProvider = require('./buttonConnector');
-var copyButtonProvider = require('./copyButtonProvider');
-var buttonTemplate = '<button class="copy-button snippet"></button>';
+var ClipboardJs = require('clipboard');
 var $ = require('jquery');
+var os = require('../../platform/os');
 
 // This version of bootstrap looks for window.jQuery. ick.
 window.jQuery = $;
 require('bootstrap/js/bootstrap-tooltip');
 
-// ZeroClipboard 1.1.7 needs this
-// I tried updating to ZeroClipboard 1.2.2 and it has major timing issues
-// inside the swf file.  Many events are lost so most times, the
-// clipboard doesn't have the right thing in it.  It typically will
-// have no text or the text from previous previous copy-to-clipboard operation!
-if (!window.ZeroClipboard) {
-    window.ZeroClipboard = ZeroClipboard;
-}
+var buttonTemplate = '<button class="copy-button snippet"></button>';
+var snippetsSelector = '.listingblock pre, .has-copy-button pre, article .highlight pre';
+var buttonsSelector = 'button.copy-button';
 
-var ZeroClipboardSwf = '/lib/zeroclipboard/ZeroClipboard.swf';
+module.exports = function initClipboardButtons() {
 
+    $(ready);
 
-// TODO: don't create clipboard buttons if ZeroClipboard.detectFlashSupport() is false
-/**
- * Creates and initializes the plan for decorating pages that require
- * enhanced clipboard functionality.
- * @constructor
- */
-function Clipboard () {
-    var createButton;
+    return {
+        destroy: destroy
+    };
 
-    ZeroClipboard.setDefaults({ moviePath: ZeroClipboardSwf });
+    function ready() {
+        var message = 'Copied to clipboard!';
+        var createButton = copyButtonProvider($(buttonTemplate)[0]);
+        var createClipboardButtons = buttonConnector(createButton);
+        createClipboardButtons($(snippetsSelector));
 
-    createButton = copyButtonProvider($(buttonTemplate)[0]);
-    this.createClipboardButtons = clipboardProvider(createButton);
-
-    $(function () {
-        this.ready();
-    }.bind(this));
-}
-
-Clipboard.prototype = {
-
-    /**
-     * Attaches a clipboard button to each of the elements provided.
-     * The clipboard buttons are created by the constructor's buttonProvider
-     * option and given enhanced clipboard functionality.
-     * @param {HTMLElement|NodeList|Array} elements
-     * @returns {*} elements
-     */
-    attachClipboardElements: function (elements) {
-        return this.connectToClipboard(this.createClipboardButtons(elements));
-    },
-
-    /**
-     * Adds enhanced clipboard functionality to the elements provided.
-     * @param {HTMLElement|NodeList|Array} elements
-     * @returns {*} elements
-     */
-    connectToClipboard: function (elements) {
-        var zero = this.zero;
-        zero.glue(elements);
-        return elements;
-    },
-
-    /**
-     * Called when the dom is ready.
-     */
-    ready: function () {
-        var $copyButtons, $actionsSection, $codeSnippets;
-
-        $codeSnippets = $('.listingblock pre, .has-copy-button pre, article .highlight pre');
-        $actionsSection = $('.github-actions');
-        $copyButtons = $actionsSection.find('button.copy-button');
-
-        var zero = this.zero = new ZeroClipboard();
-        // add bootstrap tooltip
-        $(zero.htmlBridge).tooltip({
-            title: 'copy to clipboard',
-            placement: 'bottom'
+        var clipboard = new ClipboardJs(buttonsSelector);
+        clipboard.on('success', function(e) {
+            $(e.trigger).tooltip('show');
+            e.clearSelection();
         });
 
-        this.connectToClipboard($copyButtons);
-        this.attachClipboardElements($codeSnippets);
+        clipboard.on('error', function(e) {
+            if(os.type() == 'iOS') {
+                message = 'Could not copy :-(';
+            }
+            else if (os.type == 'Mac') {
+                message = 'Press ⌘-C to Copy';
+            }
+            else {
+                message = 'Press Ctrl-C to Copy';
+            }
+            $(e.trigger).tooltip('show');
+        });
 
-    },
+        $(buttonsSelector).tooltip({
+            title: function() {return message;},
+            placement: 'bottom',
+            trigger: 'manual'
+        });
+
+        $(buttonsSelector).on('shown.bs.tooltip', function () {
+            setTimeout(function() {$(this).tooltip('hide');}.bind(this), 1000);
+        });
+
+    }
+
+    function destroy() {
+    }
 
     /**
-     * Call this when this component is no longer needed.
+     * Returns a function that will create clones of the provided prototype
+     * element and insert them just before a "host" element.
+     * @param {HTMLELement} prototype
+     * @returns {function(HTMLELement) : HTMLELement}
      */
-    destroy: function () {}
+    function copyButtonProvider (prototype) {
+        return function appendCopyButton (host) {
+            var button = prototype.cloneNode(true);
+            // put it right before the host node
+            host.parentNode.insertBefore(button, host);
+            return button;
+        };
+    }
+
+    function buttonConnector (provideButton) {
+        return function createClipboardElements(elements) {
+            var el, button, text, buttons = [];
+            for (var i = 0, len = elements.length; i < len; i++) {
+                el = elements[i];
+                button = provideButton(el);
+                if (el.id) {
+                    button.setAttribute('data-clipboard-target', el.id);
+                }
+                else {
+                    text = el.value || el.textContent || el.innerText;
+                    button.setAttribute('data-clipboard-text', text);
+                }
+                buttons.push(button);
+            }
+            return buttons;
+        };
+    }
 
 };

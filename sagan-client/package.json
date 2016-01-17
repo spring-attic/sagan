@@ -33,6 +33,7 @@
     "dependencies": {
       "bootstrap": "github:twbs/bootstrap@^2.3.2",
       "bootstrap-datetimepicker": "npm:eonasdan-bootstrap-datetimepicker@^4.15.35",
+      "clipboard": "npm:clipboard@^1.5.5",
       "font-awesome": "github:FortAwesome/font-awesome@3.2.1",
       "gmaps": "npm:gmaps@^0.4.14",
       "google-code-prettify": "github:tcollard/google-code-prettify@^1.0.4",
@@ -41,12 +42,11 @@
       "meld": "npm:meld@^1.3.2",
       "most": "npm:most@^0.2.0",
       "poly": "npm:poly@^0.6.1",
-      "when": "npm:when@^2.8.0",
-      "zeroclipboard": "npm:zeroclipboard@^1.1.7"
+      "when": "npm:when@^2.8.0"
     },
     "devDependencies": {
-      "traceur": "github:jmcriffey/bower-traceur@0.0.92",
-      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.92"
+      "traceur": "github:jmcriffey/bower-traceur@0.0.93",
+      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.93"
     }
   }
 }
