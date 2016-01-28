@@ -41,7 +41,7 @@ public class SaganQueryBuildersTests {
                 "}}";
         FilteredQueryBuilder builder = SaganQueryBuilders.matchUnsupportedProjectEntries(projectId, supportedVersions);
         String result = SaganQueryBuilders.wrapQuery(builder.toString());
-        assertThat(result.replaceAll("\\s",""), equalTo(expected));
+        assertThat(result.replaceAll("[\\s|\\r|\\n]",""), equalTo(expected));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class SaganQueryBuildersTests {
                 Charset.forName("UTF-8"));
         String actual = builder.build().getData(new Gson());
 
-        assertThat(actual, equalTo(expected));
+        assertThat(actual.replaceAll("[\\s|\\r|\\n]",""), equalTo(expected.replaceAll("[\\s|\\r|\\n]","")));
     }
 
 }
