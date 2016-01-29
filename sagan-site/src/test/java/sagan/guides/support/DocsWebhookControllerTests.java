@@ -61,9 +61,10 @@ public class DocsWebhookControllerTests {
     public void testGuideWebhookPing() throws Exception {
         given(this.gettingStartedGuides.parseGuideName("gs-test-guide")).willReturn("test-guide");
         String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/pingWebhook.json").getInputStream(), Charset.forName("UTF-8"));
+                new ClassPathResource("fixtures/webhooks/pingWebhook.json").getInputStream(), Charset.forName("UTF-8"))
+				.replaceAll("[\\n|\\r]","");;
 
-        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=9f4c6a2798428b9b0db9893026f200cfab03525b", "ping");
+        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=9E629DCCF4472F600D048510354BE400B8EB25CB", "ping");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed ping event\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.gettingStartedGuides, never()).evictFromCache("test-guide");
@@ -73,9 +74,10 @@ public class DocsWebhookControllerTests {
     public void testGuideCacheEviction() throws Exception {
         given(this.gettingStartedGuides.parseGuideName("gs-test-guide")).willReturn("test-guide");
         String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"));
+                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
+				.replaceAll("[\\n|\\r]","");;
 
-        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=f808b2905e91e6a7a31526b9f44a95a5a7e3472a", "push");
+        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.gettingStartedGuides, times(1)).evictFromCache("test-guide");
@@ -85,9 +87,10 @@ public class DocsWebhookControllerTests {
     public void testGuideCacheEviction2() throws Exception {
         given(this.gettingStartedGuides.parseGuideName("gs-test-guide")).willReturn("test-guide");
         String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"));
+                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
+				.replaceAll("[\\n|\\r]","");;
 
-        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=f808b2905e91e6a7a31526b9f44a95a5a7e3472a", "push",
+        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push",
                 "gs-test-guide");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
@@ -98,9 +101,10 @@ public class DocsWebhookControllerTests {
     public void testTutorialCacheEviction() throws Exception {
         given(this.tutorials.parseTutorialName("gs-test-guide")).willReturn("test-guide");
         String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"));
+                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
+				.replaceAll("[\\n|\\r]","");
 
-        ResponseEntity response = this.controller.processTutorialsUpdate(payload, "sha1=f808b2905e91e6a7a31526b9f44a95a5a7e3472a", "push");
+        ResponseEntity response = this.controller.processTutorialsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.tutorials, times(1)).evictFromCache("test-guide");
@@ -110,9 +114,10 @@ public class DocsWebhookControllerTests {
     public void testTutorialCacheEviction2() throws Exception {
         given(this.tutorials.parseTutorialName("gs-test-guide")).willReturn("test-guide");
         String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"));
+                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
+				.replaceAll("[\\n|\\r]","");;
 
-        ResponseEntity response = this.controller.processTutorialsUpdate(payload, "sha1=f808b2905e91e6a7a31526b9f44a95a5a7e3472a", "push",
+        ResponseEntity response = this.controller.processTutorialsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push",
                 "gs-test-guide");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
@@ -122,9 +127,10 @@ public class DocsWebhookControllerTests {
     @Test
     public void testUnderstandingCacheEviction() throws Exception {
         String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"));
+                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
+				.replaceAll("[\\n|\\r]","");;
 
-        ResponseEntity response = this.controller.processUnderstandingUpdate(payload, "sha1=f808b2905e91e6a7a31526b9f44a95a5a7e3472a", "push");
+        ResponseEntity response = this.controller.processUnderstandingUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.understandingDocs, times(1)).clearCache();
