@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface ProjectMetadataRepository extends JpaRepository<Project, String> {
+public interface ProjectMetadataRepository extends JpaRepository<Project, String> {
     List<Project> findByCategory(String category);
 
     @Query("SELECT DISTINCT p FROM Project p JOIN FETCH p.releaseList")

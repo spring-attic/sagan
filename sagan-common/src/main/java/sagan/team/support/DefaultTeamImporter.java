@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-class DefaultTeamImporter implements TeamImporter {
+public class DefaultTeamImporter implements TeamImporter {
 
     private final TeamService teamService;
     private final GitHubClient gitHub;
