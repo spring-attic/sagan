@@ -2,6 +2,7 @@
 <html
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <body>
     <div layout:fragment="full-post">
@@ -9,6 +10,9 @@
         <div th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
           <div th:text="${category.displayName}">Engineering</div>
         </div>
+      </header>
+      <header sec:authorize="fullyAuthenticated">
+        <span>[<a id="edit" th:href="@{/admin/blog/{id}-{slug}/edit(id=${post.id},slug=${slug})}">Edit</a>]</span>
       </header>
       <div class="blog--container">
         <header>

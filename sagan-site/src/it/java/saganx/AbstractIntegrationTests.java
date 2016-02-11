@@ -2,6 +2,7 @@ package saganx;
 
 import org.springframework.test.context.ActiveProfiles;
 import sagan.SaganProfiles;
+import sagan.blog.support.BlogService;
 import sagan.support.github.StubGithubRestClient;
 
 import org.junit.After;
@@ -36,6 +37,9 @@ public abstract class AbstractIntegrationTests {
 
     @Autowired
     protected StubGithubRestClient stubRestClient;
+
+    @Autowired
+    protected BlogService blogService;
 
     @Autowired
     protected FilterChainProxy springSecurityFilterChain;

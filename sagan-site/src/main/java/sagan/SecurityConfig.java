@@ -64,7 +64,7 @@ class SecurityConfig {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             configureHeaders(http.headers());
-            http.antMatcher("/signin/**")
+            http.requestMatchers().antMatchers("/signin/**","/blog/**").and()
                     .addFilterBefore(authenticationFilter(),
                             AnonymousAuthenticationFilter.class).anonymous().and().csrf()
                     .disable();
