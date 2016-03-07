@@ -119,7 +119,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
 
         assertThat((String) repository.get("id"), equalTo("spring-snapshots"));
         assertThat((String) repository.get("name"), equalTo("Spring Snapshots"));
-        assertThat((String) repository.get("url"), equalTo("http://repo.spring.io/snapshot"));
+        assertThat((String) repository.get("url"), equalTo("https://repo.spring.io/libs-snapshot"));
         assertThat((Boolean) repository.get("snapshotsEnabled"), equalTo(true));
     }
 

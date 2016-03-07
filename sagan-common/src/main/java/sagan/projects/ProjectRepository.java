@@ -8,9 +8,9 @@ import javax.persistence.Id;
 @Entity
 public class ProjectRepository {
     private static final ProjectRepository SNAPSHOT = new ProjectRepository("spring-snapshots", "Spring Snapshots",
-            "http://repo.spring.io/snapshot", true);
+            "https://repo.spring.io/libs-snapshot", true);
     private static final ProjectRepository MILESTONE = new ProjectRepository("spring-milestones", "Spring Milestones",
-            "http://repo.spring.io/milestone", false);
+            "https://repo.spring.io/libs-milestone", false);
 
     @Id
     private String id;

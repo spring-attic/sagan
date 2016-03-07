@@ -1,0 +1,2 @@
+update projectrepository set url='https://repo.spring.io/libs-snapshot' where id='spring-snapshots';
+update projectrepository set url='https://repo.spring.io/libs-milestone' where id='spring-milestones';
