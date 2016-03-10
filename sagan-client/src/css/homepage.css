@@ -123,23 +123,6 @@
   text-transform: uppercase;
 }
 
-/* Initializr hero banner */
-.homepage--body .hero--banner .initializr {
-  background: #34302d;
-  height: auto;
-  text-align: center;
-  padding: 60px 0;
-}
-.homepage--body .hero--banner .initializr .initializr--title {
-  font-family: "Montserrat", sans-serif;
-  color: #f1f1f1;
-  font-size: 30px;
-  font-weight: normal;
-  line-height: 30px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
 .homepage--body .key-feature--wrapper {
   background-color: #6db33f;
   padding: 60px 0;
@@ -204,6 +187,9 @@
   margin-left: 10px;
   text-decoration: none;
 }
+.homepage--body .offset-feature--container.feature-initializr {
+    text-align:right;
+}
 .homepage--body .offset-feature--container.feature-guides {
   background-image: url("../img/homepage-feature-guides.png");
   background-repeat: no-repeat;
@@ -218,6 +204,12 @@
   background-image: url("../img/homepage-feature-projects.png");
   background-repeat: no-repeat;
   background-position: 130px 0;
+}
+.homepage--body .offset-feature--container.feature-certification {
+    background-image: url("../img/homepage-feature-certification.png");
+    background-repeat: no-repeat;
+    background-position: 0% 0;
+    text-align: right;
 }
 .homepage--body .offset-feature--container:last-child {
   border: none;
