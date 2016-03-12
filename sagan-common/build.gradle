@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE"
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
     }
 }
 
@@ -18,7 +18,7 @@ sourceSets {
 
 dependencyManagement {
 	imports {
-		mavenBom 'io.spring.platform:platform-bom:2.0.1.RELEASE'
+		mavenBom 'io.spring.platform:platform-bom:2.0.3.RELEASE'
 	}
 }
 
@@ -32,7 +32,7 @@ dependencies {
     compile 'org.apache.httpcomponents:httpclient'
 
     compile 'org.elasticsearch:elasticsearch'
-    compile 'io.searchbox:jest:0.1.6'
+    compile 'io.searchbox:jest:0.1.7'
     compile 'commons-codec:commons-codec' // needed by Jest's HTTP client?
     compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
     compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
@@ -59,7 +59,7 @@ dependencies {
     compile 'org.hibernate:hibernate-validator'
 
     // for use in rendering AsciiDoc-based guide content to HTML
-    compile 'org.asciidoctor:asciidoctorj:1.5.2'
+    compile 'org.asciidoctor:asciidoctorj:1.5.4'
 
     testUtilCompile "junit:junit"
     testUtilCompile sourceSets.main.output
