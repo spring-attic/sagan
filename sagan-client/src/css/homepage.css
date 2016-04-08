@@ -248,21 +248,29 @@
 }
 .support--wrapper .support--container .icon {
   float: left;
-  margin-right: 45px;
+  margin-right: 20px;
 }
 .support--wrapper .support--container .support--title {
   font-size: 18px;
   line-height: 18px;
   text-transform: uppercase;
   color: #f1f1f1;
-  margin: 22px 0;
+  margin: 16px 0;
+}
+.support--wrapper .support--container .support-links {
+    list-style: none;
+}
+.support--wrapper .support--container .support-links.community {
+    margin-left: 117px;
+}
+.support--wrapper .support--container .support-links.professional {
+    margin-left: 146px;
+}
+.support--wrapper .support--container .support-links.hosted {
+    margin-left: 137px;
 }
 .support--wrapper .support--container .support-links a {
   color: #5fa134;
-  padding: 0 20px;
-}
-.support--wrapper .support--container .support-links a:first-child {
-  padding-left: 0;
 }
 .support--wrapper.about-page {
   position: absolute;
