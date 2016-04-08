@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import sagan.blog.PostFormat;
 
-class PostForm {
+public class PostForm {
     @NotEmpty
     private String title;
 

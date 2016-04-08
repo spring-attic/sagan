@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-class SearchResults {
+public class SearchResults {
     private Page<SearchResult> page;
 
     private final List<SearchFacet> facets;

@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-class ToolsService {
+public class ToolsService {
     private final ToolXmlConverter toolXmlConverter = new ToolXmlConverter();
     private final CachedRestClient restClient;
     private final RestTemplate restTemplate;
