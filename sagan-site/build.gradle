@@ -35,6 +35,9 @@ dependencies {
     // override Boot dependency management, since urlrewritefilter uses a more recent version
     compile 'xml-apis:xml-apis:1.4.01'
 
+    // for XML manipulation
+   compile 'org.xmlbeam:xmlprojector:1.4.8'
+
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test"
 
