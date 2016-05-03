@@ -9,7 +9,7 @@
     <meta property="og:title" content="Spring Projects" />
     <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
     <meta property="og:description" content="The Spring portfolio has many projects, including Spring Framework,
-    Sprint IO Platform, Spring XD, Spring Boot, Spring Data, Spring Security..." />
+    Sprint IO Platform, Spring Cloud, Spring Boot, Spring Data, Spring Security..." />
 </head>
 <body>
   <div layout:fragment="header-container"></div>
@@ -39,12 +39,12 @@
           <div class="project--title">Spring Framework</div>
           <p class="project--description">Provides core support for dependency injection, transaction management, web apps, data access, messaging and more.</p>
         </a>
-        <a th:href="${project.siteUrl}" class="project--container project--container--link" th:with="project=${projectMetadata.getProject('spring-xd')}">
+        <a th:href="${project.siteUrl}" class="project--container project--container--link" th:with="project=${projectMetadata.getProject('spring-cloud-dataflow')}">
           <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-xd"></div>
+            <div class="icon project--logo logo-spring-cloud-dataflow"></div>
           </div>
-          <div class="project--title">Spring XD</div>
-          <p class="project--description">Simplifies the development of big data applications by addressing ingestion, analytics, batch jobs and data export.</p>
+          <div class="project--title">Spring Cloud Data Flow</div>
+          <p class="project--description">A cloud native programming and operating model for composable data microservices on a structured platform.</p>
         </a>
         <a class="project--container parent-project project--container--link"
            th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-cloud')}"
@@ -178,6 +178,13 @@
           <div class="project--title">Spring Shell</div>
           <p class="project--description">Provides a powerful foundation for building command-line apps using a Spring-based programming model.</p>
         </a>
+          <a th:href="${project.siteUrl}" class="project--container project--container--link" th:with="project=${projectMetadata.getProject('spring-xd')}">
+              <div class="project-logo--container">
+                  <div class="icon project--logo logo-spring-xd"></div>
+              </div>
+              <div class="project--title">Spring XD</div>
+              <p class="project--description">Simplifies the development of big data applications by addressing ingestion, analytics, batch jobs and data export.</p>
+          </a>
       </section>
       <h2 class="index-page--title">Community Projects</h2>
       <section class="projects--wrapper project-aggregator top-separator">
