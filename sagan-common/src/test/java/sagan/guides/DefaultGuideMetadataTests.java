@@ -57,4 +57,9 @@ public class DefaultGuideMetadataTests {
     public void testGetCiLatestUrl() throws Exception {
         assertThat(guide.getCiLatestUrl(), is("https://travis-ci.org/my-org/gs-rest-service"));
     }
+
+    @Test
+    public void testGetGithubRepoIssuesUrl() throws Exception {
+        assertThat(guide.getGithubIssuesUrl(), is("https://github.com/my-org/gs-rest-service/issues"));
+    }
 }

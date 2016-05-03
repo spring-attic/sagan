@@ -130,4 +130,8 @@ abstract class AbstractGuide implements Guide {
         return metadata.getCiLatestUrl();
     }
 
+    @Override
+    @JsonIgnore
+    public String getGithubIssuesUrl() { return metadata.getGithubIssuesUrl(); }
+
 }

@@ -1,5 +1,6 @@
 package sagan.guides;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -12,6 +13,7 @@ public class DefaultGuideMetadata implements GuideMetadata {
     private final static String REPO_ZIP_URL = "https://github.com/%s/%s/archive/master.zip";
     private final static String REPO_HTTPS_URL = "https://github.com/%s/%s.git";
     private final static String GITHUB_HTTPS_URL = "https://github.com/%s/%s";
+    private final static String GITHUB_ISSUES_URL = "https://github.com/%s/%s/issues";
     private final static String REPO_SSH_URL = "git@github.com:%s/%s.git";
     private final static String REPO_SUBVERSION_URL = "https://github.com/%s/%s";
     private final static String CI_STATUS_IMAGE_URL = "https://travis-ci.org/%s/%s.svg?branch=master";
@@ -107,5 +109,8 @@ public class DefaultGuideMetadata implements GuideMetadata {
     public String getCiLatestUrl() {
         return String.format(CI_LATEST_URL, ghOrgName, repoName);
     }
+
+    @JsonIgnore
+    public String getGithubIssuesUrl() { return String.format(GITHUB_ISSUES_URL, ghOrgName, repoName); }
 
 }

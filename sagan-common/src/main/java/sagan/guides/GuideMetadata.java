@@ -31,4 +31,6 @@ public interface GuideMetadata extends DocumentMetadata {
 
     String getCiLatestUrl();
 
+    String getGithubIssuesUrl();
+
 }
