@@ -114,12 +114,22 @@
   height: 278px;
 }
 
-.homepage--body .hero--banner .springone a {
+.homepage--body .hero--banner .springone .banner--text {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 11em;
+}
+
+.homepage--body .hero--banner .springone .banner--text p {
+    color: #f1f1f1;
+    text-align: center;
+}
+
+.homepage--body .hero--banner .springone .banner--text a {
   background-color: #261D57;
   color: #f1f1f1;
   padding: 0.3em;
   float:right;
-  margin-top: 12em;
 }
 
 /* Spring Cloud Services banner */
