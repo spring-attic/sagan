@@ -1,7 +1,8 @@
 <html   xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorator="layout"
-        data-filterable-list>
+        data-filterable-list
+        data-clipboard-buttons>
 <head>
     <title>Guides</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/guide.css}"/>
@@ -26,6 +27,7 @@
       <div class="row-fluid content-container--wrapper guides-section--container">
         <div class="content-container--header">
           <input type='text' id='doc_filter' style="color:#aaa;" onfocus="this.value=''; this.style.color='#000'; this.style.fontStyle='normal'; this.onfocus='';" autofocus value="Find a guide..." placeholder="Find a guide..." class="content-container--filter"/>
+          <a id="filter-link" th:hidden="true" href="#" class="filter-link">Link to this search</a>
         </div>
         <section class="content-container--body">
           <div data-filterable-container>

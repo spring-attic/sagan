@@ -828,6 +828,12 @@ input.floating-input:focus {
 .content-container--wrapper .content-container--header .btn {
   margin: 6px;
 }
+.content-container--wrapper .content-container--header .filter-link {
+  color: #6db33f;
+}
+.content-container--wrapper .content-container--header .filter-link:hover {
+  color: #7ac04c;
+}
 .content-container--wrapper .content-container--body {
   padding: 20px;
   border-top: 1px solid white;
