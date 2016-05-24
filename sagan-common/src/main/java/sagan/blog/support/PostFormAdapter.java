@@ -61,7 +61,14 @@ class PostFormAdapter {
     }
 
     private void setPostProperties(PostForm postForm, String content, Post post) {
-        post.setRenderedContent(renderer.render(content));
+        String rendered = renderer.render(content);
+        if (renderer instanceof FormatAwarePostContentRenderer) {
+            rendered = ((FormatAwarePostContentRenderer)renderer).render(content, post.getFormat());
+        } else {
+            // Keep the option open of reverting to the old PostContentRenderer
+            rendered = renderer.render(content);
+        }
+        post.setRenderedContent(rendered);
         summarize(post);
         post.setBroadcast(postForm.isBroadcast());
         post.setDraft(postForm.isDraft());
