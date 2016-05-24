@@ -61,7 +61,7 @@ class PostFormAdapter {
     }
 
     private void setPostProperties(PostForm postForm, String content, Post post) {
-        String rendered = renderer.render(content);
+        String rendered = null;
         if (renderer instanceof FormatAwarePostContentRenderer) {
             rendered = ((FormatAwarePostContentRenderer)renderer).render(content, post.getFormat());
         } else {

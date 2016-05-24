@@ -44,6 +44,7 @@ public class PostForm {
         broadcast = post.isBroadcast();
         draft = post.isDraft();
         publishAt = post.getPublishAt();
+        format = post.getFormat();
     }
 
     public String getTitle() {
