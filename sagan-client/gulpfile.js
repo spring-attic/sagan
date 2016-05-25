@@ -4,7 +4,8 @@ var cssmin = require('gulp-minify-css'),
     gulp = require('gulp');
 
 var paths = {
-    app: 'src/app/main.js',
+    main: 'src/app/main.js',
+    maps: 'src/app/maps.js',
     css: {
         files: ['src/css/*.css']
     },
@@ -37,12 +38,19 @@ gulp.task('copy-assets', function () {
         .pipe(gulp.dest(paths.dest));
 });
 
-gulp.task('jspm-build', function () {
-    return gulp.src(paths.app)
+gulp.task('jspm-main', function () {
+    return gulp.src(paths.main)
         .pipe(gulp_jspm({minify: true}))
         .pipe(rename('main.js'))
         .pipe(gulp.dest(paths.dest + "app"));
 });
 
-gulp.task('build', ['minify-css', 'copy-external-css', 'jspm-build', 'copy-assets'], function () {
+gulp.task('jspm-maps', function () {
+    return gulp.src(paths.maps)
+        .pipe(gulp_jspm({minify: true}))
+        .pipe(rename('maps.js'))
+        .pipe(gulp.dest(paths.dest + "app"));
+});
+
+gulp.task('build', ['minify-css', 'copy-external-css', 'jspm-main', 'jspm-maps', 'copy-assets'], function () {
 });
