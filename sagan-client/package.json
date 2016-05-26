@@ -32,8 +32,8 @@
     },
     "dependencies": {
       "bootstrap": "github:twbs/bootstrap@^2.3.2",
-      "bootstrap-datetimepicker": "npm:eonasdan-bootstrap-datetimepicker@^4.15.35",
       "clipboard": "npm:clipboard@^1.5.10",
+      "eonasdan/bootstrap-datetimepicker": "github:eonasdan/bootstrap-datetimepicker@0.0.10",
       "font-awesome": "github:FortAwesome/font-awesome@3.2.1",
       "gmaps": "npm:gmaps@^0.4.14",
       "google-code-prettify": "github:tcollard/google-code-prettify@^1.0.4",
@@ -44,6 +44,11 @@
     "devDependencies": {
       "traceur": "github:jmcriffey/bower-traceur@0.0.93",
       "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.93"
+    },
+    "overrides": {
+      "github:eonasdan/bootstrap-datetimepicker@0.0.10": {
+        "main": "build/js/bootstrap-datetimepicker.min.js"
+      }
     }
   }
 }

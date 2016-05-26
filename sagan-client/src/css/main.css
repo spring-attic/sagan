@@ -1,5 +1,5 @@
 @import url(../jspm_packages/github/twbs/bootstrap@2.3.2/docs/assets/css/bootstrap.css);
-@import url(../jspm_packages/npm/eonasdan-bootstrap-datetimepicker@4.15.35/build/css/bootstrap-datetimepicker.css);
+@import url(../jspm_packages/github/eonasdan/bootstrap-datetimepicker@0.0.10/build/css/bootstrap-datetimepicker.min.css);
 @import url(../jspm_packages/github/FortAwesome/font-awesome@3.2.1/css/font-awesome.css);
 
 @import url(fontcustom.css);
