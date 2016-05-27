@@ -3,7 +3,7 @@ def javaProjects = [ project(':sagan-site'), project(':sagan-indexer'), project(
 def bootProjects = javaProjects - project(':sagan-common')
 def gradleDir = "${rootProject.rootDir}/gradle"
 
-wrapper.gradleVersion = '2.11'
+wrapper.gradleVersion = '2.13'
 
 buildscript {
     ext.springRepo = 'http://repo.spring.io/libs-release'
@@ -23,10 +23,6 @@ configure(allprojects) {
     apply plugin: 'eclipse'
 }
 
-configure(rootProject) {
-    apply from: 'gradle/gitMetadata.gradle'
-}
-
 configure(javaProjects) {
     apply plugin: 'java'
 
@@ -42,7 +38,6 @@ configure(javaProjects) {
 
     dependencies {
         compile 'org.slf4j:slf4j-api'
-        compile 'org.projectlombok:lombok'
         testCompile 'junit:junit'
         testCompile 'org.hamcrest:hamcrest-library'
         testCompile 'org.mockito:mockito-core'
@@ -74,10 +69,8 @@ configure(bootProjects) {
     apply plugin: 'spring-boot'
     apply from: "$gradleDir/integTest.gradle"
     apply from: "$gradleDir/deploy.gradle"
-    apply from: "$gradleDir/writeGitPropertiesFile.gradle"
 
     springBoot.backupSource = false
-    bootRun.dependsOn writeGitPropertiesFile
 
     dependencyManagement {
         imports {

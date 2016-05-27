@@ -17,7 +17,7 @@ def isPullRequest = Boolean.valueOf(System.getenv().get("TRAVIS_PULL_REQUEST"))
 def isTravisBuild = travisBranch != null
 def isDeployableTravisBuild = isTravisBuild && (!isPullRequest || hasSecureEnv)
 
-task deploy(dependsOn: [ build, rootProject.gitMetadata ]) {
+task deploy(dependsOn: [ build ]) {
     description = 'Deploys the project to a Cloud Foundry space (specified with -Pspace=<targetspace>)'
     mustRunAfter checkTasks
 
