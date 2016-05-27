@@ -108,8 +108,4 @@ public class SiteApplication {
         return reg;
     }
 
-    @Bean
-    public DispatcherServlet dispatcherServlet() {
-        return new DispatcherServlet();
-    }
 }
