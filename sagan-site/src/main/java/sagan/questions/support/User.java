@@ -2,11 +2,9 @@ package sagan.questions.support;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.ToString;
 
 import java.io.Serializable;
 
-@ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 class User implements Serializable {
 
@@ -22,4 +20,13 @@ class User implements Serializable {
 	public String link;
 
 	public Integer reputation;
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", link='" + link + '\'' +
+				'}';
+	}
 }
