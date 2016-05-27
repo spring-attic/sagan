@@ -2,33 +2,39 @@ package sagan;
 
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
+import org.springframework.web.servlet.resource.VersionResourceResolver;
 import org.springframework.web.util.UrlPathHelper;
 import sagan.projects.support.ProjectMetadataService;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.StaticPagePathFinder;
 import sagan.support.nav.Navigation;
 
-import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Properties;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -36,9 +42,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
  * Site-wide MVC infrastructure configuration. See also {@link SiteApplication} where certain
  * additional web infrastructure is configured.
  */
-@Configuration
-@ControllerAdvice
-class MvcConfig extends WebMvcConfigurerAdapter {
+abstract class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private StaticPagePathFinder staticPagePathFinder;
@@ -53,6 +57,8 @@ class MvcConfig extends WebMvcConfigurerAdapter {
     public DataAttributeDialect dataAttributeDialect() {
         return new DataAttributeDialect();
     }
+
+    public abstract AppVersionHelper appVersionHelper();
 
     @ExceptionHandler
     @ResponseStatus(NOT_FOUND)
@@ -73,14 +79,6 @@ class MvcConfig extends WebMvcConfigurerAdapter {
         } catch (IOException e) {
             throw new RuntimeException("Unable to locate static pages: " + e.getMessage(), e);
         }
-    }
-
-    @Bean
-    public Filter characterEncodingFilter() {
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding("UTF-8");
-        filter.setForceEncoding(true);
-        return filter;
     }
 
     @Override
@@ -119,9 +117,6 @@ class MvcConfig extends WebMvcConfigurerAdapter {
         private HttpServletRequest request;
 
         @Autowired
-        private ProjectMetadataService projectMetadataService;
-
-        @Autowired
         public void setRequest(HttpServletRequest request) {
             this.request = request;
         }
@@ -147,5 +142,76 @@ class MvcConfig extends WebMvcConfigurerAdapter {
         public String path() {
             return urlPathHelper.getPathWithinApplication(request);
         }
+    }
+
+    static class AppVersionHelper {
+
+        private final String version;
+
+        public AppVersionHelper(String version) {
+            this.version = version;
+        }
+
+        public String version() {
+            return version;
+        }
+    }
+}
+
+@Configuration
+@ControllerAdvice
+@Profile("cloudfoundry")
+class CloudFoundryMvcConfig extends MvcConfig {
+
+    @Value("${spring.git.properties:classpath:git.properties}")
+    private Resource gitProperties;
+
+    public String getGitCommitId() {
+        try {
+            if (this.gitProperties.exists()) {
+                Properties properties = PropertiesLoaderUtils.loadProperties(this.gitProperties);
+                return properties.getProperty("git.commit.id.abbrev");
+            }
+        } catch (IOException exc) {
+
+        }
+        throw new IllegalStateException("Missing git.properties file on classpath");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+        VersionResourceResolver versionResourceResolver = new VersionResourceResolver()
+                .addFixedVersionStrategy(getGitCommitId(), "/app/**")
+                .addContentVersionStrategy("/**");
+
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/")
+                .resourceChain(true)
+                .addResolver(versionResourceResolver);
+
+    }
+
+    @Bean
+    public ResourceUrlEncodingFilter resourceUrlEncodingFilter() {
+        return new ResourceUrlEncodingFilter();
+    }
+
+    @Bean(name = "saganApp")
+    @Override
+    public AppVersionHelper appVersionHelper() {
+        return new AppVersionHelper(getGitCommitId());
+    }
+}
+
+@Configuration
+@ControllerAdvice
+@Profile("standalone")
+class StandaloneMvcConfig extends MvcConfig {
+
+    @Bean(name = "saganApp")
+    @Override
+    public AppVersionHelper appVersionHelper() {
+        return new AppVersionHelper("");
     }
 }

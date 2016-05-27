@@ -98,11 +98,7 @@ logging:
 spring:
   profiles: staging,production
   resources:
-    chain:
-      enabled: true
-      strategy:
-        content:
-          enabled: true
+    add-mappings: false
 security:
   require_ssl: true
 server:
@@ -110,6 +106,9 @@ server:
   tomcat:
     remote_ip_header: x-forwarded-for
     protocol_header: x-forwarded-proto
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json
 
 ---
 

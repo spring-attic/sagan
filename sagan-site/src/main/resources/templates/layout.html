@@ -11,8 +11,8 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
 
   <script th:src="@{/jspm_packages/system.js}"></script>
-  <script th:inline="javascript">
-    System.config({baseURL: "/"});
+  <script th:inline="text">
+    System.config({baseURL: "/[[${beans.saganApp.version()}]]"});
   </script>
   <script th:src="@{/config.js}"></script>
   <script>
