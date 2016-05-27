@@ -75,6 +75,12 @@ github:
       name: ${GITHUB_GUIDES_OWNER_NAME:spring-guides} # any GitHub org or user having publicly-readable guide repos
       type: ${GITHUB_GUIDES_OWNER_TYPE:orgs}          # 'users' is the other possible value
 
+# Configuration used by the "Deploy to PWS" OAuth client; See http://run-on-pws-api.cfapps.io/docs/javascript/index.html
+deploytopws:
+  client_id: ${DEPLOY_PWS_CLIENTID:spring-io-local}
+  redirect_url: ${DEPLOY_PWS_REDIRECTURL:https://localhost:8080/guides/deploy-to-pws}
+
+
 elasticsearch:
   client:
     endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
@@ -126,14 +132,20 @@ spring:
 
 
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
+
 ---
 
 spring:
   profiles: staging
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-staging}
-
+deploytopws:
+  client_id: ${DEPLOY_PWS_CLIENTID:spring-io-staging}
+  redirect_url: ${DEPLOY_PWS_REDIRECTURL:https://staging.spring.io/guides/deploy-to-pws}
 ---
 
 spring:
   profiles: production
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io}
+deploytopws:
+  client_id: ${DEPLOY_PWS_CLIENTID:spring-io}
+  redirect_url: ${DEPLOY_PWS_REDIRECTURL:https://spring.io/guides/deploy-to-pws}

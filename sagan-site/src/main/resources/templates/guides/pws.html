@@ -1,0 +1,107 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout"
+      data-deploy-to-pws>
+<head>
+    <title th:inline="text">Deploy to PWS</title>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="Deploy to Pivotal Web Services" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:description" content="Deploy Spring applications to
+    Pivotal Web Services, the agile platform as a service built on CloudFoundry" />
+</head>
+<body>
+<header class="header--content" layout:fragment="header-content">
+    <div class="row-fluid container-fluid">
+        <div class="span8 mobile-left-pane">
+            <h1 class="header--content-title" layout:fragment="header">Deploy to Pivotal Web Services</h1>
+            <p class="header--content-subtitle" layout:fragment="overview">
+                Deploying guides to <a herf="https://run.pivotal.io">Pivotal Web Services</a>.
+            </p>
+        </div>
+    </div>
+</header>
+<div layout:fragment="content">
+
+    <div class="row-fluid deploy-to-pws">
+
+        <div id="spinner-loading" class="row">
+            <div class="text-center">
+                <span><i class="icon-refresh"></i> Loading...</span>
+            </div>
+        </div>
+
+        <div class="alert" style="display:none" id="alert-org">
+            <strong>Warning!</strong> You should select an organization to deploy the application to.
+        </div>
+
+        <div class="alert alert-error" style="display:none" id="alert-auth">
+            <strong>Error!</strong> You are not authenticated. Please <a href="/guides">return to the guides page</a>.
+        </div>
+
+        <div class="alert alert-error" style="display:none" id="alert-error">
+            <strong>Error!</strong> Please <a href="/guides">return to the guides page</a> and try again later.
+        </div>
+
+        <form class="form-horizontal" id="deploy-config" style="display: none">
+            <h2>Configure your Pivotal Web Service deployment</h2>
+            <div class="control-group">
+                <label for="organizations" class="control-label">Select an organization:</label>
+
+                <div class="controls">
+                    <select class="form-control" id="organizations">
+                        <option value="---">---</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="space-name" class="control-label">Creating space:</label>
+
+                <div class="controls">
+                    <span id="space-name" class="input-xlarge uneditable-input"></span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="app-name" class="control-label">Application Name:</label>
+
+                <div class="controls">
+                    <span id="app-name" class="input-xlarge uneditable-input"></span>
+                </div>
+            </div>
+
+            <div id="display-services" class="control-group">
+                <label for="service-names" class="control-label">Services to be created:</label>
+
+                <div class="controls">
+                    <ul id="service-names" class="service-list">
+                    </ul>
+                </div>
+            </div>
+
+            <p class="text-center">
+                <button id="deploy-action" class="btn btn-large btn-primary" type="button">Deploy to PWS!</button>
+            </p>
+
+        </form>
+
+        <form class="form-horizontal" id="deploy-status" style="display: none">
+            <h2 id="spinner-deploying"><i class="icon-refresh"></i> Deploying...</h2>
+            <div id="app-links">
+                <a id="pws-console" target="_blank" class="btn btn-link" href="#">Go to your App PWS console</a>
+                <a id="pws-app" target="_blank" class="btn btn-link" href="#">Go to your App (when deployed)</a>
+            </div>
+            <div id="deploy-console-wrapper">
+                <p id="deploy-console"></p>
+            </div>
+            <p class="text-center">
+                <button id="stop-updates" class="btn btn-large btn-warning" type="button">Stop log updates</button>
+            </p>
+        </form>
+    </div>
+</div>
+<script type="application/javascript" th:src="@{/pws/pws-1.0.0.min.js}"></script>
+<script type="application/javascript"></script>
+</body>
+</html>

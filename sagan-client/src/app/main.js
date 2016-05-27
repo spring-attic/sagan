@@ -3,6 +3,7 @@ var initSearchFacets = require('feature/searchFacets/main');
 var initFilterableList = require('feature/filterableList/main');
 var initClipboardButtons = require('feature/clipboardButtons/main');
 var initCodeSidebar = require('feature/codeSidebar/main');
+var initDeployToPws = require('feature/deployToPws/main');
 var initStsImport = require('feature/stsImport/main');
 var initMobileSupport = require('feature/mobileSupport/main');
 var initInfoPopups = require('feature/infoPopups/main');
@@ -35,7 +36,8 @@ var features = {
     'map': initMap,
     'timeago': initTimeAgo,
     'hide-show-guide': initHideShowGuide,
-    'hero-banner': initHeroBanner
+    'hero-banner': initHeroBanner,
+    'deploy-to-pws': initDeployToPws
 };
 
 initFeatures(features, document).each(function(features) {

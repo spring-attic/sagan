@@ -31,7 +31,7 @@ public class GettingStartedGuideControllerTests {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        controller = new GettingStartedGuideController(guides);
+        controller = new GettingStartedGuideController(guides,"sagan", "http://localhost:8080/guides/deploy-to-pws");
         model = new ExtendedModelMap();
         guide = new GettingStartedGuide(
                 new DefaultGuideMetadata("my-org", "rest-service", "gs-rest-service", ""));

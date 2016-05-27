@@ -37,6 +37,7 @@ class GuideOrganization {
 
     private static final String REPO_BASE_PATH = "/repos/{name}/{repo}";
     private static final String REPO_CONTENTS_PATH = REPO_BASE_PATH + "/contents";
+    private static final String RUN_ON_PWS_FILE = "run-on-pws.json";
 
     private final String type;
     private final GitHubClient gitHub;
@@ -276,6 +277,13 @@ class GuideOrganization {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getRunOnPwsMetadataUrl(String repoName) {
+        return this.getRepoContents(repoName).stream()
+                .filter(content -> RUN_ON_PWS_FILE.equals(content.getName()))
+                .map(content -> content.getDownloadUrl())
+                .findAny().orElse("");
     }
 
 }

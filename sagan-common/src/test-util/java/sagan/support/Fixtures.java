@@ -34,4 +34,8 @@ public class Fixtures {
     public static String githubRepoListJson() {
         return load("/fixtures/github/githubRepoList.json");
     }
+
+    public static String githubRepoContent() {
+        return load("/fixtures/github/githubRepoContent.json");
+    }
 }

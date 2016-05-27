@@ -11,6 +11,7 @@ abstract class AbstractGuide implements Guide {
     private String content;
     private String sidebar;
 	private String typeLabel;
+    private String deployToPwsUrl;
 
     public AbstractGuide() {
     }
@@ -56,7 +57,16 @@ abstract class AbstractGuide implements Guide {
 		this.typeLabel = typeLabel;
 	}
 
-	// --- GuideMetadata delegate methods ---
+    public String getDeployToPwsUrl() {
+        return deployToPwsUrl;
+    }
+
+    public void setDeployToPwsUrl(String deployToPwsUrl) {
+        Assert.notNull(sidebar, "Expected run on PWS metadata file URL to be populated");
+        this.deployToPwsUrl = deployToPwsUrl;
+    }
+
+// --- GuideMetadata delegate methods ---
 
     @Override
     @JsonIgnore
