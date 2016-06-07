@@ -36,7 +36,7 @@ public class AsciidoctorMarkdownServiceTests {
         String markdown = "### This is a title";
         Assert.assertThat(
                 service.renderToHtml(markdown), CoreMatchers.containsString(
-                        "<h3 id=\"_this_is_a_title\">This is a title</h3>"));
+                        "<h3 id=\"this-is-a-title\"><a class=\"anchor\" href=\"#this-is-a-title\"></a>This is a title</h3>"));
     }
 
 }
