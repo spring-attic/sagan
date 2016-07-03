@@ -20,9 +20,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -94,7 +96,10 @@ class BadgeController {
         }
 
         byte[] svgBadge = versionBadgeService.createSvgBadge(project, gaRelease.get());
-        return ResponseEntity.ok(svgBadge);
+        return ResponseEntity.ok()
+                .eTag(gaRelease.get().getVersion())
+                .cacheControl(CacheControl.maxAge(1L, TimeUnit.HOURS))
+                .body(svgBadge);
     }
 
     private Optional<ProjectRelease> getRelease(Project project, ReleaseStatus releaseStatus) {

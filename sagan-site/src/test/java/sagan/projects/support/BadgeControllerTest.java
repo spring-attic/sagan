@@ -79,6 +79,8 @@ public class BadgeControllerTest {
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         assertThat(response.getStatusCode(), is(equalTo(HttpStatus.OK)));
+        assertThat(response.getHeaders().getETag(), is(equalTo("\"1.0.RELEASE\"")));
+        assertThat(response.getHeaders().getCacheControl(), is(equalTo("max-age=3600")));
 
         String content = new String(response.getBody());
         assertThat(content, containsString("<svg"));
