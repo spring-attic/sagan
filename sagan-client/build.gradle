@@ -1,5 +1,5 @@
 plugins {
-    id 'com.moowork.node' version '0.11'
+    id 'com.moowork.node' version '0.13'
 }
 
 apply plugin: 'java'

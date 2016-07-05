@@ -1,3 +1,19 @@
+buildscript {
+    ext.springRepo = 'http://repo.spring.io/libs-release'
+    repositories {
+        maven { url springRepo }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE"
+        classpath 'io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE'
+        classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.3' // see deploy.gradle
+    }
+}
+
+plugins {
+    id 'com.github.ben-manes.versions' version '0.12.0'
+}
+
 def vJavaLang = '1.8'
 def javaProjects = [ project(':sagan-site'), project(':sagan-indexer'), project(':sagan-common') ]
 def bootProjects = javaProjects - project(':sagan-common')
@@ -5,26 +21,14 @@ def gradleDir = "${rootProject.rootDir}/gradle"
 
 wrapper.gradleVersion = '2.13'
 
-buildscript {
-    ext.springRepo = 'http://repo.spring.io/libs-release'
-
-    repositories {
-        maven { url springRepo }
-    }
-
-    dependencies {
-		classpath 'io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE'
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE"
-        classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.3' // see deploy.gradle
-    }
-}
-
 configure(allprojects) {
     apply plugin: 'eclipse'
 }
 
 configure(javaProjects) {
+
     apply plugin: 'java'
+    apply plugin: "io.spring.dependency-management"
 
     targetCompatibility = vJavaLang
     sourceCompatibility = vJavaLang
@@ -33,8 +37,15 @@ configure(javaProjects) {
         maven { url springRepo }
     }
 
-    // Override Spring IO Platform versions
-    ext['elasticsearch.version'] = '1.7.1' // see io.searchbox:jest
+    dependencyManagement {
+        imports {
+            mavenBom('io.spring.platform:platform-bom:2.0.5.RELEASE') {
+                bomProperties([
+                        'elasticsearch.version': '1.7.1' // see io.searchbox:jest
+                ])
+            }
+        }
+    }
 
     dependencies {
         compile 'org.slf4j:slf4j-api'
@@ -65,17 +76,10 @@ configure(javaProjects) {
 }
 
 configure(bootProjects) {
-	apply plugin: "io.spring.dependency-management"
     apply plugin: 'spring-boot'
     apply from: "$gradleDir/integTest.gradle"
     apply from: "$gradleDir/deploy.gradle"
 
     springBoot.backupSource = false
-
-    dependencyManagement {
-        imports {
-            mavenBom 'io.spring.platform:platform-bom:2.0.3.RELEASE'
-        }
-    }
 }
 
