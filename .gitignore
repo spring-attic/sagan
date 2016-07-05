@@ -12,6 +12,9 @@ test.log
 logs/
 work/
 .bower-*
+.cram/
+lib/
+dist/
 
 # Eclipse
 # > the following should be created by `./gradlew eclipse`
