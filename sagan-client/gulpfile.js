@@ -1,6 +1,5 @@
 var cssmin = require('gulp-minify-css'),
-    gulp_jspm = require('gulp-jspm'),
-    rename = require("gulp-rename"),
+    jspm = require('gulp-jspm-build'),
     gulp = require('gulp');
 
 var paths = {
@@ -38,24 +37,19 @@ gulp.task('copy-assets', function () {
 });
 
 // build JSPM modules
-gulp.task('jspm-main', function () {
-    return buildJspmModule('main.js');
+gulp.task('jspm', function () {
+    jspm({
+        bundleOptions: {
+            minify: true,
+            mangle: true
+        },
+        bundles: [
+            {src: 'app/main', dst: 'main.js'},
+            {src: 'app/maps', dst: 'maps.js'},
+            {src: 'app/admin', dst: 'admin.js'}
+        ]
+    })
+    .pipe(gulp.dest(paths.dest + "app"));
 });
 
-gulp.task('jspm-maps', function () {
-    return buildJspmModule('maps.js');
-});
-
-gulp.task('jspm-admin', function () {
-    return buildJspmModule('admin.js');
-});
-
-function buildJspmModule(name) {
-    return gulp.src(paths.app + name)
-        .pipe(gulp_jspm({minify: true}))
-        .pipe(rename(name))
-        .pipe(gulp.dest(paths.dest + "app"));
-}
-
-gulp.task('build', ['minify-css', 'copy-external-css', 'jspm-main', 'jspm-maps', 'jspm-admin', 'copy-assets'], function () {
-});
+gulp.task('build', ['minify-css', 'copy-external-css', 'jspm', 'copy-assets'], function () {});

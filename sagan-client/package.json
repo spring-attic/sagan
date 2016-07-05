@@ -8,9 +8,8 @@
   "dependencies": {},
   "devDependencies": {
     "gulp": "3.9.0",
-    "gulp-jspm": "^0.5.4",
+    "gulp-jspm-build": "0.0.15",
     "gulp-minify-css": "^1.2.2",
-    "gulp-rename": "^1.2.2",
     "gulp-util": "3.0.1",
     "jshint": "2.1",
     "jspm": "^0.16.14",
