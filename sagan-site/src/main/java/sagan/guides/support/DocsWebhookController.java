@@ -128,7 +128,7 @@ class DocsWebhookController {
         logPayload(push);
 
         String repositoryName = (String) ((Map<?, ?>) push.get("repository")).get("name");
-        String tutorialName = this.tutorials.parseTutorialName(repositoryName);
+        String tutorialName = this.tutorials.parseGuideName(repositoryName);
         this.tutorials.evictFromCache(tutorialName);
         return ResponseEntity.ok("{ \"message\": \"Successfully processed update\" }\n");
     }
@@ -147,7 +147,7 @@ class DocsWebhookController {
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
         logger.info("Received new webhook payload for push against " + repositoryName);
 
-        String tutorialName = this.tutorials.parseTutorialName(repositoryName);
+        String tutorialName = this.tutorials.parseGuideName(repositoryName);
         this.tutorials.evictFromCache(tutorialName);
         return ResponseEntity.ok("{ \"message\": \"Successfully processed update\" }\n");
     }

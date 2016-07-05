@@ -23,17 +23,20 @@ class GuideIndexController {
 
     private final GettingStartedGuides gsGuides;
     private final Tutorials tutorials;
+    private final Topicals topicals;
 
     @Autowired
-    public GuideIndexController(GettingStartedGuides gsGuides, Tutorials tutorials) {
+    public GuideIndexController(GettingStartedGuides gsGuides, Tutorials tutorials, Topicals topicals) {
         this.gsGuides = gsGuides;
         this.tutorials = tutorials;
+        this.topicals = topicals;
     }
 
     @RequestMapping(value = "/guides", method = { GET, HEAD })
     public String viewIndex(Model model) {
         model.addAttribute("guides", gsGuides.findAllMetadata());
         model.addAttribute("tutorials", tutorials.findAllMetadata());
+        model.addAttribute("topicals", topicals.findAllMetadata());
         return "guides/index";
     }
 }
