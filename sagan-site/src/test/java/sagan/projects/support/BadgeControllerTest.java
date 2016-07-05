@@ -66,14 +66,14 @@ public class BadgeControllerTest {
     }
 
     @Test
-    public void badgeForReleaseNotFound() throws Exception {
+    public void badgeNotFound() throws Exception {
 
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
         assertThat(response.getStatusCode(), is(equalTo(HttpStatus.NOT_FOUND)));
     }
 
     @Test
-    public void badgeForReleaseShouldBeGenerated() throws Exception {
+    public void badgeShouldBeGenerated() throws Exception {
 
         releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", ""));
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
@@ -86,5 +86,71 @@ public class BadgeControllerTest {
         assertThat(content, containsString("<svg"));
         assertThat(content, containsString("Spring Data Redis"));
         assertThat(content, containsString("1.0.RELEASE"));
+    }
+
+    @Test
+    public void projecWithTwoReleasesShouldBeGenerated() throws Exception {
+
+        releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        releases.add(new ProjectRelease("1.1.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", ""));
+        ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
+
+        String content = new String(response.getBody());
+        assertThat(content, containsString("1.1.RELEASE"));
+    }
+
+    @Test
+    public void projecWithTwoReleasesWithoutCurrentFlagPicksHighestRelease() throws Exception {
+
+        releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        releases.add(new ProjectRelease("1.1.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
+
+        String content = new String(response.getBody());
+        assertThat(content, containsString("1.1.RELEASE"));
+    }
+
+    @Test
+    public void projecWithTwoReleasesFlagPicksCurrentRelease() throws Exception {
+
+        releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", ""));
+        releases.add(new ProjectRelease("1.1.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
+
+        String content = new String(response.getBody());
+        assertThat(content, containsString("1.0.RELEASE"));
+    }
+
+    @Test
+    public void projecWithTwoReleasesUsingSymbolicNamesWithNumbersWithoutCurrentFlagPicksFirstRelease() throws Exception {
+
+        releases.add(new ProjectRelease("Angel-SR6", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        releases.add(new ProjectRelease("Brixton-SR2", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
+
+        String content = new String(response.getBody());
+        assertThat(content, containsString("Angel-SR6"));
+    }
+
+    @Test
+    public void projecWithTwoReleasesUsingSymbolicNamesWithoutCurrentFlagPicksFirstRelease() throws Exception {
+
+        releases.add(new ProjectRelease("Angel-SR6", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        releases.add(new ProjectRelease("Brixton-RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
+
+        String content = new String(response.getBody());
+        assertThat(content, containsString("Angel-SR6"));
+    }
+
+    @Test
+    public void projecWithTwoReleasesUsingSymbolicNamesFlagPicksCurrentRelease() throws Exception {
+
+        releases.add(new ProjectRelease("Angel-SR1", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        releases.add(new ProjectRelease("Brixton-RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", ""));
+        ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
+
+        String content = new String(response.getBody());
+        assertThat(content, containsString("Brixton-RELEASE"));
     }
 }
