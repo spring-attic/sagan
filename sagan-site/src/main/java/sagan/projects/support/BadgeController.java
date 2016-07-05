@@ -19,9 +19,10 @@ package sagan.projects.support;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
+import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -89,26 +90,34 @@ class BadgeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        Optional<ProjectRelease> gaRelease = getRelease(project, releaseStatus);
+        Optional<ProjectRelease> gaRelease = getRelease(project.getProjectReleases(),
+                projectRelease -> projectRelease.getReleaseStatus() == releaseStatus);
 
         if (!gaRelease.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         byte[] svgBadge = versionBadgeService.createSvgBadge(project, gaRelease.get());
-        return ResponseEntity.ok()
-                .eTag(gaRelease.get().getVersion())
-                .cacheControl(CacheControl.maxAge(1L, TimeUnit.HOURS))
+        return ResponseEntity.ok().eTag(gaRelease.get().getVersion()).cacheControl(CacheControl.maxAge(1L, TimeUnit.HOURS))
                 .body(svgBadge);
     }
 
-    private Optional<ProjectRelease> getRelease(Project project, ReleaseStatus releaseStatus) {
+    private Optional<ProjectRelease> getRelease(Collection<ProjectRelease> projectReleases,
+            Predicate<ProjectRelease> predicate) {
 
-        Stream<ProjectRelease> stream = project.getProjectReleases().stream();
-        if (releaseStatus != null) {
-            stream = stream.filter(projectRelease -> projectRelease.getReleaseStatus() == releaseStatus);
+        Optional<ProjectRelease> first = projectReleases //
+                .stream() //
+                .filter(projectRelease -> predicate.test(projectRelease) && projectRelease.isCurrent()) //
+                .findFirst();
+
+        if (first.isPresent()) {
+            return first;
         }
-        return stream.findFirst();
+
+        return projectReleases //
+                .stream() //
+                .filter(projectRelease -> predicate.test(projectRelease)) //
+                .findFirst();
     }
 
 }
