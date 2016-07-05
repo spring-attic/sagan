@@ -73,18 +73,18 @@ public class TutorialsTests {
 
     @Test
     public void testParseTutorialName() throws Exception {
-        String name = tutorials.parseTutorialName("tut-tutorial-name");
+        String name = tutorials.parseGuideName("tut-tutorial-name");
         assertThat(name, is("tutorial-name"));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testParseEmptyTutorialName() throws Exception {
-        tutorials.parseTutorialName("");
+        tutorials.parseGuideName("");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testParseInvalidTutorialName() throws Exception {
-        tutorials.parseTutorialName("invalid");
+        tutorials.parseGuideName("invalid");
     }
 
 }

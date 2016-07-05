@@ -99,7 +99,7 @@ public class DocsWebhookControllerTests {
 
     @Test
     public void testTutorialCacheEviction() throws Exception {
-        given(this.tutorials.parseTutorialName("gs-test-guide")).willReturn("test-guide");
+        given(this.tutorials.parseGuideName("gs-test-guide")).willReturn("test-guide");
         String payload = StreamUtils.copyToString(
                 new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
 				.replaceAll("[\\n|\\r]","");
@@ -112,7 +112,7 @@ public class DocsWebhookControllerTests {
 
     @Test
     public void testTutorialCacheEviction2() throws Exception {
-        given(this.tutorials.parseTutorialName("gs-test-guide")).willReturn("test-guide");
+        given(this.tutorials.parseGuideName("gs-test-guide")).willReturn("test-guide");
         String payload = StreamUtils.copyToString(
                 new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
 				.replaceAll("[\\n|\\r]","");;

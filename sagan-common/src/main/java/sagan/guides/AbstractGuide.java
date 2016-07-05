@@ -5,7 +5,7 @@ import org.springframework.util.Assert;
 
 import java.util.Set;
 
-abstract class AbstractGuide implements Guide {
+public abstract class AbstractGuide implements Guide {
 
     private GuideMetadata metadata;
     private String content;
