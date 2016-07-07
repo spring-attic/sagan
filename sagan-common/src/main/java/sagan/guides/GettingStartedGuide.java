@@ -9,8 +9,7 @@ public class GettingStartedGuide extends AbstractGuide {
 		this.setTypeLabel(TYPE_LABEL);
     }
 
-    @SuppressWarnings("rawtypes")
-    public GettingStartedGuide(GuideMetadata metadata) {
+     public GettingStartedGuide(GuideMetadata metadata) {
         super(metadata);
 		this.setTypeLabel(TYPE_LABEL);
     }
