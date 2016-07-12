@@ -1,6 +1,7 @@
 buildscript {
     ext.springRepo = 'http://repo.spring.io/libs-release'
     repositories {
+        mavenLocal()
         maven { url springRepo }
     }
     dependencies {
@@ -34,15 +35,19 @@ configure(javaProjects) {
     sourceCompatibility = vJavaLang
 
     repositories {
+        mavenLocal()
         maven { url springRepo }
     }
 
-    dependencyManagement {
-        imports {
-            mavenBom('io.spring.platform:platform-bom:2.0.5.RELEASE') {
-                bomProperties([
-                        'elasticsearch.version': '1.7.1' // see io.searchbox:jest
-                ])
+    afterEvaluate {
+        dependencyManagement {
+            imports {
+                mavenBom('io.spring.platform:platform-bom:2.0.5.RELEASE') {
+                    bomProperties([
+                            'elasticsearch.version': '1.7.1', // see io.searchbox:jest
+                            'hibernate.version': '4.3.11.Final'
+                    ])
+                }
             }
         }
     }

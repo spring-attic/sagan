@@ -15,37 +15,37 @@
           </form>
         </div>
         <div class="navigation-item-list">
-          <div th:class="${beans.uih.navClass(navSection?:'','')}">
+          <div th:class="${@uih.navClass(navSection?:'','')}">
             <a th:href="@{/}" href="/">
               Home
               <i class="icon-chevron-right pull-right"></i>
             </a>
           </div>
-          <div th:class="${beans.uih.navClass(navSection?:'','docs')}">
+          <div th:class="${@uih.navClass(navSection?:'','docs')}">
             <a th:href="@{/docs}" href="docs/index.html">
               Docs
               <i class="icon-chevron-right pull-right"></i>
             </a>
           </div>
-          <div th:class="${beans.uih.navClass(navSection?:'','guides')}">
+          <div th:class="${@uih.navClass(navSection?:'','guides')}">
             <a th:href="@{/guides}" href="guides/index.html">
               Guides
               <i class="icon-chevron-right pull-right"></i>
             </a>
           </div>
-          <div th:class="${beans.uih.navClass(navSection?:'','projects')}">
+          <div th:class="${@uih.navClass(navSection?:'','projects')}">
             <a th:href="@{/projects}" href="projects/index.html">
               Projects
               <i class="icon-chevron-right pull-right"></i>
             </a>
           </div>
-          <div th:class="${beans.uih.navClass(navSection?:'','blog')}">
+          <div th:class="${@uih.navClass(navSection?:'','blog')}">
             <a th:href="@{/blog}" href="blog/index.html">
               Blog
               <i class="icon-chevron-right pull-right"></i>
             </a>
           </div>
-          <div th:class="${beans.uih.navClass(navSection?:'','questions')}">
+          <div th:class="${@uih.navClass(navSection?:'','questions')}">
             <a th:href="@{/questions}" href="/questions">
               Questions
               <i class="icon-chevron-right pull-right"></i>

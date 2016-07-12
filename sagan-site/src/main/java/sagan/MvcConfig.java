@@ -53,11 +53,6 @@ abstract class MvcConfig extends WebMvcConfigurerAdapter {
         return new ViewRenderingHelper();
     }
 
-    @Bean
-    public DataAttributeDialect dataAttributeDialect() {
-        return new DataAttributeDialect();
-    }
-
     public abstract AppVersionHelper appVersionHelper();
 
     @ExceptionHandler

@@ -12,7 +12,7 @@
 
   <script th:src="@{/jspm_packages/system.js}"></script>
   <script th:inline="text">
-    System.config({baseURL: "/[[${beans.saganApp.version()}]]"});
+    System.config({baseURL: "/[[${@saganApp.version()}]]"});
   </script>
   <script th:src="@{/config.js}"></script>
   <script>
@@ -56,19 +56,19 @@
             <a class="spring-logo" th:href="@{/}" href="/"><span></span></a>
           </div>
           <ul class="nav pull-right">
-            <li th:class="${beans.uih.navClass(navSection?:'','docs')}">
+            <li th:class="${@uih.navClass(navSection?:'','docs')}">
               <a th:href="@{/docs}" >Docs</a>
             </li>
-            <li th:class="${beans.uih.navClass(navSection?:'','guides')}">
+            <li th:class="${@uih.navClass(navSection?:'','guides')}">
               <a th:href="@{/guides}" >Guides</a>
             </li>
-            <li th:class="${beans.uih.navClass(navSection?:'','projects')}">
+            <li th:class="${@uih.navClass(navSection?:'','projects')}">
               <a th:href="@{/projects}" >Projects</a>
             </li>
-            <li th:class="${beans.uih.navClass(navSection?:'','blog')}">
+            <li th:class="${@uih.navClass(navSection?:'','blog')}">
               <a th:href="@{/blog}" >Blog</a>
             </li>
-            <li th:class="${beans.uih.navClass(navSection?:'','questions')}">
+            <li th:class="${@uih.navClass(navSection?:'','questions')}">
               <a th:href="@{/questions}" >Questions</a>
             </li>
             <li class="navbar-link nav-search">

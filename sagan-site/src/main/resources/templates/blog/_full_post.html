@@ -7,7 +7,7 @@
   <body>
     <div layout:fragment="full-post">
       <header class="desktop-only">
-        <div th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
+        <div th:each="category : ${categories}" th:class="${@uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
           <div th:text="${category.displayName}">Engineering</div>
         </div>
       </header>

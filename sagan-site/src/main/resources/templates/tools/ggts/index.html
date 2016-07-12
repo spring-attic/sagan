@@ -27,16 +27,15 @@
           <div class="span4">
             <div class="right-pane-widget--container tools-right-pane">
               <div class="tools-logo ggts-logo"></div>
-                <ul class='download-links'>
-                  <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${downloadLinks}">
-                    <a class="download-btn btn btn-black uppercase sub-text" th:href="${downloadLink.url}">
-                      Download GGTS
-                      <p th:text="'(' + ${version} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
-                    </a>
-                  </li>
-                </ul>
-                <a href="all.html" th:href="@{/tools/ggts/all}" class="all-versions">See All Versions</a>
-              </div>
+              <ul class='download-links'>
+                <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${downloadLinks}">
+                  <a class="download-btn btn btn-black uppercase sub-text" th:href="${downloadLink.url}">
+                    Download GGTS
+                    <p th:text="'(' + ${version} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
+                  </a>
+                </li>
+              </ul>
+              <a href="all.html" th:href="@{/tools/ggts/all}" class="all-versions">See All Versions</a>
             </div>
           </div>
           <section>

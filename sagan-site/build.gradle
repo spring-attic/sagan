@@ -21,7 +21,7 @@ dependencies {
 
     // Thymeleaf is used as the template engine for serving HTML
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
-    compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute:1.3'
+    compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
 
     // nekohtml is required for thymeleaf's LEGACYHTML5 mode
@@ -43,4 +43,5 @@ dependencies {
 
     // pick up common test utility classes
     testCompile project(':sagan-common').sourceSets.testUtil.output
+
 }
