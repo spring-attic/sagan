@@ -44,7 +44,7 @@ public class AsciidoctorMarkdownServiceTests {
         String markdown = "NOTE: this is a note";
         String rendered = service.renderToHtml(markdown);
         Assert.assertThat(rendered, CoreMatchers.containsString("<div class=\"admonitionblock note\">"));
-        Assert.assertThat(rendered, CoreMatchers.containsString("<i class=\"fa icon-note\" title=\"Note\"></i>"));
+        Assert.assertThat(rendered, CoreMatchers.containsString("<div class=\"title\">Note</div>"));
         Assert.assertThat(rendered, CoreMatchers.containsString("this is a note"));
     }
 

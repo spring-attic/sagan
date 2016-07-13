@@ -14,7 +14,6 @@ public class AsciidoctorMarkdownService implements MarkdownService {
         Attributes attributes = new Attributes();
         attributes.setAllowUriRead(true);
         attributes.setSkipFrontMatter(true);
-        attributes.setIcons("font");
         attributes.setAttribute("source-highlighter", "prettify");
         attributes.setAttribute("idprefix", "");
         attributes.setAttribute("idseparator", "-");

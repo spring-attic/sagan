@@ -38,11 +38,14 @@
     width: auto;
 }
 
-.admonitionblock .content:before {
-    content: "Note:";
-    font-family: "Montserrat",sans-serif;
+.admonitionblock .icon {
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: bold;
+}
+
+.admonitionblock .content {
+    padding-left: 10px;
 }
 
 .admonitionblock code {
