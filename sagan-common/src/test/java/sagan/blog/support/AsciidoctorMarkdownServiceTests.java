@@ -39,4 +39,13 @@ public class AsciidoctorMarkdownServiceTests {
                         "<h3 id=\"this-is-a-title\"><a class=\"anchor\" href=\"#this-is-a-title\"></a>This is a title</h3>"));
     }
 
+    @Test
+    public void renderAdmonition() throws Exception {
+        String markdown = "NOTE: this is a note";
+        String rendered = service.renderToHtml(markdown);
+        Assert.assertThat(rendered, CoreMatchers.containsString("<div class=\"admonitionblock note\">"));
+        Assert.assertThat(rendered, CoreMatchers.containsString("<i class=\"fa icon-note\" title=\"Note\"></i>"));
+        Assert.assertThat(rendered, CoreMatchers.containsString("this is a note"));
+    }
+
 }
