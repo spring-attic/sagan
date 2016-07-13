@@ -30,6 +30,8 @@ public class DocsWebhookControllerTests {
     private UnderstandingDocs understandingDocs;
     @Mock
     private GettingStartedGuides gettingStartedGuides;
+    @Mock
+    private Topicals topicals;
 
     private DocsWebhookController controller;
 
@@ -38,7 +40,7 @@ public class DocsWebhookControllerTests {
         MockitoAnnotations.initMocks(this);
         this.objectMapper = new ObjectMapper();
         this.controller = new DocsWebhookController(this.objectMapper, this.tutorials, this.understandingDocs,
-                this.gettingStartedGuides, "accesstoken");
+                this.gettingStartedGuides, this.topicals, "accesstoken");
     }
 
     @Test
@@ -134,6 +136,20 @@ public class DocsWebhookControllerTests {
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.understandingDocs, times(1)).clearCache();
+    }
+
+    @Test
+    public void testTopicalCacheEviction() throws Exception {
+        given(this.topicals.parseGuideName("top-test-guide")).willReturn("test-guide");
+        String payload = StreamUtils.copyToString(
+                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
+                .replaceAll("[\\n|\\r]","");;
+
+        ResponseEntity response = this.controller.processTopicalsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98",
+                "push", "top-test-guide");
+        assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
+        assertThat(response.getStatusCode().value(), is(200));
+        verify(this.topicals, times(1)).evictFromCache("test-guide");
     }
 
 }

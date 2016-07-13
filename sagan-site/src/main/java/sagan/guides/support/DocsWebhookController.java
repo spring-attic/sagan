@@ -43,6 +43,7 @@ class DocsWebhookController {
     private final Tutorials tutorials;
     private final UnderstandingDocs understandingDocs;
     private final GettingStartedGuides gettingStartedGuides;
+    private final Topicals topicals;
 
     private final Mac hmac;
 
@@ -51,12 +52,14 @@ class DocsWebhookController {
                                  Tutorials tutorials,
                                  UnderstandingDocs understandingDocs,
                                  GettingStartedGuides gettingStartedGuides,
+                                 Topicals topicals,
                                  @Value("${WEBHOOK_ACCESS_TOKEN:default}") String accessToken)
             throws NoSuchAlgorithmException, InvalidKeyException {
         this.objectMapper = objectMapper;
         this.tutorials = tutorials;
         this.understandingDocs = understandingDocs;
         this.gettingStartedGuides = gettingStartedGuides;
+        this.topicals = topicals;
 
         // initialize HMAC with SHA1 algorithm and secret
         SecretKeySpec secret = new SecretKeySpec(accessToken.getBytes(CHARSET), HMAC_ALGORITHM);
@@ -106,7 +109,6 @@ class DocsWebhookController {
         if (PING_EVENT.equals(event)) {
             return ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
         }
-        Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
         logger.info("Received new webhook payload for push against " + repositoryName);
 
         String guideName = this.gettingStartedGuides.parseGuideName(repositoryName);
@@ -122,7 +124,7 @@ class DocsWebhookController {
 
         verifyHmacSignature(payload, signature);
         if (PING_EVENT.equals(event)) {
-            ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
+            return ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
         logPayload(push);
@@ -142,9 +144,8 @@ class DocsWebhookController {
 
         verifyHmacSignature(payload, signature);
         if (PING_EVENT.equals(event)) {
-            ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
+            return ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
         }
-        Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
         logger.info("Received new webhook payload for push against " + repositoryName);
 
         String tutorialName = this.tutorials.parseGuideName(repositoryName);
@@ -160,13 +161,31 @@ class DocsWebhookController {
 
         verifyHmacSignature(payload, signature);
         if (PING_EVENT.equals(event)) {
-            ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
+            return ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
         }
         Map<?, ?> push = this.objectMapper.readValue(payload, Map.class);
         logPayload(push);
 
         // all understanding docs live under the same repository, so clearing all entries
         this.understandingDocs.clearCache();
+        return ResponseEntity.ok("{ \"message\": \"Successfully processed update\" }\n");
+    }
+
+    @RequestMapping(value = "topicals/{repositoryName}", method = POST,
+            consumes = "application/json", produces = "application/json")
+    public ResponseEntity<String> processTopicalsUpdate(@RequestBody String payload,
+                                                      @RequestHeader("X-Hub-Signature") String signature,
+                                                      @RequestHeader("X-GitHub-Event") String event,
+                                                      @PathVariable String repositoryName) throws IOException {
+
+        verifyHmacSignature(payload, signature);
+        if (PING_EVENT.equals(event)) {
+            return ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
+        }
+        logger.info("Received new webhook payload for push against " + repositoryName);
+
+        String guideName = this.topicals.parseGuideName(repositoryName);
+        this.topicals.evictFromCache(guideName);
         return ResponseEntity.ok("{ \"message\": \"Successfully processed update\" }\n");
     }
 
