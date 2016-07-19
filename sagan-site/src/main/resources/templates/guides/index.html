@@ -15,7 +15,13 @@
   <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container-fluid">
     <main class="main-body--wrapper">
-      <h1 class="index-page--title">Guides</h1>
+      <h1 class="index-page--title">Guides & Tutorials</h1>
+      <ul>
+        <li><a href="#guides">Guides</a></li>
+        <li><a href="#topicals">Topical Guides</a></li>
+        <li><a href="#tutorials">Tutorials</a></li>
+      </ul>
+
       <p class="index-page--subtitle with-subtext">Whatever you're building, these guides are designed to get you productive as quickly as possible &ndash; using the latest Spring project releases and techniques as recommended by the <a href="/team">Spring team</a>.<br/>
         <span class="subtext">
           Have a suggestion for a new guide? Let us know at <a href="https://twitter.com/intent/tweet?text=@springcentral&related=springcentral&hashtags=guides">@springcentral</a>.
@@ -27,7 +33,7 @@
         <div class="content-container--header">
           <input type='text' id='doc_filter' style="color:#aaa;" onfocus="this.value=''; this.style.color='#000'; this.style.fontStyle='normal'; this.onfocus='';" autofocus value="Find a guide..." placeholder="Find a guide..." class="content-container--filter"/>
         </div>
-        <section class="content-container--body">
+        <section class="content-container--body" id="guides">
           <div data-filterable-container>
             <div class="content-section-title--container">
               <div class="pull-left icon icon-gs-guides"></div>
@@ -41,7 +47,7 @@
             </div>
           </div>
         </section>
-        <section class="content-container--body" th:if="${not topicals.empty}">
+        <section class="content-container--body" th:if="${not topicals.empty}" id="topicals">
           <div data-filterable-container>
             <div class="content-section-title--container">
               <div class="pull-left icon icon-topical"></div>
@@ -54,7 +60,7 @@
             </div>
           </div>
         </section>
-        <section class="content-container--body">
+        <section class="content-container--body" id="tutorials">
           <div data-filterable-container>
             <div class="content-section-title--container">
               <div class="pull-left icon icon-tutorial"></div>
