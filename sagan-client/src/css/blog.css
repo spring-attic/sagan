@@ -180,6 +180,12 @@
   font-size: 14px;
   line-height: 20px;
 }
+.blog--container .blog--post .colist p, li
+ {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
 /*
     Fix styling of tables in GitHub Markdown-generated
     HTML to match other spring.io tables

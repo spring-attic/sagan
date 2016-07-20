@@ -782,6 +782,12 @@ input.floating-input:focus {
   border: 1px solid #34302d;
   margin-top: -1px;
 }
+.colist p, li
+{
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
 .content-container--wrapper:first-child {
   margin: 0;
 }
