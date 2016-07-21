@@ -5,9 +5,12 @@ import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+// This is the "original" renderer, It can be re-activated by running in the "original" profile.
+@Profile("original")
 class PostContentRenderer {
 
     private MarkdownService markdownService;

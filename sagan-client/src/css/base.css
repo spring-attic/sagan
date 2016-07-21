@@ -65,7 +65,7 @@ body {
 }
 .header--navbar .navbar-inner .spring-logo--container .spring-logo {
   margin: 12px 0 6px;
-  width: 160px;
+  width: 224px;
   height: 46px;
   display: inline-block;
   text-decoration: none;
@@ -185,7 +185,7 @@ a.spring-logo {
 
 a.spring-logo span {
   display: block;
-  width: 160px;
+  width: 224px;
   height: 46px;
   background: url("../img/spring-logo.png") -1px -48px no-repeat;
   opacity: 0;

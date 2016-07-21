@@ -1,0 +1,211 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Tools</title>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="Spring Trademark Guidelines" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:description" content="Spring Trademark Guidelines" />
+    <style>
+        ol ol {
+            list-style-type: lower-alpha;
+        }
+
+        ol ol ol {
+            list-style-type: lower-roman;
+        }
+
+        ol ol ol ol {
+            list-style-type: decimal;
+        }
+        img.thumbnail {
+            max-width: 150px;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="header-container"></div>
+<div layout:fragment="content" class="container-fluid">
+    <article class="main-body--wrapper">
+        <h1 class="content--title">Trademarks</h1>
+            <div class="content--container">
+                <section>
+                <h2>Spring Trademark Guidelines</h2>
+                <ol>
+                    <li>
+                        <strong>PURPOSE.</strong> Pivotal Software, Inc. (“<strong>Pivotal</strong>”) owns a number of international trademarks and logos
+                        that identify the Spring community and individual Spring projects (“<strong>Spring Marks</strong>”). These trademarks
+                        include, but are not limited to:
+
+                        <ol>
+                            <li>
+                                <strong>Words: SPRING, SPRING FRAMEWORK, SPRING BOOT, SPRING CLOUD, SPRINGSOURCE, SPRING IO,
+                                SPRING IO PLATFORM, SPRING BY PIVOTAL</strong>
+                            </li>
+                            <li>
+                                <strong>Logos:</strong>
+                                <img class="thumbnail" th:src="@{/img/favicon.png}"/>
+                                <img class="thumbnail" th:src="@{/img/spring-platform-watermark.png}"/>
+                                <img class="thumbnail" th:src="@{/img/spring-by-pivotal.png}"/>
+                            </li>
+                        </ol>
+
+                        This policy outlines Pivotal’s policy and guidelines about the use of the Spring trademarks by
+                        members of the Spring development and user community.
+                    </li>
+                    <li>
+                        <strong>WHY HAVE TRADEMARK GUIDELINES?</strong> The Spring Marks are a symbol of the quality and
+                        community support associated with the Spring open source software. Trademarks protect not only those
+                        using the marks, but the entire community as well. Our community members need to know that they can
+                        rely on the quality and capabilities represented by the brand. We also want to provide a level playing
+                        field. No one should use the Spring marks in ways that mislead or take advantage of the community, or
+                        make unfair use of the trademarks. Also, use of the Spring Marks should not be in a disparaging manner
+                        because we prefer that our marks not be used to be rude about the Spring open source project or its
+                        members.
+                    </li>
+                    <li>
+                        <strong>OPEN SOURCE LICENSE VS. TRADEMARKS.</strong> The Apache 2.0 license gives you the right to use,
+                        copy, distribute and modify the Spring software. However, open source licenses like the Apache 2.0
+                        license do not address trademarks. Spring Marks need to be used in a way consistent with trademark
+                        law, and that is why we have prepared this policy – to help you understand what branding is allowed
+                        or required when using our software under the Apache license.
+                    </li>
+                    <li>
+                        <strong>PROPER USE OF THE SPRING MARKS.</strong> We want to encourage a robust community for the Spring
+                        open source project. Therefore, you may do any of the following, as long as you do so in a way that
+                        does not devalue, dilute, or disparage the Spring brand. In other words, when you do these things, you
+                        should behave responsibly and reasonably in the interest of the community, but you do not need a
+                        trademark license from us to do them.
+                        <ol>
+                            <li>
+                                <strong>Nominative Use.</strong> You may engage in “nominative use” of the Spring name, but
+                                this does not allow you to use the logo.  Nominative use is sometimes called “fair use” of a
+                                trademark, and does not require a trademark license from us.  Here are examples:
+                                <ol>
+                                    <li>
+                                        You may use the Spring Marks in connection with development of tools, add-ons, or
+                                        utilities that are compatible with bit-for-bit identical copies of official Spring
+                                        software. For example, if you are developing a Foobar tool for Spring,
+                                        acceptable project titles would be “Foobar for Spring".
+                                    </li>
+                                    <li>
+                                        You may use the Spring Marks in connection with your noncommercial redistribution of
+                                        (1) bit-for-bit identical copies of official Spring software, and (2) unmodified copies
+                                        of official Spring source packages.  For example, if your Foobar product included a
+                                        full redistribution of official Spring Software or source code packages:
+                                        "Spring-powered Foobar Product". We strongly discourage, and likely would consider it
+                                        a trademark problem, to use a name such as “Spring Foobar.”
+                                    </li>
+                                    <li>
+                                        If you offer maintenance, support, or hosting services for Spring software, you may
+                                        accurately state that in your marketing materials or portfolio, without using the
+                                        Spring logo.
+                                    </li>
+                                    <li>
+                                        You may modify the Spring software and state that your modified software is “based on the Spring software” or a similar accurate statement, without using the Spring logo.
+                                    </li>
+                                    <li>
+                                        You may engage in community advocacy. The Spring software is developed by and for its community. We will allow the use of the word trademark in this context, provided:
+                                    </li>
+                                    <ol>
+                                        <li>
+                                            The trademark is used in a manner consistent with this policy
+                                        </li>
+                                        <li>
+                                            There is no commercial purpose behind the use
+                                        </li>
+                                        <li>
+                                            There is no suggestion that your project is approved, sponsored, or affiliated with Pivotal.
+                                        </li>
+                                        <li>
+                                            User or Development Groups. You may create Spring user or development groups, and publicize meetings or discussions for those groups.  Please consider joining our official groups, or contact us if you are interested in creating a Pivotal-sponsored group.
+                                        </li>
+                                    </ol>
+                                </ol>
+                            </li>
+                            <li>
+                                <strong>Attribution.</strong> Identify the trademarks as trademarks of Pivotal, as set forth in Section 7.
+                            </li>
+                            <li>
+                                <strong>Redistribution of Binaries.</strong> If you redistribute binaries that you have downloaded from the Spring repository, you should retain the logos and name of the product.  However, if you make any changes to the binaries (other than configuration or installation changes that do not involve changes to the source code), or if you re-build binaries from our source code, you should not use our logos.  Our logos represent our quality control, so they should be retained where the product has been built by us, but not otherwise.  Our source code does not include logo image files, to remind you to follow this rule.
+                            </li>
+                            <li>
+                                <strong>Capitalization.</strong> “Spring” should always be capitalized and one word.
+                            </li>
+                            <li>
+                                <strong>Adjectives.</strong> Use the Spring mark as an adjective, not a noun or verb.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>IMPROPER USE OF THE TRADEMARKS AND LOGOS.</strong> Use of the logo is reserved solely for use by Pivotal in its unaltered form. Examples of <strong>unauthorized</strong> use of the Spring trademarks include:
+                        <ol>
+                            <li>
+                                <strong>Commercial Use:</strong> You may not use the Spring Marks in connection with commercial redistribution of Spring software (commercial redistribution includes, but is not limited to, redistribution in connection with any commercial business activities or revenue-generating business activities) regardless of whether the Spring software is unmodified.
+                            </li>
+                            <li>
+                                <strong>Entity Names.</strong> You may not form a company, use a company name, or create a software product name that includes the “Spring” trademark, or implies any foundational or authorship role. If you have a software product that works with Spring, it is suggested you use terms such as ‘&lt;product name&gt; for Spring’ or ‘&lt;product name&gt;, Spring Edition.” If you wish to form an entity for a user or developer group, please contact us and we will be glad to discuss a license for a suitable name.
+                            </li>
+                            <li>
+                                <strong>Class or Quality.</strong> You may not imply that you are providing a class or quality of Spring (e.g., "enterprise-class" or "commercial quality") in a way that implies Spring is not of that class, grade or quality, nor that other parties are not of that class, grade, or quality.
+                            </li>
+                            <li>
+                                <strong>Combinations.</strong> Use of the Spring Marks to identify software that combines any portion of the Spring software with any other software, unless the combined distribution is an official Spring distribution. For example, you may not distribute a combination of the Spring  software with software released by the Foobar project under the name “Spring Foobar Distro”.
+                            </li>
+                            <li>
+                                <strong>False or Misleading Statements.</strong> You may not make false or misleading statements regarding your use of Spring (e.g., "we wrote the majority of the code" or "we are major contributors" or "we are committers").
+                            </li>
+                            <li>
+                                <strong>Domain Names.</strong> You must not use Spring or any confusingly similar phrase in a domain name. For instance “www.springhost.com” is not allowed. If you wish to use such a domain name for a non-commercial user or developer group to engage in community advocacy, please contact us and we will be glad to discuss a license for a suitable domain name.  Because of the many persons who, unfortunately, seek to spoof, swindle or deceive the community by using confusing domain names, we must be very strict about this rule.
+                            </li>
+                            <li>
+                                <strong>Merchandise.</strong> You must not manufacture, sell or give away merchandise items, such as T-shirts and mugs, bearing the Spring logo, or create any mascot for the project. If you wish to use the logo to do this for a non-commerical user or developer group to engage in community advocacy, please contact us and we will be glad to discuss a license to do this.
+                            </li>
+                            <li>
+                                <strong>Variations, takeoffs or abbreviations.</strong> You may not use a variation of the Spring name or logo for any purpose other than common usage of these in community communications. For example, the following are not acceptable:
+                                <ol>
+                                    <li>
+                                        SPRNG
+                                    </li>
+                                    <li>
+                                        MySpring
+                                    </li>
+                                    <li>
+                                        SpringDB
+                                    </li>
+                                    <li>
+                                        SpringHost
+                                    </li>
+                                    <li>
+                                        SpringGuru
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <strong>Endorsement or Sponsorship.</strong> You may not use the Spring trademarks in a manner that would imply Pivotal’s affiliation with or endorsement, sponsorship, or support of a product or service.
+                            </li>
+                            <li>
+                                <strong>Rebranding.</strong> You may not change the trademark on unmodified Spring software to your own brand.  You may not hold yourself out as the source of the Spring software, except to the extent you have modified it as allowed under the Apache 2.0 license, and you make it clear that you are the source only of the modification.
+                            </li>
+                            <li>
+                                <strong>Combination Marks.</strong> Do not use our trademarks in combination with any other marks or logos (for example Foobar Spring, or the name of your company or product typeset to look like the Spring logo).
+                            </li>
+                            <li>
+                                <strong>Web Tags.</strong> Do not use the Spring trademark in a title or meta tag of a web page to influence search engine rankings or result listings, rather than for discussion or advocacy of the Spring project.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>PROPER NOTICE AND ATTRIBUTION.</strong> The appropriate trademark symbol (i.e.,  ®) should appear at least with the first use of the Spring trademarks (for example, SPRING®). When you use a Spring trademark you should include a statement attributing the trademark to Pivotal. For example, "Spring is a trademark of Pivotal Software, Inc. in the U.S. and other countries."
+                    </li>
+                    <li>
+                        <strong>MORE QUESTIONS?</strong> If you have questions about this policy, please contact us at <a href="mailto:ask@spring.io">ask@spring.io</a>.
+                    </li>
+                </ol>
+                </section>
+            </div>
+    </article>
+</div>
+</body>
+</html>

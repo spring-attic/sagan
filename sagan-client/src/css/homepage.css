@@ -37,6 +37,8 @@
     display: none;
 }
 
+/* Hero banners */
+
 .homepage--body .hero--banner {
   background-color: #34302d;
   position: relative;
@@ -81,38 +83,19 @@
   cursor: pointer;
 }
 
-/* Spring IO Platform Banner */
+/* Spring Cloud banner */
 
-.homepage--body .hero--banner .platform {
-  background: url("../img/platform-bg.png") #34302d 50% 50% no-repeat;
-  height: auto;
-  text-align: center;
-  padding: 60px 0;
-  background-size: 450px;
-}
-.homepage--body .hero--banner .platform .platform--title {
-  font-family: "Montserrat", sans-serif;
-  color: #f1f1f1;
-  font-size: 30px;
-  font-weight: normal;
-  line-height: 30px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
-/* Spring Cloud GA banner */
-
-.homepage--body .hero--banner .springcloud10 {
+.homepage--body .hero--banner .springcloud {
   padding: 60px;
-  background: url("../img/hero-banner-springcloud10.jpg") #34302d no-repeat;
+  background: url("../img/home-banner-spring-cloud.jpg") #34302d no-repeat;
   background-size: cover;
 }
 
-.homepage--body .hero--banner .springcloud10 .banner--text {
+.homepage--body .hero--banner .springcloud .banner--text {
     margin-left: 28%;
 }
 
-.homepage--body .hero--banner .springcloud10 .banner--text h2 {
+.homepage--body .hero--banner .springcloud .banner--text h2 {
   font-family: "Montserrat", sans-serif;
   color: #f1f1f1;
   font-size: 25px;
@@ -123,22 +106,69 @@
   text-transform: uppercase;
 }
 
-/* Initializr hero banner */
-.homepage--body .hero--banner .initializr {
-  background: #34302d;
-  height: auto;
-  text-align: center;
-  padding: 60px 0;
+/* SpringOne Platform banner */
+
+.homepage--body .hero--banner .springone {
+  background: url("../img/home-banner-springone-platform.jpg") #34302d no-repeat 50% 50%;
+  background-size: cover;
+  height: 278px;
 }
-.homepage--body .hero--banner .initializr .initializr--title {
+
+.homepage--body .hero--banner .springone .banner--text {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 11em;
+}
+
+.homepage--body .hero--banner .springone .banner--text p {
+    color: #f1f1f1;
+    text-align: center;
+}
+
+.homepage--body .hero--banner .springone .banner--text a {
+  background-color: #261D57;
+  color: #f1f1f1;
+  padding: 0.3em;
+  float:right;
+}
+
+/* Spring Cloud Native Roadshow */
+.homepage--body .hero--banner .cn-roadshow {
+    height: 272px;
+    background: url("../img/cn-roadshow.jpg") #34302d no-repeat;
+    background-size: cover;
+}
+
+.homepage--body .hero--banner .cn-roadshow .banner--text {
+    margin-left: 56%;
+    padding-top: 195px;
+}
+
+
+/* Spring Cloud Services banner */
+
+.homepage--body .hero--banner .springcloud-services {
+  height: 272px;
+  background: url("../img/home-banner-spring-cloud-services.jpg") #34302d no-repeat;
+  background-size: cover;
+}
+
+.homepage--body .hero--banner .springcloud-services .banner--text {
+  margin-left: 50%;
+  padding-top: 60px;
+}
+
+.homepage--body .hero--banner .springcloud-services .banner--text h2 {
   font-family: "Montserrat", sans-serif;
   color: #f1f1f1;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: normal;
   line-height: 30px;
   margin-bottom: 20px;
+  max-width: 430px;
   text-transform: uppercase;
 }
+
 
 .homepage--body .key-feature--wrapper {
   background-color: #6db33f;
@@ -204,6 +234,9 @@
   margin-left: 10px;
   text-decoration: none;
 }
+.homepage--body .offset-feature--container.feature-initializr {
+    text-align:right;
+}
 .homepage--body .offset-feature--container.feature-guides {
   background-image: url("../img/homepage-feature-guides.png");
   background-repeat: no-repeat;
@@ -219,6 +252,12 @@
   background-repeat: no-repeat;
   background-position: 130px 0;
 }
+.homepage--body .offset-feature--container.feature-certification {
+    background-image: url("../img/homepage-feature-certification.png");
+    background-repeat: no-repeat;
+    background-position: 0% 0;
+    text-align: right;
+}
 .homepage--body .offset-feature--container:last-child {
   border: none;
 }
@@ -232,21 +271,29 @@
 }
 .support--wrapper .support--container .icon {
   float: left;
-  margin-right: 45px;
+  margin-right: 20px;
 }
 .support--wrapper .support--container .support--title {
   font-size: 18px;
   line-height: 18px;
   text-transform: uppercase;
   color: #f1f1f1;
-  margin: 22px 0;
+  margin: 16px 0;
+}
+.support--wrapper .support--container .support-links {
+    list-style: none;
+}
+.support--wrapper .support--container .support-links.community {
+    margin-left: 117px;
+}
+.support--wrapper .support--container .support-links.professional {
+    margin-left: 146px;
+}
+.support--wrapper .support--container .support-links.hosted {
+    margin-left: 137px;
 }
 .support--wrapper .support--container .support-links a {
   color: #5fa134;
-  padding: 0 20px;
-}
-.support--wrapper .support--container .support-links a:first-child {
-  padding-left: 0;
 }
 .support--wrapper.about-page {
   position: absolute;

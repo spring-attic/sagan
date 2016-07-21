@@ -119,8 +119,11 @@
     float: none;
     margin-right: 0;
   }
-  .support--wrapper .support--container .support-links a {
-    padding: 0 15px;
+  .support--wrapper .support--container .support-links.community,
+  .support--wrapper .support--container .support-links.professional,
+  .support--wrapper .support--container .support-links.hosted,
+  .support--wrapper .support--container .support-links ul {
+    margin: 0;
   }
 
   aside {

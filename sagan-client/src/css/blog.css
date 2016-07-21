@@ -126,6 +126,7 @@
 }
 .blog--container .blog--post pre {
   margin: 20px 0;
+  padding: 9.5px;
 }
 .blog--container .blog--post strong {
   font-family: "Montserrat", sans-serif;

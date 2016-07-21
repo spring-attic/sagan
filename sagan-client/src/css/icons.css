@@ -100,6 +100,12 @@
   background-position: 247px 837px;
   margin-top: 11px;
 }
+.icon.project--logo.logo-spring-cloud-dataflow {
+    width: 130px;
+    height: 105px;
+    background-position: 669px 1072px;
+    margin-top: 11px;
+}
 .icon.project--logo.logo-spring-boot {
   width: 102px;
   height: 90px;
@@ -238,6 +244,12 @@
   width: 126px;
   height: 97px;
   background-position: 272px 288px;
+  font-size: 0;
+}
+.icon.icon-hosted-services {
+  width: 117px;
+  height: 79px;
+  background-position: 272px 374px;
   font-size: 0;
 }
 .icon.icon-gs-guides {

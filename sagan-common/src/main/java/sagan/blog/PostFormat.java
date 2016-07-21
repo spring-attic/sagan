@@ -5,7 +5,7 @@ package sagan.blog;
  */
 public enum PostFormat {
 
-    MARKDOWN("Markdown", "markdown");
+    MARKDOWN("Markdown", "markdown"), ASCIIDOC("Asciidoc", "asciidoc");
 
     private String displayName;
     private String slug;
