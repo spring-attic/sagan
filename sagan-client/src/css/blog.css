@@ -1,4 +1,5 @@
 @import "highlight.css";
+@import "asciidoctor.css";
 
 .blog--container {
   padding: 0 0 40px 0;
@@ -179,6 +180,12 @@
   font-size: 14px;
   line-height: 20px;
 }
+.blog--container .blog--post .colist p, li
+ {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
 /*
     Fix styling of tables in GitHub Markdown-generated
     HTML to match other spring.io tables
@@ -219,10 +226,25 @@
     border-bottom: 1px solid #ccc
 }
 
-.blog--container .blog--post tr:nth-child(odd) > td {
+.blog--container .blog--post tr:nth-child(even) > td {
     background-color: #f9f9f9
 }
 /* end table fix */
+
+/* asciidoctor admonitions fix */
+.blog--container .blog--post .admonitionblock table {
+  margin: 0;
+}
+
+.blog--container .blog--post .admonitionblock th,
+.blog--container .blog--post .admonitionblock tr,
+.blog--container .blog--post .admonitionblock td,
+.blog--container .blog--post .admonitionblock td:first-child,
+.blog--container .blog--post .admonitionblock td:last-child {
+  border: 0;
+  padding: 0;
+}
+/* end asciidoctor admonitions fix */
 
 .blog-comments--wrapper {
   border-top: 1px solid #cccccc;

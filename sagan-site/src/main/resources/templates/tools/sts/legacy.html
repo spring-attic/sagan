@@ -16,13 +16,12 @@
   <div class="main-body--wrapper">
     <div class="tools--wrapper">
       <div class="content--title">Tools</div>
-        <h1 class="tools--title">Previous Spring Tool Suite&trade; Downloads</h1>
-        <p class="tools--description">Use one of the links below to download an all-in-one
-            distribution for your platform.</p>
-        <th:block th:each="legacyRelease : ${legacyReleases}">
-            <section class='ga--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${legacyRelease}"></section>
-        </th:block>
-      </div>
+      <h1 class="tools--title">Previous Spring Tool Suite&trade; Downloads</h1>
+      <p class="tools--description">Use one of the links below to download an all-in-one
+          distribution for your platform.</p>
+      <th:block th:each="legacyRelease : ${legacyReleases}">
+          <section class='ga--release' layout:include="tools/_tools_versions :: tools-versions" th:with="release=${legacyRelease}"></section>
+      </th:block>
     </div>
   </div>
 </div>

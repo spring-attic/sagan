@@ -1,25 +1,8 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
-    }
-}
-
-apply plugin: "io.spring.dependency-management"
-
 sourceSets {
     testUtil {
         java.srcDir 'src/test-util/java'
         resources.srcDir 'src/test-util/resources'
     }
-}
-
-dependencyManagement {
-	imports {
-		mavenBom 'io.spring.platform:platform-bom:2.0.3.RELEASE'
-	}
 }
 
 dependencies {
@@ -54,12 +37,13 @@ dependencies {
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
     compile "org.codehaus.woodstox:woodstox-core-asl"
 
-    compile 'org.jsoup:jsoup:1.8.3'
+    compile 'org.jsoup:jsoup:1.9.2'
     compile 'joda-time:joda-time'
     compile 'org.hibernate:hibernate-validator'
 
     // for use in rendering AsciiDoc-based guide content to HTML
-    compile 'org.asciidoctor:asciidoctorj:1.5.3'
+    compile 'org.asciidoctor:asciidoctorj:1.5.4'
+    compile 'org.jruby:jruby-complete:9.1.2.0'
 
     testUtilCompile "junit:junit"
     testUtilCompile sourceSets.main.output

@@ -154,6 +154,12 @@
     background-position: 675px 957px;
     margin-top: 23px;
 }
+.icon.project--logo.logo-spring-flo {
+    width: 133px;
+    height: 111px;
+    background-position: 133px 1065px;
+    margin-top: 23px;
+}
 .icon.icon-projects {
   width: 28px;
   height: 28px;
@@ -268,6 +274,11 @@
   background-position: 995px 1070px;
 }
 .icon.icon-tutorial {
+  width: 73px;
+  height: 101px;
+  background-position: 430px 101px;
+}
+.icon.icon-topical {
   width: 73px;
   height: 101px;
   background-position: 430px 101px;

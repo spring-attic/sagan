@@ -3,7 +3,7 @@
         layout:decorator="layout">
 <head>
     <title>The Spring Blog</title>
-    <link rel="alternate" type="application/atom+xml" th:href="${beans.uih.path() + '.atom'}" />
+    <link rel="alternate" type="application/atom+xml" th:href="${@uih.path() + '.atom'}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/blog.css}"/>
 </head>
 <body>
@@ -11,10 +11,10 @@
     <main layout:fragment="content" class="container">
         <div class="main-body--wrapper">
             <div class="desktop-only" th:unless="${title}">
-                <h1 th:class="${beans.uih.blogClass(activeCategory?:'','All Posts') + ' content--title'}">
+                <h1 th:class="${@uih.blogClass(activeCategory?:'','All Posts') + ' content--title'}">
                     The Spring Blog
                 </h1>
-                <div th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
+                <div th:each="category : ${categories}" th:class="${@uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
                     <div th:text="${category.displayName}">Engineering</div>
                 </div>
             </div>
@@ -58,13 +58,13 @@
                         </article>
                     </div>
                     <div id='pagination_control' th:if="${paginationInfo.isVisible()}" class="pagination blog-pagination">
-                        <a th:href="@{${beans.uih.path()}(page=${paginationInfo.previousPageNumber})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
+                        <a th:href="@{${@uih.path()}(page=${paginationInfo.previousPageNumber})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
                         <div th:each="element : ${paginationInfo.pageElements }" >
-                            <a th:href="@{${beans.uih.path()}(page=${element.label})}" th:text="${element.label}" th:if="${element.navigable}" ></a>
+                            <a th:href="@{${@uih.path()}(page=${element.label})}" th:text="${element.label}" th:if="${element.navigable}" ></a>
                             <div th:text="${element.label}" th:if="${!element.navigable && element.currentPage}" class="active" ></div>
                             <div th:text="${element.label}" th:unless="${element.navigable || element.currentPage}" ></div>
                         </div>
-                        <a th:href="@{${beans.uih.path()}(page=${paginationInfo.nextPageNumber})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
+                        <a th:href="@{${@uih.path()}(page=${paginationInfo.nextPageNumber})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
                     </div>
                 </div>
                 <aside class="span4 mobile-right-pane">

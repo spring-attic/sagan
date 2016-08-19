@@ -95,35 +95,6 @@
 .project--container:hover .project-links--container {
   opacity: 1;
 }
-.project--container.parent-project {
-  position: relative;
-}
-.project--container.parent-project .child-project-count--wrapper {
-  position: absolute;
-  top: 30px;
-  right: 20px;
-}
-.project--container.parent-project .child-project-count--wrapper .child-project-count--number {
-  position: relative;
-  z-index: 101;
-  color: #f1f1f1;
-  margin: -22px -9px 0 9px;
-}
-.project--container.parent-project .child-project-count--wrapper .child-project-count--background {
-  position: absolute;
-  margin: -54px 0 0 -5px;
-  z-index: 100;
-  width: 0;
-  height: 0;
-  border-top: 40px solid transparent;
-  border-bottom: 40px solid transparent;
-  border-left: 40px solid #6db33f;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-}
 .project--container.full-width {
   background-color: #ddd;
   border-color: white;

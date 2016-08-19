@@ -1,60 +1,55 @@
-var gulpFilter = require('gulp-filter'),
-    cram = require('gulp-cram'),
-    uglify = require('gulp-uglify'),
-    bowerSrc = require('gulp-bower-src'),
-    sourcemaps = require('gulp-sourcemaps'),
-    cssmin = require('gulp-minify-css'),
+var cssmin = require('gulp-minify-css'),
+    jspm = require('gulp-jspm-build'),
     gulp = require('gulp');
 
 var paths = {
-    run: 'src/run.js',
+    app: 'src/app/',
     css: {
-        files: ['src/css/*.css'],
-        root: 'src/css'
+        files: ['src/css/*.css']
     },
-    assets: ['src/img*/**','src/*.txt','src/*.html','src/font*/**','src/css*/filterable-list.css'],
-    dest: './dist/'
+    external_css: [
+        'src/jspm_packages/npm/eonasdan-bootstrap-datetimepicker@4.15.35/build/css/bootstrap-datetimepicker.min.css',
+        'src/jspm_packages/github/twbs/bootstrap@2.3.2/docs/assets/css/bootstrap.css',
+        'src/jspm_packages/github/FortAwesome/font-awesome@3.2.1/css/font-awesome.min.css'
+    ],
+    assets: ['src/img*/**', 'src/*.txt', 'src/*.html', 'src/font*/**', 'src/css*/filterable-list.css',
+    'src/config.js', 'src/jspm_packages*/system*', 'src/jspm_packages*/**/*.ttf', 'src/jspm_packages*/**/*.woff'],
+    dest: './build/dist/'
 };
 
-
 // concat and minify CSS files
-gulp.task('minify-css', function() {
+gulp.task('minify-css', function () {
     return gulp.src(paths.css.files)
-        .pipe(cssmin({root:paths.css.root}))
-        .pipe(gulp.dest(paths.dest+'css'));
+        .pipe(cssmin({}))
+        .pipe(gulp.dest(paths.dest + 'css'));
 });
 
-// cram and uglify JavaScript source files
-gulp.task('build-modules', function() {
-
-    var opts = {
-        includes: [ 'curl/loader/legacy', 'curl/loader/cjsm11'],
-        excludes: ['gmaps']
-    };
-
-    return cram(paths.run, opts).into('run.js')
-        .pipe(sourcemaps.init())
-        .pipe(uglify())
-        .pipe(sourcemaps.write("./"))
-        .pipe(gulp.dest(paths.dest));
+// copy external css
+gulp.task('copy-external-css', function () {
+    return gulp.src(paths.external_css)
+        .pipe(gulp.dest(paths.dest + 'lib/css'));
 });
-
-// copy main bower files (see bower.json) and optimize js
-gulp.task('bower-files', function() {
-    var filter = gulpFilter(["**/*.js", "!**/*.min.js"]);
-    return bowerSrc()
-        .pipe(sourcemaps.init())
-        .pipe(filter)
-        .pipe(uglify())
-        .pipe(filter.restore())
-        .pipe(sourcemaps.write("./"))
-        .pipe(gulp.dest(paths.dest+'lib'));
-})
 
 // copy assets
-gulp.task('copy-assets', function() {
+gulp.task('copy-assets', function () {
     return gulp.src(paths.assets)
         .pipe(gulp.dest(paths.dest));
-})
+});
 
-gulp.task('build', ['minify-css', 'build-modules', 'copy-assets', 'bower-files'], function(){ });
+// build JSPM modules
+gulp.task('jspm', function () {
+    jspm({
+        bundleOptions: {
+            minify: true,
+            mangle: true
+        },
+        bundles: [
+            {src: 'app/main', dst: 'main.js'},
+            {src: 'app/maps', dst: 'maps.js'},
+            {src: 'app/admin', dst: 'admin.js'}
+        ]
+    })
+    .pipe(gulp.dest(paths.dest + "app"));
+});
+
+gulp.task('build', ['minify-css', 'copy-external-css', 'jspm', 'copy-assets'], function () {});

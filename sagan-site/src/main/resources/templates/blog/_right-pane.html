@@ -5,12 +5,12 @@
 <body>
   <div layout:fragment="right-pane">
     <ul class="right-pane-widget--container secondary-nav with-icon">
-      <li th:class="${beans.uih.blogClass(activeCategory?:'','All Posts')}">
+      <li th:class="${@uih.blogClass(activeCategory?:'','All Posts')}">
         <div class="icon blog-icon all-posts"></div>
         <a th:href="@{/blog}">All Posts</a>
         <a th:href="@{/blog.atom}" class="pull-right"><i class="icon-rss"></i></a>
       </li>
-      <li th:each="category : ${categories}" th:class="${beans.uih.blogClass(activeCategory?:'',category.displayName)}">
+      <li th:each="category : ${categories}" th:class="${@uih.blogClass(activeCategory?:'',category.displayName)}">
         <div th:class="${'icon blog-icon '+ category.displayName.toLowerCase().replace(' ','-')}"></div>
         <a th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}">Engineering</a>
         <a th:href="@{'/blog/category/'+${category.urlSlug}}+'.atom'" class="pull-right"><i class="icon-rss"></i></a>

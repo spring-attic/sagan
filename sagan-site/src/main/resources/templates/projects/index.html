@@ -46,26 +46,16 @@
           <div class="project--title">Spring Cloud Data Flow</div>
           <p class="project--description">A cloud native programming and operating model for composable data microservices on a structured platform.</p>
         </a>
-        <a class="project--container parent-project project--container--link"
-           th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-cloud')}"
-                title="See Spring Cloud's subprojects">
-          <div class="child-project-count--wrapper">
-            <div class="child-project-count--number">7</div>
-            <div class="child-project-count--background"></div>
-          </div>
+        <a class="project--container project--container--link"
+           th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-cloud')}">
           <div class="project-logo--container">
             <div class="icon project--logo logo-spring-cloud"></div>
           </div>
           <div class="project--title">Spring Cloud</div>
           <p class="project--description">Provides a set of tools for common patterns in distributed systems. Useful for building and deploying microservices.</p>
         </a>
-        <a class="project--container parent-project project--container--link"
-           th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-data')}"
-                title="See Spring Data's 9 subprojects">
-          <div class="child-project-count--wrapper">
-            <div class="child-project-count--number">9</div>
-            <div class="child-project-count--background"></div>
-          </div>
+        <a class="project--container project--container--link"
+           th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-data')}">
           <div class="project-logo--container">
             <div class="icon project--logo logo-spring-data"></div>
           </div>
@@ -86,14 +76,8 @@
           <div class="project--title">Spring Batch</div>
           <p class="project--description">Simplifies and optimizes the work of processing high-volume batch operations.</p>
         </a>
-        <a class="project--container parent-project project--container--link"
-           th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-security')}"
-           title="See Spring Security's 4 subprojects">
-          <div class="child-project-count--wrapper">
-            <div class="child-project-count--number">4</div>
-            <div class="child-project-count--background">
-            </div>
-          </div>
+        <a class="project--container project--container--link"
+           th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-security')}">
           <div class="project-logo--container">
             <div class="icon project--logo logo-spring-security"></div>
           </div>
@@ -107,13 +91,8 @@
           <div class="project--title">Spring HATEOAS</div>
           <p class="project--description">Simplifies creating REST representations that follow the HATEOAS principle.</p>
         </a>
-        <a class="project--container parent-project project--container--link"
-           th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-social')}"
-           title="See Spring Social's 4 subprojects">
-          <div class="child-project-count--wrapper">
-            <div class="child-project-count--number">4</div>
-            <div class="child-project-count--background"></div>
-          </div>
+        <a class="project--container project--container--link"
+           th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-social')}">
           <div class="project-logo--container">
             <div class="icon project--logo logo-spring-social"></div>
           </div>
@@ -178,13 +157,21 @@
           <div class="project--title">Spring Shell</div>
           <p class="project--description">Provides a powerful foundation for building command-line apps using a Spring-based programming model.</p>
         </a>
-          <a th:href="${project.siteUrl}" class="project--container project--container--link" th:with="project=${projectMetadata.getProject('spring-xd')}">
-              <div class="project-logo--container">
-                  <div class="icon project--logo logo-spring-xd"></div>
-              </div>
-              <div class="project--title">Spring XD</div>
-              <p class="project--description">Simplifies the development of big data applications by addressing ingestion, analytics, batch jobs and data export.</p>
-          </a>
+        <a th:href="${project.siteUrl}" class="project--container project--container--link" th:with="project=${projectMetadata.getProject('spring-xd')}">
+            <div class="project-logo--container">
+                <div class="icon project--logo logo-spring-xd"></div>
+            </div>
+            <div class="project--title">Spring XD</div>
+            <p class="project--description">Simplifies the development of big data applications by addressing ingestion, analytics, batch jobs and data export.</p>
+        </a>
+        <a th:href="${project.siteUrl}" class="project--container project--container--link" th:if="${projectMetadata.getProject('spring-flo')}"
+           th:with="project=${projectMetadata.getProject('spring-flo')}">
+          <div class="project-logo--container">
+            <div class="icon project--logo logo-spring-flo"></div>
+          </div>
+          <div class="project--title">Spring Flo</div>
+          <p class="project--description">A JavaScript library that offers a basic embeddable HTML5 visual builder for pipelines and simple graphs.</p>
+        </a>
       </section>
       <h2 class="index-page--title">Community Projects</h2>
       <section class="projects--wrapper project-aggregator top-separator">

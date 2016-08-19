@@ -7,9 +7,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.ToString;
 
-@ToString(exclude = "body")
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Question implements Serializable {
 
@@ -41,4 +39,13 @@ class Question implements Serializable {
 		String synopsis = body.replaceAll("\\<(/?[^\\>]+)\\>", "");
         return synopsis.substring(0, synopsis.length() > 200 ? 200 : synopsis.length());
     }
+
+	@Override
+	public String toString() {
+		return "Question{" +
+				"id='" + id + '\'' +
+				", title='" + title + '\'' +
+				", link='" + link + '\'' +
+				'}';
+	}
 }

@@ -1,5 +1,3 @@
-src/lib
+jspm_packages
 node_modules
 npm-debug.log
-.cram/
-dist/
