@@ -117,10 +117,14 @@
   margin: 15px 0 20px 25px;
 }
 .blog--container .blog--post ul li, .blog--container .blog--post ol li {
-  padding-bottom: 20px;
   font-size: 15px;
   line-height: 24px;
 }
+
+.blog--container .blog--post ul li p, .blog--container .blog--post ol li p {
+  margin-bottom: 0px;
+}
+
 .blog--container .blog--post img {
   display: block;
   margin: 20px 0;
@@ -242,7 +246,7 @@
 .blog--container .blog--post .admonitionblock td:first-child,
 .blog--container .blog--post .admonitionblock td:last-child {
   border: 0;
-  padding: 0;
+  padding: 5px;
 }
 /* end asciidoctor admonitions fix */
 
