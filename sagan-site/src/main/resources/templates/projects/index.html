@@ -44,7 +44,7 @@
             <div class="icon project--logo logo-spring-cloud-dataflow"></div>
           </div>
           <div class="project--title">Spring Cloud Data Flow</div>
-          <p class="project--description">A cloud native programming and operating model for composable data microservices on a structured platform.</p>
+          <p class="project--description">An orchestration service for composable data microservice applications on modern runtimes.</p>
         </a>
         <a class="project--container project--container--link"
            th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-cloud')}">
@@ -171,6 +171,14 @@
           </div>
           <div class="project--title">Spring Flo</div>
           <p class="project--description">A JavaScript library that offers a basic embeddable HTML5 visual builder for pipelines and simple graphs.</p>
+        </a>
+        <a th:href="${project.siteUrl}" class="project--container project--container--link" th:if="${projectMetadata.getProject('spring-kafka')}"
+           th:with="project=${projectMetadata.getProject('spring-kafka')}">
+          <div class="project-logo--container">
+            <div class="icon project--logo logo-spring-kafka"></div>
+          </div>
+          <div class="project--title">Spring Kafka</div>
+          <p class="project--description">Provides Familiar Spring Abstractions for Apache Kafka.</p>
         </a>
       </section>
       <h2 class="index-page--title">Community Projects</h2>
