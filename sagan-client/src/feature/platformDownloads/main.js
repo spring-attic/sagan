@@ -1,4 +1,5 @@
 var $ = require('jquery');
+require('bootstrap/js/bootstrap-collapse');
 var os = require('../../platform/os');
 
 module.exports = function initPlatformDownloads() {
