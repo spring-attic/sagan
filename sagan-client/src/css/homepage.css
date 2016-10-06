@@ -130,6 +130,13 @@
   text-transform: uppercase;
 }
 
+/* SpringOne Platform banner */
+.homepage--body .hero--banner .springoneplatform a {
+  background: url("../img/s1p-2017-banner.jpg") #34302d no-repeat 50% 50%;
+  background-size: cover;
+  height: 278px;
+  display:block;
+}
 
 .homepage--body .key-feature--wrapper {
   background-color: #6db33f;
