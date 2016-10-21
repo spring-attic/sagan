@@ -2,13 +2,11 @@ package sagan.projects;
 
 import org.springframework.util.StringUtils;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Entity
 public class Project {
@@ -19,6 +17,23 @@ public class Project {
     private String repoUrl;
     private String siteUrl;
     private String category;
+
+    @JoinTable(name = "projecttolabel", joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_label_id"))
+    @ManyToMany(cascade = CascadeType.ALL )
+    private Set<ProjectLabel> projectLabels = new HashSet<>();
+
+    public Set<ProjectLabel> getProjectLabels() {
+        return projectLabels;
+    }
+
+    public void setProjectLabels(Set<ProjectLabel> projectLabels) {
+        this.projectLabels = projectLabels;
+    }
+
+    public List<ProjectRelease> getReleaseList() {
+        return releaseList;
+    }
 
     @ElementCollection
     private List<ProjectRelease> releaseList = new ArrayList<>();
@@ -45,6 +60,12 @@ public class Project {
                    boolean isAggregator, String category, String stackOverflowTags) {
         this(id, name, repoUrl, siteUrl, releaseList, isAggregator, category);
         this.setStackOverflowTags(stackOverflowTags);
+    }
+
+    public Project(String id, String name, String repoUrl, String siteUrl, List<ProjectRelease> releaseList,
+                   boolean isAggregator, String category, String stackOverflowTags, Set<ProjectLabel> labels) {
+        this(id, name, repoUrl, siteUrl, releaseList, isAggregator, category, stackOverflowTags);
+        this.setProjectLabels(labels);
     }
 
     public String getCategory() {
@@ -125,7 +146,7 @@ public class Project {
     }
 
     public void setStackOverflowTags(String stackOverflowTags) {
-        this.stackOverflowTags = stackOverflowTags.replaceAll(" ","");
+        this.stackOverflowTags = stackOverflowTags.replaceAll(" ", "");
     }
 
     public Set<String> getStackOverflowTagList() {
