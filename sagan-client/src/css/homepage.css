@@ -130,6 +130,15 @@
   text-transform: uppercase;
 }
 
+/* Spring Boot JAX winner */
+
+.homepage--body .hero--banner .springboot-jax a {
+  height: 278px;
+  background: url("../img/springboot-jax-banner.jpg") #34302d no-repeat 50% 50%;
+  background-size: cover;
+  display: block;
+}
+
 /* SpringOne Platform banner */
 .homepage--body .hero--banner .springoneplatform a {
   background: url("../img/s1p-2017-banner.jpg") #34302d no-repeat 50% 50%;
