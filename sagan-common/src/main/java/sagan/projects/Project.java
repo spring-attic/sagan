@@ -37,12 +37,17 @@ public class Project {
 
     @ElementCollection
     private List<ProjectRelease> releaseList = new ArrayList<>();
+
     private boolean isAggregator;
     private String stackOverflowTags;
 
-
     @SuppressWarnings("unused")
     private Project() {
+    }
+
+    public void addProjectLabel( ProjectLabel projectLabel ){
+        projectLabel.getProjects().add(this);
+        this.projectLabels.add( projectLabel );
     }
 
     public Project(String id, String name, String repoUrl, String siteUrl, List<ProjectRelease> releaseList,

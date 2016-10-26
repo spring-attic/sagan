@@ -11,6 +11,7 @@ public class ProjectLabel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     public Long getId() {

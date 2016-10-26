@@ -16,7 +16,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static junit.framework.TestCase.fail;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -26,26 +25,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
 
     @Test
-    public void projectMetadata_Project_labels() throws Exception {
-        ObjectMapper om = new ObjectMapper();
-        mockMvc.perform(
-                MockMvcRequestBuilders.get("/project_metadata/spring-cloud/labels")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(mvcResult -> {
-                    String string = mvcResult.getResponse().getContentAsString();
-                    List<String> content =
-                            om.readValue(string, new TypeReference<List<String>>() {});
-                    MatcherAssert.assertThat( "should have many labels", content.contains("microservices"));
-                });
-    }
-
-    @Test
     public void projectMetadata_ids() throws Exception {
         ObjectMapper om = new ObjectMapper();
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/project_metadata/ids")
+                MockMvcRequestBuilders.get("/project_metadata/projects")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
