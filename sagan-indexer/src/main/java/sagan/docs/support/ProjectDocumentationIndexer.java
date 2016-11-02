@@ -44,6 +44,7 @@ public class ProjectDocumentationIndexer implements Indexer<Project> {
         logger.debug("Indexing project: " + project.getId());
 
         List<String> projectVersions = project.getProjectReleases().stream()
+                .filter(projectRelease -> projectRelease.isCurrent())
                 .map(ProjectRelease::getVersion)
                 .collect(Collectors.toList());
 
