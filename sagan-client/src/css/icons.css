@@ -221,6 +221,11 @@
     width: 186px;
     height: 40px;
 }
+.icon.logo-artifactory-text {
+  background-image: url("../img/icon-artifactory-logo.svg");
+  width: 171px;
+  height: 46px;
+}
 .icon.icon-social-twitter {
   width: 36px;
   height: 36px;

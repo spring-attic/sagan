@@ -52,7 +52,7 @@
   margin: 26px 0 43px;
 }
 
-.eclipse--container, .yourkit--container, .browserstack--container {
+.eclipse--container, .yourkit--container, .browserstack--container, .artifactory--container {
   border: 1px solid #34302d;
   padding: 40px;
   margin-bottom: 40px;
@@ -68,6 +68,10 @@
 .browserstack--container .logo-browserstack-text {
     float: left;
     margin: 0 40px 40px 0;
+}
+.artifactory--container .logo-artifactory-text {
+  float: left;
+  margin: 0 40px 40px 0;
 }
 .eclipse--container .eclipse-content--container {
   margin-left: 159px;
