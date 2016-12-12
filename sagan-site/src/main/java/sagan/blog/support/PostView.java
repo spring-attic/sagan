@@ -22,7 +22,8 @@ import org.springframework.data.domain.PageRequest;
  * structures not otherwise suitable for inclusion in the Post class.
  */
 public final class PostView {
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy");
+
+    private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy");
 
     private final Post post;
     private final DateFactory dateFactory;
