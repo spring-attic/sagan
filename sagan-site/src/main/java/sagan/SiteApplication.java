@@ -4,18 +4,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import io.searchbox.client.JestClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.h2.server.web.WebServlet;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.social.SocialWebAutoConfiguration;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
-import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
@@ -98,14 +95,6 @@ public class SiteApplication {
         reg.addInitParameter("statusPath", "/redirect");
         reg.addInitParameter("statusEnabledOnHosts", "*");
         reg.addInitParameter("logLevel", "WARN");
-        return reg;
-    }
-
-    @Bean
-    @Profile(SaganProfiles.STANDALONE)
-    public ServletRegistrationBean h2Console() {
-        ServletRegistrationBean reg = new ServletRegistrationBean(new WebServlet(), "/console/*");
-        reg.setLoadOnStartup(1);
         return reg;
     }
 

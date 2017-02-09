@@ -23,7 +23,7 @@ dependencies {
     compile 'org.pegdown:pegdown:1.6.0'
 
     // datasource and connection pool dependencies
-    runtime 'org.postgresql:postgresql:9.4-1201-jdbc4'
+    runtime 'org.postgresql:postgresql:9.4.1212'
     compile 'com.h2database:h2'
     compile 'org.apache.tomcat:tomcat-jdbc'
 
@@ -42,8 +42,8 @@ dependencies {
     compile 'org.hibernate:hibernate-validator'
 
     // for use in rendering AsciiDoc-based guide content to HTML
-    compile 'org.asciidoctor:asciidoctorj:1.5.4'
-    compile 'org.jruby:jruby-complete:9.1.2.0'
+    compile 'org.asciidoctor:asciidoctorj:1.5.4.1'
+    compile 'org.jruby:jruby-complete:9.1.7.0'
 
     testUtilCompile "junit:junit"
     testUtilCompile sourceSets.main.output

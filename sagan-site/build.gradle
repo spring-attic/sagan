@@ -18,7 +18,6 @@ dependencies {
     compile "org.springframework.boot:spring-boot-devtools"
     compile "org.springframework.security:spring-security-acl"
 
-
     // Thymeleaf is used as the template engine for serving HTML
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
@@ -36,10 +35,11 @@ dependencies {
     compile 'xml-apis:xml-apis:1.4.01'
 
     // for XML manipulation
-   compile 'org.xmlbeam:xmlprojector:1.4.8'
+    compile 'org.xmlbeam:xmlprojector:1.4.8'
 
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test"
+    testCompile "org.springframework.boot:spring-boot-test"
 
     // pick up common test utility classes
     testCompile project(':sagan-common').sourceSets.testUtil.output

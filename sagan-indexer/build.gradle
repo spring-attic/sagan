@@ -16,6 +16,7 @@ dependencies {
 
     // for use in mocking http interactions
     testCompile "org.springframework:spring-test"
+    testCompile "org.springframework.boot:spring-boot-test"
 
     // pick up common test utility classes
     testCompile project(':sagan-common').sourceSets.testUtil.output

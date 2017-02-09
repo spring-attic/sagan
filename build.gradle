@@ -5,14 +5,14 @@ buildscript {
         maven { url springRepo }
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.3.7.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.4.RELEASE"
         classpath 'io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE'
         classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.3' // see deploy.gradle
     }
 }
 
 plugins {
-    id 'com.github.ben-manes.versions' version '0.12.0'
+    id 'com.github.ben-manes.versions' version '0.14.0'
 }
 
 def vJavaLang = '1.8'
@@ -42,7 +42,7 @@ configure(javaProjects) {
     afterEvaluate {
         dependencyManagement {
             imports {
-                mavenBom('io.spring.platform:platform-bom:2.0.7.RELEASE') {
+                mavenBom('io.spring.platform:platform-bom:Athens-SR3') {
                     bomProperties([
                             'elasticsearch.version': '1.7.1', // see io.searchbox:jest
                             'hibernate.version': '4.3.11.Final'
@@ -81,7 +81,7 @@ configure(javaProjects) {
 }
 
 configure(bootProjects) {
-    apply plugin: 'spring-boot'
+    apply plugin: 'org.springframework.boot'
     apply from: "$gradleDir/integTest.gradle"
     apply from: "$gradleDir/deploy.gradle"
 
