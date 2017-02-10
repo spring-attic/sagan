@@ -16,8 +16,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
-import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 import sagan.search.support.SearchService;
+import sagan.support.TuckeyRewriteFilter;
 import sagan.support.health.ElasticsearchHealthIndicator;
 
 import javax.sql.DataSource;
@@ -89,7 +89,7 @@ public class SiteApplication {
     public FilterRegistrationBean rewriteFilterConfig() {
         FilterRegistrationBean reg = new FilterRegistrationBean();
         reg.setName(REWRITE_FILTER_NAME);
-        reg.setFilter(new UrlRewriteFilter());
+        reg.setFilter(new TuckeyRewriteFilter());
         reg.addInitParameter("confPath", REWRITE_FILTER_CONF_PATH);
         reg.addInitParameter("confReloadCheckInterval", "-1");
         reg.addInitParameter("statusPath", "/redirect");

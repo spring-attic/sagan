@@ -102,13 +102,10 @@ spring:
 security:
   require_ssl: true
 server:
-  # when deployed to CloudFoundry, tomcat is behind a CDN proxy
-  tomcat:
-    remote_ip_header: x-forwarded-for
-    protocol_header: x-forwarded-proto
   compression:
     enabled: true
     mime-types: application/javascript,text/css,application/json
+  use-forward-headers: true
 
 ---
 
