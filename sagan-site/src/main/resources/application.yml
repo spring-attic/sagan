@@ -36,7 +36,6 @@ security:
     - /img/**
     - /500
     - /404
-    - /project_metadata/**
   headers:
     hsts: domain
   user:
@@ -119,7 +118,6 @@ spring:
       additional_paths:
         - ../sagan-client/src/
       additional_exclude: "**/*.js,**/*.css"
-
 
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
 ---
