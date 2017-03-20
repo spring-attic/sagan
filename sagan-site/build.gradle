@@ -13,7 +13,7 @@ dependencies {
 
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "org.springframework.boot:spring-boot-starter-redis"
+    compile "org.springframework.boot:spring-boot-starter-data-redis"
     compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.springframework.boot:spring-boot-devtools"
     compile "org.springframework.security:spring-security-acl"
@@ -38,7 +38,6 @@ dependencies {
     compile 'org.xmlbeam:xmlprojector:1.4.8'
 
     // for use in mocking http interactions
-    testCompile "org.springframework:spring-test"
     testCompile "org.springframework.boot:spring-boot-test"
 
     // pick up common test utility classes

@@ -5,8 +5,7 @@ buildscript {
         maven { url springRepo }
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.4.RELEASE"
-        classpath 'io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE"
         classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.3' // see deploy.gradle
     }
 }
@@ -42,7 +41,7 @@ configure(javaProjects) {
     afterEvaluate {
         dependencyManagement {
             imports {
-                mavenBom('io.spring.platform:platform-bom:Athens-SR3') {
+                mavenBom('io.spring.platform:platform-bom:Brussels-SR1') {
                     bomProperties([
                             'elasticsearch.version': '1.7.1', // see io.searchbox:jest
                             'hibernate.version': '4.3.11.Final'
