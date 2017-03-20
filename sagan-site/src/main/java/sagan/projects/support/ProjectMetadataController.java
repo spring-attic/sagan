@@ -5,6 +5,7 @@ import sagan.projects.ProjectRelease;
 import sagan.support.JsonPController;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +39,7 @@ class ProjectMetadataController {
         return service.getProject(projectId);
     }
 
-    @RequestMapping(value = "/{projectId}/{version:.*}", method = GET)
+    @RequestMapping(value = "/{projectId}/releases/{version:.*}", method = GET)
     public ProjectRelease releaseMetadata(@PathVariable("projectId") String projectId,
                                           @PathVariable("version") String version) throws IOException {
         Project project = service.getProject(projectId);
@@ -52,15 +53,27 @@ class ProjectMetadataController {
         return release;
     }
 
-    @RequestMapping(value = "/{projectId}", method = PUT)
-    public Project updateProjectMetadata(@PathVariable("projectId") String projectId, @RequestBody Project project)
+    @RequestMapping(value = "/{projectId}/releases", method = GET)
+    public List<ProjectRelease> releaseMetadata(@PathVariable("projectId") String projectId) throws IOException {
+        Project project = service.getProject(projectId);
+        if (project == null) {
+            throw new MetadataNotFoundException("Cannot find project " + projectId);
+        }
+        return project.getProjectReleases();
+    }
+
+    @RequestMapping(value = "/{projectId}/releases", method = PUT)
+    public Project updateProjectMetadata(@PathVariable("projectId") String projectId,
+                                         @RequestBody List<ProjectRelease> releases)
             throws IOException {
-        service.save(project);
+        Project project = service.getProject(projectId);
+        project.setProjectReleases(releases);
         project.normalizeProjectReleases();
+        service.save(project);
         return project;
     }
 
-    @RequestMapping(value = "/{projectId}", method = POST)
+    @RequestMapping(value = "/{projectId}/releases", method = POST)
     public ProjectRelease updateReleaseMetadata(@PathVariable("projectId") String projectId,
                                                 @RequestBody ProjectRelease release) throws IOException {
         Project project = service.getProject(projectId);
@@ -74,7 +87,7 @@ class ProjectMetadataController {
         return release;
     }
 
-    @RequestMapping(value = "/{projectId}/{version:.*}", method = DELETE)
+    @RequestMapping(value = "/{projectId}/releases/{version:.*}", method = DELETE)
     public ProjectRelease removeReleaseMetadata(@PathVariable("projectId") String projectId,
                                                 @PathVariable("version") String version) throws IOException {
         Project project = service.getProject(projectId);

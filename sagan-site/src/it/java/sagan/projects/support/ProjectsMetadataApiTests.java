@@ -68,7 +68,8 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .post("/project_metadata/spring-framework").content(mapper.writeValueAsString(release))
+                                .post("/project_metadata/spring-framework/releases").content(mapper.writeValueAsString(
+                                        release))
                                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("application/json"))
@@ -81,7 +82,8 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .get("/project_metadata/spring-framework/" + project.getProjectReleases().iterator()
+                                .get("/project_metadata/spring-framework/releases/" + project.getProjectReleases()
+                                        .iterator()
                                         .next().getVersion()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("application/json"));
@@ -94,7 +96,8 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .put("/project_metadata/spring-framework").content(mapper.writeValueAsString(project))
+                                .put("/project_metadata/spring-framework/releases").content(mapper.writeValueAsString(
+                                        project.getProjectReleases()))
                                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("application/json"));
@@ -105,7 +108,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .get("/project_metadata/spring-framework/FOO"))
+                                .get("/project_metadata/spring-framework/releases/FOO"))
                 .andExpect(status().isNotFound());
     }
 
@@ -115,7 +118,8 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .delete("/project_metadata/spring-framework/" + project.getProjectReleases().iterator()
+                                .delete("/project_metadata/spring-framework/releases/" + project.getProjectReleases()
+                                        .iterator()
                                         .next().getVersion()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("application/json"));
