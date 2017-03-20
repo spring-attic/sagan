@@ -1,6 +1,7 @@
 package sagan.projects;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
@@ -8,7 +9,10 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.util.Assert;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Embeddable
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProjectRelease implements Comparable<ProjectRelease> {
 
     private static final Pattern PRERELEASE_PATTERN = Pattern.compile("[A-Za-z0-9\\.\\-]+?(M|RC)\\d+");
@@ -45,7 +49,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     public ProjectRelease(String versionName, ReleaseStatus releaseStatus, boolean isCurrent, String refDocUrl,
                           String apiDocUrl, String groupId, String artifactId) {
         setVersion(versionName);
-        if (releaseStatus!=null) {
+        if (releaseStatus != null) {
             this.releaseStatus = releaseStatus;
         }
         this.isCurrent = isCurrent;
@@ -89,7 +93,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         String versionLabel = "";
         if (versionName.contains(".")) {
             versionNumber = versionName.substring(0, versionName.lastIndexOf("."));
-            versionLabel = " " + versionName.substring(versionName.lastIndexOf(".")+1);
+            versionLabel = " " + versionName.substring(versionName.lastIndexOf(".") + 1);
             if (versionLabel.contains("SNAPSHOT") || versionLabel.equals(" RELEASE")) {
                 versionLabel = "";
             }

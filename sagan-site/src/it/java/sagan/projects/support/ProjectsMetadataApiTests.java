@@ -1,6 +1,8 @@
 package sagan.projects.support;
 
-import saganx.AbstractIntegrationTests;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.projects.ProjectRelease.ReleaseStatus;
 
 import java.util.List;
 import java.util.Map;
@@ -9,9 +11,13 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static junit.framework.TestCase.fail;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -19,7 +25,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import saganx.AbstractIntegrationTests;
+
 public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
+
+    @Autowired
+    private ProjectMetadataService service;
+
+    @Autowired
+    private ObjectMapper mapper;
 
     @Test
     public void projectMetadata_respondsWithJavascript() throws Exception {
@@ -44,6 +58,52 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         List<Object> releases = getAndCheckProjectReleases("spring-security-kerberos", "Spring Security Kerberos");
 
         checkSnapshot(releases);
+    }
+
+    @Test
+    public void projectMetadata_addRelease() throws Exception {
+        ProjectRelease release = new ProjectRelease("1.2.3.BUILD-SNAPSHOT", ReleaseStatus.SNAPSHOT, false,
+                "http://example.com", "http://example.com/api", "org.springframework", "spring-core");
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .post("/project_metadata/spring-framework").content(mapper.writeValueAsString(release))
+                                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/json"));
+    }
+
+    @Test
+    public void projectMetadata_getRelease() throws Exception {
+        Project project = service.getProject("spring-framework");
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .get("/project_metadata/spring-framework/" + project.getProjectReleases().iterator()
+                                        .next().getVersion()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/json"));
+    }
+
+    @Test
+    public void projectMetadata_getMissingRelease() throws Exception {
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .get("/project_metadata/spring-framework/FOO"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void projectMetadata_deleteRelease() throws Exception {
+        Project project = service.getProject("spring-framework");
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .delete("/project_metadata/spring-framework/" + project.getProjectReleases().iterator()
+                                        .next().getVersion()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/json"));
     }
 
     public List<Object> getAndCheckProjectReleases(String projectId, String expectedProjectName) throws Exception {
