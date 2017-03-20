@@ -57,6 +57,13 @@ class ProjectMetadataController {
         throw new MetadataNotFoundException("Could not find " + version + " for " + projectId);
     }
 
+    @RequestMapping(value = "/{projectId}", method = PUT)
+    public Project updateMetadata(@PathVariable("projectId") String projectId, @RequestBody Project project)
+            throws IOException {
+        service.save(project);
+        return project;
+    }
+
     @RequestMapping(value = "/{projectId}", method = POST)
     public ProjectRelease updateReleaseMetadata(@PathVariable("projectId") String projectId,
                                                 @RequestBody ProjectRelease release) throws IOException {

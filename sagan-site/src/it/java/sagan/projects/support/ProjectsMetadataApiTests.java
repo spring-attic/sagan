@@ -86,6 +86,19 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
     }
 
     @Test
+    public void projectMetadata_updateProject() throws Exception {
+        Project project = service.getProject("spring-framework");
+        project.getProjectReleases().iterator().next().setVersion("1.2.8.RELEASE");
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .put("/project_metadata/spring-framework").content(mapper.writeValueAsString(project))
+                                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/json"));
+    }
+
+    @Test
     public void projectMetadata_getMissingRelease() throws Exception {
         mockMvc
                 .perform(
