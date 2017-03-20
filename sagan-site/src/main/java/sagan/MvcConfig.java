@@ -1,11 +1,20 @@
 package sagan;
 
-import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
+import sagan.support.ResourceNotFoundException;
+import sagan.support.StaticPagePathFinder;
+import sagan.support.nav.Navigation;
+
+import java.io.IOException;
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.context.embedded.ErrorPage;
+import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -26,28 +35,19 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
 import org.springframework.web.servlet.resource.VersionResourceResolver;
 import org.springframework.web.util.UrlPathHelper;
-import sagan.projects.support.ProjectMetadataService;
-import sagan.support.ResourceNotFoundException;
-import sagan.support.StaticPagePathFinder;
-import sagan.support.nav.Navigation;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Properties;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 /**
- * Site-wide MVC infrastructure configuration. See also {@link SiteApplication} where certain
- * additional web infrastructure is configured.
+ * Site-wide MVC infrastructure configuration. See also {@link SiteApplication} where
+ * certain additional web infrastructure is configured.
  */
 abstract class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private StaticPagePathFinder staticPagePathFinder;
 
-    @Bean(name = {"uih", "viewRenderingHelper"})
+    @Bean(name = { "uih", "viewRenderingHelper" })
     @Scope("request")
     public ViewRenderingHelper viewRenderingHelper() {
         return new ViewRenderingHelper();
@@ -119,8 +119,7 @@ abstract class MvcConfig extends WebMvcConfigurerAdapter {
         public String navClass(String active, String current) {
             if (active.equals(current)) {
                 return "navbar-link active";
-            }
-            else {
+            } else {
                 return "navbar-link";
             }
         }
@@ -128,8 +127,7 @@ abstract class MvcConfig extends WebMvcConfigurerAdapter {
         public String blogClass(String active, String current) {
             if (active.equals(current)) {
                 return "blog-category active";
-            }
-            else {
+            } else {
                 return "blog-category";
             }
         }
