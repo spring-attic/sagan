@@ -86,7 +86,7 @@ class ProjectAdminController {
             return "pages/404";
         }
 
-        project.normalizeProjectReleases();
+        denormalizeProjectReleases(project);
 
         List<ProjectRelease> releases = project.getProjectReleases();
         if (!releases.isEmpty()) {
@@ -107,9 +107,27 @@ class ProjectAdminController {
                 iReleases.remove();
             }
         }
-        project.normalizeProjectReleases(groupId);
+        normalizeProjectReleases(project, groupId);
         service.save(project);
 
         return "redirect:" + project.getId();
     }
+
+    private void normalizeProjectReleases(Project project, String groupId) {
+        for (ProjectRelease release : project.getProjectReleases()) {
+            if (groupId != null) {
+                release.setGroupId(groupId);
+            }
+            release.replaceVersionPattern();
+        }
+    }
+
+    private void denormalizeProjectReleases(Project project) {
+        List<ProjectRelease> releases = new ArrayList<>();
+        for (ProjectRelease release : project.getProjectReleases()) {
+            releases.add(release.createWithVersionPattern());
+        }
+        project.setProjectReleases(releases);
+    }
+
 }

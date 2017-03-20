@@ -3,7 +3,6 @@ package sagan.projects;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -13,9 +12,6 @@ import org.springframework.util.StringUtils;
 
 @Entity
 public class Project {
-
-    private static final String VERSION_PLACEHOLDER = "{version}";
-    private static final String VERSION_PATTERN = Pattern.quote(VERSION_PLACEHOLDER);
 
     @Id
     private String id;
@@ -168,21 +164,6 @@ public class Project {
                 '}';
     }
 
-    public void normalizeProjectReleases(String groupId) {
-        for (ProjectRelease release : getProjectReleases()) {
-            if (groupId != null) {
-                release.setGroupId(groupId);
-            }
-            String version = release.getVersion();
-            release.setApiDocUrl(release.getApiDocUrl().replaceAll(VERSION_PATTERN, version));
-            release.setRefDocUrl(release.getRefDocUrl().replaceAll(VERSION_PATTERN, version));
-        }
-    }
-
-    public void normalizeProjectReleases() {
-        normalizeProjectReleases(null);
-    }
-
     public boolean updateProjectRelease(ProjectRelease release) {
         boolean found = false;
         List<ProjectRelease> releases = getProjectReleases();
@@ -200,7 +181,7 @@ public class Project {
         if (!found) {
             releases.add(release);
         }
-        normalizeProjectReleases();
+        release.replaceVersionPattern();
         return found;
     }
 
