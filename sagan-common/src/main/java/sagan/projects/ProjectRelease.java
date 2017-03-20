@@ -17,6 +17,8 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 
     private static final Pattern PRERELEASE_PATTERN = Pattern.compile("[A-Za-z0-9\\.\\-]+?(M|RC)\\d+");
     private static final String SNAPSHOT_SUFFIX = "SNAPSHOT";
+    private static final String VERSION_PLACEHOLDER = "{version}";
+    private static final String VERSION_PATTERN = Pattern.quote(VERSION_PLACEHOLDER);
 
     public enum ReleaseStatus {
         SNAPSHOT, PRERELEASE, GENERAL_AVAILABILITY;
@@ -161,6 +163,21 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
 
     public void setRepository(ProjectRepository repository) {
         this.repository = repository;
+    }
+
+    public void replaceVersionPattern() {
+        String version = getVersion();
+        setApiDocUrl(getApiDocUrl().replaceAll(VERSION_PATTERN, version));
+        setRefDocUrl(getRefDocUrl().replaceAll(VERSION_PATTERN, version));
+    }
+
+    public ProjectRelease createWithVersionPattern() {
+        String version = getVersion();
+        ProjectRelease release = new ProjectRelease(version, releaseStatus, isCurrent, refDocUrl, apiDocUrl, groupId,
+                artifactId);
+        release.setApiDocUrl(getApiDocUrl().replaceAll(version, VERSION_PLACEHOLDER));
+        release.setRefDocUrl(getRefDocUrl().replaceAll(version, VERSION_PLACEHOLDER));
+        return release;
     }
 
     @Override

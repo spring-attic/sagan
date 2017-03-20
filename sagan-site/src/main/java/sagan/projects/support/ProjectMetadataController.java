@@ -5,6 +5,7 @@ import sagan.projects.ProjectRelease;
 import sagan.support.JsonPController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,8 @@ class ProjectMetadataController {
 
     @RequestMapping(value = "/{projectId}", method = { GET, HEAD })
     public Project projectMetadata(@PathVariable("projectId") String projectId) throws IOException {
-        return service.getProject(projectId);
+        Project project = service.getProject(projectId);
+        return project;
     }
 
     @RequestMapping(value = "/{projectId}/releases/{version:.*}", method = GET)
@@ -50,7 +52,7 @@ class ProjectMetadataController {
         if (release == null) {
             throw new MetadataNotFoundException("Could not find " + version + " for " + projectId);
         }
-        return release;
+        return release.createWithVersionPattern();
     }
 
     @RequestMapping(value = "/{projectId}/releases", method = GET)
@@ -59,7 +61,11 @@ class ProjectMetadataController {
         if (project == null) {
             throw new MetadataNotFoundException("Cannot find project " + projectId);
         }
-        return project.getProjectReleases();
+        List<ProjectRelease> releases = new ArrayList<>();
+        for (ProjectRelease release : project.getProjectReleases()) {
+            releases.add(release.createWithVersionPattern());
+        }
+        return releases;
     }
 
     @RequestMapping(value = "/{projectId}/releases", method = PUT)
@@ -67,8 +73,10 @@ class ProjectMetadataController {
                                          @RequestBody List<ProjectRelease> releases)
             throws IOException {
         Project project = service.getProject(projectId);
+        for (ProjectRelease release : releases) {
+            release.replaceVersionPattern();
+        }
         project.setProjectReleases(releases);
-        project.normalizeProjectReleases();
         service.save(project);
         return project;
     }
