@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static junit.framework.TestCase.fail;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -54,7 +54,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
     }
 
     @Test
-    public void projectMetadata_WithSnapshot() throws Exception {
+    public void projectMetadata_withSnapshot() throws Exception {
         List<Object> releases = getAndCheckProjectReleases("spring-security-kerberos", "Spring Security Kerberos");
 
         checkSnapshot(releases);
@@ -63,14 +63,17 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
     @Test
     public void projectMetadata_addRelease() throws Exception {
         ProjectRelease release = new ProjectRelease("1.2.3.BUILD-SNAPSHOT", ReleaseStatus.SNAPSHOT, false,
-                "http://example.com", "http://example.com/api", "org.springframework", "spring-core");
+                "http://example.com/{version}", "http://example.com/api/{version}", "org.springframework",
+                "spring-core");
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .post("/project_metadata/spring-framework").content(mapper.writeValueAsString(release))
+                                .post("/project_metadata/spring-framework/releases").content(mapper.writeValueAsString(
+                                        release))
                                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("application/json"));
+                .andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andExpect(content().string(containsString("http://example.com/1.2.3.BUILD-SNAPSHOT")));
     }
 
     @Test
@@ -79,8 +82,23 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .get("/project_metadata/spring-framework/" + project.getProjectReleases().iterator()
+                                .get("/project_metadata/spring-framework/releases/" + project.getProjectReleases()
+                                        .iterator()
                                         .next().getVersion()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/json"));
+    }
+
+    @Test
+    public void projectMetadata_updateProject() throws Exception {
+        Project project = service.getProject("spring-framework");
+        project.getProjectReleases().iterator().next().setVersion("1.2.8.RELEASE");
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .put("/project_metadata/spring-framework/releases").content(mapper.writeValueAsString(
+                                        project.getProjectReleases()))
+                                .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("application/json"));
     }
@@ -90,7 +108,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .get("/project_metadata/spring-framework/FOO"))
+                                .get("/project_metadata/spring-framework/releases/FOO"))
                 .andExpect(status().isNotFound());
     }
 
@@ -100,7 +118,8 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .delete("/project_metadata/spring-framework/" + project.getProjectReleases().iterator()
+                                .delete("/project_metadata/spring-framework/releases/" + project.getProjectReleases()
+                                        .iterator()
                                         .next().getVersion()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("application/json"));

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -40,74 +39,67 @@ class ProjectMetadataController {
         return service.getProject(projectId);
     }
 
-    @RequestMapping(value = "/{projectId}/**", method = GET)
-    public ProjectRelease releaseMetadata(@PathVariable("projectId") String projectId) throws IOException {
+    @RequestMapping(value = "/{projectId}/releases/{version:.*}", method = GET)
+    public ProjectRelease releaseMetadata(@PathVariable("projectId") String projectId,
+                                          @PathVariable("version") String version) throws IOException {
         Project project = service.getProject(projectId);
         if (project == null) {
             throw new MetadataNotFoundException("Cannot find project " + projectId);
         }
-        List<ProjectRelease> releases = project.getProjectReleases();
-        String path = ServletUriComponentsBuilder.fromCurrentRequest().build().getPath();
-        String version = path.substring(("/project_metadata/" + projectId + "/").length());
-        for (ProjectRelease release : releases) {
-            if (release.getVersion().equals(version)) {
-                return release;
-            }
+        ProjectRelease release = project.getProjectRelease(version);
+        if (release == null) {
+            throw new MetadataNotFoundException("Could not find " + version + " for " + projectId);
         }
-        throw new MetadataNotFoundException("Could not find " + version + " for " + projectId);
+        return release;
     }
 
-    @RequestMapping(value = "/{projectId}", method = POST)
+    @RequestMapping(value = "/{projectId}/releases", method = GET)
+    public List<ProjectRelease> releaseMetadata(@PathVariable("projectId") String projectId) throws IOException {
+        Project project = service.getProject(projectId);
+        if (project == null) {
+            throw new MetadataNotFoundException("Cannot find project " + projectId);
+        }
+        return project.getProjectReleases();
+    }
+
+    @RequestMapping(value = "/{projectId}/releases", method = PUT)
+    public Project updateProjectMetadata(@PathVariable("projectId") String projectId,
+                                         @RequestBody List<ProjectRelease> releases)
+            throws IOException {
+        Project project = service.getProject(projectId);
+        project.setProjectReleases(releases);
+        project.normalizeProjectReleases();
+        service.save(project);
+        return project;
+    }
+
+    @RequestMapping(value = "/{projectId}/releases", method = POST)
     public ProjectRelease updateReleaseMetadata(@PathVariable("projectId") String projectId,
                                                 @RequestBody ProjectRelease release) throws IOException {
         Project project = service.getProject(projectId);
         if (project == null) {
             throw new MetadataNotFoundException("Cannot find project " + projectId);
         }
-        List<ProjectRelease> releases = service.getProject(projectId).getProjectReleases();
-        boolean found = false;
-        for (int i = 0; i < releases.size(); i++) {
-            ProjectRelease projectRelease = releases.get(i);
-            if (release.getRepository() != null && release.getRepository().equals(projectRelease.getRepository())) {
-                release.setRepository(projectRelease.getRepository());
-            }
-            if (projectRelease.getVersion().equals(release)) {
-                releases.set(i, release);
-                found = true;
-                break;
-            }
+        boolean found = project.updateProjectRelease(release);
+        if (found) {
+            service.save(project);
         }
-        if (!found) {
-            releases.add(release);
-        }
-        service.save(project);
         return release;
     }
 
-    @RequestMapping(value = "/{projectId}/**", method = DELETE)
-    public ProjectRelease removeReleaseMetadata(@PathVariable("projectId") String projectId) throws IOException {
+    @RequestMapping(value = "/{projectId}/releases/{version:.*}", method = DELETE)
+    public ProjectRelease removeReleaseMetadata(@PathVariable("projectId") String projectId,
+                                                @PathVariable("version") String version) throws IOException {
         Project project = service.getProject(projectId);
         if (project == null) {
             throw new MetadataNotFoundException("Cannot find project " + projectId);
         }
-        List<ProjectRelease> releases = project.getProjectReleases();
-        String path = ServletUriComponentsBuilder.fromCurrentRequest().build().getPath();
-        String version = path.substring(("/project_metadata/" + projectId + "/").length());
-        boolean found = false;
-        ProjectRelease release = null;
-        for (int i = 0; i < releases.size(); i++) {
-            ProjectRelease projectRelease = releases.get(i);
-            if (projectRelease.getVersion().equals(version)) {
-                release = releases.remove(i);
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
+        ProjectRelease found = project.removeProjectRelease(version);
+        if (found == null) {
             throw new MetadataNotFoundException("Could not find " + version + " for " + projectId);
         }
         service.save(project);
-        return release;
+        return found;
     }
 
     @ExceptionHandler(MetadataNotFoundException.class)
