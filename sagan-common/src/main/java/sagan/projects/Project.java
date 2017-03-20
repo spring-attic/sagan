@@ -1,17 +1,21 @@
 package sagan.projects;
 
-import org.springframework.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.util.StringUtils;
+
 @Entity
 public class Project {
+
+    private static final String VERSION_PLACEHOLDER = "{version}";
+    private static final String VERSION_PATTERN = Pattern.quote(VERSION_PLACEHOLDER);
 
     @Id
     private String id;
@@ -24,7 +28,6 @@ public class Project {
     private List<ProjectRelease> releaseList = new ArrayList<>();
     private boolean isAggregator;
     private String stackOverflowTags;
-
 
     @SuppressWarnings("unused")
     private Project() {
@@ -125,7 +128,7 @@ public class Project {
     }
 
     public void setStackOverflowTags(String stackOverflowTags) {
-        this.stackOverflowTags = stackOverflowTags.replaceAll(" ","");
+        this.stackOverflowTags = stackOverflowTags.replaceAll(" ", "");
     }
 
     public Set<String> getStackOverflowTagList() {
@@ -164,4 +167,64 @@ public class Project {
                 ", stackOverflowTags=" + stackOverflowTags +
                 '}';
     }
+
+    public void normalizeProjectReleases(String groupId) {
+        for (ProjectRelease release : getProjectReleases()) {
+            if (groupId != null) {
+                release.setGroupId(groupId);
+            }
+            String version = release.getVersion();
+            release.setApiDocUrl(release.getApiDocUrl().replaceAll(VERSION_PATTERN, version));
+            release.setRefDocUrl(release.getRefDocUrl().replaceAll(VERSION_PATTERN, version));
+        }
+    }
+
+    public void normalizeProjectReleases() {
+        normalizeProjectReleases(null);
+    }
+
+    public boolean updateProjectRelease(ProjectRelease release) {
+        boolean found = false;
+        List<ProjectRelease> releases = getProjectReleases();
+        for (int i = 0; i < releases.size(); i++) {
+            ProjectRelease projectRelease = releases.get(i);
+            if (release.getRepository() != null && release.getRepository().equals(projectRelease.getRepository())) {
+                release.setRepository(projectRelease.getRepository());
+            }
+            if (projectRelease.getVersion().equals(release)) {
+                releases.set(i, release);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            releases.add(release);
+        }
+        normalizeProjectReleases();
+        return found;
+    }
+
+    public ProjectRelease removeProjectRelease(String version) {
+        List<ProjectRelease> releases = getProjectReleases();
+        ProjectRelease release = null;
+        for (int i = 0; i < releases.size(); i++) {
+            ProjectRelease projectRelease = releases.get(i);
+            if (projectRelease.getVersion().equals(version)) {
+                release = releases.remove(i);
+                return release;
+            }
+        }
+        return null;
+    }
+
+    public ProjectRelease getProjectRelease(String version) {
+        List<ProjectRelease> releases = getProjectReleases();
+        for (ProjectRelease release : releases) {
+            if (release.getVersion().equals(version)) {
+                return release;
+            }
+        }
+        return null;
+    }
+
 }
