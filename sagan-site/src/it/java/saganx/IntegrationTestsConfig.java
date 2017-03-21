@@ -1,6 +1,5 @@
 package saganx;
 
-import sagan.SiteApplication;
 import sagan.support.github.StubGithubRestClient;
 
 import javax.servlet.Filter;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.boot.test.autoconfigure.web.servlet.MockMvcBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,7 +16,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static sagan.support.SecurityRequestPostProcessors.*;
 
 @Configuration
-@Import(SiteApplication.class)
 class IntegrationTestsConfig {
 
     @Primary
