@@ -38,8 +38,7 @@ dependencies {
     compile 'org.xmlbeam:xmlprojector:1.4.8'
 
     // for use in mocking http interactions
-    testCompile "org.springframework:spring-test"
-    testCompile "org.springframework.boot:spring-boot-test"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
 
     // pick up common test utility classes
     testCompile project(':sagan-common').sourceSets.testUtil.output
