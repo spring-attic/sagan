@@ -1,4 +1,4 @@
-package saganx;
+package sagan.search.support;
 
 import sagan.search.support.SearchService;
 

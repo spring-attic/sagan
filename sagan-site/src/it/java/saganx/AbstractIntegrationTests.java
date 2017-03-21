@@ -26,7 +26,7 @@ import static sagan.support.SecurityRequestPostProcessors.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
-@ContextConfiguration(classes = { IntegrationTestsConfig.class, InMemoryElasticSearchConfig.class })
+@ContextConfiguration(classes = { IntegrationTestsConfig.class })
 @Transactional
 @ActiveProfiles(profiles = { SaganProfiles.STANDALONE })
 public abstract class AbstractIntegrationTests {
