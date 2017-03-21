@@ -80,9 +80,11 @@ public final class SecurityRequestPostProcessors {
          */
         @Override
         public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
-            CsrfToken token = repository.generateToken(request);
-            repository.saveToken(token, request, new MockHttpServletResponse());
-            request.setParameter(token.getParameterName(), token.getToken());
+            if (!request.getRequestURI().startsWith("/project_metadata")) {
+                CsrfToken token = repository.generateToken(request);
+                repository.saveToken(token, request, new MockHttpServletResponse());
+                request.setParameter(token.getParameterName(), token.getToken());
+            }
             return request;
         }
     }
@@ -123,6 +125,7 @@ public final class SecurityRequestPostProcessors {
             this.securityContext = securityContext;
         }
 
+        @Override
         public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
             save(securityContext, request);
             return request;
@@ -188,6 +191,7 @@ public final class SecurityRequestPostProcessors {
             return this;
         }
 
+        @Override
         public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(username, credentials, authorities);
@@ -220,6 +224,7 @@ public final class SecurityRequestPostProcessors {
             return this;
         }
 
+        @Override
         public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
             UsernamePasswordAuthenticationToken authentication = authentication(request.getServletContext());
             save(authentication, request);

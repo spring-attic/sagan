@@ -1,10 +1,24 @@
 plugins {
+	id "org.asciidoctor.convert" version "1.5.3"
     id "com.gorylenko.gradle-git-properties" version "1.4.6"
 }
 
 springBoot {
     mainClass = 'sagan.SiteApplication'
     requiresUnpack = ['org.jruby:jruby-complete', 'org.asciidoctor:asciidoctorj']
+}
+
+asciidoctor {
+    attributes \
+      'snippets': file('build/snippets')
+	dependsOn integTest
+}
+
+jar {
+	dependsOn asciidoctor
+	from ("${asciidoctor.outputDir}/html5") {
+		into 'static/docs'
+	}
 }
 
 dependencies {
@@ -38,6 +52,7 @@ dependencies {
     compile 'org.xmlbeam:xmlprojector:1.4.8'
 
     // for use in mocking http interactions
+    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
     testCompile "org.springframework.boot:spring-boot-starter-test"
 
     // pick up common test utility classes
