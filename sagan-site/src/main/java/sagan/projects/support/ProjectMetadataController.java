@@ -74,9 +74,8 @@ class ProjectMetadataController {
             throws IOException {
         Project project = service.getProject(projectId);
         for (ProjectRelease release : releases) {
-            release.replaceVersionPattern();
+            project.updateProjectRelease(release);
         }
-        project.setProjectReleases(releases);
         service.save(project);
         return project;
     }

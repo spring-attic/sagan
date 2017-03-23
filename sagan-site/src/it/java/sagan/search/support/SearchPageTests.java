@@ -1,20 +1,25 @@
 package sagan.search.support;
 
+import sagan.search.types.SearchEntry;
+
+import java.util.Calendar;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MvcResult;
-import sagan.search.types.SearchEntry;
-import saganx.AbstractIntegrationTests;
 
-import java.util.Calendar;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.web.servlet.MvcResult;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
+import saganx.AbstractIntegrationTests;
+
+@ContextConfiguration(classes = InMemoryElasticSearchConfig.class)
 public class SearchPageTests extends AbstractIntegrationTests {
 
     @Autowired

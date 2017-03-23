@@ -1,10 +1,13 @@
 package sagan.search.support;
 
 import sagan.search.types.SearchEntry;
-import saganx.AbstractIntegrationTests;
 
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.ContextConfiguration;
 
 import io.searchbox.client.JestClient;
 
@@ -21,6 +25,9 @@ import static java.util.stream.Collectors.toList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+import saganx.AbstractIntegrationTests;
+
+@ContextConfiguration(classes = InMemoryElasticSearchConfig.class)
 public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
 
     private final Pageable pageable = new PageRequest(0, 10);

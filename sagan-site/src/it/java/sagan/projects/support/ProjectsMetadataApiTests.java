@@ -4,6 +4,8 @@ import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.ProjectRelease.ReleaseStatus;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -13,7 +15,9 @@ import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -23,10 +27,13 @@ import static junit.framework.TestCase.fail;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import saganx.AbstractIntegrationTests;
 
+@AutoConfigureRestDocs(outputDir = "build/snippets")
 public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
 
     @Autowired
@@ -35,6 +42,23 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
     @Autowired
     private ObjectMapper mapper;
 
+    private RestDocumentationResultHandler docs(String name) {
+        return document(name,
+                preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint()));
+    }
+
+    @Test
+    public void projectMetadata_respondsWithData() throws Exception {
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .get("/project_metadata/spring-framework"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andDo(docs("project"));
+    }
+
     @Test
     public void projectMetadata_respondsWithJavascript() throws Exception {
         mockMvc
@@ -42,7 +66,8 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
                         MockMvcRequestBuilders
                                 .get("/project_metadata/spring-framework?callback=a_function_name"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("application/javascript"));
+                .andExpect(content().contentTypeCompatibleWith("application/javascript"))
+                .andDo(docs("callback"));
     }
 
     @Test
@@ -69,11 +94,30 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
                 .perform(
                         MockMvcRequestBuilders
                                 .post("/project_metadata/spring-framework/releases").content(mapper.writeValueAsString(
-                                        release))
+                                        getRelease(release)))
                                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("application/json"))
-                .andExpect(content().string(containsString("http://example.com/1.2.3.BUILD-SNAPSHOT")));
+                .andExpect(content().string(containsString("http://example.com/1.2.3.BUILD-SNAPSHOT")))
+                .andDo(docs("add_release"));
+    }
+
+    @Test
+    public void projectMetadata_updateRelease() throws Exception {
+        Project project = service.getProject("spring-framework");
+        ProjectRelease release = project.getProjectReleases().iterator().next().createWithVersionPattern();
+        release.setVersion("1.2.3.RELEASE");
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .post("/project_metadata/spring-framework/releases").content(mapper.writeValueAsString(
+                                        getRelease(release)))
+                                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andExpect(content().string(containsString("/spring/docs/1.2.3.RELEASE")))
+                .andExpect(content().string(not(containsString("null"))))
+                .andDo(docs("add_release"));
     }
 
     @Test
@@ -86,21 +130,47 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
                                         .iterator()
                                         .next().getVersion()))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("application/json"));
+                .andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andDo(docs("get_release"));
     }
 
     @Test
     public void projectMetadata_updateProject() throws Exception {
         Project project = service.getProject("spring-framework");
+        List<Map<String, Object>> releases = new ArrayList<>();
+        for (ProjectRelease release : project.getProjectReleases()) {
+            release = release.createWithVersionPattern();
+            Map<String, Object> map = getRelease(release);
+            releases.add(map);
+        }
         project.getProjectReleases().iterator().next().setVersion("1.2.8.RELEASE");
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
                                 .put("/project_metadata/spring-framework/releases").content(mapper.writeValueAsString(
-                                        project.getProjectReleases()))
+                                        releases))
                                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("application/json"));
+                .andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andDo(docs("update_project"));
+    }
+
+    private Map<String, Object> getRelease(ProjectRelease release) {
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("groupId", release.getGroupId());
+        map.put("artifactId", release.getArtifactId());
+        map.put("version", release.getVersion());
+        map.put("releaseStatus", release.getReleaseStatus());
+        if (release.isCurrent()) {
+            map.put("current", true);
+        }
+        map.put("refDocUrl", release.getRefDocUrl());
+        map.put("apiDocUrl", release.getApiDocUrl());
+        if (release.getRepository() != null) {
+            map.put("repository", release.getRepository());
+        }
+
+        return map;
     }
 
     @Test
@@ -122,7 +192,8 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
                                         .iterator()
                                         .next().getVersion()))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("application/json"));
+                .andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andDo(docs("delete_release"));
     }
 
     public List<Object> getAndCheckProjectReleases(String projectId, String expectedProjectName) throws Exception {

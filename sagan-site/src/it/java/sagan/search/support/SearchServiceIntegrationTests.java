@@ -1,7 +1,6 @@
 package sagan.search.support;
 
 import sagan.search.types.SearchEntry;
-import saganx.AbstractIntegrationTests;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -17,12 +16,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.ContextConfiguration;
 
 import io.searchbox.client.JestClient;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+import saganx.AbstractIntegrationTests;
+
+@ContextConfiguration(classes = InMemoryElasticSearchConfig.class)
 public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
 
     private final Pageable pageable = new PageRequest(0, 10);
