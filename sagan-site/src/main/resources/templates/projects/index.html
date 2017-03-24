@@ -180,6 +180,14 @@
           <div class="project--title">Spring Kafka</div>
           <p class="project--description">Provides Familiar Spring Abstractions for Apache Kafka.</p>
         </a>
+        <a th:href="${project.siteUrl}" class="project--container project--container--link" th:if="${projectMetadata.getProject('spring-statemachine')}"
+           th:with="project=${projectMetadata.getProject('spring-statemachine')}">
+          <div class="project-logo--container">
+            <div class="icon project--logo logo-spring-statemachine"></div>
+          </div>
+          <div class="project--title">Spring Statemachine</div>
+          <p class="project--description">A framework for application developers to use state machine concepts with Spring applications.</p>
+        </a>
       </section>
       <h2 class="index-page--title">Community Projects</h2>
       <section class="projects--wrapper project-aggregator top-separator">
