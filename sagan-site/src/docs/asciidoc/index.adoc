@@ -13,6 +13,8 @@ Dave Syer;
 [[resources-project]]
 === Accessing Project Metadata
 
+This resource is unprotected and open to all clients. It is used by the https://start.spring.io[Spring Initializr] as well as by the individual https://projects.spring.io[project pages] to list their available releases and create documentation links.
+
 A `GET` request will list all of the projects's metadata, including releases. The resource path ends with the project id (e.g. "spring-framework"):
 
 include::{snippets}/project/http-request.adoc[]
@@ -25,12 +27,10 @@ include::{snippets}/callback/http-request.adoc[]
 
 include::{snippets}/callback/http-response.adoc[]
 
-This resource is unprotected and open to all clients. It is used by the https://start.spring.io[Spring Initializr] as well as by the individual https://projects.spring.io[project pages] to list their available releases and create documentation links.
-
 [[resources-project-releases]]
 === Project Releases
 
-This resource is protected by HTTP Basic authentication. The username is a Github API token and the password is empty (just like Github API access). Access is denied is the key does not belong to one of the Spring developer team.
+This resource is protected by HTTP Basic authentication. The username is a Github API token and the password is empty (just like Github API access). Access is denied if the key does not belong to one of the Spring developer team in Github.
 
 The releases of each project can be accessed and manipulated independently of the top-level metadata.
 
