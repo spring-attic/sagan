@@ -106,6 +106,35 @@
   text-transform: uppercase;
 }
 
+/* Spring Days */
+
+.homepage--body .hero--banner .springdays {
+  padding: 60px;
+  background: url("../img/home-banner-springdays.png") #34302d no-repeat;
+  background-size: cover;
+  text-align: center;
+}
+
+.homepage--body .hero--banner .springdays .banner--text p {
+  color: #2f3093;
+  font-size: 1.2em;
+  font-weight:bold;
+}
+
+.homepage--body .hero--banner .springdays .banner--text h2 {
+  font-family: "Montserrat", sans-serif;
+  color: #f1f1f1;
+  font-size: 25px;
+  font-weight: normal;
+  line-height: 30px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.homepage--body .hero--banner .springdays .banner--link {
+  color: #f1f1f1;
+}
+
 /* Spring Cloud Services banner */
 
 .homepage--body .hero--banner .springcloud-services {
@@ -128,15 +157,6 @@
   margin-bottom: 20px;
   max-width: 430px;
   text-transform: uppercase;
-}
-
-/* Spring Boot JAX winner */
-
-.homepage--body .hero--banner .springboot-jax a {
-  height: 278px;
-  background: url("../img/springboot-jax-banner.jpg") #34302d no-repeat 50% 50%;
-  background-size: cover;
-  display: block;
 }
 
 /* Pivotal Web Services */
