@@ -67,6 +67,13 @@ configure(javaProjects) {
         all*.exclude group: 'log4j', module: 'log4j'
     }
 
+    configurations {
+        // replaced with jcl-over-slf4j
+        all*.exclude group: 'commons-logging', module: 'commons-logging'
+        // replaced with log4j-over-slf4j
+        all*.exclude group: 'log4j', module: 'log4j'
+    }
+
     // Ensure that all Gradle-compiled classes are available to Eclipse's
     // classpath.
     eclipseClasspath.dependsOn testClasses
