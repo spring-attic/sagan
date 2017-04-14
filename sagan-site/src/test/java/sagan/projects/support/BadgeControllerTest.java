@@ -122,14 +122,14 @@ public class BadgeControllerTest {
     }
 
     @Test
-    public void projecWithTwoReleasesUsingSymbolicNamesWithNumbersWithoutCurrentFlagPicksFirstRelease() throws Exception {
+    public void projecWithTwoReleasesUsingSymbolicNamesWithNumbersWithoutCurrentFlagPicksMostRecentRelease() throws Exception {
 
         releases.add(new ProjectRelease("Angel-SR6", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
         releases.add(new ProjectRelease("Brixton-SR2", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
-        assertThat(content, containsString("Angel-SR6"));
+        assertThat(content, containsString("Brixton-SR2"));
     }
 
     @Test
@@ -140,7 +140,7 @@ public class BadgeControllerTest {
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
-        assertThat(content, containsString("Angel-SR6"));
+        assertThat(content, containsString("Brixton-RELEASE"));
     }
 
     @Test

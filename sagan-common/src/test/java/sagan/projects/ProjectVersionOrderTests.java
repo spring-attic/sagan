@@ -37,13 +37,19 @@ public class ProjectVersionOrderTests {
     @Test
     public void getProjectReleases_ordersVersionsByNumber_milestonesWithVersions() throws Exception {
         Project project = getProject("0.1 M1", "0.1", "0.1 M2");
-        assertThat(getProjectReleases(project), equalTo(asList("0.1 M2", "0.1 M1", "0.1")));
+        assertThat(getProjectReleases(project), equalTo(asList("0.1", "0.1 M2", "0.1 M1")));
+    }
+
+    @Test
+    public void getProjectReleases_ordersReleaseTrainsByName() throws Exception {
+        Project project = getProject("Brixton.SR7", "Camden.RELEASE", "Camden.SR5", "Camden.SR6", "Dalston.RELEASE");
+        assertThat(getProjectReleases(project), equalTo(asList("Dalston.RELEASE", "Camden.RELEASE", "Camden.SR6", "Camden.SR5", "Brixton.SR7")));
     }
 
     @Test
     public void getProjectReleases_ordersVersionsByNumber_otherCharacters() throws Exception {
         Project project = getProject("Gosling-RC9", "Angel.RC10", "Gosling-RC10", "Angel.RC9");
-        assertThat(getProjectReleases(project), equalTo(asList("Angel.RC10", "Gosling-RC10", "Angel.RC9", "Gosling-RC9")));
+        assertThat(getProjectReleases(project), equalTo(asList( "Gosling-RC10", "Gosling-RC9", "Angel.RC10", "Angel.RC9")));
     }
 
     private Project getProject(String... projectReleaseStrings) {
