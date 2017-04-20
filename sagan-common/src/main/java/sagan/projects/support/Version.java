@@ -39,8 +39,9 @@ public class Version {
      * Adapted from Gradle's VersionParser
      */
     public static Version build(String raw) {
-        if(raw == null)
+        if (raw == null) {
             return null;
+        }
 
         List<String> parts = new ArrayList<String>();
         boolean digit = false;
