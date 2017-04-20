@@ -1,21 +1,17 @@
 package sagan.projects;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.google.common.collect.ImmutableMap;
+import org.springframework.util.Assert;
+import sagan.projects.support.Version;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
-
-import com.google.common.collect.ImmutableMap;
-import org.springframework.util.Assert;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import sagan.projects.support.Version;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 @Embeddable
 @JsonInclude(Include.NON_NULL)
@@ -187,42 +183,37 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         return release;
     }
 
-    private static final Map<String, Integer> SPECIAL_MEANINGS =
-            ImmutableMap.of("dev", -1, "rc", 1, "release", 2, "final", 3);
-
     /**
      * Adapted from Gradle's StaticVersionComparator
      */
     @Override
     public int compareTo(ProjectRelease other) {
-        if(other == null) return -1;
+        if (other == null) return -1;
 
-        Version version1 = Version.build(getVersion());
-        Version version2 = Version.build(other.getVersion());
+        Version thisVersion = Version.build(getVersion());
+        Version otherVersion = Version.build(other.getVersion());
 
-        if(version1 == null && version2 == null) {
+        if (thisVersion == null && otherVersion == null) {
             return 0;
-        }
-        else if(version1 == null) {
+        } else if (thisVersion == null) {
             return -1;
-        }
-        else if(version2 == null) {
+        } else if (otherVersion == null) {
             return 1;
         }
-        if (version1.equals(version2)) {
+        if (thisVersion.equals(otherVersion)) {
             return 0;
         }
 
-        String[] parts1 = version1.getParts();
-        String[] parts2 = version2.getParts();
+        String[] theseParts = thisVersion.getParts();
+        String[] otherParts = otherVersion.getParts();
 
         int i = 0;
-        for (; i < parts1.length && i < parts2.length; i++) {
-            if (parts1[i].equals(parts2[i])) {
+        for (; i < theseParts.length && i < otherParts.length; i++) {
+            if (theseParts[i].equals(otherParts[i])) {
                 continue;
             }
-            boolean is1Number = isNumber(parts1[i]);
-            boolean is2Number = isNumber(parts2[i]);
+            boolean is1Number = isNumber(theseParts[i]);
+            boolean is2Number = isNumber(otherParts[i]);
             if (is1Number && !is2Number) {
                 return 1;
             }
@@ -230,25 +221,17 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
                 return -1;
             }
             if (is1Number) {
-                return Long.valueOf(parts1[i]).compareTo(Long.valueOf(parts2[i]));
+                return Long.valueOf(theseParts[i]).compareTo(Long.valueOf(otherParts[i]));
             }
-            // both are strings, we compare them taking into account special meaning
-            Integer sm1 = SPECIAL_MEANINGS.get(parts1[i].toLowerCase());
-            Integer sm2 = SPECIAL_MEANINGS.get(parts2[i].toLowerCase());
-            if (sm1 != null) {
-                sm2 = sm2 == null ? 0 : sm2;
-                return sm1 - sm2;
-            }
-            if (sm2 != null) {
-                return -sm2;
-            }
-            return parts1[i].compareTo(parts2[i]);
+
+            // both are strings, we compare them lexicographically
+            return theseParts[i].compareTo(otherParts[i]);
         }
-        if (i < parts1.length) {
-            return isNumber(parts1[i]) ? 1 : -1;
+        if (i < theseParts.length) {
+            return isNumber(theseParts[i]) ? 1 : -1;
         }
-        if (i < parts2.length) {
-            return isNumber(parts2[i]) ? -1 : 1;
+        if (i < otherParts.length) {
+            return isNumber(otherParts[i]) ? -1 : 1;
         }
 
         return 0;
