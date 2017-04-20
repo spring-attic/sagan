@@ -1,6 +1,7 @@
 package sagan.projects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -90,16 +91,11 @@ public class Project {
         return id;
     }
 
+    /**
+     * @return The list of releases sorted in descending order by version
+     */
     public List<ProjectRelease> getProjectReleases() {
-        releaseList.sort((release1, release2) -> {
-            if (release1.getVersion() == null || release2.getVersion() == null) {
-                return 0;
-            }
-
-            return release1.getVersion().compareTo(release2.getVersion());
-        });
-        releaseList.sort(ProjectRelease::compareTo);
-
+        releaseList.sort(Collections.reverseOrder(ProjectRelease::compareTo));
         return releaseList;
     }
 

@@ -1,17 +1,17 @@
 package sagan.projects;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.google.common.collect.ImmutableMap;
+import org.springframework.util.Assert;
+import sagan.projects.support.Version;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
-
-import org.springframework.util.Assert;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 @Embeddable
 @JsonInclude(Include.NON_NULL)
@@ -183,44 +183,62 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         return release;
     }
 
+    /**
+     * Adapted from Gradle's StaticVersionComparator
+     */
     @Override
     public int compareTo(ProjectRelease other) {
-        if (this.getVersion() == null || other.getVersion() == null) {
+        if (other == null) return -1;
+
+        Version thisVersion = Version.build(getVersion());
+        Version otherVersion = Version.build(other.getVersion());
+
+        if (thisVersion == null && otherVersion == null) {
+            return 0;
+        } else if (thisVersion == null) {
+            return -1;
+        } else if (otherVersion == null) {
+            return 1;
+        }
+        if (thisVersion.equals(otherVersion)) {
             return 0;
         }
 
-        Pattern pattern = Pattern.compile("([0-9]+)");
+        String[] theseParts = thisVersion.getParts();
+        String[] otherParts = otherVersion.getParts();
 
-        Matcher thisMatcher = pattern.matcher(this.getVersion());
-        Matcher otherMatcher = pattern.matcher(other.getVersion());
-
-        int versionDiff = 0;
-
-        boolean thisFind = thisMatcher.find();
-        boolean otherFind = otherMatcher.find();
-
-        while (thisFind && otherFind) {
-            int thisFoundVersion = Integer.parseInt(thisMatcher.group(0));
-            int otherFoundVersion = Integer.parseInt(otherMatcher.group(0));
-            versionDiff = otherFoundVersion - thisFoundVersion;
-
-            if (versionDiff != 0) {
-                return versionDiff;
+        int i = 0;
+        for (; i < theseParts.length && i < otherParts.length; i++) {
+            if (theseParts[i].equals(otherParts[i])) {
+                continue;
+            }
+            boolean is1Number = isNumber(theseParts[i]);
+            boolean is2Number = isNumber(otherParts[i]);
+            if (is1Number && !is2Number) {
+                return 1;
+            }
+            if (is2Number && !is1Number) {
+                return -1;
+            }
+            if (is1Number) {
+                return Long.valueOf(theseParts[i]).compareTo(Long.valueOf(otherParts[i]));
             }
 
-            thisFind = thisMatcher.find();
-            otherFind = otherMatcher.find();
+            // both are strings, we compare them lexicographically
+            return theseParts[i].compareTo(otherParts[i]);
+        }
+        if (i < theseParts.length) {
+            return isNumber(theseParts[i]) ? 1 : -1;
+        }
+        if (i < otherParts.length) {
+            return isNumber(otherParts[i]) ? -1 : 1;
         }
 
-        if (thisFind) {
-            return -1;
-        }
+        return 0;
+    }
 
-        if (otherFind) {
-            return 1;
-        }
-
-        return versionDiff;
+    private boolean isNumber(String str) {
+        return str.matches("\\d+");
     }
 
     @Override
