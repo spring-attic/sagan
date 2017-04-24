@@ -161,14 +161,14 @@
 
 /* Pivotal Web Services */
 .homepage--body .hero--banner .pws {
-  padding: 60px;
+  padding: 3em;
   background: url("../img/home-banner-pws.png") #34302d no-repeat;
   background-size: cover;
 }
 
 .homepage--body .hero--banner .pws .banner--text {
   margin-left: 32%;
-  margin-top: 57px;
+  margin-top: 5em;
 }
 
 .homepage--body .hero--banner .pws .banner--text h2 {
@@ -178,7 +178,7 @@
   font-weight: normal;
   line-height: 30px;
   margin-bottom: 20px;
-  max-width: 430px;
+  max-width: 18em;
   text-transform: uppercase;
 }
 
