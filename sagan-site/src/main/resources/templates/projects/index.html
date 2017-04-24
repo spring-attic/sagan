@@ -91,6 +91,14 @@
           <div class="project--title">Spring HATEOAS</div>
           <p class="project--description">Simplifies creating REST representations that follow the HATEOAS principle.</p>
         </a>
+        <a th:href="${project.siteUrl}" class="project--container project--container--link" th:if="${projectMetadata.getProject('spring-restdocs')}"
+           th:with="project=${projectMetadata.getProject('spring-restdocs')}">
+          <div class="project-logo--container">
+            <div class="icon project--logo logo-spring-restdocs"></div>
+          </div>
+          <div class="project--title">Spring REST Docs</div>
+          <p class="project--description">Document RESTful services by combining hand-written documentation with auto-generated snippets produced with Spring MVC Test or REST Assured.</p>
+        </a>
         <a class="project--container project--container--link"
            th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-social')}">
           <div class="project-logo--container">
