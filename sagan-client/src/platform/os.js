@@ -16,17 +16,17 @@ function type(environment) {
     environment = navigator;
   }
 
-  if (environment.appVersion.indexOf('iPhone') !== -1
-      || environment.appVersion.indexOf('iPad') !== -1) {
+  if (environment.userAgent.indexOf('iPhone') !== -1
+      || environment.userAgent.indexOf('iPad') !== -1) {
     return 'iOS';
   }
-  else if (environment.appVersion.indexOf('Win') !== -1) {
+  else if (environment.userAgent.indexOf('Win') !== -1) {
     return 'Windows';
   }
-  else if (environment.appVersion.indexOf('Mac') !== -1) {
+  else if (environment.userAgent.indexOf('Mac') !== -1) {
     return 'Mac';
   }
-  else if (environment.appVersion.indexOf('Linux') !== -1) {
+  else if (environment.userAgent.indexOf('Linux') !== -1) {
     return 'Linux';
   }
 
