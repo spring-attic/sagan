@@ -2,7 +2,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title>Admin &middot; Blog</title>
+    <title>Admin &middot; Projects</title>
 </head>
 <body>
   <div layout:fragment="header-container"></div>
@@ -16,6 +16,7 @@
 
       <div class="admin-index--title">
           <a th:href="@{/admin/projects/new}" href="edit.html">Add Project</a>
+          <a th:href="@{/admin/projects/eol}" href="eol.html">End Of Life</a>
       </div>
 
       <div class="row">

@@ -16,6 +16,13 @@
 
 package sagan.projects.support;
 
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.projects.ProjectRelease.ReleaseStatus;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,12 +31,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectRelease.ReleaseStatus;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
@@ -74,7 +75,7 @@ public class BadgeControllerTest {
     @Test
     public void badgeShouldBeGenerated() throws Exception {
 
-        releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", ""));
+        releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", "", ""));
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         assertThat(response.getStatusCode(), is(equalTo(HttpStatus.OK)));
@@ -90,8 +91,8 @@ public class BadgeControllerTest {
     @Test
     public void projecWithTwoReleasesShouldBeGenerated() throws Exception {
 
-        releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
-        releases.add(new ProjectRelease("1.1.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", ""));
+        releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", "", ""));
+        releases.add(new ProjectRelease("1.1.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", "", ""));
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
@@ -101,8 +102,8 @@ public class BadgeControllerTest {
     @Test
     public void projecWithTwoReleasesWithoutCurrentFlagPicksHighestRelease() throws Exception {
 
-        releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
-        releases.add(new ProjectRelease("1.1.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", "", ""));
+        releases.add(new ProjectRelease("1.1.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", "", ""));
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
@@ -112,8 +113,8 @@ public class BadgeControllerTest {
     @Test
     public void projecWithTwoReleasesFlagPicksCurrentRelease() throws Exception {
 
-        releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", ""));
-        releases.add(new ProjectRelease("1.1.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        releases.add(new ProjectRelease("1.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", "", ""));
+        releases.add(new ProjectRelease("1.1.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", "", ""));
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
@@ -124,8 +125,8 @@ public class BadgeControllerTest {
     public void projecWithTwoReleasesUsingSymbolicNamesWithNumbersWithoutCurrentFlagPicksMostRecentRelease()
             throws Exception {
 
-        releases.add(new ProjectRelease("Angel-SR6", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
-        releases.add(new ProjectRelease("Brixton-SR2", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        releases.add(new ProjectRelease("Angel-SR6", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", "", ""));
+        releases.add(new ProjectRelease("Brixton-SR2", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", "", ""));
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
@@ -135,8 +136,8 @@ public class BadgeControllerTest {
     @Test
     public void projecWithTwoReleasesUsingSymbolicNamesWithoutCurrentFlagPicksFirstRelease() throws Exception {
 
-        releases.add(new ProjectRelease("Angel-SR6", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
-        releases.add(new ProjectRelease("Brixton-RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
+        releases.add(new ProjectRelease("Angel-SR6", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", "", ""));
+        releases.add(new ProjectRelease("Brixton-RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", "", ""));
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
@@ -146,8 +147,8 @@ public class BadgeControllerTest {
     @Test
     public void projecWithTwoReleasesUsingSymbolicNamesFlagPicksCurrentRelease() throws Exception {
 
-        releases.add(new ProjectRelease("Angel-SR1", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", ""));
-        releases.add(new ProjectRelease("Brixton-RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", ""));
+        releases.add(new ProjectRelease("Angel-SR1", ReleaseStatus.GENERAL_AVAILABILITY, false, "", "", "", "", ""));
+        releases.add(new ProjectRelease("Brixton-RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "", "", "", "", ""));
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());

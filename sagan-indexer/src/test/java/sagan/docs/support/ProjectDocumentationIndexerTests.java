@@ -27,11 +27,11 @@ public class ProjectDocumentationIndexerTests {
 
     private List<ProjectRelease> documentationList = Arrays.asList(
             new ProjectRelease("3", GENERAL_AVAILABILITY, true, "http://reference.example.com/3",
-                    "http://api.example.com/3", "com.example", "example-framework"),
+                    "http://api.example.com/3", "com.example", "example-framework", ""),
             new ProjectRelease("2", SNAPSHOT, false, "http://reference.example.com/2", "http://api.example.com/2",
-                    "com.example", "example-framework"),
+                    "com.example", "example-framework", ""),
             new ProjectRelease("1", SNAPSHOT, false, "http://reference.example.com/1", "http://api.example.com/1",
-                    "com.example", "example-framework")
+                    "com.example", "example-framework", "")
             );
 
     private Project project = new Project("spring",

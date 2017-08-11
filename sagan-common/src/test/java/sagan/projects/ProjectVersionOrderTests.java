@@ -86,7 +86,7 @@ public class ProjectVersionOrderTests {
 
     private Project getProject(String... projectReleaseStrings) {
         List<ProjectRelease> projectReleases = asList(projectReleaseStrings).stream()
-                .map(release -> new ProjectRelease(release, null, false, "", "", "", ""))
+                .map(release -> new ProjectRelease(release, null, false, "", "", "", "", ""))
                 .collect(toList());
 
         return new Project("", "", "", "", projectReleases, false, "");

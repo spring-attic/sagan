@@ -12,7 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.junit.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -89,7 +88,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
     public void projectMetadata_addRelease() throws Exception {
         ProjectRelease release = new ProjectRelease("1.2.3.BUILD-SNAPSHOT", ReleaseStatus.SNAPSHOT, false,
                 "http://example.com/{version}", "http://example.com/api/{version}", "org.springframework",
-                "spring-core");
+                "spring-core", "");
         mockMvc
                 .perform(
                         MockMvcRequestBuilders

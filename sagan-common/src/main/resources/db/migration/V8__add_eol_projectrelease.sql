@@ -1,0 +1,1 @@
+alter table project_releaselist add endOfLife character varying(255);

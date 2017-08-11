@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Admin &middot; Projects &middot; End Of Life</title>
+</head>
+<body>
+<div layout:fragment="header-container"></div>
+<div layout:fragment="content" class="container">
+    <div class="main-body--wrapper">
+        <div class="admin-index--title">
+            <div class="content--title search-title">
+                <a th:href="@{/admin}">Admin</a> : <a th:href="@{/admin/projects}">Projects</a> : End Of Life
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="content" class="span12">
+                <h2>Projects</h2>
+                <table class='table dashboard--posts'>
+                    <tr>
+                        <th>Project</th>
+                        <th>Version</th>
+                        <th>End Of Life</th>
+                        <th />
+                    </tr>
+                    <tr th:each="projectAndRelease : ${projects}" layout:fragment="post-row">
+                        <td th:text="${projectAndRelease.project.id}">spring-framework</td>
+                        <td th:text="${projectAndRelease.projectRelease.version}">5.0.0.BUILD-SNAPSHOT</td>
+                        <td th:text="${projectAndRelease.projectRelease.endOfLife}">April 1st, 2013</td>
+                        <td>
+                            <a th:href="@{'/admin/projects/' + ${projectAndRelease.project.id}}">Edit</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="sidebar" class="span4">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

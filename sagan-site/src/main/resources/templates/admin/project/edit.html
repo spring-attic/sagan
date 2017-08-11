@@ -46,6 +46,7 @@
                         <td>Current</td>
                         <td>Reference URL</td>
                         <td>API URL</td>
+                        <td>EOL</td>
                     </tr>
                   </thead>
                   <tbody>
@@ -56,6 +57,7 @@
                           <td><input type="checkbox" th:field="*{projectReleases[__${releaseStat.index}__].current}" value="true"/></td>
                           <td><input type="text" th:field="*{projectReleases[__${releaseStat.index}__].refDocUrl}" /></td>
                           <td><input type="text" th:field="*{projectReleases[__${releaseStat.index}__].apiDocUrl}" /></td>
+                          <td><input type="text" th:field="*{projectReleases[__${releaseStat.index}__].endOfLife}" /></td>
                       </tr>
                       <tr th:with="size=${project.projectReleases.size()}">
                           <td></td>
@@ -64,6 +66,7 @@
                           <td><input type="checkbox" th:field="*{projectReleases[__${size}__].current}" value="true"/></td>
                           <td><input type="text" th:field="*{projectReleases[__${size}__].refDocUrl}" /></td>
                           <td><input type="text" th:field="*{projectReleases[__${size}__].apiDocUrl}" /></td>
+                          <td><input type="text" th:field="*{projectReleases[__${size}__].endOfLife}" /></td>
                       </tr>
                   </tbody>
               </table>

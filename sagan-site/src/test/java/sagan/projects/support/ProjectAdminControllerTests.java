@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
 import org.springframework.ui.ExtendedModelMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -41,7 +40,7 @@ public class ProjectAdminControllerTests {
     public void listProjects_providesProjectMetadataServiceInModel() {
         releases.add(new ProjectRelease("1.2.3", ReleaseStatus.GENERAL_AVAILABILITY, false,
                 "http://example.com/1.2.3",
-                "http://example.com/1.2.3", "org.springframework", "spring-core"));
+                "http://example.com/1.2.3", "org.springframework", "spring-core", ""));
         when(projectMetadataService.getProject("spring-framework")).thenReturn(project);
         List<Project> list = Arrays.asList(project);
         when(projectMetadataService.getProjects()).thenReturn(list);
@@ -55,7 +54,7 @@ public class ProjectAdminControllerTests {
     public void editProject_presentsVersionPatternsInUris() {
         releases.add(new ProjectRelease("1.2.3", ReleaseStatus.GENERAL_AVAILABILITY, false,
                 "http://example.com/1.2.3",
-                "http://example.com/1.2.3", "org.springframework", "spring-core"));
+                "http://example.com/1.2.3", "org.springframework", "spring-core",""));
         when(projectMetadataService.getProject("spring-framework")).thenReturn(project);
         controller.edit("spring-framework", model);
         assertThat(model.get("project"), equalTo(project));

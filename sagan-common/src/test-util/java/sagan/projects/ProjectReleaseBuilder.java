@@ -8,6 +8,7 @@ public class ProjectReleaseBuilder {
     private String apiDocUrl = "";
     private String groupId = "";
     private String artifactId = "";
+    private String endOfLife = "";
 
     public ProjectReleaseBuilder versionName(String versionName) {
         this.versionName = versionName;
@@ -44,7 +45,12 @@ public class ProjectReleaseBuilder {
         return this;
     }
 
+    public ProjectReleaseBuilder endOfLife(String endOfLife) {
+        this.endOfLife = endOfLife;
+        return this;
+    }
+
     public ProjectRelease build() {
-        return new ProjectRelease(versionName, releaseStatus, current, refDocUrl, apiDocUrl, groupId, artifactId);
+        return new ProjectRelease(versionName, releaseStatus, current, refDocUrl, apiDocUrl, groupId, artifactId, endOfLife);
     }
 }

@@ -8,11 +8,14 @@ import sagan.support.nav.Section;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import groovy.lang.Tuple2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,7 +59,8 @@ class ProjectAdminController {
                 "http://docs.spring.io/spring-new/docs/{version}/spring-new/htmlsingle/",
                 "http://docs.spring.io/spring-new/docs/{version}/javadoc-api/",
                 "org.springframework.new",
-                "spring-new");
+                "spring-new",
+                "");
 
         Project project = new Project("spring-new",
                 "New Spring Project",
@@ -79,6 +83,19 @@ class ProjectAdminController {
     public String delete(@PathVariable String id, Model model) {
         service.delete(id);
         return "redirect:./";
+    }
+
+    @RequestMapping(value = "/eol", method = GET)
+    public String endOfLife(Model model) {
+        model.addAttribute("projects", service.getProjects().stream()
+            .flatMap(project -> project.getProjectReleases().stream()
+                .map(projectRelease -> new Tuple2(project, projectRelease)))
+            .map(tuple2 -> new HashMap<String, Object>(){{
+                put("project", tuple2.getFirst());
+                put("projectRelease", tuple2.getSecond());
+            }})
+            .collect(Collectors.toList()));
+        return "admin/project/eol";
     }
 
     private String edit(Project project, Model model) {

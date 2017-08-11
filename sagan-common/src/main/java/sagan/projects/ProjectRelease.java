@@ -59,6 +59,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     private String apiDocUrl;
     private String groupId;
     private String artifactId;
+    private String endOfLife;
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private ProjectRepository repository;
 
@@ -66,7 +67,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     }
 
     public ProjectRelease(String versionName, ReleaseStatus releaseStatus, boolean isCurrent, String refDocUrl,
-                          String apiDocUrl, String groupId, String artifactId) {
+                          String apiDocUrl, String groupId, String artifactId, String endOfLife) {
         setVersion(versionName);
         if (releaseStatus != null) {
             this.releaseStatus = releaseStatus;
@@ -76,6 +77,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         this.apiDocUrl = apiDocUrl;
         this.groupId = groupId;
         this.artifactId = artifactId;
+        this.endOfLife = endOfLife;
         repository = ProjectRepository.get(versionName, this.releaseStatus);
     }
 
@@ -144,6 +146,10 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         return artifactId;
     }
 
+    public String getEndOfLife() {
+        return endOfLife;
+    }
+
     public ProjectRepository getRepository() {
         return repository;
     }
@@ -178,6 +184,10 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
         this.artifactId = artifactId;
     }
 
+    public void setEndOfLife(String endOfLife) {
+        this.endOfLife = endOfLife;
+    }
+
     public void setRepository(ProjectRepository repository) {
         this.repository = repository;
     }
@@ -191,7 +201,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     public ProjectRelease createWithVersionPattern() {
         String version = getVersion();
         ProjectRelease release = new ProjectRelease(version, releaseStatus, isCurrent, refDocUrl, apiDocUrl, groupId,
-                artifactId);
+                artifactId, endOfLife);
         release.setApiDocUrl(getApiDocUrl().replaceAll(version, VERSION_PLACEHOLDER));
         release.setRefDocUrl(getRefDocUrl().replaceAll(version, VERSION_PLACEHOLDER));
         return release;
@@ -280,7 +290,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     @Override
     public String toString() {
         return "ProjectRelease{" + "versionName='" + versionName + '\'' + ", release=" + releaseStatus
-                + ", refDocUrl='" + refDocUrl + '\'' + ", apiDocUrl='" + apiDocUrl + '\'' + '}';
+                + ", refDocUrl='" + refDocUrl + '\'' + ", apiDocUrl='" + apiDocUrl + '\'' + ", endOfLife='" + endOfLife + '\'' + '}';
     }
 
 }
