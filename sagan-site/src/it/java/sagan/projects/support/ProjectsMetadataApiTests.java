@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.persistence.EntityManager;
+
 import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,9 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
 
     @Autowired
     private ObjectMapper mapper;
+
+    @Autowired
+    private EntityManager entityManager;
 
     private RestDocumentationResultHandler docs(String name) {
         return document(name,
@@ -143,7 +148,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
             Map<String, Object> map = getRelease(release);
             releases.add(map);
         }
-        project.getProjectReleases().iterator().next().setVersion("1.2.8.RELEASE");
+        releases.iterator().next().put("version", "1.2.8.RELEASE");
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
@@ -153,6 +158,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("application/json"))
                 .andDo(docs("update_project"));
+        entityManager.flush();
     }
 
     private Map<String, Object> getRelease(ProjectRelease release) {
