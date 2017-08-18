@@ -1,6 +1,5 @@
 package sagan.guides.support;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import sagan.support.Fixtures;
 import sagan.support.github.GitHubClient;
 
@@ -14,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import org.springframework.social.github.api.GitHubRepo;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -32,7 +33,7 @@ public class GuidesOrgTests {
 
     @Before
     public void setUp() throws Exception {
-        service = new GuideOrganization(OWNER_NAME, OWNER_TYPE, ghClient, new ObjectMapper());
+        service = new GuideOrganization(OWNER_NAME, OWNER_TYPE, ghClient, new ObjectMapper(), null);
     }
 
     @Test

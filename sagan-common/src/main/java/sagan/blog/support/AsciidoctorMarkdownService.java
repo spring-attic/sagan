@@ -7,7 +7,11 @@ import org.asciidoctor.SafeMode;
 
 public class AsciidoctorMarkdownService implements MarkdownService {
 
-    Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+    private final Asciidoctor asciidoctor;
+
+    public AsciidoctorMarkdownService(Asciidoctor asciidoctor) {
+        this.asciidoctor = asciidoctor;
+    }
 
     @Override
     public String renderToHtml(String markdownSource) {
