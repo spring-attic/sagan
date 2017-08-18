@@ -59,3 +59,8 @@ dependencies {
     testCompile project(':sagan-common').sourceSets.testUtil.output
 
 }
+
+clean.doFirst {
+    delete "${projectDir}/data/"
+    println "Deleted ${projectDir}/data/"
+}
