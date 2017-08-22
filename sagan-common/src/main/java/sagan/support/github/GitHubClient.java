@@ -3,6 +3,7 @@ package sagan.support.github;
 import sagan.support.cache.CachedRestClient;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.social.github.api.GitHub;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriTemplate;
@@ -26,6 +27,11 @@ public class GitHubClient {
         return restClient.get(gitHub.restOperations(), url, String.class);
     }
 
+    public ResponseEntity<String> sendRequestForEntity(String path, Object... uriVariables) {
+        String url = resolveUrl(path, uriVariables);
+        return restClient.getEntity(gitHub.restOperations(), url, String.class);
+    }
+
     public byte[] sendRequestForDownload(String path, Object... uriVariables) {
         String url = resolveUrl(path, uriVariables);
         return restClient.get(gitHub.restOperations(), url, byte[].class);
@@ -44,7 +50,11 @@ public class GitHubClient {
 
     private String resolveUrl(String path, Object[] uriVariables) {
         String expandedPath = new UriTemplate(path).expand(uriVariables).toString();
-        return API_URL_BASE + expandedPath;
+        if (expandedPath.startsWith("http")) {
+            return expandedPath;
+        } else {
+            return API_URL_BASE + expandedPath;
+        }
     }
 
 }

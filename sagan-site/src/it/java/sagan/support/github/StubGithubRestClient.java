@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriTemplate;
 
@@ -31,6 +32,11 @@ public class StubGithubRestClient extends GitHubClient {
     @Override
     public String sendRequestForHtml(String path, Object... uriVariables) {
         return handleRequest(path, uriVariables);
+    }
+
+    @Override
+    public ResponseEntity<String> sendRequestForEntity(String path, Object... uriVariables) {
+        return ResponseEntity.ok(handleRequest(path, uriVariables));
     }
 
     @Override

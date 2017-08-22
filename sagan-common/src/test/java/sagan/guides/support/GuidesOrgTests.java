@@ -53,15 +53,15 @@ public class GuidesOrgTests {
 
     @Test
     public void getGitHubRepos_fetchesGuideReposGitHub() {
-        given(ghClient.sendRequestForJson(anyString(), anyVararg())).willReturn(Fixtures.githubRepoListJson());
+        given(ghClient.sendRequestForEntity(anyString(), anyVararg())).willReturn(Fixtures.githubRepoListEntity());
 
-        GitHubRepo[] repos = service.findAllRepositories();
-        assertThat(repos[0].getName(), equalTo("gs-rest-service"));
+        List<GitHubRepo> repos = service.findAllRepositories();
+        assertThat(repos.get(0).getName(), equalTo("gs-rest-service"));
     }
 
     @Test
     public void shouldFindByPrefix() throws Exception {
-        given(ghClient.sendRequestForJson(anyString(), anyVararg())).willReturn(Fixtures.githubRepoListJson());
+        given(ghClient.sendRequestForEntity(anyString(), anyVararg())).willReturn(Fixtures.githubRepoListEntity());
 
         List<GitHubRepo> matches = service.findRepositoriesByPrefix(GettingStartedGuides.REPO_PREFIX);
         assertThat(matches.size(), greaterThan(0));
