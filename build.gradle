@@ -24,6 +24,7 @@ wrapper.gradleVersion = '2.13'
 
 configure(allprojects) {
     apply plugin: 'eclipse'
+    version = "1.0.0.BUILD-SNAPSHOT"
 }
 
 configure(javaProjects) {
