@@ -48,6 +48,7 @@ configure(javaProjects) {
                             'hibernate.version': '4.3.11.Final'
                     ])
                 }
+                mavenBom("org.springframework.cloud:spring-cloud-dependencies:Camden.SR7")
             }
         }
     }
