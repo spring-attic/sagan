@@ -134,8 +134,8 @@ afterEvaluate {
 
                     licenses {
                         license {
-                            name 'The Apache License, Version 2.0'
-                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            name 'BSD 3-clause "New" or "Revised" License'
+                            url 'https://raw.githubusercontent.com/spring-io/sagan/master/LICENSE.md'
                         }
                     }
 
