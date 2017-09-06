@@ -2,7 +2,6 @@ plugins {
     id "org.asciidoctor.convert" version "1.5.3"
     id "com.gorylenko.gradle-git-properties" version "1.4.6"
 }
-apply plugin: 'maven-publish'
 
 springBoot {
     mainClass = 'sagan.SiteApplication'
@@ -68,25 +67,98 @@ clean.doFirst {
 }
 
 task stubsJar(type: Jar) {
-    String fakeVersion = "1.0.0.BUILD-SNAPSHOT"
     classifier = "stubs"
-    into("META-INF/${project.group}/${project.name}/${fakeVersion}/mappings") {
+    into("META-INF/${project.group}/${project.name}/${project.version}/mappings") {
         include('**/*.*')
         from("${project.buildDir}/snippets/stubs")
     }
 }
-// we need the tests to pass to build the stub jar
+
 stubsJar.dependsOn(test)
 
 artifacts {
     archives stubsJar
 }
 
-publishing {
-    publications {
-        stubs(MavenPublication) {
-            artifactId project.name
-            artifact stubsJar
+apply plugin: 'maven'
+
+uploadArchives.dependsOn { [check] }
+
+ext {
+    resolveRepoName = { Project project ->
+        resolvedRepoName = "libs-${resolveVersion(project.version)}-local"
+        logger.lifecycle("For project [$project.name] with " +
+                "version [$project.version] the resolved Artifactory repo is [$resolvedRepoName]")
+        return resolvedRepoName
+    }
+
+    isReleaseVersion = version.endsWith("RELEASE")
+    isMilestoneVersion = version.matches('[0-9].[0-9].[0-9].M[0-9]+') || version.matches('[0-9].[0-9].[0-9].RC[0-9]+')
+    isSnapshotVersion = !(isReleaseVersion || isMilestoneVersion)
+
+    resolveVersion = { String version ->
+        if (isMilestoneVersion) return 'milestone'
+        if (isReleaseVersion) return 'release'
+        return 'snapshot'
+    }
+
+    repoUrl = "https://repo.spring.io/${resolveRepoName(project)}"
+}
+
+afterEvaluate {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                // Target repository
+                String repoUserName = getProp("REPO_USERNAME") ?: "changeme"
+                String repoPass = getProp("REPO_PASSWORD") ?: "changeme"
+                repository(url: repoUrl) {
+                    authentication(userName: repoUserName, password: repoPass)
+                }
+                // we want to publish only the stubs
+                addFilter('stubs') {artifact, file ->
+                    artifact.extraAttributes["classifier"] == "stubs"
+                }
+                pom.project {
+                    name project.name
+                    packaging 'jar'
+                    description 'Project Sagan Site Stubs'
+                    url 'https://github.com/spring-io/sagan'
+                    inceptionYear '2013'
+
+                    scm {
+                        connection 'scm:git:git@github.com:spring-io/sagan.git'
+                        developerConnection 'scm:git:git@github.com:spring-io/sagan.git'
+                        url 'https://github.com/spring-io/sagan'
+                    }
+
+                    licenses {
+                        license {
+                            name 'The Apache License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'bclozel'
+                            name 'Brian Clozel'
+                            email 'bclozel ATT pivotal DOTT io'
+                        }
+                        developer {
+                            id 'dsyer'
+                            name 'Dave Syer'
+                            email 'dsyer ATT pivotal DOTT io'
+                        }
+                    }
+                }
+            }
         }
     }
+}
+
+String getProp(String propName) {
+    return hasProperty(propName) ?
+            (getProperty(propName) ?: System.properties[propName]) : System.properties[propName] ?:
+            System.getenv(propName)
 }
