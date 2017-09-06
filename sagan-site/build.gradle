@@ -1,7 +1,8 @@
 plugins {
-	id "org.asciidoctor.convert" version "1.5.3"
+    id "org.asciidoctor.convert" version "1.5.3"
     id "com.gorylenko.gradle-git-properties" version "1.4.6"
 }
+apply plugin: 'maven-publish'
 
 springBoot {
     mainClass = 'sagan.SiteApplication'
@@ -53,6 +54,7 @@ dependencies {
 
     // for use in mocking http interactions
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
+    testCompile "org.springframework.cloud:spring-cloud-contract-wiremock"
     testCompile "org.springframework.boot:spring-boot-starter-test"
 
     // pick up common test utility classes
@@ -63,4 +65,28 @@ dependencies {
 clean.doFirst {
     delete "${projectDir}/data/"
     println "Deleted ${projectDir}/data/"
+}
+
+task stubsJar(type: Jar) {
+    String fakeVersion = "1.0.0.BUILD-SNAPSHOT"
+    classifier = "stubs"
+    into("META-INF/${project.group}/${project.name}/${fakeVersion}/mappings") {
+        include('**/*.*')
+        from("${project.buildDir}/snippets/stubs")
+    }
+}
+// we need the tests to pass to build the stub jar
+stubsJar.dependsOn(test)
+
+artifacts {
+    archives stubsJar
+}
+
+publishing {
+    publications {
+        stubs(MavenPublication) {
+            artifactId project.name
+            artifact stubsJar
+        }
+    }
 }
