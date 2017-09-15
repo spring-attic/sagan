@@ -19,7 +19,7 @@ def javaProjects = [ project(':sagan-site'), project(':sagan-indexer'), project(
 def bootProjects = javaProjects - project(':sagan-common')
 def gradleDir = "${rootProject.rootDir}/gradle"
 
-wrapper.gradleVersion = '2.13'
+wrapper.gradleVersion = '4.1'
 
 configure(allprojects) {
     apply plugin: 'eclipse'
