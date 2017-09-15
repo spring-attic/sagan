@@ -2,7 +2,6 @@ package sagan.support.cache;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
 
@@ -16,11 +15,6 @@ public class CachedRestClient {
     @Cacheable(value = CACHE_NAME, key = "#url")
     public <T> T get(RestOperations operations, String url, Class<T> clazz) {
         return operations.getForObject(url, clazz);
-    }
-
-    @Cacheable(value = CACHE_NAME, key = "#url")
-    public <T> ResponseEntity<T> getEntity(RestOperations operations, String url, Class<T> clazz) {
-        return operations.getForEntity(url, clazz);
     }
 
     public <T> T post(RestOperations operations, String url, Class<T> clazz, String body) {

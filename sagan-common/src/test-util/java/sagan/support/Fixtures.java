@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.StreamUtils;
 
 public class Fixtures {
@@ -34,9 +33,5 @@ public class Fixtures {
 
     public static String githubRepoListJson() {
         return load("/fixtures/github/githubRepoList.json");
-    }
-
-    public static ResponseEntity<String> githubRepoListEntity() {
-        return ResponseEntity.ok(load("/fixtures/github/githubRepoList.json"));
     }
 }

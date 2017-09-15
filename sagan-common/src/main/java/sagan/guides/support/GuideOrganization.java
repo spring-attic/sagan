@@ -1,7 +1,6 @@
 package sagan.guides.support;
 
 import sagan.support.github.GitHubClient;
-import sagan.support.github.PaginationUtils;
 import sagan.support.github.Readme;
 import sagan.support.github.RepoContent;
 
@@ -30,6 +29,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.yaml.snakeyaml.Yaml;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.codec.Base64;
@@ -37,7 +38,6 @@ import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StreamUtils;
-import org.yaml.snakeyaml.Yaml;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -246,9 +246,14 @@ class GuideOrganization {
         }
     }
 
-    public List<GitHubRepo> findAllRepositories() {
-        return PaginationUtils.readResults(url -> gitHub.sendRequestForEntity(url, type, name),
-            "/{type}/{name}/repos?per_page=100&page=1", objectMapper, GitHubRepo.class);
+    public GitHubRepo[] findAllRepositories() {
+        String json = gitHub.sendRequestForJson("/{type}/{name}/repos?per_page=100", type, name);
+
+        try {
+            return objectMapper.readValue(json, GitHubRepo[].class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<GitHubRepo> findRepositoriesByPrefix(String prefix) {
