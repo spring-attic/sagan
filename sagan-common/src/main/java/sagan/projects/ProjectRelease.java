@@ -125,7 +125,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     }
 
     public boolean hasRefDocUrl() {
-        return refDocUrl != null ? !refDocUrl.isEmpty() : false;
+        return refDocUrl != null && !refDocUrl.isEmpty();
     }
 
     public String getApiDocUrl() {
@@ -133,7 +133,7 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     }
 
     public boolean hasApiDocUrl() {
-        return apiDocUrl != null ? !apiDocUrl.isEmpty() : false;
+        return apiDocUrl != null && !apiDocUrl.isEmpty();
     }
 
     public String getGroupId() {
