@@ -45,7 +45,7 @@ configure(javaProjects) {
                 mavenBom('io.spring.platform:platform-bom:Brussels-SR4') {
                     bomProperties([
                             'elasticsearch.version': '1.7.1', // see io.searchbox:jest
-                            'hibernate.version': '4.3.11.Final'
+							'spring.version': '4.3.11.RELEASE'
                     ])
                 }
                 mavenBom("org.springframework.cloud:spring-cloud-dependencies:Camden.SR7")

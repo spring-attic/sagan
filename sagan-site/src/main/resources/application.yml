@@ -20,9 +20,7 @@ spring:
   thymeleaf:
     mode: LEGACYHTML5
   jpa:
-    show_sql: false
     hibernate:
-      naming_strategy: org.hibernate.cfg.EJB3NamingStrategy
       ddl_auto: none
 
 security:
@@ -118,8 +116,9 @@ spring:
       additional_paths:
         - ../sagan-client/src/
       additional_exclude: "**/*.js,**/*.css"
-
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
+flyway:
+  locations: classpath:/db/migration, classpath:/db/dev
 ---
 
 spring:

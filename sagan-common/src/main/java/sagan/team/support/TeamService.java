@@ -69,7 +69,6 @@ public class TeamService {
         existingProfile.setTwitterUsername(profile.getTwitterUsername());
         existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
         existingProfile.setLanyrdUsername(profile.getLanyrdUsername());
-        existingProfile.setGplusId(profile.getGplusId());
         existingProfile.setLocation(profile.getLocation());
         existingProfile.setGeoLocation(profile.getGeoLocation());
         existingProfile.setVideoEmbeds(profile.getVideoEmbeds());

@@ -24,26 +24,6 @@ public abstract class DatabaseConfig {
 }
 
 @Configuration
-@Profile(SaganProfiles.STANDALONE)
-class StandaloneDatabaseConfig extends DatabaseConfig {
-
-    @Bean
-    public DataSource dataSource() {
-        org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
-
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:mem:sagan;MODE=PostgreSQL");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("");
-        dataSource.setValidationQuery("SELECT 1");
-
-        configureDataSource(dataSource);
-
-        return dataSource;
-    }
-}
-
-@Configuration
 @Profile(SaganProfiles.CLOUDFOUNDRY)
 class CloudFoundryDatabaseConfig extends DatabaseConfig {
 
