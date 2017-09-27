@@ -23,6 +23,7 @@ wrapper.gradleVersion = '4.1'
 
 configure(allprojects) {
     apply plugin: 'eclipse'
+    group = 'io.spring'
     version = "1.0.0.BUILD-SNAPSHOT"
 }
 
