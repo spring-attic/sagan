@@ -2,7 +2,6 @@ package sagan.blog.support;
 
 import sagan.blog.PostFormat;
 
-import org.asciidoctor.Asciidoctor;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +22,7 @@ public class BlogPostContentRendererTests {
 
     @Before
     public void setUp() throws Exception {
-        renderer = new PostContentRenderer(markdownService, Asciidoctor.Factory.create());
+        renderer = new PostContentRenderer(markdownService, null);
     }
 
     @Test

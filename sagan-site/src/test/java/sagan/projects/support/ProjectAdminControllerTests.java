@@ -1,13 +1,6 @@
 package sagan.projects.support;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.ui.ExtendedModelMap;
-import sagan.blog.support.FormatAwarePostContentRenderer;
+import sagan.blog.support.PostContentRenderer;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.ProjectRelease.ReleaseStatus;
@@ -17,10 +10,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import org.springframework.ui.ExtendedModelMap;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.contains;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -30,7 +31,7 @@ public class ProjectAdminControllerTests {
     private ProjectMetadataService projectMetadataService;
 
     @Mock
-    private FormatAwarePostContentRenderer renderer;
+    private PostContentRenderer renderer;
 
     private List<ProjectRelease> releases = new ArrayList<>();
     Project project = new Project("spring-framework", "spring", "http://example.com", "http://examples.com", releases,

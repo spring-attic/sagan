@@ -7,37 +7,32 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.asciidoctor.Asciidoctor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-class PostContentRenderer {
-
-    private MarkdownService markdownService;
+public class PostContentRenderer {
 
     private Map<PostFormat, MarkdownService> renderers = new HashMap<>();
 
     @Autowired
     public PostContentRenderer(@Qualifier("pegdown") MarkdownService markdownService,
-                                          Asciidoctor asciidoctor) {
-        renderers.put(PostFormat.ASCIIDOC, new AsciidoctorMarkdownService(asciidoctor));
-        this.markdownService = markdownService;
+                               @Qualifier("asciidoctor") MarkdownService asciidoctor) {
+        renderers.put(PostFormat.ASCIIDOC, asciidoctor);
+        renderers.put(PostFormat.MARKDOWN, markdownService);
     }
 
     public String render(String content, PostFormat format) {
         MarkdownService renderer = renderers.get(format);
         if (renderer == null) {
-            return render(content);
+            throw new IllegalArgumentException("Unsupported post format: " + format);
         }
-        return renderer.renderToHtml(content);
-    }
-
-    private String render(String content) {
-        String html = markdownService.renderToHtml(content);
-        return renderCallouts(decode(html));
+        String html = renderer.renderToHtml(content);
+        if (format == PostFormat.MARKDOWN) {
+            html = renderCallouts(decode(html));
+        }
+        return html;
     }
 
     private String decode(String html) {

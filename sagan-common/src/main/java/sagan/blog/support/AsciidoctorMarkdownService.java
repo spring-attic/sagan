@@ -5,6 +5,11 @@ import org.asciidoctor.Attributes;
 import org.asciidoctor.OptionsBuilder;
 import org.asciidoctor.SafeMode;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+@Service
+@Qualifier("asciidoctor")
 public class AsciidoctorMarkdownService implements MarkdownService {
 
     private final Asciidoctor asciidoctor;

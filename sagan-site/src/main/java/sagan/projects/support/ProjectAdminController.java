@@ -1,22 +1,28 @@
 package sagan.projects.support;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import sagan.blog.PostFormat;
-import sagan.blog.support.FormatAwarePostContentRenderer;
+import sagan.blog.support.PostContentRenderer;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.ProjectSample;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.Section;
 
-import javax.validation.Valid;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -34,10 +40,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
     private ProjectMetadataService service;
 
-    private final FormatAwarePostContentRenderer renderer;
+    private final PostContentRenderer renderer;
 
     @Autowired
-    public ProjectAdminController(ProjectMetadataService service, FormatAwarePostContentRenderer renderer) {
+    public ProjectAdminController(ProjectMetadataService service, PostContentRenderer renderer) {
         this.service = service;
         this.renderer = renderer;
     }
