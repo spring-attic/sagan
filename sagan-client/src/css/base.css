@@ -550,6 +550,9 @@ input.floating-input:focus {
 .footer .nav li:first-child a {
   padding-left: 0;
 }
+.footer .nav li:last-child a {
+  padding-right: 0;
+}
 .footer .footer-newsletter--wrapper {
   width: auto;
   margin: 0;
