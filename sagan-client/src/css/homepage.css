@@ -1,346 +1,423 @@
-.homepage-billboard {
-  background-image: url("../img/homepage-bg.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
+.homepage--body {
+  background-color: #f5f5f5;
+}
+
+.homepage--body .homepage--banner p,
+.homepage--body .homepage--section p,
+.homepage--body .homepage--section li,
+.homepage--body .homepage--section td {
+  font-size: 16px;
+  color: #333333;
+  line-height: 1.5em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.homepage--body p a {
+  color: #68bd45;
+  -webkit-font-smoothing: auto;
+}
+
+.homepage--body p a:hover {
+  color: #333333;
+  text-decoration: none;
+}
+
+.homepage--body .container-fluid {
+  max-width: 1140px;
+}
+
+.homepage--body .center {
   text-align: center;
 }
 
-.homepage-title--container {
-  margin-top: 66px;
-}
-
-.homepage-title, .homepage-subtitle {
-  background: rgba(52, 48, 45, 0.8);
-  color: #f1f1f1;
-  display: inline-block;
-}
-
-.homepage-title {
-  font-size: 48px;
-  font-weight: normal;
-  line-height: 68px;
-  font-family: "Montserrat", sans-serif;
-  padding: 0 15px;
-  letter-spacing: -2px;
-}
-
-.homepage-subtitle {
-  font-size: 22px;
-  line-height: 18px;
-  padding: 2px 19px 12px;
-}
-.homepage-subtitle:first-child {
-  padding-top: 12px;
-}
-
-.homepage--body h1 {
-    display: none;
-}
-
-/* Hero banners */
-
-.homepage--body .hero--banner {
-  background-color: #34302d;
+.homepage--body .vcenter {
   position: relative;
-  max-height: 278px;
-  overflow: hidden;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.homepage--body .hero--banner .banner--text {
-  color: #f1f1f1;
-  font-size: 18px;
-  line-height: 28px;
-  margin-bottom: 20px;
-}
-.homepage--body .hero--banner .banner--link {
-  font-size: 18px;
-  line-height: 28px;
-}
-.homepage--body .hero--banner .banner--link [class^="icon-"] {
-  margin-left: 15px;
-  line-height: 10px;
-  vertical-align: middle;
-  text-decoration: none;
-}
-
-.homepage--body .hero--banner .blockarrows {
-  position: absolute;
-  bottom: 27px;
-  right: 20px;
-  z-index: 20;
-  max-width: 230px;
-  font-size: 13px;
-  line-height: 2.2em;
-}
-
-.homepage--body .hero--banner .blockarrows .next,
-.homepage--body .hero--banner .blockarrows .previous {
+.homepage--body .sidebyside {
   display: inline-block;
-  width: 27px;
-  height: 27px;
-  background: rgba(255,255,255,0.7);
-  text-align: center;
-  cursor: pointer;
+  vertical-align: top;
 }
 
-/* Spring Cloud banner */
-
-.homepage--body .hero--banner .springcloud {
-  padding: 60px;
-  background: url("../img/home-banner-spring-cloud.jpg") #34302d no-repeat;
-  background-size: cover;
+.homepage--body .thirtywide {
+  width: 33%;
 }
 
-.homepage--body .hero--banner .springcloud .banner--text {
-    margin-left: 28%;
+.homepage--body .fiftywide {
+  width: 49.5%;
 }
 
-.homepage--body .hero--banner .springcloud .banner--text h2 {
-  font-family: "Montserrat", sans-serif;
-  color: #f1f1f1;
-  font-size: 25px;
-  font-weight: normal;
-  line-height: 30px;
-  margin-bottom: 20px;
-  max-width: 430px;
+.homepage--body .display-flex {
+  display: inline-flex;;
+}
+
+.homepage--body .float-right {
+  float: right;
+}
+
+.homepage--body .uppercase {
   text-transform: uppercase;
 }
 
-/* Spring Days */
-
-.homepage--body .hero--banner .springdays {
-  padding: 60px;
-  background: url("../img/home-banner-springdays.png") #34302d no-repeat;
-  background-size: cover;
-  text-align: center;
+.homepage--body .bg-white {
+  background-color: white;
 }
 
-.homepage--body .hero--banner .springdays .banner--text p {
-  color: #2f3093;
-  font-size: 1.2em;
-  font-weight:bold;
+.homepage--body .homepage--banner {
+  height: 430px;
+  max-height: 430px;
+  position: relative;
 }
 
-.homepage--body .hero--banner .springdays .banner--text h2 {
-  font-family: "Montserrat", sans-serif;
-  color: #f1f1f1;
-  font-size: 25px;
-  font-weight: normal;
-  line-height: 30px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
-.homepage--body .hero--banner .springdays .banner--link {
-  color: #f1f1f1;
-}
-
-/* Spring Cloud Services banner */
-
-.homepage--body .hero--banner .springcloud-services {
-  height: 272px;
-  background: url("../img/home-banner-spring-cloud-services.jpg") #34302d no-repeat;
-  background-size: cover;
-}
-
-.homepage--body .hero--banner .springcloud-services .banner--text {
-  margin-left: 50%;
-  padding-top: 60px;
-}
-
-.homepage--body .hero--banner .springcloud-services .banner--text h2 {
-  font-family: "Montserrat", sans-serif;
-  color: #f1f1f1;
-  font-size: 25px;
-  font-weight: normal;
-  line-height: 30px;
-  margin-bottom: 20px;
-  max-width: 430px;
-  text-transform: uppercase;
-}
-
-/* Pivotal Web Services */
-.homepage--body .hero--banner .pws {
-  padding: 3em;
-  background: url("../img/home-banner-pws.png") #34302d no-repeat;
-  background-size: cover;
-}
-
-.homepage--body .hero--banner .pws .banner--text {
-  margin-left: 32%;
-  margin-top: 5em;
-}
-
-.homepage--body .hero--banner .pws .banner--text h2 {
-  font-family: "Montserrat", sans-serif;
-  color: #f1f1f1;
-  font-size: 25px;
-  font-weight: normal;
-  line-height: 30px;
-  margin-bottom: 20px;
-  max-width: 18em;
-  text-transform: uppercase;
-}
-
-
-/* SpringOne Platform banner */
-.homepage--body .hero--banner .springoneplatform {
-  padding: 3em;
-  background: url("../img/s1p-2017-banner.jpg") #34302d no-repeat 50% 70%;
-  background-size: cover;
-}
-
-.homepage--body .hero--banner .springoneplatform .banner--text {
-  margin-left: 28%;
-  margin-top: 4em;
-}
-
-.homepage--body .hero--banner .springoneplatform .banner--text h2 {
-  font-family: "Montserrat", sans-serif;
-  color: #f1f1f1;
-  font-size: 22px;
-  font-weight: normal;
-  line-height: 25px;
-  margin-bottom: 1em;
-  max-width: 35em;
-  text-transform: uppercase;
-}
-
-.homepage--body .hero--banner .springoneplatform .banner--text a {
-  color: #00ae9e
-}
-
-.homepage--body .key-feature--wrapper {
-  background-color: #6db33f;
-  padding: 60px 0;
-}
-.homepage--body .key-feature--wrapper .key-feature--container {
-  text-align: center;
-  color: #f1f1f1;
-}
-.homepage--body .key-feature--wrapper .key-feature--container .key-feature--icon--container {
-  height: 88px;
-  text-align: center;
-  margin-bottom: 44px;
-}
-.homepage--body .key-feature--wrapper .key-feature--container .key-feature--title {
-  text-transform: uppercase;
-  font-family: "Montserrat", sans-serif;
-  font-size: 30px;
-  font-weight: normal;
-  line-height: 30px;
-  margin-bottom: 20px;
-  color: #f1f1f1;
-}
-.homepage--body .key-feature--wrapper .key-feature--container .key-feature--text {
-  font-size: 18px;
-  line-height: 28px;
-}
-.homepage--body .key-feature--wrapper .key-feature--container .key-feature--text.highlight {
-  text-transform: uppercase;
-}
-.homepage--body .offset-feature--container {
-  border-bottom: 1px solid #dddbda;
-  transition: all 0.25s;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  -o-transition: all 0.25s;
-  -ms-transition: all 0.25s;
-}
-.homepage--body .offset-feature--container .feature--content {
-  padding: 90px 0;
-}
-.homepage--body .offset-feature--container .offset-feature--title {
-  font-size: 30px;
-  line-height: 30px;
-  font-family: "Montserrat", sans-serif;
-  margin-bottom: 20px;
-  color: #34302d;
-}
-.homepage--body .offset-feature--container .offset-feature--text {
-  font-size: 18px;
-  line-height: 28px;
-  margin-bottom: 20px;
-  color: #34302d;
-}
-.homepage--body .offset-feature--container .offset-feature--link {
-  color: #5fa134;
-  font-size: 18px;
-  line-height: 18px;
-}
-.homepage--body .offset-feature--container .offset-feature--link i {
-  font-size: 18px;
-  line-height: 10px;
-  margin-left: 10px;
-  text-decoration: none;
-}
-.homepage--body .offset-feature--container.feature-initializr {
-    text-align:right;
-}
-.homepage--body .offset-feature--container.feature-guides {
-  background-image: url("../img/homepage-feature-guides.png");
-  background-repeat: no-repeat;
-  background-position: 148% 0;
-}
-.homepage--body .offset-feature--container.feature-sts {
-  background-image: url("../img/homepage-feature-sts.png");
-  background-repeat: no-repeat;
-  background-position: -40% 100%;
-}
-.homepage--body .offset-feature--container.feature-projects {
-  background-image: url("../img/homepage-feature-projects.png");
-  background-repeat: no-repeat;
-  background-position: 130px 0;
-}
-.homepage--body .offset-feature--container.feature-certification {
-    background-image: url("../img/homepage-feature-certification.png");
-    background-repeat: no-repeat;
-    background-position: 0% 0;
-    text-align: right;
-}
-.homepage--body .offset-feature--container:last-child {
-  border: none;
-}
-.homepage--body .offset-feature--container:nth-child(even) {
-  background-color: #ebf1e7;
-}
-
-.support--wrapper {
-  background-color: #5d5d5d;
-  padding: 50px 0 60px;
-}
-.support--wrapper .support--container .icon {
-  float: left;
-  margin-right: 20px;
-}
-.support--wrapper .support--container .support--title {
-  font-size: 18px;
-  line-height: 18px;
-  text-transform: uppercase;
-  color: #f1f1f1;
-  margin: 16px 0;
-}
-.support--wrapper .support--container .support-links {
-    list-style: none;
-}
-.support--wrapper .support--container .support-links.community {
-    margin-left: 117px;
-}
-.support--wrapper .support--container .support-links.professional {
-    margin-left: 146px;
-}
-.support--wrapper .support--container .support-links.hosted {
-    margin-left: 137px;
-}
-.support--wrapper .support--container .support-links a {
-  color: #5fa134;
-}
-.support--wrapper.about-page {
+.homepage--body .homepage--banner section {
+  height: 430px;
   position: absolute;
   left: 0;
   right: 0;
+  display: none;
 }
 
-.tool-suite {
-  text-align: right;
+.homepage--body .homepage--banner section:first-child {
+  display: block;
+}
+
+.homepage--body .homepage--banner h2,
+.homepage--body .homepage--banner p {
+  color: white;
+  line-height: 1.2em;
+}
+
+.homepage--body .homepage--banner h2 {
+  font-size: 50px;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.homepage--body .homepage--banner p {
+  font-size: 20px;
+}
+
+.homepage--body .homepage--banner p a:hover {
+  color: white;
+}
+
+.homepage--body .homepage--banner .spring-framework-5--banner {
+  background: #0f3f61;
+  background-image: url(/img/homepage/bg-hero-banner-home-spring-framework-5.png), -moz-linear-gradient( 90deg, rgb(5,55,91) 0%, rgb(15,63,97) 52%);
+  background-image: url(/img/homepage/bg-hero-banner-home-spring-framework-5.png), -webkit-linear-gradient( 90deg, rgb(5,55,91) 0%, rgb(15,63,97) 52%);
+  background-image: url(/img/homepage/bg-hero-banner-home-spring-framework-5.png), -ms-linear-gradient( 90deg, rgb(5,55,91) 0%, rgb(15,63,97) 52%);
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+
+.homepage--body .homepage--banner .springone-platform--banner {
+  background: #111229;
+  background-image: -moz-linear-gradient( 0deg, rgb(16,17,40) 0%, rgb(19,20,47) 22%, rgb(21,23,54) 47%, rgb(34,36,100) 82%, rgb(46,49,146) 100%);
+  background-image: -webkit-linear-gradient( 0deg, rgb(16,17,40) 0%, rgb(19,20,47) 22%, rgb(21,23,54) 47%, rgb(34,36,100) 82%, rgb(46,49,146) 100%);
+  background-image: -ms-linear-gradient( 0deg, rgb(16,17,40) 0%, rgb(19,20,47) 22%, rgb(21,23,54) 47%, rgb(34,36,100) 82%, rgb(46,49,146) 100%);
+}
+
+.homepage--body .homepage--banner .springone-platform--banner img {
+  height: 55px;
+  max-width: 336px;
+  margin: -40px 0 30px;
+}
+
+.homepage--body .homepage--banner .automate-ops--banner {
+  background: #055891;
+  background-image: url(/img/homepage/bg-hero-banner-home-automate-ops.png), -moz-linear-gradient( 0deg, rgb(15,63,97) 0%, rgb(8,83,135) 53%, rgb(0,102,172) 100%);
+  background-image: url(/img/homepage/bg-hero-banner-home-automate-ops.png), -webkit-linear-gradient( 0deg, rgb(15,63,97) 0%, rgb(8,83,135) 53%, rgb(0,102,172) 100%);
+  background-image: url(/img/homepage/bg-hero-banner-home-automate-ops.png), -ms-linear-gradient( 0deg, rgb(15,63,97) 0%, rgb(8,83,135) 53%, rgb(0,102,172) 100%);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+
+.homepage--body .homepage--banner .pws--banner {
+  background: #0f3f61;
+  background-image: url(/img/homepage/bg-hero-banner-home-pws.png), -moz-linear-gradient( 90deg, rgb(5,55,91) 0%, rgb(15,63,97) 52%);
+  background-image: url(/img/homepage/bg-hero-banner-home-pws.png), -webkit-linear-gradient( 90deg, rgb(5,55,91) 0%, rgb(15,63,97) 52%);
+  background-image: url(/img/homepage/bg-hero-banner-home-pws.png), -ms-linear-gradient( 90deg, rgb(5,55,91) 0%, rgb(15,63,97) 52%);
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+
+.homepage--body .homepage--banner .dalston--banner {
+  background: #055891;
+  background-image: url(/img/homepage/bg-hero-banner-home-dalston.png), -moz-linear-gradient( 0deg, rgb(15,63,97) 0%, rgb(8,83,135) 53%, rgb(0,102,172) 100%);
+  background-image: url(/img/homepage/bg-hero-banner-home-dalston.png), -webkit-linear-gradient( 0deg, rgb(15,63,97) 0%, rgb(8,83,135) 53%, rgb(0,102,172) 100%);
+  background-image: url(/img/homepage/bg-hero-banner-home-dalston.png), -ms-linear-gradient( 0deg, rgb(15,63,97) 0%, rgb(8,83,135) 53%, rgb(0,102,172) 100%);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+}
+
+.homepage--body .slide--dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 55px;
+  -webkit-touch-callout: none; 
+  -webkit-user-select: none; 
+  -khtml-user-select: none; 
+  -moz-user-select: none;
+  -ms-user-select: none; 
+  user-select: none;
+}
+
+.homepage--body .slide--dots .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  display: inline-block;
+  margin: 0 7px;
+}
+
+.homepage--body .slide--dots .dot.active {
+  background: white;
+}
+
+.homepage--body .homepage--section {
+  padding: 80px 0 0;
+}
+
+.homepage--body .homepage--section h2 {
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2em;
+}
+
+.homepage--body .homepage--section h3 {
+  font-size: 28px;
+  color: #76bd1d;
+  font-family: Montserrat,sans-serif;
+  font-weight: 400;
+  line-height: 1.2em;
+}
+
+.homepage--body .homepage--section h4 {
+  font-family: Montserrat,sans-serif;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+.homepage--body .homepage--section p {
+  margin: 20px 0;
+}
+
+.homepage--body .modern-java-section {
+  padding-bottom: 80px;
+}
+
+.homepage--body #fader-diagram {
+  position: relative;
+  margin: 30px auto;
+  height: 300px;
+  width: 1020px;
+  cursor: ew-resize;
+}
+
+.homepage--body #fader-diagram-modern-java-color {
+  position: absolute;
+  height: 238px;
+  max-width: 1020px;
+  margin: 31px auto;
+  overflow: hidden;
+  width: 400px;
+}
+
+.homepage--body #fader-diagram-modern-java-color div {
+  position: absolute;
+  height: 238px;
+  background: url(/img/homepage/diagram-modern-java.svg) no-repeat;
+  background-size: 100%;
+  width: 1020px;
+}
+
+.homepage--body #fader-diagram-modern-java-gray {
+  position:absolute;
+  height: 238px;
+  background-size: 100%;
+  width: 1020px;
+  margin: 31px auto;
+  background: url(/img/homepage/diagram-gray.svg) no-repeat;
+  background-size: 100%;
+}
+
+.homepage--body #fader {
+  background-color: #34302d;
+  width: 6px;
+  height: 300px;
+  border-radius: 4px;
+  position: absolute;
+  left: 400px;
+}
+
+.homepage--body #fader #box {
+  background-color: #34302d;
+  border-radius: 6px;
+  width: 35px;
+  height: 30px;
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+  margin-left: -16px;
+  position: absolute;
+}
+
+.homepage--body #fader #box #inner {
+  width: 12px;
+  margin: 0 auto;
+}
+
+.homepage--body #fader #box .line {
+  background-color: rgba(255,255,255,0.2);
+  height: 14px;
+  width: 2px;
+  margin: 8px 0;
+  float: left;
+}
+
+.homepage--body #fader #box .line:nth-child(2) {
+  margin: 8px 3px;
+}
+
+.homepage--body .homepage--section .benefits .inner {
+  padding: 0 20px;
+}
+
+.homepage--body #spring-framework-icon {
+  height: 100px;
+  width: 100px;
+  margin-right: 20px;
+}
+
+.homepage--body .icon-title {
+  margin-bottom: 40px;
+  display: block;
+}
+
+.homepage--body .icon-title img {
+  margin: 0 20px 20px 0;
+}
+
+.homepage--body .icon-title .sidebyside {
+  vertical-align: middle;
+}
+
+.homepage--body #diagram-boot-reactor {
+  max-height: 590px;
+  margin-right: 60px;
+  max-width: 683px;
+  width: 100%;
+}
+
+.homepage--body .diagram-text {
+  max-width: 390px;
+}
+
+.homepage--body .homepage--section hr {
+  margin-bottom: 0;
+}
+
+.homepage--body #spring-boot-icon {
+  height: 71px;
+  max-width: 80px;
+}
+
+.homepage--body .spring-boot-section .inner {
+  margin-right: 10px;
+}
+
+.homepage--body #video-with-overlay {
+  position: relative;
+  margin: 45px 0 0 30px;
+  width: 534px;
+  height: 300px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.homepage--body #video-with-overlay:hover {
+  opacity: 0.9;
+}
+
+.homepage--body #video-with-overlay iframe,
+.homepage--body #video-with-overlay img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.homepage--body #video-with-overlay img {
+  z-index: 1;
+  background: white;
+}
+
+.homepage--body .homepage--section td {
+  vertical-align: top;
+  padding: 7px 0;
+}
+
+.homepage--body .homepage--section .dash {
+  color: #5fa134;
+  padding-right: 15px;
+  font-size: 30px;
+}
+
+.homepage--body .homepage--section .icon-file-text {
+  padding-right: 8px;
+  font-size: 20px;
+}
+
+.homepage--body .homepage--section .intro {
+  max-width: 830px;
+  margin: 0 auto;
+}
+
+.homepage--body #spring-cloud-icon {
+  height: 68px;
+  max-width: 103px;
+}
+
+.homepage--body .spring-cloud-section .icon-title {
+  margin-bottom: 45px;
+}
+
+.homepage--body #diagram-distributed-systems {
+  background-color: #f7f7f7;
+  padding: 60px;
+}
+
+.homepage--body .spring-cloud-section .columns {
+  display: inline-flex;
+}
+
+.homepage--body .spring-cloud-section .column .inner {
+  margin-right: 60px;
+}
+
+.homepage--body .spring-cloud-section .column:last-child {
+  min-width: 264px;
+}
+
+.homepage--body .spring-cloud-data-flow-section {
+  padding-bottom: 200px;
+}
+
+.homepage--body .spring-cloud-data-flow-section .monitor-container {
+  background-image: url(/img/homepage/monitor.jpg);
+  background-position: top 30px right -220px;
+  background-repeat: no-repeat;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.homepage--body #spring-cloud-data-flow-icon {
+  height: 75px;
+  max-width: 114px;
 }
