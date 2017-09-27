@@ -3,6 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
+import sagan.blog.PostFormat;
 import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 import sagan.team.support.TeamRepository;
@@ -54,7 +55,7 @@ public class PostFormAdapter_UpdatePostTests {
     public void setup() {
         given(dateFactory.now()).willReturn(now);
         given(postSummary.forContent(anyString(), anyInt())).willReturn(SUMMARY);
-        given(renderer.render(content)).willReturn(RENDERED_HTML);
+        given(renderer.render(content, PostFormat.MARKDOWN)).willReturn(RENDERED_HTML);
 
         post = PostBuilder.post().id(123L).author("author_id", ORIGINAL_AUTHOR).build();
 

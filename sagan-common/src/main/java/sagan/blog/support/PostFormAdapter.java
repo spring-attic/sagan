@@ -62,12 +62,7 @@ class PostFormAdapter {
 
     private void setPostProperties(PostForm postForm, String content, Post post) {
         String rendered = null;
-        if (renderer instanceof FormatAwarePostContentRenderer) {
-            rendered = ((FormatAwarePostContentRenderer)renderer).render(content, post.getFormat());
-        } else {
-            // Keep the option open of reverting to the old PostContentRenderer
-            rendered = renderer.render(content);
-        }
+        rendered = renderer.render(content, post.getFormat());
         post.setRenderedContent(rendered);
         summarize(post);
         post.setBroadcast(postForm.isBroadcast());
@@ -89,7 +84,7 @@ class PostFormAdapter {
     }
 
     public void refreshPost(Post post) {
-        post.setRenderedContent(renderer.render(post.getRawContent()));
+        post.setRenderedContent(renderer.render(post.getRawContent(), post.getFormat()));
         summarize(post);
     }
 }

@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.blog.PostFormat;
 import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 import sagan.team.MemberProfile;
@@ -63,7 +64,7 @@ public class PostFormAdapter_CreatePostTests {
         profile.setName(AUTHOR_NAME);
         given(teamRepository.findByUsername(AUTHOR_USERNAME)).willReturn(profile);
 
-        given(renderer.render(content)).willReturn(RENDERED_HTML);
+        given(renderer.render(content, PostFormat.MARKDOWN)).willReturn(RENDERED_HTML);
         given(postSummary.forContent(anyString(), anyInt())).willReturn(RENDERED_SUMMARY);
         given(dateFactory.now()).willReturn(now);
 
@@ -75,6 +76,7 @@ public class PostFormAdapter_CreatePostTests {
         postForm.setCategory(category);
         postForm.setBroadcast(broadcast);
         postForm.setPublishAt(publishAt);
+        postForm.setFormat(PostFormat.MARKDOWN);
 
         post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
     }
