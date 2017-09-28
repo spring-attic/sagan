@@ -523,4 +523,13 @@
   .homepage--body .homepage--section h2 {
     font-size: 28px;
   }
+  .homepage--body .homepage--banner p br {
+    display: none;
+  }
+  .homepage--body #diagram-distributed-systems img {
+    max-height: 138px;
+  }
+  .footer .nav li a {
+    padding: 0 10px;
+  }
 }
