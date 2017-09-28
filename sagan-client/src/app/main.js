@@ -12,7 +12,7 @@ var initPrettify = require('../feature/prettify/main');
 var initMap = require('../feature/map/main');
 var initTimeAgo = require('../feature/timeAgo/main');
 var initHideShowGuide = require('../feature/hide-show-guide/main');
-var initHeroBanner = require('../feature/heroBanner/main');
+var initHomepage = require('../feature/homepage/main');
 
 var most = require('most');
 var $ = require('jquery');
@@ -35,7 +35,7 @@ var features = {
     'map': initMap,
     'timeago': initTimeAgo,
     'hide-show-guide': initHideShowGuide,
-    'hero-banner': initHeroBanner
+    'homepage': initHomepage
 };
 
 initFeatures(features, document).each(function(features) {
