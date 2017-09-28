@@ -31,8 +31,9 @@ $('.homepage--body .homepage--banner .dot').click(function (){
 
 //Modern Java diagram fader
 $(document).on('mousemove', function(e){
-  if (e.pageX < 1020 && e.pageX > 120) {
-    $('.homepage--body #fader-diagram #fader').css({left:  e.pageX});
+  var x = e.pageX - $('.homepage--body #fader-diagram').offset().left;
+  if ((e.pageY < 960 && e.pageY > 630) && (x < 800 && x > 0)) {
+    $('.homepage--body #fader-diagram #fader').css({left:  x});
     var fader = $("#fader-diagram #fader").css('left');
     $(".homepage--body #fader-diagram #fader-diagram-modern-java-color").css('width',fader);        
   }

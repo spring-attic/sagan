@@ -23,10 +23,6 @@
   text-decoration: none;
 }
 
-.homepage--body .container-fluid {
-  max-width: 1140px;
-}
-
 .homepage--body .center {
   text-align: center;
 }
@@ -167,12 +163,13 @@
 }
 
 .homepage--body .slide--dots .dot {
-  width: 7px;
-  height: 7px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: rgba(255,255,255,0.1);
   display: inline-block;
   margin: 0 7px;
+  cursor: pointer;
 }
 
 .homepage--body .slide--dots .dot.active {
@@ -211,48 +208,54 @@
   padding-bottom: 80px;
 }
 
+.homepage--body #fader-diagram-your-app img {
+  height: 105px;
+  width: 102px;
+  padding: 125px 20px 0 0;
+}
+
 .homepage--body #fader-diagram {
   position: relative;
   margin: 30px auto;
   height: 300px;
-  width: 1020px;
+  width: 800px;
   cursor: ew-resize;
 }
 
 .homepage--body #fader-diagram-modern-java-color {
   position: absolute;
   height: 238px;
-  max-width: 1020px;
+  max-width: 800px;
   margin: 31px auto;
   overflow: hidden;
-  width: 400px;
+  width: 0;
 }
 
 .homepage--body #fader-diagram-modern-java-color div {
   position: absolute;
   height: 238px;
-  background: url(/img/homepage/diagram-modern-java.svg) no-repeat;
+  background: url(/img/homepage/diagram-modern-java-color.svg) no-repeat;
   background-size: 100%;
-  width: 1020px;
+  width: 800px;
 }
 
 .homepage--body #fader-diagram-modern-java-gray {
   position:absolute;
   height: 238px;
   background-size: 100%;
-  width: 1020px;
+  width: 800px;
   margin: 31px auto;
-  background: url(/img/homepage/diagram-gray.svg) no-repeat;
+  background: url(/img/homepage/diagram-modern-java-gray.svg) no-repeat;
   background-size: 100%;
 }
 
 .homepage--body #fader {
   background-color: #34302d;
   width: 6px;
-  height: 300px;
+  height: 275px;
   border-radius: 4px;
   position: absolute;
-  left: 400px;
+  left: 0;
 }
 
 .homepage--body #fader #box {
@@ -308,9 +311,9 @@
 }
 
 .homepage--body #diagram-boot-reactor {
-  max-height: 590px;
-  margin-right: 60px;
-  max-width: 683px;
+  max-height: 493px;
+  margin-right: 40px;
+  max-width: 590px;
   width: 100%;
 }
 

@@ -63,6 +63,17 @@
 }
 
 @media (max-width: 1080px) {
+  .homepage--body #fader-diagram-your-app {
+    background: url(/img/homepage/diagram-modern-java.svg) no-repeat;
+    height: 240px;
+    background-size: 100%;
+    margin: 60px auto;
+  }
+  .homepage--body #fader-diagram-your-app img,
+  .homepage--body #fader-diagram-your-app #fader-diagram {
+    display: none;
+  }
+
   .tool-versions--wrapper .tool-versions--container .platform {
     border-right: none;
   }
@@ -78,22 +89,6 @@
 
 @media (max-width: 1075px) {
   .copy-button {
-    display: none;
-  }
-}
-
-@media(max-width: 1040px) {
-  .homepage--body #fader-diagram {
-    cursor: auto;
-    width: 100%;
-  }
-  .homepage--body #fader-diagram-modern-java-color div,
-  .homepage--body #fader-diagram-modern-java-color {
-    width: 100% !important;
-    height: 100%;
-  }
-  .homepage--body #fader-diagram-modern-java-gray,
-  .homepage--body #fader {
     display: none;
   }
 }
@@ -156,8 +151,8 @@
   .homepage--body .homepage--banner h2 {
     font-size: 30px;
   }
-  .homepage--body #fader-diagram {
-    height: 220px;
+  .homepage--body #fader-diagram-your-app {
+    height: 180px;
   }
   .homepage--body .spring-cloud-data-flow-section .monitor-container {
     background-image: none;
@@ -522,8 +517,8 @@
 }
 
 @media(max-width: 480px) {
-  .homepage--body #fader-diagram {
-    height: 140px;
+  .homepage--body #fader-diagram-your-app {
+    height: 80px;
   }
   .homepage--body .homepage--section h2 {
     font-size: 28px;
