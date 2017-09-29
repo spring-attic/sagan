@@ -10,6 +10,7 @@ import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,6 +34,7 @@ public class ProjectControllerTest {
     public void setUp() throws Exception {
         controller = new ProjectController(projectMetadataService);
         when(projectMetadataService.getProject("spring-framework")).thenReturn(project);
+        when(projectMetadataService.getProjectsForCategory("active")).thenReturn(Arrays.asList(project, project));
         viewName = controller.showProject(model, "spring-framework");
     }
 
@@ -40,7 +42,14 @@ public class ProjectControllerTest {
     public void showProjectModelHasProjectData() { assertThat(model.get("project"), equalTo(project)); }
 
     @Test
-    public void viewNameIsShow() {
+    public void showProjectModelHasProjectsListForSidebar() {
+        List<Project> modelProjectList = (List<Project>) model.get("projects");
+        assertThat(modelProjectList.size(), equalTo(2));
+        assertThat(modelProjectList.get(0), equalTo(project));
+    }
+
+    @Test
+    public void showProjectViewNameIsShow() {
         assertThat(viewName, is("projects/show"));
     }
 

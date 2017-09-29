@@ -1,0 +1,27 @@
+
+.compass.main-body--wrapper {
+    margin-top: 0;
+}
+
+.compass .sidebar {
+    background: #dbe6d6;
+    float: left;
+    width: 220px;
+    margin: 0;
+    list-style: none;
+    padding: 20px;
+}
+
+.compass .sidebar_project{
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+    padding: 6px 0;
+}
+
+.compass .sidebar a {
+    color: #34302d;
+}
+
+.compass .sidebar a:hover {
+    color: #5fa134;
+}

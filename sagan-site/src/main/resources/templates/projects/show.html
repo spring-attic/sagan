@@ -4,7 +4,10 @@
       layout:decorator="layout"
       data-info-popups>
 <head>
-    <title>Projects</title>
+    <title th:text="${project.getName()}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/project.css}" href="../../../../../../sagan-client/css/project.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+
     <!-- http://opengraphprotocol.org/ -->
     <meta property="og:title" content="Spring Projects" />
     <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
@@ -14,7 +17,12 @@
 <body>
   <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container-fluid">
-    <article class="main-body--wrapper">
+    <article class="main-body--wrapper compass">
+      <ul class="sidebar">
+          <li class="sidebar_project" th:each="proj : ${projects}">
+              <a th:href="${proj.siteUrl}" th:text="${proj.getName()}"></a>
+          </li>
+      </ul>
       <h1 class="index-page--title" th:text="${project.getName()}"></h1>
     </article>
   </div>
