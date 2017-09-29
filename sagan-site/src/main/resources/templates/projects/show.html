@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout"
+      data-info-popups>
+<head>
+    <title>Projects</title>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="Spring Projects" />
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:description" content="The Spring portfolio has many projects, including Spring Framework,
+    Sprint IO Platform, Spring Cloud, Spring Boot, Spring Data, Spring Security..." />
+</head>
+<body>
+  <div layout:fragment="header-container"></div>
+  <div layout:fragment="content" class="container-fluid">
+    <article class="main-body--wrapper">
+      <h1 class="index-page--title" th:text="${project.getName()}"></h1>
+    </article>
+  </div>
+</body>
+</html>
