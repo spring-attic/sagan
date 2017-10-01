@@ -121,19 +121,19 @@ public class ProjectRelease implements Comparable<ProjectRelease> {
     }
 
     public String getRefDocUrl() {
-        return hasRefDocUrl() ? refDocUrl : "";
+        return refDocUrl;
     }
 
     public boolean hasRefDocUrl() {
-        return refDocUrl != null && !refDocUrl.isEmpty();
+        return !refDocUrl.isEmpty();
     }
 
     public String getApiDocUrl() {
-        return hasApiDocUrl() ? apiDocUrl : "";
+        return apiDocUrl;
     }
 
     public boolean hasApiDocUrl() {
-        return apiDocUrl != null && !apiDocUrl.isEmpty();
+        return !apiDocUrl.isEmpty();
     }
 
     public String getGroupId() {
