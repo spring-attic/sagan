@@ -2,6 +2,124 @@
   display: none;
 }
 
+@media (min-width: 2000px) {
+  .homepage--body .offset-feature--container.feature-sts {
+    background-position: 25% 100%;
+  }
+  .homepage--body .offset-feature--container.feature-projects, .homepage--body .offset-feature--container.feature-guides {
+    background-position: 77% 0;
+  }
+}
+
+@media(min-width: 1900px) {
+  .homepage--body .spring-cloud-data-flow-section .monitor-container {
+    background-position: top 30px right 0px;
+  }
+}
+
+@media(min-width: 1441px) {
+  .homepage--body .spring-cloud-data-flow-section .monitor-container {
+    max-width: 1900px;
+  }
+}
+
+@media(max-width: 1441px) {
+  .homepage--body .spring-cloud-data-flow-section .monitor-container {
+    background-size: 60%;
+  }
+}
+
+@media (min-width: 1180px) and (max-width: 2000px) {
+  .homepage--body .offset-feature--container.feature-sts {
+    background-position: 0 100%;
+  }
+  .homepage--body .offset-feature--container.feature-projects, .homepage--body .offset-feature--container.feature-guides {
+    background-position: 100% 0;
+  }
+}
+
+@media(max-width: 1190px) {
+  .homepage--body #diagram-boot-reactor {
+    margin: 0 auto;
+    display: block;
+  }
+  .homepage--body .diagram-text {
+    text-align: center;
+    margin-top: 70px;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1180px) {
+  .homepage--body .offset-feature--container.feature-guides {
+    background-position: 120% 0;
+  }
+  .homepage--body .offset-feature--container.feature-sts {
+    background-position: -50px 100%;
+  }
+  .homepage--body .offset-feature--container.feature-projects {
+    background-position: 300px 0;
+  }
+}
+
+@media (max-width: 1080px) {
+  .homepage--body #fader-diagram-your-app {
+    background: url(/img/homepage/diagram-modern-java.svg) no-repeat;
+    height: 240px;
+    background-size: 100%;
+    margin: 60px auto;
+  }
+  .homepage--body #fader-diagram-your-app img,
+  .homepage--body #fader-diagram-your-app #fader-diagram {
+    display: none;
+  }
+
+  .tool-versions--wrapper .tool-versions--container .platform {
+    border-right: none;
+  }
+
+  .tool-versions--wrapper .tool-versions--container {
+    text-align: center;
+  }
+
+  .tool-versions--wrapper .tool-versions--icon--container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1075px) {
+  .copy-button {
+    display: none;
+  }
+}
+
+@media (max-width: 1007px) {
+  .new-noteworthy-box {
+    display: none;
+  }
+  .tools-intro {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .search-facets, .facets--clear-filters {
+    display: none;
+  }
+  .search-results-page .row-fluid .span8 {
+    width: 100%;
+  }
+  .homepage--body .spring-boot-section .display-flex {
+    display: block;
+  }
+  .homepage--body .spring-boot-section .icon-title {
+    text-align: left;
+  }
+  .homepage--body #video-with-overlay {
+    margin: 60px 0 0;
+  }
+}
+
 @media (max-width: 800px) {
   html, body {
     height: 100%;
@@ -30,57 +148,37 @@
     display: block;
   }
 
-  .homepage-billboard {
-    height: auto;
+  .homepage--body .homepage--banner h2 {
+    font-size: 30px;
   }
-  .homepage-billboard .billboard--container {
-    position: relative;
-    overflow: hidden;
+  .homepage--body #fader-diagram-your-app {
+    height: 180px;
   }
-  .homepage-billboard .icon.icon-spring-logo-big {
-    background: url("../img/mobile-leaf-watermark.png") 0 0 no-repeat;
-    width: 928px;
-    height: 924px;
-    position: absolute;
-    left: 50%;
-    transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    top: 50%;
-    opacity: 0.06;
-    margin: -462px 0 0 -464px;
-    z-index: 0;
+  .homepage--body .spring-cloud-data-flow-section .monitor-container {
+    background-image: none;
   }
-  .homepage-billboard .homepage-title--container {
-    margin-top: 0;
+  .homepage--body .spring-cloud-data-flow-section .fiftywide {
+    width: 100%;
   }
-  .homepage-billboard .homepage-title {
-    font-size: 40px;
-    line-height: 50px;
+  .homepage--body .icon-title {
+    text-align: left;
   }
-  .homepage-billboard .homepage-subtitle {
-    font-size: 21px;
-    line-height: 21px;
+  .homepage--body .modern-java-section .thirtywide {
+    width: 100%;
+    display: block;
   }
-
-  .homepage--body .key-feature--wrapper {
+  .homepage--body .modern-java-section .thirtywide .inner {
+    padding: 0 0 20px;
+  }
+  .homepage--body .homepage--section .intro {
+    text-align: left;
+  }
+  .homepage--body #diagram-distributed-systems {
+    background-color: transparent;
     padding: 0;
   }
-  .homepage--body .key-feature--wrapper .key-feature--container {
-    margin-top: 5%;
-    margin-bottom: 5%;
-  }
-  .homepage--body .key-feature--wrapper .key-feature--container .key-feature--icon--container {
-    margin-bottom: 30px;
-  }
-  .homepage--body .key-feature--wrapper .key-feature--container .key-feature--title {
-    font-size: 24px;
-  }
-  .homepage--body .key-feature--wrapper .key-feature--container .key-feature--text {
-    font-size: 15px;
-    line-height: 21px;
+  .homepage--body .spring-cloud-section .columns {
+    display: block;
   }
 
   .mobile-left-pane {
@@ -326,19 +424,6 @@
     height: 290px;
   }
 
-  .platform-index--header {
-    text-align: center;
-    padding: 60px 0;
-  }
-  .platform-index--header:after {
-    background-position: 50%;
-    background-size: 100%;
-  }
-
-  footer {
-    display: none;
-  }
-
   .content--title {
     display: none;
   }
@@ -347,6 +432,17 @@
     padding: 0 5px;
   }
 }
+
+@media (max-width: 777px) {
+  .eclipse--container .logo-eclipse-text {
+     float:none;
+  }
+
+  .eclipse--container .eclipse-content--container {
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 600px) {
   .blog--container .meta-data--container .meta-data--item {
     margin-bottom: 10px !important;
@@ -355,62 +451,11 @@
     margin-bottom: 0 !important;
   }
 
-  .homepage-billboard {
-    text-align: left !important;
-  }
-  .homepage-billboard .homepage-title {
-    font-size: 30px !important;
-    line-height: 36px !important;
-  }
-  .homepage-billboard .homepage-subtitle {
-    font-size: 18px !important;
-    line-height: 24px !important;
-  }
-
-  .homepage--body .key-feature--wrapper .key-feature--container {
-    width: 100%;
-    margin: 7% 0;
-  }
-  .homepage--body .key-feature--wrapper .key-feature--container:first-child {
-    margin-top: 60px;
-  }
-  .homepage--body .key-feature--wrapper .key-feature--container:last-child {
-    margin-bottom: 60px;
-  }
-  .homepage--body .platform--wrapper {
-    padding: 30px 0 60px;
-    background-size: 404px;
-  }
-  .homepage--body .platform--wrapper .platform--icon {
-    margin-bottom: 15px;
-    transform: scale(0.75);
-    -moz-transform: scale(0.75);
-    -webkit-transform: scale(0.75);
-    -o-transform: scale(0.75);
-    -ms-transform: scale(0.75);
-  }
-  .homepage--body .platform--wrapper .platform--title {
-    font-size: 21px;
-    line-height: 24px;
-  }
-  .homepage--body .platform--wrapper .platform--text {
-    font-size: 15px;
-    line-height: 21px;
-  }
-  .homepage--body .offset-feature--container .feature--content {
-    padding: 60px 0;
-    text-align: left !important;
-  }
-  .homepage--body .offset-feature--container .offset-feature--title {
-    font-size: 21px;
-    line-height: 24px;
-  }
-  .homepage--body .offset-feature--container .offset-feature--text, .homepage--body .offset-feature--container .offset-feature--link {
-    font-size: 15px;
-    line-height: 21px;
-  }
-  .homepage--body .offset-feature--container .tool-suite {
-    text-align: left;
+  .homepage--body #video-with-overlay,
+  .homepage--body #video-with-overlay img,
+  .homepage--body #video-with-overlay iframe {
+    width: 290px;
+    height: 165px;
   }
 
   .content-container--wrapper .content-container--header {
@@ -457,77 +502,21 @@
   }
 
 }
-@media (max-width: 900px) {
-  .search-facets, .facets--clear-filters {
+
+@media(max-width: 480px) {
+  .homepage--body #fader-diagram-your-app {
+    height: 80px;
+  }
+  .homepage--body .homepage--section h2 {
+    font-size: 28px;
+  }
+  .homepage--body .homepage--banner p br {
     display: none;
   }
-  .search-results-page .row-fluid .span8 {
-    width: 100%;
+  .homepage--body #diagram-distributed-systems img {
+    max-height: 138px;
   }
-}
-@media (min-width: 900px) and (max-width: 1180px) {
-  .homepage--body .offset-feature--container.feature-guides {
-    background-position: 120% 0;
-  }
-  .homepage--body .offset-feature--container.feature-sts {
-    background-position: -50px 100%;
-  }
-  .homepage--body .offset-feature--container.feature-projects {
-    background-position: 300px 0;
-  }
-
-}
-@media (min-width: 1180px) and (max-width: 2000px) {
-  .homepage--body .offset-feature--container.feature-sts {
-    background-position: 0 100%;
-  }
-  .homepage--body .offset-feature--container.feature-projects, .homepage--body .offset-feature--container.feature-guides {
-    background-position: 100% 0;
-  }
-}
-@media (min-width: 2000px) {
-  .homepage--body .offset-feature--container.feature-sts {
-    background-position: 25% 100%;
-  }
-  .homepage--body .offset-feature--container.feature-projects, .homepage--body .offset-feature--container.feature-guides {
-    background-position: 77% 0;
-  }
-}
-@media (max-width: 1080px) {
-  .tool-versions--wrapper .tool-versions--container .platform {
-    border-right: none;
-  }
-
-  .tool-versions--wrapper .tool-versions--container {
-    text-align: center;
-  }
-
-  .tool-versions--wrapper .tool-versions--icon--container {
-    width: 100%;
-  }
-
-}
-@media (max-width: 1075px) {
-  .copy-button {
-    display: none;
-  }
-}
-
-@media (max-width: 1007px) {
-  .new-noteworthy-box {
-    display: none;
-  }
-  .tools-intro {
-    width: 100%;
-  }
-}
-
-@media (max-width: 777px) {
-   .eclipse--container .logo-eclipse-text {
-     float:none;
-  }
-
-.eclipse--container .eclipse-content--container {
-    margin-left: 0;
+  .footer .nav li a {
+    padding: 0 10px;
   }
 }

@@ -1,5 +1,6 @@
 package sagan.blog.support;
 
+import org.asciidoctor.Asciidoctor;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,7 +12,7 @@ public class AsciidoctorMarkdownServiceTests {
 
     @Before
     public void setup() {
-        service = new AsciidoctorMarkdownService();
+        service = new AsciidoctorMarkdownService(Asciidoctor.Factory.create());
     }
 
     @Test

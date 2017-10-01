@@ -165,13 +165,6 @@
           <div class="project--title">Spring Shell</div>
           <p class="project--description">Provides a powerful foundation for building command-line apps using a Spring-based programming model.</p>
         </a>
-        <a th:href="${project.siteUrl}" class="project--container project--container--link" th:with="project=${projectMetadata.getProject('spring-xd')}">
-            <div class="project-logo--container">
-                <div class="icon project--logo logo-spring-xd"></div>
-            </div>
-            <div class="project--title">Spring XD</div>
-            <p class="project--description">Simplifies the development of big data applications by addressing ingestion, analytics, batch jobs and data export.</p>
-        </a>
         <a th:href="${project.siteUrl}" class="project--container project--container--link" th:if="${projectMetadata.getProject('spring-flo')}"
            th:with="project=${projectMetadata.getProject('spring-flo')}">
           <div class="project-logo--container">
@@ -221,6 +214,10 @@
         <a href="https://github.com/spring-projects/rest-shell#readme" class="project--container project--container--link">
           <div class="project--title">REST Shell</div>
           <p class="project--description">Makes writing and testing RESTful applications easier with CLI-based resource discovery and interaction.</p>
+        </a>
+        <a th:href="${project.siteUrl}" class="project--container project--container--link" th:with="project=${projectMetadata.getProject('spring-xd')}">
+          <div class="project--title">Spring XD</div>
+          <p class="project--description">Simplifies the development of big data applications by addressing ingestion, analytics, batch jobs and data export.</p>
         </a>
       </section>
     </article>

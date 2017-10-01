@@ -2,7 +2,7 @@ language: java
 jdk:
 - oraclejdk8
 node_js:
-- '0.10'
+- "8"
 git:
   submodules: false
 env:
@@ -10,7 +10,7 @@ env:
   - GRADLE_OPTS="-Xmx1024m -Xms1024m"
   - TERM=dumb
 script:
-- 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew deploy; else ./gradlew check; fi'
+  - 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew deploy :sagan-site:uploadArchives; else ./gradlew check; fi'
 sudo: false
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock

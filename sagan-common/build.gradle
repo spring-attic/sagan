@@ -24,8 +24,7 @@ dependencies {
 
     // datasource and connection pool dependencies
     runtime 'org.postgresql:postgresql:9.4.1212'
-    compile 'com.h2database:h2'
-    compile 'org.apache.tomcat:tomcat-jdbc'
+    runtime 'com.h2database:h2'
 
     // for use in on-the-fly database setup and migrations
     compile 'org.flywaydb:flyway-core'

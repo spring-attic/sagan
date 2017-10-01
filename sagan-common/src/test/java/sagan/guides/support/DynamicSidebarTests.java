@@ -1,6 +1,5 @@
 package sagan.guides.support;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import sagan.support.github.GitHubClient;
 
 import java.io.IOException;
@@ -13,6 +12,8 @@ import org.mockito.Mock;
 
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.util.StreamUtils;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -32,7 +33,7 @@ public class DynamicSidebarTests {
     @Before
     public void setup() throws IOException {
         initMocks(this);
-        org = new GuideOrganization("spring-guides", "orgs", github, new ObjectMapper());
+        org = new GuideOrganization("spring-guides", "orgs", github, new ObjectMapper(), null);
     }
 
     @Test

@@ -5,8 +5,7 @@ buildscript {
         maven { url springRepo }
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.4.RELEASE"
-        classpath 'io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.6.RELEASE"
         classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.3' // see deploy.gradle
     }
 }
@@ -20,10 +19,11 @@ def javaProjects = [ project(':sagan-site'), project(':sagan-indexer'), project(
 def bootProjects = javaProjects - project(':sagan-common')
 def gradleDir = "${rootProject.rootDir}/gradle"
 
-wrapper.gradleVersion = '2.13'
+wrapper.gradleVersion = '4.1'
 
 configure(allprojects) {
     apply plugin: 'eclipse'
+    version = "1.0.0.BUILD-SNAPSHOT"
 }
 
 configure(javaProjects) {
@@ -42,12 +42,13 @@ configure(javaProjects) {
     afterEvaluate {
         dependencyManagement {
             imports {
-                mavenBom('io.spring.platform:platform-bom:Athens-SR3') {
+                mavenBom('io.spring.platform:platform-bom:Brussels-SR4') {
                     bomProperties([
                             'elasticsearch.version': '1.7.1', // see io.searchbox:jest
-                            'hibernate.version': '4.3.11.Final'
+							'spring.version': '4.3.11.RELEASE'
                     ])
                 }
+                mavenBom("org.springframework.cloud:spring-cloud-dependencies:Camden.SR7")
             }
         }
     }

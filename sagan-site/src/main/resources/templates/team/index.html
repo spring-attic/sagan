@@ -56,7 +56,6 @@
             <div class="team-member--social">
               <a class="team-member--social--icon twitter-small" rel="me" th:href="${profile.twitterLink.href}" th:if="${profile.hasTwitterUsername()}"></a>
               <a class="team-member--social--icon github-small" rel="me" th:href="${profile.githubLink.href}" th:if="${profile.hasGithubUsername()}"></a>
-              <a class="team-member--social--icon gplus-small" rel="me" th:href="${profile.gplusLink.href}" th:if="${profile.hasGplusId()}">G+</a>
               <a class="team-member--social--icon speakerdeck-small" rel="me" th:href="${profile.speakerdeckLink.href}" th:if="${profile.hasSpeakerdeckUsername()}"></a>
               <a class="team-member--social--icon lanyrd-small" rel="me" th:href="${profile.lanyrdLink.href}" th:if="${profile.hasLanyrdUsername()}"></a>
             </div>

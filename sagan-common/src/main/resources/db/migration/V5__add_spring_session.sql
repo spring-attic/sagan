@@ -1,2 +1,0 @@
-insert into project values('spring-session','Spring Session','http://github.com/spring-projects/spring-session','active','http://projects.spring.io/spring-session/','FALSE','spring-session');
-insert into project_releaselist values('spring-session', null,'','spring-session','org.springframework.session','TRUE','http://docs.spring.io/spring-session/docs/current/reference/html5/','0','1.0.0.RELEASE');

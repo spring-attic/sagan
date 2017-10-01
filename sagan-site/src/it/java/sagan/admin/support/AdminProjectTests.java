@@ -38,7 +38,7 @@ public class AdminProjectTests extends AbstractIntegrationTests {
     @Test
     public void viewProject404() throws Exception {
         mockMvc.perform(get("/admin/projects/missing"))
-                .andExpect(view().name("pages/404"));
+                .andExpect(view().name("error/404"));
     }
 
     @Test

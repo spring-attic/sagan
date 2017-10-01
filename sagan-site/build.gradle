@@ -1,5 +1,5 @@
 plugins {
-	id "org.asciidoctor.convert" version "1.5.3"
+    id "org.asciidoctor.convert" version "1.5.3"
     id "com.gorylenko.gradle-git-properties" version "1.4.6"
 }
 
@@ -27,7 +27,7 @@ dependencies {
 
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "org.springframework.boot:spring-boot-starter-redis"
+    compile "org.springframework.boot:spring-boot-starter-data-redis"
     compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.springframework.boot:spring-boot-devtools"
     compile "org.springframework.security:spring-security-acl"
@@ -53,9 +53,112 @@ dependencies {
 
     // for use in mocking http interactions
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
+    testCompile "org.springframework.cloud:spring-cloud-contract-wiremock"
     testCompile "org.springframework.boot:spring-boot-starter-test"
 
     // pick up common test utility classes
     testCompile project(':sagan-common').sourceSets.testUtil.output
 
+}
+
+clean.doFirst {
+    delete "${projectDir}/data/"
+    println "Deleted ${projectDir}/data/"
+}
+
+task stubsJar(type: Jar) {
+    classifier = "stubs"
+    into("META-INF/${project.group}/${project.name}/${project.version}/mappings") {
+        include('**/*.*')
+        from("${project.buildDir}/snippets/stubs")
+    }
+}
+
+stubsJar.dependsOn(test)
+
+artifacts {
+    archives stubsJar
+}
+
+apply plugin: 'maven'
+
+uploadArchives.dependsOn { [check] }
+
+ext {
+    resolveRepoName = { Project project ->
+        resolvedRepoName = "libs-${resolveVersion(project.version)}-local"
+        logger.lifecycle("For project [$project.name] with " +
+                "version [$project.version] the resolved Artifactory repo is [$resolvedRepoName]")
+        return resolvedRepoName
+    }
+
+    isReleaseVersion = version.endsWith("RELEASE")
+    isMilestoneVersion = version.matches('[0-9].[0-9].[0-9].M[0-9]+') || version.matches('[0-9].[0-9].[0-9].RC[0-9]+')
+    isSnapshotVersion = !(isReleaseVersion || isMilestoneVersion)
+
+    resolveVersion = { String version ->
+        if (isMilestoneVersion) return 'milestone'
+        if (isReleaseVersion) return 'release'
+        return 'snapshot'
+    }
+
+    repoUrl = "https://repo.spring.io/${resolveRepoName(project)}"
+}
+
+afterEvaluate {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                // Target repository
+                String repoUserName = getProp("REPO_USERNAME") ?: "changeme"
+                String repoPass = getProp("REPO_PASSWORD") ?: "changeme"
+                repository(url: repoUrl) {
+                    authentication(userName: repoUserName, password: repoPass)
+                }
+                // we want to publish only the stubs
+                addFilter('stubs') {artifact, file ->
+                    artifact.extraAttributes["classifier"] == "stubs"
+                }
+                pom.project {
+                    name project.name
+                    packaging 'jar'
+                    description 'Project Sagan Site Stubs'
+                    url 'https://github.com/spring-io/sagan'
+                    inceptionYear '2013'
+
+                    scm {
+                        connection 'scm:git:git@github.com:spring-io/sagan.git'
+                        developerConnection 'scm:git:git@github.com:spring-io/sagan.git'
+                        url 'https://github.com/spring-io/sagan'
+                    }
+
+                    licenses {
+                        license {
+                            name 'BSD 3-clause "New" or "Revised" License'
+                            url 'https://raw.githubusercontent.com/spring-io/sagan/master/LICENSE.md'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'bclozel'
+                            name 'Brian Clozel'
+                            email 'bclozel ATT pivotal DOTT io'
+                        }
+                        developer {
+                            id 'dsyer'
+                            name 'Dave Syer'
+                            email 'dsyer ATT pivotal DOTT io'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+String getProp(String propName) {
+    return hasProperty(propName) ?
+            (getProperty(propName) ?: System.properties[propName]) : System.properties[propName] ?:
+            System.getenv(propName)
 }

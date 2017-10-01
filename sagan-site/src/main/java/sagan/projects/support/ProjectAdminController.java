@@ -83,7 +83,7 @@ class ProjectAdminController {
 
     private String edit(Project project, Model model) {
         if (project == null) {
-            return "pages/404";
+            return "error/404";
         }
 
         denormalizeProjectReleases(project);

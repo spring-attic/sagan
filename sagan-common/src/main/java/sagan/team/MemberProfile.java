@@ -52,9 +52,6 @@ public class MemberProfile {
     private String twitterUsername;
 
     @Column(nullable = true)
-    private String gplusId;
-
-    @Column(nullable = true)
     private String lanyrdUsername;
 
     @Column(nullable = true)
@@ -191,18 +188,6 @@ public class MemberProfile {
         return !StringUtils.isEmpty(lanyrdUsername);
     }
 
-    public String getGplusId() {
-        return gplusId;
-    }
-
-    public void setGplusId(String gplusId) {
-        this.gplusId = gplusId;
-    }
-
-    public boolean hasGplusId() {
-        return !StringUtils.isEmpty(gplusId);
-    }
-
     @JsonIgnore
     public Link getTwitterLink() {
         if (StringUtils.isEmpty(getTwitterUsername())) {
@@ -235,15 +220,6 @@ public class MemberProfile {
             return null;
         }
         String pathAndHost = String.format("lanyrd.com/profile/%s", getLanyrdUsername());
-        return new Link("https://" + pathAndHost, pathAndHost);
-    }
-
-    @JsonIgnore
-    public Link getGplusLink() {
-        if (StringUtils.isEmpty(getGplusId())) {
-            return null;
-        }
-        String pathAndHost = String.format("plus.google.com/%s", getGplusId());
         return new Link("https://" + pathAndHost, pathAndHost);
     }
 
@@ -315,8 +291,6 @@ public class MemberProfile {
             return false;
         if (lanyrdUsername != null ? !lanyrdUsername.equals(that.lanyrdUsername) : that.lanyrdUsername != null)
             return false;
-        if (gplusId != null ? !gplusId.equals(that.gplusId) : that.gplusId != null)
-            return false;
         if (location != null ? !location.equals(that.location) : that.location != null)
             return false;
         if (name != null ? !name.equals(that.name) : that.name != null)
@@ -349,7 +323,6 @@ public class MemberProfile {
         result = 31 * result + (twitterUsername != null ? twitterUsername.hashCode() : 0);
         result = 31 * result + (lanyrdUsername != null ? lanyrdUsername.hashCode() : 0);
         result = 31 * result + (githubId != null ? githubId.hashCode() : 0);
-        result = 31 * result + (gplusId != null ? gplusId.hashCode() : 0);
         result = 31 * result + (geoLocation != null ? geoLocation.hashCode() : 0);
         result = 31 * result + (videoEmbeds != null ? videoEmbeds.hashCode() : 0);
         result = 31 * result + (hidden ? 1 : 0);

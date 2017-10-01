@@ -183,7 +183,7 @@ public class Project {
             if (release.getRepository() != null && release.getRepository().equals(projectRelease.getRepository())) {
                 release.setRepository(projectRelease.getRepository());
             }
-            if (projectRelease.getVersion().equals(release)) {
+            if (projectRelease.getVersion().equals(release.getVersion())) {
                 releases.set(i, release);
                 found = true;
                 break;

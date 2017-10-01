@@ -1,7 +1,7 @@
 <html
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorator="layout"
-    data-platform-downloads data-hero-banner>
+    data-platform-downloads data-homepage>
   <head>
     <title>Spring</title>
     <!-- http://opengraphprotocol.org/ -->
@@ -14,223 +14,308 @@
     <div layout:fragment="header-container"></div>
     <div layout:fragment="full-width--layout">
       <div class="homepage--body">
-        <h1>Spring</h1>
-        <section class="billboard--wrapper homepage-billboard">
-          <!-- Billboard photo by Alvaro Videla -->
-          <div class="billboard--container">
-            <div class="container-fluid">
-              <div class="icon icon-spring-logo-big homepage-icon"></div>
-              <div class="homepage-title--container">
-                <h2 class="homepage-title">
-                  Let's build a better Enterprise.
-                </h2>
-                <div class="homepage-subtitle--container desktop-only">
-                  <div class="homepage-subtitle">
-                    Spring helps development teams everywhere build simple, portable,
-                  </div>
-                  <div class="homepage-subtitle">
-                    fast and flexible JVM-based systems and applications.
-                  </div>
-                </div>
-                <div class="homepage-subtitle--container mobile-only">
-                  <div class="homepage-subtitle">
-                    Spring helps development teams everywhere build simple, portable, fast and flexible JVM-based systems and applications.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="key-feature--wrapper">
-          <div class="container-fluid">
-            <div class="row-fluid">
-              <div class="span4 key-feature--container">
-                <div class="key-feature--icon--container">
-                  <div class="key-feature--icon icon icon-build-anything"></div>
-                </div>
-                <h3 class="key-feature--title">Build Anything</h3>
-                <div class="key-feature--text">
-                  Write clean, testable code against the infrastructure components of your choice and accomplish any task &ndash; without re-inventing the wheel.
-                </div>
-              </div>
-              <div class="span4 key-feature--container">
-                <div class="key-feature--icon--container">
-                  <div class="key-feature--icon icon icon-run-anywhere"></div>
-                </div>
-                <h3 class="key-feature--title">Run Anywhere</h3>
-                <div class="key-feature--text">
-                  Keep it portable &ndash; Spring-based apps run anywhere the JVM does. Deploy standalone, in an app server, on a Cloud or all of the above.
-                </div>
-              </div>
-              <div class="span4 key-feature--container">
-                <div class="key-feature--icon--container">
-                  <div class="key-feature--icon icon icon-rest-assured"></div>
-                </div>
-                <h3 class="key-feature--title">Rest Assured</h3>
-                <div class="key-feature--text">
-                  Code with confidence &ndash; Spring provides an open programming model that is comprehensive, cohesive, widely understood and well-supported.
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="hero--banner">
-          <section class="springoneplatform">
-            <div class="banner--text">
-              <h2>Join your Cloud Native community at SpringOne Platform and build software people love.</h2>
-              <p><a href="https://springoneplatform.io/?utm_source=springio&utm_medium=homepage-banner&utm_campaign=s1p-registration-early-bird-promo" class="banner--link">Save $400 with an early bird pass. Register Now<i class="icon-chevron-right"></i></a></p>
+        <section class="homepage--banner center">
+          <section class="spring-framework-5--banner active">
+            <div class="homepage--banner-text container-fluid vcenter">
+              <h2>Spring Framework 5.0<br/>The right stack for the right job.</h2>
+              <p>End-to-end support for reactive &amp; servlet based apps on the JVM. <a href='https://content.pivotal.io/spring/oct-4-getting-reactive-with-spring-framework-5-0-s-ga-release-webinar' target="_blank">Learn More</a></p>
             </div>
           </section>
-          <section class="pws" style="display: none">
-            <div class="banner--text">
-              <h2>Zero friction Spring Boot deployment to the Cloud</h2>
-              <p><a href="http://run.pivotal.io/spring" class="banner--link">Learn more<i class="icon-chevron-right"></i></a></p>
+          <section class="springone-platform--banner">
+            <div class="homepage--banner-text container-fluid vcenter">
+              <img src='/img/homepage/springoneplatform-by-pivotal-horizontal.svg'/>
+              <h2>Put a little Spring in your app</h2>
+              <p>Join your cloud-native community at SpringOne Platform and build <br/> software people love.   <a href='https://springoneplatform.io/?utm_source=springio&utm_medium=homepage-banner&utm_campaign=s1p-registration-promo' target="_blank">Register Now</a></p>
             </div>
           </section>
-          <section class="springdays" style="display: none">
-            <div class="banner--text">
-              <h2>Spring Days 2017</h2>
-              <p>Local Spring events for the professional Java developer</p>
-              <p><a href="http://springdays.io" class="banner--link">Learn more<i class="icon-chevron-right"></i></a></p>
+          <section class="automate-ops--banner">
+            <div class="homepage--banner-text container-fluid vcenter">
+              <h2>Automate Ops for Spring<br/> Cloud  on Cloud Foundry</h2>
+              <p>Build Spring microservices with Cloud Foundry's new container <br/> networking stack.    <a href='https://content.pivotal.io/blog/building-spring-microservices-with-cloud-foundrys-new-container-networking-stack' target="_blank">Learn More</a></p>
             </div>
           </section>
-          <section class="springcloud" style="display: none">
-            <div class="banner--text">
-              <h2>Spring Cloud Camden adds Consumer Driven Contracts, Service Schemas, and much more</h2>
-              <p><a href="https://spring.io/blog/2016/09/26/spring-cloud-camden-release-and-brixton-sr6-are-available" class="banner--link">Learn more<i class="icon-chevron-right"></i></a></p>
+          <section class="pws--banner">
+            <div class="homepage--banner-text container-fluid vcenter">
+              <h2>Pivotal Web Services</h2>
+              <p>Zero friction Spring Boot deployment to the cloud.   <a href='https://run.pivotal.io/spring' target="_blank">Learn More</a></p>
             </div>
           </section>
-          <section class="springcloud-services" style="display: none">
-            <div class="banner--text">
-              <h2>Automate Ops for Spring Cloud on Cloud Foundry</h2>
-              <p><a href="https://content.pivotal.io/blog/building-spring-microservices-with-cloud-foundrys-new-container-networking-stack" class="banner--link">Learn more<i class="icon-chevron-right"></i></a></p>
+          <section class="dalston--banner">
+            <div class="homepage--banner-text container-fluid vcenter">
+              <h2>Spring Cloud Dalston Released</h2>
+              <p>Spring Cloud Dalston  debuts composite Config Server <br/> backends, Vault secrets.   <a href='/blog/2017/04/12/spring-cloud-dalston-released'>Learn More</a></p>
             </div>
           </section>
-          <div class="blockarrows">
-            <div class="previous">
-              <i class="icon-chevron-left"></i>
-            </div>
-            <div class="next">
-              <i class="icon-chevron-right"></i>
-            </div>
-          </div>
-        </section>
-        <section class="offset-feature--wrapper">
-          <div class="offset-feature--container feature-initializr">
-              <div class="container-fluid">
-                  <div class="row-fluid feature--content">
-                      <div class="initializr offset4 span8 mobile-left-pane">
-                          <div class="offset-feature--title">Spring Initializr</div>
-                          <div class="offset-feature--text">
-                              Bootstrap your Spring Boot application with start.spring.io.
-                          </div>
-                          <a href="https://start.spring.io" class="offset-feature--link">
-                              Generate now!
-                              <i class="icon-chevron-right"></i>
-                          </a>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="offset-feature--container feature-guides">
-            <div class="container-fluid">
-              <div class="row-fluid feature--content">
-                <div class="span8 mobile-left-pane">
-                  <div class="offset-feature--title">Guides</div>
-                  <div class="offset-feature--text">
-                    Whether you're an expert or a newcomer our task-focused Getting Started Guides and Tutorials are designed to get you productive with Spring as quickly as possible.
-                  </div>
-                  <a href="/guides" class="offset-feature--link">
-                    Browse the Guides
-                    <i class="icon-chevron-right"></i>
-                  </a>
+          <div class="slide--dots center">
+            <div class='dot active'></div>
+            <div class='dot'></div>
+            <div class='dot'></div>
+            <div class='dot'></div>
+            <div class='dot'></div>
+          </div><!--end slide-dots-->
+        </section><!--end homepage-banner-->
+        <section class='homepage--section modern-java-section center'>
+          <div class='container-fluid'>
+            <h2>Spring: the source for modern java</h2>
+            
+            <div id='fader-diagram-your-app'>
+              <div id='your-app' class='sidebyside'>
+                <img src='/img/homepage/icon-your-app.svg'/>
+              </div><!--end your-app-->
+              <div id='fader-diagram' class='sidebyside'>
+                <div id='fader-diagram-modern-java-gray'></div>
+                <div id='fader-diagram-modern-java-color'><div></div></div>
+                <div id='fader'>
+                  <div id='box'>
+                    <div id='inner'>
+                      <div class='line'></div>
+                      <div class='line'></div>
+                      <div class='line'></div>
+                    </div><!--end inner-->
+                  </div><!--end box-->
+                </div><!--end fader-->
+              </div><!--end fader-diagram-->
+            </div><!--end fader-diagram-your-app-->
+            <div class='benefits'>
+              <div class='benefit thirtywide sidebyside'>
+                <div class='inner'>
+                  <h3>Spring Boot</h3>
+                  <h4 class='uppercase'>Build Anything</h4>
+                  <p>Spring Boot is designed to get you up and running as quickly as possible, with minimal upfront configuration of Spring. Spring Boot takes an opinionated view of building production ready applications. </p>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="offset-feature--container feature-sts desktop-only">
-            <div class="container-fluid">
-              <div class="row-fluid feature--content">
-                <div class="tool-suite span8 offset4 mobile-left-pane">
-                  <div class="offset-feature--title">Spring Tool Suite&trade;</div>
-                  <div class="offset-feature--text">
-                    Your tools should be as refined as the code you write. STS is our Eclipse-based IDE crafted to serve the needs of building applications with Spring. We're always working on new features and performance in our mission to make STS the most productive Eclipse distribution available.
-                  </div>
-                  <a href="/tools/sts" class="offset-feature--link">
-                    Learn more about STS
-                    <i class="icon-chevron-right"></i>
-                  </a>
+              </div><!--end benefit-->
+              <div class='benefit thirtywide sidebyside'>
+                <div class='inner'>
+                  <h3>Spring Cloud</h3>
+                  <h4 class='uppercase'>Coordinate Anything</h4>
+                  <p>Built directly on Spring Boot's innovative approach to enterprise Java, Spring Cloud simplifies distributed, microservice-style architecture by implementing proven patterns to bring resilience, reliability, and coordination to your microservices.  </p>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="offset-feature--container feature-projects">
-            <div class="container-fluid">
-              <div class="row-fluid feature--content">
-                <div class="span8 mobile-left-pane">
-                  <div class="offset-feature--title">Spring Projects</div>
-                  <div class="offset-feature--text">
-                    From configuration to security, web apps to big data &ndash; whatever the infrastructure needs of your application may be, there is a Spring Project to help you build it. Start small and use just what you need &ndash; Spring is modular by design.
-                  </div>
-                  <a href="/projects" class="offset-feature--link">
-                    Explore the Projects
-                    <i class="icon-chevron-right"></i>
-                  </a>
+              </div><!--end benefit-->
+              <div class='benefit thirtywide sidebyside'>
+                <div class='inner'>
+                  <h3>Spring Cloud Data Flow</h3>
+                  <h4 class='uppercase'>Connect Anything</h4>
+                  <p>Connect the Enterprise to the Internet of Anything-mobile devices, sensors, wearables, automobiles, and more. Spring Cloud Data Flow provides a unified service for creating composable data microservices that address streaming and ETL-based data processing patterns. </p>
                 </div>
-              </div>
-            </div>
-          </div>
-            <div class="offset-feature--container feature-certification">
-                <div class="container-fluid">
-                    <div class="row-fluid feature--content">
-                        <div class="span8 offset4 mobile-left-pane">
-                            <div class="offset-feature--title">Certification</div>
-                            <div class="offset-feature--text">
-                                The perfect way to demonstrate your proficiency with the Spring IO Platform portfolio is to obtain an industry-recognized Pivotal Certification. Our role-based certification exams are designed to test and validate your product knowledge and help you advance your career.
-                            </div>
-                            <a href="/blog/2016/01/21/pivotal-academy-launches-updated-spring-classes" class="offset-feature--link">
-                                Learn more
-                                <i class="icon-chevron-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div class="support--wrapper">
-            <div class="container-fluid">
-              <div class="row-fluid">
-                <div class="span4 support--container mobile-left-pane">
-                  <div class="icon icon-community-support"></div>
-                  <div class="support--title">Community Services</div>
-                  <ul class="support-links community">
-                    <li><a href="/questions">Questions</a></li>
-                    <li><a href="https://twitter.com/SpringCentral">Twitter</a></li>
-                    <li><a href="https://spring.io/video">Youtube</a></li>
-                  </ul>
-                </div>
-                <div class="span4 support--container mobile-left-pane">
-                  <div class="icon icon-professional-support"></div>
-                  <div class="support--title">Professional Services</div>
-                  <ul class="support-links professional">
-                    <li><a href="https://pivotal.io/academy#spring">Training and Certification</a></li>
-                    <li><a href="https://www.pivotal.io/contact/spring-consulting">Consulting</a></li>
-                    <li><a href="/services">Support</a></li>
-                  </ul>
-                </div>
-                <div class="span4 support--container mobile-left-pane">
-                  <div class="icon icon-hosted-services"></div>
-                  <div class="support--title">Hosted Services</div>
-                  <ul class="support-links hosted">
-                    <li><a href="http://run.pivotal.io/spring">Spring App Hosting</a></li>
-                    <li><a href="https://www.pivotaltracker.com">Agile Project Management</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div layout:fragment="content"></div>
+              </div><!--end benefit-->
+            </div><!--end benefits-->
+          </div><!--end container-fluid-->
+        </section><!--end modern-java-section-->
+        <section class='homepage--section spring-framework-section bg-white'>
+          <div class='container-fluid'>
+            <div class='icon-title center'>
+              <img id='spring-framework-icon' class='sidebyside' src='/img/homepage/icon-spring-framework.svg'/>
+              <h2 class='sidebyside'>Spring Framework 5</h2>
+            </div><!--end icon-title-->
+            <div id='diagram-boot-reactor-container'>
+              <img id='diagram-boot-reactor' class='sidebyside' src='/img/homepage/diagram-boot-reactor.svg'/>
+              <div class='sidebyside text diagram-text'>
+                <h4 class='uppercase'>The Right Technology Stack for the Job at Hand</h4>
+                <p>Developers are constantly challenged with choosing the most effective runtime, programming model and architecture for their application's requirements and team's skill-set. For example, some <a href='/blog/2016/06/07/notes-on-reactive-programming-part-i-the-reactive-landscape#reactive-use-cases'>use cases</a> are best handled by a technology stack based on synchronous blocking I/O architecture while others would be better served by an asynchronous, and non-blocking stack built on the reactive design principles described in the <a href='http://www.reactive-streams.org/'>Reactive Streams Specification</a>.</p>
+                <p>Reactive Spring represents a platform wide initiative to deliver reactive support at every level of the development stack&mdash;web, security, data, messaging, etc. Spring Framework 5 delivers on this vision by providing a new reactive web stack called, Spring WebFlux, which is offered side-by-side with the traditional Spring MVC web stack. The choice is yours!</p>
+                <p>
+                  <a href='https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#spring-webflux'><i class='icon-file-text'></i> WebFlux Reference Documentation</a>
+                </p>
+                <!--
+                <p>
+                  <a href='https://spring.io/guides/gs/reactive-rest-service'><i class='icon-file-text'></i> Getting Started Guide</a>
+                </p>
+                -->
+              </div><!--end diagram-text-->
+            </div><!--end diagram-boot-reactor-container-->
+            <br/>
+            <br/>
+            <br/>
+            <hr/>
+          </div><!--end container-fluid-->
+        </section><!--end spring-framework-section-->
+        <section class='homepage--section spring-boot-section bg-white'>
+          <div class='container-fluid'>
+            <div class='icon-title center'>
+              <img id='spring-boot-icon' class='sidebyside' src='/img/homepage/icon-spring-boot.svg'/>
+              <h2 class='sidebyside'>Spring Boot</h2>
+            </div><!--end icon-title-->
+            <div class='display-flex'>
+              <div id='build-anything-container'>
+                <div class='inner'>
+                  <h4 class='uppercase'>Build Anything with Spring Boot</h4>
+                  <p>Spring Boot is the starting point for building all Spring-based applications. Spring Boot is designed to get you up and running as quickly as possible, with minimal upfront configuration of Spring. </p>
+                  <table>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Get started in seconds using Spring Initializr</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Build anything - REST API, WebSocket, Web, Streaming, Tasks, and more</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Simplified Security</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Rich support for SQL and NoSQL</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Embedded runtime support - Tomcat, Jetty, and Undertow</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Developer productivity tools such as live reload and auto restart</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Curated dependencies that just work</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Production-ready features such as tracing, metrics and health status</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Works in your favorite IDE - Spring Tool Suite, IntelliJ&nbsp;IDEA and NetBeans</td>
+                    </tr>
+                  </table>
+                  <br/>
+                  <hr/>
+                  <br/>
+                  <p>
+                    <a href='https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/'><i class='icon-file-text'></i> Spring Boot Reference Manual</a>
+                  </p>
+                  <p>
+                    <a href='https://spring.io/guides/gs/spring-boot/'><i class='icon-file-text'></i> Getting Started Guide</a>
+                  </p>
+                </div><!--end inner-->
+              </div><!--end build-anything-container-->
+              <div id='video-with-overlay-container'>
+                <div id='video-with-overlay'>
+                  <img src='/img/homepage/ytvid-overlay-tour-300.png'/>
+                  <iframe width="534" height="300" frameborder="0" vspace="0" hspace="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" scrolling="auto" src="https://www.youtube.com/embed/8RPdOmKtur0"></iframe>
+                </div><!--end video-with-overlay-->
+              </div><!--end video-with-overlay-container-->
+            </div><!--end display-flex-->
+            <br/>
+            <br/>
+            <hr/>
+          </div><!--end container-fluid-->
+        </section><!--end spring-boot-section-->
+        <section class='homepage--section spring-cloud-section bg-white'>
+          <div class='container-fluid'>
+            <div class='icon-title center'>
+              <img id='spring-cloud-icon' class='sidebyside' src='/img/homepage/icon-spring-cloud.svg'/>
+              <h2 class='sidebyside'>Spring Cloud</h2>
+            </div><!--end icon-title-->
+            <div class='intro center'>
+              <h4 class='uppercase'>Coordinate Anything: Distributed Systems Simplified</h4>
+              <p>Building distributed systems doesn't need to be complex and error-prone. Spring Cloud offers a simple and accessible programming model to the most common distributed system patterns, helping developers build resilient, reliable, and coordinated applications. Spring Cloud is built on top of Spring Boot, making it easy for developers to get started and become productive quickly.</p>
+            </div><!--end intro-->
+            <br/>
+            <br/>
+            <div id='diagram-distributed-systems' class='center'>
+              <img src='/img/homepage/diagram-distributed-systems.svg'/>
+            </div><!--end diagram-distributed-systems-->
+            <br/>
+            <br/>
+            <br/>
+            <div id='columns-container'>
+              <div class='columns'>
+                <div class='column'>
+                  <div class='inner'>
+                    <p><strong>Service Discovery</strong><br/>A dynamic directory that enables client side load balancing and smart routing </p> 
+
+                    <p><strong>Circuit Breaker</strong><br/>Microservice fault tolerance with a monitoring dashboard   </p> 
+
+                    <p><strong>Configuration Server</strong><br/>Dynamic, centralized configuration management for your decentralized applications </p> 
+
+                    <p><strong>API Gateway</strong><br/>Single entry point for API consumers (browsers, devices, other APIs)   </p> 
+                  </div><!--end inner-->
+                </div><!--end column-->
+                <div class='column'>
+                  <div class='inner'>
+                    <p><strong>Distributed Tracing</strong><br/>Automated application instrumentation and operational visibility for distributed systems </p>  
+
+                    <p><strong>OAuth2</strong><br/>Support for single sign on, token relay and token exchange </p>
+
+                    <p><strong>Consumer-Driven Contracts</strong><br/>Service evolution patterns to support both HTTP based and message based APIs  </p> 
+
+                    <p><a href='http://cloud.spring.io/'>View All</a></p>
+                  </div><!--end inner-->
+                </div><!--end column-->
+                <div class='column'>
+                  <hr/>
+                  <p>
+                    <a href='http://cloud.spring.io/spring-cloud-static/current/'><i class='icon-file-text'></i> Spring Cloud Reference Manual</a>
+                  </p>
+                  <p>
+                    Getting Started Guides <br/> <a href='/guides/gs/centralized-configuration/'><i class='icon-file-text'></i> Config</a><br/> <a href='/guides/gs/service-registration-and-discovery/'><i class='icon-file-text'></i> Registry</a><br/><a href='/guides/gs/circuit-breaker/'><i class='icon-file-text'></i>  Breakers</a><br/> <a href='/guides/gs/client-side-load-balancing/'><i class='icon-file-text'></i> Load Balancing</a><br/> <a href='/guides/gs/routing-and-filtering/'><i class='icon-file-text'></i> Routing</a>
+                  </p>
+                </div><!--end column-->
+              </div><!--end columns-->
+            </div><!--end columns-container-->
+            <br/>
+            <br/>
+            <hr/>
+          </div><!--end container-fluid-->
+        </section><!--end  spring-cloud-section-->
+        <section class='homepage--section spring-cloud-data-flow-section bg-white'>
+          <div class='container-fluid'>
+            <div class='icon-title center'>
+              <img id='spring-cloud-data-flow-icon' class='sidebyside' src='/img/homepage/icon-spring-cloud-data-flow.svg'/>
+              <h2 class='sidebyside'>Spring Cloud Data Flow</h2>
+            </div><!--end icon-title-->
+          </div><!--end container-fluid-->
+          <div class='monitor-container'>
+            <div class='container-fluid'>
+              <div class='sidebyside fiftywide'>
+                <div class='inner'>
+                  <h4 class='uppercase'>Connect Anything</h4>
+                  <p>Spring Cloud Data Flow makes it easy to build and orchestrate cloud-native data pipelines for use cases such as data ingest, real-time analytics, and data import/export. Spring Cloud Data Flow makes it simple to connect systems by providing out of the box connectors for the most common integration scenarios. </p>
+                  <table>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Supports processing data in real-time streams and batch</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Ingest, transform, analyze &amp; store data </td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Connectors for FTP, RDBMS, Cassandra, RabbitMQ, GemFire, Redis, and much more</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Supports modern messaging middleware - Kafka and RabbitMQ</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Spring Flo visual designer for pipelines</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Operational dashboard - metrics, health checks, and remote management</td>
+                    </tr>
+                    <tr>
+                      <td><div class='dash'>-</div></td>
+                      <td>Supported platforms: Cloud Foundry, Kubernetes, Apache YARN, Apache Mesos</td>
+                    </tr>
+                  </table>
+                  <br/>
+                  <hr/>
+                  <br/>
+                  <p>
+                    <a href='https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#getting-started'><i class='icon-file-text'></i> Spring Cloud Data Flow Reference Manual</a>
+                  </p>
+                </div><!--end inner-->
+              </div><!--end sidebyside-->
+            </div><!--end container-fluid-->
+          </div><!--end monitor-container-->
+          <br/>
+          <br/>
+        </section><!--end spring-cloud-data-flow-section-->
+      </div><!--end homepage-body-->
+    </div><!--end full-width-layout-->
   </body>
 </html>
