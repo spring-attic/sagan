@@ -19,7 +19,7 @@
   <div layout:fragment="content" class="container-fluid">
     <article class="main-body--wrapper compass">
       <ul class="sidebar">
-          <li class="sidebar_project" th:each="proj : ${projects}">
+          <li class="sidebar_project" th:classappend="${proj.getId() == project.getId()} ? 'active'" th:each="proj : ${projects}">
               <a th:href="${proj.siteUrl}" th:text="${proj.getName()}"></a>
           </li>
       </ul>
