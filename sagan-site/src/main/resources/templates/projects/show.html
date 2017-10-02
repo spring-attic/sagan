@@ -16,15 +16,22 @@
 </head>
 <body>
   <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container-fluid">
-    <article class="main-body--wrapper compass">
-      <ul class="sidebar">
-          <li class="sidebar_project" th:classappend="${proj.getId() == project.getId()} ? 'active'" th:each="proj : ${projects}">
-              <a th:href="${proj.siteUrl}" th:text="${proj.getName()}"></a>
-          </li>
-      </ul>
+  <div layout:fragment="content" class="body--container container-fluid">
+      <div class="compass row">
+    <ul class="sidebar col-lg-3">
+      <li class="sidebar_project" th:classappend="${proj.getId() == project.getId()} ? 'active'" th:each="proj : ${projects}">
+          <a th:href="${proj.siteUrl}" th:text="${proj.getName()}"></a>
+      </li>
+    </ul>
+    <article class="col-lg-9">
       <h1 class="index-page--title" th:text="${project.getName()}"></h1>
+      <div class="quickstart">
+        <span class="quickstart--title">Quick start</span>
+        <span class="quickstart--subtitle">Bootstrap your application with Spring Initializr</span>
+        <a class="quickstart--button" href="https://start.spring.io/" target="_blank">Get started</a>
+      </div>
     </article>
+      </div>
   </div>
 </body>
 </html>
