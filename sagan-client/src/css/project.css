@@ -1,8 +1,4 @@
 
-.compass.main-body--wrapper {
-    margin-top: 0;
-}
-
 .compass .sidebar {
     background: #dbe6d6;
     float: left;
@@ -16,7 +12,7 @@
     color: #34302d;
     padding: 6px 10px;
     display: block;
-    transition: background 0.5s ;
+    transition: background 0.5s;
     font-size: 16px;
     font-family: Montserrat, sans-serif;
 }
@@ -25,4 +21,34 @@
 .compass .sidebar_project:hover a {
     color: #5fa134;
     background: #fff;
+}
+
+.compass .quickstart {
+    background: #fff;
+    padding: 20px;
+    width: 260px;
+}
+
+.compass .quickstart--title {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.compass .quickstart--button {
+    background: rgba(109, 179, 63, 0.0);
+    color: #6db33f;
+    border: 2px solid #6db33f;
+    padding: 5px;
+    text-align: center;
+    display: block;
+    border-radius: 3px;
+    margin-top: 10px;
+    transition: background 0.5s, color 0.5s;
+    text-decoration: none;
+}
+
+.compass .quickstart--button:hover {
+    background: rgba(109, 179, 63, 1);
+    color: #fff;
 }
