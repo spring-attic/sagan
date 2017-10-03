@@ -2,6 +2,7 @@ package sagan.guides.support;
 
 import sagan.guides.DocumentContent;
 import sagan.support.github.GitHubClient;
+import sagan.support.github.PaginationUtils;
 import sagan.support.github.Readme;
 import sagan.support.github.RepoContent;
 
@@ -83,13 +84,9 @@ class GuideOrganization {
     }
 
     public GitHubRepo[] findAllRepositories() {
-        String json = gitHub.sendRequestForJson("/{type}/{name}/repos?per_page=100", type, name);
-
-        try {
-            return objectMapper.readValue(json, GitHubRepo[].class);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return PaginationUtils.readResults(url -> gitHub.sendRequestForEntity(url, type, name),
+            "/{type}/{name}/repos?per_page=100&page=1", objectMapper, GitHubRepo.class)
+                .toArray(new GitHubRepo[]{});
     }
 
     public List<GitHubRepo> findRepositoriesByPrefix(String prefix) {
