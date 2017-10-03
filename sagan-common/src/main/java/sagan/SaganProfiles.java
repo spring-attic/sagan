@@ -1,7 +1,5 @@
 package sagan;
 
-import org.springframework.core.env.ConfigurableEnvironment;
-
 /**
  * Spring profiles under which a {@link SaganApplication} can be run. If no profiles are
  * specified, the {@link #STANDALONE} profile will be implicitly activated, making
@@ -42,14 +40,13 @@ public final class SaganProfiles {
 
     /**
      * The default profile for any {@link SaganApplication}. Indicates that the
-     * application is running locally, i.e. on a developer machine, or on any server
-     * in standalone mode. All services are either registered automatically by the application
-     * (e.g. in-memory datasources) or should be provided to the application by environment
-     * variables or configuration values.
-     * As opposed to {@link #CLOUDFOUNDRY}, the application won't try to detect Marketplace
-     * services provided by the PaaS environment.
-     * This profile is automatically added to the environment if neither {@link #PRODUCTION}
-     * nor {@link #STAGING} are activated.
+     * application is running locally, i.e. on a developer machine, or on any server in
+     * standalone mode. All services are either registered automatically by the
+     * application (e.g. in-memory datasources) or should be provided to the application
+     * by environment variables or configuration values. As opposed to
+     * {@link #CLOUDFOUNDRY}, the application won't try to detect Marketplace services
+     * provided by the PaaS environment. This profile is automatically added to the
+     * environment if neither {@link #PRODUCTION} nor {@link #STAGING} are activated.
      *
      * @see sagan.StandaloneDatabaseConfig
      */

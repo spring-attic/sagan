@@ -54,7 +54,7 @@ class GuideOrganization {
     }
 
     public Readme getReadme(String path) {
-        String json = gitHub.sendRequestForJson(path);
+        String json = gitHub.sendRequestForJson("/repos/" + path + "/readme");
 
         try {
             return objectMapper.readValue(json, Readme.class);

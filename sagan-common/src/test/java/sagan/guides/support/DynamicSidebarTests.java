@@ -23,7 +23,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 @Ignore
 public class DynamicSidebarTests {
 
-    private static final String README_REST_ZIPBALL = "/repos/spring-guides/gs-rest-service/zipball";
+    private static final String REPO_PATH = "spring-guides/gs-rest-service";
 
     @Mock
     GitHubClient github;
@@ -43,9 +43,9 @@ public class DynamicSidebarTests {
         byte[] zipContents = StreamUtils.copyToByteArray(inputStream);
         inputStream.close();
 
-        given(github.sendRequestForDownload(README_REST_ZIPBALL)).willReturn(zipContents);
+        given(github.sendRequestForDownload(REPO_PATH)).willReturn(zipContents);
 
-        AsciidocGuide guide = org.getAsciidocGuide(README_REST_ZIPBALL);
+        AsciidocGuide guide = org.getAsciidocGuide(REPO_PATH);
 
         assertThat(guide.getTableOfContents(), startsWith("<ul class=\"sectlevel1\">"));
         assertThat(guide.getTableOfContents(), not(containsString("<ul class=\"sectlevel2\">")));
@@ -59,9 +59,9 @@ public class DynamicSidebarTests {
         byte[] zipContents = StreamUtils.copyToByteArray(inputStream);
         inputStream.close();
 
-        given(github.sendRequestForDownload(README_REST_ZIPBALL)).willReturn(zipContents);
+        given(github.sendRequestForDownload(REPO_PATH)).willReturn(zipContents);
 
-        AsciidocGuide guide = org.getAsciidocGuide(README_REST_ZIPBALL);
+        AsciidocGuide guide = org.getAsciidocGuide(REPO_PATH);
 
         assertThat(guide.getTableOfContents(), startsWith("<ul class=\"sectlevel1\">"));
         assertThat(guide.getTableOfContents(), not(containsString("<ul class=\"sectlevel2\">")));
@@ -76,9 +76,9 @@ public class DynamicSidebarTests {
         byte[] zipContents = StreamUtils.copyToByteArray(inputStream);
         inputStream.close();
 
-        given(github.sendRequestForDownload(README_REST_ZIPBALL)).willReturn(zipContents);
+        given(github.sendRequestForDownload(REPO_PATH)).willReturn(zipContents);
 
-        AsciidocGuide guide = org.getAsciidocGuide(README_REST_ZIPBALL);
+        AsciidocGuide guide = org.getAsciidocGuide(REPO_PATH);
 
         assertThat(guide.getTableOfContents(), equalTo(""));
         assertThat(guide.getContent(), containsString("About 15 minutes"));
@@ -92,9 +92,9 @@ public class DynamicSidebarTests {
         byte[] zipContents = StreamUtils.copyToByteArray(inputStream);
         inputStream.close();
 
-        given(github.sendRequestForDownload(README_REST_ZIPBALL)).willReturn(zipContents);
+        given(github.sendRequestForDownload(REPO_PATH)).willReturn(zipContents);
 
-        AsciidocGuide guide = org.getAsciidocGuide(README_REST_ZIPBALL);
+        AsciidocGuide guide = org.getAsciidocGuide(REPO_PATH);
 
         assertThat(guide.getTableOfContents(), startsWith("<ul class=\"sectlevel1\">"));
         assertThat(guide.getTableOfContents(), not(containsString("<ul class=\"sectlevel2\">")));

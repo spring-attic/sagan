@@ -1,0 +1,63 @@
+= Project Metadata API Guide
+Dave Syer;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[[overview]]
+== Overview
+
+[[resources-project]]
+=== Accessing Project Metadata
+
+This resource is unprotected and open to all clients. It is used by the https://start.spring.io[Spring Initializr] as well as by the individual https://projects.spring.io[project pages] to list their available releases and create documentation links.
+
+A `GET` request will list all of the projects's metadata, including releases. The resource path ends with the project id (e.g. "spring-framework"):
+
+include::{snippets}/project/http-request.adoc[]
+
+include::{snippets}/project/http-response.adoc[]
+
+The request can optionally include a "callback" query parameter for JSON-P clients.
+
+include::{snippets}/callback/http-request.adoc[]
+
+include::{snippets}/callback/http-response.adoc[]
+
+[[resources-project-releases]]
+=== Project Releases
+
+This resource is protected by HTTP Basic authentication. The username is a Github API token and the password is empty (just like Github API access). Access is denied if the key does not belong to one of the Spring developer team in Github.
+
+The releases of each project can be accessed and manipulated independently of the top-level metadata.
+
+A `GET` is used to access a release by version:
+
+include::{snippets}/get_release/http-request.adoc[]
+
+include::{snippets}/get_release/http-response.adoc[]
+
+A `POST` request is used to create a new release, or to update an existing one. Note that in the request body the documentation URLs can contain a `{version}` placeholder, and this is replaced in the backend (as shown in the example response):
+
+include::{snippets}/add_release/http-request.adoc[]
+
+include::{snippets}/add_release/http-response.adoc[]
+
+NOTE: the only mandatory properties for a release are the ones shown above in the example request. Normally only snapshot and milestone releases need a repository (anything in Maven Ceantral does not need it).
+
+A `DELETE` request is used to remove a release.
+
+include::{snippets}/delete_release/http-request.adoc[]
+
+include::{snippets}/delete_release/http-response.adoc[]
+
+A `PUT` request without any version is used to update all the releases in one request. Version placeholders can also be used here.
+
+include::{snippets}/update_project/http-request.adoc[]
+
+include::{snippets}/update_project/http-response.adoc[]
+
+

@@ -124,9 +124,15 @@ flyway:
 spring:
   profiles: staging
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-staging}
+sagan:
+  markdown:
+    uri: https://sagan-markdown-staging.cfapps.io
 
 ---
 
 spring:
   profiles: production
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io}
+sagan:
+  markdown:
+    uri: https://sagan-markdown-prod.cfapps.io

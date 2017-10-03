@@ -3,6 +3,7 @@ package sagan.guides.support;
 import sagan.guides.AbstractGuide;
 import sagan.guides.ContentProvider;
 import sagan.guides.DefaultGuideMetadata;
+import sagan.guides.DocumentContent;
 import sagan.guides.Guide;
 import sagan.guides.GuideMetadata;
 import sagan.guides.ImageProvider;
@@ -27,11 +28,7 @@ public abstract class PrefixDocRepository<T extends Guide> implements DocReposit
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    private static final String REPO_BASE_PATH = "/repos/%s/%s";
-    private static final String README_PATH_ASC = REPO_BASE_PATH + "/zipball";
-
     private final GuideOrganization org;
-    private final AsciidoctorUtils asciidoctorUtils = new AsciidoctorUtils();
 
     private String prefix;
 
@@ -90,13 +87,24 @@ public abstract class PrefixDocRepository<T extends Guide> implements DocReposit
         String repoName = guide.getRepoName();
         if (guide instanceof AbstractGuide) {
             AbstractGuide mutable = (AbstractGuide) guide;
-            AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org
+            DocumentContent asciidocGuide = getDocument(org, String.format("%s/%s", org
                     .getName(),
                     repoName));
             mutable.setContent(asciidocGuide.getContent());
             mutable.setTableOfContents(asciidocGuide.getTableOfContents());
         }
         return guide;
+    }
+
+    private DocumentContent getDocument(GuideOrganization org, String path) {
+        try {
+            log.debug(String.format("Fetching content for '%s'", path));
+            return org.getAsciidocGuide(path);
+        } catch (RestClientException ex) {
+            String msg = String.format("No content found for '%s'", path);
+            log.warn(msg, ex);
+            throw new ResourceNotFoundException(msg, ex);
+        }
     }
 
     @Override

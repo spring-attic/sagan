@@ -1,0 +1,67 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.9.RELEASE'
+		springRepo = 'http://repo.spring.io/libs-release'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'io.spring.sagan'
+version = '1.0.0.BUILD-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url springRepo }
+}
+
+
+ext {
+	springCloudVersion = 'Edgware.RELEASE'
+}
+
+dependencies {
+	compile('org.pegdown:pegdown:1.6.0')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.asciidoctor:asciidoctorj:1.5.4.1')
+	compile('org.jruby:jruby-complete:9.1.7.0')
+	compile 'org.jsoup:jsoup:1.9.2'
+	compile 'org.springframework.social:spring-social-github:1.0.0.M4'
+	runtime('org.springframework.boot:spring-boot-devtools')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.cloud:spring-cloud-contract-wiremock')
+	testCompile('org.springframework.cloud:spring-cloud-contract-stub-runner')
+	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+task stubsJar(type: Jar, dependsOn: ['copySnippets']) {
+	baseName = project.name
+	classifier = 'stubs'
+	from project.file("${project.buildDir}/snippets/stubs")
+}
+
+artifacts {
+	archives stubsJar
+}
+
+task copySnippets(type: Copy, dependsOn: test) {
+	from "target/snippets/stubs"
+	into "${project.buildDir}/stubs/META-INF/${project.group}/${project.name}/${project.version}/mappings"
+}

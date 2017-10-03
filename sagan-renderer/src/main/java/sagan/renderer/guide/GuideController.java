@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package sagan.guides.support;
-
-import sagan.guides.DocumentContent;
-import sagan.support.github.GitHubClient;
+package sagan.renderer.guide;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -35,30 +32,35 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import org.springframework.stereotype.Component;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StreamUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * Converts <code>org</code> and <code>repo</code> into a rendered guide. Downloads entire
+ * repository from GitHub and unpacks it locally before running asciidoctor on the readme.
+ * The result is the rendered HTML and table of contents.
+ * 
  * @author Dave Syer
  *
  */
-@Component
-public class AsciidoctorGuideRenderer implements GuideRenderer {
+@RestController
+public class GuideController {
+
+    private final Asciidoctor asciidoctor;
 
     private GitHubClient gitHub;
 
-    private Asciidoctor asciidoctor;
-
-    public AsciidoctorGuideRenderer(GitHubClient gitHub, Asciidoctor asciidoctor) {
+    public GuideController(GitHubClient gitHub, Asciidoctor asciidoctor) {
         this.gitHub = gitHub;
         this.asciidoctor = asciidoctor;
     }
 
-    @Override
-    public DocumentContent render(String path) {
-        final String htmlContent;
-        final String tableOfContents;
+    @GetMapping("/guides/{org}/{repo}")
+    public DocumentContent render(@PathVariable String org, @PathVariable String repo) {
+        String path = org + "/" + repo;
 
         byte[] download = gitHub.sendRequestForDownload("/repos/" + path + "/zipball");
 
@@ -75,17 +77,21 @@ public class AsciidoctorGuideRenderer implements GuideRenderer {
             File unzippedRoot;
             try (ZipFile zipFile = new ZipFile(zipball)) {
                 unzippedRoot = null;
-                for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements();) {
+                for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e
+                        .hasMoreElements();) {
                     ZipEntry entry = e.nextElement();
                     if (entry.isDirectory()) {
-                        File dir = new File(zipball.getParent() + File.separator + entry.getName());
+                        File dir = new File(
+                                zipball.getParent() + File.separator + entry.getName());
                         dir.mkdir();
                         if (unzippedRoot == null) {
                             unzippedRoot = dir; // first directory is the root
                         }
-                    } else {
+                    }
+                    else {
                         StreamUtils.copy(zipFile.getInputStream(entry),
-                                new FileOutputStream(zipball.getParent() + File.separator + entry.getName()));
+                                new FileOutputStream(zipball.getParent() + File.separator
+                                        + entry.getName()));
                     }
                 }
             }
@@ -94,28 +100,28 @@ public class AsciidoctorGuideRenderer implements GuideRenderer {
             Attributes attributes = new Attributes();
             attributes.setAllowUriRead(true);
             attributes.setSkipFrontMatter(true);
-            File readmeAdocFile = new File(unzippedRoot.getAbsolutePath() + File.separator + "README.adoc");
-            OptionsBuilder options = OptionsBuilder.options()
-                    .safe(SafeMode.SAFE)
-                    .baseDir(unzippedRoot)
-                    .headerFooter(true)
-                    .attributes(attributes);
+            File readmeAdocFile = new File(
+                    unzippedRoot.getAbsolutePath() + File.separator + "README.adoc");
+            OptionsBuilder options = OptionsBuilder.options().safe(SafeMode.SAFE)
+                    .baseDir(unzippedRoot).headerFooter(true).attributes(attributes);
             StringWriter writer = new StringWriter();
             asciidoctor.convert(new FileReader(readmeAdocFile), writer, options);
 
             Document doc = Jsoup.parse(writer.toString());
 
-            htmlContent = doc.select("#content").html();
-
-            tableOfContents = findTableOfContents(doc);
+            String htmlContent = doc.select("#content").html()
+                    + "\n<!-- rendered by GuideController -->";
+            String tableOfContents = findTableOfContents(doc);
 
             // Delete the zipball and the unpacked content
             FileSystemUtils.deleteRecursively(zipball);
             FileSystemUtils.deleteRecursively(unzippedRoot);
 
-            return new AsciidocGuide(htmlContent, tableOfContents);
-        } catch (IOException ex) {
-            throw new IllegalStateException("Could not create temp file for source: " + tempFilePrefix);
+            return new DocumentContent(htmlContent, tableOfContents);
+        }
+        catch (IOException ex) {
+            throw new IllegalStateException(
+                    "Could not create temp file for source: " + tempFilePrefix, ex);
         }
     }
 
@@ -131,11 +137,11 @@ public class AsciidoctorGuideRenderer implements GuideRenderer {
         toc.select("ul.sectlevel2").forEach(subsection -> subsection.remove());
 
         toc.forEach(part -> part.select("a[href]").stream()
-                .filter(anchor -> doc.select(anchor.attr("href")).get(0).parent().classNames().stream()
+                .filter(anchor -> doc.select(anchor.attr("href")).get(0).parent()
+                        .classNames().stream()
                         .anyMatch(clazz -> clazz.startsWith("reveal")))
                 .forEach(href -> href.parent().remove()));
 
         return toc.toString();
     }
-
 }

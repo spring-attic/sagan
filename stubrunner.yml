@@ -1,0 +1,4 @@
+stubrunner:
+  workOffline: true
+  ids:
+    - io.spring.sagan:sagan-renderer:+:9000

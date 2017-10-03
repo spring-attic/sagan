@@ -1,21 +1,20 @@
 package sagan.guides.support;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Answers;
-import org.mockito.Mock;
-import org.springframework.social.github.api.GitHubRepo;
 import sagan.guides.Tutorial;
 import sagan.support.github.Readme;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Answers;
+import org.mockito.Mock;
+
+import org.springframework.social.github.api.GitHubRepo;
+
 import static java.util.Collections.singletonList;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.eq;
@@ -50,7 +49,7 @@ public class TutorialsTests {
     @Test
     public void findAll() {
         given(org.findRepositoriesByPrefix(Tutorials.REPO_PREFIX)).willReturn(singletonList(repo));
-        given(org.getAsciidocGuide("/repos/mock-org/tut-rest/zipball")).willReturn(tutorial);
+        given(org.getAsciidocGuide("mock-org/tut-rest")).willReturn(tutorial);
 
         List<Tutorial> all = tutorials.findAll();
         assertThat(all.size(), is(1));
@@ -63,8 +62,8 @@ public class TutorialsTests {
     @Test
     public void pageZero() throws IOException {
         given(org.getRepoInfo(eq("tut-rest"))).willReturn(repo);
-        given(org.getReadme(eq("/repos/mock-org/tut-rest/readme"))).willReturn(readme);
-        given(org.getAsciidocGuide("/repos/mock-org/tut-rest/zipball")).willReturn(tutorial);
+        given(org.getReadme(eq("mock-org/tut-rest"))).willReturn(readme);
+        given(org.getAsciidocGuide("mock-org/tut-rest")).willReturn(tutorial);
 
         Tutorial tutorial = tutorials.find("rest");
 

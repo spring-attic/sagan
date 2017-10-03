@@ -1,0 +1,37 @@
+project:
+  artifactId: spring-io-renderer
+  name: spring-io-renderer
+  description: spring-io-renderer
+
+info:
+  build:
+    artifact: ${project.artifactId}
+    name: ${project.name}
+    description: ${project.description}
+  spring:
+    profiles: ${spring.profiles.active:default}
+  app:
+    name: ${vcap.application.name:sagan}:${vcap.application.instance_index:*}
+    start: ${vcap.application.start:N/A}
+
+logging:
+  level:
+    ROOT: INFO
+    org.apache.http: WARN
+    # always log high-level information about application startup
+    sagan.renderer: INFO
+
+server:
+  port: 9000
+
+github:
+
+  # This optional property may be assigned using a "personal access token" created
+  # at https://github.com/settings/applications. It is used for accessing GitHub's
+  # API, even for operations that do not require authorization (e.g. Getting Started
+  # Guide repositories). This is done in order to work against higher rate limits
+  # (5000req/hour vs. the default 60req/hour without a token). When running the app
+  # locally, this lower default is fine. When running the app in production, the
+  # token is a must. See http://developer.github.com/v3/#rate-limiting.
+  access:
+    token: ${GITHUB_ACCESS_TOKEN:}

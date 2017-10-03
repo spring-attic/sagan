@@ -1,11 +1,5 @@
 package sagan.guides.support;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Answers;
-import org.mockito.Mock;
-import org.springframework.social.github.api.GitHubRepo;
-import org.springframework.web.client.RestClientException;
 import sagan.guides.GettingStartedGuide;
 import sagan.guides.Guide;
 import sagan.projects.support.ProjectMetadataService;
@@ -13,15 +7,19 @@ import sagan.support.ResourceNotFoundException;
 import sagan.support.github.Readme;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Answers;
+import org.mockito.Mock;
+
+import org.springframework.social.github.api.GitHubRepo;
+import org.springframework.web.client.RestClientException;
+
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
@@ -62,7 +60,7 @@ public class GettingStartedGuidesTests {
         REPO_INFO.setDescription(description);
         given(org.getReadme(anyString())).willReturn(readme);
         given(org.getRepoInfo(GUIDE_REPO_NAME)).willReturn(REPO_INFO);
-        given(org.getAsciidocGuide("/repos/mock-org/gs-rest-service/zipball")).willReturn(
+        given(org.getAsciidocGuide("mock-org/gs-rest-service")).willReturn(
                 new AsciidocGuide("Awesome Guide", "Table of C"));
         GettingStartedGuide guide = gsGuides.find(GUIDE_ID);
         assertThat(guide.getTitle(), equalTo("Awesome Guide"));
@@ -74,7 +72,7 @@ public class GettingStartedGuidesTests {
         REPO_INFO.setDescription(description);
         given(org.getReadme(anyString())).willReturn(readme);
         given(org.getRepoInfo(GUIDE_REPO_NAME)).willReturn(REPO_INFO);
-        given(org.getAsciidocGuide("/repos/mock-org/gs-rest-service/zipball")).willReturn(
+        given(org.getAsciidocGuide("mock-org/gs-rest-service")).willReturn(
                 new AsciidocGuide("Awesome Guide", "Table of C"));
         GettingStartedGuide guide = gsGuides.find(GUIDE_ID);
         assertThat(guide.getSubtitle(), equalTo("Learn awesome stuff with this guide"));
