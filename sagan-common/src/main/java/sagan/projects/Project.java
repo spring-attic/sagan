@@ -21,10 +21,7 @@ import org.springframework.util.StringUtils;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Project {
@@ -219,4 +216,10 @@ public class Project {
         return null;
     }
 
+    public Optional<String> getCurrentVersion() {
+        return releaseList.stream()
+                .filter(projectRelease -> projectRelease.isCurrent())
+                .findFirst()
+                .map(projectRelease -> projectRelease.getVersion());
+    }
 }
