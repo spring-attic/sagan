@@ -1,0 +1,9 @@
+applications:
+- name: sagan
+  buildpack: java_buildpack
+  path: build/libs/sagan-site-1.0.0.BUILD-SNAPSHOT.jar
+  instances: 1
+  memory: 1024M
+  disk_quota: 256M
+  routes:
+  - route: compass-sagan.cfapps.io
