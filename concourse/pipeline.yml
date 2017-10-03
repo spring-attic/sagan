@@ -1,0 +1,95 @@
+##########################################################
+#
+# Groups are used to display jobs on the Web UI
+#
+##########################################################
+groups:
+- name: build
+  jobs:
+   - build-sagan
+
+##########################################################
+#
+# Resources a specific instances of resources to be used
+# by jobs : a Git repo, a PCF instance, etc.
+#
+##########################################################
+resources:
+- name: sagan-repo
+  type: git
+  source:
+    uri: ((sagan-git-uri))
+    branch: ((sagan-git-branch))
+    private_key: ((ci-ssh-key))
+- name: sagan-pipeline-repo
+  type: git
+  source:
+    uri: ((sagan-pipeline-git-uri))
+    branch: ((sagan-pipeline-git-branch))
+    private_key: ((ci-ssh-key))
+- name: sagan-cf-qa
+  type: cf
+  source:
+    api: https://api.run.pivotal.io
+    username: ((compass-cf-login))
+    password: ((compass-cf-password))
+    organization: pivotallabs
+    space: Beach-Paris
+    skip_cert_check: false
+
+##########################################################
+#
+# Jobs are tasks executed by concourse.
+#
+##########################################################
+
+jobs:
+- name: build-sagan
+  serial: true
+  public: true
+  plan:
+  - aggregate:
+    - get: sagan-repo
+      trigger: true
+      params: { submodules: none }
+    - get: sagan-pipeline-repo
+      trigger: true
+  - task: build-sagan
+    params:
+      # JSPM github authentication is needed for the CI
+      # otherwise install steps reach github API limitation
+      JSPM_GITHUB_AUTH_TOKEN: ((JSPM_GITHUB_AUTH_TOKEN))
+    config:
+     inputs:
+     - name: sagan-repo
+     outputs:
+     - name: build
+     image_resource:
+       type: docker-image
+       source:
+         repository: gradle
+         tag: '4.1.0-jdk8'
+     platform: linux
+     run:
+       user: root
+       path: /bin/bash
+       args:
+       - -c
+       - |-
+         set -e -u -x
+         # saga-repo will be available with root owner
+         # but js things will complain if ran by root
+         # so we first change repo owner and then use
+         # gradle user to run build
+         chown gradle:gradle -R ./sagan-repo
+         cd sagan-repo
+         su gradle -c "./gradlew --console plain build"
+         cd ../
+         cp -R sagan-repo/sagan-site/build build
+  - put: sagan-cf-qa
+    params:
+      manifest: sagan-pipeline-repo/manifest.yml
+      environment_variables:
+        GITHUB_CLIENT_ID: {{compass-github-clientid}}
+        GITHUB_CLIENT_SECRET: {{compass-github-clientsecret}}
+        GITHUB_TEAM_ID: {{compass-github-teamid}}
