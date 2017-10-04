@@ -20,13 +20,6 @@ resources:
   source:
     uri: ((sagan-git-uri))
     branch: ((sagan-git-branch))
-    private_key: ((ci-ssh-key))
-- name: sagan-pipeline-repo
-  type: git
-  source:
-    uri: ((sagan-pipeline-git-uri))
-    branch: ((sagan-pipeline-git-branch))
-    private_key: ((ci-ssh-key))
 - name: sagan-cf-qa
   type: cf
   source:
@@ -46,14 +39,10 @@ resources:
 jobs:
 - name: build-sagan
   serial: true
-  public: true
   plan:
-  - aggregate:
-    - get: sagan-repo
-      trigger: true
-      params: { submodules: none }
-    - get: sagan-pipeline-repo
-      trigger: true
+  - get: sagan-repo
+    trigger: true
+    params: { submodules: none }
   - task: build-sagan
     params:
       # JSPM github authentication is needed for the CI
@@ -85,10 +74,10 @@ jobs:
          cd sagan-repo
          su gradle -c "./gradlew --console plain build"
          cd ../
-         cp -R sagan-repo/sagan-site/build build
+         cp -R sagan-repo/sagan-site/build/* build
   - put: sagan-cf-qa
     params:
-      manifest: sagan-pipeline-repo/manifest.yml
+      manifest: sagan-repo/concourse/manifest.yml
       environment_variables:
         GITHUB_CLIENT_ID: {{compass-github-clientid}}
         GITHUB_CLIENT_SECRET: {{compass-github-clientsecret}}
