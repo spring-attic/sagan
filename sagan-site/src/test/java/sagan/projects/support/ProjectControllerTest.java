@@ -25,7 +25,7 @@ public class ProjectControllerTest {
 
     private List<ProjectRelease> releases = new ArrayList<>();
     Project project = new Project("spring-framework", "spring", "http://example.com", "/project/spring-framework", releases,
-            false, "project");
+            false, "project", "spring-cool,spring-awesome");
     private ExtendedModelMap model = new ExtendedModelMap();
     private ProjectController controller;
     private String viewName;
@@ -52,5 +52,8 @@ public class ProjectControllerTest {
     public void showProjectViewNameIsShow() {
         assertThat(viewName, is("projects/show"));
     }
+
+    @Test
+    public void showProjectHasStackOverflowLink() { assertThat(model.get("projectStackOverflow"), is("https://stackoverflow.com/questions/tagged/spring-cool+or+spring-awesome"));}
 
 }

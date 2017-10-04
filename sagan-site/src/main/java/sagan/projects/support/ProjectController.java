@@ -1,10 +1,12 @@
 package sagan.projects.support;
 
+import com.google.common.base.Joiner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sagan.projects.Project;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.Section;
 
@@ -28,7 +30,10 @@ class ProjectController {
 
     @RequestMapping(value = "/{projectName}", method = { GET, HEAD })
     public String showProject(Model model, @PathVariable String projectName) {
-        model.addAttribute("project", projectMetadataService.getProject(projectName));
+        // TODO: not ideal, the best is to change towards PageModel (maybe using mapstruct?)
+        Project project = projectMetadataService.getProject(projectName);
+        model.addAttribute("project", project);
+        model.addAttribute("projectStackOverflow", "https://stackoverflow.com/questions/tagged/" + Joiner.on("+or+").join(project.getStackOverflowTagList()));
         model.addAttribute("projects", projectMetadataService.getProjectsForCategory("active"));
         return "projects/show";
     }
