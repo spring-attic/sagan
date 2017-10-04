@@ -4,9 +4,9 @@
 #
 ##########################################################
 groups:
-- name: build
+- name: sagan
   jobs:
-   - build-sagan
+   - build-compass
 
 ##########################################################
 #
@@ -37,7 +37,7 @@ resources:
 ##########################################################
 
 jobs:
-- name: build-sagan
+- name: build-compass
   serial: true
   plan:
   - get: sagan-repo
