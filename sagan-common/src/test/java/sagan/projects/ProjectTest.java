@@ -13,8 +13,8 @@ import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
 public class ProjectTest {
     @Test
     public void currentVersion() {
-        ProjectRelease currentRelease = new ProjectRelease("1.8.7", GENERAL_AVAILABILITY, true, "ref-doc-url", "api-doc-url", "group-id", "artifact-id");
-        ProjectRelease olderRelease = new ProjectRelease("2.0.0", GENERAL_AVAILABILITY, false, "ref-doc-url", "api-doc-url", "group-id", "artifact-id");
+        ProjectRelease currentRelease = new ProjectRelease("1.8.7.RELEASE", GENERAL_AVAILABILITY, true, "ref-doc-url", "api-doc-url", "group-id", "artifact-id");
+        ProjectRelease olderRelease = new ProjectRelease("2.0.0.RELEASE", GENERAL_AVAILABILITY, false, "ref-doc-url", "api-doc-url", "group-id", "artifact-id");
         List<ProjectRelease> releases = Arrays.asList(currentRelease, olderRelease);
 
         Project project = new Project("id", "my-special-project", "my-repo-url", "my-site-url", releases, false, "my-special-category");

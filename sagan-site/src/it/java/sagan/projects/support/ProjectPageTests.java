@@ -3,6 +3,7 @@ package sagan.projects.support;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.ResultActions;
@@ -59,14 +60,32 @@ public class ProjectPageTests extends AbstractIntegrationTests {
     public void getQuickStart() throws Exception {
         assertThat(document.select(".quickstart").size(), is(1));
 
-        assertThat(document.select(".quickstart--title").size(), is(1));
-        assertThat(document.select(".quickstart--title").first().text(), is("Quick start"));
+        Elements quickStartTitle = document.select(".quickstart--title");
+        assertThat(quickStartTitle.size(), is(1));
+        assertThat(quickStartTitle.first().text(), is("Quick start"));
 
-        assertThat(document.select(".quickstart--subtitle").size(), is(1));
-        assertThat(document.select(".quickstart--subtitle").first().text(), is("Bootstrap your application with Spring Initializr"));
+        Elements quickStartSubtitle = document.select(".quickstart--subtitle");
+        assertThat(quickStartSubtitle.size(), is(1));
+        assertThat(quickStartSubtitle.first().text(), is("Bootstrap your application with Spring Initializr"));
 
-        assertThat(document.select(".quickstart--button").size(), is(1));
-        assertThat(document.select(".quickstart--button").first().text(), is("Get started"));
-        assertThat(document.select(".quickstart--button").first().attr("href"), startsWith("https://start.spring.io/"));
+        Elements quickStartButton = document.select(".quickstart--button");
+        assertThat(quickStartButton.size(), is(1));
+        assertThat(quickStartButton.first().text(), is("Get started"));
+        assertThat(quickStartButton.first().attr("href"), startsWith("https://start.spring.io/"));
+    }
+
+    @Test
+    public void getHeader() throws Exception {
+        assertThat(document.select(".project--header").size(), is(1));
+
+        Elements githubLink = document.select(".project--header .link--github");
+        assertThat(githubLink.size(), is(1));
+        assertThat(githubLink.first().attr("href"), is("https://github.com/spring-projects/spring-boot"));
+
+        Elements stackoverflowLink = document.select(".project--header .link--stackoverflow");
+        assertThat(stackoverflowLink.size(), is(1));
+        assertThat(stackoverflowLink.first().attr("href"), is("https://stackoverflow.com/questions/tagged/spring-boot"));
+
+        assertThat(document.select(".project--header .version").first().text(), containsString("v1.5.7"));
     }
 }

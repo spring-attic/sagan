@@ -5,33 +5,53 @@
       data-info-popups>
 <head>
     <title th:text="${project.getName()}"></title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/project.css}" href="../../../../../../sagan-client/css/project.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/project.css}"
+          href="../../../../../../sagan-client/css/project.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css"
+          type="text/css">
 
     <!-- http://opengraphprotocol.org/ -->
-    <meta property="og:title" content="Spring Projects" />
-    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <meta property="og:title" content="Spring Projects"/>
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}"/>
     <meta property="og:description" content="The Spring portfolio has many projects, including Spring Framework,
-    Sprint IO Platform, Spring Cloud, Spring Boot, Spring Data, Spring Security..." />
+    Sprint IO Platform, Spring Cloud, Spring Boot, Spring Data, Spring Security..."/>
 </head>
 <body>
-  <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="body--container container-fluid">
-      <div class="compass row">
-    <ul class="sidebar col-lg-3">
-      <li class="sidebar_project" th:classappend="${proj.getId() == project.getId()} ? 'active'" th:each="proj : ${projects}">
-          <a th:href="${proj.siteUrl}" th:text="${proj.getName()}"></a>
-      </li>
-    </ul>
-    <article class="col-lg-9">
-      <h1 class="index-page--title" th:text="${project.getName()}"></h1>
-      <div class="quickstart">
-        <span class="quickstart--title">Quick start</span>
-        <span class="quickstart--subtitle">Bootstrap your application with Spring Initializr</span>
-        <a class="quickstart--button" href="https://start.spring.io/" target="_blank">Get started</a>
-      </div>
-    </article>
-      </div>
-  </div>
+<div layout:fragment="header-container"></div>
+<div layout:fragment="content" class="body--container container-fluid">
+    <div class="compass row">
+        <ul class="sidebar col-lg-3">
+            <li class="sidebar_project" th:classappend="${proj.getId() == project.getId()} ? 'active'"
+                th:each="proj : ${projects}">
+                <a th:href="${proj.siteUrl}" th:text="${proj.getName()}"></a>
+            </li>
+        </ul>
+        <article class="col-lg-9">
+            <div class="box">
+                <div class="row">
+                    <div class="project--header col-lg-12">
+                        <h1 th:text="${project.getName()}"></h1>
+                        <a th:href="${project.getRepoUrl()}" target="_blank" class="link--github"><img
+                                th:src="@{/img/github-icon.svg}"/></a>
+                        <a th:href="${projectStackOverflow}" target="_blank" class="link--stackoverflow"><img
+                                th:src="@{/img/stackoverflow-icon.svg}"/></a>
+
+                        <!--/* TODO: remember this doesn't exist sometimes and we should hide it */-->
+                        <span class="version">CURRENT VERSION
+                            <strong th:text="'v' + ${project.getCurrentVersion().get()}"></strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="quickstart">
+                        <span class="quickstart--title">Quick start</span>
+                        <span class="quickstart--subtitle">Bootstrap your application with Spring Initializr</span>
+                        <a class="quickstart--button" href="https://start.spring.io/" target="_blank">Get started</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
 </body>
 </html>

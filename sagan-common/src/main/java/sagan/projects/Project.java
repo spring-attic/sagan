@@ -220,6 +220,6 @@ public class Project {
         return releaseList.stream()
                 .filter(projectRelease -> projectRelease.isCurrent())
                 .findFirst()
-                .map(projectRelease -> projectRelease.getVersion());
+                .map(projectRelease -> projectRelease.getVersionDisplayName());
     }
 }

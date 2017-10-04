@@ -52,3 +52,40 @@
     background: rgba(109, 179, 63, 1);
     color: #fff;
 }
+
+.compass .project--header {
+    background: #fff;
+    padding: 1rem 2rem
+}
+
+.compass .project--header h1 {
+    display: inline-block;
+    margin-right: 2rem;
+}
+
+.compass .project--header .link--github,
+.compass .project--header .link--stackoverflow{
+    margin: 0 0.4rem;
+    text-decoration: none;
+}
+
+.compass .project--header .link--github img {
+    height: 1.5rem;
+    vertical-align: baseline;
+}
+
+.compass .project--header .link--stackoverflow img {
+    height: 2rem;
+    vertical-align: sub;
+}
+
+.compass .project--header .version {
+    font-size: 0.65rem;
+    float: right;
+    line-height: 30px;
+}
+
+.compass .project--header .version strong {
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
