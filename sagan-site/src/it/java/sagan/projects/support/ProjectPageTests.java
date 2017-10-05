@@ -109,10 +109,23 @@ public class ProjectPageTests extends AbstractIntegrationTests {
         assertThat(document.select(".spring-boot-config"), hasSize(0));
     }
 
+    @Test
     public void getHeaderOmitsVersionWhenThereIsNoCurrentRelease() throws Exception {
         result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-data-redis"));
         document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
 
         assertThat(document.select(".project--header .version"), hasSize(0));
+    }
+
+    @Test
+    public void getFeatures() throws Exception {
+        Elements features = document.select(".project-features");
+        assertThat(features, hasSize(1));
+
+        assertThat(features.select(".project-features--subtitle").text(), is("Features"));
+
+        String featuresHtml = features.html()
+                .replaceAll("\\n\\s+", "");
+        assertThat(featuresHtml, containsString("<ul><li>hello world</li></ul>"));
     }
 }

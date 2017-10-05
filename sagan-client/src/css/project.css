@@ -26,6 +26,14 @@
     background: #fff;
 }
 
+.compass .project-features {
+    margin: 25px;
+}
+
+.compass .project-features h2 {
+    font-size: 20px;
+}
+
 .compass .spring-boot-config {
     border-radius: 4px;
     background-color: #fff;

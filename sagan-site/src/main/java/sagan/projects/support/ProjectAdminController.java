@@ -113,8 +113,12 @@ class ProjectAdminController {
             }
         }
         normalizeProjectReleases(project, groupId);
-        String renderedContent = this.renderer.render(project.getRawBootConfig(), PostFormat.ASCIIDOC);
-        project.setRenderedBootConfig(renderedContent);
+
+        String renderedBootConfig = this.renderer.render(project.getRawBootConfig(), PostFormat.ASCIIDOC);
+        project.setRenderedBootConfig(renderedBootConfig);
+        String renderedFeatures = this.renderer.render(project.getRawFeatures(), PostFormat.ASCIIDOC);
+        project.setRenderedFeatures(renderedFeatures);
+
         service.save(project);
 
         return "redirect:" + project.getId();
