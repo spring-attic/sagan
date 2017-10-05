@@ -34,6 +34,8 @@ public class Project {
     private String category;
     private String rawBootConfig;
     private String renderedBootConfig;
+    private String rawFeatures;
+    private String renderedFeatures;
 
     @ElementCollection
     private List<ProjectRelease> releaseList = new ArrayList<>();
@@ -156,6 +158,22 @@ public class Project {
 
     public void setRenderedBootConfig(String renderedBootConfig) {
         this.renderedBootConfig = renderedBootConfig;
+    }
+
+    public String getRawFeatures() {
+        return rawFeatures;
+    }
+
+    public void setRawFeatures(String rawFeatures) {
+        this.rawFeatures = rawFeatures;
+    }
+
+    public String getRenderedFeatures() {
+        return renderedFeatures;
+    }
+
+    public void setRenderedFeatures(String renderedFeatures) {
+        this.renderedFeatures = renderedFeatures;
     }
 
     @Override

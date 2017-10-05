@@ -30,12 +30,16 @@ class ProjectController {
 
     @RequestMapping(value = "/{projectName}", method = { GET, HEAD })
     public String showProject(Model model, @PathVariable String projectName) {
-        // TODO: not ideal, the best is to change towards PageModel (maybe using mapstruct?)
         Project project = projectMetadataService.getProject(projectName);
         model.addAttribute("project", project);
-        model.addAttribute("projectStackOverflow", "https://stackoverflow.com/questions/tagged/" + Joiner.on("+or+").join(project.getStackOverflowTagList()));
+        model.addAttribute("projectStackOverflow", stackOverflowUrl(project));
         model.addAttribute("projects", projectMetadataService.getProjectsForCategory("active"));
         return "projects/show";
+    }
+
+    private String stackOverflowUrl(Project project) {
+        return "https://stackoverflow.com/questions/tagged/"
+                +  Joiner.on("+or+").join(project.getStackOverflowTagList());
     }
 
 }

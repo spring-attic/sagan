@@ -3,6 +3,7 @@ package sagan.projects.support;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ExtendedModelMap;
@@ -17,6 +18,10 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -63,6 +68,23 @@ public class ProjectAdminControllerTests {
         assertThat(model.get("project"), equalTo(project));
         assertThat(((Project) model.get("project")).getProjectReleases().iterator().next().getApiDocUrl(), equalTo(
                 "http://example.com/{version}"));
+    }
+
+    @Test
+    public void saveProject_rendersAsciidocContent() {
+        when(renderer.render(contains("boot-config"), any())).thenReturn("rendered-boot-config");
+        when(renderer.render(contains("overview"), any())).thenReturn("rendered-overview");
+
+        project.setRawBootConfig("boot-config");
+        project.setRawFeatures("overview");
+        controller.save(project, null, "");
+
+        ArgumentCaptor<Project> captor = ArgumentCaptor.forClass(Project.class);
+        verify(projectMetadataService, times(1)).save(captor.capture());
+
+        Project projectCaptured = captor.getValue();
+        assertThat(projectCaptured.getRenderedBootConfig(), equalTo("rendered-boot-config"));
+        assertThat(projectCaptured.getRenderedFeatures(), equalTo("rendered-overview"));
     }
 
 }
