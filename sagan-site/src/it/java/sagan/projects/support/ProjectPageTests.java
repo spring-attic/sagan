@@ -108,4 +108,11 @@ public class ProjectPageTests extends AbstractIntegrationTests {
 
         assertThat(document.select(".spring-boot-config"), hasSize(0));
     }
+
+    public void getHeaderOmitsVersionWhenThereIsNoCurrentRelease() throws Exception {
+        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-data-redis"));
+        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+
+        assertThat(document.select(".project--header .version"), hasSize(0));
+    }
 }

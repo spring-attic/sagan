@@ -36,8 +36,8 @@
                         <a th:href="${projectStackOverflow}" target="_blank" class="link--stackoverflow"><img
                                 th:src="@{/img/stackoverflow-icon.svg}"/></a>
 
-                        <!--/* TODO: remember this doesn't exist sometimes and we should hide it */-->
-                        <span class="version">CURRENT VERSION
+                        <span class="version" th:if="${project.getCurrentVersion().isPresent()}">
+                            CURRENT VERSION
                             <strong th:text="'v' + ${project.getCurrentVersion().get()}"></strong>
                         </span>
                     </div>
