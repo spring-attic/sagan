@@ -32,6 +32,8 @@ public class Project {
     private String repoUrl;
     private String siteUrl;
     private String category;
+    private String rawBootConfig;
+    private String renderedBootConfig;
 
     @ElementCollection
     private List<ProjectRelease> releaseList = new ArrayList<>();
@@ -54,9 +56,10 @@ public class Project {
     }
 
     public Project(String id, String name, String repoUrl, String siteUrl, List<ProjectRelease> releaseList,
-                   boolean isAggregator, String category, String stackOverflowTags) {
+                   boolean isAggregator, String category, String stackOverflowTags, String bootconfig) {
         this(id, name, repoUrl, siteUrl, releaseList, isAggregator, category);
         this.setStackOverflowTags(stackOverflowTags);
+        this.setRawBootConfig(bootconfig);
     }
 
     public String getCategory() {
@@ -137,6 +140,22 @@ public class Project {
 
     public Set<String> getStackOverflowTagList() {
         return StringUtils.commaDelimitedListToSet(this.stackOverflowTags);
+    }
+
+    public String getRawBootConfig() {
+        return rawBootConfig;
+    }
+
+    public void setRawBootConfig(String rawBootConfig) {
+        this.rawBootConfig = rawBootConfig;
+    }
+
+    public String getRenderedBootConfig() {
+        return renderedBootConfig;
+    }
+
+    public void setRenderedBootConfig(String renderedBootConfig) {
+        this.renderedBootConfig = renderedBootConfig;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package sagan.projects.support;
 
+import sagan.blog.PostFormat;
+import sagan.blog.support.FormatAwarePostContentRenderer;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.support.nav.Navigation;
@@ -37,9 +39,12 @@ class ProjectAdminController {
 
     private ProjectMetadataService service;
 
+    private final FormatAwarePostContentRenderer renderer;
+
     @Autowired
-    public ProjectAdminController(ProjectMetadataService service) {
+    public ProjectAdminController(ProjectMetadataService service, FormatAwarePostContentRenderer renderer) {
         this.service = service;
+        this.renderer = renderer;
     }
 
     @RequestMapping(value = "", method = GET)
@@ -108,6 +113,8 @@ class ProjectAdminController {
             }
         }
         normalizeProjectReleases(project, groupId);
+        String renderedContent = this.renderer.render(project.getRawBootConfig(), PostFormat.ASCIIDOC);
+        project.setRenderedBootConfig(renderedContent);
         service.save(project);
 
         return "redirect:" + project.getId();

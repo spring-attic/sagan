@@ -42,11 +42,29 @@
                         </span>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="quickstart">
-                        <span class="quickstart--title">Quick start</span>
-                        <span class="quickstart--subtitle">Bootstrap your application with Spring Initializr</span>
-                        <a class="quickstart--button" href="https://start.spring.io/" target="_blank">Get started</a>
+                    <div class="col-lg-8">
+                        Good™ content goes here.
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div th:if="${project.getRenderedBootConfig().length() > 0}" class="row">
+                            <div class="spring-boot-config">
+                                <h3 class="spring-boot-config--subtitle">
+                                    Spring Boot Config
+                                </h3>
+                                <div th:utext="${project.getRenderedBootConfig()}"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="quickstart">
+                                <span class="quickstart--title">Quick start</span>
+                                <span class="quickstart--subtitle">Bootstrap your application with Spring Initializr</span>
+                                <a class="quickstart--button" href="https://start.spring.io/" target="_blank">Get
+                                    started</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

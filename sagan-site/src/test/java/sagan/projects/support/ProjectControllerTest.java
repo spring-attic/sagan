@@ -25,7 +25,7 @@ public class ProjectControllerTest {
 
     private List<ProjectRelease> releases = new ArrayList<>();
     Project project = new Project("spring-framework", "spring", "http://example.com", "/project/spring-framework", releases,
-            false, "project", "spring-cool,spring-awesome");
+            false, "project", "spring-cool,spring-awesome", "");
     private ExtendedModelMap model = new ExtendedModelMap();
     private ProjectController controller;
     private String viewName;

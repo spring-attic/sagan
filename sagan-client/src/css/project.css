@@ -1,3 +1,6 @@
+.compass a {
+    color: #5fa134;
+}
 
 .compass .sidebar {
     background: #dbe6d6;
@@ -23,10 +26,23 @@
     background: #fff;
 }
 
+.compass .spring-boot-config {
+    border-radius: 4px;
+    background-color: #fff;
+    border: solid 2px #e5b451;
+
+    padding: 20px;
+    margin: 25px 0px;
+}
+
+.compass .spring-boot-config h3 {
+    color: #e5b451;
+}
+
 .compass .quickstart {
     background: #fff;
+    border-radius: 4px;
     padding: 20px;
-    width: 260px;
 }
 
 .compass .quickstart--title {
