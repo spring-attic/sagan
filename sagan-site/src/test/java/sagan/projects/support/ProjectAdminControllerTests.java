@@ -1,6 +1,11 @@
 package sagan.projects.support;
 
-import sagan.blog.support.AsciidoctorMarkdownService;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.ui.ExtendedModelMap;
 import sagan.blog.support.FormatAwarePostContentRenderer;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
@@ -9,14 +14,6 @@ import sagan.projects.ProjectRelease.ReleaseStatus;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import org.springframework.ui.ExtendedModelMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

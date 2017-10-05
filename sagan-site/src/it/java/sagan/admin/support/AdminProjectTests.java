@@ -66,6 +66,7 @@ public class AdminProjectTests extends AbstractIntegrationTests {
                         .param("name", "Spring Framework")
                         .param("repoUrl", "http://github.com/spring-projects/spring-framework")
                         .param("siteUrl", "http://projects.spring.io/spring-framework")
+                        .param("rawBootConfig", "")
                         .param("releasesToDelete", "4.0.1.BUILD-SNAPSHOT")
                         .param("projectReleases[0].artifactId", "spring-framework")
                         .param("projectReleases[0].version", "4.0.1.BUILD-SNAPSHOT")
@@ -119,6 +120,7 @@ public class AdminProjectTests extends AbstractIntegrationTests {
                         .param("name", "Spring Framework")
                         .param("repoUrl", "http://github.com/spring-projects/spring-framework")
                         .param("siteUrl", "http://projects.spring.io/spring-framework")
+                        .param("rawBootConfig", "")
                         .param("projectReleases[0].artifactId", "spring-framework")
                         .param("projectReleases[0].version", "4.0.2.BUILD-SNAPSHOT")
                         .param("projectReleases[0].refDocUrl",
@@ -172,6 +174,7 @@ public class AdminProjectTests extends AbstractIntegrationTests {
                         .param("name", "Spring New")
                         .param("repoUrl", "http://github.com/spring-projects/spring-new")
                         .param("siteUrl", "http://projects.spring.io/spring-new")
+                        .param("rawBootConfig", "")
                         .param("projectReleases[0].artifactId", "spring-framework")
                         .param("projectReleases[0].version", "4.0.2.BUILD-SNAPSHOT")
                         .param("projectReleases[0].refDocUrl",
@@ -227,6 +230,7 @@ public class AdminProjectTests extends AbstractIntegrationTests {
                         .param("name", "Spring Data JDBC Extensions")
                         .param("repoUrl", "http://github.com/spring-projects/spring-data-jdbc-ext")
                         .param("siteUrl", "http://projects.spring.io/spring-data-jdbc-ext")
+                        .param("rawBootConfig", "")
                         .param("projectReleases[0].artifactId", "spring-jdbc-oracle")
                         .param("projectReleases[0].version", "1.0.0.RELEASE")
                         .param("projectReleases[0].refDocUrl",
