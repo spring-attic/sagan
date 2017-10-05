@@ -88,4 +88,24 @@ public class ProjectPageTests extends AbstractIntegrationTests {
 
         assertThat(document.select(".project--header .version").first().text(), containsString("v1.5.7"));
     }
+
+    @Test
+    public void getSpringBootConfig() {
+        Elements springBootConfig = document.select(".spring-boot-config");
+        assertThat(springBootConfig, hasSize(1));
+
+        Elements springBootConfigTitle = springBootConfig.select(".spring-boot-config--subtitle");
+        assertThat(springBootConfigTitle.text(), is("Spring Boot Config"));
+
+        String cleanHtml = springBootConfig.html().replaceAll("\\s+", " ");
+        assertThat(cleanHtml, containsString("Lorem ipsum dolor sit amet, <a>consectetur</a> adipiscing elit"));
+    }
+
+    @Test
+    public void getSpringBootConfigIsHiddenWhenItDoesNotExist() throws Exception {
+        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-data-redis"));
+        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+
+        assertThat(document.select(".spring-boot-config"), hasSize(0));
+    }
 }

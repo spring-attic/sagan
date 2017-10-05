@@ -49,12 +49,12 @@ public class QuestionsControllerTests {
 
         given(projectMetadataService.getProjects()).willReturn(Arrays.asList(
                 new Project("spring-framework", "Spring Framework", null, null,
-                        Collections.emptyList(), false, "active", "spring-core, spring-framework, spring"),
+                        Collections.emptyList(), false, "active", "spring-core, spring-framework, spring", ""),
                 new Project("spring-data", "Spring Data", null, null,
-                        Collections.emptyList(), true, "active", "spring-data,spring-data-mongodb"),
-                new Project("spring-data-mongodb", "Spring Data MongoDB", null, null, Collections.emptyList(), false, "active", ""),
-                new Project("spring-data-graph", "Spring Data Graph", null, null, Collections.emptyList(), false, "attic", ""),
-                new Project("spring-scala", "Spring Scala", null, null, Collections.emptyList(), false, "incubator", "")
+                        Collections.emptyList(), true, "active", "spring-data,spring-data-mongodb", ""),
+                new Project("spring-data-mongodb", "Spring Data MongoDB", null, null, Collections.emptyList(), false, "active", "", ""),
+                new Project("spring-data-graph", "Spring Data Graph", null, null, Collections.emptyList(), false, "attic", "", ""),
+                new Project("spring-scala", "Spring Scala", null, null, Collections.emptyList(), false, "incubator", "", "")
         ));
         questionsController = new QuestionsController(projectMetadataService, stackOverflow);
     }

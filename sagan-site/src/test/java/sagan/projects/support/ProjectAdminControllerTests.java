@@ -1,5 +1,7 @@
 package sagan.projects.support;
 
+import sagan.blog.support.AsciidoctorMarkdownService;
+import sagan.blog.support.FormatAwarePostContentRenderer;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.ProjectRelease.ReleaseStatus;
@@ -26,6 +28,9 @@ public class ProjectAdminControllerTests {
     @Mock
     private ProjectMetadataService projectMetadataService;
 
+    @Mock
+    private FormatAwarePostContentRenderer renderer;
+
     private List<ProjectRelease> releases = new ArrayList<>();
     Project project = new Project("spring-framework", "spring", "http://example.com", "http://examples.com", releases,
             false, "project");
@@ -34,7 +39,7 @@ public class ProjectAdminControllerTests {
 
     @Before
     public void setUp() throws Exception {
-        controller = new ProjectAdminController(projectMetadataService);
+        controller = new ProjectAdminController(this.projectMetadataService, this.renderer);
     }
 
     @Test
