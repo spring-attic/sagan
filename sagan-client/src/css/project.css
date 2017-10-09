@@ -165,3 +165,53 @@
     font-size: 0.8rem;
     margin-left: 0.5rem;
 }
+
+/* Learn */
+
+.compass #learn {
+    padding: 2rem;
+}
+
+.compass .project--guides {
+    list-style: none;
+    margin-left: -0.6rem;
+}
+
+.compass .project--guides--title {
+    font-size: 20px;
+}
+
+.compass .project--guides--subtitle {
+    font-size: 16px;
+    margin: 1rem 0;
+}
+
+.compass .project--guide {
+    margin-bottom: 1.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.compass .project--guide a {
+    background-color: #fff;
+    box-shadow: 0.5px 0.5px 1.5px 0 rgba(0, 0, 0, 0.27);
+    border: solid 0.5px #dfdfdf;
+    display: block;
+    height: 100%;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #eac36d;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.compass .project--guide a h3 {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+}
+
+.compass .project--guide a div {
+    color: #34302d;
+}

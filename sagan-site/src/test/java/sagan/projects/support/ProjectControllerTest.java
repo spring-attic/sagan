@@ -6,11 +6,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ExtendedModelMap;
+import sagan.guides.GettingStartedGuide;
+import sagan.guides.support.ProjectGuidesRepository;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -23,6 +26,9 @@ public class ProjectControllerTest {
     @Mock
     private ProjectMetadataService projectMetadataService;
 
+    @Mock
+    private ProjectGuidesRepository projectGuidesRepo;
+
     private List<ProjectRelease> releases = new ArrayList<>();
     Project project = new Project("spring-framework", "spring", "http://example.com", "/project/spring-framework", releases,
             false, "project", "spring-cool,spring-awesome", "");
@@ -32,7 +38,7 @@ public class ProjectControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        controller = new ProjectController(projectMetadataService);
+        controller = new ProjectController(projectMetadataService, Collections.singletonList(projectGuidesRepo));
         when(projectMetadataService.getProject("spring-framework")).thenReturn(project);
         when(projectMetadataService.getProjectsForCategory("active")).thenReturn(Arrays.asList(project, project));
         viewName = controller.showProject(model, "spring-framework");

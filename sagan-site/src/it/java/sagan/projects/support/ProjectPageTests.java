@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import sagan.support.Fixtures;
 import saganx.AbstractIntegrationTests;
 
 import java.util.List;
@@ -25,6 +26,11 @@ public class ProjectPageTests extends AbstractIntegrationTests {
 
     @Before
     public void setup() throws Exception {
+        stubRestClient.putResponse("/orgs/spring-guides/repos",
+                Fixtures.load("/fixtures/github/githubRepoListWithSpringBoot.json"));
+        stubRestClient.putResponseBytes("/repos/spring-guides/gs-spring-boot/zipball",
+                Fixtures.loadData("../../gs-spring-boot.zip"));
+
         result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-boot"));
         document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
     }
@@ -84,7 +90,8 @@ public class ProjectPageTests extends AbstractIntegrationTests {
 
         Elements stackoverflowLink = document.select(".project--header .link--stackoverflow");
         assertThat(stackoverflowLink.size(), is(1));
-        assertThat(stackoverflowLink.first().attr("href"), is("https://stackoverflow.com/questions/tagged/spring-boot"));
+        assertThat(stackoverflowLink.first().attr("href"),
+                is("https://stackoverflow.com/questions/tagged/spring-boot"));
 
         assertThat(document.select(".project--header .version").first().text(), containsString("v1.5.7"));
     }
@@ -146,5 +153,26 @@ public class ProjectPageTests extends AbstractIntegrationTests {
         assertThat(tabsContent.get(0).id(), is("overview"));
         assertThat(tabsContent.get(0).text(), containsString("Features"));
         assertThat(tabsContent.get(1).id(), is("learn"));
+    }
+
+    @Test
+    public void getGuides() throws Exception {
+        Elements learnSection = document.select("#learn");
+        assertThat(learnSection, hasSize(1));
+
+        Element learnTitle = learnSection.select(".project--guides--title").first();
+        assertThat(learnTitle.text(), is("Guides"));
+
+        Elements guides = learnSection.select(".project--guide");
+        assertThat(guides, hasSize(1));
+
+        Element firstGuide = guides.get(0);
+        Elements title = firstGuide.select(".project--guide--title");
+        Elements subtitle = firstGuide.select(".project--guide--subtitle");
+        Element guideLink = firstGuide.select("a").first();
+
+        assertThat(title.text(), is("Building a RESTful Web Service"));
+        assertThat(subtitle.text(), is("Learn how to create a RESTful web service with Spring."));
+        assertThat(guideLink.attr("href"), is("/guides/gs/spring-boot"));
     }
 }

@@ -92,10 +92,21 @@
                         </div>
                     </div>
                     <div class="tab-pane col-lg-12" id="learn">
-                        Learn
+                        <h2 class="project--guides--title">Guides</h2>
+                        <div class="project--guides--subtitle">Designed to be completed in 15-30 minutes, a guide
+                            provides quick, hands-on instructions for building a starter app for any development
+                            task with Spring.
+                        </div>
+                        <ul class="project--guides row">
+                            <li class="project--guide col-lg-6" th:each="guide : ${guides}">
+                                <a th:href="'/guides/gs/' + ${guide.guideId}">
+                                    <h3 class="project--guide--title" th:text="${guide.getTitle()}"></h3>
+                                    <div class="project--guide--subtitle" th:text="${guide.getSubtitle()}"></div>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-
             </div>
         </article>
     </div>
