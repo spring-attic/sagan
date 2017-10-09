@@ -6,9 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sagan.guides.GettingStartedGuide;
+import sagan.guides.GuideMetadata;
+import sagan.guides.support.ProjectGuidesRepository;
 import sagan.projects.Project;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.Section;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
@@ -22,10 +28,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 class ProjectController {
 
     private ProjectMetadataService projectMetadataService;
+    private List<ProjectGuidesRepository> projectGuidesRepositories;
 
     @Autowired
-    public ProjectController(ProjectMetadataService projectMetadataService) {
+    public ProjectController(ProjectMetadataService projectMetadataService,
+                             List<ProjectGuidesRepository> projectGuidesRepositories) {
         this.projectMetadataService = projectMetadataService;
+        this.projectGuidesRepositories = projectGuidesRepositories;
     }
 
     @RequestMapping(value = "/{projectName}", method = { GET, HEAD })
@@ -34,6 +43,11 @@ class ProjectController {
         model.addAttribute("project", project);
         model.addAttribute("projectStackOverflow", stackOverflowUrl(project));
         model.addAttribute("projects", projectMetadataService.getProjectsForCategory("active"));
+
+        List<GuideMetadata> guides = projectGuidesRepositories.stream()
+				.flatMap(repo -> repo.findByProject(project).stream()).collect(Collectors.toList());
+        model.addAttribute("guides", guides);
+
         return "projects/show";
     }
 
