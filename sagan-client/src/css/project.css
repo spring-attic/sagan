@@ -26,8 +26,62 @@
     background: #fff;
 }
 
-.compass .project-features {
-    margin: 25px;
+.compass .nav {
+    border-bottom: 0;
+    background: #fff;
+    padding: 1.5rem 0 0 0;
+    margin-bottom: 0;
+}
+
+.compass .nav-tabs li {
+    margin-bottom: 0;
+}
+
+.compass .nav-tabs a {
+    border: 0;
+    color: #34302d;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    margin: 0 1rem;
+}
+
+.compass .nav-tabs a:focus {
+    background: #fff;
+}
+
+.compass .nav-tabs a:hover,
+.compass .nav-tabs > .active > a {
+    border: 0;
+    border-bottom: 4px solid #6bb536;
+    color: #6bb536;
+    background: #fff;
+    font-weight: bold;
+}
+
+.compass .nav > li > a > svg {
+    padding-left: 0.5rem;
+    vertical-align: sub;
+}
+
+.compass .nav > li > a > svg path {
+    fill: #34302d;
+}
+
+.compass .nav > .active > a > svg path,
+.compass .nav-tabs a:hover svg path {
+    fill: #6bb536;
+}
+
+.compass .tab-content .col-lg-7 {
+    padding: 2rem;
+}
+
+.compass .tab-content .col-lg-5 {
+    padding: 2rem 2rem 2rem 0;
+}
+
+.compass .tab-content .col-lg-5 .row {
+    margin-bottom: 2rem;
 }
 
 .compass .project-features h2 {
@@ -38,9 +92,7 @@
     border-radius: 4px;
     background-color: #fff;
     border: solid 2px #e5b451;
-
     padding: 20px;
-    margin: 25px 0px;
 }
 
 .compass .spring-boot-config h3 {

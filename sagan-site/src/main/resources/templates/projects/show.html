@@ -41,38 +41,65 @@
                             <strong th:text="'v' + ${project.getCurrentVersion().get()}"></strong>
                         </span>
                     </div>
+                    <ul class="nav nav-tabs col-lg-12">
+                        <li class="active"><a href="#overview" data-toggle="tab">
+                            Overview
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14">
+                                <g>
+                                    <path d="M10.186 9.072a2.24 2.24 0 0 1-2.235-2.237 2.236 2.236 0 0 1 4.472 0 2.24 2.24 0 0 1-2.237 2.237zm0-5.965A3.732 3.732 0 0 0 6.46 6.835a3.732 3.732 0 0 0 3.726 3.727 3.732 3.732 0 0 0 3.727-3.727 3.732 3.732 0 0 0-3.727-3.728zm.178 9.2c-2.921.126-5.847-1.75-8.701-5.6.952-1.278 4.137-5.1 8.245-5.213 2.88-.06 5.729 1.688 8.442 5.251-.88 1.316-3.912 5.378-7.986 5.561zm9.492-6.037C16.743 2.016 13.381-.109 9.86.004 4.163.17.282 6.054.12 6.304a.751.751 0 0 0 .02.84c3.153 4.424 6.491 6.662 9.929 6.662.121 0 .243-.005.364-.01 5.645-.258 9.313-6.444 9.467-6.708a.75.75 0 0 0-.043-.818z"></path>
+                                </g>
+                            </svg>
+                        </a></li>
+                        <li><a href="#learn" data-toggle="tab">
+                            Learn
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="19" viewBox="0 0 15 19">
+                                <g>
+                                    <path d="M8.18 5.624H3.966a.705.705 0 1 1 0-1.41h4.212a.705.705 0 1 1 0 1.41zm2.785 2.958H3.967a.705.705 0 1 1 0-1.41h6.998a.705.705 0 1 1 0 1.41zM11 11.536H4.001a.705.705 0 1 1 0-1.411h6.998a.705.705 0 1 1 0 1.41zm-.034 2.958H3.967a.705.705 0 1 1 0-1.41l6.998-.001a.705.705 0 1 1 0 1.41zM1.645 1.41a.239.239 0 0 0-.234.235v15.312c0 .127.107.235.235.235h11.708a.239.239 0 0 0 .235-.235V1.646a.239.239 0 0 0-.235-.235H1.646zm11.71 17.193H1.644A1.648 1.648 0 0 1 0 16.958V1.646C0 .738.738 0 1.646 0h11.708C14.262 0 15 .738 15 1.646v15.312c0 .907-.738 1.646-1.646 1.646z"></path>
+                                </g>
+                            </svg>
+                        </a></li>
+                    </ul>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="project-features">
-                            <h2 class="project-features--subtitle">Features</h2>
-                            <div th:utext="${project.getRenderedFeatures()}"></div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div th:if="${project.getRenderedBootConfig().length() > 0}" class="row">
-                            <div class="spring-boot-config">
-                                <h3 class="spring-boot-config--subtitle">
-                                    Spring Boot Config
-                                </h3>
-                                <div th:utext="${project.getRenderedBootConfig()}"></div>
-                            </div>
-                        </div>
+                <div class="tab-content row">
+                    <div class="tab-pane active col-lg-12" id="overview">
                         <div class="row">
-                            <div class="quickstart">
-                                <span class="quickstart--title">Quick start</span>
-                                <span class="quickstart--subtitle">Bootstrap your application with Spring Initializr</span>
-                                <a class="quickstart--button" href="https://start.spring.io/" target="_blank">Get
-                                    started</a>
+                            <div class="col-lg-7">
+                                <div class="project-features">
+                                    <h2 class="project-features--subtitle">Features</h2>
+                                    <div th:utext="${project.getRenderedFeatures()}"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5">
+                                <div th:if="${project.getRenderedBootConfig().length() > 0}" class="row">
+                                    <div class="spring-boot-config col-lg-12">
+                                        <h3 class="spring-boot-config--subtitle">
+                                            Spring Boot Config
+                                        </h3>
+                                        <div th:utext="${project.getRenderedBootConfig()}"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="quickstart">
+                                        <span class="quickstart--title">Quick start</span>
+                                        <span class="quickstart--subtitle">Bootstrap your application with Spring Initializr</span>
+                                        <a class="quickstart--button" href="https://start.spring.io/" target="_blank">Get
+                                            started</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="tab-pane col-lg-12" id="learn">
+                        Learn
+                    </div>
                 </div>
+
             </div>
         </article>
     </div>
+
 </div>
 </body>
 </html>
