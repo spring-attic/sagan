@@ -1,4 +1,5 @@
 var $ = require('jquery');
+require('bootstrap/js/bootstrap-tab');
 
 var activeBannerSelector = ".homepage--body .homepage--banner section.active";
 var dotSelector = ".homepage--body .homepage--banner .dot";

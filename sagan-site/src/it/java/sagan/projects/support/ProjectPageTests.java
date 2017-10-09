@@ -128,4 +128,23 @@ public class ProjectPageTests extends AbstractIntegrationTests {
                 .replaceAll("\\n\\s+", "");
         assertThat(featuresHtml, containsString("<ul><li>hello world</li></ul>"));
     }
+
+    @Test
+    public void getSubheaderHasBootstrapTabsMarkup() throws Exception {
+        Elements subheader = document.select(".nav.nav-tabs");
+        assertThat(subheader, hasSize(1));
+
+        Elements tabs = subheader.select("a[data-toggle=tab]");
+        assertThat(tabs, hasSize(2));
+        assertThat(tabs.get(0).text(), is("Overview"));
+        assertThat(tabs.get(1).text(), is("Learn"));
+        assertThat(tabs.get(0).attr("href"), is("#overview"));
+        assertThat(tabs.get(1).attr("href"), is("#learn"));
+
+        Elements tabsContent = document.select(".tab-content .tab-pane");
+        assertThat(tabsContent, hasSize(2));
+        assertThat(tabsContent.get(0).id(), is("overview"));
+        assertThat(tabsContent.get(0).text(), containsString("Features"));
+        assertThat(tabsContent.get(1).id(), is("learn"));
+    }
 }
