@@ -10,7 +10,7 @@ public abstract class AbstractGuide implements Guide {
     private GuideMetadata metadata;
     private String content;
     private String sidebar;
-	private String typeLabel;
+    private String typeLabel;
 
     public AbstractGuide() {
     }
@@ -47,16 +47,16 @@ public abstract class AbstractGuide implements Guide {
         this.sidebar = sidebar;
     }
 
-	public String getTypeLabel() {
-		return typeLabel;
-	}
+    public String getTypeLabel() {
+        return typeLabel;
+    }
 
-	public void setTypeLabel(String typeLabel) {
-		Assert.notNull(typeLabel, "Expected label type to be populated");
-		this.typeLabel = typeLabel;
-	}
+    public void setTypeLabel(String typeLabel) {
+        Assert.notNull(typeLabel, "Expected label type to be populated");
+        this.typeLabel = typeLabel;
+    }
 
-	// --- GuideMetadata delegate methods ---
+    // --- GuideMetadata delegate methods ---
 
     @Override
     @JsonIgnore
@@ -130,4 +130,8 @@ public abstract class AbstractGuide implements Guide {
         return metadata.getCiLatestUrl();
     }
 
+    @JsonIgnore
+    public Set<String> getProjectIds() {
+        return metadata.getProjects();
+    }
 }

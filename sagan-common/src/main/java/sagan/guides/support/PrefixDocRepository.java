@@ -5,6 +5,7 @@ import sagan.guides.ContentProvider;
 import sagan.guides.DefaultGuideMetadata;
 import sagan.guides.GuideMetadata;
 import sagan.guides.ImageProvider;
+import sagan.projects.Project;
 import sagan.projects.support.ProjectMetadataService;
 import sagan.support.ResourceNotFoundException;
 
@@ -28,7 +29,7 @@ import org.springframework.web.client.RestClientException;
  * Repository implementation providing data access services for guides by repo prefix.
  */
 public abstract class PrefixDocRepository<T extends AbstractGuide> implements DocRepository<T, GuideMetadata>,
-        ContentProvider<T>, ImageProvider {
+        ContentProvider<T>, ImageProvider, ProjectGuidesRepository {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -84,15 +85,22 @@ public abstract class PrefixDocRepository<T extends AbstractGuide> implements Do
                 .collect(Collectors.toList());
     }
 
+    public List<GuideMetadata> findByProject(Project project) {
+        return this.findAllMetadata()
+                .stream()
+                .filter(guideMetadata -> guideMetadata.getProjects().contains(project.getId()))
+                .collect(Collectors.toList());
+    }
+
     @Override
-    public T populate(T tutorial) {
-        String repoName = tutorial.getRepoName();
+    public T populate(T guide) {
+        String repoName = guide.getRepoName();
 
         AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org.getName(),
                 repoName));
-        tutorial.setContent(asciidocGuide.getContent());
-        tutorial.setSidebar(asciidoctorUtils.generateDynamicSidebar(projectMetadataService, asciidocGuide));
-        return tutorial;
+		guide.setContent(asciidocGuide.getContent());
+		guide.setSidebar(asciidoctorUtils.generateDynamicSidebar(projectMetadataService, asciidocGuide));
+        return guide;
     }
 
     @Override
