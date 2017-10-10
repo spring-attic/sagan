@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sagan.guides.GettingStartedGuide;
 import sagan.guides.GuideMetadata;
 import sagan.guides.support.ProjectGuidesRepository;
 import sagan.projects.Project;
@@ -45,7 +44,9 @@ class ProjectController {
         model.addAttribute("projects", projectMetadataService.getProjectsForCategory("active"));
 
         List<GuideMetadata> guides = projectGuidesRepositories.stream()
-				.flatMap(repo -> repo.findByProject(project).stream()).collect(Collectors.toList());
+				.flatMap(repo -> repo.findByProject(project).stream())
+                .collect(Collectors.toList());
+
         model.addAttribute("guides", guides);
 
         return "projects/show";
