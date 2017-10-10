@@ -206,6 +206,10 @@
     box-sizing: border-box;
 }
 
+.compass .project--guide a:hover > * {
+    color: #5fa134;
+}
+
 .compass .project--guide a h3 {
     font-size: 14px;
     font-weight: bold;
