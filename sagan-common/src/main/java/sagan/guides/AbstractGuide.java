@@ -72,8 +72,8 @@ public abstract class AbstractGuide implements Guide {
 
     @Override
     @JsonIgnore
-    public Set<String> getTags() {
-        return metadata.getTags();
+    public Set<String> getProjects() {
+        return metadata.getProjects();
     }
 
     @Override

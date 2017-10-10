@@ -3,7 +3,10 @@ package sagan.guides;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
@@ -21,7 +24,7 @@ public class DefaultGuideMetadata implements GuideMetadata {
     private String guideId;
     private String repoName;
     private String description;
-    private Set<String> tags;
+    private Set<String> projects;
     private String title;
     private String subtitle;
 
@@ -30,20 +33,36 @@ public class DefaultGuideMetadata implements GuideMetadata {
     }
 
     public DefaultGuideMetadata(String ghOrgName, String guideId, String repoName, String description) {
-        this(ghOrgName, guideId, repoName, description, new HashSet<>());
-    }
-
-    public DefaultGuideMetadata(String ghOrgName, String guideId, String repoName, String description, Set<String> tags) {
         this.ghOrgName = ghOrgName;
         this.guideId = guideId;
         this.repoName = repoName;
         this.description = description;
-        this.tags = tags;
+        this.projects = new HashSet<>();
 
-        String[] split = description.split("::", 2);
-        title = split[0].trim();
-        subtitle = (split.length > 1) ? split[1].trim() : "";
+        this.title = getTitleFromDescription();
+        this.subtitle = getSubtitleFromDescription();
+        this.projects.addAll(getProjectsFromDescription());
     }
+
+    private String getTitleFromDescription() {
+		String[] split = description.split("::", 3);
+		return split[0].trim();
+	}
+
+	private String getSubtitleFromDescription() {
+		String[] split = description.split("::", 3);
+		return (split.length > 1) ? split[1].trim() : "";
+	}
+
+	private List<String> getProjectsFromDescription() {
+		String[] split = description.split("::", 3);
+		if (split.length > 2) {
+			return Arrays.asList(split[2].trim().split(","));
+		}
+		else {
+			return Collections.emptyList();
+		}
+	}
 
     public String getGhOrgName() {
         return ghOrgName;
@@ -61,8 +80,8 @@ public class DefaultGuideMetadata implements GuideMetadata {
         return description;
     }
 
-    public Set<String> getTags() {
-        return tags;
+    public Set<String> getProjects() {
+        return projects;
     }
 
     public String getTitle() {

@@ -3,8 +3,10 @@ package sagan.guides;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
 
 /**
  * Unit tests for {@link DefaultGuideMetadata}.
@@ -15,7 +17,8 @@ public class DefaultGuideMetadataTests {
 
     @Before
     public void setUp() throws Exception {
-        guide = new DefaultGuideMetadata("my-org", "rest-service", "gs-rest-service", "Title :: Description");
+        guide = new DefaultGuideMetadata("my-org", "rest-service",
+				"gs-rest-service", "Title :: Subtitle :: project-1,project-2");
     }
 
     @Test
@@ -57,4 +60,26 @@ public class DefaultGuideMetadataTests {
     public void testGetCiLatestUrl() throws Exception {
         assertThat(guide.getCiLatestUrl(), is("https://travis-ci.org/my-org/gs-rest-service"));
     }
+
+	@Test
+	public void testGetTitle() throws Exception {
+    	assertThat(guide.getTitle(), is("Title"));
+	}
+
+	@Test
+	public void testGetSubtitle() throws Exception {
+    	assertThat(guide.getSubtitle(), is("Subtitle"));
+	}
+
+	@Test
+	public void testGetProjects() throws Exception {
+    	assertThat(guide.getProjects(), hasItems("project-1", "project-2"));
+	}
+
+	@Test
+	public void testGetEmptyProjectList() throws Exception {
+		guide = new DefaultGuideMetadata("my-org", "rest-service",
+				"gs-rest-service", "Title :: Subtitle");
+		assertThat(guide.getProjects(), empty());
+	}
 }

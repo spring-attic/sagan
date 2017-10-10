@@ -35,7 +35,6 @@ public abstract class PrefixDocRepository<T extends AbstractGuide> implements Do
     private static final String REPO_BASE_PATH = "/repos/%s/%s";
     private static final String README_PATH_ASC = REPO_BASE_PATH + "/zipball";
 
-    private final MultiValueMap<String, String> tagMultimap = new LinkedMultiValueMap<>();
     private final GuideOrganization org;
     private final ProjectMetadataService projectMetadataService;
     private final AsciidoctorUtils asciidoctorUtils = new AsciidoctorUtils();
@@ -62,9 +61,7 @@ public abstract class PrefixDocRepository<T extends AbstractGuide> implements Do
     public GuideMetadata findMetadata(String tutorial) {
         String repoName = this.prefix + tutorial;
         String description = getRepoDescription(repoName);
-        Set<String> tags = tagMultimap.get(repoName) != null ? new HashSet<>(tagMultimap.get(repoName))
-                : Collections.emptySet();
-        return new DefaultGuideMetadata(org.getName(), tutorial, repoName, description, tags);
+        return new DefaultGuideMetadata(org.getName(), tutorial, repoName, description);
     }
 
     @Override
@@ -73,8 +70,7 @@ public abstract class PrefixDocRepository<T extends AbstractGuide> implements Do
         return org.findRepositoriesByPrefix(this.prefix)
                 .stream()
                 .map(repo -> new DefaultGuideMetadata(org.getName(), repo.getName().replaceAll("^" + this.prefix, ""),
-                        repo.getName(), repo.getDescription(), new HashSet<String>(tagMultimap.getOrDefault(repo
-                                .getName(), Collections.emptyList()))))
+                        repo.getName(), repo.getDescription()))
                 .collect(Collectors.toList());
     }
 
@@ -94,11 +90,6 @@ public abstract class PrefixDocRepository<T extends AbstractGuide> implements Do
 
         AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org.getName(),
                 repoName));
-        tagMultimap.merge(repoName, new ArrayList<>(asciidocGuide.getTags()), (source, target) -> {
-            Set<String> tags = new LinkedHashSet<>(target);
-            tags.addAll(source);
-            return new ArrayList<>(tags);
-        });
         tutorial.setContent(asciidocGuide.getContent());
         tutorial.setSidebar(asciidoctorUtils.generateDynamicSidebar(projectMetadataService, asciidocGuide));
         return tutorial;

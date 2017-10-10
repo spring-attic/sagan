@@ -11,7 +11,7 @@ public interface GuideMetadata extends DocumentMetadata {
 
     String getSubtitle();
 
-    Set<String> getTags();
+    Set<String> getProjects();
 
     String getRepoName();
 

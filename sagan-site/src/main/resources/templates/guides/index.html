@@ -35,7 +35,7 @@
               <p class="content-section-sub-title">Designed to be completed in 15-30 minutes, these guides provide quick, hands-on instructions for building the "Hello World" of any development task with Spring. In most cases, the only prerequisites are a JDK and a text editor.</p>
             </div>
 
-            <div th:each="guide : ${guides}" class="guide--container" th:attr="data-filterable=${guide.title}+' '+${guide.subtitle}+' '+${guide.tags}">
+            <div th:each="guide : ${guides}" class="guide--container" th:attr="data-filterable=${guide.title}+' '+${guide.subtitle}+' '+${guide.projects}">
               <a class="guide--title" href="guide.html" th:href="@{'/guides/gs/'+${guide.guideId}+'/'}" th:text="${guide.title}"></a>
               <p class="guide--subtitle" th:text="${guide.subtitle}"></p>
             </div>
