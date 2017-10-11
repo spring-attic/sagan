@@ -5,7 +5,6 @@
 .compass .sidebar {
     background: #dbe6d6;
     float: left;
-    width: 220px;
     margin: 0;
     list-style: none;
     padding: 20px 10px;
@@ -72,20 +71,12 @@
     fill: #6bb536;
 }
 
-.compass .tab-content .col-lg-7 {
-    padding: 2rem;
-}
-
 .compass .tab-content .col-lg-5 {
     padding: 2rem 2rem 2rem 0;
 }
 
 .compass .tab-content .col-lg-5 .row {
     margin-bottom: 2rem;
-}
-
-.compass .project-features h2 {
-    font-size: 20px;
 }
 
 .compass .spring-boot-config {
@@ -168,22 +159,87 @@
 
 /* Learn */
 
-.compass #learn {
-    padding: 2rem;
+/* Documentation */
+
+.compass .project-reference {
+    background-color: #fff;
+    padding: 1.2rem;
 }
 
-.compass .project--guides {
+.compass .project-reference--current-version a,
+.compass .project-reference--version a {
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    border-radius: 4px;
+    border: solid 1px #6bb536;
+    padding: 0.5rem 0.8rem;
+    font-size: 14px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.compass .project-reference--current-version a:hover,
+.compass .project-reference--version a:hover {
+    color: #fff;
+    background: #6bb536;
+}
+
+.compass .project-reference--current-version a .release-status-group,
+.compass .project-reference--version a .release-status-group {
+    justify-content: flex-end;
+}
+
+.compass .project-reference--current-version a .release-status,
+.compass .project-reference--version a .release-status {
+    font-weight: bold;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.compass .project-reference--version {
+    padding: 0;
+    margin-top: 0.7rem;
+}
+
+.compass .project-reference--version:nth-child(even) {
+    padding-left: 0.35rem;
+}
+
+.compass .project-reference--version:nth-child(odd) {
+    padding-right: 0.35rem;
+}
+
+.compass .project-reference--releases {
+    margin: 0;
     list-style: none;
-    margin-left: -0.6rem;
 }
 
-.compass .project--guides--title {
-    font-size: 20px;
+
+
+.compass .project-reference--version-button {
+    text-align: center;
+    margin-top: 1rem;
 }
 
-.compass .project--guides--subtitle {
-    font-size: 16px;
-    margin: 1rem 0;
+.compass .project-reference--version-button a {
+    color: #34302d;
+    text-decoration: none;
+}
+
+.compass .project-reference--version-button a:hover {
+    color: #5fa134;
+}
+
+.compass .project-reference--version-button a span {
+    margin-right: 0.5rem;
+    text-decoration: underline;
+}
+
+/* Guides */
+
+.compass .project--guides.row {
+    list-style: none;
+    margin-left: -0.7rem;
 }
 
 .compass .project--guide {
@@ -218,4 +274,24 @@
 
 .compass .project--guide a div {
     color: #34302d;
+}
+
+/* Shared section */
+
+.compass .compass-section {
+    padding: 0 2rem 2rem 2rem;
+}
+
+.compass .compass-section h2 {
+    font-size: 20px;
+    padding-top: 2rem;
+}
+
+.compass .compass-section + .compass-section > h2 {
+    border-top: solid 1px rgb(195,195,195);
+}
+
+.compass .compass-section .compass-subtitle {
+    font-size: 16px;
+    margin: 1rem 0;
 }

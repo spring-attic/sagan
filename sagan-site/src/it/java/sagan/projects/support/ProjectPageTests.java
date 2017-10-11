@@ -175,4 +175,72 @@ public class ProjectPageTests extends AbstractIntegrationTests {
         assertThat(subtitle.text(), is("Learn how to create a RESTful web service with Spring."));
         assertThat(guideLink.attr("href"), is("/guides/gs/spring-boot"));
     }
+
+    @Test
+    public void getReferenceDocumentation() {
+        Element documentationSection = document.select(".project--documentation").first();
+
+        Element documentationTitle = documentationSection.select("h2").first();
+        assertThat(documentationTitle.text(), is("Documentation"));
+
+        Element referenceDoc = documentationSection.select(".project-reference").first();
+        Element referenceSubtitle = referenceDoc.select("h3").first();
+        assertThat(referenceSubtitle.text(), is("Reference doc."));
+
+        Element currentVersion = referenceDoc.select(".project-reference--current-version").first();
+        assertThat(currentVersion.select(".release-display-name").text(), is("1.5.7"));
+        assertThat(currentVersion.select(".release-status").text(), is("GA CURRENT"));
+        assertThat(currentVersion.select("a").attr("href"),
+                is("http://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/htmlsingle/"));
+
+        Elements versions = referenceDoc.select(".project-reference--version");
+        assertThat(versions, hasSize(4));
+
+        List<String> displayNames = versions.stream()
+                .map(element -> element.select(".release-display-name").text())
+                .collect(toList());
+
+        assertThat(displayNames, contains("2.0.0 M4", "2.0.0", "1.5.8", "1.4.7"));
+
+        List<String> statuses = versions.stream()
+                .map(element -> element.select(".release-status").text())
+                .collect(toList());
+
+        assertThat(statuses, contains("PRE", "SNAPSHOT", "SNAPSHOT", "GA"));
+
+        List<String> links = versions.stream()
+                .map(element -> element.select("a").attr("href"))
+                .collect(toList());
+
+        assertThat(links, contains(
+                "http://docs.spring.io/spring-boot/docs/2.0.0.M4/reference/htmlsingle/",
+                "http://docs.spring.io/spring-boot/docs/2.0.0.BUILD-SNAPSHOT/reference/htmlsingle/",
+                "http://docs.spring.io/spring-boot/docs/1.5.8.BUILD-SNAPSHOT/reference/htmlsingle/",
+                "http://docs.spring.io/spring-boot/docs/1.4.7.RELEASE/reference/htmlsingle/"
+        ));
+
+    }
+
+    @Test
+    public void getShowsAllReleasesWhenThereIsNoCurrentRelease() throws Exception {
+        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/platform"));
+        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+
+        Element documentationSection = document.select(".project--documentation").first();
+        Element referenceDoc = documentationSection.select(".project-reference").first();
+
+        Elements versions = referenceDoc.select(".project-reference--version");
+        assertThat(versions, hasSize(3));
+
+        assertThat(document.select(".project-reference--releases").hasClass("in"), is(true));
+        assertThat(document.select(".project-reference--version-button"), hasSize(0));
+    }
+
+    @Test
+    public void getReferenceDocIsHiddenWhenThereAreNoReleases() throws Exception {
+        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-xd"));
+        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+
+        assertThat(document.select(".project-reference"), hasSize(0));
+    }
 }

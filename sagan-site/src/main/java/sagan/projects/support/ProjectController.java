@@ -23,8 +23,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
  */
 @Controller
 @RequestMapping("/project")
-@Navigation(Section.PROJECTS)
-class ProjectController {
+@Navigation(Section.PROJECTS) class ProjectController {
 
     private ProjectMetadataService projectMetadataService;
     private List<ProjectGuidesRepository> projectGuidesRepositories;
@@ -42,11 +41,12 @@ class ProjectController {
         model.addAttribute("project", project);
         model.addAttribute("projectStackOverflow", stackOverflowUrl(project));
         model.addAttribute("projects", projectMetadataService.getProjectsForCategory("active"));
+        model.addAttribute("currentRelease", project.getMostCurrentRelease());
+        model.addAttribute("otherReleases", project.getNonMostCurrentReleases());
 
         List<GuideMetadata> guides = projectGuidesRepositories.stream()
-				.flatMap(repo -> repo.findByProject(project).stream())
+                .flatMap(repo -> repo.findByProject(project).stream())
                 .collect(Collectors.toList());
-
         model.addAttribute("guides", guides);
 
         return "projects/show";
@@ -54,7 +54,7 @@ class ProjectController {
 
     private String stackOverflowUrl(Project project) {
         return "https://stackoverflow.com/questions/tagged/"
-                +  Joiner.on("+or+").join(project.getStackOverflowTagList());
+                + Joiner.on("+or+").join(project.getStackOverflowTagList());
     }
 
 }

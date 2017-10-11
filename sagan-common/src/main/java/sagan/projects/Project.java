@@ -22,6 +22,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Project {
@@ -253,10 +254,20 @@ public class Project {
         return null;
     }
 
-    public Optional<String> getCurrentVersion() {
-        return releaseList.stream()
-                .filter(projectRelease -> projectRelease.isCurrent())
-                .findFirst()
-                .map(projectRelease -> projectRelease.getVersionDisplayName());
+    public Optional<ProjectRelease> getMostCurrentRelease() {
+        return this.getProjectReleases().stream()
+                .filter(ProjectRelease::isCurrent)
+                .findFirst();
+    }
+
+    public List<ProjectRelease> getNonMostCurrentReleases() {
+        Optional<ProjectRelease> mostCurrentRelease = this.getMostCurrentRelease();
+        if (mostCurrentRelease.isPresent()) {
+            return this.getProjectReleases().stream()
+                    .filter(projectRelease -> !projectRelease.equals(mostCurrentRelease.get()))
+                    .collect(Collectors.toList());
+        } else {
+            return this.getProjectReleases();
+        }
     }
 }
