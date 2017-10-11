@@ -161,13 +161,15 @@
 
 /* Documentation */
 
-.compass .project-reference {
+.compass .project-reference,
+.compass .project-api{
     background-color: #fff;
     padding: 1.2rem;
+    margin: 0.5rem;
+    max-width: calc(50% - 1rem);
 }
 
-.compass .project-reference--current-version a,
-.compass .project-reference--version a {
+.compass .project--documentation a:not(.not-version) {
     font-family: "Montserrat", sans-serif;
     display: flex;
     border-radius: 4px;
@@ -178,59 +180,54 @@
     justify-content: space-between;
 }
 
-.compass .project-reference--current-version a:hover,
-.compass .project-reference--version a:hover {
+.compass .project--documentation a:not(.not-version):hover {
     color: #fff;
     background: #6bb536;
 }
 
-.compass .project-reference--current-version a .release-status-group,
-.compass .project-reference--version a .release-status-group {
+.compass .project--documentation a:not(.not-version) .release-status-group {
     justify-content: flex-end;
 }
 
-.compass .project-reference--current-version a .release-status,
-.compass .project-reference--version a .release-status {
+.compass .project--documentation a:not(.not-version) .release-status {
     font-weight: bold;
     font-size: 12px;
     margin-left: 10px;
 }
 
-.compass .project-reference--version {
-    padding: 0;
-    margin-top: 0.7rem;
-}
-
-.compass .project-reference--version:nth-child(even) {
-    padding-left: 0.35rem;
-}
-
-.compass .project-reference--version:nth-child(odd) {
-    padding-right: 0.35rem;
-}
-
-.compass .project-reference--releases {
+.compass .project--documentation ul {
     margin: 0;
     list-style: none;
 }
 
+.compass .project--documentation ul li {
+    padding: 0;
+    margin-top: 0.7rem;
+}
 
+.compass .project--documentation ul li:nth-child(even) {
+    padding-left: 0.35rem;
+}
 
-.compass .project-reference--version-button {
+.compass .project--documentation ul li:nth-child(odd) {
+    padding-right: 0.35rem;
+}
+
+.compass .project--documentation--version-button {
     text-align: center;
     margin-top: 1rem;
 }
 
-.compass .project-reference--version-button a {
+.compass a.not-version {
     color: #34302d;
     text-decoration: none;
 }
 
-.compass .project-reference--version-button a:hover {
+.compass a.not-version:hover {
     color: #5fa134;
 }
 
-.compass .project-reference--version-button a span {
+.compass a.not-version span {
     margin-right: 0.5rem;
     text-decoration: underline;
 }
@@ -293,5 +290,5 @@
 
 .compass .compass-section .compass-subtitle {
     font-size: 16px;
-    margin: 1rem 0;
+    margin: 1rem 0 2rem 0;
 }

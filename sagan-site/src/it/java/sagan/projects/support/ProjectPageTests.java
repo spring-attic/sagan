@@ -222,7 +222,7 @@ public class ProjectPageTests extends AbstractIntegrationTests {
     }
 
     @Test
-    public void getShowsAllReleasesWhenThereIsNoCurrentRelease() throws Exception {
+    public void referenceDocShowsAllReleasesWhenThereIsNoCurrentRelease() throws Exception {
         result = mockMvc.perform(MockMvcRequestBuilders.get("/project/platform"));
         document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
 
@@ -237,10 +237,75 @@ public class ProjectPageTests extends AbstractIntegrationTests {
     }
 
     @Test
-    public void getReferenceDocIsHiddenWhenThereAreNoReleases() throws Exception {
+    public void referenceDocIsHiddenWhenThereAreNoReleases() throws Exception {
         result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-xd"));
         document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
 
         assertThat(document.select(".project-reference"), hasSize(0));
+    }
+
+    @Test
+    public void getAPIDocumentation() {
+        Element documentationSection = document.select(".project--documentation").first();
+
+        Element apiDoc = documentationSection.select(".project-api").first();
+        Element apiSubtitle = apiDoc.select("h3").first();
+        assertThat(apiSubtitle.text(), is("API doc."));
+
+        Element currentVersion = apiDoc.select(".project-api--current-version").first();
+        assertThat(currentVersion.select(".release-display-name").text(), is("1.5.7"));
+        assertThat(currentVersion.select(".release-status").text(), is("GA CURRENT"));
+        assertThat(currentVersion.select("a").attr("href"),
+                is("http://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/api/"));
+
+        Elements versions = apiDoc.select(".project-api--version");
+        assertThat(versions, hasSize(4));
+
+        List<String> displayNames = versions.stream()
+                .map(element -> element.select(".release-display-name").text())
+                .collect(toList());
+
+        assertThat(displayNames, contains("2.0.0 M4", "2.0.0", "1.5.8", "1.4.7"));
+
+        List<String> statuses = versions.stream()
+                .map(element -> element.select(".release-status").text())
+                .collect(toList());
+
+        assertThat(statuses, contains("PRE", "SNAPSHOT", "SNAPSHOT", "GA"));
+
+        List<String> links = versions.stream()
+                .map(element -> element.select("a").attr("href"))
+                .collect(toList());
+
+        assertThat(links, contains(
+                "http://docs.spring.io/spring-boot/docs/2.0.0.M4/api/",
+                "http://docs.spring.io/spring-boot/docs/2.0.0.BUILD-SNAPSHOT/api/",
+                "http://docs.spring.io/spring-boot/docs/1.5.8.BUILD-SNAPSHOT/api/",
+                "http://docs.spring.io/spring-boot/docs/1.4.7.RELEASE/api/"
+        ));
+
+    }
+
+    @Test
+    public void apiDocShowsAllReleasesWhenThereIsNoCurrentRelease() throws Exception {
+        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/platform"));
+        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+
+        Element documentationSection = document.select(".project--documentation").first();
+        Element apiDoc = documentationSection.select(".project-api").first();
+
+        Elements versions = apiDoc.select(".project-api--version");
+        assertThat(versions, hasSize(3));
+
+        assertThat(document.select(".project-api--releases").hasClass("in"), is(true));
+        assertThat(document.select(".project-api--version-button"), hasSize(0));
+    }
+
+    @Test
+    public void apiDocIsHiddenWhenThereAreNoReleases() throws Exception {
+        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-xd"));
+        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+
+        assertThat(document.select(".project-api"), hasSize(0));
     }
 }

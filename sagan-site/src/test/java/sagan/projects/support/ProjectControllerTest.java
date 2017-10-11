@@ -102,7 +102,7 @@ public class ProjectControllerTest {
     }
 
     @Test
-    public void showProjectHasCurrentRelease() {
+    public void showProjectHasReleases() {
         Optional<ProjectRelease> currentRelease = (Optional<ProjectRelease>) model.get("currentRelease");
         List<ProjectRelease> otherReleases = (List<ProjectRelease>) model.get("otherReleases");
 
