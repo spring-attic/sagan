@@ -14,15 +14,15 @@ import sagan.guides.support.ProjectGuidesRepository;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.when;
+import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
+import static sagan.projects.ProjectRelease.ReleaseStatus.SNAPSHOT;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectControllerTest {
@@ -38,9 +38,15 @@ public class ProjectControllerTest {
     @Mock
     private ProjectGuidesRepository projectTopicalRepo;
 
-    private List<ProjectRelease> releases = new ArrayList<>();
-    Project project = new Project("spring-framework", "spring", "http://example.com", "/project/spring-framework", releases,
-            false, "project", "spring-cool,spring-awesome", "");
+    private ProjectRelease currentRelease =
+            new ProjectRelease("1.5.7.RELEASE", GENERAL_AVAILABILITY, true, "", "", "", "");
+    private ProjectRelease anotherCurrentRelease =
+            new ProjectRelease("1.4.7.RELEASE", GENERAL_AVAILABILITY, true, "", "", "", "");
+    private ProjectRelease snapshotRelease = new ProjectRelease("1.7.7.SNAPSHOT", SNAPSHOT, false, "", "", "", "");
+    private List<ProjectRelease> releases = asList(currentRelease, anotherCurrentRelease, snapshotRelease);
+    Project project =
+            new Project("spring-framework", "spring", "http://example.com", "/project/spring-framework", releases,
+                    false, "project", "spring-cool,spring-awesome", "");
     private ExtendedModelMap model = new ExtendedModelMap();
     private ProjectController controller;
     private String viewName;
@@ -66,7 +72,9 @@ public class ProjectControllerTest {
     }
 
     @Test
-    public void showProjectModelHasProjectData() { assertThat(model.get("project"), equalTo(project)); }
+    public void showProjectModelHasProjectData() {
+        assertThat(model.get("project"), equalTo(project));
+    }
 
     @Test
     public void showProjectModelHasProjectsListForSidebar() {
@@ -81,12 +89,42 @@ public class ProjectControllerTest {
     }
 
     @Test
-    public void showProjectHasStackOverflowLink() { assertThat(model.get("projectStackOverflow"), is("https://stackoverflow.com/questions/tagged/spring-cool+or+spring-awesome"));}
+    public void showProjectHasStackOverflowLink() {
+        assertThat(model.get("projectStackOverflow"),
+                is("https://stackoverflow.com/questions/tagged/spring-cool+or+spring-awesome"));
+    }
 
     @Test
     public void showProjectHasGuidesTutorialsTopicals() {
         List<AbstractGuide> guides = (List<AbstractGuide>) model.get("guides");
 
         assertThat(guides, hasItems(guide, tutorial, topical));
+    }
+
+    @Test
+    public void showProjectHasCurrentRelease() {
+        Optional<ProjectRelease> currentRelease = (Optional<ProjectRelease>) model.get("currentRelease");
+        List<ProjectRelease> otherReleases = (List<ProjectRelease>) model.get("otherReleases");
+
+        assertThat(currentRelease, is(Optional.of(this.currentRelease)));
+        assertThat(otherReleases, hasItems(anotherCurrentRelease, snapshotRelease));
+    }
+
+    @Test
+    public void showProjectDoesNotExplodeWhenThereAreNoReleases() {
+        Project projectWithoutReleases =
+                new Project("spring-spline-reticulator", "spring-spline-reticulator", "http://example.com",
+                        "/project/spring-spline-reticulator", asList(),
+                        false, "project", "spring-cool,spring-awesome", "");
+        when(projectMetadataService.getProject("spring-spline-reticulator")).thenReturn(projectWithoutReleases);
+
+        model = new ExtendedModelMap();
+        controller.showProject(model, "spring-spline-reticulator");
+
+        Optional<ProjectRelease> currentRelease = (Optional<ProjectRelease>) model.get("currentRelease");
+        List<ProjectRelease> otherReleases = (List<ProjectRelease>) model.get("otherReleases");
+
+        assertThat(currentRelease, is(Optional.empty()));
+        assertThat(otherReleases, hasSize(0));
     }
 }

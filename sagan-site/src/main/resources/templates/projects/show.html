@@ -36,9 +36,10 @@
                         <a th:href="${projectStackOverflow}" target="_blank" class="link--stackoverflow"><img
                                 th:src="@{/img/stackoverflow-icon.svg}"/></a>
 
-                        <span class="version" th:if="${project.getCurrentVersion().isPresent()}">
+                        <span class="version" th:if="${currentRelease.isPresent()}"
+                              th:with="release=${currentRelease.get()}">
                             CURRENT VERSION
-                            <strong th:text="'v' + ${project.getCurrentVersion().get()}"></strong>
+                            <strong th:text="'v' + ${release.getVersionDisplayName()}"></strong>
                         </span>
                     </div>
                     <ul class="nav nav-tabs col-lg-12">
@@ -64,7 +65,7 @@
                 <div class="tab-content row">
                     <div class="tab-pane active col-lg-12" id="overview">
                         <div class="row">
-                            <div class="col-lg-7">
+                            <div class="col-lg-7 compass-section">
                                 <div class="project-features">
                                     <h2 class="project-features--subtitle">Features</h2>
                                     <div th:utext="${project.getRenderedFeatures()}"></div>
@@ -92,19 +93,79 @@
                         </div>
                     </div>
                     <div class="tab-pane col-lg-12" id="learn">
-                        <h2 class="project--guides--title">Guides</h2>
-                        <div class="project--guides--subtitle">Designed to be completed in 15-30 minutes, a guide
-                            provides quick, hands-on instructions for building a starter app for any development
-                            task with Spring.
+                        <div class="project--documentation compass-section row">
+                            <h2>Documentation</h2>
+                            <div class="project--documentation--subtitle compass-subtitle">
+                                Each Spring project has its own; it explains in great details how you can use project
+                                features and what you can achieve with them.
+                            </div>
+
+                            <div class="project-reference col-lg-6"
+                                 th:if="${currentRelease.isPresent() || otherReleases.size() > 0 }">
+                                <h3>Reference doc.</h3>
+
+                                <div class="project-reference--current-version" th:if="${currentRelease.isPresent()}"
+                                     th:with="release=${currentRelease.get()}">
+                                    <a th:href="${release.getRefDocUrl()}">
+                                        <span class="release-display-name"
+                                              th:text="${release.getVersionDisplayName()}"></span>
+                                        <span class="release-status-group">
+                                            <span class="release-status release-status-pre"
+                                                  th:if="${release.isPreRelease()}">PRE</span>
+                                            <span class="release-status release-status-snapshot"
+                                                  th:if="${release.isSnapshot()}">SNAPSHOT</span>
+                                            <span class="release-status release-status-ga"
+                                                  th:if="${release.isGeneralAvailability()}">GA</span>
+                                            <span class="release-status release-status-current"
+                                                  th:if="${release.isCurrent()}">CURRENT</span>
+                                        </span>
+                                    </a>
+                                </div>
+
+                                <ul class="project-reference--releases collapse row"
+                                    th:classappend="${!currentRelease.isPresent()} ? 'in'">
+                                    <li class="project-reference--version col-lg-6"
+                                        th:each="release : ${otherReleases}">
+                                        <a th:href="${release.getRefDocUrl()}">
+                                            <span class="release-display-name"
+                                                  th:text="${release.getVersionDisplayName()}"></span>
+                                            <span class="release-status-group">
+                                                <span class="release-status release-status-pre"
+                                                      th:if="${release.isPreRelease()}">PRE</span>
+                                                <span class="release-status release-status-snapshot"
+                                                      th:if="${release.isSnapshot()}">SNAPSHOT</span>
+                                                <span class="release-status release-status-ga"
+                                                      th:if="${release.isGeneralAvailability()}">GA</span>
+                                                <span class="release-status release-status-current"
+                                                      th:if="${release.isCurrent()}">CURRENT</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="project-reference--version-button" th:if="${currentRelease.isPresent()}">
+                                    <a data-toggle="collapse" href=".project-reference--releases">
+                                        <span>other versions</span>
+                                        <i class="icon-chevron-up" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <ul class="project--guides row">
-                            <li class="project--guide col-lg-6" th:each="guide : ${guides}">
-                                <a th:href="'/guides/gs/' + ${guide.guideId}">
-                                    <h3 class="project--guide--title" th:text="${guide.getTitle()}"></h3>
-                                    <div class="project--guide--subtitle" th:text="${guide.getSubtitle()}"></div>
-                                </a>
-                            </li>
-                        </ul>
+
+                        <div class="project--guides compass-section">
+                            <h2 class="project--guides--title">Guides</h2>
+                            <div class="project--guides--subtitle compass-subtitle">
+                                Designed to be completed in 15-30 minutes, a guide provides quick, hands-on instructions
+                                for building a starter app for any development task with Spring.
+                            </div>
+                            <ul class="project--guides row">
+                                <li class="project--guide col-lg-6" th:each="guide : ${guides}">
+                                    <a th:href="'/guides/gs/' + ${guide.guideId}">
+                                        <h3 class="project--guide--title" th:text="${guide.getTitle()}"></h3>
+                                        <div class="project--guide--subtitle" th:text="${guide.getSubtitle()}"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
