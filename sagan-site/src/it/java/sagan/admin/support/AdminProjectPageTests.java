@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class AdminProjectTests extends AbstractIntegrationTests {
+public class AdminProjectPageTests extends AbstractIntegrationTests {
     @Autowired
     private ProjectMetadataService projects;
 
