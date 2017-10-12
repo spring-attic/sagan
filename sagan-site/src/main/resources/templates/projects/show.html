@@ -15,6 +15,9 @@
     <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}"/>
     <meta property="og:description" content="The Spring portfolio has many projects, including Spring Framework,
     Sprint IO Platform, Spring Cloud, Spring Boot, Spring Data, Spring Security..."/>
+    <script>
+        System.import('app/pages/projects/show.js')
+    </script>
 </head>
 <body>
 <div layout:fragment="header-container"></div>
@@ -227,7 +230,6 @@
             </div>
         </article>
     </div>
-
 </div>
 </body>
 </html>
