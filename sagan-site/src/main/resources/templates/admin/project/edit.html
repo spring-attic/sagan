@@ -19,6 +19,10 @@
           <input type="text" name="groupId" id="groupId" th:value="${groupId}" value="org.springframework"/>
           <label for="id">ID</label>
           <input type="text" th:field="*{id}"/>
+
+          <label for="parentId">Parent Project Id (e.g.: 'spring-data')</label>
+          <input type="text" name="parentId" id="parentId" th:value="${project.getParentId()}"/>
+
           <label for="groupId">Category</label>
           <select th:field="*{category}">
               <option th:each="c : ${categories}"

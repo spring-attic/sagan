@@ -103,8 +103,10 @@ class ProjectAdminController {
     }
 
     @RequestMapping(value = "{id}", method = POST)
-    public String save(@Valid Project project, @RequestParam(defaultValue = "") List<String> releasesToDelete,
-                       @RequestParam String groupId) {
+    public String save(@Valid Project project,
+                       @RequestParam(defaultValue = "") List<String> releasesToDelete,
+                       @RequestParam String groupId,
+                       @RequestParam(required = false) String parentId) {
         Iterator<ProjectRelease> iReleases = project.getProjectReleases().iterator();
         while (iReleases.hasNext()) {
             ProjectRelease release = iReleases.next();
@@ -118,6 +120,11 @@ class ProjectAdminController {
         project.setRenderedBootConfig(renderedBootConfig);
         String renderedFeatures = this.renderer.render(project.getRawFeatures(), PostFormat.ASCIIDOC);
         project.setRenderedFeatures(renderedFeatures);
+
+        if (parentId != null) {
+            Project parentProject = service.getProject(parentId);
+            project.setParentProject(parentProject);
+        }
 
         service.save(project);
 

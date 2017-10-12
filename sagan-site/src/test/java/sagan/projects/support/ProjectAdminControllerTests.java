@@ -77,7 +77,7 @@ public class ProjectAdminControllerTests {
 
         project.setRawBootConfig("boot-config");
         project.setRawFeatures("overview");
-        controller.save(project, null, "");
+        controller.save(project, null, "", null);
 
         ArgumentCaptor<Project> captor = ArgumentCaptor.forClass(Project.class);
         verify(projectMetadataService, times(1)).save(captor.capture());

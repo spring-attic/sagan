@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -250,5 +251,37 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
         List<ProjectRelease> projectReleases = project.getProjectReleases();
         assertThat(projectReleases.get(0).getVersion(), equalTo("1.0.0.RELEASE"));
         assertThat(projectReleases.get(0).getArtifactId(), equalTo("spring-jdbc-oracle"));
+    }
+
+    @Test
+    public void saveProjectAddParentProject() throws Exception {
+        MockHttpServletRequestBuilder request =
+                post("/admin/projects/spring-data-new")
+                        .param("id", "spring-data-new")
+                        .param("groupId", "org.springframework.data")
+                        .param("rawFeatures", "")
+                        .param("rawBootConfig", "")
+                        .param("parentId", "spring-data");
+
+        mockMvc.perform(request);
+
+        Project project = projects.getProject("spring-data-new");
+        assertThat(project.getParentProject().getId(), equalTo("spring-data"));
+    }
+
+    @Test
+    public void saveProjectShowsAnErrorIfTheParentProjectDoesNotExist() throws Exception {
+        MockHttpServletRequestBuilder request =
+                post("/admin/projects/spring-data-new")
+                        .param("id", "spring-data-new")
+                        .param("groupId", "org.springframework.data")
+                        .param("rawFeatures", "")
+                        .param("rawBootConfig", "")
+                        .param("parentId", "spring-whoops-i-accidentally-all-the-parapluies");
+
+        mockMvc.perform(request);
+
+        Project project = projects.getProject("spring-data-new");
+        assertThat(project.getParentProject(), nullValue());
     }
 }
