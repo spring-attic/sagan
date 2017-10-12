@@ -5,5 +5,5 @@ package sagan.support.nav;
  * of the site-wide navigation is currently active and highlighted.
  */
 public enum Section {
-    DOCS, GUIDES, PROJECTS, BLOG, QUESTIONS
+    DOCS, GUIDES, PROJECTS, BLOG
 }
