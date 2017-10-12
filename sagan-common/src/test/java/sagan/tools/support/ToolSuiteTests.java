@@ -31,10 +31,8 @@ public class ToolSuiteTests {
                 "zip", "323MB", "windows", "32"));
         links.add(new DownloadLink("http://example.com/spring-tool-suite-3.6.0.RELEASE-e4.4-win32-x86_64.zip",
                 "zip", "323MB", "windows", "64"));
-        links.add(new DownloadLink("http://example.com/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa.tar.gz",
-                "tar.gz", "323MB", "mac", "32"));
-        links.add(new DownloadLink("http://example.com/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa-x86_64.tar.gz",
-                "tar.gz", "323MB", "mac", "64"));
+        links.add(new DownloadLink("http://example.com/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa-x86_64.dmg",
+                "dmg", "323MB", "mac", "64"));
         links.add(new DownloadLink("http://example.com/spring-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk.tar.gz",
                 "tar.gz", "323MB", "linux", "32"));
         links.add(new DownloadLink("http://example.com/spring-tool-suite-3.6.0.RELEASE-e4.4-linux-gtk-x86_64.tar.gz",
@@ -52,15 +50,10 @@ public class ToolSuiteTests {
         List<DownloadLink> v36Mac64Links = new ArrayList<>();
         String os = "mac";
         String architecture = "64";
-        v36Mac64Links.add(new DownloadLink("http://example.com/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa-x86_64.tar.gz",
-                "tar.gz", "323MB", os, architecture));
+        v36Mac64Links.add(new DownloadLink("http://example.com/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa-x86_64.dmg",
+                "dmg", "323MB", os, architecture));
         v36MacArchitectures.add(new Architecture("Mac OS X (Cocoa, 64bit)", v36Mac64Links));
 
-        List<DownloadLink> v36Mac32Links = new ArrayList<>();
-        architecture = "32";
-        v36Mac32Links.add(new DownloadLink("http://example.com/spring-tool-suite-3.6.0.RELEASE-e4.4-macosx-cocoa.tar.gz",
-                "tar.gz", "323MB", os, architecture));
-        v36MacArchitectures.add(new Architecture("Mac OS X (Cocoa)", v36Mac32Links));
         macEclipseVersions.add(new EclipseVersion("4.4", v36MacArchitectures));
 
         List<Architecture> v35MacArchitectures = new ArrayList<>();

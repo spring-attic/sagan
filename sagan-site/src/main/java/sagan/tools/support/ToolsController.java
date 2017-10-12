@@ -43,9 +43,6 @@ class ToolsController {
         ToolSuiteDownloads stsDownloads = toolsService.getStsGaDownloads();
         model.addAttribute("stsDownloadLinks", stsDownloads.getPreferredDownloadLinks());
         model.addAttribute("stsVersion", stsDownloads.getReleaseName());
-        ToolSuiteDownloads ggtsDownloads = toolsService.getGgtsGaDownloads();
-        model.addAttribute("ggtsDownloadLinks", ggtsDownloads.getPreferredDownloadLinks());
-        model.addAttribute("ggtsVersion", ggtsDownloads.getReleaseName());
         return "tools/index";
     }
 
