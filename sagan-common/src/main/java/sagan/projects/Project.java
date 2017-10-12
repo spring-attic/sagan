@@ -185,6 +185,12 @@ public class Project {
         return parentProject;
     }
 
+    public String getParentId() {
+        if (parentProject == null) { return null; }
+
+        return parentProject.getId();
+    }
+
     public void setParentProject(Project parentProject) {
         this.parentProject = parentProject;
     }
