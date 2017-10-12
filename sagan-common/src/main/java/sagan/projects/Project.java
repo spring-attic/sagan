@@ -18,9 +18,7 @@ package sagan.projects;
 
 import org.springframework.util.StringUtils;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -37,6 +35,12 @@ public class Project {
     private String renderedBootConfig;
     private String rawFeatures;
     private String renderedFeatures;
+
+    @ManyToOne()
+    private Project parentProject;
+
+    @OneToMany(mappedBy = "parentProject")
+    private List<Project> childProjectList;
 
     @ElementCollection
     private List<ProjectRelease> releaseList = new ArrayList<>();
@@ -175,6 +179,22 @@ public class Project {
 
     public void setRenderedFeatures(String renderedFeatures) {
         this.renderedFeatures = renderedFeatures;
+    }
+
+    public Project getParentProject() {
+        return parentProject;
+    }
+
+    public void setParentProject(Project parentProject) {
+        this.parentProject = parentProject;
+    }
+
+    public List<Project> getChildProjectList() {
+        return childProjectList;
+    }
+
+    public void setChildProjectList(List<Project> childProjectList) {
+        this.childProjectList = childProjectList;
     }
 
     @Override
