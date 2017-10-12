@@ -47,6 +47,15 @@ public class ProjectControllerTest {
     Project project =
             new Project("spring-framework", "spring", "http://example.com", "/project/spring-framework", releases,
                     false, "project", "spring-cool,spring-awesome", "");
+    Project projectUmbrella =
+            new Project("spring-parapluie", "Spring Parapluie", "http://example.com", "/project/spring-parapluie",
+                    releases,
+                    false, "project", "spring-cool,spring-awesome", "");
+    Project projectUmbrellaChild =
+            new Project("spring-parapluie-child", "Spring Parapluie Child", "http://example.com",
+                    "/project/spring-parapluie-child", releases,
+                    false, "project", "spring-cool,spring-awesome", "");
+
     private ExtendedModelMap model = new ExtendedModelMap();
     private ProjectController controller;
     private String viewName;
@@ -57,12 +66,16 @@ public class ProjectControllerTest {
 
     @Before
     public void setUp() throws Exception {
+        projectUmbrellaChild.setParentProject(projectUmbrella);
+        projectUmbrella.setChildProjectList(asList(projectUmbrellaChild));
+
         when(projectTopicalRepo.findByProject(project)).thenReturn(asList(topical));
         when(projectTutorialRepo.findByProject(project)).thenReturn(asList(tutorial));
         when(projectGuidesRepo.findByProject(project)).thenReturn(asList(guide));
 
         when(projectMetadataService.getProject("spring-framework")).thenReturn(project);
-        when(projectMetadataService.getProjectsForCategory("active")).thenReturn(asList(project, project));
+        when(projectMetadataService.getProjectsForCategory("active"))
+                .thenReturn(asList(project, projectUmbrellaChild, projectUmbrella));
 
         List<ProjectGuidesRepository> repositoryList =
                 asList(projectGuidesRepo, projectTutorialRepo, projectTopicalRepo);
@@ -73,14 +86,17 @@ public class ProjectControllerTest {
 
     @Test
     public void showProjectModelHasProjectData() {
-        assertThat(model.get("project"), equalTo(project));
+        assertThat(model.get("selectedProject"), equalTo(project));
     }
 
     @Test
     public void showProjectModelHasProjectsListForSidebar() {
         List<Project> modelProjectList = (List<Project>) model.get("projects");
-        assertThat(modelProjectList.size(), equalTo(2));
-        assertThat(modelProjectList.get(0), equalTo(project));
+        assertThat(modelProjectList, hasSize(2));
+        assertThat(modelProjectList, is(asList(project, projectUmbrella)));
+
+        Project actualUmbrellaProject = modelProjectList.get(1);
+        assertThat(actualUmbrellaProject.getChildProjectList(), equalTo(asList(projectUmbrellaChild)));
     }
 
     @Test

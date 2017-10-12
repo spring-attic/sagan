@@ -38,9 +38,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
     @RequestMapping(value = "/{projectName}", method = { GET, HEAD })
     public String showProject(Model model, @PathVariable String projectName) {
         Project project = projectMetadataService.getProject(projectName);
-        model.addAttribute("project", project);
+        model.addAttribute("selectedProject", project);
         model.addAttribute("projectStackOverflow", stackOverflowUrl(project));
-        model.addAttribute("projects", projectMetadataService.getProjectsForCategory("active"));
+        model.addAttribute("projects", getProjectsForSidebar());
         model.addAttribute("currentRelease", project.getMostCurrentRelease());
         model.addAttribute("otherReleases", project.getNonMostCurrentReleases());
 
@@ -50,6 +50,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
         model.addAttribute("guides", guides);
 
         return "projects/show";
+    }
+
+    private List<Project> getProjectsForSidebar() {
+        return projectMetadataService.getProjectsForCategory("active")
+                .stream()
+                .filter(project -> project.isTopLevelProject())
+                .collect(Collectors.toList());
     }
 
     private String stackOverflowUrl(Project project) {

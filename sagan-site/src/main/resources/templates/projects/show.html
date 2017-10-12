@@ -4,7 +4,7 @@
       layout:decorator="layout"
       data-info-popups>
 <head>
-    <title th:text="${project.getName()}"></title>
+    <title th:text="${selectedProject.getName()}"></title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/project.css}"
           href="../../../../../../sagan-client/css/project.css"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css"
@@ -24,17 +24,26 @@
 <div layout:fragment="content" class="body--container container-fluid">
     <div class="compass row">
         <ul class="sidebar col-lg-3">
-            <li class="sidebar_project" th:classappend="${proj.getId() == project.getId()} ? 'active'"
-                th:each="proj : ${projects}">
-                <a th:href="${proj.siteUrl}" th:text="${proj.getName()}"></a>
+            <li class="sidebar_project"
+                th:each="proj : ${projects}"
+                th:classappend="${proj.getId() ==  selectedProject.getId()} ? 'active'">
+                <a th:href="${proj.getSiteUrl()}" th:text="${proj.getName()}"></a>
+                <ul class="sidebar_children"
+                    th:if="${proj.equals(selectedProject) or proj.equals(selectedProject.getParentProject())}">
+                    <li class="sidebar_child"
+                        th:each="childProject : ${proj.getChildProjectList()}"
+                        th:classappend="${childProject.getId() ==  selectedProject.getId()} ? 'active'">
+                        <a th:href="${childProject.getSiteUrl()}" th:text="${childProject.getName()}"></a>
+                    </li>
+                </ul>
             </li>
         </ul>
         <article class="col-lg-9">
             <div class="box">
                 <div class="row">
                     <div class="project--header col-lg-12">
-                        <h1 th:text="${project.getName()}"></h1>
-                        <a th:href="${project.getRepoUrl()}" target="_blank" class="link--github"><img
+                        <h1 th:text="${selectedProject.getName()}"></h1>
+                        <a th:href="${selectedProject.getRepoUrl()}" target="_blank" class="link--github"><img
                                 th:src="@{/img/github-icon.svg}"/></a>
                         <a th:href="${projectStackOverflow}" target="_blank" class="link--stackoverflow"><img
                                 th:src="@{/img/stackoverflow-icon.svg}"/></a>
@@ -71,17 +80,17 @@
                             <div class="col-lg-7 compass-section">
                                 <div class="project-features">
                                     <h2 class="project-features--subtitle">Features</h2>
-                                    <div th:utext="${project.getRenderedFeatures()}"></div>
+                                    <div th:utext="${selectedProject.getRenderedFeatures()}"></div>
                                 </div>
                             </div>
 
                             <div class="col-lg-5">
-                                <div th:if="${project.getRenderedBootConfig().length() > 0}" class="row">
+                                <div th:if="${selectedProject.getRenderedBootConfig().length() > 0}" class="row">
                                     <div class="spring-boot-config col-lg-12">
                                         <h3 class="spring-boot-config--subtitle">
                                             Spring Boot Config
                                         </h3>
-                                        <div th:utext="${project.getRenderedBootConfig()}"></div>
+                                        <div th:utext="${selectedProject.getRenderedBootConfig()}"></div>
                                     </div>
                                 </div>
                                 <div class="row">

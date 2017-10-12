@@ -3,11 +3,15 @@
 }
 
 .compass .sidebar {
-    background: #dbe6d6;
+    background: #96c773;
     float: left;
     margin: 0;
     list-style: none;
-    padding: 20px 10px;
+    padding: 36px 10px;
+}
+
+.compass .sidebar li {
+    font-size: 16px;
 }
 
 .compass .sidebar a {
@@ -15,14 +19,25 @@
     padding: 6px 10px;
     display: block;
     transition: background 0.5s;
-    font-size: 16px;
     font-family: Montserrat, sans-serif;
 }
 
-.compass .sidebar_project.active a,
-.compass .sidebar_project:hover a {
-    color: #5fa134;
+.compass .sidebar .active > a,
+.compass .sidebar a:hover {
+    color: #6bb536;
     background: #fff;
+}
+
+.compass .sidebar .sidebar_children {
+    list-style: none;
+    border-left: 1px solid black;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.compass .sidebar .sidebar_children a {
+    font-size: .9em;
 }
 
 .compass .nav {

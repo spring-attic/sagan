@@ -296,4 +296,8 @@ public class Project {
             return this.getProjectReleases();
         }
     }
+
+    public boolean isTopLevelProject() {
+        return parentProject == null;
+    }
 }
