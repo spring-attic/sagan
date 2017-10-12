@@ -78,7 +78,7 @@ cloudfoundry {
 if (project.name == siteProject.name) {
     cloudfoundry {
         application = 'sagan' // instead of 'sagan-site'
-        instances = 3
+        instances = 2
         variants = ['-blue', '-green']
     }
 }
@@ -178,10 +178,6 @@ if (project.hasProperty(TARGET_SPACE)) {
             'sagan-db' {
                 label = 'elephantsql'
                 plan = (space == PRODUCTION_SPACE ? 'panda' : 'hippo')
-            }
-            'newrelic' {
-                label = 'newrelic'
-                plan = 'standard'
             }
             'sagan-cache' {
                 label = 'rediscloud'
