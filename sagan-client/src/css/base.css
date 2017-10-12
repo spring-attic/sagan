@@ -906,12 +906,6 @@ input.floating-input:focus {
   background-repeat: no-repeat;
   background-size: cover;
 }
-.billboard--wrapper .billboard-bg.about-us--bg {
-  background-image: url("../img/about-us-bg.png");
-}
-.billboard--wrapper .billboard-bg.jobs--bg {
-  background-image: url("../img/jobs-bg.png");
-}
 
 .billboard-body--wrapper {
   padding: 0 0 100px;

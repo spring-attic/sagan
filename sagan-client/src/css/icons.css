@@ -218,26 +218,6 @@
   width: 46px;
   background-position: 603px 317px;
 }
-.icon.logo-eclipse-text {
-  width: 159px;
-  height: 38px;
-  background-position: 603px 38px;
-}
-.icon.logo-yourkit-text {
-    width: 187px;
-    height: 46px;
-    background-position: 989px 964px;
-}
-.icon.logo-browserstack-text {
-    background-image: url("../img/icon-browserstack-logo.svg");
-    width: 186px;
-    height: 40px;
-}
-.icon.logo-artifactory-text {
-  background-image: url("../img/icon-artifactory-logo.svg");
-  width: 171px;
-  height: 46px;
-}
 .icon.icon-social-twitter {
   width: 36px;
   height: 36px;

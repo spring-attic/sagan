@@ -52,45 +52,33 @@
   margin: 26px 0 43px;
 }
 
-.eclipse--container, .yourkit--container, .browserstack--container, .artifactory--container {
+.tool-sponsor--container .logo-sponsor-text {
+    float: left;
+    margin: 0 40px 40px 0;
+    width: 190px;
+}
+
+.tool-sponsor--container {
   border: 1px solid #34302d;
   padding: 40px;
   margin-bottom: 40px;
 }
-.eclipse--container .logo-eclipse-text {
-  float: left;
-  margin: 20px 66px 40px 0;
-}
-.yourkit--container .logo-yourkit-text {
-    float: left;
-    margin: 0 40px 40px 0;
-}
-.browserstack--container .logo-browserstack-text {
-    float: left;
-    margin: 0 40px 40px 0;
-}
-.artifactory--container .logo-artifactory-text {
-  float: left;
-  margin: 0 40px 40px 0;
-}
-.eclipse--container .eclipse-content--container {
-  margin-left: 159px;
-}
-.eclipse--container h2 {
+
+.eclipse-content--container h2 {
   font-size: 18px;
   line-height: 18px;
   margin-bottom: 20px;
   font-weight: 400;
 }
-.eclipse--container p {
+.eclipse-content--container p {
   font-size: 15px;
   line-height: 20px;
   margin-bottom: 20px;
 }
-.eclipse--container a {
+.eclipse-content--container a {
   color: #5fa134;
 }
-.eclipse--container a.learn-more-link {
+.eclipse-content--container a.learn-more-link {
   text-transform: uppercase;
 }
 
