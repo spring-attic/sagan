@@ -47,19 +47,59 @@ public class ProjectPageTests extends AbstractIntegrationTests {
 
     @Test
     public void getSidebar() throws Exception {
-        Document document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
         List<String> titles = document.select(".sidebar .sidebar_project a").stream()
                 .map(Element::text).collect(toList());
-        assertThat(titles, hasItems("Spring Data", "Spring Framework", "Spring Boot"));
-        assertThat(titles, not(hasItems("Spring XD")));
+        assertThat(titles, hasItems("Spring Data", "Spring Framework", "Spring Boot")); // active
+        assertThat(titles, not(hasItems("Spring XD"))); // not active
+        assertThat(titles, not(hasItems("spring-data-solr"))); // children of "umbrella" projects
     }
 
     @Test
-    public void sidebarHighlightCurrentProject() throws Exception {
-        List<String> titles = document.select(".sidebar .sidebar_project.active").stream()
-                .map(Element::text).collect(toList());
-        assertThat(titles.size(), is(1));
-        assertThat(titles.get(0), is("Spring Boot"));
+    public void sidebar_highlightsUmbrellaProjectAndShowsChildren() throws Exception {
+        Document document = documentForUrlPath("/project/spring-data");
+
+        Elements activeProject = document.select(".sidebar .sidebar_project.active");
+
+        List<String> titles = activeProject.stream()
+                .map(element -> element.select("> a").text())
+                .collect(toList());
+        assertThat(titles, hasSize(1));
+        assertThat(titles.get(0), is("Spring Data"));
+
+        Elements childProjects = activeProject.select(".sidebar_child");
+        assertThat(childProjects, hasSize(15));
+
+        List<String> childTitles = childProjects.stream()
+                .map(Element::text)
+                .map(String::toLowerCase)
+                .collect(toList());
+        assertThat(childTitles, hasItems("spring data rest"));
+
+        List<String> childHrefs = childProjects.stream()
+                .map(element -> element.select("a").attr("href"))
+                .collect(toList());
+        assertThat(childHrefs, hasItems(containsString("/spring-data-rest")));
+    }
+
+    @Test
+    public void sidebar_hidesChildrenOfNotSelectedUmbrellaProjects() throws Exception {
+        Document document = documentForUrlPath("/project/spring-vault");
+
+        Elements children = document.select(".sidebar_child");
+        assertThat(children, hasSize(0));
+    }
+
+    @Test
+    public void sidebar_selectingChildHighlightsItselfAndShowsSiblings() throws Exception {
+        Document document = documentForUrlPath("/project/spring-data-rest");
+
+        Elements activeProject = document.select(".sidebar_child.active");
+        List<String> titles = activeProject.stream()
+                .map(element -> element.select("a").text())
+                .map(String::toLowerCase)
+                .collect(toList());
+        assertThat(titles, hasSize(1));
+        assertThat(titles, hasItems("spring data rest"));
     }
 
     @Test
@@ -110,16 +150,14 @@ public class ProjectPageTests extends AbstractIntegrationTests {
 
     @Test
     public void getSpringBootConfigIsHiddenWhenItDoesNotExist() throws Exception {
-        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-data-redis"));
-        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+        Document document = documentForUrlPath("/project/spring-data-redis");
 
         assertThat(document.select(".spring-boot-config"), hasSize(0));
     }
 
     @Test
     public void getHeaderOmitsVersionWhenThereIsNoCurrentRelease() throws Exception {
-        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-data-redis"));
-        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+        Document document = documentForUrlPath("/project/spring-data-redis");
 
         assertThat(document.select(".project--header .version"), hasSize(0));
     }
@@ -223,8 +261,7 @@ public class ProjectPageTests extends AbstractIntegrationTests {
 
     @Test
     public void referenceDocShowsAllReleasesWhenThereIsNoCurrentRelease() throws Exception {
-        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/platform"));
-        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+        Document document = documentForUrlPath("/project/platform");
 
         Element documentationSection = document.select(".project--documentation").first();
         Element referenceDoc = documentationSection.select(".project-reference").first();
@@ -238,8 +275,7 @@ public class ProjectPageTests extends AbstractIntegrationTests {
 
     @Test
     public void referenceDocIsHiddenWhenThereAreNoReleases() throws Exception {
-        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-xd"));
-        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+        Document document = documentForUrlPath("/project/spring-xd");
 
         assertThat(document.select(".project-reference"), hasSize(0));
     }
@@ -283,13 +319,11 @@ public class ProjectPageTests extends AbstractIntegrationTests {
                 "http://docs.spring.io/spring-boot/docs/1.5.8.BUILD-SNAPSHOT/api/",
                 "http://docs.spring.io/spring-boot/docs/1.4.7.RELEASE/api/"
         ));
-
     }
 
     @Test
     public void apiDocShowsAllReleasesWhenThereIsNoCurrentRelease() throws Exception {
-        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/platform"));
-        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+        Document document = documentForUrlPath("/project/platform");
 
         Element documentationSection = document.select(".project--documentation").first();
         Element apiDoc = documentationSection.select(".project-api").first();
@@ -303,9 +337,13 @@ public class ProjectPageTests extends AbstractIntegrationTests {
 
     @Test
     public void apiDocIsHiddenWhenThereAreNoReleases() throws Exception {
-        result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-xd"));
-        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
+        Document document = documentForUrlPath("/project/spring-xd");
 
         assertThat(document.select(".project-api"), hasSize(0));
+    }
+
+    private Document documentForUrlPath(String urlPath) throws Exception {
+        ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get(urlPath));
+        return Jsoup.parse(result.andReturn().getResponse().getContentAsString());
     }
 }
