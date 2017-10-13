@@ -19,4 +19,11 @@ $(document).ready(function() {
         var tabName = $(e.target).attr('href');
         history.pushState(null, null, tabName);
     });
+
+    $('.sidebar .icon-chevron-up').on('click', function () {
+        if ($('.sidebar_children').length){
+            $('.sidebar_children').toggle();
+            $('.sidebar .icon-chevron-up').toggleClass('icon-chevron-down');
+        }
+    })
 });

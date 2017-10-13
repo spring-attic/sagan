@@ -61,7 +61,7 @@ public class ProjectPageTests extends AbstractIntegrationTests {
         Elements activeProject = document.select(".sidebar .sidebar_project.active");
 
         List<String> titles = activeProject.stream()
-                .map(element -> element.select("> a").text())
+                .map(element -> element.select("> div > a").text())
                 .collect(toList());
         assertThat(titles, hasSize(1));
         assertThat(titles.get(0), is("Spring Data"));

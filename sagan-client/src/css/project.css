@@ -14,13 +14,14 @@
     font-size: 1rem;
 }
 
+.compass .sidebar div {
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    position: relative;
+}
+
 .compass .sidebar a {
     color: #34302d;
-    padding: 0.5rem 1.5rem 0.5rem 1rem;
-    display: block;
-    transition: background 0.5s;
     font-family: Montserrat, sans-serif;
-    margin-right: -0.5rem;
 }
 
 .compass .sidebar span {
@@ -28,28 +29,33 @@
 }
 
 .compass .sidebar i {
-    float: right;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.3rem;
+    padding: 0.3rem;
+    cursor: pointer;
 }
 
-.compass .sidebar .child-inactive > a {
+.compass .sidebar .child-inactive > div {
     color: #34302d;
     opacity: 0.5;
 }
 
-.compass .sidebar .active > a,
-.compass .sidebar a:hover {
-    color: #6bb536;
-    background: #fff;
+.compass .sidebar .active > div,
+.compass .sidebar div:hover {
+    color: #34302d;
     font-weight: bold;
     font-size: 0.98rem;
-    text-decoration:none;
     opacity: 1;
 }
 
-.compass .sidebar .child-active > a {
+.compass .sidebar a:hover {
+    text-decoration:none;
+}
+
+.compass .sidebar .child-active > div {
     font-weight: bold;
     font-size: 0.98rem;
-    text-decoration:none;
 }
 
 .compass .sidebar .sidebar_children {
@@ -62,11 +68,15 @@
     font-size: .9rem;
     padding: 0.4rem 0.5rem;
     margin-right: -1.5rem;
+    display: block;
 }
 
 .compass .sidebar .sidebar_children .active a,
 .compass .sidebar .sidebar_children a:hover {
     font-size: .87rem;
+    color: #6bb536;
+    background: #fff;
+    font-weight: bold;
 }
 
 .compass .nav {
