@@ -26,10 +26,13 @@
         <ul class="sidebar col-lg-3">
             <li class="sidebar_project"
                 th:each="proj : ${projects}"
-                th:classappend="${proj.getId() ==  selectedProject.getId()} ? 'active'">
-                <a th:href="${proj.getSiteUrl()}" th:text="${proj.getName()}"></a>
+                th:classappend="${proj.getId() ==  selectedProject.getId()} ? 'active' : (${proj.getId() ==  selectedProject.getParentId()} ? 'child-active': 'child-inactive')">
+                <a th:href="${proj.getSiteUrl()}">
+                    <span th:text="${proj.getName()}"></span>
+                    <i th:class="${(proj.getId() ==  selectedProject.getParentId()) or (proj.getId() ==  selectedProject.getId())} ? 'icon-chevron-up' : 'icon-chevron-down'" aria-hidden="true"></i>
+                </a>
                 <ul class="sidebar_children"
-                    th:if="${proj.equals(selectedProject) or proj.equals(selectedProject.getParentProject())}">
+                    th:if="${(proj.equals(selectedProject) or proj.equals(selectedProject.getParentProject())) and proj.getChildProjectList().size() > 0}">
                     <li class="sidebar_child"
                         th:each="childProject : ${proj.getChildProjectList()}"
                         th:classappend="${childProject.getId() ==  selectedProject.getId()} ? 'active'">

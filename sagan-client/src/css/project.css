@@ -7,37 +7,66 @@
     float: left;
     margin: 0;
     list-style: none;
-    padding: 36px 10px;
+    padding: 2rem 0.5rem;
 }
 
 .compass .sidebar li {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .compass .sidebar a {
     color: #34302d;
-    padding: 6px 10px;
+    padding: 0.5rem 1.5rem 0.5rem 1rem;
     display: block;
     transition: background 0.5s;
     font-family: Montserrat, sans-serif;
+    margin-right: -0.5rem;
+}
+
+.compass .sidebar span {
+    padding-right: 1rem;
+}
+
+.compass .sidebar i {
+    float: right;
+}
+
+.compass .sidebar .child-inactive > a {
+    color: #34302d;
+    opacity: 0.5;
 }
 
 .compass .sidebar .active > a,
 .compass .sidebar a:hover {
     color: #6bb536;
     background: #fff;
+    font-weight: bold;
+    font-size: 0.98rem;
+    text-decoration:none;
+    opacity: 1;
+}
+
+.compass .sidebar .child-active > a {
+    font-weight: bold;
+    font-size: 0.98rem;
+    text-decoration:none;
 }
 
 .compass .sidebar .sidebar_children {
     list-style: none;
     border-left: 1px solid black;
-
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 1rem;
 }
 
 .compass .sidebar .sidebar_children a {
-    font-size: .9em;
+    font-size: .9rem;
+    padding: 0.4rem 0.5rem;
+    margin-right: -1.5rem;
+}
+
+.compass .sidebar .sidebar_children .active a,
+.compass .sidebar .sidebar_children a:hover {
+    font-size: .87rem;
 }
 
 .compass .nav {
