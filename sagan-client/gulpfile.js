@@ -46,7 +46,8 @@ gulp.task('jspm', function () {
         bundles: [
             {src: 'app/main', dst: 'main.js'},
             {src: 'app/maps', dst: 'maps.js'},
-            {src: 'app/admin', dst: 'admin.js'}
+            {src: 'app/admin', dst: 'admin.js'},
+            {src: 'app/pages/projects/show', dst: 'pages/projects/show.js'}
         ]
     })
     .pipe(gulp.dest(paths.dest + "app"));
