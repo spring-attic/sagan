@@ -2,12 +2,28 @@
     color: #5fa134;
 }
 
+.compass.container-fluid {
+    padding: 0;
+}
+
 .compass .sidebar {
     background: #96c773;
     float: left;
     margin: 0;
     list-style: none;
     padding: 2rem 0.5rem;
+}
+
+@media only screen and (max-width: 64em) {
+    .compass .hide-sm {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 64em) {
+    .compass .hide-sm {
+        display: inline-block;
+    }
 }
 
 .compass .sidebar li {
@@ -50,7 +66,7 @@
 }
 
 .compass .sidebar a:hover {
-    text-decoration:none;
+    text-decoration: none;
 }
 
 .compass .sidebar .child-active > div {
@@ -84,10 +100,12 @@
     background: #fff;
     padding: 1.5rem 0 0 0;
     margin-bottom: 0;
+    display: flex;
 }
 
 .compass .nav-tabs li {
     margin-bottom: 0;
+    float: none;
 }
 
 .compass .nav-tabs a {
@@ -96,6 +114,9 @@
     padding: 0.7rem 1rem;
     font-size: 1rem;
     margin: 0 1rem;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .compass .nav-tabs a:focus {
@@ -111,8 +132,11 @@
     font-weight: bold;
 }
 
+.compass .nav > li > a > span {
+    padding-right: 0.5rem;
+}
+
 .compass .nav > li > a > svg {
-    padding-left: 0.5rem;
     vertical-align: sub;
 }
 
@@ -123,14 +147,6 @@
 .compass .nav > .active > a > svg path,
 .compass .nav-tabs a:hover svg path {
     fill: #6bb536;
-}
-
-.compass .tab-content .col-lg-5 {
-    padding: 2rem 2rem 2rem 0;
-}
-
-.compass .tab-content .col-lg-5 .row {
-    margin-bottom: 2rem;
 }
 
 .compass .spring-boot-config {
@@ -185,7 +201,7 @@
 }
 
 .compass .project--header .link--github,
-.compass .project--header .link--stackoverflow{
+.compass .project--header .link--stackoverflow {
     margin: 0 0.4rem;
     text-decoration: none;
 }
@@ -215,12 +231,14 @@
 
 /* Documentation */
 
-.compass .project-reference,
-.compass .project-api{
+.compass .project-reference > div,
+.compass .project-api > div {
     background-color: #fff;
     padding: 1.2rem;
     margin: 0.5rem;
-    max-width: calc(50% - 1rem);
+    max-width: calc(100% - 1rem);
+    box-shadow: 0.5px 0.5px 1.5px 0 rgba(0, 0, 0, 0.27);
+    border: solid 0.5px #dfdfdf;
 }
 
 .compass .project--documentation a:not(.not-version) {
@@ -247,6 +265,11 @@
     font-weight: bold;
     font-size: 12px;
     margin-left: 10px;
+}
+
+.compass .project--documentation > .row {
+    margin-right: -1rem;
+    margin-left: -1rem;
 }
 
 .compass .project--documentation ul {
@@ -288,15 +311,14 @@
 
 /* Guides */
 
-.compass .project--guides.row {
+.compass ul.project--guides {
     list-style: none;
-    margin-left: -0.7rem;
+    margin-top: 0.5rem;
 }
 
 .compass .project--guide {
-    margin-bottom: 1.5rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    margin-top: 2rem;
+    padding: 0;
 }
 
 .compass .project--guide a {
@@ -305,12 +327,20 @@
     border: solid 0.5px #dfdfdf;
     display: block;
     height: 100%;
-    width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    width: calc(100% - 1rem);
     border-left: 4px solid #eac36d;
     padding: 1rem;
     box-sizing: border-box;
+}
+
+@media only screen and (min-width: 64em) {
+    .compass .project--guide:nth-child(even) a {
+        margin-left: 1rem;
+    }
+
+    .compass .project--guide:nth-child(odd) a {
+        margin-right: 1rem;
+    }
 }
 
 .compass .project--guide a:hover > * {
@@ -336,13 +366,18 @@
 .compass .compass-section h2 {
     font-size: 20px;
     padding-top: 2rem;
+    width: 100%;
 }
 
 .compass .compass-section + .compass-section > h2 {
-    border-top: solid 1px rgb(195,195,195);
+    border-top: solid 1px rgb(195, 195, 195);
 }
 
 .compass .compass-section .compass-subtitle {
     font-size: 16px;
-    margin: 1rem 0 2rem 0;
+    margin: 1rem 0 0 0;
+}
+
+.compass .tab-content .compass-section > .row {
+    margin-top: 2rem;
 }
