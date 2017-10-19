@@ -118,8 +118,8 @@ class ProjectAdminController {
 
         String renderedBootConfig = this.renderer.render(project.getRawBootConfig(), PostFormat.ASCIIDOC);
         project.setRenderedBootConfig(renderedBootConfig);
-        String renderedFeatures = this.renderer.render(project.getRawFeatures(), PostFormat.ASCIIDOC);
-        project.setRenderedFeatures(renderedFeatures);
+        String renderedOverview = this.renderer.render(project.getRawOverview(), PostFormat.ASCIIDOC);
+        project.setRenderedOverview(renderedOverview);
 
         if (parentId != null) {
             Project parentProject = service.getProject(parentId);

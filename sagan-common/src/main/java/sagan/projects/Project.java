@@ -33,8 +33,8 @@ public class Project {
     private String category;
     private String rawBootConfig;
     private String renderedBootConfig;
-    private String rawFeatures;
-    private String renderedFeatures;
+    private String rawOverview;
+    private String renderedOverview;
 
     @ManyToOne()
     private Project parentProject;
@@ -165,20 +165,20 @@ public class Project {
         this.renderedBootConfig = renderedBootConfig;
     }
 
-    public String getRawFeatures() {
-        return rawFeatures;
+    public String getRawOverview() {
+        return rawOverview;
     }
 
-    public void setRawFeatures(String rawFeatures) {
-        this.rawFeatures = rawFeatures;
+    public void setRawOverview(String rawOverview) {
+        this.rawOverview = rawOverview;
     }
 
-    public String getRenderedFeatures() {
-        return renderedFeatures;
+    public String getRenderedOverview() {
+        return renderedOverview;
     }
 
-    public void setRenderedFeatures(String renderedFeatures) {
-        this.renderedFeatures = renderedFeatures;
+    public void setRenderedOverview(String renderedOverview) {
+        this.renderedOverview = renderedOverview;
     }
 
     public Project getParentProject() {

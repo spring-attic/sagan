@@ -76,7 +76,7 @@ public class ProjectAdminControllerTests {
         when(renderer.render(contains("overview"), any())).thenReturn("rendered-overview");
 
         project.setRawBootConfig("boot-config");
-        project.setRawFeatures("overview");
+        project.setRawOverview("overview");
         controller.save(project, null, "", null);
 
         ArgumentCaptor<Project> captor = ArgumentCaptor.forClass(Project.class);
@@ -84,7 +84,7 @@ public class ProjectAdminControllerTests {
 
         Project projectCaptured = captor.getValue();
         assertThat(projectCaptured.getRenderedBootConfig(), equalTo("rendered-boot-config"));
-        assertThat(projectCaptured.getRenderedFeatures(), equalTo("rendered-overview"));
+        assertThat(projectCaptured.getRenderedOverview(), equalTo("rendered-overview"));
     }
 
 }
