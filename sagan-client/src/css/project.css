@@ -381,3 +381,8 @@
 .compass .tab-content .compass-section > .row {
     margin-top: 2rem;
 }
+
+/* Fix layout for Safari */
+.compass .row:before, .compass .row:after {
+    display: initial;
+}
