@@ -164,10 +164,8 @@ public class ProjectPageTests extends AbstractIntegrationTests {
 
     @Test
     public void getFeatures() throws Exception {
-        Elements features = document.select(".project-features");
+        Elements features = document.select(".project-overview");
         assertThat(features, hasSize(1));
-
-        assertThat(features.select(".project-features--subtitle").text(), is("Features"));
 
         String featuresHtml = features.html()
                 .replaceAll("\\n\\s+", "");
@@ -189,7 +187,6 @@ public class ProjectPageTests extends AbstractIntegrationTests {
         Elements tabsContent = document.select(".tab-content .tab-pane");
         assertThat(tabsContent, hasSize(2));
         assertThat(tabsContent.get(0).id(), is("overview"));
-        assertThat(tabsContent.get(0).text(), containsString("Features"));
         assertThat(tabsContent.get(1).id(), is("learn"));
     }
 

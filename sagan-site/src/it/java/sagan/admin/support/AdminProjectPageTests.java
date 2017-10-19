@@ -68,7 +68,7 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
                         .param("repoUrl", "http://github.com/spring-projects/spring-framework")
                         .param("siteUrl", "http://projects.spring.io/spring-framework")
                         .param("rawBootConfig", "")
-                        .param("rawFeatures", "")
+                        .param("rawOverview", "")
                         .param("releasesToDelete", "4.0.1.BUILD-SNAPSHOT")
                         .param("projectReleases[0].artifactId", "spring-framework")
                         .param("projectReleases[0].version", "4.0.1.BUILD-SNAPSHOT")
@@ -123,7 +123,7 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
                         .param("repoUrl", "http://github.com/spring-projects/spring-framework")
                         .param("siteUrl", "http://projects.spring.io/spring-framework")
                         .param("rawBootConfig", "")
-                        .param("rawFeatures", "")
+                        .param("rawOverview", "")
                         .param("projectReleases[0].artifactId", "spring-framework")
                         .param("projectReleases[0].version", "4.0.2.BUILD-SNAPSHOT")
                         .param("projectReleases[0].refDocUrl",
@@ -178,7 +178,7 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
                         .param("repoUrl", "http://github.com/spring-projects/spring-new")
                         .param("siteUrl", "http://projects.spring.io/spring-new")
                         .param("rawBootConfig", "")
-                        .param("rawFeatures", "")
+                        .param("rawOverview", "")
                         .param("projectReleases[0].artifactId", "spring-framework")
                         .param("projectReleases[0].version", "4.0.2.BUILD-SNAPSHOT")
                         .param("projectReleases[0].refDocUrl",
@@ -235,7 +235,7 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
                         .param("repoUrl", "http://github.com/spring-projects/spring-data-jdbc-ext")
                         .param("siteUrl", "http://projects.spring.io/spring-data-jdbc-ext")
                         .param("rawBootConfig", "")
-                        .param("rawFeatures", "")
+                        .param("rawOverview", "")
                         .param("projectReleases[0].artifactId", "spring-jdbc-oracle")
                         .param("projectReleases[0].version", "1.0.0.RELEASE")
                         .param("projectReleases[0].refDocUrl",
@@ -259,7 +259,7 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
                 post("/admin/projects/spring-data-new")
                         .param("id", "spring-data-new")
                         .param("groupId", "org.springframework.data")
-                        .param("rawFeatures", "")
+                        .param("rawOverview", "")
                         .param("rawBootConfig", "")
                         .param("parentId", "spring-data");
 
@@ -275,7 +275,7 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
                 post("/admin/projects/spring-data-new")
                         .param("id", "spring-data-new")
                         .param("groupId", "org.springframework.data")
-                        .param("rawFeatures", "")
+                        .param("rawOverview", "")
                         .param("rawBootConfig", "")
                         .param("parentId", "spring-whoops-i-accidentally-all-the-parapluies");
 
