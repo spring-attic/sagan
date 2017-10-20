@@ -304,12 +304,12 @@ public class Project {
         return parentProject == null;
     }
 
-    public List<ProjectSample> getSampleList() {
+    public List<ProjectSample> getProjectSamples() {
         sampleList.sort(Comparator.comparingInt(ProjectSample::getDisplayOrder));
         return sampleList;
     }
 
-    public void setSampleList(List<ProjectSample> sampleList) {
+    public void setProjectSamples(List<ProjectSample> sampleList) {
         this.sampleList = sampleList;
     }
 }

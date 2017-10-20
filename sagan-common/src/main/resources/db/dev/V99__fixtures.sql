@@ -121,9 +121,9 @@ INSERT INTO project_release_list values('spring-framework','spring-milestones','
 -- Project samples
 
 INSERT INTO project_sample_list (title, description, url, display_order, project_id) VALUES
-  ('Simple', 'Simple command line application', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-simple', 1, 'spring-boot'),
-  ('Embedded Tomcat', 'It is a mountain kitty.', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-tomcat', 2, 'spring-boot'),
-  ('Batch', 'Define and run a Batch job in a few lines of code', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-batch', 3, 'spring-boot'),
-  ('Data JPA', 'Stores data using Spring Data JPA with Hibernate', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-data-jpa', 4, 'spring-boot'),
-  ('Integration', 'Integration application built using Spring Integration and its Java DSL', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-integration', 5, 'spring-boot'),
-  ('more…', 'Collection of Spring Boot sample applications.', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples', 6, 'spring-boot');
+  ('Simple', 'Simple command line application', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-simple', 0, 'spring-boot'),
+  ('Embedded Tomcat', 'It is a mountain kitty.', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-tomcat', 1, 'spring-boot'),
+  ('Batch', 'Define and run a Batch job in a few lines of code', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-batch', 2, 'spring-boot'),
+  ('Data JPA', 'Stores data using Spring Data JPA with Hibernate', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-data-jpa', 3, 'spring-boot'),
+  ('Integration', 'Integration application built using Spring Integration and its Java DSL', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-integration', 4, 'spring-boot'),
+  ('more…', 'Collection of Spring Boot sample applications.', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples', 5, 'spring-boot');

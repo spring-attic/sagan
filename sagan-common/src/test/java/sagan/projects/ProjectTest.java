@@ -65,22 +65,14 @@ public class ProjectTest {
 
     @Test
     public void orderedProjectSamples() {
-        ProjectSample first = new ProjectSampleForTest("First", 1);
-        ProjectSample second = new ProjectSampleForTest("Second", 2);
-        ProjectSample third = new ProjectSampleForTest("Third", 3);
+        ProjectSample first = new ProjectSample("First", 1);
+        ProjectSample second = new ProjectSample("Second", 2);
+        ProjectSample third = new ProjectSample("Third", 3);
         List<ProjectSample> samples = Arrays.asList(third, first, second);
 
         Project project = new Project("id", "my-special-project", "my-repo-url", "my-site-url", emptyList(), false, "my-special-category");
-        project.setSampleList(samples);
+        project.setProjectSamples(samples);
 
-        assertThat(project.getSampleList(), contains(first, second, third));
-    }
-
-    public class ProjectSampleForTest extends ProjectSample {
-        public ProjectSampleForTest(String title, int displayOrder) {
-            super();
-            this.setTitle(title);
-            this.setDisplayOrder(displayOrder);
-        }
+        assertThat(project.getProjectSamples(), contains(first, second, third));
     }
 }

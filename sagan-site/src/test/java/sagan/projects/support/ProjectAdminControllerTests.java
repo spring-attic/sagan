@@ -11,6 +11,7 @@ import sagan.blog.support.FormatAwarePostContentRenderer;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.ProjectRelease.ReleaseStatus;
+import sagan.projects.ProjectSample;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,11 +19,9 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.contains;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectAdminControllerTests {
@@ -77,7 +76,7 @@ public class ProjectAdminControllerTests {
 
         project.setRawBootConfig("boot-config");
         project.setRawOverview("overview");
-        controller.save(project, null, "", null);
+        controller.save(project, null, null, "", null);
 
         ArgumentCaptor<Project> captor = ArgumentCaptor.forClass(Project.class);
         verify(projectMetadataService, times(1)).save(captor.capture());
@@ -87,4 +86,13 @@ public class ProjectAdminControllerTests {
         assertThat(projectCaptured.getRenderedOverview(), equalTo("rendered-overview"));
     }
 
+    @Test
+    public void editProject_newProjectSampleDisplayOrder() {
+        ProjectSample second = new ProjectSample("Second", 42);
+        List<ProjectSample> samples = Arrays.asList(second);
+        project.setProjectSamples(samples);
+        when(projectMetadataService.getProject("spring-framework")).thenReturn(project);
+        controller.edit("spring-framework", model);
+        assertThat(model.get("projectSampleDisplayOrder"), equalTo(43));
+    }
 }
