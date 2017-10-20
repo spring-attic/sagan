@@ -28,8 +28,6 @@ public class ProjectPageTests extends AbstractIntegrationTests {
     public void setup() throws Exception {
         stubRestClient.putResponse("/orgs/spring-guides/repos",
                 Fixtures.load("/fixtures/github/githubRepoListWithSpringBoot.json"));
-        stubRestClient.putResponseBytes("/repos/spring-guides/gs-spring-boot/zipball",
-                Fixtures.loadData("../../gs-spring-boot.zip"));
 
         result = mockMvc.perform(MockMvcRequestBuilders.get("/project/spring-boot"));
         document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
@@ -178,16 +176,19 @@ public class ProjectPageTests extends AbstractIntegrationTests {
         assertThat(subheader, hasSize(1));
 
         Elements tabs = subheader.select("a[data-toggle=tab]");
-        assertThat(tabs, hasSize(2));
+        assertThat(tabs, hasSize(3));
         assertThat(tabs.get(0).text(), is("Overview"));
         assertThat(tabs.get(1).text(), is("Learn"));
+        assertThat(tabs.get(2).text(), is("Samples"));
         assertThat(tabs.get(0).attr("href"), is("#overview"));
         assertThat(tabs.get(1).attr("href"), is("#learn"));
+        assertThat(tabs.get(2).attr("href"), is("#samples"));
 
         Elements tabsContent = document.select(".tab-content .tab-pane");
-        assertThat(tabsContent, hasSize(2));
+        assertThat(tabsContent, hasSize(3));
         assertThat(tabsContent.get(0).id(), is("overview"));
         assertThat(tabsContent.get(1).id(), is("learn"));
+        assertThat(tabsContent.get(2).id(), is("samples"));
     }
 
     @Test
@@ -337,6 +338,28 @@ public class ProjectPageTests extends AbstractIntegrationTests {
         Document document = documentForUrlPath("/project/spring-xd");
 
         assertThat(document.select(".project-api"), hasSize(0));
+    }
+
+    @Test
+    public void getSamples() {
+        Elements samplesSection = document.select("#samples");
+        assertThat(samplesSection, hasSize(1));
+
+        Element samplesTitle = samplesSection.select("h2").first();
+        assertThat(samplesTitle.text(), is("A few examples to try out:"));
+
+
+        Elements samples = samplesSection.select(".project--sample");
+        assertThat(samples, hasSize(6));
+
+        Element firstSample = samples.get(0);
+        Elements title = firstSample.select(".project--sample--title");
+        Elements description = firstSample.select(".project--sample--description");
+        Element sample = firstSample.select("a").first();
+
+        assertThat(title.text(), is("Simple"));
+        assertThat(description.text(), is("Simple command line application"));
+        assertThat(sample.attr("href"), is("https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-simple"));
     }
 
     private Document documentForUrlPath(String urlPath) throws Exception {

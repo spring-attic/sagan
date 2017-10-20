@@ -117,3 +117,13 @@ INSERT INTO project_release_list values('spring-framework',NULL,'http://docs.spr
 INSERT INTO project_release_list values('spring-framework','spring-snapshots','http://docs.spring.io/spring/docs/4.3.12.BUILD-SNAPSHOT/javadoc-api/','spring-context','org.springframework',false,'http://docs.spring.io/spring/docs/4.3.12.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/',0,'4.3.12.BUILD-SNAPSHOT');
 INSERT INTO project_release_list values('spring-framework','spring-snapshots','http://docs.spring.io/spring/docs/5.0.0.BUILD-SNAPSHOT/javadoc-api/','spring-context','org.springframework',false,'http://docs.spring.io/spring/docs/5.0.0.BUILD-SNAPSHOT/spring-framework-reference/',0,'5.0.0.BUILD-SNAPSHOT');
 INSERT INTO project_release_list values('spring-framework','spring-milestones','http://docs.spring.io/spring/docs/5.0.0.RC4/javadoc-api/','spring-context','org.springframework',false,'http://docs.spring.io/spring/docs/5.0.0.RC4/spring-framework-reference/',1,'5.0.0.RC4');
+
+-- Project samples
+
+INSERT INTO project_sample_list (title, description, url, display_order, project_id) VALUES
+  ('Simple', 'Simple command line application', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-simple', 1, 'spring-boot'),
+  ('Embedded Tomcat', 'It is a mountain kitty.', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-tomcat', 2, 'spring-boot'),
+  ('Batch', 'Define and run a Batch job in a few lines of code', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-batch', 3, 'spring-boot'),
+  ('Data JPA', 'Stores data using Spring Data JPA with Hibernate', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-data-jpa', 4, 'spring-boot'),
+  ('Integration', 'Integration application built using Spring Integration and its Java DSL', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-integration', 5, 'spring-boot'),
+  ('more…', 'Collection of Spring Boot sample applications.', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples', 6, 'spring-boot');
