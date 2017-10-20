@@ -78,6 +78,17 @@
                                 </g>
                             </svg>
                         </a></li>
+                        <li class="col-xs-3"><a href="#samples" data-toggle="tab">
+                            <span class="hide-sm">Samples</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="19" viewBox="0 0 15 19">
+                                <g>
+                                    <path d="M8.18 5.624H3.966a.705.705 0 1 1 0-1.41h4.212a.705.705 0 1 1 0 1.41zm2.785 2.958H3.967a.705.705 0 1 1 0-1.41h6.998a.705.705 0 1 1 0 1.41zM11 11.536H4.001a.705.705 0 1 1 0-1.411h6.998a.705.705 0 1 1 0 1.41zm-.034 2.958H3.967a.705.705 0 1 1 0-1.41l6.998-.001a.705.705 0 1 1 0 1.41zM1.645 1.41a.239.239 0 0 0-.234.235v15.312c0 .127.107.235.235.235h11.708a.239.239 0 0 0 .235-.235V1.646a.239.239 0 0 0-.235-.235H1.646zm11.71 17.193H1.644A1.648 1.648 0 0 1 0 16.958V1.646C0 .738.738 0 1.646 0h11.708C14.262 0 15 .738 15 1.646v15.312c0 .907-.738 1.646-1.646 1.646z"></path>
+                                    <path class="fill-white-only" d="M0 12h16v7H0z"></path>
+                                    <path class="stroke-only"
+                                          d="M4.023 17.989L2.01 15.494 4.023 13M11.01 17.989l2.013-2.495L11.01 13M6 18.402l2.512-5.399"></path>
+                                </g>
+                            </svg>
+                        </a></li>
                     </ul>
                 </div>
 
@@ -118,20 +129,21 @@
                                 features and what you can achieve with them.
                             </div>
 
-                            <div class="row">
-                                <div class="project-reference col-xs-12 col-md-6"
-                                     th:if="${currentRelease.isPresent() || otherReleases.size() > 0 }">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="project-reference project--card col-xs-12 col-md-6"
+                                         th:if="${currentRelease.isPresent() || otherReleases.size() > 0 }">
 
-                                    <div>
-                                        <h3>Reference doc.</h3>
+                                        <div>
+                                            <h3>Reference doc.</h3>
 
-                                        <div class="project-reference--current-version"
-                                             th:if="${currentRelease.isPresent()}"
-                                             th:with="release=${currentRelease.get()}">
-                                            <a th:href="${release.getRefDocUrl()}">
+                                            <div class="project-reference--current-version"
+                                                 th:if="${currentRelease.isPresent()}"
+                                                 th:with="release=${currentRelease.get()}">
+                                                <a th:href="${release.getRefDocUrl()}">
                                         <span class="release-display-name"
                                               th:text="${release.getVersionDisplayName()}"></span>
-                                                <span class="release-status-group">
+                                                    <span class="release-status-group">
                                             <span class="release-status release-status-pre"
                                                   th:if="${release.isPreRelease()}">PRE</span>
                                             <span class="release-status release-status-snapshot"
@@ -141,18 +153,18 @@
                                             <span class="release-status release-status-current"
                                                   th:if="${release.isCurrent()}">CURRENT</span>
                                         </span>
-                                            </a>
+                                                </a>
 
-                                        </div>
+                                            </div>
 
-                                        <ul class="project-reference--releases collapse row"
-                                            th:classappend="${!currentRelease.isPresent()} ? 'in'">
-                                            <li class="project-reference--version col-xs-6"
-                                                th:each="release : ${otherReleases}">
-                                                <a th:href="${release.getRefDocUrl()}">
+                                            <ul class="project-reference--releases collapse row"
+                                                th:classappend="${!currentRelease.isPresent()} ? 'in'">
+                                                <li class="project-reference--version col-xs-6"
+                                                    th:each="release : ${otherReleases}">
+                                                    <a th:href="${release.getRefDocUrl()}">
                                             <span class="release-display-name"
                                                   th:text="${release.getVersionDisplayName()}"></span>
-                                                    <span class="release-status-group">
+                                                        <span class="release-status-group">
                                                 <span class="release-status release-status-pre"
                                                       th:if="${release.isPreRelease()}">PRE</span>
                                                 <span class="release-status release-status-snapshot"
@@ -162,31 +174,32 @@
                                                 <span class="release-status release-status-current"
                                                       th:if="${release.isCurrent()}">CURRENT</span>
                                             </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="project--documentation--version-button"
+                                                 th:if="${currentRelease.isPresent()}">
+                                                <a class="not-version" data-toggle="collapse"
+                                                   href=".project-reference--releases">
+                                                    <span>other versions</span>
+                                                    <i class="icon-chevron-up" aria-hidden="true"></i>
                                                 </a>
-                                            </li>
-                                        </ul>
-                                        <div class="project--documentation--version-button"
-                                             th:if="${currentRelease.isPresent()}">
-                                            <a class="not-version" data-toggle="collapse"
-                                               href=".project-reference--releases">
-                                                <span>other versions</span>
-                                                <i class="icon-chevron-up" aria-hidden="true"></i>
-                                            </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="project-api col-xs-12 col-md-6"
-                                     th:if="${currentRelease.isPresent() || otherReleases.size() > 0 }">
-                                    <div>
-                                        <h3>API doc.</h3>
+                                    <div class="project-api project--card col-xs-12 col-md-6"
+                                         th:if="${currentRelease.isPresent() || otherReleases.size() > 0 }">
+                                        <div>
+                                            <h3>API doc.</h3>
 
-                                        <div class="project-api--current-version" th:if="${currentRelease.isPresent()}"
-                                             th:with="release=${currentRelease.get()}">
-                                            <a th:href="${release.getApiDocUrl()}">
+                                            <div class="project-api--current-version"
+                                                 th:if="${currentRelease.isPresent()}"
+                                                 th:with="release=${currentRelease.get()}">
+                                                <a th:href="${release.getApiDocUrl()}">
                                         <span class="release-display-name"
                                               th:text="${release.getVersionDisplayName()}"></span>
-                                                <span class="release-status-group">
+                                                    <span class="release-status-group">
                                             <span class="release-status release-status-pre"
                                                   th:if="${release.isPreRelease()}">PRE</span>
                                             <span class="release-status release-status-snapshot"
@@ -196,17 +209,17 @@
                                             <span class="release-status release-status-current"
                                                   th:if="${release.isCurrent()}">CURRENT</span>
                                         </span>
-                                            </a>
-                                        </div>
+                                                </a>
+                                            </div>
 
-                                        <ul class="project-api--releases collapse row"
-                                            th:classappend="${!currentRelease.isPresent()} ? 'in'">
-                                            <li class="project-api--version col-xs-6"
-                                                th:each="release : ${otherReleases}">
-                                                <a th:href="${release.getApiDocUrl()}">
+                                            <ul class="project-api--releases collapse row"
+                                                th:classappend="${!currentRelease.isPresent()} ? 'in'">
+                                                <li class="project-api--version col-xs-6"
+                                                    th:each="release : ${otherReleases}">
+                                                    <a th:href="${release.getApiDocUrl()}">
                                             <span class="release-display-name"
                                                   th:text="${release.getVersionDisplayName()}"></span>
-                                                    <span class="release-status-group">
+                                                        <span class="release-status-group">
                                                 <span class="release-status release-status-pre"
                                                       th:if="${release.isPreRelease()}">PRE</span>
                                                 <span class="release-status release-status-snapshot"
@@ -216,15 +229,17 @@
                                                 <span class="release-status release-status-current"
                                                       th:if="${release.isCurrent()}">CURRENT</span>
                                             </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="project--documentation--version-button"
+                                                 th:if="${currentRelease.isPresent()}">
+                                                <a class="not-version" data-toggle="collapse"
+                                                   href=".project-api--releases">
+                                                    <span>other versions</span>
+                                                    <i class="icon-chevron-up" aria-hidden="true"></i>
                                                 </a>
-                                            </li>
-                                        </ul>
-                                        <div class="project--documentation--version-button"
-                                             th:if="${currentRelease.isPresent()}">
-                                            <a class="not-version" data-toggle="collapse" href=".project-api--releases">
-                                                <span>other versions</span>
-                                                <i class="icon-chevron-up" aria-hidden="true"></i>
-                                            </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -239,11 +254,29 @@
                             </div>
                             <div class="col-xs-12">
                                 <ul class="project--guides row">
-                                    <li class="project--guide col-xs-12 col-md-6" th:each="guide : ${guides}">
+                                    <li class="project--guide project--card col-xs-12 col-md-6"
+                                        th:each="guide : ${guides}">
                                         <a th:href="'/guides/gs/' + ${guide.guideId}">
                                             <h3 class="project--guide--title" th:text="${guide.getTitle()}"></h3>
                                             <div class="project--guide--subtitle"
                                                  th:text="${guide.getSubtitle()}"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane col-xs-12" id="samples">
+                        <div class="project--samples compass-section row">
+                            <h2>A few examples to try out:</h2>
+                            <div class="col-xs-12">
+                                <ul class="row">
+                                    <li class="project--sample project--card col-xs-12 col-md-6"
+                                        th:each="sample : ${selectedProject.getSampleList()}">
+                                        <a th:href="${sample.getUrl()}" target="_blank">
+                                            <h3 class="project--sample--title" th:text="${sample.getTitle()}"></h3>
+                                            <div class="project--sample--description"
+                                                 th:text="${sample.getDescription()}"></div>
                                         </a>
                                     </li>
                                 </ul>

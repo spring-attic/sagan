@@ -3,6 +3,7 @@ package sagan.projects;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,5 +61,26 @@ public class ProjectTest {
 
         assertThat(project.isTopLevelProject(), is(true));
         assertThat(childProject.isTopLevelProject(), is(false));
+    }
+
+    @Test
+    public void orderedProjectSamples() {
+        ProjectSample first = new ProjectSampleForTest("First", 1);
+        ProjectSample second = new ProjectSampleForTest("Second", 2);
+        ProjectSample third = new ProjectSampleForTest("Third", 3);
+        List<ProjectSample> samples = Arrays.asList(third, first, second);
+
+        Project project = new Project("id", "my-special-project", "my-repo-url", "my-site-url", emptyList(), false, "my-special-category");
+        project.setSampleList(samples);
+
+        assertThat(project.getSampleList(), contains(first, second, third));
+    }
+
+    public class ProjectSampleForTest extends ProjectSample {
+        public ProjectSampleForTest(String title, int displayOrder) {
+            super();
+            this.setTitle(title);
+            this.setDisplayOrder(displayOrder);
+        }
     }
 }

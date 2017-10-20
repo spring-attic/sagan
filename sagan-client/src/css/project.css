@@ -149,6 +149,94 @@
     fill: #6bb536;
 }
 
+.compass .nav > li > a > svg path.fill-white-only,
+.compass .nav > .active > a > svg path.fill-white-only,
+.compass .nav-tabs a:hover svg path.fill-white-only {
+    fill: #fff;
+}
+
+.compass .nav > li > a > svg path.stroke-only {
+    fill: transparent;
+    stroke: #34302d;
+}
+
+.compass .nav > .active > a > svg path.stroke-only,
+.compass .nav-tabs a:hover svg path.stroke-only {
+    fill: transparent;
+    stroke: #6bb536;
+}
+
+.compass .project--card {
+    margin-top: 2rem;
+    padding: 0;
+}
+
+.compass .project--card > * {
+    background-color: #fff;
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.27);
+    border: solid 1px #dfdfdf;
+    display: block;
+    height: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.compass .project--card > *:hover {
+    text-decoration: none;
+    color: black;
+    transition: .2s ease;
+}
+
+.compass .project--card > a h3 {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+}
+
+.compass .project--card > a div {
+    color: #34302d;
+}
+
+@media only screen and (min-width: 64em) {
+    .compass .project--card:nth-child(even) > * {
+        margin-left: 1rem;
+    }
+
+    .compass .project--card:nth-child(odd) > * {
+        margin-right: 1rem;
+    }
+}
+
+.compass .compass-section {
+    padding: 0 2rem 2rem 2rem;
+}
+
+.compass .compass-section h2 {
+    font-size: 20px;
+    padding-top: 2rem;
+    width: 100%;
+}
+
+.compass .compass-section + .compass-section > h2 {
+    border-top: solid 1px rgb(195, 195, 195);
+}
+
+.compass .compass-section .compass-subtitle {
+    font-size: 16px;
+    margin: 1rem 0 0 0;
+}
+
+.compass .tab-content .compass-section > .row {
+    margin-top: 2rem;
+}
+
+/* Fix layout for Safari */
+.compass .row:before, .compass .row:after {
+    display: initial;
+}
+
+/* Overview */
+
 .compass .spring-boot-config {
     border-radius: 4px;
     background-color: #fff;
@@ -235,16 +323,6 @@
 
 /* Documentation */
 
-.compass .project-reference > div,
-.compass .project-api > div {
-    background-color: #fff;
-    padding: 1.2rem;
-    margin: 0.5rem;
-    max-width: calc(100% - 1rem);
-    box-shadow: 0.5px 0.5px 1.5px 0 rgba(0, 0, 0, 0.27);
-    border: solid 0.5px #dfdfdf;
-}
-
 .compass .project--documentation a:not(.not-version) {
     font-family: "Montserrat", sans-serif;
     display: flex;
@@ -269,11 +347,6 @@
     font-weight: bold;
     font-size: 12px;
     margin-left: 10px;
-}
-
-.compass .project--documentation > .row {
-    margin-right: -1rem;
-    margin-left: -1rem;
 }
 
 .compass .project--documentation ul {
@@ -320,73 +393,26 @@
     margin-top: 0.5rem;
 }
 
-.compass .project--guide {
-    margin-top: 2rem;
-    padding: 0;
-}
-
-.compass .project--guide a {
-    background-color: #fff;
-    box-shadow: 0.5px 0.5px 1.5px 0 rgba(0, 0, 0, 0.27);
-    border: solid 0.5px #dfdfdf;
-    display: block;
-    height: 100%;
-    width: calc(100% - 1rem);
+.compass .project--guide > a {
     border-left: 4px solid #eac36d;
-    padding: 1rem;
-    box-sizing: border-box;
 }
 
-@media only screen and (min-width: 64em) {
-    .compass .project--guide:nth-child(even) a {
-        margin-left: 1rem;
-    }
-
-    .compass .project--guide:nth-child(odd) a {
-        margin-right: 1rem;
-    }
+.compass .project--guide > a:hover {
+    background-color: #eac36d;
+    border-color: #eac36d;
 }
 
-.compass .project--guide a:hover > * {
-    color: #5fa134;
+/* Samples */
+
+.compass .project--samples ul{
+    list-style: none;
 }
 
-.compass .project--guide a h3 {
-    font-size: 14px;
-    font-weight: bold;
-    font-family: "Montserrat", sans-serif;
+.compass .project--sample > a {
+    border-left: 4px solid #96c773;
 }
 
-.compass .project--guide a div {
-    color: #34302d;
-}
-
-/* Shared section */
-
-.compass .compass-section {
-    padding: 0 2rem 2rem 2rem;
-}
-
-.compass .compass-section h2 {
-    font-size: 20px;
-    padding-top: 2rem;
-    width: 100%;
-}
-
-.compass .compass-section + .compass-section > h2 {
-    border-top: solid 1px rgb(195, 195, 195);
-}
-
-.compass .compass-section .compass-subtitle {
-    font-size: 16px;
-    margin: 1rem 0 0 0;
-}
-
-.compass .tab-content .compass-section > .row {
-    margin-top: 2rem;
-}
-
-/* Fix layout for Safari */
-.compass .row:before, .compass .row:after {
-    display: initial;
+.compass .project--sample > a:hover {
+    background-color: #96c773;
+    border-color: #96c773;
 }

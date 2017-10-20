@@ -36,7 +36,7 @@ public class Project {
     private String rawOverview;
     private String renderedOverview;
 
-    @ManyToOne()
+    @ManyToOne
     private Project parentProject;
 
     @OneToMany(mappedBy = "parentProject")
@@ -46,6 +46,9 @@ public class Project {
     private List<ProjectRelease> releaseList = new ArrayList<>();
     private boolean isAggregator;
     private String stackOverflowTags;
+
+    @ElementCollection
+    private List<ProjectSample> sampleList = new ArrayList<>();
 
     @SuppressWarnings("unused")
     private Project() {
@@ -299,5 +302,14 @@ public class Project {
 
     public boolean isTopLevelProject() {
         return parentProject == null;
+    }
+
+    public List<ProjectSample> getSampleList() {
+        sampleList.sort(Comparator.comparingInt(ProjectSample::getDisplayOrder));
+        return sampleList;
+    }
+
+    public void setSampleList(List<ProjectSample> sampleList) {
+        this.sampleList = sampleList;
     }
 }
