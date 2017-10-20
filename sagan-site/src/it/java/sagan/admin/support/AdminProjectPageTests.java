@@ -1,5 +1,8 @@
 package sagan.admin.support;
 
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.support.ProjectMetadataService;
@@ -7,14 +10,8 @@ import saganx.AbstractIntegrationTests;
 
 import java.util.List;
 
-import org.junit.Test;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -283,5 +280,68 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
 
         Project project = projects.getProject("spring-data-new");
         assertThat(project.getParentProject(), nullValue());
+    }
+
+    @Test
+    public void saveProjectSamples() throws Exception {
+        MockHttpServletRequestBuilder request =
+                post("/admin/projects/spring-data-new")
+                        .param("id", "spring-data-new")
+                        .param("groupId", "org.springframework.data")
+                        .param("rawOverview", "")
+                        .param("rawBootConfig", "")
+                        .param("projectSamples[0].title", "first sample")
+                        .param("projectSamples[0].displayOrder", "42")
+                        .param("projectSamples[0].url", "http://test.com");
+
+        mockMvc.perform(request);
+
+        Project project = projects.getProject("spring-data-new");
+        assertThat(project.getProjectSamples().get(0).getTitle(), equalTo("first sample"));
+        assertThat(project.getProjectSamples().get(0).getDisplayOrder(), equalTo(42));
+    }
+
+    @Test
+    public void saveProjectNotSaveEmptySample() throws Exception {
+        MockHttpServletRequestBuilder request =
+                post("/admin/projects/spring-data-new")
+                        .param("id", "spring-data-new")
+                        .param("groupId", "org.springframework.data")
+                        .param("rawOverview", "")
+                        .param("rawBootConfig", "")
+                        .param("projectSamples[0].title", "")
+                        .param("projectSamples[0].displayOrder", "42")
+                        .param("projectSamples[0].url", "http://test.com")
+                        .param("projectSamples[1].title", "Test sample")
+                        .param("projectSamples[1].displayOrder", "56")
+                        .param("projectSamples[1].url", "");
+
+        mockMvc.perform(request);
+
+        Project project = projects.getProject("spring-data-new");
+        assertThat(project.getProjectSamples(), empty());
+    }
+
+    @Test
+    public void saveProjectDeleteSamples() throws Exception {
+        MockHttpServletRequestBuilder request =
+                post("/admin/projects/spring-data-new")
+                        .param("id", "spring-data-new")
+                        .param("groupId", "org.springframework.data")
+                        .param("rawOverview", "")
+                        .param("rawBootConfig", "")
+                        .param("projectSamples[0].title", "First Sample")
+                        .param("projectSamples[0].displayOrder", "42")
+                        .param("projectSamples[0].url", "http://first.com")
+                        .param("projectSamples[1].title", "Second Sample")
+                        .param("projectSamples[1].displayOrder", "56")
+                        .param("projectSamples[1].url", "http://second.com")
+                        .param("samplesToDelete", "42,56");
+
+        mockMvc.perform(request);
+
+        Project project = projects.getProject("spring-data-new");
+        assertThat(project.getProjectSamples(), empty());
+
     }
 }

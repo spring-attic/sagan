@@ -8,9 +8,14 @@ public class ProjectSample {
     private String title;
     private String description;
     private String url;
-    private int displayOrder;
+    private int displayOrder = Integer.MAX_VALUE;
 
     public ProjectSample() {
+    }
+
+    public ProjectSample(String title, int displayOrder) {
+        this.title = title;
+        this.setDisplayOrder(displayOrder);
     }
 
     public String getTitle() {

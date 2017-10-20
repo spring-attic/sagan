@@ -1,26 +1,22 @@
 package sagan.projects.support;
 
-import sagan.blog.PostFormat;
-import sagan.blog.support.FormatAwarePostContentRenderer;
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.support.nav.Navigation;
-import sagan.support.nav.Section;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import sagan.blog.PostFormat;
+import sagan.blog.support.FormatAwarePostContentRenderer;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.projects.ProjectSample;
+import sagan.support.nav.Navigation;
+import sagan.support.nav.Section;
+
+import javax.validation.Valid;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -32,8 +28,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
  */
 @Controller
 @RequestMapping("/admin/projects")
-@Navigation(Section.PROJECTS)
-class ProjectAdminController {
+@Navigation(Section.PROJECTS) class ProjectAdminController {
     private static final List<String> CATEGORIES =
             Collections.unmodifiableList(Arrays.asList("incubator", "active", "attic", "community"));
 
@@ -97,14 +92,23 @@ class ProjectAdminController {
         if (!releases.isEmpty()) {
             model.addAttribute("groupId", releases.get(0).getGroupId());
         }
+
+        int nextAvailableSampleDisplayOrder = project.getProjectSamples()
+                .stream()
+                .mapToInt(ProjectSample::getDisplayOrder)
+                .max()
+                .orElse(0) + 1;
+
         model.addAttribute("project", project);
         model.addAttribute("categories", CATEGORIES);
+        model.addAttribute("projectSampleDisplayOrder", nextAvailableSampleDisplayOrder);
         return "admin/project/edit";
     }
 
     @RequestMapping(value = "{id}", method = POST)
     public String save(@Valid Project project,
                        @RequestParam(defaultValue = "") List<String> releasesToDelete,
+                       @RequestParam(defaultValue = "") List<Integer> samplesToDelete,
                        @RequestParam String groupId,
                        @RequestParam(required = false) String parentId) {
         Iterator<ProjectRelease> iReleases = project.getProjectReleases().iterator();
@@ -125,6 +129,14 @@ class ProjectAdminController {
             Project parentProject = service.getProject(parentId);
             project.setParentProject(parentProject);
         }
+
+        project.setProjectSamples(
+                project.getProjectSamples()
+                        .stream()
+                        .filter(ps -> !(ps.getTitle().isEmpty() || ps.getUrl().isEmpty()))
+                        .filter(ps -> !samplesToDelete.contains(ps.getDisplayOrder()))
+                        .collect(Collectors.toList())
+        );
 
         service.save(project);
 

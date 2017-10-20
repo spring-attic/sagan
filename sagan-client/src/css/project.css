@@ -181,9 +181,13 @@
     box-sizing: border-box;
 }
 
+.compass .project--card > a:focus {
+    text-decoration: none;
+}
+
 .compass .project--card > *:hover {
     text-decoration: none;
-    color: black;
+    color: #34302d;
     transition: .2s ease;
 }
 
