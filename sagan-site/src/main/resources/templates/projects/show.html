@@ -45,7 +45,8 @@
                 </ul>
             </li>
         </ul>
-        <article class="col-xs-12 col-md-9">
+        <article class="col-xs-12 col-md-9"
+            th:with="hasSamples=${selectedProject.projectSamples.size() > 0},hasDocumentation=${currentRelease.isPresent() || otherReleases.size() > 0 || guides.size() > 0}">
             <div class="box">
                 <div class="row">
                     <div class="project--header col-xs-12">
@@ -70,7 +71,7 @@
                                 </g>
                             </svg>
                         </a></li>
-                        <li class="col-xs-3"><a href="#learn" data-toggle="tab">
+                        <li th:if="${hasDocumentation}" class="col-xs-3"><a href="#learn" data-toggle="tab">
                             <span class="hide-sm">Learn</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="19" viewBox="0 0 15 19">
                                 <g>
@@ -78,7 +79,7 @@
                                 </g>
                             </svg>
                         </a></li>
-                        <li class="col-xs-3"><a href="#samples" data-toggle="tab">
+                        <li th:if="${hasSamples}" class="col-xs-3"><a href="#samples" data-toggle="tab">
                             <span class="hide-sm">Samples</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="19" viewBox="0 0 15 19">
                                 <g>
@@ -121,8 +122,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane col-xs-12" id="learn">
-                        <div class="project--documentation compass-section row">
+                    <div id="learn" th:if="${hasDocumentation}" class="tab-pane col-xs-12">
+                        <div th:if="${currentRelease.isPresent() || otherReleases.size() > 0}" class="project--documentation compass-section row">
                             <h2>Documentation</h2>
                             <div class="project--documentation--subtitle compass-subtitle">
                                 Each Spring project has its own; it explains in great details how you can use project
@@ -131,8 +132,7 @@
 
                             <div class="col-xs-12">
                                 <div class="row">
-                                    <div class="project-reference project--card col-xs-12 col-md-6"
-                                         th:if="${currentRelease.isPresent() || otherReleases.size() > 0 }">
+                                    <div class="project-reference project--card col-xs-12 col-md-6">
 
                                         <div>
                                             <h3>Reference doc.</h3>
@@ -246,7 +246,7 @@
                             </div>
                         </div>
 
-                        <div class="project--guides compass-section row">
+                        <div th:if="${guides.size() > 0}" class="project--guides compass-section row">
                             <h2 class="project--guides--title">Guides</h2>
                             <div class="project--guides--subtitle compass-subtitle">
                                 Designed to be completed in 15-30 minutes, a guide provides quick, hands-on instructions
@@ -266,7 +266,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane col-xs-12" id="samples">
+                    <div id="samples" th:if="${hasSamples}" class="tab-pane col-xs-12">
                         <div class="project--samples compass-section row">
                             <h2>A few examples to try out:</h2>
                             <div class="col-xs-12">

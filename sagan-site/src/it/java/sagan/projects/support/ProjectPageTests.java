@@ -362,6 +362,18 @@ public class ProjectPageTests extends AbstractIntegrationTests {
         assertThat(sample.attr("href"), is("https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-simple"));
     }
 
+    @Test
+    public void onlyOverviewSectionWhenEmpty() throws Exception {
+        Document document = documentForUrlPath("/project/spring-xd");
+
+        Elements tabs = document.select(".nav.nav-tabs a[data-toggle=tab]");
+        assertThat(tabs, hasSize(1));
+
+        assertThat(document.select("#overview"), hasSize(1));
+        assertThat(document.select("#learn"), hasSize(0));
+        assertThat(document.select("#samples"), hasSize(0));
+    }
+
     private Document documentForUrlPath(String urlPath) throws Exception {
         ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get(urlPath));
         return Jsoup.parse(result.andReturn().getResponse().getContentAsString());
