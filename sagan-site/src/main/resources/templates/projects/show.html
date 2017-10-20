@@ -32,7 +32,7 @@
                 <div>
                     <a th:href="${proj.getSiteUrl()}" th:text="${proj.getName()}"></a>
                     <i th:if="${isChildrenOpen}" class="icon-chevron-up" aria-hidden="true"></i>
-                    <a th:if="${!isChildrenOpen}" th:href="${proj.getSiteUrl()}"><i class="icon-chevron-down"
+                    <a th:if="${!isChildrenOpen and proj.getChildProjectList().size() > 0}" th:href="${proj.getSiteUrl()}"><i class="icon-chevron-down"
                                                                                     aria-hidden="true"></i></a>
                 </div>
                 <ul class="sidebar_children"
