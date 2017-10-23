@@ -115,12 +115,6 @@ public class RewriteTests {
     }
 
     @Test
-    public void projectPagesAreRedirected() throws ServletException, IOException, URISyntaxException {
-        validateTemporaryRedirect("http://spring.io/projects/spring-data", "http://projects.spring.io/spring-data");
-        validateTemporaryRedirect("http://spring.io/spring-data", "http://projects.spring.io/spring-data");
-    }
-
-    @Test
     public void ggtsWelcomePageIsRedirected() throws Exception {
         validateTemporaryRedirect("http://spring.io/tools/ggts/welcome", "http://grails.org/products/ggts/welcome");
     }
