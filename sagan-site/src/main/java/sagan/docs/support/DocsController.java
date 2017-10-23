@@ -20,7 +20,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
  */
 @Controller
 @RequestMapping("/docs")
-@Navigation(Section.DOCS)
 class DocsController {
 
     private ProjectMetadataService projectService;
