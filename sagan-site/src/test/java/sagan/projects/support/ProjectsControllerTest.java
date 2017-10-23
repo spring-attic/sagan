@@ -25,7 +25,7 @@ import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
 import static sagan.projects.ProjectRelease.ReleaseStatus.SNAPSHOT;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProjectControllerTest {
+public class ProjectsControllerTest {
     @Mock
     private ProjectMetadataService projectMetadataService;
 
@@ -57,7 +57,7 @@ public class ProjectControllerTest {
                     false, "project", "spring-cool,spring-awesome", "");
 
     private ExtendedModelMap model = new ExtendedModelMap();
-    private ProjectController controller;
+    private ProjectsController controller;
     private String viewName;
 
     Topical topical = new Topical();
@@ -80,7 +80,7 @@ public class ProjectControllerTest {
         List<ProjectGuidesRepository> repositoryList =
                 asList(projectGuidesRepo, projectTutorialRepo, projectTopicalRepo);
 
-        controller = new ProjectController(projectMetadataService, repositoryList);
+        controller = new ProjectsController(projectMetadataService, repositoryList);
         viewName = controller.showProject(model, "spring-framework");
     }
 
@@ -143,4 +143,16 @@ public class ProjectControllerTest {
         assertThat(currentRelease, is(Optional.empty()));
         assertThat(otherReleases, hasSize(0));
     }
+
+	@Test
+	public void listProjects_providesProjectMetadataServiceInModel() {
+		controller.listProjects(model);
+		assertThat((ProjectMetadataService) model.get("projectMetadata"), equalTo(projectMetadataService));
+	}
+
+	@Test
+	public void listProjectReleases_providesReleaseMetadataInJsonPCallback() {
+		controller.listProjects(model);
+		assertThat((ProjectMetadataService) model.get("projectMetadata"), equalTo(projectMetadataService));
+	}
 }
