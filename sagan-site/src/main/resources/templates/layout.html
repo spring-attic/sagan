@@ -47,14 +47,11 @@
             <a class="spring-logo" th:href="@{/}" href="/"><span></span></a>
           </div>
           <ul class="nav pull-right">
-            <li th:class="${@uih.navClass(navSection?:'','docs')}">
-              <a th:href="@{/docs}" >Docs</a>
+            <li th:class="${@uih.navClass(navSection?:'','projects')}">
+              <a th:href="@{/projects}" >Projects</a>
             </li>
             <li th:class="${@uih.navClass(navSection?:'','guides')}">
               <a th:href="@{/guides}" >Guides</a>
-            </li>
-            <li th:class="${@uih.navClass(navSection?:'','projects')}">
-              <a th:href="@{/projects}" >Projects</a>
             </li>
             <li th:class="${@uih.navClass(navSection?:'','blog')}">
               <a th:href="@{/blog}" >Blog</a>
