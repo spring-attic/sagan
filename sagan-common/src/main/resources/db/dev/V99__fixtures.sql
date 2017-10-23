@@ -9,8 +9,6 @@ insert into project_repository values('spring-snapshots','Spring Snapshots','htt
 -- Projects
 
 insert into project values('platform','Spring IO Platform','http://github.com/spring-io/platform','active','http://platform.spring.io/platform/',false,'spring-io', '', '', '', '', NULL);
-insert into project values('reactor','Reactor Project','https://github.com/reactor/reactor','active','https://github.com/reactor/reactor',false,NULL, '', '', '', '', NULL);
-insert into project values('reactor-core','Reactor Core','https://github.com/reactor/reactor-core','active','https://projectreactor.io',false,'reactor-core,project-reactor', '', '', '', '', NULL);
 insert into project values('spring-amqp','Spring AMQP','http://github.com/spring-projects/spring-amqp','active','http://projects.spring.io/spring-amqp',false,'spring-amqp', '', '', '', '', NULL);
 insert into project values('spring-android','Spring for Android','http://github.com/spring-projects/spring-android','active','http://projects.spring.io/spring-android',false,'spring-android', '', '', '', '', NULL);
 insert into project values('spring-batch','Spring Batch','http://github.com/spring-projects/spring-batch','active','http://projects.spring.io/spring-batch',false,'spring-batch', '', '', '', '', NULL);
