@@ -53,17 +53,6 @@ public class UnderstandingDocsTests {
         assertThat(guides.get(1).getContent(), equalTo("Understanding: rest"));
     }
 
-    @Test
-    public void testGetsSidebarForGuide() throws Exception {
-        given(org.getMarkdownFileAsHtml(matches(".*foo.*SIDEBAR.*"))).willReturn("foo sidebar");
-        given(org.getMarkdownFileAsHtml(matches(".*rest.*SIDEBAR.*"))).willReturn("rest sidebar");
-
-        List<UnderstandingDoc> guides = understandingGuidesService.findAll();
-
-        assertThat(guides.get(0).getSidebar(), equalTo("foo sidebar"));
-        assertThat(guides.get(1).getSidebar(), equalTo("rest sidebar"));
-    }
-
     private void addRepoContent(ArrayList<RepoContent> repoContents, String name, String path, String type) {
         RepoContent repoContent = new RepoContent();
         repoContent.setName(name);

@@ -1,15 +1,20 @@
 package sagan.guides.support;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import sagan.guides.GettingStartedGuide;
+import sagan.projects.Project;
+import sagan.projects.support.ProjectMetadataService;
+import sagan.support.nav.Navigation;
+import sagan.support.nav.Section;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sagan.guides.GettingStartedGuide;
-import sagan.support.nav.Navigation;
-import sagan.support.nav.Section;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
@@ -25,17 +30,24 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 @RequestMapping(value = "/guides/gs", method = { GET, HEAD })
 class GettingStartedGuideController {
 
-    private GettingStartedGuides guides;
+    private final GettingStartedGuides guides;
+
+	private final ProjectMetadataService projectMetadataService;
 
     @Autowired
-    public GettingStartedGuideController(GettingStartedGuides guides) {
+    public GettingStartedGuideController(GettingStartedGuides guides, ProjectMetadataService projectMetadataService) {
         this.guides = guides;
+        this.projectMetadataService = projectMetadataService;
     }
 
     @RequestMapping("/{guide}")
     public String viewGuide(@PathVariable String guide, Model model) {
         GettingStartedGuide gsGuide = guides.find(guide);
+        List<Project> projects = gsGuide.getProjects()
+				.stream().map(name -> projectMetadataService.getProject(name))
+				.collect(Collectors.toList());
         model.addAttribute("guide", gsGuide);
+		model.addAttribute("projects", projects);
         model.addAttribute("description", "this guide is designed to get you productive as quickly as " +
                 "possible and using the latest Spring project releases and techniques as recommended by the Spring team");
         return "guides/gs/guide";

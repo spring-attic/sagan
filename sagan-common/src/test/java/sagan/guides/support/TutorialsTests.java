@@ -44,7 +44,7 @@ public class TutorialsTests {
         repo.setDescription("Rest tutorial :: Learn some rest stuff");
         readme = new Readme();
         readme.setName("README.adoc");
-        tutorial = new AsciidocGuide("REST Tutorial", new HashSet<>(), new HashSet<>(), "Table of C", new HashMap<>());
+        tutorial = new AsciidocGuide("REST Tutorial", "Table of C");
     }
 
     @Test

@@ -37,14 +37,12 @@ public abstract class PrefixDocRepository<T extends AbstractGuide> implements Do
     private static final String README_PATH_ASC = REPO_BASE_PATH + "/zipball";
 
     private final GuideOrganization org;
-    private final ProjectMetadataService projectMetadataService;
     private final AsciidoctorUtils asciidoctorUtils = new AsciidoctorUtils();
 
     private String prefix;
 
     public PrefixDocRepository(GuideOrganization org, ProjectMetadataService projectMetadataService, String prefix) {
         this.org = org;
-        this.projectMetadataService = projectMetadataService;
         this.prefix = prefix;
     }
 
@@ -99,7 +97,7 @@ public abstract class PrefixDocRepository<T extends AbstractGuide> implements Do
         AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org.getName(),
                 repoName));
 		guide.setContent(asciidocGuide.getContent());
-		guide.setSidebar(asciidoctorUtils.generateDynamicSidebar(projectMetadataService, asciidocGuide));
+		guide.setTableOfContents(asciidocGuide.getTableOfContents());
         return guide;
     }
 

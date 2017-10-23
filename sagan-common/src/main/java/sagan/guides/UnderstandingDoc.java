@@ -4,7 +4,7 @@ public class UnderstandingDoc implements UnderstandingMetadata, DocumentContent 
 
     private String subject;
     private String content;
-    private String sidebar;
+	private String tableOfContents;
 
     // only used for JSON serialization
     public UnderstandingDoc() {
@@ -14,10 +14,9 @@ public class UnderstandingDoc implements UnderstandingMetadata, DocumentContent 
         this.subject = subject;
     }
 
-    public UnderstandingDoc(String subject, final String content, final String sidebar) {
+    public UnderstandingDoc(String subject, final String content) {
         this.subject = subject;
         this.content = content;
-        this.sidebar = sidebar;
     }
 
     @Override
@@ -34,13 +33,12 @@ public class UnderstandingDoc implements UnderstandingMetadata, DocumentContent 
         this.content = content;
     }
 
-    @Override
-    public String getSidebar() {
-        return sidebar;
-    }
+	@Override
+	public String getTableOfContents() {
+		return this.tableOfContents;
+	}
 
-    public void setSidebar(String sidebar) {
-        this.sidebar = sidebar;
-    }
-
+	public void setTableOfContents(String tableOfContents) {
+		this.tableOfContents = tableOfContents;
+	}
 }
