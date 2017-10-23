@@ -19,11 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultHandler;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.tomakehurst.wiremock.client.WireMock;
 
 import static junit.framework.TestCase.fail;
 import static org.hamcrest.CoreMatchers.*;
@@ -31,6 +32,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.cloud.contract.wiremock.restdocs.WireMockRestDocs.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import saganx.AbstractIntegrationTests;
@@ -47,7 +49,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
     @Autowired
     private EntityManager entityManager;
 
-    private RestDocumentationResultHandler docs(String name) {
+    private ResultHandler docs(String name) {
         return document(name,
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()));
@@ -61,7 +63,9 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
                                 .get("/project_metadata/spring-framework"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("application/json"))
-                .andDo(docs("project"));
+                .andDo(verify().wiremock(
+                        WireMock.get(WireMock.urlPathMatching("/project_metadata/spring-framework")).atPriority(1)
+                        ).stub("project"));
     }
 
     @Test
@@ -72,7 +76,9 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
                                 .get("/project_metadata/spring-framework?callback=a_function_name"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("application/javascript"))
-                .andDo(docs("callback"));
+                .andDo(verify().wiremock(WireMock.get(WireMock.urlPathMatching("/project_metadata/spring-framework"))
+                        .withQueryParam("callback", WireMock.matching("a_function_name")).atPriority(5)
+                        ).stub("callback"));
     }
 
     @Test

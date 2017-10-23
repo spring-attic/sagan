@@ -47,7 +47,7 @@ configure(javaProjects) {
                             'elasticsearch.version': '1.7.1' // see io.searchbox:jest
                     ])
                 }
-                mavenBom("org.springframework.cloud:spring-cloud-dependencies:Camden.SR7")
+                mavenBom("org.springframework.cloud:spring-cloud-dependencies:Dalston.SR3")
             }
         }
     }
