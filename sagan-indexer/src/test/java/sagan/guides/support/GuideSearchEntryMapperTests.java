@@ -21,7 +21,6 @@ public class GuideSearchEntryMapperTests {
         guide = new GettingStartedGuide(
                 new DefaultGuideMetadata("my-org", "xyz", "gs-xyz", "Guide XYZ Title::Guide XYZ Subtitle"));
         guide.setContent("Some Guide Content");
-        guide.setSidebar("Some Sidebar Content");
         searchEntry = guideMapper.map(guide);
     }
 

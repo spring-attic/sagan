@@ -1,35 +1,29 @@
 package sagan.guides.support;
 
-import sagan.support.github.GitHubClient;
-import sagan.support.github.Readme;
-import sagan.support.github.RepoContent;
-
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.apache.commons.lang3.text.WordUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Attributes;
 import org.asciidoctor.OptionsBuilder;
 import org.asciidoctor.SafeMode;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.yaml.snakeyaml.Yaml;
+import sagan.support.github.GitHubClient;
+import sagan.support.github.Readme;
+import sagan.support.github.RepoContent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,9 +32,6 @@ import org.springframework.social.github.api.GitHubRepo;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StreamUtils;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Repository representing the GitHub organization (or user account) that contains guide
@@ -57,19 +48,17 @@ class GuideOrganization {
     private final String name;
     private final ObjectMapper objectMapper;
     private final Asciidoctor asciidoctor;
-    private final Yaml yaml = new Yaml();
 
     @Autowired
     public GuideOrganization(@Value("${github.guides.owner.name}") String name,
-                             @Value("${github.guides.owner.type}") String type,
-                             GitHubClient gitHub,
-                             ObjectMapper objectMapper, Asciidoctor asciidoctor) {
+			@Value("${github.guides.owner.type}") String type,
+			GitHubClient gitHub, ObjectMapper objectMapper, Asciidoctor asciidoctor) {
         this.name = name;
         this.type = type;
         this.gitHub = gitHub;
         this.objectMapper = objectMapper;
         this.asciidoctor = asciidoctor;
-    }
+	}
 
     /**
      * The name of the GitHub organization or user that 'owns' guides.
@@ -90,11 +79,7 @@ class GuideOrganization {
 
     public AsciidocGuide getAsciidocGuide(String path) {
         final String htmlContent;
-        final Map<String, List<String>> frontMatter;
-        final HashSet<String> tags;
-        final HashSet<String> projects;
         final String tableOfContents;
-        final Map<String, String> understandingDocs;
 
         byte[] download = gitHub.sendRequestForDownload(path);
 
@@ -142,22 +127,8 @@ class GuideOrganization {
             Document doc = Jsoup.parse(writer.toString());
 
             htmlContent = doc.select("#content").html();
-            frontMatter = parseFrontMatter(readmeAdocFile);
-
-            if (frontMatter.containsKey("tags")) {
-                tags = new HashSet<>(frontMatter.get("tags"));
-            } else {
-                tags = new HashSet<>(Arrays.asList(new String[0]));
-            }
-
-            if (frontMatter.containsKey("projects")) {
-                projects = new HashSet<>(frontMatter.get("projects"));
-            } else {
-                projects = new HashSet<>(Arrays.asList(new String[0]));
-            }
 
             tableOfContents = findTableOfContents(doc);
-            understandingDocs = findUnderstandingLinks(doc);
 
             // Delete the zipball and the unpacked content
             FileSystemUtils.deleteRecursively(zipball);
@@ -166,33 +137,7 @@ class GuideOrganization {
             throw new IllegalStateException("Could not create temp file for source: " + tempFilePrefix);
         }
 
-        return new AsciidocGuide(htmlContent, tags, projects, tableOfContents, understandingDocs);
-    }
-
-    /**
-     * Parse front-matter
-     *
-     * @param readme asciidoctor file
-     * @return set of categories
-     * @throws IOException
-     */
-    @SuppressWarnings("unchecked")
-    private Map<String, List<String>> parseFrontMatter(File readme) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(readme))) {
-            String frontMatter = "";
-            String line = reader.readLine();
-            if (line.startsWith("---")) {
-                while ((line = reader.readLine()) != null) {
-                    if (line.startsWith("---")) {
-                        break;
-                    } else {
-                        frontMatter += line + "\n";
-                    }
-                }
-                return (Map<String, List<String>>) yaml.load(frontMatter);
-            }
-        }
-        return new HashMap<>();
+        return new AsciidocGuide(htmlContent, tableOfContents);
     }
 
     /**
@@ -212,24 +157,6 @@ class GuideOrganization {
                 .forEach(href -> href.parent().remove()));
 
         return toc.toString();
-    }
-
-    /**
-     * Scan document for links to understanding docs
-     *
-     * @param doc
-     * @return map of understanding links in the form of (href -> display text)
-     */
-    private Map<String, String> findUnderstandingLinks(Document doc) {
-        Map<String, String> understandingDocs = new HashMap<>();
-        Elements elements = doc.select("a[href]");
-        for (Element element : elements) {
-            String href = element.attr("href");
-            if (!href.equals("") && href.toLowerCase().contains("understanding")) {
-                understandingDocs.put(href, WordUtils.capitalize(element.text()));
-            }
-        }
-        return understandingDocs;
     }
 
     public String getMarkdownFileAsHtml(String path) {

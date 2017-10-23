@@ -21,9 +21,6 @@ public class UnderstandingDocIntegrationTests extends AbstractIntegrationTests {
         String readmeHtml = Fixtures.load("/fixtures/understanding/amqp/README.html");
         stubRestClient.putResponse("/repos/spring-guides/understanding/contents/amqp/README.md", readmeHtml);
 
-        String sidebarHtml = Fixtures.load("/fixtures/understanding/amqp/SIDEBAR.html");
-        stubRestClient.putResponse("/repos/spring-guides/understanding/contents/amqp/SIDEBAR.md", sidebarHtml);
-
         MvcResult response = mockMvc.perform(get("/understanding/AMqp"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
@@ -32,7 +29,6 @@ public class UnderstandingDocIntegrationTests extends AbstractIntegrationTests {
         Document html = Jsoup.parse(response.getResponse().getContentAsString());
         assertThat(html.select("title").text(), containsString("Understanding AMqp"));
         assertThat(html.select("h1").text(), containsString("Understanding: AMQP"));
-        assertThat(html.select("aside").text(), containsString("Messaging with RabbitMQ"));
     }
 
     @Test

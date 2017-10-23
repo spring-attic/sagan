@@ -22,7 +22,7 @@ public class ModelSerializationTests {
 
         GettingStartedGuide guide = new GettingStartedGuide(new DefaultGuideMetadata("org", "guide", "repo", "description"));
         guide.setContent("main content");
-        guide.setSidebar("sidebar content");
+        guide.setTableOfContents("TOC");
 
         String serialized = mapper.writeValueAsString(guide);
         GettingStartedGuide unserialized = mapper.readValue(serialized, GettingStartedGuide.class);
@@ -35,7 +35,7 @@ public class ModelSerializationTests {
 
         Tutorial tutorial = new Tutorial(new DefaultGuideMetadata("org", "guide", "repo", "description"));
         tutorial.setContent("main content");
-        tutorial.setSidebar("sidebar content");
+		tutorial.setTableOfContents("TOC");
 
         String serialized = mapper.writeValueAsString(tutorial);
         Tutorial unserialized = mapper.readValue(serialized, Tutorial.class);
@@ -46,7 +46,7 @@ public class ModelSerializationTests {
     @Test
     public void testUnderstandingSerialization() throws Exception {
 
-        UnderstandingDoc doc = new UnderstandingDoc("subject", "content", "sidebar");
+        UnderstandingDoc doc = new UnderstandingDoc("subject", "content");
         String serialized = mapper.writeValueAsString(doc);
         UnderstandingDoc unserialized = mapper.readValue(serialized, UnderstandingDoc.class);
         Assert.assertNotNull(unserialized);

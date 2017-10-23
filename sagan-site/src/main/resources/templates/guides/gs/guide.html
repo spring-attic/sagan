@@ -64,7 +64,20 @@
                 </div>
               </div>
             </div>
-            <div th:utext="${guide.sidebar}">Container</div>
+            <div class="right-pane-widget--container" th:if="${not #lists.isEmpty(projects)}">
+              <div class="related_resources">
+                <h3><a name="projects" class="anchor" href="#projects"></a>Projects</h3>
+                  <ul>
+                    <li th:each="project : ${projects}"><a th:href="${project.siteUrl}" th:text="${project.name}">Spring Framework</a></li>
+                  </ul>
+              </div>
+            </div>
+              <div class="right-pane-widget--container">
+                  <div>
+                      <h3><a name='table-of-contents' class='anchor' href='#table-of-contents'></a>Table of contents</h3>
+                      <div th:utext="${guide.tableOfContents}">TOC Content</div>
+                  </div>
+              </div>
           </aside>
         </div>
       </main>

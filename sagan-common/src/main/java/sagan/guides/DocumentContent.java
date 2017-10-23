@@ -10,6 +10,6 @@ public interface DocumentContent {
 
     String getContent();
 
-    String getSidebar();
+    String getTableOfContents();
 
 }

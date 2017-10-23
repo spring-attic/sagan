@@ -9,7 +9,7 @@ public abstract class AbstractGuide implements Guide {
 
     private GuideMetadata metadata;
     private String content;
-    private String sidebar;
+    private String tableOfContents;
     private String typeLabel;
 
     public AbstractGuide() {
@@ -38,13 +38,13 @@ public abstract class AbstractGuide implements Guide {
     }
 
     @Override
-    public String getSidebar() {
-        return sidebar;
+    public String getTableOfContents() {
+        return this.tableOfContents;
     }
 
-    public void setSidebar(String sidebar) {
-        Assert.notNull(sidebar, "Expected sidebar content to be populated");
-        this.sidebar = sidebar;
+    public void setTableOfContents(String tableOfContents) {
+        Assert.notNull(tableOfContents, "Expected tableOfContents content to be populated");
+        this.tableOfContents = tableOfContents;
     }
 
     public String getTypeLabel() {
@@ -130,8 +130,4 @@ public abstract class AbstractGuide implements Guide {
         return metadata.getCiLatestUrl();
     }
 
-    @JsonIgnore
-    public Set<String> getProjectIds() {
-        return metadata.getProjects();
-    }
 }

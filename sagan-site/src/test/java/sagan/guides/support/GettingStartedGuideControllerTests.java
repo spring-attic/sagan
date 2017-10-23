@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import sagan.projects.support.ProjectMetadataService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ExtendedModelMap;
@@ -24,6 +25,8 @@ public class GettingStartedGuideControllerTests {
 
     @Mock
     private GettingStartedGuides guides;
+    @Mock
+	private ProjectMetadataService projectMetadataService;
     private GettingStartedGuide guide;
     private ExtendedModelMap model;
     private GettingStartedGuideController controller;
@@ -31,7 +34,7 @@ public class GettingStartedGuideControllerTests {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        controller = new GettingStartedGuideController(guides);
+        controller = new GettingStartedGuideController(guides, projectMetadataService);
         model = new ExtendedModelMap();
         guide = new GettingStartedGuide(
                 new DefaultGuideMetadata("my-org", "rest-service", "gs-rest-service", ""));
@@ -39,6 +42,7 @@ public class GettingStartedGuideControllerTests {
 
     @Test
     public void viewGuide() {
+		given(guides.find("rest-service")).willReturn(guide);
         String view = controller.viewGuide("rest-service", model);
         assertThat(view, is("guides/gs/guide"));
     }

@@ -75,8 +75,6 @@ public class UnderstandingDocs implements DocRepository<UnderstandingDoc, Unders
         try {
             document.setContent(org.getMarkdownFileAsHtml(String.format(CONTENT_PATH, org.getName(), repoName,
                     lcSubject)));
-            document.setSidebar(org.getMarkdownFileAsHtml(String.format(SIDEBAR_PATH, org.getName(), repoName,
-                    lcSubject)));
         } catch (RestClientException ex) {
             String msg = String.format("No understanding doc found for subject '%s'", lcSubject);
             throw new ResourceNotFoundException(msg, ex);

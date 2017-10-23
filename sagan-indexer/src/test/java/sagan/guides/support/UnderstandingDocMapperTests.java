@@ -18,8 +18,7 @@ public class UnderstandingDocMapperTests {
 
     private final UnderstandingDocMapper mapper = new UnderstandingDocMapper();
     private final UnderstandingDoc doc = new UnderstandingDoc("foo",
-            "<h1>Understanding: foo</h1><p>content</p>",
-            "<p>sidebar</p>");
+            "<h1>Understanding: foo</h1><p>content</p>");
 
     private final GuideDoc entry = mapper.map(doc);
 
@@ -41,7 +40,7 @@ public class UnderstandingDocMapperTests {
     @Test
     public void summaryIsFirst500Characters() throws Exception {
         String content = Fixtures.load("/fixtures/understanding/amqp/README.html");
-        UnderstandingDoc guide = new UnderstandingDoc("foo", content, "sidebar");
+        UnderstandingDoc guide = new UnderstandingDoc("foo", content);
         SearchEntry entry = mapper.map(guide);
         assertThat(entry.getSummary().length(), equalTo(500));
     }
