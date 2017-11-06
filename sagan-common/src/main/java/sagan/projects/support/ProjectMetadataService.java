@@ -19,7 +19,7 @@ public class ProjectMetadataService {
     }
 
     public List<Project> getProjectsForCategory(String category) {
-        return repository.findByCategory(category);
+        return repository.findByCategoryOrderByNameAsc(category);
     }
 
     public List<Project> getProjects() {

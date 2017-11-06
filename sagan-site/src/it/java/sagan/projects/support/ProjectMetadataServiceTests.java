@@ -1,13 +1,12 @@
 package sagan.projects.support;
 
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import saganx.AbstractIntegrationTests;
-
 import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import saganx.AbstractIntegrationTests;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -76,19 +75,6 @@ public class ProjectMetadataServiceTests extends AbstractIntegrationTests {
                 equalTo("http://docs.spring.io/spring/docs/current/javadoc-api/"));
         assertThat(docVersions.get(4).getApiDocUrl(),
                 equalTo("http://docs.spring.io/spring/docs/4.2.9.RELEASE/javadoc-api/"));
-    }
-
-    @Test
-    public void nonAggregatorProject() throws IOException {
-        Project project = service.getProject("spring-security");
-        assertThat(project.isAggregator(), equalTo(false));
-    }
-
-    @Test
-    public void aggregatorProject() throws IOException {
-        Project project = service.getProject("spring-data");
-        assertThat(project.isAggregator(), equalTo(true));
-        assertThat(project.getId(), equalTo("spring-data"));
     }
 
     @Test

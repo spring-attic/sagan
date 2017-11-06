@@ -44,7 +44,6 @@ public class Project {
 
     @ElementCollection
     private List<ProjectRelease> releaseList = new ArrayList<>();
-    private boolean isAggregator;
     private String stackOverflowTags;
 
     @ElementCollection
@@ -61,7 +60,6 @@ public class Project {
         this.repoUrl = repoUrl;
         this.siteUrl = siteUrl;
         this.releaseList = releaseList;
-        this.isAggregator = isAggregator;
         this.category = category;
     }
 
@@ -104,10 +102,6 @@ public class Project {
         this.releaseList = releaseList;
     }
 
-    public void setAggregator(boolean isAggregator) {
-        this.isAggregator = isAggregator;
-    }
-
     public String getName() {
         return name;
     }
@@ -134,10 +128,6 @@ public class Project {
 
     public boolean hasSite() {
         return !siteUrl.isEmpty();
-    }
-
-    public boolean isAggregator() {
-        return isAggregator;
     }
 
     public String getStackOverflowTags() {
@@ -234,7 +224,6 @@ public class Project {
                 ", repoUrl='" + repoUrl + '\'' +
                 ", siteUrl='" + siteUrl + '\'' +
                 ", releaseList=" + releaseList +
-                ", isAggregator=" + isAggregator +
                 ", stackOverflowTags=" + stackOverflowTags +
                 '}';
     }

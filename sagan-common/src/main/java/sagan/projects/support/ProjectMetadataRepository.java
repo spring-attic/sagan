@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProjectMetadataRepository extends JpaRepository<Project, String> {
-    List<Project> findByCategory(String category);
+    List<Project> findByCategoryOrderByNameAsc(String category);
 
     @Query("SELECT DISTINCT p FROM Project p JOIN FETCH p.releaseList")
     List<Project> findAllWithReleases(Sort sort);

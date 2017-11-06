@@ -1,19 +1,18 @@
 package sagan.docs.support;
 
-import saganx.AbstractIntegrationTests;
-
-import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
+import saganx.AbstractIntegrationTests;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ViewDocsTests extends AbstractIntegrationTests {
 
@@ -47,16 +46,6 @@ public class ViewDocsTests extends AbstractIntegrationTests {
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("Spring Security")))
                 .andExpect(content().string(containsString("http://docs.spring.io/spring/docs")));
-    }
-
-    @Test
-    public void refDocsdoesNotContainAggregatorProjects() throws Exception {
-        mockMvc
-                .perform(get("/docs/reference"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("text/html"))
-                .andExpect(content().string(CoreMatchers.containsString(">Spring Data JPA<")))
-                .andExpect(content().string(not(CoreMatchers.containsString(">Spring Data<"))));
     }
 
 }
