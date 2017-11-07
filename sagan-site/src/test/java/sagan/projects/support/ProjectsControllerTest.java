@@ -45,16 +45,14 @@ public class ProjectsControllerTest {
     private ProjectRelease snapshotRelease = new ProjectRelease("1.7.7.SNAPSHOT", SNAPSHOT, false, "", "", "", "");
     private List<ProjectRelease> releases = asList(currentRelease, anotherCurrentRelease, snapshotRelease);
     Project project =
-            new Project("spring-framework", "spring", "http://example.com", "/project/spring-framework", releases,
-                    false, "project", "spring-cool,spring-awesome", "");
+            new Project("spring-framework", "spring", "http://example.com", "/project/spring-framework", 0, releases,
+					"project", "spring-cool,spring-awesome", "");
     Project projectUmbrella =
             new Project("spring-parapluie", "Spring Parapluie", "http://example.com", "/project/spring-parapluie",
-                    releases,
-                    false, "project", "spring-cool,spring-awesome", "");
+                    1, releases, "project", "spring-cool,spring-awesome", "");
     Project projectUmbrellaChild =
             new Project("spring-parapluie-child", "Spring Parapluie Child", "http://example.com",
-                    "/project/spring-parapluie-child", releases,
-                    false, "project", "spring-cool,spring-awesome", "");
+                    "/project/spring-parapluie-child", 1, releases, "project", "spring-cool,spring-awesome", "");
 
     private ExtendedModelMap model = new ExtendedModelMap();
     private ProjectsController controller;
@@ -74,8 +72,8 @@ public class ProjectsControllerTest {
         when(projectGuidesRepo.findByProject(project)).thenReturn(asList(guide));
 
         when(projectMetadataService.getProject("spring-framework")).thenReturn(project);
-        when(projectMetadataService.getProjectsForCategory("active"))
-                .thenReturn(asList(project, projectUmbrellaChild, projectUmbrella));
+        when(projectMetadataService.getActiveTopLevelProjects())
+                .thenReturn(asList(project, projectUmbrella));
 
         List<ProjectGuidesRepository> repositoryList =
                 asList(projectGuidesRepo, projectTutorialRepo, projectTopicalRepo);
@@ -130,8 +128,8 @@ public class ProjectsControllerTest {
     public void showProjectDoesNotExplodeWhenThereAreNoReleases() {
         Project projectWithoutReleases =
                 new Project("spring-spline-reticulator", "spring-spline-reticulator", "http://example.com",
-                        "/project/spring-spline-reticulator", asList(),
-                        false, "project", "spring-cool,spring-awesome", "");
+                        "/project/spring-spline-reticulator", 0, asList(),
+                        "project", "spring-cool,spring-awesome", "");
         when(projectMetadataService.getProject("spring-spline-reticulator")).thenReturn(projectWithoutReleases);
 
         model = new ExtendedModelMap();

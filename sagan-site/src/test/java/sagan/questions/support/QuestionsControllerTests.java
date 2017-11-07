@@ -48,13 +48,13 @@ public class QuestionsControllerTests {
         given(stackOverflow.searchForQuestionsTagged("spring")).willReturn(Arrays.asList(q1, q2));
 
         given(projectMetadataService.getProjects()).willReturn(Arrays.asList(
-                new Project("spring-framework", "Spring Framework", null, null,
-                        Collections.emptyList(), false, "active", "spring-core, spring-framework, spring", ""),
-                new Project("spring-data", "Spring Data", null, null,
-                        Collections.emptyList(), true, "active", "spring-data,spring-data-mongodb", ""),
-                new Project("spring-data-mongodb", "Spring Data MongoDB", null, null, Collections.emptyList(), false, "active", "", ""),
-                new Project("spring-data-graph", "Spring Data Graph", null, null, Collections.emptyList(), false, "attic", "", ""),
-                new Project("spring-scala", "Spring Scala", null, null, Collections.emptyList(), false, "incubator", "", "")
+                new Project("spring-framework", "Spring Framework", null, null, 0,
+                        Collections.emptyList(), "active", "spring-core, spring-framework, spring", ""),
+                new Project("spring-data", "Spring Data", null, null, 1,
+                        Collections.emptyList(), "active", "spring-data,spring-data-mongodb", ""),
+                new Project("spring-data-mongodb", "Spring Data MongoDB", null, null, 1,Collections.emptyList(), "active", "", ""),
+                new Project("spring-data-graph", "Spring Data Graph", null, null, 1,Collections.emptyList(), "attic", "", ""),
+                new Project("spring-scala", "Spring Scala", null, null, 2, Collections.emptyList(), "incubator", "", "")
         ));
         questionsController = new QuestionsController(projectMetadataService, stackOverflow);
     }

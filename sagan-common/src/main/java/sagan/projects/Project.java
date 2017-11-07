@@ -23,6 +23,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
+@NamedEntityGraph(name = "Project.tree",
+        attributeNodes = @NamedAttributeNode("childProjectList"))
 public class Project {
 
     @Id
@@ -35,6 +37,7 @@ public class Project {
     private String renderedBootConfig;
     private String rawOverview;
     private String renderedOverview;
+    private int displayOrder = Integer.MAX_VALUE;
 
     @ManyToOne
     private Project parentProject;
@@ -53,8 +56,8 @@ public class Project {
     private Project() {
     }
 
-    public Project(String id, String name, String repoUrl, String siteUrl, List<ProjectRelease> releaseList,
-                   boolean isAggregator, String category) {
+    public Project(String id, String name, String repoUrl, String siteUrl,
+                   List<ProjectRelease> releaseList, String category) {
         this.id = id;
         this.name = name;
         this.repoUrl = repoUrl;
@@ -63,9 +66,10 @@ public class Project {
         this.category = category;
     }
 
-    public Project(String id, String name, String repoUrl, String siteUrl, List<ProjectRelease> releaseList,
-                   boolean isAggregator, String category, String stackOverflowTags, String bootconfig) {
-        this(id, name, repoUrl, siteUrl, releaseList, isAggregator, category);
+    public Project(String id, String name, String repoUrl, String siteUrl, int displayOrder, List<ProjectRelease> releaseList,
+                   String category, String stackOverflowTags, String bootconfig) {
+        this(id, name, repoUrl, siteUrl, releaseList, category);
+        this.setDisplayOrder(displayOrder);
         this.setStackOverflowTags(stackOverflowTags);
         this.setRawBootConfig(bootconfig);
     }
@@ -174,12 +178,22 @@ public class Project {
         this.renderedOverview = renderedOverview;
     }
 
+    public int getDisplayOrder() {
+        return displayOrder;
+    }
+
+    public void setDisplayOrder(int displayOrder) {
+        this.displayOrder = displayOrder;
+    }
+
     public Project getParentProject() {
         return parentProject;
     }
 
     public String getParentId() {
-        if (parentProject == null) { return null; }
+        if (parentProject == null) {
+            return null;
+        }
 
         return parentProject.getId();
     }
@@ -284,7 +298,8 @@ public class Project {
             return this.getProjectReleases().stream()
                     .filter(projectRelease -> !projectRelease.equals(mostCurrentRelease.get()))
                     .collect(Collectors.toList());
-        } else {
+        }
+        else {
             return this.getProjectReleases();
         }
     }

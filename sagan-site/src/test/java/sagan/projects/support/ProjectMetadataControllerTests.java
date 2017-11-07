@@ -31,7 +31,7 @@ public class ProjectMetadataControllerTests {
 
     private List<ProjectRelease> releases = new ArrayList<>();
     Project project = new Project(PROJECT_ID, "spring", "http://example.com", "http://examples.com", releases,
-            false, "project");
+            "project");
     private ProjectMetadataController controller;
 
     @Before

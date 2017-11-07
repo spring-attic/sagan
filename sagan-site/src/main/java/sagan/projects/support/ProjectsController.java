@@ -44,9 +44,10 @@ class ProjectsController {
 	@RequestMapping(value = "/{projectName}", method = { GET, HEAD })
     public String showProject(Model model, @PathVariable String projectName) {
         Project project = projectMetadataService.getProject(projectName);
+        List<Project> projects = this.projectMetadataService.getActiveTopLevelProjects();
         model.addAttribute("selectedProject", project);
         model.addAttribute("projectStackOverflow", stackOverflowUrl(project));
-        model.addAttribute("projects", getProjectsForSidebar());
+        model.addAttribute("projects", projects);
         model.addAttribute("currentRelease", project.getMostCurrentRelease());
         model.addAttribute("otherReleases", project.getNonMostCurrentReleases());
 

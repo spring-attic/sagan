@@ -63,7 +63,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
                 "http://github.com/spring-projects/spring-new",
                 "http://projects.spring.io/spring-new",
                 new ArrayList<>(Arrays.asList(release)),
-                false,
                 CATEGORIES.get(0));
 
         return edit(project, model);

@@ -55,7 +55,7 @@ public class BadgeControllerTest {
 
         versionBadgeService.postConstruct();
         controller = new BadgeController(projectMetadataServiceMock, versionBadgeService);
-        project = new Project("spring-data-redis", "Spring Data Redis", "http", "http", releases, false, "data");
+        project = new Project("spring-data-redis", "Spring Data Redis", "http", "http", releases, "data");
         when(projectMetadataServiceMock.getProject("spring-data-redis")).thenReturn(project);
     }
 

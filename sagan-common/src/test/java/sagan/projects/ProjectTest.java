@@ -28,7 +28,7 @@ public class ProjectTest {
     public void setup() {
         List<ProjectRelease> releases = asList(currentRelease, olderRelease);
 
-        project = new Project("id", "my-special-project", "my-repo-url", "my-site-url", releases, false,
+        project = new Project("id", "my-special-project", "my-repo-url", "my-site-url", releases,
                 "my-special-category");
     }
 
@@ -41,7 +41,7 @@ public class ProjectTest {
     public void currentVersionNotAvailable() {
         List<ProjectRelease> releases = asList();
 
-        Project project = new Project("id", "my-special-project", "my-repo-url", "my-site-url", releases, false,
+        Project project = new Project("id", "my-special-project", "my-repo-url", "my-site-url", releases,
                 "my-special-category");
 
         Optional<String> noVersion = Optional.empty();
@@ -55,7 +55,7 @@ public class ProjectTest {
 
     @Test
     public void isTopLevelProjectWhenItHasNoParentProject() {
-        Project childProject = new Project("child-project", "", "", "", emptyList(), false, "");
+        Project childProject = new Project("child-project", "", "", "", emptyList(), "");
         childProject.setParentProject(project);
         project.setChildProjectList(asList(childProject));
 
@@ -70,7 +70,7 @@ public class ProjectTest {
         ProjectSample third = new ProjectSample("Third", 3);
         List<ProjectSample> samples = Arrays.asList(third, first, second);
 
-        Project project = new Project("id", "my-special-project", "my-repo-url", "my-site-url", emptyList(), false, "my-special-category");
+        Project project = new Project("id", "my-special-project", "my-repo-url", "my-site-url", emptyList(), "my-special-category");
         project.setProjectSamples(samples);
 
         assertThat(project.getProjectSamples(), contains(first, second, third));

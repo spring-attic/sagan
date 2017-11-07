@@ -24,9 +24,9 @@ import static org.mockito.BDDMockito.given;
 public class ProjectGuidesRepositoryTest {
     ProjectGuidesRepository subject;
 
-    Project bananaProject = new Project("banana-project", "Banana Project", "my-banana-url", "my-banana-url", null, false,
+    Project bananaProject = new Project("banana-project", "Banana Project", "my-banana-url", "my-banana-url", null,
             "my-banana-category");
-    Project specialProject = new Project("special-project", "Special Project", "my-repo-url", "my-site-url", null, false,
+    Project specialProject = new Project("special-project", "Special Project", "my-repo-url", "my-site-url", null,
             "my-special-category");
 
     @Mock(answer = Answers.RETURNS_SMART_NULLS)

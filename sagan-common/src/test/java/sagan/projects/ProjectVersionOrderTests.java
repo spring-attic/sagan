@@ -89,7 +89,7 @@ public class ProjectVersionOrderTests {
                 .map(release -> new ProjectRelease(release, null, false, "", "", "", ""))
                 .collect(toList());
 
-        return new Project("", "", "", "", projectReleases, false, "");
+        return new Project("", "", "", "", projectReleases, "");
     }
 
     private List<String> getProjectReleases(Project project) {
