@@ -27,7 +27,7 @@
 }
 
 .tools4--body .tools4--banner {
-  background: url("../img/tools4/Hero-Image.jpg") transparent no-repeat;
+  background: url("../img/tools4/Hero-Image.jpg") transparent no-repeat center;
   background-size: cover;
   padding: 135px 0;
 }
