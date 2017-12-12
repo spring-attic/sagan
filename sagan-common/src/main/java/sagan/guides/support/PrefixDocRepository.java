@@ -3,32 +3,26 @@ package sagan.guides.support;
 import sagan.guides.AbstractGuide;
 import sagan.guides.ContentProvider;
 import sagan.guides.DefaultGuideMetadata;
+import sagan.guides.Guide;
 import sagan.guides.GuideMetadata;
 import sagan.guides.ImageProvider;
 import sagan.projects.Project;
 import sagan.projects.support.ProjectMetadataService;
 import sagan.support.ResourceNotFoundException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.util.Assert;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 
 /**
  * Repository implementation providing data access services for guides by repo prefix.
  */
-public abstract class PrefixDocRepository<T extends AbstractGuide> implements DocRepository<T, GuideMetadata>,
+public abstract class PrefixDocRepository<T extends Guide> implements DocRepository<T, GuideMetadata>,
         ContentProvider<T>, ImageProvider, ProjectGuidesRepository {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -83,6 +77,7 @@ public abstract class PrefixDocRepository<T extends AbstractGuide> implements Do
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<GuideMetadata> findByProject(Project project) {
         return this.findAllMetadata()
                 .stream()
@@ -93,11 +88,14 @@ public abstract class PrefixDocRepository<T extends AbstractGuide> implements Do
     @Override
     public T populate(T guide) {
         String repoName = guide.getRepoName();
-
-        AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org.getName(),
-                repoName));
-		guide.setContent(asciidocGuide.getContent());
-		guide.setTableOfContents(asciidocGuide.getTableOfContents());
+        if (guide instanceof AbstractGuide) {
+            AbstractGuide mutable = (AbstractGuide) guide;
+            AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org
+                    .getName(),
+                    repoName));
+            mutable.setContent(asciidocGuide.getContent());
+            mutable.setTableOfContents(asciidocGuide.getTableOfContents());
+        }
         return guide;
     }
 
@@ -114,8 +112,8 @@ public abstract class PrefixDocRepository<T extends AbstractGuide> implements Do
     }
 
     public String parseGuideName(String repositoryName) {
-        Assert.hasText(repositoryName);
-        Assert.isTrue(repositoryName.startsWith(this.prefix));
+        Assert.hasText(repositoryName, "repository name must not be empty");
+        Assert.isTrue(repositoryName.startsWith(this.prefix), "repository name should start with " + this.prefix);
         return repositoryName.substring(this.prefix.length());
     }
 

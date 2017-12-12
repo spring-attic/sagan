@@ -1,9 +1,10 @@
 package sagan.guides.support;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.github.Readme;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.springframework.web.client.RestClientException;
 
@@ -29,10 +30,10 @@ public class AsciidoctorUtils {
 
     public AsciidocGuide getDocument(GuideOrganization org, String path) {
         try {
-            log.debug(String.format("Fetching getting started guide for '%s'", path));
+            log.debug(String.format("Fetching content for '%s'", path));
             return org.getAsciidocGuide(path);
         } catch (RestClientException ex) {
-            String msg = String.format("No getting started guide found for '%s'", path);
+            String msg = String.format("No content found for '%s'", path);
             log.warn(msg, ex);
             throw new ResourceNotFoundException(msg, ex);
         }

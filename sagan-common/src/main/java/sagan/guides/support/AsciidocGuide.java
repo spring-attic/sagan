@@ -1,6 +1,8 @@
 package sagan.guides.support;
 
-class AsciidocGuide {
+import sagan.guides.DocumentContent;
+
+class AsciidocGuide implements DocumentContent {
     private final String content;
     private final String tableOfContents;
 
@@ -9,10 +11,12 @@ class AsciidocGuide {
         this.tableOfContents = tableOfContents;
     }
 
+    @Override
     public String getContent() {
         return this.content;
     }
 
+    @Override
     public String getTableOfContents() {
         return this.tableOfContents;
     }
