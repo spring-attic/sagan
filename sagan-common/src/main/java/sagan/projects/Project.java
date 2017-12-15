@@ -16,6 +16,7 @@
 
 package sagan.projects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -40,6 +41,7 @@ public class Project {
     private int displayOrder = Integer.MAX_VALUE;
 
     @ManyToOne
+    @JsonIgnore
     private Project parentProject;
 
     @OneToMany(mappedBy = "parentProject")
