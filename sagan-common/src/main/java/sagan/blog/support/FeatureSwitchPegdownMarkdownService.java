@@ -7,9 +7,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * A {@link MarkdownService} that switches implementation according to whether a feature
@@ -28,9 +28,9 @@ public class FeatureSwitchPegdownMarkdownService implements MarkdownService {
     private final FeatureProperties features;
 
     public FeatureSwitchPegdownMarkdownService(PegdownMarkdownService pegdown, RendererProperties remote,
-                                               FeatureProperties features, RestTemplateBuilder builder) {
+                                               FeatureProperties features, RestTemplate builder) {
         this.pegdown = pegdown;
-        this.remote = new RemoteMarkdownService(builder.build(), remote.getUri(), MediaType.valueOf("text/markdown"));
+        this.remote = new RemoteMarkdownService(builder, remote.getUri(), MediaType.valueOf("text/markdown"));
         this.features = features;
     }
 

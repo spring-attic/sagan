@@ -1,3 +1,10 @@
+spring:
+  application:
+    name: sagan-renderer
+  cloud:
+    services:
+      registrationMethod: direct
+
 project:
   artifactId: spring-io-renderer
   name: spring-io-renderer
@@ -35,3 +42,20 @@ github:
   # token is a must. See http://developer.github.com/v3/#rate-limiting.
   access:
     token: ${GITHUB_ACCESS_TOKEN:}
+
+eureka:
+  client:
+    enabled: false
+
+security:
+  basic:
+    enabled: false
+
+---
+
+spring:
+  profiles: cloud
+eureka:
+  client:
+    enabled: true
+

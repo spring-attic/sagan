@@ -51,6 +51,9 @@ dependencies {
     // for XML manipulation
     compile 'org.xmlbeam:xmlprojector:1.4.8'
 
+    // for service discovery
+    compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
+
     // for use in mocking http interactions
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
     testCompile "org.springframework.cloud:spring-cloud-contract-wiremock"

@@ -7,9 +7,9 @@ import sagan.guides.DocumentContent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * A {@link GuideRenderer} that switches implementation according to whether a feature is
@@ -28,9 +28,9 @@ public class FeatureSwitchGuideRenderer implements GuideRenderer {
     private final FeatureProperties features;
 
     public FeatureSwitchGuideRenderer(AsciidoctorGuideRenderer local, RendererProperties remote,
-                                      FeatureProperties features, RestTemplateBuilder builder) {
+                                      FeatureProperties features, RestTemplate builder) {
         this.local = local;
-        this.remote = new RemoteGuideRenderer(builder.build(), remote.getUri());
+        this.remote = new RemoteGuideRenderer(builder, remote.getUri());
         this.features = features;
     }
 

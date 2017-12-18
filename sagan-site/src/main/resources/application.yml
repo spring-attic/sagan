@@ -15,6 +15,11 @@ info:
     start: ${vcap.application.start:N/A}
 
 spring:
+  application:
+    name: sagan-site
+  cloud:
+    services:
+      registrationMethod: direct
   main:
     sources: sagan.SiteApplication
   thymeleaf:
@@ -77,6 +82,10 @@ elasticsearch:
     endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
     index: ${ELASTICSEARCH_INDEX:sagan}
 
+eureka:
+  client:
+    enabled: false
+
 logging:
   level:
     ROOT: WARN
@@ -124,15 +133,22 @@ flyway:
 spring:
   profiles: staging
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-staging}
-sagan:
-  markdown:
-    uri: https://sagan-markdown-staging.cfapps.io
 
 ---
 
 spring:
   profiles: production
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io}
+
+---
+
+spring:
+  profiles: cloud
+disqus_shortname: ${DISQUS_SHORTNAME:spring-io}
 sagan:
-  markdown:
-    uri: https://sagan-markdown-prod.cfapps.io
+  renderer:
+    uri: https://sagan-renderer
+eureka:
+  client:
+    enabled: true
+

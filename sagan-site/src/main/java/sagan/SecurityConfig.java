@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -86,6 +87,15 @@ class SecurityConfig {
             successHandler.setDefaultTargetUrl("/admin");
             filter.setAuthenticationSuccessHandler(successHandler);
             return filter;
+        }
+    }
+
+    @Configuration
+    @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+    protected static class FallbackAuthenticationConfig extends WebSecurityConfigurerAdapter {
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.authorizeRequests().anyRequest().permitAll();
         }
     }
 

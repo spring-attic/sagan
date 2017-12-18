@@ -27,7 +27,7 @@ public class FeatureProperties {
 
     private boolean enabled = false;
 
-    private Set<String> users = new HashSet<>(Arrays.asList("dsyer"));
+    private Set<String> users = new HashSet<>(Arrays.asList("dsyer", "bclozel", "gregturn"));
 
     public boolean isEnabled() {
         return this.enabled;

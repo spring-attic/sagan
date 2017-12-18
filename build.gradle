@@ -5,7 +5,7 @@ buildscript {
         maven { url springRepo }
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.7.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE"
         classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.3' // see deploy.gradle
     }
 }
@@ -34,6 +34,10 @@ configure(javaProjects) {
     targetCompatibility = vJavaLang
     sourceCompatibility = vJavaLang
 
+    ext {
+	    springCloudVersion = 'Edgware.RELEASE'
+    }
+
     repositories {
         mavenLocal()
         maven { url springRepo }
@@ -42,12 +46,14 @@ configure(javaProjects) {
     afterEvaluate {
         dependencyManagement {
             imports {
+                mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+                mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.6.0.RELEASE"
                 mavenBom('io.spring.platform:platform-bom:Brussels-SR5') {
                     bomProperties([
-                            'elasticsearch.version': '1.7.1' // see io.searchbox:jest
+                            'elasticsearch.version': '1.7.1', // see io.searchbox:jest
+                            'guice.version': '4.1.0'
                     ])
                 }
-                mavenBom("org.springframework.cloud:spring-cloud-dependencies:Dalston.SR3")
             }
         }
     }
@@ -66,6 +72,7 @@ configure(javaProjects) {
         // replaced with log4j-over-slf4j
         all*.exclude group: 'log4j', module: 'log4j'
         all*.exclude group: 'javax.servlet'
+        all*.exclude group: 'asm'
     }
 
     // Ensure that all Gradle-compiled classes are available to Eclipse's

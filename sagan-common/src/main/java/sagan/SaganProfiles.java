@@ -29,6 +29,14 @@ public final class SaganProfiles {
     public static final String PRODUCTION = "production";
 
     /**
+     * Activated by Cloud Foundry build pack. Can be used to run a "standalone" server in
+     * the cloud.
+     *
+     * @see sagan.StandaloneRestTemplateConfig
+     */
+    public static final String CLOUD = "cloud";
+
+    /**
      * Implicitly activated when either {@link #PRODUCTION} or {@link #STAGING} profiles
      * are active, this profile indicates that the application is running on Cloud Foundry
      * as opposed to running {@link #STANDALONE}, and should expect to find data sources,
