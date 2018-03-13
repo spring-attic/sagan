@@ -23,264 +23,201 @@
 <div layout:fragment="header-container"></div>
 <div layout:fragment="content" class="compass body--container container-fluid">
     <div class="row">
-        <ul class="sidebar hide-sm col-md-3">
-            <li class="sidebar_project"
-                th:each="proj : ${projects}"
-                th:classappend="${proj.getId() ==  selectedProject.getId()} ? 'active' : (${proj.getId() ==  selectedProject.getParentId()} ? 'child-active': 'child-inactive')"
-                th:with="isChildrenOpen=(${proj.equals(selectedProject)} or ${proj.equals(selectedProject.getParentProject())}) and ${proj.getChildProjectList().size()} > 0"
-            >
-                <div>
-                    <a th:href="${proj.getSiteUrl()}" th:text="${proj.getName()}"></a>
-                    <i th:if="${isChildrenOpen}" class="icon-chevron-up" aria-hidden="true"></i>
-                    <a th:if="${!isChildrenOpen and proj.getChildProjectList().size() > 0}" th:href="${proj.getSiteUrl()}"><i class="icon-chevron-down"
-                                                                                    aria-hidden="true"></i></a>
-                </div>
-                <ul class="sidebar_children"
-                    th:if="${isChildrenOpen}">
-                    <li class="sidebar_child"
-                        th:each="childProject : ${proj.getChildProjectList()}"
-                        th:classappend="${childProject.getId() ==  selectedProject.getId()} ? 'active'">
-                        <a th:href="${childProject.getSiteUrl()}" th:text="${childProject.getName()}"></a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <article class="col-xs-12 col-md-9"
-            th:with="hasSamples=${selectedProject.projectSamples.size() > 0},hasDocumentation=${currentRelease.isPresent() || otherReleases.size() > 0 || guides.size() > 0}">
-            <div class="box">
-                <div class="row">
-                    <div class="project--header col-xs-12">
-                        <h1 th:text="${selectedProject.getName()}"></h1>
-                        <a th:href="${selectedProject.getRepoUrl()}" target="_blank" class="link--github"><img
-                                th:src="@{/img/github-icon.svg}"/></a>
-                        <a th:href="${projectStackOverflow}" target="_blank" class="link--stackoverflow"><img
-                                th:src="@{/img/stackoverflow-icon.svg}"/></a>
+        <div class="sidebar hide-sm col-md-3">
+            <ul>
+                <li class="sidebar_head">Projects</li>
+                <li class="sidebar_project"
+                    th:each="proj : ${projects}"
+                    th:classappend="${proj.getId() ==  selectedProject.getId()} ? 'active' : (${proj.getId() ==  selectedProject.getParentId()} ? 'child-active': 'child-inactive')"
+                    th:with="isChildrenOpen=(${proj.equals(selectedProject)} or ${proj.equals(selectedProject.getParentProject())}) and ${proj.getChildProjectList().size()} > 0">
+                    <div>
+                        <a th:href="${proj.getSiteUrl()}" th:text="${proj.getName()}"></a>
+                        <!--<i th:if="${isChildrenOpen}" class="icon-chevron-up" aria-hidden="true"></i>
 
-                        <span class="version" th:if="${currentRelease.isPresent()}"
-                              th:with="release=${currentRelease.get()}">
-                            CURRENT VERSION
-                            <strong th:text="'v' + ${release.getVersionDisplayName()}"></strong>
-                        </span>
+                        <a th:if="${!isChildrenOpen and proj.getChildProjectList().size() > 0}"
+                           th:href="${proj.getSiteUrl()}">
+                            <i class="icon-chevron-down" aria-hidden="true"></i>
+                        </a>-->
                     </div>
-                    <ul class="nav nav-tabs col-xs-12">
-                        <li class="active col-xs-3"><a href="#overview" data-toggle="tab">
-                            <span class="hide-sm">Overview</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14">
-                                <g>
-                                    <path d="M10.186 9.072a2.24 2.24 0 0 1-2.235-2.237 2.236 2.236 0 0 1 4.472 0 2.24 2.24 0 0 1-2.237 2.237zm0-5.965A3.732 3.732 0 0 0 6.46 6.835a3.732 3.732 0 0 0 3.726 3.727 3.732 3.732 0 0 0 3.727-3.727 3.732 3.732 0 0 0-3.727-3.728zm.178 9.2c-2.921.126-5.847-1.75-8.701-5.6.952-1.278 4.137-5.1 8.245-5.213 2.88-.06 5.729 1.688 8.442 5.251-.88 1.316-3.912 5.378-7.986 5.561zm9.492-6.037C16.743 2.016 13.381-.109 9.86.004 4.163.17.282 6.054.12 6.304a.751.751 0 0 0 .02.84c3.153 4.424 6.491 6.662 9.929 6.662.121 0 .243-.005.364-.01 5.645-.258 9.313-6.444 9.467-6.708a.75.75 0 0 0-.043-.818z"></path>
-                                </g>
-                            </svg>
-                        </a></li>
-                        <li th:if="${hasDocumentation}" class="col-xs-3"><a href="#learn" data-toggle="tab">
-                            <span class="hide-sm">Learn</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="19" viewBox="0 0 15 19">
-                                <g>
-                                    <path d="M8.18 5.624H3.966a.705.705 0 1 1 0-1.41h4.212a.705.705 0 1 1 0 1.41zm2.785 2.958H3.967a.705.705 0 1 1 0-1.41h6.998a.705.705 0 1 1 0 1.41zM11 11.536H4.001a.705.705 0 1 1 0-1.411h6.998a.705.705 0 1 1 0 1.41zm-.034 2.958H3.967a.705.705 0 1 1 0-1.41l6.998-.001a.705.705 0 1 1 0 1.41zM1.645 1.41a.239.239 0 0 0-.234.235v15.312c0 .127.107.235.235.235h11.708a.239.239 0 0 0 .235-.235V1.646a.239.239 0 0 0-.235-.235H1.646zm11.71 17.193H1.644A1.648 1.648 0 0 1 0 16.958V1.646C0 .738.738 0 1.646 0h11.708C14.262 0 15 .738 15 1.646v15.312c0 .907-.738 1.646-1.646 1.646z"></path>
-                                </g>
-                            </svg>
-                        </a></li>
-                        <li th:if="${hasSamples}" class="col-xs-3"><a href="#samples" data-toggle="tab">
-                            <span class="hide-sm">Samples</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="19" viewBox="0 0 15 19">
-                                <g>
-                                    <path d="M8.18 5.624H3.966a.705.705 0 1 1 0-1.41h4.212a.705.705 0 1 1 0 1.41zm2.785 2.958H3.967a.705.705 0 1 1 0-1.41h6.998a.705.705 0 1 1 0 1.41zM11 11.536H4.001a.705.705 0 1 1 0-1.411h6.998a.705.705 0 1 1 0 1.41zm-.034 2.958H3.967a.705.705 0 1 1 0-1.41l6.998-.001a.705.705 0 1 1 0 1.41zM1.645 1.41a.239.239 0 0 0-.234.235v15.312c0 .127.107.235.235.235h11.708a.239.239 0 0 0 .235-.235V1.646a.239.239 0 0 0-.235-.235H1.646zm11.71 17.193H1.644A1.648 1.648 0 0 1 0 16.958V1.646C0 .738.738 0 1.646 0h11.708C14.262 0 15 .738 15 1.646v15.312c0 .907-.738 1.646-1.646 1.646z"></path>
-                                    <path class="fill-white-only" d="M0 12h16v7H0z"></path>
-                                    <path class="stroke-only"
-                                          d="M4.023 17.989L2.01 15.494 4.023 13M11.01 17.989l2.013-2.495L11.01 13M6 18.402l2.512-5.399"></path>
-                                </g>
-                            </svg>
-                        </a></li>
+                    <ul class="sidebar_children"
+                        th:if="${isChildrenOpen}">
+                        <li class="sidebar_child"
+                            th:each="childProject : ${proj.getChildProjectList()}"
+                            th:classappend="${childProject.getId() ==  selectedProject.getId()} ? 'active'">
+                            <a th:href="${childProject.getSiteUrl()}" th:text="${childProject.getName()}"></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <article class="col-xs-12 col-md-9"
+                 th:with="hasSamples=${selectedProject.projectSamples.size() > 0},hasDocumentation=${currentRelease.isPresent() || otherReleases.size() > 0 || guides.size() > 0}">
+            <div class="box">
+                <div class="">
+                    <div class="project--header">
+                        <h1 th:text="${selectedProject.getName()}"></h1>
+                        <span class="version label current" th:if="${currentRelease.isPresent()}"
+                              th:with="release=${currentRelease.get()}" th:text="${release.getVersionDisplayName()}">
+                            </span>
+
+                        <div class="social-links">
+                            <a th:href="${selectedProject.getRepoUrl()}" target="_blank" class="link--github">
+                                <img th:src="@{/img/github-icon.svg}"/>
+                            </a>
+
+                            <a th:href="${projectStackOverflow}" target="_blank" class="link--stackoverflow">
+                                <img th:src="@{/img/stackoverflow-icon.svg}"/>
+                            </a>
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#overview" data-toggle="tab">
+                                <i class="icon-eye-open"></i>
+                                <span class="hide-sm">Overview</span>
+                            </a>
+                        </li>
+                        <li th:if="${hasDocumentation}" class="">
+                            <a href="#learn" data-toggle="tab">
+                                <i class="icon-file-text-alt"></i>
+                                <span class="hide-sm">Learn</span>
+                            </a>
+                        </li>
+                        <li th:if="${hasSamples}" class="">
+                            <a href="#samples" data-toggle="tab">
+                                <i class="icon-code"></i>
+                                <span class="hide-sm">Samples</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="tab-content row">
-                    <div class="tab-pane active col-xs-12" id="overview">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-5 compass-section">
-                                <div th:if="${selectedProject.getRenderedBootConfig().length() > 0}" class="row">
-                                    <div class="spring-boot-config col-xs-12">
-                                        <h3 class="spring-boot-config--subtitle">
-                                            Spring Boot Config
-                                        </h3>
-                                        <div th:utext="${selectedProject.getRenderedBootConfig()}"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="quickstart col-xs-12">
-                                        <span class="quickstart--title">Quick start</span>
-                                        <span class="quickstart--subtitle">Bootstrap your application with Spring Initializr</span>
-                                        <a class="quickstart--button" href="https://start.spring.io/" target="_blank">Get
-                                            started</a>
-                                    </div>
-                                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="overview">
+                        <div class="compass-section">
+                            <div class="project-overview">
+                                <div th:utext="${selectedProject.getRenderedOverview()}"></div>
                             </div>
-
-                            <div class="first-md col-xs-12 col-md-7 compass-section">
-                                <div class="project-overview">
-                                    <div th:utext="${selectedProject.getRenderedOverview()}"></div>
+                            <div th:if="${selectedProject.getRenderedBootConfig().length() > 0}"
+                                 class="spring-boot-config">
+                                <h2>Spring Boot Config</h2>
+                                <div th:utext="${selectedProject.getRenderedBootConfig()}"></div>
+                            </div>
+                            <div class="quickstart">
+                                <h2>Quick start</h2>
+                                <div>
+                                    Bootstrap your application with
+                                    <a class="quickstart--button" href="https://start.spring.io/" target="_blank">
+                                        Spring Initializr</a>.
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="learn" th:if="${hasDocumentation}" class="tab-pane col-xs-12">
-                        <div th:if="${currentRelease.isPresent() || otherReleases.size() > 0}" class="project--documentation compass-section row">
+                    <div id="learn" th:if="${hasDocumentation}" class="tab-pane">
+                        <div th:if="${currentRelease.isPresent() || otherReleases.size() > 0}"
+                             class="project--documentation compass-section">
+
                             <h2>Documentation</h2>
                             <div class="project--documentation--subtitle compass-subtitle">
-                                Each Spring project has its own; it explains in great details how you can use project
-                                features and what you can achieve with them.
+                                Each <strong>Spring project</strong> has its own; it explains in great details how
+                                you can use <strong>project features</strong> and what you can achieve with them.
                             </div>
 
-                            <div class="col-xs-12">
-                                <div class="row">
-                                    <div class="project-reference project--card col-xs-12 col-md-6">
-
-                                        <div>
-                                            <h3>Reference doc.</h3>
-
-                                            <div class="project-reference--current-version"
-                                                 th:if="${currentRelease.isPresent()}"
-                                                 th:with="release=${currentRelease.get()}">
-                                                <a th:href="${release.getRefDocUrl()}">
-                                        <span class="release-display-name"
-                                              th:text="${release.getVersionDisplayName()}"></span>
-                                                    <span class="release-status-group">
-                                            <span class="release-status release-status-pre"
-                                                  th:if="${release.isPreRelease()}">PRE</span>
-                                            <span class="release-status release-status-snapshot"
-                                                  th:if="${release.isSnapshot()}">SNAPSHOT</span>
-                                            <span class="release-status release-status-ga"
-                                                  th:if="${release.isGeneralAvailability()}">GA</span>
-                                            <span class="release-status release-status-current"
-                                                  th:if="${release.isCurrent()}">CURRENT</span>
+                            <table class="table table--documentation">
+                                <tbody>
+                                <tr th:with="release=${currentRelease.get()}">
+                                    <td>
+                                        <span class="release-display-name" th:text="${release.getVersionDisplayName()}">
                                         </span>
-                                                </a>
+                                        <span class="label pre"
+                                              th:if="${release.isPreRelease()}">PRE</span>
+                                        <span class="label snapshot"
+                                              th:if="${release.isSnapshot()}">SNAPSHOT</span>
+                                        <span class="label current"
+                                              th:if="${release.isCurrent()}">CURRENT</span>
+                                        <span class="label ga"
+                                              th:if="${release.isGeneralAvailability()}">GA</span>
+                                    </td>
+                                    <td>
+                                        <a th:href="${release.getRefDocUrl()}">
+                                            <i class="icon-file-text"></i>
+                                            Reference Doc.
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a th:href="${release.getApiDocUrl()}">
+                                            <i class="icon-file-text"></i>
+                                            API Doc.
+                                        </a>
+                                    </td>
+                                </tr>
 
-                                            </div>
-
-                                            <ul class="project-reference--releases collapse row"
-                                                th:classappend="${!currentRelease.isPresent()} ? 'in'">
-                                                <li class="project-reference--version col-xs-6"
-                                                    th:each="release : ${otherReleases}">
-                                                    <a th:href="${release.getRefDocUrl()}">
-                                            <span class="release-display-name"
-                                                  th:text="${release.getVersionDisplayName()}"></span>
-                                                        <span class="release-status-group">
-                                                <span class="release-status release-status-pre"
-                                                      th:if="${release.isPreRelease()}">PRE</span>
-                                                <span class="release-status release-status-snapshot"
-                                                      th:if="${release.isSnapshot()}">SNAPSHOT</span>
-                                                <span class="release-status release-status-ga"
-                                                      th:if="${release.isGeneralAvailability()}">GA</span>
-                                                <span class="release-status release-status-current"
-                                                      th:if="${release.isCurrent()}">CURRENT</span>
-                                            </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <div class="project--documentation--version-button"
-                                                 th:if="${currentRelease.isPresent()}">
-                                                <a class="not-version" data-toggle="collapse"
-                                                   href=".project-reference--releases">
-                                                    <span>other versions</span>
-                                                    <i class="icon-chevron-up" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="project-api project--card col-xs-12 col-md-6"
-                                         th:if="${currentRelease.isPresent() || otherReleases.size() > 0 }">
-                                        <div>
-                                            <h3>API doc.</h3>
-
-                                            <div class="project-api--current-version"
-                                                 th:if="${currentRelease.isPresent()}"
-                                                 th:with="release=${currentRelease.get()}">
-                                                <a th:href="${release.getApiDocUrl()}">
-                                        <span class="release-display-name"
-                                              th:text="${release.getVersionDisplayName()}"></span>
-                                                    <span class="release-status-group">
-                                            <span class="release-status release-status-pre"
-                                                  th:if="${release.isPreRelease()}">PRE</span>
-                                            <span class="release-status release-status-snapshot"
-                                                  th:if="${release.isSnapshot()}">SNAPSHOT</span>
-                                            <span class="release-status release-status-ga"
-                                                  th:if="${release.isGeneralAvailability()}">GA</span>
-                                            <span class="release-status release-status-current"
-                                                  th:if="${release.isCurrent()}">CURRENT</span>
+                                <tr th:each="release : ${otherReleases}">
+                                    <td>
+                                        <span class="release-display-name" th:text="${release.getVersionDisplayName()}">
                                         </span>
-                                                </a>
-                                            </div>
+                                        <span class="label pre"
+                                              th:if="${release.isPreRelease()}">PRE</span>
+                                        <span class="label snapshot"
+                                              th:if="${release.isSnapshot()}">SNAPSHOT</span>
+                                        <span class="label current"
+                                              th:if="${release.isCurrent()}">CURRENT</span>
+                                        <span class="label ga"
+                                              th:if="${release.isGeneralAvailability()}">GA</span>
+                                    </td>
+                                    <td>
+                                        <a th:href="${release.getRefDocUrl()}">
+                                            <i class="icon-file-text"></i>
+                                            Reference Doc.
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a th:href="${release.getApiDocUrl()}">
+                                            <i class="icon-file-text"></i>
+                                            API Doc.
+                                        </a>
+                                    </td>
+                                </tr>
 
-                                            <ul class="project-api--releases collapse row"
-                                                th:classappend="${!currentRelease.isPresent()} ? 'in'">
-                                                <li class="project-api--version col-xs-6"
-                                                    th:each="release : ${otherReleases}">
-                                                    <a th:href="${release.getApiDocUrl()}">
-                                            <span class="release-display-name"
-                                                  th:text="${release.getVersionDisplayName()}"></span>
-                                                        <span class="release-status-group">
-                                                <span class="release-status release-status-pre"
-                                                      th:if="${release.isPreRelease()}">PRE</span>
-                                                <span class="release-status release-status-snapshot"
-                                                      th:if="${release.isSnapshot()}">SNAPSHOT</span>
-                                                <span class="release-status release-status-ga"
-                                                      th:if="${release.isGeneralAvailability()}">GA</span>
-                                                <span class="release-status release-status-current"
-                                                      th:if="${release.isCurrent()}">CURRENT</span>
-                                            </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <div class="project--documentation--version-button"
-                                                 th:if="${currentRelease.isPresent()}">
-                                                <a class="not-version" data-toggle="collapse"
-                                                   href=".project-api--releases">
-                                                    <span>other versions</span>
-                                                    <i class="icon-chevron-up" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                </tbody>
+                            </table>
+
                         </div>
 
-                        <div th:if="${guides.size() > 0}" class="project--guides compass-section row">
+                        <div th:if="${guides.size() > 0}" class="project--guides project--samples compass-section">
                             <h2 class="project--guides--title">Guides</h2>
                             <div class="project--guides--subtitle compass-subtitle">
-                                Designed to be completed in 15-30 minutes, a guide provides quick, hands-on instructions
-                                for building a starter app for any development task with Spring.
+                                Designed to be completed in <strong>15-30 minutes</strong>, a guide provides quick,
+                                hands-on instructions for <strong>building a starter app</strong> for any development
+                                task with <strong>Spring</strong>.
                             </div>
-                            <div class="col-xs-12">
-                                <ul class="project--guides row">
-                                    <li class="project--guide project--card col-xs-12 col-md-6"
-                                        th:each="guide : ${guides}">
-                                        <a th:href="'/guides/gs/' + ${guide.guideId}">
-                                            <h3 class="project--guide--title" th:text="${guide.getTitle()}"></h3>
-                                            <div class="project--guide--subtitle"
-                                                 th:text="${guide.getSubtitle()}"></div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+
+                            <ul>
+                                <li th:each="guide : ${guides}">
+                                    <a th:href="'/guides/gs/' + ${guide.guideId}">
+                                        <i class="icon-file-text"></i>
+                                        <strong class="project--sample--title"
+                                                th:text="${guide.getTitle()}"></strong>
+                                        <span class="project--sample--description"
+                                              th:text="${guide.getSubtitle()}"></span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div id="samples" th:if="${hasSamples}" class="tab-pane col-xs-12">
-                        <div class="project--samples compass-section row">
+                    <div id="samples" th:if="${hasSamples}" class="tab-pane">
+                        <div class="project--samples compass-section">
                             <h2>A few examples to try out:</h2>
-                            <div class="col-xs-12">
-                                <ul class="row">
-                                    <li class="project--sample project--card col-xs-12 col-md-6"
-                                        th:each="sample : ${selectedProject.projectSamples}">
-                                        <a th:href="${sample.getUrl()}" target="_blank">
-                                            <h3 class="project--sample--title" th:text="${sample.getTitle()}"></h3>
-                                            <div class="project--sample--description"
-                                                 th:text="${sample.getDescription()}"></div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <ul>
+                                <li th:each="sample : ${selectedProject.projectSamples}">
+                                    <a th:href="${sample.getUrl()}" target="_blank">
+                                        <i class="icon-file-text"></i>
+                                        <strong class="project--sample--title" th:text="${sample.getTitle()}"></strong>
+                                        <span class="project--sample--description"
+                                              th:text="${sample.getDescription()}"></span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
