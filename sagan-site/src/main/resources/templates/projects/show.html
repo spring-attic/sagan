@@ -24,7 +24,7 @@
 <div layout:fragment="content" class="compass body--container container-fluid">
     <div class="row">
         <div class="sidebar hide-sm col-md-3">
-            <ul>
+            <ul class="sidebar_main">
                 <li class="sidebar_head">Projects</li>
                 <li class="sidebar_project"
                     th:each="proj : ${projects}"
@@ -32,19 +32,16 @@
                     th:with="isChildrenOpen=(${proj.equals(selectedProject)} or ${proj.equals(selectedProject.getParentProject())}) and ${proj.getChildProjectList().size()} > 0">
                     <div>
                         <a th:href="${proj.getSiteUrl()}" th:text="${proj.getName()}"></a>
-                        <!--<i th:if="${isChildrenOpen}" class="icon-chevron-up" aria-hidden="true"></i>
-
-                        <a th:if="${!isChildrenOpen and proj.getChildProjectList().size() > 0}"
-                           th:href="${proj.getSiteUrl()}">
-                            <i class="icon-chevron-down" aria-hidden="true"></i>
-                        </a>-->
+                        <i th:if="${!isChildrenOpen && proj.getChildProjectList().size() > 0}" class="icon-chevron-right" aria-hidden="true"></i>
+                        <i th:if="${isChildrenOpen && proj.getChildProjectList().size() > 0}" class="icon-chevron-down" aria-hidden="true"></i>
                     </div>
-                    <ul class="sidebar_children"
-                        th:if="${isChildrenOpen}">
-                        <li class="sidebar_child"
-                            th:each="childProject : ${proj.getChildProjectList()}"
+                    <ul class="sidebar_children" th:if="${isChildrenOpen}">
+                        <li class="sidebar_child" th:each="childProject : ${proj.getChildProjectList()}"
                             th:classappend="${childProject.getId() ==  selectedProject.getId()} ? 'active'">
-                            <a th:href="${childProject.getSiteUrl()}" th:text="${childProject.getName()}"></a>
+                            <a th:href="${childProject.getSiteUrl()}">
+                                <i class="icon-circle"></i>
+                                <span th:text="${childProject.getName()}"></span>
+                            </a>
                         </li>
                     </ul>
                 </li>

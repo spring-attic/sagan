@@ -10,7 +10,7 @@
 
 }
 
-.compass .sidebar ul {
+.compass .sidebar ul.sidebar_main {
     background: #f1f1f1;
     list-style: none;
     padding: 0;
@@ -60,6 +60,9 @@
     padding: 0.3rem;
     cursor: pointer;
 }
+.compass .sidebar i.icon-chevron-down {
+    right: 0.4rem;
+}
 
 .compass .sidebar .child-inactive > div {
     color: #34302d;
@@ -89,26 +92,33 @@
     font-weight: normal;
 }
 
-.compass .sidebar .child-active > div {
-}
-
-.compass .sidebar .sidebar_children {
+.compass .sidebar ul.sidebar_children {
     list-style: none;
-    border-left: 1px solid black;
-    margin: 1rem;
+    padding: 0;
+    margin: 0;
+    border-left: 0 none;
+    border-top: 1px solid #FFF;
 }
 
-.compass .sidebar .sidebar_children a {
-    font-size: .9rem;
-    padding: 0.4rem 0.5rem;
-    margin-right: -1.5rem;
-    display: block;
+.compass .sidebar ul.sidebar_children li a {
+    position: relative;
+    padding-left: 2rem;
 }
 
-.compass .sidebar .sidebar_children .active a,
-.compass .sidebar .sidebar_children a:hover {
-    color: #6bb536;
-    background: #fff;
+.compass .sidebar ul.sidebar_children li a i {
+    right: auto;
+    left: .8rem;
+    top: .5rem;
+    font-size: 8px;
+}
+
+.compass .sidebar ul.sidebar_children li a:hover i {
+    text-decoration: none;
+}
+
+.compass .sidebar ul.sidebar_children li.active a {
+    font-weight: bold;
+    color: #34302e;
 }
 
 .compass .nav {
