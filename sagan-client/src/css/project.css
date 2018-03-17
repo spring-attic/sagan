@@ -236,18 +236,28 @@
 }
 
 .compass .project--header {
+    position: relative;
     padding: 2.5rem 0 2rem;
+    margin-right: 90px;
 }
 
 .compass .project--header h1 {
     display: inline-block;
-    margin-right: 1rem;
     font-size: 2.4rem;
-    vertical-align: bottom;
+    vertical-align: middle;
+    line-height: 2.7rem;
+    margin-right: 1rem;
+}
+
+.compass .project--header .label {
+    margin-top: 0.7rem;
+    vertical-align: middle;
 }
 
 .compass .project--header .social-links {
-    float: right;
+    position: absolute;
+    right: -90px;
+    top: 3rem;
     font-size: 36px;
     line-height: 30px;
 }
@@ -261,8 +271,17 @@
 }
 
 .compass .project--header .social-links img {
-    height: 1.8rem;
+    height: 30px;
     vertical-align: baseline;
+}
+
+.compass .project--header .social-links a svg {
+    height: 30px;
+    width: 30px;
+}
+
+.compass .project--header .social-links a:hover svg {
+    fill: #6bb536;
 }
 
 /* Learn */
