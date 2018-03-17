@@ -164,38 +164,11 @@
     font-weight: bold;
 }
 
-.compass .nav > li > a > span {
-    padding-right: 0.5rem;
-}
 
-.compass .nav > li > a > svg {
-    vertical-align: sub;
-}
-
-.compass .nav > li > a > svg path {
-    fill: #34302d;
-}
-
-.compass .nav > .active > a > svg path,
-.compass .nav-tabs a:hover svg path {
-    fill: #6bb536;
-}
-
-.compass .nav > li > a > svg path.fill-white-only,
-.compass .nav > .active > a > svg path.fill-white-only,
-.compass .nav-tabs a:hover svg path.fill-white-only {
-    fill: #fff;
-}
-
-.compass .nav > li > a > svg path.stroke-only {
-    fill: transparent;
-    stroke: #34302d;
-}
-
-.compass .nav > .active > a > svg path.stroke-only,
-.compass .nav-tabs a:hover svg path.stroke-only {
-    fill: transparent;
-    stroke: #6bb536;
+@media only screen and (max-width: 64em) {
+    .compass .nav-tabs a {
+        padding: 0.7rem 2.3rem;
+    }
 }
 
 .compass .compass-section {
@@ -210,30 +183,12 @@
     font-weight: 400;
 }
 
-.compass .compass-section .compass-subtitle {
-    font-size: 16px;
-    margin: 1rem 0 1rem 0;
-}
-
 .compass .tab-content {
     border: 1px solid #ccc;
     border-top: 0 none;
 }
 
-.compass .tab-content .compass-section > .row {
-    margin-top: 2rem;
-}
-
-/* Fix layout for Safari */
-.compass .row:before, .compass .row:after {
-    display: initial;
-}
-
-/* Overview */
-
-.compass .project-overview {
-    padding-top: 2rem;
-}
+/* Project Header  */
 
 .compass .project--header {
     position: relative;
@@ -284,6 +239,18 @@
     fill: #6bb536;
 }
 
+@media only screen and (max-width: 64em) {
+    .compass .project--header {
+        padding: 2.5rem 0 2rem 1.5rem;
+        margin-right: 120px;
+    }
+}
+
+/* Overview */
+
+.compass .project-overview {
+    padding-top: 2rem;
+}
 /* Learn */
 
 /* Documentation */

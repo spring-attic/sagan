@@ -54,9 +54,8 @@
                     <div class="project--header">
                         <h1 th:text="${selectedProject.getName()}"></h1>
                         <span class="version label current" th:if="${currentRelease.isPresent()}"
-                              th:with="release=${currentRelease.get()}" th:text="${release.getVersionDisplayName()}">
-                            </span>
-
+                          th:with="release=${currentRelease.get()}" th:text="${release.getVersionDisplayName()}">
+                        </span>
                         <div class="social-links">
                             <a th:href="${selectedProject.getRepoUrl()}" target="_blank" class="link--github">
                                 <img class="svg" th:src="@{/img/github-icon.svg}"/>
