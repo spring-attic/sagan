@@ -23,6 +23,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
  */
 @Controller
 @RequestMapping("/projects")
+@Navigation(Section.PROJECTS)
 class ProjectsController {
 
     private ProjectMetadataService projectMetadataService;
