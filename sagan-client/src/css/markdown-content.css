@@ -4,6 +4,7 @@ a[name="gs"], a[name="tutorials"] {
 
 .content--container h1 {
     margin-bottom: 15px;
+    font-weight: 700;
 }
 .content--container a {
     color: #5fa134;
@@ -24,14 +25,14 @@ a[name="gs"], a[name="tutorials"] {
     font-family: "Montserrat", sans-serif;
     font-size: 20px;
     line-height: 28px;
-    font-weight: 400;
+    font-weight: 700;
     margin: 30px 0 10px;
 }
 .content--container h3, .content--container h4 {
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
     line-height: 26px;
-    font-weight: 400;
+    font-weight: 700;
     margin: 20px 0 10px;
 }
 .content--container p code {
