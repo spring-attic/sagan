@@ -3,8 +3,8 @@ var $ = require('jquery');
 
 var searchDropdown = '.js-search-dropdown';
 var navItem = '.nav-search';
-var searchOpenTrigger = '.js-search-input-open';
-var searchCloseTrigger = '.body--container, .js-search-input-close, .homepage--body';
+var searchTrigger = '.js-nav-search a';
+var searchCloseTrigger = '.body--container, .homepage--body';
 var noAnimationClass = 'no-animation';
 var enabledClass = 'js-highlight';
 var showHideClass = 'js-show';
@@ -26,14 +26,17 @@ module.exports = function initSearch() {
  */
 function initSearchController(initiallyVisible, searchContainer) {
     var searchController;
+    var isOpen = false;
 
     $(function() {
         searchController = new SearchController(searchContainer, showHideClass);
-
-        $(searchOpenTrigger).on('click', function() {
-            showSearchDropdown();
+        $(searchTrigger).on('click', function() {
+            if (isOpen) {
+                hideSearchDropdown();
+            } else {
+                showSearchDropdown();
+            }
         });
-
         $(searchCloseTrigger).on('click', hideSearchDropdown);
 
         if (initiallyVisible) {
@@ -45,11 +48,13 @@ function initSearchController(initiallyVisible, searchContainer) {
         function showSearchDropdown(additionalClass) {
             searchController.show(additionalClass);
             $(navItem).addClass(enabledClass);
+            isOpen = true;
         }
 
         function hideSearchDropdown() {
             searchController.hide();
             $(navItem).removeClass(enabledClass);
+            isOpen = false;
         }
     });
 
