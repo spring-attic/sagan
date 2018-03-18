@@ -56,9 +56,13 @@
             <li th:class="${@uih.navClass(navSection?:'','blog')}">
               <a th:href="@{/blog}" >Blog</a>
             </li>
-            <li class="navbar-link nav-search">
-              <i class="icon-search navbar-search--icon js-search-input-open"></i>
-              <div class="search-input-close js-search-input-close">x</div>
+            <li class="navbar-link nav-search js-nav-search">
+              <a>
+                <i class="icon-search navbar-search--icon js-search-input-open"></i>
+                <span class="search-input-close js-search-input-close">
+                  <i class="icon-remove"></i>
+                </span>
+              </a>
             </li>
           </ul>
         </div>

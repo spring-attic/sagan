@@ -92,17 +92,19 @@ body {
   color: #eeeeee;
   background-color: #6db33f;
 }
+.header--navbar .navbar-inner .navbar-link.nav-search a {
+  padding: 23px 0 22px;
+  height: 25px;
+  cursor: pointer;
+}
 .header--navbar .navbar-inner .navbar-link.nav-search {
-  padding: 20px 0 23px;
+  width: 56px;
 }
 .header--navbar .navbar-inner .navbar-link.nav-search .navbar-search--icon {
   color: #eeeeee;
   font-size: 24px;
-  padding: 3px 16px 3px 18px;
+  padding: 3px 16px 3px 16px;
   cursor: pointer;
-}
-.header--navbar .navbar-inner .navbar-link.nav-search:hover .navbar-search--icon {
-  text-shadow: 0 0 10px #6db33f;
 }
 .header--navbar .navbar-inner .navbar-link.nav-search .search-input-close {
   display: none;
@@ -116,8 +118,11 @@ body {
 .header--navbar .navbar-inner .navbar-link.nav-search.js-highlight .search-input-close {
   display: inline-block;
   color: #eeeeee;
-  padding: 4px 24px 3px;
+  font-size: 24px;
+  padding: 0 18px 3px 18px;
   cursor: pointer;
+  width: 20px;
+  margin: 0;
 }
 .header--navbar .search-dropdown--container {
   position: absolute;
@@ -169,11 +174,19 @@ body {
   background-color: transparent;
   border: none;
   float: right;
-  padding: 28px 16px 24px 0;
+  padding: 28px 16px 24px 15px;
 }
 .header--navbar .search-dropdown--container .form-search .icon-search {
   font-size: 22px;
   color: #34302d;
+  transition: color 0.2s;
+  -webkit-transition: color 0.2s;
+  -moz-transition: color 0.2s;
+  -o-transition: color 0.2s;
+  -ms-transition: color 0.2s;
+}
+.header--navbar .search-dropdown--container .form-search .search-form--submit:hover .icon-search {
+  color: #6db33f;
 }
 .header--navbar .search-dropdown--container.js-show {
   margin-top: 0;
