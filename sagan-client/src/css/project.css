@@ -149,6 +149,13 @@
     text-align: center;
     box-sizing: border-box;
     font-weight: 100;
+    border-bottom: 4px solid #34302d;
+    transition: border-color 0.2s;
+    -webkit-transition: border-color 0.2s;
+    -moz-transition: border-color 0.2s;
+    -o-transition: border-color 0.2s;
+    -ms-transition: border-color 0.2s;
+    font-weight: bold;
 }
 
 .compass .nav-tabs a:focus {
@@ -161,7 +168,6 @@
     border-bottom: 4px solid #6bb536;
     color: #fff;
     background: #34302e;
-    font-weight: bold;
 }
 
 
@@ -180,7 +186,7 @@
     padding: 2rem 0 1rem;
     width: 100%;
     border-bottom: 1px solid #33302d;
-    font-weight: 400;
+    font-weight: 700;
 }
 
 .compass .tab-content {
@@ -233,6 +239,11 @@
 .compass .project--header .social-links a svg {
     height: 30px;
     width: 30px;
+    transition: fill 0.2s;
+    -webkit-transition: fill 0.2s;
+    -moz-transition: fill 0.2s;
+    -o-transition: fill 0.2s;
+    -ms-transition: fill 0.2s;
 }
 
 .compass .project--header .social-links a:hover svg {
@@ -281,6 +292,7 @@
 
 .compass .label {
     background-color: #34302d;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .2);
 }
 
 .compass .label.current {
@@ -346,4 +358,9 @@
 
 .compass .project--samples ul li a:hover .project--sample--description {
     text-decoration: none;
+}
+
+/* Fix layout for Safari */
+.compass .row:before, .compass .row:after {
+    display: initial;
 }
