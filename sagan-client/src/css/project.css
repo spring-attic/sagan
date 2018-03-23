@@ -7,11 +7,16 @@
 }
 
 .compass .sidebar {
-    background: #96c773;
-    float: left;
-    margin: 0;
+
+}
+
+.compass .sidebar ul.sidebar_main {
+    background: #f1f1f1;
     list-style: none;
-    padding: 2rem 0.5rem;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-top: 4px solid #34302e;
+    margin: 2rem 1rem 2rem 0;
 }
 
 @media only screen and (max-width: 64em) {
@@ -27,17 +32,21 @@
 }
 
 .compass .sidebar li {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    border-top: 1px solid white;
+}
+
+.compass .sidebar li:first-child {
+    border-top: 0 none;
 }
 
 .compass .sidebar div {
-    padding: 0.5rem 2.5rem 0.5rem 1rem;
     position: relative;
 }
 
 .compass .sidebar a {
     color: #34302d;
-    font-family: Montserrat, sans-serif;
+    font-family: "Varela Round", sans-serif;
 }
 
 .compass .sidebar span {
@@ -51,54 +60,71 @@
     padding: 0.3rem;
     cursor: pointer;
 }
+.compass .sidebar i.icon-chevron-down {
+    right: 0.4rem;
+}
 
 .compass .sidebar .child-inactive > div {
     color: #34302d;
-    opacity: 0.5;
 }
 
-.compass .sidebar .active > div,
-.compass .sidebar div:hover {
-    color: #34302d;
+.compass .sidebar li.sidebar_head {
+    padding: 0.7rem 2.5rem 0.5rem 1rem;
     font-weight: bold;
-    font-size: 0.98rem;
-    opacity: 1;
+    font-size: 1rem;
+}
+
+.compass .sidebar .active > div a {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #34302e;
+}
+
+.compass .sidebar a {
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    display: block;
+    color: #7cb050;
+    font-weight: normal;
 }
 
 .compass .sidebar a:hover {
+    text-decoration: underline;
+    font-weight: normal;
+}
+
+.compass .sidebar ul.sidebar_children {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 0 none;
+    border-top: 1px solid #FFF;
+}
+
+.compass .sidebar ul.sidebar_children li a {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.compass .sidebar ul.sidebar_children li a i {
+    right: auto;
+    left: .8rem;
+    top: .5rem;
+    font-size: 8px;
+}
+
+.compass .sidebar ul.sidebar_children li a:hover i {
     text-decoration: none;
 }
 
-.compass .sidebar .child-active > div {
+.compass .sidebar ul.sidebar_children li.active a {
     font-weight: bold;
-    font-size: 0.98rem;
-}
-
-.compass .sidebar .sidebar_children {
-    list-style: none;
-    border-left: 1px solid black;
-    margin: 1rem;
-}
-
-.compass .sidebar .sidebar_children a {
-    font-size: .9rem;
-    padding: 0.4rem 0.5rem;
-    margin-right: -1.5rem;
-    display: block;
-}
-
-.compass .sidebar .sidebar_children .active a,
-.compass .sidebar .sidebar_children a:hover {
-    font-size: .87rem;
-    color: #6bb536;
-    background: #fff;
-    font-weight: bold;
+    color: #34302e;
 }
 
 .compass .nav {
     border-bottom: 0;
-    background: #fff;
-    padding: 1.5rem 0 0 0;
+    background: #34302e;
+    padding: 0;
     margin-bottom: 0;
     display: flex;
 }
@@ -106,108 +132,48 @@
 .compass .nav-tabs li {
     margin-bottom: 0;
     float: none;
+    padding: 0.3rem 1rem 0 1rem;
+}
+
+.compass .nav-tabs li i {
+    margin-right: 0.3rem;
 }
 
 .compass .nav-tabs a {
     border: 0;
-    color: #34302d;
-    padding: 0.7rem 1rem;
+    color: #fff;
+    padding: 0.7rem 0.3rem;
     font-size: 1rem;
-    margin: 0 1rem;
+    margin: 0;
     width: 100%;
     text-align: center;
     box-sizing: border-box;
+    font-weight: 100;
+    border-bottom: 4px solid #34302d;
+    transition: border-color 0.2s;
+    -webkit-transition: border-color 0.2s;
+    -moz-transition: border-color 0.2s;
+    -o-transition: border-color 0.2s;
+    -ms-transition: border-color 0.2s;
+    font-weight: bold;
 }
 
 .compass .nav-tabs a:focus {
-    background: #fff;
+    background: #34302e;
 }
 
 .compass .nav-tabs a:hover,
 .compass .nav-tabs > .active > a {
     border: 0;
     border-bottom: 4px solid #6bb536;
-    color: #6bb536;
-    background: #fff;
-    font-weight: bold;
+    color: #fff;
+    background: #34302e;
 }
 
-.compass .nav > li > a > span {
-    padding-right: 0.5rem;
-}
 
-.compass .nav > li > a > svg {
-    vertical-align: sub;
-}
-
-.compass .nav > li > a > svg path {
-    fill: #34302d;
-}
-
-.compass .nav > .active > a > svg path,
-.compass .nav-tabs a:hover svg path {
-    fill: #6bb536;
-}
-
-.compass .nav > li > a > svg path.fill-white-only,
-.compass .nav > .active > a > svg path.fill-white-only,
-.compass .nav-tabs a:hover svg path.fill-white-only {
-    fill: #fff;
-}
-
-.compass .nav > li > a > svg path.stroke-only {
-    fill: transparent;
-    stroke: #34302d;
-}
-
-.compass .nav > .active > a > svg path.stroke-only,
-.compass .nav-tabs a:hover svg path.stroke-only {
-    fill: transparent;
-    stroke: #6bb536;
-}
-
-.compass .project--card {
-    margin-top: 2rem;
-    padding: 0;
-}
-
-.compass .project--card > * {
-    background-color: #fff;
-    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.27);
-    border: solid 1px #dfdfdf;
-    display: block;
-    height: 100%;
-    padding: 1rem;
-    box-sizing: border-box;
-}
-
-.compass .project--card > a:focus {
-    text-decoration: none;
-}
-
-.compass .project--card > *:hover {
-    text-decoration: none;
-    color: #34302d;
-    transition: .2s ease;
-}
-
-.compass .project--card > a h3 {
-    font-size: 14px;
-    font-weight: bold;
-    font-family: "Montserrat", sans-serif;
-}
-
-.compass .project--card > a div {
-    color: #34302d;
-}
-
-@media only screen and (min-width: 64em) {
-    .compass .project--card:nth-child(even) > * {
-        margin-left: 1rem;
-    }
-
-    .compass .project--card:nth-child(odd) > * {
-        margin-right: 1rem;
+@media only screen and (max-width: 64em) {
+    .compass .nav-tabs a {
+        padding: 0.7rem 2.3rem;
     }
 }
 
@@ -217,206 +183,184 @@
 
 .compass .compass-section h2 {
     font-size: 20px;
-    padding-top: 2rem;
+    padding: 2rem 0 1rem;
     width: 100%;
+    border-bottom: 1px solid #33302d;
+    font-weight: 700;
 }
 
-.compass .compass-section + .compass-section > h2 {
-    border-top: solid 1px rgb(195, 195, 195);
+.compass .tab-content {
+    border: 1px solid #ccc;
+    border-top: 0 none;
 }
 
-.compass .compass-section .compass-subtitle {
-    font-size: 16px;
-    margin: 1rem 0 0 0;
+/* Project Header  */
+
+.compass .project--header {
+    position: relative;
+    padding: 2.5rem 0 2rem;
+    margin-right: 90px;
 }
 
-.compass .tab-content .compass-section > .row {
-    margin-top: 2rem;
+.compass .project--header h1 {
+    display: inline-block;
+    font-size: 2.4rem;
+    vertical-align: middle;
+    line-height: 2.7rem;
+    margin-right: 1rem;
+}
+
+.compass .project--header .label {
+    margin-top: 0.7rem;
+    vertical-align: middle;
+}
+
+.compass .project--header .social-links {
+    position: absolute;
+    right: -90px;
+    top: 3rem;
+    font-size: 36px;
+    line-height: 30px;
+}
+
+.compass .project--header .social-links a {
+    display: inline-block;
+}
+
+.compass .project--header .social-links a:hover {
+    text-decoration: none;
+}
+
+.compass .project--header .social-links img {
+    height: 30px;
+    vertical-align: baseline;
+}
+
+.compass .project--header .social-links a svg {
+    height: 30px;
+    width: 30px;
+    transition: fill 0.2s;
+    -webkit-transition: fill 0.2s;
+    -moz-transition: fill 0.2s;
+    -o-transition: fill 0.2s;
+    -ms-transition: fill 0.2s;
+}
+
+.compass .project--header .social-links a:hover svg {
+    fill: #6bb536;
+}
+
+@media only screen and (max-width: 64em) {
+    .compass .project--header {
+        padding: 2.5rem 0 2rem 1.5rem;
+        margin-right: 120px;
+    }
+}
+
+/* Overview */
+
+.compass .project-overview {
+    padding-top: 2rem;
+}
+/* Learn */
+
+/* Documentation */
+
+.compass .table--documentation {
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.compass table.table--documentation tbody tr td {
+    border: 0 none;
+    border-right: 1px solid #ccc;
+    padding: 10px 15px;
+}
+
+.compass table.table--documentation tbody tr td:last-child {
+    border-right: 0 none;
+}
+
+.compass table.table--documentation tbody tr td:first-child {
+    padding-left: 0;
+}
+
+.compass table.table--documentation .label {
+    vertical-align: top;
+}
+
+.compass .label {
+    background-color: #34302d;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+}
+
+.compass .label.current {
+    background-color: #6db33f;
+}
+
+.compass .label.snapshot {
+    background-color: #007ed6;
+}
+
+.compass .label.ga {
+    background-color: #c51515;
+}
+
+/* Guides */
+
+.compass h2.project--guides--title {
+    padding-top: 0
+}
+
+/* Samples */
+
+.compass .project--samples ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.compass .project--samples ul li {
+}
+
+.compass .project--samples ul li a {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    position: relative;
+    padding: 0.6rem 0 0.6rem 30px;
+    display: block;
+}
+
+.compass .project--samples ul li a:hover {
+    text-decoration: none;
+}
+
+.compass .project--samples ul li a i {
+    position: absolute;
+    left: 0;
+    top: 1rem;
+    font-size: 20px;
+}
+
+.compass .project--samples ul li a .project--sample--title,
+.compass .project--samples ul li a .project--sample--description {
+    display: block;
+}
+
+.compass .project--samples ul li a .project--sample--description {
+    color: #34302d;
+}
+
+.compass .project--samples ul li a:hover .project--sample--title {
+    text-decoration: underline;
+}
+
+.compass .project--samples ul li a:hover .project--sample--description {
+    text-decoration: none;
 }
 
 /* Fix layout for Safari */
 .compass .row:before, .compass .row:after {
     display: initial;
-}
-
-/* Overview */
-
-.compass .spring-boot-config {
-    border-radius: 4px;
-    background-color: #fff;
-    border: solid 2px #e5b451;
-    padding: 20px;
-}
-
-.compass .spring-boot-config h3 {
-    color: #e5b451;
-}
-
-.compass .quickstart {
-    background: #fff;
-    border-radius: 4px;
-    padding: 20px;
-}
-
-.compass .quickstart--title {
-    font-size: 22px;
-    display: block;
-    margin-bottom: 3px;
-}
-
-.compass .quickstart--button {
-    background: rgba(109, 179, 63, 0.0);
-    color: #6db33f;
-    border: 2px solid #6db33f;
-    padding: 5px;
-    text-align: center;
-    display: block;
-    border-radius: 3px;
-    margin-top: 10px;
-    transition: background 0.5s, color 0.5s;
-    text-decoration: none;
-}
-
-.compass .quickstart--button:hover {
-    background: rgba(109, 179, 63, 1);
-    color: #fff;
-}
-
-.compass .project--header {
-    background: #fff;
-    padding: 1rem 2rem
-}
-
-.compass .project--header h1 {
-    display: inline-block;
-    margin-right: 2rem;
-}
-
-.compass .project--header .link--github,
-.compass .project--header .link--stackoverflow {
-    margin: 0 0.4rem;
-    text-decoration: none;
-}
-
-.compass .project--header .link--github img {
-    height: 1.5rem;
-    vertical-align: baseline;
-}
-
-.compass .project--header .link--stackoverflow img {
-    height: 2rem;
-    vertical-align: sub;
-}
-
-.compass .project--header .version {
-    font-size: 0.65rem;
-    float: right;
-    line-height: 30px;
-}
-
-.compass .project--header .version strong {
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
-}
-
-.compass .project-overview {
-    padding-top: 2rem;
-}
-
-/* Learn */
-
-/* Documentation */
-
-.compass .project--documentation a:not(.not-version) {
-    font-family: "Montserrat", sans-serif;
-    display: flex;
-    border-radius: 4px;
-    border: solid 1px #6bb536;
-    padding: 0.5rem 0.8rem;
-    font-size: 14px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.compass .project--documentation a:not(.not-version):hover {
-    color: #fff;
-    background: #6bb536;
-}
-
-.compass .project--documentation a:not(.not-version) .release-status-group {
-    justify-content: flex-end;
-}
-
-.compass .project--documentation a:not(.not-version) .release-status {
-    font-weight: bold;
-    font-size: 12px;
-    margin-left: 10px;
-}
-
-.compass .project--documentation ul {
-    margin: 0;
-    list-style: none;
-}
-
-.compass .project--documentation ul li {
-    padding: 0;
-    margin-top: 0.7rem;
-}
-
-.compass .project--documentation ul li:nth-child(even) {
-    padding-left: 0.35rem;
-}
-
-.compass .project--documentation ul li:nth-child(odd) {
-    padding-right: 0.35rem;
-}
-
-.compass .project--documentation--version-button {
-    text-align: center;
-    margin-top: 1rem;
-}
-
-.compass a.not-version {
-    color: #34302d;
-    text-decoration: none;
-}
-
-.compass a.not-version:hover {
-    color: #5fa134;
-}
-
-.compass a.not-version span {
-    margin-right: 0.5rem;
-    text-decoration: underline;
-}
-
-/* Guides */
-
-.compass ul.project--guides {
-    list-style: none;
-    margin-top: 0.5rem;
-}
-
-.compass .project--guide > a {
-    border-left: 4px solid #eac36d;
-}
-
-.compass .project--guide > a:hover {
-    background-color: #eac36d;
-    border-color: #eac36d;
-}
-
-/* Samples */
-
-.compass .project--samples ul{
-    list-style: none;
-}
-
-.compass .project--sample > a {
-    border-left: 4px solid #96c773;
-}
-
-.compass .project--sample > a:hover {
-    background-color: #96c773;
-    border-color: #96c773;
 }
