@@ -1,5 +1,7 @@
 body {
   background-color: #f1f1f1;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
 }
 
 #scrim {
@@ -82,6 +84,7 @@ body {
   font-size: 14px;
   line-height: 14px;
   padding: 28px 20px;
+  font-weight: 700;
   transition: all 0.15s;
   -webkit-transition: all 0.15s;
   -moz-transition: all 0.15s;
@@ -185,7 +188,7 @@ a.spring-logo {
 
 a.spring-logo span {
   display: block;
-  width: 224px;
+  width: 46px;
   height: 46px;
   background: url("../img/spring-logo.png") -1px -48px no-repeat;
   opacity: 0;
@@ -497,6 +500,7 @@ input.floating-input:focus {
 
 .index-page--title {
   line-height: 24px;
+  font-weight: bold;
 }
 .index-page--title.top-margin {
   margin-top: 60px;
@@ -860,7 +864,7 @@ input.floating-input:focus {
   line-height: 16px;
   margin-bottom: 20px;
   padding-top: 10px;
-  font-weight: 400;
+  font-weight: 700;
 }
 .content-container--wrapper .content-container--body .content-section-sub-title {
   padding-right: 50px;
