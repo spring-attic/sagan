@@ -15,7 +15,7 @@
 }
 
 .project--container {
-  border: 1px solid #34302d;
+  border: 1px solid #ddd;
   display: inline-block;
   width: 21.8%;
   height: 340px;
@@ -51,6 +51,7 @@
   line-height: 20px;
   margin-bottom: 20px;
   text-transform: uppercase;
+  font-weight: 700;
 }
 .project--container .project--description {
   font-size: 14px;
@@ -85,8 +86,9 @@
   color: rgba(241, 241, 241, 0.75);
   font-size: 14px;
   line-height: 14px;
+  text-decoration: none;
 }
-.project--container .project-links--container .project-link:hover {
+.project--container .project-links--container .project-link:hover{
   text-decoration: none;
 }
 .project--container .project-links--container .project-link:hover [class^=icon-] {
@@ -124,8 +126,7 @@
 }
 .project--container.project--container--link:hover {
   text-decoration: none;
-  box-shadow: 0 0 3px #6db33f;
-  border-color: #6db33f;
+  border-color: #34302d;
 }
 .project--container.project--container--link:active {
   box-shadow: none;
