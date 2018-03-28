@@ -21,30 +21,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ProjectPagesTests extends AbstractIntegrationTests {
 
-    private ResultActions result;
-    private Document document;
-
     @Before
     public void setup() throws Exception {
         stubRestClient.putResponse("/orgs/spring-guides/repos",
                 Fixtures.load("/fixtures/github/githubRepoListWithSpringBoot.json"));
-
-        result = mockMvc.perform(MockMvcRequestBuilders.get("/projects/spring-boot"));
-        document = Jsoup.parse(result.andReturn().getResponse().getContentAsString());
     }
 
     @Test
     public void getStatusOk() throws Exception {
-        result.andExpect(status().isOk());
-    }
-
-    @Test
-    public void getContentType() throws Exception {
-        result.andExpect(content().contentTypeCompatibleWith("text/html"));
+		ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get("/projects/spring-boot"));
+        result.andExpect(status().isOk())
+				.andExpect(content().contentTypeCompatibleWith("text/html"));
     }
 
     @Test
     public void getSidebar() throws Exception {
+		Document document = documentForUrlPath("/projects/spring-boot");
         List<String> titles = document.select(".sidebar .sidebar_project a").stream()
                 .map(Element::text).collect(toList());
         assertThat(titles, hasItems("Spring Data", "Spring Framework", "Spring Boot")); // active
@@ -57,14 +49,10 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
         Document document = documentForUrlPath("/projects/spring-data");
 
         Elements activeProject = document.select(".sidebar .sidebar_project.active");
+        assertThat(activeProject, hasSize(1));
+		assertThat(activeProject.select("div > a").text(), is("Spring Data"));
 
-        List<String> titles = activeProject.stream()
-                .map(element -> element.select("> div > a").text())
-                .collect(toList());
-        assertThat(titles, hasSize(1));
-        assertThat(titles.get(0), is("Spring Data"));
-
-        Elements childProjects = activeProject.select(".sidebar_child");
+		Elements childProjects = activeProject.select(".sidebar_child");
         assertThat(childProjects, hasSize(15));
 
         List<String> childTitles = childProjects.stream()
@@ -102,24 +90,26 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void getQuickStart() throws Exception {
+		Document document = documentForUrlPath("/projects/spring-boot");
         assertThat(document.select(".quickstart").size(), is(1));
-
-        Elements quickStartTitle = document.select(".quickstart--title");
+        
+        Elements quickStartTitle = document.select(".quickstart h2");
         assertThat(quickStartTitle.size(), is(1));
         assertThat(quickStartTitle.first().text(), is("Quick start"));
 
-        Elements quickStartSubtitle = document.select(".quickstart--subtitle");
-        assertThat(quickStartSubtitle.size(), is(1));
-        assertThat(quickStartSubtitle.first().text(), is("Bootstrap your application with Spring Initializr"));
+        Elements quickStartContent = document.select(".quickstart div");
+        assertThat(quickStartContent.size(), is(1));
+        assertThat(quickStartContent.first().text(), is("Bootstrap your application with Spring Initializr."));
 
-        Elements quickStartButton = document.select(".quickstart--button");
-        assertThat(quickStartButton.size(), is(1));
-        assertThat(quickStartButton.first().text(), is("Get started"));
-        assertThat(quickStartButton.first().attr("href"), startsWith("https://start.spring.io/"));
+        Elements quickStartLink = quickStartContent.select("a");
+        assertThat(quickStartLink.size(), is(1));
+        assertThat(quickStartLink.first().text(), is("Spring Initializr"));
+        assertThat(quickStartLink.first().attr("href"), startsWith("https://start.spring.io/"));
     }
 
     @Test
     public void getHeader() throws Exception {
+		Document document = documentForUrlPath("/projects/spring-boot");
         assertThat(document.select(".project--header").size(), is(1));
 
         Elements githubLink = document.select(".project--header .link--github");
@@ -131,15 +121,16 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
         assertThat(stackoverflowLink.first().attr("href"),
                 is("https://stackoverflow.com/questions/tagged/spring-boot"));
 
-        assertThat(document.select(".project--header .version").first().text(), containsString("v1.5.7"));
+        assertThat(document.select(".project--header .version").first().text(), containsString("1.5.7"));
     }
 
     @Test
-    public void getSpringBootConfig() {
+    public void getSpringBootConfig() throws Exception {
+		Document document = documentForUrlPath("/projects/spring-boot");
         Elements springBootConfig = document.select(".spring-boot-config");
         assertThat(springBootConfig, hasSize(1));
 
-        Elements springBootConfigTitle = springBootConfig.select(".spring-boot-config--subtitle");
+        Elements springBootConfigTitle = springBootConfig.select("h2");
         assertThat(springBootConfigTitle.text(), is("Spring Boot Config"));
 
         String cleanHtml = springBootConfig.html().replaceAll("\\s+", " ");
@@ -162,6 +153,7 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void getFeatures() throws Exception {
+		Document document = documentForUrlPath("/projects/spring-boot");
         Elements features = document.select(".project-overview");
         assertThat(features, hasSize(1));
 
@@ -172,6 +164,7 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void getSubheaderHasBootstrapTabsMarkup() throws Exception {
+		Document document = documentForUrlPath("/projects/spring-boot");
         Elements subheader = document.select(".nav.nav-tabs");
         assertThat(subheader, hasSize(1));
 
@@ -193,18 +186,19 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
 
     @Test
     public void getGuides() throws Exception {
+		Document document = documentForUrlPath("/projects/spring-boot");
         Elements learnSection = document.select("#learn");
         assertThat(learnSection, hasSize(1));
 
         Element learnTitle = learnSection.select(".project--guides--title").first();
         assertThat(learnTitle.text(), is("Guides"));
 
-        Elements guides = learnSection.select(".project--guide");
+        Elements guides = learnSection.select(".project--guides ul li");
         assertThat(guides, hasSize(1));
 
         Element firstGuide = guides.get(0);
-        Elements title = firstGuide.select(".project--guide--title");
-        Elements subtitle = firstGuide.select(".project--guide--subtitle");
+        Elements title = firstGuide.select(".project--sample--title");
+        Elements subtitle = firstGuide.select(".project--sample--description");
         Element guideLink = firstGuide.select("a").first();
 
         assertThat(title.text(), is("Building a RESTful Web Service"));
@@ -213,62 +207,53 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
     }
 
     @Test
-    public void getReferenceDocumentation() {
+    public void getDocumentation() throws Exception {
+		Document document = documentForUrlPath("/projects/spring-boot");
         Element documentationSection = document.select(".project--documentation").first();
 
         Element documentationTitle = documentationSection.select("h2").first();
         assertThat(documentationTitle.text(), is("Documentation"));
 
-        Element referenceDoc = documentationSection.select(".project-reference").first();
-        Element referenceSubtitle = referenceDoc.select("h3").first();
-        assertThat(referenceSubtitle.text(), is("Reference doc."));
+        Elements docs = document.select("tr");
+        assertThat(docs, hasSize(5));
 
-        Element currentVersion = referenceDoc.select(".project-reference--current-version").first();
-        assertThat(currentVersion.select(".release-display-name").text(), is("1.5.7"));
-        assertThat(currentVersion.select(".release-status").text(), is("GA CURRENT"));
-        assertThat(currentVersion.select("a").attr("href"),
-                is("http://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/htmlsingle/"));
-
-        Elements versions = referenceDoc.select(".project-reference--version");
-        assertThat(versions, hasSize(4));
-
-        List<String> displayNames = versions.stream()
+        List<String> displayNames = docs.stream()
                 .map(element -> element.select(".release-display-name").text())
                 .collect(toList());
 
-        assertThat(displayNames, contains("2.0.0 M4", "2.0.0", "1.5.8", "1.4.7"));
+        assertThat(displayNames, contains("1.5.7", "2.0.0 M4", "2.0.0", "1.5.8", "1.4.7"));
 
-        List<String> statuses = versions.stream()
-                .map(element -> element.select(".release-status").text())
+        List<String> statuses = docs.select(".label").stream()
+                .map(element -> element.text())
                 .collect(toList());
 
-        assertThat(statuses, contains("PRE", "SNAPSHOT", "SNAPSHOT", "GA"));
+        assertThat(statuses, contains("CURRENT", "GA", "PRE", "SNAPSHOT", "SNAPSHOT", "GA"));
 
-        List<String> links = versions.stream()
-                .map(element -> element.select("a").attr("href"))
+        List<String> links = docs.select("a").stream()
+                .map(element -> element.attr("href"))
                 .collect(toList());
 
         assertThat(links, contains(
-                "http://docs.spring.io/spring-boot/docs/2.0.0.M4/reference/htmlsingle/",
+				"http://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/htmlsingle/",
+				"http://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/api/",
+				"http://docs.spring.io/spring-boot/docs/2.0.0.M4/reference/htmlsingle/",
+                "http://docs.spring.io/spring-boot/docs/2.0.0.M4/api/",
                 "http://docs.spring.io/spring-boot/docs/2.0.0.BUILD-SNAPSHOT/reference/htmlsingle/",
+                "http://docs.spring.io/spring-boot/docs/2.0.0.BUILD-SNAPSHOT/api/",
                 "http://docs.spring.io/spring-boot/docs/1.5.8.BUILD-SNAPSHOT/reference/htmlsingle/",
-                "http://docs.spring.io/spring-boot/docs/1.4.7.RELEASE/reference/htmlsingle/"
+				"http://docs.spring.io/spring-boot/docs/1.5.8.BUILD-SNAPSHOT/api/",
+                "http://docs.spring.io/spring-boot/docs/1.4.7.RELEASE/reference/htmlsingle/",
+				"http://docs.spring.io/spring-boot/docs/1.4.7.RELEASE/api/"
         ));
-
     }
 
     @Test
     public void referenceDocShowsAllReleasesWhenThereIsNoCurrentRelease() throws Exception {
         Document document = documentForUrlPath("/projects/platform");
-
         Element documentationSection = document.select(".project--documentation").first();
-        Element referenceDoc = documentationSection.select(".project-reference").first();
-
-        Elements versions = referenceDoc.select(".project-reference--version");
+        Elements versions = documentationSection.select(".table--documentation tr");
         assertThat(versions, hasSize(3));
-
-        assertThat(document.select(".project-reference--releases").hasClass("in"), is(true));
-        assertThat(document.select(".project-reference--version-button"), hasSize(0));
+        assertThat(documentationSection.select(".label.current"), hasSize(0));
     }
 
     @Test
@@ -279,58 +264,13 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
     }
 
     @Test
-    public void getAPIDocumentation() {
-        Element documentationSection = document.select(".project--documentation").first();
-
-        Element apiDoc = documentationSection.select(".project-api").first();
-        Element apiSubtitle = apiDoc.select("h3").first();
-        assertThat(apiSubtitle.text(), is("API doc."));
-
-        Element currentVersion = apiDoc.select(".project-api--current-version").first();
-        assertThat(currentVersion.select(".release-display-name").text(), is("1.5.7"));
-        assertThat(currentVersion.select(".release-status").text(), is("GA CURRENT"));
-        assertThat(currentVersion.select("a").attr("href"),
-                is("http://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/api/"));
-
-        Elements versions = apiDoc.select(".project-api--version");
-        assertThat(versions, hasSize(4));
-
-        List<String> displayNames = versions.stream()
-                .map(element -> element.select(".release-display-name").text())
-                .collect(toList());
-
-        assertThat(displayNames, contains("2.0.0 M4", "2.0.0", "1.5.8", "1.4.7"));
-
-        List<String> statuses = versions.stream()
-                .map(element -> element.select(".release-status").text())
-                .collect(toList());
-
-        assertThat(statuses, contains("PRE", "SNAPSHOT", "SNAPSHOT", "GA"));
-
-        List<String> links = versions.stream()
-                .map(element -> element.select("a").attr("href"))
-                .collect(toList());
-
-        assertThat(links, contains(
-                "http://docs.spring.io/spring-boot/docs/2.0.0.M4/api/",
-                "http://docs.spring.io/spring-boot/docs/2.0.0.BUILD-SNAPSHOT/api/",
-                "http://docs.spring.io/spring-boot/docs/1.5.8.BUILD-SNAPSHOT/api/",
-                "http://docs.spring.io/spring-boot/docs/1.4.7.RELEASE/api/"
-        ));
-    }
-
-    @Test
     public void apiDocShowsAllReleasesWhenThereIsNoCurrentRelease() throws Exception {
         Document document = documentForUrlPath("/projects/platform");
 
         Element documentationSection = document.select(".project--documentation").first();
-        Element apiDoc = documentationSection.select(".project-api").first();
-
-        Elements versions = apiDoc.select(".project-api--version");
+        Elements versions = documentationSection.select(".table--documentation tr");
         assertThat(versions, hasSize(3));
-
-        assertThat(document.select(".project-api--releases").hasClass("in"), is(true));
-        assertThat(document.select(".project-api--version-button"), hasSize(0));
+        assertThat(document.select(".project--header .version"), hasSize(0));
     }
 
     @Test
@@ -341,7 +281,8 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
     }
 
     @Test
-    public void getSamples() {
+    public void getSamples() throws Exception {
+		Document document = documentForUrlPath("/projects/spring-boot");
         Elements samplesSection = document.select("#samples");
         assertThat(samplesSection, hasSize(1));
 
@@ -349,7 +290,7 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
         assertThat(samplesTitle.text(), is("A few examples to try out:"));
 
 
-        Elements samples = samplesSection.select(".project--sample");
+        Elements samples = samplesSection.select(".project--samples li");
         assertThat(samples, hasSize(6));
 
         Element firstSample = samples.get(0);

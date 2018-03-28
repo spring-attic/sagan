@@ -121,7 +121,8 @@
 
                             <table class="table table--documentation">
                                 <tbody>
-                                <tr th:with="release=${currentRelease.get()}">
+                                <tr     th:if="${currentRelease.isPresent()}"
+                                        th:with="release=${currentRelease.get()}">
                                     <td>
                                         <span class="release-display-name" th:text="${release.getVersionDisplayName()}">
                                         </span>
