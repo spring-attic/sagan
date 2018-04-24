@@ -123,6 +123,29 @@
   width: 100%;
 }
 
+.homepage--body .homepage--banner .pvtl-nyse--banner {
+  background: #00ae9e;
+  background-image: url(/img/homepage/bg-hero-banner-home-spring-logo.png);
+  background-repeat: no-repeat;
+}
+
+.homepage--body .homepage--banner .pvtl-nyse--banner .container-fluid {
+  max-width: 900px;
+}
+
+.homepage--body .homepage--banner .pvtl-nyse--banner p a {
+  color: white;
+  transition: all .2s;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -o-transition: all .2s;
+  -ms-transition: all .2s;
+}
+
+.homepage--body .homepage--banner .pvtl-nyse--banner p a:hover {
+  color: #00253e;
+}
+
 .homepage--body .homepage--banner .automate-ops--banner {
   background: #055891;
   background-image: url(/img/homepage/bg-hero-banner-home-automate-ops.png), -moz-linear-gradient( 0deg, rgb(15,63,97) 0%, rgb(8,83,135) 53%, rgb(0,102,172) 100%);
