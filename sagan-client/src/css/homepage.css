@@ -133,6 +133,10 @@
   max-width: 900px;
 }
 
+.homepage--body .homepage--banner .pvtl-nyse--banner img {
+  margin: -40px 0 30px;
+}
+
 .homepage--body .homepage--banner .pvtl-nyse--banner p a {
   color: white;
   transition: all .2s;
