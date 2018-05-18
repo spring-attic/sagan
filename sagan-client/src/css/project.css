@@ -262,6 +262,10 @@
 .compass .project-overview {
     padding-top: 2rem;
 }
+
+.compass .project-overview .paragraph {
+    padding-bottom: 1rem;
+}
 /* Learn */
 
 /* Documentation */
