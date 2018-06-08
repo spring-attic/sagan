@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import sagan.guides.GuideMetadata;
 import sagan.guides.support.ProjectGuidesRepository;
 import sagan.projects.Project;
+import sagan.support.ResourceNotFoundException;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.Section;
 
@@ -44,7 +45,10 @@ class ProjectsController {
 
 	@RequestMapping(value = "/{projectName}", method = { GET, HEAD })
     public String showProject(Model model, @PathVariable String projectName) {
-        Project project = projectMetadataService.getProject(projectName);
+		Project project = projectMetadataService.getProject(projectName);
+		if (project == null) {
+			throw new ResourceNotFoundException("project " + projectName);
+		}
         List<Project> projects = this.projectMetadataService.getActiveTopLevelProjects();
         model.addAttribute("selectedProject", project);
         model.addAttribute("projectStackOverflow", stackOverflowUrl(project));
