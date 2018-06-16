@@ -110,44 +110,34 @@
 }
 
 .homepage--body .homepage--banner .springone-platform--banner {
-  background: #111229;
-  background-image: -moz-linear-gradient( 0deg, rgb(16,17,40) 0%, rgb(19,20,47) 22%, rgb(21,23,54) 47%, rgb(34,36,100) 82%, rgb(46,49,146) 100%);
+  background: #2f358f;
+/*  background-image: -moz-linear-gradient( 0deg, rgb(16,17,40) 0%, rgb(19,20,47) 22%, rgb(21,23,54) 47%, rgb(34,36,100) 82%, rgb(46,49,146) 100%);
   background-image: -webkit-linear-gradient( 0deg, rgb(16,17,40) 0%, rgb(19,20,47) 22%, rgb(21,23,54) 47%, rgb(34,36,100) 82%, rgb(46,49,146) 100%);
-  background-image: -ms-linear-gradient( 0deg, rgb(16,17,40) 0%, rgb(19,20,47) 22%, rgb(21,23,54) 47%, rgb(34,36,100) 82%, rgb(46,49,146) 100%);
+  background-image: -ms-linear-gradient( 0deg, rgb(16,17,40) 0%, rgb(19,20,47) 22%, rgb(21,23,54) 47%, rgb(34,36,100) 82%, rgb(46,49,146) 100%);*/
+}
+
+.homepage--body .homepage--banner .springone-platform--banner h2 {
+  font-weight: bold;
 }
 
 .homepage--body .homepage--banner .springone-platform--banner img {
   height: 55px;
-  max-width: 336px;
+  /*max-width: 336px;*/
   margin: -40px 0 30px;
   width: 100%;
 }
 
-.homepage--body .homepage--banner .pvtl-nyse--banner {
-  background: #00ae9e;
-  background-image: url(/img/homepage/bg-hero-banner-home-spring-logo.png);
-  background-repeat: no-repeat;
-}
-
-.homepage--body .homepage--banner .pvtl-nyse--banner .container-fluid {
-  max-width: 900px;
-}
-
-.homepage--body .homepage--banner .pvtl-nyse--banner img {
-  margin: -40px 0 30px;
-}
-
-.homepage--body .homepage--banner .pvtl-nyse--banner p a {
+.homepage--body .homepage--banner .springone-platform--banner p a {
   color: white;
-  transition: all .2s;
-  -webkit-transition: all .2s;
-  -moz-transition: all .2s;
-  -o-transition: all .2s;
-  -ms-transition: all .2s;
 }
 
-.homepage--body .homepage--banner .pvtl-nyse--banner p a:hover {
-  color: #00253e;
+.homepage--body .homepage--banner .springone-platform--banner p a:hover {
+  color: #9499c8;
+}
+
+.homepage--body .homepage--banner .springone-platform--banner .small {
+  font-size: 14px;
+  margin-top: 20px;
 }
 
 .homepage--body .homepage--banner .automate-ops--banner {
