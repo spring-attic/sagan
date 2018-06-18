@@ -92,15 +92,6 @@
           <div class="project--title">Spring REST Docs</div>
           <p class="project--description">Document RESTful services by combining hand-written documentation with auto-generated snippets produced with Spring MVC Test or REST Assured.</p>
         </a>
-        <a class="project--container project--container--link"
-           th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-social')}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-social"></div>
-          </div>
-          <div class="project--title">Spring Social</div>
-          <p class="project--description">Easily connects your applications with third-party APIs such as Facebook, Twitter, LinkedIn, and more.</p>
-        </a>
-
         <a class="project--container project--container--link" th:href="${project.siteUrl}" th:with="project=${projectMetadata.getProject('spring-amqp')}">
           <div class="project-logo--container">
             <div class="icon project--logo logo-spring-amqp"></div>
@@ -219,6 +210,10 @@
         <a th:href="${project.siteUrl}" class="project--container project--container--link" th:with="project=${projectMetadata.getProject('spring-xd')}">
           <div class="project--title">Spring XD</div>
           <p class="project--description">Simplifies the development of big data applications by addressing ingestion, analytics, batch jobs and data export.</p>
+        </a>
+        <a th:href="${project.siteUrl}" class="project--container project--container--link" th:with="project=${projectMetadata.getProject('spring-social')}">
+          <div class="project--title">Spring Social</div>
+          <p class="project--description">Easily connects your applications with third-party APIs such as Facebook, Twitter, LinkedIn, and more.</p>
         </a>
       </section>
     </article>
