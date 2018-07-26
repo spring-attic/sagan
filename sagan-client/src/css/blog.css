@@ -293,6 +293,8 @@
 }
 .social-btn--container .social-btn.googleplus {
   background-position: 1000px 617px;
+  width: 0;
+  margin: 0;
 }
 .social-btn--container .social-btn.googleplus:hover {
   background-position: 917px 617px;
@@ -315,7 +317,76 @@
 .social-btn--container .social-btn.youtube:hover {
   background-position: 917px 387px;
 }
-
+#blog-sidebar-newsletter p {
+  text-align: center;
+  margin: 20px;
+  /*font-size: 13px;*/
+}
+#blog-sidebar-newsletter #confirmation {
+  display: none;
+}
+#blog-sidebar-newsletter .mktoForm .mktoRequiredField .mktoAsterix {
+  display: none !important;
+}
+#blog-sidebar-newsletter .mktoForm .mktoCheckboxList > label {
+  font-family: "Varela Round", sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 0;
+  width: 300px !important;
+}
+#blog-sidebar-newsletter .mktoForm .mktoCheckboxList > label a {
+  color: #6db33f;
+}
+#blog-sidebar-newsletter .mktoForm input[type="email"]{
+  height: 40px;
+  padding: 5px 10px;
+  border-radius: 0;
+  width: 327px !important;
+}
+#blog-sidebar-newsletter .mktoForm input[type="email"]:focus {
+  border-color: #6db33f;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(109, 179, 63, 0.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(109, 179, 63, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(109, 179, 63, 0.6);
+}
+#blog-sidebar-newsletter .mktoForm .mktoGutter {
+  height: 0;
+}
+#blog-sidebar-newsletter .mktoForm .mktoOffset {
+  width: 0 !important;
+}
+#blog-sidebar-newsletter .mktoForm .mktoError .mktoErrorMsg {
+  background-color: white !important;
+  background-image: none !important;
+  border: 1px solid #ccc !important;
+  text-shadow: none !important;
+  color: #ccc !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+}
+#blog-sidebar-newsletter .mktoForm .mktoError .mktoErrorArrow {
+  background-color: white !important;
+  border: 1px solid #ccc !important;
+}
+#blog-sidebar-newsletter .mktoForm .mktoButtonWrap {
+  margin-left: 130px !important;
+}
+#blog-sidebar-newsletter .mktoForm .mktoButtonWrap.mktoSimple .mktoButton {
+  background-color: #6db33f;
+  background-image: none;
+  border: 1px solid #6db33f;
+  transition: all 0.15s;
+  -webkit-transition: all 0.15s;
+  -moz-transition: all 0.15s;
+  -o-transition: all 0.15s;
+  -ms-transition: all 0.15s;
+}
+#blog-sidebar-newsletter .mktoForm .mktoButtonWrap.mktoSimple .mktoButton:hover {
+  opacity: 0.9;
+}
 .promo-material {
   padding: 75px 0;
   margin: 0 0 40px 0;

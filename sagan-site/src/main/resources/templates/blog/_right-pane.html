@@ -18,10 +18,23 @@
     </ul>
     <ul class="social-btn--container">
       <a href="http://twitter.com/springcentral" class="social-btn twitter"></a>
-      <a href="https://plus.google.com/+springframework" class="social-btn googleplus"></a>
+      <!-- <a href="https://plus.google.com/+springframework" class="social-btn googleplus"></a> -->
       <a href="http://www.linkedin.com/groups/Spring-Users-46964" class="social-btn linkedin"></a>
       <a href="/videos" class="social-btn youtube"></a>
     </ul>
+    <div id='blog-sidebar-newsletter'>
+      <p>Get monthly updates from The Spring Team delivered to your inbox</p>
+      <script src="https://app-sj05.marketo.com/js/forms2/js/forms2.min.js"></script>
+      <form id="mktoForm_4723"></form>
+      <script>
+        MktoForms2.loadForm("https://app-sj05.marketo.com", "625-IUJ-009", 4723, function(form){
+          form.onSuccess(function(values, followUpUrl) {
+            form.getFormElem().html("<p>Thank you!</p>");
+            return false;
+          });
+        });
+      </script>
+    </div>
   </div>
 </body>
 </html>

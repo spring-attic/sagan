@@ -550,6 +550,10 @@ input.floating-input:focus {
 .footer a {
   color: #6db33f;
 }
+.footer a:hover {
+  color: white;
+  text-decoration: none;
+}
 .footer .nav {
   margin-bottom: 12px;
 }

@@ -565,6 +565,7 @@
     max-height: 138px;
   }
   .footer .nav li a {
-    padding: 0 10px;
+    padding: 0 4px;
+    font-size: 11px;
   }
 }
