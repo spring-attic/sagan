@@ -320,10 +320,6 @@
 #blog-sidebar-newsletter p {
   text-align: center;
   margin: 20px;
-  /*font-size: 13px;*/
-}
-#blog-sidebar-newsletter #confirmation {
-  display: none;
 }
 #blog-sidebar-newsletter .mktoForm .mktoRequiredField .mktoAsterix {
   display: none !important;
@@ -395,4 +391,23 @@
   border: 6px solid white;
   color: #ccc;
   background-color: #ddd;
+}
+
+@media(max-width: 1072px) {
+  #blog-sidebar-newsletter .mktoForm .mktoCheckboxList,
+  #blog-sidebar-newsletter .mktoForm .mktoCheckboxList > label {
+    width: 250px !important;
+    padding: 0;
+  }
+  #blog-sidebar-newsletter .mktoForm input[type="email"]{
+    width: 250px !important;
+  }
+  #blog-sidebar-newsletter p {
+    text-align: left;
+    margin: 0 0 10px;
+    max-width: 260px;
+  }
+  #blog-sidebar-newsletter .mktoForm .mktoButtonWrap {
+    margin-left: 0 !important;
+  }
 }
