@@ -574,23 +574,8 @@ input.floating-input:focus {
 .footer .nav li:last-child a {
   padding-right: 0;
 }
-.footer .footer-newsletter--wrapper {
-  width: auto;
-  margin: 0;
-}
-.footer .footer-newsletter--container iframe {
-  border: 0;
-}
-.footer .footer-newsletter--container label {
-  text-transform: uppercase;
-  margin-bottom: 15px;
-  line-height: 12px;
-  font-weight: bold;
-  font-size: 12px;
-}
-.footer .footer-newsletter--container .footer-subscribe--input--container {
-  background-color: white;
-  border: 1px solid #f1f1f1;
+#teconsent a:before, #authentication a:before {
+    content:"•";margin: 0 3px 0 1px;color:white;
 }
 
 .item-dropdown-widget {
@@ -1114,62 +1099,6 @@ form.lpeRegForm .mktInput {
 .about-feature--container.no-link {
   box-shadow: none;
   border: none;
-}
-
-.job-category--container {
-  padding-right: 95px;
-}
-.job-category--container .job-category--title {
-  font-family: "Montserrat", sans-serif;
-  text-transform: uppercase;
-  font-size: 16px;
-  line-height: 20px;
-  margin-bottom: 10px;
-}
-.job-category--container .job--container {
-  margin-bottom: 20px;
-}
-.job-category--container .job--container .title {
-  color: #5fa134;
-  font-size: 16px;
-  line-height: 20px;
-}
-
-.job-post--container {
-  padding-bottom: 60px;
-  margin-bottom: 55px;
-  border-bottom: 1px solid white;
-}
-.job-post--container a {
-  color: #5fa134;
-}
-.job-post--container .job-post--title {
-  margin-bottom: 5px;
-}
-.job-post--container .job-post--location {
-  font-size: 16px;
-  line-height: 20px;
-  margin-bottom: 20px;
-}
-.job-post--container .job-post--details p {
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 20px;
-}
-.job-post--container .job-post--details ul {
-  margin-bottom: 30px;
-}
-.job-post--container .job-post--details ul li {
-  line-height: 22px;
-  margin-bottom: 5px;
-}
-.job-post--container .apply-now-link {
-  text-decoration: uppercase;
-}
-.job-post--container:last-child {
-  padding-bottom: 0;
-  margin-bottom: 0;
-  border-bottom: none;
 }
 
 .admin--wrapper {

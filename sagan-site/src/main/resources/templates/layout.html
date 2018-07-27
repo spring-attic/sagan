@@ -121,7 +121,6 @@
             <a href="https://pivotal.io/terms-of-use">Terms of Use</a> &bullet;
             <a href="https://pivotal.io/privacy-policy">Privacy</a> &bullet;
             <a th:href="@{/trademarks}">Trademark Guidelines</a> 
-            <style>#teconsent a:before, #authentication a:before {content:"•";margin: 0 3px 0 1px;color:white;}</style>
             <div id="teconsent" style='display:inline-block;'></div> 
             <span id='authentication' sec:authorize="isFullyAuthenticated()">
               [<a th:href="@{/signout}">Sign out</a>]
@@ -131,7 +130,7 @@
       </div>
     </footer>
     <div id="scrim"></div>
-    <script async="async" src=//consent.trustarc.com/notice?domain=spring.io&c=teconsent&js=nj&text=true&pcookie&country=gb crossorigin=""></script>
+    <script async="async" src=//consent.trustarc.com/notice?domain=spring.io&c=teconsent&js=nj&text=true&pcookie crossorigin=""></script>
   </div>
 </body>
 </html>
