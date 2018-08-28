@@ -70,7 +70,7 @@
     <rule>
         <name>Deprecated Tutorials</name>
         <note>https://github.com/spring-io/sagan/pull/475</note>
-        <from>/guides/tutorials/(rest|data|web)/$</from>
+        <from>/guides/tutorials/(data|web)/$</from>
         <to type="temporary-redirect" last="true">/guides</to>
     </rule>
     <rule>
