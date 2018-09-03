@@ -136,7 +136,6 @@ public class RewriteTests {
 
     @Test
     public void deprecatedTutorialsRedirected() throws Exception {
-        validateTemporaryRedirect("http://spring.io/guides/tutorials/rest/", "/guides");
         validateTemporaryRedirect("http://spring.io/guides/tutorials/data/", "/guides");
         validateTemporaryRedirect("http://spring.io/guides/tutorials/web/", "/guides");
     }
