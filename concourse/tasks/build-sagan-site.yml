@@ -1,0 +1,22 @@
+---
+platform: linux
+inputs:
+- name: sagan-site-repo
+outputs:
+- name: build
+run:
+  user: root
+  path: /bin/bash
+  args:
+  - -c
+  - |-
+    set -e -u -x
+    # sagan-repo will be available with root owner
+    # but js things will complain if ran by root
+    # so we first change repo owner and then use
+    # gradle user to run build
+    chown gradle:gradle -R ./sagan-site-repo
+    cd sagan-site-repo
+    su gradle -c "./gradlew --console plain :sagan-site:build"
+    cd ../
+    cp -R sagan-site-repo/sagan-site/build/* build

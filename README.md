@@ -1,7 +1,5 @@
 ## Sagan: the spring.io site and reference application
 
-#### Latest production deployment [![Build Status](https://travis-ci.org/spring-io/sagan.svg?branch=master)](https://travis-ci.org/spring-io/sagan)
-
 Welcome! The code in the master branch of this repository is deployed and running right now at [spring.io](http://spring.io). The [blog][], the collection of [guides][], and everything else you see there is implemented right here.
 
 In addition to the practical purpose of powering Spring's home on the web, this project is designed to serve as a *reference application*--a resource that developers can use to see how the [Spring team][] have used Spring to implement a real-world app with a few interesting requirements. We hope you'll find it useful!
@@ -23,8 +21,8 @@ If you have any questions, feedback, or feature requests, don't hesitate to [add
 Sagan is released under the [BSD-3 license](LICENSE.md).
 
 
-[blog]: http://spring.io/blog
-[guides]: http://spring.io/guides
-[Spring team]: http://spring.io/team
+[blog]: https://spring.io/blog
+[guides]: https://spring.io/guides
+[Spring team]: https://spring.io/team
 [project wiki]: https://github.com/spring-io/sagan/wiki
 [add an issue]: https://github.com/spring-io/sagan/issues
