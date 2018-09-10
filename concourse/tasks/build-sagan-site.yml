@@ -1,0 +1,31 @@
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: gradle
+    tag: jdk8
+inputs:
+- name: sagan-site-repo
+outputs:
+- name: build
+params:
+  # JSPM github authentication is needed for the CI
+  # otherwise install steps reach github API limitation
+  JSPM_GITHUB_AUTH_TOKEN:
+run:
+  user: root
+  path: /bin/bash
+  args:
+  - -c
+  - |-
+    set -e -u -x
+    # sagan-repo will be available with root owner
+    # but js things will complain if ran by root
+    # so we first change repo owner and then use
+    # gradle user to run build
+    chown gradle:gradle -R ./sagan-site-repo
+    cd sagan-site-repo
+    su gradle -c "./gradlew --console plain :sagan-site:build"
+    cd ../
+    cp -R sagan-site-repo/sagan-site/build/* build

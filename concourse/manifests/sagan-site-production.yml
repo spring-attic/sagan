@@ -1,0 +1,18 @@
+---
+applications:
+- name: sagan
+  buildpack: java_buildpack
+  instances: 2
+  health-check-type: http
+  health-check-http-endpoint: /health
+  memory: 2048M
+  disk_quota: 1024M
+  routes:
+  - route: spring.io
+  - route: www.spring.io
+  - route: sagan-production.cfapps.io
+  services:
+  - papertrail
+  - sagan-db
+  - sagan-cache
+  - sagan-search

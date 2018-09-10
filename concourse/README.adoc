@@ -1,0 +1,40 @@
+== Continuous Integration and Deployment with Concourse
+
+The Sagan application is continuously built, tested and deployed in production with http://concourse.ci[Concourse CI].
+You can check the status of the Concourse pipeline at any time on our
+https://ci.spring.io/teams/sagan/pipelines/sagan[Concourse instance].
+
+=== Sagan pipelines
+
+Sagan is made of several applications, including the website itself, `sagan-site`.
+
+The https://ci.spring.io/teams/sagan/pipelines/sagan[Sagan pipeline] has a job for each application,
+but they're all quite similar.
+
+. Continuously check the Sagan GitHub repository for changes
+. Start a build
+. Checkout the git repository
+. Build the application and run the tests
+. Deploy the application to https://run.pivotal.io/[Pivotal Web Services] with zero downtime
+. Notify the private Slack channel
+
+
+=== Setting up a Concourse pipeline
+
+Everything you need to deploy an identical Concourse pipeline is here. The `pipeline.yml` file
+describes the resources, jobs and steps that make the Sagan pipeline. It is referencing the
+various tasks and CloudFoundry manifests as external files under the concourse folder.
+
+Some job steps require credentials and secrets; instead of adding them to `pipeline.yml` file
+(and to the commit history), they can be stored in a separate (private) file or in a
+https://concourse-ci.org/creds.html[credentials manager]. You can spot those `\((parameters))`
+in the pipeline description.
+
+To deploy the pipeline to an existing Concourse instance, in a existing `sagan` target, you
+can run the following command using the https://concourse-ci.org/fly.html[fly CLI]:
+
+[source]
+----
+$ cd sagan/concourse
+$ fly --target sagan set-pipeline --pipeline=sagan --config=pipeline.yml --load-vars-from=credentials.yml
+----
