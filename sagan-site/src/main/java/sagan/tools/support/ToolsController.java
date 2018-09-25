@@ -28,7 +28,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
  * {@link sagan.tools.support.ToolsService} for details.
  */
 @Controller
-@RequestMapping("/tools")
+@RequestMapping("/tools3")
 class ToolsController {
 
     private ToolsService toolsService;

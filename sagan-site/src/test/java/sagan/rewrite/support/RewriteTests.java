@@ -141,6 +141,16 @@ public class RewriteTests {
     }
 
     @Test
+	public void tools4IsRedirected() throws Exception {
+		validateTemporaryRedirect("http://spring.io/tools4", "/tools");
+	}
+
+	@Test
+	public void eclipseToolsIsRedirected() throws Exception {
+		validateTemporaryRedirect("http://spring.io/tools/eclipse", "/tools3/eclipse");
+	}
+
+    @Test
     public void deprecatedWarGuideRedirected() throws Exception {
         validateTemporaryRedirect("http://spring.io/guides/gs/convert-jar-to-war-maven/", "/guides/gs/convert-jar-to-war/");
     }
