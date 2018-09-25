@@ -17,10 +17,6 @@
   width: 124px;
   background-position: 808px 838px;
 }
-.tool--container .tool--icon.ggts-icon {
-  width: 96px;
-  background-position: 798px 697px;
-}
 .tool--container .tool--title {
   font-size: 18px;
   text-transform: uppercase;
@@ -158,15 +154,6 @@
   background-color: #ccc;
   box-shadow: inset 3px 3px 0 white, inset -3px -3px 0 white;
 }
-.tools--wrapper .tools-feature--container .tools-feature--thumbnail.screenshot-ggts-editing {
-  background: url("../img/screenshot-ggts-editing.png") transparent no-repeat;
-}
-.tools--wrapper .tools-feature--container .tools-feature--thumbnail.screenshot-ggts-support {
-  background: url("../img/screenshot-ggts-support.png") transparent no-repeat;
-}
-.tools--wrapper .tools-feature--container .tools-feature--thumbnail.screenshot-ggts-integration {
-  background: url("../img/screenshot-ggts-integration.png") transparent no-repeat;
-}
 .tools--wrapper .tools-feature--container .tools-feature--description {
   font-size: 14px;
   line-height: 20px;
@@ -217,9 +204,6 @@
 }
 .tools--wrapper.screenshot .screenshot.sts-screenshot {
   background-image: url("../img/sts-screenshot.png");
-}
-.tools--wrapper.screenshot .screenshot.ggts-screenshot {
-  background-image: url("../img/ggts-screenshot.png");
 }
 .tools--wrapper.tools-feature--wrapper .tools-feature--container {
   min-height: 175px;
@@ -278,10 +262,6 @@
 .tool-versions--wrapper .tool-versions--icon--container .tool-versions--icon.sts-icon {
   width: 124px;
   background-position: 808px 838px;
-}
-.tool-versions--wrapper .tool-versions--icon--container .tool-versions--icon.ggts-icon {
-  width: 96px;
-  background-position: 798px 697px;
 }
 .tool-versions--wrapper .tool-versions--icon--container .tool-versions--version {
   color: #f1f1f1;
@@ -454,10 +434,6 @@
   background-position: 673px 838px;
   width: 124px;
 }
-.tools-right-pane .tools-logo.ggts-logo {
-  background-position: 664px 698px;
-  width: 96px;
-}
 .tools-right-pane .tools-logo-small {
   background-image: url("../img/iconsprite.png");
   margin: 0 20px 0 0;
@@ -466,9 +442,6 @@
 }
 .tools-right-pane .tools-logo-small.sts-logo {
   background-position: 770px 470px;
-}
-.tools-right-pane .tools-logo-small.ggts-logo {
-  background-position: 770px 404px;
 }
 .tools-right-pane ul {
   margin: 0;

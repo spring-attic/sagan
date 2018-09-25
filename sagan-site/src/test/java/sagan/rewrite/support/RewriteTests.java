@@ -120,11 +120,6 @@ public class RewriteTests {
     }
 
     @Test
-    public void ggtsWelcomePageIsRedirected() throws Exception {
-        validateTemporaryRedirect("http://spring.io/tools/ggts/welcome", "http://grails.org/products/ggts/welcome");
-    }
-
-    @Test
     public void gplusIsRedirected() throws Exception {
         validateTemporaryRedirect("http://spring.io/gplus", "https://plus.google.com/+springframework/");
     }

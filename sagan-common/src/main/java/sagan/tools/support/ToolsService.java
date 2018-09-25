@@ -1,16 +1,17 @@
 package sagan.tools.support;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import sagan.support.cache.CachedRestClient;
 import sagan.tools.EclipseDownloads;
 import sagan.tools.ToolSuiteDownloads;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ToolsService {
@@ -40,14 +41,6 @@ public class ToolsService {
         previousStsDownloads.addAll(getLegacyToolSuiteDownloads("Spring Tool Suite", "STS"));
         previousStsDownloads.addAll(getLegacyToolSuiteDownloads("Previous Version", "STS"));
         return previousStsDownloads;
-    }
-
-    public ToolSuiteDownloads getGgtsGaDownloads() throws Exception {
-        return getToolSuiteDownloads("Groovy/Grails Tool Suite", "GGTS");
-    }
-
-    public ToolSuiteDownloads getGgtsMilestoneDownloads() throws Exception {
-        return getToolSuiteDownloads("Milestone Version - Groovy/Grails Tool Suite", "GGTS");
     }
 
     private ToolSuiteDownloads getToolSuiteDownloads(String toolSuiteName, String shortName) throws Exception {

@@ -57,7 +57,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 .andReturn();
 
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
-        assertThat(document.select("h1").text(), equalTo("Spring Tool Suite™ Downloads"));
+        assertThat(document.select("h1").text(), equalTo("Spring Tool Suite™ 3 Downloads"));
         assertThat(document.select(".ga--release h2.tool-versions--version").text(), allOf(containsString("STS"),
                 containsString("RELEASE")));
         assertThat(document.select(".platform h3").text(), containsString("Windows"));
@@ -118,7 +118,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 .andReturn();
 
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
-        assertThat(document.select("h1").text(), equalTo("Previous Spring Tool Suite™ Downloads"));
+        assertThat(document.select("h1").text(), equalTo("Previous Spring Tool Suite™ 3 Downloads"));
         assertThat(document.select(".ga--release h2.tool-versions--version").text(), allOf(containsString("STS"),
                 containsString("RELEASE")));
         assertThat(document.select(".platform h3").text(), containsString("Windows"));
@@ -129,73 +129,6 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
                 containsString("win32-installer.exe")));
 
         assertThat(document.select(".ga--release").size(), equalTo(24));
-    }
-
-    @Test
-    public void showsGgtsIndex() throws Exception {
-        mockMvc.perform(get("/tools3/ggts"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("text/html"));
-    }
-
-    @Test
-    public void showsAllGgtsGaDownloads() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(get("/tools3/ggts/all"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("text/html"))
-                .andReturn();
-
-        Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
-        assertThat(document.select("h1").text(), equalTo("Groovy/Grails Tool Suite™ Downloads will be available from Pivotal for a limited time"));
-        assertThat(document.select(".ga--release h2.tool-versions--version").text(),
-                allOf(containsString("GGTS"), containsString("RELEASE")));
-        assertThat(document.select(".platform h3").text(), containsString("Windows"));
-
-        assertThat(
-                document.select(".ga--release .item--dropdown a").attr("href"),
-                allOf(
-                        containsString("http://download.springsource.com/release/STS/"),
-                        containsString("groovy-grails-tool-suite"),
-                        containsString("win32.zip")));
-    }
-
-    @Test
-    public void showsAllGgtsMilestoneDownloads() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(get("/tools3/ggts/all"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("text/html"))
-                .andReturn();
-
-        Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
-        assertThat(document.select(".milestone--release h2.tool-versions--version").text(),
-                allOf(containsString("GGTS"), containsString(".M")));
-
-        assertThat(
-                document.select(".milestone--release .item--dropdown a").attr("href"),
-                allOf(containsString("http://download.springsource.com/milestone/STS/"),
-                        containsString("groovy-grails-tool-suite"),
-                        containsString("win32.zip")));
-    }
-
-    @Test
-    public void hidesGgtsMilestoneDownloadsIfNotAvailable() throws Exception {
-        String responseXml = Fixtures.load("/fixtures/tools/sts_downloads_without_milestones.xml");
-        stub(restTemplate.getForObject(anyString(), eq(String.class))).toReturn(responseXml);
-
-        MvcResult mvcResult = mockMvc.perform(get("/tools3/ggts/all"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith("text/html"))
-                .andReturn();
-
-        Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
-        assertThat(document.select(".milestone--release h2.tool-versions--version").text(),
-                not(allOf(containsString("GGTS"), containsString(".M"))));
-
-        assertThat(
-                document.select(".milestone--release .item--dropdown a").attr("href"),
-                not(allOf(containsString("http://download.springsource.com/milestone/STS/"),
-                        containsString("groovy-grails-tool-suite"),
-                        containsString("win32.zip"))));
     }
 
     @Test
@@ -211,7 +144,6 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
         Document document = Jsoup.parse(mvcResult.getResponse().getContentAsString());
         assertThat(document.select("h1").text(), containsString("Eclipse"));
         assertThat(document.text(), containsString("Spring Tool Suite"));
-        assertThat(document.text(), containsString("Groovy/Grails Tool Suite"));
         assertThat(document.text(), containsString("Windows"));
     }
 
