@@ -84,12 +84,12 @@
         <note>Redirect www.spring.io => spring.io[#54747656]</note>
         <condition name="host">www.spring.io</condition>
         <from>^(.*)$</from>
-        <to type="permanent-redirect" last="true">http://spring.io$1</to>
+        <to type="permanent-redirect" last="true">https://spring.io$1</to>
     </rule>
     <rule>
         <name>Project page catch-all</name>
         <from>^(/spring-.+)$</from>
-        <to type="temporary-redirect" last="true">http://projects.spring.io$1</to>
+        <to type="temporary-redirect" last="true">https://projects.spring.io$1</to>
     </rule>
     <rule>
         <name>Google Plus</name>
@@ -112,5 +112,15 @@
 		<name>Eclipse Tools</name>
 		<from>^/tools/eclipse$</from>
 		<to type="temporary-redirect" last="true">/tools3/eclipse</to>
+	</rule>
+	<rule>
+		<name>Main STS 3</name>
+		<from>^/tools/sts$</from>
+		<to type="temporary-redirect" last="true">/tools</to>
+	</rule>
+	<rule>
+		<name>Other STS 3</name>
+		<from>^/tools/sts</from>
+		<to type="temporary-redirect" last="true">/tools3/sts</to>
 	</rule>
 </urlrewrite>

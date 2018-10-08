@@ -100,8 +100,8 @@ public class RewriteTests {
 
     @Test
     public void stripsWwwSubdomain() throws ServletException, IOException, URISyntaxException {
-        validatePermanentRedirect("http://www.spring.io", "http://spring.io/");
-        validatePermanentRedirect("http://www.spring.io/something", "http://spring.io/something");
+        validatePermanentRedirect("http://www.spring.io", "https://spring.io/");
+        validatePermanentRedirect("http://www.spring.io/something", "https://spring.io/something");
     }
 
     @Test
@@ -116,7 +116,7 @@ public class RewriteTests {
 
     @Test
     public void projectPagesAreRedirected() throws ServletException, IOException, URISyntaxException {
-        validateTemporaryRedirect("http://spring.io/spring-data", "http://projects.spring.io/spring-data");
+        validateTemporaryRedirect("http://spring.io/spring-data", "https://projects.spring.io/spring-data");
     }
 
     @Test
@@ -143,6 +143,12 @@ public class RewriteTests {
 	@Test
 	public void eclipseToolsIsRedirected() throws Exception {
 		validateTemporaryRedirect("http://spring.io/tools/eclipse", "/tools3/eclipse");
+	}
+
+	@Test
+	public void sts3IsRedirected() throws Exception {
+		validateTemporaryRedirect("http://spring.io/tools/sts", "/tools");
+		validateTemporaryRedirect("http://spring.io/tools/sts/all", "/tools3/sts/all");
 	}
 
     @Test
