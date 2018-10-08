@@ -1,15 +1,5 @@
 package sagan.tools.support;
 
-import sagan.tools.Architecture;
-import sagan.tools.DownloadLink;
-import sagan.tools.EclipseDownloads;
-import sagan.tools.EclipsePlatform;
-import sagan.tools.EclipseRelease;
-import sagan.tools.EclipseVersion;
-import sagan.tools.ToolSuiteDownloads;
-import sagan.tools.ToolSuitePlatform;
-import sagan.tools.UpdateSiteArchive;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -21,11 +11,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import sagan.tools.Architecture;
+import sagan.tools.DownloadLink;
+import sagan.tools.EclipseDownloads;
+import sagan.tools.EclipsePlatform;
+import sagan.tools.EclipseRelease;
+import sagan.tools.EclipseVersion;
+import sagan.tools.ToolSuiteDownloads;
+import sagan.tools.ToolSuitePlatform;
+import sagan.tools.UpdateSiteArchive;
 
 import org.springframework.ui.ExtendedModelMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -60,32 +60,6 @@ public class ToolsControllerTests {
                 "http://static.springsource.org/sts/nan/v312/NewAndNoteworthy.html", platforms, archives);
         when(service.getStsGaDownloads()).thenReturn(toolSuite);
         controller.stsIndex(model);
-
-        @SuppressWarnings("unchecked")
-        Set<DownloadLink> actual = (Set<DownloadLink>) model.get("downloadLinks");
-        assertThat(actual, equalTo(toolSuite.getPreferredDownloadLinks()));
-        assertThat((String) model.get("version"), equalTo("3.1.2.RELEASE"));
-
-    }
-
-    @Test
-    public void ggtsIndexHasDownloadLinks() throws Exception {
-        Map<String, ToolSuitePlatform> platforms = new HashMap<>();
-        List<DownloadLink> downloadLinks = Collections.singletonList(new DownloadLink(
-                "http://example.com/download.dmg", "dmg", "323MB", "mac", "64"));
-        List<Architecture> architectures = Collections.singletonList(new Architecture(
-                "Mac OS X (Cocoa, 64bit)", downloadLinks));
-        List<EclipseVersion> eclipseVersions = Collections
-                .singletonList(new EclipseVersion("1.2", architectures));
-
-        ToolSuitePlatform windows = new ToolSuitePlatform("windows", eclipseVersions);
-        platforms.put("windows", windows);
-
-        List<UpdateSiteArchive> archives = Collections.emptyList();
-        ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("GGTS", "3.1.2.RELEASE",
-                "http://static.springsource.org/sts/nan/v312/NewAndNoteworthy.html", platforms, archives);
-        when(service.getGgtsGaDownloads()).thenReturn(toolSuite);
-        controller.ggtsIndex(model);
 
         @SuppressWarnings("unchecked")
         Set<DownloadLink> actual = (Set<DownloadLink>) model.get("downloadLinks");

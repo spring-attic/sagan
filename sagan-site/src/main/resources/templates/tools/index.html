@@ -7,52 +7,55 @@
     <!-- http://opengraphprotocol.org/ -->
     <meta property="og:title" content="Spring Tools" />
     <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
-    <meta property="og:description" content="Spring Tool Suite&trade; &amp; Groovy/Grails Tool Suite&trade;" />
+    <meta property="og:description" content="Spring Tool Suite&trade; 3" />
 </head>
 <body>
 <div layout:fragment="header-container"></div>
 <div layout:fragment="content" class="container-fluid">
     <div class="main-body--wrapper">
-        <h1 class="index-page--title">Spring Tool Suite&trade;</h1>
+        <h1 class="index-page--title">Spring Tool Suite&trade; 3</h1>
         <div class="span8 tools-intro">
             <p class="index-page--subtitle">
-                We provide a customized all-in-one Eclipse based distribution that makes application development easy. The tool suites provide ready-to-use combinations of language support, framework support, and runtime support, and combine them with the existing Java, Web and Java EE tooling from Eclipse.  An integrated dashboard in the distribution makes it trivial to install further extensions that add support for technologies such as Pivotal Cloud Foundry, Gradle or Pivotal tcServer. Support for these distributions is always available through <a href="https://github.com/spring-projects/spring-ide/issues">GitHub Issues</a> or <a href="https://stackoverflow.com/questions/ask?tags=spring-tool-suite">StackOverflow tag</a>.
-                <br/>Looking for Groovy and Grails Tool Suite?  Continue to <a href="all.html" th:href="@{/tools/ggts/all}">download</a> GGTS 3.6.4 from Pivotal for a limited time.
+                For your convenience, we continue to provide updates and downloads of the Spring Tool Suite 3, the previous generation of the Spring Tools. Spring Tools Suite 3 continues to ship as a customized all-in-one Eclipse based distribution that makes application development easy. The tool suite provides ready-to-use combinations of language support, framework support, and runtime support, and combines them with the existing Java, Web and Java EE tooling from Eclipse. An integrated dashboard in the distribution makes it trivial to install further extensions that add support for technologies such as Pivotal Cloud Foundry, Gradle or Pivotal tc Server.<br>
+                Support for these distributions is always available through <a href="https://github.com/spring-projects/spring-ide/issues">GitHub Issues</a> or <a href="https://stackoverflow.com/questions/ask?tags=spring-tool-suite">StackOverflow tag</a>.<br>
+            </p>
+            <p class="index-page--subtitle">
+                The Spring Tool Suite 3 will reach its EOL in mid 2019.
             </p>
         </div>
         <div class="new-noteworthy-box right-pane-widget--container">
             <p class="title">New & Noteworthy</p>
-            <p>Latest STS <br> release notes.</p>
+            <p>Latest STS 3 <br> release notes.</p>
             <a href="http://docs.spring.io/sts/nan/latest/NewAndNoteworthy.html">Read more</a>
         </div>
         <div class="tools--wrapper">
             <section class="tool--container">
                 <div class="tool--icon sts-icon"></div>
-                <h2 class="tool--title">Spring Tool Suite&trade;</h2>
-                <div class="tool--description">The Spring Tool Suite is an Eclipse-based development environment that is customized for developing Spring applications. It provides a ready-to-use environment to implement, debug, run, and deploy your Spring applications, including integrations for Pivotal tc Server, Pivotal Cloud Foundry, Git, Maven, AspectJ, and more.</div>
-                <a href="sts/index.html" th:href="@{/tools/sts}" class="tool--learn-more">Learn More</a>
+                <h2 class="tool--title">Spring Tool Suite&trade; 3</h2>
+                <div class="tool--description">The Spring Tool Suite 3 is an Eclipse-based development environment that is customized for developing Spring applications. It provides a ready-to-use environment to implement, debug, run, and deploy your Spring applications, including integrations for Pivotal tc Server, Pivotal Cloud Foundry, Git, Maven, AspectJ, and more.</div>
+                <a href="sts/index.html" th:href="@{/tools3/sts}" class="tool--learn-more">Learn More</a>
                 <ul class='download-links'>
                     <li th:class="${downloadLink.osAndArch}" th:each="downloadLink : ${stsDownloadLinks}">
                         <a class="tool--download-btn btn btn-black uppercase sub-text on-black" th:href="${downloadLink.url}"
                            th:onclick="'_gaq.push([\'_trackEvent\',\'download STS ' + ${stsVersion} +
                            ' ' + ${downloadLink.os} + '\',\'' + ${downloadLink.url} + '\'])'"
                            target="_blank">
-                            Download STS
+                            Download STS 3
                             <p th:text="'(' + ${stsVersion} + ' for ' + ${#strings.capitalize(downloadLink.os)} + ')'"></p>
                         </a>
                     </li>
                 </ul>
-                <a href="all.html" th:href="@{/tools/sts/all}" class="tool--see-all-versions">See all versions</a>
+                <a href="all.html" th:href="@{/tools3/sts/all}" class="tool--see-all-versions">See all versions</a>
             </section>
         </div>
         <section class="tool-sponsor--container">
             <div class="logo-sponsor-text"><img th:src="@{/img/tools/logo-eclipse.png}"/></div>
             <div class="eclipse-content--container">
-                <p>The Spring Tool Suite is built on top of the Eclipse platform, which is provided by the
+                <p>The Spring Tool Suite 3 is built on top of the Eclipse platform, which is provided by the
                     <a href="http://www.eclipse.org">Eclipse Foundation</a> under the
                     <a href="http://www.eclipse.org/org/documents/epl-v10.php">Eclipse
                     Public License</a>.</p>
-                <a href="eclipse/index.html" th:href="@{/tools/eclipse}" class="learn-more-link">Eclipse
+                <a href="eclipse/index.html" th:href="@{/tools3/eclipse}" class="learn-more-link">Eclipse
                 Download Mirror</a>
             </div>
         </section>

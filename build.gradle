@@ -42,12 +42,12 @@ configure(javaProjects) {
     afterEvaluate {
         dependencyManagement {
             imports {
-                mavenBom('io.spring.platform:platform-bom:Brussels-SR5') {
+                mavenBom('io.spring.platform:platform-bom:Brussels-SR12') {
                     bomProperties([
                             'elasticsearch.version': '1.7.1' // see io.searchbox:jest
                     ])
                 }
-                mavenBom("org.springframework.cloud:spring-cloud-dependencies:Dalston.SR3")
+                mavenBom("org.springframework.cloud:spring-cloud-dependencies:Edgware.SR4")
             }
         }
     }
@@ -83,7 +83,6 @@ configure(javaProjects) {
 configure(bootProjects) {
     apply plugin: 'org.springframework.boot'
     apply from: "$gradleDir/integTest.gradle"
-    apply from: "$gradleDir/deploy.gradle"
 
     springBoot.backupSource = false
 }

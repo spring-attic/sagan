@@ -1,84 +1,61 @@
-##########################################################
-#
-# Groups are used to display jobs on the Web UI
-#
-##########################################################
-groups:
-- name: sagan
-  jobs:
-   - build-compass
+resource_types:
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
 
-##########################################################
-#
-# Resources a specific instances of resources to be used
-# by jobs : a Git repo, a PCF instance, etc.
-#
-##########################################################
 resources:
-- name: sagan-repo
+- name: sagan-site-repo
   type: git
   source:
-    uri: ((sagan-git-uri))
-    branch: ((sagan-git-branch))
-- name: sagan-cf-qa
+    uri: "https://github.com/spring-io/sagan.git"
+- name: sagan-cf-production
   type: cf
   source:
     api: https://api.run.pivotal.io
-    username: ((compass-cf-login))
-    password: ((compass-cf-password))
-    organization: pivotallabs
-    space: Beach-Paris
-    skip_cert_check: false
-
-##########################################################
-#
-# Jobs are tasks executed by concourse.
-#
-##########################################################
+    username: ((sagan-cf-login))
+    password: ((sagan-cf-password))
+    organization: spring.io
+    space: production
+- name: slack-alert
+  type: slack-notification
+  source:
+    url: ((slack-webhook-url))
 
 jobs:
-- name: build-compass
+- name: deploy-sagan-site
   serial: true
   plan:
-  - get: sagan-repo
+  - get: sagan-site-repo
     trigger: true
     params: { submodules: none }
-  - task: build-sagan
+  - task: build-sagan-site
+    file: sagan-site-repo/concourse/tasks/build-sagan-site.yml
     params:
       # JSPM github authentication is needed for the CI
       # otherwise install steps reach github API limitation
-      JSPM_GITHUB_AUTH_TOKEN: ((JSPM_GITHUB_AUTH_TOKEN))
-    config:
-     inputs:
-     - name: sagan-repo
-     outputs:
-     - name: build
-     image_resource:
-       type: docker-image
-       source:
-         repository: gradle
-         tag: '4.1.0-jdk8'
-     platform: linux
-     run:
-       user: root
-       path: /bin/bash
-       args:
-       - -c
-       - |-
-         set -e -u -x
-         # saga-repo will be available with root owner
-         # but js things will complain if ran by root
-         # so we first change repo owner and then use
-         # gradle user to run build
-         chown gradle:gradle -R ./sagan-repo
-         cd sagan-repo
-         su gradle -c "./gradlew --console plain build"
-         cd ../
-         cp -R sagan-repo/sagan-site/build/* build
-  - put: sagan-cf-qa
+      JSPM_GITHUB_AUTH_TOKEN: ((jspm-github-auth-token))
+  - put: sagan-cf-production
     params:
-      manifest: sagan-repo/concourse/manifest.yml
+      current_app_name: sagan
+      path: ./build/libs/sagan-site-1.0.0.BUILD-SNAPSHOT.jar
       environment_variables:
-        GITHUB_CLIENT_ID: {{compass-github-clientid}}
-        GITHUB_CLIENT_SECRET: {{compass-github-clientsecret}}
-        GITHUB_TEAM_ID: {{compass-github-teamid}}
+        SPRING_PROFILES_ACTIVE: production
+        ELASTICSEARCH_INDEX: sagan-production
+        ADMIN_PASSWORD: ((sagan-admin-password))
+        GITHUB_CLIENT_ID: ((sagan-github-clientid))
+        GITHUB_CLIENT_SECRET: ((sagan-github-clientsecret))
+        GITHUB_ACCESS_TOKEN: ((sagan-github-access-token))
+        WEBHOOK_ACCESS_TOKEN: ((sagan-webhook-access-token))
+      manifest: sagan-site-repo/concourse/manifests/sagan-site-production.yml
+  - put: slack-alert
+    params:
+      text: ":concourse-succeeded: <https://ci.spring.io/teams/${BUILD_TEAM_NAME}/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}|${BUILD_PIPELINE_NAME} ${BUILD_JOB_NAME} was successful!>"
+      silent: true
+      icon_emoji: ":concourse:"
+      username: concourse-ci
+groups:
+- name: Deploy
+  jobs:
+  - deploy-sagan-site

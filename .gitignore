@@ -1,3 +1,6 @@
+# Concourse
+concourse/credentials.yml
+
 # Misc
 *~
 .#*
@@ -7,12 +10,10 @@ data/
 tmp/
 *.sw[op]
 classes/
-.new-relic/
 test.log
 logs/
 work/
 .bower-*
-.cram/
 lib/
 dist/
 

@@ -100,8 +100,8 @@ public class RewriteTests {
 
     @Test
     public void stripsWwwSubdomain() throws ServletException, IOException, URISyntaxException {
-        validatePermanentRedirect("http://www.spring.io", "http://spring.io/");
-        validatePermanentRedirect("http://www.spring.io/something", "http://spring.io/something");
+        validatePermanentRedirect("http://www.spring.io", "https://spring.io/");
+        validatePermanentRedirect("http://www.spring.io/something", "https://spring.io/something");
     }
 
     @Test
@@ -116,12 +116,7 @@ public class RewriteTests {
 
     @Test
     public void projectPagesAreRedirected() throws ServletException, IOException, URISyntaxException {
-        validateTemporaryRedirect("http://spring.io/spring-data", "http://projects.spring.io/spring-data");
-    }
-
-    @Test
-    public void ggtsWelcomePageIsRedirected() throws Exception {
-        validateTemporaryRedirect("http://spring.io/tools/ggts/welcome", "http://grails.org/products/ggts/welcome");
+        validateTemporaryRedirect("http://spring.io/spring-data", "https://projects.spring.io/spring-data");
     }
 
     @Test
@@ -136,10 +131,25 @@ public class RewriteTests {
 
     @Test
     public void deprecatedTutorialsRedirected() throws Exception {
-        validateTemporaryRedirect("http://spring.io/guides/tutorials/rest/", "/guides");
         validateTemporaryRedirect("http://spring.io/guides/tutorials/data/", "/guides");
         validateTemporaryRedirect("http://spring.io/guides/tutorials/web/", "/guides");
     }
+
+    @Test
+	public void tools4IsRedirected() throws Exception {
+		validateTemporaryRedirect("http://spring.io/tools4", "/tools");
+	}
+
+	@Test
+	public void eclipseToolsIsRedirected() throws Exception {
+		validateTemporaryRedirect("http://spring.io/tools/eclipse", "/tools3/eclipse");
+	}
+
+	@Test
+	public void sts3IsRedirected() throws Exception {
+		validateTemporaryRedirect("http://spring.io/tools/sts", "/tools");
+		validateTemporaryRedirect("http://spring.io/tools/sts/all", "/tools3/sts/all");
+	}
 
     @Test
     public void deprecatedWarGuideRedirected() throws Exception {

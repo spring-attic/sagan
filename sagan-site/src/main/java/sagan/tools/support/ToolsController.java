@@ -19,8 +19,7 @@ import sagan.tools.UpdateSiteArchive;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
- * Controller that handles requests for Spring Tool Suite (STS) and Groovy/Grails Tool
- * Suite (GGTS) pages.
+ * Controller that handles requests for Spring Tool Suite (STS)
  *
  * Note that unlike other sections of the site, there is no "Admin" counterpart for this
  * controller. Rather, metadata about tools releases and download link locations is
@@ -28,7 +27,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
  * {@link sagan.tools.support.ToolsService} for details.
  */
 @Controller
-@RequestMapping("/tools")
+@RequestMapping("/tools3")
 class ToolsController {
 
     private ToolsService toolsService;
@@ -74,24 +73,6 @@ class ToolsController {
         Collection<ToolSuiteDownloads> stsDownloads = toolsService.getStsLegacyDownloads();
         model.addAttribute("legacyReleases", stsDownloads);
         return "tools/sts/legacy";
-    }
-
-    @RequestMapping(value = "/ggts", method = { GET, HEAD })
-    public String ggtsIndex(Model model) throws Exception {
-        ToolSuiteDownloads ggtsDownloads = toolsService.getGgtsGaDownloads();
-        model.addAttribute("downloadLinks", ggtsDownloads.getPreferredDownloadLinks());
-        model.addAttribute("version", ggtsDownloads.getReleaseName());
-        return "tools/ggts/index";
-    }
-
-    @RequestMapping(value = "/ggts/all", method = { GET, HEAD })
-    public String allGgtsDownloads(Model model) throws Exception {
-        ToolSuiteDownloads gaDownloads = toolsService.getGgtsGaDownloads();
-        ToolSuiteDownloads milestoneDownloads = toolsService.getGgtsMilestoneDownloads();
-        model.addAttribute("gaRelease", gaDownloads);
-        model.addAttribute("milestoneRelease", milestoneDownloads);
-        model.addAttribute("updateSiteArchives", gaDownloads.getArchives());
-        return "tools/ggts/all";
     }
 
     @RequestMapping(value = "/eclipse", method = { GET, HEAD })

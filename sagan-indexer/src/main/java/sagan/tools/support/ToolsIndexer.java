@@ -30,7 +30,7 @@ public class ToolsIndexer implements Indexer<String> {
 
     @Override
     public Iterable<String> indexableItems() {
-        return buildItems("/tools", "/tools/eclipse", "/tools/sts", "/tools/ggts", "/tools/sts/all", "/tools/ggts/all");
+        return buildItems("/tools", "/tools/eclipse", "/tools/sts", "/tools/sts/all");
     }
 
     private Iterable<String> buildItems(String... paths) {

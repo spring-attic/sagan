@@ -70,7 +70,7 @@
     <rule>
         <name>Deprecated Tutorials</name>
         <note>https://github.com/spring-io/sagan/pull/475</note>
-        <from>/guides/tutorials/(rest|data|web)/$</from>
+        <from>/guides/tutorials/(data|web)/$</from>
         <to type="temporary-redirect" last="true">/guides</to>
     </rule>
     <rule>
@@ -84,18 +84,12 @@
         <note>Redirect www.spring.io => spring.io[#54747656]</note>
         <condition name="host">www.spring.io</condition>
         <from>^(.*)$</from>
-        <to type="permanent-redirect" last="true">http://spring.io$1</to>
+        <to type="permanent-redirect" last="true">https://spring.io$1</to>
     </rule>
     <rule>
         <name>Project page catch-all</name>
         <from>^(/spring-.+)$</from>
-        <to type="temporary-redirect" last="true">http://projects.spring.io$1</to>
-    </rule>
-    <rule>
-        <name>GGTS welcome page</name>
-        <note>https://www.pivotaltracker.com/story/show/60153474</note>
-        <from>^/tools/ggts/welcome</from>
-        <to type="temporary-redirect" last="true">http://grails.org/products/ggts/welcome</to>
+        <to type="temporary-redirect" last="true">https://projects.spring.io$1</to>
     </rule>
     <rule>
         <name>Google Plus</name>
@@ -109,4 +103,24 @@
         <from>^/linkedin$</from>
         <to type="temporary-redirect" last="true">http://www.linkedin.com/groups/Spring-Users-46964</to>
     </rule>
+	<rule>
+		<name>Tools4</name>
+		<from>^/tools4$</from>
+		<to type="temporary-redirect" last="true">/tools</to>
+	</rule>
+	<rule>
+		<name>Eclipse Tools</name>
+		<from>^/tools/eclipse$</from>
+		<to type="temporary-redirect" last="true">/tools3/eclipse</to>
+	</rule>
+	<rule>
+		<name>Main STS 3</name>
+		<from>^/tools/sts$</from>
+		<to type="temporary-redirect" last="true">/tools</to>
+	</rule>
+	<rule>
+		<name>Other STS 3</name>
+		<from>^/tools/sts</from>
+		<to type="temporary-redirect" last="true">/tools3/sts</to>
+	</rule>
 </urlrewrite>
