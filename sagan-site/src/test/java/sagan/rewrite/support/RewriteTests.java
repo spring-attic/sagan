@@ -126,7 +126,7 @@ public class RewriteTests {
 
     @Test
     public void linkedinIsRedirected() throws Exception {
-        validateTemporaryRedirect("http://spring.io/linkedin", "http://www.linkedin.com/groups/Spring-Users-46964");
+        validateTemporaryRedirect("http://spring.io/linkedin", "http://www.linkedin.com/groups/46964");
     }
 
     @Test
