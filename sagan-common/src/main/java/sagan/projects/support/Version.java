@@ -19,6 +19,8 @@ package sagan.projects.support;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.util.StringUtils;
+
 /**
  * An artifact version.
  *
@@ -39,7 +41,7 @@ public class Version {
      * Adapted from Gradle's VersionParser
      */
     public static Version build(String raw) {
-        if (raw == null) {
+        if (StringUtils.isEmpty(raw)) {
             return null;
         }
 
