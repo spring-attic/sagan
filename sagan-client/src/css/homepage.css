@@ -158,13 +158,13 @@
   background-position: top left;
 }
 
-.homepage--body .homepage--banner .dalston--banner {
-  background: #055891;
-  background-image: url(/img/homepage/bg-hero-banner-home-dalston.png), -moz-linear-gradient( 0deg, rgb(15,63,97) 0%, rgb(8,83,135) 53%, rgb(0,102,172) 100%);
-  background-image: url(/img/homepage/bg-hero-banner-home-dalston.png), -webkit-linear-gradient( 0deg, rgb(15,63,97) 0%, rgb(8,83,135) 53%, rgb(0,102,172) 100%);
-  background-image: url(/img/homepage/bg-hero-banner-home-dalston.png), -ms-linear-gradient( 0deg, rgb(15,63,97) 0%, rgb(8,83,135) 53%, rgb(0,102,172) 100%);
+.homepage--body .homepage--banner .fifth--banner {
+  background: #00264a;
+  background-image: url(/img/homepage/bg-hero-banner-spring-professional-certification.png), -moz-linear-gradient( -149deg, rgb(46,49,146) 0%, rgb(0,38,74) 53%);
+  background-image: url(/img/homepage/bg-hero-banner-spring-professional-certification.png), -webkit-linear-gradient( -149deg, rgb(46,49,146) 0%, rgb(0,38,74) 53%);
+  background-image: url(/img/homepage/bg-hero-banner-spring-professional-certification.png), -ms-linear-gradient( -149deg, rgb(46,49,146) 0%, rgb(0,38,74) 53%);
   background-repeat: no-repeat;
-  background-position: bottom left;
+  background-position: top right;
 }
 
 .homepage--body .slide--dots {

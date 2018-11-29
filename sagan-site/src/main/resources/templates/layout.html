@@ -56,6 +56,9 @@
             <li th:class="${@uih.navClass(navSection?:'','blog')}">
               <a th:href="@{/blog}" >Blog</a>
             </li>
+            <li th:class="${@uih.navClass(navSection?:'','services')}">
+              <a th:href="@{/services}" >Services</a>
+            </li>
             <li class="navbar-link nav-search js-nav-search">
               <a>
                 <i class="icon-search navbar-search--icon js-search-input-open"></i>
@@ -110,7 +113,6 @@
               <div class="container">
                 <ul class="nav">
                   <li><a th:href="@{/team}">Team</a></li>
-                  <li><a th:href="@{/services}">Services</a></li>
                   <li><a th:href="@{/tools}">Tools</a></li>
                   <li><a href="https://store.pivotal.io/">Store</a></li>
                   <li><a th:href="@{/blog}">Newsletter</a></li>
