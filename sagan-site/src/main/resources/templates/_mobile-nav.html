@@ -45,6 +45,12 @@
               <i class="icon-chevron-right pull-right"></i>
             </a>
           </div>
+          <div th:class="${@uih.navClass(navSection?:'','services')}">
+            <a th:href="@{/services}" href="/services">
+              Training & Certification
+              <i class="icon-chevron-right pull-right"></i>
+            </a>
+          </div>
           <div th:class="${@uih.navClass(navSection?:'','questions')}">
             <a th:href="@{/questions}" href="/questions">
               Questions

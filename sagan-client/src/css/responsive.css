@@ -150,6 +150,13 @@
   }
 }
 
+@media(max-width: 982px) {
+  .header--navbar .navbar-inner .navbar-link a {
+    font-size: 12px;
+    padding: 28px 15px;
+  }
+}
+
 @media (max-width: 900px) {
   .search-facets, .facets--clear-filters {
     display: none;
