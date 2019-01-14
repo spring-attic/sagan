@@ -274,7 +274,7 @@ class SecurityConfig {
     static class RemoteUsernameConnectionSignUp implements ConnectionSignUp {
         @Override
         public String execute(Connection<?> connection) {
-            return connection.getKey().getProviderUserId() != null ? connection.getKey().getProviderUserId() : null;
+            return connection.getKey().getProviderUserId();
         }
     }
 
