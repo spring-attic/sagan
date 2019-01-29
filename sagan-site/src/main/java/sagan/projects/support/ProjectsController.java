@@ -1,23 +1,24 @@
 package sagan.projects.support;
 
-import com.google.common.base.Joiner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import sagan.guides.GuideMetadata;
-import sagan.guides.support.ProjectGuidesRepository;
+import sagan.guides.support.GettingStartedGuides;
+import sagan.guides.support.Topicals;
+import sagan.guides.support.Tutorials;
 import sagan.projects.Project;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.Section;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.google.common.base.Joiner;
+
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
  * Controller that handles requests for the projects overview page at /projects.
@@ -28,13 +29,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 class ProjectsController {
 
     private ProjectMetadataService projectMetadataService;
-    private List<ProjectGuidesRepository> projectGuidesRepositories;
+    private GettingStartedGuides gsGuides;
+    private Tutorials tutorials;
+    private Topicals topicals;
 
     @Autowired
     public ProjectsController(ProjectMetadataService projectMetadataService,
-                             List<ProjectGuidesRepository> projectGuidesRepositories) {
+                              GettingStartedGuides gsGuides, Tutorials tutorials, Topicals topicals) {
         this.projectMetadataService = projectMetadataService;
-        this.projectGuidesRepositories = projectGuidesRepositories;
+        this.gsGuides = gsGuides;
+        this.tutorials = tutorials;
+        this.topicals = topicals;
     }
 
 	@RequestMapping(method = { GET, HEAD })
@@ -56,19 +61,11 @@ class ProjectsController {
         model.addAttribute("currentRelease", project.getMostCurrentRelease());
         model.addAttribute("otherReleases", project.getNonMostCurrentReleases());
 
-        List<GuideMetadata> guides = projectGuidesRepositories.stream()
-                .flatMap(repo -> repo.findByProject(project).stream())
-                .collect(Collectors.toList());
-        model.addAttribute("guides", guides);
+        model.addAttribute("guides", gsGuides.findByProject(project));
+        model.addAttribute("topicals", topicals.findByProject(project));
+        model.addAttribute("tutorials", tutorials.findByProject(project));
 
         return "projects/show";
-    }
-
-    private List<Project> getProjectsForSidebar() {
-        return projectMetadataService.getProjectsForCategory("active")
-                .stream()
-                .filter(project -> project.isTopLevelProject())
-                .collect(Collectors.toList());
     }
 
     private String stackOverflowUrl(Project project) {

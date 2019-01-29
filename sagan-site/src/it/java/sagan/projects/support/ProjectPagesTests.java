@@ -194,7 +194,7 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
         assertThat(learnTitle.text(), is("Guides"));
 
         Elements guides = learnSection.select(".project--guides ul li");
-        assertThat(guides, hasSize(1));
+        assertThat(guides, hasSize(2));
 
         Element firstGuide = guides.get(0);
         Elements title = firstGuide.select(".project--sample--title");
@@ -204,7 +204,12 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
         assertThat(title.text(), is("Building a RESTful Web Service"));
         assertThat(subtitle.text(), is("Learn how to create a RESTful web service with Spring."));
         assertThat(guideLink.attr("href"), is("/guides/gs/spring-boot"));
-    }
+
+        Element nextGuide = guides.get(1);
+        guideLink = nextGuide.select("a").first();
+
+        assertThat(guideLink.attr("href"), is("/guides/topicals/spring-boot"));
+}
 
     @Test
     public void getDocumentation() throws Exception {
