@@ -1,28 +1,31 @@
 package sagan.projects.support;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.ui.ExtendedModelMap;
 import sagan.guides.AbstractGuide;
 import sagan.guides.GettingStartedGuide;
 import sagan.guides.Topical;
 import sagan.guides.Tutorial;
-import sagan.guides.support.ProjectGuidesRepository;
+import sagan.guides.support.GettingStartedGuides;
+import sagan.guides.support.Topicals;
+import sagan.guides.support.Tutorials;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import org.springframework.ui.ExtendedModelMap;
+
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.when;
-import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
-import static sagan.projects.ProjectRelease.ReleaseStatus.SNAPSHOT;
+import static sagan.projects.ProjectRelease.ReleaseStatus.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectsControllerTest {
@@ -30,13 +33,13 @@ public class ProjectsControllerTest {
     private ProjectMetadataService projectMetadataService;
 
     @Mock
-    private ProjectGuidesRepository projectGuidesRepo;
+    private GettingStartedGuides projectGuidesRepo;
 
     @Mock
-    private ProjectGuidesRepository projectTutorialRepo;
+    private Tutorials projectTutorialRepo;
 
     @Mock
-    private ProjectGuidesRepository projectTopicalRepo;
+    private Topicals projectTopicalRepo;
 
     private ProjectRelease currentRelease =
             new ProjectRelease("1.5.7.RELEASE", GENERAL_AVAILABILITY, true, "", "", "", "");
@@ -75,10 +78,7 @@ public class ProjectsControllerTest {
         when(projectMetadataService.getActiveTopLevelProjects())
                 .thenReturn(asList(project, projectUmbrella));
 
-        List<ProjectGuidesRepository> repositoryList =
-                asList(projectGuidesRepo, projectTutorialRepo, projectTopicalRepo);
-
-        controller = new ProjectsController(projectMetadataService, repositoryList);
+        controller = new ProjectsController(projectMetadataService, projectGuidesRepo, projectTutorialRepo, projectTopicalRepo);
         viewName = controller.showProject(model, "spring-framework");
     }
 
@@ -111,8 +111,11 @@ public class ProjectsControllerTest {
     @Test
     public void showProjectHasGuidesTutorialsTopicals() {
         List<AbstractGuide> guides = (List<AbstractGuide>) model.get("guides");
-
-        assertThat(guides, hasItems(guide, tutorial, topical));
+        assertThat(guides, hasItems(guide));
+        guides = (List<AbstractGuide>) model.get("topicals");
+        assertThat(guides, hasItems(topical));
+        guides = (List<AbstractGuide>) model.get("tutorials");
+        assertThat(guides, hasItems(tutorial));
     }
 
     @Test
