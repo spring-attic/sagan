@@ -1,12 +1,8 @@
 package sagan;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import io.searchbox.client.JestClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import sagan.search.support.SearchService;
 import sagan.support.TuckeyRewriteFilter;
-import sagan.support.health.ElasticsearchHealthIndicator;
+
+import org.apache.http.impl.client.HttpClientBuilder;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.social.SocialWebAutoConfiguration;
@@ -15,6 +11,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 /**
  * The entry point for the Sagan web application.
@@ -29,14 +28,8 @@ public class SiteApplication {
     public static final String REWRITE_FILTER_NAME = "rewriteFilter";
     public static final String REWRITE_FILTER_CONF_PATH = "urlrewrite.xml";
 
-
     public static void main(String[] args) {
         new SaganApplication(SiteApplication.class).run(args);
-    }
-
-    @Bean
-    public ElasticsearchHealthIndicator elasticsearch(JestClient jestClient, SearchService searchService) {
-        return new ElasticsearchHealthIndicator(jestClient, searchService.getIndexName());
     }
 
     @Bean

@@ -15,7 +15,7 @@ plugins {
 }
 
 def vJavaLang = '1.8'
-def javaProjects = [ project(':sagan-site'), project(':sagan-indexer'), project(':sagan-common') ]
+def javaProjects = [ project(':sagan-site'), project(':sagan-common') ]
 def bootProjects = javaProjects - project(':sagan-common')
 def gradleDir = "${rootProject.rootDir}/gradle"
 
@@ -41,11 +41,7 @@ configure(javaProjects) {
     afterEvaluate {
         dependencyManagement {
             imports {
-                mavenBom('io.spring.platform:platform-bom:Brussels-SR15') {
-                    bomProperties([
-                            'elasticsearch.version': '1.7.1' // see io.searchbox:jest
-                    ])
-                }
+                mavenBom('io.spring.platform:platform-bom:Brussels-SR15')
                 mavenBom("org.springframework.cloud:spring-cloud-dependencies:Edgware.SR5")
             }
         }

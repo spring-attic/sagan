@@ -14,9 +14,7 @@ dependencies {
 
     compile 'org.apache.httpcomponents:httpclient'
 
-    compile 'org.elasticsearch:elasticsearch'
-    compile 'io.searchbox:jest:0.1.7'
-    compile 'commons-codec:commons-codec' // needed by Jest's HTTP client?
+    compile 'com.google.code.gson:gson'
     compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
     compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 

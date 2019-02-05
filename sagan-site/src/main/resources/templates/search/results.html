@@ -40,21 +40,6 @@
             </div>
         </div>
 
-    <aside class="span4">
-      <div class="search-facets content-container--wrapper">
-        <form th:action="@{/search}" method="GET" th:object="${searchForm}" onsubmit="interceptFilterForm(this);">
-          <input type="hidden" name="q" th:value="${searchForm.q}" />
-          <header class="content-container--header">
-            <h3 class="header-title">Filter Your Results</h3>
-            <input type="submit" value="Filter" class="btn btn-black compact pull-right on-black uppercase" ></input>
-          </header>
-          <ul layout:include="search/_facets :: facets" th:with="root=${rootFacet}">
-          </ul>
-        </form>
-      </div>
-      <a href="#" class="facets--clear-filters pull-right">Clear Filters</a>
-     </aside>
-
   </div>
 </div>
 </div>

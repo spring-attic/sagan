@@ -72,10 +72,9 @@ github:
       name: ${GITHUB_GUIDES_OWNER_NAME:spring-guides} # any GitHub org or user having publicly-readable guide repos
       type: ${GITHUB_GUIDES_OWNER_TYPE:orgs}          # 'users' is the other possible value
 
-elasticsearch:
-  client:
-    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
-    index: ${ELASTICSEARCH_INDEX:sagan}
+search:
+  engine: 009730509569965617374:mwjzq2_odd4
+  key: <add-google-api-key-here>
 
 logging:
   level:

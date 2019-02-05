@@ -13,10 +13,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.google.common.base.Joiner;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -42,18 +41,18 @@ class ProjectsController {
         this.topicals = topicals;
     }
 
-	@RequestMapping(method = { GET, HEAD })
-	public String listProjects(Model model) {
-		model.addAttribute("projectMetadata", projectMetadataService);
-		return "projects/index";
-	}
+    @RequestMapping(method = { GET, HEAD })
+    public String listProjects(Model model) {
+        model.addAttribute("projectMetadata", projectMetadataService);
+        return "projects/index";
+    }
 
-	@RequestMapping(value = "/{projectName}", method = { GET, HEAD })
+    @RequestMapping(value = "/{projectName}", method = { GET, HEAD })
     public String showProject(Model model, @PathVariable String projectName) {
-		Project project = projectMetadataService.getProject(projectName);
-		if (project == null) {
-			throw new ResourceNotFoundException("project " + projectName);
-		}
+        Project project = projectMetadataService.getProject(projectName);
+        if (project == null) {
+            throw new ResourceNotFoundException("project " + projectName);
+        }
         List<Project> projects = this.projectMetadataService.getActiveTopLevelProjects();
         model.addAttribute("selectedProject", project);
         model.addAttribute("projectStackOverflow", stackOverflowUrl(project));
@@ -70,7 +69,7 @@ class ProjectsController {
 
     private String stackOverflowUrl(Project project) {
         return "https://stackoverflow.com/questions/tagged/"
-                + Joiner.on("+or+").join(project.getStackOverflowTagList());
+                + StringUtils.collectionToDelimitedString(project.getStackOverflowTagList(), "+or+");
     }
 
 }

@@ -16,7 +16,15 @@
 
 package sagan.projects.support;
 
-import java.awt.*;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.projects.ProjectRelease.ReleaseStatus;
+import sagan.projects.support.BadgeSvg.GraphicElement;
+import sagan.projects.support.BadgeSvg.Path;
+
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,20 +34,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 import org.xmlbeam.XBProjector;
 import org.xmlbeam.XBProjector.Flags;
 import org.xmlbeam.config.DefaultXMLFactoriesConfig;
 import org.xmlbeam.config.DefaultXMLFactoriesConfig.NamespacePhilosophy;
 
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectRelease.ReleaseStatus;
-import sagan.projects.support.BadgeSvg.GraphicElement;
-import sagan.projects.support.BadgeSvg.Path;
-
-import com.google.common.io.Resources;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 /**
  * Service to generate SVG badges.
@@ -80,8 +82,8 @@ public class VersionBadgeService {
     }
 
     /**
-     * Create a version badge for a given {@link Project} and {@link ProjectRelease}. The badge uses SVG and is returned as byte
-     * array.
+     * Create a version badge for a given {@link Project} and {@link ProjectRelease}. The
+     * badge uses SVG and is returned as byte array.
      *
      * @param project must not be {@literal null}.
      * @param projectRelease must not be {@literal null}.
@@ -158,5 +160,18 @@ public class VersionBadgeService {
             default:
                 return SNAPSHOT_TEMPLATE;
         }
+    }
+
+    private static class Resources {
+
+        public static URL getResource(String path) {
+            path = path.startsWith("/") ? path : "/" + path;
+            try {
+                return new ClassPathResource(path, Resources.class).getURL();
+            } catch (IOException e) {
+                throw new IllegalStateException("Cannot locate resource: " + path);
+            }
+        }
+
     }
 }
