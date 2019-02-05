@@ -22,7 +22,6 @@ def gradleDir = "${rootProject.rootDir}/gradle"
 wrapper.gradleVersion = '4.1'
 
 configure(allprojects) {
-    apply plugin: 'eclipse'
     version = "1.0.0.BUILD-SNAPSHOT"
 }
 
@@ -67,17 +66,6 @@ configure(javaProjects) {
         all*.exclude group: 'log4j', module: 'log4j'
     }
 
-    // Ensure that all Gradle-compiled classes are available to Eclipse's
-    // classpath.
-    eclipseClasspath.dependsOn testClasses
-
-    // Skip generation and removal of .settings/org.eclipse.jdt.core.prefs files
-    // during the normal `gradle eclipse` / `gradle cleanEclipse` lifecycle, as
-    // these files have been checked in with formatting settings imported from
-    // style/sagan-format.xml and style/sagan.importorder.
-    // See http://www.gradle.org/docs/current/userguide/eclipse_plugin.html
-    eclipseJdt.onlyIf { false }
-    cleanEclipseJdt.onlyIf { false }
 }
 
 configure(bootProjects) {
