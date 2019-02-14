@@ -1,9 +1,5 @@
 package sagan.projects.support;
 
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectRelease.ReleaseStatus;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -13,7 +9,14 @@ import java.util.regex.Pattern;
 
 import javax.persistence.EntityManager;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import org.assertj.core.api.BDDAssertions;
 import org.junit.Test;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.projects.ProjectRelease.ReleaseStatus;
+import saganx.AbstractIntegrationTests;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
@@ -23,19 +26,20 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultHandler;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tomakehurst.wiremock.client.WireMock;
-
 import static junit.framework.TestCase.fail;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.endsWith;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.cloud.contract.wiremock.restdocs.WireMockRestDocs.verify;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import saganx.AbstractIntegrationTests;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureRestDocs(outputDir = "build/snippets")
 public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
@@ -165,6 +169,28 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
                 .andExpect(content().contentTypeCompatibleWith("application/json"))
                 .andDo(docs("update_project"));
         entityManager.flush();
+    }
+
+    @Test
+    public void projectMetadata_patchProject() throws Exception {
+        Project project = new Project("spring-framework", null, null, null, null, null);
+        project.setRawBootConfig("rawBootConfig");
+        project.setRawOverview("rawOverview");
+
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .patch("/project_metadata/spring-framework")
+                                .content(mapper.writeValueAsString(project))
+                                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andDo(docs("patch_project"));
+        entityManager.flush();
+
+        Project storedProject = entityManager.find(Project.class, "spring-framework");
+        BDDAssertions.then(storedProject.getRawBootConfig()).isEqualTo("rawBootConfig");
+        BDDAssertions.then(storedProject.getRawOverview()).isEqualTo("rawOverview");
     }
 
     private Map<String, Object> getRelease(ProjectRelease release) {

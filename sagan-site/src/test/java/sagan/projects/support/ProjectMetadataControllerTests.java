@@ -1,9 +1,5 @@
 package sagan.projects.support;
 
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectRelease.ReleaseStatus;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import sagan.projects.Project;
+import sagan.projects.ProjectPatchingService;
+import sagan.projects.ProjectRelease;
+import sagan.projects.ProjectRelease.ReleaseStatus;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -36,7 +37,7 @@ public class ProjectMetadataControllerTests {
 
     @Before
     public void setUp() throws Exception {
-        controller = new ProjectMetadataController(projectMetadataService);
+        controller = new ProjectMetadataController(projectMetadataService, new ProjectPatchingService());
     }
 
     @Test
@@ -76,6 +77,27 @@ public class ProjectMetadataControllerTests {
         controller.updateReleaseMetadata(PROJECT_ID, update);
         assertThat(project.getProjectReleases().iterator().next().getApiDocUrl(), equalTo(
                 "http://example.com/1.2.4"));
+    }
+
+    @Test
+    public void updateProject_patchesTheProject() throws Exception {
+        List<ProjectRelease> newReleases = new ArrayList<>();
+        newReleases.add(new ProjectRelease("1.0.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "foo", "bar", "com.example", "artifact"));
+        Project newProject = new Project(PROJECT_ID, null, "http://example.com", "newSite", newReleases, "newProject");
+        newProject.setRawBootConfig("newRawBootConfig");
+        newProject.setRawOverview("newRawOverview");
+        when(projectMetadataService.getProject(PROJECT_ID)).thenReturn(project);
+        when(projectMetadataService.save(Mockito.anyObject()))
+                .thenAnswer(invocation -> invocation.getArguments()[0]);
+
+        Project updatedProject = controller.updateProject(PROJECT_ID, newProject);
+
+        // for now we only patch the raw stuff
+        assertThat(updatedProject.getName(), equalTo(project.getName()));
+        assertThat(updatedProject.getRepoUrl(), equalTo(project.getRepoUrl()));
+
+        assertThat(updatedProject.getRawOverview(), equalTo("newRawOverview"));
+        assertThat(updatedProject.getRawBootConfig(), equalTo("newRawBootConfig"));
     }
 
 }

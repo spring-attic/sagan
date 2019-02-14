@@ -1,12 +1,13 @@
 package sagan.projects.support;
 
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.support.JsonPController;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import sagan.projects.Project;
+import sagan.projects.ProjectPatchingService;
+import sagan.projects.ProjectRelease;
+import sagan.support.JsonPController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.PATCH;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 /**
  * Controller that handles ajax requests for project metadata, typically from the
@@ -29,10 +35,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 class ProjectMetadataController {
 
     private final ProjectMetadataService service;
+    private final ProjectPatchingService projectPatchingService;
 
     @Autowired
-    public ProjectMetadataController(ProjectMetadataService service) {
+    public ProjectMetadataController(ProjectMetadataService service,
+            ProjectPatchingService projectPatchingService) {
         this.service = service;
+        this.projectPatchingService = projectPatchingService;
     }
 
     @RequestMapping(value = "/{projectId}", method = { GET, HEAD })
@@ -109,6 +118,17 @@ class ProjectMetadataController {
         return found;
     }
 
+    @RequestMapping(value = "/{projectId}", method = PATCH)
+    public Project updateProject(@PathVariable("projectId") String projectId,
+            @RequestBody Project projectWithPatches) throws IOException {
+        Project project = service.getProject(projectId);
+        if (project == null) {
+            throw new MetadataNotFoundException("Cannot find project " + projectId);
+        }
+        Project patchedProject = projectPatchingService.patch(projectWithPatches, project);
+        return service.save(patchedProject);
+    }
+
     @ExceptionHandler(MetadataNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void handle() {
@@ -121,5 +141,4 @@ class ProjectMetadataController {
         }
 
     }
-
 }
