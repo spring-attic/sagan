@@ -1,12 +1,13 @@
 package sagan.projects.support;
 
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.support.JsonPController;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.support.JsonPController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.PATCH;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 /**
  * Controller that handles ajax requests for project metadata, typically from the
@@ -29,10 +35,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 class ProjectMetadataController {
 
     private final ProjectMetadataService service;
+    private final IsPropertyDirtyChecker checker;
 
     @Autowired
     public ProjectMetadataController(ProjectMetadataService service) {
         this.service = service;
+        this.checker = new IsPropertyDirtyChecker();
     }
 
     @RequestMapping(value = "/{projectId}", method = { GET, HEAD })
@@ -109,6 +117,28 @@ class ProjectMetadataController {
         return found;
     }
 
+    @RequestMapping(value = "/{projectId}", method = PATCH)
+    public Project updateProject(@PathVariable("projectId") String projectId,
+            @RequestBody Project projectWithPatches) throws IOException {
+        Project project = service.getProject(projectId);
+        if (project == null) {
+            throw new MetadataNotFoundException("Cannot find project " + projectId);
+        }
+        Project patchedProject = patchProject(projectWithPatches, project);
+        return service.save(patchedProject);
+    }
+
+    // we could move it outside the controller
+    private Project patchProject(Project projectWithPatches, Project projectToPatch) {
+        if (checker.isDirty(projectWithPatches.getRawOverview(), projectToPatch.getRawOverview())) {
+            projectToPatch.setRawOverview(projectWithPatches.getRawOverview());
+        }
+        if (checker.isDirty(projectWithPatches.getRawBootConfig(), projectToPatch.getRawBootConfig())) {
+            projectToPatch.setRawBootConfig(projectWithPatches.getRawBootConfig());
+        }
+        return projectToPatch;
+    }
+
     @ExceptionHandler(MetadataNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void handle() {
@@ -122,4 +152,10 @@ class ProjectMetadataController {
 
     }
 
+    // we could move it outside of the controller
+    static class IsPropertyDirtyChecker {
+    	boolean isDirty(Object newValue, Object oldValue) {
+    		return newValue != null && !Objects.equals(newValue, oldValue);
+		}
+	}
 }
