@@ -61,8 +61,6 @@ public class TeamService {
     }
 
     private void updateMemberProfile(MemberProfile profile, MemberProfile existingProfile) {
-        existingProfile.setSpeakerdeckUsername(profile.getSpeakerdeckUsername());
-        existingProfile.setTwitterUsername(profile.getTwitterUsername());
         existingProfile.setBio(profile.getBio());
         existingProfile.setName(profile.getName());
         existingProfile.setJobTitle(profile.getJobTitle());
