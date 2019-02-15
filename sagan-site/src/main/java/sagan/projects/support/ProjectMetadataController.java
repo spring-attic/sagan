@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
@@ -11,6 +13,7 @@ import sagan.support.JsonPController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,12 +38,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 class ProjectMetadataController {
 
     private final ProjectMetadataService service;
-    private final IsPropertyDirtyChecker checker;
+    private final ProjectPatchingService projectPatchingService;
 
     @Autowired
-    public ProjectMetadataController(ProjectMetadataService service) {
+    public ProjectMetadataController(ProjectMetadataService service,
+            ProjectPatchingService projectPatchingService) {
         this.service = service;
-        this.checker = new IsPropertyDirtyChecker();
+        this.projectPatchingService = projectPatchingService;
     }
 
     @RequestMapping(value = "/{projectId}", method = { GET, HEAD })
@@ -124,19 +128,8 @@ class ProjectMetadataController {
         if (project == null) {
             throw new MetadataNotFoundException("Cannot find project " + projectId);
         }
-        Project patchedProject = patchProject(projectWithPatches, project);
+        Project patchedProject = projectPatchingService.patch(projectWithPatches, project);
         return service.save(patchedProject);
-    }
-
-    // we could move it outside the controller
-    private Project patchProject(Project projectWithPatches, Project projectToPatch) {
-        if (checker.isDirty(projectWithPatches.getRawOverview(), projectToPatch.getRawOverview())) {
-            projectToPatch.setRawOverview(projectWithPatches.getRawOverview());
-        }
-        if (checker.isDirty(projectWithPatches.getRawBootConfig(), projectToPatch.getRawBootConfig())) {
-            projectToPatch.setRawBootConfig(projectWithPatches.getRawBootConfig());
-        }
-        return projectToPatch;
     }
 
     @ExceptionHandler(MetadataNotFoundException.class)
@@ -151,11 +144,48 @@ class ProjectMetadataController {
         }
 
     }
+}
 
-    // we could move it outside of the controller
-    static class IsPropertyDirtyChecker {
-    	boolean isDirty(Object newValue, Object oldValue) {
-    		return newValue != null && !Objects.equals(newValue, oldValue);
-		}
-	}
+@Service
+class ProjectPatchingService {
+    Project patch(Project newValue, Project valueToMutate) {
+        return ObjectPatcher.patch(newValue, valueToMutate)
+                .mutateIfDirty(Project::getRawOverview, Project::setRawOverview)
+                .mutateIfDirty(Project::getRawBootConfig, Project::setRawBootConfig)
+                .patchedValue();
+    }
+}
+
+// could be reused in other projects
+class ObjectPatcher<T> {
+    private T newValue;
+    private T valueToMutate;
+
+    private ObjectPatcher(T newValue, T valueToMutate) {
+        this.newValue = newValue;
+        this.valueToMutate = valueToMutate;
+    }
+
+    static <T> ObjectPatcher<T> patch(T newValue, T valueToMutate) {
+        return new ObjectPatcher<>(newValue, valueToMutate);
+    }
+
+    <V> ObjectPatcher<T> mutateIfDirty(Function<T, V> getter, BiConsumer<T, V> modifyIfDirty) {
+        V newValue = getter.apply(this.newValue);
+        V valueToMutate = getter.apply(this.valueToMutate);
+        if (isDirty(newValue, valueToMutate)) {
+            // mutates the old object
+            modifyIfDirty.accept(this.valueToMutate, newValue);
+        }
+        return this;
+    }
+
+    // syntactic sugar since new value got mutated all the way
+    T patchedValue() {
+        return this.valueToMutate;
+    }
+
+    private boolean isDirty(Object newValue, Object oldValue) {
+        return newValue != null && !Objects.equals(newValue, oldValue);
+    }
 }

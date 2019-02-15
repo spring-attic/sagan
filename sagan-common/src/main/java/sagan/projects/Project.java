@@ -1,15 +1,33 @@
 package sagan.projects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.util.StringUtils;
-
-import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import org.springframework.util.StringUtils;
 
 @Entity
 @NamedEntityGraph(name = "Project.tree",
         attributeNodes = @NamedAttributeNode("childProjectList"))
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class Project {
 
     @Id
@@ -105,6 +123,9 @@ public class Project {
      * @return The list of releases sorted in descending order by version
      */
     public List<ProjectRelease> getProjectReleases() {
+        if (releaseList == null) {
+            return new ArrayList<>();
+        }
         releaseList.sort(Collections.reverseOrder(ProjectRelease::compareTo));
         return releaseList;
     }
@@ -126,7 +147,8 @@ public class Project {
     }
 
     public void setStackOverflowTags(String stackOverflowTags) {
-        this.stackOverflowTags = stackOverflowTags.replaceAll(" ", "");
+        this.stackOverflowTags = stackOverflowTags != null ?
+                stackOverflowTags.replaceAll(" ", "") : "";
     }
 
     public Set<String> getStackOverflowTagList() {

@@ -36,7 +36,7 @@ public class ProjectMetadataControllerTests {
 
     @Before
     public void setUp() throws Exception {
-        controller = new ProjectMetadataController(projectMetadataService);
+        controller = new ProjectMetadataController(projectMetadataService, new ProjectPatchingService());
     }
 
     @Test
