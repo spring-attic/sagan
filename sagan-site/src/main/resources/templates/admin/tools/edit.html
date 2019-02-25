@@ -1,0 +1,53 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
+<head>
+    <title th:inline="text">Edit &middot; [[${platform.id}]]</title>
+</head>
+<body>
+<div layout:fragment="header-container"></div>
+<div layout:fragment="content" class="container">
+    <div class="main-body--wrapper">
+        <div class="admin-index--title">
+            <div class="content--title search-title" th:inline="text">
+                <a th:href="@{/admin}">Admin</a> : <a th:href="@{/admin/tools}">Spring Tools</a> : Edit [[${platform.id}]]
+            </div>
+        </div>
+        <form th:action="@{'/admin/tools/' + ${platform.id}}" method="post" th:object="${platform}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <label for="id">Name</label>
+            <input type="text" th:field="*{id}"/>
+            <fieldset>
+                <legend>Downloads</legend>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <td>Delete?</td>
+                        <td>Variant</td>
+                        <td>Label</td>
+                        <td>Download URL</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="download, downloadStat : ${platform.downloads}">
+                        <td><input type="checkbox" name="downloadsToDelete"
+                                   th:value="*{downloads[__${downloadStat.index}__].variant}"></td>
+                        <td><input type="text" th:field="*{downloads[__${downloadStat.index}__].variant}"/></td>
+                        <td><input type="text" th:field="*{downloads[__${downloadStat.index}__].label}"/></td>
+                        <td><input type="text" th:field="*{downloads[__${downloadStat.index}__].downloadUrl}"/></td>
+                    </tr>
+                    <tr th:with="size=${platform.downloads.size()}">
+                        <td></td>
+                        <td><input type="text" th:field="*{downloads[__${size}__].variant}"/></td>
+                        <td><input type="text" th:field="*{downloads[__${size}__].label}"/></td>
+                        <td><input type="text" th:field="*{downloads[__${size}__].downloadUrl}"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+            <input type="submit" value="Save"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

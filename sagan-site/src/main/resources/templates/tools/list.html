@@ -1,0 +1,237 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+        layout:decorator="layout"
+        data-platform-downloads>
+<head>
+    <title>Spring Tools 4</title>
+    <!-- http://opengraphprotocol.org/ -->
+    <meta property="og:title" content="Spring Tools 4"/>
+    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}"/>
+    <meta property="og:description"
+          content="Spring Tools 4 is the next generation of Spring tooling for your favorite coding environment. Largely rebuilt from scratch, it provides world-class support for developing Spring-based enterprise applications, whether you prefer Eclipse, Visual Studio Code, or Atom IDE."/>
+</head>
+<body>
+<div layout:fragment="header-container"></div>
+<div layout:fragment="full-width--layout">
+    <div class="tools4--body">
+        <section class="tools4--banner center">
+            <div class='container-fluid'>
+                <img th:src="@{/img/tools4/spring-tools-logo.svg}"/>
+                <br/><br/><br/>
+                <p>
+                    <strong>Spring Tools 4</strong> is the next generation of Spring tooling for your favorite coding
+                    environment.
+                    Largely rebuilt from scratch, it provides world-class support for developing Spring-based
+                    enterprise applications, whether you prefer Eclipse, Visual Studio Code, or Atom IDE.
+                </p>
+            </div>
+        </section><!--end tools4-banner-->
+        <section class="tools4--options center">
+            <div class='container-fluid'>
+                <div th:if="${eclipse}" class='tools4--option'>
+                    <div class='sidebyside text'>
+                        <img class='icon-eclipse' th:src="@{/img/tools4/icon-eclipse.png}"/>
+                        <h3>Spring Tools 4 for Eclipse</h3>
+                        <p>The all-new Spring Tool Suite 4.<br/> Free. Open source.</p>
+                        <a th:each="download : ${eclipse.downloads}"
+                             class="btn" th:href="${download.downloadUrl}">
+                            <strong>Download STS4</strong>
+                            <br/>
+                            <span th:text="${download.label}">(for Operating System)</span>
+                        </a>
+                    </div>
+                    <img class='sidebyside' th:src="@{/img/tools4/screenshot-eclipse.png}"/>
+                </div><!--end tools4-eclipse-->
+                <br/><br/>
+                <hr/>
+                <br/><br/>
+                <div th:if="${vscode}" class='tools4--option'>
+                    <div class='sidebyside text'>
+                        <img class='icon-vsc' th:src="@{/img/tools4/icon-vsc.png}"/>
+                        <h3>Spring Tools 4 <br/> for Visual Studio Code</h3>
+                        <p>Free. Open source.</p>
+                        <a th:each="download : ${vscode.downloads}"
+                           class="btn" th:href="${download.downloadUrl}">
+                            <strong>Spring Tools 4</strong>
+                            <br/>
+                            <span th:text="${download.label}">(for Operating System)</span>
+                        </a>
+                    </div>
+                    <img class='sidebyside' th:src="@{/img/tools4/screenshot-vsc.png}"/>
+                </div><!--end tools4-vsc-->
+                <br/><br/>
+                <hr/>
+                <br/><br/>
+                <div th:if="${atom}" class='tools4--option'>
+                    <div class='sidebyside text'>
+                        <img class='icon-vsc' th:src="@{/img/tools4/icon-atom.png}"/>
+                        <h3>Spring Tools 4 <br/> for Atom IDE</h3>
+                        <p>Free. Open source.</p>
+                        <a th:each="download : ${atom.downloads}"
+                           class="btn" th:href="${download.downloadUrl}">
+                            <strong>Spring Tools 4</strong>
+                            <br/>
+                            <span th:text="${download.label}">(for Operating System)</span>
+                        </a>
+                    </div>
+                    <img class='sidebyside' th:src="@{/img/tools4/screenshot-atom.png}"/>
+                </div><!--end tools4-atom-->
+            </div>
+        </section><!--end tools4-options-->
+        <section class="tools4--features center">
+            <div class='container-fluid'>
+                <h2><img th:src="@{/img/tools4/Spring-Tools-icon.svg}"/> Spring Tools 4</h2>
+                <br/><br/>
+                <div class='tools4--features--container'>
+                    <div class='tools4--feature sidebyside'>
+                        <div class='inner'>
+                            <h3>Spring aware</h3>
+                            <p>Tailored for developing enterprise applications using Spring Framework and Spring Boot,
+                                the new generation of Spring Tools provides world-class development support for your
+                                Spring applications. Our tools have deep knowledge of Spring built in.</p>
+                        </div>
+                    </div>
+                    <div class='tools4--feature sidebyside'>
+                        <div class='inner'>
+                            <h3>IDE agnostic</h3>
+                            <p>The all-new Spring Tools can be used in various coding environments, ranging from Eclipse
+                                as a full-featured integrated development environment to Visual Studio Code and Atom as
+                                lightweight code editors. Continue to use your preferred environment and add great
+                                Spring tooling to it.</p>
+                        </div>
+                    </div>
+                    <div class='tools4--feature sidebyside'>
+                        <div class='inner'>
+                            <h3>Rebuilt from scratch</h3>
+                            <p>The new generation of Spring Tools is largely built from scratch, incorporating modern
+                                technologies and developer tooling architectures. It runs in separate processes, is
+                                built with performance in mind from the start, and knows about the latest Spring
+                                technologies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--end tools4-features-->
+        <section class="tools4--screenshot--features">
+            <div class='container-fluid'>
+                <div class='tools4--screenshot--feature'>
+                    <img class='sidebyside' th:src="@{/img/tools4/screenshot-get-started.png}"/>
+                    <div class='text sidebyside'>
+                        <h3>Getting Started</h3>
+                        <p>Spring Tool Suite 4 makes it easy to get started. A direct and easy-to-use integration of the
+                            Spring Initializr and the famous Spring Guides allows you to go from nothing to a running
+                            Spring Boot app in seconds.</p>
+                    </div>
+                </div>
+                <div class='tools4--screenshot--feature'>
+                    <img class='sidebyside' th:src="@{/img/tools4/screenshot-navigate.png}"/>
+                    <div class='text sidebyside'>
+                        <h3>Navigate Your Spring Code</h3>
+                        <p>Understanding and quickly navigating source code is essential for coding. The new Spring
+                            Tools 4 understands your Spring-based source code and allows you to quickly get an overview
+                            and navigate to the important pieces of your Spring apps. Finding Spring elements and
+                            navigating to them has never been easier.</p>
+                    </div>
+                </div>
+                <div class='tools4--screenshot--feature'>
+                    <img class='sidebyside' th:src="@{/img/tools4/screenshot-smart-code.png}"/>
+                    <div class='text sidebyside'>
+                        <h3>Smart Code Editing</h3>
+                        <p>Code completion is a critical part of working with source code. The all-new Spring Tools 4
+                            provides smart code completions for the Spring elements in your app.</p>
+                    </div>
+                </div>
+                <div class='tools4--screenshot--feature'>
+                    <img class='sidebyside' th:src="@{/img/tools4/screenshot-runtime.png}"/>
+                    <div class='text sidebyside'>
+                        <h3>Runtime Information in Your Editor</h3>
+                        <p>Spring Tools 4 now bridges the gap between your source code and running Spring Boot
+                            applications. By taking advantage of the Spring Boot Actuators, we enriched the source code
+                            with detailed information from the running app (e.g., exact bean wiring information,
+                            conditional reports, configuration, details, and more).</p>
+                    </div>
+                </div>
+                <br/><br/>
+                <a class='btn center' href='https://github.com/spring-projects/sts4/wiki'>
+                    <strong>USER GUIDE, INSTALLATION INSTRUCTIONS, FAQ</strong>
+                    <br/>
+                    (learn more on the project Wiki)
+                </a>
+            </div>
+        </section><!--end tools4-screenshot-features-->
+        <section class='tools4--try center'>
+            <div class='container-fluid'>
+                <h2>Try Spring Tools 4 today</h2>
+                <br/><br/>
+                <div class='tools4--try--container'>
+                    <div th:if="${vscode}" class='tools4--try--option sidebyside'>
+                        <div class='inner'>
+                            <img class='icon-vsc' th:src='@{/img/tools4/icon-vsc.png}'/>
+                            <h3>Spring Tools 4<br/>for Visual Studio Code</h3>
+                            <p>Free. Open source.</p>
+                            <h4 th:each="download : ${vscode.downloads}">
+                                <a class='download-link' th:href="${download.downloadUrl}" th:utext="'Spring Tools 4 <br/>' + ${download.label}">
+                                    Spring Tools 4 <br/>on the VSCode Marketplace</a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div th:if="${eclipse}" class='tools4--try--option sidebyside'>
+                        <div class='inner'>
+                            <img class='icon-eclipse' th:src="@{/img/tools4/icon-eclipse.png}"/>
+                            <h3>Spring Tools 4<br/>for Eclipse</h3>
+                            <p>The all-new Spring Tool Suite 4.<br/> Free. Open source.</p>
+                            <h4 th:each="download : ${eclipse.downloads}">
+                                <a class='download-link' th:href="${download.downloadUrl}" th:text="'STS4 ' + ${download.label}">STS4 for Operating System</a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div th:if="${atom}" class='tools4--try--option sidebyside'>
+                        <div class='inner'>
+                            <img class='icon-vsc' th:src="@{/img/tools4/icon-atom.png}"/>
+                            <h3>Spring Tools 4<br/>for Atom IDE</h3>
+                            <p>Free. Open source.</p>
+                            <h4 th:each="download : ${atom.downloads}">
+                                <a class='download-link' th:href="${download.downloadUrl}" th:utext="'Spring Tools 4 <br/>' + ${download.label}">
+                                    Spring Tools 4 <br/>as package for Atom</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <hr/>
+                <br/>
+                <br/>
+                <div class='tools4--learn--more center'>
+                    <div class='tools4--learn--more--option sidebyside'>
+                        <h4><a class='stack-link' href='https://stackoverflow.com/questions/ask?tags=spring-tools-4'>
+                            Ask Questions on Stack Overflow</a></h4>
+                    </div>
+                    <div class='tools4--learn--more--option sidebyside'>
+                        <h4><a class='git-link' href='https://github.com/spring-projects/sts4/issues'> File Issues at
+                            GitHub</a></h4>
+                    </div>
+                    <div class='tools4--learn--more--option sidebyside'>
+                        <h4><a class='git-link' href='https://github.com/spring-projects/sts4'> Find the Code at
+                            GitHub</a></h4>
+                    </div>
+                </div>
+            </div>
+        </section><!-- end tools4-try-->
+        <section class='tools4--features center'>
+            <div class='container-fluid'>
+                <h2><img th:src="@{/img/tools4/sts3-icon.png}"/> Spring Tool Suite 3</h2>
+                <br/><br/>
+                <p>Looking for the latest releases and updates of the <strong>Spring Tool Suite </strong>3?<br/>
+                    Go to the <a th:href="@{/tools3}">Spring Tool Suite 3 page</a>
+                    for downloading the latest version of STS3, finding the matching update sites, or reading the new
+                    and noteworthy.</p>
+                <p>We will keep updating STS3 distributions until mid of 2019 if you want to stay on STS3 releases for a
+                    little while.</p>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>

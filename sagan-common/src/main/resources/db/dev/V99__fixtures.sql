@@ -125,3 +125,16 @@ INSERT INTO project_sample_list (title, description, url, display_order, project
   ('Data JPA', 'Stores data using Spring Data JPA with Hibernate', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-data-jpa', 3, 'spring-boot'),
   ('Integration', 'Integration application built using Spring Integration and its Java DSL', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-integration', 4, 'spring-boot'),
   ('more…', 'Collection of Spring Boot sample applications.', 'https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples', 5, 'spring-boot');
+
+-- Spring Tools
+
+INSERT INTO spring_tools_platform VALUES ('vscode');
+INSERT INTO spring_tools_platform VALUES ('eclipse');
+INSERT INTO spring_tools_platform VALUES ('atom');
+
+INSERT INTO spring_tools_platform_downloads (spring_tools_platform_id, variant, label, download_url) VALUES
+('eclipse', 'windows', 'Windows 64-bit', 'http://download.springsource.com/release/STS4/4.1.1.RELEASE/dist/e4.10/spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64.zip'),
+('eclipse', 'macos', 'macOS 64-bit', 'http://download.springsource.com/release/STS4/4.1.1.RELEASE/dist/e4.10/spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-macosx.cocoa.x86_64.dmg'),
+('eclipse', 'linux', 'Linux 64-bit', 'http://download.springsource.com/release/STS4/4.1.1.RELEASE/dist/e4.10/spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-linux.gtk.x86_64.tar.gz'),
+('vscode', 'marketplace', 'VSCode Marketplace', 'https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack'),
+('atom', 'package', 'Package for Atom', 'https://atom.io/packages/spring-boot');
