@@ -1,4 +1,4 @@
-package sagan.search.support;
+package sagan.search.service;
 
 import java.util.List;
 

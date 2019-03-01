@@ -1,9 +1,9 @@
-package sagan.search.support;
+package sagan.search.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class SearchFacet {
+public class SearchFacet {
     private String path;
     private String name;
     private int count;

@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import sagan.search.support.SearchService;
+import sagan.search.support.JestSearchService;
 import sagan.team.MemberProfile;
 
 import java.util.List;
@@ -23,11 +23,11 @@ public class TeamService {
     private static Log logger = LogFactory.getLog(TeamService.class);
 
     private final TeamRepository teamRepository;
-    private final SearchService searchService;
+    private final JestSearchService searchService;
     private final MemberProfileSearchEntryMapper mapper;
 
     @Autowired
-    public TeamService(TeamRepository teamRepository, SearchService searchService,
+    public TeamService(TeamRepository teamRepository, JestSearchService searchService,
                        MemberProfileSearchEntryMapper mapper) {
         this.teamRepository = teamRepository;
         this.searchService = searchService;

@@ -1,6 +1,9 @@
 package sagan.search.support;
 
 import sagan.search.SearchException;
+import sagan.search.service.SearchFacet;
+import sagan.search.service.SearchResult;
+import sagan.search.service.SearchResults;
 import sagan.support.nav.PageableFactory;
 import sagan.support.nav.PaginationInfo;
 
@@ -24,10 +27,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/search")
 class SearchController {
 
-    private final SearchService searchService;
+    private final JestSearchService searchService;
 
     @Autowired
-    public SearchController(SearchService searchService) {
+    public SearchController(JestSearchService searchService) {
         this.searchService = searchService;
     }
 

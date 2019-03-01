@@ -1,12 +1,15 @@
 package sagan.search.support;
 
+import sagan.search.service.SearchFacet;
+import sagan.search.service.SearchResult;
+import sagan.search.service.SearchResults;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import io.searchbox.client.JestResult;
 
@@ -15,7 +18,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-@Service
 class SearchResultParser {
 
     public SearchResults parseResults(JestResult jestResult, Pageable pageable, String originalSearchTerm) {

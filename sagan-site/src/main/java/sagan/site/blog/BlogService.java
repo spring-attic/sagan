@@ -10,7 +10,7 @@ import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.PostMovedException;
 import sagan.blog.PostNotFoundException;
-import sagan.search.support.SearchService;
+import sagan.search.support.JestSearchService;
 import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 
@@ -33,7 +33,7 @@ public class BlogService {
 
     private final PostFormAdapter postFormAdapter;
     private final PostRepository postRepository;
-    private final SearchService searchService;
+    private final JestSearchService searchService;
     private final DateFactory dateFactory;
     private final PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
@@ -42,7 +42,7 @@ public class BlogService {
 
     @Autowired
     public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter, DateFactory dateFactory,
-                       SearchService searchService) {
+                       JestSearchService searchService) {
         this.postRepository = postRepository;
         this.postFormAdapter = postFormAdapter;
         this.dateFactory = dateFactory;

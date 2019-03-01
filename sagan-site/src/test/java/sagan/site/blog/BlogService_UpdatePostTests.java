@@ -37,7 +37,7 @@ public class BlogService_UpdatePostTests {
     private DateFactory dateFactory;
 
     @Mock
-    private SearchService searchService;
+    private JestSearchService searchService;
 
     @Mock
     private PostFormAdapter postFormAdapter;

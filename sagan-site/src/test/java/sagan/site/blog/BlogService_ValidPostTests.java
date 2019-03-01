@@ -45,7 +45,7 @@ public class BlogService_ValidPostTests {
     private DateFactory dateFactory;
 
     @Mock
-    private SearchService searchService;
+    private JestSearchService searchService;
 
     @Rule
     public ExpectedException expected = ExpectedException.none();

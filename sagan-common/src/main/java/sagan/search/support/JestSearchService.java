@@ -1,6 +1,21 @@
 package sagan.search.support;
 
-import com.google.gson.Gson;
+import sagan.search.SearchException;
+import sagan.search.service.SearchResults;
+import sagan.search.service.SearchService;
+import sagan.search.types.SearchEntry;
+
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.elasticsearch.index.query.FilteredQueryBuilder;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
+import org.springframework.util.StringUtils;
+
 import io.searchbox.action.Action;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
@@ -8,23 +23,12 @@ import io.searchbox.core.Delete;
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.elasticsearch.index.query.FilteredQueryBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import sagan.search.SearchException;
-import sagan.search.types.SearchEntry;
 
-import java.util.List;
+import com.google.gson.Gson;
 
-@Service
-public class SearchService {
+public class JestSearchService implements SearchService {
 
-    private static Log logger = LogFactory.getLog(SearchService.class);
+    private static Log logger = LogFactory.getLog(JestSearchService.class);
 
     private final JestClient jestClient;
     private final Gson gson;
@@ -36,7 +40,7 @@ public class SearchService {
     private String index;
 
     @Autowired
-    public SearchService(JestClient jestClient, SearchResultParser searchResultParser, Gson gson) {
+    public JestSearchService(JestClient jestClient, SearchResultParser searchResultParser, Gson gson) {
         this.jestClient = jestClient;
         this.searchResultParser = searchResultParser;
         this.gson = gson;
@@ -46,6 +50,7 @@ public class SearchService {
         return index;
     }
 
+    @Override
     public void saveToIndex(SearchEntry entry) {
         Index.Builder indexEntryBuilder = new Index.Builder(entry).id(entry.getId()).index(index).type(entry.getType());
 
@@ -56,12 +61,12 @@ public class SearchService {
         execute(indexEntryBuilder.build());
     }
 
+    @Override
     public SearchResults search(String term, Pageable pageable, List<String> filter) {
         Search.Builder searchBuilder;
         if (StringUtils.isEmpty(term)) {
             searchBuilder = SaganQueryBuilders.forEmptyQuery(pageable, filter);
-        }
-        else {
+        } else {
             searchBuilder = SaganQueryBuilders.fullTextSearch(term, pageable, filter);
         }
         searchBuilder.addIndex(index);
@@ -75,6 +80,7 @@ public class SearchService {
         this.useRefresh = useRefresh;
     }
 
+    @Override
     public void removeFromIndex(SearchEntry entry) {
         Delete delete = new Delete.Builder(entry.getId())
                 .index(index)
@@ -84,6 +90,7 @@ public class SearchService {
         execute(delete);
     }
 
+    @Override
     public void removeOldProjectEntriesFromIndex(String projectId, List<String> supportedVersions) {
         FilteredQueryBuilder builder = SaganQueryBuilders.matchUnsupportedProjectEntries(projectId, supportedVersions);
         String query = SaganQueryBuilders.wrapQuery(builder.toString());

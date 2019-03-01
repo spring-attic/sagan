@@ -1,6 +1,6 @@
-package sagan.search.support;
+package sagan.search.service;
 
-class SearchResult {
+public class SearchResult {
     private final String type;
     private final String title;
     private final String subTitle;
