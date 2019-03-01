@@ -1,0 +1,22 @@
+dependencies {
+
+    compile project(':sagan-common')
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-starter-web"
+
+    compile 'org.elasticsearch:elasticsearch'
+    compile 'io.searchbox:jest:0.1.7'
+    compile 'commons-codec:commons-codec' // needed by Jest's HTTP client?
+    compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
+    compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
+
+    // jackson, for JSON and XML serialization
+    compile "com.fasterxml.jackson.core:jackson-core"
+    compile "com.fasterxml.jackson.core:jackson-annotations"
+    compile "com.fasterxml.jackson.core:jackson-databind"
+
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+
+    // pick up common test utility classes
+    testCompile project(':sagan-common').sourceSets.testUtil.output
+}
