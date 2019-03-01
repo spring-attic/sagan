@@ -1,6 +1,8 @@
-package sagan.search.service;
+package sagan.search.service.support;
 
-import sagan.search.SearchException;
+import sagan.search.service.SearchException;
+import sagan.search.service.SearchResults;
+import sagan.search.service.SearchService;
 import sagan.search.types.SearchEntry;
 
 import java.util.List;

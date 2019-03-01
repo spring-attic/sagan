@@ -16,7 +16,7 @@ info:
 
 spring:
   main:
-    sources: sagan.search.SearchApplication
+    sources: sagan.search.service.SearchApplication
 
 elasticsearch:
   client:

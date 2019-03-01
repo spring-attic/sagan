@@ -1,4 +1,8 @@
-package sagan.search.service;
+package sagan.search.service.support;
+
+import sagan.search.service.SearchFacet;
+import sagan.search.service.SearchResults;
+import sagan.search.service.support.SearchResultParser;
 
 import java.util.List;
 

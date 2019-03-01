@@ -1,4 +1,4 @@
-package sagan.search;
+package sagan.search.service;
 
 import sagan.search.types.SearchEntry;
 

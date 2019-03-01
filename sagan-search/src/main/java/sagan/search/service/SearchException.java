@@ -1,4 +1,4 @@
-package sagan.search;
+package sagan.search.service;
 
 @SuppressWarnings("serial")
 public class SearchException extends RuntimeException {

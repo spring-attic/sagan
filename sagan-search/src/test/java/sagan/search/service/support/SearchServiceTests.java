@@ -1,8 +1,8 @@
-package sagan.search.service;
+package sagan.search.service.support;
 
-import sagan.search.SearchException;
-import sagan.search.service.SearchResultParser;
-import sagan.search.service.ElasticSearchService;
+import sagan.search.service.SearchException;
+import sagan.search.service.support.ElasticSearchService;
+import sagan.search.service.support.SearchResultParser;
 import sagan.search.support.SearchEntryBuilder;
 import sagan.search.types.SearchEntry;
 import sagan.search.types.SearchType;

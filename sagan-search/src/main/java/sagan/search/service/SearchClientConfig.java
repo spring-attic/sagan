@@ -1,4 +1,4 @@
-package sagan.search;
+package sagan.search.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

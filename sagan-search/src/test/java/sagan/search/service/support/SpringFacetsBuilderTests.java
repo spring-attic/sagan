@@ -1,4 +1,7 @@
-package sagan.search.service;
+package sagan.search.service.support;
+
+import sagan.search.service.SearchFacet;
+import sagan.search.service.support.SpringFacetsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;

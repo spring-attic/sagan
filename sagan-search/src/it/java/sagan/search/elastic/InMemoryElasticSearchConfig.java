@@ -1,6 +1,6 @@
-package sagan.search.service;
+package sagan.search.elastic;
 
-import sagan.search.service.ElasticSearchService;
+import sagan.search.service.support.ElasticSearchService;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

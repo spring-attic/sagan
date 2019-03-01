@@ -1,4 +1,4 @@
-package sagan.search.service;
+package sagan.search.service.support;
 
 import com.google.gson.Gson;
 import io.searchbox.core.Search;
@@ -8,7 +8,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.util.StreamUtils;
 
-import sagan.search.service.SaganQueryBuilders;
+import sagan.search.service.support.SaganQueryBuilders;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;

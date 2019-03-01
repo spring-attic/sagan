@@ -1,4 +1,4 @@
-package sagan.support.health;
+package sagan.search.service.health;
 
 import com.google.gson.JsonObject;
 import io.searchbox.client.JestClient;

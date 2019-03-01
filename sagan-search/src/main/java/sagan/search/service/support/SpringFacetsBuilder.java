@@ -1,4 +1,6 @@
-package sagan.search.service;
+package sagan.search.service.support;
+
+import sagan.search.service.SearchFacet;
 
 import java.util.ArrayList;
 import java.util.List;

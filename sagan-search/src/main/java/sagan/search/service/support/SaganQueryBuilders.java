@@ -1,4 +1,4 @@
-package sagan.search.service;
+package sagan.search.service.support;
 
 import io.searchbox.core.Search;
 import org.elasticsearch.common.unit.Fuzziness;

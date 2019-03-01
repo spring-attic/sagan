@@ -12,19 +12,13 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
 @ContextConfiguration(classes = { IntegrationTestsConfig.class })
-@Transactional
 @ActiveProfiles(profiles = { SaganProfiles.STANDALONE })
 @AutoConfigureMockMvc(addFilters = false)
 public abstract class AbstractIntegrationTests {
-
-    @Autowired
-    protected WebApplicationContext wac;
 
     @Autowired
     protected MockMvc mockMvc;

@@ -1,4 +1,6 @@
-package sagan.search.service;
+package sagan.search.service.support;
+
+import sagan.search.service.SearchResult;
 
 import org.junit.Test;
 

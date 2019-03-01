@@ -1,10 +1,11 @@
-package sagan.search;
+package sagan.search.service;
 
 import sagan.SaganApplication;
-import sagan.search.service.ElasticSearchService;
-import sagan.support.health.ElasticsearchHealthIndicator;
+import sagan.search.service.health.ElasticsearchHealthIndicator;
+import sagan.search.service.support.ElasticSearchService;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 
 import io.searchbox.client.JestClient;
@@ -21,7 +22,8 @@ public class SearchApplication {
     }
 
     @Bean
-    public ElasticsearchHealthIndicator elasticsearch(JestClient jestClient, ElasticSearchService searchService) {
+    @ConditionalOnBean(ElasticSearchService.class)
+    public ElasticsearchHealthIndicator elasticsearchHealthIndicator(JestClient jestClient, ElasticSearchService searchService) {
         return new ElasticsearchHealthIndicator(jestClient, searchService.getIndexName());
     }
 

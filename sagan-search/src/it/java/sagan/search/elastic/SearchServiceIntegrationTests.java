@@ -1,7 +1,7 @@
-package sagan.search.service;
+package sagan.search.elastic;
 
-import sagan.search.service.ElasticSearchService;
 import sagan.search.service.SearchResult;
+import sagan.search.service.support.ElasticSearchService;
 import sagan.search.support.SearchEntryBuilder;
 import sagan.search.support.SearchIndexSetup;
 import sagan.search.types.SearchEntry;
