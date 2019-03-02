@@ -1,5 +1,6 @@
 package sagan.search.elastic;
 
+import sagan.SaganProfiles;
 import sagan.search.service.SearchResult;
 import sagan.search.service.support.ElasticSearchService;
 import sagan.search.support.SearchEntryBuilder;
@@ -14,23 +15,26 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import io.searchbox.client.JestClient;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-import saganx.AbstractIntegrationTests;
-
-@ContextConfiguration(classes = InMemoryElasticSearchConfig.class)
-public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = { InMemoryElasticSearchConfig.class })
+@ActiveProfiles(profiles = { SaganProfiles.STANDALONE, SaganProfiles.JEST })
+public class SearchServiceIntegrationTests {
 
     private final Pageable pageable = new PageRequest(0, 10);
 

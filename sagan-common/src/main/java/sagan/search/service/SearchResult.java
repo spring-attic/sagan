@@ -14,6 +14,10 @@ public class SearchResult {
     private final String highlight;
     private final String originalSearchTerm;
 
+    SearchResult() {
+        this(null, null, null, null, null, null, null, null);
+    }
+
     public SearchResult(String id, String title, String subTitle, String summary, String path, String type,
                         String highlight, String originalSearchTerm) {
         this.title = title;

@@ -18,7 +18,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-class SearchResultParser {
+public class SearchResultParser {
 
     public SearchResults parseResults(JestResult jestResult, Pageable pageable, String originalSearchTerm) {
         JsonObject response = jestResult.getJsonObject();

@@ -12,6 +12,8 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
     compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 
+    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
+    testCompile "org.springframework.cloud:spring-cloud-contract-wiremock"
     testCompile "org.springframework.boot:spring-boot-starter-test"
 
     // pick up common test utility classes

@@ -4,6 +4,18 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import sagan.blog.Post;
+import sagan.blog.PostCategory;
+import sagan.blog.PostMovedException;
+import sagan.blog.PostNotFoundException;
+import sagan.search.service.SearchService;
+import sagan.support.DateFactory;
+import sagan.team.MemberProfile;
+
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import sagan.blog.Post;
@@ -33,7 +45,7 @@ public class BlogService {
 
     private final PostFormAdapter postFormAdapter;
     private final PostRepository postRepository;
-    private final JestSearchService searchService;
+    private final SearchService searchService;
     private final DateFactory dateFactory;
     private final PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
@@ -42,7 +54,7 @@ public class BlogService {
 
     @Autowired
     public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter, DateFactory dateFactory,
-                       JestSearchService searchService) {
+                       SearchService searchService) {
         this.postRepository = postRepository;
         this.postFormAdapter = postFormAdapter;
         this.dateFactory = dateFactory;

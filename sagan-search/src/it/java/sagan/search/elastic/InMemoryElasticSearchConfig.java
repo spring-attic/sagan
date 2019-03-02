@@ -2,6 +2,9 @@ package sagan.search.elastic;
 
 import sagan.search.service.support.ElasticSearchService;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -26,10 +29,13 @@ class InMemoryElasticSearchConfig {
 
     private Node node;
 
+    private CountDownLatch latch = new CountDownLatch(1);
+
     @PostConstruct
-    public void configureSearchService() {
+    public void configureSearchService() throws InterruptedException {
         searchService.setUseRefresh(true);
         new Thread(this::start).start();
+        latch.await(5000L, TimeUnit.MILLISECONDS);
     }
 
     private void start() {
@@ -39,6 +45,7 @@ class InMemoryElasticSearchConfig {
         node = nodeBuilder.node();
         client = node.client();
         log.info("Started Elastic Search");
+        latch.countDown();
     }
 
     @PreDestroy

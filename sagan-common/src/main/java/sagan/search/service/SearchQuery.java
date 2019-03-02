@@ -33,6 +33,10 @@ public class SearchQuery {
         return filter;
     }
 
+    public void setFilter(List<String> filter) {
+        this.filter.addAll(filter);
+    }
+
     public void addFilter(String... filter) {
         this.filter.addAll(Arrays.asList(filter));
     }

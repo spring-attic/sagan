@@ -1,5 +1,7 @@
 package sagan.search.web;
 
+import sagan.SaganProfiles;
+import sagan.search.service.SearchApplication;
 import sagan.search.service.SearchQuery;
 import sagan.search.service.support.ElasticSearchService;
 import sagan.search.types.GuideDoc;
@@ -8,12 +10,19 @@ import sagan.search.types.SearchEntry;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -23,15 +32,20 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import saganx.AbstractIntegrationTests;
-
-public class SearchServiceControllerTests extends AbstractIntegrationTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes=SearchApplication.class)
+@ActiveProfiles(profiles = { SaganProfiles.STANDALONE })
+@AutoConfigureMockMvc(addFilters = false)
+public class SearchServiceControllerTests {
 
     @MockBean
     private ElasticSearchService service;
 
     @Autowired
     private ObjectMapper mapper;
+
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
     public void search() throws Exception {

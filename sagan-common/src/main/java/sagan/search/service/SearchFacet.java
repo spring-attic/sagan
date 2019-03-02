@@ -13,6 +13,10 @@ public class SearchFacet {
     private int count;
     private List<SearchFacet> facets;
     private List<SearchFacet> headerFacets = new ArrayList<>();
+    
+    SearchFacet() {
+        this(null, null, 0);
+    }
 
     public SearchFacet(String path, String name, int count) {
         this(path, name, count, new ArrayList<>());

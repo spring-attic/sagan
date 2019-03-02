@@ -13,6 +13,10 @@ public class SearchResults {
 
     private final List<SearchFacet> facets;
 
+    SearchResults() {
+        this(null, null);
+    }
+
     public SearchResults(Page<SearchResult> page, List<SearchFacet> facets) {
         this.page = page;
         this.facets = facets;
