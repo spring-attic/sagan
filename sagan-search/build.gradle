@@ -1,6 +1,8 @@
 dependencies {
 
-    compile project(':sagan-common').sourceSets.main.output
+    compile (project(':sagan-common')) {
+        exclude group: '*'
+    }
 
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-web"
