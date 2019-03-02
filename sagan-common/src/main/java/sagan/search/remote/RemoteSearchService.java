@@ -53,28 +53,4 @@ public class RemoteSearchService implements SearchService {
         }
     }
 
-    @Override
-    public void removeFromIndex(SearchEntry entry) {
-        URI uri = UriComponentsBuilder.fromUriString(url).path("index/{type}").path(entry.getPath()).build().expand(
-                entry.getType()).toUri();
-        try {
-            rest.delete(uri);
-        } catch (RestClientException e) {
-            // Ignore
-        }
-    }
-
-    @Override
-    public void removeOldProjectEntriesFromIndex(String projectId, List<String> supportedVersions) {
-        for (String version : supportedVersions) {
-            URI uri = UriComponentsBuilder.fromUriString(url).path("projects/{project}").path(version).build().expand(
-                    projectId).toUri();
-            try {
-                rest.delete(uri);
-            } catch (RestClientException e) {
-                // Ignore
-            }
-        }
-    }
-
 }

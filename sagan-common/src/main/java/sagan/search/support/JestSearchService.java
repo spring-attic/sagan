@@ -80,7 +80,6 @@ public class JestSearchService implements SearchService {
         this.useRefresh = useRefresh;
     }
 
-    @Override
     public void removeFromIndex(SearchEntry entry) {
         Delete delete = new Delete.Builder(entry.getId())
                 .index(index)
@@ -90,7 +89,6 @@ public class JestSearchService implements SearchService {
         execute(delete);
     }
 
-    @Override
     public void removeOldProjectEntriesFromIndex(String projectId, List<String> supportedVersions) {
         FilteredQueryBuilder builder = SaganQueryBuilders.matchUnsupportedProjectEntries(projectId, supportedVersions);
         String query = SaganQueryBuilders.wrapQuery(builder.toString());

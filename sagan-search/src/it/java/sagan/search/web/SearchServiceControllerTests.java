@@ -19,7 +19,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,7 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -64,25 +63,12 @@ public class SearchServiceControllerTests {
     }
 
     @Test
-    public void deleteSearchEntry() throws Exception {
-        mockMvc.perform(delete("/index/abcdef/gs/stuff")).andExpect(status().is2xxSuccessful());
-        verify(service).removeFromIndex(argThat(new SearchEntryMatcher("abcdef", "gs/stuff")));
-    }
-
-    @Test
     public void createSearchEntry() throws Exception {
         GuideDoc value = new GuideDoc();
         value.setPath("gs/stuff");
         mockMvc.perform(post("/index").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(
                 value))).andExpect(status().is2xxSuccessful());
         verify(service).saveToIndex(argThat(new SearchEntryMatcher("guidedoc", "gs/stuff")));
-    }
-
-    @Test
-    public void deleteProjectVersion() throws Exception {
-        mockMvc.perform(delete("/projects/abcdef/1.0.0.RELEASE")).andExpect(status().is2xxSuccessful());
-        verify(service).removeOldProjectEntriesFromIndex(argThat(equalTo("abcdef")), argThat(new ListMatcher(
-                "1.0.0.RELEASE")));
     }
 
     private class SearchEntryMatcher extends ArgumentMatcher<SearchEntry> {
@@ -98,22 +84,6 @@ public class SearchServiceControllerTests {
         public boolean matches(Object argument) {
             SearchEntry entry = (SearchEntry) argument;
             return entry.getPath().equals(path) && entry.getType().equals(type);
-        }
-    }
-
-    private class ListMatcher extends ArgumentMatcher<List<String>> {
-
-        private String item;
-
-        public ListMatcher(String item) {
-            this.item = item;
-        }
-
-        @Override
-        public boolean matches(Object argument) {
-            @SuppressWarnings("unchecked")
-            List<String> entry = (List<String>) argument;
-            return entry.contains(item);
         }
     }
 

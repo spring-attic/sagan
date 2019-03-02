@@ -11,9 +11,5 @@ public interface SearchService {
     void saveToIndex(SearchEntry entry);
 
     SearchResults search(String term, Pageable pageable, List<String> filter);
-    
-    void removeFromIndex(SearchEntry entry);
-    
-    void removeOldProjectEntriesFromIndex(String projectId, List<String> supportedVersions);
-    
+
 }

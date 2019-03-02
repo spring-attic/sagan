@@ -4,7 +4,7 @@ dependencies {
 
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.springframework.boot:spring-boot-starter-data-rest"
+    compile "org.springframework.data:spring-data-commons"
 
     compile 'org.elasticsearch:elasticsearch'
     compile 'io.searchbox:jest:0.1.7'
