@@ -19,7 +19,7 @@ jar {
         details.path = details.path.startsWith('META-INF') ?: 'static/'+details.path
     }
     // Jar contains duplicate empty folders, see Gradle issue:
-    // http://issues.gradle.org/browse/GRADLE-1830
+    // https://issues.gradle.org/browse/GRADLE-1830
     // so we need to set includeEmptyDirs to false
     includeEmptyDirs = false
 

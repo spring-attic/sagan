@@ -1,5 +1,5 @@
 buildscript {
-    ext.springRepo = 'http://repo.spring.io/libs-release'
+    ext.springRepo = 'https://repo.spring.io/libs-release'
     repositories {
         mavenLocal()
         maven { url springRepo }
@@ -75,7 +75,7 @@ configure(javaProjects) {
     // during the normal `gradle eclipse` / `gradle cleanEclipse` lifecycle, as
     // these files have been checked in with formatting settings imported from
     // style/sagan-format.xml and style/sagan.importorder.
-    // See http://www.gradle.org/docs/current/userguide/eclipse_plugin.html
+    // See https://www.gradle.org/docs/current/userguide/eclipse_plugin.html
     eclipseJdt.onlyIf { false }
     cleanEclipseJdt.onlyIf { false }
 }
