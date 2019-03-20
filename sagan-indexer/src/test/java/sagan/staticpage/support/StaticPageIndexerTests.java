@@ -36,7 +36,7 @@ public class StaticPageIndexerTests {
     @Before
     public void setUp() throws Exception {
         indexer = new StaticPageIndexer(crawlerService, searchService, staticPagePathFinder);
-        ReflectionTestUtils.setField(indexer, "baseUrl", "http://www.example.com");
+        ReflectionTestUtils.setField(indexer, "baseUrl", "https://www.example.com");
     }
 
     @Test
@@ -46,7 +46,7 @@ public class StaticPageIndexerTests {
 
         Iterable<String> pages = indexer.indexableItems();
 
-        assertThat(pages, containsInAnyOrder("http://www.example.com/foo"));
+        assertThat(pages, containsInAnyOrder("https://www.example.com/foo"));
     }
 
     @Test
@@ -59,6 +59,6 @@ public class StaticPageIndexerTests {
 
         Iterable<String> pages = indexer.indexableItems();
 
-        assertThat(pages, containsInAnyOrder("http://www.example.com/foo"));
+        assertThat(pages, containsInAnyOrder("https://www.example.com/foo"));
     }
 }

@@ -63,7 +63,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
         assertThat(document.select(".platform h3").text(), containsString("Windows"));
 
         assertThat(document.select(".ga--release .item--dropdown a").attr("href"), allOf(
-                containsString("http://download.springsource.com/release/STS/"),
+                containsString("https://download.springsource.com/release/STS/"),
                 containsString("spring-tool-suite"),
                 containsString("win32.zip")));
     }
@@ -82,7 +82,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
 
         assertThat(
                 document.select(".milestone--release .item--dropdown a").attr("href"), allOf(
-                        containsString("http://download.springsource.com/milestone/STS/"),
+                        containsString("https://download.springsource.com/milestone/STS/"),
                         containsString("spring-tool-suite"),
                         containsString("win32.zip")));
     }
@@ -104,7 +104,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
         assertThat(
                 document.select(".milestone--release .item--dropdown a").attr("href"),
                 not(allOf(
-                        containsString("http://download.springsource.com/milestone/STS/"),
+                        containsString("https://download.springsource.com/milestone/STS/"),
                         containsString("spring-tool-suite"),
                         containsString("win32.zip"))));
 
@@ -124,7 +124,7 @@ public class ToolsPagesTests extends AbstractIntegrationTests {
         assertThat(document.select(".platform h3").text(), containsString("Windows"));
 
         assertThat(document.select(".ga--release .item--dropdown a").first().attr("href"), allOf(
-                containsString("http://download.springsource.com/release/STS/"),
+                containsString("https://download.springsource.com/release/STS/"),
                 containsString("spring-tool-suite"),
                 containsString("win32-installer.exe")));
 

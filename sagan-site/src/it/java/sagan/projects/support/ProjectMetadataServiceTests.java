@@ -29,8 +29,8 @@ public class ProjectMetadataServiceTests extends AbstractIntegrationTests {
         Project project = service.getProject("spring-framework");
         assertThat(project.getId(), equalTo("spring-framework"));
         assertThat(project.getName(), equalTo("Spring Framework"));
-        assertThat(project.getRepoUrl(), equalTo("http://github.com/spring-projects/spring-framework"));
-        assertThat(project.getSiteUrl(), equalTo("http://projects.spring.io/spring-framework"));
+        assertThat(project.getRepoUrl(), equalTo("https://github.com/spring-projects/spring-framework"));
+        assertThat(project.getSiteUrl(), equalTo("https://projects.spring.io/spring-framework"));
         assertThat(project.getCategory(), equalTo("active"));
         assertThat(project.hasSite(), equalTo(true));
     }
@@ -40,7 +40,7 @@ public class ProjectMetadataServiceTests extends AbstractIntegrationTests {
         Project project = service.getProject("spring-integration-dsl-groovy");
         assertThat(project.getId(), equalTo("spring-integration-dsl-groovy"));
         assertThat(project.getName(), equalTo("Spring Integration Groovy DSL"));
-        assertThat(project.getRepoUrl(), equalTo("http://github.com/spring-projects/spring-integration-dsl-groovy"));
+        assertThat(project.getRepoUrl(), equalTo("https://github.com/spring-projects/spring-integration-dsl-groovy"));
         assertThat(project.getSiteUrl(), equalTo(""));
         assertThat(project.hasSite(), equalTo(false));
     }
@@ -50,31 +50,31 @@ public class ProjectMetadataServiceTests extends AbstractIntegrationTests {
         List<ProjectRelease> docVersions = service.getProject("spring-framework").getProjectReleases();
         assertThat(
                 docVersions.get(0).getRefDocUrl(),
-                equalTo("http://docs.spring.io/spring/docs/5.0.0.RC4/spring-framework-reference/"));
+                equalTo("https://docs.spring.io/spring/docs/5.0.0.RC4/spring-framework-reference/"));
         assertThat(docVersions.get(1).getRefDocUrl(),
-                equalTo("http://docs.spring.io/spring/docs/5.0.0.BUILD-SNAPSHOT/spring-framework-reference/"));
+                equalTo("https://docs.spring.io/spring/docs/5.0.0.BUILD-SNAPSHOT/spring-framework-reference/"));
         assertThat(
                 docVersions.get(2).getRefDocUrl(),
-                equalTo("http://docs.spring.io/spring/docs/4.3.12.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/"));
+                equalTo("https://docs.spring.io/spring/docs/4.3.12.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/"));
         assertThat(docVersions.get(3).getRefDocUrl(),
-                equalTo("http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/"));
+                equalTo("https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/"));
         assertThat(docVersions.get(4).getRefDocUrl(),
-                equalTo("http://docs.spring.io/spring/docs/4.2.9.RELEASE/spring-framework-reference/htmlsingle/"));
+                equalTo("https://docs.spring.io/spring/docs/4.2.9.RELEASE/spring-framework-reference/htmlsingle/"));
     }
 
     @Test
     public void getSupportedApiDocsUrlsOrdering() {
         List<ProjectRelease> docVersions = service.getProject("spring-framework").getProjectReleases();
         assertThat(docVersions.get(0).getApiDocUrl(),
-                equalTo("http://docs.spring.io/spring/docs/5.0.0.RC4/javadoc-api/"));
+                equalTo("https://docs.spring.io/spring/docs/5.0.0.RC4/javadoc-api/"));
         assertThat(docVersions.get(1).getApiDocUrl(),
-                equalTo("http://docs.spring.io/spring/docs/5.0.0.BUILD-SNAPSHOT/javadoc-api/"));
+                equalTo("https://docs.spring.io/spring/docs/5.0.0.BUILD-SNAPSHOT/javadoc-api/"));
         assertThat(docVersions.get(2).getApiDocUrl(),
-                equalTo("http://docs.spring.io/spring/docs/4.3.12.BUILD-SNAPSHOT/javadoc-api/"));
+                equalTo("https://docs.spring.io/spring/docs/4.3.12.BUILD-SNAPSHOT/javadoc-api/"));
         assertThat(docVersions.get(3).getApiDocUrl(),
-                equalTo("http://docs.spring.io/spring/docs/current/javadoc-api/"));
+                equalTo("https://docs.spring.io/spring/docs/current/javadoc-api/"));
         assertThat(docVersions.get(4).getApiDocUrl(),
-                equalTo("http://docs.spring.io/spring/docs/4.2.9.RELEASE/javadoc-api/"));
+                equalTo("https://docs.spring.io/spring/docs/4.2.9.RELEASE/javadoc-api/"));
     }
 
     @Test

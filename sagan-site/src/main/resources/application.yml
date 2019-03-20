@@ -44,7 +44,7 @@ github:
   # Credentials are based on users belonging to a particular GitHub team,
   # by requesting the GitHub API (see github.client configuration keys).
   # This key can be found in the list of teams in your organization
-  # See http://developer.github.com/v3/orgs/teams/#list-teams
+  # See https://developer.github.com/v3/orgs/teams/#list-teams
   team:
     id: ${GITHUB_TEAM_ID:482984}
 
@@ -62,7 +62,7 @@ github:
   # Guide repositories). This is done in order to work against higher rate limits
   # (5000req/hour vs. the default 60req/hour without a token). When running the app
   # locally, this lower default is fine. When running the app in production, the
-  # token is a must. See http://developer.github.com/v3/#rate-limiting.
+  # token is a must. See https://developer.github.com/v3/#rate-limiting.
   access:
     token: ${GITHUB_ACCESS_TOKEN:}
 
@@ -88,7 +88,7 @@ logging:
     # always log high-level information about application startup
     sagan.SiteApplication: INFO
     # log generated password for admin endpoints, e.g. /env, /beans
-    # See http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints
+    # See https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints
     org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration: INFO
 ---
 

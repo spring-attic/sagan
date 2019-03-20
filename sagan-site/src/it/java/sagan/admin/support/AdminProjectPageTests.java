@@ -62,45 +62,45 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
                         .param("id", "spring-framework")
                         .param("category", "active")
                         .param("name", "Spring Framework")
-                        .param("repoUrl", "http://github.com/spring-projects/spring-framework")
-                        .param("siteUrl", "http://projects.spring.io/spring-framework")
+                        .param("repoUrl", "https://github.com/spring-projects/spring-framework")
+                        .param("siteUrl", "https://projects.spring.io/spring-framework")
                         .param("rawBootConfig", "")
                         .param("rawOverview", "")
                         .param("releasesToDelete", "4.0.1.BUILD-SNAPSHOT")
                         .param("projectReleases[0].artifactId", "spring-framework")
                         .param("projectReleases[0].version", "4.0.1.BUILD-SNAPSHOT")
                         .param("projectReleases[0].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
                         .param("projectReleases[0].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[1].artifactId", "spring-framework")
                         .param("projectReleases[1].version", "4.0.0.RELEASE")
                         .param("projectReleases[1].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
                         .param("projectReleases[1].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[2].artifactId", "spring-framework")
                         .param("projectReleases[2].version", "3.2.7.BUILD-SNAPSHOT")
                         .param("projectReleases[2].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
                         .param("projectReleases[2].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[3].artifactId", "spring-framework")
                         .param("projectReleases[3].version", "3.2.6.RELEASE")
                         .param("projectReleases[3].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
                         .param("projectReleases[3].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[4].artifactId", "spring-framework")
                         .param("projectReleases[4].version", "3.1.4.RELEASE")
                         .param("projectReleases[4].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
                         .param("projectReleases[4].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/");
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/");
 
         mockMvc.perform(request)
                 .andExpect(redirectedUrl("spring-framework?navSection=projects"));
@@ -117,44 +117,44 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
                         .param("id", "spring-framework")
                         .param("category", "active")
                         .param("name", "Spring Framework")
-                        .param("repoUrl", "http://github.com/spring-projects/spring-framework")
-                        .param("siteUrl", "http://projects.spring.io/spring-framework")
+                        .param("repoUrl", "https://github.com/spring-projects/spring-framework")
+                        .param("siteUrl", "https://projects.spring.io/spring-framework")
                         .param("rawBootConfig", "")
                         .param("rawOverview", "")
                         .param("projectReleases[0].artifactId", "spring-framework")
                         .param("projectReleases[0].version", "4.0.2.BUILD-SNAPSHOT")
                         .param("projectReleases[0].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
                         .param("projectReleases[0].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[1].artifactId", "spring-framework")
                         .param("projectReleases[1].version", "4.0.1.RELEASE")
                         .param("projectReleases[1].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
                         .param("projectReleases[1].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[2].artifactId", "spring-framework")
                         .param("projectReleases[2].version", "3.2.7.BUILD-SNAPSHOT")
                         .param("projectReleases[2].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
                         .param("projectReleases[2].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[3].artifactId", "spring-framework")
                         .param("projectReleases[3].version", "3.2.6.RELEASE")
                         .param("projectReleases[3].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
                         .param("projectReleases[3].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[4].artifactId", "spring-framework")
                         .param("projectReleases[4].version", "3.1.4.RELEASE")
                         .param("projectReleases[4].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-framework-reference/htmlsingle/")
                         .param("projectReleases[4].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/");
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/");
 
         mockMvc.perform(request)
                 .andExpect(redirectedUrl("spring-framework?navSection=projects"));
@@ -172,44 +172,44 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
                         .param("id", "spring-new")
                         .param("category", "active")
                         .param("name", "Spring New")
-                        .param("repoUrl", "http://github.com/spring-projects/spring-new")
-                        .param("siteUrl", "http://projects.spring.io/spring-new")
+                        .param("repoUrl", "https://github.com/spring-projects/spring-new")
+                        .param("siteUrl", "https://projects.spring.io/spring-new")
                         .param("rawBootConfig", "")
                         .param("rawOverview", "")
                         .param("projectReleases[0].artifactId", "spring-framework")
                         .param("projectReleases[0].version", "4.0.2.BUILD-SNAPSHOT")
                         .param("projectReleases[0].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-new-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-new-reference/htmlsingle/")
                         .param("projectReleases[0].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[1].artifactId", "spring-framework")
                         .param("projectReleases[1].version", "4.0.1.RELEASE")
                         .param("projectReleases[1].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-new-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-new-reference/htmlsingle/")
                         .param("projectReleases[1].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[2].artifactId", "spring-framework")
                         .param("projectReleases[2].version", "3.2.7.BUILD-SNAPSHOT")
                         .param("projectReleases[2].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-new-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-new-reference/htmlsingle/")
                         .param("projectReleases[2].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[3].artifactId", "spring-framework")
                         .param("projectReleases[3].version", "3.2.6.RELEASE")
                         .param("projectReleases[3].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-new-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-new-reference/htmlsingle/")
                         .param("projectReleases[3].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/")
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/")
 
                         .param("projectReleases[4].artifactId", "spring-framework")
                         .param("projectReleases[4].version", "3.1.4.RELEASE")
                         .param("projectReleases[4].refDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/spring-new-reference/htmlsingle/")
+                                "https://docs.spring.io/spring/docs/{version}/spring-new-reference/htmlsingle/")
                         .param("projectReleases[4].apiDocUrl",
-                                "http://docs.spring.io/spring/docs/{version}/javadoc-api/");
+                                "https://docs.spring.io/spring/docs/{version}/javadoc-api/");
 
         mockMvc.perform(request)
                 .andExpect(redirectedUrl("spring-new?navSection=projects"));
@@ -229,16 +229,16 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
                         .param("id", "spring-data-jdbc-ext")
                         .param("category", "active")
                         .param("name", "Spring Data JDBC Extensions")
-                        .param("repoUrl", "http://github.com/spring-projects/spring-data-jdbc-ext")
-                        .param("siteUrl", "http://projects.spring.io/spring-data-jdbc-ext")
+                        .param("repoUrl", "https://github.com/spring-projects/spring-data-jdbc-ext")
+                        .param("siteUrl", "https://projects.spring.io/spring-data-jdbc-ext")
                         .param("rawBootConfig", "")
                         .param("rawOverview", "")
                         .param("projectReleases[0].artifactId", "spring-jdbc-oracle")
                         .param("projectReleases[0].version", "1.0.0.RELEASE")
                         .param("projectReleases[0].refDocUrl",
-                                "http://docs.spring.io/spring-data/jdbc/docs/{version}/reference/html")
+                                "https://docs.spring.io/spring-data/jdbc/docs/{version}/reference/html")
                         .param("projectReleases[0].apiDocUrl",
-                                "http://docs.spring.io/spring-data/jdbc/docs/{version}/api/");
+                                "https://docs.spring.io/spring-data/jdbc/docs/{version}/api/");
 
         mockMvc.perform(request)
                 .andExpect(redirectedUrl("spring-data-jdbc-ext?navSection=projects"));
@@ -335,7 +335,7 @@ public class AdminProjectPageTests extends AbstractIntegrationTests {
                         .param("projectSamples[0].url", "http://first.com")
                         .param("projectSamples[1].title", "Second Sample")
                         .param("projectSamples[1].displayOrder", "56")
-                        .param("projectSamples[1].url", "http://second.com")
+                        .param("projectSamples[1].url", "http://www.cyberfinder.com/")
                         .param("samplesToDelete", "42,56");
 
         mockMvc.perform(request);

@@ -40,14 +40,14 @@ public class RewriteTests {
     @Test
     public void rossensWebSocketPostIsRedirectedToOldBlog() throws Exception {
         validateTemporaryRedirect(
-                "http://spring.io/blog/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures",
-                "http://assets.spring.io/wp/WebSocketBlogPost.html");
+                "https://spring.io/blog/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures",
+                "https://assets.spring.io/wp/WebSocketBlogPost.html");
     }
 
     @Test
     public void videosRedirectToYoutube() throws ServletException, IOException, URISyntaxException {
-        validateTemporaryRedirect("http://spring.io/video", "http://www.youtube.com/springsourcedev");
-        validateTemporaryRedirect("http://spring.io/videos", "http://www.youtube.com/springsourcedev");
+        validateTemporaryRedirect("https://spring.io/video", "https://www.youtube.com/springsourcedev");
+        validateTemporaryRedirect("https://spring.io/videos", "https://www.youtube.com/springsourcedev");
     }
 
     @Test
@@ -100,60 +100,60 @@ public class RewriteTests {
 
     @Test
     public void stripsWwwSubdomain() throws ServletException, IOException, URISyntaxException {
-        validatePermanentRedirect("http://www.spring.io", "https://spring.io/");
-        validatePermanentRedirect("http://www.spring.io/something", "https://spring.io/something");
+        validatePermanentRedirect("https://www.spring.io", "https://spring.io/");
+        validatePermanentRedirect("https://www.spring.io/something", "https://spring.io/something");
     }
 
     @Test
     public void projectPageIndexIsNotRedirected() throws ServletException, IOException, URISyntaxException {
-        validateOk("http://spring.io/projects");
+        validateOk("https://spring.io/projects");
     }
 
     @Test
     public void projectPageIndexWithSlashIsNotRedirected() throws ServletException, IOException, URISyntaxException {
-        validateOk("http://spring.io/projects/");
+        validateOk("https://spring.io/projects/");
     }
 
     @Test
     public void projectPagesAreRedirected() throws ServletException, IOException, URISyntaxException {
-        validateTemporaryRedirect("http://spring.io/spring-data", "https://projects.spring.io/spring-data");
+        validateTemporaryRedirect("https://spring.io/spring-data", "https://projects.spring.io/spring-data");
     }
 
     @Test
     public void gplusIsRedirected() throws Exception {
-        validateTemporaryRedirect("http://spring.io/gplus", "https://plus.google.com/+springframework/");
+        validateTemporaryRedirect("https://spring.io/gplus", "https://plus.google.com/+springframework/");
     }
 
     @Test
     public void linkedinIsRedirected() throws Exception {
-        validateTemporaryRedirect("http://spring.io/linkedin", "http://www.linkedin.com/groups/46964");
+        validateTemporaryRedirect("https://spring.io/linkedin", "https://www.linkedin.com/groups/46964");
     }
 
     @Test
     public void deprecatedTutorialsRedirected() throws Exception {
-        validateTemporaryRedirect("http://spring.io/guides/tutorials/data/", "/guides");
-        validateTemporaryRedirect("http://spring.io/guides/tutorials/web/", "/guides");
+        validateTemporaryRedirect("https://spring.io/guides/tutorials/data/", "/guides");
+        validateTemporaryRedirect("https://spring.io/guides/tutorials/web/", "/guides");
     }
 
     @Test
 	public void tools4IsRedirected() throws Exception {
-		validateTemporaryRedirect("http://spring.io/tools4", "/tools");
+		validateTemporaryRedirect("https://spring.io/tools4", "/tools");
 	}
 
 	@Test
 	public void eclipseToolsIsRedirected() throws Exception {
-		validateTemporaryRedirect("http://spring.io/tools/eclipse", "/tools3/eclipse");
+		validateTemporaryRedirect("https://spring.io/tools/eclipse", "/tools3/eclipse");
 	}
 
 	@Test
 	public void sts3IsRedirected() throws Exception {
-		validateTemporaryRedirect("http://spring.io/tools/sts", "/tools");
-		validateTemporaryRedirect("http://spring.io/tools/sts/all", "/tools3/sts/all");
+		validateTemporaryRedirect("https://spring.io/tools/sts", "/tools");
+		validateTemporaryRedirect("https://spring.io/tools/sts/all", "/tools3/sts/all");
 	}
 
     @Test
     public void deprecatedWarGuideRedirected() throws Exception {
-        validateTemporaryRedirect("http://spring.io/guides/gs/convert-jar-to-war-maven/", "/guides/gs/convert-jar-to-war/");
+        validateTemporaryRedirect("https://spring.io/guides/gs/convert-jar-to-war-maven/", "/guides/gs/convert-jar-to-war/");
     }
 
     private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,

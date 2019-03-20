@@ -20,7 +20,7 @@ class DefaultMarkdownService implements MarkdownService {
 
     /**
      * Process the given markdown through GitHub's Markdown rendering API. See
-     * http://developer.github.com/v3/markdown
+     * https://developer.github.com/v3/markdown
      */
     @Override
     public String renderToHtml(String markdownSource) {

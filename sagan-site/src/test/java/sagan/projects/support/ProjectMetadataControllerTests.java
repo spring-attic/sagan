@@ -31,7 +31,7 @@ public class ProjectMetadataControllerTests {
     private ProjectMetadataService projectMetadataService;
 
     private List<ProjectRelease> releases = new ArrayList<>();
-    Project project = new Project(PROJECT_ID, "spring", "http://example.com", "http://examples.com", releases,
+    Project project = new Project(PROJECT_ID, "spring", "https://example.com", "https://examples.com", releases,
             "project");
     private ProjectMetadataController controller;
 
@@ -43,47 +43,47 @@ public class ProjectMetadataControllerTests {
     @Test
     public void getProject_doesNotContainVersionPlaceholders() throws Exception {
         ProjectRelease release = new ProjectRelease("1.2.3", ReleaseStatus.GENERAL_AVAILABILITY, false,
-                "http://example.com/1.2.3",
-                "http://example.com/1.2.3", "org.springframework", "spring-core");
+                "https://example.com/1.2.3",
+                "https://example.com/1.2.3", "org.springframework", "spring-core");
         releases.add(release);
         when(projectMetadataService.getProject(PROJECT_ID)).thenReturn(project);
         Project result = controller.projectMetadata(PROJECT_ID);
         assertThat(result.getProjectRelease("1.2.3"), equalTo(release));
         assertThat(project.getProjectReleases().iterator().next().getApiDocUrl(), equalTo(
-                "http://example.com/1.2.3"));
+                "https://example.com/1.2.3"));
     }
 
     @Test
     public void editProjectReleases_replacesVersionPatterns() throws Exception {
         ProjectRelease release = new ProjectRelease("1.2.3", ReleaseStatus.GENERAL_AVAILABILITY, false,
-                "http://example.com/1.2.3",
-                "http://example.com/1.2.3", "org.springframework", "spring-core");
+                "https://example.com/1.2.3",
+                "https://example.com/1.2.3", "org.springframework", "spring-core");
         ProjectRelease update = new ProjectRelease("1.2.4", ReleaseStatus.GENERAL_AVAILABILITY, false,
-                "http://example.com/{version}",
-                "http://example.com/{version}", "org.springframework", "spring-core");
+                "https://example.com/{version}",
+                "https://example.com/{version}", "org.springframework", "spring-core");
         releases.add(release);
         when(projectMetadataService.getProject(PROJECT_ID)).thenReturn(project);
         controller.updateProjectMetadata(PROJECT_ID, Arrays.asList(update));
         assertThat(project.getProjectReleases().iterator().next().getApiDocUrl(), equalTo(
-                "http://example.com/1.2.4"));
+                "https://example.com/1.2.4"));
     }
 
     @Test
     public void addProjectRelease_replacesVersionPatterns() throws Exception {
         ProjectRelease update = new ProjectRelease("1.2.4", ReleaseStatus.GENERAL_AVAILABILITY, false,
-                "http://example.com/{version}",
-                "http://example.com/{version}", "org.springframework", "spring-core");
+                "https://example.com/{version}",
+                "https://example.com/{version}", "org.springframework", "spring-core");
         when(projectMetadataService.getProject(PROJECT_ID)).thenReturn(project);
         controller.updateReleaseMetadata(PROJECT_ID, update);
         assertThat(project.getProjectReleases().iterator().next().getApiDocUrl(), equalTo(
-                "http://example.com/1.2.4"));
+                "https://example.com/1.2.4"));
     }
 
     @Test
     public void updateProject_patchesTheProject() throws Exception {
         List<ProjectRelease> newReleases = new ArrayList<>();
         newReleases.add(new ProjectRelease("1.0.0.RELEASE", ReleaseStatus.GENERAL_AVAILABILITY, true, "foo", "bar", "com.example", "artifact"));
-        Project newProject = new Project(PROJECT_ID, null, "http://example.com", "newSite", newReleases, "newProject");
+        Project newProject = new Project(PROJECT_ID, null, "https://example.com", "newSite", newReleases, "newProject");
         newProject.setRawBootConfig("newRawBootConfig");
         newProject.setRawOverview("newRawOverview");
         when(projectMetadataService.getProject(PROJECT_ID)).thenReturn(project);

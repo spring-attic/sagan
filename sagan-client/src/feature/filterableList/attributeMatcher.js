@@ -9,7 +9,7 @@ module.exports = function createAttributeMatcher(attribute) {
         // Construct a RegExp that looks lookahead (?=) to ensure that the
         // string to match contains all the words in wordsString.
         // Inspired by:
-        // http://stackoverflow.com/questions/13911053/regular-expression-to-match-all-words-in-a-query-in-any-order
+        // https://stackoverflow.com/questions/13911053/regular-expression-to-match-all-words-in-a-query-in-any-order
         rxString = wordsString.split(/\s+/).reduce(function(rxString, word) {
             return rxString + '(?=.*' + word + ')';
         }, '^') + '.+';

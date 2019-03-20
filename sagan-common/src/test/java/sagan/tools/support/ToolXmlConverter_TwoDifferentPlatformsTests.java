@@ -31,7 +31,7 @@ public class ToolXmlConverter_TwoDifferentPlatformsTests {
         download.setDescription("Mac OS X (Cocoa)");
         download.setOs("mac");
         download.setFile("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg");
-        download.setBucket("http://dist.springsource.com/");
+        download.setBucket("https://dist.springsource.com/");
         download.setEclipseVersion("4.3");
         download.setSize("373MB");
         download.setVersion("3.3.0.RELEASE");
@@ -41,7 +41,7 @@ public class ToolXmlConverter_TwoDifferentPlatformsTests {
         download.setDescription("Windows (64bit)");
         download.setOs("windows");
         download.setFile("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-x86_64-installer.exe");
-        download.setBucket("http://dist.springsource.com/");
+        download.setBucket("https://dist.springsource.com/");
         download.setEclipseVersion("4.3");
         download.setSize("373MB");
         download.setVersion("3.3.0.RELEASE");
@@ -99,13 +99,13 @@ public class ToolXmlConverter_TwoDifferentPlatformsTests {
         assertThat(macArchitecture.getDownloadLinks().size(), equalTo(1));
         assertThat(
                 macArchitecture.getDownloadLinks().get(0).getUrl(),
-                equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
+                equalTo("https://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
 
         Architecture windowsArchitecture =
                 toolSuite.getPlatformList().get(0).getEclipseVersions().get(0).getArchitectures().get(0);
         assertThat(windowsArchitecture.getDownloadLinks().size(), equalTo(1));
         assertThat(
                 windowsArchitecture.getDownloadLinks().get(0).getUrl(),
-                equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-x86_64-installer.exe"));
+                equalTo("https://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-win32-x86_64-installer.exe"));
     }
 }

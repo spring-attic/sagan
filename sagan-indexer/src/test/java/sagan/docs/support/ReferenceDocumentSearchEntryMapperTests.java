@@ -20,8 +20,8 @@ public class ReferenceDocumentSearchEntryMapperTests {
 
     private Project project = new Project("spring",
             "Spring Project",
-            "http://www.example.com/repo/spring-framework",
-            "http://www.example.com/spring-framework",
+            "https://www.example.com/repo/spring-framework",
+            "https://www.example.com/spring-framework",
             Collections.<ProjectRelease> emptyList(),
             "release");
 

@@ -27,7 +27,7 @@ public class MemberProfileTests {
     public void twitterLink() {
         MemberProfile nick = new MemberProfile();
         nick.setTwitterUsername("nickstreet");
-        assertThat(nick.getTwitterLink().getHref(), equalTo("http://twitter.com/nickstreet"));
+        assertThat(nick.getTwitterLink().getHref(), equalTo("https://twitter.com/nickstreet"));
         assertThat(nick.getTwitterLink().getText(), equalTo("@nickstreet"));
     }
 

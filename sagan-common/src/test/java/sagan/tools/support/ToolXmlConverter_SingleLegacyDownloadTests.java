@@ -28,7 +28,7 @@ public class ToolXmlConverter_SingleLegacyDownloadTests {
         download.setDescription("Mac OS X (Cocoa)");
         download.setOs("mac");
         download.setFile("release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-installer.dmg");
-        download.setBucket("http://download.springsource.com/");
+        download.setBucket("https://download.springsource.com/");
         download.setEclipseVersion("4.3.2");
         download.setSize("361MB");
         download.setVersion("3.5.1.RELEASE");
@@ -43,7 +43,7 @@ public class ToolXmlConverter_SingleLegacyDownloadTests {
         download.setDescription("Mac OS X (Cocoa)");
         download.setOs("mac");
         download.setFile("release/STS/3.5.1/dist/e3.8/spring-tool-suite-3.5.1.RELEASE-e3.8.2-macosx-cocoa-installer.dmg");
-        download.setBucket("http://download.springsource.com/");
+        download.setBucket("https://download.springsource.com/");
         download.setEclipseVersion("3.8.2");
         download.setSize("349MB");
         download.setVersion("3.5.1.RELEASE");
@@ -58,7 +58,7 @@ public class ToolXmlConverter_SingleLegacyDownloadTests {
         download.setDescription("Mac OS X (Cocoa)");
         download.setOs("mac");
         download.setFile("release/STS/3.5.0/dist/e4.3/spring-tool-suite-3.5.0.RELEASE-e4.3.2-macosx-cocoa-installer.dmg");
-        download.setBucket("http://download.springsource.com/");
+        download.setBucket("https://download.springsource.com/");
         download.setEclipseVersion("4.3.2");
         download.setSize("361MB");
         download.setVersion("3.5.0.RELEASE");
@@ -114,7 +114,7 @@ public class ToolXmlConverter_SingleLegacyDownloadTests {
         assertThat(architecture.getDownloadLinks().size(), equalTo(1));
         assertThat(
                 architecture.getDownloadLinks().get(0).getUrl(),
-                equalTo("http://download.springsource.com/release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-installer.dmg"));
+                equalTo("https://download.springsource.com/release/STS/3.5.1/dist/e4.3/spring-tool-suite-3.5.1.RELEASE-e4.3.2-macosx-cocoa-installer.dmg"));
         assertThat(architecture.getDownloadLinks().get(0).getOs(), equalTo("mac"));
         assertThat(architecture.getDownloadLinks().get(0).getArchitecture(), equalTo("32"));
     }

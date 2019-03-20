@@ -1,7 +1,7 @@
 <html
   xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
+  xmlns:th="https://www.thymeleaf.org"
   layout:decorator="layout">
   <head>
     <title th:inline="text">Admin &middot; [[${profile.fullName}]]</title>
@@ -82,7 +82,7 @@
           <div class="admin-profile--field">
             <img th:src="*{avatarUrl}" class="push-right" />
             <p class="image-note">
-              <a href="http://gravatar.com">Sign up</a> for a Gravatar account or
+              <a href="https://gravatar.com">Sign up</a> for a Gravatar account or
               <a href="https://gravatar.com/emails/">edit your Gravatar settings</a>
             </p>
           </div>

@@ -26,18 +26,18 @@ public class ProjectDocumentationIndexerTests {
             metadataService);
 
     private List<ProjectRelease> documentationList = Arrays.asList(
-            new ProjectRelease("3", GENERAL_AVAILABILITY, true, "http://reference.example.com/3",
-                    "http://api.example.com/3", "com.example", "example-framework"),
-            new ProjectRelease("2", SNAPSHOT, false, "http://reference.example.com/2", "http://api.example.com/2",
+            new ProjectRelease("3", GENERAL_AVAILABILITY, true, "https://reference.example.com/3",
+                    "https://api.example.com/3", "com.example", "example-framework"),
+            new ProjectRelease("2", SNAPSHOT, false, "https://reference.example.com/2", "https://api.example.com/2",
                     "com.example", "example-framework"),
-            new ProjectRelease("1", SNAPSHOT, false, "http://reference.example.com/1", "http://api.example.com/1",
+            new ProjectRelease("1", SNAPSHOT, false, "https://reference.example.com/1", "https://api.example.com/1",
                     "com.example", "example-framework")
             );
 
     private Project project = new Project("spring",
             "Spring",
-            "http://www.example.com/repo/spring-framework",
-            "http://www.example.com/spring-framework",
+            "https://www.example.com/repo/spring-framework",
+            "https://www.example.com/spring-framework",
             documentationList,
             "release");
 
@@ -49,18 +49,18 @@ public class ProjectDocumentationIndexerTests {
     public void referenceDocsAreIndexed() throws Exception {
         service.indexItem(project);
         int linkDepthLevel = 1;
-        assertThatCrawlingIsDoneFor("http://reference.example.com/3", linkDepthLevel);
-        assertThatCrawlingIsDoneFor("http://reference.example.com/2", linkDepthLevel);
-        assertThatCrawlingIsDoneFor("http://reference.example.com/1", linkDepthLevel);
+        assertThatCrawlingIsDoneFor("https://reference.example.com/3", linkDepthLevel);
+        assertThatCrawlingIsDoneFor("https://reference.example.com/2", linkDepthLevel);
+        assertThatCrawlingIsDoneFor("https://reference.example.com/1", linkDepthLevel);
     }
 
     @Test
     public void apiDocsAreIndexed() throws Exception {
         service.indexItem(project);
         int linkDepthLevel = 2;
-        assertThatCrawlingIsDoneFor("http://api.example.com/3/allclasses-frame.html", linkDepthLevel);
-        assertThatCrawlingIsDoneFor("http://api.example.com/2/allclasses-frame.html", linkDepthLevel);
-        assertThatCrawlingIsDoneFor("http://api.example.com/1/allclasses-frame.html", linkDepthLevel);
+        assertThatCrawlingIsDoneFor("https://api.example.com/3/allclasses-frame.html", linkDepthLevel);
+        assertThatCrawlingIsDoneFor("https://api.example.com/2/allclasses-frame.html", linkDepthLevel);
+        assertThatCrawlingIsDoneFor("https://api.example.com/1/allclasses-frame.html", linkDepthLevel);
     }
 
 }

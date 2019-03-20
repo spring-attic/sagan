@@ -45,7 +45,7 @@ public class ToolsService {
 
     private ToolSuiteDownloads getToolSuiteDownloads(String toolSuiteName, String shortName) throws Exception {
         String responseXml =
-                restClient.get(restTemplate, "http://dist.springsource.com/release/STS/index-new.xml",
+                restClient.get(restTemplate, "https://dist.springsource.com/release/STS/index-new.xml",
                         String.class);
         ToolSuiteXml toolSuiteXml = serializer.readValue(responseXml, ToolSuiteXml.class);
         return toolXmlConverter.convert(toolSuiteXml, toolSuiteName, shortName);
@@ -53,7 +53,7 @@ public class ToolsService {
 
     private Collection<ToolSuiteDownloads> getLegacyToolSuiteDownloads(String toolSuiteName, String shortName) throws Exception {
         String responseXml =
-                restClient.get(restTemplate, "http://dist.springsource.com/release/STS/index-new.xml",
+                restClient.get(restTemplate, "https://dist.springsource.com/release/STS/index-new.xml",
                         String.class);
         ToolSuiteXml toolSuiteXml = serializer.readValue(responseXml, ToolSuiteXml.class);
         return toolXmlConverter.convertLegacy(toolSuiteXml, toolSuiteName, shortName);
@@ -61,7 +61,7 @@ public class ToolsService {
 
     public EclipseDownloads getEclipseDownloads() throws Exception {
         String responseXml =
-                restClient.get(restTemplate, "http://dist.springsource.com/release/STS/eclipse.xml",
+                restClient.get(restTemplate, "https://dist.springsource.com/release/STS/eclipse.xml",
                         String.class);
         EclipseXml eclipseXml = serializer.readValue(responseXml, EclipseXml.class);
         return new EclipseDownloadsXmlConverter().convert(eclipseXml);

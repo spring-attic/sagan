@@ -39,25 +39,25 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
     private JestClient jestClient;
 
     private SearchEntry gettingStarted = SearchEntryBuilder.entry()
-            .path("http://example.com/gettingStarted/some")
+            .path("https://example.com/gettingStarted/some")
             .title("a title")
             .facetPath("Guides")
             .facetPath("Guides/Getting Started").guide();
 
     private SearchEntry tutorial = SearchEntryBuilder.entry()
-            .path("http://example.com/tutorial")
+            .path("https://example.com/tutorial")
             .title("a title")
             .facetPath("Guides")
             .facetPath("Guides/Tutorials").guide();
 
     private SearchEntry blog = SearchEntryBuilder.entry()
-            .path("http://example.com/blog")
+            .path("https://example.com/blog")
             .title("a title")
             .facetPath("Blog")
             .facetPath("Blog/Engineering").blog();
 
     private SearchEntry springFrameworkApiDoc = SearchEntryBuilder.entry()
-            .path("http://example.com/projects/springFramework/apiDoc")
+            .path("https://example.com/projects/springFramework/apiDoc")
             .title("a title")
             .facetPath("Projects")
             .facetPath("Projects/Api")
@@ -65,7 +65,7 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
             .facetPath("Projects/SpringFramework/3.4.5.RELEASE").api();
 
     private SearchEntry springFrameworkRefDoc = SearchEntryBuilder.entry()
-            .path("http://example.com/projects/springFramework/refDoc")
+            .path("https://example.com/projects/springFramework/refDoc")
             .title("a title")
             .facetPath("Projects")
             .facetPath("Projects/Reference")
@@ -73,7 +73,7 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
             .facetPath("Projects/SpringFramework/3.4.5.RELEASE").reference();
 
     private SearchEntry springSecurityApiDoc = SearchEntryBuilder.entry()
-            .path("http://example.com/projects/spring-security/apiDoc")
+            .path("https://example.com/projects/spring-security/apiDoc")
             .title("a title")
             .facetPath("Projects")
             .facetPath("Projects/Api")
@@ -81,7 +81,7 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
             .facetPath("Projects/SpringSecurity/1.2.3.RELEASE").api();
 
     private SearchEntry springSecurityRefDoc = SearchEntryBuilder.entry()
-            .path("http://example.com/projects/spring-security/refDoc")
+            .path("https://example.com/projects/spring-security/refDoc")
             .title("a title")
             .facetPath("Projects")
             .facetPath("Projects/Reference")
@@ -247,7 +247,7 @@ public class SearchFacetsIntegrationTests extends AbstractIntegrationTests {
     @Test
     public void unpublishedEntriesDoNotAppearInResultsOrFacets() throws ParseException {
         SearchEntry unpublishedPost = SearchEntryBuilder.entry()
-                .path("http://example.com/blog")
+                .path("https://example.com/blog")
                 .title("a title")
                 .publishAt(new Date(System.currentTimeMillis() + (24 * 60 * 60 * 1000)))
                 .facetPath("Blog")

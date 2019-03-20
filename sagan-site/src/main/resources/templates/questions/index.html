@@ -1,5 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
       layout:decorator="layout"
       data-timeago>
 <head>
@@ -19,7 +19,7 @@
                 <p class="header--content-subtitle" layout:fragment="overview">
                     Welcome to our StackOverflow page, where we maintain a list of StackOverflow tags that our engineering team
                     monitors and participates in. If you are a previous forum.spring.io user, please read the
-                    <a href="/blog/2014/06/18/retiring-the-forum-spring-io-website">blog post</a> about the change or visit the <a href="http://forum.spring.io">read-only archive</a>.
+                    <a href="/blog/2014/06/18/retiring-the-forum-spring-io-website">blog post</a> about the change or visit the <a href="https://forum.spring.io">read-only archive</a>.
                 </p>
             </div>
             <div class="span4 mobile-left-pane">
@@ -59,7 +59,7 @@
                             </div>
                             <div class="tags" >
 
-                                <a th:each="tag : ${question.tags}" th:href="'http://stackoverflow.com/questions/tagged/' + ${tag}"
+                                <a th:each="tag : ${question.tags}" th:href="'https://stackoverflow.com/questions/tagged/' + ${tag}"
                                    class="post-tag" th:classappend="'t-' + ${tag}"
                                    th:title="'show questions tagged ' + ${tag}" rel="tag" th:text="${tag}">tagname</a>
 
@@ -94,7 +94,7 @@
                         <h4 th:text="${project.name}">Spring Framework</h4>
                         <div class="tags">
                             <a th:each="tag : ${project.stackOverflowTagList}"
-                               th:href="'http://stackoverflow.com/questions/tagged/' + ${tag}" th:text="'['+${tag}+']'"
+                               th:href="'https://stackoverflow.com/questions/tagged/' + ${tag}" th:text="'['+${tag}+']'"
                                class="post-tag">[spring-core]</a>
                         </div>
                     </div>

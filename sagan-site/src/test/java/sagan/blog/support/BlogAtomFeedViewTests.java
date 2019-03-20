@@ -85,7 +85,7 @@ public class BlogAtomFeedViewTests {
 
         atomFeedView.buildFeedMetadata(model, feed, request);
 
-        assertThat(feed.getId(), is("http://spring.io/blog.atom"));
+        assertThat(feed.getId(), is("https://spring.io/blog.atom"));
     }
 
     @Test

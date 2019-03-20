@@ -166,7 +166,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
 
     @Test
     public void searchisCaseInsensitive() throws ParseException {
-        entry = SearchEntryBuilder.entry().path("http://example.com")
+        entry = SearchEntryBuilder.entry().path("https://example.com")
                 .title("My Entry").rawContent("Uppercase is here")
                 .summary("Html summary").publishAt("2013-01-01 10:00").blog();
         searchService.saveToIndex(entry);
@@ -176,7 +176,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
 
     @Test
     public void searchMatchesPartialWords() throws ParseException {
-        entry = SearchEntryBuilder.entry().path("http://example.com")
+        entry = SearchEntryBuilder.entry().path("https://example.com")
                 .title("My Entry").rawContent("Exporter is here")
                 .summary("Html summary").publishAt("2013-01-01 10:00").blog();
         searchService.saveToIndex(entry);
@@ -186,7 +186,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
 
     @Test
     public void searchMatchesFuzzyQueries() throws ParseException {
-        entry = SearchEntryBuilder.entry().path("http://example.com")
+        entry = SearchEntryBuilder.entry().path("https://example.com")
                 .title("My Example Title").rawContent("Exporter is here")
                 .summary("Html summary").publishAt("2013-01-01 10:00").blog();
         searchService.saveToIndex(entry);
@@ -197,14 +197,14 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
     @Test
     public void boostsTitleMatchesOverContent() throws ParseException {
         SearchEntry entryContent = SearchEntryBuilder.entry()
-                .path("http://example.com/content").title("a title")
+                .path("https://example.com/content").title("a title")
                 .rawContent("application is in the content").summary("Html summary")
                 .publishAt("2013-01-01 10:00").blog();
 
         searchService.saveToIndex(entryContent);
 
         SearchEntry entryTitle = SearchEntryBuilder.entry()
-                .path("http://example.com/title").title("application is in the title")
+                .path("https://example.com/title").title("application is in the title")
                 .rawContent("some content").summary("Html summary")
                 .publishAt("2013-01-01 10:00").blog();
 
@@ -220,7 +220,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
     @Test
     public void boostsCurrentVersionEntries() throws ParseException {
         SearchEntry notCurrent = SearchEntryBuilder.entry()
-                .path("http://example.com/content1").title("ApplicationContext")
+                .path("https://example.com/content1").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description")
                 .version("1.2.2.RELEASE").notCurrent().projectId("project")
@@ -229,7 +229,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(notCurrent);
 
         SearchEntry current = SearchEntryBuilder.entry()
-                .path("http://example.com/content2").title("ApplicationContext")
+                .path("https://example.com/content2").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description")
                 .version("1.2.3.RELEASE").projectId("project")
@@ -247,7 +247,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
     @Test
     public void returnsApiDocSearchResult() throws ParseException {
         SearchEntry apiDoc = SearchEntryBuilder.entry()
-                .path("http://example.com/content").title("ApplicationContext")
+                .path("https://example.com/content").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .api();
@@ -267,7 +267,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
     @Test
     public void deleteOldApiDocs() throws ParseException {
         SearchEntry oldApiDoc1 = SearchEntryBuilder.entry()
-                .path("http://example.com/content1").title("ApplicationContext")
+                .path("https://example.com/content1").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description")
                 .version("1.2.3.RELEASE").notCurrent().projectId("project id to delete")
@@ -276,7 +276,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(oldApiDoc1);
 
         SearchEntry oldApiDoc2 = SearchEntryBuilder.entry()
-                .path("http://example.com/content2").title("ApplicationContext")
+                .path("https://example.com/content2").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description")
                 .version("1.5.3.M1").notCurrent().projectId("project id to delete")
@@ -285,7 +285,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(oldApiDoc2);
 
         SearchEntry newApiDoc1 = SearchEntryBuilder.entry()
-                .path("http://example.com/content3").title("ApplicationContext")
+                .path("https://example.com/content3").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description")
                 .version("2.0.0.RELEASE").notCurrent().projectId("project id to delete")
@@ -294,7 +294,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(newApiDoc1);
 
         SearchEntry newApiDoc2 = SearchEntryBuilder.entry()
-                .path("http://example.com/content4").title("ApplicationContext")
+                .path("https://example.com/content4").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description")
                 .version("2.1.0.M1").notCurrent().projectId("project id to delete")
@@ -303,7 +303,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(newApiDoc2);
 
         SearchEntry nonApiDoc = SearchEntryBuilder.entry()
-                .path("http://example.com/content5").title("ApplicationContext")
+                .path("https://example.com/content5").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .notCurrent().sitePage();
@@ -311,7 +311,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(nonApiDoc);
 
         SearchEntry otherApiDoc = SearchEntryBuilder.entry()
-                .path("http://example.com/content6").title("ApplicationContext")
+                .path("https://example.com/content6").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description")
                 .notCurrent().projectId("not id to delete").version("3.4.5.RELEASE")
@@ -331,7 +331,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
     @Test
     public void deleteOldReferenceDocs() throws ParseException {
         SearchEntry oldReferenceDoc1 = SearchEntryBuilder.entry()
-                .path("http://example.com/content1").title("ApplicationContext")
+                .path("https://example.com/content1").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .version("1.2.3.RELEASE").notCurrent().projectId("project id to delete")
@@ -340,7 +340,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(oldReferenceDoc1);
 
         SearchEntry oldReferenceDoc2 = SearchEntryBuilder.entry()
-                .path("http://example.com/content2").title("ApplicationContext")
+                .path("https://example.com/content2").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .version("1.5.3.M1").notCurrent().projectId("project id to delete")
@@ -349,7 +349,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(oldReferenceDoc2);
 
         SearchEntry newReferenceDoc1 = SearchEntryBuilder.entry()
-                .path("http://example.com/content3").title("ApplicationContext")
+                .path("https://example.com/content3").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .version("2.0.0.RELEASE").notCurrent().projectId("project id to delete")
@@ -358,7 +358,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(newReferenceDoc1);
 
         SearchEntry newReferenceDoc2 = SearchEntryBuilder.entry()
-                .path("http://example.com/content4").title("ApplicationContext")
+                .path("https://example.com/content4").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .version("2.1.0.M1").notCurrent().projectId("project id to delete")
@@ -367,7 +367,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(newReferenceDoc2);
 
         SearchEntry nonReferenceDoc = SearchEntryBuilder.entry()
-                .path("http://example.com/content5").title("ApplicationContext")
+                .path("https://example.com/content5").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .notCurrent().sitePage();
@@ -375,7 +375,7 @@ public class SearchServiceIntegrationTests extends AbstractIntegrationTests {
         searchService.saveToIndex(nonReferenceDoc);
 
         SearchEntry othersite = SearchEntryBuilder.entry()
-                .path("http://example.com/content6").title("ApplicationContext")
+                .path("https://example.com/content6").title("ApplicationContext")
                 .rawContent("This is an api doc for ApplicationContext.")
                 .summary("class level description").publishAt("2013-01-01 10:00")
                 .notCurrent().projectId("not id to delete").version("3.4.5.RELEASE")

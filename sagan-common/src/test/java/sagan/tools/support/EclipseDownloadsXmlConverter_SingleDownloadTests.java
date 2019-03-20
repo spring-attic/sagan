@@ -26,7 +26,7 @@ public class EclipseDownloadsXmlConverter_SingleDownloadTests {
         eclipseXmlDownload.setSize("196MB");
         eclipseXmlDownload.setDescription("Mac OS X (Cocoa)");
         eclipseXmlDownload.setFile("release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz");
-        eclipseXmlDownload.setBucket("http://eclipseXmlDownload.springsource.com/");
+        eclipseXmlDownload.setBucket("https://eclipseXmlDownload.springsource.com/");
 
         EclipseXmlPackage eclipseXmlPackage = new EclipseXmlPackage();
         eclipseXmlPackage.setName("Eclipse Standard 4.3 (Win32, 0MB)");
@@ -82,7 +82,7 @@ public class EclipseDownloadsXmlConverter_SingleDownloadTests {
         assertThat(downloadLinks.get(0).getArchitecture(), equalTo("32"));
         assertThat(
                 downloadLinks.get(0).getUrl(),
-                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz"));
+                equalTo("https://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz"));
         assertThat(downloadLinks.get(0).getFileSize(), equalTo("196MB"));
         assertThat(downloadLinks.get(0).getFileType(), equalTo("tar.gz"));
     }

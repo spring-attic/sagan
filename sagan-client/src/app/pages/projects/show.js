@@ -38,7 +38,7 @@ $(document).ready(function () {
             if (typeof imgClass !== 'undefined') {
                 $svg = $svg.attr('class', imgClass + ' replaced-svg');
             }
-            // Remove any invalid XML tags as per http://validator.w3.org
+            // Remove any invalid XML tags as per https://validator.w3.org
             $svg = $svg.removeAttr('xmlns:a');
             // Check if the viewport is set, if the viewport is not set the SVG wont't scale.
             if (!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {

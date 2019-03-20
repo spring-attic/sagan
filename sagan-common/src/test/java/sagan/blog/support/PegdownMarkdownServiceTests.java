@@ -15,8 +15,8 @@ public class PegdownMarkdownServiceTests {
 
     @Test
     public void renderLink() throws Exception {
-        String markdown = "[my link](http://spring.io)";
-        Assert.assertEquals("<p><a href=\"http://spring.io\">my link</a></p>", service.renderToHtml(markdown));
+        String markdown = "[my link](https://spring.io)";
+        Assert.assertEquals("<p><a href=\"https://spring.io\">my link</a></p>", service.renderToHtml(markdown));
     }
 
     @Test

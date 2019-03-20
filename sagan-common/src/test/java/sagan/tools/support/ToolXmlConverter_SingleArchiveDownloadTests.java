@@ -29,7 +29,7 @@ public class ToolXmlConverter_SingleArchiveDownloadTests {
         download.setDescription("Update Site");
         download.setOs("all");
         download.setFile("release/TOOLS/update/3.3.0.RELEASE/e4.3/springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip");
-        download.setBucket("http://dist.springsource.com/");
+        download.setBucket("https://dist.springsource.com/");
         download.setEclipseVersion("4.3.x");
         download.setSize("172MB");
         download.setVersion("3.3.0.RELEASE");
@@ -52,7 +52,7 @@ public class ToolXmlConverter_SingleArchiveDownloadTests {
         assertThat(archive.getVersion(), equalTo("4.3.x"));
         assertThat(
                 archive.getUrl(),
-                equalTo("http://dist.springsource.com/release/TOOLS/update/3.3.0.RELEASE/e4.3/springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
+                equalTo("https://dist.springsource.com/release/TOOLS/update/3.3.0.RELEASE/e4.3/springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
         assertThat(archive.getFileSize(), equalTo("172MB"));
         assertThat(archive.getFileName(), equalTo("springsource-tool-suite-3.3.0.RELEASE-e4.3-updatesite.zip"));
     }

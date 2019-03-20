@@ -9,14 +9,14 @@ This module holds all web resources that make the client application of spring.i
 
 This module is using several tools for its own build system:
 
-* [node.js and npm](http://nodejs.org)
+* [node.js and npm](https://nodejs.org)
 * [Jspm](https://jspm.io)
-* [Gulp](http://gulpjs.com)
+* [Gulp](https://gulpjs.com)
 
 ## Build requirements
 
 Node.js is brought by the Gradle build itself, so you don't need it to build the project.
-But if you want to work on the `sagan-client` module, installing a recent version of [node.js](http://nodejs.org)
+But if you want to work on the `sagan-client` module, installing a recent version of [node.js](https://nodejs.org)
 is a good idea. Usage of the [Node Version Manager (nvm)](https://github.com/creationix/nvm) is perfectly fine.
 
 ## Making changes in sagan-client

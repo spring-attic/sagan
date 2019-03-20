@@ -59,15 +59,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
         ProjectRelease release = new ProjectRelease("1.0.0.BUILD-SNAPSHOT",
                 ProjectRelease.ReleaseStatus.SNAPSHOT,
                 false,
-                "http://docs.spring.io/spring-new/docs/{version}/spring-new/htmlsingle/",
-                "http://docs.spring.io/spring-new/docs/{version}/javadoc-api/",
+                "https://docs.spring.io/spring-new/docs/{version}/spring-new/htmlsingle/",
+                "https://docs.spring.io/spring-new/docs/{version}/javadoc-api/",
                 "org.springframework.new",
                 "spring-new");
 
         Project project = new Project("spring-new",
                 "New Spring Project",
-                "http://github.com/spring-projects/spring-new",
-                "http://projects.spring.io/spring-new",
+                "https://github.com/spring-projects/spring-new",
+                "https://projects.spring.io/spring-new",
                 new ArrayList<>(Arrays.asList(release)),
                 CATEGORIES.get(0));
 

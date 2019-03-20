@@ -48,13 +48,13 @@ public class ProjectsControllerTest {
     private ProjectRelease snapshotRelease = new ProjectRelease("1.7.7.SNAPSHOT", SNAPSHOT, false, "", "", "", "");
     private List<ProjectRelease> releases = asList(currentRelease, anotherCurrentRelease, snapshotRelease);
     Project project =
-            new Project("spring-framework", "spring", "http://example.com", "/project/spring-framework", 0, releases,
+            new Project("spring-framework", "spring", "https://example.com", "/project/spring-framework", 0, releases,
 					"project", "spring-cool,spring-awesome", "");
     Project projectUmbrella =
-            new Project("spring-parapluie", "Spring Parapluie", "http://example.com", "/project/spring-parapluie",
+            new Project("spring-parapluie", "Spring Parapluie", "https://example.com", "/project/spring-parapluie",
                     1, releases, "project", "spring-cool,spring-awesome", "");
     Project projectUmbrellaChild =
-            new Project("spring-parapluie-child", "Spring Parapluie Child", "http://example.com",
+            new Project("spring-parapluie-child", "Spring Parapluie Child", "https://example.com",
                     "/project/spring-parapluie-child", 1, releases, "project", "spring-cool,spring-awesome", "");
 
     private ExtendedModelMap model = new ExtendedModelMap();
@@ -130,7 +130,7 @@ public class ProjectsControllerTest {
     @Test
     public void showProjectDoesNotExplodeWhenThereAreNoReleases() {
         Project projectWithoutReleases =
-                new Project("spring-spline-reticulator", "spring-spline-reticulator", "http://example.com",
+                new Project("spring-spline-reticulator", "spring-spline-reticulator", "https://example.com",
                         "/project/spring-spline-reticulator", 0, asList(),
                         "project", "spring-cool,spring-awesome", "");
         when(projectMetadataService.getProject("spring-spline-reticulator")).thenReturn(projectWithoutReleases);

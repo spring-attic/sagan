@@ -193,7 +193,7 @@ public class MemberProfile {
         if (StringUtils.isEmpty(getTwitterUsername())) {
             return null;
         }
-        return new Link(String.format("http://twitter.com/%s", getTwitterUsername()), "@" + getTwitterUsername());
+        return new Link(String.format("https://twitter.com/%25s", getTwitterUsername()), "@" + getTwitterUsername());
     }
 
     @JsonIgnore

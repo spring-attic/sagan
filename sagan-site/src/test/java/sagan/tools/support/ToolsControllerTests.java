@@ -46,7 +46,7 @@ public class ToolsControllerTests {
     public void stsIndexHasDownloadLinks() throws Exception {
         Map<String, ToolSuitePlatform> platforms = new HashMap<>();
         List<DownloadLink> downloadLinks = Collections.singletonList(new DownloadLink(
-                "http://example.com/download.dmg", "dmg", "323MB", "mac", "64"));
+                "https://example.com/download.dmg", "dmg", "323MB", "mac", "64"));
         List<Architecture> architectures = Collections.singletonList(new Architecture(
                 "Mac OS X (Cocoa, 64bit)", downloadLinks));
         List<EclipseVersion> eclipseVersions = Collections
@@ -57,7 +57,7 @@ public class ToolsControllerTests {
 
         List<UpdateSiteArchive> archives = Collections.emptyList();
         ToolSuiteDownloads toolSuite = new ToolSuiteDownloads("STS", "3.1.2.RELEASE",
-                "http://static.springsource.org/sts/nan/v312/NewAndNoteworthy.html", platforms, archives);
+                "https://docs.spring.io/sts/nan/v312/NewAndNoteworthy.html", platforms, archives);
         when(service.getStsGaDownloads()).thenReturn(toolSuite);
         controller.stsIndex(model);
 

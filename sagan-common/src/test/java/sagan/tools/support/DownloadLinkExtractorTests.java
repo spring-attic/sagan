@@ -19,7 +19,7 @@ public class DownloadLinkExtractorTests {
         download.setDescription("Mac OS X (Cocoa)");
         download.setOs("mac");
         download.setFile("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg");
-        download.setBucket("http://dist.springsource.com/");
+        download.setBucket("https://dist.springsource.com/");
         download.setEclipseVersion("4.3");
         download.setSize("373MB");
         download.setVersion("3.3.0.RELEASE");
@@ -31,7 +31,7 @@ public class DownloadLinkExtractorTests {
     public void extractsUrl() throws Exception {
         assertThat(
                 extractor.createDownloadLink(download).getUrl(),
-                equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
+                equalTo("https://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
     }
 
     @Test

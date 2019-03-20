@@ -17,7 +17,7 @@ public class TeamServiceTests extends AbstractIntegrationTests {
 
     @Test
     public void newlyCreatedTeamMembersAreHiddenByDefault() throws Exception {
-        MemberProfile jdoe = teamService.createOrUpdateMemberProfile(123L, "jdoe", "http://avatarurl.com", "John Doe");
+        MemberProfile jdoe = teamService.createOrUpdateMemberProfile(123L, "jdoe", "https://avatarurl.com", "John Doe");
         assertThat(jdoe.isHidden(), is(true));
     }
 }

@@ -55,7 +55,7 @@ public class ToolsServiceTests {
 
         assertThat(
                 toolSuite.getWhatsNew(),
-                equalTo("http://static.springsource.org/sts/nan/v360/NewAndNoteworthy.html"));
+                equalTo("https://docs.spring.io/sts/nan/v360/NewAndNoteworthy.html"));
 
         List<ToolSuitePlatform> platforms = toolSuite.getPlatformList();
         assertThat(platforms.size(), equalTo(3));
@@ -76,7 +76,7 @@ public class ToolsServiceTests {
                 windows.getEclipseVersions().get(0).getArchitectures().get(0).getDownloadLinks().get(0);
         assertThat(
                 downloadLink.getUrl(),
-                equalTo("http://download.springsource.com/release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-win32.zip"));
+                equalTo("https://download.springsource.com/release/STS/3.6.0/dist/e4.4/spring-tool-suite-3.6.0.RELEASE-e4.4-win32.zip"));
 
         assertThat(toolSuite.getArchives().size(), equalTo(5));
         assertThat(toolSuite.getArchives().get(0).getVersion(), equalTo("4.4"));

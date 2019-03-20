@@ -110,7 +110,7 @@ class GhPagesWebhookController {
     }
 
     private boolean hasGhPagesBranch(Project project) {
-        if (project.hasSite() && project.getSiteUrl().startsWith("http://projects.spring.io")) {
+        if (project.hasSite() && project.getSiteUrl().startsWith("https://projects.spring.io")) {
             String ghPagesBranchUrl = format("%s/repos/%s/%s/branches/gh-pages",
                     GitHubClient.API_URL_BASE, "spring-projects", project.getId());
             try {

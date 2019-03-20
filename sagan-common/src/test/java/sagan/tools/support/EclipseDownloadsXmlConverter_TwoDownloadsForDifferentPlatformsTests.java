@@ -25,13 +25,13 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForDifferentPlatformsTests
         macDownload.setOs("mac");
         macDownload.setDescription("Mac OS X (Cocoa)");
         macDownload.setFile("release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz");
-        macDownload.setBucket("http://eclipseXmlDownload.springsource.com/");
+        macDownload.setBucket("https://eclipseXmlDownload.springsource.com/");
 
         EclipseXmlDownload windowsDownload = new EclipseXmlDownload();
         windowsDownload.setOs("windows");
         windowsDownload.setDescription("Windows (64bit)");
         windowsDownload.setFile("release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32-x86_64.zip");
-        windowsDownload.setBucket("http://eclipseXmlDownload.springsource.com/");
+        windowsDownload.setBucket("https://eclipseXmlDownload.springsource.com/");
 
         EclipseXmlPackage eclipseXmlPackage = new EclipseXmlPackage();
         eclipseXmlPackage.setName("Eclipse Standard 4.3 (Win32, 0MB)");
@@ -87,7 +87,7 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForDifferentPlatformsTests
         assertThat(macDownloadLinks.get(0).getOs(), equalTo("mac"));
         assertThat(
                 macDownloadLinks.get(0).getUrl(),
-                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz"));
+                equalTo("https://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-macosx-cocoa.tar.gz"));
 
         List<EclipsePackage> windowsPackages =
                 eclipseDownloads.getPlatforms().get("windows").getReleases().get(0).getPackages();
@@ -96,6 +96,6 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForDifferentPlatformsTests
         assertThat(windowsDownloadLinks.get(0).getOs(), equalTo("windows"));
         assertThat(
                 windowsDownloadLinks.get(0).getUrl(),
-                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32-x86_64.zip"));
+                equalTo("https://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32-x86_64.zip"));
     }
 }

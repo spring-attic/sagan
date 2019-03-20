@@ -103,7 +103,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
     @Test
     public void projectMetadata_addRelease() throws Exception {
         ProjectRelease release = new ProjectRelease("1.2.3.BUILD-SNAPSHOT", ReleaseStatus.SNAPSHOT, false,
-                "http://example.com/{version}", "http://example.com/api/{version}", "org.springframework",
+                "https://example.com/{version}", "https://example.com/api/{version}", "org.springframework",
                 "spring-core");
         mockMvc
                 .perform(
@@ -113,7 +113,7 @@ public class ProjectsMetadataApiTests extends AbstractIntegrationTests {
                                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("application/json"))
-                .andExpect(content().string(containsString("http://example.com/1.2.3.BUILD-SNAPSHOT")))
+                .andExpect(content().string(containsString("https://example.com/1.2.3.BUILD-SNAPSHOT")))
                 .andDo(docs("add_release"));
     }
 

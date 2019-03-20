@@ -134,7 +134,7 @@ public class CachedRestClientTests {
 		String stsDownloads = Fixtures.load("/fixtures/tools/sts_downloads.xml");
 		given(
 				restTemplate.getForObject(
-						"http://dist.springsource.com/release/STS/index-new.xml",
+						"https://dist.springsource.com/release/STS/index-new.xml",
 						String.class)).willReturn(stsDownloads);
 
 		mockMvc.perform(get("/tools")).andExpect(status().isOk());
@@ -148,7 +148,7 @@ public class CachedRestClientTests {
 		String eclipse = Fixtures.load("/fixtures/tools/eclipse.xml");
 		given(
 				restTemplate.getForObject(
-						"http://dist.springsource.com/release/STS/eclipse.xml",
+						"https://dist.springsource.com/release/STS/eclipse.xml",
 						String.class)).willReturn(eclipse);
 
 		mockMvc.perform(get("/tools/eclipse")).andExpect(status().isOk());

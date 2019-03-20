@@ -21,8 +21,8 @@ public class ApiDocumentMapperTests {
 
     private Project project = new Project("spring",
             "Spring Project",
-            "http://www.example.com/repo/spring-framework",
-            "http://www.example.com/spring-framework",
+            "https://www.example.com/repo/spring-framework",
+            "https://www.example.com/spring-framework",
             Collections.<ProjectRelease> emptyList(),
             "release");
 
@@ -37,7 +37,7 @@ public class ApiDocumentMapperTests {
     @Test
     public void mapOlderJdkApiDocContent() throws Exception {
         InputStream html = new ClassPathResource("/fixtures/apidocs/apiDocument.html", getClass()).getInputStream();
-        Document document = Jsoup.parse(html, "UTF-8", "http://example.com/docs");
+        Document document = Jsoup.parse(html, "UTF-8", "https://example.com/docs");
 
         ApiDoc searchEntry = apiDocumentMapper.map(document);
         assertThat(searchEntry.getRawContent(), equalTo("SomeClass"));
@@ -47,7 +47,7 @@ public class ApiDocumentMapperTests {
     @Test
     public void mapJdk7ApiDocContent() throws Exception {
         InputStream html = new ClassPathResource("/fixtures/apidocs/jdk7javaDoc.html", getClass()).getInputStream();
-        Document document = Jsoup.parse(html, "UTF-8", "http://example.com/docs");
+        Document document = Jsoup.parse(html, "UTF-8", "https://example.com/docs");
 
         ApiDoc searchEntry = apiDocumentMapper.map(document);
         assertThat(searchEntry.getRawContent(), equalTo(document.select(".block").text()));
@@ -56,7 +56,7 @@ public class ApiDocumentMapperTests {
     @Test
     public void mapApiDoc() throws Exception {
         InputStream html = new ClassPathResource("/fixtures/apidocs/jdk7javaDoc.html", getClass()).getInputStream();
-        Document document = Jsoup.parse(html, "UTF-8", "http://example.com/docs");
+        Document document = Jsoup.parse(html, "UTF-8", "https://example.com/docs");
 
         ApiDoc searchEntry = apiDocumentMapper.map(document);
         assertThat(searchEntry.getType(), equalTo(SearchType.API_DOC.toString()));

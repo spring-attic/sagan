@@ -239,16 +239,16 @@ public class ProjectPagesTests extends AbstractIntegrationTests {
                 .collect(toList());
 
         assertThat(links, contains(
-				"http://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/htmlsingle/",
-				"http://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/api/",
-				"http://docs.spring.io/spring-boot/docs/2.0.0.M4/reference/htmlsingle/",
-                "http://docs.spring.io/spring-boot/docs/2.0.0.M4/api/",
-                "http://docs.spring.io/spring-boot/docs/2.0.0.BUILD-SNAPSHOT/reference/htmlsingle/",
-                "http://docs.spring.io/spring-boot/docs/2.0.0.BUILD-SNAPSHOT/api/",
-                "http://docs.spring.io/spring-boot/docs/1.5.8.BUILD-SNAPSHOT/reference/htmlsingle/",
-				"http://docs.spring.io/spring-boot/docs/1.5.8.BUILD-SNAPSHOT/api/",
-                "http://docs.spring.io/spring-boot/docs/1.4.7.RELEASE/reference/htmlsingle/",
-				"http://docs.spring.io/spring-boot/docs/1.4.7.RELEASE/api/"
+				"https://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/htmlsingle/",
+				"https://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/api/",
+				"https://docs.spring.io/spring-boot/docs/2.0.0.M4/reference/htmlsingle/",
+                "https://docs.spring.io/spring-boot/docs/2.0.0.M4/api/",
+                "https://docs.spring.io/spring-boot/docs/2.0.0.BUILD-SNAPSHOT/reference/htmlsingle/",
+                "https://docs.spring.io/spring-boot/docs/2.0.0.BUILD-SNAPSHOT/api/",
+                "https://docs.spring.io/spring-boot/docs/1.5.8.BUILD-SNAPSHOT/reference/htmlsingle/",
+				"https://docs.spring.io/spring-boot/docs/1.5.8.BUILD-SNAPSHOT/api/",
+                "https://docs.spring.io/spring-boot/docs/1.4.7.RELEASE/reference/htmlsingle/",
+				"https://docs.spring.io/spring-boot/docs/1.4.7.RELEASE/api/"
         ));
     }
 

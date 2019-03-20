@@ -17,9 +17,9 @@ public class AsciidoctorMarkdownServiceTests {
 
     @Test
     public void renderLink() throws Exception {
-        String markdown = "http://spring.io[my link]";
+        String markdown = "https://spring.io[my link]";
         String rendered = service.renderToHtml(markdown);
-        Assert.assertThat(rendered, CoreMatchers.containsString("<p><a href=\"http://spring.io\">my link</a></p>"));
+        Assert.assertThat(rendered, CoreMatchers.containsString("<p><a href=\"https://spring.io\">my link</a></p>"));
     }
 
     @Test

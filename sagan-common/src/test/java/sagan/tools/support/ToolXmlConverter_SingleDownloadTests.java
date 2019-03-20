@@ -32,7 +32,7 @@ public class ToolXmlConverter_SingleDownloadTests {
         download.setDescription("Mac OS X (Cocoa)");
         download.setOs("mac");
         download.setFile("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg");
-        download.setBucket("http://dist.springsource.com/");
+        download.setBucket("https://dist.springsource.com/");
         download.setEclipseVersion("4.3");
         download.setSize("373MB");
         download.setVersion("3.3.0.RELEASE");
@@ -83,7 +83,7 @@ public class ToolXmlConverter_SingleDownloadTests {
         assertThat(architecture.getDownloadLinks().size(), equalTo(1));
         assertThat(
                 architecture.getDownloadLinks().get(0).getUrl(),
-                equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
+                equalTo("https://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
         assertThat(architecture.getDownloadLinks().get(0).getOs(), equalTo("mac"));
         assertThat(architecture.getDownloadLinks().get(0).getArchitecture(), equalTo("32"));
     }

@@ -21,7 +21,7 @@ Our formatting and import organization profiles are checked into the project und
 
 ## Use `hub` for pull requests
 
-If you're not already familiar, GitHub's [`hub`](http://hub.github.com) utility is a simple, transparent layer on top of your existing `git` installation that adds amazingly useful tools specific to working with GitHub. Install it post-haste! It'll allow you to do super-powerful things like this:
+If you're not already familiar, GitHub's [`hub`](https://hub.github.com) utility is a simple, transparent layer on top of your existing `git` installation that adds amazingly useful tools specific to working with GitHub. Install it post-haste! It'll allow you to do super-powerful things like this:
 
     # nothing unusual here...
     git checkout my-feature-branch
@@ -37,7 +37,7 @@ Besides being really convenient, the Sagan development team heavily uses this fe
 
 ## Commit like a pro
 
-Read Pro Git's section on [Commit Guidelines](http://www.git-scm.com/book/en/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines), and then read it again. Understanding how to structure git commits and properly format comments will pay off for every Git project you contribute to in the future. Look through Sagan's commit history with `git log`, and do your best to follow suit.
+Read Pro Git's section on [Commit Guidelines](https://www.git-scm.com/book/en/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines), and then read it again. Understanding how to structure git commits and properly format comments will pay off for every Git project you contribute to in the future. Look through Sagan's commit history with `git log`, and do your best to follow suit.
 
 
 ## Expect discussion and rework

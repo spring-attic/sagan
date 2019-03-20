@@ -25,13 +25,13 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForSameReleaseWithDifferen
         eclipseStandardDownload.setOs("windows");
         eclipseStandardDownload.setDescription("Windows");
         eclipseStandardDownload.setFile("release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip");
-        eclipseStandardDownload.setBucket("http://eclipseXmlDownload.springsource.com/");
+        eclipseStandardDownload.setBucket("https://eclipseXmlDownload.springsource.com/");
 
         EclipseXmlDownload eclipseJavaEEDownload = new EclipseXmlDownload();
         eclipseJavaEEDownload.setOs("windows");
         eclipseJavaEEDownload.setDescription("Windows");
         eclipseJavaEEDownload.setFile("release/ECLIPSE/kepler/R/eclipse-jee-kepler-R-win32.zip");
-        eclipseJavaEEDownload.setBucket("http://eclipseXmlDownload.springsource.com/");
+        eclipseJavaEEDownload.setBucket("https://eclipseXmlDownload.springsource.com/");
 
         EclipseXmlPackage eclipseStandardPackage = new EclipseXmlPackage();
         eclipseStandardPackage.setName("Eclipse Standard 4.3 (Win32, 0MB)");
@@ -85,12 +85,12 @@ public class EclipseDownloadsXmlConverter_TwoDownloadsForSameReleaseWithDifferen
         assertThat(standardDownloadLinks.get(0).getOs(), equalTo("windows"));
         assertThat(
                 standardDownloadLinks.get(0).getUrl(),
-                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
+                equalTo("https://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-standard-kepler-R-win32.zip"));
 
         assertThat(javaEEDownloadLinks.size(), equalTo(1));
         assertThat(javaEEDownloadLinks.get(0).getOs(), equalTo("windows"));
         assertThat(
                 javaEEDownloadLinks.get(0).getUrl(),
-                equalTo("http://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-jee-kepler-R-win32.zip"));
+                equalTo("https://eclipseXmlDownload.springsource.com/release/ECLIPSE/kepler/R/eclipse-jee-kepler-R-win32.zip"));
     }
 }

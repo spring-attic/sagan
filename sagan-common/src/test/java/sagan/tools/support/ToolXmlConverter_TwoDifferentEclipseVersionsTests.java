@@ -30,7 +30,7 @@ public class ToolXmlConverter_TwoDifferentEclipseVersionsTests {
         download.setDescription("Mac OS X (Cocoa)");
         download.setOs("mac");
         download.setFile("release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg");
-        download.setBucket("http://dist.springsource.com/");
+        download.setBucket("https://dist.springsource.com/");
         download.setEclipseVersion("4.3");
         download.setSize("373MB");
         download.setVersion("3.3.0.RELEASE");
@@ -44,7 +44,7 @@ public class ToolXmlConverter_TwoDifferentEclipseVersionsTests {
         download.setDescription("Mac OS X (Cocoa)");
         download.setOs("mac");
         download.setFile("release/STS/3.3.0/dist/e3.8/spring-tool-suite-3.3.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg");
-        download.setBucket("http://dist.springsource.com/");
+        download.setBucket("https://dist.springsource.com/");
         download.setEclipseVersion("3.8.2");
         download.setSize("368MB");
         download.setVersion("3.3.0.RELEASE");
@@ -97,13 +97,13 @@ public class ToolXmlConverter_TwoDifferentEclipseVersionsTests {
         assertThat(v43Architecture.getDownloadLinks().size(), equalTo(1));
         assertThat(
                 v43Architecture.getDownloadLinks().get(0).getUrl(),
-                equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
+                equalTo("https://dist.springsource.com/release/STS/3.3.0/dist/e4.3/spring-tool-suite-3.3.0.RELEASE-e4.3-macosx-cocoa-installer.dmg"));
 
         Architecture v38Architecture =
                 toolSuite.getPlatformList().get(1).getEclipseVersions().get(1).getArchitectures().get(0);
         assertThat(v38Architecture.getDownloadLinks().size(), equalTo(1));
         assertThat(
                 v38Architecture.getDownloadLinks().get(0).getUrl(),
-                equalTo("http://dist.springsource.com/release/STS/3.3.0/dist/e3.8/spring-tool-suite-3.3.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg"));
+                equalTo("https://dist.springsource.com/release/STS/3.3.0/dist/e3.8/spring-tool-suite-3.3.0.RELEASE-e3.8.2-macosx-cocoa-installer.dmg"));
     }
 }

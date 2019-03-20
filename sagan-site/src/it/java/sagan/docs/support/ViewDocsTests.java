@@ -45,7 +45,7 @@ public class ViewDocsTests extends AbstractIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith("text/html"))
                 .andExpect(content().string(containsString("Spring Security")))
-                .andExpect(content().string(containsString("http://docs.spring.io/spring/docs")));
+                .andExpect(content().string(containsString("https://docs.spring.io/spring/docs")));
     }
 
 }

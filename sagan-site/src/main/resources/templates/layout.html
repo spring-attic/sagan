@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
       xmlns:data="https://github.com/mxab/thymeleaf-extras-data-attribute"
       data-search data-mobile-support>
 <head>
@@ -119,7 +119,7 @@
                 </ul>
               </div>
             </div>
-            &copy; <span th:text="${#calendars.format(#calendars.createToday(),'yyyy')}">2013</span> <a href="http://www.pivotal.io/">Pivotal Software</a>, Inc. All Rights Reserved.
+            &copy; <span th:text="${#calendars.format(#calendars.createToday(),'yyyy')}">2013</span> <a href="https://www.pivotal.io/">Pivotal Software</a>, Inc. All Rights Reserved.
             <a href="https://pivotal.io/terms-of-use">Terms of Use</a> &bullet;
             <a href="https://pivotal.io/privacy-policy">Privacy</a> &bullet;
             <a th:href="@{/trademarks}">Trademark Guidelines</a> 

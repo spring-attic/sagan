@@ -50,7 +50,7 @@ public class SearchResultParser_WithHighlightTests {
                     +
                     "      \"_source\": {\n"
                     +
-                    "        \"path\": \"http://docs.spring.io/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html\",\n"
+                    "        \"path\": \"https://docs.spring.io/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html\",\n"
                     +
                     "        \"summary\": \"org.springframework.context Interface ApplicationContext All Superinterfaces: ApplicationEventPublisher, BeanFactory, EnvironmentCapable, HierarchicalBeanFactory, ListableBeanFactory, MessageSource, ResourceLoader, ResourcePatternResolver All Known Subinterfaces: ConfigurableApplicationContext, ConfigurablePortletApplicationContext, ConfigurableWebApplicationContext, WebApplicationContext All Known Implementing Classes: AbstractApplicationContext, AbstractRefreshableApplicationContext, AbstractR\",\n"
                     +
@@ -82,7 +82,7 @@ public class SearchResultParser_WithHighlightTests {
                     +
                     "      \"_source\": {\n"
                     +
-                    "        \"path\": \"http://docs.spring.io/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html\",\n"
+                    "        \"path\": \"https://docs.spring.io/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html\",\n"
                     +
                     "        \"summary\": \"org.springframework.context Interface ApplicationContext All Superinterfaces: ApplicationEventPublisher, BeanFactory, EnvironmentCapable, HierarchicalBeanFactory, ListableBeanFactory, MessageSource, ResourceLoader, ResourcePatternResolver All Known Subinterfaces: ConfigurableApplicationContext, ConfigurablePortletApplicationContext, ConfigurableWebApplicationContext, WebApplicationContext All Known Implementing Classes: AbstractApplicationContext, AbstractRefreshableApplicationContext, AbstractR\",\n"
                     +
@@ -153,6 +153,6 @@ public class SearchResultParser_WithHighlightTests {
     public void url() {
         assertThat(
                 content.get(0).getPath(),
-                equalTo("http://docs.spring.io/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html"));
+                equalTo("https://docs.spring.io/spring/docs/3.1.4.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html"));
     }
 }

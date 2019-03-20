@@ -36,7 +36,7 @@ public class SignInServiceTests {
     private String name = "Full Name";
     private String location = "London";
     private String email = "user@example.com";
-    private String avatarUrl = "http://gravatar.com/avatar/ABC";
+    private String avatarUrl = "https://gravatar.com/avatar/ABC";
 
     @Before
     public void setup() {

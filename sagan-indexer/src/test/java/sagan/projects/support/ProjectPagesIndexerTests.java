@@ -25,17 +25,17 @@ import static org.mockito.Mockito.*;
 public class ProjectPagesIndexerTests {
 
     private final Project springProject = new Project("spring", "Spring Project",
-            "http://www.example.com/repo/spring-project",
-            "http://www.example.com/spring-project", Collections.emptyList(), "release");
+            "https://www.example.com/repo/spring-project",
+            "https://www.example.com/spring-project", Collections.emptyList(), "release");
 
     private final Project springFramework = new Project("spring-framework", "Spring Framework",
-            "http://www.example.com/repo/spring-framework",
+            "https://www.example.com/repo/spring-framework",
             "https://projects.spring.io/spring-framework", Collections.emptyList(), "release");
 
 
     private final Project ioPlatform = new Project("spring-platform", "Spring IO Platform",
-            "http://www.example.com/repo/spring-io-platform",
-            "http://platform.spring.io/platform/", Collections.emptyList(), "release");
+            "https://www.example.com/repo/spring-io-platform",
+            "https://platform.spring.io/platform/", Collections.emptyList(), "release");
     @Mock
     private CrawlerService crawlerService;
 

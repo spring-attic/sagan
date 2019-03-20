@@ -12,7 +12,7 @@
       "push"
     ],
     "config": {
-      "url": "http://spring.io/webhook/docs/guides",
+      "url": "https://spring.io/webhook/docs/guides",
       "content_type": "json",
       "insecure_ssl": "0",
       "secret": "********"
@@ -95,7 +95,7 @@
     "ssh_url": "git@github.com:spring-guides/gs-rest-service.git",
     "clone_url": "https://github.com/spring-guides/gs-rest-service.git",
     "svn_url": "https://github.com/spring-guides/gs-rest-service",
-    "homepage": "http://spring.io/guides/gs/rest-service/",
+    "homepage": "https://spring.io/guides/gs/rest-service/",
     "size": 1674,
     "stargazers_count": 92,
     "watchers_count": 92,

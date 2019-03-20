@@ -62,7 +62,7 @@ public class TeamServiceTests {
     @Test
     public void updateMemberProfileDoesNotUpdateAvatarUrlIfGravatarEmailIsEmpty() {
         MemberProfile savedProfile = new MemberProfile();
-        savedProfile.setAvatarUrl("http://example.com/image.png");
+        savedProfile.setAvatarUrl("https://example.com/image.png");
         given(teamRepository.findById(1234L)).willReturn(savedProfile);
 
         SitePage searchEntry = new SitePage();
@@ -71,6 +71,6 @@ public class TeamServiceTests {
         updatedProfile.setGravatarEmail("");
         service.updateMemberProfile(1234L, updatedProfile);
 
-        assertThat(savedProfile.getAvatarUrl(), equalTo("http://example.com/image.png"));
+        assertThat(savedProfile.getAvatarUrl(), equalTo("https://example.com/image.png"));
     }
 }
