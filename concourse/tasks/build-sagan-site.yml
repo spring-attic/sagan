@@ -20,7 +20,7 @@ run:
   - -c
   - |-
     set -e -u -x
-    # sagan-repo will be available with root owner
+    # sagan-site-repo will be available with root owner
     # but js things will complain if ran by root
     # so we first change repo owner and then use
     # gradle user to run build

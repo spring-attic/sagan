@@ -1,0 +1,22 @@
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: gradle
+    tag: jdk8
+inputs:
+- name: sagan-renderer-repo
+outputs:
+- name: build
+run:
+  user: root
+  path: /bin/bash
+  args:
+  - -c
+  - |-
+    set -e -u -x
+    cd sagan-renderer-repo
+    ./gradlew --console plain :sagan-renderer:build
+    cd ../
+    cp -R sagan-renderer-repo/sagan-renderer/build/* build

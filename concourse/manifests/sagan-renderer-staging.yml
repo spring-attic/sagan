@@ -1,0 +1,12 @@
+---
+applications:
+- name: sagan-renderer
+  buildpack: java_buildpack
+  instances: 1
+  health-check-type: http
+  health-check-http-endpoint: /health
+  memory: 1024
+  disk_quota: 1024M
+  routes:
+  - route: sagan-renderer-staging.cfapps.io
+  services:
