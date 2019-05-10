@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sagan.projects.Project;
 import sagan.site.renderer.GuideContent;
 import sagan.site.renderer.SaganRendererClient;
 
@@ -40,6 +41,14 @@ public class Tutorials implements GuidesRepository<Tutorial> {
 		return Arrays.stream(this.client.fetchTutorialGuides())
 				.map(DefaultGuideHeader::new)
 				.toArray(DefaultGuideHeader[]::new);
+	}
+
+	@Override
+	@Cacheable(cacheNames = CACHE_TUTORIALS, key="#project.id")
+	public GuideHeader[] findByProject(Project project) {
+		return Arrays.stream(findAll())
+				.filter(guide -> guide.getProjects().contains(project.getId()))
+				.toArray(GuideHeader[]::new);
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sagan.projects.Project;
 import sagan.site.renderer.GuideContent;
 import sagan.site.renderer.SaganRendererClient;
 
@@ -35,11 +36,19 @@ public class GettingStartedGuides implements GuidesRepository<GettingStartedGuid
 	}
 
 	@Override
-	@Cacheable(value = CACHE_GUIDES)
+	@Cacheable(CACHE_GUIDES)
 	public GuideHeader[] findAll() {
 		return Arrays.stream(this.client.fetchGettingStartedGuides())
 				.map(DefaultGuideHeader::new)
 				.toArray(DefaultGuideHeader[]::new);
+	}
+
+	@Override
+	@Cacheable(cacheNames = CACHE_GUIDES, key="#project.id")
+	public GuideHeader[] findByProject(Project project) {
+		return Arrays.stream(findAll())
+				.filter(guide -> guide.getProjects().contains(project.getId()))
+				.toArray(GuideHeader[]::new);
 	}
 
 	@Override
@@ -49,19 +58,19 @@ public class GettingStartedGuides implements GuidesRepository<GettingStartedGuid
 	}
 
 	@Override
-	@Cacheable(value = CACHE_GUIDE)
+	@Cacheable(CACHE_GUIDE)
 	public Optional<GettingStartedGuide> findByName(String name) {
 		DefaultGuideHeader guideHeader = new DefaultGuideHeader(this.client.fetchGettingStartedGuide(name));
 		GuideContent guideContent = this.client.fetchGettingStartedGuideContent(name);
 		return Optional.of(new GettingStartedGuide(guideHeader, guideContent));
 	}
 
-	@CacheEvict(value = CACHE_GUIDES)
+	@CacheEvict(CACHE_GUIDES)
 	public void evictListFromCache() {
 		logger.info("Getting Started guides evicted from cache");
 	}
 
-	@CacheEvict(value = CACHE_GUIDE)
+	@CacheEvict(CACHE_GUIDE)
 	public void evictFromCache(String guide) {
 		logger.info("Getting Started guide evicted from cache: {}", guide);
 	}

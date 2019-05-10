@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sagan.projects.Project;
 import sagan.site.renderer.GuideContent;
 import sagan.site.renderer.SaganRendererClient;
 
@@ -39,11 +40,19 @@ public class Topicals implements GuidesRepository<Topical> {
 	}
 
 	@Override
-	@Cacheable(value = CACHE_TOPICALS)
+	@Cacheable(CACHE_TOPICALS)
 	public GuideHeader[] findAll() {
 		return Arrays.stream(this.client.fetchTopicalGuides())
 				.map(DefaultGuideHeader::new)
 				.toArray(DefaultGuideHeader[]::new);
+	}
+
+	@Override
+	@Cacheable(cacheNames = CACHE_TOPICALS, key="#project.id")
+	public GuideHeader[] findByProject(Project project) {
+		return Arrays.stream(findAll())
+				.filter(guide -> guide.getProjects().contains(project.getId()))
+				.toArray(GuideHeader[]::new);
 	}
 
 	@Override
@@ -53,19 +62,19 @@ public class Topicals implements GuidesRepository<Topical> {
 	}
 
 	@Override
-	@Cacheable(value = CACHE_TOPICAL)
+	@Cacheable(CACHE_TOPICAL)
 	public Optional<Topical> findByName(String name) {
 		DefaultGuideHeader guideHeader = new DefaultGuideHeader(this.client.fetchTopicalGuide(name));
 		GuideContent guideContent = this.client.fetchTopicalGuideContent(name);
 		return Optional.of(new Topical(guideHeader, guideContent));
 	}
 
-	@CacheEvict(value = CACHE_TOPICALS)
+	@CacheEvict(CACHE_TOPICALS)
 	public void evictListFromCache() {
 		logger.info("Tutorials evicted from cache");
 	}
 
-	@CacheEvict(value = CACHE_TOPICAL)
+	@CacheEvict(CACHE_TOPICAL)
 	public void evictFromCache(String guide) {
 		logger.info("Tutorial evicted from cache: {}", guide);
 	}

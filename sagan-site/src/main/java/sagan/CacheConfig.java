@@ -62,12 +62,12 @@ class CloudFoundryCacheConfig extends AbstractCloudConfig {
 		JsonRedisTemplate guideTemplate = new JsonRedisTemplate<>(redisConnectionFactory, objectMapper,
 				GettingStartedGuides.CACHE_GUIDE_TYPE);
 		cacheManager.withCache(GettingStartedGuides.CACHE_GUIDE, guideTemplate,
-				properties.getCache().getListTimeToLive());
+				properties.getCache().getContentTimeToLive());
 
 		JsonRedisTemplate guidesTemplate = new JsonRedisTemplate<>(redisConnectionFactory, objectMapper,
 				GettingStartedGuides.CACHE_GUIDES_TYPE);
 		cacheManager.withCache(GettingStartedGuides.CACHE_GUIDES, guidesTemplate,
-				properties.getCache().getContentTimeToLive());
+				properties.getCache().getListTimeToLive());
 
 		JsonRedisTemplate tutorialTemplate = new JsonRedisTemplate<>(redisConnectionFactory, objectMapper,
 				Tutorials.CACHE_TUTORIAL_TYPE);
