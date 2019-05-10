@@ -2,10 +2,10 @@ package sagan;
 
 import java.io.IOException;
 import java.util.Properties;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.StaticPagePathFinder;
 import sagan.support.nav.Navigation;
@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -49,7 +50,10 @@ abstract class MvcConfig extends WebMvcConfigurerAdapter {
 		return new ViewRenderingHelper();
 	}
 
-	public abstract AppVersionHelper appVersionHelper();
+	@Bean
+	public StaticPagePathFinder staticPagePathFinder(ResourcePatternResolver resourcePatternResolver) {
+		return new StaticPagePathFinder(resourcePatternResolver);
+	}
 
 	@ExceptionHandler
 	@ResponseStatus(NOT_FOUND)
@@ -125,18 +129,6 @@ abstract class MvcConfig extends WebMvcConfigurerAdapter {
 		}
 	}
 
-	static class AppVersionHelper {
-
-		private final String version;
-
-		public AppVersionHelper(String version) {
-			this.version = version;
-		}
-
-		public String version() {
-			return version;
-		}
-	}
 }
 
 @Configuration
@@ -175,15 +167,15 @@ class CloudFoundryMvcConfig extends MvcConfig {
 	}
 
 	@Bean
+	public ThymeleafViewResolverCustomizer thymeleafViewResolverCustomizer(ThymeleafViewResolver viewResolver) {
+		return new ThymeleafViewResolverCustomizer(viewResolver, getGitCommitId());
+	}
+
+	@Bean
 	public ResourceUrlEncodingFilter resourceUrlEncodingFilter() {
 		return new ResourceUrlEncodingFilter();
 	}
 
-	@Bean(name = "saganApp")
-	@Override
-	public AppVersionHelper appVersionHelper() {
-		return new AppVersionHelper(getGitCommitId());
-	}
 }
 
 @Configuration
@@ -191,9 +183,4 @@ class CloudFoundryMvcConfig extends MvcConfig {
 @Profile("standalone")
 class StandaloneMvcConfig extends MvcConfig {
 
-	@Bean(name = "saganApp")
-	@Override
-	public AppVersionHelper appVersionHelper() {
-		return new AppVersionHelper("");
-	}
 }

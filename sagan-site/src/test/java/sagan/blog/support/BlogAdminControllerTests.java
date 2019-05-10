@@ -6,6 +6,8 @@ import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
 import sagan.blog.PostFormat;
+import sagan.site.blog.BlogService;
+import sagan.site.blog.PostForm;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 import sagan.team.MemberProfile;

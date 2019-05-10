@@ -2,12 +2,13 @@ package sagan.blog.support;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.PostFormat;
+import sagan.site.blog.BlogService;
+import sagan.site.blog.PostForm;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 import sagan.support.nav.PaginationInfo;

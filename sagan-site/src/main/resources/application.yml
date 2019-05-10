@@ -66,12 +66,6 @@ github:
   access:
     token: ${GITHUB_ACCESS_TOKEN:}
 
-  # Coordinates for finding guides against the GitHub API
-  guides:
-    owner:
-      name: ${GITHUB_GUIDES_OWNER_NAME:spring-guides} # any GitHub org or user having publicly-readable guide repos
-      type: ${GITHUB_GUIDES_OWNER_TYPE:orgs}          # 'users' is the other possible value
-
 elasticsearch:
   client:
     endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
@@ -124,9 +118,16 @@ flyway:
 spring:
   profiles: staging
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-staging}
-
+sagan:
+  site:
+    renderer:
+      service-url: https://sagan-renderer-staging.cfapps.io
 ---
 
 spring:
   profiles: production
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io}
+sagan:
+  site:
+    renderer:
+      service-url: https://sagan-renderer.cfapps.io

@@ -40,26 +40,23 @@
                 <div class="btn-group">
                   <button class="btn" data-protocol="https">HTTPS</button>
                   <button class="btn" data-protocol="ssh">SSH</button>
-                  <button class="btn" data-protocol="subversion">Subversion</button>
                 </div>
                 <div class="clone-url https">
-                  <input type="text" id="clone-url-https" th:value="${guide.gitRepoHttpsUrl}" readonly="readonly"/>
-                  <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoHttpsUrl}" data-toggle="tooltip"></button>
+                  <input type="text" id="clone-url-https" th:value="${guide.cloneUrl}" readonly="readonly"/>
+                  <button class="copy-button github" th:attr="data-clipboard-text=${guide.cloneUrl}" data-toggle="tooltip"></button>
                 </div>
                 <div class="clone-url ssh">
-                  <input type="text" id="clone-url-ssh" th:value="${guide.gitRepoSshUrl}" readonly="readonly"/>
-                  <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoSshUrl}" data-toggle="tooltip"></button>
-                </div>
-                <div class="clone-url subversion">
-                  <input type="text" id="clone-url-subversion" th:value="${guide.gitRepoSubversionUrl}" readonly="readonly"/>
-                  <button class="copy-button github" th:attr="data-clipboard-text=${guide.gitRepoSubversionUrl}" data-toggle="tooltip"></button>
+                  <input type="text" id="clone-url-ssh" th:value="${guide.sshUrl}" readonly="readonly"/>
+                  <button class="copy-button github" th:attr="data-clipboard-text=${guide.sshUrl}" data-toggle="tooltip"></button>
                 </div>
                 <a class="github_download btn btn-black uppercase" th:href='${guide.zipUrl}'>Download ZIP</a>
-                <a class="gs-guide-import" th:href="${guide.githubHttpsUrl}">Import into STS</a>
+                <a class="gs-guide-import" th:href="${guide.cloneUrl}">Import into STS</a>
                 <div class="go-to-repo--container">
-                  <a th:href="${guide.GithubHttpsUrl}">
-                    <i class="icon-github"></i>
-                    Go To Repo
+                  <a th:href="${guide.githubUrl}"><i class="icon-github"></i>Go To Repo</a>
+                </div>
+                <div class="go-to-repo--container">
+                  <a th:if="${guide.pushToPwsUrl}" th:href="${guide.pushToPwsUrl}">
+                    <img src="https://push-to.cfapps.io/ui/assets/images/Push-to-Pivotal-Dark.svg" width="300" alt="Push">
                   </a>
                 </div>
               </div>

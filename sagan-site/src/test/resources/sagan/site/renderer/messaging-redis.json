@@ -1,0 +1,25 @@
+{
+  "name": "messaging-redis",
+  "repositoryName": "spring-guides/gs-messaging-redis",
+  "title": "Messaging with Redis",
+  "description": "Learn how to use Redis as a message broker.",
+  "type": "getting-started",
+  "githubUrl": "https://github.com/spring-guides/gs-messaging-redis",
+  "gitUrl": "git://github.com/spring-guides/gs-messaging-redis.git",
+  "sshUrl": "git@github.com:spring-guides/gs-messaging-redis.git",
+  "cloneUrl": "https://github.com/spring-guides/gs-messaging-redis.git",
+  "projects": [
+
+  ],
+  "_links": {
+    "self": {
+      "href": "/guides/getting-started/messaging-redis"
+    },
+    "content": {
+      "href": "/guides/getting-started/messaging-redis/content"
+    },
+    "guides": {
+      "href": "/guides/"
+    }
+  }
+}

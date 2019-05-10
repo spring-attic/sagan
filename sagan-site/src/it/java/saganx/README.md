@@ -1,1 +1,0 @@
-The saganx package exists to segregate test-specific @Configuration classes away from component-scanning directives in main sources. These classes should be explicitly included, as opposed to always included by every integration test.

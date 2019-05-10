@@ -1,8 +1,8 @@
 package sagan.team.support;
 
 import sagan.blog.Post;
-import sagan.blog.support.BlogService;
 import sagan.blog.support.PostView;
+import sagan.site.blog.BlogService;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 import sagan.team.MemberProfile;

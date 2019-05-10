@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.stereotype.Service;
 
-@Service
 public class StaticPagePathFinder {
     private ResourcePatternResolver resourceResolver;
 
@@ -31,7 +28,6 @@ public class StaticPagePathFinder {
         }
     }
 
-    @Autowired
     public StaticPagePathFinder(ResourcePatternResolver resourceResolver) {
         this.resourceResolver = resourceResolver;
     }

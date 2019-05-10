@@ -1,6 +1,5 @@
 package sagan.projects.support;
 
-import sagan.blog.support.PostContentRenderer;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.ProjectRelease.ReleaseStatus;
@@ -16,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import sagan.site.blog.PostContentRenderer;
 
 import org.springframework.ui.ExtendedModelMap;
 

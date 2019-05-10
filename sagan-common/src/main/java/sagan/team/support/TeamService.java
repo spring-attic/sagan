@@ -22,10 +22,6 @@ public class TeamService {
 
     private static Log logger = LogFactory.getLog(TeamService.class);
 
-    public static final String CACHE_NAME = "cache.team";
-    public static final Class CACHE_TYPE = MemberProfile.class;
-    public static final String CACHE_TTL = "${cache.team.timetolive:60}";
-
     private final TeamRepository teamRepository;
     private final SearchService searchService;
     private final MemberProfileSearchEntryMapper mapper;
@@ -42,7 +38,6 @@ public class TeamService {
         return teamRepository.findById(id);
     }
 
-    @Cacheable(CACHE_NAME)
     public MemberProfile fetchMemberProfileUsername(String username) {
         MemberProfile profile = teamRepository.findByUsername(username);
         if (profile == null) {
@@ -55,7 +50,6 @@ public class TeamService {
         updateMemberProfile(profile, fetchMemberProfile(id));
     }
 
-    @CacheEvict(value = CACHE_NAME, key = "#username")
     public void updateMemberProfile(String username, MemberProfile updatedProfile) {
         updateMemberProfile(updatedProfile, fetchMemberProfileUsername(username));
     }

@@ -1,8 +1,5 @@
 package sagan.team.support;
 
-import sagan.support.github.GitHubClient;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,21 +11,17 @@ import org.springframework.social.github.api.GitHubUser;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @Service
 public class DefaultTeamImporter implements TeamImporter {
 
+	private static final String API_URL_BASE = "https://api.github.com";
+
     private final TeamService teamService;
-    private final GitHubClient gitHub;
     private final String gitHubTeamId;
 
     @Autowired
-    public DefaultTeamImporter(TeamService teamService, GitHubClient gitHub,
-                               @Value("${github.team.id}") String gitHubTeamId) {
+    public DefaultTeamImporter(TeamService teamService, @Value("${github.team.id}") String gitHubTeamId) {
         this.teamService = teamService;
-        this.gitHub = gitHub;
         this.gitHubTeamId = gitHubTeamId;
     }
 
@@ -46,7 +39,7 @@ public class DefaultTeamImporter implements TeamImporter {
     }
 
     private GitHubUser[] getGitHubUsers(GitHub gitHub) {
-        String membersUrl = GitHubClient.API_URL_BASE + "/teams/{teamId}/members?per_page=100";
+        String membersUrl = API_URL_BASE + "/teams/{teamId}/members?per_page=100";
         ResponseEntity<GitHubUser[]> entity =
                 gitHub.restOperations().getForEntity(membersUrl, GitHubUser[].class, gitHubTeamId);
         return entity.getBody();
@@ -54,7 +47,7 @@ public class DefaultTeamImporter implements TeamImporter {
 
     public String getNameForUser(String username, GitHub gitHub) {
         return gitHub.restOperations()
-                .getForObject(GitHubClient.API_URL_BASE +"/users/{user}", GitHubUser.class, username)
+                .getForObject(API_URL_BASE +"/users/{user}", GitHubUser.class, username)
                 .getName();
     }
 }

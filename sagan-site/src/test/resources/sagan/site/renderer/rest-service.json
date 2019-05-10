@@ -1,0 +1,25 @@
+{
+  "name": "rest-service",
+  "repositoryName": "spring-guides/gs-rest-service",
+  "title": "Building a RESTful Web Service",
+  "description": "Learn how to create a RESTful web service with Spring.",
+  "type": "getting-started",
+  "githubUrl": "https://github.com/spring-guides/gs-rest-service",
+  "gitUrl": "git://github.com/spring-guides/gs-rest-service.git",
+  "sshUrl": "git@github.com:spring-guides/gs-rest-service.git",
+  "cloneUrl": "https://github.com/spring-guides/gs-rest-service.git",
+  "projects": [
+    "spring-boot"
+  ],
+  "_links": {
+    "self": {
+      "href": "/guides/getting-started/rest-service"
+    },
+    "content": {
+      "href": "/guides/getting-started/rest-service/content"
+    },
+    "guides": {
+      "href": "/guides/"
+    }
+  }
+}

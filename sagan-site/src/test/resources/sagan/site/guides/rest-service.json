@@ -1,0 +1,27 @@
+{
+  "@class": "sagan.site.guides.GettingStartedGuide",
+  "header": {
+    "@class": "sagan.site.guides.DefaultGuideHeader",
+    "name": "rest-service",
+    "repositoryName": "spring-guides/gs-rest-service",
+    "title": "Rest Service Title",
+    "description": "Description",
+    "githubUrl": "https://github.com/spring-guides/gs-rest-service",
+    "gitUrl": "git://github.com/spring-guides/gs-rest-service.git",
+    "sshUrl": "git@github.com:spring-guides/gs-rest-service.git",
+    "cloneUrl": "https://github.com/spring-guides/gs-rest-service.git",
+    "projects": [
+      "spring-boot"
+    ]
+  },
+  "content": "CONTENT",
+  "tableOfContents": "TOC",
+  "typeLabel": "Getting Started",
+  "images": [
+    {
+      "name": "image.jpg",
+      "encodedContent": "encodedContent"
+    }
+  ],
+  "pushToPwsUrl": null
+}

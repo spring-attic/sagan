@@ -1,10 +1,10 @@
 package sagan.projects.support;
 
 import sagan.blog.PostFormat;
-import sagan.blog.support.PostContentRenderer;
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.ProjectSample;
+import sagan.site.blog.PostContentRenderer;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.Section;
 

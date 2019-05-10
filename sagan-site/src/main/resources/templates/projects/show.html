@@ -29,11 +29,11 @@
                 <li class="sidebar_project"
                     th:each="proj : ${projects}"
                     th:classappend="${proj.getId() ==  selectedProject.getId()} ? 'active' : (${proj.getId() ==  selectedProject.getParentId()} ? 'child-active': 'child-inactive')"
-                    th:with="isChildrenOpen=(${proj.equals(selectedProject)} or ${proj.equals(selectedProject.getParentProject())}) and ${proj.getChildProjectList().size()} > 0">
+                    th:with="isChildrenOpen=(${proj.equals(selectedProject)} or ${proj.equals(selectedProject.getParentProject())}) and ${proj.getChildProjectList()} and ${proj.getChildProjectList().size()} > 0">
                     <div>
                         <a th:href="${proj.getSiteUrl()}" th:text="${proj.getName()}"></a>
-                        <i th:if="${!isChildrenOpen && proj.getChildProjectList().size() > 0}" class="icon-chevron-right" aria-hidden="true"></i>
-                        <i th:if="${isChildrenOpen && proj.getChildProjectList().size() > 0}" class="icon-chevron-down" aria-hidden="true"></i>
+                        <i th:if="${!isChildrenOpen && proj.getChildProjectList() != null && proj.getChildProjectList().size() > 0}" class="icon-chevron-right" aria-hidden="true"></i>
+                        <i th:if="${isChildrenOpen && proj.getChildProjectList() != null && proj.getChildProjectList().size() > 0}" class="icon-chevron-down" aria-hidden="true"></i>
                     </div>
                     <ul class="sidebar_children" th:if="${isChildrenOpen}">
                         <li class="sidebar_child" th:each="childProject : ${proj.getChildProjectList()}"
@@ -94,7 +94,7 @@
                             <div class="project-overview">
                                 <div th:utext="${selectedProject.getRenderedOverview()}"></div>
                             </div>
-                            <div th:if="${selectedProject.getRenderedBootConfig().length() > 0}"
+                            <div th:if="${selectedProject.getRenderedBootConfig()} and ${#strings.length(selectedProject.getRenderedBootConfig()) > 0} "
                                  class="spring-boot-config">
                                 <h2>Spring Boot Config</h2>
                                 <div th:utext="${selectedProject.getRenderedBootConfig()}"></div>

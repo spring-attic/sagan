@@ -1,0 +1,20 @@
+{
+  "name": "messaging-redis",
+  "tableOfContents": "<ul class=\"sectlevel1\"> \n <li><a href=\"#_standing_up_a_redis_server\">Standing up a Redis server</a></li> \n <li><a href=\"#initial\">Create a Redis message receiver</a></li> \n</ul>",
+  "content": "<div class=\"paragraph\"> \n <p>TThis guide walks you through the process of using Spring Data Redis to publish and subscribe to messages sent via Redis.</p> \n</div> <!-- rendered by Sagan Renderer Service -->",
+  "pushToPwsMetadata": "repository: https://github.com/spring-guides/gs-rest-service.git\ndirectory: complete\npath: /test",
+  "images": [
+    {
+      "name": "hello.png",
+      "encodedContent": "base64ImageContent"
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "/guides/getting-started/rest-service/content"
+    },
+    "guide": {
+      "href": "/guides/getting-started/rest-service"
+    }
+  }
+}

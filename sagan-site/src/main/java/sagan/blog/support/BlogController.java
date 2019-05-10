@@ -3,6 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.PostMovedException;
+import sagan.site.blog.BlogService;
 import sagan.support.DateFactory;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.PageableFactory;

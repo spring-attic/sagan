@@ -1,0 +1,15 @@
+{
+  "name": "rest-service",
+  "tableOfContents": "<ul class=\"sectlevel1\"> \n <li><a href=\"#initial\">Create a resource representation class</a></li> \n <li><a href=\"#_create_a_resource_controller\">Create a resource controller</a></li> \n</ul>",
+  "content": "<div class=\"paragraph\"> \n <p>This guide walks you through the process of creating a \"hello world\" RESTful web service with Spring.</p> \n</div> <!-- rendered by Sagan Renderer Service -->",
+  "pushToPwsMetadata": null,
+  "images": null,
+  "_links": {
+    "self": {
+      "href": "/guides/getting-started/rest-service/content"
+    },
+    "guide": {
+      "href": "/guides/getting-started/rest-service"
+    }
+  }
+}

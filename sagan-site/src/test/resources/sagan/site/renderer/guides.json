@@ -1,0 +1,116 @@
+{
+  "_embedded": {
+    "guides": [
+      {
+        "name": "rest-service",
+        "title": "Building a RESTful Web Service",
+        "description": "Learn how to create a RESTful web service with Spring.",
+        "type": "getting-started",
+        "githubUrl": "https://github.com/spring-guides/gs-rest-service",
+        "gitUrl": "git://github.com/spring-guides/gs-rest-service.git",
+        "sshUrl": "git@github.com:spring-guides/gs-rest-service.git",
+        "cloneUrl": "https://github.com/spring-guides/gs-rest-service.git",
+        "projects": [
+          "spring-boot"
+        ],
+        "_links": {
+          "self": {
+            "href": "/guides/getting-started/rest-service"
+          },
+          "content": {
+            "href": "/guides/getting-started/rest-service/content"
+          },
+          "guides": {
+            "href": "/guides/"
+          }
+        }
+      },
+      {
+        "name": "messaging-redis",
+        "title": "Messaging with Redis",
+        "description": "Learn how to use Redis as a message broker.",
+        "type": "getting-started",
+        "githubUrl": "https://github.com/spring-guides/gs-messaging-redis",
+        "gitUrl": "git://github.com/spring-guides/gs-messaging-redis.git",
+        "sshUrl": "git@github.com:spring-guides/gs-messaging-redis.git",
+        "cloneUrl": "https://github.com/spring-guides/gs-messaging-redis.git",
+        "projects": [
+
+        ],
+        "_links": {
+          "self": {
+            "href": "/guides/getting-started/messaging-redis"
+          },
+          "content": {
+            "href": "/guides/getting-started/messaging-redis/content"
+          },
+          "guides": {
+            "href": "/guides/"
+          }
+        }
+      },
+      {
+        "name": "spring-security-architecture",
+        "title": "Spring Security Architecture",
+        "description": "Topical guide to Spring Security, how the bits fit together and how they interact with Spring Boot",
+        "type": "topical",
+        "githubUrl": "https://github.com/spring-guides/top-spring-security-architecture",
+        "gitUrl": "git://github.com/spring-guides/top-spring-security-architecture.git",
+        "sshUrl": "git@github.com:spring-guides/top-spring-security-architecture.git",
+        "cloneUrl": "https://github.com/spring-guides/top-spring-security-architecture.git",
+        "projects": [
+
+        ],
+        "_links": {
+          "self": {
+            "href": "/guides/topical/spring-security-architecture"
+          },
+          "content": {
+            "href": "/guides/topical/spring-security-architecture/content"
+          },
+          "guides": {
+            "href": "/guides/"
+          }
+        }
+      },
+      {
+        "name": "spring-boot-kotlin",
+        "title": "Building web applications with Spring Boot and Kotlin",
+        "description": "Learn how to easily build and test web applications with Spring, Kotlin, Junit 5 and JPA",
+        "type": "tutorial",
+        "githubUrl": "https://github.com/spring-guides/tut-spring-boot-kotlin",
+        "gitUrl": "git://github.com/spring-guides/tut-spring-boot-kotlin.git",
+        "sshUrl": "git@github.com:spring-guides/tut-spring-boot-kotlin.git",
+        "cloneUrl": "https://github.com/spring-guides/tut-spring-boot-kotlin.git",
+        "projects": [
+
+        ],
+        "_links": {
+          "self": {
+            "href": "/guides/tutorial/spring-boot-kotlin"
+          },
+          "content": {
+            "href": "/guides/tutorial/spring-boot-kotlin/content"
+          },
+          "guides": {
+            "href": "/guides/"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "getting-started": {
+      "href": "/guides/getting-started/{guide}",
+      "templated": true
+    },
+    "tutorial": {
+      "href": "/guides/tutorial/{guide}",
+      "templated": true
+    },
+    "topical": {
+      "href": "/guides/topical/{guide}",
+      "templated": true
+    }
+  }
+}

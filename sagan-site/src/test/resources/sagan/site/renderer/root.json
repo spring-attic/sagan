@@ -1,0 +1,10 @@
+{
+  "_links": {
+    "markup": {
+      "href": "/documents"
+    },
+    "guides": {
+      "href": "/guides/"
+    }
+  }
+}

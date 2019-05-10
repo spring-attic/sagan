@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
+import sagan.site.blog.BlogService;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 

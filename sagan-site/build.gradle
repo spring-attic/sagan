@@ -45,6 +45,8 @@ dependencies {
     compile project(':sagan-client')
 
     compile "org.springframework.boot:spring-boot-starter-web"
+	compile "org.springframework.boot:spring-boot-starter-hateoas"
+	compile 'com.jayway.jsonpath:json-path'
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-data-redis"
     compile "org.springframework.boot:spring-boot-starter-security"
@@ -81,7 +83,6 @@ dependencies {
 }
 
 def gradleDir = "${rootProject.rootDir}/gradle"
-apply from: "$gradleDir/integTest.gradle"
 
 clean.doFirst {
     delete "${projectDir}/data/"
@@ -91,7 +92,6 @@ clean.doFirst {
 asciidoctor {
 	attributes \
       'snippets': file('build/snippets')
-	dependsOn integTest
 }
 
 jar {

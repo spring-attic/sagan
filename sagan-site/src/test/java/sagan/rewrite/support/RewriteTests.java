@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.*;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 import sagan.SiteApplication;
+import sagan.UrlRewriterFilterConfig;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -23,8 +24,8 @@ public class RewriteTests {
     @Before
     public void setUp() throws Exception {
         UrlRewriteFilter filter =
-                createUrlFilter(SiteApplication.REWRITE_FILTER_NAME,
-                        SiteApplication.REWRITE_FILTER_CONF_PATH);
+                createUrlFilter(UrlRewriterFilterConfig.REWRITE_FILTER_NAME,
+						UrlRewriterFilterConfig.REWRITE_FILTER_CONF_PATH);
         filterChain = new PassThroughFilterChain(filter, new MockFilterChain());
     }
 

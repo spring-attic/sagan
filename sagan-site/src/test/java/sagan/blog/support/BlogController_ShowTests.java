@@ -3,6 +3,7 @@ package sagan.blog.support;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
+import sagan.site.blog.BlogService;
 import sagan.support.DateFactory;
 
 import javax.servlet.http.HttpServletRequest;

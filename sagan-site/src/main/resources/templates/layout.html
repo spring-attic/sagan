@@ -11,8 +11,8 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
 
   <script th:src="@{/jspm_packages/system.js}"></script>
-  <script th:inline="text">
-    System.config({baseURL: "/[[${@saganApp.version()}]]"});
+  <script th:inline="text" th:if="${saganAppVersion}">
+    System.config({baseURL: "/[[${saganAppVersion}]]"});
   </script>
   <script th:src="@{/config.js}"></script>
   <script>

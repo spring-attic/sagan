@@ -1,159 +1,151 @@
 package sagan.projects.support;
 
-import sagan.guides.AbstractGuide;
-import sagan.guides.GettingStartedGuide;
-import sagan.guides.Topical;
-import sagan.guides.Tutorial;
-import sagan.guides.support.GettingStartedGuides;
-import sagan.guides.support.Topicals;
-import sagan.guides.support.Tutorials;
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.site.guides.GettingStartedGuides;
+import sagan.site.guides.GuideHeader;
+import sagan.site.guides.Topicals;
+import sagan.site.guides.Tutorials;
 
-import org.springframework.ui.ExtendedModelMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
-import static java.util.Arrays.asList;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
-import static sagan.projects.ProjectRelease.ReleaseStatus.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
+import static sagan.projects.ProjectRelease.ReleaseStatus.SNAPSHOT;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@WebMvcTest(ProjectsController.class)
+@TestPropertySource(properties = "spring.profiles.active=standalone")
 public class ProjectsControllerTest {
-    @Mock
-    private ProjectMetadataService projectMetadataService;
+	@MockBean
+	private ProjectMetadataService projectMetadataService;
 
-    @Mock
-    private GettingStartedGuides projectGuidesRepo;
+	@MockBean
+	private GettingStartedGuides projectGuidesRepo;
 
-    @Mock
-    private Tutorials projectTutorialRepo;
+	@MockBean
+	private Tutorials projectTutorialRepo;
 
-    @Mock
-    private Topicals projectTopicalRepo;
+	@MockBean
+	private Topicals projectTopicalRepo;
 
-    private ProjectRelease currentRelease =
-            new ProjectRelease("1.5.7.RELEASE", GENERAL_AVAILABILITY, true, "", "", "", "");
-    private ProjectRelease anotherCurrentRelease =
-            new ProjectRelease("1.4.7.RELEASE", GENERAL_AVAILABILITY, true, "", "", "", "");
-    private ProjectRelease snapshotRelease = new ProjectRelease("1.7.7.SNAPSHOT", SNAPSHOT, false, "", "", "", "");
-    private List<ProjectRelease> releases = asList(currentRelease, anotherCurrentRelease, snapshotRelease);
-    Project project =
-            new Project("spring-framework", "spring", "http://example.com", "/project/spring-framework", 0, releases,
-					"project", "spring-cool,spring-awesome", "");
-    Project projectUmbrella =
-            new Project("spring-parapluie", "Spring Parapluie", "http://example.com", "/project/spring-parapluie",
-                    1, releases, "project", "spring-cool,spring-awesome", "");
-    Project projectUmbrellaChild =
-            new Project("spring-parapluie-child", "Spring Parapluie Child", "http://example.com",
-                    "/project/spring-parapluie-child", 1, releases, "project", "spring-cool,spring-awesome", "");
+	private ProjectRelease currentRelease;
 
-    private ExtendedModelMap model = new ExtendedModelMap();
-    private ProjectsController controller;
-    private String viewName;
+	private ProjectRelease anotherCurrentRelease;
 
-    Topical topical = new Topical();
-    Tutorial tutorial = new Tutorial();
-    GettingStartedGuide guide = new GettingStartedGuide();
+	private ProjectRelease snapshotRelease;
 
-    @Before
-    public void setUp() throws Exception {
-        projectUmbrellaChild.setParentProject(projectUmbrella);
-        projectUmbrella.setChildProjectList(asList(projectUmbrellaChild));
+	private List<ProjectRelease> releases;
 
-        when(projectTopicalRepo.findByProject(project)).thenReturn(asList(topical));
-        when(projectTutorialRepo.findByProject(project)).thenReturn(asList(tutorial));
-        when(projectGuidesRepo.findByProject(project)).thenReturn(asList(guide));
+	private Project springBoot;
 
-        when(projectMetadataService.getProject("spring-framework")).thenReturn(project);
-        when(projectMetadataService.getActiveTopLevelProjects())
-                .thenReturn(asList(project, projectUmbrella));
+	private Project springData;
 
-        controller = new ProjectsController(projectMetadataService, projectGuidesRepo, projectTutorialRepo, projectTopicalRepo);
-        viewName = controller.showProject(model, "spring-framework");
-    }
+	private Project springDataJpa;
 
-    @Test
-    public void showProjectModelHasProjectData() {
-        assertThat(model.get("selectedProject"), equalTo(project));
-    }
+	@Autowired
+	private MockMvc mvc;
 
-    @Test
-    public void showProjectModelHasProjectsListForSidebar() {
-        List<Project> modelProjectList = (List<Project>) model.get("projects");
-        assertThat(modelProjectList, hasSize(2));
-        assertThat(modelProjectList, is(asList(project, projectUmbrella)));
+	@Before
+	public void setUp() throws Exception {
+		this.currentRelease = new ProjectRelease("2.1.0.RELEASE", GENERAL_AVAILABILITY,
+				true, "", "", "", "");
+		this.anotherCurrentRelease = new ProjectRelease("2.0.0.RELEASE", GENERAL_AVAILABILITY,
+				true, "", "", "", "");
+		this.snapshotRelease = new ProjectRelease("2.2.0.SNAPSHOT", SNAPSHOT,
+				false, "", "", "", "");
+		this.releases = Arrays.asList(currentRelease, anotherCurrentRelease, snapshotRelease);
 
-        Project actualUmbrellaProject = modelProjectList.get(1);
-        assertThat(actualUmbrellaProject.getChildProjectList(), equalTo(asList(projectUmbrellaChild)));
-    }
+		this.springBoot = new Project("spring-boot", "Spring Boot",
+				"https://github.com/spring-projects/spring-boot", "/project/spring-boot", 0,
+				releases, "project", "spring-boot", "");
 
-    @Test
-    public void showProjectViewNameIsShow() {
-        assertThat(viewName, is("projects/show"));
-    }
+		this.springData = new Project("spring-data", "Spring Data",
+				"https://github.com/spring-projects/spring-data", "/project/spring-data", 0,
+				releases, "project", "spring-data,spring-data-commons", "");
+		this.springDataJpa = new Project("spring-data-jpa", "Spring Data JPA",
+				"https://github.com/spring-projects/spring-data-jpa", "/project/spring-data-jpa", 0,
+				releases, "project", "spring-data-jpa", "");
 
-    @Test
-    public void showProjectHasStackOverflowLink() {
-        assertThat(model.get("projectStackOverflow"),
-                is("https://stackoverflow.com/questions/tagged/spring-cool+or+spring-awesome"));
-    }
+		this.springData.setChildProjectList(Arrays.asList(this.springDataJpa));
+		this.springDataJpa.setParentProject(this.springData);
 
-    @Test
-    public void showProjectHasGuidesTutorialsTopicals() {
-        List<AbstractGuide> guides = (List<AbstractGuide>) model.get("guides");
-        assertThat(guides, hasItems(guide));
-        guides = (List<AbstractGuide>) model.get("topicals");
-        assertThat(guides, hasItems(topical));
-        guides = (List<AbstractGuide>) model.get("tutorials");
-        assertThat(guides, hasItems(tutorial));
-    }
+		GuideHeader[] guides = new GuideHeader[] {};
+		given(this.projectGuidesRepo.findByProject(any())).willReturn(guides);
+		given(this.projectTopicalRepo.findByProject(any())).willReturn(guides);
+		given(this.projectTutorialRepo.findByProject(any())).willReturn(guides);
 
-    @Test
-    public void showProjectHasReleases() {
-        Optional<ProjectRelease> currentRelease = (Optional<ProjectRelease>) model.get("currentRelease");
-        List<ProjectRelease> otherReleases = (List<ProjectRelease>) model.get("otherReleases");
-
-        assertThat(currentRelease, is(Optional.of(this.currentRelease)));
-        assertThat(otherReleases, hasItems(anotherCurrentRelease, snapshotRelease));
-    }
-
-    @Test
-    public void showProjectDoesNotExplodeWhenThereAreNoReleases() {
-        Project projectWithoutReleases =
-                new Project("spring-spline-reticulator", "spring-spline-reticulator", "http://example.com",
-                        "/project/spring-spline-reticulator", 0, asList(),
-                        "project", "spring-cool,spring-awesome", "");
-        when(projectMetadataService.getProject("spring-spline-reticulator")).thenReturn(projectWithoutReleases);
-
-        model = new ExtendedModelMap();
-        controller.showProject(model, "spring-spline-reticulator");
-
-        Optional<ProjectRelease> currentRelease = (Optional<ProjectRelease>) model.get("currentRelease");
-        List<ProjectRelease> otherReleases = (List<ProjectRelease>) model.get("otherReleases");
-
-        assertThat(currentRelease, is(Optional.empty()));
-        assertThat(otherReleases, hasSize(0));
-    }
-
-	@Test
-	public void listProjects_providesProjectMetadataServiceInModel() {
-		controller.listProjects(model);
-		assertThat((ProjectMetadataService) model.get("projectMetadata"), equalTo(projectMetadataService));
+		given(projectMetadataService.getProjects()).willReturn(Arrays.asList(this.springBoot, this.springData));
+		given(projectMetadataService.getProject("spring-boot")).willReturn(this.springBoot);
+		given(projectMetadataService.getProject("spring-data")).willReturn(this.springData);
+		given(projectMetadataService.getActiveTopLevelProjects()).willReturn(Arrays.asList(this.springBoot, this.springData));
 	}
 
 	@Test
-	public void listProjectReleases_providesReleaseMetadataInJsonPCallback() {
-		controller.listProjects(model);
-		assertThat((ProjectMetadataService) model.get("projectMetadata"), equalTo(projectMetadataService));
+	public void showProjectModelHasProjectData() throws Exception {
+		this.mvc.perform(get("/projects/spring-boot"))
+				.andExpect(status().isOk())
+				.andExpect(model().attribute("selectedProject", this.springBoot))
+				.andExpect(model().attribute("projects", Matchers.contains(this.springBoot, this.springData)))
+				.andExpect(model().attribute("projectStackOverflow", "https://stackoverflow.com/questions/tagged/spring-boot"));
 	}
+
+	@Test
+	public void showProjectHasStackOverflowLink() throws Exception {
+		this.mvc.perform(get("/projects/spring-data"))
+				.andExpect(status().isOk())
+				.andExpect(model().attribute("selectedProject", this.springData))
+				.andExpect(model().attribute("projects", Matchers.contains(this.springBoot, this.springData)))
+				.andExpect(model().attribute("projectStackOverflow", "https://stackoverflow.com/questions/tagged/spring-data+or+spring-data-commons"));
+	}
+
+	@Test
+	public void showProjectHasReleases() throws Exception {
+		this.mvc.perform(get("/projects/spring-boot"))
+				.andExpect(status().isOk())
+				.andExpect(model().attribute("currentRelease", Optional.of(this.currentRelease)))
+				.andExpect(model().attribute("otherReleases", Matchers.hasItems(this.anotherCurrentRelease, this.snapshotRelease)));
+	}
+
+	@Test
+	public void showProjectWithoutReleases() throws Exception {
+		Project projectWithoutReleases =
+				new Project("spring-norelease", "spring-norelease", "http://example.com",
+						"/project/spring-norelease", 0, Collections.emptyList(),
+						"project", "spring-example", "");
+		when(projectMetadataService.getProject("spring-norelease")).thenReturn(projectWithoutReleases);
+
+		this.mvc.perform(get("/projects/spring-norelease"))
+				.andExpect(status().isOk())
+				.andExpect(model().attribute("currentRelease", Optional.empty()))
+				.andExpect(model().attribute("otherReleases", Matchers.empty()));
+	}
+
+	@Test
+	public void listProjectsProvidesProjectMetadata() throws Exception {
+		this.mvc.perform(get("/projects"))
+				.andExpect(status().isOk())
+				.andExpect(model().attribute("springboot", this.springBoot))
+				.andExpect(model().attribute("springdata", this.springData));
+	}
+
 }

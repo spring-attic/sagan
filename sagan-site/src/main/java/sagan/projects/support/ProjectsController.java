@@ -1,13 +1,14 @@
 package sagan.projects.support;
 
-import sagan.guides.support.GettingStartedGuides;
-import sagan.guides.support.Topicals;
-import sagan.guides.support.Tutorials;
+import sagan.site.guides.GettingStartedGuides;
+import sagan.site.guides.Topicals;
+import sagan.site.guides.Tutorials;
 import sagan.projects.Project;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.Section;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,8 @@ class ProjectsController {
 
 	@RequestMapping(method = { GET, HEAD })
 	public String listProjects(Model model) {
-		model.addAttribute("projectMetadata", projectMetadataService);
+    	this.projectMetadataService.getProjects()
+				.forEach(project -> model.addAttribute(project.getId().replaceAll("-", ""), project));
 		return "projects/index";
 	}
 
@@ -61,9 +63,9 @@ class ProjectsController {
         model.addAttribute("currentRelease", project.getMostCurrentRelease());
         model.addAttribute("otherReleases", project.getNonMostCurrentReleases());
 
-        model.addAttribute("guides", gsGuides.findByProject(project));
-        model.addAttribute("topicals", topicals.findByProject(project));
-        model.addAttribute("tutorials", tutorials.findByProject(project));
+        model.addAttribute("guides", Arrays.asList(gsGuides.findByProject(project)));
+        model.addAttribute("topicals", Arrays.asList(topicals.findByProject(project)));
+        model.addAttribute("tutorials", Arrays.asList(tutorials.findByProject(project)));
 
         return "projects/show";
     }

@@ -1,6 +1,6 @@
 package sagan.team.support;
 
-import sagan.blog.support.BlogService;
+import sagan.site.blog.BlogService;
 import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 import sagan.team.MemberProfileBuilder;
