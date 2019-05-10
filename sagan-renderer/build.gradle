@@ -24,7 +24,9 @@ dependencies {
 		exclude group: 'org.jruby'
 	}
 	implementation 'org.jruby:jruby-complete:9.2.7.0'
+	implementation 'org.jsoup:jsoup:1.11.3'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 	compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
