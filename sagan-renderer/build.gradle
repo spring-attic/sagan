@@ -13,9 +13,20 @@ repositories {
 	mavenCentral()
 }
 
+bootJar {
+	requiresUnpack '**/jruby-complete-*.jar'
+	requiresUnpack '**/asciidoctorj-*.jar'
+}
+
 dependencies {
+	implementation 'org.pegdown:pegdown:1.6.0'
+	implementation('org.asciidoctor:asciidoctorj:1.6.2') {
+		exclude group: 'org.jruby'
+	}
+	implementation 'org.jruby:jruby-complete:9.2.7.0'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+	compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
