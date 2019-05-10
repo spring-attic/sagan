@@ -1,0 +1,23 @@
+server:
+  port: 8081
+
+logging:
+  level:
+    ROOT: INFO
+    org.apache.http: WARN
+    # always log high-level information about application startup
+    sagan.renderer: INFO
+
+sagan:
+  renderer:
+    guides:
+      organization: spring-guides
+    github:
+      # This optional property may be assigned using a "personal access token" created
+      # at https://github.com/settings/applications. It is used for accessing GitHub's
+      # API, even for operations that do not require authorization (e.g. Getting Started
+      # Guide repositories). This is done in order to work against higher rate limits
+      # (5000req/hour vs. the default 60req/hour without a token). When running the app
+      # locally, this lower default is fine. When running the app in production, the
+      # token is a must. See http://developer.github.com/v3/#rate-limiting.
+      token: ${GITHUB_ACCESS_TOKEN:}
