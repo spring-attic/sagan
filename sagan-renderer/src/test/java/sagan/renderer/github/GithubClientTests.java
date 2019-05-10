@@ -28,7 +28,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  */
 @RunWith(SpringRunner.class)
 @RestClientTest({GithubClient.class, RendererProperties.class})
-@TestPropertySource(properties = "sagan.renderer.github.token=user:password")
+@TestPropertySource(properties = "sagan.renderer.github.token=testtoken")
 public class GithubClientTests {
 
 	private static final MediaType GITHUB_PREVIEW = MediaType.parseMediaType("application/vnd.github.mercy-preview+json");
@@ -98,8 +98,7 @@ public class GithubClientTests {
 	}
 
 	private String getAuthorizationHeader() {
-		return "Basic " + Base64Utils
-				.encodeToString("user:password".getBytes(StandardCharsets.UTF_8));
+		return "Token testtoken";
 	}
 
 	private ClassPathResource getClassPathResource(String path) {
