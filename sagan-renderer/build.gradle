@@ -27,8 +27,9 @@ dependencies {
 	implementation 'org.jsoup:jsoup:1.11.3'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
-	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 	compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+	runtimeOnly 'org.springframework.boot:spring-boot-starter-actuator'
+	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
