@@ -9,7 +9,8 @@ buildscript {
 
 plugins {
 	id 'java'
-    id "org.asciidoctor.convert" version "1.5.3"
+	id "org.asciidoctor.convert" version "1.5.3"
+	id "com.gorylenko.gradle-git-properties" version "1.5.2"
 }
 
 apply plugin: 'org.springframework.boot'
