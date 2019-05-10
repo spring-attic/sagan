@@ -15,6 +15,8 @@ public class GuideContentResource extends ResourceSupport {
 
 	private String content;
 
+	private String pushToPwsMetadata;
+
 	private List<GuideImage> images;
 
 	GuideContentResource(String name, String content, String tableOfContents) {
@@ -64,5 +66,5 @@ public class GuideContentResource extends ResourceSupport {
 	public void setImages(List<GuideImage> images) {
 		this.images = images;
 	}
-	
+
 }

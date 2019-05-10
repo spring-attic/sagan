@@ -56,7 +56,7 @@ public class GuideRendererTests {
 		assertThat(result.getImages())
 				.anySatisfy(image -> {
 					assertThat(image.getName()).isEqualTo("spring.svg");
-				    assertThat(image.getEncodedContent()).contains("PHN2Z");
+					assertThat(image.getEncodedContent()).contains("PHN2Z");
 				})
 				.anySatisfy(image -> {
 					assertThat(image.getName()).isEqualTo("guides.png");
@@ -69,7 +69,6 @@ public class GuideRendererTests {
 		given(this.githubClient.downloadRepositoryAsZipball("spring-guides", "gs-sample"))
 				.willReturn(readAsBytes("gs-sample-pws.zip"));
 		GuideContentResource result = this.renderer.render(GuideType.GETTING_STARTED, "sample");
-
 		assertThat(result.getName()).isEqualTo("sample");
 		assertThat(result.getContent()).contains("<p>This is a sample guide.</p>")
 				.contains("<!-- rendered by Sagan Renderer Service -->");

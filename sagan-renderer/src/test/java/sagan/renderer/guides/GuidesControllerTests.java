@@ -2,6 +2,7 @@ package sagan.renderer.guides;
 
 import java.util.Arrays;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import sagan.renderer.github.GithubClient;
