@@ -191,12 +191,12 @@
 
                             <ul>
                                 <li th:each="guide : ${guides}">
-                                    <a th:href="'/guides/gs/' + ${guide.guideId}">
+                                    <a th:href="'/guides/gs/' + ${guide.name}">
                                         <i class="icon-file-text"></i>
                                         <strong class="project--sample--title"
                                                 th:text="${guide.getTitle()}"></strong>
                                         <span class="project--sample--description"
-                                              th:text="${guide.getSubtitle()}"></span>
+                                              th:text="${guide.getDescription()}"></span>
                                     </a>
                                 </li>
                             </ul>
@@ -210,12 +210,12 @@
 
                             <ul>
                                 <li th:each="guide : ${topicals}">
-                                    <a th:href="'/guides/topicals/' + ${guide.guideId}">
+                                    <a th:href="'/guides/topicals/' + ${guide.name}">
                                         <i class="icon-file-text"></i>
                                         <strong class="project--sample--title"
                                                 th:text="${guide.getTitle()}"></strong>
                                         <span class="project--sample--description"
-                                              th:text="${guide.getSubtitle()}"></span>
+                                              th:text="${guide.getDescription()}"></span>
                                     </a>
                                 </li>
                             </ul>
@@ -229,12 +229,12 @@
 
                             <ul>
                                 <li th:each="guide : ${tutorials}">
-                                    <a th:href="'/guides/tutorials/' + ${guide.guideId}">
+                                    <a th:href="'/guides/tutorials/' + ${guide.name}">
                                         <i class="icon-file-text"></i>
                                         <strong class="project--sample--title"
                                                 th:text="${guide.getTitle()}"></strong>
                                         <span class="project--sample--description"
-                                              th:text="${guide.getSubtitle()}"></span>
+                                              th:text="${guide.getDescription()}"></span>
                                     </a>
                                 </li>
                             </ul>
