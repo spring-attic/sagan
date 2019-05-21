@@ -19,7 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class RemoteSearchService implements SearchService {
 
-    @Value("${search.url:http://localhost:8081}")
+    @Value("${search.url:http://localhost:8082}")
     private String url;
 
     private final RestTemplate rest;

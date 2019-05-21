@@ -1,3 +1,6 @@
+server:
+  port: 8082
+
 project:
   artifactId: spring-search
   name: spring-search
