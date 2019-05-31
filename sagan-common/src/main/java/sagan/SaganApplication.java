@@ -1,10 +1,15 @@
 package sagan;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.MapPropertySource;
 
 import static java.lang.String.format;
 import static org.springframework.util.StringUtils.arrayToCommaDelimitedString;
@@ -46,6 +51,9 @@ public class SaganApplication extends SpringApplication {
         else {
             logger.info("The default 'standalone' profile is active because no other profiles have been specified.");
             environment.addActiveProfile(STANDALONE);
+            Map<String, Object> map = new HashMap<>();
+            map.put("client.dir", new File("../sagan-client").getAbsolutePath());
+            environment.getPropertySources().addLast(new MapPropertySource("clientDir", map));
         }
 
     }

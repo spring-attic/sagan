@@ -104,7 +104,7 @@ spring:
   profiles: standalone
   resources:
     static_locations:
-      - file:../sagan-client/src/
+      - file:${client.dir}/src/
   devtools:
     restart:
       additional_paths:
