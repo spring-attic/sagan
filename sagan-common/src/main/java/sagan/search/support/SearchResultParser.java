@@ -22,16 +22,24 @@ public class SearchResultParser {
 
     public SearchResults parseResults(JestResult jestResult, Pageable pageable, String originalSearchTerm) {
         JsonObject response = jestResult.getJsonObject();
-        JsonObject hits = response.getAsJsonObject("hits");
-        JsonArray resultsArray = hits.getAsJsonArray("hits");
-
-        ArrayList<SearchResult> results = prepareResults(resultsArray, originalSearchTerm);
-
-        int totalResults = hits.get("total").getAsInt();
-        PageImpl<SearchResult> page = new PageImpl<>(results, pageable, totalResults);
-
+        PageImpl<SearchResult> page = prepareResults(response, pageable, originalSearchTerm);
         List<SearchFacet> facets = prepareFacets(response);
         return new SearchResults(page, facets);
+    }
+
+    private PageImpl<SearchResult> prepareResults(JsonObject response, Pageable pageable, String originalSearchTerm) {
+        JsonObject hits = response.getAsJsonObject("hits");
+        int totalResults = 0;
+        List<SearchResult> results = Collections.emptyList();
+
+        if (hits != null) {
+            JsonArray resultsArray = hits.getAsJsonArray("hits");
+            results = prepareResults(resultsArray, originalSearchTerm);
+            totalResults = hits.get("total").getAsInt();
+        }
+
+        PageImpl<SearchResult> page = new PageImpl<>(results, pageable, totalResults);
+        return page;
     }
 
     private List<SearchFacet> prepareFacets(JsonObject response) {
