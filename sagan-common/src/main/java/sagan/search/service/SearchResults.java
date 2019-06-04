@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResults {
     @JsonDeserialize(builder = PageBuilder.class)
     private SearchPage page;
@@ -48,6 +49,7 @@ public class SearchResults {
 
     @SuppressWarnings("serial")
     @JsonDeserialize(builder = PageBuilder.class)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class SearchPage extends PageImpl<SearchResult> {
 
         public SearchPage(List<SearchResult> content, Pageable pageable, long total) {

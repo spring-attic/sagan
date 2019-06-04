@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UrlPathHelper;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @RestController
 public class SearchServiceController {
 
@@ -39,6 +41,7 @@ public class SearchServiceController {
         return service.search(query.getTerm(), pageable, query.getFilter());
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     static class GenericSearchEntry extends SearchEntry {
 
         private String type;
