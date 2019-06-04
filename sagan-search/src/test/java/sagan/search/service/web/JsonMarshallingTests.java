@@ -1,8 +1,10 @@
 package sagan.search.service.web;
 
-import sagan.search.service.SearchResults;
 import sagan.search.service.SearchService;
 import sagan.search.service.web.SearchServiceController.GenericSearchEntry;
+
+import java.util.Date;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +42,24 @@ public class JsonMarshallingTests {
         assertThat(restored.getPath()).isEqualTo("/foo");
         assertThat(restored.getSummary()).isEqualTo("Lorem ipsum");
         assertThat(restored.getType()).isEqualTo("foo");
+    }
+
+    @Test
+    public void testMarshalUnknown() throws Exception {
+        GenericSearchEntry results = new GenericSearchEntry("foo", "/foo");
+        results.setUnknownField("publishAt", new Date());
+        results.setSummary("Lorem ipsum");
+        String json = mapper.writeValueAsString(results);
+        // System.err.println(json);
+        GenericSearchEntry restored = mapper.readValue(json, GenericSearchEntry.class);
+        assertThat(restored.getPath()).isEqualTo("/foo");
+        assertThat(restored.getSummary()).isEqualTo("Lorem ipsum");
+        assertThat(restored.getType()).isEqualTo("foo");
+        assertThat(restored.getUnknownFields()).containsKey("publishAt");
+        @SuppressWarnings("unchecked")
+        Map<String,Object> map = mapper.readValue(json, Map.class);
+        assertThat(map).containsKey("publishAt");
+        assertThat(map).containsKey("path");
     }
 
     @SpringBootApplication

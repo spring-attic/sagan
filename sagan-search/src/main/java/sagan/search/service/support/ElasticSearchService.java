@@ -6,6 +6,7 @@ import sagan.search.service.SearchService;
 import sagan.search.types.SearchEntry;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,7 +26,7 @@ import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class ElasticSearchService implements SearchService {
@@ -33,7 +34,7 @@ public class ElasticSearchService implements SearchService {
     private static Log logger = LogFactory.getLog(ElasticSearchService.class);
 
     private final JestClient jestClient;
-    private final Gson gson;
+    private final ObjectMapper mapper;
 
     private boolean useRefresh = false;
     private SearchResultParser searchResultParser;
@@ -42,10 +43,10 @@ public class ElasticSearchService implements SearchService {
     private String index;
 
     @Autowired
-    public ElasticSearchService(JestClient jestClient, SearchResultParser searchResultParser, Gson gson) {
+    public ElasticSearchService(JestClient jestClient, SearchResultParser searchResultParser, ObjectMapper mapper) {
         this.jestClient = jestClient;
         this.searchResultParser = searchResultParser;
-        this.gson = gson;
+        this.mapper = mapper;
     }
 
     public String getIndexName() {
@@ -54,7 +55,8 @@ public class ElasticSearchService implements SearchService {
 
     @Override
     public void saveToIndex(SearchEntry entry) {
-        Index.Builder indexEntryBuilder = new Index.Builder(entry).id(entry.getId()).index(index).type(entry.getType());
+        Index.Builder indexEntryBuilder = new Index.Builder(mapper.convertValue(entry, Map.class)).id(entry.getId())
+                .index(index).type(entry.getType());
 
         if (useRefresh) {
             indexEntryBuilder.refresh(true);
@@ -68,13 +70,11 @@ public class ElasticSearchService implements SearchService {
         Search.Builder searchBuilder;
         if (StringUtils.isEmpty(term)) {
             searchBuilder = SaganQueryBuilders.forEmptyQuery(pageable, filter);
-        }
-        else {
+        } else {
             searchBuilder = SaganQueryBuilders.fullTextSearch(term, pageable, filter);
         }
         searchBuilder.addIndex(index);
         Search search = searchBuilder.build();
-        logger.debug(search.getData(this.gson));
         JestResult jestResult = execute(search);
         return searchResultParser.parseResults(jestResult, pageable, term);
     }
@@ -98,7 +98,7 @@ public class ElasticSearchService implements SearchService {
         execute(new DeleteByQuery.Builder(query).build());
     }
 
-    private JestResult execute(Action action) {
+    private JestResult execute(Action<?> action) {
         try {
             JestResult result = jestClient.execute(action);
             logger.debug(result.getJsonString());

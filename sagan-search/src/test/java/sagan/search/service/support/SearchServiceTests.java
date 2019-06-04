@@ -1,8 +1,6 @@
 package sagan.search.service.support;
 
 import sagan.search.service.SearchException;
-import sagan.search.service.support.ElasticSearchService;
-import sagan.search.service.support.SearchResultParser;
 import sagan.search.support.SearchEntryBuilder;
 import sagan.search.types.SearchEntry;
 import sagan.search.types.SearchType;
@@ -20,7 +18,7 @@ import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Index;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.*;
@@ -29,7 +27,7 @@ import static org.mockito.Mockito.*;
 public class SearchServiceTests {
 
     private JestClient jestClient = mock(JestClient.class);
-    private ElasticSearchService searchService = new ElasticSearchService(jestClient, mock(SearchResultParser.class), new Gson());
+    private ElasticSearchService searchService = new ElasticSearchService(jestClient, mock(SearchResultParser.class), new ObjectMapper());
     private SearchEntry entry;
 
     @Before

@@ -5,6 +5,9 @@ import sagan.search.service.SearchResults;
 import sagan.search.service.SearchService;
 import sagan.search.types.SearchEntry;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UrlPathHelper;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @RestController
@@ -44,8 +49,10 @@ public class SearchServiceController {
     @JsonIgnoreProperties(ignoreUnknown = true)
     static class GenericSearchEntry extends SearchEntry {
 
+        Map<String, Object> unknown = new HashMap<>();
+
         private String type;
-        
+
         GenericSearchEntry() {
         }
 
@@ -57,6 +64,16 @@ public class SearchServiceController {
         @Override
         public String getType() {
             return type;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getUnknownFields() {
+            return unknown;
+        }
+
+        @JsonAnySetter
+        public void setUnknownField(String name, Object value) {
+            unknown.put(name, value);
         }
 
     }
