@@ -9,7 +9,7 @@
     <meta property="og:title" content="Spring Tools 4"/>
     <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}"/>
     <meta property="og:description"
-          content="Spring Tools 4 is the next generation of Spring tooling for your favorite coding environment. Largely rebuilt from scratch, it provides world-class support for developing Spring-based enterprise applications, whether you prefer Eclipse, Visual Studio Code, or Atom IDE."/>
+          content="Spring Tools 4 is the next generation of Spring tooling for your favorite coding environment. Largely rebuilt from scratch, it provides world-class support for developing Spring-based enterprise applications, whether you prefer Eclipse, Visual Studio Code, or Theia IDE."/>
 </head>
 <body>
 <div layout:fragment="header-container"></div>
@@ -23,7 +23,7 @@
                     <strong>Spring Tools 4</strong> is the next generation of Spring tooling for your favorite coding
                     environment.
                     Largely rebuilt from scratch, it provides world-class support for developing Spring-based
-                    enterprise applications, whether you prefer Eclipse, Visual Studio Code, or Atom IDE.
+                    enterprise applications, whether you prefer Eclipse, Visual Studio Code, or Theia IDE.
                 </p>
             </div>
         </section><!--end tools4-banner-->
@@ -63,20 +63,20 @@
                 <br/><br/>
                 <hr/>
                 <br/><br/>
-                <div th:if="${atom}" class='tools4--option'>
+                <div th:if="${theia}" class='tools4--option'>
                     <div class='sidebyside text'>
-                        <img class='icon-vsc' th:src="@{/img/tools4/icon-atom.png}"/>
-                        <h3>Spring Tools 4 <br/> for Atom IDE</h3>
+                        <img class='icon-vsc' th:src="@{/img/tools4/icon-theia.png}"/>
+                        <h3>Spring Tools 4 <br/> for Theia</h3>
                         <p>Free. Open source.</p>
-                        <a th:each="download : ${atom.downloads}"
+                        <a th:each="download : ${theia.downloads}"
                            class="btn" th:href="${download.downloadUrl}">
                             <strong>Spring Tools 4</strong>
                             <br/>
                             <span th:text="${download.label}">(for Operating System)</span>
                         </a>
                     </div>
-                    <img class='sidebyside' th:src="@{/img/tools4/screenshot-atom.png}"/>
-                </div><!--end tools4-atom-->
+                    <img class='sidebyside' th:src="@{/img/tools4/screenshot-theia.png}"/>
+                </div><!--end tools4-theia-->
             </div>
         </section><!--end tools4-options-->
         <section class="tools4--features center">
@@ -96,7 +96,7 @@
                         <div class='inner'>
                             <h3>IDE agnostic</h3>
                             <p>The all-new Spring Tools can be used in various coding environments, ranging from Eclipse
-                                as a full-featured integrated development environment to Visual Studio Code and Atom as
+                                as a full-featured integrated development environment to Visual Studio Code and Theia as
                                 lightweight code editors. Continue to use your preferred environment and add great
                                 Spring tooling to it.</p>
                         </div>
@@ -186,14 +186,14 @@
                             </h4>
                         </div>
                     </div>
-                    <div th:if="${atom}" class='tools4--try--option sidebyside'>
+                    <div th:if="${theia}" class='tools4--try--option sidebyside'>
                         <div class='inner'>
-                            <img class='icon-vsc' th:src="@{/img/tools4/icon-atom.png}"/>
-                            <h3>Spring Tools 4<br/>for Atom IDE</h3>
+                            <img class='icon-vsc' th:src="@{/img/tools4/icon-theia.png}"/>
+                            <h3>Spring Tools 4<br/>for Theia</h3>
                             <p>Free. Open source.</p>
-                            <h4 th:each="download : ${atom.downloads}">
+                            <h4 th:each="download : ${theia.downloads}">
                                 <a class='download-link' th:href="${download.downloadUrl}" th:utext="'Spring Tools 4 <br/>' + ${download.label}">
-                                    Spring Tools 4 <br/>as package for Atom</a>
+                                    Spring Tools 4 <br/>as package for Theia</a>
                             </h4>
                         </div>
                     </div>
