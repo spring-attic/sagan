@@ -137,4 +137,4 @@ INSERT INTO spring_tools_platform_downloads (spring_tools_platform_id, variant, 
 ('eclipse', 'macos', 'macOS 64-bit', 'http://download.springsource.com/release/STS4/4.1.1.RELEASE/dist/e4.10/spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-macosx.cocoa.x86_64.dmg'),
 ('eclipse', 'linux', 'Linux 64-bit', 'http://download.springsource.com/release/STS4/4.1.1.RELEASE/dist/e4.10/spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-linux.gtk.x86_64.tar.gz'),
 ('vscode', 'marketplace', 'VSCode Marketplace', 'https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack'),
-('theia', 'package', 'Package for Theia', 'https://registry.npmjs.org/@pivotal-tools/theia-spring-boot/-/theia-spring-boot-1.7.0.tgz');
+('theia', 'package', 'Package for Theia', 'https://registry.npmjs.org/@pivotal-tools/theia-spring-boot/-/theia-spring-boot-1.8.0.tgz');
