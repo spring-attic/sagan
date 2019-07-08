@@ -14,5 +14,5 @@ applications:
   services:
   - papertrail
   - sagan-db
-  - sagan-cache
+  - sagan-redis
   - sagan-search
