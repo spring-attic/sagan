@@ -107,7 +107,7 @@
                   <a class="twitter-timeline" href="'https://twitter.com/springcentral" data-widget-id="366969513482285056" data-screen-name="springcentral" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
                 </div>
                 <div th:unless="${#strings.isEmpty(profile.twitterUsername)}">
-                  <a class="twitter-timeline" href="'https://twitter.com/springcentral" data-widget-id="366969513482285056" th:attr="data-screen-name=${profile.twitterUsername}" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
+                  <a class="twitter-timeline" th:href="'https://twitter.com/' + ${profile.twitterUsername}" data-widget-id="366969513482285056" th:attr="data-screen-name=${profile.twitterUsername}" data-show-replies="false" width="250" data-chrome="nofooter transparent noheader noscrollbar" data-border-color="#ffffff"></a>
                 </div>
                 <script>
                   !function(d,s,id){
