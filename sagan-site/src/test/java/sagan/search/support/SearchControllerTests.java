@@ -21,8 +21,9 @@ import org.springframework.ui.ExtendedModelMap;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.*;
 
 public class SearchControllerTests {
 
@@ -35,7 +36,6 @@ public class SearchControllerTests {
     private List<SearchResult> entries = new ArrayList<>();
     private SearchForm searchForm = new SearchForm();
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
@@ -43,7 +43,7 @@ public class SearchControllerTests {
         SearchResult entry = new SearchResult("", "", "", "", "", "", "", "original search term");
         entries.add(entry);
         resultsPage = new PageImpl<>(entries);
-        given(searchService.search(anyString(), (Pageable) anyObject(), anyList())).willReturn(
+        given(searchService.search(anyString(), (Pageable) any(), anyList())).willReturn(
                 new SearchResults(resultsPage, Collections.<SearchFacet> emptyList()));
     }
 

@@ -1,5 +1,10 @@
 package sagan.projects.support;
 
+import sagan.projects.Project;
+import sagan.projects.ProjectPatchingService;
+import sagan.projects.ProjectRelease;
+import sagan.projects.ProjectRelease.ReleaseStatus;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,11 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-import sagan.projects.Project;
-import sagan.projects.ProjectPatchingService;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectRelease.ReleaseStatus;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -87,7 +88,7 @@ public class ProjectMetadataControllerTests {
         newProject.setRawBootConfig("newRawBootConfig");
         newProject.setRawOverview("newRawOverview");
         when(projectMetadataService.getProject(PROJECT_ID)).thenReturn(project);
-        when(projectMetadataService.save(Mockito.anyObject()))
+        when(projectMetadataService.save(Mockito.any()))
                 .thenAnswer(invocation -> invocation.getArguments()[0]);
 
         Project updatedProject = controller.updateProject(PROJECT_ID, newProject);

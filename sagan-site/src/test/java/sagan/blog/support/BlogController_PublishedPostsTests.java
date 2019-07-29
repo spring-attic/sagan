@@ -24,8 +24,8 @@ import org.springframework.ui.ExtendedModelMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.eq;
 
 public class BlogController_PublishedPostsTests {
 
@@ -39,8 +39,6 @@ public class BlogController_PublishedPostsTests {
     private BlogController controller;
     private DateFactory dateFactory = new DateFactory();
     private ExtendedModelMap model = new ExtendedModelMap();
-    private List<PostView> posts = new ArrayList<>();
-    private Page<PostView> page;
     private String viewName;
 
     @Before
@@ -50,10 +48,8 @@ public class BlogController_PublishedPostsTests {
 
         List<Post> posts = new ArrayList<>();
         posts.add(PostBuilder.post().title("post title").build());
-        Page<Post> postsPage = new PageImpl<>(posts, new PageRequest(TEST_PAGE, 10), 20);
+        Page<Post> postsPage = new PageImpl<>(posts, PageRequest.of(TEST_PAGE, 10), 20);
         Pageable testPageable = PageableFactory.forLists(TEST_PAGE);
-
-        page = new PageImpl<>(new ArrayList<>(), testPageable, 1);
 
         given(blogService.getPublishedPosts(eq(testPageable))).willReturn(postsPage);
         request.setServletPath("/blog");

@@ -64,16 +64,21 @@ public class QuestionsControllerTests {
 
         assertThat(questionsController.show(model), equalTo("questions/index"));
 
-        assertThat(((List<Question>) model.get("questions")).stream()
+        assertThat(extract(Question.class, "questions").stream()
                         .map(question -> question.title)
                         .collect(Collectors.toList()),
                 contains("Question 1", "Question 2")
         );
 
-        assertThat(((List<Project>) model.get("projects")).stream()
+        assertThat(extract(Project.class, "projects").stream()
                         .map(Project::getName)
                         .collect(Collectors.toList()),
                 contains("Spring Data", "Spring Framework")
         );
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> List<T> extract(Class<T> type, String name) {
+        return (List<T>) model.get(name);
     }
 }

@@ -15,7 +15,6 @@ import java.nio.charset.Charset;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 /**
@@ -63,7 +62,7 @@ public class DocsWebhookControllerTests {
                 new ClassPathResource("fixtures/webhooks/pingWebhook.json").getInputStream(), Charset.forName("UTF-8"))
 				.replaceAll("[\\n|\\r]","");;
 
-        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=9E629DCCF4472F600D048510354BE400B8EB25CB", "ping");
+        ResponseEntity<?> response = this.controller.processGuidesUpdate(payload, "sha1=9E629DCCF4472F600D048510354BE400B8EB25CB", "ping");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed ping event\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.gettingStartedGuides, never()).evictFromCache("test-guide");
@@ -75,7 +74,7 @@ public class DocsWebhookControllerTests {
                 new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
 				.replaceAll("[\\n|\\r]","");;
 
-        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push");
+        ResponseEntity<?> response = this.controller.processGuidesUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.gettingStartedGuides, times(1)).evictFromCache("test-guide");
@@ -87,7 +86,7 @@ public class DocsWebhookControllerTests {
                 new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
 				.replaceAll("[\\n|\\r]","");;
 
-        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push",
+        ResponseEntity<?> response = this.controller.processGuidesUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push",
                 "gs-test-guide");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
@@ -100,7 +99,7 @@ public class DocsWebhookControllerTests {
                 new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
 				.replaceAll("[\\n|\\r]","");
 
-        ResponseEntity response = this.controller.processTutorialsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push");
+        ResponseEntity<?> response = this.controller.processTutorialsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
         verify(this.tutorials, times(1)).evictFromCache("test-guide");
@@ -112,7 +111,7 @@ public class DocsWebhookControllerTests {
                 new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
 				.replaceAll("[\\n|\\r]","");;
 
-        ResponseEntity response = this.controller.processTutorialsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push",
+        ResponseEntity<?> response = this.controller.processTutorialsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push",
                 "gs-test-guide");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));
@@ -125,7 +124,7 @@ public class DocsWebhookControllerTests {
                 new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), Charset.forName("UTF-8"))
                 .replaceAll("[\\n|\\r]","");;
 
-        ResponseEntity response = this.controller.processTopicalsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98",
+        ResponseEntity<?> response = this.controller.processTopicalsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98",
                 "push", "top-test-guide");
         assertThat(response.getBody(), is("{ \"message\": \"Successfully processed update\" }\n"));
         assertThat(response.getStatusCode().value(), is(200));

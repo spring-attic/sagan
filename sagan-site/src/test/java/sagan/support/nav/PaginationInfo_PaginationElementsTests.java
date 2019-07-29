@@ -17,7 +17,7 @@ public class PaginationInfo_PaginationElementsTests {
 
     @Test
     public void givenOnePage_rendersCurrentElement() {
-        PageRequest pageRequest = new PageRequest(0, 10);
+        PageRequest pageRequest = PageRequest.of(0, 10);
         int itemCount = 3;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
 
@@ -28,7 +28,7 @@ public class PaginationInfo_PaginationElementsTests {
 
     @Test
     public void givenTwoPages_rendersCurrentElementAndPageTwo() {
-        PageRequest pageRequest = new PageRequest(0, 10);
+        PageRequest pageRequest = PageRequest.of(0, 10);
         int itemCount = 13;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
@@ -40,7 +40,7 @@ public class PaginationInfo_PaginationElementsTests {
 
     @Test
     public void givenThreePagesOnPageTwo_rendersCurrentElementAndPageTwo() {
-        PageRequest pageRequest = new PageRequest(1, 10);
+        PageRequest pageRequest = PageRequest.of(1, 10);
         int itemCount = 23;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
@@ -53,7 +53,7 @@ public class PaginationInfo_PaginationElementsTests {
 
     @Test
     public void givenTenPagesOnPageFive_rendersPreviousTwoPagesAndNextThree() {
-        PageRequest pageRequest = new PageRequest(4, 10);
+        PageRequest pageRequest = PageRequest.of(4, 10);
         int itemCount = 93;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
@@ -70,7 +70,7 @@ public class PaginationInfo_PaginationElementsTests {
 
     @Test
     public void alwaysRendersFirstAndLastPage() {
-        PageRequest pageRequest = new PageRequest(4, 10);
+        PageRequest pageRequest = PageRequest.of(4, 10);
         int itemCount = 93;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
@@ -83,7 +83,7 @@ public class PaginationInfo_PaginationElementsTests {
 
     @Test
     public void rendersEllipsesBetweenNonAdjacentPages() {
-        PageRequest pageRequest = new PageRequest(4, 10);
+        PageRequest pageRequest = PageRequest.of(4, 10);
         int itemCount = 93;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
@@ -96,7 +96,7 @@ public class PaginationInfo_PaginationElementsTests {
 
     @Test
     public void doesNotRenderEllipsesBetweenAdjacentPages() {
-        PageRequest pageRequest = new PageRequest(2, 10);
+        PageRequest pageRequest = PageRequest.of(2, 10);
         int itemCount = 63;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
@@ -116,7 +116,7 @@ public class PaginationInfo_PaginationElementsTests {
     public void rendersFirstSixPagesOnPageOne_givenEnoughNumberOfPages() throws Exception {
         int currentPageIndex = 0;
 
-        PageRequest pageRequest = new PageRequest(currentPageIndex, 10);
+        PageRequest pageRequest = PageRequest.of(currentPageIndex, 10);
         int itemCount = 133;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
@@ -137,7 +137,7 @@ public class PaginationInfo_PaginationElementsTests {
     public void rendersFirstSixPagesOnPageThree_givenEnoughNumberOfPages() throws Exception {
         int currentPageIndex = 2;
 
-        PageRequest pageRequest = new PageRequest(currentPageIndex, 10);
+        PageRequest pageRequest = PageRequest.of(currentPageIndex, 10);
         int itemCount = 133;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
@@ -158,7 +158,7 @@ public class PaginationInfo_PaginationElementsTests {
     public void rendersCurrentPage() throws Exception {
         int currentPageIndex = 2;
 
-        PageRequest pageRequest = new PageRequest(currentPageIndex, 10);
+        PageRequest pageRequest = PageRequest.of(currentPageIndex, 10);
         int itemCount = 133;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();

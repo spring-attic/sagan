@@ -16,13 +16,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import org.springframework.test.util.ReflectionTestUtils;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.*;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogService_ValidPostTests {
@@ -54,7 +53,7 @@ public class BlogService_ValidPostTests {
     public void setup() {
         given(dateFactory.now()).willReturn(now);
 
-        given(postRepository.save((Post) anyObject())).will(invocation -> {
+        given(postRepository.save((Post) any())).will(invocation -> {
             Post post = (Post) invocation.getArguments()[0];
             ReflectionTestUtils.setField(post, "id", 123L);
             return post;
@@ -74,18 +73,18 @@ public class BlogService_ValidPostTests {
 
     @Test
     public void postIsPersisted() {
-        verify(postRepository).save((Post) anyObject());
+        verify(postRepository).save((Post) any());
     }
 
     @Test
     public void creatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
-        verify(searchService).saveToIndex((SearchEntry) anyObject());
+        verify(searchService).saveToIndex((SearchEntry) any());
     }
 
     @Test
     public void blogIsSavedWhenSearchServiceIsDown() {
         reset(postRepository);
-        willThrow(SearchException.class).given(searchService).saveToIndex((SearchEntry) anyObject());
+        willThrow(SearchException.class).given(searchService).saveToIndex((SearchEntry) any());
         post = service.addPost(postForm, AUTHOR_USERNAME);
         verify(postRepository).save(post);
     }

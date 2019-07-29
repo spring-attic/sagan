@@ -1,18 +1,24 @@
 package sagan.rewrite.support;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.http.HttpStatus;
-import org.springframework.mock.web.*;
-import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
-import sagan.SiteApplication;
 import sagan.UrlRewriterFilterConfig;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.mock.web.MockFilterChain;
+import org.springframework.mock.web.MockFilterConfig;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.PassThroughFilterChain;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
