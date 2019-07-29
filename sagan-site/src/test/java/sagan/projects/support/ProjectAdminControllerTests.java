@@ -49,7 +49,6 @@ public class ProjectAdminControllerTests {
         releases.add(new ProjectRelease("1.2.3", ReleaseStatus.GENERAL_AVAILABILITY, false,
                 "http://example.com/1.2.3",
                 "http://example.com/1.2.3", "org.springframework", "spring-core"));
-        when(projectMetadataService.getProject("spring-framework")).thenReturn(project);
         List<Project> list = Arrays.asList(project);
         when(projectMetadataService.getProjects()).thenReturn(list);
         controller.list(model);
