@@ -1,7 +1,6 @@
 package sagan.renderer.github;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,22 +11,20 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sagan.renderer.RendererProperties;
-
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Base64Utils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
+import sagan.renderer.RendererProperties;
 
 /**
  * Client for the Github developer API
@@ -62,7 +59,7 @@ public class GithubClient {
 					.build();
 		}
 		else {
-			this.logger.warn("GitHub API access will be rate-limited at 60 req/hour");
+			logger.warn("GitHub API access will be rate-limited at 60 req/hour");
 			this.restTemplate = restTemplateBuilder.build();
 		}
 	}
@@ -117,7 +114,7 @@ public class GithubClient {
 		}
 	}
 
-	private Optional<String> findNextPageLink(ResponseEntity response) {
+	private Optional<String> findNextPageLink(ResponseEntity<?> response) {
 		List<String> links = response.getHeaders().get("Link");
 		if (links == null) {
 			return Optional.empty();

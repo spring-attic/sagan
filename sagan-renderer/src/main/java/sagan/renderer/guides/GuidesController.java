@@ -43,7 +43,7 @@ public class GuidesController {
 	}
 
 	@ExceptionHandler(GithubResourceNotFoundException.class)
-	public ResponseEntity resourceNotFound() {
+	public ResponseEntity<?> resourceNotFound() {
 		return ResponseEntity.notFound().build();
 	}
 

@@ -125,13 +125,6 @@ public class GuidesControllerTests {
 
 	@Test
 	public void fetchUnknownGuide() throws Exception {
-		Repository securingWeb = new Repository(15L, "gs-securing-web",
-				"spring-guides/gs-securing-web", "Securing Web :: Securing a Web Application",
-				"http://example.org/spring-guides/gs-securing-web",
-				"git://example.org/spring-guides/gs-securing-web.git",
-				"git@example.org:spring-guides/gs-securing-web.git",
-				"https://example.org/spring-guides/gs-securing-web.git",
-				null);
 		given(this.githubClient.fetchOrgRepository("spring-guides", "gs-rest-service"))
 				.willThrow(new GithubResourceNotFoundException("spring-guides", "gs-rest-service",
 						new HttpClientErrorException(HttpStatus.NOT_FOUND)));
