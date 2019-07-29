@@ -34,6 +34,7 @@ import org.springframework.validation.MapBindingResult;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
@@ -79,16 +80,21 @@ public class BlogAdminControllerTests {
                 Arrays.asList(new Post("published post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN)),
                 PageableFactory.forDashboard(1), 1);
 
-        given(blogService.getPublishedPosts(anyObject())).willReturn(published);
-        given(blogService.getDraftPosts(anyObject())).willReturn(drafts);
-        given(blogService.getScheduledPosts(anyObject())).willReturn(scheduled);
+        given(blogService.getPublishedPosts(any())).willReturn(published);
+        given(blogService.getDraftPosts(any())).willReturn(drafts);
+        given(blogService.getScheduledPosts(any())).willReturn(scheduled);
 
         ExtendedModelMap model = new ExtendedModelMap();
         controller.dashboard(model, 1);
 
-        assertThat(((Page<PostView>) model.get("drafts")).getContent().get(0).getTitle(), equalTo("draft post"));
-        assertThat(((Page<PostView>) model.get("scheduled")).getContent().get(0).getTitle(), equalTo("scheduled post"));
-        assertThat(((Page<PostView>) model.get("posts")).getContent().get(0).getTitle(), equalTo("published post"));
+        assertThat(extracted(model, "drafts").getContent().get(0).getTitle(), equalTo("draft post"));
+        assertThat(extracted(model, "scheduled").getContent().get(0).getTitle(), equalTo("scheduled post"));
+        assertThat(extracted(model, "posts").getContent().get(0).getTitle(), equalTo("published post"));
+    }
+
+    @SuppressWarnings("unchecked")
+    private Page<PostView> extracted(ExtendedModelMap model, String name) {
+        return (Page<PostView>) model.get(name);
     }
 
     @Test
@@ -141,7 +147,6 @@ public class BlogAdminControllerTests {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void attemptingToCreateADuplicatePostReturnsToEditForm() throws Exception {
         String username = "username";
 
@@ -172,7 +177,7 @@ public class BlogAdminControllerTests {
         Page<Post> posts = new PageImpl<>(
                 Arrays.asList(new Post("published post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN),
                         new Post("another published post", "other body", PostCategory.NEWS_AND_EVENTS, PostFormat.MARKDOWN)),
-                new PageRequest(page, pageSize, Sort.Direction.DESC, "id"), 2);
+                PageRequest.of(page, pageSize, Sort.Direction.DESC, "id"), 2);
         given(blogService.refreshPosts(page, pageSize)).willReturn(posts);
         String result = controller.refreshBlogPosts(page, pageSize);
         assertThat(result, equalTo("{page: 0, pageSize: 20, totalPages: 1, totalElements: 2}"));

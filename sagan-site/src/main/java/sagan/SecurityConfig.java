@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -153,7 +154,7 @@ class SecurityConfig {
         }
 
         private boolean isForceHttps() {
-            return !environment.acceptsProfiles(SaganProfiles.STANDALONE);
+            return !environment.acceptsProfiles(Profiles.of(SaganProfiles.STANDALONE));
         }
 
     }
@@ -207,7 +208,7 @@ class SecurityConfig {
         }
 
         private boolean isForceHttps() {
-            return !environment.acceptsProfiles(SaganProfiles.STANDALONE);
+            return !environment.acceptsProfiles(Profiles.of(SaganProfiles.STANDALONE));
         }
 
         @Bean

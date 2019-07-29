@@ -164,7 +164,7 @@ public class BlogService {
     }
 
     public Page<Post> refreshPosts(int page, int size) {
-        PageRequest pageRequest = new PageRequest(page, size, Sort.Direction.DESC, "id");
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.DESC, "id");
         Page<Post> posts = postRepository.findAll(pageRequest);
         for (Post post : posts) {
             postFormAdapter.refreshPost(post);

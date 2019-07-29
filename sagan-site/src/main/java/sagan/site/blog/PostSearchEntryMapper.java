@@ -7,6 +7,7 @@ import sagan.search.types.BlogPost;
 
 class PostSearchEntryMapper implements SearchEntryMapper<Post> {
 
+    @SuppressWarnings("unchecked")
     @Override
     public BlogPost map(Post post) {
         BlogPost entry = new BlogPost();

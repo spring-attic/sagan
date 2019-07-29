@@ -1,12 +1,13 @@
 package sagan.site.blog;
 
-import java.util.Date;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.PostFormat;
+
+import java.util.Date;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

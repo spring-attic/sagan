@@ -1,6 +1,7 @@
 package sagan.site.guides;
 
-import java.util.ArrayList;
+import sagan.site.renderer.GuideContent;
+
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
@@ -9,13 +10,13 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.yaml.snakeyaml.Yaml;
-import sagan.site.renderer.GuideContent;
 
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 abstract class AbstractGuide implements Guide {
 

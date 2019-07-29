@@ -41,7 +41,7 @@ public final class PostView {
         List<PostView> postViews = posts.getContent().stream()
                 .map(post -> of(post, dateFactory))
                 .collect(Collectors.toList());
-        PageRequest pageRequest = new PageRequest(posts.getNumber(), posts.getSize(), posts.getSort());
+        PageRequest pageRequest = PageRequest.of(posts.getNumber(), posts.getSize(), posts.getSort());
         return new PageImpl<>(postViews, pageRequest, posts.getTotalElements());
     }
 
