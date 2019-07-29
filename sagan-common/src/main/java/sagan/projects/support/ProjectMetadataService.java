@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjectMetadataService {
 
-	private static final Sort sortByDisplayOrderAndId = new Sort("displayOrder", "id");
+	private static final Sort sortByDisplayOrderAndId = Sort.by("displayOrder", "id");
 
     private ProjectMetadataRepository repository;
 

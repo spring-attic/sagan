@@ -62,11 +62,6 @@ github:
   access:
     token: ${GITHUB_ACCESS_TOKEN:}
 
-elasticsearch:
-  client:
-    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
-    index: ${ELASTICSEARCH_INDEX:sagan}
-
 logging:
   level:
     ROOT: WARN
@@ -106,9 +101,9 @@ spring:
       additional_paths:
         - ../sagan-client/src/
       additional_exclude: "**/*.js,**/*.css"
+  flyway:
+    locations: classpath:/db/migration, classpath:/db/dev
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
-flyway:
-  locations: classpath:/db/migration, classpath:/db/dev
 ---
 
 spring:
