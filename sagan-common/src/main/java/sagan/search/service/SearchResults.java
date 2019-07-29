@@ -25,6 +25,7 @@ public class SearchResults {
         this(null, null);
     }
 
+    @SuppressWarnings("deprecation")
     public SearchResults(Page<SearchResult> page, List<SearchFacet> facets) {
         if (page == null) {
             this.page = new SearchPage(Collections.emptyList());
@@ -32,7 +33,8 @@ public class SearchResults {
             if (page.getSize() < 1) {
                 this.page = new SearchPage(page.getContent());
             } else {
-                this.page = new SearchPage(page.getContent(), PageRequest.of(page.getNumber(), page.getSize()), page
+                // N.B. need to use deprecated constructor here while search service is using old version
+                this.page = new SearchPage(page.getContent(), new PageRequest(page.getNumber(), page.getSize()), page
                         .getTotalElements());
             }
         }
@@ -88,8 +90,10 @@ public class SearchResults {
             return this;
         }
 
+        @SuppressWarnings("deprecation")
         public SearchPage build() {
-            return new SearchPage(this.content, PageRequest.of(page, size), total);
+            // N.B. need to use deprecated constructor here while search service is using old version
+            return new SearchPage(this.content, new PageRequest(page, size), total);
         }
     }
 
