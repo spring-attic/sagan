@@ -1,9 +1,5 @@
 package sagan;
 
-import sagan.search.service.SearchService;
-
-import org.springframework.core.env.ConfigurableEnvironment;
-
 /**
  * Spring profiles under which a {@link SaganApplication} can be run. If no profiles are
  * specified, the {@link #STANDALONE} profile will be implicitly activated, making
@@ -57,9 +53,4 @@ public final class SaganProfiles {
      */
     public static final String STANDALONE = "standalone";
 
-    /**
-     * A profile that activates the internal {@link SearchService} based on Jest.
-     *
-     */
-    public static final String JEST = "jest";
 }

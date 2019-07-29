@@ -37,8 +37,6 @@ dependencyManagement {
 	}
 }
 
-ext['elasticsearch.version'] = '1.7.1'
-
 dependencies {
 
     compile 'org.springframework.social:spring-social-github:1.0.0.M4'
@@ -48,9 +46,6 @@ dependencies {
 
     compile 'org.apache.httpcomponents:httpclient'
 
-    compile 'org.elasticsearch:elasticsearch'
-    compile 'io.searchbox:jest:0.1.7'
-    compile 'commons-codec:commons-codec' // needed by Jest's HTTP client?
     compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
     compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 

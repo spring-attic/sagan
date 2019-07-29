@@ -1,23 +1,22 @@
 package sagan.projects.support;
 
+import sagan.projects.Project;
 import sagan.site.guides.GettingStartedGuides;
 import sagan.site.guides.Topicals;
 import sagan.site.guides.Tutorials;
-import sagan.projects.Project;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.Section;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.google.common.base.Joiner;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -72,7 +71,7 @@ class ProjectsController {
 
     private String stackOverflowUrl(Project project) {
         return "https://stackoverflow.com/questions/tagged/"
-                + Joiner.on("+or+").join(project.getStackOverflowTagList());
+                + project.getStackOverflowTagList().stream().collect(Collectors.joining("+or+"));
     }
 
 }

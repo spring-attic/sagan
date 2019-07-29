@@ -16,20 +16,23 @@
 
 package sagan.projects.support;
 
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.projects.ProjectRelease.ReleaseStatus;
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectRelease.ReleaseStatus;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
@@ -49,6 +52,9 @@ public class BadgeControllerTest {
     private BadgeController controller;
     private Project project;
     private List<ProjectRelease> releases = new ArrayList<>();
+
+    public BadgeControllerTest() throws FileNotFoundException {
+    }
 
     @Before
     public void setUp() throws Exception {

@@ -16,8 +16,17 @@
 
 package sagan.projects.support;
 
-import java.awt.*;
+import sagan.projects.Project;
+import sagan.projects.ProjectRelease;
+import sagan.projects.ProjectRelease.ReleaseStatus;
+import sagan.projects.support.BadgeSvg.GraphicElement;
+import sagan.projects.support.BadgeSvg.Path;
+
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -26,20 +35,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 import org.xmlbeam.XBProjector;
 import org.xmlbeam.XBProjector.Flags;
 import org.xmlbeam.config.DefaultXMLFactoriesConfig;
 import org.xmlbeam.config.DefaultXMLFactoriesConfig.NamespacePhilosophy;
 
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectRelease.ReleaseStatus;
-import sagan.projects.support.BadgeSvg.GraphicElement;
-import sagan.projects.support.BadgeSvg.Path;
-
-import com.google.common.io.Resources;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+import org.springframework.util.ResourceUtils;
 
 /**
  * Service to generate SVG badges.
@@ -49,13 +52,16 @@ import com.google.common.io.Resources;
 @Service
 public class VersionBadgeService {
 
-    private final URL PRERELEASE_TEMPLATE = Resources.getResource("badge/milestone.svg");
-    private final URL GENERAL_AVAILABILITY_TEMPLATE = Resources.getResource("badge/release.svg");
-    private final URL SNAPSHOT_TEMPLATE = Resources.getResource("badge/snapshot.svg");
-    private final URL VERDANA_FONT = Resources.getResource("badge/Verdana.ttf");
+    private final URL PRERELEASE_TEMPLATE = ResourceUtils.getURL("classpath:badge/milestone.svg");
+    private final URL GENERAL_AVAILABILITY_TEMPLATE = ResourceUtils.getURL("classpath:badge/release.svg");
+    private final URL SNAPSHOT_TEMPLATE = ResourceUtils.getURL("classpath:badge/snapshot.svg");
+    private final URL VERDANA_FONT = ResourceUtils.getURL("classpath:badge/Verdana.ttf");
     private final BufferedImage DUMMY = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
     private Graphics graphics;
     private XBProjector xbProjector;
+
+    public VersionBadgeService() throws FileNotFoundException {
+    }
 
     @PostConstruct
     public void postConstruct() throws Exception {
