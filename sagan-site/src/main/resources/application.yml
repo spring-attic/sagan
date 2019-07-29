@@ -15,10 +15,6 @@ info:
     start: ${vcap.application.start:N/A}
 
 spring:
-  main:
-    sources: sagan.SiteApplication
-  thymeleaf:
-    mode: LEGACYHTML5
   jpa:
     hibernate:
       ddl_auto: none

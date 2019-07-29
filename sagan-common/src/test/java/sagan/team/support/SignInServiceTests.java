@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 import org.mockito.BDDMockito.BDDMyOngoingStubbing;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +17,8 @@ import org.springframework.web.client.RestOperations;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -77,7 +76,7 @@ public class SignInServiceTests {
         BDDMyOngoingStubbing<ResponseEntity<Void>> expectedResult =
                 given(restOperations.getForEntity(anyString(), argThat(new ArgumentMatcher<Class<Void>>() {
                     @Override
-                    public boolean matches(Object argument) {
+                    public boolean matches(Class<Void> argument) {
                         return true;
                     }
                 }), anyString(), anyString()));

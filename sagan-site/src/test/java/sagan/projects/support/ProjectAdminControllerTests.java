@@ -4,6 +4,7 @@ import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.ProjectRelease.ReleaseStatus;
 import sagan.projects.ProjectSample;
+import sagan.site.blog.PostContentRenderer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,14 +15,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import sagan.site.blog.PostContentRenderer;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import org.springframework.ui.ExtendedModelMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Matchers.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

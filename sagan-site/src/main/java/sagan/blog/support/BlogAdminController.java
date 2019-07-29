@@ -103,7 +103,7 @@ class BlogAdminController {
             model.addAttribute("formats", PostFormat.values());
             return "admin/blog/new";
         } else {
-            MemberProfile memberProfile = teamRepository.findById(new Long(principal.getName()));
+            MemberProfile memberProfile = teamRepository.findById(new Long(principal.getName())).get();
             try {
                 Post post = service.addPost(postForm, memberProfile.getUsername());
                 PostView postView = PostView.of(post, dateFactory);

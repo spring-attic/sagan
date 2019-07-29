@@ -37,7 +37,7 @@ public class ProjectMetadataService {
     }
 
     public Project getProject(String id) {
-        return repository.findOne(id);
+        return repository.findById(id).orElse(null);
     }
 
     public Project save(Project project) {
@@ -45,6 +45,6 @@ public class ProjectMetadataService {
     }
 
     public void delete(String id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 }

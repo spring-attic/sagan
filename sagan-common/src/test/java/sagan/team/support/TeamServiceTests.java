@@ -4,11 +4,13 @@ import sagan.search.service.SearchService;
 import sagan.search.types.SitePage;
 import sagan.team.MemberProfile;
 
+import java.util.Optional;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,7 +38,7 @@ public class TeamServiceTests {
     @Test
     public void updateMemberProfileSavesProfileToSearchIndex() {
         MemberProfile savedProfile = new MemberProfile();
-        given(teamRepository.findById(1234L)).willReturn(savedProfile);
+        given(teamRepository.findById(1234L)).willReturn(Optional.of(savedProfile));
 
         SitePage searchEntry = new SitePage();
         given(mapper.map(savedProfile)).willReturn(searchEntry);
@@ -48,7 +50,7 @@ public class TeamServiceTests {
     @Test
     public void updateMemberProfileUpdatesAvatarUrlFromGravatarEmail() {
         MemberProfile savedProfile = new MemberProfile();
-        given(teamRepository.findById(1234L)).willReturn(savedProfile);
+        given(teamRepository.findById(1234L)).willReturn(Optional.of(savedProfile));
 
         SitePage searchEntry = new SitePage();
         given(mapper.map(savedProfile)).willReturn(searchEntry);
@@ -64,7 +66,7 @@ public class TeamServiceTests {
     public void updateMemberProfileDoesNotUpdateAvatarUrlIfGravatarEmailIsEmpty() {
         MemberProfile savedProfile = new MemberProfile();
         savedProfile.setAvatarUrl("http://example.com/image.png");
-        given(teamRepository.findById(1234L)).willReturn(savedProfile);
+        given(teamRepository.findById(1234L)).willReturn(Optional.of(savedProfile));
 
         SitePage searchEntry = new SitePage();
         given(mapper.map(savedProfile)).willReturn(searchEntry);

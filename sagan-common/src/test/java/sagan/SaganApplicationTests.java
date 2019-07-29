@@ -6,11 +6,12 @@ import org.junit.Test;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 
-import static org.springframework.util.StringUtils.arrayToCommaDelimitedString;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.core.env.AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME;
+import static org.springframework.util.StringUtils.arrayToCommaDelimitedString;
 import static sagan.SaganProfiles.*;
 
 public class SaganApplicationTests {
@@ -24,8 +25,8 @@ public class SaganApplicationTests {
     public void unknownProfileSpecified() {
         activateProfiles("bogus");
         runApp();
-        assertThat(runApp().getEnvironment().acceptsProfiles(STANDALONE), is(true));
-        assertThat(runApp().getEnvironment().acceptsProfiles("bogus"), is(true));
+        assertThat(runApp().getEnvironment().acceptsProfiles(Profiles.of(STANDALONE)), is(true));
+        assertThat(runApp().getEnvironment().acceptsProfiles(Profiles.of("bogus")), is(true));
     }
 
     @Test(expected = IllegalStateException.class)
@@ -37,22 +38,22 @@ public class SaganApplicationTests {
     @Test
     public void stagingSpecified() {
         activateProfiles(STAGING);
-        assertThat(runApp().getEnvironment().acceptsProfiles(CLOUDFOUNDRY), is(true));
+        assertThat(runApp().getEnvironment().acceptsProfiles(Profiles.of(CLOUDFOUNDRY)), is(true));
     }
 
     @Test
     public void productionSpecified() {
         activateProfiles(PRODUCTION);
-        assertThat(runApp().getEnvironment().acceptsProfiles(CLOUDFOUNDRY), is(true));
+        assertThat(runApp().getEnvironment().acceptsProfiles(Profiles.of(CLOUDFOUNDRY)), is(true));
     }
 
     @Test
     public void noProfileSpecified() {
         // activateProfiles(...);
         Environment env = runApp().getEnvironment();
-        assertThat(env.acceptsProfiles(env.getDefaultProfiles()), is(false));
-        assertThat(env.acceptsProfiles(CLOUDFOUNDRY), is(false));
-        assertThat(env.acceptsProfiles(STANDALONE), is(true));
+        assertThat(env.acceptsProfiles(Profiles.of(env.getDefaultProfiles())), is(false));
+        assertThat(env.acceptsProfiles(Profiles.of(CLOUDFOUNDRY)), is(false));
+        assertThat(env.acceptsProfiles(Profiles.of(STANDALONE)), is(true));
     }
 
     @After

@@ -25,8 +25,6 @@ dependencyManagement {
 	}
 }
 
-ext['elasticsearch.version'] = '1.7.1'
-
 dependencies {
     compile project(':sagan-common')
     compile project(':sagan-client')
@@ -43,10 +41,7 @@ dependencies {
     // Thymeleaf is used as the template engine for serving HTML
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
-    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
-
-    // nekohtml is required for thymeleaf's LEGACYHTML5 mode
-    runtime 'net.sourceforge.nekohtml:nekohtml'
+    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
     // for use in generating blog atom feeds
     compile 'com.rometools:rome:1.12.0'

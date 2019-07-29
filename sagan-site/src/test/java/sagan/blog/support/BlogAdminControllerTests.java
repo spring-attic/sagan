@@ -1,7 +1,5 @@
 package sagan.blog.support;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
 import sagan.blog.PostCategory;
@@ -16,26 +14,28 @@ import sagan.team.support.TeamRepository;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.validation.MapBindingResult;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogAdminControllerTests {
@@ -112,7 +112,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(member);
+        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
         PostForm postForm = new PostForm();
 
         given(blogService.addPost(eq(postForm), anyString())).willReturn(TEST_POST);
@@ -127,7 +127,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(member);
+        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
 
         PostForm postForm = new PostForm();
         postForm.setTitle("title");
@@ -148,7 +148,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(member);
+        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
 
         PostForm postForm = new PostForm();
         postForm.setTitle("title");

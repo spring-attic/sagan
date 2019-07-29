@@ -1,6 +1,6 @@
 package sagan;
 
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 public class ThymeleafViewResolverCustomizer {
 

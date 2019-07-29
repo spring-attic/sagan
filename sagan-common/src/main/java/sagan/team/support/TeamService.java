@@ -3,13 +3,15 @@ package sagan.team.support;
 import sagan.search.service.SearchService;
 import sagan.team.MemberProfile;
 
+import java.security.MessageDigest;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.crypto.codec.Hex;
+import org.springframework.security.crypto.codec.Utf8;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -35,7 +37,7 @@ public class TeamService {
     }
 
     public MemberProfile fetchMemberProfile(Long id) {
-        return teamRepository.findById(id);
+        return teamRepository.findById(id).orElse(null);
     }
 
     public MemberProfile fetchMemberProfileUsername(String username) {
@@ -108,9 +110,13 @@ public class TeamService {
 
     private void updateAvatarUrlwithGravatar(MemberProfile profile) {
         if (!StringUtils.isEmpty(profile.getGravatarEmail())) {
-            Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-            String hashedEmail = encoder.encodePassword(profile.getGravatarEmail(), null);
-            profile.setAvatarUrl(String.format("https://gravatar.com/avatar/%s", hashedEmail));
+            try {
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                String hashedEmail = new String(Hex.encode(md.digest(Utf8.encode(profile.getGravatarEmail()))));
+                profile.setAvatarUrl(String.format("https://gravatar.com/avatar/%s", hashedEmail));
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
         }
     }
 }

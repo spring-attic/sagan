@@ -59,7 +59,7 @@ public class BlogService {
     // Query methods
 
     public Post getPost(Long postId) {
-        Post post = postRepository.findOne(postId);
+        Post post = postRepository.findById(postId).orElse(null);
         if (post == null) {
             throw new PostNotFoundException(postId);
         }

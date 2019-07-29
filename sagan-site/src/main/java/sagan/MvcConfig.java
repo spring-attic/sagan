@@ -1,14 +1,16 @@
 package sagan;
 
-import java.io.IOException;
-import java.util.Properties;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.StaticPagePathFinder;
 import sagan.support.nav.Navigation;
+
+import java.io.IOException;
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
 import org.springframework.web.servlet.resource.VersionResourceResolver;
@@ -39,7 +41,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
  * Site-wide MVC infrastructure configuration. See also {@link SiteApplication} where certain
  * additional web infrastructure is configured.
  */
-abstract class MvcConfig extends WebMvcConfigurerAdapter {
+abstract class MvcConfig implements WebMvcConfigurer {
 
 	@Autowired
 	private StaticPagePathFinder staticPagePathFinder;
