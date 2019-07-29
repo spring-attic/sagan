@@ -34,10 +34,8 @@ dependencies {
 	compile 'com.jayway.jsonpath:json-path'
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-data-redis"
-    compile "org.springframework.boot:spring-boot-starter-security"
+    compile 'org.springframework.boot:spring-boot-starter-oauth2-client'
     compile "org.springframework.boot:spring-boot-devtools"
-    compile "org.springframework.security:spring-security-acl"
-    compile "org.springframework.security:spring-security-oauth2-client"
 
     // Thymeleaf is used as the template engine for serving HTML
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
