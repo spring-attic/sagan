@@ -18,22 +18,14 @@ spring:
   jpa:
     hibernate:
       ddl_auto: none
-
-security:
-  basic:
-    enabled: false
-  require_ssl: false
-  ignored: 
-    - /lib/**
-    - /css/**
-    - /font-custom/**
-    - /img/**
-    - /500
-    - /404
-  headers:
-    hsts: domain
-  user:
-    password: ${ADMIN_PASSWORD:}
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+           scope: read:org,read:user
+           client-id: ${GITHUB_CLIENT_ID:fb06c006c2ed62fe9e8b}
+           client-secret: ${GITHUB_CLIENT_SECRET:164264e3f6d70c7c21713b7fa64225cb8d6107b2}
 
 github:
 

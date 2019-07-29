@@ -1,8 +1,6 @@
 package sagan;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Map;
 
 import javax.servlet.Filter;
@@ -16,18 +14,18 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.Authentication;
@@ -63,8 +61,13 @@ class SecurityConfig {
     static final String SIGNIN_SUCCESS_PATH = "/signin/success";
 
     @Configuration
-    @Order(Ordered.LOWEST_PRECEDENCE - 100)
+    @Order(-10)
     protected static class SigninAuthenticationConfig extends WebSecurityConfigurerAdapter {
+
+        @Override
+        public void configure(WebSecurity web) throws Exception {
+            web.ignoring().antMatchers("/lib/**", "/css/**", "/font-custom/**", "/img/**", "/500", "/404");
+        }
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -125,25 +128,19 @@ class SecurityConfig {
 
         private AuthenticationManager basicAuthenticationManager() {
             RestOperations rest = new RestTemplateBuilder().build();
-            URI memberUrl;
-            URI userUrl;
-            try {
-                memberUrl = new URI(IS_MEMBER_URL);
-                userUrl = new URI(USER_URL);
-            } catch (URISyntaxException e) {
-                throw new IllegalStateException(e);
-            }
             return authentication -> {
-                @SuppressWarnings("rawtypes")
-                ResponseEntity<Map> userResponse = rest.exchange(RequestEntity.get(userUrl).header(
+                HttpHeaders headers = new HttpHeaders();
+                headers.add(
                         HttpHeaders.AUTHORIZATION, "Bearer "
-                                + authentication.getName()).build(), Map.class);
+                                + authentication.getName());
+                @SuppressWarnings("rawtypes")
+                ResponseEntity<Map> userResponse = rest.exchange(USER_URL, HttpMethod.GET, new HttpEntity<>(headers),
+                        Map.class);
                 @SuppressWarnings("unchecked")
                 Map<String, Object> user = userResponse.getBody();
                 @SuppressWarnings("rawtypes")
-                ResponseEntity<Map> response = rest.exchange(IS_MEMBER_URL, HttpMethod.GET, RequestEntity.get(memberUrl)
-                        .header(HttpHeaders.AUTHORIZATION, "Bearer "
-                                + authentication.getName()).build(), Map.class, gitHubTeamId, user.get("login"));
+                ResponseEntity<Map> response = rest.exchange(IS_MEMBER_URL, HttpMethod.GET, new HttpEntity<>(headers),
+                        Map.class, gitHubTeamId, user.get("login"));
                 if (!response.getStatusCode().is2xxSuccessful()) {
                     throw new BadCredentialsException("Wrong team");
                 }
@@ -176,7 +173,8 @@ class SecurityConfig {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             configureHeaders(http.headers());
-            http.requestMatchers().antMatchers("/admin/**", "/signout").and()
+            http.requestMatchers().antMatchers("/login/**", "/admin/**", "/signout").and()
+                    .anonymous().disable()
                     .addFilterAfter(new OncePerRequestFilter() {
 
                         // TODO this filter needs to be removed once basic auth is removed
@@ -203,21 +201,17 @@ class SecurityConfig {
         @Bean
         public OAuth2UserService<OAuth2UserRequest, OAuth2User> authenticationProvider() {
             RestOperations rest = new RestTemplateBuilder().build();
-            URI memberUrl;
-            try {
-                memberUrl = new URI(IS_MEMBER_URL);
-            } catch (URISyntaxException e) {
-                throw new IllegalStateException(e);
-            }
             return new DefaultOAuth2UserService() {
                 @Override
                 public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
                     OAuth2User user = super.loadUser(userRequest);
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.add(
+                            HttpHeaders.AUTHORIZATION, "Bearer "
+                                    + userRequest.getAccessToken().getTokenValue());
                     @SuppressWarnings("rawtypes")
-                    ResponseEntity<Map> response = rest.exchange(IS_MEMBER_URL, HttpMethod.GET, RequestEntity.get(
-                            memberUrl)
-                            .header(HttpHeaders.AUTHORIZATION, "Bearer "
-                                    + userRequest.getAccessToken().getTokenValue()).build(), Map.class, gitHubTeamId,
+                    ResponseEntity<Map> response = rest.exchange(IS_MEMBER_URL, HttpMethod.GET, new HttpEntity<>(
+                            headers), Map.class, gitHubTeamId,
                             user.getName());
                     if (!response.getStatusCode().is2xxSuccessful()) {
                         throw new BadCredentialsException("Wrong team");

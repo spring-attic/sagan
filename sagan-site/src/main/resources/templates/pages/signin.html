@@ -19,7 +19,7 @@
                 <div class="admin-login--title" th:unless="${param.error}">
                   Please sign in with Github to access the admin pages.
                 </div>
-                    <form action="/signin/github" th:action="@{/signin/github}"
+                    <form action="/login/oauth2/code/github" th:action="@{/login/oauth2/code/github}"
                         method="post">
                         <button type="submit" class="btn btn-black">
                     <i class="icon-github"></i>
