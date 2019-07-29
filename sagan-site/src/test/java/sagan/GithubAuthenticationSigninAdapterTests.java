@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -24,8 +24,8 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -54,8 +54,10 @@ public class GithubAuthenticationSigninAdapterTests {
     @Test
     public void signInSunnyDay() {
         MemberProfile newMember = new MemberProfile();
+        newMember.setUsername("dsyer");
         given(signInService.getOrCreateMemberProfile(anyLong(), any(GitHub.class))).willReturn(newMember);
         given(connection.getDisplayName()).willReturn("dsyer");
+        given(connection.getApi()).willReturn(Mockito.mock(GitHub.class));
         given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willReturn(true);
 
         adapter.signIn("12345", connection, new ServletWebRequest(new MockHttpServletRequest()));
@@ -68,17 +70,14 @@ public class GithubAuthenticationSigninAdapterTests {
     @Test
     public void signInFailure() {
         given(connection.getDisplayName()).willReturn("dsyer");
-        given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willReturn(false);
 
         expectedException.expect(BadCredentialsException.class);
         adapter.signIn("12345", connection, new ServletWebRequest(new MockHttpServletRequest()));
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void signInFailureAfterRestException() {
         given(connection.getDisplayName()).willReturn("dsyer");
-        given(signInService.isSpringMember(eq("dsyer"), any(GitHub.class))).willThrow(RestClientException.class);
         expectedException.expect(BadCredentialsException.class);
         adapter.signIn("12345", connection, new ServletWebRequest(new MockHttpServletRequest()));
     }
