@@ -41,6 +41,8 @@ dependencies {
     // Thymeleaf is used as the template engine for serving HTML
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
+    // TODO: this is deprecated. Need to remove it and replace (https://github.com/ultraq/thymeleaf-layout-dialect/issues/95)
+    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
     // for use in generating blog atom feeds
