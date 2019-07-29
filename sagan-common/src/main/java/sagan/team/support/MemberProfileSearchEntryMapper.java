@@ -1,12 +1,14 @@
 package sagan.team.support;
 
-import org.springframework.stereotype.Component;
 import sagan.search.SearchEntryMapper;
 import sagan.search.types.SitePage;
 import sagan.team.MemberProfile;
 
+import org.springframework.stereotype.Component;
+
 @Component
 class MemberProfileSearchEntryMapper implements SearchEntryMapper<MemberProfile> {
+    @SuppressWarnings("unchecked")
     @Override
     public SitePage map(MemberProfile profile) {
         SitePage entry = new SitePage();

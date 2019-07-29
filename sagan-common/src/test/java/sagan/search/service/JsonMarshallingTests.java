@@ -27,7 +27,7 @@ public class JsonMarshallingTests {
 
     @Test
     public void testMarshal() throws Exception {
-        Page<SearchResult> page = new PageImpl<>(Arrays.asList(new SearchResult("0000", "foo", "bar", "", "/foo", "text", "", "foo")), new PageRequest(3, 10), 41);
+        Page<SearchResult> page = new PageImpl<>(Arrays.asList(new SearchResult("0000", "foo", "bar", "", "/foo", "text", "", "foo")), PageRequest.of(3, 10), 41);
         SearchResults results = new SearchResults(page, Collections.emptyList());
         String json = mapper.writeValueAsString(results);
         // System.err.println(json);

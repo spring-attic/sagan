@@ -1,13 +1,5 @@
 package sagan.tools.support;
 
-import java.util.List;
-
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 import sagan.support.Fixtures;
 import sagan.support.cache.CachedRestClient;
 import sagan.tools.DownloadLink;
@@ -15,14 +7,21 @@ import sagan.tools.EclipseVersion;
 import sagan.tools.ToolSuiteDownloads;
 import sagan.tools.ToolSuitePlatform;
 
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 /**
@@ -45,7 +44,7 @@ public class ToolsServiceTests {
         XmlMapper serializer = new XmlMapper();
         service = new ToolsService(restClient, restTemplate, serializer);
         String responseXml = Fixtures.load("/fixtures/tools/sts_downloads.xml");
-        when(restClient.get(eq(restTemplate), anyString(), (Class<String>) anyObject())).thenReturn(responseXml);
+        when(restClient.get(eq(restTemplate), anyString(), (Class<String>) any())).thenReturn(responseXml);
     }
 
     @Test

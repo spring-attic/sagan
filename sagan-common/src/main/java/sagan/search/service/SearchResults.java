@@ -32,7 +32,7 @@ public class SearchResults {
             if (page.getSize() < 1) {
                 this.page = new SearchPage(page.getContent());
             } else {
-                this.page = new SearchPage(page.getContent(), new PageRequest(page.getNumber(), page.getSize()), page
+                this.page = new SearchPage(page.getContent(), PageRequest.of(page.getNumber(), page.getSize()), page
                         .getTotalElements());
             }
         }
@@ -89,7 +89,7 @@ public class SearchResults {
         }
 
         public SearchPage build() {
-            return new SearchPage(this.content, new PageRequest(page, size), total);
+            return new SearchPage(this.content, PageRequest.of(page, size), total);
         }
     }
 

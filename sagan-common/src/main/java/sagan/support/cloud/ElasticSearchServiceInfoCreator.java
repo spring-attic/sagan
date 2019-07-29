@@ -14,6 +14,7 @@ public class ElasticSearchServiceInfoCreator extends CloudFoundryServiceInfoCrea
     @Override
     public ElasticSearchServiceInfo createServiceInfo(Map<String, Object> serviceData) {
         String id = (String) serviceData.get("name");
+        @SuppressWarnings("unchecked")
         Map<String, Object> credentials = (Map<String, Object>) serviceData.get("credentials");
 
         String uri = getStringFromCredentials(credentials, "uri");
