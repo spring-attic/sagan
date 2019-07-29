@@ -59,6 +59,9 @@
             <li th:class="${@uih.navClass(navSection?:'','services')}">
               <a th:href="@{/services}" >Training & Certification</a>
             </li>
+            <li sec:authorize="isFullyAuthenticated()" th:class="${@uih.navClass(navSection?:'','signout')}">
+              <form class="form-inline" th:action="@{/logout}" method="post"><button type="submit" class="btn">Sign out</button></form>
+            </li>
             <li class="navbar-link nav-search js-nav-search">
               <a>
                 <i class="icon-search navbar-search--icon js-search-input-open"></i>
@@ -124,9 +127,6 @@
             <a href="https://pivotal.io/privacy-policy">Privacy</a> &bullet;
             <a th:href="@{/trademarks}">Trademark Guidelines</a> 
             <div id="teconsent" style='display:inline-block;'></div> 
-            <span id='authentication' sec:authorize="isFullyAuthenticated()">
-              [<a th:href="@{/signout}">Sign out</a>]
-            </span>
           </div>
         </div>
       </div>
