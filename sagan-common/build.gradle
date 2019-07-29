@@ -1,15 +1,5 @@
-buildscript {
-	ext.springRepo = 'https://repo.spring.io/libs-release'
-	repositories {
-		mavenCentral()
-		maven { url springRepo }
-	}
-	dependencies {
-		classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.18.RELEASE'
-	}
-}
-
 plugins {
+	id 'org.springframework.boot' version '2.1.6.RELEASE'
 	id 'java'
 }
 
@@ -21,7 +11,7 @@ sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
-	maven { url springRepo }
+	maven { url 'https://repo.spring.io/libs-release' }
 }
 
 sourceSets {
@@ -33,7 +23,7 @@ sourceSets {
 
 dependencyManagement {
 	imports {
-		mavenBom("org.springframework.boot:spring-boot-dependencies:1.5.18.RELEASE")
+		mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.6.RELEASE")
 	}
 }
 

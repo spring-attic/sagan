@@ -1,19 +1,11 @@
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.18.RELEASE'
-	}
-}
-
 plugins {
+	id 'org.springframework.boot' version '2.1.6.RELEASE'
 	id 'java'
 	id "org.asciidoctor.convert" version "1.5.3"
 	id "com.gorylenko.gradle-git-properties" version "1.5.2"
 }
 
-apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 group = 'io.spring.sagan'
 version = "1.0.0.BUILD-SNAPSHOT"
@@ -23,18 +15,13 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	set('springCloudVersion', 'Edgware.SR5')
-}
-
-springBoot {
-    mainClass = 'sagan.SiteApplication'
-    requiresUnpack = ['org.jruby:jruby-complete', 'org.asciidoctor:asciidoctorj']
+bootJar {
+	mainClassName = 'sagan.SiteApplication'
 }
 
 dependencyManagement {
 	imports {
-		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Edgware.SR5")
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Greenwich.SR1")
 	}
 }
 
