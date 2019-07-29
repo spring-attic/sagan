@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.6.RELEASE' apply false
-	id 'java'
+    id 'org.springframework.boot' version '2.1.6.RELEASE' apply false
+    id 'java'
 }
 
 apply plugin: "io.spring.dependency-management"
@@ -10,8 +10,8 @@ version = "1.0.0.BUILD-SNAPSHOT"
 sourceCompatibility = '1.8'
 
 repositories {
-	mavenCentral()
-	maven { url 'https://repo.spring.io/libs-release' }
+    mavenCentral()
+    maven { url 'https://repo.spring.io/libs-release' }
 }
 
 sourceSets {
@@ -22,17 +22,16 @@ sourceSets {
 }
 
 dependencyManagement {
-	imports {
-		mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.6.RELEASE")
-	}
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.6.RELEASE")
+    }
 }
 
 dependencies {
 
-    compile 'org.springframework.social:spring-social-github:1.0.0.M4'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-	compile 'org.springframework.boot:spring-boot-starter-validation'
-	compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-validation'
+    compile 'org.springframework.boot:spring-boot-starter-security'
 
     compile 'org.apache.httpcomponents:httpclient'
 

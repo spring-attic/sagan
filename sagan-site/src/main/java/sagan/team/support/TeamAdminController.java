@@ -5,10 +5,6 @@ import sagan.team.MemberProfile;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
-import org.springframework.social.github.api.GitHub;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,14 +23,11 @@ class TeamAdminController {
 
     private final TeamService teamService;
     private final TeamImporter teamImporter;
-    private final InMemoryUsersConnectionRepository usersConnectionRepository;
 
     @Autowired
-    public TeamAdminController(TeamService teamService, TeamImporter teamImporter,
-                               InMemoryUsersConnectionRepository usersConnectionRepository) {
+    public TeamAdminController(TeamService teamService, TeamImporter teamImporter) {
         this.teamService = teamService;
         this.teamImporter = teamImporter;
-        this.usersConnectionRepository = usersConnectionRepository;
     }
 
     @RequestMapping(value = "/admin/team", method = { GET, HEAD })
@@ -46,7 +39,7 @@ class TeamAdminController {
 
     @RequestMapping(value = "/admin/profile", method = { GET, HEAD })
     public String editProfileForm(Principal principal, Model model) {
-        MemberProfile profile = teamService.fetchMemberProfile(new Long(principal.getName()));
+        MemberProfile profile = teamService.fetchMemberProfile(principal.getName());
         model.addAttribute("profile", profile);
         model.addAttribute("formAction", "/admin/profile");
         return "admin/team/edit";
@@ -65,7 +58,7 @@ class TeamAdminController {
 
     @RequestMapping(value = "/admin/profile", method = PUT)
     public String saveProfile(Principal principal, MemberProfile profile) {
-        teamService.updateMemberProfile(new Long(principal.getName()), profile);
+        teamService.updateMemberProfile(principal.getName(), profile);
         return "redirect:/admin/profile";
     }
 
@@ -77,19 +70,8 @@ class TeamAdminController {
 
     @RequestMapping(value = "/admin/team/github_import", method = POST)
     public String importTeamMembersFromGithub(Principal principal) {
-        GitHub gitHub = getGitHub(principal);
-        teamImporter.importTeamMembers(gitHub);
+        teamImporter.importTeamMembers();
         return "redirect:/admin/team";
     }
 
-    private GitHub getGitHub(Principal principal) {
-        MemberProfile profile = teamService.fetchMemberProfile(new Long(principal.getName()));
-        String githubId = profile.getGithubId().toString();
-        ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(githubId);
-        Connection<GitHub> connection = connectionRepository.findPrimaryConnection(GitHub.class);
-        if (connection != null) {
-            return connection.getApi();
-        }
-        throw new RuntimeException("Unable to obtain GitHub connection");
-    }
 }

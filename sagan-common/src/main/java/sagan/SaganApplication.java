@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
+import org.springframework.core.env.Profiles;
 
 import static java.lang.String.format;
 import static org.springframework.util.StringUtils.arrayToCommaDelimitedString;
@@ -35,8 +36,8 @@ public class SaganApplication extends SpringApplication {
     protected void configureProfiles(ConfigurableEnvironment environment, String[] args) {
         super.configureProfiles(environment, args);
 
-        boolean stagingActive = environment.acceptsProfiles(STAGING);
-        boolean productionActive = environment.acceptsProfiles(PRODUCTION);
+        boolean stagingActive = environment.acceptsProfiles(Profiles.of(STAGING));
+        boolean productionActive = environment.acceptsProfiles(Profiles.of(PRODUCTION));
 
         if (stagingActive && productionActive) {
             throw new IllegalStateException(format("Only one of the following profiles may be specified: [%s]",

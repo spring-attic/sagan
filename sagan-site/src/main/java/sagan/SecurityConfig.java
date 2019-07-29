@@ -1,9 +1,9 @@
 package sagan;
 
-import sagan.team.MemberProfile;
-import sagan.team.support.SignInService;
-
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,7 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,10 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,31 +32,22 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.header.writers.HstsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.AnyRequestMatcher;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionSignUp;
-import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
-import org.springframework.social.connect.support.ConnectionFactoryRegistry;
-import org.springframework.social.connect.web.ProviderSignInController;
-import org.springframework.social.connect.web.SignInAdapter;
-import org.springframework.social.github.api.GitHub;
-import org.springframework.social.github.api.GitHubUserProfile;
-import org.springframework.social.github.api.impl.GitHubTemplate;
-import org.springframework.social.github.connect.GitHubConnectionFactory;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
@@ -60,6 +55,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 @Configuration
 class SecurityConfig {
+
+    private static final String IS_MEMBER_URL = "https://api.github.com/teams/{team}/members/{user}";
+
+    private static final String USER_URL = "https://api.github.com/user";
 
     static final String SIGNIN_SUCCESS_PATH = "/signin/success";
 
@@ -91,14 +90,14 @@ class SecurityConfig {
     }
 
     @Configuration
-    @Order(Ordered.LOWEST_PRECEDENCE - 80)
+    @Order(0)
     protected static class ApiAuthenticationConfig extends WebSecurityConfigurerAdapter implements
             EnvironmentAware {
 
-        @Autowired
-        private SignInService signInService;
-
         private Environment environment;
+
+        @Value("${github.team.id}")
+        private String gitHubTeamId;
 
         @Override
         public void setEnvironment(Environment environment) {
@@ -121,35 +120,35 @@ class SecurityConfig {
         }
 
         private Filter githubBasicAuthFilter() {
-            return new BasicAuthenticationFilter(githubAuthenticationManager());
+            return new BasicAuthenticationFilter(basicAuthenticationManager());
         }
 
-        private AuthenticationManager githubAuthenticationManager() {
-            return new AuthenticationManager() {
-
-                @Override
-                public Authentication authenticate(Authentication input) throws AuthenticationException {
-
-                    GitHubTemplate gitHub = new GitHubTemplate(input.getName());
-                    GitHubUserProfile userInfo = null;
-                    try {
-                        userInfo = gitHub.userOperations().getUserProfile();
-                    } catch (Exception e) {
-                        throw new BadCredentialsException("Cannot authenticate");
-                    }
-                    if (!signInService.isSpringMember(userInfo.getUsername(), gitHub)) {
-                        throw new BadCredentialsException("User not member of required org");
-                    }
-
-                    MemberProfile member = signInService.getOrCreateMemberProfile(new Long(userInfo.getId()), gitHub);
-                    Authentication authentication = new UsernamePasswordAuthenticationToken(
-                            member.getId(), member.getGithubUsername(),
-                            AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                    return authentication;
-
+        private AuthenticationManager basicAuthenticationManager() {
+            RestOperations rest = new RestTemplateBuilder().build();
+            URI memberUrl;
+            URI userUrl;
+            try {
+                memberUrl = new URI(IS_MEMBER_URL);
+                userUrl = new URI(USER_URL);
+            } catch (URISyntaxException e) {
+                throw new IllegalStateException(e);
+            }
+            return authentication -> {
+                @SuppressWarnings("rawtypes")
+                ResponseEntity<Map> userResponse = rest.exchange(RequestEntity.get(userUrl).header(
+                        HttpHeaders.AUTHORIZATION, "Bearer "
+                                + authentication.getName()).build(), Map.class);
+                @SuppressWarnings("unchecked")
+                Map<String, Object> user = userResponse.getBody();
+                @SuppressWarnings("rawtypes")
+                ResponseEntity<Map> response = rest.exchange(IS_MEMBER_URL, HttpMethod.GET, RequestEntity.get(memberUrl)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer "
+                                + authentication.getName()).build(), Map.class, gitHubTeamId, user.get("login"));
+                if (!response.getStatusCode().is2xxSuccessful()) {
+                    throw new BadCredentialsException("Wrong team");
                 }
-
+                return new UsernamePasswordAuthenticationToken(user.get("login"),
+                        authentication.getName());
             };
         }
 
@@ -160,14 +159,14 @@ class SecurityConfig {
     }
 
     @Configuration
-    @Order(Ordered.LOWEST_PRECEDENCE - 90)
+    @Order(10)
     protected static class AdminAuthenticationConfig extends WebSecurityConfigurerAdapter implements
             EnvironmentAware {
 
-        @Autowired
-        private SignInService signInService;
-
         private Environment environment;
+
+        @Value("${github.team.id}")
+        private String gitHubTeamId;
 
         @Override
         public void setEnvironment(Environment environment) {
@@ -177,8 +176,7 @@ class SecurityConfig {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             configureHeaders(http.headers());
-            http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
-                    .and().requestMatchers().antMatchers("/admin/**", "/signout").and()
+            http.requestMatchers().antMatchers("/admin/**", "/signout").and()
                     .addFilterAfter(new OncePerRequestFilter() {
 
                         // TODO this filter needs to be removed once basic auth is removed
@@ -193,6 +191,7 @@ class SecurityConfig {
                             filterChain.doFilter(request, response);
                         }
                     }, ExceptionTranslationFilter.class);
+            http.oauth2Login().loginPage("/signin");
             http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
                     .logoutSuccessUrl("/").and().authorizeRequests().anyRequest()
                     .authenticated();
@@ -201,39 +200,37 @@ class SecurityConfig {
             }
         }
 
-        private AuthenticationEntryPoint authenticationEntryPoint() {
-            LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint("/signin");
-            entryPoint.setForceHttps(isForceHttps());
-            return entryPoint;
+        @Bean
+        public OAuth2UserService<OAuth2UserRequest, OAuth2User> authenticationProvider() {
+            RestOperations rest = new RestTemplateBuilder().build();
+            URI memberUrl;
+            try {
+                memberUrl = new URI(IS_MEMBER_URL);
+            } catch (URISyntaxException e) {
+                throw new IllegalStateException(e);
+            }
+            return new DefaultOAuth2UserService() {
+                @Override
+                public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+                    OAuth2User user = super.loadUser(userRequest);
+                    @SuppressWarnings("rawtypes")
+                    ResponseEntity<Map> response = rest.exchange(IS_MEMBER_URL, HttpMethod.GET, RequestEntity.get(
+                            memberUrl)
+                            .header(HttpHeaders.AUTHORIZATION, "Bearer "
+                                    + userRequest.getAccessToken().getTokenValue()).build(), Map.class, gitHubTeamId,
+                            user.getName());
+                    if (!response.getStatusCode().is2xxSuccessful()) {
+                        throw new BadCredentialsException("Wrong team");
+                    }
+                    return user;
+                }
+            };
         }
 
         private boolean isForceHttps() {
             return !environment.acceptsProfiles(Profiles.of(SaganProfiles.STANDALONE));
         }
 
-        @Bean
-        public ProviderSignInController providerSignInController(GitHubConnectionFactory connectionFactory,
-                                                                 ConnectionFactoryRegistry registry,
-                                                                 InMemoryUsersConnectionRepository repository) {
-
-            registry.addConnectionFactory(connectionFactory);
-            repository.setConnectionSignUp(new RemoteUsernameConnectionSignUp());
-            ProviderSignInController controller =
-                    new ProviderSignInController(registry, repository, new GithubAuthenticationSigninAdapter(
-                            SIGNIN_SUCCESS_PATH, signInService));
-            controller.setSignInUrl("/signin?error=access_denied");
-            return controller;
-        }
-
-        @Bean
-        public ConnectionFactoryRegistry connectionFactoryRegistry() {
-            return new ConnectionFactoryRegistry();
-        }
-
-        @Bean
-        public InMemoryUsersConnectionRepository inMemoryUsersConnectionRepository(ConnectionFactoryRegistry registry) {
-            return new InMemoryUsersConnectionRepository(registry);
-        }
     }
 
     private static void configureHeaders(HeadersConfigurer<?> headers) throws Exception {
@@ -268,47 +265,4 @@ class SecurityConfig {
         }
     }
 
-    /**
-     * Simple {@link ConnectionSignUp} implementation that pulls user id from remote user
-     * details in the Social {@link Connection}.
-     */
-    static class RemoteUsernameConnectionSignUp implements ConnectionSignUp {
-        @Override
-        public String execute(Connection<?> connection) {
-            return connection.getKey().getProviderUserId() != null ? connection.getKey().getProviderUserId() : null;
-        }
-    }
-
-    static class GithubAuthenticationSigninAdapter implements SignInAdapter {
-
-        private String path;
-        private final SignInService signInService;
-
-        public GithubAuthenticationSigninAdapter(String path, SignInService signInService) {
-            this.path = path;
-            this.signInService = signInService;
-        }
-
-        @Override
-        public String signIn(String githubId, Connection<?> connection, NativeWebRequest request) {
-            GitHub gitHub = (GitHub) connection.getApi();
-            String githubUsername = connection.getDisplayName();
-
-            try {
-                if (!signInService.isSpringMember(githubUsername, gitHub)) {
-                    throw new BadCredentialsException("User not member of required org");
-                }
-
-                MemberProfile member = signInService.getOrCreateMemberProfile(new Long(githubId), gitHub);
-                Authentication authentication = new UsernamePasswordAuthenticationToken(
-                        member.getId(), member.getGithubUsername(),
-                        AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                return path;
-
-            } catch (RestClientException ex) {
-                throw new BadCredentialsException("User not member of required org", ex);
-            }
-        }
-    }
 }
