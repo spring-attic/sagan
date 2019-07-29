@@ -59,6 +59,7 @@ dependencies {
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
     testCompile "org.springframework.cloud:spring-cloud-contract-wiremock"
     testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "org.springframework.security:spring-security-test"
 
     // pick up common test utility classes
     testCompile project(':sagan-common').sourceSets.testUtil.output
