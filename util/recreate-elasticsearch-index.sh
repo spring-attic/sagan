@@ -27,20 +27,20 @@ sleep 1
 echo "\nClosing index."
 curl -XPOST "$ENDPOINT/$INDEX/_close"
 sleep 1
-curl -XPUT $ENDPOINT/$INDEX/_settings -d @../sagan-site/src/main/resources/elasticsearch/settings.json
+curl -XPUT $ENDPOINT/$INDEX/_settings -d @../sagan-search/src/main/resources/elasticsearch/settings.json
 sleep 1
 echo "\nInstall the mapping - do once per type/mapping file."
-curl -XPOST "$ENDPOINT/$INDEX/apidoc/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/apidoc.json
+curl -XPOST "$ENDPOINT/$INDEX/apidoc/_mapping" -d @../sagan-search/src/main/resources/elasticsearch/mappings/apidoc.json
 sleep 1
-curl -XPOST "$ENDPOINT/$INDEX/blogpost/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/blogpost.json
+curl -XPOST "$ENDPOINT/$INDEX/blogpost/_mapping" -d @../sagan-search/src/main/resources/elasticsearch/mappings/blogpost.json
 sleep 1
-curl -XPOST "$ENDPOINT/$INDEX/guidedoc/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/guidedoc.json
+curl -XPOST "$ENDPOINT/$INDEX/guidedoc/_mapping" -d @../sagan-search/src/main/resources/elasticsearch/mappings/guidedoc.json
 sleep 1
-curl -XPOST "$ENDPOINT/$INDEX/referencedoc/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/referencedoc.json
+curl -XPOST "$ENDPOINT/$INDEX/referencedoc/_mapping" -d @../sagan-search/src/main/resources/elasticsearch/mappings/referencedoc.json
 sleep 1
-curl -XPOST "$ENDPOINT/$INDEX/sitepage/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/sitepage.json
+curl -XPOST "$ENDPOINT/$INDEX/sitepage/_mapping" -d @../sagan-search/src/main/resources/elasticsearch/mappings/sitepage.json
 sleep 1
-curl -XPOST "$ENDPOINT/$INDEX/projectpage/_mapping" -d @../sagan-site/src/main/resources/elasticsearch/mappings/projectpage.json
+curl -XPOST "$ENDPOINT/$INDEX/projectpage/_mapping" -d @../sagan-search/src/main/resources/elasticsearch/mappings/projectpage.json
 sleep 1
 curl -XPOST "$ENDPOINT/$INDEX/_open"
 sleep 1
