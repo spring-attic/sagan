@@ -1,35 +1,27 @@
 package sagan;
 
-import java.util.Map;
-
 import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.header.writers.HstsHeaderWriter;
 import org.springframework.security.web.util.matcher.AnyRequestMatcher;
-import org.springframework.web.client.RestOperations;
+import sagan.security.GithubAuthenticationManager;
 
 /**
  * Site-wide web security configuration.
@@ -37,14 +29,16 @@ import org.springframework.web.client.RestOperations;
 @Configuration
 class SecurityConfig {
 
-    private static final String IS_MEMBER_URL = "https://api.github.com/teams/{team}/members/{user}";
-
-    private static final String USER_URL = "https://api.github.com/user";
-
     @Configuration
     @Order(0)
     protected static class ApiAuthenticationConfig extends WebSecurityConfigurerAdapter implements
             EnvironmentAware {
+
+        @Autowired
+        private OAuth2UserService<OAuth2UserRequest, OAuth2User> userService;
+
+        @Autowired
+        private ClientRegistrationRepository oauthClients;
 
         private Environment environment;
 
@@ -67,7 +61,7 @@ class SecurityConfig {
             http.requestMatchers().antMatchers("/project_metadata/**")
                     .and().authorizeRequests().antMatchers(HttpMethod.HEAD, "/project_metadata/*").permitAll()
                     .antMatchers(HttpMethod.GET, "/project_metadata/*").permitAll()
-                    .anyRequest().authenticated()
+                    .anyRequest().hasRole("ADMIN")
                     .and()
                     .addFilterAfter(githubBasicAuthFilter(), BasicAuthenticationFilter.class)
                     .csrf().disable();
@@ -77,30 +71,8 @@ class SecurityConfig {
         }
 
         private Filter githubBasicAuthFilter() {
-            return new BasicAuthenticationFilter(basicAuthenticationManager());
-        }
-
-        private AuthenticationManager basicAuthenticationManager() {
-            RestOperations rest = new RestTemplateBuilder().build();
-            return authentication -> {
-                HttpHeaders headers = new HttpHeaders();
-                headers.add(
-                        HttpHeaders.AUTHORIZATION, "Bearer "
-                                + authentication.getName());
-                @SuppressWarnings("rawtypes")
-                ResponseEntity<Map> userResponse = rest.exchange(USER_URL, HttpMethod.GET, new HttpEntity<>(headers),
-                        Map.class);
-                @SuppressWarnings("unchecked")
-                Map<String, Object> user = userResponse.getBody();
-                @SuppressWarnings("rawtypes")
-                ResponseEntity<Map> response = rest.exchange(IS_MEMBER_URL, HttpMethod.GET, new HttpEntity<>(headers),
-                        Map.class, gitHubTeamId, user.get("login"));
-                if (!response.getStatusCode().is2xxSuccessful()) {
-                    throw new BadCredentialsException("Wrong team");
-                }
-                return new UsernamePasswordAuthenticationToken(user.get("login"),
-                        authentication.getName());
-            };
+            GithubAuthenticationManager manager = new GithubAuthenticationManager(this.oauthClients, this.userService);
+            return new BasicAuthenticationFilter(manager);
         }
 
         private boolean isForceHttps() {
