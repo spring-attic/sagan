@@ -3,6 +3,7 @@ package sagan;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
@@ -43,5 +44,11 @@ public class SiteApplication {
         return new XmlMapper();
     }
 
-
+    @Bean
+    public FlywayMigrationStrategy repairStrategy() {
+        return flyway -> {
+            flyway.repair();
+            flyway.migrate();
+        };
+    }
 }
