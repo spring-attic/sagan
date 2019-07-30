@@ -42,19 +42,6 @@ class SecurityConfig {
     private static final String USER_URL = "https://api.github.com/user";
 
     @Configuration
-    @Order(-10)
-    protected static class SigninAuthenticationConfig extends WebSecurityConfigurerAdapter {
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            configureHeaders(http.headers());
-            http.requestMatchers().antMatchers("/actuator/**").and().httpBasic().and().csrf()
-                    .disable();
-        }
-
-    }
-
-    @Configuration
     @Order(0)
     protected static class ApiAuthenticationConfig extends WebSecurityConfigurerAdapter implements
             EnvironmentAware {
