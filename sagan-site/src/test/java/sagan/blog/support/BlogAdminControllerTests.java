@@ -14,7 +14,6 @@ import sagan.team.support.TeamRepository;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -118,7 +117,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
+        given(teamRepository.findByGithubId(12345L)).willReturn(member);
         PostForm postForm = new PostForm();
 
         given(blogService.addPost(eq(postForm), anyString())).willReturn(TEST_POST);
@@ -133,7 +132,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
+        given(teamRepository.findByGithubId(12345L)).willReturn(member);
 
         PostForm postForm = new PostForm();
         postForm.setTitle("title");
@@ -153,7 +152,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
+        given(teamRepository.findByGithubId(12345L)).willReturn(member);
 
         PostForm postForm = new PostForm();
         postForm.setTitle("title");
