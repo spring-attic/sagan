@@ -108,43 +108,43 @@ public class SecurityConfigTests {
 	}
 
 	@Test
-	@WithMockUser
-	public void projectMetadataWhenPostAndUserThenForbidden() throws Exception {
+	@WithMockUser(roles = "ADMIN")
+	public void projectMetadataWhenPostAndAdminThenForbidden() throws Exception {
 		this.mockMvc.perform(post("/project_metadata/spring-security"))
 				.andExpect(status().isForbidden());
 	}
 
 	@Test
-	@WithMockUser
-	public void projectMetadataWhenPutAndAndUserThenForbidden() throws Exception {
+	@WithMockUser(roles = "ADMIN")
+	public void projectMetadataWhenPutAndAndAdminThenForbidden() throws Exception {
 		this.mockMvc.perform(put("/project_metadata/spring-security"))
 				.andExpect(status().isForbidden());
 	}
 
 	@Test
-	@WithMockUser
-	public void projectMetadataWhenDeleteAndUserThenForbidden() throws Exception {
+	@WithMockUser(roles = "ADMIN")
+	public void projectMetadataWhenDeleteAndAdminThenForbidden() throws Exception {
 		this.mockMvc.perform(delete("/project_metadata/spring-security"))
 				.andExpect(status().isForbidden());
 	}
 
 	@Test
-	@WithMockUser(roles = "ADMIN")
-	public void projectMetadataWhenPostAndAdminThenOk() throws Exception {
+	@WithMockUser(roles = {"API", "ADMIN"})
+	public void projectMetadataWhenPostAndApiAdminThenOk() throws Exception {
 		this.mockMvc.perform(post("/project_metadata/spring-security"))
 				.andExpect(status().isOk());
 	}
 
 	@Test
-	@WithMockUser(roles = "ADMIN")
-	public void projectMetadataWhenPutAndAndAdminThenOk() throws Exception {
+	@WithMockUser(roles = {"API", "ADMIN"})
+	public void projectMetadataWhenPutAndAndApiAdminThenOk() throws Exception {
 		this.mockMvc.perform(put("/project_metadata/spring-security"))
 				.andExpect(status().isOk());
 	}
 
 	@Test
-	@WithMockUser(roles = "ADMIN")
-	public void projectMetadataWhenDeleteAndAdminThenOk() throws Exception {
+	@WithMockUser(roles = {"API", "ADMIN"})
+	public void projectMetadataWhenDeleteAndApiAdminThenOk() throws Exception {
 		this.mockMvc.perform(delete("/project_metadata/spring-security"))
 				.andExpect(status().isOk());
 	}

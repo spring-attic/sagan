@@ -1,116 +1,77 @@
 package sagan;
 
-import javax.servlet.Filter;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.core.env.Environment;
-import org.springframework.core.env.Profiles;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.DelegatingAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.header.writers.HstsHeaderWriter;
-import org.springframework.security.web.util.matcher.AnyRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import sagan.security.GithubAuthenticationManager;
+
+import javax.servlet.Filter;
+import java.util.LinkedHashMap;
 
 /**
  * Site-wide web security configuration.
  */
 @Configuration
-class SecurityConfig {
+class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Configuration
-    @Order(0)
-    protected static class ApiAuthenticationConfig extends WebSecurityConfigurerAdapter implements
-            EnvironmentAware {
+    @Autowired
+    private OAuth2UserService<OAuth2UserRequest, OAuth2User> userService;
 
-        @Autowired
-        private OAuth2UserService<OAuth2UserRequest, OAuth2User> userService;
+    @Autowired
+    private ClientRegistrationRepository oauthClients;
 
-        @Autowired
-        private ClientRegistrationRepository oauthClients;
-
-        private Environment environment;
-
-        @Value("${github.team.id}")
-        private String gitHubTeamId;
-
-        @Override
-        public void setEnvironment(Environment environment) {
-            this.environment = environment;
-        }
-
-        @Override
-        public void configure(WebSecurity web) throws Exception {
-            web.ignoring().antMatchers("/lib/**", "/css/**", "/font-custom/**", "/img/**", "/500", "/404");
-        }
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            configureHeaders(http.headers());
-            http.requestMatchers().antMatchers("/project_metadata/**")
-                    .and().authorizeRequests().antMatchers(HttpMethod.HEAD, "/project_metadata/*").permitAll()
-                    .antMatchers(HttpMethod.GET, "/project_metadata/*").permitAll()
-                    .anyRequest().hasRole("ADMIN")
-                    .and()
-                    .addFilterAfter(githubBasicAuthFilter(), BasicAuthenticationFilter.class)
-                    .csrf().disable();
-            if (isForceHttps()) {
-                http.requiresChannel().anyRequest().requiresSecure();
-            }
-        }
-
-        private Filter githubBasicAuthFilter() {
-            GithubAuthenticationManager manager = new GithubAuthenticationManager(this.oauthClients, this.userService);
-            return new BasicAuthenticationFilter(manager);
-        }
-
-        private boolean isForceHttps() {
-            return !environment.acceptsProfiles(Profiles.of(SaganProfiles.STANDALONE));
-        }
-
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .addFilterAfter(githubBasicAuthFilter(), BasicAuthenticationFilter.class)
+            .exceptionHandling()
+                .authenticationEntryPoint(entryPoint())
+                .and()
+            .csrf()
+                .ignoringAntMatchers("/project_metadata/*")
+                .and()
+            .requiresChannel()
+                .requestMatchers(request -> request.getHeader("x-forwarded-port") != null).requiresSecure()
+                .and()
+            .authorizeRequests()
+                .mvcMatchers("/admin/**").hasRole("ADMIN")
+                .mvcMatchers(HttpMethod.HEAD, "/project_metadata/*").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/project_metadata/*").permitAll()
+                .mvcMatchers("/project_metadata/**").access("hasRole('ADMIN') and hasRole('API')")
+                .and()
+            .oauth2Login()
+                .defaultSuccessUrl("/admin/")
+                .loginPage("/signin")
+                .permitAll()
+                .userInfoEndpoint()
+                    .userService(this.userService);
     }
 
-    @Configuration
-    @Order(10)
-    protected static class AdminAuthenticationConfig extends WebSecurityConfigurerAdapter {
-
-        @Autowired
-        private OAuth2UserService<OAuth2UserRequest, OAuth2User> userService;
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http
-                .requiresChannel()
-                    .requestMatchers(request -> request.getHeader("x-forwarded-port") != null).requiresSecure()
-                    .and()
-                .authorizeRequests()
-                    .mvcMatchers("/admin/**").hasRole("ADMIN")
-                    .and()
-                .oauth2Login()
-                    .defaultSuccessUrl("/admin/")
-                    .loginPage("/signin")
-                    .permitAll()
-                    .userInfoEndpoint().userService(this.userService);
-             }
-
+    private Filter githubBasicAuthFilter() {
+        GithubAuthenticationManager manager = new GithubAuthenticationManager(this.oauthClients, this.userService);
+        return new BasicAuthenticationFilter(manager);
     }
 
-    private static void configureHeaders(HeadersConfigurer<?> headers) throws Exception {
-        HstsHeaderWriter writer = new HstsHeaderWriter(false);
-        writer.setRequestMatcher(AnyRequestMatcher.INSTANCE);
-        headers.contentTypeOptions().and().xssProtection()
-                .and().cacheControl().and().addHeaderWriter(writer).frameOptions();
+    private AuthenticationEntryPoint entryPoint() {
+        LinkedHashMap<RequestMatcher, AuthenticationEntryPoint> mapping = new LinkedHashMap<>();
+        mapping.put(new AntPathRequestMatcher("/project_metadata/**"), new Http403ForbiddenEntryPoint());
+        DelegatingAuthenticationEntryPoint result = new DelegatingAuthenticationEntryPoint(
+                mapping);
+        result.setDefaultEntryPoint(new LoginUrlAuthenticationEntryPoint("/signin"));
+        return result;
     }
 
 }
