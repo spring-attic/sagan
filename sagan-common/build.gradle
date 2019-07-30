@@ -59,7 +59,7 @@ dependencies {
     runtime 'com.h2database:h2'
 
     // for use in on-the-fly database setup and migrations
-    compile 'org.flywaydb:flyway-core'
+    compile 'org.flywaydb:flyway-core:4.2.0'
 
     // jackson, for JSON and XML serialization
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
