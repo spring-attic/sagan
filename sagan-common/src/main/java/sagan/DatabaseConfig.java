@@ -2,6 +2,7 @@ package sagan;
 
 import javax.sql.DataSource;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.Cloud;
 import org.springframework.cloud.CloudFactory;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Profile;
 class CloudFoundryDatabaseConfig {
 
     @Bean
+    @ConditionalOnMissingBean
     public Cloud cloud() {
         return new CloudFactory().getCloud();
     }

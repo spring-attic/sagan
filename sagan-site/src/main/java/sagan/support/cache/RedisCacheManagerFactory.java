@@ -1,6 +1,7 @@
 package sagan.support.cache;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.data.redis.cache.CacheKeyPrefix;
@@ -27,7 +28,7 @@ public class RedisCacheManagerFactory {
 
     private final RedisConnectionFactory connectionFactory;
 
-    private Map<String, RedisCacheConfiguration> expires;
+    private Map<String, RedisCacheConfiguration> expires = new HashMap<>();
 
     public RedisCacheManagerFactory(RedisConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
