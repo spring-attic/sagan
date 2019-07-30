@@ -1,0 +1,26 @@
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+    <title>Page Not Found</title>
+</head>
+<body>
+<div layout:fragment="header-container"></div>
+
+<div layout:fragment="content" class="container">
+    <div class="main-body--wrapper">
+        <div class="error-page">
+            <div class="error-title">Forbidden</div>
+            <div class="paragraph">
+                <p>
+                You have logged into GitHub with a user who has not been granted access
+                to this application. Please make sure you have been added to the correct
+                GitHub team to gain access.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
