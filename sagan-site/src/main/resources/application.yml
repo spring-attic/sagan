@@ -95,6 +95,7 @@ spring:
       additional_exclude: "**/*.js,**/*.css"
   flyway:
     locations: classpath:/db/migration, classpath:/db/dev
+    table: schema_version
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
 ---
 
