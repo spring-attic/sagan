@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.head;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -71,6 +75,78 @@ public class SecurityConfigTests {
 			String redirectedUrl = result.getResponse().getRedirectedUrl();
 			assertThat(redirectedUrl).startsWith("https://github.com/login/oauth/authorize");
 		});
+	}
+
+	@Test
+	public void projectMetadataWhenGetThenNoAuthenticationRequired() throws Exception {
+		this.mockMvc.perform(get("/project_metadata/spring-security"))
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	public void projectMetadataWhenHeadThenNoAuthenticationRequired() throws Exception {
+		this.mockMvc.perform(head("/project_metadata/spring-security"))
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	public void projectMetadataWhenPostAndAnonymousThenAuthenticationRequired() throws Exception {
+		this.mockMvc.perform(post("/project_metadata/spring-security"))
+				.andExpect(status().is4xxClientError());
+	}
+
+	@Test
+	public void projectMetadataWhenPutAndAnonymousThenAuthenticationRequired() throws Exception {
+		this.mockMvc.perform(put("/project_metadata/spring-security"))
+				.andExpect(status().is4xxClientError());
+	}
+
+	@Test
+	public void projectMetadataWhenDeleteAndAnonymousThenAuthenticationRequired() throws Exception {
+		this.mockMvc.perform(delete("/project_metadata/spring-security"))
+				.andExpect(status().is4xxClientError());
+	}
+
+	@Test
+	@WithMockUser
+	public void projectMetadataWhenPostAndUserThenForbidden() throws Exception {
+		this.mockMvc.perform(post("/project_metadata/spring-security"))
+				.andExpect(status().isForbidden());
+	}
+
+	@Test
+	@WithMockUser
+	public void projectMetadataWhenPutAndAndUserThenForbidden() throws Exception {
+		this.mockMvc.perform(put("/project_metadata/spring-security"))
+				.andExpect(status().isForbidden());
+	}
+
+	@Test
+	@WithMockUser
+	public void projectMetadataWhenDeleteAndUserThenForbidden() throws Exception {
+		this.mockMvc.perform(delete("/project_metadata/spring-security"))
+				.andExpect(status().isForbidden());
+	}
+
+	@Test
+	@WithMockUser(roles = "ADMIN")
+	public void projectMetadataWhenPostAndAdminThenOk() throws Exception {
+		this.mockMvc.perform(post("/project_metadata/spring-security"))
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	@WithMockUser(roles = "ADMIN")
+	public void projectMetadataWhenPutAndAndAdminThenOk() throws Exception {
+		this.mockMvc.perform(put("/project_metadata/spring-security"))
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	@WithMockUser(roles = "ADMIN")
+	public void projectMetadataWhenDeleteAndAdminThenOk() throws Exception {
+		this.mockMvc.perform(delete("/project_metadata/spring-security"))
+				.andExpect(status().isOk());
 	}
 
 	@RestController
