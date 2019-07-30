@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
@@ -26,6 +27,20 @@ public class SaganApplication extends SpringApplication {
 
     public SaganApplication(Class<?> configClass) {
         super(configClass);
+    }
+
+    public static SpringApplication create(Class<?> configClass) {
+        try {
+            return new SaganApplication(configClass);
+        } catch (Throwable e) {
+            try {
+                return BeanUtils.instantiateClass(SpringApplication.class.getConstructor(Object[].class), new Object[] {
+                        new Object[] {
+                                configClass.getName() } });
+            } catch (Exception ex) {
+                throw new IllegalStateException(ex);
+            }
+        }
     }
 
     /**
@@ -48,8 +63,7 @@ public class SaganApplication extends SpringApplication {
             logger.info(format("Activating '%s' profile because one of '%s' or '%s' profiles have been specified.",
                     CLOUDFOUNDRY, STAGING, PRODUCTION));
             environment.addActiveProfile(CLOUDFOUNDRY);
-        }
-        else {
+        } else {
             logger.info("The default 'standalone' profile is active because no other profiles have been specified.");
             environment.addActiveProfile(STANDALONE);
             Map<String, Object> map = new HashMap<>();
