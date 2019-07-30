@@ -20,6 +20,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static sagan.projects.ProjectRelease.ReleaseStatus.*;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers=ProjectsController.class, secure=false)
+@WebMvcTest(controllers=ProjectsController.class)
 @TestPropertySource(properties = "spring.profiles.active=standalone")
 public class ProjectsControllerTest {
     @MockBean
@@ -47,6 +49,12 @@ public class ProjectsControllerTest {
     @MockBean
     private Topicals projectTopicalRepo;
 
+    @MockBean
+    private OAuth2UserService<?,?> userService;
+
+    @MockBean
+    private ClientRegistrationRepository registrationRepository;
+    
     private ProjectRelease currentRelease;
 
     private ProjectRelease anotherCurrentRelease;
