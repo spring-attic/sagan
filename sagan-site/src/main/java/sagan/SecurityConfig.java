@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.client.endpoint.DefaultAuthorizationCodeTokenResponseClient;
+import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
+import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -33,6 +36,10 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private ClientRegistrationRepository oauthClients;
 
+    @Autowired(required = false)
+    private OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> responseClient =
+        new DefaultAuthorizationCodeTokenResponseClient();
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -55,7 +62,10 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
             .oauth2Login()
                 .defaultSuccessUrl("/admin/")
                 .loginPage("/signin")
-                .permitAll()
+                    .permitAll()
+                .tokenEndpoint()
+                    .accessTokenResponseClient(this.responseClient)
+                    .and()
                 .userInfoEndpoint()
                     .userService(this.userService);
     }
