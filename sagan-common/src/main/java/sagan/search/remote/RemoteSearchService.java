@@ -9,6 +9,9 @@ import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +21,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class RemoteSearchService implements SearchService {
+
+    private static final Log logger = LogFactory.getLog(RemoteSearchService.class);
 
     @Value("${search.url:http://localhost:8082}")
     private String url;
@@ -35,7 +40,7 @@ public class RemoteSearchService implements SearchService {
         try {
             rest.postForEntity(uri, entry, String.class);
         } catch (RestClientException e) {
-            // Ignore
+            logger.warn("Could not index search entry: " + e.getMessage());
         }
     }
 
