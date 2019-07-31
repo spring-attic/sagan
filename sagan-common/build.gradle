@@ -39,7 +39,7 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 
     // datasource and connection pool dependencies
-    runtime 'org.postgresql:postgresql:9.4.1212'
+    runtime 'org.postgresql:postgresql'
     runtime 'com.h2database:h2'
 
     // for use in on-the-fly database setup and migrations

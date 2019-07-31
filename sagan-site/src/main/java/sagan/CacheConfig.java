@@ -80,11 +80,4 @@ class CloudFoundryCacheConfig extends AbstractCloudConfig {
 		return cacheManager.build();
 	}
 
-	
-
-	@Bean
-	public RedisConnectionFactory redisConnectionFactory() {
-		return connectionFactory().redisConnectionFactory();
-	}
-
 }

@@ -58,7 +58,7 @@ github:
 
 logging:
   level:
-    ROOT: WARN
+    ROOT: INFO
     org.apache.http: WARN
     # turn up to DEBUG to diagnose GitHub API issues
     org.apache.http.headers: WARN
@@ -66,15 +66,16 @@ logging:
     sagan.guides.support: WARN
     # always log high-level information about application startup
     sagan.SiteApplication: INFO
-    # log generated password for admin endpoints, e.g. /env, /beans
-    # See http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints
-    org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration: INFO
 ---
 
 spring:
   profiles: staging,production
   resources:
     add-mappings: false
+  redis:
+    host: ${vcap.services.redis.credentials.hostname:localhost}
+    password: ${vcap.services.redis.credentials.password:}
+    port: ${vcap.services.redis.credentials.port:6379}
 security:
   require_ssl: true
 server:
