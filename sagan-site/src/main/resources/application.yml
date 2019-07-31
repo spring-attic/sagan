@@ -72,10 +72,6 @@ spring:
   profiles: staging,production
   resources:
     add-mappings: false
-  redis:
-    host: ${vcap.services.redis.credentials.hostname:localhost}
-    password: ${vcap.services.redis.credentials.password:}
-    port: ${vcap.services.redis.credentials.port:6379}
 security:
   require_ssl: true
 server:

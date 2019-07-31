@@ -55,6 +55,10 @@ dependencies {
     // for XML manipulation
     compile 'org.xmlbeam:xmlprojector:1.4.8'
 
+    // for CloudFoundry service binding
+    compile "io.pivotal.cfenv:java-cfenv-boot:1.0.1.RELEASE"
+
+
     // for use in mocking http interactions
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
     testCompile "org.springframework.cloud:spring-cloud-contract-wiremock"
