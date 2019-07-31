@@ -1,16 +1,18 @@
 package sagan.support.cache;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.data.redis.cache.CacheKeyPrefix;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.SerializationException;
 
 /**
  * A factory for CacheManager implementations that uses redis as a distributed cache. One
@@ -53,7 +55,27 @@ public class RedisCacheManagerFactory {
             config = config.entryTtl(Duration.ofMillis(expiration));
         }
         if (usePrefix) {
-            config = config.computePrefixWith(CacheKeyPrefix.simple());
+            RedisSerializer<Object> jdkSerializer = RedisSerializer.java();
+            byte[] prefix = (cacheName + ":").getBytes();
+            SerializationPair<String> serializer = SerializationPair.fromSerializer(new RedisSerializer<String>() {
+
+                @Override
+                public byte[] serialize(String t) throws SerializationException {
+                    byte[] bytes = jdkSerializer.serialize(t);
+                    byte[] result = Arrays.copyOf(prefix, prefix.length + bytes.length);
+                    System.arraycopy(bytes, 0, result, prefix.length, bytes.length);
+                    return result;
+                }
+
+                @Override
+                public String deserialize(byte[] bytes) throws SerializationException {
+                    byte[] key = new byte[bytes.length - prefix.length];
+                    System.arraycopy(bytes, prefix.length, key, 0, key.length);
+                    return (String) jdkSerializer.deserialize(key);
+                }
+            });
+            config = config.computePrefixWith(name -> "");
+            config = config.serializeKeysWith(serializer);
         }
         if (type != null) {
             SerializationPair<?> serializer = SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<>(type));

@@ -151,7 +151,7 @@ class CloudFoundryMvcConfig extends MvcConfig {
 		catch (IOException exc) {
 
 		}
-		throw new IllegalStateException("Missing git.properties file on classpath");
+		return "<not-available>";
 	}
 
 	@Override
