@@ -14,7 +14,7 @@ If you have any questions, feedback, or feature requests, don't hesitate to [add
 
 ## Contributing
 
-[Pull requests](http://help.github.com/send-pull-requests) are welcome; see the [contributor guidelines](CONTRIBUTING.md) for details.
+[Pull requests](https://help.github.com/en/desktop/contributing-to-projects/creating-a-pull-request) are welcome; see the [contributor guidelines](CONTRIBUTING.md) for details.
 
 ## License
 
