@@ -111,3 +111,7 @@ table.tableblock {
 .tableblock tr:nth-child(even) > td {
     background-color: #f9f9f9
 }
+
+pre.prettyprint {
+  tab-size: 4;
+}
