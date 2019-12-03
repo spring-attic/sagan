@@ -1,89 +1,69 @@
-var initSearch = require('../feature/search/main');
-var initSearchFacets = require('../feature/searchFacets/main');
-var initFilterableList = require('../feature/filterableList/main');
-var initClipboardButtons = require('../feature/clipboardButtons/main');
-var initCodeSidebar = require('../feature/codeSidebar/main');
-var initStsImport = require('../feature/stsImport/main');
-var initMobileSupport = require('../feature/mobileSupport/main');
-var initInfoPopups = require('../feature/infoPopups/main');
-var initPlatformDownloads = require('../feature/platformDownloads/main');
-var initFormWidgets = require('../feature/formWidgets/main');
-var initPrettify = require('../feature/prettify/main');
-var initMap = require('../feature/map/main');
-var initTimeAgo = require('../feature/timeAgo/main');
-var initHideShowGuide = require('../feature/hide-show-guide/main');
-var initHomepage = require('../feature/homepage/main');
+import $ from 'jquery';
+import '@fancyapps/fancybox'
+import '@fancyapps/fancybox/dist/jquery.fancybox.css'
+import '../css/main.css'
 
-var most = require('most');
-var $ = require('jquery');
 
-var slice = Array.prototype.slice;
-var dataAttrRx = /^data-/i;
+$(document).ready(function() {
 
-var features = {
-    search: initSearch,
-    'search-facets': initSearchFacets,
-    'filterable-list': initFilterableList,
-    'clipboard-buttons': initClipboardButtons,
-    'code-sidebar': initCodeSidebar,
-    'sts-import': initStsImport,
-    'mobile-support': initMobileSupport,
-    'info-popups': initInfoPopups,
-    'platform-downloads': initPlatformDownloads,
-    'form-widgets': initFormWidgets,
-    'code-prettify': initPrettify,
-    'map': initMap,
-    'timeago': initTimeAgo,
-    'hide-show-guide': initHideShowGuide,
-    'homepage': initHomepage
-};
+    // Open external links in new tab
+    $("a[href^='http']").attr('target', '_blank');
 
-initFeatures(features, document).each(function(features) {
-    $(window).unload(function() {
-        destroyFeatures(features);
+    $(".lightbox, .topics-resources a[href*=youtu], #quote a[href*=youtu], .half a[href*=youtu]").click(function() {
+        var href = $(this).attr('href');
+        $(this).attr('href', href + '?autoplay=1&autohide=1&showinfo=0&controls=1');
+        $.fancybox({
+            'padding'   : 0,
+            'href'      : this.href.replace(new RegExp("watch\\?v=", "i"), 'embed/'),
+            'type'      : 'iframe',
+            'width'     : 1000,
+            'autoPlay'  : true,
+            'height'    : 560,
+            'autoSize'  : false,
+            fitToView   : true
+        });
+
+        return false;
     });
+
 });
 
-/**
- * Scans the document for the set of desired features, initializes
- * each, and returns a Stream containing a single array, whose contents
- * are the initialized features.
- * @param features
- * @param document
- * @returns {Object|*}
- */
-function initFeatures(features, document) {
-    return scanFeatures(features, document)
-        .map(function(key) {
-            return features[key]();
-        })
-        .reduce(function(initialized, feature) {
-            initialized.push(feature);
-            return initialized;
-        }, []);
+// Terminal animation
+window.onload = function() {
+    if (document.querySelector("body").id == 'index') {
+        var i = 0;
+        var txt = 'return String.format("Hello World!");';
+        var speed = 100;
+
+        function type() {
+            if (i < txt.length) {
+                document.querySelector(".terminal .typed").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(type, speed);
+                if (i == 37) {
+                    document.querySelector(".terminal .typed").innerHTML = document.querySelector(".terminal .typed").innerHTML.replace(`"Hello World!"`, `<span class='terminal-lime'>"Hello World!"</span>`);
+                }
+            }
+        }
+
+        function handler(entries, observer) {
+            for (const entry of entries) {
+                if (entry.isIntersecting) {
+                    document.querySelector(".terminal .typed-placeholder").style.display = 'none';
+                    type();
+                }
+            }
+        }
+
+        let observer = new IntersectionObserver(handler);
+        observer.observe(document.querySelector(".terminal .terminal-blue"));
+    }
 }
 
-/**
- *
- * @param {object} features hash of feature initializers by name
- * @param {Document} document Document whose <html> is annotated with the
- *  set of desired features
- * @returns {object} most.js Stream containing the string names of
- *  the desired features
- */
-function scanFeatures(features, document) {
-    return most.fromArray(slice.call(document.documentElement.attributes))
-        .map(function(attr) {
-            var name = attr.name;
-            return dataAttrRx.test(name) && name.slice(5);
-        })
-        .filter(function(name) {
-            return name && name in features;
-        });
+// Mobile nav
+document.querySelector('#hamburger').onclick = function(){
+    document.querySelector('#popup').classList.add('active');
 }
-
-function destroyFeatures(features) {
-    features.forEach(function(feature) {
-        feature.destroy();
-    });
+document.querySelector('#exit').onclick = function(){
+    document.querySelector('#popup').classList.remove('active');
 }

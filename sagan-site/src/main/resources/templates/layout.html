@@ -1,137 +1,215 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:data="https://github.com/mxab/thymeleaf-extras-data-attribute"
-      data-search data-mobile-support>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
 <head>
-  <title>Layout</title>
-  <meta id="Viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.png}"/>
-  <link href='https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
-
-  <script th:src="@{/jspm_packages/system.js}"></script>
-  <script th:inline="text" th:if="${saganAppVersion}">
-    System.config({baseURL: "/[[${saganAppVersion}]]"});
-  </script>
-  <script th:src="@{/config.js}"></script>
-  <script>
-      System.import('app/main.js')
-  </script>
-
-  <meta name="google-site-verification" content="7qGntFPD9lWAVCtUu5U77v4l68PsTHf6xpzgjQv2j2M" />
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-KZM7GF6');</script>
-  <!-- End Google Tag Manager -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=2, minimum-scale=1, user-scalable=no' id='Viewport' name='viewport'></meta>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/main.css}" />
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap" rel="stylesheet">
+    <title>Spring</title>
+    <link href='/images/favicon.ico' rel='shortcut icon' type='image/vnd.microsoft.icon'>
 </head>
-<body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZM7GF6"
-                    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  <script type="text/javascript">
-    // Work around Google font rendering issues in webkit browsers on Windows 7
-    if (navigator.userAgent.indexOf("NT 6.1") != -1) {
-      document.body.style.WebkitTextStroke = "0.5px";
-    }
-  </script>
-  <div class="viewport">
-    <header class="navbar header--navbar desktop-only">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <div class="spring-logo--container">
-            <a class="spring-logo" th:href="@{/}" href="/"><span></span></a>
-          </div>
-          <ul class="nav pull-right">
-            <li th:class="${@uih.navClass(navSection?:'','projects')}">
-              <a th:href="@{/projects}" >Projects</a>
-            </li>
-            <li th:class="${@uih.navClass(navSection?:'','guides')}">
-              <a th:href="@{/guides}" >Guides</a>
-            </li>
-            <li th:class="${@uih.navClass(navSection?:'','blog')}">
-              <a th:href="@{/blog}" >Blog</a>
-            </li>
-            <li th:class="${@uih.navClass(navSection?:'','services')}">
-              <a th:href="@{/services}" >Training & Certification</a>
-            </li>
-            <li class="navbar-link nav-search js-nav-search">
-              <a>
-                <i class="icon-search navbar-search--icon js-search-input-open"></i>
-                <span class="search-input-close js-search-input-close">
-                  <i class="icon-remove"></i>
-                </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="search-dropdown--container js-search-dropdown">
-        <div class="container-fluid">
-          <div class="search-form--container">
-            <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
-              <input type="text" class="search-query search-form--form js-search-input" placeholder="Search for documentation, guides, and posts..." name="q" th:value="${searchForm != null ? searchForm.q : ''}" />
-              <button type="submit" class="search-form--submit"><i class="icon-search"></i></button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </header>
-    <div layout:include="_mobile-nav :: mobile-nav"></div>
-    <div class="header--container" layout:fragment="header-container">
-      <div class="header--content" layout:fragment="header-content">
-        <div class="row-fluid container-fluid">
-          <div class="span8">
-            <h1 class="header--content-title" layout:fragment="header">
-              First Last
-            </h1>
-            <p class="header--content-subtitle" layout:fragment="overview">
-              Subttitle Ligula Risus Tristique Pharetra
-            </p>
-          </div>
-          <div class="span4">
-            <div layout:fragment="header-sidebar"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid" layout:fragment="top-content"></div>
-    <div layout:fragment="full-width--layout"></div>
-    <main layout:fragment="content">
-      <div id="footer-push-down"></div>
-    </main>
 
-    <footer class="footer">
-      <div class="container-fluid">
-        <div class="row-fluid">
-          <div class="span12">
-            <div class="navbar">
-              <div class="container">
-                <ul class="nav">
-                  <li><a th:href="@{/team}">Team</a></li>
-                  <li><a th:href="@{/tools}">Tools</a></li>
-                  <li><a href="https://store.pivotal.io/">Store</a></li>
-                  <li><a th:href="@{/blog}">Newsletter</a></li>
-                </ul>
-              </div>
+<body>
+<header>
+    <div id='nav' class="container flex jc-between ai-center">
+        <a href='/'>
+            <img id='springlogo' src='/images/logo-spring.svg'>
+        </a>
+        <div id='mobile-nav' class='pointer'>
+            <div id="hamburger">
+                <div class="burger-bar"></div>
+                <div class="burger-bar"></div>
+                <div class="burger-bar"></div>
             </div>
-            &copy; <span th:text="${#calendars.format(#calendars.createToday(),'yyyy')}">2013</span> <a href="http://www.pivotal.io/">Pivotal Software</a>, Inc. All Rights Reserved.
-            <a href="https://pivotal.io/terms-of-use">Terms of Use</a> &bullet;
-            <a href="https://pivotal.io/privacy-policy">Privacy</a> &bullet;
-            <a th:href="@{/trademarks}">Trademark Guidelines</a> 
-            <div id="teconsent" style='display:inline-block;'></div> 
-            <span id='authentication' sec:authorize="isFullyAuthenticated()">
-              [<a th:href="@{/signout}">Sign out</a>]
-            </span>
-          </div>
         </div>
-      </div>
-    </footer>
-    <div id="scrim"></div>
-  </div>
+        <div id='popup' class='rad-5 border-box'>
+            <div class='relative'>
+                <p id='exit' class='h3 pointer m-0 z-1'>X</p>
+                <ul id='mobile-list' class='m-0'>
+                    <li><a href='/why-spring'>Why Spring</a></li>
+                    <li><a href='/learn'>Learn</a></li>
+                    <li><a href='/projects'>Projects</a></li>
+                    <li><a href='/training'>Training</a></li>
+                    <li><a href='/support'>Support</a></li>
+                    <li><a href='/community'>Community</a></li>
+                </ul>
+            </div>
+        </div>
+        <ul id='nav-items' class='flex jc-between'>
+            <li>
+                <div class='has-menu pointer' onclick="location.href='/why-spring';">Why Spring<div class='nav-arrow'></div>
+                    <div class='sub-menu-gap'>
+                        <ul id='why-items' class='drop-menu'>
+                            <li><a href='/microservices'>Microservices</a></li>
+                            <li><a href='/reactive'>Reactive</a></li>
+                            <li><a href='/streams'>Streams</a></li>
+                            <li><a href='/cloud'>Cloud</a></li>
+                            <li><a href='/web-applications'>Web Apps</a></li>
+                            <li><a href='/serverless'>Serverless</a></li>
+                            <li><a href='/batch'>Batch</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class='has-menu pointer' onclick="location.href='/learn';">Learn<div class='nav-arrow'></div>
+                    <div class='sub-menu-gap'>
+                        <ul id='learn-items' class='drop-menu'>
+                            <li><a href='/guides'>Guides</a></li>
+                            <li><a href='/blog'>Blog</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class='has-menu pointer' onclick="location.href='/projects';">Projects<div class='nav-arrow'></div>
+                    <div class='sub-menu-gap'>
+                        <ul id='why-items' class='drop-menu'>
+                            <li><a href='/projects/spring-boot'>Spring Boot</a></li>
+                            <li><a href='/projects/spring-framework'>Spring Framework</a></li>
+                            <li><a href='/projects/spring-cloud-dataflow'>Spring Cloud Data Flow</a></li>
+                            <li><a href='/projects/spring-cloud'>Spring Cloud</a></li>
+                            <li><a href='/projects/spring-data'>Spring Data</a></li>
+                            <li><a href='/projects/spring-integration'>Spring Integration</a></li>
+                            <li><a href='/projects/spring-batch'>Spring Batch</a></li>
+                            <li><a href='/projects/spring-security'>Spring Security</a></li>
+                            <li><a class='blue mb-2 inline-block' href='/projects'>View all projects</a></li>
+                            <p class='uppercase smaller'>Development Tools</p>
+                            <li><a href='/tools'>Spring Tools 4</a></li>
+                            <li><a href='https://start.spring.io'>Spring Initialzr <svg class='external-link-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polyline points="15 10.94 15 15 1 15 1 1 5.06 1" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><polyline points="8.93 1 15 1 15 7.07" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><line x1="15" y1="1" x2="8" y2="8" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/></svg></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href='/training'>Training</a></li>
+            <li><a href='/support'>Support</a></li>
+            <li>
+                <div class='has-menu pointer' onclick="location.href='/community';">Community<div class='nav-arrow'></div>
+                    <div class='sub-menu-gap'>
+                        <ul id='community-items' class='drop-menu'>
+                            <li><a href='/events'>Events</a></li>
+                            <li><a href='/team'>Team</a></li>
+                            <li><a href='http://store.pivotal.io'>Store <svg class='external-link-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polyline points="15 10.94 15 15 1 15 1 1 5.06 1" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><polyline points="8.93 1 15 1 15 7.07" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><line x1="15" y1="1" x2="8" y2="8" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/></svg></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li id='search'><img src='/images/search.svg'></li>
+            <li><a id='p-bug' target="_blank" href='https://pivotal.io'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.88 28.88"><defs><style>.cls-1{fill:#fff;}</style></defs><title>pivotal-bug</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><rect width="28.88" height="28.88"/><path class="cls-1" d="M13.9,6.17H9.37V22.71h2.81v-14h1.41l.91,0c2.29,0,3.44.74,3.44,2.53v.19c0,1.65-.91,2.74-3.4,2.74a5.53,5.53,0,0,1-.6-.05v2.29h.6c3.59,0,6.12-1.41,6.12-5v-.21C20.66,7.55,17.9,6.17,13.9,6.17Z"/></g></g></svg></a></li>
+        </ul>
+    </div>
+</header>
+
+<div id='main' layout:fragment="~{content}">
+
+</div><!--end of main-->
+<footer>
+    <div id='top'>
+        <div class='container flex jc-between mx-auto'>
+            <div id='green-circle-sm'></div>
+            <!-- <div id='green-circle-lg'></div> -->
+            <img id='circle-grid' src='/images/footer-circles.svg'>
+            <div class='third'>
+                <h2 class='bold h3 antialiased'>Get ahead</h2>
+                <p>Pivotal offers training and certification to turbo-charge your progress.</p>
+                <a href='/learn' class='blue link-animate'>Learn more</a>
+            </div>
+            <div class='third'>
+                <h2 class='bold h3 antialiased'>Get support</h2>
+                <p>Spring Runtime offers support and binaries for OpenJDK, Spring, and Tomcat in one simple subscription.</p>
+                <a href='/support' class='blue link-animate'>Learn more</a>
+            </div>
+            <div class='third'>
+                <h2 class='bold h3 antialiased'>Upcoming events</h2>
+                <div class='footer-event'>
+                    <a href='https://springoneplatform.io' class='blue link-animate'>SpringOne Platform</a>
+                    <p>Sep 21&ndash;24, Seattle</p>
+                </div>
+                <br>
+                <div class='footer-event'>
+                    <a href='https://springonetour.io' class='blue link-animate'>SpringOne Tour</a>
+                    <p>The best Cloud-Native Java content brought directly to you.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='bottom'>
+        <div id='bottom-top'>
+            <div id='footer-over' class='mx-auto'>
+                <div class='container flex jc-between mx-auto'>
+                    <div class='left'>
+                        <div class='flex jc-between'>
+                            <div class='footer-column'>
+                                <p><strong><a href='/why-spring'>Why Spring</a></strong></p>
+                                <ul>
+                                    <li><a href='/microservices'>Microservices</a></li>
+                                    <li><a href='/reactive'>Reactive</a></li>
+                                    <li><a href='/streams'>Streams</a></li>
+                                    <li><a href='/cloud'>Cloud</a></li>
+                                    <li><a href='/web-applications'>Web Apps</a></li>
+                                    <li><a href='/serverless'>Serverless</a></li>
+                                    <li><a href='/batch'>Batch</a></li>
+                                </ul>
+                            </div>
+                            <div class='footer-column'>
+                                <p><strong><a href='/learn'>Learn</a></strong></p>
+                                <ul>
+                                    <li><a href='/blog'>Blog</a></li>
+                                    <li><a href='/guides'>Guides</a></li>
+                                </ul>
+                            </div>
+                            <div class='footer-column'>
+                                <p><strong><a href='/community'>Community</a></strong></p>
+                                <ul>
+                                    <li><a href='/events'>Events</a></li>
+                                    <li><a href='/team'>Team</a></li>
+                                    <li><a href='https://store.pivotal.io'>Store <svg class='external-link-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polyline points="15 10.94 15 15 1 15 1 1 5.06 1" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><polyline points="8.93 1 15 1 15 7.07" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><line x1="15" y1="1" x2="8" y2="8" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/></svg></a></li>
+                                </ul>
+                            </div>
+                            <div class='footer-column'>
+                                <p><strong><a href='/projects'>Projects</a></strong></p>
+                                <p><strong><a href='/training'>Training</a></strong></p>
+                                <p><strong><a href='/support'>Support</a></strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='right' th:unless="${#httpServletRequest.requestURI == '/support'}">
+                        <h2 class='h3 mb-2 antialiased hide'>Get the Spring newsletter</h2>
+                        <h2 class='h3 mb-2 antialiased confirmation'>Thank you!</h2>
+                        <script src="//app-sj05.marketo.com/js/forms2/js/forms2.min.js"></script>
+                        <form id="mktoForm_4723"></form>
+                        <script>
+                            MktoForms2.loadForm("https://app-sj05.marketo.com", "625-IUJ-009", 4723 , function(form){
+                                form.onSuccess(function(values, followUpUrl){
+                                    form.getFormElem().hide();
+                                    $('.hide').hide();
+                                    $('.confirmation').show();
+                                    return false;
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='bottom-bottom'>
+            <div class='flex container jc-between'>
+                <div>
+                    <img id='springlogo-foot' src='/images/logo-spring.svg'>
+                    <p class='small antialiased'>© 2019 Pivotal Software, Inc. All Rights Reserved. <a href='https://pivotal.io/legal'>Terms of Use</a> • <a href='https://pivotal.io/privacy-policy'>Privacy</a> • <a href='/trademarks'>Trademark Guidelines</a> <span id='teconsent'></span></p>
+                    <p class='small antialiased'>Apache®, Apache Tomcat®, Apache Kafka, Apache Geode and Kubernetes are either registered trademarks or trademarks of the Apache Software Foundation in the United States and/or other countries. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates. Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. Windows® is a registered trademark of the Microsoft Corporation. Other names may be trademarks of their respective owners.</p>
+                </div>
+                <div id='social-icons' class='flex jc-between'>
+                    <a href='https://www.youtube.com/user/SpringSourceDev'><svg id='youtube-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><style>#youtube-icon .cls-1{fill:#333333;}#youtube-icon .cls-2{fill:#fff;}</style></defs><circle class="cls-1" cx="20" cy="20" r="20"/><path class="cls-2" d="M30.91,14.53a2.89,2.89,0,0,0-2-2C27.12,12,20,12,20,12s-7.12,0-8.9.47a2.9,2.9,0,0,0-2,2A30.56,30.56,0,0,0,8.63,20a30.44,30.44,0,0,0,.46,5.47,2.89,2.89,0,0,0,2,2C12.9,28,20,28,20,28s7.12,0,8.9-.47a2.87,2.87,0,0,0,2-2A30.56,30.56,0,0,0,31.37,20,28.88,28.88,0,0,0,30.91,14.53ZM17.73,23.41V16.59L23.65,20Z"/></svg></a>
+                    <a href='https://github.com/spring-projects'><svg id='github-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.93 75.93"><defs><style>#github-icon .cls-1{fill:#333333;}#github-icon .cls-2{fill:#fff;fill-rule:evenodd;}</style></defs><path class="cls-1" d="M38,0a38,38,0,1,0,38,38A38,38,0,0,0,38,0Z"/></g><path class="cls-2" d="M38,15.59A22.95,22.95,0,0,0,30.71,60.3c1.15.21,1.57-.5,1.57-1.11s0-2,0-3.9c-6.38,1.39-7.73-3.07-7.73-3.07A6.09,6.09,0,0,0,22,48.86c-2.09-1.42.15-1.39.15-1.39a4.81,4.81,0,0,1,3.52,2.36c2,3.5,5.37,2.49,6.67,1.91a4.87,4.87,0,0,1,1.46-3.07c-5.09-.58-10.45-2.55-10.45-11.34a8.84,8.84,0,0,1,2.36-6.15,8.29,8.29,0,0,1,.23-6.07s1.92-.62,6.3,2.35a21.82,21.82,0,0,1,11.49,0c4.38-3,6.3-2.35,6.3-2.35a8.29,8.29,0,0,1,.23,6.07,8.84,8.84,0,0,1,2.36,6.15c0,8.81-5.37,10.75-10.48,11.32a5.46,5.46,0,0,1,1.56,4.25c0,3.07,0,5.54,0,6.29s.42,1.33,1.58,1.1A22.94,22.94,0,0,0,38,15.59Z"/></svg></a>
+                    <a href='https://twitter.com/springframework'><svg id='twitter-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.93 75.93"><defs><style>#twitter-icon .cls-1{fill:#333333;}#twitter-icon .cls-2{fill:#fff;}</style></defs><circle class="cls-1" cx="37.97" cy="37.97" r="37.97"/><path id="Twitter-2" data-name="Twitter" class="cls-2" d="M55.2,22.73a15.43,15.43,0,0,1-4.88,1.91,7.56,7.56,0,0,0-5.61-2.49A7.78,7.78,0,0,0,37,30a7.56,7.56,0,0,0,.2,1.79,21.63,21.63,0,0,1-15.84-8.23,8,8,0,0,0,2.37,10.52,7.66,7.66,0,0,1-3.48-1v.09A7.84,7.84,0,0,0,26.45,41a7.54,7.54,0,0,1-2,.28A7.64,7.64,0,0,1,23,41.09a7.71,7.71,0,0,0,7.18,5.47,15.21,15.21,0,0,1-9.55,3.37,15.78,15.78,0,0,1-1.83-.11,21.41,21.41,0,0,0,11.78,3.54c14.13,0,21.86-12,21.86-22.42,0-.34,0-.68,0-1a15.67,15.67,0,0,0,3.83-4.08,14.9,14.9,0,0,1-4.41,1.24A7.8,7.8,0,0,0,55.2,22.73Z"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script th:src="@{/js/main.js}"></script>
 </body>
 </html>
