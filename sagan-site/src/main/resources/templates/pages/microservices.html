@@ -1,0 +1,140 @@
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+</head>
+<body id='microservices'>
+<div layout:fragment="~{content}">
+    <div id='hero' class='topics-banner mb-5'>
+        <img id='midshape' src='/images/header-microservices.svg'>
+    </div>
+    <div class='content' role='Main'>
+        <section class='container mb-5'>
+            <h1 class='h1'>Microservices</h1>
+            <div class='flex jc-between topic-hero'>
+                <div class='left m-0 topic-info'>
+                    <p class='big'>Microservice architectures are growing in popularity. Spring can help you write microservices that are small and self-contained and has many tools to help you look after your microservices once they’re in the hands of your users.In addition, Spring Cloud can help your microservices work together so you can reliably deliver rich functionality to your users.</p>
+                    <div class='flex jc-between half-and-half'>
+                        <div class='topics-half'>
+                            <h3 class='h3'>What are microservices?</h3>
+                            <p>Microservices are a modern approach to software whereby application code is delivered in small, manageable pieces, independent of others.</p>
+                        </div>
+                        <div class='topics-half'>
+                            <h3 class='h3'>Why build microservices?</h3>
+                            <p>Their small scale and relative isolation can lead to many additional benefits, such as easier maintenance, improved productivity, greater fault tolerance, better business alignment, and more. </p>
+                        </div>
+                    </div>
+                </div>
+                <img class='as-fs topic-icon' src='/images/microservices.svg'>
+            </div>
+        </section>
+        <section class='cornell container'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Microservices with Spring Boot</h2>
+                </div>
+                <div class='right'>
+                    <p class='mb-3'>With Spring Boot, your microservices can start small and iterate fast. That’s why it has become the de facto standard for Java™ microservices. Quickstart your project with Spring Initializr and then package as a JAR. With Spring Boot’s embedded server model, you’re ready to go in minutes.</p>
+                    <a class='button animate uppercase mb-3' href='/guides/gs/quickstart'>Try our quickstart guide</a>
+                </div>
+            </div>
+        </section>
+        <section class='cornell container'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Microservice resilience with Spring Cloud</h2>
+                </div>
+                <div class='right'>
+                    <p>The distributed nature of microservices can bring challenges. Spring can help you mitigate these issues. With several ready-to-run cloud patterns, <a class='blue link-animate' href='/cloud'>Spring Cloud</a> can help with service discovery, load-balancing, circuit-breaking, distributed tracing, monitoring, and can even act as an API gateway.</p>
+                </div>
+            </div>
+        </section>
+        <section class='cornell container'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Build streaming data microservices with Spring Cloud Stream</h2>
+                </div>
+                <div class='right'>
+                    <p>Spring Cloud Stream makes it easy to consume and produce events no matter which messaging platform you choose. Designed to help build highly scalable, event-driven systems, Spring Cloud Stream can connect your microservices with real-time messaging in just a few lines of code.</p>
+                    <a class='link-animate blue' href='https://content.pivotal.io/practitioners/getting-started-with-spring-cloud-stream'>Get started with Spring Cloud Stream</a>
+                </div>
+            </div>
+        </section>
+        <section id='manage' class='cornell container'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Manage your microservices</h2>
+                </div>
+                <div class='right'>
+                    <div class='flex jc-between'>
+                        <img src='/images/icon-graph.svg'>
+                        <div class='text'>
+                            <p><a class='link-animate blue' href="https://micrometer.io">Micrometer</a>, Spring Boot’s optional instrumentation framework, sends valuable metric insights straight to Prometheus, Atlas, and more. <a class='link-animate blue' href="/cloud">Spring Cloud’s</a> Sleuth and Zipkin projects offer distributed tracing so that you can follow along with what’s happening in real time.</p>
+                            <a class='link-animate blue' href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-metrics">Get started with Micrometer on Spring Boot</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id='last' class='cornell container'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Microservices on Cloud Foundry</h2>
+                </div>
+                <div class='right'>
+                    <div class='flex jc-between'>
+                        <div class='text half'>
+                            <p class='mb-3'>Because microservices tend to be small and stateless, they can scale horizontally. Platforms like PAS and PKS can do this with ease and greatly reduce your administrative overhead. With cloud connectors, you can even consume multiple backend services effortlessly.</p>
+                            <p><a class='link-animate blue' href="https://run.pivotal.io/">Try Pivotal Web Services for free</a></p>
+                        </div>
+                        <div class='images'>
+                            <img class='mb-2' src='/images/cloud-foundry.svg'>
+                            <img src='/images/logo-pas.svg'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class='topics-resources mb-7'>
+            <div class='container'>
+                <hr class='dark'>
+                <h2 class='h2'>
+                    More resources
+                </h2>
+                <div class='flex jc-between'>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://content.pivotal.io/ebooks/migrating-to-cloud-native-application-architectures'>
+                            <img src='/images/micro-res1.png'>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/ebooks/migrating-to-cloud-native-application-architectures'>Migrating to Cloud-Native Application Architectures</a>
+                        <div class='author'>Matt Stine</div>
+                    </div>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://content.pivotal.io/ebooks/thinking-architecturally'>
+                            <img src='/images/micro-res2.png'>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/ebooks/thinking-architecturally'>Thinking Architecturally</a>
+                        <div class='author'>Nate Schutta</div>
+                    </div>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://content.pivotal.io/ebooks/cloud-native-java-ebook'>
+                            <img src='/images/micro-res3.png'>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/ebooks/cloud-native-java-ebook'>Cloud-Native Java: Designing Resilient Systems with Spring Boot, Spring Cloud, and Cloud Foundry</a>
+                        <div class='author'>Josh Long & Kenny Bastani</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class='topic-getstarted py-80'>
+            <div class='container center'>
+                <h2 class='h2 white'>Ready to get started?</h2>
+                <div class='flex jc-center'>
+                    <a class='button animate white uppercase antialiased' href='/guides/gs/quickstart'><span>Try this tutorial</span></a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>

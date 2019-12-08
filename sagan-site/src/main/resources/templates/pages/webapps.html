@@ -1,0 +1,133 @@
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+</head>
+<body id='web-apps'>
+<div layout:fragment="~{content}">
+    <div id='hero' class='topics-banner mb-5'>
+        <img id='midshape' src='/images/header-web.svg'>
+    </div>
+    <div class='content' role='Main'>
+        <section class='container mb-5'>
+            <h1 class='h1'>Web Applications</h1>
+            <div class='flex jc-between topic-hero'>
+                <div class='left m-0 topic-info'>
+                    <p class='big'>Spring makes building web applications fast and hassle-free. By removing much of the boilerplate and configuration associated with web development, you get a modern web programming model that streamlines the development of server-side HTML applications, REST APIs, and bidirectional, event-based systems.</p>
+                </div>
+                <img class='as-fs topic-icon' src='/images/topic-web-applications.svg'>
+            </div>
+        </section>
+        <section id='productivity' class='cornell container'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Developer productivity</h2>
+                </div>
+                <div class='right'>
+                    <p class='mb-3'>Spring Boot is the starting point of your developer experience, whatever you’re building. Spring Boot is designed to get you up and running as quickly as possible, with minimal upfront configuration. With its embedded application servers, you can be serving in seconds.</p>
+                    <div class='flex jc-between'>
+                        <div class='half'>
+                            <p>Spring’s out-of-the-box, production-ready features like tracing, metrics, and health status provide developers with deep insight into their applications.</p>
+                            <p>Finally, Spring supports multiple JVM languages: Java, Kotlin, and Groovy.</p>
+                            <a class='blue link-animate' href='/guides/gs/rest-service/'>Try our REST Service Guide</a>
+                        </div>
+                        <div class='item half'>
+                            <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=lhkwLtDIMHI'>
+                                <img src='/images/webapps-video.png'>
+                                <div class='play'><div class='relative'><div class='triangle'></div></div></div>
+                            </a>
+                            <div class='type'>TUTORIAL</div>
+                            <a class='h3 blue mb-1 inline-block link-animate' href='https://www.youtube.com/watch?v=lhkwLtDIMHI'>Spring Boot in Less than 10 Minutes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id='battle' class='cornell container'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Battle-tested security</h2>
+                </div>
+                <div class='right'>
+                    <p>
+                        When it’s time to secure your web application, Spring Security supports many industry-standard authentication protocols, including SAML, OAuth, and LDAP.
+                    </p>
+                    <p>Get protection from top <a class='blue link-animate' href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf">OWASP</a> attacks, such as session fixation, clickjacking, cross-site request forgery, and more.
+                    </p>
+                    <a class='blue link-animate' href='/guides/gs/securing-web/'>Try our Securing Web Applications Guide</a>
+                </div>
+            </div>
+        </section>
+        <section id='battle' class='cornell container'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Data access made easy</h2>
+                </div>
+                <div class='right'>
+                    <p>Spring helps developers connect their web applications to a number of data stores. It supports relational and nonrelational databases, map-reduce frameworks, and cloud-based data services. </p>
+                    <p class='mb-3'><a class='blue link-animate' href='/guides/gs/accessing-data-jpa/'>Get Started with JPA</a> or <a class='blue link-animate' href='/guides/gs/accessing-data-mongodb/'>Get Started with MongoDB</a></p>
+                    <div class='logos flex jc-between flex-wrap'>
+                        <div class='logo flex jc-center ai-center'><img src='/images/logo-redis.png'></div>
+                        <div class='blue-line'></div>
+                        <div class='logo flex jc-center ai-center'><img src='/images/logo-mongodb.png'></div>
+                        <div class='blue-line'></div>
+                        <div class='logo flex jc-center ai-center'><img src='/images/logo-geode.png'></div>
+                        <div class='blue-line'></div>
+                        <div class='logo flex jc-center ai-center'><img src='/images/logo-solr.png'></div>
+                    </div>
+                    <div class='logos flex jc-between flex-wrap'>
+                        <div class='logo flex jc-center ai-center'><img src='/images/logo-cassandra.png'></div>
+                        <div class='blue-line'></div>
+                        <div class='logo flex jc-center ai-center'><img src='/images/logo-cosmos.png'></div>
+                        <div class='blue-line'></div>
+                        <div class='logo flex jc-center ai-center'><img src='/images/logo-neo4j.png'></div>
+                        <div class='blue-line'></div>
+                        <div class='logo flex jc-center ai-center'><img src='/images/logo-cloud-spanner.png'></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class='topics-resources mb-7'>
+            <div class='container'>
+                <hr class='dark'>
+                <h2 class='h2'>
+                    More resources
+                </h2>
+                <div class='flex jc-between'>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://content.pivotal.io/ebooks/migrating-to-cloud-native-application-architectures'>
+                            <img src='/images/micro-res1.png'>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/ebooks/migrating-to-cloud-native-application-architectures'>Migrating to Cloud-Native Application Architectures</a>
+                        <div class='author'>Matt Stine</div>
+                    </div>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://content.pivotal.io/ebooks/thinking-architecturally'>
+                            <img src='/images/micro-res2.png'>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/ebooks/thinking-architecturally'>Thinking Architecturally</a>
+                        <div class='author'>Nate Schutta</div>
+                    </div>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://content.pivotal.io/ebooks/cloud-native-java-ebook'>
+                            <img src='/images/micro-res3.png'>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/ebooks/cloud-native-java-ebook'>Cloud-Native Java: Designing Resilient Systems with Spring Boot, Spring Cloud, and Cloud Foundry</a>
+                        <div class='author'>Josh Long & Kenny Bastani</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class='topic-getstarted py-80'>
+            <div class='container'>
+                <h2 class='h2 white center'>Ready to get started?</h2>
+                <div class='flex jc-center'>
+                    <a class='button animate white uppercase antialiased' href='/guides/gs/rest-service/'><span>Try this tutorial</span></a>
+                    <!-- <a class='button animate white uppercase antialiased' href='https://start.spring.io/'><span>Start with Spring Initializr</span></a> -->
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>
