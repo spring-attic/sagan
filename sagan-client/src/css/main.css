@@ -148,8 +148,67 @@ body {
 #springlogo {
     height: 53px;
 }
-#search img {
-    height: 19px;
+#search .fa {
+    font-size: 20px;
+    cursor: pointer;
+}
+#search:hover .fa {
+    color: #6db33f;
+}
+#searchheaderform input {
+    background:transparent;
+    border-radius: 0;
+    height: 26px;
+    margin: 2px 0 0;
+    font-size: 16px;
+    border: none;
+    color: #333333;
+    padding: 0;
+    font-weight: 300;
+    width: 100%;
+}
+#searchheaderform input:focus {
+    outline: none !important;
+}
+#searchheadersubmit {
+    display: none;
+}
+.fa-search.close:before {
+    content: "\f00d";
+    font-size: 23px;
+}
+#search-nav {
+    display: none;
+    background: white;
+    position: absolute;
+    top: 90px;
+    width: 100%;
+    padding: 15px 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: none;
+    z-index: 3;
+}
+#search-nav .fa-search {
+    right: 17px;
+    position: absolute;
+    top: 6px;
+    font-size: 18px;
+}
+#searchheaderform {
+    width: 98%;
+    display: inline-block;
+}
+#searchheaderform .fa-search {
+    display: inline-block;
+    float: right;
+}
+#searchheaderform ::placeholder {
+    font-style: italic;
+    color: #999999;
 }
 .confirmation {
     display: none;
@@ -518,6 +577,9 @@ a.link-animate.link-darken:before {
 .mt-0 {
     margin-top: 0;
 }
+.mt-50 {
+    margin-top: 50px;
+}
 .mb-0 {
     margin-bottom: 0;
 }
@@ -547,6 +609,10 @@ a.link-animate.link-darken:before {
 }
 .mb-8 {
     margin-bottom: 140px;
+}
+.py-40 {
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 .py-50 {
     padding-top: 50px;
@@ -815,10 +881,10 @@ hr.dark {
     border-width: 0 2px 2px 0;
 }
 /* Pages with border nav */
-body#training header,
+/*body#training header,
 body#quickstart header {
-    border-bottom: 1px solid #ecf3f3;
-}
+  border-bottom: 1px solid #ecf3f3;
+}*/
 @media(max-width:1100px) {
     #springlogo {
         height: 30px;
@@ -1061,6 +1127,29 @@ body#quickstart header {
     /*  opacity: 0;
       animation: fadeIn .4s ease-out forwards;*/
 }
+@keyframes change {
+    0%, 12.66%, 100% {transform:translateY(0);}
+    16.66%, 29.32% {transform:translateY(-20%);}
+    33.32%,45.98% {transform:translateY(-40%);}
+    49.98%,62.64% {transform:translateY(-60%);}
+    66.64%,79.3% {transform:translateY(-80%);}
+}
+body#index .pre-flip-text {
+    height: 63px;
+}
+body#index .flip-text-container {
+    height: 66px;
+    overflow: hidden;
+}
+body#index .flip-text {
+    margin: 0;
+    list-style: none;
+    animation: change 15s infinite step-end;
+}
+body#index .flip-text-item {
+    margin:0;
+    line-height: 66px;
+}
 body#index #hero h1,
 body#index #hero p,
 body#index #hero .flex {
@@ -1074,6 +1163,7 @@ body#index #hero {
     padding: 80px 0 95px;
     overflow: hidden;
 }
+body#index #hero .center .button:nth-child(3),
 body#index #hero .center .button:nth-child(2){
     margin-right: 10px;
 }
@@ -1158,7 +1248,7 @@ body#index .right-geo .quarter-circle2 {
 }
 body#index h1 {
     margin-top: 0;
-    max-width: 480px;
+    max-width: 580px;
 }
 body#index .card {
     animation: riseUp .5s forwards ease, fadeIn .7s forwards ease;
@@ -1487,14 +1577,14 @@ body#web-apps .topic-icon {
 body#web-apps .topics-banner {
     background: linear-gradient(90deg, rgba(215,231,231,1) 50%, rgba(110, 179, 64,1) 50%);
 }
-body#web-apps ul {
+body#web-apps .content ul {
     padding-left: 20px;
     margin-top: 0;
 }
 body#web-apps #productivity .half {
     width: 46.5%;
 }
-body#web-apps li {
+body#web-apps .content li {
     line-height: 1.7em;
 }
 body#web-apps .logo {
@@ -1574,7 +1664,7 @@ body#serverless .content ul {
     padding-left: 20px;
     line-height: 1.7em;
 }
-body#serverless ul li {
+body#serverless .content ul li {
     margin-bottom: 8px;
 }
 @media(max-width:1000px) {
@@ -1610,6 +1700,9 @@ body#reactive #reactive-micro .right img {
 body#reactive .topics-banner {
     background: rgb(215,231,231);
 }
+body#reactive .topics-banner #midshape {
+    height: 80px;
+}
 @media(max-width:600px) {
     body#reactive #reactive-micro .right .flex {
         flex-direction: column;
@@ -1622,6 +1715,9 @@ body#reactive .topics-banner {
 }
 body#streams .topics-banner {
     background: rgb(215,231,231);
+}
+body#streams .topics-banner #midshape {
+    height: 80px;
 }
 body#streams .topic-icon {
     width: 305px;
@@ -2226,13 +2322,14 @@ body#support #support-list {
 }
 body#support #support-list li {
     line-height: 1.7em;
+    font-size: 15px;
 }
 body#support #support-list .col {
     width: 20%;
 }
-body#support #support-list .flex.mobile {
-    display: none;
-}
+/*body#support #support-list .flex.mobile {
+  display: none;
+}*/
 @media(max-width:1140px) {
     body#support #hero #pacman{
         right: -150px;
@@ -2281,11 +2378,14 @@ body#support #support-list .flex.mobile {
     }
 }
 @media(max-width:600px) {
-    body#support #support-list .flex.desktop {
+    /*  body#support #support-list .flex.desktop {
         display: none;
-    }
-    body#support #support-list .flex.mobile {
+      }
+      body#support #support-list .flex.mobile {
         display: flex;
+      }*/
+    body#support #support-list .flex {
+        flex-wrap: wrap;
     }
     body#support #support-list .flex .col {
         width: 48.5%;
@@ -2430,7 +2530,7 @@ form .mktoGutter,
 form .mktoOffset {
     display: none !important;
 }
-form input#Email {
+footer form input#Email {
     width: 250px !important;
     height: 48px;
     /*border: 2px solid black;*/
@@ -2440,14 +2540,7 @@ form input#Email {
     padding: 15px;
     box-sizing: border-box;
 }
-body#support form input#Email {
-    height: auto;
-    width: 175px !important;
-    border: 1px solid white;
-    font-size: 1em;
-    padding: 2px 3px;
-}
-form input[id^='mktoCheckbox'] {
+footer form input[id^='mktoCheckbox'] {
     transform: translateY(5px);
 }
 form .mktoButtonWrap {
@@ -2468,26 +2561,38 @@ form.mktoForm .mktoButtonWrap.mktoSimple button.mktoButton {
     box-sizing: border-box;
     border: none !important;
     height: 48px;
+    transition: all .2s;
 }
-body#support form.mktoForm .mktoButtonWrap.mktoSimple button.mktoButton {
+#contact-form .mktoForm .mktoButtonWrap.mktoSimple .mktoButton {
     background: white;
     /*color: black;*/
     color: #333333;
 }
+#contact-form .mktoForm .mktoButtonWrap.mktoSimple .mktoButton:hover,
+.mktoForm .mktoButtonWrap.mktoSimple .mktoButton:hover {
+    background: #6db33f;
+    color: white;
+}
 form button:focus {
     outline: 2px solid lightgrey !important;
 }
-form .mktoButtonRow {
+footer form .mktoButtonRow {
     position: absolute;
     top: 0;
     right: 0;
 }
-body#support form .mktoButtonRow {
-    position: relative;
-}
-body#support .mktoForm .mktoRadioList > label,
-body#support .mktoForm .mktoCheckboxList > label {
+#contact-form .mktoForm .mktoRadioList > label a:hover,
+#contact-form .mktoForm .mktoCheckboxList > label a:hover,
+#contact-form .mktoForm .mktoRadioList > label,
+#contact-form .mktoForm .mktoCheckboxList > label {
     color: white;
+}
+footer .mktoForm .mktoCheckboxList > label {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #999999;
+    font-size: 14px;
+    line-height: 1.5em;
 }
 form button:hover,
 form button:focus {
@@ -2500,8 +2605,8 @@ label[for^='mktoCheckbox'] {
 label[for^='mktoCheckbox'] a {
     color: #086dc3
 }
-label[for^='mktoCheckbox'] a:hover,
-label[for^='mktoCheckbox'] a:focus {
+footer label[for^='mktoCheckbox'] a:hover,
+footer label[for^='mktoCheckbox'] a:focus {
     /*color: black;*/
     color: #333333;
 }
@@ -2528,6 +2633,62 @@ label[for^='mktoCheckbox'] a:focus {
     width: 100% !important;
     max-width: 410px;
 }
+#contact-form input,
+#contact-form select,
+#contact-form form {
+    width: 475px !important;
+}
+#contact-form input,
+#contact-form select {
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border: 0 !important;
+    color: white;
+    height: 40px;
+}
+@media(max-width: 880px) {
+    #contact-form .mt-50 {
+        margin-top: 10px;
+    }
+    #contact-form .flex {
+        display: block;
+    }
+}
+@media(max-width: 500px) {
+    #contact-form input,
+    #contact-form select,
+    #contact-form form {
+        width: 275px !important;
+    }
+}
+#contact-form input[type=radio],
+#contact-form input[type=checkbox] {
+    height: auto;
+    width: auto !important;
+}
+#contact-form input {
+    background: transparent;
+    border-bottom: 1px solid rgba(255,255,255,0.7) !important;
+    padding: 0 !important;
+    margin-bottom: 10px;
+}
+#contact-form select {
+    background: url(https://d1fto35gcfffzn.cloudfront.net/images/icons/icon-angledown-white.png) no-repeat transparent right;
+    padding: 0 !important;
+    opacity: .7;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-bottom: 1px solid rgba(255,255,255,0.7) !important;
+    border-radius: 0;
+}
+#contact-form .mktoFieldWrap {
+    /*border-bottom: 1px solid rgba(255,255,255,0.7);*/
+}
+#contact-form ::placeholder {
+    color: white;
+    opacity: 0.7;
+}
 @media only screen and (max-width: 480px) {
     form {
         width: 100% !important;
@@ -2538,7 +2699,7 @@ label[for^='mktoCheckbox'] a:focus {
     .mktoForm .mktoLabel {
         padding-top: 0 !important;
     }
-    form input#Email {
+    footer form input#Email {
         width: 200px !important;
     }
     form .mktoButtonRow {
@@ -2552,7 +2713,7 @@ label[for^='mktoCheckbox'] a:focus {
     form.mktoForm .mktoButtonWrap.mktoSimple button.mktoButton {
         padding: 15px 15px;
     }
-    form input#Email {
+    footer form input#Email {
         width: 150px !important;
     }
     form .mktoButtonRow {

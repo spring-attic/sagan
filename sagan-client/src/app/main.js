@@ -26,6 +26,12 @@ $(document).ready(function() {
         return false;
     });
 
+    $('li#search').click(function(){
+        $('#search-nav').slideToggle();
+        $('li#search .fa-search').toggleClass('close');
+        $('#searchheaderform input').focus();
+    });
+
 });
 
 // Terminal animation
@@ -47,7 +53,7 @@ window.onload = function() {
         }
 
         function handler(entries, observer) {
-            for (const entry of entries) {
+            for (entry of entries) {
                 if (entry.isIntersecting) {
                     document.querySelector(".terminal .typed-placeholder").style.display = 'none';
                     type();
