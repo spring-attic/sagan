@@ -1,217 +1,174 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout"
-      data-info-popups>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
 <head>
-    <title>Projects</title>
-    <!-- http://opengraphprotocol.org/ -->
-    <meta property="og:title" content="Spring Projects" />
-    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
-    <meta property="og:description" content="The Spring portfolio has many projects, including Spring Framework,
-    Spring IO Platform, Spring Cloud, Spring Boot, Spring Data, Spring Security..." />
 </head>
-<body>
-  <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container-fluid">
-    <article class="main-body--wrapper">
-      <h1 class="index-page--title">Main Projects</h1>
-      <p class="index-page--subtitle">From configuration to security, web apps to big data &ndash; whatever the infrastructure needs of your application may be, there is a <strong>Spring Project</strong> to help you build it. Start small and use just what you need &ndash; <strong>Spring is modular by design</strong>.</p>
-      <section class="projects--wrapper">
-        <a class="project--container project--container--link" th:href="${springboot.siteUrl}" th:if="${springboot}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-boot"></div>
-          </div>
-          <div class="project--title">Spring Boot</div>
-          <p class="project--description">Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
-        </a>
-        <a th:href="${springframework.siteUrl}" class="project--container project--container--link" th:if="${springframework}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-framework"></div>
-          </div>
-          <div class="project--title">Spring Framework</div>
-          <p class="project--description">Provides core support for dependency injection, transaction management, web apps, data access, messaging and more.</p>
-        </a>
-        <a th:href="${springclouddataflow.siteUrl}" class="project--container project--container--link" th:if="${springclouddataflow}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-cloud-dataflow"></div>
-          </div>
-          <div class="project--title">Spring Cloud Data Flow</div>
-          <p class="project--description">An orchestration service for composable data microservice applications on modern runtimes.</p>
-        </a>
-        <a class="project--container project--container--link"
-           th:href="${springcloud.siteUrl}" th:if="${springcloud}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-cloud"></div>
-          </div>
-          <div class="project--title">Spring Cloud</div>
-          <p class="project--description">Provides a set of tools for common patterns in distributed systems. Useful for building and deploying microservices.</p>
-        </a>
-        <a class="project--container project--container--link"
-           th:href="${springdata.siteUrl}" th:if="${springdata}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-data"></div>
-          </div>
-          <div class="project--title">Spring Data</div>
-          <p class="project--description">Provides a consistent approach to data access &ndash; relational, non-relational, map-reduce, and beyond.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${springintegration.siteUrl}" th:if="${springintegration}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-integration"></div>
-          </div>
-          <div class="project--title">Spring Integration</div>
-          <p class="project--description">Supports the well-known <em>Enterprise Integration Patterns</em> via lightweight messaging and declarative adapters.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${springbatch.siteUrl}" th:if="${springbatch}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-batch"></div>
-          </div>
-          <div class="project--title">Spring Batch</div>
-          <p class="project--description">Simplifies and optimizes the work of processing high-volume batch operations.</p>
-        </a>
-        <a class="project--container project--container--link"
-           th:href="${springsecurity.siteUrl}" th:if="${springsecurity}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-security"></div>
-          </div>
-          <div class="project--title">Spring Security</div>
-          <p class="project--description">Protects your application with comprehensive and extensible authentication and authorization support.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${springhateoas.siteUrl}" th:if="${springhateoas}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-hateoas"></div>
-          </div>
-          <div class="project--title">Spring HATEOAS</div>
-          <p class="project--description">Simplifies creating REST representations that follow the HATEOAS principle.</p>
-        </a>
-        <a th:href="${springrestdocs.siteUrl}" class="project--container project--container--link" th:if="${springrestdocs}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-restdocs"></div>
-          </div>
-          <div class="project--title">Spring REST Docs</div>
-          <p class="project--description">Document RESTful services by combining hand-written documentation with auto-generated snippets produced with Spring MVC Test or REST Assured.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${springamqp.siteUrl}" th:if="${springamqp}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-amqp"></div>
-          </div>
-          <div class="project--title">Spring AMQP</div>
-          <p class="project--description">Applies core Spring concepts to the development of AMQP-based messaging solutions.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${springmobile.siteUrl}" th:if="${springmobile}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-mobile"></div>
-          </div>
-          <div class="project--title">Spring Mobile</div>
-          <p class="project--description">Simplifies the development of mobile web apps through device detection and progressive rendering options.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${springandroid.siteUrl}" th:if="${springandroid}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-android"></div>
-          </div>
-          <div class="project--title">Spring for Android</div>
-          <p class="project--description">Provides key Spring components for use in developing Android applications.</p>
-        </a>
-
-        <a class="project--container project--container--link" th:href="${springwebflow.siteUrl}" th:if="${springwebflow}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-webflow"></div>
-          </div>
-          <div class="project--title">Spring Web Flow</div>
-          <p class="project--description">Supports building web applications with controlled navigation such as checking in for a flight or applying for a loan.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${springws.siteUrl}" th:if="${springws}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-web-services"></div>
-          </div>
-          <div class="project--title">Spring Web Services</div>
-          <p class="project--description">Facilitates the development of <br/>contract-first SOAP web services.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${springldap.siteUrl}" th:if="${springldap}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-ldap"></div>
-          </div>
-          <div class="project--title">Spring LDAP</div>
-          <p class="project--description">Simplifies the development of applications using LDAP using Spring's familiar template-based approach.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${springsession.siteUrl}" th:if="${springsession}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-session"></div>
-          </div>
-          <div class="project--title">Spring Session</div>
-          <p class="project--description">Spring Session provides an API and implementations for managing a user’s session information.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${springshell.siteUrl}" th:if="${springshell}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-shell"></div>
-          </div>
-          <div class="project--title">Spring Shell</div>
-          <p class="project--description">Provides a powerful foundation for building command-line apps using a Spring-based programming model.</p>
-        </a>
-        <a th:href="${springflo.siteUrl}" class="project--container project--container--link" th:if="${springflo}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-flo"></div>
-          </div>
-          <div class="project--title">Spring Flo</div>
-          <p class="project--description">A JavaScript library that offers a basic embeddable HTML5 visual builder for pipelines and simple graphs.</p>
-        </a>
-        <a th:href="${springkafka.siteUrl}" class="project--container project--container--link" th:if="${springkafka}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-kafka"></div>
-          </div>
-          <div class="project--title">Spring Kafka</div>
-          <p class="project--description">Provides Familiar Spring Abstractions for Apache Kafka.</p>
-        </a>
-        <a th:href="${springstatemachine.siteUrl}" class="project--container project--container--link" th:if="${springstatemachine}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-spring-statemachine"></div>
-          </div>
-          <div class="project--title">Spring Statemachine</div>
-          <p class="project--description">A framework for application developers to use state machine concepts with Spring applications.</p>
-        </a>
-        <a th:href="${platform.siteUrl}" class="project--container project--container--link" th:if="${platform}">
-          <div class="project-logo--container">
-            <div class="icon project--logo logo-platform"></div>
-          </div>
-          <div class="project--title">Spring IO Platform</div>
-          <p class="project--description">Provides a cohesive, versioned platform for building modern applications. It is a modular, enterprise-grade distribution that delivers a curated set of dependencies.</p>
-        </a>
-      </section>
-      <h2 class="index-page--title">Community Projects</h2>
-      <section class="projects--wrapper project-aggregator top-separator">
-        <a class="project--container project--container--link" th:href="${springroo.siteUrl}" th:if="${springroo}">
-            <div class="project--title">Spring Roo</div>
-            <p class="project--description">Makes it fast and easy to build full Java applications in minutes.</p>
-        </a>
-        <a class="project--container project--container--link" th:href="${springscala.siteUrl}" th:if="${springscala}">
-          <div class="project--title">Spring Scala</div>
-          <p class="project--description">Brings the power and expressiveness of Scala together with the productivity and deep ecosystem of Spring.</p>
-        </a>
-      </section>
-      <h2 class="index-page--title">Projects in the Attic</h2>
-      <section class="projects--wrapper project-aggregator top-separator">
-        <a href="https://github.com/spring-projects/spring-flex#readme" class="project--container project--container--link">
-          <div class="project--title">Spring BlazeDS Integration</div>
-          <p class="project--description">Provides first-class support for using Adobe BlazeDS in Spring-based apps with Adobe Flex front-end clients.</p>
-        </a>
-        <a href="https://github.com/spring-projects/spring-loaded#readme" class="project--container project--container--link">
-          <div class="project--title">Spring Loaded</div>
-          <p class="project--description">Boosts development productivity by reloading class file changes&mdash;as you make them&mdash;within your app's JVM.</p>
-        </a>
-        <a href="https://github.com/spring-projects/rest-shell#readme" class="project--container project--container--link">
-          <div class="project--title">REST Shell</div>
-          <p class="project--description">Makes writing and testing RESTful applications easier with CLI-based resource discovery and interaction.</p>
-        </a>
-        <a th:href="${springxd.siteUrl}" class="project--container project--container--link" th:if="${springxd}">
-          <div class="project--title">Spring XD</div>
-          <p class="project--description">Simplifies the development of big data applications by addressing ingestion, analytics, batch jobs and data export.</p>
-        </a>
-        <a th:href="${springsocial.siteUrl}" class="project--container project--container--link" th:if="${springsocial}">
-          <div class="project--title">Spring Social</div>
-          <p class="project--description">Easily connects your applications with third-party APIs such as Facebook, Twitter, LinkedIn, and more.</p>
-        </a>
-      </section>
-    </article>
+<body id='projects'>
+<div layout:fragment="~{content}">
+  <div id='hero'>
+    <div class='container'>
+      <h1 class='h1 mb-1 antialiased'>Projects</h1>
+      <p class='big mb-5'>From configuration to security, web apps to big data&mdash;whatever the infrastructure needs of your application may be, there is a Spring Project to help you build it. Start small and use just what you need&mdash;Spring is modular by design.</p>
+    </div>
   </div>
+  <div class='content' role='Main'>
+    <div class='container'>
+      <!-- <h2 class='h3 mb-3 antialiased'>Main Projects</h2> -->
+      <h2 class='h5 small uppercase thin wide'>Featured Projects</h2>
+      <section id='featured' class='flex jc-between mb-4'>
+        <a class='featured-proj third rad-5 shadow-hover border-dark bg-white border-box'>
+          <h3 class='h3 m-0 antialiased'>Spring Kubernetes</h3>
+          <p class='m-0'>Very short one-line description.</p>
+        </a>
+        <a class='featured-proj third rad-5 shadow-hover border-dark bg-white border-box'>
+          <h3 class='h3 m-0 antialiased'>Spring Kubernetes</h3>
+          <p class='m-0'>Very short one-line description.</p>
+        </a>
+        <a class='featured-proj third rad-5 shadow-hover border-dark bg-white border-box'>
+          <h3 class='h3 m-0 antialiased'>Spring Kubernetes</h3>
+          <p class='m-0'>Very short one-line description.</p>
+        </a>
+      </section>
+      <section id='filters-and-proj' class='flex jc-between mb-6'>
+        <ul id='proj-filters'>
+          <li class='blue mb-1 pointer'>Microservices</li>
+          <li class='blue mb-1 pointer'>Reactive</li>
+          <li class='blue mb-1 pointer'>Event Driven</li>
+          <li class='blue mb-1 pointer'>Cloud</li>
+          <li class='blue mb-1 pointer'>Web Apps</li>
+          <li class='blue mb-1 pointer'>Serverless</li>
+          <li class='blue mb-1 pointer'>Streams</li>
+          <li class='blue mb-1 pointer'>Batch</li>
+        </ul>
+        <div class='proj-80'>
+          <div class='flex jc-between flex-wrap'>
+            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box' href='/projects/spring-boot'>
+              <div class='proj-icon-box'>
+                <img class='proj-icon' src='/images/icon-spring-boot.svg'>
+              </div>
+              <div class='proj-text'>
+                <h3 class='h3 m-0 antialiased'>Spring Boot</h3>
+                <p>Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
+              </div>
+            </a>
+            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box' href='/projects/spring-framework'>
+              <div class='proj-icon-box'>
+                <img class='proj-icon' src='/images/icon-spring-framework.svg'>
+              </div>
+              <div class='proj-text'>
+                <h3 class='h3 m-0 antialiased'>Spring Framework</h3>
+                <p>Provides core support for dependency injection, transaction management, web apps, data access, messaging and more.</p>
+              </div>
+            </a>
+            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box' href='/projects/spring-cloud-dataflow'>
+              <div class='proj-icon-box'>
+                <img class='proj-icon' src='/images/icon-spring-data-flow.svg'>
+              </div>
+              <div class='proj-text'>
+                <h3 class='h3 m-0 antialiased'>Spring Cloud Data Flow</h3>
+                <p>An orchestration service for composable data microservice applications on modern runtimes.</p>
+              </div>
+            </a>
+            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box' href='/projects/spring-cloud'>
+              <div class='proj-icon-box'>
+                <img class='proj-icon' src='/images/icon-spring-cloud.svg'>
+              </div>
+              <div class='proj-text'>
+                <h3 class='h3 m-0 antialiased'>Spring Cloud</h3>
+                <p>Provides a set of tools for common patterns in distributed systems. Useful for building and deploying microservices.</p>
+              </div>
+            </a>
+            <!--                 <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
+                              <div class='proj-icon-box'>
+                                <img class='proj-icon' src='/images/icon-spring-boot.svg'>
+                              </div>
+                              <div class='proj-text'>
+                                <h3 class='h3 m-0 antialiased'>Spring Boot</h3>
+                                <p>Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
+                              </div>
+                            </a>
+                            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
+                              <div class='proj-icon-box'>
+                                <img class='proj-icon' src='/images/icon-spring-framework.svg'>
+                              </div>
+                              <div class='proj-text'>
+                                <h3 class='h3 m-0 antialiased'>Framework</h3>
+                                <p>Provides core support for dependency injection, transaction management, web apps, data access, messaging and more.</p>
+                              </div>
+                            </a>
+                            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
+                              <div class='proj-icon-box'>
+                                <img class='proj-icon' src='/images/icon-spring-data-flow.svg'>
+                              </div>
+                              <div class='proj-text'>
+                                <h3 class='h3 m-0 antialiased'>Spring Cloud Data Flow</h3>
+                                <p>An orchestration service for composable data microservice applications on modern runtimes.</p>
+                              </div>
+                            </a>
+                            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
+                              <div class='proj-icon-box'>
+                                <img class='proj-icon' src='/images/icon-spring-cloud.svg'>
+                              </div>
+                              <div class='proj-text'>
+                                <h3 class='h3 m-0 antialiased'>Spring Cloud</h3>
+                                <p>Provides a set of tools for common patterns in distributed systems. Useful for building and deploying microservices.</p>
+                              </div>
+                            </a> -->
+          </div>
+        </div>
+      </section>
+      <section id='community-proj' class='proj-category mb-6'>
+        <h2 class='h3 mb-3 antialiased'>Community Projects</h2>
+        <div class='flex'>
+          <div class='proj-80 flex jc-between flex-wrap'>
+            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
+              <div class='proj-icon-box'>
+                <img class='proj-icon' src='/images/icon-spring-boot.svg'>
+              </div>
+              <div class='proj-text'>
+                <h3 class='h3 m-0 antialiased'>Spring Boot</h3>
+                <p>Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
+              </div>
+            </a>
+            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
+              <div class='proj-icon-box'>
+                <img class='proj-icon' src='/images/icon-spring-framework.svg'>
+              </div>
+              <div class='proj-text'>
+                <h3 class='h3 m-0 antialiased'>Framework</h3>
+                <p>Provides core support for dependency injection, transaction management, web apps, data access, messaging and more.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section id='attic-proj' class='proj-category mb-6'>
+        <h2 class='h3 mb-3 antialiased'>Projects in the Attic</h2>
+        <div class='flex'>
+          <div class='proj-80 flex jc-between flex-wrap'>
+            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
+              <div class='proj-icon-box'>
+                <img class='proj-icon' src='/images/icon-spring-boot.svg'>
+              </div>
+              <div class='proj-text'>
+                <h3 class='h3 m-0 antialiased'>Spring Boot</h3>
+                <p>Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
+              </div>
+            </a>
+            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
+              <div class='proj-icon-box'>
+                <img class='proj-icon' src='/images/icon-spring-framework.svg'>
+              </div>
+              <div class='proj-text'>
+                <h3 class='h3 m-0 antialiased'>Framework</h3>
+                <p>Provides core support for dependency injection, transaction management, web apps, data access, messaging and more.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
     <div layout:fragment="header-container"></div>
-    <main layout:fragment="content" class="body--container container-fluid">
+    <main layout:fragment="~{content}" class="body--container container-fluid">
         <div class="main-body--wrapper">
             <div class="desktop-only" th:unless="${title}">
                 <h1 th:class="${@uih.blogClass(activeCategory?:'','All Posts') + ' content--title'}">
