@@ -104,11 +104,11 @@ spring:
   profiles: standalone
   resources:
     static_locations:
-      - file:${client.dir}/src/
+      - file:${client.dir}/build/dist/
   devtools:
     restart:
       additional_paths:
-        - ../sagan-client/src/
+        - ../sagan-client/build/dist/
       additional_exclude: "**/*.js,**/*.css"
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
 flyway:
