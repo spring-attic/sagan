@@ -28,7 +28,7 @@
             <div class='relative'>
                 <p id='exit' class='h3 pointer m-0 z-1'>X</p>
                 <ul id='mobile-list' class='m-0'>
-                    <li><a href='/whyspring'>Why Spring</a></li>
+                    <li><a href='/why-spring'>Why Spring</a></li>
                     <li><a href='/learn'>Learn</a></li>
                     <li><a href='/projects'>Projects</a></li>
                     <li><a href='/training'>Training</a></li>
@@ -39,14 +39,14 @@
         </div>
         <ul id='nav-items' class='flex jc-between'>
             <li>
-                <div class='has-menu pointer' onclick="location.href='/whyspring';">Why Spring<div class='nav-arrow'></div>
+                <div class='has-menu pointer' onclick="location.href='/why-spring';">Why Spring<div class='nav-arrow'></div>
                     <div class='sub-menu-gap'>
                         <ul id='why-items' class='drop-menu'>
                             <li><a href='/microservices'>Microservices</a></li>
                             <li><a href='/reactive'>Reactive</a></li>
                             <li><a href='/streams'>Streams</a></li>
                             <li><a href='/cloud'>Cloud</a></li>
-                            <li><a href='/webapps'>Web Apps</a></li>
+                            <li><a href='/web-applications'>Web Apps</a></li>
                             <li><a href='/serverless'>Serverless</a></li>
                             <li><a href='/batch'>Batch</a></li>
                         </ul>
@@ -57,8 +57,9 @@
                 <div class='has-menu pointer' onclick="location.href='/learn';">Learn<div class='nav-arrow'></div>
                     <div class='sub-menu-gap'>
                         <ul id='learn-items' class='drop-menu'>
-                            <li><a href='/guides'>Guides</a></li>
                             <li><a href='/blog'>Blog</a></li>
+                            <li><a href='/guides'>Guides</a></li>
+                            <li><a href='/guides/gs/quickstart'>Quickstart</a></li>
                         </ul>
                     </div>
                 </div>
@@ -96,9 +97,18 @@
                     </div>
                 </div>
             </li>
-            <li id='search'><img src='/images/search.svg'></li>
+            <li id='search'><i class='fa fa-search'></i></li>
             <li><a id='p-bug' target="_blank" href='https://pivotal.io'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.88 28.88"><defs><style>.cls-1{fill:#fff;}</style></defs><title>pivotal-bug</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><rect width="28.88" height="28.88"/><path class="cls-1" d="M13.9,6.17H9.37V22.71h2.81v-14h1.41l.91,0c2.29,0,3.44.74,3.44,2.53v.19c0,1.65-.91,2.74-3.4,2.74a5.53,5.53,0,0,1-.6-.05v2.29h.6c3.59,0,6.12-1.41,6.12-5v-.21C20.66,7.55,17.9,6.17,13.9,6.17Z"/></g></g></svg></a></li>
         </ul>
+    </div>
+    <div id="search-nav" role="search">
+        <div class="container relative">
+            <form id="searchheaderform" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+                <input type="text" name="q" id="searchheaderinput" autocomplete="off" placeholder="Search for documentation, guides, and posts...">
+                <input type="submit" value="" id="searchheadersubmit" data-disable-with="">
+            </form>
+            <!-- <i class="fa fa-search transition"></i> -->
+        </div>
     </div>
 </header>
 
@@ -114,11 +124,11 @@
             <div class='third'>
                 <h2 class='bold h3 antialiased'>Get ahead</h2>
                 <p>Pivotal offers training and certification to turbo-charge your progress.</p>
-                <a href='/learn' class='blue link-animate'>Learn more</a>
+                <a href='/training' class='blue link-animate'>Learn more</a>
             </div>
             <div class='third'>
                 <h2 class='bold h3 antialiased'>Get support</h2>
-                <p>Spring Runtime offers support and binaries for OpenJDK, Spring, and Tomcat in one simple subscription.</p>
+                <p>Spring Runtime offers support and binaries for OpenJDK&trade;, Spring, and Apache Tomcat&reg; in one simple subscription.</p>
                 <a href='/support' class='blue link-animate'>Learn more</a>
             </div>
             <div class='third'>
@@ -142,7 +152,7 @@
                     <div class='left'>
                         <div class='flex jc-between'>
                             <div class='footer-column'>
-                                <p><strong><a href='/whyspring'>Why Spring</a></strong></p>
+                                <p><strong><a href='/why-spring'>Why Spring</a></strong></p>
                                 <ul>
                                     <li><a href='/microservices'>Microservices</a></li>
                                     <li><a href='/reactive'>Reactive</a></li>
@@ -158,6 +168,7 @@
                                 <ul>
                                     <li><a href='/blog'>Blog</a></li>
                                     <li><a href='/guides'>Guides</a></li>
+                                    <li><a href='/guides/gs/quickstart'>Quickstart</a></li>
                                 </ul>
                             </div>
                             <div class='footer-column'>
@@ -198,13 +209,13 @@
             <div class='flex container jc-between'>
                 <div>
                     <img id='springlogo-foot' src='/images/logo-spring.svg'>
-                    <p class='small antialiased'>© 2019 Pivotal Software, Inc. All Rights Reserved. <a href='https://pivotal.io/legal'>Terms of Use</a> • <a href='https://pivotal.io/privacy-policy'>Privacy</a> • <a href='/trademarks'>Trademark Guidelines</a> <span id='teconsent'></span></p>
-                    <p class='small antialiased'>Apache®, Apache Tomcat®, Apache Kafka, Apache Geode and Kubernetes are either registered trademarks or trademarks of the Apache Software Foundation in the United States and/or other countries. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates. Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. Windows® is a registered trademark of the Microsoft Corporation. Other names may be trademarks of their respective owners.</p>
+                    <p class='small antialiased'>© 2019 <a href='https://pivotal.io'>Pivotal Software</a>, Inc. All Rights Reserved. <a href='https://pivotal.io/legal'>Terms of Use</a> • <a href='https://pivotal.io/privacy-policy'>Privacy</a> • <a href='/trademarks'>Trademark Guidelines</a> <span id='teconsent'></span></p>
+                    <p class='small antialiased'>Apache®, Apache Tomcat®, Apache Kafka®, Apache Cassandra&trade;, and Apache Geode&trade; are trademarks or registered trademarks of the Apache Software Foundation in the United States and/or other countries. Java&trade;, Java&trade; SE, Java&trade; EE, and OpenJDK&trade; are trademarks of Oracle and/or its affiliates. Kubernetes® is a registered trademark of the Linux Foundation in the United States and other countries. Linux® is the registered trademark of Linus Torvalds in the United States and other countries. Windows® and Microsoft® Azure are registered trademarks of Microsoft Corporation. “AWS” and “Amazon Web Services” are trademarks or registered trademarks of Amazon.com Inc. or its affiliates. All other trademarks and copyrights are property of their respective owners and are only mentioned for informative purposes. Other names may be trademarks of their respective owners.</p>
                 </div>
                 <div id='social-icons' class='flex jc-between'>
-                    <a href='https://www.youtube.com/user/SpringSourceDev'><svg id='youtube-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><style>#youtube-icon .cls-1{fill:#333333;}#youtube-icon .cls-2{fill:#fff;}</style></defs><circle class="cls-1" cx="20" cy="20" r="20"/><path class="cls-2" d="M30.91,14.53a2.89,2.89,0,0,0-2-2C27.12,12,20,12,20,12s-7.12,0-8.9.47a2.9,2.9,0,0,0-2,2A30.56,30.56,0,0,0,8.63,20a30.44,30.44,0,0,0,.46,5.47,2.89,2.89,0,0,0,2,2C12.9,28,20,28,20,28s7.12,0,8.9-.47a2.87,2.87,0,0,0,2-2A30.56,30.56,0,0,0,31.37,20,28.88,28.88,0,0,0,30.91,14.53ZM17.73,23.41V16.59L23.65,20Z"/></svg></a>
-                    <a href='https://github.com/spring-projects'><svg id='github-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.93 75.93"><defs><style>#github-icon .cls-1{fill:#333333;}#github-icon .cls-2{fill:#fff;fill-rule:evenodd;}</style></defs><path class="cls-1" d="M38,0a38,38,0,1,0,38,38A38,38,0,0,0,38,0Z"/></g><path class="cls-2" d="M38,15.59A22.95,22.95,0,0,0,30.71,60.3c1.15.21,1.57-.5,1.57-1.11s0-2,0-3.9c-6.38,1.39-7.73-3.07-7.73-3.07A6.09,6.09,0,0,0,22,48.86c-2.09-1.42.15-1.39.15-1.39a4.81,4.81,0,0,1,3.52,2.36c2,3.5,5.37,2.49,6.67,1.91a4.87,4.87,0,0,1,1.46-3.07c-5.09-.58-10.45-2.55-10.45-11.34a8.84,8.84,0,0,1,2.36-6.15,8.29,8.29,0,0,1,.23-6.07s1.92-.62,6.3,2.35a21.82,21.82,0,0,1,11.49,0c4.38-3,6.3-2.35,6.3-2.35a8.29,8.29,0,0,1,.23,6.07,8.84,8.84,0,0,1,2.36,6.15c0,8.81-5.37,10.75-10.48,11.32a5.46,5.46,0,0,1,1.56,4.25c0,3.07,0,5.54,0,6.29s.42,1.33,1.58,1.1A22.94,22.94,0,0,0,38,15.59Z"/></svg></a>
-                    <a href='https://twitter.com/springframework'><svg id='twitter-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.93 75.93"><defs><style>#twitter-icon .cls-1{fill:#333333;}#twitter-icon .cls-2{fill:#fff;}</style></defs><circle class="cls-1" cx="37.97" cy="37.97" r="37.97"/><path id="Twitter-2" data-name="Twitter" class="cls-2" d="M55.2,22.73a15.43,15.43,0,0,1-4.88,1.91,7.56,7.56,0,0,0-5.61-2.49A7.78,7.78,0,0,0,37,30a7.56,7.56,0,0,0,.2,1.79,21.63,21.63,0,0,1-15.84-8.23,8,8,0,0,0,2.37,10.52,7.66,7.66,0,0,1-3.48-1v.09A7.84,7.84,0,0,0,26.45,41a7.54,7.54,0,0,1-2,.28A7.64,7.64,0,0,1,23,41.09a7.71,7.71,0,0,0,7.18,5.47,15.21,15.21,0,0,1-9.55,3.37,15.78,15.78,0,0,1-1.83-.11,21.41,21.41,0,0,0,11.78,3.54c14.13,0,21.86-12,21.86-22.42,0-.34,0-.68,0-1a15.67,15.67,0,0,0,3.83-4.08,14.9,14.9,0,0,1-4.41,1.24A7.8,7.8,0,0,0,55.2,22.73Z"/></svg></a>
+                    <a href='https://www.youtube.com/user/SpringSourceDev'><svg id='youtube-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><style>#youtube-icon .cls-1{fill:black;}#youtube-icon .cls-2{fill:#fff;}</style></defs><circle class="cls-1" cx="20" cy="20" r="20"/><path class="cls-2" d="M30.91,14.53a2.89,2.89,0,0,0-2-2C27.12,12,20,12,20,12s-7.12,0-8.9.47a2.9,2.9,0,0,0-2,2A30.56,30.56,0,0,0,8.63,20a30.44,30.44,0,0,0,.46,5.47,2.89,2.89,0,0,0,2,2C12.9,28,20,28,20,28s7.12,0,8.9-.47a2.87,2.87,0,0,0,2-2A30.56,30.56,0,0,0,31.37,20,28.88,28.88,0,0,0,30.91,14.53ZM17.73,23.41V16.59L23.65,20Z"/></svg></a>
+                    <a href='https://github.com/spring-projects'><svg id='github-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.93 75.93"><defs><style>#github-icon .cls-1{fill:black;}#github-icon .cls-2{fill:#fff;fill-rule:evenodd;}</style></defs><path class="cls-1" d="M38,0a38,38,0,1,0,38,38A38,38,0,0,0,38,0Z"/></g><path class="cls-2" d="M38,15.59A22.95,22.95,0,0,0,30.71,60.3c1.15.21,1.57-.5,1.57-1.11s0-2,0-3.9c-6.38,1.39-7.73-3.07-7.73-3.07A6.09,6.09,0,0,0,22,48.86c-2.09-1.42.15-1.39.15-1.39a4.81,4.81,0,0,1,3.52,2.36c2,3.5,5.37,2.49,6.67,1.91a4.87,4.87,0,0,1,1.46-3.07c-5.09-.58-10.45-2.55-10.45-11.34a8.84,8.84,0,0,1,2.36-6.15,8.29,8.29,0,0,1,.23-6.07s1.92-.62,6.3,2.35a21.82,21.82,0,0,1,11.49,0c4.38-3,6.3-2.35,6.3-2.35a8.29,8.29,0,0,1,.23,6.07,8.84,8.84,0,0,1,2.36,6.15c0,8.81-5.37,10.75-10.48,11.32a5.46,5.46,0,0,1,1.56,4.25c0,3.07,0,5.54,0,6.29s.42,1.33,1.58,1.1A22.94,22.94,0,0,0,38,15.59Z"/></svg></a>
+                    <a href='https://twitter.com/springframework'><svg id='twitter-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.93 75.93"><defs><style>#twitter-icon .cls-1{fill:black;}#twitter-icon .cls-2{fill:#fff;}</style></defs><circle class="cls-1" cx="37.97" cy="37.97" r="37.97"/><path id="Twitter-2" data-name="Twitter" class="cls-2" d="M55.2,22.73a15.43,15.43,0,0,1-4.88,1.91,7.56,7.56,0,0,0-5.61-2.49A7.78,7.78,0,0,0,37,30a7.56,7.56,0,0,0,.2,1.79,21.63,21.63,0,0,1-15.84-8.23,8,8,0,0,0,2.37,10.52,7.66,7.66,0,0,1-3.48-1v.09A7.84,7.84,0,0,0,26.45,41a7.54,7.54,0,0,1-2,.28A7.64,7.64,0,0,1,23,41.09a7.71,7.71,0,0,0,7.18,5.47,15.21,15.21,0,0,1-9.55,3.37,15.78,15.78,0,0,1-1.83-.11,21.41,21.41,0,0,0,11.78,3.54c14.13,0,21.86-12,21.86-22.42,0-.34,0-.68,0-1a15.67,15.67,0,0,0,3.83-4.08,14.9,14.9,0,0,1-4.41,1.24A7.8,7.8,0,0,0,55.2,22.73Z"/></svg></a>
                 </div>
             </div>
         </div>

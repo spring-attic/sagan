@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import '@fancyapps/fancybox'
 import '@fancyapps/fancybox/dist/jquery.fancybox.css'
+import '@fortawesome/fontawesome-free/css/all.css'
 import '../css/main.css'
 
 
@@ -30,6 +31,12 @@ $(document).ready(function() {
         $('#search-nav').slideToggle();
         $('li#search .fa-search').toggleClass('close');
         $('#searchheaderform input').focus();
+    });
+
+    //Guide
+    $('body.guide main h2[id]').click(function(){
+        $(this).parent().next().toggle();
+        $(this).toggleClass('open');
     });
 
 });
@@ -64,12 +71,12 @@ window.onload = function() {
         let observer = new IntersectionObserver(handler);
         observer.observe(document.querySelector(".terminal .terminal-blue"));
     }
-}
+};
 
 // Mobile nav
 document.querySelector('#hamburger').onclick = function(){
     document.querySelector('#popup').classList.add('active');
-}
+};
 document.querySelector('#exit').onclick = function(){
     document.querySelector('#popup').classList.remove('active');
-}
+};

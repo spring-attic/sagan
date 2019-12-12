@@ -1,7 +1,11 @@
 html {
     font-size: 100%;
     font-family: 'Open Sans', sans-serif;
-    /*color: #010101;*/
+}
+html,h1,h2,h3,h4,h5, p strong {
+    color: #010101;
+}
+p,li {
     color: #333333;
 }
 body {
@@ -13,8 +17,8 @@ body {
 #hamburger .burger-bar {
     width: 19px;
     height: 3px;
-    /*background: black;*/
-    background: #333333;
+    background: black;
+    /*background: #333333;*/
     margin: 0 0 3px;
     transition: background .2s;
 }
@@ -35,8 +39,8 @@ body {
 #nav li {
     position: relative;
     font-weight: 500;
-    /*color: #010101;*/
-    color: #333333;
+    color: #010101;
+    /*color: #333333;*/
 }
 .drop-menu li a {
     transition: color .2s;
@@ -115,7 +119,8 @@ body {
 .nav-arrow {
     transform: rotate(45deg) translateY(-6px);
     -webkit-transform: rotate(45deg) translateY(-6px);
-    border: solid #333333;
+    /*border: solid #333333;*/
+    border: solid black;
     border-width: 0 1px 1px 0;
     display: inline-block;
     padding: 3px;
@@ -269,6 +274,7 @@ footer #bottom-bottom p {
     /*margin: 0;*/
     line-height: 1.5em;
     font-size: 14px;
+    color: #999999;
 }
 footer #bottom-bottom #social-icons {
     flex-shrink: 0;
@@ -399,8 +405,8 @@ a.link-animate.link-darken:before {
     background: #ebf2f2;
 }
 .bg-black {
-    /*background-color: black;*/
-    background-color: #333333;
+    background-color: black;
+    /*background-color: #333333;*/
 }
 .pointer:hover {
     cursor: pointer;
@@ -459,8 +465,8 @@ a.link-animate.link-darken:before {
     overflow: hidden;
     font-size: .9375rem;
     text-transform: uppercase;
-    /*border: 2px solid black;*/
-    border: 2px solid #333333;
+    border: 2px solid black;
+    /*border: 2px solid #333333;*/
     padding: 14px 30px;
     font-weight: 700;
     -webkit-font-smoothing: antialiased;
@@ -481,8 +487,8 @@ a.link-animate.link-darken:before {
     right: 0;
     bottom: 0;
     left: 0;
-    /*background-color: black;*/
-    background-color: #333333;
+    background-color: black;
+    /*background-color: #333333;*/
     transition: 0.2s ease-in-out;
     -webkit-transform: translateX(-101%);
     transform: translateX(-101%);
@@ -509,8 +515,8 @@ a.link-animate.link-darken:before {
 }
 .button.white.animate:hover,
 .button.white.animate:focus {
-    /*color: black;*/
-    color: #333333;
+    color: black;
+    /*color: #333333;*/
 }
 .flex {
     display: flex;
@@ -546,6 +552,7 @@ a.link-animate.link-darken:before {
 .quarter {
     width: 23.5%;
 }
+.container-fluid,
 .container {
     max-width: 1140px;
     padding: 0 20px;
@@ -704,8 +711,8 @@ hr.light {
     height: 2px;
 }
 hr.dark {
-    /*background: black;*/
-    background: #333333;
+    background: black;
+    /*background: #333333;*/
     border: 0;
     height: 2px;
 }
@@ -770,23 +777,23 @@ hr.dark {
 }
 .topic-getstarted {
     /*background: black;*/
-    background: #333333;
+    /*background: #333333;*/
 }
 .topic-getstarted .flex {
     max-width: 565px;
     margin: 0 auto 40px;
 }
 .topics-resources .thumbnail:hover + .link-darken {
-    /*color: black;*/
-    color: #333333;
+    color: black;
+    /*color: #333333;*/
 }
 .thumbnail img {
     max-width: 100%;
     display: block;
 }
 .cornell > .flex {
-    /*border-top: 2px solid black;*/
-    border-top: 2px solid #333333;
+    border-top: 2px solid black;
+    /*border-top: 2px solid #333333;*/
 }
 .cornell .right{
     width: 65.5%;
@@ -810,8 +817,8 @@ hr.dark {
     max-width: 80%;
 }
 .half-cornell .half {
-    /*border-top: 2px solid black;*/
-    border-top: 2px solid #333333;
+    border-top: 2px solid black;
+    /*border-top: 2px solid #333333;*/
     width: 47.5%;
 }
 .half {
@@ -876,8 +883,8 @@ hr.dark {
     transition: border .2s;
 }
 .backlink:hover .arrow {
-    /*border: solid black;*/
-    border: solid #333333;
+    border: solid black;
+    /*border: solid #333333;*/
     border-width: 0 2px 2px 0;
 }
 /* Pages with border nav */
@@ -1855,8 +1862,8 @@ body#projects .proj-text {
     width: 76.5%;
 }
 body#projects .proj-category {
-    /*border-top: 2px solid black;*/
-    border-top: 2px solid #333333;
+    border-top: 2px solid black;
+    /*border-top: 2px solid #333333;*/
     padding-top: 20px;
 }
 body#projects .proj-category > .flex {
@@ -1927,8 +1934,8 @@ body#learn #quickstart .mx-auto {
     z-index: 1;
 }
 body#learn #columns .third {
-    /*border-top: 2px solid black;*/
-    border-top: 2px solid #333333;
+    border-top: 2px solid black;
+    /*border-top: 2px solid #333333;*/
     padding-top: 10px;
 }
 body#learn #columns .third .button {
@@ -2047,8 +2054,8 @@ body#guides #guide-search {
     width: 355px;
     height: 50px;
     max-width: 100%;
-    /*border: 2px solid black;*/
-    border: 2px solid #333333;
+    border: 2px solid black;
+    /*border: 2px solid #333333;*/
     font-family: 'Open Sans', sans-serif;
     font-size: 1rem;
     padding: 10px 20px 10px 50px;
@@ -2307,8 +2314,8 @@ body#support .content {
     padding: 110px 0 0;
 }
 body#support #included .item {
-    /*border-top: 2px solid black;*/
-    border-top: 2px solid #333333;
+    border-top: 2px solid black;
+    /*border-top: 2px solid #333333;*/
     width: 30.5%;
     padding-top: 10px;
 }
@@ -2316,8 +2323,8 @@ body#support #included h2 {
     max-width: 300px;
 }
 body#support #support-list {
-    /*border-top: 2px solid black;*/
-    border-top: 2px solid #333333;
+    border-top: 2px solid black;
+    /*border-top: 2px solid #333333;*/
     padding-top: 10px;
 }
 body#support #support-list li {
@@ -2479,8 +2486,8 @@ body#community .card .greenbar {
 }
 body#community .content .third,
 body#community .content .two-thirds {
-    /*border-top: 2px solid black;*/
-    border-top: 2px solid #333333;
+    border-top: 2px solid black;
+    /*border-top: 2px solid #333333;*/
     padding-top: 15px;
 }
 body#community #twitter,
@@ -2533,8 +2540,8 @@ form .mktoOffset {
 footer form input#Email {
     width: 250px !important;
     height: 48px;
-    /*border: 2px solid black;*/
-    border: 2px solid #333333;
+    border: 2px solid black;
+    /*border: 2px solid #333333;*/
     font-size: 1rem;
     font-family: 'Open Sans', sans-serif !important;
     padding: 15px;
@@ -2551,8 +2558,8 @@ form.mktoForm .mktoButtonWrap.mktoSimple button.mktoButton {
     overflow: hidden;
     font-size: .9375rem;
     text-transform: uppercase;
-    /*background: black;*/
-    background: #333333;
+    background: black;
+    /*background: #333333;*/
     color: white;
     padding: 15px 41px;
     font-weight: 700;
@@ -2565,8 +2572,8 @@ form.mktoForm .mktoButtonWrap.mktoSimple button.mktoButton {
 }
 #contact-form .mktoForm .mktoButtonWrap.mktoSimple .mktoButton {
     background: white;
-    /*color: black;*/
-    color: #333333;
+    color: black;
+    /*color: #333333;*/
 }
 #contact-form .mktoForm .mktoButtonWrap.mktoSimple .mktoButton:hover,
 .mktoForm .mktoButtonWrap.mktoSimple .mktoButton:hover {
@@ -2607,8 +2614,8 @@ label[for^='mktoCheckbox'] a {
 }
 footer label[for^='mktoCheckbox'] a:hover,
 footer label[for^='mktoCheckbox'] a:focus {
-    /*color: black;*/
-    color: #333333;
+    color: black;
+    /*color: #333333;*/
 }
 .mktoError {
     z-index: 1 !important;
@@ -2626,8 +2633,8 @@ footer label[for^='mktoCheckbox'] a:focus {
 }
 .mktoError .mktoErrorArrow {
     background-color: white !important;
-    /*border: 1px solid black !important;*/
-    border: 1px solid #333333 !important;
+    border: 1px solid black !important;
+    /*border: 1px solid #333333 !important;*/
 }
 .mktoForm .mktoCheckboxList {
     width: 100% !important;

@@ -15,7 +15,8 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
-            chunkFilename: 'css/[id].css'
+            chunkFilename: 'css/[id].css',
+            publicPath: '../'
         }),
         new CopyPlugin([
             { from: './src/images', to: 'images' }
@@ -34,10 +35,8 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, 'css-loader']
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
+                test: /\.(png|svg|jpg|gif|woff|woff2|ttf|eot)$/,
+                loader: 'file-loader'
             }
         ]
     },
