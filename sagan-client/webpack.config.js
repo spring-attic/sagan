@@ -14,12 +14,10 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
-            chunkFilename: 'css/[id].css',
-            publicPath: '../'
+            filename: 'css/[name].css'
         }),
         new CopyPlugin([
-            { from: './src/images', to: 'images' }
+            {from: './src/images', to: 'images'}
         ]),
         new webpack.ProvidePlugin({
             $: "jquery",
@@ -32,11 +30,27 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {publicPath: '../'},
+                    },
+                    'css-loader',
+                ]
             },
             {
-                test: /\.(png|svg|jpg|gif|woff|woff2|ttf|eot)$/,
-                loader: 'file-loader'
+                test: /.*webfonts\/.*$/,
+                loader: 'file-loader',
+                options: {
+                    name: 'css/[name].[ext]',
+                },
+            },
+            {
+                test: /^images/,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]',
+                },
             }
         ]
     },
