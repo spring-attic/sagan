@@ -13,7 +13,7 @@
             <h1 class='h1'>Streams</h1>
             <div class='flex jc-between topic-hero'>
                 <div class='left m-0 topic-info'>
-                    <p class='big'>Streaming data means a constant flow of events, each containing information about a change of some kind. Streaming data reflects how modern businesses actually work&mdash;thousands of small changes happening all day, every day. Spring’s ability to handle events and easily build applications around them, allows your apps to stay in sync with your business.</p>
+                    <p class='big'>Streaming data means a constant flow of events, each containing information about a change of some kind. Streaming data reflects how modern businesses actually work&mdash;thousands of small changes happening all day, every day. Spring’s ability to handle events and easily build applications around them lets your apps stay in sync with your business.</p>
                     <div class='flex jc-between half-and-half'>
                         <div class='topics-half'>
                             <h2 class='h3'>What is Streaming Data?</h3>
@@ -58,7 +58,7 @@
                 <div class='right'>
                     <div class='flex jc-between'>
                         <div class='text'>
-                            <p>Spring Cloud Stream provides a second, more specific binder solely for working with Kafka Streams. This special binder still focuses on developer productivity but adds support for Kafka specific features like KStream, KTable, and GlobalKTable. As with regular Spring Cloud Stream, the binder also takes care of connecting to Kafka, as well as creating, configuring, and maintaining the streams and topics. <a class='blue link-animate' href='https://www.confluent.io/blog/spring-for-apache-kafka-deep-dive-part-2-apache-kafka-spring-cloud-stream/'>Learn more</a></p>
+                            <p>Spring Cloud Stream provides a second, more specific binder solely for working with Kafka Streams. This special binder still focuses on developer productivity but adds support for Kafka-specific features like KStream, KTable, and GlobalKTable. As with regular Spring Cloud Stream, the binder also takes care of connecting to Kafka, as well as creating, configuring, and maintaining the streams and topics. <a class='blue link-animate' href='https://www.confluent.io/blog/spring-for-apache-kafka-deep-dive-part-2-apache-kafka-spring-cloud-stream/'>Learn more</a></p>
                         </div>
                         <img src='/images/apache-kakfa.svg'>
                     </div>
@@ -71,7 +71,7 @@
                     <h2 class='h2'>Spring Cloud Function</h2>
                 </div>
                 <div class='right'>
-                    <p class='mb-3'>With Spring Cloud Function, you can write functions once and run them anywhere (AWS, Azure, etc.), while continuing to use all the familiar and comprehensive Spring APIs to get your work done. You can chain multiple functions together to offer additional features, and there’s support for multiple inputs and outputs to bring merging, joining, and other more advanced use cases within easy reach. <a class='blue link-animate' href="/projects/spring-cloud-function">Learn more</a></p>
+                    <p class='mb-3'>With Spring Cloud Function, you can write functions once and run them anywhere (AWS, Azure, etc.) while continuing to use all the familiar and comprehensive Spring APIs to get your work done. You can chain multiple functions together to offer additional features, and there’s support for multiple inputs and outputs to bring merging, joining, and other more advanced use cases within easy reach. <a class='blue link-animate' href="/projects/spring-cloud-function">Learn more</a></p>
                     <div class='terminal rad-5 border-box mb-3'>
                         <div class='top'>
                             <div class='x-circle'></div>
@@ -105,12 +105,14 @@
                     <h2 class='h2'>Spring Cloud Data Flow</h2>
                 </div>
                 <div class='right'>
-                    <p class='m-0'>Spring Cloud Data Flow offers developers a range of tools and automation for working with all kinds of data sources and destinations. Spring Cloud Data Flow helps you to develop, deploy, manage, and scale high-throughput streaming data pipelines across multiple cloud-native platforms. It also features a rich user interface for building and monitoring your applications.</p>
-                    <a class='blue link-animate' href='https://dataflow.spring.io/'>Learn more</a>
+                    <p class='m-0'>Spring Cloud Data Flow offers developers a range of tools and automation for working with all kinds of data sources and destinations. Spring Cloud Data Flow helps you to develop, deploy, manage, and scale high-throughput streaming data pipelines across multiple cloud-native platforms. It also features a rich user interface for building and monitoring your applications. <a class='blue link-animate' href='https://dataflow.spring.io/'>Learn more</a></p>
+                    <br/>
+                    <br/>
+                    <img src='/images/SpringCloudDataFlow.png' alt="Spring Cloud Data Flow"/>
                 </div>
             </div>
         </section>
-        <section class='cornell container'>
+        <section class='cornell container mb-2'>
             <div class='flex jc-between py-50'>
                 <div class='left third'>
                     <h2 class='h2'>Spring AMQP and Spring for Apache Kafka</h2>
@@ -121,9 +123,17 @@
                 </div>
             </div>
         </section>
+        <section class='topic-getstarted mb-6 container center'>
+            <div class='bg-lightblue py-40'>
+                <h2 class='h2'>Ready to get started?</h2>
+                <div class='flex jc-center'>
+                    <a class='button animate uppercase' href='/blog/2019/10/15/simple-event-driven-microservices-with-spring-cloud-stream'><span>Try this guide</span></a>
+                </div>
+            </div>
+        </section>
         <section class='topics-resources mb-7'>
             <div class='container'>
-                <hr class='dark'>
+                <!-- <hr class='dark'> -->
                 <h2 class='h2'>
                     More resources
                 </h2>
@@ -151,14 +161,6 @@
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/content-developers/getting-started-with-spring-cloud-stream'>Getting Started With Spring Cloud Stream</a>
                         <div class='author'>Ben Wilcock and Brian McClain</div>
                     </div>
-                </div>
-            </div>
-        </section>
-        <section class='topic-getstarted py-80'>
-            <div class='container center'>
-                <h2 class='h2 white'>Ready to get started?</h2>
-                <div class='flex jc-center'>
-                    <a class='button animate white uppercase' href='/blog/2019/10/15/simple-event-driven-microservices-with-spring-cloud-stream'><span>Try this tutorial</span></a>
                 </div>
             </div>
         </section>

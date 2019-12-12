@@ -1,168 +1,168 @@
 <html
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorator="layout">
-  <head>
-  </head>
-  <body id='batch'>
-    <div layout:fragment="~{content}">
-      <div id='hero' class='topics-banner mb-5'>
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+</head>
+<body id='batch'>
+<div layout:fragment="~{content}">
+    <div id='hero' class='topics-banner mb-5'>
         <img id='midshape' src='/images/header-batch.svg'>
-      </div>
-      <div class='content' role='Main'>
+    </div>
+    <div class='content' role='Main'>
         <section class='container mb-5'>
-          <h1 class='h1'>Batch</h1>
-          <div class='flex jc-between topic-hero'>
-            <div class='left m-0 topic-info'>
-              <p class='big'>The ability of batch processing to efficiently process large amounts of data makes it ideal for many use cases. Spring Batch’s implementation of industry-standard processing patterns lets you build robust batch jobs on the JVM. Adding Spring Boot and other components from the Spring portfolio lets you build mission-critical batch applications.</p>
-              <div class='flex jc-between half-and-half'>
-                <div class='topics-half'>
-                  <h2 class='h3'>What is batch processing?</h3>
-                  <p>Batch processing is the processing of a finite amount of data in a manner that does not require external interaction or interruption.</p>
+            <h1 class='h1'>Batch</h1>
+            <div class='flex jc-between topic-hero'>
+                <div class='left m-0 topic-info'>
+                    <p class='big'>The ability of batch processing to efficiently process large amounts of data makes it ideal for many use cases. Spring Batch’s implementation of industry-standard processing patterns lets you build robust batch jobs on the JVM. Adding Spring Boot and other components from the Spring portfolio lets you build mission-critical batch applications.</p>
+                    <div class='flex jc-between half-and-half'>
+                        <div class='topics-half'>
+                            <h3 class='h3'>What is batch processing?</h3>
+                                <p>Batch processing is the processing of a finite amount of data in a manner that does not require external interaction or interruption.</p>
+                        </div>
+                        <div class='topics-half'>
+                            <h3 class='h3'>Why build batch processes?</h3>
+                                <p>Batch processes are an extremely efficient way of processing large amounts of data. The ability to schedule and prioritize work based on SLAs lets you allocate resources for  best utilization.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class='topics-half'>
-                  <h2 class='h3'>Why build batch processes?</h3>
-                  <p>Batch processes are an extremely efficient way of processing large amounts of data. The ability to schedule and prioritize work based on SLAs lets you allocate resources for  best utilization.</p>
-                </div>
-              </div>
+                <img class='as-fs topic-icon' src='/images/batch.svg'>
             </div>
-            <img class='as-fs topic-icon' src='/images/batch.svg'>              
-          </div>
         </section>
         <section class='cornell container'>
-          <div class='flex jc-between py-50'>
-            <div class='left third'>
-              <h2 class='h2'>Batch processing with Spring</h2>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Batch processing with Spring</h2>
+                </div>
+                <div class='right'>
+                    <p class='mb-3'>Spring Batch is the de facto standard for batch processing on the JVM. Its implementation of common batch patterns, such as chunk-based processing and partitioning, lets you create high-performing, scalable batch applications that are resilient enough for your most mission-critical processes. Spring Boot provides an additional level of production-grade features to let you speed up the development of your batch processes.</p>
+                    <a class='button animate uppercase mb-4' href='/guides/gs/batch-processing/'>Take the tutorial</a>
+                    <img src='/images/batch-diagram1.svg'>
+                </div>
             </div>
-            <div class='right'>
-              <p class='mb-3'>Spring Batch is the de facto standard for batch processing on the JVM. Its implementation of common batch patterns, such as chunk-based processing and partitioning, lets you create high-performing, scalable batch applications that are resilient enough for your most mission-critical processes. Spring Boot provides an additional level of production-grade features to let you speed up the development of your batch processes.</p>
-              <a class='button animate uppercase mb-4' href='/guides/gs/batch-processing/'>Take the tutorial</a>
-              <img src='/images/batch-diagram1.svg'>              
-            </div>
-          </div>
         </section>
         <section id='batchcloud' class='cornell container'>
-          <div class='flex jc-between py-50'>
-            <div class='left third'>
-              <h2 class='h2'>Batch processing in the cloud</h2>
-            </div>
-            <div class='right'>
-              <div class='flex'>
-                <div class='text'>
-                  <p>Batch processing fits perfectly with cloud computing, and Infrastructure as a Service, in particular. The ability to run applications in an on-demand, elastically scalable, and fault-tolerant manner are all cloud features that Spring Batch can use.</p>
-                  <a class='blue link-animate lightbox' href='https://www.youtube.com/watch?v=t1Kwx8bXv4Y'>Why move batch to the cloud?</a>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Batch processing in the cloud</h2>
                 </div>
-                <img src='/images/img-cloud.svg'>              
-              </div>
+                <div class='right'>
+                    <div class='flex'>
+                        <div class='text'>
+                            <p>Batch processing fits perfectly with cloud computing, and Infrastructure as a Service, in particular. The ability to run applications in an on-demand, elastically scalable, and fault-tolerant manner are all cloud features that Spring Batch can use.</p>
+                            <a class='blue link-animate lightbox' href='https://www.youtube.com/watch?v=t1Kwx8bXv4Y'>Why move batch to the cloud?</a>
+                        </div>
+                        <img src='/images/img-cloud.svg'>
+                    </div>
+                </div>
             </div>
-          </div>
         </section>
         <section class='cornell container'>
-          <div class='flex jc-between py-50'>
-            <div class='left third'>
-              <h2 class='h2'>Integration with common technologies</h2>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Integration with common technologies</h2>
+                </div>
+                <div class='right'>
+                    <p>Spring Batch’s integration with other Spring APIs lets you be productive from Day One. With <code>ItemReader</code> and <code>ItemWriter</code> support for files, relational databases and NoSQL stores support via Spring Data and messaging support through Apache Kafka and RabbitMQ, Spring Batch has the ability to handle most use cases out of the box.</p>
+                    <a class='blue link-animate' href='https://docs.spring.io/spring-batch/docs/current/reference/html/index.html'>Check out the docs</a>
+                </div>
             </div>
-            <div class='right'>
-              <p>Spring Batch’s integration with other Spring APIs lets you be productive from Day One. With <code>ItemReader</code> and <code>ItemWriter</code> support for files, relational databases and NoSQL stores support via Spring Data, and messaging support through Apache Kafka and RabbitMQ, Spring Batch has the ability to handle most use cases out of the box.</p>
-              <a class='blue link-animate' href='https://docs.spring.io/spring-batch/docs/current/reference/html/index.html'>Check out the docs</a>
-            </div>
-          </div>
         </section>
-        <section id='last' class='cornell container'>
-          <div class='flex jc-between py-50'>
-            <div class='left third'>
-              <!-- <h2 class='h2'>This needs a title</h2> -->
+        <section id='last' class='cornell container mb-2'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <!-- <h2 class='h2'>This needs a title</h2> -->
+                </div>
+                <div class='right'>
+                    <img class='mb-3' src='/images/batch-diagram2.svg'>
+                    <div class='flex jc-between'>
+                        <div class='col third'>
+                            <div class='item mb-3'>
+                                <h3 class='small uppercase'>Configuration Server</h3>
+                                <p>Configuration on-demand for your distributed applications.</p>
+                                <a class='link-animate blue' href='/guides/gs/centralized-configuration/'>Config</a>
+                            </div>
+                            <div class='item mb-3'>
+                                <h3 class='small uppercase'>Service Discovery</h3>
+                                <p>A dynamic directory that enables client-side load balancing and smart routing.</p>
+                                <a class='link-animate blue' href='/guides/gs/service-registration-and-discovery/'>Discovery</a>
+                            </div>
+                        </div>
+                        <div class='col third'>
+                            <div class='item mb-3'>
+                                <h3 class='small uppercase'>Batch Job</h3>
+                                <p>Efficient processing of data in batches for mission-critical applications.</p>
+                                <a class='link-animate blue' href='/guides/gs/batch-processing/'>Spring Batch</a>
+                            </div>
+                            <div class='item mb-3'>
+                                <h3 class='small uppercase'>Batch Job Workers</h3>
+                                <p>Scale a batch job to multiple nodes for high performance.</p>
+                                <a class='link-animate blue' href='https://docs.spring.io/spring-batch/4.1.x/reference/html/scalability.html#scalability'>Scaling Spring Batch</a>
+                            </div>
+                            <div class='item mb-3'>
+                                <h3 class='small uppercase'>Spring Cloud Data Flow</h3>
+                                <p>Orchestrate or schedule your ephemeral microservices in the cloud.</p>
+                                <a class='link-animate blue' href='https://dataflow.spring.io/getting-started/'>Spring Cloud Data Flow</a>
+                            </div>
+                        </div>
+                        <div class='col third'>
+                            <div class='item mb-3'>
+                                <h3 class='small uppercase'>Metrics Store</h3>
+                                <p>Monitor application metrics on the platform of your choice.</p>
+                                <a class='link-animate blue' href='http://micrometer.io/'>Metrics</a>
+                            </div>
+                            <div class='item mb-3'>
+                                <h3 class='small uppercase'>Dynamic Monitoring Dashboards</h3>
+                                <p>Create dynamic dashboards to monitor your production applications using tools like Grafana.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class='right'>
-              <img class='mb-3' src='/images/batch-diagram2.svg'>              
-              <div class='flex jc-between'>
-                <div class='col third'>
-                  <div class='item mb-3'>
-                    <h3 class='small uppercase'>Configuration Server</h3>
-                    <p>Configuration on-demand for your distributed applications.</p>
-                    <a class='link-animate blue' href='/guides/gs/centralized-configuration/'>Config</a>
-                  </div>
-                  <div class='item mb-3'>
-                    <h3 class='small uppercase'>Service Discovery</h3>
-                    <p>A dynamic directory that enables client-side load balancing and smart routing.</p>
-                    <a class='link-animate blue' href='/guides/gs/service-registration-and-discovery/'>Discovery</a>
-                  </div>
+        </section>
+        <section class='topic-getstarted mb-6 container center'>
+            <div class='bg-lightblue py-40'>
+                <h2 class='h2 center'>Ready to get started?</h2>
+                <div class='flex jc-center'>
+                    <a class='button animate uppercase' href='/guides/gs/batch-processing/'><span>Try this guide</span></a>
+                    <!-- <a class='button animate white uppercase' href='https://start.spring.io/'><span>Start with Spring Initializr</span></a> -->
                 </div>
-                <div class='col third'>
-                  <div class='item mb-3'>
-                    <h3 class='small uppercase'>Batch Job</h3>
-                    <p>Efficient processing of data in batches for mission-critical applications.</p>
-                    <a class='link-animate blue' href='/guides/gs/batch-processing/'>Spring Batch</a>
-                  </div>
-                  <div class='item mb-3'>
-                    <h3 class='small uppercase'>Batch Job Workers</h3> 
-                    <p>Scale a batch job to multiple nodes for high performance.</p>
-                    <a class='link-animate blue' href='https://docs.spring.io/spring-batch/4.1.x/reference/html/scalability.html#scalability'>Scaling Spring Batch</a>
-                  </div>
-                  <div class='item mb-3'>
-                    <h3 class='small uppercase'>Spring Cloud Data Flow</h3>
-                    <p>Orchestrate or schedule your ephemeral microservices in the cloud.</p>
-                    <a class='link-animate blue' href='https://dataflow.spring.io/getting-started/'>Spring Cloud Data Flow</a>
-                  </div>
-                </div>
-                <div class='col third'>
-                  <div class='item mb-3'>
-                    <h3 class='small uppercase'>Metrics Store</h3>
-                    <p>Monitor application metrics on the platform of your choice.</p>
-                    <a class='link-animate blue' href='http://micrometer.io/'>Metrics</a>
-                  </div>    
-                  <div class='item mb-3'>
-                    <h3 class='small uppercase'>Dynamic Monitoring Dashboards</h3>
-                    <p>Create dynamic dashboards to monitor your production applications using tools like Grafana.</p>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
         </section>
         <section class='topics-resources mb-7'>
-          <div class='container'>
-            <hr class='dark'>
-            <h2 class='h2'>
-              More resources
-            </h2>
-            <div class='flex jc-between'>
-              <div class='item third'>
-                <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=J6IPlfm7N6w'>
-                  <img src='/images/batch-vod1.jpg'>
-                  <div class='play'><div class='relative'><div class='triangle'></div></div></div>
-                </a>
-                <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=J6IPlfm7N6w'>High-Performance Batch Processing</a>
-                <div class='author'>Michael Minella & Mahmoud Ben Hassine</div>
-              </div>
-              <div class='item third'>
-                <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=x4nBNLoizOc'>
-                  <img src='/images/batch-vod2.jpg'>
-                  <div class='play'><div class='relative'><div class='triangle'></div></div></div>
-                </a>
-                <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=x4nBNLoizOc'>Spring Tips: Spring Batch</a>
-                <div class='author'>Josh Long</div>
-              </div>
-              <div class='item third'>
-                <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=-Icd-s2JoAw'>
-                  <img src='/images/batch-vod3.jpg'>
-                  <div class='play'><div class='relative'><div class='triangle'></div></div></div>
-                </a>
-                <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=-Icd-s2JoAw'>Cloud-Native Batch Processing</a>
-                <div class='author'>Michael Minella</div>
-              </div>
+            <div class='container'>
+                <!-- <hr class='dark'> -->
+                <h2 class='h2'>
+                    More resources
+                </h2>
+                <div class='flex jc-between'>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=J6IPlfm7N6w'>
+                            <img src='/images/batch-vod1.jpg'>
+                            <div class='play'><div class='relative'><div class='triangle'></div></div></div>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=J6IPlfm7N6w'>High-Performance Batch Processing</a>
+                        <div class='author'>Michael Minella & Mahmoud Ben Hassine</div>
+                    </div>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=x4nBNLoizOc'>
+                            <img src='/images/batch-vod2.jpg'>
+                            <div class='play'><div class='relative'><div class='triangle'></div></div></div>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=x4nBNLoizOc'>Spring Tips: Spring Batch</a>
+                        <div class='author'>Josh Long</div>
+                    </div>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=-Icd-s2JoAw'>
+                            <img src='/images/batch-vod3.jpg'>
+                            <div class='play'><div class='relative'><div class='triangle'></div></div></div>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=-Icd-s2JoAw'>Cloud-Native Batch Processing</a>
+                        <div class='author'>Michael Minella</div>
+                    </div>
+                </div>
             </div>
-          </div>
         </section>
-        <section class='topic-getstarted py-80'>
-          <div class='container'>
-            <h2 class='h2 white center'>Ready to get started?</h2>
-            <div class='flex jc-center'>
-              <a class='button animate white uppercase' href='/guides/gs/batch-processing/'><span>Try this tutorial</span></a>
-              <!-- <a class='button animate white uppercase' href='https://start.spring.io/'><span>Start with Spring Initializr</span></a> -->
-            </div>
-          </div>
-        </section>
-      </div>
     </div>
-  </body>
+</div>
+</body>
 </html>
