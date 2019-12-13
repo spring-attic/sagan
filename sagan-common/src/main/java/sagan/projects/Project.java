@@ -223,12 +223,12 @@ public class Project {
         this.childProjectList = childProjectList;
     }
 
-    public void setGroup(Set<ProjectGroup> group) {
-        this.groupsTag = group;
+    public Set<ProjectGroup> getGroupsTag() {
+        return this.groupsTag;
     }
 
-    public Set<ProjectGroup> getGroup() {
-        return this.groupsTag;
+    public void setGroupsTag(Set<ProjectGroup> groupsTag) {
+        this.groupsTag = groupsTag;
     }
 
     @Override

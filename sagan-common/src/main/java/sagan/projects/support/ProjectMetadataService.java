@@ -1,13 +1,17 @@
 package sagan.projects.support;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import javax.persistence.criteria.Predicate;
 
 import sagan.projects.Project;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,8 +46,13 @@ public class ProjectMetadataService {
         if (group == null || group.isEmpty()) {
             return Collections.emptyList();
         }
-
-        return repository.findByGroupTag(group);
+        Specification<Project> spec = (root, query, cb) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            predicates.add(cb.and(cb.like(root.get("groupsTag").as(String.class)
+                    ,"%"+group.toLowerCase()+"%")));
+            return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+        };
+        return repository.findAll(spec, sortByDisplayOrderAndId);
     }
 
     public Project getProject(String id) {

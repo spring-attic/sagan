@@ -41,7 +41,7 @@ public enum ProjectGroup {
 
 	public static ProjectGroup getGroup(String _value) {
 		return Stream.of(ProjectGroup.values())
-				.filter(e -> e.getValue().toLowerCase().equals(_value))
+				.filter(e -> e.getValue().toLowerCase().equals(_value.toLowerCase()))
 				.findFirst()
 				.orElseThrow(IllegalArgumentException::new);
 	}

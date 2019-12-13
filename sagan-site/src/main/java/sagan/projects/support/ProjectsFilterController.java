@@ -20,8 +20,8 @@ import java.util.Collection;
 import sagan.projects.Project;
 import sagan.support.JsonPController;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
@@ -31,17 +31,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
  **/
 
 @JsonPController
-@RequestMapping("/projects")
-public class DeleteMeController {
+@RequestMapping("/projects_filter")
+public class ProjectsFilterController {
 
 	private final ProjectMetadataService projectMetadataService;
 
-	public DeleteMeController(ProjectMetadataService service) {
+	public ProjectsFilterController(ProjectMetadataService service) {
 		this.projectMetadataService = service;
 	}
 
-	@RequestMapping(value="/filter", method = { GET, HEAD })
-	public Collection<Project> byGroup(@RequestParam("groups") String tag) {
+	@RequestMapping(value="/group/{tag}", method = { GET, HEAD })
+	public Collection<Project> byGroup(@PathVariable("tag") String tag) {
 		Collection<Project> projects = projectMetadataService.getProjectsInGroup(tag);
 		projects.stream().forEach(System.out::println);
 		return projects;
