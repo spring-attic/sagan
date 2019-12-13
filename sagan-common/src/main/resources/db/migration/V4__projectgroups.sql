@@ -1,0 +1,1 @@
+ALTER TABLE project ADD groups_tag VARCHAR;

@@ -1,17 +1,18 @@
 package sagan.projects.support;
 
-import sagan.projects.Project;
-
 import java.util.List;
+
+import sagan.projects.Project;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProjectMetadataRepository extends JpaRepository<Project, String> {
+public interface ProjectMetadataRepository extends JpaRepository<Project, String>, JpaSpecificationExecutor<Project> {
 
 	List<Project> findByCategory(String category, Sort sort);
 
