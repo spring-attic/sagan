@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -41,6 +42,9 @@ public class Project {
     private String rawOverview;
     private String renderedOverview;
     private int displayOrder = Integer.MAX_VALUE;
+
+    @Convert(converter = ProjectGroupConverter.class)
+    private Set<ProjectGroup> groupsTag;
 
     @ManyToOne
     @JsonIgnore
@@ -217,6 +221,14 @@ public class Project {
 
     public void setChildProjectList(List<Project> childProjectList) {
         this.childProjectList = childProjectList;
+    }
+
+    public void setGroup(Set<ProjectGroup> group) {
+        this.groupsTag = group;
+    }
+
+    public Set<ProjectGroup> getGroup() {
+        return this.groupsTag;
     }
 
     @Override

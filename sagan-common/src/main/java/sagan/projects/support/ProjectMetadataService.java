@@ -1,8 +1,10 @@
 package sagan.projects.support;
 
-import sagan.projects.Project;
-
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import sagan.projects.Project;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -34,6 +36,14 @@ public class ProjectMetadataService {
 
     public List<Project> getProjectsWithReleases() {
         return repository.findAllWithReleases(sortByDisplayOrderAndId);
+    }
+
+    public Collection<Project> getProjectsInGroup(String group) {
+        if (group == null || group.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        return repository.findByGroupTag(group);
     }
 
     public Project getProject(String id) {
