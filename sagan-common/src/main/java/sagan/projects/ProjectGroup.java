@@ -15,35 +15,19 @@
  */
 package sagan.projects;
 
-import java.util.stream.Stream;
-
 /**
  * @author Haytham Mohamed
  **/
 
 public enum ProjectGroup {
 
-	MICROSERVICES("microservices")
-	,REACTIVE("reactive")
-	,EVENT("event driven")
-	,CLOUD("cloud")
-	,WEB("webapps")
-	,SERVERLESS("serverless")
-	,STREAMS("streams")
-	,BATCH("batch")
+	microservices
+	,reactive
+	,event_driven
+	,cloud
+	,web_apps
+	,serverless
+	,streams
+	,batch
 	;
-
-	private String value;
-
-	private ProjectGroup(String value) { this.value = value.toLowerCase(); }
-
-	public String getValue() { return this.value; }
-
-	public static ProjectGroup getGroup(String _value) {
-		return Stream.of(ProjectGroup.values())
-				.filter(e -> e.getValue().toLowerCase().equals(_value.toLowerCase()))
-				.findFirst()
-				.orElseThrow(IllegalArgumentException::new);
-	}
-
 }

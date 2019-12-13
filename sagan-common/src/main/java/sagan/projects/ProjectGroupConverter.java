@@ -35,7 +35,7 @@ public class ProjectGroupConverter implements AttributeConverter<Set<ProjectGrou
 			return null;
 		}
 		return group.stream()
-				.map(e -> e.getValue().toLowerCase())
+				.map(e -> e.name().toLowerCase())
 				.collect(Collectors.joining(","));
 	}
 
@@ -46,7 +46,7 @@ public class ProjectGroupConverter implements AttributeConverter<Set<ProjectGrou
 		}
 		return Arrays.stream(value.split(","))
 				.map(s -> s.toLowerCase())
-				.map(s -> ProjectGroup.getGroup(s))
+				.map(s -> ProjectGroup.valueOf(s))
 				.collect(Collectors.toSet());
 	}
 }
