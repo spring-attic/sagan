@@ -15,11 +15,13 @@
  */
 package sagan.projects.support;
 
+import java.util.List;
+
 import sagan.projects.ProjectGroup;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProjectGroupRepository extends JpaRepository<ProjectGroup, Long> {
 
-	ProjectGroup findByNameIgnoreCase(String name);
+	List<ProjectGroup> findByNameIgnoreCase(String name);
 }

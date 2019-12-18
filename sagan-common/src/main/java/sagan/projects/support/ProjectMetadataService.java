@@ -50,24 +50,35 @@ public class ProjectMetadataService {
         return repository.findByGroup(group);
     }
 
-    public Project addGroups(String projectId, List<ProjectGroup> groups) {
+    public Project addGroupsToProject(String projectId, List<ProjectGroup> groups) {
         Project project = this.getProject(projectId);
         for (ProjectGroup grp: groups) {
-            ProjectGroup savedGroup = groupRepository.findByNameIgnoreCase(grp.getName());
-            if (savedGroup != null) {
-                project.getGroups().add(savedGroup);
+            List<ProjectGroup> savedGroups =
+                    groupRepository.findByNameIgnoreCase(grp.getName());
+
+            if (savedGroups != null && savedGroups.size() > 1) {
+                throw new RuntimeException("More than one group found that match name "
+                        + grp.getName());
+            }
+            if (savedGroups != null && savedGroups.size() == 1) {
+                project.getGroups().add(savedGroups.get(0));
             }
         }
         repository.save(project);
         return project;
     }
 
-    public Project deleteGroups(String projectId, List<ProjectGroup> groups) {
+    public Project deleteGroupsFromProject(String projectId, List<ProjectGroup> groups) {
         Project project = this.getProject(projectId);
         for (ProjectGroup grp: groups) {
-            ProjectGroup savedGroup = groupRepository.findByNameIgnoreCase(grp.getName());
-            if (savedGroup != null) {
-                project.getGroups().remove(savedGroup);
+            List<ProjectGroup> savedGroups =
+                    groupRepository.findByNameIgnoreCase(grp.getName());
+            if (savedGroups != null && savedGroups.size() > 1) {
+                throw new RuntimeException("More than one group found that match name "
+                        + grp.getName());
+            }
+            if (savedGroups != null && savedGroups.size() == 1) {
+                project.getGroups().remove(savedGroups.get(0));
             }
         }
         repository.save(project);

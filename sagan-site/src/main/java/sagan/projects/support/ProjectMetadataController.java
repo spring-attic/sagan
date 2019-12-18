@@ -150,14 +150,14 @@ class ProjectMetadataController {
     @RequestMapping(value="/{projectId}/groups", method = PUT )
     public Project assignGroups(@PathVariable("projectId") String projectId,
             @RequestBody List<ProjectGroup> groups) {
-        return service.addGroups(projectId, groups);
+        return service.addGroupsToProject(projectId, groups);
     }
 
     // remove groups from a project
     @RequestMapping(value="/{projectId}/groups", method = DELETE )
     public Project removeGroups(@PathVariable("projectId") String projectId,
             @RequestBody List<ProjectGroup> groups) {
-        return service.deleteGroups(projectId, groups);
+        return service.deleteGroupsFromProject(projectId, groups);
     }
 
     @ExceptionHandler(MetadataNotFoundException.class)
