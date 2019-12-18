@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,10 +47,7 @@ public class Project {
     private String renderedOverview;
     private int displayOrder = Integer.MAX_VALUE;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-        cascade = {CascadeType.PERSIST,
-                    CascadeType.MERGE
-    })
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "project_groups_rel",
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "group_id") }

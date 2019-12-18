@@ -1,12 +1,11 @@
 package sagan.projects.support;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import sagan.projects.ProjectGroup;
 import sagan.projects.Project;
+import sagan.projects.ProjectGroup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -43,24 +42,33 @@ public class ProjectMetadataService {
         return repository.findAllWithReleases(sortByDisplayOrderAndId);
     }
 
+    // for testing purpose
     public Collection<Project> getProjectsInGroup(String group) {
         if (group == null || group.isEmpty()) {
             return Collections.emptyList();
         }
-
-        ProjectGroup grp = groupRepository.findByNameIgnoreCase(group);
-        return grp != null?
-                repository.findByGroups(grp, sortByDisplayOrderAndId) : Collections.emptyList();
+        return repository.findByGroup(group);
     }
 
-    public Project addToGroup(String projectId, List<ProjectGroup> groups) {
+    public Project addGroups(String projectId, List<ProjectGroup> groups) {
         Project project = this.getProject(projectId);
-        List<ProjectGroup> savedGroupList = new ArrayList<>();
         for (ProjectGroup grp: groups) {
             ProjectGroup savedGroup = groupRepository.findByNameIgnoreCase(grp.getName());
-            savedGroup.getProjects().add(project);
-            project.getGroups().add(savedGroup);
-            savedGroupList.add(savedGroup);
+            if (savedGroup != null) {
+                project.getGroups().add(savedGroup);
+            }
+        }
+        repository.save(project);
+        return project;
+    }
+
+    public Project deleteGroups(String projectId, List<ProjectGroup> groups) {
+        Project project = this.getProject(projectId);
+        for (ProjectGroup grp: groups) {
+            ProjectGroup savedGroup = groupRepository.findByNameIgnoreCase(grp.getName());
+            if (savedGroup != null) {
+                project.getGroups().remove(savedGroup);
+            }
         }
         repository.save(project);
         return project;

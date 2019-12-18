@@ -15,16 +15,10 @@
  */
 package sagan.projects;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -50,15 +44,6 @@ public class ProjectGroup {
 		this.name = name;
 	}
 
-	@JsonIgnore
-	@ManyToMany(fetch = FetchType.LAZY,
-			cascade = {
-					CascadeType.PERSIST,
-					CascadeType.MERGE
-			},
-			mappedBy = "groups")
-	private Set<Project> projects = new HashSet<>();
-
 	public Long getId() {
 		return id;
 	}
@@ -75,12 +60,32 @@ public class ProjectGroup {
 		this.name = name;
 	}
 
-	public Set<Project> getProjects() {
-		return projects;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		ProjectGroup group = (ProjectGroup) o;
+
+		if (id != null ? !id.equals(group.id) : group.id != null)
+			return false;
+
+		return true;
 	}
 
-	public void setProjects(Set<Project> projects) {
-		this.projects = projects;
+	@Override
+	public int hashCode() {
+		return id != null ? id.hashCode() : 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ProjectGroup{" +
+				"id=" + id +
+				", name='" + name + "\'" +
+				"}";
 	}
 
 }

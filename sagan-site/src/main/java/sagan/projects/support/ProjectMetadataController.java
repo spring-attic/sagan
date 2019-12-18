@@ -132,23 +132,32 @@ class ProjectMetadataController {
         return service.save(patchedProject);
     }
 
-    // assign a project to group(s)
-    @RequestMapping(value="/{projectId}/groups", method = PUT )
-    public Project assignGroup(@PathVariable("projectId") String projectId,
-            @RequestBody List<ProjectGroup> groups) {
-        return service.addToGroup(projectId, groups);
-    }
-
-    // Obtain projects in a group
-    @RequestMapping(value="/groups/{group}", method = { GET, HEAD })
-    public Collection<Project> byGroup(@PathVariable("group") String group) {
+    // List projects by group
+    // for testing purpose
+    @RequestMapping(value="/group/{tag}", method = { GET, HEAD })
+    public Collection<Project> byGroup(@PathVariable("tag") String group) {
         return service.getProjectsInGroup(group);
     }
 
     // Obtain groups in a project
+    // for testing purpose
     @RequestMapping(value="/{projectId}/groups", method = { GET, HEAD } )
     public Set<ProjectGroup> groups(@PathVariable("projectId") String projectId) {
         return service.getProject(projectId).getGroups();
+    }
+
+    // assign groups to a project
+    @RequestMapping(value="/{projectId}/groups", method = PUT )
+    public Project assignGroups(@PathVariable("projectId") String projectId,
+            @RequestBody List<ProjectGroup> groups) {
+        return service.addGroups(projectId, groups);
+    }
+
+    // remove groups from a project
+    @RequestMapping(value="/{projectId}/groups", method = DELETE )
+    public Project removeGroups(@PathVariable("projectId") String projectId,
+            @RequestBody List<ProjectGroup> groups) {
+        return service.deleteGroups(projectId, groups);
     }
 
     @ExceptionHandler(MetadataNotFoundException.class)
