@@ -5,13 +5,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import javax.persistence.criteria.Predicate;
-
+import sagan.projects.ProjectGroup;
 import sagan.projects.Project;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,10 +18,13 @@ public class ProjectMetadataService {
 	private static final Sort sortByDisplayOrderAndId = new Sort("displayOrder", "id");
 
     private ProjectMetadataRepository repository;
+    private ProjectGroupRepository groupRepository;
 
     @Autowired
-    public ProjectMetadataService(ProjectMetadataRepository repository) {
+    public ProjectMetadataService(ProjectMetadataRepository repository,
+            ProjectGroupRepository groupRepository) {
         this.repository = repository;
+        this.groupRepository = groupRepository;
     }
 
     public List<Project> getProjectsForCategory(String category) {
@@ -46,13 +47,23 @@ public class ProjectMetadataService {
         if (group == null || group.isEmpty()) {
             return Collections.emptyList();
         }
-        Specification<Project> spec = (root, query, cb) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            predicates.add(cb.and(cb.like(root.get("groupsTag").as(String.class)
-                    ,"%"+group.toLowerCase()+"%")));
-            return cb.and(predicates.toArray(new Predicate[predicates.size()]));
-        };
-        return repository.findAll(spec, sortByDisplayOrderAndId);
+
+        ProjectGroup grp = groupRepository.findByNameIgnoreCase(group);
+        return grp != null?
+                repository.findByGroups(grp, sortByDisplayOrderAndId) : Collections.emptyList();
+    }
+
+    public Project addToGroup(String projectId, List<ProjectGroup> groups) {
+        Project project = this.getProject(projectId);
+        List<ProjectGroup> savedGroupList = new ArrayList<>();
+        for (ProjectGroup grp: groups) {
+            ProjectGroup savedGroup = groupRepository.findByNameIgnoreCase(grp.getName());
+            savedGroup.getProjects().add(project);
+            project.getGroups().add(savedGroup);
+            savedGroupList.add(savedGroup);
+        }
+        repository.save(project);
+        return project;
     }
 
     public Project getProject(String id) {

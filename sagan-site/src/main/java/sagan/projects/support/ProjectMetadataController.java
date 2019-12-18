@@ -2,9 +2,12 @@ package sagan.projects.support;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import sagan.projects.Project;
+import sagan.projects.ProjectGroup;
 import sagan.projects.ProjectPatchingService;
 import sagan.projects.ProjectRelease;
 import sagan.support.JsonPController;
@@ -127,6 +130,25 @@ class ProjectMetadataController {
         }
         Project patchedProject = projectPatchingService.patch(projectWithPatches, project);
         return service.save(patchedProject);
+    }
+
+    // assign a project to group(s)
+    @RequestMapping(value="/{projectId}/groups", method = PUT )
+    public Project assignGroup(@PathVariable("projectId") String projectId,
+            @RequestBody List<ProjectGroup> groups) {
+        return service.addToGroup(projectId, groups);
+    }
+
+    // Obtain projects in a group
+    @RequestMapping(value="/groups/{group}", method = { GET, HEAD })
+    public Collection<Project> byGroup(@PathVariable("group") String group) {
+        return service.getProjectsInGroup(group);
+    }
+
+    // Obtain groups in a project
+    @RequestMapping(value="/{projectId}/groups", method = { GET, HEAD } )
+    public Set<ProjectGroup> groups(@PathVariable("projectId") String projectId) {
+        return service.getProject(projectId).getGroups();
     }
 
     @ExceptionHandler(MetadataNotFoundException.class)

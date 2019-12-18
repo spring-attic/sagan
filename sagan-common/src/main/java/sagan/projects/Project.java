@@ -3,15 +3,20 @@ package sagan.projects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.Convert;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
@@ -43,8 +48,15 @@ public class Project {
     private String renderedOverview;
     private int displayOrder = Integer.MAX_VALUE;
 
-    @Convert(converter = ProjectGroupConverter.class)
-    private Set<ProjectGroup> groupsTag;
+    @ManyToMany(fetch = FetchType.LAZY,
+        cascade = {CascadeType.PERSIST,
+                    CascadeType.MERGE
+    })
+    @JoinTable(name = "project_groups_rel",
+            joinColumns = { @JoinColumn(name = "project_id") },
+            inverseJoinColumns = { @JoinColumn(name = "group_id") }
+    )
+    private Set<ProjectGroup> groups = new HashSet<>();
 
     @ManyToOne
     @JsonIgnore
@@ -223,12 +235,12 @@ public class Project {
         this.childProjectList = childProjectList;
     }
 
-    public Set<ProjectGroup> getGroupsTag() {
-        return this.groupsTag;
+    public Set<ProjectGroup> getGroups() {
+        return this.groups;
     }
 
-    public void setGroupsTag(Set<ProjectGroup> groupsTag) {
-        this.groupsTag = groupsTag;
+    public void setGroupsTag(Set<ProjectGroup> groups) {
+        this.groups = groups;
     }
 
     @Override
