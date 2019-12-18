@@ -1,3 +1,13 @@
+-- insert groups
+INSERT INTO project_groups (name) values('Microservices');
+INSERT INTO project_groups (name) values('Event Driven');
+INSERT INTO project_groups (name) values('Cloud');
+INSERT INTO project_groups (name) values('Reactive');
+INSERT INTO project_groups (name) values('Web Apps');
+INSERT INTO project_groups (name) values('Serverless');
+INSERT INTO project_groups (name) values('Streams');
+INSERT INTO project_groups (name) values('Batch');
+
 -- project groups
 INSERT INTO PROJECT_GROUPS_REL SELECT 'spring-test-mvc', id FROM PROJECT_GROUPS WHERE name in ('Microservices');
 INSERT INTO PROJECT_GROUPS_REL SELECT 'spring-social-facebook', id FROM PROJECT_GROUPS WHERE name in ('Microservices');
