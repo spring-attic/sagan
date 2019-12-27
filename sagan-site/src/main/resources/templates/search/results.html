@@ -46,7 +46,7 @@
           <input type="hidden" name="q" th:value="${searchForm.q}" />
           <header class="content-container--header">
             <h3 class="header-title">Filter Your Results</h3>
-            <input type="submit" value="Filter" class="btn btn-black compact pull-right on-black uppercase" ></input>
+            <input type="submit" formmethod="post" value="Filter" class="btn btn-black compact pull-right on-black uppercase" ></input>
           </header>
           <ul layout:include="search/_facets :: facets" th:with="root=${rootFacet}">
           </ul>
