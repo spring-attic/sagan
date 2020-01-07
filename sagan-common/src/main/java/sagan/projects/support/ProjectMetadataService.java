@@ -1,7 +1,5 @@
 package sagan.projects.support;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import sagan.projects.Project;
@@ -42,48 +40,9 @@ public class ProjectMetadataService {
         return repository.findAllWithReleases(sortByDisplayOrderAndId);
     }
 
-    // for testing purpose
-    public Collection<Project> getProjectsInGroup(String group) {
-        if (group == null || group.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return repository.findByGroup(group);
-    }
-
-    public Project addGroupsToProject(String projectId, List<ProjectGroup> groups) {
-        Project project = this.getProject(projectId);
-        for (ProjectGroup grp: groups) {
-            List<ProjectGroup> savedGroups =
-                    groupRepository.findByNameIgnoreCase(grp.getName());
-
-            if (savedGroups != null && savedGroups.size() > 1) {
-                throw new RuntimeException("More than one group found that match name "
-                        + grp.getName());
-            }
-            if (savedGroups != null && savedGroups.size() == 1) {
-                project.getGroups().add(savedGroups.get(0));
-            }
-        }
-        repository.save(project);
-        return project;
-    }
-
-    public Project deleteGroupsFromProject(String projectId, List<ProjectGroup> groups) {
-        Project project = this.getProject(projectId);
-        for (ProjectGroup grp: groups) {
-            List<ProjectGroup> savedGroups =
-                    groupRepository.findByNameIgnoreCase(grp.getName());
-            if (savedGroups != null && savedGroups.size() > 1) {
-                throw new RuntimeException("More than one group found that match name "
-                        + grp.getName());
-            }
-            if (savedGroups != null && savedGroups.size() == 1) {
-                project.getGroups().remove(savedGroups.get(0));
-            }
-        }
-        repository.save(project);
-        return project;
-    }
+	public List<Project> getProjectsWithGroups() {
+		return repository.findTopLevelProjectsWithGroup();
+	}
 
     public Project getProject(String id) {
         return repository.findOne(id);
@@ -96,4 +55,8 @@ public class ProjectMetadataService {
     public void delete(String id) {
         repository.delete(id);
     }
+
+    public List<ProjectGroup> getAllGroups() {
+    	return this.groupRepository.findAll();
+	}
 }

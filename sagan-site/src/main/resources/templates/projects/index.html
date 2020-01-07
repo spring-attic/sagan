@@ -1,4 +1,5 @@
 <html
+        xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorator="layout">
 <head>
@@ -13,107 +14,31 @@
   </div>
   <div class='content' role='Main'>
     <div class='container'>
-      <!-- <h2 class='h3 mb-3 antialiased'>Main Projects</h2> -->
-      <h2 class='h5 small uppercase thin wide'>Featured Projects</h2>
-      <section id='featured' class='flex jc-between mb-4'>
+
+      <h2 class='h5 small uppercase thin wide' th:if="${not #lists.isEmpty(featured)}">Featured Projects</h2>
+      <section id='featured' class='flex jc-between mb-4' th:each="project : ${featured}">
         <a class='featured-proj third rad-5 shadow-hover border-dark bg-white border-box'>
-          <h3 class='h3 m-0 antialiased'>Spring Kubernetes</h3>
-          <p class='m-0'>Very short one-line description.</p>
-        </a>
-        <a class='featured-proj third rad-5 shadow-hover border-dark bg-white border-box'>
-          <h3 class='h3 m-0 antialiased'>Spring Kubernetes</h3>
-          <p class='m-0'>Very short one-line description.</p>
-        </a>
-        <a class='featured-proj third rad-5 shadow-hover border-dark bg-white border-box'>
-          <h3 class='h3 m-0 antialiased'>Spring Kubernetes</h3>
-          <p class='m-0'>Very short one-line description.</p>
+          <h3 class='h3 m-0 antialiased' th:text="${project.name}">Spring Kubernetes</h3>
+          <p class='m-0' th:text="${project.tagLine}">Very short one-line description.</p>
         </a>
       </section>
       <section id='filters-and-proj' class='flex jc-between mb-6'>
         <ul id='proj-filters'>
-          <li class='blue mb-1 pointer'>Microservices</li>
-          <li class='blue mb-1 pointer'>Reactive</li>
-          <li class='blue mb-1 pointer'>Event Driven</li>
-          <li class='blue mb-1 pointer'>Cloud</li>
-          <li class='blue mb-1 pointer'>Web Apps</li>
-          <li class='blue mb-1 pointer'>Serverless</li>
-          <li class='blue mb-1 pointer'>Streams</li>
-          <li class='blue mb-1 pointer'>Batch</li>
+          <li class='blue mb-1 pointer' th:each="group : ${groups}" th:text="${group.label}">Microservices</li>
         </ul>
         <div class='proj-80'>
           <div class='flex jc-between flex-wrap'>
-            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box' href='/projects/spring-boot'>
+            <a th:each="project : ${active}" class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'
+               th:href="${project.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
               <div class='proj-icon-box'>
+                  <!-- TODO: adapt icon for each project -->
                 <img class='proj-icon' src='/images/icon-spring-boot.svg'>
               </div>
               <div class='proj-text'>
-                <h3 class='h3 m-0 antialiased'>Spring Boot</h3>
-                <p>Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
+                <h3 class='h3 m-0 antialiased' th:text="${project.name}">Spring Boot</h3>
+                <p th:text="${project.tagLine}">Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
               </div>
             </a>
-            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box' href='/projects/spring-framework'>
-              <div class='proj-icon-box'>
-                <img class='proj-icon' src='/images/icon-spring-framework.svg'>
-              </div>
-              <div class='proj-text'>
-                <h3 class='h3 m-0 antialiased'>Spring Framework</h3>
-                <p>Provides core support for dependency injection, transaction management, web apps, data access, messaging and more.</p>
-              </div>
-            </a>
-            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box' href='/projects/spring-cloud-dataflow'>
-              <div class='proj-icon-box'>
-                <img class='proj-icon' src='/images/icon-spring-data-flow.svg'>
-              </div>
-              <div class='proj-text'>
-                <h3 class='h3 m-0 antialiased'>Spring Cloud Data Flow</h3>
-                <p>An orchestration service for composable data microservice applications on modern runtimes.</p>
-              </div>
-            </a>
-            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box' href='/projects/spring-cloud'>
-              <div class='proj-icon-box'>
-                <img class='proj-icon' src='/images/icon-spring-cloud.svg'>
-              </div>
-              <div class='proj-text'>
-                <h3 class='h3 m-0 antialiased'>Spring Cloud</h3>
-                <p>Provides a set of tools for common patterns in distributed systems. Useful for building and deploying microservices.</p>
-              </div>
-            </a>
-            <!--                 <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
-                              <div class='proj-icon-box'>
-                                <img class='proj-icon' src='/images/icon-spring-boot.svg'>
-                              </div>
-                              <div class='proj-text'>
-                                <h3 class='h3 m-0 antialiased'>Spring Boot</h3>
-                                <p>Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
-                              </div>
-                            </a>
-                            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
-                              <div class='proj-icon-box'>
-                                <img class='proj-icon' src='/images/icon-spring-framework.svg'>
-                              </div>
-                              <div class='proj-text'>
-                                <h3 class='h3 m-0 antialiased'>Framework</h3>
-                                <p>Provides core support for dependency injection, transaction management, web apps, data access, messaging and more.</p>
-                              </div>
-                            </a>
-                            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
-                              <div class='proj-icon-box'>
-                                <img class='proj-icon' src='/images/icon-spring-data-flow.svg'>
-                              </div>
-                              <div class='proj-text'>
-                                <h3 class='h3 m-0 antialiased'>Spring Cloud Data Flow</h3>
-                                <p>An orchestration service for composable data microservice applications on modern runtimes.</p>
-                              </div>
-                            </a>
-                            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
-                              <div class='proj-icon-box'>
-                                <img class='proj-icon' src='/images/icon-spring-cloud.svg'>
-                              </div>
-                              <div class='proj-text'>
-                                <h3 class='h3 m-0 antialiased'>Spring Cloud</h3>
-                                <p>Provides a set of tools for common patterns in distributed systems. Useful for building and deploying microservices.</p>
-                              </div>
-                            </a> -->
           </div>
         </div>
       </section>
@@ -121,22 +46,14 @@
         <h2 class='h3 mb-3 antialiased'>Community Projects</h2>
         <div class='flex'>
           <div class='proj-80 flex jc-between flex-wrap'>
-            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
+            <a th:each="project : ${community}" class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
               <div class='proj-icon-box'>
+                  <!-- TODO: adapt icon for each project -->
                 <img class='proj-icon' src='/images/icon-spring-boot.svg'>
               </div>
               <div class='proj-text'>
-                <h3 class='h3 m-0 antialiased'>Spring Boot</h3>
-                <p>Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
-              </div>
-            </a>
-            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
-              <div class='proj-icon-box'>
-                <img class='proj-icon' src='/images/icon-spring-framework.svg'>
-              </div>
-              <div class='proj-text'>
-                <h3 class='h3 m-0 antialiased'>Framework</h3>
-                <p>Provides core support for dependency injection, transaction management, web apps, data access, messaging and more.</p>
+                <h3 class='h3 m-0 antialiased' th:text="${project.name}">Spring Boot</h3>
+                <p th:text="${project.tagLine}">Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
               </div>
             </a>
           </div>
@@ -146,24 +63,16 @@
         <h2 class='h3 mb-3 antialiased'>Projects in the Attic</h2>
         <div class='flex'>
           <div class='proj-80 flex jc-between flex-wrap'>
-            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
-              <div class='proj-icon-box'>
-                <img class='proj-icon' src='/images/icon-spring-boot.svg'>
-              </div>
-              <div class='proj-text'>
-                <h3 class='h3 m-0 antialiased'>Spring Boot</h3>
-                <p>Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
-              </div>
-            </a>
-            <a class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
-              <div class='proj-icon-box'>
-                <img class='proj-icon' src='/images/icon-spring-framework.svg'>
-              </div>
-              <div class='proj-text'>
-                <h3 class='h3 m-0 antialiased'>Framework</h3>
-                <p>Provides core support for dependency injection, transaction management, web apps, data access, messaging and more.</p>
-              </div>
-            </a>
+              <a th:each="project : ${attic}" class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'>
+                  <div class='proj-icon-box'>
+                      <!-- TODO: adapt icon for each project -->
+                      <img class='proj-icon' src='/images/icon-spring-boot.svg'>
+                  </div>
+                  <div class='proj-text'>
+                      <h3 class='h3 m-0 antialiased' th:text="${project.name}">Spring Boot</h3>
+                      <p th:text="${project.tagLine}">Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
+                  </div>
+              </a>
           </div>
         </div>
       </section>

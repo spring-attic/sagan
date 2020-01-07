@@ -2,12 +2,9 @@ package sagan.projects.support;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import sagan.projects.Project;
-import sagan.projects.ProjectGroup;
 import sagan.projects.ProjectPatchingService;
 import sagan.projects.ProjectRelease;
 import sagan.support.JsonPController;
@@ -130,34 +127,6 @@ class ProjectMetadataController {
         }
         Project patchedProject = projectPatchingService.patch(projectWithPatches, project);
         return service.save(patchedProject);
-    }
-
-    // List projects by group
-    // for testing purpose
-    @RequestMapping(value="/group/{tag}", method = { GET, HEAD })
-    public Collection<Project> byGroup(@PathVariable("tag") String group) {
-        return service.getProjectsInGroup(group);
-    }
-
-    // Obtain groups in a project
-    // for testing purpose
-    @RequestMapping(value="/{projectId}/groups", method = { GET, HEAD } )
-    public Set<ProjectGroup> groups(@PathVariable("projectId") String projectId) {
-        return service.getProject(projectId).getGroups();
-    }
-
-    // assign groups to a project
-    @RequestMapping(value="/{projectId}/groups", method = PUT )
-    public Project assignGroups(@PathVariable("projectId") String projectId,
-            @RequestBody List<ProjectGroup> groups) {
-        return service.addGroupsToProject(projectId, groups);
-    }
-
-    // remove groups from a project
-    @RequestMapping(value="/{projectId}/groups", method = DELETE )
-    public Project removeGroups(@PathVariable("projectId") String projectId,
-            @RequestBody List<ProjectGroup> groups) {
-        return service.deleteGroupsFromProject(projectId, groups);
     }
 
     @ExceptionHandler(MetadataNotFoundException.class)

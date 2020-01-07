@@ -10,10 +10,13 @@ import sagan.support.nav.Section;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,14 +46,22 @@ class ProjectsController {
         this.topicals = topicals;
     }
 
-	@RequestMapping(method = { GET, HEAD })
+	@GetMapping
 	public String listProjects(Model model) {
-    	this.projectMetadataService.getProjects()
-				.forEach(project -> model.addAttribute(project.getId().replaceAll("-", ""), project));
+		List<Project> projects = this.projectMetadataService.getProjectsWithGroups();
+		model.addAttribute("groups", this.projectMetadataService.getAllGroups());
+		model.addAttribute("featured",
+				projects.stream().filter(Project::isFeatured).collect(Collectors.toList()));
+		projects
+				.stream()
+				.collect(Collectors.groupingBy(Project::getCategory))
+				.forEach((category, proj) -> {
+					model.addAttribute(category, proj);
+				});
 		return "projects/index";
 	}
 
-	@RequestMapping(value = "/{projectName}", method = { GET, HEAD })
+	@GetMapping("/{projectName}")
     public String showProject(Model model, @PathVariable String projectName) {
 		Project project = projectMetadataService.getProject(projectName);
 		if (project == null) {

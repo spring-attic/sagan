@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -43,11 +42,13 @@ public class Project {
     private String category;
     private String rawBootConfig;
     private String renderedBootConfig;
+    private String tagLine;
+    private boolean featured;
     private String rawOverview;
     private String renderedOverview;
     private int displayOrder = Integer.MAX_VALUE;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "project_groups_rel",
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "group_id") }
@@ -183,7 +184,23 @@ public class Project {
         this.renderedBootConfig = renderedBootConfig;
     }
 
-    public String getRawOverview() {
+	public String getTagLine() {
+		return this.tagLine;
+	}
+
+	public void setTagLine(String tagLine) {
+		this.tagLine = tagLine;
+	}
+
+	public boolean isFeatured() {
+		return featured;
+	}
+
+	public void setFeatured(boolean featured) {
+		this.featured = featured;
+	}
+
+	public String getRawOverview() {
         return rawOverview;
     }
 
