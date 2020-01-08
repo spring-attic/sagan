@@ -1,95 +1,98 @@
 <html
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorator="layout">
-  <head>
-  </head>
-  <body id='learn'>
-    <div layout:fragment="~{content}">
-      <div class='content' role='Main'>
-        <img id='pacman' src='/images/learn-pacman.svg'>
-        <div class='container'>
-          <h1 class='h1'>Learn</h1>
-          <section id='featured' class='flex jc-between mb-4'>
-            <section class='left'>
-              <img class='mb-2' src='/images/podcast.jpg'>
-              <a class='blue h3 antialiased link-darken' href=''>This Week in Spring - August 13, 2019</a>
-              <p>Hi Spring fans! Welcome to another installment of a This Week in Spring! I’ve just finished one of the most amazing experiences of my life - O’Reilly’s “Foo Camp,” an unconference where invited guests can camp on the O’Reilly Media campus headquarters and talk to...</p>
-            </section>
-            <section class='right flex fd-col'>
-              <div class='item mb-3'>
-                <a class='blue h3 antialiased link-darken' href=''>Securing Services with Spring Cloud Gateway</a>
-                <p><span class='author'>Ben Wilcock</span> | <span class='date'>August 16</span></p>
-              </div>
-              <div class='item mb-3'>
-                <a class='blue h3 antialiased link-darken' href=''>Announcing Spring Cloud Function 3.0.0.M2</a>
-                <p><span class='author'>Oleg Zhurakousky</span> | <span class='date'>August 15</span></p>
-              </div>
-              <div class='item mb-3'>
-                <a class='blue h3 antialiased link-darken' href=''>Spring Boot for Apache Geode & Pivotal GemFire 1.1.0.RC2 Released!</a>
-                <p><span class='author'>John Blum</span> | <span class='date'>August 16</span></p>
-              </div>
-              <a class='button animate uppercase as-fs' href='/blog'>More blog posts</a>
-            </section>
-          </section>
-          <section id='quickstart' class='bg-lightblue mb-6 rel'>
-            <img id='learn-shape' src='/images/learn-shapes.svg'>
-            <div class='mx-auto'>
-              <h2 class='h2 antialiased m-0'>New to Spring? Start here.</h2>
-              <p class='m-0'>With the <a class='blue link-animate' href="/guides/gs/quickstart">Spring Quickstart</a> guide you’ll build a classic “Hello World!” endpoint.</p>
-            </div>
-          </section>
-          <section id='columns' class='flex jc-between mb-6'>
-            <div class='third flex fd-col'>
-              <h3 class='h3 mb-3'>Popular guides</h3>
-              <div class='item mb-3'>
-                <a class='blue link-darken' href=''>Building a RESTful Web Service</a>
-                <p class='m-0'>Learn how to create a RESTful web service with Spring.</p>
-              </div>
-              <div class='item mb-3'>
-                <a class='blue link-darken' href=''>Consuming a RESTful Web Service</a>
-                <p class='m-0'>Learn how to retrieve web page data with Spring's RestTemplate.</p>
-              </div>
-              <div class='item mb-3'>
-                <a class='blue link-darken' href=''>Accessing Data with JPA</a>
-                <p class='m-0'>Learn how to work with JPA data persistence using Spring Data JPA.</p>
-              </div> 
-              <a class='button animate uppercase as-fs' href='/guides'>More guides</a>
-            </div>
-            <div class='third flex fd-col'>
-              <h3 class='h3 mb-3'>Recommended videos</h3>
-              <div class='item video flex jc-between mb-3'>
-                <a class='thumbnail' href=''><img src='/images/vid1.png'></a>
-                <a class='blue link link-darken' href=''>Getting Started with Spring Cloud Kubernetes</a>
-              </div>
-              <div class='item video flex jc-between mb-3'>
-                <a class='thumbnail' href=''><img src='/images/vid2.png'></a>
-                <a class='blue link link-darken' href=''>Spring Tips: Distributed Locks with Spring Integration</a>
-              </div>
-              <div class='item video flex jc-between mb-3'>
-                <a class='thumbnail' href=''><img src='/images/vid3.png'></a>
-                <a class='blue link link-darken' href=''>Spring Tips: Spring's Support for Kotlin Coroutines</a>
-              </div>
-              <a class='button animate uppercase as-fs' href='/guides'>More videos</a>
-            </div>
-            <div class='third flex fd-col'>
-              <h3 class='h3 mb-3'>Recommended podcast</h3>
-              <div class='item video flex jc-between mb-3'>
-                <a class='thumbnail' href=''><img src='/images/podcast1.png'></a>
-                <a class='blue link link-darken' href=''>Spring teammate Brian Clozel on new features in Sparing 5.2 and Spring Boot 2.2</a>
-              </div>
-              <div class='item video flex jc-between mb-3'>
-                <a class='thumbnail' href=''><img src='/images/podcast2.png'></a>
-                <a class='blue link link-darken' href=''>Gradle Developer Advocate Jenn Strater </a>
-              </div>
-              <div class='item video flex jc-between mb-3'>
-                <a class='thumbnail' href=''><img src='/images/podcast3.png'></a>
-                <a class='blue link link-darken' href=''>Spring team legend Oliver Drotbohm on Spring Data, HATEOAS, Hypermedia, and more</a>
-              </div>
-              <a class='button animate uppercase as-fs' href='/guides'>More podcasts</a>
-            </div>
-          </section>
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+  <title>Spring | Learn</title>
+  <meta property='og:title' content='Learn about Spring'/>
+  <meta property='og:description' content='Read guides, watch videos, and listen to podcasts to level up your Spring knowledge.'/>
+</head>
+<body id='learn'>
+<div layout:fragment="~{content}">
+  <div class='content' role='Main'>
+    <img id='pacman' src='/images/learn-pacman.svg'>
+    <div class='container'>
+      <h1 class='h1'>Learn</h1>
+      <section id='featured' class='flex jc-between mb-4'>
+        <section class='left'>
+          <img class='mb-2' src='/images/podcast.jpg'>
+          <a class='blue h3 antialiased link-darken' href=''>This Week in Spring - August 13, 2019</a>
+          <p>Hi Spring fans! Welcome to another installment of a This Week in Spring! I’ve just finished one of the most amazing experiences of my life - O’Reilly’s “Foo Camp,” an unconference where invited guests can camp on the O’Reilly Media campus headquarters and talk to...</p>
+        </section>
+        <section class='right flex fd-col'>
+          <div class='item mb-3'>
+            <a class='blue h3 antialiased link-darken' href=''>Securing Services with Spring Cloud Gateway</a>
+            <p><span class='author'>Ben Wilcock</span> | <span class='date'>August 16</span></p>
+          </div>
+          <div class='item mb-3'>
+            <a class='blue h3 antialiased link-darken' href=''>Announcing Spring Cloud Function 3.0.0.M2</a>
+            <p><span class='author'>Oleg Zhurakousky</span> | <span class='date'>August 15</span></p>
+          </div>
+          <div class='item mb-3'>
+            <a class='blue h3 antialiased link-darken' href=''>Spring Boot for Apache Geode & Pivotal GemFire 1.1.0.RC2 Released!</a>
+            <p><span class='author'>John Blum</span> | <span class='date'>August 16</span></p>
+          </div>
+          <a class='button animate uppercase as-fs' href='/blog'>More blog posts</a>
+        </section>
+      </section>
+      <section id='quickstart' class='bg-lightblue mb-6 rel'>
+        <img id='learn-shape' src='/images/learn-shapes.svg'>
+        <div class='mx-auto'>
+          <h2 class='h2 antialiased m-0'>New to Spring? Start here.</h2>
+          <p class='m-0'>With the <a class='blue link-animate' href="/quickstart">Spring Quickstart</a> guide you’ll build a classic “Hello World!” endpoint.</p>
         </div>
-      </div>
+      </section>
+      <section id='columns' class='flex jc-between mb-6'>
+        <div class='third flex fd-col'>
+          <h3 class='h3 mb-3'>Popular guides</h3>
+          <div class='item mb-3'>
+            <a class='blue link-darken' href=''>Building a RESTful Web Service</a>
+            <p class='m-0'>Learn how to create a RESTful web service with Spring.</p>
+          </div>
+          <div class='item mb-3'>
+            <a class='blue link-darken' href=''>Consuming a RESTful Web Service</a>
+            <p class='m-0'>Learn how to retrieve web page data with Spring's RestTemplate.</p>
+          </div>
+          <div class='item mb-3'>
+            <a class='blue link-darken' href=''>Accessing Data with JPA</a>
+            <p class='m-0'>Learn how to work with JPA data persistence using Spring Data JPA.</p>
+          </div>
+          <a class='button animate uppercase as-fs' href='/guides'>More guides</a>
+        </div>
+        <div class='third flex fd-col'>
+          <h3 class='h3 mb-3'>Recommended videos</h3>
+          <div class='item video flex jc-between mb-3'>
+            <a class='thumbnail' href=''><img src='/images/vid1.png' alt='Getting Started with Spring Cloud Kubernetes'></a>
+            <a class='blue link link-darken' href=''>Getting Started with Spring Cloud Kubernetes</a>
+          </div>
+          <div class='item video flex jc-between mb-3'>
+            <a class='thumbnail' href=''><img src='/images/vid2.png' alt='Spring Tips: Distributed Locks with Spring Integration'></a>
+            <a class='blue link link-darken' href=''>Spring Tips: Distributed Locks with Spring Integration</a>
+          </div>
+          <div class='item video flex jc-between mb-3'>
+            <a class='thumbnail' href=''><img src='/images/vid3.png' alt="Spring Tips: Spring's Support for Kotlin Coroutines"></a>
+            <a class='blue link link-darken' href=''>Spring Tips: Spring's Support for Kotlin Coroutines</a>
+          </div>
+          <a class='button animate uppercase as-fs' href='/guides'>More videos</a>
+        </div>
+        <div class='third flex fd-col'>
+          <h3 class='h3 mb-3'>Recommended podcast</h3>
+          <div class='item video flex jc-between mb-3'>
+            <a class='thumbnail' href=''><img src='/images/podcast1.png' alt='Spring teammate Brian Clozel on new features in Sparing 5.2 and Spring Boot 2.2'></a>
+            <a class='blue link link-darken' href=''>Spring teammate Brian Clozel on new features in Sparing 5.2 and Spring Boot 2.2</a>
+          </div>
+          <div class='item video flex jc-between mb-3'>
+            <a class='thumbnail' href=''><img src='/images/podcast2.png' alt='Gradle Developer Advocate Jenn Strater'></a>
+            <a class='blue link link-darken' href=''>Gradle Developer Advocate Jenn Strater</a>
+          </div>
+          <div class='item video flex jc-between mb-3'>
+            <a class='thumbnail' href=''><img src='/images/podcast3.png' alt='Spring team legend Oliver Drotbohm on Spring Data, HATEOAS, Hypermedia, and more'></a>
+            <a class='blue link link-darken' href=''>Spring team legend Oliver Drotbohm on Spring Data, HATEOAS, Hypermedia, and more</a>
+          </div>
+          <a class='button animate uppercase as-fs' href='/guides'>More podcasts</a>
+        </div>
+      </section>
     </div>
-  </body>
+  </div>
+</div>
+</body>
 </html>

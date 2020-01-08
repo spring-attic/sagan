@@ -3,8 +3,9 @@
 
 <head>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=2, minimum-scale=1, user-scalable=no' id='Viewport' name='viewport'></meta>
+    <meta property="og:image" content="/images/OG-Spring.png">
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/master.css(v=${#dates.format(#dates.createNow(), 'ddHHmmss')})}" />
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap" rel="stylesheet">
     <title>Spring</title>
@@ -13,93 +14,96 @@
 
 <body>
 <header>
-    <div id='nav' class="container flex jc-between ai-center">
-        <a href='/'>
-            <img id='springlogo' src='/images/logo-spring.svg'>
-        </a>
-        <div id='mobile-nav' class='pointer'>
-            <div id="hamburger">
-                <div class="burger-bar"></div>
-                <div class="burger-bar"></div>
-                <div class="burger-bar"></div>
+    <div id='nav'>
+        <div id='nav-inner' class='container flex jc-between ai-center'>
+            <a href='/'>
+                <img id='springlogo' src='/images/logo-spring.svg'>
+            </a>
+            <ul id='nav-items' class='flex jc-between'>
+                <li><div class='has-menu' id='why-hov' href='/why-spring'>Why Spring<div class='nav-arrow'></div></div></li>
+                <li><div class='has-menu' id='learn-hov' href='/learn'>Learn<div class='nav-arrow'></div></div></li>
+                <li><div class='has-menu' id='projects-hov' href='/projects'>Projects<div class='nav-arrow'></div></div></li>
+                <li><a class='z-5 rel' href='/training'>Training</a></li>
+                <li><a class='z-5 rel' href='/support'>Support</a></li>
+                <li><a class='has-menu' id='community-hov' href='/community'>Community<div class='nav-arrow'></div></a></li>
+                <li id='search' class='rel z-5'>
+                    <i class='fa fa-search'><title>Open search</title></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.61 14.61"><title>Close search</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><line x1="1.5" y1="1.5" x2="13.11" y2="13.11" fill="none" stroke="#000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3"/><line x1="13.11" y1="1.5" x2="1.5" y2="13.11" fill="none" stroke="#000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3"/></g></g></svg>
+                </li>
+            </ul>
+            <div id='mobile-nav' class='pointer'>
+                <div id="hamburger">
+                    <div class="burger-bar"></div>
+                    <div class="burger-bar"></div>
+                    <div class="burger-bar"></div>
+                </div>
             </div>
         </div>
-        <div id='popup' class='rad-5 border-box'>
-            <div class='relative'>
-                <p id='exit' class='h3 pointer m-0 z-1'>X</p>
-                <ul id='mobile-list' class='m-0'>
-                    <li><a href='/why-spring'>Why Spring</a></li>
-                    <li><a href='/learn'>Learn</a></li>
-                    <li><a href='/projects'>Projects</a></li>
-                    <li><a href='/training'>Training</a></li>
-                    <li><a href='/support'>Support</a></li>
-                    <li><a href='/community'>Community</a></li>
+        <div id='dropdown-menus' class='container rel'>
+            <div id='scope' class='abs rad-5'></div>
+            <div id='why-items' class='drop-menu'>
+                <div id='why-target' class='drop-target' href='/why-spring'></div>
+                <ul>
+                    <li><a href='/why-spring'>Overview</a></li>
+                    <li><a href='/microservices'>Microservices</a></li>
+                    <li><a href='/reactive'>Reactive</a></li>
+                    <li><a href='/streams'>Streams</a></li>
+                    <li><a href='/cloud'>Cloud</a></li>
+                    <li><a href='/web-applications'>Web Apps</a></li>
+                    <li><a href='/serverless'>Serverless</a></li>
+                    <li><a href='/batch'>Batch</a></li>
+                </ul>
+            </div>
+            <div id='learn-items' class='drop-menu'>
+                <div id='learn-target' class='drop-target' href='/learn'></div>
+                <ul>
+                    <li><a href='/learn'>Overview</a></li>
+                    <li><a href='/blog'>Blog</a></li>
+                    <li><a href='/guides'>Guides</a></li>
+                    <li><a href='/quickstart'>Quickstart</a></li>
+                </ul>
+            </div>
+            <div id='project-items' class='drop-menu'>
+                <div id='project-target' class='drop-target' href='/projects'></div>
+                <ul>
+                    <li><a href='/projects'>Overview</a></li>
+                    <li><a href='/projects/spring-boot'>Spring Boot</a></li>
+                    <li><a href='/projects/spring-framework'>Spring Framework</a></li>
+                    <li><a href='/projects/spring-cloud-dataflow'>Spring Cloud Data Flow</a></li>
+                    <li><a href='/projects/spring-cloud'>Spring Cloud</a></li>
+                    <li><a href='/projects/spring-data'>Spring Data</a></li>
+                    <li><a href='/projects/spring-integration'>Spring Integration</a></li>
+                    <li><a href='/projects/spring-batch'>Spring Batch</a></li>
+                    <li><a href='/projects/spring-security'>Spring Security</a></li>
+                    <li><a class='blue mb-2 inline-block' href='/projects'>View all projects</a></li>
+                    <p class='uppercase smallest'>Development Tools</p>
+                    <li><a href='/tools'>Spring Tools 4</a></li>
+                    <li><a href='https://start.spring.io'>Spring Initialzr <svg class='external-link-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polyline points="15 10.94 15 15 1 15 1 1 5.06 1" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><polyline points="8.93 1 15 1 15 7.07" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><line x1="15" y1="1" x2="8" y2="8" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/></svg></a></li>
+                </ul>
+            </div>
+            <div id='community-items' class='drop-menu'>
+                <div id='community-target' class='drop-target' href='/community'></div>
+                <ul>
+                    <li><a href='/events'>Community</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/team'>Team</a></li>
+                    <li><a href='http://store.pivotal.io'>Store <svg class='external-link-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polyline points="15 10.94 15 15 1 15 1 1 5.06 1" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><polyline points="8.93 1 15 1 15 7.07" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><line x1="15" y1="1" x2="8" y2="8" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/></svg></a></li>
                 </ul>
             </div>
         </div>
-        <ul id='nav-items' class='flex jc-between'>
-            <li>
-                <div class='has-menu pointer' onclick="location.href='/why-spring';">Why Spring<div class='nav-arrow'></div>
-                    <div class='sub-menu-gap'>
-                        <ul id='why-items' class='drop-menu'>
-                            <li><a href='/microservices'>Microservices</a></li>
-                            <li><a href='/reactive'>Reactive</a></li>
-                            <li><a href='/streams'>Streams</a></li>
-                            <li><a href='/cloud'>Cloud</a></li>
-                            <li><a href='/web-applications'>Web Apps</a></li>
-                            <li><a href='/serverless'>Serverless</a></li>
-                            <li><a href='/batch'>Batch</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class='has-menu pointer' onclick="location.href='/learn';">Learn<div class='nav-arrow'></div>
-                    <div class='sub-menu-gap'>
-                        <ul id='learn-items' class='drop-menu'>
-                            <li><a href='/blog'>Blog</a></li>
-                            <li><a href='/guides'>Guides</a></li>
-                            <li><a href='/guides/gs/quickstart'>Quickstart</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class='has-menu pointer' onclick="location.href='/projects';">Projects<div class='nav-arrow'></div>
-                    <div class='sub-menu-gap'>
-                        <ul id='why-items' class='drop-menu'>
-                            <li><a href='/projects/spring-boot'>Spring Boot</a></li>
-                            <li><a href='/projects/spring-framework'>Spring Framework</a></li>
-                            <li><a href='/projects/spring-cloud-dataflow'>Spring Cloud Data Flow</a></li>
-                            <li><a href='/projects/spring-cloud'>Spring Cloud</a></li>
-                            <li><a href='/projects/spring-data'>Spring Data</a></li>
-                            <li><a href='/projects/spring-integration'>Spring Integration</a></li>
-                            <li><a href='/projects/spring-batch'>Spring Batch</a></li>
-                            <li><a href='/projects/spring-security'>Spring Security</a></li>
-                            <li><a class='blue mb-2 inline-block' href='/projects'>View all projects</a></li>
-                            <p class='uppercase smaller'>Development Tools</p>
-                            <li><a href='/tools'>Spring Tools 4</a></li>
-                            <li><a href='https://start.spring.io'>Spring Initialzr <svg class='external-link-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polyline points="15 10.94 15 15 1 15 1 1 5.06 1" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><polyline points="8.93 1 15 1 15 7.07" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><line x1="15" y1="1" x2="8" y2="8" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/></svg></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li><a href='/training'>Training</a></li>
-            <li><a href='/support'>Support</a></li>
-            <li>
-                <div class='has-menu pointer' onclick="location.href='/community';">Community<div class='nav-arrow'></div>
-                    <div class='sub-menu-gap'>
-                        <ul id='community-items' class='drop-menu'>
-                            <li><a href='/events'>Events</a></li>
-                            <li><a href='/team'>Team</a></li>
-                            <li><a href='http://store.pivotal.io'>Store <svg class='external-link-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polyline points="15 10.94 15 15 1 15 1 1 5.06 1" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><polyline points="8.93 1 15 1 15 7.07" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/><line x1="15" y1="1" x2="8" y2="8" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/></svg></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li id='search'><i class='fa fa-search'></i></li>
-            <li><a id='p-bug' target="_blank" href='https://pivotal.io'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.88 28.88"><defs><style>.cls-1{fill:#fff;}</style></defs><title>pivotal-bug</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><rect width="28.88" height="28.88"/><path class="cls-1" d="M13.9,6.17H9.37V22.71h2.81v-14h1.41l.91,0c2.29,0,3.44.74,3.44,2.53v.19c0,1.65-.91,2.74-3.4,2.74a5.53,5.53,0,0,1-.6-.05v2.29h.6c3.59,0,6.12-1.41,6.12-5v-.21C20.66,7.55,17.9,6.17,13.9,6.17Z"/></g></g></svg></a></li>
-        </ul>
+    </div>
+    <div id='popup' class='border-box rel'>
+        <?xml version="1.0" encoding="utf-8"?><!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0) --><svg version="1.1" class='mobile-close pointer' id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14.6 14.6" style="enable-background:new 0 0 14.6 14.6;" xml:space="preserve"><style type="text/css">.st0{fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}</style><title>close</title><line class="st0" x1="1.5" y1="1.5" x2="13.1" y2="13.1"/><line class="st0" x1="13.1" y1="1.5" x2="1.5" y2="13.1"/></svg>
+        <div class='relative'>
+            <ul id='mobile-list' class='m-0'>
+                <li><a href='/why-spring'>Why Spring</a></li>
+                <li><a href='/learn'>Learn</a></li>
+                <li><a href='/projects'>Projects</a></li>
+                <li><a href='/training'>Training</a></li>
+                <li><a href='/support'>Support</a></li>
+                <li><a href='/community'>Community</a></li>
+            </ul>
+        </div>
     </div>
     <div id="search-nav" role="search">
         <div class="container relative">
@@ -168,7 +172,7 @@
                                 <ul>
                                     <li><a href='/blog'>Blog</a></li>
                                     <li><a href='/guides'>Guides</a></li>
-                                    <li><a href='/guides/gs/quickstart'>Quickstart</a></li>
+                                    <li><a href='/quickstart'>Quickstart</a></li>
                                 </ul>
                             </div>
                             <div class='footer-column'>
@@ -186,7 +190,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class='right' th:unless="${#httpServletRequest.requestURI == '/support'}">
+                    <div class='right' th:unless="${#httpServletRequest.requestURI == '/support'} or ${#httpServletRequest.requestURI.contains('/blog')}">
                         <h2 class='h3 mb-2 antialiased hide'>Get the Spring newsletter</h2>
                         <h2 class='h3 mb-2 antialiased confirmation'>Thank you!</h2>
                         <script src="//app-sj05.marketo.com/js/forms2/js/forms2.min.js"></script>
@@ -209,8 +213,8 @@
             <div class='flex container jc-between'>
                 <div>
                     <img id='springlogo-foot' src='/images/logo-spring.svg'>
-                    <p class='small antialiased'>© 2019 <a href='https://pivotal.io'>Pivotal Software</a>, Inc. All Rights Reserved. <a href='https://pivotal.io/legal'>Terms of Use</a> • <a href='https://pivotal.io/privacy-policy'>Privacy</a> • <a href='/trademarks'>Trademark Guidelines</a> <span id='teconsent'></span></p>
-                    <p class='small antialiased'>Apache®, Apache Tomcat®, Apache Kafka®, Apache Cassandra&trade;, and Apache Geode&trade; are trademarks or registered trademarks of the Apache Software Foundation in the United States and/or other countries. Java&trade;, Java&trade; SE, Java&trade; EE, and OpenJDK&trade; are trademarks of Oracle and/or its affiliates. Kubernetes® is a registered trademark of the Linux Foundation in the United States and other countries. Linux® is the registered trademark of Linus Torvalds in the United States and other countries. Windows® and Microsoft® Azure are registered trademarks of Microsoft Corporation. “AWS” and “Amazon Web Services” are trademarks or registered trademarks of Amazon.com Inc. or its affiliates. All other trademarks and copyrights are property of their respective owners and are only mentioned for informative purposes. Other names may be trademarks of their respective owners.</p>
+                    <p class='smallest antialiased'>© 2019 <a href='https://pivotal.io'>Pivotal Software</a>, Inc. All Rights Reserved. <a href='https://pivotal.io/legal'>Terms of Use</a> • <a href='https://pivotal.io/privacy-policy'>Privacy</a> • <a href='/trademarks'>Trademark Guidelines</a> <span id='teconsent'></span></p>
+                    <p class='smallest antialiased'>Apache®, Apache Tomcat®, Apache Kafka®, Apache Cassandra&trade;, and Apache Geode&trade; are trademarks or registered trademarks of the Apache Software Foundation in the United States and/or other countries. Java&trade;, Java&trade; SE, Java&trade; EE, and OpenJDK&trade; are trademarks of Oracle and/or its affiliates. Kubernetes® is a registered trademark of the Linux Foundation in the United States and other countries. Linux® is the registered trademark of Linus Torvalds in the United States and other countries. Windows® and Microsoft® Azure are registered trademarks of Microsoft Corporation. “AWS” and “Amazon Web Services” are trademarks or registered trademarks of Amazon.com Inc. or its affiliates. All other trademarks and copyrights are property of their respective owners and are only mentioned for informative purposes. Other names may be trademarks of their respective owners.</p>
                 </div>
                 <div id='social-icons' class='flex jc-between'>
                     <a href='https://www.youtube.com/user/SpringSourceDev'><svg id='youtube-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><style>#youtube-icon .cls-1{fill:black;}#youtube-icon .cls-2{fill:#fff;}</style></defs><circle class="cls-1" cx="20" cy="20" r="20"/><path class="cls-2" d="M30.91,14.53a2.89,2.89,0,0,0-2-2C27.12,12,20,12,20,12s-7.12,0-8.9.47a2.9,2.9,0,0,0-2,2A30.56,30.56,0,0,0,8.63,20a30.44,30.44,0,0,0,.46,5.47,2.89,2.89,0,0,0,2,2C12.9,28,20,28,20,28s7.12,0,8.9-.47a2.87,2.87,0,0,0,2-2A30.56,30.56,0,0,0,31.37,20,28.88,28.88,0,0,0,30.91,14.53ZM17.73,23.41V16.59L23.65,20Z"/></svg></a>
@@ -221,6 +225,6 @@
         </div>
     </div>
 </footer>
-<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/master.js(v=${#dates.format(#dates.createNow(), 'ddHHmmss')})}"></script>
 </body>
 </html>

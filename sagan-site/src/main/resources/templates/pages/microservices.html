@@ -2,18 +2,21 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorator="layout">
 <head>
+    <title>Spring | Microservices</title>
+    <meta property='og:title' content='Spring can help you write microservices that are small and self-contained and has many tools to help you look after your microservices once they’re in the hands of your users.'/>
+    <meta property='og:description' content='Microservices are a modern approach to software whereby application code is delivered in small, manageable pieces, independent of others.'/>
 </head>
 <body id='microservices'>
 <div layout:fragment="~{content}">
     <div id='hero' class='topics-banner mb-5'>
-        <img id='midshape' src='/images/header-microservices.svg'>
+        <img id='midshape' src='/images/header-microservices.svg' alt=''>
     </div>
     <div class='content' role='Main'>
         <section class='container mb-5'>
             <h1 class='h1'>Microservices</h1>
             <div class='flex jc-between topic-hero'>
                 <div class='left m-0 topic-info'>
-                    <p class='big'>Microservice architectures are growing in popularity. Spring can help you write microservices that are small and self-contained and has many tools to help you look after your microservices once they’re in the hands of your users.In addition, Spring Cloud can help your microservices work together so that you can reliably deliver rich functionality to your users.</p>
+                    <p class='big'>Microservice architectures are growing in popularity. Spring can help you write microservices that are small and self-contained and has many tools to help you look after your microservices once they’re in the hands of your users. In addition, Spring Cloud can help your microservices work together so that you can reliably deliver rich functionality to your users.</p>
                     <div class='flex jc-between half-and-half'>
                         <div class='topics-half'>
                             <h3 class='h3'>What are microservices?</h3>
@@ -25,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <img class='as-fs topic-icon' src='/images/microservices.svg'>
+                <img class='as-fs topic-icon' src='/images/microservices.svg' alt=''>
             </div>
         </section>
         <section class='cornell container'>
@@ -35,7 +38,7 @@
                 </div>
                 <div class='right'>
                     <p class='mb-3'>With Spring Boot, your microservices can start small and iterate fast. That’s why it has become the de facto standard for Java™ microservices. Quickstart your project with Spring Initializr and then package as a JAR. With Spring Boot’s embedded server model, you’re ready to go in minutes.</p>
-                    <a class='button animate uppercase mb-3' href='/guides/gs/quickstart'>Try our quickstart guide</a>
+                    <a class='button animate uppercase mb-3' href='/quickstart'>Try our quickstart guide</a>
                 </div>
             </div>
         </section>
@@ -47,7 +50,7 @@
                 <div class='right'>
                     <p>The distributed nature of microservices can bring challenges. Spring can help you mitigate these issues. With several ready-to-run cloud patterns, <a class='blue link-animate' href='/cloud'>Spring Cloud</a> can help with service discovery, load-balancing, circuit-breaking, distributed tracing, and monitoring and can even act as an API gateway.</p>
                     <br/>
-                    <img src='/images/diagram-microservices.svg' alt='Microservices Diagram'/>
+                    <img src='/images/diagram-microservices.svg' alt='Microservices diagram'/>
                 </div>
             </div>
         </section>
@@ -69,7 +72,7 @@
                 </div>
                 <div class='right'>
                     <div class='flex jc-between'>
-                        <img src='/images/icon-graph.svg'>
+                        <img src='/images/icon-graph.svg' alt=''>
                         <div class='text'>
                             <p><a class='link-animate blue' href="https://micrometer.io">Micrometer</a>, Spring Boot’s optional instrumentation framework, sends valuable metric insights straight to Prometheus, Atlas, and more. <a class='link-animate blue' href="/cloud">Spring Cloud’s</a> Sleuth and Zipkin projects offer distributed tracing so that you can follow along with what’s happening in real time.</p>
                             <a class='link-animate blue' href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-metrics">Get started with Micrometer on Spring Boot</a>
@@ -90,8 +93,8 @@
                             <p><a class='link-animate blue' href="https://run.pivotal.io/">Try Pivotal Web Services for free</a></p>
                         </div>
                         <div class='images'>
-                            <img class='mb-2' src='/images/cloud-foundry.svg'>
-                            <img src='/images/logo-pas.svg'>
+                            <img class='mb-2' src='/images/cloud-foundry.svg' alt='Cloud Foundry logo'>
+                            <img src='/images/logo-pas.svg' alt='Pivotal Application Service logo'>
                         </div>
                     </div>
                 </div>
@@ -101,7 +104,7 @@
             <div class='bg-lightblue py-40'>
                 <h2 class='h2'>Ready to get started?</h2>
                 <div class='flex jc-center'>
-                    <a class='button animate uppercase antialiased' href='/guides/gs/quickstart'><span>Try this guide</span></a>
+                    <a class='button animate uppercase antialiased' href='/quickstart'><span>Try this guide</span></a>
                 </div>
             </div>
         </section>
@@ -114,21 +117,21 @@
                 <div class='flex jc-between'>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://content.pivotal.io/ebooks/migrating-to-cloud-native-application-architectures'>
-                            <img src='/images/micro-res1.png'>
+                            <img src='/images/micro-res1.png' alt='Migrating to Cloud-Native Application Architectures'>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/ebooks/migrating-to-cloud-native-application-architectures'>Migrating to Cloud-Native Application Architectures</a>
                         <div class='author'>Matt Stine</div>
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://content.pivotal.io/ebooks/thinking-architecturally'>
-                            <img src='/images/micro-res2.png'>
+                            <img src='/images/micro-res2.png' alt='Thinking Architecturally'>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/ebooks/thinking-architecturally'>Thinking Architecturally</a>
                         <div class='author'>Nate Schutta</div>
                     </div>
                     <div class='item third'>
-                        <a class='thumbnail mb-1 block' href='https://content.pivotal.io/ebooks/cloud-native-java-ebook'>
-                            <img src='/images/micro-res3.png'>
+                        <a class='thumbnail mb-1 block' href='https://content.pivotal.io/ebooks/cloud-native-java-ebook' alt='Cloud-Native Java: Designing Resilient Systems with Spring Boot, Spring Cloud, and Cloud Foundry'>
+                            <img src='/images/micro-res3.png' alt='Cloud-Native Java: Designing Resilient Systems with Spring Boot, Spring Cloud, and Cloud Foundry'>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/ebooks/cloud-native-java-ebook'>Cloud-Native Java: Designing Resilient Systems with Spring Boot, Spring Cloud, and Cloud Foundry</a>
                         <div class='author'>Josh Long & Kenny Bastani</div>

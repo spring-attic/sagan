@@ -2,34 +2,30 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorator="layout">
 <head>
+    <title>Spring | Serverless</title>
+    <meta property='og:title' content='Spring and Serverless'/>
+    <meta property='og:description' content='Serverless applications take advantage of modern cloud computing capabilities and abstractions to let you focus on logic rather than on infrastructure.'/>
 </head>
 <body id='serverless'>
 <div layout:fragment="~{content}">
     <div id='hero' class='topics-banner mb-5'>
-        <img id='midshape' src='/images/header-serverless.svg'>
+        <img id='midshape' src='/images/header-serverless.svg' alt=''>
     </div>
     <div class='content' role='Main'>
         <section class='container mb-5'>
             <h1 class='h1'>Serverless</h1>
             <div class='flex jc-between topic-hero mb-3'>
-                <p class='big'>Serverless applications take advantage of modern cloud computing capabilities and
-                    abstractions to let you focus on logic rather than on infrastructure. In a serverless environment,
-                    you can concentrate on writing application code, while the underlying platform takes care of
-                    scaling, runtimes, resource allocation, security, and other “server” specifics.</p>
-                <img class='as-fs topic-icon' src='/images/topic-serverless.svg'>
+                <p class='big'>Serverless applications take advantage of modern cloud computing capabilities and abstractions to let you focus on logic rather than on infrastructure. In a serverless environment, you can concentrate on writing application code, while the underlying platform takes care of scaling, runtimes, resource allocation, security, and other “server” specifics.</p>
+                <img class='as-fs topic-icon' src='/images/topic-serverless.svg' alt=''>
             </div>
             <div class='flex jc-between half-and-half'>
                 <div class='third'>
-                    <h3 class='h3'>What is serverless?</h3>
-                        <p class='m0'>Serverless workloads are “event-driven workloads that aren’t concerned with
-                            aspects normally handled by server infrastructure.” Concerns like how many instances to run
-                            and what operating system to use are all managed by a Function as a Service platform (or
-                            FaaS), leaving developers free to focus on business logic.</p>
+                    <h2 class='h3'>What is serverless?</h3>
+                        <p class='m0'>Serverless workloads are “event-driven workloads that aren’t concerned with aspects normally handled by server infrastructure.” Concerns like how many instances to run and what operating system to use are all managed by a Function as a Service platform (or FaaS), leaving developers free to focus on business logic.</p>
                 </div>
                 <div class='two-thirds'>
-                    <h3 class='h3'>Serverless characteristics?</h3>
-                        <p class='mb-0'>Serverless applications have a number of specific characteristics,
-                            including:</p>
+                    <h2 class='h3'>Serverless characteristics?</h3>
+                        <p class='mb-0'>Serverless applications have a number of specific characteristics, including:</p>
                         <div class='flex jc-between'>
                             <ul class='half'>
                                 <li>Event-driven code execution with triggers</li>
@@ -50,30 +46,22 @@
                 </div>
                 <div class='right'>
                     <div class='diagram-container'>
-                        <div class='center mb-3'><img src='/images/diagram-serverless-standalone.svg'></div>
+                        <div class='center mb-3'><img src='/images/diagram-serverless-standalone.svg' alt='Function as a Service (FaaS) and Legacy diagram'></div>
                         <div class='flex jc-between'>
                             <div class='half'>
                                 <h3 class='h3'>Function as a Service (FaaS)</h3>
                                 <ul>
                                     <li>Event-driven execution.</li>
                                     <li>Developers delegate all server-specific tasks to the FaaS platform.</li>
-                                    <li>Developers only write business logic that is invoked by the platform, allowing
-                                        for a more resilient requirement evolution as business needs change.
-                                    </li>
+                                    <li>Developers only write business logic that is invoked by the platform, allowing for a more resilient requirement evolution as business needs change.</li>
                                 </ul>
                             </div>
                             <div class='half'>
                                 <h3 class='h3'>Legacy</h3>
                                 <ul>
-                                    <li>Must maintain server infrastructure (installing, configuring, patching,
-                                        upgrading, etc.).
-                                    </li>
-                                    <li>Infrastructure scales in ways that might not be dynamic enough for the workload
-                                        (wasting resources).
-                                    </li>
-                                    <li>Developers write integration code to deal with messaging platforms, HTTP
-                                        request/responses, etc.
-                                    </li>
+                                    <li>Must maintain server infrastructure (installing, configuring, patching, upgrading, etc.).</li>
+                                    <li>Infrastructure scales in ways that might not be dynamic enough for the workload (wasting resources).</li>
+                                    <li>Developers write integration code to deal with messaging platforms, HTTP request/responses, etc.</li>
                                 </ul>
                             </div>
                         </div>
@@ -87,17 +75,8 @@
                     <h2 class='h2'>Why Spring and Serverless?</h2>
                 </div>
                 <div class='right'>
-                    <p>The Spring portfolio provides a robust collection of functionality for serverless applications.
-                        Whether accessing data with <a class='blue link-animate' href="/projects/spring-data">Spring
-                            Data</a>, using the enterprise integration patterns with <a class='blue link-animate'
-                                                                                        href='/projects/spring-integration'>Spring
-                            Integration</a>, or using the latest in reactive programming with <a
-                                class='blue link-animate' href='/projects/spring-framework'>Spring Framework</a> and <a
-                                class='blue link-animate' href='https://projectreactor.io/'>Project Reactor</a>, Spring
-                        lets developers be productive in a serverless environment from day one.</p>
-                    <p>Spring also helps your functions avoid vendor lock-in. The adapters provided by <a
-                            class='blue link-animate' href="/projects/spring-cloud-function">Spring Cloud Function</a>
-                        let you decouple from vendor-specific APIs when running your code on their platform.</p>
+                    <p>The Spring portfolio provides a robust collection of functionality for serverless applications. Whether accessing data with <a class='blue link-animate' href="/projects/spring-data">Spring Data</a>, using the enterprise integration patterns with <a class='blue link-animate' href='/projects/spring-integration'>Spring Integration</a>, or using the latest in reactive programming with <a class='blue link-animate' href='/projects/spring-framework'>Spring Framework</a> and <a class='blue link-animate' href='https://projectreactor.io/'>Project Reactor</a>, Spring lets developers be productive in a serverless environment from day one.</p>
+                    <p>Spring also helps your functions avoid vendor lock-in. The adapters provided by <a class='blue link-animate' href="/projects/spring-cloud-function">Spring Cloud Function</a> let you decouple from vendor-specific APIs when running your code on their platform.</p>
                 </div>
             </div>
         </section>
@@ -107,36 +86,18 @@
                     <h2 class='h2'>Spring and Serverless</h2>
                 </div>
                 <div class='right'>
-                    <p><a class='blue link-animate' href="/projects/spring-cloud-function">Spring Cloud Function</a>
-                        provides capabilities that let Spring developers take advantage of serverless or FaaS platforms.
-                    </p>
-                    <p>The <code>java.util.function</code> package from core Java serves as the foundation of the
-                        programming model used by Spring Cloud Function. In a nutshell, Spring Cloud Function provides:
-                    </p>
+                    <p><a class='blue link-animate' href="/projects/spring-cloud-function">Spring Cloud Function</a> provides capabilities that let Spring developers take advantage of serverless or FaaS platforms.  </p>
+                    <p>The <code>java.util.function</code> package from core Java serves as the foundation of the programming model used by Spring Cloud Function. In a nutshell, Spring Cloud Function provides:</p>
                     <ul>
                         <li>Choice of programming styles: reactive, imperative, or hybrid.</li>
-                        <li>Function composition and adaptation (such as composing imperative functions with
-                            reactive).
-                        </li>
-                        <li>Support for reactive function with multiple inputs and outputs to let functions handle
-                            merging, joining, and other complex streaming operations.
-                        </li>
+                        <li>Function composition and adaptation (such as composing imperative functions with reactive).</li>
+                        <li>Support for reactive function with multiple inputs and outputs to let functions handle merging, joining, and other complex streaming operations.</li>
                         <li>Transparent type conversion of inputs and outputs.</li>
-                        <li>Packaging functions for deployments, specific to the target platform (such as Project Riff,
-                            AWS Lambda, and more; see below).
-                        </li>
-                        <li>Functions with flexible signatures (POJO functions) - “if it looks like a function, it’s a
-                            function”
-                        </li>
+                        <li>Packaging functions for deployments, specific to the target platform (such as Project Riff, AWS Lambda, and more; see below).</li>
+                        <li>Functions with flexible signatures (POJO functions) - “if it looks like a function, it’s a function”</li>
                         <li>All other benefits of Spring's idioms and programming model.</li>
                     </ul>
-                    <p>Spring Cloud Function provides adaptors so that you can run your functionals on the most common
-                        FaaS services including <a class='blue link-animate' href="https://aws.amazon.com/lambda/">Amazon
-                            Lambda</a>, <a class='blue link-animate' href="https://openwhisk.apache.org/">Apache
-                            OpenWhisk</a>, <a class='blue link-animate'
-                                              href="https://azure.microsoft.com/en-us/services/functions/">Microsoft
-                            Azure</a>, and <a class='blue link-animate' href="https://projectriff.io/">Project Riff</a>.
-                    </p>
+                    <p>Spring Cloud Function provides adaptors so that you can run your functionals on the most common FaaS services including <a class='blue link-animate' href="https://aws.amazon.com/lambda/">Amazon Lambda</a>, <a class='blue link-animate' href="https://openwhisk.apache.org/">Apache OpenWhisk</a>, <a class='blue link-animate' href="https://azure.microsoft.com/en-us/services/functions/">Microsoft Azure</a>, and <a class='blue link-animate' href="https://projectriff.io/">Project Riff</a>.</p>
                 </div>
             </div>
         </section>
@@ -144,7 +105,7 @@
             <div class='bg-lightblue py-40'>
                 <h2 class='h2 center'>Ready to get started?</h2>
                 <div class='flex jc-center mb-3'>
-                    <a class='button animate uppercase' href='/guides/gs/quickstart'><span>Try this guide</span></a>
+                    <a class='button animate uppercase' href='/quickstart'><span>Try this guide</span></a>
                     <!-- <a class='button animate white uppercase' href='https://start.spring.io/'><span>Start with Spring Initializr</span></a> -->
                 </div>
             </div>
@@ -158,38 +119,25 @@
                 <div class='flex jc-between'>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=8tOj4A7jgWg'>
-                            <img src='/images/serverless-res1.png'>
-                            <div class='play'>
-                                <div class='relative'>
-                                    <div class='triangle'></div>
-                                </div>
-                            </div>
+                            <img src='/images/serverless-res1.png' alt='Play "Spring, Functions, Serverless, and You" on YouTube'>
+                            <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
-                        <a class='h3 blue mb-1 inline-block link-darken'
-                           href='https://www.youtube.com/watch?v=8tOj4A7jgWg'>Spring, Functions, Serverless, and You</a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=8tOj4A7jgWg'>Spring, Functions, Serverless, and You</a>
                         <div class='author'>Nate Schutta</div>
                     </div>
                     <div class='item third'>
-                        <a class='thumbnail mb-1 block'
-                           href='/blog/2018/05/16/spring-tips-project-riff-and-spring-cloud-function'>
-                            <img src='/images/serverless-res2.png'>
+                        <a class='thumbnail mb-1 block' href='/blog/2018/05/16/spring-tips-project-riff-and-spring-cloud-function'>
+                            <img src='/images/serverless-res2.png' alt='Spring Tips: Project Riff and Spring Cloud Function'>
                         </a>
-                        <a class='h3 blue mb-1 inline-block link-darken'
-                           href='/blog/2018/05/16/spring-tips-project-riff-and-spring-cloud-function'>Spring Tips:
-                            Project Riff and Spring Cloud Function</a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='/blog/2018/05/16/spring-tips-project-riff-and-spring-cloud-function'>Spring Tips: Project Riff and Spring Cloud Function</a>
                         <div class='author'>Josh Long</div>
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=mPOl3024R4s'>
-                            <img src='/images/serverless-res3.png'>
-                            <div class='play'>
-                                <div class='relative'>
-                                    <div class='triangle'></div>
-                                </div>
-                            </div>
+                            <img src='/images/serverless-res3.png' alt='Play "Serverless Spring" on YouTube'>
+                            <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
-                        <a class='h3 blue mb-1 inline-block link-darken'
-                           href='https://www.youtube.com/watch?v=mPOl3024R4s'>Serverless Spring</a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=mPOl3024R4s'>Serverless Spring</a>
                         <div class='author'>Dave Syer and Mark Fisher</div>
                     </div>
                 </div>

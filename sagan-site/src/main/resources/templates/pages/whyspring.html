@@ -1,124 +1,127 @@
 <html
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorator="layout">
-  <head>
-  </head>
-  <body id='why-spring'>
-    <div layout:fragment="~{content}">
-      <div id='hero' role='banner'>
-        <div class='container'>
-          <div class='text'>
-            <h1 class='h1'>Why Spring?</h1>
-            <p class='bigger'>Spring makes programming Java quicker, easier, and safer for everybody. Spring’s focus on speed, simplicity, and productivity has made it the <a class='blue link-animate' href="https://snyk.io/blog/jvm-ecosystem-report-2018-platform-application/">world's most popular</a> Java framework.</p>
-            <!-- <p>Spring’s flexible libraries are trusted by developers everywhere. Spring delivers delightful experiences to millions of end users every day&mdash;whether that’s <a class='blue link-animate' href="https://medium.com/netflix-techblog/netflix-oss-and-spring-boot-coming-full-circle-4855947713a0">streaming TV</a>, <a class='blue link-animate' href="https://pivotal.io/en/big-data/press-release/mercedes-benz-teams-with-pivotal-to-bring-connected-car-app-to-life">connected cars</a>, <a class='blue link-animate' href="https://tech.target.com/2018/12/18/spring-feign.html">online shopping</a>, or countless other innovative solutions.</p> -->
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+  <title>Spring | Why Spring?</title>
+  <meta property='og:title' content='Why Spring?'/>
+  <meta property='og:description' content="Spring makes programming Java quicker, easier, and safer for everybody. Spring’s focus on speed, simplicity, and productivity has made it the world's most popular Java framework."/>
+</head>
+<body id='why-spring'>
+<div layout:fragment="~{content}">
+  <div id='hero' role='banner'>
+    <div class='container'>
+      <div class='text'>
+        <h1 class='h1'>Why Spring?</h1>
+        <p>Spring makes programming Java quicker, easier, and safer for everybody. Spring’s focus on speed, simplicity, and productivity has made it the <a class='blue link-animate' href="https://snyk.io/blog/jvm-ecosystem-report-2018-platform-application/">world's most popular</a> Java framework.</p>
+        <!-- <p>Spring’s flexible libraries are trusted by developers everywhere. Spring delivers delightful experiences to millions of end users every day&mdash;whether that’s <a class='blue link-animate' href="https://medium.com/netflix-techblog/netflix-oss-and-spring-boot-coming-full-circle-4855947713a0">streaming TV</a>, <a class='blue link-animate' href="https://pivotal.io/en/big-data/press-release/mercedes-benz-teams-with-pivotal-to-bring-connected-car-app-to-life">connected cars</a>, <a class='blue link-animate' href="https://tech.target.com/2018/12/18/spring-feign.html">online shopping</a>, or countless other innovative solutions.</p> -->
+      </div>
+      <img id='illustration' src='/images/why-spring.svg' alt='Everywhere icon'>
+    </div>
+  </div>
+  <div class='content' role='Main'>
+    <section id='quote' class='container mb-4' role="contentinfo" aria-label="Quote">
+      <div class='container'>
+        <blockquote class='white h3 bigger antialiased'>“We use a lot of the tools that come with the Spring framework and reap the benefits of having a lot of the out of the box solutions, and not having to worry about writing a ton of additional code&mdash;so that really saves us some time and energy.”</blockquote>
+        <br>
+        <div class='quoted white mb-05'>Sean Graham, Application Transformation Lead, DICK’s Sporting Goods</div>
+        <a class='link-darken link-animate lightbox' href="https://www.youtube.com/watch?v=J66S0qP7DO4">Watch now</a>
+        <img id='shape' src='/images/quote-shape.svg'>
+      </div>
+    </section>
+    <section id='springis' class='mb-5'>
+      <div class='container flex jc-between flex-wrap'>
+        <div class='item mb-2'>
+          <h2 class='h2'>Spring is everywhere</h2>
+          <div class='flex jc-between'>
+            <img class='as-fs' src='/images/img-everywhere.svg' alt='Everywhere icon'>
+            <p>Spring’s flexible libraries are trusted by developers everywhere. Spring delivers delightful experiences to millions of end-users every day&mdash;whether that’s <a class='blue link-animate' href="https://medium.com/netflix-techblog/netflix-oss-and-spring-boot-coming-full-circle-4855947713a0">streaming TV</a>, <a class='blue link-animate'href="https://pivotal.io/big-data/press-release/mercedes-benz-teams-with-pivotal-to-bring-connected-car-app-to-life">connected cars</a>, <a class='blue link-animate' href="https://tech.target.com/2018/12/18/spring-feign.html">online shopping</a>, or countless other innovative solutions. Spring also has contributions from all the big names in tech, including Alibaba, Amazon, Google, Microsoft, and more.
+            </p>
           </div>
-          <img id='illustration' src='/images/why-spring.svg' alt='Everywhere icon'>
+        </div>
+        <div class='item mb-2'>
+          <h2 class='h2'>Spring is flexible</h2>
+          <div class='flex jc-between'>
+            <img class='as-fs' src='/images/img-flexible.svg' alt='Flexible icon'>
+            <p>Spring’s flexible and comprehensive set of extensions and third-party libraries let developers build almost any application imaginable. At its core, Spring Framework’s <a class='blue link-animate' href="https://en.wikipedia.org/wiki/Inversion_of_control">Inversion of Control (IoC)</a> and <a class='blue link-animate' href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection (DI)</a> features provide the foundation for a wide-ranging set of features and functionality. Whether you’re building secure, reactive, cloud-based microservices for the web, or complex streaming data flows for the enterprise, Spring has the tools to help.</p>
+          </div>
+        </div>
+        <div class='item mb-2'>
+          <h2 class='h2'>Spring is innovative</h2>
+          <div class='flex jc-between'>
+            <img class='as-fs' src='/images/img-innovative.svg' alt='Innovative icon'>
+            <p><a class='blue link-animate' href="/guides/gs/spring-boot">Spring Boot</a> has changed how developers approach Java programming tasks, radically streamlining their experience. By combining necessities such as an application context and an embedded web server with features such as auto-configuration, Spring Boot makes <a class='blue link-animate' href="/microservices">microservice</a> development a cinch. When you combine Spring Boot with Spring Cloud’s rich set of supporting libraries, servers, patterns, and templates, you can deploy whole microservices-based architectures safely into the <a class='blue link-animate' href="/cloud">cloud</a> in record time. These are just two of the many ways that the Spring family of projects helps you innovate at speed.</p>
+          </div>
+        </div>
+        <div class='item mb-2'>
+          <h2 class='h2'>Spring is fast</h2>
+          <div class='flex jc-between'>
+            <img class='as-fs' src='/images/img-fast.svg' alt='Fast icon'>
+            <p>Our engineers care deeply about performance. With Spring, you’ll notice fast startup, fast shutdown, and optimized execution, by default. Increasingly, Spring projects also support the <a class='blue link-animate' href="/reactive">reactive</a> (nonblocking) programming model for even greater efficiency. Developer productivity is Spring’s superpower. Spring Boot helps developers build applications with ease and with far less toil than other competing paradigms. Embedded web servers, auto-configuration, and “fat jars” help you get started quickly, and innovations like <a class='blue link-animate' href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-devtools-livereload">LiveReload in Spring DevTools</a> mean developers can iterate faster than ever before. You can even start a new Spring project in seconds, with the Spring Initializr at <a class='blue link-animate' href="https://start.spring.io/">start.spring.io</a>.</p>
+          </div>
+        </div>
+        <div class='item mb-2'>
+          <h2 class='h2'>Spring is secure</h2>
+          <div class='flex jc-between'>
+            <img class='as-fs' src='/images/img-secure.svg' alt='Secure icon'>
+            <p>Spring has a proven track record of dealing with security issues quickly and responsibly. The Spring committers work with security professionals to patch and test any reported vulnerabilities. Third-party dependencies are also monitored closely, and regular updates are issued to help keep your data and applications as safe as possible. In addition, <a class='blue link-animate' href='/projects/spring-security'>Spring Security</a> makes it easier for you to integrate with industry-standard security schemes and deliver trustworthy solutions that are secure by default.</p>
+          </div>
+        </div>
+        <div class='item mb-2'>
+          <h2 class='h2'>Spring is helpful</h2>
+          <div class='flex jc-between'>
+            <img class='as-fs' src='/images/img-indemand.svg' alt='In demand icon'>
+            <p>The <a class='blue link-animate' href="/community">Spring community</a> is enormous, global, diverse, and spans folks of all ages and capabilities, from complete beginners to seasoned pros. No matter where you are on your journey, you can find the resources to help you get to the next level: <a class='blue link-animate' href='/quickstart'>quickstarts</a>, <a class='blue link-animate' href='/guides'>guides & tutorials</a>, <a class='blue link-animate' href='https://www.youtube.com/channel/UC7yfnfvEUlXUIfm8rGLwZdA'>videos</a>, <a class='blue link-animate' href='/community'>meetups</a>, or even formal <a class='blue link-animate' href='/training'>training and certification</a>.</p>
+          </div>
         </div>
       </div>
-      <div class='content' role='Main'>
-        <section id='quote' class='container mb-4' role="contentinfo" aria-label="Quote">
-          <div class='container'>
-            <blockquote class='white h3 bigger antialiased'>“We use a lot of the tools that come with the Spring framework and reap the benefits of having a lot of the out of the box solutions, and not having to worry about writing a ton of additional code&mdash;so that really saves us some time and energy.”</blockquote>
-            <br>
-            <div class='quoted white mb-05'>Sean Graham, Application Transformation Lead, DICK’s Sporting Goods</div>
-            <a class='link-darken link-animate lightbox' href="https://www.youtube.com/watch?v=J66S0qP7DO4">Watch now</a>
-            <img id='shape' src='/images/quote-shape.svg'>
-          </div>     
-        </section>
-        <section id='springis' class='mb-5'>
-          <div class='container flex jc-between flex-wrap'>
-            <div class='item mb-2'>
-              <h2 class='h2'>Spring is everywhere</h2>
-              <div class='flex jc-between'>
-                <img class='as-fs' src='/images/img-everywhere.svg' alt='Everywhere icon'>
-                <p>Spring’s flexible libraries are trusted by developers everywhere. Spring delivers delightful experiences to millions of end-users every day—whether that’s <a class='blue link-animate' href="https://medium.com/netflix-techblog/netflix-oss-and-spring-boot-coming-full-circle-4855947713a0">streaming TV</a>, <a class='blue link-animate'href="https://pivotal.io/big-data/press-release/mercedes-benz-teams-with-pivotal-to-bring-connected-car-app-to-life">connected cars</a>, <a class='blue link-animate' href="https://tech.target.com/2018/12/18/spring-feign.html">online shopping</a>, or countless other innovative solutions. Spring also has contributions from all the big names in tech, including Alibaba, Amazon, Google, Microsoft, and more.
-</p>
-              </div>
-            </div>
-            <div class='item mb-2'>
-              <h2 class='h2'>Spring is flexible</h2>
-              <div class='flex jc-between'>
-                <img class='as-fs' src='/images/img-flexible.svg' alt='Flexible icon'>
-                <p>Spring’s flexible and comprehensive set of extensions and third-party libraries let developers build almost any application imaginable. At its core, Spring Framework’s <a class='blue link-animate' href="https://en.wikipedia.org/wiki/Inversion_of_control">Inversion of Control (IoC)</a> and <a class='blue link-animate' href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection (DI)</a> features provide the foundation for a wide-ranging set of features and functionality. Whether you’re building secure, reactive, cloud-based microservices for the web, or complex streaming data flows for the enterprise, Spring has the tools to help.</p>
-              </div>
-            </div>
-            <div class='item mb-2'>
-              <h2 class='h2'>Spring is innovative</h2>
-              <div class='flex jc-between'>
-                <img class='as-fs' src='/images/img-innovative.svg' alt='Innovative icon'>
-                <p><a class='blue link-animate' href="/guides/gs/spring-boot">Spring Boot</a> has changed how developers approach Java programming tasks, radically streamlining their experience. By combining necessities such as an application context and an embedded web server with features such as auto-configuration, Spring Boot makes <a class='blue link-animate' href="/microservices">microservice</a> development a cinch. When you combine Spring Boot with Spring Cloud’s rich set of supporting libraries, servers, patterns, and templates, you can deploy whole microservices-based architectures safely into the <a class='blue link-animate' href="/cloud">cloud</a> in record time. These are just two of the many ways that the Spring family of projects helps you innovate at speed.</p>
-              </div>
-            </div>
-            <div class='item mb-2'>
-              <h2 class='h2'>Spring is fast</h2>
-              <div class='flex jc-between'>
-                <img class='as-fs' src='/images/img-fast.svg' alt='Fast icon'>
-                <p>Our engineers care deeply about performance. With Spring you’ll notice fast startup, fast shutdown, and optimized execution by default. Increasingly, Spring projects also support the <a class='blue link-animate' href="/reactive">reactive</a> (nonblocking) programming model for even greater efficiency. Developer productivity is Spring’s superpower. Spring Boot helps developers build applications with ease and with far less toil than other competing paradigms. Embedded web servers, auto-configuration, and “fat jars” help you get started quickly, and innovations like <a class='blue link-animate' href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-devtools-livereload">LiveReload in Spring DevTools</a> mean developers can iterate faster than ever before. You can even start a new Spring project in seconds, with the Spring Initializr at <a class='blue link-animate' href="https://start.spring.io/">start.spring.io</a>.</p>
-              </div>
-            </div>
-            <div class='item mb-2'>
-              <h2 class='h2'>Spring is secure</h2>
-              <div class='flex jc-between'>
-                <img class='as-fs' src='/images/img-secure.svg' alt='Secure icon'>
-                <p>Spring has a proven track record of dealing with security issues quickly and responsibly. The Spring committers work with security professionals to patch and test any reported vulnerabilities. Third-party dependencies are also monitored closely and regular updates are issued to help keep your data and applications as safe as possible. In addition, <a class='blue link-animate' href='/projects/spring-security'>Spring Security</a> makes it easier for you to integrate with industry-standard security schemes and deliver trustworthy solutions that are secure by default.</p>
-              </div>
-            </div>
-            <div class='item mb-2'>
-              <h2 class='h2'>Spring is helpful</h2>
-              <div class='flex jc-between'>
-                <img class='as-fs' src='/images/img-indemand.svg' alt='In demand icon'>
-                <p>The <a class='blue link-animate' href="/community">Spring community</a> is enormous, global, diverse, and spans folks of all ages and capabilities, from complete beginners to seasoned pros. No matter where you are on your journey, you can find the resources to help you get to the next level: <a class='blue link-animate' href='/guides/gs/quickstart'>quickstarts</a>, <a class='blue link-animate' href='/guides'>guides & tutorials</a>, <a class='blue link-animate' href='https://www.youtube.com/channel/UC7yfnfvEUlXUIfm8rGLwZdA'>videos</a>, <a class='blue link-animate' href='/community'>meetups and 3rd party sites</a>, or even formal <a class='blue link-animate' href='/training'>training and certification</a>.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section id='whatspring' class='p-80' role="contentinfo" aria-label="What Spring can do">
-          <div class='container'>
-            <h2 class='h2 antialiased white'>
-              What can Spring do?
-            </h2>
-          </div>
-          <div class='container cards flex jc-between flex-wrap'>
-            <a href='/microservices' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
-              <img class='mw-100' src='/images/icon-microservices.svg' alt='Microservices icon'>
-              <h3 class='h3 antialiased'>Microservices</h3>
-              <p>Quickly deliver production&#8209;grade features with independently evolvable microservices.</p>
-            </a>
-            <a href='/reactive' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
-              <img class='mw-100' src='/images/icon-reactive.svg' alt='Reactive icon'>
-              <h3 class='h3 antialiased'>Reactive</h3>
-              <p>Spring's asynchronous, nonblocking architecture means you can get more from your computing resources.</p>
-            </a>
-            <a href='/cloud' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
-              <img class='mw-100' src='/images/icon-cloud.svg' alt='Cloud icon'>
-              <h3 class='h3 antialiased'>Cloud</h3>
-              <p>Your code, any cloud&mdash;we’ve got you covered. Connect and scale your services, whatever your platform.</p>
-            </a>
-            <a href='/web-applications' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
-              <img class='mw-100' src='/images/icon-webapps.svg' alt='Web apps icon'>
-              <h3 class='h3 antialiased'>Web apps</h3>
-              <p>Frameworks for fast, secure, and responsive web applications connected to any data store.</p>
-            </a>
-          </div>
-          <div class='container cards flex jc-between flex-wrap mw-850'>
-            <a href='/serverless' class='card third block quarter border-box center border mb-2 rad-5 shadow-hover'>
-              <img class='mw-100' src='/images/icon-serverless.svg' alt='Serverless icon'>
-              <h3 class='h3 antialiased'>Serverless</h3>
-              <p>The ultimate flexibility. Scale up on demand and scale to zero when there’s no demand.</p>
-            </a>
-            <a href='/streams' class='card third block quarter border-box center border mb-2 rad-5 shadow-hover'>
-              <img class='mw-100' src='/images/icon-streams.svg' alt='Streams icon'>
-              <h3 class='h3 antialiased'>Streams</h3>
-              <p>Data coming thick and fast? Never miss a beat with high&#8209;performance stream processing.</p>
-            </a>     
-            <a href='/batch' class='card third block quarter border-box center border mb-2 rad-5 shadow-hover'>
-              <img class='mw-100' src='/images/icon-batch.svg' alt='Batch icon'>
-              <h3 class='h3 antialiased'>Batch</h3>
-              <p>Automated tasks. Offline processing of data at a time to suit you.</p>
-            </a>         
-          </div>
-        </section>
+    </section>
+    <section id='whatspring' class='p-80' role="contentinfo" aria-label="What Spring can do">
+      <div class='container'>
+        <h2 class='h2 antialiased white'>
+          What can Spring do?
+        </h2>
       </div>
-    </div>
-  </body>
+      <div class='container cards flex jc-between flex-wrap'>
+        <a href='/microservices' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
+          <img class='mw-100' src='/images/icon-microservices.svg' alt='Microservices icon'>
+          <h3 class='h3 antialiased'>Microservices</h3>
+          <p>Quickly deliver production&#8209;grade features with independently evolvable microservices.</p>
+        </a>
+        <a href='/reactive' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
+          <img class='mw-100' src='/images/icon-reactive.svg' alt='Reactive icon'>
+          <h3 class='h3 antialiased'>Reactive</h3>
+          <p>Spring's asynchronous, nonblocking architecture means you can get more from your computing resources.</p>
+        </a>
+        <a href='/cloud' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
+          <img class='mw-100' src='/images/icon-cloud.svg' alt='Cloud icon'>
+          <h3 class='h3 antialiased'>Cloud</h3>
+          <p>Your code, any cloud&mdash;we’ve got you covered. Connect and scale your services, whatever your platform.</p>
+        </a>
+        <a href='/web-applications' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
+          <img class='mw-100' src='/images/icon-webapps.svg' alt='Web apps icon'>
+          <h3 class='h3 antialiased'>Web apps</h3>
+          <p>Frameworks for fast, secure, and responsive web applications connected to any data store.</p>
+        </a>
+      </div>
+      <div class='container cards flex jc-between flex-wrap mw-850'>
+        <a href='/serverless' class='card third block quarter border-box center border mb-2 rad-5 shadow-hover'>
+          <img class='mw-100' src='/images/icon-serverless.svg' alt='Serverless icon'>
+          <h3 class='h3 antialiased'>Serverless</h3>
+          <p>The ultimate flexibility. Scale up on demand and scale to zero when there’s no demand.</p>
+        </a>
+        <a href='/streams' class='card third block quarter border-box center border mb-2 rad-5 shadow-hover'>
+          <img class='mw-100' src='/images/icon-streams.svg' alt='Streams icon'>
+          <h3 class='h3 antialiased'>Streams</h3>
+          <p>Data coming thick and fast? Never miss a beat with high&#8209;performance stream processing.</p>
+        </a>
+        <a href='/batch' class='card third block quarter border-box center border mb-2 rad-5 shadow-hover'>
+          <img class='mw-100' src='/images/icon-batch.svg' alt='Batch icon'>
+          <h3 class='h3 antialiased'>Batch</h3>
+          <p>Automated tasks. Offline processing of data at a time to suit you.</p>
+        </a>
+      </div>
+    </section>
+  </div>
+</div>
+</body>
 </html>

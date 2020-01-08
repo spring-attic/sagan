@@ -1,41 +1,44 @@
 <html
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorator="layout">
-  <head>
-    
-  </head>
-  <body id='quickstart'>
-    <div layout:fragment="~{content}">
-      <div id='hero' class='of-hide rel' role='Banner'>
-        <img src='/images/floating-quickstart.svg'>
-        <div class='container rel z-1'>
-          <a href='/guides' class='uppercase smaller bold backlink blue link-darken block'><!--div class='arrow'></div-->All Guides</a>
-          <h1 class='h1 antialiased mb-3'>Spring Quickstart Guide</h1>
-          <div id='intro' class='mw-850 flex bg-lightblue jc-between border-box mb-2'>
-            <div class='third'>
-              <h2 class='h3 antialiased'>What you'll build</h2>
-              <p>You will build a classic “Hello World!” endpoint which any browser can connect to. You can even tell it your name, and it will respond in a more friendly way.</p>
-            </div>
-            <div class='two-thirds'>
-              <h2 class='h3 antialiased'>What you’ll need</h2>
-              <p class='m-0 bold antialiased'>An Integrated Developer Environment (IDE)</p>
-              <p class='mt-0 mb-2'>Popular choices include <a class='blue link-animate' href="https://www.jetbrains.com/idea/">IntelliJ</a>, <a class='blue link-animate' href="/tools">Spring Tools</a>, <a class='blue link-animate' href="https://code.visualstudio.com/docs/languages/java">Visual Studio Code</a>, or <a class='blue link-animate' href="https://www.eclipse.org/downloads/packages/">Eclipse</a>, and many more.</p>
-              <p class='mb-0 bold'>A Java™ Development Kit (JDK)</p>
-              <p class='m-0'>We recommend <a class='blue link-animate' href="https://adoptopenjdk.net/">AdoptOpenJDK</a> version 8 or version 11.</p>
-            </div>
-          </div>
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+  <title>Spring | Spring Quickstart Guide</title>
+  <meta property='og:title' content='Spring Quickstart Guide'/>
+  <meta property='og:description' content='You will build a classic “Hello World!” endpoint which any browser can connect to. You can even tell it your name, and it will respond in a more friendly way.'/>
+</head>
+<body id='quickstart'>
+<div layout:fragment="~{content}">
+  <div id='hero' class='of-hide rel' role='Banner'>
+    <img src='/images/floating-quickstart.svg' alt=''>
+    <div class='container rel z-1'>
+      <a href='/guides' class='uppercase smallest bold backlink blue link-darken block'><div class='arrow'></div>All Guides</a>
+      <h1 class='h1 antialiased mb-3'>Spring Quickstart Guide</h1>
+      <div id='intro' class='mw-850 flex bg-lightblue jc-between border-box mb-2'>
+        <div class='third'>
+          <h2 class='h3 antialiased'>What you'll build</h2>
+          <p>You will build a classic “Hello World!” endpoint which any browser can connect to. You can even tell it your name, and it will respond in a more friendly way.</p>
+        </div>
+        <div class='two-thirds'>
+          <h2 class='h3 antialiased'>What you’ll need</h2>
+          <p class='m-0 bold antialiased'>An Integrated Developer Environment (IDE)</p>
+          <p class='mt-0 mb-2'>Popular choices include <a class='blue link-animate' href="https://www.jetbrains.com/idea/">IntelliJ</a>, <a class='blue link-animate' href="/tools">Spring Tools</a>, <a class='blue link-animate' href="https://code.visualstudio.com/docs/languages/java">Visual Studio Code</a>, or <a class='blue link-animate' href="https://www.eclipse.org/downloads/packages/">Eclipse</a>, and many more.</p>
+          <p class='mb-0 bold'>A Java™ Development Kit (JDK)</p>
+          <p class='m-0'>We recommend <a class='blue link-animate' href="https://adoptopenjdk.net/">AdoptOpenJDK</a> version 8 or version 11.</p>
         </div>
       </div>
-      <div class='content' role='Main'>
-        <div class='container'>
-          <section id='steps' class='mb-5 mw-850'>
-            <h2 class='h2 antialiased'><span class='green'>Step 1: </span>Start a new Spring Boot project</h2>
-            <p class='mb-3'>Use the <a class='blue link-animate' href='https://start.spring.io/'>Spring Initializr</a> to create a “web” project. In the “Dependencies” section search for and add the “web” dependency as shown in the screenshot.  Hit the green “Generate” button, download the zip, and unpack it into a folder on your computer.</p>
-            <img id='init' class='mx-auto block shadow mb-4' src='/images/quick-img-1.png' alt='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.' title='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.'>
-            <p class='mb-4'>Spring projects created by the Spring Initializr contain <a class='blue link-animate' href='/projects/spring-boot'>Spring Boot</a>. Spring Boot makes Spring ready for work inside your app, but without the need for much in the way of code or configuration. Spring Boot is the quickest and most popular way to start Spring projects.</p>
-            <h2 class='h2 antialiased'><span class='green'>Step 2: </span>Add your code</h2>
-            <p>Open up the project in your IDE and locate the <code>DemoApplication.java</code></pre> file in the <code>src/main/java/com/example/demo</code></pre> folder. Now change the contents of the file by adding the extra method and annotations shown in the code below. You can copy and paste the code below or type it out.</p>
-            <pre class='prettyprint'><code class='no-bg'>
+    </div>
+  </div>
+  <div class='content' role='Main'>
+    <div class='container'>
+      <section id='steps' class='mb-5 mw-850'>
+        <h2 class='h2 antialiased'><span class='green'>Step 1: </span>Start a new Spring Boot project</h2>
+        <p class='mb-3'>Use the <a class='blue link-animate' href='https://start.spring.io/'>Spring Initializr</a> to create a “web” project. In the “Dependencies” section search for and add the “web” dependency as shown in the screenshot.  Hit the green “Generate” button, download the zip, and unpack it into a folder on your computer.</p>
+        <img id='init' class='mx-auto block mb-4' src='/images/quick-img-1.png' alt='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.' title='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.'>
+        <p class='mb-4'>Spring projects created by the Spring Initializr contain <a class='blue link-animate' href='/projects/spring-boot'>Spring Boot</a>. Spring Boot makes Spring ready for work inside your app, but without the need for much in the way of code or configuration. Spring Boot is the quickest and most popular way to start Spring projects.</p>
+        <h2 class='h2 antialiased'><span class='green'>Step 2: </span>Add your code</h2>
+        <p>Open up the project in your IDE and locate the <code>DemoApplication.java</code></pre> file in the <code>src/main/java/com/example/demo</code></pre> folder. Now change the contents of the file by adding the extra method and annotations shown in the code below. You can copy and paste the code below over the top of what you have, or type it out.</p>
+        <pre class='prettyprint'><code class='no-bg'>
+              package com.example.demo;<br/>
               import org.springframework.boot.SpringApplication;<br>
               import org.springframework.boot.autoconfigure.SpringBootApplication;<br>
               import org.springframework.web.bind.annotation.GetMapping;<br>
@@ -58,51 +61,51 @@
                 </div>
               }<br>
             </code></pre>
-            <p class='caption'>This is all the code required to create a simple “Hello World” web service in Spring Boot.</p>
-            <p>The method we’ve added is designed to take a String argument called “name“, and then combine it with the word “Hello” before returning. If I set my name as “Amy” in the request, the response would be “Hello Amy”.</p>
-            <p class='mb-4'>The <code>@RestController</code></pre> annotation tells Spring that this code describes an endpoint that should be made available over the web. The <code>@GetMapping(“/hello”)</code></pre> tells Spring to use our <code class='no-bg'>hello</code></pre> method to answer requests that get sent to the <code>http://localhost:8080/hello</code></pre> address. Finally, the <code>@RequestParam</code></pre> is telling Spring to expect a <code class='no-bg'>name</code></pre> value in the request, but if it’s not there, use the word “World” instead.</p>
-            <h2 class='h2 antialiased'><span class='green'>Step 3: </span>Try it</h2>
-            <p>Let’s Build and run the program. Open a command line (or terminal) and navigate to the folder where you have the project files. We can use the Maven build system to build and run the application by issuing the following command:</p>
-            <p><b>MacOS/Linux:</b><br><code class='inline-block'>./mvnw package spring-boot:run -DskipTests=true</code></pre></p>
-            <p><b>Windows:</b><br><code class='inline-block'>mvnw package spring-boot:run -DskipTests=true</code></pre></p>
-            <p>You should see some output that looks very similar to this:</p>
-            <img class='shadow mb-1' alt='The terminal outputting various log statements as our Spring Boot application starts up.' title='The terminal outputting various log statements as our Spring Boot application starts up.' src='/images/quick-img2.png'>
-            <p class='mb-3'>The last couple of lines here tell us that Spring has started. Spring Boot’s embedded Apache Tomcat server is acting as a webserver and is listening for requests on <code class='no-bg'>localhost</code> port <code class='no-bg'>8080</code>. Open your browser and in the address bar at the top enter <a class='blue link-animate' href='http://localhost:8080/hello'>http://localhost:8080/hello</a>. You should get a nice friendly response like this:</p>
-            <img class='shadow mb-3' alt='The browser screen displaying the default ‘hello world’ output from our application.' title='The browser screen displaying the default ‘hello world’ output from our application.' src='/images/quick-img3.png'>
-            <img id='pop-quiz' class='inline-block' src='/images/pop-quiz.svg'>
-            <h3 class='h3 antialiased inline-block m-0'>Pop quiz</h3>
-            <p>What should happen if you add <code>?name=Amy</code></pre> to the end of the URL?</p>
-          </section>
-          <section id='next' class='mw-850 mb-8'>
-            <h2 class='h2 antialiased'>Next, try these popular guides</h2>
-            <p class='mb-3'>You’ve already seen how simple Spring can be, but it’s also very flexible. There are thousands of things you can do with Spring, and we have lots of guides available to take you through the most popular choices. Why not keep on learning and try one of these additional guides?</p>
-            <div class='flex jc-between'>
-              <a href='/guides/gs/rest-service' class='card block border shadow-hover bg-white border-box third rad-5'>
-                <div class='flex title'>
-                  <img src='/images/icon-guides-start.svg'>
-                  <p class='bold antialiased blue m-0'>Building a RESTful web Service</p>
-                </div>
-                <p>Continue your learning by creating a RESTful JSON web service in Spring</p>
-              </a>
-              <a href='/guides/gs/consuming-rest' class='card block border shadow-hover bg-white border-box third rad-5'>
-                <div class='flex title'>
-                  <img src='/images/icon-guides-start.svg'>
-                  <p class='bold antialiased blue m-0'>Consuming a RESTful Web Service</p>
-                </div>
-                <p>Learn how to retrieve web page data with Spring's RestTemplate.</p>
-              </a>
-              <a href='/guides/gs/accessing-data-jpa' class='card block border shadow-hover bg-white border-box third rad-5'>
-                <div class='flex title'>
-                  <img src='/images/icon-guides-start.svg'>
-                  <p class='bold antialiased blue m-0'>Accessing Data with JPA</p>
-                </div>
-                <p>Learn how to work with JPA data persistence using Spring Data JPA.</p>
-              </a>
+        <p class='caption'>This is all the code required to create a simple “Hello World” web service in Spring Boot.</p>
+        <p>The <code class='no-bg'>hello()</code> method we’ve added is designed to take a String parameter called “name“, and then combine it with the word “Hello”. If I set my name as “Amy” in the request, the response would be “Hello Amy”.</p>
+        <p class='mb-4'>The <code>@RestController</code></pre> annotation tells Spring that this code describes an endpoint that should be made available over the web. The <code>@GetMapping(“/hello”)</code></pre> tells Spring to use our <code class='no-bg'>hello</code></pre> method to answer requests that get sent to the <code>http://localhost:8080/hello</code></pre> address. Finally, the <code>@RequestParam</code></pre> is telling Spring to expect a <code class='no-bg'>name</code></pre> value in the request, but if it’s not there, it will use the word “World” by default.</p>
+        <h2 class='h2 antialiased'><span class='green'>Step 3: </span>Try it</h2>
+        <p>Let’s Build and run the program. Open a command line (or terminal) and navigate to the folder where you have the project files. We can use the Maven build system to build and run the application by issuing the following command:</p>
+        <p><b>MacOS/Linux:</b><br><code class='inline-block'>./mvnw package spring-boot:run -DskipTests=true</code></pre></p>
+        <p><b>Windows:</b><br><code class='inline-block'>mvnw package spring-boot:run -DskipTests=true</code></pre></p>
+        <p>You should see some output that looks very similar to this:</p>
+        <img class='shadow mb-1' alt='The terminal outputting various log statements as our Spring Boot application starts up.' title='The terminal outputting various log statements as our Spring Boot application starts up.' src='/images/quick-img2.png'>
+        <p class='mb-3'>The last couple of lines here tell us that Spring has started. Spring Boot’s embedded Apache Tomcat server is acting as a webserver and is listening for requests on <code class='no-bg'>localhost</code> port <code class='no-bg'>8080</code>. Open your browser and in the address bar at the top enter <a class='blue link-animate' href='http://localhost:8080/hello'>http://localhost:8080/hello</a>. You should get a nice friendly response like this:</p>
+        <img class='shadow mb-3' alt='The browser screen displaying the default ‘hello world’ output from our application.' title='The browser screen displaying the default ‘hello world’ output from our application.' src='/images/quick-img3.png'>
+        <img id='pop-quiz' class='inline-block' src='/images/pop-quiz.svg'>
+        <h3 class='h3 antialiased inline-block m-0'>Pop quiz</h3>
+        <p>What should happen if you add <code>?name=Amy</code></pre> to the end of the URL?</p>
+      </section>
+      <section id='next' class='mw-850 mb-8'>
+        <h2 class='h2 antialiased'>Next, try these popular guides</h2>
+        <p class='mb-3'>You’ve already seen how simple Spring can be, but it’s also very flexible. There are thousands of things you can do with Spring, and we have lots of guides available to take you through the most popular choices. Why not keep on learning and try one of these additional guides?</p>
+        <div class='flex jc-between'>
+          <a href='/guides/gs/rest-service' class='card block border shadow-hover bg-white border-box third rad-5'>
+            <div class='flex title'>
+              <img src='/images/icon-guides-start.svg' alt=''>
+              <p class='bold antialiased blue m-0'>Building a RESTful web Service</p>
             </div>
-          </section>
+            <p>Continue your learning by creating a RESTful JSON web service in Spring</p>
+          </a>
+          <a href='/guides/gs/consuming-rest' class='card block border shadow-hover bg-white border-box third rad-5'>
+            <div class='flex title'>
+              <img src='/images/icon-guides-start.svg' alt=''>
+              <p class='bold antialiased blue m-0'>Consuming a RESTful Web Service</p>
+            </div>
+            <p>Learn how to retrieve web page data with Spring's RestTemplate.</p>
+          </a>
+          <a href='/guides/gs/accessing-data-jpa' class='card block border shadow-hover bg-white border-box third rad-5'>
+            <div class='flex title'>
+              <img src='/images/icon-guides-start.svg' alt=''>
+              <p class='bold antialiased blue m-0'>Accessing Data with JPA</p>
+            </div>
+            <p>Learn how to work with JPA data persistence using Spring Data JPA.</p>
+          </a>
         </div>
-      </div>
+      </section>
     </div>
-    <script src="/js/prism.js"></script>
-  </body>
+  </div>
+</div>
+<script src="/js/prism.js"></script>
+</body>
 </html>

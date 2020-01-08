@@ -2,6 +2,9 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorator="layout">
 <head>
+    <title>Spring | Home</title>
+    <meta property='og:title' content='Spring makes Java simple.'/>
+    <meta property='og:description' content='Level up your Java code and explore what Spring can do for you.'/>
 </head>
 <body id='index'>
 <div layout:fragment="~{content}">
@@ -30,13 +33,13 @@
                             <li class="flip-text-item">modern.</li>
                             <li class="flip-text-item">productive.</li>
                             <li class="flip-text-item">reactive.</li>
-                            <li class="flip-text-item">cloud-ready.</li>
+                            <li class="flip-text-item ws-nowrap">cloud-ready.</li>
                         </ul>
                     </div>
                 </div>
                 <a href='/why-spring' class='button uppercase transparent animate'>Why Spring</a>
-                <a href='/guides/gs/quickstart' class='button uppercase transparent animate'>Quickstart</a>
-                <a href='/docs' class='button uppercase transparent animate'>Docs</a>
+                <a href='/quickstart' class='button uppercase transparent animate'>Quickstart</a>
+                <!-- <a href='/docs' class='button uppercase transparent animate'>Docs</a> -->
             </div>
         </div>
     </div>
@@ -61,39 +64,39 @@
             </div>
             <div class='container cards grid flex jc-between flex-wrap'>
                 <a href='/microservices' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
-                    <img class='mw-100' src='/images/icon-microservices.svg' alt='Microservices icon'>
+                    <img class='mw-100' src='/images/icon-microservices.svg' alt=''>
                     <h3 class='h3 antialiased'>Microservices</h3>
                     <p>Quickly deliver production&#8209;grade features with independently evolvable microservices.</p>
                 </a>
                 <a href='/reactive' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
-                    <img class='mw-100' src='/images/icon-reactive.svg' alt='Reactive icon'>
+                    <img class='mw-100' src='/images/icon-reactive.svg' alt=''>
                     <h3 class='h3 antialiased'>Reactive</h3>
                     <p>Spring's asynchronous, nonblocking architecture means you can get more from your computing resources.</p>
                 </a>
                 <a href='/cloud' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
-                    <img class='mw-100' src='/images/icon-cloud.svg' alt='Cloud icon'>
+                    <img class='mw-100' src='/images/icon-cloud.svg' alt=''>
                     <h3 class='h3 antialiased'>Cloud</h3>
                     <p>Your code, any cloud&mdash;we’ve got you covered. Connect and scale your services, whatever your platform.</p>
                 </a>
                 <a href='/web-applications' class='card block quarter border-box center border mb-2 rad-5 shadow-hover'>
-                    <img class='mw-100' src='/images/icon-webapps.svg' alt='Web apps icon'>
+                    <img class='mw-100' src='/images/icon-webapps.svg' alt=''>
                     <h3 class='h3 antialiased'>Web apps</h3>
                     <p>Frameworks for fast, secure, and responsive web applications connected to any data store.</p>
                 </a>
             </div>
             <div class='container cards flex jc-between flex-wrap mw-850'>
                 <a href='/serverless' class='card third block quarter border-box center border mb-2 rad-5 shadow-hover'>
-                    <img class='mw-100' src='/images/icon-serverless.svg' alt='Serverless icon'>
+                    <img class='mw-100' src='/images/icon-serverless.svg' alt=''>
                     <h3 class='h3 antialiased'>Serverless</h3>
                     <p>The ultimate flexibility. Scale up on demand and scale to zero when there’s no demand.</p>
                 </a>
                 <a href='/streams' class='card third block quarter border-box center border mb-2 rad-5 shadow-hover'>
-                    <img class='mw-100' src='/images/icon-streams.svg' alt='Streams icon'>
+                    <img class='mw-100' src='/images/icon-streams.svg' alt=''>
                     <h3 class='h3 antialiased'>Streams</h3>
                     <p>Data coming thick and fast? Never miss a beat with high&#8209;performance stream processing.</p>
                 </a>
                 <a href='/batch' class='card third block quarter border-box center border mb-2 rad-5 shadow-hover'>
-                    <img class='mw-100' src='/images/icon-batch.svg' alt='Batch icon'>
+                    <img class='mw-100' src='/images/icon-batch.svg' alt=''>
                     <h3 class='h3 antialiased'>Batch</h3>
                     <p>Automated tasks. Offline processing of data at a time to suit you.</p>
                 </a>
@@ -132,18 +135,18 @@
                 </div>
                 <aside class='text'>
                     <h2 class='h2'>Level up your Java™ code</h2>
-                    <p>With <a class='blue link-animate' href='/projects/spring-boot'>Spring Boot</a> in your app, just a few lines of code is all you need to start building services like a boss.</p><p>New to Spring? Try our simple <a class='blue link-animate' href='/guides/gs/quickstart'>quickstart guide</a></p>
+                    <p>With <a class='blue link-animate' href='/projects/spring-boot'>Spring Boot</a> in your app, just a few lines of code is all you need to start building services like a boss.</p><p>New to Spring? Try our simple <a class='blue link-animate' href='/quickstart'>quickstart guide</a></p>
                 </aside>
             </div>
         </section>
         <section class='mb-7' role="contentinfo" aria-label="Quote">
             <div class='container'>
-                <img class='big-quote' src='/images/quote.svg'>
+                <img class='big-quote' src='/images/quote.svg' alt=''>
                 <blockquote class='h3 center green antialiased'>
                     Originally [Netflix's Java] libraries and frameworks were built in-house. I'm very proud to say, as of early 2019, we've moved our platform almost entirely over to Spring Boot.”
                 </blockquote>
                 <div class='flex ai-center jc-center quoted-with-video'>
-                    <img class='rad-50' src='/images/wicksell.jpg'>
+                    <img class='rad-50' src='/images/wicksell.jpg' alt=''>
                     <div>
                         <span class='quoted antialiased'>Taylor Wicksell, Senior Software Engineer, Netflix</span>
                         <br/>
