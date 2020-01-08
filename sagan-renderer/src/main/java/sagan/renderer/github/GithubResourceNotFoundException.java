@@ -14,7 +14,7 @@ public class GithubResourceNotFoundException extends RuntimeException {
 	}
 
 	public GithubResourceNotFoundException(String orgName, Throwable cause) {
-		super("Could not fing github organization [" + orgName + "]", cause);
+		super("Could not find github organization [" + orgName + "]", cause);
 		this.resourceName = "Organization [" + orgName + "]";
 	}
 
