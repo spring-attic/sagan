@@ -24,7 +24,7 @@
       </section>
       <section id='filters-and-proj' class='flex jc-between mb-6'>
         <ul id='proj-filters'>
-          <li class='blue mb-1 pointer' th:each="group : ${groups}" th:text="${group.label}">Microservices</li>
+          <li class='blue pointer rad-5 border-box flex jc-between ai-center' th:each="group : ${groups}" th:inline="text">[[${group.label}]]<img class='filter-exit'src='/images/close.svg' alt=''></li>
         </ul>
         <div class='proj-80'>
           <div class='flex jc-between flex-wrap'>
