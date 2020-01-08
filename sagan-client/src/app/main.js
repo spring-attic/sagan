@@ -29,7 +29,7 @@ $(document).ready(function() {
 
     $('li#search').click(function(){
         $('#search-nav').slideToggle();
-        $('li#search .fa-search').toggleClass('close');
+        $('li#search').toggleClass('close');
         $('#searchheaderform input').focus();
     });
 
@@ -41,42 +41,123 @@ $(document).ready(function() {
 
 });
 
-// Terminal animation
-window.onload = function() {
-    if (document.querySelector("body").id == 'index') {
-        var i = 0;
-        var txt = 'return String.format("Hello World!");';
-        var speed = 100;
+// Terminal animation compiled with Babel
+"use strict";
 
-        function type() {
+window.onload = function () {
+    if (document.querySelector("body").id == 'index') {
+        var type = function type() {
             if (i < txt.length) {
                 document.querySelector(".terminal .typed").innerHTML += txt.charAt(i);
                 i++;
                 setTimeout(type, speed);
-                if (i == 37) {
-                    document.querySelector(".terminal .typed").innerHTML = document.querySelector(".terminal .typed").innerHTML.replace(`"Hello World!"`, `<span class='terminal-lime'>"Hello World!"</span>`);
+
+                if (i == 22) {
+                    document.querySelector(".terminal .typed").innerHTML = document.querySelector(".terminal .typed").innerHTML.replace("\"Hello World!\"", "<span class='terminal-lime'>\"Hello World!\"</span>");
                 }
             }
-        }
+        };
 
-        function handler(entries, observer) {
-            for (entry of entries) {
-                if (entry.isIntersecting) {
-                    document.querySelector(".terminal .typed-placeholder").style.display = 'none';
-                    type();
+        var handler = function handler(entries, observer) {
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = entries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var entry = _step.value;
+
+                    if (entry.isIntersecting) {
+                        document.querySelector(".terminal .typed-placeholder").style.display = 'none';
+                        type();
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return != null) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
                 }
             }
-        }
+        };
 
-        let observer = new IntersectionObserver(handler);
+        var i = 0;
+        var txt = 'return "Hello World!";';
+        var speed = 100;
+        var observer = new IntersectionObserver(handler);
         observer.observe(document.querySelector(".terminal .terminal-blue"));
     }
 };
 
+// Filter toggle
+$('#projects #proj-filters li').click(function(){
+
+    if($(this).hasClass('active')) {
+        $(this).toggleClass('active');
+    }
+    else {
+        $('#projects #proj-filters li').removeClass('active');
+        $(this).toggleClass('active');
+    }
+});
+
+//Nav animation
+function removeNavClasses () {
+    $('#scope').removeClass('why-scope learn-scope projects-scope community-scope');
+    $('.drop-menu').removeClass('active');
+    $('.has-menu').removeClass('active');
+}
+$('#why-target').mouseenter(function(){
+    removeNavClasses();
+    $('#scope').addClass('why-scope');
+    $('#why-items').addClass('active');
+});
+$('#learn-target').mouseenter(function(){
+    removeNavClasses();
+    $('#scope').addClass('learn-scope');
+    $('#learn-items').addClass('active');
+});
+$('#project-target').mouseenter(function(){
+    removeNavClasses();
+    $('#scope').addClass('projects-scope');
+    $('#project-items').addClass('active');
+});
+$('#community-target').mouseenter(function(){
+    removeNavClasses();
+    $('#scope').addClass('community-scope');
+    $('#community-items').addClass('active');
+});
+$('.drop-menu').mouseenter(function () {
+    $('this').addClass('active');
+});
+$('.drop-menu ul').mouseleave(function () {
+    removeNavClasses();
+});
+$('.drop-menu').mouseleave(function () {
+    removeNavClasses();
+});
+
 // Mobile nav
 document.querySelector('#hamburger').onclick = function(){
-    document.querySelector('#popup').classList.add('active');
-};
-document.querySelector('#exit').onclick = function(){
-    document.querySelector('#popup').classList.remove('active');
-};
+    $('.mobile-close').fadeIn();
+    $('#mobile-nav').slideDown();
+    $('#mobile-nav-open #hamburger').removeClass('grow').addClass('shrink');
+    $('#mobile-nav-open .mobile-class').addClass('grow');
+    $('body').addClass('noscroll');
+    $('.mobile-nav-arrow').delay(250).fadeIn();
+}
+document.querySelector('.mobile-close').onclick = function(){
+    $('.mobile-close').fadeOut();
+    $('#mobile-nav').slideUp();
+    $('#mobile-nav-open .mobile-class').removeClass('grow').addClass('shrink');
+    $('#mobile-nav-open #hamburger').addClass('grow');
+    $('body').removeClass('noscroll');
+    $('.mobile-nav-arrow').fadeOut();
+}
