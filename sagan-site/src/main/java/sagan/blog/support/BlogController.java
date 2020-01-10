@@ -1,5 +1,9 @@
 package sagan.blog.support;
 
+import java.util.List;
+
+import org.joda.time.LocalDate;
+import org.joda.time.YearMonth;
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.PostMovedException;
@@ -8,11 +12,7 @@ import sagan.support.DateFactory;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.PageableFactory;
 import sagan.support.nav.PaginationInfo;
-
-import java.util.List;
-
-import org.joda.time.LocalDate;
-import org.joda.time.YearMonth;
+import sagan.support.nav.Section;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
-import sagan.support.nav.Section;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
 /**
  * Controller that handles read-only blog actions, e.g. listing, paging, and showing
@@ -131,7 +131,12 @@ class BlogController {
         List<PostView> posts = postViewPage.getContent();
         model.addAttribute("activeCategory", activeCategory);
         model.addAttribute("categories", PostCategory.values());
-        model.addAttribute("posts", posts);
+        if (!posts.isEmpty() && posts.size()>1) {
+            model.addAttribute("latestPost", posts.get(0));
+            model.addAttribute("posts", posts.subList(1,posts.size()));
+        } else {
+            model.addAttribute("posts", posts);
+        }
         model.addAttribute("paginationInfo", new PaginationInfo(postViewPage));
         model.addAttribute("disqusShortname", service.getDisqusShortname());
         return "blog/index";

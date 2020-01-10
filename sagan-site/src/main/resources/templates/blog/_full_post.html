@@ -6,17 +6,17 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <body>
     <div layout:fragment="full-post">
-      <header class="desktop-only">
+      <!--header class="desktop-only">
         <div th:each="category : ${categories}" th:class="${@uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
           <div th:text="${category.displayName}">Engineering</div>
         </div>
-      </header>
+      </header-->
       <header sec:authorize="fullyAuthenticated">
         <span>[<a id="edit" th:href="@{/admin/blog/{id}-{slug}/edit(id=${post.id},slug=${slug})}">Edit</a>]</span>
       </header>
       <div class="blog--container">
         <header>
-        <h1 class="blog--title" th:text="*{title}">Blog post</h1>
+        <h1 class="blog--title" th:text="${post.title}">Blog post</h1>
         <div class="meta-data--container">
           <div class="meta-data--item desktop-only">
             <div th:class="${'meta-data--icon icon blog-icon '+ #strings.toLowerCase(post.category).replace(' ','-')}"></div>
@@ -37,7 +37,7 @@
           </div>
         </div>
         </header>
-        <div class="blog--post" th:utext="*{renderedContent}">Blog content</div>
+        <div class="blog--post" th:utext="${post.renderedContent}">Blog content</div>
     </div>
     <section id="disqus_thread"></section>
     <script type="text/javascript" th:inline="javascript">

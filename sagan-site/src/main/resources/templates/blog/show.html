@@ -1,10 +1,178 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout"
-      data-code-prettify>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
 <head>
-    <title th:inline="text">[[${post.title}]]</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/blog.css}" href="../../../../../../sagan-client/css/blog.css" />
+    <style>
+        #blog main {
+            padding: 20px 20px 80px;
+        }
+        h1.content--title {
+            color: #6db33f;
+            font-size: 24px;
+            margin: 0;
+        }
+        h2.blog--title {
+            font-size: 38px;
+            margin-top: 0;
+        }
+        .meta-data--item {
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-family: 'Work Sans', sans-serif;
+            display: inline-block;
+        }
+        .meta-data--item img {
+            display: none;
+        }
+        .meta-data--item:nth-child(2):after,
+        .meta-data--item:first-child:after {
+            content: "|";
+            margin: 0 3px;
+        }
+        .meta-data--item:last-child:after {
+            content: "";
+        }
+        article {
+            border-bottom: 2px solid black;
+            padding: 30px 0 60px;
+        }
+        article:last-child {
+            border-bottom: none;
+        }
+        .pagination a, .pagination div {
+            display: inline-block;
+            color: #888;
+            text-decoration: none;
+            vertical-align: middle;
+            font-size: 16px;
+        }
+        .pagination a a, .pagination a div, .pagination div a, .pagination div div {
+            padding: 10px;
+        }
+        .pagination a a.active, .pagination a div.active, .pagination div a.active, .pagination div div.active {
+            color: #34302d;
+            border-top: 2px solid #34302d;
+            padding-top: 8px;
+        }
+        #blog main .row-fluid {
+            display: flex;
+            justify-content: space-between;
+        }
+        #blog main .span8 {
+            width: 65.95744680851064%;
+            margin-right: 20px;
+        }
+        @media(max-width: 800px) {
+            #blog main .row-fluid {
+                flex-direction: column;
+            }
+            #blog main .span8 {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+        .secondary-nav,
+        .blog-category {
+            display: inline-block;
+            margin: 0 15px;
+        }
+        .blog-category a {
+            color: #0066cc;
+        }
+        .blog-category a:hover {
+            color: #333;
+        }
+        #blog-sidebar-newsletter {
+            background: #ebf2f2;
+            padding: 30px;
+            max-width: 333px;
+            margin-top: 35px;
+        }
+        #blog-sidebar-newsletter p {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Work Sans', sans-serif;
+            margin: 0 0 10px;
+            max-width: 200px;
+            line-height: 1.3em;
+        }
+        #blog-sidebar-newsletter form {
+            width: 265px !important;
+        }
+        #blog-sidebar-newsletter form input#Email {
+            border-width: 1px;
+        }
+        #blog-sidebar-newsletter form.mktoForm .mktoCheckboxList > label {
+            max-width: 86%;
+            line-height: 1.5em;
+            font-size: 14px;
+        }
+        #blog-sidebar-newsletter form.mktoForm .mktoCheckboxList > label a:hover {
+            color: #333;
+        }
+        #blog-sidebar-newsletter form.mktoForm .mktoCheckboxList {
+            padding: 0;
+        }
+        #featured-post {
+            padding: 60px 60px 50px 60px;
+            margin: 30px 0 20px;
+            background: url(/images/bg-featured-post.svg) no-repeat center right #6db33f;
+            background-size: cover;
+        }
+        #featured-post h5 {
+            text-transform: uppercase;
+            font-size: 15px;
+            color: white;
+            margin: 0 0 10px;
+        }
+        #featured-post h2.blog--title {
+            font-size: 50px;
+            margin: 0;
+            max-width: 700px;
+        }
+        #featured-post .meta-data--container {
+            margin: 5px 0 30px;
+        }
+        @media(max-width: 684px) {
+            h1.content--title {
+                display: block;
+                margin-bottom: 10px;
+            }
+            .secondary-nav, .blog-category {
+                margin: 0 10px;
+                font-size: 14px;
+            }
+            .secondary-nav, .blog-category:first-child {
+                margin-left: 0;
+            }
+            #featured-post {
+                padding: 40px 40px 30px 40px;
+            }
+            #featured-post h2.blog--title {
+                font-size: 2.3rem;
+                word-break: break-word;
+            }
+        }
+        @media(max-width: 480px) {
+            .secondary-nav, .blog-category {
+                margin: 0;
+                display: block;
+            }
+        }
+        .blog--post a {
+            color: #086dc3;
+        }
+        .blog--post a:hover {
+            color: #333;
+        }
+        .blog--wrapper {
+            margin: 40px 0;
+        }
+        .main-body--wrapper {
+            padding: 0;
+        }
+    </style>
 
     <!-- Twitter card -->
     <meta name="twitter:card" content="summary">
@@ -21,18 +189,64 @@
     <meta property="og:type" content="article">
     <meta property="og:article:published_time" th:content="${post.publishAt}">
 </head>
-<body>
-  <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container-fluid" th:object="${post}">
-    <div class="main-body--wrapper">
-      <div class="row-fluid blog--wrapper">
-        <article id="content" class="span8 mobile-left-pane" layout:include="blog/_full_post :: full-post" >
-        </article>
-        <aside id="sidebar" class="span4 mobile-right-pane">
-          <div layout:include="blog/_right-pane :: right-pane"></div>
-        </aside>
-      </div>
-    </div>
-  </div>
-</body>
-</html>
+<body id='blog'>
+<div layout:fragment="~{content}">
+    <main class="body--container container-fluid">
+        <div class="main-body--wrapper">
+            <div class="desktop-only">
+                <h1 class="blog-category active content--title">
+                    Spring Blog
+                </h1>
+                <ul class="right-pane-widget--container secondary-nav with-icon small">
+                    <li class="blog-category active">
+                        <div class="icon blog-icon all-posts"></div>
+                        <a href="/blog">All Posts</a>
+                        <a class="pull-right" href="/blog.atom"><i class="icon-rss"></i></a>
+                    </li>
+                    <li th:each="category : ${categories}" class="blog-category">
+                        <div th:class="${'icon blog-icon' + @uih.blogClass(activeCategory?:'',category.displayName)}"></div>
+                        <a th:href="@{'/blog/category/' + ${category.urlSlug}}" th:text="${category.displayName}"></a>
+                        <a class="pull-right" th:href="@{'/blog/category/'+${category.urlSlug}+'.atom'}"><i class="icon-rss"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- post -->
+            <div class="row-fluid blog--wrapper">
+                <div class="span8 mobile-left-pane">
+                    <div class="blog-preview--wrapper">
+                        <article id="content" class="blog--container blog-preview" layout:include="blog/_full_post :: full-post" >
+                        </article>
+                    </div>
+                </div>
+
+                <aside class="span4 mobile-right-pane">
+                    <div>
+
+                        <ul class="social-btn--container">
+                            <a class="social-btn twitter" href="https://twitter.com/springcentral"></a>
+
+                            <a class="social-btn linkedin" href="https://www.linkedin.com/groups/46964"></a>
+                            <a class="social-btn youtube" href="/videos"></a>
+                        </ul>
+                        <div id="blog-sidebar-newsletter">
+                            <p>Get the Spring newsletter</p>
+                            <script src="//connect.pivotal.io/js/forms2/js/forms2.min.js"></script>
+                            <form id="mktoForm_4723"></form>
+                            <script>
+                                MktoForms2.setOptions({formXDPath : "/rs/pivotal/images/marketo-xdframe-relative.html"});
+                                MktoForms2.loadForm("//connect.pivotal.io", "625-IUJ-009", 4723, function(form){
+                                    form.onSuccess(function(values, followUpUrl) {
+                                        form.getFormElem().html("<p>Thank you!</p>");
+                                        return false;
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+</div>
+</body></html>

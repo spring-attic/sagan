@@ -2,24 +2,234 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorator="layout">
 <head>
-    <title>The Spring Blog</title>
-    <link rel="alternate" type="application/atom+xml" th:href="${@uih.path() + '.atom'}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/blog.css}"/>
+    <title>Spring | Blog</title>
+    <meta property='og:title' content='Spring Blog'/>
+    <meta property='og:description' content='Read the latest news on Spring.'/>
+
+    <style>
+        #blog main {
+            padding: 20px 20px 80px;
+        }
+        h1.content--title {
+            color: #6db33f;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        h2.blog--title {
+            font-size: 2.375rem;
+            margin-top: 0;
+        }
+        .meta-data--item {
+            font-size: .875rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-family: 'Work Sans', sans-serif;
+            display: inline-block;
+        }
+        .meta-data--item img {
+            display: none;
+        }
+        .meta-data--item:nth-child(2):after,
+        .meta-data--item:first-child:after {
+            content: "|";
+            margin: 0 3px;
+        }
+        .meta-data--item:last-child:after {
+            content: "";
+        }
+        article {
+            border-bottom: 2px solid black;
+            padding: 30px 0 60px;
+        }
+        article:last-child {
+            border-bottom: none;
+        }
+        .pagination a, .pagination div {
+            display: inline-block;
+            color: #888;
+            text-decoration: none;
+            vertical-align: middle;
+            font-size: 1rem;
+        }
+        .pagination a a, .pagination a div, .pagination div a, .pagination div div {
+            padding: 10px;
+        }
+        .pagination a a.active, .pagination a div.active, .pagination div a.active, .pagination div div.active {
+            color: #34302d;
+            border-top: 2px solid #34302d;
+            padding-top: 8px;
+        }
+        #blog main .row-fluid {
+            display: flex;
+            justify-content: space-between;
+        }
+        #blog main .span8 {
+            width: 65.95744680851064%;
+            margin-right: 20px;
+        }
+        @media(max-width: 800px) {
+            #blog main .row-fluid {
+                flex-direction: column;
+            }
+            #blog main .span8 {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+        .secondary-nav,
+        .blog-category {
+            display: inline-block;
+            margin: 0 15px;
+        }
+        .blog-category a {
+            color: #0066cc;
+        }
+        .blog-category a:hover {
+            color: #333;
+        }
+        #blog-sidebar-newsletter {
+            background: #ebf2f2;
+            padding: 30px;
+            max-width: 333px;
+            margin-top: 35px;
+        }
+        #blog-sidebar-newsletter p {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Work Sans', sans-serif;
+            margin: 0 0 10px;
+            max-width: 200px;
+            line-height: 1.3em;
+        }
+        #blog-sidebar-newsletter form {
+            width: 265px !important;
+        }
+        #blog-sidebar-newsletter form input#Email {
+            border-width: 1px;
+        }
+        #blog-sidebar-newsletter form.mktoForm .mktoCheckboxList > label {
+            max-width: 86%;
+            line-height: 1.5em;
+            font-size: .875rem;
+        }
+        #blog-sidebar-newsletter form.mktoForm .mktoCheckboxList > label a:hover {
+            color: #333;
+        }
+        #blog-sidebar-newsletter form.mktoForm .mktoCheckboxList {
+            padding: 0;
+        }
+        #featured-post {
+            padding: 60px 60px 50px 60px;
+            margin: 30px 0 20px;
+            background: url(/images/bg-featured-post.svg) no-repeat center right #6db33f;
+            background-size: cover;
+        }
+        #featured-post h5 {
+            text-transform: uppercase;
+            font-size: .9375rem;
+            color: white;
+            margin: 0 0 10px;
+        }
+        #featured-post h2.blog--title {
+            font-size: 50px;
+            margin: 0;
+            max-width: 700px;
+        }
+        #featured-post .meta-data--container {
+            margin: 5px 0 30px;
+        }
+        @media(max-width: 684px) {
+            h1.content--title {
+                display: block;
+                margin-bottom: 10px;
+            }
+            .secondary-nav, .blog-category {
+                margin: 0 10px;
+                font-size: .875rem;
+            }
+            .secondary-nav, .blog-category:first-child {
+                margin-left: 0;
+            }
+            #featured-post {
+                padding: 40px 40px 30px 40px;
+            }
+            #featured-post h2.blog--title {
+                font-size: 2.3rem;
+                word-break: break-word;
+            }
+        }
+        @media(max-width: 480px) {
+            .secondary-nav, .blog-category {
+                margin: 0;
+                display: block;
+            }
+        }
+        .main-body--wrapper {
+            padding: 0;
+        }
+    </style>
 </head>
-<body>
-    <div layout:fragment="header-container"></div>
-    <main layout:fragment="~{content}" class="body--container container-fluid">
+<body id='blog'>
+<div layout:fragment="~{content}">
+    <main class="body--container container-fluid">
         <div class="main-body--wrapper">
-            <div class="desktop-only" th:unless="${title}">
-                <h1 th:class="${@uih.blogClass(activeCategory?:'','All Posts') + ' content--title'}">
-                    The Spring Blog
+            <div class="desktop-only">
+                <h1 class="blog-category active content--title">
+                    Spring Blog
                 </h1>
-                <div th:each="category : ${categories}" th:class="${@uih.blogClass(activeCategory?:'',category.displayName) + ' content--title'}">
-                    <div th:text="${category.displayName}">Engineering</div>
-                </div>
+                <ul class="right-pane-widget--container secondary-nav with-icon small">
+                    <li class="blog-category active">
+                        <div class="icon blog-icon all-posts"></div>
+                        <a href="/blog">All Posts</a>
+                        <a class="pull-right" href="/blog.atom"><i class="icon-rss"></i></a>
+                    </li>
+                    <li th:each="category : ${categories}" class="blog-category">
+                        <div th:class="${'icon blog-icon' + @uih.blogClass(activeCategory?:'',category.displayName)}"></div>
+                        <a th:href="@{'/blog/category/' + ${category.urlSlug}}" th:text="${category.displayName}"></a>
+                        <a class="pull-right" th:href="@{'/blog/category/'+${category.urlSlug}+'.atom'}"><i class="icon-rss"></i></a>
+                    </li>
+                </ul>
             </div>
 
-            <div class="row-fluid blog--wrapper">
+            <!-- newest post -->
+            <div id='featured-post' th:object="${latestPost}">
+                <h5 class='white antialiased'>Newest Post</h5>
+                <h2 class='blog--title'>
+                    <a th:href="@{${latestPost.path}}" th:text="${latestPost.title}">
+                        This week in Spring
+                    </a>
+                </h2>
+                <header class="meta-data--container">
+                    <div class="meta-data--item desktop-only">
+                        <div th:class="${'meta-data--icon icon blog-icon '+ #strings.toLowerCase(latestPost.category).replace(' ','-')}"></div>
+                        <a class='category' th:href="@{'/blog/category/'+${latestPost.category.urlSlug}}" th:text="${latestPost.category}">Category</a>
+                    </div>
+                    <div class="meta-data--item">
+                        <img class="meta-data--icon" th:src="@{${latestPost.author.avatarUrl} + '?s=20&amp;d=mm'}" />
+                        <a class='author' th:text="${latestPost.author.name}" th:href="@{'/team/'+${latestPost.author.username}}" th:unless="${latestPost.author.hidden}">Author</a>
+                        <span class='author' th:text="${latestPost.author.name}" th:if="${latestPost.author.hidden}">Author</span>
+                    </div>
+                    <div class="meta-data--item">
+                        <div class="meta-data--icon icon blog-icon calendar"></div>
+                        <time class='date' pubdate th:datetime="${latestPost.publishAt}" th:text='${#dates.format(latestPost.publishAt, "MMMM d, yyyy")}'>June 18, 2013</time>
+                    </div>
+                    <div class="meta-data--item">
+                        <div class="meta-data--icon icon blog-icon comments"></div>
+                        <a class='comments' th:attr="data-disqus-identifier=${latestPost.id}" th:href="@{${latestPost.path} + '#disqus_thread'}"/>
+                    </div>
+                </header>
+                <section class="blog--post desktop-only">
+                    <div th:utext="${latestPost.renderedSummary}">
+                        This has been an interesting week.
+                    </div>
+                </section>
+                <a class="blog-preview--readmore desktop-only" th:href="@{${latestPost.path}}" th:if="${latestPost.showReadMore()}">
+                    Read more
+                </a>
+            </div>
+
+            <!-- blog listing -->
+            <div class="row-fluid blog--wrapper" th:object="${posts}">
                 <div class="span8 mobile-left-pane">
                     <div class="blog-preview--wrapper">
                         <article class="blog--container blog-preview" th:each="post : ${posts}">
@@ -32,6 +242,7 @@
                                 <div class="meta-data--item desktop-only">
                                     <div th:class="${'meta-data--icon icon blog-icon '+ #strings.toLowerCase(post.category).replace(' ','-')}"></div>
                                     <a class='category' th:href="@{'/blog/category/'+${post.category.urlSlug}}" th:text="${post.category}">Category</a>
+
                                 </div>
                                 <div class="meta-data--item">
                                     <img class="meta-data--icon" th:src="@{${post.author.avatarUrl} + '?s=20&amp;d=mm'}" />
@@ -42,18 +253,18 @@
                                     <div class="meta-data--icon icon blog-icon calendar"></div>
                                     <time class='date' pubdate th:datetime="${post.publishAt}" th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013</time>
                                 </div>
-                              <div class="meta-data--item">
-                                <div class="meta-data--icon icon blog-icon comments"></div>
-                                <a class='comments' th:attr="data-disqus-identifier=${post.id}" th:href="@{${post.path} + '#disqus_thread'}"/>
-                              </div>
+                                <div class="meta-data--item">
+                                    <div class="meta-data--icon icon blog-icon comments"></div>
+                                    <a class='comments' th:attr="data-disqus-identifier=${post.id}" th:href="@{${post.path} + '#disqus_thread'}"/>
+                                </div>
                             </header>
-                            <section class='blog--post desktop-only'>
+                            <section class="blog--post desktop-only">
                                 <div th:utext="${post.renderedSummary}">
                                     This has been an interesting week.
                                 </div>
                             </section>
                             <a class="blog-preview--readmore desktop-only" th:href="@{${post.path}}" th:if="${post.showReadMore()}">
-                                Read more...
+                                Read more
                             </a>
                         </article>
                     </div>
@@ -68,20 +279,32 @@
                     </div>
                 </div>
                 <aside class="span4 mobile-right-pane">
-                    <div layout:include="blog/_right-pane :: right-pane"></div>
+                    <div>
+
+                        <ul class="social-btn--container">
+                            <a class="social-btn twitter" href="https://twitter.com/springcentral"></a>
+
+                            <a class="social-btn linkedin" href="https://www.linkedin.com/groups/46964"></a>
+                            <a class="social-btn youtube" href="/videos"></a>
+                        </ul>
+                        <div id="blog-sidebar-newsletter">
+                            <p>Get the Spring newsletter</p>
+                            <script src="//connect.pivotal.io/js/forms2/js/forms2.min.js"></script>
+                            <form id="mktoForm_4723"></form>
+                            <script>
+                                MktoForms2.setOptions({formXDPath : "/rs/pivotal/images/marketo-xdframe-relative.html"});
+                                MktoForms2.loadForm("//connect.pivotal.io", "625-IUJ-009", 4723, function(form){
+                                    form.onSuccess(function(values, followUpUrl) {
+                                        form.getFormElem().html("<p>Thank you!</p>");
+                                        return false;
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
                 </aside>
             </div>
         </div>
-      <script type="text/javascript" th:inline="javascript">
-        var disqus_shortname = /*[[${disqusShortname}]]*/ 'no_shortname';
-
-        (function (disqus_shortname, document) {
-          var s = document.createElement('script');
-          s.async = true;
-          s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
-        }(disqus_shortname, document));
-      </script>
     </main>
-</body>
-</html>
+</div>
+</body></html>
