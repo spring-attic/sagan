@@ -2,6 +2,7 @@ package sagan.projects.support;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import sagan.projects.Project;
+import sagan.projects.ProjectGroup;
 import sagan.projects.ProjectRelease;
 import sagan.site.guides.GettingStartedGuides;
 import sagan.site.guides.GuideHeader;
@@ -56,6 +58,8 @@ public class ProjectsControllerTest {
 
 	private List<ProjectRelease> releases;
 
+	private List<ProjectGroup> projectGroups;
+
 	private Project springBoot;
 
 	private Project springData;
@@ -89,6 +93,21 @@ public class ProjectsControllerTest {
 		this.springData.setChildProjectList(Arrays.asList(this.springDataJpa));
 		this.springDataJpa.setParentProject(this.springData);
 
+		ProjectGroup pg1 = new ProjectGroup();
+		pg1.setName("group1");
+		pg1.setLabel("group 1");
+
+		ProjectGroup pg2 = new ProjectGroup();
+		pg2.setName("group2");
+		pg2.setLabel("group 2");
+
+		projectGroups = Arrays.asList(pg1, pg2);
+
+		this.springBoot.setGroupsTag(new HashSet<>(Arrays.asList(pg1)));
+		this.springBoot.setFeatured(true);
+
+		this.springData.setGroupsTag(new HashSet<>(Arrays.asList(pg2)));
+
 		GuideHeader[] guides = new GuideHeader[] {};
 		given(this.projectGuidesRepo.findByProject(any())).willReturn(guides);
 		given(this.projectTopicalRepo.findByProject(any())).willReturn(guides);
@@ -98,6 +117,8 @@ public class ProjectsControllerTest {
 		given(projectMetadataService.getProject("spring-boot")).willReturn(this.springBoot);
 		given(projectMetadataService.getProject("spring-data")).willReturn(this.springData);
 		given(projectMetadataService.getActiveTopLevelProjects()).willReturn(Arrays.asList(this.springBoot, this.springData));
+		given(projectMetadataService.getAllGroups()).willReturn(this.projectGroups);
+		given(projectMetadataService.getProjectsWithGroups()).willReturn(Arrays.asList(this.springBoot, this.springData));
 	}
 
 	@Test
@@ -144,8 +165,9 @@ public class ProjectsControllerTest {
 	public void listProjectsProvidesProjectMetadata() throws Exception {
 		this.mvc.perform(get("/projects"))
 				.andExpect(status().isOk())
-				.andExpect(model().attribute("springboot", this.springBoot))
-				.andExpect(model().attribute("springdata", this.springData));
+				.andExpect(model().attribute("groups", this.projectGroups))
+				.andExpect(model().attribute("featured", Matchers.contains(this.springBoot)))
+		;
 	}
 
 }

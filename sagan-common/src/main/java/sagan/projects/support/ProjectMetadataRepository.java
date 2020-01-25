@@ -1,8 +1,8 @@
 package sagan.projects.support;
 
-import sagan.projects.Project;
-
 import java.util.List;
+
+import sagan.projects.Project;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -20,4 +20,7 @@ public interface ProjectMetadataRepository extends JpaRepository<Project, String
 
 	@EntityGraph(value = "Project.tree", type = EntityGraph.EntityGraphType.LOAD)
 	List<Project> findDistinctByCategoryAndParentProjectIsNull(String category, Sort sort);
+
+	@Query("SELECT DISTINCT p FROM Project p LEFT JOIN FETCH p.groups WHERE p.parentProject = NULL ORDER BY p.displayOrder ASC")
+	List<Project> findTopLevelProjectsWithGroup();
 }

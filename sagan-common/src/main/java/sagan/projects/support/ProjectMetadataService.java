@@ -1,8 +1,9 @@
 package sagan.projects.support;
 
-import sagan.projects.Project;
-
 import java.util.List;
+
+import sagan.projects.Project;
+import sagan.projects.ProjectGroup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -14,10 +15,13 @@ public class ProjectMetadataService {
 	private static final Sort sortByDisplayOrderAndId = new Sort("displayOrder", "id");
 
     private ProjectMetadataRepository repository;
+    private ProjectGroupRepository groupRepository;
 
     @Autowired
-    public ProjectMetadataService(ProjectMetadataRepository repository) {
+    public ProjectMetadataService(ProjectMetadataRepository repository,
+            ProjectGroupRepository groupRepository) {
         this.repository = repository;
+        this.groupRepository = groupRepository;
     }
 
     public List<Project> getProjectsForCategory(String category) {
@@ -36,6 +40,10 @@ public class ProjectMetadataService {
         return repository.findAllWithReleases(sortByDisplayOrderAndId);
     }
 
+	public List<Project> getProjectsWithGroups() {
+		return repository.findTopLevelProjectsWithGroup();
+	}
+
     public Project getProject(String id) {
         return repository.findOne(id);
     }
@@ -47,4 +55,8 @@ public class ProjectMetadataService {
     public void delete(String id) {
         repository.delete(id);
     }
+
+    public List<ProjectGroup> getAllGroups() {
+    	return this.groupRepository.findAll();
+	}
 }

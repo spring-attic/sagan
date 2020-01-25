@@ -3,6 +3,7 @@ package sagan.projects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -11,6 +12,9 @@ import java.util.stream.Collectors;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
@@ -38,9 +42,19 @@ public class Project {
     private String category;
     private String rawBootConfig;
     private String renderedBootConfig;
+    private String tagLine;
+    private boolean featured;
     private String rawOverview;
     private String renderedOverview;
     private int displayOrder = Integer.MAX_VALUE;
+    private String imagePath;
+
+    @ManyToMany
+    @JoinTable(name = "project_groups_rel",
+            joinColumns = { @JoinColumn(name = "project_id") },
+            inverseJoinColumns = { @JoinColumn(name = "group_id") }
+    )
+    private Set<ProjectGroup> groups = new HashSet<>();
 
     @ManyToOne
     @JsonIgnore
@@ -171,7 +185,23 @@ public class Project {
         this.renderedBootConfig = renderedBootConfig;
     }
 
-    public String getRawOverview() {
+	public String getTagLine() {
+		return this.tagLine;
+	}
+
+	public void setTagLine(String tagLine) {
+		this.tagLine = tagLine;
+	}
+
+	public boolean isFeatured() {
+		return featured;
+	}
+
+	public void setFeatured(boolean featured) {
+		this.featured = featured;
+	}
+
+	public String getRawOverview() {
         return rawOverview;
     }
 
@@ -217,6 +247,22 @@ public class Project {
 
     public void setChildProjectList(List<Project> childProjectList) {
         this.childProjectList = childProjectList;
+    }
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public Set<ProjectGroup> getGroups() {
+        return this.groups;
+    }
+
+    public void setGroups(Set<ProjectGroup> groups) {
+        this.groups = groups;
     }
 
     @Override
