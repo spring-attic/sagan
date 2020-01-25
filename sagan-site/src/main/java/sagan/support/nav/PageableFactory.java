@@ -14,6 +14,10 @@ public abstract class PageableFactory {
         return build(0, Integer.MAX_VALUE);
     }
 
+	public static Pageable first(int count) {
+		return build(0, count);
+	}
+
     public static Pageable forLists(int page) {
         return build(page - 1, 10);
     }
