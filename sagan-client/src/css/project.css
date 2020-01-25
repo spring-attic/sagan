@@ -1,0 +1,240 @@
+@media only screen and (min-width: 64em) {
+    .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-offset-0, .col-md-offset-1, .col-md-offset-10, .col-md-offset-11, .col-md-offset-12, .col-md-offset-2, .col-md-offset-3, .col-md-offset-4, .col-md-offset-5, .col-md-offset-6, .col-md-offset-7, .col-md-offset-8, .col-md-offset-9 {
+        box-sizing: border-box;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+        padding-right: .5rem;
+        padding-left: .5rem;
+    }
+    .col-md-3 {
+        -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+        max-width: 25%;
+    }
+    .compass .hide-sm {
+        display: inline-block;
+    }
+    .col-md-9 {
+        -ms-flex-preferred-size: 70%;
+        flex-basis: 70%;
+        max-width: 70%;
+    }
+}
+
+#main {
+    margin: 40px 0;
+}
+.compass .sidebar ul.sidebar_main {
+    list-style: none;
+    padding: 0px;
+    border-right: 1px solid #ebf2f2;
+    margin: 2rem 1rem 2rem 0px;
+}
+.compass .sidebar .icon-circle,
+.compass .sidebar li.sidebar_head {
+    display: none;
+}
+.compass .sidebar li {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    -webkit-font-smoothing: antialiased;
+}
+.compass .child-active .sidebar_child {
+    font-weight: normal;
+    -webkit-font-smoothing: auto;
+    margin-bottom: 0;
+}
+.compass .child-inactive div,
+.compass .child-active div {
+    position: relative;
+}
+.compass .sidebar li:first-child {
+    border-top: 0px;
+}
+.compass .sidebar ul.sidebar_children li.active a {
+    background: #191E1E;
+    border-radius: 5px;
+    margin-left: -12px;
+    padding-left: 12px;
+}
+.compass .sidebar ul.sidebar_children li.active a {
+    font-weight: normal;
+    color: white;
+}
+.compass .sidebar ul.sidebar_children li.active a:hover {
+    font-weight: normal;
+    background: #191E1E;
+}
+.compass .sidebar a {
+    display: block;
+    padding: 4px 0 7px;
+    margin-right: 17px;
+}
+.compass .sidebar a:hover {
+    font-weight: 700;
+    text-decoration: none;
+    background: #ebf2f2;
+    color: #0066cc;
+    margin-left: -12px;
+    padding-left: 12px;
+    border-radius: 5px;
+}
+.compass .sidebar .child-active .sidebar_child a:hover {
+    font-weight: normal;
+    background: transparent;
+}
+.row {
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -.5rem;
+    margin-left: -.5rem;
+    justify-content: space-between;
+}
+.compass .project--header {
+    position: relative;
+    margin-right: 90px;
+}
+.compass .project--header h1 {
+    font-size: 38px;
+    display: inline-block;
+    font-size: 2.4rem;
+    vertical-align: middle;
+    line-height: 2.7rem;
+    margin-right: 1rem;
+}
+.compass .project--header .label {
+    display: inline-block;
+    margin-top: 0.7rem;
+    vertical-align: middle;
+    background: #80ea6e;
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-weight: 700;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+}
+.compass .project--header .social-links {
+    position: absolute;
+    right: -90px;
+    top: 3rem;
+    font-size: 36px;
+    line-height: 30px;
+}
+.compass .nav,
+.compass .nav-tabs a:focus {
+    background: #ebf2f2;
+}
+.compass .nav {
+    margin-bottom: 0px;
+    display: flex;
+    border-bottom: 0px;
+    padding: 13px 7px 8px;
+    border-radius: 7px 7px 0 0;
+}
+.compass .nav-tabs li {
+    margin-bottom: 0px;
+    float: none;
+    padding: 0.7rem 0.3rem;
+    font-size: 15px;
+    font-family: 'Work Sans', sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.compass .nav-tabs a {
+    border-top-style: initial;
+    border-right-style: initial;
+    border-left-style: initial;
+    border-top-color: initial;
+    border-right-color: initial;
+    border-left-color: initial;
+    color: #191E1E;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    font-weight: 700;
+    border-width: 0px 0px 4px;
+    border-image: initial;
+    padding: 14px 20px 19px;
+    margin: 0px;
+}
+.compass .nav-tabs a:hover, .compass .nav-tabs > .active > a {
+    border-top-style: initial;
+    border-right-style: initial;
+    border-left-style: initial;
+    border-top-color: initial;
+    border-right-color: initial;
+    border-left-color: initial;
+    border-width: 0px 0px 4px;
+    border-image: initial;
+    border-top: 4px solid rgb(107, 181, 54);
+    background: white;
+}
+.tab-content {
+    margin: 40px 0 80px;
+}
+.tab-content ul {
+    padding: 0 0 0 40px;
+    list-style: disc;
+}
+.tab-content h2 {
+    margin: 30px 0 10px;
+}
+.pill-content > .pill-pane, .tab-content > .tab-pane {
+    display: none;
+}
+.pill-content > .active, .tab-content > .active {
+    display: block;
+}
+@media(max-width: 1023px) {
+    .sidebar {
+        display: none;
+    }
+}
+.compass .project--header .social-links a svg {
+    height: 30px;
+    width: 30px;
+    transition: fill 0.2s ease 0s;
+}
+.compass .project--header .social-links a:hover svg {
+    fill: rgb(107, 181, 54);
+}
+[class*=" icon-"], [class^="icon-"] {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.compass .sidebar i.icon-chevron-down {
+    right: 1.2rem;
+}
+.compass .sidebar i {
+    position: absolute;
+    right: 1.3rem;
+    top: 0.2rem;
+    cursor: pointer;
+    padding: 0.3rem;
+}
+.icon-chevron-down:before {
+    content: "\f078";
+}
+.icon-chevron-right:before {
+    content: "\f054";
+}
