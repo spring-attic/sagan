@@ -1,74 +1,97 @@
-<html   xmlns:th="http://www.thymeleaf.org"
+<html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout"
-        data-filterable-list>
+        xmlns:th="http://www.thymeleaf.org"
+        layout:decorator="layout">
 <head>
-    <title>Guides</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/guide.css}"/>
-    <!-- http://opengraphprotocol.org/ -->
-    <meta property="og:title" content="Spring Guides" />
-    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
-    <meta property="og:description" content="these guides are designed to get you productive as quickly as
-    possible and using the latest Spring project releases and techniques as recommended by the Spring team" />
+    <title>Spring | Guides</title>
+    <meta property='og:title' content=''/>
+    <meta property='og:description' content=''/>
 </head>
-<body>
-  <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container-fluid">
-    <main class="main-body--wrapper">
-      <h1 class="index-page--title">Guides</h1>
-      <p class="index-page--subtitle with-subtext">Whatever you're building, these guides are designed to get you productive as quickly as possible &ndash; using the latest Spring project releases and techniques as recommended by the <a href="/team">Spring team</a>.<br/>
-        <span class="subtext">
-          Have a suggestion for a new guide? Let us know at <a href="https://twitter.com/intent/tweet?text=@springcentral&related=springcentral&hashtags=guides">@springcentral</a>.
-        </span>
-      </p>
-
-      <a name="gs"></a>
-      <div class="row-fluid content-container--wrapper guides-section--container">
-        <div class="content-container--header">
-          <input type='text' id='doc_filter' style="color:#aaa;" onfocus="this.value=''; this.style.color='#000'; this.style.fontStyle='normal'; this.onfocus='';" autofocus value="Find a guide..." placeholder="Find a guide..." class="content-container--filter"/>
+<body id='guides'>
+<div layout:fragment="~{content}">
+    <div id='hero' class='bg-lightblue' role='Banner'>
+        <div class='container'>
+            <div class='flex jc-between ai-center mb-3'>
+                <img src='/images/guides.svg' alt=''>
+                <div class='text'>
+                    <h1 class='h1 antialiased'>Guides</h1>
+                    <p class='big'>Whatever you're building, these guides are designed to get you productive as quickly as possible – using the latest Spring project releases and techniques as recommended by the Spring team.</p>
+                </div>
+            </div>
+            <div id='jump-cards' class='flex jc-between'>
+                <a href='#getting-started-guides' class='jump-card rad-5 shadow-hover border-dark border-box center'>
+                    <h3 class='h3 antialiased'>Getting Started Guides</h3>
+                    <p class='m-0'>15-30 minutes</p>
+                    <div class='jump-arrow mx-auto'></div>
+                </a>
+                <a href='#topical-guides' class='jump-card rad-5 shadow-hover border-dark border-box center'>
+                    <h3 class='h3 antialiased'>Topical Guides</h3>
+                    <p class='m-0'>60 minutes or less</p>
+                    <div class='jump-arrow mx-auto'></div>
+                </a>
+                <a href='#tutorials' class='jump-card rad-5 shadow-hover border-dark border-box center'>
+                    <h3 class='h3 antialiased'>Tutorials</h3>
+                    <p class='m-0'>2-3 hours</p>
+                    <div class='jump-arrow mx-auto'></div>
+                </a>
+            </div>
         </div>
-        <section class="content-container--body">
-          <div data-filterable-container>
-            <div class="content-section-title--container">
-              <div class="pull-left icon icon-gs-guides"></div>
-              <h3 class="content-section-title no-border no-margin">Getting Started Guides</h3>
-              <p class="content-section-sub-title">Designed to be completed in 15-30 minutes, these guides provide quick, hands-on instructions for building the "Hello World" of any development task with Spring. In most cases, the only prerequisites are a JDK and a text editor.</p>
+    </div>
+    <div class='content' role='Main'>
+        <div id='getting-started-guides' class='container mb-6'>
+            <h2 class='h2 antialiased'>Getting Started Guides</h2>
+            <section id='started-and-search' class='flex jc-between mb-3'>
+                <p class='guide-description m-0'>Designed to be completed in 15-30 minutes, these guides provide quick, hands-on instructions for building the "Hello World" of any development task with Spring. In most cases, the only prerequisites are a JDK and a text editor.</p>
+                <div id='search-container' class='rel'>
+                    <input id='guide-search' class='border-box' placeholder='Find a guide'></input>
+                    <img id='guide-search-icon' src='/images/search.svg'>
+                </div>
+            </section>
+            <section id='getting-started-list' class='flex jc-between flex-wrap'>
+                <div th:each="guide : ${guides}" class='guide half border-box flex' th:attr="data-filterable=${guide.title}+' '+${guide.description}+' '+${guide.projects}">
+                    <img class='guide-icon' src='/images/icon-guides-start.svg'>
+                    <div class='text'>
+                        <a class='guide-link bold blue link-darken antialiased' th:href="@{'/guides/gs/'+${guide.name}+'/'}" th:text="${guide.title}">Building a RESTful Web Service</a>
+                        <p class='m-0' th:text="${guide.description}">Learn how to create a RESTful web service with Spring.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <section id='topical-guides' class='mb-6'>
+            <div class='container'>
+                <div class='mb-3'>
+                    <h2 class='h2 antialiased'>Topical Guides</h2>
+                    <p class='guide-description m-0'>Designed to be read and comprehended in an hour or less, providing more wide-ranging or subjective content than a getting started guide.</p>
+                </div>
+                <section id='topical-guides-list' class='flex jc-between flex-wrap'>
+                    <div th:each="topical : ${topicals}" class='guide half border-box flex' th:attr="data-filterable=${topical.title}+' '+${topical.description}">
+                        <img class='guide-icon' src='/images/icon-guides-topic.svg'>
+                        <div class='text'>
+                            <a class='guide-link bold blue link-darken antialiased' th:href="@{'/guides/topicals/'+${topical.name}+'/'}" th:text="${topical.title}">Spring Security Architecture</a>
+                            <p class='m-0' th:text="${topical.description}">Topical guide to Spring Security, how the bits fit together and how they interact with Spring Boot.</p>
+                        </div>
+                    </div>
+                </section>
             </div>
-
-            <div th:each="guide : ${guides}" class="guide--container" th:attr="data-filterable=${guide.title}+' '+${guide.description}+' '+${guide.projects}">
-              <a class="guide--title" href="guide.html" th:href="@{'/guides/gs/'+${guide.name}+'/'}" th:text="${guide.title}"></a>
-              <p class="guide--subtitle" th:text="${guide.description}"></p>
-            </div>
-          </div>
         </section>
-        <section class="content-container--body" th:if="${not topicals.empty}">
-          <div data-filterable-container>
-            <div class="content-section-title--container">
-              <div class="pull-left icon icon-topical"></div>
-              <h3 class="content-section-title no-margin">Topical Guides</h3>
-              <p class="content-section-sub-title">Designed to be read and comprehended in an hour or less, providing more wide-ranging or subjective content than a getting started guide.</p>
+        <section id='tutorials' class='mb-6'>
+            <div class='container'>
+                <div class='mb-3'>
+                    <h2 class='h2 antialiased'>Tutorials</h2>
+                    <p class='guide-description m-0'>Designed to be completed in 2-3 hours, these guides provide deeper, in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions.</p>
+                </div>
+                <section id='tutorials-list' class='flex jc-between flex-wrap'>
+                    <div th:each="tutorial : ${tutorials}" class='guide half border-box flex' th:attr="data-filterable=${tutorial.title}+' '+${tutorial.description}">
+                        <img class='guide-icon' src='/images/icon-guides-tutorial.svg'>
+                        <div class='text'>
+                            <a class='guide-link bold blue link-darken antialiased' th:href="@{'/guides/tutorials/'+${tutorial.name}+'/'}" th:text="${tutorial.title}">Building REST services with Spring</a>
+                            <p class='m-0' th:text="${tutorial.description}">Learn how to easily build RESTful services with Spring.</p>
+                        </div>
+                    </div>
+                </section>
             </div>
-            <div th:each="topical : ${topicals}" class="guide--container" th:attr="data-filterable=${topical.title}+' '+${topical.description}">
-              <a class="guide--title" th:href="@{'/guides/topicals/'+${topical.name}+'/'}" th:text="${topical.title}"></a>
-              <p class="guide--subtitle" th:text="${topical.description}"></p>
-            </div>
-          </div>
         </section>
-        <section class="content-container--body">
-          <div data-filterable-container>
-            <div class="content-section-title--container">
-              <div class="pull-left icon icon-tutorial"></div>
-              <h3 class="content-section-title no-margin">Tutorials</h3>
-              <p class="content-section-sub-title">Designed to be completed in 2-3 hours, these guides provide deeper, in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions.</p>
-            </div>
-            <div th:each="tutorial : ${tutorials}" class="guide--container" th:attr="data-filterable=${tutorial.title}+' '+${tutorial.description}">
-              <a class="guide--title" th:href="@{'/guides/tutorials/'+${tutorial.name}+'/'}" th:text="${tutorial.title}"></a>
-              <p class="guide--subtitle" th:text="${tutorial.description}"></p>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
-  </div>
+    </div>
+</div>
 </body>
 </html>
