@@ -1,0 +1,156 @@
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+    <title>Spring | Events</title>
+    <meta property='og:title' content='Spring Events'/>
+    <meta property='og:description' content='Engage with the Spring community by attending an event.'/>
+
+    <style>
+        body#events .content {
+            padding: 70px 0 0;
+        }
+        body#events #hero {
+            padding: 50px 0;
+        }
+        body#events #hero img {
+            position: absolute;
+            height: 825px;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            animation: fadeIn 2s forwards;
+        }
+        body#events #hero .container {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        body#events .card {
+            border-radius: 0 0 5px 5px;
+            animation: riseUp .5s forwards ease, fadeIn .7s forwards ease;
+            opacity: 0;
+        }
+        body#events .card:first-child {
+            animation-delay: 0s;
+        }
+        body#events .card:nth-child(2) {
+            animation-delay: .15s;
+        }
+        body#events .card:nth-child(3) {
+            animation-delay: .3s;
+        }
+        body#events .card:nth-child(4) {
+            animation-delay: .45s;
+        }
+        body#events .card:nth-child(5) {
+            animation-delay: .6s;
+        }
+        body#events .card:nth-child(6) {
+            animation-delay: .75s;
+        }
+        body#events .button {
+            opacity: 0;
+            animation: riseUp .5s forwards ease, fadeIn .7s forwards ease;
+            animation-delay: .9s;
+        }
+        body#events .card .border-dark {
+            height: 100%;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+        body#events .card .greenbar {
+            background: #80ea6e;
+            height: 6px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        @media(max-width:1000px) {
+            body#events .card {
+                width: 48.5%;
+            }
+        }
+        @media(max-width:800px) {
+            body#events #hero {
+                padding: 60px 0;
+            }
+            body#events .flex.mb-6 {
+                margin-bottom: 0;
+            }
+        }
+        @media(max-width:600px) {
+            body#events .card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body id='events'>
+
+<div layout:fragment="~{content}">
+    <div class='content'>
+        <div class='container'>
+            <h1 class='h1 antialiased mb-3'>Events</h1>
+        </div>
+        <div id='hero' class='bg-lightblue rel of-hide' role='banner'>
+            <div class='container rel z-1'>
+                <div class='flex jc-between flex-wrap mb-2'>
+                    <a class='card third shadow-hover bg-white border-box block rel mb-2'>
+                        <div class='greenbar'></div>
+                        <div class='border-dark rad-5'>
+                            <h3 class='h3 antialiased'>Event</h3>
+                            <p class='location m-0'>Location</p>
+                            <p class='date'>Date/Time</p>
+                        </div>
+                    </a>
+                    <a class='card third shadow-hover bg-white border-box block rel mb-2 '>
+                        <div class='greenbar'></div>
+                        <div class='border-dark rad-5'>
+                            <h3 class='h3 antialiased'>Event</h3>
+                            <p class='location m-0'>Location</p>
+                            <p class='date'>Date/Time</p>
+                        </div>
+                    </a>
+                    <a class='card third shadow-hover bg-white border-box block rel mb-2 '>
+                        <div class='greenbar'></div>
+                        <div class='border-dark rad-5'>
+                            <h3 class='h3 antialiased'>Event</h3>
+                            <p class='location m-0'>Location</p>
+                            <p class='date'>Date/Time</p>
+                        </div>
+                    </a>
+                    <a class='card third shadow-hover bg-white border-box block rel mb-2 '>
+                        <div class='greenbar'></div>
+                        <div class='border-dark rad-5'>
+                            <h3 class='h3 antialiased'>Event</h3>
+                            <p class='location m-0'>Location</p>
+                            <p class='date'>Date/Time</p>
+                        </div>
+                    </a>
+                    <a class='card third shadow-hover bg-white border-box block rel mb-2 '>
+                        <div class='greenbar'></div>
+                        <div class='border-dark rad-5'>
+                            <h3 class='h3 antialiased'>Event</h3>
+                            <p class='location m-0'>Location</p>
+                            <p class='date'>Date/Time</p>
+                        </div>
+                    </a>
+                    <a class='card third shadow-hover bg-white border-box block rel mb-2 '>
+                        <div class='greenbar'></div>
+                        <div class='border-dark rad-5'>
+                            <h3 class='h3 antialiased'>Event</h3>
+                            <p class='location m-0'>Location</p>
+                            <p class='date'>Date/Time</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
