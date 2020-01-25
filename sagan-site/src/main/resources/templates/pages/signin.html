@@ -5,8 +5,7 @@
 <title>Sign In</title>
 </head>
 <body>
-    <div layout:fragment="header-container"></div>
-    <div layout:fragment="content" class="container">
+    <div layout:fragment="~{content}">
         <div class="main-body--wrapper">
             <div class="admin--wrapper">
                 <div th:if="${param.error}" class="alert alert-error">We could not

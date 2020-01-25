@@ -1,0 +1,124 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Spring | Reactive</title>
+    <meta property='og:title' content='Project Reactor and the Spring portfolio work together to enable developers to build enterprise-grade reactive systems that are responsive, resilient, elastic, and message-driven.'/>
+    <meta property='og:description' content='Reactive systems better utilize modern processors. Also, the inclusion of back-pressure in reactive programming ensures better resilience between decoupled components.'/>
+</head>
+<body id='reactive'>
+<div layout:fragment="~{content}">
+    <div id='hero' class='topics-banner mb-5'>
+        <img id='midshape' th:src="@{/images/header-reactive.svg}" alt=''>
+    </div>
+    <div class='content' role='Main'>
+        <section class='container mb-5'>
+            <h1 class='h1'>Reactive</h1>
+            <div class='flex jc-between topic-hero'>
+                <div class='left m-0 topic-info'>
+                    <p class='big'>Reactive systems have certain characteristics that make them ideal for low-latency, high-throughput workloads. Project Reactor and the Spring portfolio work together to enable developers to build enterprise-grade reactive systems that are responsive, resilient, elastic, and message-driven.</p>
+                    <div class='flex jc-between half-and-half'>
+                        <div class='topics-half'>
+                            <h3 class='h3'>What is reactive processing?</h3>
+                                <p>Reactive processing is a paradigm that enables developers build non-blocking, asynchronous applications that can handle back-pressure (flow control).</p>
+                        </div>
+                        <div class='topics-half'>
+                            <h3 class='h3'>Why use reactive processing?</h3>
+                                <p>Reactive systems better utilize modern processors. Also, the inclusion of back-pressure in reactive programming ensures better resilience between decoupled components.</p>
+                        </div>
+                    </div>
+                </div>
+                <img class='as-fs topic-icon' th:src="@{/images/reactive.svg}" alt=''>
+            </div>
+        </section>
+        <section class='cornell container'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Project Reactor</h2>
+                </div>
+                <div class='right'>
+                    <p class='mb-3'>Project Reactor is a fully non-blocking foundation with back-pressure support included. It’s the foundation of the reactive stack in the Spring ecosystem and is featured in projects such as Spring WebFlux, Spring Data, and Spring Cloud Gateway.<br/><br/><a class='blue link-animate' href='https://projectreactor.io/'>Learn more</a></p>
+                </div>
+            </div>
+        </section>
+        <section id='reactive-micro' class='cornell container'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Reactive Microservices</h2>
+                </div>
+                <div class='right'>
+                    <div class='flex'>
+                        <img th:src="@{/images/img-gear.svg}" alt=''>
+                        <div class='text'>
+                            <p>One of the main reasons developers move from blocking to non-blocking code is efficiency. Reactive code does more work with fewer resources. Project Reactor and Spring WebFlux let developers take advantage of multi-core, next-generation processors—handling potentially massive numbers of concurrent connections. With reactive processing, you can satisfy more concurrent users with fewer microservice instances.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class='cornell container'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Reactive Microservices With Spring Boot</h2>
+                </div>
+                <div class='right'>
+                    <p>The Spring portfolio provides two parallel stacks. One is based on a Servlet API with Spring MVC and Spring Data constructs. The other is a fully reactive stack that takes advantage of Spring WebFlux and Spring Data’s reactive repositories. In both cases, Spring Security has you covered with native support for both stacks.</p>
+                    <img th:src="@{/images/diagram-reactive.svg}" alt='Spring Reactive diagram'>
+                </div>
+            </div>
+        </section>
+        <section class='cornell container mb-2'>
+            <div class='flex jc-between py-50'>
+                <div class='left third'>
+                    <h2 class='h2'>Integration with common technologies</h2>
+                </div>
+                <div class='right'>
+                    <p>Accessing and processing data in a reactive way is important. MongoDB, Redis, and Cassandra all have native reactive support in <a class='blue link-animate' href="/projects/spring-data">Spring Data</a>. Many relational databases (Postgres, Microsoft SQL Server, MySQL, H2, and Google Spanner) have reactive support via <a class='blue link-animate' href="https://github.com/r2dbc">R2DBC</a>. In the world of messaging, <a class='blue link-animate' href="/projects/spring-cloud-stream">Spring Cloud Stream</a> also supports reactive access to platforms like RabbitMQ and Kafka.</p>
+                </div>
+            </div>
+        </section>
+        <section class='topic-getstarted mb-6 container center'>
+            <div class='bg-lightblue py-40'>
+                <h2 class='h2'>Ready to get started?</h2>
+                <div class='flex jc-center mb-3'>
+                    <a class='button animate uppercase' href='/guides/gs/reactive-rest-service/'><span>Try this tutorial</span></a>
+                </div>
+            </div>
+        </section>
+        <section class='topics-resources mb-7'>
+            <div class='container'>
+                <h2 class='h2'>
+                    More resources
+                </h2>
+                <div class='flex jc-between'>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://youtube.com/watch?v=xQEJFUPeQ_8'>
+                            <img th:src="@{/images/reactive-res1.png}" alt='Play "Reactive Relational Database Connectivity with Spring" on YouTube'>
+                            <div class='play'><div class='relative'><div class='triangle'></div></div></div>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://youtube.com/watch?v=xQEJFUPeQ_8'>Reactive Relational Database Connectivity with Spring</a>
+                        <div class='author'>Mark Paluch</div>
+                    </div>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://youtube.com/watch?v=Tr04KiJdAXQ'>
+                            <img th:src="@{/images/reactive-res2.png}" alt='Play "Main Stage Presentation at SpringOne Platform 2019" on YouTube'>
+                            <div class='play'><div class='relative'><div class='triangle'></div></div></div>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://youtube.com/watch?v=Tr04KiJdAXQ'>Main Stage Presentation at SpringOne Platform 2019</a>
+                        <div class='author'>Stephane Maldini and Violeta Georgieva</div>
+                    </div>
+                    <div class='item third'>
+                        <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=0oI_-xBhAK8'>
+                            <img th:src="@{/images/reactive-res3.png}" alt='Play "Spring Tips: Debugging Reactive Applications" on YouTube'>
+                            <div class='play'><div class='relative'><div class='triangle'></div></div></div>
+                        </a>
+                        <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=0oI_-xBhAK8'>Spring Tips: Debugging Reactive Applications</a>
+                        <div class='author'>Josh Long</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>
