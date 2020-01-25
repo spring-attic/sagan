@@ -2,67 +2,63 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:data="https://github.com/mxab/thymeleaf-extras-data-attribute"
-      layout:decorator="layout"
-      data-map>
+      layout:decorator="layout">
 <head>
-    <title>Team</title>
-    <script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyBOVeQZLTLC5_RxhGtRXOV8xqQQQcP8b9Q"></script>
+    <title>Spring | Team</title>
+    <meta property='og:title' content='Meet the Spring team'/>
+    <meta property='og:description' content='Learn more about members of the Spring team.'/>
+    <script th:src="@{/js/team.js}"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
         var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
         /*]]>*/
     </script>
-    <!-- http://opengraphprotocol.org/ -->
-    <meta property="og:title" content="The Spring team" />
-    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVeQZLTLC5_RxhGtRXOV8xqQQQcP8b9Q&callback=initMap"></script>
+    <meta property="og:title" content="The Spring team"/>
     <meta property="og:description" content="The Spring team works from around the world with one mission: building
-    quality, open-source software that helps you and your team be more productive on the JVM." />
+    quality, open-source software that helps you and your team be more productive on the JVM."/>
 </head>
-<body>
-  <div layout:fragment="header-container"></div>
-  <div layout:fragment="full-width--layout">
-    <div class="billboard--wrapper js-team-map--wrapper">
-      <div class="billboard--container center-text js-team-map--container">
-        <div class="container-fluid">
-          <h1 class="billboard--title">
-            The Spring Team
-          </h1>
-          <div class="billboard--sub-title--container">
-            <div class="billboard--sub-title">
-              We work together from around the world with one mission &ndash; building quality, open-source
+<body id="team">
+<div layout:fragment="~{content}">
+    <div class="container-fluid"></div>
+    <div>
+        <div class="billboard--wrapper js-team-map--wrapper">
+            <div class="billboard--container center-text js-team-map--container">
+                <div class="container-fluid">
+                    <h1 class="billboard--title">The Spring Team</h1>
+                </div>
             </div>
-            <div class="billboard--sub-title">
-              software that helps you and your team be more productive on the JVM.
-            </div>
-          </div>
+            <figure class="billboard-bg" id="map"></figure>
         </div>
-      </div>
-      <figure id="map" class="billboard-bg"></figure>
     </div>
-  </div>
-  <div layout:fragment="content">
     <div class="main-body--wrapper">
-      <div class="team-members--wrapper">
-        <section class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
-          <a th:href="@{'/team/' + ${profile.username}}" class="team-member--avatar">
-            <img th:src="${profile.avatarUrl} + '?s=153&s=153'" />
-          </a>
-          <div class="team-member--info">
-            <a th:href="@{'/team/' + ${profile.username}}" class="team-member--name" th:text="${profile.name}">Member Name</a>
-            <div class="team-member--bio">
-              <p class="team-member--position" th:text="${profile.jobTitle}">Rock Star</p>
-              <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
-            </div>
-            <div class="team-member--social">
-              <a class="team-member--social--icon twitter-small" rel="me" th:href="${profile.twitterLink.href}" th:if="${profile.hasTwitterUsername()}"></a>
-              <a class="team-member--social--icon github-small" rel="me" th:href="${profile.githubLink.href}" th:if="${profile.hasGithubUsername()}"></a>
-              <a class="team-member--social--icon speakerdeck-small" rel="me" th:href="${profile.speakerdeckLink.href}" th:if="${profile.hasSpeakerdeckUsername()}"></a>
-              <a class="team-member--social--icon lanyrd-small" rel="me" th:href="${profile.lanyrdLink.href}" th:if="${profile.hasLanyrdUsername()}"></a>
-            </div>
-          </div>
-        </section>
-      </div>
+        <div class="team-members--wrapper">
+            <section class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
+                <a th:href="@{'/team/' + ${profile.username}}" class="team-member--avatar">
+                    <img th:src="${profile.avatarUrl} + '?s=153&s=153'"/>
+                </a>
+                <div class="team-member--info">
+                    <a th:href="@{'/team/' + ${profile.username}}" class="team-member--name" th:text="${profile.name}">Member
+                        Name</a>
+                    <div class="team-member--bio">
+                        <p class="team-member--position" th:text="${profile.jobTitle}">Rock Star</p>
+                        <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
+                    </div>
+                    <div class="team-member--social">
+                        <a class="team-member--social--icon twitter-small" rel="me"
+                           th:href="${profile.twitterLink.href}" th:if="${profile.hasTwitterUsername()}"></a>
+                        <a class="team-member--social--icon github-small" rel="me" th:href="${profile.githubLink.href}"
+                           th:if="${profile.hasGithubUsername()}"></a>
+                        <a class="team-member--social--icon speakerdeck-small" rel="me"
+                           th:href="${profile.speakerdeckLink.href}" th:if="${profile.hasSpeakerdeckUsername()}"></a>
+                        <a class="team-member--social--icon lanyrd-small" rel="me" th:href="${profile.lanyrdLink.href}"
+                           th:if="${profile.hasLanyrdUsername()}"></a>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
-  </div>
+</div>
 </body>
 </html>
