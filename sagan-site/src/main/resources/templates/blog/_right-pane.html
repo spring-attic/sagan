@@ -4,37 +4,22 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
   <div layout:fragment="right-pane">
-    <ul class="right-pane-widget--container secondary-nav with-icon">
-      <li th:class="${@uih.blogClass(activeCategory?:'','All Posts')}">
-        <div class="icon blog-icon all-posts"></div>
-        <a th:href="@{/blog}">All Posts</a>
-        <a th:href="@{/blog.atom}" class="pull-right"><i class="icon-rss"></i></a>
-      </li>
-      <li th:each="category : ${categories}" th:class="${@uih.blogClass(activeCategory?:'',category.displayName)}">
-        <div th:class="${'icon blog-icon '+ category.displayName.toLowerCase().replace(' ','-')}"></div>
-        <a th:href="@{'/blog/category/'+${category.urlSlug}}" th:text="${category.displayName}">Engineering</a>
-        <a th:href="@{'/blog/category/'+${category.urlSlug}}+'.atom'" class="pull-right"><i class="icon-rss"></i></a>
-      </li>
-    </ul>
-    <ul class="social-btn--container">
-      <a href="http://twitter.com/springcentral" class="social-btn twitter"></a>
-      <!-- <a href="https://plus.google.com/+springframework" class="social-btn googleplus"></a> -->
-      <a href="http://www.linkedin.com/groups/46964" class="social-btn linkedin"></a>
-      <a href="/videos" class="social-btn youtube"></a>
-    </ul>
-    <div id='blog-sidebar-newsletter'>
-      <p>Get updates from The Spring Team delivered to your inbox</p>
-      <script src="https://app-sj05.marketo.com/js/forms2/js/forms2.min.js"></script>
-      <form id="mktoForm_4723"></form>
-      <script>
-        MktoForms2.loadForm("https://app-sj05.marketo.com", "625-IUJ-009", 4723, function(form){
-          form.onSuccess(function(values, followUpUrl) {
-            form.getFormElem().html("<p>Thank you!</p>");
-            return false;
-          });
-        });
-      </script>
-    </div>
+      <div>
+          <div id="blog-sidebar-newsletter">
+              <p>Get the Spring newsletter</p>
+              <script src="//connect.pivotal.io/js/forms2/js/forms2.min.js"></script>
+              <form id="mktoForm_4723"></form>
+              <script>
+                  MktoForms2.setOptions({formXDPath : "/rs/pivotal/images/marketo-xdframe-relative.html"});
+                  MktoForms2.loadForm("//connect.pivotal.io", "625-IUJ-009", 4723, function(form){
+                      form.onSuccess(function(values, followUpUrl) {
+                          form.getFormElem().html("<p>Thank you!</p>");
+                          return false;
+                      });
+                  });
+              </script>
+          </div>
+      </div>
   </div>
 </body>
 </html>
