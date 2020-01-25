@@ -1,0 +1,73 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Spring | Learn</title>
+    <meta property='og:title' content='Learn about Spring'/>
+    <meta property='og:description' content='Read guides, watch videos, and listen to podcasts to level up your Spring knowledge.'/>
+</head>
+<body id='learn'>
+<div layout:fragment="~{content}">
+    <div class='content' role='Main'>
+        <img id='pacman' th:src="@{/images/learn-pacman.svg}">
+        <div class='container'>
+            <h1 class='h1'>Learn</h1>
+            <section id='featured' class='flex jc-between mb-4'>
+
+                <section class='left' th:if="${newestPost}">
+                    <img class='mb-2' th:src="@{/images/podcast.jpg}">
+                    <a class='blue h3 antialiased link-darken' th:href="@{${newestPost.path}}" th:text="${newestPost.title}">Newest blog post title</a>
+                    <p><span class='author' th:text="${newestPost.author.name}">Author Name</span> |
+                        <time class='date' pubdate th:datetime="${newestPost.publishAt}"
+                              th:text='${#dates.format(newestPost.publishAt, "MMMM d")}'>June 18</time>
+                </section>
+                <section class='right flex fd-col'>
+                    <div class='item mb-3' th:each="post : ${posts}">
+                        <a class='blue h3 antialiased link-darken' th:href="@{${post.path}}" th:text="${post.title}">Blog post title</a>
+                        <p><span class='author' th:text="${post.author.name}">Author Name</span> |
+                            <time class='date' pubdate th:datetime="${newestPost.publishAt}"
+                                  th:text='${#dates.format(newestPost.publishAt, "MMMM d")}'>June 18</time>
+                    </div>
+                    <a class='button animate uppercase as-fs' th:href="@{/blog}">More blog posts</a>
+                </section>
+            </section>
+            <section id='quickstart' class='bg-lightblue mb-6 rel'>
+                <img id='learn-shape' th:src="@{/images/learn-shapes.svg}">
+                <div class='mx-auto'>
+                    <h2 class='h2 antialiased m-0'>New to Spring? Start here.</h2>
+                    <p class='m-0'>With the <a class='blue link-animate' th:href="@{/quickstart}">Spring Quickstart</a> guide you’ll build a classic “Hello World!” endpoint.</p>
+                </div>
+            </section>
+            <section id='columns' class='flex jc-between mb-6'>
+                <div class='third flex fd-col'>
+                    <h3 class='h3 mb-3'>Popular guides</h3>
+                    <div class='item mb-3'>
+                        <a class='blue link-darken' href='/guides/gs/rest-service/'>Building a RESTful Web Service</a>
+                        <p class='m-0'>Learn how to create a RESTful web service with Spring.</p>
+                    </div>
+                    <div class='item mb-3'>
+                        <a class='blue link-darken' href='/guides/gs/consuming-rest/'>Consuming a RESTful Web Service</a>
+                        <p class='m-0'>Learn how to retrieve web page data with Spring's RestTemplate.</p>
+                    </div>
+                    <div class='item mb-3'>
+                        <a class='blue link-darken' href='/guides/gs/accessing-data-jpa/'>Accessing Data with JPA</a>
+                        <p class='m-0'>Learn how to work with JPA data persistence using Spring Data JPA.</p>
+                    </div>
+                    <a class='button animate uppercase as-fs' href='/guides'>More guides</a>
+                </div>
+                <div class='third flex fd-col'>
+                    <h3 class='h3 mb-3'>Latest videos</h3>
+                    <iframe width="356" height="200" src="https://www.youtube.com/embed?listType=user_uploads&list=SpringSourceDev" frameborder="0" allowfullscreen></iframe>
+                    <a class='button animate uppercase as-fs mt-20' href='https://www.youtube.com/user/SpringSourceDev'>More videos</a>
+                </div>
+                <div class='third flex fd-col'>
+                    <h3 class='h3 mb-3'>Latest podcasts</h3>
+                    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/521839740&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                    <a class='button animate uppercase as-fs mt-20' href='https://soundcloud.com/a-bootiful-podcast'>More podcasts</a>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>
