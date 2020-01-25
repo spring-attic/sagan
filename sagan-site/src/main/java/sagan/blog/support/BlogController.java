@@ -9,6 +9,7 @@ import sagan.support.nav.Navigation;
 import sagan.support.nav.PageableFactory;
 import sagan.support.nav.PaginationInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -21,13 +22,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 import sagan.support.nav.Section;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
  * Controller that handles read-only blog actions, e.g. listing, paging, and showing
@@ -39,83 +39,86 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Navigation(Section.BLOG)
 class BlogController {
 
-    private final BlogService service;
+	private final String ALL_POSTS_CATEGORY = "All Posts";
+	private final String BROADCASTS_CATEGORY = "Broadcasts";
+
+    private final BlogService blogService;
     private final DateFactory dateFactory;
 
     @Autowired
-    public BlogController(BlogService service, DateFactory dateFactory) {
-        this.service = service;
+    public BlogController(BlogService blogService, DateFactory dateFactory) {
+        this.blogService = blogService;
         this.dateFactory = dateFactory;
     }
 
-    @RequestMapping(value = "/{year:\\d+}/{month:\\d+}/{day:\\d+}/{slug}", method = { GET, HEAD })
+    @GetMapping("/{year:\\d+}/{month:\\d+}/{day:\\d+}/{slug}")
     public String showPost(@PathVariable String year, @PathVariable String month, @PathVariable String day,
                            @PathVariable String slug, Model model) {
 
         String publicSlug = String.format("%s/%s/%s/%s", year, month, day, slug);
-        Post post = service.getPublishedPost(publicSlug);
+        Post post = blogService.getPublishedPost(publicSlug);
         model.addAttribute("post", PostView.of(post, dateFactory));
         model.addAttribute("categories", PostCategory.values());
         model.addAttribute("activeCategory", post.getCategory().getDisplayName());
-        model.addAttribute("disqusShortname", service.getDisqusShortname());
+        model.addAttribute("disqusShortname", blogService.getDisqusShortname());
         return "blog/show";
     }
 
-    @RequestMapping(value = "", method = { GET, HEAD })
+    @GetMapping("")
     public String listPublishedPosts(Model model, @RequestParam(defaultValue = "1") int page) {
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = service.getPublishedPosts(pageRequest);
-        return renderListOfPosts(result, model, "All Posts");
+        Page<Post> result = blogService.getPublishedPosts(pageRequest);
+        return renderListOfPosts(result, model, ALL_POSTS_CATEGORY);
     }
 
-    @RequestMapping(value = "/category/{category}", method = { GET, HEAD })
+    @GetMapping("/category/{category}")
     public String listPublishedPostsForCategory(@PathVariable("category") PostCategory category, Model model,
                                                 @RequestParam(defaultValue = "1", value = "page") int page) {
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = service.getPublishedPosts(category, pageRequest);
+        Page<Post> result = blogService.getPublishedPosts(category, pageRequest);
         return renderListOfPosts(result, model, category.getDisplayName());
     }
 
-    @RequestMapping(value = "/broadcasts", method = { GET, HEAD })
+    @GetMapping("/broadcasts")
     public String listPublishedBroadcasts(Model model, @RequestParam(defaultValue = "1", value = "page") int page) {
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = service.getPublishedBroadcastPosts(pageRequest);
-        return renderListOfPosts(result, model, "Broadcasts");
+        Page<Post> result = blogService.getPublishedBroadcastPosts(pageRequest);
+        return renderListOfPosts(result, model, BROADCASTS_CATEGORY);
     }
 
-    @RequestMapping(value = "/{year:\\d+}/{month:\\d+}/{day:\\d+}", method = { GET, HEAD })
+    @GetMapping("/{year:\\d+}/{month:\\d+}/{day:\\d+}")
     public String listPublishedPostsForDate(@PathVariable int year, @PathVariable int month, @PathVariable int day,
                                             @RequestParam(defaultValue = "1", value = "page") int page, Model model) {
 
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = service.getPublishedPostsByDate(year, month, day, pageRequest);
+        Page<Post> result = blogService.getPublishedPostsByDate(year, month, day, pageRequest);
 
         LocalDate date = new LocalDate(year, month, day);
         model.addAttribute("title", "Archive for " + date.toString("MMMM dd, yyyy"));
 
-        return renderListOfPosts(result, model, "All Posts");
+        return renderListOfPosts(result, model, ALL_POSTS_CATEGORY);
     }
 
-    @RequestMapping(value = "/{year:\\d+}/{month:\\d+}", method = { GET, HEAD })
+    @GetMapping("/{year:\\d+}/{month:\\d+}")
     public String listPublishedPostsForYearAndMonth(@PathVariable int year, @PathVariable int month,
                                                     @RequestParam(defaultValue = "1", value = "page") int page,
                                                     Model model) {
 
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = service.getPublishedPostsByDate(year, month, pageRequest);
+        Page<Post> result = blogService.getPublishedPostsByDate(year, month, pageRequest);
         YearMonth yearMonth = new YearMonth(year, month);
         model.addAttribute("title", "Archive for " + yearMonth.toString("MMMM yyyy"));
-        return renderListOfPosts(result, model, "All Posts");
+        return renderListOfPosts(result, model, ALL_POSTS_CATEGORY);
     }
 
-    @RequestMapping(value = "/{year:\\d+}", method = { GET, HEAD })
+    @GetMapping("/{year:\\d+}")
     public String listPublishedPostsForYear(@PathVariable int year,
                                             @RequestParam(defaultValue = "1", value = "page") int page, Model model) {
 
         Pageable pageRequest = PageableFactory.forLists(page);
-        Page<Post> result = service.getPublishedPostsByDate(year, pageRequest);
+        Page<Post> result = blogService.getPublishedPostsByDate(year, pageRequest);
         model.addAttribute("title", String.format("Archive for %d", year));
-        return renderListOfPosts(result, model, "All Posts");
+        return renderListOfPosts(result, model, ALL_POSTS_CATEGORY);
     }
 
     @ExceptionHandler
@@ -129,11 +132,19 @@ class BlogController {
     private String renderListOfPosts(Page<Post> page, Model model, String activeCategory) {
         Page<PostView> postViewPage = PostView.pageOf(page, dateFactory);
         List<PostView> posts = postViewPage.getContent();
+        if (page.isFirst() && ALL_POSTS_CATEGORY.equals(activeCategory)) {
+			List<PostView> recentPosts = new ArrayList<>(posts);
+			model.addAttribute("newestPost", recentPosts.remove(0));
+			model.addAttribute("posts", recentPosts);
+		}
+        else {
+        	model.addAttribute("posts", posts);
+		}
+
         model.addAttribute("activeCategory", activeCategory);
         model.addAttribute("categories", PostCategory.values());
-        model.addAttribute("posts", posts);
         model.addAttribute("paginationInfo", new PaginationInfo(postViewPage));
-        model.addAttribute("disqusShortname", service.getDisqusShortname());
+        model.addAttribute("disqusShortname", blogService.getDisqusShortname());
         return "blog/index";
     }
 }
