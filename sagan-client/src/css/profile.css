@@ -1,0 +1,156 @@
+#map {
+    height: 410px;
+    width: 100%;
+    margin: 0;
+}
+#main {
+    margin: 80px 0;
+}
+h1.team-member--name {
+    font-size: 60px;
+    margin: 5px 0 30px;
+}
+.team-member--avatar {
+    filter: grayscale(1);
+}
+.team-member--sub-info {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Work Sans', sans-serif;
+    margin-bottom: 10px;
+}
+.team-member--sub-info p {
+    margin-bottom: 0;
+    display: inline-block;
+    line-height: 0;
+    color: #191E1E;
+}
+.team-member--sub-info p:first-child:after {
+    content: " | ";
+}
+.team-member--sub-info p:last-child:after {
+    content: "";
+}
+.team-member--bio {
+    line-height: 1.7em;
+    color: #333;
+}
+.row-fluid {
+    display: flex;
+    justify-content: space-between;
+}
+.row-fluid .span4 {
+    width: 31.914893617021278%;
+}
+.row-fluid .span8 {
+    width: 65.95744680851064%;
+}
+.team-member--social--icon {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 30px;
+    color: white;
+    background: #191E1E;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    display: block;
+    margin-right: 15px;
+}
+.team-member--social--icon:hover {
+    background: #6db33f;
+}
+.team-member--social--icon:before {
+    padding: 5px 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+.github-small:before {
+    content: "\f09b";
+}
+.twitter-small {
+    font-size: 27px;
+}
+.twitter-small:before {
+    content: "\f099";
+    padding: 7px 0;
+}
+.team-member-info--container {
+    display: flex;
+    flex-direction: column;
+}
+.team-member-social.pull-right {
+    float: none;
+    order: 1;
+    display: flex;
+    margin: 15px 0;
+}
+.twitter-handle,
+.content-container--title {
+    text-transform: uppercase;
+    color: #6db33f;
+    font-size: 14px;
+    font-weight: 700;
+}
+.main-body--wrapper {
+    border-top: 2px solid #ebf2f2;
+    margin-top: 40px;
+    padding: 60px 0 0;
+}
+.member-post--container {
+    border-bottom: 2px solid #ebf2f2;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+}
+.member-post--container:last-child {
+    border-bottom: none;
+}
+h2.member-post--title {
+    font-size: 38px;
+    line-height: 1.3em;
+    -webkit-font-smoothing: antialiased;
+}
+.meta-data--item {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-block;
+}
+.meta-data--item:first-child:after {
+    content: " | ";
+}
+.meta-data--item:last-child:after {
+    content: "";
+}
+.meta-data--item a:hover {
+    color: #0066cc;
+}
+.member-post--summary a {
+    color: #0066cc;
+}
+.member-post--summary a:hover {
+    color: #333;
+}
+@media(max-width: 800px) {
+    .row-fluid {
+        flex-direction: column;
+    }
+    .row-fluid .span4,
+    .row-fluid .span8 {
+        width: 100%;
+    }
+}
+#team-bio-info {
+    background: white;
+    padding: 50px 50px 0 50px;
+    margin-top: -140px;
+    position: relative;
+}

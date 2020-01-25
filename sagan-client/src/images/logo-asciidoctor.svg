@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="105.83333mm"
+   height="105.83333mm"
+   viewBox="0 0 105.83333 105.83333"
+   version="1.1"
+   id="svg3751"
+   inkscape:export-filename="/tmp/asciidoctor-logo-fill-color.png"
+   inkscape:export-xdpi="240"
+   inkscape:export-ydpi="240"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <title
+     id="title4527">Asciidoctor</title>
+  <defs
+     id="defs3745" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.6245048"
+     inkscape:cx="-46.777153"
+     inkscape:cy="24.966208"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="3200"
+     inkscape:window-height="1658"
+     inkscape:window-x="0"
+     inkscape:window-y="68"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3748">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Asciidoctor</dc:title>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Asciidoctor</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:description>Asciidoctor project logo.</dc:description>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>AsciiDoc</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:relation>https://asciidoctor.org</dc:relation>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.083335,-191.08337)">
+    <path
+       inkscape:connector-curvature="0"
+       id="path907"
+       d="m 26.240746,191.08337 c -14.436702,0 -26.157411,11.7201 -26.157411,26.15666 v 53.51951 c 0,14.43654 11.720957,26.15715 26.157411,26.15715 H 79.76025 c 14.436679,0 26.15641,-11.72061 26.15641,-26.15715 v -53.51951 c 0,-14.43656 -11.719488,-26.15666 -26.15641,-26.15666 z"
+       style="clip-rule:evenodd;fill:#e40046;fill-opacity:1;fill-rule:evenodd;stroke-width:0.24752024;stroke-linejoin:round;stroke-miterlimit:1.41420996" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4.46009064px;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 55.70942,210.48548 a 2.2302684,2.2302684 0 0 0 -2.015517,1.37263 l -13.327365,32.05565 a 2.2302684,2.2302684 0 1 0 4.117839,1.71171 l 11.25217,-27.06706 23.600261,57.54395 a 2.2302684,2.2302684 0 1 0 4.125976,-1.69271 L 57.814455,211.86894 a 2.2302684,2.2302684 0 0 0 -2.105035,-1.38346 z"
+       id="path909"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path911"
+       d="m 36.817184,255.95416 a 2.2302685,2.2302685 0 0 0 -2.024151,1.40272 l -7.083967,17.04249 a 2.2302685,2.2302685 0 1 0 4.118502,1.71234 l 7.083967,-17.0425 a 2.2302685,2.2302685 0 0 0 -2.094351,-3.11505 z"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.46009111px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1.5;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4.46009111px;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 21.548721,254.55016 a 2.2302685,2.2302685 0 1 0 0,4.45963 h 25.754124 a 2.2302685,2.2302685 0 1 0 0,-4.45964 z"
+       id="path915"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4.46009111px;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 26.263348,243.9626 a 2.2302685,2.2302685 0 1 0 0,4.45962 h 25.751411 a 2.2302685,2.2302685 0 1 0 0,-4.45962 z"
+       id="path919"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

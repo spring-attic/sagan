@@ -1,0 +1,134 @@
+.guide main {
+    padding: 80px 0;
+}
+.guide main .ci-status,
+.guide main .right-pane-widget--container .github_download,
+.guide main .right-pane-widget--container .gs-guide-import,
+.guide main .right-pane-widget--container:last-child,
+.guide main .btn-group,
+.guide main .clone-url,
+.guide main .content--title,
+.use-gradle h2, .use-maven h2, .use-sts h2,
+.use-gradle, .use-maven, .use-sts {
+    display: none;
+}
+.guide main .right-pane-widget--container h3 {
+    font-size: 1.5em;
+    margin: 0;
+}
+.guide main .right-pane-widget--container .go-to-repo--container {
+    max-width: 225px;
+    margin: 10px 0 20px;
+}
+.guide main .right-pane-widget--container .go-to-repo--container:last-child {
+    margin-bottom: 0;
+}
+.guide main .right-pane-widget--container .go-to-repo--container .icon-github:before {
+    font-family: FontAwesome;
+    content: "\f09b";
+    font-size: 1.7em;
+    margin-right: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    color: #191E1E;
+}
+.guide main .right-pane-widget--container .go-to-repo--container i {
+    font-style: unset;
+}
+.guide main .right-pane-widget--container {
+    background: #ebf2f2;
+    padding: 30px;
+    margin-bottom: 15px;
+}
+.guide main h1.title {
+    margin: 30px 0 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 2.375rem;
+    line-height: 1em;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+}
+.guide main h2 {
+    margin: 40px 0 0;
+}
+.guide main .right-pane-widget--container h2 {
+    margin: 0;
+}
+.guide main .row-fluid {
+    display: flex;
+    justify-content: space-between;
+}
+
+.guide main .span8 {
+    width: 65.95744680851064%;
+    margin-right: 20px;
+}
+@media(max-width: 800px) {
+    .guide main .row-fluid {
+        flex-direction: column;
+    }
+    .guide main .span8 {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+.guide main ul {
+    padding: 0 0 0 40px;
+    list-style-type: disc;
+}
+.guide main .right-pane-widget--container ul {
+    padding: 0;
+    list-style: none;
+}
+.guide main code,
+.guide main pre {
+    padding: 10px;
+    font-size: .875rem;
+    font-family: 'Monaco', monospace;
+    border: 1px solid #e1e1e8;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+.guide main pre code {
+    border: none;
+    padding: 0;
+}
+.guide main table pre,
+.guide main table code,
+.guide main p pre,
+.guide main p code {
+    padding: 2px 6px;
+    color: #000099;
+
+}
+.guide main p code a,
+.guide main p pre a {
+    color: #000099;
+}
+.guide main a {
+    color: #086dc3;
+}
+.guide main .right-pane-widget--container a {
+    font-weight: 700;
+}
+.guide main a:hover {
+    color: #333;
+}
+h2[id*=reveal]:before {
+    font-family: FontAwesome;
+    content: "\f105";
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+h2[id*=reveal].open:before {
+    content: "\f107";
+    margin-right: 2px;
+}
+.admonitionblock {
+    border-left: none;
+    background-color: #ebf2f2;
+    padding: 25px 20px;
+    margin: 30px 0;
+    width: auto;
+}
