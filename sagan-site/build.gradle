@@ -55,6 +55,7 @@ dependencies {
 
     // Thymeleaf is used as the template engine for serving HTML
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+	compile 'org.thymeleaf.extras:thymeleaf-extras-java8time'
     compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
 
@@ -63,6 +64,8 @@ dependencies {
 
     // for use in generating blog atom feeds
     compile 'com.rometools:rome:1.12.0'
+
+	compile 'net.sf.biweekly:biweekly:0.6.3'
 
     // for use in serving redirects; see urlrewrite.xml
     compile 'org.tuckey:urlrewritefilter:4.0.4'

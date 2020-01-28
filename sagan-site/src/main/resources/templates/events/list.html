@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Spring | Events</title>
+    <meta property='og:title' content='Spring Events'/>
+    <meta property='og:description' content='Engage with the Spring community by attending an event.'/>
+</head>
+
+<body id='events'>
+<div layout:fragment="~{content}">
+    <div class='content'>
+        <div class='container'>
+            <h1 class='h1 antialiased mb-3'>Events</h1>
+        </div>
+        <div id='hero' class='bg-lightblue rel of-hide' role='banner'>
+            <div class='container rel z-1'>
+                <div class='flex jc-between flex-wrap mb-2'>
+                    <a th:each="event : ${events}"
+                       th:href="${event.link}" class='card third shadow-hover bg-white border-box block rel mb-2'>
+                        <div class='greenbar'></div>
+                        <div class='border-dark rad-5'>
+                            <h3 class='h3 antialiased' th:text="${event.summary}">Event</h3>
+                            <p class='location m-0' th:text="${event.location}">Location</p>
+                            <p class='date' th:text="${#temporals.format(event.startTime, 'dd-MMM-yyyy')}">Date/Time</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

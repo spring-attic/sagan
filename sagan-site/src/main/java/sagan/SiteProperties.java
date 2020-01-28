@@ -1,5 +1,7 @@
 package sagan;
 
+import java.net.URI;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("sagan.site")
@@ -9,12 +11,18 @@ public class SiteProperties {
 
 	private Renderer renderer = new Renderer();
 
+	private Events events = new Events();
+
 	public Renderer getRenderer() {
 		return this.renderer;
 	}
 
 	public Cache getCache() {
 		return this.cache;
+	}
+
+	public Events getEvents() {
+		return events;
 	}
 
 	public static class Cache {
@@ -60,6 +68,19 @@ public class SiteProperties {
 
 		public void setServiceUrl(String serviceUrl) {
 			this.serviceUrl = serviceUrl;
+		}
+	}
+
+	public static class Events {
+
+		private URI calendarUri;
+
+		public URI getCalendarUri() {
+			return calendarUri;
+		}
+
+		public void setCalendarUri(URI calendarUri) {
+			this.calendarUri = calendarUri;
 		}
 	}
 

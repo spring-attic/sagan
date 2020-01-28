@@ -81,6 +81,7 @@ jobs:
         GITHUB_CLIENT_SECRET: ((sagan-github-clientsecret))
         GITHUB_ACCESS_TOKEN: ((sagan-github-access-token))
         WEBHOOK_ACCESS_TOKEN: ((sagan-webhook-access-token))
+        SAGAN_SITE_EVENTS_CALENDAR_URI: ((sagan-events-calendar-uri))
       manifest: sagan-site-repo/concourse/manifests/sagan-site-production.yml
   - put: slack-alert
     params:
