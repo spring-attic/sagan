@@ -1,22 +1,38 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+      layout:decorator="admin/layout">
 <head>
-    <title>Admin &middot; Spring Tools</title>
+    <title>Admin | Spring Tools</title>
 </head>
 <body>
-  <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container">
-    <div class="main-body--wrapper">
-      <div class="admin-index--title">
-        <div class="content--title search-title">
-          <a th:href="@{/admin}">Admin</a> : Spring Tools
+<nav layout:fragment="~{breadcrumb}">
+    <ul>
+        <li><a th:href="@{/admin}">Admin</a></li>
+        <li><a class="is-active" th:href="@{admin/tools}" aria-current="page">Spring Tools</a></li>
+    </ul>
+</nav>
+<div layout:fragment="~{content}">
+    <nav class="level">
+        <div class="level-right">
+            <p class="level-item"><a class="button is-success" th:href="@{'/admin/tools/new'}">Add Platform</a></p>
         </div>
-      </div>
+    </nav>
+    <h2>Platforms</h2>
+    <table class="table is-striped is-fullwidth">
+        <thead>
+        <tr>
+            <td>Name</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="platform : ${platforms}">
+            <td><a th:href="@{'/admin/tools/' + ${platform.id}}" th:text="${platform.id}">eclipse</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
-      <div class="admin-index--title">
-          <a th:href="@{/admin/tools/new}" href="edit.html">Add Platform</a>
-      </div>
+  <div layout:fragment="content" class="container">
 
       <div class="row">
           <div id="content" class="span12">

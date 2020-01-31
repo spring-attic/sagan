@@ -94,19 +94,19 @@ public class ProjectsControllerTest {
 		this.springDataJpa.setParentProject(this.springData);
 
 		ProjectGroup pg1 = new ProjectGroup();
-		pg1.setName("group1");
-		pg1.setLabel("group 1");
+		pg1.setName("microservices");
+		pg1.setLabel("Microservices");
 
 		ProjectGroup pg2 = new ProjectGroup();
-		pg2.setName("group2");
-		pg2.setLabel("group 2");
+		pg2.setName("cloud");
+		pg2.setLabel("Cloud");
 
 		projectGroups = Arrays.asList(pg1, pg2);
 
-		this.springBoot.setGroupsTag(new HashSet<>(Arrays.asList(pg1)));
+		this.springBoot.setGroups(new HashSet<>(Arrays.asList(pg1)));
 		this.springBoot.setFeatured(true);
 
-		this.springData.setGroupsTag(new HashSet<>(Arrays.asList(pg2)));
+		this.springData.setGroups(new HashSet<>(Arrays.asList(pg2)));
 
 		GuideHeader[] guides = new GuideHeader[] {};
 		given(this.projectGuidesRepo.findByProject(any())).willReturn(guides);

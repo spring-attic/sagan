@@ -102,7 +102,7 @@ public class BlogAdminControllerTests {
 
     @Test
     public void showPostView() {
-        assertThat(controller.showPost(1L, "not important", model), is("admin/blog/show"));
+        assertThat(controller.showPost(1L, "not important", model), is("blog/show"));
     }
 
     @Test

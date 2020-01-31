@@ -1,53 +1,62 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="layout">
+      layout:decorator="admin/layout">
 <head>
-    <title th:inline="text">Edit &middot; [[${platform.id}]]</title>
+    <title th:inline="text">Admin | Edit | [[${platform.id}]]</title>
 </head>
 <body>
-<div layout:fragment="header-container"></div>
-<div layout:fragment="content" class="container">
-    <div class="main-body--wrapper">
-        <div class="admin-index--title">
-            <div class="content--title search-title" th:inline="text">
-                <a th:href="@{/admin}">Admin</a> : <a th:href="@{/admin/tools}">Spring Tools</a> : Edit [[${platform.id}]]
+<nav layout:fragment="~{breadcrumb}">
+    <ul>
+        <li><a th:href="@{/admin}">Admin</a></li>
+        <li><a th:href="@{/admin/tools}">Spring Tools</a></li>
+        <li><a class="is-active" th:href="@{'/admin/tools/' + ${platform.id}}" th:inline="text" aria-current="page">Edit [[${platform.id}]]</a></li>
+    </ul>
+</nav>
+<div layout:fragment="~{content}">
+    <form th:action="@{'/admin/tools/' + ${platform.id}}" method="post" th:object="${platform}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <h2 class="title" th:inline="text">Edit [[${platform.id}]] platform</h2>
+        <div class="field">
+            <label class="label">Id</label>
+            <div class="control">
+                <input class="input" th:classappend="(${#fields.hasErrors('id')}? ' is-danger')"
+                       type="text" th:field="*{id}" name="id" placeholder="Name">
+                <p class="help is-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Incorrect name</p>
             </div>
         </div>
-        <form th:action="@{'/admin/tools/' + ${platform.id}}" method="post" th:object="${platform}">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-            <label for="id">Name</label>
-            <input type="text" th:field="*{id}"/>
-            <fieldset>
-                <legend>Downloads</legend>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <td>Delete?</td>
-                        <td>Variant</td>
-                        <td>Label</td>
-                        <td>Download URL</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="download, downloadStat : ${platform.downloads}">
-                        <td><input type="checkbox" name="downloadsToDelete"
-                                   th:value="*{downloads[__${downloadStat.index}__].variant}"></td>
-                        <td><input type="text" th:field="*{downloads[__${downloadStat.index}__].variant}"/></td>
-                        <td><input type="text" th:field="*{downloads[__${downloadStat.index}__].label}"/></td>
-                        <td><input type="text" th:field="*{downloads[__${downloadStat.index}__].downloadUrl}"/></td>
-                    </tr>
-                    <tr th:with="size=${platform.downloads.size()}">
-                        <td></td>
-                        <td><input type="text" th:field="*{downloads[__${size}__].variant}"/></td>
-                        <td><input type="text" th:field="*{downloads[__${size}__].label}"/></td>
-                        <td><input type="text" th:field="*{downloads[__${size}__].downloadUrl}"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </fieldset>
-            <input type="submit" value="Save"/>
-        </form>
-    </div>
+        <div class="field">
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                <tr>
+                    <td>Delete?</td>
+                    <td>Variant</td>
+                    <td>Label</td>
+                    <td>Download URL</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="download, downloadStat : ${platform.downloads}">
+                    <td><input type="checkbox" name="downloadsToDelete" class="checkbox"
+                               th:value="*{downloads[__${downloadStat.index}__].variant}"></td>
+                    <td><input class="input" type="text" th:field="*{downloads[__${downloadStat.index}__].variant}"/></td>
+                    <td><input class="input" type="text" th:field="*{downloads[__${downloadStat.index}__].label}"/></td>
+                    <td><input class="input" type="text" th:field="*{downloads[__${downloadStat.index}__].downloadUrl}"/></td>
+                </tr>
+                <tr th:with="size=${platform.downloads.size()}">
+                    <td></td>
+                    <td><input class="input" type="text" th:field="*{downloads[__${size}__].variant}"/></td>
+                    <td><input class="input" type="text" th:field="*{downloads[__${size}__].label}"/></td>
+                    <td><input class="input" type="text" th:field="*{downloads[__${size}__].downloadUrl}"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="buttons control is-centered">
+            <button type="submit" class="button is-primary">Save</button>
+            <a class="button" th:href="@{/admin/tools}">Cancel</a>
+        </div>
+    </form>
+
 </div>
 </body>
 </html>

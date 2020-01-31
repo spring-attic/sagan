@@ -1,101 +1,150 @@
-<html
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  xmlns:th="http://www.thymeleaf.org"
-  layout:decorator="layout">
-  <head>
-    <title th:inline="text">Admin &middot; [[${profile.fullName}]]</title>
-  </head>
-  <body>
-    <div layout:fragment="header-container"></div>
-    <div layout:fragment="content" class="container">
-      <div class="main-body--wrapper">
-
-        <div class="admin-index--title">
-          <div class="content--title search-title">
-            <a th:href="@{/admin}">Admin</a> : <a th:href="@{/admin/team}">Team</a> : Edit Profile
-          </div>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="admin/layout">
+<head>
+    <title th:inline="text">Admin | Team | Edit [[${profile.fullName}]]</title>
+</head>
+<body>
+<nav layout:fragment="~{breadcrumb}">
+    <ul>
+        <li><a th:href="@{/admin}">Admin</a></li>
+        <li><a th:href="@{/admin/team}">Team</a></li>
+        <li><a class="is-active" th:href="@{'/admin/team/' + ${profile.id}}" aria-current="page"
+               th:text="${profile.username}">username</a></li>
+    </ul>
+</nav>
+<div layout:fragment="~{content}">
+    <form th:action="@{${formAction}}" action="#" method="post" th:object="${profile}">
+        <input type="hidden" name="_method" value="PUT"/>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <h2 class="title">Basics</h2>
+        <div class="columns">
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('name')}? ' is-danger')"
+                               type="text" th:field="*{name}" name="name" placeholder="Name">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect
+                            name</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Job Title</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('jobTitle')}? ' is-danger')"
+                               type="text" th:field="*{jobTitle}" name="jobTitle"
+                               placeholder="Your role on the Spring team">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{name}">Incorrect
+                            job title</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <label class="checkbox"><input class="checkbox" type="checkbox" th:field="*{hidden}"
+                                                       name="hidden"> Alumni</label>
+                        <p>Switch on this flag to indicate someone has left the Spring team</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label">Location</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('location')}? ' is-danger')"
+                               type="text" th:field="*{location}" name="location">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('location')}" th:errors="*{location}">
+                            Incorrect location</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Geolocation</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('geoLocation')}? ' is-danger')"
+                               type="text" th:field="*{geoLocation}" name="geoLocation"
+                               placeholder="e.g. 34.021944,-118.481389">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('geoLocation')}"
+                           th:errors="*{geoLocation}">Incorrect geoLocation</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <form th:action="@{${formAction}}" action="#" method="post" th:object="${profile}" class="admin-profile--form">
-          <div class="admin-profile--field">
-            <label for="name">Name:</label>
-            <input id="name" type="text" th:field="*{name}" name="name" />
-          </div>
+        <h2 class="title">Social</h2>
 
-          <div class="admin-profile--field">
-            <label for="jobTitle">Role:</label>
-            <input id="jobTitle" type="text" th:field="*{jobTitle}" name="jobTitle" placeholder="e.g. Spring Integration committer"/>
-            <div class="note">Your role on the Spring team</div>
-          </div>
+        <div class="columns">
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label">Gravatar Email</label>
+                    <div class="control">
+                        <input class="input"
+                               th:classappend="(${#fields.hasErrors('gravatarEmail')}? ' is-danger')"
+                               type="text" th:field="*{gravatarEmail}" name="gravatarEmail"
+                               placeholder="emily@pivotal.io">
+                        <p>Your user avatar throughout the site.</p>
+                        <p class="help is-danger" th:if="${#fields.hasErrors('gravatarEmail')}"
+                           th:errors="*{gravatarEmail}">Incorrect Gravatar email.</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <img th:src="*{avatarUrl}"/>
+                    <p>
+                        <a href="http://gravatar.com">Sign up</a> for a Gravatar account or
+                        <a href="https://gravatar.com/emails/">edit your Gravatar settings</a>
+                    </p>
+                </div>
 
-          <div class="admin-profile--field">
-            <label>Username:</label>
-            <span id="username" th:text="*{username}"></span>
-          </div>
-
-          <div class="admin-profile--field">
-              <label for="location">Location (city, country):</label>
-            <input id="location" type="text" th:field="*{location}" name="location" placeholder="e.g. Antwerp, Belgium"/>
-            <div class="note">City, State for locations in US</div>
-          </div>
-
-          <div class="admin-profile--field">
-              <label for="geoLocation">Location (lat,long):</label>
-            <input id="geoLocation" type="text" th:field="*{geoLocation}" name="geoLocation" placeholder="e.g. 34.021944,-118.481389"/>
-            <div class="note">Used to position your pin on the Spring team map</div>
-          </div>
-
-          <div class="admin-profile--field bio">
-              <label for="bio">Bio:</label>
-            <textarea id="bio" th:field="*{bio}" name="bio"></textarea>
-            <div class="note">500 chars or less, markdown not (yet) supported</div>
-          </div>
-
-          <div class="admin-profile--field">
-              <label>GitHub Username: </label>
-            <span id="githubUsername" th:text="*{githubUsername}" ></span>
-          </div>
-
-          <div class="admin-profile--field">
-              <label for="speakerdeckUsername">Speakerdeck Username:</label>
-            <input id="speakerdeckUsername" type="text" th:field="*{speakerdeckUsername}" name="speakerdeckUsername" />
-          </div>
-
-          <div class="admin-profile--field">
-            <label for="twitterUsername">Twitter Username:</label>
-            <input id="twitterUsername" type="text" th:field="*{twitterUsername}" name="twitterUsername" />
-          </div>
-
-          <div class="admin-profile--field">
-            <label for="lanyrdUsername">Lanyrd Username:</label>
-            <input id="lanyrdUsername" type="text" th:field="*{lanyrdUsername}" name="lanrydUsername" />
-          </div>
-
-          <!-- <label for="videoEmbeds">Video Embeds:<textarea id="videoEmbeds" th:field="*{videoEmbeds}" name="videoEmbeds"></textarea></label> -->
-          <input type="hidden" name="_method" value="PUT" />
-          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                  <div class="admin-profile--field">
-            <label for="gravatarEmail">Gravatar Email:</label>
-            <input id="gravatarEmail" type="text" th:field="*{gravatarEmail}" name="gravatarEmail" placeholder="jdoe@pivotal.io"/>
-            <div class="note">Your user avatar throughout the site</div>
-          </div>
-          <div class="admin-profile--field">
-            <img th:src="*{avatarUrl}" class="push-right" />
-            <p class="image-note">
-              <a href="http://gravatar.com">Sign up</a> for a Gravatar account or
-              <a href="https://gravatar.com/emails/">edit your Gravatar settings</a>
-            </p>
-          </div>
-          <div class="admin-profile--field">
-            <label for="hidden">Hidden (Spring Alumni)?</label>
-            <input id="hidden" type="checkbox" th:field="*{hidden}" name="hidden" />
-            <div class="note">Switch on this flag to indicate someone has left the Spring team`</div>
-          </div>
-          <div class="admin-profile--field submit-form">
-            <button type="submit" class="btn btn-black push-right">Save Changes</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </body>
+            </div>
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label">Speakerdeck</label>
+                    <div class="control">
+                        <input class="input"
+                               th:classappend="(${#fields.hasErrors('speakerdeckUsername')}? ' is-danger')"
+                               type="text" th:field="*{speakerdeckUsername}" name="speakerdeckUsername"
+                               placeholder="username">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('speakerdeckUsername')}"
+                           th:errors="*{speakerdeckUsername}">Incorrect Speakerdeck username</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Twitter</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('twitterUsername')}? ' is-danger')"
+                               type="text" th:field="*{twitterUsername}" name="twitterUsername" placeholder="username">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('twitterUsername')}"
+                           th:errors="*{twitterUsername}">Incorrect Twitter username</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Lanyrd</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('lanyrdUsername')}? ' is-danger')"
+                               type="text" th:field="*{lanyrdUsername}" name="lanyrdUsername" placeholder="username">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('lanyrdUsername')}"
+                           th:errors="*{lanyrdUsername}">Incorrect Lanyrd username</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="title">More!</h2>
+        <div class="field">
+            <label class="label">Short Bio</label>
+            <div class="control">
+                        <textarea class="textarea"
+                                  th:classappend="(${#fields.hasErrors('bio')}? ' is-danger')"
+                                  placeholder="Tell us a bit about yourself!"
+                                  th:field="*{bio}" name="bio" rows="5"></textarea>
+                <p class="help is-danger" th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}">
+                    Incorrect Bio</p>
+            </div>
+            <p>500 chars or less, no markup supported.</p>
+        </div>
+        <div class="buttons control is-centered">
+            <button type="submit" class="button is-primary">Save</button>
+            <a class="button" th:href="@{/admin/team}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
 </html>

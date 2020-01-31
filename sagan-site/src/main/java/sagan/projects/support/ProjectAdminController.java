@@ -106,6 +106,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
         model.addAttribute("project", project);
         model.addAttribute("categories", CATEGORIES);
+		model.addAttribute("groups", this.service.getAllGroups());
         model.addAttribute("projectSampleDisplayOrder", nextAvailableSampleDisplayOrder);
         return "admin/project/edit";
     }

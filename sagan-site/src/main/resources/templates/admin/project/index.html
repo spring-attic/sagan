@@ -1,46 +1,40 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+      layout:decorator="admin/layout">
 <head>
-    <title>Admin &middot; Blog</title>
+    <title>Admin | Projects</title>
 </head>
 <body>
-  <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container">
-    <div class="main-body--wrapper">
-      <div class="admin-index--title">
-        <div class="content--title search-title">
-          <a th:href="@{/admin}">Admin</a> : Projects
+<nav layout:fragment="~{breadcrumb}">
+    <ul>
+        <li><a th:href="@{/admin}">Admin</a></li>
+        <li><a class="is-active" th:href="@{admin/projects}" aria-current="page">Projects</a></li>
+    </ul>
+</nav>
+<div layout:fragment="~{content}">
+    <nav class="level">
+        <div class="level-right">
+            <p class="level-item"><a class="button is-success" th:href="@{'/admin/projects/new'}">Create Project</a></p>
         </div>
-      </div>
-
-      <div class="admin-index--title">
-          <a th:href="@{/admin/projects/new}" href="edit.html">Add Project</a>
-      </div>
-
-      <div class="row">
-          <div id="content" class="span12">
-              <h2>Projects</h2>
-              <table class='table dashboard--posts'>
-                  <tr th:each="project : ${projects}">
-                      <td th:text="${project.id}">spring-framework</td>
-                      <td>
-                          <a th:href="@{'/admin/projects/' + ${project.id}}">Edit</a>
-                      </td>
-                      <td>
-                          <form th:action="@{'/admin/projects/' + ${project.id}}" action="/admin/project/init" method="post" class='form-inline'>
-                              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                              <input type="hidden" name="_method" value="delete"/>
-                              <input type="submit" class="btn" value="Delete"/>
-                          </form>
-                      </td>
-                  </tr>
-              </table>
-          </div>
-
-          <div id="sidebar" class="span4">
-          </div>
-      </div>
+    </nav>
+    <div>
+        <h2>Projects</h2>
+        <table class="table is-striped is-fullwidth">
+            <thead>
+            <tr>
+                <td>Name</td>
+                <td>Category</td>
+                <td>Public Page</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${projects}">
+                <td><a th:href="@{'/admin/projects/' + ${project.id}}" th:text="${project.name}">spring-framework</a></td>
+                <td th:text="${project.category}">Microservices</td>
+                <td><a th:href="${project.siteUrl}" th:text="${project.siteUrl}">/projects/spring-framework</a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
