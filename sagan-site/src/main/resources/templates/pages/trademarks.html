@@ -2,10 +2,9 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title>Tools</title>
+    <title>Trademarks</title>
     <!-- http://opengraphprotocol.org/ -->
     <meta property="og:title" content="Spring Trademark Guidelines" />
-    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
     <meta property="og:description" content="Spring Trademark Guidelines" />
     <style>
         ol ol {
@@ -25,8 +24,7 @@
     </style>
 </head>
 <body>
-<div layout:fragment="header-container"></div>
-<div layout:fragment="content" class="container-fluid">
+<div layout:fragment="~{content}" class="container-fluid">
     <article class="main-body--wrapper">
         <h1 class="content--title">Trademarks</h1>
             <div class="content--container">
@@ -45,9 +43,9 @@
                             </li>
                             <li>
                                 <strong>Logos:</strong>
-                                <img class="thumbnail" th:src="@{/img/favicon.png}"/>
-                                <img class="thumbnail" th:src="@{/img/spring-platform-watermark.png}"/>
-                                <img class="thumbnail" th:src="@{/img/spring-by-pivotal.png}"/>
+                                <img class="thumbnail" th:src="@{/images/favicon.ico}"/>
+                                <img class="thumbnail" th:src="@{/images/spring-logo.svg}"/>
+                                <img class="thumbnail" th:src="@{/images/projects/spring.svg}"/>
                             </li>
                         </ol>
 
