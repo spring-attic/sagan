@@ -7,17 +7,15 @@
     <title>Spring | Team</title>
     <meta property='og:title' content='Meet the Spring team'/>
     <meta property='og:description' content='Learn more about members of the Spring team.'/>
-    <script th:src="@{/js/team.js}"></script>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/team.css}" />
     <script th:inline="javascript">
         /*<![CDATA[*/
         var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
         /*]]>*/
     </script>
+    <script th:src="@{/js/team.js}"></script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVeQZLTLC5_RxhGtRXOV8xqQQQcP8b9Q&callback=initMap"></script>
-    <meta property="og:title" content="The Spring team"/>
-    <meta property="og:description" content="The Spring team works from around the world with one mission: building
-    quality, open-source software that helps you and your team be more productive on the JVM."/>
 </head>
 <body id="team">
 <div layout:fragment="~{content}">
@@ -42,7 +40,7 @@
                     <a th:href="@{'/team/' + ${profile.username}}" class="team-member--name" th:text="${profile.name}">Member
                         Name</a>
                     <div class="team-member--bio">
-                        <p class="team-member--position" th:text="${profile.jobTitle}">Rock Star</p>
+                        <p class="team-member--position" th:text="${profile.jobTitle}">Spring team member</p>
                         <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
                     </div>
                     <div class="team-member--social">

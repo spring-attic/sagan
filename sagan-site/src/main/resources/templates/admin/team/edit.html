@@ -10,7 +10,7 @@
     <ul>
         <li><a th:href="@{/admin}">Admin</a></li>
         <li><a th:href="@{/admin/team}">Team</a></li>
-        <li><a class="is-active" th:href="@{'/admin/team/' + ${profile.id}}" aria-current="page"
+        <li><a class="is-active" th:href="@{'/admin/team/' + ${profile.username}}" aria-current="page"
                th:text="${profile.username}">username</a></li>
     </ul>
 </nav>
