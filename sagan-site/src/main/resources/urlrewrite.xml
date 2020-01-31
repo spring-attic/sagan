@@ -50,7 +50,7 @@
         Provide a consistent URL abstraction for our videos while we work out the new
         name of our youtube channel.
         </note>
-        <from>/videos?</from>
+        <from>^/videos?</from>
         <to type="temporary-redirect" last="true">http://www.youtube.com/springsourcedev</to>
     </rule>
     <rule>
