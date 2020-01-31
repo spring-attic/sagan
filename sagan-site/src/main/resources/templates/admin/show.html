@@ -1,48 +1,25 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="admin/layout">
 <head>
     <title>Admin</title>
 </head>
 <body>
-  <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container">
-    <div class="main-body--wrapper">
-      <h1 class="admin-index--title">
-        <span>Welcome</span>
-        <span sec:authentication="credentials">Bob</span>
-      </h1>
-      <div class="row-fluid">
-        <div class="span6">
-          <a th:href="@{/admin/team}" class="admin-index--link">
-            <div class="icon--container">
-              <div class="icon about-icon team"></div>
+<div layout:fragment="~{content}">
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Welcome, <span sec:authentication="credentials">Emily</span>
+                </h1>
+                <h2 class="subtitle">
+                    to the spring.io admin website.
+                </h2>
             </div>
-            <p>Manage Team Members</p>
-          </a>
         </div>
-        <div class="span6">
-          <a th:href="@{/admin/blog}" class="admin-index--link">
-            <div class="icon--container">
-              <i class="icon-comments"></i>
-            </div>
-            <p>Manage Blog Posts</p>
-          </a>
-        </div>
-      </div>
-      <div class="row-fluid">
-          <div class="span6">
-              <a th:href="@{/admin/projects}" class="admin-index--link">
-                  <p>Manage Projects</p>
-              </a>
-          </div>
-          <div class="span6">
-              <a th:href="@{/admin/tools}" class="admin-index--link">
-                  <p>Manage Spring Tools</p>
-              </a>
-          </div>
-    </div>
-  </div>
+    </section>
+</div>
 </body>
 </html>

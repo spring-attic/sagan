@@ -1,121 +1,277 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="layout">
+      layout:decorator="admin/layout">
 <head>
-    <title th:inline="text">Edit &middot; [[${project.id}]]</title>
+    <title th:inline="text">Admin | Edit | [[${project.id}]]</title>
 </head>
 <body>
-<div layout:fragment="header-container"></div>
-<div layout:fragment="content" class="container">
-    <div class="main-body--wrapper">
-        <div class="admin-index--title">
-            <div class="content--title search-title" th:inline="text">
-                <a th:href="@{/admin}">Admin</a> : <a th:href="@{/admin/projects}">Projects</a> : Edit [[${project.id}]]
+<nav layout:fragment="~{breadcrumb}">
+    <ul>
+        <li><a th:href="@{/admin}">Admin</a></li>
+        <li><a th:href="@{/admin/projects}">Projects</a></li>
+        <li><a class="is-active" th:href="@{'/admin/projects/' + ${project.id}}" aria-current="page">Edit</a></li>
+    </ul>
+</nav>
+<div layout:fragment="~{content}">
+    <form th:action="@{'/admin/projects/' + ${project.id}}" method="post" th:object="${project}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <h2 class="title">Project metadata</h2>
+        <div class="columns">
+            <div class="column is-one-thid">
+                <div class="field">
+                    <label class="label">Id</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('id')}? ' is-danger')"
+                               type="text" th:field="*{id}" name="id" placeholder="Project id">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Incorrect id</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('name')}? ' is-danger')"
+                               type="text" th:field="*{name}" name="name" placeholder="Name">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect
+                            name</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-one-thid">
+                <div class="field">
+                    <label class="label">GroupId</label>
+                    <div class="control">
+                        <input class="input" type="text" th:value="${groupId}" name="groupId"
+                               placeholder="Artifact groupId">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Repository URL</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('repoUrl')}? ' is-danger')"
+                               type="text" th:field="*{repoUrl}" name="repoUrl"
+                               placeholder="https://github.com/spring-projects/your-project">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('repoUrl')}" th:errors="*{repoUrl}">
+                            Incorrect Repository URL</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-one-thid">
+                <div class="field">
+                    <label class="label">Parent project</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('parentId')}? ' is-danger')"
+                               type="text" th:field="*{parentId}" name="parentId" placeholder="Parent project id">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('parentId')}" th:errors="*{parentId}">
+                            Incorrect parentId</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Category</label>
+                    <div class="control">
+                        <div class="select" th:classappend="(${#fields.hasErrors('category')}? ' is-danger')">
+                            <select name="category" th:field="*{category}">
+                                <option th:each="cat : ${categories}" th:value="${cat}" th:text="${cat}">
+                                    Category
+                                </option>
+                            </select>
+                            <p class="help is-danger" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">
+                                Incorrect category</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <form th:action="@{'/admin/projects/' + ${project.id}}" method="post" th:object="${project}">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-            <label for="groupId">Group ID</label>
-            <input type="text" name="groupId" id="groupId" th:value="${groupId}" value="org.springframework"/>
-            <label for="id">ID</label>
-            <input type="text" th:field="*{id}"/>
-
-            <label for="parentId">Parent Project Id (e.g.: 'spring-data')</label>
-            <input type="text" name="parentId" id="parentId" th:value="${project.getParentId()}"/>
-
-            <label for="groupId">Category</label>
-            <select th:field="*{category}">
-                <option th:each="c : ${categories}"
-                        th:value="${c}"
-                        th:text="${c}">incubator
-                </option>
-            </select>
-            <label for="name">Name</label>
-            <input type="text" th:field="*{name}"/>
-            <label for="repoUrl">Repository URL</label>
-            <input type="text" th:field="*{repoUrl}"/>
-            <label for="siteUrl">Site URL</label>
-            <input type="text" th:field="*{siteUrl}"/>
-            <label for="stackOverflowTags">StackOverflow Tags (comma-separated list)</label>
-            <input type="text" th:field="*{stackOverflowTags}"/>
-            <label for="displayOrder">Display order</label>
-            <input type="text" th:field="*{displayOrder}"/>
-            <label for="rawBootConfig">Boot configuration content (Asciidoctor format)</label>
-            <textarea id="rawBootConfig" th:field="*{rawBootConfig}" name="rawBootConfig" class="span12" rows="5"></textarea>
-            <label for="rawOverview">Overview content (Asciidoctor format)</label>
-            <textarea id="rawOverview" th:field="*{rawOverview}" name="rawOverview" class="span12" rows="5"></textarea>
-            <fieldset>
-                <legend>Releases</legend>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <td>Delete?</td>
-                        <td>Artifact ID</td>
-                        <td>Version</td>
-                        <td>Current</td>
-                        <td>Reference URL</td>
-                        <td>API URL</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="release,releaseStat : ${project.projectReleases}">
-                        <td><input type="checkbox" name="releasesToDelete"
-                                   th:value="*{projectReleases[__${releaseStat.index}__].version}"></td>
-                        <td><input type="text" th:field="*{projectReleases[__${releaseStat.index}__].artifactId}"/></td>
-                        <td><input type="text" th:field="*{projectReleases[__${releaseStat.index}__].version}"/></td>
-                        <td><input type="checkbox" th:field="*{projectReleases[__${releaseStat.index}__].current}"
-                                   value="true"/></td>
-                        <td><input type="text" th:field="*{projectReleases[__${releaseStat.index}__].refDocUrl}"/></td>
-                        <td><input type="text" th:field="*{projectReleases[__${releaseStat.index}__].apiDocUrl}"/></td>
-                    </tr>
-                    <tr th:with="size=${project.projectReleases.size()}">
-                        <td></td>
-                        <td><input type="text" th:field="*{projectReleases[__${size}__].artifactId}"/></td>
-                        <td><input type="text" th:field="*{projectReleases[__${size}__].version}"/></td>
-                        <td><input type="checkbox" th:field="*{projectReleases[__${size}__].current}" value="true"/>
-                        </td>
-                        <td><input type="text" th:field="*{projectReleases[__${size}__].refDocUrl}"/></td>
-                        <td><input type="text" th:field="*{projectReleases[__${size}__].apiDocUrl}"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </fieldset>
-            <fieldset>
-                <legend>Samples</legend>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <td>Delete?</td>
-                        <td>Display order</td>
-                        <td>Title</td>
-                        <td>Description</td>
-                        <td>URL</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="sample,sampleStat : ${project.projectSamples}">
-                        <td><input type="checkbox" name="samplesToDelete"
-                                   th:value="*{projectSamples[__${sampleStat.index}__].displayOrder}"></td>
-                        <td><input type="text" th:field="*{projectSamples[__${sampleStat.index}__].displayOrder}"/></td>
-                        <td><input type="text" th:field="*{projectSamples[__${sampleStat.index}__].title}"/></td>
-                        <td><textarea th:field="*{projectSamples[__${sampleStat.index}__].description}"></textarea></td>
-                        <td><input type="text" th:field="*{projectSamples[__${sampleStat.index}__].url}"/></td>
-                    </tr>
-                    <tr th:with="size=${project.projectSamples.size()}">
-                        <td></td>
-                        <!--/* Changing display order default value to something else than maxint will break everything. */-->
-                        <td><input type="text" th:name="'projectSamples[' + ${size} + '].displayOrder'"
-                                   th:value="${projectSampleDisplayOrder}"/></td>
-                        <td><input type="text" th:field="*{projectSamples[__${size}__].title}"/></td>
-                        <td><textarea th:field="*{projectSamples[__${size}__].description}"></textarea></td>
-                        <td><input type="text" th:field="*{projectSamples[__${size}__].url}"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </fieldset>
-            <input type="submit" value="Save"/>
-        </form>
-    </div>
+        <h2 class="title">Releases</h2>
+        <div class="field">
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                <tr>
+                    <td>Delete?</td>
+                    <td>ArtifactId</td>
+                    <td>Version</td>
+                    <td>Current</td>
+                    <td>Reference URL</td>
+                    <td>API URL</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="release,releaseStat : ${project.projectReleases}">
+                    <td>
+                        <input type="checkbox" name="releasesToDelete" class="checkbox"
+                               th:value="*{projectReleases[__${releaseStat.index}__].version}"></td>
+                    <td><input class="input" type="text"
+                               th:field="*{projectReleases[__${releaseStat.index}__].artifactId}"/></td>
+                    <td><input class="input" type="text"
+                               th:field="*{projectReleases[__${releaseStat.index}__].version}"/></td>
+                    <td><input class="checkbox" type="checkbox"
+                               th:field="*{projectReleases[__${releaseStat.index}__].current}"
+                               value="true"/></td>
+                    <td><input class="input" type="text"
+                               th:field="*{projectReleases[__${releaseStat.index}__].refDocUrl}"/></td>
+                    <td><input class="input" type="text"
+                               th:field="*{projectReleases[__${releaseStat.index}__].apiDocUrl}"/></td>
+                </tr>
+                <tr th:with="size=${project.projectReleases.size()}">
+                    <td></td>
+                    <td><input class="input" type="text" th:field="*{projectReleases[__${size}__].artifactId}"/></td>
+                    <td><input class="input" type="text" th:field="*{projectReleases[__${size}__].version}"/></td>
+                    <td><input class="checkbox" type="checkbox" th:field="*{projectReleases[__${size}__].current}"
+                               value="true"/>
+                    </td>
+                    <td><input class="input" type="text" th:field="*{projectReleases[__${size}__].refDocUrl}"/></td>
+                    <td><input class="input" type="text" th:field="*{projectReleases[__${size}__].apiDocUrl}"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="buttons control is-centered">
+            <button type="submit" class="button is-primary">Save</button>
+            <a class="button" th:href="@{/admin/projects}">Cancel</a>
+        </div>
+        <h2 class="title">Site information</h2>
+        <div class="columns">
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label">Site URL</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('siteUrl')}? ' is-danger')"
+                               type="text" th:field="*{siteUrl}" name="siteUrl" placeholder="/projects/spring-boot">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('siteUrl')}" th:errors="*{siteUrl}">
+                            Incorrect site URL</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Groups</label>
+                    <div class="control">
+                        <div class="select is-multiple" th:classappend="(${#fields.hasErrors('groups')}? ' is-danger')">
+                            <select multiple size="5" name="groups" th:field="*{groups}">
+                                <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.label}">
+                                    Group
+                                </option>
+                            </select>
+                            <p class="help is-danger" th:if="${#fields.hasErrors('groups')}" th:errors="*{groups}">
+                                Incorrect groups</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label">StackOverflow tags</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('stackOverflowTags')}? ' is-danger')"
+                               type="text" th:field="*{stackOverflowTags}" name="stackOverflowTags"
+                               placeholder="spring-boot,spring-data">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('stackOverflowTags')}"
+                           th:errors="*{stackOverflowTags}">Incorrect SO tags</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Display Order</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('displayOrder')}? ' is-danger')"
+                               type="text" th:field="*{displayOrder}" name="displayOrder" placeholder="255">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('displayOrder')}"
+                           th:errors="*{displayOrder}">Incorrect display order</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Path to project icon</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('imagePath')}? ' is-danger')"
+                               type="text" th:field="*{imagePath}" name="imagePath"
+                               placeholder="/images/projects/spring.svg">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('imagePath')}"
+                           th:errors="*{imagePath}">Incorrect path to project icon</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="checkbox">
+                        <input class="checkbox" type="checkbox" th:field="*{featured}" name="featured"> Featured on the projects page
+                    </label>
+                    <div class="control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Spring Boot configuration</label>
+            <div class="control">
+                        <textarea class="textarea"
+                                  th:classappend="(${#fields.hasErrors('rawBootConfig')}? ' is-danger')"
+                                  placeholder="Tell developers which Spring Boot starter they can use, where to get started in Spring Boot with this project."
+                                  th:field="*{rawBootConfig}" name="rawBootConfig" rows="10"></textarea>
+                <p class="help is-danger" th:if="${#fields.hasErrors('rawBootConfig')}" th:errors="*{rawBootConfig}">
+                    Incorrect
+                    Spring Boot configuration</p>
+            </div>
+            <p>Please use the Asciidoc format.</p>
+        </div>
+        <div class="field">
+            <label class="label">Project Overview</label>
+            <div class="control">
+                        <textarea class="textarea" th:classappend="(${#fields.hasErrors('rawOverview')}? ' is-danger')"
+                                  placeholder="Documentation displayed in the overview tab on the project page."
+                                  th:field="*{rawOverview}" name="rawOverview" rows="20"></textarea>
+                <p class="help is-danger" th:if="${#fields.hasErrors('rawOverview')}" th:errors="*{rawOverview}">
+                    Incorrect
+                    project overview</p>
+            </div>
+            <p>Please use the Asciidoc format.</p>
+        </div>
+        <div class="buttons control is-centered">
+            <button type="submit" class="button is-primary">Save</button>
+            <a class="button" th:href="@{/admin/projects}">Cancel</a>
+        </div>
+        <h2 class="title">Project Samples</h2>
+        <div class="field">
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                <tr>
+                    <td>Delete?</td>
+                    <td>Display order</td>
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td>URL</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="sample,sampleStat : ${project.projectSamples}">
+                    <td><input class="checkbox" type="checkbox" name="samplesToDelete"
+                               th:value="*{projectSamples[__${sampleStat.index}__].displayOrder}"></td>
+                    <td><input class="input" type="text"
+                               th:field="*{projectSamples[__${sampleStat.index}__].displayOrder}"/></td>
+                    <td><input class="input" type="text" th:field="*{projectSamples[__${sampleStat.index}__].title}"/>
+                    </td>
+                    <td><textarea class="textarea"
+                                  th:field="*{projectSamples[__${sampleStat.index}__].description}"></textarea></td>
+                    <td><input class="input" type="text" th:field="*{projectSamples[__${sampleStat.index}__].url}"/>
+                    </td>
+                </tr>
+                <tr th:with="size=${project.projectSamples.size()}">
+                    <td></td>
+                    <!--/* Changing display order default value to something else than maxint will break everything. */-->
+                    <td><input class="input" type="text" th:name="'projectSamples[' + ${size} + '].displayOrder'"
+                               th:value="${projectSampleDisplayOrder}"/></td>
+                    <td><input class="input" type="text" th:field="*{projectSamples[__${size}__].title}"/></td>
+                    <td><textarea class="textarea" th:field="*{projectSamples[__${size}__].description}"></textarea>
+                    </td>
+                    <td><input class="input" type="text" th:field="*{projectSamples[__${size}__].url}"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="buttons control is-centered">
+            <button type="submit" class="button is-primary">Save</button>
+            <a class="button" th:href="@{/admin/projects}">Cancel</a>
+        </div>
+    </form>
+    <h2 class="title">Admin</h2>
+    <form th:action="@{'/admin/projects/' + ${project.id}}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <input type="hidden" name="_method" value="delete"/>
+        <input type="submit" class="button is-danger" value="Delete Project"/>
+    </form>
 </div>
 </body>
 </html>

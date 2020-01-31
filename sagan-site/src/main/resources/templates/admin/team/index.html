@@ -1,33 +1,77 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+      layout:decorator="admin/layout">
 <head>
-    <title>Admin &middot; Team</title>
+    <title>Admin | Team</title>
 </head>
 <body>
-    <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container">
+<nav layout:fragment="~{breadcrumb}">
+    <ul>
+        <li><a th:href="@{/admin}">Admin</a></li>
+        <li><a class="is-active" th:href="@{admin/team}" aria-current="page">Team</a></li>
+    </ul>
+</nav>
+<div layout:fragment="~{content}">
+    <h2 class="title">Active Members</h2>
+    <table class="table is-striped is-fullwidth">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${activeMembers}" layout:fragment="member-row">
+            <td><a th:text="${member.username}"
+                   th:href="@{'/admin/team/'+${member.username}}">username</a></td>
+            <td th:text="${member.name}?:''">Name</td>
+        </tr>
+        </tbody>
+    </table>
+    <h2 class="title">Hidden Members</h2>
+    <table class="table is-striped is-fullwidth">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${hiddenMembers}">
+            <td><a th:text="${member.username}"
+                   th:href="@{'/admin/team/'+${member.username}}">username</a></td>
+            <td th:text="${member.name}?:''">Name</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+
+<div layout:fragment="header-container"></div>
+<div layout:fragment="content" class="container">
     <div class="main-body--wrapper">
 
-    <div class="admin-index--title">
-      <div class="content--title search-title">
-        <a th:href="@{/admin}">Admin</a> : Team
-      </div>
-    </div>
-    <form th:action="@{'/admin/team/github_import'}" method="post" class='form-inline admin-index--title'>
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <button class="btn">Import Team Members From Github</button>
-    </form>
-    <div class="row">
-        <div id="content" class="span12">
-            <h2>Active Members</h2>
-            <table class='table dashboard--members'>
-                <tr th:each="member : ${activeMembers}" layout:fragment="post-row">
-                    <td>
-                        <p>
-                            <a th:text="(${member.name}?:'') + ' (' + ${member.username}+ ')'"
-                               th:href="@{'/admin/team/'+${member.username}}">Full Name (username)</a>
-                        </p>
+        <div class="admin-index--title">
+            <div class="content--title search-title">
+                <a th:href="@{/admin}">Admin</a> : Team
+            </div>
+        </div>
+        <form th:action="@{'/admin/team/github_import'}" method="post" class='form-inline admin-index--title'>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button class="btn">Import Team Members From Github</button>
+        </form>
+        <div class="row">
+            <div id="content" class="span12">
+                <h2>Active Members</h2>
+                <table class='table dashboard--members'>
+                    <tr th:each="member : ${activeMembers}" layout:fragment="post-row">
+                        <td>
+                            <p>
+                                <a th:text="(${member.name}?:'') + ' (' + ${member.username}+ ')'"
+                                   th:href="@{'/admin/team/'+${member.username}}">Full Name (username)</a>
+                            </p>
                         </td>
                     </tr>
                 </table>

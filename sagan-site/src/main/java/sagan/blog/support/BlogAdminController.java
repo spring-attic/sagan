@@ -2,6 +2,7 @@ package sagan.blog.support;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import sagan.blog.Post;
@@ -93,7 +94,7 @@ class BlogAdminController {
     @RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { GET, HEAD })
     public String showPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
         model.addAttribute("post", PostView.of(service.getPost(postId), dateFactory));
-        return "admin/blog/show";
+        return "blog/show";
     }
 
     @RequestMapping(value = "", method = { POST })

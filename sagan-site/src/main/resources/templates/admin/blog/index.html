@@ -1,74 +1,110 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+      layout:decorator="admin/layout">
 <head>
-    <title>Admin &middot; Blog</title>
+    <title>Admin | Blog</title>
 </head>
 <body>
-  <div layout:fragment="header-container"></div>
-  <div layout:fragment="content" class="container">
-    <div class="main-body--wrapper">
-      <div class="admin-index--title">
-        <div class="content--title search-title">
-          <a th:href="@{/admin}">Admin</a> : Blog
+<nav layout:fragment="~{breadcrumb}">
+    <ul>
+        <li><a th:href="@{/admin}">Admin</a></li>
+        <li><a class="is-active" th:href="@{/admin/blog}" aria-current="page">Blog</a></li>
+    </ul>
+</nav>
+<div layout:fragment="~{content}">
+
+    <nav class="level">
+        <!--
+        <div class="level-left">
+            <div class="level-item">
+                <p class="subtitle is-5">
+                    <strong>123</strong> posts
+                </p>
+            </div>
+            <div class="level-item">
+                <div class="field has-addons">
+                    <p class="control">
+                        <input class="input" type="text" placeholder="Find a post">
+                    </p>
+                    <p class="control">
+                        <button class="button">
+                            Search
+                        </button>
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
+        -->
+        <div class="level-right">
+            <!--
+            <p class="level-item"><strong>All</strong></p>
+            <p class="level-item"><a th:href="@{/admin/blog?state=published}">Published</a></p>
+            <p class="level-item"><a th:href="@{/admin/blog?state=scheduled}">Scheduled</a></p>
+            <p class="level-item"><a th:href="@{/admin/blog?state=draft}">Drafts</a></p>
+            -->
+            <p class="level-item"><a class="button is-success" th:href="@{'/admin/blog/new'}">New</a></p>
+        </div>
+    </nav>
 
-      <div class="admin-index--title">
-        <a th:href="@{'/admin/blog/new'}" href="/admin/blog/new" class="btn">Create New Post</a>
-          <form th:action="@{'/admin/blog/resummarize'}" action="/admin/blog/resummarize" method="post" class='form-inline' style="display: inline">
-              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-              <button class="btn">Resummarize all posts</button>
-          </form>
-      </div>
-
-      <div class="row">
-          <div id="content" class="span12">
-              <div th:if="${drafts.totalElements}">
-                  <h2>Drafts</h2>
-                  <table class='table dashboard--posts'>
-                      <tr th:each="post : ${drafts}" layout:fragment="post-row">
-                          <td class="date" th:text="${post.formattedPublishDate}">June 18, 2013</td>
-                          <td class="author">
-                              <a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.username}}">Author</a>
-                          </td>
-                          <td th:text="${post.title}">This week in Spring</td>
-                          <td>
-                              <nav layout:replace="admin/blog/_dashboard_actions :: dashboard-actions" />
-                          </td>
-                      </tr>
-                  </table>
-              </div>
-              <div th:if="${scheduled.totalElements}">
-                  <h2>Scheduled</h2>
-                  <table class='table dashboard--posts'>
-                      <tr th:each="post : ${scheduled}" layout:include="admin/blog/index::post-row">
-                      </tr>
-                  </table>
-              </div>
-              <div th:if="${posts.totalElements}">
-                  <h2>Published</h2>
-                  <table class='table dashboard--posts'>
-                      <tr th:each="post : ${posts}" layout:include="admin/blog/index::post-row">
-                          </tr>
-                  </table>
-              </div>
-
-              <div id='pagination_control' th:if="${paginationInfo.isVisible()}" class="pagination blog-pagination">
-                  <a th:href="@{${@uih.path()}(page=${paginationInfo.previousPageNumber})}" class='previous' th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
-                  <div th:each="element : ${paginationInfo.pageElements }" >
-                      <a th:href="@{${@uih.path()}(page=${element.label})}" th:text="${element.label}" th:if="${element.navigable}" ></a>
-                      <div th:text="${element.label}" th:if="${!element.navigable && element.currentPage}" class="active" ></div>
-                      <div th:text="${element.label}" th:unless="${element.navigable || element.currentPage}" ></div>
-                  </div>
-                  <a th:href="@{${@uih.path()}(page=${paginationInfo.nextPageNumber})}" class='next' th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
-              </div>
-          </div>
-
-          <div id="sidebar" class="span4">
-          </div>
-      </div>
+    <div th:if="${drafts.totalElements}">
+        <h2 class="title">Drafts</h2>
+        <table class="table is-striped is-fullwidth">
+            <thead layout:fragment="post-head">
+            <tr>
+                <td>Title</td>
+                <td>Author</td>
+                <td>Category</td>
+                <td>Publication date</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post : ${drafts}" layout:fragment="post-row">
+                <td><a th:href="@{${post.editPath}}" th:text="${post.title}">This week in Spring</a></td>
+                <td class="author">
+                    <a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.username}}">Emily
+                        Spring</a>
+                </td>
+                <td th:text="${post.category}">News</td>
+                <td th:text="${post.formattedPublishDate}">January 01, 2020</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+    <div th:if="${scheduled.totalElements}">
+        <h2 class="title">Scheduled</h2>
+        <table class="table is-striped is-fullwidth">
+            <thead layout:include="admin/blog/index::post-head"></thead>
+            <tbody>
+            <tr th:each="post : ${scheduled}" layout:include="admin/blog/index::post-row">
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${posts.totalElements}">
+        <h2 class="title">Published</h2>
+        <table class="table is-striped is-fullwidth">
+            <thead layout:include="admin/blog/index::post-head"></thead>
+            <tbody>
+            <tr th:each="post : ${posts}" layout:include="admin/blog/index::post-row"></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <nav class="pagination" role="navigation" th:if="${paginationInfo.isVisible()}" aria-label="pagination">
+        <a class="pagination-previous" th:if="${paginationInfo.previousVisible}"
+           th:href="@{${@uih.path()}(page=${paginationInfo.previousPageNumber})}">Previous</a>
+        <a class="pagination-next" th:if="${paginationInfo.nextVisible}"
+           th:href="@{${@uih.path()}(page=${paginationInfo.nextPageNumber})}">Next page</a>
+        <ul class="pagination-list">
+            <li th:each="element : ${paginationInfo.pageElements }">
+                <a class="pagination-link" th:classappend="${element.currentPage} ? ' is-current'"
+                   th:href="@{${@uih.path()}(page=${element.label})}" th:text="${element.label}">1</a>
+                <span class="pagination-ellipsis" th:unless="${element.navigable || element.currentPage}">&hellip;</span>
+            </li>
+        </ul>
+    </nav>
+
 </div>
 </body>
 </html>

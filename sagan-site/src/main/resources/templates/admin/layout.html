@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spring.io Admin</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/admin.css}"/>
+</head>
+<body>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" th:href="@{/}">
+            <img th:src="@{/images/spring-logo.svg}" width="200">
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+           data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" th:href="@{/admin/blog}">Blog</a>
+            <a class="navbar-item" th:href="@{/admin/projects}">Projects</a>
+            <a class="navbar-item" th:href="@{/admin/team}">Team</a>
+            <a class="navbar-item" th:href="@{/admin/tools}">Spring Tools</a>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <a th:href="@{/admin/profile}" sec:authentication="credentials">Emily</a>
+            </div>
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-light" th:href="@{/signout}">Log out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<main class="container">
+    <nav id="breadcrumbs" class="breadcrumb is-medium" aria-label="breadcrumbs" layout:fragment="~{breadcrumb}"></nav>
+    <div id="admin" layout:fragment="~{content}"></div>
+</main>
+<script th:src="@{/js/admin.js}"></script>
+</body>
+</html>
