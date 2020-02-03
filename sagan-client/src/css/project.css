@@ -35,6 +35,10 @@
 .compass .sidebar li.sidebar_head {
     display: none;
 }
+
+.compass .nav-tabs li, .compass .child-active .sidebar_child {
+    list-style: none;
+}
 .compass .sidebar li {
     font-size: 15px;
     font-weight: 700;
