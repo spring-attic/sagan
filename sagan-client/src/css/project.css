@@ -36,9 +36,11 @@
     display: none;
 }
 
-.compass .nav-tabs li, .compass .child-active .sidebar_child {
+.compass .nav-tabs li, .compass .child-active .sidebar_child,
+.compass .sidebar li {
     list-style: none;
 }
+
 .compass .sidebar li {
     font-size: 15px;
     font-weight: 700;
