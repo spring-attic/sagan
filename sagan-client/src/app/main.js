@@ -7,9 +7,6 @@ import '../css/main.css'
 
 $(document).ready(function() {
 
-    // Open external links in new tab
-    $("a[href^='http']").attr('target', '_blank');
-
     $(".lightbox, .topics-resources a[href*=youtu], #quote a[href*=youtu], .half a[href*=youtu]").click(function() {
         var href = $(this).attr('href');
         $(this).attr('href', href + '?autoplay=1&autohide=1&showinfo=0&controls=1');
