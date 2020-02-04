@@ -154,3 +154,25 @@ h2.member-post--title {
     margin-top: -140px;
     position: relative;
 }
+
+.team-member--social--icon.github-lg {
+    position: relative;
+    background: white;
+}
+.team-member--social--icon.github-lg .fab {
+    font-size: 42px;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    color: black;
+    transition: all .2s;
+}
+.team-member--social--icon.github-lg:hover .fab {
+    color: #6db33f;
+}
+.team-member--social--icon.twitter-lg .fab {
+    position: absolute;
+    top: 6px;
+    left: 7px;
+    font-size: 27px;
+}

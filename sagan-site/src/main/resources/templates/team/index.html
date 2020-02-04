@@ -45,13 +45,22 @@
                     </div>
                     <div class="team-member--social">
                         <a class="team-member--social--icon twitter-small" rel="me"
-                           th:href="${profile.twitterLink.href}" th:if="${profile.hasTwitterUsername()}"></a>
+                           th:href="${profile.twitterLink.href}" th:if="${profile.hasTwitterUsername()}">
+                            <i class="fab fa-twitter"></i>
+                        </a>
                         <a class="team-member--social--icon github-small" rel="me" th:href="${profile.githubLink.href}"
-                           th:if="${profile.hasGithubUsername()}"></a>
+                           th:if="${profile.hasGithubUsername()}">
+                            <i class="fab fa-github"></i>
+                        </a>
                         <a class="team-member--social--icon speakerdeck-small" rel="me"
-                           th:href="${profile.speakerdeckLink.href}" th:if="${profile.hasSpeakerdeckUsername()}"></a>
+                           th:href="${profile.speakerdeckLink.href}" th:if="${profile.hasSpeakerdeckUsername()}">
+                            <i class="fab fa-speaker-deck"></i>
+                        </a>
+                        <!--
+                        TODO: no icon
                         <a class="team-member--social--icon lanyrd-small" rel="me" th:href="${profile.lanyrdLink.href}"
-                           th:if="${profile.hasLanyrdUsername()}"></a>
+                           th:if="${profile.hasLanyrdUsername()}">
+                        </a>-->
                     </div>
                 </div>
             </section>
