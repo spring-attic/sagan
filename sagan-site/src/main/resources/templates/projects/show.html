@@ -64,21 +64,13 @@
                                 </a>
 
                                 <a th:href="${projectStackOverflow}" target="_blank" class="link--stackoverflow">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 120 120"
-                                         style="enable-background:new 0 0 120 120;" xml:space="preserve"
-                                         class="svg replaced-svg">
-                                <style type="text/css">
-                                    .st0 {
-                                        fill-rule: evenodd;
-                                        clip-rule: evenodd;
-                                    }
-                                </style>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.2 30.2">
+                                        <circle cx="15.1" cy="15.1" r="15.1"/>
                                         <g>
-                                    <path class="st0"
-                                          d="M60,120C26.9,120,0,93.1,0,60S26.9,0,60,0s60,26.9,60,60S93.1,120,60,120z M34.1,66.6h-6.8v27h61v-27h-6.8   v20.3H34.1V66.6z M40.9,80.1h33.9v-6.7H40.9V80.1z M41.6,64.7l33.2,6.9l1.4-6.7L43,58.1L41.6,64.7z M46,49l30.7,14.3l2.8-6.1   L48.8,42.7L46,49z M58.8,28.7l-4.3,5.2l26.1,21.6l4.3-5.2L58.8,28.7z M71.4,17.9l-5.4,4l20.2,27.1l5.4-4L71.4,17.9z"></path>
-                                </g>
-                                </svg>
+                                            <path d="M20.27,22.39V17.64h1.58V24H7.62V17.64H9.19v4.75Z" style="fill: #fff"/>
+                                            <path d="M10.93,17.19l7.74,1.62L19,17.25l-7.74-1.62Zm1-3.69,7.16,3.34.66-1.43-7.17-3.36Zm2-3.52L20,15l1-1.21L15,8.77Zm3.94-3.75-1.27.95,4.71,6.34,1.26-.94ZM10.77,20.79h7.9V19.22h-7.9Z" style="fill: #fff"/>
+                                        </g>
+                                    </svg>
                                 </a>
                             </div>
                             <ul id="nav-project" class="nav nav-tabs">
@@ -145,24 +137,24 @@
                                             <td>
                                         <span class="release-display-name" th:text="${release.getVersionDisplayName()}">
                                         </span>
-                                                <span class="label pre"
+                                                <span class="version label pre"
                                                       th:if="${release.isPreRelease()}">PRE</span>
-                                                <span class="label snapshot"
+                                                <span class="version label snapshot"
                                                       th:if="${release.isSnapshot()}">SNAPSHOT</span>
-                                                <span class="label current"
+                                                <span class="version label current"
                                                       th:if="${release.isCurrent()}">CURRENT</span>
-                                                <span class="label ga"
+                                                <span class="version label ga"
                                                       th:if="${release.isGeneralAvailability()}">GA</span>
                                             </td>
                                             <td>
                                                 <a th:href="${release.getRefDocUrl()}">
-                                                    <i class="icon-file-text"></i>
+                                                    <i class="fas fa-file-alt"></i>
                                                     Reference Doc.
                                                 </a>
                                             </td>
                                             <td>
                                                 <a th:href="${release.getApiDocUrl()}">
-                                                    <i class="icon-file-text"></i>
+                                                    <i class="fas fa-file-alt"></i>
                                                     API Doc.
                                                 </a>
                                             </td>
@@ -172,24 +164,24 @@
                                             <td>
                                         <span class="release-display-name" th:text="${release.getVersionDisplayName()}">
                                         </span>
-                                                <span class="label pre"
+                                                <span class="version label pre"
                                                       th:if="${release.isPreRelease()}">PRE</span>
-                                                <span class="label snapshot"
+                                                <span class="version label snapshot"
                                                       th:if="${release.isSnapshot()}">SNAPSHOT</span>
-                                                <span class="label current"
+                                                <span class="version label current"
                                                       th:if="${release.isCurrent()}">CURRENT</span>
-                                                <span class="label ga"
+                                                <span class="version label ga"
                                                       th:if="${release.isGeneralAvailability()}">GA</span>
                                             </td>
                                             <td>
                                                 <a th:href="${release.getRefDocUrl()}">
-                                                    <i class="icon-file-text"></i>
+                                                    <i class="fas fa-file-alt"></i>
                                                     Reference Doc.
                                                 </a>
                                             </td>
                                             <td>
                                                 <a th:href="${release.getApiDocUrl()}">
-                                                    <i class="icon-file-text"></i>
+                                                    <i class="fas fa-file-alt"></i>
                                                     API Doc.
                                                 </a>
                                             </td>
@@ -211,10 +203,10 @@
                                         task with <strong>Spring</strong>.
                                     </div>
 
-                                    <ul>
+                                    <ul class="project--list-links">
                                         <li th:each="guide : ${guides}">
                                             <a th:href="'/guides/gs/' + ${guide.name}">
-                                                <i class="icon-file-text"></i>
+                                                <i class="fas fa-file-alt"></i>
                                                 <strong class="project--sample--title"
                                                         th:text="${guide.getTitle()}"></strong>
                                                 <span class="project--sample--description"
@@ -232,10 +224,10 @@
                                         wide-ranging or subjective content than a getting started guide.
                                     </div>
 
-                                    <ul>
+                                    <ul class="project--list-links">
                                         <li th:each="guide : ${topicals}">
                                             <a th:href="'/guides/topicals/' + ${guide.name}">
-                                                <i class="icon-file-text"></i>
+                                                <i class="fas fa-file-alt"></i>
                                                 <strong class="project--sample--title"
                                                         th:text="${guide.getTitle()}"></strong>
                                                 <span class="project--sample--description"
@@ -254,10 +246,10 @@
                                         implement real-world solutions.
                                     </div>
 
-                                    <ul>
+                                    <ul class="project--list-links">
                                         <li th:each="guide : ${tutorials}">
                                             <a th:href="'/guides/tutorials/' + ${guide.name}">
-                                                <i class="icon-file-text"></i>
+                                                <i class="fas fa-file-alt"></i>
                                                 <strong class="project--sample--title"
                                                         th:text="${guide.getTitle()}"></strong>
                                                 <span class="project--sample--description"
@@ -270,10 +262,10 @@
                             <div id="samples" th:if="${hasSamples}" class="tab-pane">
                                 <div class="project--samples compass-section">
                                     <h2>A few examples to try out:</h2>
-                                    <ul>
+                                    <ul class="project--list-links">
                                         <li th:each="sample : ${selectedProject.projectSamples}">
                                             <a th:href="${sample.getUrl()}" target="_blank">
-                                                <i class="icon-file-text"></i>
+                                                <i class="fas fa-file-alt"></i>
                                                 <strong class="project--sample--title"
                                                         th:text="${sample.getTitle()}"></strong>
                                                 <span class="project--sample--description"
