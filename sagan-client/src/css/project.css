@@ -62,19 +62,26 @@
 .compass .sidebar li:first-child {
     border-top: 0px;
 }
-.compass .sidebar ul.sidebar_children li.active a {
+.compass .sidebar ul.sidebar_children li.active a,
+.compass .sidebar_project.active > div > a {
     background: #191E1E;
     border-radius: 5px;
     margin-left: -12px;
     padding-left: 12px;
-}
-.compass .sidebar ul.sidebar_children li.active a {
+    color: white;
     font-weight: normal;
+}
+
+.compass .sidebar_project.active > div > i {
     color: white;
 }
+
 .compass .sidebar ul.sidebar_children li.active a:hover {
     font-weight: normal;
     background: #191E1E;
+}
+.compass .sidebar ul.sidebar_children li {
+    margin: 0;
 }
 .compass .sidebar a {
     display: block;
