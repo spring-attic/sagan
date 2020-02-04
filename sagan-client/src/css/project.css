@@ -254,3 +254,93 @@
 .icon-chevron-right:before {
     content: "\f054";
 }
+
+.compass .table--documentation {
+    width: 100%;
+    margin-top: 18px;
+    border-spacing: 0;
+}
+
+.compass .table--documentation td {
+    border-top: 1px solid black;
+    padding: 6px 4px;
+}
+
+.compass .table--documentation tr:first-child td {
+    border-top: 0 none;
+}
+
+.compass .table--documentation a {
+    color: #086dc3;
+}
+
+.compass .table--documentation a:hover {
+    text-decoration: underline;
+}
+
+.compass .table--documentation .label {
+    display: inline-block;
+    background: #80ea6e;
+    border-radius: 6px;
+    padding: 1px 8px;
+    margin-left: 2px;
+    font-weight: 700;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 12px;
+}
+
+.compass .table--documentation .label.ga {
+    background: #c51515;
+    color: white;
+}
+
+.compass .table--documentation .label.snapshot {
+    background: #007ed6;
+    color: white;
+}
+
+.compass .table--documentation .label.pre {
+    background: #34302d;
+    color: white;
+}
+
+.compass .project--guides--title {
+    border-top: 1px solid black;
+    padding-top: 30px;
+}
+
+.compass .project--list-links {
+    padding: 12px 0;
+    margin: 0;
+}
+
+.compass .project--list-links li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.compass .project--list-links li a {
+    display: block;
+    position: relative;
+    padding: 5px 0 5px 30px;
+}
+
+.compass .project--list-links li strong, .compass .project--list-links li span {
+    display: block;
+}
+
+.compass .project--list-links li a strong {
+    color: #086dc3;
+}
+
+.compass .project--list-links li a:hover strong {
+    text-decoration: underline;
+}
+
+.compass .project--list-links li .fas {
+    position: absolute;
+    top: 14px;
+    left: 6px;
+}
