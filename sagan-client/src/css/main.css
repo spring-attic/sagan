@@ -700,6 +700,20 @@ a.blog-preview--readmore:hover:before,
 .button.white.animate:focus {
     color: #191E1E;
 }
+.button.button-small {
+    padding: 4px 12px;
+    font-size: 12px;
+    position: relative;
+}
+.button.button-small.button-icon {
+    padding-left: 25px;
+    position: relative;
+}
+.button.button-small.button-icon .fab {
+    position: absolute;
+    top: 7px;
+    left: 9px;
+}
 .flex {
     display: flex;
 }
