@@ -3710,3 +3710,6 @@ footer label[for^='mktoCheckbox'] a:focus {
     top: 11px;
     left: 20px;
 }
+.compass .prettyprint {
+    overflow: auto;
+}
