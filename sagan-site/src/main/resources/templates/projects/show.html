@@ -24,15 +24,14 @@
                         <div>
                             <a th:href="${proj.getSiteUrl()}" th:text="${proj.getName()}"></a>
                             <i th:if="${!isChildrenOpen && proj.getChildProjectList() != null && proj.getChildProjectList().size() > 0}"
-                               class="icon-chevron-right" aria-hidden="true"></i>
+                               class="fas fa-chevron-right" aria-hidden="true"></i>
                             <i th:if="${isChildrenOpen && proj.getChildProjectList() != null && proj.getChildProjectList().size() > 0}"
-                               class="icon-chevron-down" aria-hidden="true"></i>
+                               class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <ul class="sidebar_children" th:if="${isChildrenOpen}">
                             <li class="sidebar_child" th:each="childProject : ${proj.getChildProjectList()}"
                                 th:classappend="${childProject.getId() ==  selectedProject.getId()} ? 'active'">
                                 <a th:href="${childProject.getSiteUrl()}">
-                                    <i class="icon-circle"></i>
                                     <span th:text="${childProject.getName()}"></span>
                                 </a>
                             </li>

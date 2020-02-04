@@ -31,6 +31,9 @@
     border-right: 1px solid #ebf2f2;
     margin: 2rem 1rem 2rem 0px;
 }
+.compass .sidebar ul.sidebar_main li {
+    position: relative;
+}
 .compass .sidebar .icon-circle,
 .compass .sidebar li.sidebar_head {
     display: none;
