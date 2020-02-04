@@ -3693,6 +3693,6 @@ footer label[for^='mktoCheckbox'] a:focus {
 .signin .button .fab {
     font-size: 24px;
     position: absolute;
-    top: 10px;
+    top: 11px;
     left: 20px;
 }
