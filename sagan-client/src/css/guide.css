@@ -24,7 +24,7 @@
     margin-bottom: 0;
 }
 .guide main .right-pane-widget--container .go-to-repo--container .icon-github:before {
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
     content: "\f09b";
     font-size: 1.7em;
     margin-right: 12px;
@@ -116,14 +116,19 @@
     color: #333;
 }
 h2[id*=reveal]:before {
-    font-family: FontAwesome;
+    font-family: 'Font Awesome 5 Free';
     content: "\f105";
     font-size: 1.2em;
     margin-right: 10px;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 900;
+    vertical-align: top;
 }
 h2[id*=reveal].open:before {
     content: "\f107";
-    margin-right: 2px;
+    margin-right: 6px;
 }
 .admonitionblock {
     border-left: none;
