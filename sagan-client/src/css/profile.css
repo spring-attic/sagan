@@ -100,6 +100,9 @@ h1.team-member--name {
     font-size: 14px;
     font-weight: 700;
 }
+.twitter-handle {
+    padding-bottom: 8px;
+}
 .main-body--wrapper {
     border-top: 2px solid #ebf2f2;
     margin-top: 40px;

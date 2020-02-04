@@ -114,14 +114,16 @@
                                 </div>
                                 <div th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-handle"
                                      th:text="'@'+${profile.twitterUsername}"></div>
-                                <a th:if="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn"
+                                <a th:if="${#strings.isEmpty(profile.twitterUsername)}"
+                                   class="button button-small uppercase animate button-icon"
                                    href="https://twitter.com/intent/user?screen_name=springcentral">
-                                    <i class="icon-twitter"></i>
+                                    <i class="fab fa-twitter"></i>
                                     Follow
                                 </a>
-                                <a th:unless="${#strings.isEmpty(profile.twitterUsername)}" class="twitter-follow-btn"
+                                <a th:unless="${#strings.isEmpty(profile.twitterUsername)}"
+                                   class="button button-small uppercase animate button-icon"
                                    th:href="'https://twitter.com/intent/user?screen_name=' + ${profile.twitterUsername}">
-                                    <i class="icon-twitter"></i>
+                                    <i class="fab fa-twitter"></i>
                                     Follow
                                 </a>
 
