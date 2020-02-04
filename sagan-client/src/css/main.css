@@ -432,6 +432,10 @@ footer #bottom-bottom #social-icons {
 footer #bottom-bottom #social-icons a {
     height: 40px;
 }
+footer #bottom-bottom #spring-links a:hover {
+    color: #086dc3;
+    text-decoration: underline;
+}
 footer #bottom #bottom-top{
     /*border-bottom: 1px solid #ebf2f2;*/
 }
@@ -3653,4 +3657,18 @@ footer label[for^='mktoCheckbox'] a:focus {
     form .mktoButtonRow {
         left: 150px;
     }
+}
+
+.trademark h1 {
+    font-size: 2rem;
+    margin-bottom: 0;
+    margin-top: 3rem;
+}
+
+.trademark {
+    padding-bottom: 4rem;
+}
+
+.trademark ol li {
+    padding-top: 1rem;
 }
