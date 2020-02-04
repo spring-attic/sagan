@@ -6,7 +6,7 @@
 </head>
 <body>
     <div layout:fragment="~{content}">
-        <div class="main-body--wrapper">
+        <div class="main-body--wrapper signin">
             <div class="admin--wrapper">
                 <div th:if="${param.error}" class="alert alert-error">We could not
                     authenticate you with Github. You must authenticate and authorize
@@ -20,8 +20,8 @@
                 </div>
                     <form action="/signin/github" th:action="@{/signin/github}"
                         method="post">
-                        <button type="submit" class="btn btn-black">
-                    <i class="icon-github"></i>
+                        <button type="submit" class="button uppercase animate">
+                    <i class="fab fa-github"></i>
                     Sign in with github
                   </button>
                     </form>
