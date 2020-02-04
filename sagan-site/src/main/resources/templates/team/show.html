@@ -40,10 +40,14 @@
                         <div class="span8 mobile-left-pane">
                             <div class="team-member-info--container">
                                 <div class="team-member-social pull-right">
-                                    <a class="team-member--social--icon twitter-small" rel="me"
-                                       th:href="${profile.twitterLink.href}" th:if="${profile.hasTwitterUsername()}"></a>
-                                    <a class="team-member--social--icon github-small" rel="me"
-                                       th:href="${profile.githubLink.href}" th:if="${profile.hasGithubUsername()}"></a>
+                                    <a class="team-member--social--icon twitter-lg" rel="me"
+                                       th:href="${profile.twitterLink.href}" th:if="${profile.hasTwitterUsername()}">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a class="team-member--social--icon github-lg" rel="me"
+                                       th:href="${profile.githubLink.href}" th:if="${profile.hasGithubUsername()}">
+                                        <i class="fab fa-github"></i>
+                                    </a>
                                 </div>
                                 <div class="team-member--sub-info">
                                     <p th:text="*{jobTitle}" th:unless="${#strings.isEmpty(profile.jobTitle)}">Rock Star</p>
