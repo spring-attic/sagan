@@ -3690,7 +3690,7 @@ footer label[for^='mktoCheckbox'] a:focus {
     color: #086dc3
 }
 .trademark a:hover {
-    text-decoration: underline;
+    color: #191E1E;
 }
 
 .signin {
