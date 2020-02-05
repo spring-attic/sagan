@@ -3754,8 +3754,10 @@ pre.prettyprint {
 
 pre.prettyprint .button.copy-button {
     position: absolute;
-    right: 2px;
-    top: 2px;
+    right: 3px;
+    top: 3px;
     outline: none;
     cursor: pointer;
+    font-size: 11px;
+    padding: 3px 6px;
 }
