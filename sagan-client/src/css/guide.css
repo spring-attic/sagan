@@ -34,6 +34,9 @@
 }
 .guide main .right-pane-widget--container .go-to-repo--container i {
     font-style: unset;
+    margin-right: 8px;
+    font-size: 20px;
+    vertical-align: bottom;
 }
 .guide main .right-pane-widget--container {
     background: #ebf2f2;
