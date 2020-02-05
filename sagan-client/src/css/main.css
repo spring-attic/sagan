@@ -3719,3 +3719,15 @@ footer label[for^='mktoCheckbox'] a:focus {
 .compass .prettyprint {
     overflow: auto;
 }
+
+pre.prettyprint {
+    position: relative;
+}
+
+pre.prettyprint .button.copy-button {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    outline: none;
+    cursor: pointer;
+}
