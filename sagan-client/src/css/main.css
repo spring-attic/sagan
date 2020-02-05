@@ -2634,11 +2634,24 @@ body#guides #guide-search {
     padding: 10px 20px 10px 50px;
     position: relative;
 }
+body#guides .guide-search.hide {
+    display: none;
+}
 
 body#guides #guide-search:focus {
     border: 2px solid #6db33f;
     box-shadow: none;
     outline: none;
+}
+body#guides .guide-search-no-result {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    display: none;
+}
+body#guides .guide-search-no-result.show {
+    display: block;
 }
 
 body#guides #guide-search-icon {
