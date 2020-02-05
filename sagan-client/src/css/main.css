@@ -1532,7 +1532,7 @@ body#index #wordWrapper div:nth-child(2) span.up-2,
 body#index #wordWrapper div:nth-child(3) span.up-3,
 body#index #wordWrapper div:nth-child(4) span.up-4,
 body#index #wordWrapper div:nth-child(5) span.up-0 {
-    transform: translateY(-100%);
+    transform: translateY(-120%);
 }
 body#index #wordWrapper div:nth-child(1) span.up-2,
 body#index #wordWrapper div:nth-child(2) span.up-3,
@@ -1540,14 +1540,14 @@ body#index #wordWrapper div:nth-child(3) span.up-4,
 body#index #wordWrapper div:nth-child(4) span.up-0,
 body#index #wordWrapper div:nth-child(5) span.up-1 {
     opacity: 0 !important;
-    transform: translateY(-100%);
+    transform: translateY(-120%);
 }
 body#index #wordWrapper div:nth-child(1) span.up-3,
 body#index #wordWrapper div:nth-child(2) span.up-4,
 body#index #wordWrapper div:nth-child(3) span.up-0,
 body#index #wordWrapper div:nth-child(4) span.up-1,
 body#index #wordWrapper div:nth-child(5) span.up-2 {
-    transform: translateY(100%);
+    transform: translateY(120%);
     opacity: 0 !important;
 }
 body#index #wordWrapper div:nth-child(1) span.up-4,
@@ -1555,7 +1555,7 @@ body#index #wordWrapper div:nth-child(2) span.up-0,
 body#index #wordWrapper div:nth-child(3) span.up-1,
 body#index #wordWrapper div:nth-child(4) span.up-2,
 body#index #wordWrapper div:nth-child(5) span.up-3 {
-    transform: translateY(100%);
+    transform: translateY(120%);
     opacity: 1 !important;
 }
 
