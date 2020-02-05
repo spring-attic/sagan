@@ -2634,6 +2634,13 @@ body#guides #guide-search {
     padding: 10px 20px 10px 50px;
     position: relative;
 }
+
+body#guides #guide-search:focus {
+    border: 2px solid #6db33f;
+    box-shadow: none;
+    outline: none;
+}
+
 body#guides #guide-search-icon {
     height: 20px;
     position: absolute;
@@ -3485,6 +3492,14 @@ footer form input#Email {
     font-family: 'Open Sans', sans-serif !important;
     padding: 15px;
     box-sizing: border-box;
+}
+#blog-sidebar-newsletter form input#Email:focus,
+footer form input#Email:focus {
+    border-top: 2px solid #6db33f;
+    border-left: 2px solid #6db33f;
+    border-bottom: 2px solid #6db33f;
+    box-shadow: none;
+    outline: none;
 }
 #blog-sidebar-newsletter form input[id^='mktoCheckbox'],
 footer form input[id^='mktoCheckbox'] {
