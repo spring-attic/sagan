@@ -92,6 +92,7 @@
 }
 .guide main pre code {
     border: none;
+    white-space: pre-wrap;
     padding: 0;
 }
 .guide main table pre,
