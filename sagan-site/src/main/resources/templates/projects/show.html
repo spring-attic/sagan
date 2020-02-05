@@ -148,13 +148,11 @@
                                             </td>
                                             <td>
                                                 <a th:href="${release.getRefDocUrl()}">
-                                                    <i class="fas fa-file-alt"></i>
                                                     Reference Doc.
                                                 </a>
                                             </td>
                                             <td>
                                                 <a th:href="${release.getApiDocUrl()}">
-                                                    <i class="fas fa-file-alt"></i>
                                                     API Doc.
                                                 </a>
                                             </td>
@@ -175,13 +173,11 @@
                                             </td>
                                             <td>
                                                 <a th:href="${release.getRefDocUrl()}">
-                                                    <i class="fas fa-file-alt"></i>
                                                     Reference Doc.
                                                 </a>
                                             </td>
                                             <td>
                                                 <a th:href="${release.getApiDocUrl()}">
-                                                    <i class="fas fa-file-alt"></i>
                                                     API Doc.
                                                 </a>
                                             </td>
@@ -206,7 +202,9 @@
                                     <ul class="project--list-links">
                                         <li th:each="guide : ${guides}">
                                             <a th:href="'/guides/gs/' + ${guide.name}">
-                                                <i class="fas fa-file-alt"></i>
+                                                <span class="icon">
+                                                    <img th:src="@{/images/icon-guides-start.svg}" alt=''>
+                                                </span>
                                                 <strong class="project--sample--title"
                                                         th:text="${guide.getTitle()}"></strong>
                                                 <span class="project--sample--description"
@@ -227,7 +225,9 @@
                                     <ul class="project--list-links">
                                         <li th:each="guide : ${topicals}">
                                             <a th:href="'/guides/topicals/' + ${guide.name}">
-                                                <i class="fas fa-file-alt"></i>
+                                                <span class="icon">
+                                                    <img th:src="@{/images/icon-guides-topic.svg}" alt=''>
+                                                </span>
                                                 <strong class="project--sample--title"
                                                         th:text="${guide.getTitle()}"></strong>
                                                 <span class="project--sample--description"
@@ -249,7 +249,9 @@
                                     <ul class="project--list-links">
                                         <li th:each="guide : ${tutorials}">
                                             <a th:href="'/guides/tutorials/' + ${guide.name}">
-                                                <i class="fas fa-file-alt"></i>
+                                                <span class="icon">
+                                                    <img th:src="@{/images/icon-guides-tutorial.svg}" alt=''>
+                                                </span>
                                                 <strong class="project--sample--title"
                                                         th:text="${guide.getTitle()}"></strong>
                                                 <span class="project--sample--description"
@@ -265,7 +267,9 @@
                                     <ul class="project--list-links">
                                         <li th:each="sample : ${selectedProject.projectSamples}">
                                             <a th:href="${sample.getUrl()}" target="_blank">
-                                                <i class="fas fa-file-alt"></i>
+                                                <span class="icon">
+                                                    <img th:src="@{/images/icon-guides-tutorial.svg}" alt=''>
+                                                </span>
                                                 <strong class="project--sample--title"
                                                         th:text="${sample.getTitle()}"></strong>
                                                 <span class="project--sample--description"

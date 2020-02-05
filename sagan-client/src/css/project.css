@@ -121,7 +121,6 @@
 }
 .compass .project--header {
     position: relative;
-    margin-right: 90px;
 }
 .compass .project--header h1 {
     font-size: 38px;
@@ -145,7 +144,7 @@
 }
 .compass .project--header .social-links {
     position: absolute;
-    right: -90px;
+    right: 0px;
     top: 3rem;
     font-size: 36px;
     line-height: 30px;
@@ -230,6 +229,9 @@
 .compass .project--header .social-links a:hover svg {
     fill: rgb(107, 181, 54);
 }
+.compass .project--header .social-links a:hover {
+    text-decoration: none;
+}
 [class*=" icon-"], [class^="icon-"] {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
@@ -262,8 +264,8 @@
 }
 
 .compass .table--documentation td {
-    border-top: 1px solid black;
-    padding: 6px 4px;
+    border-top: 1px solid #ebf2f2;
+    padding: 12px 4px;
 }
 
 .compass .table--documentation tr:first-child td {
@@ -306,8 +308,9 @@
 }
 
 .compass .project--guides--title {
-    border-top: 1px solid black;
-    padding-top: 30px;
+    border-top: 4px solid #ebf2f2;
+    padding-top: 40px;
+    padding-bottom: 10px;
 }
 
 .compass .project--list-links {
@@ -317,14 +320,19 @@
 
 .compass .project--list-links li {
     list-style: none;
-    padding: 0;
+    padding: 12px 0;
     margin: 0;
+    border-top: 1px solid #ebf2f2;
+}
+
+.compass .project--list-links li:first-child {
+    border-top: 0 none;
 }
 
 .compass .project--list-links li a {
     display: block;
     position: relative;
-    padding: 5px 0 5px 30px;
+    padding: 5px 0 5px 60px;
 }
 
 .compass .project--list-links li strong, .compass .project--list-links li span {
@@ -332,22 +340,27 @@
 }
 
 .compass .project-content .project--list-links li a {
-    color: black;
+    color: #333;
     text-decoration: none;
 }
 
 .compass .project-content .project--list-links li a strong {
     color: #086dc3;
+    padding-bottom: 2px;
 }
 
 .compass .project-content .project--list-links li a:hover strong {
     text-decoration: underline;
 }
 
-.compass .project--list-links li .fas {
+.compass .project--list-links li span.icon {
     position: absolute;
-    top: 14px;
-    left: 6px;
+    top: 8px;
+    left: 15px;
+}
+
+.compass .project--list-links li span.icon img {
+    width: 25px;
 }
 
 .admonitionblock {
@@ -373,4 +386,29 @@
 
 .compass .project-content a:hover {
     text-decoration: underline;
+}
+
+.project-content pre {
+    padding: 10px;
+    border: 1px solid #e1e1e8;
+}
+
+.project-content pre code {
+    border: 0 none;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.project-content code {
+    font-size: 14px;
+    font-family: Monaco,monospace;
+    border: 1px solid #e1e1e8;
+    white-space: nowrap;
+    overflow-x: auto;
+    padding: 2px 6px;
+    color: #009;
+}
+
+.project-content {
+    color: #333;
 }
