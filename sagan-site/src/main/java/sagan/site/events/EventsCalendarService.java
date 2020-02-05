@@ -1,6 +1,7 @@
 package sagan.site.events;
 
 import java.net.URI;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
@@ -38,6 +39,7 @@ public class EventsCalendarService {
 			return events.stream()
 					.filter(period.toCalendarFilter())
 					.map(event -> new Event(event, calendarTimeZone))
+					.sorted(Comparator.comparingLong(event -> event.getStartTime().toInstant().toEpochMilli()))
 					.collect(Collectors.toList());
 		}
 		catch (HttpClientErrorException ex) {
