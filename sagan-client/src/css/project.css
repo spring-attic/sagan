@@ -344,3 +344,16 @@
     top: 14px;
     left: 6px;
 }
+
+.admonitionblock {
+    border-left: none;
+    background-color: #ebf2f2;
+    padding: 25px 20px;
+    margin: 30px 0;
+    width: auto;
+    overflow: auto;
+}
+
+.admonitionblock table tr td:first-child {
+    display: none;
+}
