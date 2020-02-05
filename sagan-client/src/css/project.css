@@ -277,7 +277,7 @@
 }
 
 .compass .table--documentation a:hover {
-    text-decoration: underline;
+    color: #333;
 }
 
 .compass .table--documentation .label {
