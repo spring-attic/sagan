@@ -43,12 +43,13 @@
             <section id='started-and-search' class='flex jc-between mb-3'>
                 <p class='guide-description m-0'>Designed to be completed in 15-30 minutes, these guides provide quick, hands-on instructions for building the "Hello World" of any development task with Spring. In most cases, the only prerequisites are a JDK and a text editor.</p>
                 <div id='search-container' class='rel'>
-                    <input id='guide-search' class='border-box' placeholder='Find a guide'></input>
+                    <input id='guide-search' class='border-box' placeholder='Find a guide' />
                     <img id='guide-search-icon' src='/images/search.svg'>
                 </div>
             </section>
             <section id='getting-started-list' class='flex jc-between flex-wrap'>
-                <div th:each="guide : ${guides}" class='guide half border-box flex' th:attr="data-filterable=${guide.title}+' '+${guide.description}+' '+${guide.projects}">
+                <div id="guide-search-no-result" class="guide-search-no-result">No result find.</div>
+                <div th:each="guide : ${guides}" class='guide guide-search half border-box flex' th:attr="data-filterable=${guide.title}+' '+${guide.description}+' '+${guide.projects}">
                     <img class='guide-icon' src='/images/icon-guides-start.svg'>
                     <div class='text'>
                         <a class='guide-link bold blue link-darken antialiased' th:href="@{'/guides/gs/'+${guide.name}+'/'}" th:text="${guide.title}">Building a RESTful Web Service</a>
@@ -92,6 +93,7 @@
             </div>
         </section>
     </div>
+    <script th:src="@{/js/guide.js}"></script>
 </div>
 </body>
 </html>
