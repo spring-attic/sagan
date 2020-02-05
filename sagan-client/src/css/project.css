@@ -331,11 +331,16 @@
     display: block;
 }
 
-.compass .project--list-links li a strong {
+.compass .project-content .project--list-links li a {
+    color: black;
+    text-decoration: none;
+}
+
+.compass .project-content .project--list-links li a strong {
     color: #086dc3;
 }
 
-.compass .project--list-links li a:hover strong {
+.compass .project-content .project--list-links li a:hover strong {
     text-decoration: underline;
 }
 
@@ -356,4 +361,16 @@
 
 .admonitionblock table tr td:first-child {
     display: none;
+}
+.compass .project-content .nav-tabs>.active>a, .compass .project-content .nav-tabs a,
+.compass .project-content .nav-tabs a:hover {
+    color: black;
+    text-decoration: none;
+}
+.compass .project-content a {
+    color: #086dc3;
+}
+
+.compass .project-content a:hover {
+    text-decoration: underline;
 }
