@@ -42,7 +42,7 @@
             <article class="col-xs-12 col-md-9"
                      th:with="hasSamples=${selectedProject.projectSamples.size() > 0},hasDocumentation=${currentRelease.isPresent() || otherReleases.size() > 0 || guides.size() > 0}">
 
-                <div class="box">
+                <div class="box project-content">
                     <div class="">
                         <div class="project--header">
                             <h1 th:text="${selectedProject.getName()}"></h1>
