@@ -350,7 +350,7 @@
 }
 
 .compass .project-content .project--list-links li a:hover strong {
-    text-decoration: underline;
+    color: #191E1E;
 }
 
 .compass .project--list-links li span.icon {
@@ -385,7 +385,7 @@
 }
 
 .compass .project-content a:hover {
-    text-decoration: underline;
+    color: #191E1E;
 }
 
 .project-content pre {
