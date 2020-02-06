@@ -98,6 +98,10 @@ article:last-child {
 #blog-sidebar-newsletter form input#Email {
     border-width: 1px;
 }
+#blog-sidebar-newsletter form input#Email:focus {
+    border-width: 1px;
+    border-color: #6db33f;
+}
 #blog-sidebar-newsletter form.mktoForm .mktoCheckboxList > label {
     max-width: 86%;
     line-height: 1.5em;
