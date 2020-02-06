@@ -1,6 +1,6 @@
-<html
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
 <head>
     <title>Spring | Event Driven</title>
     <meta property='og:title' content='Event-driven architectures'/>
@@ -9,7 +9,7 @@
 <body id='event-driven'>
 <div layout:fragment="~{content}">
     <div id='hero' class='topics-banner mb-5'>
-        <img id='midshape' src='/images/header-streams.svg' alt=''>
+        <img id='midshape' th:src="@{/images/header-streams.svg}" alt=''>
     </div>
     <section class='content' role='Main'>
         <section class='container'>
@@ -18,7 +18,7 @@
                 <div class='left m-0 topic-info'>
                     <p class='big'>Event-driven systems reflect how modern businesses actually work–thousands of small changes happening all day, every day. Spring’s ability to handle events and enable developers to build applications around them, means your apps will stay in sync with your business. Spring has a number of event-driven options to choose from, from integration and streaming all the way to cloud functions and data flows.</p>
                 </div>
-                <img class='as-fs topic-icon' src='/images/streams.svg' alt=''>
+                <img class='as-fs topic-icon' th:src="@{/images/streams.svg}" alt=''>
             </div>
         </section>
         <section class='container'>

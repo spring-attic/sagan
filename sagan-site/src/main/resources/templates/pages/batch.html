@@ -1,5 +1,5 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+      xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
 <head>
     <title>Spring | Batch</title>
     <meta property='og:title' content='Batch processing with Spring'/>
@@ -8,7 +8,7 @@
 <body id='batch'>
 <div layout:fragment="~{content}">
     <div id='hero' class='topics-banner mb-5'>
-        <img id='midshape' src='/images/header-batch.svg' alt=''>
+        <img id='midshape' th:src="@{/images/header-batch.svg}" alt=''>
     </div>
     <div class='content' role='Main'>
         <section class='container mb-5'>
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <img class='as-fs topic-icon' src='/images/batch.svg' alt=''>
+                <img class='as-fs topic-icon' th:src="@{/images/batch.svg}" alt=''>
             </div>
         </section>
         <section class='cornell container'>
@@ -38,7 +38,7 @@
                 <div class='right'>
                     <p class='mb-3'>Spring Batch is the de facto standard for batch processing on the JVM. Its implementation of common batch patterns, such as chunk-based processing and partitioning, lets you create high-performing, scalable batch applications that are resilient enough for your most mission-critical processes. Spring Boot provides an additional level of production-grade features to let you speed up the development of your batch processes.</p>
                     <a class='button animate uppercase mb-4' href='/guides/gs/batch-processing/'>Take the tutorial</a>
-                    <img src='/images/diagram-batch.svg' alt='Batch processing with Spring diagram'>
+                    <img th:src="@{/images/diagram-batch.svg}" alt='Batch processing with Spring diagram'>
                 </div>
             </div>
         </section>
@@ -53,7 +53,7 @@
                             <p>Batch processing fits perfectly with cloud computing, and Infrastructure as a Service (IaaS), in particular. The ability to run applications in an on-demand, elastically scalable, and fault-tolerant manner are all cloud features that Spring Batch can use.</p>
                             <a class='blue link-animate lightbox' href='https://www.youtube.com/watch?v=t1Kwx8bXv4Y'>Why move batch to the cloud?</a>
                         </div>
-                        <img src='/images/img-cloud.svg' alt=''>
+                        <img th:src="@{/images/img-cloud.svg}" alt=''>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                     <!-- <h2 class='h2'>This needs a title</h2> -->
                 </div>
                 <div class='right'>
-                    <img class='mb-3' src='/images/diagram-batch2.svg' alt='Spring Batch diagram'>
+                    <img class='mb-3' th:src="@{/images/diagram-batch2.svg}" alt='Spring Batch diagram'>
                     <div class='flex jc-between'>
                         <div class='col third'>
                             <div class='item mb-3'>
@@ -139,7 +139,7 @@
                 <div class='flex jc-between'>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=J6IPlfm7N6w'>
-                            <img src='/images/batch-vod1.jpg' alt='Play "High-Performance Batch Processing" on YouTube'>
+                            <img th:src="@{/images/batch-vod1.jpg}" alt='Play "High-Performance Batch Processing" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=J6IPlfm7N6w'>High-Performance Batch Processing</a>
@@ -147,7 +147,7 @@
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=x4nBNLoizOc'>
-                            <img src='/images/batch-vod2.jpg' alt='Play "Spring Tips: Spring Batch" on YouTube'>
+                            <img th:src="@{/images/batch-vod2.jpg}" alt='Play "Spring Tips: Spring Batch" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=x4nBNLoizOc'>Spring Tips: Spring Batch</a>
@@ -155,7 +155,7 @@
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=-Icd-s2JoAw'>
-                            <img src='/images/batch-vod3.jpg' alt='Play "Cloud-Native Batch Processing" on YouTube'>
+                            <img th:src="@{/images/batch-vod3.jpg}" alt='Play "Cloud-Native Batch Processing" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=-Icd-s2JoAw'>Cloud-Native Batch Processing</a>

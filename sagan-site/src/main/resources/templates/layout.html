@@ -18,7 +18,7 @@
     <nav id='nav'>
         <div id='nav-inner' class='container flex jc-between ai-center'>
             <a id='logo-focus' tabindex='1' href='/'>
-                <img id='springlogo' class='block' src='/images/spring-logo.svg'>
+                <img id='springlogo' class='block' th:src="@{/images/spring-logo.svg}">
             </a>
             <ul id='nav-items' class='flex jc-between'>
                 <li><div class='has-menu' id='why-hov'><span tabindex='2'>Why Spring</span><div class='nav-arrow'></div></div></li>
@@ -187,7 +187,7 @@
         <div class='container flex jc-between mx-auto'>
             <div id='green-circle-sm'></div>
             <!-- <div id='green-circle-lg'></div> -->
-            <img id='circle-grid' src='/images/footer-circles.svg'>
+            <img id='circle-grid' th:src="@{/images/footer-circles.svg}">
             <div class='third'>
                 <h2 class='bold h3 antialiased'>Get ahead</h2>
                 <p>Pivotal offers training and certification to turbo-charge your progress.</p>
@@ -276,7 +276,7 @@
         <div id='bottom-bottom'>
             <div class='flex container jc-between'>
                 <div id="spring-links">
-                    <img id='springlogo-foot' src='/images/spring-logo.svg'>
+                    <img id='springlogo-foot' th:src="@{/images/spring-logo.svg}">
                     <p class='smallest antialiased'>© <script>var d = new Date();
                     document.write(d.getFullYear());</script> <a href='https://pivotal.io'>Pivotal Software</a>, Inc. All Rights Reserved. <a href='https://pivotal.io/legal'>Terms of Use</a> • <a href='https://pivotal.io/privacy-policy'>Privacy</a> • <a href='/trademarks'>Trademark Guidelines</a> <span id='thank-you-mobile'>• <a href='/thank-you'>Thank you</a></span> <span id='teconsent'></span></p>
                     <p class='smallest antialiased'>Apache®, Apache Tomcat®, Apache Kafka®, Apache Cassandra&trade;, and Apache Geode&trade; are trademarks or registered trademarks of the Apache Software Foundation in the United States and/or other countries. Java&trade;, Java&trade; SE, Java&trade; EE, and OpenJDK&trade; are trademarks of Oracle and/or its affiliates. Kubernetes® is a registered trademark of the Linux Foundation in the United States and other countries. Linux® is the registered trademark of Linus Torvalds in the United States and other countries. Windows® and Microsoft® Azure are registered trademarks of Microsoft Corporation. “AWS” and “Amazon Web Services” are trademarks or registered trademarks of Amazon.com Inc. or its affiliates. All other trademarks and copyrights are property of their respective owners and are only mentioned for informative purposes. Other names may be trademarks of their respective owners.</p>

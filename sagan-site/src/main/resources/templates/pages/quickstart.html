@@ -69,9 +69,9 @@
                 <p><b>MacOS/Linux:</b><br><pre><code class='inline-block'>./mvnw package spring-boot:run -DskipTests=true</code></pre></p>
                 <p><b>Windows:</b><br><pre><code class='inline-block'>mvnw package spring-boot:run -DskipTests=true</code></pre></p>
                 <p>You should see some output that looks very similar to this:</p>
-                <img class='shadow mb-1' alt='The terminal outputting various log statements as our Spring Boot application starts up.' title='The terminal outputting various log statements as our Spring Boot application starts up.' src='/images/quick-img2.png'>
+                <img class='shadow mb-1' alt='The terminal outputting various log statements as our Spring Boot application starts up.' title='The terminal outputting various log statements as our Spring Boot application starts up.' th:src="@{/images/quick-img2.png}">
                 <p class='mb-3'>The last couple of lines here tell us that Spring has started. Spring Boot’s embedded Apache Tomcat server is acting as a webserver and is listening for requests on <code class='no-bg'>localhost</code> port <code class='no-bg'>8080</code>. Open your browser and in the address bar at the top enter <a class='blue link-animate' href='http://localhost:8080/hello'>http://localhost:8080/hello</a>. You should get a nice friendly response like this:</p>
-                <img class='shadow mb-3' alt='The browser screen displaying the default ‘hello world’ output from our application.' title='The browser screen displaying the default ‘hello world’ output from our application.' src='/images/quick-img3.png'>
+                <img class='shadow mb-3' alt='The browser screen displaying the default ‘hello world’ output from our application.' title='The browser screen displaying the default ‘hello world’ output from our application.' th:src="@{/images/quick-img3.png}">
                 <img id='pop-quiz' class='inline-block' th:src="@{/images/pop-quiz.svg}">
                 <h3 class='h3 antialiased inline-block m-0'>Pop quiz</h3>
                 <p>What should happen if you add <pre><code>?name=Amy</code></pre> to the end of the URL?</p>
