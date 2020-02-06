@@ -21,7 +21,7 @@ public class EventsController {
 	@GetMapping("/community")
 	public String community(Model model) {
 		List<Event> events = calendarService.findEvents(Period.of(LocalDate.now().toString(), NEXT_SIX_MONTHS));
-		int count = Math.min(events.size(), 5);
+		int count = Math.min(events.size(), 6);
 		model.addAttribute("events", events.subList(0, count));
 		return "events/community";
 	}
