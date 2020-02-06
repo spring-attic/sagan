@@ -3,8 +3,8 @@
         layout:decorator="layout">
 <head>
     <title>Spring | Event Driven</title>
-    <meta property='og:title' content='Event driven architectures'/>
-    <meta property='og:description' content='Event driven systems reflect how modern businesses actually work–thousands of small changes happening all day, every day. Spring’s ability to handle events and easily build applications around them, allows your apps to stay in sync with your business.'/>
+    <meta property='og:title' content='Event-driven architectures'/>
+    <meta property='og:description' content='Event-driven systems reflect how modern businesses actually work–thousands of small changes happening all day, every day. Spring’s ability to handle events and easily build applications around them, allows your apps to stay in sync with your business.'/>
 </head>
 <body id='event-driven'>
 <div layout:fragment="~{content}">
@@ -16,7 +16,7 @@
             <h1 class='h1'>Event Driven</h1>
             <div class='flex jc-between topic-hero'>
                 <div class='left m-0 topic-info'>
-                    <p class='big'>Event driven systems reflect how modern businesses actually work–thousands of small changes happening all day, every day. Spring’s ability to handle events and enable developers to build applications around them, means your apps will stay in sync with your business. Spring has a number of event-driven options to choose from, from integration and streaming all the way to cloud functions and data flows.</p>
+                    <p class='big'>Event-driven systems reflect how modern businesses actually work–thousands of small changes happening all day, every day. Spring’s ability to handle events and enable developers to build applications around them, means your apps will stay in sync with your business. Spring has a number of event-driven options to choose from, from integration and streaming all the way to cloud functions and data flows.</p>
                 </div>
                 <img class='as-fs topic-icon' src='/images/streams.svg' alt=''>
             </div>
@@ -24,7 +24,7 @@
         <section class='container'>
             <div id='trio' class='flex jc-between py-50'>
                 <div class='third'>
-                    <h3 class='h3'>Event driven microservices</h3>
+                    <h3 class='h3'>Event-driven microservices</h3>
                         <p>When combined with microservices, event streaming opens up exciting opportunities&mdash;event-driven architecture being one common example. Spring simplifies the production, processing, and consumption of events, providing several useful abstractions.</p>
                 </div>
                 <div class='third'>
@@ -96,7 +96,7 @@
                     <h2 class='h2'>Spring Cloud Data Flow</h2>
                 </div>
                 <div class='right flex jc-between'>
-                    <img class='as-fs half mr-40' src='/images/dataflow-stream-details.png' alt="Spring Cloud Data Flow"/>
+                    <img class='as-fs half mr-40' th:src="@{/images/dataflow-stream-details.png}" alt="Spring Cloud Data Flow"/>
                     <p class='m-0 half'>Spring Cloud Data Flow offers developers a range of tools and automation for working with all kinds of data sources and destinations. Spring Cloud Data Flow helps you to develop, deploy, manage, and scale high-throughput streaming data pipelines across multiple cloud-native platforms. It also features a rich user interface for building and monitoring your applications. <br><a class='blue link-animate' href='https://dataflow.spring.io/'>Learn more</a></p>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                         <div class='text'>
                             <p>Spring Cloud Stream provides a second, more specific binder solely for working with Kafka Streams. This special binder still focuses on developer productivity but adds support for Kafka-specific features like KStream, KTable, and GlobalKTable. As with regular Spring Cloud Stream, the binder also takes care of connecting to Kafka, as well as creating, configuring, and maintaining the streams and topics. <a class='blue link-animate' href='https://www.confluent.io/blog/spring-for-apache-kafka-deep-dive-part-2-apache-kafka-spring-cloud-stream/'>Learn more</a></p>
                         </div>
-                        <img src='/images/apache-kakfa.svg' alt='Apache Kafka logo'>
+                        <img th:src="@{/images/apache-kakfa.svg}" alt='Apache Kafka logo'>
                     </div>
                 </div>
             </div>
@@ -156,7 +156,7 @@
                 <div class='flex jc-between'>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=9I3CDfHKfNY'>
-                            <img src='/images/streams-res1.png' alt='Play "Kafka Summit 2019 Keynote" on YouTube'>
+                            <img th:src="@{/images/streams-res1.png}" alt='Play "Kafka Summit 2019 Keynote" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=9I3CDfHKfNY'>Kafka Summit 2019 Keynote</a>
@@ -164,7 +164,7 @@
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://content.pivotal.io/webinars/jun-6-boosting-microservice-performance-with-kafka-rabbitmq-and-spring-webinar'>
-                            <img src='/images/streams-res2.png' alt='Boosting Microservice Performance with Kafka'>
+                            <img th:src="@{/images/streams-res2.png}" alt='Boosting Microservice Performance with Kafka'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/webinars/jun-6-boosting-microservice-performance-with-kafka-rabbitmq-and-spring-webinar'>Boosting Microservice Performance with Kafka</a>
@@ -172,7 +172,7 @@
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://content.pivotal.io/content-developers/getting-started-with-spring-cloud-stream'>
-                            <img src='/images/streams-res3.png' alt='Getting Started With Spring Cloud Stream'>
+                            <img th:src="@{/images/streams-res3.png}" alt='Getting Started With Spring Cloud Stream'>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/content-developers/getting-started-with-spring-cloud-stream'>Getting Started With Spring Cloud Stream</a>
                         <div class='author'>Ben Wilcock and Brian McClain</div>
