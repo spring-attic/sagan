@@ -3622,6 +3622,7 @@ footer label[for^='mktoCheckbox'] a:focus {
     color: white;
     height: 40px;
 }
+
 @media(max-width: 880px) {
     #contact-form .mt-50 {
         margin-top: 10px;
@@ -3649,6 +3650,12 @@ footer label[for^='mktoCheckbox'] a:focus {
     border-bottom: 1px solid rgba(255,255,255,0.7) !important;
     padding: 0 !important;
     margin-bottom: 10px;
+}
+#contact-form textarea:focus,
+#contact-form input:focus,
+#contact-form select:focus {
+    outline: none;
+    border-bottom-color: #6db33f !important;
 }
 #contact-form select {
     background: url(https://d1fto35gcfffzn.cloudfront.net/images/icons/icon-angledown-white.png) no-repeat transparent right;
