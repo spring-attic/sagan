@@ -1,6 +1,5 @@
-<html
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
 <head>
     <title>Spring | Cloud</title>
     <meta property='og:title' content='The Spring Cloud suite of projects contains many of the services you need to make your applications run well in the cloud.'/>
@@ -9,7 +8,7 @@
 <body id='cloud'>
 <div layout:fragment="~{content}">
     <div id='hero' class='topics-banner mb-5'>
-        <img id='midshape' src='/images/header-cloud.svg' alt=''>
+        <img id='midshape' th:src="@{/images/header-cloud.svg}" alt=''>
     </div>
     <div class='content' role='Main'>
         <section class='container mb-5'>
@@ -18,7 +17,7 @@
                 <div class='left m-0 topic-info'>
                     <p class='big'>Developing distributed systems can be challenging. Complexity is moved from the application layer to the network layer and demands greater interaction between services. Making your code ‘cloud-native’ means dealing with <a class='blue link-animate' href="https://12factor.net/">12-factor</a> issues such as external configuration, statelessness, logging, and connecting to backing services. The Spring Cloud suite of projects contains many of the services you need to make your applications run in the cloud. </p>
                 </div>
-                <img class='as-fs topic-icon' src='/images/cloud.svg' alt=''>
+                <img class='as-fs topic-icon' th:src="@{/images/cloud.svg}" alt=''>
             </div>
         </section>
         <section class='cornell container'>
@@ -27,7 +26,7 @@
                     <h2 class='h2'>Spring Cloud architecture highlights</h2>
                 </div>
                 <div class='right'>
-                    <img src='/images/cloud-diagram.svg' alt='Spring Cloud diagram'>
+                    <img th:src="@{/images/cloud-diagram.svg}" alt='Spring Cloud diagram'>
                 </div>
             </div>
         </section>
@@ -54,7 +53,7 @@
             </div>
             <div id='quote' class='flex mb-4 mx-auto jc-between'>
                 <a class='thumbnail block as-fs' href="https://youtube.com/watch?v=RRMO4oNptoQ">
-                    <img src='/images/video-jackson.jpg' alt=''>
+                    <img th:src="@{/images/video-jackson.jpg}" alt=''>
                     <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                 </a>
                 <div class='text'>
@@ -72,7 +71,7 @@
                 </div>
                 <div class='right'>
                     <div class='flex jc-between'>
-                        <img class='as-fs' src='/images/cloud-wrench.svg' alt=''>
+                        <img class='as-fs' th:src="@{/images/cloud-wrench.svg}" alt=''>
                         <div class='text'>
                             <p>In the cloud, configuration can’t simply be embedded inside the application. The configuration has to be flexible enough to cope with multiple applications, environments, and service instances, as well as deal with dynamic changes without downtime. <a class='blue link-animate' href="/projects/spring-cloud-config">Spring Cloud Config</a> is designed to ease these burdens and offers integration with version control systems like Git to help you keep your configuration safe.</p>
                             <a class='link-animate blue' href="/guides/gs/centralized-configuration/">Try it now</a>
@@ -104,7 +103,7 @@
                         </div>
                         <div class='half'>
                             <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=CFLZJSwbYI0'>
-                                <img src='/images/video-tracing.png' alt='Play "Spring Tips: Zipkin and Distributed Tracing" on YouTube'>
+                                <img th:src="@{/images/video-tracing.png}" alt='Play "Spring Tips: Zipkin and Distributed Tracing" on YouTube'>
                                 <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                             </a>
                             <p class='m-0 uppercase'>Video</p>
@@ -144,7 +143,7 @@
                 <div class='flex jc-between'>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://content.pivotal.io/webinars/dec-5-introducing-azure-spring-cloud-a-managed-runtime-for-spring-based-apps-webinar'>
-                            <img src='/images/cloud-res1.jpg' alt='Introducing Azure Spring Cloud'>
+                            <img th:src="@{/images/cloud-res1.jpg}" alt='Introducing Azure Spring Cloud'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/webinars/dec-5-introducing-azure-spring-cloud-a-managed-runtime-for-spring-based-apps-webinar'>Introducing Azure Spring Cloud</a>
@@ -152,14 +151,14 @@
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://content.pivotal.io/ebooks/migrating-to-cloud-native-application-architectures'>
-                            <img src='/images/micro-res1.png' alt='Migrating to Cloud-Native Application Architectures'>
+                            <img th:src="@{/images/micro-res1.png}" alt='Migrating to Cloud-Native Application Architectures'>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://content.pivotal.io/ebooks/migrating-to-cloud-native-application-architectures'>Migrating to Cloud-Native Application Architectures</a>
                         <div class='author'>Matt Stine</div>
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='/blog/2019/06/18/getting-started-with-spring-cloud-gateway'>
-                            <img src='/images/tutorial.png' alt='Getting Started With Spring Cloud Gateway'>
+                            <img th:src="@{/images/tutorial.png}" alt='Getting Started With Spring Cloud Gateway'>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='/blog/2019/06/18/getting-started-with-spring-cloud-gateway'>Getting Started With Spring Cloud Gateway</a>
                         <div class='author'>Ben Wilcock</div>

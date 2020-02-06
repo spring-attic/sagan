@@ -9,14 +9,14 @@
 <body id='serverless'>
 <div layout:fragment="~{content}">
     <div id='hero' class='topics-banner mb-5'>
-        <img id='midshape' src='/images/header-serverless.svg' alt=''>
+        <img id='midshape' th:src="@{/images/header-serverless.svg}" alt=''>
     </div>
     <div class='content' role='Main'>
         <section class='container mb-5'>
             <h1 class='h1'>Serverless</h1>
             <div class='flex jc-between topic-hero mb-2'>
                 <p class='big'>Serverless applications take advantage of modern cloud computing capabilities and abstractions to let you focus on logic rather than on infrastructure. In a serverless environment, you can concentrate on writing application code while the underlying platform takes care of scaling, runtimes, resource allocation, security, and other “server” specifics.</p>
-                <img class='as-fs topic-icon' src='/images/topic-serverless.svg' alt=''>
+                <img class='as-fs topic-icon' th:src="@{/images/topic-serverless.svg}" alt=''>
             </div>
             <div class='flex jc-between half-and-half'>
                 <div class='third'>
@@ -46,7 +46,7 @@
                 </div>
                 <div class='right'>
                     <div class='diagram-container'>
-                        <div class='center mb-3'><img src='/images/diagram-serverless-standalone.svg' alt='Function as a Service (FaaS) and Legacy diagram'></div>
+                        <div class='center mb-3'><img th:src="@{/images/diagram-serverless-standalone.svg}" alt='Function as a Service (FaaS) and Legacy diagram'></div>
                         <div class='flex jc-between'>
                             <div class='half'>
                                 <h3 class='h3'>Function as a Service (FaaS)</h3>
@@ -119,7 +119,7 @@
                 <div class='flex jc-between'>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=8tOj4A7jgWg'>
-                            <img src='/images/serverless-res1.png' alt='Play "Spring, Functions, Serverless, and You" on YouTube'>
+                            <img th:src="@{/images/serverless-res1.png}" alt='Play "Spring, Functions, Serverless, and You" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=8tOj4A7jgWg'>Spring, Functions, Serverless, and You</a>
@@ -127,14 +127,14 @@
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='/blog/2018/05/16/spring-tips-project-riff-and-spring-cloud-function'>
-                            <img src='/images/serverless-res2.png' alt='Spring Tips: Project Riff and Spring Cloud Function'>
+                            <img th:src="@{/images/serverless-res2.png}" alt='Spring Tips: Project Riff and Spring Cloud Function'>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='/blog/2018/05/16/spring-tips-project-riff-and-spring-cloud-function'>Spring Tips: Project Riff and Spring Cloud Function</a>
                         <div class='author'>Josh Long</div>
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=mPOl3024R4s'>
-                            <img src='/images/serverless-res3.png' alt='Play "Serverless Spring" on YouTube'>
+                            <img th:src="@{/images/serverless-res3.png}" alt='Play "Serverless Spring" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=mPOl3024R4s'>Serverless Spring</a>

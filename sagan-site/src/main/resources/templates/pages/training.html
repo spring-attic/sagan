@@ -1,6 +1,6 @@
-<html
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
 <head>
     <title>Spring | Training</title>
     <meta property='og:title' content='Increase your mastery of Spring with official training and certification'/>
@@ -20,7 +20,7 @@
             <div class='course border-dark rad-5 border-box mb-2 bg-white'>
                 <div class='course-title flex ai-center'>
                     <div class='course-icon'>
-                        <img src='/images/icon-spring.svg' alt=''>
+                        <img th:src="@{/images/icon-spring.svg}" alt=''>
                     </div>
                     <a class='h3 link-darken blue antialiased' href='https://store.education.pivotal.io/confirm-course?courseid=EDU-1094'>Core Spring for Developers</a>
                 </div>
@@ -32,7 +32,7 @@
             <div class='course border-dark rad-5 border-box mb-2 bg-white'>
                 <div class='course-title flex ai-center'>
                     <div class='course-icon'>
-                        <img src='/images/icon-spring-boot.svg' alt=''>
+                        <img th:src="@{/images/icon-spring-boot.svg}" alt=''>
                     </div>
                     <a class='h3 link-darken blue antialiased' href='https://store.education.pivotal.io/confirm-course?courseid=EDU-1100'>Spring Boot Developer Training</a>
                 </div>
@@ -44,7 +44,7 @@
             <div class='course border-dark rad-5 border-box mb-2 bg-white'>
                 <div class='course-title flex ai-center'>
                     <div class='course-icon'>
-                        <img src='/images/icon-spring-data-flow.svg' alt=''>
+                        <img th:src="@{/images/icon-spring-data-flow.svg}" alt=''>
                     </div>
                     <a class='h3 link-darken blue antialiased' href='https://store.education.pivotal.io/confirm-course?courseid=EDU-1122'>Spring Cloud Data Flow Training</a>
                 </div>
@@ -56,7 +56,7 @@
             <div class='course border-dark rad-5 border-box mb-2 bg-white'>
                 <div class='course-title flex ai-center'>
                     <div class='course-icon'>
-                        <img src='/images/icon-spring-cloud.svg' alt=''>
+                        <img th:src="@{/images/icon-spring-cloud.svg}" alt=''>
                     </div>
                     <a class='h3 link-darken blue antialiased' href='https://store.education.pivotal.io/confirm-course?courseid=EDU-1102'>Spring Cloud Developer Training</a>
                 </div>

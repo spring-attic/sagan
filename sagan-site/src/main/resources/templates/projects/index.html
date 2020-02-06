@@ -1,7 +1,6 @@
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
 <head>
 </head>
 <body id='projects'>
@@ -24,7 +23,7 @@
       </section>
       <section id='filters-and-proj' class='flex jc-between mb-6'>
         <ul id='proj-filters'>
-          <li class='blue pointer rad-5 border-box flex jc-between ai-center' th:each="group : ${groups}" th:inline="text">[[${group.label}]]<img class='filter-exit'src='/images/close.svg' alt=''></li>
+          <li class='blue pointer rad-5 border-box flex jc-between ai-center' th:each="group : ${groups}" th:inline="text">[[${group.label}]]<img class='filter-exit'th:src="@{/images/close.svg}" alt=''></li>
         </ul>
         <div class='proj-80'>
           <div class='flex jc-between flex-wrap'>

@@ -27,7 +27,7 @@
                 <a class='button transparent animate' th:href="@{/events}">More events</a>
             </div>
         </div>
-        <img src='/images/world-map.svg' alt=''>
+        <img th:src="@{/images/world-map.svg}" alt=''>
     </div>
     <div class='content' role='main'>
         <div class='container'>
@@ -89,7 +89,7 @@
             <div class='flex flex-wrap jc-between'>
                 <div class='third'>
                     <div class='flex ai-center mb-3'>
-                        <img id='twitter' src='/images/twitter.svg'>
+                        <img id='twitter' th:src="@{/images/twitter.svg}">
                         <h3 class='h3 antialiased inline-block m-0'>Twitter</h3>
                     </div>
                     <div id='twitter-list' class='flex jc-between'>
@@ -123,7 +123,7 @@
                 </div>
                 <div class='two-thirds'>
                     <div class='flex ai-center mb-3'>
-                        <img id='youtube' src='/images/youtube.svg'>
+                        <img id='youtube' th:src="@{/images/youtube.svg}">
                         <h3 class='h3 antialiased inline-block m-0'>YouTube</h3>
                     </div>
                     <div class='iframe-container'>
