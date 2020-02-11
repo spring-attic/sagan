@@ -3768,3 +3768,11 @@ pre.prettyprint .button.copy-button {
     font-size: 11px;
     padding: 3px 6px;
 }
+
+a#logo-focus:focus, .button:focus, a.link-animate:focus, .card:focus, footer #bottom a:focus {
+    outline: 1px dotted #086dc3;
+}
+
+.mktoForm .mktoButtonWrap.mktoSimple .mktoButton:focus {
+    outline: 2px solid #6db33f !important;
+}
