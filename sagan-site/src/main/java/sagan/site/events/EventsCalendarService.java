@@ -1,9 +1,7 @@
 package sagan.site.events;
 
 import java.net.URI;
-import java.util.Comparator;
 import java.util.List;
-import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 import biweekly.Biweekly;
@@ -34,12 +32,11 @@ public class EventsCalendarService {
 		try {
 			String rawCalendar = this.client.getForEntity(this.calendarUri.toString(), String.class).getBody();
 			ICalendar iCalendar = Biweekly.parse(rawCalendar).first();
-			TimeZone calendarTimeZone = getCalendarTimeZone(iCalendar);
 			List<VEvent> events = iCalendar.getEvents();
 			return events.stream()
 					.filter(period.toCalendarFilter())
-					.map(event -> new Event(event, calendarTimeZone))
-					.sorted(Comparator.comparingLong(event -> event.getStartTime().toInstant().toEpochMilli()))
+					.map(Event::new)
+					.sorted()
 					.collect(Collectors.toList());
 		}
 		catch (HttpClientErrorException ex) {
@@ -50,13 +47,4 @@ public class EventsCalendarService {
 		}
 	}
 
-	private TimeZone getCalendarTimeZone(ICalendar iCalendar) {
-		if (iCalendar.getTimezoneInfo().getDefaultTimezone() != null) {
-			return iCalendar.getTimezoneInfo().getDefaultTimezone().getTimeZone();
-		}
-		if (iCalendar.getExperimentalProperties("X-WR-TIMEZONE").size() > 0) {
-			return TimeZone.getTimeZone(iCalendar.getExperimentalProperties("X-WR-TIMEZONE").get(0).getValue());
-		}
-		return TimeZone.getDefault();
-	}
 }

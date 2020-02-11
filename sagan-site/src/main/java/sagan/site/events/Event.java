@@ -1,16 +1,17 @@
 package sagan.site.events;
 
 import java.net.URI;
-import java.time.ZonedDateTime;
-import java.util.TimeZone;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 import biweekly.component.VEvent;
 
-public class Event {
+public class Event implements Comparable<Event> {
 
-	private final ZonedDateTime startTime;
+	private final LocalDate firstDay;
 
-	private final ZonedDateTime endTime;
+	private final LocalDate lastDay;
 
 	private final String summary;
 
@@ -18,17 +19,17 @@ public class Event {
 
 	private final String location;
 
-	protected Event(ZonedDateTime startTime, ZonedDateTime endTime, String summary, URI link, String location) {
-		this.startTime = startTime;
-		this.endTime = endTime;
+	protected Event(LocalDate firstDay, LocalDate lastDay, String summary, URI link, String location) {
+		this.firstDay = firstDay;
+		this.lastDay = lastDay;
 		this.summary = summary;
 		this.link = link;
 		this.location = location;
 	}
 
-	protected Event(VEvent event, TimeZone timeZone) {
-		this.startTime = ZonedDateTime.ofInstant(event.getDateStart().getValue().toInstant(), timeZone.toZoneId());
-		this.endTime = ZonedDateTime.ofInstant(event.getDateEnd().getValue().toInstant(), timeZone.toZoneId());
+	protected Event(VEvent event) {
+		this.firstDay = event.getDateStart().getValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		this.lastDay = event.getDateEnd().getValue().toInstant().minus(Duration.ofMinutes(1)).atZone(ZoneId.systemDefault()).toLocalDate();
 		this.summary = event.getSummary().getValue();
 		this.link = parseLink(event);
 		this.location = event.getLocation().getValue();
@@ -43,24 +44,32 @@ public class Event {
 		}
 	}
 
-	public ZonedDateTime getStartTime() {
-		return startTime;
+	public LocalDate getFirstDay() {
+		return this.firstDay;
 	}
 
-	public ZonedDateTime getEndTime() {
-		return endTime;
+	public LocalDate getLastDay() {
+		return this.lastDay;
+	}
+
+	public boolean isSingleDayEvent() {
+		return this.firstDay.equals(this.lastDay);
 	}
 
 	public String getSummary() {
-		return summary;
+		return this.summary;
 	}
 
 	public URI getLink() {
-		return link;
+		return this.link;
 	}
 
 	public String getLocation() {
-		return location;
+		return this.location;
 	}
 
+	@Override
+	public int compareTo(Event other) {
+		return this.firstDay.compareTo(other.firstDay);
+	}
 }
