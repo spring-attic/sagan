@@ -5,6 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 module.exports = {
     entry: {
@@ -35,6 +36,22 @@ module.exports = {
             jQuery: "jquery",
             'window.jQuery': 'jquery',
             'window.$': 'jquery'
+        }),
+        new WebpackPwaManifest({
+            name: 'spring',
+            short_name: 'Spring',
+            description: 'Level up your Java code and explore what Spring can do for you.',
+            background_color: '#6db33f',
+            inject: false,
+            fingerprints: false,
+            ios: true,
+            crossorigin: null,
+            icons: [
+                {
+                    src: path.resolve('./src/images/spring-logo.png'),
+                    sizes: [48, 72, 96, 144, 192, 256, 384, 512],
+                },
+            ],
         })
     ],
     module: {
