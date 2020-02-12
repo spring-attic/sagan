@@ -1,6 +1,5 @@
 package sagan.site.events;
 
-
 import java.util.List;
 
 import org.junit.Test;
@@ -71,8 +70,8 @@ public class EventsCalendarServiceTests {
 		assertThat(events).hasSize(1);
 		Event event = events.get(0);
 		assertThat(event.getSummary()).isEqualTo("Spring IO conference");
-		assertThat(event.getStartTime().toString()).isEqualTo("2020-05-14T00:00-07:00[America/Los_Angeles]");
-		assertThat(event.getEndTime().toString()).isEqualTo("2020-05-15T09:00-07:00[America/Los_Angeles]");
+		assertThat(event.getFirstDay().toString()).isEqualTo("2020-05-14");
+		assertThat(event.getLastDay().toString()).isEqualTo("2020-05-15");
 		assertThat(event.getLocation()).isEqualTo("Barcelona, Spain");
 		assertThat(event.getLink().toString()).isEqualTo("https://springio.net");
 	}
@@ -84,11 +83,19 @@ public class EventsCalendarServiceTests {
 		List<Event> events = this.calendarService.findEvents(Period.of("2020-05-01", 30));
 		assertThat(events).hasSize(2);
 		Event event = events.get(0);
-		assertThat(event.getSummary()).isEqualTo("Spring @ San Francisco JUG");
-		assertThat(event.getStartTime().toString()).isEqualTo("2020-05-11T18:00-07:00[America/Los_Angeles]");
-		assertThat(event.getEndTime().toString()).isEqualTo("2020-05-11T21:00-07:00[America/Los_Angeles]");
-		assertThat(event.getLocation()).isEqualTo("San Francisco, California");
-		assertThat(event.getLink().toString()).isEqualTo("https://spring.io");
+		assertThat(event.getSummary()).isEqualTo("Spring IO conference");
+		assertThat(event.getFirstDay().toString()).isEqualTo("2020-05-14");
+		assertThat(event.getLastDay().toString()).isEqualTo("2020-05-15");
+		assertThat(event.isSingleDayEvent()).isFalse();
+		assertThat(event.getLocation()).isEqualTo("Barcelona, Spain");
+		assertThat(event.getLink().toString()).isEqualTo("https://springio.net");
+		event = events.get(1);
+		assertThat(event.getSummary()).isEqualTo("Sample Event");
+		assertThat(event.getFirstDay().toString()).isEqualTo("2020-05-20");
+		assertThat(event.getLastDay().toString()).isEqualTo("2020-05-20");
+		assertThat(event.isSingleDayEvent()).isTrue();
+		assertThat(event.getLocation()).isEqualTo("Seattle, WA, USA");
+		assertThat(event.getLink().toString()).isEqualTo("https://example.org/sample");
 	}
 
 	private ClassPathResource getClassPathResource(String path) {
