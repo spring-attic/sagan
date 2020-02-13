@@ -3776,3 +3776,15 @@ a#logo-focus:focus, .button:focus, a.link-animate:focus, .card:focus, footer #bo
 .mktoForm .mktoButtonWrap.mktoSimple .mktoButton:focus {
     outline: 2px solid #6db33f !important;
 }
+body#projects #hero #pacman {
+    position: absolute;
+    right: -200px;
+    top: -100px;
+    height: 500px;
+}
+body#training #hero #pacman {
+    position: absolute;
+    right: -200px;
+    top: -200px;
+    height: 700px;
+}
