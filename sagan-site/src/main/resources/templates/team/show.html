@@ -72,7 +72,7 @@
                             <div class='content-items--container posts'>
                                 <article class="member-post--container" th:each="post : ${posts}">
                                     <header>
-                                        <a th:href="@{${post.path}}"><h2 class="member-post--title" th:text="${post.title}">
+                                        <a class="member-post--title-link" th:href="@{${post.path}}"><h2 class="member-post--title" th:text="${post.title}">
                                             This week in Spring</h2></a>
                                         <div class="meta-data--container">
                                             <div class="meta-data--item">

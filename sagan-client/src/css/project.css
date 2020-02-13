@@ -412,3 +412,7 @@
 .project-content {
     color: #333;
 }
+
+.compass .project-content .anchor {
+    display: none;
+}
