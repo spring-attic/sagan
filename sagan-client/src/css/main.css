@@ -3769,18 +3769,28 @@ pre.prettyprint .button.copy-button {
     padding: 3px 6px;
 }
 
-.compass .project--header .social-links a:focus {
+.compass .project--header .social-links a:focus, .team-member--social a:focus {
     outline: none;
 }
 
 a#logo-focus:focus, .button:focus, a.link-animate:focus, .card:focus, footer #bottom a:focus,
 body#projects a.project:focus, .compass .sidebar a:focus, .compass .project--header .social-links a:focus svg,
-.compass .nav a:focus, .compass .project-content a:focus, a.link-darken:focus{
+.compass .nav a:focus, .compass .project-content a:focus, a.link-darken:focus, label[for^=mktoCheckbox] a:focus,
+.team-member--info a.team-member--name:focus, .team-member--social a:focus .fab, a.team-member--social--icon:focus,
+.blog--container a:focus, a.blog-preview--readmore:focus, .blog-category a:focus, .guide main a:focus,
+pre.prettyprint .button.copy-button:focus{
     outline: 1px dotted #086dc3;
+}
+#featured-post a:focus, #suite-three a:focus {
+    outline: 1px dotted #FFF;
 }
 
 .compass .project--header .social-links a:focus svg {
     fill: #6bb536;
+}
+
+.team-member--social a:focus .fab {
+    color: #6bb536;
 }
 
 .mktoForm .mktoButtonWrap.mktoSimple .mktoButton:focus {
@@ -3797,4 +3807,8 @@ body#training #hero #pacman {
     right: -200px;
     top: -200px;
     height: 700px;
+}
+
+.blog--container a.member-post--title-link {
+    display: block;
 }

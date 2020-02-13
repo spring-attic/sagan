@@ -35,13 +35,13 @@
                 <ul class="right-pane-widget--container secondary-nav with-icon">
                     <li class="blog-category">
                         <a th:href="@{/blog}">All Posts</a>
-                        <a class="pull-right" th:href="@{/blog/category/blog.atom}"><i class="icon-rss"></i></a>
+                        <a class="pull-right" th:href="@{/blog/category/blog.atom}"><i class="fas fa-rss-square"></i></a>
                     </li>
                     <li th:each="category : ${categories}" class="blog-category">
                         <a th:href="@{'/blog/category/' + ${category.urlSlug}}" th:text="${category.displayName}">All
                             Posts</a>
                         <a class="pull-right" th:href="@{'/blog/category/'+${category.urlSlug}}+'.atom'"><i
-                                class="icon-rss"></i></a>
+                                class="fas fa-rss-square"></i></a>
                     </li>
                 </ul>
             </div>

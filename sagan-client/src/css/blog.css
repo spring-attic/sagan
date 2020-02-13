@@ -75,6 +75,9 @@ article:last-child {
 .blog-category a {
     color: #0066cc;
 }
+.blog-category .pull-right {
+    margin-left: 4px;
+}
 .blog-category a:hover {
     color: #333;
 }
