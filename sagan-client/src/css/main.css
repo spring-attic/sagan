@@ -3769,8 +3769,18 @@ pre.prettyprint .button.copy-button {
     padding: 3px 6px;
 }
 
-a#logo-focus:focus, .button:focus, a.link-animate:focus, .card:focus, footer #bottom a:focus {
+.compass .project--header .social-links a:focus {
+    outline: none;
+}
+
+a#logo-focus:focus, .button:focus, a.link-animate:focus, .card:focus, footer #bottom a:focus,
+body#projects a.project:focus, .compass .sidebar a:focus, .compass .project--header .social-links a:focus svg,
+.compass .nav a:focus, .compass .project-content a:focus, a.link-darken:focus{
     outline: 1px dotted #086dc3;
+}
+
+.compass .project--header .social-links a:focus svg {
+    fill: #6bb536;
 }
 
 .mktoForm .mktoButtonWrap.mktoSimple .mktoButton:focus {
