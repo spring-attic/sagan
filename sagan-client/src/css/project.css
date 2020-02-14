@@ -395,7 +395,7 @@
 
 .project-content pre code {
     border: 0 none;
-    white-space: nowrap;
+    white-space: pre-wrap;
     overflow-x: auto;
 }
 
