@@ -3891,3 +3891,31 @@ table.tableblock .valign-bottom {
 table.stretch {
     width: 100%;
 }
+
+blockquote {
+    border-left: 2px solid #6db33f;
+    margin: 0;
+    padding: 10px 10px 10px 30px;
+    position: relative;
+    color: #666;
+}
+blockquote, blockquote p {
+    color: #666;
+}
+blockquote:after {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f10e";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    color: #6db33f;
+    font-style: normal;
+    line-height: 2em;
+    text-align: center;
+    text-indent: -2px;
+    margin-top: -15px;
+    background: white;
+    height: 30px;
+    width: 20px;
+}
