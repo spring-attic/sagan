@@ -17,6 +17,9 @@ h2.blog--title {
     font-family: 'Work Sans', sans-serif;
     display: inline-block;
 }
+.meta-data--item a:hover {
+    color: #086dc3;
+}
 .meta-data--item img {
     display: none;
 }
@@ -173,4 +176,35 @@ article:last-child {
 }
 .main-body--wrapper {
     padding: 0;
+}
+
+.blog--post pre {
+    padding: 10px;
+    border: 1px solid #e1e1e8;
+    overflow-x: auto;
+}
+
+.blog--post pre code {
+    border: 0 none;
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
+
+.blog--post code {
+    font-size: 14px;
+    font-family: Monaco,monospace;
+    border: 1px solid #e1e1e8;
+    white-space: nowrap;
+    overflow-x: auto;
+    padding: 2px 6px;
+    color: #009;
+}
+
+.blog--post ul li p {
+    margin: 0;
+    padding: 0;
+}
+
+.blog--post ul li {
+    margin: 12px 0;
 }
