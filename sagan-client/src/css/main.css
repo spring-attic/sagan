@@ -2405,6 +2405,9 @@ body#projects .project {
     padding: 40px 30px;
     margin-bottom: 25px;
 }
+body#projects .project.hide {
+    display: none;
+}
 body#projects .proj-icon-box {
     width: 18.5%;
     align-self: flex-start;
