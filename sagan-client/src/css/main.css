@@ -3812,3 +3812,79 @@ body#training #hero #pacman {
 .blog--container a.member-post--title-link {
     display: block;
 }
+
+table.tableblock {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+table.tableblock[frame=hsides] {
+    border-style: solid none;
+}
+table.tableblock[frame=border] {
+    border-style: solid;
+}
+table.tableblock[frame=void] {
+    border-style: none;
+}
+table.tableblock[frame=vsides] {
+    border-style: none solid;
+}
+table.tableblock[rules=all] tbody tr *,
+table.tableblock[rules=rows] tbody tr * {
+    border-top: 1px solid #ebf2f2;
+}
+table.tableblock[rules=all] tr *,
+table.tableblock[rules=cols] tr * {
+    border-left: 1px solid #ebf2f2;
+}
+table.tableblock tbody tr:first-child * {
+    border-top: 1px solid white; /* none don't work here... %-[] */
+}
+table.tableblock tr *:first-child {
+    border-left: none;
+}
+table.tableblock thead tr *,
+table.tableblock thead tr * {
+    border-top: 1px solid white;
+    border-bottom: 2px solid #cbd8d8;
+}
+table.tableblock tr td, table.tableblock tr th {
+    padding: 8px;
+}
+table.tableblock tr td p.table,
+table.tableblock tr td p.table * {
+    border: 0px;
+}
+table.tableblock tr td {
+    border-top: 1px solid #ebf2f2;
+}
+table.tableblock tr td p.tableblock {
+    padding: 0;
+    margin: 0;
+}
+table.tableblock caption.title {
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-align: left;
+}
+table.tableblock .halign-left {
+    text-align: left;
+}
+table.tableblock .halign-center {
+    text-align: center;
+}
+table.tableblock .halign-right {
+    text-align: right;
+}
+table.tableblock .valign-top {
+    vertical-align: top;
+}
+table.tableblock .valign-middle {
+    vertical-align: middle;
+}
+table.tableblock .valign-bottom {
+    vertical-align: bottom;
+}
+table.stretch {
+    width: 100%;
+}
