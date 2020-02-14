@@ -3919,3 +3919,9 @@ blockquote:after {
     height: 30px;
     width: 20px;
 }
+body#index blockquote {
+    padding-left: 0px;
+}
+body#index blockquote:after {
+    display: none;
+}
