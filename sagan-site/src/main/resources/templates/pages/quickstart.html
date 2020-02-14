@@ -38,38 +38,38 @@
                 <h2 class='h2 antialiased'><span class='green'>Step 2: </span>Add your code</h2>
                 <p>Open up the project in your IDE and locate the <code>DemoApplication.java</code> file in the <code>src/main/java/com/example/demo</code> folder. Now change the contents of the file by adding the extra method and annotations shown in the code below. You can copy and paste the code or just type it.</p>
                 <pre class='prettyprint'><code class='no-bg'>
-              package com.example.demo;<br/>
-              import org.springframework.boot.SpringApplication;<br>
-              import org.springframework.boot.autoconfigure.SpringBootApplication;<br>
-              import org.springframework.web.bind.annotation.GetMapping;<br>
-              import org.springframework.web.bind.annotation.RequestParam;<br>
-              import org.springframework.web.bind.annotation.RestController;<br>
-              <br>
-              @SpringBootApplication<br>
-              @RestController<br>
-              public class DemoApplication {<br>
+              package com.example.demo;<br/><br/>
+              import org.springframework.boot.SpringApplication;<br/>
+              import org.springframework.boot.autoconfigure.SpringBootApplication;<br/>
+              import org.springframework.web.bind.annotation.GetMapping;<br/>
+              import org.springframework.web.bind.annotation.RequestParam;<br/>
+              import org.springframework.web.bind.annotation.RestController;<br/>
+              <br/>
+              @SpringBootApplication<br/>
+              @RestController<br/>
+              public class DemoApplication {<br/>
                 <div class='indent'>
-                  <br>
-                  public static void main(String[] args) {<br>
-                  <div class='indent'>SpringApplication.run(DemoApplication.class, args);<br></div>
-                  }<br>
-                  <br>
-                  @GetMapping("/hello")<br>
-                  public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {<br>
-                  <div class='indent'>return String.format("Hello %s!", name);<br></div>
-                  }<br>
+                  <br/>
+                  public static void main(String[] args) {<br/>
+                  <div class='indent'>SpringApplication.run(DemoApplication.class, args);<br/></div>
+                  }<br/>
+                  <br/>
+                  @GetMapping("/hello")<br/>
+                  public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {<br/>
+                  <div class='indent'>return String.format("Hello %s!", name);<br/></div>
+                  }<br/>
                 </div>
-              }<br>
+              }<br/>
             </code></pre>
                 <p class='caption'>This is all the code required to create a simple “Hello World” web service in Spring Boot.</p>
                 <p>The <code class='no-bg'>hello()</code> method we’ve added is designed to take a String parameter called <code>name</code>, and then combine this parameter with the word <code>"Hello"</code> in the code. This means that if you set your name to <code>“Amy”</code> in the request, the response would be <code>“Hello Amy”</code>.</p>
                 <p class='mb-4'>The <code>@RestController</code> annotation tells Spring that this code describes an endpoint that should be made available over the web. The <code>@GetMapping(“/hello”)</code> tells Spring to use our <code class='no-bg'>hello()</code> method to answer requests that get sent to the <code>http://localhost:8080/hello</code> address. Finally, the <code>@RequestParam</code> is telling Spring to expect a <code class='no-bg'>name</code> value in the request, but if it’s not there, it will use the word “World” by default.</p>
                 <h2 class='h2 antialiased'><span class='green'>Step 3: </span>Try it</h2>
                 <p>Let’s build and run the program. Open a command line (or terminal) and navigate to the folder where you have the project files. We can use the Maven build system to build and run the application by issuing the following command:</p>
-                <p><b>MacOS/Linux:</b><br><pre><code class='inline-block'>./mvnw package spring-boot:run -DskipTests=true</code></pre></p>
-                <p><b>Windows:</b><br><pre><code class='inline-block'>mvnw package spring-boot:run -DskipTests=true</code></pre></p>
+                <p><b>MacOS/Linux:</b><br><pre><code class='inline-block'>./mvnw spring-boot:run</code></pre></p>
+                <p><b>Windows:</b><br><pre><code class='inline-block'>mvnw spring-boot:run</code></pre></p>
                 <p>You should see some output that looks very similar to this:</p>
-                <img class='shadow mb-1' alt='The terminal outputting various log statements as our Spring Boot application starts up.' title='The terminal outputting various log statements as our Spring Boot application starts up.' th:src="@{/images/quick-img2.png}">
+                <img alt='The terminal outputting various log statements as our Spring Boot application starts up.' title='The terminal outputting various log statements as our Spring Boot application starts up.' th:src="@{/images/quick-img2.png}">
                 <p class='mb-3'>The last couple of lines here tell us that Spring has started. Spring Boot’s embedded Apache Tomcat server is acting as a webserver and is listening for requests on <code class='no-bg'>localhost</code> port <code class='no-bg'>8080</code>. Open your browser and in the address bar at the top enter <a class='blue link-animate' href='http://localhost:8080/hello'>http://localhost:8080/hello</a>. You should get a nice friendly response like this:</p>
                 <img class='shadow mb-3' alt='The browser screen displaying the default ‘hello world’ output from our application.' title='The browser screen displaying the default ‘hello world’ output from our application.' th:src="@{/images/quick-img3.png}">
                 <img id='pop-quiz' class='inline-block' th:src="@{/images/pop-quiz.svg}">
