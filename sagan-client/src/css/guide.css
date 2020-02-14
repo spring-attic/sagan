@@ -97,6 +97,7 @@
     border: none;
     white-space: pre-wrap;
     padding: 0;
+    word-break: break-word;
 }
 .guide main table pre,
 .guide main table code,
