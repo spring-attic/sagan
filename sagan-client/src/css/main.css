@@ -3921,6 +3921,7 @@ blockquote:after {
 }
 body#index blockquote {
     padding-left: 0px;
+    border: 0 none;
 }
 body#index blockquote:after {
     display: none;
