@@ -36,7 +36,7 @@
                 <img id='init' class='mx-auto block mb-4' th:src="@{/images/quick-img-1.png}" alt='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.' title='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.'>
                 <p class='mb-4'>Projects created by <a href='https://start.spring.io/' class='blue link-animate'>start.spring.io</a> contain <a href='/projects/spring-boot' class='blue link-animate'>Spring Boot</a>, a framework that makes Spring ready to work inside your app, but without much code or configuration required. Spring Boot is the quickest and most popular way to start Spring projects.</p>
                 <h2 class='h2 antialiased'><span class='green'>Step 2: </span>Add your code</h2>
-                <p>Open up the project in your IDE and locate the <pre><code>DemoApplication.java</code></pre> file in the <pre><code>src/main/java/com/example/demo</code></pre> folder. Now change the contents of the file by adding the extra method and annotations shown in the code below. You can copy and paste the code or just type it.</p>
+                <p>Open up the project in your IDE and locate the <code>DemoApplication.java</code> file in the <code>src/main/java/com/example/demo</code> folder. Now change the contents of the file by adding the extra method and annotations shown in the code below. You can copy and paste the code or just type it.</p>
                 <pre class='prettyprint'><code class='no-bg'>
               package com.example.demo;<br/>
               import org.springframework.boot.SpringApplication;<br>
@@ -62,8 +62,8 @@
               }<br>
             </code></pre>
                 <p class='caption'>This is all the code required to create a simple “Hello World” web service in Spring Boot.</p>
-                <p>The <code class='no-bg'>hello()</code> method we’ve added is designed to take a String parameter called “name“, and then combine it with the word “Hello”. If I set my name as “Amy” in the request, the response would be “Hello Amy”.</p>
-                <p class='mb-4'>The <pre><code>@RestController</code></pre> annotation tells Spring that this code describes an endpoint that should be made available over the web. The <pre><code>@GetMapping(“/hello”)</code></pre> tells Spring to use our <pre><code class='no-bg'>hello()</code></pre> method to answer requests that get sent to the <pre><code>http://localhost:8080/hello</code></pre> address. Finally, the <pre><code>@RequestParam</code></pre> is telling Spring to expect a <pre><code class='no-bg'>name</code></pre> value in the request, but if it’s not there, it will use the word “World” by default.</p>
+                <p>The <code class='no-bg'>hello()</code> method we’ve added is designed to take a String parameter called <code>name</code>, and then combine this parameter with the word <code>"Hello"</code> in the code. This means that if you set your name to <code>“Amy”</code> in the request, the response would be <code>“Hello Amy”</code>.</p>
+                <p class='mb-4'>The <code>@RestController</code> annotation tells Spring that this code describes an endpoint that should be made available over the web. The <code>@GetMapping(“/hello”)</code> tells Spring to use our <code class='no-bg'>hello()</code> method to answer requests that get sent to the <code>http://localhost:8080/hello</code> address. Finally, the <code>@RequestParam</code> is telling Spring to expect a <code class='no-bg'>name</code> value in the request, but if it’s not there, it will use the word “World” by default.</p>
                 <h2 class='h2 antialiased'><span class='green'>Step 3: </span>Try it</h2>
                 <p>Let’s build and run the program. Open a command line (or terminal) and navigate to the folder where you have the project files. We can use the Maven build system to build and run the application by issuing the following command:</p>
                 <p><b>MacOS/Linux:</b><br><pre><code class='inline-block'>./mvnw package spring-boot:run -DskipTests=true</code></pre></p>
@@ -74,7 +74,7 @@
                 <img class='shadow mb-3' alt='The browser screen displaying the default ‘hello world’ output from our application.' title='The browser screen displaying the default ‘hello world’ output from our application.' th:src="@{/images/quick-img3.png}">
                 <img id='pop-quiz' class='inline-block' th:src="@{/images/pop-quiz.svg}">
                 <h3 class='h3 antialiased inline-block m-0'>Pop quiz</h3>
-                <p>What should happen if you add <pre><code>?name=Amy</code></pre> to the end of the URL?</p>
+                <p>What should happen if you add <code>?name=Amy</code> to the end of the URL?</p>
             </section>
             <section id='next' class='mw-850 mb-8'>
                 <h2 class='h2 antialiased'>Next, try these popular guides</h2>
