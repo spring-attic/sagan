@@ -397,6 +397,7 @@
     border: 0 none;
     white-space: pre-wrap;
     overflow-x: auto;
+    word-break: break-word;
 }
 
 .project-content code {
@@ -415,4 +416,23 @@
 
 .compass .project-content .anchor {
     display: none;
+}
+
+@media (max-width: 600px) {
+    .compass .nav-tabs a {
+        padding: 14px 8px 19px;
+    }
+    .compass .project--header h1 {
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+    .compass .project--header .social-links {
+        position: relative;
+        top: 0;
+        margin-bottom: 12px;
+    }
+    .compass .project--header .label {
+        margin-top: 0;
+        margin-bottom: 0.1rem;
+    }
 }
