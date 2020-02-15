@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 24.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 150.49 156.27" style="enable-background:new 0 0 150.49 156.27;" xml:space="preserve">
+	 viewBox="0 0 150.5 156.3" style="enable-background:new 0 0 150.5 156.3;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#68BD45;}
+	.st0{fill:#6DB33F;}
 </style>
 <title>logo-batch</title>
-<path class="st0" d="M69.57,0H4v156.27h65.57c43.15,0,78.14-34.98,78.14-78.13C147.7,34.98,112.73,0,69.57,0z M130.4,127.25
-	l-1.02,1.01h-26.05L67.2,92.14l-36.12,36.13H5.02L4,127.25l29.29-49.16L4,28.94l1.02-1.02h26.06L67.2,64.05l36.13-36.13h26.05
-	l1.02,1.02L101.1,78.09L130.4,127.25z"/>
+<path class="st0" d="M69.6,0H4v156.3h65.6c43.2,0,78.1-35,78.1-78.1C147.7,35,112.7,0,69.6,0z M130.4,127.2l-1,1h-26.1L67.2,92.1
+	l-36.1,36.1H5l-1-1l29.3-49.2L4,28.9l1-1h26.1l36.1,36.1l36.1-36.1h26.1l1,1l-29.3,49.1L130.4,127.2z"/>
 </svg>
