@@ -3892,17 +3892,17 @@ table.stretch {
     width: 100%;
 }
 
-blockquote {
+.blog--post blockquote {
     border-left: 2px solid #6db33f;
     margin: 0;
     padding: 10px 10px 10px 30px;
     position: relative;
     color: #666;
 }
-blockquote, blockquote p {
+.blog--post blockquote, blockquote p {
     color: #666;
 }
-blockquote:after {
+.blog--post blockquote:after {
     font-family: 'Font Awesome 5 Free';
     content: "\f10e";
     font-weight: 900;
