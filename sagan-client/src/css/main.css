@@ -3804,12 +3804,14 @@ body#projects #hero #pacman {
     right: -200px;
     top: -100px;
     height: 500px;
+    z-index: -1;
 }
 body#training #hero #pacman {
     position: absolute;
     right: -200px;
     top: -200px;
     height: 700px;
+    z-index: -1;
 }
 
 .blog--container a.member-post--title-link {
