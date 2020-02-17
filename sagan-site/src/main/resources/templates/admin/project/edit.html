@@ -195,6 +195,17 @@
             </div>
         </div>
         <div class="field">
+            <label class="label">Project Tag Line</label>
+            <div class="control">
+                        <textarea class="textarea" th:classappend="(${#fields.hasErrors('tagLine')}? ' is-danger')"
+                                  placeholder="Tag line displayed in the projects list."
+                                  th:field="*{tagLine}" name="tagLine" rows="8"></textarea>
+                <p class="help is-danger" th:if="${#fields.hasErrors('tagLine')}" th:errors="*{tagLine}">
+                    Incorrect
+                    project tag line</p>
+            </div>
+        </div>
+        <div class="field">
             <label class="label">Spring Boot configuration</label>
             <div class="control">
                         <textarea class="textarea"
@@ -219,17 +230,7 @@
             </div>
             <p>Please use the Asciidoc format.</p>
         </div>
-        <div class="field">
-            <label class="label">Project Tag Line</label>
-            <div class="control">
-                        <textarea class="textarea" th:classappend="(${#fields.hasErrors('tagLine')}? ' is-danger')"
-                                  placeholder="Tag line displayed in the projects list."
-                                  th:field="*{tagLine}" name="tagLine" rows="8"></textarea>
-                <p class="help is-danger" th:if="${#fields.hasErrors('tagLine')}" th:errors="*{tagLine}">
-                    Incorrect
-                    project tag line</p>
-            </div>
-        </div>
+
         <div class="buttons control is-centered">
             <button type="submit" class="button is-primary">Save</button>
             <a class="button" th:href="@{/admin/projects}">Cancel</a>
