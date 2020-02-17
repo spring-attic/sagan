@@ -8,16 +8,18 @@
 <nav layout:fragment="~{breadcrumb}">
     <ul>
         <li><a th:href="@{/admin}">Admin</a></li>
-        <li><a class="is-active" th:href="@{admin/tools}" aria-current="page">Spring Tools</a></li>
+        <li class="is-active"><a th:href="@{admin/tools}" aria-current="page">Spring Tools</a></li>
     </ul>
 </nav>
 <div layout:fragment="~{content}">
     <nav class="level">
+        <div class="level-left">
+            <h2 class="title is-2">Platforms</h2>
+        </div>
         <div class="level-right">
             <p class="level-item"><a class="button is-success" th:href="@{'/admin/tools/new'}">Add Platform</a></p>
         </div>
     </nav>
-    <h2>Platforms</h2>
     <table class="table is-striped is-fullwidth">
         <thead>
         <tr>

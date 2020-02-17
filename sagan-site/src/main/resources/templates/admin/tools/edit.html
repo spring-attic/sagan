@@ -9,7 +9,7 @@
     <ul>
         <li><a th:href="@{/admin}">Admin</a></li>
         <li><a th:href="@{/admin/tools}">Spring Tools</a></li>
-        <li><a class="is-active" th:href="@{'/admin/tools/' + ${platform.id}}" th:inline="text" aria-current="page">Edit [[${platform.id}]]</a></li>
+        <li class="is-active"><a th:href="@{'/admin/tools/' + ${platform.id}}" th:inline="text" aria-current="page">Edit [[${platform.id}]]</a></li>
     </ul>
 </nav>
 <div layout:fragment="~{content}">
