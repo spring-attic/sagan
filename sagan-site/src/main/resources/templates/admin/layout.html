@@ -10,39 +10,69 @@
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/admin.css}"/>
 </head>
 <body>
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" th:href="@{/}">
-            <img th:src="@{/images/spring-logo.svg}" width="200">
-        </a>
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-           data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-    </div>
-    <div class="navbar-menu">
-        <div class="navbar-start">
-            <a class="navbar-item" th:href="@{/admin/blog}">Blog</a>
-            <a class="navbar-item" th:href="@{/admin/projects}">Projects</a>
-            <a class="navbar-item" th:href="@{/admin/team}">Team</a>
-            <a class="navbar-item" th:href="@{/admin/tools}">Spring Tools</a>
+<nav class="navbar is-spaced has-shadow" role="navigation" aria-label="main navigation" id="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-item-logo" th:href="@{/admin/}">
+                <img th:src="@{/images/spring-logo.svg}" width="200">
+            </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+               data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
         </div>
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <a th:href="@{/admin/profile}" sec:authentication="credentials">Emily</a>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" th:href="@{/admin/blog}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/blog') ? 'is-active':''}">
+                    <span class="icon has-text-primary">
+                        <i class="fab fa-microblog"></i>
+                    </span>
+                    <span>Blog</span>
+                </a>
+                <a class="navbar-item" th:href="@{/admin/projects}"  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/projects') ? 'is-active':''}">
+                    <span class="icon has-text-star">
+                        <i class="fas fa-star"></i>
+                    </span>
+                    <span>Projects</span>
+                </a>
+                <a class="navbar-item" th:href="@{/admin/team}"  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/team') ? 'is-active':''}">
+                    <span class="icon has-text-success">
+                        <i class="fas fa-users"></i>
+                    </span>
+                    <span>Team</span>
+                </a>
+                <a class="navbar-item" th:href="@{/admin/tools}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/tools') ? 'is-active':''}">
+                    <span class="icon has-text-tools">
+                        <i class="fas fa-tools"></i>
+                    </span>
+                    <span>Spring Tools</span>
+                </a>
             </div>
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a class="button is-light" th:href="@{/signout}">Log out</a>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-white" th:href="@{/admin/profile}">
+                            <span class="icon has-text-success">
+                              <i class="fas fa-user"></i>
+                            </span>
+                            <span sec:authentication="credentials">Emily</span>
+                        </a>
+                        <a class="button is-white" th:href="@{/signout}">
+                            <span class="icon has-text-danger">
+                              <i class="fas fa-sign-out-alt"></i>
+                            </span>
+                            <span>Log out</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </nav>
 <main class="container">
-    <nav id="breadcrumbs" class="breadcrumb is-medium" aria-label="breadcrumbs" layout:fragment="~{breadcrumb}"></nav>
+    <nav id="breadcrumbs" class="breadcrumb" aria-label="breadcrumbs" layout:fragment="~{breadcrumb}"></nav>
     <div id="admin" layout:fragment="~{content}"></div>
 </main>
 <script th:src="@{/js/admin.js}"></script>

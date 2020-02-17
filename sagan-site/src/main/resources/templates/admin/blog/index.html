@@ -9,7 +9,7 @@
 <nav layout:fragment="~{breadcrumb}">
     <ul>
         <li><a th:href="@{/admin}">Admin</a></li>
-        <li><a class="is-active" th:href="@{/admin/blog}" aria-current="page">Blog</a></li>
+        <li class="is-active"><a th:href="@{/admin/blog}" aria-current="page">Blog</a></li>
     </ul>
 </nav>
 <div layout:fragment="~{content}">
@@ -36,6 +36,9 @@
             </div>
         </div>
         -->
+        <div class="level-left">
+            <h2 class="title is-2">Blog Posts</h2>
+        </div>
         <div class="level-right">
             <!--
             <p class="level-item"><strong>All</strong></p>
@@ -43,12 +46,13 @@
             <p class="level-item"><a th:href="@{/admin/blog?state=scheduled}">Scheduled</a></p>
             <p class="level-item"><a th:href="@{/admin/blog?state=draft}">Drafts</a></p>
             -->
-            <p class="level-item"><a class="button is-success" th:href="@{'/admin/blog/new'}">New</a></p>
+            <p class="level-item"><a class="button is-success" th:href="@{'/admin/blog/new'}">New Post</a></p>
         </div>
     </nav>
 
     <div th:if="${drafts.totalElements}">
-        <h2 class="title">Drafts</h2>
+        <hr class="hr">
+        <h3 class="title is-3">Drafts</h3>
         <table class="table is-striped is-fullwidth">
             <thead layout:fragment="post-head">
             <tr>
@@ -62,17 +66,24 @@
             <tr th:each="post : ${drafts}" layout:fragment="post-row">
                 <td><a th:href="@{${post.editPath}}" th:text="${post.title}">This week in Spring</a></td>
                 <td class="author">
-                    <a class='author' th:text="${post.author.name}" th:href="@{'/team/'+${post.author.username}}">Emily
-                        Spring</a>
+                    <a class='author' th:href="@{'/team/'+${post.author.username}}">
+                        <span class="icon has-text-success">
+                          <i class="fas fa-user"></i>
+                        </span>
+                        <span th:text="${post.author.name}">Emily Spring</span>
+                    </a>
                 </td>
-                <td th:text="${post.category}">News</td>
+                <td>
+                   <span class="tag is-primary" th:text="${post.category}">News</span>
+                </td>
                 <td th:text="${post.formattedPublishDate}">January 01, 2020</td>
             </tr>
             </tbody>
         </table>
     </div>
     <div th:if="${scheduled.totalElements}">
-        <h2 class="title">Scheduled</h2>
+        <hr class="hr">
+        <h3 class="title is-3">Scheduled</h3>
         <table class="table is-striped is-fullwidth">
             <thead layout:include="admin/blog/index::post-head"></thead>
             <tbody>
@@ -82,7 +93,8 @@
         </table>
     </div>
     <div th:if="${posts.totalElements}">
-        <h2 class="title">Published</h2>
+        <hr class="hr">
+        <h3 class="title is-3">Published</h3>
         <table class="table is-striped is-fullwidth">
             <thead layout:include="admin/blog/index::post-head"></thead>
             <tbody>
