@@ -31,7 +31,7 @@
             <a th:each="project : ${active}" class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'
                th:href="${project.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
               <div class='proj-icon-box'>
-                <img class='proj-icon' th:src="${project.imagePath ?: '/images/projects/spring.svg'}">
+                <img class='proj-icon' th:src="@{${project.imagePath ?: '/images/projects/spring.svg'}}">
               </div>
               <div class='proj-text'>
                 <h3 class='h3 m-0 antialiased' th:text="${project.name}">Spring Boot</h3>
@@ -48,7 +48,7 @@
             <a th:each="project : ${community}" class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'
                th:href="${project.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
               <div class='proj-icon-box'>
-                <img class='proj-icon' th:src="${project.imagePath ?: '/images/projects/spring.svg'}">
+                <img class='proj-icon' th:src="@{${project.imagePath ?: '/images/projects/spring.svg'}}">
               </div>
               <div class='proj-text'>
                 <h3 class='h3 m-0 antialiased' th:text="${project.name}">Spring Boot</h3>
@@ -65,7 +65,7 @@
               <a th:each="project : ${attic}" class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'
                  th:href="${project.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
                   <div class='proj-icon-box'>
-                      <img class='proj-icon' th:src="${project.imagePath ?: '/images/projects/spring.svg'}">
+                      <img class='proj-icon' th:src="@{${project.imagePath ?: '/images/projects/spring.svg'}}">
                   </div>
                   <div class='proj-text'>
                       <h3 class='h3 m-0 antialiased' th:text="${project.name}">Spring Boot</h3>
