@@ -188,6 +188,7 @@ article:last-child {
     border: 0 none;
     white-space: pre-wrap;
     overflow-x: auto;
+    word-break: break-word;
 }
 
 .blog--post code {

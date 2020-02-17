@@ -157,7 +157,7 @@ body {
 }
 #community-target {
     width: 110px;
-    transform: translateX(30px);
+    transform: translateX(87px);
 }
 .drop-menu.active {
     opacity: 1;
@@ -2405,6 +2405,9 @@ body#projects .project {
     padding: 40px 30px;
     margin-bottom: 25px;
 }
+body#projects .project.hide {
+    display: none;
+}
 body#projects .proj-icon-box {
     width: 18.5%;
     align-self: flex-start;
@@ -3801,14 +3804,128 @@ body#projects #hero #pacman {
     right: -200px;
     top: -100px;
     height: 500px;
+    z-index: -1;
 }
 body#training #hero #pacman {
     position: absolute;
     right: -200px;
     top: -200px;
     height: 700px;
+    z-index: -1;
+    display: none;
 }
 
 .blog--container a.member-post--title-link {
     display: block;
+}
+
+table.tableblock {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+table.tableblock[frame=hsides] {
+    border-style: solid none;
+}
+table.tableblock[frame=border] {
+    border-style: solid;
+}
+table.tableblock[frame=void] {
+    border-style: none;
+}
+table.tableblock[frame=vsides] {
+    border-style: none solid;
+}
+table.tableblock[rules=all] tbody tr *,
+table.tableblock[rules=rows] tbody tr * {
+    border-top: 1px solid #ebf2f2;
+}
+table.tableblock[rules=all] tr *,
+table.tableblock[rules=cols] tr * {
+    border-left: 1px solid #ebf2f2;
+}
+table.tableblock tbody tr:first-child * {
+    border-top: 1px solid white; /* none don't work here... %-[] */
+}
+table.tableblock tr *:first-child {
+    border-left: none;
+}
+table.tableblock thead tr *,
+table.tableblock thead tr * {
+    border-top: 1px solid white;
+    border-bottom: 2px solid #cbd8d8;
+}
+table.tableblock tr td, table.tableblock tr th {
+    padding: 8px;
+}
+table.tableblock tr td p.table,
+table.tableblock tr td p.table * {
+    border: 0px;
+}
+table.tableblock tr td {
+    border-top: 1px solid #ebf2f2;
+}
+table.tableblock tr td p.tableblock {
+    padding: 0;
+    margin: 0;
+}
+table.tableblock caption.title {
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-align: left;
+}
+table.tableblock .halign-left {
+    text-align: left;
+}
+table.tableblock .halign-center {
+    text-align: center;
+}
+table.tableblock .halign-right {
+    text-align: right;
+}
+table.tableblock .valign-top {
+    vertical-align: top;
+}
+table.tableblock .valign-middle {
+    vertical-align: middle;
+}
+table.tableblock .valign-bottom {
+    vertical-align: bottom;
+}
+table.stretch {
+    width: 100%;
+}
+
+.blog--post blockquote {
+    border-left: 2px solid #6db33f;
+    margin: 0;
+    padding: 10px 10px 10px 30px;
+    position: relative;
+    color: #666;
+}
+.blog--post blockquote, blockquote p {
+    color: #666;
+}
+.blog--post blockquote:after {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f10e";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    color: #6db33f;
+    font-style: normal;
+    line-height: 2em;
+    text-align: center;
+    text-indent: -2px;
+    margin-top: -15px;
+    background: white;
+    height: 30px;
+    width: 20px;
+}
+body#index blockquote {
+    padding-left: 0px;
+    border: 0 none;
+}
+body#index blockquote:after {
+    display: none;
 }

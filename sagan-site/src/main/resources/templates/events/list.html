@@ -17,7 +17,8 @@
             <div class='container rel z-1'>
                 <div class='flex jc-between flex-wrap mb-2'>
                     <a th:each="event : ${events}"
-                       th:href="${event.link}" class='card third shadow-hover bg-white border-box block rel mb-2'>
+                       th:href="${event.link}" class='card third shadow-hover bg-white border-box block rel mb-2'
+                       target="_blank">
                         <div class='greenbar'></div>
                         <div class='border-dark rad-5'>
                             <h3 class='h3 antialiased' th:text="${event.summary}">Event</h3>
