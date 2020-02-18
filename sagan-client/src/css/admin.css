@@ -64,3 +64,9 @@
 .layout-tile a.tile:hover {
     transform: scale(1.02);
 }
+
+#footer {
+    padding: 2rem 0;
+    border-top: 2px solid #f5f5f5;
+    margin-top: 3rem;
+}
