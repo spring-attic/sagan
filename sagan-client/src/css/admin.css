@@ -1,0 +1,66 @@
+
+.navbar-item-logo {
+    width: 160px;
+}
+
+.has-text-star {
+    color: #ffd257;
+}
+
+.has-text-tools {
+    color: #f96854!important;
+}
+
+.navbar .icon {
+    margin-right: .25rem;
+}
+
+.navbar-item img {
+    max-height: 2.75rem;
+}
+
+#breadcrumbs {
+    margin: 1.5rem 0;
+}
+
+@media screen and (min-width: 1024px) {
+    .navbar-link.is-active:not(:focus):not(:hover), a.navbar-item.is-active:not(:focus):not(:hover) {
+        background-color: #fafafa;
+    }
+}
+
+.tag:not(body).is-active {
+    background-color: #00d1b2;
+    color: #fff;
+}
+.tag:not(body).is-attic {
+    background-color: #3298dc;
+    color: #fff;
+}
+.tag:not(body).is-incubator {
+    background-color: #f14668;
+    color: #fff;
+}
+.tag:not(body).is-community {
+    background-color: #ffdd57;
+    color: rgba(0,0,0,.7);
+}
+
+.layout-tile {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px 20px;
+    padding-bottom: 3rem;
+}
+
+.layout-tile a.tile {
+    display: flex;
+    transition: all .15s;
+}
+.layout-tile a.tile .card {
+    width: 100%;
+}
+
+.layout-tile a.tile:hover {
+    transform: scale(1.02);
+}

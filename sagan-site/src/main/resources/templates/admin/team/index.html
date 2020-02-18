@@ -8,44 +8,66 @@
 <nav layout:fragment="~{breadcrumb}">
     <ul>
         <li><a th:href="@{/admin}">Admin</a></li>
-        <li><a class="is-active" th:href="@{admin/team}" aria-current="page">Team</a></li>
+        <li class="is-active"><a th:href="@{admin/team}" aria-current="page">Team</a></li>
     </ul>
 </nav>
 <div layout:fragment="~{content}">
-    <h2 class="title">Active Members</h2>
-    <table class="table is-striped is-fullwidth">
-        <thead>
-        <tr>
-            <td>Id</td>
-            <td>Name</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="member : ${activeMembers}" layout:fragment="member-row">
-            <td><a th:text="${member.username}"
-                   th:href="@{'/admin/team/'+${member.username}}">username</a></td>
-            <td th:text="${member.name}?:''">Name</td>
-        </tr>
-        </tbody>
-    </table>
-    <h2 class="title">Hidden Members</h2>
-    <table class="table is-striped is-fullwidth">
-        <thead>
-        <tr>
-            <td>Id</td>
-            <td>Name</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="member : ${hiddenMembers}">
-            <td><a th:text="${member.username}"
-                   th:href="@{'/admin/team/'+${member.username}}">username</a></td>
-            <td th:text="${member.name}?:''">Name</td>
-        </tr>
-        </tbody>
-    </table>
+    <h3 class="title is-3">Active Members</h3>
+    <div class="layout-tile">
+        <a class="tile" th:each="member : ${activeMembers}" layout:fragment="member-row"
+           th:href="@{'/admin/team/'+${member.username}}">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image">
+                        <img th:src="${member.avatarUrl} + '?s=153&s=153'"/>
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <p class="title is-4" th:text="${member.name}">Name</p>
+                            <p class="subtitle is-6 has-text-link">@<span th:text="${member.twitterUsername}">Twitter</span></p>
+                        </div>
+                    </div>
 
+                    <div class="content">
+                        <span th:text="${member.jobTitle}"></span>
+                        <br>
+                        <span th:text="${member.location}"></span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
 
+    <hr class="hr">
+    <h3 class="title is-3">Hidden Members</h3>
+    <div class="layout-tile">
+        <a class="tile" th:each="member : ${hiddenMembers}" layout:fragment="member-row"
+           th:href="@{'/admin/team/'+${member.username}}">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image">
+                        <img th:src="${member.avatarUrl} + '?s=153&s=153'"/>
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <p class="title is-4" th:text="${member.name}">Name</p>
+                            <p class="subtitle is-6 has-text-link">@<span th:text="${member.twitterUsername}">Twitter</span></p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <span th:text="${member.jobTitle}"></span>
+                        <br>
+                        <span th:text="${member.location}"></span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>
 
 
@@ -64,7 +86,7 @@
         </form>
         <div class="row">
             <div id="content" class="span12">
-                <h2>Active Members</h2>
+                <h3 class="title is-3">Active Members</h3>
                 <table class='table dashboard--members'>
                     <tr th:each="member : ${activeMembers}" layout:fragment="post-row">
                         <td>
@@ -76,7 +98,8 @@
                     </tr>
                 </table>
 
-                <h2>Hidden Members</h2>
+                <hr class="hr">
+                <h3 class="title is-3">Hidden Members</h3>
                 <table class='table dashboard--members'>
                     <tr th:each="member : ${hiddenMembers}" layout:fragment="post-row">
                         <td>

@@ -10,7 +10,7 @@
     <ul>
         <li><a th:href="@{/admin}">Admin</a></li>
         <li><a th:href="@{/admin/team}">Team</a></li>
-        <li><a class="is-active" th:href="@{'/admin/team/' + ${profile.username}}" aria-current="page"
+        <li class="is-active"><a th:href="@{'/admin/team/' + ${profile.username}}" aria-current="page"
                th:text="${profile.username}">username</a></li>
     </ul>
 </nav>
@@ -18,7 +18,7 @@
     <form th:action="@{${formAction}}" action="#" method="post" th:object="${profile}">
         <input type="hidden" name="_method" value="PUT"/>
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <h2 class="title">Basics</h2>
+        <h3 class="title is-3">Informations</h3>
         <div class="columns">
             <div class="column is-half">
                 <div class="field">
@@ -70,7 +70,9 @@
                 </div>
             </div>
         </div>
-        <h2 class="title">Social</h2>
+
+        <hr class="hr">
+        <h3 class="title is-3">Social</h3>
 
         <div class="columns">
             <div class="column is-half">
