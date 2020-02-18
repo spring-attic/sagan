@@ -9,14 +9,11 @@ inputs:
 - name: sagan-renderer-repo
 outputs:
 - name: build
+caches:
+- path: gradle
 run:
-  user: root
   path: /bin/bash
   args:
-  - -c
-  - |-
-    set -e -u -x
-    cd sagan-renderer-repo
-    ./gradlew --console plain :sagan-renderer:build
-    cd ../
-    cp -R sagan-renderer-repo/sagan-renderer/build/* build
+  - -ec
+  - |
+    ${PWD}/sagan-renderer-repo/concourse/scripts/build-sagan-renderer.sh
