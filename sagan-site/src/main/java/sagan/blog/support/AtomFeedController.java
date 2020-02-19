@@ -1,21 +1,19 @@
 package sagan.blog.support;
 
+import javax.servlet.http.HttpServletResponse;
+
 import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.site.blog.BlogService;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
  * Controller that handles requests for Atom feeds of blog content. All requests return a
@@ -36,14 +34,14 @@ class AtomFeedController {
         this.atomFeedView = new AtomFeedView(siteUrl, dateFactory);
     }
 
-    @RequestMapping(value = "/blog.atom", method = { GET, HEAD })
+    @GetMapping("/blog.atom")
     public AtomFeedView listPublishedPosts(Model model, HttpServletResponse response) {
         Page<Post> page = blogService.getPublishedPosts(PageableFactory.forFeeds());
         prepareResponse(model, response, page, "", "");
         return atomFeedView;
     }
 
-    @RequestMapping(value = "/blog/category/{category}.atom", method = { GET, HEAD })
+	@GetMapping("/blog/category/{category}.atom")
     public AtomFeedView listPublishedPostsForCategory(@PathVariable PostCategory category, Model model,
                                                       HttpServletResponse response) {
         Page<Post> page = blogService.getPublishedPosts(category, PageableFactory.forFeeds());
@@ -51,7 +49,7 @@ class AtomFeedController {
         return atomFeedView;
     }
 
-    @RequestMapping(value = "/blog/broadcasts.atom", method = { GET, HEAD })
+	@GetMapping("/blog/broadcasts.atom")
     public AtomFeedView listPublishedBroadcastPosts(Model model, HttpServletResponse response) {
         Page<Post> page = blogService.getPublishedBroadcastPosts(PageableFactory.forFeeds());
         prepareResponse(model, response, page, "Broadcasts", "/broadcasts");
