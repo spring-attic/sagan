@@ -15,7 +15,8 @@ module.exports = {
         team: './src/app/team.js',
         profile: './src/app/profile.js',
         blog: './src/app/blog.js',
-        admin: './src/app/admin.js'
+        admin: './src/app/admin.js',
+        run_prettify: './src/app/run_prettify.js'
     },
 
     output: {
