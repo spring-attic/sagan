@@ -9,6 +9,8 @@ inputs:
 - name: sagan-site-repo
 outputs:
 - name: build
+caches:
+- path: gradle
 params:
   # JSPM github authentication is needed for the CI
   # otherwise install steps reach github API limitation
@@ -17,15 +19,6 @@ run:
   user: root
   path: /bin/bash
   args:
-  - -c
-  - |-
-    set -e -u -x
-    # sagan-site-repo will be available with root owner
-    # but js things will complain if ran by root
-    # so we first change repo owner and then use
-    # gradle user to run build
-    chown gradle:gradle -R ./sagan-site-repo
-    cd sagan-site-repo
-    su gradle -c "./gradlew --console plain :sagan-site:build"
-    cd ../
-    cp -R sagan-site-repo/sagan-site/build/* build
+    - -ec
+    - |
+      ${PWD}/sagan-site-repo/concourse/scripts/build-sagan-site.sh
