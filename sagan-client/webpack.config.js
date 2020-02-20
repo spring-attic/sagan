@@ -1,11 +1,12 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest')
+const RobotstxtPlugin = require('robotstxt-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -15,7 +16,8 @@ module.exports = {
         team: './src/app/team.js',
         profile: './src/app/profile.js',
         blog: './src/app/blog.js',
-        admin: './src/app/admin.js'
+        admin: './src/app/admin.js',
+        run_prettify: './src/app/run_prettify.js'
     },
 
     output: {
@@ -26,14 +28,14 @@ module.exports = {
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
-            chunkFilename: "[id].css"
+            chunkFilename: '[id].css'
         }),
         new CopyPlugin([
             {from: './src/images', to: 'images'}
         ]),
         new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery",
+            $: 'jquery',
+            jQuery: 'jquery',
             'window.jQuery': 'jquery',
             'window.$': 'jquery'
         }),
@@ -52,6 +54,21 @@ module.exports = {
                     sizes: [48, 72, 96, 144, 192, 256, 384, 512],
                 },
             ],
+        }),
+        new RobotstxtPlugin({
+            policy: [
+                {
+                    userAgent: '*',
+                    allow: '/',
+                    crawlDelay: 10
+                },
+                {
+                    userAgent: 'Twitterbot',
+                    disallow: '*',
+                    allow: '/images'
+                }
+            ],
+            host: "https://spring.io"
         })
     ],
     module: {
