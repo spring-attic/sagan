@@ -30,14 +30,7 @@ $(document).ready(function () {
         $('li#search').toggleClass('close');
         $('#searchheaderform input').focus();
     });
-
-    //Guide
-    $('body.guide main h2[id]').click(function () {
-        $(this).parent().next().toggle();
-        $(this).toggleClass('open');
-    });
-
-
+    
     $('pre.prettyprint').each(function () {
         var _this = $(this);
         var button = $('<button />')
