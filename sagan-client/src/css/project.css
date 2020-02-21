@@ -43,7 +43,12 @@
 .compass .sidebar li {
     list-style: none;
 }
-
+.compass .sidebar li li {
+    font-weight: normal;
+}
+.compass .sidebar li li a:hover {
+    font-weight: normal;
+}
 .compass .sidebar li {
     font-size: 15px;
     font-weight: 700;
