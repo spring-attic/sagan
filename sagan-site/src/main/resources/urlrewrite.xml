@@ -104,23 +104,8 @@
         <to type="temporary-redirect" last="true">http://www.linkedin.com/groups/46964</to>
     </rule>
 	<rule>
-		<name>Tools4</name>
-		<from>^/tools4$</from>
-		<to type="temporary-redirect" last="true">/tools</to>
-	</rule>
-	<rule>
-		<name>Eclipse Tools</name>
-		<from>^/tools/eclipse$</from>
-		<to type="temporary-redirect" last="true">/tools3/eclipse</to>
-	</rule>
-	<rule>
-		<name>Main STS 3</name>
-		<from>^/tools/sts$</from>
-		<to type="temporary-redirect" last="true">/tools</to>
-	</rule>
-	<rule>
-		<name>Other STS 3</name>
-		<from>^/tools/sts</from>
-		<to type="temporary-redirect" last="true">/tools3/sts</to>
+		<name>Tools3</name>
+		<from>^/tools3.*</from>
+		<to type="temporary-redirect" last="true">/tools#suite-three</to>
 	</rule>
 </urlrewrite>

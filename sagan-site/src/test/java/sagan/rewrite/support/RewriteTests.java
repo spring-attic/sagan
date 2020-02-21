@@ -137,19 +137,9 @@ public class RewriteTests {
     }
 
     @Test
-	public void tools4IsRedirected() throws Exception {
-		validateTemporaryRedirect("http://spring.io/tools4", "/tools");
-	}
-
-	@Test
-	public void eclipseToolsIsRedirected() throws Exception {
-		validateTemporaryRedirect("http://spring.io/tools/eclipse", "/tools3/eclipse");
-	}
-
-	@Test
-	public void sts3IsRedirected() throws Exception {
-		validateTemporaryRedirect("http://spring.io/tools/sts", "/tools");
-		validateTemporaryRedirect("http://spring.io/tools/sts/all", "/tools3/sts/all");
+	public void tools3IsRedirected() throws Exception {
+		validateTemporaryRedirect("http://spring.io/tools3", "/tools#suite-three");
+		validateTemporaryRedirect("http://spring.io/tools3/sts/all", "/tools#suite-three");
 	}
 
     @Test
