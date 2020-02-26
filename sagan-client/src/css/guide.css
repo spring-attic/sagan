@@ -122,6 +122,12 @@
 .guide main a:hover {
     color: #333;
 }
+h2[id*=reveal] {
+    cursor: pointer;
+}
+h2[id*=reveal]:hover {
+    color: #086dc3;
+}
 h2[id*=reveal]:before {
     font-family: 'Font Awesome 5 Free';
     content: "\f105";
