@@ -90,8 +90,10 @@
     font-size: 15px;
     font-family: 'Monaco', monospace;
     border: 1px solid #e1e1e8;
-    white-space: nowrap;
     overflow-x: auto;
+}
+.guide main code {
+    white-space: nowrap;
 }
 .guide main pre code {
     border: none;
