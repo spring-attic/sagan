@@ -3894,7 +3894,7 @@ body#training #hero #pacman {
     display: block;
 }
 
-table.tableblock {
+table.tableblock, .blog--post table {
     border-collapse: collapse;
     border-spacing: 0;
 }
@@ -3911,39 +3911,53 @@ table.tableblock[frame=vsides] {
     border-style: none solid;
 }
 table.tableblock[rules=all] tbody tr *,
-table.tableblock[rules=rows] tbody tr * {
+table.tableblock[rules=rows] tbody tr *,
+.blog--post table[rules=all] tbody tr *,
+.blog--post table[rules=rows] tbody tr * {
     border-top: 1px solid #ebf2f2;
 }
 table.tableblock[rules=all] tr *,
-table.tableblock[rules=cols] tr * {
+table.tableblock[rules=cols] tr *,
+.blog--post table[rules=all] tr *,
+.blog--post table[rules=cols] tr * {
     border-left: 1px solid #ebf2f2;
 }
-table.tableblock tbody tr:first-child * {
+table.tableblock tbody tr:first-child *,
+.blog--post table tbody tr:first-child * {
     border-top: 1px solid white; /* none don't work here... %-[] */
 }
-table.tableblock tr *:first-child {
+table.tableblock tr *:first-child,
+.blog--post table tr *:first-child {
     border-left: none;
 }
 table.tableblock thead tr *,
-table.tableblock thead tr * {
+table.tableblock thead tr *,
+.blog--post table thead tr *,
+.blog--post table thead tr * {
     border-top: 1px solid white;
     border-bottom: 2px solid #cbd8d8;
 }
-table.tableblock tr td, table.tableblock tr th {
+table.tableblock tr td, table.tableblock tr th,
+.blog--post table tr td, .blog--post table tr th {
     padding: 8px;
 }
 table.tableblock tr td p.table,
-table.tableblock tr td p.table * {
-    border: 0px;
+table.tableblock tr td p.table *,
+.blog--post table tr td p.table,
+.blog--post table tr td p.table * {
+    border: 0;
 }
-table.tableblock tr td {
+table.tableblock tr td,
+.blog--post table tr td {
     border-top: 1px solid #ebf2f2;
 }
-table.tableblock tr td p.tableblock {
+table.tableblock tr td p.tableblock,
+.blog--post table tr td p {
     padding: 0;
     margin: 0;
 }
-table.tableblock caption.title {
+table.tableblock caption.title,
+.blog--post table caption {
     font-weight: bold;
     padding-bottom: 10px;
     text-align: left;
