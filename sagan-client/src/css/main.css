@@ -4018,3 +4018,7 @@ body#index blockquote {
 body#index blockquote:after {
     display: none;
 }
+
+.prettyprint.none span {
+    color: #000;
+}
