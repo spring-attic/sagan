@@ -6,8 +6,9 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <body>
     <div layout:fragment="full-post">
-        <header sec:authorize="fullyAuthenticated">
-            <span>[<a id="edit" th:href="@{/admin/blog/{id}-{slug}/edit(id=${post.id},slug=${slug})}">Edit</a>]</span>
+        <header sec:authorize="fullyAuthenticated" style="padding-bottom: 20px;">
+            <span><a id="edit" class="button uppercase transparent animate button-small"
+                     th:href="@{/admin/blog/{id}-{slug}/edit(id=${post.id},slug=${slug})}">Edit blog post</a></span>
         </header>
         <h2 class="blog--title">
             <a th:href="@{*{path}}" th:text="*{title}">Blog post title</a>
