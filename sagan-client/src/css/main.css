@@ -19,7 +19,6 @@
     font-weight: 600;
     font-style: normal;
 }
-
 /* open-sans-regular - latin */
 @font-face {
     font-family: 'Open Sans';
@@ -68,7 +67,6 @@
     url('../fonts/open-sans-v17-latin/open-sans-v17-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
     url('../fonts/open-sans-v17-latin/open-sans-v17-latin-700.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
-
 /* work-sans-regular - latin */
 @font-face {
     font-family: 'Work Sans';
@@ -93,8 +91,6 @@
     url('../fonts/work-sans-v5-latin/work-sans-v5-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
     url('../fonts/work-sans-v5-latin/work-sans-v5-latin-700.svg#WorkSans') format('svg'); /* Legacy iOS */
 }
-
-
 html {
     font-size: 100%;
     font-family: 'Open Sans', sans-serif;
@@ -109,9 +105,6 @@ p {
 body {
     margin: 0;
 }
-/* header:not(.meta-data--container) {
-  border-bottom: 1px solid #ebf2f2;
-} */
 #mobile-nav-open {
     display: none;
 }
