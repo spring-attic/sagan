@@ -423,6 +423,24 @@
     display: none;
 }
 
+.compass .quickstart {
+    background: #ebf2f2;
+    margin-top: 3rem;
+    padding: 2rem 2rem 2rem 95px;
+    position: relative;
+}
+
+.compass .quickstart img {
+    width: 50px;
+    position: absolute;
+    left: 30px;
+    top: 36px;
+}
+
+.compass .quickstart h2 {
+    margin: 0;
+}
+
 @media (max-width: 600px) {
     .compass .nav-tabs a {
         padding: 14px 8px 19px;
