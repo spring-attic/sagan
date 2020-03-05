@@ -55,8 +55,8 @@
                   }<br/>
                   <br/>
                   @GetMapping("/hello")<br/>
-                  public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {<br/>
-                  <div class='indent'>return String.format("Hello %s!", name);<br/></div>
+                  public String hello(@RequestParam Optional&lt;String&gt; name) {<br/>
+                  <div class='indent'>return String.format("Hello %s!", name.orElse("World"));<br/></div>
                   }<br/>
                 </div>
               }<br/>
