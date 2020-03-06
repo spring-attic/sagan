@@ -48,7 +48,7 @@
                 </div>
             </section>
             <section id='getting-started-list' class='flex jc-between flex-wrap'>
-                <div id="guide-search-no-result" class="guide-search-no-result">No result find.</div>
+                <div id="guide-search-no-result" class="guide-search-no-result">No result found.</div>
                 <div th:each="guide : ${guides}" class='guide guide-search half border-box flex' th:attr="data-filterable=${guide.title}+' '+${guide.description}+' '+${guide.projects}">
                     <img class='guide-icon' th:src="@{/images/icon-guides-start.svg}">
                     <div class='text'>
