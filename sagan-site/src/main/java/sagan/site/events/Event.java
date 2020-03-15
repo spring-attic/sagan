@@ -4,10 +4,14 @@ import java.net.URI;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import biweekly.component.VEvent;
 
 public class Event implements Comparable<Event> {
+
+	private static final Pattern URL_REGEXP = Pattern.compile("http[^\\s<\"]*");
 
 	private final LocalDate firstDay;
 
@@ -37,7 +41,9 @@ public class Event implements Comparable<Event> {
 
 	private URI parseLink(VEvent event) {
 		try {
-			return URI.create(event.getDescription().getValue());
+			Matcher matcher = URL_REGEXP.matcher(event.getDescription().getValue());
+			String url = matcher.find() ? matcher.group() : "#";
+			return URI.create(url);
 		}
 		catch (IllegalArgumentException ex) {
 			return URI.create("#");

@@ -77,6 +77,20 @@ public class EventsCalendarServiceTests {
 	}
 
 	@Test
+	public void shouldParseHtmlEvent() {
+		mockServer.expect(requestTo("http://example.org/ical"))
+				.andRespond(withSuccess(getClassPathResource("html-event.ics"), TEXT_CALENDAR));
+		List<Event> events = this.calendarService.findEvents(Period.of("2020-03-01", 30));
+		assertThat(events).hasSize(1);
+		Event event = events.get(0);
+		assertThat(event.getSummary()).isEqualTo("Spring Live");
+		assertThat(event.getFirstDay().toString()).isEqualTo("2020-03-19");
+		assertThat(event.getLastDay().toString()).isEqualTo("2020-03-20");
+		assertThat(event.getLocation()).isEqualTo("Virtual");
+		assertThat(event.getLink().toString()).isEqualTo("https://events.example.org/event.html");
+	}
+
+	@Test
 	public void shouldReturnManyEvents() {
 		mockServer.expect(requestTo("http://example.org/ical"))
 				.andRespond(withSuccess(getClassPathResource("multi-events.ics"), TEXT_CALENDAR));
