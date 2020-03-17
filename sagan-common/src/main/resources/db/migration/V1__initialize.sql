@@ -18,6 +18,11 @@ CREATE TABLE member_profile (
   job_title            CHARACTER VARYING(255)
 );
 
+CREATE INDEX idx_github_id
+  ON member_profile (github_id);
+CREATE INDEX idx_username
+  ON member_profile (username);
+
 CREATE TABLE post (
   id               SERIAL                 NOT NULL PRIMARY KEY,
   broadcast        BOOLEAN                NOT NULL,
@@ -42,8 +47,8 @@ CREATE TABLE post_public_slug_aliases (
 
 CREATE INDEX idx_category
   ON POST (category);
-CREATE INDEX idx_draft
-  ON POST (draft);
+CREATE INDEX idx_author_id
+  ON POST (author_id);
 CREATE INDEX idx_publish_at
   ON POST (publish_at);
 
