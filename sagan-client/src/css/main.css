@@ -4015,3 +4015,7 @@ body#index blockquote:after {
 .prettyprint.none span {
     color: #000;
 }
+
+@media print {
+    header,footer,#blog-sidebar-newsletter,#sidebar,.blog-category {display:none}
+}
