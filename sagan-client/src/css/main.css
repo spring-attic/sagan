@@ -4025,6 +4025,7 @@ body#projects .proj-category-attic .project {
     margin: 0;
     flex: 50%;
     outline: none;
+    max-width: 50%;
 }
 
 body#projects .proj-category-attic .project:hover h3, body#projects .proj-category-attic .project:focus h3 {
