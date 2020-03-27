@@ -6,7 +6,6 @@
 <body id='projects'>
 <div layout:fragment="~{content}">
   <div id='hero'>
-    <img id='pacman' th:src="@{/images/pacman2.svg}">
     <div class='container'>
       <h1 class='h1 mb-1 antialiased'>Projects</h1>
       <p class='big mb-5'>From configuration to security, web apps to big data&mdash;whatever the infrastructure needs of your application may be, there is a Spring Project to help you build it. Start small and use just what you need&mdash;Spring is modular by design.</p>
@@ -58,20 +57,19 @@
           </div>
         </div>
       </section>
-      <section id='attic-proj' class='proj-category mb-6'>
+      <section id='attic-proj' class='proj-category proj-category-attic mb-6'>
         <h2 class='h3 mb-3 antialiased'>Projects in the Attic</h2>
         <div class='flex'>
-          <div class='proj-80 flex jc-between flex-wrap'>
-              <a th:each="project : ${attic}" class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'
-                 th:href="${project.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
-                  <div class='proj-icon-box'>
-                      <img class='proj-icon' th:src="@{${project.imagePath ?: '/images/projects/spring.svg'}}">
-                  </div>
-                  <div class='proj-text'>
-                      <h3 class='h3 m-0 antialiased' th:text="${project.name}">Spring Boot</h3>
-                      <p th:text="${project.tagLine}">Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
-                  </div>
-              </a>
+          <div class='flex flex-wrap'>
+            <a th:each="project : ${attic}"
+               class='project'
+               th:href="${project.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
+              <div class='proj-text'>
+                <h3 class='h3 blue m-0 antialiased' th:text="${project.name}">Spring Boot</h3>
+                <p th:text="${project.tagLine}">Takes an opinionated view of building Spring applications and gets you
+                  up and running as quickly as possible.</p>
+              </div>
+            </a>
           </div>
         </div>
       </section>

@@ -4019,3 +4019,38 @@ body#index blockquote:after {
 @media print {
     header,footer,#blog-sidebar-newsletter,#sidebar,.blog-category {display:none}
 }
+
+body#projects .proj-category-attic .project {
+    padding: 0;
+    margin: 0;
+    flex: 50%;
+    outline: none;
+}
+
+body#projects .proj-category-attic .project:hover h3, body#projects .proj-category-attic .project:focus h3 {
+    text-decoration: underline;
+}
+
+body#projects .proj-category-attic .project:focus {
+    outline: none;
+}
+
+body#projects .proj-category-attic .proj-text {
+    width: auto;
+    padding-right: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+body#projects .proj-category-attic .proj-text p, body#projects .proj-category-attic .proj-text h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+body#projects .proj-category-attic .mb-3 {
+    padding-bottom: 2rem;
+}
+body#projects .proj-category-attic .proj-text h3 {
+    color: #086dc3;
+}
