@@ -4055,3 +4055,40 @@ body#projects .proj-category-attic .mb-3 {
 body#projects .proj-category-attic .proj-text h3 {
     color: #086dc3;
 }
+
+.page-error {
+    text-align: center;
+    padding: 5rem 0;
+}
+
+.page-error h1 {
+    font-size: 130px;
+    font-weight: 100;
+    line-height: 110px;
+    color: #6db33f;
+    margin: 0;
+    padding: 0 0 1.5rem 0;
+}
+
+.page-error h2 {
+    font-size: 21px;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+.page-error p {
+    font-size: 16px;
+    margin: 0;
+    padding: .4rem 0;
+    color: #222;
+}
+
+.page-error p a {
+    color: #086dc3;
+    font-weight: 600;
+}
+
+.page-error p a:hover {
+    text-decoration: underline;
+}
