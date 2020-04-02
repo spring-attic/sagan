@@ -459,3 +459,9 @@
         margin-bottom: 0.1rem;
     }
 }
+
+@media(max-width:1023px) {
+    .compass .col-project-content {
+        width: 100%;
+    }
+}
