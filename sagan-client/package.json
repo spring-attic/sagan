@@ -12,7 +12,9 @@
     "bulma": "^0.8.0",
     "clipboard": "^2.0.4",
     "jquery": "^3.4.1",
-    "js-search": "^1.4.3"
+    "jquery-datetimepicker": "^2.5.21",
+    "js-search": "^1.4.3",
+    "luxon": "^1.23.0"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",

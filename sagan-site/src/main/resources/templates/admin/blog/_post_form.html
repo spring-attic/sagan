@@ -80,8 +80,9 @@
             <div class="field">
                 <label class="label">Publication Date</label>
                 <input type="text" th:field="*{publishAt}" name="publishAt"
-                       class="input" th:classappend="(${#fields.hasErrors('publishAt')}? ' is-danger')"
-                       placeholder="2020-01-01 10:00"/>
+                       id="datetimepicker" class="input"
+                       th:classappend="(${#fields.hasErrors('publishAt')}? ' is-danger')"
+                       placeholder="2020-01-01 10:00" autocomplete="off"/>
                 <p class="help is-danger" th:if="${#fields.hasErrors('publishAt')}" th:errors="*{publishAt}">
                     Incorrect date</p>
             </div>
