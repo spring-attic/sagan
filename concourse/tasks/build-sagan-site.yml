@@ -12,9 +12,6 @@ outputs:
 caches:
 - path: gradle
 params:
-  # JSPM github authentication is needed for the CI
-  # otherwise install steps reach github API limitation
-  JSPM_GITHUB_AUTH_TOKEN:
 run:
   user: root
   path: /bin/bash

@@ -66,9 +66,6 @@ jobs:
   - task: build-sagan-site
     file: sagan-site-repo/concourse/tasks/build-sagan-site.yml
     params:
-      # JSPM github authentication is needed for the CI
-      # otherwise install steps reach github API limitation
-      JSPM_GITHUB_AUTH_TOKEN: ((jspm-github-auth-token))
   - put: sagan-cf-production
     params:
       current_app_name: sagan
