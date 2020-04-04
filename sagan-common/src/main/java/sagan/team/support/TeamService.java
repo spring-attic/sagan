@@ -8,7 +8,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import sagan.search.support.SearchService;
 import sagan.team.MemberProfile;
 
 import java.util.List;
@@ -23,15 +22,10 @@ public class TeamService {
     private static Log logger = LogFactory.getLog(TeamService.class);
 
     private final TeamRepository teamRepository;
-    private final SearchService searchService;
-    private final MemberProfileSearchEntryMapper mapper;
 
     @Autowired
-    public TeamService(TeamRepository teamRepository, SearchService searchService,
-                       MemberProfileSearchEntryMapper mapper) {
+    public TeamService(TeamRepository teamRepository) {
         this.teamRepository = teamRepository;
-        this.searchService = searchService;
-        this.mapper = mapper;
     }
 
     public MemberProfile fetchMemberProfile(Long id) {
@@ -69,11 +63,6 @@ public class TeamService {
         updateAvatarUrlwithGravatar(existingProfile);
 
         teamRepository.save(existingProfile);
-        try {
-            searchService.saveToIndex(mapper.map(existingProfile));
-        } catch (Exception e) {
-            logger.warn("Indexing failed for " + existingProfile.getId(), e);
-        }
     }
 
     public List<MemberProfile> fetchActiveMembers() {

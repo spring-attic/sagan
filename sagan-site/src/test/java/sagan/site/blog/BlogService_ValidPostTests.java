@@ -11,19 +11,13 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import sagan.blog.Post;
 import sagan.blog.PostBuilder;
-import sagan.search.SearchException;
-import sagan.search.support.SearchService;
-import sagan.search.types.SearchEntry;
 import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 
 import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.reset;
 import static org.mockito.BDDMockito.verify;
-import static org.mockito.BDDMockito.verifyZeroInteractions;
-import static org.mockito.BDDMockito.willThrow;
 import static org.mockito.Matchers.anyObject;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -44,9 +38,6 @@ public class BlogService_ValidPostTests {
     @Mock
     private DateFactory dateFactory;
 
-    @Mock
-    private SearchService searchService;
-
     @Rule
     public ExpectedException expected = ExpectedException.none();
 
@@ -65,7 +56,7 @@ public class BlogService_ValidPostTests {
         post = PostBuilder.post().publishAt(publishAt).build();
         given(postFormAdapter.createPostFromPostForm(postForm, AUTHOR_USERNAME)).willReturn(post);
 
-        service = new BlogService(postRepository, postFormAdapter, dateFactory, searchService);
+        service = new BlogService(postRepository, postFormAdapter, dateFactory);
         service.addPost(postForm, AUTHOR_USERNAME);
     }
 
@@ -77,33 +68,6 @@ public class BlogService_ValidPostTests {
     @Test
     public void postIsPersisted() {
         verify(postRepository).save((Post) anyObject());
-    }
-
-    @Test
-    public void creatingABlogPost_addsThatPostToTheSearchIndexIfPublished() {
-        verify(searchService).saveToIndex((SearchEntry) anyObject());
-    }
-
-    @Test
-    public void blogIsSavedWhenSearchServiceIsDown() {
-        reset(postRepository);
-        willThrow(SearchException.class).given(searchService).saveToIndex((SearchEntry) anyObject());
-        post = service.addPost(postForm, AUTHOR_USERNAME);
-        verify(postRepository).save(post);
-    }
-
-    @Test
-    public void creatingABlogPost_doesNotSaveToSearchIndexIfNotLive() throws Exception {
-        reset(searchService);
-
-        PostForm draftPostForm = new PostForm();
-        draftPostForm.setDraft(true);
-
-        Post draft = PostBuilder.post().draft().build();
-        given(postFormAdapter.createPostFromPostForm(draftPostForm, AUTHOR_USERNAME)).willReturn(draft);
-
-        service.addPost(draftPostForm, AUTHOR_USERNAME);
-        verifyZeroInteractions(searchService);
     }
 
 }

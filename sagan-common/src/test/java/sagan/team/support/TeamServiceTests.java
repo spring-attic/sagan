@@ -5,43 +5,22 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import sagan.search.support.SearchService;
-import sagan.search.types.SitePage;
 import sagan.team.MemberProfile;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TeamServiceTests {
     @Mock
     private TeamRepository teamRepository;
 
-    @Mock
-    private SearchService searchService;
-
-    @Mock
-    private MemberProfileSearchEntryMapper mapper;
-
     private TeamService service;
 
     @Before
     public void setup() {
-        service = new TeamService(teamRepository, searchService, mapper);
-    }
-
-    @Test
-    public void updateMemberProfileSavesProfileToSearchIndex() {
-        MemberProfile savedProfile = new MemberProfile();
-        given(teamRepository.findById(1234L)).willReturn(savedProfile);
-
-        SitePage searchEntry = new SitePage();
-        given(mapper.map(savedProfile)).willReturn(searchEntry);
-        service.updateMemberProfile(1234L, new MemberProfile());
-
-        verify(searchService).saveToIndex(searchEntry);
+        service = new TeamService(teamRepository);
     }
 
     @Test
@@ -49,8 +28,6 @@ public class TeamServiceTests {
         MemberProfile savedProfile = new MemberProfile();
         given(teamRepository.findById(1234L)).willReturn(savedProfile);
 
-        SitePage searchEntry = new SitePage();
-        given(mapper.map(savedProfile)).willReturn(searchEntry);
         MemberProfile updatedProfile = new MemberProfile();
         updatedProfile.setGravatarEmail("test@example.com");
         service.updateMemberProfile(1234L, updatedProfile);
@@ -65,8 +42,6 @@ public class TeamServiceTests {
         savedProfile.setAvatarUrl("http://example.com/image.png");
         given(teamRepository.findById(1234L)).willReturn(savedProfile);
 
-        SitePage searchEntry = new SitePage();
-        given(mapper.map(savedProfile)).willReturn(searchEntry);
         MemberProfile updatedProfile = new MemberProfile();
         updatedProfile.setGravatarEmail("");
         service.updateMemberProfile(1234L, updatedProfile);

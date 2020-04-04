@@ -66,11 +66,6 @@ github:
   access:
     token: ${GITHUB_ACCESS_TOKEN:}
 
-elasticsearch:
-  client:
-    endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
-    index: ${ELASTICSEARCH_INDEX:sagan}
-
 logging:
   level:
     ROOT: WARN

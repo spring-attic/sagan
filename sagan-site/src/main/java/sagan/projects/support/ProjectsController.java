@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.google.common.base.Joiner;
-
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
@@ -83,7 +81,7 @@ class ProjectsController {
 
     private String stackOverflowUrl(Project project) {
         return "https://stackoverflow.com/questions/tagged/"
-                + Joiner.on("+or+").join(project.getStackOverflowTagList());
+                + String.join("+or+", project.getStackOverflowTagList());
     }
 
 }

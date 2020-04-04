@@ -1,19 +1,3 @@
-/*
- * Copyright 2016 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package sagan.projects.support;
 
 import java.awt.*;
@@ -26,20 +10,18 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 import org.xmlbeam.XBProjector;
 import org.xmlbeam.XBProjector.Flags;
 import org.xmlbeam.config.DefaultXMLFactoriesConfig;
 import org.xmlbeam.config.DefaultXMLFactoriesConfig.NamespacePhilosophy;
-
 import sagan.projects.Project;
 import sagan.projects.ProjectRelease;
 import sagan.projects.ProjectRelease.ReleaseStatus;
 import sagan.projects.support.BadgeSvg.GraphicElement;
 import sagan.projects.support.BadgeSvg.Path;
 
-import com.google.common.io.Resources;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 /**
  * Service to generate SVG badges.
@@ -49,10 +31,10 @@ import com.google.common.io.Resources;
 @Service
 public class VersionBadgeService {
 
-    private final URL PRERELEASE_TEMPLATE = Resources.getResource("badge/milestone.svg");
-    private final URL GENERAL_AVAILABILITY_TEMPLATE = Resources.getResource("badge/release.svg");
-    private final URL SNAPSHOT_TEMPLATE = Resources.getResource("badge/snapshot.svg");
-    private final URL VERDANA_FONT = Resources.getResource("badge/Verdana.ttf");
+    private final URL PRERELEASE_TEMPLATE = getClass().getResource("/badge/milestone.svg");
+    private final URL GENERAL_AVAILABILITY_TEMPLATE = getClass().getResource("/badge/release.svg");
+    private final URL SNAPSHOT_TEMPLATE = getClass().getResource("/badge/snapshot.svg");
+    private final URL VERDANA_FONT = getClass().getResource("/badge/Verdana.ttf");
     private final BufferedImage DUMMY = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
     private Graphics graphics;
     private XBProjector xbProjector;

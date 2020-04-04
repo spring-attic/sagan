@@ -38,8 +38,6 @@ dependencyManagement {
 	}
 }
 
-ext['elasticsearch.version'] = '1.7.1'
-
 dependencies {
     compile project(':sagan-common')
     compile project(':sagan-client')
@@ -61,6 +59,8 @@ dependencies {
 
     // nekohtml is required for thymeleaf's LEGACYHTML5 mode
     runtime 'net.sourceforge.nekohtml:nekohtml'
+
+	compile 'org.yaml:snakeyaml'
 
     // for use in generating blog atom feeds
     compile 'com.rometools:rome:1.12.0'

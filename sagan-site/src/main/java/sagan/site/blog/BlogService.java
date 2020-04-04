@@ -10,7 +10,6 @@ import sagan.blog.Post;
 import sagan.blog.PostCategory;
 import sagan.blog.PostMovedException;
 import sagan.blog.PostNotFoundException;
-import sagan.search.support.SearchService;
 import sagan.support.DateFactory;
 import sagan.team.MemberProfile;
 
@@ -33,20 +32,16 @@ public class BlogService {
 
     private final PostFormAdapter postFormAdapter;
     private final PostRepository postRepository;
-    private final SearchService searchService;
     private final DateFactory dateFactory;
-    private final PostSearchEntryMapper mapper = new PostSearchEntryMapper();
 
     @Value("${disqus_shortname}")
     private String disqusShortname;
 
     @Autowired
-    public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter, DateFactory dateFactory,
-                       SearchService searchService) {
+    public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter, DateFactory dateFactory) {
         this.postRepository = postRepository;
         this.postFormAdapter = postFormAdapter;
         this.dateFactory = dateFactory;
-        this.searchService = searchService;
     }
 
     // Property methods
@@ -130,28 +125,16 @@ public class BlogService {
     public Post addPost(PostForm postForm, String username) {
         Post post = postFormAdapter.createPostFromPostForm(postForm, username);
         postRepository.save(post);
-        saveToIndex(post);
         return post;
     }
 
     public void updatePost(Post post, PostForm postForm) {
         postFormAdapter.updatePostFromPostForm(post, postForm);
         postRepository.save(post);
-        saveToIndex(post);
     }
 
     public void deletePost(Post post) {
         postRepository.delete(post);
-    }
-
-    private void saveToIndex(Post post) {
-        if (post.isLiveOn(dateFactory.now())) {
-            try {
-                searchService.saveToIndex(mapper.map(post));
-            } catch (Exception e) {
-                logger.error(e);
-            }
-        }
     }
 
     public void resummarizeAllPosts() {
