@@ -1,6 +1,7 @@
-package sagan.team;
+package sagan.team.support;
 
 import org.junit.Test;
+import sagan.team.MemberProfile;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

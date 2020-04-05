@@ -39,7 +39,7 @@ import static org.mockito.Mockito.when;
  * @author Mark Paluch
  */
 @RunWith(MockitoJUnitRunner.class)
-public class BadgeControllerTest {
+public class BadgeControllerTests {
 
     @Mock
     private ProjectMetadataService projectMetadataServiceMock;

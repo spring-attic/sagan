@@ -14,7 +14,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
 
-public class ProjectTest {
+public class ProjectTests {
 
     Project project;
     ProjectRelease currentRelease =

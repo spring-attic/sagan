@@ -29,7 +29,6 @@ ext {
 
 springBoot {
     mainClass = 'sagan.SiteApplication'
-    requiresUnpack = ['org.jruby:jruby-complete', 'org.asciidoctor:asciidoctorj']
 }
 
 dependencyManagement {
@@ -39,164 +38,77 @@ dependencyManagement {
 }
 
 dependencies {
-    compile project(':sagan-common')
     compile project(':sagan-client')
 
-    compile "org.springframework.boot:spring-boot-starter-web"
+	compile "org.springframework.boot:spring-boot-starter-web"
 	compile "org.springframework.boot:spring-boot-starter-hateoas"
 	compile 'com.jayway.jsonpath:json-path'
-    compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "org.springframework.boot:spring-boot-starter-data-redis"
-    compile "org.springframework.boot:spring-boot-starter-security"
-    compile "org.springframework.boot:spring-boot-devtools"
-    compile "org.springframework.security:spring-security-acl"
+	compile "org.springframework.boot:spring-boot-starter-actuator"
+	compile "org.springframework.boot:spring-boot-starter-data-redis"
+	compile "org.springframework.boot:spring-boot-starter-security"
+	compile "org.springframework.boot:spring-boot-devtools"
+	compile "org.springframework.security:spring-security-acl"
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.springframework.boot:spring-boot-starter-validation'
 
-    // Thymeleaf is used as the template engine for serving HTML
-    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+	compile 'org.springframework.social:spring-social-github:1.0.0.M4'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+
+	// for use in on-the-fly database setup and migrations
+	compile 'org.flywaydb:flyway-core'
+	compile 'org.apache.httpcomponents:httpclient'
+
+	// jackson, for JSON and XML serialization
+	compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
+	compile "org.codehaus.woodstox:woodstox-core-asl:4.4.1"
+	compile 'org.jsoup:jsoup:1.9.2'
+	compile 'joda-time:joda-time'
+	compile 'org.yaml:snakeyaml'
+	// for XML manipulation
+	compile 'org.xmlbeam:xmlprojector:1.4.8'
+	// for use in generating blog atom feeds
+	compile 'com.rometools:rome:1.12.0'
+	compile 'net.sf.biweekly:biweekly:0.6.3'
+	// for use in serving redirects; see urlrewrite.xml
+	compile 'org.tuckey:urlrewritefilter:4.0.4'
+	// override Boot dependency management, since urlrewritefilter uses a more recent version
+	compile 'xml-apis:xml-apis:1.4.01'
+
+	// Thymeleaf is used as the template engine for serving HTML
+	compile "org.springframework.boot:spring-boot-starter-thymeleaf"
 	compile 'org.thymeleaf.extras:thymeleaf-extras-java8time'
-    compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
-    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
+	compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
+	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
+
+	compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
+	compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
+
+	// datasource and connection pool dependencies
+	runtime 'org.postgresql:postgresql:9.4.1212'
+	runtime 'com.h2database:h2'
+
+	testUtilCompile "junit:junit"
+	testUtilCompile sourceSets.main.output
+	testUtilCompile configurations.compile
+	testUtilRuntime configurations.runtime
+
+	// pick up common test utility classes
+	testCompile sourceSets.testUtil.output
+
+	// for use of spring-test's MatcherAssertionErrors.*
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
 
     // nekohtml is required for thymeleaf's LEGACYHTML5 mode
     runtime 'net.sourceforge.nekohtml:nekohtml'
-
-	compile 'org.yaml:snakeyaml'
-
-    // for use in generating blog atom feeds
-    compile 'com.rometools:rome:1.12.0'
-
-	compile 'net.sf.biweekly:biweekly:0.6.3'
-
-    // for use in serving redirects; see urlrewrite.xml
-    compile 'org.tuckey:urlrewritefilter:4.0.4'
-    // override Boot dependency management, since urlrewritefilter uses a more recent version
-    compile 'xml-apis:xml-apis:1.4.01'
-
-    // for XML manipulation
-    compile 'org.xmlbeam:xmlprojector:1.4.8'
 
     // for use in mocking http interactions
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
     testCompile "org.springframework.cloud:spring-cloud-contract-wiremock"
     testCompile "org.springframework.boot:spring-boot-starter-test"
 
-    // pick up common test utility classes
-    testCompile project(':sagan-common').sourceSets.testUtil.output
-
 }
-
-def gradleDir = "${rootProject.rootDir}/gradle"
 
 clean.doFirst {
     delete "${projectDir}/data/"
     println "Deleted ${projectDir}/data/"
-}
-
-asciidoctor {
-	attributes \
-      'snippets': file('build/snippets')
-}
-
-jar {
-	dependsOn asciidoctor
-	from ("${asciidoctor.outputDir}/html5") {
-		into 'static/docs'
-	}
-}
-
-task stubsJar(type: Jar) {
-    classifier = "stubs"
-    into("META-INF/${project.group}/${project.name}/${project.version}/mappings") {
-        include('**/*.*')
-        from("${project.buildDir}/snippets/stubs")
-    }
-}
-
-stubsJar.dependsOn(test)
-
-artifacts {
-    archives stubsJar
-}
-
-apply plugin: 'maven'
-
-uploadArchives.dependsOn { [check] }
-
-ext {
-    resolveRepoName = { Project project ->
-        resolvedRepoName = "libs-${resolveVersion(project.version)}-local"
-        logger.lifecycle("For project [$project.name] with " +
-                "version [$project.version] the resolved Artifactory repo is [$resolvedRepoName]")
-        return resolvedRepoName
-    }
-
-    isReleaseVersion = version.endsWith("RELEASE")
-    isMilestoneVersion = version.matches('[0-9].[0-9].[0-9].M[0-9]+') || version.matches('[0-9].[0-9].[0-9].RC[0-9]+')
-    isSnapshotVersion = !(isReleaseVersion || isMilestoneVersion)
-
-    resolveVersion = { String version ->
-        if (isMilestoneVersion) return 'milestone'
-        if (isReleaseVersion) return 'release'
-        return 'snapshot'
-    }
-
-    repoUrl = "https://repo.spring.io/${resolveRepoName(project)}"
-}
-
-afterEvaluate {
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                // Target repository
-                String repoUserName = getProp("REPO_USERNAME") ?: "changeme"
-                String repoPass = getProp("REPO_PASSWORD") ?: "changeme"
-                repository(url: repoUrl) {
-                    authentication(userName: repoUserName, password: repoPass)
-                }
-                // we want to publish only the stubs
-                addFilter('stubs') {artifact, file ->
-                    artifact.extraAttributes["classifier"] == "stubs"
-                }
-                pom.project {
-                    name project.name
-                    packaging 'jar'
-                    description 'Project Sagan Site Stubs'
-                    url 'https://github.com/spring-io/sagan'
-                    inceptionYear '2013'
-
-                    scm {
-                        connection 'scm:git:git@github.com:spring-io/sagan.git'
-                        developerConnection 'scm:git:git@github.com:spring-io/sagan.git'
-                        url 'https://github.com/spring-io/sagan'
-                    }
-
-                    licenses {
-                        license {
-                            name 'BSD 3-clause "New" or "Revised" License'
-                            url 'https://raw.githubusercontent.com/spring-io/sagan/master/LICENSE.md'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id 'bclozel'
-                            name 'Brian Clozel'
-                            email 'bclozel ATT pivotal DOTT io'
-                        }
-                        developer {
-                            id 'dsyer'
-                            name 'Dave Syer'
-                            email 'dsyer ATT pivotal DOTT io'
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-String getProp(String propName) {
-    return hasProperty(propName) ?
-            (getProperty(propName) ?: System.properties[propName]) : System.properties[propName] ?:
-            System.getenv(propName)
 }

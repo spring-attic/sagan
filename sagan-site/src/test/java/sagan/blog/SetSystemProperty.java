@@ -1,4 +1,4 @@
-package sagan.support;
+package sagan.blog;
 
 import org.junit.rules.ExternalResource;
 

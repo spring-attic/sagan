@@ -37,7 +37,7 @@ import static sagan.projects.ProjectRelease.ReleaseStatus.SNAPSHOT;
 @RunWith(SpringRunner.class)
 @WebMvcTest(ProjectsController.class)
 @TestPropertySource(properties = "spring.profiles.active=standalone")
-public class ProjectsControllerTest {
+public class ProjectsControllerTests {
 	@MockBean
 	private ProjectMetadataService projectMetadataService;
 
