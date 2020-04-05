@@ -104,6 +104,16 @@ module.exports = {
                 options: {
                     name: '[path][name].[ext]',
                 },
+            },
+            {
+                test: /\.(jpg|png|gif|woff|eot|ttf|svg)/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 50000
+
+                    }
+                }
             }
         ]
     },
