@@ -9,6 +9,7 @@
     <!-- http://opengraphprotocol.org/ -->
     <meta property="og:title" th:content="${guide.title}" />
     <meta property="og:description" th:content="${description}" />
+    <meta property="og:url" th:content="${'https://www.spring.io/guides/gs/'+ guide.name +'/'}" />
   </head>
   <body class='guide'>
   <div layout:fragment="~{content}">

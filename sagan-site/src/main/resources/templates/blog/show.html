@@ -22,6 +22,7 @@
     <meta property="og:description" th:content="${post.renderedSummary}">
     <meta property="og:type" content="article">
     <meta property="og:article:published_time" th:content="${post.publishAt}">
+    <meta property="og:url" th:content="${'https://www.spring.io' + post.path}" />
 </head>
 <body id="blog">
 <div layout:fragment="header-container"></div>

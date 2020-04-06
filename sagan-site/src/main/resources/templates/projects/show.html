@@ -6,6 +6,7 @@
     <title th:text="${selectedProject.getName()}"></title>
     <meta property="og:title" th:attr="content=${selectedProject.getName()}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/project.css}" />
+    <meta property="og:url" th:content="${'https://www.spring.io' + selectedProject.siteUrl}" />
 </head>
 <body>
 <div layout:fragment="header-container"></div>

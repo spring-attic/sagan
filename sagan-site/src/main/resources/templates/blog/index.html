@@ -5,6 +5,7 @@
     <title>Spring | Blog</title>
     <meta property='og:title' content='Spring Blog'/>
     <meta property='og:description' content='Read the latest news on Spring.'/>
+    <meta property="og:url" th:content="${'https://www.spring.io/blog'}" />
     <link rel="alternate" type="application/atom+xml" th:href="${@uih.path() + '.atom'}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/blog.css}"/>
 </head>

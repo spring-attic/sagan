@@ -6,6 +6,7 @@
 <head>
     <title th:inline="text">Team | [[${profile.fullName}]]</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/profile.css}"/>
+    <meta property="og:url" th:content="${'https://www.spring.io/team/' + profile.username}" />
     <script th:inline="javascript">
         /*<![CDATA[*/
         var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
