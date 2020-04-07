@@ -87,14 +87,6 @@ dependencies {
 	runtime 'org.postgresql:postgresql:9.4.1212'
 	runtime 'com.h2database:h2'
 
-	testUtilCompile "junit:junit"
-	testUtilCompile sourceSets.main.output
-	testUtilCompile configurations.compile
-	testUtilRuntime configurations.runtime
-
-	// pick up common test utility classes
-	testCompile sourceSets.testUtil.output
-
 	// for use of spring-test's MatcherAssertionErrors.*
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 
