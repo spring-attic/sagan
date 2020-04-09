@@ -3,8 +3,9 @@ import '@fancyapps/fancybox'
 import '@fancyapps/fancybox/dist/jquery.fancybox.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import ClipboardJS from 'clipboard';
+import {get, set} from 'local-storage';
 import '../css/main.css'
-
+import '../css/dark.scss'
 
 $(document).ready(function () {
 
@@ -160,6 +161,23 @@ window.onload = function () {
         var observer = new IntersectionObserver(handler);
         observer.observe(document.querySelector('.terminal .terminal-blue'));
     }
+
+    const switchButton = $('#switch-theme');
+    const body = $('body');
+
+    switchButton.click(function() {
+        if (body.hasClass(('dark'))) {
+            set('theme', 'light');
+            switchButton.removeClass('on');
+            body.addClass('light')
+                .removeClass('dark');
+        } else {
+            set('theme', 'dark');
+            switchButton.addClass('on');
+            body.removeClass('light')
+                .addClass('dark');
+        }
+    });
 
 };
 

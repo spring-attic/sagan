@@ -9,7 +9,7 @@
 <body id='learn'>
 <div layout:fragment="~{content}">
     <div class='content' role='Main'>
-        <img id='pacman' th:src="@{/images/learn-pacman.svg}">
+        <div id="pacman" layout:include="svg/_shapes :: pacman-learn"></div>
         <div class='container'>
             <h1 class='h1'>Learn</h1>
             <section id='featured' class='flex jc-between mb-4'>
@@ -32,7 +32,7 @@
                 </section>
             </section>
             <section id='quickstart' class='bg-lightblue mb-6 rel'>
-                <img id='learn-shape' th:src="@{/images/learn-shapes.svg}">
+                <div id="learn-shape" layout:include="svg/_shapes :: shape-learn"></div>
                 <div class='mx-auto'>
                     <h2 class='h2 antialiased m-0'>New to Spring? Start here.</h2>
                     <p class='m-0'>With the <a class='blue link-animate' th:href="@{/quickstart}">Spring Quickstart</a> guide you’ll build a classic “Hello World!” endpoint.</p>

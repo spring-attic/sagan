@@ -9,7 +9,7 @@
 <body id='support'>
 <div layout:fragment="~{content}">
     <div id='hero' class='rel of-hide' role='Banner'>
-        <img id='pacman' th:src="@{/images/pacman2.svg}">
+        <div id='pacman' layout:include="svg/_shapes :: pacman"></div>
         <div class='container rel z-1'>
             <div class='mw-850'>
                 <p class='h3 bold m-0'>Support</p>
@@ -17,17 +17,17 @@
                 <p class='mb-4'>Comprehensive support for OpenJDK&trade;, Spring, and Apache Tomcat® for any enterprise.</p>
                 <div id='trio' class='flex jc-between mb-3'>
                     <div class='third'>
-                        <img th:src="@{/images/icon-support-1.svg}" alt=''>
+                        <div class="img" layout:include="svg/_icons-color :: icon-support-1"></div>
                         <h2 class='h3 antialiased'>Lean on the Spring experts</h2>
                         <p>VMware has years of experience working with Spring Framework, Spring Boot, and Apache Tomcat®.</p>
                     </div>
                     <div class='third'>
-                        <img th:src="@{/images/icon-support-2.svg}" alt=''>
+                        <div class="img" layout:include="svg/_icons-color :: icon-support-2"></div>
                         <h2 class='h3 antialiased'>24x7 support from VMware</h2>
                         <p>Focus on your work and leave the support to us!</p>
                     </div>
                     <div class='third'>
-                        <img th:src="@{/images/icon-support-3.svg}" alt=''>
+                        <div class="img" layout:include="svg/_icons-color :: icon-support-3"></div>
                         <h2 class='h3 antialiased'>Simple and fair pricing</h2>
                         <p>VMware Spring Runtime makes OpenJDK support easy. Annual subscriptions are available for Kubernetes pods or CPU cores.</p>
                     </div>

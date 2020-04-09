@@ -9,7 +9,7 @@
 <body id='microservices'>
 <div layout:fragment="~{content}">
     <div id='hero' class='topics-banner mb-5'>
-        <img id='midshape' th:src="@{/images/header-microservices.svg}" alt=''>
+        <div id="midshape" layout:include="svg/_shapes :: header-microservices"></div>
     </div>
     <div class='content' role='Main'>
         <section class='container mb-5'>
@@ -28,7 +28,8 @@
                         </div>
                     </div>
                 </div>
-                <img class='as-fs topic-icon' th:src="@{/images/microservices.svg}" alt=''>
+                <img class='as-fs topic-icon img-light' th:src="@{/images/microservices.svg}" alt=''>
+                <img class='as-fs topic-icon img-dark' th:src="@{/images/microservices-dark.svg}" alt=''>
             </div>
         </section>
         <section class='cornell container'>
@@ -51,7 +52,8 @@
                     <p>The distributed nature of microservices brings challenges. Spring helps you mitigate these.
                         With several ready-to-run cloud patterns, <a class='blue link-animate' th:href="@{/cloud}">Spring Cloud</a> can help with service discovery, load-balancing, circuit-breaking, distributed tracing, and monitoring. It can even act as an API gateway.</p>
                     <br/>
-                    <img th:src="@{/images/diagram-microservices.svg}" alt='Microservices diagram'/>
+                    <img class="img-light" th:src="@{/images/diagram-microservices.svg}" alt='Microservices diagram'/>
+                    <img class="img-dark" th:src="@{/images/diagram-microservices-dark.svg}" alt='Microservices diagram'/>
                 </div>
             </div>
         </section>
@@ -73,7 +75,7 @@
                 </div>
                 <div class='right'>
                     <div class='flex jc-between'>
-                        <img th:src="@{/images/icon-graph.svg}" alt=''>
+                        <div class="icon-flex" layout:include="svg/_icons-color :: icon-graph"></div>
                         <div class='text'>
                             <p>Spring Boot’s optional instrumentation framework, <a class='link-animate blue' href="https://micrometer.io">Micrometer</a>, sends metrics straight to Prometheus, Atlas, and more to provide valuable insights. This is complemented by <a class='link-animate blue' th:href="@{/cloud}">Spring Cloud’s</a> Sleuth and Zipkin projects which offer distributed tracing so that you can follow along with what’s happening in real-time.</p>
                             <a class='link-animate blue' href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-metrics">Get started with Micrometer on Spring Boot</a>
@@ -94,7 +96,7 @@
                             <p><a class='link-animate blue' href="https://run.pivotal.io/">Try Pivotal Web Services for free</a></p>
                         </div>
                         <div class='images'>
-                            <img class='mb-2' th:src="@{/images/cloud-foundry.svg}" alt='Cloud Foundry logo'>
+                            <div class="mb-2" layout:include="svg/_icons-color :: icon-clound-foundry"></div>
                         </div>
                     </div>
                 </div>

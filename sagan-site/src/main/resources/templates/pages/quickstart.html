@@ -9,7 +9,7 @@
 <body id='quickstart'>
 <div layout:fragment="~{content}">
     <div id='hero' class='of-hide rel' role='Banner'>
-        <img th:src="@{/images/floating-quickstart.svg}" alt=''>
+        <div layout:include="svg/_shapes :: shape-quickstart"></div>
         <div class='container rel z-1'>
             <a href='/guides' class='uppercase smallest bold backlink blue link-darken block'><div class='arrow'></div>All Guides</a>
             <h1 class='h1 antialiased mb-3'>Spring Quickstart Guide</h1>
@@ -33,7 +33,8 @@
             <section id='steps' class='mb-5 mw-850'>
                 <h2 class='h2 antialiased'><span class='green'>Step 1: </span>Start a new Spring Boot project</h2>
                 <p class='mb-3'>Use <a class='blue link-animate' href='https://start.spring.io/'>start.spring.io</a> to create a “web” project. In the “Dependencies” dialog search for and add the “web” dependency as shown in the screenshot.  Hit the “Generate” button, download the zip, and unpack it into a folder on your computer.</p>
-                <img id='init' class='mx-auto block mb-4' th:src="@{/images/quick-img-1.png}" alt='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.' title='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.'>
+                <img id='init' class='mx-auto block mb-4 img-light' th:src="@{/images/quick-img-1.png}" alt='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.' title='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.'>
+                <img id='init-2' class='mx-auto block mb-4 img-dark' th:src="@{/images/quick-img-1-dark.png}" alt='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.' title='The Spring Initializr (start.spring.io) being asked to generate a simple Spring Boot ‘Web’ project. Hitting the ‘generate’ button will create an archive of a project which you can unpack and use to get started.'>
                 <p class='mb-4'>Projects created by <a href='https://start.spring.io/' class='blue link-animate'>start.spring.io</a> contain <a href='/projects/spring-boot' class='blue link-animate'>Spring Boot</a>, a framework that makes Spring ready to work inside your app, but without much code or configuration required. Spring Boot is the quickest and most popular way to start Spring projects.</p>
                 <h2 class='h2 antialiased'><span class='green'>Step 2: </span>Add your code</h2>
                 <p>Open up the project in your IDE and locate the <code>DemoApplication.java</code> file in the <code>src/main/java/com/example/demo</code> folder. Now change the contents of the file by adding the extra method and annotations shown in the code below. You can copy and paste the code or just type it.</p>

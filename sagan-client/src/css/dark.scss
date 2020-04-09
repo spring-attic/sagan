@@ -1,0 +1,497 @@
+$dark-background: #1b1f23;
+$dark-highlight-background: #262a2d;
+$dark-color: #fff;
+$dark-highlight-color: #bbbcbe;
+$dark-border-color: #2b2f33;
+$dark-blue: #1f98ff;
+$primary-color: #6db33f;
+
+body.dark {
+  background: $dark-background;
+  color: $dark-color;
+
+  .theme-light {
+    display: none;
+  }
+
+  .theme-dark {
+    display: block;
+  }
+
+  #nav {
+    background: $dark-background;
+    color: $dark-color;
+    border-bottom: 1px solid $dark-border-color;
+  }
+
+  #nav li, .external-link-icon, footer label[for^=mktoCheckbox] a:focus, footer label[for^=mktoCheckbox] a:hover, h1,
+  h2, h3, h4, h5, html, p strong, a.link-darken:focus, a.link-darken:hover, .compass .project-content a:hover,
+  .compass .project-content .nav-tabs > .active > a, .compass .project-content .nav-tabs a,
+  .compass .project-content .nav-tabs a:hover, .team-member--sub-info p, .team-member--social--icon.github-lg .fab,
+  &.guide main p code, .guide main p pre, &.guide main table code, &.guide main table pre,
+  .compass .project-content .project--list-links li a:hover strong {
+    color: $dark-color;
+  }
+
+  p {
+    color: $dark-highlight-color;
+  }
+
+  #scope {
+    background: #16191c;
+    box-shadow: none;
+  }
+
+  .nav-arrow {
+    border-color: $dark-color;
+  }
+
+  footer #bottom,
+  footer #footer-over {
+    background: $dark-background;
+    color: $dark-color;
+  }
+
+  footer #bottom-bottom p,
+  footer .mktoForm .mktoCheckboxList > label {
+    color: rgba(255, 255, 255, .3);
+  }
+
+  #youtube-icon .cls-1,
+  #github-icon .cls-1,
+  #twitter-icon .cls-1 {
+    fill: $dark-color;
+  }
+
+  #youtube-icon .cls-2,
+  #github-icon .cls-2,
+  #twitter-icon .cls-2 {
+    fill: $dark-background;
+  }
+
+  footer #top {
+    background: $dark-highlight-background;
+  }
+
+  footer #top p {
+    color: $dark-highlight-color;
+  }
+
+  hr.light,
+  .vdivider {
+    background: $dark-border-color;
+  }
+
+  #blog-sidebar-newsletter form input#Email,
+  footer form input#Email {
+    background: $dark-background;
+    color: $dark-color;
+    border-color: $dark-color;
+  }
+
+  #blog-sidebar-newsletter form input#Email::placeholder,
+  footer form input#Email::placeholder {
+    color: rgba(255, 255, 255, .3);
+  }
+
+  form.mktoForm .mktoButtonWrap.mktoSimple button.mktoButton {
+    background: $dark-color;
+    color: $dark-background;
+  }
+
+  footer #circle-grid {
+    opacity: .3;
+  }
+
+  .border {
+    border: 2px solid $dark-border-color;
+  }
+
+  .shadow-hover:focus, .shadow-hover:hover {
+    box-shadow: none;
+    border-color: #6d7579;
+    background: #1f2327;
+  }
+
+  .terminal {
+    background: $dark-highlight-background;
+    box-shadow: none;
+  }
+
+  .terminal-blue {
+    color: #36bedb;
+  }
+
+  .terminal-lime {
+    color: #a1d21b;
+  }
+
+  .terminal-green {
+    color: #23c44c;
+  }
+
+  &#index #hero {
+    background: $dark-highlight-background;
+  }
+
+  .button, a.blog-preview--readmore {
+    border: 2px solid $dark-color;
+  }
+
+  .button.animate:before, a.blog-preview--readmore:before {
+    background: $dark-color;
+  }
+
+  .button.animate:focus, .button.animate:hover, a.blog-preview--readmore:hover {
+    color: $dark-background;
+  }
+
+  &#index .semicircle, &#index .square {
+    background: #1f2327;
+  }
+
+  .blue, label[for^=mktoCheckbox] a {
+    color: $dark-blue;
+  }
+
+  .new-tag {
+    background: $dark-blue;
+  }
+
+  &#why-spring #hero {
+    background: $dark-highlight-background;
+  }
+
+  .shape-color-1 {
+    fill: $dark-border-color;
+  }
+
+  .shape-color-2 {
+    fill: $dark-background;
+  }
+
+  .shape-color-3 {
+    fill: #80ea6e;
+  }
+
+  .shape-color-4 {
+    fill: #6db33f;
+  }
+
+  .shape-color-5 {
+    fill: $dark-background;
+  }
+
+  .shape-color-6 {
+    fill: #fff;
+  }
+
+  .shape-color-7 {
+    fill: $dark-highlight-background;
+  }
+
+  .shape-color-8 {
+    fill: #afc6c5;
+  }
+
+  .shape-border-1 {
+    stroke: $dark-background;
+  }
+
+  .shape-border-2 {
+    stroke: $dark-border-color;
+  }
+
+
+  .bg-lightblue {
+    background: $dark-highlight-background;
+  }
+
+  .bg-white {
+    background: $dark-background;
+  }
+
+  .border-dark {
+    border-color: $dark-border-color;
+  }
+
+  &#projects footer, &#training footer {
+    border-color: $dark-border-color;
+  }
+
+  &#projects .content {
+    background: $dark-highlight-background;
+  }
+
+  &#projects .proj-category {
+    border-color: $dark-border-color;
+  }
+
+  &#guides .jump-card {
+    background: $dark-background;
+    border-color: $dark-border-color;
+    border-top-color: $primary-color;
+  }
+
+  &#guides .guide {
+    border-color: $dark-border-color;
+  }
+
+  &#guides #topical-guides, &#guides #tutorials {
+    border-color: $dark-border-color;
+  }
+
+  .cornell > .flex {
+    border-color: $dark-border-color;
+  }
+
+  &#why-spring #whatspring {
+    background: $dark-background;
+    border-top: 2px solid $dark-border-color;
+  }
+
+  &#why-spring #whatspring .card {
+    background: $dark-background;
+    color: white;
+    border-color: $dark-border-color;
+  }
+
+  &#why-spring #whatspring .card:hover {
+    border-color: #6d7579;
+    background: #1f2327;
+  }
+
+  .topics-banner {
+    background: $dark-highlight-background;
+    background: linear-gradient(90deg, $dark-border-color 50%, #80ea6e 0);
+  }
+
+  .topics-resources .thumbnail:hover + .link-darken {
+    color: $dark-color;
+  }
+
+  &#reactive .topics-banner {
+    background: $dark-border-color;
+  }
+
+  &#event-driven .topics-banner {
+    background: $dark-border-color;
+  }
+
+  &#cloud .topics-banner {
+    background: $dark-border-color;
+  }
+
+  &#batch code, &#cloud code, &#quickstart code, &#serverless code, &.project code,
+  .project-content code, .blog--post code {
+    background-color: $dark-background;
+    border-color: $dark-border-color;
+    color: $dark-color;
+  }
+
+  &#web-apps .topics-banner {
+    background: linear-gradient(90deg, $dark-border-color 50%, $primary-color 0);
+  }
+
+  &#serverless .topics-banner {
+    background: linear-gradient(90deg, $dark-border-color 50%, #81ea6f 0);
+  }
+
+  .cornell .diagram-container {
+    background: $dark-highlight-background;
+  }
+
+  .backlink:focus .arrow, .backlink:hover .arrow {
+    border-color: $dark-color;
+  }
+
+  .shadow {
+    box-shadow: none;
+  }
+
+  &#quickstart #next {
+    border-color: $dark-border-color;
+  }
+
+  pre.prettyprint .button.copy-button {
+    border-color: $dark-color;
+    background: $dark-highlight-background;
+    color: $dark-color;
+
+    &:hover {
+      color: $dark-background;
+    }
+  }
+
+  &#quickstart pre {
+    border-color: $dark-color;
+  }
+
+  &#guides #guide-search {
+    background: $dark-background;
+    color: $dark-color;
+    border-color: $dark-color;
+  }
+
+  #blog-sidebar-newsletter {
+    background: $dark-highlight-background;
+  }
+
+  #blog-sidebar-newsletter form.mktoForm .mktoCheckboxList > label {
+    color: $dark-highlight-color;
+  }
+
+  #blog-sidebar-newsletter form.mktoForm .mktoCheckboxList > label a:hover, .blog-category a:hover, #blog-sidebar-newsletter p {
+    color: $dark-color;
+  }
+
+  .blog-category a {
+    color: $dark-blue;
+  }
+
+  #featured-post {
+    background: url(/images/bg-featured-post-dark.svg) no-repeat 100% #6db33f;
+    background-size: cover;
+  }
+
+  .compass .nav, .compass .nav-tabs a:focus {
+    background: $dark-highlight-background;
+  }
+
+  .compass .nav-tabs > .active > a, .compass .nav-tabs a:hover {
+    background: $dark-background;
+  }
+
+  .compass .quickstart {
+    background: $dark-highlight-background;
+    color: $dark-color;
+  }
+
+  .compass .project-content a {
+    color: $dark-blue;
+  }
+
+  .compass .sidebar ul.sidebar_main {
+    border-color: $dark-border-color;
+  }
+
+  .compass .sidebar_project.active > div > a, .compass .sidebar ul.sidebar_children li.active a {
+    background: $dark-color;
+    color: $dark-background;
+  }
+
+  .compass .sidebar a:hover {
+    color: $dark-blue;
+    background: $dark-highlight-background;
+  }
+
+  .compass .sidebar_project.active > div > i {
+    color: $dark-background;
+  }
+
+  &#support #included .item, &#support #support-list {
+    border-color: $dark-border-color;
+  }
+
+  .bg-black {
+    background: $dark-background;
+  }
+
+  #team-bio-info, .team-member--social--icon.github-lg {
+    background: $dark-background;
+    color: $dark-color;
+  }
+
+  .team-member--bio {
+    color: $dark-highlight-color;
+  }
+
+  .twitter-lg {
+    background: $dark-color;
+    color: $dark-background;
+  }
+
+  .main-body--wrapper, .member-post--container {
+    border-color: $dark-border-color;
+  }
+
+  .project-content, .compass .project-content .project--list-links li a {
+    color: $dark-highlight-color;
+  }
+
+  .compass .table--documentation td, .compass .project--guides--title,
+  .compass .project--list-links li {
+    border-color: $dark-border-color;
+  }
+
+  .compass .project-content .project--list-links li a strong {
+    color: $dark-blue;
+  }
+
+  &.guide main a {
+    color: $dark-blue;
+
+    &:hover {
+      color: $dark-color;
+    }
+  }
+
+  &.guide main p code a, &.guide main p pre a {
+    color: #abd8ff;
+
+    &:hover {
+      color: $dark-color;
+    }
+  }
+
+  .compass .table--documentation .label, .compass .project--header .label {
+    color: $dark-background;
+  }
+
+  .admonitionblock, &.guide main .right-pane-widget--container {
+    background: $dark-highlight-background;
+  }
+
+  .compass .project--header .social-links a {
+    fill: $dark-color;
+  }
+
+  .team-member--name:hover {
+    color: $dark-color;
+  }
+
+  .blog--post blockquote:after {
+    background: $dark-background;
+  }
+
+  .recommend-col-header h2 {
+    color: $dark-highlight-color;
+    strong {
+      color: $dark-color;
+    }
+  }
+
+  .img-light {
+    display: none;
+  }
+
+  .img-dark {
+    display: block;
+  }
+
+  .compass .table--documentation .label.pre {
+    color: $dark-color;
+    background: $dark-highlight-background;
+  }
+
+  .recommend-post {
+    color: $dark-color;
+    background: $dark-background;
+    border-color: $dark-border-color;
+  }
+
+  &#blog article {
+    border-color: $dark-border-color;
+  }
+  @import 'prettify';
+}
