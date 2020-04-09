@@ -217,15 +217,15 @@ body {
 }
 #learn-target {
     width: 95px;
-    transform: translateX(-10px);
+    transform: translateX(-22px);
 }
 #project-target {
     width: 100px;
-    transform: translateX(-10px);
+    transform: translateX(-16px);
 }
 #community-target {
     width: 110px;
-    transform: translateX(87px);
+    transform: translateX(15px);
 }
 .drop-menu.active {
     opacity: 1;
@@ -247,10 +247,10 @@ body {
     right: 495px;
 }
 #learn-items {
-    right: 360px;
+    right: 380px;
 }
 #project-items {
-    right: 265px;
+    right: 300px;
 }
 .has-menu.active {
     color: #6db33f;
@@ -273,12 +273,12 @@ body {
     transition: all .2s ease-out;
 }
 #scope.learn-scope {
-    right: 360px;
+    right: 380px;
     height: 190px;
     opacity: 1;
 }
 #scope.projects-scope {
-    right: 265px;
+    right: 300px;
     height: 510px;
     opacity: 1;
 }
@@ -503,6 +503,25 @@ footer #bottom-bottom #social-icons a {
 footer #bottom-bottom #spring-links a:hover {
     color: #086dc3;
     text-decoration: underline;
+}
+#youtube-icon .cls-1 {
+    fill: #191E1E;
+}
+#youtube-icon .cls-2 {
+    fill: #fff;
+}
+#github-icon .cls-1 {
+    fill: #191E1E;
+}
+#github-icon .cls-2 {
+    fill: #fff;
+    fill-rule: evenodd;
+}
+#twitter-icon .cls-1 {
+    fill: #191E1E;
+}
+#twitter-icon .cls-2 {
+    fill: #fff;
 }
 footer #bottom #bottom-top{
     /*border-bottom: 1px solid #ebf2f2;*/
@@ -1069,10 +1088,10 @@ hr.dark {
     height: 40px;
     overflow: hidden;
 }
-.topics-banner img {
+.topics-banner svg {
     max-width: 1440px;
 }
-.topics-banner #midshape {
+.topics-banner #midshape svg {
     display: block;
     margin: 0 auto;
     height: 40px;
@@ -1130,6 +1149,7 @@ hr.dark {
 }
 .cornell .diagram-container img {
     max-width: 80%;
+    margin: 0 auto;
 }
 .half-cornell .half {
     border-top: 2px solid #191E1E;
@@ -1794,6 +1814,10 @@ body#index .card:nth-child(4) {
     animation-delay: .45s;
 }
 
+body#index .card .mw-100, body#why-spring .card .mw-100 {
+    margin: 0 auto;
+}
+
 body#index .card,
 body#why-spring .card {
     padding: 20px 25px;
@@ -1955,7 +1979,7 @@ body#why-spring #hero .container {
 body#why-spring #mobile-illustration {
     display: none;
 }
-body#why-spring #illustration {
+body#why-spring .illustration-why-spring {
     position: absolute;
     right: -170px;
     top: -290px;
@@ -1969,7 +1993,7 @@ body#why-spring #quote {
 }
 body#why-spring #shape {
     position: absolute;
-    bottom: -2px;
+    bottom: -5px;
     right: -1px;
     width: 18%;
 }
@@ -1992,7 +2016,7 @@ body#why-spring #quote > .container blockquote{
 body#why-spring #springis .item {
     width: 48%;
 }
-body#why-spring #springis .item img{
+body#why-spring #springis .item .icon-flex{
     width: 21%;
     max-width: 115px;
     transform: translateY(20px);
@@ -2019,7 +2043,7 @@ body#why-spring #whatspring {
     body#why-spring #shape {
         display: none;
     }
-    body#why-spring #illustration {
+    body#why-spring .illustration-why-spring {
         position: static;
         height: auto;
         width: 38.5%;
@@ -2047,7 +2071,7 @@ body#why-spring #whatspring {
         width: 100%;
         max-width: 100%;
     }
-    body#why-spring #illustration {
+    body#why-spring .illustration-why-spring {
         display: none;
     }
     body#why-spring #mobile-illustration {
@@ -2059,7 +2083,7 @@ body#why-spring #whatspring {
     body#why-spring #springis .item p {
         width: 79%;
     }
-    body#why-spring #springis .item img {
+    body#why-spring #springis .item .icon-flex {
         width: 18%;
     }
     body#why-spring #hero > .container {
@@ -2080,7 +2104,7 @@ body#batch .topic-icon {
 body#batch .cornell .right > .flex > .text {
     width: 65%;
 }
-body#batch .cornell .right > .flex > img {
+body#batch .cornell .right > .flex > .img  {
     width: 21.5%;
     margin-left: 45px;
 }
@@ -2096,7 +2120,7 @@ body#microservices .topic-icon {
 body#microservices .half-cornell .half:first-child h2 {
     max-width: 400px;
 }
-body#microservices #manage img {
+body#microservices #manage .icon-flex {
     width: 20%;
 }
 body#microservices #manage .text {
@@ -2165,7 +2189,7 @@ body#web-apps .logo img {
 body#web-apps #easy .right .text {
     width: 78%;
 }
-body#web-apps #easy .right img {
+body#web-apps #easy .right .as-fs {
     width: 16%;
 }
 @media(min-width:801px) {
@@ -2200,13 +2224,13 @@ body#web-apps #easy .right img {
     body#web-apps #easy .right .flex .text {
         width: 100%;
     }
-    body#web-apps #easy .right .flex img {
+    body#web-apps #easy .right .flex .as-fs {
         margin-bottom: 30px;
         align-self: center;
     }
 }
 @media(max-width:500px) {
-    body#batch .cornell .right > .flex > img {
+    body#batch .cornell .right > .flex > .img {
         margin-left: 20px;
     }
     body#batch #batchcloud .right .flex {
@@ -2240,7 +2264,7 @@ body#serverless .topics-banner {
 body#serverless .topic-hero p {
     width: 72%;
 }
-body#serverless .topic-hero img {
+body#serverless .topic-hero .topic-icon {
     width: 230px;
 }
 body#serverless .content ul {
@@ -2258,7 +2282,7 @@ body#serverless .topic-icon {
     body#serverless .topic-hero p {
         width: 100%;
     }
-    body#serverless .topic-hero img {
+    body#serverless .topic-hero .topic-icon {
         width: 22%;
         margin-bottom: 40px;
         transform: translateY(0);
@@ -2280,14 +2304,18 @@ body#serverless .topic-icon {
 body#reactive .topic-icon {
     width: 252px;
 }
-body#reactive #reactive-micro .right img {
+body#reactive #reactive-micro .right .img {
     margin-right: 40px;
-    max-width: 130px;
+    min-width: 130px;
+    height: 112px;
+}
+body#reactive #reactive-micro .right .flex {
+    align-items: center;
 }
 body#reactive .topics-banner {
     background: rgb(215,231,231);
 }
-body#reactive .topics-banner #midshape {
+body#reactive .topics-banner #midshape svg {
     height: 80px;
 }
 @media(max-width:600px) {
@@ -2295,7 +2323,7 @@ body#reactive .topics-banner #midshape {
         flex-direction: column;
         align-items: center;
     }
-    body#reactive #reactive-micro .right img {
+    body#reactive #reactive-micro .right .img {
         margin-right: 0px;
         margin-bottom: 20px;
     }
@@ -2303,7 +2331,7 @@ body#reactive .topics-banner #midshape {
 body#event-driven .topics-banner {
     background: rgb(215,231,231);
 }
-body#event-driven .topics-banner #midshape {
+body#event-driven .topics-banner #midshape svg {
     height: 80px;
 }
 body#event-driven .topic-icon {
@@ -2404,7 +2432,7 @@ body#cloud .topics-banner {
     background: rgb(215,231,231);
     /*background: linear-gradient(90deg, rgba(215,231,231,1) 50%, rgba(109,179,63,1) 50%);*/
 }
-body#cloud #config img {
+body#cloud #config img, body#cloud #config .as-fs {
     width: 20%;
 }
 body#cloud #config .text {
@@ -2420,7 +2448,7 @@ body#cloud #tracing .right .text {
     body#cloud #config .right .flex .text {
         width: 100%;
     }
-    body#cloud #config img {
+    body#cloud #config img, body#cloud #config .as-fs  {
         align-self: center;
         margin-bottom: 20px;
     }
@@ -2564,7 +2592,7 @@ body#learn #quickstart  {
     padding: 50px 30px;
     overflow: hidden;
 }
-body#learn #learn-shape {
+body#learn #learn-shape svg {
     position: absolute;
     height: 470px;
     bottom: -25px;
@@ -2597,7 +2625,7 @@ body#learn #columns .third:nth-child(3) .item .thumbnail {
 body#learn #columns .third:nth-child(3) .item .link {
     width: 75%;
 }
-body#learn #pacman {
+body#learn #pacman svg {
     height: 695px;
     position: absolute;
     right: -200px;
@@ -2654,8 +2682,11 @@ body#guides #hero {
 body#guides #hero .text {
     width: 66%;
 }
-body#guides #hero img {
+body#guides #hero .img {
     width: 31.5%;
+    max-height: 345px;
+}
+body#guides #hero .img svg {
     max-height: 345px;
 }
 body#guides #jump-cards {
@@ -2731,6 +2762,9 @@ body#guides #guide-search-icon {
     left: 20px;
     top: 15px;
 }
+body#guides #guide-search-icon svg {
+    height: 20px;
+}
 body#guides .content {
     padding-top: 60px;
 }
@@ -2740,6 +2774,9 @@ body#guides #getting-started-guides {
 body#guides .guide-icon {
     height: 45px;
     margin-right: 30px;
+}
+body#guides .guide-icon svg {
+    height: 45px;
 }
 body#guides .guide {
     border-top: 1px solid #ebf2f2;
@@ -2793,7 +2830,7 @@ body#guides #tutorials {
 body#quickstart #hero {
     padding-top: 80px;
 }
-body#quickstart #hero img {
+body#quickstart #hero svg {
     height: 675px;
     position: absolute;
     right: -100px;
@@ -2912,7 +2949,6 @@ body#training .course .button:hover line,
 body#training .course .button:focus polyline,
 body#training .course .button:focus line {
     transition: stroke .2s;
-    stroke: white;
 }
 body#training .course em {
     display: inline-block;
@@ -2984,7 +3020,7 @@ body#support #included ul li:nth-child(3):before {
 body#support #hero {
     padding: 85px 0 95px;
 }
-body#support #hero #pacman{
+body#support #hero #pacman svg{
     position: absolute;
     right: -200px;
     top: -200px;
@@ -2993,9 +3029,12 @@ body#support #hero #pacman{
 body#support #hero h1 {
     margin-top: 0;
 }
-body#support #hero .third img {
+body#support #hero .third .img {
     height: 80px;
     margin-bottom: 10px;
+}
+body#support #hero .third .img svg {
+    height: 80px;
 }
 body#support #subscription img {
     height: 32px;
@@ -3095,7 +3134,7 @@ body#support #support-list .flex.mobile {
     body#support #hero {
         padding: 60px 0;
     }
-    body#support #hero #pacman{
+    body#support #hero #pacman svg{
         right: -100px;
         top: -100px;
         height: 200px;
@@ -3844,17 +3883,17 @@ pre.prettyprint .button.copy-button {
     outline: none;
 }
 
-a#logo-focus:focus, .button:focus, a.link-animate:focus, .card:focus, footer #bottom a:focus,
-body#projects a.project:focus, .compass .sidebar a:focus, .compass .project--header .social-links a:focus svg,
-.compass .nav a:focus, .compass .project-content a:focus, a.link-darken:focus, label[for^=mktoCheckbox] a:focus,
-.team-member--info a.team-member--name:focus, .team-member--social a:focus .fab, a.team-member--social--icon:focus,
-.blog--container a:focus, a.blog-preview--readmore:focus, .blog-category a:focus, .guide main a:focus,
-pre.prettyprint .button.copy-button:focus{
-    outline: 1px dotted #086dc3;
-}
-#featured-post a:focus, #suite-three a:focus {
-    outline: 1px dotted #FFF;
-}
+/*a#logo-focus:focus, .button:focus, a.link-animate:focus, .card:focus, footer #bottom a:focus,*/
+/*body#projects a.project:focus, .compass .sidebar a:focus, .compass .project--header .social-links a:focus svg,*/
+/*.compass .nav a:focus, .compass .project-content a:focus, a.link-darken:focus, label[for^=mktoCheckbox] a:focus,*/
+/*.team-member--info a.team-member--name:focus, .team-member--social a:focus .fab, a.team-member--social--icon:focus,*/
+/*.blog--container a:focus, a.blog-preview--readmore:focus, .blog-category a:focus, .guide main a:focus,*/
+/*pre.prettyprint .button.copy-button:focus{*/
+/*    outline: 1px dotted #086dc3;*/
+/*}*/
+/*#featured-post a:focus, #suite-three a:focus {*/
+/*    outline: 1px dotted #FFF;*/
+/*}*/
 
 .compass .project--header .social-links a:focus svg {
     fill: #6bb536;
@@ -4091,4 +4130,103 @@ body#projects .proj-category-attic .proj-text h3 {
 
 .page-error p a:hover {
     text-decoration: underline;
+}
+
+.theme-light {
+    display: block;
+}
+.theme-dark {
+    display: none;
+}
+.shape-color-1 {
+    fill: #d7e7e7;
+}
+.shape-color-2 {
+    fill: #fff;
+}
+.shape-color-3 {
+    fill: #80ea6e;
+}
+.shape-color-4 {
+    fill: #6db33f;
+}
+.shape-color-5 {
+    fill: #fff;
+}
+.shape-color-6 {
+    fill: #191E1E;
+}
+.shape-border-1 {
+    stroke: #fff;
+}
+.shape-color-7 {
+    fill: #ebf2f2;
+}
+.shape-color-8 {
+    fill: #afc6c5;
+}
+.shape-border-1 {
+    stroke: #fff;
+}
+.shape-border-2 {
+    stroke: #d7e7e7;
+}
+
+.theme-switch {
+    display: inline-block;
+    width: 36px;
+    height: 10px;
+    background: #d7e7e7;
+    position: relative;
+    border-radius: 15px;
+    z-index: 2000;
+}
+
+.theme-switch span {
+    display: block;
+    height: 22px;
+    width: 22px;
+    background: #191E1E;
+    border-radius: 12px;
+    position: absolute;
+    left: 0;
+    top: -7px;
+    color: #fff;
+    text-align: center;
+    line-height: 24px;
+    transition: transform .35s;
+    font-size: 14px;
+}
+.theme-switch .fa-sun {
+    display: block;
+    margin-top: 4px;
+}
+.theme-switch .fa-moon {
+    display: none;
+    margin-top: 4px;
+}
+
+body.dark .theme-switch .fa-sun {
+    display: none;
+}
+body.dark .theme-switch .fa-moon {
+    display: block;
+}
+
+body.dark .theme-switch span {
+    background: white;
+    transform: translateX(15px);
+    color: #191E1E;
+}
+
+body.dark .theme-switch {
+    background: #41464b;
+}
+
+.img-light {
+    display: block;
+}
+
+.img-dark {
+    display: none;
 }

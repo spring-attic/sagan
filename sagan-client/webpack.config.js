@@ -17,6 +17,7 @@ module.exports = {
         profile: './src/app/profile.js',
         blog: './src/app/blog.js',
         admin: './src/app/admin.js',
+        theme: './src/app/theme.js',
         run_prettify: './src/app/run_prettify.js'
     },
 
@@ -68,11 +69,23 @@ module.exports = {
                     allow: '/images'
                 }
             ],
-            host: "https://spring.io"
+            host: 'https://spring.io'
         })
     ],
     module: {
         rules: [
+
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {publicPath: '../'},
+                    },
+                    'css-loader',
+                    'sass-loader',
+                ],
+            },
             {
                 test: /\.css$/,
                 use: [

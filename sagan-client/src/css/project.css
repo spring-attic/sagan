@@ -364,7 +364,7 @@
     left: 15px;
 }
 
-.compass .project--list-links li span.icon img {
+.compass .project--list-links li span.icon svg {
     width: 25px;
 }
 

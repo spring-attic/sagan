@@ -12,7 +12,8 @@
     <div id='hero' class='bg-lightblue' role='Banner'>
         <div class='container'>
             <div class='flex jc-between ai-center mb-3'>
-                <img th:src="@{/images/guides.svg}" alt=''>
+                <img class='img img-light' th:src="@{/images/guides.svg}" alt=''>
+                <img class='img img-dark' th:src="@{/images/guides-dark.svg}" alt=''>
                 <div class='text'>
                     <h1 class='h1 antialiased'>Guides</h1>
                     <p class='big'>Whatever you're building, these guides are designed to get you productive as quickly as possible – using the latest Spring project releases and techniques as recommended by the Spring team.</p>
@@ -44,13 +45,13 @@
                 <p class='guide-description m-0'>Designed to be completed in 15-30 minutes, these guides provide quick, hands-on instructions for building the "Hello World" of any development task with Spring. In most cases, the only prerequisites are a JDK and a text editor.</p>
                 <div id='search-container' class='rel'>
                     <input id='guide-search' class='border-box' placeholder='Find a guide' />
-                    <img id='guide-search-icon' th:src="@{/images/search.svg}">
+                    <div id="guide-search-icon" layout:include="svg/_icons :: icon-search"></div>
                 </div>
             </section>
             <section id='getting-started-list' class='flex jc-between flex-wrap'>
                 <div id="guide-search-no-result" class="guide-search-no-result">No result found.</div>
                 <div th:each="guide : ${guides}" class='guide guide-search half border-box flex' th:attr="data-filterable=${guide.title}+' '+${guide.description}+' '+${guide.projects}">
-                    <img class='guide-icon' th:src="@{/images/icon-guides-start.svg}">
+                    <div class="guide-icon" layout:include="svg/_icons :: icon-guides-start"></div>
                     <div class='text'>
                         <a class='guide-link bold blue link-darken antialiased' th:href="@{'/guides/gs/'+${guide.name}+'/'}" th:text="${guide.title}">Building a RESTful Web Service</a>
                         <p class='m-0' th:text="${guide.description}">Learn how to create a RESTful web service with Spring.</p>
@@ -66,7 +67,7 @@
                 </div>
                 <section id='topical-guides-list' class='flex jc-between flex-wrap'>
                     <div th:each="topical : ${topicals}" class='guide half border-box flex' th:attr="data-filterable=${topical.title}+' '+${topical.description}">
-                        <img class='guide-icon' th:src="@{/images/icon-guides-topic.svg}">
+                        <div class="guide-icon" layout:include="svg/_icons :: icon-guides-topic"></div>
                         <div class='text'>
                             <a class='guide-link bold blue link-darken antialiased' th:href="@{'/guides/topicals/'+${topical.name}+'/'}" th:text="${topical.title}">Spring Security Architecture</a>
                             <p class='m-0' th:text="${topical.description}">Topical guide to Spring Security, how the bits fit together and how they interact with Spring Boot.</p>
@@ -83,7 +84,7 @@
                 </div>
                 <section id='tutorials-list' class='flex jc-between flex-wrap'>
                     <div th:each="tutorial : ${tutorials}" class='guide half border-box flex' th:attr="data-filterable=${tutorial.title}+' '+${tutorial.description}">
-                        <img class='guide-icon' th:src="@{/images/icon-guides-tutorial.svg}">
+                        <div class="guide-icon" layout:include="svg/_icons :: icon-guides-tutorial"></div>
                         <div class='text'>
                             <a class='guide-link bold blue link-darken antialiased' th:href="@{'/guides/tutorials/'+${tutorial.name}+'/'}" th:text="${tutorial.title}">Building REST services with Spring</a>
                             <p class='m-0' th:text="${tutorial.description}">Learn how to easily build RESTful services with Spring.</p>

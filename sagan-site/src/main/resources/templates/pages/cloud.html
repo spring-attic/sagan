@@ -8,7 +8,7 @@
 <body id='cloud'>
 <div layout:fragment="~{content}">
     <div id='hero' class='topics-banner mb-5'>
-        <img id='midshape' th:src="@{/images/header-cloud.svg}" alt=''>
+        <div id="midshape" layout:include="svg/_shapes :: header-cloud"></div>
     </div>
     <div class='content' role='Main'>
         <section class='container mb-5'>
@@ -17,7 +17,8 @@
                 <div class='left m-0 topic-info'>
                     <p class='big'>Developing distributed systems can be challenging. Complexity is moved from the application layer to the network layer and demands greater interaction between services. Making your code ‘cloud-native’ means dealing with <a class='blue link-animate' href="https://12factor.net/">12-factor</a> issues such as external configuration, statelessness, logging, and connecting to backing services. The Spring Cloud suite of projects contains many of the services you need to make your applications run in the cloud. </p>
                 </div>
-                <img class='as-fs topic-icon' th:src="@{/images/cloud.svg}" alt=''>
+                <img class='as-fs topic-icon img-light' th:src="@{/images/cloud.svg}" alt=''>
+                <img class='as-fs topic-icon img-dark' th:src="@{/images/cloud-dark.svg}" alt=''>
             </div>
         </section>
         <section class='cornell container'>
@@ -26,7 +27,8 @@
                     <h2 class='h2'>Spring Cloud architecture highlights</h2>
                 </div>
                 <div class='right'>
-                    <img th:src="@{/images/cloud-diagram.svg}" alt='Spring Cloud diagram'>
+                    <img class="img-light" th:src="@{/images/cloud-diagram.svg}" alt='Spring Cloud diagram'>
+                    <img class="img-dark" th:src="@{/images/cloud-diagram-dark.svg}" alt='Spring Cloud diagram'>
                 </div>
             </div>
         </section>
@@ -71,7 +73,7 @@
                 </div>
                 <div class='right'>
                     <div class='flex jc-between'>
-                        <img class='as-fs' th:src="@{/images/cloud-wrench.svg}" alt=''>
+                        <div class="as-fs" layout:include="svg/_icons-color :: icon-wrench"></div>
                         <div class='text'>
                             <p>In the cloud, configuration can’t simply be embedded inside the application. The configuration has to be flexible enough to cope with multiple applications, environments, and service instances, as well as deal with dynamic changes without downtime. <a class='blue link-animate' href="/projects/spring-cloud-config">Spring Cloud Config</a> is designed to ease these burdens and offers integration with version control systems like Git to help you keep your configuration safe.</p>
                             <a class='link-animate blue' href="/guides/gs/centralized-configuration/">Try it now</a>

@@ -6,6 +6,7 @@
 <head>
     <title th:inline="text">Team | [[${profile.fullName}]]</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/profile.css}"/>
+    <meta property="og:url" th:content="${'https://www.spring.io/team/' + profile.username}"/>
     <script th:inline="javascript">
         /*<![CDATA[*/
         var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
@@ -27,15 +28,18 @@
         <div class="team-map--wrapper">
             <div class="team-member--container">
                 <section class="container-fluid">
-                    <div class="content--title"><a th:href="@{/team}" class='uppercase smallest bold backlink blue link-darken block'>
-                        <div class='arrow'></div>Spring Team</a></div>
+                    <div class="content--title"><a th:href="@{/team}"
+                                                   class='uppercase smallest bold backlink blue link-darken block'>
+                        <div class='arrow'></div>
+                        Spring Team</a></div>
                     <h1 class="team-member--name" th:text="*{fullName}">Member Name</h1>
                 </section>
                 <figure id="map"></figure>
                 <section class="container-fluid" id='team-bio-info'>
                     <div class="row-fluid">
                         <div class="span4 mobile-right-pane">
-                            <img th:alt="*{fullName}" class="team-member--avatar" th:src="*{avatarUrl} + '?s=250&s=250'" th:unless="${#strings.isEmpty(profile.avatarUrl)}"/>
+                            <img th:alt="*{fullName}" class="team-member--avatar" th:src="*{avatarUrl} + '?s=250&s=250'"
+                                 th:unless="${#strings.isEmpty(profile.avatarUrl)}"/>
                         </div>
                         <div class="span8 mobile-left-pane">
                             <div class="team-member-info--container">
@@ -50,10 +54,14 @@
                                     </a>
                                 </div>
                                 <div class="team-member--sub-info">
-                                    <p th:text="*{jobTitle}" th:unless="${#strings.isEmpty(profile.jobTitle)}">Rock Star</p>
-                                    <p th:text="*{location}" th:unless="${#strings.isEmpty(profile.location)}">Location</p>
+                                    <p th:text="*{jobTitle}" th:unless="${#strings.isEmpty(profile.jobTitle)}">Rock
+                                        Star</p>
+                                    <p th:text="*{location}" th:unless="${#strings.isEmpty(profile.location)}">
+                                        Location</p>
                                 </div>
-                                <div class="team-member--bio" th:text="*{bio}">Subttitle Ligula Risus Tristique Pharetra</div>
+                                <div class="team-member--bio" th:text="*{bio}">Subttitle Ligula Risus Tristique
+                                    Pharetra
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,28 +76,33 @@
                 <div class="row-fluid">
                     <div id="content" class="span8 mobile-left-pane">
                         <div class="content-container--wrapper blog--container">
-                            <div class="content-container--title" th:inline="text">Blog Posts by [[${profile.name}]]</div>
+                            <div class="content-container--title" th:inline="text">Blog Posts by [[${profile.name}]]
+                            </div>
                             <div class='content-items--container posts'>
                                 <article class="member-post--container" th:each="post : ${posts}">
                                     <header>
-                                        <a class="member-post--title-link" th:href="@{${post.path}}"><h2 class="member-post--title" th:text="${post.title}">
+                                        <a class="member-post--title-link" th:href="@{${post.path}}"><h2
+                                                class="member-post--title" th:text="${post.title}">
                                             This week in Spring</h2></a>
                                         <div class="meta-data--container">
                                             <div class="meta-data--item">
                                                 <div th:class="${'meta-data--icon icon blog-icon '+ #strings.toLowerCase(post.category).replace(' ','-')}"></div>
-                                                <a class='category' th:href="@{'/blog/category/'+${post.category.urlSlug}}"
+                                                <a class='category'
+                                                   th:href="@{'/blog/category/'+${post.category.urlSlug}}"
                                                    th:text="${post.category}">Category</a>
                                             </div>
                                             <div class="meta-data--item">
                                                 <div class="meta-data--icon icon blog-icon calendar"></div>
                                                 <time class='date' pubdate th:datetime="${post.publishAt}"
-                                                      th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18,
+                                                      th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June
+                                                    18,
                                                     2013
                                                 </time>
                                             </div>
                                         </div>
                                     </header>
-                                    <section th:utext="${post.renderedSummary}" class='member-post--summary'>This has been
+                                    <section th:utext="${post.renderedSummary}" class='member-post--summary'>This has
+                                        been
                                         an interesting week.
                                     </section>
                                     <a class="blog-preview--readmore" th:href="@{${post.path}}"
@@ -130,31 +143,33 @@
                             </div>
                             <div class="member-twitter--body">
                                 <div th:if="${#strings.isEmpty(profile.twitterUsername)}">
-                                    <a class="twitter-timeline" href="'https://twitter.com/springcentral"
+                                    <a id="twitter-obj"
+                                       class="twitter-timeline" href="'https://twitter.com/springcentral"
                                        data-widget-id="366969513482285056" data-screen-name="springcentral"
                                        data-show-replies="false" width="250"
-                                       data-chrome="nofooter transparent noheader noscrollbar"
-                                       data-border-color="#ffffff"></a>
+                                       data-chrome="nofooter transparent noheader noscrollbar""></a>
                                 </div>
                                 <div th:unless="${#strings.isEmpty(profile.twitterUsername)}">
-                                    <a class="twitter-timeline"
+                                    <a id="twitter-obj" class="twitter-timeline"
                                        th:href="'https://twitter.com/' + ${profile.twitterUsername}"
                                        data-widget-id="366969513482285056"
                                        th:attr="data-screen-name=${profile.twitterUsername}" data-show-replies="false"
-                                       width="250" data-chrome="nofooter transparent noheader noscrollbar"
-                                       data-border-color="#ffffff"></a>
+                                       width="250" data-chrome="nofooter transparent noheader noscrollbar"></a>
                                 </div>
                                 <script>
+                                    const theme = document.body.className.indexOf('dark') > -1 ? 'dark' : 'light';
+                                    document.querySelector('#twitter-obj').setAttribute('data-border-color', theme === 'light' ? '#ffffff' : '#1b1f23');
+                                    document.querySelector('#twitter-obj').setAttribute('data-theme', theme);
                                     !function (d, s, id) {
                                         var js, fjs = d.getElementsByTagName(s)[0],
                                             p = /^http:/.test(d.location) ? 'http' : 'https';
                                         if (!d.getElementById(id)) {
                                             js = d.createElement(s);
                                             js.id = id;
-                                            js.src = p + "://platform.twitter.com/widgets.js";
+                                            js.src = p + '://platform.twitter.com/widgets.js';
                                             fjs.parentNode.insertBefore(js, fjs);
                                         }
-                                    }(document, "script", "twitter-wjs");
+                                    }(document, 'script', 'twitter-wjs');
                                 </script>
                             </div>
                         </div>

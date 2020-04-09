@@ -67,8 +67,8 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.2 30.2">
                                         <circle cx="15.1" cy="15.1" r="15.1"/>
                                         <g>
-                                            <path d="M20.27,22.39V17.64h1.58V24H7.62V17.64H9.19v4.75Z" style="fill: #fff"/>
-                                            <path d="M10.93,17.19l7.74,1.62L19,17.25l-7.74-1.62Zm1-3.69,7.16,3.34.66-1.43-7.17-3.36Zm2-3.52L20,15l1-1.21L15,8.77Zm3.94-3.75-1.27.95,4.71,6.34,1.26-.94ZM10.77,20.79h7.9V19.22h-7.9Z" style="fill: #fff"/>
+                                            <path d="M20.27,22.39V17.64h1.58V24H7.62V17.64H9.19v4.75Z" class="shape-color-2"/>
+                                            <path d="M10.93,17.19l7.74,1.62L19,17.25l-7.74-1.62Zm1-3.69,7.16,3.34.66-1.43-7.17-3.36Zm2-3.52L20,15l1-1.21L15,8.77Zm3.94-3.75-1.27.95,4.71,6.34,1.26-.94ZM10.77,20.79h7.9V19.22h-7.9Z" class="shape-color-2"/>
                                         </g>
                                     </svg>
                                 </a>
@@ -204,7 +204,7 @@
                                         <li th:each="guide : ${guides}">
                                             <a th:href="'/guides/gs/' + ${guide.name}">
                                                 <span class="icon">
-                                                    <img th:src="@{/images/icon-guides-start.svg}" alt=''>
+                                                    <div class="guide-icon" layout:include="svg/_icons :: icon-guides-start"></div>
                                                 </span>
                                                 <strong class="project--sample--title"
                                                         th:text="${guide.getTitle()}"></strong>
@@ -227,7 +227,7 @@
                                         <li th:each="guide : ${topicals}">
                                             <a th:href="'/guides/topicals/' + ${guide.name}">
                                                 <span class="icon">
-                                                    <img th:src="@{/images/icon-guides-topic.svg}" alt=''>
+                                                    <div class="guide-icon" layout:include="svg/_icons :: icon-guides-topic"></div>
                                                 </span>
                                                 <strong class="project--sample--title"
                                                         th:text="${guide.getTitle()}"></strong>
@@ -251,7 +251,7 @@
                                         <li th:each="guide : ${tutorials}">
                                             <a th:href="'/guides/tutorials/' + ${guide.name}">
                                                 <span class="icon">
-                                                    <img th:src="@{/images/icon-guides-tutorial.svg}" alt=''>
+                                                    <div class="guide-icon" layout:include="svg/_icons :: icon-guides-tutorial"></div>
                                                 </span>
                                                 <strong class="project--sample--title"
                                                         th:text="${guide.getTitle()}"></strong>
@@ -269,7 +269,7 @@
                                         <li th:each="sample : ${selectedProject.projectSamples}">
                                             <a th:href="${sample.getUrl()}" target="_blank">
                                                 <span class="icon">
-                                                    <img th:src="@{/images/icon-guides-tutorial.svg}" alt=''>
+                                                    <div class="guide-icon" layout:include="svg/_icons :: icon-guides-tutorial"></div>
                                                 </span>
                                                 <strong class="project--sample--title"
                                                         th:text="${sample.getTitle()}"></strong>

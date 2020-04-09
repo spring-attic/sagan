@@ -9,7 +9,7 @@
 <body id='reactive'>
 <div layout:fragment="~{content}">
     <div id='hero' class='topics-banner mb-5'>
-        <img id='midshape' th:src="@{/images/header-reactive.svg}" alt=''>
+        <div id="midshape" layout:include="svg/_shapes :: header-reactive"></div>
     </div>
     <div class='content' role='Main'>
         <section class='container mb-5'>
@@ -28,7 +28,8 @@
                         </div>
                     </div>
                 </div>
-                <img class='as-fs topic-icon' th:src="@{/images/reactive.svg}" alt=''>
+                <img class='as-fs topic-icon img-light' th:src="@{/images/reactive.svg}" alt=''>
+                <img class='as-fs topic-icon img-dark' th:src="@{/images/reactive-dark.svg}" alt=''>
             </div>
         </section>
         <section class='cornell container'>
@@ -48,7 +49,7 @@
                 </div>
                 <div class='right'>
                     <div class='flex'>
-                        <img th:src="@{/images/img-gear.svg}" alt=''>
+                        <div class="img" layout:include="svg/_icons-color :: icon-gear"></div>
                         <div class='text'>
                             <p>One of the main reasons developers move from blocking to non-blocking code is efficiency. Reactive code does more work with fewer resources. Project Reactor and Spring WebFlux let developers take advantage of multi-core, next-generation processors—handling potentially massive numbers of concurrent connections. With reactive processing, you can satisfy more concurrent users with fewer microservice instances.</p>
                         </div>
@@ -63,7 +64,8 @@
                 </div>
                 <div class='right'>
                     <p>The Spring portfolio provides two parallel stacks. One is based on a Servlet API with Spring MVC and Spring Data constructs. The other is a fully reactive stack that takes advantage of Spring WebFlux and Spring Data’s reactive repositories. In both cases, Spring Security has you covered with native support for both stacks.</p>
-                    <img th:src="@{/images/diagram-reactive.svg}" alt='Spring Reactive diagram'>
+                    <img class='img-light' th:src="@{/images/diagram-reactive.svg}" alt=''>
+                    <img class='img-dark' th:src="@{/images/diagram-reactive-dark.svg}" alt=''>
                 </div>
             </div>
         </section>
