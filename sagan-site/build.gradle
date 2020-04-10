@@ -55,7 +55,7 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-security'
 
 	// for use in on-the-fly database setup and migrations
-	compile 'org.flywaydb:flyway-core'
+	compile 'org.flywaydb:flyway-core:4.2.0'
 	compile 'org.apache.httpcomponents:httpclient'
 
 	// jackson, for JSON and XML serialization
