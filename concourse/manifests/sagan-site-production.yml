@@ -15,4 +15,3 @@ applications:
   - papertrail
   - sagan-db
   - sagan-redis
-  - sagan-search
