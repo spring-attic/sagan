@@ -33,7 +33,7 @@ body.dark {
     color: $dark-color;
   }
 
-  p {
+  p, .blog--post ul li {
     color: $dark-highlight-color;
   }
 
