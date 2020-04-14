@@ -297,6 +297,10 @@ body.dark {
     background: linear-gradient(90deg, $dark-border-color 50%, #81ea6f 0);
   }
 
+  &#thankyou #hero {
+    background: linear-gradient(90deg, $dark-border-color 50%, #81ea6f 0);
+  }
+
   .cornell .diagram-container {
     background: $dark-highlight-background;
   }
@@ -466,6 +470,7 @@ body.dark {
 
   .recommend-col-header h2 {
     color: $dark-highlight-color;
+
     strong {
       color: $dark-color;
     }
@@ -493,5 +498,10 @@ body.dark {
   &#blog article {
     border-color: $dark-border-color;
   }
+
+  &#thankyou .item {
+    border-color: $dark-border-color;
+  }
+
   @import 'prettify';
 }
