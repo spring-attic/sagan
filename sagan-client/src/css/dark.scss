@@ -37,6 +37,15 @@ body.dark {
     color: $dark-highlight-color;
   }
 
+  .signin {
+    background: $dark-background;
+  }
+
+  .signin .button {
+    background: $dark-background;
+    color: $dark-color;
+  }
+
   #scope {
     background: #16191c;
     box-shadow: none;
