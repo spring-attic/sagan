@@ -512,5 +512,11 @@ body.dark {
     border-color: $dark-border-color;
   }
 
+  form.mktoForm .mktoButtonWrap.mktoSimple button.mktoButton:hover,
+  form.mktoForm .mktoButtonWrap.mktoSimple button.mktoButton:focus {
+    background: $primary-color;
+    color: white;
+  }
+
   @import 'prettify';
 }
