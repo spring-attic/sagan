@@ -433,7 +433,7 @@ body.dark {
   }
 
   .compass .table--documentation td, .compass .project--guides--title,
-  .compass .project--list-links li {
+  .compass .project--list-links li, table.tableblock tr td {
     border-color: $dark-border-color;
   }
 
@@ -516,6 +516,14 @@ body.dark {
   form.mktoForm .mktoButtonWrap.mktoSimple button.mktoButton:focus {
     background: $primary-color;
     color: white;
+  }
+
+  table.tableblock tbody tr:first-child *, table.tableblock thead tr * {
+    border-top: 0 none;
+  }
+
+  table.tableblock thead tr * {
+    border-bottom-color: lighten($dark-border-color, 5);
   }
 
   @import 'prettify';
