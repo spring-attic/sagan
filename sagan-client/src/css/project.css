@@ -126,19 +126,21 @@
 }
 .compass .project--header {
     position: relative;
+    padding-bottom: 0.6rem;
+    padding-right: 80px;
 }
 .compass .project--header h1 {
-    font-size: 38px;
     display: inline-block;
     font-size: 2.4rem;
     vertical-align: middle;
     line-height: 2.7rem;
     margin-right: 1rem;
+    margin-bottom: 0.8rem;
 }
 .compass .project--header .label {
     display: inline-block;
-    margin-top: 0.7rem;
-    vertical-align: middle;
+    margin-bottom: 1.3rem;
+    vertical-align: bottom;
     background: #80ea6e;
     border-radius: 6px;
     padding: 2px 10px;
@@ -445,6 +447,9 @@
     .compass .nav-tabs a {
         padding: 14px 8px 19px;
     }
+    .compass .project--header {
+        padding-right: 0;
+    }
     .compass .project--header h1 {
         margin-top: 0;
         margin-bottom: 8px;
@@ -453,10 +458,11 @@
         position: relative;
         top: 0;
         margin-bottom: 12px;
+        margin-top: 1rem;
     }
     .compass .project--header .label {
         margin-top: 0;
-        margin-bottom: 0.1rem;
+        margin-bottom: 1rem;
     }
 }
 

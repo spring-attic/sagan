@@ -73,27 +73,28 @@
                                     </svg>
                                 </a>
                             </div>
-                            <ul id="nav-project" class="nav nav-tabs">
-                                <li class="active">
-                                    <a href="#overview" data-toggle="tab">
-                                        <i class="icon-eye-open"></i>
-                                        <span class="hide-sm">Overview</span>
-                                    </a>
-                                </li>
-                                <li th:if="${hasDocumentation}" class="">
-                                    <a href="#learn" data-toggle="tab">
-                                        <i class="icon-file-text-alt"></i>
-                                        <span class="hide-sm">Learn</span>
-                                    </a>
-                                </li>
-                                <li th:if="${hasSamples}" class="">
-                                    <a href="#samples" data-toggle="tab">
-                                        <i class="icon-code"></i>
-                                        <span class="hide-sm">Samples</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
+
+                        <ul id="nav-project" class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#overview" data-toggle="tab">
+                                    <i class="icon-eye-open"></i>
+                                    <span class="hide-sm">Overview</span>
+                                </a>
+                            </li>
+                            <li th:if="${hasDocumentation}" class="">
+                                <a href="#learn" data-toggle="tab">
+                                    <i class="icon-file-text-alt"></i>
+                                    <span class="hide-sm">Learn</span>
+                                </a>
+                            </li>
+                            <li th:if="${hasSamples}" class="">
+                                <a href="#samples" data-toggle="tab">
+                                    <i class="icon-code"></i>
+                                    <span class="hide-sm">Samples</span>
+                                </a>
+                            </li>
+                        </ul>
 
 
                         <div class="tab-content" id="content-project">
