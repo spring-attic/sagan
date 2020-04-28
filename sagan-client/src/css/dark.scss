@@ -36,7 +36,9 @@ body.dark {
   p, .blog--post ul li {
     color: $dark-highlight-color;
   }
-
+  .blog--post a:hover {
+    color: $dark-color;
+  }
   .signin {
     background: $dark-background;
   }
