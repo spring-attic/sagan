@@ -1,7 +1,8 @@
 ---
 applications:
 - name: sagan
-  buildpack: java_buildpack
+  buildpacks:
+  - java_buildpack
   instances: 2
   health-check-type: http
   health-check-http-endpoint: /health
