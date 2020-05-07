@@ -3,9 +3,22 @@
       layout:decorator="layout">
 <head>
     <title>Spring | Home</title>
-    <meta property='og:title' content='Spring makes Java simple.'/>
-    <meta name='description' content='Level up your Java code and explore what Spring can do for you.'/>
-    <meta property='og:description' content='Level up your Java code and explore what Spring can do for you.'/>
+    <meta property="og:site_name" content="Spring">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Spring makes Java simple.">
+    <meta property="og:description" content="Level up your Java code and explore what Spring can do for you.">
+    <meta property="og:url" th:content="${#httpServletRequest.getRequestURL()}">
+    <meta property="og:image" content="/images/OG-Spring.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+
+    <meta name="twitter:title" content="Spring">
+    <meta name="twitter:description" content="Level up your Java code and explore what Spring can do for you.">
+    <meta name="twitter:url" th:content="${#httpServletRequest.getRequestURL()}">
+    <meta name="twitter:site" content="@springcentral">
+    <meta name="twitter:creator" content="@springcentral">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://spring.io/images/OG-Spring.png">
 </head>
 <body id='index'>
 <div layout:fragment="~{content}">
