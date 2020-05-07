@@ -121,6 +121,9 @@ sagan:
 
 spring:
   profiles: production
+  datasource:
+    tomcat:
+      max-active: 8
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io}
 sagan:
   site:
