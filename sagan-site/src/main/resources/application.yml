@@ -124,6 +124,7 @@ spring:
   datasource:
     tomcat:
       max-active: 8
+      test-on-borrow: true
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io}
 sagan:
   site:
