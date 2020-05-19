@@ -17,7 +17,7 @@ resources:
   icon: github-circle
   source:
     uri: "https://github.com/spring-io/sagan.git"
-    ignore_paths: ["sagan-site/*", "sagan-common/*"]
+    ignore_paths: ["sagan-site/*"]
 - name: sagan-cf-production
   type: cf
   icon: cloud
