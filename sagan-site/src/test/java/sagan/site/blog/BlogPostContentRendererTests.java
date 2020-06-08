@@ -3,7 +3,6 @@ package sagan.site.blog;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import sagan.SiteProperties;
-import sagan.blog.PostFormat;
 import sagan.site.renderer.SaganRendererClient;
 
 import org.springframework.beans.factory.annotation.Autowired;

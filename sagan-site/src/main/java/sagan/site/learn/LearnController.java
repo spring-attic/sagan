@@ -3,8 +3,8 @@ package sagan.site.learn;
 import java.util.ArrayList;
 import java.util.List;
 
-import sagan.blog.Post;
-import sagan.blog.support.PostView;
+import sagan.site.blog.Post;
+import sagan.site.blog.support.PostView;
 import sagan.site.blog.BlogService;
 import sagan.support.DateFactory;
 import sagan.support.nav.PageableFactory;

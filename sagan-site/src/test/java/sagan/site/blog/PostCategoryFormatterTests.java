@@ -3,7 +3,6 @@ package sagan.site.blog;
 import java.text.ParseException;
 
 import org.junit.Test;
-import sagan.blog.PostCategory;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

@@ -2,7 +2,7 @@ package sagan.site.guides;
 
 import java.util.Optional;
 
-import sagan.projects.Project;
+import sagan.site.projects.Project;
 
 public interface GuidesRepository<T extends Guide> {
 

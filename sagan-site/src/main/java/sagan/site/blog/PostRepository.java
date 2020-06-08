@@ -4,9 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import sagan.blog.Post;
-import sagan.blog.PostCategory;
-import sagan.team.MemberProfile;
+import sagan.site.team.MemberProfile;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

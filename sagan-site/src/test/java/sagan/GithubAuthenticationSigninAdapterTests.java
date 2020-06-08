@@ -1,8 +1,8 @@
 package sagan;
 
 import sagan.SecurityConfig.GithubAuthenticationSigninAdapter;
-import sagan.team.MemberProfile;
-import sagan.team.support.SignInService;
+import sagan.site.team.MemberProfile;
+import sagan.site.team.support.SignInService;
 
 import org.junit.After;
 import org.junit.Before;

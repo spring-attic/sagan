@@ -2,7 +2,7 @@ package sagan.site.projects;
 
 import java.util.List;
 
-import sagan.blog.PostFormat;
+import sagan.site.blog.PostFormat;
 import sagan.site.projects.support.SupportPolicyProjectGenerationsProcessor;
 import sagan.site.blog.PostContentRenderer;
 

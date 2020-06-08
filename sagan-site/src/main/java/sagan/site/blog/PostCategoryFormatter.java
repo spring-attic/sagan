@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import sagan.blog.PostCategory;
-
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 

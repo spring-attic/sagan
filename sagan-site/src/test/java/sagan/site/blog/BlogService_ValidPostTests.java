@@ -9,8 +9,6 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import sagan.blog.Post;
-import sagan.blog.PostBuilder;
 import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 

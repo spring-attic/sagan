@@ -7,13 +7,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import sagan.blog.Post;
-import sagan.blog.PostBuilder;
-import sagan.blog.PostCategory;
-import sagan.blog.PostFormat;
 import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
-import sagan.team.support.TeamRepository;
+import sagan.site.team.support.TeamRepository;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

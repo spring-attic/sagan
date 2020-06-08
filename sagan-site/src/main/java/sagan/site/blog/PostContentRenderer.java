@@ -3,7 +3,6 @@ package sagan.site.blog;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import sagan.blog.PostFormat;
 import sagan.site.renderer.SaganRendererClient;
 
 import org.springframework.stereotype.Service;

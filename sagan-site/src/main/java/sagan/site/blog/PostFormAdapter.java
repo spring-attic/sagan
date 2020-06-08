@@ -2,10 +2,9 @@ package sagan.site.blog;
 
 import java.util.Date;
 
-import sagan.blog.Post;
 import sagan.support.DateFactory;
-import sagan.team.MemberProfile;
-import sagan.team.support.TeamRepository;
+import sagan.site.team.MemberProfile;
+import sagan.site.team.support.TeamRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

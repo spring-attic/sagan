@@ -6,12 +6,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import sagan.blog.Post;
-import sagan.blog.PostCategory;
-import sagan.blog.PostMovedException;
-import sagan.blog.PostNotFoundException;
 import sagan.support.DateFactory;
-import sagan.team.MemberProfile;
+import sagan.site.team.MemberProfile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

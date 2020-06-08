@@ -3,8 +3,8 @@ package sagan.site.guides;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import sagan.projects.Project;
-import sagan.projects.support.ProjectMetadataService;
+import sagan.site.projects.Project;
+import sagan.site.projects.ProjectMetadataService;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.Section;
 
@@ -41,7 +41,7 @@ class GettingStartedGuideController {
 	public String viewGuide(@PathVariable String guide, Model model) {
 		GettingStartedGuide gsGuide = this.guides.findByName(guide).get();
 		List<Project> projects = gsGuide.getProjects()
-				.stream().map(name -> this.projectMetadataService.getProject(name))
+				.stream().map(name -> this.projectMetadataService.fetchFullProject(name))
 				.collect(Collectors.toList());
 		model.addAttribute("guide", gsGuide);
 		model.addAttribute("projects", projects);
