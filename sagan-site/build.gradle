@@ -23,10 +23,6 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	set('springCloudVersion', 'Edgware.SR5')
-}
-
 springBoot {
     mainClass = 'sagan.SiteApplication'
 }
@@ -49,6 +45,9 @@ dependencies {
 	compile "org.springframework.boot:spring-boot-devtools"
 	compile "org.springframework.security:spring-security-acl"
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.hibernate:hibernate-java8'
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
 	compile 'org.springframework.boot:spring-boot-starter-validation'
 
 	compile 'org.springframework.social:spring-social-github:1.0.0.M4'
@@ -84,7 +83,7 @@ dependencies {
 
 	// datasource and connection pool dependencies
 	runtime 'org.postgresql:postgresql:9.4.1212'
-	runtime 'com.h2database:h2'
+	runtime 'com.h2database:h2:1.4.200'
 
 	// for use of spring-test's MatcherAssertionErrors.*
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
@@ -94,7 +93,6 @@ dependencies {
 
     // for use in mocking http interactions
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
-    testCompile "org.springframework.cloud:spring-cloud-contract-wiremock"
     testCompile "org.springframework.boot:spring-boot-starter-test"
 
 }

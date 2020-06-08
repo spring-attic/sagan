@@ -97,6 +97,8 @@ server:
 
 spring:
   profiles: standalone
+  datasource:
+    url: jdbc:h2:mem:sagan;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
   resources:
     static_locations:
       - file:${client.dir}/build/dist/

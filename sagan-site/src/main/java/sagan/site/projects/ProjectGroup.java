@@ -1,4 +1,4 @@
-package sagan.projects;
+package sagan.site.projects;
 
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Group of projects related by a particular theme or problem space
+ */
 @Entity
 @Table(name = "project_groups")
 public class ProjectGroup {

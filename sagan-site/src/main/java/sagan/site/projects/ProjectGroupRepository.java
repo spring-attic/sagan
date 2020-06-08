@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package sagan.projects.support;
-
-import java.util.List;
-
-import sagan.projects.ProjectGroup;
+package sagan.site.projects;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ProjectGroupRepository extends JpaRepository<ProjectGroup, Long> {
 
-	List<ProjectGroup> findByNameIgnoreCase(String name);
+	ProjectGroup findByNameIgnoreCase(String name);
 }
