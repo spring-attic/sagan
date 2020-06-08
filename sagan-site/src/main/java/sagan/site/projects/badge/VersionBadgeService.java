@@ -1,4 +1,4 @@
-package sagan.projects.support;
+package sagan.site.projects.badge;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,11 +14,11 @@ import org.xmlbeam.XBProjector;
 import org.xmlbeam.XBProjector.Flags;
 import org.xmlbeam.config.DefaultXMLFactoriesConfig;
 import org.xmlbeam.config.DefaultXMLFactoriesConfig.NamespacePhilosophy;
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectRelease.ReleaseStatus;
-import sagan.projects.support.BadgeSvg.GraphicElement;
-import sagan.projects.support.BadgeSvg.Path;
+import sagan.site.projects.Project;
+import sagan.site.projects.Release;
+import sagan.site.projects.ReleaseStatus;
+import sagan.site.projects.badge.BadgeSvg.GraphicElement;
+import sagan.site.projects.badge.BadgeSvg.Path;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -62,27 +62,27 @@ public class VersionBadgeService {
     }
 
     /**
-     * Create a version badge for a given {@link Project} and {@link ProjectRelease}. The badge uses SVG and is returned as byte
+     * Create a version badge for a given {@link Project} and {@link Release}. The badge uses SVG and is returned as byte
      * array.
      *
      * @param project must not be {@literal null}.
-     * @param projectRelease must not be {@literal null}.
+     * @param release must not be {@literal null}.
      * @return
      * @throws IOException
      */
-    public byte[] createSvgBadge(Project project, ProjectRelease projectRelease) throws IOException {
+    public byte[] createSvgBadge(Project project, Release release) throws IOException {
 
         Assert.notNull(project, "Project must not be null!");
-        Assert.notNull(projectRelease, "ProjectRelease must not be null!");
+        Assert.notNull(release, "ProjectRelease must not be null!");
 
-        URL template = getTemplate(projectRelease.getReleaseStatus());
+        URL template = getTemplate(release.getReleaseStatus());
 
         BadgeSvg svgDocument = xbProjector.io().url(template.toString()).read(BadgeSvg.class);
 
         List<Path> paths = svgDocument.getPaths();
 
         String label = project.getName();
-        String version = projectRelease.getVersion();
+        String version = release.getVersion().toString();
 
         return createSvgBadge(svgDocument, paths, label, version);
     }

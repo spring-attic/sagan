@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sagan.projects.support;
+package sagan.site.projects.badge;
 
 import java.util.List;
 

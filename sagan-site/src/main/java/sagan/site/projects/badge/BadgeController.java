@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sagan.projects.support;
+package sagan.site.projects.badge;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -32,9 +32,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import sagan.projects.Project;
-import sagan.projects.ProjectRelease;
-import sagan.projects.ProjectRelease.ReleaseStatus;
+import sagan.site.projects.Project;
+import sagan.site.projects.Release;
+import sagan.site.projects.ReleaseStatus;
+import sagan.site.projects.ProjectMetadataService;
 
 /**
  * Controller that handles request to version badges.
@@ -84,13 +85,13 @@ class BadgeController {
      */
     private ResponseEntity<byte[]> badgeFor(String projectId, ReleaseStatus releaseStatus) throws IOException {
 
-        Project project = service.getProject(projectId);
+        Project project = service.fetchFullProject(projectId);
 
         if (project == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        Optional<ProjectRelease> gaRelease = getRelease(project.getProjectReleases(),
+        Optional<Release> gaRelease = getRelease(project.getReleases(),
                 projectRelease -> projectRelease.getReleaseStatus() == releaseStatus);
 
         if (!gaRelease.isPresent()) {
@@ -98,14 +99,15 @@ class BadgeController {
         }
 
         byte[] svgBadge = versionBadgeService.createSvgBadge(project, gaRelease.get());
-        return ResponseEntity.ok().eTag(gaRelease.get().getVersion()).cacheControl(CacheControl.maxAge(1L, TimeUnit.HOURS))
+        return ResponseEntity.ok().eTag(gaRelease.get().getVersion().toString())
+				.cacheControl(CacheControl.maxAge(1L, TimeUnit.HOURS))
                 .body(svgBadge);
     }
 
-    private Optional<ProjectRelease> getRelease(Collection<ProjectRelease> projectReleases,
-            Predicate<ProjectRelease> predicate) {
+    private Optional<Release> getRelease(Collection<Release> releases,
+            Predicate<Release> predicate) {
 
-        Optional<ProjectRelease> first = projectReleases //
+        Optional<Release> first = releases //
                 .stream() //
                 .filter(projectRelease -> predicate.test(projectRelease) && projectRelease.isCurrent()) //
                 .findFirst();
@@ -114,7 +116,7 @@ class BadgeController {
             return first;
         }
 
-        return projectReleases //
+        return releases //
                 .stream() //
                 .filter(projectRelease -> predicate.test(projectRelease)) //
                 .findFirst();
