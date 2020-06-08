@@ -26,7 +26,7 @@
             <thead>
             <tr>
                 <td>Name</td>
-                <td>Category</td>
+                <td>Status</td>
                 <td>Public Page</td>
             </tr>
             </thead>
@@ -34,14 +34,14 @@
             <tr th:each="project : ${projects}">
                 <td><a th:href="@{'/admin/projects/' + ${project.id}}" th:text="${project.name}">spring-framework</a></td>
                 <td>
-                    <span class="tag" th:classappend="${'is-' + project.category}" th:text="${project.category}">News</span>
+                    <span class="tag" th:classappend="${'is-' + project.status}" th:text="${project.status.label}">Active</span>
                 </td>
                 <td>
-                    <a th:href="${project.siteUrl}" target="_blank">
+                    <a th:href="${project.display.siteUrl}" target="_blank">
                         <span class="icon">
                             <i class="fas fa-link"></i>
                         </span>
-                        <span th:text="${project.siteUrl}">/projects/spring-framework</span>
+                        <span th:text="${project.display.siteUrl}">/projects/spring-framework</span>
                     </a>
                 </td>
             </tr>

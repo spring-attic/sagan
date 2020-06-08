@@ -1,0 +1,92 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="admin/layout">
+<head>
+    <title th:inline="text">Admin | Edit | [[${project.id}]]</title>
+</head>
+<body>
+<nav layout:fragment="~{breadcrumb}">
+    <ul>
+        <li><a th:href="@{/admin}">Admin</a></li>
+        <li><a th:href="@{/admin/projects}">Projects</a></li>
+        <li class="is-active"><a th:href="@{'/admin/projects/' + ${project.id}}" aria-current="page">Edit</a></li>
+    </ul>
+</nav>
+<div layout:fragment="~{tabs}">
+    <ul>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id}}">
+                <span class="icon is-small"><i class="far fa-folder-open" aria-hidden="true"></i></span>
+                <span>Metadata</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/info'}">
+                <span class="icon is-small"><i class="fas fa-info" aria-hidden="true"></i></span>
+                <span>Info</span>
+            </a>
+        </li>
+        <li class="is-active">
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/releases'}">
+                <span class="icon is-small"><i class="fas fa-download" aria-hidden="true"></i></span>
+                <span>Releases</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/support'}">
+                <span class="icon is-small"><i class="far fa-calendar-check" aria-hidden="true"></i></span>
+                <span>Support</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/samples'}">
+                <span class="icon is-small"><i class="fas fa-code" aria-hidden="true"></i></span>
+                <span>Samples</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div layout:fragment="~{content}">
+    <form th:action="@{'/admin/projects/'+${project.id} + '/releases'}" method="post" th:object="${project}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <input type="hidden" th:name="id" th:value="*{id}"/>
+
+        <div class="field">
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                <tr>
+                    <td>Delete?</td>
+                    <td>Version</td>
+                    <td>Reference URL</td>
+                    <td>API URL</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="release,releaseStat : ${project.releases}">
+                    <input type="hidden" name="id" th:field="*{releases[__${releaseStat.index}__].id}">
+                    <td><input class="checkbox" type="checkbox"
+                               th:field="*{releases[__${releaseStat.index}__].toDelete}"/></td>
+                    <td><input class="input" type="text"
+                               th:field="*{releases[__${releaseStat.index}__].version}"/></td>
+                    <td><input class="input" type="text"
+                               th:field="*{releases[__${releaseStat.index}__].refDocUrl}"/></td>
+                    <td><input class="input" type="text"
+                               th:field="*{releases[__${releaseStat.index}__].apiDocUrl}"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input class="input" type="text" th:field="*{newRelease.version}"/></td>
+                    <td><input class="input" type="text" th:field="*{newRelease.refDocUrl}"/></td>
+                    <td><input class="input" type="text" th:field="*{newRelease.apiDocUrl}"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="buttons control is-centered">
+            <button type="submit" class="button is-primary">Save</button>
+            <a class="button" th:href="@{'/admin/projects/' + ${project.id}}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

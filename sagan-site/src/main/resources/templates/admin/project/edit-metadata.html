@@ -1,0 +1,135 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="admin/layout">
+<head>
+    <title th:inline="text">Admin | Edit | [[${project.id}]]</title>
+</head>
+<body>
+<nav layout:fragment="~{breadcrumb}">
+    <ul>
+        <li><a th:href="@{/admin}">Admin</a></li>
+        <li><a th:href="@{/admin/projects}">Projects</a></li>
+        <li class="is-active"><a th:href="@{'/admin/projects/' + ${project.id}}" aria-current="page">Edit</a></li>
+    </ul>
+</nav>
+<div layout:fragment="~{tabs}">
+    <ul>
+        <li class="is-active">
+            <a th:href="@{'/admin/projects/' + ${project.id}}">
+                <span class="icon is-small"><i class="far fa-folder-open" aria-hidden="true"></i></span>
+                <span>Metadata</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/info'}">
+                <span class="icon is-small"><i class="fas fa-info" aria-hidden="true"></i></span>
+                <span>Info</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/releases'}">
+                <span class="icon is-small"><i class="fas fa-download" aria-hidden="true"></i></span>
+                <span>Releases</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/support'}">
+                <span class="icon is-small"><i class="far fa-calendar-check" aria-hidden="true"></i></span>
+                <span>Support</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/samples'}">
+                <span class="icon is-small"><i class="fas fa-code" aria-hidden="true"></i></span>
+                <span>Samples</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div layout:fragment="~{content}">
+    <form th:action="@{'/admin/projects/'+${project.id}}" method="post" th:object="${project}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <div class="columns">
+            <div class="column is-one-thid">
+                <div class="field">
+                    <label class="label">Id</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('id')}? ' is-danger')"
+                               type="text" th:field="*{id}" name="id" placeholder="Project id">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Incorrect id</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('name')}? ' is-danger')"
+                               type="text" th:field="*{name}" name="name" placeholder="Name">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect
+                            name</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-one-thid">
+                <div class="field">
+                    <label class="label">Repository URL</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('repoUrl')}? ' is-danger')"
+                               type="text" th:field="*{repoUrl}" name="repoUrl"
+                               placeholder="https://github.com/spring-projects/your-project">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('repoUrl')}" th:errors="*{repoUrl}">
+                            Incorrect Repository URL</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">StackOverflow tags</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('stackOverflowTags')}? ' is-danger')"
+                               type="text" th:field="*{stackOverflowTags}" name="stackOverflowTags"
+                               th:placeholder="*{id}">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('stackOverflowTags')}" th:errors="*{stackOverflowTags}">
+                            Incorrect StackOverflow tags</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-one-thid">
+                <div class="field">
+                    <label class="label">Parent project</label>
+                    <div class="control">
+                        <input class="input" th:classappend="(${#fields.hasErrors('parentProjectId')}? ' is-danger')"
+                               type="text" th:field="*{parentProjectId}" name="parentProjectId" placeholder="Parent project">
+                        <p class="help is-danger" th:if="${#fields.hasErrors('parentProjectId')}" th:errors="*{parentProjectId}">
+                            Incorrect parentId</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Status</label>
+                    <div class="control">
+                        <div class="select" th:classappend="(${#fields.hasErrors('status')}? ' is-danger')">
+                            <select name="status" th:field="*{status}">
+                                <option th:each="stat : ${statusList}" th:value="${stat}" th:text="${stat}">
+                                    Active
+                                </option>
+                            </select>
+                            <p class="help is-danger" th:if="${#fields.hasErrors('status')}" th:errors="*{status}">
+                                Incorrect status</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="buttons control is-centered">
+            <button type="submit" class="button is-primary">Save</button>
+            <a class="button" th:href="@{/admin/projects}">Cancel</a>
+        </div>
+    </form>
+    <hr class="hr">
+    <h3 class="title is-3">Admin</h3>
+    <form th:action="@{'/admin/projects/' + ${project.id}}" method="post" class="notification is-light">
+        <p>You can delete the project. This action will destroy permanently the project.</p>
+        <p style="padding-top:10px;"><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input type="hidden" name="_method" value="delete"/>
+            <input type="submit" class="button is-danger" value="Yes, Delete the project"/></p>
+    </form>
+</div>
+</body>
+</html>

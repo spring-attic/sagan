@@ -1,0 +1,94 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="admin/layout">
+<head>
+    <title th:inline="text">Admin | Edit | [[${project.id}]]</title>
+</head>
+<body>
+<nav layout:fragment="~{breadcrumb}">
+    <ul>
+        <li><a th:href="@{/admin}">Admin</a></li>
+        <li><a th:href="@{/admin/projects}">Projects</a></li>
+        <li class="is-active"><a th:href="@{'/admin/projects/' + ${project.id}}" aria-current="page">Edit</a></li>
+    </ul>
+</nav>
+<div layout:fragment="~{tabs}">
+    <ul>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id}}">
+                <span class="icon is-small"><i class="far fa-folder-open" aria-hidden="true"></i></span>
+                <span>Metadata</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/info'}">
+                <span class="icon is-small"><i class="fas fa-info" aria-hidden="true"></i></span>
+                <span>Info</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/releases'}">
+                <span class="icon is-small"><i class="fas fa-download" aria-hidden="true"></i></span>
+                <span>Releases</span>
+            </a>
+        </li>
+        <li class="is-active">
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/support'}">
+                <span class="icon is-small"><i class="far fa-calendar-check" aria-hidden="true"></i></span>
+                <span>Support</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'/admin/projects/' + ${project.id} + '/samples'}">
+                <span class="icon is-small"><i class="fas fa-code" aria-hidden="true"></i></span>
+                <span>Samples</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div layout:fragment="~{content}">
+    <form th:action="@{'/admin/projects/'+${project.id} + '/support'}" method="post" th:object="${project}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <input type="hidden" th:name="id" th:value="*{id}"/>
+
+        <div class="field">
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                <tr>
+                    <td>Delete?</td>
+                    <td>Generation</td>
+                    <td>Initial Release</td>
+                    <td>End of OSS Support</td>
+                    <td>End of Commercial support</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="generation,generationStat : ${project.generations}">
+                    <td><input class="checkbox" type="checkbox" th:field="*{generations[__${generationStat.index}__].toDelete}"/></td>
+                    <td><input type="hidden" th:field="*{generations[__${generationStat.index}__].name}"/><span th:text="${generation.name}">2.1.x</span></td>
+                    <td><input type="text" class="input" th:field="*{generations[__${generationStat.index}__].initialReleaseDate}" autocomplete="off"/></td>
+                    <td><input type="text" class="input" th:field="*{generations[__${generationStat.index}__].ossSupportEnforcedEndDate}" autocomplete="off"/>
+                        <p class="help" th:if="${generation.ossSupportPolicyEndDate}" th:text="${'Official Policy: ' + generation.ossSupportPolicyEndDate}">2020-01-01</p></td>
+                    <td><input type="text" class="input" th:field="*{generations[__${generationStat.index}__].commercialSupportEnforcedEndDate}" autocomplete="off"/>
+                        <p class="help" th:if="${generation.commercialSupportPolicyEndDate}" th:text="${'Official Policy: ' + generation.commercialSupportPolicyEndDate}">2020-01-01</p></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input class="input" type="text" th:field="*{newGeneration.name}" placeholder="2.1.x or Name.x"/></td>
+                    <td><input class="input" type="text" th:field="*{newGeneration.initialReleaseDate}" placeholder="2020-01-01"/></td>
+                    <td><input class="input" type="text" th:field="*{newGeneration.ossSupportEnforcedEndDate}" placeholder="Leave blank to use official policy"/>
+                        <p class="help">12+ months after initial release</p></td>
+                    <td><input class="input" type="text" th:field="*{newGeneration.commercialSupportEnforcedEndDate}" placeholder="Leave blank to use official policy"/>
+                        <p class="help">18+ months after initial release of following generation</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="buttons control is-centered">
+            <button type="submit" class="button is-primary">Save</button>
+            <a class="button" th:href="@{'/admin/projects/' + ${project.id}}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
