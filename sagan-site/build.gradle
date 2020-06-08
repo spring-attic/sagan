@@ -53,6 +53,8 @@ dependencies {
 	compile 'org.springframework.social:spring-social-github:1.0.0.M4'
 	compile 'org.springframework.boot:spring-boot-starter-security'
 
+	compile 'org.modelmapper:modelmapper:2.3.7'
+
 	// for use in on-the-fly database setup and migrations
 	compile 'org.flywaydb:flyway-core:4.2.0'
 	compile 'org.apache.httpcomponents:httpclient'

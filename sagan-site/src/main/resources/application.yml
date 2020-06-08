@@ -107,6 +107,8 @@ spring:
       additional_paths:
         - ../sagan-client/build/dist/
       additional_exclude: "**/*.js,**/*.css"
+      include:
+        modelmapper: "/modelmapper-(.*).jar"
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
 flyway:
   locations: classpath:/db/migration, classpath:/db/dev
