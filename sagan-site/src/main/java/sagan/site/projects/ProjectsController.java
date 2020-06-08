@@ -1,17 +1,16 @@
-package sagan.projects.support;
+package sagan.site.projects;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import sagan.site.guides.GettingStartedGuides;
 import sagan.site.guides.Topicals;
 import sagan.site.guides.Tutorials;
-import sagan.projects.Project;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.nav.Navigation;
 import sagan.support.nav.Section;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
  * Controller that handles requests for the projects overview page at /projects.
@@ -46,31 +43,33 @@ class ProjectsController {
 
 	@GetMapping
 	public String listProjects(Model model) {
-		List<Project> projects = this.projectMetadataService.getProjectsWithGroups();
+		List<Project> projects = this.projectMetadataService.fetchTopLevelProjectsWithGroups();
 		model.addAttribute("groups", this.projectMetadataService.getAllGroups());
 		model.addAttribute("featured",
-				projects.stream().filter(Project::isFeatured).collect(Collectors.toList()));
+				projects.stream().filter(p -> p.getDisplay().isFeatured()).collect(Collectors.toList()));
 		projects
 				.stream()
-				.collect(Collectors.groupingBy(Project::getCategory))
-				.forEach((category, proj) -> {
-					model.addAttribute(category, proj);
+				.collect(Collectors.groupingBy(Project::getStatus))
+				.forEach((status, proj) -> {
+					model.addAttribute(status.name(), proj);
 				});
 		return "projects/index";
 	}
 
 	@GetMapping("/{projectName}")
     public String showProject(Model model, @PathVariable String projectName) {
-		Project project = projectMetadataService.getProject(projectName);
+		Project project = projectMetadataService.fetchFullProject(projectName);
 		if (project == null) {
 			throw new ResourceNotFoundException("project " + projectName);
 		}
-        List<Project> projects = this.projectMetadataService.getActiveTopLevelProjects();
-        model.addAttribute("selectedProject", project);
+        List<Project> projects = this.projectMetadataService.fetchActiveProjectsTree();
+
+		model.addAttribute("now", LocalDate.now());
+        model.addAttribute("project", project);
         model.addAttribute("projectStackOverflow", stackOverflowUrl(project));
         model.addAttribute("projects", projects);
-        model.addAttribute("currentRelease", project.getMostCurrentRelease());
-        model.addAttribute("otherReleases", project.getNonMostCurrentReleases());
+        model.addAttribute("currentRelease", project.getCurrentRelease());
+        model.addAttribute("otherReleases", project.getNonCurrentReleases());
 
         model.addAttribute("guides", Arrays.asList(gsGuides.findByProject(project)));
         model.addAttribute("topicals", Arrays.asList(topicals.findByProject(project)));
@@ -80,8 +79,9 @@ class ProjectsController {
     }
 
     private String stackOverflowUrl(Project project) {
-        return "https://stackoverflow.com/questions/tagged/"
-                + String.join("+or+", project.getStackOverflowTagList());
+		String tags = project.getStackOverflowTags() != null ? project.getStackOverflowTags() : "spring";
+		return "https://stackoverflow.com/questions/tagged/"
+                + String.join("+or+", tags.split(","));
     }
 
 }

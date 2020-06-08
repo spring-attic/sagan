@@ -1,18 +1,16 @@
-package sagan.projects.support;
+package sagan.site.projects;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import sagan.projects.Project;
-import sagan.projects.ProjectGroup;
-import sagan.projects.ProjectRelease;
 import sagan.site.guides.GettingStartedGuides;
 import sagan.site.guides.GuideHeader;
 import sagan.site.guides.Topicals;
@@ -31,8 +29,6 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static sagan.projects.ProjectRelease.ReleaseStatus.GENERAL_AVAILABILITY;
-import static sagan.projects.ProjectRelease.ReleaseStatus.SNAPSHOT;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ProjectsController.class)
@@ -50,13 +46,13 @@ public class ProjectsControllerTests {
 	@MockBean
 	private Topicals projectTopicalRepo;
 
-	private ProjectRelease currentRelease;
+	private Release currentRelease;
 
-	private ProjectRelease anotherCurrentRelease;
+	private Release anotherRelease;
 
-	private ProjectRelease snapshotRelease;
+	private Release snapshotRelease;
 
-	private List<ProjectRelease> releases;
+	private SortedSet<Release> releases;
 
 	private List<ProjectGroup> projectGroups;
 
@@ -71,61 +67,46 @@ public class ProjectsControllerTests {
 
 	@Before
 	public void setUp() throws Exception {
-		this.currentRelease = new ProjectRelease("2.1.0.RELEASE", GENERAL_AVAILABILITY,
-				true, "", "", "", "");
-		this.anotherCurrentRelease = new ProjectRelease("2.0.0.RELEASE", GENERAL_AVAILABILITY,
-				true, "", "", "", "");
-		this.snapshotRelease = new ProjectRelease("2.2.0.SNAPSHOT", SNAPSHOT,
-				false, "", "", "", "");
-		this.releases = Arrays.asList(currentRelease, anotherCurrentRelease, snapshotRelease);
+		ProjectGroup pg1 = new ProjectGroup("microservices", "Microservices");
+		ProjectGroup pg2 = new ProjectGroup("cloud", "Cloud");
+		this.projectGroups = Arrays.asList(pg1, pg2);
 
-		this.springBoot = new Project("spring-boot", "Spring Boot",
-				"https://github.com/spring-projects/spring-boot", "/project/spring-boot", 0,
-				releases, "project", "spring-boot", "");
-
-		this.springData = new Project("spring-data", "Spring Data",
-				"https://github.com/spring-projects/spring-data", "/project/spring-data", 0,
-				releases, "project", "spring-data,spring-data-commons", "");
-		this.springDataJpa = new Project("spring-data-jpa", "Spring Data JPA",
-				"https://github.com/spring-projects/spring-data-jpa", "/project/spring-data-jpa", 0,
-				releases, "project", "spring-data-jpa", "");
-
-		this.springData.setChildProjectList(Arrays.asList(this.springDataJpa));
-		this.springDataJpa.setParentProject(this.springData);
-
-		ProjectGroup pg1 = new ProjectGroup();
-		pg1.setName("microservices");
-		pg1.setLabel("Microservices");
-
-		ProjectGroup pg2 = new ProjectGroup();
-		pg2.setName("cloud");
-		pg2.setLabel("Cloud");
-
-		projectGroups = Arrays.asList(pg1, pg2);
-
+		this.springBoot = new Project("spring-boot", "Spring Boot");
+		this.springBoot.getDisplay().setFeatured(true);
 		this.springBoot.setGroups(new HashSet<>(Arrays.asList(pg1)));
-		this.springBoot.setFeatured(true);
+		this.springBoot.setStackOverflowTags("spring-boot");
+		this.currentRelease = new Release(Version.of("2.1.0.RELEASE"), true);
+		this.anotherRelease = new Release(Version.of("2.0.0.RELEASE"));
+		this.snapshotRelease = new Release(Version.of("2.2.0.SNAPSHOT"));
+		this.releases = new TreeSet<>();
+		this.releases.addAll(Arrays.asList(this.currentRelease, this.anotherRelease, this.snapshotRelease));
+		this.springBoot.setReleases(this.releases);
 
+		this.springData = new Project("spring-data", "Spring Data");
 		this.springData.setGroups(new HashSet<>(Arrays.asList(pg2)));
+		this.springData.setStackOverflowTags("spring-data,spring-data-commons");
+		this.springDataJpa = new Project("spring-data-jpa", "Spring Data JPA");
+		this.springDataJpa.setParentProject(this.springData);
+		this.springData.setSubProjects(Arrays.asList(this.springDataJpa));
 
 		GuideHeader[] guides = new GuideHeader[] {};
 		given(this.projectGuidesRepo.findByProject(any())).willReturn(guides);
 		given(this.projectTopicalRepo.findByProject(any())).willReturn(guides);
 		given(this.projectTutorialRepo.findByProject(any())).willReturn(guides);
 
-		given(projectMetadataService.getProjects()).willReturn(Arrays.asList(this.springBoot, this.springData));
-		given(projectMetadataService.getProject("spring-boot")).willReturn(this.springBoot);
-		given(projectMetadataService.getProject("spring-data")).willReturn(this.springData);
-		given(projectMetadataService.getActiveTopLevelProjects()).willReturn(Arrays.asList(this.springBoot, this.springData));
+		given(projectMetadataService.fetchAllProjects()).willReturn(Arrays.asList(this.springBoot, this.springData));
+		given(projectMetadataService.fetchFullProject("spring-boot")).willReturn(this.springBoot);
+		given(projectMetadataService.fetchFullProject("spring-data")).willReturn(this.springData);
+		given(projectMetadataService.fetchActiveProjectsTree()).willReturn(Arrays.asList(this.springBoot, this.springData));
 		given(projectMetadataService.getAllGroups()).willReturn(this.projectGroups);
-		given(projectMetadataService.getProjectsWithGroups()).willReturn(Arrays.asList(this.springBoot, this.springData));
+		given(projectMetadataService.fetchTopLevelProjectsWithGroups()).willReturn(Arrays.asList(this.springBoot, this.springData));
 	}
 
 	@Test
 	public void showProjectModelHasProjectData() throws Exception {
 		this.mvc.perform(get("/projects/spring-boot"))
 				.andExpect(status().isOk())
-				.andExpect(model().attribute("selectedProject", this.springBoot))
+				.andExpect(model().attribute("project", this.springBoot))
 				.andExpect(model().attribute("projects", Matchers.contains(this.springBoot, this.springData)))
 				.andExpect(model().attribute("projectStackOverflow", "https://stackoverflow.com/questions/tagged/spring-boot"));
 	}
@@ -134,7 +115,7 @@ public class ProjectsControllerTests {
 	public void showProjectHasStackOverflowLink() throws Exception {
 		this.mvc.perform(get("/projects/spring-data"))
 				.andExpect(status().isOk())
-				.andExpect(model().attribute("selectedProject", this.springData))
+				.andExpect(model().attribute("project", this.springData))
 				.andExpect(model().attribute("projects", Matchers.contains(this.springBoot, this.springData)))
 				.andExpect(model().attribute("projectStackOverflow", "https://stackoverflow.com/questions/tagged/spring-data+or+spring-data-commons"));
 	}
@@ -144,16 +125,13 @@ public class ProjectsControllerTests {
 		this.mvc.perform(get("/projects/spring-boot"))
 				.andExpect(status().isOk())
 				.andExpect(model().attribute("currentRelease", Optional.of(this.currentRelease)))
-				.andExpect(model().attribute("otherReleases", Matchers.hasItems(this.anotherCurrentRelease, this.snapshotRelease)));
+				.andExpect(model().attribute("otherReleases", Matchers.hasItems(this.anotherRelease, this.snapshotRelease)));
 	}
 
 	@Test
 	public void showProjectWithoutReleases() throws Exception {
-		Project projectWithoutReleases =
-				new Project("spring-norelease", "spring-norelease", "http://example.com",
-						"/project/spring-norelease", 0, Collections.emptyList(),
-						"project", "spring-example", "");
-		when(projectMetadataService.getProject("spring-norelease")).thenReturn(projectWithoutReleases);
+		Project projectWithoutReleases = new Project("spring-norelease", "spring-norelease");
+		when(projectMetadataService.fetchFullProject("spring-norelease")).thenReturn(projectWithoutReleases);
 
 		this.mvc.perform(get("/projects/spring-norelease"))
 				.andExpect(status().isOk())

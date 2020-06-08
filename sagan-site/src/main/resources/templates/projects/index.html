@@ -18,7 +18,7 @@
       <section id='featured' class='flex jc-between mb-4' th:each="project : ${featured}">
         <a class='featured-proj third rad-5 shadow-hover border-dark bg-white border-box'>
           <h3 class='h3 m-0 antialiased' th:text="${project.name}">Spring Kubernetes</h3>
-          <p class='m-0' th:text="${project.tagLine}">Very short one-line description.</p>
+          <p class='m-0' th:text="${project.display.tagLine}">Very short one-line description.</p>
         </a>
       </section>
       <section id='filters-and-proj' class='flex jc-between mb-6'>
@@ -27,31 +27,31 @@
         </ul>
         <div class='proj-80'>
           <div class='flex jc-between flex-wrap'>
-            <a th:each="project : ${active}" class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'
-               th:href="${project.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
+            <a th:each="project : ${ACTIVE}" class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'
+               th:href="${project.display.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
               <div class='proj-icon-box'>
-                <img class='proj-icon' th:src="@{${project.imagePath ?: '/images/projects/spring.svg'}}">
+                <img class='proj-icon' th:src="@{${project.display.imagePath ?: '/images/projects/spring.svg'}}">
               </div>
               <div class='proj-text'>
                 <h3 class='h3 m-0 antialiased' th:text="${project.name}">Spring Boot</h3>
-                <p th:text="${project.tagLine}">Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
+                <p th:text="${project.display.tagLine}">Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
               </div>
             </a>
           </div>
         </div>
       </section>
-      <section id='community-proj' class='proj-category mb-6' th:if="${community}">
+      <section id='community-proj' class='proj-category mb-6' th:if="${COMMUNITY}">
         <h2 class='h3 mb-3 antialiased'>Community Projects</h2>
         <div class='flex'>
           <div class='proj-80 flex jc-between flex-wrap'>
             <a th:each="project : ${community}" class='project half border-dark shadow-hover rad-5 flex jc-between bg-white border-box'
-               th:href="${project.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
+               th:href="${project.display.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
               <div class='proj-icon-box'>
-                <img class='proj-icon' th:src="@{${project.imagePath ?: '/images/projects/spring.svg'}}">
+                <img class='proj-icon' th:src="@{${project.display.imagePath ?: '/images/projects/spring.svg'}}">
               </div>
               <div class='proj-text'>
                 <h3 class='h3 m-0 antialiased' th:text="${project.name}">Spring Boot</h3>
-                <p th:text="${project.tagLine}">Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
+                <p th:text="${project.display.tagLine}">Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.</p>
               </div>
             </a>
           </div>
@@ -61,12 +61,12 @@
         <h2 class='h3 mb-3 antialiased'>Projects in the Attic</h2>
         <div class='flex'>
           <div class='flex flex-wrap'>
-            <a th:each="project : ${attic}"
+            <a th:each="project : ${END_OF_LIFE}"
                class='project'
-               th:href="${project.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
+               th:href="${project.display.siteUrl}" th:attr="data-groups=${project.groups.![name]}">
               <div class='proj-text'>
                 <h3 class='h3 blue m-0 antialiased' th:text="${project.name}">Spring Boot</h3>
-                <p th:text="${project.tagLine}">Takes an opinionated view of building Spring applications and gets you
+                <p th:text="${project.display.tagLine}">Takes an opinionated view of building Spring applications and gets you
                   up and running as quickly as possible.</p>
               </div>
             </a>
