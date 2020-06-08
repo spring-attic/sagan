@@ -102,6 +102,7 @@ spring:
   resources:
     static_locations:
       - file:${client.dir}/build/dist/
+      - file:build/asciidoc/
   devtools:
     restart:
       additional_paths:

@@ -1,0 +1,199 @@
+= Project Metadata Service
+Brian Clozel;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[[overview]]
+== Overview
+
+Spring projects are https://spring.io/projects[listed and documented on the spring.io website].
+We can find there information about releases, samples, support and more.
+
+Spring.io also exposes a RESTful web service under https://spring.io/api for fetching and
+updating Spring Projects Metadata. It uses hypermedia to describe the relationships between
+resources and to allow navigation between them.
+
+The source of this application is available in the https://github.com/spring-io/sagan[Sagan project].
+
+[[mediatype]]
+=== Media Type
+This web service exposes resources with the `application/hal+json` Media Type.
+Requests sent to this service should `Accept` this type, like:
+
+include::{snippets}/show-index/http-request.adoc[]
+
+
+[[authentication]]
+=== Authentication
+This web service is publicly available here: https://spring.io/api.
+
+Fetching resources using the HTTP `GET` method is permitted to all clients.
+Other HTTP verbs like `POST`, `PUT`, `PATCH` and `DELETE` require authentication.
+
+Authenticated requests should send
+https://developer.github.com/v3/auth/#via-oauth-and-personal-access-tokens[a GitHub personal access token as basic authentication].
+The user associated with this token *must be a member of the Spring team on GitHub*.
+
+
+[[index-endpoint]]
+=== Index Endpoint
+The root endpoint of this web service lists the main resources: <<project, Projects>> and <<repository, Repositories>>:
+
+include::{snippets}/show-index/http-response.adoc[]
+
+The links allow you to access other resources:
+
+include::{snippets}/show-index/links.adoc[]
+
+
+[[project]]
+== Projects
+Spring Projects are listed on https://spring.io/projects[the official projects page].
+A Spring Project has an official name in the Spring portfolio.
+Its sources can be found in a git repository.
+The team in charge of this project will build the sources and release the resulting artifacts in an <<repository, Artifact Repository>>.
+
+Some projects are part of a Release train, i.e. a set of project releases that are known to be compatible.
+Such projects are gathered under an umbrella project (or parent project).
+
+We can `GET` the full collection of Spring Projects using the `"projects"` link provided at the root of the service:
+
+include::{snippets}/list-projects/http-response.adoc[]
+
+We can then fetch an individual project using its `"self"` link when listed in the full collection, for example for the Spring Boot project:
+
+include::{snippets}/show-project/http-response.adoc[]
+
+=== Response structure
+
+include::{snippets}/show-project/response-fields.adoc[]
+
+=== Links
+Project responses provide links to other related resources:
+
+include::{snippets}/show-project/links.adoc[]
+
+
+[[project-status]]
+=== Project Support Status
+Each Project has an official support status; the goal here is to set expectations about the type of support you can expect from the Spring team:
+
+[horizontal]
+Incubating:: an experiment which might/might no be officially supported in the future.
+Active:: actively and officially supported by the Spring team.
+Community:: actively supported by the Spring community with limited involvement from the Spring team.
+End Of Life:: not supported anymore; there won't be new releases for this project.
+
+
+[[release]]
+== Releases
+The Project team selects the currently relevant releases; they're often releases that belong to active <<generation, Project Generations>>.
+We can get the list of releases for a given project by following the `"releases"` link on the Project resource:
+
+include::{snippets}/list-releases/http-response.adoc[]
+
+[[fetch-release]]
+=== Fetching a single Release
+We can fetch a single release by following its canonical link:
+
+include::{snippets}/show-release/http-response.adoc[]
+
+==== Response structure
+
+include::{snippets}/show-release/response-fields.adoc[]
+
+[[release-status]]
+==== Release version status
+
+SNAPSHOT:: Unstable release with limited support; SNAPSHOT versions are released continuously
+PRERELEASE:: Also known as Milestone, this a release meant to be tested by the community
+GENERAL_AVAILABILITY:: Release Generally Available on public artifact repositories and getting full support from maintainers
+
+==== Links
+Release responses provide links to other related resources:
+
+include::{snippets}/show-release/links.adoc[]
+
+
+
+[[create-release]]
+=== Adding a new Release
+We can add a new Release to a Project:
+
+include::{snippets}/create-release/http-request.adoc[]
+
+include::{snippets}/create-release/http-response.adoc[]
+
+NOTE: This request requires <<authentication>>.
+
+==== Request structure
+
+include::{snippets}/create-release/request-fields.adoc[]
+
+
+[[delete-release]]
+=== Deleting an existing Release
+We can delete an existing Release from a Project:
+
+include::{snippets}/delete-release/http-request.adoc[]
+
+include::{snippets}/delete-release/http-response.adoc[]
+
+NOTE: This request requires <<authentication>>.
+
+
+
+[[generation]]
+== Generations
+Each project has an official <<project-status, Support Status>>, but not all releases are supported at any time.
+Releases are grouped as Generations. Depending on the project and its release policy, a Generation usually
+regroups all maintenance Releases for a given minor version or a specific release train.
+
+Developers should upgrade to the latest Release at their earliest convenience;
+the Spring team helps drive that decision by providing end of support dates for each generation.
+
+Each project generation has two periods of active support:
+https://tanzu.vmware.com/support/oss[Open Source support] and https://tanzu.vmware.com/support/lifecycle_policy[Commercial support].
+All releases cut during these support periods are publicly available in the <<repository, artifact repositories>>.
+
+We can get the list of generations for a given project by following the `"generations"` link on the Project resource:
+
+include::{snippets}/list-generations/http-response.adoc[]
+
+We can of course fetch a single generation by following its canonical link:
+
+include::{snippets}/show-generation/http-response.adoc[]
+
+=== Response structure
+
+include::{snippets}/show-generation/response-fields.adoc[]
+
+
+
+[[repository]]
+== Artifact Repositories
+Releases are hosted on public Artifact Repositories.
+The Spring team deploys artifacts to different repositories, depending on the <<releases-status, Release Status>>.
+You can configure your build system to resolve dependencies from the artifact repositories listed by this service.
+"Generally Available" releases are also available on Maven Central and its mirrors.
+
+Each <<release, Project Release>> has a link to an Artifact Repository resource.
+You can fetch the full list of repositories managed by the Spring team by following the `"repositories"` link on the root endpoint:
+
+include::{snippets}/list-repositories/http-response.adoc[]
+
+And get a single repository by following its canonical link:
+
+include::{snippets}/show-repository/http-response.adoc[]
+
+=== Response structure
+
+include::{snippets}/show-repository/response-fields.adoc[]
+
+=== Links
+
+include::{snippets}/show-repository/links.adoc[]

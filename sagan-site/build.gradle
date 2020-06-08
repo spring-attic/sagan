@@ -9,7 +9,7 @@ buildscript {
 
 plugins {
 	id 'java'
-	id "org.asciidoctor.convert" version "1.5.3"
+	id "org.asciidoctor.convert" version "1.5.9.2"
 	id "com.gorylenko.gradle-git-properties" version "1.5.2"
 }
 
@@ -18,6 +18,10 @@ apply plugin: 'org.springframework.boot'
 group = 'io.spring.sagan'
 version = "1.0.0.BUILD-SNAPSHOT"
 sourceCompatibility = '1.8'
+
+ext {
+	snippetsDir = file('build/generated-snippets')
+}
 
 repositories {
 	mavenCentral()
@@ -83,6 +87,8 @@ dependencies {
 	compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
 	compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 
+	testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
 	// datasource and connection pool dependencies
 	runtime 'org.postgresql:postgresql:9.4.1212'
 	runtime 'com.h2database:h2:1.4.200'
@@ -97,6 +103,23 @@ dependencies {
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
     testCompile "org.springframework.boot:spring-boot-starter-test"
 
+}
+
+test {
+	outputs.dir snippetsDir
+}
+
+asciidoctor {
+	attributes 'snippets': snippetsDir
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+jar {
+	dependsOn asciidoctor
+	from ("${asciidoctor.outputDir}/html5") {
+		into 'static/restdocs'
+	}
 }
 
 clean.doFirst {

@@ -107,9 +107,9 @@ class SecurityConfig {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             configureHeaders(http.headers());
-            http.requestMatchers().antMatchers("/project_metadata/**")
-                    .and().authorizeRequests().antMatchers(HttpMethod.HEAD, "/project_metadata/*").permitAll()
-                    .antMatchers(HttpMethod.GET, "/project_metadata/*").permitAll()
+            http.requestMatchers().antMatchers("/api/**")
+                    .and().authorizeRequests().antMatchers(HttpMethod.HEAD, "/api/**").permitAll()
+                    .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .addFilterAfter(githubBasicAuthFilter(), BasicAuthenticationFilter.class)
