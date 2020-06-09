@@ -1,0 +1,271 @@
+.calendar-releases {
+  .table {
+    width: 100%;
+    border-spacing: 0;
+
+    tr td {
+      border-top: 1px solid #ebf2f2;
+      font-size: 14px;
+    }
+
+    thead tr th {
+      border-top: 0 none;
+    }
+
+    td,
+    th {
+      padding: 12px 12px;
+      text-align: left;
+    }
+
+    td.head {
+      background: #ebf2f2;
+      font-weight: bold;
+    }
+
+    .past {
+      color: #888;
+      // text-decoration: line-through;
+    }
+
+    .release > div,
+    .release strong {
+      position: relative;
+      display: inline-block;
+      padding-left: 22px;
+      font-weight: normal;
+    }
+
+    .status {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      width: 15px;
+      height: 15px;
+      background: #ecf2f2;
+      border-radius: 8px;
+    }
+
+    [data-status="migrate"] .status {
+      background-color: #ffe88e;
+    }
+
+    [data-status="active"] .status {
+      background-color: #99e67d;
+    }
+
+    [data-status="coming"] .status {
+      background-color: #c1edff;
+    }
+
+  }
+
+  .timeline {
+    margin: 2rem 0 2rem 100px;
+    padding: 0 0 2rem;
+    position: relative;
+
+    &.t7 {
+      .axis .year {
+        width: 13.571428571%;
+      }
+    }
+
+    &.t6 {
+      .axis .year {
+        width: 15.8333333333%;
+      }
+    }
+
+    &.t5 {
+      .axis .year {
+        width: 19%;
+      }
+    }
+
+    &.t4 {
+      .axis .year {
+        width: 23.75%;
+      }
+    }
+
+    &.t3 {
+      .axis .year {
+        width: 31.666666667%;
+      }
+    }
+
+    .axis {
+      position: absolute;
+      top: 0;
+      left: 1px;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      z-index: 7;
+
+      .year {
+        box-shadow: inset 1px 0 0 #ecf2f2;
+        width: 19%;
+        margin-top: 30px;
+
+        &:last-child {
+          width: 5%;
+        }
+
+        .label {
+          display: block;
+          width: 80px;
+          text-align: center;
+          margin-left: -40px;
+          margin-top: -25px;
+          left: 0;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .releases {
+      padding-top: 30px;
+      z-index: 100;
+
+      .head {
+        $h: 40px;
+        height: $h;
+        line-height: $h;
+        margin-top: 8px;
+
+        .content {
+          position: absolute;
+          background: #ecf2f2;
+          box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+          left: 0;
+          right: 0;
+          height: $h;
+          line-height: $h;
+          font-weight: bold;
+          padding-left: 10px;
+          z-index: 8;
+        }
+      }
+
+      .release {
+        position: relative;
+        height: 26px;
+        margin: 4px 0 4px 1px;
+      }
+
+      .plop-active,
+      .plop-migrate {
+        height: 26px;
+        position: absolute;
+      }
+
+      .plop-active {
+        background: #99e67d;
+
+        &.coming {
+          background: #c1edff;
+        }
+      }
+
+      .plop-migrate {
+        width: 9.5%;
+        background: #ffe88e;
+        left: 38%;
+      }
+
+      .label {
+        position: absolute;
+        left: -100px;
+        top: 0;
+        background: #ecf2f2;
+        font-size: 14px;
+        font-weight: bold;
+
+        a {
+          color: #000;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        a,
+        span {
+          display: inline-block;
+          padding: 0 8px;
+          height: 26px;
+          line-height: 26px;
+        }
+
+        &[data-status="active"], &.active {
+          background: #99e67d;
+        }
+
+        &[data-status="migrate"], &.migrate {
+          background: #ffe88e;
+        }
+
+        &[data-status="coming"], &.coming {
+          background: #c1edff;
+        }
+      }
+
+      .date {
+        position: absolute;
+        left: -40px;
+        top: -10px;
+        width: 80px;
+        text-align: center;
+        font-size: 12px;
+        z-index: 20;
+        opacity: 0;
+        transition: all 100ms;
+
+        span {
+          margin: 0 auto;
+          display: inline-block;
+          background: #000;
+          color: #fff;
+          padding: 2px 6px;
+        }
+
+        &.right {
+          left: auto;
+          right: -40px;
+        }
+      }
+
+      .release.active {
+        .date {
+          opacity: 1;
+        }
+      }
+    }
+
+    .current-date {
+      position: absolute;
+      top: 25px;
+      bottom: 20px;
+      width: 100px;
+      margin-left: -50px;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAKCAYAAACXDi8zAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3VpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ4IDc5LjE2NDAzNiwgMjAxOS8wOC8xMy0wMTowNjo1NyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3MGM4M2M4Yy0wMDRkLTQ5YzItYTc4NS05NDY3NDA3ZmFjZjkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTc4QzRCRkU2RDE2MTFFQUJEMEFBOTIwQkE5OEEzOEEiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTc4QzRCRkQ2RDE2MTFFQUJEMEFBOTIwQkE5OEEzOEEiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjEgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmNWFhMjAwMS02MmVmLTRlYTItOWMxYy0zM2Y0ZDU2NTUwYmQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NzBjODNjOGMtMDA0ZC00OWMyLWE3ODUtOTQ2NzQwN2ZhY2Y5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+2sFQEwAAAExJREFUeNpiZMg9xcbAwNANxDFAzAjEi4G4lAVIdAFxHgMCgNjfmYBELAMmSGViwAGYoGaigzkgO8qglsKMBCmsZQS6CqdRVJIACDAAg9QK3fKoL2AAAAAASUVORK5CYII=');
+      background-repeat: repeat-y;
+      background-size: 3px 5px;
+      background-position: center 0;
+      z-index: 10;
+      //border-left: 1px dotted #086dc3;
+      .label {
+        color: #086dc3;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: -20px;
+        width: 100px;
+        text-align: center;
+        font-weight: bold;
+      }
+    }
+  }
+}

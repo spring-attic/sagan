@@ -537,5 +537,59 @@ body.dark {
     background: #6db33f;
   }
 
+  .calendar-releases {
+
+    .table tr td,
+    .sample hr {
+      border-color: $dark-border-color;
+    }
+
+    .timeline .axis .year {
+      box-shadow: inset 1px 0 0 $dark-border-color;
+    }
+
+    .timeline .releases .label {
+      background: $dark-highlight-background;
+
+      a {
+        color: $dark-color;
+      }
+
+      &.active {
+        background: #99e67d;
+
+        a {
+          color: $dark-background;
+        }
+      }
+
+      &.migrate {
+        background: #ffe88e;
+
+        a {
+          color: $dark-background;
+        }
+      }
+
+      &.coming {
+        background: #c1edff;
+        color: $dark-background;
+
+        a {
+          color: $dark-background;
+        }
+      }
+    }
+
+    .table a {
+      color: $dark-color;
+    }
+
+    .table td.head,
+    .timeline .releases .head .content {
+      background: $dark-highlight-background;
+    }
+  }
+
   @import 'prettify';
 }

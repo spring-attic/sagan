@@ -1,5 +1,6 @@
 import '../css/project.css'
 import $ from 'jquery';
+import { CalendarReleases } from './calendar-releases'
 
 
 $(document).ready(function () {
@@ -57,5 +58,10 @@ $(document).ready(function () {
         });
     }
 
+    // Single project
+    const tableReleases = document.querySelectorAll('.calendar-releases')
+    tableReleases.forEach(calendar => {
+        CalendarReleases.singleRelease(calendar);
+    })
 
 });
