@@ -84,9 +84,12 @@ const formatDate = date => {
     return date.toISOString().substring(0, 10)
 }
 
-const createDiv = ({className}) => {
+const createDiv = ({className, text = ''}) => {
     const element = document.createElement('div')
     element.className = className || ''
+    if (text) {
+        element.append(document.createTextNode(text))
+    }
     return element
 }
 
@@ -182,7 +185,7 @@ const createReleases = (timeline, releases, config) => {
     })
 }
 
-const createTimeline = ({calendar}) => {
+const createTimeline = (calendar) => {
     const timeline = createDiv({className: 'timeline'})
     const _releasesDiv = createDiv({className: 'releases'})
     const _axisDiv = createDiv({className: 'axis'})
@@ -192,12 +195,15 @@ const createTimeline = ({calendar}) => {
     return timeline
 }
 
-const createHead = ({timeline, project}) => {
-    const head = createDiv({className: 'head'})
-    const headContent = createDiv({className: 'content'})
-    headContent.innerText = project
-    head.append(headContent)
-    timeline.querySelector('.releases').append(head)
+const createLegendText = (timeline) => {
+    const oss = createDiv({className: 'oss', text: 'OSS support'})
+    const commercial = createDiv({className: 'commercial', text: 'Commercial support'})
+    const future = createDiv({className: 'future', text: 'Future release'})
+    const legend = createDiv({className: 'legend'})
+    legend.append(oss)
+    legend.append(commercial)
+    legend.append(future)
+    timeline.append(legend)
 }
 
 export const CalendarReleases = {
@@ -212,7 +218,7 @@ export const CalendarReleases = {
         // Timeline Config
         const config = new Config(releases)
         // Create Timeline
-        const timeline = createTimeline({calendar})
+        const timeline = createTimeline(calendar)
         // Release
         createReleases(timeline, releases, config)
         // Axis
@@ -221,6 +227,8 @@ export const CalendarReleases = {
         createCurrenDate(timeline, config)
         // Legend size
         updateLegend(timeline)
+        // Legend Text
+        createLegendText(timeline)
     }
 
 }

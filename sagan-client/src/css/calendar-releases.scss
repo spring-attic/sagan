@@ -61,7 +61,7 @@
   }
 
   .timeline {
-    margin: 2rem 0 2rem 100px;
+    margin: 2rem 0 80px 100px;
     padding: 0 0 2rem;
     position: relative;
 
@@ -265,6 +265,50 @@
         width: 100px;
         text-align: center;
         font-weight: bold;
+      }
+    }
+
+    .legend {
+      position: absolute;
+      bottom: -45px;
+      left: 0;
+      right: 0;
+      text-align: center;
+
+      > div {
+        display: inline-block;
+        position: relative;
+        padding-left: 30px;
+        padding-right: 20px;
+        white-space: nowrap;
+        font-size: 14px;
+
+        &:before {
+          content: '';
+          position: absolute;
+          height: 20px;
+          width: 20px;
+          left: 0;
+          background: #ecf2f2;
+        }
+
+        &.oss {
+          &:before {
+            background: #99e67d;
+          }
+        }
+
+        &.commercial {
+          &:before {
+            background: #ffe88e;
+          }
+        }
+
+        &.future {
+          &:before {
+            background: #c1edff;
+          }
+        }
       }
     }
   }
