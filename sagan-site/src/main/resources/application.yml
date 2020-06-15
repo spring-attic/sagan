@@ -107,7 +107,7 @@ spring:
     restart:
       additional_paths:
         - ../sagan-client/build/dist/
-      additional_exclude: "**/*.js,**/*.css"
+      additional_exclude: "css/**,fonts/**,images/**,js/**,icon*.png,manifest.json,robots.txt"
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
 flyway:
   locations: classpath:/db/migration, classpath:/db/dev
