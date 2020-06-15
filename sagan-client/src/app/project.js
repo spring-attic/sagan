@@ -1,6 +1,6 @@
 import '../css/project.css'
 import $ from 'jquery';
-import { CalendarReleases } from './calendar-releases'
+import {CalendarReleases} from './calendar-releases'
 
 
 $(document).ready(function () {
@@ -20,6 +20,16 @@ $(document).ready(function () {
             }
         } catch (e) {
         }
+        if ($(this).attr('href') === '#support') {
+            // Single project
+            const tableReleases = document.querySelectorAll('.calendar-releases')
+            tableReleases.forEach(calendar => {
+                CalendarReleases.singleRelease(calendar);
+            })
+        } else {
+            // Clean
+            $('.timeline').detach()
+        }
     });
 
     try {
@@ -35,6 +45,12 @@ $(document).ready(function () {
                 tabs.removeClass('active');
                 f.addClass('active');
                 $(f.find('a').attr('href')).addClass('active');
+            }
+            if (f.find('a').attr('href') === '#support') {
+                const tableReleases = document.querySelectorAll('.calendar-releases')
+                tableReleases.forEach(calendar => {
+                    CalendarReleases.singleRelease(calendar);
+                })
             }
         }
     } catch (e) {
@@ -57,11 +73,5 @@ $(document).ready(function () {
             }
         });
     }
-
-    // Single project
-    const tableReleases = document.querySelectorAll('.calendar-releases')
-    tableReleases.forEach(calendar => {
-        CalendarReleases.singleRelease(calendar);
-    })
 
 });

@@ -31,21 +31,26 @@ class Release {
         this.endCommercial = this.parseDate(tds[3].innerText)
         this.status = tableRow.dataset.status
     }
+
     parseDate(str) {
         if (!str) {
             return ''
         }
         return new Date(str)
     }
+
     lifetime() {
-        return new Period("lifetime", this.initial, this.endDate())
+        return new Period('lifetime', this.initial, this.endDate())
     }
+
     activeSupport() {
-        return new Period("active", this.initial, this.endSupport)
+        return new Period('active', this.initial, this.endSupport)
     }
+
     commercialSupport() {
-        return new Period("commercial", this.endSupport, this.endDate())
+        return new Period('commercial', this.endSupport, this.endDate())
     }
+
     endDate() {
         return this.endCommercial ? this.endCommercial : this.endSupport
     }
@@ -57,23 +62,26 @@ class Period {
         this.start = start
         this.end = end
     }
+
     isVisibleWithin(period) {
         return this.start < period.end && this.end > period.start
     }
+
     calculateStartPosition(timeline) {
         if (timeline.start > this.start) {
             return 0
         }
         return Math.round((this.start - timeline.start) / (timeline.end - timeline.start) * 95) // 100-5% padding
     }
+
     calculateWidth(timeline) {
-        const end  = Math.min(timeline.end, this.end)
+        const end = Math.min(timeline.end, this.end)
         return Math.round((end - this.start) / (timeline.end - timeline.start) * 95) // 100-5% padding
     }
 }
 
 const formatDate = date => {
-    return date.toISOString().substring(0,10)
+    return date.toISOString().substring(0, 10)
 }
 
 const createDiv = ({className}) => {
@@ -102,8 +110,8 @@ const createAxis = (timeline, config) => {
 }
 
 const createCurrenDate = (timeline, config) => {
-    const today = new Period("today", config.today, config.today);
-    const period = new Period("timeline", config.startDate, config.endDate);
+    const today = new Period('today', config.today, config.today);
+    const period = new Period('timeline', config.startDate, config.endDate);
     const current = createDiv({className: 'current-date'})
     const currentLabel = createDiv({className: 'label'})
     currentLabel.append(document.createTextNode(formatDate(config.today)))
@@ -130,7 +138,7 @@ const updateLegend = (timeline) => {
 
 const createReleases = (timeline, releases, config) => {
     const _releases = timeline.querySelector('div.releases')
-    const period = new Period("timeline", config.startDate, config.endDate);
+    const period = new Period('timeline', config.startDate, config.endDate);
     releases.forEach(release => {
         const _releaseD = createDiv({className: 'release'})
         _releases.append(_releaseD)
@@ -194,7 +202,7 @@ const createHead = ({timeline, project}) => {
 
 export const CalendarReleases = {
 
-    singleRelease: function(calendar) {
+    singleRelease: function (calendar) {
         const releases = []
         // Parsing table data
         const trs = calendar.querySelectorAll('table tbody tr')
