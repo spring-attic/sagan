@@ -23,7 +23,7 @@
                         <div class='border-dark rad-5'>
                             <h3 class='h3 antialiased' th:text="${event.summary}">Event</h3>
                             <p class='location m-0' th:text="${event.location}">Location</p>
-                            <p class='date' th:text="${#temporals.format(event.firstDay, 'yyyy-MM-dd')}">2020-01-01</p>
+                            <p class='date' th:text="${#temporals.format(event.startTime, 'yyyy-MM-dd')}">2020-01-01</p>
                         </div>
                     </a>
                 </div>

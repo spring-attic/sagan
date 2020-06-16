@@ -1,0 +1,40 @@
+{
+  "kind": "calendar#events",
+  "etag": "\"etagvalue\"",
+  "summary": "Spring Events Shared Calendar",
+  "updated": "2020-06-09T00:18:44.279Z",
+  "timeZone": "America/Los_Angeles",
+  "accessRole": "reader",
+  "defaultReminders": [],
+  "nextSyncToken": "some-token",
+  "items": [
+    {
+      "kind": "calendar#event",
+      "etag": "\"etagvalue\"",
+      "id": "some-id-1",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=some-id-1",
+      "created": "2020-05-27T00:16:23.000Z",
+      "updated": "2020-05-27T00:16:23.479Z",
+      "summary": "Spring IO conference",
+      "description": "https://springio.net",
+      "location": "Barcelona, Spain",
+      "creator": {
+        "email": "user@example.org"
+      },
+      "organizer": {
+        "email": "organizer@example.com",
+        "displayName": "Spring Events Shared Calendar",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2020-05-14T09:00:00+01:00"
+      },
+      "end": {
+        "dateTime": "2020-05-16T18:00:00+01:00"
+      },
+      "iCalUID": "some-id-1@google.com",
+      "sequence": 0
+    }
+  ]
+}

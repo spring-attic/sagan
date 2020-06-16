@@ -68,7 +68,6 @@ dependencies {
 	compile 'org.xmlbeam:xmlprojector:1.4.8'
 	// for use in generating blog atom feeds
 	compile 'com.rometools:rome:1.12.0'
-	compile 'net.sf.biweekly:biweekly:0.6.3'
 	// for use in serving redirects; see urlrewrite.xml
 	compile 'org.tuckey:urlrewritefilter:4.0.4'
 	// override Boot dependency management, since urlrewritefilter uses a more recent version

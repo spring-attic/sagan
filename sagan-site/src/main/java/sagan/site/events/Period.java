@@ -1,51 +1,49 @@
 package sagan.site.events;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.Objects;
+import java.time.ZonedDateTime;
 import java.util.function.Predicate;
-
-import biweekly.component.VEvent;
 
 import org.springframework.util.Assert;
 
 public class Period {
 
-	private final LocalDate startDate;
+	private final ZonedDateTime startDateTime;
 
 	private final int days;
 
-	private Period(LocalDate startDate, int days) {
-		this.startDate = startDate;
+	private Period(ZonedDateTime startDateTime, int days) {
+		this.startDateTime = startDateTime;
 		this.days = days;
 	}
 
 	public static Period of(String startDate, int days) {
 		Assert.isTrue(days > 0, "days should be a positive integer");
-		return new Period(LocalDate.parse(startDate), days);
+		ZonedDateTime startDateTime = ZonedDateTime.of(LocalDate.parse(startDate), LocalTime.MIDNIGHT, ZoneId.systemDefault());
+		return new Period(startDateTime, days);
 	}
 
-	public LocalDate getStartDate() {
-		return startDate;
+	public ZonedDateTime getStartDateTime() {
+		return this.startDateTime;
 	}
 
 	public int getDays() {
 		return days;
 	}
 
-	protected Predicate<VEvent> toCalendarFilter() {
+	protected Predicate<Event> toCalendarFilter() {
 		return event -> {
-			LocalDate eventStart = event.getDateStart().getValue()
-					.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			return eventStart.isAfter(this.startDate)
-					&& eventStart.isBefore(this.startDate.plusDays(this.days));
+			return event.getStartTime().isAfter(this.startDateTime)
+					&& event.getStartTime().isBefore(this.startDateTime.plusDays(this.days));
 		};
 	}
 
 	@Override
 	public String toString() {
 		return "Period{" +
-				"startDate=" + startDate +
+				"startDateTime=" + startDateTime +
 				", days=" + days +
 				'}';
 	}

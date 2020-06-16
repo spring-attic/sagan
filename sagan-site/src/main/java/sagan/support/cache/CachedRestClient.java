@@ -9,7 +9,6 @@ import org.springframework.web.client.RestOperations;
 public class CachedRestClient {
 
     public static final String CACHE_NAME = "cache.network";
-    public static final String CACHE_TTL_KEY = "cache.network.timetolive";
     public static final String CACHE_TTL = "${cache.network.timetolive:300}";
 
     @Cacheable(value = CACHE_NAME, key = "#url")

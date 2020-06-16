@@ -1,81 +1,76 @@
 package sagan.site.events;
 
 import java.net.URI;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
-import biweekly.component.VEvent;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+@JsonDeserialize(using = EventDeserializer.class)
 public class Event implements Comparable<Event> {
 
-	private static final Pattern URL_REGEXP = Pattern.compile("http[^\\s<\"]*");
+	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd - HH:mm:ss z");
 
-	private final LocalDate firstDay;
+	private ZonedDateTime startTime;
 
-	private final LocalDate lastDay;
+	private ZonedDateTime endTime;
 
-	private final String summary;
+	private String summary;
 
-	private final URI link;
+	private URI link;
 
-	private final String location;
+	private String location;
 
-	protected Event(LocalDate firstDay, LocalDate lastDay, String summary, URI link, String location) {
-		this.firstDay = firstDay;
-		this.lastDay = lastDay;
-		this.summary = summary;
-		this.link = link;
-		this.location = location;
+	public ZonedDateTime getStartTime() {
+		return this.startTime;
 	}
 
-	protected Event(VEvent event) {
-		this.firstDay = event.getDateStart().getValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		this.lastDay = event.getDateEnd().getValue().toInstant().minus(Duration.ofMinutes(1)).atZone(ZoneId.systemDefault()).toLocalDate();
-		this.summary = event.getSummary().getValue();
-		this.link = parseLink(event);
-		this.location = event.getLocation().getValue();
+	public void setStartTime(ZonedDateTime startTime) {
+		this.startTime = startTime;
 	}
 
-	private URI parseLink(VEvent event) {
-		try {
-			Matcher matcher = URL_REGEXP.matcher(event.getDescription().getValue());
-			String url = matcher.find() ? matcher.group() : "#";
-			return URI.create(url);
-		}
-		catch (IllegalArgumentException ex) {
-			return URI.create("#");
-		}
+	public String formatStartTime() {
+		return FORMATTER.format(this.startTime);
 	}
 
-	public LocalDate getFirstDay() {
-		return this.firstDay;
+	public ZonedDateTime getEndTime() {
+		return this.endTime;
 	}
 
-	public LocalDate getLastDay() {
-		return this.lastDay;
+	public void setEndTime(ZonedDateTime endTime) {
+		this.endTime = endTime;
 	}
 
-	public boolean isSingleDayEvent() {
-		return this.firstDay.equals(this.lastDay);
+	public String formatEndTime() {
+		return FORMATTER.format(this.endTime);
 	}
 
 	public String getSummary() {
 		return this.summary;
 	}
 
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
 	public URI getLink() {
 		return this.link;
+	}
+
+	public void setLink(URI link) {
+		this.link = link;
 	}
 
 	public String getLocation() {
 		return this.location;
 	}
 
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	@Override
 	public int compareTo(Event other) {
-		return this.firstDay.compareTo(other.firstDay);
+		return this.startTime.compareTo(other.startTime);
 	}
 }
