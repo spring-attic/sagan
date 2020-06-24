@@ -48,7 +48,7 @@ class Release {
     }
 
     commercialSupport() {
-        return new Period('commercial', this.endSupport, this.endDate())
+        return new Period('commercial', this.initial, this.endDate())
     }
 
     endDate() {
@@ -137,6 +137,7 @@ const updateLegend = (timeline) => {
         control.style.left = `-${labelsWidth + 20}px`
     })
     timeline.style.marginLeft = `${labelsWidth + 20}px`
+    timeline.querySelector('.legend').style.marginLeft = `-${labelsWidth + 20}px`
 }
 
 const createReleases = (timeline, releases, config) => {
@@ -196,10 +197,16 @@ const createTimeline = (calendar) => {
 }
 
 const createLegendText = (timeline) => {
-    const oss = createDiv({className: 'oss', text: 'OSS support'})
-    const commercial = createDiv({className: 'commercial', text: 'Commercial support'})
-    const future = createDiv({className: 'future', text: 'Future release'})
+    const oss = createDiv({className: 'oss'})
+    const commercial = createDiv({className: 'commercial'})
+    const future = createDiv({className: 'future'})
     const legend = createDiv({className: 'legend'})
+    oss.append(createDiv({className: 'title', text: 'OSS support'}))
+    oss.append(createDiv({text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'}))
+    commercial.append(createDiv({className: 'title', text: 'Commercial support'}))
+    commercial.append(createDiv({text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'}))
+    future.append(createDiv({className: 'title', text: 'Future release'}))
+    future.append(createDiv({text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'}))
     legend.append(oss)
     legend.append(commercial)
     legend.append(future)
@@ -225,10 +232,10 @@ export const CalendarReleases = {
         createAxis(timeline, config)
         // Current Date
         createCurrenDate(timeline, config)
-        // Legend size
-        updateLegend(timeline)
         // Legend Text
         createLegendText(timeline)
+        // Legend size
+        updateLegend(timeline)
     }
 
 }

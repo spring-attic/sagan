@@ -1,3 +1,7 @@
+$active: #99e67d;
+$migrate: #ffe88e;
+$future: #c1edff;
+
 .calendar-releases {
   .table {
     width: 100%;
@@ -47,21 +51,21 @@
     }
 
     [data-status="migrate"] .status {
-      background-color: #ffe88e;
+      background-color: $migrate;
     }
 
     [data-status="active"] .status {
-      background-color: #99e67d;
+      background-color: $active;
     }
 
     [data-status="coming"] .status {
-      background-color: #c1edff;
+      background-color: $future;
     }
 
   }
 
   .timeline {
-    margin: 2rem 0 80px 100px;
+    margin: 2rem 0 160px 100px;
     padding: 0 0 2rem;
     position: relative;
 
@@ -162,16 +166,17 @@
       }
 
       .plop-active {
-        background: #99e67d;
-
+        background: $active;
+        z-index: 1;
         &.coming {
-          background: #c1edff;
+          background: $future;
         }
       }
 
       .plop-migrate {
+        z-index: 0;
         width: 9.5%;
-        background: #ffe88e;
+        background: $migrate;
         left: 38%;
       }
 
@@ -201,15 +206,15 @@
         }
 
         &[data-status="active"], &.active {
-          background: #99e67d;
+          background: $active;
         }
 
         &[data-status="migrate"], &.migrate {
-          background: #ffe88e;
+          background: $migrate;
         }
 
         &[data-status="coming"], &.coming {
-          background: #c1edff;
+          background: $future;
         }
       }
 
@@ -270,19 +275,19 @@
 
     .legend {
       position: absolute;
-      bottom: -45px;
+      bottom: -150px;
       left: 0;
       right: 0;
-      text-align: center;
+      text-align: left;
 
       > div {
-        display: inline-block;
+        display: block;
         position: relative;
         padding-left: 30px;
         padding-right: 20px;
         white-space: nowrap;
         font-size: 14px;
-
+        margin: .6rem 0;
         &:before {
           content: '';
           position: absolute;
@@ -292,21 +297,25 @@
           background: #ecf2f2;
         }
 
+        div.title {
+          font-weight: bold;
+        }
+
         &.oss {
           &:before {
-            background: #99e67d;
+            background: $active;
           }
         }
 
         &.commercial {
           &:before {
-            background: #ffe88e;
+            background: $migrate;
           }
         }
 
         &.future {
           &:before {
-            background: #c1edff;
+            background: $future;
           }
         }
       }
