@@ -172,7 +172,17 @@ include::{snippets}/show-generation/http-response.adoc[]
 
 include::{snippets}/show-generation/response-fields.adoc[]
 
+=== HTTP Caching support
 
+This endpoint supports conditional requests with `"If-Modified-Since"` request headers.
+To avoid fetching and parsing a generation or the list of generations for a given project,
+clients can issue conditional requests like:
+
+include::{snippets}/cached-list-generations/http-request.adoc[]
+
+If the project generations haven't been updated in the meantime, the server will respond with a "304 Not Modified" status.
+
+include::{snippets}/cached-list-generations/http-response.adoc[]
 
 [[repository]]
 == Artifact Repositories

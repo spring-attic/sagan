@@ -55,7 +55,7 @@ public class ProjectMetadataService {
 				.sorted(Release::compareTo)
 				.filter(Release::isGeneralAvailability)
 				.findFirst().ifPresent(rel -> rel.setCurrent(true));
-		this.supportPolicyProcessor.updateSupportPolicyDates(project.getGenerations());
+		this.supportPolicyProcessor.updateSupportPolicyDates(project.getGenerationsInfo().getGenerations());
 		String bootConfigHtml = this.renderer.render(project.getBootConfig().getSource(), PostFormat.ASCIIDOC);
 		project.getBootConfig().setHtml(bootConfigHtml);
 		String overviewHtml = this.renderer.render(project.getOverview().getSource(), PostFormat.ASCIIDOC);

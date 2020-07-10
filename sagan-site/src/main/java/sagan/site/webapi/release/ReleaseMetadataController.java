@@ -100,12 +100,11 @@ public class ReleaseMetadataController {
 
 	@DeleteMapping("/projects/{projectId}/releases/{version}")
 	public ResponseEntity<String> deleteRelease(@PathVariable String projectId, @PathVariable String version) {
-		Release release = this.metadataService.findRelease(projectId, Version.of(version));
-		if (release == null) {
-			throw new ResourceNotFoundException("Could not find release for project: " + projectId + " and version: " + version);
-		}
-		release.getProject().removeRelease(release.getVersion());
-		this.metadataService.save(release.getProject());
+		Project project = this.metadataService.fetchFullProject(projectId);
+		Release release = project.findRelease(Version.of(version))
+				.orElseThrow(() -> new ResourceNotFoundException("Could not find release for project: " + projectId + " and version: " + version));
+		project.removeRelease(release.getVersion());
+		this.metadataService.save(project);
 		return ResponseEntity.noContent().build();
 	}
 }

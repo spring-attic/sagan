@@ -113,7 +113,8 @@ class SecurityConfig {
                     .anyRequest().authenticated()
                     .and()
                     .addFilterAfter(githubBasicAuthFilter(), BasicAuthenticationFilter.class)
-                    .csrf().disable();
+                    .csrf().disable()
+					.headers().defaultsDisabled().httpStrictTransportSecurity();
             if (isForceHttps()) {
                 http.requiresChannel().anyRequest().requiresSecure();
             }

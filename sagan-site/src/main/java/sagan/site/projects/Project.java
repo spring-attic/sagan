@@ -1,6 +1,8 @@
 package sagan.site.projects;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -91,11 +93,12 @@ public class Project {
 	private SortedSet<Release> releases = new TreeSet<>();
 
 	/**
-	 * Set of available {@link ProjectGeneration} sorted by their name
+	 * Set of available {@link ProjectGeneration}
 	 */
-	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-	@SortNatural
-	private SortedSet<ProjectGeneration> generations = new TreeSet<>();
+	@AttributeOverrides({
+			@AttributeOverride(name = "lastModified", column = @Column(name = "project_generations_lastmodified")),
+	})
+	private ProjectGenerationsInfo generationsInfo = new ProjectGenerationsInfo();
 
 	/**
 	 * Set of {@link ProjectGroup} this project belongs to
@@ -252,31 +255,33 @@ public class Project {
 		return !this.releases.isEmpty();
 	}
 
-	public SortedSet<ProjectGeneration> getGenerations() {
-		return this.generations;
+	public ProjectGenerationsInfo getGenerationsInfo() {
+		return this.generationsInfo;
 	}
 
 	public Optional<ProjectGeneration> findGeneration(String name) {
-		return this.generations.stream().filter(gen -> gen.getName().equals(name)).findFirst();
+		return this.generationsInfo.getGenerations().stream().filter(gen -> gen.getName().equals(name)).findFirst();
 	}
 
 	public ProjectGeneration addGeneration(String name, LocalDate initialReleaseDate) {
 		Assert.hasText(name, "name should not be empty");
 		ProjectGeneration generation = new ProjectGeneration(name, initialReleaseDate);
 		generation.setProject(this);
-		this.generations.add(generation);
+		this.generationsInfo.getGenerations().add(generation);
+		this.generationsInfo.recordModification();
 		return generation;
 	}
 
 	public void removeGeneration(String name) {
 		findGeneration(name).ifPresent(generation -> {
 			generation.setProject(null);
-			this.generations.remove(generation);
+			this.generationsInfo.getGenerations().remove(generation);
+			this.generationsInfo.recordModification();
 		});
 	}
 
 	public boolean hasGenerations() {
-		return !this.generations.isEmpty();
+		return !this.generationsInfo.getGenerations().isEmpty();
 	}
 
 	public Set<ProjectGroup> getGroups() {

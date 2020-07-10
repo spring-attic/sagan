@@ -276,7 +276,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:each="generation : ${project.generations}"
+                                            <tr th:each="generation : ${project.generationsInfo.generations}"
                                                 th:attr="data-status=|${!generation.isReleased() ? 'coming' : ''}${generation.hasOssSupport()? 'active' : ''}${(!generation.hasOssSupport() && generation.hasCommercialSupport())? 'migrate': ''}${(generation.isReleased() && !generation.hasCommercialSupport())? 'inactive': ''}|">
                                                 <td class="release" th:inline="text">
                                                     <div><span class="status"></span>  [[${generation.name}]]</div>

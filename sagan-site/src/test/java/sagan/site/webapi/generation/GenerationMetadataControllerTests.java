@@ -1,7 +1,11 @@
 package sagan.site.webapi.generation;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.HttpHeaders;
 import org.springframework.restdocs.hypermedia.LinkDescriptor;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.JsonFieldType;
@@ -33,6 +38,8 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -69,6 +76,7 @@ public class GenerationMetadataControllerTests {
 		given(this.metadataService.fetchFullProject(eq("spring-boot"))).willReturn(this.springBoot);
 		this.mvc.perform(get("/api/projects/spring-boot/generations").accept(MediaTypes.HAL_JSON))
 				.andExpect(status().isOk())
+				.andExpect(header().string("Last-Modified", Matchers.notNullValue()))
 				.andExpect(jsonPath("$._embedded.generations.length()").value("2"))
 				.andDo(document("{method-name}", preprocessResponse(prettyPrint()),
 						responseFields(fieldWithPath("_embedded.generations").description("An array of Project Generations"))
@@ -78,10 +86,23 @@ public class GenerationMetadataControllerTests {
 	}
 
 	@Test
+	public void cachedListGenerations() throws Exception {
+		OffsetDateTime nextWeek = LocalDateTime.now().plusDays(7).atOffset(ZoneOffset.UTC);
+		given(this.metadataService.fetchFullProject(eq("spring-boot"))).willReturn(this.springBoot);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setIfModifiedSince(nextWeek.toEpochSecond() * 1000);
+		this.mvc.perform(get("/api/projects/spring-boot/generations").accept(MediaTypes.HAL_JSON).headers(headers))
+				.andExpect(status().isNotModified())
+				.andExpect(header().string("Last-Modified", Matchers.notNullValue()))
+				.andDo(document("{method-name}", preprocessResponse(prettyPrint())));
+	}
+
+	@Test
 	public void showGeneration() throws Exception {
 		given(this.metadataService.fetchFullProject("spring-boot")).willReturn(this.springBoot);
 		this.mvc.perform(get("/api/projects/spring-boot/generations/2.1.x").accept(MediaTypes.HAL_JSON))
 				.andExpect(status().isOk())
+				.andExpect(header().string("Last-Modified", Matchers.notNullValue()))
 				.andDo(document("{method-name}", preprocessResponse(prettyPrint()),
 						responseFields(generationPayload()), links(generationLinks())));
 	}

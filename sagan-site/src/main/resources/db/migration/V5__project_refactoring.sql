@@ -19,6 +19,8 @@ ALTER TABLE project
     RENAME COLUMN rendered_overview TO overview_html;
 ALTER TABLE project
     RENAME COLUMN display_order TO sort_order;
+ALTER TABLE project
+    ADD COLUMN project_generations_lastmodified TIMESTAMP DEFAULT Now();
 
 CREATE INDEX idx_project_name ON project(name);
 
@@ -56,15 +58,15 @@ ALTER TABLE project_release
 
 -- Update repository_id
 ALTER TABLE project_release
+    DROP COLUMN repository_id;
+ALTER TABLE project_release
     ADD COLUMN repository CHARACTER VARYING(255);
 UPDATE project_release
-    SET repository='SNAPSHOT' where repository_id='spring-snapshots';
+    SET repository='SNAPSHOT' where release_status='SNAPSHOT';
 UPDATE project_release
-    SET repository='MILESTONE' where repository_id='spring-milestones';
+    SET repository='MILESTONE' where release_status='PRERELEASE';
 UPDATE project_release
-    SET repository='RELEASE' where repository_id='spring-releases' OR repository_id IS NULL;
-ALTER TABLE project_release
-    DROP COLUMN repository_id;
+    SET repository='RELEASE' where release_status='GENERAL_AVAILABILITY';
 
 --
 -- Update project_repository

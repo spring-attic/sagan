@@ -109,6 +109,7 @@ public class ReleaseMetadataControllerTests {
 
 	@Test
 	public void deleteRelease() throws Exception {
+		given(this.metadataService.fetchFullProject(eq("spring-boot"))).willReturn(this.springBoot);
 		given(this.metadataService.findRelease(eq("spring-boot"), eq(Version.of("2.3.0.RELEASE")))).willReturn(this.currentRelease);
 		this.mvc.perform(delete("/api/projects/spring-boot/releases/2.3.0.RELEASE"))
 				.andExpect(status().isNoContent())
