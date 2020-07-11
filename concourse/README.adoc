@@ -1,6 +1,6 @@
 == Continuous Integration and Deployment with Concourse
 
-The Sagan application is continuously built, tested and deployed in production with http://concourse.ci[Concourse CI].
+The Sagan application is continuously built, tested and deployed in production with https://concourse-ci.org/[Concourse CI].
 You can check the status of the Concourse pipeline at any time on our
 https://ci.spring.io/teams/sagan/pipelines/sagan[Concourse instance].
 
