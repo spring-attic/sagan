@@ -528,5 +528,14 @@ body.dark {
     border-bottom-color: lighten($dark-border-color, 5);
   }
 
+  #hamburger .burger-bar {
+    color: white;
+    background: white;
+  }
+
+  #hamburger:hover .burger-bar {
+    background: #6db33f;
+  }
+
   @import 'prettify';
 }
