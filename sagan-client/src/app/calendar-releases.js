@@ -151,12 +151,12 @@ const createReleases = (timeline, releases, config) => {
             const label = createDiv({
                 className: `label label-release ${release.status}`,
             })
-            label.addEventListener('mouseenter', event => {
-                event.target.parentElement.className = 'release active'
-            })
-            label.addEventListener('mouseleave', event => {
-                event.target.parentElement.className = 'release'
-            })
+            // label.addEventListener('mouseenter', event => {
+            //     event.target.parentElement.className = 'release active'
+            // })
+            // label.addEventListener('mouseleave', event => {
+            //     event.target.parentElement.className = 'release'
+            // })
             const span = document.createElement('span')
             span.append(document.createTextNode(release.name))
             label.append(span)
@@ -234,7 +234,7 @@ export const CalendarReleases = {
         // Current Date
         createCurrenDate(timeline, config)
         // Legend Text
-        createLegendText(timeline)
+        // createLegendText(timeline)
         // Legend size
         updateLegend(timeline)
     }

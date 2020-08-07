@@ -591,6 +591,14 @@ body.dark {
       background: $dark-highlight-background;
     }
   }
-
+  .release-learn {
+    background: $dark-highlight-background;
+  }
+  .compass .project-content a.button {
+    color: white;
+    &:hover {
+      color: $dark-background;
+    }
+  }
   @import 'prettify';
 }

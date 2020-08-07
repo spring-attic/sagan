@@ -294,9 +294,32 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <p class="center"><a class="project-commercial" href="https://tanzu.vmware.com/spring-runtime">Learn more about commercial support.</a></p>
-                                    <p class="caption">* This page shows the current state of project releases and does not define the commercial support policy.<br>
-                                        Please refer to the official support policy for more information. [TO BE UPDATED]</p>
+
+                                    <div class="release-legend">
+                                        <div class="legend-block oss">
+                                            <h3>OSS support</h3>
+                                            <p>Free security updates and bugfixes with support from the Spring community</p>
+                                        </div>
+                                        <div class="legend-block commercial">
+                                            <h3>Commercial support</h3>
+                                            <p>Business support from Spring experts during the OSS timeline, plus extended support after OSS End-Of-Life.<br />
+                                                Publicly available releases for critical bugfixes and security issues when requested by customers.</p>
+                                        </div>
+                                        <div class="legend-block future">
+                                            <h3>Future release</h3>
+                                            <p>Generation not yet released, timeline is subject to changes.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="release-learn">
+                                        <h2>About commercial support</h2>
+                                        <div>This page shows the current state of project releases and does not define the commercial support policy.
+                                            Please refer to the official support policy for more information. [TO BE UPDATED]</div>
+                                        <div class="release-learn-action">
+                                            <a class="button uppercase transparent animate" href="https://tanzu.vmware.com/spring-runtime">Learn more about commercial support.</a>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <div id="samples" th:if="${project.hasSamples()}" class="tab-pane">

@@ -65,7 +65,7 @@ $future: #c1edff;
   }
 
   .timeline {
-    margin: 2rem 0 160px 100px;
+    margin: 2rem 0 2rem 2rem;
     padding: 0 0 2rem;
     position: relative;
 
@@ -168,8 +168,12 @@ $future: #c1edff;
       .plop-active {
         background: $active;
         z-index: 1;
+        height: 14px;
+        top: 12px;
         &.coming {
           background: $future;
+          height: 26px;
+          top: 0px;
         }
       }
 
@@ -273,52 +277,81 @@ $future: #c1edff;
       }
     }
 
-    .legend {
+  }
+}
+
+.release-legend {
+  // position: absolute;
+  // bottom: -150px;
+  // left: 0;
+  // right: 0;
+  text-align: left;
+  > div {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    padding-right: 20px;
+    white-space: nowrap;
+    font-size: 14px;
+    margin: .6rem 0;
+    &:before {
+      content: '';
       position: absolute;
-      bottom: -150px;
+      height: 20px;
+      width: 20px;
       left: 0;
-      right: 0;
-      text-align: left;
+      background: #ecf2f2;
+    }
 
-      > div {
-        display: block;
-        position: relative;
-        padding-left: 30px;
-        padding-right: 20px;
-        white-space: nowrap;
-        font-size: 14px;
-        margin: .6rem 0;
-        &:before {
-          content: '';
-          position: absolute;
-          height: 20px;
-          width: 20px;
-          left: 0;
-          background: #ecf2f2;
-        }
+    p, h3 {
+      margin: 0;
+      padding: 0;
+    }
 
-        div.title {
-          font-weight: bold;
-        }
+    div.title {
+      font-weight: bold;
+    }
 
-        &.oss {
-          &:before {
-            background: $active;
-          }
-        }
-
-        &.commercial {
-          &:before {
-            background: $migrate;
-          }
-        }
-
-        &.future {
-          &:before {
-            background: $future;
-          }
-        }
+    &.oss {
+      &:before {
+        background: $active;
       }
     }
+
+    &.commercial {
+      &:before {
+        background: $migrate;
+      }
+    }
+
+    &.future {
+      &:before {
+        background: $future;
+      }
+    }
+  }
+}
+
+.release-learn {
+  background: #ebf2f2;
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  position: relative;
+  text-align: center;
+  h2 {
+    margin: 0;
+    padding-bottom: 6px;
+    text-align: center;
+  }
+  .release-learn-action {
+    padding-top: 10px;
+    text-align: center;
+  }
+}
+
+.compass .project-content a.button {
+  color: rgb(25, 30, 30);
+  &:hover {
+    color: white;
   }
 }
