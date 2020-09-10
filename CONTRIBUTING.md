@@ -30,7 +30,7 @@ If you're not already familiar, GitHub's [`hub`](http://hub.github.com) utility 
     # but the following is only possible with hub--
     # it will submit the changes in my-feature-branch
     # by converting issue #123 into a pull request. Win.
-    git pull-request -i 123
+    hub pull-request -i 123
 
 Besides being really convenient, the Sagan development team heavily uses this feature of `hub` to avoid creating extra issues. We'll create an issue, discuss it, and then at some point submit a pull request against it as above. This way, everything about that change is in one place, neat and tidy.
 
