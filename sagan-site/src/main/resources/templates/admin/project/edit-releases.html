@@ -64,10 +64,10 @@
                 <tbody>
                 <tr th:each="release,releaseStat : ${project.releases}">
                     <input type="hidden" name="id" th:field="*{releases[__${releaseStat.index}__].id}">
+                    <input class="input" type="hidden" th:field="*{releases[__${releaseStat.index}__].version}"/>
                     <td><input class="checkbox" type="checkbox"
                                th:field="*{releases[__${releaseStat.index}__].toDelete}"/></td>
-                    <td><input class="input" type="text"
-                               th:field="*{releases[__${releaseStat.index}__].version}"/></td>
+                    <td><span th:text="*{releases[__${releaseStat.index}__].version}"></span></td>
                     <td><input class="input" type="text"
                                th:field="*{releases[__${releaseStat.index}__].refDocUrl}"/></td>
                     <td><input class="input" type="text"
