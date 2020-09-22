@@ -61,7 +61,7 @@
                           <div class="related_resources">
                               <h3><a name="projects" class="anchor" href="#projects"></a>Projects</h3>
                               <ul>
-                                  <li th:each="project : ${projects}"><a th:href="${project.siteUrl}" th:text="${project.name}">Spring Framework</a></li>
+                                  <li th:each="project : ${projects}"><a th:href="${project.display.siteUrl}" th:text="${project.name}">Spring Framework</a></li>
                               </ul>
                           </div>
                       </div>
