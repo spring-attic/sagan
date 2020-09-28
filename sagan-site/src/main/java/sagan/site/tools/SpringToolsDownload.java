@@ -19,6 +19,9 @@ public class SpringToolsDownload {
 	@Column(nullable = false)
 	private String label;
 
+	@Column(nullable = false)
+	private String version;
+
 	public SpringToolsDownload() {
 		
 	}
@@ -30,7 +33,7 @@ public class SpringToolsDownload {
 	}
 
 	public String getDownloadUrl() {
-		return downloadUrl;
+		return this.downloadUrl;
 	}
 
 	public void setDownloadUrl(String downloadUrl) {
@@ -38,7 +41,7 @@ public class SpringToolsDownload {
 	}
 
 	public String getVariant() {
-		return variant;
+		return this.variant;
 	}
 
 	public void setVariant(String variant) {
@@ -46,11 +49,19 @@ public class SpringToolsDownload {
 	}
 
 	public String getLabel() {
-		return label;
+		return this.label;
 	}
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 	@Override
@@ -58,6 +69,8 @@ public class SpringToolsDownload {
 		return "SpringToolsDownload{" +
 				"downloadUrl='" + downloadUrl + '\'' +
 				", variant='" + variant + '\'' +
+				", label='" + label + '\'' +
+				", version='" + version + '\'' +
 				'}';
 	}
 }

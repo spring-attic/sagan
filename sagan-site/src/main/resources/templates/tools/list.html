@@ -24,7 +24,7 @@
                     <p class='mw-240 mb-2'>The all-new Spring Tool Suite 4. Free. Open source.</p>
                     <a class='button uppercase transparent animate block center w-220 ws-nowrap mb-1 px-0'
                        th:each="download : ${eclipse.downloads}"
-                       th:href="${download.downloadUrl}" th:text="${download.label}">STS4 Linux 64-bit</a>
+                       th:href="${download.downloadUrl}" th:text="|${download.version} ${download.label}|">v4.5 STS4 Linux 64-bit</a>
                 </div>
                 <div class='right rel as-fs'>
                     <img th:src="@{/images/eclipse-shot.jpg}" alt=''>
@@ -38,7 +38,7 @@
                     <p class=''>Free. Open source.</p>
                     <a class='button transparent animate center w-220 ws-nowrap px-0'
                        th:each="download : ${vscode.downloads}"
-                       th:href="${download.downloadUrl}"><strong>Spring Tools 4</strong><br><span class='smaller thin tt-none'>VSCode Marketplace</span></a>
+                       th:href="${download.downloadUrl}"><strong th:text="|${download.label} ${download.version}|">Spring Tools 4</strong><br><span class='smaller thin tt-none'>VSCode Marketplace</span></a>
                 </div>
                 <div class='right rel as-fs'>
                     <img th:src="@{/images/vs-shot.jpg}" alt=''>
@@ -51,7 +51,7 @@
                     <h2 class='h2 antialiased m-0'>Spring Tools 4 for Theia</h2>
                     <p class=''>Free. Open source.</p>
                     <a class='button transparent animate center w-220 ws-nowrap px-0'
-                       th:each="download : ${theia.downloads}" th:href="${download.downloadUrl}"><strong>Spring Tools 4</strong><br><span class='smaller thin tt-none'>Installation for Theia</span></a>
+                       th:each="download : ${theia.downloads}" th:href="${download.downloadUrl}"><strong th:text="|${download.label} ${download.version}|">Spring Tools 4</strong><br><span class='smaller thin tt-none'>Installation for Theia</span></a>
                 </div>
                 <div class='right rel as-fs'>
                     <img th:src="@{/images/theia-shot.jpg}" alt=''>
