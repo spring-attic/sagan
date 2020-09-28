@@ -50,11 +50,6 @@
                               <div class="go-to-repo--container">
                                   <a th:href="${guide.githubUrl}"><i class="fab fa-github"></i>Go To Repo</a>
                               </div>
-                              <div class="go-to-repo--container">
-                                  <a th:if="${guide.pushToPwsUrl}" th:href="${guide.pushToPwsUrl}">
-                                      <img src="https://push-to.cfapps.io/ui/assets/images/Push-to-Pivotal-Dark.svg" width="300" alt="Push">
-                                  </a>
-                              </div>
                           </div>
                       </div>
                       <div class="right-pane-widget--container" th:if="${not #lists.isEmpty(projects)}">
