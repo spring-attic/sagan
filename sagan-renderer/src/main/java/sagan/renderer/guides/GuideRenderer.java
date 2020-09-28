@@ -37,8 +37,8 @@ class GuideRenderer {
 		this.contributors = contributors;
 	}
 
-	GuideContentResource render(GuideType type, String guideName) {
-		GuideContentResource guideContent = new GuideContentResource();
+	GuideContentModel render(GuideType type, String guideName) {
+		GuideContentModel guideContent = new GuideContentModel();
 		guideContent.setName(guideName);
 		String repositoryName = type.getPrefix() + guideName;
 		String org = this.properties.getGuides().getOrganization();

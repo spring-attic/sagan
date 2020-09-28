@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import sagan.renderer.guides.GuideContentResource;
+import sagan.renderer.guides.GuideContentModel;
 import sagan.renderer.guides.GuideRenderingException;
 
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class PwsGuideContentContributor implements GuideContentContributor {
 	private static final String PWS_METADATA_FILENAME = "push-to-pws" + File.separator + "button.yml";
 
 	@Override
-	public void contribute(GuideContentResource guideContent, File repositoryRoot) {
+	public void contribute(GuideContentModel guideContent, File repositoryRoot) {
 		try {
 			File pushToPwsMetadataFile = new File(
 					repositoryRoot.getAbsolutePath() + File.separator + PWS_METADATA_FILENAME);

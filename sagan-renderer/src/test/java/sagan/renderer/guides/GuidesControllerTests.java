@@ -3,8 +3,7 @@ package sagan.renderer.guides;
 import java.util.Arrays;
 
 import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import sagan.renderer.github.GithubClient;
 import sagan.renderer.github.GithubResourceNotFoundException;
 import sagan.renderer.github.Repository;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.JsonPathExpectationsHelper;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -31,7 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Tests for {@link GuidesController}
  */
-@RunWith(SpringRunner.class)
 @WebMvcTest(GuidesController.class)
 public class GuidesControllerTests {
 
@@ -142,7 +139,7 @@ public class GuidesControllerTests {
 
 	@Test
 	public void fetchGuideContent() throws Exception {
-		GuideContentResource content = new GuideContentResource("rest-service", "content", "toc");
+		GuideContentModel content = new GuideContentModel("rest-service", "content", "toc");
 		content.setPushToPwsMetadata("repository: https://github.com/spring-guides/gs-rest-service.git\n" +
 				"directory: complete\n" +
 				"path: /greeting");

@@ -2,15 +2,15 @@ package sagan.renderer.guides;
 
 import sagan.renderer.github.Repository;
 
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.core.Relation;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 /**
  * A Spring Guide ("Getting started guide", "Topical guide" or "Tutorial")
  * is a document for learning Spring technologies, backed by a Github repository.
  */
 @Relation(collectionRelation = "guides")
-class GuideResource extends ResourceSupport {
+class GuideModel extends RepresentationModel<GuideModel> {
 
 	private String name;
 
@@ -32,7 +32,7 @@ class GuideResource extends ResourceSupport {
 
 	private String[] projects;
 
-	GuideResource(Repository repository) {
+	GuideModel(Repository repository) {
 		this.type = GuideType.fromRepositoryName(repository.getName());
 		this.name = this.type.stripPrefix(repository.getName());
 		this.repositoryName = repository.getFullName();

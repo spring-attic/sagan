@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.asciidoctor.Asciidoctor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import sagan.renderer.RendererProperties;
 import sagan.renderer.github.GithubClient;
 import sagan.renderer.guides.content.AsciidoctorGuideContentContributor;
@@ -27,7 +27,7 @@ public class GuideRendererTests {
 
 	private RendererProperties properties;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		this.properties = new RendererProperties();
 		this.githubClient = mock(GithubClient.class);
@@ -40,7 +40,7 @@ public class GuideRendererTests {
 	public void renderAsciidoctorContent() throws Exception {
 		given(this.githubClient.downloadRepositoryAsZipball("spring-guides", "gs-sample"))
 				.willReturn(readAsBytes("gs-sample.zip"));
-		GuideContentResource result = this.renderer.render(GuideType.GETTING_STARTED, "sample");
+		GuideContentModel result = this.renderer.render(GuideType.GETTING_STARTED, "sample");
 		assertThat(result.getName()).isEqualTo("sample");
 		assertThat(result.getContent()).contains("<p>This is a sample guide.</p>")
 				.contains("<!-- rendered by Sagan Renderer Service -->");
@@ -51,7 +51,7 @@ public class GuideRendererTests {
 	public void renderImages() throws Exception {
 		given(this.githubClient.downloadRepositoryAsZipball("spring-guides", "gs-sample"))
 				.willReturn(readAsBytes("gs-sample.zip"));
-		GuideContentResource result = this.renderer.render(GuideType.GETTING_STARTED, "sample");
+		GuideContentModel result = this.renderer.render(GuideType.GETTING_STARTED, "sample");
 		assertThat(result.getName()).isEqualTo("sample");
 		assertThat(result.getImages())
 				.anySatisfy(image -> {
@@ -68,7 +68,7 @@ public class GuideRendererTests {
 	public void renderSampleGuideWithPwsMetadata() throws Exception {
 		given(this.githubClient.downloadRepositoryAsZipball("spring-guides", "gs-sample"))
 				.willReturn(readAsBytes("gs-sample-pws.zip"));
-		GuideContentResource result = this.renderer.render(GuideType.GETTING_STARTED, "sample");
+		GuideContentModel result = this.renderer.render(GuideType.GETTING_STARTED, "sample");
 		assertThat(result.getName()).isEqualTo("sample");
 		assertThat(result.getContent()).contains("<p>This is a sample guide.</p>")
 				.contains("<!-- rendered by Sagan Renderer Service -->");

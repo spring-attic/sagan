@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sagan.renderer.guides.GuideContentResource;
+import sagan.renderer.guides.GuideContentModel;
 import sagan.renderer.guides.GuideImage;
 
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class ImagesGuideContentContributor implements GuideContentContributor {
 	private static final String IMAGES_DIRECTORY = "images";
 
 	@Override
-	public void contribute(GuideContentResource guideContent, File repositoryRoot) {
+	public void contribute(GuideContentModel guideContent, File repositoryRoot) {
 		File imagesDir = new File(repositoryRoot.getAbsolutePath() + File.separator + IMAGES_DIRECTORY);
 		if (imagesDir.isDirectory()) {
 			Base64.Encoder encoder = Base64.getEncoder();

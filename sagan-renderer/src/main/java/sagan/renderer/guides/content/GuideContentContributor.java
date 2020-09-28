@@ -2,7 +2,7 @@ package sagan.renderer.guides.content;
 
 import java.io.File;
 
-import sagan.renderer.guides.GuideContentResource;
+import sagan.renderer.guides.GuideContentModel;
 
 /**
  * Contribute information to the Guide content.
@@ -14,6 +14,6 @@ public interface GuideContentContributor {
 	 * @param guideContent the guide content to contribute to
 	 * @param repositoryRoot the unzipped repository root folder
 	 */
-	void contribute(GuideContentResource guideContent, File repositoryRoot);
+	void contribute(GuideContentModel guideContent, File repositoryRoot);
 
 }

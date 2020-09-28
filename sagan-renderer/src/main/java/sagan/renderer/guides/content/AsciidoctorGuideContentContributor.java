@@ -12,7 +12,7 @@ import org.asciidoctor.SafeMode;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import sagan.renderer.guides.GuideContentResource;
+import sagan.renderer.guides.GuideContentModel;
 import sagan.renderer.guides.GuideRenderingException;
 
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public class AsciidoctorGuideContentContributor implements GuideContentContribut
 	}
 
 	@Override
-	public void contribute(GuideContentResource guideContent, File repositoryRoot) {
+	public void contribute(GuideContentModel guideContent, File repositoryRoot) {
 		try {
 			Attributes attributes = new Attributes();
 			attributes.setAllowUriRead(true);

@@ -2,12 +2,12 @@ package sagan.renderer.guides;
 
 import java.util.List;
 
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.RepresentationModel;
 
 /**
  * Spring guide content holder.
  */
-public class GuideContentResource extends ResourceSupport {
+public class GuideContentModel extends RepresentationModel {
 
 	private String name;
 
@@ -19,13 +19,13 @@ public class GuideContentResource extends ResourceSupport {
 
 	private List<GuideImage> images;
 
-	GuideContentResource(String name, String content, String tableOfContents) {
+	GuideContentModel(String name, String content, String tableOfContents) {
 		this.name = name;
 		this.content = content;
 		this.tableOfContents = tableOfContents;
 	}
 
-	GuideContentResource() { }
+	GuideContentModel() { }
 
 	public String getName() {
 		return name;

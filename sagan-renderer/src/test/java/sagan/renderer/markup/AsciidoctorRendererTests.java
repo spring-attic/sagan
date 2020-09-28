@@ -1,8 +1,8 @@
 package sagan.renderer.markup;
 
 import org.asciidoctor.Asciidoctor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import org.springframework.http.MediaType;
 
@@ -16,7 +16,7 @@ public class AsciidoctorRendererTests {
 
 	private AsciidoctorRenderer converter;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		converter = new AsciidoctorRenderer(Asciidoctor.Factory.create());
 	}
@@ -35,7 +35,7 @@ public class AsciidoctorRendererTests {
 				"```";
 		String rendered = converter.renderToHtml(markdown);
 		assertThat(rendered).contains("<pre class=\"prettyprint highlight\">")
-				.contains("<code class=\"language-java\"");
+				.contains("<code data-lang=\"java\"");
 	}
 
 	@Test

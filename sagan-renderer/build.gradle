@@ -1,9 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'org.springframework.boot' version '2.3.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 }
-
-apply plugin: 'io.spring.dependency-management'
 
 group = 'io.spring.sagan'
 version = "1.0.0.BUILD-SNAPSHOT"
@@ -20,16 +19,23 @@ bootJar {
 
 dependencies {
 	implementation 'org.pegdown:pegdown:1.6.0'
-	implementation('org.asciidoctor:asciidoctorj:1.6.2') {
+	implementation('org.asciidoctor:asciidoctorj:2.4.1') {
 		exclude group: 'org.jruby'
 	}
-	implementation 'org.jruby:jruby-complete:9.2.7.0'
-	implementation 'org.jsoup:jsoup:1.11.3'
+	implementation 'org.jruby:jruby-complete:9.2.13.0'
+	implementation 'org.jsoup:jsoup:1.13.1'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 	compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 	runtimeOnly 'org.springframework.boot:spring-boot-starter-actuator'
-	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
 }
 

@@ -1,10 +1,8 @@
 package sagan.renderer.github;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import sagan.renderer.RendererProperties;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +11,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.util.Base64Utils;
 import org.springframework.util.StreamUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,7 +22,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 /**
  * Tests for {@link GithubClient}
  */
-@RunWith(SpringRunner.class)
 @RestClientTest({GithubClient.class, RendererProperties.class})
 @TestPropertySource(properties = "sagan.renderer.github.token=testtoken")
 public class GithubClientTests {
@@ -52,7 +47,7 @@ public class GithubClientTests {
 				.andExpect(header(HttpHeaders.ACCEPT, GITHUB_PREVIEW.toString()))
 				.andRespond(withSuccess(getClassPathResource("gs-rest-service.json"), GITHUB_PREVIEW));
 		Repository repository = this.client.fetchOrgRepository(org, repo);
-		assertThat(repository).extracting("name").containsOnly("gs-rest-service");
+		assertThat(repository).extracting("name").isEqualTo("gs-rest-service");
 	}
 
 	@Test
@@ -92,7 +87,7 @@ public class GithubClientTests {
 		List<Repository> repositories = this.client.fetchOrgRepositories(org);
 		assertThat(repositories).hasSize(5)
 				.extracting("name")
-				.containsExactlyInAnyOrder("gs-rest-service","gs-scheduling-tasks",
+				.containsExactlyInAnyOrder("gs-rest-service", "gs-scheduling-tasks",
 						"gs-consuming-rest", "gs-relational-data-access", "deprecate-gs-device-detection");
 
 	}
