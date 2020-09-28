@@ -24,6 +24,7 @@ import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpClientErrorException;
@@ -109,10 +110,13 @@ public class GithubClient {
 	 */
 	public Repository fetchOrgRepository(String organization, String repositoryName) {
 		try {
-			return this.restTemplate
+			Repository repository = this.restTemplate
 					.getForObject(REPO_INFO_PATH, Repository.class, organization, repositoryName);
+			Assert.state(repository.getFullName().contains(repositoryName),
+					() -> "Repository [" + repositoryName + "] redirected to [" + repository.getFullName() + "]");
+			return repository;
 		}
-		catch (HttpClientErrorException ex) {
+		catch (HttpClientErrorException | IllegalStateException ex) {
 			throw new GithubResourceNotFoundException(organization, repositoryName, ex);
 		}
 	}

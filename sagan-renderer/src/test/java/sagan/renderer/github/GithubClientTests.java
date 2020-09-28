@@ -15,6 +15,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.util.StreamUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.header;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -48,6 +49,22 @@ public class GithubClientTests {
 				.andRespond(withSuccess(getClassPathResource("gs-rest-service.json"), GITHUB_PREVIEW));
 		Repository repository = this.client.fetchOrgRepository(org, repo);
 		assertThat(repository).extracting("name").isEqualTo("gs-rest-service");
+	}
+
+	@Test
+	public void downloadRepositoryInfoRedirected() {
+		String org = "spring-guides";
+		String repo = "gs-redirected";
+		String expectedUrl = String.format("/repos/%s/%s", org, repo);
+		String authorization = getAuthorizationHeader();
+		this.server.expect(requestTo(expectedUrl))
+				.andExpect(header(HttpHeaders.AUTHORIZATION, authorization))
+				.andExpect(header(HttpHeaders.ACCEPT, GITHUB_PREVIEW.toString()))
+				.andRespond(withSuccess(getClassPathResource("gs-rest-service.json"), GITHUB_PREVIEW));
+		assertThatThrownBy(() -> this.client.fetchOrgRepository(org, repo))
+				.isInstanceOf(GithubResourceNotFoundException.class)
+				.hasMessage("Could not find github repository [spring-guides/gs-redirected]")
+				.getCause().hasMessage("Repository [gs-redirected] redirected to [spring-guides/gs-rest-service]");
 	}
 
 	@Test
