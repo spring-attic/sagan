@@ -52,7 +52,7 @@ public class BlogController_BroadcastPostsTests {
         List<Post> posts = new ArrayList<>();
         post = PostBuilder.post().title("post title").build();
         posts.add(post);
-        Page<Post> postsPage = new PageImpl<>(posts, new PageRequest(TEST_PAGE, 10), 20);
+        Page<Post> postsPage = new PageImpl<>(posts, PageRequest.of(TEST_PAGE, 10), 20);
         Pageable testPageable = PageableFactory.forLists(TEST_PAGE);
 
         page = new PageImpl<>(new ArrayList<>(), testPageable, 1);

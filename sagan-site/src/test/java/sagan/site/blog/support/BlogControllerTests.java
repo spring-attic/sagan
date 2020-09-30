@@ -39,7 +39,7 @@ public class BlogControllerTests {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        PageImpl<Post> page = new PageImpl<>(Collections.<Post> emptyList(), new PageRequest(1, 1), 1);
+        PageImpl<Post> page = new PageImpl<>(Collections.<Post> emptyList(), PageRequest.of(1, 1), 1);
         given(blogService.getPublishedPostsByDate(anyInt(), any(Pageable.class))).willReturn(page);
         given(blogService.getPublishedPostsByDate(anyInt(), anyInt(), any(Pageable.class))).willReturn(page);
         given(blogService.getPublishedPostsByDate(anyInt(), anyInt(), anyInt(), any(Pageable.class))).willReturn(

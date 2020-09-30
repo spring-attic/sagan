@@ -41,7 +41,8 @@ public class SpringToolsAdminController {
 
 	@GetMapping("{id}")
 	public String edit(@PathVariable String id, Model model) {
-		SpringToolsPlatform platform = this.repository.findOne(id);
+		SpringToolsPlatform platform = this.repository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Could not find platform: " + id));
 		return edit(platform, model);
 	}
 
@@ -73,7 +74,7 @@ public class SpringToolsAdminController {
 
 	@DeleteMapping("{id}")
 	public String delete(@PathVariable String id) {
-		this.repository.delete(id);
+		this.repository.deleteById(id);
 		return "redirect:./";
 	}
 }

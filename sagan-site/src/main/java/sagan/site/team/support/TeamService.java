@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import sagan.site.team.MemberProfile;
+import sagan.support.ResourceNotFoundException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -30,7 +31,7 @@ public class TeamService {
     }
 
     public MemberProfile fetchMemberProfile(Long id) {
-        return teamRepository.findById(id);
+        return teamRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Member not found for id: " + id));
     }
 
     public MemberProfile fetchMemberProfileUsername(String username) {

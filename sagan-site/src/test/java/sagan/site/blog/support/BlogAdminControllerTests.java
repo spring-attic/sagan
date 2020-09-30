@@ -16,6 +16,7 @@ import sagan.site.team.support.TeamRepository;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -112,7 +113,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(member);
+        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
         PostForm postForm = new PostForm();
 
         given(blogService.addPost(eq(postForm), anyString())).willReturn(TEST_POST);
@@ -127,7 +128,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(member);
+        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
 
         PostForm postForm = new PostForm();
         postForm.setTitle("title");
@@ -148,7 +149,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(member);
+        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
 
         PostForm postForm = new PostForm();
         postForm.setTitle("title");
@@ -172,7 +173,7 @@ public class BlogAdminControllerTests {
         Page<Post> posts = new PageImpl<>(
                 Arrays.asList(new Post("published post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN),
                         new Post("another published post", "other body", PostCategory.NEWS_AND_EVENTS, PostFormat.MARKDOWN)),
-                new PageRequest(page, pageSize, Sort.Direction.DESC, "id"), 2);
+                PageRequest.of(page, pageSize, Sort.Direction.DESC, "id"), 2);
         given(blogService.refreshPosts(page, pageSize)).willReturn(posts);
         String result = controller.refreshBlogPosts(page, pageSize);
         assertThat(result, equalTo("{page: 0, pageSize: 20, totalPages: 1, totalElements: 2}"));
