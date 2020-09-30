@@ -5,7 +5,6 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import sagan.support.ResourceNotFoundException;
 import sagan.support.StaticPagePathFinder;
 import sagan.support.nav.Navigation;
@@ -176,11 +175,6 @@ class CloudFoundryMvcConfig extends MvcConfig {
 				.resourceChain(true)
 				.addResolver(versionResourceResolver);
 
-	}
-
-	@Bean
-	public ThymeleafViewResolverCustomizer thymeleafViewResolverCustomizer(ThymeleafViewResolver viewResolver) {
-		return new ThymeleafViewResolverCustomizer(viewResolver, getGitCommitId());
 	}
 
 	@Bean
