@@ -5,17 +5,18 @@ import sagan.site.projects.ProjectGeneration;
 import sagan.site.webapi.project.ProjectMetadataController;
 
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 
 /**
  * @author Brian Clozel
  */
 @Component
-class GenerationMetadataAssembler extends ResourceAssemblerSupport<ProjectGeneration, GenerationMetadata> {
+class GenerationMetadataAssembler extends RepresentationModelAssemblerSupport<ProjectGeneration, GenerationMetadata> {
 
 	private final ModelMapper modelMapper;
 
@@ -29,7 +30,7 @@ class GenerationMetadataAssembler extends ResourceAssemblerSupport<ProjectGenera
 	}
 
 	@Override
-	public GenerationMetadata toResource(ProjectGeneration entity) {
+	public GenerationMetadata toModel(ProjectGeneration entity) {
 		GenerationMetadata generation = this.modelMapper.map(entity, GenerationMetadata.class);
 		Link selfLink = linkTo(methodOn(GenerationMetadataController.class).showRelease(entity.getProject().getId(), entity.getName())).withSelfRel();
 		generation.add(selfLink);

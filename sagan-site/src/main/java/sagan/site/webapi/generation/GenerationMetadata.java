@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.core.Relation;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 /**
  * 
  */
 @Relation(collectionRelation = "generations")
-public class GenerationMetadata extends ResourceSupport {
+public class GenerationMetadata extends RepresentationModel<GenerationMetadata> {
 
 	private String name;
 

@@ -4,12 +4,13 @@ import sagan.site.webapi.project.ProjectMetadataController;
 import sagan.site.webapi.repository.RepositoryMetadataController;
 
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 
 /**
  * Lists all resources at the root of the Web API
@@ -18,10 +19,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 class IndexController {
 
 	@GetMapping(path = "/api", produces = MediaTypes.HAL_JSON_VALUE)
-	public ResourceSupport index() {
-		ResourceSupport resource = new ResourceSupport();
-		resource.add(linkTo(methodOn(ProjectMetadataController.class).listProjects()).withRel("projects"));
-		resource.add(linkTo(methodOn(RepositoryMetadataController.class).listRepositories()).withRel("repositories"));
-		return resource;
+	public RepresentationModel index() {
+		return RepresentationModel.of(null).add(
+				linkTo(methodOn(ProjectMetadataController.class).listProjects()).withRel("projects"),
+				linkTo(methodOn(RepositoryMetadataController.class).listRepositories()).withRel("repositories")
+		);
 	}
 }

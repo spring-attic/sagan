@@ -4,17 +4,17 @@ import org.modelmapper.ModelMapper;
 import sagan.site.projects.Release;
 import sagan.site.webapi.repository.RepositoryMetadataController;
 
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 /**
  *
  */
 @Component
-class ReleaseMetadataAssembler extends ResourceAssemblerSupport<Release, ReleaseMetadata> {
+class ReleaseMetadataAssembler extends RepresentationModelAssemblerSupport<Release, ReleaseMetadata> {
 
 	private final ModelMapper modelMapper;
 
@@ -28,10 +28,11 @@ class ReleaseMetadataAssembler extends ResourceAssemblerSupport<Release, Release
 	}
 
 	@Override
-	public ReleaseMetadata toResource(Release release) {
+	public ReleaseMetadata toModel(Release release) {
 		ReleaseMetadata releaseMetadata = this.modelMapper.map(release, ReleaseMetadata.class);
 		releaseMetadata.add(linkTo(methodOn(ReleaseMetadataController.class).showRelease(release.getProject().getId(), release.getVersion().toString())).withSelfRel());
 		releaseMetadata.add(linkTo(methodOn(RepositoryMetadataController.class).showRepository(release.getRepository().getId())).withRel("repository"));
 		return releaseMetadata;
 	}
+
 }

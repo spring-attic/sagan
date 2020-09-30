@@ -1,13 +1,13 @@
 package sagan.site.webapi.repository;
 
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.core.Relation;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 /**
  * 
  */
 @Relation(collectionRelation = "repositories")
-public class RepositoryMetadata extends ResourceSupport {
+public class RepositoryMetadata extends RepresentationModel<RepositoryMetadata> {
 
 	private String identifier;
 

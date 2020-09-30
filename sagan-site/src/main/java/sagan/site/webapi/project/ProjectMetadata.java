@@ -2,14 +2,15 @@ package sagan.site.webapi.project;
 
 import sagan.site.projects.SupportStatus;
 
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.core.Relation;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
+
 
 /**
  *
  */
 @Relation(collectionRelation = "projects")
-public class ProjectMetadata extends ResourceSupport {
+public class ProjectMetadata extends RepresentationModel<ProjectMetadata> {
 
 	private String name;
 

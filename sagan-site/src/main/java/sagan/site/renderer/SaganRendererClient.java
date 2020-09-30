@@ -8,9 +8,9 @@ import sagan.SiteProperties;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.client.Hop;
 import org.springframework.hateoas.client.Traverson;
 import org.springframework.http.HttpEntity;
@@ -22,8 +22,8 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class SaganRendererClient {
 
-	private static final ParameterizedTypeReference<Resources<GuideMetadata>> guidesResourceRef =
-			new ParameterizedTypeReference<Resources<GuideMetadata>>() {};
+	private static final ParameterizedTypeReference<CollectionModel<GuideMetadata>> guidesResourceRef =
+			new ParameterizedTypeReference<CollectionModel<GuideMetadata>>() {};
 
 	private static final MediaType TEXT_ASCIIDOC = MediaType.parseMediaType("text/asciidoc");
 

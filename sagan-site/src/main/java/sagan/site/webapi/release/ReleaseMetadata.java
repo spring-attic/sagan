@@ -2,14 +2,14 @@ package sagan.site.webapi.release;
 
 import sagan.site.projects.ReleaseStatus;
 
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.core.Relation;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 /**
  *
  */
 @Relation(collectionRelation = "releases")
-public class ReleaseMetadata extends ResourceSupport {
+public class ReleaseMetadata extends RepresentationModel<ReleaseMetadata> {
 
 	private String version;
 

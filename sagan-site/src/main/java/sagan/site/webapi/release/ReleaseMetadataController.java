@@ -11,10 +11,10 @@ import sagan.site.projects.Version;
 import sagan.site.webapi.project.ProjectMetadataController;
 import sagan.support.ResourceNotFoundException;
 
-import org.springframework.hateoas.ExposesResourceFor;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,8 +25,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 
 /**
  * Expose {@link ReleaseMetadata} resources.
@@ -46,17 +47,17 @@ public class ReleaseMetadataController {
 	}
 
 	@GetMapping("/projects/{projectId}/releases")
-	public Resources<ReleaseMetadata> listReleases(@PathVariable String projectId) {
+	public CollectionModel<ReleaseMetadata> listReleases(@PathVariable String projectId) {
 		Project project = this.metadataService.fetchFullProject(projectId);
 		if (project == null) {
 			throw new ResourceNotFoundException("Could not find releases for project: " + projectId);
 		}
-		List<ReleaseMetadata> releaseMetadata = this.resourceAssembler.toResources(project.getReleases());
-		Resources<ReleaseMetadata> resources = new Resources<>(releaseMetadata);
+		CollectionModel<ReleaseMetadata> releaseMetadata = this.resourceAssembler.toCollectionModel(project.getReleases());
+
 		project.getCurrentRelease().ifPresent(r ->
-				resources.add(linkTo(methodOn(ReleaseMetadataController.class).showCurrentRelease(project.getId())).withRel("current")));
-		resources.add(linkTo(methodOn(ProjectMetadataController.class).showProject(project.getId())).withRel("project"));
-		return resources;
+				releaseMetadata.add(linkTo(methodOn(ReleaseMetadataController.class).showCurrentRelease(project.getId())).withRel("current")));
+		releaseMetadata.add(linkTo(methodOn(ProjectMetadataController.class).showProject(project.getId())).withRel("project"));
+		return releaseMetadata;
 	}
 
 	@PostMapping(path = "/projects/{projectId}/releases", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -78,24 +79,24 @@ public class ReleaseMetadataController {
 	}
 
 	@GetMapping("/projects/{projectId}/releases/current")
-	public Resource<ReleaseMetadata> showCurrentRelease(@PathVariable String projectId) {
+	public EntityModel<ReleaseMetadata> showCurrentRelease(@PathVariable String projectId) {
 		Release release = this.metadataService.findCurrentRelease(projectId);
 		if (release == null) {
 			throw new ResourceNotFoundException("Could not find current release for project: " + projectId);
 		}
-		ReleaseMetadata releaseMetadata = this.resourceAssembler.toResource(release);
-		return new Resource(releaseMetadata);
+		ReleaseMetadata releaseMetadata = this.resourceAssembler.toModel(release);
+		return EntityModel.of(releaseMetadata);
 	}
 
 
 	@GetMapping("/projects/{projectId}/releases/{version}")
-	public Resource<ReleaseMetadata> showRelease(@PathVariable String projectId, @PathVariable String version) {
+	public EntityModel<ReleaseMetadata> showRelease(@PathVariable String projectId, @PathVariable String version) {
 		Release release = this.metadataService.findRelease(projectId, Version.of(version));
 		if (release == null) {
 			throw new ResourceNotFoundException("Could not find release for project: " + projectId + " and version: " + version);
 		}
-		ReleaseMetadata releaseMetadata = this.resourceAssembler.toResource(release);
-		return new Resource(releaseMetadata);
+		ReleaseMetadata releaseMetadata = this.resourceAssembler.toModel(release);
+		return EntityModel.of(releaseMetadata);
 	}
 
 	@DeleteMapping("/projects/{projectId}/releases/{version}")
