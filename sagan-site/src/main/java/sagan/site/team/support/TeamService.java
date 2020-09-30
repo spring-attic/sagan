@@ -3,12 +3,15 @@ package sagan.site.team.support;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import sagan.site.team.MemberProfile;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
+import javax.xml.bind.DatatypeConverter;
 
 /**
  * Service providing high-level, selectively cached data access and other
@@ -93,9 +96,15 @@ public class TeamService {
 
     private void updateAvatarUrlwithGravatar(MemberProfile profile) {
         if (!StringUtils.isEmpty(profile.getGravatarEmail())) {
-            Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-            String hashedEmail = encoder.encodePassword(profile.getGravatarEmail(), null);
-            profile.setAvatarUrl(String.format("https://gravatar.com/avatar/%s", hashedEmail));
+			try {
+				MessageDigest digest = MessageDigest.getInstance("MD5");
+				digest.update(profile.getGravatarEmail().getBytes());
+				String hashedEmail = DatatypeConverter.printHexBinary(digest.digest());
+            	profile.setAvatarUrl(String.format("https://gravatar.com/avatar/%s", hashedEmail));
+			}
+			catch (NoSuchAlgorithmException e) {
+				logger.error("Could not find MD5 MessageDigest");
+			}
         }
     }
 }
