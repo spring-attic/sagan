@@ -1,108 +1,73 @@
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.18.RELEASE'
-	}
-}
-
 plugins {
 	id 'java'
-	id "org.asciidoctor.convert" version "1.5.9.2"
-	id "com.gorylenko.gradle-git-properties" version "1.5.2"
+	id 'org.springframework.boot' version '2.3.4.RELEASE'
+	id "org.asciidoctor.convert" version '1.5.9.2'
+	id "com.gorylenko.gradle-git-properties" version '2.2.2'
 }
 
-apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 group = 'io.spring.sagan'
-version = "1.0.0.BUILD-SNAPSHOT"
+version = "1.0.0-SNAPSHOT"
 sourceCompatibility = '1.8'
 
 ext {
 	snippetsDir = file('build/generated-snippets')
 }
 
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
 repositories {
 	mavenCentral()
-}
-
-springBoot {
-    mainClass = 'sagan.SiteApplication'
-}
-
-dependencyManagement {
-	imports {
-		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Edgware.SR5")
-	}
 }
 
 dependencies {
     compile project(':sagan-client')
 
-	compile "org.springframework.boot:spring-boot-starter-web"
-	compile "org.springframework.boot:spring-boot-starter-hateoas"
-	compile 'com.jayway.jsonpath:json-path'
-	compile "org.springframework.boot:spring-boot-starter-actuator"
-	compile "org.springframework.boot:spring-boot-starter-data-redis"
-	compile "org.springframework.boot:spring-boot-starter-security"
-	compile "org.springframework.boot:spring-boot-devtools"
-	compile "org.springframework.security:spring-security-acl"
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compile 'org.hibernate:hibernate-java8'
-	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-
+	compile 'org.springframework.boot:spring-boot-starter-data-redis'
+	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.springframework.boot:spring-boot-starter-validation'
-
-	compile 'org.springframework.social:spring-social-github:1.0.0.M4'
-	compile 'org.springframework.boot:spring-boot-starter-security'
-
-	compile 'org.modelmapper:modelmapper:2.3.7'
+	compile 'org.springframework.boot:spring-boot-starter-hateoas'
+	compile 'org.springframework.boot:spring-boot-starter-actuator'
 
 	// for use in on-the-fly database setup and migrations
-	compile 'org.flywaydb:flyway-core:4.2.0'
+	compile 'org.flywaydb:flyway-core'
 	compile 'org.apache.httpcomponents:httpclient'
-
-	// jackson, for JSON and XML serialization
-	compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
-	compile "org.codehaus.woodstox:woodstox-core-asl:4.4.1"
+	compile 'org.modelmapper:modelmapper:2.3.8'
 	compile 'org.jsoup:jsoup:1.9.2'
 	compile 'joda-time:joda-time'
 	compile 'org.yaml:snakeyaml'
 	// for XML manipulation
-	compile 'org.xmlbeam:xmlprojector:1.4.8'
+	compile 'org.xmlbeam:xmlprojector:1.4.17'
 	// for use in generating blog atom feeds
-	compile 'com.rometools:rome:1.12.0'
+	compile 'com.rometools:rome:1.15.0'
 	// for use in serving redirects; see urlrewrite.xml
 	compile 'org.tuckey:urlrewritefilter:4.0.4'
-	// override Boot dependency management, since urlrewritefilter uses a more recent version
-	compile 'xml-apis:xml-apis:1.4.01'
 
 	// Thymeleaf is used as the template engine for serving HTML
 	compile "org.springframework.boot:spring-boot-starter-thymeleaf"
 	compile 'org.thymeleaf.extras:thymeleaf-extras-java8time'
 	compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
-	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
+	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
-	compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
-	compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
-
-	testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	// for CloudFoundry service binding
+	compile "io.pivotal.cfenv:java-cfenv-boot:2.2.2.RELEASE"
 
 	// datasource and connection pool dependencies
-	runtime 'org.postgresql:postgresql:9.4.1212'
-	runtime 'com.h2database:h2:1.4.200'
+	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'com.h2database:h2'
 
-	// for use of spring-test's MatcherAssertionErrors.*
-	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    // nekohtml is required for thymeleaf's LEGACYHTML5 mode
-    runtime 'net.sourceforge.nekohtml:nekohtml'
-
-    // for use in mocking http interactions
-    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
-    testCompile "org.springframework.boot:spring-boot-starter-test"
-
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
 
 test {
@@ -120,9 +85,4 @@ jar {
 	from ("${asciidoctor.outputDir}/html5") {
 		into 'static/restdocs'
 	}
-}
-
-clean.doFirst {
-    delete "${projectDir}/data/"
-    println "Deleted ${projectDir}/data/"
 }
