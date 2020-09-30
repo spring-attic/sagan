@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TeamRepository extends JpaRepository<MemberProfile, Long> {
-    MemberProfile findById(Long id);
 
     MemberProfile findByGithubId(Long githubId);
 

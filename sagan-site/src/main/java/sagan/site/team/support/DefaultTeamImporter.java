@@ -1,53 +1,111 @@
 package sagan.site.team.support;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.social.github.api.GitHub;
-import org.springframework.social.github.api.GitHubUser;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestOperations;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service
 public class DefaultTeamImporter implements TeamImporter {
 
 	private static final String API_URL_BASE = "https://api.github.com";
 
-    private final TeamService teamService;
-    private final String gitHubTeamId;
+	private final TeamService teamService;
+	private final String gitHubTeamId;
+	private final RestOperations rest;
 
-    @Autowired
-    public DefaultTeamImporter(TeamService teamService, @Value("${github.team.id}") String gitHubTeamId) {
-        this.teamService = teamService;
-        this.gitHubTeamId = gitHubTeamId;
-    }
+	@Autowired
+	public DefaultTeamImporter(TeamService teamService, @Value("${github.team.id}") String gitHubTeamId,
+			@Value("${github.access.token}") String gitHubAccessToken) {
+		this.teamService = teamService;
+		this.gitHubTeamId = gitHubTeamId;
+		this.rest = new RestTemplateBuilder().basicAuthentication(gitHubAccessToken, "").build();
+	}
 
-    @Transactional
-    public void importTeamMembers(GitHub gitHub) {
-        GitHubUser[] users = getGitHubUsers(gitHub);
-        List<Long> userIds = new ArrayList<>();
-        for (GitHubUser user : users) {
-            userIds.add(user.getId());
-            String userName = getNameForUser(user.getLogin(), gitHub);
+	@Transactional
+	public void importTeamMembers() {
+		GitHubUser[] users = getGitHubUsers();
+		List<Long> userIds = new ArrayList<>();
+		for (GitHubUser user : users) {
+			userIds.add(user.getId());
+			String userName = getNameForUser(user.getLogin());
 
-            teamService.createOrUpdateMemberProfile(user.getId(), user.getLogin(), user.getAvatarUrl(), userName);
-        }
-        teamService.showOnlyTeamMembersWithIds(userIds);
-    }
+			teamService.createOrUpdateMemberProfile(user.getId(), user.getLogin(), user.getAvatarUrl(), userName);
+		}
+		teamService.showOnlyTeamMembersWithIds(userIds);
+	}
 
-    private GitHubUser[] getGitHubUsers(GitHub gitHub) {
-        String membersUrl = API_URL_BASE + "/teams/{teamId}/members?per_page=100";
-        ResponseEntity<GitHubUser[]> entity =
-                gitHub.restOperations().getForEntity(membersUrl, GitHubUser[].class, gitHubTeamId);
-        return entity.getBody();
-    }
+	private GitHubUser[] getGitHubUsers() {
+		String membersUrl = API_URL_BASE + "/teams/{teamId}/members?per_page=100";
+		ResponseEntity<GitHubUser[]> entity =
+				this.rest.getForEntity(membersUrl, GitHubUser[].class, gitHubTeamId);
+		return entity.getBody();
+	}
 
-    public String getNameForUser(String username, GitHub gitHub) {
-        return gitHub.restOperations()
-                .getForObject(API_URL_BASE +"/users/{user}", GitHubUser.class, username)
-                .getName();
-    }
+	public String getNameForUser(String username) {
+		return this.rest
+				.getForObject(API_URL_BASE + "/users/{user}", GitHubUser.class, username)
+				.getName();
+	}
+}
+
+@SuppressWarnings("serial")
+@JsonIgnoreProperties(ignoreUnknown = true)
+class GitHubUser implements Serializable {
+	private Long id;
+	private String url;
+	private String login;
+	private String avatarUrl;
+	private String gravatarId;
+	private String name;
+	private String email;
+	private Date date;
+
+	public Long getId() { return id; }
+
+	public void setId(Long id) { this.id = id; }
+
+	public String getUrl() { return url; }
+
+	public void setUrl(String url) { this.url = url; }
+
+	/**
+	 * @return watcher's GitHub login
+	 */
+	public String getLogin() { return login; }
+
+	public void setLogin(String login) { this.login = login; }
+
+	@JsonProperty("avatar_url")
+	public String getAvatarUrl() { return avatarUrl; }
+
+	public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
+
+	@JsonProperty("gravatar_id")
+	public String getGravatarId() { return gravatarId; }
+
+	public void setGravatarId(String gravatarId) { this.gravatarId = gravatarId; }
+
+	public String getName() { return name; }
+
+	public void setName(String name) { this.name = name; }
+
+	public String getEmail() { return email; }
+
+	public void setEmail(String email) { this.email = email; }
+
+	public Date getDate() { return date; }
+
+	public void setDate(Date date) { this.date = date; }
 }

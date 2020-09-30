@@ -23,22 +23,6 @@ spring:
     hibernate:
       ddl_auto: none
 
-security:
-  basic:
-    enabled: false
-  require_ssl: false
-  ignored: 
-    - /lib/**
-    - /css/**
-    - /font-custom/**
-    - /img/**
-    - /500
-    - /404
-  headers:
-    hsts: domain
-  user:
-    password: ${ADMIN_PASSWORD:}
-
 github:
 
   # Credentials are based on users belonging to a particular GitHub team,
@@ -85,8 +69,6 @@ spring:
   profiles: staging,production
   resources:
     add-mappings: false
-security:
-  require_ssl: true
 server:
   compression:
     enabled: true
