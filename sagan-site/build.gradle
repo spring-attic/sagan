@@ -42,7 +42,6 @@ dependencies {
 	compile 'org.apache.httpcomponents:httpclient'
 	compile 'org.modelmapper:modelmapper:2.3.8'
 	compile 'org.jsoup:jsoup:1.9.2'
-	compile 'joda-time:joda-time'
 	compile 'org.yaml:snakeyaml'
 	// for XML manipulation
 	compile 'org.xmlbeam:xmlprojector:1.4.17'

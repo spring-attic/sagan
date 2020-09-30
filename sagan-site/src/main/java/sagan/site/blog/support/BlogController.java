@@ -9,11 +9,11 @@ import sagan.support.nav.Navigation;
 import sagan.support.nav.PageableFactory;
 import sagan.support.nav.PaginationInfo;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.joda.time.LocalDate;
-import org.joda.time.YearMonth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,6 +38,8 @@ import sagan.support.nav.Section;
 @RequestMapping("/blog")
 @Navigation(Section.BLOG)
 class BlogController {
+
+	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_DATE;
 
 	private final String ALL_POSTS_CATEGORY = "All Posts";
 	private final String BROADCASTS_CATEGORY = "Broadcasts";
@@ -93,8 +95,8 @@ class BlogController {
         Pageable pageRequest = PageableFactory.forLists(page);
         Page<Post> result = blogService.getPublishedPostsByDate(year, month, day, pageRequest);
 
-        LocalDate date = new LocalDate(year, month, day);
-        model.addAttribute("title", "Archive for " + date.toString("MMMM dd, yyyy"));
+		LocalDate date = LocalDate.of(year, month, day);
+        model.addAttribute("title", "Archive for " + date.format(DATE_FORMATTER));
 
         return renderListOfPosts(result, model, ALL_POSTS_CATEGORY);
     }
@@ -106,8 +108,8 @@ class BlogController {
 
         Pageable pageRequest = PageableFactory.forLists(page);
         Page<Post> result = blogService.getPublishedPostsByDate(year, month, pageRequest);
-        YearMonth yearMonth = new YearMonth(year, month);
-        model.addAttribute("title", "Archive for " + yearMonth.toString("MMMM yyyy"));
+		YearMonth yearMonth = YearMonth.of(year, month);
+        model.addAttribute("title", "Archive for " + yearMonth.format(DATE_FORMATTER));
         return renderListOfPosts(result, model, ALL_POSTS_CATEGORY);
     }
 
