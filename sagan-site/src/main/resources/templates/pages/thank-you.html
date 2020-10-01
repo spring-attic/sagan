@@ -1,23 +1,22 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'thankyou', ~{::div})}">
 <head>
     <title>Spring | Thank You</title>
     <meta property='og:title' content='Spring Thank You'/>
     <meta property='og:description' content='Tools that make Spring happen!'/>
 </head>
-<body id='thankyou'>
-<div layout:fragment="~{content}">
+<body>
+<div>
     <div id='hero' class='topics-banner mb-5'>
-        <img id='midshape' th:src="@{/images/header-microservices.svg}" alt=''>
+        <img id='midshape' data-th-src="@{/images/header-microservices.svg}" alt=''>
     </div>
     <div class='content' role='main'>
         <div class='container'>
             <h1 class='h1 antialiased mb-5'>Thank you</h1>
             <div class='item flex jc-between'>
                 <div class='logo flex jc-center'>
-                    <img class='as-fs ht-6 img-light' th:src="@{/images/logo-eclipse-ide.svg}" alt='Eclipse'>
-                    <img class='as-fs ht-6 img-dark' th:src="@{/images/logo-eclipse-white.svg}" alt='Eclipse'>
+                    <img class='as-fs ht-6 img-light' data-th-src="@{/images/logo-eclipse-ide.svg}" alt='Eclipse'>
+                    <img class='as-fs ht-6 img-dark' data-th-src="@{/images/logo-eclipse-white.svg}" alt='Eclipse'>
                 </div>
                 <div class='text'>
                     <p>The Spring Tool Suite 4 is built on top of the Eclipse platform, which is provided by the <a
@@ -31,9 +30,9 @@
             </div>
             <div class='item flex jc-between'>
                 <div class='logo flex jc-center'>
-                    <img class='as-fs max-ht-8' th:src="@{/images/logo-jetbrains.svg}" alt='JetBrains'>
+                    <img class='as-fs max-ht-8' data-th-src="@{/images/logo-jetbrains.svg}" alt='JetBrains'>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <img class='as-fs max-ht-8' th:src="@{/images/logo-intellij.svg}" alt='IntelliJ IDEA'>
+                    <img class='as-fs max-ht-8' data-th-src="@{/images/logo-intellij.svg}" alt='IntelliJ IDEA'>
                 </div>
                 <div class='text'>
                     <p>The Spring team uses <a class='link-animate blue' href="https://www.jetbrains.com/idea/">IntelliJ
@@ -45,8 +44,8 @@
             </div>
             <div class='item flex jc-between'>
                 <div class='logo flex jc-center'>
-                    <img class='as-fs img-light' th:src="@{/images/logo-jfrog-artifactory.png}" alt='JFrog Artifactory'>
-                    <img class='as-fs img-dark' width="230px" th:src="@{/images/logo-jfrog-artifactory-white.png}" alt='JFrog Artifactory'>
+                    <img class='as-fs img-light' data-th-src="@{/images/logo-jfrog-artifactory.png}" alt='JFrog Artifactory'>
+                    <img class='as-fs img-dark' width="230px" data-th-src="@{/images/logo-jfrog-artifactory-white.png}" alt='JFrog Artifactory'>
                 </div>
                 <div class='text'>
                     <p>The Spring team uses JFrog <a class='link-animate blue'
@@ -58,8 +57,8 @@
             </div>
             <div class='item flex jc-between'>
                 <div class='logo flex jc-center'>
-                    <img class='as-fs ht-6 img-light' th:src="@{/images/gradle-enterprise-dark-green-primary.svg}" alt='Gradle'>
-                    <img class='as-fs ht-6 img-dark' th:src="@{/images/gradle-enterprise-white.svg}" alt='Gradle'>
+                    <img class='as-fs ht-6 img-light' data-th-src="@{/images/gradle-enterprise-dark-green-primary.svg}" alt='Gradle'>
+                    <img class='as-fs ht-6 img-dark' data-th-src="@{/images/gradle-enterprise-white.svg}" alt='Gradle'>
                 </div>
                 <div class='text'>
                     <p>The Spring team uses <a class='blue link-animate' href="https://gradle.com/">Gradle
@@ -69,8 +68,8 @@
             </div>
             <div class='item flex jc-between'>
                 <div class='logo flex jc-center'>
-                    <img class='as-fs img-light' th:src="@{/images/logo-yourkit.png}" alt='YourKit'>
-                    <img class='as-fs img-dark' th:src="@{/images/logo-yourkit-black.png}" alt='YourKit'>
+                    <img class='as-fs img-light' data-th-src="@{/images/logo-yourkit.png}" alt='YourKit'>
+                    <img class='as-fs img-dark' data-th-src="@{/images/logo-yourkit-black.png}" alt='YourKit'>
                 </div>
                 <div class='text'>
                     <p>The Spring team uses the <a class='link-animate blue' href="http://yourkit.com/">Yourkit Java
@@ -81,8 +80,8 @@
             </div>
             <div class='item flex jc-between'>
                 <div class='logo as-fs'>
-                    <img id='bintray' class='block mx-auto img-light' th:src="@{/images/logo-jfrog-bintray.png}" alt='JFrog Bintray'>
-                    <img style="max-height: 70px" class='block mx-auto img-dark' th:src="@{/images/logo-jfrog-bintray-white.png}" alt='JFrog Bintray'>
+                    <img id='bintray' class='block mx-auto img-light' data-th-src="@{/images/logo-jfrog-bintray.png}" alt='JFrog Bintray'>
+                    <img style="max-height: 70px" class='block mx-auto img-dark' data-th-src="@{/images/logo-jfrog-bintray-white.png}" alt='JFrog Bintray'>
                 </div>
                 <div class='text'>
                     <p>The Spring team uses <a class='link-animate blue' href="Bintray">Bintray</a> for <a
@@ -92,8 +91,8 @@
             </div>
             <div class='item flex jc-between'>
                 <div class='logo flex jc-center'>
-                    <img class='as-fs img-light' th:src="@{/images/logo-structure101.png}" alt='Structure101'>
-                    <img class='as-fs img-dark' style="max-width: 170px" th:src="@{/images/logo-structure101-white.png}" alt='Structure101'>
+                    <img class='as-fs img-light' data-th-src="@{/images/logo-structure101.png}" alt='Structure101'>
+                    <img class='as-fs img-dark' style="max-width:170px" data-th-src="@{/images/logo-structure101-white.png}" alt='Structure101'>
                 </div>
                 <div class='text'>
                     <p>The Spring team uses <a class='blue link-animate' href="https://www.structure101.com">Structure101</a>
@@ -104,7 +103,7 @@
             </div>
             <div class='item flex jc-between'>
                 <div class='logo flex jc-center'>
-                    <img class='as-fs ht-6' th:src="@{/images/logo-asciidoctor.svg}" alt='Asciidoctor'>
+                    <img class='as-fs ht-6' data-th-src="@{/images/logo-asciidoctor.svg}" alt='Asciidoctor'>
                 </div>
                 <div class='text'>
                     <p>The Spring team uses <a class='blue link-animate' href="https://asciidoctor.org/">Asciidoctor</a>
@@ -113,8 +112,8 @@
             </div>
             <div class='item flex jc-between'>
                 <div class='logo flex jc-center'>
-                    <img class='as-fs ht-6 img-light' th:src="@{/images/logo-browserstack.svg}" alt='BrowserStack'>
-                    <img class='as-fs ht-6 img-dark' th:src="@{/images/logo-browserstack-white.svg}" alt='BrowserStack'>
+                    <img class='as-fs ht-6 img-light' data-th-src="@{/images/logo-browserstack.svg}" alt='BrowserStack'>
+                    <img class='as-fs ht-6 img-dark' data-th-src="@{/images/logo-browserstack-white.svg}" alt='BrowserStack'>
                 </div>
                 <div class='text'>
                     <p>The Spring team uses <a class='blue link-animate' href="https://www.browserstack.com">BrowserStack</a>

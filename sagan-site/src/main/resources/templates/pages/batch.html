@@ -1,14 +1,14 @@
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'batch', ~{::div})}">
 <head>
     <title>Spring | Batch</title>
     <meta property='og:title' content='Batch processing with Spring'/>
     <meta property='og:description' content='Spring Batch’s implementation of industry-standard processing patterns lets you build robust batch jobs on the JVM. Adding Spring Boot and other components from the Spring portfolio lets you build mission-critical batch applications.'/>
 </head>
 <body id='batch'>
-<div layout:fragment="~{content}">
+<div>
     <div id='hero' class='topics-banner mb-5'>
-        <div id="midshape" layout:include="svg/_shapes :: header-batch"></div>
+        <div id="midshape" data-th-insert="~{svg/_shapes :: header-batch}"></div>
     </div>
     <div class='content' role='Main'>
         <section class='container mb-5'>
@@ -27,8 +27,8 @@
                         </div>
                     </div>
                 </div>
-                <img class='as-fs topic-icon img-light' th:src="@{/images/batch.svg}" alt=''>
-                <img class='as-fs topic-icon img-dark' th:src="@{/images/batch-dark.svg}" alt=''>
+                <img class='as-fs topic-icon img-light' data-th-src="@{/images/batch.svg}" alt=''>
+                <img class='as-fs topic-icon img-dark' data-th-src="@{/images/batch-dark.svg}" alt=''>
             </div>
         </section>
         <section class='cornell container'>
@@ -39,8 +39,8 @@
                 <div class='right'>
                     <p class='mb-3'>Spring Batch is the de facto standard for batch processing on the JVM. Its implementation of common batch patterns, such as chunk-based processing and partitioning, lets you create high-performing, scalable batch applications that are resilient enough for your most mission-critical processes. Spring Boot provides an additional level of production-grade features to let you speed up the development of your batch processes.</p>
                     <a class='button animate uppercase mb-4' href='/guides/gs/batch-processing/'>Take the tutorial</a>
-                    <img class="img-light" th:src="@{/images/diagram-batch.svg}" alt='Batch processing with Spring diagram'>
-                    <img class="img-dark" th:src="@{/images/diagram-batch-dark.svg}" alt='Batch processing with Spring diagram'>
+                    <img class="img-light" data-th-src="@{/images/diagram-batch.svg}" alt='Batch processing with Spring diagram'>
+                    <img class="img-dark" data-th-src="@{/images/diagram-batch-dark.svg}" alt='Batch processing with Spring diagram'>
                 </div>
             </div>
         </section>
@@ -55,7 +55,7 @@
                             <p>Batch processing fits perfectly with cloud computing, and Infrastructure as a Service (IaaS), in particular. The ability to run applications in an on-demand, elastically scalable, and fault-tolerant manner are all cloud features that Spring Batch can use.</p>
                             <a class='blue link-animate lightbox' href='https://www.youtube.com/watch?v=t1Kwx8bXv4Y'>Why move batch to the cloud?</a>
                         </div>
-                        <div class='img' layout:include="svg/_icons-color :: icon-cloud"></div>
+                        <div class='img' data-th-insert="~{svg/_icons-color :: icon-cloud}"></div>
                     </div>
                 </div>
             </div>
@@ -77,8 +77,8 @@
                     <!-- <h2 class='h2'>This needs a title</h2> -->
                 </div>
                 <div class='right'>
-                    <img class='mb-3 img-light' th:src="@{/images/diagram-batch2.svg}" alt='Spring Batch diagram'>
-                    <img class='mb-3 img-dark' th:src="@{/images/diagram-batch2-dark.svg}" alt='Spring Batch diagram'>
+                    <img class='mb-3 img-light' data-th-src="@{/images/diagram-batch2.svg}" alt='Spring Batch diagram'>
+                    <img class='mb-3 img-dark' data-th-src="@{/images/diagram-batch2-dark.svg}" alt='Spring Batch diagram'>
                     <div class='flex jc-between'>
                         <div class='col third'>
                             <div class='item mb-3'>
@@ -142,7 +142,7 @@
                 <div class='flex jc-between'>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=J6IPlfm7N6w'>
-                            <img th:src="@{/images/batch-vod1.jpg}" alt='Play "High-Performance Batch Processing" on YouTube'>
+                            <img data-th-src="@{/images/batch-vod1.jpg}" alt='Play "High-Performance Batch Processing" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=J6IPlfm7N6w'>High-Performance Batch Processing</a>
@@ -150,7 +150,7 @@
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=x4nBNLoizOc'>
-                            <img th:src="@{/images/batch-vod2.jpg}" alt='Play "Spring Tips: Spring Batch" on YouTube'>
+                            <img data-th-src="@{/images/batch-vod2.jpg}" alt='Play "Spring Tips: Spring Batch" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=x4nBNLoizOc'>Spring Tips: Spring Batch</a>
@@ -158,7 +158,7 @@
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=-Icd-s2JoAw'>
-                            <img th:src="@{/images/batch-vod3.jpg}" alt='Play "Cloud-Native Batch Processing" on YouTube'>
+                            <img data-th-src="@{/images/batch-vod3.jpg}" alt='Play "Cloud-Native Batch Processing" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=-Icd-s2JoAw'>Cloud-Native Batch Processing</a>

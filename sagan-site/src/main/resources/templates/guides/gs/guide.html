@@ -1,34 +1,32 @@
-<html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'guide', ~{::div})}">
   <head>
-      <title th:inline="text">[[${guide.typeLabel}]] | [[${guide.title}]]</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/guide.css}"/>
+      <title data-th-inline="text">[[${guide.typeLabel}]] | [[${guide.title}]]</title>
+    <link rel="stylesheet" type="text/css" data-th-href="@{/css/guide.css}"/>
 
     <!-- http://opengraphprotocol.org/ -->
-    <meta property="og:title" th:content="${guide.title}" />
-    <meta property="og:description" th:content="${description}" />
+    <meta property="og:title" data-th-content="${guide.title}" />
+    <meta property="og:description" data-th-content="${description}" />
   </head>
-  <body class='guide'>
-  <div layout:fragment="~{content}">
+  <body>
+  <div>
       <div></div>
       <div class="container-fluid">
           <main class="main-body--wrapper">
               <div class="row-fluid">
                   <div class="span8 mobile-left-pane">
-                      <div class="content--title desktop-only" th:text="${guide.typeLabel}">Getting Started</div>
-                      <a th:href='@{/guides}' class='uppercase smallest bold backlink blue link-darken block'><div class='arrow'></div>All Guides</a>
+                      <div class="content--title desktop-only" data-th-text="${guide.typeLabel}">Getting Started</div>
+                      <a data-th-href='@{/guides}' class='uppercase smallest bold backlink blue link-darken block'><div class='arrow'></div>All Guides</a>
 
                       <article class="content--container">
-                          <h1 class="title" th:text="${guide.title}">Building a RESTful Web Service</h1>
-                          <div class="article-body"th:utext="${guide.content}">Guide content.
+                          <h1 class="title" data-th-text="${guide.title}">Building a RESTful Web Service</h1>
+                          <div class="article-body" data-th-utext="${guide.content}">Guide content.
                           </div>
                       </article>
                   </div>
                   <aside class="span4 content-right-pane--container mobile-left-pane" id="sidebar">
-                      <a class="ci-status desktop-only" th:href="${guide.ciLatestUrl}">
-                          <img th:src="${guide.ciStatusImageUrl}" />
+                      <a class="ci-status desktop-only" data-th-href="${guide.ciLatestUrl}">
+                          <img data-th-src="${guide.ciStatusImageUrl}" />
                       </a>
                       <div class="right-pane-widget--container desktop-only">
                           <div class="github-actions https">
@@ -38,32 +36,32 @@
                                   <button class="btn" data-protocol="ssh">SSH</button>
                               </div>
                               <div class="clone-url https">
-                                  <input id="clone-url-https" readonly="readonly" type="text" th:value="${guide.cloneUrl}" />
-                                  <button class="copy-button github" data-toggle="tooltip" th:attr="data-clipboard-text=${guide.cloneUrl}"></button>
+                                  <input id="clone-url-https" readonly="readonly" type="text" data-th-value="${guide.cloneUrl}" />
+                                  <button class="copy-button github" data-toggle="tooltip" data-th-attr="data-clipboard-text=${guide.cloneUrl}"></button>
                               </div>
                               <div class="clone-url ssh">
-                                  <input id="clone-url-ssh" readonly="readonly" type="text" th:value="${guide.sshUrl}" />
-                                  <button class="copy-button github" data-toggle="tooltip" th:attr="data-clipboard-text=${guide.sshUrl}"></button>
+                                  <input id="clone-url-ssh" readonly="readonly" type="text" data-th-value="${guide.sshUrl}" />
+                                  <button class="copy-button github" data-toggle="tooltip" data-th-attr="data-clipboard-text=${guide.sshUrl}"></button>
                               </div>
-                              <a class="github_download btn btn-black uppercase" th:href='${guide.zipUrl}'>Download ZIP</a>
-                              <a class="gs-guide-import" th:href="${guide.cloneUrl}">Import into STS</a>
+                              <a class="github_download btn btn-black uppercase" data-th-href='${guide.zipUrl}'>Download ZIP</a>
+                              <a class="gs-guide-import" data-th-href="${guide.cloneUrl}">Import into STS</a>
                               <div class="go-to-repo--container">
-                                  <a th:href="${guide.githubUrl}"><i class="fab fa-github"></i>Go To Repo</a>
+                                  <a data-th-href="${guide.githubUrl}"><i class="fab fa-github"></i>Go To Repo</a>
                               </div>
                           </div>
                       </div>
-                      <div class="right-pane-widget--container" th:if="${not #lists.isEmpty(projects)}">
+                      <div class="right-pane-widget--container" data-th-if="${not #lists.isEmpty(projects)}">
                           <div class="related_resources">
                               <h3><a name="projects" class="anchor" href="#projects"></a>Projects</h3>
                               <ul>
-                                  <li th:each="project : ${projects}"><a th:href="${project.display.siteUrl}" th:text="${project.name}">Spring Framework</a></li>
+                                  <li data-th-each="project : ${projects}"><a data-th-href="${project.display.siteUrl}" data-th-text="${project.name}">Spring Framework</a></li>
                               </ul>
                           </div>
                       </div>
                       <div class="right-pane-widget--container">
                           <div>
                               <h3><a name='table-of-contents' class='anchor' href='#table-of-contents'></a>Table of contents</h3>
-                              <div th:utext="${guide.tableOfContents}">TOC Content</div>
+                              <div data-th-utext="${guide.tableOfContents}">TOC Content</div>
                           </div>
                       </div>
                   </aside>

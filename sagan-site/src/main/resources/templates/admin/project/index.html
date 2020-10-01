@@ -1,23 +1,22 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="admin/layout">
+<!DOCTYPE html>
+<html data-th-replace="~{admin/layout :: layout(~{::head/content()}, ~{::body/nav/content()}, ~{}, ~{::body/div})}">
 <head>
     <title>Admin | Projects</title>
 </head>
 <body>
-<nav layout:fragment="~{breadcrumb}">
+<nav>
     <ul>
-        <li><a th:href="@{/admin}">Admin</a></li>
-        <li class="is-active"><a th:href="@{admin/projects}" aria-current="page">Projects</a></li>
+        <li><a data-th-href="@{/admin}">Admin</a></li>
+        <li class="is-active"><a data-th-href="@{admin/projects}" aria-current="page">Projects</a></li>
     </ul>
 </nav>
-<div layout:fragment="~{content}">
+<div>
     <nav class="level">
         <div class="level-left">
             <h2 class="title is-2">Projects</h2>
         </div>
         <div class="level-right">
-            <p class="level-item"><a class="button is-success" th:href="@{'/admin/projects/new'}">Create Project</a></p>
+            <p class="level-item"><a class="button is-success" data-th-href="@{'/admin/projects/new'}">Create Project</a></p>
         </div>
     </nav>
     <hr class="hr">
@@ -31,17 +30,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="project : ${projects}">
-                <td><a th:href="@{'/admin/projects/' + ${project.id}}" th:text="${project.name}">spring-framework</a></td>
+            <tr data-th-each="project : ${projects}">
+                <td><a data-th-href="@{'/admin/projects/' + ${project.id}}" data-th-text="${project.name}">spring-framework</a></td>
                 <td>
-                    <span class="tag" th:classappend="${'is-' + project.status}" th:text="${project.status.label}">Active</span>
+                    <span class="tag" data-th-classappend="${'is-' + project.status}" data-th-text="${project.status.label}">Active</span>
                 </td>
                 <td>
-                    <a th:href="${project.display.siteUrl}" target="_blank">
+                    <a data-th-href="${project.display.siteUrl}" target="_blank">
                         <span class="icon">
                             <i class="fas fa-link"></i>
                         </span>
-                        <span th:text="${project.display.siteUrl}">/projects/spring-framework</span>
+                        <span data-th-text="${project.display.siteUrl}">/projects/spring-framework</span>
                     </a>
                 </td>
             </tr>

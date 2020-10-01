@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+<thead data-th-fragment="post-head">
+<tr>
+    <td>Title</td>
+    <td>Author</td>
+    <td>Category</td>
+    <td>Publication date</td>
+</tr>
+</thead>
+<tr data-th-fragment="post-row">
+    <td><a data-th-href="@{${post.editPath}}" data-th-text="${post.title}">This week in Spring</a></td>
+    <td class="author">
+        <a class='author' data-th-href="@{'/team/'+${post.author.username}}">
+                        <span class="icon has-text-success">
+                          <i class="fas fa-user"></i>
+                        </span>
+            <span data-th-text="${post.author.name}">Emily Spring</span>
+        </a>
+    </td>
+    <td>
+        <span class="tag is-primary" data-th-text="${post.category}">News</span>
+    </td>
+    <td data-th-text="${post.formattedPublishDate}">January 01, 2020</td>
+</tr>
+</body>
+</html>

@@ -1,15 +1,14 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'reactive', ~{::div})}">
 <head>
     <title>Spring | Reactive</title>
     <meta property='og:title' content='Project Reactor and the Spring portfolio work together to enable developers to build enterprise-grade reactive systems that are responsive, resilient, elastic, and message-driven.'/>
     <meta property='og:description' content='Reactive systems better utilize modern processors. Also, the inclusion of back-pressure in reactive programming ensures better resilience between decoupled components.'/>
 </head>
 <body id='reactive'>
-<div layout:fragment="~{content}">
+<div>
     <div id='hero' class='topics-banner mb-5'>
-        <div id="midshape" layout:include="svg/_shapes :: header-reactive"></div>
+        <div id="midshape" data-th-insert="~{svg/_shapes :: header-reactive}"></div>
     </div>
     <div class='content' role='Main'>
         <section class='container mb-5'>
@@ -28,8 +27,8 @@
                         </div>
                     </div>
                 </div>
-                <img class='as-fs topic-icon img-light' th:src="@{/images/reactive.svg}" alt=''>
-                <img class='as-fs topic-icon img-dark' th:src="@{/images/reactive-dark.svg}" alt=''>
+                <img class='as-fs topic-icon img-light' data-th-src="@{/images/reactive.svg}" alt=''>
+                <img class='as-fs topic-icon img-dark' data-th-src="@{/images/reactive-dark.svg}" alt=''>
             </div>
         </section>
         <section class='cornell container'>
@@ -49,7 +48,7 @@
                 </div>
                 <div class='right'>
                     <div class='flex'>
-                        <div class="img" layout:include="svg/_icons-color :: icon-gear"></div>
+                        <div class="img" data-th-insert="~{svg/_icons-color :: icon-gear}"></div>
                         <div class='text'>
                             <p>One of the main reasons developers move from blocking to non-blocking code is efficiency. Reactive code does more work with fewer resources. Project Reactor and Spring WebFlux let developers take advantage of multi-core, next-generation processors—handling potentially massive numbers of concurrent connections. With reactive processing, you can satisfy more concurrent users with fewer microservice instances.</p>
                         </div>
@@ -64,8 +63,8 @@
                 </div>
                 <div class='right'>
                     <p>The Spring portfolio provides two parallel stacks. One is based on a Servlet API with Spring MVC and Spring Data constructs. The other is a fully reactive stack that takes advantage of Spring WebFlux and Spring Data’s reactive repositories. In both cases, Spring Security has you covered with native support for both stacks.</p>
-                    <img class='img-light' th:src="@{/images/diagram-reactive.svg}" alt=''>
-                    <img class='img-dark' th:src="@{/images/diagram-reactive-dark.svg}" alt=''>
+                    <img class='img-light' data-th-src="@{/images/diagram-reactive.svg}" alt=''>
+                    <img class='img-dark' data-th-src="@{/images/diagram-reactive-dark.svg}" alt=''>
                 </div>
             </div>
         </section>
@@ -95,7 +94,7 @@
                 <div class='flex jc-between'>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://youtube.com/watch?v=xQEJFUPeQ_8'>
-                            <img th:src="@{/images/reactive-res1.png}" alt='Play "Reactive Relational Database Connectivity with Spring" on YouTube'>
+                            <img data-th-src="@{/images/reactive-res1.png}" alt='Play "Reactive Relational Database Connectivity with Spring" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://youtube.com/watch?v=xQEJFUPeQ_8'>Reactive Relational Database Connectivity with Spring</a>
@@ -103,7 +102,7 @@
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://youtube.com/watch?v=Tr04KiJdAXQ'>
-                            <img th:src="@{/images/reactive-res2.png}" alt='Play "Main Stage Presentation at SpringOne 2019" on YouTube'>
+                            <img data-th-src="@{/images/reactive-res2.png}" alt='Play "Main Stage Presentation at SpringOne 2019" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://youtube.com/watch?v=Tr04KiJdAXQ'>Main Stage Presentation at SpringOne 2019</a>
@@ -111,7 +110,7 @@
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=0oI_-xBhAK8'>
-                            <img th:src="@{/images/reactive-res3.png}" alt='Play "Spring Tips: Debugging Reactive Applications" on YouTube'>
+                            <img data-th-src="@{/images/reactive-res3.png}" alt='Play "Spring Tips: Debugging Reactive Applications" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=0oI_-xBhAK8'>Spring Tips: Debugging Reactive Applications</a>

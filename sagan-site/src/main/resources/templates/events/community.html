@@ -1,34 +1,33 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'community', ~{::div})}">
 <head>
     <title>Spring | Community</title>
     <meta property='og:title' content='Engage with the Spring Community'/>
     <meta property='og:description' content='Explore Spring community events, projects, social media and more.'/>
 </head>
-<body id='community'>
-<div layout:fragment="~{content}">
+<body>
+<div>
     <div id='hero' class='bg-lightblue rel of-hide' role='banner'>
         <div class='container rel z-1'>
             <h1 class='h1 antialiased mb-3'>Community</h1>
             <h2 class='h3 antialiased mb-2'>Events</h2>
             <div class='flex jc-between flex-wrap mb-2'>
-                <a th:each="event : ${events}"
-                   th:href="${event.link}" class='card third shadow-hover bg-white border-box block rel mb-2'
+                <a data-th-each="event : ${events}"
+                   data-th-href="${event.link}" class='card third shadow-hover bg-white border-box block rel mb-2'
                     target="_blank">
                     <div class='greenbar'></div>
                     <div class='border-dark rad-5'>
-                        <h3 class='h3 antialiased' th:text="${event.summary}">Event</h3>
-                        <p class='location m-0' th:text="${event.location}">Location</p>
-                        <p class='date' th:text="${#temporals.format(event.startTime, 'yyyy-MM-dd')}">2020-01-01</p>
+                        <h3 class='h3 antialiased' data-th-text="${event.summary}">Event</h3>
+                        <p class='location m-0' data-th-text="${event.location}">Location</p>
+                        <p class='date' data-th-text="${#temporals.format(event.startTime, 'yyyy-MM-dd')}">2020-01-01</p>
                     </div>
                 </a>
             </div>
             <div class='center'>
-                <a class='button transparent animate' th:href="@{/events}">More events</a>
+                <a class='button transparent animate' data-th-href="@{/events}">More events</a>
             </div>
         </div>
-        <img th:src="@{/images/world-map.svg}" alt=''>
+        <img data-th-src="@{/images/world-map.svg}" alt=''>
     </div>
     <div class='content' role='main'>
         <div class='container'>
@@ -90,7 +89,7 @@
             <div class='flex flex-wrap jc-between'>
                 <div class='third'>
                     <div class='flex ai-center mb-3'>
-                        <img id='twitter' th:src="@{/images/twitter.svg}">
+                        <img id='twitter' data-th-src="@{/images/twitter.svg}">
                         <h3 class='h3 antialiased inline-block m-0'>Twitter</h3>
                     </div>
                     <div id='twitter-list' class='flex jc-between'>
@@ -124,7 +123,7 @@
                 </div>
                 <div class='two-thirds'>
                     <div class='flex ai-center mb-3'>
-                        <img id='youtube' th:src="@{/images/youtube.svg}">
+                        <img id='youtube' data-th-src="@{/images/youtube.svg}">
                         <h3 class='h3 antialiased inline-block m-0'>YouTube</h3>
                     </div>
                     <div class='iframe-container'>

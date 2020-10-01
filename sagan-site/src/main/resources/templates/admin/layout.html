@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html data-th-fragment="layout (heads, breadcrumbs, tabs, content)" lang='en'>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Spring.io Admin</title>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/admin.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/admin.css}"/>
+    <data-th-block data-th-replace="${heads}"></data-th-block>
 </head>
-<body>
+<body data-th-id="${bodyId}">
 <nav class="navbar is-spaced has-shadow" role="navigation" aria-label="main navigation" id="navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-item-logo" th:href="@{/admin/}">
-                <img th:src="@{/images/spring-logo.svg}" width="200">
+            <a class="navbar-item navbar-item-logo" data-th-href="@{/admin/}">
+                <img data-th-src="@{/images/spring-logo.svg}" width="200">
             </a>
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
                data-target="navbarBasicExample">
@@ -25,25 +23,25 @@
         </div>
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" th:href="@{/admin/blog}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/blog') ? 'is-active':''}">
+                <a class="navbar-item" data-th-href="@{/admin/blog}" data-th-classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/blog') ? 'is-active':''}">
                     <span class="icon has-text-primary">
                         <i class="fab fa-microblog"></i>
                     </span>
                     <span>Blog</span>
                 </a>
-                <a class="navbar-item" th:href="@{/admin/projects}"  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/projects') ? 'is-active':''}">
+                <a class="navbar-item" data-th-href="@{/admin/projects}"  data-th-classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/projects') ? 'is-active':''}">
                     <span class="icon has-text-star">
                         <i class="fas fa-star"></i>
                     </span>
                     <span>Projects</span>
                 </a>
-                <a class="navbar-item" th:href="@{/admin/team}"  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/team') ? 'is-active':''}">
+                <a class="navbar-item" data-th-href="@{/admin/team}"  data-th-classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/team') ? 'is-active':''}">
                     <span class="icon has-text-success">
                         <i class="fas fa-users"></i>
                     </span>
                     <span>Team</span>
                 </a>
-                <a class="navbar-item" th:href="@{/admin/tools}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/tools') ? 'is-active':''}">
+                <a class="navbar-item" data-th-href="@{/admin/tools}" data-th-classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/tools') ? 'is-active':''}">
                     <span class="icon has-text-tools">
                         <i class="fas fa-tools"></i>
                     </span>
@@ -53,13 +51,15 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a class="button is-white" th:href="@{/admin/profile}">
+                        <a class="button is-white" data-th-href="@{/admin/profile}">
                             <span class="icon has-text-success">
                               <i class="fas fa-user"></i>
                             </span>
+                            <!--
                             <span sec:authentication="credentials">Emily</span>
+                            -->
                         </a>
-                        <a class="button is-white" th:href="@{/signout}">
+                        <a class="button is-white" data-th-href="@{/signout}">
                             <span class="icon has-text-danger">
                               <i class="fas fa-sign-out-alt"></i>
                             </span>
@@ -72,15 +72,17 @@
     </div>
 </nav>
 <main class="container">
-    <nav id="breadcrumbs" class="breadcrumb" aria-label="breadcrumbs" layout:fragment="~{breadcrumb}"></nav>
-    <div id="tabs" class="tabs is-centered is-boxed is-medium" layout:fragment="~{tabs}"></div>
-    <div id="admin" layout:fragment="~{content}"></div>
+    <nav id="breadcrumbs" class="breadcrumb" aria-label="breadcrumbs" data-th-insert="${breadcrumbs}"></nav>
+    <div id="tabs" class="tabs is-centered is-boxed is-medium" data-th-replace="${tabs}"></div>
+    <div id='admin' data-th-replace="${content}">
+        <p>Content</p>
+    </div>
 </main>
 <footer id="footer">
     <div class="container">
         © 2020 <a target="_blank" href="https://tanzu.vmware.com/">VMware</a>, Inc.
     </div>
 </footer>
-<script th:src="@{/js/admin.js}"></script>
+<script data-th-src="@{/js/admin.js}"></script>
 </body>
 </html>

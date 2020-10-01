@@ -1,23 +1,22 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'serverless', ~{::div})}">
 <head>
     <title>Spring | Serverless</title>
     <meta property='og:title' content='Spring and Serverless'/>
     <meta property='og:description' content='Serverless applications take advantage of modern cloud computing capabilities and abstractions to let you focus on logic rather than on infrastructure.'/>
 </head>
 <body id='serverless'>
-<div layout:fragment="~{content}">
+<div>
     <div id='hero' class='topics-banner mb-5'>
-        <div id="midshape" layout:include="svg/_shapes :: header-serverless"></div>
+        <div id="midshape" data-th-insert="~{svg/_shapes :: header-serverless}"></div>
     </div>
     <div class='content' role='Main'>
         <section class='container mb-5'>
             <h1 class='h1'>Serverless</h1>
             <div class='flex jc-between topic-hero mb-2'>
                 <p class='big'>Serverless applications take advantage of modern cloud computing capabilities and abstractions to let you focus on logic rather than on infrastructure. In a serverless environment, you can concentrate on writing application code while the underlying platform takes care of scaling, runtimes, resource allocation, security, and other “server” specifics.</p>
-                <img class='as-fs topic-icon img-light' th:src="@{/images/serverless.svg}" alt=''>
-                <img class='as-fs topic-icon img-dark' th:src="@{/images/serverless-dark.svg}" alt=''>
+                <img class='as-fs topic-icon img-light' data-th-src="@{/images/serverless.svg}" alt=''>
+                <img class='as-fs topic-icon img-dark' data-th-src="@{/images/serverless-dark.svg}" alt=''>
             </div>
             <div class='flex jc-between half-and-half'>
                 <div class='third'>
@@ -48,9 +47,9 @@
                 <div class='right'>
                     <div class='diagram-container'>
                         <div class="center mb-3">
-                            <img class='center mb-3 img-light' th:src="@{/images/diagram-serverless-standalone.svg}"
+                            <img class='center mb-3 img-light' data-th-src="@{/images/diagram-serverless-standalone.svg}"
                                  alt='Function as a Service (FaaS) and Legacy diagram'>
-                            <img class='center mb-3 img-dark' th:src="@{/images/diagram-serverless-standalone-dark.svg}"
+                            <img class='center mb-3 img-dark' data-th-src="@{/images/diagram-serverless-standalone-dark.svg}"
                                  alt='Function as a Service (FaaS) and Legacy diagram'>
                         </div>
                         <div class='flex jc-between'>
@@ -125,7 +124,7 @@
                 <div class='flex jc-between'>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=8tOj4A7jgWg'>
-                            <img th:src="@{/images/serverless-res1.png}" alt='Play "Spring, Functions, Serverless, and You" on YouTube'>
+                            <img data-th-src="@{/images/serverless-res1.png}" alt='Play "Spring, Functions, Serverless, and You" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=8tOj4A7jgWg'>Spring, Functions, Serverless, and You</a>
@@ -133,14 +132,14 @@
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='/blog/2018/05/16/spring-tips-project-riff-and-spring-cloud-function'>
-                            <img th:src="@{/images/serverless-res2.png}" alt='Spring Tips: Project Riff and Spring Cloud Function'>
+                            <img data-th-src="@{/images/serverless-res2.png}" alt='Spring Tips: Project Riff and Spring Cloud Function'>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='/blog/2018/05/16/spring-tips-project-riff-and-spring-cloud-function'>Spring Tips: Project Riff and Spring Cloud Function</a>
                         <div class='author'>Josh Long</div>
                     </div>
                     <div class='item third'>
                         <a class='thumbnail mb-1 block' href='https://www.youtube.com/watch?v=mPOl3024R4s'>
-                            <img th:src="@{/images/serverless-res3.png}" alt='Play "Serverless Spring" on YouTube'>
+                            <img data-th-src="@{/images/serverless-res3.png}" alt='Play "Serverless Spring" on YouTube'>
                             <div class='play'><div class='relative'><div class='triangle'></div></div></div>
                         </a>
                         <a class='h3 blue mb-1 inline-block link-darken' href='https://www.youtube.com/watch?v=mPOl3024R4s'>Serverless Spring</a>

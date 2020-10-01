@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="admin/layout">
+<html data-th-replace="~{admin/layout :: layout(~{::head/content()}, ~{}, ~{}, ~{::div})}">
 <head>
     <title>Admin</title>
 </head>
 <body>
-<div layout:fragment="~{content}">
+<div>
     <section class="hero">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
-                    Welcome, <span sec:authentication="credentials">Emily</span>
+                    Welcome, Emily
+                    <!-- <span sec:authentication="credentials">Emily</span> -->
                 </h1>
                 <h2 class="subtitle">
                     to the spring.io admin website.

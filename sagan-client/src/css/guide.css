@@ -1,29 +1,29 @@
-.guide main {
+#guide main {
     padding: 80px 0;
 }
-.guide main .ci-status,
-.guide main .right-pane-widget--container .github_download,
-.guide main .right-pane-widget--container .gs-guide-import,
-.guide main .right-pane-widget--container:last-child,
-.guide main .btn-group,
-.guide main .clone-url,
-.guide main .content--title,
+#guide main .ci-status,
+#guide main .right-pane-widget--container .github_download,
+#guide main .right-pane-widget--container .gs-guide-import,
+#guide main .right-pane-widget--container:last-child,
+#guide main .btn-group,
+#guide main .clone-url,
+#guide main .content--title,
 .use-gradle h2, .use-maven h2, .use-sts h2,
 .use-gradle, .use-maven, .use-sts {
     display: none;
 }
-.guide main .right-pane-widget--container h3 {
+#guide main .right-pane-widget--container h3 {
     font-size: 1.5em;
     margin: 0;
 }
-.guide main .right-pane-widget--container .go-to-repo--container {
+#guide main .right-pane-widget--container .go-to-repo--container {
     max-width: 225px;
     margin: 10px 0 20px;
 }
-.guide main .right-pane-widget--container .go-to-repo--container:last-child {
+#guide main .right-pane-widget--container .go-to-repo--container:last-child {
     margin-bottom: 0;
 }
-.guide main .right-pane-widget--container .go-to-repo--container .icon-github:before {
+#guide main .right-pane-widget--container .go-to-repo--container .icon-github:before {
     font-family: "Font Awesome 5 Free";
     content: "\f09b";
     font-size: 1.7em;
@@ -32,18 +32,18 @@
     vertical-align: middle;
     color: #191E1E;
 }
-.guide main .right-pane-widget--container .go-to-repo--container i {
+#guide main .right-pane-widget--container .go-to-repo--container i {
     font-style: unset;
     margin-right: 8px;
     font-size: 20px;
     vertical-align: bottom;
 }
-.guide main .right-pane-widget--container {
+#guide main .right-pane-widget--container {
     background: #ebf2f2;
     padding: 30px;
     margin-bottom: 15px;
 }
-.guide main h1.title {
+#guide main h1.title {
     margin: 30px 0 20px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -52,74 +52,74 @@
     font-family: 'Work Sans', sans-serif;
     font-weight: 700;
 }
-.guide main h2 {
+#guide main h2 {
     margin: 40px 0 0;
 }
-.guide main .right-pane-widget--container h2 {
+#guide main .right-pane-widget--container h2 {
     margin: 0;
 }
-.guide main .row-fluid {
+#guide main .row-fluid {
     display: flex;
     justify-content: space-between;
 }
 
-.guide main .span8 {
+#guide main .span8 {
     width: 65.95744680851064%;
     margin-right: 20px;
 }
 @media(max-width: 800px) {
-    .guide main .row-fluid {
+    #guide main .row-fluid {
         flex-direction: column;
     }
-    .guide main .span8 {
+    #guide main .span8 {
         width: 100%;
         margin-right: 0;
     }
 }
-.guide main ul {
+#guide main ul {
     padding: 0 0 0 40px;
     list-style-type: disc;
 }
-.guide main .right-pane-widget--container ul {
+#guide main .right-pane-widget--container ul {
     padding: 0;
     list-style: none;
 }
-.guide main code,
-.guide main pre {
+#guide main code,
+#guide main pre {
     padding: 10px;
     font-size: 15px;
     font-family: 'Monaco', monospace;
     border: 1px solid #e1e1e8;
     overflow-x: auto;
 }
-.guide main code {
+#guide main code {
     white-space: nowrap;
 }
-.guide main pre code {
+#guide main pre code {
     border: none;
     white-space: pre-wrap;
     padding: 0;
     word-break: break-word;
 }
-.guide main table pre,
-.guide main table code,
-.guide main p pre,
-.guide main p code {
+#guide main table pre,
+#guide main table code,
+#guide main p pre,
+#guide main p code {
     padding: 2px 6px;
     color: #000099;
 
 }
-.guide main p code a,
-.guide main p pre a {
+#guide main p code a,
+#guide main p pre a {
     color: #000099;
 }
-.guide main a {
+#guide main a {
     color: #086dc3;
 }
-.guide main .right-pane-widget--container a {
+#guide main .right-pane-widget--container a {
     font-weight: 700;
 }
-.guide main a:hover {
+#guide main a:hover {
     color: #333;
 }
 h2[id*=reveal] {

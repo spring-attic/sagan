@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html>
 <body>
 
 <!-- Why Spring -->
-<div layout:fragment="shape-quote">
+<div data-th-fragment="shape-quote">
     <svg
             class="shape-quote"
             aria-hidden='true'
@@ -20,7 +18,7 @@
 </div>
 
 <!-- Header microservices -->
-<div layout:fragment="header-microservices">
+<div data-th-fragment="header-microservices">
     <svg
             class="header-microservices"
             aria-hidden='true'
@@ -35,7 +33,7 @@
 </div>
 
 <!-- Header reactive -->
-<div layout:fragment="header-reactive">
+<div data-th-fragment="header-reactive">
     <svg
             class="header-microservices"
             aria-hidden='true'
@@ -53,7 +51,7 @@
 </div>
 
 <!-- Header serverless -->
-<div layout:fragment="header-serverless">
+<div data-th-fragment="header-serverless">
     <svg
             class="header-cloud"
             aria-hidden='true'
@@ -68,7 +66,7 @@
 </div>
 
 <!-- Header batch -->
-<div layout:fragment="header-batch">
+<div data-th-fragment="header-batch">
     <svg
             class="header-cloud"
             aria-hidden='true'
@@ -82,8 +80,8 @@
     </svg>
 </div>
 
-<!-- Learn packman -->
-<div layout:fragment="pacman-learn">
+<!-- Learn pacman -->
+<div data-th-fragment="pacman-learn">
     <svg
             class="packman-learn"
             aria-hidden='true'
@@ -103,7 +101,7 @@
 </div>
 
 <!-- Shape learn -->
-<div layout:fragment="shape-learn">
+<div data-th-fragment="shape-learn">
     <svg
             class="shape-learn"
             aria-hidden='true'
@@ -121,7 +119,7 @@
 </div>
 
 <!-- Shape quickstart -->
-<div layout:fragment="shape-quickstart">
+<div data-th-fragment="shape-quickstart">
     <svg
             class="shape-learn"
             aria-hidden='true'
@@ -141,7 +139,7 @@
 </div>
 
 <!-- Packman -->
-<div layout:fragment="pacman">
+<div data-th-fragment="pacman">
     <svg
             class="packman"
             aria-hidden='true'

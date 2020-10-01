@@ -15,10 +15,6 @@ info:
     start: ${vcap.application.start:N/A}
 
 spring:
-  main:
-    sources: sagan.SiteApplication
-  thymeleaf:
-    mode: LEGACYHTML5
   jpa:
     hibernate:
       ddl_auto: none
@@ -67,8 +63,6 @@ logging:
 
 spring:
   profiles: staging,production
-  resources:
-    add-mappings: false
 server:
   compression:
     enabled: true
@@ -81,9 +75,11 @@ spring:
   profiles: standalone
   datasource:
     url: jdbc:h2:mem:sagan;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+  flyway:
+    locations: classpath:/db/migration, classpath:/db/dev
   resources:
     static_locations:
-      - file:${client.dir}/build/dist/
+      - file:/Users/bclozel/workspace/sagan/sagan-client/build/dist/
       - file:build/asciidoc/
   devtools:
     restart:
@@ -91,8 +87,6 @@ spring:
         - ../sagan-client/build/dist/
       additional_exclude: "css/**,fonts/**,images/**,js/**,icon*.png,manifest.json,robots.txt"
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
-flyway:
-  locations: classpath:/db/migration, classpath:/db/dev
 ---
 
 spring:

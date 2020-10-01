@@ -1,15 +1,12 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'project', ~{::div})}">
 <head>
-    <title th:text="${project.getName()}"></title>
-    <meta property="og:title" th:attr="content=${project.getName()}"/>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/project.css}" />
+    <title data-th-text="${project.getName()}"></title>
+    <meta property="og:title" data-th-attr="content=${project.getName()}"/>
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/project.css}" />
 </head>
 <body>
-<div layout:fragment="header-container"></div>
-<div layout:fragment="~{content}">
+<div>
     <div class="container-fluid"></div>
     <div></div>
     <div class="compass body--container container-fluid">
@@ -18,21 +15,21 @@
                 <ul class="sidebar_main">
                     <li class="sidebar_head">Projects</li>
                     <li class="sidebar_project"
-                        th:each="proj : ${projects}"
-                        th:classappend="${proj.getId() ==  project.getId()} ? 'active' : (${proj.getId() ==  project.getParentId()} ? 'child-active': 'child-inactive')"
-                        th:with="isChildrenOpen=(${proj.equals(project)} or ${proj.equals(project.getParentProject())}) and ${proj.subProjects} and ${proj.subProjects.size()} > 0">
+                        data-th-each="proj : ${projects}"
+                        data-th-classappend="${proj.getId() ==  project.getId()} ? 'active' : (${proj.getId() ==  project.getParentId()} ? 'child-active': 'child-inactive')"
+                        data-th-with="isChildrenOpen=(${proj.equals(project)} or ${proj.equals(project.getParentProject())}) and ${proj.subProjects} and ${proj.subProjects.size()} > 0">
                         <div>
-                            <a th:href="${proj.display.siteUrl}" th:text="${proj.getName()}"></a>
-                            <i th:if="${!isChildrenOpen && proj.subProjects != null && proj.subProjects.size() > 0}"
+                            <a data-th-href="${proj.display.siteUrl}" data-th-text="${proj.getName()}"></a>
+                            <i data-th-if="${!isChildrenOpen && proj.subProjects != null && proj.subProjects.size() > 0}"
                                class="fas fa-chevron-right" aria-hidden="true"></i>
-                            <i th:if="${isChildrenOpen && proj.subProjects != null && proj.subProjects.size() > 0}"
+                            <i data-th-if="${isChildrenOpen && proj.subProjects != null && proj.subProjects.size() > 0}"
                                class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
-                        <ul class="sidebar_children" th:if="${isChildrenOpen}">
-                            <li class="sidebar_child" th:each="childProject : ${proj.subProjects}"
-                                th:classappend="${childProject.getId() ==  project.getId()} ? 'active'">
-                                <a th:href="${childProject.display.siteUrl}">
-                                    <span th:text="${childProject.getName()}"></span>
+                        <ul class="sidebar_children" data-th-if="${isChildrenOpen}">
+                            <li class="sidebar_child" data-th-each="childProject : ${proj.subProjects}"
+                                data-th-classappend="${childProject.getId() ==  project.getId()} ? 'active'">
+                                <a data-th-href="${childProject.display.siteUrl}">
+                                    <span data-th-text="${childProject.getName()}"></span>
                                 </a>
                             </li>
                         </ul>
@@ -44,13 +41,13 @@
                 <div class="box project-content">
                     <div class="">
                         <div class="project--header">
-                            <h1 th:text="${project.getName()}"></h1>
-                            <span class="version label current" th:if="${currentRelease.isPresent()}"
-                                  th:with="release=${currentRelease.get()}"
-                                  th:text="${release.version}">
+                            <h1 data-th-text="${project.getName()}"></h1>
+                            <span class="version label current" data-th-if="${currentRelease.isPresent()}"
+                                  data-th-with="release=${currentRelease.get()}"
+                                  data-th-text="${release.version}">
                         </span>
                             <div class="social-links">
-                                <a th:href="${project.getRepoUrl()}" target="_blank" class="link--github">
+                                <a data-th-href="${project.getRepoUrl()}" target="_blank" class="link--github">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                          version="1.1" id="Capa_1" x="0px" y="0px" width="438.549px" height="438.549px"
                                          viewBox="0 0 438.549 438.549"
@@ -62,7 +59,7 @@
                                 </svg>
                                 </a>
 
-                                <a th:href="${projectStackOverflow}" target="_blank" class="link--stackoverflow">
+                                <a data-th-href="${projectStackOverflow}" target="_blank" class="link--stackoverflow">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.2 30.2">
                                         <circle cx="15.1" cy="15.1" r="15.1"/>
                                         <g>
@@ -80,17 +77,17 @@
                                     <span class="hide-sm">Overview</span>
                                 </a>
                             </li>
-                            <li th:if="${project.hasReleases()}" class="">
+                            <li data-th-if="${project.hasReleases()}" class="">
                                 <a href="#learn" data-toggle="tab">
                                     <span class="hide-sm">Learn</span>
                                 </a>
                             </li>
-                            <li th:if="${project.hasGenerations()}" class="">
+                            <li data-th-if="${project.hasGenerations()}" class="">
                                 <a href="#support" data-toggle="tab">
                                     <span class="hide-sm">Support</span>
                                 </a>
                             </li>
-                            <li th:if="${project.hasSamples()}" class="">
+                            <li data-th-if="${project.hasSamples()}" class="">
                                 <a href="#samples" data-toggle="tab">
                                     <span class="hide-sm">Samples</span>
                                 </a>
@@ -102,15 +99,15 @@
                             <div class="tab-pane active" id="overview">
                                 <div class="compass-section">
                                     <div class="project-overview">
-                                        <div th:utext="${project.overview.html}"></div>
+                                        <div data-th-utext="${project.overview.html}"></div>
                                     </div>
-                                    <div th:if="${project.bootConfig.html} and ${#strings.length(project.overview.html) > 0} "
+                                    <div data-th-if="${project.bootConfig.html} and ${#strings.length(project.overview.html) > 0} "
                                          class="spring-boot-config">
                                         <h2>Spring Boot Config</h2>
-                                        <div th:utext="${project.bootConfig.html}"></div>
+                                        <div data-th-utext="${project.bootConfig.html}"></div>
                                     </div>
                                     <div class="quickstart">
-                                        <img th:src="@{/images/spring-initializr.svg}" alt='Spring Initializr'>
+                                        <img data-th-src="@{/images/spring-initializr.svg}" alt='Spring Initializr'>
                                         <h2>Quickstart Your Project</h2>
                                         <div>
                                             Bootstrap your application with
@@ -121,7 +118,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="learn" th:if="${project.hasReleases()}" class="tab-pane">
+                            <div id="learn" data-th-if="${project.hasReleases()}" class="tab-pane">
                                 <div class="project--documentation compass-section">
                                     <h2>Documentation</h2>
                                     <div class="project--documentation--subtitle compass-subtitle">
@@ -133,52 +130,52 @@
 
                                     <table class="table table--documentation">
                                         <tbody>
-                                        <tr th:if="${currentRelease.isPresent()}"
-                                            th:with="release=${currentRelease.get()}">
+                                        <tr data-th-if="${currentRelease.isPresent()}"
+                                            data-th-with="release=${currentRelease.get()}">
                                             <td>
-                                        <span class="release-display-name" th:text="${release.version}">
+                                        <span class="release-display-name" data-th-text="${release.version}">
                                         </span>
                                                 <span class="version label pre"
-                                                      th:if="${release.isPreRelease()}">PRE</span>
+                                                      data-th-if="${release.isPreRelease()}">PRE</span>
                                                 <span class="version label snapshot"
-                                                      th:if="${release.isSnapshot()}">SNAPSHOT</span>
+                                                      data-th-if="${release.isSnapshot()}">SNAPSHOT</span>
                                                 <span class="version label current"
-                                                      th:if="${release.isCurrent()}">CURRENT</span>
+                                                      data-th-if="${release.isCurrent()}">CURRENT</span>
                                                 <span class="version label ga"
-                                                      th:if="${release.isGeneralAvailability()}">GA</span>
+                                                      data-th-if="${release.isGeneralAvailability()}">GA</span>
                                             </td>
                                             <td>
-                                                <a th:href="${release.expandRefDocUrl()}">
+                                                <a data-th-href="${release.expandRefDocUrl()}">
                                                     Reference Doc.
                                                 </a>
                                             </td>
                                             <td>
-                                                <a th:href="${release.expandApiDocUrl()}">
+                                                <a data-th-href="${release.expandApiDocUrl()}">
                                                     API Doc.
                                                 </a>
                                             </td>
                                         </tr>
 
-                                        <tr th:each="release : ${otherReleases}">
+                                        <tr data-th-each="release : ${otherReleases}">
                                             <td>
-                                        <span class="release-display-name" th:text="${release.version}">
+                                        <span class="release-display-name" data-th-text="${release.version}">
                                         </span>
                                                 <span class="version label pre"
-                                                      th:if="${release.isPreRelease()}">PRE</span>
+                                                      data-th-if="${release.isPreRelease()}">PRE</span>
                                                 <span class="version label snapshot"
-                                                      th:if="${release.isSnapshot()}">SNAPSHOT</span>
+                                                      data-th-if="${release.isSnapshot()}">SNAPSHOT</span>
                                                 <span class="version label current"
-                                                      th:if="${release.isCurrent()}">CURRENT</span>
+                                                      data-th-if="${release.isCurrent()}">CURRENT</span>
                                                 <span class="version label ga"
-                                                      th:if="${release.isGeneralAvailability()}">GA</span>
+                                                      data-th-if="${release.isGeneralAvailability()}">GA</span>
                                             </td>
                                             <td>
-                                                <a th:href="${release.expandRefDocUrl()}">
+                                                <a data-th-href="${release.expandRefDocUrl()}">
                                                     Reference Doc.
                                                 </a>
                                             </td>
                                             <td>
-                                                <a th:href="${release.expandApiDocUrl()}">
+                                                <a data-th-href="${release.expandApiDocUrl()}">
                                                     API Doc.
                                                 </a>
                                             </td>
@@ -189,7 +186,7 @@
 
                                 </div>
 
-                                <div th:if="${guides.size() > 0}"
+                                <div data-th-if="${guides.size() > 0}"
                                      class="project--guides project--samples compass-section">
                                     <h2 class="project--guides--title">Guides</h2>
                                     <div class="project--guides--subtitle compass-subtitle">
@@ -201,21 +198,21 @@
                                     </div>
 
                                     <ul class="project--list-links">
-                                        <li th:each="guide : ${guides}">
-                                            <a th:href="'/guides/gs/' + ${guide.name}">
+                                        <li data-th-each="guide : ${guides}">
+                                            <a data-th-href="'/guides/gs/' + ${guide.name}">
                                                 <span class="icon">
-                                                    <div class="guide-icon" layout:include="svg/_icons :: icon-guides-start"></div>
+                                                    <div class="guide-icon" data-th-insert="~{svg/_icons :: icon-guides-start}"></div>
                                                 </span>
                                                 <strong class="project--sample--title"
-                                                        th:text="${guide.getTitle()}"></strong>
+                                                        data-th-text="${guide.getTitle()}"></strong>
                                                 <span class="project--sample--description"
-                                                      th:text="${guide.getDescription()}"></span>
+                                                      data-th-text="${guide.getDescription()}"></span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
 
-                                <div th:if="${topicals.size() > 0}"
+                                <div data-th-if="${topicals.size() > 0}"
                                      class="project--guides project--samples compass-section">
                                     <h2 class="project--guides--title">Topics</h2>
                                     <div class="project--guides--subtitle compass-subtitle">
@@ -224,21 +221,21 @@
                                     </div>
 
                                     <ul class="project--list-links">
-                                        <li th:each="guide : ${topicals}">
-                                            <a th:href="'/guides/topicals/' + ${guide.name}">
+                                        <li data-th-each="guide : ${topicals}">
+                                            <a data-th-href="'/guides/topicals/' + ${guide.name}">
                                                 <span class="icon">
-                                                    <div class="guide-icon" layout:include="svg/_icons :: icon-guides-topic"></div>
+                                                    <div class="guide-icon" data-th-insert="~{svg/_icons :: icon-guides-topic}"></div>
                                                 </span>
                                                 <strong class="project--sample--title"
-                                                        th:text="${guide.getTitle()}"></strong>
+                                                        data-th-text="${guide.getTitle()}"></strong>
                                                 <span class="project--sample--description"
-                                                      th:text="${guide.getDescription()}"></span>
+                                                      data-th-text="${guide.getDescription()}"></span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
 
-                                <div th:if="${tutorials.size() > 0}"
+                                <div data-th-if="${tutorials.size() > 0}"
                                      class="project--guides project--samples compass-section">
                                     <h2 class="project--guides--title">Tutorials</h2>
                                     <div class="project--guides--subtitle compass-subtitle">
@@ -248,21 +245,21 @@
                                     </div>
 
                                     <ul class="project--list-links">
-                                        <li th:each="guide : ${tutorials}">
-                                            <a th:href="'/guides/tutorials/' + ${guide.name}">
+                                        <li data-th-each="guide : ${tutorials}">
+                                            <a data-th-href="'/guides/tutorials/' + ${guide.name}">
                                                 <span class="icon">
-                                                    <div class="guide-icon" layout:include="svg/_icons :: icon-guides-tutorial"></div>
+                                                    <div class="guide-icon" data-th-insert="~{svg/_icons :: icon-guides-tutorial}"></div>
                                                 </span>
                                                 <strong class="project--sample--title"
-                                                        th:text="${guide.getTitle()}"></strong>
+                                                        data-th-text="${guide.getTitle()}"></strong>
                                                 <span class="project--sample--description"
-                                                      th:text="${guide.getDescription()}"></span>
+                                                      data-th-text="${guide.getDescription()}"></span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="tab-pane" th:if="${project.hasGenerations()}" id="support">
+                            <div class="tab-pane" data-th-if="${project.hasGenerations()}" id="support">
                                 <div class="compass-section">
 
                                     <div class="calendar-releases">
@@ -276,19 +273,19 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:each="generation : ${project.generationsInfo.generations}"
-                                                th:attr="data-status=|${!generation.isReleased() ? 'coming' : ''}${generation.hasOssSupport()? 'active' : ''}${(!generation.hasOssSupport() && generation.hasCommercialSupport())? 'migrate': ''}${(generation.isReleased() && !generation.hasCommercialSupport())? 'inactive': ''}|">
-                                                <td class="release" th:inline="text">
+                                            <tr data-th-each="generation : ${project.generationsInfo.generations}"
+                                                data-th-attr="data-status=|${!generation.isReleased() ? 'coming' : ''}${generation.hasOssSupport()? 'active' : ''}${(!generation.hasOssSupport() && generation.hasCommercialSupport())? 'migrate': ''}${(generation.isReleased() && !generation.hasCommercialSupport())? 'inactive': ''}|">
+                                                <td class="release" data-th-inline="text">
                                                     <div><span class="status"></span>  [[${generation.name}]]</div>
                                                 </td>
-                                                <td><span th:text="${generation.initialReleaseDate}" th:classappend="${generation.initialReleaseDate.isBefore(now)} ? 'past'">1 Aug 2018</span></td>
+                                                <td><span data-th-text="${generation.initialReleaseDate}" data-th-classappend="${generation.initialReleaseDate.isBefore(now)} ? 'past'">1 Aug 2018</span></td>
                                                 <td>
-                                                    <span th:if="${generation.ossSupportEndDate() == null}" class="none"></span>
-                                                    <span th:if="${generation.ossSupportEndDate() != null}" th:classappend="${generation.ossSupportEndDate().isBefore(now)} ? 'past'"  th:text="${generation.ossSupportEndDate()}">1 Jan 2019</span>
+                                                    <span data-th-if="${generation.ossSupportEndDate() == null}" class="none"></span>
+                                                    <span data-th-if="${generation.ossSupportEndDate() != null}" data-th-classappend="${generation.ossSupportEndDate().isBefore(now)} ? 'past'"  data-th-text="${generation.ossSupportEndDate()}">1 Jan 2019</span>
                                                 </td>
                                                 <td>
-                                                    <span th:if="${generation.commercialSupportEndDate() == null}" class="none"></span>
-                                                    <span th:if="${generation.commercialSupportEndDate() != null}" th:classappend="${generation.commercialSupportEndDate().isBefore(now)} ? 'past'"  th:text="${generation.commercialSupportEndDate()}">1 Jan 2020</span>
+                                                    <span data-th-if="${generation.commercialSupportEndDate() == null}" class="none"></span>
+                                                    <span data-th-if="${generation.commercialSupportEndDate() != null}" data-th-classappend="${generation.commercialSupportEndDate().isBefore(now)} ? 'past'"  data-th-text="${generation.commercialSupportEndDate()}">1 Jan 2020</span>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -322,19 +319,19 @@
 
                                 </div>
                             </div>
-                            <div id="samples" th:if="${project.hasSamples()}" class="tab-pane">
+                            <div id="samples" data-th-if="${project.hasSamples()}" class="tab-pane">
                                 <div class="project--samples compass-section">
                                     <h2>A few examples to try out:</h2>
                                     <ul class="project--list-links">
-                                        <li th:each="sample : ${project.samples}">
-                                            <a th:href="${sample.getUrl()}" target="_blank">
+                                        <li data-th-each="sample : ${project.samples}">
+                                            <a data-th-href="${sample.getUrl()}" target="_blank">
                                                 <span class="icon">
-                                                    <div class="guide-icon" layout:include="svg/_icons :: icon-guides-tutorial"></div>
+                                                    <div class="guide-icon" data-th-insert="~{svg/_icons :: icon-guides-tutorial}"></div>
                                                 </span>
                                                 <strong class="project--sample--title"
-                                                        th:text="${sample.getTitle()}"></strong>
+                                                        data-th-text="${sample.getTitle()}"></strong>
                                                 <span class="project--sample--description"
-                                                      th:text="${sample.getDescription()}"></span>
+                                                      data-th-text="${sample.getDescription()}"></span>
                                             </a>
                                         </li>
                                     </ul>
@@ -344,7 +341,7 @@
                     </div>
                 </div>
             </article>
-            <script th:src="@{/js/project.js}"></script>
+            <script data-th-src="@{/js/project.js}"></script>
         </div>
     </div>
 </div>

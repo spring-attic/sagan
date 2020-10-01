@@ -1,5 +1,6 @@
 package sagan;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
@@ -15,7 +16,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 public class SiteApplication {
 
     public static void main(String[] args) {
-        new SaganApplication(SiteApplication.class).run(args);
+        SpringApplication.run(SiteApplication.class, args);
     }
 
 }

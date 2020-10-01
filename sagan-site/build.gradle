@@ -54,7 +54,6 @@ dependencies {
 	compile "org.springframework.boot:spring-boot-starter-thymeleaf"
 	compile 'org.thymeleaf.extras:thymeleaf-extras-java8time'
 	compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
-	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 	// for CloudFoundry service binding
 	compile "io.pivotal.cfenv:java-cfenv-boot:2.2.2.RELEASE"

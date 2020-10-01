@@ -1,6 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, '', ~{::div})}">
 <head>
     <title>Trademarks</title>
     <!-- http://opengraphprotocol.org/ -->
@@ -24,7 +23,7 @@
     </style>
 </head>
 <body>
-<div layout:fragment="~{content}" class="container-fluid">
+<div class="container-fluid">
     <article class="main-body--wrapper trademark">
         <h1 class="content--title">Spring Trademark Guidelines</h1>
             <div class="content--container">
@@ -42,9 +41,9 @@
                             </li>
                             <li>
                                 <strong>Logos:</strong>
-                                <img class="thumbnail" th:src="@{/images/favicon.ico}"/>
-                                <img class="thumbnail" th:src="@{/images/spring-logo.svg}"/>
-                                <img class="thumbnail" th:src="@{/images/projects/spring.svg}"/>
+                                <img class="thumbnail" data-th-src="@{/images/favicon.ico}"/>
+                                <img class="thumbnail" data-th-src="@{/images/spring-logo.svg}"/>
+                                <img class="thumbnail" data-th-src="@{/images/projects/spring.svg}"/>
                             </li>
                         </ol>
 

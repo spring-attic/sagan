@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="admin/layout">
+<html data-th-replace="~{admin/layout :: layout(~{::head/content()}, ~{::body/nav/content()}, ~{}, ~{::body/div})}">
 <head>
-    <title>Admin | Blog</title>
+    <title>Admin | Blog</title>
 </head>
 <body>
-<nav layout:fragment="~{breadcrumb}">
+<nav>
     <ul>
-        <li><a th:href="@{/admin}">Admin</a></li>
-        <li class="is-active"><a th:href="@{/admin/blog}" aria-current="page">Blog</a></li>
+        <li><a data-th-href="@{/admin}">Admin</a></li>
+        <li class="is-active"><a data-th-href="@{/admin/blog}" aria-current="page">Blog</a></li>
     </ul>
 </nav>
-<div layout:fragment="~{content}">
-
+<div>
     <nav class="level">
         <!--
         <div class="level-left">
@@ -42,77 +39,56 @@
         <div class="level-right">
             <!--
             <p class="level-item"><strong>All</strong></p>
-            <p class="level-item"><a th:href="@{/admin/blog?state=published}">Published</a></p>
-            <p class="level-item"><a th:href="@{/admin/blog?state=scheduled}">Scheduled</a></p>
-            <p class="level-item"><a th:href="@{/admin/blog?state=draft}">Drafts</a></p>
+            <p class="level-item"><a data-th-href="@{/admin/blog?state=published}">Published</a></p>
+            <p class="level-item"><a data-th-href="@{/admin/blog?state=scheduled}">Scheduled</a></p>
+            <p class="level-item"><a data-th-href="@{/admin/blog?state=draft}">Drafts</a></p>
             -->
-            <p class="level-item"><a class="button is-success" th:href="@{'/admin/blog/new'}">New Post</a></p>
+            <p class="level-item"><a class="button is-success" data-th-href="@{'/admin/blog/new'}">New Post</a></p>
         </div>
     </nav>
 
-    <div th:if="${drafts.totalElements}">
+    <div data-th-if="${drafts.totalElements}">
         <hr class="hr">
         <h3 class="title is-3">Drafts</h3>
         <table class="table is-striped is-fullwidth">
-            <thead layout:fragment="post-head">
-            <tr>
-                <td>Title</td>
-                <td>Author</td>
-                <td>Category</td>
-                <td>Publication date</td>
-            </tr>
-            </thead>
+            <thead data-th-insert="admin/blog/_posts_table::post-head"></thead>
             <tbody>
-            <tr th:each="post : ${drafts}" layout:fragment="post-row">
-                <td><a th:href="@{${post.editPath}}" th:text="${post.title}">This week in Spring</a></td>
-                <td class="author">
-                    <a class='author' th:href="@{'/team/'+${post.author.username}}">
-                        <span class="icon has-text-success">
-                          <i class="fas fa-user"></i>
-                        </span>
-                        <span th:text="${post.author.name}">Emily Spring</span>
-                    </a>
-                </td>
-                <td>
-                   <span class="tag is-primary" th:text="${post.category}">News</span>
-                </td>
-                <td th:text="${post.formattedPublishDate}">January 01, 2020</td>
-            </tr>
+            <tr data-th-each="post : ${drafts}" data-th-insert="admin/blog/_posts_table::post-row">
             </tbody>
         </table>
     </div>
-    <div th:if="${scheduled.totalElements}">
+    <div data-th-if="${scheduled.totalElements}">
         <hr class="hr">
         <h3 class="title is-3">Scheduled</h3>
         <table class="table is-striped is-fullwidth">
-            <thead layout:include="admin/blog/index::post-head"></thead>
+            <thead data-th-insert="admin/blog/_posts_table::post-head"></thead>
             <tbody>
-            <tr th:each="post : ${scheduled}" layout:include="admin/blog/index::post-row">
+            <tr data-th-each="post : ${scheduled}" data-th-insert="admin/blog/_posts_table::post-row">
             </tr>
             </tbody>
         </table>
     </div>
-    <div th:if="${posts.totalElements}">
+    <div data-th-if="${posts.totalElements}">
         <hr class="hr">
         <h3 class="title is-3">Published</h3>
         <table class="table is-striped is-fullwidth">
-            <thead layout:include="admin/blog/index::post-head"></thead>
+            <thead data-th-insert="admin/blog/_posts_table::post-head"></thead>
             <tbody>
-            <tr th:each="post : ${posts}" layout:include="admin/blog/index::post-row"></tr>
+            <tr data-th-each="post : ${posts}" data-th-insert="admin/blog/_posts_table::post-row"></tr>
             </tbody>
         </table>
     </div>
 
-    <nav class="pagination" role="navigation" th:if="${paginationInfo.isVisible()}" aria-label="pagination">
-        <a class="pagination-previous" th:if="${paginationInfo.previousVisible}"
-           th:href="@{${@uih.path()}(page=${paginationInfo.previousPageNumber})}">Previous</a>
-        <a class="pagination-next" th:if="${paginationInfo.nextVisible}"
-           th:href="@{${@uih.path()}(page=${paginationInfo.nextPageNumber})}">Next page</a>
+    <nav class="pagination" role="navigation" data-th-if="${paginationInfo.isVisible()}" aria-label="pagination">
+        <a class="pagination-previous" data-th-if="${paginationInfo.previousVisible}"
+           data-th-href="@{${@uih.path()}(page=${paginationInfo.previousPageNumber})}">Previous</a>
+        <a class="pagination-next" data-th-if="${paginationInfo.nextVisible}"
+           data-th-href="@{${@uih.path()}(page=${paginationInfo.nextPageNumber})}">Next page</a>
         <ul class="pagination-list">
-            <li th:each="element : ${paginationInfo.pageElements }">
-                <a class="pagination-link" th:classappend="${element.currentPage} ? ' is-current'"
-                   th:href="@{${@uih.path()}(page=${element.label})}" th:text="${element.label}">1</a>
-                <span class="pagination-ellipsis" th:unless="${element.navigable || element.currentPage}">&hellip;</span>
+            <li data-th-each="element : ${paginationInfo.pageElements }">
+                <a class="pagination-link" data-th-classappend="${element.currentPage} ? ' is-current'"
+                   data-th-href="@{${@uih.path()}(page=${element.label})}" data-th-text="${element.label}">1</a>
+                <span class="pagination-ellipsis" data-th-unless="${element.navigable || element.currentPage}">&hellip;</span>
             </li>
         </ul>
     </nav>

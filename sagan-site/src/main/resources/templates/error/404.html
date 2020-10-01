@@ -1,12 +1,11 @@
-<html
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'error', ~{::div})}">
 <head>
-    <title>404</title>
+    <title>Not Found!</title>
 </head>
 
 <body>
-<div layout:fragment="~{content}">
+<div>
     <div class='container'>
         <div class='content page-error'>
             <h1>404</h1>

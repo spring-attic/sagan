@@ -2,6 +2,7 @@ package sagan;
 
 import java.io.IOException;
 import java.util.Properties;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,9 +24,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -59,16 +58,6 @@ abstract class MvcConfig extends WebMvcConfigurerAdapter {
 	@ExceptionHandler
 	@ResponseStatus(NOT_FOUND)
 	public void handleException(ResourceNotFoundException ex) {
-	}
-
-	@Override
-	public void configurePathMatch(PathMatchConfigurer matcher) {
-		matcher.setUseSuffixPatternMatch(false);
-	}
-
-	@Override
-	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-		configurer.favorPathExtension(false);
 	}
 
 	@Override

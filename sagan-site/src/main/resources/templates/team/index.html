@@ -1,24 +1,21 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:data="https://github.com/mxab/thymeleaf-extras-data-attribute"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'team', ~{::div})}">
 <head>
     <title>Spring | Team</title>
     <meta property='og:title' content='Meet the Spring team'/>
     <meta property='og:description' content='Learn more about members of the Spring team.'/>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/team.css}" />
-    <script th:inline="javascript">
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/team.css}" />
+    <script data-th-inline="javascript">
         /*<![CDATA[*/
         var teamLocations = /*[[${teamLocations}]]*/ [{id: '123', latitude: 30.0, longitude: 1.5}];
         /*]]>*/
     </script>
-    <script th:src="@{/js/team.js}"></script>
+    <script data-th-src="@{/js/team.js}"></script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVeQZLTLC5_RxhGtRXOV8xqQQQcP8b9Q&callback=initMap"></script>
 </head>
-<body id="team">
-<div layout:fragment="~{content}">
+<body>
+<div>
     <div class="container-fluid"></div>
     <div>
         <div class="billboard--wrapper js-team-map--wrapper">
@@ -32,35 +29,30 @@
     </div>
     <div class="main-body--wrapper">
         <div class="team-members--wrapper">
-            <section class="team-member--container" th:each="profile : ${profiles}" data:member-id="${profile.id}">
-                <a th:href="@{'/team/' + ${profile.username}}" class="team-member--avatar">
-                    <img th:src="${profile.avatarUrl} + '?s=153&s=153'"/>
+            <section class="team-member--container" data-th-each="profile : ${profiles}" data:member-id="${profile.id}">
+                <a data-th-href="@{'/team/' + ${profile.username}}" class="team-member--avatar">
+                    <img data-th-src="${profile.avatarUrl} + '?s=153&s=153'"/>
                 </a>
                 <div class="team-member--info">
-                    <a th:href="@{'/team/' + ${profile.username}}" class="team-member--name" th:text="${profile.name}">Member
+                    <a data-th-href="@{'/team/' + ${profile.username}}" class="team-member--name" data-th-text="${profile.name}">Member
                         Name</a>
                     <div class="team-member--bio">
-                        <p class="team-member--position" th:text="${profile.jobTitle}">Spring team member</p>
-                        <p class="team-member--location" th:text="${profile.location}">Some-hometown</p>
+                        <p class="team-member--position" data-th-text="${profile.jobTitle}">Spring team member</p>
+                        <p class="team-member--location" data-th-text="${profile.location}">Some-hometown</p>
                     </div>
                     <div class="team-member--social">
                         <a class="team-member--social--icon twitter-small" rel="me"
-                           th:href="${profile.twitterLink.href}" th:if="${profile.hasTwitterUsername()}">
+                           data-th-href="${profile.twitterLink.href}" data-th-if="${profile.hasTwitterUsername()}">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a class="team-member--social--icon github-small" rel="me" th:href="${profile.githubLink.href}"
-                           th:if="${profile.hasGithubUsername()}">
+                        <a class="team-member--social--icon github-small" rel="me" data-th-href="${profile.githubLink.href}"
+                           data-th-if="${profile.hasGithubUsername()}">
                             <i class="fab fa-github"></i>
                         </a>
                         <a class="team-member--social--icon speakerdeck-small" rel="me"
-                           th:href="${profile.speakerdeckLink.href}" th:if="${profile.hasSpeakerdeckUsername()}">
+                           data-th-href="${profile.speakerdeckLink.href}" data-th-if="${profile.hasSpeakerdeckUsername()}">
                             <i class="fab fa-speaker-deck"></i>
                         </a>
-                        <!--
-                        TODO: no icon
-                        <a class="team-member--social--icon lanyrd-small" rel="me" th:href="${profile.lanyrdLink.href}"
-                           th:if="${profile.hasLanyrdUsername()}">
-                        </a>-->
                     </div>
                 </div>
             </section>

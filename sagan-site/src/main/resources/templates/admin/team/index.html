@@ -1,117 +1,27 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="admin/layout">
+<!DOCTYPE html>
+<html data-th-replace="~{admin/layout :: layout(~{::head/content()}, ~{::body/nav/content()}, ~{}, ~{::body/div})}">
 <head>
     <title>Admin | Team</title>
 </head>
 <body>
-<nav layout:fragment="~{breadcrumb}">
+<nav>
     <ul>
-        <li><a th:href="@{/admin}">Admin</a></li>
-        <li class="is-active"><a th:href="@{admin/team}" aria-current="page">Team</a></li>
+        <li><a data-th-href="@{/admin}">Admin</a></li>
+        <li class="is-active"><a data-th-href="@{admin/team}" aria-current="page">Team</a></li>
     </ul>
 </nav>
-<div layout:fragment="~{content}">
+<div>
     <h3 class="title is-3">Active Members</h3>
     <div class="layout-tile">
-        <a class="tile" th:each="member : ${activeMembers}" layout:fragment="member-row"
-           th:href="@{'/admin/team/'+${member.username}}">
-            <div class="card">
-                <div class="card-image">
-                    <figure class="image">
-                        <img th:src="${member.avatarUrl} + '?s=153&s=153'"/>
-                    </figure>
-                </div>
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-content">
-                            <p class="title is-4" th:text="${member.name}">Name</p>
-                            <p class="subtitle is-6 has-text-link">@<span th:text="${member.twitterUsername}">Twitter</span></p>
-                        </div>
-                    </div>
-
-                    <div class="content">
-                        <span th:text="${member.jobTitle}"></span>
-                        <br>
-                        <span th:text="${member.location}"></span>
-                    </div>
-                </div>
-            </div>
-        </a>
+        <a class="tile" data-th-each="member : ${activeMembers}" data-th-href="@{'/admin/team/'+${member.username}}"
+           data-th-insert="admin/team/_member::member-card"></a>
     </div>
 
     <hr class="hr">
     <h3 class="title is-3">Hidden Members</h3>
     <div class="layout-tile">
-        <a class="tile" th:each="member : ${hiddenMembers}" layout:fragment="member-row"
-           th:href="@{'/admin/team/'+${member.username}}">
-            <div class="card">
-                <div class="card-image">
-                    <figure class="image">
-                        <img th:src="${member.avatarUrl} + '?s=153&s=153'"/>
-                    </figure>
-                </div>
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-content">
-                            <p class="title is-4" th:text="${member.name}">Name</p>
-                            <p class="subtitle is-6 has-text-link">@<span th:text="${member.twitterUsername}">Twitter</span></p>
-                        </div>
-                    </div>
-
-                    <div class="content">
-                        <span th:text="${member.jobTitle}"></span>
-                        <br>
-                        <span th:text="${member.location}"></span>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-</div>
-
-
-<div layout:fragment="header-container"></div>
-<div layout:fragment="content" class="container">
-    <div class="main-body--wrapper">
-
-        <div class="admin-index--title">
-            <div class="content--title search-title">
-                <a th:href="@{/admin}">Admin</a> : Team
-            </div>
-        </div>
-        <form th:action="@{'/admin/team/github_import'}" method="post" class='form-inline admin-index--title'>
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-            <button class="btn">Import Team Members From Github</button>
-        </form>
-        <div class="row">
-            <div id="content" class="span12">
-                <h3 class="title is-3">Active Members</h3>
-                <table class='table dashboard--members'>
-                    <tr th:each="member : ${activeMembers}" layout:fragment="post-row">
-                        <td>
-                            <p>
-                                <a th:text="(${member.name}?:'') + ' (' + ${member.username}+ ')'"
-                                   th:href="@{'/admin/team/'+${member.username}}">Full Name (username)</a>
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-
-                <hr class="hr">
-                <h3 class="title is-3">Hidden Members</h3>
-                <table class='table dashboard--members'>
-                    <tr th:each="member : ${hiddenMembers}" layout:fragment="post-row">
-                        <td>
-                            <p>
-                                <a th:text="(${member.name}?:'') + ' (' + ${member.username}+ ')'"
-                                   th:href="@{'/admin/team/'+${member.username}}">Full Name (username)</a>
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+        <a class="tile" data-th-each="member : ${hiddenMembers}" data-th-href="@{'/admin/team/'+${member.username}}"
+           data-th-insert="admin/team/_member::member-card"></a>
     </div>
 </div>
 </body>

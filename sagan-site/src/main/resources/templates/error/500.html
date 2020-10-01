@@ -1,28 +1,18 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'error', ~{::div})}">
 <head>
     <title>Server Error</title>
 </head>
-<body>
-  <div layout:fragment="header-container"></div>
 
-<div layout:fragment="content" class="container">
-  <div class="main-body--wrapper">
-    <div class="error-page">
-      <img src="/img/500-icon.png">
-      <div class="error-title">Internal server error</div>
-      <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
-        <div class="big-search--container">
-          <input type="text" class="search-query search-form--form js-search-input" placeholder="Search for..." name="q" th:value="${searchForm != null ? searchForm.q : ''}" />
-          <button type="submit" class="search-form--submit"><i class="icon-search"></i></button>
+<body>
+<div>
+    <div class='container'>
+        <div class='content page-error'>
+            <h1>500</h1>
+            <h2>There was a server error.</h2>
+            <p>Go to the <a href='/'>homepage</a> or let us know <a href="https://twitter.com/springops">@springops</a>.</p>
         </div>
-      </form>
-      <a href="https://twitter.com/springcentral" class="error-bottom-link">
-        <div class="social-icon twitter"></div>@springcentral
-      </a>
     </div>
-  </div>
 </div>
 </body>
 </html>

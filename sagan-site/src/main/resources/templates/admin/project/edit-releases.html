@@ -2,44 +2,44 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorator="admin/layout">
 <head>
-    <title th:inline="text">Admin | Edit | [[${project.id}]]</title>
+    <title data-th-inline="text">Admin | Edit | [[${project.id}]]</title>
 </head>
 <body>
 <nav layout:fragment="~{breadcrumb}">
     <ul>
-        <li><a th:href="@{/admin}">Admin</a></li>
-        <li><a th:href="@{/admin/projects}">Projects</a></li>
-        <li class="is-active"><a th:href="@{'/admin/projects/' + ${project.id}}" aria-current="page">Edit</a></li>
+        <li><a data-th-href="@{/admin}">Admin</a></li>
+        <li><a data-th-href="@{/admin/projects}">Projects</a></li>
+        <li class="is-active"><a data-th-href="@{'/admin/projects/' + ${project.id}}" aria-current="page">Edit</a></li>
     </ul>
 </nav>
 <div layout:fragment="~{tabs}">
     <ul>
         <li>
-            <a th:href="@{'/admin/projects/' + ${project.id}}">
+            <a data-th-href="@{'/admin/projects/' + ${project.id}}">
                 <span class="icon is-small"><i class="far fa-folder-open" aria-hidden="true"></i></span>
                 <span>Metadata</span>
             </a>
         </li>
         <li>
-            <a th:href="@{'/admin/projects/' + ${project.id} + '/info'}">
+            <a data-th-href="@{'/admin/projects/' + ${project.id} + '/info'}">
                 <span class="icon is-small"><i class="fas fa-info" aria-hidden="true"></i></span>
                 <span>Info</span>
             </a>
         </li>
         <li class="is-active">
-            <a th:href="@{'/admin/projects/' + ${project.id} + '/releases'}">
+            <a data-th-href="@{'/admin/projects/' + ${project.id} + '/releases'}">
                 <span class="icon is-small"><i class="fas fa-download" aria-hidden="true"></i></span>
                 <span>Releases</span>
             </a>
         </li>
         <li>
-            <a th:href="@{'/admin/projects/' + ${project.id} + '/support'}">
+            <a data-th-href="@{'/admin/projects/' + ${project.id} + '/support'}">
                 <span class="icon is-small"><i class="far fa-calendar-check" aria-hidden="true"></i></span>
                 <span>Support</span>
             </a>
         </li>
         <li>
-            <a th:href="@{'/admin/projects/' + ${project.id} + '/samples'}">
+            <a data-th-href="@{'/admin/projects/' + ${project.id} + '/samples'}">
                 <span class="icon is-small"><i class="fas fa-code" aria-hidden="true"></i></span>
                 <span>Samples</span>
             </a>
@@ -47,9 +47,9 @@
     </ul>
 </div>
 <div layout:fragment="~{content}">
-    <form th:action="@{'/admin/projects/'+${project.id} + '/releases'}" method="post" th:object="${project}">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <input type="hidden" th:name="id" th:value="*{id}"/>
+    <form data-th-action="@{'/admin/projects/'+${project.id} + '/releases'}" method="post" data-th-object="${project}">
+        <input type="hidden" data-th-name="${_csrf.parameterName}" data-th-value="${_csrf.token}"/>
+        <input type="hidden" data-th-name="id" data-th-value="*{id}"/>
 
         <div class="field">
             <table class="table is-striped is-fullwidth">
@@ -62,29 +62,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="release,releaseStat : ${project.releases}">
-                    <input type="hidden" name="id" th:field="*{releases[__${releaseStat.index}__].id}">
-                    <input class="input" type="hidden" th:field="*{releases[__${releaseStat.index}__].version}"/>
+                <tr data-th-each="release,releaseStat : ${project.releases}">
+                    <input type="hidden" name="id" data-th-field="*{releases[__${releaseStat.index}__].id}">
+                    <input class="input" type="hidden" data-th-field="*{releases[__${releaseStat.index}__].version}"/>
                     <td><input class="checkbox" type="checkbox"
-                               th:field="*{releases[__${releaseStat.index}__].toDelete}"/></td>
-                    <td><span th:text="*{releases[__${releaseStat.index}__].version}"></span></td>
+                               data-th-field="*{releases[__${releaseStat.index}__].toDelete}"/></td>
+                    <td><span data-th-text="*{releases[__${releaseStat.index}__].version}"></span></td>
                     <td><input class="input" type="text"
-                               th:field="*{releases[__${releaseStat.index}__].refDocUrl}"/></td>
+                               data-th-field="*{releases[__${releaseStat.index}__].refDocUrl}"/></td>
                     <td><input class="input" type="text"
-                               th:field="*{releases[__${releaseStat.index}__].apiDocUrl}"/></td>
+                               data-th-field="*{releases[__${releaseStat.index}__].apiDocUrl}"/></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input class="input" type="text" th:field="*{newRelease.version}"/></td>
-                    <td><input class="input" type="text" th:field="*{newRelease.refDocUrl}"/></td>
-                    <td><input class="input" type="text" th:field="*{newRelease.apiDocUrl}"/></td>
+                    <td><input class="input" type="text" data-th-field="*{newRelease.version}"/></td>
+                    <td><input class="input" type="text" data-th-field="*{newRelease.refDocUrl}"/></td>
+                    <td><input class="input" type="text" data-th-field="*{newRelease.apiDocUrl}"/></td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="buttons control is-centered">
             <button type="submit" class="button is-primary">Save</button>
-            <a class="button" th:href="@{'/admin/projects/' + ${project.id}}">Cancel</a>
+            <a class="button" data-th-href="@{'/admin/projects/' + ${project.id}}">Cancel</a>
         </div>
     </form>
 </div>

@@ -1,20 +1,19 @@
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="admin/layout">
+<!DOCTYPE html>
+<html data-th-replace="~{admin/layout :: layout(~{::head/content()}, ~{::body/nav/content()}, ~{}, ~{::body/div})}">
 <head>
-    <title>Admin | Blog | New Blog Post</title>
+    <title>Admin | Blog | New Blog Post</title>
 </head>
 <body>
-<nav layout:fragment="~{breadcrumb}">
+<nav>
     <ul>
-        <li><a th:href="@{/admin}">Admin</a></li>
-        <li><a th:href="@{/admin/blog}">Blog</a></li>
-        <li class="is-active"><a th:href="@{/admin/blog/new}" aria-current="page">New Post</a></li>
+        <li><a data-th-href="@{/admin}">Admin</a></li>
+        <li><a data-th-href="@{/admin/blog}">Blog</a></li>
+        <li class="is-active"><a data-th-href="@{/admin/blog/new}" aria-current="page">New Post</a></li>
     </ul>
 </nav>
-<div layout:fragment="~{content}">
-    <form layout:include="admin/blog/_post_form :: post-form" th:with="create=1" th:action="@{/admin/blog}"
-          method="post" th:object="${postForm}"></form>
+<div>
+    <form data-th-insert="admin/blog/_post_form :: post-form" data-th-with="create=1" data-th-action="@{/admin/blog}"
+          method="post" data-th-object="${postForm}"></form>
 </div>
 </body>
 </html>

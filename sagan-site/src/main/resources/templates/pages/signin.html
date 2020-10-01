@@ -1,24 +1,23 @@
-<html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'signin', ~{::div})}">
 <head>
-<title>Sign In</title>
+    <title>Sign In</title>
 </head>
 <body>
-    <div layout:fragment="~{content}">
+    <div>
         <div class="main-body--wrapper signin">
             <div class="admin--wrapper">
-                <div th:if="${param.error}" class="alert alert-error">We could not
+                <div data-th-if="${param.error}" class="alert alert-error">We could not
                     authenticate you with Github. You must authenticate and authorize
                     this application to access your Github profile before you can use the
                     admin features. This application can not access any private
                     information (like passwords), from Github, only the public profile.
               </div>
               <div class="admin-login--container">
-                <div class="admin-login--title" th:unless="${param.error}">
+                <div class="admin-login--title" data-th-unless="${param.error}">
                   Please sign in with Github to access the admin pages.
                 </div>
-                    <form action="/signin/github" th:action="@{/signin/github}"
+                    <form action="/signin/github" data-th-action="@{/signin/github}"
                         method="post">
                         <button type="submit" class="button uppercase animate">
                     <i class="fab fa-github"></i>

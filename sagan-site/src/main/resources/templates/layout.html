@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang='en' xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html data-th-fragment="layout (heads, bodyId, content)" lang='en'>
 <head>
     <meta content='width=device-width,initial-scale=1,shrink-to-fit=no' id='Viewport' name='viewport'>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/main.css}"/>
-    <title>Spring</title>
-    <link th:href="@{/images/favicon.ico}" rel='shortcut icon' type='image/vnd.microsoft.icon'>
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/main.css}"/>
+    <link data-th-href="@{/images/favicon.ico}" rel='shortcut icon' type='image/vnd.microsoft.icon'>
     <meta name='description' content='Level up your Java code and explore what Spring can do for you.'/>
-    <link rel="manifest" th:href="@{/manifest.json}">
+    <link rel="manifest" data-th-href="@{/manifest.json}">
 
     <meta name="theme-color" content="#6db33f">
     <meta name="apple-mobile-web-app-title" content="spring">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <data-th-block data-th-replace="${heads}"></data-th-block>
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -19,16 +21,16 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-KZM7GF6');</script>
     <!-- End Google Tag Manager -->
-    <script th:src="@{/js/run_prettify.js}"></script>
+    <script data-th-src="@{/js/run_prettify.js}"></script>
 </head>
 
-<body>
-<script th:src="@{/js/theme.js}"></script>
+<body data-th-id="${bodyId}">
+<script data-th-src="@{/js/theme.js}"></script>
 <header>
     <nav id='nav'>
         <div id='nav-inner' class='container flex jc-between ai-center'>
             <a id='logo-focus' tabindex='1' href='/'>
-                <img id='springlogo' class='block' th:src="@{/images/spring-logo.svg}" alt="Spring">
+                <img id='springlogo' class='block' data-th-src="@{/images/spring-logo.svg}" alt="Spring">
             </a>
             <ul id='nav-items' class='flex jc-between'>
                 <li><div class='has-menu' id='why-hov'><span tabindex='2'>Why Spring</span><div class='nav-arrow'></div></div></li>
@@ -112,7 +114,7 @@
             <div class="burger-bar"></div>
             <div class="burger-bar"></div>
         </div>
-        <?xml version="1.0" encoding="utf-8"?><!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0) --><svg version="1.1" class='mobile-close pointer' id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14.6 14.6" style="enable-background:new 0 0 14.6 14.6;" xml:space="preserve"><style type="text/css">.st0{fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}</style><title>close</title><line class="st0" x1="1.5" y1="1.5" x2="13.1" y2="13.1"/><line class="st0" x1="13.1" y1="1.5" x2="1.5" y2="13.1"/></svg>
+        <?xml version="1.0" encoding="utf-8"?><!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0) --><svg version="1.1" class='mobile-close pointer' id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14.6 14.6" style="enable-background:new 0 0 14.6 14.6;" xml:space="preserve"><style type="text/css">.st0{fill:none;stroke:#000000;stroke-widdata-th-3;stroke-miterlimit:10;}</style><title>close</title><line class="st0" x1="1.5" y1="1.5" x2="13.1" y2="13.1"/><line class="st0" x1="13.1" y1="1.5" x2="1.5" y2="13.1"/></svg>
     </div>
     <nav id='mobile-nav' class='border-box rel'>
         <div class='rel'>
@@ -195,7 +197,9 @@
     </div>
 </header>
 
-<div id='main' layout:fragment="~{content}">
+<div id='main' data-th-replace="${content}">
+    <p>Content</p>
+</div>
 
 </div><!--end of main-->
 <footer>
@@ -203,7 +207,7 @@
         <div class='container flex jc-between mx-auto'>
             <div id='green-circle-sm'></div>
             <!-- <div id='green-circle-lg'></div> -->
-            <img id='circle-grid' th:src="@{/images/footer-circles.svg}" alt="">
+            <img id='circle-grid' data-th-src="@{/images/footer-circles.svg}" alt="">
             <div class='third'>
                 <h2 class='bold h3 antialiased'>Get ahead</h2>
                 <p>VMware offers training and certification to turbo-charge your progress.</p>
@@ -270,7 +274,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class='right' th:unless="${#httpServletRequest.requestURI == '/support'} or ${#httpServletRequest.requestURI.contains('/blog')}">
+                    <div class='right' data-th-unless="${#httpServletRequest.requestURI == '/support'} or ${#httpServletRequest.requestURI.contains('/blog')}">
                         <h2 class='h3 mb-2 antialiased hide'>Get the Spring newsletter</h2>
                         <h2 class='h3 mb-2 antialiased confirmation'>Thank you!</h2>
                         <script src="//app-sj05.marketo.com/js/forms2/js/forms2.min.js"></script>
@@ -292,7 +296,7 @@
         <div id='bottom-bottom'>
             <div class='flex container jc-between'>
                 <div id="spring-links">
-                    <img id='springlogo-foot' th:src="@{/images/spring-logo.svg}" alt="Spring">
+                    <img id='springlogo-foot' data-th-src="@{/images/spring-logo.svg}" alt="Spring">
                     <p class='smallest antialiased'>© <script>var d = new Date();
                     document.write(d.getFullYear());</script> <a href='https://www.vmware.com/'>VMware</a>, Inc. or its affiliates. <a href='https://www.vmware.com/help/legal.html'>Terms of Use</a> • <a href='https://www.vmware.com/help/privacy.html' rel="noopener noreferrer">Privacy</a> • <a href='/trademarks'>Trademark Guidelines</a> <span id='thank-you-mobile'>• <a href='/thank-you'>Thank you</a></span> <span id='teconsent'></span></p>
                     <p class='smallest antialiased'>Apache®, Apache Tomcat®, Apache Kafka®, Apache Cassandra&trade;, and Apache Geode&trade; are trademarks or registered trademarks of the Apache Software Foundation in the United States and/or other countries. Java&trade;, Java&trade; SE, Java&trade; EE, and OpenJDK&trade; are trademarks of Oracle and/or its affiliates. Kubernetes® is a registered trademark of the Linux Foundation in the United States and other countries. Linux® is the registered trademark of Linus Torvalds in the United States and other countries. Windows® and Microsoft® Azure are registered trademarks of Microsoft Corporation. “AWS” and “Amazon Web Services” are trademarks or registered trademarks of Amazon.com Inc. or its affiliates. All other trademarks and copyrights are property of their respective owners and are only mentioned for informative purposes. Other names may be trademarks of their respective owners.</p>
@@ -306,6 +310,6 @@
         </div>
     </div>
 </footer>
-<script th:src="@{/js/main.js}"></script>
+<script data-th-src="@{/js/main.js}"></script>
 </body>
 </html>

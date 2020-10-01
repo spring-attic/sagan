@@ -1,18 +1,17 @@
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'tools', ~{::div})}">
 <head>
     <title>Spring | Tools</title>
     <meta property='og:title' content='Spring Tools 4 is the next generation of Spring tooling'/>
     <meta property='og:description' content='Largely rebuilt from scratch, Spring Tools 4 provides world-class support for developing Spring-based enterprise applications, whether you prefer Eclipse, Visual Studio Code, or Theia IDE.'/>
 </head>
-<body id='tools'>
-<div layout:fragment="~{content}">
+<body>
+<div>
     <div id='hero' class='rel py-100 border-box bg-lightblue' role='banner'>
-        <img class='abs' th:src="@{/images/tools-left-tri.svg}" alt=''>
-        <img class='abs' th:src="@{/images/tools-right-geo.svg}" alt=''>
+        <img class='abs' data-th-src="@{/images/tools-left-tri.svg}" alt=''>
+        <img class='abs' data-th-src="@{/images/tools-right-geo.svg}" alt=''>
         <div class='container center rel z-1'>
-            <img class='block mx-auto' th:src="@{/images/logo-spring-tools-4.svg}">
+            <img class='block mx-auto' data-th-src="@{/images/logo-spring-tools-4.svg}">
             <p class='mw-580 mx-auto'>Spring Tools 4 is the next generation of Spring tooling for your favorite coding environment. Largely rebuilt from scratch, it provides world-class support for developing Spring-based enterprise applications, whether you prefer Eclipse, Visual Studio Code, or Theia IDE.</p>
         </div>
     </div>
@@ -23,12 +22,12 @@
                     <h2 class='h2 antialiased m-0'>Spring Tools 4 for Eclipse</h2>
                     <p class='mw-240 mb-2'>The all-new Spring Tool Suite 4. Free. Open source.</p>
                     <a class='button uppercase transparent animate block center w-220 ws-nowrap mb-1 px-0'
-                       th:each="download : ${eclipse.downloads}"
-                       th:href="${download.downloadUrl}" th:text="|${download.version} ${download.label}|">v4.5 STS4 Linux 64-bit</a>
+                       data-th-each="download : ${eclipse.downloads}"
+                       data-th-href="${download.downloadUrl}" data-th-text="|${download.version} ${download.label}|">v4.5 STS4 Linux 64-bit</a>
                 </div>
                 <div class='right rel as-fs'>
-                    <img th:src="@{/images/eclipse-shot.jpg}" alt=''>
-                    <img id='logo-eclipse' class='abs' th:src="@{/images/logo-eclipse.svg}" alt=''>
+                    <img data-th-src="@{/images/eclipse-shot.jpg}" alt=''>
+                    <img id='logo-eclipse' class='abs' data-th-src="@{/images/logo-eclipse.svg}" alt=''>
                 </div>
             </div>
             <hr class='light mb-5'>
@@ -37,30 +36,30 @@
                     <h2 class='h2 antialiased m-0'>Spring Tools 4 for Visual Studio Code</h2>
                     <p class=''>Free. Open source.</p>
                     <a class='button transparent animate center w-220 ws-nowrap px-0'
-                       th:each="download : ${vscode.downloads}"
-                       th:href="${download.downloadUrl}"><strong th:text="|${download.label} ${download.version}|">Spring Tools 4</strong><br><span class='smaller thin tt-none'>VSCode Marketplace</span></a>
+                       data-th-each="download : ${vscode.downloads}"
+                       data-th-href="${download.downloadUrl}"><strong data-th-text="|${download.label} ${download.version}|">Spring Tools 4</strong><br><span class='smaller thin tt-none'>VSCode Marketplace</span></a>
                 </div>
                 <div class='right rel as-fs'>
-                    <img th:src="@{/images/vs-shot.jpg}" alt=''>
-                    <img id='logo-vs' class='abs' th:src="@{/images/vscode-logo.svg}" alt=''>
+                    <img data-th-src="@{/images/vs-shot.jpg}" alt=''>
+                    <img id='logo-vs' class='abs' data-th-src="@{/images/vscode-logo.svg}" alt=''>
                 </div>
             </div>
             <hr class='light mb-5'>
-            <div th:if="${theia}" id='theia' class='tool flex jc-between mx-auto mb-6'>
+            <div data-th-if="${theia}" id='theia' class='tool flex jc-between mx-auto mb-6'>
                 <div class='left'>
                     <h2 class='h2 antialiased m-0'>Spring Tools 4 for Theia</h2>
                     <p class=''>Free. Open source.</p>
                     <a class='button transparent animate center w-220 ws-nowrap px-0'
-                       th:each="download : ${theia.downloads}" th:href="${download.downloadUrl}"><strong th:text="|${download.label} ${download.version}|">Spring Tools 4</strong><br><span class='smaller thin tt-none'>Installation for Theia</span></a>
+                       data-th-each="download : ${theia.downloads}" data-th-href="${download.downloadUrl}"><strong data-th-text="|${download.label} ${download.version}|">Spring Tools 4</strong><br><span class='smaller thin tt-none'>Installation for Theia</span></a>
                 </div>
                 <div class='right rel as-fs'>
-                    <img th:src="@{/images/theia-shot.jpg}" alt=''>
-                    <img id='logo-theia' class='abs' th:src="@{/images/theia-logo.svg}" alt=''>
+                    <img data-th-src="@{/images/theia-shot.jpg}" alt=''>
+                    <img id='logo-theia' class='abs' data-th-src="@{/images/theia-logo.svg}" alt=''>
                 </div>
             </div>
             <hr class='light mb-4'>
             <div class='flex ai-center jc-between mw-340 mx-auto mb-4'>
-                <img id='gear-icon' th:src="@{/images/logo-spring-tools-gear.svg}">
+                <img id='gear-icon' data-th-src="@{/images/logo-spring-tools-gear.svg}">
                 <h2 class='h2 antialiased m-0'>Spring Tools 4</h2>
             </div>
             <div id='trio' class='flex jc-between mb-5'>
@@ -81,28 +80,28 @@
         <div id='more' class='bg-lightblue py-80'>
             <div class='container'>
                 <div class='flex jc-between ai-center mw-945 mx-auto mb-5'>
-                    <img th:src="@{/images/tools-img1.jpg}" alt=''>
+                    <img data-th-src="@{/images/tools-img1.jpg}" alt=''>
                     <div class='text'>
                         <h2 class='h3 antialiased'>Getting started</h2>
                         <p>Spring Tool Suite 4 makes it easy to get started. A direct and easy-to-use integration of the Spring Initializr and the famous Spring Guides allows you to go from nothing to a running Spring Boot app in seconds.</p>
                     </div>
                 </div>
                 <div class='flex jc-between ai-center mw-945 mx-auto mb-5'>
-                    <img th:src="@{/images/tools-img2.jpg}" alt=''>
+                    <img data-th-src="@{/images/tools-img2.jpg}" alt=''>
                     <div class='text'>
                         <h2 class='h3 antialiased'>Navigate your spring code</h2>
                         <p>Understanding and quickly navigating source code is essential for coding. The new Spring Tools 4 understands your Spring-based source code and allows you to quickly get an overview and navigate to the important pieces of your Spring apps. Finding Spring elements and navigating to them has never been easier.</p>
                     </div>
                 </div>
                 <div class='flex jc-between ai-center mw-945 mx-auto mb-5'>
-                    <img th:src="@{/images/tools-img3.jpg}" alt=''>
+                    <img data-th-src="@{/images/tools-img3.jpg}" alt=''>
                     <div class='text'>
                         <h2 class='h3 antialiased'>Smart code editing</h2>
                         <p>Code completion is a critical part of working with source code. The all-new Spring Tools 4 provides smart code completions for the Spring elements in your app.</p>
                     </div>
                 </div>
                 <div class='flex jc-between ai-center mw-945 mx-auto mb-5'>
-                    <img th:src="@{/images/tools-img4.jpg}" alt=''>
+                    <img data-th-src="@{/images/tools-img4.jpg}" alt=''>
                     <div class='text'>
                         <h2 class='h3 antialiased'>Runtime Information in your Editor</h2>
                         <p>Spring Tools 4 now bridges the gap between your source code and running Spring Boot applications. By taking advantage of the Spring Boot Actuators, we enriched the source code with detailed information from the running app (e.g., exact bean wiring information, conditional reports, configuration, details, and more).</p>
@@ -113,15 +112,15 @@
                 </div>
                 <div id='support-links' class='flex jc-between mx-auto'>
                     <div class='item flex'>
-                        <img th:src="@{/images/logo-stackoverflow.svg}" alt=''>
+                        <img data-th-src="@{/images/logo-stackoverflow.svg}" alt=''>
                         <a class='blue link-darken ws-nowrap' href='https://stackoverflow.com/questions/ask?tags=spring-tools-4'>Ask Questions on Stack Overflow</a>
                     </div>
                     <div class='item flex'>
-                        <img th:src="@{/images/icon-github.svg}" alt=''>
+                        <img data-th-src="@{/images/icon-github.svg}" alt=''>
                         <a class='blue link-darken ws-nowrap' href='https://github.com/spring-projects/sts4/issues'>File Issues at GitHub</a>
                     </div>
                     <div class='item flex'>
-                        <img th:src="@{/images/icon-github.svg}" alt=''>
+                        <img data-th-src="@{/images/icon-github.svg}" alt=''>
                         <a class='blue link-darken ws-nowrap' href='https://github.com/spring-projects/sts4'>Find the Code at GitHub</a>
                     </div>
                 </div>

@@ -1,64 +1,63 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'blog', ~{::div})}">
 <head>
     <title>Spring | Blog</title>
     <meta property='og:title' content='Spring Blog'/>
     <meta property='og:description' content='Read the latest news on Spring.'/>
-    <link rel="alternate" type="application/atom+xml" th:href="${@uih.path() + '.atom'}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/blog.css}"/>
+    <link rel="alternate" type="application/atom+xml" data-th-href="${@uih.path() + '.atom'}"/>
+    <link rel="stylesheet" type="text/css" data-th-href="@{/css/blog.css}"/>
 </head>
-<body id="blog">
-<div layout:fragment="~{content}">
+<body>
+<div>
     <main class="body--container container-fluid">
         <div class="main-body--wrapper">
-            <div class="desktop-only" th:unless="${title}">
+            <div class="desktop-only">
                 <h1 class="blog-category active content--title">
                     Spring Blog
                 </h1>
                 <ul class="right-pane-widget--container secondary-nav with-icon small">
                     <li class="blog-category">
-                        <a th:href="@{/blog}">All Posts</a>
-                        <a class="pull-right" th:href="@{/blog.atom}"><i class="fas fa-rss-square"></i></a>
+                        <a data-th-href="@{/blog}">All Posts</a>
+                        <a class="pull-right" data-th-href="@{/blog.atom}"><i class="fas fa-rss-square"></i></a>
                     </li>
-                    <li th:each="category : ${categories}" class="blog-category">
-                        <a th:href="@{'/blog/category/' + ${category.urlSlug}}" th:text="${category.displayName}">All
+                    <li data-th-each="category : ${categories}" class="blog-category">
+                        <a data-th-href="@{'/blog/category/' + ${category.urlSlug}}" data-th-text="${category.displayName}">All
                             Posts</a>
-                        <a class="pull-right" th:href="@{'/blog/category/'+${category.urlSlug}}+'.atom'"><i
+                        <a class="pull-right" data-th-href="@{'/blog/category/'+${category.urlSlug}}+'.atom'"><i
                                 class="fas fa-rss-square"></i></a>
                     </li>
                 </ul>
             </div>
-            <div id='featured-post' th:if="${newestPost}">
+            <div id='featured-post' data-th-if="${newestPost}">
                 <h5 class='white antialiased'>Newest Post</h5>
-                <h2 class='blog--title'><a th:href="@{${newestPost.path}}" th:text="${newestPost.title}">Blog post title</a></h2>
+                <h2 class='blog--title'><a data-th-href="@{${newestPost.path}}" data-th-text="${newestPost.title}">Blog post title</a></h2>
                 <header class="meta-data--container">
                     <div class="meta-data--item desktop-only">
-                        <div th:class="${'meta-data--icon icon blog-icon '+ #strings.toLowerCase(newestPost.category).replace(' ','-')}"></div>
-                        <a class='category' th:href="@{'/blog/category/'+${newestPost.category.urlSlug}}"
-                           th:text="${newestPost.category}">Category</a>
+                        <div data-th-class="${'meta-data--icon icon blog-icon '+ #strings.toLowerCase(newestPost.category).replace(' ','-')}"></div>
+                        <a class='category' data-th-href="@{'/blog/category/'+${newestPost.category.urlSlug}}"
+                           data-th-text="${newestPost.category}">Category</a>
                     </div>
                     <div class="meta-data--item">
                         <img class="meta-data--icon"
-                             th:src="@{${newestPost.author.avatarUrl} + '?s=20&amp;d=mm'}"/>
-                        <a class='author' th:text="${newestPost.author.name}"
-                           th:href="@{'/team/'+${newestPost.author.username}}" th:unless="${newestPost.author.hidden}">Author</a>
-                        <span class='author' th:text="${newestPost.author.name}" th:if="${newestPost.author.hidden}">Author</span>
+                             data-th-src="@{${newestPost.author.avatarUrl} + '?s=20&amp;d=mm'}"/>
+                        <a class='author' data-th-text="${newestPost.author.name}"
+                           data-th-href="@{'/team/'+${newestPost.author.username}}" data-th-unless="${newestPost.author.hidden}">Author</a>
+                        <span class='author' data-th-text="${newestPost.author.name}" data-th-if="${newestPost.author.hidden}">Author</span>
                     </div>
                     <div class="meta-data--item">
                         <div class="meta-data--icon icon blog-icon calendar"></div>
-                        <time class='date' pubdate th:datetime="${newestPost.publishAt}"
-                              th:text='${#dates.format(newestPost.publishAt, "MMMM d, yyyy")}'>June 18, 2013
+                        <time class='date' pubdate data-th-datetime="${newestPost.publishAt}"
+                              data-th-text='${#dates.format(newestPost.publishAt, "MMMM d, yyyy")}'>June 18, 2013
                         </time>
                     </div>
                     <div class="meta-data--item">
                         <div class="meta-data--icon icon blog-icon comments"></div>
-                        <a class='comments' th:attr="data-disqus-identifier=${newestPost.id}"
-                           th:href="@{${newestPost.path} + '#disqus_thread'}"/>
+                        <a class='comments' data-th-attr="data-disqus-identifier=${newestPost.id}"
+                           data-th-href="@{${newestPost.path} + '#disqus_thread'}">0 Comment</a>
                     </div>
                 </header>
-                <a class="blog-preview--readmore desktop-only" th:href="@{${newestPost.path}}"
-                   th:if="${newestPost.showReadMore()}">
+                <a class="blog-preview--readmore desktop-only" data-th-href="@{${newestPost.path}}"
+                   data-th-if="${newestPost.showReadMore()}">
                     Read more
                 </a>
             </div>
@@ -66,79 +65,70 @@
             <div class="row-fluid blog--wrapper">
                 <div class="span8 mobile-left-pane">
                     <div class="blog-preview--wrapper">
-                        <article class="blog--container blog-preview" th:each="post : ${posts}">
+                        <article class="blog--container blog-preview" data-th-each="post : ${posts}">
                             <h2 class="blog--title">
-                                <a th:href="@{${post.path}}" th:text="${post.title}">
+                                <a data-th-href="@{${post.path}}" data-th-text="${post.title}">
                                     This week in Spring
                                 </a>
                             </h2>
                             <header class="meta-data--container">
                                 <div class="meta-data--item desktop-only">
-                                    <div th:class="${'meta-data--icon icon blog-icon '+ #strings.toLowerCase(post.category).replace(' ','-')}"></div>
-                                    <a class='category' th:href="@{'/blog/category/'+${post.category.urlSlug}}"
-                                       th:text="${post.category}">Category</a>
+                                    <div data-th-class="${'meta-data--icon icon blog-icon '+ #strings.toLowerCase(post.category).replace(' ','-')}"></div>
+                                    <a class='category' data-th-href="@{'/blog/category/'+${post.category.urlSlug}}"
+                                       data-th-text="${post.category}">Category</a>
                                 </div>
                                 <div class="meta-data--item">
                                     <img class="meta-data--icon"
-                                         th:src="@{${post.author.avatarUrl} + '?s=20&amp;d=mm'}"/>
-                                    <a class='author' th:text="${post.author.name}"
-                                       th:href="@{'/team/'+${post.author.username}}" th:unless="${post.author.hidden}">Author</a>
-                                    <span class='author' th:text="${post.author.name}" th:if="${post.author.hidden}">Author</span>
+                                         data-th-src="@{${post.author.avatarUrl} + '?s=20&amp;d=mm'}"/>
+                                    <a class='author' data-th-text="${post.author.name}"
+                                       data-th-href="@{'/team/'+${post.author.username}}" data-th-unless="${post.author.hidden}">Author</a>
+                                    <span class='author' data-th-text="${post.author.name}" data-th-if="${post.author.hidden}">Author</span>
                                 </div>
                                 <div class="meta-data--item">
                                     <div class="meta-data--icon icon blog-icon calendar"></div>
-                                    <time class='date' pubdate th:datetime="${post.publishAt}"
-                                          th:text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013
+                                    <time class='date' pubdate data-th-datetime="${post.publishAt}"
+                                          data-th-text='${#dates.format(post.publishAt, "MMMM d, yyyy")}'>June 18, 2013
                                     </time>
                                 </div>
                                 <div class="meta-data--item">
                                     <div class="meta-data--icon icon blog-icon comments"></div>
-                                    <a class='comments' th:attr="data-disqus-identifier=${post.id}"
-                                       th:href="@{${post.path} + '#disqus_thread'}"/>
+                                    <a class='comments' data-th-attr="data-disqus-identifier=${post.id}"
+                                       data-th-href="@{${post.path} + '#disqus_thread'}">0 Comment</a>
                                 </div>
                             </header>
                             <section class='blog--post desktop-only'>
-                                <div th:utext="${post.renderedSummary}">
+                                <div data-th-utext="${post.renderedSummary}">
                                     This has been an interesting week.
                                 </div>
                             </section>
-                            <a class="blog-preview--readmore desktop-only" th:href="@{${post.path}}"
-                               th:if="${post.showReadMore()}">
+                            <a class="blog-preview--readmore desktop-only" data-th-href="@{${post.path}}"
+                               data-th-if="${post.showReadMore()}">
                                 Read more
                             </a>
                         </article>
                     </div>
-                    <div id='pagination_control' th:if="${paginationInfo.isVisible()}"
+                    <div id='pagination_control' data-th-if="${paginationInfo.isVisible()}"
                          class="pagination blog-pagination">
-                        <a th:href="@{${@uih.path()}(page=${paginationInfo.previousPageNumber})}" class='previous'
-                           th:if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
-                        <div th:each="element : ${paginationInfo.pageElements }">
-                            <a th:href="@{${@uih.path()}(page=${element.label})}" th:text="${element.label}"
-                               th:if="${element.navigable}"></a>
-                            <div th:text="${element.label}" th:if="${!element.navigable && element.currentPage}"
+                        <a data-th-href="@{${@uih.path()}(page=${paginationInfo.previousPageNumber})}" class='previous'
+                           data-th-if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
+                        <div data-th-each="element : ${paginationInfo.pageElements }">
+                            <a data-th-href="@{${@uih.path()}(page=${element.label})}" data-th-text="${element.label}"
+                               data-th-if="${element.navigable}"></a>
+                            <div data-th-text="${element.label}" data-th-if="${!element.navigable && element.currentPage}"
                                  class="active"></div>
-                            <div th:text="${element.label}"
-                                 th:unless="${element.navigable || element.currentPage}"></div>
+                            <div data-th-text="${element.label}"
+                                 data-th-unless="${element.navigable || element.currentPage}"></div>
                         </div>
-                        <a th:href="@{${@uih.path()}(page=${paginationInfo.nextPageNumber})}" class='next'
-                           th:if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
+                        <a data-th-href="@{${@uih.path()}(page=${paginationInfo.nextPageNumber})}" class='next'
+                           data-th-if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
                     </div>
                 </div>
                 <aside class="span4 mobile-right-pane">
-                    <div layout:include="blog/_right-pane :: right-pane"></div>
+                    <div data-th-insert="~{blog/_right-pane :: right-pane}"></div>
                 </aside>
             </div>
         </div>
-        <script type="text/javascript" th:inline="javascript">
-            var disqus_shortname = /*[[${disqusShortname}]]*/ 'no_shortname';
-
-            (function (disqus_shortname, document) {
-                var s = document.createElement('script');
-                s.async = true;
-                s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
-            }(disqus_shortname, document));
-        </script>
+        <script id="dsq-count-scr" data-th-src="${'//' + disqusShortname + '.disqus.com/count.js'}" async></script>
     </main>
 </div>
 </body>

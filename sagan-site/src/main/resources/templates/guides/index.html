@@ -1,19 +1,17 @@
-<html
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:th="http://www.thymeleaf.org"
-        layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'guides', ~{::div})}">
 <head>
     <title>Spring | Guides</title>
     <meta property='og:title' content=''/>
     <meta property='og:description' content=''/>
 </head>
-<body id='guides'>
-<div layout:fragment="~{content}">
+<body>
+<div>
     <div id='hero' class='bg-lightblue' role='Banner'>
         <div class='container'>
             <div class='flex jc-between ai-center mb-3'>
-                <img class='img img-light' th:src="@{/images/guides.svg}" alt=''>
-                <img class='img img-dark' th:src="@{/images/guides-dark.svg}" alt=''>
+                <img class='img img-light' data-th-src="@{/images/guides.svg}" alt=''>
+                <img class='img img-dark' data-th-src="@{/images/guides-dark.svg}" alt=''>
                 <div class='text'>
                     <h1 class='h1 antialiased'>Guides</h1>
                     <p class='big'>Whatever you're building, these guides are designed to get you productive as quickly as possible – using the latest Spring project releases and techniques as recommended by the Spring team.</p>
@@ -45,16 +43,16 @@
                 <p class='guide-description m-0'>Designed to be completed in 15-30 minutes, these guides provide quick, hands-on instructions for building the "Hello World" of any development task with Spring. In most cases, the only prerequisites are a JDK and a text editor.</p>
                 <div id='search-container' class='rel'>
                     <input id='guide-search' class='border-box' placeholder='Find a guide' />
-                    <div id="guide-search-icon" layout:include="svg/_icons :: icon-search"></div>
+                    <div id="guide-search-icon" data-th-insert="~{svg/_icons :: icon-search}"></div>
                 </div>
             </section>
             <section id='getting-started-list' class='flex jc-between flex-wrap'>
                 <div id="guide-search-no-result" class="guide-search-no-result">No result found.</div>
-                <div th:each="guide : ${guides}" class='guide guide-search half border-box flex' th:attr="data-filterable=${guide.title}+' '+${guide.description}+' '+${guide.projects}">
-                    <div class="guide-icon" layout:include="svg/_icons :: icon-guides-start"></div>
+                <div data-th-each="guide : ${guides}" class='guide guide-search half border-box flex' data-th-attr="data-filterable=${guide.title}+' '+${guide.description}+' '+${guide.projects}">
+                    <div class="guide-icon" data-th-insert="~{svg/_icons :: icon-guides-start}"></div>
                     <div class='text'>
-                        <a class='guide-link bold blue link-darken antialiased' th:href="@{'/guides/gs/'+${guide.name}+'/'}" th:text="${guide.title}">Building a RESTful Web Service</a>
-                        <p class='m-0' th:text="${guide.description}">Learn how to create a RESTful web service with Spring.</p>
+                        <a class='guide-link bold blue link-darken antialiased' data-th-href="@{'/guides/gs/'+${guide.name}+'/'}" data-th-text="${guide.title}">Building a RESTful Web Service</a>
+                        <p class='m-0' data-th-text="${guide.description}">Learn how to create a RESTful web service with Spring.</p>
                     </div>
                 </div>
             </section>
@@ -66,11 +64,11 @@
                     <p class='guide-description m-0'>Designed to be read and comprehended in an hour or less, providing more wide-ranging or subjective content than a getting started guide.</p>
                 </div>
                 <section id='topical-guides-list' class='flex jc-between flex-wrap'>
-                    <div th:each="topical : ${topicals}" class='guide half border-box flex' th:attr="data-filterable=${topical.title}+' '+${topical.description}">
-                        <div class="guide-icon" layout:include="svg/_icons :: icon-guides-topic"></div>
+                    <div data-th-each="topical : ${topicals}" class='guide half border-box flex' data-th-attr="data-filterable=${topical.title}+' '+${topical.description}">
+                        <div class="guide-icon" data-th-insert="~{svg/_icons :: icon-guides-topic}"></div>
                         <div class='text'>
-                            <a class='guide-link bold blue link-darken antialiased' th:href="@{'/guides/topicals/'+${topical.name}+'/'}" th:text="${topical.title}">Spring Security Architecture</a>
-                            <p class='m-0' th:text="${topical.description}">Topical guide to Spring Security, how the bits fit together and how they interact with Spring Boot.</p>
+                            <a class='guide-link bold blue link-darken antialiased' data-th-href="@{'/guides/topicals/'+${topical.name}+'/'}" data-th-text="${topical.title}">Spring Security Architecture</a>
+                            <p class='m-0' data-th-text="${topical.description}">Topical guide to Spring Security, how the bits fit together and how they interact with Spring Boot.</p>
                         </div>
                     </div>
                 </section>
@@ -83,18 +81,18 @@
                     <p class='guide-description m-0'>Designed to be completed in 2-3 hours, these guides provide deeper, in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions.</p>
                 </div>
                 <section id='tutorials-list' class='flex jc-between flex-wrap'>
-                    <div th:each="tutorial : ${tutorials}" class='guide half border-box flex' th:attr="data-filterable=${tutorial.title}+' '+${tutorial.description}">
-                        <div class="guide-icon" layout:include="svg/_icons :: icon-guides-tutorial"></div>
+                    <div data-th-each="tutorial : ${tutorials}" class='guide half border-box flex' data-th-attr="data-filterable=${tutorial.title}+' '+${tutorial.description}">
+                        <div class="guide-icon" data-th-insert="~{svg/_icons :: icon-guides-tutorial}"></div>
                         <div class='text'>
-                            <a class='guide-link bold blue link-darken antialiased' th:href="@{'/guides/tutorials/'+${tutorial.name}+'/'}" th:text="${tutorial.title}">Building REST services with Spring</a>
-                            <p class='m-0' th:text="${tutorial.description}">Learn how to easily build RESTful services with Spring.</p>
+                            <a class='guide-link bold blue link-darken antialiased' data-th-href="@{'/guides/tutorials/'+${tutorial.name}+'/'}" data-th-text="${tutorial.title}">Building REST services with Spring</a>
+                            <p class='m-0' data-th-text="${tutorial.description}">Learn how to easily build RESTful services with Spring.</p>
                         </div>
                     </div>
                 </section>
             </div>
         </section>
     </div>
-    <script th:src="@{/js/guide.js}"></script>
+    <script data-th-src="@{/js/guide.js}"></script>
 </div>
 </body>
 </html>

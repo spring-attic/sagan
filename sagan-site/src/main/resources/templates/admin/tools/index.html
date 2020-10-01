@@ -1,23 +1,22 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="admin/layout">
+<!DOCTYPE html>
+<html data-th-replace="~{admin/layout :: layout(~{::head/content()}, ~{::body/nav/content()}, ~{}, ~{::body/div})}">
 <head>
     <title>Admin | Spring Tools</title>
 </head>
 <body>
-<nav layout:fragment="~{breadcrumb}">
+<nav>
     <ul>
-        <li><a th:href="@{/admin}">Admin</a></li>
-        <li class="is-active"><a th:href="@{admin/tools}" aria-current="page">Spring Tools</a></li>
+        <li><a data-th-href="@{/admin}">Admin</a></li>
+        <li class="is-active"><a data-th-href="@{admin/tools}" aria-current="page">Spring Tools</a></li>
     </ul>
 </nav>
-<div layout:fragment="~{content}">
+<div>
     <nav class="level">
         <div class="level-left">
             <h2 class="title is-2">Platforms</h2>
         </div>
         <div class="level-right">
-            <p class="level-item"><a class="button is-success" th:href="@{'/admin/tools/new'}">Add Platform</a></p>
+            <p class="level-item"><a class="button is-success" data-th-href="@{'/admin/tools/new'}">Add Platform</a></p>
         </div>
     </nav>
     <table class="table is-striped is-fullwidth">
@@ -27,39 +26,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="platform : ${platforms}">
-            <td><a th:href="@{'/admin/tools/' + ${platform.id}}" th:text="${platform.id}">eclipse</a></td>
+        <tr data-th-each="platform : ${platforms}">
+            <td><a data-th-href="@{'/admin/tools/' + ${platform.id}}" data-th-text="${platform.id}">eclipse</a></td>
         </tr>
         </tbody>
     </table>
-</div>
-
-  <div layout:fragment="content" class="container">
-
-      <div class="row">
-          <div id="content" class="span12">
-              <h2>Platforms</h2>
-              <table class='table'>
-                  <tr th:each="platform : ${platforms}">
-                      <td th:text="${platform.id}">eclipse</td>
-                      <td>
-                          <a th:href="@{'/admin/tools/' + ${platform.id}}">Edit</a>
-                      </td>
-                      <td>
-                          <form th:action="@{'/admin/tools/' + ${platform.id}}" action="/admin/tools/init" method="post" class='form-inline'>
-                              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                              <input type="hidden" name="_method" value="delete"/>
-                              <input type="submit" class="btn" value="Delete"/>
-                          </form>
-                      </td>
-                  </tr>
-              </table>
-          </div>
-
-          <div id="sidebar" class="span4">
-          </div>
-      </div>
-    </div>
 </div>
 </body>
 </html>

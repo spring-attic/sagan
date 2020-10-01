@@ -1,6 +1,5 @@
-<html
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'services', ~{::div})}">
 <head>
 <title>Services</title>
 <!-- http://opengraphprotocol.org/ -->
@@ -9,8 +8,7 @@
 <meta property="og:description" content="Spring services such as consulting, developer support, training." />
 </head>
 <body>
-    <div layout:fragment="header-container"></div>
-    <div layout:fragment="content" class="container-fluid">
+    <div class="container-fluid">
         <article class="main-body--wrapper">
             <h1 class="content--title">Services</h1>
             <div class="content--container">
@@ -30,7 +28,7 @@
                 </section>
                 <section>
                 <h2>Spring Certification</h2>
-                <p>The Spring Professional certification exam is designed to test and validate your understanding of and familiarity with:</p>
+                <p>The Spring Professional certification exam is designed to test and validate your understanding of and familiarity widata-th-</p>
 
                 <ul>
                     <li>Container basics</li>

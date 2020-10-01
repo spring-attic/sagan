@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="card" data-th-fragment="member-card">
+        <div class="card-image">
+            <figure class="image">
+                <img data-th-src="${member.avatarUrl} + '?s=153&s=153'"/>
+            </figure>
+        </div>
+        <div class="card-content">
+            <div class="media">
+                <div class="media-content">
+                    <p class="title is-4" data-th-text="${member.name}">Name</p>
+                    <p class="subtitle is-6 has-text-link">@<span data-th-text="${member.twitterUsername}">Twitter</span></p>
+                </div>
+            </div>
+
+            <div class="content">
+                <span data-th-text="${member.jobTitle}"></span>
+                <br>
+                <span data-th-text="${member.location}"></span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

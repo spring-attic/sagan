@@ -1,41 +1,40 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'learn', ~{::div})}">
 <head>
     <title>Spring | Learn</title>
     <meta property='og:title' content='Learn about Spring'/>
     <meta property='og:description' content='Read guides, watch videos, and listen to podcasts to level up your Spring knowledge.'/>
 </head>
-<body id='learn'>
-<div layout:fragment="~{content}">
+<body>
+<div>
     <div class='content' role='Main'>
-        <div id="pacman" layout:include="svg/_shapes :: pacman-learn"></div>
+        <div id="pacman" data-th-insert="~{svg/_shapes :: pacman-learn}"></div>
         <div class='container'>
             <h1 class='h1'>Learn</h1>
             <section id='featured' class='flex jc-between mb-4'>
 
-                <section class='left' th:if="${newestPost}">
-                    <img class='mb-2' th:src="@{/images/podcast.jpg}">
-                    <a class='blue h3 antialiased link-darken' th:href="@{${newestPost.path}}" th:text="${newestPost.title}">Newest blog post title</a>
-                    <p><span class='author' th:text="${newestPost.author.name}">Author Name</span> |
-                        <time class='date' pubdate th:datetime="${newestPost.publishAt}"
-                              th:text='${#dates.format(newestPost.publishAt, "MMMM d")}'>June 18</time>
+                <section class='left' data-th-if="${newestPost}">
+                    <img class='mb-2' data-th-src="@{/images/podcast.jpg}">
+                    <a class='blue h3 antialiased link-darken' data-th-href="@{${newestPost.path}}" data-th-text="${newestPost.title}">Newest blog post title</a>
+                    <p><span class='author' data-th-text="${newestPost.author.name}">Author Name</span> |
+                        <time class='date' pubdate data-th-datetime="${newestPost.publishAt}"
+                              data-th-text='${#dates.format(newestPost.publishAt, "MMMM d")}'>June 18</time>
                 </section>
                 <section class='right flex fd-col'>
-                    <div class='item mb-3' th:each="post : ${posts}">
-                        <a class='blue h3 antialiased link-darken' th:href="@{${post.path}}" th:text="${post.title}">Blog post title</a>
-                        <p><span class='author' th:text="${post.author.name}">Author Name</span> |
-                            <time class='date' pubdate th:datetime="${newestPost.publishAt}"
-                                  th:text='${#dates.format(newestPost.publishAt, "MMMM d")}'>June 18</time>
+                    <div class='item mb-3' data-th-each="post : ${posts}">
+                        <a class='blue h3 antialiased link-darken' data-th-href="@{${post.path}}" data-th-text="${post.title}">Blog post title</a>
+                        <p><span class='author' data-th-text="${post.author.name}">Author Name</span> |
+                            <time class='date' pubdate data-th-datetime="${newestPost.publishAt}"
+                                  data-th-text='${#dates.format(newestPost.publishAt, "MMMM d")}'>June 18</time>
                     </div>
-                    <a class='button animate uppercase as-fs' th:href="@{/blog}">More blog posts</a>
+                    <a class='button animate uppercase as-fs' data-th-href="@{/blog}">More blog posts</a>
                 </section>
             </section>
             <section id='quickstart' class='bg-lightblue mb-6 rel'>
-                <div id="learn-shape" layout:include="svg/_shapes :: shape-learn"></div>
+                <div id="learn-shape" data-th-insert="~{svg/_shapes :: shape-learn}"></div>
                 <div class='mx-auto'>
                     <h2 class='h2 antialiased m-0'>New to Spring? Start here.</h2>
-                    <p class='m-0'>With the <a class='blue link-animate' th:href="@{/quickstart}">Spring Quickstart</a> guide you’ll build a classic “Hello World!” endpoint.</p>
+                    <p class='m-0'>With the <a class='blue link-animate' data-th-href="@{/quickstart}">Spring Quickstart</a> guide you’ll build a classic “Hello World!” endpoint.</p>
                 </div>
             </section>
             <section id='columns' class='flex jc-between mb-6'>

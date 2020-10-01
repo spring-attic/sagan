@@ -1,46 +1,44 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'blog', ~{::div})}">
 <head>
-    <title th:inline="text">[[${post.title}]]</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/blog.css}"/>
+    <title data-th-inline="text">[[${post.title}]]</title>
+    <link rel="stylesheet" type="text/css" data-th-href="@{/css/blog.css}"/>
 
     <!-- Twitter card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@springcentral">
-    <meta name="twitter:title" th:content="${post.title}">
-    <meta name="twitter:description" th:content="${post.renderedSummary}">
-    <meta name="twitter:creator" th:if="${post.author.hasTwitterUsername()}"
-          th:content="'@' + ${post.author.twitterUsername}">
-    <meta name="twitter:image:src" th:unless="${#strings.isEmpty(post.author.avatarUrl)}"
-          th:content="${post.author.avatarUrl} + '?s=200'">
+    <meta name="twitter:title" data-th-content="${post.title}">
+    <meta name="twitter:description" data-th-content="${post.renderedSummary}">
+    <meta name="twitter:creator" data-th-if="${post.author.hasTwitterUsername()}"
+          data-th-content="'@' + ${post.author.twitterUsername}">
+    <meta name="twitter:image:src" data-th-unless="${#strings.isEmpty(post.author.avatarUrl)}"
+          data-th-content="${post.author.avatarUrl} + '?s=200'">
 
     <!-- http://opengraphprotocol.org/ -->
-    <meta property="og:title" th:content="${post.title}">
-    <meta property="og:image" th:unless="${#strings.isEmpty(post.author.avatarUrl)}"
-          th:content="${post.author.avatarUrl} + '?s=200'">
-    <meta property="og:description" th:content="${post.renderedSummary}">
+    <meta property="og:title" data-th-content="${post.title}">
+    <meta property="og:image" data-th-unless="${#strings.isEmpty(post.author.avatarUrl)}"
+          data-th-content="${post.author.avatarUrl} + '?s=200'">
+    <meta property="og:description" data-th-content="${post.renderedSummary}">
     <meta property="og:type" content="article">
-    <meta property="og:article:published_time" th:content="${post.publishAt}">
+    <meta property="og:article:published_time" data-th-content="${post.publishAt}">
 </head>
-<body id="blog">
-<div layout:fragment="header-container"></div>
-<div layout:fragment="~{content}" th:object="${post}">
+<body>
+<div data-th-object="${post}">
     <main class="body--container container-fluid">
         <div class="main-body--wrapper">
-            <div class="desktop-only" th:unless="${title}">
+            <div class="desktop-only" data-th-unless="${title}">
                 <h1 class="blog-category active content--title">
                     Spring Blog
                 </h1>
                 <ul class="right-pane-widget--container secondary-nav with-icon small">
                     <li class="blog-category">
-                        <a th:href="@{/blog}">All Posts</a>
-                        <a class="pull-right" th:href="@{/blog/category/blog.atom}"><i class="fas fa-rss-square"></i></a>
+                        <a data-th-href="@{/blog}">All Posts</a>
+                        <a class="pull-right" data-th-href="@{/blog/category/blog.atom}"><i class="fas fa-rss-square"></i></a>
                     </li>
-                    <li th:each="category : ${categories}" class="blog-category">
-                        <a th:href="@{'/blog/category/' + ${category.urlSlug}}" th:text="${category.displayName}">All
+                    <li data-th-each="category : ${categories}" class="blog-category">
+                        <a data-th-href="@{'/blog/category/' + ${category.urlSlug}}" data-th-text="${category.displayName}">All
                             Posts</a>
-                        <a class="pull-right" th:href="@{'/blog/category/'+${category.urlSlug}}+'.atom'"><i
+                        <a class="pull-right" data-th-href="@{'/blog/category/'+${category.urlSlug}}+'.atom'"><i
                                 class="fas fa-rss-square"></i></a>
                     </li>
                 </ul>
@@ -48,11 +46,11 @@
             <div class="row-fluid blog--wrapper">
                 <div class="span8 mobile-left-pane">
                     <article class="blog--container blog-preview" id="content"
-                             layout:include="blog/_full_post :: full-post">
+                             data-th-insert="~{blog/_full_post :: full-post}">
                     </article>
                 </div>
                 <aside id="sidebar" class="span4 mobile-right-pane">
-                    <div layout:include="blog/_right-pane :: right-pane"></div>
+                    <div data-th-insert="~{blog/_right-pane :: right-pane}"></div>
                 </aside>
             </div>
         </div>

@@ -1,14 +1,13 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<!DOCTYPE html>
+<html data-th-replace="~{layout :: layout(~{::head/content()}, 'events', ~{::div})}">
 <head>
     <title>Spring | Events</title>
     <meta property='og:title' content='Spring Events'/>
     <meta property='og:description' content='Engage with the Spring community by attending an event.'/>
 </head>
 
-<body id='events'>
-<div layout:fragment="~{content}">
+<body>
+<div>
     <div class='content'>
         <div class='container'>
             <h1 class='h1 antialiased mb-3'>Events</h1>
@@ -16,14 +15,14 @@
         <div id='hero' class='bg-lightblue rel of-hide' role='banner'>
             <div class='container rel z-1'>
                 <div class='flex jc-between flex-wrap mb-2'>
-                    <a th:each="event : ${events}"
-                       th:href="${event.link}" class='card third shadow-hover bg-white border-box block rel mb-2'
+                    <a data-th-each="event : ${events}"
+                       data-th-href="${event.link}" class='card third shadow-hover bg-white border-box block rel mb-2'
                        target="_blank">
                         <div class='greenbar'></div>
                         <div class='border-dark rad-5'>
-                            <h3 class='h3 antialiased' th:text="${event.summary}">Event</h3>
-                            <p class='location m-0' th:text="${event.location}">Location</p>
-                            <p class='date' th:text="${#temporals.format(event.startTime, 'yyyy-MM-dd')}">2020-01-01</p>
+                            <h3 class='h3 antialiased' data-th-text="${event.summary}">Event</h3>
+                            <p class='location m-0' data-th-text="${event.location}">Location</p>
+                            <p class='date' data-th-text="${#temporals.format(event.startTime, 'yyyy-MM-dd')}">2020-01-01</p>
                         </div>
                     </a>
                 </div>
