@@ -1,24 +1,23 @@
 package sagan.site.blog.support;
 
+import java.text.ParseException;
+import java.util.Locale;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import sagan.site.blog.Post;
 import sagan.site.blog.PostBuilder;
 import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 
-import java.text.ParseException;
-import java.util.Locale;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.BDDMockito.given;
 
+@ExtendWith(MockitoExtension.class)
 public class PostViewTests {
 
     @Mock
@@ -29,14 +28,13 @@ public class PostViewTests {
     private Post post;
     private PostView postView;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
         defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         Locale.setDefault(defaultLocale);
     }

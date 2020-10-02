@@ -1,9 +1,8 @@
 package sagan.site.blog;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PostSummaryTests {
 
@@ -20,7 +19,7 @@ public class PostSummaryTests {
                 "<p>this is a blog post</p>\n"
                         + "<p>With the release of Spring 1.1 the Spring community was given it?s first taste of JMS support. This support included exception translation, message conversion, and a template class much like <a href=\"http://static.springframework.org/spring/docs/2.0-m3/api/org/springframework/jdbc/core/JdbcTemplate.html\">JdbcTemplate</a>. This support also took care of domain unification between the JMS 1.0.2 and 1.1 specs. The centerpieces of this support are the <a href=\"http://static.springframework.org/spring/docs/1.2.x/api/org/springframework/jms/core/JmsTemplate.html\">JmsTemplate</a> class and it?s JMS 1.0.2 counterpart <a href=\"http://static.springframework.org/spring/docs/1.2.x/api/org/springframework/jms/core/JmsTemplate102.html\">JmsTemplate102</a>.</p>\n";
 
-        assertThat(postSummary.forContent(content, 50), is(expected));
+        assertThat(postSummary.forContent(content, 50)).isEqualTo(expected);
     }
 
     @Test
@@ -38,7 +37,7 @@ public class PostSummaryTests {
         String expected =
                 "<p>We?re pleased to announce that, after a long period of internal incubation, we?re releasing a foundational framework for asynchronous applications on the JVM which we?re calling <em>Reactor</em>. It provides abstractions for Java, Groovy and other JVM languages to make building event and data-driven applications easier. It?s also really fast. On modest hardware, it's possible to process over 15,000,000 events per second with the fastest non-blocking <code>Dispatcher</code>. Other dispatchers are available to provide the developer with a range of choices from thread-pool style, long-running task execution to non-blocking, high-volume task dispatching. The GitHub repo is here <a href=\"https://github.com/reactor/reactor\"></a><a href=\"https://github.com/reactor/reactor\">https://github.com/reactor/reactor</a>.</p>\n";
 
-        assertThat(postSummary.forContent(content, 500), is(expected));
+        assertThat(postSummary.forContent(content, 500)).isEqualTo(expected);
     }
 
 }

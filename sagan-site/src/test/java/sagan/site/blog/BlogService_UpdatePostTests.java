@@ -2,20 +2,17 @@ package sagan.site.blog;
 
 import java.util.Date;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import sagan.support.DateFactory;
 import sagan.support.DateTestUtils;
 
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class BlogService_UpdatePostTests {
 
     private BlogService service;
@@ -32,15 +29,10 @@ public class BlogService_UpdatePostTests {
     @Mock
     private PostFormAdapter postFormAdapter;
 
-    @Rule
-    public ExpectedException expected = ExpectedException.none();
-
     private PostForm postForm;
 
-    @Before
+    @BeforeEach
     public void setup() {
-        given(dateFactory.now()).willReturn(now);
-
         service = new BlogService(postRepository, postFormAdapter, dateFactory);
 
         post = PostBuilder.post().id(123L).publishAt(publishAt).build();

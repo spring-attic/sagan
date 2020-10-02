@@ -3,13 +3,12 @@ package sagan.support.nav;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PaginationInfo_PaginationElementsTests {
 
@@ -22,7 +21,7 @@ public class PaginationInfo_PaginationElementsTests {
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
 
         List<PageElement> pageElements = paginationInfo.getPageElements();
-        assertThat(pageElements.size(), is(equalTo(1)));
+        assertThat(pageElements.size()).isEqualTo(1);
         assertNotNavigableElementOnPage("1", pageElements.get(0));
     }
 
@@ -33,7 +32,7 @@ public class PaginationInfo_PaginationElementsTests {
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
-        assertThat(paginationInfo.getPageElements().size(), is(equalTo(2)));
+        assertThat(paginationInfo.getPageElements().size()).isEqualTo(2);
         assertNotNavigableElementOnPage("1", pageElements.get(0));
         assertNavigableElementOnPage("2", pageElements.get(1));
     }
@@ -45,7 +44,7 @@ public class PaginationInfo_PaginationElementsTests {
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
-        assertThat(pageElements.size(), is(equalTo(3)));
+        assertThat(pageElements.size()).isEqualTo(3);
         assertNavigableElementOnPage("1", pageElements.get(0));
         assertNotNavigableElementOnPage("2", pageElements.get(1));
         assertNavigableElementOnPage("3", pageElements.get(2));
@@ -58,7 +57,7 @@ public class PaginationInfo_PaginationElementsTests {
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
-        assertThat(paginationInfo.getPageElements().size(), is(equalTo(10)));
+        assertThat(paginationInfo.getPageElements().size()).isEqualTo(10);
 
         assertNavigableElementOnPage("3", pageElements.get(2));
         assertNavigableElementOnPage("4", pageElements.get(3));
@@ -75,7 +74,7 @@ public class PaginationInfo_PaginationElementsTests {
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
-        assertThat(paginationInfo.getPageElements().size(), is(equalTo(10)));
+        assertThat(paginationInfo.getPageElements().size()).isEqualTo(10);
 
         assertNavigableElementOnPage("1", pageElements.get(0));
         assertNavigableElementOnPage("10", pageElements.get(9));
@@ -88,7 +87,7 @@ public class PaginationInfo_PaginationElementsTests {
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
-        assertThat(paginationInfo.getPageElements().size(), is(equalTo(10)));
+        assertThat(paginationInfo.getPageElements().size()).isEqualTo(10);
 
         assertNotNavigableElementOnPage("...", pageElements.get(1));
         assertNotNavigableElementOnPage("...", pageElements.get(8));
@@ -101,7 +100,7 @@ public class PaginationInfo_PaginationElementsTests {
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
-        assertThat(paginationInfo.getPageElements().size(), is(equalTo(7)));
+        assertThat(paginationInfo.getPageElements().size()).isEqualTo(7);
 
         assertNavigableElementOnPage("1", pageElements.get(0));
         assertNavigableElementOnPage("2", pageElements.get(1));
@@ -121,7 +120,7 @@ public class PaginationInfo_PaginationElementsTests {
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
-        assertThat(paginationInfo.getPageElements().size(), is(equalTo(8)));
+        assertThat(paginationInfo.getPageElements().size()).isEqualTo(8);
 
         assertNotNavigableElementOnPage("1", pageElements.get(0));
         assertNavigableElementOnPage("2", pageElements.get(1));
@@ -142,7 +141,7 @@ public class PaginationInfo_PaginationElementsTests {
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
-        assertThat(paginationInfo.getPageElements().size(), is(equalTo(8)));
+        assertThat(paginationInfo.getPageElements().size()).isEqualTo(8);
 
         assertNavigableElementOnPage("1", pageElements.get(0));
         assertNavigableElementOnPage("2", pageElements.get(1));
@@ -163,23 +162,23 @@ public class PaginationInfo_PaginationElementsTests {
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
         List<PageElement> pageElements = paginationInfo.getPageElements();
 
-        assertThat(pageElements.get(0).isCurrentPage(), is(false));
-        assertThat(pageElements.get(1).isCurrentPage(), is(false));
-        assertThat(pageElements.get(2).isCurrentPage(), is(true));
-        assertThat(pageElements.get(3).isCurrentPage(), is(false));
-        assertThat(pageElements.get(4).isCurrentPage(), is(false));
-        assertThat(pageElements.get(5).isCurrentPage(), is(false));
-        assertThat(pageElements.get(6).isCurrentPage(), is(false));
-        assertThat(pageElements.get(7).isCurrentPage(), is(false));
+        assertThat(pageElements.get(0).isCurrentPage()).isFalse();
+        assertThat(pageElements.get(1).isCurrentPage()).isFalse();
+        assertThat(pageElements.get(2).isCurrentPage()).isTrue();
+        assertThat(pageElements.get(3).isCurrentPage()).isFalse();
+        assertThat(pageElements.get(4).isCurrentPage()).isFalse();
+        assertThat(pageElements.get(5).isCurrentPage()).isFalse();
+        assertThat(pageElements.get(6).isCurrentPage()).isFalse();
+        assertThat(pageElements.get(7).isCurrentPage()).isFalse();
     }
 
     private void assertNotNavigableElementOnPage(String page, PageElement element) {
-        assertThat(element.isNavigable(), is(false));
-        assertThat(element.getLabel(), is(page));
+        assertThat(element.isNavigable()).isFalse();
+        assertThat(element.getLabel()).isEqualTo(page);
     }
 
     private void assertNavigableElementOnPage(String page, PageElement element) {
-        assertThat(element.isNavigable(), is(true));
-        assertThat(element.getLabel(), is(page));
+        assertThat(element.isNavigable()).isTrue();
+        assertThat(element.getLabel()).isEqualTo(page);
     }
 }

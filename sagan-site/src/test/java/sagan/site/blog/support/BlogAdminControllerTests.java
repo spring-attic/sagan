@@ -1,44 +1,45 @@
 package sagan.site.blog.support;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import sagan.site.blog.Post;
-import sagan.site.blog.PostBuilder;
-import sagan.site.blog.PostCategory;
-import sagan.site.blog.PostFormat;
-import sagan.site.blog.BlogService;
-import sagan.site.blog.PostForm;
-import sagan.support.DateFactory;
-import sagan.support.nav.PageableFactory;
-import sagan.site.team.MemberProfile;
-import sagan.site.team.support.TeamRepository;
-
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Optional;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import sagan.site.blog.BlogService;
+import sagan.site.blog.Post;
+import sagan.site.blog.PostBuilder;
+import sagan.site.blog.PostCategory;
+import sagan.site.blog.PostForm;
+import sagan.site.blog.PostFormat;
+import sagan.site.team.MemberProfile;
+import sagan.site.team.support.TeamRepository;
+import sagan.support.DateFactory;
+import sagan.support.nav.PageableFactory;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.validation.MapBindingResult;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class BlogAdminControllerTests {
     private static final Post TEST_POST = PostBuilder.post()
             .id(123L)
@@ -58,7 +59,7 @@ public class BlogAdminControllerTests {
     @Mock
     private TeamRepository teamRepository;
 
-    @Before
+    @BeforeEach
     public void setup() {
         bindingResult = new MapBindingResult(new HashMap<>(), "postForm");
         principal = () -> "12345";
@@ -87,9 +88,9 @@ public class BlogAdminControllerTests {
         ExtendedModelMap model = new ExtendedModelMap();
         controller.dashboard(model, 1);
 
-        assertThat(((Page<PostView>) model.get("drafts")).getContent().get(0).getTitle(), equalTo("draft post"));
-        assertThat(((Page<PostView>) model.get("scheduled")).getContent().get(0).getTitle(), equalTo("scheduled post"));
-        assertThat(((Page<PostView>) model.get("posts")).getContent().get(0).getTitle(), equalTo("published post"));
+        assertThat(((Page<PostView>) model.get("drafts")).getContent().get(0).getTitle()).isEqualTo("draft post");
+        assertThat(((Page<PostView>) model.get("scheduled")).getContent().get(0).getTitle()).isEqualTo("scheduled post");
+        assertThat(((Page<PostView>) model.get("posts")).getContent().get(0).getTitle()).isEqualTo("published post");
     }
 
     @Test
@@ -98,12 +99,12 @@ public class BlogAdminControllerTests {
         given(blogService.getPost(post.getId())).willReturn(post);
         controller.showPost(post.getId(), "1-post-title", model);
         PostView view = (PostView) model.get("post");
-        assertThat(view, is(notNullValue()));
+        assertThat(view).isNotNull();
     }
 
     @Test
     public void showPostView() {
-        assertThat(controller.showPost(1L, "not important", model), is("blog/show"));
+        assertThat(controller.showPost(1L, "not important", model)).isEqualTo("blog/show");
     }
 
     @Test
@@ -138,7 +139,7 @@ public class BlogAdminControllerTests {
         given(blogService.addPost(postForm, username)).willReturn(post);
         String result = controller.createPost(principal, postForm, bindingResult, null);
 
-        assertThat(result, equalTo("redirect:/blog/2013/05/06/post-title/edit"));
+        assertThat(result).isEqualTo("redirect:/blog/2013/05/06/post-title/edit");
     }
 
     @Test
@@ -159,11 +160,11 @@ public class BlogAdminControllerTests {
 
         given(blogService.addPost(postForm, username)).willReturn(post);
         String result1 = controller.createPost(principal, postForm, bindingResult, null);
-        assertThat(result1, equalTo("redirect:/blog/2013/05/06/post-title/edit"));
+        assertThat(result1).isEqualTo("redirect:/blog/2013/05/06/post-title/edit");
 
         given(blogService.addPost(postForm, username)).willThrow(DataIntegrityViolationException.class);
         String result2 = controller.createPost(principal, postForm, bindingResult, new ExtendedModelMap());
-        assertThat(result2, equalTo("admin/blog/new"));
+        assertThat(result2).isEqualTo("admin/blog/new");
     }
 
     @Test
@@ -176,7 +177,7 @@ public class BlogAdminControllerTests {
                 PageRequest.of(page, pageSize, Sort.Direction.DESC, "id"), 2);
         given(blogService.refreshPosts(page, pageSize)).willReturn(posts);
         String result = controller.refreshBlogPosts(page, pageSize);
-        assertThat(result, equalTo("{page: 0, pageSize: 20, totalPages: 1, totalElements: 2}"));
+        assertThat(result).isEqualTo("{page: 0, pageSize: 20, totalPages: 1, totalElements: 2}");
         verify(blogService, times(1)).refreshPosts(page, pageSize);
     }
 

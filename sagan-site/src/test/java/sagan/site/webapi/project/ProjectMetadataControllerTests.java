@@ -2,9 +2,8 @@ package sagan.site.webapi.project;
 
 import java.util.Arrays;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import sagan.site.projects.Project;
 import sagan.site.projects.ProjectMetadataService;
@@ -38,7 +37,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Tests for {@link ProjectMetadataController}
  */
-@RunWith(SpringRunner.class)
 @WebApiTest(ProjectMetadataController.class)
 public class ProjectMetadataControllerTests {
 
@@ -54,7 +52,7 @@ public class ProjectMetadataControllerTests {
 
 	private Project springDataES;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		this.springBoot = new Project("spring-boot", "Spring Boot");
 		this.springBoot.setRepoUrl("https://github.com/spring-projects/spring-boot");

@@ -3,13 +3,13 @@ package sagan.support.nav;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class PaginationInfo_PreviousAndNextControlsTests {
 
@@ -21,9 +21,9 @@ public class PaginationInfo_PreviousAndNextControlsTests {
         int itemCount = 8;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
 
-        assertThat(paginationInfo.isVisible(), is(false));
-        assertThat(paginationInfo.isPreviousVisible(), is(false));
-        assertThat(paginationInfo.isNextVisible(), is(false));
+        assertThat(paginationInfo.isVisible()).isFalse();
+        assertThat(paginationInfo.isPreviousVisible()).isFalse();
+        assertThat(paginationInfo.isNextVisible()).isFalse();
     }
 
     @Test
@@ -32,9 +32,9 @@ public class PaginationInfo_PreviousAndNextControlsTests {
         int itemCount = 23;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
 
-        assertThat(paginationInfo.isVisible(), is(true));
-        assertThat(paginationInfo.isPreviousVisible(), is(false));
-        assertThat(paginationInfo.isNextVisible(), is(true));
+        assertThat(paginationInfo.isVisible()).isTrue();
+        assertThat(paginationInfo.isPreviousVisible()).isFalse();
+        assertThat(paginationInfo.isNextVisible()).isTrue();
     }
 
     @Test
@@ -43,9 +43,9 @@ public class PaginationInfo_PreviousAndNextControlsTests {
         int itemCount = 23;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
 
-        assertThat(paginationInfo.isVisible(), is(true));
-        assertThat(paginationInfo.isPreviousVisible(), is(true));
-        assertThat(paginationInfo.isNextVisible(), is(true));
+        assertThat(paginationInfo.isVisible()).isTrue();
+        assertThat(paginationInfo.isPreviousVisible()).isTrue();
+        assertThat(paginationInfo.isNextVisible()).isTrue();
     }
 
     @Test
@@ -54,9 +54,9 @@ public class PaginationInfo_PreviousAndNextControlsTests {
         int itemCount = 23;
         PaginationInfo paginationInfo = new PaginationInfo(new PageImpl<>(content, pageRequest, itemCount));
 
-        assertThat(paginationInfo.isVisible(), is(true));
-        assertThat(paginationInfo.isPreviousVisible(), is(true));
-        assertThat(paginationInfo.isNextVisible(), is(false));
+        assertThat(paginationInfo.isVisible()).isTrue();
+        assertThat(paginationInfo.isPreviousVisible()).isTrue();
+        assertThat(paginationInfo.isNextVisible()).isFalse();
     }
 
 }

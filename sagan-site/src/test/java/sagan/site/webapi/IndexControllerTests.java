@@ -1,7 +1,6 @@
 package sagan.site.webapi;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
@@ -21,7 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Tests for {@link IndexController}
  */
-@RunWith(SpringRunner.class)
 @WebApiTest(IndexController.class)
 public class IndexControllerTests {
 

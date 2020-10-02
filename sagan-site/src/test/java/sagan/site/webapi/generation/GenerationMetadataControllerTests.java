@@ -6,9 +6,8 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import sagan.site.projects.Project;
 import sagan.site.projects.ProjectGeneration;
@@ -25,11 +24,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.restdocs.hypermedia.LinkDescriptor;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.eq;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -38,7 +36,6 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -46,7 +43,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Tests for {@link GenerationMetadataController}
  */
-@RunWith(SpringRunner.class)
 @WebApiTest(GenerationMetadataController.class)
 public class GenerationMetadataControllerTests {
 
@@ -58,7 +54,7 @@ public class GenerationMetadataControllerTests {
 
 	private Project springBoot;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		this.springBoot = new Project("spring-boot", "Spring Boot");
 		this.springBoot.setRepoUrl("https://github.com/spring-projects/spring-boot");

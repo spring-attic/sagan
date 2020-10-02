@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import sagan.site.projects.Project;
 import sagan.site.projects.ProjectMetadataService;
@@ -52,7 +51,6 @@ import static sagan.site.webapi.ConstrainedFields.constraintsOn;
 /**
  * Tests for {@link ReleaseMetadataController}
  */
-@RunWith(SpringRunner.class)
 @WebApiTest(ReleaseMetadataController.class)
 public class ReleaseMetadataControllerTests {
 
@@ -68,7 +66,7 @@ public class ReleaseMetadataControllerTests {
 
 	private Release currentRelease;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		this.springBoot = new Project("spring-boot", "Spring Boot");
 		this.springBoot.setRepoUrl("https://github.com/spring-projects/spring-boot");

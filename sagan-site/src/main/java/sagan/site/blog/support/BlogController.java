@@ -39,7 +39,9 @@ import sagan.support.nav.Section;
 @Navigation(Section.BLOG)
 class BlogController {
 
-	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_DATE;
+	private static final DateTimeFormatter DAY_FORMATTER = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
+
+	private static final DateTimeFormatter MONTH_FORMATTER = DateTimeFormatter.ofPattern("MMMM yyyy");
 
 	private final String ALL_POSTS_CATEGORY = "All Posts";
 	private final String BROADCASTS_CATEGORY = "Broadcasts";
@@ -96,7 +98,7 @@ class BlogController {
         Page<Post> result = blogService.getPublishedPostsByDate(year, month, day, pageRequest);
 
 		LocalDate date = LocalDate.of(year, month, day);
-        model.addAttribute("title", "Archive for " + date.format(DATE_FORMATTER));
+        model.addAttribute("title", "Archive for " + date.format(DAY_FORMATTER));
 
         return renderListOfPosts(result, model, ALL_POSTS_CATEGORY);
     }
@@ -109,7 +111,7 @@ class BlogController {
         Pageable pageRequest = PageableFactory.forLists(page);
         Page<Post> result = blogService.getPublishedPostsByDate(year, month, pageRequest);
 		YearMonth yearMonth = YearMonth.of(year, month);
-        model.addAttribute("title", "Archive for " + yearMonth.format(DATE_FORMATTER));
+        model.addAttribute("title", "Archive for " + yearMonth.format(MONTH_FORMATTER));
         return renderListOfPosts(result, model, ALL_POSTS_CATEGORY);
     }
 

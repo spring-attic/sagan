@@ -2,27 +2,23 @@ package sagan.site.blog;
 
 import java.util.Date;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
+import org.mockito.junit.jupiter.MockitoExtension;
 import sagan.site.team.MemberProfile;
 import sagan.site.team.support.TeamRepository;
+import sagan.support.DateFactory;
+import sagan.support.DateTestUtils;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class PostFormAdapter_CreatePostTests {
 
     public static final String RENDERED_HTML = "<p>Rendered HTML</p><p>from Markdown</p>";
@@ -50,13 +46,11 @@ public class PostFormAdapter_CreatePostTests {
     @Mock
     private PostContentRenderer renderer;
 
-    @Rule
-    public ExpectedException expected = ExpectedException.none();
     private PostForm postForm;
 
     private PostFormAdapter adapter;
 
-    @Before
+    @BeforeEach
     public void setup() {
         MemberProfile profile = new MemberProfile();
         profile.setUsername(AUTHOR_USERNAME);
@@ -82,32 +76,32 @@ public class PostFormAdapter_CreatePostTests {
 
     @Test
     public void postHasCorrectUserEnteredValues() {
-        assertThat(post.getTitle(), equalTo(title));
-        assertThat(post.getRawContent(), equalTo(content));
-        assertThat(post.getCategory(), equalTo(category));
-        assertThat(post.isBroadcast(), equalTo(broadcast));
-        assertThat(post.isDraft(), equalTo(draft));
-        assertThat(post.getPublishAt(), equalTo(publishAt));
+        assertThat(post.getTitle()).isEqualTo(title);
+        assertThat(post.getRawContent()).isEqualTo(content);
+        assertThat(post.getCategory()).isEqualTo(category);
+        assertThat(post.isBroadcast()).isEqualTo(broadcast);
+        assertThat(post.isDraft()).isEqualTo(draft);
+        assertThat(post.getPublishAt()).isEqualTo(publishAt);
     }
 
     @Test
     public void postHasAuthor() {
-        assertThat(post.getAuthor().getName(), equalTo(AUTHOR_NAME));
+        assertThat(post.getAuthor().getName()).isEqualTo(AUTHOR_NAME);
     }
 
     @Test
     public void postHasRenderedContent() {
-        assertThat(post.getRenderedContent(), equalTo(RENDERED_HTML));
+        assertThat(post.getRenderedContent()).isEqualTo(RENDERED_HTML);
     }
 
     @Test
     public void postHasRenderedSummary() {
-        assertThat(post.getRenderedSummary(), equalTo(RENDERED_SUMMARY));
+        assertThat(post.getRenderedSummary()).isEqualTo(RENDERED_SUMMARY);
     }
 
     @Test
     public void postHasPublicSlug() {
-        assertThat(post.getPublicSlug(), equalTo("2013/07/01/title"));
+        assertThat(post.getPublicSlug()).isEqualTo("2013/07/01/title");
     }
 
     @Test
@@ -115,7 +109,7 @@ public class PostFormAdapter_CreatePostTests {
         postForm.setDraft(true);
         postForm.setPublishAt(null);
         post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
-        assertThat(post.getPublishAt(), is(nullValue()));
+        assertThat(post.getPublishAt()).isNull();
     }
 
     @Test
@@ -123,12 +117,12 @@ public class PostFormAdapter_CreatePostTests {
         postForm.setDraft(false);
         postForm.setPublishAt(null);
         post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
-        assertThat(post.getPublishAt(), equalTo(now));
+        assertThat(post.getPublishAt()).isEqualTo(now);
     }
 
     @Test
     public void postCreatedDateDefaultsToNow() throws Exception {
-        assertThat(post.getCreatedAt(), is(now));
+        assertThat(post.getCreatedAt()).isEqualTo(now);
     }
 
     @Test
@@ -136,6 +130,6 @@ public class PostFormAdapter_CreatePostTests {
         Date createdAt = DateTestUtils.getDate("2013-05-23 22:58");
         postForm.setCreatedAt(createdAt);
         Post post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
-        assertThat(post.getCreatedAt(), is(createdAt));
+        assertThat(post.getCreatedAt()).isEqualTo(createdAt);
     }
 }

@@ -2,8 +2,7 @@ package sagan.site.events;
 
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import sagan.SiteProperties;
 import sagan.support.cache.CachedRestClient;
 
@@ -29,7 +28,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 /**
  * Tests for {@link EventsCalendarService}
  */
-@RunWith(SpringRunner.class)
 @RestClientTest({EventsCalendarService.class, SiteProperties.class})
 @TestPropertySource(properties = "sagan.site.events.calendar-uri=http://example.org/calendar")
 public class EventsCalendarServiceTests {

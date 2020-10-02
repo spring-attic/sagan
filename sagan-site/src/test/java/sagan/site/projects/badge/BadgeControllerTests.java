@@ -16,27 +16,27 @@
 
 package sagan.site.projects.badge;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.mockito.junit.jupiter.MockitoExtension;
 import sagan.site.projects.Project;
 import sagan.site.projects.ProjectMetadataService;
 import sagan.site.projects.Release;
 import sagan.site.projects.Version;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class BadgeControllerTests {
 
     @Mock
@@ -48,7 +48,7 @@ public class BadgeControllerTests {
     private Project project;
     private SortedSet<Release> releases = new TreeSet<>();
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.versionBadgeService.postConstruct();
 		this.controller = new BadgeController(projectMetadataServiceMock, versionBadgeService);
@@ -57,7 +57,7 @@ public class BadgeControllerTests {
         when(this.projectMetadataServiceMock.fetchFullProject("spring-data-redis")).thenReturn(project);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
 		this.versionBadgeService.preDestroy();
     }
@@ -65,7 +65,7 @@ public class BadgeControllerTests {
     @Test
     public void badgeNotFound() throws Exception {
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
-        assertThat(response.getStatusCode(), is(equalTo(HttpStatus.NOT_FOUND)));
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 
     @Test
@@ -73,14 +73,14 @@ public class BadgeControllerTests {
 		this.releases.add(new Release(Version.of("1.0.RELEASE"), true));
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
-        assertThat(response.getStatusCode(), is(equalTo(HttpStatus.OK)));
-        assertThat(response.getHeaders().getETag(), is(equalTo("\"1.0.RELEASE\"")));
-        assertThat(response.getHeaders().getCacheControl(), is(equalTo("max-age=3600")));
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getHeaders().getETag()).isEqualTo("\"1.0.RELEASE\"");
+        assertThat(response.getHeaders().getCacheControl()).isEqualTo("max-age=3600");
 
         String content = new String(response.getBody());
-        assertThat(content, containsString("<svg"));
-        assertThat(content, containsString("Spring Data Redis"));
-        assertThat(content, containsString("1.0.RELEASE"));
+        assertThat(content).contains("<svg");
+        assertThat(content).contains("Spring Data Redis");
+        assertThat(content).contains("1.0.RELEASE");
     }
 
     @Test
@@ -90,7 +90,7 @@ public class BadgeControllerTests {
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
-        assertThat(content, containsString("1.1.RELEASE"));
+        assertThat(content).contains("1.1.RELEASE");
     }
 
     @Test
@@ -99,7 +99,7 @@ public class BadgeControllerTests {
 		this.releases.add(new Release(Version.of("1.1.RELEASE"), false));
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
         String content = new String(response.getBody());
-        assertThat(content, containsString("1.1.RELEASE"));
+        assertThat(content).contains("1.1.RELEASE");
     }
 
     @Test
@@ -109,7 +109,7 @@ public class BadgeControllerTests {
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
-        assertThat(content, containsString("1.0.RELEASE"));
+        assertThat(content).contains("1.0.RELEASE");
     }
 
     @Test
@@ -120,7 +120,7 @@ public class BadgeControllerTests {
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
-        assertThat(content, containsString("Brixton-SR2"));
+        assertThat(content).contains("Brixton-SR2");
     }
 
     @Test
@@ -130,7 +130,7 @@ public class BadgeControllerTests {
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
-        assertThat(content, containsString("Brixton-RELEASE"));
+        assertThat(content).contains("Brixton-RELEASE");
     }
 
     @Test
@@ -140,6 +140,6 @@ public class BadgeControllerTests {
         ResponseEntity<byte[]> response = controller.releaseBadge("spring-data-redis");
 
         String content = new String(response.getBody());
-        assertThat(content, containsString("Brixton-RELEASE"));
+        assertThat(content).contains("Brixton-RELEASE");
     }
 }

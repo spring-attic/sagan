@@ -3,8 +3,8 @@ package sagan.site.guides;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +15,7 @@ public class DefaultGuideHeaderTests {
 
 	private DefaultGuideHeader guide;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		Set<String> projects = new HashSet<>();
 		projects.add("spring-boot");

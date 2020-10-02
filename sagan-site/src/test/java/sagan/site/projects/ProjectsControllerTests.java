@@ -8,9 +8,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import sagan.site.guides.GettingStartedGuides;
 import sagan.site.guides.GuideHeader;
 import sagan.site.guides.Topicals;
@@ -20,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.BDDMockito.given;
@@ -30,7 +28,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @WebMvcTest(ProjectsController.class)
 @TestPropertySource(properties = "spring.profiles.active=standalone")
 public class ProjectsControllerTests {
@@ -65,7 +62,7 @@ public class ProjectsControllerTests {
 	@Autowired
 	private MockMvc mvc;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProjectGroup pg1 = new ProjectGroup("microservices", "Microservices");
 		ProjectGroup pg2 = new ProjectGroup("cloud", "Cloud");

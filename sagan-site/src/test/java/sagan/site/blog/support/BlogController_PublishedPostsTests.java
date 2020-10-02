@@ -10,8 +10,8 @@ import sagan.support.nav.PageableFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -22,7 +22,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.ui.ExtendedModelMap;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.eq;
@@ -43,7 +44,7 @@ public class BlogController_PublishedPostsTests {
     private Page<PostView> page;
     private String viewName;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         controller = new BlogController(blogService, dateFactory);
@@ -63,22 +64,22 @@ public class BlogController_PublishedPostsTests {
 
     @Test
     public void providesAllCategoriesInModel() {
-        assertThat(model.get("categories"), is(PostCategory.values()));
+        assertThat(model.get("categories")).isEqualTo(PostCategory.values());
     }
 
     @Test
     public void providesPaginationInfoInModel() {
-        assertThat(model.get("paginationInfo"), notNullValue());
+        assertThat(model.get("paginationInfo")).isNotNull();
     }
 
     @Test
     public void viewNameIsIndex() {
-        assertThat(viewName, is("blog/index"));
+        assertThat(viewName).isEqualTo("blog/index");
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void postsInModel() {
-        assertThat(((List<PostView>) model.get("posts")).get(0).getTitle(), is("post title"));
+        assertThat(((List<PostView>) model.get("posts")).get(0).getTitle()).isEqualTo("post title");
     }
 }

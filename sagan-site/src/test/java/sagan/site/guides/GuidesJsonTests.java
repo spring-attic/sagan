@@ -4,15 +4,13 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import sagan.site.renderer.GuideContent;
 import sagan.site.renderer.GuideImage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,7 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * To store model objects in that cache, they are (de)serialized to JSON -
  * these tests make sure that models are properly annotated to support JSON serialization.
  */
-@RunWith(SpringRunner.class)
 @JsonTest
 public class GuidesJsonTests {
 

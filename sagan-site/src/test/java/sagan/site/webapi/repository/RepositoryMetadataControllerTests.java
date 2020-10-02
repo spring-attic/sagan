@@ -1,7 +1,6 @@
 package sagan.site.webapi.repository;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import sagan.site.webapi.WebApiTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Tests for {@link RepositoryMetadataController}
  */
-@RunWith(SpringRunner.class)
 @WebApiTest(RepositoryMetadataController.class)
 public class RepositoryMetadataControllerTests {
 

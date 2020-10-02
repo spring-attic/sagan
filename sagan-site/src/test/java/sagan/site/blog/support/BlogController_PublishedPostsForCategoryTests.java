@@ -10,8 +10,8 @@ import sagan.support.nav.PageableFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -22,10 +22,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.ui.ExtendedModelMap;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.eq;
 import static sagan.site.blog.PostCategory.ENGINEERING;
 
 public class BlogController_PublishedPostsForCategoryTests {
@@ -45,7 +45,7 @@ public class BlogController_PublishedPostsForCategoryTests {
     private Page<PostView> page;
     private String viewName;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         controller = new BlogController(blogService, dateFactory);
@@ -66,23 +66,23 @@ public class BlogController_PublishedPostsForCategoryTests {
 
     @Test
     public void providesAllCategoriesInModel() {
-        assertThat(model.get("categories"), is(PostCategory.values()));
+        assertThat(model.get("categories")).isEqualTo(PostCategory.values());
     }
 
     @Test
     public void providesPaginationInfoInModel() {
-        assertThat(model.get("paginationInfo"), notNullValue());
+        assertThat(model.get("paginationInfo")).isNotNull();
     }
 
     @Test
     public void viewNameIsIndex() {
-        assertThat(viewName, is("blog/index"));
+        assertThat(viewName).isEqualTo("blog/index");
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void postsInModel() {
         controller.listPublishedPostsForCategory(TEST_CATEGORY, model, TEST_PAGE);
-        assertThat(((List<PostView>) model.get("posts")).get(0).getTitle(), is("post title"));
+        assertThat(((List<PostView>) model.get("posts")).get(0).getTitle()).isEqualTo("post title");
     }
 }

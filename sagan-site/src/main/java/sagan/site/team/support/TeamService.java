@@ -101,7 +101,7 @@ public class TeamService {
 				MessageDigest digest = MessageDigest.getInstance("MD5");
 				digest.update(profile.getGravatarEmail().getBytes());
 				String hashedEmail = DatatypeConverter.printHexBinary(digest.digest());
-            	profile.setAvatarUrl(String.format("https://gravatar.com/avatar/%s", hashedEmail));
+            	profile.setAvatarUrl(String.format("https://gravatar.com/avatar/%s", hashedEmail.toLowerCase()));
 			}
 			catch (NoSuchAlgorithmException e) {
 				logger.error("Could not find MD5 MessageDigest");

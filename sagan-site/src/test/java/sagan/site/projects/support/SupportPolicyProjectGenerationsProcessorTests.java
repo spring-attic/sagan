@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.TreeSet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import sagan.site.projects.ProjectGeneration;
 
 import static org.assertj.core.api.Assertions.assertThat;

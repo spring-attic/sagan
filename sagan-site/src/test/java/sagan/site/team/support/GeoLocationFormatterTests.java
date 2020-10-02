@@ -1,19 +1,18 @@
 package sagan.site.team.support;
 
-import sagan.site.team.GeoLocation;
-
 import java.text.ParseException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import sagan.site.team.GeoLocation;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class GeoLocationFormatterTests {
     private GeoLocationFormatter formatter;
 
-    @Before
+    @BeforeEach
     public void setup() {
         formatter = new GeoLocationFormatter();
     }
@@ -26,19 +25,19 @@ public class GeoLocationFormatterTests {
         assertLatLon("1.1 , 1.1", 1.1f, 1.1f);
     }
 
-    @Test(expected = ParseException.class)
+    @Test
     public void testNoParse() throws Exception {
-        formatter.parse("afslk", null);
+        assertThatThrownBy(() -> formatter.parse("afslk", null)).isInstanceOf(ParseException.class) ;
     }
 
     private void assertLatLon(String latLon, float lat, float lon) throws ParseException {
         GeoLocation location = formatter.parse(latLon, null);
-        assertThat(location.getLatitude(), equalTo(lat));
-        assertThat(location.getLongitude(), equalTo(lon));
+        assertThat(location.getLatitude()).isEqualTo(lat);
+        assertThat(location.getLongitude()).isEqualTo(lon);
     }
 
     @Test
     public void testPrint() throws Exception {
-        assertThat(formatter.print(new GeoLocation(-10.3f, 87.42f), null), equalTo("-10.300000,87.419998"));
+        assertThat(formatter.print(new GeoLocation(-10.3f, 87.42f), null)).isEqualTo("-10.300000,87.419998");
     }
 }

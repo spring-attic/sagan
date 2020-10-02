@@ -1,12 +1,5 @@
 package sagan.site.blog.support;
 
-import com.rometools.rome.feed.atom.Entry;
-import com.rometools.rome.feed.atom.Feed;
-import com.rometools.rome.feed.atom.Link;
-import sagan.site.blog.Post;
-import sagan.site.blog.PostBuilder;
-import sagan.support.DateFactory;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -15,17 +8,24 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Before;
-import org.junit.Test;
+import com.rometools.rome.feed.atom.Entry;
+import com.rometools.rome.feed.atom.Feed;
+import com.rometools.rome.feed.atom.Link;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import sagan.site.blog.Post;
+import sagan.site.blog.PostBuilder;
+import sagan.support.DateFactory;
 
 import org.springframework.ui.ExtendedModelMap;
 
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 
 public class BlogAtomFeedViewTests {
 
@@ -36,7 +36,7 @@ public class BlogAtomFeedViewTests {
     private Calendar calendar = Calendar.getInstance(DateFactory.DEFAULT_TIME_ZONE);
     private HttpServletRequest request = mock(HttpServletRequest.class);
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         siteUrl = mock(SiteUrl.class);
         atomFeedView = new AtomFeedView(siteUrl, new DateFactory());
@@ -48,7 +48,7 @@ public class BlogAtomFeedViewTests {
     public void hasFeedTitleFromModel() {
         model.addAttribute("feed-title", "Spring Engineering");
         atomFeedView.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
-        assertThat(feed.getTitle(), is("Spring Engineering"));
+        assertThat(feed.getTitle()).isEqualTo("Spring Engineering");
     }
 
     @Test
@@ -61,8 +61,8 @@ public class BlogAtomFeedViewTests {
         atomFeedView.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
 
         Link feedLink = (Link) feed.getAlternateLinks().get(0);
-        assertThat(feedLink.getHref(), is(expectedBlogUrl));
-        assertThat(feedLink.getRel(), is("alternate"));
+        assertThat(feedLink.getHref()).isEqualTo(expectedBlogUrl);
+        assertThat(feedLink.getRel()).isEqualTo("alternate");
     }
 
     @Test
@@ -75,8 +75,8 @@ public class BlogAtomFeedViewTests {
         atomFeedView.buildFeedMetadata(model, feed, mock(HttpServletRequest.class));
 
         Link feedLink = (Link) feed.getOtherLinks().get(0);
-        assertThat(feedLink.getHref(), is(expectedFeedUrl));
-        assertThat(feedLink.getRel(), is("self"));
+        assertThat(feedLink.getHref()).isEqualTo(expectedFeedUrl);
+        assertThat(feedLink.getRel()).isEqualTo("self");
     }
 
     @Test
@@ -85,7 +85,7 @@ public class BlogAtomFeedViewTests {
 
         atomFeedView.buildFeedMetadata(model, feed, request);
 
-        assertThat(feed.getId(), is("http://spring.io/blog.atom"));
+        assertThat(feed.getId()).isEqualTo("http://spring.io/blog.atom");
     }
 
     @Test
@@ -97,7 +97,7 @@ public class BlogAtomFeedViewTests {
         atomFeedView.buildFeedMetadata(model, feed, request);
 
         Post latestPost = posts.get(0);
-        assertThat(feed.getUpdated(), is(latestPost.getPublishAt()));
+        assertThat(feed.getUpdated()).isEqualTo(latestPost.getPublishAt());
     }
 
     @Test
@@ -107,7 +107,7 @@ public class BlogAtomFeedViewTests {
 
         atomFeedView.buildFeedMetadata(model, feed, request);
 
-        assertThat(feed.getUpdated(), is(nullValue()));
+        assertThat(feed.getUpdated()).isNull();
     }
 
     private void buildPostsWithDate(int numberOfPosts, List<Post> posts) {
@@ -131,6 +131,6 @@ public class BlogAtomFeedViewTests {
         List<Entry> entries = atomFeedView.buildFeedEntries(model, request, mock(HttpServletResponse.class));
 
         Entry entry = entries.get(0);
-        assertThat(entry.getId(), is("tag:springsource.org,2013-07-01:123"));
+        assertThat(entry.getId()).isEqualTo("tag:springsource.org,2013-07-01:123");
     }
 }

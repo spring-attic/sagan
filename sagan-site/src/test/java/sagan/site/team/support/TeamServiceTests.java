@@ -1,24 +1,23 @@
 package sagan.site.team.support;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import sagan.site.team.MemberProfile;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class TeamServiceTests {
 	@Mock
 	private TeamRepository teamRepository;
 
 	private TeamService service;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		service = new TeamService(teamRepository);
 	}
@@ -33,8 +32,8 @@ public class TeamServiceTests {
 		updatedProfile.setGravatarEmail("test@example.com");
 		service.updateMemberProfile(savedProfile.getName(), updatedProfile);
 
-		assertThat(savedProfile.getGravatarEmail(), equalTo("test@example.com"));
-		assertThat(savedProfile.getAvatarUrl(), equalTo("https://gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0"));
+		assertThat(savedProfile.getGravatarEmail()).isEqualTo("test@example.com");
+		assertThat(savedProfile.getAvatarUrl()).isEqualTo("https://gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0");
 	}
 
 	@Test
@@ -48,7 +47,7 @@ public class TeamServiceTests {
 		updatedProfile.setGravatarEmail("");
 		service.updateMemberProfile(savedProfile.getName(), updatedProfile);
 
-		assertThat(savedProfile.getAvatarUrl(), equalTo("http://example.com/image.png"));
+		assertThat(savedProfile.getAvatarUrl()).isEqualTo("http://example.com/image.png");
 	}
 }
 

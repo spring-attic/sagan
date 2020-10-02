@@ -22,7 +22,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = "/api", produces = MediaTypes.HAL_JSON_VALUE)
-@ExposesResourceFor(GenerationMetadata.class)
+//@ExposesResourceFor(GenerationMetadata.class)
 public class GenerationMetadataController {
 
 	private final ProjectMetadataService metadataService;

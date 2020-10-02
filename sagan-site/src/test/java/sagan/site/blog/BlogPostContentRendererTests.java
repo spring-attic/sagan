@@ -1,7 +1,6 @@
 package sagan.site.blog;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import sagan.SiteProperties;
 import sagan.site.renderer.SaganRendererClient;
 
@@ -12,7 +11,6 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +19,6 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-@RunWith(SpringRunner.class)
 @RestClientTest({SaganRendererClient.class, SiteProperties.class, PostContentRenderer.class})
 @TestPropertySource(properties = "sagan.site.renderer.service-url=https://example.com/")
 public class BlogPostContentRendererTests {

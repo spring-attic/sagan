@@ -1,29 +1,28 @@
 package sagan.site.team.support;
 
-import sagan.site.blog.BlogService;
-import sagan.support.DateFactory;
-import sagan.site.team.MemberProfile;
-import sagan.site.team.MemberProfileBuilder;
-import sagan.site.team.TeamLocation;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import sagan.site.blog.BlogService;
+import sagan.site.team.MemberProfile;
+import sagan.site.team.MemberProfileBuilder;
+import sagan.site.team.TeamLocation;
+import sagan.support.DateFactory;
 
 import org.springframework.ui.ExtendedModelMap;
 
 /**
  * Unit tests for {@link TeamController}.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class TeamControllerTests {
 
     @Mock
@@ -37,7 +36,7 @@ public class TeamControllerTests {
     private TeamController teamController;
     private DateFactory dateFactory = new DateFactory();
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         teamController = new TeamController(teamService, blogService, dateFactory);
         List<MemberProfile> members = new ArrayList<>();

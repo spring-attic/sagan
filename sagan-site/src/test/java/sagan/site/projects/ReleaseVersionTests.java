@@ -16,9 +16,10 @@
 
 package sagan.site.projects;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class ReleaseVersionTests {
@@ -28,64 +29,64 @@ public class ReleaseVersionTests {
     @Test
     public void snapshotDetected() {
         Release release = new Release(Version.of("1.0.0.BUILD-SNAPSHOT"));
-        assertThat(release.isSnapshot(), equalTo(true));
-        assertThat(release.getRepository().getUrl(), containsString("snapshot"));
+        assertThat(release.isSnapshot()).isEqualTo(true);
+        assertThat(release.getRepository().getUrl().contains("snapshot"));
     }
 
     @Test
     public void snapshotDetectedMavenStyle() {
 		Release release = new Release(Version.of("1.0.0-SNAPSHOT"));
-        assertThat(release.isSnapshot(), equalTo(true));
-        assertThat(release.getRepository().getUrl(), containsString("snapshot"));
+        assertThat(release.isSnapshot()).isEqualTo(true);
+        assertThat(release.getRepository().getUrl().contains("snapshot"));
     }
 
     @Test
     public void releaseTrainSnapshotDetected() {
 		Release release = new Release(Version.of("Angel.BUILD-SNAPSHOT"));
-        assertThat(release.isSnapshot(), equalTo(true));
-        assertThat(release.getRepository().getUrl(), containsString("snapshot"));
+        assertThat(release.isSnapshot()).isEqualTo(true);
+        assertThat(release.getRepository().getUrl().contains("snapshot"));
     }
 
     @Test
     public void prereleaseDetected() {
 		Release release = new Release(Version.of("1.0.0.RC1"));
-        assertThat(release.isPreRelease(), equalTo(true));
-        assertThat(release.getRepository().getUrl(), containsString("milestone"));
+        assertThat(release.isPreRelease()).isEqualTo(true);
+        assertThat(release.getRepository().getUrl().contains("milestone"));
     }
 
     @Test
     public void releaseTrainPrereleaseDetected() {
 		Release release = new Release(Version.of("Angel.RC1"));
-        assertThat(release.isPreRelease(), equalTo(true));
-        assertThat(release.getRepository().getUrl(), containsString("milestone"));
+        assertThat(release.isPreRelease()).isEqualTo(true);
+        assertThat(release.getRepository().getUrl().contains("milestone"));
     }
 
     @Test
     public void gaDetected() {
 		Release release = new Release(Version.of("1.0.0.RELEASE"));
-        assertThat(release.isGeneralAvailability(), equalTo(true));
-		assertThat(release.getRepository().getUrl(), containsString("release"));
+        assertThat(release.isGeneralAvailability()).isEqualTo(true);
+		assertThat(release.getRepository().getUrl().contains("release"));
     }
 
     @Test
     public void releaseTrainGaDetected() {
 		Release release = new Release(Version.of("Angel.RELEASE"));
-        assertThat(release.isGeneralAvailability(), equalTo(true));
-		assertThat(release.getRepository().getUrl(), containsString("release"));
+        assertThat(release.isGeneralAvailability()).isEqualTo(true);
+		assertThat(release.getRepository().getUrl().contains("release"));
     }
 
     @Test
     public void releaseServiceReleaseTrainGaDetected() {
 		Release release = new Release(Version.of("Angel.SR1"));
-        assertThat(release.isGeneralAvailability(), equalTo(true));
-		assertThat(release.getRepository().getUrl(), containsString("release"));
+        assertThat(release.isGeneralAvailability()).isEqualTo(true);
+		assertThat(release.getRepository().getUrl().contains("release"));
     }
 
     @Test
     public void releaseDashSeparatorDetected() {
 		Release release = new Release(Version.of("Angel.M1"));
-        assertThat(release.isPreRelease(), equalTo(true));
-        assertThat(release.getRepository().getUrl(), containsString("milestone"));
+        assertThat(release.isPreRelease()).isEqualTo(true);
+        assertThat(release.getRepository().getUrl().contains("milestone"));
     }
 
 }
