@@ -16,18 +16,19 @@ import sagan.site.projects.SupportStatus;
 import sagan.site.webapi.WebApiTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
-import org.springframework.restdocs.hypermedia.LinkDescriptor;
+import org.springframework.restdocs.hypermedia.LinksSnippet;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.halLinks;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -35,6 +36,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -75,10 +77,11 @@ public class GenerationMetadataControllerTests {
 				.andExpect(header().string("Last-Modified", Matchers.notNullValue()))
 				.andExpect(jsonPath("$._embedded.generations.length()").value("2"))
 				.andDo(document("{method-name}", preprocessResponse(prettyPrint()),
+						generationsLinks(),
 						responseFields(fieldWithPath("_embedded.generations").description("An array of Project Generations"))
 								.andWithPrefix("_embedded.generations[]", generationPayload())
-								.and(fieldWithPath("_links").description("Links to other resources")),
-						links(generationsLinks())));
+								.and(subsectionWithPath("_links").description("Links to other resources"))
+						));
 	}
 
 	@Test
@@ -100,7 +103,7 @@ public class GenerationMetadataControllerTests {
 				.andExpect(status().isOk())
 				.andExpect(header().string("Last-Modified", Matchers.notNullValue()))
 				.andDo(document("{method-name}", preprocessResponse(prettyPrint()),
-						responseFields(generationPayload()), links(generationLinks())));
+						generationLinks(), responseFields(generationPayload())));
 	}
 
 	FieldDescriptor[] generationPayload() {
@@ -109,23 +112,23 @@ public class GenerationMetadataControllerTests {
 				fieldWithPath("initialReleaseDate").type(JsonFieldType.STRING).description("Date of the first release for this Generation"),
 				fieldWithPath("ossSupportEndDate").type(JsonFieldType.STRING).description("End date of the OSS support"),
 				fieldWithPath("commercialSupportEndDate").type(JsonFieldType.STRING).description("End date of the Commercial support"),
-				fieldWithPath("_links").description("Links to other resources")
+				subsectionWithPath("_links").description("Links to other resources")
 		};
 	}
 
-	LinkDescriptor generationsLinks() {
-		return linkWithRel("project").description("Link to Project");
+	LinksSnippet generationsLinks() {
+		return links(halLinks(), linkWithRel("project").description("Link to Project"));
 	}
 
-	LinkDescriptor[] generationLinks() {
-		return new LinkDescriptor[] {
+	LinksSnippet generationLinks() {
+		return links(halLinks(),
 				linkWithRel("self").description("Canonical self link"),
 				linkWithRel("project").description("Link to Project")
-		};
+		);
 	}
 
 
-	@Configuration
+	@TestConfiguration
 	static class GenerationMetadataTestConfig {
 
 		@Bean

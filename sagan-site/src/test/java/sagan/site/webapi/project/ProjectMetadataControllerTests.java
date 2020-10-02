@@ -11,18 +11,20 @@ import sagan.site.projects.SupportStatus;
 import sagan.site.webapi.WebApiTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.restdocs.hypermedia.LinkDescriptor;
+import org.springframework.restdocs.hypermedia.LinksSnippet;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.halLinks;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -30,6 +32,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -83,7 +86,7 @@ public class ProjectMetadataControllerTests {
 		this.mvc.perform(get("/api/projects/spring-boot").accept(MediaTypes.HAL_JSON))
 				.andExpect(status().isOk())
 				.andDo(document("{method-name}", preprocessResponse(prettyPrint()),
-						responseFields(projectPayload()), links(projectLinks())));
+						projectLinks(), responseFields(projectPayload())));
 	}
 
 	FieldDescriptor[] projectPayload() {
@@ -92,21 +95,20 @@ public class ProjectMetadataControllerTests {
 				fieldWithPath("slug").type(JsonFieldType.STRING).description("URL-friendly name of the project"),
 				fieldWithPath("repositoryUrl").type(JsonFieldType.STRING).description("URL for the source repository"),
 				fieldWithPath("status").type(JsonFieldType.STRING).description("<<project-status, Support status>> of the project"),
-				fieldWithPath("_links").description("Links to other resources")
+				subsectionWithPath("_links").description("Links to other resources")
 		};
 	}
 
-	LinkDescriptor[] projectLinks() {
-		return new LinkDescriptor[] {
+	LinksSnippet projectLinks() {
+		return links(halLinks(),
 				linkWithRel("self").description("Canonical self link"),
 				linkWithRel("parent").optional().description("Link to <<project, parent Project>>, if any"),
 				linkWithRel("generations").optional().description("Link to <<generation, Generations>>"),
-				linkWithRel("releases").optional().description("Link to <<release, Releases>>")
-		};
+				linkWithRel("releases").optional().description("Link to <<release, Releases>>"));
 	}
 
 
-	@Configuration
+	@TestConfiguration
 	static class ProjectMetadataTestConfig {
 
 		@Bean

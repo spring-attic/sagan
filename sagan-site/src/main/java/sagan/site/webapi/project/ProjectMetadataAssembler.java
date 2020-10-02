@@ -38,7 +38,8 @@ class ProjectMetadataAssembler extends RepresentationModelAssemblerSupport<Proje
 		ProjectMetadata projectMetadata = this.modelMapper.map(project, ProjectMetadata.class);
 		Link selfLink = this.entityLinks.linkToItemResource(ProjectMetadata.class, project.getId()).withSelfRel();
 		projectMetadata.add(linkTo(methodOn(ReleaseMetadataController.class).listReleases(project.getId())).withRel("releases"),
-				linkTo(methodOn(GenerationMetadataController.class).listGenerations(project.getId())).withRel("generations"));
+				linkTo(methodOn(GenerationMetadataController.class).listGenerations(project.getId())).withRel("generations")
+				, selfLink);
 		return projectMetadata;
 	}
 }

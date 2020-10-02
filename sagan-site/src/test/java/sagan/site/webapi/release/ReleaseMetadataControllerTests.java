@@ -16,15 +16,14 @@ import sagan.site.webapi.ConstrainedFields;
 import sagan.site.webapi.WebApiTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.hypermedia.LinkDescriptor;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.BDDMockito.given;
@@ -40,6 +39,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -92,7 +92,7 @@ public class ReleaseMetadataControllerTests {
 				.andDo(document("{method-name}", preprocessResponse(prettyPrint()),
 						responseFields(fieldWithPath("_embedded.releases").description("An array of Project Releases"))
 								.andWithPrefix("_embedded.releases[]", releasePayload())
-								.and(fieldWithPath("_links").description("Links to other resources")),
+								.and(subsectionWithPath("_links").description("Links to other resources")),
 						links(releasesLinks())));
 	}
 
@@ -142,7 +142,7 @@ public class ReleaseMetadataControllerTests {
 				fieldWithPath("referenceDocUrl").type(JsonFieldType.STRING).description("URL for the reference documentation"),
 				fieldWithPath("apiDocUrl").type(JsonFieldType.STRING).description("URL for the API documentation"),
 				fieldWithPath("current").type(JsonFieldType.BOOLEAN).description("Whether this release is the most recent, officially supported"),
-				fieldWithPath("_links").description("Links to other resources")
+				subsectionWithPath("_links").description("Links to other resources")
 		};
 	}
 
@@ -161,7 +161,7 @@ public class ReleaseMetadataControllerTests {
 	}
 
 
-	@Configuration
+	@TestConfiguration
 	static class ReleaseMetadataTestConfig {
 
 		@Bean
