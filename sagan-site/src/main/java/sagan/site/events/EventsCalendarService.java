@@ -1,6 +1,5 @@
 package sagan.site.events;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +17,7 @@ public class EventsCalendarService {
 
 	private final RestTemplate client;
 
-	private final URI calendarUri;
+	private final String calendarUri;
 
 	private final CachedRestClient cachedClient;
 
@@ -31,7 +30,7 @@ public class EventsCalendarService {
 	public List<Event> findEvents(Period period) {
 		Assert.notNull(this.calendarUri, "No calendar URI configured, see 'sagan.site.events.calendar-uri'");
 		try {
-			GoogleCalendar googleCalendar = this.client.getForEntity(this.calendarUri.toString(), GoogleCalendar.class).getBody();
+			GoogleCalendar googleCalendar = this.client.getForEntity(this.calendarUri, GoogleCalendar.class).getBody();
 			return googleCalendar.getEvents().stream()
 					.filter(period.toCalendarFilter())
 					.sorted()

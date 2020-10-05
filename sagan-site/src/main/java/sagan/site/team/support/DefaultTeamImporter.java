@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import sagan.SiteProperties;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestOperations;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service
 public class DefaultTeamImporter implements TeamImporter {
@@ -22,15 +22,14 @@ public class DefaultTeamImporter implements TeamImporter {
 	private static final String API_URL_BASE = "https://api.github.com";
 
 	private final TeamService teamService;
-	private final String gitHubTeamId;
+	private final String gitHubTeam;
 	private final RestOperations rest;
 
 	@Autowired
-	public DefaultTeamImporter(TeamService teamService, @Value("${github.team.id}") String gitHubTeamId,
-			@Value("${github.access.token}") String gitHubAccessToken) {
+	public DefaultTeamImporter(TeamService teamService, SiteProperties properties) {
 		this.teamService = teamService;
-		this.gitHubTeamId = gitHubTeamId;
-		this.rest = new RestTemplateBuilder().basicAuthentication(gitHubAccessToken, "").build();
+		this.gitHubTeam = properties.getGithub().getTeam();
+		this.rest = new RestTemplateBuilder().basicAuthentication(properties.getGithub().getAccessToken(), "").build();
 	}
 
 	@Transactional
@@ -49,7 +48,7 @@ public class DefaultTeamImporter implements TeamImporter {
 	private GitHubUser[] getGitHubUsers() {
 		String membersUrl = API_URL_BASE + "/teams/{teamId}/members?per_page=100";
 		ResponseEntity<GitHubUser[]> entity =
-				this.rest.getForEntity(membersUrl, GitHubUser[].class, gitHubTeamId);
+				this.rest.getForEntity(membersUrl, GitHubUser[].class, gitHubTeam);
 		return entity.getBody();
 	}
 

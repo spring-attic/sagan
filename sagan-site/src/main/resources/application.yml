@@ -18,33 +18,42 @@ spring:
   jpa:
     hibernate:
       ddl_auto: none
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            # GitHub OAuth application credentials for use when logging into administrative
+            # console at /admin. Default 'id' and 'secret' values apply only when running
+            # locally, i.e. at http://localhost:8080. Production values must be overridden
+            # using SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENTID and
+            # SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENTSECRET, respectively.
+            client-id: fb06c006c2ed62fe9e8b
+            client-secret: 164264e3f6d70c7c21713b7fa64225cb8d6107b2
+            # Request the 'read: org' OAuth scope, so that we can check whether the
+            # authenticated user belongs to the configured `sagan.site.github.team` for
+            # admin access.
+            scope:
+             - 'read:org'
 
-github:
 
-  # Credentials are based on users belonging to a particular GitHub team,
-  # by requesting the GitHub API (see github.client configuration keys).
-  # This key can be found in the list of teams in your organization
-  # See http://developer.github.com/v3/orgs/teams/#list-teams
-  team:
-    id: ${GITHUB_TEAM_ID:482984}
-
-  # GitHub OAuth application credentials for use when logging into administrative
-  # console at /admin. Default 'id' and 'secret' values apply only when running
-  # locally, i.e. at http://localhost:8080. Production values must be overridden
-  # using GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET, respectively.
-  client:
-    id: ${GITHUB_CLIENT_ID:fb06c006c2ed62fe9e8b}
-    secret: ${GITHUB_CLIENT_SECRET:164264e3f6d70c7c21713b7fa64225cb8d6107b2}
-
-  # This optional property may be assigned using a "personal access token" created
-  # at https://github.com/settings/applications. It is used for accessing GitHub's
-  # API, even for operations that do not require authorization (e.g. Getting Started
-  # Guide repositories). This is done in order to work against higher rate limits
-  # (5000req/hour vs. the default 60req/hour without a token). When running the app
-  # locally, this lower default is fine. When running the app in production, the
-  # token is a must. See http://developer.github.com/v3/#rate-limiting.
-  access:
-    token: ${GITHUB_ACCESS_TOKEN:}
+sagan:
+  site:
+    github:
+      # Credentials are based on users belonging to a particular GitHub team,
+      # by requesting the GitHub API (see github.client configuration keys).
+      # This key can be found in the list of teams in your organization
+      # See http://developer.github.com/v3/orgs/teams/#list-teams
+      team: spring-team
+      # This optional property may be assigned using a "personal access token" created
+      # at https://github.com/settings/applications. It is used for accessing GitHub's
+      # API, even for operations that do not require authorization (e.g. Getting Started
+      # Guide repositories). This is done in order to work against higher rate limits
+      # (5000req/hour vs. the default 60req/hour without a token). When running the app
+      # locally, this lower default is fine. When running the app in production, the
+      # token is a must. See http://developer.github.com/v3/#rate-limiting.
+      access-token:
+      org: spring-io
 
 logging:
   level:
@@ -67,7 +76,7 @@ server:
   compression:
     enabled: true
     mime-types: application/javascript,text/css,application/json
-  use-forward-headers: true
+  forward-headers-strategy: native
 
 ---
 

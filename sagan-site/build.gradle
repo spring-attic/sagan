@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    compile project(':sagan-client')
+	compile project(':sagan-client')
 
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compile 'org.hibernate:hibernate-java8'
@@ -35,6 +35,9 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.springframework.boot:spring-boot-starter-validation'
 	compile 'org.springframework.boot:spring-boot-starter-hateoas'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-oauth2-client'
+	implementation 'org.springframework.security:spring-security-oauth2-jose'
 	compile 'org.springframework.boot:spring-boot-starter-actuator'
 
 	// for use in on-the-fly database setup and migrations
@@ -58,6 +61,8 @@ dependencies {
 	// for CloudFoundry service binding
 	compile "io.pivotal.cfenv:java-cfenv-boot:2.2.2.RELEASE"
 
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
 	// datasource and connection pool dependencies
 	runtimeOnly 'org.postgresql:postgresql'
 	runtimeOnly 'com.h2database:h2'
@@ -67,6 +72,7 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
 
@@ -83,7 +89,7 @@ asciidoctor {
 
 jar {
 	dependsOn asciidoctor
-	from ("${asciidoctor.outputDir}/html5") {
+	from("${asciidoctor.outputDir}/html5") {
 		into 'static/restdocs'
 	}
 }

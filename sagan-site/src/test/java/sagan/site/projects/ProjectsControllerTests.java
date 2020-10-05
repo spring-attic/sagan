@@ -10,6 +10,7 @@ import java.util.TreeSet;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import sagan.site.TestSecurityConfig;
 import sagan.site.guides.GettingStartedGuides;
 import sagan.site.guides.GuideHeader;
 import sagan.site.guides.Topicals;
@@ -18,11 +19,12 @@ import sagan.site.guides.Tutorials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -30,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(ProjectsController.class)
 @TestPropertySource(properties = "spring.profiles.active=standalone")
+@Import(TestSecurityConfig.class)
 public class ProjectsControllerTests {
 	@MockBean
 	private ProjectMetadataService projectMetadataService;

@@ -24,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.hypermedia.LinkDescriptor;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.BDDMockito.given;
@@ -40,6 +41,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWit
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -106,6 +108,7 @@ public class ReleaseMetadataControllerTests {
 	}
 
 	@Test
+	@WithMockUser(roles = {"ADMIN", "API"})
 	public void deleteRelease() throws Exception {
 		given(this.metadataService.fetchFullProject(eq("spring-boot"))).willReturn(this.springBoot);
 		given(this.metadataService.findRelease(eq("spring-boot"), eq(Version.of("2.3.0.RELEASE")))).willReturn(this.currentRelease);
@@ -117,6 +120,7 @@ public class ReleaseMetadataControllerTests {
 	}
 
 	@Test
+	@WithMockUser(roles = {"ADMIN", "API"})
 	public void createRelease() throws Exception {
 		given(this.metadataService.fetchFullProject(eq("spring-boot"))).willReturn(this.springBoot);
 		Map<String, String> newRelease = new HashMap<>();
