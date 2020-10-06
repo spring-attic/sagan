@@ -1,4 +1,4 @@
-package sagan.support.nav;
+package sagan.site.support.nav;
 
 /**
  * Represents a single element in the array of pagination controls displayed on pages such

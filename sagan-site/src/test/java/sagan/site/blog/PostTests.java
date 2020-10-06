@@ -1,7 +1,7 @@
 package sagan.site.blog;
 
 import org.junit.jupiter.api.Disabled;
-import sagan.support.DateTestUtils;
+import sagan.site.support.DateTestUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

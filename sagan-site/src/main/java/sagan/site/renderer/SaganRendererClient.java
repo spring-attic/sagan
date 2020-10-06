@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.Collections;
 
-import sagan.SiteProperties;
+import sagan.site.SiteProperties;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;

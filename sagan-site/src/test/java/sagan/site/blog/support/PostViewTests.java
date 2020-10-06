@@ -11,8 +11,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import sagan.site.blog.Post;
 import sagan.site.blog.PostBuilder;
-import sagan.support.DateFactory;
-import sagan.support.DateTestUtils;
+import sagan.site.support.DateFactory;
+import sagan.site.support.DateTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;

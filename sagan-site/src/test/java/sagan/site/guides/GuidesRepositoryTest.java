@@ -1,7 +1,7 @@
 package sagan.site.guides;
 
 import org.junit.jupiter.api.Test;
-import sagan.SiteProperties;
+import sagan.site.SiteProperties;
 import sagan.site.renderer.SaganRendererClient;
 
 import org.springframework.beans.factory.annotation.Autowired;

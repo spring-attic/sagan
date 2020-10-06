@@ -4,7 +4,7 @@ import sagan.site.projects.Project;
 import sagan.site.projects.ProjectGeneration;
 import sagan.site.projects.ProjectMetadataService;
 import sagan.site.webapi.project.ProjectMetadataController;
-import sagan.support.ResourceNotFoundException;
+import sagan.site.support.ResourceNotFoundException;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;

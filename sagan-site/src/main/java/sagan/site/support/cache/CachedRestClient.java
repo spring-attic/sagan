@@ -1,4 +1,4 @@
-package sagan.support.cache;
+package sagan.site.support.cache;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;

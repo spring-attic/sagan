@@ -1,4 +1,4 @@
-package sagan;
+package sagan.site;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -6,9 +6,9 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sagan.support.ResourceNotFoundException;
-import sagan.support.StaticPagePathFinder;
-import sagan.support.nav.Navigation;
+import sagan.site.support.ResourceNotFoundException;
+import sagan.site.support.StaticPagePathFinder;
+import sagan.site.support.nav.Navigation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

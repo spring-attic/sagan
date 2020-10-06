@@ -16,7 +16,7 @@ import com.rometools.rome.feed.atom.Feed;
 import com.rometools.rome.feed.atom.Link;
 import com.rometools.rome.feed.atom.Person;
 import sagan.site.blog.Post;
-import sagan.support.DateFactory;
+import sagan.site.support.DateFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.view.feed.AbstractAtomFeedView;

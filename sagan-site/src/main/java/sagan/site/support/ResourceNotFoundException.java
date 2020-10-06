@@ -1,4 +1,4 @@
-package sagan.support;
+package sagan.site.support;
 
 @SuppressWarnings("serial")
 public class ResourceNotFoundException extends RuntimeException {

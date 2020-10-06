@@ -1,4 +1,4 @@
-package sagan.support;
+package sagan.site.support;
 
 import java.util.Date;
 import java.util.TimeZone;

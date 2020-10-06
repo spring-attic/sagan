@@ -1,5 +1,7 @@
 package sagan.site.team.support;
 
+import sagan.site.support.ResourceNotFoundException;
+
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -11,7 +13,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
  * Note that because this class is marked with {@code @ResponseStatus(NOT_FOUND)}, the
  * site-wide 404 page will be displayed when this exception is handled. See
  * {@link sagan.MvcConfig.ErrorConfig} for details, and contrast the approach used here
- * with {@link sagan.MvcConfig#handleException(sagan.support.ResourceNotFoundException)}
+ * with {@link sagan.MvcConfig#handleException(ResourceNotFoundException)}
  */
 @ResponseStatus(NOT_FOUND)
 @SuppressWarnings("serial")

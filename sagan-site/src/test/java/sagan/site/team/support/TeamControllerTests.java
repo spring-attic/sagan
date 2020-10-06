@@ -15,7 +15,7 @@ import sagan.site.blog.BlogService;
 import sagan.site.team.MemberProfile;
 import sagan.site.team.MemberProfileBuilder;
 import sagan.site.team.TeamLocation;
-import sagan.support.DateFactory;
+import sagan.site.support.DateFactory;
 
 import org.springframework.ui.ExtendedModelMap;
 

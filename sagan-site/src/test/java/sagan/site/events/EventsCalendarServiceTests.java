@@ -3,8 +3,8 @@ package sagan.site.events;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import sagan.SiteProperties;
-import sagan.support.cache.CachedRestClient;
+import sagan.site.SiteProperties;
+import sagan.site.support.cache.CachedRestClient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
@@ -15,7 +15,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.response.MockRestResponseCreators;
 

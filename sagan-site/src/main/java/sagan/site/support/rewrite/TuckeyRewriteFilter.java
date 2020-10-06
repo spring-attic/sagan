@@ -1,4 +1,4 @@
-package sagan.support;
+package sagan.site.support.rewrite;
 
 import org.tuckey.web.filters.urlrewrite.Conf;
 

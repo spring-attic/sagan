@@ -1,4 +1,4 @@
-package sagan.support.nav;
+package sagan.site.support.nav;
 
 import java.util.List;
 

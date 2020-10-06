@@ -1,6 +1,6 @@
 package sagan.site.blog;
 
-import sagan.support.ResourceNotFoundException;
+import sagan.site.support.ResourceNotFoundException;
 
 /**
  * Exception thrown when requesting a non existent (or no-longer existent) blog post. See

@@ -1,6 +1,5 @@
 package sagan.site;
 
-import sagan.SiteProperties;
 import sagan.site.support.security.GitHubAuthenticationManager;
 import sagan.site.support.security.GitHubMemberOAuth2UserService;
 

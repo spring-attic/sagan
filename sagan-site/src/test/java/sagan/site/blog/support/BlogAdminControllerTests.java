@@ -18,8 +18,8 @@ import sagan.site.blog.PostForm;
 import sagan.site.blog.PostFormat;
 import sagan.site.team.MemberProfile;
 import sagan.site.team.support.TeamRepository;
-import sagan.support.DateFactory;
-import sagan.support.nav.PageableFactory;
+import sagan.site.support.DateFactory;
+import sagan.site.support.nav.PageableFactory;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;

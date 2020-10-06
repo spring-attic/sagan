@@ -4,10 +4,10 @@ import sagan.site.blog.Post;
 import sagan.site.blog.PostCategory;
 import sagan.site.blog.PostMovedException;
 import sagan.site.blog.BlogService;
-import sagan.support.DateFactory;
-import sagan.support.nav.Navigation;
-import sagan.support.nav.PageableFactory;
-import sagan.support.nav.PaginationInfo;
+import sagan.site.support.DateFactory;
+import sagan.site.support.nav.Navigation;
+import sagan.site.support.nav.PageableFactory;
+import sagan.site.support.nav.PaginationInfo;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
-import sagan.support.nav.Section;
+import sagan.site.support.nav.Section;
 
 /**
  * Controller that handles read-only blog actions, e.g. listing, paging, and showing

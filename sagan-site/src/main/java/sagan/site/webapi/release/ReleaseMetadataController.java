@@ -1,7 +1,6 @@
 package sagan.site.webapi.release;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 import sagan.site.projects.Project;
@@ -9,7 +8,7 @@ import sagan.site.projects.ProjectMetadataService;
 import sagan.site.projects.Release;
 import sagan.site.projects.Version;
 import sagan.site.webapi.project.ProjectMetadataController;
-import sagan.support.ResourceNotFoundException;
+import sagan.site.support.ResourceNotFoundException;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;

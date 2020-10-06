@@ -1,6 +1,6 @@
-package sagan;
+package sagan.site;
 
-import sagan.support.TuckeyRewriteFilter;
+import sagan.site.support.rewrite.TuckeyRewriteFilter;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

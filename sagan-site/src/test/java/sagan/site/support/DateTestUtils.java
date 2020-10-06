@@ -1,4 +1,4 @@
-package sagan.support;
+package sagan.site.support;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

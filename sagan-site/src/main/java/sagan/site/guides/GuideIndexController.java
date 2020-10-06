@@ -2,8 +2,8 @@ package sagan.site.guides;
 
 import java.util.Arrays;
 
-import sagan.support.nav.Navigation;
-import sagan.support.nav.Section;
+import sagan.site.support.nav.Navigation;
+import sagan.site.support.nav.Section;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

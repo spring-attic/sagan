@@ -2,7 +2,7 @@ package sagan.site.blog;
 
 import java.util.Date;
 
-import sagan.support.DateFactory;
+import sagan.site.support.DateFactory;
 import sagan.site.team.MemberProfile;
 import sagan.site.team.support.TeamRepository;
 

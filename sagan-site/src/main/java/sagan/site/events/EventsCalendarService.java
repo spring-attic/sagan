@@ -3,8 +3,8 @@ package sagan.site.events;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import sagan.SiteProperties;
-import sagan.support.cache.CachedRestClient;
+import sagan.site.SiteProperties;
+import sagan.site.support.cache.CachedRestClient;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;

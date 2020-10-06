@@ -6,8 +6,8 @@ import java.util.List;
 import sagan.site.blog.Post;
 import sagan.site.blog.support.PostView;
 import sagan.site.blog.BlogService;
-import sagan.support.DateFactory;
-import sagan.support.nav.PageableFactory;
+import sagan.site.support.DateFactory;
+import sagan.site.support.nav.PageableFactory;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;

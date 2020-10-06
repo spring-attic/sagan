@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import sagan.support.DateFactory;
+import sagan.site.support.DateFactory;
 import sagan.site.team.MemberProfile;
 
 import org.springframework.beans.factory.annotation.Autowired;

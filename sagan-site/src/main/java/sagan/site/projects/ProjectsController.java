@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import sagan.site.guides.GettingStartedGuides;
 import sagan.site.guides.Topicals;
 import sagan.site.guides.Tutorials;
-import sagan.support.ResourceNotFoundException;
-import sagan.support.nav.Navigation;
-import sagan.support.nav.Section;
+import sagan.site.support.ResourceNotFoundException;
+import sagan.site.support.nav.Navigation;
+import sagan.site.support.nav.Section;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

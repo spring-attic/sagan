@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
-import sagan.SiteProperties;
+import sagan.site.SiteProperties;
+import sagan.site.TestClientRegistrations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;

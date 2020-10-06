@@ -1,4 +1,4 @@
-package sagan;
+package sagan.site;
 
 import org.springframework.core.env.ConfigurableEnvironment;
 

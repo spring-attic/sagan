@@ -1,4 +1,4 @@
-package sagan.support.nav;
+package sagan.site.support.nav;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

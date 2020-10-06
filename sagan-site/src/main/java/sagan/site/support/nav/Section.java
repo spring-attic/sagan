@@ -1,7 +1,7 @@
-package sagan.support.nav;
+package sagan.site.support.nav;
 
 /**
- * Used in conjunction with {@link sagan.support.nav.Navigation} to indicate which section
+ * Used in conjunction with {@link sagan.site.support.nav.Navigation} to indicate which section
  * of the site-wide navigation is currently active and highlighted.
  */
 public enum Section {

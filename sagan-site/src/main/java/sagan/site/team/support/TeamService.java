@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import sagan.site.team.MemberProfile;
-import sagan.support.ResourceNotFoundException;
+import sagan.site.support.ResourceNotFoundException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

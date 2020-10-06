@@ -15,7 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import sagan.site.blog.Post;
 import sagan.site.blog.PostBuilder;
-import sagan.support.DateFactory;
+import sagan.site.support.DateFactory;
 
 import org.springframework.ui.ExtendedModelMap;
 

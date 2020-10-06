@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import sagan.site.projects.Project;
 import sagan.site.projects.ProjectMetadataService;
-import sagan.support.nav.Navigation;
-import sagan.support.nav.Section;
+import sagan.site.support.nav.Navigation;
+import sagan.site.support.nav.Section;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

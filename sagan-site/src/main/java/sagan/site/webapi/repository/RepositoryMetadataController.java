@@ -3,7 +3,7 @@ package sagan.site.webapi.repository;
 import java.util.Arrays;
 
 import sagan.site.projects.Repository;
-import sagan.support.ResourceNotFoundException;
+import sagan.site.support.ResourceNotFoundException;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;

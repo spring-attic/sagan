@@ -1,4 +1,4 @@
-package sagan.support;
+package sagan.site.support;
 
 import java.io.IOException;
 import java.io.InputStream;

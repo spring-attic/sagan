@@ -1,4 +1,4 @@
-package sagan.rewrite.support;
+package sagan.site.support.rewrite;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,8 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.*;
 
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
-import sagan.SiteApplication;
-import sagan.UrlRewriterFilterConfig;
+import sagan.site.UrlRewriterFilterConfig;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -19,7 +18,6 @@ import java.net.URISyntaxException;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 public class RewriteTests {
 
