@@ -1,27 +1,106 @@
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="admin/layout">
+<!DOCTYPE html>
+<html data-th-replace="~{admin/layout :: layout(~{::head/content()}, ~{::body/nav/content()}, ~{}, ~{::body/form})}">
 <head>
-    <title data-th-inline="text">Admin | Blog | [[${post.title}]]</title>
+    <title data-th-inline="text">Admin | Blog | [[${post.title}]]</title>
 </head>
 <body>
-<nav layout:fragment="~{breadcrumb}">
+<nav>
     <ul>
         <li><a data-th-href="@{/admin}">Admin</a></li>
         <li><a data-th-href="@{/admin/blog}">Blog</a></li>
         <li class="is-active"><a data-th-href="@{'/admin/blog/' + ${post.id} + '/edit'}" aria-current="page">Edit Blog Post</a></li>
     </ul>
 </nav>
-<div layout:fragment="~{content}">
-    <form layout:include="admin/blog/_post_form :: post-form" data-th-with="edit=1" data-th-action="@{'/admin/blog/' + ${post.id} + '/edit'}"
-          method="post" data-th-object="${postForm}"></form>
-    <form data-th-action="@{'/admin/blog/' + ${post.adminSlug}}" method="post">
-        <input type="hidden" name="_method" value="DELETE"/>
-        <input type="hidden" data-th-name="${_csrf.parameterName}" data-th-value="${_csrf.token}"/>
-        <div class="buttons">
-            <button class="button is-danger" type="submit" name="delete">Delete</button>
+<form data-th-action="@{'/admin/blog/' + ${post.id} + '/edit'}" method="post" data-th-object="${postForm}">
+    <div class="columns">
+        <div class="column is-three-quarters">
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control">
+                    <input class="input" data-th-classappend="(${#fields.hasErrors('title')}? ' is-danger')"
+                           type="text" data-th-field="*{title}" name="title" placeholder="Blog post title">
+                    <p class="help is-danger" data-th-if="${#fields.hasErrors('title')}" data-th-errors="*{title}">Incorrect
+                        title</p>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Content</label>
+                <div class="control">
+                    <textarea class="textarea" data-th-classappend="(${#fields.hasErrors('content')}? ' is-danger')"
+                              placeholder="Blog post content" data-th-field="*{content}" name="content"
+                              rows="20"></textarea>
+                    <p class="help is-danger" data-th-if="${#fields.hasErrors('content')}" data-th-errors="*{content}">Incorrect
+                        content</p>
+                </div>
+                <p class="help">You can write blog posts in <a href="https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/"
+                                                               target="_blank">AsciiDoc</a> or
+                    <a href="https://help.github.com/en/github/writing-on-github" target="_blank">GitHub flavored Markdown</a> format.</p>
+            </div>
+            <div class="field is-grouped">
+                <button name="draft" data-th-if="*{!draft}" value="false" type="submit" class="button is-primary">
+                    Update
+                </button>
+                <button name="draft" data-th-if="*{draft}" value="true" type="submit" class="button is-primary">Save
+                </button>
+
+                <a data-th-href="${path}" data-th-if="*{draft}" target="_blank" class="button is-info"
+                   role="button">Preview</a>
+            </div>
         </div>
-    </form>
-</div>
+        <div class="column">
+            <div class="field">
+                <label class="label">Category</label>
+                <div class="control">
+                    <div class="select" data-th-classappend="(${#fields.hasErrors('category')}? ' is-danger')">
+                        <select name="category" data-th-field="*{category}">
+                            <option data-th-each="cat : ${categories}" data-th-value="${cat.id}" data-th-text="${cat.displayName}">
+                                Category
+                            </option>
+                        </select>
+                        <p class="help is-danger" data-th-if="${#fields.hasErrors('category')}" data-th-errors="*{category}">
+                            Incorrect category</p>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Format</label>
+                <div class="control">
+                    <div class="select" data-th-classappend="(${#fields.hasErrors('format')}? ' is-danger')">
+                        <select name="format" data-th-field="*{format}">
+                            <option data-th-each="format : ${formats}" data-th-value="${format.id}"
+                                    data-th-text="${format.displayName}">
+                                Format
+                            </option>
+                        </select>
+                        <p class="help is-danger" data-th-if="${#fields.hasErrors('format')}" data-th-errors="*{format}">
+                            Incorrect format</p>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Publication Date</label>
+                <input type="text" data-th-field="*{publishAt}" name="publishAt"
+                       id="datetimepicker" class="input"
+                       data-th-classappend="(${#fields.hasErrors('publishAt')}? ' is-danger')"
+                       placeholder="2020-01-01 10:00" autocomplete="off"/>
+                <p class="help is-danger" data-th-if="${#fields.hasErrors('publishAt')}" data-th-errors="*{publishAt}">
+                    Incorrect date</p>
+            </div>
+            <div class="control">
+                <button name="draft" data-th-if="*{!draft}" value="true" type="submit" class="button is-warning">Unpublish
+                </button>
+                <button name="draft" data-th-if="*{draft}" value="false" type="submit" class="button is-warning">Publish now!
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<form data-th-action="@{'/admin/blog/' + ${post.adminSlug}} + '/delete'" method="post">
+    <hr class="hr">
+    <h3 class="title is-3">Admin</h3>
+    <div class="buttons">
+        <button class="button is-danger" type="submit" name="delete">Delete</button>
+    </div>
+</form>
 </body>
 </html>

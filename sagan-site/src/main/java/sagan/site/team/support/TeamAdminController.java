@@ -1,16 +1,15 @@
 package sagan.site.team.support;
 
-import sagan.site.team.MemberProfile;
-
 import java.security.Principal;
+
+import sagan.site.team.MemberProfile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * Controller that handles administrative team actions, e.g. editing member details and
@@ -30,14 +29,14 @@ class TeamAdminController {
         this.teamImporter = teamImporter;
     }
 
-    @RequestMapping(value = "/admin/team", method = { GET, HEAD })
+    @GetMapping("/admin/team")
     public String getTeamAdminPage(Model model) {
         model.addAttribute("activeMembers", teamService.fetchActiveMembers());
         model.addAttribute("hiddenMembers", teamService.fetchHiddenMembers());
         return "admin/team/index";
     }
 
-    @RequestMapping(value = "/admin/profile", method = { GET, HEAD })
+    @GetMapping("/admin/profile")
     public String editProfileForm(Principal principal, Model model) {
         MemberProfile profile = teamService.fetchMemberProfile(new Long(principal.getName()));
         model.addAttribute("profile", profile);
@@ -45,7 +44,7 @@ class TeamAdminController {
         return "admin/team/edit";
     }
 
-    @RequestMapping(value = "/admin/team/{username}", method = { GET, HEAD })
+    @GetMapping("/admin/team/{username}")
     public String editTeamMemberForm(@PathVariable("username") String username, Model model) {
         MemberProfile profile = teamService.fetchMemberProfileUsername(username);
         if (profile == MemberProfile.NOT_FOUND) {
@@ -56,19 +55,19 @@ class TeamAdminController {
         return "admin/team/edit";
     }
 
-    @RequestMapping(value = "/admin/profile", method = PUT)
+    @PostMapping(value = "/admin/profile")
     public String saveProfile(Principal principal, MemberProfile profile) {
         teamService.updateMemberProfile(new Long(principal.getName()), profile);
         return "redirect:/admin/profile";
     }
 
-    @RequestMapping(value = "/admin/team/{username}", method = PUT)
+    @PostMapping(value = "/admin/team/{username}")
     public String saveTeamMember(@PathVariable("username") String username, MemberProfile profile) {
         teamService.updateMemberProfile(username, profile);
         return "redirect:/admin/team/" + username;
     }
 
-    @RequestMapping(value = "/admin/team/github_import", method = POST)
+    @PostMapping(value = "/admin/team/github_import")
     public String importTeamMembersFromGithub() {
         teamImporter.importTeamMembers();
         return "redirect:/admin/team";

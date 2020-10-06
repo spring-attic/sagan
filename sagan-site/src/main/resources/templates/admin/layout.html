@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-th-fragment="layout (heads, breadcrumbs, tabs, content)" lang='en'>
+<html data-th-fragment="layout (heads, breadcrumbs, tabs, content)" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang='en'>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,20 +51,18 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a class="button is-white" data-th-href="@{/admin/profile}">
+                        <a class="button is-white" data-th-href="@{'/admin/team/' + ${#authentication.principal.attributes.login}}">
                             <span class="icon has-text-success">
                               <i class="fas fa-user"></i>
                             </span>
-                            <!--
-                            <span sec:authentication="credentials">Emily</span>
-                            -->
+                            <span data-th-text="${#authentication.principal.attributes.login}">springcentral</span>
                         </a>
-                        <a class="button is-white" data-th-href="@{/signout}">
-                            <span class="icon has-text-danger">
-                              <i class="fas fa-sign-out-alt"></i>
-                            </span>
-                            <span>Log out</span>
-                        </a>
+                        <form method="post" data-th-action="@{/signout}">
+                            <button class="button is-white"  type="submit">
+                                <span class="icon has-text-danger">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </span><span>Log out</span></button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -73,8 +71,8 @@
 </nav>
 <main class="container">
     <nav id="breadcrumbs" class="breadcrumb" aria-label="breadcrumbs" data-th-insert="${breadcrumbs}"></nav>
-    <div id="tabs" class="tabs is-centered is-boxed is-medium" data-th-replace="${tabs}"></div>
-    <div id='admin' data-th-replace="${content}">
+    <div id="tabs" class="tabs is-centered is-boxed is-medium" data-th-insert="${tabs}"></div>
+    <div id='admin' data-th-insert="${content}">
         <p>Content</p>
     </div>
 </main>

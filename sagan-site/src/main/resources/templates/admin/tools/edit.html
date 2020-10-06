@@ -1,65 +1,61 @@
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="admin/layout">
+<!DOCTYPE html>
+<html data-th-replace="~{admin/layout :: layout(~{::head/content()}, ~{::body/ul}, ~{}, ~{::body/form})}">
 <head>
     <title data-th-inline="text">Admin | Edit | [[${platform.id}]]</title>
 </head>
 <body>
-<nav layout:fragment="~{breadcrumb}">
-    <ul>
-        <li><a data-th-href="@{/admin}">Admin</a></li>
-        <li><a data-th-href="@{/admin/tools}">Spring Tools</a></li>
-        <li class="is-active"><a data-th-href="@{'/admin/tools/' + ${platform.id}}" data-th-inline="text" aria-current="page">Edit [[${platform.id}]]</a></li>
-    </ul>
-</nav>
-<div layout:fragment="~{content}">
-    <form data-th-action="@{'/admin/tools/' + ${platform.id}}" method="post" data-th-object="${platform}">
-        <input type="hidden" data-th-name="${_csrf.parameterName}" data-th-value="${_csrf.token}"/>
-        <h2 class="title" data-th-inline="text">Edit [[${platform.id}]] platform</h2>
-        <div class="field">
-            <label class="label">Id</label>
-            <div class="control">
-                <input class="input" data-th-classappend="(${#fields.hasErrors('id')}? ' is-danger')"
-                       type="text" data-th-field="*{id}" name="id" placeholder="Name">
-                <p class="help is-danger" data-th-if="${#fields.hasErrors('id')}" data-th-errors="*{id}">Incorrect name</p>
-            </div>
-        </div>
-        <div class="field">
-            <table class="table is-striped is-fullwidth">
-                <thead>
-                <tr>
-                    <td>Delete?</td>
-                    <td>Variant</td>
-                    <td>Label</td>
-                    <td>Version</td>
-                    <td>Download URL</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr data-th-each="download, downloadStat : ${platform.downloads}">
-                    <td><input type="checkbox" name="downloadsToDelete" class="checkbox"
-                               data-th-value="*{downloads[__${downloadStat.index}__].variant}"></td>
-                    <td><input class="input" type="text" data-th-field="*{downloads[__${downloadStat.index}__].variant}"/></td>
-                    <td><input class="input" type="text" data-th-field="*{downloads[__${downloadStat.index}__].label}"/></td>
-                    <td><input class="input" type="text" data-th-field="*{downloads[__${downloadStat.index}__].version}"/></td>
-                    <td><input class="input" type="text" data-th-field="*{downloads[__${downloadStat.index}__].downloadUrl}"/></td>
-                </tr>
-                <tr data-th-with="size=${platform.downloads.size()}">
-                    <td></td>
-                    <td><input class="input" type="text" data-th-field="*{downloads[__${size}__].variant}"/></td>
-                    <td><input class="input" type="text" data-th-field="*{downloads[__${size}__].label}"/></td>
-                    <td><input class="input" type="text" data-th-field="*{downloads[__${size}__].version}"/></td>
-                    <td><input class="input" type="text" data-th-field="*{downloads[__${size}__].downloadUrl}"/></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="buttons control is-centered">
-            <button type="submit" class="button is-primary">Save</button>
-            <a class="button" data-th-href="@{/admin/tools}">Cancel</a>
-        </div>
-    </form>
 
-</div>
+<ul>
+    <li><a data-th-href="@{/admin}">Admin</a></li>
+    <li><a data-th-href="@{/admin/tools}">Spring Tools</a></li>
+    <li class="is-active"><a data-th-href="@{'/admin/tools/' + ${platform.id}}" data-th-inline="text" aria-current="page">Edit [[${platform.id}]]</a></li>
+</ul>
+
+<form data-th-action="@{'/admin/tools/' + ${platform.id}}" method="post" data-th-object="${platform}">
+    <h2 class="title" data-th-inline="text">Edit [[${platform.id}]] platform</h2>
+    <div class="field">
+        <label class="label">Id</label>
+        <div class="control">
+            <input class="input" data-th-classappend="(${#fields.hasErrors('id')}? ' is-danger')"
+                   type="text" data-th-field="*{id}" name="id" placeholder="Name">
+            <p class="help is-danger" data-th-if="${#fields.hasErrors('id')}" data-th-errors="*{id}">Incorrect name</p>
+        </div>
+    </div>
+    <div class="field">
+        <table class="table is-striped is-fullwidth">
+            <thead>
+            <tr>
+                <td>Delete?</td>
+                <td>Variant</td>
+                <td>Label</td>
+                <td>Version</td>
+                <td>Download URL</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="download, downloadStat : ${platform.downloads}">
+                <td><input type="checkbox" name="downloadsToDelete" class="checkbox"
+                           data-th-value="*{downloads[__${downloadStat.index}__].variant}"></td>
+                <td><input class="input" type="text" data-th-field="*{downloads[__${downloadStat.index}__].variant}"/></td>
+                <td><input class="input" type="text" data-th-field="*{downloads[__${downloadStat.index}__].label}"/></td>
+                <td><input class="input" type="text" data-th-field="*{downloads[__${downloadStat.index}__].version}"/></td>
+                <td><input class="input" type="text" data-th-field="*{downloads[__${downloadStat.index}__].downloadUrl}"/></td>
+            </tr>
+            <tr data-th-with="size=${platform.downloads.size()}">
+                <td></td>
+                <td><input class="input" type="text" data-th-field="*{downloads[__${size}__].variant}"/></td>
+                <td><input class="input" type="text" data-th-field="*{downloads[__${size}__].label}"/></td>
+                <td><input class="input" type="text" data-th-field="*{downloads[__${size}__].version}"/></td>
+                <td><input class="input" type="text" data-th-field="*{downloads[__${size}__].downloadUrl}"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="buttons control is-centered">
+        <button type="submit" class="button is-primary">Save</button>
+        <a class="button" data-th-href="@{/admin/tools}">Cancel</a>
+    </div>
+</form>
+
 </body>
 </html>

@@ -54,9 +54,10 @@ dependencies {
 	compile 'org.tuckey:urlrewritefilter:4.0.4'
 
 	// Thymeleaf is used as the template engine for serving HTML
-	compile "org.springframework.boot:spring-boot-starter-thymeleaf"
-	compile 'org.thymeleaf.extras:thymeleaf-extras-java8time'
-	compile 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
+	implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time'
+	implementation 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
 
 	// for CloudFoundry service binding
 	compile "io.pivotal.cfenv:java-cfenv-boot:2.2.2.RELEASE"

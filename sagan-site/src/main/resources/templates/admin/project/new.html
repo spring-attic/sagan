@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html data-th-replace="~{admin/layout :: layout(~{::head/content()}, ~{::body/nav/content()}, ~{::body/ul}, ~{::body/div})}">
 <head>
-    <title data-th-inline="text">Admin | Edit | [[${project.id}]]</title>
+    <title data-th-inline="text">Admin | Project | New Project</title>
 </head>
 <body>
 <nav>
@@ -19,34 +19,10 @@
             <span>Metadata</span>
         </a>
     </li>
-    <li>
-        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/info'}">
-            <span class="icon is-small"><i class="fas fa-info" aria-hidden="true"></i></span>
-            <span>Info</span>
-        </a>
-    </li>
-    <li>
-        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/releases'}">
-            <span class="icon is-small"><i class="fas fa-download" aria-hidden="true"></i></span>
-            <span>Releases</span>
-        </a>
-    </li>
-    <li>
-        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/support'}">
-            <span class="icon is-small"><i class="far fa-calendar-check" aria-hidden="true"></i></span>
-            <span>Support</span>
-        </a>
-    </li>
-    <li>
-        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/samples'}">
-            <span class="icon is-small"><i class="fas fa-code" aria-hidden="true"></i></span>
-            <span>Samples</span>
-        </a>
-    </li>
 </ul>
 
 <div>
-    <form data-th-action="@{'/admin/projects/'+${project.id}}" method="post" data-th-object="${project}">
+    <form data-th-action="@{/admin/projects/new}" method="post" data-th-object="${project}">
         <div class="columns">
             <div class="column is-one-thid">
                 <div class="field">
@@ -117,15 +93,7 @@
         </div>
         <div class="buttons control is-centered">
             <button type="submit" class="button is-primary">Save</button>
-            <a class="button" data-th-href="@{/admin/projects}">Cancel</a>
         </div>
-    </form>
-    <hr class="hr">
-    <h3 class="title is-3">Admin</h3>
-    <form data-th-action="@{'/admin/projects/' + ${project.id}} + '/delete'" method="post" class="notification is-light">
-        <p>You can delete the project. This action will destroy permanently the project.</p>
-        <p style="padding-top:10px;">
-            <input type="submit" class="button is-danger" value="Yes, Delete the project"/></p>
     </form>
 </div>
 </body>

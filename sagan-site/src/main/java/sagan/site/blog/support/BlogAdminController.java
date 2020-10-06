@@ -1,34 +1,34 @@
 package sagan.site.blog.support;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import sagan.site.blog.Post;
-import sagan.site.blog.PostCategory;
-import sagan.site.blog.PostFormat;
-import sagan.site.blog.BlogService;
-import sagan.site.blog.PostForm;
-import sagan.support.DateFactory;
-import sagan.support.nav.PageableFactory;
-import sagan.support.nav.PaginationInfo;
-import sagan.site.team.MemberProfile;
-import sagan.site.team.support.TeamRepository;
-
 import java.security.Principal;
 import java.util.Collections;
 
 import javax.validation.Valid;
 
+import sagan.site.blog.BlogService;
+import sagan.site.blog.Post;
+import sagan.site.blog.PostCategory;
+import sagan.site.blog.PostForm;
+import sagan.site.blog.PostFormat;
+import sagan.site.team.MemberProfile;
+import sagan.site.team.support.TeamRepository;
+import sagan.support.DateFactory;
+import sagan.support.nav.PageableFactory;
+import sagan.support.nav.PaginationInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Controller that handles administrative blog actions, e.g. creating, editing and
@@ -50,7 +50,7 @@ class BlogAdminController {
         this.dateFactory = dateFactory;
     }
 
-    @RequestMapping(value = "", method = { GET, HEAD })
+    @GetMapping("")
     public String dashboard(Model model, @RequestParam(defaultValue = "1") int page) {
         Page<PostView> postViewPage = PostView.pageOf(service.getPublishedPosts(PageableFactory.forDashboard(page)), dateFactory);
         model.addAttribute("posts", postViewPage);
@@ -68,7 +68,7 @@ class BlogAdminController {
         return "admin/blog/index";
     }
 
-    @RequestMapping(value = "/new", method = { GET, HEAD })
+    @GetMapping("/new")
     public String newPost(Model model) {
         model.addAttribute("postForm", new PostForm());
         model.addAttribute("categories", PostCategory.values());
@@ -76,7 +76,7 @@ class BlogAdminController {
         return "admin/blog/new";
     }
 
-    @RequestMapping(value = "/{postId:[0-9]+}{slug:.*}/edit", method = { GET, HEAD })
+    @GetMapping("/{postId:[0-9]+}{slug:.*}/edit")
     public String editPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
         Post post = service.getPost(postId);
         PostForm postForm = new PostForm(post);
@@ -90,13 +90,13 @@ class BlogAdminController {
         return "admin/blog/edit";
     }
 
-    @RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = { GET, HEAD })
+    @GetMapping("/{postId:[0-9]+}{slug:.*}")
     public String showPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
         model.addAttribute("post", PostView.of(service.getPost(postId), dateFactory));
         return "blog/show";
     }
 
-    @RequestMapping(value = "", method = { POST })
+    @PostMapping("")
     public String createPost(Principal principal, @Valid PostForm postForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", PostCategory.values());
@@ -118,7 +118,7 @@ class BlogAdminController {
         }
     }
 
-    @RequestMapping(value = "/{postId:[0-9]+}{slug:.*}/edit", method = PUT)
+    @PostMapping("/{postId:[0-9]+}{slug:.*}/edit")
     public String updatePost(@PathVariable Long postId, @Valid PostForm postForm, BindingResult bindingResult,
                              Model model) {
         Post post = service.getPost(postId);
@@ -135,20 +135,20 @@ class BlogAdminController {
         return "/admin/blog/edit";
     }
 
-    @RequestMapping(value = "/{postId:[0-9]+}{slug:.*}", method = DELETE)
+    @PostMapping("/{postId:[0-9]+}{slug:.*}/delete")
     public String deletePost(@PathVariable Long postId) {
         Post post = service.getPost(postId);
         service.deletePost(post);
         return "redirect:/admin/blog";
     }
 
-    @RequestMapping(value = "resummarize", method = POST)
+    @PostMapping("resummarize")
     public String resummarizeAllBlogPosts() {
         service.resummarizeAllPosts();
         return "redirect:/admin/blog";
     }
 
-    @RequestMapping(value = "refreshblogposts", method = POST)
+    @PostMapping("refreshblogposts")
     @ResponseBody
     public String refreshBlogPosts(
             @RequestParam(value="page", defaultValue = "1", required = false) int page,

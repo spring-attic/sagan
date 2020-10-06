@@ -1,54 +1,52 @@
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="admin/layout">
+<!DOCTYPE html>
+<html data-th-replace="~{admin/layout :: layout(~{::head/content()}, ~{::body/nav/content()}, ~{::body/ul}, ~{::body/div})}">
 <head>
     <title data-th-inline="text">Admin | Edit | [[${project.id}]]</title>
 </head>
 <body>
-<nav layout:fragment="~{breadcrumb}">
+<nav>
     <ul>
         <li><a data-th-href="@{/admin}">Admin</a></li>
         <li><a data-th-href="@{/admin/projects}">Projects</a></li>
         <li class="is-active"><a data-th-href="@{'/admin/projects/' + ${project.id}}" aria-current="page">Edit</a></li>
     </ul>
 </nav>
-<div layout:fragment="~{tabs}">
-    <ul>
-        <li>
-            <a data-th-href="@{'/admin/projects/' + ${project.id}}">
-                <span class="icon is-small"><i class="far fa-folder-open" aria-hidden="true"></i></span>
-                <span>Metadata</span>
-            </a>
-        </li>
-        <li>
-            <a data-th-href="@{'/admin/projects/' + ${project.id} + '/info'}">
-                <span class="icon is-small"><i class="fas fa-info" aria-hidden="true"></i></span>
-                <span>Info</span>
-            </a>
-        </li>
-        <li>
-            <a data-th-href="@{'/admin/projects/' + ${project.id} + '/releases'}">
-                <span class="icon is-small"><i class="fas fa-download" aria-hidden="true"></i></span>
-                <span>Releases</span>
-            </a>
-        </li>
-        <li class="is-active">
-            <a data-th-href="@{'/admin/projects/' + ${project.id} + '/support'}">
-                <span class="icon is-small"><i class="far fa-calendar-check" aria-hidden="true"></i></span>
-                <span>Support</span>
-            </a>
-        </li>
-        <li>
-            <a data-th-href="@{'/admin/projects/' + ${project.id} + '/samples'}">
-                <span class="icon is-small"><i class="fas fa-code" aria-hidden="true"></i></span>
-                <span>Samples</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<div layout:fragment="~{content}">
+
+<ul>
+    <li>
+        <a data-th-href="@{'/admin/projects/' + ${project.id}}">
+            <span class="icon is-small"><i class="far fa-folder-open" aria-hidden="true"></i></span>
+            <span>Metadata</span>
+        </a>
+    </li>
+    <li>
+        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/info'}">
+            <span class="icon is-small"><i class="fas fa-info" aria-hidden="true"></i></span>
+            <span>Info</span>
+        </a>
+    </li>
+    <li>
+        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/releases'}">
+            <span class="icon is-small"><i class="fas fa-download" aria-hidden="true"></i></span>
+            <span>Releases</span>
+        </a>
+    </li>
+    <li class="is-active">
+        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/support'}">
+            <span class="icon is-small"><i class="far fa-calendar-check" aria-hidden="true"></i></span>
+            <span>Support</span>
+        </a>
+    </li>
+    <li>
+        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/samples'}">
+            <span class="icon is-small"><i class="fas fa-code" aria-hidden="true"></i></span>
+            <span>Samples</span>
+        </a>
+    </li>
+</ul>
+
+<div>
     <form data-th-action="@{'/admin/projects/'+${project.id} + '/support'}" method="post" data-th-object="${project}">
-        <input type="hidden" data-th-name="${_csrf.parameterName}" data-th-value="${_csrf.token}"/>
         <input type="hidden" data-th-name="id" data-th-value="*{id}"/>
 
         <div class="field">

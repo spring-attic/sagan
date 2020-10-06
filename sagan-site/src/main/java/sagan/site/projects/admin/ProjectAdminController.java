@@ -19,7 +19,6 @@ import sagan.site.projects.Version;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -88,7 +87,15 @@ class ProjectAdminController {
 		ProjectFormMetadata project = new ProjectFormMetadata("spring-new", "New Spring Project");
 		model.addAttribute("project", project);
 		model.addAttribute("statusList", SupportStatus.values());
-		return "admin/project/edit-metadata";
+		return "admin/project/new";
+	}
+
+	@PostMapping("/new")
+	public String createProject(@Valid ProjectFormMetadata projectMetadata, Model model) {
+		Project project = new Project(projectMetadata.getId(), projectMetadata.getName());
+		this.modelMapper.map(projectMetadata, project);
+		this.service.save(project);
+		return "redirect:" + project.getId();
 	}
 
 	@GetMapping("/{id}")
@@ -107,7 +114,7 @@ class ProjectAdminController {
 		return "redirect:" + project.getId();
 	}
 
-	@DeleteMapping("/{id}")
+	@PostMapping("/{id}/delete")
 	public String delete(@PathVariable String id, Model model) {
 		this.service.delete(id);
 		return "redirect:/admin/projects";

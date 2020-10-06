@@ -2,12 +2,10 @@
 <html>
   <body>
     <div data-th-fragment="full-post">
-        <!--
-        <header sec:authorize="fullyAuthenticated" style="padding-bottom: 20px;">
+        <header data-sec-authorize="fullyAuthenticated" style="padding-bottom: 20px;">
             <span><a id="edit" class="button uppercase transparent animate button-small"
                      data-th-href="@{/admin/blog/{id}-{slug}/edit(id=${post.id},slug=${slug})}">Edit blog post</a></span>
         </header>
-        -->
         <h2 class="blog--title">
             <a data-th-href="@{*{path}}" data-th-text="*{title}">Blog post title</a>
         </h2>
