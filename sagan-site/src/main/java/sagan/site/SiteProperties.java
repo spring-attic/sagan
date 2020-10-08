@@ -1,17 +1,19 @@
 package sagan.site;
 
+import java.time.Duration;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("sagan.site")
 public class SiteProperties {
 
-	private Cache cache = new Cache();
+	private final Cache cache = new Cache();
 
-	private Renderer renderer = new Renderer();
+	private final Renderer renderer = new Renderer();
 
-	private Events events = new Events();
+	private final Events events = new Events();
 
-	private GitHub gitHub = new GitHub();
+	private final GitHub gitHub = new GitHub();
 
 	public Renderer getRenderer() {
 		return this.renderer;
@@ -32,29 +34,42 @@ public class SiteProperties {
 	public static class Cache {
 
 		/**
-		 * Cache duration for guides metadata.
+		 * Cache duration for list of guides metadata.
 		 */
-		private Long listTimeToLive = 3600L;
+		private Duration guidesTimeToLive = Duration.ofHours(1);
+
+		/**
+		 * Cache duration for a guide content.
+		 */
+		private Duration guideTimeToLive = Duration.ofDays(30);
 
 		/**
 		 * Cache duration for guides content.
 		 */
-		private Long contentTimeToLive = 0L;
+		private Duration eventsTimeToLive = Duration.ofHours(2);
 
-		public Long getListTimeToLive() {
-			return listTimeToLive;
+		public Duration getGuidesTimeToLive() {
+			return guidesTimeToLive;
 		}
 
-		public void setListTimeToLive(Long listTimeToLive) {
-			this.listTimeToLive = listTimeToLive;
+		public void setGuidesTimeToLive(Duration guidesTimeToLive) {
+			this.guidesTimeToLive = guidesTimeToLive;
 		}
 
-		public Long getContentTimeToLive() {
-			return contentTimeToLive;
+		public Duration getGuideTimeToLive() {
+			return guideTimeToLive;
 		}
 
-		public void setContentTimeToLive(Long contentTimeToLive) {
-			this.contentTimeToLive = contentTimeToLive;
+		public void setGuideTimeToLive(Duration guideTimeToLive) {
+			this.guideTimeToLive = guideTimeToLive;
+		}
+
+		public Duration getEventsTimeToLive() {
+			return eventsTimeToLive;
+		}
+
+		public void setEventsTimeToLive(Duration eventsTimeToLive) {
+			this.eventsTimeToLive = eventsTimeToLive;
 		}
 	}
 

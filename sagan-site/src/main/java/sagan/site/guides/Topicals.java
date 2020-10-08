@@ -24,11 +24,7 @@ public class Topicals implements GuidesRepository<Topical> {
 
 	public static final String CACHE_TOPICALS = "cache.topicals";
 
-	public static final Class<?> CACHE_TOPICALS_TYPE = GuideHeader[].class;
-
 	public static final String CACHE_TOPICAL = "cache.topical";
-
-	public static final Class<?> CACHE_TOPICAL_TYPE = Topical.class;
 
 	private final SaganRendererClient client;
 

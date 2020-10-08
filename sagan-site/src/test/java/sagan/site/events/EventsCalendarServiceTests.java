@@ -4,13 +4,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import sagan.site.SiteProperties;
-import sagan.site.support.cache.CachedRestClient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -39,7 +36,7 @@ public class EventsCalendarServiceTests {
 
 	@Test
 	public void shouldFailWithoutCalendarUri() {
-		EventsCalendarService service = new EventsCalendarService(new RestTemplateBuilder(), new CachedRestClient(), new SiteProperties());
+		EventsCalendarService service = new EventsCalendarService(new RestTemplateBuilder(), new SiteProperties());
 		assertThatThrownBy(() -> service.findEvents(Period.of("2020-01-01", 10)))
 				.isInstanceOf(IllegalArgumentException.class).hasMessage("No calendar URI configured, see 'sagan.site.events.calendar-uri'");
 	}
@@ -112,12 +109,4 @@ public class EventsCalendarServiceTests {
 		return new ClassPathResource(path, getClass());
 	}
 
-	@TestConfiguration
-	static class CacheConfiguration {
-
-		@Bean
-		CachedRestClient cachedRestClient() {
-			return new CachedRestClient();
-		}
-	}
 }

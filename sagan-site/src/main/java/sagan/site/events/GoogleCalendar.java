@@ -11,10 +11,10 @@ public class GoogleCalendar {
 
 	private String summary;
 
-	private List<Event> events;
+	private List<GoogleCalendarEvent> events;
 
 	@JsonCreator
-	public GoogleCalendar(@JsonProperty("summary") String summary, @JsonProperty("items") List<Event> events) {
+	public GoogleCalendar(@JsonProperty("summary") String summary, @JsonProperty("items") List<GoogleCalendarEvent> events) {
 		this.summary = summary;
 		this.events = events;
 	}
@@ -27,11 +27,11 @@ public class GoogleCalendar {
 		this.summary = summary;
 	}
 
-	public List<Event> getEvents() {
+	public List<GoogleCalendarEvent> getEvents() {
 		return events;
 	}
 
-	public void setEvents(List<Event> events) {
+	public void setEvents(List<GoogleCalendarEvent> events) {
 		this.events = events;
 	}
 }

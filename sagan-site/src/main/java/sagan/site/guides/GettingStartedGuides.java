@@ -23,11 +23,7 @@ public class GettingStartedGuides implements GuidesRepository<GettingStartedGuid
 
 	public static final String CACHE_GUIDES = "cache.guides";
 
-	public static final Class<?> CACHE_GUIDES_TYPE = GuideHeader[].class;
-
 	public static final String CACHE_GUIDE = "cache.guide";
-
-	public static final Class<?> CACHE_GUIDE_TYPE = GettingStartedGuide.class;
 
 	private final SaganRendererClient client;
 

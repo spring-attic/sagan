@@ -23,11 +23,7 @@ public class Tutorials implements GuidesRepository<Tutorial> {
 
 	public static final String CACHE_TUTORIALS = "cache.tutorials";
 
-	public static final Class<?> CACHE_TUTORIALS_TYPE = GuideHeader[].class;
-
 	public static final String CACHE_TUTORIAL = "cache.tutorial";
-
-	public static final Class<?> CACHE_TUTORIAL_TYPE = Tutorial.class;
 
 	private final SaganRendererClient client;
 
