@@ -105,7 +105,7 @@ class BlogAdminController {
         } else {
             MemberProfile memberProfile = teamRepository.findById(new Long(principal.getName())).get();
             try {
-                Post post = service.addPost(postForm, memberProfile.getUsername());
+                Post post = service.addPost(postForm, memberProfile);
                 PostView postView = PostView.of(post, dateFactory);
                 return "redirect:" + postView.getPath() + "/edit";
             } catch (DataIntegrityViolationException ex) {

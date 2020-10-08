@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import sagan.site.support.DateFactory;
 import sagan.site.support.DateTestUtils;
+import sagan.site.team.MemberProfile;
 
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -19,7 +20,7 @@ import static org.mockito.Matchers.anyObject;
 @ExtendWith(MockitoExtension.class)
 public class BlogService_ValidPostTests {
 
-    private static final String AUTHOR_USERNAME = "username";
+    private static final MemberProfile AUTHOR = new MemberProfile();
     private Post post;
     private PostForm postForm = new PostForm();
     private Date publishAt = DateTestUtils.getDate("2013-07-01 12:00");
@@ -44,15 +45,15 @@ public class BlogService_ValidPostTests {
         });
 
         post = PostBuilder.post().publishAt(publishAt).build();
-        given(postFormAdapter.createPostFromPostForm(postForm, AUTHOR_USERNAME)).willReturn(post);
+        given(postFormAdapter.createPostFromPostForm(postForm, AUTHOR)).willReturn(post);
 
         service = new BlogService(postRepository, postFormAdapter, dateFactory);
-        service.addPost(postForm, AUTHOR_USERNAME);
+        service.addPost(postForm, AUTHOR);
     }
 
     @Test
     public void createsAPost() {
-        verify(postFormAdapter).createPostFromPostForm(postForm, AUTHOR_USERNAME);
+        verify(postFormAdapter).createPostFromPostForm(postForm, AUTHOR);
     }
 
     @Test

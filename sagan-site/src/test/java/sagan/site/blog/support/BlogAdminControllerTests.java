@@ -32,6 +32,7 @@ import org.springframework.validation.MapBindingResult;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
@@ -117,9 +118,9 @@ public class BlogAdminControllerTests {
         given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
         PostForm postForm = new PostForm();
 
-        given(blogService.addPost(eq(postForm), anyString())).willReturn(TEST_POST);
+        given(blogService.addPost(eq(postForm), any())).willReturn(TEST_POST);
         controller.createPost(principal, postForm, new BindException(postForm, "postForm"), null);
-        verify(blogService).addPost(postForm, username);
+        verify(blogService).addPost(postForm, member);
     }
 
     @Test
@@ -136,7 +137,7 @@ public class BlogAdminControllerTests {
         postForm.setContent("content");
         postForm.setCategory(PostCategory.ENGINEERING);
         Post post = PostBuilder.post().id(123L).publishAt("2013-05-06 00:00").title("Post Title").build();
-        given(blogService.addPost(postForm, username)).willReturn(post);
+        given(blogService.addPost(postForm, member)).willReturn(post);
         String result = controller.createPost(principal, postForm, bindingResult, null);
 
         assertThat(result).isEqualTo("redirect:/blog/2013/05/06/post-title/edit");
@@ -158,11 +159,11 @@ public class BlogAdminControllerTests {
         postForm.setCategory(PostCategory.ENGINEERING);
         Post post = PostBuilder.post().id(123L).publishAt("2013-05-06 00:00").title("Post Title").build();
 
-        given(blogService.addPost(postForm, username)).willReturn(post);
+        given(blogService.addPost(postForm, member)).willReturn(post);
         String result1 = controller.createPost(principal, postForm, bindingResult, null);
         assertThat(result1).isEqualTo("redirect:/blog/2013/05/06/post-title/edit");
 
-        given(blogService.addPost(postForm, username)).willThrow(DataIntegrityViolationException.class);
+        given(blogService.addPost(postForm, member)).willThrow(DataIntegrityViolationException.class);
         String result2 = controller.createPost(principal, postForm, bindingResult, new ExtendedModelMap());
         assertThat(result2).isEqualTo("admin/blog/new");
     }

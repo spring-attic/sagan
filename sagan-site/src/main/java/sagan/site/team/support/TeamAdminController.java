@@ -21,12 +21,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 class TeamAdminController {
 
     private final TeamService teamService;
-    private final TeamImporter teamImporter;
 
     @Autowired
-    public TeamAdminController(TeamService teamService, TeamImporter teamImporter) {
+    public TeamAdminController(TeamService teamService) {
         this.teamService = teamService;
-        this.teamImporter = teamImporter;
     }
 
     @GetMapping("/admin/team")
@@ -38,7 +36,8 @@ class TeamAdminController {
 
     @GetMapping("/admin/profile")
     public String editProfileForm(Principal principal, Model model) {
-        MemberProfile profile = teamService.fetchMemberProfile(new Long(principal.getName()));
+		MemberProfile profile = this.teamService.fetchMemberProfile(Long.parseLong(principal.getName()))
+				.orElseThrow(() -> new MemberNotFoundException(principal.getName()));
         model.addAttribute("profile", profile);
         model.addAttribute("formAction", "/admin/profile");
         return "admin/team/edit";
@@ -46,10 +45,8 @@ class TeamAdminController {
 
     @GetMapping("/admin/team/{username}")
     public String editTeamMemberForm(@PathVariable("username") String username, Model model) {
-        MemberProfile profile = teamService.fetchMemberProfileUsername(username);
-        if (profile == MemberProfile.NOT_FOUND) {
-            throw new MemberNotFoundException(username);
-        }
+		MemberProfile profile = this.teamService.fetchMemberProfile(username)
+				.orElseThrow(() -> new MemberNotFoundException(username));
         model.addAttribute("profile", profile);
         model.addAttribute("formAction", "/admin/team/" + username);
         return "admin/team/edit";
@@ -65,12 +62,6 @@ class TeamAdminController {
     public String saveTeamMember(@PathVariable("username") String username, MemberProfile profile) {
         teamService.updateMemberProfile(username, profile);
         return "redirect:/admin/team/" + username;
-    }
-
-    @PostMapping(value = "/admin/team/github_import")
-    public String importTeamMembersFromGithub() {
-        teamImporter.importTeamMembers();
-        return "redirect:/admin/team";
     }
 
 }

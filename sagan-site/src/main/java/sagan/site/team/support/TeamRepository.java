@@ -3,6 +3,7 @@ package sagan.site.team.support;
 import sagan.site.team.MemberProfile;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,9 +14,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TeamRepository extends JpaRepository<MemberProfile, Long> {
 
-    MemberProfile findByGithubId(Long githubId);
+    Optional<MemberProfile> findByGithubId(Long githubId);
 
-    MemberProfile findByUsername(String username);
+    Optional<MemberProfile> findByUsername(String username);
 
     List<MemberProfile> findByHiddenOrderByNameAsc(boolean hidden);
 

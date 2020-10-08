@@ -1,5 +1,7 @@
 package sagan.site.team.support;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +28,7 @@ public class TeamServiceTests {
 	public void updateMemberProfileUpdatesAvatarUrlFromGravatarEmail() {
 		MemberProfile savedProfile = new MemberProfile();
 		savedProfile.setName("jlong");
-		given(teamRepository.findByUsername("jlong")).willReturn(savedProfile);
+		given(teamRepository.findByUsername("jlong")).willReturn(Optional.of(savedProfile));
 
 		MemberProfile updatedProfile = new MemberProfile();
 		updatedProfile.setGravatarEmail("test@example.com");
@@ -41,7 +43,7 @@ public class TeamServiceTests {
 		MemberProfile savedProfile = new MemberProfile();
 		savedProfile.setName("jlong");
 		savedProfile.setAvatarUrl("http://example.com/image.png");
-		given(teamRepository.findByUsername("jlong")).willReturn(savedProfile);
+		given(teamRepository.findByUsername("jlong")).willReturn(Optional.of(savedProfile));
 
 		MemberProfile updatedProfile = new MemberProfile();
 		updatedProfile.setGravatarEmail("");

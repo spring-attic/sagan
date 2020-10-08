@@ -14,8 +14,6 @@ import org.springframework.util.StringUtils;
 @Entity
 public class MemberProfile {
 
-    public static final MemberProfile NOT_FOUND = new MemberProfile();
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

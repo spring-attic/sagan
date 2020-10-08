@@ -61,7 +61,7 @@ public class PostFormAdapter_UpdatePostTests {
         postForm.setBroadcast(broadcast);
         postForm.setPublishAt(publishAt);
 
-        postFormAdapter = new PostFormAdapter(renderer, postSummary, dateFactory, teamRepository);
+        postFormAdapter = new PostFormAdapter(renderer, postSummary, dateFactory);
         postFormAdapter.updatePostFromPostForm(post, postForm);
     }
 

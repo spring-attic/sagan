@@ -4,7 +4,6 @@ import java.util.Date;
 
 import sagan.site.support.DateFactory;
 import sagan.site.team.MemberProfile;
-import sagan.site.team.support.TeamRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,21 +15,17 @@ class PostFormAdapter {
     private final PostContentRenderer renderer;
     private final PostSummary postSummary;
     private final DateFactory dateFactory;
-    private final TeamRepository teamRepository;
 
     @Autowired
-    public PostFormAdapter(PostContentRenderer renderer, PostSummary postSummary,
-                           DateFactory dateFactory, TeamRepository teamRepository) {
+    public PostFormAdapter(PostContentRenderer renderer, PostSummary postSummary, DateFactory dateFactory) {
         this.renderer = renderer;
         this.postSummary = postSummary;
         this.dateFactory = dateFactory;
-        this.teamRepository = teamRepository;
     }
 
-    public Post createPostFromPostForm(PostForm postForm, String username) {
+    public Post createPostFromPostForm(PostForm postForm, MemberProfile profile) {
         String content = postForm.getContent();
         Post post = new Post(postForm.getTitle(), content, postForm.getCategory(), postForm.getFormat());
-        MemberProfile profile = teamRepository.findByUsername(username);
         post.setAuthor(profile);
         post.setCreatedAt(createdDate(postForm, dateFactory.now()));
 

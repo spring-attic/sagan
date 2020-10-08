@@ -54,10 +54,8 @@ class TeamController {
 
     @RequestMapping(value = "/{username}", method = { GET, HEAD })
     public String showProfile(@PathVariable String username, Model model) {
-        MemberProfile profile = teamService.fetchMemberProfileUsername(username);
-        if (profile == MemberProfile.NOT_FOUND) {
-            throw new MemberNotFoundException(username);
-        }
+        MemberProfile profile = teamService.fetchMemberProfile(username)
+				.orElseThrow(() -> new MemberNotFoundException(username));
         if (profile.isHidden()) {
             throw new MemberNotFoundException("Member profile for username '%s' is hidden", username);
         }

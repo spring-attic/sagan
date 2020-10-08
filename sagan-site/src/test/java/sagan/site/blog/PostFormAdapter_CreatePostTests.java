@@ -7,16 +7,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import sagan.site.team.MemberProfile;
-import sagan.site.team.support.TeamRepository;
 import sagan.site.support.DateFactory;
 import sagan.site.support.DateTestUtils;
+import sagan.site.team.MemberProfile;
+import sagan.site.team.support.TeamRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.nullValue;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 
 @ExtendWith(MockitoExtension.class)
 public class PostFormAdapter_CreatePostTests {
@@ -25,6 +24,7 @@ public class PostFormAdapter_CreatePostTests {
     public static final String RENDERED_SUMMARY = "<p>Rendered HTML</p>";
     private static final String AUTHOR_USERNAME = "author";
     private static final String AUTHOR_NAME = "mr author";
+    private MemberProfile profile;
     private Post post;
     private String title = "Title";
     private String content = "Rendered HTML\n\nfrom Markdown";
@@ -52,16 +52,14 @@ public class PostFormAdapter_CreatePostTests {
 
     @BeforeEach
     public void setup() {
-        MemberProfile profile = new MemberProfile();
+        this.profile = new MemberProfile();
         profile.setUsername(AUTHOR_USERNAME);
         profile.setName(AUTHOR_NAME);
-        given(teamRepository.findByUsername(AUTHOR_USERNAME)).willReturn(profile);
-
         given(renderer.render(content, PostFormat.MARKDOWN)).willReturn(RENDERED_HTML);
         given(postSummary.forContent(anyString(), anyInt())).willReturn(RENDERED_SUMMARY);
         given(dateFactory.now()).willReturn(now);
 
-        adapter = new PostFormAdapter(renderer, postSummary, dateFactory, teamRepository);
+        adapter = new PostFormAdapter(renderer, postSummary, dateFactory);
 
         postForm = new PostForm();
         postForm.setTitle(title);
@@ -71,7 +69,7 @@ public class PostFormAdapter_CreatePostTests {
         postForm.setPublishAt(publishAt);
         postForm.setFormat(PostFormat.MARKDOWN);
 
-        post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
+        post = adapter.createPostFromPostForm(postForm, profile);
     }
 
     @Test
@@ -108,7 +106,7 @@ public class PostFormAdapter_CreatePostTests {
     public void draftWithNullPublishDate() {
         postForm.setDraft(true);
         postForm.setPublishAt(null);
-        post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
+        post = adapter.createPostFromPostForm(postForm, profile);
         assertThat(post.getPublishAt()).isNull();
     }
 
@@ -116,7 +114,7 @@ public class PostFormAdapter_CreatePostTests {
     public void postWithNullPublishDateSetsPublishAtToNow() {
         postForm.setDraft(false);
         postForm.setPublishAt(null);
-        post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
+        post = adapter.createPostFromPostForm(postForm, profile);
         assertThat(post.getPublishAt()).isEqualTo(now);
     }
 
@@ -129,7 +127,7 @@ public class PostFormAdapter_CreatePostTests {
     public void postCreatedDateCanBeSetFromAPostForm() throws Exception {
         Date createdAt = DateTestUtils.getDate("2013-05-23 22:58");
         postForm.setCreatedAt(createdAt);
-        Post post = adapter.createPostFromPostForm(postForm, AUTHOR_USERNAME);
+        Post post = adapter.createPostFromPostForm(postForm, profile);
         assertThat(post.getCreatedAt()).isEqualTo(createdAt);
     }
 }

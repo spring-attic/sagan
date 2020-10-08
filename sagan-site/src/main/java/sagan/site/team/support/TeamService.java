@@ -1,18 +1,19 @@
 package sagan.site.team.support;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import sagan.site.team.MemberProfile;
-import sagan.site.support.ResourceNotFoundException;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.DatatypeConverter;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sagan.site.team.MemberProfile;
+
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * Service providing high-level, selectively cached data access and other
@@ -21,36 +22,31 @@ import javax.xml.bind.DatatypeConverter;
 @Service
 public class TeamService {
 
-    private static Log logger = LogFactory.getLog(TeamService.class);
+    private static Logger logger = LoggerFactory.getLogger(TeamService.class);
 
     private final TeamRepository teamRepository;
 
-    @Autowired
     public TeamService(TeamRepository teamRepository) {
         this.teamRepository = teamRepository;
     }
 
-    public MemberProfile fetchMemberProfile(Long id) {
-        return teamRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Member not found for id: " + id));
+    public Optional<MemberProfile> fetchMemberProfile(Long id) {
+        return this.teamRepository.findById(id);
     }
 
-    public MemberProfile fetchMemberProfileUsername(String username) {
-        MemberProfile profile = teamRepository.findByUsername(username);
-        if (profile == null) {
-            profile = MemberProfile.NOT_FOUND;
-        }
-        return profile;
+    public Optional<MemberProfile> fetchMemberProfile(String username) {
+        return this.teamRepository.findByUsername(username);
     }
 
-    public void updateMemberProfile(Long id, MemberProfile profile) {
-        updateMemberProfile(profile, fetchMemberProfile(id));
+    public Optional<MemberProfile> updateMemberProfile(Long id, MemberProfile newProfile) {
+		return fetchMemberProfile(id).map(profile -> updateMemberProfile(newProfile, profile));
     }
 
-    public void updateMemberProfile(String username, MemberProfile updatedProfile) {
-        updateMemberProfile(updatedProfile, fetchMemberProfileUsername(username));
+    public Optional<MemberProfile> updateMemberProfile(String username, MemberProfile updatedProfile) {
+		return fetchMemberProfile(username).map(profile -> updateMemberProfile(updatedProfile, profile));
     }
 
-    private void updateMemberProfile(MemberProfile profile, MemberProfile existingProfile) {
+    private MemberProfile updateMemberProfile(MemberProfile profile, MemberProfile existingProfile) {
         existingProfile.setBio(profile.getBio());
         existingProfile.setName(profile.getName());
         existingProfile.setJobTitle(profile.getJobTitle());
@@ -64,35 +60,33 @@ public class TeamService {
         existingProfile.setHidden(profile.isHidden());
         updateAvatarUrlwithGravatar(existingProfile);
 
-        teamRepository.save(existingProfile);
+        return this.teamRepository.save(existingProfile);
     }
 
     public List<MemberProfile> fetchActiveMembers() {
-        return teamRepository.findByHiddenOrderByNameAsc(false);
+        return this.teamRepository.findByHiddenOrderByNameAsc(false);
     }
 
     public List<MemberProfile> fetchHiddenMembers() {
-        return teamRepository.findByHiddenOrderByNameAsc(true);
+        return this.teamRepository.findByHiddenOrderByNameAsc(true);
     }
 
-    public MemberProfile createOrUpdateMemberProfile(Long githubId, String username, String avatarUrl, String name) {
-        MemberProfile profile = teamRepository.findByGithubId(githubId);
-
-        if (profile == null) {
-            profile = new MemberProfile();
-            profile.setGithubId(githubId);
-            profile.setUsername(username);
-            profile.setHidden(true);
-        }
-        profile.setAvatarUrl(avatarUrl);
-        profile.setName(name);
-        profile.setGithubUsername(username);
-        updateAvatarUrlwithGravatar(profile);
-        return teamRepository.save(profile);
+    public MemberProfile createOrUpdateMemberProfile(Long githubId, OAuth2User oAuth2User) {
+        MemberProfile profile = teamRepository.findByGithubId(githubId).orElseGet(() -> {
+			MemberProfile newProfile = new MemberProfile();
+			newProfile.setGithubId(githubId);
+			newProfile.setHidden(true);
+			return newProfile;
+		});
+		profile.setUsername(oAuth2User.getAttribute("login"));
+        profile.setGithubUsername(oAuth2User.getAttribute("login"));
+        profile.setName(oAuth2User.getAttribute("name"));
+        profile.setAvatarUrl(oAuth2User.getAttribute("avatar_url"));
+        return this.teamRepository.save(profile);
     }
 
     public void showOnlyTeamMembersWithIds(List<Long> userIds) {
-        teamRepository.hideTeamMembersNotInIds(userIds);
+        this.teamRepository.hideTeamMembersNotInIds(userIds);
     }
 
     private void updateAvatarUrlwithGravatar(MemberProfile profile) {

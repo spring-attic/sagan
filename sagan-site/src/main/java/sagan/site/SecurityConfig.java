@@ -4,13 +4,14 @@ import java.util.LinkedHashMap;
 
 import javax.servlet.Filter;
 
-import sagan.site.support.security.GitHubAuthenticationManager;
-import sagan.site.support.security.GitHubMemberOAuth2UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -50,6 +51,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						.defaultSuccessUrl("/admin").loginPage("/signin")
 						.userInfoEndpoint(endpoint -> endpoint.userService(this.userService)))
 				.logout(logout -> logout.logoutUrl("/signout").logoutSuccessUrl("/"));
+	}
+
+	@Bean
+	public AuthenticationEventPublisher authenticationEventPublisher
+			(ApplicationEventPublisher applicationEventPublisher) {
+		return new DefaultAuthenticationEventPublisher(applicationEventPublisher);
 	}
 
 	private Filter githubBasicAuthFilter() {
