@@ -128,9 +128,9 @@ public class SiteProperties {
 		private String team;
 
 		/**
-		 * Personal access token to use the GitHub API with better rate-limiting.
+		 * Token configured in GitHub webhooks for this application.
 		 */
-		private String accessToken;
+		private String webhookToken = "changeme";
 
 		public String getOrg() {
 			return this.org;
@@ -148,12 +148,12 @@ public class SiteProperties {
 			this.team = team;
 		}
 
-		public String getAccessToken() {
-			return this.accessToken;
+		public String getWebhookToken() {
+			return this.webhookToken;
 		}
 
-		public void setAccessToken(String accessToken) {
-			this.accessToken = accessToken;
+		public void setWebhookToken(String webhookToken) {
+			this.webhookToken = webhookToken;
 		}
 	}
 

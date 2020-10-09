@@ -3,6 +3,7 @@ package sagan.site.guides;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import sagan.site.SiteProperties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,7 +59,7 @@ class DocsWebhookController {
 			Tutorials tutorials,
 			GettingStartedGuides gettingStartedGuides,
 			Topicals topicals,
-			@Value("${WEBHOOK_ACCESS_TOKEN:default}") String accessToken)
+			SiteProperties properties)
 			throws NoSuchAlgorithmException, InvalidKeyException {
 		this.objectMapper = objectMapper;
 		this.tutorials = tutorials;
@@ -66,7 +67,7 @@ class DocsWebhookController {
 		this.topicals = topicals;
 
 		// initialize HMAC with SHA1 algorithm and secret
-		SecretKeySpec secret = new SecretKeySpec(accessToken.getBytes(CHARSET), HMAC_ALGORITHM);
+		SecretKeySpec secret = new SecretKeySpec(properties.getGithub().getWebhookToken().getBytes(CHARSET), HMAC_ALGORITHM);
 		hmac = Mac.getInstance(HMAC_ALGORITHM);
 		hmac.init(secret);
 	}

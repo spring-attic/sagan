@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import sagan.site.SiteProperties;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +41,10 @@ public class DocsWebhookControllerTests {
     @BeforeEach
     public void setup() throws Exception {
         this.objectMapper = new ObjectMapper();
-        this.controller = new DocsWebhookController(this.objectMapper, this.tutorials,
-                this.gettingStartedGuides, this.topicals, "accesstoken");
+		SiteProperties siteProperties = new SiteProperties();
+		siteProperties.getGithub().setWebhookToken("accesstoken");
+		this.controller = new DocsWebhookController(this.objectMapper, this.tutorials,
+                this.gettingStartedGuides, this.topicals, siteProperties);
     }
 
     @Test

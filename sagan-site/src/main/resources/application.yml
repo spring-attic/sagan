@@ -40,16 +40,8 @@ sagan:
       # by requesting the GitHub API (see github.client configuration keys).
       # This key can be found in the list of teams in your organization
       # See http://developer.github.com/v3/orgs/teams/#list-teams
-      team: spring-team
-      # This optional property may be assigned using a "personal access token" created
-      # at https://github.com/settings/applications. It is used for accessing GitHub's
-      # API, even for operations that do not require authorization (e.g. Getting Started
-      # Guide repositories). This is done in order to work against higher rate limits
-      # (5000req/hour vs. the default 60req/hour without a token). When running the app
-      # locally, this lower default is fine. When running the app in production, the
-      # token is a must. See http://developer.github.com/v3/#rate-limiting.
-      access-token:
       org: spring-io
+      team: spring-team
 ---
 
 spring:
