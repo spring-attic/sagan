@@ -71,14 +71,11 @@ jobs:
       current_app_name: sagan
       path: ./build/libs/sagan-site-1.0.0.BUILD-SNAPSHOT.jar
       environment_variables:
-        SPRING_PROFILES_ACTIVE: production
-        ELASTICSEARCH_INDEX: sagan-production
-        ADMIN_PASSWORD: ((sagan-admin-password))
-        GITHUB_CLIENT_ID: ((sagan-github-clientid))
-        GITHUB_CLIENT_SECRET: ((sagan-github-clientsecret))
-        GITHUB_ACCESS_TOKEN: ((sagan-github-access-token))
-        WEBHOOK_ACCESS_TOKEN: ((sagan-webhook-access-token))
-        SAGAN_SITE_EVENTS_CALENDAR_URI: ((sagan-events-calendar-uri))
+        SPRING_PROFILES_ACTIVE: cloud,production
+        SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENTID: ((sagan-github-clientid))
+        SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENTSECRET: ((sagan-github-clientsecret))
+        SAGAN_SITE_GITHUB_WEBHOOKTOKEN: ((sagan-webhook-access-token))
+        SAGAN_SITE_EVENTS_CALENDARURI: ((sagan-events-calendar-uri))
       manifest: sagan-site-repo/concourse/manifests/sagan-site-production.yml
   - put: slack-alert
     params:
