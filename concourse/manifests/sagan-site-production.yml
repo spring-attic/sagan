@@ -5,8 +5,8 @@ applications:
   - java_buildpack
   instances: 2
   health-check-type: http
-  health-check-http-endpoint: /health
-  timeout: 120
+  health-check-http-endpoint: /actuator/health/liveness
+  timeout: 30
   memory: 2048M
   disk_quota: 1024M
   routes:

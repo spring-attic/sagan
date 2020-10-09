@@ -36,6 +36,11 @@ spring:
             scope:
              - 'read:org'
 
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
 
 sagan:
   site:
@@ -54,7 +59,6 @@ sagan:
       # token is a must. See http://developer.github.com/v3/#rate-limiting.
       access-token:
       org: spring-io
-
 ---
 
 spring:
