@@ -1,9 +1,6 @@
 info:
   spring:
     profiles: ${spring.profiles.active:default}
-  app:
-    name: ${vcap.application.name:sagan}:${vcap.application.instance_index:*}
-    start: ${vcap.application.start:N/A}
 
 spring:
   jpa:
@@ -52,6 +49,9 @@ spring:
       strategy:
         content:
           enabled: true
+    cache:
+      cachecontrol:
+        max-age: 7d
 server:
   compression:
     enabled: true
@@ -90,9 +90,8 @@ sagan:
 spring:
   profiles: production
   datasource:
-    tomcat:
-      max-active: 8
-      test-on-borrow: true
+    hikari:
+      maximum-pool-size: 8
 sagan:
   site:
     disqus:
