@@ -9,18 +9,21 @@ public class SiteProperties {
 
 	private final Cache cache = new Cache();
 
-	private final Renderer renderer = new Renderer();
+	private final Disqus disqus = new Disqus();
 
 	private final Events events = new Events();
 
 	private final GitHub gitHub = new GitHub();
 
-	public Renderer getRenderer() {
-		return this.renderer;
-	}
+	private final Renderer renderer = new Renderer();
+
 
 	public Cache getCache() {
 		return this.cache;
+	}
+
+	public Disqus getDisqus() {
+		return this.disqus;
 	}
 
 	public Events getEvents() {
@@ -30,6 +33,11 @@ public class SiteProperties {
 	public GitHub getGithub() {
 		return this.gitHub;
 	}
+
+	public Renderer getRenderer() {
+		return this.renderer;
+	}
+
 
 	public static class Cache {
 
@@ -146,6 +154,22 @@ public class SiteProperties {
 
 		public void setAccessToken(String accessToken) {
 			this.accessToken = accessToken;
+		}
+	}
+
+	public static final class Disqus {
+
+		/**
+		 * Disqus.com subdomain to get the integration script from.
+		 */
+		private String shortName = "spring-io-localhost";
+
+		public String getShortName() {
+			return this.shortName;
+		}
+
+		public void setShortName(String shortName) {
+			this.shortName = shortName;
 		}
 	}
 

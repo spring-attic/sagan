@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import sagan.site.SiteProperties;
 import sagan.site.support.DateFactory;
 import sagan.site.support.DateTestUtils;
 import sagan.site.team.MemberProfile;
@@ -47,7 +48,7 @@ public class BlogService_ValidPostTests {
         post = PostBuilder.post().publishAt(publishAt).build();
         given(postFormAdapter.createPostFromPostForm(postForm, AUTHOR)).willReturn(post);
 
-        service = new BlogService(postRepository, postFormAdapter, dateFactory);
+        service = new BlogService(postRepository, postFormAdapter, dateFactory, new SiteProperties());
         service.addPost(postForm, AUTHOR);
     }
 

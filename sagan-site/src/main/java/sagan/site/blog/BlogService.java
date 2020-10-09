@@ -6,11 +6,10 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import sagan.site.SiteProperties;
 import sagan.site.support.DateFactory;
 import sagan.site.team.MemberProfile;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,14 +29,14 @@ public class BlogService {
     private final PostRepository postRepository;
     private final DateFactory dateFactory;
 
-    @Value("${disqus_shortname}")
     private String disqusShortname;
 
-    @Autowired
-    public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter, DateFactory dateFactory) {
+    public BlogService(PostRepository postRepository, PostFormAdapter postFormAdapter, DateFactory dateFactory,
+			SiteProperties siteProperties) {
         this.postRepository = postRepository;
         this.postFormAdapter = postFormAdapter;
         this.dateFactory = dateFactory;
+        this.disqusShortname = siteProperties.getDisqus().getShortName();
     }
 
     // Property methods

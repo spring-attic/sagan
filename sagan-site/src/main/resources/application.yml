@@ -86,16 +86,16 @@ spring:
       additional_paths:
         - ../sagan-client/build/dist/
       additional_exclude: "css/**,fonts/**,images/**,js/**,icon*.png,manifest.json,robots.txt"
-disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
 ---
 
 spring:
   profiles: staging
-disqus_shortname: ${DISQUS_SHORTNAME:spring-io-staging}
 sagan:
   site:
     renderer:
       service-url: https://sagan-renderer-staging.cfapps.io
+    disqus:
+      short-name: spring-io-staging
 ---
 
 spring:
@@ -104,8 +104,9 @@ spring:
     tomcat:
       max-active: 8
       test-on-borrow: true
-disqus_shortname: ${DISQUS_SHORTNAME:spring-io}
 sagan:
   site:
+    disqus:
+      short-name: spring-io
     renderer:
       service-url: https://sagan-renderer.cfapps.io
