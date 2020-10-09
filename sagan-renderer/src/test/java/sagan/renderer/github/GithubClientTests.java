@@ -38,7 +38,7 @@ public class GithubClientTests {
 	private MockRestServiceServer server;
 
 	@Test
-	public void downloadRepositoryInfo() {
+	void downloadRepositoryInfo() {
 		String org = "spring-guides";
 		String repo = "gs-rest-service";
 		String expectedUrl = String.format("/repos/%s/%s", org, repo);
@@ -52,7 +52,7 @@ public class GithubClientTests {
 	}
 
 	@Test
-	public void downloadRepositoryInfoRedirected() {
+	void downloadRepositoryInfoRedirected() {
 		String org = "spring-guides";
 		String repo = "gs-redirected";
 		String expectedUrl = String.format("/repos/%s/%s", org, repo);
@@ -68,7 +68,7 @@ public class GithubClientTests {
 	}
 
 	@Test
-	public void downloadRepositoryAsZipBall() throws Exception {
+	void downloadRepositoryAsZipBall() throws Exception {
 		String org = "spring-guides";
 		String repo = "gs-rest-service";
 		String expectedUrl = String.format("/repos/%s/%s/zipball", org, repo);
@@ -83,7 +83,7 @@ public class GithubClientTests {
 	}
 
 	@Test
-	public void fetchRepositoriesMultiplePages() {
+	void fetchRepositoriesMultiplePages() {
 		String org = "spring-guides";
 		String authorization = getAuthorizationHeader();
 		HttpHeaders firstPageHeaders = new HttpHeaders();
@@ -107,6 +107,22 @@ public class GithubClientTests {
 				.containsExactlyInAnyOrder("gs-rest-service", "gs-scheduling-tasks",
 						"gs-consuming-rest", "gs-relational-data-access", "deprecate-gs-device-detection");
 
+	}
+
+	@Test
+	void fetchRateLimitInformation() {
+		String authorization = getAuthorizationHeader();
+		this.server.expect(requestTo("/rate_limit"))
+				.andExpect(header(HttpHeaders.AUTHORIZATION, authorization))
+				.andExpect(header(HttpHeaders.ACCEPT, GITHUB_PREVIEW.toString()))
+				.andRespond(withSuccess(getClassPathResource("rate_limit.json"),
+						MediaType.APPLICATION_JSON));
+
+		RateLimit rateLimit = this.client.fetchRateLimitInfo();
+		assertThat(rateLimit.getLimit()).isEqualTo(60);
+		assertThat(rateLimit.getRemaining()).isEqualTo(60);
+		assertThat(rateLimit.getUsed()).isEqualTo(0);
+		assertThat(rateLimit.getReset().toString()).isEqualTo("2020-10-09T13:51:05Z");
 	}
 
 	private String getAuthorizationHeader() {

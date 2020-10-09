@@ -42,6 +42,8 @@ public class GithubClient {
 
 	private static final Logger logger = LoggerFactory.getLogger(GithubClient.class);
 
+	private static final String RATE_LIMIT_PATH = "/rate_limit";
+
 	private static final String REPOS_LIST_PATH = "/orgs/%s/repos?per_page=100";
 
 	private static final String REPO_INFO_PATH = "/repos/{organization}/{repositoryName}";
@@ -131,6 +133,10 @@ public class GithubClient {
 				.filter(Matcher::matches)
 				.map(matcher -> matcher.group(1))
 				.findFirst();
+	}
+
+	public RateLimit fetchRateLimitInfo() {
+		return this.restTemplate.getForObject(RATE_LIMIT_PATH, RateLimit.class);
 	}
 
 	private static class GithubAppTokenInterceptor implements ClientHttpRequestInterceptor {
