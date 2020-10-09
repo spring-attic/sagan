@@ -1,13 +1,4 @@
-project:
-  artifactId: spring-io
-  name: spring-io
-  description: spring-io
-
 info:
-  build:
-    artifact: ${project.artifactId}
-    name: ${project.name}
-    description: ${project.description}
   spring:
     profiles: ${spring.profiles.active:default}
   app:
@@ -62,7 +53,13 @@ sagan:
 ---
 
 spring:
-  profiles: staging,production
+  profiles: cloud
+  resources:
+    chain:
+      cache: true
+      strategy:
+        content:
+          enabled: true
 server:
   compression:
     enabled: true

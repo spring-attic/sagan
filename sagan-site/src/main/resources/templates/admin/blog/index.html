@@ -81,13 +81,13 @@
 
     <nav class="pagination" role="navigation" data-th-if="${paginationInfo.isVisible()}" aria-label="pagination">
         <a class="pagination-previous" data-th-if="${paginationInfo.previousVisible}"
-           data-th-href="@{${@uih.path()}(page=${paginationInfo.previousPageNumber})}">Previous</a>
+           data-th-href="@{/admin/blog(page=${paginationInfo.previousPageNumber})}">Previous</a>
         <a class="pagination-next" data-th-if="${paginationInfo.nextVisible}"
-           data-th-href="@{${@uih.path()}(page=${paginationInfo.nextPageNumber})}">Next page</a>
+           data-th-href="@{/admin/blog(page=${paginationInfo.nextPageNumber})}">Next page</a>
         <ul class="pagination-list">
             <li data-th-each="element : ${paginationInfo.pageElements }">
                 <a class="pagination-link" data-th-classappend="${element.currentPage} ? ' is-current'"
-                   data-th-href="@{${@uih.path()}(page=${element.label})}" data-th-text="${element.label}">1</a>
+                   data-th-href="@{/admin/blog(page=${element.label})}" data-th-text="${element.label}">1</a>
                 <span class="pagination-ellipsis" data-th-unless="${element.navigable || element.currentPage}">&hellip;</span>
             </li>
         </ul>

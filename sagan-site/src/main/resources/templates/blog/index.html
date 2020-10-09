@@ -4,7 +4,7 @@
     <title>Spring | Blog</title>
     <meta property='og:title' content='Spring Blog'/>
     <meta property='og:description' content='Read the latest news on Spring.'/>
-    <link rel="alternate" type="application/atom+xml" data-th-href="${@uih.path() + '.atom'}"/>
+    <link rel="alternate" type="application/atom+xml" data-th-href="@{/blog.atom}"/>
     <link rel="stylesheet" type="text/css" data-th-href="@{/css/blog.css}"/>
 </head>
 <body>
@@ -109,17 +109,17 @@
                     </div>
                     <div id='pagination_control' data-th-if="${paginationInfo.isVisible()}"
                          class="pagination blog-pagination">
-                        <a data-th-href="@{${@uih.path()}(page=${paginationInfo.previousPageNumber})}" class='previous'
+                        <a data-th-href="@{/blog(page=${paginationInfo.previousPageNumber})}" class='previous'
                            data-th-if="${paginationInfo.previousVisible}"><i class="icon-chevron-left"></i></a>
                         <div data-th-each="element : ${paginationInfo.pageElements }">
-                            <a data-th-href="@{${@uih.path()}(page=${element.label})}" data-th-text="${element.label}"
+                            <a data-th-href="@{/blog(page=${element.label})}" data-th-text="${element.label}"
                                data-th-if="${element.navigable}"></a>
                             <div data-th-text="${element.label}" data-th-if="${!element.navigable && element.currentPage}"
                                  class="active"></div>
                             <div data-th-text="${element.label}"
                                  data-th-unless="${element.navigable || element.currentPage}"></div>
                         </div>
-                        <a data-th-href="@{${@uih.path()}(page=${paginationInfo.nextPageNumber})}" class='next'
+                        <a data-th-href="@{/blog(page=${paginationInfo.nextPageNumber})}" class='next'
                            data-th-if="${paginationInfo.nextVisible}"><i class="icon-chevron-right"></i></a>
                     </div>
                 </div>
