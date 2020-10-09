@@ -1,13 +1,6 @@
 server:
   port: 8081
 
-logging:
-  level:
-    ROOT: INFO
-    org.apache.http: WARN
-    # always log high-level information about application startup
-    sagan.renderer: INFO
-
 sagan:
   renderer:
     guides:
@@ -21,3 +14,9 @@ sagan:
       # locally, this lower default is fine. When running the app in production, the
       # token is a must. See http://developer.github.com/v3/#rate-limiting.
       token: ${GITHUB_ACCESS_TOKEN:}
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
