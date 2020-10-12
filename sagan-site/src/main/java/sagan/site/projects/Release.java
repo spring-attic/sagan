@@ -170,12 +170,6 @@ public class Release implements Comparable<Release> {
 		if (other == null) {
 			return -1;
 		}
-		if (this.isCurrent && !other.isCurrent) {
-			return -1;
-		}
-		if (!this.isCurrent && other.isCurrent) {
-			return 1;
-		}
 		// invert Version comparator, to get most recent version first
 		return - this.version.compareTo(other.version);
 	}

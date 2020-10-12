@@ -56,7 +56,7 @@ public class ReleaseTests {
 		Release oneTwoSnapshot = new Release(Version.of("1.2.0-SNAPSHOT"));
 		Release oneThreeGa = new Release(Version.of("1.3.0"));
 		List<Release> releases = Stream.of(oneOneGa, oneTwoGa, oneTwoM2, oneTwoSnapshot, oneThreeGa).sorted().collect(Collectors.toList());
-		assertThat(releases).containsExactly(oneOneGa, oneThreeGa, oneTwoGa, oneTwoSnapshot, oneTwoM2);
+		assertThat(releases).containsExactly(oneThreeGa, oneTwoGa, oneTwoSnapshot, oneTwoM2, oneOneGa);
 	}
 
 	@Test
