@@ -87,7 +87,7 @@ jobs:
       icon_emoji: ":concourse:"
       username: concourse-ci
 groups:
-- name: Deploy
+- name: deploy
   jobs:
   - deploy-sagan-renderer
   - deploy-sagan-site
