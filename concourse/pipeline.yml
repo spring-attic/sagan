@@ -46,10 +46,11 @@ jobs:
   - put: sagan-cf-production
     params:
       current_app_name: sagan-renderer
-      path: ./build/libs/sagan-renderer-1.0.0.BUILD-SNAPSHOT.jar
+      path: ./build/libs/sagan-renderer-1.0.0-SNAPSHOT.jar
       environment_variables:
-        SPRING_PROFILES_ACTIVE: production
+        SPRING_PROFILES_ACTIVE: cloud,production
         SAGAN_RENDERER_GITHUB_TOKEN: ((sagan-github-access-token))
+        JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: "{enabled: false}"
       manifest: sagan-renderer-repo/concourse/manifests/sagan-renderer-production.yml
   - put: slack-alert
     params:
