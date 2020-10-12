@@ -96,5 +96,3 @@ sagan:
   site:
     disqus:
       short-name: spring-io
-    renderer:
-      service-url: https://sagan-renderer.cfapps.io

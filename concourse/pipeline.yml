@@ -70,13 +70,15 @@ jobs:
   - put: sagan-cf-production
     params:
       current_app_name: sagan
-      path: ./build/libs/sagan-site-1.0.0.BUILD-SNAPSHOT.jar
+      path: ./build/libs/sagan-site-1.0.0-SNAPSHOT.jar
       environment_variables:
         SPRING_PROFILES_ACTIVE: cloud,production
         SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENTID: ((sagan-github-clientid))
         SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENTSECRET: ((sagan-github-clientsecret))
         SAGAN_SITE_GITHUB_WEBHOOKTOKEN: ((sagan-webhook-access-token))
         SAGAN_SITE_EVENTS_CALENDARURI: ((sagan-events-calendar-uri))
+        SAGAN_SITE_RENDERER_SERVICE_URL: https://sagan-renderer.cfapps.io
+        JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: "{enabled: false}"
       manifest: sagan-site-repo/concourse/manifests/sagan-site-production.yml
   - put: slack-alert
     params:
