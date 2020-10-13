@@ -28,7 +28,7 @@ body.dark {
   h2, h3, h4, h5, html, p strong, a.link-darken:focus, a.link-darken:hover, .compass .project-content a:hover,
   .compass .project-content .nav-tabs > .active > a, .compass .project-content .nav-tabs a,
   .compass .project-content .nav-tabs a:hover, .team-member--sub-info p, .team-member--social--icon.github-lg .fab,
-  &.guide main p code, .guide main p pre, &.guide main table code, &.guide main table pre,
+  &#guide main p code, #guide main p pre, &#guide main table code, &#guide main table pre,
   .compass .project-content .project--list-links li a:hover strong {
     color: $dark-color;
   }
@@ -451,7 +451,7 @@ body.dark {
     }
   }
 
-  &.guide main p code a, &.guide main p pre a {
+  &#guide main p code a, &#guide main p pre a {
     color: #abd8ff;
 
     &:hover {
