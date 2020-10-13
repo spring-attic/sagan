@@ -17,9 +17,9 @@ import sagan.site.blog.PostCategory;
 import sagan.site.blog.PostForm;
 import sagan.site.blog.PostFormat;
 import sagan.site.team.MemberProfile;
-import sagan.site.team.support.TeamRepository;
 import sagan.site.support.DateFactory;
 import sagan.site.support.nav.PageableFactory;
+import sagan.site.team.support.TeamService;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -35,7 +35,6 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -58,19 +57,19 @@ public class BlogAdminControllerTests {
     private MapBindingResult bindingResult;
 
     @Mock
-    private TeamRepository teamRepository;
+    private TeamService teamService;
 
     @BeforeEach
     public void setup() {
         bindingResult = new MapBindingResult(new HashMap<>(), "postForm");
         principal = () -> "12345";
 
-        controller = new BlogAdminController(blogService, teamRepository, dateFactory);
+        controller = new BlogAdminController(blogService, teamService, dateFactory);
     }
 
     @Test
     public void dashboardShowsUsersPosts() {
-        controller = new BlogAdminController(blogService, teamRepository, dateFactory);
+        controller = new BlogAdminController(blogService, teamService, dateFactory);
 
         Page<Post> drafts = new PageImpl<>(
                 Arrays.asList(new Post("draft post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN)),
@@ -115,7 +114,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
+        given(teamService.fetchMemberProfile(12345L)).willReturn(Optional.of(member));
         PostForm postForm = new PostForm();
 
         given(blogService.addPost(eq(postForm), any())).willReturn(TEST_POST);
@@ -130,7 +129,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
+        given(teamService.fetchMemberProfile(12345L)).willReturn(Optional.of(member));
 
         PostForm postForm = new PostForm();
         postForm.setTitle("title");
@@ -151,7 +150,7 @@ public class BlogAdminControllerTests {
         MemberProfile member = new MemberProfile();
         member.setUsername(username);
 
-        given(teamRepository.findById(12345L)).willReturn(Optional.of(member));
+        given(teamService.fetchMemberProfile(12345L)).willReturn(Optional.of(member));
 
         PostForm postForm = new PostForm();
         postForm.setTitle("title");

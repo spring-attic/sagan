@@ -31,7 +31,7 @@ public class TeamService {
     }
 
     public Optional<MemberProfile> fetchMemberProfile(Long id) {
-        return this.teamRepository.findById(id);
+        return this.teamRepository.findByGithubId(id);
     }
 
     public Optional<MemberProfile> fetchMemberProfile(String username) {

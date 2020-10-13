@@ -11,10 +11,10 @@ import sagan.site.blog.PostCategory;
 import sagan.site.blog.PostForm;
 import sagan.site.blog.PostFormat;
 import sagan.site.team.MemberProfile;
-import sagan.site.team.support.TeamRepository;
 import sagan.site.support.DateFactory;
 import sagan.site.support.nav.PageableFactory;
 import sagan.site.support.nav.PaginationInfo;
+import sagan.site.team.support.TeamService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -39,26 +39,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/admin/blog")
 class BlogAdminController {
 
-    private BlogService service;
-    private TeamRepository teamRepository;
-    private DateFactory dateFactory;
+    private final BlogService blogService;
+    private final TeamService teamService;
+    private final DateFactory dateFactory;
 
     @Autowired
-    public BlogAdminController(BlogService service, TeamRepository teamRepository, DateFactory dateFactory) {
-        this.service = service;
-        this.teamRepository = teamRepository;
+    public BlogAdminController(BlogService blogService, TeamService teamService, DateFactory dateFactory) {
+        this.blogService = blogService;
+		this.teamService = teamService;
         this.dateFactory = dateFactory;
     }
 
     @GetMapping("")
     public String dashboard(Model model, @RequestParam(defaultValue = "1") int page) {
-        Page<PostView> postViewPage = PostView.pageOf(service.getPublishedPosts(PageableFactory.forDashboard(page)), dateFactory);
+        Page<PostView> postViewPage = PostView.pageOf(blogService.getPublishedPosts(PageableFactory.forDashboard(page)), dateFactory);
         model.addAttribute("posts", postViewPage);
         model.addAttribute("paginationInfo", new PaginationInfo(postViewPage));
 
         if(page == 1) {
-            model.addAttribute("drafts", PostView.pageOf(service.getDraftPosts(PageableFactory.all()), dateFactory));
-            model.addAttribute("scheduled", PostView.pageOf(service.getScheduledPosts(PageableFactory.all()), dateFactory));
+            model.addAttribute("drafts", PostView.pageOf(blogService.getDraftPosts(PageableFactory.all()), dateFactory));
+            model.addAttribute("scheduled", PostView.pageOf(blogService.getScheduledPosts(PageableFactory.all()), dateFactory));
         } else {
             Page<PostView> emptyPage = new PageImpl<PostView>(Collections.emptyList(), PageableFactory.all(), 0);
             model.addAttribute("drafts", emptyPage);
@@ -78,7 +78,7 @@ class BlogAdminController {
 
     @GetMapping("/{postId:[0-9]+}{slug:.*}/edit")
     public String editPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
-        Post post = service.getPost(postId);
+        Post post = blogService.getPost(postId);
         PostForm postForm = new PostForm(post);
         String path = PostView.of(post, dateFactory).getPath();
 
@@ -92,7 +92,7 @@ class BlogAdminController {
 
     @GetMapping("/{postId:[0-9]+}{slug:.*}")
     public String showPost(@PathVariable Long postId, @PathVariable String slug, Model model) {
-        model.addAttribute("post", PostView.of(service.getPost(postId), dateFactory));
+        model.addAttribute("post", PostView.of(blogService.getPost(postId), dateFactory));
         return "blog/show";
     }
 
@@ -103,9 +103,9 @@ class BlogAdminController {
             model.addAttribute("formats", PostFormat.values());
             return "admin/blog/new";
         } else {
-            MemberProfile memberProfile = teamRepository.findById(new Long(principal.getName())).get();
+            MemberProfile memberProfile = teamService.fetchMemberProfile(Long.parseLong(principal.getName())).get();
             try {
-                Post post = service.addPost(postForm, memberProfile);
+                Post post = blogService.addPost(postForm, memberProfile);
                 PostView postView = PostView.of(post, dateFactory);
                 return "redirect:" + postView.getPath() + "/edit";
             } catch (DataIntegrityViolationException ex) {
@@ -121,9 +121,9 @@ class BlogAdminController {
     @PostMapping("/{postId:[0-9]+}{slug:.*}/edit")
     public String updatePost(@PathVariable Long postId, @Valid PostForm postForm, BindingResult bindingResult,
                              Model model) {
-        Post post = service.getPost(postId);
+        Post post = blogService.getPost(postId);
         if (!bindingResult.hasErrors()) {
-            service.updatePost(post, postForm);
+            blogService.updatePost(post, postForm);
         }
         PostView postView = PostView.of(post, dateFactory);
         String path = postView.getPath();
@@ -137,14 +137,14 @@ class BlogAdminController {
 
     @PostMapping("/{postId:[0-9]+}{slug:.*}/delete")
     public String deletePost(@PathVariable Long postId) {
-        Post post = service.getPost(postId);
-        service.deletePost(post);
+        Post post = blogService.getPost(postId);
+        blogService.deletePost(post);
         return "redirect:/admin/blog";
     }
 
     @PostMapping("resummarize")
     public String resummarizeAllBlogPosts() {
-        service.resummarizeAllPosts();
+        blogService.resummarizeAllPosts();
         return "redirect:/admin/blog";
     }
 
@@ -153,7 +153,7 @@ class BlogAdminController {
     public String refreshBlogPosts(
             @RequestParam(value="page", defaultValue = "1", required = false) int page,
             @RequestParam(value="size", defaultValue = "10", required = false) int size) {
-        Page<Post> posts = service.refreshPosts(page, size);
+        Page<Post> posts = blogService.refreshPosts(page, size);
         return String.format("{page: %s, pageSize: %s, totalPages: %s, totalElements: %s}",
                 posts.getNumber(), posts.getSize(), posts.getTotalPages(), posts.getTotalElements());
     }
