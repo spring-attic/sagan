@@ -91,7 +91,7 @@ asciidoctor {
 	dependsOn test
 }
 
-jar {
+bootJar {
 	dependsOn asciidoctor
 	from("${asciidoctor.outputDir}/html5") {
 		into 'static/restdocs'
