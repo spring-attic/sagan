@@ -3,141 +3,124 @@ package sagan.site.guides;
 
 import java.nio.charset.StandardCharsets;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import sagan.site.SiteProperties;
+import sagan.site.TestSecurityConfig;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.util.StreamUtils;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 /**
- * Unit tests for {@link DocsWebhookController}.
+ * Integration tests for {@link DocsWebhookController}.
  */
-@ExtendWith(MockitoExtension.class)
+@WebMvcTest(value = DocsWebhookController.class, properties = "sagan.site.github.webhook-token=accesstoken")
+@Import(TestSecurityConfig.class)
 public class DocsWebhookControllerTests {
 
-    private ObjectMapper objectMapper;
-    @Mock
-    private Tutorials tutorials;
-    @Mock
-    private GettingStartedGuides gettingStartedGuides;
-    @Mock
-    private Topicals topicals;
+	@MockBean
+	private Tutorials tutorials;
 
-    private DocsWebhookController controller;
+	@MockBean
+	private GettingStartedGuides gettingStartedGuides;
 
-    @BeforeEach
-    public void setup() throws Exception {
-        this.objectMapper = new ObjectMapper();
-		SiteProperties siteProperties = new SiteProperties();
-		siteProperties.getGithub().setWebhookToken("accesstoken");
-		this.controller = new DocsWebhookController(this.objectMapper, this.tutorials,
-                this.gettingStartedGuides, this.topicals, siteProperties);
-    }
+	@MockBean
+	private Topicals topicals;
 
-    @Test
-    public void testHmacValue() throws Exception {
-        this.controller.verifyHmacSignature("this is a test message", "sha1=5df34e8979dc9a831873a42c6e172546f6937190");
-    }
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Test
-    public void testInvalidHmacValue() throws Exception {
-        assertThatThrownBy(() -> this.controller.verifyHmacSignature("this is a test message", "sha1=wronghmacvalue"))
-		.isInstanceOf(WebhookAuthenticationException.class);
-    }
+	@Test
+	void missingHeadersShouldBeRejected() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/webhook/docs/guides")
+				.accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+				.content("{\"message\": \"this is a test\""))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+	}
 
-    @Test
-    public void testInvalidPayload() throws Exception {
-        String payload = "{ invalid: true";
-		assertThatThrownBy(() -> this.controller.processGuidesUpdate(payload, "sha1=57a5af868a58183684f68ffe9ff44f112cfbfdaf", "push"))
-				.isInstanceOf(JsonParseException.class);
-    }
+	@Test
+	void invalidHmacSignatureShouldBeRejected() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/webhook/docs/guides")
+				.accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+				.header("X-Hub-Signature", "sha1=wronghmacvalue")
+				.header("X-GitHub-Event", "push")
+				.content("{\"message\": \"this is a test\""))
+				.andExpect(MockMvcResultMatchers.status().isForbidden())
+				.andExpect(MockMvcResultMatchers.content().string("{ \"message\": \"Forbidden\" }"));
+	}
 
-    @Test
-    public void testGuideWebhookPing() throws Exception {
-        String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/pingWebhook.json").getInputStream(), StandardCharsets.UTF_8)
-				.replaceAll("[\\n|\\r]","");;
+	@Test
+	void pingEventShouldHaveResponse() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/webhook/docs/guides")
+				.accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+				.header("X-Hub-Signature", "sha1=9E629DCCF4472F600D048510354BE400B8EB25CB")
+				.header("X-GitHub-Event", "ping")
+				.content(getTestPayload("pingWebhook")))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.content().string("{ \"message\": \"Successfully processed ping event\" }"));
+	}
 
-        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=9E629DCCF4472F600D048510354BE400B8EB25CB", "ping");
-        assertThat(response.getBody()).isEqualTo("{ \"message\": \"Successfully processed ping event\" }\n");
-        assertThat(response.getStatusCode().value()).isEqualTo(200);
-        verify(this.gettingStartedGuides, never()).evictFromCache("test-guide");
-    }
+	@Test
+	void invalidJsonPushEventShouldBeRejected() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/webhook/docs/guides")
+				.accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+				.header("X-Hub-Signature", "sha1=5df34e8979dc9a831873a42c6e172546f6937190")
+				.header("X-GitHub-Event", "push")
+				.content("this is a test message"))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest())
+				.andExpect(MockMvcResultMatchers.content().string("{ \"message\": \"Bad Request\" }"));
+	}
 
-    @Test
-    public void testGuideCacheEviction() throws Exception {
-        String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), StandardCharsets.UTF_8)
-				.replaceAll("[\\n|\\r]","");;
+	@Test
+	void shouldEvictGuideFromCache() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/webhook/docs/guides")
+				.accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+				.header("X-Hub-Signature", "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98")
+				.header("X-GitHub-Event", "push")
+				.content(getTestPayload("pushGettingStarted")))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.content().string("{ \"message\": \"Successfully processed update\" }"));
+		verify(this.gettingStartedGuides, times(1)).evictFromCache("test-guide");
+	}
 
-        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push");
-        assertThat(response.getBody()).isEqualTo("{ \"message\": \"Successfully processed update\" }\n");
-        assertThat(response.getStatusCode().value()).isEqualTo(200);
-        verify(this.gettingStartedGuides, times(1)).evictFromCache("test-guide");
-    }
+	@Test
+	void shouldEvictTutorialFromCache() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/webhook/docs/guides")
+				.accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+				.header("X-Hub-Signature", "sha1=751B1641F223E44119DD3F4A8BBAE7680ABDEF45")
+				.header("X-GitHub-Event", "push")
+				.content(getTestPayload("pushTutorial")))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.content().string("{ \"message\": \"Successfully processed update\" }"));
+		verify(this.tutorials, times(1)).evictFromCache("test-guide");
+	}
 
-    @Test
-    public void testGuideCacheEviction2() throws Exception {
-        String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), StandardCharsets.UTF_8)
-				.replaceAll("[\\n|\\r]","");;
+	@Test
+	void shouldEvictTopicalFromCache() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/webhook/docs/guides")
+				.accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+				.header("X-Hub-Signature", "sha1=84EB536B625A88DEB20F608F4510DCE60E81ADCA")
+				.header("X-GitHub-Event", "push")
+				.content(getTestPayload("pushTopical")))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.content().string("{ \"message\": \"Successfully processed update\" }"));
+		verify(this.topicals, times(1)).evictFromCache("test-guide");
+	}
 
-        ResponseEntity response = this.controller.processGuidesUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push",
-                "gs-test-guide");
-        assertThat(response.getBody()).isEqualTo("{ \"message\": \"Successfully processed update\" }\n");
-        assertThat(response.getStatusCode().value()).isEqualTo(200);
-        verify(this.gettingStartedGuides, times(1)).evictFromCache("test-guide");
-    }
 
-    @Test
-    public void testTutorialCacheEviction() throws Exception {
-        String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), StandardCharsets.UTF_8)
-				.replaceAll("[\\n|\\r]","");
-
-        ResponseEntity response = this.controller.processTutorialsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push");
-        assertThat(response.getBody()).isEqualTo("{ \"message\": \"Successfully processed update\" }\n");
-        assertThat(response.getStatusCode().value()).isEqualTo(200);
-        verify(this.tutorials, times(1)).evictFromCache("test-guide");
-    }
-
-    @Test
-    public void testTutorialCacheEviction2() throws Exception {
-        String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), StandardCharsets.UTF_8)
-				.replaceAll("[\\n|\\r]","");;
-
-        ResponseEntity response = this.controller.processTutorialsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98", "push",
-                "gs-test-guide");
-        assertThat(response.getBody()).isEqualTo("{ \"message\": \"Successfully processed update\" }\n");
-        assertThat(response.getStatusCode().value()).isEqualTo(200);
-        verify(this.tutorials, times(1)).evictFromCache("test-guide");
-    }
-
-    @Test
-    public void testTopicalCacheEviction() throws Exception {
-        String payload = StreamUtils.copyToString(
-                new ClassPathResource("fixtures/webhooks/docsWebhook.json").getInputStream(), StandardCharsets.UTF_8)
-                .replaceAll("[\\n|\\r]","");;
-
-        ResponseEntity response = this.controller.processTopicalsUpdate(payload, "sha1=848E37804A9EC374FE1B8596AB25B15E98928C98",
-                "push", "top-test-guide");
-        assertThat(response.getBody()).isEqualTo("{ \"message\": \"Successfully processed update\" }\n");
-        assertThat(response.getStatusCode().value()).isEqualTo(200);
-        verify(this.topicals, times(1)).evictFromCache("test-guide");
-    }
+	private String getTestPayload(String fileName) throws Exception {
+		ClassPathResource resource = new ClassPathResource(fileName + ".json", getClass());
+		return StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8)
+				.replaceAll("[\\n|\\r]", "");
+	}
 
 }

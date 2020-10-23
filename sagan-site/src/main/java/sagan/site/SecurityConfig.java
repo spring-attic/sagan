@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 				.addFilterAfter(githubBasicAuthFilter(), BasicAuthenticationFilter.class)
 				.exceptionHandling(handling -> handling.authenticationEntryPoint(entryPoint()))
-				.csrf(csrf -> csrf.ignoringAntMatchers("/api/**"))
+				.csrf(csrf -> csrf.ignoringAntMatchers("/api/**", "/webhook/**"))
 				.requiresChannel(channel ->
 						channel.requestMatchers(request -> request.getHeader("x-forwarded-port") != null).requiresSecure())
 				.authorizeRequests(req ->

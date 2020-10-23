@@ -13,7 +13,7 @@ public class SiteProperties {
 
 	private final Events events = new Events();
 
-	private final GitHub gitHub = new GitHub();
+	private final GitHub github = new GitHub();
 
 	private final Renderer renderer = new Renderer();
 
@@ -31,7 +31,7 @@ public class SiteProperties {
 	}
 
 	public GitHub getGithub() {
-		return this.gitHub;
+		return this.github;
 	}
 
 	public Renderer getRenderer() {
