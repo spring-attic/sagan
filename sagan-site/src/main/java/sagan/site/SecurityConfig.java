@@ -43,9 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.requiresChannel(channel ->
 						channel.requestMatchers(request -> request.getHeader("x-forwarded-port") != null).requiresSecure())
 				.authorizeRequests(req ->
-						req.mvcMatchers("/admin", "/admin/*").hasRole("ADMIN")
-								.mvcMatchers(HttpMethod.GET, "/api/*").permitAll()
-								.mvcMatchers("/api/*").access("hasRole('ADMIN') and hasRole('API')")
+						req.mvcMatchers("/admin", "/admin/**").hasRole("ADMIN")
+								.mvcMatchers(HttpMethod.GET, "/api/**").permitAll()
+								.mvcMatchers("/api/**").access("hasRole('ADMIN') and hasRole('API')")
 				)
 				.oauth2Login(login -> login
 						.defaultSuccessUrl("/admin").loginPage("/signin")
