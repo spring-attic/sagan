@@ -145,12 +145,12 @@
                                                       data-th-if="${release.isGeneralAvailability()}">GA</span>
                                             </td>
                                             <td>
-                                                <a data-th-href="${release.expandRefDocUrl()}">
+                                                <a data-th-unless="${#strings.isEmpty(release.expandRefDocUrl())}" data-th-href="${release.expandRefDocUrl()}">
                                                     Reference Doc.
                                                 </a>
                                             </td>
                                             <td>
-                                                <a data-th-href="${release.expandApiDocUrl()}">
+                                                <a data-th-unless="${#strings.isEmpty(release.expandApiDocUrl())}" data-th-href="${release.expandApiDocUrl()}">
                                                     API Doc.
                                                 </a>
                                             </td>
@@ -170,12 +170,12 @@
                                                       data-th-if="${release.isGeneralAvailability()}">GA</span>
                                             </td>
                                             <td>
-                                                <a data-th-href="${release.expandRefDocUrl()}">
+                                                <a data-th-unless="${#strings.isEmpty(release.expandRefDocUrl())}" data-th-href="${release.expandRefDocUrl()}">
                                                     Reference Doc.
                                                 </a>
                                             </td>
                                             <td>
-                                                <a data-th-href="${release.expandApiDocUrl()}">
+                                                <a data-th-unless="${#strings.isEmpty(release.expandApiDocUrl())}" data-th-href="${release.expandApiDocUrl()}">
                                                     API Doc.
                                                 </a>
                                             </td>
