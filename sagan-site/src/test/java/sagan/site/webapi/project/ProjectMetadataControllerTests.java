@@ -27,6 +27,7 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.halLinks;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.relaxedLinks;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
@@ -75,9 +76,10 @@ public class ProjectMetadataControllerTests {
 		this.mvc.perform(get("/api/projects").accept(MediaTypes.HAL_JSON))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$._embedded.projects.length()").value("3"))
-				.andDo(document("{method-name}", preprocessResponse(prettyPrint()),
+				.andDo(document("{method-name}", preprocessResponse(prettyPrint()), indexLinks(),
 						responseFields(fieldWithPath("_embedded.projects").description("An array of Projects"))
-								.andWithPrefix("_embedded.projects[]", projectPayload())));
+								.andWithPrefix("_embedded.projects[]", projectPayload())
+								.and(subsectionWithPath("_links").description("Links to other resources"))));
 	}
 
 	@Test
@@ -97,6 +99,11 @@ public class ProjectMetadataControllerTests {
 				fieldWithPath("status").type(JsonFieldType.STRING).description("<<project-status, Support status>> of the project"),
 				subsectionWithPath("_links").description("Links to other resources")
 		};
+	}
+
+	LinksSnippet indexLinks() {
+		return relaxedLinks(halLinks(),
+				linkWithRel("project").description("Link to a particular <<project, Project>>"));
 	}
 
 	LinksSnippet projectLinks() {

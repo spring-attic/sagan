@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 /**
  * Expose {@link ProjectMetadata} resources.
  */
@@ -34,7 +37,9 @@ public class ProjectMetadataController {
 	@GetMapping("")
 	public CollectionModel<ProjectMetadata> listProjects() {
 		List<Project> projects = this.metadataService.fetchAllProjects();
-		return this.resourceAssembler.toCollectionModel(projects);
+		CollectionModel<ProjectMetadata> collection = this.resourceAssembler.toCollectionModel(projects);
+		collection.add(linkTo(methodOn(ProjectMetadataController.class).showProject(null)).withRel("project"));
+		return collection;
 	}
 
 	@GetMapping("/{id}")
