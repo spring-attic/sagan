@@ -1,4 +1,4 @@
-= Project Metadata Service
+sagan-site/src/docs/asciidoc/index.adoc= Project Metadata Service
 Brian Clozel;
 :doctype: book
 :icons: font
@@ -35,8 +35,8 @@ Fetching resources using the HTTP `GET` method is permitted to all clients.
 Other HTTP verbs like `POST`, `PUT`, `PATCH` and `DELETE` require authentication.
 
 Authenticated requests should send
-https://docs.github.com/en/free-pro-team@latest/rest/overview/other-authentication-methods#via-oauth-and-personal-access-tokens[a GitHub personal access token as basic authentication].
-The user associated with this token *must be a member of the Spring team on GitHub*.
+https://docs.github.com/en/free-pro-team@latest/rest/overview/other-authentication-methods#via-oauth-and-personal-access-tokens[a GitHub personal access token as basic authentication]
+with the `read:org` scope enabled. The user associated with this token *must be a member of the Spring team on GitHub*.
 
 
 [[index-endpoint]]
