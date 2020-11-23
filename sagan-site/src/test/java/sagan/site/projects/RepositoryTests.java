@@ -20,7 +20,7 @@ public class RepositoryTests {
 	public void shouldProvideInfoForReleaseRepository() {
 		assertThat(Repository.RELEASE.getId()).isEqualTo("spring-releases");
 		assertThat(Repository.RELEASE.getName()).isEqualTo("Spring Releases");
-		assertThat(Repository.RELEASE.getUrl()).isEqualTo("https://repo.spring.io/libs-release");
+		assertThat(Repository.RELEASE.getUrl()).isEqualTo("https://repo.spring.io/release");
 		assertThat(Repository.RELEASE.isSnapshotsEnabled()).isEqualTo(false);
 	}
 
@@ -28,7 +28,7 @@ public class RepositoryTests {
 	public void shouldProvideInfoForMilestoneRepository() {
 		assertThat(Repository.MILESTONE.getId()).isEqualTo("spring-milestones");
 		assertThat(Repository.MILESTONE.getName()).isEqualTo("Spring Milestones");
-		assertThat(Repository.MILESTONE.getUrl()).isEqualTo("https://repo.spring.io/libs-milestone");
+		assertThat(Repository.MILESTONE.getUrl()).isEqualTo("https://repo.spring.io/milestone");
 		assertThat(Repository.MILESTONE.isSnapshotsEnabled()).isEqualTo(false);
 	}
 
@@ -36,7 +36,7 @@ public class RepositoryTests {
 	public void shouldProvideInfoForSnapshotRepository() {
 		assertThat(Repository.SNAPSHOT.getId()).isEqualTo("spring-snapshots");
 		assertThat(Repository.SNAPSHOT.getName()).isEqualTo("Spring Snapshots");
-		assertThat(Repository.SNAPSHOT.getUrl()).isEqualTo("https://repo.spring.io/libs-snapshot");
+		assertThat(Repository.SNAPSHOT.getUrl()).isEqualTo("https://repo.spring.io/snapshot");
 		assertThat(Repository.SNAPSHOT.isSnapshotsEnabled()).isEqualTo(true);
 	}
 

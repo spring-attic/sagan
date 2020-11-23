@@ -6,11 +6,11 @@ package sagan.site.projects;
 public enum Repository {
 
 	SNAPSHOT("spring-snapshots", "Spring Snapshots",
-			"https://repo.spring.io/libs-snapshot", true),
+			"https://repo.spring.io/snapshot", true),
 	MILESTONE("spring-milestones", "Spring Milestones",
-			"https://repo.spring.io/libs-milestone", false),
+			"https://repo.spring.io/milestone", false),
 	RELEASE("spring-releases", "Spring Releases",
-			"https://repo.spring.io/libs-release", false);
+			"https://repo.spring.io/release", false);
 
 	private final String id;
 
