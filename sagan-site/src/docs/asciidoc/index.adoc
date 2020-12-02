@@ -1,4 +1,4 @@
-sagan-site/src/docs/asciidoc/index.adoc= Project Metadata Service
+= Project Metadata Service
 Brian Clozel;
 :doctype: book
 :icons: font
