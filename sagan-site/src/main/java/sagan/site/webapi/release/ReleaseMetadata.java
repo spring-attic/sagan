@@ -15,7 +15,7 @@ public class ReleaseMetadata extends RepresentationModel<ReleaseMetadata> {
 
 	private ReleaseStatus status;
 
-	private boolean isCurrent;
+	private boolean current;
 
 	private String referenceDocUrl;
 
@@ -38,11 +38,11 @@ public class ReleaseMetadata extends RepresentationModel<ReleaseMetadata> {
 	}
 
 	public boolean isCurrent() {
-		return isCurrent;
+		return current;
 	}
 
 	public void setCurrent(boolean current) {
-		isCurrent = current;
+		this.current = current;
 	}
 
 	public String getReferenceDocUrl() {

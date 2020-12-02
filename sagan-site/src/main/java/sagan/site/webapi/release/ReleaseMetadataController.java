@@ -62,7 +62,6 @@ public class ReleaseMetadataController {
 	@PostMapping(path = "/projects/{projectId}/releases", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> createRelease(@PathVariable String projectId, @RequestBody ReleaseMetadataInput input) {
 		Project project = this.metadataService.fetchFullProject(projectId);
-		Optional<Release> currentRelease = project.getCurrentRelease();
 		if (project == null) {
 			throw new ResourceNotFoundException("Could not find project: " + projectId);
 		}

@@ -1,8 +1,9 @@
 package sagan.site.webapi.release;
 
+import javax.validation.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
 public class ReleaseMetadataInput {
@@ -18,7 +19,6 @@ public class ReleaseMetadataInput {
 
 	@JsonCreator
 	public ReleaseMetadataInput(@JsonProperty("version") String version,
-			@JsonProperty("isCurrent") boolean isCurrent,
 			@JsonProperty("referenceDocUrl") String referenceDocUrl, @JsonProperty("apiDocUrl") String apiDocUrl) {
 		this.version = version;
 		this.referenceDocUrl = referenceDocUrl;
