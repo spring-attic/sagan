@@ -1,5 +1,6 @@
 plugins {
 	id 'java'
+	id 'maven-publish'
 	id 'org.springframework.boot' version '2.3.4.RELEASE'
 	id "org.asciidoctor.convert" version '1.5.9.2'
 	id "com.gorylenko.gradle-git-properties" version '2.2.2'
@@ -13,6 +14,7 @@ sourceCompatibility = '1.8'
 
 ext {
 	snippetsDir = file('build/generated-snippets')
+	springCloudContractVersion = "2.2.3.RELEASE"
 }
 
 configurations {
@@ -78,6 +80,8 @@ dependencies {
 	}
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	testImplementation(platform("org.springframework.cloud:spring-cloud-contract-dependencies:${springCloudContractVersion}"))
+	testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
 }
 
 test {
@@ -95,5 +99,28 @@ bootJar {
 	dependsOn asciidoctor
 	from("${asciidoctor.outputDir}/html5") {
 		into 'static/restdocs'
+	}
+}
+
+task stubsJar(type: Jar) {
+	archiveClassifier.set("stubs")
+	into('/sagan/site/webapi/') {
+		include('**/*Metadata.*')
+		from("${project.projectDir}/src/main/java/sagan/site/webapi/")
+		from("${project.buildDir}/classes/java/main/sagan/site/webapi/")
+	}
+	into("META-INF/${project.group}/${project.name}/${project.version}/mappings") {
+		include('**/*.*')
+		from("${project.buildDir}/generated-snippets/stubs")
+	}
+}
+
+build.dependsOn("stubsJar")
+
+publishing {
+	publications {
+		myPublicationName(MavenPublication) {
+			artifact stubsJar
+		}
 	}
 }
