@@ -9,6 +9,8 @@ inputs:
 - name: sagan-site-repo
 outputs:
 - name: build
+- name: distribution-repository
+- name: sagan-site-repo
 caches:
 - path: gradle
 params:
