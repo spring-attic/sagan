@@ -20,13 +20,13 @@ resource_types:
 resources:
 - name: sagan-site-repo
   type: git
-  icon: github-circle
+  icon: github
   source:
     uri: "https://github.com/spring-io/sagan.git"
     ignore_paths: ["sagan-renderer/*"]
 - name: sagan-renderer-repo
   type: git
-  icon: github-circle
+  icon: github
   source:
     uri: "https://github.com/spring-io/sagan.git"
     ignore_paths: ["sagan-site/*", "sagan-client/*"]
