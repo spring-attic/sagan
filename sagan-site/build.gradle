@@ -1,12 +1,12 @@
 plugins {
 	id 'java'
-	id 'maven-publish'
 	id 'org.springframework.boot' version '2.3.4.RELEASE'
 	id "org.asciidoctor.convert" version '1.5.9.2'
 	id "com.gorylenko.gradle-git-properties" version '2.2.2'
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply from: "${rootDir}/gradle/publications.gradle"
 
 group = 'io.spring.sagan'
 version = "1.0.0-SNAPSHOT"
@@ -14,7 +14,6 @@ sourceCompatibility = '1.8'
 
 ext {
 	snippetsDir = file('build/generated-snippets')
-	springCloudContractVersion = "2.2.3.RELEASE"
 }
 
 configurations {
@@ -26,6 +25,12 @@ configurations {
 
 repositories {
 	mavenCentral()
+}
+
+dependencyManagement {
+    generatedPomCustomization {
+        enabled = false
+    }
 }
 
 dependencies {
@@ -80,7 +85,7 @@ dependencies {
 	}
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	testImplementation(platform("org.springframework.cloud:spring-cloud-contract-dependencies:${springCloudContractVersion}"))
+	testImplementation(platform("org.springframework.cloud:spring-cloud-contract-dependencies:2.2.3.RELEASE"))
 	testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
 }
 
@@ -119,7 +124,7 @@ build.dependsOn("stubsJar")
 
 publishing {
 	publications {
-		myPublicationName(MavenPublication) {
+		mavenJava(MavenPublication) {
 			artifact stubsJar
 		}
 	}
