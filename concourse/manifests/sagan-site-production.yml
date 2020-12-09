@@ -14,6 +14,6 @@ applications:
   - route: www.spring.io
   - route: sagan-production.cfapps.io
   services:
-  - papertrail
+  - logz-springio
   - sagan-db
   - sagan-cache
