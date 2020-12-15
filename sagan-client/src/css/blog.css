@@ -210,3 +210,8 @@ article:last-child {
 .blog--post ul li {
     margin: 12px 0;
 }
+
+.blog--post pre.prettyprint {
+    padding: 10px;
+    border: 1px solid #e1e1e8;
+}
