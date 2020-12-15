@@ -119,7 +119,12 @@ public class RewriteTests {
 
 	@Test
 	public void projectPagesAreRedirected() throws ServletException, IOException, URISyntaxException {
-		validateTemporaryRedirect("http://spring.io/spring-data", "https://projects.spring.io/spring-data");
+		validateTemporaryRedirect("http://spring.io/spring-data", "https://spring.io/projects/spring-data");
+	}
+
+	@Test
+	public void formerDocsPagesAreRedirected() throws ServletException, IOException, URISyntaxException {
+		validateTemporaryRedirect("http://spring.io/docs", "https://spring.io/projects");
 	}
 
 	@Test
