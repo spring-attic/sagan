@@ -48,7 +48,8 @@ public class Version implements Comparable<Version>, Serializable {
 	}
 
 	public static Version of(String rawVersion) {
-		if (!StringUtils.hasText(rawVersion)) {
+		rawVersion = rawVersion.trim();
+		if (!StringUtils.hasLength(rawVersion)) {
 			throw new InvalidVersionException("Version string should not be empty");
 		}
 		char firstChar = rawVersion.charAt(0);
@@ -70,6 +71,7 @@ public class Version implements Comparable<Version>, Serializable {
 						state = PARSER_STATE.SUFFIX;
 					}
 					else {
+						checkAsciiAlphanum(ch);
 						pos++;
 					}
 					break;
@@ -98,6 +100,17 @@ public class Version implements Comparable<Version>, Serializable {
 		PART,
 		SEPARATOR,
 		SUFFIX
+	}
+
+	private static void checkAsciiAlphanum(char c) {
+		if ((c >= 'a' && c <= 'z') ||
+				(c >= 'A' && c <= 'Z') ||
+				(c >= '0' && c <= '9')) {
+			// char is ascii alphanum
+		}
+		else {
+			throw new InvalidVersionException("Character '" + c + "' is not alphanumeric");
+		}
 	}
 
 	@Override

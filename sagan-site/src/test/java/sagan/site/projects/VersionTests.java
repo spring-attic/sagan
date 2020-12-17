@@ -27,6 +27,12 @@ public class VersionTests {
 	}
 
 	@Test
+	public void shouldFailWithVersionContainingNonAlphanumChars() {
+		assertThatThrownBy(() -> Version.of("Horsham.SR10 [3.0.10.RELEASE]")).isInstanceOf(InvalidVersionException.class)
+				.hasMessage("Character ' ' is not alphanumeric");
+	}
+
+	@Test
 	public void shouldOrderVersionSchemeWithNumbers() {
 		List<String> sortedVersions = Stream.of("2.3.0.BUILD-SNAPSHOT", "2.3.0.M1", "2.3.0.M2", "2.3.0.RC1",
 				"2.3.0.RC2", "2.3.0.RELEASE")
