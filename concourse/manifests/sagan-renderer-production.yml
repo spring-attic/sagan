@@ -1,13 +1,13 @@
 ---
 applications:
-- name: sagan-renderer
+- name: springio-renderer
   buildpacks:
-  - java_buildpack
+  - java_buildpack_offline
   instances: 1
   health-check-type: http
   health-check-http-endpoint: /actuator/health/liveness
   memory: 1024M
   disk_quota: 1024M
   routes:
-  - route: sagan-renderer.cfapps.io
+  - route: springio-renderer.sc2-04-pcf1-apps.oc.vmware.com
   services:

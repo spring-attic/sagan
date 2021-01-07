@@ -1,9 +1,9 @@
 ---
 applications:
-- name: sagan
+- name: springio
   buildpacks:
-  - java_buildpack
-  instances: 2
+  - java_buildpack_offline
+  instances: 3
   health-check-type: http
   health-check-http-endpoint: /actuator/health/liveness
   timeout: 30
@@ -11,9 +11,8 @@ applications:
   disk_quota: 1024M
   routes:
   - route: spring.io
-  - route: www.spring.io
-  - route: sagan-production.cfapps.io
+  - route: https://springio.sc2-04-pcf1-apps.oc.vmware.com
   services:
   - logz-springio
-  - sagan-db
-  - sagan-cache
+  - springio-db
+  - springio-cache
