@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -27,6 +30,8 @@ import org.springframework.web.client.RestOperations;
  * membership API</a>
  */
 public class GitHubMemberOAuth2UserService extends DefaultOAuth2UserService {
+
+	private static final Logger logger = LoggerFactory.getLogger(GitHubMemberOAuth2UserService.class);
 
 	private static final ParameterizedTypeReference<Map<String, String>> STRING_MAP =
 			new ParameterizedTypeReference<Map<String, String>>() {
@@ -77,15 +82,18 @@ public class GitHubMemberOAuth2UserService extends DefaultOAuth2UserService {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setBasicAuth(userName, accessToken);
 		try {
+			logger.debug("Checking {}/{} membership for user {}", this.org, this.team, userName);
 			ResponseEntity<Map<String, String>> response = this.client
 					.exchange(MEMBER_PATH_TEMPLATE, HttpMethod.GET,
 							new HttpEntity<>(headers), STRING_MAP, this.org, this.team, userName);
 			if (response.getStatusCode().is2xxSuccessful()) {
+				logger.debug("Membership state is {}", response.getBody().get("state"));
 				return response.getBody().get("state").equals("active");
 			}
 			return false;
 		}
 		catch (HttpClientErrorException.NotFound notFound) {
+			logger.debug("Membership not found, maybe privacy restrictions are in place");
 			return false;
 		}
 	}

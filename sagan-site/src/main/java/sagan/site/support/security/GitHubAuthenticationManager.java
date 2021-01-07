@@ -12,11 +12,15 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.util.StringUtils;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * {@link AuthenticationManager} that reads OAuth2 tokens from basic Auth requests
@@ -29,6 +33,8 @@ import java.util.List;
  *     GitHub authentication via OAuth and personal access tokens</a>
  */
 public class GitHubAuthenticationManager implements AuthenticationManager {
+
+	private static final Logger logger = LoggerFactory.getLogger(GitHubAuthenticationManager.class);
 
 	private final ClientRegistrationRepository clients;
 
@@ -44,6 +50,10 @@ public class GitHubAuthenticationManager implements AuthenticationManager {
 	public Authentication authenticate(Authentication authentication)
 			throws AuthenticationException {
 		String token = (String) authentication.getCredentials();
+		if (!StringUtils.hasText(token)) {
+			logger.debug("Missing OAuth2 token as basic auth credentials");
+			return null;
+		}
 		ClientRegistration registration = this.clients.findByRegistrationId("github");
 		OAuth2AccessToken oauthToken = new OAuth2AccessToken(OAuth2AccessToken.TokenType.BEARER, token,
 				Instant.now(), Instant.now().plus(Duration.ofHours(1)));
