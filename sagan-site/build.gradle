@@ -72,7 +72,7 @@ dependencies {
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
 	// datasource and connection pool dependencies
-	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'mysql:mysql-connector-java'
 	runtimeOnly 'com.h2database:h2'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
