@@ -100,9 +100,13 @@ asciidoctor {
 	dependsOn test
 }
 
+asciidoctor.doLast {
+    file("$buildDir/asciidoc/html5").renameTo(file("$buildDir/asciidoc/restdocs"))
+}
+
 bootJar {
 	dependsOn asciidoctor
-	from("${asciidoctor.outputDir}/html5") {
+	from("${asciidoctor.outputDir}/restdocs") {
 		into 'static/restdocs'
 	}
 }

@@ -68,8 +68,10 @@ spring:
     locations: classpath:/db/migration, classpath:/db/dev
   resources:
     static_locations:
-      - file:/Users/bclozel/workspace/sagan/sagan-client/build/dist/
-      - file:build/asciidoc/
+      - file:../sagan-client/build/dist/
+      - file:./sagan-client/build/dist/
+      - file:./build/asciidoc/
+      - file:./sagan-site/build/asciidoc/
   devtools:
     restart:
       additional_paths:
