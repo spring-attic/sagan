@@ -1,0 +1,2 @@
+Contact: https://spring.io/security-policy
+Policy: https://spring.io/security-policy
