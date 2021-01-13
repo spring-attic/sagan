@@ -41,117 +41,117 @@ public class RewriteTests {
 	}
 
 	@Test
-	public void rossensWebSocketPostIsRedirectedToOldBlog() throws Exception {
+	void rossensWebSocketPostIsRedirectedToOldBlog() throws Exception {
 		validateTemporaryRedirect(
-				"http://spring.io/blog/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures",
-				"http://assets.spring.io/wp/WebSocketBlogPost.html");
+				"https://spring.io/blog/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures",
+				"https://assets.spring.io/wp/WebSocketBlogPost.html");
 	}
 
 	@Test
-	public void videosRedirectToYoutube() throws ServletException, IOException, URISyntaxException {
-		validateTemporaryRedirect("http://spring.io/video", "http://www.youtube.com/springsourcedev");
-		validateTemporaryRedirect("http://spring.io/videos", "http://www.youtube.com/springsourcedev");
+	void videosRedirectToYoutube() throws Exception {
+		validateTemporaryRedirect("https://spring.io/video", "https://www.youtube.com/springsourcedev");
+		validateTemporaryRedirect("https://spring.io/videos", "https://www.youtube.com/springsourcedev");
 	}
 
 	@Test
-	public void supportRenamedMongodbGSGuide() throws ServletException, IOException, URISyntaxException {
+	void supportRenamedMongodbGSGuide() throws Exception {
 		validatePermanentRedirect("/guides/gs/accessing-data-mongo", "/guides/gs/accessing-data-mongodb/");
 		validatePermanentRedirect("/guides/gs/accessing-data-mongo/", "/guides/gs/accessing-data-mongodb/");
 		validateOk("/guides/gs/accessing-data-mongodb/");
 	}
 
 	@Test
-	public void supportRenamedXDGuide() throws ServletException, IOException, URISyntaxException {
+	void supportRenamedXDGuide() throws Exception {
 		validatePermanentRedirect("/guides/gs/spring-xd-osx/", "/guides/gs/spring-xd/");
 		validateOk("/guides/gs/spring-xd/");
 	}
 
 	@Test
-	public void gsgGuidesShouldAlwaysHaveTrailingSlash() throws ServletException, IOException, URISyntaxException {
+	void gsgGuidesShouldAlwaysHaveTrailingSlash() throws Exception {
 		validatePermanentRedirect("/guides/gs/guide-name", "/guides/gs/guide-name/");
 		validateOk("/guides/gs/guide-name/");
 	}
 
 	@Test
-	public void tutorialRootShouldHaveTrailingSlash() throws ServletException, IOException, URISyntaxException {
+	void tutorialRootShouldHaveTrailingSlash() throws Exception {
 		validatePermanentRedirect("/guides/tutorials/guide-name", "/guides/tutorials/guide-name/");
 		validateOk("/guides/tutorials/guide-name/");
 	}
 
 	@Test
-	public void tutorialPagesShouldAlwaysHaveTrailingSlash() throws ServletException, IOException, URISyntaxException {
+	void tutorialPagesShouldAlwaysHaveTrailingSlash() throws Exception {
 		validatePermanentRedirect("/guides/tutorials/guide-name/1", "/guides/tutorials/guide-name/1/");
 		validateOk("/guides/tutorials/guide-name/1/");
 	}
 
 	@Test
-	public void tutorialImagesShouldNeverHaveTrailingSlash() throws ServletException, IOException, URISyntaxException {
+	void tutorialImagesShouldNeverHaveTrailingSlash() throws Exception {
 		validateOk("/guides/tutorials/rest/images/yummynoodle.jpg");
 	}
 
 	@Test
-	public void gsgGuidesListingRedirectsToIndex() throws ServletException, IOException, URISyntaxException {
+	void gsgGuidesListingRedirectsToIndex() throws Exception {
 		validateTemporaryRedirect("/guides/gs/", "/guides#gs");
 		validateTemporaryRedirect("/guides/gs", "/guides#gs");
 	}
 
 	@Test
-	public void gsgTutorialsListingRedirectsToIndex() throws ServletException, IOException, URISyntaxException {
+	void gsgTutorialsListingRedirectsToIndex() throws Exception {
 		validateTemporaryRedirect("/guides/tutorials/", "/guides#tutorials");
 		validateTemporaryRedirect("/guides/tutorials", "/guides#tutorials");
 	}
 
 	@Test
-	public void stripsWwwSubdomain() throws ServletException, IOException, URISyntaxException {
-		validatePermanentRedirect("http://www.spring.io", "https://spring.io/");
-		validatePermanentRedirect("http://www.spring.io/something", "https://spring.io/something");
+	void stripsWwwSubdomain() throws Exception {
+		validatePermanentRedirect("https://www.spring.io", "https://spring.io/");
+		validatePermanentRedirect("https://www.spring.io/something", "https://spring.io/something");
 	}
 
 	@Test
-	public void projectPageIndexIsNotRedirected() throws ServletException, IOException, URISyntaxException {
-		validateOk("http://spring.io/projects");
+	void projectPageIndexIsNotRedirected() throws Exception {
+		validateOk("https://spring.io/projects");
 	}
 
 	@Test
-	public void projectPageIndexWithSlashIsNotRedirected() throws ServletException, IOException, URISyntaxException {
-		validateOk("http://spring.io/projects/");
+	void projectPageIndexWithSlashIsNotRedirected() throws Exception {
+		validateOk("https://spring.io/projects/");
 	}
 
 	@Test
-	public void projectPagesAreRedirected() throws ServletException, IOException, URISyntaxException {
-		validateTemporaryRedirect("http://spring.io/spring-data", "https://spring.io/projects/spring-data");
+	void projectPagesAreRedirected() throws Exception {
+		validateTemporaryRedirect("https://spring.io/spring-data", "https://spring.io/projects/spring-data");
 	}
 
 	@Test
-	public void formerDocsPagesAreRedirected() throws ServletException, IOException, URISyntaxException {
-		validateTemporaryRedirect("http://spring.io/docs", "https://spring.io/projects");
+	void formerDocsPagesAreRedirected() throws Exception {
+		validateTemporaryRedirect("https://spring.io/docs", "https://spring.io/projects");
 	}
 
 	@Test
-	public void gplusIsRedirected() throws Exception {
-		validateTemporaryRedirect("http://spring.io/gplus", "https://plus.google.com/+springframework/");
+	void linkedinIsRedirected() throws Exception {
+		validateTemporaryRedirect("https://spring.io/linkedin", "https://www.linkedin.com/groups/46964");
 	}
 
 	@Test
-	public void linkedinIsRedirected() throws Exception {
-		validateTemporaryRedirect("http://spring.io/linkedin", "http://www.linkedin.com/groups/46964");
+	void deprecatedTutorialsRedirected() throws Exception {
+		validateTemporaryRedirect("https://spring.io/guides/tutorials/data/", "/guides");
+		validateTemporaryRedirect("https://spring.io/guides/tutorials/web/", "/guides");
 	}
 
 	@Test
-	public void deprecatedTutorialsRedirected() throws Exception {
-		validateTemporaryRedirect("http://spring.io/guides/tutorials/data/", "/guides");
-		validateTemporaryRedirect("http://spring.io/guides/tutorials/web/", "/guides");
+	void tools3IsRedirected() throws Exception {
+		validateTemporaryRedirect("https://spring.io/tools3", "/tools#suite-three");
+		validateTemporaryRedirect("https://spring.io/tools3/sts/all", "/tools#suite-three");
 	}
 
 	@Test
-	public void tools3IsRedirected() throws Exception {
-		validateTemporaryRedirect("http://spring.io/tools3", "/tools#suite-three");
-		validateTemporaryRedirect("http://spring.io/tools3/sts/all", "/tools#suite-three");
+	void deprecatedWarGuideRedirected() throws Exception {
+		validateTemporaryRedirect("https://spring.io/guides/gs/convert-jar-to-war-maven/", "/guides/gs/convert-jar-to-war/");
 	}
 
 	@Test
-	public void deprecatedWarGuideRedirected() throws Exception {
-		validateTemporaryRedirect("http://spring.io/guides/gs/convert-jar-to-war-maven/", "/guides/gs/convert-jar-to-war/");
+	void tanzuSecurityPolicy() throws Exception {
+		validateTemporaryRedirect("https://spring.io/security-policy", "https://tanzu.vmware.com/security");
 	}
 
 	private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,

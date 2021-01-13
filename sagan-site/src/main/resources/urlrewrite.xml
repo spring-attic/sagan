@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
-        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+        "https://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
 <!--
     Configuration file for UrlRewriteFilter. See:
-    http://www.tuckey.org/urlrewrite/
-    http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/guide.html
-    http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html
-    http://localhost:8080/rewrite-status (only works when running locally)
+    https://www.tuckey.org/urlrewrite/
+    https://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/guide.html
+    https://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html
+    https://localhost:8080/rewrite-status (only works when running locally)
 -->
 <urlrewrite use-query-string="true">
+	<rule>
+		<name>Security page</name>
+		<note>https://github.com/spring-io/sagan/issues/1015</note>
+		<from>^/security-policy$</from>
+		<to type="temporary-redirect" last="true">https://tanzu.vmware.com/security</to>
+	</rule>
     <rule>
         <name>Support renamed mongodb GS guide</name>
         <note>https://github.com/spring-io/sagan/issues/249</note>
@@ -42,7 +48,7 @@
     <rule>
         <name>Rossen's WebSocket blog post</name>
         <from>^.*/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures/?</from>
-        <to type="temporary-redirect" last="true">http://assets.spring.io/wp/WebSocketBlogPost.html</to>
+        <to type="temporary-redirect" last="true">https://assets.spring.io/wp/WebSocketBlogPost.html</to>
     </rule>
     <rule>
         <name>YouTube</name>
@@ -51,7 +57,7 @@
         name of our youtube channel.
         </note>
         <from>^/videos?</from>
-        <to type="temporary-redirect" last="true">http://www.youtube.com/springsourcedev</to>
+        <to type="temporary-redirect" last="true">https://www.youtube.com/springsourcedev</to>
     </rule>
     <rule>
         <name>GSG listing</name>
@@ -97,16 +103,10 @@
         <to type="temporary-redirect" last="true">https://spring.io/projects$1</to>
     </rule>
     <rule>
-        <name>Google Plus</name>
-        <note>https://github.com/spring-io/sagan/issues/125</note>
-        <from>^/gplus$</from>
-        <to type="temporary-redirect" last="true">https://plus.google.com/+springframework/</to>
-    </rule>
-    <rule>
         <name>Linkedin</name>
         <note>https://github.com/spring-io/sagan/issues/222</note>
         <from>^/linkedin$</from>
-        <to type="temporary-redirect" last="true">http://www.linkedin.com/groups/46964</to>
+        <to type="temporary-redirect" last="true">https://www.linkedin.com/groups/46964</to>
     </rule>
 	<rule>
 		<name>Tools3</name>
