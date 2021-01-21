@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="field">
-                <label class="label">Publication Date</label>
+                <label class="label" data-th-text="|Publication Date (${timezone})|">Publication Date (PST)</label>
                 <input type="text" data-th-field="*{publishAt}" name="publishAt"
                        id="datetimepicker" class="input"
                        data-th-classappend="(${#fields.hasErrors('publishAt')}? ' is-danger')"

@@ -2,6 +2,7 @@ package sagan.site.blog.support;
 
 import java.security.Principal;
 import java.util.Collections;
+import java.util.TimeZone;
 
 import javax.validation.Valid;
 
@@ -81,7 +82,7 @@ class BlogAdminController {
         Post post = blogService.getPost(postId);
         PostForm postForm = new PostForm(post);
         String path = PostView.of(post, dateFactory).getPath();
-
+		model.addAttribute("timezone", TimeZone.getDefault().getID());
         model.addAttribute("categories", PostCategory.values());
         model.addAttribute("formats", PostFormat.values());
         model.addAttribute("postForm", postForm);
