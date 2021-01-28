@@ -56,9 +56,14 @@ public class GettingStartedGuides implements GuidesRepository<GettingStartedGuid
 	@Override
 	@Cacheable(CACHE_GUIDE)
 	public Optional<GettingStartedGuide> findByName(String name) {
-		DefaultGuideHeader guideHeader = new DefaultGuideHeader(this.client.fetchGettingStartedGuide(name));
-		GuideContent guideContent = this.client.fetchGettingStartedGuideContent(name);
-		return Optional.of(new GettingStartedGuide(guideHeader, guideContent));
+		try {
+			DefaultGuideHeader guideHeader = new DefaultGuideHeader(this.client.fetchGettingStartedGuide(name));
+			GuideContent guideContent = this.client.fetchGettingStartedGuideContent(name);
+			return Optional.of(new GettingStartedGuide(guideHeader, guideContent));
+		}
+		catch (Exception exc) {
+			return Optional.empty();
+		}
 	}
 
 	@CacheEvict(CACHE_GUIDES)

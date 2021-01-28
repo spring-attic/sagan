@@ -1,5 +1,8 @@
 package sagan.site.guides;
 
+import java.util.Optional;
+
+import sagan.site.support.ResourceNotFoundException;
 import sagan.site.support.nav.Navigation;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +34,14 @@ class TutorialController {
 
     @RequestMapping("/{tutorial}")
     public String viewTutorial(@PathVariable String tutorial, Model model) {
-        model.addAttribute("guide", this.tutorials.findByName(tutorial).get());
-        model.addAttribute("description", "this tutorial is designed to be completed in 2-3 hours, it provides deeper," +
-                " in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions.");
-        return "guides/gs/guide";
+		Optional<Tutorial> tutorialGuide = this.tutorials.findByName(tutorial);
+		if (tutorialGuide.isPresent()) {
+			model.addAttribute("guide", tutorialGuide.get());
+			model.addAttribute("description", "this tutorial is designed to be completed in 2-3 hours, it provides deeper," +
+					" in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions.");
+			return "guides/gs/guide";
+		}
+		throw new ResourceNotFoundException("Missing tutorial guide: '" + tutorial + "'");
     }
 
 

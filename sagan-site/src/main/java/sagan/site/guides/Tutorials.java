@@ -56,9 +56,14 @@ public class Tutorials implements GuidesRepository<Tutorial> {
 	@Override
 	@Cacheable(CACHE_TUTORIAL)
 	public Optional<Tutorial> findByName(String name) {
-		DefaultGuideHeader guideHeader = new DefaultGuideHeader(this.client.fetchTutorialGuide(name));
-		GuideContent guideContent = this.client.fetchTutorialGuideContent(name);
-		return Optional.of(new Tutorial(guideHeader, guideContent));
+		try {
+			DefaultGuideHeader guideHeader = new DefaultGuideHeader(this.client.fetchTutorialGuide(name));
+			GuideContent guideContent = this.client.fetchTutorialGuideContent(name);
+			return Optional.of(new Tutorial(guideHeader, guideContent));
+		}
+		catch (Exception exc) {
+			return Optional.empty();
+		}
 	}
 
 	@CacheEvict(CACHE_TUTORIALS)

@@ -58,9 +58,14 @@ public class Topicals implements GuidesRepository<Topical> {
 	@Override
 	@Cacheable(CACHE_TOPICAL)
 	public Optional<Topical> findByName(String name) {
-		DefaultGuideHeader guideHeader = new DefaultGuideHeader(this.client.fetchTopicalGuide(name));
-		GuideContent guideContent = this.client.fetchTopicalGuideContent(name);
-		return Optional.of(new Topical(guideHeader, guideContent));
+		try {
+			DefaultGuideHeader guideHeader = new DefaultGuideHeader(this.client.fetchTopicalGuide(name));
+			GuideContent guideContent = this.client.fetchTopicalGuideContent(name);
+			return Optional.of(new Topical(guideHeader, guideContent));
+		}
+		catch (Exception exc) {
+			return Optional.empty();
+		}
 	}
 
 	@CacheEvict(CACHE_TOPICALS)

@@ -1,10 +1,12 @@
 package sagan.site.guides;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import sagan.site.projects.Project;
 import sagan.site.projects.ProjectMetadataService;
+import sagan.site.support.ResourceNotFoundException;
 import sagan.site.support.nav.Navigation;
 import sagan.site.support.nav.Section;
 
@@ -39,15 +41,18 @@ class GettingStartedGuideController {
 
 	@GetMapping("/{guide}")
 	public String viewGuide(@PathVariable String guide, Model model) {
-		GettingStartedGuide gsGuide = this.guides.findByName(guide).get();
-		List<Project> projects = gsGuide.getProjects()
-				.stream().map(name -> this.projectMetadataService.fetchFullProject(name))
-				.collect(Collectors.toList());
-		model.addAttribute("guide", gsGuide);
-		model.addAttribute("projects", projects);
-		model.addAttribute("description", "this guide is designed to get you productive as quickly as " +
-				"possible and using the latest Spring project releases and techniques as recommended by the Spring team");
-		return "guides/gs/guide";
+		Optional<GettingStartedGuide> gsGuide = this.guides.findByName(guide);
+		if (gsGuide.isPresent()) {
+			List<Project> projects = gsGuide.get().getProjects()
+					.stream().map(this.projectMetadataService::fetchFullProject)
+					.collect(Collectors.toList());
+			model.addAttribute("guide", gsGuide.get());
+			model.addAttribute("projects", projects);
+			model.addAttribute("description", "this guide is designed to get you productive as quickly as " +
+					"possible and using the latest Spring project releases and techniques as recommended by the Spring team");
+			return "guides/gs/guide";
+		}
+		throw new ResourceNotFoundException("Missing GS guide: '" + guide + "'");
 	}
 
 	@GetMapping("/{guide}/images/{image:[a-zA-Z0-9._-]+}")

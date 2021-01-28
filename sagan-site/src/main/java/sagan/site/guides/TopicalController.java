@@ -1,5 +1,8 @@
 package sagan.site.guides;
 
+import java.util.Optional;
+
+import sagan.site.support.ResourceNotFoundException;
 import sagan.site.support.nav.Navigation;
 import sagan.site.support.nav.Section;
 
@@ -30,11 +33,15 @@ class TopicalController {
 
 	@GetMapping("/{topical}")
 	public String viewTutorial(@PathVariable String topical, Model model) {
-		model.addAttribute("guide", this.topicals.findByName(topical).get());
-		model.addAttribute("description",
-				"this topical is designed to be read and comprehended in under an hour, it provides broad "
-						+ "coverage of a topic that is possibly nuanced or requires deeper understanding than you would get from a getting started guide");
-		return "guides/gs/guide";
+		Optional<Topical> topicalGuide = this.topicals.findByName(topical);
+		if (topicalGuide.isPresent()) {
+			model.addAttribute("guide", topicalGuide.get());
+			model.addAttribute("description",
+					"this topical is designed to be read and comprehended in under an hour, it provides broad "
+							+ "coverage of a topic that is possibly nuanced or requires deeper understanding than you would get from a getting started guide");
+			return "guides/gs/guide";
+		}
+		throw new ResourceNotFoundException("Missing topical guide: '" + topical + "'");
 	}
 
 	@GetMapping("/{topical}/images/{image:[a-zA-Z0-9._-]+}")
