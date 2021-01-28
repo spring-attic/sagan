@@ -41,7 +41,7 @@ public class MarkupControllerTests {
 	@Test
 	public void renderMarkdown() throws Exception {
 		given(this.asciidoctor.canRender(any())).willReturn(false);
-		given(this.markdown.canRender(MediaType.TEXT_MARKDOWN)).willReturn(true);
+		given(this.markdown.canRender(MediaType.parseMediaType("text/markdown;charset=UTF-8"))).willReturn(true);
 		given(this.markdown.renderToHtml("test")).willReturn("rendered");
 		this.mvc.perform(post("/documents").content("test").contentType(MediaType.TEXT_MARKDOWN))
 				.andExpect(status().isOk())

@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.4.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'org.springframework.boot' version '2.4.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
 
@@ -19,10 +19,10 @@ bootJar {
 
 dependencies {
 	implementation 'org.pegdown:pegdown:1.6.0'
-	implementation('org.asciidoctor:asciidoctorj:2.4.1') {
+	implementation('org.asciidoctor:asciidoctorj:2.4.2') {
 		exclude group: 'org.jruby'
 	}
-	implementation 'org.jruby:jruby-complete:9.2.13.0'
+	implementation 'org.jruby:jruby-complete:9.2.14.0'
 	implementation 'org.jsoup:jsoup:1.13.1'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
