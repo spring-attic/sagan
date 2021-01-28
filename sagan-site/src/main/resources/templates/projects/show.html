@@ -101,7 +101,7 @@
                                     <div class="project-overview">
                                         <div data-th-utext="${project.overview.html}"></div>
                                     </div>
-                                    <div data-th-if="${project.bootConfig.html} and ${#strings.length(project.overview.html) > 0} "
+                                    <div data-th-if="${project.bootConfig.html} and ${#strings.length(project.bootConfig.html) > 0} and ${#strings.length(project.overview.html) > 0} "
                                          class="spring-boot-config">
                                         <h2>Spring Boot Config</h2>
                                         <div data-th-utext="${project.bootConfig.html}"></div>
