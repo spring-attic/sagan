@@ -42,16 +42,19 @@ sagan:
 ---
 
 spring:
-  profiles: cloud
-  resources:
-    chain:
-      cache: true
-      strategy:
-        content:
-          enabled: true
-    cache:
-      cachecontrol:
-        max-age: 7d
+  config:
+    activate:
+      on-profile: cloud
+  web:
+    resources:
+      chain:
+        cache: true
+        strategy:
+          content:
+            enabled: true
+      cache:
+        cachecontrol:
+          max-age: 7d
 server:
   compression:
     enabled: true
@@ -61,7 +64,9 @@ server:
 ---
 
 spring:
-  profiles: standalone
+  config:
+    activate:
+      on-profile: standalone
   datasource:
     url: jdbc:h2:mem:sagan;MODE=MySQL;DATABASE_TO_LOWER=TRUE
   flyway:
@@ -81,17 +86,21 @@ spring:
 ---
 
 spring:
-  profiles: staging
+  config:
+    activate:
+      on-profile: staging
 sagan:
   site:
     renderer:
-      service-url: https://sagan-renderer-staging.cfapps.io
+      service-url: https://springio-renderer-dev.sc2-04-pcf1-apps.oc.vmware.com/
     disqus:
       short-name: spring-io-staging
 ---
 
 spring:
-  profiles: production
+  config:
+    activate:
+      on-profile: production
   datasource:
     hikari:
       maximum-pool-size: 8
