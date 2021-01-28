@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class EventsController {
 
-	private static final int NEXT_SIX_MONTHS = 180;
+	private static final int NEXT_12_MONTHS = 365;
 
 	private final EventsCalendarService calendarService;
 
@@ -20,7 +20,7 @@ public class EventsController {
 
 	@GetMapping("/community")
 	public String community(Model model) {
-		List<Event> events = calendarService.findEvents(Period.of(LocalDate.now().toString(), NEXT_SIX_MONTHS));
+		List<Event> events = calendarService.findEvents(Period.of(LocalDate.now().toString(), NEXT_12_MONTHS));
 		int count = Math.min(events.size(), 6);
 		model.addAttribute("events", events.subList(0, count));
 		return "events/community";
@@ -28,7 +28,7 @@ public class EventsController {
 
 	@GetMapping("/events")
 	public String events(Model model) {
-		List<Event> events = calendarService.findEvents(Period.of(LocalDate.now().toString(), NEXT_SIX_MONTHS));
+		List<Event> events = calendarService.findEvents(Period.of(LocalDate.now().toString(), NEXT_12_MONTHS));
 		model.addAttribute("events", events);
 		return "events/list";
 	}
