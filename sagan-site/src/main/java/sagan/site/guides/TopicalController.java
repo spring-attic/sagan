@@ -7,7 +7,6 @@ import sagan.site.support.nav.Navigation;
 import sagan.site.support.nav.Section;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,14 +41,6 @@ class TopicalController {
 			return "guides/gs/guide";
 		}
 		throw new ResourceNotFoundException("Missing topical guide: '" + topical + "'");
-	}
-
-	@GetMapping("/{topical}/images/{image:[a-zA-Z0-9._-]+}")
-	public ResponseEntity<byte[]> loadImage(@PathVariable String topical, @PathVariable String image) {
-		return this.topicals.findByName(topical)
-				.flatMap(guide -> guide.getImageContent(image))
-				.map(ResponseEntity::ok)
-				.orElse(ResponseEntity.notFound().build());
 	}
 
 }

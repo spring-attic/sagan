@@ -1,21 +1,11 @@
 package sagan.site.guides;
 
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.yaml.snakeyaml.Yaml;
 import sagan.site.renderer.GuideContent;
 
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
-import org.springframework.web.util.UriComponentsBuilder;
 
 abstract class AbstractGuide implements Guide {
 
@@ -29,8 +19,6 @@ abstract class AbstractGuide implements Guide {
 
 	private String typeLabel;
 
-	private List<GuideImage> images;
-
 	private String pushToPwsUrl;
 
 	AbstractGuide() {
@@ -41,28 +29,6 @@ abstract class AbstractGuide implements Guide {
 		this.header = header;
 		this.content = content.getContent();
 		this.tableOfContents = content.getTableOfContents();
-		if (content.getImages() != null) {
-			this.images = content.getImages()
-					.stream()
-					.map(img -> new GuideImage(img.getName(), img.getEncodedContent()))
-					.collect(Collectors.toList());
-		}
-		else {
-			this.images = Collections.emptyList();
-		}
-		this.pushToPwsUrl = createPushToPwsUrl(content.getPushToPwsMetadata());
-	}
-
-	@SuppressWarnings("unchecked")
-	private String createPushToPwsUrl(String pushToPwsMetadata) {
-		if (StringUtils.hasText(pushToPwsMetadata)) {
-			Yaml yaml = new Yaml();
-			Map<String, String> keys = (Map<String, String>) yaml.load(pushToPwsMetadata);
-			final UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(PUSH_TO_PWS_URL);
-			keys.forEach(builder::queryParam);
-			return builder.toUriString();
-		}
-		return null;
 	}
 
 	public GuideHeader getHeader() {
@@ -86,27 +52,6 @@ abstract class AbstractGuide implements Guide {
 	public void setTypeLabel(String typeLabel) {
 		Assert.notNull(typeLabel, "Expected label type to be populated");
 		this.typeLabel = typeLabel;
-	}
-
-	public List<GuideImage> getImages() {
-		return images;
-	}
-
-	public void setImages(List<GuideImage> images) {
-		this.images = images;
-	}
-
-	@Override
-	public Optional<byte[]> getImageContent(String imageName) {
-		return this.images.stream()
-				.filter(image -> imageName.equals(image.getName()))
-				.findFirst()
-				.map(image -> Base64.getDecoder().decode(image.getEncodedContent()));
-	}
-
-	@Override
-	public String getPushToPwsUrl() {
-		return pushToPwsUrl;
 	}
 
 	// --- GuideMetadata delegate methods ---

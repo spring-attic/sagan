@@ -1,12 +1,10 @@
 package sagan.site.guides;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import sagan.site.renderer.GuideContent;
-import sagan.site.renderer.GuideImage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
@@ -36,8 +34,7 @@ public class GuidesJsonTests {
 				"git@github.com:spring-guides/gs-rest-service.git",
 				"https://github.com/spring-guides/gs-rest-service.git",
 				projects);
-		GuideContent content = new GuideContent("gs-rest-service", "TOC", "CONTENT",
-				null, Collections.singletonList(new GuideImage("image.jpg", "encodedContent")));
+		GuideContent content = new GuideContent("gs-rest-service", "TOC", "CONTENT");
 		GettingStartedGuide guide = new GettingStartedGuide(header, content);
 		assertThat(this.json.write(guide)).isEqualToJson("rest-service.json", getClass());
 	}
@@ -56,8 +53,6 @@ public class GuidesJsonTests {
 		assertThat(guide.getProjects()).containsExactly("spring-boot");
 		assertThat(guide.getContent()).isEqualTo("CONTENT");
 		assertThat(guide.getTableOfContents()).isEqualTo("TOC");
-		assertThat(guide.getImageContent("image.jpg").get())
-				.isEqualTo(new byte[] {122, 119, 40, 117, -25, 66, -94, 123, 94, -98});
 	}
 
 }

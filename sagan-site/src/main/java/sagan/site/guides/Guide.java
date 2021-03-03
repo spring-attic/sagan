@@ -11,8 +11,4 @@ public interface Guide extends GuideHeader {
 
 	String getTableOfContents();
 
-	Optional<byte[]> getImageContent(String imageName);
-
-	String getPushToPwsUrl();
-	
 }

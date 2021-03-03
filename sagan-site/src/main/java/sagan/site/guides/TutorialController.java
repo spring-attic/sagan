@@ -4,15 +4,13 @@ import java.util.Optional;
 
 import sagan.site.support.ResourceNotFoundException;
 import sagan.site.support.nav.Navigation;
+import sagan.site.support.nav.Section;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sagan.site.support.nav.Section;
 
 /**
  * Controller that handles requests for tutorial docs at /guides/tutorials.
@@ -44,12 +42,4 @@ class TutorialController {
 		throw new ResourceNotFoundException("Missing tutorial guide: '" + tutorial + "'");
     }
 
-
-	@GetMapping("/{tutorial}/images/{image:[a-zA-Z0-9._-]+}")
-	public ResponseEntity<byte[]> loadImage(@PathVariable String tutorial, @PathVariable String image) {
-		return this.tutorials.findByName(tutorial)
-				.flatMap(gs -> gs.getImageContent(image))
-				.map(ResponseEntity::ok)
-				.orElse(ResponseEntity.notFound().build());
-	}
 }

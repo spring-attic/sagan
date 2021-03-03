@@ -11,7 +11,6 @@ import sagan.site.support.nav.Navigation;
 import sagan.site.support.nav.Section;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,11 +54,4 @@ class GettingStartedGuideController {
 		throw new ResourceNotFoundException("Missing GS guide: '" + guide + "'");
 	}
 
-	@GetMapping("/{guide}/images/{image:[a-zA-Z0-9._-]+}")
-	public ResponseEntity<byte[]> loadImage(@PathVariable String guide, @PathVariable String image) {
-		return this.guides.findByName(guide)
-				.flatMap(gs -> gs.getImageContent(image))
-				.map(ResponseEntity::ok)
-				.orElse(ResponseEntity.notFound().build());
-	}
 }

@@ -16,12 +16,5 @@
   },
   "content": "CONTENT",
   "tableOfContents": "TOC",
-  "typeLabel": "Getting Started",
-  "images": [
-    {
-      "name": "image.jpg",
-      "encodedContent": "encodedContent"
-    }
-  ],
-  "pushToPwsUrl": null
+  "typeLabel": "Getting Started"
 }
