@@ -1,7 +1,5 @@
 package sagan.renderer.guides;
 
-import java.util.List;
-
 import org.springframework.hateoas.RepresentationModel;
 
 /**
@@ -14,10 +12,6 @@ public class GuideContentModel extends RepresentationModel {
 	private String tableOfContents;
 
 	private String content;
-
-	private String pushToPwsMetadata;
-
-	private List<GuideImage> images;
 
 	GuideContentModel(String name, String content, String tableOfContents) {
 		this.name = name;
@@ -49,22 +43,6 @@ public class GuideContentModel extends RepresentationModel {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public String getPushToPwsMetadata() {
-		return this.pushToPwsMetadata;
-	}
-
-	public void setPushToPwsMetadata(String pushToPwsMetadata) {
-		this.pushToPwsMetadata = pushToPwsMetadata;
-	}
-
-	public List<GuideImage> getImages() {
-		return this.images;
-	}
-
-	public void setImages(List<GuideImage> images) {
-		this.images = images;
 	}
 
 }

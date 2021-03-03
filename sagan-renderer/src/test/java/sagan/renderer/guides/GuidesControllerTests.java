@@ -2,7 +2,6 @@ package sagan.renderer.guides;
 
 import java.util.Arrays;
 
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import sagan.renderer.github.GithubClient;
 import sagan.renderer.github.GithubResourceNotFoundException;
@@ -140,15 +139,11 @@ public class GuidesControllerTests {
 	@Test
 	public void fetchGuideContent() throws Exception {
 		GuideContentModel content = new GuideContentModel("rest-service", "content", "toc");
-		content.setPushToPwsMetadata("repository: https://github.com/spring-guides/gs-rest-service.git\n" +
-				"directory: complete\n" +
-				"path: /greeting");
 		given(this.guideRenderer.render(GuideType.GETTING_STARTED, "rest-service")).willReturn(content);
 		this.mvc.perform(get("/guides/getting-started/rest-service/content"))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(jsonPath("$.content").value("content"))
 				.andExpect(jsonPath("$.tableOfContents").value("toc"))
-				.andExpect(jsonPath("$.pushToPwsMetadata").value(Matchers.containsString("directory: complete")))
 				.andExpect(hasLink("self", "http://localhost/guides/getting-started/rest-service/content"))
 				.andExpect(hasLink("guide", "http://localhost/guides/getting-started/rest-service"));
 	}
