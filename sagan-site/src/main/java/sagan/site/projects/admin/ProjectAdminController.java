@@ -139,7 +139,10 @@ class ProjectAdminController {
 	@GetMapping("/{id}/releases")
 	public String editReleases(@PathVariable String id, Model model) {
 		Project project = this.service.fetchFullProject(id);
-		model.addAttribute("project", this.modelMapper.map(project, ProjectFormReleases.class));
+		ProjectFormReleases form = this.modelMapper.map(project, ProjectFormReleases.class);
+		form.getNewRelease().setApiDocUrl("https://docs.spring.io/" + id + "/docs/{version}/api/");
+		form.getNewRelease().setRefDocUrl("https://docs.spring.io/" + id + "/docs/{version}/reference/html/");
+		model.addAttribute("project", form);
 		return "admin/project/edit-releases";
 	}
 

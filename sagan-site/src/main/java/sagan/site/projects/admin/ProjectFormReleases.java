@@ -12,7 +12,7 @@ public class ProjectFormReleases {
 
 	private List<FormRelease> releases = new ArrayList<>();
 
-	private FormRelease newRelease;
+	private FormRelease newRelease = new FormRelease();
 
 	public String getId() {
 		return id;
