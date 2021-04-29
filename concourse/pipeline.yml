@@ -23,12 +23,14 @@ resources:
   icon: github
   source:
     uri: "https://github.com/spring-io/sagan.git"
+    branch: main
     ignore_paths: ["sagan-renderer/*"]
 - name: sagan-renderer-repo
   type: git
   icon: github
   source:
     uri: "https://github.com/spring-io/sagan.git"
+    branch: main
     ignore_paths: ["sagan-site/*", "sagan-client/*"]
 - name: artifactory-repo
   type: artifactory-resource
