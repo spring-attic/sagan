@@ -31,7 +31,7 @@ public class TeamMemberAuthenticationHandler {
 		if (authentication instanceof OAuth2LoginAuthenticationToken) {
 			OAuth2LoginAuthenticationToken oauth = (OAuth2LoginAuthenticationToken) authentication;
 			logger.info("OAuth auth success for {}", oauth.getPrincipal().getAttribute("login").toString());
-			if(oauth.getAuthorities().stream().map(GrantedAuthority::getAuthority).anyMatch("ADMIN"::equals)) {
+			if(oauth.getAuthorities().stream().map(GrantedAuthority::getAuthority).anyMatch("ROLE_ADMIN"::equals)) {
 				Integer id = oauth.getPrincipal().getAttribute("id");
 				logger.info("Authenticated user {}", oauth.getPrincipal().getAttribute("login").toString());
 				this.teamService.createOrUpdateMemberProfile(Integer.toUnsignedLong(id), oauth.getPrincipal());
