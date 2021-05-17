@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '2.4.2'
+	id 'org.springframework.boot' version '2.4.5'
 	id 'org.asciidoctor.convert' version '2.4.0'
 	id 'com.gorylenko.gradle-git-properties' version '2.2.4'
 }
@@ -50,11 +50,11 @@ dependencies {
 	// for use in on-the-fly database setup and migrations
 	compile 'org.flywaydb:flyway-core'
 	compile 'org.apache.httpcomponents:httpclient'
-	compile 'org.modelmapper:modelmapper:2.3.9'
-	compile 'org.jsoup:jsoup:1.9.2'
+	compile 'org.modelmapper:modelmapper:2.4.3'
+	compile 'org.jsoup:jsoup:1.13.1'
 	compile 'org.yaml:snakeyaml'
 	// for XML manipulation
-	compile 'org.xmlbeam:xmlprojector:1.4.18'
+	compile 'org.xmlbeam:xmlprojector:1.4.20'
 	// for use in generating blog atom feeds
 	compile 'com.rometools:rome:1.15.0'
 	// for use in serving redirects; see urlrewrite.xml
@@ -67,7 +67,7 @@ dependencies {
 	implementation 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
 
 	// for CloudFoundry service binding
-	compile "io.pivotal.cfenv:java-cfenv-boot:2.2.5.RELEASE"
+	compile "io.pivotal.cfenv:java-cfenv-boot:2.3.0"
 
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
@@ -77,15 +77,15 @@ dependencies {
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	testCompile "org.testcontainers:testcontainers:1.15.1"
-	testCompile "org.testcontainers:junit-jupiter:1.15.1"
+	testCompile "org.testcontainers:testcontainers:1.15.3"
+	testCompile "org.testcontainers:junit-jupiter:1.15.3"
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	testImplementation(platform("org.springframework.cloud:spring-cloud-contract-dependencies:3.0.1"))
+	testImplementation(platform("org.springframework.cloud:spring-cloud-contract-dependencies:3.0.2"))
 	testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
 }
 
