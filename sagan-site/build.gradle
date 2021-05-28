@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.5.0'
-	id 'org.asciidoctor.convert' version '2.4.0'
+	id 'org.asciidoctor.jvm.convert' version '3.1.0'
 	id 'com.gorylenko.gradle-git-properties' version '2.2.4'
 }
 
@@ -96,17 +96,12 @@ test {
 
 asciidoctor {
 	attributes 'snippets': snippetsDir
-	inputs.dir snippetsDir
 	dependsOn test
-}
-
-asciidoctor.doLast {
-    file("$buildDir/asciidoc/html5").renameTo(file("$buildDir/asciidoc/restdocs"))
 }
 
 bootJar {
 	dependsOn asciidoctor
-	from("${asciidoctor.outputDir}/restdocs") {
+	from("${asciidoctor.outputDir}/index.html") {
 		into 'static/restdocs'
 	}
 }
