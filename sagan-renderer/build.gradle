@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.5'
+	id 'org.springframework.boot' version '2.5.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
@@ -19,7 +19,7 @@ bootJar {
 
 dependencies {
 	implementation 'org.pegdown:pegdown:1.6.0'
-	implementation('org.asciidoctor:asciidoctorj:2.4.3') {
+	implementation('org.asciidoctor:asciidoctorj:2.5.1') {
 		exclude group: 'org.jruby'
 	}
 	implementation 'org.jruby:jruby-complete:9.2.17.0'
@@ -28,7 +28,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	compile 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

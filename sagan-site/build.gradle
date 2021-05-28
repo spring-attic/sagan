@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '2.4.5'
+	id 'org.springframework.boot' version '2.5.0'
 	id 'org.asciidoctor.convert' version '2.4.0'
 	id 'com.gorylenko.gradle-git-properties' version '2.2.4'
 }
@@ -34,31 +34,31 @@ dependencyManagement {
 }
 
 dependencies {
-	compile project(':sagan-client')
+	implementation project(':sagan-client')
 
-	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-	compile 'org.hibernate:hibernate-java8'
-	compile 'org.springframework.boot:spring-boot-starter-data-redis'
-	compile 'org.springframework.boot:spring-boot-starter-web'
-	compile 'org.springframework.boot:spring-boot-starter-validation'
-	compile 'org.springframework.boot:spring-boot-starter-hateoas'
-	compile 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.hibernate:hibernate-java8'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.security:spring-security-oauth2-client'
 	implementation 'org.springframework.security:spring-security-oauth2-jose'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 	// for use in on-the-fly database setup and migrations
-	compile 'org.flywaydb:flyway-core'
-	compile 'org.apache.httpcomponents:httpclient'
-	compile 'org.modelmapper:modelmapper:2.4.3'
-	compile 'org.jsoup:jsoup:1.13.1'
-	compile 'org.yaml:snakeyaml'
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.apache.httpcomponents:httpclient'
+	implementation 'org.modelmapper:modelmapper:2.4.4'
+	implementation 'org.jsoup:jsoup:1.13.1'
+	implementation 'org.yaml:snakeyaml'
 	// for XML manipulation
-	compile 'org.xmlbeam:xmlprojector:1.4.20'
+	implementation 'org.xmlbeam:xmlprojector:1.4.20'
 	// for use in generating blog atom feeds
-	compile 'com.rometools:rome:1.15.0'
+	implementation 'com.rometools:rome:1.15.0'
 	// for use in serving redirects; see urlrewrite.xml
-	compile 'org.tuckey:urlrewritefilter:4.0.4'
+	implementation 'org.tuckey:urlrewritefilter:4.0.4'
 
 	// Thymeleaf is used as the template engine for serving HTML
 	implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
@@ -67,7 +67,7 @@ dependencies {
 	implementation 'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
 
 	// for CloudFoundry service binding
-	compile "io.pivotal.cfenv:java-cfenv-boot:2.3.0"
+	implementation "io.pivotal.cfenv:java-cfenv-boot:2.3.0"
 
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
@@ -77,8 +77,8 @@ dependencies {
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	testCompile "org.testcontainers:testcontainers:1.15.3"
-	testCompile "org.testcontainers:junit-jupiter:1.15.3"
+	testImplementation "org.testcontainers:testcontainers:1.15.3"
+	testImplementation "org.testcontainers:junit-jupiter:1.15.3"
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
