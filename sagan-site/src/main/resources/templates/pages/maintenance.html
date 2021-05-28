@@ -1,16 +1,33 @@
 <!DOCTYPE html>
-<html data-th-replace="~{layout :: layout(~{::head/content()}, 'maintenance', ~{::div})}">
+<html>
 <head>
     <title>Scheduled Maintenance</title>
+    <meta content='width=device-width,initial-scale=1,shrink-to-fit=no' id='Viewport' name='viewport'>
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/maintenance.css}"/>
+    <link data-th-href="@{/images/favicon.ico}" rel='shortcut icon' type='image/vnd.microsoft.icon'>
+    <meta name='description' content='Level up your Java code and explore what Spring can do for you.'/>
+    <meta name="theme-color" content="#6db33f">
+    <meta name="apple-mobile-web-app-title" content="spring">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
-
-<body>
-<div>
+<body id="maintenance">
+<header>
+    <nav id='nav'>
+        <div id='nav-inner' class='container flex jc-between ai-center'>
+            <a id='logo-focus' tabindex='1' href='/'>
+                <img id='springlogo' class='block' data-th-src="@{/images/spring-logo.svg}" alt="Spring">
+            </a>
+        </div>
+    </nav>
+</header>
+<div id='main'>
     <div class='container'>
         <div class='content page-error'>
             <h1>:-\</h1>
             <h2>Sorry, we're down for scheduled maintenance. We'll be back up by 3AM Pacific Time.</h2>
             <p>Check out our <a href='https://status.spring.io/'>status page</a> and follow <a href="https://twitter.com/springops">@springops</a> for updates.</p>
+            <div style="display: none">::CLOUDFLARE_ERROR_500S_BOX::</div>
         </div>
     </div>
 </div>

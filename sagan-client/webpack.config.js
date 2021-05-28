@@ -18,7 +18,8 @@ module.exports = {
         blog: './src/app/blog.js',
         admin: './src/app/admin.js',
         theme: './src/app/theme.js',
-        run_prettify: './src/app/run_prettify.js'
+        run_prettify: './src/app/run_prettify.js',
+        maintenance: './src/app/maintenance.js',
     },
 
     output: {
