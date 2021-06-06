@@ -6,8 +6,8 @@ pipeline {
     environment {
         GITHUB = credentials('gitHubCredentials')
 		registry = "akshaygirpunje/sagan-deploy"
-        registryCredential = ‘dockerHubCredentials’
-		dockerImage = ''
+        registryCredential = "dockerHubCredentials"
+		dockerImage = " "
 
     }
 
@@ -41,11 +41,11 @@ pipeline {
                             }
                             steps {
                                 echo '=== Pushing simple-java-maven-app Docker Image ==='
-                                    script {
-									docker.withRegistry( '', registryCredential ) {
-									dockerImage.push()
-									}
-									}
+                                script {
+			          docker.withRegistry( '', registryCredential ) {
+				       dockerImage.push()
+				          }
+					}
                             }
                 }
                 stage('Remove local images') {
