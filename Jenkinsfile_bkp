@@ -5,9 +5,6 @@ pipeline {
      }
     environment {
         GITHUB = credentials('gitHubCredentials')
-		registry = "akshaygirpunje/sagan-deploy"
-        registryCredential = ‘dockerHubCredentials’
-		dockerImage = ''
 
     }
 
@@ -31,7 +28,7 @@ pipeline {
                             steps {
                                 echo '=== Building sagan Docker Image ==='
                                 script {
-                                    app = docker.build registry + ":$BUILD_NUMBER"
+                                    app = docker.build("akshaygirpunje/sagan")
                                 }
                             }
                 }
@@ -41,17 +38,22 @@ pipeline {
                             }
                             steps {
                                 echo '=== Pushing simple-java-maven-app Docker Image ==='
-                                    script {
-									docker.withRegistry( '', registryCredential ) {
-									dockerImage.push()
-									}
-									}
+                                script {
+                                    GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+                                    SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
+                                    docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') {
+                                        app.push("$SHORT_COMMIT")
+                                        app.push("latest")
+                                    }
+                                }
                             }
                 }
                 stage('Remove local images') {
-                                             steps{
-                                             sh "docker rmi $registry:$BUILD_NUMBER"
-                                               }
-									}
+                            steps {
+                                echo '=== Delete the local docker images ==='
+                                sh("docker rmi -f akshaygirpunje/sagan:latest || :")
+                                sh("docker rmi -f akshaygirpunje/sagan:$SHORT_COMMIT || :")
+                }
+            }
     }
 }
