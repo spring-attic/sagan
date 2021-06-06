@@ -5,9 +5,9 @@ pipeline {
      }
     environment {
         GITHUB = credentials('gitHubCredentials')
-		registry = "akshaygirpunje/sagan-deploy"
+	registry = "akshaygirpunje/sagan-deploy"
         registryCredential = "dockerHubCredentials"
-		dockerImage = " "
+	dockerImage = " "
 
     }
 
@@ -24,9 +24,6 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-                            when {
-                                branch 'master'
-                            }
 
                             steps {
                                 echo '=== Building sagan Docker Image ==='
@@ -36,9 +33,6 @@ pipeline {
                             }
                 }
                 stage('Push Docker Image') {
-                            when {
-                                branch 'master'
-                            }
                             steps {
                                 echo '=== Pushing simple-java-maven-app Docker Image ==='
                                 script {
