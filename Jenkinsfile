@@ -21,9 +21,6 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-                            when {
-                                branch 'main'
-                            }
 
                             steps {
                                 echo '=== Building sagan Docker Image ==='
@@ -33,9 +30,6 @@ pipeline {
                             }
                 }
                 stage('Push Docker Image') {
-                            when {
-                                branch 'main'
-                            }
                             steps {
                                 echo '=== Pushing simple-java-maven-app Docker Image ==='
                                 script {
