@@ -1,6 +1,6 @@
 package sagan.site.guides;
 
-import java.util.Optional;
+import java.util.Arrays;
 
 import sagan.site.support.ResourceNotFoundException;
 import sagan.site.support.nav.Navigation;
@@ -32,9 +32,10 @@ class TutorialController {
 
     @RequestMapping("/{tutorial}")
     public String viewTutorial(@PathVariable String tutorial, Model model) {
-		Optional<Tutorial> tutorialGuide = this.tutorials.findByName(tutorial);
-		if (tutorialGuide.isPresent()) {
-			model.addAttribute("guide", tutorialGuide.get());
+		boolean knownTutorial = Arrays.stream(this.tutorials.findAll()).anyMatch(header -> header.getName().equals(tutorial));
+		if (knownTutorial) {
+			Tutorial tutorialGuide = this.tutorials.findByName(tutorial);
+			model.addAttribute("guide", tutorialGuide);
 			model.addAttribute("description", "this tutorial is designed to be completed in 2-3 hours, it provides deeper," +
 					" in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions.");
 			return "guides/gs/guide";

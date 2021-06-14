@@ -10,7 +10,7 @@ public interface GuidesRepository<T extends Guide> {
 
 	Optional<GuideHeader> findGuideHeaderByName(String name);
 
-	Optional<T> findByName(String name);
+	T findByName(String name);
 
-	GuideHeader[] findByProject(Project project);
+   	GuideHeader[] findByProject(Project project);
 }

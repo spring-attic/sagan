@@ -1,5 +1,6 @@
 package sagan.site.guides;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,12 +41,13 @@ class GettingStartedGuideController {
 
 	@GetMapping("/{guide}")
 	public String viewGuide(@PathVariable String guide, Model model) {
-		Optional<GettingStartedGuide> gsGuide = this.guides.findByName(guide);
-		if (gsGuide.isPresent()) {
-			List<Project> projects = gsGuide.get().getProjects()
+		boolean knownGuide = Arrays.stream(this.guides.findAll()).anyMatch(header -> header.getName().equals(guide));
+		if (knownGuide) {
+			GettingStartedGuide gsGuide = this.guides.findByName(guide);
+			List<Project> projects = gsGuide.getProjects()
 					.stream().map(this.projectMetadataService::fetchFullProject)
 					.collect(Collectors.toList());
-			model.addAttribute("guide", gsGuide.get());
+			model.addAttribute("guide", gsGuide);
 			model.addAttribute("projects", projects);
 			model.addAttribute("description", "this guide is designed to get you productive as quickly as " +
 					"possible and using the latest Spring project releases and techniques as recommended by the Spring team");
