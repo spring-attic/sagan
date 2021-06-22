@@ -16,7 +16,7 @@ We also ask that you sign our [Contributor License Agreement](https://cla.pivota
 
 ## Coding conventions
 
-Our formatting and import organization profiles are checked into the project under the [style](https://github.com/spring-io/sagan/tree/master/style) directory. Check out the README there for instructions how to import them into Eclipse or IDEA.
+Our formatting and import organization profiles are checked into the project under the [style](https://github.com/spring-io/sagan/tree/main/style) directory. Check out the README there for instructions how to import them into Eclipse or IDEA.
 
 
 ## Use `hub` for pull requests
