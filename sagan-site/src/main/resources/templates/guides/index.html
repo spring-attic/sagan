@@ -64,7 +64,7 @@
                     <p class='guide-description m-0'>Designed to be read and comprehended in an hour or less, providing more wide-ranging or subjective content than a getting started guide.</p>
                 </div>
                 <section id='topical-guides-list' class='flex jc-between flex-wrap'>
-                    <div data-th-each="topical : ${topicals}" class='guide half border-box flex' data-th-attr="data-filterable=${topical.title}+' '+${topical.description}">
+                    <div data-th-each="topical : ${topicals}" class='guide guide-search half border-box flex' data-th-attr="data-filterable=${topical.title}+' '+${topical.description}">
                         <div class="guide-icon" data-th-insert="~{svg/_icons :: icon-guides-topic}"></div>
                         <div class='text'>
                             <a class='guide-link bold blue link-darken antialiased' data-th-href="@{'/guides/topicals/'+${topical.name}+'/'}" data-th-text="${topical.title}">Spring Security Architecture</a>
@@ -81,7 +81,7 @@
                     <p class='guide-description m-0'>Designed to be completed in 2-3 hours, these guides provide deeper, in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions.</p>
                 </div>
                 <section id='tutorials-list' class='flex jc-between flex-wrap'>
-                    <div data-th-each="tutorial : ${tutorials}" class='guide half border-box flex' data-th-attr="data-filterable=${tutorial.title}+' '+${tutorial.description}">
+                    <div data-th-each="tutorial : ${tutorials}" class='guide guide-search half border-box flex' data-th-attr="data-filterable=${tutorial.title}+' '+${tutorial.description}">
                         <div class="guide-icon" data-th-insert="~{svg/_icons :: icon-guides-tutorial}"></div>
                         <div class='text'>
                             <a class='guide-link bold blue link-darken antialiased' data-th-href="@{'/guides/tutorials/'+${tutorial.name}+'/'}" data-th-text="${tutorial.title}">Building REST services with Spring</a>
