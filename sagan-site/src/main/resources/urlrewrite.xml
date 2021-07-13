@@ -56,6 +56,12 @@
 		<from>^/survey$</from>
 		<to type="temporary-redirect" last="true">https://dimensionalresearch.co1.qualtrics.com/jfe/form/SV_1KWe8QXUPrSvaNU</to>
 	</rule>
+	<rule>
+		<name>Services -> Training</name>
+		<note>Requested by Chloe</note>
+		<from>^/services$</from>
+		<to type="temporary-redirect" last="true">/training</to>
+	</rule>
     <rule>
         <name>YouTube</name>
         <note>https://www.pivotaltracker.com/story/show/54309374
