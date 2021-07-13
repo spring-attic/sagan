@@ -11,7 +11,7 @@ Everything regarding Sagan is tracked in [GitHub Issues](https://github.com/spri
 
 If you want to contribute code to the project, you'll need to be familiar with GitHub's notion of [pull requests](https://help.github.com/articles/using-pull-requests) (they're awesome). See also the section below on `hub`.
 
-We also ask that you sign our [Contributor License Agreement](https://cla.pivotal.io/sign/spring). It's not too big a deal, just a form to fill out.
+We also ask that you sign our [Contributor License Agreement](https://cla.spring.io/sign/spring). It's not too big a deal, just a form to fill out.
 
 
 ## Coding conventions
@@ -19,23 +19,18 @@ We also ask that you sign our [Contributor License Agreement](https://cla.pivota
 Our formatting and import organization profiles are checked into the project under the [style](https://github.com/spring-io/sagan/tree/main/style) directory. Check out the README there for instructions how to import them into Eclipse or IDEA.
 
 
-## Use `hub` for pull requests
+## Use `gh` for pull requests
 
-If you're not already familiar, GitHub's [`hub`](http://hub.github.com) utility is a simple, transparent layer on top of your existing `git` installation that adds amazingly useful tools specific to working with GitHub. Install it post-haste! It'll allow you to do super-powerful things like this:
+If you're not already familiar, GitHub's [`gh`](ihttps://cli.github.com/manual/) utility that brings pull requests, issues and many other GitHub features to your terminal. It'll allow you to do super-powerful things like this:
 
     # nothing unusual here...
     git checkout my-feature-branch
     git push myfork my-feature-branch
 
-    # but the following is only possible with hub--
-    # it will submit the changes in my-feature-branch
-    # by converting issue #123 into a pull request. Win.
-    hub pull-request -i 123
-    
-    # or, if you alias hub to git as most hub users do
-    git pull-request -i 123
-
-Besides being really convenient, the Sagan development team heavily uses this feature of `hub` to avoid creating extra issues. We'll create an issue, discuss it, and then at some point submit a pull request against it as above. This way, everything about that change is in one place, neat and tidy.
+    # but the following is only possible with gh--
+    # it will guide you with an interactively
+		# to create a PR against the upstream branch
+		gh pr create
 
 
 ## Commit like a pro
