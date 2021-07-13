@@ -50,6 +50,12 @@
         <from>^.*/2013/07/24/spring-framework-4-0-m2-websocket-messaging-architectures/?</from>
         <to type="temporary-redirect" last="true">https://assets.spring.io/wp/WebSocketBlogPost.html</to>
     </rule>
+	<rule>
+		<name>Spring Survey</name>
+		<note>Requested by Aditya for the 2021 Spring Survey</note>
+		<from>^/survey$</from>
+		<to type="temporary-redirect" last="true">https://dimensionalresearch.co1.qualtrics.com/jfe/form/SV_1KWe8QXUPrSvaNU</to>
+	</rule>
     <rule>
         <name>YouTube</name>
         <note>https://www.pivotaltracker.com/story/show/54309374
@@ -57,7 +63,7 @@
         name of our youtube channel.
         </note>
         <from>^/videos?</from>
-        <to type="temporary-redirect" last="true">https://www.youtube.com/springsourcedev</to>
+        <to type="temporary-redirect" last="true">https://www.youtube.com/user/SpringSourceDev</to>
     </rule>
     <rule>
         <name>GSG listing</name>

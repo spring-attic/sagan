@@ -49,8 +49,8 @@ public class RewriteTests {
 
 	@Test
 	void videosRedirectToYoutube() throws Exception {
-		validateTemporaryRedirect("https://spring.io/video", "https://www.youtube.com/springsourcedev");
-		validateTemporaryRedirect("https://spring.io/videos", "https://www.youtube.com/springsourcedev");
+		validateTemporaryRedirect("https://spring.io/video", "https://www.youtube.com/user/SpringSourceDev");
+		validateTemporaryRedirect("https://spring.io/videos", "https://www.youtube.com/user/SpringSourceDev");
 	}
 
 	@Test
@@ -152,6 +152,11 @@ public class RewriteTests {
 	@Test
 	void tanzuSecurityPolicy() throws Exception {
 		validateTemporaryRedirect("https://spring.io/security-policy", "https://tanzu.vmware.com/security");
+	}
+
+	@Test
+	void springSurvey() throws Exception {
+		validateTemporaryRedirect("https://spring.io/survey", "https://dimensionalresearch.co1.qualtrics.com/jfe/form/SV_1KWe8QXUPrSvaNU");
 	}
 
 	private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,
