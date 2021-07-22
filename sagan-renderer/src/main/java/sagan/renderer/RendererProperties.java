@@ -30,7 +30,7 @@ public class RendererProperties {
 		 * Access token to query public github endpoints.
 		 * https://developer.github.com/v3/auth/#authenticating-for-saml-sso
 		 */
-		@Pattern(regexp = "([0-9a-z]*)?")
+		@Pattern(regexp = "([0-9a-zA-Z_]*)?")
 		private String token;
 
 		public String getToken() {
