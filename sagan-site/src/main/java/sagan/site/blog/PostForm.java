@@ -1,14 +1,16 @@
 package sagan.site.blog;
 
 import java.util.Date;
+
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class PostForm {
-    @NotEmpty
+
+	@NotEmpty
     private String title;
 
     @NotEmpty

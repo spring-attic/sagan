@@ -10,7 +10,7 @@ import org.modelmapper.ModelMapper;
 import sagan.site.projects.Project;
 import sagan.site.projects.ProjectMetadataService;
 import sagan.site.projects.Release;
-import sagan.site.projects.SupportStatus;
+import sagan.site.projects.support.SupportStatus;
 import sagan.site.projects.Version;
 import sagan.site.webapi.ConstrainedFields;
 import sagan.site.webapi.WebApiTest;

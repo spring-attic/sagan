@@ -1,8 +1,6 @@
 package sagan.site.projects;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +29,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.SortNatural;
+import sagan.site.projects.support.SupportPolicy;
+import sagan.site.projects.support.SupportStatus;
 
 import org.springframework.util.Assert;
 
@@ -66,6 +66,12 @@ public class Project {
 	 */
 	@Enumerated(EnumType.STRING)
 	private SupportStatus status = SupportStatus.ACTIVE;
+
+	/**
+	 * {@link SupportPolicy} of the project
+	 */
+	@Enumerated(EnumType.STRING)
+	private SupportPolicy supportPolicy = SupportPolicy.UPSTREAM;
 
 	/**
 	 * URL of the project source repository
@@ -177,6 +183,14 @@ public class Project {
 		this.status = status;
 	}
 
+	public SupportPolicy getSupportPolicy() {
+		return this.supportPolicy;
+	}
+
+	public void setSupportPolicy(SupportPolicy policy) {
+		this.supportPolicy = policy;
+	}
+
 	public String getRepoUrl() {
 		return this.repoUrl;
 	}
@@ -251,6 +265,14 @@ public class Project {
 				.collect(toList());
 	}
 
+	public void computeCurrentRelease() {
+		this.releases.forEach(rel -> rel.setCurrent(false));
+		this.releases.stream()
+				.sorted(Release::compareTo)
+				.filter(Release::isGeneralAvailability)
+				.findFirst().ifPresent(rel -> rel.setCurrent(true));
+	}
+
 	public boolean hasReleases() {
 		return !this.releases.isEmpty();
 	}
@@ -283,7 +305,7 @@ public class Project {
 	public boolean hasGenerations() {
 		return !this.generationsInfo.getGenerations().isEmpty();
 	}
-
+	
 	public Set<ProjectGroup> getGroups() {
 		return this.groups;
 	}

@@ -3,6 +3,7 @@ package sagan.site.projects.admin;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
 public class ProjectFormGenerations {
@@ -11,6 +12,7 @@ public class ProjectFormGenerations {
 
 	private List<FormGeneration> generations = new ArrayList<>();
 
+	@Valid
 	private FormGeneration newGeneration;
 
 	public String getId() {
@@ -39,17 +41,20 @@ public class ProjectFormGenerations {
 
 	public static class FormGeneration {
 
-		@Pattern(regexp = "[\\w\\d.]*\\.x")
+		@Pattern(regexp = "([\\w\\d.]*\\.x)?", message = "Generation name should end with '.x'")
 		private String name;
 
 		private boolean toDelete;
 
+		@Pattern(regexp = "(\\d{4}-\\d{2}-\\d{2})?", message = "Date should be formatted like 2021-01-01")
 		private String initialReleaseDate;
 
+		@Pattern(regexp = "(\\d{4}-\\d{2}-\\d{2})?", message = "Date should be formatted like 2021-01-01")
 		private String ossSupportEnforcedEndDate;
 
 		private String ossSupportPolicyEndDate;
 
+		@Pattern(regexp = "(\\d{4}-\\d{2}-\\d{2})?", message = "Date should be formatted like 2021-01-01")
 		private String commercialSupportEnforcedEndDate;
 
 		private String commercialSupportPolicyEndDate;

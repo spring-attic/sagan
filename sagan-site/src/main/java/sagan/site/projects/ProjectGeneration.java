@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import sagan.site.projects.support.SupportPolicyProjectGenerationsProcessor;
-
 import org.springframework.util.Assert;
 
 /**
@@ -24,7 +22,7 @@ import org.springframework.util.Assert;
  * </ul>
  * <p>Each support period has an end date, which is:
  * <ul>
- *     <li>the end date calculated using {@link SupportPolicyProjectGenerationsProcessor the official support policy}.
+ *     <li>the end date calculated using {@link sagan.site.projects.support.SupportPolicy the official support policy}.
  *     <li>the end date enforced by the project team, extending the official policy.
  * </ul>
  */
@@ -224,6 +222,6 @@ public class ProjectGeneration implements Comparable<ProjectGeneration> {
 
 	@Override
 	public int compareTo(ProjectGeneration other) {
-		return name.compareTo(other.name);
+		return initialReleaseDate.compareTo(other.initialReleaseDate);
 	}
 }

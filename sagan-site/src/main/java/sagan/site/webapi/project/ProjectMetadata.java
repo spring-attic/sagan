@@ -1,6 +1,6 @@
 package sagan.site.webapi.project;
 
-import sagan.site.projects.SupportStatus;
+import sagan.site.projects.support.SupportStatus;
 
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;

@@ -1,4 +1,4 @@
-package sagan.site.projects;
+package sagan.site.projects.support;
 
 /**
  * Support status for Spring projects

@@ -1,16 +1,22 @@
 package sagan.site.projects.admin;
 
+import javax.validation.constraints.NotEmpty;
+
 public class ProjectFormMetadata {
 
 	String id;
 
+	@NotEmpty
 	String name;
 
 	String parentProjectId;
 
+	@NotEmpty
 	String repoUrl;
 
 	String status;
+
+	String supportPolicy;
 
 	String stackOverflowTags;
 
@@ -60,6 +66,14 @@ public class ProjectFormMetadata {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getSupportPolicy() {
+		return supportPolicy;
+	}
+
+	public void setSupportPolicy(String supportPolicy) {
+		this.supportPolicy = supportPolicy;
 	}
 
 	public String getStackOverflowTags() {

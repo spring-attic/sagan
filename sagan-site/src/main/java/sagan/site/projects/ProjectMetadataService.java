@@ -3,8 +3,8 @@ package sagan.site.projects;
 import java.util.List;
 
 import sagan.site.blog.PostFormat;
-import sagan.site.projects.support.SupportPolicyProjectGenerationsProcessor;
 import sagan.site.blog.PostContentRenderer;
+import sagan.site.projects.support.SupportStatus;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -20,16 +20,13 @@ public class ProjectMetadataService {
 
 	private final ReleaseRepository releaseRepository;
 
-	private final SupportPolicyProjectGenerationsProcessor supportPolicyProcessor;
-
 	private final PostContentRenderer renderer;
 
 	public ProjectMetadataService(ProjectRepository repository, ProjectGroupRepository groupRepository,
-			ReleaseRepository releaseRepository, SupportPolicyProjectGenerationsProcessor supportPolicyProcessor, PostContentRenderer postContentRenderer) {
+			ReleaseRepository releaseRepository, PostContentRenderer postContentRenderer) {
 		this.repository = repository;
 		this.groupRepository = groupRepository;
 		this.releaseRepository = releaseRepository;
-		this.supportPolicyProcessor = supportPolicyProcessor;
 		this.renderer = postContentRenderer;
 	}
 
@@ -50,12 +47,8 @@ public class ProjectMetadataService {
 	}
 
 	public Project save(Project project) {
-		project.getReleases().forEach(rel -> rel.setCurrent(false));
-		project.getReleases().stream()
-				.sorted(Release::compareTo)
-				.filter(Release::isGeneralAvailability)
-				.findFirst().ifPresent(rel -> rel.setCurrent(true));
-		this.supportPolicyProcessor.updateSupportPolicyDates(project.getGenerationsInfo().getGenerations());
+		project.computeCurrentRelease();
+		project.getGenerationsInfo().computeSupportPolicyDates(project.getSupportPolicy());
 		String bootConfigHtml = this.renderer.render(project.getBootConfig().getSource(), PostFormat.ASCIIDOC);
 		project.getBootConfig().setHtml(bootConfigHtml);
 		String overviewHtml = this.renderer.render(project.getOverview().getSource(), PostFormat.ASCIIDOC);

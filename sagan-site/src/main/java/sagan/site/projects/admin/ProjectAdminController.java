@@ -13,12 +13,14 @@ import sagan.site.projects.ProjectGroup;
 import sagan.site.projects.ProjectMetadataService;
 import sagan.site.projects.ProjectSample;
 import sagan.site.projects.Release;
-import sagan.site.projects.SupportStatus;
 import sagan.site.projects.Version;
+import sagan.site.projects.support.SupportPolicy;
+import sagan.site.projects.support.SupportStatus;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,6 +89,7 @@ class ProjectAdminController {
 		ProjectFormMetadata project = new ProjectFormMetadata("spring-new", "New Spring Project");
 		model.addAttribute("project", project);
 		model.addAttribute("statusList", SupportStatus.values());
+		model.addAttribute("supportPolicies", SupportPolicy.values());
 		return "admin/project/new";
 	}
 
@@ -103,6 +106,7 @@ class ProjectAdminController {
 		Project project = this.service.fetchFullProject(id);
 		model.addAttribute("project", this.modelMapper.map(project, ProjectFormMetadata.class));
 		model.addAttribute("statusList", SupportStatus.values());
+		model.addAttribute("supportPolicies", SupportPolicy.values());
 		return "admin/project/edit-metadata";
 	}
 
@@ -177,7 +181,10 @@ class ProjectAdminController {
 	}
 
 	@PostMapping("/{id}/support")
-	public String saveSupport(@Valid ProjectFormGenerations formGenerations, Model model) {
+	public String saveSupport(@Valid ProjectFormGenerations formGenerations, BindingResult result) {
+		if (result.hasErrors()) {
+			return "admin/project/edit-support";
+		}
 		Project project = this.service.fetchFullProject(formGenerations.getId());
 		formGenerations.getGenerations().forEach(formGeneration -> {
 			if (formGeneration.isToDelete()) {

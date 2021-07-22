@@ -48,7 +48,7 @@
 <div>
     <form data-th-action="@{'/admin/projects/'+${project.id}}" method="post" data-th-object="${project}">
         <div class="columns">
-            <div class="column is-one-thid">
+            <div class="column is-one-third">
                 <div class="field">
                     <label class="label">Id</label>
                     <div class="control">
@@ -66,18 +66,6 @@
                             name</p>
                     </div>
                 </div>
-            </div>
-            <div class="column is-one-thid">
-                <div class="field">
-                    <label class="label">Repository URL</label>
-                    <div class="control">
-                        <input class="input" data-th-classappend="(${#fields.hasErrors('repoUrl')}? ' is-danger')"
-                               type="text" data-th-field="*{repoUrl}" name="repoUrl"
-                               placeholder="https://github.com/spring-projects/your-project">
-                        <p class="help is-danger" data-th-if="${#fields.hasErrors('repoUrl')}" data-th-errors="*{repoUrl}">
-                            Incorrect Repository URL</p>
-                    </div>
-                </div>
                 <div class="field">
                     <label class="label">StackOverflow tags</label>
                     <div class="control">
@@ -89,7 +77,34 @@
                     </div>
                 </div>
             </div>
-            <div class="column is-one-thid">
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Repository URL</label>
+                    <div class="control">
+                        <input class="input" data-th-classappend="(${#fields.hasErrors('repoUrl')}? ' is-danger')"
+                               type="text" data-th-field="*{repoUrl}" name="repoUrl"
+                               placeholder="https://github.com/spring-projects/your-project">
+                        <p class="help is-danger" data-th-if="${#fields.hasErrors('repoUrl')}" data-th-errors="*{repoUrl}">
+                            Incorrect Repository URL</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Status</label>
+                    <div class="control">
+                        <div class="select" data-th-classappend="(${#fields.hasErrors('status')}? ' is-danger')">
+                            <select name="status" data-th-field="*{status}">
+                                <option data-th-each="stat : ${statusList}" data-th-value="${stat}" data-th-text="${stat.label}">
+                                    Active
+                                </option>
+                            </select>
+                            <p class="help is-danger" data-th-if="${#fields.hasErrors('status')}" data-th-errors="*{status}">
+                                Incorrect status</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="column is-one-third">
                 <div class="field">
                     <label class="label">Parent project</label>
                     <div class="control">
@@ -100,16 +115,16 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Status</label>
+                    <label class="label">Support policy</label>
                     <div class="control">
-                        <div class="select" data-th-classappend="(${#fields.hasErrors('status')}? ' is-danger')">
-                            <select name="status" data-th-field="*{status}">
-                                <option data-th-each="stat : ${statusList}" data-th-value="${stat}" data-th-text="${stat}">
-                                    Active
+                        <div class="select" data-th-classappend="(${#fields.hasErrors('supportPolicy')}? ' is-danger')">
+                            <select name="status" data-th-field="*{supportPolicy}">
+                                <option data-th-each="policy : ${supportPolicies}" data-th-value="${policy}" data-th-text="${policy.label}">
+                                    Upstream
                                 </option>
                             </select>
-                            <p class="help is-danger" data-th-if="${#fields.hasErrors('status')}" data-th-errors="*{status}">
-                                Incorrect status</p>
+                            <p class="help is-danger" data-th-if="${#fields.hasErrors('supportPolicy')}" data-th-errors="*{supportPolicy}">
+                                Incorrect support policy</p>
                         </div>
                     </div>
                 </div>
