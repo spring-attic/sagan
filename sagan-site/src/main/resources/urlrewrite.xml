@@ -51,12 +51,6 @@
         <to type="temporary-redirect" last="true">https://assets.spring.io/wp/WebSocketBlogPost.html</to>
     </rule>
 	<rule>
-		<name>Spring Survey</name>
-		<note>Requested by Aditya for the 2021 Spring Survey</note>
-		<from>^/survey$</from>
-		<to type="temporary-redirect" last="true">https://dimensionalresearch.co1.qualtrics.com/jfe/form/SV_1KWe8QXUPrSvaNU</to>
-	</rule>
-	<rule>
 		<name>Services -> Training</name>
 		<note>Requested by Chloe</note>
 		<from>^/services$</from>

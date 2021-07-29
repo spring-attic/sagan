@@ -155,11 +155,6 @@ public class RewriteTests {
 	}
 
 	@Test
-	void springSurvey() throws Exception {
-		validateTemporaryRedirect("https://spring.io/survey", "https://dimensionalresearch.co1.qualtrics.com/jfe/form/SV_1KWe8QXUPrSvaNU");
-	}
-
-	@Test
 	void servicesPageRemoved() throws Exception {
 		validateTemporaryRedirect("https://spring.io/services", "/training");
 	}
