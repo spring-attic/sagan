@@ -91,6 +91,11 @@
         <from>/guides/gs/convert-jar-to-war-maven/$</from>
         <to type="temporary-redirect" last="true">/guides/gs/convert-jar-to-war/</to>
     </rule>
+	<rule>
+		<name>Renamed Circuit Breaker guide</name>
+		<from>^/guides/gs/circuit-breaker/?$</from>
+		<to type="permanent-redirect" last="true">/guides/gs/cloud-circuit-breaker/</to>
+	</rule>
     <rule>
         <name>Remove www</name>
         <note>Redirect www.spring.io => spring.io[#54747656]</note>

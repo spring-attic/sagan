@@ -150,6 +150,11 @@ public class RewriteTests {
 	}
 
 	@Test
+	void renamedCircuitBreakerGuideIsRedirected() throws Exception {
+		validatePermanentRedirect("https://spring.io/guides/gs/circuit-breaker/", "/guides/gs/cloud-circuit-breaker/");
+	}
+
+	@Test
 	void tanzuSecurityPolicy() throws Exception {
 		validateTemporaryRedirect("https://spring.io/security-policy", "https://tanzu.vmware.com/security");
 	}
