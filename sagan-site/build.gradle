@@ -10,7 +10,7 @@ apply from: "${rootDir}/gradle/publications.gradle"
 
 group = 'io.spring.sagan'
 version = "1.0.0-SNAPSHOT"
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 ext {
 	snippetsDir = file('build/generated-snippets')
