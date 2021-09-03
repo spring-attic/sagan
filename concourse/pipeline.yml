@@ -10,7 +10,7 @@ resource_types:
   type: registry-image
   source:
     repository: springio/artifactory-resource
-    tag: 0.0.12
+    tag: 0.0.17
 - name: slack-notification
   type: registry-image
   source:
@@ -73,6 +73,7 @@ jobs:
         SPRING_PROFILES_ACTIVE: cloud,production
         SAGAN_RENDERER_GITHUB_TOKEN: ((github-access-token))
         JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: "{enabled: false}"
+        JBP_CONFIG_OPEN_JDK_JRE: "{ jre: { version: 11.+ } }"
       manifest: sagan-renderer-repo/concourse/manifests/sagan-renderer-production.yml
   - put: slack-alert
     params:
@@ -108,6 +109,7 @@ jobs:
         SAGAN_SITE_EVENTS_CALENDARURI: ((google-calendar-url))
         SAGAN_SITE_RENDERER_SERVICE_URL: https://springio-renderer.sc2-04-pcf1-apps.oc.vmware.com
         JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: "{enabled: false}"
+        JBP_CONFIG_OPEN_JDK_JRE: "{ jre: { version: 11.+ } }"
       manifest: sagan-site-repo/concourse/manifests/sagan-site-production.yml
   - put: slack-alert
     params:

@@ -3,8 +3,8 @@ platform: linux
 image_resource:
   type: registry-image
   source:
-    repository: gradle
-    tag: jdk8
+    repository: bellsoft/liberica-openjdk-debian
+    tag: 11
 inputs:
 - name: sagan-site-repo
 outputs:

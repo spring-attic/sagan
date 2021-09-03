@@ -2,7 +2,7 @@
 applications:
 - name: springio-renderer
   buildpacks:
-  - java_buildpack_offline
+  - https://github.com/cloudfoundry/java-buildpack.git
   instances: 1
   health-check-type: http
   health-check-http-endpoint: /actuator/health/liveness
