@@ -13,7 +13,7 @@
 		<name>Security page</name>
 		<note>https://github.com/spring-io/sagan/issues/1015</note>
 		<from>^/security-policy$</from>
-		<to type="temporary-redirect" last="true">https://tanzu.vmware.com/security</to>
+		<to type="temporary-redirect" last="true">https://www.vmware.com/support/policies/security_response.html</to>
 	</rule>
     <rule>
         <name>Support renamed mongodb GS guide</name>

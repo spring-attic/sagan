@@ -156,7 +156,7 @@ public class RewriteTests {
 
 	@Test
 	void tanzuSecurityPolicy() throws Exception {
-		validateTemporaryRedirect("https://spring.io/security-policy", "https://tanzu.vmware.com/security");
+		validateTemporaryRedirect("https://spring.io/security-policy", "https://www.vmware.com/support/policies/security_response.html");
 	}
 
 	@Test
