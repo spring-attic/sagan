@@ -1,2 +1,6 @@
+Contact: mailto:security@vmware.com
 Contact: https://spring.io/security-policy
+Contact: https://tanzu.vmware.com/security
+Expires: 2023-08-31T22:00:00.000Z
+Encryption: https://kb.vmware.com/s/article/1055
 Policy: https://spring.io/security-policy
