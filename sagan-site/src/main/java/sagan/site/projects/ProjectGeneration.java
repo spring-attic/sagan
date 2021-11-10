@@ -207,6 +207,20 @@ public class ProjectGeneration implements Comparable<ProjectGeneration> {
 		return true;
 	}
 
+	public boolean isInvalidOssSupportEndDate() {
+		if (this.ossSupportEnforcedEndDate != null && this.ossSupportPolicyEndDate != null) {
+			return this.ossSupportEnforcedEndDate.isBefore(this.ossSupportPolicyEndDate);
+		}
+		return false;
+	}
+
+	public boolean isInvalidCommercialSupportEndDate() {
+		if (this.commercialSupportEnforcedEndDate != null && this.commercialSupportPolicyEndDate != null) {
+			return this.commercialSupportEnforcedEndDate.isBefore(this.commercialSupportPolicyEndDate);
+		}
+		return false;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

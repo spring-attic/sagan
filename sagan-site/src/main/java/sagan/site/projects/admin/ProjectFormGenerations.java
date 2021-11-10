@@ -54,10 +54,14 @@ public class ProjectFormGenerations {
 
 		private String ossSupportPolicyEndDate;
 
+		private boolean invalidOssSupportEndDate;
+
 		@Pattern(regexp = "(\\d{4}-\\d{2}-\\d{2})?", message = "Date should be formatted like 2021-01-01")
 		private String commercialSupportEnforcedEndDate;
 
 		private String commercialSupportPolicyEndDate;
+
+		private boolean invalidCommercialSupportEndDate;
 
 		public String getName() {
 			return name;
@@ -99,12 +103,28 @@ public class ProjectFormGenerations {
 			this.ossSupportPolicyEndDate = ossSupportPolicyEndDate;
 		}
 
+		public boolean isInvalidOssSupportEndDate() {
+			return this.invalidOssSupportEndDate;
+		}
+
+		public void setInvalidOssSupportEndDate(boolean invalidOssSupportEndDate) {
+			this.invalidOssSupportEndDate = invalidOssSupportEndDate;
+		}
+
 		public String getCommercialSupportEnforcedEndDate() {
 			return commercialSupportEnforcedEndDate;
 		}
 
 		public void setCommercialSupportEnforcedEndDate(String commercialSupportEnforcedEndDate) {
 			this.commercialSupportEnforcedEndDate = commercialSupportEnforcedEndDate;
+		}
+
+		public boolean isInvalidCommercialSupportEndDate() {
+			return this.invalidCommercialSupportEndDate;
+		}
+
+		public void setInvalidCommercialSupportEndDate(boolean invalidCommercialSupportEndDate) {
+			this.invalidCommercialSupportEndDate = invalidCommercialSupportEndDate;
 		}
 
 		public String getCommercialSupportPolicyEndDate() {

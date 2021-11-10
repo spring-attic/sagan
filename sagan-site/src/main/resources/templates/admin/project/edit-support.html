@@ -66,9 +66,11 @@
                     <td><input type="hidden" data-th-field="*{generations[__${generationStat.index}__].name}"/><span data-th-text="${generation.name}">2.1.x</span></td>
                     <td><input type="text" class="input" data-th-field="*{generations[__${generationStat.index}__].initialReleaseDate}" autocomplete="off"/></td>
                     <td><input type="text" class="input" data-th-field="*{generations[__${generationStat.index}__].ossSupportEnforcedEndDate}" autocomplete="off"/>
-                        <p class="help" data-th-if="${generation.ossSupportPolicyEndDate}" data-th-text="${'Official Policy: ' + generation.ossSupportPolicyEndDate}">2020-01-01</p></td>
+                        <p class="help" data-th-if="${generation.ossSupportPolicyEndDate}" data-th-text="${'Official Policy: ' + generation.ossSupportPolicyEndDate}">2020-01-01</p>
+                        <p class="help is-danger" data-th-if="${generation.invalidOssSupportEndDate}">Defined end date does not comply with policy!</p></td>
                     <td><input type="text" class="input" data-th-field="*{generations[__${generationStat.index}__].commercialSupportEnforcedEndDate}" autocomplete="off"/>
-                        <p class="help" data-th-if="${generation.commercialSupportPolicyEndDate}" data-th-text="${'Official Policy: ' + generation.commercialSupportPolicyEndDate}">2020-01-01</p></td>
+                        <p class="help" data-th-if="${generation.commercialSupportPolicyEndDate}" data-th-text="${'Official Policy: ' + generation.commercialSupportPolicyEndDate}">2020-01-01</p>
+                        <p class="help is-danger" data-th-if="${generation.invalidCommercialSupportEndDate}">Defined end date does not comply with policy!</p></td>
                 </tr>
                 <tr>
                     <td></td>

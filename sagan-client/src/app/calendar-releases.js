@@ -196,24 +196,6 @@ const createTimeline = (calendar) => {
     return timeline
 }
 
-const createLegendText = (timeline) => {
-    const oss = createDiv({className: 'oss'})
-    const commercial = createDiv({className: 'commercial'})
-    const future = createDiv({className: 'future'})
-    const legend = createDiv({className: 'legend'})
-    oss.append(createDiv({className: 'title', text: 'OSS support'}))
-    oss.append(createDiv({text: 'Free security updates and bugfixes with support from the Spring community'}))
-    commercial.append(createDiv({className: 'title', text: 'Commercial support'}))
-    commercial.append(createDiv({text: 'Business support from Spring experts during the OSS timeline, plus extended support after OSS End-Of-Life.'}))
-    commercial.append(createDiv({text: 'Publicly available releases for critical bugfixes and security issues when requested by customers.'}))
-    future.append(createDiv({className: 'title', text: 'Future release'}))
-    future.append(createDiv({text: 'Generation not yet released, timeline is subject to changes.'}))
-    legend.append(oss)
-    legend.append(commercial)
-    legend.append(future)
-    timeline.append(legend)
-}
-
 export const CalendarReleases = {
 
     singleRelease: function (calendar) {
@@ -233,8 +215,6 @@ export const CalendarReleases = {
         createAxis(timeline, config)
         // Current Date
         createCurrenDate(timeline, config)
-        // Legend Text
-        // createLegendText(timeline)
         // Legend size
         updateLegend(timeline)
     }
