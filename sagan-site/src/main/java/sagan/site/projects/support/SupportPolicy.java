@@ -59,31 +59,39 @@ public enum SupportPolicy {
 
 	/**
 	 * Calculate the support timeline with the given release dates.
-	 * @param initialReleaseDate release date of the considered generation
-	 * @param nextGenReleaseDate release date of the next generation, can be null
-	 * @return the support timeline for the current {@link SupportPolicy}.
+	 *
+	 * @param supportTimelineRequest@return the support timeline for the current {@link SupportPolicy}.
 	 */
-	public SupportTimeline calculateTimeline(LocalDate initialReleaseDate, LocalDate nextGenReleaseDate) {
-		Assert.notNull(initialReleaseDate, "initialReleaseDate is required.");
-		SupportTimeline.Builder builder = SupportTimeline.create(initialReleaseDate);
-		LocalDate openSourceSupportEndDate = initialReleaseDate.plus(this.openSourceSupport);
-		builder.openSourceSupport(initialReleaseDate, openSourceSupportEndDate,
-				this.openSourceSupport + " OSS support with " + this.getLabel() + " support policy.");
+	public SupportTimeline calculateTimeline(SupportTimelineRequest supportTimelineRequest) {
+		Assert.notNull(supportTimelineRequest, "supportTimelineRequest is required.");
+		SupportTimeline.Builder builder = SupportTimeline.create(supportTimelineRequest.getInitialReleaseDate());
 
-		LocalDate commercialSupportEndDate = openSourceSupportEndDate.plus(this.commercialSupport);
-		if (nextGenReleaseDate != null) {
-			LocalDate upgradeSupportEndDate = nextGenReleaseDate.plus(this.upgradeSupport);
+		LocalDate openSourceSupportEndDate = supportTimelineRequest.getInitialReleaseDate().plus(this.openSourceSupport);
+		LocalDate enforcedEndOfOssSupportDate = supportTimelineRequest.getEnforcedEndOfOssSupportDate();
+		if (enforcedEndOfOssSupportDate != null) {
+			builder.openSourceSupport(supportTimelineRequest.getInitialReleaseDate(), enforcedEndOfOssSupportDate,
+					this.openSourceSupport + " OSS support with enforced date, " + this.getLabel() + " support policy is '" + enforcedEndOfOssSupportDate + "'.");
+		}
+		else {
+			builder.openSourceSupport(supportTimelineRequest.getInitialReleaseDate(), openSourceSupportEndDate,
+					this.openSourceSupport + " OSS support with " + this.getLabel() + " support policy.");
+		}
+
+		LocalDate actualOpenSourceSupportEndDate = enforcedEndOfOssSupportDate != null ? enforcedEndOfOssSupportDate : openSourceSupportEndDate;
+		LocalDate commercialSupportEndDate = actualOpenSourceSupportEndDate.plus(this.commercialSupport);
+		if (supportTimelineRequest.getNextGenReleaseDate() != null) {
+			LocalDate upgradeSupportEndDate = supportTimelineRequest.getNextGenReleaseDate().plus(this.upgradeSupport);
 			if (upgradeSupportEndDate.isAfter(commercialSupportEndDate)) {
-				builder.commercialSupport(openSourceSupportEndDate, upgradeSupportEndDate,
-						this.upgradeSupport + " of upgrade support (next generation released on " + nextGenReleaseDate + ").");
+				builder.commercialSupport(actualOpenSourceSupportEndDate, upgradeSupportEndDate,
+						this.upgradeSupport + " of upgrade support (next generation released on " + supportTimelineRequest.getNextGenReleaseDate() + ").");
 			}
 			else {
-				builder.commercialSupport(openSourceSupportEndDate, commercialSupportEndDate,
+				builder.commercialSupport(actualOpenSourceSupportEndDate, commercialSupportEndDate,
 						this.commercialSupport + " commercial support with " + this.getLabel() + " support policy.");
 			}
 		}
 		else {
-			builder.commercialSupport(openSourceSupportEndDate, commercialSupportEndDate,
+			builder.commercialSupport(actualOpenSourceSupportEndDate, commercialSupportEndDate,
 					this.commercialSupport + " commercial support with " + this.getLabel() + " support policy.");
 		}
 		return builder.build();

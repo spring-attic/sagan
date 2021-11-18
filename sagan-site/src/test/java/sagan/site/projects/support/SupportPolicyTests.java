@@ -20,33 +20,34 @@ public class SupportPolicyTests {
 
 	@Test
 	void shouldRejectNullReleaseDate() {
-		Assertions.assertThatThrownBy(() -> SupportPolicy.SPRING_BOOT.calculateTimeline(null, null))
+		Assertions.assertThatThrownBy(() -> SupportPolicy.SPRING_BOOT.calculateTimeline(null))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@ParameterizedTest
 	@MethodSource("ossSupportProvider")
-	void shouldCalculateOssSupportDateWithoutNextRelease(SupportPolicy policy, LocalDate currentGenReleaseDate, LocalDate expectedEndSupportDate) {
-		SupportTimeline supportTimeline = policy.calculateTimeline(currentGenReleaseDate, null);
-		assertThat(supportTimeline.getOpenSourceSupport().getStartDate()).isEqualTo(currentGenReleaseDate);
+	void shouldCalculateOssSupportDateWithoutNextRelease(SupportPolicy policy, SupportTimelineRequest request, LocalDate expectedEndSupportDate) {
+		SupportTimeline supportTimeline = policy.calculateTimeline(request);
+		assertThat(supportTimeline.getOpenSourceSupport().getStartDate()).isEqualTo(request.getInitialReleaseDate());
 		assertThat(supportTimeline.getOpenSourceSupport().getEndDate()).isEqualTo(expectedEndSupportDate);
 		assertThat(supportTimeline.getOpenSourceSupport().getReason()).isEqualTo("P12M OSS support with " + policy.getLabel() + " support policy.");
 	}
 
 	static Stream<Arguments> ossSupportProvider() {
 		LocalDate releaseDate = LocalDate.parse("2021-01-15");
+		SupportTimelineRequest request = new SupportTimelineRequest(releaseDate);
 		LocalDate twelveMonthsLater = releaseDate.plus(Period.ofMonths(12));
 		return Stream.of(
-				arguments(SupportPolicy.UPSTREAM, releaseDate, twelveMonthsLater),
-				arguments(SupportPolicy.SPRING_BOOT, releaseDate, twelveMonthsLater),
-				arguments(SupportPolicy.DOWNSTREAM, releaseDate, twelveMonthsLater)
+				arguments(SupportPolicy.UPSTREAM, request, twelveMonthsLater),
+				arguments(SupportPolicy.SPRING_BOOT, request, twelveMonthsLater),
+				arguments(SupportPolicy.DOWNSTREAM, request, twelveMonthsLater)
 		);
 	}
 
 	@ParameterizedTest
 	@MethodSource("commercialSupportProvider")
-	void shouldCalculateCommercialSupportDateWithoutNextRelease(SupportPolicy policy, LocalDate currentGenReleaseDate, LocalDate expectedEndSupportDate) {
-		SupportTimeline supportTimeline = policy.calculateTimeline(currentGenReleaseDate, null);
+	void shouldCalculateCommercialSupportDateWithoutNextRelease(SupportPolicy policy, SupportTimelineRequest request, LocalDate expectedEndSupportDate) {
+		SupportTimeline supportTimeline = policy.calculateTimeline(request);
 		assertThat(supportTimeline.getCommercialSupport().getStartDate()).isEqualTo(supportTimeline.getOpenSourceSupport().getEndDate());
 		assertThat(supportTimeline.getCommercialSupport().getEndDate()).isEqualTo(expectedEndSupportDate);
 		assertThat(supportTimeline.getCommercialSupport().getReason()).contains("commercial support with " + policy.getLabel() + " support policy.");
@@ -54,17 +55,18 @@ public class SupportPolicyTests {
 
 	static Stream<Arguments> commercialSupportProvider() {
 		LocalDate releaseDate = LocalDate.parse("2021-01-15");
+		SupportTimelineRequest request = new SupportTimelineRequest(releaseDate);
 		return Stream.of(
-				arguments(SupportPolicy.UPSTREAM, releaseDate, releaseDate.plus(Period.ofMonths(28))),
-				arguments(SupportPolicy.SPRING_BOOT, releaseDate, releaseDate.plus(Period.ofMonths(27))),
-				arguments(SupportPolicy.DOWNSTREAM, releaseDate, releaseDate.plus(Period.ofMonths(24)))
+				arguments(SupportPolicy.UPSTREAM, request, releaseDate.plus(Period.ofMonths(28))),
+				arguments(SupportPolicy.SPRING_BOOT, request, releaseDate.plus(Period.ofMonths(27))),
+				arguments(SupportPolicy.DOWNSTREAM, request, releaseDate.plus(Period.ofMonths(24)))
 		);
 	}
 
 	@ParameterizedTest
 	@MethodSource("upgradeCommercialSupportProvider")
-	void shouldCalculateCommercialSupportDateWithSupportPolicy(SupportPolicy policy, LocalDate currentGenReleaseDate, LocalDate nextGenReleaseDate, LocalDate expectedEndSupportDate) {
-		SupportTimeline supportTimeline = policy.calculateTimeline(currentGenReleaseDate, nextGenReleaseDate);
+	void shouldCalculateCommercialSupportDateWithSupportPolicy(SupportPolicy policy, SupportTimelineRequest request, LocalDate expectedEndSupportDate) {
+		SupportTimeline supportTimeline = policy.calculateTimeline(request);
 		assertThat(supportTimeline.getCommercialSupport().getStartDate()).isEqualTo(supportTimeline.getOpenSourceSupport().getEndDate());
 		assertThat(supportTimeline.getCommercialSupport().getEndDate()).isEqualTo(expectedEndSupportDate);
 		assertThat(supportTimeline.getCommercialSupport().getReason()).isEqualTo("P12M of upgrade support (next generation released on 2023-01-15).");
@@ -73,12 +75,36 @@ public class SupportPolicyTests {
 	static Stream<Arguments> upgradeCommercialSupportProvider() {
 		LocalDate releaseDate = LocalDate.parse("2021-01-15");
 		LocalDate nextGenReleaseDate = releaseDate.plus(Period.ofMonths(24));
+		SupportTimelineRequest request = new SupportTimelineRequest(releaseDate, null, nextGenReleaseDate);
 		LocalDate upgradePolicyDate = nextGenReleaseDate.plus(Period.ofMonths(12));
-
 		return Stream.of(
-				arguments(SupportPolicy.UPSTREAM, releaseDate, nextGenReleaseDate, upgradePolicyDate),
-				arguments(SupportPolicy.SPRING_BOOT, releaseDate, nextGenReleaseDate, upgradePolicyDate),
-				arguments(SupportPolicy.DOWNSTREAM, releaseDate, nextGenReleaseDate, upgradePolicyDate)
+				arguments(SupportPolicy.UPSTREAM, request, upgradePolicyDate),
+				arguments(SupportPolicy.SPRING_BOOT, request, upgradePolicyDate),
+				arguments(SupportPolicy.DOWNSTREAM, request, upgradePolicyDate)
+		);
+	}
+
+	@ParameterizedTest
+	@MethodSource("enforcedOssSupportProvider")
+	void shouldCalculateCommercialSupportDateWithEnforcedOssDate(SupportPolicy policy, SupportTimelineRequest request, LocalDate expectedEndSupportDate) {
+		SupportTimeline supportTimeline = policy.calculateTimeline(request);
+		assertThat(supportTimeline.getOpenSourceSupport().getStartDate()).isEqualTo(request.getInitialReleaseDate());
+		assertThat(supportTimeline.getOpenSourceSupport().getEndDate()).isEqualTo(request.getEnforcedEndOfOssSupportDate());
+		assertThat(supportTimeline.getOpenSourceSupport().getReason())
+				.isEqualTo("P12M OSS support with enforced date, " + policy.getLabel() + " support policy is '" + request.getEnforcedEndOfOssSupportDate() + "'.");
+		assertThat(supportTimeline.getCommercialSupport().getStartDate()).isEqualTo(supportTimeline.getOpenSourceSupport().getEndDate());
+		assertThat(supportTimeline.getCommercialSupport().getEndDate()).isEqualTo(expectedEndSupportDate);
+		assertThat(supportTimeline.getCommercialSupport().getReason()).contains("commercial support with " + policy.getLabel() + " support policy.");
+	}
+
+	static Stream<Arguments> enforcedOssSupportProvider() {
+		LocalDate releaseDate = LocalDate.parse("2021-01-15");
+		LocalDate enforcedOssSupportEndDate = releaseDate.plus(Period.ofMonths(15));
+		SupportTimelineRequest request = new SupportTimelineRequest(releaseDate, enforcedOssSupportEndDate, null);
+		return Stream.of(
+				arguments(SupportPolicy.UPSTREAM, request, enforcedOssSupportEndDate.plus(Period.ofMonths(16))),
+				arguments(SupportPolicy.SPRING_BOOT, request, enforcedOssSupportEndDate.plus(Period.ofMonths(15))),
+				arguments(SupportPolicy.DOWNSTREAM, request, enforcedOssSupportEndDate.plus(Period.ofMonths(12)))
 		);
 	}
 

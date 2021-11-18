@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.SortNatural;
 import sagan.site.projects.support.SupportPolicy;
 import sagan.site.projects.support.SupportTimeline;
+import sagan.site.projects.support.SupportTimelineRequest;
 
 @Embeddable
 public class ProjectGenerationsInfo {
@@ -55,7 +56,8 @@ public class ProjectGenerationsInfo {
 	public void computeSupportPolicyDates(SupportPolicy supportPolicy) {
 		iterateOnGenerations((currentGeneration, nextGeneration) -> {
 			LocalDate nextGenReleaseDate = nextGeneration != null ? nextGeneration.getInitialReleaseDate() : null;
-			SupportTimeline currentGenTimeline = supportPolicy.calculateTimeline(currentGeneration.getInitialReleaseDate(), nextGenReleaseDate);
+			SupportTimelineRequest supportTimelineRequest = new SupportTimelineRequest(currentGeneration.getInitialReleaseDate(), currentGeneration.getOssSupportEnforcedEndDate(), nextGenReleaseDate);
+			SupportTimeline currentGenTimeline = supportPolicy.calculateTimeline(supportTimelineRequest);
 			currentGeneration.setOssSupportPolicyEndDate(currentGenTimeline.getOpenSourceSupport().getEndDate());
 			currentGeneration.setCommercialSupportPolicyEndDate(currentGenTimeline.getCommercialSupport().getEndDate());
 		});
