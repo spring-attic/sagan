@@ -176,12 +176,12 @@ class ProjectAdminController {
 	@GetMapping("/{id}/support")
 	public String editSupport(@PathVariable String id, Model model) {
 		Project project = this.service.fetchFullProject(id);
-		model.addAttribute("project", this.modelMapper.map(project, ProjectFormGenerations.class));
+		model.addAttribute("projectFormGenerations", this.modelMapper.map(project, ProjectFormGenerations.class));
 		return "admin/project/edit-support";
 	}
 
 	@PostMapping("/{id}/support")
-	public String saveSupport(@Valid ProjectFormGenerations formGenerations, BindingResult result) {
+	public String saveSupport(@Valid ProjectFormGenerations formGenerations, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "admin/project/edit-support";
 		}

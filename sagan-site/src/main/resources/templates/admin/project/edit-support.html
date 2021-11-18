@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html data-th-replace="~{admin/layout :: layout(~{::head/content()}, ~{::body/nav/content()}, ~{::body/ul}, ~{::body/div})}">
 <head>
-    <title data-th-inline="text">Admin | Edit | [[${project.id}]]</title>
+    <title data-th-inline="text">Admin | Edit | [[${projectFormGenerations.id}]]</title>
 </head>
 <body>
 <nav>
     <ul>
         <li><a data-th-href="@{/admin}">Admin</a></li>
         <li><a data-th-href="@{/admin/projects}">Projects</a></li>
-        <li class="is-active"><a data-th-href="@{'/admin/projects/' + ${project.id}}" aria-current="page">Edit</a></li>
+        <li class="is-active"><a data-th-href="@{'/admin/projects/' + ${projectFormGenerations.id}}" aria-current="page">Edit</a></li>
     </ul>
 </nav>
 
 <ul>
     <li>
-        <a data-th-href="@{'/admin/projects/' + ${project.id}}">
+        <a data-th-href="@{'/admin/projects/' + ${projectFormGenerations.id}}">
             <span class="icon is-small"><i class="far fa-folder-open" aria-hidden="true"></i></span>
             <span>Metadata</span>
         </a>
     </li>
     <li>
-        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/info'}">
+        <a data-th-href="@{'/admin/projects/' + ${projectFormGenerations.id} + '/info'}">
             <span class="icon is-small"><i class="fas fa-info" aria-hidden="true"></i></span>
             <span>Info</span>
         </a>
     </li>
     <li>
-        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/releases'}">
+        <a data-th-href="@{'/admin/projects/' + ${projectFormGenerations.id} + '/releases'}">
             <span class="icon is-small"><i class="fas fa-download" aria-hidden="true"></i></span>
             <span>Releases</span>
         </a>
     </li>
     <li class="is-active">
-        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/support'}">
+        <a data-th-href="@{'/admin/projects/' + ${projectFormGenerations.id} + '/support'}">
             <span class="icon is-small"><i class="far fa-calendar-check" aria-hidden="true"></i></span>
             <span>Support</span>
         </a>
     </li>
     <li>
-        <a data-th-href="@{'/admin/projects/' + ${project.id} + '/samples'}">
+        <a data-th-href="@{'/admin/projects/' + ${projectFormGenerations.id} + '/samples'}">
             <span class="icon is-small"><i class="fas fa-code" aria-hidden="true"></i></span>
             <span>Samples</span>
         </a>
@@ -46,7 +46,7 @@
 </ul>
 
 <div>
-    <form data-th-action="@{'/admin/projects/'+${project.id} + '/support'}" method="post" data-th-object="${project}">
+    <form data-th-action="@{'/admin/projects/'+${projectFormGenerations.id} + '/support'}" method="post" data-th-object="${projectFormGenerations}">
         <input type="hidden" data-th-name="id" data-th-value="*{id}"/>
 
         <div class="field">
@@ -61,7 +61,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-th-each="generation,generationStat : ${project.generations}">
+                <tr data-th-each="generation,generationStat : ${projectFormGenerations.generations}">
                     <td><input class="checkbox" type="checkbox" data-th-field="*{generations[__${generationStat.index}__].toDelete}"/></td>
                     <td><input type="hidden" data-th-field="*{generations[__${generationStat.index}__].name}"/><span data-th-text="${generation.name}">2.1.x</span></td>
                     <td><input type="text" class="input" data-th-field="*{generations[__${generationStat.index}__].initialReleaseDate}" autocomplete="off"/></td>
@@ -90,7 +90,7 @@
         </div>
         <div class="buttons control is-centered">
             <button type="submit" class="button is-primary">Save</button>
-            <a class="button" data-th-href="@{'/admin/projects/' + ${project.id}}">Cancel</a>
+            <a class="button" data-th-href="@{'/admin/projects/' + ${projectFormGenerations.id}}">Cancel</a>
         </div>
     </form>
 </div>
