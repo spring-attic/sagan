@@ -66,12 +66,12 @@ public class ProjectGenerationsInfo {
 	private <T> void iterateOnGenerations(BiConsumer<ProjectGeneration, ProjectGeneration> consumer) {
 		Iterator<ProjectGeneration> it = this.generations.iterator();
 		if(!it.hasNext()) return;
-		ProjectGeneration first = it.next();
+		ProjectGeneration current = it.next();
 		while(it.hasNext()) {
-			ProjectGeneration next = it.next();
-			consumer.accept(first, next);
-			first = next;
+			ProjectGeneration previous = it.next();
+			consumer.accept(previous, current);
+			current = previous;
 		}
-		consumer.accept(first, null);
+		consumer.accept(current, null);
 	}
 }

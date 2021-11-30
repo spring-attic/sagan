@@ -236,6 +236,6 @@ public class ProjectGeneration implements Comparable<ProjectGeneration> {
 
 	@Override
 	public int compareTo(ProjectGeneration other) {
-		return initialReleaseDate.compareTo(other.initialReleaseDate);
+		return -initialReleaseDate.compareTo(other.initialReleaseDate);
 	}
 }
