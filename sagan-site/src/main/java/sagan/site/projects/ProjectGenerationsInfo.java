@@ -67,11 +67,11 @@ public class ProjectGenerationsInfo {
 		Iterator<ProjectGeneration> it = this.generations.iterator();
 		if(!it.hasNext()) return;
 		ProjectGeneration current = it.next();
+		consumer.accept(current, null);
 		while(it.hasNext()) {
 			ProjectGeneration previous = it.next();
 			consumer.accept(previous, current);
 			current = previous;
 		}
-		consumer.accept(current, null);
 	}
 }
