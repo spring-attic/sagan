@@ -16,9 +16,9 @@ import sagan.site.blog.PostBuilder;
 import sagan.site.blog.PostCategory;
 import sagan.site.blog.PostForm;
 import sagan.site.blog.PostFormat;
-import sagan.site.team.MemberProfile;
 import sagan.site.support.DateFactory;
 import sagan.site.support.nav.PageableFactory;
+import sagan.site.team.MemberProfile;
 import sagan.site.team.support.TeamService;
 
 import org.springframework.dao.DataIntegrityViolationException;
@@ -31,11 +31,9 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.MapBindingResult;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -81,9 +79,9 @@ public class BlogAdminControllerTests {
                 Arrays.asList(new Post("published post", "body", PostCategory.ENGINEERING, PostFormat.MARKDOWN)),
                 PageableFactory.forDashboard(1), 1);
 
-        given(blogService.getPublishedPosts(anyObject())).willReturn(published);
-        given(blogService.getDraftPosts(anyObject())).willReturn(drafts);
-        given(blogService.getScheduledPosts(anyObject())).willReturn(scheduled);
+        given(blogService.getPublishedPosts(any())).willReturn(published);
+        given(blogService.getDraftPosts(any())).willReturn(drafts);
+        given(blogService.getScheduledPosts(any())).willReturn(scheduled);
 
         ExtendedModelMap model = new ExtendedModelMap();
         controller.dashboard(model, 1);

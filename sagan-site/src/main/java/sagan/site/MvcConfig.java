@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import sagan.site.support.StaticPagePathFinder;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -18,12 +17,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-	@Autowired
 	private StaticPagePathFinder staticPagePathFinder;
 
 	@Bean
 	public StaticPagePathFinder staticPagePathFinder(ResourcePatternResolver resourcePatternResolver) {
-		return new StaticPagePathFinder(resourcePatternResolver);
+		this.staticPagePathFinder = new StaticPagePathFinder(resourcePatternResolver);
+		return this.staticPagePathFinder;
 	}
 
 	@Override

@@ -7,15 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import sagan.site.team.support.TeamRepository;
 import sagan.site.support.DateFactory;
 import sagan.site.support.DateTestUtils;
+import sagan.site.team.support.TeamRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.nullValue;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 
 @ExtendWith(MockitoExtension.class)
 public class PostFormAdapter_UpdatePostTests {

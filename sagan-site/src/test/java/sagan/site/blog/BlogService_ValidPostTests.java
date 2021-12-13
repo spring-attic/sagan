@@ -14,9 +14,9 @@ import sagan.site.team.MemberProfile;
 
 import org.springframework.test.util.ReflectionTestUtils;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.verify;
-import static org.mockito.Matchers.anyObject;
 
 @ExtendWith(MockitoExtension.class)
 public class BlogService_ValidPostTests {
@@ -39,7 +39,7 @@ public class BlogService_ValidPostTests {
 
     @BeforeEach
     public void setup() {
-        given(postRepository.save((Post) anyObject())).will(invocation -> {
+        given(postRepository.save(any())).will(invocation -> {
             Post post = (Post) invocation.getArguments()[0];
             ReflectionTestUtils.setField(post, "id", 123L);
             return post;
@@ -59,7 +59,7 @@ public class BlogService_ValidPostTests {
 
     @Test
     public void postIsPersisted() {
-        verify(postRepository).save((Post) anyObject());
+        verify(postRepository).save(any());
     }
 
 }
