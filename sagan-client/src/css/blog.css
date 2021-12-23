@@ -165,10 +165,10 @@ article:last-child {
         display: block;
     }
 }
-.blog--post a {
+.blog--post a, #disqus_thread a {
     color: #086dc3;
 }
-.blog--post a:hover {
+.blog--post a:hover, #disqus_thread a:hover {
     color: #333;
 }
 .blog--wrapper {
