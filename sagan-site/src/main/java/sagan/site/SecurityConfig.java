@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 .policy(ReferrerPolicyHeaderWriter.ReferrerPolicy.SAME_ORIGIN)
                         )
                         .contentSecurityPolicy(csp -> csp
-                                        .policyDirectives("script-src 'self' 'unsafe-eval' 'unsafe-inline' *.jquery.com *.vmware.com *.tiqcdn.com *.cookielaw.org *.marketo.com *.onetrust.com")
+                                .policyDirectives("script-src 'self' 'unsafe-eval' 'unsafe-inline' *.jquery.com *.vmware.com *.tiqcdn.com *.cookielaw.org *.marketo.com *.onetrust.com")
                         )
                         .permissionsPolicy(permissions -> permissions
                                 .policy("geolocation=(self)")
