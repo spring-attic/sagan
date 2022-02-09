@@ -8,7 +8,7 @@ public class TestClientRegistrations {
 	public static ClientRegistration.Builder clientRegistration() {
 		return ClientRegistration.withRegistrationId("registration-id")
 				.redirectUri("{baseUrl}/{action}/oauth2/code/{registrationId}")
-				.clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
+				.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 				.scope("read:user")
 				.authorizationUri("https://example.com/login/oauth/authorize")
