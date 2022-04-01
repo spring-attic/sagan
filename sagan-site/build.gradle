@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '2.5.8'
+	id 'org.springframework.boot' version '2.5.12'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'org.asciidoctor.jvm.convert' version '3.3.2'
 	id 'com.gorylenko.gradle-git-properties' version '2.3.1'
@@ -50,13 +50,13 @@ dependencies {
 	// for use in on-the-fly database setup and migrations
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'org.apache.httpcomponents:httpclient'
-	implementation 'org.modelmapper:modelmapper:2.4.4'
+	implementation 'org.modelmapper:modelmapper:2.4.5'
 	implementation 'org.jsoup:jsoup:1.14.3'
 	implementation 'org.yaml:snakeyaml'
 	// for XML manipulation
 	implementation 'org.xmlbeam:xmlprojector:1.4.20'
 	// for use in generating blog atom feeds
-	implementation 'com.rometools:rome:1.16.0'
+	implementation 'com.rometools:rome:1.18.0'
 	// for use in serving redirects; see urlrewrite.xml
 	implementation 'org.tuckey:urlrewritefilter:4.0.4'
 
@@ -77,8 +77,8 @@ dependencies {
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	testImplementation "org.testcontainers:testcontainers:1.16.2"
-	testImplementation "org.testcontainers:junit-jupiter:1.16.2"
+	testImplementation "org.testcontainers:testcontainers:1.16.3"
+	testImplementation "org.testcontainers:junit-jupiter:1.16.3"
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
