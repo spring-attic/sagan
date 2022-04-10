@@ -21,6 +21,8 @@ $(document).ready(function () {
         } catch (e) {
         }
         if ($(this).attr('href') === '#support') {
+            // Clean previously created timeline
+            $('.timeline').detach()
             // Single project
             const tableReleases = document.querySelectorAll('.calendar-releases')
             tableReleases.forEach(calendar => {
