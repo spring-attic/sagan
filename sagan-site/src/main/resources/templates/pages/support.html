@@ -241,12 +241,23 @@
                     <script src="//app-sj05.marketo.com/js/forms2/js/forms2.min.js"></script>
                     <form id="mktoForm_7985"></form>
                     <script>
-                        MktoForms2.loadForm("https://app-sj05.marketo.com", "625-IUJ-009", 7985, function(form){
-                            form.setValues({ "Product_Selection__c": "Pivotal Spring Runtime", "Most_Recent_Lead_Source_Description__c": "Global_Website_Product Contact", "Original_Lead_Source_Description__c":"Global_Website_Product Contact"});
+                        var productcontactformID = "7985"
+                        MktoForms2.setOptions({formXDPath : "/rs/pivotal/images/marketo-xdframe-relative.html"});
+                        MktoForms2.loadForm("//connect.tanzu.vmware.com", "625-IUJ-009", productcontactformID, function(form){
+                            var productname = "Tanzu Application Platform"
+                            form.setValues({ "Product_Selection__c":productname, "Most_Recent_Lead_Source_Description__c": "Global_WS_Website_Contact_Us", "Original_Lead_Source_Description__c":"Global_WS_Website_Contact_Us"});
                             form.onSuccess(function(values, followUpUrl) {
                                 form.getFormElem().hide();
-                                $('.hide').hide();
-                                $('.confirmation').show();
+                                window.dataLayer = window.dataLayer || [];
+                                window.dataLayer.push({
+                                    'event' : 'ctaSubmitted',
+                                    'eventCategory': 'Contact Us Form',
+                                    'eventAction': 'Form Submitted',
+                                    'eventLabel': 'Product: ' + productname
+                                });
+                                window.dataLayer.push({'event': 'logEvent', 'eventType': 'Form submitted', 'eventProperties': {'page name': 'Product: VMware Tanzu Application Service', 'url path': window.location.pathname} });
+
+                                location.href = location.href + "?confirmation";
                                 return false;
                             });
                         });
