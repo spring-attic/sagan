@@ -4230,3 +4230,10 @@ body.dark .theme-switch {
 .img-dark {
     display: none;
 }
+
+.mktoForm div,
+.mktoForm span,
+.mktoForm label,
+.mktoForm p {
+    color: rgba(255,255,255,.6);
+}
