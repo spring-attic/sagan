@@ -209,6 +209,7 @@ article:last-child {
 
 .blog--post ul li {
     margin: 12px 0;
+    line-height: 1.7em;
 }
 
 .blog--post pre.prettyprint {
