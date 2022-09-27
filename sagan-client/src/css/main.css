@@ -4268,3 +4268,24 @@ body#index #spring-one p.desc {
         font-size: 2.5rem;
     }
 }
+
+#global-banner {
+    display: block;
+    padding: 10px 0;
+    background: #6db33f;
+    cursor: pointer;
+    font-size: .9rem;
+    text-align: center;
+    color: rgba(255,255,255,.7);
+}
+
+#global-banner:hover {
+    color: white;
+}
+
+
+@media(max-width:900px) {
+    #global-banner {
+        display: none;
+    }
+}
