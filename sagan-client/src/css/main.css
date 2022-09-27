@@ -4259,3 +4259,10 @@ body#index #spring-one h1 {
 body#index #spring-one p.desc {
     font-size: 1.2rem;
 }
+
+
+@media(max-width: 800px) {
+    body#index #spring-one h1 {
+        font-size: 2.5rem;
+    }
+}
