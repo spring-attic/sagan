@@ -4237,3 +4237,25 @@ body.dark .theme-switch {
 .mktoForm p {
     color: rgba(255,255,255,.6);
 }
+
+body.dark #spring-one {
+    background: url(/images/sp1/sp1-dark.png) no-repeat center center;
+}
+
+#spring-one {
+    height: 400px;
+    background: url(/images/sp1/sp1-light.png) no-repeat center center;
+    text-align: center;
+}
+
+body#index #spring-one h1 {
+    margin: 0 auto;
+    font-size: 3.75rem;
+    line-height: 1em;
+    max-width: 600px;
+    padding-top: 65px;
+}
+
+body#index #spring-one p.desc {
+    font-size: 1.2rem;
+}
