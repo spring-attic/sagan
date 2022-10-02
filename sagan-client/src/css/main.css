@@ -4239,13 +4239,13 @@ body.dark .theme-switch {
 }
 
 body.dark #spring-one {
-    background: url(/images/sp1/sp1-dark.png) no-repeat center center;
+    background: url(/images/sp1/sp1-dark.svg) no-repeat center center;
     background-size: cover;
 }
 
 #spring-one {
     height: 400px;
-    background: url(/images/sp1/sp1-light.png) no-repeat center center;
+    background: url(/images/sp1/sp1-light.svg) no-repeat center center;
     background-size: cover;
     text-align: center;
 }
