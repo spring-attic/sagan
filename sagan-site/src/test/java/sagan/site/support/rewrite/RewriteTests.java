@@ -164,6 +164,11 @@ public class RewriteTests {
 		validateTemporaryRedirect("https://spring.io/services", "/training");
 	}
 
+	@Test
+	void surveyIsRedirected() throws Exception {
+		validateTemporaryRedirect("https://spring.io/survey", "https://dimensionalresearch.co1.qualtrics.com/jfe/form/SV_6QLOBsf3TirbfDM");
+	}
+
 	private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,
 			ServletException, URISyntaxException {
 		validateRedirect(requestedUrl, redirectedUrl, 302);
