@@ -11,7 +11,7 @@
 <urlrewrite use-query-string="true">
 	<rule>
 		<name>Survey page</name>
-		<from>^/survey$</from>
+		<from>^/survey</from>
 		<to type="temporary-redirect" last="true">https://dimensionalresearch.co1.qualtrics.com/jfe/form/SV_6QLOBsf3TirbfDM</to>
 	</rule>
 	<rule>
