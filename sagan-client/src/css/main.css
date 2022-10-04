@@ -339,9 +339,11 @@ body {
     outline: none;
 }
 #springlogo,
-#springlogo-foot {
+#springlogo-foot,
+#springlogo-dark,
+#springlogo-foot-dark {
     height: 48px;
-    max-width: 250px;
+    max-width: 300px;
 }
 #search {
     cursor: pointer;
@@ -4221,6 +4223,28 @@ body.dark .theme-switch span {
 
 body.dark .theme-switch {
     background: #41464b;
+}
+
+body.dark #springlogo {
+    display: none;
+}
+
+body.dark #springlogo-foot {
+    display: none;
+}
+
+#springlogo-foot-dark {
+    display: none;
+}
+body.dark #springlogo-foot-dark {
+    display: block;
+}
+
+#springlogo-dark {
+    display: none;
+}
+body.dark #springlogo-dark {
+    display: block;
 }
 
 .img-light {
