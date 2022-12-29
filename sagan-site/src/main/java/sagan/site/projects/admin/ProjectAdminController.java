@@ -95,7 +95,7 @@ class ProjectAdminController {
 
 	@PostMapping("/new")
 	public String createProject(@Valid ProjectFormMetadata projectMetadata, Model model) {
-		Project project = new Project(projectMetadata.getId(), projectMetadata.getName());
+		Project project = new Project();
 		this.modelMapper.map(projectMetadata, project);
 		this.service.save(project);
 		return "redirect:" + project.getId();
