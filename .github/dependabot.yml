@@ -1,0 +1,18 @@
+version: 2
+updates:
+  # For dependencies declared with Gradle
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # For dependencies declared with npm
+  - package-ecosystem: "npm"
+    directory: "/sagan-client/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
