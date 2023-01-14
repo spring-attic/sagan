@@ -1,3 +1,8 @@
+## Note to contributors
+
+The spring.io website is currently being ported to a different application.
+This repository doesn't accept contributions anymore and will be soon archived.
+
 ## Sagan: the spring.io site and reference application
 
 Welcome! The code in the main branch of this repository is deployed and running right now at [spring.io](http://spring.io). The [blog][], the collection of [guides][], and everything else you see there is implemented right here.
