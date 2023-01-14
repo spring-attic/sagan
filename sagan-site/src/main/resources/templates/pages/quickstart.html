@@ -22,7 +22,7 @@
                     <p class='m-0 bold antialiased'>An Integrated Developer Environment (IDE)</p>
                     <p class='mt-0 mb-2'>Popular choices include <a class='blue link-animate' href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a>, <a class='blue link-animate' data-th-href="@{/tools}">Spring Tools</a>, <a class='blue link-animate' href="https://code.visualstudio.com/docs/languages/java">Visual Studio Code</a>, or <a class='blue link-animate' href="https://www.eclipse.org/downloads/packages/">Eclipse</a>, and many more.</p>
                     <p class='mb-0 bold'>A Java™ Development Kit (JDK)</p>
-                    <p class='m-0'>We recommend <a class='blue link-animate' href="https://bell-sw.com/">BellSoft Liberica JDK</a> version 8 or version 11.</p>
+                    <p class='m-0'>We recommend <a class='blue link-animate' href="https://bell-sw.com/pages/downloads/#/java-17-lts">BellSoft Liberica JDK</a> version 17.</p>
                 </div>
             </div>
         </div>
@@ -66,8 +66,8 @@
                 <p class='mb-4'>The <code>@RestController</code> annotation tells Spring that this code describes an endpoint that should be made available over the web. The <code>@GetMapping(“/hello”)</code> tells Spring to use our <code class='no-bg'>hello()</code> method to answer requests that get sent to the <code>http://localhost:8080/hello</code> address. Finally, the <code>@RequestParam</code> is telling Spring to expect a <code class='no-bg'>name</code> value in the request, but if it’s not there, it will use the word “World” by default.</p>
                 <h2 class='h2 antialiased'><span class='green'>Step 3: </span>Try it</h2>
                 <p>Let’s build and run the program. Open a command line (or terminal) and navigate to the folder where you have the project files. We can build and run the application by issuing the following command:</p>
-                <p><b>MacOS/Linux:</b><br><pre><code class='inline-block'>./mvnw spring-boot:run</code></pre></p>
-                <p><b>Windows:</b><br><pre><code class='inline-block'>mvnw spring-boot:run</code></pre></p>
+                <p><b>MacOS/Linux:</b><br><pre><code class='inline-block'>./gradlew spring-boot:run</code></pre></p>
+                <p><b>Windows:</b><br><pre><code class='inline-block'>gradlew.bat spring-boot:run</code></pre></p>
                 <p>You should see some output that looks very similar to this:</p>
                 <img alt='The terminal outputting various log statements as our Spring Boot application starts up.' title='The terminal outputting various log statements as our Spring Boot application starts up.' data-th-src="@{/images/quick-img2.png}">
                 <p class='mb-3'>The last couple of lines here tell us that Spring has started. Spring Boot’s embedded Apache Tomcat server is acting as a webserver and is listening for requests on <code class='no-bg'>localhost</code> port <code class='no-bg'>8080</code>. Open your browser and in the address bar at the top enter <a class='blue link-animate' href='http://localhost:8080/hello'>http://localhost:8080/hello</a>. You should get a nice friendly response like this:</p>
