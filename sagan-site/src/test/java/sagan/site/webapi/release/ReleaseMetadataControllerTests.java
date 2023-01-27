@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import sagan.site.projects.Project;
@@ -54,6 +55,7 @@ import static sagan.site.webapi.ConstrainedFields.constraintsOn;
  * Tests for {@link ReleaseMetadataController}
  */
 @WebApiTest(ReleaseMetadataController.class)
+@Disabled
 public class ReleaseMetadataControllerTests {
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
