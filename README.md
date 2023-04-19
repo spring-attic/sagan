@@ -1,7 +1,6 @@
 ## Note to contributors
 
-The spring.io website is currently being ported to a different application.
-This repository doesn't accept contributions anymore and will be soon archived.
+The spring.io website is not using the sagan application in production anymore. This repository is now archived.
 
 ## Sagan: the spring.io site and reference application
 
